@@ -27,7 +27,7 @@ vector<vector<lint>> gauss_jordan(vector<vector<lint>> mtr, lint mod)
     {
         if (c == W) break;
         int piv = -1;
-        for(int j = h; j < H; j++) if (mtr[j][c]) {
+        for (int j = h; j < H; j++) if (mtr[j][c]) {
             if (piv == -1 or abs(mtr[j][c]) > abs(mtr[piv][c])) piv = j;
         }
         if (piv == -1) { c++; h--; continue; }
@@ -38,7 +38,7 @@ vector<vector<lint>> gauss_jordan(vector<vector<lint>> mtr, lint mod)
             }
         }
         lint pivinv = mod_inverse(mtr[h][c], mod);
-        for(int hh = h + 1; hh < H; hh++) {
+        for (int hh = h + 1; hh < H; hh++) {
             for (int w = W - 1; w >= c; w--) {
                 mtr[hh][w] = (mtr[hh][w] - mtr[h][w] * mtr[hh][c] % mod * pivinv % mod + mod) % mod;
             }
