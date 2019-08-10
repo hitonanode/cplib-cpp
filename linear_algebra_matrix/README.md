@@ -2,4 +2,5 @@
 
 ## Contests
 
-- `matrix_longlong.hpp` 
+- `linalg_longlong.hpp` (with test)
+- `linalg_bitset.hpp` (with test)
