@@ -6,6 +6,7 @@
 
 - `linear_algebra_matrix/`
 - `marathonmatch/`
+- `string/`
 - `unionfind/`
 
 ## License 
