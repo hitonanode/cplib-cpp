@@ -11,15 +11,15 @@ vector<int> z_algorithm(const string &s) {
     vector<int> ans(s.size());
     ans[0] = s.size();
     int i = 1, j = 0;
-    while (i < s.size()) {
-        while (i + j < s.size() && s[j] == s[i + j]) ++j;
+    while (i < (int)s.size()) {
+        while (i + j < (int)s.size() && s[j] == s[i + j]) ++j;
         ans[i] = j;
         if (!j) {
             ++i;
             continue;
         }
         int k = 1;
-        while (i + k < s.size() && k + ans[k] < j) ans[i + k] = ans[k], ++k;
+        while (i + k < (int)s.size() && k + ans[k] < j) ans[i + k] = ans[k], ++k;
         i += k;
         j -= k;
     }

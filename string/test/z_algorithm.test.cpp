@@ -11,7 +11,7 @@ int main()
     cin >> T >> P;
     vector<int> z = z_algorithm(P + "_" + T);
     int n = P.length();
-    for (int i = n + 1; i < z.size(); i++)
+    for (int i = n + 1; i < (int)z.size(); i++)
     {
         if (z[i] == n) printf("%d\n", i - n - 1);
     }
