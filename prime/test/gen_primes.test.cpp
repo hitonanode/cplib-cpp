@@ -15,7 +15,13 @@ int main()
     {
         int x;
         cin >> x;
-        ret += binary_search(primes.begin(), primes.end(), x);
+        bool flg = true;
+        for (auto p : primes) if (x % p == 0 and x != p)
+        {
+            flg = false;
+            break;
+        }
+        ret += flg;
     }
     cout << ret << endl;
 }
