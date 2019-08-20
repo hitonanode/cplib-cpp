@@ -39,3 +39,15 @@ plint linear_congruence(const vector<lint> &A, const vector<lint> &B, const vect
     }
     return plint((x < 0 ? x + m : x), m);
 }
+
+lint power(lint x, lint n, lint MOD)
+{
+    lint ans = 1;
+    while (n>0)
+    {
+        if (n & 1) (ans *= x) %= MOD;
+        (x *= x) %= MOD;
+       n >>= 1;
+    }
+   return ans;
+}
