@@ -22,6 +22,7 @@ vector<int> gen_primes(int N) // primes in [2, N]
 
 map<lint, int> prime_factorization(lint N, const vector<int> &primes)
 {
+    if (N == 0) exit(1);
     map<lint, int> ans;
     for (auto v : primes)
     {
