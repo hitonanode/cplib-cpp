@@ -1,4 +1,5 @@
 #pragma once
+#include <cassert>
 #include <cstdlib>
 #include <vector>
 using namespace std;
@@ -58,6 +59,8 @@ int rank_gauss_jordan(const vector<vector<lint>> &mtr) // Rank of Gauss-Jordan e
 
 lint mod_determinant(vector<vector<lint>> mtr, lint mod)
 {
+    if (mtr.empty()) return 1 % mod;
+    assert(mtr.size() == mtr[0].size());
     lint ans = 1;
     mtr = gauss_jordan(mtr, mod);
     for (int i = 0; i < (int)mtr.size(); i++) ans = ans * mtr[i][i] % mod;
