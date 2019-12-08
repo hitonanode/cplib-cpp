@@ -2,7 +2,7 @@
 #include <iostream>
 #include "string/aho_corasick.hpp"
 using namespace std;
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D"
 
 void operator+=(bitset<10000> &l, const bitset<10000> &r) { l |= r; }
 
