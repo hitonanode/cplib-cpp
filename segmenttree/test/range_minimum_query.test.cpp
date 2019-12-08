@@ -1,7 +1,7 @@
 #include <iostream>
 #include "segmenttree/range_minimum_query.hpp"
 using namespace std;
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"
 
 
 int main()
