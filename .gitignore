@@ -31,5 +31,4 @@
 *.out
 *.app
 
-.verify-helper
 .vscode
