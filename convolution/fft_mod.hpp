@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 using namespace std;
 
 // Integer FFT (Fast Fourier Transform) for ModInt class

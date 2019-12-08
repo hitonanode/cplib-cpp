@@ -16,7 +16,7 @@ struct ModIntRuntime
         static vector<ModIntRuntime> facs_;
         return facs_;
     }
-    static int &primitive_root() {
+    static int &get_primitive_root() {
         static int primitive_root_ = 0;
         if (!primitive_root_) {
             primitive_root_ = [&](){
@@ -37,7 +37,7 @@ struct ModIntRuntime
     static void set_mod(const int &m) {
         if (mod != m) facs().clear();
         mod = m;
-        primitive_root() = 0;
+        get_primitive_root() = 0;
     }
     ModIntRuntime &_setval(int v) { val = (v >= mod ? v - mod : v); return *this; }
     ModIntRuntime() : val(0) {}
