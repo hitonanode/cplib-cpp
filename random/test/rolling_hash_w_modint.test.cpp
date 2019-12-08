@@ -3,9 +3,10 @@
 #include "random/rolling_hash_1d_general.hpp"
 #include "modulus/modint_fixed.hpp"
 #include "random/xorshift.hpp"
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 using namespace std;
 
+using mint = ModInt<998244353>;
 int main()
 {
     mint b1(rand_int() % 1000000 + 1), b2(rand_int() % 1000000 + 1);

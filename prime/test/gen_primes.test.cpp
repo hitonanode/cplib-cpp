@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "prime/prime.hpp"
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C"
 using namespace std;
 
 int main()

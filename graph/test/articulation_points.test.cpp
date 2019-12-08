@@ -1,6 +1,6 @@
 #include <iostream>
 #include "graph/lowlink.hpp"
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A"
 
 int main()
 {

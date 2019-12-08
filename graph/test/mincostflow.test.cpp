@@ -1,6 +1,6 @@
 #include <iostream>
 #include "graph/flow_mincost.hpp"
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
 using namespace std;
 
 int main()

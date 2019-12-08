@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "string/z_algorithm.hpp"
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 using namespace std;
 
 int main()

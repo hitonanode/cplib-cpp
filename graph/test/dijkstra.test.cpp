@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "graph/dijkstra.hpp"
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
 
 wedges e;
 

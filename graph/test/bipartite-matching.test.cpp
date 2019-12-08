@@ -1,6 +1,6 @@
 #include <iostream>
 #include "graph/bipartite-matching.hpp"
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A"
 
 int main()
 {
