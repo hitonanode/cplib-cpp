@@ -6,7 +6,7 @@
 // Calculate log_A B (MOD M) (baby-step gian-step)
 // DiscreteLogarithm dl(M, A);
 // lint ans = dl.log(B);
-// Complexity: O(M^(3/2)) for each query
+// Complexity: O(M^(1/2)) for each query
 // Verified: <https://judge.yosupo.jp/problem/discrete_logarithm_mod>
 // Constraints: 0 <= A < M, B < M, 1 <= M <= 1e9  (M is not limited to prime)
 struct DiscreteLogarithm
