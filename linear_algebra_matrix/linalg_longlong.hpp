@@ -35,13 +35,15 @@ vector<vector<lint>> gauss_jordan(vector<vector<lint>> mtr, lint mod)
         swap(mtr[piv], mtr[h]);
         if (h != piv) {
             for(int w = 0; w < W; w++) {
-                mtr[piv][w] = mtr[piv][w] ? mod - mtr[piv][w] : 0; // 行列式符号不変
+                mtr[piv][w] = mtr[piv][w] ? mod - mtr[piv][w] : 0;  // To preserve sign of determinant
             }
         }
         lint pivinv = mod_inverse(mtr[h][c], mod);
         for (int hh = h + 1; hh < H; hh++) {
+            lint coeff = mtr[hh][c] * pivinv % mod;
             for (int w = W - 1; w >= c; w--) {
-                mtr[hh][w] = (mtr[hh][w] - mtr[h][w] * mtr[hh][c] % mod * pivinv % mod + mod) % mod;
+                mtr[hh][w] = mtr[hh][w] - mtr[h][w] * coeff % mod;
+                if (mtr[hh][w] < 0) mtr[hh][w] += mod;
             }
         }
         c++;
