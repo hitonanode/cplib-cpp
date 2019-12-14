@@ -1,9 +1,6 @@
 #pragma once
-#include <iostream>
 #include <vector>
 #include <set>
-using namespace std;
-
 
 struct ModIntRuntime
 {
@@ -11,16 +8,16 @@ struct ModIntRuntime
     static int get_mod() { return mod; }
     int val;
     static int mod;
-    static vector<ModIntRuntime> &facs()
+    static std::vector<ModIntRuntime> &facs()
     {
-        static vector<ModIntRuntime> facs_;
+        static std::vector<ModIntRuntime> facs_;
         return facs_;
     }
     static int &get_primitive_root() {
         static int primitive_root_ = 0;
         if (!primitive_root_) {
             primitive_root_ = [&](){
-                set<int> fac;
+                std::set<int> fac;
                 int v = mod - 1;
                 for (lint i = 2; i * i <= v; i++) while (v % i == 0) fac.insert(i), v /= i;
                 if (v > 1) fac.insert(v);
@@ -39,14 +36,14 @@ struct ModIntRuntime
         mod = m;
         get_primitive_root() = 0;
     }
-    ModIntRuntime &_setval(int v) { val = (v >= mod ? v - mod : v); return *this; }
+    ModIntRuntime &_setval(lint v) { val = (v >= mod ? v - mod : v); return *this; }
     ModIntRuntime() : val(0) {}
     ModIntRuntime(lint v) { _setval(v % mod + mod); }
     explicit operator bool() const { return val != 0; }
-    ModIntRuntime operator+(const ModIntRuntime &x) const { return ModIntRuntime()._setval(val + x.val); }
-    ModIntRuntime operator-(const ModIntRuntime &x) const { return ModIntRuntime()._setval(val - x.val + mod); }
+    ModIntRuntime operator+(const ModIntRuntime &x) const { return ModIntRuntime()._setval((lint)val + x.val); }
+    ModIntRuntime operator-(const ModIntRuntime &x) const { return ModIntRuntime()._setval((lint)val - x.val + mod); }
     ModIntRuntime operator*(const ModIntRuntime &x) const { return ModIntRuntime()._setval((lint)val * x.val % mod); }
-    ModIntRuntime operator/(const ModIntRuntime &x) const { return ModIntRuntime()._setval(val * x.inv() % mod); }
+    ModIntRuntime operator/(const ModIntRuntime &x) const { return ModIntRuntime()._setval((lint)val * x.inv() % mod); }
     ModIntRuntime operator-() const { return ModIntRuntime()._setval(mod - val); }
     ModIntRuntime &operator+=(const ModIntRuntime &x) { return *this = *this + x; }
     ModIntRuntime &operator-=(const ModIntRuntime &x) { return *this = *this - x; }
@@ -58,8 +55,9 @@ struct ModIntRuntime
     friend ModIntRuntime operator/(lint a, const ModIntRuntime &x) { return ModIntRuntime()._setval(a % mod * x.inv() % mod); }
     bool operator==(const ModIntRuntime &x) const { return val == x.val; }
     bool operator!=(const ModIntRuntime &x) const { return val != x.val; }
-    friend istream &operator>>(istream &is, ModIntRuntime &x) { lint t; is >> t; x = ModIntRuntime(t); return is; }
-    friend ostream &operator<<(ostream &os, const ModIntRuntime &x) { os << x.val;  return os; }
+    bool operator<(const ModIntRuntime &x) const { return val < x.val; }  // To use std::map<ModIntRuntime, T>
+    friend std::istream &operator>>(std::istream &is, ModIntRuntime &x) { lint t; is >> t; x = ModIntRuntime(t); return is; }
+    friend std::ostream &operator<<(std::ostream &os, const ModIntRuntime &x) { os << x.val;  return os; }
  
     lint power(lint n) const {
         lint ans = 1, tmp = this->val;
@@ -113,7 +111,7 @@ struct ModIntRuntime
             x *= z, z *= z, y *= z;
             e = j;
         }
-        return ModIntRuntime(min(x.val, mod - x.val));
+        return ModIntRuntime(std::min(x.val, mod - x.val));
     }
 };
 int ModIntRuntime::mod = 1;

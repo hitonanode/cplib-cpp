@@ -1,10 +1,12 @@
 #pragma once
 #include <algorithm>
 #include <numeric>
+#include <stack>
 #include <vector>
 
 // Maximum Independent Set for general graph （最大独立集合）
 // Works with reasonable time complexity when N~40
+// Given graph must not have self-edges
 // Verified: <https://judge.yosupo.jp/submission/1864>
 // Reference: <https://www.slideshare.net/wata_orz/ss-12131479>
 
@@ -29,16 +31,19 @@ struct MaximumIndependentSet
         int deg_tmp = deg[n];
         deg[n] = 0;
 
-        std::vector<std::pair<int, int>> newly_occupied;
+        std::stack<std::pair<int, int>> newly_occupied;
         for (auto x : edges[n]) if (deg[x]) {
-            newly_occupied.emplace_back(x, deg[x]);
+            newly_occupied.emplace(x, deg[x]);
             deg[x] = 0;
         }
         tmp_state[n] = 1;
         mis_dfs();
 
         tmp_state[n] = 0;
-        for (auto p : newly_occupied) deg[p.first] = p.second;
+        while (!newly_occupied.empty()) {
+            deg[newly_occupied.top().first] = newly_occupied.top().second;
+            newly_occupied.pop();
+        }
         mis_dfs();
 
         deg[n] = deg_tmp;
@@ -81,16 +86,19 @@ struct MaximumIndependentSetFast
         int deg_tmp = deg[n];
         deg[n] = 0;
 
-        std::vector<std::pair<int, int>> newly_occupied;
+        std::stack<std::pair<int, int>> newly_occupied;
         for (auto x : edges[n]) if (deg[x]) {
-            newly_occupied.emplace_back(x, deg[x]);
+            newly_occupied.emplace(x, deg[x]);
             deg[x] = 0;
         }
         tmp_state += 1LL << n;
         mis_dfs();
 
         tmp_state -= 1LL << n;
-        for (auto p : newly_occupied) deg[p.first] = p.second;
+        while (!newly_occupied.empty()) {
+            deg[newly_occupied.top().first] = newly_occupied.top().second;
+            newly_occupied.pop();
+        }
         mis_dfs();
 
         deg[n] = deg_tmp;
