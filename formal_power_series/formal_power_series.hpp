@@ -193,7 +193,7 @@ struct FormalPowerSeries : vector<T>
                 P C(*this * rev);
                 P D(n - i);
                 for (int j = i; j < n; j++) D[j - i] = C[j];
-                D = (D.log() * T(k)).exp() * (*this)[i].power(k);
+                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].power(k);
                 P E(deg);
                 if (k * (i > 0) > deg or k * i > deg) return {};
                 long long int S = i * k;
