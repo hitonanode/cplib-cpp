@@ -83,7 +83,7 @@ struct matrix
                     mtr.at(piv, w) *= -1; // To preserve sign of determinant
                 }
             }
-            for (int hh = h + 1; hh < H; hh++) {
+            for (int hh = 0; hh < H; hh++) if (hh != h) {
                 T coeff = mtr.at(hh, c) * mtr.at(h, c).inv();
                 for (int w = W - 1; w >= c; w--) {
                     mtr.at(hh, w) -= mtr.at(h, w) * coeff;
