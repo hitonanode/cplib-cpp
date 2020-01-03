@@ -4,6 +4,7 @@
 
 // Directed graph library to find strongly connected components （強連結成分分解）
 // 0-indexed directed graph
+// Complexity: O(V + E)
 struct DirectedGraphSCC {
     int V; // # of Vertices
     std::vector<std::vector<int>> to, from;
