@@ -8,7 +8,7 @@ int main()
 {
     int V, E;
     scanf("%d %d", &V, &E);
-    assert(V < VMAX);
+    assert(V <= VMAX);
     std::vector<std::bitset<VMAX>> e(V), einv(V);
     while (E--)
     {
