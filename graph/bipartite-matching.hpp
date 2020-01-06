@@ -5,7 +5,7 @@ using namespace std;
 
 // 二部グラフの最大マッチング bipartite-matching of undirected bipartite graph
 // <https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>
-
+// Comprexity: O(VE)
 struct BipartiteMatching
 {
     int V;  // # of vertices

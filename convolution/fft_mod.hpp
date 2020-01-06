@@ -47,7 +47,14 @@ vector<MODINT> convolution_mod(vector<MODINT> a, vector<MODINT> b)
     int sz = 1, n = a.size(), m = b.size();
     while (sz < n + m) sz <<= 1;
     a.resize(sz), b.resize(sz);
-    fft_mod(a, false), fft_mod(b, false);
+    if (a == b) {
+        fft_mod(a, false);
+        b = a;
+    }
+    else {
+        fft_mod(a, false);
+        fft_mod(b, false);
+    }
     for (int i = 0; i < sz; i++) a[i] *= b[i];
     fft_mod(a, true);
     a.resize(n + m - 1);
