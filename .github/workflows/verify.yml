@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-python@v1
     
     - name: Install boost
-      run: apt install -y libboost-dev
+      run: sudo apt install -y libboost-dev
 
     - name: Install dependencies
       run: pip3 install -U online-judge-verify-helper
