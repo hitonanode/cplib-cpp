@@ -1,6 +1,6 @@
 #pragma once
-#include "convolution/fft_mod.hpp"
-// #include "convolution/fft_arbitrary_mod.hpp"
+// #include "convolution/ntt.hpp"
+#include "convolution/ntt_arbitrary_mod.hpp"
 #include <algorithm>
 #include <cassert>
 #include <vector>
@@ -58,7 +58,7 @@ struct FormalPowerSeries : vector<T>
     P &operator*=(const P &r) {
         if (this->empty() || r.empty()) this->clear();
         else {
-            auto ret = convolution_mod(*this, r);
+            auto ret = nttconv(*this, r);
             *this = P(ret.begin(), ret.end());
         }
         return *this;
