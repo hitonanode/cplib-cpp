@@ -1,6 +1,5 @@
 #pragma once
-// #include "convolution/ntt.hpp"
-#include "convolution/ntt_arbitrary_mod.hpp"
+#include "convolution/ntt.hpp"
 #include <algorithm>
 #include <cassert>
 #include <vector>
