@@ -49,8 +49,10 @@ public:
     {
         root = r;
         par.resize(V);
-        depth.assign(V, 0);
+        depth.resize(V);
+        depth[r] = 0;
         acc_weight.resize(V);
+        acc_weight[r] = 0;
         _fix_root_dfs(root, INVALID, INVALID);
     }
 
