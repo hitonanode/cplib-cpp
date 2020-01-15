@@ -22,7 +22,7 @@ struct MatroidExample
 // Matroid intersection solver
 // Algorithm based on <http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/>
 // Complexity: O(CE^2 + E^3) (C : circuit query)
-template<typename T_M1, typename T_M2>
+template <typename T_M1, typename T_M2>
 State MatroidIntersection(T_M1 matroid1, T_M2 matroid2)
 {
     assert(matroid1.M == matroid2.M);
@@ -105,6 +105,7 @@ struct GraphMatroid
 };
 
 
+// Partition matroid (partitional matroid) : direct sum of uniform matroids
 struct PartitionMatroid
 {
     int M;
@@ -112,11 +113,23 @@ struct PartitionMatroid
     vector<int> belong;
     vector<int> maxi;
     PartitionMatroid() = default;
+    // parts: partition of [0, 1, ..., M - 1]
+    // maxi: only maxi[i] elements from parts[i] can be chosen for each i.
     PartitionMatroid(int M, const vector<vector<int>> &parts, const vector<int> &maxi)
-        : M(M), parts(parts), belong(M), maxi(maxi)
+        : M(M), parts(parts), belong(M, -1), maxi(maxi)
     {
-        for (size_t i = 0; i < parts.size(); i++) {
+        assert(parts.size() == maxi.size());
+        for (size_t i = 0; i < parts.size(); i++)
+        {
             for (Element x : parts[i]) belong[x] = i;
+        }
+        for (Element e = 0; e < M; e++) {
+            // assert(belong[e] != -1);
+            if (belong[e] == -1) {
+                belong[e] = this->parts.size();
+                this->parts.emplace_back(vector<int>{e});
+                this->maxi.push_back(1);
+            }
         }
     }
 
@@ -127,7 +140,7 @@ struct PartitionMatroid
         int p = belong[e];
         int cnt = 0;
         for (Element x : parts[p]) cnt += I[x];
-        if (cnt == maxi[p] - 1) {
+        if (cnt == maxi[p]) {
             for (Element x : parts[p]) if (I[x]) ret.push_back(x);
         }
         return ret;
