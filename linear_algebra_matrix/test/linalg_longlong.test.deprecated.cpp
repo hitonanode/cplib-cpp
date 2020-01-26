@@ -1,7 +1,7 @@
+#include "linear_algebra_matrix/linalg_longlong.hpp"
 #include <iostream>
 #include <numeric>
-#include "linear_algebra_matrix/linalg_longlong.hpp"
-#define PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624"
 
 template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
 
