@@ -29,6 +29,7 @@ struct Rational {
     Rational &operator*=(const Rational &r) { return *this = *this * r; }
     Rational &operator/=(const Rational &r) { return *this = *this / r; }
     Rational operator-() const { return Rational(-num, den); }
+    Rational abs() const { return Rational(num > 0 ? num : -num, den); }
     bool operator==(const Rational &r) const { return num == r.num and den == r.den; }
     bool operator!=(const Rational &r) const { return num != r.num or den != r.den; }
     bool operator<(const Rational &r) const {
@@ -38,6 +39,7 @@ struct Rational {
         else return num * r.den < den * r.num;
     }
     bool operator<=(const Rational &r) const { return (*this == r) or (*this < r); }
+    bool operator>(const Rational &r) const { return r < *this; }
     explicit operator double() const { return (double)num / (double)den; }
     explicit operator long double() const { return (long double)num / (long double)den; }
     friend std::ostream &operator<<(std::ostream &os, const Rational &x) { os << x.num << '/' << x.den; return os; }
