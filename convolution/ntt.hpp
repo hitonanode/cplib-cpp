@@ -15,8 +15,7 @@ using namespace std;
 template <typename MODINT>
 vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner = false);
 
-constexpr array<int, 3> nttprimes = {998244353, 167772161, 469762049};
-
+constexpr int nttprimes[3] = {998244353, 167772161, 469762049};
 
 // Integer FFT (Fast Fourier Transform) for ModInt class
 // (Also known as Number Theoretic Transform, NTT)
@@ -104,7 +103,7 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
     int sz = 1, n = a.size(), m = b.size();
     while (sz < n + m) sz <<= 1;
     int mod = MODINT::get_mod();
-    if (skip_garner or find(nttprimes.begin(), nttprimes.end(), mod) != nttprimes.end()) {
+    if (skip_garner or find(begin(nttprimes), end(nttprimes), mod) != end(nttprimes)) {
         a.resize(sz), b.resize(sz);
         if (a == b) { ntt(a, false); b = a; }
         else ntt(a, false), ntt(b, false);
