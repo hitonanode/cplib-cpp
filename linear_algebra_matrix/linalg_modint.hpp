@@ -117,3 +117,16 @@ struct matrix
         return is;
     }
 };
+
+
+// Fibonacci numbers f(n) = af(n - 1) + bf(n - 2)
+// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...
+template <typename T>
+T Fibonacci(long long int k, int a = 1, int b = 1)
+{
+    matrix<T> mat(2, 2);
+    mat[0][1] = 1;
+    mat[1][0] = b;
+    mat[1][1] = a;
+    return mat.pow(k + 1)[0][1];
+}
