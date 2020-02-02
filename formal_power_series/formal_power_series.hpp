@@ -38,13 +38,13 @@ struct FormalPowerSeries : vector<T>
         return *this;
     }
     P &operator-=(const P &r) {
-        if(r.size() > this->size()) this->resize(r.size());
-        for(int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
+        if (r.size() > this->size()) this->resize(r.size());
+        for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
         shrink();
         return *this;
     }
     P &operator-=(const T &v) {
-        if(this->empty()) this->resize(1);
+        if (this->empty()) this->resize(1);
         (*this)[0] -= v;
         shrink();
         return *this;
