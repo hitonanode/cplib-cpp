@@ -2,7 +2,7 @@
 #include <cassert>
 #include <vector>
 
-// Range Minimum Query for static sequence by sparse table
+// Static sequence sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
 template<typename T, typename F>
 struct SparseTable {
@@ -11,6 +11,7 @@ struct SparseTable {
     F func;
     std::vector<std::vector<T>> data;
     std::vector<int> lgx_table;
+    SparseTable(F func) : func(func) {}
     SparseTable(const std::vector<T> &sequence, T defaultT, F func) : N(sequence.size()), defaultT(defaultT), func(func)
     {
         lgx_table.resize(N + 1);
