@@ -1,17 +1,20 @@
 #pragma once
+#include <algorithm>
 #include <cassert>
 #include <vector>
 
 // Range Minimum Query for static sequence by sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
-template<typename T, typename F>
-struct SparseTable {
+template<typename T>
+struct StaticRMQ {
+    inline T func(const T &l, const T &r) {
+        return std::min<T>(l, r);
+    }
     int N, lgN;
     T defaultT;
-    F func;
     std::vector<std::vector<T>> data;
     std::vector<int> lgx_table;
-    SparseTable(const std::vector<T> &sequence, T defaultT, F func) : N(sequence.size()), defaultT(defaultT), func(func)
+    StaticRMQ(const std::vector<T> &sequence, T defaultT) : N(sequence.size()), defaultT(defaultT)
     {
         lgx_table.resize(N + 1);
         for (int i = 2; i < N + 1; i++) lgx_table[i] = lgx_table[i >> 1] + 1;
