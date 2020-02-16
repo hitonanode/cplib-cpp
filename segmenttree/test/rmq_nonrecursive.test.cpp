@@ -9,11 +9,10 @@ int main()
     cin >> N >> Q;
     vector<int> A(N, (1LL << 31) - 1);
     RangeMinimumQuery<int> rmq(A, A[0]);
-    for (int q = 0; q < Q; q++)
-    {
+    while (Q--) {
         int c, x, y;
         cin >> c >> x >> y;
         if (c == 0) rmq.update(x, y);
-        else cout << rmq.get(x, y + 1, 0) << endl;
+        else cout << rmq.get(x, y + 1) << endl;
     }
 }
