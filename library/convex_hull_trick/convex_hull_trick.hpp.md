@@ -180,13 +180,13 @@ Traceback (most recent call last):
     onlinejudge_verify.verify.main(paths, marker=marker, timeout=timeout, jobs=jobs)
   File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/verify.py", line 116, in main
     verified = verify_file(path, compilers=compilers, jobs=jobs)
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/verify.py", line 70, in verify_file
-    exec_command(command)
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/verify.py", line 28, in exec_command
+  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/verify.py", line 77, in verify_file
+    language.compile(path, basedir=pathlib.Path.cwd(), tempdir=directory)
+  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 48, in compile
     subprocess.check_call(command)
   File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/subprocess.py", line 364, in check_call
     raise CalledProcessError(retcode, cmd)
-subprocess.CalledProcessError: Command '['oj', 'download', '--system', '-d', '.verify-helper/cache/ca259f8e9cebda54d88036dfaeafd417/test', 'https://yukicoder.me/problems/no/877']' returned non-zero exit status 1.
+subprocess.CalledProcessError: Command '['g++', '--std=c++17', '-O2', '-Wall', '-g', '-I', '/home/runner/work/cplib-cpp/cplib-cpp', '-o', '.verify-helper/cache/ca259f8e9cebda54d88036dfaeafd417/a.out', '/home/runner/work/cplib-cpp/cplib-cpp/segmenttree/test/countandsumlessthan.test.cpp']' returned non-zero exit status 1.
 
 During handling of the above exception, another exception occurred:
 

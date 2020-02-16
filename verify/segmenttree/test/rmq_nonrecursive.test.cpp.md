@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/rmq_nonrecursive.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-16 16:13:35+09:00
+    - Last commit date: 2020-02-16 16:37:28+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A</a>
@@ -84,15 +84,18 @@ int main()
 //   - data2ret: [TDATA, TQUERY] -> TRET, f(defaultDATA, q) == defaultRET
 //   - retmerge: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)
 //   - commutability f(e(x, y), q) == g(f(x, q), f(y, q))
-template<typename TDATA, typename TRET, typename TQUERY, typename E, typename F, typename G>
+template<typename TDATA, typename TRET, typename TQUERY>
 struct NonrecursiveSegmentTree
 {
     int N;
     TDATA defaultDATA;
     TRET defaultRET;
-    E datamerge;
-    F data2ret;
-    G retmerge;
+    // E datamerge;
+    // F data2ret;
+    // G retmerge;
+    virtual TDATA datamerge(const TDATA &, const TDATA &) = 0;
+    virtual TRET data2ret(const TDATA &, const TQUERY &) = 0;
+    virtual TRET retmerge(const TRET &, const TRET &) = 0;
     std::vector<TDATA> data;
     inline TDATA& at(int i) { return data[i]; }
 
@@ -103,13 +106,8 @@ struct NonrecursiveSegmentTree
         std::copy(seq.begin(), seq.end(), data.begin() + N);
         for (int i = N - 1; i; i--) _merge(i);
     }
-    NonrecursiveSegmentTree(TDATA defaultDATA, E datamerge, F data2ret, G retmerge)
-        : N(0), defaultDATA(defaultDATA), defaultRET(data2ret(defaultDATA, TQUERY(0))),
-          datamerge(datamerge), data2ret(data2ret), retmerge(retmerge) {}
-    NonrecursiveSegmentTree(const std::vector<TDATA> &seq, TDATA defaultDATA, E datamerge, F data2ret, G retmerge)
-        : N(seq.size()), defaultDATA(defaultDATA),
-          defaultRET(data2ret(defaultDATA, TQUERY(0))),
-          datamerge(datamerge), data2ret(data2ret), retmerge(retmerge)
+    NonrecursiveSegmentTree() = default;
+    NonrecursiveSegmentTree(const std::vector<TDATA> &seq, TDATA defaultDATA) : N(seq.size()), defaultDATA(defaultDATA), defaultRET(data2ret(defaultDATA, TQUERY(0)))
     {
         initialize(seq);
     }
@@ -140,6 +138,7 @@ struct NonrecursiveSegmentTree
     }
 };
 
+/*
 // Range Minimum Query
 // - get: return min(x_l, ..., x_{r - 1})
 auto st_op_1st = [](auto x, auto q) { return x; };
@@ -150,28 +149,37 @@ struct RangeMinimumQuery : public NonrecursiveSegmentTree<T, T, int, decltype(st
     using SegTree = NonrecursiveSegmentTree<T, T, int, decltype(st_op_getmin), decltype(st_op_1st), decltype(st_op_getmin)>;
     RangeMinimumQuery(const std::vector<T> &seq, T defaultmin) : SegTree::NonrecursiveSegmentTree(seq, defaultmin, st_op_getmin, st_op_1st, st_op_getmin) {}
 };
-
+*/
 
 // Range Counting less than q Query
 // - get: return (#{i | l <= i < r, x_i < q}, total sum of them).
-auto st_op_vecmerge = [](auto v, auto w) { 
-    v.insert(v.end(), w.begin(), w.end());
-    std::sort(v.begin(), v.end());
-    v[0].second = v[0].first;
-    for (size_t i = 1; i < v.size(); i++) v[i].second = v[i - 1].second + v[i].first;
-    return v;
-};
-auto st_op_cntless = [](auto vec, auto q) {
-    int i = std::lower_bound(vec.begin(), vec.end(), std::pair<decltype(q), decltype(q)>(q, 0)) - vec.begin();
-    if (!i) return std::pair<int, decltype(q)>(0, 0);
-    else return std::pair<int, decltype(q)>(i, vec[i - 1].second);
-};
-auto st_op_pairsum = [](auto p1, auto p2) { return std::pair<int, decltype(p1.second)>(p1.first + p2.first, p1.second + p2.second); };
 template <typename T>
-struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pair<T, T>>, std::pair<int, T>, T, decltype(st_op_vecmerge), decltype(st_op_cntless), decltype(st_op_pairsum)>
+struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pair<T, T>>, std::pair<int, T>, T>
 {
-    using SegTree = NonrecursiveSegmentTree<std::vector<std::pair<T, T>>, std::pair<int, T>, T, decltype(st_op_vecmerge), decltype(st_op_cntless), decltype(st_op_pairsum)>;
-    CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree({}, st_op_vecmerge, st_op_cntless, st_op_pairsum) {
+    using TDATA = std::vector<std::pair<T, T>>;
+    using TRET = std::pair<int, T>;
+    using TQUERY = T;
+    TDATA datamerge(const TDATA &vl, const TDATA &vr) {
+        vl.insert(vl.end(), vr.begin(), vr.end());
+        std::sort(vl.begin(), vl.end());
+        if (vl.size()) {
+            vl[0].second = vl[0].first;
+            for (size_t i = 1; i < vl.size(); i++) vl[i].second = vl[i - 1].second + vl[i].first;
+        }
+        return vl;
+    }
+    TRET data2ret(const TDATA &vec, TQUERY q) {
+        int i = std::lower_bound(vec.begin(), vec.end(), std::make_pair(q, q)) - vec.begin();
+        if (!i) return std::make_pair(0, 0);
+        else return std::make_pair(i, vec[i - 1].second);
+    }
+    TRET retmerge(const TRET &l, const TRET &r) {
+        return std::make_pair(l.first + r.first, l.second + r.second);
+    }
+    using SegTree = NonrecursiveSegmentTree<TDATA, TRET, TQUERY>;
+    CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree()
+    {
+        SegTree::defaultDATA = std::make_pair(0, 0);
         std::vector<std::vector<std::pair<T, T>>> init;
         for (auto x : seq) init.emplace_back(std::vector<std::pair<T, T>>{std::pair<T, T>(x, x)});
         SegTree::initialize(init);
