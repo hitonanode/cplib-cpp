@@ -39,7 +39,8 @@ vector<vector<lint>> gauss_jordan(vector<vector<lint>> mtr, lint mod)
             }
         }
         lint pivinv = mod_inverse(mtr[h][c], mod);
-        for (int hh = h + 1; hh < H; hh++) {
+        for (int hh = 0; hh < H; hh++) {
+            if (hh == h) continue;
             lint coeff = mtr[hh][c] * pivinv % mod;
             for (int w = W - 1; w >= c; w--) {
                 mtr[hh][w] = mtr[hh][w] - mtr[h][w] * coeff % mod;

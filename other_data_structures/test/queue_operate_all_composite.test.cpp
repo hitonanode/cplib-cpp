@@ -6,9 +6,7 @@
 using mint = ModInt<998244353>;
 int main()
 {
-    pair<mint, mint> pz{1, 0};
     LinearFunctionQueue<mint> swag;
-
     int Q;
     cin >> Q;
     while (Q--) {

@@ -18,8 +18,8 @@ vector<bitset<Wmax>> gauss_jordan(int W, vector<bitset<Wmax>> mtr)
         }
         if (piv == -1) { h--; continue; }
         swap(mtr[piv], mtr[h]);
-        for (int hh = h + 1; hh < H; hh++) {
-            if (mtr[hh][c]) mtr[hh] ^= mtr[h];
+        for (int hh = 0; hh < H; hh++) {
+            if (hh != h and mtr[hh][c]) mtr[hh] ^= mtr[h];
         }
     }
     return mtr;

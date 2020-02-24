@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-class UndirectedWeightedTree
+struct UndirectedWeightedTree
 {
     using T = long long int;   // Arbitrary data structure (operator+, operator- must be defined)
     const int INVALID = -1;
@@ -30,7 +30,6 @@ class UndirectedWeightedTree
         }
     }
 
-public:
     UndirectedWeightedTree(int N = 0): V(N), E(0), adj(N) {
         lgV = 1;
         while (1 << lgV < V) lgV++;

@@ -7,21 +7,21 @@ detect_centroid(int r): Enumerate centroid(s) of the tree which `r` belongs to.
 */
 
 #pragma once
+#include <tuple>
 #include <utility>
 #include <vector>
-using namespace std;
 
 struct Tree
 {
     int NO_PARENT = -1;
-    using pint = pair<int, int>;
+    using pint = std::pair<int, int>;
     int V;
     int E;
-    vector<vector<pint>> to;  // (node_id, edge_id)
-    vector<int> par;          // parent node_id par[root] = -1
-    vector<vector<int>> chi;  // children id's
-    vector<int> subtree_size; // size of each subtree
-    vector<int> available_edge; // If 0, ignore the corresponding edge.
+    std::vector<std::vector<pint>> to;  // (node_id, edge_id)
+    std::vector<int> par;          // parent node_id par[root] = -1
+    std::vector<std::vector<int>> chi;  // children id's
+    std::vector<int> subtree_size; // size of each subtree
+    std::vector<int> available_edge; // If 0, ignore the corresponding edge.
 
     Tree() : Tree(0) {}
     Tree(int v) : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v) {}
@@ -38,10 +38,8 @@ struct Tree
     {
         chi[now].clear();
         subtree_size[now] = 1;
-        for (auto nxt : to[now])
-        {
-            if (nxt.first != prv and available_edge[nxt.second])
-            {
+        for (auto nxt : to[now]) {
+            if (nxt.first != prv and available_edge[nxt.second]) {
                 par[nxt.first] = now;
                 chi[now].push_back(nxt.first);
                 subtree_size[now] += _dfs_fixroot(nxt.first, now);
@@ -50,35 +48,49 @@ struct Tree
         return subtree_size[now];
     }
 
-    void fix_root(int root)
-    {
+    void fix_root(int root) {
         par[root] = NO_PARENT;
         _dfs_fixroot(root, -1);
     }
 
     //// Centroid Decpmposition ////
-    vector<int> centroid_cand_tmp;
-    void _dfs_detect_centroid(int now, int prv, int n)
+    std::vector<int> centroid_cand_tmp;
+    void _dfs_detect_centroids(int now, int prv, int n)
     {
         bool is_centroid = true;
         for (auto nxt : to[now])
         {
             if (nxt.first != prv and available_edge[nxt.second])
             {
-                _dfs_detect_centroid(nxt.first, now, n);
+                _dfs_detect_centroids(nxt.first, now, n);
                 if (subtree_size[nxt.first] > n / 2) is_centroid = false;
             }
         }
         if (n - subtree_size[now] > n / 2) is_centroid = false;
         if (is_centroid) centroid_cand_tmp.push_back(now);
     }
-    pint detect_centroid(int r) // ([centroid_node_id1], ([centroid_node_id2]|-1))
+    pint detect_centroids(int r) // ([centroid_node_id1], ([centroid_node_id2]|-1))
     {
         centroid_cand_tmp.clear();
         while (par[r] != NO_PARENT) r = par[r];
         int n = subtree_size[r];
-        _dfs_detect_centroid(r, -1, n);
-        if (centroid_cand_tmp.size() == 1) return make_pair(centroid_cand_tmp[0], -1);
-        else return make_pair(centroid_cand_tmp[0], centroid_cand_tmp[1]);
+        _dfs_detect_centroids(r, -1, n);
+        if (centroid_cand_tmp.size() == 1) return std::make_pair(centroid_cand_tmp[0], -1);
+        else return std::make_pair(centroid_cand_tmp[0], centroid_cand_tmp[1]);
+    }
+
+    void centroid_decomposition(int now) {
+        fix_root(now);
+        now = detect_centroids(now).first;
+        /*
+        do something
+        */
+        for (auto p : to[now]) {
+            int nxt, eid;
+            std::tie(nxt, eid) = p;
+            if (available_edge[eid] == 0) continue;
+            available_edge[eid] = 0;
+            centroid_decomposition(nxt);
+        }
     }
 };
