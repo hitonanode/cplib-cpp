@@ -1,6 +1,7 @@
 #include "graph-tree/eulertour.hpp"
 #include "segmenttree/point-update-range-get_nonrecursive.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
+#include <cassert>
 #include <iostream>
 using namespace std;
 
@@ -21,7 +22,7 @@ int main()
     PreorderEulerTour tour(to, 0);
     vector<long long int> v;
     for (auto i : tour.vis_order) v.push_back(A[i]);
-    assert(v.size() == N);
+    assert(int(v.size()) == N);
     PointUpdateRangeSum<long long int> rsq(v, 0);
 
     while (Q--) {

@@ -73,6 +73,18 @@ struct RangeMinimumQuery : public NonrecursiveSegmentTree<T, T, bool>
     };
 };
 
+template<typename T>
+struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool>
+{
+    using SegTree = NonrecursiveSegmentTree<T, T, bool>;
+    T datamerge(const T &vl, const T &vr) override { return vl + vr; };
+    T data2ret(const T &v, const bool &q) override { return v; }
+    T retmerge(const T &vl, const T &vr) override { return vl + vr; };
+    PointUpdateRangeSum(const std::vector<T> &seq, T zero) : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, zero);
+    };
+};
+
 // Range Counting less than q Query
 // - get: return (#{i | l <= i < r, x_i < q}, total sum of them).
 template <typename T>
