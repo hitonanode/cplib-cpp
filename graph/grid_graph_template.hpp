@@ -34,6 +34,7 @@ struct GridGraph
 
         using P = std::tuple<T_E, int, int>;
         std::priority_queue<P, std::vector<P>, std::greater<P>> pq;
+        dij[x_s][y_s] = 0;
         pq.emplace(0, x_s, y_s);
         while (!pq.empty()) {
             T_E dnow;
