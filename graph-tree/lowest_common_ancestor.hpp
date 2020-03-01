@@ -69,6 +69,7 @@ struct UndirectedWeightedTree
 
     int kth_parent(int x, int k)
     {
+        if (depth[x] < k) return INVALID;
         for (int d = 0; d < lgV; d++)
         {
             if (x == INVALID) return INVALID;
