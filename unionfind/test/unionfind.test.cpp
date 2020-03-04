@@ -1,5 +1,5 @@
 #include <iostream>
-#include "unionfind/unionfind_sizebased.hpp"
+#include "unionfind/unionfind.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp"
 using namespace std;
 
@@ -8,7 +8,7 @@ int main()
 {
     int n, q;
     cin >> n >> q;
-    SizeAwareUnionFind uf(n);
+    UnionFind uf(n);
     for (int i = 0; i < q; i++)
     {
         int c, x, y;

@@ -8,7 +8,7 @@ using namespace std;
 struct UndirectedWeightedTree
 {
     using T = long long int;   // Arbitrary data structure (operator+, operator- must be defined)
-    const int INVALID = -1;
+    int INVALID = -1;
     int V, lgV;
     int E;
     int root;
@@ -30,7 +30,9 @@ struct UndirectedWeightedTree
         }
     }
 
-    UndirectedWeightedTree(int N = 0): V(N), E(0), adj(N) {
+    UndirectedWeightedTree() = default;
+    UndirectedWeightedTree(int N) : V(N), E(0), adj(N)
+    {
         lgV = 1;
         while (1 << lgV < V) lgV++;
     }

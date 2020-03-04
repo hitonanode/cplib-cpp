@@ -1,23 +1,22 @@
-// UnionFind Tree (0-indexed), based on size of each disjoint set
+// UnionFind Tree (0-indexed)
 #pragma once
 #include <numeric>
-#include <utility>
 #include <vector>
 
-struct SizeAwareUnionFind
+struct RankBasedUnionFind
 {
-    std::vector<int> par, cou;
-    SizeAwareUnionFind(int N = 0) : par(N), cou(N, 1) {
+    std::vector<int> par, rank;
+    RankBasedUnionFind(int N = 0): par(N), rank(N) {
         iota(par.begin(), par.end(), 0);
     }
     int find(int x) { return (par[x] == x) ? x : (par[x] = find(par[x])); }
     bool unite(int x, int y) {
         x = find(x), y = find(y);
         if (x == y) return false;
-        if (cou[x] < cou[y]) std::swap(x, y); 
-        par[y] = x, cou[x] += cou[y];
+        if (rank[x] < rank[y]) par[x] = y;
+        else par[y] = x;
+        if (rank[x] == rank[y]) rank[x]++;
         return true;
     }
-    int count(int x) { return cou[find(x)]; }
     bool same(int x, int y) { return find(x) == find(y); }
 };
