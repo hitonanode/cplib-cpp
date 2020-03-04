@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#aea7f79aded53b9cdf48a7ce3f3ec60e">graph-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph-tree/lowest_common_ancestor.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-13 19:30:08+09:00
+    - Last commit date: 2020-03-04 22:53:39+09:00
 
 
 
@@ -53,10 +53,10 @@ layout: default
 #include <vector>
 using namespace std;
 
-class UndirectedWeightedTree
+struct UndirectedWeightedTree
 {
     using T = long long int;   // Arbitrary data structure (operator+, operator- must be defined)
-    const int INVALID = -1;
+    int INVALID = -1;
     int V, lgV;
     int E;
     int root;
@@ -78,8 +78,9 @@ class UndirectedWeightedTree
         }
     }
 
-public:
-    UndirectedWeightedTree(int N = 0): V(N), E(0), adj(N) {
+    UndirectedWeightedTree() = default;
+    UndirectedWeightedTree(int N) : V(N), E(0), adj(N)
+    {
         lgV = 1;
         while (1 << lgV < V) lgV++;
     }
@@ -118,6 +119,7 @@ public:
 
     int kth_parent(int x, int k)
     {
+        if (depth[x] < k) return INVALID;
         for (int d = 0; d < lgV; d++)
         {
             if (x == INVALID) return INVALID;
@@ -161,10 +163,10 @@ public:
 #include <vector>
 using namespace std;
 
-class UndirectedWeightedTree
+struct UndirectedWeightedTree
 {
     using T = long long int;   // Arbitrary data structure (operator+, operator- must be defined)
-    const int INVALID = -1;
+    int INVALID = -1;
     int V, lgV;
     int E;
     int root;
@@ -186,8 +188,9 @@ class UndirectedWeightedTree
         }
     }
 
-public:
-    UndirectedWeightedTree(int N = 0): V(N), E(0), adj(N) {
+    UndirectedWeightedTree() = default;
+    UndirectedWeightedTree(int N) : V(N), E(0), adj(N)
+    {
         lgV = 1;
         while (1 << lgV < V) lgV++;
     }
@@ -226,6 +229,7 @@ public:
 
     int kth_parent(int x, int k)
     {
+        if (depth[x] < k) return INVALID;
         for (int d = 0; d < lgV; d++)
         {
             if (x == INVALID) return INVALID;

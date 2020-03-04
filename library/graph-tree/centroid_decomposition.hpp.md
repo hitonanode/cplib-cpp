@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#aea7f79aded53b9cdf48a7ce3f3ec60e">graph-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph-tree/centroid_decomposition.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-08-20 10:32:26+09:00
+    - Last commit date: 2020-02-24 18:37:52+09:00
 
 
 
@@ -50,21 +50,21 @@ detect_centroid(int r): Enumerate centroid(s) of the tree which `r` belongs to.
 */
 
 #pragma once
+#include <tuple>
 #include <utility>
 #include <vector>
-using namespace std;
 
 struct Tree
 {
     int NO_PARENT = -1;
-    using pint = pair<int, int>;
+    using pint = std::pair<int, int>;
     int V;
     int E;
-    vector<vector<pint>> to;  // (node_id, edge_id)
-    vector<int> par;          // parent node_id par[root] = -1
-    vector<vector<int>> chi;  // children id's
-    vector<int> subtree_size; // size of each subtree
-    vector<int> available_edge; // If 0, ignore the corresponding edge.
+    std::vector<std::vector<pint>> to;  // (node_id, edge_id)
+    std::vector<int> par;          // parent node_id par[root] = -1
+    std::vector<std::vector<int>> chi;  // children id's
+    std::vector<int> subtree_size; // size of each subtree
+    std::vector<int> available_edge; // If 0, ignore the corresponding edge.
 
     Tree() : Tree(0) {}
     Tree(int v) : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v) {}
@@ -81,10 +81,8 @@ struct Tree
     {
         chi[now].clear();
         subtree_size[now] = 1;
-        for (auto nxt : to[now])
-        {
-            if (nxt.first != prv and available_edge[nxt.second])
-            {
+        for (auto nxt : to[now]) {
+            if (nxt.first != prv and available_edge[nxt.second]) {
                 par[nxt.first] = now;
                 chi[now].push_back(nxt.first);
                 subtree_size[now] += _dfs_fixroot(nxt.first, now);
@@ -93,36 +91,50 @@ struct Tree
         return subtree_size[now];
     }
 
-    void fix_root(int root)
-    {
+    void fix_root(int root) {
         par[root] = NO_PARENT;
         _dfs_fixroot(root, -1);
     }
 
     //// Centroid Decpmposition ////
-    vector<int> centroid_cand_tmp;
-    void _dfs_detect_centroid(int now, int prv, int n)
+    std::vector<int> centroid_cand_tmp;
+    void _dfs_detect_centroids(int now, int prv, int n)
     {
         bool is_centroid = true;
         for (auto nxt : to[now])
         {
             if (nxt.first != prv and available_edge[nxt.second])
             {
-                _dfs_detect_centroid(nxt.first, now, n);
+                _dfs_detect_centroids(nxt.first, now, n);
                 if (subtree_size[nxt.first] > n / 2) is_centroid = false;
             }
         }
         if (n - subtree_size[now] > n / 2) is_centroid = false;
         if (is_centroid) centroid_cand_tmp.push_back(now);
     }
-    pint detect_centroid(int r) // ([centroid_node_id1], ([centroid_node_id2]|-1))
+    pint detect_centroids(int r) // ([centroid_node_id1], ([centroid_node_id2]|-1))
     {
         centroid_cand_tmp.clear();
         while (par[r] != NO_PARENT) r = par[r];
         int n = subtree_size[r];
-        _dfs_detect_centroid(r, -1, n);
-        if (centroid_cand_tmp.size() == 1) return make_pair(centroid_cand_tmp[0], -1);
-        else return make_pair(centroid_cand_tmp[0], centroid_cand_tmp[1]);
+        _dfs_detect_centroids(r, -1, n);
+        if (centroid_cand_tmp.size() == 1) return std::make_pair(centroid_cand_tmp[0], -1);
+        else return std::make_pair(centroid_cand_tmp[0], centroid_cand_tmp[1]);
+    }
+
+    void centroid_decomposition(int now) {
+        fix_root(now);
+        now = detect_centroids(now).first;
+        /*
+        do something
+        */
+        for (auto p : to[now]) {
+            int nxt, eid;
+            std::tie(nxt, eid) = p;
+            if (available_edge[eid] == 0) continue;
+            available_edge[eid] = 0;
+            centroid_decomposition(nxt);
+        }
     }
 };
 
@@ -133,28 +145,11 @@ struct Tree
 {% raw %}
 ```cpp
 Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/main.py", line 181, in main
-    subcommand_run(paths=[], jobs=parsed.jobs)
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/main.py", line 59, in subcommand_run
-    onlinejudge_verify.verify.main(paths, marker=marker, timeout=timeout, jobs=jobs)
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/verify.py", line 116, in main
-    verified = verify_file(path, compilers=compilers, jobs=jobs)
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/verify.py", line 77, in verify_file
-    language.compile(path, basedir=pathlib.Path.cwd(), tempdir=directory)
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 48, in compile
-    subprocess.check_call(command)
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/subprocess.py", line 364, in check_call
-    raise CalledProcessError(retcode, cmd)
-subprocess.CalledProcessError: Command '['g++', '--std=c++17', '-O2', '-Wall', '-g', '-I', '/home/runner/work/cplib-cpp/cplib-cpp', '-o', '.verify-helper/cache/ca259f8e9cebda54d88036dfaeafd417/a.out', '/home/runner/work/cplib-cpp/cplib-cpp/segmenttree/test/countandsumlessthan.test.cpp']' returned non-zero exit status 1.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 347, in write_contents
+  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 347, in write_contents
     bundled_code = language.bundle(self.file_class.file_path, basedir=self.cpp_source_path)
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 63, in bundle
+  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 68, in bundle
     bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.1/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 115, in update
+  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 115, in update
     raise BundleError(path, i + 1, "#pragma once found in a non-first line")
 onlinejudge_verify.languages.cplusplus_bundle.BundleError: graph-tree/centroid_decomposition.hpp: line 9: #pragma once found in a non-first line
 

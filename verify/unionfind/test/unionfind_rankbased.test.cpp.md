@@ -25,11 +25,11 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: unionfind/test/unionfind_plain.test.cpp
+# :heavy_check_mark: unionfind/test/unionfind_rankbased.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* <a href="{{ site.github.repository_url }}/blob/master/unionfind/test/unionfind_plain.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/unionfind/test/unionfind_rankbased.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-04 22:53:39+09:00
 
 

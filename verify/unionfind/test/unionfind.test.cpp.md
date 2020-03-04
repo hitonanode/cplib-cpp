@@ -25,11 +25,11 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: unionfind/test/unionfind_plain.test.cpp
+# :heavy_check_mark: unionfind/test/unionfind.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* <a href="{{ site.github.repository_url }}/blob/master/unionfind/test/unionfind_plain.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/unionfind/test/unionfind.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-04 22:53:39+09:00
 
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/unionfind/unionfind_rankbased.hpp.html">unionfind/unionfind_rankbased.hpp</a>
+* :heavy_check_mark: <a href="../../../library/unionfind/unionfind.hpp.html">unionfind/unionfind.hpp</a>
 
 
 ## Code
@@ -47,7 +47,7 @@ layout: default
 {% raw %}
 ```cpp
 #include <iostream>
-#include "unionfind/unionfind_rankbased.hpp"
+#include "unionfind/unionfind.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp"
 using namespace std;
 
@@ -56,7 +56,7 @@ int main()
 {
     int n, q;
     cin >> n >> q;
-    RankBasedUnionFind uf(n);
+    UnionFind uf(n);
     for (int i = 0; i < q; i++)
     {
         int c, x, y;
@@ -81,7 +81,7 @@ Traceback (most recent call last):
     self.update(self._resolve(included, included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 115, in update
     raise BundleError(path, i + 1, "#pragma once found in a non-first line")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: unionfind/unionfind_rankbased.hpp: line 2: #pragma once found in a non-first line
+onlinejudge_verify.languages.cplusplus_bundle.BundleError: unionfind/unionfind.hpp: line 2: #pragma once found in a non-first line
 
 ```
 {% endraw %}

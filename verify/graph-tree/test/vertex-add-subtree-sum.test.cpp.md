@@ -25,19 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/test/countandsumlessthan.test.cpp
+# :heavy_check_mark: graph-tree/test/vertex-add-subtree-sum.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/countandsumlessthan.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/graph-tree/test/vertex-add-subtree-sum.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-01 16:56:10+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/no/877">https://yukicoder.me/problems/no/877</a>
+* see: <a href="https://judge.yosupo.jp/problem/vertex_add_subtree_sum">https://judge.yosupo.jp/problem/vertex_add_subtree_sum</a>
 
 
 ## Depends on
 
+* :heavy_check_mark: <a href="../../../library/graph-tree/eulertour.hpp.html">graph-tree/eulertour.hpp</a>
 * :heavy_check_mark: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
 
 
@@ -46,8 +47,10 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#include "graph-tree/eulertour.hpp"
 #include "segmenttree/point-update-range-get_nonrecursive.hpp"
-#define PROBLEM "https://yukicoder.me/problems/no/877"
+#define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
+#include <cassert>
 #include <iostream>
 using namespace std;
 
@@ -56,14 +59,35 @@ int main()
     int N, Q;
     cin >> N >> Q;
     vector<long long int> A(N);
+    vector<vector<int>> to(N);
     for (auto &a : A) cin >> a;
-    CountAndSumLessThan<long long int> segtree(A);
+    for (int i = 1; i < N; i++) {
+        int p;
+        cin >> p;
+        to[p].push_back(i);
+        to[i].push_back(p);
+    }
+
+    PreorderEulerTour tour(to, 0);
+    vector<long long int> v;
+    for (auto i : tour.vis_order) v.push_back(A[i]);
+    assert(int(v.size()) == N);
+    PointUpdateRangeSum<long long int> rsq(v, 0);
+
     while (Q--) {
-        int q, l, r, x;
-        cin >> q >> l >> r >> x;
-        auto r1 = segtree.get(l - 1, r, x);
-        auto r2 = segtree.get(l - 1, r, 1e18);
-        printf("%lld\n", r2.second - r1.second - 1LL * (r2.first - r1.first) * x);
+        int q;
+        cin >> q;
+        if (q) {
+            int u;
+            cin >> u;
+            printf("%lld\n", rsq.get(tour.subtree_begin[u], tour.subtree_end[u]));
+        }
+        else {
+            int u, x;
+            cin >> u >> x;
+            A[u] += x;
+            rsq.update(tour.subtree_begin[u], A[u]);
+        }
     }
 }
 
@@ -73,6 +97,35 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
+#line 2 "graph-tree/eulertour.hpp"
+#include <cassert>
+#include <vector>
+
+// Preorder Euler Tour
+// （行きがけ順，部分木の頂点クエリ等に有用）
+struct PreorderEulerTour
+{
+    int V; // # of vertices of tree
+    int root;
+    std::vector<std::vector<int>> edges;
+    std::vector<int> subtree_begin, subtree_end;
+    std::vector<int> vis_order;
+
+    void _build_dfs(int now, int prv) {
+        subtree_begin[now] = vis_order.size();
+        vis_order.push_back(now);
+        for (auto nxt : edges[now]) if (nxt != prv) _build_dfs(nxt, now);
+        subtree_end[now] = vis_order.size();
+    }
+    PreorderEulerTour() = default;
+    PreorderEulerTour(const std::vector<std::vector<int>> &to, int root) : V(to.size()), root(root), edges(to)
+    {
+        assert(root >= 0 and root < V);
+        subtree_begin.resize(V);
+        subtree_end.resize(V);
+        _build_dfs(root, -1);
+    }
+};
 #line 2 "segmenttree/point-update-range-get_nonrecursive.hpp"
 #include <algorithm>
 #include <cassert>
@@ -193,8 +246,9 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
         SegTree::initialize(init, TRET(0, 0));
     }
 };
-#line 2 "segmenttree/test/countandsumlessthan.test.cpp"
-#define PROBLEM "https://yukicoder.me/problems/no/877"
+#line 3 "graph-tree/test/vertex-add-subtree-sum.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
+#include <cassert>
 #include <iostream>
 using namespace std;
 
@@ -203,14 +257,35 @@ int main()
     int N, Q;
     cin >> N >> Q;
     vector<long long int> A(N);
+    vector<vector<int>> to(N);
     for (auto &a : A) cin >> a;
-    CountAndSumLessThan<long long int> segtree(A);
+    for (int i = 1; i < N; i++) {
+        int p;
+        cin >> p;
+        to[p].push_back(i);
+        to[i].push_back(p);
+    }
+
+    PreorderEulerTour tour(to, 0);
+    vector<long long int> v;
+    for (auto i : tour.vis_order) v.push_back(A[i]);
+    assert(int(v.size()) == N);
+    PointUpdateRangeSum<long long int> rsq(v, 0);
+
     while (Q--) {
-        int q, l, r, x;
-        cin >> q >> l >> r >> x;
-        auto r1 = segtree.get(l - 1, r, x);
-        auto r2 = segtree.get(l - 1, r, 1e18);
-        printf("%lld\n", r2.second - r1.second - 1LL * (r2.first - r1.first) * x);
+        int q;
+        cin >> q;
+        if (q) {
+            int u;
+            cin >> u;
+            printf("%lld\n", rsq.get(tour.subtree_begin[u], tour.subtree_end[u]));
+        }
+        else {
+            int u, x;
+            cin >> u >> x;
+            A[u] += x;
+            rsq.update(tour.subtree_begin[u], A[u]);
+        }
     }
 }
 

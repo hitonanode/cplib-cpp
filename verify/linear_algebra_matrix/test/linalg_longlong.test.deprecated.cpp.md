@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-26 18:46:10+09:00
+    - Last commit date: 2020-02-24 18:37:52+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624</a>
@@ -137,7 +137,8 @@ vector<vector<lint>> gauss_jordan(vector<vector<lint>> mtr, lint mod)
             }
         }
         lint pivinv = mod_inverse(mtr[h][c], mod);
-        for (int hh = h + 1; hh < H; hh++) {
+        for (int hh = 0; hh < H; hh++) {
+            if (hh == h) continue;
             lint coeff = mtr[hh][c] * pivinv % mod;
             for (int w = W - 1; w >= c; w--) {
                 mtr[hh][w] = mtr[hh][w] - mtr[h][w] * coeff % mod;

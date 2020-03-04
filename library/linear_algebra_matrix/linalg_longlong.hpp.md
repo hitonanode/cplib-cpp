@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#20f2c5d841ec31673050aaedd8b17f50">linear_algebra_matrix</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/linalg_longlong.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-14 11:42:36+09:00
+    - Last commit date: 2020-02-24 18:37:52+09:00
 
 
 
@@ -89,7 +89,8 @@ vector<vector<lint>> gauss_jordan(vector<vector<lint>> mtr, lint mod)
             }
         }
         lint pivinv = mod_inverse(mtr[h][c], mod);
-        for (int hh = h + 1; hh < H; hh++) {
+        for (int hh = 0; hh < H; hh++) {
+            if (hh == h) continue;
             lint coeff = mtr[hh][c] * pivinv % mod;
             for (int w = W - 1; w >= c; w--) {
                 mtr[hh][w] = mtr[hh][w] - mtr[h][w] * coeff % mod;
@@ -202,7 +203,8 @@ vector<vector<lint>> gauss_jordan(vector<vector<lint>> mtr, lint mod)
             }
         }
         lint pivinv = mod_inverse(mtr[h][c], mod);
-        for (int hh = h + 1; hh < H; hh++) {
+        for (int hh = 0; hh < H; hh++) {
+            if (hh == h) continue;
             lint coeff = mtr[hh][c] * pivinv % mod;
             for (int w = W - 1; w >= c; w--) {
                 mtr[hh][w] = mtr[hh][w] - mtr[h][w] * coeff % mod;

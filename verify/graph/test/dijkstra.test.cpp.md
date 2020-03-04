@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/dijkstra.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-08 14:58:12+09:00
+    - Last commit date: 2020-03-04 23:26:14+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A</a>
@@ -39,6 +39,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/graph/dijkstra.hpp.html">graph/dijkstra.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/shortest_path.hpp.html">graph/shortest_path.hpp</a>
 
 
 ## Code
@@ -46,9 +47,11 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#include <cassert>
 #include <iostream>
 #include <vector>
 #include "graph/dijkstra.hpp"
+#include "graph/shortest_path.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
 
 wedges e;
@@ -58,16 +61,22 @@ int main()
     int V, E, r;
     cin >> V >> E >> r;
     e.resize(V);
+    ShortestPath<int> graph(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
         cin >> s >> t >> d;
         e[s].emplace_back(t, d);
+        graph.add_edge(s, t, d);
     }
     auto ret = dijkstra(V, r, e);
+    graph.Dijkstra(r);
 
     for (int i = 0; i < V; i++) {
         if (ret.first[i] == INF) puts("INF");
-        else printf("%lld\n", ret.first[i]);
+        else {
+            assert(ret.first[i] == graph.dist[i]);
+            printf("%lld\n", ret.first[i]);
+        }
     }
 }
 ```
@@ -77,6 +86,7 @@ int main()
 {% raw %}
 ```cpp
 #line 1 "graph/test/dijkstra.test.cpp"
+#include <cassert>
 #include <iostream>
 #include <vector>
 #line 2 "graph/dijkstra.hpp"
@@ -115,7 +125,79 @@ pair<vector<lint>, vector<int>> dijkstra(int N, int s, const wedges &w)
     }
     return make_pair(dist, prev); // (distance, previous_node)
 }
-#line 4 "graph/test/dijkstra.test.cpp"
+#line 2 "graph/shortest_path.hpp"
+#include <cassert>
+#include <functional>
+#include <limits>
+#include <queue>
+#include <utility>
+#include <vector>
+
+
+template<typename T>
+struct ShortestPath
+{
+    int V, E;
+    int INVALID = -1;
+    std::vector<std::vector<std::pair<int, T>>> to;
+    ShortestPath() = default;
+    ShortestPath(int V) : V(V), E(0), to(V) {}
+    void add_edge(int s, int t, T len) {
+        assert(0 <= s and s < V);
+        assert(0 <= t and t < V);
+        to[s].emplace_back(t, len);
+        E++;
+    }
+
+    std::vector<T> dist;
+    std::vector<int> prev;
+    void Dijkstra(int s) {
+        assert(0 <= s and s < V);
+        dist.assign(V, std::numeric_limits<T>::max());
+        dist[s] = 0;
+        prev.assign(V, INVALID);
+        using P = std::pair<T, int>;
+        std::priority_queue<P, std::vector<P>, std::greater<P>> pq;
+        pq.emplace(0, s);
+        while(!pq.empty()) {
+            T d;
+            int v;
+            std::tie(d, v) = pq.top();
+            pq.pop();
+            if (dist[v] < d) continue;
+            for (auto nx : to[v]) {
+                T dnx = d + nx.second;
+                if (dist[nx.first] > dnx) {
+                    dist[nx.first] = dnx, prev[nx.first] = v;
+                    pq.emplace(dnx, nx.first);
+                }
+            }
+        }
+    }
+
+    bool BellmanFord(int s, int nb_loop) {
+        assert(0 <= s and s < V);
+        dist.assign(V, std::numeric_limits<T>::max());
+        dist[s] = 0;
+        prev.assign(V, INVALID);
+        for (int l = 0; l < nb_loop; l++) {
+            bool upd = false;
+            for (int v = 0; v < V; v++) {
+                if (dist[v] == std::numeric_limits<T>::max()) continue;
+                for (auto nx : to[v]) {
+                    T dnx = dist[v] + nx.second;
+                    if (dist[nx.first] > dnx) {
+                        dist[nx.first] = dnx, prev[nx.first] = v;
+                        upd = true;
+                    }
+                }
+            }
+            if (!upd) return true;
+        }
+        return false;
+    }
+};
+#line 6 "graph/test/dijkstra.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
 
 wedges e;
@@ -125,16 +207,22 @@ int main()
     int V, E, r;
     cin >> V >> E >> r;
     e.resize(V);
+    ShortestPath<int> graph(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
         cin >> s >> t >> d;
         e[s].emplace_back(t, d);
+        graph.add_edge(s, t, d);
     }
     auto ret = dijkstra(V, r, e);
+    graph.Dijkstra(r);
 
     for (int i = 0; i < V; i++) {
         if (ret.first[i] == INF) puts("INF");
-        else printf("%lld\n", ret.first[i]);
+        else {
+            assert(ret.first[i] == graph.dist[i]);
+            printf("%lld\n", ret.first[i]);
+        }
     }
 }
 

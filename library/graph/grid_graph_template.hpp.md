@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/grid_graph_template.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-18 00:17:13+09:00
+    - Last commit date: 2020-03-01 13:14:15+09:00
 
 
 
@@ -77,6 +77,7 @@ struct GridGraph
 
         using P = std::tuple<T_E, int, int>;
         std::priority_queue<P, std::vector<P>, std::greater<P>> pq;
+        dij[x_s][y_s] = 0;
         pq.emplace(0, x_s, y_s);
         while (!pq.empty()) {
             T_E dnow;
@@ -140,6 +141,7 @@ struct GridGraph
 
         using P = std::tuple<T_E, int, int>;
         std::priority_queue<P, std::vector<P>, std::greater<P>> pq;
+        dij[x_s][y_s] = 0;
         pq.emplace(0, x_s, y_s);
         while (!pq.empty()) {
             T_E dnow;

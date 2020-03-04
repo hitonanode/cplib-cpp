@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/other_data_structures/test/queue_operate_all_composite.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-16 13:44:07+09:00
+    - Last commit date: 2020-02-24 18:37:52+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/queue_operate_all_composite">https://judge.yosupo.jp/problem/queue_operate_all_composite</a>
@@ -55,9 +55,7 @@ layout: default
 using mint = ModInt<998244353>;
 int main()
 {
-    pair<mint, mint> pz{1, 0};
     LinearFunctionQueue<mint> swag;
-
     int Q;
     cin >> Q;
     while (Q--) {
@@ -260,9 +258,7 @@ struct ModInt
 using mint = ModInt<998244353>;
 int main()
 {
-    pair<mint, mint> pz{1, 0};
     LinearFunctionQueue<mint> swag;
-
     int Q;
     cin >> Q;
     while (Q--) {

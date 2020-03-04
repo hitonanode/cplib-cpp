@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: segmenttree/test/rmq_nonrecursive.test.cpp
+# :heavy_check_mark: segmenttree/test/rmq_nonrecursive.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/rmq_nonrecursive.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-16 16:37:28+09:00
+    - Last commit date: 2020-03-01 16:56:10+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
 
 
 ## Code
@@ -57,12 +57,11 @@ int main()
     cin >> N >> Q;
     vector<int> A(N, (1LL << 31) - 1);
     RangeMinimumQuery<int> rmq(A, A[0]);
-    for (int q = 0; q < Q; q++)
-    {
+    while (Q--) {
         int c, x, y;
         cin >> c >> x >> y;
         if (c == 0) rmq.update(x, y);
-        else cout << rmq.get(x, y + 1, 0) << endl;
+        else cout << rmq.get(x, y + 1) << endl;
     }
 }
 
@@ -80,19 +79,15 @@ int main()
 
 // Nonrecursive Segment Tree (point-update, range-get)
 // - Conditions for operations:
-//   - datamerge: [TDATA, TDATA] -> TDATA, e(defaultDATA, x) == x, e(x, y) == e(y, x)
-//   - data2ret: [TDATA, TQUERY] -> TRET, f(defaultDATA, q) == defaultRET
+//   - datamerge: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)
+//   - data2ret: [TDATA, TQUERY] -> TRET
 //   - retmerge: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)
 //   - commutability f(e(x, y), q) == g(f(x, q), f(y, q))
 template<typename TDATA, typename TRET, typename TQUERY>
 struct NonrecursiveSegmentTree
 {
     int N;
-    TDATA defaultDATA;
     TRET defaultRET;
-    // E datamerge;
-    // F data2ret;
-    // G retmerge;
     virtual TDATA datamerge(const TDATA &, const TDATA &) = 0;
     virtual TRET data2ret(const TDATA &, const TQUERY &) = 0;
     virtual TRET retmerge(const TRET &, const TRET &) = 0;
@@ -100,17 +95,14 @@ struct NonrecursiveSegmentTree
     inline TDATA& at(int i) { return data[i]; }
 
     inline void _merge(int i) { at(i) = datamerge(at(i << 1), at((i << 1) + 1)); }
-    void initialize(const std::vector<TDATA> &seq) {
+    void initialize(const std::vector<TDATA> &seq, TRET RET_ZERO) {
         N = seq.size();
-        data.assign(N * 2, defaultDATA);
-        std::copy(seq.begin(), seq.end(), data.begin() + N);
+        defaultRET = RET_ZERO;
+        data = seq;
+        data.insert(data.end(), seq.begin(), seq.end());
         for (int i = N - 1; i; i--) _merge(i);
     }
     NonrecursiveSegmentTree() = default;
-    NonrecursiveSegmentTree(const std::vector<TDATA> &seq, TDATA defaultDATA) : N(seq.size()), defaultDATA(defaultDATA), defaultRET(data2ret(defaultDATA, TQUERY(0)))
-    {
-        initialize(seq);
-    }
     void update(int pos, const TDATA &x) {
         assert(pos >= 0 and pos < N);
         at(pos + N) = x;
@@ -118,9 +110,9 @@ struct NonrecursiveSegmentTree
     }
 
     // [l, r), 0-indexed
-    TRET get(int l, int r, TQUERY query) {
-        TRET retl = defaultRET, retr = defaultRET;
+    TRET get(int l, int r, TQUERY query = NULL) {
         assert(l >= 0 and r <= N);
+        TRET retl = defaultRET, retr = defaultRET;
         l += N, r += N;
         while (l < r) {
             if (l & 1) retl = retmerge(retl, data2ret(data[l++], query));
@@ -130,7 +122,8 @@ struct NonrecursiveSegmentTree
         return retmerge(retl, retr);
     }
 
-    friend std::ostream &operator<<(std::ostream &os, NonrecursiveSegmentTree s) {
+    template<typename T1, typename T2, typename T3>
+    friend std::ostream &operator<<(std::ostream &os, NonrecursiveSegmentTree<T1, T2, T3> s) {
         os << "[SegmentTree (len: " << s.N << ')';
         for (int i = 0; i < s.N; i++) os << s.at(i + s.N) << ',';
         os << "]";
@@ -138,18 +131,32 @@ struct NonrecursiveSegmentTree
     }
 };
 
-/*
+
 // Range Minimum Query
 // - get: return min(x_l, ..., x_{r - 1})
-auto st_op_1st = [](auto x, auto q) { return x; };
-auto st_op_getmin = [](auto xl, auto xr) { return std::min(xl, xr); };
 template <typename T>
-struct RangeMinimumQuery : public NonrecursiveSegmentTree<T, T, int, decltype(st_op_getmin), decltype(st_op_1st), decltype(st_op_getmin)>
+struct RangeMinimumQuery : public NonrecursiveSegmentTree<T, T, bool>
 {
-    using SegTree = NonrecursiveSegmentTree<T, T, int, decltype(st_op_getmin), decltype(st_op_1st), decltype(st_op_getmin)>;
-    RangeMinimumQuery(const std::vector<T> &seq, T defaultmin) : SegTree::NonrecursiveSegmentTree(seq, defaultmin, st_op_getmin, st_op_1st, st_op_getmin) {}
+    using SegTree = NonrecursiveSegmentTree<T, T, bool>;
+    T datamerge(const T &vl, const T &vr) override { return std::min(vl, vr); };
+    T data2ret(const T &v, const bool &q) override { return v; }
+    T retmerge(const T &vl, const T &vr) override { return std::min(vl, vr); };
+    RangeMinimumQuery(const std::vector<T> &seq, T defaultmin) : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, defaultmin);
+    };
 };
-*/
+
+template<typename T>
+struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool>
+{
+    using SegTree = NonrecursiveSegmentTree<T, T, bool>;
+    T datamerge(const T &vl, const T &vr) override { return vl + vr; };
+    T data2ret(const T &v, const bool &q) override { return v; }
+    T retmerge(const T &vl, const T &vr) override { return vl + vr; };
+    PointUpdateRangeSum(const std::vector<T> &seq, T zero) : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, zero);
+    };
+};
 
 // Range Counting less than q Query
 // - get: return (#{i | l <= i < r, x_i < q}, total sum of them).
@@ -159,30 +166,29 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
     using TDATA = std::vector<std::pair<T, T>>;
     using TRET = std::pair<int, T>;
     using TQUERY = T;
-    TDATA datamerge(const TDATA &vl, const TDATA &vr) {
-        vl.insert(vl.end(), vr.begin(), vr.end());
-        std::sort(vl.begin(), vl.end());
-        if (vl.size()) {
-            vl[0].second = vl[0].first;
-            for (size_t i = 1; i < vl.size(); i++) vl[i].second = vl[i - 1].second + vl[i].first;
+    TDATA datamerge(const TDATA &vl, const TDATA &vr) override {
+        TDATA ret = vl;
+        ret.insert(ret.end(), vr.begin(), vr.end());
+        std::sort(ret.begin(), ret.end());
+        if (ret.size()) {
+            ret[0].second = ret[0].first;
+            for (size_t i = 1; i < ret.size(); i++) ret[i].second = ret[i - 1].second + ret[i].first;
         }
-        return vl;
+        return ret;
     }
-    TRET data2ret(const TDATA &vec, TQUERY q) {
+    TRET data2ret(const TDATA &vec, const TQUERY &q) override {
         int i = std::lower_bound(vec.begin(), vec.end(), std::make_pair(q, q)) - vec.begin();
         if (!i) return std::make_pair(0, 0);
         else return std::make_pair(i, vec[i - 1].second);
     }
-    TRET retmerge(const TRET &l, const TRET &r) {
+    TRET retmerge(const TRET &l, const TRET &r) override {
         return std::make_pair(l.first + r.first, l.second + r.second);
     }
     using SegTree = NonrecursiveSegmentTree<TDATA, TRET, TQUERY>;
-    CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree()
-    {
-        SegTree::defaultDATA = std::make_pair(0, 0);
-        std::vector<std::vector<std::pair<T, T>>> init;
-        for (auto x : seq) init.emplace_back(std::vector<std::pair<T, T>>{std::pair<T, T>(x, x)});
-        SegTree::initialize(init);
+    CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree(){
+        std::vector<TDATA> init;
+        for (auto x : seq) init.emplace_back(TDATA{std::pair<T, T>(x, x)});
+        SegTree::initialize(init, TRET(0, 0));
     }
 };
 #line 2 "segmenttree/test/rmq_nonrecursive.test.cpp"
@@ -196,12 +202,11 @@ int main()
     cin >> N >> Q;
     vector<int> A(N, (1LL << 31) - 1);
     RangeMinimumQuery<int> rmq(A, A[0]);
-    for (int q = 0; q < Q; q++)
-    {
+    while (Q--) {
         int c, x, y;
         cin >> c >> x >> y;
         if (c == 0) rmq.update(x, y);
-        else cout << rmq.get(x, y + 1, 0) << endl;
+        else cout << rmq.get(x, y + 1) << endl;
     }
 }
 

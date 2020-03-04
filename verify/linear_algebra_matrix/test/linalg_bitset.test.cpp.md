@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linalg_bitset.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-08 14:58:12+09:00
+    - Last commit date: 2020-02-24 18:37:52+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624</a>
@@ -129,8 +129,8 @@ vector<bitset<Wmax>> gauss_jordan(int W, vector<bitset<Wmax>> mtr)
         }
         if (piv == -1) { h--; continue; }
         swap(mtr[piv], mtr[h]);
-        for (int hh = h + 1; hh < H; hh++) {
-            if (mtr[hh][c]) mtr[hh] ^= mtr[h];
+        for (int hh = 0; hh < H; hh++) {
+            if (hh != h and mtr[hh][c]) mtr[hh] ^= mtr[h];
         }
     }
     return mtr;
