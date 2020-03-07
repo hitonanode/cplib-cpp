@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#b1bc248a7ff2b2e95569f56de68615df">number</a>
 * <a href="{{ site.github.repository_url }}/blob/master/number/enumerate_partitions.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 12:37:26+09:00
+    - Last commit date: 2020-03-07 22:32:10+09:00
 
 
 
@@ -45,6 +45,7 @@ layout: default
 #include <numeric>
 #include <vector>
 
+// CUT begin
 // Enumerate Partitions of number <= N （自然数の分割の列挙）
 // - can be used for N less than ~50
 // - Example:
@@ -89,6 +90,7 @@ struct
 #include <numeric>
 #include <vector>
 
+// CUT begin
 // Enumerate Partitions of number <= N （自然数の分割の列挙）
 // - can be used for N less than ~50
 // - Example:

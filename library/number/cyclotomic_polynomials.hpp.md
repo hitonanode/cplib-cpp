@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#b1bc248a7ff2b2e95569f56de68615df">number</a>
 * <a href="{{ site.github.repository_url }}/blob/master/number/cyclotomic_polynomials.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-26 16:35:18+09:00
+    - Last commit date: 2020-03-07 22:32:10+09:00
 
 
 
@@ -50,6 +50,7 @@ layout: default
 #include "number/eratosthenes.hpp"
 #include <vector>
 
+// CUT begin
 // cyclotomic polynominals : 円分多項式
 // ret[i][j] = [x^j]\Phi_i(x) for i <= Nmax, which are known to be integers
 std::vector<std::vector<int>> cyclotomic_polynomials(int Nmax)
@@ -100,7 +101,7 @@ std::vector<std::vector<int>> cyclotomic_polynomials(int Nmax)
 #include <numeric>
 #include <vector>
 
-
+// CUT begin
 // Sieve of Eratosthenes
 // (*this)[i] = (divisor of i, greater than 1)
 // Example: [0, 1, 2, 3, 2, 5, 3, 7, 2, 3, 2, 11, ...]
@@ -168,6 +169,7 @@ struct SieveOfEratosthenes : std::vector<int>
 #line 3 "number/cyclotomic_polynomials.hpp"
 #include <vector>
 
+// CUT begin
 // cyclotomic polynominals : 円分多項式
 // ret[i][j] = [x^j]\Phi_i(x) for i <= Nmax, which are known to be integers
 std::vector<std::vector<int>> cyclotomic_polynomials(int Nmax)

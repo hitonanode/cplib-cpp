@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/number/test/gen_primes.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-11 19:38:38+09:00
+    - Last commit date: 2020-03-07 22:32:10+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C</a>
@@ -84,7 +84,7 @@ int main()
 #include <numeric>
 #include <vector>
 
-
+// CUT begin
 // Sieve of Eratosthenes
 // (*this)[i] = (divisor of i, greater than 1)
 // Example: [0, 1, 2, 3, 2, 5, 3, 7, 2, 3, 2, 11, ...]

@@ -41,17 +41,14 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-/*
-Binary lifting / `Doubling`
-<https://atcoder.jp/contests/arc060/submissions/7039451>
-*/
 #pragma once
 #include <cstdlib>
 #include <vector>
 
-
-// Binary lifting
+// CUT begin
+// Binary lifting / `Doubling`
 // Complexity: O(NlogN) precalculation / O(logN) per query
+// <https://atcoder.jp/contests/arc060/submissions/7039451>
 struct BinaryLifting
 {
     int N, INVALID, lgD;
@@ -94,14 +91,49 @@ struct BinaryLifting
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 347, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=self.cpp_source_path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 68, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 115, in update
-    raise BundleError(path, i + 1, "#pragma once found in a non-first line")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: binary_lifting(doubling)/doubling.hpp: line 5: #pragma once found in a non-first line
+#line 2 "binary_lifting(doubling)/doubling.hpp"
+#include <cstdlib>
+#include <vector>
+
+// CUT begin
+// Binary lifting / `Doubling`
+// Complexity: O(NlogN) precalculation / O(logN) per query
+// <https://atcoder.jp/contests/arc060/submissions/7039451>
+struct BinaryLifting
+{
+    int N, INVALID, lgD;
+    std::vector<std::vector<int>> mat;
+    BinaryLifting() : N(0), lgD(0) {}
+    BinaryLifting(const std::vector<int> &vec_nxt, int INVALID = -1, int lgd = 0) : N(vec_nxt.size()), INVALID(INVALID), lgD(lgd)
+    {
+        while ((1 << lgD) < N) lgD++;
+        mat.assign(lgD, std::vector<int>(N, INVALID));
+        mat[0] = vec_nxt;
+        for (int i = 0; i < N; i++) if (mat[0][i] < 0 or mat[0][i] >= N) mat[0][i] = INVALID;
+        for (int d = 0; d < lgD - 1; d++) {
+            for (int i = 0; i < N; i++) if (mat[d][i] != INVALID) mat[d + 1][i] = mat[d][mat[d][i]];
+        }
+    }
+    int kth_next(int now, int k)
+    {
+        if (k >= (1 << lgD)) exit(8);
+        for (int d = 0; k and now != INVALID; d++, k >>= 1) if (k & 1) now = mat[d][now];
+        return now;
+    }
+
+    // Distance from l to [r, \infty)
+    // Requirement: mat[0][i] > i for all i (monotone increasing)
+    int distance(int l, int r)
+    {
+        if (l >= r) return 0;
+        int ret = 0;
+        for (int d = lgD - 1; d >= 0; d--) {
+            if (mat[d][l] < r and mat[d][l] != INVALID) ret += 1 << d, l = mat[d][l];
+        }
+        if (mat[0][l] == INVALID or mat[0][l] >= r) return ret + 1;
+        else return -1; // Unable to reach
+    }
+};
 
 ```
 {% endraw %}

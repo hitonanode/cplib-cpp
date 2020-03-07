@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#b1bc248a7ff2b2e95569f56de68615df">number</a>
 * <a href="{{ site.github.repository_url }}/blob/master/number/eratosthenes.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-11 19:38:38+09:00
+    - Last commit date: 2020-03-07 22:32:10+09:00
 
 
 
@@ -58,7 +58,7 @@ layout: default
 #include <numeric>
 #include <vector>
 
-
+// CUT begin
 // Sieve of Eratosthenes
 // (*this)[i] = (divisor of i, greater than 1)
 // Example: [0, 1, 2, 3, 2, 5, 3, 7, 2, 3, 2, 11, ...]
@@ -136,7 +136,7 @@ struct SieveOfEratosthenes : std::vector<int>
 #include <numeric>
 #include <vector>
 
-
+// CUT begin
 // Sieve of Eratosthenes
 // (*this)[i] = (divisor of i, greater than 1)
 // Example: [0, 1, 2, 3, 2, 5, 3, 7, 2, 3, 2, 11, ...]

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a1f2c13e39c190602cc1599f47ad6179">convex_hull_trick</a>
 * <a href="{{ site.github.repository_url }}/blob/master/convex_hull_trick/monotone_cht.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-28 00:44:30+09:00
+    - Last commit date: 2020-03-07 22:32:10+09:00
 
 
 
@@ -46,6 +46,7 @@ layout: default
 #include <deque>
 #include <utility>
 
+// CUT begin
 // Convex Hull Trick for monotone increasing queries, monotone decreasing slopes
 // Each operation is amortized O(1)
 // - add_line(a, b): Add `y = ax + b`, a must be monotone decreasing (if is_minimizer == true) / decreasing (otherwise)
@@ -92,6 +93,7 @@ struct MonotoneConvexHullTrick : std::deque<std::pair<T_CHT, T_CHT>> // (a, b) m
 #include <deque>
 #include <utility>
 
+// CUT begin
 // Convex Hull Trick for monotone increasing queries, monotone decreasing slopes
 // Each operation is amortized O(1)
 // - add_line(a, b): Add `y = ax + b`, a must be monotone decreasing (if is_minimizer == true) / decreasing (otherwise)
