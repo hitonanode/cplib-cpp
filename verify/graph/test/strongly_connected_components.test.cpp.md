@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/test/strongly_connected_components.test.cpp
+# :x: graph/test/strongly_connected_components.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/strongly_connected_components.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-04 00:39:22+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C</a>
@@ -86,6 +86,7 @@ int main()
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Directed graph library to find strongly connected components （強連結成分分解）
 // 0-indexed directed graph
 // Complexity: O(V + E)

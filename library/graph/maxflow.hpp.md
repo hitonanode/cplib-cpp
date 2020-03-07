@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/maxflow.hpp
+# :x: graph/maxflow.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/maxflow.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-07 22:06:51+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/graph/test/maxflow.test.cpp.html">graph/test/maxflow.test.cpp</a>
+* :x: <a href="../../verify/graph/test/maxflow.test.cpp.html">graph/test/maxflow.test.cpp</a>
 
 
 ## Code
@@ -52,6 +52,7 @@ layout: default
 #include <queue>
 #include <vector>
 
+// CUT begin
 // MaxFlow (Dinic algorithm)
 template <typename T>
 struct MaxFlow
@@ -191,6 +192,7 @@ public:
 #include <queue>
 #include <vector>
 
+// CUT begin
 // MaxFlow (Dinic algorithm)
 template <typename T>
 struct MaxFlow

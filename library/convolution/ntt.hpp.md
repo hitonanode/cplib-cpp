@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a9595c1c24c33b16056d2ad07e71682d">convolution</a>
 * <a href="{{ site.github.repository_url }}/blob/master/convolution/ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-01 19:48:31+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
@@ -74,6 +74,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Integer convolution for arbitrary mod
 // with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.
 // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.
@@ -317,6 +318,7 @@ struct ModInt
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Integer convolution for arbitrary mod
 // with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.
 // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.

@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/articulation_points.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-08 14:58:12+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A</a>
@@ -84,6 +84,7 @@ int main()
 #include <vector>
 using namespace std;
 
+// CUT begin
 struct UndirectedGraph
 {
     using pint = pair<int, int>;

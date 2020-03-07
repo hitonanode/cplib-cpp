@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/bipartite-matching.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-06 22:58:02+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
@@ -51,6 +51,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 // 二部グラフの最大マッチング bipartite-matching of undirected bipartite graph
 // <https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>
 // Comprexity: O(VE)
@@ -118,6 +119,7 @@ struct BipartiteMatching
 #include <vector>
 using namespace std;
 
+// CUT begin
 // 二部グラフの最大マッチング bipartite-matching of undirected bipartite graph
 // <https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>
 // Comprexity: O(VE)

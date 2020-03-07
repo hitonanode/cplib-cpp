@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/bellman_ford.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-08-12 12:36:28+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
@@ -50,14 +50,14 @@ layout: default
 #include <utility>
 #include <vector>
 using namespace std;
-using lint = long long;
 
-using wedges = vector<vector<pair<lint, lint>>>; // (to, weight)
-constexpr lint INF = 1e17;
-vector<lint> bellman_ford(int s, const wedges &w, int T)
+// CUT begin
+using wedges = vector<vector<pair<long long int, long long int>>>; // (to, weight)
+constexpr long long int INF = 1e17;
+vector<long long int> bellman_ford(int s, const wedges &w, int T)
 {
     int N = w.size();
-    vector<lint> d(N, INF);
+    vector<long long int> d(N, INF);
     d[s] = 0;
     for(int l = 0; l < T; l++) {
         bool upd = false;
@@ -75,6 +75,7 @@ vector<lint> bellman_ford(int s, const wedges &w, int T)
     }
     return d;
 }
+
 ```
 {% endraw %}
 
@@ -85,14 +86,14 @@ vector<lint> bellman_ford(int s, const wedges &w, int T)
 #include <utility>
 #include <vector>
 using namespace std;
-using lint = long long;
 
-using wedges = vector<vector<pair<lint, lint>>>; // (to, weight)
-constexpr lint INF = 1e17;
-vector<lint> bellman_ford(int s, const wedges &w, int T)
+// CUT begin
+using wedges = vector<vector<pair<long long int, long long int>>>; // (to, weight)
+constexpr long long int INF = 1e17;
+vector<long long int> bellman_ford(int s, const wedges &w, int T)
 {
     int N = w.size();
-    vector<lint> d(N, INF);
+    vector<long long int> d(N, INF);
     d[s] = 0;
     for(int l = 0; l < T; l++) {
         bool upd = false;

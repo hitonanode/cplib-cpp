@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/dijkstra.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-04 23:26:14+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A</a>
@@ -94,14 +94,14 @@ int main()
 #include <utility>
 #include <vector>
 using namespace std;
-using lint = long long int;
-using plint = pair<lint, lint>;
 
-using wedges = vector<vector<plint>>; // (to, weight)
+using wedges = vector<vector<pair<long long int, long long int>>>; // (to, weight)
 
-constexpr lint INF = 1e17;
-pair<vector<lint>, vector<int>> dijkstra(int N, int s, const wedges &w)
+constexpr long long int INF = 1e17;
+pair<vector<long long int>, vector<int>> dijkstra(int N, int s, const wedges &w)
 {
+    using lint = long long int;
+    using plint = pair<long long int, long long int>;
     vector<lint> dist(N, INF);
     dist[s] = 0;
     vector<int> prev(N, -1);
@@ -133,7 +133,7 @@ pair<vector<lint>, vector<int>> dijkstra(int N, int s, const wedges &w)
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 template<typename T>
 struct ShortestPath
 {

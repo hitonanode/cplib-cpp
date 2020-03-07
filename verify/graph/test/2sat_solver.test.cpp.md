@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/2sat_solver.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-04 00:39:22+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/two_sat">https://judge.yosupo.jp/problem/two_sat</a>
@@ -90,6 +90,7 @@ int main() {
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Directed graph library to find strongly connected components （強連結成分分解）
 // 0-indexed directed graph
 // Complexity: O(V + E)

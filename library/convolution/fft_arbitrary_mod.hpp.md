@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a9595c1c24c33b16056d2ad07e71682d">convolution</a>
 * <a href="{{ site.github.repository_url }}/blob/master/convolution/fft_arbitrary_mod.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-13 15:48:40+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
@@ -47,6 +47,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Arbitrary mod (<1e9) FFT/convolution
 // MAXA*MAXB*N <= 1e15 (double), 1e19 (long double)
 // Based on <https://ei1333.github.io/luzhiled/snippets/math/arbitrary-mod-convolution.html>
@@ -168,6 +169,7 @@ vector<MODINT> convolution_mod(vector<MODINT> a, vector<MODINT> b)
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Arbitrary mod (<1e9) FFT/convolution
 // MAXA*MAXB*N <= 1e15 (double), 1e19 (long double)
 // Based on <https://ei1333.github.io/luzhiled/snippets/math/arbitrary-mod-convolution.html>

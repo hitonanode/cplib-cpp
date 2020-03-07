@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/test/strongly_connected_components_bitset.test.cpp
+# :x: graph/test/strongly_connected_components_bitset.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/strongly_connected_components_bitset.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-04 13:28:10+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/graph/strongly_connected_components_bitset.hpp.html">graph/strongly_connected_components_bitset.hpp</a>
+* :x: <a href="../../../library/graph/strongly_connected_components_bitset.hpp.html">graph/strongly_connected_components_bitset.hpp</a>
 
 
 ## Code
@@ -88,6 +88,7 @@ int main()
 #include <bitset>
 #include <vector>
 
+// CUT begin
 // Directed graph library to find strongly connected components （強連結成分分解）
 // 0-indexed directed graph
 // - using std::bitset

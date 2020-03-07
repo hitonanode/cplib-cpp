@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/bellman_ford.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-04 23:26:14+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B</a>
@@ -59,7 +59,7 @@ int main()
 {
     int V, E, r;
     cin >> V >> E >> r;
-    ShortestPath<lint> graph(V);
+    ShortestPath<long long int> graph(V);
     e.resize(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
@@ -67,7 +67,7 @@ int main()
         e[s].emplace_back(t, d);
         graph.add_edge(s, t, d);
     }
-    vector<lint> ret = bellman_ford(r, e, V);
+    vector<long long int> ret = bellman_ford(r, e, V);
 
     if (!graph.BellmanFord(r, V + 1)) {
         puts("NEGATIVE CYCLE");
@@ -103,7 +103,7 @@ int main()
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 template<typename T>
 struct ShortestPath
 {
@@ -171,14 +171,14 @@ struct ShortestPath
 #include <utility>
 #include <vector>
 using namespace std;
-using lint = long long;
 
-using wedges = vector<vector<pair<lint, lint>>>; // (to, weight)
-constexpr lint INF = 1e17;
-vector<lint> bellman_ford(int s, const wedges &w, int T)
+// CUT begin
+using wedges = vector<vector<pair<long long int, long long int>>>; // (to, weight)
+constexpr long long int INF = 1e17;
+vector<long long int> bellman_ford(int s, const wedges &w, int T)
 {
     int N = w.size();
-    vector<lint> d(N, INF);
+    vector<long long int> d(N, INF);
     d[s] = 0;
     for(int l = 0; l < T; l++) {
         bool upd = false;
@@ -205,7 +205,7 @@ int main()
 {
     int V, E, r;
     cin >> V >> E >> r;
-    ShortestPath<lint> graph(V);
+    ShortestPath<long long int> graph(V);
     e.resize(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
@@ -213,7 +213,7 @@ int main()
         e[s].emplace_back(t, d);
         graph.add_edge(s, t, d);
     }
-    vector<lint> ret = bellman_ford(r, e, V);
+    vector<long long int> ret = bellman_ford(r, e, V);
 
     if (!graph.BellmanFord(r, V + 1)) {
         puts("NEGATIVE CYCLE");

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f0e336561d1c18f84cd3e0ce52a956cf">formal_power_series</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/formal_power_series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-02 21:57:08+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
@@ -66,6 +66,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Formal Power Series (形式的冪級数) based on ModInt<mod> / ModIntRuntime
 // Reference: <https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>
 template<typename T>
@@ -402,6 +403,7 @@ struct ModInt
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Integer convolution for arbitrary mod
 // with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.
 // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.
@@ -526,6 +528,7 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Formal Power Series (形式的冪級数) based on ModInt<mod> / ModIntRuntime
 // Reference: <https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>
 template<typename T>

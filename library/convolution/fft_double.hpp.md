@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a9595c1c24c33b16056d2ad07e71682d">convolution</a>
 * <a href="{{ site.github.repository_url }}/blob/master/convolution/fft_double.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-30 22:18:12+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
@@ -46,6 +46,7 @@ layout: default
 #include <utility>
 #include <vector>
 
+// CUT begin
 // Convolution by FFT (Fast Fourier Transform)
 // Algorithm based on <http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>
 // Verified: ATC001C (168 ms) <https://atcoder.jp/contests/atc001/submissions/9243440>
@@ -115,6 +116,7 @@ std::vector<long long int> fftconv(const std::vector<T> &a, const std::vector<T>
 #include <utility>
 #include <vector>
 
+// CUT begin
 // Convolution by FFT (Fast Fourier Transform)
 // Algorithm based on <http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>
 // Verified: ATC001C (168 ms) <https://atcoder.jp/contests/atc001/submissions/9243440>

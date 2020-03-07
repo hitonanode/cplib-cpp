@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/flow_mincost.hpp
+# :x: graph/flow_mincost.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/flow_mincost.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-10 23:32:45+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/graph/test/mincostflow.test.cpp.html">graph/test/mincostflow.test.cpp</a>
+* :x: <a href="../../verify/graph/test/mincostflow.test.cpp.html">graph/test/mincostflow.test.cpp</a>
 
 
 ## Code
@@ -53,6 +53,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 /*
 MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE
 Verified by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>
@@ -182,6 +183,7 @@ struct MinCostFlow
 #include <vector>
 using namespace std;
 
+// CUT begin
 /*
 MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE
 Verified by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>

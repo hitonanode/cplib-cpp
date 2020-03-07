@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/grid_graph_template.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-01 13:14:15+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
@@ -48,7 +48,7 @@ layout: default
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 struct GridGraph
 {
 
@@ -112,7 +112,7 @@ struct GridGraph
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 struct GridGraph
 {
 

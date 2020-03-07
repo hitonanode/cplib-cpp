@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/strongly_connected_components.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-04 00:39:22+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/graph/test/2sat_solver.test.cpp.html">graph/test/2sat_solver.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/graph/test/strongly_connected_components.test.cpp.html">graph/test/strongly_connected_components.test.cpp</a>
+* :x: <a href="../../verify/graph/test/strongly_connected_components.test.cpp.html">graph/test/strongly_connected_components.test.cpp</a>
 
 
 ## Code
@@ -51,6 +51,7 @@ layout: default
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Directed graph library to find strongly connected components （強連結成分分解）
 // 0-indexed directed graph
 // Complexity: O(V + E)
@@ -143,6 +144,7 @@ struct SATSolver : DirectedGraphSCC {
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Directed graph library to find strongly connected components （強連結成分分解）
 // 0-indexed directed graph
 // Complexity: O(V + E)

@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/strongly_connected_components_bitset.hpp
+# :x: graph/strongly_connected_components_bitset.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/strongly_connected_components_bitset.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-04 00:39:22+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/graph/test/strongly_connected_components_bitset.test.cpp.html">graph/test/strongly_connected_components_bitset.test.cpp</a>
+* :x: <a href="../../verify/graph/test/strongly_connected_components_bitset.test.cpp.html">graph/test/strongly_connected_components_bitset.test.cpp</a>
 
 
 ## Code
@@ -50,6 +50,7 @@ layout: default
 #include <bitset>
 #include <vector>
 
+// CUT begin
 // Directed graph library to find strongly connected components （強連結成分分解）
 // 0-indexed directed graph
 // - using std::bitset
@@ -105,6 +106,7 @@ struct DirectedGraphSCC64 {
 #include <bitset>
 #include <vector>
 
+// CUT begin
 // Directed graph library to find strongly connected components （強連結成分分解）
 // 0-indexed directed graph
 // - using std::bitset

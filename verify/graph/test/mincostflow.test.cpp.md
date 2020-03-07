@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/test/mincostflow.test.cpp
+# :x: graph/test/mincostflow.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/mincostflow.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-10 23:32:45+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/graph/flow_mincost.hpp.html">graph/flow_mincost.hpp</a>
+* :x: <a href="../../../library/graph/flow_mincost.hpp.html">graph/flow_mincost.hpp</a>
 
 
 ## Code
@@ -81,6 +81,7 @@ int main()
 #include <vector>
 using namespace std;
 
+// CUT begin
 /*
 MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE
 Verified by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>

@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/test/maximum_independent_set.test.cpp
+# :x: graph/test/maximum_independent_set.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/maximum_independent_set.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-14 11:23:41+09:00
+    - Last commit date: 2020-03-07 22:40:57+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/maximum_independent_set">https://judge.yosupo.jp/problem/maximum_independent_set</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/graph/maximum_independent_set.hpp.html">graph/maximum_independent_set.hpp</a>
+* :x: <a href="../../../library/graph/maximum_independent_set.hpp.html">graph/maximum_independent_set.hpp</a>
 
 
 ## Code
@@ -89,12 +89,12 @@ int main() {
 #include <stack>
 #include <vector>
 
+// CUT begin
 // Maximum Independent Set for general graph （最大独立集合）
 // Works with reasonable time complexity when N~40
 // Given graph must not have self-edges
 // Verified: <https://judge.yosupo.jp/submission/1864>
 // Reference: <https://www.slideshare.net/wata_orz/ss-12131479>
-
 struct MaximumIndependentSet
 {
     using E = std::vector<std::vector<int>>;
