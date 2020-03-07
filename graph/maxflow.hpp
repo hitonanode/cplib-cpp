@@ -4,6 +4,7 @@
 #include <queue>
 #include <vector>
 
+// CUT begin
 // MaxFlow (Dinic algorithm)
 template <typename T>
 struct MaxFlow

@@ -7,6 +7,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Integer convolution for arbitrary mod
 // with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.
 // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.

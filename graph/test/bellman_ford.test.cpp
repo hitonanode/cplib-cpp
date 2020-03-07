@@ -10,7 +10,7 @@ int main()
 {
     int V, E, r;
     cin >> V >> E >> r;
-    ShortestPath<lint> graph(V);
+    ShortestPath<long long int> graph(V);
     e.resize(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
@@ -18,7 +18,7 @@ int main()
         e[s].emplace_back(t, d);
         graph.add_edge(s, t, d);
     }
-    vector<lint> ret = bellman_ford(r, e, V);
+    vector<long long int> ret = bellman_ford(r, e, V);
 
     if (!graph.BellmanFord(r, V + 1)) {
         puts("NEGATIVE CYCLE");

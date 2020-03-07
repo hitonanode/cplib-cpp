@@ -5,7 +5,7 @@
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 struct GridGraph
 {
 

@@ -2,6 +2,7 @@
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Directed graph library to find strongly connected components （強連結成分分解）
 // 0-indexed directed graph
 // Complexity: O(V + E)

@@ -5,6 +5,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Formal Power Series (形式的冪級数) based on ModInt<mod> / ModIntRuntime
 // Reference: <https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>
 template<typename T>

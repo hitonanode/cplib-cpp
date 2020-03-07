@@ -6,7 +6,7 @@
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 template<typename T>
 struct ShortestPath
 {

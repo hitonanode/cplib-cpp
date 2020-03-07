@@ -5,6 +5,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 struct UndirectedGraph
 {
     using pint = pair<int, int>;

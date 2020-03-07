@@ -5,6 +5,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 /*
 MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE
 Verified by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>

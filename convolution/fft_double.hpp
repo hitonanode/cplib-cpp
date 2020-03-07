@@ -3,6 +3,7 @@
 #include <utility>
 #include <vector>
 
+// CUT begin
 // Convolution by FFT (Fast Fourier Transform)
 // Algorithm based on <http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>
 // Verified: ATC001C (168 ms) <https://atcoder.jp/contests/atc001/submissions/9243440>

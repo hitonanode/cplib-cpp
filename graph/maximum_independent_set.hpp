@@ -4,12 +4,12 @@
 #include <stack>
 #include <vector>
 
+// CUT begin
 // Maximum Independent Set for general graph （最大独立集合）
 // Works with reasonable time complexity when N~40
 // Given graph must not have self-edges
 // Verified: <https://judge.yosupo.jp/submission/1864>
 // Reference: <https://www.slideshare.net/wata_orz/ss-12131479>
-
 struct MaximumIndependentSet
 {
     using E = std::vector<std::vector<int>>;

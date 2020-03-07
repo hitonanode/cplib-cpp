@@ -4,6 +4,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Arbitrary mod (<1e9) FFT/convolution
 // MAXA*MAXB*N <= 1e15 (double), 1e19 (long double)
 // Based on <https://ei1333.github.io/luzhiled/snippets/math/arbitrary-mod-convolution.html>

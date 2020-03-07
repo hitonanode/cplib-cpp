@@ -2,14 +2,14 @@
 #include <utility>
 #include <vector>
 using namespace std;
-using lint = long long;
 
-using wedges = vector<vector<pair<lint, lint>>>; // (to, weight)
-constexpr lint INF = 1e17;
-vector<lint> bellman_ford(int s, const wedges &w, int T)
+// CUT begin
+using wedges = vector<vector<pair<long long int, long long int>>>; // (to, weight)
+constexpr long long int INF = 1e17;
+vector<long long int> bellman_ford(int s, const wedges &w, int T)
 {
     int N = w.size();
-    vector<lint> d(N, INF);
+    vector<long long int> d(N, INF);
     d[s] = 0;
     for(int l = 0; l < T; l++) {
         bool upd = false;

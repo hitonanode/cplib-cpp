@@ -3,14 +3,14 @@
 #include <utility>
 #include <vector>
 using namespace std;
-using lint = long long int;
-using plint = pair<lint, lint>;
 
-using wedges = vector<vector<plint>>; // (to, weight)
+using wedges = vector<vector<pair<long long int, long long int>>>; // (to, weight)
 
-constexpr lint INF = 1e17;
-pair<vector<lint>, vector<int>> dijkstra(int N, int s, const wedges &w)
+constexpr long long int INF = 1e17;
+pair<vector<long long int>, vector<int>> dijkstra(int N, int s, const wedges &w)
 {
+    using lint = long long int;
+    using plint = pair<long long int, long long int>;
     vector<lint> dist(N, INF);
     dist[s] = 0;
     vector<int> prev(N, -1);
