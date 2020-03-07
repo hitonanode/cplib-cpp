@@ -1,3 +1,4 @@
+#pragma once
 /*
 Convex Hull Trick
 - y = ax + b が順次追加されつつ，最大値/最小値クエリに答える
@@ -6,15 +7,14 @@ Verify:
 CF 1179D <https://codeforces.com/contest/1179/submission/59448330>
 CF 1137E <https://codeforces.com/contest/1137/submission/59448399>
 */
-#pragma once
 #include <limits>
 #include <set>
 #include <vector>
 using namespace std;
 
+// CUT begin
 #include <boost/multiprecision/cpp_int.hpp>
 using mpint = boost::multiprecision::cpp_int;
-
 /*
 Convex Hull Trick
 Implementation Idea: <https://github.com/satanic0258/Cpp_snippet/blob/master/src/technique/ConvexHullTrick.cpp>

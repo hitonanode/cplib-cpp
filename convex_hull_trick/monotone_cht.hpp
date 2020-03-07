@@ -3,6 +3,7 @@
 #include <deque>
 #include <utility>
 
+// CUT begin
 // Convex Hull Trick for monotone increasing queries, monotone decreasing slopes
 // Each operation is amortized O(1)
 // - add_line(a, b): Add `y = ax + b`, a must be monotone decreasing (if is_minimizer == true) / decreasing (otherwise)

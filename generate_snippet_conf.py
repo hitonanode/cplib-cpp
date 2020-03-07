@@ -14,8 +14,11 @@ def read_hpp(filepath):
     ret = [os.path.basename(filepath) + '|']
     with open(filepath, 'r') as file:
         for line in file.read().splitlines():
-            line = re.sub('([|`])', '`\\1', line)
-            ret.append('`' + line)
+            if line[:12] == '// CUT begin':
+                ret = ret[:1]
+            else:
+                line = re.sub('([|`])', '`\\1', line)
+                ret.append('`' + line)
     ret.append('/E')
     return ret
 

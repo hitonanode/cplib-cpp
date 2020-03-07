@@ -2,6 +2,7 @@
 #include "number/eratosthenes.hpp"
 #include <vector>
 
+// CUT begin
 // cyclotomic polynominals : 円分多項式
 // ret[i][j] = [x^j]\Phi_i(x) for i <= Nmax, which are known to be integers
 std::vector<std::vector<int>> cyclotomic_polynomials(int Nmax)

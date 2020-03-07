@@ -2,6 +2,7 @@
 #include <numeric>
 #include <vector>
 
+// CUT begin
 // Enumerate Partitions of number <= N （自然数の分割の列挙）
 // - can be used for N less than ~50
 // - Example:

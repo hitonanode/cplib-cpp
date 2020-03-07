@@ -4,7 +4,7 @@
 #include <numeric>
 #include <vector>
 
-
+// CUT begin
 // Sieve of Eratosthenes
 // (*this)[i] = (divisor of i, greater than 1)
 // Example: [0, 1, 2, 3, 2, 5, 3, 7, 2, 3, 2, 11, ...]

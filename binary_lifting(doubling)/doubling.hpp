@@ -1,14 +1,11 @@
-/*
-Binary lifting / `Doubling`
-<https://atcoder.jp/contests/arc060/submissions/7039451>
-*/
 #pragma once
 #include <cstdlib>
 #include <vector>
 
-
-// Binary lifting
+// CUT begin
+// Binary lifting / `Doubling`
 // Complexity: O(NlogN) precalculation / O(logN) per query
+// <https://atcoder.jp/contests/arc060/submissions/7039451>
 struct BinaryLifting
 {
     int N, INVALID, lgD;
