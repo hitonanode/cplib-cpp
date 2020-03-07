@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: string/test/manacher_mp.test.cpp
+# :x: string/test/manacher_mp.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/string/test/manacher_mp.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-08 18:22:34+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2934">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2934</a>
@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/string/manacher.hpp.html">string/manacher.hpp</a>
-* :heavy_check_mark: <a href="../../../library/string/mp_algorithm.hpp.html">string/mp_algorithm.hpp</a>
+* :x: <a href="../../../library/string/manacher.hpp.html">string/manacher.hpp</a>
+* :x: <a href="../../../library/string/mp_algorithm.hpp.html">string/mp_algorithm.hpp</a>
 
 
 ## Code
@@ -94,6 +94,7 @@ int main()
 #include <string>
 #include <vector>
 
+// CUT begin
 // Manacher's Algorithm: radius of palindromes
 // Input: std::string of length N
 // Output: std::vector<int> of size N
@@ -101,7 +102,6 @@ int main()
 // Sample:
 // - `sakanakanandaka` -> [1, 1, 2, 1, 4, 1, 4, 1, 2, 2, 1, 1, 1, 2, 1]
 // Reference: <https://snuke.hatenablog.com/entry/2014/12/02/235837>
-
 std::vector<int> manacher(std::string S)
 {
     std::vector<int> res(S.length());
@@ -119,7 +119,7 @@ std::vector<int> manacher(std::string S)
 #include <string>
 #include <vector>
 
-
+// CUT begin
 std::vector<int> mp_algorithm(std::string s) {
     int N = s.length();
     std::vector<int> ret(N + 1, -1);

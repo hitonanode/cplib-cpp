@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: random/test/rolling_hash_w_modint.test.cpp
+# :x: random/test/rolling_hash_w_modint.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/random/test/rolling_hash_w_modint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-22 23:56:40+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -39,8 +39,8 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
-* :heavy_check_mark: <a href="../../../library/random/rolling_hash_1d_general.hpp.html">random/rolling_hash_1d_general.hpp</a>
-* :heavy_check_mark: <a href="../../../library/random/xorshift.hpp.html">random/xorshift.hpp</a>
+* :x: <a href="../../../library/random/rolling_hash_1d_general.hpp.html">random/rolling_hash_1d_general.hpp</a>
+* :x: <a href="../../../library/random/xorshift.hpp.html">random/xorshift.hpp</a>
 
 
 ## Code
@@ -90,6 +90,7 @@ int main()
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Rolling Hash (Rabin-Karp), 1dim
 template<typename V>
 struct rolling_hash
@@ -156,6 +157,7 @@ plint DoubleHash::MODs = plint(1000000007, 998244353);
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {
@@ -264,6 +266,7 @@ struct ModInt
 #line 2 "random/xorshift.hpp"
 #include <cstdint>
 
+// CUT begin
 uint32_t rand_int() // XorShift random integer generator
 {
     static uint32_t x = 123456789, y = 362436069, z = 521288629, w = 88675123;

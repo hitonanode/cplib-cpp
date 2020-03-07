@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#06efba23b1f3a9b846a25c6b49f30348">modulus</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modulus/modint_runtime.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-22 23:56:40+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -42,9 +42,9 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/convolution/test/ntt_arbitrary_mod.test.cpp.html">convolution/test/ntt_arbitrary_mod.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_exp_modintruntime.test.cpp.html">formal_power_series/test/fps_exp_modintruntime.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/modulus/test/sqrt_modint_runtime.test.cpp.html">modulus/test/sqrt_modint_runtime.test.cpp</a>
+* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
+* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
+* :x: <a href="../../verify/modulus/test/sqrt_modint_runtime.test.cpp.html">modulus/test/sqrt_modint_runtime.test.cpp</a>
 
 
 ## Code
@@ -57,6 +57,7 @@ layout: default
 #include <vector>
 #include <set>
 
+// CUT begin
 struct ModIntRuntime
 {
     using lint = long long int;
@@ -182,6 +183,7 @@ int ModIntRuntime::mod = 1;
 #include <vector>
 #include <set>
 
+// CUT begin
 struct ModIntRuntime
 {
     using lint = long long int;

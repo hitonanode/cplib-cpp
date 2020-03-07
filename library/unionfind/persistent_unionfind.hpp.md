@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05779a67d348d10b6c575a1ac0d9b972">unionfind</a>
 * <a href="{{ site.github.repository_url }}/blob/master/unionfind/persistent_unionfind.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-13 17:28:13+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -46,6 +46,7 @@ layout: default
 #include <utility>
 #include <vector>
 
+// CUT begin
 struct PersistentUnionFind
 {
     std::vector<int> parsz, t_unite;
@@ -75,6 +76,7 @@ struct PersistentUnionFind
 #include <utility>
 #include <vector>
 
+// CUT begin
 struct PersistentUnionFind
 {
     std::vector<int> parsz, t_unite;

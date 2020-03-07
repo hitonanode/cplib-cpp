@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#4d78bd1b354012e24586b247dc164462">segmenttree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/count_less_than.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-15 22:53:10+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -47,6 +47,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Count elements in [A_begin, ..., A_{end-1}] which satisfy A_i < query
 // Complexity: O(N log^2 N) for initialization, O(log^2 N) for each query
 // Verified: cntLess <https://codeforces.com/contest/1288/submission/68865506>
@@ -109,6 +110,7 @@ struct CountLessThan
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Count elements in [A_begin, ..., A_{end-1}] which satisfy A_i < query
 // Complexity: O(N log^2 N) for initialization, O(log^2 N) for each query
 // Verified: cntLess <https://codeforces.com/contest/1288/submission/68865506>

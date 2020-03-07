@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05779a67d348d10b6c575a1ac0d9b972">unionfind</a>
 * <a href="{{ site.github.repository_url }}/blob/master/unionfind/undo_unionfind.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-08-10 13:05:46+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -41,15 +41,15 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-// UnionFind, able to rewind to the previous state by undo()
-// Written for Educational Codeforces 62 F, although not verified yet.
 #pragma once 
 #include <stack>
 #include <vector>
 #include <numeric>
 #include <utility>
 
-
+// CUT begin
+// UnionFind, able to rewind to the previous state by undo()
+// Written for Educational Codeforces 62 F, although not verified yet.
 struct UndoSizeAwareUnionFind
 {
     using pint = std::pair<int, int>;
@@ -81,14 +81,39 @@ struct UndoSizeAwareUnionFind
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 347, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=self.cpp_source_path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 68, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 115, in update
-    raise BundleError(path, i + 1, "#pragma once found in a non-first line")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: unionfind/undo_unionfind.hpp: line 3: #pragma once found in a non-first line
+#line 2 "unionfind/undo_unionfind.hpp"
+#include <stack>
+#include <vector>
+#include <numeric>
+#include <utility>
+
+// CUT begin
+// UnionFind, able to rewind to the previous state by undo()
+// Written for Educational Codeforces 62 F, although not verified yet.
+struct UndoSizeAwareUnionFind
+{
+    using pint = std::pair<int, int>;
+    std::vector<int> par, cou;
+    std::stack<std::pair<int, pint>> history;
+    UndoSizeAwareUnionFind(int N) : par(N), cou(N, 1) {
+        std::iota(par.begin(), par.end(), 0);
+    }
+    int find(int x) { return (par[x] == x) ? x :find(par[x]); }
+    void unite(int x, int y) {
+        x = find(x), y = find(y);
+        if (cou[x] < cou[y]) std::swap(x, y);
+        history.emplace(y, pint(par[y], cou[x]));
+        if (x != y) par[y] = x, cou[x] += cou[y];
+    }
+    void undo()
+    {
+        cou[par[history.top().first]] = history.top().second.second;
+        par[history.top().first] = history.top().second.first;
+        history.pop();
+    }
+    int count(int x) { return cou[find(x)]; }
+    bool same(int x, int y) { return find(x) == find(y); }
+};
 
 ```
 {% endraw %}

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#06efba23b1f3a9b846a25c6b49f30348">modulus</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modulus/modint_fixed.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-22 23:56:40+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -55,11 +55,11 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_log.test.cpp.html">formal_power_series/test/fps_log.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/other_data_structures/test/queue_operate_all_composite.test.cpp.html">other_data_structures/test/queue_operate_all_composite.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/random/test/rolling_hash_w_modint.test.cpp.html">random/test/rolling_hash_w_modint.test.cpp</a>
+* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
+* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
+* :x: <a href="../../verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
+* :x: <a href="../../verify/other_data_structures/test/queue_operate_all_composite.test.cpp.html">other_data_structures/test/queue_operate_all_composite.test.cpp</a>
+* :x: <a href="../../verify/random/test/rolling_hash_w_modint.test.cpp.html">random/test/rolling_hash_w_modint.test.cpp</a>
 
 
 ## Code
@@ -72,6 +72,7 @@ layout: default
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {
@@ -189,6 +190,7 @@ struct ModInt
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {

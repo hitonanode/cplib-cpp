@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: unionfind/test/unionfind.test.cpp
+# :x: unionfind/test/unionfind.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/unionfind/test/unionfind.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-04 22:53:39+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/unionfind/unionfind.hpp.html">unionfind/unionfind.hpp</a>
+* :x: <a href="../../../library/unionfind/unionfind.hpp.html">unionfind/unionfind.hpp</a>
 
 
 ## Code
@@ -72,16 +72,50 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 347, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=self.cpp_source_path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 68, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 182, in update
-    self.update(self._resolve(included, included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 115, in update
-    raise BundleError(path, i + 1, "#pragma once found in a non-first line")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: unionfind/unionfind.hpp: line 2: #pragma once found in a non-first line
+#line 1 "unionfind/test/unionfind.test.cpp"
+#include <iostream>
+#line 2 "unionfind/unionfind.hpp"
+#include <numeric>
+#include <utility>
+#include <vector>
+
+// CUT begin
+// UnionFind Tree (0-indexed), based on size of each disjoint set
+struct UnionFind
+{
+    std::vector<int> par, cou;
+    UnionFind(int N = 0) : par(N), cou(N, 1) {
+        iota(par.begin(), par.end(), 0);
+    }
+    int find(int x) { return (par[x] == x) ? x : (par[x] = find(par[x])); }
+    bool unite(int x, int y) {
+        x = find(x), y = find(y);
+        if (x == y) return false;
+        if (cou[x] < cou[y]) std::swap(x, y); 
+        par[y] = x, cou[x] += cou[y];
+        return true;
+    }
+    int count(int x) { return cou[find(x)]; }
+    bool same(int x, int y) { return find(x) == find(y); }
+};
+#line 3 "unionfind/test/unionfind.test.cpp"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp"
+using namespace std;
+
+
+int main()
+{
+    int n, q;
+    cin >> n >> q;
+    UnionFind uf(n);
+    for (int i = 0; i < q; i++)
+    {
+        int c, x, y;
+        cin >> c >> x >> y;
+        if (c) cout << (int)uf.same(x, y) << endl;
+        else uf.unite(x, y);
+    }
+}
 
 ```
 {% endraw %}

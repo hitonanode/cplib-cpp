@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a7427d145086499c399a0f95224a581">string/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/test/aho_corasick.deprecated.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-26 18:59:15+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D</a>
@@ -99,6 +99,7 @@ int main()
 #include <vector>
 using namespace std;
 
+// CUT begin
 template<typename T>
 struct Trie
 {

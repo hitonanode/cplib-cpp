@@ -25,21 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/segment_tree_2d.hpp
+# :x: segmenttree/segment_tree_2d.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#4d78bd1b354012e24586b247dc164462">segmenttree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/segment_tree_2d.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-15 23:05:17+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/segmenttree/test/segment_tree_2d.test.cpp.html">segmenttree/test/segment_tree_2d.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/segmenttree/test/segment_tree_2d_pointadd.test.cpp.html">segmenttree/test/segment_tree_2d_pointadd.test.cpp</a>
+* :x: <a href="../../verify/segmenttree/test/segment_tree_2d.test.cpp.html">segmenttree/test/segment_tree_2d.test.cpp</a>
+* :x: <a href="../../verify/segmenttree/test/segment_tree_2d_pointadd.test.cpp.html">segmenttree/test/segment_tree_2d_pointadd.test.cpp</a>
 
 
 ## Code
@@ -51,6 +51,7 @@ layout: default
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // 2D Segment Tree (point-update, range-get)
 // - 0-indexed
 // - Conditions for operations:
@@ -159,6 +160,7 @@ struct SegmentTree2D
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // 2D Segment Tree (point-update, range-get)
 // - 0-indexed
 // - Conditions for operations:

@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: sparse_table/test/sparse_table_2d.test.cpp
+# :x: sparse_table/test/sparse_table_2d.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/sparse_table/test/sparse_table_2d.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-15 18:38:40+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068</a>
@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/sparse_table/sparse_table.hpp.html">sparse_table/sparse_table.hpp</a>
-* :heavy_check_mark: <a href="../../../library/sparse_table/sparse_table_2d.hpp.html">sparse_table/sparse_table_2d.hpp</a>
+* :x: <a href="../../../library/sparse_table/sparse_table.hpp.html">sparse_table/sparse_table.hpp</a>
+* :x: <a href="../../../library/sparse_table/sparse_table_2d.hpp.html">sparse_table/sparse_table_2d.hpp</a>
 
 
 ## Code
@@ -82,6 +82,7 @@ int main()
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Static sequence sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
 template<typename T, typename F>
@@ -116,6 +117,7 @@ struct SparseTable {
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Static matrix sparse table
 // Complexity; O(HWlogHlogW) for precalculation, O(1) per query
 template<typename T, typename F>

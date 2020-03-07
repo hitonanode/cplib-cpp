@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph-tree/test/lca.test.cpp
+# :x: graph-tree/test/lca.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph-tree/test/lca.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-04 22:53:39+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/lca">https://judge.yosupo.jp/problem/lca</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/graph-tree/lowest_common_ancestor.hpp.html">graph-tree/lowest_common_ancestor.hpp</a>
+* :x: <a href="../../../library/graph-tree/lowest_common_ancestor.hpp.html">graph-tree/lowest_common_ancestor.hpp</a>
 
 
 ## Code
@@ -76,14 +76,14 @@ int main()
 ```cpp
 #line 1 "graph-tree/test/lca.test.cpp"
 #include <iostream>
-#line 1 "graph-tree/lowest_common_ancestor.hpp"
-// lowest common ancestor (LCA) class for undirected weighted tree
-// 無向重み付きグラフの最小共通祖先
-// <https://yukicoder.me/submissions/392383>
-
+#line 2 "graph-tree/lowest_common_ancestor.hpp"
 #include <vector>
 using namespace std;
 
+// CUT begin
+// lowest common ancestor (LCA) class for undirected weighted tree
+// 無向重み付きグラフの最小共通祖先
+// <https://yukicoder.me/submissions/392383>
 struct UndirectedWeightedTree
 {
     using T = long long int;   // Arbitrary data structure (operator+, operator- must be defined)

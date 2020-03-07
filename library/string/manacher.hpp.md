@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: string/manacher.hpp
+# :x: string/manacher.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/manacher.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-08 14:58:12+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/string/test/manacher_mp.test.cpp.html">string/test/manacher_mp.test.cpp</a>
+* :x: <a href="../../verify/string/test/manacher_mp.test.cpp.html">string/test/manacher_mp.test.cpp</a>
 
 
 ## Code
@@ -50,6 +50,7 @@ layout: default
 #include <string>
 #include <vector>
 
+// CUT begin
 // Manacher's Algorithm: radius of palindromes
 // Input: std::string of length N
 // Output: std::vector<int> of size N
@@ -57,7 +58,6 @@ layout: default
 // Sample:
 // - `sakanakanandaka` -> [1, 1, 2, 1, 4, 1, 4, 1, 2, 2, 1, 1, 1, 2, 1]
 // Reference: <https://snuke.hatenablog.com/entry/2014/12/02/235837>
-
 std::vector<int> manacher(std::string S)
 {
     std::vector<int> res(S.length());
@@ -82,6 +82,7 @@ std::vector<int> manacher(std::string S)
 #include <string>
 #include <vector>
 
+// CUT begin
 // Manacher's Algorithm: radius of palindromes
 // Input: std::string of length N
 // Output: std::vector<int> of size N
@@ -89,7 +90,6 @@ std::vector<int> manacher(std::string S)
 // Sample:
 // - `sakanakanandaka` -> [1, 1, 2, 1, 4, 1, 4, 1, 2, 2, 1, 1, 1, 2, 1]
 // Reference: <https://snuke.hatenablog.com/entry/2014/12/02/235837>
-
 std::vector<int> manacher(std::string S)
 {
     std::vector<int> res(S.length());

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: graph/test/strongly_connected_components.test.cpp
+# :heavy_check_mark: graph/test/strongly_connected_components.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 

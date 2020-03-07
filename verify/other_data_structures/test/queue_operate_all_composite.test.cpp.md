@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: other_data_structures/test/queue_operate_all_composite.test.cpp
+# :x: other_data_structures/test/queue_operate_all_composite.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/other_data_structures/test/queue_operate_all_composite.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-24 18:37:52+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/queue_operate_all_composite">https://judge.yosupo.jp/problem/queue_operate_all_composite</a>
@@ -39,7 +39,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
-* :heavy_check_mark: <a href="../../../library/other_data_structures/sliding_window_aggregation.hpp.html">other_data_structures/sliding_window_aggregation.hpp</a>
+* :x: <a href="../../../library/other_data_structures/sliding_window_aggregation.hpp.html">other_data_structures/sliding_window_aggregation.hpp</a>
 
 
 ## Code
@@ -87,7 +87,7 @@ int main()
 #include <utility>
 using namespace std;
 
-
+// CUT begin
 // Sliding-Window Aggregation based queue
 // - `std::queue`-like data structure with monoid operation
 // - Each operation is amortized O(1)
@@ -146,6 +146,7 @@ struct LinearFunctionQueue : public SlidingWindowAggregation<pair<T, T>, pair<T,
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05779a67d348d10b6c575a1ac0d9b972">unionfind</a>
 * <a href="{{ site.github.repository_url }}/blob/master/unionfind/grid_unionfind.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-01 22:50:04+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -49,6 +49,7 @@ layout: default
 #include <iomanip>
 #include <iostream>
 
+// CUT begin
 struct GridUnionFind
 {
     int H, W;
@@ -117,6 +118,7 @@ struct GridUnionFind
 #include <iomanip>
 #include <iostream>
 
+// CUT begin
 struct GridUnionFind
 {
     int H, W;

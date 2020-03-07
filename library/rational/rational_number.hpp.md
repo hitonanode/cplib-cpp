@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#086ac53f0f2847a22b2a7364bcf50206">rational</a>
 * <a href="{{ site.github.repository_url }}/blob/master/rational/rational_number.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-26 16:35:18+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -44,6 +44,7 @@ layout: default
 #pragma once
 #include <iostream>
 
+// CUT begin
 // Rational number + {infinity(1 / 0), -infiity(-1 / 0)} （有理数）
 struct Rational {
     using Int = long long int; // __int128
@@ -97,6 +98,7 @@ struct Rational {
 #line 2 "rational/rational_number.hpp"
 #include <iostream>
 
+// CUT begin
 // Rational number + {infinity(1 / 0), -infiity(-1 / 0)} （有理数）
 struct Rational {
     using Int = long long int; // __int128

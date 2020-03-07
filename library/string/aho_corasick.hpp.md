@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/aho_corasick.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-08-20 10:32:26+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -53,6 +53,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 template<typename T>
 struct Trie
 {
@@ -112,6 +113,7 @@ struct Trie
 #include <vector>
 using namespace std;
 
+// CUT begin
 template<typename T>
 struct Trie
 {

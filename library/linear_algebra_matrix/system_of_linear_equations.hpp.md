@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: linear_algebra_matrix/system_of_linear_equations.hpp
+# :x: linear_algebra_matrix/system_of_linear_equations.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#20f2c5d841ec31673050aaedd8b17f50">linear_algebra_matrix</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/system_of_linear_equations.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-02 01:11:21+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
+* :x: <a href="linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
+* :x: <a href="../../verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
 
 
 ## Code
@@ -56,7 +56,7 @@ layout: default
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 // Solve Ax = b for T = ModInt<PRIME>
 // - retval: {one of the solution, {freedoms}} (if solution exists)
 //           {{}, {}} (otherwise)
@@ -106,6 +106,7 @@ system_of_linear_equations(matrix<T> A, std::vector<T> b)
 #include <iterator>
 #include <vector>
 
+// CUT begin
 template <typename T>
 struct matrix
 {
@@ -236,7 +237,7 @@ T Fibonacci(long long int k, int a = 1, int b = 1)
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 // Solve Ax = b for T = ModInt<PRIME>
 // - retval: {one of the solution, {freedoms}} (if solution exists)
 //           {{}, {}} (otherwise)

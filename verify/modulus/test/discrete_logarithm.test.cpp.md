@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: modulus/test/discrete_logarithm.test.cpp
+# :x: modulus/test/discrete_logarithm.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/modulus/test/discrete_logarithm.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-10 01:09:07+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/discrete_logarithm_mod">https://judge.yosupo.jp/problem/discrete_logarithm_mod</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/modulus/discrete_logarithm.hpp.html">modulus/discrete_logarithm.hpp</a>
+* :x: <a href="../../../library/modulus/discrete_logarithm.hpp.html">modulus/discrete_logarithm.hpp</a>
 
 
 ## Code
@@ -75,6 +75,7 @@ int main()
 #include <unordered_map>
 #include <utility>
 
+// CUT begin
 // Calculate log_A B (MOD M) (baby-step gian-step)
 // DiscreteLogarithm dl(M, A);
 // lint ans = dl.log(B);

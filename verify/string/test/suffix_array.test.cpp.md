@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: string/test/suffix_array.test.cpp
+# :x: string/test/suffix_array.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/string/test/suffix_array.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-02 21:57:08+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/suffixarray">https://judge.yosupo.jp/problem/suffixarray</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/string/suffix_array.hpp.html">string/suffix_array.hpp</a>
+* :x: <a href="../../../library/string/suffix_array.hpp.html">string/suffix_array.hpp</a>
 
 
 ## Code
@@ -71,6 +71,7 @@ int main()
 #include <numeric>
 #include <vector>
 
+// CUT begin
 // Suffix Array / Longest Common Prefix Array Construction
 // Comlexity: O(N(log N)^2)
 template<typename T>

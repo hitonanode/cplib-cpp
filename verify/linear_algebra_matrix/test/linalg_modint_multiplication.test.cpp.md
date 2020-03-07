@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+# :x: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-02 01:11:21+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D</a>
@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/bare_mod_algebra.hpp.html">modulus/bare_mod_algebra.hpp</a>
+* :x: <a href="../../../library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
+* :x: <a href="../../../library/modulus/bare_mod_algebra.hpp.html">modulus/bare_mod_algebra.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
 
@@ -105,6 +105,7 @@ int main()
 #include <iterator>
 #include <vector>
 
+// CUT begin
 template <typename T>
 struct matrix
 {
@@ -235,8 +236,9 @@ T Fibonacci(long long int k, int a = 1, int b = 1)
 #include <algorithm>
 #include <utility>
 #include <vector>
-using lint = long long;
 
+// CUT begin
+using lint = long long;
 // Solve ax+by=gcd(a, b)
 lint extgcd(lint a, lint b, lint &x, lint &y)
 {
@@ -326,6 +328,7 @@ lint find_smallest_primitive_root(lint p)
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {
@@ -436,6 +439,7 @@ struct ModInt
 #include <vector>
 #include <set>
 
+// CUT begin
 struct ModIntRuntime
 {
     using lint = long long int;

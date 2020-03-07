@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+# :x: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-02 01:11:21+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/matrix_det">https://judge.yosupo.jp/problem/matrix_det</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
+* :x: <a href="../../../library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
 
@@ -92,6 +92,7 @@ int main()
 #include <iterator>
 #include <vector>
 
+// CUT begin
 template <typename T>
 struct matrix
 {
@@ -223,6 +224,7 @@ T Fibonacci(long long int k, int a = 1, int b = 1)
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {
@@ -333,6 +335,7 @@ struct ModInt
 #include <vector>
 #include <set>
 
+// CUT begin
 struct ModIntRuntime
 {
     using lint = long long int;

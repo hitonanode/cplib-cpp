@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#aea7f79aded53b9cdf48a7ce3f3ec60e">graph-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph-tree/tree_isomorphism.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-15 22:53:10+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -54,6 +54,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Tree isomorphism with hashing （ハッシュによる木の同型判定）
 // Dependence: ModInt or ModIntRuntime
 // Reference: <https://snuke.hatenablog.com/entry/2017/02/03/054210>
@@ -130,6 +131,7 @@ struct UndirectedTree
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {
@@ -242,6 +244,7 @@ struct ModInt
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Tree isomorphism with hashing （ハッシュによる木の同型判定）
 // Dependence: ModInt or ModIntRuntime
 // Reference: <https://snuke.hatenablog.com/entry/2017/02/03/054210>

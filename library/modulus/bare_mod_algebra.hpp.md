@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: modulus/bare_mod_algebra.hpp
+# :x: modulus/bare_mod_algebra.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#06efba23b1f3a9b846a25c6b49f30348">modulus</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modulus/bare_mod_algebra.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-14 11:23:41+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
+* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
 
 
 ## Code
@@ -50,8 +50,9 @@ layout: default
 #include <algorithm>
 #include <utility>
 #include <vector>
-using lint = long long;
 
+// CUT begin
+using lint = long long;
 // Solve ax+by=gcd(a, b)
 lint extgcd(lint a, lint b, lint &x, lint &y)
 {
@@ -147,8 +148,9 @@ lint find_smallest_primitive_root(lint p)
 #include <algorithm>
 #include <utility>
 #include <vector>
-using lint = long long;
 
+// CUT begin
+using lint = long long;
 // Solve ax+by=gcd(a, b)
 lint extgcd(lint a, lint b, lint &x, lint &y)
 {

@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: modulus/discrete_logarithm.hpp
+# :x: modulus/discrete_logarithm.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#06efba23b1f3a9b846a25c6b49f30348">modulus</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modulus/discrete_logarithm.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-10 01:09:07+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/modulus/test/discrete_logarithm.test.cpp.html">modulus/test/discrete_logarithm.test.cpp</a>
+* :x: <a href="../../verify/modulus/test/discrete_logarithm.test.cpp.html">modulus/test/discrete_logarithm.test.cpp</a>
 
 
 ## Code
@@ -51,6 +51,7 @@ layout: default
 #include <unordered_map>
 #include <utility>
 
+// CUT begin
 // Calculate log_A B (MOD M) (baby-step gian-step)
 // DiscreteLogarithm dl(M, A);
 // lint ans = dl.log(B);
@@ -118,6 +119,7 @@ struct DiscreteLogarithm
 #include <unordered_map>
 #include <utility>
 
+// CUT begin
 // Calculate log_A B (MOD M) (baby-step gian-step)
 // DiscreteLogarithm dl(M, A);
 // lint ans = dl.log(B);

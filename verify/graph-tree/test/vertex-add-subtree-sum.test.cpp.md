@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph-tree/test/vertex-add-subtree-sum.test.cpp
+# :x: graph-tree/test/vertex-add-subtree-sum.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/graph-tree/test/vertex-add-subtree-sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-01 16:56:10+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/vertex_add_subtree_sum">https://judge.yosupo.jp/problem/vertex_add_subtree_sum</a>
@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/graph-tree/eulertour.hpp.html">graph-tree/eulertour.hpp</a>
-* :heavy_check_mark: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
+* :x: <a href="../../../library/graph-tree/eulertour.hpp.html">graph-tree/eulertour.hpp</a>
+* :x: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
 
 
 ## Code
@@ -101,6 +101,7 @@ int main()
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Preorder Euler Tour
 // （行きがけ順，部分木の頂点クエリ等に有用）
 struct PreorderEulerTour
@@ -132,6 +133,7 @@ struct PreorderEulerTour
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // Nonrecursive Segment Tree (point-update, range-get)
 // - Conditions for operations:
 //   - datamerge: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)

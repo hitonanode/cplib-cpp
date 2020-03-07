@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: graph/test/maximum_independent_set.test.cpp
+# :heavy_check_mark: graph/test/maximum_independent_set.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/graph/maximum_independent_set.hpp.html">graph/maximum_independent_set.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/maximum_independent_set.hpp.html">graph/maximum_independent_set.hpp</a>
 
 
 ## Code

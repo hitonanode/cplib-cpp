@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/range_minimum_query.hpp
+# :x: segmenttree/range_minimum_query.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#4d78bd1b354012e24586b247dc164462">segmenttree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/range_minimum_query.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-08-17 13:05:13+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/segmenttree/test/range_minimum_query.test.cpp.html">segmenttree/test/range_minimum_query.test.cpp</a>
+* :x: <a href="../../verify/segmenttree/test/range_minimum_query.test.cpp.html">segmenttree/test/range_minimum_query.test.cpp</a>
 
 
 ## Code
@@ -51,6 +51,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 using T = int;
 struct RangeMinimumQuery
 {
@@ -110,6 +111,7 @@ struct RangeMinimumQuery
 #include <vector>
 using namespace std;
 
+// CUT begin
 using T = int;
 struct RangeMinimumQuery
 {

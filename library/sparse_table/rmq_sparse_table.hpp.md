@@ -25,21 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: sparse_table/rmq_sparse_table.hpp
+# :x: sparse_table/rmq_sparse_table.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#cb323a14df0a258a78d4acbe3d02dfda">sparse_table</a>
 * <a href="{{ site.github.repository_url }}/blob/master/sparse_table/rmq_sparse_table.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-15 16:40:57+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/sparse_table/test/sparse_table.test.cpp.html">sparse_table/test/sparse_table.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/sparse_table/test/sparse_table_aoj.test.cpp.html">sparse_table/test/sparse_table_aoj.test.cpp</a>
+* :x: <a href="../../verify/sparse_table/test/sparse_table.test.cpp.html">sparse_table/test/sparse_table.test.cpp</a>
+* :x: <a href="../../verify/sparse_table/test/sparse_table_aoj.test.cpp.html">sparse_table/test/sparse_table_aoj.test.cpp</a>
 
 
 ## Code
@@ -52,6 +52,7 @@ layout: default
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Range Minimum Query for static sequence by sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
 template<typename T>
@@ -95,6 +96,7 @@ struct StaticRMQ {
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Range Minimum Query for static sequence by sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
 template<typename T>

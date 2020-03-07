@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+# :x: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/system_of_linear_equations.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-02 01:11:21+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/system_of_linear_equations">https://judge.yosupo.jp/problem/system_of_linear_equations</a>
@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
-* :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/system_of_linear_equations.hpp.html">linear_algebra_matrix/system_of_linear_equations.hpp</a>
+* :x: <a href="../../../library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
+* :x: <a href="../../../library/linear_algebra_matrix/system_of_linear_equations.hpp.html">linear_algebra_matrix/system_of_linear_equations.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
@@ -91,6 +91,7 @@ int main()
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {
@@ -202,6 +203,7 @@ struct ModInt
 #include <iterator>
 #include <vector>
 
+// CUT begin
 template <typename T>
 struct matrix
 {
@@ -332,7 +334,7 @@ T Fibonacci(long long int k, int a = 1, int b = 1)
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 // Solve Ax = b for T = ModInt<PRIME>
 // - retval: {one of the solution, {freedoms}} (if solution exists)
 //           {{}, {}} (otherwise)

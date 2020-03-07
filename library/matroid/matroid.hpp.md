@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#2a6c9c56c5dd30cd2db2c415985dabce">matroid</a>
 * <a href="{{ site.github.repository_url }}/blob/master/matroid/matroid.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-15 20:56:54+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -53,6 +53,7 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 using Element = int;
 using State = vector<bool>;
 
@@ -65,7 +66,6 @@ struct MatroidExample
     // If I is NOT independent, undefined.
     vector<Element> circuit(State I, Element e);
 };
-
 
 // Matroid intersection solver
 // Algorithm based on <http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/>
@@ -208,6 +208,7 @@ struct PartitionMatroid
 #include <vector>
 using namespace std;
 
+// CUT begin
 using Element = int;
 using State = vector<bool>;
 
@@ -220,7 +221,6 @@ struct MatroidExample
     // If I is NOT independent, undefined.
     vector<Element> circuit(State I, Element e);
 };
-
 
 // Matroid intersection solver
 // Algorithm based on <http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/>

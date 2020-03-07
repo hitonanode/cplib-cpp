@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: string/mp_algorithm.hpp
+# :x: string/mp_algorithm.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/mp_algorithm.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-08-12 12:36:28+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/string/test/manacher_mp.test.cpp.html">string/test/manacher_mp.test.cpp</a>
+* :x: <a href="../../verify/string/test/manacher_mp.test.cpp.html">string/test/manacher_mp.test.cpp</a>
 
 
 ## Code
@@ -50,7 +50,7 @@ layout: default
 #include <string>
 #include <vector>
 
-
+// CUT begin
 std::vector<int> mp_algorithm(std::string s) {
     int N = s.length();
     std::vector<int> ret(N + 1, -1);
@@ -72,7 +72,7 @@ std::vector<int> mp_algorithm(std::string s) {
 #include <string>
 #include <vector>
 
-
+// CUT begin
 std::vector<int> mp_algorithm(std::string s) {
     int N = s.length();
     std::vector<int> ret(N + 1, -1);

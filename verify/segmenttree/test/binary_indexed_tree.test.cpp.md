@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/test/binary_indexed_tree.test.cpp
+# :x: segmenttree/test/binary_indexed_tree.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/binary_indexed_tree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-22 01:52:53+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/segmenttree/binary_indexed_tree.hpp.html">segmenttree/binary_indexed_tree.hpp</a>
+* :x: <a href="../../../library/segmenttree/binary_indexed_tree.hpp.html">segmenttree/binary_indexed_tree.hpp</a>
 
 
 ## Code
@@ -74,6 +74,7 @@ int main()
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // 1-indexed BIT (i : [1, len])
 template<typename T>
 struct BIT : std::vector<T>

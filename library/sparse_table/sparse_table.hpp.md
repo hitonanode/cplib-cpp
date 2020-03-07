@@ -25,27 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: sparse_table/sparse_table.hpp
+# :x: sparse_table/sparse_table.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#cb323a14df0a258a78d4acbe3d02dfda">sparse_table</a>
 * <a href="{{ site.github.repository_url }}/blob/master/sparse_table/sparse_table.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-15 18:38:40+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="sparse_table_2d.hpp.html">sparse_table/sparse_table_2d.hpp</a>
+* :x: <a href="sparse_table_2d.hpp.html">sparse_table/sparse_table_2d.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/sparse_table/test/sparse_table.test.cpp.html">sparse_table/test/sparse_table.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/sparse_table/test/sparse_table_2d.test.cpp.html">sparse_table/test/sparse_table_2d.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/sparse_table/test/sparse_table_aoj.test.cpp.html">sparse_table/test/sparse_table_aoj.test.cpp</a>
+* :x: <a href="../../verify/sparse_table/test/sparse_table.test.cpp.html">sparse_table/test/sparse_table.test.cpp</a>
+* :x: <a href="../../verify/sparse_table/test/sparse_table_2d.test.cpp.html">sparse_table/test/sparse_table_2d.test.cpp</a>
+* :x: <a href="../../verify/sparse_table/test/sparse_table_aoj.test.cpp.html">sparse_table/test/sparse_table_aoj.test.cpp</a>
 
 
 ## Code
@@ -57,6 +57,7 @@ layout: default
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Static sequence sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
 template<typename T, typename F>
@@ -98,6 +99,7 @@ struct SparseTable {
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Static sequence sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
 template<typename T, typename F>

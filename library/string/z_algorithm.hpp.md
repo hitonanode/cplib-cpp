@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: string/z_algorithm.hpp
+# :x: string/z_algorithm.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/z_algorithm.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-08-14 23:10:43+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/string/test/z_algorithm.test.cpp.html">string/test/z_algorithm.test.cpp</a>
+* :x: <a href="../../verify/string/test/z_algorithm.test.cpp.html">string/test/z_algorithm.test.cpp</a>
 
 
 ## Code
@@ -51,10 +51,10 @@ layout: default
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Z algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)
 // Complexity: O(N)
 // <http://snuke.hatenablog.com/entry/2014/12/03/214243>
-
 vector<int> z_algorithm(const string &s) {
     vector<int> ans(s.size());
     ans[0] = s.size();
@@ -85,10 +85,10 @@ vector<int> z_algorithm(const string &s) {
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Z algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)
 // Complexity: O(N)
 // <http://snuke.hatenablog.com/entry/2014/12/03/214243>
-
 vector<int> z_algorithm(const string &s) {
     vector<int> ans(s.size());
     ans[0] = s.size();

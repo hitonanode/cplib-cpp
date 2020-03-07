@@ -30,7 +30,7 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/convolution/test/ntt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -91,6 +91,7 @@ int main()
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {
@@ -328,6 +329,7 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
 #include <vector>
 #include <set>
 
+// CUT begin
 struct ModIntRuntime
 {
     using lint = long long int;

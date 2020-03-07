@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: graph/strongly_connected_components_bitset.hpp
+# :heavy_check_mark: graph/strongly_connected_components_bitset.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/graph/test/strongly_connected_components_bitset.test.cpp.html">graph/test/strongly_connected_components_bitset.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/graph/test/strongly_connected_components_bitset.test.cpp.html">graph/test/strongly_connected_components_bitset.test.cpp</a>
 
 
 ## Code

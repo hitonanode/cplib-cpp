@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: linear_algebra_matrix/linalg_bitset.hpp
+# :x: linear_algebra_matrix/linalg_bitset.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#20f2c5d841ec31673050aaedd8b17f50">linear_algebra_matrix</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/linalg_bitset.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-24 18:37:52+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_bitset.test.cpp.html">linear_algebra_matrix/test/linalg_bitset.test.cpp</a>
+* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_bitset.test.cpp.html">linear_algebra_matrix/test/linalg_bitset.test.cpp</a>
 
 
 ## Code
@@ -52,7 +52,7 @@ layout: default
 #include <vector>
 using namespace std;
 
-
+// CUT begin
 constexpr int Wmax = 320;
 vector<bitset<Wmax>> gauss_jordan(int W, vector<bitset<Wmax>> mtr)
 {
@@ -120,7 +120,7 @@ vector<bitset<Wmax>> matpower(vector<bitset<Wmax>> X, long long int n) // Calc X
 #include <vector>
 using namespace std;
 
-
+// CUT begin
 constexpr int Wmax = 320;
 vector<bitset<Wmax>> gauss_jordan(int W, vector<bitset<Wmax>> mtr)
 {

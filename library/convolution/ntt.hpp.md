@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a9595c1c24c33b16056d2ad07e71682d">convolution</a>
 * <a href="{{ site.github.repository_url }}/blob/master/convolution/ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -205,6 +205,7 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
 #include <vector>
 #include <set>
 
+// CUT begin
 template <int mod>
 struct ModInt
 {

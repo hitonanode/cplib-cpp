@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: graph/flow_mincost.hpp
+# :heavy_check_mark: graph/flow_mincost.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/graph/test/mincostflow.test.cpp.html">graph/test/mincostflow.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/graph/test/mincostflow.test.cpp.html">graph/test/mincostflow.test.cpp</a>
 
 
 ## Code

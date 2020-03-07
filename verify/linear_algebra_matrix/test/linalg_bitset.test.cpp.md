@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: linear_algebra_matrix/test/linalg_bitset.test.cpp
+# :x: linear_algebra_matrix/test/linalg_bitset.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linalg_bitset.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-24 18:37:52+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linalg_bitset.hpp.html">linear_algebra_matrix/linalg_bitset.hpp</a>
+* :x: <a href="../../../library/linear_algebra_matrix/linalg_bitset.hpp.html">linear_algebra_matrix/linalg_bitset.hpp</a>
 
 
 ## Code
@@ -115,7 +115,7 @@ int main()
 #include <vector>
 using namespace std;
 
-
+// CUT begin
 constexpr int Wmax = 320;
 vector<bitset<Wmax>> gauss_jordan(int W, vector<bitset<Wmax>> mtr)
 {

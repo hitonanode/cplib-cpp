@@ -25,21 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: unionfind/unionfind_rankbased.hpp
+# :x: unionfind/unionfind_rankbased.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05779a67d348d10b6c575a1ac0d9b972">unionfind</a>
 * <a href="{{ site.github.repository_url }}/blob/master/unionfind/unionfind_rankbased.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-04 22:53:39+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/unionfind/test/unionfind_plain.test.cpp.html">unionfind/test/unionfind_plain.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/unionfind/test/unionfind_rankbased.test.cpp.html">unionfind/test/unionfind_rankbased.test.cpp</a>
+* :x: <a href="../../verify/unionfind/test/unionfind_plain.test.cpp.html">unionfind/test/unionfind_plain.test.cpp</a>
+* :x: <a href="../../verify/unionfind/test/unionfind_rankbased.test.cpp.html">unionfind/test/unionfind_rankbased.test.cpp</a>
 
 
 ## Code
@@ -47,11 +47,12 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-// UnionFind Tree (0-indexed)
 #pragma once
 #include <numeric>
 #include <vector>
 
+// CUT begin
+// UnionFind Tree (0-indexed)
 struct RankBasedUnionFind
 {
     std::vector<int> par, rank;
@@ -76,14 +77,29 @@ struct RankBasedUnionFind
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 347, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=self.cpp_source_path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 68, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 115, in update
-    raise BundleError(path, i + 1, "#pragma once found in a non-first line")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: unionfind/unionfind_rankbased.hpp: line 2: #pragma once found in a non-first line
+#line 2 "unionfind/unionfind_rankbased.hpp"
+#include <numeric>
+#include <vector>
+
+// CUT begin
+// UnionFind Tree (0-indexed)
+struct RankBasedUnionFind
+{
+    std::vector<int> par, rank;
+    RankBasedUnionFind(int N = 0): par(N), rank(N) {
+        iota(par.begin(), par.end(), 0);
+    }
+    int find(int x) { return (par[x] == x) ? x : (par[x] = find(par[x])); }
+    bool unite(int x, int y) {
+        x = find(x), y = find(y);
+        if (x == y) return false;
+        if (rank[x] < rank[y]) par[x] = y;
+        else par[y] = x;
+        if (rank[x] == rank[y]) rank[x]++;
+        return true;
+    }
+    bool same(int x, int y) { return find(x) == find(y); }
+};
 
 ```
 {% endraw %}

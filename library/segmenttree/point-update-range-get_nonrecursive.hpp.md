@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/point-update-range-get_nonrecursive.hpp
+# :x: segmenttree/point-update-range-get_nonrecursive.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#4d78bd1b354012e24586b247dc164462">segmenttree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/point-update-range-get_nonrecursive.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-01 16:56:10+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
+* :x: <a href="../../verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
+* :x: <a href="../../verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
+* :x: <a href="../../verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
 
 
 ## Code
@@ -54,6 +54,7 @@ layout: default
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // Nonrecursive Segment Tree (point-update, range-get)
 // - Conditions for operations:
 //   - datamerge: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)
@@ -181,6 +182,7 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // Nonrecursive Segment Tree (point-update, range-get)
 // - Conditions for operations:
 //   - datamerge: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)

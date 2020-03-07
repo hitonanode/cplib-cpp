@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph-tree/eulertour.hpp
+# :x: graph-tree/eulertour.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#aea7f79aded53b9cdf48a7ce3f3ec60e">graph-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph-tree/eulertour.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-01 16:51:07+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
+* :x: <a href="../../verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
 
 
 ## Code
@@ -50,6 +50,7 @@ layout: default
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Preorder Euler Tour
 // （行きがけ順，部分木の頂点クエリ等に有用）
 struct PreorderEulerTour
@@ -86,6 +87,7 @@ struct PreorderEulerTour
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Preorder Euler Tour
 // （行きがけ順，部分木の頂点クエリ等に有用）
 struct PreorderEulerTour

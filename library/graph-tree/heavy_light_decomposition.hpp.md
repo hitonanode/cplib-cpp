@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#aea7f79aded53b9cdf48a7ce3f3ec60e">graph-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph-tree/heavy_light_decomposition.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-06 22:58:32+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -55,7 +55,7 @@ layout: default
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 // Heavy-Light Decomposition of trees
 // Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>
 struct HeavyLightDecomposition {
@@ -191,7 +191,7 @@ struct HeavyLightDecomposition {
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 // Heavy-Light Decomposition of trees
 // Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>
 struct HeavyLightDecomposition {

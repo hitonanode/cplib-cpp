@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#7ddf32e17a6ac5ce04a8ecbf782ca509">random</a>
 * <a href="{{ site.github.repository_url }}/blob/master/random/custom_hash.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-08-17 13:05:13+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
@@ -46,6 +46,7 @@ layout: default
 #include <cstdlib>
 using namespace std;
 
+// CUT begin
 struct custom_hash
 {
     // <https://codeforces.com/blog/entry/62393>
@@ -64,7 +65,6 @@ struct custom_hash
         return splitmix64(x + FIXED_RANDOM);
     }
 };
-
 
 // Usage
 #include <unordered_map>
@@ -85,6 +85,7 @@ gp_hash_table<int, null_type, custom_hash> robust_hash_table; // fast unordered_
 #include <cstdlib>
 using namespace std;
 
+// CUT begin
 struct custom_hash
 {
     // <https://codeforces.com/blog/entry/62393>
@@ -103,7 +104,6 @@ struct custom_hash
         return splitmix64(x + FIXED_RANDOM);
     }
 };
-
 
 // Usage
 #include <unordered_map>

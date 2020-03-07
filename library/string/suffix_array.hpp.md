@@ -25,21 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: string/suffix_array.hpp
+# :x: string/suffix_array.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/suffix_array.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-02 21:57:08+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/string/test/lcp.test.cpp.html">string/test/lcp.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/string/test/suffix_array.test.cpp.html">string/test/suffix_array.test.cpp</a>
+* :x: <a href="../../verify/string/test/lcp.test.cpp.html">string/test/lcp.test.cpp</a>
+* :x: <a href="../../verify/string/test/suffix_array.test.cpp.html">string/test/suffix_array.test.cpp</a>
 
 
 ## Code
@@ -52,6 +52,7 @@ layout: default
 #include <numeric>
 #include <vector>
 
+// CUT begin
 // Suffix Array / Longest Common Prefix Array Construction
 // Comlexity: O(N(log N)^2)
 template<typename T>
@@ -110,6 +111,7 @@ struct SuffixArray
 #include <numeric>
 #include <vector>
 
+// CUT begin
 // Suffix Array / Longest Common Prefix Array Construction
 // Comlexity: O(N(log N)^2)
 template<typename T>

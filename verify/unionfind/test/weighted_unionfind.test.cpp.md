@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: unionfind/test/weighted_unionfind.test.cpp
+# :x: unionfind/test/weighted_unionfind.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/unionfind/test/weighted_unionfind.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-08 16:37:09+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B&lang=jp">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B&lang=jp</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/unionfind/weighted_unionfind.hpp.html">unionfind/weighted_unionfind.hpp</a>
+* :x: <a href="../../../library/unionfind/weighted_unionfind.hpp.html">unionfind/weighted_unionfind.hpp</a>
 
 
 ## Code
@@ -86,16 +86,89 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 347, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=self.cpp_source_path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 68, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 182, in update
-    self.update(self._resolve(included, included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 115, in update
-    raise BundleError(path, i + 1, "#pragma once found in a non-first line")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: unionfind/weighted_unionfind.hpp: line 2: #pragma once found in a non-first line
+#line 1 "unionfind/test/weighted_unionfind.test.cpp"
+#include <iostream>
+#line 2 "unionfind/weighted_unionfind.hpp"
+#include <numeric>
+#include <utility>
+#include <vector>
+
+// CUT begin
+// Weighted UnionFind
+template<typename T>
+struct WeightedUnionFind
+{
+    std::vector<int> par, sz;
+    std::vector<T> pot;
+    WeightedUnionFind(int N = 0) : par(N), sz(N, 1), pot(N) {
+        std::iota(par.begin(), par.end(), 0);
+    }
+    int find(int x) {
+        if (par[x] != x) {
+            int r = find(par[x]);
+            pot[x] = pot[x] + pot[par[x]], par[x] = r;
+        }
+        return par[x];
+    }
+    bool unite(int s, int t, T rel_diff) {
+        // Relate s and t by t = s + rel_diff
+        // Return false iff contradiction happens.
+        rel_diff = rel_diff + weight(s) + (-weight(t));
+        if ((s = find(s)) == (t = find(t))) return rel_diff == 0;
+        if (sz[s] < sz[t]) std::swap(s, t), rel_diff = -rel_diff; 
+        par[t] = s, sz[s] += sz[t], pot[t] = rel_diff;
+        return true;
+    }
+    T weight(int x) { find(x); return pot[x]; }
+    T diff(int s, int t) { return weight(t) + (-weight(s)); }
+    int count(int x) { return sz[find(x)]; }
+    bool same(int s, int t) { return find(s) == find(t); }
+};
+
+// sample data structure T for WeightedUnionFind<T>
+/*
+struct Monoid {
+    int data;
+    Monoid() : data(0) {}
+    Monoid(int d) : data(d) {}
+    Monoid operator+(const Monoid &x) const { return Monoid(this->data + x.data); }
+    Monoid operator-() const { return Monoid(-data); }
+    bool operator==(const Monoid &x) const { return data == x.data; }
+};
+WeightedUnionFind<Monoid> wuf(10000);
+*/
+#line 3 "unionfind/test/weighted_unionfind.test.cpp"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B&lang=jp"
+using namespace std;
+
+int main()
+{
+    int N, Q, x, y, z;
+    cin >> N >> Q;
+    WeightedUnionFind<int> uf(N);
+    for (int i = 0; i < Q; i++)
+    {
+        int c;
+        cin >> c;
+        if (c)
+        {
+            cin >> x >> y;
+            if (uf.same(x, y))
+            {
+                cout << uf.diff(x, y) << endl;
+            }
+            else
+            {
+                cout << "?" << endl;
+            }
+        }
+        else
+        {
+            cin >> x >> y >> z;
+            uf.unite(x, y, z);
+        }
+    }
+}
 
 ```
 {% endraw %}

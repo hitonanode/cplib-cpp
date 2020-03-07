@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/test/segment_tree_2d_pointadd.test.cpp
+# :x: segmenttree/test/segment_tree_2d_pointadd.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/segment_tree_2d_pointadd.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-02-15 23:05:17+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/segmenttree/segment_tree_2d.hpp.html">segmenttree/segment_tree_2d.hpp</a>
+* :x: <a href="../../../library/segmenttree/segment_tree_2d.hpp.html">segmenttree/segment_tree_2d.hpp</a>
 
 
 ## Code
@@ -114,6 +114,7 @@ int main()
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // 2D Segment Tree (point-update, range-get)
 // - 0-indexed
 // - Conditions for operations:

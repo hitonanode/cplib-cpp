@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: random/test/rolling_hash.test.cpp
+# :x: random/test/rolling_hash.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/random/test/rolling_hash.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-08 14:58:12+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/random/rand_nondeterministic.hpp.html">random/rand_nondeterministic.hpp</a>
-* :heavy_check_mark: <a href="../../../library/random/rolling_hash_1d_general.hpp.html">random/rolling_hash_1d_general.hpp</a>
+* :x: <a href="../../../library/random/rand_nondeterministic.hpp.html">random/rand_nondeterministic.hpp</a>
+* :x: <a href="../../../library/random/rolling_hash_1d_general.hpp.html">random/rolling_hash_1d_general.hpp</a>
 
 
 ## Code
@@ -85,6 +85,7 @@ int main()
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Rolling Hash (Rabin-Karp), 1dim
 template<typename V>
 struct rolling_hash
@@ -151,6 +152,7 @@ plint DoubleHash::MODs = plint(1000000007, 998244353);
 #include <random>
 using namespace std;
 
+// CUT begin
 struct rand_int_
 {
     using lint = long long;

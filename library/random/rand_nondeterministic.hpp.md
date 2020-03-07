@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: random/rand_nondeterministic.hpp
+# :x: random/rand_nondeterministic.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#7ddf32e17a6ac5ce04a8ecbf782ca509">random</a>
 * <a href="{{ site.github.repository_url }}/blob/master/random/rand_nondeterministic.hpp">View this file on GitHub</a>
-    - Last commit date: 2019-08-14 20:07:57+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/random/test/rolling_hash.test.cpp.html">random/test/rolling_hash.test.cpp</a>
+* :x: <a href="../../verify/random/test/rolling_hash.test.cpp.html">random/test/rolling_hash.test.cpp</a>
 
 
 ## Code
@@ -51,6 +51,7 @@ layout: default
 #include <random>
 using namespace std;
 
+// CUT begin
 struct rand_int_
 {
     using lint = long long;
@@ -74,6 +75,7 @@ struct rand_int_
 #include <random>
 using namespace std;
 
+// CUT begin
 struct rand_int_
 {
     using lint = long long;

@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/graph/test/2sat_solver.test.cpp.html">graph/test/2sat_solver.test.cpp</a>
-* :x: <a href="../../verify/graph/test/strongly_connected_components.test.cpp.html">graph/test/strongly_connected_components.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/graph/test/strongly_connected_components.test.cpp.html">graph/test/strongly_connected_components.test.cpp</a>
 
 
 ## Code

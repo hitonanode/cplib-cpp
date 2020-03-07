@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: string/test/z_algorithm.test.cpp
+# :x: string/test/z_algorithm.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/string/test/z_algorithm.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-08 14:58:12+09:00
+    - Last commit date: 2020-03-07 22:54:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/string/z_algorithm.hpp.html">string/z_algorithm.hpp</a>
+* :x: <a href="../../../library/string/z_algorithm.hpp.html">string/z_algorithm.hpp</a>
 
 
 ## Code
@@ -79,10 +79,10 @@ int main()
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Z algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)
 // Complexity: O(N)
 // <http://snuke.hatenablog.com/entry/2014/12/03/214243>
-
 vector<int> z_algorithm(const string &s) {
     vector<int> ans(s.size());
     ans[0] = s.size();
