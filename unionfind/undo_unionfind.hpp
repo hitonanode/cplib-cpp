@@ -1,12 +1,12 @@
-// UnionFind, able to rewind to the previous state by undo()
-// Written for Educational Codeforces 62 F, although not verified yet.
 #pragma once 
 #include <stack>
 #include <vector>
 #include <numeric>
 #include <utility>
 
-
+// CUT begin
+// UnionFind, able to rewind to the previous state by undo()
+// Written for Educational Codeforces 62 F, although not verified yet.
 struct UndoSizeAwareUnionFind
 {
     using pint = std::pair<int, int>;

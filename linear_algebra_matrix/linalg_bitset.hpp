@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-
+// CUT begin
 constexpr int Wmax = 320;
 vector<bitset<Wmax>> gauss_jordan(int W, vector<bitset<Wmax>> mtr)
 {

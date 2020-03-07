@@ -3,6 +3,7 @@
 #include <vector>
 #include <set>
 
+// CUT begin
 struct ModIntRuntime
 {
     using lint = long long int;

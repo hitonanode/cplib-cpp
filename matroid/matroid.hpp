@@ -5,6 +5,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 using Element = int;
 using State = vector<bool>;
 
@@ -17,7 +18,6 @@ struct MatroidExample
     // If I is NOT independent, undefined.
     vector<Element> circuit(State I, Element e);
 };
-
 
 // Matroid intersection solver
 // Algorithm based on <http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/>

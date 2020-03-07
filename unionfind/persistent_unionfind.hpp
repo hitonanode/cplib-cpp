@@ -3,6 +3,7 @@
 #include <utility>
 #include <vector>
 
+// CUT begin
 struct PersistentUnionFind
 {
     std::vector<int> parsz, t_unite;

@@ -3,6 +3,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 using T = int;
 struct RangeMinimumQuery
 {

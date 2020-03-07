@@ -3,10 +3,10 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Z algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)
 // Complexity: O(N)
 // <http://snuke.hatenablog.com/entry/2014/12/03/214243>
-
 vector<int> z_algorithm(const string &s) {
     vector<int> ans(s.size());
     ans[0] = s.size();

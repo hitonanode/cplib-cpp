@@ -3,6 +3,7 @@
 #include <numeric>
 #include <vector>
 
+// CUT begin
 // Suffix Array / Longest Common Prefix Array Construction
 // Comlexity: O(N(log N)^2)
 template<typename T>

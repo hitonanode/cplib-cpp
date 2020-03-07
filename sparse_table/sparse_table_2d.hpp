@@ -3,6 +3,7 @@
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Static matrix sparse table
 // Complexity; O(HWlogHlogW) for precalculation, O(1) per query
 template<typename T, typename F>

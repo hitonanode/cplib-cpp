@@ -3,6 +3,7 @@
 #include <random>
 using namespace std;
 
+// CUT begin
 struct rand_int_
 {
     using lint = long long;

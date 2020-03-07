@@ -3,7 +3,7 @@
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 // Solve Ax = b for T = ModInt<PRIME>
 // - retval: {one of the solution, {freedoms}} (if solution exists)
 //           {{}, {}} (otherwise)

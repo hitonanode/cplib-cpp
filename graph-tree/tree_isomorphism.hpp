@@ -6,6 +6,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Tree isomorphism with hashing （ハッシュによる木の同型判定）
 // Dependence: ModInt or ModIntRuntime
 // Reference: <https://snuke.hatenablog.com/entry/2017/02/03/054210>

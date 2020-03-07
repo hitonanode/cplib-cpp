@@ -5,6 +5,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 template<typename T>
 struct Trie
 {

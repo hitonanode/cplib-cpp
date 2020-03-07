@@ -1,5 +1,5 @@
-#include "matroid/matroid.hpp"
 #pragma once
+#include "matroid/matroid.hpp"
 #include <bitset>
 #include <cassert>
 #include <unordered_map>
@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 
-
+// CUT begin
 // Vector matroid on F2 : linearly independent vectors
 // VDIM: max. dimension of vector space
 // Verified: SRM526.5 1000 (Used only for linear independence check)

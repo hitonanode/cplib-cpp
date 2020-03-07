@@ -1,10 +1,11 @@
-// lowest common ancestor (LCA) class for undirected weighted tree
-// 無向重み付きグラフの最小共通祖先
-// <https://yukicoder.me/submissions/392383>
-
+#pragma once
 #include <vector>
 using namespace std;
 
+// CUT begin
+// lowest common ancestor (LCA) class for undirected weighted tree
+// 無向重み付きグラフの最小共通祖先
+// <https://yukicoder.me/submissions/392383>
 struct UndirectedWeightedTree
 {
     using T = long long int;   // Arbitrary data structure (operator+, operator- must be defined)

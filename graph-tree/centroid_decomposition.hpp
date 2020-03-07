@@ -1,3 +1,9 @@
+#pragma once
+#include <tuple>
+#include <utility>
+#include <vector>
+
+// CUT begin
 /*
 (Recursive) Centroid Decomposition
 Verification: Codeforces #190 Div.1 C <https://codeforces.com/contest/321/submission/59093583>
@@ -5,12 +11,6 @@ Verification: Codeforces #190 Div.1 C <https://codeforces.com/contest/321/submis
 fix_root(int r): Build information of the tree which `r` belongs to.
 detect_centroid(int r): Enumerate centroid(s) of the tree which `r` belongs to.
 */
-
-#pragma once
-#include <tuple>
-#include <utility>
-#include <vector>
-
 struct Tree
 {
     int NO_PARENT = -1;

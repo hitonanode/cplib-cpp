@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 
+// CUT begin
 uint32_t rand_int() // XorShift random integer generator
 {
     static uint32_t x = 123456789, y = 362436069, z = 521288629, w = 88675123;

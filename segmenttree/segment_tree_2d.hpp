@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // 2D Segment Tree (point-update, range-get)
 // - 0-indexed
 // - Conditions for operations:

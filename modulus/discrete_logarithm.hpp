@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <utility>
 
+// CUT begin
 // Calculate log_A B (MOD M) (baby-step gian-step)
 // DiscreteLogarithm dl(M, A);
 // lint ans = dl.log(B);

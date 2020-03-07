@@ -2,8 +2,9 @@
 #include <algorithm>
 #include <utility>
 #include <vector>
-using lint = long long;
 
+// CUT begin
+using lint = long long;
 // Solve ax+by=gcd(a, b)
 lint extgcd(lint a, lint b, lint &x, lint &y)
 {

@@ -3,8 +3,9 @@
 #include <cstdlib>
 #include <vector>
 using namespace std;
-using lint = long long int;
 
+// CUT begin
+using lint = long long int;
 // Solve ax+by=gcd(a, b)
 lint extgcd(lint a, lint b, lint &x, lint &y)
 {

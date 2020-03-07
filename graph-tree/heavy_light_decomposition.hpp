@@ -7,7 +7,7 @@
 #include <utility>
 #include <vector>
 
-
+// CUT begin
 // Heavy-Light Decomposition of trees
 // Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>
 struct HeavyLightDecomposition {

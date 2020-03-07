@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-
+// CUT begin
 std::vector<int> mp_algorithm(std::string s) {
     int N = s.length();
     std::vector<int> ret(N + 1, -1);

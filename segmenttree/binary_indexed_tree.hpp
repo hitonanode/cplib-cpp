@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // 1-indexed BIT (i : [1, len])
 template<typename T>
 struct BIT : std::vector<T>

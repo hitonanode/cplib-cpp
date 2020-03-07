@@ -3,7 +3,7 @@
 #include <utility>
 using namespace std;
 
-
+// CUT begin
 // Sliding-Window Aggregation based queue
 // - `std::queue`-like data structure with monoid operation
 // - Each operation is amortized O(1)

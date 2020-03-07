@@ -1,8 +1,9 @@
-// UnionFind Tree (0-indexed)
 #pragma once
 #include <numeric>
 #include <vector>
 
+// CUT begin
+// UnionFind Tree (0-indexed)
 struct RankBasedUnionFind
 {
     std::vector<int> par, rank;

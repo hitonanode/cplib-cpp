@@ -3,6 +3,7 @@
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Range Minimum Query for static sequence by sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
 template<typename T>

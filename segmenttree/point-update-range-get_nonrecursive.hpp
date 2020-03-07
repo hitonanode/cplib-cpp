@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 
+// CUT begin
 // Nonrecursive Segment Tree (point-update, range-get)
 // - Conditions for operations:
 //   - datamerge: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)

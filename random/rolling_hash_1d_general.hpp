@@ -3,6 +3,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Rolling Hash (Rabin-Karp), 1dim
 template<typename V>
 struct rolling_hash

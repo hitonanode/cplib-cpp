@@ -1,10 +1,10 @@
-// Weighted UnionFind
 #pragma once
 #include <numeric>
 #include <utility>
 #include <vector>
 
-
+// CUT begin
+// Weighted UnionFind
 template<typename T>
 struct WeightedUnionFind
 {

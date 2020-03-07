@@ -1,9 +1,10 @@
-// UnionFind Tree (0-indexed), based on size of each disjoint set
 #pragma once
 #include <numeric>
 #include <utility>
 #include <vector>
 
+// CUT begin
+// UnionFind Tree (0-indexed), based on size of each disjoint set
 struct UnionFind
 {
     std::vector<int> par, cou;

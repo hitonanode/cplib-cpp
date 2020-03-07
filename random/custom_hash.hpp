@@ -3,6 +3,7 @@
 #include <cstdlib>
 using namespace std;
 
+// CUT begin
 struct custom_hash
 {
     // <https://codeforces.com/blog/entry/62393>
@@ -21,7 +22,6 @@ struct custom_hash
         return splitmix64(x + FIXED_RANDOM);
     }
 };
-
 
 // Usage
 #include <unordered_map>

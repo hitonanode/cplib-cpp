@@ -4,6 +4,7 @@
 #include <vector>
 using namespace std;
 
+// CUT begin
 // Count elements in [A_begin, ..., A_{end-1}] which satisfy A_i < query
 // Complexity: O(N log^2 N) for initialization, O(log^2 N) for each query
 // Verified: cntLess <https://codeforces.com/contest/1288/submission/68865506>

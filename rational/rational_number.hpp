@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 
+// CUT begin
 // Rational number + {infinity(1 / 0), -infiity(-1 / 0)} （有理数）
 struct Rational {
     using Int = long long int; // __int128

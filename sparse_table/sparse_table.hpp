@@ -2,6 +2,7 @@
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Static sequence sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
 template<typename T, typename F>

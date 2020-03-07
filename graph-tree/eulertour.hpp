@@ -2,6 +2,7 @@
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Preorder Euler Tour
 // （行きがけ順，部分木の頂点クエリ等に有用）
 struct PreorderEulerTour

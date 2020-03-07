@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <iostream>
 
+// CUT begin
 struct GridUnionFind
 {
     int H, W;
