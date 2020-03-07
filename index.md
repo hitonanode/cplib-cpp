@@ -154,6 +154,7 @@ layout: default
 ### number
 
 * :warning: <a href="library/number/cyclotomic_polynomials.hpp.html">number/cyclotomic_polynomials.hpp</a>
+* :warning: <a href="library/number/enumerate_partitions.hpp.html">number/enumerate_partitions.hpp</a>
 * :heavy_check_mark: <a href="library/number/eratosthenes.hpp.html">number/eratosthenes.hpp</a>
 
 
