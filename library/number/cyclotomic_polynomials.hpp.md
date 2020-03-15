@@ -166,8 +166,7 @@ struct SieveOfEratosthenes : std::vector<int>
     }
 };
 // SieveOfEratosthenes sieve(100000);
-#line 3 "number/cyclotomic_polynomials.hpp"
-#include <vector>
+#line 4 "number/cyclotomic_polynomials.hpp"
 
 // CUT begin
 // cyclotomic polynominals : 円分多項式

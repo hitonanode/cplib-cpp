@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: graph-tree/lowest_common_ancestor.hpp
+# :heavy_check_mark: graph-tree/lowest_common_ancestor.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/graph-tree/test/lca.test.cpp.html">graph-tree/test/lca.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/graph-tree/test/lca.test.cpp.html">graph-tree/test/lca.test.cpp</a>
 
 
 ## Code

@@ -25,10 +25,11 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+# :heavy_check_mark: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#dc91d55fecbe93608b76606ec1490b73">linear_algebra_matrix/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -38,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
+* :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
+* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
 
 
 ## Code
@@ -221,7 +222,7 @@ T Fibonacci(long long int k, int a = 1, int b = 1)
 }
 #line 2 "modulus/modint_fixed.hpp"
 #include <iostream>
-#include <vector>
+#line 4 "modulus/modint_fixed.hpp"
 #include <set>
 
 // CUT begin
@@ -330,10 +331,7 @@ struct ModInt
 
 // constexpr lint MOD = 998244353;
 // using mint = ModInt<MOD>;
-#line 2 "modulus/modint_runtime.hpp"
-#include <iostream>
-#include <vector>
-#include <set>
+#line 5 "modulus/modint_runtime.hpp"
 
 // CUT begin
 struct ModIntRuntime
@@ -449,8 +447,7 @@ struct ModIntRuntime
     }
 };
 int ModIntRuntime::mod = 1;
-#line 5 "linear_algebra_matrix/test/linalg_modint_determinant.test.cpp"
-#include <iostream>
+#line 6 "linear_algebra_matrix/test/linalg_modint_determinant.test.cpp"
 
 int main()
 {

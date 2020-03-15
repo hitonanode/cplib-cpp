@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#9e0aaf7c24822f646f604a7599f511a1">other_data_structures/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/other_data_structures/test/queue_operate_all_composite.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -38,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 * :x: <a href="../../../library/other_data_structures/sliding_window_aggregation.hpp.html">other_data_structures/sliding_window_aggregation.hpp</a>
 
 
@@ -254,7 +255,7 @@ struct ModInt
 // using mint = ModInt<MOD>;
 #line 3 "other_data_structures/test/queue_operate_all_composite.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
-#include <iostream>
+#line 5 "other_data_structures/test/queue_operate_all_composite.test.cpp"
 
 using mint = ModInt<998244353>;
 int main()

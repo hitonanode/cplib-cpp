@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#138f586853b56e3cad59aa29ba977214">convolution/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/convolution/test/ntt_arbitrary_mod.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -39,8 +40,8 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
+* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
 
 
 ## Code
@@ -202,7 +203,7 @@ struct ModInt
 #include <algorithm>
 #include <array>
 #include <cassert>
-#include <vector>
+#line 8 "convolution/ntt.hpp"
 using namespace std;
 
 // CUT begin
@@ -324,10 +325,7 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
     }
     return a;
 }
-#line 2 "modulus/modint_runtime.hpp"
-#include <iostream>
-#include <vector>
-#include <set>
+#line 5 "modulus/modint_runtime.hpp"
 
 // CUT begin
 struct ModIntRuntime
@@ -443,8 +441,7 @@ struct ModIntRuntime
     }
 };
 int ModIntRuntime::mod = 1;
-#line 5 "convolution/test/ntt_arbitrary_mod.test.cpp"
-#include <iostream>
+#line 6 "convolution/test/ntt_arbitrary_mod.test.cpp"
 using namespace std;
 
 constexpr int MOD = 1000000007;

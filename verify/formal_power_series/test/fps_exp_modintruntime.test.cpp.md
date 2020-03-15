@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#a20fdd22d4cc62ca1cf4e679d77fd3d2">formal_power_series/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/test/fps_exp_modintruntime.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -40,8 +41,8 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
 * :heavy_check_mark: <a href="../../../library/formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
+* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
 
 
 ## Code
@@ -76,8 +77,7 @@ int main()
 #line 1 "formal_power_series/test/fps_exp_modintruntime.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/exp_of_formal_power_series"
 #include <iostream>
-#line 2 "modulus/modint_runtime.hpp"
-#include <iostream>
+#line 3 "modulus/modint_runtime.hpp"
 #include <vector>
 #include <set>
 
@@ -195,10 +195,7 @@ struct ModIntRuntime
     }
 };
 int ModIntRuntime::mod = 1;
-#line 2 "modulus/modint_fixed.hpp"
-#include <iostream>
-#include <vector>
-#include <set>
+#line 5 "modulus/modint_fixed.hpp"
 
 // CUT begin
 template <int mod>
@@ -311,7 +308,7 @@ struct ModInt
 #include <algorithm>
 #include <array>
 #include <cassert>
-#include <vector>
+#line 8 "convolution/ntt.hpp"
 using namespace std;
 
 // CUT begin
@@ -433,10 +430,7 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
     }
     return a;
 }
-#line 3 "formal_power_series/formal_power_series.hpp"
-#include <algorithm>
-#include <cassert>
-#include <vector>
+#line 6 "formal_power_series/formal_power_series.hpp"
 using namespace std;
 
 // CUT begin

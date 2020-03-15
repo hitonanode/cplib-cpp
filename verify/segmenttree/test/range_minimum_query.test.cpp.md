@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/range_minimum_query.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -81,8 +82,7 @@ int main()
 ```cpp
 #line 1 "segmenttree/test/range_minimum_query.test.cpp"
 #include <iostream>
-#line 2 "segmenttree/range_minimum_query.hpp"
-#include <iostream>
+#line 3 "segmenttree/range_minimum_query.hpp"
 #include <vector>
 using namespace std;
 

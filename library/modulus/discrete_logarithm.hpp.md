@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: modulus/discrete_logarithm.hpp
+# :heavy_check_mark: modulus/discrete_logarithm.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/modulus/test/discrete_logarithm.test.cpp.html">modulus/test/discrete_logarithm.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/modulus/test/discrete_logarithm.test.cpp.html">modulus/test/discrete_logarithm.test.cpp</a>
 
 
 ## Code

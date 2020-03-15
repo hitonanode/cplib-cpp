@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#f30c46bc6b7c73d2a504337afafe2518">random/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/random/test/rolling_hash.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -80,8 +81,7 @@ int main()
 #line 1 "random/test/rolling_hash.test.cpp"
 #include <iostream>
 #include <string>
-#line 2 "random/rolling_hash_1d_general.hpp"
-#include <string>
+#line 3 "random/rolling_hash_1d_general.hpp"
 #include <vector>
 using namespace std;
 

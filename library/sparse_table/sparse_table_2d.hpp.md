@@ -131,9 +131,7 @@ struct SparseTable {
         return func(data[d][l], data[d][r - (1 << d)]);
     }
 };
-#line 3 "sparse_table/sparse_table_2d.hpp"
-#include <cassert>
-#include <vector>
+#line 5 "sparse_table/sparse_table_2d.hpp"
 
 // CUT begin
 // Static matrix sparse table

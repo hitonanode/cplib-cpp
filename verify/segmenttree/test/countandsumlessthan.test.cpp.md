@@ -29,8 +29,9 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/countandsumlessthan.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-03-15 20:16:09+09:00
 
 
 * see: <a href="https://yukicoder.me/problems/no/877">https://yukicoder.me/problems/no/877</a>
@@ -38,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
+* :question: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
 
 
 ## Code
@@ -149,6 +150,20 @@ struct RangeMinimumQuery : public NonrecursiveSegmentTree<T, T, bool>
     };
 };
 
+// Range Maximum Query
+// - get: return max(x_l, ..., x_{r - 1})
+template <typename T>
+struct RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool>
+{
+    using SegTree = NonrecursiveSegmentTree<T, T, bool>;
+    T datamerge(const T &vl, const T &vr) override { return std::max(vl, vr); };
+    T data2ret(const T &v, const bool &q) override { return v; }
+    T retmerge(const T &vl, const T &vr) override { return std::max(vl, vr); };
+    RangeMaximumQuery(const std::vector<T> &seq, T defaultmax) : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, defaultmax);
+    };
+};
+
 template<typename T>
 struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool>
 {
@@ -196,7 +211,7 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
 };
 #line 2 "segmenttree/test/countandsumlessthan.test.cpp"
 #define PROBLEM "https://yukicoder.me/problems/no/877"
-#include <iostream>
+#line 4 "segmenttree/test/countandsumlessthan.test.cpp"
 using namespace std;
 
 int main()

@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/segment_tree_2d_pointadd.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -215,11 +216,11 @@ struct SegmentTree2D
 #line 3 "segmenttree/test/segment_tree_2d_pointadd.test.cpp"
 
 #include <cstdio>
-#include <iostream>
+#line 6 "segmenttree/test/segment_tree_2d_pointadd.test.cpp"
 #include <queue>
 #include <tuple>
 #include <utility>
-#include <vector>
+#line 10 "segmenttree/test/segment_tree_2d_pointadd.test.cpp"
 using namespace std;
 
 int main()

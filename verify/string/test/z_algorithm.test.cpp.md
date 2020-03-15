@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#1a7427d145086499c399a0f95224a581">string/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/test/z_algorithm.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -74,9 +75,7 @@ int main()
 #include <iostream>
 #include <string>
 #include <vector>
-#line 2 "string/z_algorithm.hpp"
-#include <string>
-#include <vector>
+#line 4 "string/z_algorithm.hpp"
 using namespace std;
 
 // CUT begin

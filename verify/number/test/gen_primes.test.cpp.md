@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#f11c31ed854a10cb04d51564b38e6849">number/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/number/test/gen_primes.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:32:10+09:00
 
@@ -152,7 +153,7 @@ struct SieveOfEratosthenes : std::vector<int>
 #line 2 "number/test/gen_primes.test.cpp"
 #include <algorithm>
 #include <iostream>
-#include <vector>
+#line 5 "number/test/gen_primes.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C"
 using namespace std;
 

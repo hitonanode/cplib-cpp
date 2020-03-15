@@ -25,10 +25,11 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: graph-tree/test/lca.test.cpp
+# :heavy_check_mark: graph-tree/test/lca.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#728e08a0b5b0c7a31e7e3fe276503f5d">graph-tree/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph-tree/test/lca.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -38,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/graph-tree/lowest_common_ancestor.hpp.html">graph-tree/lowest_common_ancestor.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph-tree/lowest_common_ancestor.hpp.html">graph-tree/lowest_common_ancestor.hpp</a>
 
 
 ## Code

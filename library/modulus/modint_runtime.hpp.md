@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: modulus/modint_runtime.hpp
+# :question: modulus/modint_runtime.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -42,8 +42,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/convolution/test/ntt_arbitrary_mod.test.cpp.html">convolution/test/ntt_arbitrary_mod.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_exp_modintruntime.test.cpp.html">formal_power_series/test/fps_exp_modintruntime.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
-* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
 * :x: <a href="../../verify/modulus/test/sqrt_modint_runtime.test.cpp.html">modulus/test/sqrt_modint_runtime.test.cpp</a>
 
 

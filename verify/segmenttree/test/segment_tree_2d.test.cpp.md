@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/segment_tree_2d.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -183,7 +184,7 @@ struct SegmentTree2D
 #line 2 "segmenttree/test/segment_tree_2d.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068"
 
-#include <iostream>
+#line 5 "segmenttree/test/segment_tree_2d.test.cpp"
 using namespace std;
 
 int main()

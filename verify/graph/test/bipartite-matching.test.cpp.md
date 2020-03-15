@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#cb3e5c672d961db00b76e36ddf5c068a">graph/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/bipartite-matching.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:40:57+09:00
 
@@ -72,8 +73,7 @@ int main()
 ```cpp
 #line 1 "graph/test/bipartite-matching.test.cpp"
 #include <iostream>
-#line 2 "graph/bipartite-matching.hpp"
-#include <iostream>
+#line 3 "graph/bipartite-matching.hpp"
 #include <vector>
 using namespace std;
 

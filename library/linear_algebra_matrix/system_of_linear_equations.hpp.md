@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: linear_algebra_matrix/system_of_linear_equations.hpp
+# :heavy_check_mark: linear_algebra_matrix/system_of_linear_equations.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,12 +38,12 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
+* :heavy_check_mark: <a href="linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
 
 
 ## Code
@@ -235,7 +235,7 @@ T Fibonacci(long long int k, int a = 1, int b = 1)
 }
 #line 3 "linear_algebra_matrix/system_of_linear_equations.hpp"
 #include <utility>
-#include <vector>
+#line 5 "linear_algebra_matrix/system_of_linear_equations.hpp"
 
 // CUT begin
 // Solve Ax = b for T = ModInt<PRIME>

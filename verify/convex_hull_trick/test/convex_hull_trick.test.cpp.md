@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#0731c72a2836fc3aaeb2f4bdde63d868">convex_hull_trick/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/convex_hull_trick/test/convex_hull_trick.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:32:10+09:00
 

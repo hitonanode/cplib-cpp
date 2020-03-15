@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: linear_algebra_matrix/linalg_longlong.hpp
+# :heavy_check_mark: linear_algebra_matrix/linalg_longlong.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,9 +38,9 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_ll_det.test.cpp.html">linear_algebra_matrix/test/linalg_ll_det.test.cpp</a>
-* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp.html">linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp</a>
-* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp.html">linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_ll_det.test.cpp.html">linear_algebra_matrix/test/linalg_ll_det.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp.html">linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp.html">linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp</a>
 
 
 ## Code

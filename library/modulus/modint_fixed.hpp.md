@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: modulus/modint_fixed.hpp
+# :question: modulus/modint_fixed.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -55,9 +55,9 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_log.test.cpp.html">formal_power_series/test/fps_log.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
-* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
-* :x: <a href="../../verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
 * :x: <a href="../../verify/other_data_structures/test/queue_operate_all_composite.test.cpp.html">other_data_structures/test/queue_operate_all_composite.test.cpp</a>
 * :x: <a href="../../verify/random/test/rolling_hash_w_modint.test.cpp.html">random/test/rolling_hash_w_modint.test.cpp</a>
 

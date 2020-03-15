@@ -29,8 +29,9 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#cb3e5c672d961db00b76e36ddf5c068a">graph/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/bellman_ford.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+    - Last commit date: 2020-03-15 20:16:09+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B</a>
@@ -101,7 +102,7 @@ int main()
 #include <limits>
 #include <queue>
 #include <utility>
-#include <vector>
+#line 8 "graph/shortest_path.hpp"
 
 // CUT begin
 template<typename T>
@@ -121,6 +122,8 @@ struct ShortestPath
 
     std::vector<T> dist;
     std::vector<int> prev;
+    // Dijkstra algorithm
+    // Complexity: O(E log E)
     void Dijkstra(int s) {
         assert(0 <= s and s < V);
         dist.assign(V, std::numeric_limits<T>::max());
@@ -145,6 +148,8 @@ struct ShortestPath
         }
     }
 
+    // Bellman-Ford algorithm
+    // Complexity: O(VE)
     bool BellmanFord(int s, int nb_loop) {
         assert(0 <= s and s < V);
         dist.assign(V, std::numeric_limits<T>::max());
@@ -166,10 +171,27 @@ struct ShortestPath
         }
         return false;
     }
+    // Warshall-Floyd algorithm
+    // Complexity: O(E + V^3)
+    std::vector<std::vector<T>> dist2d;
+    void WarshallFloyd() {
+        dist2d.assign(V, std::vector<T>(V, std::numeric_limits<T>::max()));
+        for (int i = 0; i < V; i++) {
+            dist2d[i][i] = 0;
+            for (auto p : to[i]) dist2d[i][p.first] = min(dist2d[i][p.first], p.second);
+        }
+        for (int k = 0; k < V; k++) {
+            for (int i = 0; i < V; i++) {
+                if (dist2d[i][k] = std::numeric_limits<T>::max()) continue;
+                for (int j = 0; j < V; j++) {
+                    if (dist2d[k][j] = std::numeric_limits<T>::max()) continue;
+                    dist2d[i][j] = min(dist2d[i][j], dist2d[i][k] + dist2d[k][j]);
+                }
+            }
+        }
+    }
 };
-#line 2 "graph/bellman_ford.hpp"
-#include <utility>
-#include <vector>
+#line 4 "graph/bellman_ford.hpp"
 using namespace std;
 
 // CUT begin

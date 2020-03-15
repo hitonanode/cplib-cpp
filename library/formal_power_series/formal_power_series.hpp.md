@@ -39,7 +39,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :heavy_check_mark: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Verified with
@@ -401,7 +401,7 @@ struct ModInt
 #include <algorithm>
 #include <array>
 #include <cassert>
-#include <vector>
+#line 8 "convolution/ntt.hpp"
 using namespace std;
 
 // CUT begin
@@ -523,10 +523,7 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
     }
     return a;
 }
-#line 3 "formal_power_series/formal_power_series.hpp"
-#include <algorithm>
-#include <cassert>
-#include <vector>
+#line 6 "formal_power_series/formal_power_series.hpp"
 using namespace std;
 
 // CUT begin

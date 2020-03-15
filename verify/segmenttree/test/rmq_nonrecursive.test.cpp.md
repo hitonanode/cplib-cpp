@@ -29,8 +29,9 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/rmq_nonrecursive.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-03-15 20:16:09+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A</a>
@@ -38,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
+* :question: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
 
 
 ## Code
@@ -147,6 +148,20 @@ struct RangeMinimumQuery : public NonrecursiveSegmentTree<T, T, bool>
     };
 };
 
+// Range Maximum Query
+// - get: return max(x_l, ..., x_{r - 1})
+template <typename T>
+struct RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool>
+{
+    using SegTree = NonrecursiveSegmentTree<T, T, bool>;
+    T datamerge(const T &vl, const T &vr) override { return std::max(vl, vr); };
+    T data2ret(const T &v, const bool &q) override { return v; }
+    T retmerge(const T &vl, const T &vr) override { return std::max(vl, vr); };
+    RangeMaximumQuery(const std::vector<T> &seq, T defaultmax) : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, defaultmax);
+    };
+};
+
 template<typename T>
 struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool>
 {
@@ -192,8 +207,7 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
         SegTree::initialize(init, TRET(0, 0));
     }
 };
-#line 2 "segmenttree/test/rmq_nonrecursive.test.cpp"
-#include <iostream>
+#line 3 "segmenttree/test/rmq_nonrecursive.test.cpp"
 using namespace std;
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"
 

@@ -25,10 +25,11 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: modulus/test/discrete_logarithm.test.cpp
+# :heavy_check_mark: modulus/test/discrete_logarithm.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#1e1bae9d81a5584838c517ca3b5198a4">modulus/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modulus/test/discrete_logarithm.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -38,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/modulus/discrete_logarithm.hpp.html">modulus/discrete_logarithm.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulus/discrete_logarithm.hpp.html">modulus/discrete_logarithm.hpp</a>
 
 
 ## Code

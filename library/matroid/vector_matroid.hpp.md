@@ -265,10 +265,9 @@ struct PartitionMatroid
 };
 #line 3 "matroid/vector_matroid.hpp"
 #include <bitset>
-#include <cassert>
+#line 5 "matroid/vector_matroid.hpp"
 #include <unordered_map>
-#include <utility>
-#include <vector>
+#line 8 "matroid/vector_matroid.hpp"
 using namespace std;
 
 // CUT begin

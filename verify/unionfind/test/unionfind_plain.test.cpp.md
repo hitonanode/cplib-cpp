@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#44cd2525982f578aae3dfa33b70b27d1">unionfind/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/unionfind/test/unionfind_plain.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 

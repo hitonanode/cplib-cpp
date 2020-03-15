@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#f30c46bc6b7c73d2a504337afafe2518">random/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/random/test/rolling_hash_w_modint.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -38,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 * :x: <a href="../../../library/random/rolling_hash_1d_general.hpp.html">random/rolling_hash_1d_general.hpp</a>
 * :x: <a href="../../../library/random/xorshift.hpp.html">random/xorshift.hpp</a>
 
@@ -85,8 +86,7 @@ int main()
 #line 1 "random/test/rolling_hash_w_modint.test.cpp"
 #include <iostream>
 #include <string>
-#line 2 "random/rolling_hash_1d_general.hpp"
-#include <string>
+#line 3 "random/rolling_hash_1d_general.hpp"
 #include <vector>
 using namespace std;
 
@@ -152,9 +152,7 @@ struct DoubleHash : public plint
     }
 };
 plint DoubleHash::MODs = plint(1000000007, 998244353);
-#line 2 "modulus/modint_fixed.hpp"
-#include <iostream>
-#include <vector>
+#line 4 "modulus/modint_fixed.hpp"
 #include <set>
 
 // CUT begin

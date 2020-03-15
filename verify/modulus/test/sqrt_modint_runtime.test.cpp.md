@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#1e1bae9d81a5584838c517ca3b5198a4">modulus/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modulus/test/sqrt_modint_runtime.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -38,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
+* :question: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
 
 
 ## Code
@@ -77,8 +78,7 @@ int main()
 #line 1 "modulus/test/sqrt_modint_runtime.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
 #include <iostream>
-#line 2 "modulus/modint_runtime.hpp"
-#include <iostream>
+#line 3 "modulus/modint_runtime.hpp"
 #include <vector>
 #include <set>
 

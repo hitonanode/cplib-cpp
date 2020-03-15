@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05779a67d348d10b6c575a1ac0d9b972">unionfind</a>
 * <a href="{{ site.github.repository_url }}/blob/master/unionfind/grid_unionfind.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-03-15 20:16:09+09:00
 
 
 
@@ -93,7 +93,7 @@ struct GridUnionFind
             for (int j = 0; j < g.W - 1; j++) {
                 os << std::setw(WW) << g.find(i, j) << (g.same(i, j, i, j + 1) ? '-' : ' ');
             }
-            os << std::setw(WW) << g.find(i, g.H - 1) << '\n';
+            os << std::setw(WW) << g.find(i, g.W - 1) << '\n';
             if (i < g.H - 1) {
                 for (int j = 0; j < g.W; j++) os << std::setw(WW + 1) << (g.same(i, j, i + 1, j) ? "| " : "  ");
                 os << "\n";
@@ -162,7 +162,7 @@ struct GridUnionFind
             for (int j = 0; j < g.W - 1; j++) {
                 os << std::setw(WW) << g.find(i, j) << (g.same(i, j, i, j + 1) ? '-' : ' ');
             }
-            os << std::setw(WW) << g.find(i, g.H - 1) << '\n';
+            os << std::setw(WW) << g.find(i, g.W - 1) << '\n';
             if (i < g.H - 1) {
                 for (int j = 0; j < g.W; j++) os << std::setw(WW + 1) << (g.same(i, j, i + 1, j) ? "| " : "  ");
                 os << "\n";

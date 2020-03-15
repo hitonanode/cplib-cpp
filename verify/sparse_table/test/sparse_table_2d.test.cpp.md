@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../../index.html">Back to top page</a>
 
+* category: <a href="../../../index.html#a966236a3b794cca2d3eef6875f0f6b3">sparse_table/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/sparse_table/test/sparse_table_2d.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-07 22:54:47+09:00
 
@@ -113,9 +114,7 @@ struct SparseTable {
         return func(data[d][l], data[d][r - (1 << d)]);
     }
 };
-#line 3 "sparse_table/sparse_table_2d.hpp"
-#include <cassert>
-#include <vector>
+#line 5 "sparse_table/sparse_table_2d.hpp"
 
 // CUT begin
 // Static matrix sparse table
