@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: sparse_table/sparse_table_2d.hpp
+# :heavy_check_mark: sparse_table/sparse_table_2d.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,12 +38,12 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="sparse_table.hpp.html">sparse_table/sparse_table.hpp</a>
+* :heavy_check_mark: <a href="sparse_table.hpp.html">sparse_table/sparse_table.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/sparse_table/test/sparse_table_2d.test.cpp.html">sparse_table/test/sparse_table_2d.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/sparse_table/test/sparse_table_2d.test.cpp.html">sparse_table/test/sparse_table_2d.test.cpp</a>
 
 
 ## Code

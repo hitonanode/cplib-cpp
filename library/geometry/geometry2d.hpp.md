@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ed7daeb157cd9b31e53896ad3c771a26">geometry</a>
 * <a href="{{ site.github.repository_url }}/blob/master/geometry/geometry2d.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+    - Last commit date: 2020-03-16 00:27:04+09:00
 
 
 
@@ -80,6 +80,7 @@ struct P
     T_P arg() const { return atan2(y, x); }
     // rotate point/vector by rad
     P rotate(T_P rad) { return P(add_w_error(x * cos(rad), -y * sin(rad)), add_w_error(x * sin(rad), y * cos(rad))); }
+    P normalized() const { return (*this) / this->norm(); }
     P conj() const { return P(x, -y); }
     friend istream &operator>>(istream &is, P &p) { T_P x, y; is >> x >> y; p = P(x, y); return is; }
     friend ostream &operator<<(ostream &os, const P &p) { os << '(' << p.x << ',' << p.y << ')'; return os; }
@@ -159,6 +160,20 @@ vector<P> IntersectTwoCircles(P Ca, double Ra, P Cb, double Rb) {
     double rs = sqrt(Ra * Ra - rc * rc);
     P diff = (Cb - Ca) / d;
     return {Ca + diff * P(rc, rs), Ca + diff * P(rc, -rs)};
+}
+
+// Solve |x0 + vt| = R (SRM 543 Div.1 1000)
+vector<T_P> IntersectCircleLine(P x0, P v, T_P R) {
+    T_P b = x0.dot(v) / v.norm2();
+    T_P c = (x0.norm2() - R * R) / v.norm2();
+    if (b * b - c < 0) return {};
+    T_P ret1;
+    if (b > 0) ret1 = -b - sqrt(b * b - c);
+    else ret1 = -b + sqrt(b * b - c);
+    T_P ret2 = c / ret1;
+    vector<T_P> ret{ret1, ret2};
+    sort(ret.begin(), ret.end());
+    return ret;
 }
 
 ```
@@ -206,6 +221,7 @@ struct P
     T_P arg() const { return atan2(y, x); }
     // rotate point/vector by rad
     P rotate(T_P rad) { return P(add_w_error(x * cos(rad), -y * sin(rad)), add_w_error(x * sin(rad), y * cos(rad))); }
+    P normalized() const { return (*this) / this->norm(); }
     P conj() const { return P(x, -y); }
     friend istream &operator>>(istream &is, P &p) { T_P x, y; is >> x >> y; p = P(x, y); return is; }
     friend ostream &operator<<(ostream &os, const P &p) { os << '(' << p.x << ',' << p.y << ')'; return os; }
@@ -285,6 +301,20 @@ vector<P> IntersectTwoCircles(P Ca, double Ra, P Cb, double Rb) {
     double rs = sqrt(Ra * Ra - rc * rc);
     P diff = (Cb - Ca) / d;
     return {Ca + diff * P(rc, rs), Ca + diff * P(rc, -rs)};
+}
+
+// Solve |x0 + vt| = R (SRM 543 Div.1 1000)
+vector<T_P> IntersectCircleLine(P x0, P v, T_P R) {
+    T_P b = x0.dot(v) / v.norm2();
+    T_P c = (x0.norm2() - R * R) / v.norm2();
+    if (b * b - c < 0) return {};
+    T_P ret1;
+    if (b > 0) ret1 = -b - sqrt(b * b - c);
+    else ret1 = -b + sqrt(b * b - c);
+    T_P ret2 = c / ret1;
+    vector<T_P> ret{ret1, ret2};
+    sort(ret.begin(), ret.end());
+    return ret;
 }
 
 ```

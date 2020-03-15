@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: segmenttree/point-update-range-get_nonrecursive.hpp
+# :heavy_check_mark: segmenttree/point-update-range-get_nonrecursive.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,8 +39,8 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
-* :x: <a href="../../verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
-* :x: <a href="../../verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: other_data_structures/sliding_window_aggregation.hpp
+# :heavy_check_mark: other_data_structures/sliding_window_aggregation.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/other_data_structures/test/queue_operate_all_composite.test.cpp.html">other_data_structures/test/queue_operate_all_composite.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/other_data_structures/test/queue_operate_all_composite.test.cpp.html">other_data_structures/test/queue_operate_all_composite.test.cpp</a>
 
 
 ## Code

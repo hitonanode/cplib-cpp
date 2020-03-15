@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: segmenttree/test/binary_indexed_tree.test.cpp
+# :heavy_check_mark: segmenttree/test/binary_indexed_tree.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/segmenttree/binary_indexed_tree.hpp.html">segmenttree/binary_indexed_tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segmenttree/binary_indexed_tree.hpp.html">segmenttree/binary_indexed_tree.hpp</a>
 
 
 ## Code

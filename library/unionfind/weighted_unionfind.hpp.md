@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: unionfind/weighted_unionfind.hpp
+# :heavy_check_mark: unionfind/weighted_unionfind.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/unionfind/test/weighted_unionfind.test.cpp.html">unionfind/test/weighted_unionfind.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/unionfind/test/weighted_unionfind.test.cpp.html">unionfind/test/weighted_unionfind.test.cpp</a>
 
 
 ## Code

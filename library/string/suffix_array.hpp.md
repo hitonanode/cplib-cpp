@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: string/suffix_array.hpp
+# :heavy_check_mark: string/suffix_array.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,8 +38,8 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/string/test/lcp.test.cpp.html">string/test/lcp.test.cpp</a>
-* :x: <a href="../../verify/string/test/suffix_array.test.cpp.html">string/test/suffix_array.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/string/test/lcp.test.cpp.html">string/test/lcp.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/string/test/suffix_array.test.cpp.html">string/test/suffix_array.test.cpp</a>
 
 
 ## Code

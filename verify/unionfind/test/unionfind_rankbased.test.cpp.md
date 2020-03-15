@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: unionfind/test/unionfind_rankbased.test.cpp
+# :heavy_check_mark: unionfind/test/unionfind_rankbased.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/unionfind/unionfind_rankbased.hpp.html">unionfind/unionfind_rankbased.hpp</a>
+* :heavy_check_mark: <a href="../../../library/unionfind/unionfind_rankbased.hpp.html">unionfind/unionfind_rankbased.hpp</a>
 
 
 ## Code

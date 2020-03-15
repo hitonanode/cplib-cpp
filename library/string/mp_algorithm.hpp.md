@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: string/mp_algorithm.hpp
+# :heavy_check_mark: string/mp_algorithm.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/string/test/manacher_mp.test.cpp.html">string/test/manacher_mp.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/string/test/manacher_mp.test.cpp.html">string/test/manacher_mp.test.cpp</a>
 
 
 ## Code

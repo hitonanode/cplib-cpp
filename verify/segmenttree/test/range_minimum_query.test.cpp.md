@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: segmenttree/test/range_minimum_query.test.cpp
+# :heavy_check_mark: segmenttree/test/range_minimum_query.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/segmenttree/range_minimum_query.hpp.html">segmenttree/range_minimum_query.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segmenttree/range_minimum_query.hpp.html">segmenttree/range_minimum_query.hpp</a>
 
 
 ## Code

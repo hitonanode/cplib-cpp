@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: random/test/rolling_hash_w_modint.test.cpp
+# :heavy_check_mark: random/test/rolling_hash_w_modint.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
-* :x: <a href="../../../library/random/rolling_hash_1d_general.hpp.html">random/rolling_hash_1d_general.hpp</a>
-* :x: <a href="../../../library/random/xorshift.hpp.html">random/xorshift.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :heavy_check_mark: <a href="../../../library/random/rolling_hash_1d_general.hpp.html">random/rolling_hash_1d_general.hpp</a>
+* :heavy_check_mark: <a href="../../../library/random/xorshift.hpp.html">random/xorshift.hpp</a>
 
 
 ## Code

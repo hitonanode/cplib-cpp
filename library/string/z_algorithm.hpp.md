@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: string/z_algorithm.hpp
+# :heavy_check_mark: string/z_algorithm.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/string/test/z_algorithm.test.cpp.html">string/test/z_algorithm.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/string/test/z_algorithm.test.cpp.html">string/test/z_algorithm.test.cpp</a>
 
 
 ## Code

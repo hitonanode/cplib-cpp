@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: random/rand_nondeterministic.hpp
+# :heavy_check_mark: random/rand_nondeterministic.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/random/test/rolling_hash.test.cpp.html">random/test/rolling_hash.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/random/test/rolling_hash.test.cpp.html">random/test/rolling_hash.test.cpp</a>
 
 
 ## Code
