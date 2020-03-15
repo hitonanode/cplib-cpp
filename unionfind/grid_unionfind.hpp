@@ -50,7 +50,7 @@ struct GridUnionFind
             for (int j = 0; j < g.W - 1; j++) {
                 os << std::setw(WW) << g.find(i, j) << (g.same(i, j, i, j + 1) ? '-' : ' ');
             }
-            os << std::setw(WW) << g.find(i, g.H - 1) << '\n';
+            os << std::setw(WW) << g.find(i, g.W - 1) << '\n';
             if (i < g.H - 1) {
                 for (int j = 0; j < g.W; j++) os << std::setw(WW + 1) << (g.same(i, j, i + 1, j) ? "| " : "  ");
                 os << "\n";
