@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#f11c31ed854a10cb04d51564b38e6849">number/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/number/test/prime_factorization.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:32:10+09:00
+    - Last commit date: 2020-04-04 22:42:12+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A</a>
@@ -116,7 +116,7 @@ struct SieveOfEratosthenes : std::vector<int>
         }
         return ret;
     }
-    std::vector<T> Divisors(int x) {
+    std::vector<T> Divisors(T x) {
         std::vector<T> ret{1};
         for (auto p : Factorize(x)) {
             int n = ret.size();

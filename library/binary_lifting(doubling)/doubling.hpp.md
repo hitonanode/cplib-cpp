@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#fc840529f018acf34013c4bdd67ada43">binary_lifting(doubling)</a>
 * <a href="{{ site.github.repository_url }}/blob/master/binary_lifting(doubling)/doubling.hpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00
+    - Last commit date: 2020-03-07 22:32:10+09:00
 
 
 
