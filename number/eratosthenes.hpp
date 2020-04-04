@@ -43,7 +43,7 @@ struct SieveOfEratosthenes : std::vector<int>
         }
         return ret;
     }
-    std::vector<T> Divisors(int x) {
+    std::vector<T> Divisors(T x) {
         std::vector<T> ret{1};
         for (auto p : Factorize(x)) {
             int n = ret.size();
