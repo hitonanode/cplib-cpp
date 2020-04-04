@@ -28,8 +28,9 @@ struct P
     P operator/(T_P d) const { return P(x / d, y / d); }
     P inv() const { return conj() / norm2(); }
     P operator/(const P &p) const { return (*this) * p.inv(); }
-    bool operator<(const P &r) const{ return x != r.x ? x < r.x : y < r.y; }
-    bool operator==(const P &r) const{ return add_w_error(x, -r.x) == 0 and add_w_error(y, -r.y) == 0; }
+    bool operator<(const P &r) const { return x != r.x ? x < r.x : y < r.y; }
+    bool operator==(const P &r) const { return add_w_error(x, -r.x) == 0 and add_w_error(y, -r.y) == 0; }
+    bool operator!=(const P &r) const { return !((*this) == r); }
     T_P dot(P p) const { return add_w_error(x * p.x, y * p.y); }
     T_P det(P p) const { return add_w_error(x * p.y, -y * p.x); }
     T_P norm() const { return sqrt(x * x + y * y); }
@@ -131,4 +132,19 @@ vector<T_P> IntersectCircleLine(P x0, P v, T_P R) {
     vector<T_P> ret{ret1, ret2};
     sort(ret.begin(), ret.end());
     return ret;
+}
+
+// Distance between point p <-> line ab
+T_P DistancePointLine(const P &p, const P &a, const P &b)
+{
+    assert(a != b);
+    return abs((b - a).det(p - a)) / (b - a).norm();
+}
+
+// Distance between point p <-> line segment ab
+T_P DistancePointSegment(const P &p, const P &a, const P &b) {
+    if (a == b) return (p - a).norm();
+    else if ((p - a).dot(b - a) <= 0) return (p - a).norm();
+    else if ((p - b).dot(a - b) <= 0) return (p - b).norm();
+    else return DistancePointLine(p, a, b);
 }
