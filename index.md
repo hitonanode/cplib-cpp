@@ -109,7 +109,7 @@ layout: default
 ### graph-tree
 
 * :warning: <a href="library/graph-tree/centroid_decomposition.hpp.html">graph-tree/centroid_decomposition.hpp</a>
-* :heavy_check_mark: <a href="library/graph-tree/eulertour.hpp.html">graph-tree/eulertour.hpp</a>
+* :x: <a href="library/graph-tree/eulertour.hpp.html">graph-tree/eulertour.hpp</a>
 * :heavy_check_mark: <a href="library/graph-tree/heavy_light_decomposition.hpp.html">graph-tree/heavy_light_decomposition.hpp</a>
 * :heavy_check_mark: <a href="library/graph-tree/lowest_common_ancestor.hpp.html">graph-tree/lowest_common_ancestor.hpp</a>
 * :warning: <a href="library/graph-tree/tree_isomorphism.hpp.html">graph-tree/tree_isomorphism.hpp</a>
@@ -196,7 +196,7 @@ layout: default
 
 * :heavy_check_mark: <a href="library/segmenttree/binary_indexed_tree.hpp.html">segmenttree/binary_indexed_tree.hpp</a>
 * :warning: <a href="library/segmenttree/count_less_than.hpp.html">segmenttree/count_less_than.hpp</a>
-* :heavy_check_mark: <a href="library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
+* :x: <a href="library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
 * :heavy_check_mark: <a href="library/segmenttree/range_minimum_query.hpp.html">segmenttree/range_minimum_query.hpp</a>
 * :heavy_check_mark: <a href="library/segmenttree/segment_tree_2d.hpp.html">segmenttree/segment_tree_2d.hpp</a>
 
@@ -266,7 +266,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/graph/test/strongly_connected_components_bitset.test.cpp.html">graph/test/strongly_connected_components_bitset.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph-tree/test/hl_decomposition.test.cpp.html">graph-tree/test/hl_decomposition.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph-tree/test/lca.test.cpp.html">graph-tree/test/lca.test.cpp</a>
-* :heavy_check_mark: <a href="verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
+* :x: <a href="verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_bitset.test.cpp.html">linear_algebra_matrix/test/linalg_bitset.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_ll_det.test.cpp.html">linear_algebra_matrix/test/linalg_ll_det.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp.html">linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp</a>
@@ -282,9 +282,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/random/test/rolling_hash.test.cpp.html">random/test/rolling_hash.test.cpp</a>
 * :heavy_check_mark: <a href="verify/random/test/rolling_hash_w_modint.test.cpp.html">random/test/rolling_hash_w_modint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/binary_indexed_tree.test.cpp.html">segmenttree/test/binary_indexed_tree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
+* :x: <a href="verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/range_minimum_query.test.cpp.html">segmenttree/test/range_minimum_query.test.cpp</a>
-* :heavy_check_mark: <a href="verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
+* :x: <a href="verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/segment_tree_2d.test.cpp.html">segmenttree/test/segment_tree_2d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/segment_tree_2d_pointadd.test.cpp.html">segmenttree/test/segment_tree_2d_pointadd.test.cpp</a>
 * :heavy_check_mark: <a href="verify/sparse_table/test/sparse_table.test.cpp.html">sparse_table/test/sparse_table.test.cpp</a>

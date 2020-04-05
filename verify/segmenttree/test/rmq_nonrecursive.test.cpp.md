@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/test/rmq_nonrecursive.test.cpp
+# :x: segmenttree/test/rmq_nonrecursive.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/rmq_nonrecursive.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-15 20:16:09+09:00
+    - Last commit date: 2020-04-06 01:29:43+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
+* :x: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
 
 
 ## Code
@@ -85,7 +85,7 @@ int main()
 //   - data2ret: [TDATA, TQUERY] -> TRET
 //   - retmerge: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)
 //   - commutability f(e(x, y), q) == g(f(x, q), f(y, q))
-template<typename TDATA, typename TRET, typename TQUERY>
+template <typename TDATA, typename TRET, typename TQUERY>
 struct NonrecursiveSegmentTree
 {
     int N;
@@ -122,6 +122,49 @@ struct NonrecursiveSegmentTree
             l >>= 1, r >>= 1;
         }
         return retmerge(retl, retr);
+    }
+
+    // Calculate smallest r that satisfies g(f(x_l, q), ..., f(x_{r - 1}, q)) >= threshold
+    // Assumption: Monotonicity of g(x_l, ..., x_r) about r (l: fixed)
+    // Complexity: O(log N)
+    int binary_search(int l, const TRET &threshold, TQUERY query = NULL) {
+        stack<int> rs;
+        l += N;
+        int r = N * 2;
+        TRET retl = defaultRET;
+        if (threshold <= retl) return l - N;
+        while (l < r) {
+            if (l & 1) {
+                TRET ret_tmp = retmerge(retl, data2ret(data[l], query));
+                if (threshold <= ret_tmp) {
+                    while (l * 2 < N * 2) {
+                        ret_tmp = retmerge(retl, data2ret(data[l * 2], query));
+                        if (threshold <= ret_tmp) l *= 2;
+                        else retl = ret_tmp, l = l * 2 + 1;
+                    }
+                    return l - N;
+                }
+                l++;
+                retl = ret_tmp;
+            }
+            if (r & 1) rs.push(--r);
+            l >>= 1, r >>= 1;
+        }
+        while (!rs.empty()) {
+            l = rs.top();
+            rs.pop();
+            TRET ret_tmp = retmerge(retl, data2ret(data[l], query));
+            if (threshold <= ret_tmp) {
+                while (l * 2 < N * 2) {
+                    ret_tmp = retmerge(retl, data2ret(data[l * 2], query));
+                    if (threshold <= ret_tmp) l *= 2;
+                    else retl = ret_tmp, l = l * 2 + 1;
+                }
+                return l - N;
+            }
+            retl = ret_tmp;
+        }
+        return N;
     }
 
     template<typename T1, typename T2, typename T3>
@@ -162,7 +205,7 @@ struct RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool>
     };
 };
 
-template<typename T>
+template <typename T>
 struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool>
 {
     using SegTree = NonrecursiveSegmentTree<T, T, bool>;
