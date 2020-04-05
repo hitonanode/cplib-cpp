@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05779a67d348d10b6c575a1ac0d9b972">unionfind</a>
 * <a href="{{ site.github.repository_url }}/blob/master/unionfind/undo_unionfind.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-04-05 20:29:36+09:00
 
 
 
@@ -65,11 +65,13 @@ struct UndoSizeAwareUnionFind
         history.emplace(y, pint(par[y], cou[x]));
         if (x != y) par[y] = x, cou[x] += cou[y];
     }
-    void undo()
-    {
+    void undo() {
         cou[par[history.top().first]] = history.top().second.second;
         par[history.top().first] = history.top().second.first;
         history.pop();
+    }
+    void reset() {
+        while (!history.empty()) undo();
     }
     int count(int x) { return cou[find(x)]; }
     bool same(int x, int y) { return find(x) == find(y); }
@@ -105,11 +107,13 @@ struct UndoSizeAwareUnionFind
         history.emplace(y, pint(par[y], cou[x]));
         if (x != y) par[y] = x, cou[x] += cou[y];
     }
-    void undo()
-    {
+    void undo() {
         cou[par[history.top().first]] = history.top().second.second;
         par[history.top().first] = history.top().second.first;
         history.pop();
+    }
+    void reset() {
+        while (!history.empty()) undo();
     }
     int count(int x) { return cou[find(x)]; }
     bool same(int x, int y) { return find(x) == find(y); }
