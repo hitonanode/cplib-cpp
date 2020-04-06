@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: segmenttree/test/countandsumlessthan.test.cpp
+# :heavy_check_mark: segmenttree/test/countandsumlessthan.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/countandsumlessthan.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-06 01:29:43+09:00
+    - Last commit date: 2020-04-06 09:44:46+09:00
 
 
 * see: <a href="https://yukicoder.me/problems/no/877">https://yukicoder.me/problems/no/877</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
 
 
 ## Code
@@ -78,6 +78,7 @@ int main()
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <stack>
 #include <vector>
 
 // CUT begin
@@ -130,7 +131,7 @@ struct NonrecursiveSegmentTree
     // Assumption: Monotonicity of g(x_l, ..., x_r) about r (l: fixed)
     // Complexity: O(log N)
     int binary_search(int l, const TRET &threshold, TQUERY query = NULL) {
-        stack<int> rs;
+        std::stack<int> rs;
         l += N;
         int r = N * 2;
         TRET retl = defaultRET;

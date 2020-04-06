@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: segmenttree/point-update-range-get_nonrecursive.hpp
+# :heavy_check_mark: segmenttree/point-update-range-get_nonrecursive.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#4d78bd1b354012e24586b247dc164462">segmenttree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/point-update-range-get_nonrecursive.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-06 01:29:43+09:00
+    - Last commit date: 2020-04-06 09:44:46+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
-* :x: <a href="../../verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
-* :x: <a href="../../verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
 
 
 ## Code
@@ -52,6 +52,7 @@ layout: default
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <stack>
 #include <vector>
 
 // CUT begin
@@ -104,7 +105,7 @@ struct NonrecursiveSegmentTree
     // Assumption: Monotonicity of g(x_l, ..., x_r) about r (l: fixed)
     // Complexity: O(log N)
     int binary_search(int l, const TRET &threshold, TQUERY query = NULL) {
-        stack<int> rs;
+        std::stack<int> rs;
         l += N;
         int r = N * 2;
         TRET retl = defaultRET;
@@ -237,6 +238,7 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <stack>
 #include <vector>
 
 // CUT begin
@@ -289,7 +291,7 @@ struct NonrecursiveSegmentTree
     // Assumption: Monotonicity of g(x_l, ..., x_r) about r (l: fixed)
     // Complexity: O(log N)
     int binary_search(int l, const TRET &threshold, TQUERY query = NULL) {
-        stack<int> rs;
+        std::stack<int> rs;
         l += N;
         int r = N * 2;
         TRET retl = defaultRET;

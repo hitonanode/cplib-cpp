@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: graph-tree/test/vertex-add-subtree-sum.test.cpp
+# :heavy_check_mark: graph-tree/test/vertex-add-subtree-sum.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#728e08a0b5b0c7a31e7e3fe276503f5d">graph-tree/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph-tree/test/vertex-add-subtree-sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-06 01:29:43+09:00
+    - Last commit date: 2020-04-06 09:44:46+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/vertex_add_subtree_sum">https://judge.yosupo.jp/problem/vertex_add_subtree_sum</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/graph-tree/eulertour.hpp.html">graph-tree/eulertour.hpp</a>
-* :x: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph-tree/eulertour.hpp.html">graph-tree/eulertour.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
 
 
 ## Code
@@ -132,7 +132,8 @@ struct PreorderEulerTour
 #include <algorithm>
 #line 4 "segmenttree/point-update-range-get_nonrecursive.hpp"
 #include <iostream>
-#line 6 "segmenttree/point-update-range-get_nonrecursive.hpp"
+#include <stack>
+#line 7 "segmenttree/point-update-range-get_nonrecursive.hpp"
 
 // CUT begin
 // Nonrecursive Segment Tree (point-update, range-get)
@@ -184,7 +185,7 @@ struct NonrecursiveSegmentTree
     // Assumption: Monotonicity of g(x_l, ..., x_r) about r (l: fixed)
     // Complexity: O(log N)
     int binary_search(int l, const TRET &threshold, TQUERY query = NULL) {
-        stack<int> rs;
+        std::stack<int> rs;
         l += N;
         int r = N * 2;
         TRET retl = defaultRET;
