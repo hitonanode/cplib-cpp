@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <stack>
 #include <vector>
 
 // CUT begin
@@ -54,7 +55,7 @@ struct NonrecursiveSegmentTree
     // Assumption: Monotonicity of g(x_l, ..., x_r) about r (l: fixed)
     // Complexity: O(log N)
     int binary_search(int l, const TRET &threshold, TQUERY query = NULL) {
-        stack<int> rs;
+        std::stack<int> rs;
         l += N;
         int r = N * 2;
         TRET retl = defaultRET;
