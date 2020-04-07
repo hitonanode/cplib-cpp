@@ -123,6 +123,7 @@ layout: default
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_longlong.hpp.html">linear_algebra_matrix/linalg_longlong.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/system_of_linear_equations.hpp.html">linear_algebra_matrix/system_of_linear_equations.hpp</a>
+* :warning: <a href="library/linear_algebra_matrix/transpose.hpp.html">linear_algebra_matrix/transpose.hpp</a>
 
 
 <div id="ca17c0f58aa8093333be60a2430b936d"></div>
@@ -218,6 +219,7 @@ layout: default
 * :heavy_check_mark: <a href="library/string/manacher.hpp.html">string/manacher.hpp</a>
 * :heavy_check_mark: <a href="library/string/mp_algorithm.hpp.html">string/mp_algorithm.hpp</a>
 * :heavy_check_mark: <a href="library/string/suffix_array.hpp.html">string/suffix_array.hpp</a>
+* :warning: <a href="library/string/trie_light.hpp.html">string/trie_light.hpp</a>
 * :heavy_check_mark: <a href="library/string/z_algorithm.hpp.html">string/z_algorithm.hpp</a>
 
 
