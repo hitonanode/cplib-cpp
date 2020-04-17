@@ -258,6 +258,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/2sat_solver.test.cpp.html">graph/test/2sat_solver.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/articulation_points.test.cpp.html">graph/test/articulation_points.test.cpp</a>
+* :heavy_check_mark: <a href="verify/graph/test/assignment_problem.test.cpp.html">graph/test/assignment_problem.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/bellman_ford.test.cpp.html">graph/test/bellman_ford.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/bipartite-matching.test.cpp.html">graph/test/bipartite-matching.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/bridge.test.cpp.html">graph/test/bridge.test.cpp</a>

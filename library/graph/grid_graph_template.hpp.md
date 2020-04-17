@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/grid_graph_template.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+    - Last commit date: 2020-04-18 04:11:17+09:00
 
 
 
@@ -53,8 +53,8 @@ struct GridGraph
 {
 
     int H, W;
-    std::array<int, 4> dx = {1, -1, 0, 0};
-    std::array<int, 4> dy = {0, 0, 1, -1};
+    const std::vector<int> dx{1, -1, 0, 0};
+    const std::vector<int> dy{0, 0, 1, -1};
 
     GridGraph() = default;
     GridGraph(int h, int w) : H(h), W(w) {}
@@ -117,8 +117,8 @@ struct GridGraph
 {
 
     int H, W;
-    std::array<int, 4> dx = {1, -1, 0, 0};
-    std::array<int, 4> dy = {0, 0, 1, -1};
+    const std::vector<int> dx{1, -1, 0, 0};
+    const std::vector<int> dy{0, 0, 1, -1};
 
     GridGraph() = default;
     GridGraph(int h, int w) : H(h), W(w) {}
