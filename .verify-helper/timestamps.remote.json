@@ -15,6 +15,7 @@
 "graph-tree/test/vertex-add-subtree-sum.test.cpp": "2020-04-06 09:44:46 +0900",
 "graph/test/2sat_solver.test.cpp": "2020-03-07 22:40:57 +0900",
 "graph/test/articulation_points.test.cpp": "2020-03-07 22:40:57 +0900",
+"graph/test/assignment_problem.test.cpp": "2020-04-18 04:11:17 +0900",
 "graph/test/bellman_ford.test.cpp": "2020-03-15 20:16:09 +0900",
 "graph/test/bipartite-matching.test.cpp": "2020-03-07 22:40:57 +0900",
 "graph/test/bridge.test.cpp": "2020-03-07 22:40:57 +0900",
