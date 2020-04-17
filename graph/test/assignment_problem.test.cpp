@@ -45,11 +45,11 @@ int main()
     {
         for (auto &x : vec)
         {
-            cin >> x;
+            std::cin >> x;
         }
     }
     auto ret = AssignmentProblem(A);
-    cout << ret.first << '\n';
-    for (auto x : ret.second) cout << x << ' ';
-    cout << '\n';
+    std::cout << ret.first << '\n';
+    for (auto x : ret.second) std::cout << x << ' ';
+    std::cout << '\n';
 }
