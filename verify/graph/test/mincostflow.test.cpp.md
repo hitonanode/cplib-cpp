@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#cb3e5c672d961db00b76e36ddf5c068a">graph/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/mincostflow.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+    - Last commit date: 2020-04-18 04:20:40+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B</a>
@@ -50,23 +50,24 @@ layout: default
 #include <iostream>
 #include "graph/flow_mincost.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
-using namespace std;
+
 
 int main()
 {
     int V, E, F;
-    cin >> V >> E >> F;
+    std::cin >> V >> E >> F;
     MinCostFlow mcf(V);
     for (int i = 0; i < E; i++)
     {
         int u, v, c, d;
-        cin >> u >> v >> c >> d;
+        std::cin >> u >> v >> c >> d;
         mcf.add_edge(u, v, c, d);
     }
 
     auto ret = mcf.flush(0, V - 1, F);
-    cout << (ret.second.first ? ret.first : -1) << endl;
+    std::cout << (ret.second.first ? ret.first : -1) << '\n';
 }
+
 ```
 {% endraw %}
 
@@ -79,7 +80,6 @@ int main()
 #include <limits>
 #include <queue>
 #include <vector>
-using namespace std;
 
 // CUT begin
 /*
@@ -95,16 +95,16 @@ struct MinCostFlow
         int to, rev;
         TFLOW cap;
         TCOST cost;
-        friend ostream &operator<<(ostream &os, const edge &e) {
-            os << "(" << e.to << "," << e.rev << "," << e.cap << "," << e.cost << ")";
+        friend std::ostream &operator<<(std::ostream &os, const edge &e) {
+            os << '(' << e.to << ',' << e.rev << ',' << e.cap << ',' << e.cost << ')';
             return os;
         }
     };
     int V;
-    vector<vector<edge>> G;
-    vector<TCOST> dist;
-    vector<int> prevv, preve;
-    vector<TCOST> h;  // h[V]: potential
+    std::vector<std::vector<edge>> G;
+    std::vector<TCOST> dist;
+    std::vector<int> prevv, preve;
+    std::vector<TCOST> h;  // h[V]: potential
 
     bool _calc_distance_bellman_ford(int s) {  // O(VE), able to detect negative cycle
         dist.assign(V, INF_COST);
@@ -132,8 +132,8 @@ struct MinCostFlow
     bool _calc_distance_dijkstra(int s) {  // O(ElogV)
         dist.assign(V, INF_COST);
         dist[s] = 0;
-        using P = pair<TCOST, int>;
-        priority_queue<P, vector<P>, greater<P>> q;
+        using P = std::pair<TCOST, int>;
+        std::priority_queue<P, std::vector<P>, std::greater<P>> q;
         q.emplace(0, s);
         while (!q.empty()) {
             P p = q.top();
@@ -159,7 +159,7 @@ struct MinCostFlow
         G[to].emplace_back(edge{from, (int)G[from].size() - 1, (TFLOW)0, -cost});
     }
 
-    pair<TCOST, pair<bool, TFLOW>> flush(int s, int t, TFLOW f) {
+    std::pair<TCOST, std::pair<bool, TFLOW>> flush(int s, int t, TFLOW f) {
         /*
         Flush amount of `f` from `s` to `t` using the Dijkstra's algorithm
         works for graph with no negative cycles (negative cost edges are allowed)
@@ -172,11 +172,11 @@ struct MinCostFlow
         preve.assign(V, -1);
         while (f > 0) {
             _calc_distance_dijkstra(s);
-            if (dist[t] == INF_COST) return make_pair(ret, make_pair(false, f));
+            if (dist[t] == INF_COST) return std::make_pair(ret, std::make_pair(false, f));
             for (int v = 0; v < V; v++) h[v] += dist[v];
             TFLOW d = f;
             for (int v = t; v != s; v = prevv[v]) {
-                d = min(d, G[prevv[v]][preve[v]].cap);
+                d = std::min(d, G[prevv[v]][preve[v]].cap);
             }
             f -= d;
             ret += d * h[t];
@@ -186,10 +186,10 @@ struct MinCostFlow
                 G[v][e.rev].cap += d;
             }
         }
-        return make_pair(ret, make_pair(true, 0));
+        return std::make_pair(ret, std::make_pair(true, 0));
     }
 
-    friend ostream &operator<<(ostream &os, const MinCostFlow &mcf) {
+    friend std::ostream &operator<<(std::ostream &os, const MinCostFlow &mcf) {
         os << "[MinCostFlow]V=" << mcf.V << ":";
         for (int i = 0; i < (int)mcf.G.size(); i++) for (auto &e : mcf.G[i]) {
             os << "\n" << i << "->" << e.to << ": cap=" << e.cap << ", cost=" << e.cost;
@@ -199,22 +199,22 @@ struct MinCostFlow
 };
 #line 3 "graph/test/mincostflow.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
-using namespace std;
+
 
 int main()
 {
     int V, E, F;
-    cin >> V >> E >> F;
+    std::cin >> V >> E >> F;
     MinCostFlow mcf(V);
     for (int i = 0; i < E; i++)
     {
         int u, v, c, d;
-        cin >> u >> v >> c >> d;
+        std::cin >> u >> v >> c >> d;
         mcf.add_edge(u, v, c, d);
     }
 
     auto ret = mcf.flush(0, V - 1, F);
-    cout << (ret.second.first ? ret.first : -1) << endl;
+    std::cout << (ret.second.first ? ret.first : -1) << '\n';
 }
 
 ```

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#20f2c5d841ec31673050aaedd8b17f50">linear_algebra_matrix</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/system_of_linear_equations.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-04-18 04:20:40+09:00
 
 
 
@@ -126,7 +126,7 @@ struct matrix
         for (auto &raw : d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));
     }
 
-    static matrix Identity(int N) { 
+    static matrix Identity(int N) {
         matrix ret(N, N);
         for (int i = 0; i < N; i++) ret.at(i, i) = 1;
         return ret;
@@ -143,7 +143,7 @@ struct matrix
                     ret.at(i, j) += this->get(i, k) * r.get(k, j);
                 }
             }
-        } 
+        }
         return ret;
     }
     matrix &operator+=(const matrix &r) { return *this = *this + r; }
@@ -205,8 +205,35 @@ struct matrix
         for (int i = 0; i < H; i++) ret *= get(i, i);
         return ret;
     }
+    friend std::vector<T> operator*(const matrix &m, const std::vector<T> &v) {
+        assert(m.W == int(v.size()));
+        std::vector<T> ret(m.H);
+        for (int i = 0; i < m.H; i++) {
+            for (int j = 0; j < m.W; j++) {
+                ret[i] += m.get(i, j) * v[j];
+            }
+        }
+        return ret;
+    }
+    friend std::vector<T> operator*(const std::vector<T> &v, const matrix &m) {
+        assert(int(v.size()) == m.H);
+        std::vector<T> ret(m.W);
+        for (int i = 0; i < m.H; i++) {
+            for (int j = 0; j < m.W; j++) {
+                ret[j] += v[i] * m.get(i, j);
+            }
+        }
+        return ret;
+    }
     friend std::ostream &operator<<(std::ostream &os, const matrix &x) {
         os << "[(" << x.H << " * " << x.W << " matrix)";
+        os << "\n[column sums: ";
+        for (int j = 0; j < x.W; j++) {
+            T s = 0;
+            for (int i = 0; i < x.H; i++) s += x.get(i, j);
+            os << s << ",";
+        }
+        os << "]";
         for (int i = 0; i < x.H; i++) {
             os << "\n[";
             for (int j = 0; j < x.W; j++) os << x.get(i, j) << ",";
