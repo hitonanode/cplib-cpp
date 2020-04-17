@@ -10,8 +10,8 @@ struct GridGraph
 {
 
     int H, W;
-    std::array<int, 4> dx = {1, -1, 0, 0};
-    std::array<int, 4> dy = {0, 0, 1, -1};
+    const std::vector<int> dx{1, -1, 0, 0};
+    const std::vector<int> dy{0, 0, 1, -1};
 
     GridGraph() = default;
     GridGraph(int h, int w) : H(h), W(w) {}
