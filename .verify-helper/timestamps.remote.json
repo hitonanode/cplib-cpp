@@ -40,6 +40,7 @@
 "random/test/rolling_hash_w_modint.test.cpp": "2020-03-07 22:54:47 +0900",
 "segmenttree/test/binary_indexed_tree.test.cpp": "2020-03-07 22:54:47 +0900",
 "segmenttree/test/countandsumlessthan.test.cpp": "2020-04-06 09:44:46 +0900",
+"segmenttree/test/range_affine_range_sum.test.cpp": "2020-04-18 03:35:35 +0900",
 "segmenttree/test/range_minimum_query.test.cpp": "2020-03-07 22:54:47 +0900",
 "segmenttree/test/rmq_nonrecursive.test.cpp": "2020-04-06 09:44:46 +0900",
 "segmenttree/test/segment_tree_2d.test.cpp": "2020-03-07 22:54:47 +0900",
