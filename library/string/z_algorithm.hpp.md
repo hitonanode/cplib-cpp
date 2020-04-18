@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/z_algorithm.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-04-18 21:15:29+09:00
 
 
 
@@ -49,14 +49,13 @@ layout: default
 #pragma once
 #include <string>
 #include <vector>
-using namespace std;
 
 // CUT begin
 // Z algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)
 // Complexity: O(N)
 // <http://snuke.hatenablog.com/entry/2014/12/03/214243>
-vector<int> z_algorithm(const string &s) {
-    vector<int> ans(s.size());
+std::vector<int> z_algorithm(const std::string &s) {
+    std::vector<int> ans(s.size());
     ans[0] = s.size();
     int i = 1, j = 0;
     while (i < (int)s.size()) {
@@ -83,14 +82,13 @@ vector<int> z_algorithm(const string &s) {
 #line 2 "string/z_algorithm.hpp"
 #include <string>
 #include <vector>
-using namespace std;
 
 // CUT begin
 // Z algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)
 // Complexity: O(N)
 // <http://snuke.hatenablog.com/entry/2014/12/03/214243>
-vector<int> z_algorithm(const string &s) {
-    vector<int> ans(s.size());
+std::vector<int> z_algorithm(const std::string &s) {
+    std::vector<int> ans(s.size());
     ans[0] = s.size();
     int i = 1, j = 0;
     while (i < (int)s.size()) {

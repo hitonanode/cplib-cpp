@@ -31,10 +31,10 @@ layout: default
 
 * category: <a href="../../../index.html#1a7427d145086499c399a0f95224a581">string/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/test/z_algorithm.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-04-18 21:15:29+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
+* see: <a href="https://judge.yosupo.jp/problem/zalgorithm">https://judge.yosupo.jp/problem/zalgorithm</a>
 
 
 ## Depends on
@@ -47,43 +47,38 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#include "string/z_algorithm.hpp"
+#include <cstdio>
 #include <iostream>
 #include <string>
-#include <vector>
-#include "string/z_algorithm.hpp"
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
-using namespace std;
+#define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 
 int main()
 {
-    string T, P;
-    cin >> T >> P;
-    vector<int> z = z_algorithm(P + "_" + T);
-    int n = P.length();
-    for (int i = n + 1; i < (int)z.size(); i++)
+    std::string S;
+    std::cin >> S;
+    for (auto x : z_algorithm(S))
     {
-        if (z[i] == n) printf("%d\n", i - n - 1);
+        printf("%d ", x);
     }
 }
+
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "string/test/z_algorithm.test.cpp"
-#include <iostream>
+#line 2 "string/z_algorithm.hpp"
 #include <string>
 #include <vector>
-#line 4 "string/z_algorithm.hpp"
-using namespace std;
 
 // CUT begin
 // Z algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)
 // Complexity: O(N)
 // <http://snuke.hatenablog.com/entry/2014/12/03/214243>
-vector<int> z_algorithm(const string &s) {
-    vector<int> ans(s.size());
+std::vector<int> z_algorithm(const std::string &s) {
+    std::vector<int> ans(s.size());
     ans[0] = s.size();
     int i = 1, j = 0;
     while (i < (int)s.size()) {
@@ -100,19 +95,19 @@ vector<int> z_algorithm(const string &s) {
     }
     return ans;
 }
+#line 2 "string/test/z_algorithm.test.cpp"
+#include <cstdio>
+#include <iostream>
 #line 5 "string/test/z_algorithm.test.cpp"
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
-using namespace std;
+#define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 
 int main()
 {
-    string T, P;
-    cin >> T >> P;
-    vector<int> z = z_algorithm(P + "_" + T);
-    int n = P.length();
-    for (int i = n + 1; i < (int)z.size(); i++)
+    std::string S;
+    std::cin >> S;
+    for (auto x : z_algorithm(S))
     {
-        if (z[i] == n) printf("%d\n", i - n - 1);
+        printf("%d ", x);
     }
 }
 
