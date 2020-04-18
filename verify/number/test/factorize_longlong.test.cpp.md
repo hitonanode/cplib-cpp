@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#f11c31ed854a10cb04d51564b38e6849">number/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/number/test/factorize_longlong.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-19 04:33:31+09:00
+    - Last commit date: 2020-04-19 04:44:27+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/factorize">https://judge.yosupo.jp/problem/factorize</a>
@@ -82,16 +82,16 @@ namespace SPRP
 {
 // <http://miller-rabin.appspot.com/>
 const std::vector<std::vector<__int128>> bases{
-    {126401071349994536},                              // <= 291831
-    {336781006125, 9639812373923155},                  // <= 1050535501 (1e9)
-    {2, 2570940, 211991001, 3749873356},               // <= 47636622961201 (4e13)
+    {126401071349994536},                              // < 291831
+    {336781006125, 9639812373923155},                  // < 1050535501 (1e9)
+    {2, 2570940, 211991001, 3749873356},               // < 47636622961201 (4e13)
     {2, 325, 9375, 28178, 450775, 9780504, 1795265022} // <= 1e64
 };
 inline int get_id(long long n)
 {
-    if (n <= 291831) return 0;
-    else if (n <= 1050535501) return 1;
-    else if (n <= 47636622961201) return 2;
+    if (n < 291831) return 0;
+    else if (n < 1050535501) return 1;
+    else if (n < 47636622961201) return 2;
     else return 3;
 }
 } // namespace SPRP
