@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/test/bipartite-matching.test.cpp
+# :heavy_check_mark: graph/test/bipartite_matching(slow).test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#cb3e5c672d961db00b76e36ddf5c068a">graph/test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/test/bipartite-matching.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/graph/test/bipartite_matching(slow).test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-18 18:32:38+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/graph/bipartite-matching.hpp.html">graph/bipartite-matching.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/bipartite_matching(slow).hpp.html">graph/bipartite_matching(slow).hpp</a>
 
 
 ## Code
@@ -48,21 +48,24 @@ layout: default
 {% raw %}
 ```cpp
 #include <iostream>
-#include "graph/bipartite-matching.hpp"
+#include "graph/bipartite_matching(slow).hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A"
 
 int main()
 {
+    std::cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+
     int X, Y, E;
-    cin >> X >> Y >> E;
+    std::cin >> X >> Y >> E;
     BipartiteMatching graph(X + Y);
-    for (int i = 0; i < E; i++)
+    while (E--)
     {
         int s, t;
-        cin >> s >> t;
+        std::cin >> s >> t;
         graph.add_edge(s, X + t);
     }
-    cout << graph.solve() << endl;
+    std::cout << graph.solve() << '\n';
 }
 
 ```
@@ -71,22 +74,21 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "graph/test/bipartite-matching.test.cpp"
+#line 1 "graph/test/bipartite_matching(slow).test.cpp"
 #include <iostream>
-#line 3 "graph/bipartite-matching.hpp"
+#line 3 "graph/bipartite_matching(slow).hpp"
 #include <vector>
-using namespace std;
 
 // CUT begin
-// 二部グラフの最大マッチング bipartite-matching of undirected bipartite graph
+// Bipartite matching of undirected bipartite graph
 // <https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>
 // Comprexity: O(VE)
 struct BipartiteMatching
 {
-    int V;  // # of vertices
-    vector<vector<int>> edges;  // Adjacency list
-    vector<int> match;  // match[i] = (Partner of i'th node) or -1 (No parter)
-    vector<int> used;
+    int V;                               // # of vertices
+    std::vector<std::vector<int>> edges; // Adjacency list
+    std::vector<int> match;              // match[i] = (Partner of i'th node) or -1 (No parter)
+    std::vector<int> used;
     int timestamp;
     BipartiteMatching(int V = 0) : V(V), edges(V), match(V, -1), used(V, 0), timestamp(0) {}
 
@@ -122,7 +124,7 @@ struct BipartiteMatching
         return ret;
     }
 
-    friend ostream &operator<<(ostream &os, const BipartiteMatching &bm)
+    friend std::ostream &operator<<(std::ostream &os, const BipartiteMatching &bm)
     {
         os << "{V=" << bm.V << ":";
         for (int i = 0; i < bm.V; i++) if (i < bm.match[i])
@@ -133,21 +135,24 @@ struct BipartiteMatching
         return os;
     }
 };
-#line 3 "graph/test/bipartite-matching.test.cpp"
+#line 3 "graph/test/bipartite_matching(slow).test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A"
 
 int main()
 {
+    std::cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+
     int X, Y, E;
-    cin >> X >> Y >> E;
+    std::cin >> X >> Y >> E;
     BipartiteMatching graph(X + Y);
-    for (int i = 0; i < E; i++)
+    while (E--)
     {
         int s, t;
-        cin >> s >> t;
+        std::cin >> s >> t;
         graph.add_edge(s, X + t);
     }
-    cout << graph.solve() << endl;
+    std::cout << graph.solve() << '\n';
 }
 
 ```

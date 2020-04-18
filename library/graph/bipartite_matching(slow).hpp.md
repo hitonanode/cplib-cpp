@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/bipartite-matching.hpp
+# :heavy_check_mark: graph/bipartite_matching(slow).hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/bipartite-matching.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/graph/bipartite_matching(slow).hpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-18 18:32:38+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/graph/test/bipartite-matching.test.cpp.html">graph/test/bipartite-matching.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/graph/test/bipartite_matching(slow).test.cpp.html">graph/test/bipartite_matching(slow).test.cpp</a>
 
 
 ## Code
@@ -49,18 +49,17 @@ layout: default
 #pragma once
 #include <iostream>
 #include <vector>
-using namespace std;
 
 // CUT begin
-// 二部グラフの最大マッチング bipartite-matching of undirected bipartite graph
+// Bipartite matching of undirected bipartite graph
 // <https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>
 // Comprexity: O(VE)
 struct BipartiteMatching
 {
-    int V;  // # of vertices
-    vector<vector<int>> edges;  // Adjacency list
-    vector<int> match;  // match[i] = (Partner of i'th node) or -1 (No parter)
-    vector<int> used;
+    int V;                               // # of vertices
+    std::vector<std::vector<int>> edges; // Adjacency list
+    std::vector<int> match;              // match[i] = (Partner of i'th node) or -1 (No parter)
+    std::vector<int> used;
     int timestamp;
     BipartiteMatching(int V = 0) : V(V), edges(V), match(V, -1), used(V, 0), timestamp(0) {}
 
@@ -96,7 +95,7 @@ struct BipartiteMatching
         return ret;
     }
 
-    friend ostream &operator<<(ostream &os, const BipartiteMatching &bm)
+    friend std::ostream &operator<<(std::ostream &os, const BipartiteMatching &bm)
     {
         os << "{V=" << bm.V << ":";
         for (int i = 0; i < bm.V; i++) if (i < bm.match[i])
@@ -114,21 +113,20 @@ struct BipartiteMatching
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "graph/bipartite-matching.hpp"
+#line 2 "graph/bipartite_matching(slow).hpp"
 #include <iostream>
 #include <vector>
-using namespace std;
 
 // CUT begin
-// 二部グラフの最大マッチング bipartite-matching of undirected bipartite graph
+// Bipartite matching of undirected bipartite graph
 // <https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>
 // Comprexity: O(VE)
 struct BipartiteMatching
 {
-    int V;  // # of vertices
-    vector<vector<int>> edges;  // Adjacency list
-    vector<int> match;  // match[i] = (Partner of i'th node) or -1 (No parter)
-    vector<int> used;
+    int V;                               // # of vertices
+    std::vector<std::vector<int>> edges; // Adjacency list
+    std::vector<int> match;              // match[i] = (Partner of i'th node) or -1 (No parter)
+    std::vector<int> used;
     int timestamp;
     BipartiteMatching(int V = 0) : V(V), edges(V), match(V, -1), used(V, 0), timestamp(0) {}
 
@@ -164,7 +162,7 @@ struct BipartiteMatching
         return ret;
     }
 
-    friend ostream &operator<<(ostream &os, const BipartiteMatching &bm)
+    friend std::ostream &operator<<(std::ostream &os, const BipartiteMatching &bm)
     {
         os << "{V=" << bm.V << ":";
         for (int i = 0; i < bm.V; i++) if (i < bm.match[i])

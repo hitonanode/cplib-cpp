@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#bfb6916ed81a21dd8b41fa4e5aa1a9eb">geometry/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/geometry/test/sort_by_argument.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-18 17:19:39+09:00
+    - Last commit date: 2020-04-18 18:32:38+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sort_points_by_argument">https://judge.yosupo.jp/problem/sort_points_by_argument</a>
@@ -83,6 +83,7 @@ int main()
 #line 2 "geometry/sort_by_argument.hpp"
 #include <cmath>
 
+// CUT begin
 // Point on grid, sortable by its argument
 struct P
 {

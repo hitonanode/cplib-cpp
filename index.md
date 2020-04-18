@@ -92,7 +92,8 @@ layout: default
 ### graph
 
 * :heavy_check_mark: <a href="library/graph/bellman_ford.hpp.html">graph/bellman_ford.hpp</a>
-* :heavy_check_mark: <a href="library/graph/bipartite-matching.hpp.html">graph/bipartite-matching.hpp</a>
+* :heavy_check_mark: <a href="library/graph/bipartite_matching(slow).hpp.html">graph/bipartite_matching(slow).hpp</a>
+* :heavy_check_mark: <a href="library/graph/bipartite_matching.hpp.html">graph/bipartite_matching.hpp</a>
 * :heavy_check_mark: <a href="library/graph/dijkstra.hpp.html">graph/dijkstra.hpp</a>
 * :heavy_check_mark: <a href="library/graph/flow_mincost.hpp.html">graph/flow_mincost.hpp</a>
 * :warning: <a href="library/graph/grid_graph_template.hpp.html">graph/grid_graph_template.hpp</a>
@@ -262,7 +263,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/graph/test/articulation_points.test.cpp.html">graph/test/articulation_points.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/assignment_problem.test.cpp.html">graph/test/assignment_problem.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/bellman_ford.test.cpp.html">graph/test/bellman_ford.test.cpp</a>
-* :heavy_check_mark: <a href="verify/graph/test/bipartite-matching.test.cpp.html">graph/test/bipartite-matching.test.cpp</a>
+* :heavy_check_mark: <a href="verify/graph/test/bipartite_matching(slow).test.cpp.html">graph/test/bipartite_matching(slow).test.cpp</a>
+* :heavy_check_mark: <a href="verify/graph/test/bipartite_matching.test.cpp.html">graph/test/bipartite_matching.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/bridge.test.cpp.html">graph/test/bridge.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/dijkstra.test.cpp.html">graph/test/dijkstra.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/maxflow.test.cpp.html">graph/test/maxflow.test.cpp</a>
