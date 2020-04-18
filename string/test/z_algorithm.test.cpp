@@ -1,18 +1,15 @@
+#include "string/z_algorithm.hpp"
+#include <cstdio>
 #include <iostream>
 #include <string>
-#include <vector>
-#include "string/z_algorithm.hpp"
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
-using namespace std;
+#define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 
 int main()
 {
-    string T, P;
-    cin >> T >> P;
-    vector<int> z = z_algorithm(P + "_" + T);
-    int n = P.length();
-    for (int i = n + 1; i < (int)z.size(); i++)
+    std::string S;
+    std::cin >> S;
+    for (auto x : z_algorithm(S))
     {
-        if (z[i] == n) printf("%d\n", i - n - 1);
+        printf("%d ", x);
     }
 }
