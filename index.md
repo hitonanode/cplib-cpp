@@ -161,6 +161,7 @@ layout: default
 * :warning: <a href="library/number/cyclotomic_polynomials.hpp.html">number/cyclotomic_polynomials.hpp</a>
 * :warning: <a href="library/number/enumerate_partitions.hpp.html">number/enumerate_partitions.hpp</a>
 * :heavy_check_mark: <a href="library/number/eratosthenes.hpp.html">number/eratosthenes.hpp</a>
+* :heavy_check_mark: <a href="library/number/factorize.hpp.html">number/factorize.hpp</a>
 
 
 <div id="d8e67fcaf05802735e10c02b3e2db75e"></div>
@@ -281,6 +282,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
 * :heavy_check_mark: <a href="verify/modulus/test/discrete_logarithm.test.cpp.html">modulus/test/discrete_logarithm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/modulus/test/sqrt_modint_runtime.test.cpp.html">modulus/test/sqrt_modint_runtime.test.cpp</a>
+* :heavy_check_mark: <a href="verify/number/test/factorize_longlong.test.cpp.html">number/test/factorize_longlong.test.cpp</a>
 * :heavy_check_mark: <a href="verify/number/test/gen_primes.test.cpp.html">number/test/gen_primes.test.cpp</a>
 * :heavy_check_mark: <a href="verify/number/test/prime_factorization.test.cpp.html">number/test/prime_factorization.test.cpp</a>
 * :heavy_check_mark: <a href="verify/other_data_structures/test/persistent_queue.test.cpp.html">other_data_structures/test/persistent_queue.test.cpp</a>
