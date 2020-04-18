@@ -84,6 +84,7 @@ layout: default
 ### geometry
 
 * :warning: <a href="library/geometry/geometry2d.hpp.html">geometry/geometry2d.hpp</a>
+* :heavy_check_mark: <a href="library/geometry/sort_by_argument.hpp.html">geometry/sort_by_argument.hpp</a>
 
 
 <div id="f8b0b924ebd7046dbfa85a856e4682c8"></div>
@@ -256,6 +257,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/formal_power_series/test/fps_log.test.cpp.html">formal_power_series/test/fps_log.test.cpp</a>
 * :heavy_check_mark: <a href="verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
+* :heavy_check_mark: <a href="verify/geometry/test/sort_by_argument.test.cpp.html">geometry/test/sort_by_argument.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/2sat_solver.test.cpp.html">graph/test/2sat_solver.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/articulation_points.test.cpp.html">graph/test/articulation_points.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/assignment_problem.test.cpp.html">graph/test/assignment_problem.test.cpp</a>
