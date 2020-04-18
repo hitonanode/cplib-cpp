@@ -56,6 +56,7 @@ layout: default
 * :warning: <a href="library/convolution/fft_arbitrary_mod.hpp.html">convolution/fft_arbitrary_mod.hpp</a>
 * :warning: <a href="library/convolution/fft_double.hpp.html">convolution/fft_double.hpp</a>
 * :heavy_check_mark: <a href="library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :heavy_check_mark: <a href="library/convolution/subset_convolution.hpp.html">convolution/subset_convolution.hpp</a>
 
 
 <div id="0d028ccab5dd03f57c1809f14fa2b5bc"></div>
@@ -63,13 +64,6 @@ layout: default
 ### convolution/integer_convolution
 
 * :warning: <a href="library/convolution/integer_convolution/integer_convolution.hpp.html">convolution/integer_convolution/integer_convolution.hpp</a>
-
-
-<div id="fdfbcfdf78ce9afce8338cf04c6824f1"></div>
-
-### convolution/set_convolution
-
-* :warning: <a href="library/convolution/set_convolution/zeta_moebius.cpp.html">convolution/set_convolution/zeta_moebius.cpp</a>
 
 
 <div id="f0e336561d1c18f84cd3e0ce52a956cf"></div>
@@ -250,6 +244,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/convex_hull_trick/test/convex_hull_trick.test.cpp.html">convex_hull_trick/test/convex_hull_trick.test.cpp</a>
 * :heavy_check_mark: <a href="verify/convolution/test/ntt.test.cpp.html">convolution/test/ntt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/convolution/test/ntt_arbitrary_mod.test.cpp.html">convolution/test/ntt_arbitrary_mod.test.cpp</a>
+* :heavy_check_mark: <a href="verify/convolution/test/subset_convolution.test.cpp.html">convolution/test/subset_convolution.test.cpp</a>
 * :heavy_check_mark: <a href="verify/formal_power_series/test/bernoulli_number.test.cpp.html">formal_power_series/test/bernoulli_number.test.cpp</a>
 * :heavy_check_mark: <a href="verify/formal_power_series/test/division_number.test.cpp.html">formal_power_series/test/division_number.test.cpp</a>
 * :heavy_check_mark: <a href="verify/formal_power_series/test/fps_exp.test.cpp.html">formal_power_series/test/fps_exp.test.cpp</a>

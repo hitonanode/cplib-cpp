@@ -47,6 +47,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../verify/convolution/test/ntt.test.cpp.html">convolution/test/ntt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/convolution/test/ntt_arbitrary_mod.test.cpp.html">convolution/test/ntt_arbitrary_mod.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/convolution/test/subset_convolution.test.cpp.html">convolution/test/subset_convolution.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/bernoulli_number.test.cpp.html">formal_power_series/test/bernoulli_number.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/division_number.test.cpp.html">formal_power_series/test/division_number.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_exp.test.cpp.html">formal_power_series/test/fps_exp.test.cpp</a>
