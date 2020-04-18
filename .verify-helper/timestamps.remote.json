@@ -11,6 +11,7 @@
 "formal_power_series/test/fps_log.test.cpp": "2020-03-07 22:54:47 +0900",
 "formal_power_series/test/fps_sqrt.test.cpp": "2020-03-07 22:54:47 +0900",
 "formal_power_series/test/fps_sqrt_modintruntime.test.cpp": "2020-03-07 22:54:47 +0900",
+"geometry/test/convex_hull.test.cpp": "2020-04-18 21:44:08 +0900",
 "geometry/test/sort_by_argument.test.cpp": "2020-04-18 18:32:38 +0900",
 "graph-tree/test/hl_decomposition.test.cpp": "2020-03-07 22:54:47 +0900",
 "graph-tree/test/lca.test.cpp": "2020-03-07 22:54:47 +0900",
