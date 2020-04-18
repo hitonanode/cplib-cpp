@@ -40,6 +40,7 @@
 "modulus/test/sqrt_modint_runtime.test.cpp": "2020-03-07 22:54:47 +0900",
 "number/test/gen_primes.test.cpp": "2020-04-04 22:42:12 +0900",
 "number/test/prime_factorization.test.cpp": "2020-04-04 22:42:12 +0900",
+"other_data_structures/test/persistent_queue.test.cpp": "2020-04-18 22:56:40 +0900",
 "other_data_structures/test/queue_operate_all_composite.test.cpp": "2020-03-07 22:54:47 +0900",
 "random/test/rolling_hash.test.cpp": "2020-03-07 22:54:47 +0900",
 "random/test/rolling_hash_w_modint.test.cpp": "2020-03-07 22:54:47 +0900",
