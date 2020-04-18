@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
 
+// CUT begin
 // Point on grid, sortable by its argument
 struct P
 {

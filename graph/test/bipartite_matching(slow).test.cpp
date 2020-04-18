@@ -1,17 +1,20 @@
 #include <iostream>
-#include "graph/bipartite-matching.hpp"
+#include "graph/bipartite_matching(slow).hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A"
 
 int main()
 {
+    std::cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+
     int X, Y, E;
-    cin >> X >> Y >> E;
+    std::cin >> X >> Y >> E;
     BipartiteMatching graph(X + Y);
-    for (int i = 0; i < E; i++)
+    while (E--)
     {
         int s, t;
-        cin >> s >> t;
+        std::cin >> s >> t;
         graph.add_edge(s, X + t);
     }
-    cout << graph.solve() << endl;
+    std::cout << graph.solve() << '\n';
 }

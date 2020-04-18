@@ -1,18 +1,17 @@
 #pragma once
 #include <iostream>
 #include <vector>
-using namespace std;
 
 // CUT begin
-// 二部グラフの最大マッチング bipartite-matching of undirected bipartite graph
+// Bipartite matching of undirected bipartite graph
 // <https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>
 // Comprexity: O(VE)
 struct BipartiteMatching
 {
-    int V;  // # of vertices
-    vector<vector<int>> edges;  // Adjacency list
-    vector<int> match;  // match[i] = (Partner of i'th node) or -1 (No parter)
-    vector<int> used;
+    int V;                               // # of vertices
+    std::vector<std::vector<int>> edges; // Adjacency list
+    std::vector<int> match;              // match[i] = (Partner of i'th node) or -1 (No parter)
+    std::vector<int> used;
     int timestamp;
     BipartiteMatching(int V = 0) : V(V), edges(V), match(V, -1), used(V, 0), timestamp(0) {}
 
@@ -48,7 +47,7 @@ struct BipartiteMatching
         return ret;
     }
 
-    friend ostream &operator<<(ostream &os, const BipartiteMatching &bm)
+    friend std::ostream &operator<<(std::ostream &os, const BipartiteMatching &bm)
     {
         os << "{V=" << bm.V << ":";
         for (int i = 0; i < bm.V; i++) if (i < bm.match[i])
