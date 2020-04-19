@@ -4,7 +4,7 @@
 
 // CUT begin
 // 1-indexed BIT (i : [1, len])
-template<typename T>
+template <typename T>
 struct BIT : std::vector<T>
 {
     BIT(int len = 0) : std::vector<T>(len + 1) {}
