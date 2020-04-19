@@ -35,6 +35,7 @@
 "linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp": "2020-03-07 22:54:47 +0900",
 "linear_algebra_matrix/test/linalg_modint_determinant.test.cpp": "2020-04-18 04:20:40 +0900",
 "linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp": "2020-04-18 04:20:40 +0900",
+"linear_algebra_matrix/test/linear_recurrence.test.cpp": "2020-04-19 19:51:42 +0900",
 "linear_algebra_matrix/test/system_of_linear_equations.test.cpp": "2020-04-18 04:20:40 +0900",
 "modulus/test/discrete_logarithm.test.cpp": "2020-03-07 22:54:47 +0900",
 "modulus/test/sqrt_modint_runtime.test.cpp": "2020-03-07 22:54:47 +0900",
