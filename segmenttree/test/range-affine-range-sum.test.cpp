@@ -3,6 +3,9 @@
 #include <utility>
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 
+// RangeAffineRangeSum
+// - update: x_i -> a * x_i + b for i in [l, r)
+// - get: return x_l + ... + x_{r - 1}
 template <typename T>
 struct RangeAffineRangeSum : public LazySegmentTree<std::pair<T, int>, std::pair<T, T>, T, bool>
 {
