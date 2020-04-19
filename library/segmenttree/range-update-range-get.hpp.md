@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/segmenttree/test/range_affine_range_sum.test.cpp.html">segmenttree/test/range_affine_range_sum.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/range-affine-range-sum.test.cpp.html">segmenttree/test/range-affine-range-sum.test.cpp</a>
 
 
 ## Code

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/test/range_minimum_query.test.cpp
+# :heavy_check_mark: segmenttree/test/point-update-range-min.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/range_minimum_query.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/point-update-range-min.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-19 16:04:51+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A</a>
@@ -80,7 +80,7 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "segmenttree/test/range_minimum_query.test.cpp"
+#line 1 "segmenttree/test/point-update-range-min.test.cpp"
 #include <iostream>
 #line 3 "segmenttree/range_minimum_query.hpp"
 #include <vector>
@@ -134,7 +134,7 @@ struct RangeMinimumQuery
         return os;
     }
 };
-#line 3 "segmenttree/test/range_minimum_query.test.cpp"
+#line 3 "segmenttree/test/point-update-range-min.test.cpp"
 using namespace std;
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"
 

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/test/range_affine_range_sum.test.cpp
+# :heavy_check_mark: segmenttree/test/range-affine-range-sum.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/range_affine_range_sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-18 03:35:35+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/range-affine-range-sum.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-19 16:04:51+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/range_affine_range_sum">https://judge.yosupo.jp/problem/range_affine_range_sum</a>
@@ -53,6 +53,9 @@ layout: default
 #include <utility>
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 
+// RangeAffineRangeSum
+// - update: x_i -> a * x_i + b for i in [l, r)
+// - get: return x_l + ... + x_{r - 1}
 template <typename T>
 struct RangeAffineRangeSum : public LazySegmentTree<std::pair<T, int>, std::pair<T, T>, T, bool>
 {
@@ -323,10 +326,13 @@ struct ModInt
 
 // constexpr lint MOD = 998244353;
 // using mint = ModInt<MOD>;
-#line 3 "segmenttree/test/range_affine_range_sum.test.cpp"
+#line 3 "segmenttree/test/range-affine-range-sum.test.cpp"
 #include <utility>
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 
+// RangeAffineRangeSum
+// - update: x_i -> a * x_i + b for i in [l, r)
+// - get: return x_l + ... + x_{r - 1}
 template <typename T>
 struct RangeAffineRangeSum : public LazySegmentTree<std::pair<T, int>, std::pair<T, T>, T, bool>
 {

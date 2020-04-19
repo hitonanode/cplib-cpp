@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/segmenttree/test/range_minimum_query.test.cpp.html">segmenttree/test/range_minimum_query.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/point-update-range-min.test.cpp.html">segmenttree/test/point-update-range-min.test.cpp</a>
 
 
 ## Code

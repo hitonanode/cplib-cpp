@@ -292,8 +292,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/random/test/rolling_hash_w_modint.test.cpp.html">random/test/rolling_hash_w_modint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/binary_indexed_tree.test.cpp.html">segmenttree/test/binary_indexed_tree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
-* :heavy_check_mark: <a href="verify/segmenttree/test/range_affine_range_sum.test.cpp.html">segmenttree/test/range_affine_range_sum.test.cpp</a>
-* :heavy_check_mark: <a href="verify/segmenttree/test/range_minimum_query.test.cpp.html">segmenttree/test/range_minimum_query.test.cpp</a>
+* :heavy_check_mark: <a href="verify/segmenttree/test/point-set-range-composite.test.cpp.html">segmenttree/test/point-set-range-composite.test.cpp</a>
+* :heavy_check_mark: <a href="verify/segmenttree/test/point-update-range-min.test.cpp.html">segmenttree/test/point-update-range-min.test.cpp</a>
+* :heavy_check_mark: <a href="verify/segmenttree/test/range-affine-range-sum.test.cpp.html">segmenttree/test/range-affine-range-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/segment_tree_2d.test.cpp.html">segmenttree/test/segment_tree_2d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/segment_tree_2d_pointadd.test.cpp.html">segmenttree/test/segment_tree_2d_pointadd.test.cpp</a>

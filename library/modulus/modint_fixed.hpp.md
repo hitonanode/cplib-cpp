@@ -61,7 +61,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/other_data_structures/test/queue_operate_all_composite.test.cpp.html">other_data_structures/test/queue_operate_all_composite.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/random/test/rolling_hash_w_modint.test.cpp.html">random/test/rolling_hash_w_modint.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/segmenttree/test/range_affine_range_sum.test.cpp.html">segmenttree/test/range_affine_range_sum.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/point-set-range-composite.test.cpp.html">segmenttree/test/point-set-range-composite.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/range-affine-range-sum.test.cpp.html">segmenttree/test/range-affine-range-sum.test.cpp</a>
 
 
 ## Code

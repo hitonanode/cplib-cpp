@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#4d78bd1b354012e24586b247dc164462">segmenttree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/point-update-range-get_nonrecursive.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-06 09:44:46+09:00
+    - Last commit date: 2020-04-19 16:04:51+09:00
 
 
 
@@ -40,6 +40,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/point-set-range-composite.test.cpp.html">segmenttree/test/point-set-range-composite.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
 
 
@@ -58,22 +59,22 @@ layout: default
 // CUT begin
 // Nonrecursive Segment Tree (point-update, range-get)
 // - Conditions for operations:
-//   - datamerge: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)
+//   - merge_data: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)
 //   - data2ret: [TDATA, TQUERY] -> TRET
-//   - retmerge: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)
+//   - merge_ret: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)
 //   - commutability f(e(x, y), q) == g(f(x, q), f(y, q))
 template <typename TDATA, typename TRET, typename TQUERY>
 struct NonrecursiveSegmentTree
 {
     int N;
     TRET defaultRET;
-    virtual TDATA datamerge(const TDATA &, const TDATA &) = 0;
+    virtual TDATA merge_data(const TDATA &, const TDATA &) = 0;
     virtual TRET data2ret(const TDATA &, const TQUERY &) = 0;
-    virtual TRET retmerge(const TRET &, const TRET &) = 0;
+    virtual TRET merge_ret(const TRET &, const TRET &) = 0;
     std::vector<TDATA> data;
     inline TDATA& at(int i) { return data[i]; }
 
-    inline void _merge(int i) { at(i) = datamerge(at(i << 1), at((i << 1) + 1)); }
+    inline void _merge(int i) { at(i) = merge_data(at(i << 1), at((i << 1) + 1)); }
     void initialize(const std::vector<TDATA> &seq, TRET RET_ZERO) {
         N = seq.size();
         defaultRET = RET_ZERO;
@@ -94,11 +95,11 @@ struct NonrecursiveSegmentTree
         TRET retl = defaultRET, retr = defaultRET;
         l += N, r += N;
         while (l < r) {
-            if (l & 1) retl = retmerge(retl, data2ret(data[l++], query));
-            if (r & 1) retr = retmerge(data2ret(data[--r], query), retr);
+            if (l & 1) retl = merge_ret(retl, data2ret(data[l++], query));
+            if (r & 1) retr = merge_ret(data2ret(data[--r], query), retr);
             l >>= 1, r >>= 1;
         }
-        return retmerge(retl, retr);
+        return merge_ret(retl, retr);
     }
 
     // Calculate smallest r that satisfies g(f(x_l, q), ..., f(x_{r - 1}, q)) >= threshold
@@ -112,10 +113,10 @@ struct NonrecursiveSegmentTree
         if (threshold <= retl) return l - N;
         while (l < r) {
             if (l & 1) {
-                TRET ret_tmp = retmerge(retl, data2ret(data[l], query));
+                TRET ret_tmp = merge_ret(retl, data2ret(data[l], query));
                 if (threshold <= ret_tmp) {
                     while (l * 2 < N * 2) {
-                        ret_tmp = retmerge(retl, data2ret(data[l * 2], query));
+                        ret_tmp = merge_ret(retl, data2ret(data[l * 2], query));
                         if (threshold <= ret_tmp) l *= 2;
                         else retl = ret_tmp, l = l * 2 + 1;
                     }
@@ -130,10 +131,10 @@ struct NonrecursiveSegmentTree
         while (!rs.empty()) {
             l = rs.top();
             rs.pop();
-            TRET ret_tmp = retmerge(retl, data2ret(data[l], query));
+            TRET ret_tmp = merge_ret(retl, data2ret(data[l], query));
             if (threshold <= ret_tmp) {
                 while (l * 2 < N * 2) {
-                    ret_tmp = retmerge(retl, data2ret(data[l * 2], query));
+                    ret_tmp = merge_ret(retl, data2ret(data[l * 2], query));
                     if (threshold <= ret_tmp) l *= 2;
                     else retl = ret_tmp, l = l * 2 + 1;
                 }
@@ -160,9 +161,9 @@ template <typename T>
 struct RangeMinimumQuery : public NonrecursiveSegmentTree<T, T, bool>
 {
     using SegTree = NonrecursiveSegmentTree<T, T, bool>;
-    T datamerge(const T &vl, const T &vr) override { return std::min(vl, vr); };
+    T merge_data(const T &vl, const T &vr) override { return std::min(vl, vr); };
     T data2ret(const T &v, const bool &q) override { return v; }
-    T retmerge(const T &vl, const T &vr) override { return std::min(vl, vr); };
+    T merge_ret(const T &vl, const T &vr) override { return std::min(vl, vr); };
     RangeMinimumQuery(const std::vector<T> &seq, T defaultmin) : SegTree::NonrecursiveSegmentTree() {
         SegTree::initialize(seq, defaultmin);
     };
@@ -174,9 +175,9 @@ template <typename T>
 struct RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool>
 {
     using SegTree = NonrecursiveSegmentTree<T, T, bool>;
-    T datamerge(const T &vl, const T &vr) override { return std::max(vl, vr); };
+    T merge_data(const T &vl, const T &vr) override { return std::max(vl, vr); };
     T data2ret(const T &v, const bool &q) override { return v; }
-    T retmerge(const T &vl, const T &vr) override { return std::max(vl, vr); };
+    T merge_ret(const T &vl, const T &vr) override { return std::max(vl, vr); };
     RangeMaximumQuery(const std::vector<T> &seq, T defaultmax) : SegTree::NonrecursiveSegmentTree() {
         SegTree::initialize(seq, defaultmax);
     };
@@ -186,9 +187,9 @@ template <typename T>
 struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool>
 {
     using SegTree = NonrecursiveSegmentTree<T, T, bool>;
-    T datamerge(const T &vl, const T &vr) override { return vl + vr; };
+    T merge_data(const T &vl, const T &vr) override { return vl + vr; };
     T data2ret(const T &v, const bool &q) override { return v; }
-    T retmerge(const T &vl, const T &vr) override { return vl + vr; };
+    T merge_ret(const T &vl, const T &vr) override { return vl + vr; };
     PointUpdateRangeSum(const std::vector<T> &seq, T zero) : SegTree::NonrecursiveSegmentTree() {
         SegTree::initialize(seq, zero);
     };
@@ -202,7 +203,7 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
     using TDATA = std::vector<std::pair<T, T>>;
     using TRET = std::pair<int, T>;
     using TQUERY = T;
-    TDATA datamerge(const TDATA &vl, const TDATA &vr) override {
+    TDATA merge_data(const TDATA &vl, const TDATA &vr) override {
         TDATA ret = vl;
         ret.insert(ret.end(), vr.begin(), vr.end());
         std::sort(ret.begin(), ret.end());
@@ -217,7 +218,7 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
         if (!i) return std::make_pair(0, 0);
         else return std::make_pair(i, vec[i - 1].second);
     }
-    TRET retmerge(const TRET &l, const TRET &r) override {
+    TRET merge_ret(const TRET &l, const TRET &r) override {
         return std::make_pair(l.first + r.first, l.second + r.second);
     }
     using SegTree = NonrecursiveSegmentTree<TDATA, TRET, TQUERY>;
@@ -244,22 +245,22 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
 // CUT begin
 // Nonrecursive Segment Tree (point-update, range-get)
 // - Conditions for operations:
-//   - datamerge: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)
+//   - merge_data: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)
 //   - data2ret: [TDATA, TQUERY] -> TRET
-//   - retmerge: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)
+//   - merge_ret: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)
 //   - commutability f(e(x, y), q) == g(f(x, q), f(y, q))
 template <typename TDATA, typename TRET, typename TQUERY>
 struct NonrecursiveSegmentTree
 {
     int N;
     TRET defaultRET;
-    virtual TDATA datamerge(const TDATA &, const TDATA &) = 0;
+    virtual TDATA merge_data(const TDATA &, const TDATA &) = 0;
     virtual TRET data2ret(const TDATA &, const TQUERY &) = 0;
-    virtual TRET retmerge(const TRET &, const TRET &) = 0;
+    virtual TRET merge_ret(const TRET &, const TRET &) = 0;
     std::vector<TDATA> data;
     inline TDATA& at(int i) { return data[i]; }
 
-    inline void _merge(int i) { at(i) = datamerge(at(i << 1), at((i << 1) + 1)); }
+    inline void _merge(int i) { at(i) = merge_data(at(i << 1), at((i << 1) + 1)); }
     void initialize(const std::vector<TDATA> &seq, TRET RET_ZERO) {
         N = seq.size();
         defaultRET = RET_ZERO;
@@ -280,11 +281,11 @@ struct NonrecursiveSegmentTree
         TRET retl = defaultRET, retr = defaultRET;
         l += N, r += N;
         while (l < r) {
-            if (l & 1) retl = retmerge(retl, data2ret(data[l++], query));
-            if (r & 1) retr = retmerge(data2ret(data[--r], query), retr);
+            if (l & 1) retl = merge_ret(retl, data2ret(data[l++], query));
+            if (r & 1) retr = merge_ret(data2ret(data[--r], query), retr);
             l >>= 1, r >>= 1;
         }
-        return retmerge(retl, retr);
+        return merge_ret(retl, retr);
     }
 
     // Calculate smallest r that satisfies g(f(x_l, q), ..., f(x_{r - 1}, q)) >= threshold
@@ -298,10 +299,10 @@ struct NonrecursiveSegmentTree
         if (threshold <= retl) return l - N;
         while (l < r) {
             if (l & 1) {
-                TRET ret_tmp = retmerge(retl, data2ret(data[l], query));
+                TRET ret_tmp = merge_ret(retl, data2ret(data[l], query));
                 if (threshold <= ret_tmp) {
                     while (l * 2 < N * 2) {
-                        ret_tmp = retmerge(retl, data2ret(data[l * 2], query));
+                        ret_tmp = merge_ret(retl, data2ret(data[l * 2], query));
                         if (threshold <= ret_tmp) l *= 2;
                         else retl = ret_tmp, l = l * 2 + 1;
                     }
@@ -316,10 +317,10 @@ struct NonrecursiveSegmentTree
         while (!rs.empty()) {
             l = rs.top();
             rs.pop();
-            TRET ret_tmp = retmerge(retl, data2ret(data[l], query));
+            TRET ret_tmp = merge_ret(retl, data2ret(data[l], query));
             if (threshold <= ret_tmp) {
                 while (l * 2 < N * 2) {
-                    ret_tmp = retmerge(retl, data2ret(data[l * 2], query));
+                    ret_tmp = merge_ret(retl, data2ret(data[l * 2], query));
                     if (threshold <= ret_tmp) l *= 2;
                     else retl = ret_tmp, l = l * 2 + 1;
                 }
@@ -346,9 +347,9 @@ template <typename T>
 struct RangeMinimumQuery : public NonrecursiveSegmentTree<T, T, bool>
 {
     using SegTree = NonrecursiveSegmentTree<T, T, bool>;
-    T datamerge(const T &vl, const T &vr) override { return std::min(vl, vr); };
+    T merge_data(const T &vl, const T &vr) override { return std::min(vl, vr); };
     T data2ret(const T &v, const bool &q) override { return v; }
-    T retmerge(const T &vl, const T &vr) override { return std::min(vl, vr); };
+    T merge_ret(const T &vl, const T &vr) override { return std::min(vl, vr); };
     RangeMinimumQuery(const std::vector<T> &seq, T defaultmin) : SegTree::NonrecursiveSegmentTree() {
         SegTree::initialize(seq, defaultmin);
     };
@@ -360,9 +361,9 @@ template <typename T>
 struct RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool>
 {
     using SegTree = NonrecursiveSegmentTree<T, T, bool>;
-    T datamerge(const T &vl, const T &vr) override { return std::max(vl, vr); };
+    T merge_data(const T &vl, const T &vr) override { return std::max(vl, vr); };
     T data2ret(const T &v, const bool &q) override { return v; }
-    T retmerge(const T &vl, const T &vr) override { return std::max(vl, vr); };
+    T merge_ret(const T &vl, const T &vr) override { return std::max(vl, vr); };
     RangeMaximumQuery(const std::vector<T> &seq, T defaultmax) : SegTree::NonrecursiveSegmentTree() {
         SegTree::initialize(seq, defaultmax);
     };
@@ -372,9 +373,9 @@ template <typename T>
 struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool>
 {
     using SegTree = NonrecursiveSegmentTree<T, T, bool>;
-    T datamerge(const T &vl, const T &vr) override { return vl + vr; };
+    T merge_data(const T &vl, const T &vr) override { return vl + vr; };
     T data2ret(const T &v, const bool &q) override { return v; }
-    T retmerge(const T &vl, const T &vr) override { return vl + vr; };
+    T merge_ret(const T &vl, const T &vr) override { return vl + vr; };
     PointUpdateRangeSum(const std::vector<T> &seq, T zero) : SegTree::NonrecursiveSegmentTree() {
         SegTree::initialize(seq, zero);
     };
@@ -388,7 +389,7 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
     using TDATA = std::vector<std::pair<T, T>>;
     using TRET = std::pair<int, T>;
     using TQUERY = T;
-    TDATA datamerge(const TDATA &vl, const TDATA &vr) override {
+    TDATA merge_data(const TDATA &vl, const TDATA &vr) override {
         TDATA ret = vl;
         ret.insert(ret.end(), vr.begin(), vr.end());
         std::sort(ret.begin(), ret.end());
@@ -403,7 +404,7 @@ struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pai
         if (!i) return std::make_pair(0, 0);
         else return std::make_pair(i, vec[i - 1].second);
     }
-    TRET retmerge(const TRET &l, const TRET &r) override {
+    TRET merge_ret(const TRET &l, const TRET &r) override {
         return std::make_pair(l.first + r.first, l.second + r.second);
     }
     using SegTree = NonrecursiveSegmentTree<TDATA, TRET, TQUERY>;
