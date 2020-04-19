@@ -118,6 +118,7 @@ layout: default
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_bitset.hpp.html">linear_algebra_matrix/linalg_bitset.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_longlong.hpp.html">linear_algebra_matrix/linalg_longlong.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
+* :heavy_check_mark: <a href="library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/system_of_linear_equations.hpp.html">linear_algebra_matrix/system_of_linear_equations.hpp</a>
 * :warning: <a href="library/linear_algebra_matrix/transpose.hpp.html">linear_algebra_matrix/transpose.hpp</a>
 
@@ -279,6 +280,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp.html">linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>
+* :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linear_recurrence.test.cpp.html">linear_algebra_matrix/test/linear_recurrence.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html">linear_algebra_matrix/test/system_of_linear_equations.test.cpp</a>
 * :heavy_check_mark: <a href="verify/modulus/test/discrete_logarithm.test.cpp.html">modulus/test/discrete_logarithm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/modulus/test/sqrt_modint_runtime.test.cpp.html">modulus/test/sqrt_modint_runtime.test.cpp</a>
