@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#f11c31ed854a10cb04d51564b38e6849">number/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/number/test/miller-rabin.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-19 04:48:57+09:00
+    - Last commit date: 2020-04-19 12:18:34+09:00
 
 
 * see: <a href="https://yukicoder.me/problems/1967">https://yukicoder.me/problems/1967</a>
@@ -74,6 +74,7 @@ int main()
 #include <cassert>
 #include <vector>
 
+// CUT begin
 namespace SPRP
 {
 // <http://miller-rabin.appspot.com/>

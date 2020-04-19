@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#b1bc248a7ff2b2e95569f56de68615df">number</a>
 * <a href="{{ site.github.repository_url }}/blob/master/number/factorize.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-19 04:44:27+09:00
+    - Last commit date: 2020-04-19 12:18:34+09:00
 
 
 
@@ -53,6 +53,7 @@ layout: default
 #include <cassert>
 #include <vector>
 
+// CUT begin
 namespace SPRP
 {
 // <http://miller-rabin.appspot.com/>
@@ -166,6 +167,7 @@ struct
 #include <cassert>
 #include <vector>
 
+// CUT begin
 namespace SPRP
 {
 // <http://miller-rabin.appspot.com/>
