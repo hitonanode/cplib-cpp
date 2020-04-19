@@ -4,6 +4,7 @@
 #include <cassert>
 #include <vector>
 
+// CUT begin
 namespace SPRP
 {
 // <http://miller-rabin.appspot.com/>

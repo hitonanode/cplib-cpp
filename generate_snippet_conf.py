@@ -18,7 +18,9 @@ def read_hpp(filepath):
                 ret = ret[:1]
             else:
                 line = re.sub('([|`])', '`\\1', line)
-                ret.append('`' + line)
+                if len(line) and line[0] in ['+', '*', '.', ';', ' ']:
+                    line = '`' + line
+                ret.append(line)
     ret.append('/E')
     return ret
 
