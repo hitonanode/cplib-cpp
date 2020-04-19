@@ -292,6 +292,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/random/test/rolling_hash_w_modint.test.cpp.html">random/test/rolling_hash_w_modint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/binary_indexed_tree.test.cpp.html">segmenttree/test/binary_indexed_tree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/countandsumlessthan.test.cpp.html">segmenttree/test/countandsumlessthan.test.cpp</a>
+* :heavy_check_mark: <a href="verify/segmenttree/test/point-add-range-sum.test.cpp.html">segmenttree/test/point-add-range-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/point-set-range-composite.test.cpp.html">segmenttree/test/point-set-range-composite.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/point-update-range-min.test.cpp.html">segmenttree/test/point-update-range-min.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/range-affine-range-sum.test.cpp.html">segmenttree/test/range-affine-range-sum.test.cpp</a>

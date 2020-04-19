@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segmenttree/test/binary_indexed_tree.test.cpp
+# :heavy_check_mark: segmenttree/test/point-add-range-sum.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5fd93d3fa59267c091e036914d93749e">segmenttree/test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/binary_indexed_tree.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/segmenttree/test/point-add-range-sum.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-04-19 16:23:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
+* see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
 
 
 ## Depends on
@@ -48,20 +48,55 @@ layout: default
 {% raw %}
 ```cpp
 #include "segmenttree/binary_indexed_tree.hpp"
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
-#include <cstdio>
+#include <iostream>
+#define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
+
+// PointAddRangeSum (BIT based) 0-indexed
+// Complexity: O(lg N) for each query
+template <typename T>
+struct PointAddRangeSum
+{
+    BIT<T> bit;
+    PointAddRangeSum(const std::vector<T> &A) : bit(A.size())
+    {
+        for (unsigned i = 0; i < A.size(); i++) bit.add(i + 1, A[i]);
+    }
+    void add(int i, T val)
+    {
+        bit.add(i + 1, val);
+    }
+    // sum [l, r)
+    T get(int l, int r) const
+    {
+        return bit.sum(r) - bit.sum(l);
+    }
+};
 
 int main()
 {
+    std::cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+
     int N, Q;
-    scanf("%d %d", &N, &Q);
-    BIT<int> bit(N);
+    std::cin >> N >> Q;
+    std::vector<long long> A(N);
+    for (auto &a : A)
+    {
+        std::cin >> a;
+    }
+    PointAddRangeSum<long long> s(A);
     while (Q--)
     {
-        int c, x, y;
-        scanf("%d %d %d", &c, &x, &y);
-        if (c) printf("%d\n", bit.sum(y) - bit.sum(x - 1));
-        else bit.add(x, y);
+        int q, l, r;
+        std::cin >> q >> l >> r;
+        if (q)
+        {
+            std::cout << s.get(l, r) << '\n';
+        }
+        else
+        {
+            s.add(l, r);
+        }
     }
 }
 
@@ -102,21 +137,55 @@ struct BIT : std::vector<T>
         return os;
     }
 };
-#line 2 "segmenttree/test/binary_indexed_tree.test.cpp"
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
-#include <cstdio>
+#line 3 "segmenttree/test/point-add-range-sum.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
+
+// PointAddRangeSum (BIT based) 0-indexed
+// Complexity: O(lg N) for each query
+template <typename T>
+struct PointAddRangeSum
+{
+    BIT<T> bit;
+    PointAddRangeSum(const std::vector<T> &A) : bit(A.size())
+    {
+        for (unsigned i = 0; i < A.size(); i++) bit.add(i + 1, A[i]);
+    }
+    void add(int i, T val)
+    {
+        bit.add(i + 1, val);
+    }
+    // sum [l, r)
+    T get(int l, int r) const
+    {
+        return bit.sum(r) - bit.sum(l);
+    }
+};
 
 int main()
 {
+    std::cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+
     int N, Q;
-    scanf("%d %d", &N, &Q);
-    BIT<int> bit(N);
+    std::cin >> N >> Q;
+    std::vector<long long> A(N);
+    for (auto &a : A)
+    {
+        std::cin >> a;
+    }
+    PointAddRangeSum<long long> s(A);
     while (Q--)
     {
-        int c, x, y;
-        scanf("%d %d %d", &c, &x, &y);
-        if (c) printf("%d\n", bit.sum(y) - bit.sum(x - 1));
-        else bit.add(x, y);
+        int q, l, r;
+        std::cin >> q >> l >> r;
+        if (q)
+        {
+            std::cout << s.get(l, r) << '\n';
+        }
+        else
+        {
+            s.add(l, r);
+        }
     }
 }
 

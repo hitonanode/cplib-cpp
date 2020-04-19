@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#4d78bd1b354012e24586b247dc164462">segmenttree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segmenttree/binary_indexed_tree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-04-19 16:23:43+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/segmenttree/test/binary_indexed_tree.test.cpp.html">segmenttree/test/binary_indexed_tree.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/segmenttree/test/point-add-range-sum.test.cpp.html">segmenttree/test/point-add-range-sum.test.cpp</a>
 
 
 ## Code
@@ -52,7 +53,7 @@ layout: default
 
 // CUT begin
 // 1-indexed BIT (i : [1, len])
-template<typename T>
+template <typename T>
 struct BIT : std::vector<T>
 {
     BIT(int len = 0) : std::vector<T>(len + 1) {}
@@ -90,7 +91,7 @@ struct BIT : std::vector<T>
 
 // CUT begin
 // 1-indexed BIT (i : [1, len])
-template<typename T>
+template <typename T>
 struct BIT : std::vector<T>
 {
     BIT(int len = 0) : std::vector<T>(len + 1) {}
