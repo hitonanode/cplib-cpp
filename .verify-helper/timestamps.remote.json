@@ -9,6 +9,7 @@
 "formal_power_series/test/fps_exp_modintruntime.test.cpp": "2020-03-07 22:54:47 +0900",
 "formal_power_series/test/fps_inv.test.cpp": "2020-03-07 22:54:47 +0900",
 "formal_power_series/test/fps_log.test.cpp": "2020-03-07 22:54:47 +0900",
+"formal_power_series/test/fps_pow.test.cpp": "2020-04-21 01:24:16 +0900",
 "formal_power_series/test/fps_sqrt.test.cpp": "2020-03-07 22:54:47 +0900",
 "formal_power_series/test/fps_sqrt_modintruntime.test.cpp": "2020-03-07 22:54:47 +0900",
 "geometry/test/convex_hull.test.cpp": "2020-04-18 21:44:08 +0900",
