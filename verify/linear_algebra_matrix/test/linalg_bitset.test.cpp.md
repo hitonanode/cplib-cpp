@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: linear_algebra_matrix/test/linalg_bitset.test.cpp
+# :heavy_check_mark: linear_algebra_matrix/test/linalg_bitset.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#dc91d55fecbe93608b76606ec1490b73">linear_algebra_matrix/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linalg_bitset.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-26 13:02:29+09:00
+    - Last commit date: 2020-04-26 13:14:26+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/linear_algebra_matrix/linalg_bitset.hpp.html">linear_algebra_matrix/linalg_bitset.hpp</a>
+* :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linalg_bitset.hpp.html">linear_algebra_matrix/linalg_bitset.hpp</a>
 
 
 ## Code
@@ -47,10 +47,11 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#include <iostream>
-#include <numeric>
 #include "linear_algebra_matrix/linalg_bitset.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624"
+#include <iostream>
+#include <numeric>
+using namespace std;
 
 int main()
 {
@@ -107,9 +108,6 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "linear_algebra_matrix/test/linalg_bitset.test.cpp"
-#include <iostream>
-#include <numeric>
 #line 2 "linear_algebra_matrix/linalg_bitset.hpp"
 #include <bitset>
 #include <utility>
@@ -168,8 +166,11 @@ std::vector<std::bitset<Wmax>> matpower(std::vector<std::bitset<Wmax>> X, long l
     }
     return ret;
 }
-#line 4 "linear_algebra_matrix/test/linalg_bitset.test.cpp"
+#line 2 "linear_algebra_matrix/test/linalg_bitset.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624"
+#include <iostream>
+#include <numeric>
+using namespace std;
 
 int main()
 {

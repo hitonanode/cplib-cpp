@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: linear_algebra_matrix/linalg_bitset.hpp
+# :heavy_check_mark: linear_algebra_matrix/linalg_bitset.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/linear_algebra_matrix/test/linalg_bitset.test.cpp.html">linear_algebra_matrix/test/linalg_bitset.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_bitset.test.cpp.html">linear_algebra_matrix/test/linalg_bitset.test.cpp</a>
 
 
 ## Code
