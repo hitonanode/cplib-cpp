@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#dc91d55fecbe93608b76606ec1490b73">linear_algebra_matrix/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linalg_bitset.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-04-26 12:49:52+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624</a>
@@ -148,12 +148,16 @@ int rank_gauss_jordan(int W, const vector<bitset<Wmax>> &mtr) // Rank of Gauss-J
 vector<bitset<Wmax>> matmul(const vector<bitset<Wmax>> &A, const vector<bitset<Wmax>> &B, int W_B)
 {
     int H = A.size(), K = B.size();
+    vector<bitset<Wmax>> BT(W_B);
+    for (int i = 0; i < K; i++) {
+        for (int j = 0; j < W_B; j++) {
+            BT[j][i] = B[i][j];
+        }
+    }
     vector<bitset<Wmax>> C(H);
     for (int i = 0; i < H; i++) {
         for (int j = 0; j < W_B; j++) {
-            for (int k = 0; k < K; k++) {
-                C[i][j] = C[i][j] ^ (A[i][k] & B[k][j]);
-            }
+            C[i][j] = (A[i] & BT[j]).count() % 2;
         }
     }
     return C;
