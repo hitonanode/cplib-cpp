@@ -36,12 +36,16 @@ int rank_gauss_jordan(int W, const vector<bitset<Wmax>> &mtr) // Rank of Gauss-J
 vector<bitset<Wmax>> matmul(const vector<bitset<Wmax>> &A, const vector<bitset<Wmax>> &B, int W_B)
 {
     int H = A.size(), K = B.size();
+    vector<bitset<Wmax>> BT(W_B);
+    for (int i = 0; i < K; i++) {
+        for (int j = 0; j < W_B; j++) {
+            BT[j][i] = B[i][j];
+        }
+    }
     vector<bitset<Wmax>> C(H);
     for (int i = 0; i < H; i++) {
         for (int j = 0; j < W_B; j++) {
-            for (int k = 0; k < K; k++) {
-                C[i][j] = C[i][j] ^ (A[i][k] & B[k][j]);
-            }
+            C[i][j] = (A[i] & BT[j]).count() % 2;
         }
     }
     return C;
