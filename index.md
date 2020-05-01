@@ -198,6 +198,7 @@ layout: default
 * :heavy_check_mark: <a href="library/segmenttree/binary_indexed_tree.hpp.html">segmenttree/binary_indexed_tree.hpp</a>
 * :warning: <a href="library/segmenttree/count_less_than.hpp.html">segmenttree/count_less_than.hpp</a>
 * :heavy_check_mark: <a href="library/segmenttree/point-update-range-get_nonrecursive.hpp.html">segmenttree/point-update-range-get_nonrecursive.hpp</a>
+* :warning: <a href="library/segmenttree/range-add-range-min.hpp.html">segmenttree/range-add-range-min.hpp</a>
 * :heavy_check_mark: <a href="library/segmenttree/range-update-range-get.hpp.html">segmenttree/range-update-range-get.hpp</a>
 * :heavy_check_mark: <a href="library/segmenttree/range_minimum_query.hpp.html">segmenttree/range_minimum_query.hpp</a>
 * :heavy_check_mark: <a href="library/segmenttree/segment_tree_2d.hpp.html">segmenttree/segment_tree_2d.hpp</a>
