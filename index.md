@@ -294,6 +294,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/number/test/miller-rabin.test.cpp.html">number/test/miller-rabin.test.cpp</a>
 * :heavy_check_mark: <a href="verify/number/test/prime_factorization.test.cpp.html">number/test/prime_factorization.test.cpp</a>
 * :heavy_check_mark: <a href="verify/other_data_structures/test/fibonacci_heap_dijkstra.test.cpp.html">other_data_structures/test/fibonacci_heap_dijkstra.test.cpp</a>
+* :heavy_check_mark: <a href="verify/other_data_structures/test/fibonacci_heap_shortestpath.test.cpp.html">other_data_structures/test/fibonacci_heap_shortestpath.test.cpp</a>
 * :heavy_check_mark: <a href="verify/other_data_structures/test/fibonacci_heap_spanningtree.test.cpp.html">other_data_structures/test/fibonacci_heap_spanningtree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/other_data_structures/test/persistent_queue.test.cpp.html">other_data_structures/test/persistent_queue.test.cpp</a>
 * :heavy_check_mark: <a href="verify/other_data_structures/test/queue_operate_all_composite.test.cpp.html">other_data_structures/test/queue_operate_all_composite.test.cpp</a>
