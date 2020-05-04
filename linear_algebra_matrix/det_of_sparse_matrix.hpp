@@ -47,6 +47,9 @@ struct sparse_matrix
         }
         return ret;
     }
+    // Determinant of sparse matrix
+    // Complexity: O(NK + N^2) (K: # of non-zero elements in M)
+    // Reference: <https://yukicoder.me/wiki/black_box_linear_algebra>
     _Tp Determinant() const
     {
         assert(H == W);
