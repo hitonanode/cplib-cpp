@@ -36,8 +36,14 @@ layout: default
 
 
 
+## Required by
+
+* :heavy_check_mark: <a href="det_of_sparse_matrix.hpp.html">linear_algebra_matrix/det_of_sparse_matrix.hpp</a>
+
+
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp.html">linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linear_recurrence.test.cpp.html">linear_algebra_matrix/test/linear_recurrence.test.cpp</a>
 
 

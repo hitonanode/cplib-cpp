@@ -115,6 +115,7 @@ layout: default
 
 ### linear_algebra_matrix
 
+* :heavy_check_mark: <a href="library/linear_algebra_matrix/det_of_sparse_matrix.hpp.html">linear_algebra_matrix/det_of_sparse_matrix.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_bitset.hpp.html">linear_algebra_matrix/linalg_bitset.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_longlong.hpp.html">linear_algebra_matrix/linalg_longlong.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
@@ -277,6 +278,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/graph-tree/test/hl_decomposition.test.cpp.html">graph-tree/test/hl_decomposition.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph-tree/test/lca.test.cpp.html">graph-tree/test/lca.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
+* :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp.html">linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_bitset.test.cpp.html">linear_algebra_matrix/test/linalg_bitset.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_ll_det.test.cpp.html">linear_algebra_matrix/test/linalg_ll_det.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp.html">linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp</a>
