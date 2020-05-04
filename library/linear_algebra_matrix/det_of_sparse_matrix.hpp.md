@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#20f2c5d841ec31673050aaedd8b17f50">linear_algebra_matrix</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/det_of_sparse_matrix.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-05 04:37:32+09:00
+    - Last commit date: 2020-05-05 05:15:06+09:00
 
 
 
@@ -101,6 +101,9 @@ struct sparse_matrix
         }
         return ret;
     }
+    // Determinant of sparse matrix
+    // Complexity: O(NK + N^2) (K: # of non-zero elements in M)
+    // Reference: <https://yukicoder.me/wiki/black_box_linear_algebra>
     _Tp Determinant() const
     {
         assert(H == W);
@@ -251,6 +254,9 @@ struct sparse_matrix
         }
         return ret;
     }
+    // Determinant of sparse matrix
+    // Complexity: O(NK + N^2) (K: # of non-zero elements in M)
+    // Reference: <https://yukicoder.me/wiki/black_box_linear_algebra>
     _Tp Determinant() const
     {
         assert(H == W);

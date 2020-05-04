@@ -275,6 +275,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/graph/test/mincostflow.test.cpp.html">graph/test/mincostflow.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/strongly_connected_components.test.cpp.html">graph/test/strongly_connected_components.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/strongly_connected_components_bitset.test.cpp.html">graph/test/strongly_connected_components_bitset.test.cpp</a>
+* :heavy_check_mark: <a href="verify/graph/test/topological_sort.test.cpp.html">graph/test/topological_sort.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph-tree/test/hl_decomposition.test.cpp.html">graph-tree/test/hl_decomposition.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph-tree/test/lca.test.cpp.html">graph-tree/test/lca.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
