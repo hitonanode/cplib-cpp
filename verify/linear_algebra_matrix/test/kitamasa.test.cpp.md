@@ -25,20 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: linear_algebra_matrix/test/linear_recurrence.test.cpp
+# :heavy_check_mark: linear_algebra_matrix/test/kitamasa.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#dc91d55fecbe93608b76606ec1490b73">linear_algebra_matrix/test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linear_recurrence.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/kitamasa.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-05-05 22:31:32+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/find_linear_recurrence">https://judge.yosupo.jp/problem/find_linear_recurrence</a>
+* see: <a href="https://yukicoder.me/problems/no/214">https://yukicoder.me/problems/no/214</a>
 
 
 ## Depends on
 
+* :heavy_check_mark: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
 * :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
@@ -48,27 +49,83 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#define PROBLEM "https://yukicoder.me/problems/no/214"
 #include "linear_algebra_matrix/linear_recurrence.hpp"
 #include "modulus/modint_fixed.hpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
-#include <iostream>
+#include "convolution/ntt.hpp"
+using mint = ModInt<1000000007>;
 
-using mint = ModInt<998244353>;
+#include <iostream>
+#include <numeric>
+template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
+#define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
+
+
+std::vector<mint> gen_dp(std::vector<int> v, int n)
+{
+    vector<vector<mint>> dp(n + 1, vector<mint>(v.back() * n + 1));
+    dp[0][0] = 1;
+    for (auto x : v)
+    {
+        for (int i = n - 1; i >= 0; i--)
+        {
+            for (int j = 0; j < dp[i].size(); j++) if (dp[i][j])
+            {
+                for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];
+            }
+        }
+    }
+    return dp.back();
+}
+
 int main()
 {
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
-    int N;
-    std::cin >> N;
-    std::vector<mint> A(N);
-    for (auto &a : A)
+    long long N;
+    int P, C;
+    std::cin >> N >> P >> C;
+    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
+    std::vector<mint> f_reversed = nttconv(primes, composites);
+    std::vector<mint> dp(f_reversed.size());
+    dp[0] = 1;
+    for (int i = 0; i < dp.size(); i++)
     {
-        std::cin >> a;
+        for (int j = 1; i + j < dp.size(); j++) dp[i + j] += dp[i] * f_reversed[j];
     }
-    auto [L, poly] = linear_recurrence(A);
-    std::cout << L << '\n';
-    for (int i = 1; i <= L; i++) std::cout << -poly[i] << ' ';
-    std::cout << '\n';
+
+    for (auto &x : f_reversed) x = -x;
+    f_reversed[0] = 1;
+
+    std::vector<mint> g(f_reversed.size() - 1);
+    g[0] = 1;
+    if (N > f_reversed.size())
+    {
+        long long d = N - f_reversed.size();
+        N -= d;
+        g = monomial_mod_polynomial<mint>(d, f_reversed);
+    }
+
+    auto prod_x = [&](std::vector<mint> v) -> std::vector<mint> {
+        int K = v.size();
+        std::vector<mint> c(K);
+        c[0] = -v[K - 1] * f_reversed[K];
+        for (int i = 1; i < K; i++)
+        {
+            c[i] = v[i - 1] - v[K - 1] * f_reversed[K - i];
+        }
+        return c;
+    };
+    mint acc = 0;
+    for (int i = N; i < f_reversed.size(); i++) acc += f_reversed[i];
+    mint ret = 0;
+    while (N)
+    {
+        mint p = std::inner_product(g.begin(), g.end(), dp.begin(), mint(0));
+        ret -= acc * p;
+        g = prod_x(g);
+        N--;
+        acc += f_reversed[N];
+    }
+    cout << ret << '\n';
 }
 
 ```
@@ -77,6 +134,8 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
+#line 1 "linear_algebra_matrix/test/kitamasa.test.cpp"
+#define PROBLEM "https://yukicoder.me/problems/no/214"
 #line 2 "linear_algebra_matrix/linear_recurrence.hpp"
 #include <algorithm>
 #include <cassert>
@@ -293,26 +352,206 @@ struct ModInt
 
 // constexpr lint MOD = 998244353;
 // using mint = ModInt<MOD>;
-#line 3 "linear_algebra_matrix/test/linear_recurrence.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
-#line 5 "linear_algebra_matrix/test/linear_recurrence.test.cpp"
+#line 3 "convolution/ntt.hpp"
 
-using mint = ModInt<998244353>;
+#line 5 "convolution/ntt.hpp"
+#include <array>
+#line 8 "convolution/ntt.hpp"
+using namespace std;
+
+// CUT begin
+// Integer convolution for arbitrary mod
+// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.
+// We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.
+// input: a (size: n), b (size: m)
+// return: vector (size: n + m - 1)
+template <typename MODINT>
+vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner = false);
+
+constexpr int nttprimes[3] = {998244353, 167772161, 469762049};
+
+// Integer FFT (Fast Fourier Transform) for ModInt class
+// (Also known as Number Theoretic Transform, NTT)
+// is_inverse: inverse transform
+// ** Input size must be 2^n **
+template <typename MODINT>
+void ntt(vector<MODINT> &a, bool is_inverse = false)
+{
+    int n = a.size();
+    assert(__builtin_popcount(n) == 1);
+    MODINT h = MODINT(MODINT::get_primitive_root()).power((MODINT::get_mod() - 1) / n);
+    if (is_inverse) h = 1 / h;
+
+    int i = 0;
+    for (int j = 1; j < n - 1; j++) {
+        for (int k = n >> 1; k > (i ^= k); k >>= 1);
+        if (j < i) swap(a[i], a[j]);
+    }
+
+    for (int m = 1; m < n; m *= 2) {
+        int m2 = 2 * m;
+        long long int base = h.power(n / m2);
+        MODINT w(1);
+        for(int x = 0; x < m; x++) {
+            for (int s = x; s < n; s += m2) {
+                MODINT u = a[s], d = a[s + m] * w;
+                a[s] = u + d, a[s + m] = u - d;
+            }
+            w *= base;
+        }
+    }
+    if (is_inverse) {
+        long long int n_inv = MODINT(n).inv();
+        for (auto &v : a) v *= n_inv;
+    }
+}
+template<int MOD>
+vector<ModInt<MOD>> nttconv_(const vector<int> &a, const vector<int> &b) {
+    int sz = a.size();
+    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);
+    vector<ModInt<MOD>> ap(sz), bp(sz);
+    for (int i = 0; i < sz; i++) ap[i] = a[i], bp[i] = b[i];
+    if (a == b) {
+        ntt(ap, false);
+        bp = ap;
+    }
+    else {
+        ntt(ap, false);
+        ntt(bp, false);
+    }
+    for (int i = 0; i < sz; i++) ap[i] *= bp[i];
+    ntt(ap, true);
+    return ap;
+}
+long long int extgcd_ntt_(long long int a, long long int b, long long int &x, long long int &y)
+{
+    long long int d = a;
+    if (b != 0) d = extgcd_ntt_(b, a % b, y, x), y -= (a / b) * x;
+    else x = 1, y = 0;
+    return d;
+}
+long long int modinv_ntt_(long long int a, long long int m)
+{
+    long long int x, y;
+    extgcd_ntt_(a, m, x, y);
+    return (m + x % m) % m;
+}
+long long int garner_ntt_(int r0, int r1, int r2, int mod)
+{
+    array<long long int, 4> rs = {r0, r1, r2, 0};
+    vector<long long int> coffs(4, 1), constants(4, 0);
+    for (int i = 0; i < 3; i++) {
+        long long int v = (rs[i] - constants[i]) * modinv_ntt_(coffs[i], nttprimes[i]) % nttprimes[i];
+        if (v < 0) v += nttprimes[i];
+        for (int j = i + 1; j < 4; j++) {
+            (constants[j] += coffs[j] * v) %= (j < 3 ? nttprimes[j] : mod);
+            (coffs[j] *= nttprimes[i]) %= (j < 3 ? nttprimes[j] : mod);
+        }
+    }
+    return constants.back();
+}
+template <typename MODINT>
+vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
+{
+    int sz = 1, n = a.size(), m = b.size();
+    while (sz < n + m) sz <<= 1;
+    int mod = MODINT::get_mod();
+    if (skip_garner or find(begin(nttprimes), end(nttprimes), mod) != end(nttprimes)) {
+        a.resize(sz), b.resize(sz);
+        if (a == b) { ntt(a, false); b = a; }
+        else ntt(a, false), ntt(b, false);
+        for (int i = 0; i < sz; i++) a[i] *= b[i];
+        ntt(a, true);
+        a.resize(n + m - 1);
+    }
+    else {
+        vector<int> ai(sz), bi(sz);
+        for (int i = 0; i < n; i++) ai[i] = a[i].val;
+        for (int i = 0; i < m; i++) bi[i] = b[i].val;
+        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);
+        auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);
+        auto ntt2 = nttconv_<nttprimes[2]>(ai, bi);
+        a.resize(n + m - 1);
+        for (int i = 0; i < n + m - 1; i++) {
+            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);
+        }
+    }
+    return a;
+}
+#line 5 "linear_algebra_matrix/test/kitamasa.test.cpp"
+using mint = ModInt<1000000007>;
+
+#line 8 "linear_algebra_matrix/test/kitamasa.test.cpp"
+#include <numeric>
+template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
+#define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
+
+
+std::vector<mint> gen_dp(std::vector<int> v, int n)
+{
+    vector<vector<mint>> dp(n + 1, vector<mint>(v.back() * n + 1));
+    dp[0][0] = 1;
+    for (auto x : v)
+    {
+        for (int i = n - 1; i >= 0; i--)
+        {
+            for (int j = 0; j < dp[i].size(); j++) if (dp[i][j])
+            {
+                for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];
+            }
+        }
+    }
+    return dp.back();
+}
+
 int main()
 {
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
-    int N;
-    std::cin >> N;
-    std::vector<mint> A(N);
-    for (auto &a : A)
+    long long N;
+    int P, C;
+    std::cin >> N >> P >> C;
+    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
+    std::vector<mint> f_reversed = nttconv(primes, composites);
+    std::vector<mint> dp(f_reversed.size());
+    dp[0] = 1;
+    for (int i = 0; i < dp.size(); i++)
     {
-        std::cin >> a;
+        for (int j = 1; i + j < dp.size(); j++) dp[i + j] += dp[i] * f_reversed[j];
     }
-    auto [L, poly] = linear_recurrence(A);
-    std::cout << L << '\n';
-    for (int i = 1; i <= L; i++) std::cout << -poly[i] << ' ';
-    std::cout << '\n';
+
+    for (auto &x : f_reversed) x = -x;
+    f_reversed[0] = 1;
+
+    std::vector<mint> g(f_reversed.size() - 1);
+    g[0] = 1;
+    if (N > f_reversed.size())
+    {
+        long long d = N - f_reversed.size();
+        N -= d;
+        g = monomial_mod_polynomial<mint>(d, f_reversed);
+    }
+
+    auto prod_x = [&](std::vector<mint> v) -> std::vector<mint> {
+        int K = v.size();
+        std::vector<mint> c(K);
+        c[0] = -v[K - 1] * f_reversed[K];
+        for (int i = 1; i < K; i++)
+        {
+            c[i] = v[i - 1] - v[K - 1] * f_reversed[K - i];
+        }
+        return c;
+    };
+    mint acc = 0;
+    for (int i = N; i < f_reversed.size(); i++) acc += f_reversed[i];
+    mint ret = 0;
+    while (N)
+    {
+        mint p = std::inner_product(g.begin(), g.end(), dp.begin(), mint(0));
+        ret -= acc * p;
+        g = prod_x(g);
+        N--;
+        acc += f_reversed[N];
+    }
+    cout << ret << '\n';
 }
 
 ```
