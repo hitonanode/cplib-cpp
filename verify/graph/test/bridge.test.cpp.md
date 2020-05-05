@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#cb3e5c672d961db00b76e36ddf5c068a">graph/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/bridge.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+    - Last commit date: 2020-05-06 01:35:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B</a>
@@ -47,32 +47,34 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#include <algorithm>
 #include <iostream>
 #include <utility>
+#include <vector>
 #include "graph/lowlink.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B"
 
 int main()
 {
     int V, E;
-    cin >> V >> E;
+    std::cin >> V >> E;
     UndirectedGraph graph(V);
     for (int i = 0; i < E; i++) {
         int s, t;
-        cin >> s >> t;
-        if (s > t) swap(s, t);
+        std::cin >> s >> t;
+        if (s > t) std::swap(s, t);
         graph.add_edge(s, t);
     }
     graph.dfs_lowlink(0);
     graph.detectBridge();
 
-    vector<pair<int, int>> bridges;
+    std::vector<std::pair<int, int>> bridges;
     for (int i = 0; i < E; i++) {
-        if (graph.isBridge[i]) {
+        if (graph.is_bridge[i]) {
             bridges.emplace_back(graph.edges[i]);
         }
     }
-    sort(bridges.begin(), bridges.end());
+    std::sort(bridges.begin(), bridges.end());
     for (auto pa : bridges) {
         printf("%d %d\n", pa.first, pa.second);
     }
@@ -85,155 +87,161 @@ int main()
 {% raw %}
 ```cpp
 #line 1 "graph/test/bridge.test.cpp"
+#include <algorithm>
 #include <iostream>
 #include <utility>
-#line 2 "graph/lowlink.hpp"
-#include <algorithm>
-#include <queue>
-#line 5 "graph/lowlink.hpp"
 #include <vector>
-using namespace std;
+#line 3 "graph/lowlink.hpp"
+#include <cassert>
+#include <queue>
+#line 7 "graph/lowlink.hpp"
+
 
 // CUT begin
 struct UndirectedGraph
 {
-    using pint = pair<int, int>;
-
-    int V; // 頂点数
-    int E; // 辺の数
+    using pint = std::pair<int, int>;
+    int V; // # of vertices
+    int E; // # of edges
     int k;
-    vector<vector<pint>> to;
-    vector<pint> edges;
-    vector<int> root_id; // DFSで根になった頂点
+    std::vector<std::vector<pint>> to;
+    std::vector<pint> edges;
+    std::vector<int> root_ids; // DFS forestの構築で根になった頂点
 
-    vector<int> isBridge; // edgesの各要素が橋かどうか
-    vector<int> isArticulation; // 各頂点が間接点かどうか
+    std::vector<int> is_bridge; // Whether edge i is bridge or not, size = E
+    std::vector<int> is_articulation; // whether vertex i is articulation point or not, size = V
 
-    vector<int> order, lowlink, isusedforDFS; // lowlink
+    // lowlink
+    std::vector<int> order;   // visiting order of DFS tree, size = V
+    std::vector<int> lowlink; // size = V
+    std::vector<int> is_dfstree_edge; // size = E
 
-    int bec_num; // 分割された二重辺連結成分数
-    vector<int> bec_id; // 各頂点が何個目の二重辺連結成分か
+    int tecc_num; // 分割された二重辺連結成分数
+    std::vector<int> tecc_id; // 各頂点が何個目の二重辺連結成分か
 
-    UndirectedGraph(int V) : V(V), E(0), k(0),
-                           to(vector<vector<pint> >(V)), 
-                           order(vector<int>(V, -1)),
-                           lowlink(vector<int>(V, -1)) {}
+    UndirectedGraph(int V) : V(V), E(0), k(0), to(V),  order(V, -1), lowlink(V, -1) {}
 
     void add_edge(int v1, int v2)
     {
-        to[v1].push_back(pint(v2, E));
-        to[v2].push_back(pint(v1, E));
-        edges.push_back(pint(v1, v2));
-        isBridge.push_back(0);
-        isusedforDFS.push_back(0);
+        assert(v1 >= 0 and v1 < V);
+        assert(v2 >= 0 and v2 < V);
+        to[v1].emplace_back(v2, E);
+        to[v2].emplace_back(v1, E);
+        edges.emplace_back(v1, v2);
+        is_bridge.push_back(0);
+        is_dfstree_edge.push_back(0);
         E++;
     }
 
-    void dfs_lowlink(int now, int prev = -1)
+    // Build DFS tree
+    // Complexity: O(V + E)
+    void dfs_lowlink(int now, int prv_eid = -1)
     {
-        if (prev < 0 || prev >= V) root_id.push_back(now);
-        order[now] = lowlink[now] = k;
-        k++;
-        for (auto nxt : to[now])
+        if (prv_eid == -1) root_ids.push_back(now);
+        order[now] = lowlink[now] = k++;
+        for (const auto &nxt : to[now]) if (nxt.second != prv_eid)
         {
-            if (nxt.first == prev) continue;
             if (order[nxt.first] >= 0)
             {
-                lowlink[now] = min(lowlink[now], order[nxt.first]);
+                lowlink[now] = std::min(lowlink[now], order[nxt.first]);
             }
             else
             {
-                isusedforDFS[nxt.second] = 1;
-                dfs_lowlink(nxt.first, now);
-                lowlink[now] = min(lowlink[now], lowlink[nxt.first]);
+                is_dfstree_edge[nxt.second] = 1;
+                dfs_lowlink(nxt.first, nxt.second);
+                lowlink[now] = std::min(lowlink[now], lowlink[nxt.first]);
             }
         }
     }
 
+    // Find all bridges
+    // Complexity: O(V + E)
     void detectBridge()
     {
         for (int i = 0; i < E; i++)
         {
             int v1 = edges[i].first, v2 = edges[i].second;
             if (order[v1] < 0) dfs_lowlink(v1);
-            if (order[v1] > order[v2]) swap(v1, v2);
-            if (order[v1] < lowlink[v2]) isBridge[i] = 1;
+            if (order[v1] > order[v2]) std::swap(v1, v2);
+            if (order[v1] < lowlink[v2]) is_bridge[i] = 1;
         }
     }
 
-    void biconnected_edge_decompose()
+    // Find two-edge-connected components and classify all vertices
+    // Complexity:  O(V + E)
+    void two_edge_connected_components()
     {
-        bec_num = 0;
-        bec_id = vector<int>(V, -1);
+        tecc_num = 0;
+        tecc_id.assign(V, -1);
 
-        for (int i = 0; i < V; i++)
+        for (int i = 0; i < V; i++) if (tecc_id[i] == -1)
         {
-            if (bec_id[i] >= 0) continue;
-            bec_id[i] = bec_num;
-            queue<int> que;
+            tecc_id[i] = tecc_num;
+            std::queue<int> que;
             que.push(i);
             while (!que.empty())
             {
                 int now = que.front();
                 que.pop();
-                for (auto edge : to[now])
+                for (const auto &edge : to[now])
                 {
                     int nxt = edge.first;
-                    if (bec_id[nxt] >= 0 || isBridge[edge.second]) continue;
-                    bec_id[nxt] = bec_num;
+                    if (tecc_id[nxt] >= 0 or is_bridge[edge.second]) continue;
+                    tecc_id[nxt] = tecc_num;
                     que.push(nxt);
                 }
             }
-            bec_num++;
+            tecc_num++;
         }
     }
 
+
     void detectArticulation()
     {
-        // sort(root_id.begin(), root_id.end());
-        isArticulation = vector<int>(V);
+        std::sort(root_ids.begin(), root_ids.end());
+        is_articulation.assign(V, 0);
         for (int v = 0; v < V; v++)
         {
-            if (binary_search(root_id.begin(), root_id.end(), v))
+            if (std::binary_search(root_ids.begin(), root_ids.end(), v))
             {
                 int n = 0;
-                for (auto edge : to[v]) n += isusedforDFS[edge.second];
-                if (n > 1) isArticulation[v] = 1;
+                for (auto edge : to[v]) n += is_dfstree_edge[edge.second];
+                if (n > 1) is_articulation[v] = 1;
             }
             else
             {
                 for (auto e : to[v])
                 {
-                    if (isusedforDFS[e.second] && order[v] <= lowlink[e.first]) isArticulation[v] = 1;
+                    if (is_dfstree_edge[e.second] and order[v] <= lowlink[e.first]) is_articulation[v] = 1;
                 }
             }
         }
     }
 };
-#line 4 "graph/test/bridge.test.cpp"
+#line 6 "graph/test/bridge.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B"
 
 int main()
 {
     int V, E;
-    cin >> V >> E;
+    std::cin >> V >> E;
     UndirectedGraph graph(V);
     for (int i = 0; i < E; i++) {
         int s, t;
-        cin >> s >> t;
-        if (s > t) swap(s, t);
+        std::cin >> s >> t;
+        if (s > t) std::swap(s, t);
         graph.add_edge(s, t);
     }
     graph.dfs_lowlink(0);
     graph.detectBridge();
 
-    vector<pair<int, int>> bridges;
+    std::vector<std::pair<int, int>> bridges;
     for (int i = 0; i < E; i++) {
-        if (graph.isBridge[i]) {
+        if (graph.is_bridge[i]) {
             bridges.emplace_back(graph.edges[i]);
         }
     }
-    sort(bridges.begin(), bridges.end());
+    std::sort(bridges.begin(), bridges.end());
     for (auto pa : bridges) {
         printf("%d %d\n", pa.first, pa.second);
     }
