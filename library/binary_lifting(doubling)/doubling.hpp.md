@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#fc840529f018acf34013c4bdd67ada43">binary_lifting(doubling)</a>
 * <a href="{{ site.github.repository_url }}/blob/master/binary_lifting(doubling)/doubling.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:32:10+09:00
+    - Last commit date: 2020-05-10 23:20:50+09:00
 
 
 
@@ -56,7 +56,7 @@ struct BinaryLifting
     BinaryLifting() : N(0), lgD(0) {}
     BinaryLifting(const std::vector<int> &vec_nxt, int INVALID = -1, int lgd = 0) : N(vec_nxt.size()), INVALID(INVALID), lgD(lgd)
     {
-        while ((1 << lgD) < N) lgD++;
+        while ((1LL << lgD) < N) lgD++;
         mat.assign(lgD, std::vector<int>(N, INVALID));
         mat[0] = vec_nxt;
         for (int i = 0; i < N; i++) if (mat[0][i] < 0 or mat[0][i] >= N) mat[0][i] = INVALID;
@@ -64,9 +64,9 @@ struct BinaryLifting
             for (int i = 0; i < N; i++) if (mat[d][i] != INVALID) mat[d + 1][i] = mat[d][mat[d][i]];
         }
     }
-    int kth_next(int now, int k)
+    int kth_next(int now, long long k)
     {
-        if (k >= (1 << lgD)) exit(8);
+        if (k >= (1LL << lgD)) exit(8);
         for (int d = 0; k and now != INVALID; d++, k >>= 1) if (k & 1) now = mat[d][now];
         return now;
     }
@@ -106,7 +106,7 @@ struct BinaryLifting
     BinaryLifting() : N(0), lgD(0) {}
     BinaryLifting(const std::vector<int> &vec_nxt, int INVALID = -1, int lgd = 0) : N(vec_nxt.size()), INVALID(INVALID), lgD(lgd)
     {
-        while ((1 << lgD) < N) lgD++;
+        while ((1LL << lgD) < N) lgD++;
         mat.assign(lgD, std::vector<int>(N, INVALID));
         mat[0] = vec_nxt;
         for (int i = 0; i < N; i++) if (mat[0][i] < 0 or mat[0][i] >= N) mat[0][i] = INVALID;
@@ -114,9 +114,9 @@ struct BinaryLifting
             for (int i = 0; i < N; i++) if (mat[d][i] != INVALID) mat[d + 1][i] = mat[d][mat[d][i]];
         }
     }
-    int kth_next(int now, int k)
+    int kth_next(int now, long long k)
     {
-        if (k >= (1 << lgD)) exit(8);
+        if (k >= (1LL << lgD)) exit(8);
         for (int d = 0; k and now != INVALID; d++, k >>= 1) if (k & 1) now = mat[d][now];
         return now;
     }
