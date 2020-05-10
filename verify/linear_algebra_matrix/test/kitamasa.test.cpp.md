@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: linear_algebra_matrix/test/kitamasa.test.cpp
+# :x: linear_algebra_matrix/test/kitamasa.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#dc91d55fecbe93608b76606ec1490b73">linear_algebra_matrix/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/kitamasa.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-05 22:31:32+09:00
+    - Last commit date: 2020-05-11 00:27:44+09:00
 
 
 * see: <a href="https://yukicoder.me/problems/no/214">https://yukicoder.me/problems/no/214</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :question: <a href="../../../library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
+* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Code
@@ -390,9 +390,8 @@ void ntt(vector<MODINT> &a, bool is_inverse = false)
 
     for (int m = 1; m < n; m *= 2) {
         int m2 = 2 * m;
-        long long int base = h.power(n / m2);
-        MODINT w(1);
-        for(int x = 0; x < m; x++) {
+        MODINT base = h.power(n / m2), w = 1;
+        for (int x = 0; x < m; x++) {
             for (int s = x; s < n; s += m2) {
                 MODINT u = a[s], d = a[s + m] * w;
                 a[s] = u + d, a[s + m] = u - d;
@@ -455,6 +454,13 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
 {
     int sz = 1, n = a.size(), m = b.size();
     while (sz < n + m) sz <<= 1;
+    if (sz <= 16) {
+        vector<MODINT> ret(n + m - 1);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) ret[i + j] += a[i] * b[j];
+        }
+        return ret;
+    }
     int mod = MODINT::get_mod();
     if (skip_garner or find(begin(nttprimes), end(nttprimes), mod) != end(nttprimes)) {
         a.resize(sz), b.resize(sz);

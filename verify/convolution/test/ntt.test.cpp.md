@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#138f586853b56e3cad59aa29ba977214">convolution/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/convolution/test/ntt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-05-11 00:27:44+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
+* :question: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
 
 
 ## Code
@@ -62,21 +62,25 @@ using mintr = ModIntRuntime;
 
 int main()
 {
+    std::cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+
     mintr::set_mod(MOD);
     int N, M;
     cin >> N >> M;
     vector<mint> A(N), B(M);
     vector<mintr> Ar(N), Br(M);
-    for (int i = 0; i < N; i++) { cin >> A[i];  Ar[i] = A[i].val; }
-    for (int i = 0; i < M; i++) { cin >> B[i];  Br[i] = B[i].val; }
+    for (int i = 0; i < N; i++) cin >> A[i], Ar[i] = A[i].val;
+    for (int i = 0; i < M; i++) cin >> B[i], Br[i] = B[i].val;
 
     vector<mint> ret = nttconv(A, B);
     vector<mintr> retr = nttconv(Ar, Br);
 
     for (int i = 0; i < N + M - 1; i++) {
         assert(ret[i].val == retr[i].val);
-        printf("%d ", ret[i].val);
+        std::cout << ret[i] << ' ';
     }
+    std::cout << '\n';
 }
 
 ```
@@ -237,9 +241,8 @@ void ntt(vector<MODINT> &a, bool is_inverse = false)
 
     for (int m = 1; m < n; m *= 2) {
         int m2 = 2 * m;
-        long long int base = h.power(n / m2);
-        MODINT w(1);
-        for(int x = 0; x < m; x++) {
+        MODINT base = h.power(n / m2), w = 1;
+        for (int x = 0; x < m; x++) {
             for (int s = x; s < n; s += m2) {
                 MODINT u = a[s], d = a[s + m] * w;
                 a[s] = u + d, a[s + m] = u - d;
@@ -302,6 +305,13 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
 {
     int sz = 1, n = a.size(), m = b.size();
     while (sz < n + m) sz <<= 1;
+    if (sz <= 16) {
+        vector<MODINT> ret(n + m - 1);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) ret[i + j] += a[i] * b[j];
+        }
+        return ret;
+    }
     int mod = MODINT::get_mod();
     if (skip_garner or find(begin(nttprimes), end(nttprimes), mod) != end(nttprimes)) {
         a.resize(sz), b.resize(sz);
@@ -450,21 +460,25 @@ using mintr = ModIntRuntime;
 
 int main()
 {
+    std::cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+
     mintr::set_mod(MOD);
     int N, M;
     cin >> N >> M;
     vector<mint> A(N), B(M);
     vector<mintr> Ar(N), Br(M);
-    for (int i = 0; i < N; i++) { cin >> A[i];  Ar[i] = A[i].val; }
-    for (int i = 0; i < M; i++) { cin >> B[i];  Br[i] = B[i].val; }
+    for (int i = 0; i < N; i++) cin >> A[i], Ar[i] = A[i].val;
+    for (int i = 0; i < M; i++) cin >> B[i], Br[i] = B[i].val;
 
     vector<mint> ret = nttconv(A, B);
     vector<mintr> retr = nttconv(Ar, Br);
 
     for (int i = 0; i < N + M - 1; i++) {
         assert(ret[i].val == retr[i].val);
-        printf("%d ", ret[i].val);
+        std::cout << ret[i] << ' ';
     }
+    std::cout << '\n';
 }
 
 ```

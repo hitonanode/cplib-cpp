@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
+* :question: <a href="linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
 * :heavy_check_mark: <a href="../random/rand_nondeterministic.hpp.html">random/rand_nondeterministic.hpp</a>
 
 

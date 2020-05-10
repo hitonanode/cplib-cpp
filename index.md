@@ -55,7 +55,7 @@ layout: default
 
 * :warning: <a href="library/convolution/fft_arbitrary_mod.hpp.html">convolution/fft_arbitrary_mod.hpp</a>
 * :warning: <a href="library/convolution/fft_double.hpp.html">convolution/fft_double.hpp</a>
-* :heavy_check_mark: <a href="library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :question: <a href="library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
 * :heavy_check_mark: <a href="library/convolution/subset_convolution.hpp.html">convolution/subset_convolution.hpp</a>
 
 
@@ -70,8 +70,8 @@ layout: default
 
 ### formal_power_series
 
-* :heavy_check_mark: <a href="library/formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
-* :heavy_check_mark: <a href="library/formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
+* :question: <a href="library/formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
+* :x: <a href="library/formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
 
 
 <div id="ed7daeb157cd9b31e53896ad3c771a26"></div>
@@ -120,7 +120,7 @@ layout: default
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_bitset.hpp.html">linear_algebra_matrix/linalg_bitset.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_longlong.hpp.html">linear_algebra_matrix/linalg_longlong.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
-* :heavy_check_mark: <a href="library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
+* :question: <a href="library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
 * :heavy_check_mark: <a href="library/linear_algebra_matrix/system_of_linear_equations.hpp.html">linear_algebra_matrix/system_of_linear_equations.hpp</a>
 * :warning: <a href="library/linear_algebra_matrix/transpose.hpp.html">linear_algebra_matrix/transpose.hpp</a>
 
@@ -146,8 +146,8 @@ layout: default
 
 * :heavy_check_mark: <a href="library/modulus/bare_mod_algebra.hpp.html">modulus/bare_mod_algebra.hpp</a>
 * :heavy_check_mark: <a href="library/modulus/discrete_logarithm.hpp.html">modulus/discrete_logarithm.hpp</a>
-* :heavy_check_mark: <a href="library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
-* :heavy_check_mark: <a href="library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
+* :question: <a href="library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
 
 
 <div id="5505d41803393eeb41e6557d77d498f8"></div>
@@ -259,9 +259,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/formal_power_series/test/fps_inv.test.cpp.html">formal_power_series/test/fps_inv.test.cpp</a>
 * :heavy_check_mark: <a href="verify/formal_power_series/test/fps_log.test.cpp.html">formal_power_series/test/fps_log.test.cpp</a>
 * :heavy_check_mark: <a href="verify/formal_power_series/test/fps_pow.test.cpp.html">formal_power_series/test/fps_pow.test.cpp</a>
-* :heavy_check_mark: <a href="verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
-* :heavy_check_mark: <a href="verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :heavy_check_mark: <a href="verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
+* :x: <a href="verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
+* :x: <a href="verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
+* :x: <a href="verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 * :heavy_check_mark: <a href="verify/geometry/test/convex_hull.test.cpp.html">geometry/test/convex_hull.test.cpp</a>
 * :heavy_check_mark: <a href="verify/geometry/test/sort_by_argument.test.cpp.html">geometry/test/sort_by_argument.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/2sat_solver.test.cpp.html">graph/test/2sat_solver.test.cpp</a>
@@ -283,7 +283,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/graph-tree/test/lca.test.cpp.html">graph-tree/test/lca.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph-tree/test/vertex-add-subtree-sum.test.cpp.html">graph-tree/test/vertex-add-subtree-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp.html">linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp</a>
-* :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/kitamasa.test.cpp.html">linear_algebra_matrix/test/kitamasa.test.cpp</a>
+* :x: <a href="verify/linear_algebra_matrix/test/kitamasa.test.cpp.html">linear_algebra_matrix/test/kitamasa.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_bitset.test.cpp.html">linear_algebra_matrix/test/linalg_bitset.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_ll_det.test.cpp.html">linear_algebra_matrix/test/linalg_ll_det.test.cpp</a>
 * :heavy_check_mark: <a href="verify/linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp.html">linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp</a>

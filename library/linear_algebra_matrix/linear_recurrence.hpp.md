@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: linear_algebra_matrix/linear_recurrence.hpp
+# :question: linear_algebra_matrix/linear_recurrence.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -44,7 +44,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp.html">linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/kitamasa.test.cpp.html">linear_algebra_matrix/test/kitamasa.test.cpp</a>
+* :x: <a href="../../verify/linear_algebra_matrix/test/kitamasa.test.cpp.html">linear_algebra_matrix/test/kitamasa.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linear_recurrence.test.cpp.html">linear_algebra_matrix/test/linear_recurrence.test.cpp</a>
 
 

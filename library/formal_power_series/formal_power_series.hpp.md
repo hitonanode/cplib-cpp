@@ -25,26 +25,26 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: formal_power_series/formal_power_series.hpp
+# :question: formal_power_series/formal_power_series.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f0e336561d1c18f84cd3e0ce52a956cf">formal_power_series</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/formal_power_series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-05-11 00:27:44+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :heavy_check_mark: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :question: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
+* :x: <a href="multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
 
 
 ## Verified with
@@ -56,9 +56,9 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_inv.test.cpp.html">formal_power_series/test/fps_inv.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_log.test.cpp.html">formal_power_series/test/fps_log.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_pow.test.cpp.html">formal_power_series/test/fps_pow.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
+* :x: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
+* :x: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
+* :x: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 
 
 ## Code
@@ -442,9 +442,8 @@ void ntt(vector<MODINT> &a, bool is_inverse = false)
 
     for (int m = 1; m < n; m *= 2) {
         int m2 = 2 * m;
-        long long int base = h.power(n / m2);
-        MODINT w(1);
-        for(int x = 0; x < m; x++) {
+        MODINT base = h.power(n / m2), w = 1;
+        for (int x = 0; x < m; x++) {
             for (int s = x; s < n; s += m2) {
                 MODINT u = a[s], d = a[s + m] * w;
                 a[s] = u + d, a[s + m] = u - d;
@@ -507,6 +506,13 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
 {
     int sz = 1, n = a.size(), m = b.size();
     while (sz < n + m) sz <<= 1;
+    if (sz <= 16) {
+        vector<MODINT> ret(n + m - 1);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) ret[i + j] += a[i] * b[j];
+        }
+        return ret;
+    }
     int mod = MODINT::get_mod();
     if (skip_garner or find(begin(nttprimes), end(nttprimes), mod) != end(nttprimes)) {
         a.resize(sz), b.resize(sz);
