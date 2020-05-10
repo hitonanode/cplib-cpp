@@ -18,7 +18,7 @@ int main()
     for (auto &a : f) std::cin >> a;
     for (auto &x : xs) std::cin >> x;
 
-    ArbitraryModMultipointEvaluation me(xs);
+    MultipointEvaluation me(xs);
     for (auto x : me.evaluate_polynomial(f)) std::cout << x << ' ';
     std::cout << '\n';
 }

@@ -7,13 +7,13 @@
 //        f = \sum_i^M f_i x^i
 // Complexity: O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation
 template <typename _Tfield>
-struct ArbitraryModMultipointEvaluation
+struct MultipointEvaluation
 {
     int nx;
     int head;
     using polynomial = FormalPowerSeries<_Tfield>;
     std::vector<polynomial> segtree;
-    ArbitraryModMultipointEvaluation(const std::vector<_Tfield> &xs) : nx(xs.size())
+    MultipointEvaluation(const std::vector<_Tfield> &xs) : nx(xs.size())
     {
         head = 1;
         while (1 << head < nx) head++;
