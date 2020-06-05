@@ -1,7 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/214"
-#include "linear_algebra_matrix/linear_recurrence.hpp"
 #include "modulus/modint_fixed.hpp"
 #include "convolution/ntt.hpp"
+#include "formal_power_series/monomial_mod_polynomial.hpp"
 using mint = ModInt<1000000007>;
 
 #include <iostream>

@@ -6,14 +6,14 @@
 // input: xs = [x_0, ..., x_{N - 1}]: points to evaluate
 //        f = \sum_i^M f_i x^i
 // Complexity: O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation
-template <typename _Tfield>
+template <typename Tfield>
 struct MultipointEvaluation
 {
     int nx;
     int head;
-    using polynomial = FormalPowerSeries<_Tfield>;
+    using polynomial = FormalPowerSeries<Tfield>;
     std::vector<polynomial> segtree;
-    MultipointEvaluation(const std::vector<_Tfield> &xs) : nx(xs.size())
+    MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size())
     {
         head = 1;
         while (1 << head < nx) head++;
@@ -27,7 +27,7 @@ struct MultipointEvaluation
             segtree[i] = segtree[2 * i] * segtree[2 * i + 1];
         }
     }
-    std::vector<_Tfield> ret;
+    std::vector<Tfield> ret;
     void _dfs_eval(polynomial f, int now)
     {
         f %= segtree[now];
@@ -39,7 +39,7 @@ struct MultipointEvaluation
         _dfs_eval(f, 2 * now);
         _dfs_eval(f, 2 * now + 1);
     }
-    std::vector<_Tfield> evaluate_polynomial(polynomial f)
+    std::vector<Tfield> evaluate_polynomial(polynomial f)
     {
         ret.resize(nx);
         _dfs_eval(f, 1);
