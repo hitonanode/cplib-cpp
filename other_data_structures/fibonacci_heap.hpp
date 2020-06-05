@@ -13,12 +13,12 @@
 //   - "Introduction to Algorithms, Third Edition", Chapter 19
 //   - <https://www.cs.princeton.edu/~wayne/teaching/fibonacci-heap.pdf>
 //   - <https://rsk0315.hatenablog.com/entry/2019/10/29/151823>
-template <typename _Tp>
+template <typename Tp>
 struct fibonacci_heap
 {
     struct Node
     {
-        _Tp val;
+        Tp val;
         int deg;
         Node *parent, *left, *right, *child;
         bool mark;
@@ -27,7 +27,7 @@ struct fibonacci_heap
         Node(Node &&) = default;
         Node &operator=(Node const &) = default;
         Node &operator=(Node &&) = default;
-        Node(_Tp v) : val(v), deg(0), parent(nullptr), left(nullptr), right(nullptr), child(nullptr), mark(false) {}
+        Node(Tp v) : val(v), deg(0), parent(nullptr), left(nullptr), right(nullptr), child(nullptr), mark(false) {}
         friend std::ostream &operator<<(std::ostream &os, const Node &n)
         {
             os << '(' << n.val << ',';
@@ -97,7 +97,7 @@ struct fibonacci_heap
         _chmin(root);
     }
 
-    Node *push(const _Tp &val) noexcept
+    Node *push(const Tp &val) noexcept
     {
         sz++;
         Node *ptr = new Node(val);
@@ -193,7 +193,7 @@ struct fibonacci_heap
         ptop = r;
         pop();
     }
-    bool decrease(Node *r, const _Tp new_val)
+    bool decrease(Node *r, const Tp new_val)
     {
         assert(r != nullptr);
         if (!(new_val < r->val)) return false;
@@ -207,7 +207,7 @@ struct fibonacci_heap
         _chmin(r);
         return true;
     }
-    _Tp top() const
+    Tp top() const
     {
         assert(ptop != nullptr);
         return ptop->val;
@@ -226,14 +226,14 @@ struct fibonacci_heap
 
 #include <utility>
 #include <vector>
-template <typename _Tp>
+template <typename Tp>
 struct heap
 {
-    using P = std::pair<_Tp, int>;
+    using P = std::pair<Tp, int>;
     fibonacci_heap<P> _heap;
     std::vector<typename fibonacci_heap<P>::Node *> vp;
-    std::vector<_Tp> result;
-    void initialize(int N, _Tp initval)
+    std::vector<Tp> result;
+    void initialize(int N, Tp initval)
     {
         _heap.clear();
         vp.resize(N);
@@ -243,11 +243,11 @@ struct heap
             vp[i] = _heap.push(std::make_pair(initval, i));
         }
     }
-    heap(int N, _Tp initval)
+    heap(int N, Tp initval)
     {
         initialize(N, initval);
     }
-    bool chmin(int i, _Tp val)
+    bool chmin(int i, Tp val)
     {
         if (val < result[i])
         {
@@ -264,7 +264,7 @@ struct heap
         }
         return false;
     }
-    _Tp operator[](int i) const { return result.at(i); }
+    Tp operator[](int i) const { return result.at(i); }
     P top()
     {
         return _heap.top();
