@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#dc91d55fecbe93608b76606ec1490b73">linear_algebra_matrix/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/linalg_bitset.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-26 13:14:26+09:00
+    - Last commit date: 2020-06-06 02:17:41+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624</a>
@@ -110,6 +110,8 @@ int main()
 ```cpp
 #line 2 "linear_algebra_matrix/linalg_bitset.hpp"
 #include <bitset>
+#include <cassert>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -165,6 +167,45 @@ std::vector<std::bitset<Wmax>> matpower(std::vector<std::bitset<Wmax>> X, long l
         X = matmul(X, X), n >>= 1;
     }
     return ret;
+}
+
+// Solve Ax = b on F_2
+// - retval: {true, one of the solutions, {freedoms}} (if solution exists)
+//           {false, {}, {}} (otherwise)
+std::tuple<bool, std::bitset<Wmax>, std::vector<std::bitset<Wmax>>>
+system_of_linear_equations(std::vector<std::bitset<Wmax>> A, std::bitset<Wmax> b, int W)
+{
+    int H = A.size();
+    assert(W + 1 <= Wmax);
+    assert(H <= Wmax);
+
+    std::vector<std::bitset<Wmax>> M = A;
+    for (int i = 0; i < H; i++) M[i][W] = b[i];
+    M = gauss_jordan(W + 1, M);
+    std::vector<int> ss(W, -1);
+    for (int i = 0; i < H; i++)
+    {
+        int j = M[i]._Find_first();
+        if (j == W)
+        {
+            return std::make_tuple(false, std::bitset<Wmax>(), std::vector<std::bitset<Wmax>>());
+        }
+        if (j < W) ss[j] = i;
+    }
+    std::bitset<Wmax> x;
+    std::vector<std::bitset<Wmax>> D;
+    for (int j = 0; j < W; j++)
+    {
+        if (ss[j] == -1)
+        {
+            std::bitset<Wmax> d;
+            d[j] = 1;
+            for (int jj = 0; jj < W; jj++) if (ss[jj] != -1) d[jj] = M[ss[jj]][j];
+            D.emplace_back(d);
+        }
+        else x[j] = M[ss[j]][W];
+    }
+    return std::make_tuple(true, x, D);
 }
 #line 2 "linear_algebra_matrix/test/linalg_bitset.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624"

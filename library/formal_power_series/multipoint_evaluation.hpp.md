@@ -25,27 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: formal_power_series/multipoint_evaluation.hpp
+# :heavy_check_mark: formal_power_series/multipoint_evaluation.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f0e336561d1c18f84cd3e0ce52a956cf">formal_power_series</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/multipoint_evaluation.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-11 00:27:44+09:00
+    - Last commit date: 2020-06-06 01:37:38+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :question: <a href="formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
-* :question: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :heavy_check_mark: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :heavy_check_mark: <a href="formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
+* :heavy_check_mark: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 
 
 ## Code
@@ -61,14 +61,14 @@ layout: default
 // input: xs = [x_0, ..., x_{N - 1}]: points to evaluate
 //        f = \sum_i^M f_i x^i
 // Complexity: O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation
-template <typename _Tfield>
+template <typename Tfield>
 struct MultipointEvaluation
 {
     int nx;
     int head;
-    using polynomial = FormalPowerSeries<_Tfield>;
+    using polynomial = FormalPowerSeries<Tfield>;
     std::vector<polynomial> segtree;
-    MultipointEvaluation(const std::vector<_Tfield> &xs) : nx(xs.size())
+    MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size())
     {
         head = 1;
         while (1 << head < nx) head++;
@@ -82,7 +82,7 @@ struct MultipointEvaluation
             segtree[i] = segtree[2 * i] * segtree[2 * i + 1];
         }
     }
-    std::vector<_Tfield> ret;
+    std::vector<Tfield> ret;
     void _dfs_eval(polynomial f, int now)
     {
         f %= segtree[now];
@@ -94,7 +94,7 @@ struct MultipointEvaluation
         _dfs_eval(f, 2 * now);
         _dfs_eval(f, 2 * now + 1);
     }
-    std::vector<_Tfield> evaluate_polynomial(polynomial f)
+    std::vector<Tfield> evaluate_polynomial(polynomial f)
     {
         ret.resize(nx);
         _dfs_eval(f, 1);
@@ -573,14 +573,14 @@ struct FormalPowerSeries : vector<T>
 // input: xs = [x_0, ..., x_{N - 1}]: points to evaluate
 //        f = \sum_i^M f_i x^i
 // Complexity: O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation
-template <typename _Tfield>
+template <typename Tfield>
 struct MultipointEvaluation
 {
     int nx;
     int head;
-    using polynomial = FormalPowerSeries<_Tfield>;
+    using polynomial = FormalPowerSeries<Tfield>;
     std::vector<polynomial> segtree;
-    MultipointEvaluation(const std::vector<_Tfield> &xs) : nx(xs.size())
+    MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size())
     {
         head = 1;
         while (1 << head < nx) head++;
@@ -594,7 +594,7 @@ struct MultipointEvaluation
             segtree[i] = segtree[2 * i] * segtree[2 * i + 1];
         }
     }
-    std::vector<_Tfield> ret;
+    std::vector<Tfield> ret;
     void _dfs_eval(polynomial f, int now)
     {
         f %= segtree[now];
@@ -606,7 +606,7 @@ struct MultipointEvaluation
         _dfs_eval(f, 2 * now);
         _dfs_eval(f, 2 * now + 1);
     }
-    std::vector<_Tfield> evaluate_polynomial(polynomial f)
+    std::vector<Tfield> evaluate_polynomial(polynomial f)
     {
         ret.resize(nx);
         _dfs_eval(f, 1);

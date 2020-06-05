@@ -25,23 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: linear_algebra_matrix/test/kitamasa.test.cpp
+# :heavy_check_mark: formal_power_series/test/coeff_of_rational_function.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#dc91d55fecbe93608b76606ec1490b73">linear_algebra_matrix/test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/kitamasa.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-11 00:27:44+09:00
+* category: <a href="../../../index.html#a20fdd22d4cc62ca1cf4e679d77fd3d2">formal_power_series/test</a>
+* <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/test/coeff_of_rational_function.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-06-06 01:37:38+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/no/214">https://yukicoder.me/problems/no/214</a>
+* see: <a href="https://yukicoder.me/problems/no/215">https://yukicoder.me/problems/no/215</a>
 
 
 ## Depends on
 
-* :question: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :question: <a href="../../../library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
-* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :heavy_check_mark: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :heavy_check_mark: <a href="../../../library/formal_power_series/coeff_of_rational_function.hpp.html">formal_power_series/coeff_of_rational_function.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Code
@@ -49,19 +49,17 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/no/214"
-#include "linear_algebra_matrix/linear_recurrence.hpp"
+#define PROBLEM "https://yukicoder.me/problems/no/215"
 #include "modulus/modint_fixed.hpp"
 #include "convolution/ntt.hpp"
+#include "formal_power_series/coeff_of_rational_function.hpp"
+
 using mint = ModInt<1000000007>;
 
 #include <iostream>
-#include <numeric>
-template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
-#define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
 
-
-std::vector<mint> gen_dp(std::vector<int> v, int n)
+using namespace std;
+vector<mint> gen_dp(vector<int> v, int n)
 {
     vector<vector<mint>> dp(n + 1, vector<mint>(v.back() * n + 1));
     dp[0][0] = 1;
@@ -82,50 +80,14 @@ int main()
 {
     long long N;
     int P, C;
-    std::cin >> N >> P >> C;
-    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
-    std::vector<mint> f_reversed = nttconv(primes, composites);
-    std::vector<mint> dp(f_reversed.size());
-    dp[0] = 1;
-    for (int i = 0; i < dp.size(); i++)
-    {
-        for (int j = 1; i + j < dp.size(); j++) dp[i + j] += dp[i] * f_reversed[j];
-    }
-
-    for (auto &x : f_reversed) x = -x;
-    f_reversed[0] = 1;
-
-    std::vector<mint> g(f_reversed.size() - 1);
-    g[0] = 1;
-    if (N > f_reversed.size())
-    {
-        long long d = N - f_reversed.size();
-        N -= d;
-        g = monomial_mod_polynomial<mint>(d, f_reversed);
-    }
-
-    auto prod_x = [&](std::vector<mint> v) -> std::vector<mint> {
-        int K = v.size();
-        std::vector<mint> c(K);
-        c[0] = -v[K - 1] * f_reversed[K];
-        for (int i = 1; i < K; i++)
-        {
-            c[i] = v[i - 1] - v[K - 1] * f_reversed[K - i];
-        }
-        return c;
-    };
-    mint acc = 0;
-    for (int i = N; i < f_reversed.size(); i++) acc += f_reversed[i];
-    mint ret = 0;
-    while (N)
-    {
-        mint p = std::inner_product(g.begin(), g.end(), dp.begin(), mint(0));
-        ret -= acc * p;
-        g = prod_x(g);
-        N--;
-        acc += f_reversed[N];
-    }
-    cout << ret << '\n';
+    cin >> N >> P >> C;
+    vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
+    vector<mint> f = nttconv(primes, composites);
+    vector<mint> denom = f;
+    for (auto &x : denom) x = -x;
+    denom[0] = 1;
+    for (int i = f.size() - 1; i > 1; i--) f[i - 1] += f[i];
+    cout << coefficient_of_rational_function(N, f, denom) << '\n';
 }
 
 ```
@@ -134,116 +96,11 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "linear_algebra_matrix/test/kitamasa.test.cpp"
-#define PROBLEM "https://yukicoder.me/problems/no/214"
-#line 2 "linear_algebra_matrix/linear_recurrence.hpp"
-#include <algorithm>
-#include <cassert>
-#include <utility>
-#include <vector>
-
-// CUT begin
-// Berlekamp–Massey algorithm
-// <https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm>
-// Complexity: O(N^2)
-// input: S = sequence from field K
-// return: L          = degree of minimal polynomial,
-//         C_reversed = monic min. polynomial (size = L + 1, reversed order, C_reversed[0] = 1))
-// Formula: convolve(S, C_reversed)[i] = 0 for i >= L
-// Example:
-// - [1, 2, 4, 8, 16]   -> (1, [1, -2])
-// - [1, 1, 2, 3, 5, 8] -> (2, [1, -1, -1])
-// - [0, 0, 0, 0, 1]    -> (5, [1, 0, 0, 0, 0, 998244352]) (mod 998244353)
-// - []                 -> (0, [1])
-// - [0, 0, 0]          -> (0, [1])
-// - [-2]               -> (1, [1, 2])
-template <typename _Tfield>
-std::pair<int, std::vector<_Tfield>> linear_recurrence(const std::vector<_Tfield> &S)
-{
-    int N = S.size();
-    using poly = std::vector<_Tfield>;
-    poly C_reversed{1}, B{1};
-    int L = 0, m = 1;
-    _Tfield b = 1;
-
-    // adjust: C(x) <- C(x) - (d / b) x^m B(x)
-    auto adjust = [](poly C, const poly &B, _Tfield d, _Tfield b, int m) -> poly {
-        C.resize(std::max(C.size(), B.size() + m));
-        _Tfield a = d / b;
-        for (unsigned i = 0; i < B.size(); i++) C[i + m] -= a * B[i];
-        return C;
-    };
-
-    for (int n = 0; n < N; n++) {
-        _Tfield d = S[n];
-        for (int i = 1; i <= L; i++) d += C_reversed[i] * S[n - i];
-
-        if (d == 0) m++;
-        else if (2 * L <= n) {
-            poly T = C_reversed;
-            C_reversed = adjust(C_reversed, B, d, b, m);
-            L = n + 1 - L;
-            B = T;
-            b = d;
-            m = 1;
-        }
-        else C_reversed = adjust(C_reversed, B, d, b, m++);
-    }
-    return std::make_pair(L, C_reversed);
-}
-
-
-// Calculate x^N mod f(x)
-// Known as `Kitamasa method`
-// Input: f_reversed: monic, reversed (f_reversed[0] = 1)
-// Complexity: O(K^2 lgN) (K: deg. of f)
-// Example: (4, [1, -1, -1]) -> [2, 3]
-//          ( x^4 = (x^2 + x + 2)(x^2 - x - 1) + 3x + 2 )
-// Reference: <http://misawa.github.io/others/fast_kitamasa_method.html>
-//            <http://sugarknri.hatenablog.com/entry/2017/11/18/233936>
-template <typename _Tfield>
-std::vector<_Tfield> monomial_mod_polynomial(long long N, const std::vector<_Tfield> &f_reversed)
-{
-    assert(!f_reversed.empty() and f_reversed[0] == 1);
-    int K = f_reversed.size() - 1;
-    if (!K) return {};
-    int D = 64 - __builtin_clzll(N);
-    std::vector<_Tfield> ret(K, 0);
-    ret[0] = 1;
-    auto self_conv = [](std::vector<_Tfield> x) -> std::vector<_Tfield> {
-        int d = x.size();
-        std::vector<_Tfield> ret(d * 2 - 1);
-        for (int i = 0; i < d; i++)
-        {
-            ret[i * 2] += x[i] * x[i];
-            for (int j = 0; j < i; j++) ret[i + j] += x[i] * x[j] * 2;
-        }
-        return ret;
-    };
-    for (int d = D; d--;)
-    {
-        ret = self_conv(ret);
-        for (int i = 2 * K - 2; i >= K; i--)
-        {
-            for (int j = 1; j <= K; j++) ret[i - j] -= ret[i] * f_reversed[j];
-        }
-        ret.resize(K);
-        if ((N >> d) & 1)
-        {
-            std::vector<_Tfield> c(K);
-            c[0] = -ret[K - 1] * f_reversed[K];
-            for (int i = 1; i < K; i++)
-            {
-                c[i] = ret[i - 1] - ret[K - 1] * f_reversed[K - i];
-            }
-            ret = c;
-        }
-    }
-    return ret;
-}
+#line 1 "formal_power_series/test/coeff_of_rational_function.test.cpp"
+#define PROBLEM "https://yukicoder.me/problems/no/215"
 #line 2 "modulus/modint_fixed.hpp"
 #include <iostream>
-#line 4 "modulus/modint_fixed.hpp"
+#include <vector>
 #include <set>
 
 // CUT begin
@@ -354,8 +211,9 @@ struct ModInt
 // using mint = ModInt<MOD>;
 #line 3 "convolution/ntt.hpp"
 
-#line 5 "convolution/ntt.hpp"
+#include <algorithm>
 #include <array>
+#include <cassert>
 #line 8 "convolution/ntt.hpp"
 using namespace std;
 
@@ -484,16 +342,57 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
     }
     return a;
 }
-#line 5 "linear_algebra_matrix/test/kitamasa.test.cpp"
+#line 4 "formal_power_series/coeff_of_rational_function.hpp"
+
+// Calculate [x^N](num(x) / den(x))
+// Coplexity: O(LlgLlgN) ( L = size(num) + size(den) )
+template <typename Tp>
+Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vector<Tp> den)
+{
+    assert(N >= 0);
+    while (den.size() and den.back() == 0) den.pop_back();
+    assert(den.size());
+    int h = 0;
+    while (den[h] == 0) h++;
+    N += h;
+    den.erase(den.begin(), den.begin() + h);
+    
+    if (den.size() == 1)
+    {
+        assert(N < int(num.size()));
+        return num[N] / den[0];
+    }
+
+    while (N)
+    {
+        std::vector<Tp> g = den;
+        for (size_t i = 1; i < g.size(); i += 2)
+        {
+            g[i] = -g[i];
+        }
+        auto conv_num_g = nttconv(num, g);
+        num.resize((conv_num_g.size() + 1 - (N & 1)) / 2);
+        for (size_t i = 0; i < num.size(); i++)
+        {
+            num[i] = conv_num_g[i * 2 + (N & 1)];
+        }
+        auto conv_den_g = nttconv(den, g);
+        for (size_t i = 0; i < den.size(); i++)
+        {
+            den[i] = conv_den_g[i * 2];
+        }
+        N >>= 1;
+    }
+    return num[0] / den[0];
+}
+#line 5 "formal_power_series/test/coeff_of_rational_function.test.cpp"
+
 using mint = ModInt<1000000007>;
 
-#line 8 "linear_algebra_matrix/test/kitamasa.test.cpp"
-#include <numeric>
-template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
-#define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
+#line 9 "formal_power_series/test/coeff_of_rational_function.test.cpp"
 
-
-std::vector<mint> gen_dp(std::vector<int> v, int n)
+using namespace std;
+vector<mint> gen_dp(vector<int> v, int n)
 {
     vector<vector<mint>> dp(n + 1, vector<mint>(v.back() * n + 1));
     dp[0][0] = 1;
@@ -514,50 +413,14 @@ int main()
 {
     long long N;
     int P, C;
-    std::cin >> N >> P >> C;
-    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
-    std::vector<mint> f_reversed = nttconv(primes, composites);
-    std::vector<mint> dp(f_reversed.size());
-    dp[0] = 1;
-    for (int i = 0; i < dp.size(); i++)
-    {
-        for (int j = 1; i + j < dp.size(); j++) dp[i + j] += dp[i] * f_reversed[j];
-    }
-
-    for (auto &x : f_reversed) x = -x;
-    f_reversed[0] = 1;
-
-    std::vector<mint> g(f_reversed.size() - 1);
-    g[0] = 1;
-    if (N > f_reversed.size())
-    {
-        long long d = N - f_reversed.size();
-        N -= d;
-        g = monomial_mod_polynomial<mint>(d, f_reversed);
-    }
-
-    auto prod_x = [&](std::vector<mint> v) -> std::vector<mint> {
-        int K = v.size();
-        std::vector<mint> c(K);
-        c[0] = -v[K - 1] * f_reversed[K];
-        for (int i = 1; i < K; i++)
-        {
-            c[i] = v[i - 1] - v[K - 1] * f_reversed[K - i];
-        }
-        return c;
-    };
-    mint acc = 0;
-    for (int i = N; i < f_reversed.size(); i++) acc += f_reversed[i];
-    mint ret = 0;
-    while (N)
-    {
-        mint p = std::inner_product(g.begin(), g.end(), dp.begin(), mint(0));
-        ret -= acc * p;
-        g = prod_x(g);
-        N--;
-        acc += f_reversed[N];
-    }
-    cout << ret << '\n';
+    cin >> N >> P >> C;
+    vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
+    vector<mint> f = nttconv(primes, composites);
+    vector<mint> denom = f;
+    for (auto &x : denom) x = -x;
+    denom[0] = 1;
+    for (int i = f.size() - 1; i > 1; i--) f[i - 1] += f[i];
+    cout << coefficient_of_rational_function(N, f, denom) << '\n';
 }
 
 ```

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#dc91d55fecbe93608b76606ec1490b73">linear_algebra_matrix/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/system_of_linear_equations.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-18 04:20:40+09:00
+    - Last commit date: 2020-06-06 02:17:41+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/system_of_linear_equations">https://judge.yosupo.jp/problem/system_of_linear_equations</a>
@@ -41,7 +41,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linalg_modint.hpp.html">linear_algebra_matrix/linalg_modint.hpp</a>
 * :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/system_of_linear_equations.hpp.html">linear_algebra_matrix/system_of_linear_equations.hpp</a>
-* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Code
@@ -54,27 +54,26 @@ layout: default
 #include "linear_algebra_matrix/system_of_linear_equations.hpp"
 #include <iostream>
 using mint = ModInt<998244353>;
-using namespace std;
 
 int main()
 {
     int N, M;
-    cin >> N >> M;
+    std::cin >> N >> M;
     matrix<mint> A(N, M);
-    cin >> A;
-    vector<mint> b(N);
-    for (int i = 0; i < N; i++) cin >> b[i];
+    std::cin >> A;
+    std::vector<mint> b(N);
+    for (auto &x : b) std::cin >> x;
     auto ret = system_of_linear_equations(A, b);
-    if (ret.first.empty()) cout << -1 << "\n";
+    if (ret.first.empty()) std::cout << -1 << "\n";
     else
     {
-        cout << ret.second.size() << "\n";
-        for (auto x : ret.first) cout << x << " ";
-        cout << "\n";
+        std::cout << ret.second.size() << "\n";
+        for (auto x : ret.first) std::cout << x << " ";
+        std::cout << "\n";
 
         for (auto vec : ret.second) {
-            for (auto e : vec) cout << e << " ";
-            cout << "\n";
+            for (auto e : vec) std::cout << e << " ";
+            std::cout << "\n";
         }
     }
 }
@@ -366,6 +365,9 @@ T Fibonacci(long long int k, int a = 1, int b = 1)
 // Solve Ax = b for T = ModInt<PRIME>
 // - retval: {one of the solution, {freedoms}} (if solution exists)
 //           {{}, {}} (otherwise)
+// Complexity:
+// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs., W: # of variables)
+// - Enumerate all of the bases: O(HW(H + W))
 template <typename T>
 std::pair<std::vector<T>, std::vector<std::vector<T>>>
 system_of_linear_equations(matrix<T> A, std::vector<T> b)
@@ -392,36 +394,35 @@ system_of_linear_equations(matrix<T> A, std::vector<T> b)
         if (ss[j] == -1) {
             std::vector<T> d(W);
             d[j] = 1;
-            for (int jj = 0; jj < W; jj++) if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];
+            for (int jj = 0; jj < j; jj++) if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];
             D.emplace_back(d);
         }
         else x[j] = M[ss[j]][W] / M[ss[j]][j];
     }
-    return make_pair(x, D);
+    return std::make_pair(x, D);
 }
 #line 5 "linear_algebra_matrix/test/system_of_linear_equations.test.cpp"
 using mint = ModInt<998244353>;
-using namespace std;
 
 int main()
 {
     int N, M;
-    cin >> N >> M;
+    std::cin >> N >> M;
     matrix<mint> A(N, M);
-    cin >> A;
-    vector<mint> b(N);
-    for (int i = 0; i < N; i++) cin >> b[i];
+    std::cin >> A;
+    std::vector<mint> b(N);
+    for (auto &x : b) std::cin >> x;
     auto ret = system_of_linear_equations(A, b);
-    if (ret.first.empty()) cout << -1 << "\n";
+    if (ret.first.empty()) std::cout << -1 << "\n";
     else
     {
-        cout << ret.second.size() << "\n";
-        for (auto x : ret.first) cout << x << " ";
-        cout << "\n";
+        std::cout << ret.second.size() << "\n";
+        for (auto x : ret.first) std::cout << x << " ";
+        std::cout << "\n";
 
         for (auto vec : ret.second) {
-            for (auto e : vec) cout << e << " ";
-            cout << "\n";
+            for (auto e : vec) std::cout << e << " ";
+            std::cout << "\n";
         }
     }
 }

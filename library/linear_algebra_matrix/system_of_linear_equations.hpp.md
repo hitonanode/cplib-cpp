@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#20f2c5d841ec31673050aaedd8b17f50">linear_algebra_matrix</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/system_of_linear_equations.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-18 04:20:40+09:00
+    - Last commit date: 2020-06-06 02:17:41+09:00
 
 
 
@@ -60,6 +60,9 @@ layout: default
 // Solve Ax = b for T = ModInt<PRIME>
 // - retval: {one of the solution, {freedoms}} (if solution exists)
 //           {{}, {}} (otherwise)
+// Complexity:
+// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs., W: # of variables)
+// - Enumerate all of the bases: O(HW(H + W))
 template <typename T>
 std::pair<std::vector<T>, std::vector<std::vector<T>>>
 system_of_linear_equations(matrix<T> A, std::vector<T> b)
@@ -86,12 +89,12 @@ system_of_linear_equations(matrix<T> A, std::vector<T> b)
         if (ss[j] == -1) {
             std::vector<T> d(W);
             d[j] = 1;
-            for (int jj = 0; jj < W; jj++) if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];
+            for (int jj = 0; jj < j; jj++) if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];
             D.emplace_back(d);
         }
         else x[j] = M[ss[j]][W] / M[ss[j]][j];
     }
-    return make_pair(x, D);
+    return std::make_pair(x, D);
 }
 
 ```
@@ -268,6 +271,9 @@ T Fibonacci(long long int k, int a = 1, int b = 1)
 // Solve Ax = b for T = ModInt<PRIME>
 // - retval: {one of the solution, {freedoms}} (if solution exists)
 //           {{}, {}} (otherwise)
+// Complexity:
+// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs., W: # of variables)
+// - Enumerate all of the bases: O(HW(H + W))
 template <typename T>
 std::pair<std::vector<T>, std::vector<std::vector<T>>>
 system_of_linear_equations(matrix<T> A, std::vector<T> b)
@@ -294,12 +300,12 @@ system_of_linear_equations(matrix<T> A, std::vector<T> b)
         if (ss[j] == -1) {
             std::vector<T> d(W);
             d[j] = 1;
-            for (int jj = 0; jj < W; jj++) if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];
+            for (int jj = 0; jj < j; jj++) if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];
             D.emplace_back(d);
         }
         else x[j] = M[ss[j]][W] / M[ss[j]][j];
     }
-    return make_pair(x, D);
+    return std::make_pair(x, D);
 }
 
 ```

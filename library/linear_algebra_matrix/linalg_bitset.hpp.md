@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#20f2c5d841ec31673050aaedd8b17f50">linear_algebra_matrix</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/linalg_bitset.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-26 13:02:29+09:00
+    - Last commit date: 2020-06-06 02:17:41+09:00
 
 
 
@@ -48,6 +48,8 @@ layout: default
 ```cpp
 #pragma once
 #include <bitset>
+#include <cassert>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -103,6 +105,45 @@ std::vector<std::bitset<Wmax>> matpower(std::vector<std::bitset<Wmax>> X, long l
         X = matmul(X, X), n >>= 1;
     }
     return ret;
+}
+
+// Solve Ax = b on F_2
+// - retval: {true, one of the solutions, {freedoms}} (if solution exists)
+//           {false, {}, {}} (otherwise)
+std::tuple<bool, std::bitset<Wmax>, std::vector<std::bitset<Wmax>>>
+system_of_linear_equations(std::vector<std::bitset<Wmax>> A, std::bitset<Wmax> b, int W)
+{
+    int H = A.size();
+    assert(W + 1 <= Wmax);
+    assert(H <= Wmax);
+
+    std::vector<std::bitset<Wmax>> M = A;
+    for (int i = 0; i < H; i++) M[i][W] = b[i];
+    M = gauss_jordan(W + 1, M);
+    std::vector<int> ss(W, -1);
+    for (int i = 0; i < H; i++)
+    {
+        int j = M[i]._Find_first();
+        if (j == W)
+        {
+            return std::make_tuple(false, std::bitset<Wmax>(), std::vector<std::bitset<Wmax>>());
+        }
+        if (j < W) ss[j] = i;
+    }
+    std::bitset<Wmax> x;
+    std::vector<std::bitset<Wmax>> D;
+    for (int j = 0; j < W; j++)
+    {
+        if (ss[j] == -1)
+        {
+            std::bitset<Wmax> d;
+            d[j] = 1;
+            for (int jj = 0; jj < W; jj++) if (ss[jj] != -1) d[jj] = M[ss[jj]][j];
+            D.emplace_back(d);
+        }
+        else x[j] = M[ss[j]][W];
+    }
+    return std::make_tuple(true, x, D);
 }
 
 ```
@@ -113,6 +154,8 @@ std::vector<std::bitset<Wmax>> matpower(std::vector<std::bitset<Wmax>> X, long l
 ```cpp
 #line 2 "linear_algebra_matrix/linalg_bitset.hpp"
 #include <bitset>
+#include <cassert>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -168,6 +211,45 @@ std::vector<std::bitset<Wmax>> matpower(std::vector<std::bitset<Wmax>> X, long l
         X = matmul(X, X), n >>= 1;
     }
     return ret;
+}
+
+// Solve Ax = b on F_2
+// - retval: {true, one of the solutions, {freedoms}} (if solution exists)
+//           {false, {}, {}} (otherwise)
+std::tuple<bool, std::bitset<Wmax>, std::vector<std::bitset<Wmax>>>
+system_of_linear_equations(std::vector<std::bitset<Wmax>> A, std::bitset<Wmax> b, int W)
+{
+    int H = A.size();
+    assert(W + 1 <= Wmax);
+    assert(H <= Wmax);
+
+    std::vector<std::bitset<Wmax>> M = A;
+    for (int i = 0; i < H; i++) M[i][W] = b[i];
+    M = gauss_jordan(W + 1, M);
+    std::vector<int> ss(W, -1);
+    for (int i = 0; i < H; i++)
+    {
+        int j = M[i]._Find_first();
+        if (j == W)
+        {
+            return std::make_tuple(false, std::bitset<Wmax>(), std::vector<std::bitset<Wmax>>());
+        }
+        if (j < W) ss[j] = i;
+    }
+    std::bitset<Wmax> x;
+    std::vector<std::bitset<Wmax>> D;
+    for (int j = 0; j < W; j++)
+    {
+        if (ss[j] == -1)
+        {
+            std::bitset<Wmax> d;
+            d[j] = 1;
+            for (int jj = 0; jj < W; jj++) if (ss[jj] != -1) d[jj] = M[ss[jj]][j];
+            D.emplace_back(d);
+        }
+        else x[j] = M[ss[j]][W];
+    }
+    return std::make_tuple(true, x, D);
 }
 
 ```

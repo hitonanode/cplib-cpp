@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#7ddf32e17a6ac5ce04a8ecbf782ca509">random</a>
 * <a href="{{ site.github.repository_url }}/blob/master/random/custom_hash.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-06-06 02:17:41+09:00
 
 
 
@@ -61,7 +61,7 @@ struct custom_hash
 
     size_t operator()(uint64_t x) const
     {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+        static const uint64_t FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();
         return splitmix64(x + FIXED_RANDOM);
     }
 };
@@ -100,7 +100,7 @@ struct custom_hash
 
     size_t operator()(uint64_t x) const
     {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+        static const uint64_t FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();
         return splitmix64(x + FIXED_RANDOM);
     }
 };

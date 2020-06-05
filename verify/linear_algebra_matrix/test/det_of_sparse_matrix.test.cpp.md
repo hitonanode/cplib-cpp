@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#dc91d55fecbe93608b76606ec1490b73">linear_algebra_matrix/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-05 22:31:32+09:00
+    - Last commit date: 2020-06-06 02:17:41+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sparse_matrix_det">https://judge.yosupo.jp/problem/sparse_matrix_det</a>
@@ -40,8 +40,8 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/det_of_sparse_matrix.hpp.html">linear_algebra_matrix/det_of_sparse_matrix.hpp</a>
-* :question: <a href="../../../library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
-* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 * :heavy_check_mark: <a href="../../../library/random/rand_nondeterministic.hpp.html">random/rand_nondeterministic.hpp</a>
 
 
@@ -230,25 +230,25 @@ struct rand_int_
 // - []                 -> (0, [1])
 // - [0, 0, 0]          -> (0, [1])
 // - [-2]               -> (1, [1, 2])
-template <typename _Tfield>
-std::pair<int, std::vector<_Tfield>> linear_recurrence(const std::vector<_Tfield> &S)
+template <typename Tfield>
+std::pair<int, std::vector<Tfield>> linear_recurrence(const std::vector<Tfield> &S)
 {
     int N = S.size();
-    using poly = std::vector<_Tfield>;
+    using poly = std::vector<Tfield>;
     poly C_reversed{1}, B{1};
     int L = 0, m = 1;
-    _Tfield b = 1;
+    Tfield b = 1;
 
     // adjust: C(x) <- C(x) - (d / b) x^m B(x)
-    auto adjust = [](poly C, const poly &B, _Tfield d, _Tfield b, int m) -> poly {
+    auto adjust = [](poly C, const poly &B, Tfield d, Tfield b, int m) -> poly {
         C.resize(std::max(C.size(), B.size() + m));
-        _Tfield a = d / b;
+        Tfield a = d / b;
         for (unsigned i = 0; i < B.size(); i++) C[i + m] -= a * B[i];
         return C;
     };
 
     for (int n = 0; n < N; n++) {
-        _Tfield d = S[n];
+        Tfield d = S[n];
         for (int i = 1; i <= L; i++) d += C_reversed[i] * S[n - i];
 
         if (d == 0) m++;
@@ -264,76 +264,26 @@ std::pair<int, std::vector<_Tfield>> linear_recurrence(const std::vector<_Tfield
     }
     return std::make_pair(L, C_reversed);
 }
-
-
-// Calculate x^N mod f(x)
-// Known as `Kitamasa method`
-// Input: f_reversed: monic, reversed (f_reversed[0] = 1)
-// Complexity: O(K^2 lgN) (K: deg. of f)
-// Example: (4, [1, -1, -1]) -> [2, 3]
-//          ( x^4 = (x^2 + x + 2)(x^2 - x - 1) + 3x + 2 )
-// Reference: <http://misawa.github.io/others/fast_kitamasa_method.html>
-//            <http://sugarknri.hatenablog.com/entry/2017/11/18/233936>
-template <typename _Tfield>
-std::vector<_Tfield> monomial_mod_polynomial(long long N, const std::vector<_Tfield> &f_reversed)
-{
-    assert(!f_reversed.empty() and f_reversed[0] == 1);
-    int K = f_reversed.size() - 1;
-    if (!K) return {};
-    int D = 64 - __builtin_clzll(N);
-    std::vector<_Tfield> ret(K, 0);
-    ret[0] = 1;
-    auto self_conv = [](std::vector<_Tfield> x) -> std::vector<_Tfield> {
-        int d = x.size();
-        std::vector<_Tfield> ret(d * 2 - 1);
-        for (int i = 0; i < d; i++)
-        {
-            ret[i * 2] += x[i] * x[i];
-            for (int j = 0; j < i; j++) ret[i + j] += x[i] * x[j] * 2;
-        }
-        return ret;
-    };
-    for (int d = D; d--;)
-    {
-        ret = self_conv(ret);
-        for (int i = 2 * K - 2; i >= K; i--)
-        {
-            for (int j = 1; j <= K; j++) ret[i - j] -= ret[i] * f_reversed[j];
-        }
-        ret.resize(K);
-        if ((N >> d) & 1)
-        {
-            std::vector<_Tfield> c(K);
-            c[0] = -ret[K - 1] * f_reversed[K];
-            for (int i = 1; i < K; i++)
-            {
-                c[i] = ret[i - 1] - ret[K - 1] * f_reversed[K - i];
-            }
-            ret = c;
-        }
-    }
-    return ret;
-}
 #line 9 "linear_algebra_matrix/det_of_sparse_matrix.hpp"
 
 // CUT begin
 // Sparse matrix on ModInt/ModIntRuntime
-template <typename _Tp>
+template <typename Tp>
 struct sparse_matrix
 {
     int H, W;
-    std::vector<std::vector<std::pair<int, _Tp>>> vals;
+    std::vector<std::vector<std::pair<int, Tp>>> vals;
     sparse_matrix(int H = 0, int W = 0) : H(H), W(W), vals(H) {}
-    void add_element(int i, int j, _Tp val)
+    void add_element(int i, int j, Tp val)
     {
         assert(i >= 0 and i < H);
         assert(j >= 0 and i < W);
         vals[i].emplace_back(j, val);
     }
-    _Tp eval_bilinear(const std::vector<_Tp> &vl, const std::vector<_Tp> &vr) const
+    Tp eval_bilinear(const std::vector<Tp> &vl, const std::vector<Tp> &vr) const
     {
         assert(vl.size() == H and vr.size() == W);
-        _Tp ret = 0;
+        Tp ret = 0;
         for (int i = 0; i < H; i++)
         {
             for (const auto &p : vals[i])
@@ -343,10 +293,10 @@ struct sparse_matrix
         }
         return ret;
     }
-    static std::vector<_Tp> prod(const sparse_matrix<_Tp> &M, const std::vector<_Tp> &vec)
+    static std::vector<Tp> prod(const sparse_matrix<Tp> &M, const std::vector<Tp> &vec)
     {
         assert(M.W == int(vec.size()));
-        std::vector<_Tp> ret(M.H);
+        std::vector<Tp> ret(M.H);
         for (int i = 0; i < M.H; i++)
         {
             for (const auto &p : M.vals[i])
@@ -359,28 +309,28 @@ struct sparse_matrix
     // Determinant of sparse matrix
     // Complexity: O(NK + N^2) (K: # of non-zero elements in M)
     // Reference: <https://yukicoder.me/wiki/black_box_linear_algebra>
-    _Tp Determinant() const
+    Tp Determinant() const
     {
         assert(H == W);
-        const int N = H, hi = _Tp::get_mod();
-        std::vector<_Tp> b(N), u(N), D(N);
+        const int N = H, hi = Tp::get_mod();
+        std::vector<Tp> b(N), u(N), D(N);
         for (int i = 0; i < N; i++)
         {
             b[i] = rnd(1, hi), u[i] = rnd(1, hi), D[i] = rnd(1, hi);
         }
-        std::vector<_Tp> uMDib(2 * N);
+        std::vector<Tp> uMDib(2 * N);
         for (int i = 0; i < 2 * N; i++)
         {
-            uMDib[i] = std::inner_product(u.begin(), u.end(), b.begin(), _Tp(0));
+            uMDib[i] = std::inner_product(u.begin(), u.end(), b.begin(), Tp(0));
             for (int j = 0; j < N; j++)
             {
                 b[j] *= D[j];
             }
             b = prod(*this, b);
         }
-        auto ret = linear_recurrence<_Tp>(uMDib);
-        _Tp det = ret.second.back() * (N % 2 ? -1 : 1);
-        _Tp ddet = 1;
+        auto ret = linear_recurrence<Tp>(uMDib);
+        Tp det = ret.second.back() * (N % 2 ? -1 : 1);
+        Tp ddet = 1;
         for (auto d : D) ddet *= d;
         return det / ddet;
     }

@@ -25,23 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
+# :heavy_check_mark: formal_power_series/test/kitamasa.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#a20fdd22d4cc62ca1cf4e679d77fd3d2">formal_power_series/test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/test/kitamasa.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-06-06 01:37:38+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/multipoint_evaluation">https://judge.yosupo.jp/problem/multipoint_evaluation</a>
+* see: <a href="https://yukicoder.me/problems/no/214">https://yukicoder.me/problems/no/214</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :heavy_check_mark: <a href="../../../library/formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
-* :heavy_check_mark: <a href="../../../library/formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
+* :heavy_check_mark: <a href="../../../library/formal_power_series/monomial_mod_polynomial.hpp.html">formal_power_series/monomial_mod_polynomial.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
@@ -50,29 +49,83 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/multipoint_evaluation"
+#define PROBLEM "https://yukicoder.me/problems/no/214"
 #include "modulus/modint_fixed.hpp"
-#include "formal_power_series/formal_power_series.hpp"
-#include "formal_power_series/multipoint_evaluation.hpp"
-#include <iostream>
+#include "convolution/ntt.hpp"
+#include "formal_power_series/monomial_mod_polynomial.hpp"
+using mint = ModInt<1000000007>;
 
-using mint = ModInt<998244353>;
+#include <iostream>
+#include <numeric>
+template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
+#define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
+
+
+std::vector<mint> gen_dp(std::vector<int> v, int n)
+{
+    vector<vector<mint>> dp(n + 1, vector<mint>(v.back() * n + 1));
+    dp[0][0] = 1;
+    for (auto x : v)
+    {
+        for (int i = n - 1; i >= 0; i--)
+        {
+            for (int j = 0; j < dp[i].size(); j++) if (dp[i][j])
+            {
+                for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];
+            }
+        }
+    }
+    return dp.back();
+}
 
 int main()
 {
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
+    long long N;
+    int P, C;
+    std::cin >> N >> P >> C;
+    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
+    std::vector<mint> f_reversed = nttconv(primes, composites);
+    std::vector<mint> dp(f_reversed.size());
+    dp[0] = 1;
+    for (int i = 0; i < dp.size(); i++)
+    {
+        for (int j = 1; i + j < dp.size(); j++) dp[i + j] += dp[i] * f_reversed[j];
+    }
 
-    int N, M;
-    std::cin >> N >> M;
-    FormalPowerSeries<ModInt<998244353>> f(N);
-    std::vector<mint> xs(M);
-    for (auto &a : f) std::cin >> a;
-    for (auto &x : xs) std::cin >> x;
+    for (auto &x : f_reversed) x = -x;
+    f_reversed[0] = 1;
 
-    MultipointEvaluation me(xs);
-    for (auto x : me.evaluate_polynomial(f)) std::cout << x << ' ';
-    std::cout << '\n';
+    std::vector<mint> g(f_reversed.size() - 1);
+    g[0] = 1;
+    if (N > f_reversed.size())
+    {
+        long long d = N - f_reversed.size();
+        N -= d;
+        g = monomial_mod_polynomial<mint>(d, f_reversed);
+    }
+
+    auto prod_x = [&](std::vector<mint> v) -> std::vector<mint> {
+        int K = v.size();
+        std::vector<mint> c(K);
+        c[0] = -v[K - 1] * f_reversed[K];
+        for (int i = 1; i < K; i++)
+        {
+            c[i] = v[i - 1] - v[K - 1] * f_reversed[K - i];
+        }
+        return c;
+    };
+    mint acc = 0;
+    for (int i = N; i < f_reversed.size(); i++) acc += f_reversed[i];
+    mint ret = 0;
+    while (N)
+    {
+        mint p = std::inner_product(g.begin(), g.end(), dp.begin(), mint(0));
+        ret -= acc * p;
+        g = prod_x(g);
+        N--;
+        acc += f_reversed[N];
+    }
+    cout << ret << '\n';
 }
 
 ```
@@ -81,8 +134,8 @@ int main()
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/multipoint_evaluation"
+#line 1 "formal_power_series/test/kitamasa.test.cpp"
+#define PROBLEM "https://yukicoder.me/problems/no/214"
 #line 2 "modulus/modint_fixed.hpp"
 #include <iostream>
 #include <vector>
@@ -327,286 +380,130 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
     }
     return a;
 }
-#line 6 "formal_power_series/formal_power_series.hpp"
-using namespace std;
+#line 4 "formal_power_series/monomial_mod_polynomial.hpp"
 
-// CUT begin
-// Formal Power Series (形式的冪級数) based on ModInt<mod> / ModIntRuntime
-// Reference: <https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>
-template<typename T>
-struct FormalPowerSeries : vector<T>
-{
-    using vector<T>::vector;
-    using P = FormalPowerSeries;
-
-    void shrink() { while (this->size() and this->back() == T(0)) this->pop_back(); }
-
-    P operator+(const P &r) const { return P(*this) += r; }
-    P operator+(const T &v) const { return P(*this) += v; }
-    P operator-(const P &r) const { return P(*this) -= r; }
-    P operator-(const T &v) const { return P(*this) -= v; }
-    P operator*(const P &r) const { return P(*this) *= r; }
-    P operator*(const T &v) const { return P(*this) *= v; }
-    P operator/(const P &r) const { return P(*this) /= r; }
-    P operator/(const T &v) const { return P(*this) /= v; }
-    P operator%(const P &r) const { return P(*this) %= r; }
-
-    P &operator+=(const P &r) {
-        if (r.size() > this->size()) this->resize(r.size());
-        for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];
-        shrink();
-        return *this;
-    }
-    P &operator+=(const T &v) {
-        if (this->empty()) this->resize(1);
-        (*this)[0] += v;
-        shrink();
-        return *this;
-    }
-    P &operator-=(const P &r) {
-        if (r.size() > this->size()) this->resize(r.size());
-        for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
-        shrink();
-        return *this;
-    }
-    P &operator-=(const T &v) {
-        if (this->empty()) this->resize(1);
-        (*this)[0] -= v;
-        shrink();
-        return *this;
-    }
-    P &operator*=(const T &v) {
-        for (auto &x : (*this)) x *= v;
-        shrink();
-        return *this;
-    }
-    P &operator*=(const P &r) {
-        if (this->empty() || r.empty()) this->clear();
-        else {
-            auto ret = nttconv(*this, r);
-            *this = P(ret.begin(), ret.end());
-        }
-        return *this;
-    }
-    P &operator%=(const P &r) {
-        *this -= *this / r * r;
-        shrink();
-        return *this;
-    }
-    P operator-() const {
-        P ret = *this;
-        for (auto &v : ret) v = -v;
-        return ret;
-    }
-    P &operator/=(const T &v) {
-        assert(v != T(0));
-        for (auto &x : (*this)) x /= v;
-        return *this;
-    }
-    P &operator/=(const P &r) {
-        if (this->size() < r.size()) {
-            this->clear();
-            return *this;
-        }
-        int n = (int)this->size() - r.size() + 1;
-        return *this = (reversed().pre(n) * r.reversed().inv(n)).pre(n).reversed(n);
-    }
-    P pre(int sz) const {
-         P ret(this->begin(), this->begin() + min((int)this->size(), sz));
-         ret.shrink();
-         return ret;
-    }
-    P operator>>(int sz) const {
-        if ((int)this->size() <= sz) return {};
-        return P(this->begin() + sz, this->end());
-    }
-    P operator<<(int sz) const {
-        if (this->empty()) return {};
-        P ret(*this);
-        ret.insert(ret.begin(), sz, T(0));
-        return ret;
-    }
-
-    P reversed(int deg = -1) const {
-        assert(deg >= -1);
-        P ret(*this);
-        if (deg != -1) ret.resize(deg, T(0));
-        reverse(ret.begin(), ret.end());
-        ret.shrink();
-        return ret;
-    }
-
-    P differential() const { // formal derivative (differential) of f.p.s.
-        const int n = (int)this->size();
-        P ret(max(0, n - 1));
-        for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * T(i);
-        return ret;
-    }
-
-    P integral() const {
-        const int n = (int)this->size();
-        P ret(n + 1);
-        ret[0] = T(0);
-        for (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / T(i + 1);
-        return ret;
-    }
-
-    P inv(int deg) const {
-        assert(deg >= -1);
-        assert(this->size() and ((*this)[0]) != T(0)); // Requirement: F(0) != 0
-        const int n = this->size();
-        if (deg == -1) deg = n;
-        P ret({T(1) / (*this)[0]});
-        for (int i = 1; i < deg; i <<= 1) {
-            ret = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1);
-        }
-        ret = ret.pre(deg);
-        ret.shrink();
-        return ret;
-    }
-
-    P log(int deg = -1) const {
-        assert(deg >= -1);
-        assert(this->size() and ((*this)[0]) == T(1)); // Requirement: F(0) = 1
-        const int n = (int)this->size();
-        if (deg == 0) return {};
-        if (deg == -1) deg = n;
-        return (this->differential() * this->inv(deg)).pre(deg - 1).integral();
-    }
-
-    P sqrt(int deg = -1) const {
-        assert(deg >= -1);
-        const int n = (int)this->size();
-        if (deg == -1) deg = n;
-        if (this->empty()) return {};
-        if ((*this)[0] == T(0)) {
-            for (int i = 1; i < n; i++) if ((*this)[i] != T(0)) {
-                if ((i & 1) or deg - i / 2 <= 0) return {};
-                return (*this >> i).sqrt(deg - i / 2) << (i / 2);
-            }
-            return {};
-        }
-        T sqrtf0 = (*this)[0].sqrt();
-        if (sqrtf0 == T(0)) return {};
-
-        P y = (*this) / (*this)[0], ret({T(1)});
-        T inv2 = T(1) / T(2);
-        for (int i = 1; i < deg; i <<= 1) {
-            ret = (ret + y.pre(i << 1) * ret.inv(i << 1)) * inv2;
-        }
-        return ret.pre(deg) * sqrtf0;
-    }
-
-    P exp(int deg = -1) const {
-        assert(deg >= -1);
-        assert(this->empty() or ((*this)[0]) == T(0)); // Requirement: F(0) = 0
-        const int n = (int)this->size();
-        if (deg == -1) deg = n;
-        P ret({T(1)});
-        for (int i = 1; i < deg; i <<= 1) {
-            ret = (ret * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1);
-        }
-        return ret.pre(deg);
-    }
-
-    P pow(long long int k, int deg = -1) const {
-        assert(deg >= -1);
-        const int n = (int)this->size();
-        if (deg == -1) deg = n;
-        for (int i = 0; i < n; i++) {
-            if ((*this)[i] != T(0)) {
-                T rev = T(1) / (*this)[i];
-                P C(*this * rev);
-                P D(n - i);
-                for (int j = i; j < n; j++) D[j - i] = C[j];
-                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].power(k);
-                P E(deg);
-                if (k * (i > 0) > deg or k * i > deg) return {};
-                long long int S = i * k;
-                for (int j = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];
-                E.shrink();
-                return E;
-            }
-        }
-        return *this;
-    }
-
-    T coeff(int i) const {
-        if ((int)this->size() <= i) return T(0);
-        return (*this)[i];
-    }
-
-    T eval(T x) const {
-        T ret = 0, w = 1;
-        for (auto &v : *this) ret += w * v, w *= x;
-        return ret;
-    }
-};
-#line 4 "formal_power_series/multipoint_evaluation.hpp"
-
-// multipoint polynomial evaluation
-// input: xs = [x_0, ..., x_{N - 1}]: points to evaluate
-//        f = \sum_i^M f_i x^i
-// Complexity: O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation
+// Calculate x^N mod f(x)
+// Known as `Kitamasa method`
+// Input: f_reversed: monic, reversed (f_reversed[0] = 1)
+// Complexity: O(K^2 lgN) (K: deg. of f)
+// Example: (4, [1, -1, -1]) -> [2, 3]
+//          ( x^4 = (x^2 + x + 2)(x^2 - x - 1) + 3x + 2 )
+// Reference: <http://misawa.github.io/others/fast_kitamasa_method.html>
+//            <http://sugarknri.hatenablog.com/entry/2017/11/18/233936>
 template <typename Tfield>
-struct MultipointEvaluation
+std::vector<Tfield> monomial_mod_polynomial(long long N, const std::vector<Tfield> &f_reversed)
 {
-    int nx;
-    int head;
-    using polynomial = FormalPowerSeries<Tfield>;
-    std::vector<polynomial> segtree;
-    MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size())
-    {
-        head = 1;
-        while (1 << head < nx) head++;
-        segtree.resize(2 << head);
-        for (int i = 0; i < 1 << head; i++)
+    assert(!f_reversed.empty() and f_reversed[0] == 1);
+    int K = f_reversed.size() - 1;
+    if (!K) return {};
+    int D = 64 - __builtin_clzll(N);
+    std::vector<Tfield> ret(K, 0);
+    ret[0] = 1;
+    auto self_conv = [](std::vector<Tfield> x) -> std::vector<Tfield> {
+        int d = x.size();
+        std::vector<Tfield> ret(d * 2 - 1);
+        for (int i = 0; i < d; i++)
         {
-            segtree[(1 << head) + i] = {i < nx ? -xs[i] : 0, 1};
+            ret[i * 2] += x[i] * x[i];
+            for (int j = 0; j < i; j++) ret[i + j] += x[i] * x[j] * 2;
         }
-        for (int i = 1 << head; --i;)
-        {
-            segtree[i] = segtree[2 * i] * segtree[2 * i + 1];
-        }
-    }
-    std::vector<Tfield> ret;
-    void _dfs_eval(polynomial f, int now)
-    {
-        f %= segtree[now];
-        if (now - (1 << head) >= 0)
-        {
-            if ((now - (1 << head)) < nx) ret[now - (1 << head)] = f.coeff(0);
-            return;
-        }
-        _dfs_eval(f, 2 * now);
-        _dfs_eval(f, 2 * now + 1);
-    }
-    std::vector<Tfield> evaluate_polynomial(polynomial f)
-    {
-        ret.resize(nx);
-        _dfs_eval(f, 1);
         return ret;
+    };
+    for (int d = D; d--;)
+    {
+        ret = self_conv(ret);
+        for (int i = 2 * K - 2; i >= K; i--)
+        {
+            for (int j = 1; j <= K; j++) ret[i - j] -= ret[i] * f_reversed[j];
+        }
+        ret.resize(K);
+        if ((N >> d) & 1)
+        {
+            std::vector<Tfield> c(K);
+            c[0] = -ret[K - 1] * f_reversed[K];
+            for (int i = 1; i < K; i++)
+            {
+                c[i] = ret[i - 1] - ret[K - 1] * f_reversed[K - i];
+            }
+            ret = c;
+        }
     }
-};
-#line 6 "formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp"
+    return ret;
+}
+#line 5 "formal_power_series/test/kitamasa.test.cpp"
+using mint = ModInt<1000000007>;
 
-using mint = ModInt<998244353>;
+#line 8 "formal_power_series/test/kitamasa.test.cpp"
+#include <numeric>
+template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
+#define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
+
+
+std::vector<mint> gen_dp(std::vector<int> v, int n)
+{
+    vector<vector<mint>> dp(n + 1, vector<mint>(v.back() * n + 1));
+    dp[0][0] = 1;
+    for (auto x : v)
+    {
+        for (int i = n - 1; i >= 0; i--)
+        {
+            for (int j = 0; j < dp[i].size(); j++) if (dp[i][j])
+            {
+                for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];
+            }
+        }
+    }
+    return dp.back();
+}
 
 int main()
 {
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
+    long long N;
+    int P, C;
+    std::cin >> N >> P >> C;
+    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
+    std::vector<mint> f_reversed = nttconv(primes, composites);
+    std::vector<mint> dp(f_reversed.size());
+    dp[0] = 1;
+    for (int i = 0; i < dp.size(); i++)
+    {
+        for (int j = 1; i + j < dp.size(); j++) dp[i + j] += dp[i] * f_reversed[j];
+    }
 
-    int N, M;
-    std::cin >> N >> M;
-    FormalPowerSeries<ModInt<998244353>> f(N);
-    std::vector<mint> xs(M);
-    for (auto &a : f) std::cin >> a;
-    for (auto &x : xs) std::cin >> x;
+    for (auto &x : f_reversed) x = -x;
+    f_reversed[0] = 1;
 
-    MultipointEvaluation me(xs);
-    for (auto x : me.evaluate_polynomial(f)) std::cout << x << ' ';
-    std::cout << '\n';
+    std::vector<mint> g(f_reversed.size() - 1);
+    g[0] = 1;
+    if (N > f_reversed.size())
+    {
+        long long d = N - f_reversed.size();
+        N -= d;
+        g = monomial_mod_polynomial<mint>(d, f_reversed);
+    }
+
+    auto prod_x = [&](std::vector<mint> v) -> std::vector<mint> {
+        int K = v.size();
+        std::vector<mint> c(K);
+        c[0] = -v[K - 1] * f_reversed[K];
+        for (int i = 1; i < K; i++)
+        {
+            c[i] = v[i - 1] - v[K - 1] * f_reversed[K - i];
+        }
+        return c;
+    };
+    mint acc = 0;
+    for (int i = N; i < f_reversed.size(); i++) acc += f_reversed[i];
+    mint ret = 0;
+    while (N)
+    {
+        mint p = std::inner_product(g.begin(), g.end(), dp.begin(), mint(0));
+        ret -= acc * p;
+        g = prod_x(g);
+        N--;
+        acc += f_reversed[N];
+    }
+    cout << ret << '\n';
 }
 
 ```
