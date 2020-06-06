@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#cb3e5c672d961db00b76e36ddf5c068a">graph/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/maximum_independent_set.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+    - Last commit date: 2020-06-06 14:20:46+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/maximum_independent_set">https://judge.yosupo.jp/problem/maximum_independent_set</a>
@@ -64,9 +64,9 @@ int main() {
         edges[u].emplace_back(v);
         edges[v].emplace_back(u);
     }
-    MaximumIndependentSet mis(edges);
-    MaximumIndependentSetFast misfast(edges);
-    std::cout << std::accumulate(mis.ret.begin(), mis.ret.end(), 0) << "\n";
+    MaximumIndependentSet<decltype(edges), 40> mis(edges);
+    MaximumIndependentSet_Intbased<decltype(edges)> misfast(edges);
+    std::cout << mis.ret.count() << "\n";
     for (int i = 0; i < N; i++) {
         // Check whether two implementation gives same results
         assert(mis.ret[i] == ((misfast.ret >> i) & 1));
@@ -85,8 +85,8 @@ int main() {
 #line 1 "graph/test/maximum_independent_set.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/maximum_independent_set"
 #line 2 "graph/maximum_independent_set.hpp"
-#include <algorithm>
-#include <numeric>
+#include <bitset>
+#include <cassert>
 #include <stack>
 #include <vector>
 
@@ -96,113 +96,154 @@ int main() {
 // Given graph must not have self-edges
 // Verified: <https://judge.yosupo.jp/submission/1864>
 // Reference: <https://www.slideshare.net/wata_orz/ss-12131479>
+template <typename E, int BS = 64>
 struct MaximumIndependentSet
 {
-    using E = std::vector<std::vector<int>>;
-    // using E = std::vector<std::set<int>>;  // #include <set> needed
-    // using E = std::vector<std::unordered_set<int>>;  // #include <unordered_set> needed
-    int V;  // # of vertices
-    int independence_number;  // Largest possible size of independent set
-    std::vector<int> ret;  // Result is saved here: use (1), don't use (0)
-    std::vector<int> deg;  // Degree of each vertex
-    std::vector<int> tmp_state;
-    E edges;
+    std::vector<std::bitset<BS>> conn;
+    int V;                    // # of vertices
+    int nret;  // Largest possible size of independent set
+    std::bitset<BS> ret;  // Result is saved here: use (1), don't use (0)
+    std::bitset<BS> _avail;
+    std::bitset<BS> _tmp_state;
+
     void mis_dfs() {
-        int t = std::accumulate(tmp_state.begin(), tmp_state.end(), 0);
-        if (t > independence_number) independence_number = t, ret = tmp_state;
-
-        int n = std::max_element(deg.begin(), deg.end()) - deg.begin();
-        if (deg[n] == 0) return;
-
-        int deg_tmp = deg[n];
-        deg[n] = 0;
-
-        std::stack<std::pair<int, int>> newly_occupied;
-        for (auto x : edges[n]) if (deg[x]) {
-            newly_occupied.emplace(x, deg[x]);
-            deg[x] = 0;
-        }
-        tmp_state[n] = 1;
-        mis_dfs();
-
-        tmp_state[n] = 0;
-        while (!newly_occupied.empty()) {
-            deg[newly_occupied.top().first] = newly_occupied.top().second;
-            newly_occupied.pop();
-        }
-        mis_dfs();
-
-        deg[n] = deg_tmp;
-    }
-    MaximumIndependentSet(const E &e) : V(e.size()), independence_number(-1), deg(V), tmp_state(V), edges(e) {
-        for (int i = 0; i < V; i++) deg[i] = edges[i].size();
-        for (int i = 0; i < V; i++) {
-            if (edges[i].size() == 0 or (edges[i].size() == 1 and deg[i])) {
-                deg[i] = 0, tmp_state[i] = 1;
-                for (auto x : edges[i]) deg[x] = 0;
+        bool retry = true;
+        std::stack<int> st;
+        while (retry)
+        {
+            retry = false;
+            for (int i = _avail._Find_first(); i < V; i = _avail._Find_next(i))
+            {
+                int nb = (_avail & conn[i]).count();
+                if (nb <= 1)
+                {
+                    st.emplace(i), _avail.reset(i), _tmp_state.set(i);
+                    retry = true;
+                    if (nb == 1)
+                    {
+                        int j = (_avail & conn[i])._Find_first();
+                        st.emplace(j), _avail.reset(j);
+                    }
+                }
             }
         }
+
+        int t = _tmp_state.count();
+        if (t > nret) nret = t, ret = _tmp_state;
+
+        int d = -1, n = -1;
+        for (int i = _avail._Find_first(); i < V; i = _avail._Find_next(i))
+        {
+            int c = (_avail & conn[i]).count();
+            if (c > d) d = c, n = i;
+        }
+
+        if (d > 0)
+        {
+            std::bitset<BS> nxt = _avail & conn[n];
+            _avail.reset(n);
+            mis_dfs();
+            _tmp_state.set(n);
+            _avail &= ~nxt;
+            mis_dfs();
+            _avail |= nxt;
+            _avail.set(n);
+            _tmp_state.reset(n);
+        }
+
+        while (st.size())
+        {
+            int i = st.top();
+            _avail.set(i);
+            _tmp_state.reset(i);
+            st.pop();
+        }
+    }
+    MaximumIndependentSet(const E &e) : conn(e.size()), V(e.size()), nret(-1) {
+        assert(V <= BS);
+        for (int i = 0; i < V; i++) for (auto &j : e[i]) if (i != j) conn[i].set(j), conn[j].set(i);
+        for (int i = 0; i < V; i++) _avail.set(i);
+        _tmp_state.reset();
         mis_dfs();
     }
 };
 
 
 // A little fast implementation of MaximumIndependentSet 
-// by substituting long long int's bit for `ret` & `tmp_state`
+// by substituting long long int's bit for `ret` & `_tmp_state`
 // Requirement: V <= 64
-struct MaximumIndependentSetFast
+template <typename E>
+struct MaximumIndependentSet_Intbased
 {
-    using E = std::vector<std::vector<int>>;
-    using ull = unsigned long long int;
-    // using E = std::vector<std::set<int>>;  // #include <set> needed
-    // using E = std::vector<std::unordered_set<int>>;  // #include <unordered_set> needed
-    int V;  // # of vertices
-    int independence_number;  // Largest possible size of independent set
-    ull ret;  // Result is saved here: use (1), don't use (0)
-    std::vector<int> deg;  // Degree of each vertex
-    ull tmp_state;
-    E edges;
+    std::vector<long long> conn;
+    int V;                    // # of vertices
+    int nret;  // Largest possible size of independent set
+    long long ret;  // Result is saved here: use (1), don't use (0)
+    long long _avail;
+    long long _tmp_state;
+
     void mis_dfs() {
-        int t = __builtin_popcountll(tmp_state);
-        if (t > independence_number) independence_number = t, ret = tmp_state;
-
-        int n = std::max_element(deg.begin(), deg.end()) - deg.begin();
-        if (deg[n] == 0) return;
-
-        int deg_tmp = deg[n];
-        deg[n] = 0;
-
-        std::stack<std::pair<int, int>> newly_occupied;
-        for (auto x : edges[n]) if (deg[x]) {
-            newly_occupied.emplace(x, deg[x]);
-            deg[x] = 0;
-        }
-        tmp_state += 1LL << n;
-        mis_dfs();
-
-        tmp_state -= 1LL << n;
-        while (!newly_occupied.empty()) {
-            deg[newly_occupied.top().first] = newly_occupied.top().second;
-            newly_occupied.pop();
-        }
-        mis_dfs();
-
-        deg[n] = deg_tmp;
-    }
-    MaximumIndependentSetFast(const E &e) : V(e.size()), independence_number(-1), ret(0), deg(V), tmp_state(0), edges(e) {
-        for (int i = 0; i < V; i++) deg[i] = edges[i].size();
-        for (int i = 0; i < V; i++) {
-            if (edges[i].size() == 0 or (edges[i].size() == 1 and deg[i])) {
-                deg[i] = 0, tmp_state += 1LL << i;
-                for (auto x : edges[i]) deg[x] = 0;
+        bool retry = true;
+        std::stack<int> st;
+        while (retry)
+        {
+            retry = false;
+            for (int i = 0; i < V; i++) if (_avail & (1LL << i))
+            {
+                int nb = __builtin_popcountll(_avail & conn[i]);
+                if (nb <= 1)
+                {
+                    st.emplace(i), _avail -= 1LL << i, _tmp_state |= 1LL << i;
+                    retry = true;
+                    if (nb == 1)
+                    {
+                        int j = __builtin_ctzll(_avail & conn[i]);
+                        st.emplace(j), _avail &= ~(1LL << j);
+                    }
+                }
             }
         }
+
+        int t = __builtin_popcountll(_tmp_state);
+        if (t > nret) nret = t, ret = _tmp_state;
+
+        int d = -1, n = -1;
+        for (int i = 0; i < V; i++) if (_avail & (1LL << i))
+        {
+            int c = __builtin_popcountll(_avail & conn[i]);
+            if (c > d) d = c, n = i;
+        }
+
+        if (d > 0)
+        {
+            long long nxt = _avail & conn[n];
+            _avail -= 1LL << n;
+            mis_dfs();
+            _tmp_state |= 1LL << n;
+            _avail &= ~nxt;
+            mis_dfs();
+            _avail |= nxt;
+            _avail |= 1LL << n;
+            _tmp_state &= ~(1LL << n);
+        }
+
+        while (st.size())
+        {
+            int i = st.top();
+            _avail |= 1LL << i;
+            _tmp_state &= ~(1LL << i);
+            st.pop();
+        }
+    }
+    MaximumIndependentSet_Intbased(const E &e) : conn(e.size()), V(e.size()), nret(-1), _avail((1LL << V) - 1), _tmp_state(0) {
+        assert(V <= 63);
+        for (int i = 0; i < V; i++) for (auto &j : e[i]) if (i != j) conn[i] |= 1LL << j, conn[j] |= 1LL << i;
         mis_dfs();
     }
 };
 #line 3 "graph/test/maximum_independent_set.test.cpp"
 
-#include <cassert>
+#line 5 "graph/test/maximum_independent_set.test.cpp"
 #include <iostream>
 #line 7 "graph/test/maximum_independent_set.test.cpp"
 
@@ -216,9 +257,9 @@ int main() {
         edges[u].emplace_back(v);
         edges[v].emplace_back(u);
     }
-    MaximumIndependentSet mis(edges);
-    MaximumIndependentSetFast misfast(edges);
-    std::cout << std::accumulate(mis.ret.begin(), mis.ret.end(), 0) << "\n";
+    MaximumIndependentSet<decltype(edges), 40> mis(edges);
+    MaximumIndependentSet_Intbased<decltype(edges)> misfast(edges);
+    std::cout << mis.ret.count() << "\n";
     for (int i = 0; i < N; i++) {
         // Check whether two implementation gives same results
         assert(mis.ret[i] == ((misfast.ret >> i) & 1));
