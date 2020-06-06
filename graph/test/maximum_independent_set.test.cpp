@@ -15,9 +15,9 @@ int main() {
         edges[u].emplace_back(v);
         edges[v].emplace_back(u);
     }
-    MaximumIndependentSet mis(edges);
-    MaximumIndependentSetFast misfast(edges);
-    std::cout << std::accumulate(mis.ret.begin(), mis.ret.end(), 0) << "\n";
+    MaximumIndependentSet<decltype(edges), 40> mis(edges);
+    MaximumIndependentSet_Intbased<decltype(edges)> misfast(edges);
+    std::cout << mis.ret.count() << "\n";
     for (int i = 0; i < N; i++) {
         // Check whether two implementation gives same results
         assert(mis.ret[i] == ((misfast.ret >> i) & 1));
