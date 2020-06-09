@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a1f2c13e39c190602cc1599f47ad6179">convex_hull_trick</a>
 * <a href="{{ site.github.repository_url }}/blob/master/convex_hull_trick/convex_hull_trick.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-19 16:51:53+09:00
+    - Last commit date: 2020-06-09 22:15:57+09:00
 
 
 
@@ -158,7 +158,7 @@ struct ConvexHullTrick
     ConvexHullTrick(bool is_minimizer) : lines(is_minimizer) {}
     void add_line(T_CHT a, T_CHT b) { lines.add_line(a, b); } // Add y = ax + b
     std::pair<T_CHT, T_CHT> get(T_CHT x) { return lines.get(x); }
-    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(-2 * c * a, c * a * a + b); } // Add y = c(x - a)^2 + b
+    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); } // Add y = c(x - a)^2 + b
     T_CHT parabola_lower_bound(T_CHT c, T_CHT x) { return lines.get(x).first + c * x * x; }
 };
 
@@ -280,7 +280,7 @@ struct ConvexHullTrick
     ConvexHullTrick(bool is_minimizer) : lines(is_minimizer) {}
     void add_line(T_CHT a, T_CHT b) { lines.add_line(a, b); } // Add y = ax + b
     std::pair<T_CHT, T_CHT> get(T_CHT x) { return lines.get(x); }
-    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(-2 * c * a, c * a * a + b); } // Add y = c(x - a)^2 + b
+    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); } // Add y = c(x - a)^2 + b
     T_CHT parabola_lower_bound(T_CHT c, T_CHT x) { return lines.get(x).first + c * x * x; }
 };
 

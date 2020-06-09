@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#086ac53f0f2847a22b2a7364bcf50206">rational</a>
 * <a href="{{ site.github.repository_url }}/blob/master/rational/rational_number.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:54:47+09:00
+    - Last commit date: 2020-06-09 22:15:57+09:00
 
 
 
@@ -84,6 +84,7 @@ struct Rational {
     }
     bool operator<=(const Rational &r) const { return (*this == r) or (*this < r); }
     bool operator>(const Rational &r) const { return r < *this; }
+    bool operator>=(const Rational &r) const { return (r == *this) or (r < *this); }
     explicit operator double() const { return (double)num / (double)den; }
     explicit operator long double() const { return (long double)num / (long double)den; }
     friend std::ostream &operator<<(std::ostream &os, const Rational &x) { os << x.num << '/' << x.den; return os; }
@@ -138,6 +139,7 @@ struct Rational {
     }
     bool operator<=(const Rational &r) const { return (*this == r) or (*this < r); }
     bool operator>(const Rational &r) const { return r < *this; }
+    bool operator>=(const Rational &r) const { return (r == *this) or (r < *this); }
     explicit operator double() const { return (double)num / (double)den; }
     explicit operator long double() const { return (long double)num / (long double)den; }
     friend std::ostream &operator<<(std::ostream &os, const Rational &x) { os << x.num << '/' << x.den; return os; }
