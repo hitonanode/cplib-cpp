@@ -6,9 +6,9 @@
 // CUT begin
 // Convex Hull Trick for monotone increasing queries, monotone decreasing slopes
 // Each operation is amortized O(1)
-// - add_line(a, b): Add `y = ax + b`, a must be monotone decreasing (if is_minimizer == true) / decreasing (otherwise)
+// - add_line(a, b): Add `y = ax + b`, a must be monotone decreasing (if is_minimizer == true) / increasing (otherwise)
 // - add_convex_parabola(c, a, b): Add `y = c(x - a)^2 + b`, c is constant, a is monotone increasing (if is_minimizer == true) / decreasing (otherwise)
-// - get(x): Calculate min/max. value of `y = ax + b`'s at point x, x must be monotone increasing (if is_minimizer == true) / decreasing (otherwise)
+// - get(x): Calculate min/max. value of `y = ax + b`'s at point x, x must be monotone increasing FOR BOTH CASES.
 // - parabola_get(c, x): Caclculate min/max. value of `y = c(x - a)^2 + b`'s, x must be monotone increasing FOR BOTH CASES.
 // Verified: <https://yukicoder.me/submissions/409156>
 using T_CHT = long long int; // template<typename T_CHT>
@@ -30,11 +30,11 @@ struct MonotoneConvexHullTrick : std::deque<std::pair<T_CHT, T_CHT>> // (a, b) m
         this->emplace_back(a, b);
     }
     T_CHT get(T_CHT x) { 
-        while (this->size() > 1u and (*this)[0].first * x + (*this)[0].second > (*this)[1].first * x + (*this)[1].second) {
+        while (this->size() > 1u and (*this)[0].first * x + (*this)[0].second >= (*this)[1].first * x + (*this)[1].second) {
             this->pop_front();
         }
         return ((*this)[0].first * x + (*this)[0].second) * (is_minimizer ? 1 : -1);
     }
-    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(-2 * c * a, c * a * a + b); } // Add y = c(x - a)^2 + b
+    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); } // Add y = c(x - a)^2 + b
     T_CHT parabola_get(T_CHT c, T_CHT x) { return get(x) + c * x * x; }
 };

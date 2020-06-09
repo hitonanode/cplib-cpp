@@ -41,6 +41,7 @@ struct Rational {
     }
     bool operator<=(const Rational &r) const { return (*this == r) or (*this < r); }
     bool operator>(const Rational &r) const { return r < *this; }
+    bool operator>=(const Rational &r) const { return (r == *this) or (r < *this); }
     explicit operator double() const { return (double)num / (double)den; }
     explicit operator long double() const { return (long double)num / (long double)den; }
     friend std::ostream &operator<<(std::ostream &os, const Rational &x) { os << x.num << '/' << x.den; return os; }
