@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#a20fdd22d4cc62ca1cf4e679d77fd3d2">formal_power_series/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/test/fps_sqrt_modintruntime.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-13 13:03:10+09:00
+    - Last commit date: 2020-06-13 13:47:58+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sqrt_of_formal_power_series">https://judge.yosupo.jp/problem/sqrt_of_formal_power_series</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :question: <a href="../../../library/formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
+* :heavy_check_mark: <a href="../../../library/formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
 * :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modulus/modint_runtime.hpp.html">modulus/modint_runtime.hpp</a>
 
@@ -410,17 +410,14 @@ long long modinv_ntt_(long long a, long long m)
 }
 long long garner_ntt_(int r0, int r1, int r2, int mod)
 {
-    std::array<long long, 4> rs = {r0, r1, r2, 0};
-    std::vector<long long> coffs(4, 1), constants(4, 0);
-    for (int i = 0; i < 3; i++) {
-        long long v = (rs[i] - constants[i]) * modinv_ntt_(coffs[i], nttprimes[i]) % nttprimes[i];
-        if (v < 0) v += nttprimes[i];
-        for (int j = i + 1; j < 4; j++) {
-            (constants[j] += coffs[j] * v) %= (j < 3 ? nttprimes[j] : mod);
-            (coffs[j] *= nttprimes[i]) %= (j < 3 ? nttprimes[j] : mod);
-        }
-    }
-    return constants.back();
+    using mint2 = ModInt<nttprimes[2]>;
+    static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];
+    static const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();
+    static const long long m01_inv_m2 = mint2(m01).inv();
+
+    int v1 = (m0_inv_m1 * (r1 + nttprimes[1] - r0)) % nttprimes[1];
+    auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0]) * v1) * m01_inv_m2;
+    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val) % mod;
 }
 template <typename MODINT>
 std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner)

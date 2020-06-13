@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: formal_power_series/formal_power_series.hpp
+# :heavy_check_mark: formal_power_series/formal_power_series.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f0e336561d1c18f84cd3e0ce52a956cf">formal_power_series</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/formal_power_series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-13 13:03:10+09:00
+    - Last commit date: 2020-06-13 13:47:58+09:00
 
 
 
@@ -44,7 +44,7 @@ layout: default
 
 ## Required by
 
-* :x: <a href="multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
+* :heavy_check_mark: <a href="multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
 
 
 ## Verified with
@@ -58,7 +58,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_pow.test.cpp.html">formal_power_series/test/fps_pow.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :x: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 
 
 ## Code
@@ -509,17 +509,14 @@ long long modinv_ntt_(long long a, long long m)
 }
 long long garner_ntt_(int r0, int r1, int r2, int mod)
 {
-    std::array<long long, 4> rs = {r0, r1, r2, 0};
-    std::vector<long long> coffs(4, 1), constants(4, 0);
-    for (int i = 0; i < 3; i++) {
-        long long v = (rs[i] - constants[i]) * modinv_ntt_(coffs[i], nttprimes[i]) % nttprimes[i];
-        if (v < 0) v += nttprimes[i];
-        for (int j = i + 1; j < 4; j++) {
-            (constants[j] += coffs[j] * v) %= (j < 3 ? nttprimes[j] : mod);
-            (coffs[j] *= nttprimes[i]) %= (j < 3 ? nttprimes[j] : mod);
-        }
-    }
-    return constants.back();
+    using mint2 = ModInt<nttprimes[2]>;
+    static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];
+    static const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();
+    static const long long m01_inv_m2 = mint2(m01).inv();
+
+    int v1 = (m0_inv_m1 * (r1 + nttprimes[1] - r0)) % nttprimes[1];
+    auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0]) * v1) * m01_inv_m2;
+    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val) % mod;
 }
 template <typename MODINT>
 std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner)
