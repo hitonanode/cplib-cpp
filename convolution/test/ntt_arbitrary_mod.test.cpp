@@ -11,6 +11,9 @@ using mintr = ModIntRuntime;
 
 int main()
 {
+    std::cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+
     mintr::set_mod(MOD);
     int N, M;
     cin >> N >> M;
