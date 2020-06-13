@@ -44,8 +44,8 @@ layout: default
 ## Required by
 
 * :heavy_check_mark: <a href="../formal_power_series/coeff_of_rational_function.hpp.html">formal_power_series/coeff_of_rational_function.hpp</a>
-* :heavy_check_mark: <a href="../formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
-* :heavy_check_mark: <a href="../formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
+* :question: <a href="../formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
+* :x: <a href="../formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
 
 
 ## Verified with
@@ -63,7 +63,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
 * :x: <a href="../../verify/formal_power_series/test/kitamasa.test.cpp.html">formal_power_series/test/kitamasa.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
+* :x: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 
 
 ## Code

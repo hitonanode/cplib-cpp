@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#a20fdd22d4cc62ca1cf4e679d77fd3d2">formal_power_series/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/test/kitamasa.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-13 13:47:58+09:00
+    - Last commit date: 2020-06-13 14:25:53+09:00
 
 
 * see: <a href="https://yukicoder.me/problems/no/214">https://yukicoder.me/problems/no/214</a>
@@ -57,13 +57,11 @@ using mint = ModInt<1000000007>;
 
 #include <iostream>
 #include <numeric>
-template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
-#define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
 
 
 std::vector<mint> gen_dp(std::vector<int> v, int n)
 {
-    vector<vector<mint>> dp(n + 1, vector<mint>(v.back() * n + 1));
+    std::vector<std::vector<mint>> dp(n + 1, std::vector<mint>(v.back() * n + 1));
     dp[0][0] = 1;
     for (auto x : v)
     {
@@ -125,7 +123,7 @@ int main()
         N--;
         acc += f_reversed[N];
     }
-    cout << ret << '\n';
+    std::cout << ret << '\n';
 }
 
 ```
@@ -453,13 +451,11 @@ using mint = ModInt<1000000007>;
 
 #line 8 "formal_power_series/test/kitamasa.test.cpp"
 #include <numeric>
-template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
-#define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
 
 
 std::vector<mint> gen_dp(std::vector<int> v, int n)
 {
-    vector<vector<mint>> dp(n + 1, vector<mint>(v.back() * n + 1));
+    std::vector<std::vector<mint>> dp(n + 1, std::vector<mint>(v.back() * n + 1));
     dp[0][0] = 1;
     for (auto x : v)
     {
@@ -521,7 +517,7 @@ int main()
         N--;
         acc += f_reversed[N];
     }
-    cout << ret << '\n';
+    std::cout << ret << '\n';
 }
 
 ```

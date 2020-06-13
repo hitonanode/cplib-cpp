@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
+# :x: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#a20fdd22d4cc62ca1cf4e679d77fd3d2">formal_power_series/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-13 13:47:58+09:00
+    - Last commit date: 2020-06-13 14:25:53+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/multipoint_evaluation">https://judge.yosupo.jp/problem/multipoint_evaluation</a>
@@ -40,8 +40,8 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :heavy_check_mark: <a href="../../../library/formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
-* :heavy_check_mark: <a href="../../../library/formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
+* :question: <a href="../../../library/formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
+* :x: <a href="../../../library/formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
 * :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
@@ -550,7 +550,7 @@ struct FormalPowerSeries : vector<T>
     }
 
     T coeff(int i) const {
-        if ((int)this->size() <= i) return T(0);
+        if ((int)this->size() <= i or i < 0) return T(0);
         return (*this)[i];
     }
 

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: formal_power_series/formal_power_series.hpp
+# :question: formal_power_series/formal_power_series.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f0e336561d1c18f84cd3e0ce52a956cf">formal_power_series</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/formal_power_series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-13 13:47:58+09:00
+    - Last commit date: 2020-06-13 14:25:53+09:00
 
 
 
@@ -44,7 +44,7 @@ layout: default
 
 ## Required by
 
-* :heavy_check_mark: <a href="multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
+* :x: <a href="multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
 
 
 ## Verified with
@@ -58,7 +58,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_pow.test.cpp.html">formal_power_series/test/fps_pow.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
+* :x: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 
 
 ## Code
@@ -275,7 +275,7 @@ struct FormalPowerSeries : vector<T>
     }
 
     T coeff(int i) const {
-        if ((int)this->size() <= i) return T(0);
+        if ((int)this->size() <= i or i < 0) return T(0);
         return (*this)[i];
     }
 
@@ -759,7 +759,7 @@ struct FormalPowerSeries : vector<T>
     }
 
     T coeff(int i) const {
-        if ((int)this->size() <= i) return T(0);
+        if ((int)this->size() <= i or i < 0) return T(0);
         return (*this)[i];
     }
 
