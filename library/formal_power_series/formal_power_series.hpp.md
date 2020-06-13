@@ -25,26 +25,26 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: formal_power_series/formal_power_series.hpp
+# :question: formal_power_series/formal_power_series.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f0e336561d1c18f84cd3e0ce52a956cf">formal_power_series</a>
 * <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/formal_power_series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-11 00:27:44+09:00
+    - Last commit date: 2020-06-13 13:03:10+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :heavy_check_mark: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :question: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :question: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
+* :x: <a href="multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
 
 
 ## Verified with
@@ -58,7 +58,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_pow.test.cpp.html">formal_power_series/test/fps_pow.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
+* :x: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 
 
 ## Code
@@ -408,8 +408,8 @@ struct ModInt
 #include <algorithm>
 #include <array>
 #include <cassert>
-#line 8 "convolution/ntt.hpp"
-using namespace std;
+#include <tuple>
+#line 9 "convolution/ntt.hpp"
 
 // CUT begin
 // Integer convolution for arbitrary mod
@@ -418,7 +418,7 @@ using namespace std;
 // input: a (size: n), b (size: m)
 // return: vector (size: n + m - 1)
 template <typename MODINT>
-vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner = false);
+std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner = false);
 
 constexpr int nttprimes[3] = {998244353, 167772161, 469762049};
 
@@ -427,40 +427,60 @@ constexpr int nttprimes[3] = {998244353, 167772161, 469762049};
 // is_inverse: inverse transform
 // ** Input size must be 2^n **
 template <typename MODINT>
-void ntt(vector<MODINT> &a, bool is_inverse = false)
+void ntt(std::vector<MODINT> &a, bool is_inverse = false)
 {
     int n = a.size();
-    assert(__builtin_popcount(n) == 1);
-    MODINT h = MODINT(MODINT::get_primitive_root()).power((MODINT::get_mod() - 1) / n);
-    if (is_inverse) h = 1 / h;
+    if (n == 1) return;
+    static const int mod = MODINT::get_mod();
+    static const MODINT root = MODINT::get_primitive_root();
+    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);
 
-    int i = 0;
-    for (int j = 1; j < n - 1; j++) {
-        for (int k = n >> 1; k > (i ^= k); k >>= 1);
-        if (j < i) swap(a[i], a[j]);
+    static std::vector<MODINT> w{1}, iw{1};
+    for (int m = w.size(); m < n / 2; m *= 2)
+    {
+        MODINT dw = root.power((mod - 1) / (4 * m)), dwinv = 1 / dw;
+        w.resize(m * 2), iw.resize(m * 2);
+        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;
     }
 
-    for (int m = 1; m < n; m *= 2) {
-        int m2 = 2 * m;
-        MODINT base = h.power(n / m2), w = 1;
-        for (int x = 0; x < m; x++) {
-            for (int s = x; s < n; s += m2) {
-                MODINT u = a[s], d = a[s + m] * w;
-                a[s] = u + d, a[s + m] = u - d;
+    if (!is_inverse) {
+        for (int m = n; m >>= 1;) {
+            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {
+                for (int i = s; i < s + m; i++) {
+#ifdef __clang__
+                    a[i + m] *= w[k];
+                    std::tie(a[i], a[i + m]) = std::make_pair(a[i] + a[i + m], a[i] - a[i + m]);
+#else
+                    MODINT x = a[i], y = a[i + m] * w[k];
+                    a[i] = x + y, a[i + m] = x - y;
+#endif
+                }
             }
-            w *= base;
         }
     }
-    if (is_inverse) {
-        long long int n_inv = MODINT(n).inv();
+    else {
+        for (int m = 1; m < n; m *= 2) {
+            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {
+                for (int i = s; i < s + m; i++) {
+#ifdef __clang__
+                    std::tie(a[i], a[i + m]) = std::make_pair(a[i] + a[i + m], a[i] - a[i + m]);
+                    a[i + m] *= iw[k];
+#else
+                    MODINT x = a[i], y = a[i + m];
+                    a[i] = x + y, a[i + m] = (x - y) * iw[k];
+#endif
+                }
+            }
+        }
+        int n_inv = MODINT(n).inv();
         for (auto &v : a) v *= n_inv;
     }
 }
-template<int MOD>
-vector<ModInt<MOD>> nttconv_(const vector<int> &a, const vector<int> &b) {
+template <int MOD>
+std::vector<ModInt<MOD>> nttconv_(const std::vector<int> &a, const std::vector<int> &b) {
     int sz = a.size();
     assert(a.size() == b.size() and __builtin_popcount(sz) == 1);
-    vector<ModInt<MOD>> ap(sz), bp(sz);
+    std::vector<ModInt<MOD>> ap(sz), bp(sz);
     for (int i = 0; i < sz; i++) ap[i] = a[i], bp[i] = b[i];
     if (a == b) {
         ntt(ap, false);
@@ -474,25 +494,25 @@ vector<ModInt<MOD>> nttconv_(const vector<int> &a, const vector<int> &b) {
     ntt(ap, true);
     return ap;
 }
-long long int extgcd_ntt_(long long int a, long long int b, long long int &x, long long int &y)
+long long extgcd_ntt_(long long a, long long b, long long &x, long long &y)
 {
-    long long int d = a;
+    long long d = a;
     if (b != 0) d = extgcd_ntt_(b, a % b, y, x), y -= (a / b) * x;
     else x = 1, y = 0;
     return d;
 }
-long long int modinv_ntt_(long long int a, long long int m)
+long long modinv_ntt_(long long a, long long m)
 {
-    long long int x, y;
+    long long x, y;
     extgcd_ntt_(a, m, x, y);
     return (m + x % m) % m;
 }
-long long int garner_ntt_(int r0, int r1, int r2, int mod)
+long long garner_ntt_(int r0, int r1, int r2, int mod)
 {
-    array<long long int, 4> rs = {r0, r1, r2, 0};
-    vector<long long int> coffs(4, 1), constants(4, 0);
+    std::array<long long, 4> rs = {r0, r1, r2, 0};
+    std::vector<long long> coffs(4, 1), constants(4, 0);
     for (int i = 0; i < 3; i++) {
-        long long int v = (rs[i] - constants[i]) * modinv_ntt_(coffs[i], nttprimes[i]) % nttprimes[i];
+        long long v = (rs[i] - constants[i]) * modinv_ntt_(coffs[i], nttprimes[i]) % nttprimes[i];
         if (v < 0) v += nttprimes[i];
         for (int j = i + 1; j < 4; j++) {
             (constants[j] += coffs[j] * v) %= (j < 3 ? nttprimes[j] : mod);
@@ -502,19 +522,20 @@ long long int garner_ntt_(int r0, int r1, int r2, int mod)
     return constants.back();
 }
 template <typename MODINT>
-vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
+std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner)
 {
     int sz = 1, n = a.size(), m = b.size();
     while (sz < n + m) sz <<= 1;
     if (sz <= 16) {
-        vector<MODINT> ret(n + m - 1);
+        std::vector<MODINT> ret(n + m - 1);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) ret[i + j] += a[i] * b[j];
         }
         return ret;
     }
     int mod = MODINT::get_mod();
-    if (skip_garner or find(begin(nttprimes), end(nttprimes), mod) != end(nttprimes)) {
+    if (skip_garner or std::find(std::begin(nttprimes), std::end(nttprimes), mod) != std::end(nttprimes))
+    {
         a.resize(sz), b.resize(sz);
         if (a == b) { ntt(a, false); b = a; }
         else ntt(a, false), ntt(b, false);
@@ -523,7 +544,7 @@ vector<MODINT> nttconv(vector<MODINT> a, vector<MODINT> b, bool skip_garner)
         a.resize(n + m - 1);
     }
     else {
-        vector<int> ai(sz), bi(sz);
+        std::vector<int> ai(sz), bi(sz);
         for (int i = 0; i < n; i++) ai[i] = a[i].val;
         for (int i = 0; i < m; i++) bi[i] = b[i].val;
         auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);
