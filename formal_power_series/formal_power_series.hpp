@@ -207,7 +207,7 @@ struct FormalPowerSeries : vector<T>
     }
 
     T coeff(int i) const {
-        if ((int)this->size() <= i) return T(0);
+        if ((int)this->size() <= i or i < 0) return T(0);
         return (*this)[i];
     }
 

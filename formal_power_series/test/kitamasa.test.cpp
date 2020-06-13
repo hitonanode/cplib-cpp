@@ -6,13 +6,11 @@ using mint = ModInt<1000000007>;
 
 #include <iostream>
 #include <numeric>
-template<typename T> istream &operator>>(istream &is, vector<T> &vec){ for (auto &v : vec) is >> v; return is; }
-#define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
 
 
 std::vector<mint> gen_dp(std::vector<int> v, int n)
 {
-    vector<vector<mint>> dp(n + 1, vector<mint>(v.back() * n + 1));
+    std::vector<std::vector<mint>> dp(n + 1, std::vector<mint>(v.back() * n + 1));
     dp[0][0] = 1;
     for (auto x : v)
     {
@@ -74,5 +72,5 @@ int main()
         N--;
         acc += f_reversed[N];
     }
-    cout << ret << '\n';
+    std::cout << ret << '\n';
 }
