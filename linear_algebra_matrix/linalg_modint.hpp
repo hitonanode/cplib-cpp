@@ -19,7 +19,8 @@ struct matrix
         return ret;
     }
 
-    matrix(int H = 0, int W = 0) : H(H), W(W), elem(H * W) {}
+    matrix() = default;
+    matrix(int H, int W) : H(H), W(W), elem(H * W) {}
     matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ? d[0].size() : 0) {
         for (auto &raw : d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));
     }
@@ -31,8 +32,10 @@ struct matrix
     }
 
     matrix operator-() const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] = -elem[i]; return ret; }
-    matrix operator+(const matrix &r) const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i]; return ret; }
-    matrix operator-(const matrix &r) const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i]; return ret; }
+    matrix operator*(const T &v) const { matrix ret = *this; for (auto &x : ret.elem) x *= v; return ret; }
+    matrix operator/(const T &v) const { matrix ret = *this; for (auto &x : ret.elem) x /= v; return ret; }
+    matrix operator+(const matrix &r) const { matrix ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i]; return ret; }
+    matrix operator-(const matrix &r) const { matrix ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i]; return ret; }
     matrix operator*(const matrix &r) const {
         matrix ret(H, r.W);
         for (int i = 0; i < H; i++) {
@@ -44,6 +47,8 @@ struct matrix
         }
         return ret;
     }
+    matrix &operator*=(const T &v) { return *this = *this * v; }
+    matrix &operator/=(const T &v) { return *this = *this / v; }
     matrix &operator+=(const matrix &r) { return *this = *this + r; }
     matrix &operator-=(const matrix &r) { return *this = *this - r; }
     matrix &operator*=(const matrix &r) { return *this = *this * r; }
