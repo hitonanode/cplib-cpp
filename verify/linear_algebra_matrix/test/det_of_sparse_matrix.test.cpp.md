@@ -41,7 +41,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/det_of_sparse_matrix.hpp.html">linear_algebra_matrix/det_of_sparse_matrix.hpp</a>
 * :heavy_check_mark: <a href="../../../library/linear_algebra_matrix/linear_recurrence.hpp.html">linear_algebra_matrix/linear_recurrence.hpp</a>
-* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 * :heavy_check_mark: <a href="../../../library/random/rand_nondeterministic.hpp.html">random/rand_nondeterministic.hpp</a>
 
 

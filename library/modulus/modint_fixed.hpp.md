@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: modulus/modint_fixed.hpp
+# :heavy_check_mark: modulus/modint_fixed.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,10 +38,10 @@ layout: default
 
 ## Required by
 
-* :question: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :heavy_check_mark: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
 * :heavy_check_mark: <a href="../formal_power_series/coeff_of_rational_function.hpp.html">formal_power_series/coeff_of_rational_function.hpp</a>
-* :question: <a href="../formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
-* :x: <a href="../formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
+* :heavy_check_mark: <a href="../formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
+* :heavy_check_mark: <a href="../formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
 * :warning: <a href="../graph-tree/tree_isomorphism.hpp.html">graph-tree/tree_isomorphism.hpp</a>
 
 
@@ -60,8 +60,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_pow.test.cpp.html">formal_power_series/test/fps_pow.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :x: <a href="../../verify/formal_power_series/test/kitamasa.test.cpp.html">formal_power_series/test/kitamasa.test.cpp</a>
-* :x: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/formal_power_series/test/kitamasa.test.cpp.html">formal_power_series/test/kitamasa.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp.html">linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_determinant.test.cpp.html">linear_algebra_matrix/test/linalg_modint_determinant.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp.html">linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp</a>

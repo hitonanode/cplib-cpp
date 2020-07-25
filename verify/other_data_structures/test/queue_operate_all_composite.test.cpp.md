@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 * :heavy_check_mark: <a href="../../../library/other_data_structures/sliding_window_aggregation.hpp.html">other_data_structures/sliding_window_aggregation.hpp</a>
 
 

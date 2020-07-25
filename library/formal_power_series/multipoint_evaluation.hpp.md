@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: formal_power_series/multipoint_evaluation.hpp
+# :heavy_check_mark: formal_power_series/multipoint_evaluation.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,14 +38,14 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :question: <a href="formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
-* :question: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :heavy_check_mark: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :heavy_check_mark: <a href="formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
+* :heavy_check_mark: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 
 
 ## Code

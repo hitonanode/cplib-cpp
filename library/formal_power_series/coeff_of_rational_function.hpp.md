@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
-* :question: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
+* :heavy_check_mark: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :heavy_check_mark: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Verified with

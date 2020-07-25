@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#20f2c5d841ec31673050aaedd8b17f50">linear_algebra_matrix</a>
 * <a href="{{ site.github.repository_url }}/blob/master/linear_algebra_matrix/linalg_modint.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-18 04:20:40+09:00
+    - Last commit date: 2020-07-25 15:58:14+09:00
 
 
 
@@ -74,7 +74,8 @@ struct matrix
         return ret;
     }
 
-    matrix(int H = 0, int W = 0) : H(H), W(W), elem(H * W) {}
+    matrix() = default;
+    matrix(int H, int W) : H(H), W(W), elem(H * W) {}
     matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ? d[0].size() : 0) {
         for (auto &raw : d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));
     }
@@ -86,8 +87,10 @@ struct matrix
     }
 
     matrix operator-() const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] = -elem[i]; return ret; }
-    matrix operator+(const matrix &r) const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i]; return ret; }
-    matrix operator-(const matrix &r) const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i]; return ret; }
+    matrix operator*(const T &v) const { matrix ret = *this; for (auto &x : ret.elem) x *= v; return ret; }
+    matrix operator/(const T &v) const { matrix ret = *this; for (auto &x : ret.elem) x /= v; return ret; }
+    matrix operator+(const matrix &r) const { matrix ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i]; return ret; }
+    matrix operator-(const matrix &r) const { matrix ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i]; return ret; }
     matrix operator*(const matrix &r) const {
         matrix ret(H, r.W);
         for (int i = 0; i < H; i++) {
@@ -99,6 +102,8 @@ struct matrix
         }
         return ret;
     }
+    matrix &operator*=(const T &v) { return *this = *this * v; }
+    matrix &operator/=(const T &v) { return *this = *this / v; }
     matrix &operator+=(const matrix &r) { return *this = *this + r; }
     matrix &operator-=(const matrix &r) { return *this = *this - r; }
     matrix &operator*=(const matrix &r) { return *this = *this * r; }
@@ -241,7 +246,8 @@ struct matrix
         return ret;
     }
 
-    matrix(int H = 0, int W = 0) : H(H), W(W), elem(H * W) {}
+    matrix() = default;
+    matrix(int H, int W) : H(H), W(W), elem(H * W) {}
     matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ? d[0].size() : 0) {
         for (auto &raw : d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));
     }
@@ -253,8 +259,10 @@ struct matrix
     }
 
     matrix operator-() const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] = -elem[i]; return ret; }
-    matrix operator+(const matrix &r) const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i]; return ret; }
-    matrix operator-(const matrix &r) const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i]; return ret; }
+    matrix operator*(const T &v) const { matrix ret = *this; for (auto &x : ret.elem) x *= v; return ret; }
+    matrix operator/(const T &v) const { matrix ret = *this; for (auto &x : ret.elem) x /= v; return ret; }
+    matrix operator+(const matrix &r) const { matrix ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i]; return ret; }
+    matrix operator-(const matrix &r) const { matrix ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i]; return ret; }
     matrix operator*(const matrix &r) const {
         matrix ret(H, r.W);
         for (int i = 0; i < H; i++) {
@@ -266,6 +274,8 @@ struct matrix
         }
         return ret;
     }
+    matrix &operator*=(const T &v) { return *this = *this * v; }
+    matrix &operator/=(const T &v) { return *this = *this / v; }
     matrix &operator+=(const matrix &r) { return *this = *this + r; }
     matrix &operator-=(const matrix &r) { return *this = *this - r; }
     matrix &operator*=(const matrix &r) { return *this = *this * r; }
