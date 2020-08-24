@@ -34,6 +34,13 @@ layout: default
 
 ## Library Files
 
+<div id="5058f1af8388633f609cadb75a75dc9d"></div>
+
+### .
+
+* :warning: <a href="library/generate_snippet_conf.py.html">generate_snippet_conf.py</a>
+
+
 <div id="fc840529f018acf34013c4bdd67ada43"></div>
 
 ### binary_lifting(doubling)
@@ -53,6 +60,7 @@ layout: default
 
 ### convolution
 
+* :warning: <a href="library/convolution/convolutive_translation_2d.hpp.html">convolution/convolutive_translation_2d.hpp</a>
 * :warning: <a href="library/convolution/fft_arbitrary_mod.hpp.html">convolution/fft_arbitrary_mod.hpp</a>
 * :warning: <a href="library/convolution/fft_double.hpp.html">convolution/fft_double.hpp</a>
 * :heavy_check_mark: <a href="library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>

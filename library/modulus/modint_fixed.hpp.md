@@ -38,6 +38,7 @@ layout: default
 
 ## Required by
 
+* :warning: <a href="../convolution/convolutive_translation_2d.hpp.html">convolution/convolutive_translation_2d.hpp</a>
 * :heavy_check_mark: <a href="../convolution/ntt.hpp.html">convolution/ntt.hpp</a>
 * :heavy_check_mark: <a href="../formal_power_series/coeff_of_rational_function.hpp.html">formal_power_series/coeff_of_rational_function.hpp</a>
 * :heavy_check_mark: <a href="../formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
