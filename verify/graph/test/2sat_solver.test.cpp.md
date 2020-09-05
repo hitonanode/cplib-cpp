@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#cb3e5c672d961db00b76e36ddf5c068a">graph/test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/test/2sat_solver.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-07 22:40:57+09:00
+    - Last commit date: 2020-09-05 20:52:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/two_sat">https://judge.yosupo.jp/problem/two_sat</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/graph/strongly_connected_components.hpp.html">graph/strongly_connected_components.hpp</a>
+* :question: <a href="../../../library/graph/strongly_connected_components.hpp.html">graph/strongly_connected_components.hpp</a>
 
 
 ## Code
@@ -89,6 +89,7 @@ int main() {
 #define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 #line 2 "graph/strongly_connected_components.hpp"
 #include <cassert>
+#include <algorithm>
 #include <vector>
 
 // CUT begin
@@ -132,6 +133,33 @@ struct DirectedGraphSCC {
         scc_num = 0;
         for (int i = (int)vs.size() - 1; i >= 0; i--) if (!used[vs[i]]) _rdfs(vs[i], scc_num++);
         return scc_num;
+    }
+
+    // Find and output the vertices that form a closed cycle.
+    // output: {v_1, ..., v_C}, where C is the length of cycle,
+    //         {} if there's NO cycle (graph is DAG)
+    std::vector<int> DetectCycle()
+    {
+        int ns = FindStronglyConnectedComponents();
+        if (ns == V) return {};
+        std::vector<int> cnt(ns);
+        for (auto x : cmp) cnt[x]++;
+        const int c = std::find_if(cnt.begin(), cnt.end(), [](int x) { return x > 1; }) - cnt.begin();
+        const int init = std::find(cmp.begin(), cmp.end(), c) - cmp.begin();
+        used.assign(V, false);
+        std::vector<int> ret;
+        auto dfs = [&](auto &&dfs, int now, bool b0) -> bool {
+            if (now == init and b0) return true;
+            for (auto nxt : to[now]) if (cmp[nxt] == c and !used[nxt])
+            {
+                ret.emplace_back(nxt), used[nxt] = 1;
+                if (dfs(dfs, nxt, true)) return true;
+                ret.pop_back();
+            }
+            return false;
+        };
+        dfs(dfs, init, false);
+        return ret;
     }
 
     // After calling `FindStronglyConnectedComponents()`, generate a new graph by uniting all vertices

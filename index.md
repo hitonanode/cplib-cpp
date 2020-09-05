@@ -107,7 +107,7 @@ layout: default
 * :heavy_check_mark: <a href="library/graph/maximum_independent_set.hpp.html">graph/maximum_independent_set.hpp</a>
 * :warning: <a href="library/graph/shortest_cycle.hpp.html">graph/shortest_cycle.hpp</a>
 * :heavy_check_mark: <a href="library/graph/shortest_path.hpp.html">graph/shortest_path.hpp</a>
-* :heavy_check_mark: <a href="library/graph/strongly_connected_components.hpp.html">graph/strongly_connected_components.hpp</a>
+* :question: <a href="library/graph/strongly_connected_components.hpp.html">graph/strongly_connected_components.hpp</a>
 * :heavy_check_mark: <a href="library/graph/strongly_connected_components_bitset.hpp.html">graph/strongly_connected_components_bitset.hpp</a>
 
 
@@ -287,11 +287,12 @@ layout: default
 * :heavy_check_mark: <a href="verify/graph/test/bipartite_matching(slow).test.cpp.html">graph/test/bipartite_matching(slow).test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/bipartite_matching.test.cpp.html">graph/test/bipartite_matching.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/bridge.test.cpp.html">graph/test/bridge.test.cpp</a>
+* :x: <a href="verify/graph/test/cycle_detection_directed.test.cpp.html">graph/test/cycle_detection_directed.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/dijkstra.test.cpp.html">graph/test/dijkstra.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/maxflow.test.cpp.html">graph/test/maxflow.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/maximum_independent_set.test.cpp.html">graph/test/maximum_independent_set.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/mincostflow.test.cpp.html">graph/test/mincostflow.test.cpp</a>
-* :heavy_check_mark: <a href="verify/graph/test/strongly_connected_components.test.cpp.html">graph/test/strongly_connected_components.test.cpp</a>
+* :x: <a href="verify/graph/test/strongly_connected_components.test.cpp.html">graph/test/strongly_connected_components.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/strongly_connected_components_bitset.test.cpp.html">graph/test/strongly_connected_components_bitset.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/topological_sort.test.cpp.html">graph/test/topological_sort.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/two-edge-connected-components.test.cpp.html">graph/test/two-edge-connected-components.test.cpp</a>
