@@ -1,6 +1,5 @@
 #pragma once
 #include "formal_power_series/formal_power_series.hpp"
-#include <vector>
 
 // multipoint polynomial evaluation
 // input: xs = [x_0, ..., x_{N - 1}]: points to evaluate
@@ -10,39 +9,56 @@ template <typename Tfield>
 struct MultipointEvaluation
 {
     int nx;
-    int head;
     using polynomial = FormalPowerSeries<Tfield>;
     std::vector<polynomial> segtree;
     MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size())
     {
-        head = 1;
-        while (1 << head < nx) head++;
-        segtree.resize(2 << head);
-        for (int i = 0; i < 1 << head; i++)
+        segtree.resize(nx * 2 - 1);
+        for (int i = 0; i < nx; i++)
         {
-            segtree[(1 << head) + i] = {i < nx ? -xs[i] : 0, 1};
+            segtree[nx - 1 + i] = {-xs[i], 1};
         }
-        for (int i = 1 << head; --i;)
+        for (int i = nx - 2; i >= 0; i--)
         {
-            segtree[i] = segtree[2 * i] * segtree[2 * i + 1];
+            segtree[i] = segtree[2 * i + 1] * segtree[2 * i + 2];
         }
     }
     std::vector<Tfield> ret;
-    void _dfs_eval(polynomial f, int now)
-    {
-        f %= segtree[now];
-        if (now - (1 << head) >= 0)
-        {
-            if ((now - (1 << head)) < nx) ret[now - (1 << head)] = f.coeff(0);
-            return;
-        }
-        _dfs_eval(f, 2 * now);
-        _dfs_eval(f, 2 * now + 1);
-    }
     std::vector<Tfield> evaluate_polynomial(polynomial f)
     {
         ret.resize(nx);
-        _dfs_eval(f, 1);
+        auto rec = [&](auto &&rec, polynomial f, int now) -> void {
+            f %= segtree[now];
+            if (now - (nx - 1) >= 0)
+            {
+                ret[now - (nx - 1)] = f.coeff(0);
+                return;
+            }
+            rec(rec, f, 2 * now + 1);
+            rec(rec, f, 2 * now + 2);
+        };
+        rec(rec, f, 0);
         return ret;
+    }
+
+    std::vector<Tfield> _interpolate_coeffs;
+    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys)
+    {
+        assert(nx == int(ys.size()));
+        if (_interpolate_coeffs.empty())
+        {
+            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());
+            for (auto &x : _interpolate_coeffs) x = x.inv();
+        }
+        for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];
+
+        auto rec = [&](auto &&rec, int now) -> polynomial {
+            int i = now - (nx - 1);
+            if (i >= 0) return {ys[i]};
+            auto retl = rec(rec, 2 * now + 1);
+            auto retr = rec(rec, 2 * now + 2);
+            return retl * segtree[2 * now + 2] + retr * segtree[2 * now + 1];
+        };
+        return rec(rec, 0);
     }
 };
