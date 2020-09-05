@@ -16,6 +16,7 @@
 "formal_power_series/test/kitamasa.test.cpp": "2020-06-13 14:25:53 +0900",
 "formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp": "2020-09-05 16:24:46 +0900",
 "formal_power_series/test/polynomial_interpolation.test.cpp": "2020-09-05 16:24:46 +0900",
+"formal_power_series/test/sharp_p_subset_sum.test.cpp": "2020-09-05 17:47:08 +0900",
 "geometry/test/convex_hull.test.cpp": "2020-04-18 21:44:08 +0900",
 "geometry/test/sort_by_argument.test.cpp": "2020-04-18 18:32:38 +0900",
 "graph-tree/test/hl_decomposition.test.cpp": "2020-03-07 22:54:47 +0900",
