@@ -1,5 +1,6 @@
 #pragma once
 #include <cassert>
+#include <algorithm>
 #include <vector>
 
 // CUT begin
@@ -43,6 +44,33 @@ struct DirectedGraphSCC {
         scc_num = 0;
         for (int i = (int)vs.size() - 1; i >= 0; i--) if (!used[vs[i]]) _rdfs(vs[i], scc_num++);
         return scc_num;
+    }
+
+    // Find and output the vertices that form a closed cycle.
+    // output: {v_1, ..., v_C}, where C is the length of cycle,
+    //         {} if there's NO cycle (graph is DAG)
+    std::vector<int> DetectCycle()
+    {
+        int ns = FindStronglyConnectedComponents();
+        if (ns == V) return {};
+        std::vector<int> cnt(ns);
+        for (auto x : cmp) cnt[x]++;
+        const int c = std::find_if(cnt.begin(), cnt.end(), [](int x) { return x > 1; }) - cnt.begin();
+        const int init = std::find(cmp.begin(), cmp.end(), c) - cmp.begin();
+        used.assign(V, false);
+        std::vector<int> ret;
+        auto dfs = [&](auto &&dfs, int now, bool b0) -> bool {
+            if (now == init and b0) return true;
+            for (auto nxt : to[now]) if (cmp[nxt] == c and !used[nxt])
+            {
+                ret.emplace_back(nxt), used[nxt] = 1;
+                if (dfs(dfs, nxt, true)) return true;
+                ret.pop_back();
+            }
+            return false;
+        };
+        dfs(dfs, init, false);
+        return ret;
     }
 
     // After calling `FindStronglyConnectedComponents()`, generate a new graph by uniting all vertices
