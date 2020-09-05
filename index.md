@@ -181,6 +181,7 @@ layout: default
 
 ### other_data_structures
 
+* :heavy_check_mark: <a href="library/other_data_structures/binary_trie.hpp.html">other_data_structures/binary_trie.hpp</a>
 * :heavy_check_mark: <a href="library/other_data_structures/fibonacci_heap.hpp.html">other_data_structures/fibonacci_heap.hpp</a>
 * :heavy_check_mark: <a href="library/other_data_structures/persistent_queue.hpp.html">other_data_structures/persistent_queue.hpp</a>
 * :heavy_check_mark: <a href="library/other_data_structures/sliding_window_aggregation.hpp.html">other_data_structures/sliding_window_aggregation.hpp</a>
@@ -310,6 +311,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/number/test/gen_primes.test.cpp.html">number/test/gen_primes.test.cpp</a>
 * :heavy_check_mark: <a href="verify/number/test/miller-rabin.test.cpp.html">number/test/miller-rabin.test.cpp</a>
 * :heavy_check_mark: <a href="verify/number/test/prime_factorization.test.cpp.html">number/test/prime_factorization.test.cpp</a>
+* :heavy_check_mark: <a href="verify/other_data_structures/test/binary_trie.test.cpp.html">other_data_structures/test/binary_trie.test.cpp</a>
 * :heavy_check_mark: <a href="verify/other_data_structures/test/fibonacci_heap_dijkstra.test.cpp.html">other_data_structures/test/fibonacci_heap_dijkstra.test.cpp</a>
 * :heavy_check_mark: <a href="verify/other_data_structures/test/fibonacci_heap_shortestpath.test.cpp.html">other_data_structures/test/fibonacci_heap_shortestpath.test.cpp</a>
 * :heavy_check_mark: <a href="verify/other_data_structures/test/fibonacci_heap_spanningtree.test.cpp.html">other_data_structures/test/fibonacci_heap_spanningtree.test.cpp</a>
