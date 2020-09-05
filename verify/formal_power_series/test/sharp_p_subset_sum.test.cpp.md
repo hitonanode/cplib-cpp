@@ -21,52 +21,27 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: convolution/ntt.hpp
+# :heavy_check_mark: formal_power_series/test/sharp_p_subset_sum.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#a9595c1c24c33b16056d2ad07e71682d">convolution</a>
-* <a href="{{ site.github.repository_url }}/blob/master/convolution/ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-13 13:47:58+09:00
+* category: <a href="../../../index.html#a20fdd22d4cc62ca1cf4e679d77fd3d2">formal_power_series/test</a>
+* <a href="{{ site.github.repository_url }}/blob/master/formal_power_series/test/sharp_p_subset_sum.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-09-05 17:47:08+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/sharp_p_subset_sum">https://judge.yosupo.jp/problem/sharp_p_subset_sum</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
-
-
-## Required by
-
-* :warning: <a href="convolutive_translation_2d.hpp.html">convolution/convolutive_translation_2d.hpp</a>
-* :heavy_check_mark: <a href="../formal_power_series/coeff_of_rational_function.hpp.html">formal_power_series/coeff_of_rational_function.hpp</a>
-* :heavy_check_mark: <a href="../formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
-* :heavy_check_mark: <a href="../formal_power_series/multipoint_evaluation.hpp.html">formal_power_series/multipoint_evaluation.hpp</a>
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../verify/convolution/test/ntt.test.cpp.html">convolution/test/ntt.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/convolution/test/ntt_arbitrary_mod.test.cpp.html">convolution/test/ntt_arbitrary_mod.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/bernoulli_number.test.cpp.html">formal_power_series/test/bernoulli_number.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/coeff_of_rational_function.test.cpp.html">formal_power_series/test/coeff_of_rational_function.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/division_number.test.cpp.html">formal_power_series/test/division_number.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_exp.test.cpp.html">formal_power_series/test/fps_exp.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_exp_modintruntime.test.cpp.html">formal_power_series/test/fps_exp_modintruntime.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_inv.test.cpp.html">formal_power_series/test/fps_inv.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_log.test.cpp.html">formal_power_series/test/fps_log.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_pow.test.cpp.html">formal_power_series/test/fps_pow.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt.test.cpp.html">formal_power_series/test/fps_sqrt.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/fps_sqrt_modintruntime.test.cpp.html">formal_power_series/test/fps_sqrt_modintruntime.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/kitamasa.test.cpp.html">formal_power_series/test/kitamasa.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/polynomial_interpolation.test.cpp.html">formal_power_series/test/polynomial_interpolation.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/formal_power_series/test/sharp_p_subset_sum.test.cpp.html">formal_power_series/test/sharp_p_subset_sum.test.cpp</a>
+* :heavy_check_mark: <a href="../../../library/convolution/ntt.hpp.html">convolution/ntt.hpp</a>
+* :heavy_check_mark: <a href="../../../library/formal_power_series/formal_power_series.hpp.html">formal_power_series/formal_power_series.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulus/modint_fixed.hpp.html">modulus/modint_fixed.hpp</a>
 
 
 ## Code
@@ -74,157 +49,44 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#pragma once
-#include "modulus/modint_fixed.hpp"
-
-#include <algorithm>
-#include <array>
-#include <cassert>
-#include <tuple>
+#define PROBLEM "https://judge.yosupo.jp/problem/sharp_p_subset_sum"
+#include <iostream>
 #include <vector>
+#include "modulus/modint_fixed.hpp"
+#include "formal_power_series/formal_power_series.hpp"
+using namespace std;
 
-// CUT begin
-// Integer convolution for arbitrary mod
-// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.
-// We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.
-// input: a (size: n), b (size: m)
-// return: vector (size: n + m - 1)
-template <typename MODINT>
-std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner = false);
-
-constexpr int nttprimes[3] = {998244353, 167772161, 469762049};
-
-// Integer FFT (Fast Fourier Transform) for ModInt class
-// (Also known as Number Theoretic Transform, NTT)
-// is_inverse: inverse transform
-// ** Input size must be 2^n **
-template <typename MODINT>
-void ntt(std::vector<MODINT> &a, bool is_inverse = false)
+int main()
 {
-    int n = a.size();
-    if (n == 1) return;
-    static const int mod = MODINT::get_mod();
-    static const MODINT root = MODINT::get_primitive_root();
-    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
 
-    static std::vector<MODINT> w{1}, iw{1};
-    for (int m = w.size(); m < n / 2; m *= 2)
+    int N, T;
+    cin >> N >> T;
+    vector<int> cnt(T + 1);
+    while (N--)
     {
-        MODINT dw = root.power((mod - 1) / (4 * m)), dwinv = 1 / dw;
-        w.resize(m * 2), iw.resize(m * 2);
-        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;
+        int s;
+        cin >> s;
+        cnt[s]++;
     }
+    FormalPowerSeries<ModInt<998244353>> A(T + 1), invs(T + 1);
+    for (int i = 1; i <= T; i++) invs[i] = (invs[i] + i).inv();
 
-    if (!is_inverse) {
-        for (int m = n; m >>= 1;) {
-            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {
-                for (int i = s; i < s + m; i++) {
-#ifdef __clang__
-                    a[i + m] *= w[k];
-                    std::tie(a[i], a[i + m]) = std::make_pair(a[i] + a[i + m], a[i] - a[i + m]);
-#else
-                    MODINT x = a[i], y = a[i + m] * w[k];
-                    a[i] = x + y, a[i + m] = x - y;
-#endif
-                }
+    for (int i = 1; i <= T; i++)
+    {
+        if (cnt[i])
+        {
+            for (int j = 1; j * i <= T; j++)
+            {
+                if (j % 2) A[j * i] += cnt[i] * invs[j];
+                else A[j * i] -= cnt[i] * invs[j];
             }
         }
     }
-    else {
-        for (int m = 1; m < n; m *= 2) {
-            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {
-                for (int i = s; i < s + m; i++) {
-#ifdef __clang__
-                    std::tie(a[i], a[i + m]) = std::make_pair(a[i] + a[i + m], a[i] - a[i + m]);
-                    a[i + m] *= iw[k];
-#else
-                    MODINT x = a[i], y = a[i + m];
-                    a[i] = x + y, a[i + m] = (x - y) * iw[k];
-#endif
-                }
-            }
-        }
-        int n_inv = MODINT(n).inv();
-        for (auto &v : a) v *= n_inv;
-    }
-}
-template <int MOD>
-std::vector<ModInt<MOD>> nttconv_(const std::vector<int> &a, const std::vector<int> &b) {
-    int sz = a.size();
-    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);
-    std::vector<ModInt<MOD>> ap(sz), bp(sz);
-    for (int i = 0; i < sz; i++) ap[i] = a[i], bp[i] = b[i];
-    if (a == b) {
-        ntt(ap, false);
-        bp = ap;
-    }
-    else {
-        ntt(ap, false);
-        ntt(bp, false);
-    }
-    for (int i = 0; i < sz; i++) ap[i] *= bp[i];
-    ntt(ap, true);
-    return ap;
-}
-long long extgcd_ntt_(long long a, long long b, long long &x, long long &y)
-{
-    long long d = a;
-    if (b != 0) d = extgcd_ntt_(b, a % b, y, x), y -= (a / b) * x;
-    else x = 1, y = 0;
-    return d;
-}
-long long modinv_ntt_(long long a, long long m)
-{
-    long long x, y;
-    extgcd_ntt_(a, m, x, y);
-    return (m + x % m) % m;
-}
-long long garner_ntt_(int r0, int r1, int r2, int mod)
-{
-    using mint2 = ModInt<nttprimes[2]>;
-    static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];
-    static const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();
-    static const long long m01_inv_m2 = mint2(m01).inv();
-
-    int v1 = (m0_inv_m1 * (r1 + nttprimes[1] - r0)) % nttprimes[1];
-    auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0]) * v1) * m01_inv_m2;
-    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val) % mod;
-}
-template <typename MODINT>
-std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner)
-{
-    int sz = 1, n = a.size(), m = b.size();
-    while (sz < n + m) sz <<= 1;
-    if (sz <= 16) {
-        std::vector<MODINT> ret(n + m - 1);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) ret[i + j] += a[i] * b[j];
-        }
-        return ret;
-    }
-    int mod = MODINT::get_mod();
-    if (skip_garner or std::find(std::begin(nttprimes), std::end(nttprimes), mod) != std::end(nttprimes))
-    {
-        a.resize(sz), b.resize(sz);
-        if (a == b) { ntt(a, false); b = a; }
-        else ntt(a, false), ntt(b, false);
-        for (int i = 0; i < sz; i++) a[i] *= b[i];
-        ntt(a, true);
-        a.resize(n + m - 1);
-    }
-    else {
-        std::vector<int> ai(sz), bi(sz);
-        for (int i = 0; i < n; i++) ai[i] = a[i].val;
-        for (int i = 0; i < m; i++) bi[i] = b[i].val;
-        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);
-        auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);
-        auto ntt2 = nttconv_<nttprimes[2]>(ai, bi);
-        a.resize(n + m - 1);
-        for (int i = 0; i < n + m - 1; i++) {
-            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);
-        }
-    }
-    return a;
+    A = A.exp(T + 1);
+    for (int t = 1; t <= T; t++) cout << A.coeff(t) << ' ';
+    cout << '\n';
 }
 
 ```
@@ -233,9 +95,11 @@ std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool s
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "modulus/modint_fixed.hpp"
+#line 1 "formal_power_series/test/sharp_p_subset_sum.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/sharp_p_subset_sum"
 #include <iostream>
 #include <vector>
+#line 4 "modulus/modint_fixed.hpp"
 #include <set>
 
 // CUT begin
@@ -495,9 +359,259 @@ std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool s
     }
     return a;
 }
+#line 6 "formal_power_series/formal_power_series.hpp"
+using namespace std;
+
+// CUT begin
+// Formal Power Series (形式的冪級数) based on ModInt<mod> / ModIntRuntime
+// Reference: <https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>
+template<typename T>
+struct FormalPowerSeries : vector<T>
+{
+    using vector<T>::vector;
+    using P = FormalPowerSeries;
+
+    void shrink() { while (this->size() and this->back() == T(0)) this->pop_back(); }
+
+    P operator+(const P &r) const { return P(*this) += r; }
+    P operator+(const T &v) const { return P(*this) += v; }
+    P operator-(const P &r) const { return P(*this) -= r; }
+    P operator-(const T &v) const { return P(*this) -= v; }
+    P operator*(const P &r) const { return P(*this) *= r; }
+    P operator*(const T &v) const { return P(*this) *= v; }
+    P operator/(const P &r) const { return P(*this) /= r; }
+    P operator/(const T &v) const { return P(*this) /= v; }
+    P operator%(const P &r) const { return P(*this) %= r; }
+
+    P &operator+=(const P &r) {
+        if (r.size() > this->size()) this->resize(r.size());
+        for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];
+        shrink();
+        return *this;
+    }
+    P &operator+=(const T &v) {
+        if (this->empty()) this->resize(1);
+        (*this)[0] += v;
+        shrink();
+        return *this;
+    }
+    P &operator-=(const P &r) {
+        if (r.size() > this->size()) this->resize(r.size());
+        for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
+        shrink();
+        return *this;
+    }
+    P &operator-=(const T &v) {
+        if (this->empty()) this->resize(1);
+        (*this)[0] -= v;
+        shrink();
+        return *this;
+    }
+    P &operator*=(const T &v) {
+        for (auto &x : (*this)) x *= v;
+        shrink();
+        return *this;
+    }
+    P &operator*=(const P &r) {
+        if (this->empty() || r.empty()) this->clear();
+        else {
+            auto ret = nttconv(*this, r);
+            *this = P(ret.begin(), ret.end());
+        }
+        return *this;
+    }
+    P &operator%=(const P &r) {
+        *this -= *this / r * r;
+        shrink();
+        return *this;
+    }
+    P operator-() const {
+        P ret = *this;
+        for (auto &v : ret) v = -v;
+        return ret;
+    }
+    P &operator/=(const T &v) {
+        assert(v != T(0));
+        for (auto &x : (*this)) x /= v;
+        return *this;
+    }
+    P &operator/=(const P &r) {
+        if (this->size() < r.size()) {
+            this->clear();
+            return *this;
+        }
+        int n = (int)this->size() - r.size() + 1;
+        return *this = (reversed().pre(n) * r.reversed().inv(n)).pre(n).reversed(n);
+    }
+    P pre(int sz) const {
+         P ret(this->begin(), this->begin() + min((int)this->size(), sz));
+         ret.shrink();
+         return ret;
+    }
+    P operator>>(int sz) const {
+        if ((int)this->size() <= sz) return {};
+        return P(this->begin() + sz, this->end());
+    }
+    P operator<<(int sz) const {
+        if (this->empty()) return {};
+        P ret(*this);
+        ret.insert(ret.begin(), sz, T(0));
+        return ret;
+    }
+
+    P reversed(int deg = -1) const {
+        assert(deg >= -1);
+        P ret(*this);
+        if (deg != -1) ret.resize(deg, T(0));
+        reverse(ret.begin(), ret.end());
+        ret.shrink();
+        return ret;
+    }
+
+    P differential() const { // formal derivative (differential) of f.p.s.
+        const int n = (int)this->size();
+        P ret(max(0, n - 1));
+        for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * T(i);
+        return ret;
+    }
+
+    P integral() const {
+        const int n = (int)this->size();
+        P ret(n + 1);
+        ret[0] = T(0);
+        for (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / T(i + 1);
+        return ret;
+    }
+
+    P inv(int deg) const {
+        assert(deg >= -1);
+        assert(this->size() and ((*this)[0]) != T(0)); // Requirement: F(0) != 0
+        const int n = this->size();
+        if (deg == -1) deg = n;
+        P ret({T(1) / (*this)[0]});
+        for (int i = 1; i < deg; i <<= 1) {
+            ret = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1);
+        }
+        ret = ret.pre(deg);
+        ret.shrink();
+        return ret;
+    }
+
+    P log(int deg = -1) const {
+        assert(deg >= -1);
+        assert(this->size() and ((*this)[0]) == T(1)); // Requirement: F(0) = 1
+        const int n = (int)this->size();
+        if (deg == 0) return {};
+        if (deg == -1) deg = n;
+        return (this->differential() * this->inv(deg)).pre(deg - 1).integral();
+    }
+
+    P sqrt(int deg = -1) const {
+        assert(deg >= -1);
+        const int n = (int)this->size();
+        if (deg == -1) deg = n;
+        if (this->empty()) return {};
+        if ((*this)[0] == T(0)) {
+            for (int i = 1; i < n; i++) if ((*this)[i] != T(0)) {
+                if ((i & 1) or deg - i / 2 <= 0) return {};
+                return (*this >> i).sqrt(deg - i / 2) << (i / 2);
+            }
+            return {};
+        }
+        T sqrtf0 = (*this)[0].sqrt();
+        if (sqrtf0 == T(0)) return {};
+
+        P y = (*this) / (*this)[0], ret({T(1)});
+        T inv2 = T(1) / T(2);
+        for (int i = 1; i < deg; i <<= 1) {
+            ret = (ret + y.pre(i << 1) * ret.inv(i << 1)) * inv2;
+        }
+        return ret.pre(deg) * sqrtf0;
+    }
+
+    P exp(int deg = -1) const {
+        assert(deg >= -1);
+        assert(this->empty() or ((*this)[0]) == T(0)); // Requirement: F(0) = 0
+        const int n = (int)this->size();
+        if (deg == -1) deg = n;
+        P ret({T(1)});
+        for (int i = 1; i < deg; i <<= 1) {
+            ret = (ret * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1);
+        }
+        return ret.pre(deg);
+    }
+
+    P pow(long long int k, int deg = -1) const {
+        assert(deg >= -1);
+        const int n = (int)this->size();
+        if (deg == -1) deg = n;
+        for (int i = 0; i < n; i++) {
+            if ((*this)[i] != T(0)) {
+                T rev = T(1) / (*this)[i];
+                P C(*this * rev);
+                P D(n - i);
+                for (int j = i; j < n; j++) D[j - i] = C[j];
+                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].power(k);
+                P E(deg);
+                if (k * (i > 0) > deg or k * i > deg) return {};
+                long long int S = i * k;
+                for (int j = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];
+                E.shrink();
+                return E;
+            }
+        }
+        return *this;
+    }
+
+    T coeff(int i) const {
+        if ((int)this->size() <= i or i < 0) return T(0);
+        return (*this)[i];
+    }
+
+    T eval(T x) const {
+        T ret = 0, w = 1;
+        for (auto &v : *this) ret += w * v, w *= x;
+        return ret;
+    }
+};
+#line 6 "formal_power_series/test/sharp_p_subset_sum.test.cpp"
+using namespace std;
+
+int main()
+{
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+
+    int N, T;
+    cin >> N >> T;
+    vector<int> cnt(T + 1);
+    while (N--)
+    {
+        int s;
+        cin >> s;
+        cnt[s]++;
+    }
+    FormalPowerSeries<ModInt<998244353>> A(T + 1), invs(T + 1);
+    for (int i = 1; i <= T; i++) invs[i] = (invs[i] + i).inv();
+
+    for (int i = 1; i <= T; i++)
+    {
+        if (cnt[i])
+        {
+            for (int j = 1; j * i <= T; j++)
+            {
+                if (j % 2) A[j * i] += cnt[i] * invs[j];
+                else A[j * i] -= cnt[i] * invs[j];
+            }
+        }
+    }
+    A = A.exp(T + 1);
+    for (int t = 1; t <= T; t++) cout << A.coeff(t) << ' ';
+    cout << '\n';
+}
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

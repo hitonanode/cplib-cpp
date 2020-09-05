@@ -277,6 +277,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/formal_power_series/test/kitamasa.test.cpp.html">formal_power_series/test/kitamasa.test.cpp</a>
 * :heavy_check_mark: <a href="verify/formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp.html">formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp</a>
 * :heavy_check_mark: <a href="verify/formal_power_series/test/polynomial_interpolation.test.cpp.html">formal_power_series/test/polynomial_interpolation.test.cpp</a>
+* :heavy_check_mark: <a href="verify/formal_power_series/test/sharp_p_subset_sum.test.cpp.html">formal_power_series/test/sharp_p_subset_sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/geometry/test/convex_hull.test.cpp.html">geometry/test/convex_hull.test.cpp</a>
 * :heavy_check_mark: <a href="verify/geometry/test/sort_by_argument.test.cpp.html">geometry/test/sort_by_argument.test.cpp</a>
 * :heavy_check_mark: <a href="verify/graph/test/2sat_solver.test.cpp.html">graph/test/2sat_solver.test.cpp</a>
