@@ -220,6 +220,7 @@ layout: default
 
 ### sparse_table
 
+* :heavy_check_mark: <a href="library/sparse_table/disjoint_sparse_table.hpp.html">sparse_table/disjoint_sparse_table.hpp</a>
 * :heavy_check_mark: <a href="library/sparse_table/rmq_sparse_table.hpp.html">sparse_table/rmq_sparse_table.hpp</a>
 * :heavy_check_mark: <a href="library/sparse_table/sparse_table.hpp.html">sparse_table/sparse_table.hpp</a>
 * :heavy_check_mark: <a href="library/sparse_table/sparse_table_2d.hpp.html">sparse_table/sparse_table_2d.hpp</a>
@@ -325,6 +326,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/segmenttree/test/rmq_nonrecursive.test.cpp.html">segmenttree/test/rmq_nonrecursive.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/segment_tree_2d.test.cpp.html">segmenttree/test/segment_tree_2d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/segmenttree/test/segment_tree_2d_pointadd.test.cpp.html">segmenttree/test/segment_tree_2d_pointadd.test.cpp</a>
+* :heavy_check_mark: <a href="verify/sparse_table/test/disjoint_sparse_table_rmq.test.cpp.html">sparse_table/test/disjoint_sparse_table_rmq.test.cpp</a>
+* :heavy_check_mark: <a href="verify/sparse_table/test/disjoint_sparse_table_rsq.test.cpp.html">sparse_table/test/disjoint_sparse_table_rsq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/sparse_table/test/sparse_table.test.cpp.html">sparse_table/test/sparse_table.test.cpp</a>
 * :heavy_check_mark: <a href="verify/sparse_table/test/sparse_table_2d.test.cpp.html">sparse_table/test/sparse_table_2d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/sparse_table/test/sparse_table_aoj.test.cpp.html">sparse_table/test/sparse_table_aoj.test.cpp</a>
