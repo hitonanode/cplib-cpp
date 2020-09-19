@@ -21,7 +21,7 @@ struct NonrecursiveSegmentTree
     virtual TRET data2ret(const TDATA &, const TQUERY &) = 0;
     virtual TRET merge_ret(const TRET &, const TRET &) = 0;
     std::vector<TDATA> data;
-    inline TDATA& at(int i) { return data[i]; }
+    inline TDATA &at(int i) { return data[i]; }
 
     inline void _merge(int i) { at(i) = merge_data(at(i << 1), at((i << 1) + 1)); }
     void initialize(const std::vector<TDATA> &seq, TRET RET_ZERO) {
@@ -51,22 +51,22 @@ struct NonrecursiveSegmentTree
         return merge_ret(retl, retr);
     }
 
-    // Calculate smallest r that satisfies g(f(x_l, q), ..., f(x_{r - 1}, q)) >= threshold
+    // Calculate smallest r that satisfies condition(g(f(x_l, q), ..., f(x_{r - 1}, q)) == true
     // Assumption: Monotonicity of g(x_l, ..., x_r) about r (l: fixed)
     // Complexity: O(log N)
-    int binary_search(int l, const TRET &threshold, TQUERY query = NULL) {
+    int binary_search(int l, auto condition, TQUERY query = NULL) {
         std::stack<int> rs;
         l += N;
         int r = N * 2;
         TRET retl = defaultRET;
-        if (threshold <= retl) return l - N;
+        if (condition(retl)) return l - N;
         while (l < r) {
             if (l & 1) {
                 TRET ret_tmp = merge_ret(retl, data2ret(data[l], query));
-                if (threshold <= ret_tmp) {
+                if (condition(ret_tmp)) {
                     while (l * 2 < N * 2) {
                         ret_tmp = merge_ret(retl, data2ret(data[l * 2], query));
-                        if (threshold <= ret_tmp) l *= 2;
+                        if (condition(ret_tmp)) l *= 2;
                         else retl = ret_tmp, l = l * 2 + 1;
                     }
                     return l - N;
@@ -81,10 +81,10 @@ struct NonrecursiveSegmentTree
             l = rs.top();
             rs.pop();
             TRET ret_tmp = merge_ret(retl, data2ret(data[l], query));
-            if (threshold <= ret_tmp) {
+            if (condition(ret_tmp)) {
                 while (l * 2 < N * 2) {
                     ret_tmp = merge_ret(retl, data2ret(data[l * 2], query));
-                    if (threshold <= ret_tmp) l *= 2;
+                    if (condition(ret_tmp)) l *= 2;
                     else retl = ret_tmp, l = l * 2 + 1;
                 }
                 return l - N;
@@ -94,8 +94,9 @@ struct NonrecursiveSegmentTree
         return N;
     }
 
-    template<typename T1, typename T2, typename T3>
-    friend std::ostream &operator<<(std::ostream &os, NonrecursiveSegmentTree<T1, T2, T3> s) {
+    template <typename T1, typename T2, typename T3>
+    friend std::ostream &operator<<(std::ostream &os, NonrecursiveSegmentTree<T1, T2, T3> s)
+    {
         os << "[SegmentTree (len: " << s.N << ')';
         for (int i = 0; i < s.N; i++) os << s.at(i + s.N) << ',';
         os << "]";
