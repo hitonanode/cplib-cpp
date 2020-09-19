@@ -1,4 +1,5 @@
 #pragma once
+#include <cassert>
 #include <iostream>
 #include <limits>
 #include <queue>
@@ -9,11 +10,10 @@
 MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE
 Verified by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>
 */
+template <typename TFLOW = long long, typename TCOST = long long>
 struct MinCostFlow
 {
-    using TFLOW = long long int;
-    using TCOST = long long int;
-    const TCOST INF_COST = std::numeric_limits<TCOST>::max();
+    const TCOST INF_COST = std::numeric_limits<TCOST>::max() / 2;
     struct edge {
         int to, rev;
         TFLOW cap;
@@ -28,6 +28,7 @@ struct MinCostFlow
     std::vector<TCOST> dist;
     std::vector<int> prevv, preve;
     std::vector<TCOST> h;  // h[V]: potential
+    std::vector<std::pair<int, int>> einfo;
 
     bool _calc_distance_bellman_ford(int s) {  // O(VE), able to detect negative cycle
         dist.assign(V, INF_COST);
@@ -78,7 +79,8 @@ struct MinCostFlow
     MinCostFlow(int V=0) : V(V), G(V) {}
 
     void add_edge(int from, int to, TFLOW cap, TCOST cost) {
-        G[from].emplace_back(edge{to, (int)G[to].size(), cap, cost});
+        einfo.emplace_back(from, G[from].size());
+        G[from].emplace_back(edge{to, (int)G[to].size() + (from == to), cap, cost});
         G[to].emplace_back(edge{from, (int)G[from].size() - 1, (TFLOW)0, -cost});
     }
 
@@ -96,7 +98,7 @@ struct MinCostFlow
         while (f > 0) {
             _calc_distance_dijkstra(s);
             if (dist[t] == INF_COST) return std::make_pair(ret, std::make_pair(false, f));
-            for (int v = 0; v < V; v++) h[v] += dist[v];
+            for (int v = 0; v < V; v++) h[v] = std::min(h[v] + dist[v], INF_COST);
             TFLOW d = f;
             for (int v = t; v != s; v = prevv[v]) {
                 d = std::min(d, G[prevv[v]][preve[v]].cap);
@@ -118,5 +120,102 @@ struct MinCostFlow
             os << "\n" << i << "->" << e.to << ": cap=" << e.cap << ", cost=" << e.cost;
         }
         return os;
+    }
+};
+
+template <typename TFLOW = long long, typename TCOST = long long>
+struct B_Flow
+{
+    int N, E;
+    MinCostFlow<TFLOW, TCOST> mcf;
+    std::vector<TFLOW> b;
+    TCOST cost_bias;
+    std::vector<TFLOW> fbias;
+    std::vector<int> fdir;
+    bool infeasible;
+    B_Flow(int N = 0) : N(N), E(0), mcf(N + 2), b(N), cost_bias(0), infeasible(false) {}
+
+    void add_supply(int v, TFLOW supply) { b[v] += supply; }
+    void add_demand(int v, TFLOW demand) { b[v] -= demand; }
+    void add_edge(int s, int t, TFLOW lower_cap, TFLOW upper_cap, TCOST cost)
+    {
+        assert(s >= 0 and s < N);
+        assert(t >= 0 and t < N);
+        if (lower_cap > upper_cap)
+        {
+            infeasible = true;
+            return;
+        }
+        E++;
+        if (s == t)
+        {
+            if (cost > 0) upper_cap = lower_cap;
+            else lower_cap = upper_cap;
+        }
+        if (cost < 0)
+        {
+            fbias.emplace_back(lower_cap);
+            fdir.emplace_back(-1);
+            cost_bias += cost * upper_cap;
+            b[s] -= upper_cap;
+            b[t] += upper_cap;
+            mcf.add_edge(t, s, upper_cap - lower_cap, -cost);
+        }
+        else
+        {
+            fbias.emplace_back(upper_cap);
+            fdir.emplace_back(1);
+            if (lower_cap < 0)
+            {
+                cost_bias += cost * lower_cap, b[s] -= lower_cap, b[t] += lower_cap;
+                upper_cap -= lower_cap, lower_cap = 0;
+            }
+            if (lower_cap > 0)
+            {
+                cost_bias += cost * lower_cap;
+                b[s] -= lower_cap;
+                b[t] += lower_cap;
+                upper_cap -= lower_cap;
+            }
+            mcf.add_edge(s, t, upper_cap, cost);
+        }
+    }
+
+    std::vector<TFLOW> f;
+    std::pair<bool, TCOST> solve()
+    {
+        if (infeasible)
+        {
+            return std::make_pair(false, 0);
+        }
+        TFLOW bsum = 0, bsum_negative = 0;
+        for (int i = 0; i < N; i++)
+        {
+            if (b[i] > 0)
+            {
+                mcf.add_edge(N, i, b[i], 0);
+                bsum += b[i];
+            }
+            if (b[i] < 0)
+            {
+                mcf.add_edge(i, N + 1, -b[i], 0);
+                bsum_negative -= b[i];
+            }
+        }
+        if (bsum != bsum_negative)
+        {
+            return std::make_pair(false, 0);
+        }
+        std::fill(b.begin(), b.end(), 0);
+        auto ret = mcf.flush(N, N + 1, bsum);
+        TCOST cost_ret = cost_bias + ret.first;
+        bool succeeded = ret.second.first;
+        f = fbias;
+        for (int i = 0; i < E; i++)
+        {
+            std::pair<int, int> p = mcf.einfo[i];
+            f[i] -= fdir[i] * mcf.G[p.first][p.second].cap;
+        }
+        return std::make_pair(succeeded, cost_ret);
     }
 };
