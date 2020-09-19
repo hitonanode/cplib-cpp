@@ -1,0 +1,48 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/det_of_sparse_matrix.hpp
+    title: linear_algebra_matrix/det_of_sparse_matrix.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: random/test/rolling_hash.test.cpp
+    title: random/test/rolling_hash.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+    title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  _pathExtension: hpp
+  _verificationStatusIcon: ':heavy_check_mark:'
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    links: []
+  bundledCode: "#line 2 \"random/rand_nondeterministic.hpp\"\n#include <chrono>\n\
+    #include <random>\nusing namespace std;\n\n// CUT begin\nstruct rand_int_\n{\n\
+    \    using lint = long long;\n    mt19937 mt;\n    rand_int_() : mt(chrono::steady_clock::now().time_since_epoch().count())\
+    \ {}\n    lint operator()(lint x) { return this->operator()(0, x); } // [0, x)\n\
+    \    lint operator()(lint l, lint r) {\n        uniform_int_distribution<lint>\
+    \ d(l, r - 1);\n        return d(mt);\n    }\n} rnd;\n"
+  code: "#pragma once\n#include <chrono>\n#include <random>\nusing namespace std;\n\
+    \n// CUT begin\nstruct rand_int_\n{\n    using lint = long long;\n    mt19937\
+    \ mt;\n    rand_int_() : mt(chrono::steady_clock::now().time_since_epoch().count())\
+    \ {}\n    lint operator()(lint x) { return this->operator()(0, x); } // [0, x)\n\
+    \    lint operator()(lint l, lint r) {\n        uniform_int_distribution<lint>\
+    \ d(l, r - 1);\n        return d(mt);\n    }\n} rnd;\n"
+  dependsOn: []
+  isVerificationFile: false
+  path: random/rand_nondeterministic.hpp
+  requiredBy:
+  - linear_algebra_matrix/det_of_sparse_matrix.hpp
+  timestamp: '2020-03-07 22:54:47+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - random/test/rolling_hash.test.cpp
+  - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+documentation_of: random/rand_nondeterministic.hpp
+layout: document
+redirect_from:
+- /library/random/rand_nondeterministic.hpp
+- /library/random/rand_nondeterministic.hpp.html
+title: random/rand_nondeterministic.hpp
+---

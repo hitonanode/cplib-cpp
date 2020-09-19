@@ -1,0 +1,52 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: unionfind/unionfind.hpp
+    title: unionfind/unionfind.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp
+    links:
+    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp
+  bundledCode: "#line 1 \"unionfind/test/unionfind.test.cpp\"\n#include <iostream>\n\
+    #line 2 \"unionfind/unionfind.hpp\"\n#include <numeric>\n#include <utility>\n\
+    #include <vector>\n\n// CUT begin\n// UnionFind Tree (0-indexed), based on size\
+    \ of each disjoint set\nstruct UnionFind\n{\n    std::vector<int> par, cou;\n\
+    \    UnionFind(int N = 0) : par(N), cou(N, 1) {\n        iota(par.begin(), par.end(),\
+    \ 0);\n    }\n    int find(int x) { return (par[x] == x) ? x : (par[x] = find(par[x]));\
+    \ }\n    bool unite(int x, int y) {\n        x = find(x), y = find(y);\n     \
+    \   if (x == y) return false;\n        if (cou[x] < cou[y]) std::swap(x, y); \n\
+    \        par[y] = x, cou[x] += cou[y];\n        return true;\n    }\n    int count(int\
+    \ x) { return cou[find(x)]; }\n    bool same(int x, int y) { return find(x) ==\
+    \ find(y); }\n};\n#line 3 \"unionfind/test/unionfind.test.cpp\"\n#define PROBLEM\
+    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp\"\
+    \nusing namespace std;\n\n\nint main()\n{\n    int n, q;\n    cin >> n >> q;\n\
+    \    UnionFind uf(n);\n    for (int i = 0; i < q; i++)\n    {\n        int c,\
+    \ x, y;\n        cin >> c >> x >> y;\n        if (c) cout << (int)uf.same(x, y)\
+    \ << endl;\n        else uf.unite(x, y);\n    }\n}\n"
+  code: "#include <iostream>\n#include \"unionfind/unionfind.hpp\"\n#define PROBLEM\
+    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp\"\
+    \nusing namespace std;\n\n\nint main()\n{\n    int n, q;\n    cin >> n >> q;\n\
+    \    UnionFind uf(n);\n    for (int i = 0; i < q; i++)\n    {\n        int c,\
+    \ x, y;\n        cin >> c >> x >> y;\n        if (c) cout << (int)uf.same(x, y)\
+    \ << endl;\n        else uf.unite(x, y);\n    }\n}\n"
+  dependsOn:
+  - unionfind/unionfind.hpp
+  isVerificationFile: true
+  path: unionfind/test/unionfind.test.cpp
+  requiredBy: []
+  timestamp: '2020-03-07 22:54:47+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: unionfind/test/unionfind.test.cpp
+layout: document
+redirect_from:
+- /verify/unionfind/test/unionfind.test.cpp
+- /verify/unionfind/test/unionfind.test.cpp.html
+title: unionfind/test/unionfind.test.cpp
+---
