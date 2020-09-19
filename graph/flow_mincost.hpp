@@ -10,14 +10,14 @@
 MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE
 Verified by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>
 */
-template <typename TFLOW = long long, typename TCOST = long long>
+template <typename CAP = long long, typename COST = long long>
 struct MinCostFlow
 {
-    const TCOST INF_COST = std::numeric_limits<TCOST>::max() / 2;
+    const COST INF_COST = std::numeric_limits<COST>::max() / 2;
     struct edge {
         int to, rev;
-        TFLOW cap;
-        TCOST cost;
+        CAP cap;
+        COST cost;
         friend std::ostream &operator<<(std::ostream &os, const edge &e) {
             os << '(' << e.to << ',' << e.rev << ',' << e.cap << ',' << e.cost << ')';
             return os;
@@ -25,9 +25,9 @@ struct MinCostFlow
     };
     int V;
     std::vector<std::vector<edge>> G;
-    std::vector<TCOST> dist;
+    std::vector<COST> dist;
     std::vector<int> prevv, preve;
-    std::vector<TCOST> h;  // h[V]: potential
+    std::vector<COST> h;  // h[V]: potential
     std::vector<std::pair<int, int>> einfo;
 
     bool _calc_distance_bellman_ford(int s) {  // O(VE), able to detect negative cycle
@@ -42,7 +42,7 @@ struct MinCostFlow
             for (int v = 0; v < V; v++) if (dist[v] != INF_COST) {
                 for (int i = 0; i < (int)G[v].size(); i++) {
                     edge &e = G[v][i];
-                    TCOST c = dist[v] + e.cost + h[v] - h[e.to];
+                    COST c = dist[v] + e.cost + h[v] - h[e.to];
                     if (e.cap > 0 and dist[e.to] > c) {
                         dist[e.to] = c, prevv[e.to] = v, preve[e.to] = i;
                         upd = true;
@@ -56,7 +56,7 @@ struct MinCostFlow
     bool _calc_distance_dijkstra(int s) {  // O(ElogV)
         dist.assign(V, INF_COST);
         dist[s] = 0;
-        using P = std::pair<TCOST, int>;
+        using P = std::pair<COST, int>;
         std::priority_queue<P, std::vector<P>, std::greater<P>> q;
         q.emplace(0, s);
         while (!q.empty()) {
@@ -66,7 +66,7 @@ struct MinCostFlow
             if (dist[v] < p.first) continue;
             for (int i = 0; i < (int)G[v].size(); i++) {
                 edge &e = G[v][i];
-                TCOST c = dist[v] + e.cost + h[v] - h[e.to];
+                COST c = dist[v] + e.cost + h[v] - h[e.to];
                 if (e.cap > 0 and dist[e.to] > c) {
                     dist[e.to] = c, prevv[e.to] = v, preve[e.to] = i;
                     q.emplace(dist[e.to], e.to);
@@ -78,20 +78,22 @@ struct MinCostFlow
 
     MinCostFlow(int V=0) : V(V), G(V) {}
 
-    void add_edge(int from, int to, TFLOW cap, TCOST cost) {
+    void add_edge(int from, int to, CAP cap, COST cost) {
+        assert(0 <= from and from < V);
+        assert(0 <= to and to < V);
         einfo.emplace_back(from, G[from].size());
         G[from].emplace_back(edge{to, (int)G[to].size() + (from == to), cap, cost});
-        G[to].emplace_back(edge{from, (int)G[from].size() - 1, (TFLOW)0, -cost});
+        G[to].emplace_back(edge{from, (int)G[from].size() - 1, (CAP)0, -cost});
     }
 
-    std::pair<TCOST, std::pair<bool, TFLOW>> flush(int s, int t, TFLOW f) {
+    std::pair<COST, std::pair<bool, CAP>> flush(int s, int t, CAP f) {
         /*
         Flush amount of `f` from `s` to `t` using the Dijkstra's algorithm
         works for graph with no negative cycles (negative cost edges are allowed)
         retval: (min_flow, ([succeeded or not], residue flow))
         [Example] Succeeded: `([mincost], (true, 0))`
         */
-        TCOST ret = 0;
+        COST ret = 0;
         h.assign(V, 0);
         prevv.assign(V, -1);
         preve.assign(V, -1);
@@ -99,7 +101,7 @@ struct MinCostFlow
             _calc_distance_dijkstra(s);
             if (dist[t] == INF_COST) return std::make_pair(ret, std::make_pair(false, f));
             for (int v = 0; v < V; v++) h[v] = std::min(h[v] + dist[v], INF_COST);
-            TFLOW d = f;
+            CAP d = f;
             for (int v = t; v != s; v = prevv[v]) {
                 d = std::min(d, G[prevv[v]][preve[v]].cap);
             }
@@ -123,21 +125,25 @@ struct MinCostFlow
     }
 };
 
-template <typename TFLOW = long long, typename TCOST = long long>
+template <typename CAP, typename COST>
 struct B_Flow
 {
     int N, E;
-    MinCostFlow<TFLOW, TCOST> mcf;
-    std::vector<TFLOW> b;
-    TCOST cost_bias;
-    std::vector<TFLOW> fbias;
+    MinCostFlow<CAP, COST> mcf;
+    std::vector<CAP> b;
+    COST cost_bias;
+    std::vector<CAP> fbias;
     std::vector<int> fdir;
     bool infeasible;
-    B_Flow(int N = 0) : N(N), E(0), mcf(N + 2), b(N), cost_bias(0), infeasible(false) {}
 
-    void add_supply(int v, TFLOW supply) { b[v] += supply; }
-    void add_demand(int v, TFLOW demand) { b[v] -= demand; }
-    void add_edge(int s, int t, TFLOW lower_cap, TFLOW upper_cap, TCOST cost)
+    std::vector<CAP> f;
+    const std::vector<COST> &potential;
+
+    B_Flow(int N = 0) : N(N), E(0), mcf(N + 2), b(N), cost_bias(0), infeasible(false), potential(mcf.h) {}
+
+    void add_supply(int v, CAP supply) { b[v] += supply; }
+    void add_demand(int v, CAP demand) { b[v] -= demand; }
+    void add_edge(int s, int t, CAP lower_cap, CAP upper_cap, COST cost)
     {
         assert(s >= 0 and s < N);
         assert(t >= 0 and t < N);
@@ -181,14 +187,13 @@ struct B_Flow
         }
     }
 
-    std::vector<TFLOW> f;
-    std::pair<bool, TCOST> solve()
+    std::pair<bool, COST> solve()
     {
         if (infeasible)
         {
             return std::make_pair(false, 0);
         }
-        TFLOW bsum = 0, bsum_negative = 0;
+        CAP bsum = 0, bsum_negative = 0;
         for (int i = 0; i < N; i++)
         {
             if (b[i] > 0)
@@ -208,7 +213,8 @@ struct B_Flow
         }
         std::fill(b.begin(), b.end(), 0);
         auto ret = mcf.flush(N, N + 1, bsum);
-        TCOST cost_ret = cost_bias + ret.first;
+        COST cost_ret = cost_bias + ret.first;
+        cost_bias = 0;
         bool succeeded = ret.second.first;
         f = fbias;
         for (int i = 0; i < E; i++)
