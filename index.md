@@ -310,6 +310,9 @@ data:
     - icon: ':x:'
       path: utilities/int128.hpp
       title: utilities/int128.hpp
+    - icon: ':warning:'
+      path: utilities/quadratic_solver.hpp
+      title: utilities/quadratic_solver.hpp
   verificationCategories:
   - name: convex_hull_trick/test
     pages:
