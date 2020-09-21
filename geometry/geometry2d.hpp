@@ -17,7 +17,8 @@ struct P
         EPS = e;
     }
     T_P x, y;
-    P(T_P x = 0, T_P y = 0) : x(x), y(y) {}
+    P() : x(0), y(0) {}
+    P(T_P x, T_P y) : x(x), y(y) {}
     P(std::pair<T_P, T_P> p) : x(p.first), y(p.second) {}
     static T_P add_w_error(T_P a, T_P b) noexcept { return (std::abs(a + b) < P::EPS * (std::abs(a) + std::abs(b))) ? 0 : a + b; }
     P operator+(const P &p) const noexcept { return P(add_w_error(x, p.x), add_w_error(y, p.y)); }
