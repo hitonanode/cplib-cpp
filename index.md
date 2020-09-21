@@ -150,6 +150,9 @@ data:
     - icon: ':warning:'
       path: linear_algebra_matrix/transpose.hpp
       title: linear_algebra_matrix/transpose.hpp
+    - icon: ':warning:'
+      path: linear_algebra_matrix/tropical_matrix.hpp
+      title: linear_algebra_matrix/tropical_matrix.hpp
   - name: marathonmatch
     pages:
     - icon: ':warning:'
