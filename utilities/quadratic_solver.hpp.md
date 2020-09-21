@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: geometry/problem_of_apollonius.hpp
+    title: geometry/problem_of_apollonius.hpp
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
@@ -41,7 +44,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: utilities/quadratic_solver.hpp
-  requiredBy: []
+  requiredBy:
+  - geometry/problem_of_apollonius.hpp
   timestamp: '2020-09-21 19:07:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

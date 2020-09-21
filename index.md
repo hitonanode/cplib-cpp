@@ -60,6 +60,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: geometry/geometry2d.hpp
       title: geometry/geometry2d.hpp
+    - icon: ':warning:'
+      path: geometry/problem_of_apollonius.hpp
+      title: geometry/problem_of_apollonius.hpp
     - icon: ':heavy_check_mark:'
       path: geometry/sort_by_argument.hpp
       title: geometry/sort_by_argument.hpp
@@ -92,6 +95,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/maximum_independent_set.hpp
       title: graph/maximum_independent_set.hpp
+    - icon: ':warning:'
+      path: graph/segment_edge_shortest_path.hpp
+      title: graph/segment_edge_shortest_path.hpp
     - icon: ':warning:'
       path: graph/shortest_cycle.hpp
       title: graph/shortest_cycle.hpp

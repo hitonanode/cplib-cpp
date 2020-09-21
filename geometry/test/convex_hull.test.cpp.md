@@ -17,9 +17,9 @@ data:
     \ <cassert>\n#include <cmath>\n#include <iostream>\n#include <utility>\n#include\
     \ <vector>\n\n\n// CUT begin\ntemplate <typename T_P>\nstruct P\n{\n    static\
     \ T_P EPS;\n    static void set_eps(T_P e)\n    {\n        EPS = e;\n    }\n \
-    \   T_P x, y;\n    P(T_P x = 0, T_P y = 0) : x(x), y(y) {}\n    P(std::pair<T_P,\
-    \ T_P> p) : x(p.first), y(p.second) {}\n    static T_P add_w_error(T_P a, T_P\
-    \ b) noexcept { return (std::abs(a + b) < P::EPS * (std::abs(a) + std::abs(b)))\
+    \   T_P x, y;\n    P() : x(0), y(0) {}\n    P(T_P x, T_P y) : x(x), y(y) {}\n\
+    \    P(std::pair<T_P, T_P> p) : x(p.first), y(p.second) {}\n    static T_P add_w_error(T_P\
+    \ a, T_P b) noexcept { return (std::abs(a + b) < P::EPS * (std::abs(a) + std::abs(b)))\
     \ ? 0 : a + b; }\n    P operator+(const P &p) const noexcept { return P(add_w_error(x,\
     \ p.x), add_w_error(y, p.y)); }\n    P operator-(const P &p) const noexcept {\
     \ return P(add_w_error(x, -p.x), add_w_error(y, -p.y)); }\n    P operator*(const\
@@ -112,7 +112,7 @@ data:
   isVerificationFile: true
   path: geometry/test/convex_hull.test.cpp
   requiredBy: []
-  timestamp: '2020-04-18 21:44:08+09:00'
+  timestamp: '2020-09-21 22:34:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: geometry/test/convex_hull.test.cpp
