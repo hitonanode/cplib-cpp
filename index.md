@@ -519,6 +519,9 @@ data:
   - name: other_data_structures/test
     pages:
     - icon: ':heavy_check_mark:'
+      path: other_data_structures/test/assosiative_array.test.cpp
+      title: other_data_structures/test/assosiative_array.test.cpp
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/binary_trie.test.cpp
       title: other_data_structures/test/binary_trie.test.cpp
     - icon: ':heavy_check_mark:'
