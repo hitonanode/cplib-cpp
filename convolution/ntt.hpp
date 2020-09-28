@@ -32,8 +32,7 @@ void ntt(std::vector<MODINT> &a, bool is_inverse = false)
     assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);
 
     static std::vector<MODINT> w{1}, iw{1};
-    for (int m = w.size(); m < n / 2; m *= 2)
-    {
+    for (int m = w.size(); m < n / 2; m *= 2) {
         MODINT dw = root.power((mod - 1) / (4 * m)), dwinv = 1 / dw;
         w.resize(m * 2), iw.resize(m * 2);
         for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;
@@ -43,13 +42,8 @@ void ntt(std::vector<MODINT> &a, bool is_inverse = false)
         for (int m = n; m >>= 1;) {
             for (int s = 0, k = 0; s < n; s += 2 * m, k++) {
                 for (int i = s; i < s + m; i++) {
-#ifdef __clang__
-                    a[i + m] *= w[k];
-                    std::tie(a[i], a[i + m]) = std::make_pair(a[i] + a[i + m], a[i] - a[i + m]);
-#else
                     MODINT x = a[i], y = a[i + m] * w[k];
                     a[i] = x + y, a[i + m] = x - y;
-#endif
                 }
             }
         }
@@ -58,13 +52,8 @@ void ntt(std::vector<MODINT> &a, bool is_inverse = false)
         for (int m = 1; m < n; m *= 2) {
             for (int s = 0, k = 0; s < n; s += 2 * m, k++) {
                 for (int i = s; i < s + m; i++) {
-#ifdef __clang__
-                    std::tie(a[i], a[i + m]) = std::make_pair(a[i] + a[i + m], a[i] - a[i + m]);
-                    a[i + m] *= iw[k];
-#else
                     MODINT x = a[i], y = a[i + m];
                     a[i] = x + y, a[i + m] = (x - y) * iw[k];
-#endif
                 }
             }
         }
@@ -78,30 +67,12 @@ std::vector<ModInt<MOD>> nttconv_(const std::vector<int> &a, const std::vector<i
     assert(a.size() == b.size() and __builtin_popcount(sz) == 1);
     std::vector<ModInt<MOD>> ap(sz), bp(sz);
     for (int i = 0; i < sz; i++) ap[i] = a[i], bp[i] = b[i];
-    if (a == b) {
-        ntt(ap, false);
-        bp = ap;
-    }
-    else {
-        ntt(ap, false);
-        ntt(bp, false);
-    }
+    ntt(ap, false);
+    if (a == b) bp = ap;
+    else ntt(bp, false);
     for (int i = 0; i < sz; i++) ap[i] *= bp[i];
     ntt(ap, true);
     return ap;
-}
-long long extgcd_ntt_(long long a, long long b, long long &x, long long &y)
-{
-    long long d = a;
-    if (b != 0) d = extgcd_ntt_(b, a % b, y, x), y -= (a / b) * x;
-    else x = 1, y = 0;
-    return d;
-}
-long long modinv_ntt_(long long a, long long m)
-{
-    long long x, y;
-    extgcd_ntt_(a, m, x, y);
-    return (m + x % m) % m;
 }
 long long garner_ntt_(int r0, int r1, int r2, int mod)
 {

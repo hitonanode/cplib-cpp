@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D"
 #include "linear_algebra_matrix/linalg_modint.hpp"
-#include "modulus/bare_mod_algebra.hpp"
+#include "number/bare_mod_algebra.hpp"
 #include "modulus/modint_fixed.hpp"
 #include "modulus/modint_runtime.hpp"
 #include <iostream>
