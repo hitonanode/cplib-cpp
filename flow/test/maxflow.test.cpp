@@ -1,4 +1,4 @@
-#include "graph/maxflow.hpp"
+#include "flow/maxflow.hpp"
 #include <cassert>
 #include <iostream>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A"

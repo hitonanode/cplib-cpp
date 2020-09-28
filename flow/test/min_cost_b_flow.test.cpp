@@ -1,4 +1,4 @@
-#include "graph/flow_mincost.hpp"
+#include "flow/mincostflow.hpp"
 #include "utilities/int128.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/min_cost_b_flow"
 

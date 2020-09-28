@@ -1,7 +1,6 @@
 #pragma once
 #include <algorithm>
 #include <limits>
-#include <queue>
 #include <vector>
 
 // CUT begin
@@ -15,10 +14,24 @@ struct MaxFlow
     std::vector<int> iter;  // iteration counter, used for Dinic's DFS
     std::vector<int> used;  // Used for Ford-Fulkerson's Algorithm
 
+    struct simple_queue_int {
+        std::vector<int> payload;
+        int pos = 0;
+        void reserve(int n) { payload.reserve(n); }
+        int size() const { return int(payload.size()) - pos; }
+        bool empty() const { return pos == int(payload.size()); }
+        void push(const int &t) { payload.push_back(t); }
+        int &front() { return payload[pos]; }
+        void clear() {
+            payload.clear();
+            pos = 0;
+        }
+        void pop() { pos++; }
+    };
     void bfs(int s)
     {
         level.assign(edges.size(), -1);
-        std::queue<int> q;
+        simple_queue_int q;
         level[s] = 0;
         q.push(s);
         while (!q.empty()) {
@@ -66,8 +79,7 @@ struct MaxFlow
         }
         return 0;
     }
- 
-public:
+
     MaxFlow(int N) { edges.resize(N); }
     void add_edge(int from, int to, T capacity)
     {
@@ -77,17 +89,21 @@ public:
  
     // Dinic algorithm
     // Complexity: O(VE)
-    T Dinic(int s, int t)
+    T Dinic(int s, int t, T req)
     {
-        constexpr T INF = std::numeric_limits<T>::max();
         T flow = 0;
-        while (true) {
+        while (req > 0) {
             bfs(s);
-            if (level[t] < 0) return flow;
+            if (level[t] < 0) break;
             iter.assign(edges.size(), 0);
             T f;
-            while ((f = dfs_dinic(s, t, INF)) > 0) flow += f;
+            while ((f = dfs_dinic(s, t, req)) > 0) flow += f, req -= f;
         }
+        return flow;
+    }
+    T Dinic(int s, int t)
+    {
+        return Dinic(s, t, std::numeric_limits<T>::max());
     }
 
     // Ford-Fulkerson algorithm

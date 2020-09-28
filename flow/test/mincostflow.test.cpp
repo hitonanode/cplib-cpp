@@ -1,5 +1,5 @@
 #include <iostream>
-#include "graph/flow_mincost.hpp"
+#include "flow/mincostflow.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
 
 
