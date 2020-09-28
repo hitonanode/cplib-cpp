@@ -171,9 +171,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulus/bare_mod_algebra.hpp
       title: modulus/bare_mod_algebra.hpp
-    - icon: ':heavy_check_mark:'
-      path: modulus/discrete_logarithm.hpp
-      title: modulus/discrete_logarithm.hpp
     - icon: ':question:'
       path: modulus/modint_fixed.hpp
       title: modulus/modint_fixed.hpp
@@ -190,6 +187,9 @@ data:
     - icon: ':warning:'
       path: number/cyclotomic_polynomials.hpp
       title: number/cyclotomic_polynomials.hpp
+    - icon: ':heavy_check_mark:'
+      path: number/discrete_logarithm.hpp
+      title: number/discrete_logarithm.hpp
     - icon: ':warning:'
       path: number/enumerate_partitions.hpp
       title: number/enumerate_partitions.hpp
@@ -487,13 +487,13 @@ data:
   - name: modulus/test
     pages:
     - icon: ':heavy_check_mark:'
-      path: modulus/test/discrete_logarithm.test.cpp
-      title: modulus/test/discrete_logarithm.test.cpp
-    - icon: ':heavy_check_mark:'
       path: modulus/test/sqrt_modint_runtime.test.cpp
       title: modulus/test/sqrt_modint_runtime.test.cpp
   - name: number/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: number/test/discrete_logarithm.test.cpp
+      title: number/test/discrete_logarithm.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/factorize_longlong.test.cpp
       title: number/test/factorize_longlong.test.cpp

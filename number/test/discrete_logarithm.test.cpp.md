@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: modulus/discrete_logarithm.hpp
-    title: modulus/discrete_logarithm.hpp
+    path: number/discrete_logarithm.hpp
+    title: number/discrete_logarithm.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -13,8 +13,8 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/discrete_logarithm_mod
     links:
     - https://judge.yosupo.jp/problem/discrete_logarithm_mod
-  bundledCode: "#line 1 \"modulus/test/discrete_logarithm.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/discrete_logarithm_mod\"\n#line 2 \"modulus/discrete_logarithm.hpp\"\
+  bundledCode: "#line 1 \"number/test/discrete_logarithm.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/discrete_logarithm_mod\"\n#line 2 \"number/discrete_logarithm.hpp\"\
     \n#include <algorithm>\n#include <unordered_map>\n#include <utility>\n\n// CUT\
     \ begin\n// Calculate log_A B (MOD M) (baby-step gian-step)\n// DiscreteLogarithm\
     \ dl(M, A);\n// lint ans = dl.log(B);\n// Complexity: O(M^(1/2)) for each query\n\
@@ -40,27 +40,27 @@ data:
     \ = b * giant_a % (M / g);\n        for (lint q = 1; q <= M / stepsize + 1; q++)\
     \ {\n            if (baby_log_dict.count(now)) return q * stepsize + baby_log_dict[now];\n\
     \            (now *= giant_a) %= M / g;\n        }\n        return -1;\n    }\n\
-    };\n#line 3 \"modulus/test/discrete_logarithm.test.cpp\"\n#include <iostream>\n\
+    };\n#line 3 \"number/test/discrete_logarithm.test.cpp\"\n#include <iostream>\n\
     \nint main()\n{\n    int T;\n    std::cin >> T;\n    while (T--) {\n        int\
     \ X, Y, M;\n        std::cin >> X >> Y >> M;\n        DiscreteLogarithm dl(M,\
     \ X);\n        std::cout << dl.log(Y) << std::endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/discrete_logarithm_mod\"\
-    \n#include \"modulus/discrete_logarithm.hpp\"\n#include <iostream>\n\nint main()\n\
+    \n#include \"number/discrete_logarithm.hpp\"\n#include <iostream>\n\nint main()\n\
     {\n    int T;\n    std::cin >> T;\n    while (T--) {\n        int X, Y, M;\n \
     \       std::cin >> X >> Y >> M;\n        DiscreteLogarithm dl(M, X);\n      \
     \  std::cout << dl.log(Y) << std::endl;\n    }\n}\n"
   dependsOn:
-  - modulus/discrete_logarithm.hpp
+  - number/discrete_logarithm.hpp
   isVerificationFile: true
-  path: modulus/test/discrete_logarithm.test.cpp
+  path: number/test/discrete_logarithm.test.cpp
   requiredBy: []
-  timestamp: '2020-03-07 22:54:47+09:00'
+  timestamp: '2020-09-28 19:47:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: modulus/test/discrete_logarithm.test.cpp
+documentation_of: number/test/discrete_logarithm.test.cpp
 layout: document
 redirect_from:
-- /verify/modulus/test/discrete_logarithm.test.cpp
-- /verify/modulus/test/discrete_logarithm.test.cpp.html
-title: modulus/test/discrete_logarithm.test.cpp
+- /verify/number/test/discrete_logarithm.test.cpp
+- /verify/number/test/discrete_logarithm.test.cpp.html
+title: number/test/discrete_logarithm.test.cpp
 ---

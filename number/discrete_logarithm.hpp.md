@@ -4,15 +4,15 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: modulus/test/discrete_logarithm.test.cpp
-    title: modulus/test/discrete_logarithm.test.cpp
+    path: number/test/discrete_logarithm.test.cpp
+    title: number/test/discrete_logarithm.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://judge.yosupo.jp/problem/discrete_logarithm_mod>
-  bundledCode: "#line 2 \"modulus/discrete_logarithm.hpp\"\n#include <algorithm>\n\
+  bundledCode: "#line 2 \"number/discrete_logarithm.hpp\"\n#include <algorithm>\n\
     #include <unordered_map>\n#include <utility>\n\n// CUT begin\n// Calculate log_A\
     \ B (MOD M) (baby-step gian-step)\n// DiscreteLogarithm dl(M, A);\n// lint ans\
     \ = dl.log(B);\n// Complexity: O(M^(1/2)) for each query\n// Verified: <https://judge.yosupo.jp/problem/discrete_logarithm_mod>\n\
@@ -66,16 +66,16 @@ data:
     };\n"
   dependsOn: []
   isVerificationFile: false
-  path: modulus/discrete_logarithm.hpp
+  path: number/discrete_logarithm.hpp
   requiredBy: []
-  timestamp: '2020-03-07 22:54:47+09:00'
+  timestamp: '2020-09-28 19:47:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - modulus/test/discrete_logarithm.test.cpp
-documentation_of: modulus/discrete_logarithm.hpp
+  - number/test/discrete_logarithm.test.cpp
+documentation_of: number/discrete_logarithm.hpp
 layout: document
 redirect_from:
-- /library/modulus/discrete_logarithm.hpp
-- /library/modulus/discrete_logarithm.hpp.html
-title: modulus/discrete_logarithm.hpp
+- /library/number/discrete_logarithm.hpp
+- /library/number/discrete_logarithm.hpp.html
+title: number/discrete_logarithm.hpp
 ---
