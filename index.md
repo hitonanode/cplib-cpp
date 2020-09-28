@@ -25,7 +25,7 @@ data:
     - icon: ':warning:'
       path: convolution/fft_double.hpp
       title: convolution/fft_double.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
     - icon: ':heavy_check_mark:'
@@ -36,18 +36,29 @@ data:
     - icon: ':warning:'
       path: convolution/integer_convolution/integer_convolution.hpp
       title: convolution/integer_convolution/integer_convolution.hpp
+  - name: flow
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: flow/maxflow.hpp
+      title: flow/maxflow.hpp
+    - icon: ':warning:'
+      path: flow/maxflow_acl.hpp
+      title: flow/maxflow_acl.hpp
+    - icon: ':question:'
+      path: flow/mincostflow.hpp
+      title: flow/mincostflow.hpp
   - name: formal_power_series
     pages:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: formal_power_series/coeff_of_rational_function.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/monomial_mod_polynomial.hpp
       title: formal_power_series/monomial_mod_polynomial.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
   - name: .
@@ -80,18 +91,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
-    - icon: ':question:'
-      path: graph/flow_mincost.hpp
-      title: graph/flow_mincost.hpp
     - icon: ':warning:'
       path: graph/grid_graph_template.hpp
       title: graph/grid_graph_template.hpp
     - icon: ':heavy_check_mark:'
       path: graph/lowlink.hpp
       title: graph/lowlink.hpp
-    - icon: ':heavy_check_mark:'
-      path: graph/maxflow.hpp
-      title: graph/maxflow.hpp
     - icon: ':heavy_check_mark:'
       path: graph/maximum_independent_set.hpp
       title: graph/maximum_independent_set.hpp
@@ -138,13 +143,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_modint.hpp
       title: linear_algebra_matrix/linalg_modint.hpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linear_recurrence.hpp
       title: linear_algebra_matrix/linear_recurrence.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
@@ -171,7 +176,7 @@ data:
     - icon: ':question:'
       path: modulus/modint_fixed.hpp
       title: modulus/modint_fixed.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulus/modint_runtime.hpp
       title: modulus/modint_runtime.hpp
   - name: multithread
@@ -181,7 +186,7 @@ data:
       title: multithread/multithread_example.cpp
   - name: number
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -342,6 +347,20 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/subset_convolution.test.cpp
       title: convolution/test/subset_convolution.test.cpp
+  - name: flow/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: flow/test/assignment_problem.test.cpp
+      title: flow/test/assignment_problem.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/maxflow.test.cpp
+      title: flow/test/maxflow.test.cpp
+    - icon: ':x:'
+      path: flow/test/min_cost_b_flow.test.cpp
+      title: flow/test/min_cost_b_flow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/mincostflow.test.cpp
+      title: flow/test/mincostflow.test.cpp
   - name: formal_power_series/test
     pages:
     - icon: ':heavy_check_mark:'
@@ -380,10 +399,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
       title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
   - name: geometry/test
@@ -403,9 +422,6 @@ data:
       path: graph/test/articulation_points.test.cpp
       title: graph/test/articulation_points.test.cpp
     - icon: ':heavy_check_mark:'
-      path: graph/test/assignment_problem.test.cpp
-      title: graph/test/assignment_problem.test.cpp
-    - icon: ':heavy_check_mark:'
       path: graph/test/bellman_ford.test.cpp
       title: graph/test/bellman_ford.test.cpp
     - icon: ':heavy_check_mark:'
@@ -424,17 +440,8 @@ data:
       path: graph/test/dijkstra.test.cpp
       title: graph/test/dijkstra.test.cpp
     - icon: ':heavy_check_mark:'
-      path: graph/test/maxflow.test.cpp
-      title: graph/test/maxflow.test.cpp
-    - icon: ':heavy_check_mark:'
       path: graph/test/maximum_independent_set.test.cpp
       title: graph/test/maximum_independent_set.test.cpp
-    - icon: ':x:'
-      path: graph/test/min_cost_b_flow.test.cpp
-      title: graph/test/min_cost_b_flow.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: graph/test/mincostflow.test.cpp
-      title: graph/test/mincostflow.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/strongly_connected_components.test.cpp
       title: graph/test/strongly_connected_components.test.cpp
@@ -475,16 +482,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linear_recurrence.test.cpp
       title: linear_algebra_matrix/test/linear_recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: modulus/test

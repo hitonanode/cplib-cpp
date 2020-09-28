@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulus/modint_runtime.hpp
     title: modulus/modint_runtime.hpp
   _extendedRequiredBy: []

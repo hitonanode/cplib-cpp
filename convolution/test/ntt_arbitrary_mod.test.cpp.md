@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':question:'
     path: modulus/modint_fixed.hpp
     title: modulus/modint_fixed.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulus/modint_runtime.hpp
     title: modulus/modint_runtime.hpp
   _extendedRequiredBy: []

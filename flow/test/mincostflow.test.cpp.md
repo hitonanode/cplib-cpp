@@ -2,21 +2,22 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: graph/flow_mincost.hpp
-    title: graph/flow_mincost.hpp
+    path: flow/mincostflow.hpp
+    title: flow/mincostflow.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/assignment
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
     links:
-    - https://judge.yosupo.jp/problem/assignment
-  bundledCode: "#line 2 \"graph/flow_mincost.hpp\"\n#include <cassert>\n#include <iostream>\n\
-    #include <limits>\n#include <queue>\n#include <vector>\n\n// CUT begin\n/*\nMinCostFlow:\
-    \ Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE\nVerified by SRM 770\
-    \ Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>\n\
+    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
+  bundledCode: "#line 1 \"flow/test/mincostflow.test.cpp\"\n#include <iostream>\n\
+    #line 2 \"flow/mincostflow.hpp\"\n#include <cassert>\n#line 4 \"flow/mincostflow.hpp\"\
+    \n#include <limits>\n#include <queue>\n#include <vector>\n\n// CUT begin\n/*\n\
+    MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE\nVerified\
+    \ by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>\n\
     */\ntemplate <typename CAP = long long, typename COST = long long>\nstruct MinCostFlow\n\
     {\n    const COST INF_COST = std::numeric_limits<COST>::max() / 2;\n    struct\
     \ edge {\n        int to, rev;\n        CAP cap;\n        COST cost;\n       \
@@ -106,54 +107,31 @@ data:
     \        f = fbias;\n        for (int i = 0; i < E; i++)\n        {\n        \
     \    std::pair<int, int> p = mcf.einfo[i];\n            f[i] -= fdir[i] * mcf.G[p.first][p.second].cap;\n\
     \        }\n        return std::make_pair(succeeded, cost_ret);\n    }\n};\n#line\
-    \ 2 \"graph/test/assignment_problem.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\
-    \n#include <algorithm>\n#line 5 \"graph/test/assignment_problem.test.cpp\"\n\n\
-    template<typename TC>\nstd::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>>\
-    \ cost)\n{\n    int N = cost.size();\n    MinCostFlow mcf(N * 2 + 2);\n    int\
-    \ S = N * 2, T = N * 2 + 1;\n    for (int i = 0; i < N; i++)\n    {\n        mcf.add_edge(S,\
-    \ i, 1, 0);\n        mcf.add_edge(N + i, T, 1, 0);\n        for (int j = 0; j\
-    \ < N; j++)\n        {\n            mcf.add_edge(i, N + j, 1, cost[i][j]);\n \
-    \       }\n    }\n    auto total_cost = mcf.flush(S, T, N).first;\n    std::vector<int>\
-    \ ret;\n\n    for (int i = 0; i < N; i++)\n    {\n        for (const auto &g :\
-    \ mcf.G[i])\n        {\n            if (g.to != S and !g.cap)\n            {\n\
-    \                ret.emplace_back(g.to - N);\n                break;\n       \
-    \     }\n        }\n    }\n    return std::make_pair(total_cost, ret);\n}\n\n\n\
-    int main()\n{\n    int N;\n    std::cin >> N;\n    std::vector<std::vector<long\
-    \ long>> A(N, std::vector<long long>(N));\n    for (auto &vec : A)\n    {\n  \
-    \      for (auto &x : vec)\n        {\n            std::cin >> x;\n        }\n\
-    \    }\n    auto ret = AssignmentProblem(A);\n    std::cout << ret.first << '\\\
-    n';\n    for (auto x : ret.second) std::cout << x << ' ';\n    std::cout << '\\\
-    n';\n}\n"
-  code: "#include \"graph/flow_mincost.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\
-    \n#include <algorithm>\n#include <iostream>\n\ntemplate<typename TC>\nstd::pair<TC,\
-    \ std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost)\n{\n\
-    \    int N = cost.size();\n    MinCostFlow mcf(N * 2 + 2);\n    int S = N * 2,\
-    \ T = N * 2 + 1;\n    for (int i = 0; i < N; i++)\n    {\n        mcf.add_edge(S,\
-    \ i, 1, 0);\n        mcf.add_edge(N + i, T, 1, 0);\n        for (int j = 0; j\
-    \ < N; j++)\n        {\n            mcf.add_edge(i, N + j, 1, cost[i][j]);\n \
-    \       }\n    }\n    auto total_cost = mcf.flush(S, T, N).first;\n    std::vector<int>\
-    \ ret;\n\n    for (int i = 0; i < N; i++)\n    {\n        for (const auto &g :\
-    \ mcf.G[i])\n        {\n            if (g.to != S and !g.cap)\n            {\n\
-    \                ret.emplace_back(g.to - N);\n                break;\n       \
-    \     }\n        }\n    }\n    return std::make_pair(total_cost, ret);\n}\n\n\n\
-    int main()\n{\n    int N;\n    std::cin >> N;\n    std::vector<std::vector<long\
-    \ long>> A(N, std::vector<long long>(N));\n    for (auto &vec : A)\n    {\n  \
-    \      for (auto &x : vec)\n        {\n            std::cin >> x;\n        }\n\
-    \    }\n    auto ret = AssignmentProblem(A);\n    std::cout << ret.first << '\\\
-    n';\n    for (auto x : ret.second) std::cout << x << ' ';\n    std::cout << '\\\
-    n';\n}\n"
+    \ 3 \"flow/test/mincostflow.test.cpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
+    \n\n\nint main()\n{\n    int V, E, F;\n    std::cin >> V >> E >> F;\n    MinCostFlow\
+    \ mcf(V);\n    for (int i = 0; i < E; i++)\n    {\n        int u, v, c, d;\n \
+    \       std::cin >> u >> v >> c >> d;\n        mcf.add_edge(u, v, c, d);\n   \
+    \ }\n\n    auto ret = mcf.flush(0, V - 1, F);\n    std::cout << (ret.second.first\
+    \ ? ret.first : -1) << '\\n';\n}\n"
+  code: "#include <iostream>\n#include \"flow/mincostflow.hpp\"\n#define PROBLEM \"\
+    http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\n\n\nint main()\n\
+    {\n    int V, E, F;\n    std::cin >> V >> E >> F;\n    MinCostFlow mcf(V);\n \
+    \   for (int i = 0; i < E; i++)\n    {\n        int u, v, c, d;\n        std::cin\
+    \ >> u >> v >> c >> d;\n        mcf.add_edge(u, v, c, d);\n    }\n\n    auto ret\
+    \ = mcf.flush(0, V - 1, F);\n    std::cout << (ret.second.first ? ret.first :\
+    \ -1) << '\\n';\n}\n"
   dependsOn:
-  - graph/flow_mincost.hpp
+  - flow/mincostflow.hpp
   isVerificationFile: true
-  path: graph/test/assignment_problem.test.cpp
+  path: flow/test/mincostflow.test.cpp
   requiredBy: []
-  timestamp: '2020-09-19 19:36:01+09:00'
+  timestamp: '2020-09-29 02:28:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph/test/assignment_problem.test.cpp
+documentation_of: flow/test/mincostflow.test.cpp
 layout: document
 redirect_from:
-- /verify/graph/test/assignment_problem.test.cpp
-- /verify/graph/test/assignment_problem.test.cpp.html
-title: graph/test/assignment_problem.test.cpp
+- /verify/flow/test/mincostflow.test.cpp
+- /verify/flow/test/mincostflow.test.cpp.html
+title: flow/test/mincostflow.test.cpp
 ---

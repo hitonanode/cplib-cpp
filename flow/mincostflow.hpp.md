@@ -4,20 +4,20 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: graph/test/assignment_problem.test.cpp
-    title: graph/test/assignment_problem.test.cpp
+    path: flow/test/assignment_problem.test.cpp
+    title: flow/test/assignment_problem.test.cpp
   - icon: ':x:'
-    path: graph/test/min_cost_b_flow.test.cpp
-    title: graph/test/min_cost_b_flow.test.cpp
+    path: flow/test/min_cost_b_flow.test.cpp
+    title: flow/test/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
-    path: graph/test/mincostflow.test.cpp
-    title: graph/test/mincostflow.test.cpp
+    path: flow/test/mincostflow.test.cpp
+    title: flow/test/mincostflow.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://community.topcoder.com/stat?c=problem_statement&pm=15702>
-  bundledCode: "#line 2 \"graph/flow_mincost.hpp\"\n#include <cassert>\n#include <iostream>\n\
+  bundledCode: "#line 2 \"flow/mincostflow.hpp\"\n#include <cassert>\n#include <iostream>\n\
     #include <limits>\n#include <queue>\n#include <vector>\n\n// CUT begin\n/*\nMinCostFlow:\
     \ Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE\nVerified by SRM 770\
     \ Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>\n\
@@ -205,18 +205,18 @@ data:
     \        }\n        return std::make_pair(succeeded, cost_ret);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: graph/flow_mincost.hpp
+  path: flow/mincostflow.hpp
   requiredBy: []
-  timestamp: '2020-09-19 19:36:01+09:00'
+  timestamp: '2020-09-29 02:28:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - graph/test/min_cost_b_flow.test.cpp
-  - graph/test/assignment_problem.test.cpp
-  - graph/test/mincostflow.test.cpp
-documentation_of: graph/flow_mincost.hpp
+  - flow/test/min_cost_b_flow.test.cpp
+  - flow/test/assignment_problem.test.cpp
+  - flow/test/mincostflow.test.cpp
+documentation_of: flow/mincostflow.hpp
 layout: document
 redirect_from:
-- /library/graph/flow_mincost.hpp
-- /library/graph/flow_mincost.hpp.html
-title: graph/flow_mincost.hpp
+- /library/flow/mincostflow.hpp
+- /library/flow/mincostflow.hpp.html
+title: flow/mincostflow.hpp
 ---
