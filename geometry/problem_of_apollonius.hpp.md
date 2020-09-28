@@ -1,18 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
-    path: utilities/quadratic_solver.hpp
-    title: utilities/quadratic_solver.hpp
   - icon: ':heavy_check_mark:'
     path: geometry/geometry2d.hpp
     title: geometry/geometry2d.hpp
+  - icon: ':warning:'
+    path: utilities/quadratic_solver.hpp
+    title: utilities/quadratic_solver.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"utilities/quadratic_solver.hpp\"\n#include <cmath>\n#include\
     \ <utility>\n#include <vector>\n\n// CUT begin\n// Solve ax^2 + bx + c = 0.\n\

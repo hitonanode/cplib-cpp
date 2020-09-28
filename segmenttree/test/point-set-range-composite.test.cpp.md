@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
-    path: segmenttree/point-update-range-get_nonrecursive.hpp
-    title: segmenttree/point-update-range-get_nonrecursive.hpp
   - icon: ':question:'
     path: modulus/modint_fixed.hpp
     title: modulus/modint_fixed.hpp
+  - icon: ':x:'
+    path: segmenttree/point-update-range-get_nonrecursive.hpp
+    title: segmenttree/point-update-range-get_nonrecursive.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

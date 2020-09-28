@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://codeforces.com/contest/1137/submission/59448399>
     - https://codeforces.com/contest/1179/submission/59448330>

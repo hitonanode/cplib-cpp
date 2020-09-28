@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://codeforces.com/contest/1325/problem/E>
   bundledCode: "#line 2 \"graph/shortest_cycle.hpp\"\n#include <cassert>\n#include\

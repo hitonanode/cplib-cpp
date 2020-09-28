@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"unionfind/persistent_unionfind.hpp\"\n#include <map>\n#include\
     \ <utility>\n#include <vector>\n\n// CUT begin\nstruct PersistentUnionFind\n{\n\

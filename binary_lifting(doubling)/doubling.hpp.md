@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://atcoder.jp/contests/arc060/submissions/7039451>
   bundledCode: "#line 2 \"binary_lifting(doubling)/doubling.hpp\"\n#include <cstdlib>\n\

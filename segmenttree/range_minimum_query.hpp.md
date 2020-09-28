@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"segmenttree/range_minimum_query.hpp\"\n#include <iostream>\n\
     #include <vector>\nusing namespace std;\n\n// CUT begin\nusing T = int;\nstruct\

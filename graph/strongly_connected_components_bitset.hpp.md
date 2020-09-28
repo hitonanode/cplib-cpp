@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://codeforces.com/contest/1268/submission/68125495>
   bundledCode: "#line 2 \"graph/strongly_connected_components_bitset.hpp\"\n#include\

@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>
     - https://atcoder.jp/contests/atc001/submissions/9243440>

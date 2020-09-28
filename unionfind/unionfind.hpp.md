@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"unionfind/unionfind.hpp\"\n#include <numeric>\n#include\
     \ <utility>\n#include <vector>\n\n// CUT begin\n// UnionFind Tree (0-indexed),\

@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://yukicoder.me/submissions/409156>
   bundledCode: "#line 2 \"convex_hull_trick/monotone_cht.hpp\"\n#include <cassert>\n\

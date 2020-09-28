@@ -7,18 +7,17 @@ data:
     title: sparse_table/sparse_table_2d.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: sparse_table/test/sparse_table_aoj.test.cpp
-    title: sparse_table/test/sparse_table_aoj.test.cpp
+    path: sparse_table/test/sparse_table.test.cpp
+    title: sparse_table/test/sparse_table.test.cpp
   - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table_2d.test.cpp
     title: sparse_table/test/sparse_table_2d.test.cpp
   - icon: ':heavy_check_mark:'
-    path: sparse_table/test/sparse_table.test.cpp
-    title: sparse_table/test/sparse_table.test.cpp
+    path: sparse_table/test/sparse_table_aoj.test.cpp
+    title: sparse_table/test/sparse_table_aoj.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"sparse_table/sparse_table.hpp\"\n#include <cassert>\n#include\
     \ <vector>\n\n// CUT begin\n// Static sequence sparse table\n// Complexity: O(NlogN)\

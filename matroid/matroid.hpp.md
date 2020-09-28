@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/>
   bundledCode: "#line 2 \"matroid/matroid.hpp\"\n#include <cassert>\n#include <queue>\n\

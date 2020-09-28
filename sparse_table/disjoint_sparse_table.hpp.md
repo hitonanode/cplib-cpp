@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
-    title: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
-  - icon: ':heavy_check_mark:'
     path: sparse_table/test/disjoint_sparse_table_rmq.test.cpp
     title: sparse_table/test/disjoint_sparse_table_rmq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
+    title: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://discuss.codechef.com/t/tutorial-disjoint-sparse-table/17404>
     - https://drken1215.hatenablog.com/entry/2018/09/08/162600>

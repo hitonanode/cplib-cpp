@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: segmenttree/range-update-range-get.hpp
-    title: segmenttree/range-update-range-get.hpp
   - icon: ':question:'
     path: modulus/modint_fixed.hpp
     title: modulus/modint_fixed.hpp
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/range-update-range-get.hpp
+    title: segmenttree/range-update-range-get.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

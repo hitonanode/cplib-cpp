@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://judge.yosupo.jp/submission/1864>
     - https://www.slideshare.net/wata_orz/ss-12131479>

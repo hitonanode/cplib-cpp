@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"number/eratosthenes.hpp\"\n#include <cassert>\n#include\
     \ <map>\n#include <numeric>\n#include <vector>\n\n// CUT begin\n// Sieve of Eratosthenes\n\

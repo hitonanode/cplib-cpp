@@ -2,76 +2,25 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/coeff_of_rational_function.hpp
-    title: formal_power_series/coeff_of_rational_function.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/formal_power_series.hpp
-    title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/multipoint_evaluation.hpp
-    title: formal_power_series/multipoint_evaluation.hpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
   - icon: ':warning:'
     path: convolution/convolutive_translation_2d.hpp
     title: convolution/convolutive_translation_2d.hpp
+  - icon: ':question:'
+    path: convolution/ntt.hpp
+    title: convolution/ntt.hpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/coeff_of_rational_function.hpp
+    title: formal_power_series/coeff_of_rational_function.hpp
+  - icon: ':question:'
+    path: formal_power_series/formal_power_series.hpp
+    title: formal_power_series/formal_power_series.hpp
+  - icon: ':question:'
+    path: formal_power_series/multipoint_evaluation.hpp
+    title: formal_power_series/multipoint_evaluation.hpp
   - icon: ':warning:'
     path: graph-tree/tree_isomorphism.hpp
     title: graph-tree/tree_isomorphism.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: segmenttree/test/point-set-range-composite.test.cpp
-    title: segmenttree/test/point-set-range-composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: segmenttree/test/range-affine-range-sum.test.cpp
-    title: segmenttree/test/range-affine-range-sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_pow.test.cpp
-    title: formal_power_series/test/fps_pow.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/polynomial_interpolation.test.cpp
-    title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_inv.test.cpp
-    title: formal_power_series/test/fps_inv.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/coeff_of_rational_function.test.cpp
-    title: formal_power_series/test/coeff_of_rational_function.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_exp_modintruntime.test.cpp
-    title: formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_exp.test.cpp
-    title: formal_power_series/test/fps_exp.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/kitamasa.test.cpp
-    title: formal_power_series/test/kitamasa.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-    title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/bernoulli_number.test.cpp
-    title: formal_power_series/test/bernoulli_number.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/division_number.test.cpp
-    title: formal_power_series/test/division_number.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_sqrt.test.cpp
-    title: formal_power_series/test/fps_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_log.test.cpp
-    title: formal_power_series/test/fps_log.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/subset_convolution.test.cpp
-    title: convolution/test/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
@@ -79,30 +28,80 @@ data:
     path: convolution/test/ntt_arbitrary_mod.test.cpp
     title: convolution/test/ntt_arbitrary_mod.test.cpp
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/queue_operate_all_composite.test.cpp
-    title: other_data_structures/test/queue_operate_all_composite.test.cpp
+    path: convolution/test/subset_convolution.test.cpp
+    title: convolution/test/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
-    path: random/test/rolling_hash_w_modint.test.cpp
-    title: random/test/rolling_hash_w_modint.test.cpp
+    path: formal_power_series/test/bernoulli_number.test.cpp
+    title: formal_power_series/test/bernoulli_number.test.cpp
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-    title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+    path: formal_power_series/test/coeff_of_rational_function.test.cpp
+    title: formal_power_series/test/coeff_of_rational_function.test.cpp
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/division_number.test.cpp
+    title: formal_power_series/test/division_number.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_exp.test.cpp
+    title: formal_power_series/test/fps_exp.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_exp_modintruntime.test.cpp
+    title: formal_power_series/test/fps_exp_modintruntime.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_inv.test.cpp
+    title: formal_power_series/test/fps_inv.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_log.test.cpp
+    title: formal_power_series/test/fps_log.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_pow.test.cpp
+    title: formal_power_series/test/fps_pow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_sqrt.test.cpp
+    title: formal_power_series/test/fps_sqrt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+    title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/kitamasa.test.cpp
+    title: formal_power_series/test/kitamasa.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
+    title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
+  - icon: ':x:'
+    path: formal_power_series/test/polynomial_interpolation.test.cpp
+    title: formal_power_series/test/polynomial_interpolation.test.cpp
+  - icon: ':x:'
+    path: formal_power_series/test/sharp_p_subset_sum.test.cpp
+    title: formal_power_series/test/sharp_p_subset_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+    title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - icon: ':x:'
+    path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+    title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linear_recurrence.test.cpp
     title: linear_algebra_matrix/test/linear_recurrence.test.cpp
+  - icon: ':x:'
+    path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+    title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+    path: other_data_structures/test/queue_operate_all_composite.test.cpp
+    title: other_data_structures/test/queue_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-    title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+    path: random/test/rolling_hash_w_modint.test.cpp
+    title: random/test/rolling_hash_w_modint.test.cpp
+  - icon: ':x:'
+    path: segmenttree/test/point-set-range-composite.test.cpp
+    title: segmenttree/test/point-set-range-composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/test/range-affine-range-sum.test.cpp
+    title: segmenttree/test/range-affine-range-sum.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"modulus/modint_fixed.hpp\"\n#include <iostream>\n#include\
     \ <vector>\n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n\

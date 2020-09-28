@@ -3,17 +3,16 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>
     - https://yukicoder.me/submissions/405938>
-  bundledCode: "#line 2 \"modulus/bare_mod_algebra.hpp\"\n#include <algorithm>\n#include\
+  bundledCode: "#line 2 \"number/bare_mod_algebra.hpp\"\n#include <algorithm>\n#include\
     \ <utility>\n#include <vector>\n\n// CUT begin\nusing lint = long long;\n// Solve\
     \ ax+by=gcd(a, b)\nlint extgcd(lint a, lint b, lint &x, lint &y)\n{\n    lint\
     \ d = a;\n    if (b != 0) d = extgcd(b, a % b, y, x), y -= (a / b) * x;\n    else\
@@ -83,16 +82,16 @@ data:
     }\n"
   dependsOn: []
   isVerificationFile: false
-  path: modulus/bare_mod_algebra.hpp
+  path: number/bare_mod_algebra.hpp
   requiredBy: []
-  timestamp: '2020-03-07 22:54:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-09-29 00:37:21+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-documentation_of: modulus/bare_mod_algebra.hpp
+documentation_of: number/bare_mod_algebra.hpp
 layout: document
 redirect_from:
-- /library/modulus/bare_mod_algebra.hpp
-- /library/modulus/bare_mod_algebra.hpp.html
-title: modulus/bare_mod_algebra.hpp
+- /library/number/bare_mod_algebra.hpp
+- /library/number/bare_mod_algebra.hpp.html
+title: number/bare_mod_algebra.hpp
 ---

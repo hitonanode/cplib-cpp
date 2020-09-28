@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"random/xorshift.hpp\"\n#include <cstdint>\n\n// CUT begin\n\
     uint32_t rand_int() // XorShift random integer generator\n{\n    static uint32_t\

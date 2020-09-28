@@ -15,7 +15,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://rsk0315.hatenablog.com/entry/2019/10/29/151823>
     - https://www.cs.princeton.edu/~wayne/teaching/fibonacci-heap.pdf>

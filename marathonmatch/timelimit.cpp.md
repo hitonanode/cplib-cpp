@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"marathonmatch/timelimit.cpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n\nint main()\n{\n    auto START = std::chrono::system_clock::now();\n\

@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"string/trie_light.hpp\"\n#include <string>\n#include <vector>\n\
     \n// CUT begin\nstruct Trie\n{\n    char a_init;\n    int D;\n    int INVALID\

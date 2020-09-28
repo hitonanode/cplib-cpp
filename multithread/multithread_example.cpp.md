@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"multithread/multithread_example.cpp\"\n// \u30DE\u30EB\u30C1\
     \u30B9\u30EC\u30C3\u30C9\u3067\u30ED\u30FC\u30AB\u30EB\u5B9F\u884C\u9AD8\u901F\

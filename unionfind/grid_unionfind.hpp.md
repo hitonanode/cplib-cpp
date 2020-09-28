@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"unionfind/grid_unionfind.hpp\"\n#include <cassert>\n#include\
     \ <numeric>\n#include <utility>\n#include <vector>\n#include <iomanip>\n#include\

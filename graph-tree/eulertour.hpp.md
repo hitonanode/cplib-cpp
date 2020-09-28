@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph-tree/eulertour.hpp\"\n#include <cassert>\n#include\
     \ <vector>\n\n// CUT begin\n// Preorder Euler Tour\n// \uFF08\u884C\u304D\u304C\

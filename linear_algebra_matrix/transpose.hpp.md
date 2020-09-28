@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"linear_algebra_matrix/transpose.hpp\"\n#include <vector>\n\
     \n// CUT begin\ntemplate <typename T>\nstd::vector<std::vector<T>> trans(std::vector<std::vector<T>>\

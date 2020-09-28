@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://xorshift.di.unimi.it/splitmix64.c>
     - https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698>

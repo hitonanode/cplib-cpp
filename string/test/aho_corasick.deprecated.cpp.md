@@ -9,8 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D
   bundledCode: "#line 1 \"string/test/aho_corasick.deprecated.cpp\"\n#include <bitset>\n\

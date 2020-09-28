@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"segmenttree/range-add-range-min.hpp\"\n#include <algorithm>\n\
     #include <vector>\n\n// CUT begin\n// StarrySkyTree: segment tree for Range Minimum\

@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://codeforces.com/contest/321/submission/59093583>
   bundledCode: "#line 2 \"graph-tree/centroid_decomposition.hpp\"\n#include <tuple>\n\

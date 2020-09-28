@@ -7,15 +7,14 @@ data:
     title: linear_algebra_matrix/det_of_sparse_matrix.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: random/test/rolling_hash.test.cpp
-    title: random/test/rolling_hash.test.cpp
-  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: random/test/rolling_hash.test.cpp
+    title: random/test/rolling_hash.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"random/rand_nondeterministic.hpp\"\n#include <chrono>\n\
     #include <random>\nusing namespace std;\n\n// CUT begin\nstruct rand_int_\n{\n\

@@ -4,21 +4,20 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
+    path: graph-tree/test/vertex-add-subtree-sum.test.cpp
+    title: graph-tree/test/vertex-add-subtree-sum.test.cpp
+  - icon: ':x:'
+    path: segmenttree/test/countandsumlessthan.test.cpp
+    title: segmenttree/test/countandsumlessthan.test.cpp
+  - icon: ':x:'
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
   - icon: ':x:'
     path: segmenttree/test/rmq_nonrecursive.test.cpp
     title: segmenttree/test/rmq_nonrecursive.test.cpp
-  - icon: ':x:'
-    path: segmenttree/test/countandsumlessthan.test.cpp
-    title: segmenttree/test/countandsumlessthan.test.cpp
-  - icon: ':x:'
-    path: graph-tree/test/vertex-add-subtree-sum.test.cpp
-    title: graph-tree/test/vertex-add-subtree-sum.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\n\
     #include <algorithm>\n#include <cassert>\n#include <iostream>\n#include <stack>\n\

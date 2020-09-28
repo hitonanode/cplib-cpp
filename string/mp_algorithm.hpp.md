@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"string/mp_algorithm.hpp\"\n#include <string>\n#include <vector>\n\
     \n// CUT begin\nstd::vector<int> mp_algorithm(std::string s) {\n    int N = s.length();\n\

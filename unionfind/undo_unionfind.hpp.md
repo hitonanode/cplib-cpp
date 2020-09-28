@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"unionfind/undo_unionfind.hpp\"\n#include <stack>\n#include\
     \ <vector>\n#include <numeric>\n#include <utility>\n\n// CUT begin\n// UnionFind,\

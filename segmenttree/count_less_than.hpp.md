@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://codeforces.com/contest/1288/submission/68865506>
   bundledCode: "#line 2 \"segmenttree/count_less_than.hpp\"\n#include <algorithm>\n\

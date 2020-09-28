@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/grid_graph_template.hpp\"\n#include <array>\n#include\
     \ <queue>\n#include <tuple>\n#include <utility>\n#include <vector>\n\n// CUT begin\n\

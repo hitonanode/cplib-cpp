@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"matroid/matroid.hpp\"\n#include <cassert>\n#include <queue>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\n// CUT begin\n\

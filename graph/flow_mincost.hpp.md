@@ -3,19 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: graph/test/min_cost_b_flow.test.cpp
-    title: graph/test/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/assignment_problem.test.cpp
     title: graph/test/assignment_problem.test.cpp
+  - icon: ':x:'
+    path: graph/test/min_cost_b_flow.test.cpp
+    title: graph/test/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/mincostflow.test.cpp
     title: graph/test/mincostflow.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://community.topcoder.com/stat?c=problem_statement&pm=15702>
   bundledCode: "#line 2 \"graph/flow_mincost.hpp\"\n#include <cassert>\n#include <iostream>\n\

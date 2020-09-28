@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: sparse_table/test/sparse_table_aoj.test.cpp
-    title: sparse_table/test/sparse_table_aoj.test.cpp
-  - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table.test.cpp
     title: sparse_table/test/sparse_table.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: sparse_table/test/sparse_table_aoj.test.cpp
+    title: sparse_table/test/sparse_table_aoj.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"sparse_table/rmq_sparse_table.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <vector>\n\n// CUT begin\n// Range Minimum Query\

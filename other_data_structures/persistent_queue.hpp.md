@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"other_data_structures/persistent_queue.hpp\"\n#include <cassert>\n\
     #include <utility>\n#include <vector>\n\n// CUT begin\n// Fully persistent queue\n\

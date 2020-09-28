@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"string/aho_corasick.hpp\"\n#include <map>\n#include <queue>\n\
     #include <string>\n#include <vector>\nusing namespace std;\n\n// CUT begin\ntemplate<typename\

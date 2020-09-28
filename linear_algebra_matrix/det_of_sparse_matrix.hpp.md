@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: random/rand_nondeterministic.hpp
-    title: random/rand_nondeterministic.hpp
-  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linear_recurrence.hpp
     title: linear_algebra_matrix/linear_recurrence.hpp
+  - icon: ':heavy_check_mark:'
+    path: random/rand_nondeterministic.hpp
+    title: random/rand_nondeterministic.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -15,7 +15,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://yukicoder.me/wiki/black_box_linear_algebra>
   bundledCode: "#line 2 \"linear_algebra_matrix/det_of_sparse_matrix.hpp\"\n#include\

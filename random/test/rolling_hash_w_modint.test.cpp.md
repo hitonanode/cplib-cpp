@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: random/rolling_hash_1d_general.hpp
-    title: random/rolling_hash_1d_general.hpp
   - icon: ':question:'
     path: modulus/modint_fixed.hpp
     title: modulus/modint_fixed.hpp
+  - icon: ':heavy_check_mark:'
+    path: random/rolling_hash_1d_general.hpp
+    title: random/rolling_hash_1d_general.hpp
   - icon: ':heavy_check_mark:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://judge.yosupo.jp/problem/discrete_logarithm_mod>
   bundledCode: "#line 2 \"number/discrete_logarithm.hpp\"\n#include <algorithm>\n\

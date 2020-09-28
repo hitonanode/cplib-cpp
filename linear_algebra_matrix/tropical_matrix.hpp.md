@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://atcoder.jp/contests/ddcc2020-final/submissions/16941701>
   bundledCode: "#line 1 \"linear_algebra_matrix/tropical_matrix.hpp\"\n#include <cassert>\n\

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"segmenttree/range-update-range-get.hpp\"\n#include <algorithm>\n\
     #include <iostream>\n#include <tuple>\n#include <vector>\n\n// CUT begin\ntemplate\

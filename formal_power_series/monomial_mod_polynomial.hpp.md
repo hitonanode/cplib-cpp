@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://misawa.github.io/others/fast_kitamasa_method.html>
     - http://sugarknri.hatenablog.com/entry/2017/11/18/233936>

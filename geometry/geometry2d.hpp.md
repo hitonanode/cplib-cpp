@@ -12,7 +12,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"geometry/geometry2d.hpp\"\n#include <algorithm>\n#include\
     \ <cassert>\n#include <cmath>\n#include <iostream>\n#include <utility>\n#include\

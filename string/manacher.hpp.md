@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://snuke.hatenablog.com/entry/2014/12/02/235837>
   bundledCode: "#line 2 \"string/manacher.hpp\"\n#include <string>\n#include <vector>\n\

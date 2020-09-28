@@ -7,15 +7,14 @@ data:
     title: linear_algebra_matrix/det_of_sparse_matrix.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/linear_recurrence.test.cpp
-    title: linear_algebra_matrix/test/linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/linear_recurrence.test.cpp
+    title: linear_algebra_matrix/test/linear_recurrence.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm>
   bundledCode: "#line 2 \"linear_algebra_matrix/linear_recurrence.hpp\"\n#include\

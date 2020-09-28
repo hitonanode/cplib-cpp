@@ -2,14 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/formal_power_series.hpp
-    title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
+  - icon: ':question:'
+    path: formal_power_series/formal_power_series.hpp
+    title: formal_power_series/formal_power_series.hpp
+  - icon: ':question:'
+    path: modulus/modint_fixed.hpp
+    title: modulus/modint_fixed.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -97,60 +97,50 @@ data:
     \    static const int mod = MODINT::get_mod();\n    static const MODINT root =\
     \ MODINT::get_primitive_root();\n    assert(__builtin_popcount(n) == 1 and (mod\
     \ - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n    for (int\
-    \ m = w.size(); m < n / 2; m *= 2)\n    {\n        MODINT dw = root.power((mod\
-    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
-    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
-    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
-    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
-    \  for (int i = s; i < s + m; i++) {\n#ifdef __clang__\n                    a[i\
-    \ + m] *= w[k];\n                    std::tie(a[i], a[i + m]) = std::make_pair(a[i]\
-    \ + a[i + m], a[i] - a[i + m]);\n#else\n                    MODINT x = a[i], y\
-    \ = a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n#endif\n\
-    \                }\n            }\n        }\n    }\n    else {\n        for (int\
-    \ m = 1; m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 *\
-    \ m, k++) {\n                for (int i = s; i < s + m; i++) {\n#ifdef __clang__\n\
-    \                    std::tie(a[i], a[i + m]) = std::make_pair(a[i] + a[i + m],\
-    \ a[i] - a[i + m]);\n                    a[i + m] *= iw[k];\n#else\n         \
-    \           MODINT x = a[i], y = a[i + m];\n                    a[i] = x + y,\
-    \ a[i + m] = (x - y) * iw[k];\n#endif\n                }\n            }\n    \
-    \    }\n        int n_inv = MODINT(n).inv();\n        for (auto &v : a) v *= n_inv;\n\
-    \    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>> nttconv_(const std::vector<int>\
-    \ &a, const std::vector<int> &b) {\n    int sz = a.size();\n    assert(a.size()\
-    \ == b.size() and __builtin_popcount(sz) == 1);\n    std::vector<ModInt<MOD>>\
-    \ ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++) ap[i] = a[i], bp[i] = b[i];\n\
-    \    if (a == b) {\n        ntt(ap, false);\n        bp = ap;\n    }\n    else\
-    \ {\n        ntt(ap, false);\n        ntt(bp, false);\n    }\n    for (int i =\
-    \ 0; i < sz; i++) ap[i] *= bp[i];\n    ntt(ap, true);\n    return ap;\n}\nlong\
-    \ long extgcd_ntt_(long long a, long long b, long long &x, long long &y)\n{\n\
-    \    long long d = a;\n    if (b != 0) d = extgcd_ntt_(b, a % b, y, x), y -= (a\
-    \ / b) * x;\n    else x = 1, y = 0;\n    return d;\n}\nlong long modinv_ntt_(long\
-    \ long a, long long m)\n{\n    long long x, y;\n    extgcd_ntt_(a, m, x, y);\n\
-    \    return (m + x % m) % m;\n}\nlong long garner_ntt_(int r0, int r1, int r2,\
-    \ int mod)\n{\n    using mint2 = ModInt<nttprimes[2]>;\n    static const long\
-    \ long m01 = 1LL * nttprimes[0] * nttprimes[1];\n    static const long long m0_inv_m1\
-    \ = ModInt<nttprimes[1]>(nttprimes[0]).inv();\n    static const long long m01_inv_m2\
-    \ = mint2(m01).inv();\n\n    int v1 = (m0_inv_m1 * (r1 + nttprimes[1] - r0)) %\
-    \ nttprimes[1];\n    auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0]) * v1) * m01_inv_m2;\n\
-    \    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val) % mod;\n}\ntemplate\
-    \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
-    \ b, bool skip_garner)\n{\n    int sz = 1, n = a.size(), m = b.size();\n    while\
-    \ (sz < n + m) sz <<= 1;\n    if (sz <= 16) {\n        std::vector<MODINT> ret(n\
-    \ + m - 1);\n        for (int i = 0; i < n; i++) {\n            for (int j = 0;\
-    \ j < m; j++) ret[i + j] += a[i] * b[j];\n        }\n        return ret;\n   \
-    \ }\n    int mod = MODINT::get_mod();\n    if (skip_garner or std::find(std::begin(nttprimes),\
-    \ std::end(nttprimes), mod) != std::end(nttprimes))\n    {\n        a.resize(sz),\
-    \ b.resize(sz);\n        if (a == b) { ntt(a, false); b = a; }\n        else ntt(a,\
-    \ false), ntt(b, false);\n        for (int i = 0; i < sz; i++) a[i] *= b[i];\n\
-    \        ntt(a, true);\n        a.resize(n + m - 1);\n    }\n    else {\n    \
-    \    std::vector<int> ai(sz), bi(sz);\n        for (int i = 0; i < n; i++) ai[i]\
-    \ = a[i].val;\n        for (int i = 0; i < m; i++) bi[i] = b[i].val;\n       \
-    \ auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);\n        auto ntt1 = nttconv_<nttprimes[1]>(ai,\
-    \ bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai, bi);\n        a.resize(n\
-    \ + m - 1);\n        for (int i = 0; i < n + m - 1; i++) {\n            a[i] =\
-    \ garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n        }\n    }\n\
-    \    return a;\n}\n#line 6 \"formal_power_series/formal_power_series.hpp\"\nusing\
-    \ namespace std;\n\n// CUT begin\n// Formal Power Series (\u5F62\u5F0F\u7684\u51AA\
-    \u7D1A\u6570) based on ModInt<mod> / ModIntRuntime\n// Reference: <https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>\n\
+    \ m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.power((mod - 1)\
+    \ / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n  \
+    \      for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;\n\
+    \    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n      \
+    \      for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n                for (int\
+    \ i = s; i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m]\
+    \ * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n             \
+    \   }\n            }\n        }\n    }\n    else {\n        for (int m = 1; m\
+    \ < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n\
+    \                for (int i = s; i < s + m; i++) {\n                    MODINT\
+    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
+    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv();\n\
+    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
+    \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
+    \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
+    \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
+    \ ap[i] = a[i], bp[i] = b[i];\n    ntt(ap, false);\n    if (a == b) bp = ap;\n\
+    \    else ntt(bp, false);\n    for (int i = 0; i < sz; i++) ap[i] *= bp[i];\n\
+    \    ntt(ap, true);\n    return ap;\n}\nlong long garner_ntt_(int r0, int r1,\
+    \ int r2, int mod)\n{\n    using mint2 = ModInt<nttprimes[2]>;\n    static const\
+    \ long long m01 = 1LL * nttprimes[0] * nttprimes[1];\n    static const long long\
+    \ m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();\n    static const long\
+    \ long m01_inv_m2 = mint2(m01).inv();\n\n    int v1 = (m0_inv_m1 * (r1 + nttprimes[1]\
+    \ - r0)) % nttprimes[1];\n    auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0])\
+    \ * v1) * m01_inv_m2;\n    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod *\
+    \ v2.val) % mod;\n}\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner)\n{\n    int sz = 1, n = a.size(),\
+    \ m = b.size();\n    while (sz < n + m) sz <<= 1;\n    if (sz <= 16) {\n     \
+    \   std::vector<MODINT> ret(n + m - 1);\n        for (int i = 0; i < n; i++) {\n\
+    \            for (int j = 0; j < m; j++) ret[i + j] += a[i] * b[j];\n        }\n\
+    \        return ret;\n    }\n    int mod = MODINT::get_mod();\n    if (skip_garner\
+    \ or std::find(std::begin(nttprimes), std::end(nttprimes), mod) != std::end(nttprimes))\n\
+    \    {\n        a.resize(sz), b.resize(sz);\n        if (a == b) { ntt(a, false);\
+    \ b = a; }\n        else ntt(a, false), ntt(b, false);\n        for (int i = 0;\
+    \ i < sz; i++) a[i] *= b[i];\n        ntt(a, true);\n        a.resize(n + m -\
+    \ 1);\n    }\n    else {\n        std::vector<int> ai(sz), bi(sz);\n        for\
+    \ (int i = 0; i < n; i++) ai[i] = a[i].val;\n        for (int i = 0; i < m; i++)\
+    \ bi[i] = b[i].val;\n        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);\n   \
+    \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
+    \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
+    \ {\n            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n\
+    \        }\n    }\n    return a;\n}\n#line 6 \"formal_power_series/formal_power_series.hpp\"\
+    \nusing namespace std;\n\n// CUT begin\n// Formal Power Series (\u5F62\u5F0F\u7684\
+    \u51AA\u7D1A\u6570) based on ModInt<mod> / ModIntRuntime\n// Reference: <https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>\n\
     template<typename T>\nstruct FormalPowerSeries : vector<T>\n{\n    using vector<T>::vector;\n\
     \    using P = FormalPowerSeries;\n\n    void shrink() { while (this->size() and\
     \ this->back() == T(0)) this->pop_back(); }\n\n    P operator+(const P &r) const\
@@ -254,7 +244,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/fps_sqrt.test.cpp
   requiredBy: []
-  timestamp: '2020-06-13 14:25:53+09:00'
+  timestamp: '2020-09-29 00:37:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/fps_sqrt.test.cpp

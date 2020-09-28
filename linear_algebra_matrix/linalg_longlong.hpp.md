@@ -15,7 +15,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/linalg_longlong.hpp\"\n#include <cassert>\n\
     #include <cstdlib>\n#include <vector>\nusing namespace std;\n\n// CUT begin\n\

@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: string/test/suffix_array.test.cpp
-    title: string/test/suffix_array.test.cpp
-  - icon: ':heavy_check_mark:'
     path: string/test/lcp.test.cpp
     title: string/test/lcp.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: string/test/suffix_array.test.cpp
+    title: string/test/suffix_array.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"string/suffix_array.hpp\"\n#include <algorithm>\n#include\
     \ <numeric>\n#include <vector>\n\n// CUT begin\n// Suffix Array / Longest Common\

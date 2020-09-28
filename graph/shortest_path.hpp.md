@@ -12,7 +12,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include\
     \ <functional>\n#include <limits>\n#include <queue>\n#include <utility>\n#include\

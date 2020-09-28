@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"rational/rational_number.hpp\"\n#include <iostream>\n\n\
     // CUT begin\n// Rational number + {infinity(1 / 0), -infiity(-1 / 0)} \uFF08\u6709\

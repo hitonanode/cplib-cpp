@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>
   bundledCode: "#line 2 \"graph/bipartite_matching(slow).hpp\"\n#include <iostream>\n\

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"other_data_structures/binary_trie.hpp\"\n#include <vector>\n\
     \nstruct BinaryTrie\n{\n    using Int = int;\n    int maxD;\n    std::vector<int>\

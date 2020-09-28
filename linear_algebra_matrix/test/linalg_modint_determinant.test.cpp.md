@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
   - icon: ':question:'
     path: modulus/modint_fixed.hpp
     title: modulus/modint_fixed.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulus/modint_runtime.hpp
     title: modulus/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/matrix_det
@@ -21,13 +21,14 @@ data:
     - https://judge.yosupo.jp/problem/matrix_det
   bundledCode: "#line 1 \"linear_algebra_matrix/test/linalg_modint_determinant.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\n#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#include <iterator>\n#include <vector>\n\
-    \n// CUT begin\ntemplate <typename T>\nstruct matrix\n{\n    int H, W;\n    std::vector<T>\
-    \ elem;\n    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
-    \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
-    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    operator std::vector<std::vector<T>>()\
-    \ const {\n        std::vector<std::vector<T>> ret(H);\n        for (int i = 0;\
-    \ i < H; i++) std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n\
+    \n#include <algorithm>\n#include <cassert>\n#include <iostream>\n#include <iterator>\n\
+    #include <vector>\n\n// CUT begin\ntemplate <typename T>\nstruct matrix\n{\n \
+    \   int H, W;\n    std::vector<T> elem;\n    typename std::vector<T>::iterator\
+    \ operator[](int i) { return elem.begin() + i * W; }\n    inline T &at(int i,\
+    \ int j) { return elem[i * W + j]; }\n    inline T get(int i, int j) const { return\
+    \ elem[i * W + j]; }\n    operator std::vector<std::vector<T>>() const {\n   \
+    \     std::vector<std::vector<T>> ret(H);\n        for (int i = 0; i < H; i++)\
+    \ std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n\
     \        return ret;\n    }\n\n    matrix() = default;\n    matrix(int H, int\
     \ W) : H(H), W(W), elem(H * W) {}\n    matrix(const std::vector<std::vector<T>>\
     \ &d) : H(d.size()), W(d.size() ? d[0].size() : 0) {\n        for (auto &raw :\
@@ -98,14 +99,13 @@ data:
     \ 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...\n\
     template <typename T>\nT Fibonacci(long long int k, int a = 1, int b = 1)\n{\n\
     \    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n    mat[1][1]\
-    \ = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 2 \"modulus/modint_fixed.hpp\"\
-    \n#include <iostream>\n#line 4 \"modulus/modint_fixed.hpp\"\n#include <set>\n\n\
-    // CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint = long long;\n\
-    \    static int get_mod() { return mod; }\n    static int get_primitive_root()\
-    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
-    \            primitive_root = [&](){\n                std::set<int> fac;\n   \
-    \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
-    \ while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
+    \ = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 4 \"modulus/modint_fixed.hpp\"\
+    \n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using\
+    \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
+    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
+    \ {\n            primitive_root = [&](){\n                std::set<int> fac;\n\
+    \                int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
+    \ i++) while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
     \                for (int g = 1; g < mod; g++) {\n                    bool ok\
     \ = true;\n                    for (auto i : fac) if (ModInt(g).power((mod - 1)\
     \ / i) == 1) { ok = false; break; }\n                    if (ok) return g;\n \
@@ -253,8 +253,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   requiredBy: []
-  timestamp: '2020-07-25 15:58:14+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-09-29 00:37:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
 layout: document

@@ -4,30 +4,29 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_exp_modintruntime.test.cpp
-    title: formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/test/ntt_arbitrary_mod.test.cpp
     title: convolution/test/ntt_arbitrary_mod.test.cpp
   - icon: ':heavy_check_mark:'
-    path: modulus/test/sqrt_modint_runtime.test.cpp
-    title: modulus/test/sqrt_modint_runtime.test.cpp
+    path: formal_power_series/test/fps_exp_modintruntime.test.cpp
+    title: formal_power_series/test/fps_exp_modintruntime.test.cpp
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+    title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+  - icon: ':x:'
+    path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+    title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+    path: modulus/test/sqrt_modint_runtime.test.cpp
+    title: modulus/test/sqrt_modint_runtime.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"modulus/modint_runtime.hpp\"\n#include <iostream>\n#include\
     \ <vector>\n#include <set>\n\n// CUT begin\nstruct ModIntRuntime\n{\n    using\
@@ -168,7 +167,7 @@ data:
   path: modulus/modint_runtime.hpp
   requiredBy: []
   timestamp: '2020-03-07 22:54:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp

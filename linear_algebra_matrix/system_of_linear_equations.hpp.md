@@ -1,25 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\n#include <algorithm>\n\
-    #include <cassert>\n#include <iterator>\n#include <vector>\n\n// CUT begin\ntemplate\
-    \ <typename T>\nstruct matrix\n{\n    int H, W;\n    std::vector<T> elem;\n  \
-    \  typename std::vector<T>::iterator operator[](int i) { return elem.begin() +\
-    \ i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n    inline\
-    \ T get(int i, int j) const { return elem[i * W + j]; }\n    operator std::vector<std::vector<T>>()\
+    #include <cassert>\n#include <iostream>\n#include <iterator>\n#include <vector>\n\
+    \n// CUT begin\ntemplate <typename T>\nstruct matrix\n{\n    int H, W;\n    std::vector<T>\
+    \ elem;\n    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
+    \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
+    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    operator std::vector<std::vector<T>>()\
     \ const {\n        std::vector<std::vector<T>> ret(H);\n        for (int i = 0;\
     \ i < H; i++) std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n\
     \        return ret;\n    }\n\n    matrix() = default;\n    matrix(int H, int\
@@ -134,8 +133,8 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/system_of_linear_equations.hpp
   requiredBy: []
-  timestamp: '2020-07-25 15:58:14+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-09-29 00:37:21+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
 documentation_of: linear_algebra_matrix/system_of_linear_equations.hpp

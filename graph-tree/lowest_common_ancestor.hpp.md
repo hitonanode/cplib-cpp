@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://yukicoder.me/submissions/392383>
   bundledCode: "#line 2 \"graph-tree/lowest_common_ancestor.hpp\"\n#include <vector>\n\

@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: number/test/miller-rabin.test.cpp
-    title: number/test/miller-rabin.test.cpp
-  - icon: ':heavy_check_mark:'
     path: number/test/factorize_longlong.test.cpp
     title: number/test/factorize_longlong.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/miller-rabin.test.cpp
+    title: number/test/miller-rabin.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://miller-rabin.appspot.com/>
     - https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95>

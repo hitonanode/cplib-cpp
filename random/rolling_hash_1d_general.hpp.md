@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: random/test/rolling_hash_w_modint.test.cpp
-    title: random/test/rolling_hash_w_modint.test.cpp
-  - icon: ':heavy_check_mark:'
     path: random/test/rolling_hash.test.cpp
     title: random/test/rolling_hash.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: random/test/rolling_hash_w_modint.test.cpp
+    title: random/test/rolling_hash_w_modint.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"random/rolling_hash_1d_general.hpp\"\n#include <string>\n\
     #include <vector>\nusing namespace std;\n\n// CUT begin\n// Rolling Hash (Rabin-Karp),\

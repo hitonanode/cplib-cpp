@@ -4,18 +4,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: graph/test/articulation_points.test.cpp
+    title: graph/test/articulation_points.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/bridge.test.cpp
     title: graph/test/bridge.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/two-edge-connected-components.test.cpp
     title: graph/test/two-edge-connected-components.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: graph/test/articulation_points.test.cpp
-    title: graph/test/articulation_points.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/lowlink.hpp\"\n#include <algorithm>\n#include <cassert>\n\
     #include <queue>\n#include <utility>\n#include <vector>\n\n\n// CUT begin\nstruct\

@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':x:'
+    path: linear_algebra_matrix/linalg_modint.hpp
+    title: linear_algebra_matrix/linalg_modint.hpp
+  - icon: ':x:'
+    path: linear_algebra_matrix/system_of_linear_equations.hpp
+    title: linear_algebra_matrix/system_of_linear_equations.hpp
   - icon: ':question:'
     path: modulus/modint_fixed.hpp
     title: modulus/modint_fixed.hpp
-  - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/system_of_linear_equations.hpp
-    title: linear_algebra_matrix/system_of_linear_equations.hpp
-  - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/linalg_modint.hpp
-    title: linear_algebra_matrix/linalg_modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/system_of_linear_equations
@@ -83,46 +83,46 @@ data:
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
     \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
     \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#include <iterator>\n#line 6 \"linear_algebra_matrix/linalg_modint.hpp\"\
-    \n\n// CUT begin\ntemplate <typename T>\nstruct matrix\n{\n    int H, W;\n   \
-    \ std::vector<T> elem;\n    typename std::vector<T>::iterator operator[](int i)\
-    \ { return elem.begin() + i * W; }\n    inline T &at(int i, int j) { return elem[i\
-    \ * W + j]; }\n    inline T get(int i, int j) const { return elem[i * W + j];\
-    \ }\n    operator std::vector<std::vector<T>>() const {\n        std::vector<std::vector<T>>\
-    \ ret(H);\n        for (int i = 0; i < H; i++) std::copy(elem.begin() + i * W,\
-    \ elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        return ret;\n\
-    \    }\n\n    matrix() = default;\n    matrix(int H, int W) : H(H), W(W), elem(H\
-    \ * W) {}\n    matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size()\
-    \ ? d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(), raw.end(),\
-    \ std::back_inserter(elem));\n    }\n\n    static matrix Identity(int N) {\n \
-    \       matrix ret(N, N);\n        for (int i = 0; i < N; i++) ret.at(i, i) =\
-    \ 1;\n        return ret;\n    }\n\n    matrix operator-() const { matrix ret(H,\
-    \ W); for (int i = 0; i < H * W; i++) ret.elem[i] = -elem[i]; return ret; }\n\
-    \    matrix operator*(const T &v) const { matrix ret = *this; for (auto &x : ret.elem)\
-    \ x *= v; return ret; }\n    matrix operator/(const T &v) const { matrix ret =\
-    \ *this; for (auto &x : ret.elem) x /= v; return ret; }\n    matrix operator+(const\
+    \n#include <algorithm>\n#include <cassert>\n#line 5 \"linear_algebra_matrix/linalg_modint.hpp\"\
+    \n#include <iterator>\n#line 7 \"linear_algebra_matrix/linalg_modint.hpp\"\n\n\
+    // CUT begin\ntemplate <typename T>\nstruct matrix\n{\n    int H, W;\n    std::vector<T>\
+    \ elem;\n    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
+    \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
+    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    operator std::vector<std::vector<T>>()\
+    \ const {\n        std::vector<std::vector<T>> ret(H);\n        for (int i = 0;\
+    \ i < H; i++) std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n\
+    \        return ret;\n    }\n\n    matrix() = default;\n    matrix(int H, int\
+    \ W) : H(H), W(W), elem(H * W) {}\n    matrix(const std::vector<std::vector<T>>\
+    \ &d) : H(d.size()), W(d.size() ? d[0].size() : 0) {\n        for (auto &raw :\
+    \ d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));\n    }\n\n \
+    \   static matrix Identity(int N) {\n        matrix ret(N, N);\n        for (int\
+    \ i = 0; i < N; i++) ret.at(i, i) = 1;\n        return ret;\n    }\n\n    matrix\
+    \ operator-() const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i]\
+    \ = -elem[i]; return ret; }\n    matrix operator*(const T &v) const { matrix ret\
+    \ = *this; for (auto &x : ret.elem) x *= v; return ret; }\n    matrix operator/(const\
+    \ T &v) const { matrix ret = *this; for (auto &x : ret.elem) x /= v; return ret;\
+    \ }\n    matrix operator+(const matrix &r) const { matrix ret = *this; for (int\
+    \ i = 0; i < H * W; i++) ret.elem[i] += r.elem[i]; return ret; }\n    matrix operator-(const\
     \ matrix &r) const { matrix ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i]\
-    \ += r.elem[i]; return ret; }\n    matrix operator-(const matrix &r) const { matrix\
-    \ ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i]; return\
-    \ ret; }\n    matrix operator*(const matrix &r) const {\n        matrix ret(H,\
-    \ r.W);\n        for (int i = 0; i < H; i++) {\n            for (int k = 0; k\
-    \ < W; k++) {\n                for (int j = 0; j < r.W; j++) {\n             \
-    \       ret.at(i, j) += this->get(i, k) * r.get(k, j);\n                }\n  \
-    \          }\n        }\n        return ret;\n    }\n    matrix &operator*=(const\
-    \ T &v) { return *this = *this * v; }\n    matrix &operator/=(const T &v) { return\
-    \ *this = *this / v; }\n    matrix &operator+=(const matrix &r) { return *this\
-    \ = *this + r; }\n    matrix &operator-=(const matrix &r) { return *this = *this\
-    \ - r; }\n    matrix &operator*=(const matrix &r) { return *this = *this * r;\
-    \ }\n    bool operator==(const matrix &r) const { return H == r.H and W == r.W\
-    \ and elem == r.elem; }\n    bool operator!=(const matrix &r) const { return H\
-    \ != r.H or W != r.W or elem != r.elem; }\n    bool operator<(const matrix &r)\
-    \ const { return elem < r.elem; }\n    matrix pow(int64_t n) const {\n       \
-    \ matrix ret = Identity(H);\n        if (n == 0) return ret;\n        for (int\
-    \ i = 63 - __builtin_clzll(n); i >= 0; i--) {\n            ret *= ret;\n     \
-    \       if ((n >> i) & 1) ret *= (*this);\n        }\n        return ret;\n  \
-    \  }\n    matrix transpose() const {\n        matrix ret(W, H);\n        for (int\
-    \ i = 0; i < H; i++) for (int j = 0; j < W; j++) ret.at(j, i) = this->get(i, j);\n\
-    \        return ret;\n    }\n    // Gauss-Jordan elimination\n    // - Require\
+    \ -= r.elem[i]; return ret; }\n    matrix operator*(const matrix &r) const {\n\
+    \        matrix ret(H, r.W);\n        for (int i = 0; i < H; i++) {\n        \
+    \    for (int k = 0; k < W; k++) {\n                for (int j = 0; j < r.W; j++)\
+    \ {\n                    ret.at(i, j) += this->get(i, k) * r.get(k, j);\n    \
+    \            }\n            }\n        }\n        return ret;\n    }\n    matrix\
+    \ &operator*=(const T &v) { return *this = *this * v; }\n    matrix &operator/=(const\
+    \ T &v) { return *this = *this / v; }\n    matrix &operator+=(const matrix &r)\
+    \ { return *this = *this + r; }\n    matrix &operator-=(const matrix &r) { return\
+    \ *this = *this - r; }\n    matrix &operator*=(const matrix &r) { return *this\
+    \ = *this * r; }\n    bool operator==(const matrix &r) const { return H == r.H\
+    \ and W == r.W and elem == r.elem; }\n    bool operator!=(const matrix &r) const\
+    \ { return H != r.H or W != r.W or elem != r.elem; }\n    bool operator<(const\
+    \ matrix &r) const { return elem < r.elem; }\n    matrix pow(int64_t n) const\
+    \ {\n        matrix ret = Identity(H);\n        if (n == 0) return ret;\n    \
+    \    for (int i = 63 - __builtin_clzll(n); i >= 0; i--) {\n            ret *=\
+    \ ret;\n            if ((n >> i) & 1) ret *= (*this);\n        }\n        return\
+    \ ret;\n    }\n    matrix transpose() const {\n        matrix ret(W, H);\n   \
+    \     for (int i = 0; i < H; i++) for (int j = 0; j < W; j++) ret.at(j, i) = this->get(i,\
+    \ j);\n        return ret;\n    }\n    // Gauss-Jordan elimination\n    // - Require\
     \ inverse for every non-zero element\n    // - Complexity: O(H^2 W)\n    matrix\
     \ gauss_jordan() const {\n        int c = 0;\n        matrix mtr(*this);\n   \
     \     for (int h = 0; h < H; h++) {\n            if (c == W) break;\n        \
@@ -206,8 +206,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2020-07-25 15:58:14+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-09-29 00:37:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
 layout: document

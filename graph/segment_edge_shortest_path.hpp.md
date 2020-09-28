@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://codeforces.com/contest/786/submission/93412867>
   bundledCode: "#line 2 \"graph/segment_edge_shortest_path.hpp\"\n#include <cassert>\n\

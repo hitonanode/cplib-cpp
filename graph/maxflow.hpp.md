@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/maxflow.hpp\"\n#include <algorithm>\n#include <limits>\n\
     #include <queue>\n#include <vector>\n\n// CUT begin\n// MaxFlow (Dinic algorithm)\n\

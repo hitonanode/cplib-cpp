@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: other_data_structures/sliding_window_aggregation.hpp
-    title: other_data_structures/sliding_window_aggregation.hpp
   - icon: ':question:'
     path: modulus/modint_fixed.hpp
     title: modulus/modint_fixed.hpp
+  - icon: ':heavy_check_mark:'
+    path: other_data_structures/sliding_window_aggregation.hpp
+    title: other_data_structures/sliding_window_aggregation.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

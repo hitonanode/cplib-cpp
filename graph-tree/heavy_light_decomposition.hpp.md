@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>
   bundledCode: "#line 2 \"graph-tree/heavy_light_decomposition.hpp\"\n#include <algorithm>\n\

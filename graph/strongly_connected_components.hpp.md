@@ -18,7 +18,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/strongly_connected_components.hpp\"\n#include <cassert>\n\
     #include <algorithm>\n#include <vector>\n\n// CUT begin\n// Directed graph library\

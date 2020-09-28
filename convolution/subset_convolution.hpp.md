@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"convolution/subset_convolution.hpp\"\n#include <cassert>\n\
     #include <vector>\n\n// CUT begin\n// Subset sum (fast zeta transform)\n// Complexity:\

@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://ei1333.github.io/luzhiled/snippets/math/arbitrary-mod-convolution.html>
   bundledCode: "#line 2 \"convolution/fft_arbitrary_mod.hpp\"\n#include <cassert>\n\

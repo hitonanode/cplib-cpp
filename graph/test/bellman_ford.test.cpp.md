@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/shortest_path.hpp
-    title: graph/shortest_path.hpp
-  - icon: ':heavy_check_mark:'
     path: graph/bellman_ford.hpp
     title: graph/bellman_ford.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/shortest_path.hpp
+    title: graph/shortest_path.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

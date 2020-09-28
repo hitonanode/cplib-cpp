@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/bellman_ford.hpp\"\n#include <utility>\n#include <vector>\n\
     using namespace std;\n\n// CUT begin\nusing wedges = vector<vector<pair<long long\

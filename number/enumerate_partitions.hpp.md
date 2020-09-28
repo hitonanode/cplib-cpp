@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"number/enumerate_partitions.hpp\"\n#include <algorithm>\n\
     #include <numeric>\n#include <vector>\n\n// CUT begin\n// Enumerate Partitions\
