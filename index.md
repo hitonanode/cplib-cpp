@@ -152,7 +152,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: linear_algebra_matrix/linalg_modint.hpp
       title: linear_algebra_matrix/linalg_modint.hpp
     - icon: ':heavy_check_mark:'
@@ -167,11 +167,6 @@ data:
     - icon: ':warning:'
       path: linear_algebra_matrix/tropical_matrix.hpp
       title: linear_algebra_matrix/tropical_matrix.hpp
-  - name: marathonmatch
-    pages:
-    - icon: ':warning:'
-      path: marathonmatch/timelimit.cpp
-      title: marathonmatch/timelimit.cpp
   - name: matroid
     pages:
     - icon: ':warning:'
@@ -185,7 +180,7 @@ data:
     - icon: ':question:'
       path: modulus/modint_fixed.hpp
       title: modulus/modint_fixed.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modulus/modint_runtime.hpp
       title: modulus/modint_runtime.hpp
   - name: multithread
@@ -195,9 +190,12 @@ data:
       title: multithread/multithread_example.cpp
   - name: number
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
+    - icon: ':warning:'
+      path: number/big_combination_logarithm.hpp
+      title: number/big_combination_logarithm.hpp
     - icon: ':warning:'
       path: number/cyclotomic_polynomials.hpp
       title: number/cyclotomic_polynomials.hpp
@@ -308,6 +306,14 @@ data:
     - icon: ':warning:'
       path: string/test/aho_corasick.deprecated.cpp
       title: string/test/aho_corasick.deprecated.cpp
+  - name: syntactic_analysis
+    pages:
+    - icon: ':warning:'
+      path: syntactic_analysis/ll1parser.hpp
+      title: syntactic_analysis/ll1parser.hpp
+    - icon: ':warning:'
+      path: syntactic_analysis/parsetree.hpp
+      title: syntactic_analysis/parsetree.hpp
   - name: unionfind
     pages:
     - icon: ':warning:'
@@ -333,12 +339,24 @@ data:
     - icon: ':warning:'
       path: utilities/floor_sum.hpp
       title: utilities/floor_sum.hpp
+    - icon: ':warning:'
+      path: utilities/gnu_pbds.hpp
+      title: utilities/gnu_pbds.hpp
     - icon: ':x:'
       path: utilities/int128.hpp
       title: utilities/int128.hpp
     - icon: ':warning:'
+      path: utilities/multiprecision_int.hpp
+      title: utilities/multiprecision_int.hpp
+    - icon: ':warning:'
+      path: utilities/next_combination.hpp
+      title: utilities/next_combination.hpp
+    - icon: ':warning:'
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
+    - icon: ':warning:'
+      path: utilities/timelimit.cpp
+      title: utilities/timelimit.cpp
   verificationCategories:
   - name: convex_hull_trick/test
     pages:
@@ -494,7 +512,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     - icon: ':heavy_check_mark:'

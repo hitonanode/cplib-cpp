@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
   - icon: ':question:'
     path: modulus/modint_fixed.hpp
     title: modulus/modint_fixed.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulus/modint_runtime.hpp
     title: modulus/modint_runtime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D
@@ -102,30 +102,52 @@ data:
     \ 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...\n\
     template <typename T>\nT Fibonacci(long long int k, int a = 1, int b = 1)\n{\n\
     \    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n    mat[1][1]\
-    \ = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 3 \"number/bare_mod_algebra.hpp\"\
-    \n#include <utility>\n#line 5 \"number/bare_mod_algebra.hpp\"\n\n// CUT begin\n\
-    using lint = long long;\n// Solve ax+by=gcd(a, b)\nlint extgcd(lint a, lint b,\
-    \ lint &x, lint &y)\n{\n    lint d = a;\n    if (b != 0) d = extgcd(b, a % b,\
-    \ y, x), y -= (a / b) * x;\n    else x = 1, y = 0;\n    return d;\n}\n// Calc\
-    \ a^(-1) (MOD m)\nlint mod_inverse(lint a, lint m)\n{\n    lint x, y;\n    extgcd(a,\
-    \ m, x, y);\n    return (m + x % m) % m;\n}\n\n// \u87FB\u672C P.262\n// \u4E2D\
-    \u56FD\u5270\u4F59\u5B9A\u7406\u3092\u5229\u7528\u3057\u3066\uFF0C\u8272\u3005\
-    \u306A\u7D20\u6570\u3067\u5272\u3063\u305F\u4F59\u308A\u304B\u3089\u5143\u306E\
-    \u5024\u3092\u5FA9\u5143\n// \u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F A * x\
-    \ = B mod M \u306E\u89E3\n// Output: x = first MOD second\nstd::pair<lint, lint>\
-    \ linear_congruence(const std::vector<lint> &A, const std::vector<lint> &B, const\
-    \ std::vector<lint> &M)\n{\n    lint x = 0, m = 1;\n    for (int i = 0; i < (int)A.size();\
-    \ i++) {\n        lint a = A[i] * m, b = B[i] - A[i] * x, d = std::__gcd(M[i],\
-    \ a);\n        if (b % d != 0) {\n            return std::make_pair(0, -1); //\
-    \ \u89E3\u306A\u3057\n        }\n        lint t = b / d * mod_inverse(a / d, M[i]\
-    \ / d) % (M[i] / d);\n        x += m * t;\n        m *= M[i] / d;\n    }\n   \
-    \ return std::make_pair((x < 0 ? x + m : x), m);\n}\n\nlint power(lint x, lint\
-    \ n, lint MOD)\n{\n    lint ans = 1;\n    while (n > 0) {\n        if (n & 1)\
-    \ (ans *= x) %= MOD;\n        (x *= x) %= MOD;\n       n >>= 1;\n    }\n   return\
-    \ ans;\n}\n\n// Find smallest primitive root for given prime P \uFF08\u6700\u5C0F\
-    \u306E\u539F\u59CB\u6839\u63A2\u7D22\uFF09\n// Complexity: maybe O(sqrt(p))\n\
-    // Algorithm: <http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>\n//\
-    \ Verified: <https://yukicoder.me/submissions/405938>\n// Sample:\n//  - 998244353\
+    \ = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 4 \"number/bare_mod_algebra.hpp\"\
+    \n#include <tuple>\n#include <utility>\n#line 7 \"number/bare_mod_algebra.hpp\"\
+    \n\n// CUT begin\nusing lint = long long;\n// Solve ax+by=gcd(a, b)\nlint extgcd(lint\
+    \ a, lint b, lint &x, lint &y)\n{\n    lint d = a;\n    if (b != 0) d = extgcd(b,\
+    \ a % b, y, x), y -= (a / b) * x;\n    else x = 1, y = 0;\n    return d;\n}\n\
+    // Calculate a^(-1) (MOD m) s if gcd(a, m) == 1\n// Calculate x s.t. ax == gcd(a,\
+    \ m) MOD m\nlint mod_inverse(lint a, lint m)\n{\n    lint x, y;\n    extgcd(a,\
+    \ m, x, y);\n    x %= m;\n    return x + (x < 0) * m;\n}\n\n// Require: 1 <= b\n\
+    // return: (g, x) s.t. g = gcd(a, b), xa = g MOD b, 0 <= x < b/g\ntemplate <typename\
+    \ Int>\nconstexpr std::pair<Int, Int> inv_gcd(Int a, Int b) {\n    a %= b;\n \
+    \   if (a < 0) a += b;\n    if (a == 0) return {b, 0};\n    T s = b, t = a, m0\
+    \ = 0, m1 = 1;\n    while (t) {\n        T u = s / t;\n        s -= t * u, m0\
+    \ -= m1 * u;\n        auto tmp = s;\n        s = t, t = tmp, tmp = m0, m0 = m1,\
+    \ m1 = tmp;\n    }\n    if (m0 < 0) m0 += b / s;\n    return {s, m0};\n}\n\ntemplate\
+    \ <typename Int>\nconstexpr std::pair<Int, Int> crt(const std::vector<Int> &r,\n\
+    \                                  const std::vector<Int> &m)\n{\n    assert(r.size()\
+    \ == m.size());\n    int n = int(r.size());\n    // Contracts: 0 <= r0 < m0\n\
+    \    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n; i++) {\n        assert(1\
+    \ <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n        if (r1 < 0) r1\
+    \ += m1;\n        if (m0 < m1) {\n            std::swap(r0, r1);\n           \
+    \ std::swap(m0, m1);\n        }\n        if (m0 % m1 == 0) {\n            if (r0\
+    \ % m1 != r1) return {0, 0};\n            continue;\n        }\n        Int g,\
+    \ im;\n        std::tie(g, im) = inv_gcd<Int>(m0, m1);\n\n        Int u1 = m1\
+    \ / g;\n        if ((r1 - r0) % g) return {0, 0};\n\n        Int x = (r1 - r0)\
+    \ / g % u1 * im % u1;\n        r0 += x * m0;\n        m0 *= u1;\n        if (r0\
+    \ < 0) r0 += m0;\n    }\n    return {r0, m0};\n}\n\n// \u87FB\u672C P.262\n//\
+    \ \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\u3092\u5229\u7528\u3057\u3066\uFF0C\u8272\
+    \u3005\u306A\u7D20\u6570\u3067\u5272\u3063\u305F\u4F59\u308A\u304B\u3089\u5143\
+    \u306E\u5024\u3092\u5FA9\u5143\n// \u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\
+    \ A * x = B mod M \u306E\u89E3\n// Requirement: M[i] > 0\n// Output: x = first\
+    \ MOD second (if solution exists), (0, 0) (otherwise)\nstd::pair<lint, lint> linear_congruence(const\
+    \ std::vector<lint> &A,\n                                        const std::vector<lint>\
+    \ &B,\n                                        const std::vector<lint> &M)\n{\n\
+    \    lint r = 0, m = 1;\n    assert(A.size() == M.size());\n    assert(B.size()\
+    \ == M.size());\n    for (int i = 0; i < (int)A.size(); i++) {\n        assert(M[i]\
+    \ > 0);\n        const lint ai = A[i] % M[i];\n        lint a = ai * m, b = B[i]\
+    \ - ai * r, d = std::__gcd(M[i], a);\n        if (b % d != 0) {\n            return\
+    \ std::make_pair(0, 0); // \u89E3\u306A\u3057\n        }\n        lint t = b /\
+    \ d * mod_inverse(a / d, M[i] / d) % (M[i] / d);\n        r += m * t;\n      \
+    \  m *= M[i] / d;\n    }\n    return std::make_pair((r < 0 ? r + m : r), m);\n\
+    }\n\nlint power(lint x, lint n, lint MOD)\n{\n    lint ans = 1;\n    while (n\
+    \ > 0) {\n        if (n & 1) (ans *= x) %= MOD;\n        (x *= x) %= MOD;\n  \
+    \     n >>= 1;\n    }\n   return ans;\n}\n\n// Find smallest primitive root for\
+    \ given prime P \uFF08\u6700\u5C0F\u306E\u539F\u59CB\u6839\u63A2\u7D22\uFF09\n\
+    // Complexity: maybe O(sqrt(p))\n// Algorithm: <http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>\n\
+    // Verified: <https://yukicoder.me/submissions/405938>\n// Sample:\n//  - 998244353\
     \ ( = (119 << 23) + 1 ) -> 3\n//  - 163577857 ( = (39 << 22) + 1 ) -> 23\n// \
     \ - 2 -> 1\n//  - 1 -> -1\n\nlint find_smallest_primitive_root(lint p)\n{\n  \
     \  std::vector<lint> fac;\n    lint v = p - 1;\n    for (lint pp = 2; pp * pp\
@@ -300,8 +322,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 00:37:21+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-09-29 18:47:04+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 layout: document
