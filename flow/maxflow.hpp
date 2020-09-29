@@ -7,7 +7,7 @@
 
 // CUT begin
 // MaxFlow based and AtCoder Library, single class, no namespace, no private variables, compatible with C++11
-// Document: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>
+// Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>
 template <class Cap>
 struct mf_graph {
     struct simple_queue_int {
