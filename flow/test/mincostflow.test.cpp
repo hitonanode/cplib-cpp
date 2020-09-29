@@ -1,5 +1,5 @@
 #include <iostream>
-#include "flow/mincostflow.hpp"
+#include "flow/mincostflow_acl.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
 
 
@@ -7,7 +7,7 @@ int main()
 {
     int V, E, F;
     std::cin >> V >> E >> F;
-    MinCostFlow mcf(V);
+    mcf_graph<long long, long long> mcf(V);
     for (int i = 0; i < E; i++)
     {
         int u, v, c, d;
@@ -15,6 +15,6 @@ int main()
         mcf.add_edge(u, v, c, d);
     }
 
-    auto ret = mcf.flush(0, V - 1, F);
-    std::cout << (ret.second.first ? ret.first : -1) << '\n';
+    auto [cap, cost] = mcf.flow(0, V - 1, F);
+    std::cout << (cap == F ? cost : -1) << '\n';
 }

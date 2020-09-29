@@ -7,7 +7,7 @@
 
 // CUT begin
 /*
-MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE
+MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE (just negative cost edge is allowed)
 Verified by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>
 */
 template <typename CAP = long long, typename COST = long long>
@@ -24,7 +24,7 @@ struct MinCostFlow
         }
     };
     int V;
-    std::vector<std::vector<edge>> G;
+    std::vector<std::vector<edge>> g;
     std::vector<COST> dist;
     std::vector<int> prevv, preve;
     std::vector<COST> h;  // h[V]: potential
@@ -40,8 +40,8 @@ struct MinCostFlow
             cnt++;
             if (cnt > V) return false;  // Negative cycle existence
             for (int v = 0; v < V; v++) if (dist[v] != INF_COST) {
-                for (int i = 0; i < (int)G[v].size(); i++) {
-                    edge &e = G[v][i];
+                for (int i = 0; i < (int)g[v].size(); i++) {
+                    edge &e = g[v][i];
                     COST c = dist[v] + e.cost + h[v] - h[e.to];
                     if (e.cap > 0 and dist[e.to] > c) {
                         dist[e.to] = c, prevv[e.to] = v, preve[e.to] = i;
@@ -64,8 +64,8 @@ struct MinCostFlow
             q.pop();
             int v = p.second;
             if (dist[v] < p.first) continue;
-            for (int i = 0; i < (int)G[v].size(); i++) {
-                edge &e = G[v][i];
+            for (int i = 0; i < (int)g[v].size(); i++) {
+                edge &e = g[v][i];
                 COST c = dist[v] + e.cost + h[v] - h[e.to];
                 if (e.cap > 0 and dist[e.to] > c) {
                     dist[e.to] = c, prevv[e.to] = v, preve[e.to] = i;
@@ -76,49 +76,49 @@ struct MinCostFlow
         return true;
     }
 
-    MinCostFlow(int V=0) : V(V), G(V) {}
+    MinCostFlow(int V=0) : V(V), g(V) {}
 
     void add_edge(int from, int to, CAP cap, COST cost) {
         assert(0 <= from and from < V);
         assert(0 <= to and to < V);
-        einfo.emplace_back(from, G[from].size());
-        G[from].emplace_back(edge{to, (int)G[to].size() + (from == to), cap, cost});
-        G[to].emplace_back(edge{from, (int)G[from].size() - 1, (CAP)0, -cost});
+        einfo.emplace_back(from, g[from].size());
+        g[from].emplace_back(edge{to, (int)g[to].size() + (from == to), cap, cost});
+        g[to].emplace_back(edge{from, (int)g[from].size() - 1, (CAP)0, -cost});
     }
 
-    std::pair<COST, std::pair<bool, CAP>> flush(int s, int t, CAP f) {
+    std::pair<CAP, COST> flow(int s, int t, const CAP &f) {
         /*
         Flush amount of `f` from `s` to `t` using the Dijkstra's algorithm
         works for graph with no negative cycles (negative cost edges are allowed)
-        retval: (min_flow, ([succeeded or not], residue flow))
-        [Example] Succeeded: `([mincost], (true, 0))`
+        retval: (flow, cost)
         */
         COST ret = 0;
         h.assign(V, 0);
         prevv.assign(V, -1);
         preve.assign(V, -1);
-        while (f > 0) {
+        CAP frem = f;
+        while (frem > 0) {
             _calc_distance_dijkstra(s);
-            if (dist[t] == INF_COST) return std::make_pair(ret, std::make_pair(false, f));
+            if (dist[t] == INF_COST) break;
             for (int v = 0; v < V; v++) h[v] = std::min(h[v] + dist[v], INF_COST);
-            CAP d = f;
+            CAP d = frem;
             for (int v = t; v != s; v = prevv[v]) {
-                d = std::min(d, G[prevv[v]][preve[v]].cap);
+                d = std::min(d, g[prevv[v]][preve[v]].cap);
             }
-            f -= d;
+            frem -= d;
             ret += d * h[t];
             for (int v = t; v != s; v = prevv[v]) {
-                edge &e = G[prevv[v]][preve[v]];
+                edge &e = g[prevv[v]][preve[v]];
                 e.cap -= d;
-                G[v][e.rev].cap += d;
+                g[v][e.rev].cap += d;
             }
         }
-        return std::make_pair(ret, std::make_pair(true, 0));
+        return std::make_pair(f - frem, ret);
     }
 
     friend std::ostream &operator<<(std::ostream &os, const MinCostFlow &mcf) {
         os << "[MinCostFlow]V=" << mcf.V << ":";
-        for (int i = 0; i < (int)mcf.G.size(); i++) for (auto &e : mcf.G[i]) {
+        for (int i = 0; i < (int)mcf.g.size(); i++) for (auto &e : mcf.g[i]) {
             os << "\n" << i << "->" << e.to << ": cap=" << e.cap << ", cost=" << e.cost;
         }
         return os;
@@ -212,7 +212,7 @@ struct B_Flow
             return std::make_pair(false, 0);
         }
         std::fill(b.begin(), b.end(), 0);
-        auto ret = mcf.flush(N, N + 1, bsum);
+        auto ret = mcf.flow(N, N + 1, bsum);
         COST cost_ret = cost_bias + ret.first;
         cost_bias = 0;
         bool succeeded = ret.second.first;
@@ -220,7 +220,7 @@ struct B_Flow
         for (int i = 0; i < E; i++)
         {
             std::pair<int, int> p = mcf.einfo[i];
-            f[i] -= fdir[i] * mcf.G[p.first][p.second].cap;
+            f[i] -= fdir[i] * mcf.g[p.first][p.second].cap;
         }
         return std::make_pair(succeeded, cost_ret);
     }

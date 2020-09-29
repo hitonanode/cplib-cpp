@@ -1,4 +1,4 @@
-#include "flow/mincostflow.hpp"
+#include "flow/mincostflow_bellmanford.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/assignment"
 #include <algorithm>
 #include <iostream>
@@ -7,7 +7,7 @@ template<typename TC>
 std::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost)
 {
     int N = cost.size();
-    MinCostFlow mcf(N * 2 + 2);
+    MinCostFlow<long long, long long> mcf(N * 2 + 2);
     int S = N * 2, T = N * 2 + 1;
     for (int i = 0; i < N; i++)
     {
@@ -18,12 +18,12 @@ std::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> c
             mcf.add_edge(i, N + j, 1, cost[i][j]);
         }
     }
-    auto total_cost = mcf.flush(S, T, N).first;
+    auto total_cost = mcf.flow(S, T, N).second;
     std::vector<int> ret;
 
     for (int i = 0; i < N; i++)
     {
-        for (const auto &g : mcf.G[i])
+        for (const auto &g : mcf.g[i])
         {
             if (g.to != S and !g.cap)
             {
