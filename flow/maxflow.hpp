@@ -5,7 +5,7 @@
 #include <limits>
 #include <vector>
 
-//CUT begin
+// CUT begin
 // MaxFlow based and AtCoder Library, single class, no namespace, no private variables, compatible with C++11
 // Document: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>
 template <class Cap>
@@ -72,13 +72,10 @@ struct mf_graph {
         _re.cap = new_flow;
     }
 
-    Cap flow(int s, int t) {
-        return flow(s, t, std::numeric_limits<Cap>::max());
-    }
     std::vector<int> level, iter;
     simple_queue_int que;
 
-    void bfs(int s, int t) {
+    void _bfs(int s, int t) {
         std::fill(level.begin(), level.end(), -1);
         level[s] = 0;
         que.clear();
@@ -94,15 +91,14 @@ struct mf_graph {
             }
         }
     }
-
-    Cap dfs(int v, int s, Cap up) {
+    Cap _dfs(int v, int s, Cap up) {
         if (v == s) return up;
         Cap res = 0;
         int level_v = level[v];
         for (int &i = iter[v]; i < int(g[v].size()); i++) {
             _edge &e = g[v][i];
             if (level_v <= level[e.to] || g[e.to][e.rev].cap == 0) continue;
-            Cap d = dfs(e.to, s, std::min(up - res, g[e.to][e.rev].cap));
+            Cap d = _dfs(e.to, s, std::min(up - res, g[e.to][e.rev].cap));
             if (d <= 0) continue;
             g[v][i].cap += d;
             g[e.to][e.rev].cap -= d;
@@ -112,6 +108,9 @@ struct mf_graph {
         return res;
     }
 
+    Cap flow(int s, int t) {
+        return flow(s, t, std::numeric_limits<Cap>::max());
+    }
     Cap flow(int s, int t, Cap flow_limit) {
         assert(0 <= s && s < _n);
         assert(0 <= t && t < _n);
@@ -122,11 +121,11 @@ struct mf_graph {
 
         Cap flow = 0;
         while (flow < flow_limit) {
-            bfs(s, t);
+            _bfs(s, t);
             if (level[t] == -1) break;
             std::fill(iter.begin(), iter.end(), 0);
             while (flow < flow_limit) {
-                Cap f = dfs(t, s, flow_limit - flow);
+                Cap f = _dfs(t, s, flow_limit - flow);
                 if (!f) break;
                 flow += f;
             }

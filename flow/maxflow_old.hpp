@@ -6,7 +6,7 @@
 // CUT begin
 // MaxFlow (Dinic algorithm)
 template <typename T>
-struct MaxFlow
+struct [[deprecated("use ACL based mf_graph")]] MaxFlow
 {
     struct edge { int to; T cap; int rev; };
     std::vector<std::vector<edge>> edges;
