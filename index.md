@@ -219,9 +219,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/fibonacci_heap.hpp
       title: other_data_structures/fibonacci_heap.hpp
+    - icon: ':warning:'
+      path: other_data_structures/link_cut_tree.cpp
+      title: other_data_structures/link_cut_tree.cpp
     - icon: ':heavy_check_mark:'
       path: other_data_structures/persistent_queue.hpp
       title: other_data_structures/persistent_queue.hpp
+    - icon: ':warning:'
+      path: other_data_structures/rbst_fast.cpp
+      title: other_data_structures/rbst_fast.cpp
     - icon: ':heavy_check_mark:'
       path: other_data_structures/sliding_window_aggregation.hpp
       title: other_data_structures/sliding_window_aggregation.hpp
@@ -236,6 +242,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: random/rolling_hash_1d_general.hpp
       title: random/rolling_hash_1d_general.hpp
+    - icon: ':warning:'
+      path: random/shuffle_container.hpp
+      title: random/shuffle_container.hpp
     - icon: ':heavy_check_mark:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
@@ -346,6 +355,9 @@ data:
       path: utilities/int128.hpp
       title: utilities/int128.hpp
     - icon: ':warning:'
+      path: utilities/momentum_deque.hpp
+      title: utilities/momentum_deque.hpp
+    - icon: ':warning:'
       path: utilities/multiprecision_int.hpp
       title: utilities/multiprecision_int.hpp
     - icon: ':warning:'
@@ -414,6 +426,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow.test.cpp
       title: formal_power_series/test/fps_pow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/fps_pow_another.test.cpp
+      title: formal_power_series/test/fps_pow_another.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt.test.cpp
       title: formal_power_series/test/fps_sqrt.test.cpp

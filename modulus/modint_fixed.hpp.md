@@ -55,6 +55,9 @@ data:
     path: formal_power_series/test/fps_pow.test.cpp
     title: formal_power_series/test/fps_pow.test.cpp
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_pow_another.test.cpp
+    title: formal_power_series/test/fps_pow_another.test.cpp
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_sqrt.test.cpp
     title: formal_power_series/test/fps_sqrt.test.cpp
   - icon: ':heavy_check_mark:'
@@ -244,6 +247,7 @@ data:
   - segmenttree/test/range-affine-range-sum.test.cpp
   - formal_power_series/test/fps_pow.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
+  - formal_power_series/test/fps_pow_another.test.cpp
   - formal_power_series/test/fps_inv.test.cpp
   - formal_power_series/test/coeff_of_rational_function.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp

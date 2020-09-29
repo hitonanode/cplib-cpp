@@ -154,32 +154,32 @@ data:
     \  den[i] = conv_den_g[i * 2];\n        }\n        N >>= 1;\n    }\n    return\
     \ num[0] / den[0];\n}\n#line 5 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
     \n\nusing mint = ModInt<1000000007>;\n\n#line 9 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
-    \n\nusing namespace std;\nvector<mint> gen_dp(vector<int> v, int n)\n{\n    vector<vector<mint>>\
-    \ dp(n + 1, vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for (auto\
-    \ x : v)\n    {\n        for (int i = n - 1; i >= 0; i--)\n        {\n       \
-    \     for (int j = 0; j < dp[i].size(); j++) if (dp[i][j])\n            {\n  \
-    \              for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];\n\
-    \            }\n        }\n    }\n    return dp.back();\n}\n\nint main()\n{\n\
-    \    long long N;\n    int P, C;\n    cin >> N >> P >> C;\n    vector<mint> primes\
-    \ = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12},\
-    \ C);\n    vector<mint> f = nttconv(primes, composites);\n    vector<mint> denom\
-    \ = f;\n    for (auto &x : denom) x = -x;\n    denom[0] = 1;\n    for (int i =\
-    \ f.size() - 1; i > 1; i--) f[i - 1] += f[i];\n    cout << coefficient_of_rational_function(N,\
-    \ f, denom) << '\\n';\n}\n"
+    \n\nstd::vector<mint> gen_dp(std::vector<int> v, int n)\n{\n    std::vector<std::vector<mint>>\
+    \ dp(n + 1, std::vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for\
+    \ (auto x : v)\n    {\n        for (int i = n - 1; i >= 0; i--)\n        {\n \
+    \           for (int j = 0; j < dp[i].size(); j++) if (dp[i][j])\n           \
+    \ {\n                for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] +=\
+    \ dp[i][j];\n            }\n        }\n    }\n    return dp.back();\n}\n\nint\
+    \ main()\n{\n    long long N;\n    int P, C;\n    std::cin >> N >> P >> C;\n \
+    \   std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4,\
+    \ 6, 8, 9, 10, 12}, C);\n    std::vector<mint> f = nttconv(primes, composites);\n\
+    \    std::vector<mint> denom = f;\n    for (auto &x : denom) x = -x;\n    denom[0]\
+    \ = 1;\n    for (int i = f.size() - 1; i > 1; i--) f[i - 1] += f[i];\n    std::cout\
+    \ << coefficient_of_rational_function(N, f, denom) << '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n#include \"modulus/modint_fixed.hpp\"\
     \n#include \"convolution/ntt.hpp\"\n#include \"formal_power_series/coeff_of_rational_function.hpp\"\
-    \n\nusing mint = ModInt<1000000007>;\n\n#include <iostream>\n\nusing namespace\
-    \ std;\nvector<mint> gen_dp(vector<int> v, int n)\n{\n    vector<vector<mint>>\
-    \ dp(n + 1, vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for (auto\
+    \n\nusing mint = ModInt<1000000007>;\n\n#include <iostream>\n\nstd::vector<mint>\
+    \ gen_dp(std::vector<int> v, int n)\n{\n    std::vector<std::vector<mint>> dp(n\
+    \ + 1, std::vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for (auto\
     \ x : v)\n    {\n        for (int i = n - 1; i >= 0; i--)\n        {\n       \
     \     for (int j = 0; j < dp[i].size(); j++) if (dp[i][j])\n            {\n  \
     \              for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];\n\
     \            }\n        }\n    }\n    return dp.back();\n}\n\nint main()\n{\n\
-    \    long long N;\n    int P, C;\n    cin >> N >> P >> C;\n    vector<mint> primes\
-    \ = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12},\
-    \ C);\n    vector<mint> f = nttconv(primes, composites);\n    vector<mint> denom\
-    \ = f;\n    for (auto &x : denom) x = -x;\n    denom[0] = 1;\n    for (int i =\
-    \ f.size() - 1; i > 1; i--) f[i - 1] += f[i];\n    cout << coefficient_of_rational_function(N,\
+    \    long long N;\n    int P, C;\n    std::cin >> N >> P >> C;\n    std::vector<mint>\
+    \ primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10,\
+    \ 12}, C);\n    std::vector<mint> f = nttconv(primes, composites);\n    std::vector<mint>\
+    \ denom = f;\n    for (auto &x : denom) x = -x;\n    denom[0] = 1;\n    for (int\
+    \ i = f.size() - 1; i > 1; i--) f[i - 1] += f[i];\n    std::cout << coefficient_of_rational_function(N,\
     \ f, denom) << '\\n';\n}\n"
   dependsOn:
   - modulus/modint_fixed.hpp
@@ -188,7 +188,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/coeff_of_rational_function.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 00:37:21+09:00'
+  timestamp: '2020-09-29 20:43:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/coeff_of_rational_function.test.cpp
