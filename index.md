@@ -42,8 +42,11 @@ data:
       path: flow/maxflow.hpp
       title: flow/maxflow.hpp
     - icon: ':warning:'
-      path: flow/maxflow_acl.hpp
-      title: flow/maxflow_acl.hpp
+      path: flow/maxflow_lb.hpp
+      title: flow/maxflow_lb.hpp
+    - icon: ':warning:'
+      path: flow/maxflow_old.hpp
+      title: flow/maxflow_old.hpp
     - icon: ':question:'
       path: flow/mincostflow.hpp
       title: flow/mincostflow.hpp

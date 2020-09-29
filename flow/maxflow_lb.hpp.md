@@ -6,13 +6,12 @@ data:
     title: flow/maxflow.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
+    - https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>
+    - https://snuke.hatenablog.com/entry/2016/07/10/043918>
   bundledCode: "#line 2 \"flow/maxflow.hpp\"\n\n#include <algorithm>\n#include <cassert>\n\
     #include <limits>\n#include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder\
     \ Library, single class, no namespace, no private variables, compatible with C++11\n\
@@ -73,30 +72,51 @@ data:
     \      }\n            }\n        }\n        return visited;\n    }\n\n    int\
     \ _n;\n    struct _edge {\n        int to, rev;\n        Cap cap;\n    };\n  \
     \  std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
-    \ g;\n};\n#line 3 \"flow/test/maxflow.test.cpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
-    \n\nint main()\n{\n    int V, E;\n    std::cin >> V >> E;\n    mf_graph<int> graph(V);\n\
-    \    while (E--) {\n        int u, v, c;\n        std::cin >> u >> v >> c;\n \
-    \       graph.add_edge(u, v, c);\n    }\n    std::cout << graph.flow(0, V - 1)\
-    \ << std::endl;\n}\n"
-  code: "#include \"flow/maxflow.hpp\"\n#include <cassert>\n#include <iostream>\n\
-    #define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
-    \n\nint main()\n{\n    int V, E;\n    std::cin >> V >> E;\n    mf_graph<int> graph(V);\n\
-    \    while (E--) {\n        int u, v, c;\n        std::cin >> u >> v >> c;\n \
-    \       graph.add_edge(u, v, c);\n    }\n    std::cout << graph.flow(0, V - 1)\
-    \ << std::endl;\n}\n"
+    \ g;\n};\n#line 5 \"flow/maxflow_lb.hpp\"\n\n// CUT begin\n// MaxFlow with lower\
+    \ bound\n// <https://snuke.hatenablog.com/entry/2016/07/10/043918>\n// <https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>\n\
+    // flush(s, t): Calculate maxflow (if solution exists), -1 (otherwise)\ntemplate\
+    \ <typename Cap>\nstruct MaxFlowLowerBound {\n    int N;\n    mf_graph<Cap> mf;\n\
+    \    std::vector<Cap> in;\n    MaxFlowLowerBound(int N = 0) : N(N), mf(N + 2),\
+    \ in(N) {}\n    int add_edge(int from, int to, Cap cap_lo, Cap cap_hi)\n    {\n\
+    \        assert(0 <= from and from < N);\n        assert(0 <= to and to < N);\n\
+    \        assert(0 <= cap_lo and cap_lo <= cap_hi);\n        in[from] -= cap_lo;\n\
+    \        in[to] += cap_lo;\n        return mf.add_edge(from, to, cap_hi - cap_lo);\n\
+    \    }\n    Cap flow(int s, int t) {\n        assert(s != t);\n        assert(0\
+    \ <= s and s < N);\n        assert(0 <= t and t < N);\n        Cap sum = 0;\n\
+    \        for (int i = 0; i < N; i++) {\n            if (in[i] > 0) mf.add_edge(N,\
+    \ i, in[i]), sum += in[i];\n            if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);\n\
+    \        }\n        auto erev = mf.add_edge(t, s, numeric_limits<Cap>::max());\n\
+    \        if (mf.flow(N, N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow\
+    \ + mf.flow(s, t);\n    }\n};\n"
+  code: "#pragma once\n#include \"flow/maxflow.hpp\"\n#include <cassert>\n#include\
+    \ <vector>\n\n// CUT begin\n// MaxFlow with lower bound\n// <https://snuke.hatenablog.com/entry/2016/07/10/043918>\n\
+    // <https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>\n// flush(s,\
+    \ t): Calculate maxflow (if solution exists), -1 (otherwise)\ntemplate <typename\
+    \ Cap>\nstruct MaxFlowLowerBound {\n    int N;\n    mf_graph<Cap> mf;\n    std::vector<Cap>\
+    \ in;\n    MaxFlowLowerBound(int N = 0) : N(N), mf(N + 2), in(N) {}\n    int add_edge(int\
+    \ from, int to, Cap cap_lo, Cap cap_hi)\n    {\n        assert(0 <= from and from\
+    \ < N);\n        assert(0 <= to and to < N);\n        assert(0 <= cap_lo and cap_lo\
+    \ <= cap_hi);\n        in[from] -= cap_lo;\n        in[to] += cap_lo;\n      \
+    \  return mf.add_edge(from, to, cap_hi - cap_lo);\n    }\n    Cap flow(int s,\
+    \ int t) {\n        assert(s != t);\n        assert(0 <= s and s < N);\n     \
+    \   assert(0 <= t and t < N);\n        Cap sum = 0;\n        for (int i = 0; i\
+    \ < N; i++) {\n            if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];\n\
+    \            if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);\n        }\n      \
+    \  auto erev = mf.add_edge(t, s, numeric_limits<Cap>::max());\n        if (mf.flow(N,\
+    \ N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow + mf.flow(s,\
+    \ t);\n    }\n};\n"
   dependsOn:
   - flow/maxflow.hpp
-  isVerificationFile: true
-  path: flow/test/maxflow.test.cpp
+  isVerificationFile: false
+  path: flow/maxflow_lb.hpp
   requiredBy: []
   timestamp: '2020-09-29 15:34:27+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: flow/test/maxflow.test.cpp
+documentation_of: flow/maxflow_lb.hpp
 layout: document
 redirect_from:
-- /verify/flow/test/maxflow.test.cpp
-- /verify/flow/test/maxflow.test.cpp.html
-title: flow/test/maxflow.test.cpp
+- /library/flow/maxflow_lb.hpp
+- /library/flow/maxflow_lb.hpp.html
+title: flow/maxflow_lb.hpp
 ---
