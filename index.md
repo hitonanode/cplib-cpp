@@ -38,6 +38,9 @@ data:
       title: convolution/integer_convolution/integer_convolution.hpp
   - name: flow
     pages:
+    - icon: ':x:'
+      path: flow/b-flow.hpp
+      title: flow/b-flow.hpp
     - icon: ':heavy_check_mark:'
       path: flow/maxflow.hpp
       title: flow/maxflow.hpp
@@ -50,6 +53,9 @@ data:
     - icon: ':question:'
       path: flow/mincostflow.hpp
       title: flow/mincostflow.hpp
+    - icon: ':heavy_check_mark:'
+      path: flow/mincostflow_bellmanford.hpp
+      title: flow/mincostflow_bellmanford.hpp
   - name: formal_power_series
     pages:
     - icon: ':heavy_check_mark:'

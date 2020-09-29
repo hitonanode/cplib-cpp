@@ -1,24 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
-    path: flow/b-flow.hpp
-    title: flow/b-flow.hpp
   - icon: ':question:'
     path: flow/mincostflow.hpp
     title: flow/mincostflow.hpp
-  - icon: ':x:'
-    path: utilities/int128.hpp
-    title: utilities/int128.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _pathExtension: cpp
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: flow/test/min_cost_b_flow.test.cpp
+    title: flow/test/min_cost_b_flow.test.cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/min_cost_b_flow
-    links:
-    - https://judge.yosupo.jp/problem/min_cost_b_flow
+    links: []
   bundledCode: "#line 2 \"flow/mincostflow.hpp\"\n#include <algorithm>\n#include <cassert>\n\
     #include <limits>\n#include <queue>\n#include <vector>\n\n// CUT begin\n// MinCostFlow\
     \ based on AtCoder Library, no namespace, no private variables, compatible with\
@@ -123,62 +117,57 @@ data:
     \ bsum);\n        f = fbias;\n        for (int i = 0; i < E; i++) {\n        \
     \    const std::pair<int, int> &p = mcf.pos[i];\n            f[i] -= fdir[i] *\
     \ mcf.g[p.first][p.second].cap;\n        }\n        return std::make_pair(succeeded,\
-    \ cost_ret);\n    }\n};\n#line 2 \"utilities/int128.hpp\"\n\n#line 4 \"utilities/int128.hpp\"\
-    \n#include <iostream>\n#line 6 \"utilities/int128.hpp\"\n#include <string>\n#line\
-    \ 8 \"utilities/int128.hpp\"\n\ntemplate <>\nstruct std::numeric_limits<__int128>\n\
-    {\n    static __int128 max() noexcept { return ((__int128(1) << 126) - 1) * 2\
-    \ + 1; }\n    static __int128 min() noexcept { return -max() - 1; }\n    static\
-    \ __int128 lowest() noexcept { return min(); }\n};\n__int128 str2i128(std::string\
-    \ str)\n{\n    __int128 ret = 0;\n    bool minus = false;\n    for (auto c : str)\n\
-    \    {\n        if (c == '-') minus = true;\n        else ret = ret * 10 + c -\
-    \ '0';\n    }\n    return minus ? -ret : ret;\n}\nstd::istream &operator>>(std::istream\
-    \ &is, __int128 &x)\n{\n    std::string s;\n    is >> s;\n    x = str2i128(s);\n\
-    \    return is;\n}\nstd::ostream &operator<<(std::ostream &os, const __int128&\
-    \ x)\n{\n    __int128 tmp = x;\n    if (tmp == 0) return os << 0;\n    std::vector<int>\
-    \ ds;\n    if (tmp < 0)\n    {\n        os << '-';\n        while (tmp)\n    \
-    \    {\n            int d = tmp % 10;\n            if (d > 0) d -= 10;\n     \
-    \       ds.emplace_back(-d), tmp = (tmp - d) / 10;\n        }\n    }\n    else\n\
-    \    {\n        while (tmp) ds.emplace_back(tmp % 10), tmp /= 10;\n    }\n   \
-    \ std::reverse(ds.begin(), ds.end());\n    for (auto i : ds) os << i;\n    return\
-    \ os;\n}\n#line 3 \"flow/test/min_cost_b_flow.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\
-    \n\nusing namespace std;\n\nint main()\n{\n    int N, M;\n    cin >> N >> M;\n\
-    \    B_Flow<long long, __int128> bflow(N);\n\n    constexpr __int128 plim = 1000000000000000;\n\
-    \    for (int i = 0; i < N; i++)\n    {\n        int b;\n        cin >> b;\n \
-    \       bflow.add_supply(i, b);\n    }\n    for (int i = 0; i < M; i++)\n    {\n\
-    \        int s, t, l, u;\n        __int128 c;\n        cin >> s >> t >> l >> u\
-    \ >> c;\n        bflow.add_edge(s, t, l, u, c);\n    }\n    auto ret = bflow.solve();\n\
-    \    if (ret.first)\n    {\n        cout << ret.second << '\\n';\n        for\
-    \ (int i = 0; i < N; i++)\n        {\n            cout << clamp(bflow.potential[i],\
-    \ -plim, plim) << '\\n';\n        }\n        for (int i = 0; i < M; i++)\n   \
-    \     {\n            cout << bflow.f[i] << '\\n';\n        }\n    }\n    else\n\
-    \    {\n        cout << \"infeasible\\n\";\n    }\n}\n"
-  code: "#include \"flow/b-flow.hpp\"\n#include \"utilities/int128.hpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n\nusing namespace\
-    \ std;\n\nint main()\n{\n    int N, M;\n    cin >> N >> M;\n    B_Flow<long long,\
-    \ __int128> bflow(N);\n\n    constexpr __int128 plim = 1000000000000000;\n   \
-    \ for (int i = 0; i < N; i++)\n    {\n        int b;\n        cin >> b;\n    \
-    \    bflow.add_supply(i, b);\n    }\n    for (int i = 0; i < M; i++)\n    {\n\
-    \        int s, t, l, u;\n        __int128 c;\n        cin >> s >> t >> l >> u\
-    \ >> c;\n        bflow.add_edge(s, t, l, u, c);\n    }\n    auto ret = bflow.solve();\n\
-    \    if (ret.first)\n    {\n        cout << ret.second << '\\n';\n        for\
-    \ (int i = 0; i < N; i++)\n        {\n            cout << clamp(bflow.potential[i],\
-    \ -plim, plim) << '\\n';\n        }\n        for (int i = 0; i < M; i++)\n   \
-    \     {\n            cout << bflow.f[i] << '\\n';\n        }\n    }\n    else\n\
-    \    {\n        cout << \"infeasible\\n\";\n    }\n}\n"
+    \ cost_ret);\n    }\n};\n"
+  code: "#pragma once\n#include \"flow/mincostflow.hpp\"\n#include <algorithm>\n#include\
+    \ <vector>\n\n\ntemplate <typename CAP, typename COST>\nstruct B_Flow\n{\n   \
+    \ int N, E;\n    COST cost_bias;\n    bool infeasible;\n    mcf_graph<CAP, COST>\
+    \ mcf;\n    std::vector<CAP> b;\n    std::vector<CAP> fbias;\n    std::vector<int>\
+    \ fdir;\n    std::vector<CAP> f;\n    const std::vector<COST> &potential;\n\n\
+    \    B_Flow(int N = 0) : N(N), E(0), cost_bias(0), infeasible(false), mcf(N +\
+    \ 2), b(N), potential(mcf.dual) {}\n\n    void add_supply(int v, CAP supply) {\
+    \ b[v] += supply; }\n    void add_demand(int v, CAP demand) { b[v] -= demand;\
+    \ }\n    void add_edge(int s, int t, CAP lower_cap, CAP upper_cap, COST cost)\
+    \ {\n        assert(s >= 0 and s < N);\n        assert(t >= 0 and t < N);\n  \
+    \      if (lower_cap > upper_cap) {\n            infeasible = true;\n        \
+    \    return;\n        }\n        E++;\n        if (s == t) {\n            if (cost\
+    \ > 0) upper_cap = lower_cap;\n            else lower_cap = upper_cap;\n     \
+    \   }\n        if (cost < 0) {\n            fbias.emplace_back(lower_cap);\n \
+    \           fdir.emplace_back(-1);\n            cost_bias += cost * upper_cap;\n\
+    \            b[s] -= upper_cap;\n            b[t] += upper_cap;\n            mcf.add_edge(t,\
+    \ s, upper_cap - lower_cap, -cost);\n        } else {\n            fbias.emplace_back(upper_cap);\n\
+    \            fdir.emplace_back(1);\n            if (lower_cap < 0) {\n       \
+    \         cost_bias += cost * lower_cap, b[s] -= lower_cap, b[t] += lower_cap;\n\
+    \                upper_cap -= lower_cap, lower_cap = 0;\n            }\n     \
+    \       if (lower_cap > 0) {\n                cost_bias += cost * lower_cap;\n\
+    \                b[s] -= lower_cap;\n                b[t] += lower_cap;\n    \
+    \            upper_cap -= lower_cap;\n            }\n            mcf.add_edge(s,\
+    \ t, upper_cap, cost);\n        }\n    }\n\n    std::pair<bool, COST> solve()\
+    \ {\n        if (infeasible) {\n            return std::make_pair(false, 0);\n\
+    \        }\n        CAP bsum = 0, bsum_negative = 0;\n        for (int i = 0;\
+    \ i < N; i++) {\n            if (b[i] > 0) {\n                mcf.add_edge(N,\
+    \ i, b[i], 0), bsum += b[i];\n            }\n            if (b[i] < 0) {\n   \
+    \             mcf.add_edge(i, N + 1, -b[i], 0), bsum_negative -= b[i];\n     \
+    \       }\n        }\n        if (bsum != bsum_negative) {\n            return\
+    \ std::make_pair(false, 0);\n        }\n        std::fill(b.begin(), b.end(),\
+    \ 0);\n        auto ret = mcf.flow(N, N + 1, bsum);\n        COST cost_ret = cost_bias\
+    \ + ret.second;\n        cost_bias = 0;\n        bool succeeded = (ret.first ==\
+    \ bsum);\n        f = fbias;\n        for (int i = 0; i < E; i++) {\n        \
+    \    const std::pair<int, int> &p = mcf.pos[i];\n            f[i] -= fdir[i] *\
+    \ mcf.g[p.first][p.second].cap;\n        }\n        return std::make_pair(succeeded,\
+    \ cost_ret);\n    }\n};\n"
   dependsOn:
-  - flow/b-flow.hpp
   - flow/mincostflow.hpp
-  - utilities/int128.hpp
-  isVerificationFile: true
-  path: flow/test/min_cost_b_flow.test.cpp
+  isVerificationFile: false
+  path: flow/b-flow.hpp
   requiredBy: []
   timestamp: '2020-09-29 17:16:20+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: flow/test/min_cost_b_flow.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - flow/test/min_cost_b_flow.test.cpp
+documentation_of: flow/b-flow.hpp
 layout: document
 redirect_from:
-- /verify/flow/test/min_cost_b_flow.test.cpp
-- /verify/flow/test/min_cost_b_flow.test.cpp.html
-title: flow/test/min_cost_b_flow.test.cpp
+- /library/flow/b-flow.hpp
+- /library/flow/b-flow.hpp.html
+title: flow/b-flow.hpp
 ---

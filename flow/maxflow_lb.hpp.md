@@ -15,7 +15,7 @@ data:
   bundledCode: "#line 2 \"flow/maxflow.hpp\"\n\n#include <algorithm>\n#include <cassert>\n\
     #include <limits>\n#include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder\
     \ Library, single class, no namespace, no private variables, compatible with C++11\n\
-    // Document: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
+    // Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
     template <class Cap>\nstruct mf_graph {\n    struct simple_queue_int {\n     \
     \   std::vector<int> payload;\n        int pos = 0;\n        void reserve(int\
     \ n) { payload.reserve(n); }\n        int size() const { return int(payload.size())\
@@ -110,7 +110,7 @@ data:
   isVerificationFile: false
   path: flow/maxflow_lb.hpp
   requiredBy: []
-  timestamp: '2020-09-29 15:34:27+09:00'
+  timestamp: '2020-09-29 16:42:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: flow/maxflow_lb.hpp
