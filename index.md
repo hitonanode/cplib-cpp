@@ -367,8 +367,8 @@ data:
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
     - icon: ':warning:'
-      path: utilities/timelimit.cpp
-      title: utilities/timelimit.cpp
+      path: utilities/timer.hpp
+      title: utilities/timer.hpp
   verificationCategories:
   - name: convex_hull_trick/test
     pages:
