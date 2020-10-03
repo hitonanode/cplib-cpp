@@ -31,6 +31,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/subset_convolution.hpp
       title: convolution/subset_convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: convolution/walsh-hadamard.hpp
+      title: convolution/walsh-hadamard.hpp
   - name: convolution/integer_convolution
     pages:
     - icon: ':warning:'
@@ -386,6 +389,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/subset_convolution.test.cpp
       title: convolution/test/subset_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: convolution/test/walsh-hadamard_xor.test.cpp
+      title: convolution/test/walsh-hadamard_xor.test.cpp
   - name: flow/test
     pages:
     - icon: ':heavy_check_mark:'
