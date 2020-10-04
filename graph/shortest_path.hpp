@@ -1,5 +1,6 @@
 #pragma once
 #include <cassert>
+#include <deque>
 #include <functional>
 #include <limits>
 #include <queue>
@@ -73,6 +74,31 @@ struct ShortestPath
         }
         return false;
     }
+
+    void ZeroOneBFS(int s) {
+        assert(0 <= s and s < V);
+        dist.assign(V, std::numeric_limits<T>::max());
+        dist[s] = 0;
+        prev.assign(V, INVALID);
+        std::deque<int> que;
+        que.push_back(s);
+        while (!que.empty()) {
+            int v = que.front();
+            que.pop_front();
+            for (auto nx : to[v]) {
+                T dnx = dist[v] + nx.second;
+                if (dist[nx.first] > dnx) {
+                    dist[nx.first] = dnx, prev[nx.first] = v;
+                    if (nx.second) {
+                        que.push_back(nx.first);
+                    } else {
+                        que.push_front(nx.first);
+                    }
+                }
+            }
+        }
+    }
+
     // Warshall-Floyd algorithm
     // Complexity: O(E + V^3)
     std::vector<std::vector<T>> dist2d;
