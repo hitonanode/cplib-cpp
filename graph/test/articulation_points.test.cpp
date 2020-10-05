@@ -12,8 +12,7 @@ int main()
         std::cin >> s >> t;
         graph.add_edge(s, t);
     }
-    graph.dfs_lowlink(0);
-    graph.detectArticulation();
+    graph.detectBridge();
     for (int i = 0; i < V; i++) {
         if (graph.is_articulation[i]) {
             printf("%d\n", i);

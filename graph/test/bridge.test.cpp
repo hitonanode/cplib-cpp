@@ -16,7 +16,6 @@ int main()
         if (s > t) std::swap(s, t);
         graph.add_edge(s, t);
     }
-    graph.dfs_lowlink(0);
     graph.detectBridge();
 
     std::vector<std::pair<int, int>> bridges;

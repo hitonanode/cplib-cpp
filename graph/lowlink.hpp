@@ -9,12 +9,11 @@
 // CUT begin
 struct UndirectedGraph
 {
-    using pint = std::pair<int, int>;
     int V; // # of vertices
     int E; // # of edges
     int k;
-    std::vector<std::vector<pint>> to;
-    std::vector<pint> edges;
+    std::vector<std::vector<std::pair<int, int>>> to;
+    std::vector<std::pair<int, int>> edges;
     std::vector<int> root_ids; // DFS forestの構築で根になった頂点
 
     std::vector<int> is_bridge; // Whether edge i is bridge or not, size = E
@@ -25,10 +24,13 @@ struct UndirectedGraph
     std::vector<int> lowlink; // size = V
     std::vector<int> is_dfstree_edge; // size = E
 
-    int tecc_num; // 分割された二重辺連結成分数
+    int tecc_num; // 二重辺連結成分数
     std::vector<int> tecc_id; // 各頂点が何個目の二重辺連結成分か
 
-    UndirectedGraph(int V) : V(V), E(0), k(0), to(V),  order(V, -1), lowlink(V, -1) {}
+    int tvcc_num; // 二重頂点連結成分数
+    std::vector<int> tvcc_id; // 各辺が何個目の二重頂点連結成分か
+
+    UndirectedGraph(int V) : V(V), E(0), k(0), to(V), is_articulation(V, 0), order(V, -1), lowlink(V, -1), tecc_num(0), tvcc_num(0) {}
 
     void add_edge(int v1, int v2)
     {
@@ -39,17 +41,23 @@ struct UndirectedGraph
         edges.emplace_back(v1, v2);
         is_bridge.push_back(0);
         is_dfstree_edge.push_back(0);
+        tvcc_id.push_back(-1);
         E++;
     }
+
+    std::vector<int> _edge_stack;
+    int _root_now;
 
     // Build DFS tree
     // Complexity: O(V + E)
     void dfs_lowlink(int now, int prv_eid = -1)
     {
+        if (prv_eid < 0) _root_now = k;
         if (prv_eid == -1) root_ids.push_back(now);
         order[now] = lowlink[now] = k++;
         for (const auto &nxt : to[now]) if (nxt.second != prv_eid)
         {
+            if (order[nxt.first] < order[now]) _edge_stack.push_back(nxt.second);
             if (order[nxt.first] >= 0)
             {
                 lowlink[now] = std::min(lowlink[now], order[nxt.first]);
@@ -59,6 +67,21 @@ struct UndirectedGraph
                 is_dfstree_edge[nxt.second] = 1;
                 dfs_lowlink(nxt.first, nxt.second);
                 lowlink[now] = std::min(lowlink[now], lowlink[nxt.first]);
+
+                if ((order[now] == _root_now and order[nxt.first] != _root_now + 1) or (order[now] != _root_now and lowlink[nxt.first] >= order[now])) {
+                    is_articulation[now] = 1;
+                }
+                if (lowlink[nxt.first] >= order[now]) {
+                    while (true) {
+                        int e = _edge_stack.back();
+                        tvcc_id[e] = tvcc_num;
+                        _edge_stack.pop_back();
+                        if (std::minmax(edges[e].first, edges[e].second) == std::minmax(now, nxt.first)) {
+                            break;
+                        }
+                    }
+                    tvcc_num++;
+                }
             }
         }
     }
@@ -101,29 +124,6 @@ struct UndirectedGraph
                 }
             }
             tecc_num++;
-        }
-    }
-
-
-    void detectArticulation()
-    {
-        std::sort(root_ids.begin(), root_ids.end());
-        is_articulation.assign(V, 0);
-        for (int v = 0; v < V; v++)
-        {
-            if (std::binary_search(root_ids.begin(), root_ids.end(), v))
-            {
-                int n = 0;
-                for (auto edge : to[v]) n += is_dfstree_edge[edge.second];
-                if (n > 1) is_articulation[v] = 1;
-            }
-            else
-            {
-                for (auto e : to[v])
-                {
-                    if (is_dfstree_edge[e.second] and order[v] <= lowlink[e.first]) is_articulation[v] = 1;
-                }
-            }
         }
     }
 };

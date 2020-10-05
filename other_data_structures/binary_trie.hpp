@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 
+// CUT begin
 struct BinaryTrie
 {
     using Int = int;
