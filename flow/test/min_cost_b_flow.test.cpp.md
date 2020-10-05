@@ -125,7 +125,7 @@ data:
     \ mcf.g[p.first][p.second].cap;\n        }\n        return std::make_pair(succeeded,\
     \ cost_ret);\n    }\n};\n#line 2 \"utilities/int128.hpp\"\n\n#line 4 \"utilities/int128.hpp\"\
     \n#include <iostream>\n#line 6 \"utilities/int128.hpp\"\n#include <string>\n#line\
-    \ 8 \"utilities/int128.hpp\"\n\ntemplate <>\nstruct std::numeric_limits<__int128>\n\
+    \ 8 \"utilities/int128.hpp\"\n\n// CUT begin\ntemplate <>\nstruct std::numeric_limits<__int128>\n\
     {\n    static __int128 max() noexcept { return ((__int128(1) << 126) - 1) * 2\
     \ + 1; }\n    static __int128 min() noexcept { return -max() - 1; }\n    static\
     \ __int128 lowest() noexcept { return min(); }\n};\n__int128 str2i128(std::string\
@@ -172,7 +172,7 @@ data:
   isVerificationFile: true
   path: flow/test/min_cost_b_flow.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 17:16:20+09:00'
+  timestamp: '2020-10-06 01:41:58+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: flow/test/min_cost_b_flow.test.cpp

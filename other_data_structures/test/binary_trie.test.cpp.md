@@ -14,16 +14,16 @@ data:
     links:
     - https://judge.yosupo.jp/problem/set_xor_min
   bundledCode: "#line 2 \"other_data_structures/binary_trie.hpp\"\n#include <vector>\n\
-    \nstruct BinaryTrie\n{\n    using Int = int;\n    int maxD;\n    std::vector<int>\
-    \ deg, sz;\n    std::vector<int> ch0, ch1, par;\n\n    int _new_node(int id_par)\n\
-    \    {\n        deg.emplace_back(0);\n        sz.emplace_back(0);\n        ch0.emplace_back(-1);\n\
-    \        ch1.emplace_back(-1);\n        par.emplace_back(id_par);\n        return\
-    \ ch0.size() - 1;\n    }\n\n    BinaryTrie(int maxD = 0) : maxD(maxD)\n    {\n\
-    \        _new_node(-1);\n    }\n    int _goto(Int x)\n    {\n        int now =\
-    \ 0;\n        for (int d = maxD - 1; d >= 0; d--)\n        {\n            int\
-    \ nxt = ((x >> d) & 1) ? ch1[now] : ch0[now];\n            if (nxt == -1)\n  \
-    \          {\n                nxt = _new_node(now);\n                (((x >> d)\
-    \ & 1) ? ch1[now] : ch0[now]) = nxt;\n            }\n            now = nxt;\n\
+    \n// CUT begin\nstruct BinaryTrie\n{\n    using Int = int;\n    int maxD;\n  \
+    \  std::vector<int> deg, sz;\n    std::vector<int> ch0, ch1, par;\n\n    int _new_node(int\
+    \ id_par)\n    {\n        deg.emplace_back(0);\n        sz.emplace_back(0);\n\
+    \        ch0.emplace_back(-1);\n        ch1.emplace_back(-1);\n        par.emplace_back(id_par);\n\
+    \        return ch0.size() - 1;\n    }\n\n    BinaryTrie(int maxD = 0) : maxD(maxD)\n\
+    \    {\n        _new_node(-1);\n    }\n    int _goto(Int x)\n    {\n        int\
+    \ now = 0;\n        for (int d = maxD - 1; d >= 0; d--)\n        {\n         \
+    \   int nxt = ((x >> d) & 1) ? ch1[now] : ch0[now];\n            if (nxt == -1)\n\
+    \            {\n                nxt = _new_node(now);\n                (((x >>\
+    \ d) & 1) ? ch1[now] : ch0[now]) = nxt;\n            }\n            now = nxt;\n\
     \        }\n        return now;\n    }\n\n    void insert(Int x)\n    {\n    \
     \    int now = _goto(x);\n        if (deg[now] == 0)\n        {\n            deg[now]\
     \ = 1;\n            while (now >= 0)\n            {\n                sz[now]++,\
@@ -55,7 +55,7 @@ data:
   isVerificationFile: true
   path: other_data_structures/test/binary_trie.test.cpp
   requiredBy: []
-  timestamp: '2020-09-05 13:06:28+09:00'
+  timestamp: '2020-10-06 01:41:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: other_data_structures/test/binary_trie.test.cpp
