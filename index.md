@@ -370,6 +370,9 @@ data:
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
     - icon: ':warning:'
+      path: utilities/rotate90.hpp
+      title: utilities/rotate90.hpp
+    - icon: ':warning:'
       path: utilities/timer.hpp
       title: utilities/timer.hpp
   verificationCategories:
