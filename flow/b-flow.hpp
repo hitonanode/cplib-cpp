@@ -4,6 +4,7 @@
 #include <vector>
 
 
+// CUT begin
 template <typename CAP, typename COST>
 struct B_Flow
 {
@@ -15,9 +16,9 @@ struct B_Flow
     std::vector<CAP> fbias;
     std::vector<int> fdir;
     std::vector<CAP> f;
-    const std::vector<COST> &potential;
+    std::vector<COST> potential;
 
-    B_Flow(int N = 0) : N(N), E(0), cost_bias(0), infeasible(false), mcf(N + 2), b(N), potential(mcf.dual) {}
+    B_Flow(int N = 0) : N(N), E(0), cost_bias(0), infeasible(false), mcf(N + 2), b(N) {}
 
     void add_supply(int v, CAP supply) { b[v] += supply; }
     void add_demand(int v, CAP demand) { b[v] -= demand; }
@@ -75,6 +76,7 @@ struct B_Flow
         }
         std::fill(b.begin(), b.end(), 0);
         auto ret = mcf.flow(N, N + 1, bsum);
+        potential = mcf.dual, potential.resize(N);
         COST cost_ret = cost_bias + ret.second;
         cost_bias = 0;
         bool succeeded = (ret.first == bsum);
