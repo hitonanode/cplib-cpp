@@ -106,8 +106,8 @@ data:
   timestamp: '2020-04-19 12:18:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/miller-rabin.test.cpp
   - number/test/factorize_longlong.test.cpp
+  - number/test/miller-rabin.test.cpp
 documentation_of: number/factorize.hpp
 layout: document
 redirect_from:

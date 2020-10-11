@@ -186,8 +186,8 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 documentation_of: linear_algebra_matrix/linalg_modint.hpp
 layout: document
 redirect_from:

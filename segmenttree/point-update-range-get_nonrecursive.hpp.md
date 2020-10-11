@@ -199,8 +199,8 @@ data:
   timestamp: '2020-09-19 23:25:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - segmenttree/test/point-set-range-composite.test.cpp
   - segmenttree/test/rmq_nonrecursive.test.cpp
+  - segmenttree/test/point-set-range-composite.test.cpp
   - segmenttree/test/countandsumlessthan.test.cpp
   - graph-tree/test/vertex-add-subtree-sum.test.cpp
 documentation_of: segmenttree/point-update-range-get_nonrecursive.hpp

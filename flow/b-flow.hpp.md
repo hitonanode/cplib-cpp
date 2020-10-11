@@ -83,12 +83,12 @@ data:
     \    }\n\n    struct _edge {\n        int to, rev;\n        Cap cap;\n       \
     \ Cost cost;\n    };\n\n    int _n;\n    std::vector<std::pair<int, int>> pos;\n\
     \    std::vector<std::vector<_edge>> g;\n};\n#line 5 \"flow/b-flow.hpp\"\n\n\n\
-    template <typename CAP, typename COST>\nstruct B_Flow\n{\n    int N, E;\n    COST\
-    \ cost_bias;\n    bool infeasible;\n    mcf_graph<CAP, COST> mcf;\n    std::vector<CAP>\
-    \ b;\n    std::vector<CAP> fbias;\n    std::vector<int> fdir;\n    std::vector<CAP>\
-    \ f;\n    const std::vector<COST> &potential;\n\n    B_Flow(int N = 0) : N(N),\
-    \ E(0), cost_bias(0), infeasible(false), mcf(N + 2), b(N), potential(mcf.dual)\
-    \ {}\n\n    void add_supply(int v, CAP supply) { b[v] += supply; }\n    void add_demand(int\
+    // CUT begin\ntemplate <typename CAP, typename COST>\nstruct B_Flow\n{\n    int\
+    \ N, E;\n    COST cost_bias;\n    bool infeasible;\n    mcf_graph<CAP, COST> mcf;\n\
+    \    std::vector<CAP> b;\n    std::vector<CAP> fbias;\n    std::vector<int> fdir;\n\
+    \    std::vector<CAP> f;\n    std::vector<COST> potential;\n\n    B_Flow(int N\
+    \ = 0) : N(N), E(0), cost_bias(0), infeasible(false), mcf(N + 2), b(N) {}\n\n\
+    \    void add_supply(int v, CAP supply) { b[v] += supply; }\n    void add_demand(int\
     \ v, CAP demand) { b[v] -= demand; }\n    void add_edge(int s, int t, CAP lower_cap,\
     \ CAP upper_cap, COST cost) {\n        assert(s >= 0 and s < N);\n        assert(t\
     \ >= 0 and t < N);\n        if (lower_cap > upper_cap) {\n            infeasible\
@@ -112,27 +112,26 @@ data:
     \             mcf.add_edge(i, N + 1, -b[i], 0), bsum_negative -= b[i];\n     \
     \       }\n        }\n        if (bsum != bsum_negative) {\n            return\
     \ std::make_pair(false, 0);\n        }\n        std::fill(b.begin(), b.end(),\
-    \ 0);\n        auto ret = mcf.flow(N, N + 1, bsum);\n        COST cost_ret = cost_bias\
-    \ + ret.second;\n        cost_bias = 0;\n        bool succeeded = (ret.first ==\
-    \ bsum);\n        f = fbias;\n        for (int i = 0; i < E; i++) {\n        \
-    \    const std::pair<int, int> &p = mcf.pos[i];\n            f[i] -= fdir[i] *\
-    \ mcf.g[p.first][p.second].cap;\n        }\n        return std::make_pair(succeeded,\
-    \ cost_ret);\n    }\n};\n"
+    \ 0);\n        auto ret = mcf.flow(N, N + 1, bsum);\n        potential = mcf.dual,\
+    \ potential.resize(N);\n        COST cost_ret = cost_bias + ret.second;\n    \
+    \    cost_bias = 0;\n        bool succeeded = (ret.first == bsum);\n        f\
+    \ = fbias;\n        for (int i = 0; i < E; i++) {\n            const std::pair<int,\
+    \ int> &p = mcf.pos[i];\n            f[i] -= fdir[i] * mcf.g[p.first][p.second].cap;\n\
+    \        }\n        return std::make_pair(succeeded, cost_ret);\n    }\n};\n"
   code: "#pragma once\n#include \"flow/mincostflow.hpp\"\n#include <algorithm>\n#include\
-    \ <vector>\n\n\ntemplate <typename CAP, typename COST>\nstruct B_Flow\n{\n   \
-    \ int N, E;\n    COST cost_bias;\n    bool infeasible;\n    mcf_graph<CAP, COST>\
-    \ mcf;\n    std::vector<CAP> b;\n    std::vector<CAP> fbias;\n    std::vector<int>\
-    \ fdir;\n    std::vector<CAP> f;\n    const std::vector<COST> &potential;\n\n\
-    \    B_Flow(int N = 0) : N(N), E(0), cost_bias(0), infeasible(false), mcf(N +\
-    \ 2), b(N), potential(mcf.dual) {}\n\n    void add_supply(int v, CAP supply) {\
-    \ b[v] += supply; }\n    void add_demand(int v, CAP demand) { b[v] -= demand;\
-    \ }\n    void add_edge(int s, int t, CAP lower_cap, CAP upper_cap, COST cost)\
-    \ {\n        assert(s >= 0 and s < N);\n        assert(t >= 0 and t < N);\n  \
-    \      if (lower_cap > upper_cap) {\n            infeasible = true;\n        \
-    \    return;\n        }\n        E++;\n        if (s == t) {\n            if (cost\
-    \ > 0) upper_cap = lower_cap;\n            else lower_cap = upper_cap;\n     \
-    \   }\n        if (cost < 0) {\n            fbias.emplace_back(lower_cap);\n \
-    \           fdir.emplace_back(-1);\n            cost_bias += cost * upper_cap;\n\
+    \ <vector>\n\n\n// CUT begin\ntemplate <typename CAP, typename COST>\nstruct B_Flow\n\
+    {\n    int N, E;\n    COST cost_bias;\n    bool infeasible;\n    mcf_graph<CAP,\
+    \ COST> mcf;\n    std::vector<CAP> b;\n    std::vector<CAP> fbias;\n    std::vector<int>\
+    \ fdir;\n    std::vector<CAP> f;\n    std::vector<COST> potential;\n\n    B_Flow(int\
+    \ N = 0) : N(N), E(0), cost_bias(0), infeasible(false), mcf(N + 2), b(N) {}\n\n\
+    \    void add_supply(int v, CAP supply) { b[v] += supply; }\n    void add_demand(int\
+    \ v, CAP demand) { b[v] -= demand; }\n    void add_edge(int s, int t, CAP lower_cap,\
+    \ CAP upper_cap, COST cost) {\n        assert(s >= 0 and s < N);\n        assert(t\
+    \ >= 0 and t < N);\n        if (lower_cap > upper_cap) {\n            infeasible\
+    \ = true;\n            return;\n        }\n        E++;\n        if (s == t) {\n\
+    \            if (cost > 0) upper_cap = lower_cap;\n            else lower_cap\
+    \ = upper_cap;\n        }\n        if (cost < 0) {\n            fbias.emplace_back(lower_cap);\n\
+    \            fdir.emplace_back(-1);\n            cost_bias += cost * upper_cap;\n\
     \            b[s] -= upper_cap;\n            b[t] += upper_cap;\n            mcf.add_edge(t,\
     \ s, upper_cap - lower_cap, -cost);\n        } else {\n            fbias.emplace_back(upper_cap);\n\
     \            fdir.emplace_back(1);\n            if (lower_cap < 0) {\n       \
@@ -149,18 +148,18 @@ data:
     \             mcf.add_edge(i, N + 1, -b[i], 0), bsum_negative -= b[i];\n     \
     \       }\n        }\n        if (bsum != bsum_negative) {\n            return\
     \ std::make_pair(false, 0);\n        }\n        std::fill(b.begin(), b.end(),\
-    \ 0);\n        auto ret = mcf.flow(N, N + 1, bsum);\n        COST cost_ret = cost_bias\
-    \ + ret.second;\n        cost_bias = 0;\n        bool succeeded = (ret.first ==\
-    \ bsum);\n        f = fbias;\n        for (int i = 0; i < E; i++) {\n        \
-    \    const std::pair<int, int> &p = mcf.pos[i];\n            f[i] -= fdir[i] *\
-    \ mcf.g[p.first][p.second].cap;\n        }\n        return std::make_pair(succeeded,\
-    \ cost_ret);\n    }\n};\n"
+    \ 0);\n        auto ret = mcf.flow(N, N + 1, bsum);\n        potential = mcf.dual,\
+    \ potential.resize(N);\n        COST cost_ret = cost_bias + ret.second;\n    \
+    \    cost_bias = 0;\n        bool succeeded = (ret.first == bsum);\n        f\
+    \ = fbias;\n        for (int i = 0; i < E; i++) {\n            const std::pair<int,\
+    \ int> &p = mcf.pos[i];\n            f[i] -= fdir[i] * mcf.g[p.first][p.second].cap;\n\
+    \        }\n        return std::make_pair(succeeded, cost_ret);\n    }\n};\n"
   dependsOn:
   - flow/mincostflow.hpp
   isVerificationFile: false
   path: flow/b-flow.hpp
   requiredBy: []
-  timestamp: '2020-09-29 17:16:20+09:00'
+  timestamp: '2020-10-11 20:57:52+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - flow/test/min_cost_b_flow.test.cpp

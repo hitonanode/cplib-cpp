@@ -169,13 +169,13 @@ data:
   timestamp: '2020-03-07 22:54:47+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - convolution/test/ntt_arbitrary_mod.test.cpp
+  - convolution/test/ntt.test.cpp
+  - modulus/test/sqrt_modint_runtime.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - convolution/test/ntt.test.cpp
-  - convolution/test/ntt_arbitrary_mod.test.cpp
-  - modulus/test/sqrt_modint_runtime.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 documentation_of: modulus/modint_runtime.hpp
 layout: document
 redirect_from:
