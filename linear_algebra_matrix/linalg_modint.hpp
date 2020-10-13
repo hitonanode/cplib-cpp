@@ -109,6 +109,31 @@ struct matrix
         for (int i = 0; i < H; i++) ret *= get(i, i);
         return ret;
     }
+    int inverse() {
+        assert(H == W);
+        std::vector<std::vector<T>> ret = Identity(H), tmp = *this;
+        int rank = 0;
+        for (int i = 0; i < H; i++) {
+            int ti = i;
+            while (ti < H and tmp[ti][i] == 0) ti++;
+            if (ti == H) continue;
+            else rank++;
+            std::swap(ret[i], ret[ti]), std::swap(tmp[i], tmp[ti]);
+            T inv = tmp[i][i].inv();
+            for (int j = 0; j < W; j++) {
+                ret[i][j] *= inv, tmp[i][j] *= inv;
+            }
+            for (int h = 0; h < H; h++) {
+                if (i == h) continue;
+                const T c = -tmp[h][i];
+                for (int j = 0; j < W; j++) {
+                    ret[h][j] += ret[i][j] * c, tmp[h][j] += tmp[i][j] * c;
+                }
+            }
+        }
+        *this = ret;
+        return rank;
+    }
     friend std::vector<T> operator*(const matrix &m, const std::vector<T> &v) {
         assert(m.W == int(v.size()));
         std::vector<T> ret(m.H);
