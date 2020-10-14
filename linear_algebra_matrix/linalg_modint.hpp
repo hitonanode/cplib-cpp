@@ -118,16 +118,22 @@ struct matrix
             while (ti < H and tmp[ti][i] == 0) ti++;
             if (ti == H) continue;
             else rank++;
-            std::swap(ret[i], ret[ti]), std::swap(tmp[i], tmp[ti]);
+            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);
             T inv = tmp[i][i].inv();
             for (int j = 0; j < W; j++) {
-                ret[i][j] *= inv, tmp[i][j] *= inv;
+                ret[i][j] *= inv;
+            }
+            for (int j = i + 1; j < W; j++) {
+                tmp[i][j] *= inv;
             }
             for (int h = 0; h < H; h++) {
                 if (i == h) continue;
                 const T c = -tmp[h][i];
                 for (int j = 0; j < W; j++) {
-                    ret[h][j] += ret[i][j] * c, tmp[h][j] += tmp[i][j] * c;
+                    ret[h][j] += ret[i][j] * c;
+                }
+                for (int j = i + 1; j < W; j++) {
+                    tmp[h][j] += tmp[i][j] * c;
                 }
             }
         }

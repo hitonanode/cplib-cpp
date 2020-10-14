@@ -1,5 +1,4 @@
 #include "graph/general_matching.hpp"
-#include "modulus/modint_fixed.hpp"
 #include <iostream>
 #include <utility>
 #include <vector>
@@ -19,7 +18,7 @@ int main()
         cin >> u >> v;
         edges.emplace_back(u, v);
     }
-    vector<pair<int, int>> ret = generalMatching<ModInt<1000000007>>(N, edges);
+    vector<pair<int, int>> ret = generalMatching(N, edges);
     cout << ret.size() << '\n';
     for (auto [a, b] : ret) {
         cout << a << ' ' << b << '\n';
