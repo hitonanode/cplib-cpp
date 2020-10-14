@@ -3,9 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: graph/general_matching.hpp
+    title: graph/general_matching.hpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/system_of_linear_equations.hpp
     title: linear_algebra_matrix/system_of_linear_equations.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: graph/test/general_matching.test.cpp
+    title: graph/test/general_matching.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
@@ -75,29 +81,42 @@ data:
     \ const {\n        for (int i = H * W - 1; i >= 0; i--) if (elem[i]) return i\
     \ / W + 1;\n        return 0;\n    }\n    T determinant_of_upper_triangle() const\
     \ {\n        T ret = 1;\n        for (int i = 0; i < H; i++) ret *= get(i, i);\n\
-    \        return ret;\n    }\n    friend std::vector<T> operator*(const matrix\
-    \ &m, const std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n    \
-    \    std::vector<T> ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n     \
-    \       for (int j = 0; j < m.W; j++) {\n                ret[i] += m.get(i, j)\
-    \ * v[j];\n            }\n        }\n        return ret;\n    }\n    friend std::vector<T>\
-    \ operator*(const std::vector<T> &v, const matrix &m) {\n        assert(int(v.size())\
-    \ == m.H);\n        std::vector<T> ret(m.W);\n        for (int i = 0; i < m.H;\
-    \ i++) {\n            for (int j = 0; j < m.W; j++) {\n                ret[j]\
-    \ += v[i] * m.get(i, j);\n            }\n        }\n        return ret;\n    }\n\
-    \    friend std::ostream &operator<<(std::ostream &os, const matrix &x) {\n  \
-    \      os << \"[(\" << x.H << \" * \" << x.W << \" matrix)\";\n        os << \"\
-    \\n[column sums: \";\n        for (int j = 0; j < x.W; j++) {\n            T s\
-    \ = 0;\n            for (int i = 0; i < x.H; i++) s += x.get(i, j);\n        \
-    \    os << s << \",\";\n        }\n        os << \"]\";\n        for (int i =\
-    \ 0; i < x.H; i++) {\n            os << \"\\n[\";\n            for (int j = 0;\
-    \ j < x.W; j++) os << x.get(i, j) << \",\";\n            os << \"]\";\n      \
-    \  }\n        os << \"]\\n\";\n        return os;\n    }\n    friend std::istream\
-    \ &operator>>(std::istream &is, matrix &x) {\n        for (auto &v : x.elem) is\
-    \ >> v;\n        return is;\n    }\n};\n\n\n// Fibonacci numbers f(n) = af(n -\
-    \ 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...\n\
-    template <typename T>\nT Fibonacci(long long int k, int a = 1, int b = 1)\n{\n\
-    \    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n    mat[1][1]\
-    \ = a;\n    return mat.pow(k + 1)[0][1];\n}\n"
+    \        return ret;\n    }\n    int inverse() {\n        assert(H == W);\n  \
+    \      std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n        int\
+    \ rank = 0;\n        for (int i = 0; i < H; i++) {\n            int ti = i;\n\
+    \            while (ti < H and tmp[ti][i] == 0) ti++;\n            if (ti == H)\
+    \ continue;\n            else rank++;\n            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);\n\
+    \            T inv = tmp[i][i].inv();\n            for (int j = 0; j < W; j++)\
+    \ {\n                ret[i][j] *= inv;\n            }\n            for (int j\
+    \ = i + 1; j < W; j++) {\n                tmp[i][j] *= inv;\n            }\n \
+    \           for (int h = 0; h < H; h++) {\n                if (i == h) continue;\n\
+    \                const T c = -tmp[h][i];\n                for (int j = 0; j <\
+    \ W; j++) {\n                    ret[h][j] += ret[i][j] * c;\n               \
+    \ }\n                for (int j = i + 1; j < W; j++) {\n                    tmp[h][j]\
+    \ += tmp[i][j] * c;\n                }\n            }\n        }\n        *this\
+    \ = ret;\n        return rank;\n    }\n    friend std::vector<T> operator*(const\
+    \ matrix &m, const std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n\
+    \        std::vector<T> ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n \
+    \           for (int j = 0; j < m.W; j++) {\n                ret[i] += m.get(i,\
+    \ j) * v[j];\n            }\n        }\n        return ret;\n    }\n    friend\
+    \ std::vector<T> operator*(const std::vector<T> &v, const matrix &m) {\n     \
+    \   assert(int(v.size()) == m.H);\n        std::vector<T> ret(m.W);\n        for\
+    \ (int i = 0; i < m.H; i++) {\n            for (int j = 0; j < m.W; j++) {\n \
+    \               ret[j] += v[i] * m.get(i, j);\n            }\n        }\n    \
+    \    return ret;\n    }\n    friend std::ostream &operator<<(std::ostream &os,\
+    \ const matrix &x) {\n        os << \"[(\" << x.H << \" * \" << x.W << \" matrix)\"\
+    ;\n        os << \"\\n[column sums: \";\n        for (int j = 0; j < x.W; j++)\
+    \ {\n            T s = 0;\n            for (int i = 0; i < x.H; i++) s += x.get(i,\
+    \ j);\n            os << s << \",\";\n        }\n        os << \"]\";\n      \
+    \  for (int i = 0; i < x.H; i++) {\n            os << \"\\n[\";\n            for\
+    \ (int j = 0; j < x.W; j++) os << x.get(i, j) << \",\";\n            os << \"\
+    ]\";\n        }\n        os << \"]\\n\";\n        return os;\n    }\n    friend\
+    \ std::istream &operator>>(std::istream &is, matrix &x) {\n        for (auto &v\
+    \ : x.elem) is >> v;\n        return is;\n    }\n};\n\n\n// Fibonacci numbers\
+    \ f(n) = af(n - 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3,\
+    \ 4=>5, ...\ntemplate <typename T>\nT Fibonacci(long long int k, int a = 1, int\
+    \ b = 1)\n{\n    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n\
+    \    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <iostream>\n\
     #include <iterator>\n#include <vector>\n\n// CUT begin\ntemplate <typename T>\n\
     struct matrix\n{\n    int H, W;\n    std::vector<T> elem;\n    typename std::vector<T>::iterator\
@@ -154,37 +173,52 @@ data:
     \ const {\n        for (int i = H * W - 1; i >= 0; i--) if (elem[i]) return i\
     \ / W + 1;\n        return 0;\n    }\n    T determinant_of_upper_triangle() const\
     \ {\n        T ret = 1;\n        for (int i = 0; i < H; i++) ret *= get(i, i);\n\
-    \        return ret;\n    }\n    friend std::vector<T> operator*(const matrix\
-    \ &m, const std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n    \
-    \    std::vector<T> ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n     \
-    \       for (int j = 0; j < m.W; j++) {\n                ret[i] += m.get(i, j)\
-    \ * v[j];\n            }\n        }\n        return ret;\n    }\n    friend std::vector<T>\
-    \ operator*(const std::vector<T> &v, const matrix &m) {\n        assert(int(v.size())\
-    \ == m.H);\n        std::vector<T> ret(m.W);\n        for (int i = 0; i < m.H;\
-    \ i++) {\n            for (int j = 0; j < m.W; j++) {\n                ret[j]\
-    \ += v[i] * m.get(i, j);\n            }\n        }\n        return ret;\n    }\n\
-    \    friend std::ostream &operator<<(std::ostream &os, const matrix &x) {\n  \
-    \      os << \"[(\" << x.H << \" * \" << x.W << \" matrix)\";\n        os << \"\
-    \\n[column sums: \";\n        for (int j = 0; j < x.W; j++) {\n            T s\
-    \ = 0;\n            for (int i = 0; i < x.H; i++) s += x.get(i, j);\n        \
-    \    os << s << \",\";\n        }\n        os << \"]\";\n        for (int i =\
-    \ 0; i < x.H; i++) {\n            os << \"\\n[\";\n            for (int j = 0;\
-    \ j < x.W; j++) os << x.get(i, j) << \",\";\n            os << \"]\";\n      \
-    \  }\n        os << \"]\\n\";\n        return os;\n    }\n    friend std::istream\
-    \ &operator>>(std::istream &is, matrix &x) {\n        for (auto &v : x.elem) is\
-    \ >> v;\n        return is;\n    }\n};\n\n\n// Fibonacci numbers f(n) = af(n -\
-    \ 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...\n\
-    template <typename T>\nT Fibonacci(long long int k, int a = 1, int b = 1)\n{\n\
-    \    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n    mat[1][1]\
-    \ = a;\n    return mat.pow(k + 1)[0][1];\n}\n"
+    \        return ret;\n    }\n    int inverse() {\n        assert(H == W);\n  \
+    \      std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n        int\
+    \ rank = 0;\n        for (int i = 0; i < H; i++) {\n            int ti = i;\n\
+    \            while (ti < H and tmp[ti][i] == 0) ti++;\n            if (ti == H)\
+    \ continue;\n            else rank++;\n            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);\n\
+    \            T inv = tmp[i][i].inv();\n            for (int j = 0; j < W; j++)\
+    \ {\n                ret[i][j] *= inv;\n            }\n            for (int j\
+    \ = i + 1; j < W; j++) {\n                tmp[i][j] *= inv;\n            }\n \
+    \           for (int h = 0; h < H; h++) {\n                if (i == h) continue;\n\
+    \                const T c = -tmp[h][i];\n                for (int j = 0; j <\
+    \ W; j++) {\n                    ret[h][j] += ret[i][j] * c;\n               \
+    \ }\n                for (int j = i + 1; j < W; j++) {\n                    tmp[h][j]\
+    \ += tmp[i][j] * c;\n                }\n            }\n        }\n        *this\
+    \ = ret;\n        return rank;\n    }\n    friend std::vector<T> operator*(const\
+    \ matrix &m, const std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n\
+    \        std::vector<T> ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n \
+    \           for (int j = 0; j < m.W; j++) {\n                ret[i] += m.get(i,\
+    \ j) * v[j];\n            }\n        }\n        return ret;\n    }\n    friend\
+    \ std::vector<T> operator*(const std::vector<T> &v, const matrix &m) {\n     \
+    \   assert(int(v.size()) == m.H);\n        std::vector<T> ret(m.W);\n        for\
+    \ (int i = 0; i < m.H; i++) {\n            for (int j = 0; j < m.W; j++) {\n \
+    \               ret[j] += v[i] * m.get(i, j);\n            }\n        }\n    \
+    \    return ret;\n    }\n    friend std::ostream &operator<<(std::ostream &os,\
+    \ const matrix &x) {\n        os << \"[(\" << x.H << \" * \" << x.W << \" matrix)\"\
+    ;\n        os << \"\\n[column sums: \";\n        for (int j = 0; j < x.W; j++)\
+    \ {\n            T s = 0;\n            for (int i = 0; i < x.H; i++) s += x.get(i,\
+    \ j);\n            os << s << \",\";\n        }\n        os << \"]\";\n      \
+    \  for (int i = 0; i < x.H; i++) {\n            os << \"\\n[\";\n            for\
+    \ (int j = 0; j < x.W; j++) os << x.get(i, j) << \",\";\n            os << \"\
+    ]\";\n        }\n        os << \"]\\n\";\n        return os;\n    }\n    friend\
+    \ std::istream &operator>>(std::istream &is, matrix &x) {\n        for (auto &v\
+    \ : x.elem) is >> v;\n        return is;\n    }\n};\n\n\n// Fibonacci numbers\
+    \ f(n) = af(n - 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3,\
+    \ 4=>5, ...\ntemplate <typename T>\nT Fibonacci(long long int k, int a = 1, int\
+    \ b = 1)\n{\n    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n\
+    \    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: linear_algebra_matrix/linalg_modint.hpp
   requiredBy:
+  - graph/general_matching.hpp
   - linear_algebra_matrix/system_of_linear_equations.hpp
-  timestamp: '2020-09-29 00:37:21+09:00'
+  timestamp: '2020-10-15 00:04:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - graph/test/general_matching.test.cpp
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp

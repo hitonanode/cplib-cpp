@@ -20,6 +20,9 @@ data:
   - icon: ':warning:'
     path: graph-tree/tree_isomorphism.hpp
     title: graph-tree/tree_isomorphism.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/general_matching.hpp
+    title: graph/general_matching.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: convolution/test/ntt.test.cpp
@@ -75,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/general_matching.test.cpp
+    title: graph/test/general_matching.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
@@ -236,6 +242,7 @@ data:
   requiredBy:
   - convolution/convolutive_translation_2d.hpp
   - convolution/ntt.hpp
+  - graph/general_matching.hpp
   - formal_power_series/multipoint_evaluation.hpp
   - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/formal_power_series.hpp
@@ -246,6 +253,7 @@ data:
   - convolution/test/ntt_arbitrary_mod.test.cpp
   - convolution/test/ntt.test.cpp
   - convolution/test/subset_convolution.test.cpp
+  - graph/test/general_matching.test.cpp
   - random/test/rolling_hash_w_modint.test.cpp
   - segmenttree/test/range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp

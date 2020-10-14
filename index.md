@@ -103,6 +103,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/general_matching.hpp
+      title: graph/general_matching.hpp
     - icon: ':warning:'
       path: graph/grid_graph_template.hpp
       title: graph/grid_graph_template.hpp
@@ -490,6 +493,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/dijkstra.test.cpp
       title: graph/test/dijkstra.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/general_matching.test.cpp
+      title: graph/test/general_matching.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/maximum_independent_set.test.cpp
       title: graph/test/maximum_independent_set.test.cpp
