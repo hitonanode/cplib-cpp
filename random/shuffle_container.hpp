@@ -1,8 +1,8 @@
 #pragma once
 #include <algorithm>
+#include <chrono>
 #include <random>
 
 // CUT begin
-std::random_device seed_gen;
-std::mt19937 engine(seed_gen());
-// std::shuffle(v.begin(), v.end(), engine);
+std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+// std::shuffle(v.begin(), v.end(), rng);
