@@ -2,6 +2,7 @@
 #include "convolution/ntt.hpp"
 #include <vector>
 
+// CUT begin
 // Calculate [x^N](num(x) / den(x))
 // Coplexity: O(LlgLlgN) ( L = size(num) + size(den) )
 template <typename Tp>

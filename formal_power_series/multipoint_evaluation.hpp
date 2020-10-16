@@ -1,6 +1,7 @@
 #pragma once
 #include "formal_power_series/formal_power_series.hpp"
 
+// CUT begin
 // multipoint polynomial evaluation
 // input: xs = [x_0, ..., x_{N - 1}]: points to evaluate
 //        f = \sum_i^M f_i x^i

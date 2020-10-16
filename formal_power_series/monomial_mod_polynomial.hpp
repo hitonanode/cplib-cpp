@@ -2,6 +2,7 @@
 #include <cassert>
 #include <vector>
 
+// CUT begin
 // Calculate x^N mod f(x)
 // Known as `Kitamasa method`
 // Input: f_reversed: monic, reversed (f_reversed[0] = 1)
