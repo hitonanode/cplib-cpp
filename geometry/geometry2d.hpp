@@ -148,3 +148,14 @@ T_P DistancePointSegment(const P<T_P> &p, const P<T_P> &a, const P<T_P> &b)
     else if ((p - b).dot(a - b) <= 0) return (p - b).norm();
     else return DistancePointLine(p, a, b);
 }
+
+// Area of polygon (might be negative)
+template <typename T_P>
+T_P signed_area_of_polygon(const std::vector<P<T_P>>& poly)
+{
+    T_P area = 0;
+    for (size_t i = 0; i < poly.size(); i++) {
+        area += poly[i].det(poly[(i + 1) % poly.size()]);
+    }
+    return area * 0.5;
+}
