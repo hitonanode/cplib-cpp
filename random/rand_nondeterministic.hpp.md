@@ -36,8 +36,8 @@ data:
   timestamp: '2020-03-07 22:54:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - random/test/rolling_hash.test.cpp
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - random/test/rolling_hash.test.cpp
 documentation_of: random/rand_nondeterministic.hpp
 layout: document
 redirect_from:

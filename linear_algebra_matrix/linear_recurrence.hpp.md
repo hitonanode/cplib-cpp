@@ -72,8 +72,8 @@ data:
   timestamp: '2020-06-06 01:37:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linear_recurrence.test.cpp
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - linear_algebra_matrix/test/linear_recurrence.test.cpp
 documentation_of: linear_algebra_matrix/linear_recurrence.hpp
 layout: document
 redirect_from:

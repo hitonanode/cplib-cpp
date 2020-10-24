@@ -229,26 +229,26 @@ data:
     \ const {\n        if ((int)this->size() <= i or i < 0) return T(0);\n       \
     \ return (*this)[i];\n    }\n\n    T eval(T x) const {\n        T ret = 0, w =\
     \ 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n        return ret;\n\
-    \    }\n};\n#line 3 \"formal_power_series/multipoint_evaluation.hpp\"\n\n// multipoint\
-    \ polynomial evaluation\n// input: xs = [x_0, ..., x_{N - 1}]: points to evaluate\n\
-    //        f = \\sum_i^M f_i x^i\n// Complexity: O(N (lgN)^2) building, O(N (lgN)^2\
-    \ + M lg M) evaluation\ntemplate <typename Tfield>\nstruct MultipointEvaluation\n\
-    {\n    int nx;\n    using polynomial = FormalPowerSeries<Tfield>;\n    std::vector<polynomial>\
-    \ segtree;\n    MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size())\n\
-    \    {\n        segtree.resize(nx * 2 - 1);\n        for (int i = 0; i < nx; i++)\n\
-    \        {\n            segtree[nx - 1 + i] = {-xs[i], 1};\n        }\n      \
-    \  for (int i = nx - 2; i >= 0; i--)\n        {\n            segtree[i] = segtree[2\
-    \ * i + 1] * segtree[2 * i + 2];\n        }\n    }\n    std::vector<Tfield> ret;\n\
-    \    std::vector<Tfield> evaluate_polynomial(polynomial f)\n    {\n        ret.resize(nx);\n\
-    \        auto rec = [&](auto &&rec, polynomial f, int now) -> void {\n       \
-    \     f %= segtree[now];\n            if (now - (nx - 1) >= 0)\n            {\n\
-    \                ret[now - (nx - 1)] = f.coeff(0);\n                return;\n\
-    \            }\n            rec(rec, f, 2 * now + 1);\n            rec(rec, f,\
-    \ 2 * now + 2);\n        };\n        rec(rec, f, 0);\n        return ret;\n  \
-    \  }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    std::vector<Tfield>\
-    \ polynomial_interpolation(std::vector<Tfield> ys)\n    {\n        assert(nx ==\
-    \ int(ys.size()));\n        if (_interpolate_coeffs.empty())\n        {\n    \
-    \        _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
+    \    }\n};\n#line 3 \"formal_power_series/multipoint_evaluation.hpp\"\n\n// CUT\
+    \ begin\n// multipoint polynomial evaluation\n// input: xs = [x_0, ..., x_{N -\
+    \ 1}]: points to evaluate\n//        f = \\sum_i^M f_i x^i\n// Complexity: O(N\
+    \ (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename Tfield>\n\
+    struct MultipointEvaluation\n{\n    int nx;\n    using polynomial = FormalPowerSeries<Tfield>;\n\
+    \    std::vector<polynomial> segtree;\n    MultipointEvaluation(const std::vector<Tfield>\
+    \ &xs) : nx(xs.size())\n    {\n        segtree.resize(nx * 2 - 1);\n        for\
+    \ (int i = 0; i < nx; i++)\n        {\n            segtree[nx - 1 + i] = {-xs[i],\
+    \ 1};\n        }\n        for (int i = nx - 2; i >= 0; i--)\n        {\n     \
+    \       segtree[i] = segtree[2 * i + 1] * segtree[2 * i + 2];\n        }\n   \
+    \ }\n    std::vector<Tfield> ret;\n    std::vector<Tfield> evaluate_polynomial(polynomial\
+    \ f)\n    {\n        ret.resize(nx);\n        auto rec = [&](auto &&rec, polynomial\
+    \ f, int now) -> void {\n            f %= segtree[now];\n            if (now -\
+    \ (nx - 1) >= 0)\n            {\n                ret[now - (nx - 1)] = f.coeff(0);\n\
+    \                return;\n            }\n            rec(rec, f, 2 * now + 1);\n\
+    \            rec(rec, f, 2 * now + 2);\n        };\n        rec(rec, f, 0);\n\
+    \        return ret;\n    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n\
+    \    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys)\n  \
+    \  {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\n\
+    \        {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
     \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
     \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n\n      \
     \  auto rec = [&](auto &&rec, int now) -> polynomial {\n            int i = now\
@@ -279,7 +279,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/polynomial_interpolation.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 00:37:21+09:00'
+  timestamp: '2020-10-17 00:01:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/polynomial_interpolation.test.cpp

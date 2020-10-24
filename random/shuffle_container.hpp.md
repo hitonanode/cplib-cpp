@@ -11,39 +11,39 @@ data:
 
     #include <algorithm>
 
+    #include <chrono>
+
     #include <random>
 
 
     // CUT begin
 
-    std::random_device seed_gen;
+    std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 
-    std::mt19937 engine(seed_gen());
-
-    // std::shuffle(v.begin(), v.end(), engine);
+    // std::shuffle(v.begin(), v.end(), rng);
 
     '
   code: '#pragma once
 
     #include <algorithm>
 
+    #include <chrono>
+
     #include <random>
 
 
     // CUT begin
 
-    std::random_device seed_gen;
+    std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 
-    std::mt19937 engine(seed_gen());
-
-    // std::shuffle(v.begin(), v.end(), engine);
+    // std::shuffle(v.begin(), v.end(), rng);
 
     '
   dependsOn: []
   isVerificationFile: false
   path: random/shuffle_container.hpp
   requiredBy: []
-  timestamp: '2020-09-29 20:43:47+09:00'
+  timestamp: '2020-10-17 02:47:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: random/shuffle_container.hpp

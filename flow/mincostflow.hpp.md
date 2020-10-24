@@ -165,8 +165,8 @@ data:
   timestamp: '2020-09-29 17:16:20+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - flow/test/min_cost_b_flow.test.cpp
   - flow/test/mincostflow.test.cpp
+  - flow/test/min_cost_b_flow.test.cpp
 documentation_of: flow/mincostflow.hpp
 layout: document
 redirect_from:

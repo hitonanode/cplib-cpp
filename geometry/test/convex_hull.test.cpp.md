@@ -87,7 +87,11 @@ data:
     T_P DistancePointSegment(const P<T_P> &p, const P<T_P> &a, const P<T_P> &b)\n\
     {\n    if (a == b) return (p - a).norm();\n    else if ((p - a).dot(b - a) <=\
     \ 0) return (p - a).norm();\n    else if ((p - b).dot(a - b) <= 0) return (p -\
-    \ b).norm();\n    else return DistancePointLine(p, a, b);\n}\n#line 2 \"geometry/test/convex_hull.test.cpp\"\
+    \ b).norm();\n    else return DistancePointLine(p, a, b);\n}\n\n// Area of polygon\
+    \ (might be negative)\ntemplate <typename T_P>\nT_P signed_area_of_polygon(const\
+    \ std::vector<P<T_P>>& poly)\n{\n    T_P area = 0;\n    for (size_t i = 0; i <\
+    \ poly.size(); i++) {\n        area += poly[i].det(poly[(i + 1) % poly.size()]);\n\
+    \    }\n    return area * 0.5;\n}\n#line 2 \"geometry/test/convex_hull.test.cpp\"\
     \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_A\"\
     \n#line 4 \"geometry/test/convex_hull.test.cpp\"\n#include <cstdio>\n#line 6 \"\
     geometry/test/convex_hull.test.cpp\"\n\nint main()\n{\n    int N;\n    std::cin\
@@ -112,7 +116,7 @@ data:
   isVerificationFile: true
   path: geometry/test/convex_hull.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 22:34:02+09:00'
+  timestamp: '2020-10-17 00:02:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: geometry/test/convex_hull.test.cpp

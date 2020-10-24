@@ -138,8 +138,8 @@ data:
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ {\n            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n\
     \        }\n    }\n    return a;\n}\n#line 4 \"formal_power_series/coeff_of_rational_function.hpp\"\
-    \n\n// Calculate [x^N](num(x) / den(x))\n// Coplexity: O(LlgLlgN) ( L = size(num)\
-    \ + size(den) )\ntemplate <typename Tp>\nTp coefficient_of_rational_function(long\
+    \n\n// CUT begin\n// Calculate [x^N](num(x) / den(x))\n// Coplexity: O(LlgLlgN)\
+    \ ( L = size(num) + size(den) )\ntemplate <typename Tp>\nTp coefficient_of_rational_function(long\
     \ long N, std::vector<Tp> num, std::vector<Tp> den)\n{\n    assert(N >= 0);\n\
     \    while (den.size() and den.back() == 0) den.pop_back();\n    assert(den.size());\n\
     \    int h = 0;\n    while (den[h] == 0) h++;\n    N += h;\n    den.erase(den.begin(),\
@@ -188,7 +188,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/coeff_of_rational_function.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 20:43:47+09:00'
+  timestamp: '2020-10-17 00:01:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/coeff_of_rational_function.test.cpp

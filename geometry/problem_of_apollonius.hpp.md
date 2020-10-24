@@ -101,7 +101,11 @@ data:
     T_P DistancePointSegment(const P<T_P> &p, const P<T_P> &a, const P<T_P> &b)\n\
     {\n    if (a == b) return (p - a).norm();\n    else if ((p - a).dot(b - a) <=\
     \ 0) return (p - a).norm();\n    else if ((p - b).dot(a - b) <= 0) return (p -\
-    \ b).norm();\n    else return DistancePointLine(p, a, b);\n}\n#line 4 \"geometry/problem_of_apollonius.hpp\"\
+    \ b).norm();\n    else return DistancePointLine(p, a, b);\n}\n\n// Area of polygon\
+    \ (might be negative)\ntemplate <typename T_P>\nT_P signed_area_of_polygon(const\
+    \ std::vector<P<T_P>>& poly)\n{\n    T_P area = 0;\n    for (size_t i = 0; i <\
+    \ poly.size(); i++) {\n        area += poly[i].det(poly[(i + 1) % poly.size()]);\n\
+    \    }\n    return area * 0.5;\n}\n#line 4 \"geometry/problem_of_apollonius.hpp\"\
     \n\n#line 7 \"geometry/problem_of_apollonius.hpp\"\n\n// CUT begin\n// \u30A2\u30DD\
     \u30ED\u30CB\u30A6\u30B9\u306E\u554F\u984C\uFF1A3\u5186\u306B\u63A5\u3059\u308B\
     \u5186\u306E\u4E2D\u5FC3\u3068\u534A\u5F84\n// Verify: TCO 2020 North America\
@@ -153,7 +157,7 @@ data:
   isVerificationFile: false
   path: geometry/problem_of_apollonius.hpp
   requiredBy: []
-  timestamp: '2020-09-21 22:34:02+09:00'
+  timestamp: '2020-10-17 00:02:16+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/problem_of_apollonius.hpp

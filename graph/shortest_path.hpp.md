@@ -116,8 +116,8 @@ data:
   timestamp: '2020-10-04 15:46:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/dijkstra.test.cpp
   - graph/test/bellman_ford.test.cpp
+  - graph/test/dijkstra.test.cpp
 documentation_of: graph/shortest_path.hpp
 layout: document
 redirect_from:

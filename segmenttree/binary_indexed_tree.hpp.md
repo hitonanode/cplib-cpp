@@ -44,8 +44,8 @@ data:
   timestamp: '2020-04-19 16:23:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/binary_indexed_tree.test.cpp
   - segmenttree/test/point-add-range-sum.test.cpp
+  - segmenttree/test/binary_indexed_tree.test.cpp
 documentation_of: segmenttree/binary_indexed_tree.hpp
 layout: document
 redirect_from:

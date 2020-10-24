@@ -51,8 +51,8 @@ data:
   timestamp: '2020-03-07 22:54:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - sparse_table/test/sparse_table.test.cpp
   - sparse_table/test/sparse_table_aoj.test.cpp
+  - sparse_table/test/sparse_table.test.cpp
 documentation_of: sparse_table/rmq_sparse_table.hpp
 layout: document
 redirect_from:

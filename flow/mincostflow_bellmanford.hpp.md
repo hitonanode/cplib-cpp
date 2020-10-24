@@ -134,8 +134,8 @@ data:
   timestamp: '2020-09-29 17:16:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - flow/test/assignment_problem.test.cpp
   - flow/test/mincostflow.test.cpp
+  - flow/test/assignment_problem.test.cpp
 documentation_of: flow/mincostflow_bellmanford.hpp
 layout: document
 redirect_from:
