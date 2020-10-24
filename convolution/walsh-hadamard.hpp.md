@@ -30,15 +30,16 @@ data:
     \ < numeric_limits<T>::max()\ntemplate <typename T>\nstd::vector<T> xorconv(std::vector<T>\
     \ x, std::vector<T> y)\n{\n    auto f = [](T& lo, T& hi) {\n        T c = lo +\
     \ hi;\n        hi = lo - hi, lo = c;\n    };\n    auto finv = [](T& lo, T& hi)\
-    \ {\n        T c = lo + hi;\n        hi = (lo - hi) / 2, lo = c / 2;\n    };\n\
-    \    return walsh_hadamard_conv(x, y, f, finv);\n}\n\n// bitwise and conolution\n\
-    // ret[i] = \\sum_{(j & k) == i} x[j] * y[k]\ntemplate <typename T>\nstd::vector<T>\
-    \ andconv(std::vector<T> x, std::vector<T> y)\n{\n    return walsh_hadamard_conv(\n\
-    \        x, y, [](T& lo, T& hi) { lo += hi; }, [](T& lo, T& hi) { lo -= hi; });\n\
-    }\n\n// bitwise or convolution\n// ret[i] = \\sum_{(j | k) == i} x[j] * y[k]\n\
-    template <typename T>\nstd::vector<T> orconv(std::vector<T> x, std::vector<T>\
-    \ y)\n{\n    return walsh_hadamard_conv(\n        x, y, [](T& lo, T& hi) { hi\
-    \ += lo; }, [](T& lo, T& hi) { hi -= lo; });\n}\n"
+    \ {\n        T c = lo + hi;\n        hi = (lo - hi) / 2, lo = c / 2;  // Reconsider\
+    \ high complexity of division when T is ModInt\n    };\n    return walsh_hadamard_conv(x,\
+    \ y, f, finv);\n}\n\n// bitwise and conolution\n// ret[i] = \\sum_{(j & k) ==\
+    \ i} x[j] * y[k]\ntemplate <typename T>\nstd::vector<T> andconv(std::vector<T>\
+    \ x, std::vector<T> y)\n{\n    return walsh_hadamard_conv(\n        x, y, [](T&\
+    \ lo, T& hi) { lo += hi; }, [](T& lo, T& hi) { lo -= hi; });\n}\n\n// bitwise\
+    \ or convolution\n// ret[i] = \\sum_{(j | k) == i} x[j] * y[k]\ntemplate <typename\
+    \ T>\nstd::vector<T> orconv(std::vector<T> x, std::vector<T> y)\n{\n    return\
+    \ walsh_hadamard_conv(\n        x, y, [](T& lo, T& hi) { hi += lo; }, [](T& lo,\
+    \ T& hi) { hi -= lo; });\n}\n"
   code: "#pragma once\n#include <cassert>\n#include <vector>\n\n// CUT begin\n// Fast\
     \ Walsh-Hadamard transform\n// Tutorials: <https://codeforces.com/blog/entry/71899>\n\
     //            <https://csacademy.com/blog/fast-fourier-transform-and-variations-of-it>\n\
@@ -57,20 +58,21 @@ data:
     \ < numeric_limits<T>::max()\ntemplate <typename T>\nstd::vector<T> xorconv(std::vector<T>\
     \ x, std::vector<T> y)\n{\n    auto f = [](T& lo, T& hi) {\n        T c = lo +\
     \ hi;\n        hi = lo - hi, lo = c;\n    };\n    auto finv = [](T& lo, T& hi)\
-    \ {\n        T c = lo + hi;\n        hi = (lo - hi) / 2, lo = c / 2;\n    };\n\
-    \    return walsh_hadamard_conv(x, y, f, finv);\n}\n\n// bitwise and conolution\n\
-    // ret[i] = \\sum_{(j & k) == i} x[j] * y[k]\ntemplate <typename T>\nstd::vector<T>\
-    \ andconv(std::vector<T> x, std::vector<T> y)\n{\n    return walsh_hadamard_conv(\n\
-    \        x, y, [](T& lo, T& hi) { lo += hi; }, [](T& lo, T& hi) { lo -= hi; });\n\
-    }\n\n// bitwise or convolution\n// ret[i] = \\sum_{(j | k) == i} x[j] * y[k]\n\
-    template <typename T>\nstd::vector<T> orconv(std::vector<T> x, std::vector<T>\
-    \ y)\n{\n    return walsh_hadamard_conv(\n        x, y, [](T& lo, T& hi) { hi\
-    \ += lo; }, [](T& lo, T& hi) { hi -= lo; });\n}\n"
+    \ {\n        T c = lo + hi;\n        hi = (lo - hi) / 2, lo = c / 2;  // Reconsider\
+    \ high complexity of division when T is ModInt\n    };\n    return walsh_hadamard_conv(x,\
+    \ y, f, finv);\n}\n\n// bitwise and conolution\n// ret[i] = \\sum_{(j & k) ==\
+    \ i} x[j] * y[k]\ntemplate <typename T>\nstd::vector<T> andconv(std::vector<T>\
+    \ x, std::vector<T> y)\n{\n    return walsh_hadamard_conv(\n        x, y, [](T&\
+    \ lo, T& hi) { lo += hi; }, [](T& lo, T& hi) { lo -= hi; });\n}\n\n// bitwise\
+    \ or convolution\n// ret[i] = \\sum_{(j | k) == i} x[j] * y[k]\ntemplate <typename\
+    \ T>\nstd::vector<T> orconv(std::vector<T> x, std::vector<T> y)\n{\n    return\
+    \ walsh_hadamard_conv(\n        x, y, [](T& lo, T& hi) { hi += lo; }, [](T& lo,\
+    \ T& hi) { hi -= lo; });\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: convolution/walsh-hadamard.hpp
   requiredBy: []
-  timestamp: '2020-10-03 19:38:50+09:00'
+  timestamp: '2020-10-24 20:37:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/walsh-hadamard_xor.test.cpp

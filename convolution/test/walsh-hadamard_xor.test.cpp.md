@@ -31,15 +31,16 @@ data:
     \ < numeric_limits<T>::max()\ntemplate <typename T>\nstd::vector<T> xorconv(std::vector<T>\
     \ x, std::vector<T> y)\n{\n    auto f = [](T& lo, T& hi) {\n        T c = lo +\
     \ hi;\n        hi = lo - hi, lo = c;\n    };\n    auto finv = [](T& lo, T& hi)\
-    \ {\n        T c = lo + hi;\n        hi = (lo - hi) / 2, lo = c / 2;\n    };\n\
-    \    return walsh_hadamard_conv(x, y, f, finv);\n}\n\n// bitwise and conolution\n\
-    // ret[i] = \\sum_{(j & k) == i} x[j] * y[k]\ntemplate <typename T>\nstd::vector<T>\
-    \ andconv(std::vector<T> x, std::vector<T> y)\n{\n    return walsh_hadamard_conv(\n\
-    \        x, y, [](T& lo, T& hi) { lo += hi; }, [](T& lo, T& hi) { lo -= hi; });\n\
-    }\n\n// bitwise or convolution\n// ret[i] = \\sum_{(j | k) == i} x[j] * y[k]\n\
-    template <typename T>\nstd::vector<T> orconv(std::vector<T> x, std::vector<T>\
-    \ y)\n{\n    return walsh_hadamard_conv(\n        x, y, [](T& lo, T& hi) { hi\
-    \ += lo; }, [](T& lo, T& hi) { hi -= lo; });\n}\n#line 2 \"convolution/test/walsh-hadamard_xor.test.cpp\"\
+    \ {\n        T c = lo + hi;\n        hi = (lo - hi) / 2, lo = c / 2;  // Reconsider\
+    \ high complexity of division when T is ModInt\n    };\n    return walsh_hadamard_conv(x,\
+    \ y, f, finv);\n}\n\n// bitwise and conolution\n// ret[i] = \\sum_{(j & k) ==\
+    \ i} x[j] * y[k]\ntemplate <typename T>\nstd::vector<T> andconv(std::vector<T>\
+    \ x, std::vector<T> y)\n{\n    return walsh_hadamard_conv(\n        x, y, [](T&\
+    \ lo, T& hi) { lo += hi; }, [](T& lo, T& hi) { lo -= hi; });\n}\n\n// bitwise\
+    \ or convolution\n// ret[i] = \\sum_{(j | k) == i} x[j] * y[k]\ntemplate <typename\
+    \ T>\nstd::vector<T> orconv(std::vector<T> x, std::vector<T> y)\n{\n    return\
+    \ walsh_hadamard_conv(\n        x, y, [](T& lo, T& hi) { hi += lo; }, [](T& lo,\
+    \ T& hi) { hi -= lo; });\n}\n#line 2 \"convolution/test/walsh-hadamard_xor.test.cpp\"\
     \n#define PROBLEM \"https://yukicoder.me/problems/no/1240\"\n#include <iostream>\n\
     using namespace std;\n\nint main()\n{\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
     \n    int N, X;\n    cin >> N >> X;\n    vector<int> A(N);\n    for (auto &x :\
@@ -68,7 +69,7 @@ data:
   isVerificationFile: true
   path: convolution/test/walsh-hadamard_xor.test.cpp
   requiredBy: []
-  timestamp: '2020-10-03 19:38:50+09:00'
+  timestamp: '2020-10-24 20:37:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/walsh-hadamard_xor.test.cpp
