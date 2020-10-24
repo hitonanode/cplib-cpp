@@ -50,7 +50,7 @@ std::vector<T> xorconv(std::vector<T> x, std::vector<T> y)
     };
     auto finv = [](T& lo, T& hi) {
         T c = lo + hi;
-        hi = (lo - hi) / 2, lo = c / 2;
+        hi = (lo - hi) / 2, lo = c / 2;  // Reconsider high complexity of division when T is ModInt
     };
     return walsh_hadamard_conv(x, y, f, finv);
 }
