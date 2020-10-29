@@ -93,6 +93,29 @@ std::vector<int> convex_hull(const std::vector<P<T_P>> &ps, bool include_boundar
     return ret;
 }
 
+// Solve r1 + t1 * v1 == r2 + t2 * v2
+template <typename T_P>
+P<T_P> lines_crosspoint(P<T_P> r1, P<T_P> v1, P<T_P> r2, P<T_P> v2) {
+    assert(v2.det(v1) != 0);
+    return r1 + v1 * (v2.det(r2 - r1) / v2.det(v1));
+}
+
+// Convex cut
+// Cut the convex polygon g by line p1->p2 and return the leftward one
+template <typename T_P>
+std::vector<P<T_P>> convex_cut(const std::vector<P<T_P>>& g, P<T_P> p1, P<T_P> p2) {
+    assert(p1 != p2);
+    std::vector<P<T_P>> ret;
+    for (int i = 0; i < (int)g.size(); i++) {
+        const P<T_P> &now = g[i], &nxt = g[(i + 1) % g.size()];
+        if (ccw(p1, p2, now) != -1) ret.push_back(now);
+        if ((ccw(p1, p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) {
+            ret.push_back(lines_crosspoint(now, nxt - now, p1, p2 - p1));
+        }
+    }
+    return ret;
+}
+
 // Circumcenter （三角形の外心）
 // - raise exception for collinear points
 template <typename T_P>
