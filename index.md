@@ -462,6 +462,9 @@ data:
   - name: geometry/test
     pages:
     - icon: ':heavy_check_mark:'
+      path: geometry/test/convex_cut.test.cpp
+      title: geometry/test/convex_cut.test.cpp
+    - icon: ':heavy_check_mark:'
       path: geometry/test/convex_hull.test.cpp
       title: geometry/test/convex_hull.test.cpp
     - icon: ':heavy_check_mark:'

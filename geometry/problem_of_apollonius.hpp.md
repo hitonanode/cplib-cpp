@@ -77,18 +77,28 @@ data:
     \ i = n - 2, t = k; i >= 0; i--) {\n        while (k > t and ccw_check(ccw(qs[k\
     \ - 2].first, qs[k - 1].first, points[i].first))) k--;\n        qs[k++] = points[i];\n\
     \    }\n    std::vector<int> ret(k - 1);\n    for (int i = 0; i < k - 1; i++)\
-    \ ret[i] = qs[i].second;\n    return ret;\n}\n\n// Circumcenter \uFF08\u4E09\u89D2\
-    \u5F62\u306E\u5916\u5FC3\uFF09\n// - raise exception for collinear points\ntemplate\
-    \ <typename T_P>\nP<T_P> circumcenter(const P<T_P> &z1, const P<T_P> &z2, const\
-    \ P<T_P> &z3)\n{\n    assert(abs(ccw(z1, z2, z3)) % 2 == 1);\n    P<T_P> a = z2\
-    \ - z1, b = z3 - z1;\n    return z1 + a * b * (a - b).conj() / (b * a.conj() -\
-    \ a * b.conj());\n}\n\n// 2\u5186\u306E\u4EA4\u70B9 (ABC157F)\ntemplate <typename\
-    \ T_P>\nstd::vector<P<T_P>> IntersectTwoCircles(const P<T_P> &Ca, double Ra, const\
-    \ P<T_P> &Cb, double Rb)\n{\n    double d = (Ca - Cb).norm();\n    if (Ra + Rb\
-    \ < d) return {};\n    double rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);\n  \
-    \  double rs = sqrt(Ra * Ra - rc * rc);\n    P<T_P> diff = (Cb - Ca) / d;\n  \
-    \  return {Ca + diff * P<T_P>(rc, rs), Ca + diff * P<T_P>(rc, -rs)};\n}\n\n//\
-    \ Solve |x0 + vt| = R (SRM 543 Div.1 1000)\ntemplate <typename T_P>\nstd::vector<T_P>\
+    \ ret[i] = qs[i].second;\n    return ret;\n}\n\n// Solve r1 + t1 * v1 == r2 +\
+    \ t2 * v2\ntemplate <typename T_P>\nP<T_P> lines_crosspoint(P<T_P> r1, P<T_P>\
+    \ v1, P<T_P> r2, P<T_P> v2) {\n    assert(v2.det(v1) != 0);\n    return r1 + v1\
+    \ * (v2.det(r2 - r1) / v2.det(v1));\n}\n\n// Convex cut\n// Cut the convex polygon\
+    \ g by line p1->p2 and return the leftward one\ntemplate <typename T_P>\nstd::vector<P<T_P>>\
+    \ convex_cut(const std::vector<P<T_P>>& g, P<T_P> p1, P<T_P> p2) {\n    assert(p1\
+    \ != p2);\n    std::vector<P<T_P>> ret;\n    for (int i = 0; i < (int)g.size();\
+    \ i++) {\n        const P<T_P> &now = g[i], &nxt = g[(i + 1) % g.size()];\n  \
+    \      if (ccw(p1, p2, now) != -1) ret.push_back(now);\n        if ((ccw(p1, p2,\
+    \ now) == -1) xor (ccw(p1, p2, nxt) == -1)) {\n            ret.push_back(lines_crosspoint(now,\
+    \ nxt - now, p1, p2 - p1));\n        }\n    }\n    return ret;\n}\n\n// Circumcenter\
+    \ \uFF08\u4E09\u89D2\u5F62\u306E\u5916\u5FC3\uFF09\n// - raise exception for collinear\
+    \ points\ntemplate <typename T_P>\nP<T_P> circumcenter(const P<T_P> &z1, const\
+    \ P<T_P> &z2, const P<T_P> &z3)\n{\n    assert(abs(ccw(z1, z2, z3)) % 2 == 1);\n\
+    \    P<T_P> a = z2 - z1, b = z3 - z1;\n    return z1 + a * b * (a - b).conj()\
+    \ / (b * a.conj() - a * b.conj());\n}\n\n// 2\u5186\u306E\u4EA4\u70B9 (ABC157F)\n\
+    template <typename T_P>\nstd::vector<P<T_P>> IntersectTwoCircles(const P<T_P>\
+    \ &Ca, double Ra, const P<T_P> &Cb, double Rb)\n{\n    double d = (Ca - Cb).norm();\n\
+    \    if (Ra + Rb < d) return {};\n    double rc = (d * d + Ra * Ra - Rb * Rb)\
+    \ / (2 * d);\n    double rs = sqrt(Ra * Ra - rc * rc);\n    P<T_P> diff = (Cb\
+    \ - Ca) / d;\n    return {Ca + diff * P<T_P>(rc, rs), Ca + diff * P<T_P>(rc, -rs)};\n\
+    }\n\n// Solve |x0 + vt| = R (SRM 543 Div.1 1000)\ntemplate <typename T_P>\nstd::vector<T_P>\
     \ IntersectCircleLine(const P<T_P> &x0, const P<T_P> &v, T_P R)\n{\n    T_P b\
     \ = x0.dot(v) / v.norm2();\n    T_P c = (x0.norm2() - R * R) / v.norm2();\n  \
     \  if (b * b - c < 0) return {};\n    T_P ret1;\n    if (b > 0) ret1 = -b - sqrt(b\
@@ -157,7 +167,7 @@ data:
   isVerificationFile: false
   path: geometry/problem_of_apollonius.hpp
   requiredBy: []
-  timestamp: '2020-10-17 00:02:16+09:00'
+  timestamp: '2020-10-29 23:07:35+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/problem_of_apollonius.hpp

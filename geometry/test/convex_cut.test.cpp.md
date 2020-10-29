@@ -10,9 +10,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_A
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_C
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_A
+    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_C
   bundledCode: "#line 2 \"geometry/geometry2d.hpp\"\n#include <algorithm>\n#include\
     \ <cassert>\n#include <cmath>\n#include <iostream>\n#include <utility>\n#include\
     \ <vector>\n\n\n// CUT begin\ntemplate <typename T_P>\nstruct P\n{\n    static\
@@ -101,38 +101,35 @@ data:
     \ (might be negative)\ntemplate <typename T_P>\nT_P signed_area_of_polygon(const\
     \ std::vector<P<T_P>>& poly)\n{\n    T_P area = 0;\n    for (size_t i = 0; i <\
     \ poly.size(); i++) {\n        area += poly[i].det(poly[(i + 1) % poly.size()]);\n\
-    \    }\n    return area * 0.5;\n}\n#line 2 \"geometry/test/convex_hull.test.cpp\"\
-    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_A\"\
-    \n#line 4 \"geometry/test/convex_hull.test.cpp\"\n#include <cstdio>\n#line 6 \"\
-    geometry/test/convex_hull.test.cpp\"\n\nint main()\n{\n    int N;\n    std::cin\
-    \ >> N;\n    std::vector<P<double>> P(N);\n    P[0].set_eps(1e-9);\n\n    for\
-    \ (auto &p : P) std::cin >> p;\n    std::vector<std::pair<int, int>> ps;\n   \
-    \ for (auto idx : convex_hull(P, true)) ps.emplace_back(std::llround(P[idx].y),\
-    \ std::llround(P[idx].x));\n    int init = std::min_element(ps.begin(), ps.end())\
-    \ - ps.begin();\n    \n    printf(\"%lu\\n\", ps.size());\n    for (size_t i =\
-    \ 0; i < ps.size(); i++) {\n        printf(\"%d %d\\n\", ps[(i + init) % ps.size()].second,\
-    \ ps[(i + init) % ps.size()].first);\n    }\n}\n"
-  code: "#include \"geometry/geometry2d.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_A\"\
-    \n#include <cmath>\n#include <cstdio>\n#include <iostream>\n\nint main()\n{\n\
-    \    int N;\n    std::cin >> N;\n    std::vector<P<double>> P(N);\n    P[0].set_eps(1e-9);\n\
-    \n    for (auto &p : P) std::cin >> p;\n    std::vector<std::pair<int, int>> ps;\n\
-    \    for (auto idx : convex_hull(P, true)) ps.emplace_back(std::llround(P[idx].y),\
-    \ std::llround(P[idx].x));\n    int init = std::min_element(ps.begin(), ps.end())\
-    \ - ps.begin();\n    \n    printf(\"%lu\\n\", ps.size());\n    for (size_t i =\
-    \ 0; i < ps.size(); i++) {\n        printf(\"%d %d\\n\", ps[(i + init) % ps.size()].second,\
-    \ ps[(i + init) % ps.size()].first);\n    }\n}\n"
+    \    }\n    return area * 0.5;\n}\n#line 2 \"geometry/test/convex_cut.test.cpp\"\
+    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_C\"\
+    \n\n#include <iomanip>\n#line 7 \"geometry/test/convex_cut.test.cpp\"\nusing namespace\
+    \ std;\n\nint main()\n{\n    int N;\n    cin >> N;\n\n    using Pt = P<double>;\n\
+    \    vector<Pt> G(N);\n    for (auto &x : G) {\n        cin >> x;\n    }\n\n \
+    \   cout << fixed << setprecision(8);\n    int Q;\n    cin >> Q;\n    while (Q--)\
+    \ {\n        Pt P1, P2;\n        cin >> P1 >> P2;\n        auto polygon = convex_cut(G,\
+    \ P1, P2);\n        cout << signed_area_of_polygon(polygon) << '\\n';\n    }\n\
+    }\n"
+  code: "#include \"geometry/geometry2d.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_C\"\
+    \n\n#include <iomanip>\n#include <iostream>\n#include <vector>\nusing namespace\
+    \ std;\n\nint main()\n{\n    int N;\n    cin >> N;\n\n    using Pt = P<double>;\n\
+    \    vector<Pt> G(N);\n    for (auto &x : G) {\n        cin >> x;\n    }\n\n \
+    \   cout << fixed << setprecision(8);\n    int Q;\n    cin >> Q;\n    while (Q--)\
+    \ {\n        Pt P1, P2;\n        cin >> P1 >> P2;\n        auto polygon = convex_cut(G,\
+    \ P1, P2);\n        cout << signed_area_of_polygon(polygon) << '\\n';\n    }\n\
+    }\n"
   dependsOn:
   - geometry/geometry2d.hpp
   isVerificationFile: true
-  path: geometry/test/convex_hull.test.cpp
+  path: geometry/test/convex_cut.test.cpp
   requiredBy: []
   timestamp: '2020-10-29 23:07:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: geometry/test/convex_hull.test.cpp
+documentation_of: geometry/test/convex_cut.test.cpp
 layout: document
 redirect_from:
-- /verify/geometry/test/convex_hull.test.cpp
-- /verify/geometry/test/convex_hull.test.cpp.html
-title: geometry/test/convex_hull.test.cpp
+- /verify/geometry/test/convex_cut.test.cpp
+- /verify/geometry/test/convex_cut.test.cpp.html
+title: geometry/test/convex_cut.test.cpp
 ---
