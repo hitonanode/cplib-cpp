@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: graph/incremental_bridge_connectivity.hpp
+    title: graph/incremental_bridge_connectivity.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: graph/test/incremental-bridge-connectivity.test.cpp
+    title: graph/test/incremental-bridge-connectivity.test.cpp
   - icon: ':heavy_check_mark:'
     path: unionfind/test/unionfind.test.cpp
     title: unionfind/test/unionfind.test.cpp
@@ -33,11 +39,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: unionfind/unionfind.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/incremental_bridge_connectivity.hpp
   timestamp: '2020-03-07 22:54:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - unionfind/test/unionfind.test.cpp
+  - graph/test/incremental-bridge-connectivity.test.cpp
 documentation_of: unionfind/unionfind.hpp
 layout: document
 redirect_from:
