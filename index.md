@@ -22,7 +22,7 @@ data:
     - icon: ':warning:'
       path: convolution/fft_arbitrary_mod.hpp
       title: convolution/fft_arbitrary_mod.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: convolution/fft_double.hpp
       title: convolution/fft_double.hpp
     - icon: ':heavy_check_mark:'
@@ -132,7 +132,7 @@ data:
       title: graph/strongly_connected_components_bitset.hpp
   - name: graph-tree
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/centroid_decomposition.hpp
       title: graph-tree/centroid_decomposition.hpp
     - icon: ':x:'
@@ -516,6 +516,9 @@ data:
       title: graph/test/two-edge-connected-components.test.cpp
   - name: graph-tree/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: graph-tree/test/frequency_table_of_tree_distance.test.cpp
+      title: graph-tree/test/frequency_table_of_tree_distance.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph-tree/test/hl_decomposition.test.cpp
       title: graph-tree/test/hl_decomposition.test.cpp

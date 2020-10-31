@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: graph-tree/test/frequency_table_of_tree_distance.test.cpp
+    title: graph-tree/test/frequency_table_of_tree_distance.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>
@@ -35,7 +38,7 @@ data:
     \ fftconv(const std::vector<T> &a, const std::vector<T> &b)\n{\n    std::vector<cmplx>\
     \ ans = conv_cmplx(a, b);\n    std::vector<long long int> ret(ans.size());\n \
     \   for (int i = 0; i < (int)ans.size(); i++) ret[i] = floor(ans[i].real() + 0.5);\n\
-    \    return ret;\n}\n"
+    \    ret.resize(a.size() + b.size() - 1);\n    return ret;\n}\n"
   code: "#pragma once\n#include <complex>\n#include <utility>\n#include <vector>\n\
     \n// CUT begin\n// Convolution by FFT (Fast Fourier Transform)\n// Algorithm based\
     \ on <http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>\n// Verified:\
@@ -62,14 +65,15 @@ data:
     \ fftconv(const std::vector<T> &a, const std::vector<T> &b)\n{\n    std::vector<cmplx>\
     \ ans = conv_cmplx(a, b);\n    std::vector<long long int> ret(ans.size());\n \
     \   for (int i = 0; i < (int)ans.size(); i++) ret[i] = floor(ans[i].real() + 0.5);\n\
-    \    return ret;\n}\n"
+    \    ret.resize(a.size() + b.size() - 1);\n    return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: convolution/fft_double.hpp
   requiredBy: []
-  timestamp: '2020-03-07 22:40:57+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2020-10-31 10:15:30+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - graph-tree/test/frequency_table_of_tree_distance.test.cpp
 documentation_of: convolution/fft_double.hpp
 layout: document
 redirect_from:

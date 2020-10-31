@@ -34,69 +34,71 @@ data:
     \ &v, const DVAL &dv)\n        : l(nullptr), r(nullptr), sz(1), val(v), dval(dv)\
     \ {}\n        Node() {}\n    };\n    inline Node *_revise_val(Node *t) // \uFF08\
     t\u306E\u5B50\u306B\u95A2\u3059\u308B\u5916\u7684\u64CD\u4F5C\u5F8C\u306B\u547C\
-    \u3093\u3067\uFF09sz\u3068val\u3092\u9069\u5207\u306B\u76F4\u3059\n    {\n   \
-    \     if (t)\n        {\n            t->sz = size(t->l) + size(t->r) + 1;\n  \
-    \          t->val.sum = t->val.val + (t->l ? t->l->val.sum + t->l->sz * t->l->dval\
-    \ : 0) + (t->r ? t->r->val.sum + t->r->sz * t->r->dval : 0);\n        };\n   \
-    \     return t;\n    }\n    inline void _propagate_dval(DVAL &a, DVAL b) // \u9045\
-    \u5EF6\u8A55\u4FA1\u4F1D\u64AD\n    {\n        a += b;\n    }\n    inline void\
-    \ _reflect_dval(Node *a, DVAL b) // \u9045\u5EF6\u8A55\u4FA1\u53CD\u6620\n   \
-    \ {\n        a->val.val += b;\n        a->val.sum += a->sz * b;\n    }\n    vector<Node>\
-    \ data;\n    uint32_t d_ptr;\n\n    RandomizedBinarySearchTree(DVAL idval)\n \
-    \   : Idval(idval), d_ptr(0) { data.resize(len); }\n\n    Node *new_tree() { return\
-    \ nullptr; } // \u65B0\u305F\u306A\u6728\u3092\u4F5C\u6210\n    static inline\
-    \ uint32_t size(const Node *t) { return t ? t->sz : 0; }\n    inline int mem_used()\
-    \ { return (int)d_ptr; }\n    inline bool empty(Node *t) { return !t; }\n    inline\
-    \ Node *_make_node(const VAL &val) { if (d_ptr >= len) exit(1); return &(data[d_ptr++]\
-    \ = Node(val, Idval)); }\n    virtual void _duplicate_node(Node *&) {}\n\n\n \
-    \   inline void _resolve_dval(Node *&t) // \u5BFE\u8C61\u306E\u9045\u5EF6\u8A55\
-    \u4FA1\u3092\u89E3\u6C7A\n    {\n        if (!t) return;\n        _duplicate_node(t);\n\
-    \        if (t->dval != Idval) {\n            if (t->l) {\n                _duplicate_node(t->l);\n\
-    \                _propagate_dval(t->l->dval, t->dval);\n            }\n      \
-    \      if (t->r) {\n                _duplicate_node(t->r);\n                _propagate_dval(t->r->dval,\
-    \ t->dval);\n            }\n            _reflect_dval(t, t->dval);\n         \
-    \   t->dval = Idval;\n        }\n    }\n\n    // l\u3068r\u3092root\u3068\u3059\
-    \u308B\u6728\u540C\u58EB\u3092\u7D50\u5408\u3057\u3066\uFF0C\u65B0\u305F\u306A\
-    root\u3092\u8FD4\u3059\n    Node *merge(Node *l, Node *r)\n    {\n        if (l\
-    \ == nullptr || r == nullptr) return l ? l : r;\n        if (_rand() % (l->sz\
-    \ + r->sz) < l->sz)\n        {\n            _resolve_dval(l);\n            l->r\
-    \ = merge(l->r, r);\n            return _revise_val(l);\n        }\n        else\n\
-    \        {\n            _resolve_dval(r);\n            r->l = merge(l, r->l);\n\
-    \            return _revise_val(r);\n        }\n    }\n\n    // [0, k)\u306E\u6728\
-    \u3068[k, root->size())\u306E\u6728\u306B\u5206\u3051\u3066\u5404root\n    //\
-    \ \uFF08\u90E8\u5206\u6728\u306E\u8981\u7D20\u6570\u304C0\u306A\u3089nullptr\uFF09\
-    \u3092\u8FD4\u3059\n    pair<Node*, Node*> split(Node *&root, int k) // root\u306E\
-    \u5B50\u5B6B\u304B\u3089\u3042\u3068k\u500B\u6B32\u3057\u3044\n    {\n       \
-    \ if (root == nullptr) return make_pair(nullptr, nullptr);\n        _resolve_dval(root);\n\
-    \        if (k <= (int)size(root->l)) // left\u304B\u3089k\u500B\u62FE\u3048\u308B\
-    \n        {\n            auto p = split(root->l, k);\n            root->l = p.second;\n\
-    \            return make_pair(p.first, _revise_val(root));\n        }\n      \
-    \  else\n        {\n            auto p = split(root->r, k - size(root->l) - 1);\n\
-    \            root->r = p.first;\n            return make_pair(_revise_val(root),\
-    \ p.second);\n        }\n    }\n\n    // 0-indexed\u3067array[pos]\u306E\u624B\
-    \u524D\u306B\u65B0\u305F\u306A\u8981\u7D20newval\u3092\u633F\u5165\u3059\u308B\
-    \n    void insert(Node *&root, int pos, const VAL &newval)\n    {\n        auto\
-    \ p = split(root, pos);\n        root = merge(p.first, merge(_make_node(newval),\
-    \ p.second));\n    }\n\n    // 0-indexed\u3067array[pos]\u3092\u524A\u9664\u3059\
-    \u308B\uFF08\u5148\u982D\u304B\u3089pos+1\u500B\u76EE\u306E\u8981\u7D20\uFF09\n\
-    \    void erase(Node *&root, int pos)\n    {\n        auto p = split(root, pos);\n\
-    \        auto p2 = split(p.second, 1);\n        root = merge(p.first, p2.second);\n\
-    \    }\n\n    // 1\u70B9\u66F4\u65B0 array[pos].val\u306Bupdval\u3092\u5165\u308C\
-    \u308B\n    void set(Node *&root, int pos, const VAL &updval)\n    {\n       \
-    \ auto p = split(root, pos);\n        auto p2 = split(p.second, 1);\n        root\
-    \ = merge(p.first, merge(_make_node(updval), p2.second));\n    }\n\n    // \u9045\
-    \u5EF6\u8A55\u4FA1\u3092\u5229\u7528\u3057\u305F\u7BC4\u56F2\u66F4\u65B0 [l, r)\n\
-    \    void range_set(Node *&root, int l, int r, const DVAL &adddval)\n    {\n \
-    \       auto p = split(root, l);\n        auto p2 = split(p.second, r - l);\n\
-    \        _propagate_dval(p2.first->dval, adddval);\n        root = merge(p.first,\
-    \ merge(p2.first, p2.second));\n    }\n\n    // array[pos].val\u3092\u53D6\u5F97\
-    \u3059\u308B\n    Node range_get(Node *&root, int l, int r)\n    {\n        auto\
-    \ p = split(root, l);\n        auto p2 = split(p.second, r - l);\n        _resolve_dval(p2.first);\n\
-    \        Node res = *p2.first;\n        root = merge(p.first, merge(p2.first,\
-    \ p2.second));\n        return res;\n    }\n    Node get(Node *&root, int pos)\n\
-    \    {\n        return range_get(root, pos, pos + 1);\n    }\n\n    // \u666E\u901A\
-    \u306Elower_bound\n    int lower_bound(Node *root, const VAL &v)\n    {\n    \
-    \    if (root == nullptr) return 0;\n        return (v <= root->val) ? lower_bound(root->l,\
+    \u3093\u3067\uFF09sz\u3068val\u3092\u9069\u5207\u306B\u76F4\u3059 t\u306E\u5B50\
+    \u306E\u9045\u5EF6\u8A55\u4FA1\u304C\u6E08\u3093\u3067\u3044\u308B\u3068\u306F\
+    \u9650\u3089\u306A\u3044\n    {\n        if (t)\n        {\n            t->sz\
+    \ = size(t->l) + size(t->r) + 1;\n            t->val.sum = t->val.val + (t->l\
+    \ ? t->l->val.sum + t->l->sz * t->l->dval : 0) + (t->r ? t->r->val.sum + t->r->sz\
+    \ * t->r->dval : 0);\n        };\n        return t;\n    }\n    inline void _propagate_dval(DVAL\
+    \ &a, DVAL b) // \u9045\u5EF6\u8A55\u4FA1\u4F1D\u64AD\n    {\n        a += b;\n\
+    \    }\n    inline void _reflect_dval(Node *a, DVAL b) // \u9045\u5EF6\u8A55\u4FA1\
+    \u53CD\u6620\n    {\n        a->val.val += b;\n        a->val.sum += a->sz * b;\n\
+    \    }\n    vector<Node> data;\n    uint32_t d_ptr;\n\n    RandomizedBinarySearchTree(DVAL\
+    \ idval)\n    : Idval(idval), d_ptr(0) { data.resize(len); }\n\n    Node *new_tree()\
+    \ { return nullptr; } // \u65B0\u305F\u306A\u6728\u3092\u4F5C\u6210\n    static\
+    \ inline uint32_t size(const Node *t) { return t ? t->sz : 0; }\n    inline int\
+    \ mem_used() { return (int)d_ptr; }\n    inline bool empty(Node *t) { return !t;\
+    \ }\n    inline Node *_make_node(const VAL &val) { if (d_ptr >= len) exit(1);\
+    \ return &(data[d_ptr++] = Node(val, Idval)); }\n    virtual void _duplicate_node(Node\
+    \ *&) {}\n\n\n    inline void _resolve_dval(Node *&t) // \u5BFE\u8C61\u306E\u9045\
+    \u5EF6\u8A55\u4FA1\u3092\u89E3\u6C7A\n    {\n        if (!t) return;\n       \
+    \ _duplicate_node(t);\n        if (t->dval != Idval) {\n            if (t->l)\
+    \ {\n                _duplicate_node(t->l);\n                _propagate_dval(t->l->dval,\
+    \ t->dval);\n            }\n            if (t->r) {\n                _duplicate_node(t->r);\n\
+    \                _propagate_dval(t->r->dval, t->dval);\n            }\n      \
+    \      _reflect_dval(t, t->dval);\n            t->dval = Idval;\n        }\n \
+    \   }\n\n    // l\u3068r\u3092root\u3068\u3059\u308B\u6728\u540C\u58EB\u3092\u7D50\
+    \u5408\u3057\u3066\uFF0C\u65B0\u305F\u306Aroot\u3092\u8FD4\u3059\n    Node *merge(Node\
+    \ *l, Node *r)\n    {\n        if (l == nullptr || r == nullptr) return l ? l\
+    \ : r;\n        if (_rand() % (l->sz + r->sz) < l->sz)\n        {\n          \
+    \  _resolve_dval(l);\n            l->r = merge(l->r, r);\n            return _revise_val(l);\n\
+    \        }\n        else\n        {\n            _resolve_dval(r);\n         \
+    \   r->l = merge(l, r->l);\n            return _revise_val(r);\n        }\n  \
+    \  }\n\n    // [0, k)\u306E\u6728\u3068[k, root->size())\u306E\u6728\u306B\u5206\
+    \u3051\u3066\u5404root\n    // \uFF08\u90E8\u5206\u6728\u306E\u8981\u7D20\u6570\
+    \u304C0\u306A\u3089nullptr\uFF09\u3092\u8FD4\u3059\n    pair<Node*, Node*> split(Node\
+    \ *&root, int k) // root\u306E\u5B50\u5B6B\u304B\u3089\u3042\u3068k\u500B\u6B32\
+    \u3057\u3044\n    {\n        if (root == nullptr) return make_pair(nullptr, nullptr);\n\
+    \        _resolve_dval(root);\n        if (k <= (int)size(root->l)) // left\u304B\
+    \u3089k\u500B\u62FE\u3048\u308B\n        {\n            auto p = split(root->l,\
+    \ k);\n            root->l = p.second;\n            return make_pair(p.first,\
+    \ _revise_val(root));\n        }\n        else\n        {\n            auto p\
+    \ = split(root->r, k - size(root->l) - 1);\n            root->r = p.first;\n \
+    \           return make_pair(_revise_val(root), p.second);\n        }\n    }\n\
+    \n    // 0-indexed\u3067array[pos]\u306E\u624B\u524D\u306B\u65B0\u305F\u306A\u8981\
+    \u7D20newval\u3092\u633F\u5165\u3059\u308B\n    void insert(Node *&root, int pos,\
+    \ const VAL &newval)\n    {\n        auto p = split(root, pos);\n        root\
+    \ = merge(p.first, merge(_make_node(newval), p.second));\n    }\n\n    // 0-indexed\u3067\
+    array[pos]\u3092\u524A\u9664\u3059\u308B\uFF08\u5148\u982D\u304B\u3089pos+1\u500B\
+    \u76EE\u306E\u8981\u7D20\uFF09\n    void erase(Node *&root, int pos)\n    {\n\
+    \        auto p = split(root, pos);\n        auto p2 = split(p.second, 1);\n \
+    \       root = merge(p.first, p2.second);\n    }\n\n    // 1\u70B9\u66F4\u65B0\
+    \ array[pos].val\u306Bupdval\u3092\u5165\u308C\u308B\n    void set(Node *&root,\
+    \ int pos, const VAL &updval)\n    {\n        auto p = split(root, pos);\n   \
+    \     auto p2 = split(p.second, 1);\n        root = merge(p.first, merge(_make_node(updval),\
+    \ p2.second));\n    }\n\n    // \u9045\u5EF6\u8A55\u4FA1\u3092\u5229\u7528\u3057\
+    \u305F\u7BC4\u56F2\u66F4\u65B0 [l, r)\n    void range_set(Node *&root, int l,\
+    \ int r, const DVAL &adddval)\n    {\n        auto p = split(root, l);\n     \
+    \   auto p2 = split(p.second, r - l);\n        _propagate_dval(p2.first->dval,\
+    \ adddval);\n        root = merge(p.first, merge(p2.first, p2.second));\n    }\n\
+    \n    // array[pos].val\u3092\u53D6\u5F97\u3059\u308B\n    Node range_get(Node\
+    \ *&root, int l, int r)\n    {\n        auto p = split(root, l);\n        auto\
+    \ p2 = split(p.second, r - l);\n        _resolve_dval(p2.first);\n        Node\
+    \ res = *p2.first;\n        root = merge(p.first, merge(p2.first, p2.second));\n\
+    \        return res;\n    }\n    Node get(Node *&root, int pos)\n    {\n     \
+    \   return range_get(root, pos, pos + 1);\n    }\n\n    // \u666E\u901A\u306E\
+    lower_bound\n    int lower_bound(Node *root, const VAL &v)\n    {\n        if\
+    \ (root == nullptr) return 0;\n        return (v <= root->val) ? lower_bound(root->l,\
     \ v) : lower_bound(root->r, v) + size(root->l) + 1;\n    }\n\n    // \u30C7\u30FC\
     \u30BF\u3092\u58CA\u3057\u3066\u65B0\u898F\u306Binit\u306E\u5185\u5BB9\u3092\u8A70\
     \u3081\u308B\n    void assign(Node *&root, const vector<VAL> &init)\n    {\n \
@@ -158,69 +160,71 @@ data:
     \        : l(nullptr), r(nullptr), sz(1), val(v), dval(dv) {}\n        Node()\
     \ {}\n    };\n    inline Node *_revise_val(Node *t) // \uFF08t\u306E\u5B50\u306B\
     \u95A2\u3059\u308B\u5916\u7684\u64CD\u4F5C\u5F8C\u306B\u547C\u3093\u3067\uFF09\
-    sz\u3068val\u3092\u9069\u5207\u306B\u76F4\u3059\n    {\n        if (t)\n     \
-    \   {\n            t->sz = size(t->l) + size(t->r) + 1;\n            t->val.sum\
-    \ = t->val.val + (t->l ? t->l->val.sum + t->l->sz * t->l->dval : 0) + (t->r ?\
-    \ t->r->val.sum + t->r->sz * t->r->dval : 0);\n        };\n        return t;\n\
-    \    }\n    inline void _propagate_dval(DVAL &a, DVAL b) // \u9045\u5EF6\u8A55\
-    \u4FA1\u4F1D\u64AD\n    {\n        a += b;\n    }\n    inline void _reflect_dval(Node\
-    \ *a, DVAL b) // \u9045\u5EF6\u8A55\u4FA1\u53CD\u6620\n    {\n        a->val.val\
-    \ += b;\n        a->val.sum += a->sz * b;\n    }\n    vector<Node> data;\n   \
-    \ uint32_t d_ptr;\n\n    RandomizedBinarySearchTree(DVAL idval)\n    : Idval(idval),\
-    \ d_ptr(0) { data.resize(len); }\n\n    Node *new_tree() { return nullptr; } //\
-    \ \u65B0\u305F\u306A\u6728\u3092\u4F5C\u6210\n    static inline uint32_t size(const\
-    \ Node *t) { return t ? t->sz : 0; }\n    inline int mem_used() { return (int)d_ptr;\
-    \ }\n    inline bool empty(Node *t) { return !t; }\n    inline Node *_make_node(const\
-    \ VAL &val) { if (d_ptr >= len) exit(1); return &(data[d_ptr++] = Node(val, Idval));\
-    \ }\n    virtual void _duplicate_node(Node *&) {}\n\n\n    inline void _resolve_dval(Node\
-    \ *&t) // \u5BFE\u8C61\u306E\u9045\u5EF6\u8A55\u4FA1\u3092\u89E3\u6C7A\n    {\n\
-    \        if (!t) return;\n        _duplicate_node(t);\n        if (t->dval !=\
-    \ Idval) {\n            if (t->l) {\n                _duplicate_node(t->l);\n\
-    \                _propagate_dval(t->l->dval, t->dval);\n            }\n      \
-    \      if (t->r) {\n                _duplicate_node(t->r);\n                _propagate_dval(t->r->dval,\
-    \ t->dval);\n            }\n            _reflect_dval(t, t->dval);\n         \
-    \   t->dval = Idval;\n        }\n    }\n\n    // l\u3068r\u3092root\u3068\u3059\
-    \u308B\u6728\u540C\u58EB\u3092\u7D50\u5408\u3057\u3066\uFF0C\u65B0\u305F\u306A\
-    root\u3092\u8FD4\u3059\n    Node *merge(Node *l, Node *r)\n    {\n        if (l\
-    \ == nullptr || r == nullptr) return l ? l : r;\n        if (_rand() % (l->sz\
-    \ + r->sz) < l->sz)\n        {\n            _resolve_dval(l);\n            l->r\
-    \ = merge(l->r, r);\n            return _revise_val(l);\n        }\n        else\n\
-    \        {\n            _resolve_dval(r);\n            r->l = merge(l, r->l);\n\
-    \            return _revise_val(r);\n        }\n    }\n\n    // [0, k)\u306E\u6728\
-    \u3068[k, root->size())\u306E\u6728\u306B\u5206\u3051\u3066\u5404root\n    //\
-    \ \uFF08\u90E8\u5206\u6728\u306E\u8981\u7D20\u6570\u304C0\u306A\u3089nullptr\uFF09\
-    \u3092\u8FD4\u3059\n    pair<Node*, Node*> split(Node *&root, int k) // root\u306E\
-    \u5B50\u5B6B\u304B\u3089\u3042\u3068k\u500B\u6B32\u3057\u3044\n    {\n       \
-    \ if (root == nullptr) return make_pair(nullptr, nullptr);\n        _resolve_dval(root);\n\
-    \        if (k <= (int)size(root->l)) // left\u304B\u3089k\u500B\u62FE\u3048\u308B\
-    \n        {\n            auto p = split(root->l, k);\n            root->l = p.second;\n\
-    \            return make_pair(p.first, _revise_val(root));\n        }\n      \
-    \  else\n        {\n            auto p = split(root->r, k - size(root->l) - 1);\n\
-    \            root->r = p.first;\n            return make_pair(_revise_val(root),\
-    \ p.second);\n        }\n    }\n\n    // 0-indexed\u3067array[pos]\u306E\u624B\
-    \u524D\u306B\u65B0\u305F\u306A\u8981\u7D20newval\u3092\u633F\u5165\u3059\u308B\
-    \n    void insert(Node *&root, int pos, const VAL &newval)\n    {\n        auto\
-    \ p = split(root, pos);\n        root = merge(p.first, merge(_make_node(newval),\
-    \ p.second));\n    }\n\n    // 0-indexed\u3067array[pos]\u3092\u524A\u9664\u3059\
-    \u308B\uFF08\u5148\u982D\u304B\u3089pos+1\u500B\u76EE\u306E\u8981\u7D20\uFF09\n\
-    \    void erase(Node *&root, int pos)\n    {\n        auto p = split(root, pos);\n\
-    \        auto p2 = split(p.second, 1);\n        root = merge(p.first, p2.second);\n\
-    \    }\n\n    // 1\u70B9\u66F4\u65B0 array[pos].val\u306Bupdval\u3092\u5165\u308C\
-    \u308B\n    void set(Node *&root, int pos, const VAL &updval)\n    {\n       \
-    \ auto p = split(root, pos);\n        auto p2 = split(p.second, 1);\n        root\
-    \ = merge(p.first, merge(_make_node(updval), p2.second));\n    }\n\n    // \u9045\
-    \u5EF6\u8A55\u4FA1\u3092\u5229\u7528\u3057\u305F\u7BC4\u56F2\u66F4\u65B0 [l, r)\n\
-    \    void range_set(Node *&root, int l, int r, const DVAL &adddval)\n    {\n \
-    \       auto p = split(root, l);\n        auto p2 = split(p.second, r - l);\n\
-    \        _propagate_dval(p2.first->dval, adddval);\n        root = merge(p.first,\
-    \ merge(p2.first, p2.second));\n    }\n\n    // array[pos].val\u3092\u53D6\u5F97\
-    \u3059\u308B\n    Node range_get(Node *&root, int l, int r)\n    {\n        auto\
-    \ p = split(root, l);\n        auto p2 = split(p.second, r - l);\n        _resolve_dval(p2.first);\n\
-    \        Node res = *p2.first;\n        root = merge(p.first, merge(p2.first,\
-    \ p2.second));\n        return res;\n    }\n    Node get(Node *&root, int pos)\n\
-    \    {\n        return range_get(root, pos, pos + 1);\n    }\n\n    // \u666E\u901A\
-    \u306Elower_bound\n    int lower_bound(Node *root, const VAL &v)\n    {\n    \
-    \    if (root == nullptr) return 0;\n        return (v <= root->val) ? lower_bound(root->l,\
+    sz\u3068val\u3092\u9069\u5207\u306B\u76F4\u3059 t\u306E\u5B50\u306E\u9045\u5EF6\
+    \u8A55\u4FA1\u304C\u6E08\u3093\u3067\u3044\u308B\u3068\u306F\u9650\u3089\u306A\
+    \u3044\n    {\n        if (t)\n        {\n            t->sz = size(t->l) + size(t->r)\
+    \ + 1;\n            t->val.sum = t->val.val + (t->l ? t->l->val.sum + t->l->sz\
+    \ * t->l->dval : 0) + (t->r ? t->r->val.sum + t->r->sz * t->r->dval : 0);\n  \
+    \      };\n        return t;\n    }\n    inline void _propagate_dval(DVAL &a,\
+    \ DVAL b) // \u9045\u5EF6\u8A55\u4FA1\u4F1D\u64AD\n    {\n        a += b;\n  \
+    \  }\n    inline void _reflect_dval(Node *a, DVAL b) // \u9045\u5EF6\u8A55\u4FA1\
+    \u53CD\u6620\n    {\n        a->val.val += b;\n        a->val.sum += a->sz * b;\n\
+    \    }\n    vector<Node> data;\n    uint32_t d_ptr;\n\n    RandomizedBinarySearchTree(DVAL\
+    \ idval)\n    : Idval(idval), d_ptr(0) { data.resize(len); }\n\n    Node *new_tree()\
+    \ { return nullptr; } // \u65B0\u305F\u306A\u6728\u3092\u4F5C\u6210\n    static\
+    \ inline uint32_t size(const Node *t) { return t ? t->sz : 0; }\n    inline int\
+    \ mem_used() { return (int)d_ptr; }\n    inline bool empty(Node *t) { return !t;\
+    \ }\n    inline Node *_make_node(const VAL &val) { if (d_ptr >= len) exit(1);\
+    \ return &(data[d_ptr++] = Node(val, Idval)); }\n    virtual void _duplicate_node(Node\
+    \ *&) {}\n\n\n    inline void _resolve_dval(Node *&t) // \u5BFE\u8C61\u306E\u9045\
+    \u5EF6\u8A55\u4FA1\u3092\u89E3\u6C7A\n    {\n        if (!t) return;\n       \
+    \ _duplicate_node(t);\n        if (t->dval != Idval) {\n            if (t->l)\
+    \ {\n                _duplicate_node(t->l);\n                _propagate_dval(t->l->dval,\
+    \ t->dval);\n            }\n            if (t->r) {\n                _duplicate_node(t->r);\n\
+    \                _propagate_dval(t->r->dval, t->dval);\n            }\n      \
+    \      _reflect_dval(t, t->dval);\n            t->dval = Idval;\n        }\n \
+    \   }\n\n    // l\u3068r\u3092root\u3068\u3059\u308B\u6728\u540C\u58EB\u3092\u7D50\
+    \u5408\u3057\u3066\uFF0C\u65B0\u305F\u306Aroot\u3092\u8FD4\u3059\n    Node *merge(Node\
+    \ *l, Node *r)\n    {\n        if (l == nullptr || r == nullptr) return l ? l\
+    \ : r;\n        if (_rand() % (l->sz + r->sz) < l->sz)\n        {\n          \
+    \  _resolve_dval(l);\n            l->r = merge(l->r, r);\n            return _revise_val(l);\n\
+    \        }\n        else\n        {\n            _resolve_dval(r);\n         \
+    \   r->l = merge(l, r->l);\n            return _revise_val(r);\n        }\n  \
+    \  }\n\n    // [0, k)\u306E\u6728\u3068[k, root->size())\u306E\u6728\u306B\u5206\
+    \u3051\u3066\u5404root\n    // \uFF08\u90E8\u5206\u6728\u306E\u8981\u7D20\u6570\
+    \u304C0\u306A\u3089nullptr\uFF09\u3092\u8FD4\u3059\n    pair<Node*, Node*> split(Node\
+    \ *&root, int k) // root\u306E\u5B50\u5B6B\u304B\u3089\u3042\u3068k\u500B\u6B32\
+    \u3057\u3044\n    {\n        if (root == nullptr) return make_pair(nullptr, nullptr);\n\
+    \        _resolve_dval(root);\n        if (k <= (int)size(root->l)) // left\u304B\
+    \u3089k\u500B\u62FE\u3048\u308B\n        {\n            auto p = split(root->l,\
+    \ k);\n            root->l = p.second;\n            return make_pair(p.first,\
+    \ _revise_val(root));\n        }\n        else\n        {\n            auto p\
+    \ = split(root->r, k - size(root->l) - 1);\n            root->r = p.first;\n \
+    \           return make_pair(_revise_val(root), p.second);\n        }\n    }\n\
+    \n    // 0-indexed\u3067array[pos]\u306E\u624B\u524D\u306B\u65B0\u305F\u306A\u8981\
+    \u7D20newval\u3092\u633F\u5165\u3059\u308B\n    void insert(Node *&root, int pos,\
+    \ const VAL &newval)\n    {\n        auto p = split(root, pos);\n        root\
+    \ = merge(p.first, merge(_make_node(newval), p.second));\n    }\n\n    // 0-indexed\u3067\
+    array[pos]\u3092\u524A\u9664\u3059\u308B\uFF08\u5148\u982D\u304B\u3089pos+1\u500B\
+    \u76EE\u306E\u8981\u7D20\uFF09\n    void erase(Node *&root, int pos)\n    {\n\
+    \        auto p = split(root, pos);\n        auto p2 = split(p.second, 1);\n \
+    \       root = merge(p.first, p2.second);\n    }\n\n    // 1\u70B9\u66F4\u65B0\
+    \ array[pos].val\u306Bupdval\u3092\u5165\u308C\u308B\n    void set(Node *&root,\
+    \ int pos, const VAL &updval)\n    {\n        auto p = split(root, pos);\n   \
+    \     auto p2 = split(p.second, 1);\n        root = merge(p.first, merge(_make_node(updval),\
+    \ p2.second));\n    }\n\n    // \u9045\u5EF6\u8A55\u4FA1\u3092\u5229\u7528\u3057\
+    \u305F\u7BC4\u56F2\u66F4\u65B0 [l, r)\n    void range_set(Node *&root, int l,\
+    \ int r, const DVAL &adddval)\n    {\n        auto p = split(root, l);\n     \
+    \   auto p2 = split(p.second, r - l);\n        _propagate_dval(p2.first->dval,\
+    \ adddval);\n        root = merge(p.first, merge(p2.first, p2.second));\n    }\n\
+    \n    // array[pos].val\u3092\u53D6\u5F97\u3059\u308B\n    Node range_get(Node\
+    \ *&root, int l, int r)\n    {\n        auto p = split(root, l);\n        auto\
+    \ p2 = split(p.second, r - l);\n        _resolve_dval(p2.first);\n        Node\
+    \ res = *p2.first;\n        root = merge(p.first, merge(p2.first, p2.second));\n\
+    \        return res;\n    }\n    Node get(Node *&root, int pos)\n    {\n     \
+    \   return range_get(root, pos, pos + 1);\n    }\n\n    // \u666E\u901A\u306E\
+    lower_bound\n    int lower_bound(Node *root, const VAL &v)\n    {\n        if\
+    \ (root == nullptr) return 0;\n        return (v <= root->val) ? lower_bound(root->l,\
     \ v) : lower_bound(root->r, v) + size(root->l) + 1;\n    }\n\n    // \u30C7\u30FC\
     \u30BF\u3092\u58CA\u3057\u3066\u65B0\u898F\u306Binit\u306E\u5185\u5BB9\u3092\u8A70\
     \u3081\u308B\n    void assign(Node *&root, const vector<VAL> &init)\n    {\n \
@@ -259,7 +263,7 @@ data:
   isVerificationFile: false
   path: other_data_structures/rbst_fast.cpp
   requiredBy: []
-  timestamp: '2020-09-29 19:32:03+09:00'
+  timestamp: '2020-10-31 10:15:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: other_data_structures/rbst_fast.cpp
