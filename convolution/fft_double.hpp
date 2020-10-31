@@ -59,5 +59,6 @@ std::vector<long long int> fftconv(const std::vector<T> &a, const std::vector<T>
     std::vector<cmplx> ans = conv_cmplx(a, b);
     std::vector<long long int> ret(ans.size());
     for (int i = 0; i < (int)ans.size(); i++) ret[i] = floor(ans[i].real() + 0.5);
+    ret.resize(a.size() + b.size() - 1);
     return ret;
 }

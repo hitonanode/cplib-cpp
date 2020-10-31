@@ -53,7 +53,7 @@ struct RandomizedBinarySearchTree
         : l(nullptr), r(nullptr), sz(1), val(v), dval(dv) {}
         Node() {}
     };
-    inline Node *_revise_val(Node *t) // （tの子に関する外的操作後に呼んで）szとvalを適切に直す
+    inline Node *_revise_val(Node *t) // （tの子に関する外的操作後に呼んで）szとvalを適切に直す tの子の遅延評価が済んでいるとは限らない
     {
         if (t)
         {
