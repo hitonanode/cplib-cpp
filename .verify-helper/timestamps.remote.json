@@ -25,6 +25,7 @@
 "geometry/test/convex_cut.test.cpp": "2020-10-29 23:07:35 +0900",
 "geometry/test/convex_hull.test.cpp": "2020-10-29 23:07:35 +0900",
 "geometry/test/sort_by_argument.test.cpp": "2020-04-18 18:32:38 +0900",
+"graph-tree/test/frequency_table_of_tree_distance.test.cpp": "2020-10-31 10:15:30 +0900",
 "graph-tree/test/hl_decomposition.test.cpp": "2020-03-07 22:54:47 +0900",
 "graph-tree/test/lca.test.cpp": "2020-03-07 22:54:47 +0900",
 "graph/test/2sat_solver.test.cpp": "2020-09-05 20:52:47 +0900",
