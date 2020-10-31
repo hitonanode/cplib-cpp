@@ -37,6 +37,7 @@
 "graph/test/cycle_detection_directed.test.cpp": "2020-09-05 20:52:47 +0900",
 "graph/test/dijkstra.test.cpp": "2020-10-04 15:46:40 +0900",
 "graph/test/general_matching.test.cpp": "2020-10-15 00:04:43 +0900",
+"graph/test/incremental-bridge-connectivity.test.cpp": "2020-10-31 12:12:16 +0900",
 "graph/test/maximum_independent_set.test.cpp": "2020-06-06 14:20:46 +0900",
 "graph/test/strongly_connected_components.test.cpp": "2020-09-05 20:52:47 +0900",
 "graph/test/strongly_connected_components_bitset.test.cpp": "2020-03-07 22:40:57 +0900",
