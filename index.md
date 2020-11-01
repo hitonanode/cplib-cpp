@@ -240,6 +240,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/sliding_window_aggregation.hpp
       title: other_data_structures/sliding_window_aggregation.hpp
+    - icon: ':heavy_check_mark:'
+      path: other_data_structures/static_range_inversion.hpp
+      title: other_data_structures/static_range_inversion.hpp
   - name: random
     pages:
     - icon: ':warning:'
@@ -608,6 +611,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/test/queue_operate_all_composite.test.cpp
       title: other_data_structures/test/queue_operate_all_composite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_data_structures/test/static_range_inversion.test.cpp
+      title: other_data_structures/test/static_range_inversion.test.cpp
   - name: random/test
     pages:
     - icon: ':heavy_check_mark:'
