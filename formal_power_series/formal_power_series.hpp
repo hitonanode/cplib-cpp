@@ -206,6 +206,23 @@ struct FormalPowerSeries : vector<T>
         return *this;
     }
 
+    // Calculate f(X + c) from f(X), O(NlogN)
+    P shift(T c) const {
+        const int n = (int)this->size();
+        P ret = *this;
+        for (int i = 0; i < n; i++) {
+            ret[i] *= T(i).fac();
+        }
+        reverse(ret.begin(), ret.end());
+        P exp_cx = P({ 0, c }).exp(n);
+        ret = (ret * exp_cx).pre(n);
+        reverse(ret.begin(), ret.end());
+        for (int i = 0; i < n; i++) {
+            ret[i] /= T(i).fac();
+        }
+        return ret;
+    }
+
     T coeff(int i) const {
         if ((int)this->size() <= i or i < 0) return T(0);
         return (*this)[i];
