@@ -4,11 +4,12 @@
 #include <vector>
 
 // CUT begin
-struct PersistentUnionFind
+// Partially persistent UnionFind
+struct PartiallyPersistentUnionFind
 {
     std::vector<int> parsz, t_unite;
     std::vector<std::map<int, int>> size_history;
-    PersistentUnionFind(int N) : parsz(N, 1), t_unite(N, 2000000000), size_history(N) {
+    PartiallyPersistentUnionFind(int N) : parsz(N, 1), t_unite(N, 2000000000), size_history(N) {
         for (int i = 0; i < N; i++) size_history[i][-1] = 1;
     }
     int find(int x, int t) { return (t_unite[x] > t) ? x : find(parsz[x], t); } // 時刻t以下のマージ操作によって定まる親

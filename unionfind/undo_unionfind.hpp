@@ -7,12 +7,12 @@
 // CUT begin
 // UnionFind, able to rewind to the previous state by undo()
 // Written for Educational Codeforces 62 F, although not verified yet.
-struct UndoSizeAwareUnionFind
+struct UndoUnionFind
 {
     using pint = std::pair<int, int>;
     std::vector<int> par, cou;
     std::stack<std::pair<int, pint>> history;
-    UndoSizeAwareUnionFind(int N) : par(N), cou(N, 1) {
+    UndoUnionFind(int N) : par(N), cou(N, 1) {
         std::iota(par.begin(), par.end(), 0);
     }
     int find(int x) { return (par[x] == x) ? x :find(par[x]); }
