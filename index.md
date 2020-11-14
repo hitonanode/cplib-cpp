@@ -220,6 +220,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
+  - name: other_algorithms
+    pages:
+    - icon: ':warning:'
+      path: other_algorithms/smawk.hpp
+      title: other_algorithms/smawk.hpp
   - name: other_data_structures
     pages:
     - icon: ':heavy_check_mark:'
