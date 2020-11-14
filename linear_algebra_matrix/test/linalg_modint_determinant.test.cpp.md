@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
+    path: modint.hpp
+    title: modint.hpp
   - icon: ':question:'
-    path: modulus/modint_runtime.hpp
-    title: modulus/modint_runtime.hpp
+    path: number/modint_runtime.hpp
+    title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/matrix_det
@@ -112,7 +112,7 @@ data:
     \ f(n) = af(n - 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3,\
     \ 4=>5, ...\ntemplate <typename T>\nT Fibonacci(long long int k, int a = 1, int\
     \ b = 1)\n{\n    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n\
-    \    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 4 \"modulus/modint_fixed.hpp\"\
+    \    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 4 \"modint.hpp\"\
     \n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using\
     \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
     \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
@@ -151,8 +151,9 @@ data:
     \ &os, const ModInt &x) { os << x.val;  return os; }\n    constexpr lint power(lint\
     \ n) const {\n        lint ans = 1, tmp = this->val;\n        while (n) {\n  \
     \          if (n & 1) ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n\
-    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr lint\
-    \ inv() const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
+    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr ModInt\
+    \ pow(lint n) const {\n        return power(n);\n    }\n    constexpr lint inv()\
+    \ const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
     \ n) const { return ModInt(this->power(n)); }\n    constexpr ModInt &operator^=(lint\
     \ n) { return *this = *this ^ n; }\n\n    inline ModInt fac() const {\n      \
     \  static std::vector<ModInt> facs;\n        int l0 = facs.size();\n        if\
@@ -173,7 +174,7 @@ data:
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
     \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 5 \"modulus/modint_runtime.hpp\"\
+    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 5 \"number/modint_runtime.hpp\"\
     \n\n// CUT begin\nstruct ModIntRuntime\n{\n    using lint = long long int;\n \
     \   static int get_mod() { return mod; }\n    int val;\n    static int mod;\n\
     \    static std::vector<ModIntRuntime> &facs()\n    {\n        static std::vector<ModIntRuntime>\
@@ -217,7 +218,8 @@ data:
     \ &x) { os << x.val;  return os; }\n \n    lint power(lint n) const {\n      \
     \  lint ans = 1, tmp = this->val;\n        while (n) {\n            if (n & 1)\
     \ ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n            n /=\
-    \ 2;\n        }\n        return ans;\n    }\n    lint inv() const { return this->power(mod\
+    \ 2;\n        }\n        return ans;\n    }\n    ModIntRuntime pow(lint n) const\
+    \ {\n        return power(n);\n    }\n    lint inv() const { return this->power(mod\
     \ - 2); }\n    ModIntRuntime operator^(lint n) const { return ModIntRuntime(this->power(n));\
     \ }\n    ModIntRuntime &operator^=(lint n) { return *this = *this ^ n; }\n \n\
     \    ModIntRuntime fac() const {\n        int l0 = facs().size();\n        if\
@@ -249,25 +251,25 @@ data:
     \n    assert(ret_fixed == ret_runtime);\n    std::cout << ret_fixed << std::endl;\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\n#include\
-    \ \"linear_algebra_matrix/linalg_modint.hpp\"\n#include \"modulus/modint_fixed.hpp\"\
-    \n#include \"modulus/modint_runtime.hpp\"\n#include <iostream>\n\nint main()\n\
-    {\n    constexpr int mod = 998244353;\n    ModIntRuntime::set_mod(mod);\n\n  \
-    \  int N;\n    std::cin >> N;\n\n    matrix<ModInt<mod>> Mfixed(N, N);\n    std::cin\
-    \ >> Mfixed;\n\n    matrix<ModIntRuntime> Mruntime(N, N);\n    for (int i = 0;\
-    \ i < N; i++) {\n        for (int j = 0; j < N; j++) {\n            Mruntime[i][j]\
-    \ = Mfixed[i][j].val;\n        }\n    }\n    int ret_fixed = Mfixed.gauss_jordan().determinant_of_upper_triangle().val;\n\
+    \ \"linear_algebra_matrix/linalg_modint.hpp\"\n#include \"modint.hpp\"\n#include\
+    \ \"number/modint_runtime.hpp\"\n#include <iostream>\n\nint main()\n{\n    constexpr\
+    \ int mod = 998244353;\n    ModIntRuntime::set_mod(mod);\n\n    int N;\n    std::cin\
+    \ >> N;\n\n    matrix<ModInt<mod>> Mfixed(N, N);\n    std::cin >> Mfixed;\n\n\
+    \    matrix<ModIntRuntime> Mruntime(N, N);\n    for (int i = 0; i < N; i++) {\n\
+    \        for (int j = 0; j < N; j++) {\n            Mruntime[i][j] = Mfixed[i][j].val;\n\
+    \        }\n    }\n    int ret_fixed = Mfixed.gauss_jordan().determinant_of_upper_triangle().val;\n\
     \    int ret_runtime = Mruntime.gauss_jordan().determinant_of_upper_triangle().val;\n\
     \n    assert(ret_fixed == ret_runtime);\n    std::cout << ret_fixed << std::endl;\n\
     }\n"
   dependsOn:
   - linear_algebra_matrix/linalg_modint.hpp
-  - modulus/modint_fixed.hpp
-  - modulus/modint_runtime.hpp
+  - modint.hpp
+  - number/modint_runtime.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   requiredBy: []
-  timestamp: '2020-10-15 00:04:43+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 01:21:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
 layout: document

@@ -2,20 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: modulus/modint_runtime.hpp
-    title: modulus/modint_runtime.hpp
+    path: number/modint_runtime.hpp
+    title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sqrt_mod
     links:
     - https://judge.yosupo.jp/problem/sqrt_mod
-  bundledCode: "#line 1 \"modulus/test/sqrt_modint_runtime.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"number/test/sqrt_modint_runtime.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include <iostream>\n#line 3 \"\
-    modulus/modint_runtime.hpp\"\n#include <vector>\n#include <set>\n\n// CUT begin\n\
+    number/modint_runtime.hpp\"\n#include <vector>\n#include <set>\n\n// CUT begin\n\
     struct ModIntRuntime\n{\n    using lint = long long int;\n    static int get_mod()\
     \ { return mod; }\n    int val;\n    static int mod;\n    static std::vector<ModIntRuntime>\
     \ &facs()\n    {\n        static std::vector<ModIntRuntime> facs_;\n        return\
@@ -58,7 +58,8 @@ data:
     \ &x) { os << x.val;  return os; }\n \n    lint power(lint n) const {\n      \
     \  lint ans = 1, tmp = this->val;\n        while (n) {\n            if (n & 1)\
     \ ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n            n /=\
-    \ 2;\n        }\n        return ans;\n    }\n    lint inv() const { return this->power(mod\
+    \ 2;\n        }\n        return ans;\n    }\n    ModIntRuntime pow(lint n) const\
+    \ {\n        return power(n);\n    }\n    lint inv() const { return this->power(mod\
     \ - 2); }\n    ModIntRuntime operator^(lint n) const { return ModIntRuntime(this->power(n));\
     \ }\n    ModIntRuntime &operator^=(lint n) { return *this = *this ^ n; }\n \n\
     \    ModIntRuntime fac() const {\n        int l0 = facs().size();\n        if\
@@ -80,30 +81,30 @@ data:
     \ y;\n            while (t != 1) j++, t *= t;\n            z = z.power(1LL <<\
     \ (e - j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n   \
     \     }\n        return ModIntRuntime(std::min(x.val, mod - x.val));\n    }\n\
-    };\nint ModIntRuntime::mod = 1;\n#line 4 \"modulus/test/sqrt_modint_runtime.test.cpp\"\
+    };\nint ModIntRuntime::mod = 1;\n#line 4 \"number/test/sqrt_modint_runtime.test.cpp\"\
     \nusing namespace std;\n\nint main()\n{\n    int T;\n    cin >> T;\n    while\
     \ (T--) {\n        int Y, P;\n        cin >> Y >> P;\n        ModIntRuntime::mod\
     \ = P;\n        ModIntRuntime m = Y;\n        if (Y) {\n            m = m.sqrt();\n\
     \            cout << (m ? m.val : -1) << endl;\n        }\n        else cout <<\
     \ 0 << endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include <iostream>\n\
-    #include \"modulus/modint_runtime.hpp\"\nusing namespace std;\n\nint main()\n\
-    {\n    int T;\n    cin >> T;\n    while (T--) {\n        int Y, P;\n        cin\
+    #include \"number/modint_runtime.hpp\"\nusing namespace std;\n\nint main()\n{\n\
+    \    int T;\n    cin >> T;\n    while (T--) {\n        int Y, P;\n        cin\
     \ >> Y >> P;\n        ModIntRuntime::mod = P;\n        ModIntRuntime m = Y;\n\
     \        if (Y) {\n            m = m.sqrt();\n            cout << (m ? m.val :\
     \ -1) << endl;\n        }\n        else cout << 0 << endl;\n    }\n}\n"
   dependsOn:
-  - modulus/modint_runtime.hpp
+  - number/modint_runtime.hpp
   isVerificationFile: true
-  path: modulus/test/sqrt_modint_runtime.test.cpp
+  path: number/test/sqrt_modint_runtime.test.cpp
   requiredBy: []
-  timestamp: '2020-03-07 22:54:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 01:21:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: modulus/test/sqrt_modint_runtime.test.cpp
+documentation_of: number/test/sqrt_modint_runtime.test.cpp
 layout: document
 redirect_from:
-- /verify/modulus/test/sqrt_modint_runtime.test.cpp
-- /verify/modulus/test/sqrt_modint_runtime.test.cpp.html
-title: modulus/test/sqrt_modint_runtime.test.cpp
+- /verify/number/test/sqrt_modint_runtime.test.cpp
+- /verify/number/test/sqrt_modint_runtime.test.cpp.html
+title: number/test/sqrt_modint_runtime.test.cpp
 ---

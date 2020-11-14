@@ -2,18 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':warning:'
     path: flow/b-flow.hpp
     title: flow/b-flow.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: flow/test/min_cost_b_flow.test.cpp
-    title: flow/test/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
     path: flow/test/mincostflow.test.cpp
     title: flow/test/mincostflow.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html>
@@ -163,10 +160,9 @@ data:
   requiredBy:
   - flow/b-flow.hpp
   timestamp: '2020-09-29 17:16:20+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - flow/test/mincostflow.test.cpp
-  - flow/test/min_cost_b_flow.test.cpp
 documentation_of: flow/mincostflow.hpp
 layout: document
 redirect_from:

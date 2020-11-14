@@ -5,11 +5,11 @@ data:
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
+    path: modint.hpp
+    title: modint.hpp
   - icon: ':question:'
-    path: modulus/modint_runtime.hpp
-    title: modulus/modint_runtime.hpp
+    path: number/modint_runtime.hpp
+    title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -20,13 +20,13 @@ data:
     links:
     - https://judge.yosupo.jp/problem/convolution_mod
   bundledCode: "#line 1 \"convolution/test/ntt.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\
-    \n#line 2 \"modulus/modint_fixed.hpp\"\n#include <iostream>\n#include <vector>\n\
-    #include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using\
-    \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
-    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
-    \ {\n            primitive_root = [&](){\n                std::set<int> fac;\n\
-    \                int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
-    \ i++) while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
+    \n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <vector>\n#include <set>\n\
+    \n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint = long long;\n\
+    \    static int get_mod() { return mod; }\n    static int get_primitive_root()\
+    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
+    \            primitive_root = [&](){\n                std::set<int> fac;\n   \
+    \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
+    \ while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
     \                for (int g = 1; g < mod; g++) {\n                    bool ok\
     \ = true;\n                    for (auto i : fac) if (ModInt(g).power((mod - 1)\
     \ / i) == 1) { ok = false; break; }\n                    if (ok) return g;\n \
@@ -59,8 +59,9 @@ data:
     \ &os, const ModInt &x) { os << x.val;  return os; }\n    constexpr lint power(lint\
     \ n) const {\n        lint ans = 1, tmp = this->val;\n        while (n) {\n  \
     \          if (n & 1) ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n\
-    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr lint\
-    \ inv() const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
+    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr ModInt\
+    \ pow(lint n) const {\n        return power(n);\n    }\n    constexpr lint inv()\
+    \ const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
     \ n) const { return ModInt(this->power(n)); }\n    constexpr ModInt &operator^=(lint\
     \ n) { return *this = *this ^ n; }\n\n    inline ModInt fac() const {\n      \
     \  static std::vector<ModInt> facs;\n        int l0 = facs.size();\n        if\
@@ -137,7 +138,7 @@ data:
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ {\n            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n\
-    \        }\n    }\n    return a;\n}\n#line 5 \"modulus/modint_runtime.hpp\"\n\n\
+    \        }\n    }\n    return a;\n}\n#line 5 \"number/modint_runtime.hpp\"\n\n\
     // CUT begin\nstruct ModIntRuntime\n{\n    using lint = long long int;\n    static\
     \ int get_mod() { return mod; }\n    int val;\n    static int mod;\n    static\
     \ std::vector<ModIntRuntime> &facs()\n    {\n        static std::vector<ModIntRuntime>\
@@ -181,7 +182,8 @@ data:
     \ &x) { os << x.val;  return os; }\n \n    lint power(lint n) const {\n      \
     \  lint ans = 1, tmp = this->val;\n        while (n) {\n            if (n & 1)\
     \ ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n            n /=\
-    \ 2;\n        }\n        return ans;\n    }\n    lint inv() const { return this->power(mod\
+    \ 2;\n        }\n        return ans;\n    }\n    ModIntRuntime pow(lint n) const\
+    \ {\n        return power(n);\n    }\n    lint inv() const { return this->power(mod\
     \ - 2); }\n    ModIntRuntime operator^(lint n) const { return ModIntRuntime(this->power(n));\
     \ }\n    ModIntRuntime &operator^=(lint n) { return *this = *this ^ n; }\n \n\
     \    ModIntRuntime fac() const {\n        int l0 = facs().size();\n        if\
@@ -205,34 +207,33 @@ data:
     \     }\n        return ModIntRuntime(std::min(x.val, mod - x.val));\n    }\n\
     };\nint ModIntRuntime::mod = 1;\n#line 6 \"convolution/test/ntt.test.cpp\"\nusing\
     \ namespace std;\n\nconstexpr int MOD = 998244353;\nusing mint = ModInt<MOD>;\n\
-    using mintr = ModIntRuntime;\n\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
+    using mintr = ModIntRuntime;\n\nint main()\n{\n    cin.tie(nullptr),  ios::sync_with_stdio(false);\n\
     \n    mintr::set_mod(MOD);\n    int N, M;\n    cin >> N >> M;\n    vector<mint>\
     \ A(N), B(M);\n    vector<mintr> Ar(N), Br(M);\n    for (int i = 0; i < N; i++)\
     \ cin >> A[i], Ar[i] = A[i].val;\n    for (int i = 0; i < M; i++) cin >> B[i],\
     \ Br[i] = B[i].val;\n\n    vector<mint> ret = nttconv(A, B);\n    vector<mintr>\
     \ retr = nttconv(Ar, Br);\n\n    for (int i = 0; i < N + M - 1; i++) {\n     \
-    \   assert(ret[i].val == retr[i].val);\n        std::cout << ret[i] << ' ';\n\
-    \    }\n    std::cout << '\\n';\n}\n"
+    \   assert(ret[i].val == retr[i].val);\n        cout << ret[i] << ' ';\n    }\n\
+    \    cout << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n#include\
-    \ \"convolution/ntt.hpp\"\n#include \"modulus/modint_fixed.hpp\"\n#include \"\
-    modulus/modint_runtime.hpp\"\n#include <iostream>\nusing namespace std;\n\nconstexpr\
-    \ int MOD = 998244353;\nusing mint = ModInt<MOD>;\nusing mintr = ModIntRuntime;\n\
-    \nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
-    \n    mintr::set_mod(MOD);\n    int N, M;\n    cin >> N >> M;\n    vector<mint>\
-    \ A(N), B(M);\n    vector<mintr> Ar(N), Br(M);\n    for (int i = 0; i < N; i++)\
-    \ cin >> A[i], Ar[i] = A[i].val;\n    for (int i = 0; i < M; i++) cin >> B[i],\
-    \ Br[i] = B[i].val;\n\n    vector<mint> ret = nttconv(A, B);\n    vector<mintr>\
-    \ retr = nttconv(Ar, Br);\n\n    for (int i = 0; i < N + M - 1; i++) {\n     \
-    \   assert(ret[i].val == retr[i].val);\n        std::cout << ret[i] << ' ';\n\
-    \    }\n    std::cout << '\\n';\n}\n"
+    \ \"convolution/ntt.hpp\"\n#include \"modint.hpp\"\n#include \"number/modint_runtime.hpp\"\
+    \n#include <iostream>\nusing namespace std;\n\nconstexpr int MOD = 998244353;\n\
+    using mint = ModInt<MOD>;\nusing mintr = ModIntRuntime;\n\nint main()\n{\n   \
+    \ cin.tie(nullptr),  ios::sync_with_stdio(false);\n\n    mintr::set_mod(MOD);\n\
+    \    int N, M;\n    cin >> N >> M;\n    vector<mint> A(N), B(M);\n    vector<mintr>\
+    \ Ar(N), Br(M);\n    for (int i = 0; i < N; i++) cin >> A[i], Ar[i] = A[i].val;\n\
+    \    for (int i = 0; i < M; i++) cin >> B[i], Br[i] = B[i].val;\n\n    vector<mint>\
+    \ ret = nttconv(A, B);\n    vector<mintr> retr = nttconv(Ar, Br);\n\n    for (int\
+    \ i = 0; i < N + M - 1; i++) {\n        assert(ret[i].val == retr[i].val);\n \
+    \       cout << ret[i] << ' ';\n    }\n    cout << '\\n';\n}\n"
   dependsOn:
   - convolution/ntt.hpp
-  - modulus/modint_fixed.hpp
-  - modulus/modint_runtime.hpp
+  - modint.hpp
+  - number/modint_runtime.hpp
   isVerificationFile: true
   path: convolution/test/ntt.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 00:37:21+09:00'
+  timestamp: '2020-11-15 01:21:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/ntt.test.cpp

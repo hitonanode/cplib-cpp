@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
+    path: modint.hpp
+    title: modint.hpp
   - icon: ':x:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
@@ -103,9 +103,9 @@ data:
     \ TRET, TQUERY>;\n    CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree(){\n\
     \        std::vector<TDATA> init;\n        for (auto x : seq) init.emplace_back(TDATA{std::pair<T,\
     \ T>(x, x)});\n        SegTree::initialize(init, TRET(0, 0));\n    }\n};\n#line\
-    \ 4 \"modulus/modint_fixed.hpp\"\n#include <set>\n\n// CUT begin\ntemplate <int\
-    \ mod>\nstruct ModInt\n{\n    using lint = long long;\n    static int get_mod()\
-    \ { return mod; }\n    static int get_primitive_root() {\n        static int primitive_root\
+    \ 4 \"modint.hpp\"\n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct\
+    \ ModInt\n{\n    using lint = long long;\n    static int get_mod() { return mod;\
+    \ }\n    static int get_primitive_root() {\n        static int primitive_root\
     \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&](){\n\
     \                std::set<int> fac;\n                int v = mod - 1;\n      \
     \          for (lint i = 2; i * i <= v; i++) while (v % i == 0) fac.insert(i),\
@@ -142,7 +142,8 @@ data:
     \    constexpr lint power(lint n) const {\n        lint ans = 1, tmp = this->val;\n\
     \        while (n) {\n            if (n & 1) ans = ans * tmp % mod;\n        \
     \    tmp = tmp * tmp % mod;\n            n /= 2;\n        }\n        return ans;\n\
-    \    }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
+    \    }\n    constexpr ModInt pow(lint n) const {\n        return power(n);\n \
+    \   }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
     \ ModInt operator^(lint n) const { return ModInt(this->power(n)); }\n    constexpr\
     \ ModInt &operator^=(lint n) { return *this = *this ^ n; }\n\n    inline ModInt\
     \ fac() const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
@@ -183,32 +184,32 @@ data:
     \ * x + ret.second << '\\n';\n        }\n        else\n        {\n           \
     \ s.update(l, std::make_pair(r, x));\n        }\n    }\n}\n"
   code: "#include \"segmenttree/point-update-range-get_nonrecursive.hpp\"\n#include\
-    \ \"modulus/modint_fixed.hpp\"\n#include <iostream>\n#include <utility>\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\nusing\
-    \ mint = ModInt<998244353>;\n\ntemplate <typename T>\nstruct PointSetRangeComposite\
-    \ : public NonrecursiveSegmentTree<std::pair<T, T>, std::pair<T, T>, bool>\n{\n\
-    \    using T_NODE = std::pair<T, T>;\n    using SegTree = NonrecursiveSegmentTree<T_NODE,\
-    \ T_NODE, bool>;\n    T_NODE merge_data(const T_NODE &vl, const T_NODE &vr) override\
-    \ { return std::make_pair(vl.first * vr.first, vr.first * vl.second + vr.second);\
-    \ };\n    T_NODE data2ret(const T_NODE &v, const bool &q) override { return v;\
-    \ }\n    T_NODE merge_ret(const T_NODE &vl, const T_NODE &vr) override { return\
-    \ merge_data(vl, vr); };\n    PointSetRangeComposite(const std::vector<T_NODE>\
-    \ &seq) : SegTree::NonrecursiveSegmentTree()\n    {\n        SegTree::initialize(seq,\
-    \ T_NODE(1, 0));\n    };\n};\n\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
-    \n    int N, Q;\n    std::cin >> N >> Q;\n    std::vector<std::pair<mint, mint>>\
-    \ A(N);\n    for (auto &p : A)\n    {\n        std::cin >> p.first >> p.second;\n\
-    \    }\n    PointSetRangeComposite<mint> s(A);\n    while (Q--)\n    {\n     \
-    \   int q, l, r, x;\n        std::cin >> q >> l >> r >> x;\n        if (q)\n \
-    \       {\n            auto ret = s.get(l, r);\n            std::cout << ret.first\
-    \ * x + ret.second << '\\n';\n        }\n        else\n        {\n           \
-    \ s.update(l, std::make_pair(r, x));\n        }\n    }\n}\n"
+    \ \"modint.hpp\"\n#include <iostream>\n#include <utility>\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/point_set_range_composite\"\nusing mint = ModInt<998244353>;\n\
+    \ntemplate <typename T>\nstruct PointSetRangeComposite : public NonrecursiveSegmentTree<std::pair<T,\
+    \ T>, std::pair<T, T>, bool>\n{\n    using T_NODE = std::pair<T, T>;\n    using\
+    \ SegTree = NonrecursiveSegmentTree<T_NODE, T_NODE, bool>;\n    T_NODE merge_data(const\
+    \ T_NODE &vl, const T_NODE &vr) override { return std::make_pair(vl.first * vr.first,\
+    \ vr.first * vl.second + vr.second); };\n    T_NODE data2ret(const T_NODE &v,\
+    \ const bool &q) override { return v; }\n    T_NODE merge_ret(const T_NODE &vl,\
+    \ const T_NODE &vr) override { return merge_data(vl, vr); };\n    PointSetRangeComposite(const\
+    \ std::vector<T_NODE> &seq) : SegTree::NonrecursiveSegmentTree()\n    {\n    \
+    \    SegTree::initialize(seq, T_NODE(1, 0));\n    };\n};\n\nint main()\n{\n  \
+    \  std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\n    int N, Q;\n\
+    \    std::cin >> N >> Q;\n    std::vector<std::pair<mint, mint>> A(N);\n    for\
+    \ (auto &p : A)\n    {\n        std::cin >> p.first >> p.second;\n    }\n    PointSetRangeComposite<mint>\
+    \ s(A);\n    while (Q--)\n    {\n        int q, l, r, x;\n        std::cin >>\
+    \ q >> l >> r >> x;\n        if (q)\n        {\n            auto ret = s.get(l,\
+    \ r);\n            std::cout << ret.first * x + ret.second << '\\n';\n       \
+    \ }\n        else\n        {\n            s.update(l, std::make_pair(r, x));\n\
+    \        }\n    }\n}\n"
   dependsOn:
   - segmenttree/point-update-range-get_nonrecursive.hpp
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   isVerificationFile: true
   path: segmenttree/test/point-set-range-composite.test.cpp
   requiredBy: []
-  timestamp: '2020-09-19 23:25:22+09:00'
+  timestamp: '2020-11-15 01:21:08+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: segmenttree/test/point-set-range-composite.test.cpp

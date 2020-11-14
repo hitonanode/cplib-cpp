@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/system_of_linear_equations.hpp
     title: linear_algebra_matrix/system_of_linear_equations.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
+    path: modint.hpp
+    title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/system_of_linear_equations
@@ -21,13 +21,13 @@ data:
     - https://judge.yosupo.jp/problem/system_of_linear_equations
   bundledCode: "#line 1 \"linear_algebra_matrix/test/system_of_linear_equations.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n#line 2 \"modulus/modint_fixed.hpp\"\n#include <iostream>\n#include <vector>\n\
-    #include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using\
-    \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
-    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
-    \ {\n            primitive_root = [&](){\n                std::set<int> fac;\n\
-    \                int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
-    \ i++) while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
+    \n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <vector>\n#include <set>\n\
+    \n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint = long long;\n\
+    \    static int get_mod() { return mod; }\n    static int get_primitive_root()\
+    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
+    \            primitive_root = [&](){\n                std::set<int> fac;\n   \
+    \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
+    \ while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
     \                for (int g = 1; g < mod; g++) {\n                    bool ok\
     \ = true;\n                    for (auto i : fac) if (ModInt(g).power((mod - 1)\
     \ / i) == 1) { ok = false; break; }\n                    if (ok) return g;\n \
@@ -60,8 +60,9 @@ data:
     \ &os, const ModInt &x) { os << x.val;  return os; }\n    constexpr lint power(lint\
     \ n) const {\n        lint ans = 1, tmp = this->val;\n        while (n) {\n  \
     \          if (n & 1) ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n\
-    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr lint\
-    \ inv() const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
+    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr ModInt\
+    \ pow(lint n) const {\n        return power(n);\n    }\n    constexpr lint inv()\
+    \ const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
     \ n) const { return ModInt(this->power(n)); }\n    constexpr ModInt &operator^=(lint\
     \ n) { return *this = *this ^ n; }\n\n    inline ModInt fac() const {\n      \
     \  static std::vector<ModInt> facs;\n        int l0 = facs.size();\n        if\
@@ -202,7 +203,7 @@ data:
     \ vec : ret.second) {\n            for (auto e : vec) std::cout << e << \" \"\
     ;\n            std::cout << \"\\n\";\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n#include \"modulus/modint_fixed.hpp\"\n#include \"linear_algebra_matrix/system_of_linear_equations.hpp\"\
+    \n#include \"modint.hpp\"\n#include \"linear_algebra_matrix/system_of_linear_equations.hpp\"\
     \n#include <iostream>\nusing mint = ModInt<998244353>;\n\nint main()\n{\n    int\
     \ N, M;\n    std::cin >> N >> M;\n    matrix<mint> A(N, M);\n    std::cin >> A;\n\
     \    std::vector<mint> b(N);\n    for (auto &x : b) std::cin >> x;\n    auto ret\
@@ -213,14 +214,14 @@ data:
     \ e : vec) std::cout << e << \" \";\n            std::cout << \"\\n\";\n     \
     \   }\n    }\n}\n"
   dependsOn:
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   - linear_algebra_matrix/system_of_linear_equations.hpp
   - linear_algebra_matrix/linalg_modint.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2020-10-15 00:04:43+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 01:21:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
 layout: document

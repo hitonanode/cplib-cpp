@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/det_of_sparse_matrix.hpp
     title: linear_algebra_matrix/det_of_sparse_matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linear_recurrence.hpp
     title: linear_algebra_matrix/linear_recurrence.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
-  - icon: ':heavy_check_mark:'
+    path: modint.hpp
+    title: modint.hpp
+  - icon: ':question:'
     path: random/rand_nondeterministic.hpp
     title: random/rand_nondeterministic.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sparse_matrix_det
@@ -24,9 +24,9 @@ data:
     - https://judge.yosupo.jp/problem/sparse_matrix_det
   bundledCode: "#line 1 \"linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\n#line\
-    \ 2 \"modulus/modint_fixed.hpp\"\n#include <iostream>\n#include <vector>\n#include\
-    \ <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint\
-    \ = long long;\n    static int get_mod() { return mod; }\n    static int get_primitive_root()\
+    \ 2 \"modint.hpp\"\n#include <iostream>\n#include <vector>\n#include <set>\n\n\
+    // CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint = long long;\n\
+    \    static int get_mod() { return mod; }\n    static int get_primitive_root()\
     \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
     \            primitive_root = [&](){\n                std::set<int> fac;\n   \
     \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
@@ -63,8 +63,9 @@ data:
     \ &os, const ModInt &x) { os << x.val;  return os; }\n    constexpr lint power(lint\
     \ n) const {\n        lint ans = 1, tmp = this->val;\n        while (n) {\n  \
     \          if (n & 1) ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n\
-    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr lint\
-    \ inv() const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
+    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr ModInt\
+    \ pow(lint n) const {\n        return power(n);\n    }\n    constexpr lint inv()\
+    \ const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
     \ n) const { return ModInt(this->power(n)); }\n    constexpr ModInt &operator^=(lint\
     \ n) { return *this = *this ^ n; }\n\n    inline ModInt fac() const {\n      \
     \  static std::vector<ModInt> facs;\n        int l0 = facs.size();\n        if\
@@ -148,21 +149,21 @@ data:
     \ a >> b >> c;\n        M.add_element(a, b, c);\n    }\n    std::cout << M.Determinant()\
     \ << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\n#include\
-    \ \"modulus/modint_fixed.hpp\"\n#include \"linear_algebra_matrix/det_of_sparse_matrix.hpp\"\
-    \n#include <iostream>\n\nint main()\n{\n    int N, K;\n    std::cin >> N >> K;\n\
+    \ \"modint.hpp\"\n#include \"linear_algebra_matrix/det_of_sparse_matrix.hpp\"\n\
+    #include <iostream>\n\nint main()\n{\n    int N, K;\n    std::cin >> N >> K;\n\
     \    sparse_matrix<ModInt<998244353>> M(N, N);\n    while (K--)\n    {\n     \
     \   int a, b, c;\n        std::cin >> a >> b >> c;\n        M.add_element(a, b,\
     \ c);\n    }\n    std::cout << M.Determinant() << '\\n';\n}\n"
   dependsOn:
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   - linear_algebra_matrix/det_of_sparse_matrix.hpp
   - random/rand_nondeterministic.hpp
   - linear_algebra_matrix/linear_recurrence.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
   requiredBy: []
-  timestamp: '2020-06-06 02:17:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 01:21:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
 layout: document

@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
-  - icon: ':question:'
-    path: modulus/modint_runtime.hpp
-    title: modulus/modint_runtime.hpp
+    path: modint.hpp
+    title: modint.hpp
   - icon: ':x:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
+  - icon: ':question:'
+    path: number/modint_runtime.hpp
+    title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -115,7 +115,69 @@ data:
     \ f(n) = af(n - 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3,\
     \ 4=>5, ...\ntemplate <typename T>\nT Fibonacci(long long int k, int a = 1, int\
     \ b = 1)\n{\n    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n\
-    \    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 4 \"number/bare_mod_algebra.hpp\"\
+    \    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 4 \"modint.hpp\"\
+    \n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using\
+    \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
+    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
+    \ {\n            primitive_root = [&](){\n                std::set<int> fac;\n\
+    \                int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
+    \ i++) while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
+    \                for (int g = 1; g < mod; g++) {\n                    bool ok\
+    \ = true;\n                    for (auto i : fac) if (ModInt(g).power((mod - 1)\
+    \ / i) == 1) { ok = false; break; }\n                    if (ok) return g;\n \
+    \               }\n                return -1;\n            }();\n        }\n \
+    \       return primitive_root;\n    }\n    int val;\n    constexpr ModInt() :\
+    \ val(0) {}\n    constexpr ModInt &_setval(lint v) { val = (v >= mod ? v - mod\
+    \ : v); return *this; }\n    constexpr ModInt(lint v) { _setval(v % mod + mod);\
+    \ }\n    explicit operator bool() const { return val != 0; }\n    constexpr ModInt\
+    \ operator+(const ModInt &x) const { return ModInt()._setval((lint)val + x.val);\
+    \ }\n    constexpr ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ - x.val + mod); }\n    constexpr ModInt operator*(const ModInt &x) const { return\
+    \ ModInt()._setval((lint)val * x.val % mod); }\n    constexpr ModInt operator/(const\
+    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % mod); }\n \
+    \   constexpr ModInt operator-() const { return ModInt()._setval(mod - val); }\n\
+    \    constexpr ModInt &operator+=(const ModInt &x) { return *this = *this + x;\
+    \ }\n    constexpr ModInt &operator-=(const ModInt &x) { return *this = *this\
+    \ - x; }\n    constexpr ModInt &operator*=(const ModInt &x) { return *this = *this\
+    \ * x; }\n    constexpr ModInt &operator/=(const ModInt &x) { return *this = *this\
+    \ / x; }\n    friend constexpr ModInt operator+(lint a, const ModInt &x) { return\
+    \ ModInt()._setval(a % mod + x.val); }\n    friend constexpr ModInt operator-(lint\
+    \ a, const ModInt &x) { return ModInt()._setval(a % mod - x.val + mod); }\n  \
+    \  friend constexpr ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a\
+    \ % mod * x.val % mod); }\n    friend constexpr ModInt operator/(lint a, const\
+    \ ModInt &x) { return ModInt()._setval(a % mod * x.inv() % mod); }\n    constexpr\
+    \ bool operator==(const ModInt &x) const { return val == x.val; }\n    constexpr\
+    \ bool operator!=(const ModInt &x) const { return val != x.val; }\n    bool operator<(const\
+    \ ModInt &x) const { return val < x.val; }  // To use std::map<ModInt, T>\n  \
+    \  friend std::istream &operator>>(std::istream &is, ModInt &x) { lint t; is >>\
+    \ t; x = ModInt(t); return is; }\n    friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModInt &x) { os << x.val;  return os; }\n    constexpr lint power(lint\
+    \ n) const {\n        lint ans = 1, tmp = this->val;\n        while (n) {\n  \
+    \          if (n & 1) ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n\
+    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr ModInt\
+    \ pow(lint n) const {\n        return power(n);\n    }\n    constexpr lint inv()\
+    \ const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
+    \ n) const { return ModInt(this->power(n)); }\n    constexpr ModInt &operator^=(lint\
+    \ n) { return *this = *this ^ n; }\n\n    inline ModInt fac() const {\n      \
+    \  static std::vector<ModInt> facs;\n        int l0 = facs.size();\n        if\
+    \ (l0 > this->val) return facs[this->val];\n\n        facs.resize(this->val +\
+    \ 1);\n        for (int i = l0; i <= this->val; i++) facs[i] = (i == 0 ? ModInt(1)\
+    \ : facs[i - 1] * ModInt(i));\n        return facs[this->val];\n    }\n\n    ModInt\
+    \ doublefac() const {\n        lint k = (this->val + 1) / 2;\n        if (this->val\
+    \ & 1) return ModInt(k * 2).fac() / ModInt(2).power(k) / ModInt(k).fac();\n  \
+    \      else return ModInt(k).fac() * ModInt(2).power(k);\n    }\n\n    ModInt\
+    \ nCr(const ModInt &r) const {\n        if (this->val < r.val) return ModInt(0);\n\
+    \        return this->fac() / ((*this - r).fac() * r.fac());\n    }\n\n    ModInt\
+    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
+    \ val;\n        if (power((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
+    \        while (b.power((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
+    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = power((m\
+    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.power(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
+    \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
+    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 4 \"number/bare_mod_algebra.hpp\"\
     \n#include <tuple>\n#include <utility>\n#line 7 \"number/bare_mod_algebra.hpp\"\
     \n\n// CUT begin\nusing lint = long long;\n// Solve ax+by=gcd(a, b)\nlint extgcd(lint\
     \ a, lint b, lint &x, lint &y)\n{\n    lint d = a;\n    if (b != 0) d = extgcd(b,\
@@ -171,91 +233,30 @@ data:
     \        for (auto pp : fac)\n        {\n            if (power(g, (p - 1) / pp,\
     \ p) == 1)\n            {\n                ok = false;\n                break;\n\
     \            }\n        }\n        if (ok) return g;\n    }\n    return -1;\n\
-    }\n#line 4 \"modulus/modint_fixed.hpp\"\n#include <set>\n\n// CUT begin\ntemplate\
-    \ <int mod>\nstruct ModInt\n{\n    using lint = long long;\n    static int get_mod()\
-    \ { return mod; }\n    static int get_primitive_root() {\n        static int primitive_root\
-    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&](){\n\
+    }\n#line 5 \"number/modint_runtime.hpp\"\n\n// CUT begin\nstruct ModIntRuntime\n\
+    {\n    using lint = long long int;\n    static int get_mod() { return mod; }\n\
+    \    int val;\n    static int mod;\n    static std::vector<ModIntRuntime> &facs()\n\
+    \    {\n        static std::vector<ModIntRuntime> facs_;\n        return facs_;\n\
+    \    }\n    static int &get_primitive_root() {\n        static int primitive_root_\
+    \ = 0;\n        if (!primitive_root_) {\n            primitive_root_ = [&](){\n\
     \                std::set<int> fac;\n                int v = mod - 1;\n      \
     \          for (lint i = 2; i * i <= v; i++) while (v % i == 0) fac.insert(i),\
     \ v /= i;\n                if (v > 1) fac.insert(v);\n                for (int\
     \ g = 1; g < mod; g++) {\n                    bool ok = true;\n              \
-    \      for (auto i : fac) if (ModInt(g).power((mod - 1) / i) == 1) { ok = false;\
-    \ break; }\n                    if (ok) return g;\n                }\n       \
-    \         return -1;\n            }();\n        }\n        return primitive_root;\n\
-    \    }\n    int val;\n    constexpr ModInt() : val(0) {}\n    constexpr ModInt\
-    \ &_setval(lint v) { val = (v >= mod ? v - mod : v); return *this; }\n    constexpr\
-    \ ModInt(lint v) { _setval(v % mod + mod); }\n    explicit operator bool() const\
-    \ { return val != 0; }\n    constexpr ModInt operator+(const ModInt &x) const\
-    \ { return ModInt()._setval((lint)val + x.val); }\n    constexpr ModInt operator-(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val - x.val + mod); }\n   \
-    \ constexpr ModInt operator*(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ * x.val % mod); }\n    constexpr ModInt operator/(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.inv() % mod); }\n    constexpr ModInt operator-()\
-    \ const { return ModInt()._setval(mod - val); }\n    constexpr ModInt &operator+=(const\
-    \ ModInt &x) { return *this = *this + x; }\n    constexpr ModInt &operator-=(const\
-    \ ModInt &x) { return *this = *this - x; }\n    constexpr ModInt &operator*=(const\
-    \ ModInt &x) { return *this = *this * x; }\n    constexpr ModInt &operator/=(const\
-    \ ModInt &x) { return *this = *this / x; }\n    friend constexpr ModInt operator+(lint\
-    \ a, const ModInt &x) { return ModInt()._setval(a % mod + x.val); }\n    friend\
-    \ constexpr ModInt operator-(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % mod - x.val + mod); }\n    friend constexpr ModInt operator*(lint a, const\
-    \ ModInt &x) { return ModInt()._setval(a % mod * x.val % mod); }\n    friend constexpr\
-    \ ModInt operator/(lint a, const ModInt &x) { return ModInt()._setval(a % mod\
-    \ * x.inv() % mod); }\n    constexpr bool operator==(const ModInt &x) const {\
-    \ return val == x.val; }\n    constexpr bool operator!=(const ModInt &x) const\
-    \ { return val != x.val; }\n    bool operator<(const ModInt &x) const { return\
-    \ val < x.val; }  // To use std::map<ModInt, T>\n    friend std::istream &operator>>(std::istream\
-    \ &is, ModInt &x) { lint t; is >> t; x = ModInt(t); return is; }\n    friend std::ostream\
-    \ &operator<<(std::ostream &os, const ModInt &x) { os << x.val;  return os; }\n\
-    \    constexpr lint power(lint n) const {\n        lint ans = 1, tmp = this->val;\n\
-    \        while (n) {\n            if (n & 1) ans = ans * tmp % mod;\n        \
-    \    tmp = tmp * tmp % mod;\n            n /= 2;\n        }\n        return ans;\n\
-    \    }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
-    \ ModInt operator^(lint n) const { return ModInt(this->power(n)); }\n    constexpr\
-    \ ModInt &operator^=(lint n) { return *this = *this ^ n; }\n\n    inline ModInt\
-    \ fac() const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
-    \        if (l0 > this->val) return facs[this->val];\n\n        facs.resize(this->val\
-    \ + 1);\n        for (int i = l0; i <= this->val; i++) facs[i] = (i == 0 ? ModInt(1)\
-    \ : facs[i - 1] * ModInt(i));\n        return facs[this->val];\n    }\n\n    ModInt\
-    \ doublefac() const {\n        lint k = (this->val + 1) / 2;\n        if (this->val\
-    \ & 1) return ModInt(k * 2).fac() / ModInt(2).power(k) / ModInt(k).fac();\n  \
-    \      else return ModInt(k).fac() * ModInt(2).power(k);\n    }\n\n    ModInt\
-    \ nCr(const ModInt &r) const {\n        if (this->val < r.val) return ModInt(0);\n\
-    \        return this->fac() / ((*this - r).fac() * r.fac());\n    }\n\n    ModInt\
-    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
-    \ val;\n        if (power((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
-    \        while (b.power((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
-    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = power((m\
-    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.power(m);\n\
-    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
-    \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
-    \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 5 \"modulus/modint_runtime.hpp\"\
-    \n\n// CUT begin\nstruct ModIntRuntime\n{\n    using lint = long long int;\n \
-    \   static int get_mod() { return mod; }\n    int val;\n    static int mod;\n\
-    \    static std::vector<ModIntRuntime> &facs()\n    {\n        static std::vector<ModIntRuntime>\
-    \ facs_;\n        return facs_;\n    }\n    static int &get_primitive_root() {\n\
-    \        static int primitive_root_ = 0;\n        if (!primitive_root_) {\n  \
-    \          primitive_root_ = [&](){\n                std::set<int> fac;\n    \
-    \            int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
-    \ while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
-    \                for (int g = 1; g < mod; g++) {\n                    bool ok\
-    \ = true;\n                    for (auto i : fac) if (ModIntRuntime(g).power((mod\
-    \ - 1) / i) == 1) { ok = false; break; }\n                    if (ok) return g;\n\
-    \                }\n                return -1;\n            }();\n        }\n\
-    \        return primitive_root_;\n    }\n    static void set_mod(const int &m)\
-    \ {\n        if (mod != m) facs().clear();\n        mod = m;\n        get_primitive_root()\
-    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) { val = (v >= mod ? v - mod\
-    \ : v); return *this; }\n    ModIntRuntime() : val(0) {}\n    ModIntRuntime(lint\
-    \ v) { _setval(v % mod + mod); }\n    explicit operator bool() const { return\
-    \ val != 0; }\n    ModIntRuntime operator+(const ModIntRuntime &x) const { return\
-    \ ModIntRuntime()._setval((lint)val + x.val); }\n    ModIntRuntime operator-(const\
-    \ ModIntRuntime &x) const { return ModIntRuntime()._setval((lint)val - x.val +\
-    \ mod); }\n    ModIntRuntime operator*(const ModIntRuntime &x) const { return\
-    \ ModIntRuntime()._setval((lint)val * x.val % mod); }\n    ModIntRuntime operator/(const\
-    \ ModIntRuntime &x) const { return ModIntRuntime()._setval((lint)val * x.inv()\
-    \ % mod); }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(mod\
+    \      for (auto i : fac) if (ModIntRuntime(g).power((mod - 1) / i) == 1) { ok\
+    \ = false; break; }\n                    if (ok) return g;\n                }\n\
+    \                return -1;\n            }();\n        }\n        return primitive_root_;\n\
+    \    }\n    static void set_mod(const int &m) {\n        if (mod != m) facs().clear();\n\
+    \        mod = m;\n        get_primitive_root() = 0;\n    }\n    ModIntRuntime\
+    \ &_setval(lint v) { val = (v >= mod ? v - mod : v); return *this; }\n    ModIntRuntime()\
+    \ : val(0) {}\n    ModIntRuntime(lint v) { _setval(v % mod + mod); }\n    explicit\
+    \ operator bool() const { return val != 0; }\n    ModIntRuntime operator+(const\
+    \ ModIntRuntime &x) const { return ModIntRuntime()._setval((lint)val + x.val);\
+    \ }\n    ModIntRuntime operator-(const ModIntRuntime &x) const { return ModIntRuntime()._setval((lint)val\
+    \ - x.val + mod); }\n    ModIntRuntime operator*(const ModIntRuntime &x) const\
+    \ { return ModIntRuntime()._setval((lint)val * x.val % mod); }\n    ModIntRuntime\
+    \ operator/(const ModIntRuntime &x) const { return ModIntRuntime()._setval((lint)val\
+    \ * x.inv() % mod); }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(mod\
     \ - val); }\n    ModIntRuntime &operator+=(const ModIntRuntime &x) { return *this\
     \ = *this + x; }\n    ModIntRuntime &operator-=(const ModIntRuntime &x) { return\
     \ *this = *this - x; }\n    ModIntRuntime &operator*=(const ModIntRuntime &x)\
@@ -275,7 +276,8 @@ data:
     \ &x) { os << x.val;  return os; }\n \n    lint power(lint n) const {\n      \
     \  lint ans = 1, tmp = this->val;\n        while (n) {\n            if (n & 1)\
     \ ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n            n /=\
-    \ 2;\n        }\n        return ans;\n    }\n    lint inv() const { return this->power(mod\
+    \ 2;\n        }\n        return ans;\n    }\n    ModIntRuntime pow(lint n) const\
+    \ {\n        return power(n);\n    }\n    lint inv() const { return this->power(mod\
     \ - 2); }\n    ModIntRuntime operator^(lint n) const { return ModIntRuntime(this->power(n));\
     \ }\n    ModIntRuntime &operator^=(lint n) { return *this = *this ^ n; }\n \n\
     \    ModIntRuntime fac() const {\n        int l0 = facs().size();\n        if\
@@ -312,8 +314,8 @@ data:
     \ {MODfixed, MODruntime}).first;\n            std::cout << (l == L - 1 ? \"\\\
     n\" : \" \");\n        }\n    }\n}\n"
   code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D\"\
-    \n#include \"linear_algebra_matrix/linalg_modint.hpp\"\n#include \"number/bare_mod_algebra.hpp\"\
-    \n#include \"modulus/modint_fixed.hpp\"\n#include \"modulus/modint_runtime.hpp\"\
+    \n#include \"linear_algebra_matrix/linalg_modint.hpp\"\n#include \"modint.hpp\"\
+    \n#include \"number/bare_mod_algebra.hpp\"\n#include \"number/modint_runtime.hpp\"\
     \n#include <iostream>\n\nconstexpr int MODfixed = 1000003;\nconstexpr int MODruntime\
     \ = 10007;\n\nint main()\n{\n    int N, M, L;\n    std::cin >> N >> M >> L;\n\
     \    matrix<ModInt<MODfixed>> Afixed(N, M), Bfixed(M, L);\n    ModIntRuntime::set_mod(MODruntime);\n\
@@ -329,13 +331,13 @@ data:
     n\" : \" \");\n        }\n    }\n}\n"
   dependsOn:
   - linear_algebra_matrix/linalg_modint.hpp
+  - modint.hpp
   - number/bare_mod_algebra.hpp
-  - modulus/modint_fixed.hpp
-  - modulus/modint_runtime.hpp
+  - number/modint_runtime.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   requiredBy: []
-  timestamp: '2020-10-15 00:04:43+09:00'
+  timestamp: '2020-11-15 01:21:08+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linear_recurrence.hpp
     title: linear_algebra_matrix/linear_recurrence.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
+    path: modint.hpp
+    title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -39,13 +39,13 @@ data:
     \ = adjust(C_reversed, B, d, b, m);\n            L = n + 1 - L;\n            B\
     \ = T;\n            b = d;\n            m = 1;\n        }\n        else C_reversed\
     \ = adjust(C_reversed, B, d, b, m++);\n    }\n    return std::make_pair(L, C_reversed);\n\
-    }\n#line 2 \"modulus/modint_fixed.hpp\"\n#include <iostream>\n#line 4 \"modulus/modint_fixed.hpp\"\
-    \n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using\
-    \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
-    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
-    \ {\n            primitive_root = [&](){\n                std::set<int> fac;\n\
-    \                int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
-    \ i++) while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
+    }\n#line 2 \"modint.hpp\"\n#include <iostream>\n#line 4 \"modint.hpp\"\n#include\
+    \ <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint\
+    \ = long long;\n    static int get_mod() { return mod; }\n    static int get_primitive_root()\
+    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
+    \            primitive_root = [&](){\n                std::set<int> fac;\n   \
+    \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
+    \ while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
     \                for (int g = 1; g < mod; g++) {\n                    bool ok\
     \ = true;\n                    for (auto i : fac) if (ModInt(g).power((mod - 1)\
     \ / i) == 1) { ok = false; break; }\n                    if (ok) return g;\n \
@@ -78,8 +78,9 @@ data:
     \ &os, const ModInt &x) { os << x.val;  return os; }\n    constexpr lint power(lint\
     \ n) const {\n        lint ans = 1, tmp = this->val;\n        while (n) {\n  \
     \          if (n & 1) ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n\
-    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr lint\
-    \ inv() const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
+    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr ModInt\
+    \ pow(lint n) const {\n        return power(n);\n    }\n    constexpr lint inv()\
+    \ const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
     \ n) const { return ModInt(this->power(n)); }\n    constexpr ModInt &operator^=(lint\
     \ n) { return *this = *this ^ n; }\n\n    inline ModInt fac() const {\n      \
     \  static std::vector<ModInt> facs;\n        int l0 = facs.size();\n        if\
@@ -108,7 +109,7 @@ data:
     \ : A)\n    {\n        std::cin >> a;\n    }\n    auto [L, poly] = linear_recurrence(A);\n\
     \    std::cout << L << '\\n';\n    for (int i = 1; i <= L; i++) std::cout << -poly[i]\
     \ << ' ';\n    std::cout << '\\n';\n}\n"
-  code: "#include \"linear_algebra_matrix/linear_recurrence.hpp\"\n#include \"modulus/modint_fixed.hpp\"\
+  code: "#include \"linear_algebra_matrix/linear_recurrence.hpp\"\n#include \"modint.hpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\n\
     #include <iostream>\n\nusing mint = ModInt<998244353>;\nint main()\n{\n    std::cin.tie(NULL);\n\
     \    std::ios::sync_with_stdio(false);\n    int N;\n    std::cin >> N;\n    std::vector<mint>\
@@ -118,12 +119,12 @@ data:
     }\n"
   dependsOn:
   - linear_algebra_matrix/linear_recurrence.hpp
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2020-06-06 01:37:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 01:21:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linear_recurrence.test.cpp
 layout: document

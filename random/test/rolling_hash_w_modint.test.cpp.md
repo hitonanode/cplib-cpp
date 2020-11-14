@@ -2,18 +2,18 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
-  - icon: ':heavy_check_mark:'
+    path: modint.hpp
+    title: modint.hpp
+  - icon: ':question:'
     path: random/rolling_hash_1d_general.hpp
     title: random/rolling_hash_1d_general.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
@@ -46,9 +46,9 @@ data:
     \ this->second * x.second % MODs.second);\n    }\n    DoubleHash operator*(lint\
     \ x) const\n    {\n        return make_pair(this->first * x % MODs.first, this->second\
     \ * x % MODs.second);\n    }\n};\nplint DoubleHash::MODs = plint(1000000007, 998244353);\n\
-    #line 4 \"modulus/modint_fixed.hpp\"\n#include <set>\n\n// CUT begin\ntemplate\
-    \ <int mod>\nstruct ModInt\n{\n    using lint = long long;\n    static int get_mod()\
-    \ { return mod; }\n    static int get_primitive_root() {\n        static int primitive_root\
+    #line 4 \"modint.hpp\"\n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct\
+    \ ModInt\n{\n    using lint = long long;\n    static int get_mod() { return mod;\
+    \ }\n    static int get_primitive_root() {\n        static int primitive_root\
     \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&](){\n\
     \                std::set<int> fac;\n                int v = mod - 1;\n      \
     \          for (lint i = 2; i * i <= v; i++) while (v % i == 0) fac.insert(i),\
@@ -85,7 +85,8 @@ data:
     \    constexpr lint power(lint n) const {\n        lint ans = 1, tmp = this->val;\n\
     \        while (n) {\n            if (n & 1) ans = ans * tmp % mod;\n        \
     \    tmp = tmp * tmp % mod;\n            n /= 2;\n        }\n        return ans;\n\
-    \    }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
+    \    }\n    constexpr ModInt pow(lint n) const {\n        return power(n);\n \
+    \   }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
     \ ModInt operator^(lint n) const { return ModInt(this->power(n)); }\n    constexpr\
     \ ModInt &operator^=(lint n) { return *this = *this ^ n; }\n\n    inline ModInt\
     \ fac() const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
@@ -122,25 +123,25 @@ data:
     \ l + P.length()) == rh_P2.get_hash(0, P.length()))\n        {\n            cout\
     \ << l << endl;\n        }\n    }\n}\n"
   code: "#include <iostream>\n#include <string>\n#include \"random/rolling_hash_1d_general.hpp\"\
-    \n#include \"modulus/modint_fixed.hpp\"\n#include \"random/xorshift.hpp\"\n#define\
-    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
-    \nusing namespace std;\n\nusing mint = ModInt<998244353>;\nint main()\n{\n   \
-    \ mint b1(rand_int() % 1000000 + 1), b2(rand_int() % 1000000 + 1);\n\n    string\
-    \ T, P;\n    cin >> T >> P;\n    rolling_hash<mint> rh_T1(T, b1),rh_P1(P, b1);\n\
-    \    rolling_hash<mint> rh_T2(T, b2),rh_P2(P, b2);\n\n    for (int l = 0; l <\
-    \ (int)(T.length() - P.length() + 1); l++)\n    {\n        if (rh_T1.get_hash(l,\
-    \ l + P.length()) == rh_P1.get_hash(0, P.length())\n            and rh_T2.get_hash(l,\
-    \ l + P.length()) == rh_P2.get_hash(0, P.length()))\n        {\n            cout\
-    \ << l << endl;\n        }\n    }\n}\n"
+    \n#include \"modint.hpp\"\n#include \"random/xorshift.hpp\"\n#define PROBLEM \"\
+    http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\nusing namespace\
+    \ std;\n\nusing mint = ModInt<998244353>;\nint main()\n{\n    mint b1(rand_int()\
+    \ % 1000000 + 1), b2(rand_int() % 1000000 + 1);\n\n    string T, P;\n    cin >>\
+    \ T >> P;\n    rolling_hash<mint> rh_T1(T, b1),rh_P1(P, b1);\n    rolling_hash<mint>\
+    \ rh_T2(T, b2),rh_P2(P, b2);\n\n    for (int l = 0; l < (int)(T.length() - P.length()\
+    \ + 1); l++)\n    {\n        if (rh_T1.get_hash(l, l + P.length()) == rh_P1.get_hash(0,\
+    \ P.length())\n            and rh_T2.get_hash(l, l + P.length()) == rh_P2.get_hash(0,\
+    \ P.length()))\n        {\n            cout << l << endl;\n        }\n    }\n\
+    }\n"
   dependsOn:
   - random/rolling_hash_1d_general.hpp
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   - random/xorshift.hpp
   isVerificationFile: true
   path: random/test/rolling_hash_w_modint.test.cpp
   requiredBy: []
-  timestamp: '2020-03-07 22:54:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 01:21:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: random/test/rolling_hash_w_modint.test.cpp
 layout: document

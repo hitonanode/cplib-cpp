@@ -4,26 +4,26 @@ data:
   - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/monomial_mod_polynomial.hpp
     title: formal_power_series/monomial_mod_polynomial.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
+    path: modint.hpp
+    title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/214
     links:
     - https://yukicoder.me/problems/no/214
   bundledCode: "#line 1 \"formal_power_series/test/kitamasa.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/214\"\n#line 2 \"modulus/modint_fixed.hpp\"\
-    \n#include <iostream>\n#include <vector>\n#include <set>\n\n// CUT begin\ntemplate\
-    \ <int mod>\nstruct ModInt\n{\n    using lint = long long;\n    static int get_mod()\
-    \ { return mod; }\n    static int get_primitive_root() {\n        static int primitive_root\
+    \ \"https://yukicoder.me/problems/no/214\"\n#line 2 \"modint.hpp\"\n#include <iostream>\n\
+    #include <vector>\n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct\
+    \ ModInt\n{\n    using lint = long long;\n    static int get_mod() { return mod;\
+    \ }\n    static int get_primitive_root() {\n        static int primitive_root\
     \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&](){\n\
     \                std::set<int> fac;\n                int v = mod - 1;\n      \
     \          for (lint i = 2; i * i <= v; i++) while (v % i == 0) fac.insert(i),\
@@ -60,7 +60,8 @@ data:
     \    constexpr lint power(lint n) const {\n        lint ans = 1, tmp = this->val;\n\
     \        while (n) {\n            if (n & 1) ans = ans * tmp % mod;\n        \
     \    tmp = tmp * tmp % mod;\n            n /= 2;\n        }\n        return ans;\n\
-    \    }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
+    \    }\n    constexpr ModInt pow(lint n) const {\n        return power(n);\n \
+    \   }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
     \ ModInt operator^(lint n) const { return ModInt(this->power(n)); }\n    constexpr\
     \ ModInt &operator^=(lint n) { return *this = *this ^ n; }\n\n    inline ModInt\
     \ fac() const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
@@ -185,7 +186,7 @@ data:
     \ g.end(), dp.begin(), mint(0));\n        ret -= acc * p;\n        g = prod_x(g);\n\
     \        N--;\n        acc += f_reversed[N];\n    }\n    std::cout << ret << '\\\
     n';\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/214\"\n#include \"modulus/modint_fixed.hpp\"\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/214\"\n#include \"modint.hpp\"\
     \n#include \"convolution/ntt.hpp\"\n#include \"formal_power_series/monomial_mod_polynomial.hpp\"\
     \nusing mint = ModInt<1000000007>;\n\n#include <iostream>\n#include <numeric>\n\
     \n\nstd::vector<mint> gen_dp(std::vector<int> v, int n)\n{\n    std::vector<std::vector<mint>>\
@@ -213,14 +214,14 @@ data:
     \     ret -= acc * p;\n        g = prod_x(g);\n        N--;\n        acc += f_reversed[N];\n\
     \    }\n    std::cout << ret << '\\n';\n}\n"
   dependsOn:
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   - convolution/ntt.hpp
   - formal_power_series/monomial_mod_polynomial.hpp
   isVerificationFile: true
   path: formal_power_series/test/kitamasa.test.cpp
   requiredBy: []
-  timestamp: '2020-10-17 00:01:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 01:21:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/kitamasa.test.cpp
 layout: document

@@ -8,8 +8,8 @@ data:
     path: formal_power_series/coeff_of_rational_function.hpp
     title: formal_power_series/coeff_of_rational_function.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
+    path: modint.hpp
+    title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -20,7 +20,7 @@ data:
     links:
     - https://yukicoder.me/problems/no/215
   bundledCode: "#line 1 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
-    \n#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n#line 2 \"modulus/modint_fixed.hpp\"\
+    \n#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n#line 2 \"modint.hpp\"\
     \n#include <iostream>\n#include <vector>\n#include <set>\n\n// CUT begin\ntemplate\
     \ <int mod>\nstruct ModInt\n{\n    using lint = long long;\n    static int get_mod()\
     \ { return mod; }\n    static int get_primitive_root() {\n        static int primitive_root\
@@ -60,7 +60,8 @@ data:
     \    constexpr lint power(lint n) const {\n        lint ans = 1, tmp = this->val;\n\
     \        while (n) {\n            if (n & 1) ans = ans * tmp % mod;\n        \
     \    tmp = tmp * tmp % mod;\n            n /= 2;\n        }\n        return ans;\n\
-    \    }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
+    \    }\n    constexpr ModInt pow(lint n) const {\n        return power(n);\n \
+    \   }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
     \ ModInt operator^(lint n) const { return ModInt(this->power(n)); }\n    constexpr\
     \ ModInt &operator^=(lint n) { return *this = *this ^ n; }\n\n    inline ModInt\
     \ fac() const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
@@ -166,7 +167,7 @@ data:
     \    std::vector<mint> denom = f;\n    for (auto &x : denom) x = -x;\n    denom[0]\
     \ = 1;\n    for (int i = f.size() - 1; i > 1; i--) f[i - 1] += f[i];\n    std::cout\
     \ << coefficient_of_rational_function(N, f, denom) << '\\n';\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n#include \"modulus/modint_fixed.hpp\"\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n#include \"modint.hpp\"\
     \n#include \"convolution/ntt.hpp\"\n#include \"formal_power_series/coeff_of_rational_function.hpp\"\
     \n\nusing mint = ModInt<1000000007>;\n\n#include <iostream>\n\nstd::vector<mint>\
     \ gen_dp(std::vector<int> v, int n)\n{\n    std::vector<std::vector<mint>> dp(n\
@@ -182,13 +183,13 @@ data:
     \ i = f.size() - 1; i > 1; i--) f[i - 1] += f[i];\n    std::cout << coefficient_of_rational_function(N,\
     \ f, denom) << '\\n';\n}\n"
   dependsOn:
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   - convolution/ntt.hpp
   - formal_power_series/coeff_of_rational_function.hpp
   isVerificationFile: true
   path: formal_power_series/test/coeff_of_rational_function.test.cpp
   requiredBy: []
-  timestamp: '2020-10-17 00:01:55+09:00'
+  timestamp: '2020-11-15 01:21:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/coeff_of_rational_function.test.cpp

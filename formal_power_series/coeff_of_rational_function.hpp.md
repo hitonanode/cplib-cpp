@@ -5,8 +5,8 @@ data:
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
+    path: modint.hpp
+    title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -16,52 +16,53 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"modulus/modint_fixed.hpp\"\n#include <iostream>\n#include\
-    \ <vector>\n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n\
-    {\n    using lint = long long;\n    static int get_mod() { return mod; }\n   \
-    \ static int get_primitive_root() {\n        static int primitive_root = 0;\n\
-    \        if (!primitive_root) {\n            primitive_root = [&](){\n       \
-    \         std::set<int> fac;\n                int v = mod - 1;\n             \
-    \   for (lint i = 2; i * i <= v; i++) while (v % i == 0) fac.insert(i), v /= i;\n\
-    \                if (v > 1) fac.insert(v);\n                for (int g = 1; g\
-    \ < mod; g++) {\n                    bool ok = true;\n                    for\
-    \ (auto i : fac) if (ModInt(g).power((mod - 1) / i) == 1) { ok = false; break;\
-    \ }\n                    if (ok) return g;\n                }\n              \
-    \  return -1;\n            }();\n        }\n        return primitive_root;\n \
-    \   }\n    int val;\n    constexpr ModInt() : val(0) {}\n    constexpr ModInt\
-    \ &_setval(lint v) { val = (v >= mod ? v - mod : v); return *this; }\n    constexpr\
-    \ ModInt(lint v) { _setval(v % mod + mod); }\n    explicit operator bool() const\
-    \ { return val != 0; }\n    constexpr ModInt operator+(const ModInt &x) const\
-    \ { return ModInt()._setval((lint)val + x.val); }\n    constexpr ModInt operator-(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val - x.val + mod); }\n   \
-    \ constexpr ModInt operator*(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ * x.val % mod); }\n    constexpr ModInt operator/(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.inv() % mod); }\n    constexpr ModInt operator-()\
-    \ const { return ModInt()._setval(mod - val); }\n    constexpr ModInt &operator+=(const\
-    \ ModInt &x) { return *this = *this + x; }\n    constexpr ModInt &operator-=(const\
-    \ ModInt &x) { return *this = *this - x; }\n    constexpr ModInt &operator*=(const\
-    \ ModInt &x) { return *this = *this * x; }\n    constexpr ModInt &operator/=(const\
-    \ ModInt &x) { return *this = *this / x; }\n    friend constexpr ModInt operator+(lint\
-    \ a, const ModInt &x) { return ModInt()._setval(a % mod + x.val); }\n    friend\
-    \ constexpr ModInt operator-(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % mod - x.val + mod); }\n    friend constexpr ModInt operator*(lint a, const\
-    \ ModInt &x) { return ModInt()._setval(a % mod * x.val % mod); }\n    friend constexpr\
-    \ ModInt operator/(lint a, const ModInt &x) { return ModInt()._setval(a % mod\
-    \ * x.inv() % mod); }\n    constexpr bool operator==(const ModInt &x) const {\
-    \ return val == x.val; }\n    constexpr bool operator!=(const ModInt &x) const\
-    \ { return val != x.val; }\n    bool operator<(const ModInt &x) const { return\
-    \ val < x.val; }  // To use std::map<ModInt, T>\n    friend std::istream &operator>>(std::istream\
-    \ &is, ModInt &x) { lint t; is >> t; x = ModInt(t); return is; }\n    friend std::ostream\
-    \ &operator<<(std::ostream &os, const ModInt &x) { os << x.val;  return os; }\n\
-    \    constexpr lint power(lint n) const {\n        lint ans = 1, tmp = this->val;\n\
-    \        while (n) {\n            if (n & 1) ans = ans * tmp % mod;\n        \
-    \    tmp = tmp * tmp % mod;\n            n /= 2;\n        }\n        return ans;\n\
-    \    }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
-    \ ModInt operator^(lint n) const { return ModInt(this->power(n)); }\n    constexpr\
-    \ ModInt &operator^=(lint n) { return *this = *this ^ n; }\n\n    inline ModInt\
-    \ fac() const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
-    \        if (l0 > this->val) return facs[this->val];\n\n        facs.resize(this->val\
-    \ + 1);\n        for (int i = l0; i <= this->val; i++) facs[i] = (i == 0 ? ModInt(1)\
+  bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <vector>\n#include\
+    \ <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint\
+    \ = long long;\n    static int get_mod() { return mod; }\n    static int get_primitive_root()\
+    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
+    \            primitive_root = [&](){\n                std::set<int> fac;\n   \
+    \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
+    \ while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
+    \                for (int g = 1; g < mod; g++) {\n                    bool ok\
+    \ = true;\n                    for (auto i : fac) if (ModInt(g).power((mod - 1)\
+    \ / i) == 1) { ok = false; break; }\n                    if (ok) return g;\n \
+    \               }\n                return -1;\n            }();\n        }\n \
+    \       return primitive_root;\n    }\n    int val;\n    constexpr ModInt() :\
+    \ val(0) {}\n    constexpr ModInt &_setval(lint v) { val = (v >= mod ? v - mod\
+    \ : v); return *this; }\n    constexpr ModInt(lint v) { _setval(v % mod + mod);\
+    \ }\n    explicit operator bool() const { return val != 0; }\n    constexpr ModInt\
+    \ operator+(const ModInt &x) const { return ModInt()._setval((lint)val + x.val);\
+    \ }\n    constexpr ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ - x.val + mod); }\n    constexpr ModInt operator*(const ModInt &x) const { return\
+    \ ModInt()._setval((lint)val * x.val % mod); }\n    constexpr ModInt operator/(const\
+    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % mod); }\n \
+    \   constexpr ModInt operator-() const { return ModInt()._setval(mod - val); }\n\
+    \    constexpr ModInt &operator+=(const ModInt &x) { return *this = *this + x;\
+    \ }\n    constexpr ModInt &operator-=(const ModInt &x) { return *this = *this\
+    \ - x; }\n    constexpr ModInt &operator*=(const ModInt &x) { return *this = *this\
+    \ * x; }\n    constexpr ModInt &operator/=(const ModInt &x) { return *this = *this\
+    \ / x; }\n    friend constexpr ModInt operator+(lint a, const ModInt &x) { return\
+    \ ModInt()._setval(a % mod + x.val); }\n    friend constexpr ModInt operator-(lint\
+    \ a, const ModInt &x) { return ModInt()._setval(a % mod - x.val + mod); }\n  \
+    \  friend constexpr ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a\
+    \ % mod * x.val % mod); }\n    friend constexpr ModInt operator/(lint a, const\
+    \ ModInt &x) { return ModInt()._setval(a % mod * x.inv() % mod); }\n    constexpr\
+    \ bool operator==(const ModInt &x) const { return val == x.val; }\n    constexpr\
+    \ bool operator!=(const ModInt &x) const { return val != x.val; }\n    bool operator<(const\
+    \ ModInt &x) const { return val < x.val; }  // To use std::map<ModInt, T>\n  \
+    \  friend std::istream &operator>>(std::istream &is, ModInt &x) { lint t; is >>\
+    \ t; x = ModInt(t); return is; }\n    friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModInt &x) { os << x.val;  return os; }\n    constexpr lint power(lint\
+    \ n) const {\n        lint ans = 1, tmp = this->val;\n        while (n) {\n  \
+    \          if (n & 1) ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n\
+    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr ModInt\
+    \ pow(lint n) const {\n        return power(n);\n    }\n    constexpr lint inv()\
+    \ const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
+    \ n) const { return ModInt(this->power(n)); }\n    constexpr ModInt &operator^=(lint\
+    \ n) { return *this = *this ^ n; }\n\n    inline ModInt fac() const {\n      \
+    \  static std::vector<ModInt> facs;\n        int l0 = facs.size();\n        if\
+    \ (l0 > this->val) return facs[this->val];\n\n        facs.resize(this->val +\
+    \ 1);\n        for (int i = l0; i <= this->val; i++) facs[i] = (i == 0 ? ModInt(1)\
     \ : facs[i - 1] * ModInt(i));\n        return facs[this->val];\n    }\n\n    ModInt\
     \ doublefac() const {\n        lint k = (this->val + 1) / 2;\n        if (this->val\
     \ & 1) return ModInt(k * 2).fac() / ModInt(2).power(k) / ModInt(k).fac();\n  \
@@ -167,11 +168,11 @@ data:
     \ num[0] / den[0];\n}\n"
   dependsOn:
   - convolution/ntt.hpp
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   isVerificationFile: false
   path: formal_power_series/coeff_of_rational_function.hpp
   requiredBy: []
-  timestamp: '2020-10-17 00:01:55+09:00'
+  timestamp: '2020-11-15 01:21:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/coeff_of_rational_function.test.cpp

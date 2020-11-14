@@ -8,8 +8,8 @@ data:
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
+    path: modint.hpp
+    title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -21,9 +21,9 @@ data:
     - https://judge.yosupo.jp/problem/sharp_p_subset_sum
   bundledCode: "#line 1 \"formal_power_series/test/sharp_p_subset_sum.test.cpp\"\n\
     #define PROBLEM \"https://judge.yosupo.jp/problem/sharp_p_subset_sum\"\n#include\
-    \ <iostream>\n#include <vector>\n#line 4 \"modulus/modint_fixed.hpp\"\n#include\
-    \ <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint\
-    \ = long long;\n    static int get_mod() { return mod; }\n    static int get_primitive_root()\
+    \ <iostream>\n#include <vector>\n#line 4 \"modint.hpp\"\n#include <set>\n\n//\
+    \ CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint = long long;\n\
+    \    static int get_mod() { return mod; }\n    static int get_primitive_root()\
     \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
     \            primitive_root = [&](){\n                std::set<int> fac;\n   \
     \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
@@ -60,8 +60,9 @@ data:
     \ &os, const ModInt &x) { os << x.val;  return os; }\n    constexpr lint power(lint\
     \ n) const {\n        lint ans = 1, tmp = this->val;\n        while (n) {\n  \
     \          if (n & 1) ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n\
-    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr lint\
-    \ inv() const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
+    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr ModInt\
+    \ pow(lint n) const {\n        return power(n);\n    }\n    constexpr lint inv()\
+    \ const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
     \ n) const { return ModInt(this->power(n)); }\n    constexpr ModInt &operator^=(lint\
     \ n) { return *this = *this ^ n; }\n\n    inline ModInt fac() const {\n      \
     \  static std::vector<ModInt> facs;\n        int l0 = facs.size();\n        if\
@@ -226,10 +227,11 @@ data:
     \ + c) from f(X), O(NlogN)\n    P shift(T c) const {\n        const int n = (int)this->size();\n\
     \        P ret = *this;\n        for (int i = 0; i < n; i++) {\n            ret[i]\
     \ *= T(i).fac();\n        }\n        reverse(ret.begin(), ret.end());\n      \
-    \  P exp_cx = P({ 0, c }).exp(n);\n        ret = (ret * exp_cx).pre(n);\n    \
-    \    reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n; i++) {\n\
-    \            ret[i] /= T(i).fac();\n        }\n        return ret;\n    }\n\n\
-    \    T coeff(int i) const {\n        if ((int)this->size() <= i or i < 0) return\
+    \  P exp_cx(n, 1);\n        for (int i = 1; i < n; i++) {\n            exp_cx[i]\
+    \ = exp_cx[i - 1] * c / i;\n        }\n        ret = (ret * exp_cx), ret.resize(n);\n\
+    \        reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n; i++)\
+    \ {\n            ret[i] /= T(i).fac();\n        }\n        return ret;\n    }\n\
+    \n    T coeff(int i) const {\n        if ((int)this->size() <= i or i < 0) return\
     \ T(0);\n        return (*this)[i];\n    }\n\n    T eval(T x) const {\n      \
     \  T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n  \
     \      return ret;\n    }\n};\n#line 6 \"formal_power_series/test/sharp_p_subset_sum.test.cpp\"\
@@ -244,11 +246,10 @@ data:
     \ + 1);\n    for (int t = 1; t <= T; t++) cout << A.coeff(t) << ' ';\n    cout\
     \ << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sharp_p_subset_sum\"\n\
-    #include <iostream>\n#include <vector>\n#include \"modulus/modint_fixed.hpp\"\n\
-    #include \"formal_power_series/formal_power_series.hpp\"\nusing namespace std;\n\
-    \nint main()\n{\n    cin.tie(NULL);\n    ios::sync_with_stdio(false);\n\n    int\
-    \ N, T;\n    cin >> N >> T;\n    vector<int> cnt(T + 1);\n    while (N--)\n  \
-    \  {\n        int s;\n        cin >> s;\n        cnt[s]++;\n    }\n    FormalPowerSeries<ModInt<998244353>>\
+    #include <iostream>\n#include <vector>\n#include \"modint.hpp\"\n#include \"formal_power_series/formal_power_series.hpp\"\
+    \nusing namespace std;\n\nint main()\n{\n    cin.tie(NULL);\n    ios::sync_with_stdio(false);\n\
+    \n    int N, T;\n    cin >> N >> T;\n    vector<int> cnt(T + 1);\n    while (N--)\n\
+    \    {\n        int s;\n        cin >> s;\n        cnt[s]++;\n    }\n    FormalPowerSeries<ModInt<998244353>>\
     \ A(T + 1), invs(T + 1);\n    for (int i = 1; i <= T; i++) invs[i] = (invs[i]\
     \ + i).inv();\n\n    for (int i = 1; i <= T; i++)\n    {\n        if (cnt[i])\n\
     \        {\n            for (int j = 1; j * i <= T; j++)\n            {\n    \
@@ -257,13 +258,13 @@ data:
     \ + 1);\n    for (int t = 1; t <= T; t++) cout << A.coeff(t) << ' ';\n    cout\
     \ << '\\n';\n}\n"
   dependsOn:
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   - formal_power_series/formal_power_series.hpp
   - convolution/ntt.hpp
   isVerificationFile: true
   path: formal_power_series/test/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2020-11-14 22:28:21+09:00'
+  timestamp: '2020-11-15 01:21:08+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/sharp_p_subset_sum.test.cpp

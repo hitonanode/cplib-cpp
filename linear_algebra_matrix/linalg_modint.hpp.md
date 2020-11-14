@@ -2,27 +2,27 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/system_of_linear_equations.hpp
     title: linear_algebra_matrix/system_of_linear_equations.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\n#include <algorithm>\n\
@@ -216,7 +216,7 @@ data:
   - linear_algebra_matrix/system_of_linear_equations.hpp
   - graph/general_matching.hpp
   timestamp: '2020-10-15 00:04:43+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp

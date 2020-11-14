@@ -2,15 +2,15 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
-  - icon: ':heavy_check_mark:'
+    path: modint.hpp
+    title: modint.hpp
+  - icon: ':x:'
     path: segmenttree/range-update-range-get.hpp
     title: segmenttree/range-update-range-get.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -74,13 +74,13 @@ data:
     \   T get(int l, int r) { return SegTree::get(l, r, {}); }\n    RangeUpdateRangeSum(const\
     \ std::vector<T> &seq) : SegTree::LazySegmentTree()\n    {\n        std::vector<TDATA>\
     \ vec;\n        for (const auto &x : seq) vec.emplace_back(x, 1);\n        SegTree::initialize(vec,\
-    \ TDATA(0, 0), TLAZY(0, false), 0);\n    }\n};\n#line 4 \"modulus/modint_fixed.hpp\"\
-    \n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using\
-    \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
-    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
-    \ {\n            primitive_root = [&](){\n                std::set<int> fac;\n\
-    \                int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
-    \ i++) while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
+    \ TDATA(0, 0), TLAZY(0, false), 0);\n    }\n};\n#line 4 \"modint.hpp\"\n#include\
+    \ <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint\
+    \ = long long;\n    static int get_mod() { return mod; }\n    static int get_primitive_root()\
+    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
+    \            primitive_root = [&](){\n                std::set<int> fac;\n   \
+    \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
+    \ while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
     \                for (int g = 1; g < mod; g++) {\n                    bool ok\
     \ = true;\n                    for (auto i : fac) if (ModInt(g).power((mod - 1)\
     \ / i) == 1) { ok = false; break; }\n                    if (ok) return g;\n \
@@ -113,8 +113,9 @@ data:
     \ &os, const ModInt &x) { os << x.val;  return os; }\n    constexpr lint power(lint\
     \ n) const {\n        lint ans = 1, tmp = this->val;\n        while (n) {\n  \
     \          if (n & 1) ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n\
-    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr lint\
-    \ inv() const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
+    \            n /= 2;\n        }\n        return ans;\n    }\n    constexpr ModInt\
+    \ pow(lint n) const {\n        return power(n);\n    }\n    constexpr lint inv()\
+    \ const { return this->power(mod - 2); }\n    constexpr ModInt operator^(lint\
     \ n) const { return ModInt(this->power(n)); }\n    constexpr ModInt &operator^=(lint\
     \ n) { return *this = *this ^ n; }\n\n    inline ModInt fac() const {\n      \
     \  static std::vector<ModInt> facs;\n        int l0 = facs.size();\n        if\
@@ -165,7 +166,7 @@ data:
     \        std::cout << segtree.get(l, r) << '\\n';\n        }\n        else\n \
     \       {\n            mint b, c;\n            std::cin >> b >> c;\n         \
     \   segtree.update(l, r, std::make_pair(b, c));\n        }\n    }\n}\n"
-  code: "#include \"segmenttree/range-update-range-get.hpp\"\n#include \"modulus/modint_fixed.hpp\"\
+  code: "#include \"segmenttree/range-update-range-get.hpp\"\n#include \"modint.hpp\"\
     \n#include <utility>\n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n\n// RangeAffineRangeSum\n// - update: x_i -> a * x_i + b for i in [l, r)\n\
     // - get: return x_l + ... + x_{r - 1}\ntemplate <typename T>\nstruct RangeAffineRangeSum\
@@ -197,12 +198,12 @@ data:
     \   segtree.update(l, r, std::make_pair(b, c));\n        }\n    }\n}\n"
   dependsOn:
   - segmenttree/range-update-range-get.hpp
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   isVerificationFile: true
   path: segmenttree/test/range-affine-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-09-04 23:33:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 01:21:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: segmenttree/test/range-affine-range-sum.test.cpp
 layout: document

@@ -1,16 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: flow/mincostflow.hpp
     title: flow/mincostflow.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: flow/test/min_cost_b_flow.test.cpp
-    title: flow/test/min_cost_b_flow.test.cpp
+  _extendedVerifiedWith: []
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"flow/mincostflow.hpp\"\n#include <algorithm>\n#include <cassert>\n\
@@ -160,9 +157,8 @@ data:
   path: flow/b-flow.hpp
   requiredBy: []
   timestamp: '2020-10-11 20:57:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - flow/test/min_cost_b_flow.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: flow/b-flow.hpp
 layout: document
 redirect_from:

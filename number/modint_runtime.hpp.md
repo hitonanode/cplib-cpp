@@ -15,20 +15,20 @@ data:
   - icon: ':x:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: modulus/test/sqrt_modint_runtime.test.cpp
-    title: modulus/test/sqrt_modint_runtime.test.cpp
+  - icon: ':x:'
+    path: number/test/sqrt_modint_runtime.test.cpp
+    title: number/test/sqrt_modint_runtime.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"modulus/modint_runtime.hpp\"\n#include <iostream>\n#include\
+  bundledCode: "#line 2 \"number/modint_runtime.hpp\"\n#include <iostream>\n#include\
     \ <vector>\n#include <set>\n\n// CUT begin\nstruct ModIntRuntime\n{\n    using\
     \ lint = long long int;\n    static int get_mod() { return mod; }\n    int val;\n\
     \    static int mod;\n    static std::vector<ModIntRuntime> &facs()\n    {\n \
@@ -72,7 +72,8 @@ data:
     \ &x) { os << x.val;  return os; }\n \n    lint power(lint n) const {\n      \
     \  lint ans = 1, tmp = this->val;\n        while (n) {\n            if (n & 1)\
     \ ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n            n /=\
-    \ 2;\n        }\n        return ans;\n    }\n    lint inv() const { return this->power(mod\
+    \ 2;\n        }\n        return ans;\n    }\n    ModIntRuntime pow(lint n) const\
+    \ {\n        return power(n);\n    }\n    lint inv() const { return this->power(mod\
     \ - 2); }\n    ModIntRuntime operator^(lint n) const { return ModIntRuntime(this->power(n));\
     \ }\n    ModIntRuntime &operator^=(lint n) { return *this = *this ^ n; }\n \n\
     \    ModIntRuntime fac() const {\n        int l0 = facs().size();\n        if\
@@ -139,7 +140,8 @@ data:
     \ &x) { os << x.val;  return os; }\n \n    lint power(lint n) const {\n      \
     \  lint ans = 1, tmp = this->val;\n        while (n) {\n            if (n & 1)\
     \ ans = ans * tmp % mod;\n            tmp = tmp * tmp % mod;\n            n /=\
-    \ 2;\n        }\n        return ans;\n    }\n    lint inv() const { return this->power(mod\
+    \ 2;\n        }\n        return ans;\n    }\n    ModIntRuntime pow(lint n) const\
+    \ {\n        return power(n);\n    }\n    lint inv() const { return this->power(mod\
     \ - 2); }\n    ModIntRuntime operator^(lint n) const { return ModIntRuntime(this->power(n));\
     \ }\n    ModIntRuntime &operator^=(lint n) { return *this = *this ^ n; }\n \n\
     \    ModIntRuntime fac() const {\n        int l0 = facs().size();\n        if\
@@ -164,22 +166,22 @@ data:
     };\nint ModIntRuntime::mod = 1;\n"
   dependsOn: []
   isVerificationFile: false
-  path: modulus/modint_runtime.hpp
+  path: number/modint_runtime.hpp
   requiredBy: []
-  timestamp: '2020-03-07 22:54:47+09:00'
+  timestamp: '2020-11-15 01:21:08+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - modulus/test/sqrt_modint_runtime.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - convolution/test/ntt.test.cpp
   - convolution/test/ntt_arbitrary_mod.test.cpp
-documentation_of: modulus/modint_runtime.hpp
+  - number/test/sqrt_modint_runtime.test.cpp
+documentation_of: number/modint_runtime.hpp
 layout: document
 redirect_from:
-- /library/modulus/modint_runtime.hpp
-- /library/modulus/modint_runtime.hpp.html
-title: modulus/modint_runtime.hpp
+- /library/number/modint_runtime.hpp
+- /library/number/modint_runtime.hpp.html
+title: number/modint_runtime.hpp
 ---

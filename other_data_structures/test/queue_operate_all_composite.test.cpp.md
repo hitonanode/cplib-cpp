@@ -2,15 +2,15 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: modulus/modint_fixed.hpp
-    title: modulus/modint_fixed.hpp
-  - icon: ':heavy_check_mark:'
+    path: modint.hpp
+    title: modint.hpp
+  - icon: ':x:'
     path: other_data_structures/sliding_window_aggregation.hpp
     title: other_data_structures/sliding_window_aggregation.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/queue_operate_all_composite
@@ -48,19 +48,19 @@ data:
     \ T>, pair<T, T>, decltype(swag_op_id), decltype(swag_op_linear_merge)>\n{\n \
     \   LinearFunctionQueue() : SlidingWindowAggregation<pair<T, T>, pair<T, T>, decltype(swag_op_id),\
     \ decltype(swag_op_linear_merge)>::SlidingWindowAggregation(swag_op_id, swag_op_linear_merge,\
-    \ pair<T, T>(1, 0)) {}\n};\n#line 2 \"modulus/modint_fixed.hpp\"\n#include <iostream>\n\
-    #include <vector>\n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct\
-    \ ModInt\n{\n    using lint = long long;\n    static int get_mod() { return mod;\
-    \ }\n    static int get_primitive_root() {\n        static int primitive_root\
-    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&](){\n\
-    \                std::set<int> fac;\n                int v = mod - 1;\n      \
-    \          for (lint i = 2; i * i <= v; i++) while (v % i == 0) fac.insert(i),\
-    \ v /= i;\n                if (v > 1) fac.insert(v);\n                for (int\
-    \ g = 1; g < mod; g++) {\n                    bool ok = true;\n              \
-    \      for (auto i : fac) if (ModInt(g).power((mod - 1) / i) == 1) { ok = false;\
-    \ break; }\n                    if (ok) return g;\n                }\n       \
-    \         return -1;\n            }();\n        }\n        return primitive_root;\n\
-    \    }\n    int val;\n    constexpr ModInt() : val(0) {}\n    constexpr ModInt\
+    \ pair<T, T>(1, 0)) {}\n};\n#line 2 \"modint.hpp\"\n#include <iostream>\n#include\
+    \ <vector>\n#include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n\
+    {\n    using lint = long long;\n    static int get_mod() { return mod; }\n   \
+    \ static int get_primitive_root() {\n        static int primitive_root = 0;\n\
+    \        if (!primitive_root) {\n            primitive_root = [&](){\n       \
+    \         std::set<int> fac;\n                int v = mod - 1;\n             \
+    \   for (lint i = 2; i * i <= v; i++) while (v % i == 0) fac.insert(i), v /= i;\n\
+    \                if (v > 1) fac.insert(v);\n                for (int g = 1; g\
+    \ < mod; g++) {\n                    bool ok = true;\n                    for\
+    \ (auto i : fac) if (ModInt(g).power((mod - 1) / i) == 1) { ok = false; break;\
+    \ }\n                    if (ok) return g;\n                }\n              \
+    \  return -1;\n            }();\n        }\n        return primitive_root;\n \
+    \   }\n    int val;\n    constexpr ModInt() : val(0) {}\n    constexpr ModInt\
     \ &_setval(lint v) { val = (v >= mod ? v - mod : v); return *this; }\n    constexpr\
     \ ModInt(lint v) { _setval(v % mod + mod); }\n    explicit operator bool() const\
     \ { return val != 0; }\n    constexpr ModInt operator+(const ModInt &x) const\
@@ -88,7 +88,8 @@ data:
     \    constexpr lint power(lint n) const {\n        lint ans = 1, tmp = this->val;\n\
     \        while (n) {\n            if (n & 1) ans = ans * tmp % mod;\n        \
     \    tmp = tmp * tmp % mod;\n            n /= 2;\n        }\n        return ans;\n\
-    \    }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
+    \    }\n    constexpr ModInt pow(lint n) const {\n        return power(n);\n \
+    \   }\n    constexpr lint inv() const { return this->power(mod - 2); }\n    constexpr\
     \ ModInt operator^(lint n) const { return ModInt(this->power(n)); }\n    constexpr\
     \ ModInt &operator^=(lint n) { return *this = *this ^ n; }\n\n    inline ModInt\
     \ fac() const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
@@ -120,7 +121,7 @@ data:
     \   pair<mint, mint> f = swag.fold_all();\n            printf(\"%d\\n\", (f.first\
     \ * x + f.second).val);\n        }\n    }\n}\n"
   code: "#include \"other_data_structures/sliding_window_aggregation.hpp\"\n#include\
-    \ \"modulus/modint_fixed.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
+    \ \"modint.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
     \n#include <iostream>\n\nusing mint = ModInt<998244353>;\nint main()\n{\n    LinearFunctionQueue<mint>\
     \ swag;\n    int Q;\n    cin >> Q;\n    while (Q--) {\n        int q;\n      \
     \  cin >> q;\n        if (q == 0) {\n            mint a, b;\n            cin >>\
@@ -130,12 +131,12 @@ data:
     \ * x + f.second).val);\n        }\n    }\n}\n"
   dependsOn:
   - other_data_structures/sliding_window_aggregation.hpp
-  - modulus/modint_fixed.hpp
+  - modint.hpp
   isVerificationFile: true
   path: other_data_structures/test/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2020-03-07 22:54:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 01:21:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: other_data_structures/test/queue_operate_all_composite.test.cpp
 layout: document
