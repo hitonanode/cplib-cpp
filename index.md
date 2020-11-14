@@ -217,6 +217,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/eratosthenes.hpp
       title: number/eratosthenes.hpp
+    - icon: ':warning:'
+      path: number/euler_totient_phi.hpp
+      title: number/euler_totient_phi.hpp
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
@@ -236,6 +239,9 @@ data:
     - icon: ':warning:'
       path: other_data_structures/link_cut_tree.cpp
       title: other_data_structures/link_cut_tree.cpp
+    - icon: ':warning:'
+      path: other_data_structures/persistent_array.hpp
+      title: other_data_structures/persistent_array.hpp
     - icon: ':heavy_check_mark:'
       path: other_data_structures/persistent_queue.hpp
       title: other_data_structures/persistent_queue.hpp
@@ -343,11 +349,14 @@ data:
   - name: unionfind
     pages:
     - icon: ':warning:'
+      path: unionfind/fully_persistent_uf.hpp
+      title: unionfind/fully_persistent_uf.hpp
+    - icon: ':warning:'
       path: unionfind/grid_unionfind.hpp
       title: unionfind/grid_unionfind.hpp
     - icon: ':warning:'
-      path: unionfind/persistent_unionfind.hpp
-      title: unionfind/persistent_unionfind.hpp
+      path: unionfind/partially_persistent_uf.hpp
+      title: unionfind/partially_persistent_uf.hpp
     - icon: ':warning:'
       path: unionfind/undo_unionfind.hpp
       title: unionfind/undo_unionfind.hpp
@@ -360,6 +369,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: unionfind/weighted_unionfind.hpp
       title: unionfind/weighted_unionfind.hpp
+  - name: unionfind/test
+    pages:
+    - icon: ':warning:'
+      path: unionfind/test/fully_persistent_uf.cpp
+      title: unionfind/test/fully_persistent_uf.cpp
   - name: utilities
     pages:
     - icon: ':warning:'
