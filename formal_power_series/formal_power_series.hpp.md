@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':question:'
     path: modulus/modint_fixed.hpp
     title: modulus/modint_fixed.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
   _extendedVerifiedWith:
@@ -36,23 +36,26 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_pow_another.test.cpp
     title: formal_power_series/test/fps_pow_another.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt.test.cpp
     title: formal_power_series/test/fps_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
     title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: formal_power_series/test/poly_taylor_shift.test.cpp
+    title: formal_power_series/test/poly_taylor_shift.test.cpp
+  - icon: ':x:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>
@@ -257,11 +260,17 @@ data:
     \         if (k * (i > 0) > deg or k * i > deg) return {};\n                long\
     \ long int S = i * k;\n                for (int j = 0; j + S < deg and j < (int)D.size();\
     \ j++) E[j + S] = D[j];\n                E.shrink();\n                return E;\n\
-    \            }\n        }\n        return *this;\n    }\n\n    T coeff(int i)\
-    \ const {\n        if ((int)this->size() <= i or i < 0) return T(0);\n       \
-    \ return (*this)[i];\n    }\n\n    T eval(T x) const {\n        T ret = 0, w =\
-    \ 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n        return ret;\n\
-    \    }\n};\n"
+    \            }\n        }\n        return *this;\n    }\n\n    // Calculate f(X\
+    \ + c) from f(X), O(NlogN)\n    P shift(T c) const {\n        const int n = (int)this->size();\n\
+    \        P ret = *this;\n        for (int i = 0; i < n; i++) {\n            ret[i]\
+    \ *= T(i).fac();\n        }\n        reverse(ret.begin(), ret.end());\n      \
+    \  P exp_cx = P({ 0, c }).exp(n);\n        ret = (ret * exp_cx).pre(n);\n    \
+    \    reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n; i++) {\n\
+    \            ret[i] /= T(i).fac();\n        }\n        return ret;\n    }\n\n\
+    \    T coeff(int i) const {\n        if ((int)this->size() <= i or i < 0) return\
+    \ T(0);\n        return (*this)[i];\n    }\n\n    T eval(T x) const {\n      \
+    \  T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n  \
+    \      return ret;\n    }\n};\n"
   code: "#pragma once\n#include \"convolution/ntt.hpp\"\n#include <algorithm>\n#include\
     \ <cassert>\n#include <vector>\nusing namespace std;\n\n// CUT begin\n// Formal\
     \ Power Series (\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570) based on ModInt<mod> / ModIntRuntime\n\
@@ -347,11 +356,17 @@ data:
     \         if (k * (i > 0) > deg or k * i > deg) return {};\n                long\
     \ long int S = i * k;\n                for (int j = 0; j + S < deg and j < (int)D.size();\
     \ j++) E[j + S] = D[j];\n                E.shrink();\n                return E;\n\
-    \            }\n        }\n        return *this;\n    }\n\n    T coeff(int i)\
-    \ const {\n        if ((int)this->size() <= i or i < 0) return T(0);\n       \
-    \ return (*this)[i];\n    }\n\n    T eval(T x) const {\n        T ret = 0, w =\
-    \ 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n        return ret;\n\
-    \    }\n};\n"
+    \            }\n        }\n        return *this;\n    }\n\n    // Calculate f(X\
+    \ + c) from f(X), O(NlogN)\n    P shift(T c) const {\n        const int n = (int)this->size();\n\
+    \        P ret = *this;\n        for (int i = 0; i < n; i++) {\n            ret[i]\
+    \ *= T(i).fac();\n        }\n        reverse(ret.begin(), ret.end());\n      \
+    \  P exp_cx = P({ 0, c }).exp(n);\n        ret = (ret * exp_cx).pre(n);\n    \
+    \    reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n; i++) {\n\
+    \            ret[i] /= T(i).fac();\n        }\n        return ret;\n    }\n\n\
+    \    T coeff(int i) const {\n        if ((int)this->size() <= i or i < 0) return\
+    \ T(0);\n        return (*this)[i];\n    }\n\n    T eval(T x) const {\n      \
+    \  T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n  \
+    \      return ret;\n    }\n};\n"
   dependsOn:
   - convolution/ntt.hpp
   - modulus/modint_fixed.hpp
@@ -359,8 +374,8 @@ data:
   path: formal_power_series/formal_power_series.hpp
   requiredBy:
   - formal_power_series/multipoint_evaluation.hpp
-  timestamp: '2020-09-29 00:37:21+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-14 22:28:21+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/fps_sqrt.test.cpp
   - formal_power_series/test/division_number.test.cpp
@@ -369,6 +384,7 @@ data:
   - formal_power_series/test/polynomial_interpolation.test.cpp
   - formal_power_series/test/fps_exp.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
+  - formal_power_series/test/poly_taylor_shift.test.cpp
   - formal_power_series/test/sharp_p_subset_sum.test.cpp
   - formal_power_series/test/fps_pow_another.test.cpp
   - formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp

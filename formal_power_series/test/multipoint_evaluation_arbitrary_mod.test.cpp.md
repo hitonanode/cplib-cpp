@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation
@@ -225,21 +225,27 @@ data:
     \         if (k * (i > 0) > deg or k * i > deg) return {};\n                long\
     \ long int S = i * k;\n                for (int j = 0; j + S < deg and j < (int)D.size();\
     \ j++) E[j + S] = D[j];\n                E.shrink();\n                return E;\n\
-    \            }\n        }\n        return *this;\n    }\n\n    T coeff(int i)\
-    \ const {\n        if ((int)this->size() <= i or i < 0) return T(0);\n       \
-    \ return (*this)[i];\n    }\n\n    T eval(T x) const {\n        T ret = 0, w =\
-    \ 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n        return ret;\n\
-    \    }\n};\n#line 3 \"formal_power_series/multipoint_evaluation.hpp\"\n\n// CUT\
-    \ begin\n// multipoint polynomial evaluation\n// input: xs = [x_0, ..., x_{N -\
-    \ 1}]: points to evaluate\n//        f = \\sum_i^M f_i x^i\n// Complexity: O(N\
-    \ (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename Tfield>\n\
-    struct MultipointEvaluation\n{\n    int nx;\n    using polynomial = FormalPowerSeries<Tfield>;\n\
-    \    std::vector<polynomial> segtree;\n    MultipointEvaluation(const std::vector<Tfield>\
-    \ &xs) : nx(xs.size())\n    {\n        segtree.resize(nx * 2 - 1);\n        for\
-    \ (int i = 0; i < nx; i++)\n        {\n            segtree[nx - 1 + i] = {-xs[i],\
-    \ 1};\n        }\n        for (int i = nx - 2; i >= 0; i--)\n        {\n     \
-    \       segtree[i] = segtree[2 * i + 1] * segtree[2 * i + 2];\n        }\n   \
-    \ }\n    std::vector<Tfield> ret;\n    std::vector<Tfield> evaluate_polynomial(polynomial\
+    \            }\n        }\n        return *this;\n    }\n\n    // Calculate f(X\
+    \ + c) from f(X), O(NlogN)\n    P shift(T c) const {\n        const int n = (int)this->size();\n\
+    \        P ret = *this;\n        for (int i = 0; i < n; i++) {\n            ret[i]\
+    \ *= T(i).fac();\n        }\n        reverse(ret.begin(), ret.end());\n      \
+    \  P exp_cx = P({ 0, c }).exp(n);\n        ret = (ret * exp_cx).pre(n);\n    \
+    \    reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n; i++) {\n\
+    \            ret[i] /= T(i).fac();\n        }\n        return ret;\n    }\n\n\
+    \    T coeff(int i) const {\n        if ((int)this->size() <= i or i < 0) return\
+    \ T(0);\n        return (*this)[i];\n    }\n\n    T eval(T x) const {\n      \
+    \  T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n  \
+    \      return ret;\n    }\n};\n#line 3 \"formal_power_series/multipoint_evaluation.hpp\"\
+    \n\n// CUT begin\n// multipoint polynomial evaluation\n// input: xs = [x_0, ...,\
+    \ x_{N - 1}]: points to evaluate\n//        f = \\sum_i^M f_i x^i\n// Complexity:\
+    \ O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename\
+    \ Tfield>\nstruct MultipointEvaluation\n{\n    int nx;\n    using polynomial =\
+    \ FormalPowerSeries<Tfield>;\n    std::vector<polynomial> segtree;\n    MultipointEvaluation(const\
+    \ std::vector<Tfield> &xs) : nx(xs.size())\n    {\n        segtree.resize(nx *\
+    \ 2 - 1);\n        for (int i = 0; i < nx; i++)\n        {\n            segtree[nx\
+    \ - 1 + i] = {-xs[i], 1};\n        }\n        for (int i = nx - 2; i >= 0; i--)\n\
+    \        {\n            segtree[i] = segtree[2 * i + 1] * segtree[2 * i + 2];\n\
+    \        }\n    }\n    std::vector<Tfield> ret;\n    std::vector<Tfield> evaluate_polynomial(polynomial\
     \ f)\n    {\n        ret.resize(nx);\n        auto rec = [&](auto &&rec, polynomial\
     \ f, int now) -> void {\n            f %= segtree[now];\n            if (now -\
     \ (nx - 1) >= 0)\n            {\n                ret[now - (nx - 1)] = f.coeff(0);\n\
@@ -279,8 +285,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
   requiredBy: []
-  timestamp: '2020-10-17 00:01:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-14 22:28:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
 layout: document

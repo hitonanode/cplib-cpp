@@ -13,21 +13,21 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/pow_of_formal_power_series
+    PROBLEM: https://judge.yosupo.jp/problem/polynomial_taylor_shift
     links:
-    - https://judge.yosupo.jp/problem/pow_of_formal_power_series
-  bundledCode: "#line 1 \"formal_power_series/test/fps_pow.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\n#include <iostream>\n\
-    #line 3 \"modulus/modint_fixed.hpp\"\n#include <vector>\n#include <set>\n\n//\
-    \ CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint = long long;\n\
-    \    static int get_mod() { return mod; }\n    static int get_primitive_root()\
-    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
-    \            primitive_root = [&](){\n                std::set<int> fac;\n   \
-    \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\
-    \ while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
+    - https://judge.yosupo.jp/problem/polynomial_taylor_shift
+  bundledCode: "#line 1 \"formal_power_series/test/poly_taylor_shift.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_taylor_shift\"\n\
+    #line 2 \"modulus/modint_fixed.hpp\"\n#include <iostream>\n#include <vector>\n\
+    #include <set>\n\n// CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using\
+    \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
+    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
+    \ {\n            primitive_root = [&](){\n                std::set<int> fac;\n\
+    \                int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
+    \ i++) while (v % i == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n\
     \                for (int g = 1; g < mod; g++) {\n                    bool ok\
     \ = true;\n                    for (auto i : fac) if (ModInt(g).power((mod - 1)\
     \ / i) == 1) { ok = false; break; }\n                    if (ok) return g;\n \
@@ -232,33 +232,33 @@ data:
     \    T coeff(int i) const {\n        if ((int)this->size() <= i or i < 0) return\
     \ T(0);\n        return (*this)[i];\n    }\n\n    T eval(T x) const {\n      \
     \  T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n  \
-    \      return ret;\n    }\n};\n#line 5 \"formal_power_series/test/fps_pow.test.cpp\"\
-    \n\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
-    \n    int N, M;\n    std::cin >> N >> M;\n    FormalPowerSeries<ModInt<998244353>>\
-    \ A(N);\n    for (auto &a : A) std::cin >> a;\n    A.shrink();\n    auto ret =\
-    \ A.pow(M, N);\n    for (int i = 0; i < N; i++) std::cout << ret.coeff(i) << '\
-    \ ';\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
-    \n#include <iostream>\n#include \"modulus/modint_fixed.hpp\"\n#include \"formal_power_series/formal_power_series.hpp\"\
-    \n\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
-    \n    int N, M;\n    std::cin >> N >> M;\n    FormalPowerSeries<ModInt<998244353>>\
-    \ A(N);\n    for (auto &a : A) std::cin >> a;\n    A.shrink();\n    auto ret =\
-    \ A.pow(M, N);\n    for (int i = 0; i < N; i++) std::cout << ret.coeff(i) << '\
-    \ ';\n}\n"
+    \      return ret;\n    }\n};\n#line 5 \"formal_power_series/test/poly_taylor_shift.test.cpp\"\
+    \nusing namespace std;\n\nint main()\n{\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, c;\n    cin >> N >> c;\n    FormalPowerSeries<ModInt<998244353>> f(N);\n\
+    \    for (auto &x : f) {\n        cin >> x;\n    }\n    f = f.shift(c);\n    for\
+    \ (int i = 0; i < N; i++) {\n        cout << f.coeff(i) << (i < N - 1 ? ' ' :\
+    \ '\\n');\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_taylor_shift\"\
+    \n#include \"modulus/modint_fixed.hpp\"\n#include \"formal_power_series/formal_power_series.hpp\"\
+    \n#include <iostream>\nusing namespace std;\n\nint main()\n{\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N, c;\n    cin >> N >> c;\n    FormalPowerSeries<ModInt<998244353>>\
+    \ f(N);\n    for (auto &x : f) {\n        cin >> x;\n    }\n    f = f.shift(c);\n\
+    \    for (int i = 0; i < N; i++) {\n        cout << f.coeff(i) << (i < N - 1 ?\
+    \ ' ' : '\\n');\n    }\n}\n"
   dependsOn:
   - modulus/modint_fixed.hpp
   - formal_power_series/formal_power_series.hpp
   - convolution/ntt.hpp
   isVerificationFile: true
-  path: formal_power_series/test/fps_pow.test.cpp
+  path: formal_power_series/test/poly_taylor_shift.test.cpp
   requiredBy: []
   timestamp: '2020-11-14 22:28:21+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: formal_power_series/test/fps_pow.test.cpp
+documentation_of: formal_power_series/test/poly_taylor_shift.test.cpp
 layout: document
 redirect_from:
-- /verify/formal_power_series/test/fps_pow.test.cpp
-- /verify/formal_power_series/test/fps_pow.test.cpp.html
-title: formal_power_series/test/fps_pow.test.cpp
+- /verify/formal_power_series/test/poly_taylor_shift.test.cpp
+- /verify/formal_power_series/test/poly_taylor_shift.test.cpp.html
+title: formal_power_series/test/poly_taylor_shift.test.cpp
 ---

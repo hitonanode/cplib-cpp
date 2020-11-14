@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
   - icon: ':question:'
@@ -13,7 +13,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sharp_p_subset_sum
@@ -222,12 +222,18 @@ data:
     \         if (k * (i > 0) > deg or k * i > deg) return {};\n                long\
     \ long int S = i * k;\n                for (int j = 0; j + S < deg and j < (int)D.size();\
     \ j++) E[j + S] = D[j];\n                E.shrink();\n                return E;\n\
-    \            }\n        }\n        return *this;\n    }\n\n    T coeff(int i)\
-    \ const {\n        if ((int)this->size() <= i or i < 0) return T(0);\n       \
-    \ return (*this)[i];\n    }\n\n    T eval(T x) const {\n        T ret = 0, w =\
-    \ 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n        return ret;\n\
-    \    }\n};\n#line 6 \"formal_power_series/test/sharp_p_subset_sum.test.cpp\"\n\
-    using namespace std;\n\nint main()\n{\n    cin.tie(NULL);\n    ios::sync_with_stdio(false);\n\
+    \            }\n        }\n        return *this;\n    }\n\n    // Calculate f(X\
+    \ + c) from f(X), O(NlogN)\n    P shift(T c) const {\n        const int n = (int)this->size();\n\
+    \        P ret = *this;\n        for (int i = 0; i < n; i++) {\n            ret[i]\
+    \ *= T(i).fac();\n        }\n        reverse(ret.begin(), ret.end());\n      \
+    \  P exp_cx = P({ 0, c }).exp(n);\n        ret = (ret * exp_cx).pre(n);\n    \
+    \    reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n; i++) {\n\
+    \            ret[i] /= T(i).fac();\n        }\n        return ret;\n    }\n\n\
+    \    T coeff(int i) const {\n        if ((int)this->size() <= i or i < 0) return\
+    \ T(0);\n        return (*this)[i];\n    }\n\n    T eval(T x) const {\n      \
+    \  T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n  \
+    \      return ret;\n    }\n};\n#line 6 \"formal_power_series/test/sharp_p_subset_sum.test.cpp\"\
+    \nusing namespace std;\n\nint main()\n{\n    cin.tie(NULL);\n    ios::sync_with_stdio(false);\n\
     \n    int N, T;\n    cin >> N >> T;\n    vector<int> cnt(T + 1);\n    while (N--)\n\
     \    {\n        int s;\n        cin >> s;\n        cnt[s]++;\n    }\n    FormalPowerSeries<ModInt<998244353>>\
     \ A(T + 1), invs(T + 1);\n    for (int i = 1; i <= T; i++) invs[i] = (invs[i]\
@@ -257,8 +263,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 00:37:21+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-14 22:28:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/sharp_p_subset_sum.test.cpp
 layout: document
