@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_of_formal_power_series"
-#include <iostream>
-#include "modulus/modint_runtime.hpp"
 #include "formal_power_series/formal_power_series.hpp"
+#include "number/modint_runtime.hpp"
+#include <iostream>
 using namespace std;
 
 int main()

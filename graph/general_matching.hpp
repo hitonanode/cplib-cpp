@@ -1,5 +1,5 @@
 #pragma once
-#include "modulus/modint_fixed.hpp"
+#include "modint.hpp"
 #include "linear_algebra_matrix/linalg_modint.hpp"
 #include <algorithm>
 #include <chrono>

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
 #include "linear_algebra_matrix/linalg_modint.hpp"
-#include "modulus/modint_fixed.hpp"
-#include "modulus/modint_runtime.hpp"
+#include "modint.hpp"
+#include "number/modint_runtime.hpp"
 #include <iostream>
 
 int main()

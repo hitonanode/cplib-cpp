@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sparse_matrix_det"
-#include "modulus/modint_fixed.hpp"
+#include "modint.hpp"
 #include "linear_algebra_matrix/det_of_sparse_matrix.hpp"
 #include <iostream>
 

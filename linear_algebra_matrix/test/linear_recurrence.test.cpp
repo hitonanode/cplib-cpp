@@ -1,5 +1,5 @@
 #include "linear_algebra_matrix/linear_recurrence.hpp"
-#include "modulus/modint_fixed.hpp"
+#include "modint.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
 #include <iostream>
 

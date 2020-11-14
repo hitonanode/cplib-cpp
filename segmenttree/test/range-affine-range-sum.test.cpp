@@ -1,5 +1,5 @@
 #include "segmenttree/range-update-range-get.hpp"
-#include "modulus/modint_fixed.hpp"
+#include "modint.hpp"
 #include <utility>
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 

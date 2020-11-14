@@ -214,8 +214,11 @@ struct FormalPowerSeries : vector<T>
             ret[i] *= T(i).fac();
         }
         reverse(ret.begin(), ret.end());
-        P exp_cx = P({ 0, c }).exp(n);
-        ret = (ret * exp_cx).pre(n);
+        P exp_cx(n, 1);
+        for (int i = 1; i < n; i++) {
+            exp_cx[i] = exp_cx[i - 1] * c / i;
+        }
+        ret = (ret * exp_cx), ret.resize(n);
         reverse(ret.begin(), ret.end());
         for (int i = 0; i < n; i++) {
             ret[i] /= T(i).fac();

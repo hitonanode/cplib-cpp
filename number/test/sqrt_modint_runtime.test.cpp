@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
 #include <iostream>
-#include "modulus/modint_runtime.hpp"
+#include "number/modint_runtime.hpp"
 using namespace std;
 
 int main()

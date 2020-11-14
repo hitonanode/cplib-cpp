@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 #include "convolution/ntt.hpp"
-#include "modulus/modint_fixed.hpp"
-#include "modulus/modint_runtime.hpp"
+#include "modint.hpp"
+#include "number/modint_runtime.hpp"
 #include <iostream>
 using namespace std;
 
@@ -11,8 +11,7 @@ using mintr = ModIntRuntime;
 
 int main()
 {
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr),  ios::sync_with_stdio(false);
 
     mintr::set_mod(MOD);
     int N, M;
@@ -27,7 +26,7 @@ int main()
 
     for (int i = 0; i < N + M - 1; i++) {
         assert(ret[i].val == retr[i].val);
-        std::cout << ret[i] << ' ';
+        cout << ret[i] << ' ';
     }
-    std::cout << '\n';
+    cout << '\n';
 }

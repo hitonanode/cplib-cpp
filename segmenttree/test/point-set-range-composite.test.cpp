@@ -1,5 +1,5 @@
 #include "segmenttree/point-update-range-get_nonrecursive.hpp"
-#include "modulus/modint_fixed.hpp"
+#include "modint.hpp"
 #include <iostream>
 #include <utility>
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"

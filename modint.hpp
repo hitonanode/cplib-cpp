@@ -59,6 +59,9 @@ struct ModInt
         }
         return ans;
     }
+    constexpr ModInt pow(lint n) const {
+        return power(n);
+    }
     constexpr lint inv() const { return this->power(mod - 2); }
     constexpr ModInt operator^(lint n) const { return ModInt(this->power(n)); }
     constexpr ModInt &operator^=(lint n) { return *this = *this ^ n; }

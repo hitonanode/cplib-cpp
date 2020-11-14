@@ -1,5 +1,5 @@
 #define PROBLEM "https://yukicoder.me/problems/no/214"
-#include "modulus/modint_fixed.hpp"
+#include "modint.hpp"
 #include "convolution/ntt.hpp"
 #include "formal_power_series/monomial_mod_polynomial.hpp"
 using mint = ModInt<1000000007>;

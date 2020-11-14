@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bernoulli_number"
 #include <iostream>
-#include "modulus/modint_fixed.hpp"
+#include "modint.hpp"
 #include "formal_power_series/formal_power_series.hpp"
 using namespace std;
 

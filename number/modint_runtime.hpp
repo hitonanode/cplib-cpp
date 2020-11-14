@@ -70,6 +70,9 @@ struct ModIntRuntime
         }
         return ans;
     }
+    ModIntRuntime pow(lint n) const {
+        return power(n);
+    }
     lint inv() const { return this->power(mod - 2); }
     ModIntRuntime operator^(lint n) const { return ModIntRuntime(this->power(n)); }
     ModIntRuntime &operator^=(lint n) { return *this = *this ^ n; }
