@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <cassert>
+#include <functional>
 #include <iostream>
 #include <stack>
 #include <vector>
@@ -54,7 +55,7 @@ struct NonrecursiveSegmentTree
     // Calculate smallest r that satisfies condition(g(f(x_l, q), ..., f(x_{r - 1}, q)) == true
     // Assumption: Monotonicity of g(x_l, ..., x_r) about r (l: fixed)
     // Complexity: O(log N)
-    int binary_search(int l, auto condition, TQUERY query = NULL) {
+    int binary_search(int l, std::function<bool(TRET)> condition, TQUERY query = NULL) {
         std::stack<int> rs;
         l += N;
         int r = N * 2;
