@@ -109,6 +109,5 @@ struct ModInt
         return ModInt(std::min(x.val, mod - x.val));
     }
 };
-
-// constexpr lint MOD = 998244353;
-// using mint = ModInt<MOD>;
+// using mint = ModInt<998244353>;
+// using mint = ModInt<1000000007>;
