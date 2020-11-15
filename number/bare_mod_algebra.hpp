@@ -32,9 +32,9 @@ constexpr std::pair<Int, Int> inv_gcd(Int a, Int b) {
     a %= b;
     if (a < 0) a += b;
     if (a == 0) return {b, 0};
-    T s = b, t = a, m0 = 0, m1 = 1;
+    Int s = b, t = a, m0 = 0, m1 = 1;
     while (t) {
-        T u = s / t;
+        Int u = s / t;
         s -= t * u, m0 -= m1 * u;
         auto tmp = s;
         s = t, t = tmp, tmp = m0, m0 = m1, m1 = tmp;
