@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
   _extendedVerifiedWith:
@@ -33,35 +33,35 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_pow.test.cpp
     title: formal_power_series/test/fps_pow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_pow_another.test.cpp
     title: formal_power_series/test/fps_pow_another.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_sqrt.test.cpp
     title: formal_power_series/test/fps_sqrt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
     title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/poly_taylor_shift.test.cpp
     title: formal_power_series/test/poly_taylor_shift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/stirling_number_of_2nd.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>
@@ -384,7 +384,7 @@ data:
   requiredBy:
   - formal_power_series/multipoint_evaluation.hpp
   timestamp: '2020-11-15 14:30:27+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/fps_sqrt.test.cpp
   - formal_power_series/test/division_number.test.cpp

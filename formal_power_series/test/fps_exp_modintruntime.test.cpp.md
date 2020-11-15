@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
   - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []

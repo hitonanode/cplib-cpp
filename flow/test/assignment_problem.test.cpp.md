@@ -74,28 +74,12 @@ data:
     \n#include <algorithm>\n#line 5 \"flow/test/assignment_problem.test.cpp\"\n\n\
     template<typename TC>\nstd::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>>\
     \ cost)\n{\n    int N = cost.size();\n    MinCostFlow<long long, long long> mcf(N\
-    \ * 2 + 2);\n    int S = N * 2, T = N * 2 + 1;\n    for (int i = 0; i < N; i++)\n\
-    \    {\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N + i, T, 1, 0);\n\
-    \        for (int j = 0; j < N; j++)\n        {\n            mcf.add_edge(i, N\
-    \ + j, 1, cost[i][j]);\n        }\n    }\n    auto total_cost = mcf.flow(S, T,\
-    \ N).second;\n    std::vector<int> ret;\n\n    for (int i = 0; i < N; i++)\n \
-    \   {\n        for (const auto &g : mcf.g[i])\n        {\n            if (g.to\
-    \ != S and !g.cap)\n            {\n                ret.emplace_back(g.to - N);\n\
-    \                break;\n            }\n        }\n    }\n    return std::make_pair(total_cost,\
-    \ ret);\n}\n\n\nint main()\n{\n    int N;\n    std::cin >> N;\n    std::vector<std::vector<long\
-    \ long>> A(N, std::vector<long long>(N));\n    for (auto &vec : A)\n    {\n  \
-    \      for (auto &x : vec)\n        {\n            std::cin >> x;\n        }\n\
-    \    }\n    auto ret = AssignmentProblem(A);\n    std::cout << ret.first << '\\\
-    n';\n    for (auto x : ret.second) std::cout << x << ' ';\n    std::cout << '\\\
-    n';\n}\n"
-  code: "#include \"flow/mincostflow_bellmanford.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\
-    \n#include <algorithm>\n#include <iostream>\n\ntemplate<typename TC>\nstd::pair<TC,\
-    \ std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost)\n{\n\
-    \    int N = cost.size();\n    MinCostFlow<long long, long long> mcf(N * 2 + 2);\n\
-    \    int S = N * 2, T = N * 2 + 1;\n    for (int i = 0; i < N; i++)\n    {\n \
-    \       mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N + i, T, 1, 0);\n   \
-    \     for (int j = 0; j < N; j++)\n        {\n            mcf.add_edge(i, N +\
-    \ j, 1, cost[i][j]);\n        }\n    }\n    auto total_cost = mcf.flow(S, T, N).second;\n\
+    \ * 2 + 2);\n    int S = N * 2, T = N * 2 + 1;\n    TC bias_total_cost = 0;\n\
+    \    for (int i = 0; i < N; i++) {\n        TC lo = *min_element(cost[i].begin(),\
+    \ cost[i].end());\n        bias_total_cost += lo;\n        mcf.add_edge(S, i,\
+    \ 1, 0);\n        mcf.add_edge(N + i, T, 1, 0);\n        for (int j = 0; j < N;\
+    \ j++)\n        {\n            mcf.add_edge(i, N + j, 1, cost[i][j] - lo);\n \
+    \       }\n    }\n    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;\n\
     \    std::vector<int> ret;\n\n    for (int i = 0; i < N; i++)\n    {\n       \
     \ for (const auto &g : mcf.g[i])\n        {\n            if (g.to != S and !g.cap)\n\
     \            {\n                ret.emplace_back(g.to - N);\n                break;\n\
@@ -106,12 +90,31 @@ data:
     \    }\n    auto ret = AssignmentProblem(A);\n    std::cout << ret.first << '\\\
     n';\n    for (auto x : ret.second) std::cout << x << ' ';\n    std::cout << '\\\
     n';\n}\n"
+  code: "#include \"flow/mincostflow_bellmanford.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\
+    \n#include <algorithm>\n#include <iostream>\n\ntemplate<typename TC>\nstd::pair<TC,\
+    \ std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost)\n{\n\
+    \    int N = cost.size();\n    MinCostFlow<long long, long long> mcf(N * 2 + 2);\n\
+    \    int S = N * 2, T = N * 2 + 1;\n    TC bias_total_cost = 0;\n    for (int\
+    \ i = 0; i < N; i++) {\n        TC lo = *min_element(cost[i].begin(), cost[i].end());\n\
+    \        bias_total_cost += lo;\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N\
+    \ + i, T, 1, 0);\n        for (int j = 0; j < N; j++)\n        {\n           \
+    \ mcf.add_edge(i, N + j, 1, cost[i][j] - lo);\n        }\n    }\n    auto total_cost\
+    \ = mcf.flow(S, T, N).second + bias_total_cost;\n    std::vector<int> ret;\n\n\
+    \    for (int i = 0; i < N; i++)\n    {\n        for (const auto &g : mcf.g[i])\n\
+    \        {\n            if (g.to != S and !g.cap)\n            {\n           \
+    \     ret.emplace_back(g.to - N);\n                break;\n            }\n   \
+    \     }\n    }\n    return std::make_pair(total_cost, ret);\n}\n\n\nint main()\n\
+    {\n    int N;\n    std::cin >> N;\n    std::vector<std::vector<long long>> A(N,\
+    \ std::vector<long long>(N));\n    for (auto &vec : A)\n    {\n        for (auto\
+    \ &x : vec)\n        {\n            std::cin >> x;\n        }\n    }\n    auto\
+    \ ret = AssignmentProblem(A);\n    std::cout << ret.first << '\\n';\n    for (auto\
+    \ x : ret.second) std::cout << x << ' ';\n    std::cout << '\\n';\n}\n"
   dependsOn:
   - flow/mincostflow_bellmanford.hpp
   isVerificationFile: true
   path: flow/test/assignment_problem.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 17:16:20+09:00'
+  timestamp: '2020-11-15 19:54:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: flow/test/assignment_problem.test.cpp

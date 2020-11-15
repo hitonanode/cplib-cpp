@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linear_recurrence.hpp
     title: linear_algebra_matrix/linear_recurrence.hpp
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -124,7 +124,7 @@ data:
   path: linear_algebra_matrix/test/linear_recurrence.test.cpp
   requiredBy: []
   timestamp: '2020-11-15 14:30:27+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linear_recurrence.test.cpp
 layout: document

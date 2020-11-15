@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linear_recurrence.hpp
     title: linear_algebra_matrix/linear_recurrence.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: random/rand_nondeterministic.hpp
     title: random/rand_nondeterministic.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://yukicoder.me/wiki/black_box_linear_algebra>
@@ -110,7 +110,7 @@ data:
   path: linear_algebra_matrix/det_of_sparse_matrix.hpp
   requiredBy: []
   timestamp: '2020-06-06 02:17:41+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
 documentation_of: linear_algebra_matrix/det_of_sparse_matrix.hpp
