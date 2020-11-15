@@ -3,11 +3,11 @@
 #include <vector>
 
 // CUT begin
-// Fast Walsh-Hadamard transform
+// Fast Walsh-Hadamard transform and its abstraction
 // Tutorials: <https://codeforces.com/blog/entry/71899>
 //            <https://csacademy.com/blog/fast-fourier-transform-and-variations-of-it>
 template <typename T, typename F>
-void walsh_hadamard(std::vector<T>& seq, F f)
+void abstract_fwht(std::vector<T>& seq, F f)
 {
     const int n = seq.size();
     assert(__builtin_popcount(n) == 1);
@@ -21,24 +21,24 @@ void walsh_hadamard(std::vector<T>& seq, F f)
 }
 
 template <typename T, typename F1, typename F2>
-std::vector<T> walsh_hadamard_conv(std::vector<T> x, std::vector<T> y, F1 f, F2 finv)
+std::vector<T> bitwise_conv(std::vector<T> x, std::vector<T> y, F1 f, F2 finv)
 {
     const int n = x.size();
     assert(__builtin_popcount(n) == 1);
     assert(x.size() == y.size());
     if (x == y) {
-        walsh_hadamard(x, f), y = x;
+        abstract_fwht(x, f), y = x;
     } else {
-        walsh_hadamard(x, f), walsh_hadamard(y, f);
+        abstract_fwht(x, f), abstract_fwht(y, f);
     }
     for (size_t i = 0; i < x.size(); i++) {
         x[i] *= y[i];
     }
-    walsh_hadamard(x, finv);
+    abstract_fwht(x, finv);
     return x;
 }
 
-// bitwise xor convolution
+// bitwise xor convolution (FWHT-based)
 // ret[i] = \sum_j x[j] * y[i ^ j]
 // if T is integer, ||x||_1 * ||y||_1 * 2 < numeric_limits<T>::max()
 template <typename T>
@@ -50,25 +50,25 @@ std::vector<T> xorconv(std::vector<T> x, std::vector<T> y)
     };
     auto finv = [](T& lo, T& hi) {
         T c = lo + hi;
-        hi = (lo - hi) / 2, lo = c / 2;  // Reconsider high complexity of division when T is ModInt
+        hi = (lo - hi) / 2, lo = c / 2;  // Reconsider HEAVY complexity of division by 2 when T is ModInt
     };
-    return walsh_hadamard_conv(x, y, f, finv);
+    return bitwise_conv(x, y, f, finv);
 }
 
-// bitwise and conolution
+// bitwise AND conolution
 // ret[i] = \sum_{(j & k) == i} x[j] * y[k]
 template <typename T>
 std::vector<T> andconv(std::vector<T> x, std::vector<T> y)
 {
-    return walsh_hadamard_conv(
+    return bitwise_conv(
         x, y, [](T& lo, T& hi) { lo += hi; }, [](T& lo, T& hi) { lo -= hi; });
 }
 
-// bitwise or convolution
+// bitwise OR convolution
 // ret[i] = \sum_{(j | k) == i} x[j] * y[k]
 template <typename T>
 std::vector<T> orconv(std::vector<T> x, std::vector<T> y)
 {
-    return walsh_hadamard_conv(
+    return bitwise_conv(
         x, y, [](T& lo, T& hi) { hi += lo; }, [](T& lo, T& hi) { hi -= lo; });
 }
