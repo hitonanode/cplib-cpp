@@ -99,22 +99,22 @@ data:
   - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linear_recurrence.test.cpp
     title: linear_algebra_matrix/test/linear_recurrence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other_data_structures/test/queue_operate_all_composite.test.cpp
     title: other_data_structures/test/queue_operate_all_composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: random/test/rolling_hash_w_modint.test.cpp
     title: random/test/rolling_hash_w_modint.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/range-affine-range-sum.test.cpp
     title: segmenttree/test/range-affine-range-sum.test.cpp
   _pathExtension: hpp

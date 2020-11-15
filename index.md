@@ -141,7 +141,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph-tree/centroid_decomposition.hpp
       title: graph-tree/centroid_decomposition.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/eulertour.hpp
       title: graph-tree/eulertour.hpp
     - icon: ':heavy_check_mark:'
@@ -167,10 +167,10 @@ data:
     - icon: ':question:'
       path: linear_algebra_matrix/linalg_modint.hpp
       title: linear_algebra_matrix/linalg_modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linear_recurrence.hpp
       title: linear_algebra_matrix/linear_recurrence.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
@@ -246,7 +246,7 @@ data:
     - icon: ':warning:'
       path: other_data_structures/rbst_fast.cpp
       title: other_data_structures/rbst_fast.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/sliding_window_aggregation.hpp
       title: other_data_structures/sliding_window_aggregation.hpp
     - icon: ':heavy_check_mark:'
@@ -260,13 +260,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: random/rand_nondeterministic.hpp
       title: random/rand_nondeterministic.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: random/rolling_hash_1d_general.hpp
       title: random/rolling_hash_1d_general.hpp
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -282,13 +282,13 @@ data:
     - icon: ':warning:'
       path: segmenttree/count_less_than.hpp
       title: segmenttree/count_less_than.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
     - icon: ':warning:'
       path: segmenttree/range-add-range-min.hpp
       title: segmenttree/range-add-range-min.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range-update-range-get.hpp
       title: segmenttree/range-update-range-get.hpp
     - icon: ':heavy_check_mark:'
@@ -383,7 +383,7 @@ data:
     - icon: ':warning:'
       path: utilities/int128.hpp
       title: utilities/int128.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/int_kth_root.hpp
       title: utilities/int_kth_root.hpp
     - icon: ':warning:'
@@ -560,7 +560,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph-tree/test/lca.test.cpp
       title: graph-tree/test/lca.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/test/vertex-add-subtree-sum.test.cpp
       title: graph-tree/test/vertex-add-subtree-sum.test.cpp
   - name: linear_algebra_matrix/test
@@ -586,10 +586,10 @@ data:
     - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linear_recurrence.test.cpp
       title: linear_algebra_matrix/test/linear_recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
@@ -609,7 +609,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
   - name: other_data_structures/test
@@ -632,7 +632,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/test/persistent_queue.test.cpp
       title: other_data_structures/test/persistent_queue.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/queue_operate_all_composite.test.cpp
       title: other_data_structures/test/queue_operate_all_composite.test.cpp
     - icon: ':heavy_check_mark:'
@@ -643,7 +643,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: random/test/rolling_hash.test.cpp
       title: random/test/rolling_hash.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: random/test/rolling_hash_w_modint.test.cpp
       title: random/test/rolling_hash_w_modint.test.cpp
   - name: segmenttree/test
@@ -651,22 +651,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/countandsumlessthan.test.cpp
       title: segmenttree/test/countandsumlessthan.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/range-affine-range-sum.test.cpp
       title: segmenttree/test/range-affine-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/rmq_nonrecursive.test.cpp
       title: segmenttree/test/rmq_nonrecursive.test.cpp
     - icon: ':heavy_check_mark:'
@@ -722,7 +722,7 @@ data:
       title: unionfind/test/weighted_unionfind.test.cpp
   - name: utilities/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/test/kth_root_integer.test.cpp
       title: utilities/test/kth_root_integer.test.cpp
 layout: toppage

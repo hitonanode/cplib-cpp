@@ -21,7 +21,7 @@ data:
   - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/sqrt_modint_runtime.test.cpp
     title: number/test/sqrt_modint_runtime.test.cpp
   _pathExtension: hpp

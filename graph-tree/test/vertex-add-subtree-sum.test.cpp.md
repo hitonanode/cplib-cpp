@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph-tree/eulertour.hpp
     title: graph-tree/eulertour.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
@@ -30,7 +30,7 @@ data:
     \ and root < V);\n        subtree_begin.resize(V);\n        subtree_end.resize(V);\n\
     \        _build_dfs(root, -1);\n    }\n};\n#line 2 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\
     \n#include <algorithm>\n#line 4 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\
-    \n#include <iostream>\n#include <stack>\n#line 7 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\
+    \n#include <functional>\n#include <iostream>\n#include <stack>\n#line 8 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\
     \n\n// CUT begin\n// Nonrecursive Segment Tree (point-update, range-get)\n// -\
     \ Conditions for operations:\n//   - merge_data: [TDATA, TDATA] -> TDATA, e(x,\
     \ y) == e(y, x)\n//   - data2ret: [TDATA, TQUERY] -> TRET\n//   - merge_ret: [TRET,\
@@ -56,10 +56,10 @@ data:
     \ retr);\n    }\n\n    // Calculate smallest r that satisfies condition(g(f(x_l,\
     \ q), ..., f(x_{r - 1}, q)) == true\n    // Assumption: Monotonicity of g(x_l,\
     \ ..., x_r) about r (l: fixed)\n    // Complexity: O(log N)\n    int binary_search(int\
-    \ l, auto condition, TQUERY query = NULL) {\n        std::stack<int> rs;\n   \
-    \     l += N;\n        int r = N * 2;\n        TRET retl = defaultRET;\n     \
-    \   if (condition(retl)) return l - N;\n        while (l < r) {\n            if\
-    \ (l & 1) {\n                TRET ret_tmp = merge_ret(retl, data2ret(data[l],\
+    \ l, std::function<bool(TRET)> condition, TQUERY query = NULL) {\n        std::stack<int>\
+    \ rs;\n        l += N;\n        int r = N * 2;\n        TRET retl = defaultRET;\n\
+    \        if (condition(retl)) return l - N;\n        while (l < r) {\n       \
+    \     if (l & 1) {\n                TRET ret_tmp = merge_ret(retl, data2ret(data[l],\
     \ query));\n                if (condition(ret_tmp)) {\n                    while\
     \ (l * 2 < N * 2) {\n                        ret_tmp = merge_ret(retl, data2ret(data[l\
     \ * 2], query));\n                        if (condition(ret_tmp)) l *= 2;\n  \
@@ -150,8 +150,8 @@ data:
   isVerificationFile: true
   path: graph-tree/test/vertex-add-subtree-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-09-19 23:25:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-15 09:39:46+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph-tree/test/vertex-add-subtree-sum.test.cpp
 layout: document
