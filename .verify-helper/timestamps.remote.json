@@ -53,6 +53,7 @@
 "linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp": "2020-03-07 22:54:47 +0900",
 "linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp": "2020-03-07 22:54:47 +0900",
 "linear_algebra_matrix/test/linalg_modint_determinant.test.cpp": "2020-11-15 01:21:08 +0900",
+"linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp": "2020-11-15 09:50:04 +0900",
 "linear_algebra_matrix/test/linear_recurrence.test.cpp": "2020-11-15 01:21:08 +0900",
 "linear_algebra_matrix/test/system_of_linear_equations.test.cpp": "2020-11-15 01:21:08 +0900",
 "number/test/discrete_logarithm.test.cpp": "2020-09-28 19:47:38 +0900",
