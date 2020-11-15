@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -77,8 +77,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 3 \"convolution/ntt.hpp\"\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"convolution/ntt.hpp\"\
     \n\n#include <algorithm>\n#include <array>\n#include <cassert>\n#include <tuple>\n\
     #line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution for arbitrary\
     \ mod\n// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.\n\
@@ -172,7 +172,7 @@ data:
   isVerificationFile: false
   path: formal_power_series/coeff_of_rational_function.hpp
   requiredBy: []
-  timestamp: '2020-11-15 01:21:08+09:00'
+  timestamp: '2020-11-15 14:30:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/coeff_of_rational_function.test.cpp

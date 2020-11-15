@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: random/rolling_hash_1d_general.hpp
     title: random/rolling_hash_1d_general.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
@@ -106,8 +106,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 2 \"random/xorshift.hpp\"\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"random/xorshift.hpp\"\
     \n#include <cstdint>\n\n// CUT begin\nuint32_t rand_int() // XorShift random integer\
     \ generator\n{\n    static uint32_t x = 123456789, y = 362436069, z = 521288629,\
     \ w = 88675123;\n    uint32_t t = x ^ (x << 11);\n    x = y;\n    y = z;\n   \
@@ -140,8 +140,8 @@ data:
   isVerificationFile: true
   path: random/test/rolling_hash_w_modint.test.cpp
   requiredBy: []
-  timestamp: '2020-11-15 01:21:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 14:30:27+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: random/test/rolling_hash_w_modint.test.cpp
 layout: document

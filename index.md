@@ -25,7 +25,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/fft_double.hpp
       title: convolution/fft_double.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
     - icon: ':heavy_check_mark:'
@@ -64,13 +64,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: formal_power_series/coeff_of_rational_function.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/monomial_mod_polynomial.hpp
       title: formal_power_series/monomial_mod_polynomial.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
   - name: .
@@ -78,7 +78,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -106,7 +106,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/general_matching.hpp
       title: graph/general_matching.hpp
     - icon: ':warning:'
@@ -155,7 +155,7 @@ data:
       title: graph-tree/tree_isomorphism.hpp
   - name: linear_algebra_matrix
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/det_of_sparse_matrix.hpp
       title: linear_algebra_matrix/det_of_sparse_matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -164,13 +164,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/linalg_modint.hpp
       title: linear_algebra_matrix/linalg_modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/linear_recurrence.hpp
       title: linear_algebra_matrix/linear_recurrence.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
@@ -194,7 +194,7 @@ data:
       title: multithread/multithread_example.cpp
   - name: number
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -218,7 +218,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
   - name: other_algorithms
@@ -246,7 +246,7 @@ data:
     - icon: ':warning:'
       path: other_data_structures/rbst_fast.cpp
       title: other_data_structures/rbst_fast.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: other_data_structures/sliding_window_aggregation.hpp
       title: other_data_structures/sliding_window_aggregation.hpp
     - icon: ':heavy_check_mark:'
@@ -257,16 +257,16 @@ data:
     - icon: ':warning:'
       path: random/custom_hash.hpp
       title: random/custom_hash.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: random/rand_nondeterministic.hpp
       title: random/rand_nondeterministic.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: random/rolling_hash_1d_general.hpp
       title: random/rolling_hash_1d_general.hpp
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -282,13 +282,13 @@ data:
     - icon: ':warning:'
       path: segmenttree/count_less_than.hpp
       title: segmenttree/count_less_than.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
     - icon: ':warning:'
       path: segmenttree/range-add-range-min.hpp
       title: segmenttree/range-add-range-min.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/range-update-range-get.hpp
       title: segmenttree/range-update-range-get.hpp
     - icon: ':heavy_check_mark:'
@@ -456,34 +456,34 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow.test.cpp
       title: formal_power_series/test/fps_pow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_pow_another.test.cpp
       title: formal_power_series/test/fps_pow_another.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_sqrt.test.cpp
       title: formal_power_series/test/fps_sqrt.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
       title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
       title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/poly_taylor_shift.test.cpp
       title: formal_power_series/test/poly_taylor_shift.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/stirling_number_of_1st.test.cpp
       title: formal_power_series/test/stirling_number_of_1st.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/stirling_number_of_2nd.test.cpp
   - name: geometry/test
@@ -523,7 +523,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/dijkstra.test.cpp
       title: graph/test/dijkstra.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/general_matching.test.cpp
       title: graph/test/general_matching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -560,7 +560,7 @@ data:
       title: graph-tree/test/vertex-add-subtree-sum.test.cpp
   - name: linear_algebra_matrix/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -575,16 +575,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linear_recurrence.test.cpp
       title: linear_algebra_matrix/test/linear_recurrence.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
@@ -627,7 +627,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/test/persistent_queue.test.cpp
       title: other_data_structures/test/persistent_queue.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: other_data_structures/test/queue_operate_all_composite.test.cpp
       title: other_data_structures/test/queue_operate_all_composite.test.cpp
     - icon: ':heavy_check_mark:'
@@ -638,7 +638,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: random/test/rolling_hash.test.cpp
       title: random/test/rolling_hash.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: random/test/rolling_hash_w_modint.test.cpp
       title: random/test/rolling_hash_w_modint.test.cpp
   - name: segmenttree/test
@@ -652,13 +652,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/range-affine-range-sum.test.cpp
       title: segmenttree/test/range-affine-range-sum.test.cpp
     - icon: ':heavy_check_mark:'

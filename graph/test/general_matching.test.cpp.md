@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/general_matching
@@ -80,8 +80,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\
     \n#include <algorithm>\n#include <cassert>\n#line 5 \"linear_algebra_matrix/linalg_modint.hpp\"\
     \n#include <iterator>\n#line 7 \"linear_algebra_matrix/linalg_modint.hpp\"\n\n\
     // CUT begin\ntemplate <typename T>\nstruct matrix\n{\n    int H, W;\n    std::vector<T>\
@@ -247,8 +247,8 @@ data:
   isVerificationFile: true
   path: graph/test/general_matching.test.cpp
   requiredBy: []
-  timestamp: '2020-11-15 01:21:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 14:30:27+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/general_matching.test.cpp
 layout: document

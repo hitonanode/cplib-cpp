@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_data_structures/sliding_window_aggregation.hpp
     title: other_data_structures/sliding_window_aggregation.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/queue_operate_all_composite
@@ -109,8 +109,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 3 \"other_data_structures/test/queue_operate_all_composite.test.cpp\"\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"other_data_structures/test/queue_operate_all_composite.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
     \n#line 5 \"other_data_structures/test/queue_operate_all_composite.test.cpp\"\n\
     \nusing mint = ModInt<998244353>;\nint main()\n{\n    LinearFunctionQueue<mint>\
@@ -135,8 +135,8 @@ data:
   isVerificationFile: true
   path: other_data_structures/test/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2020-11-15 01:21:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 14:30:27+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: other_data_structures/test/queue_operate_all_composite.test.cpp
 layout: document

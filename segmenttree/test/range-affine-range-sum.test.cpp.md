@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/range-update-range-get.hpp
     title: segmenttree/range-update-range-get.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -135,8 +135,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 3 \"segmenttree/test/range-affine-range-sum.test.cpp\"\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"segmenttree/test/range-affine-range-sum.test.cpp\"\
     \n#include <utility>\n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n\n// RangeAffineRangeSum\n// - update: x_i -> a * x_i + b for i in [l, r)\n\
     // - get: return x_l + ... + x_{r - 1}\ntemplate <typename T>\nstruct RangeAffineRangeSum\
@@ -202,8 +202,8 @@ data:
   isVerificationFile: true
   path: segmenttree/test/range-affine-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-11-15 01:21:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 14:30:27+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: segmenttree/test/range-affine-range-sum.test.cpp
 layout: document

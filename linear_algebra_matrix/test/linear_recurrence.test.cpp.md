@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linear_recurrence.hpp
     title: linear_algebra_matrix/linear_recurrence.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -100,8 +100,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 3 \"linear_algebra_matrix/test/linear_recurrence.test.cpp\"\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"linear_algebra_matrix/test/linear_recurrence.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\n\
     #line 5 \"linear_algebra_matrix/test/linear_recurrence.test.cpp\"\n\nusing mint\
     \ = ModInt<998244353>;\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
@@ -123,8 +123,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2020-11-15 01:21:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-15 14:30:27+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linear_recurrence.test.cpp
 layout: document

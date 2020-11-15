@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -76,8 +76,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 3 \"graph-tree/tree_isomorphism.hpp\"\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"graph-tree/tree_isomorphism.hpp\"\
     \n// #include \"number/modint_runtime.hpp\"\n#include <chrono>\n#include <utility>\n\
     #line 7 \"graph-tree/tree_isomorphism.hpp\"\nusing namespace std;\n\n// CUT begin\n\
     // Tree isomorphism with hashing \uFF08\u30CF\u30C3\u30B7\u30E5\u306B\u3088\u308B\
@@ -157,7 +157,7 @@ data:
   isVerificationFile: false
   path: graph-tree/tree_isomorphism.hpp
   requiredBy: []
-  timestamp: '2020-11-15 01:21:08+09:00'
+  timestamp: '2020-11-15 14:30:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph-tree/tree_isomorphism.hpp

@@ -5,22 +5,22 @@ data:
   - icon: ':warning:'
     path: convolution/convolutive_translation_2d.hpp
     title: convolution/convolutive_translation_2d.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/coeff_of_rational_function.hpp
     title: formal_power_series/coeff_of_rational_function.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
   - icon: ':warning:'
     path: graph-tree/tree_isomorphism.hpp
     title: graph-tree/tree_isomorphism.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
   _extendedVerifiedWith:
@@ -57,68 +57,68 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_pow.test.cpp
     title: formal_power_series/test/fps_pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_pow_another.test.cpp
     title: formal_power_series/test/fps_pow_another.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt.test.cpp
     title: formal_power_series/test/fps_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
     title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/poly_taylor_shift.test.cpp
     title: formal_power_series/test/poly_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/stirling_number_of_2nd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linear_recurrence.test.cpp
     title: linear_algebra_matrix/test/linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_data_structures/test/queue_operate_all_composite.test.cpp
     title: other_data_structures/test/queue_operate_all_composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: random/test/rolling_hash_w_modint.test.cpp
     title: random/test/rolling_hash_w_modint.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/range-affine-range-sum.test.cpp
     title: segmenttree/test/range-affine-range-sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <vector>\n#include\
@@ -182,8 +182,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n"
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n"
   code: "#pragma once\n#include <iostream>\n#include <vector>\n#include <set>\n\n\
     // CUT begin\ntemplate <int mod>\nstruct ModInt\n{\n    using lint = long long;\n\
     \    static int get_mod() { return mod; }\n    static int get_primitive_root()\
@@ -245,8 +245,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n"
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n"
   dependsOn: []
   isVerificationFile: false
   path: modint.hpp
@@ -258,8 +258,8 @@ data:
   - convolution/convolutive_translation_2d.hpp
   - graph/general_matching.hpp
   - graph-tree/tree_isomorphism.hpp
-  timestamp: '2020-11-15 01:21:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-15 14:30:27+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/fps_sqrt.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/subset_convolution.hpp
     title: convolution/subset_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -110,8 +110,8 @@ data:
     \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
     \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
     \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n\n// constexpr\
-    \ lint MOD = 998244353;\n// using mint = ModInt<MOD>;\n#line 5 \"convolution/test/subset_convolution.test.cpp\"\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"convolution/test/subset_convolution.test.cpp\"\
     \nusing namespace std;\n\nint main()\n{\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int N;\n    cin >> N;\n    vector<ModInt<998244353>> A(1 << N), B(1 << N);\n\
     \    for (auto &x : A) cin >> x;\n    for (auto &x : B) cin >> x;\n\n    for (auto\
@@ -128,7 +128,7 @@ data:
   isVerificationFile: true
   path: convolution/test/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2020-11-15 01:21:08+09:00'
+  timestamp: '2020-11-15 14:30:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/subset_convolution.test.cpp
