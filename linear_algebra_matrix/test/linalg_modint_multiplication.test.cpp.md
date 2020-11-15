@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D
@@ -187,12 +187,12 @@ data:
     \ m, x, y);\n    x %= m;\n    return x + (x < 0) * m;\n}\n\n// Require: 1 <= b\n\
     // return: (g, x) s.t. g = gcd(a, b), xa = g MOD b, 0 <= x < b/g\ntemplate <typename\
     \ Int>\nconstexpr std::pair<Int, Int> inv_gcd(Int a, Int b) {\n    a %= b;\n \
-    \   if (a < 0) a += b;\n    if (a == 0) return {b, 0};\n    T s = b, t = a, m0\
-    \ = 0, m1 = 1;\n    while (t) {\n        T u = s / t;\n        s -= t * u, m0\
-    \ -= m1 * u;\n        auto tmp = s;\n        s = t, t = tmp, tmp = m0, m0 = m1,\
-    \ m1 = tmp;\n    }\n    if (m0 < 0) m0 += b / s;\n    return {s, m0};\n}\n\ntemplate\
-    \ <typename Int>\nconstexpr std::pair<Int, Int> crt(const std::vector<Int> &r,\n\
-    \                                  const std::vector<Int> &m)\n{\n    assert(r.size()\
+    \   if (a < 0) a += b;\n    if (a == 0) return {b, 0};\n    Int s = b, t = a,\
+    \ m0 = 0, m1 = 1;\n    while (t) {\n        Int u = s / t;\n        s -= t * u,\
+    \ m0 -= m1 * u;\n        auto tmp = s;\n        s = t, t = tmp, tmp = m0, m0 =\
+    \ m1, m1 = tmp;\n    }\n    if (m0 < 0) m0 += b / s;\n    return {s, m0};\n}\n\
+    \ntemplate <typename Int>\nconstexpr std::pair<Int, Int> crt(const std::vector<Int>\
+    \ &r,\n                                  const std::vector<Int> &m)\n{\n    assert(r.size()\
     \ == m.size());\n    int n = int(r.size());\n    // Contracts: 0 <= r0 < m0\n\
     \    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n; i++) {\n        assert(1\
     \ <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n        if (r1 < 0) r1\
@@ -337,8 +337,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   requiredBy: []
-  timestamp: '2020-11-15 01:21:08+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-15 09:50:04+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 layout: document
