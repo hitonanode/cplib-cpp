@@ -22,6 +22,6 @@ std::pair<int, std::vector<Float>> quadratic_solver(Float A, Float B, Float C)
     if (D < 0) return std::make_pair(0, std::vector<Float>{});
     if (D == 0) return std::make_pair(1, std::vector<Float>{-B / (2 * A)});
     Float ret1 = (-B - sqrt(D)) / (2 * A), ret2 = C / A / ret1;
-    if (ret1 > ret2) swap(ret1, ret2);
+    if (ret1 > ret2) std::swap(ret1, ret2);
     return std::make_pair(2, std::vector<Float>{ret1, ret2});
 }
