@@ -90,6 +90,7 @@
 "string/test/manacher_mp.test.cpp": "2020-03-07 22:54:47 +0900",
 "string/test/suffix_array.test.cpp": "2020-03-07 22:54:47 +0900",
 "string/test/z_algorithm.test.cpp": "2020-09-28 19:06:56 +0900",
+"unionfind/test/fully_persistent_uf.test.cpp": "2020-11-15 10:02:47 +0900",
 "unionfind/test/unionfind.test.cpp": "2020-03-07 22:54:47 +0900",
 "unionfind/test/unionfind_plain.test.cpp": "2020-03-07 22:54:47 +0900",
 "unionfind/test/unionfind_rankbased.test.cpp": "2020-03-07 22:54:47 +0900",
