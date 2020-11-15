@@ -25,10 +25,10 @@ data:
     \ std::vector<Float>{-C / B});\n    }\n    Float D = B * B - 4 * A * C;\n    if\
     \ (D < 0) return std::make_pair(0, std::vector<Float>{});\n    if (D == 0) return\
     \ std::make_pair(1, std::vector<Float>{-B / (2 * A)});\n    Float ret1 = (-B -\
-    \ sqrt(D)) / (2 * A), ret2 = C / A / ret1;\n    if (ret1 > ret2) swap(ret1, ret2);\n\
-    \    return std::make_pair(2, std::vector<Float>{ret1, ret2});\n}\n#line 2 \"\
-    geometry/geometry2d.hpp\"\n#include <algorithm>\n#include <cassert>\n#line 5 \"\
-    geometry/geometry2d.hpp\"\n#include <iostream>\n#line 8 \"geometry/geometry2d.hpp\"\
+    \ sqrt(D)) / (2 * A), ret2 = C / A / ret1;\n    if (ret1 > ret2) std::swap(ret1,\
+    \ ret2);\n    return std::make_pair(2, std::vector<Float>{ret1, ret2});\n}\n#line\
+    \ 2 \"geometry/geometry2d.hpp\"\n#include <algorithm>\n#include <cassert>\n#line\
+    \ 5 \"geometry/geometry2d.hpp\"\n#include <iostream>\n#line 8 \"geometry/geometry2d.hpp\"\
     \n\n\n// CUT begin\ntemplate <typename T_P>\nstruct P\n{\n    static T_P EPS;\n\
     \    static void set_eps(T_P e)\n    {\n        EPS = e;\n    }\n    T_P x, y;\n\
     \    P() : x(0), y(0) {}\n    P(T_P x, T_P y) : x(x), y(y) {}\n    P(std::pair<T_P,\
@@ -167,7 +167,7 @@ data:
   isVerificationFile: false
   path: geometry/problem_of_apollonius.hpp
   requiredBy: []
-  timestamp: '2020-10-29 23:07:35+09:00'
+  timestamp: '2020-11-15 10:26:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/problem_of_apollonius.hpp
