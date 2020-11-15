@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: other_data_structures/persistent_array.hpp
     title: other_data_structures/persistent_array.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: unionfind/test/fully_persistent_uf.cpp
-    title: unionfind/test/fully_persistent_uf.cpp
-  _extendedVerifiedWith: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: unionfind/test/fully_persistent_uf.test.cpp
+    title: unionfind/test/fully_persistent_uf.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>
@@ -79,11 +79,11 @@ data:
   - other_data_structures/persistent_array.hpp
   isVerificationFile: false
   path: unionfind/fully_persistent_uf.hpp
-  requiredBy:
-  - unionfind/test/fully_persistent_uf.cpp
+  requiredBy: []
   timestamp: '2020-11-14 20:14:03+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - unionfind/test/fully_persistent_uf.test.cpp
 documentation_of: unionfind/fully_persistent_uf.hpp
 layout: document
 redirect_from:

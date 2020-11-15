@@ -237,7 +237,7 @@ data:
     - icon: ':warning:'
       path: other_data_structures/link_cut_tree.cpp
       title: other_data_structures/link_cut_tree.cpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/persistent_array.hpp
       title: other_data_structures/persistent_array.hpp
     - icon: ':heavy_check_mark:'
@@ -346,7 +346,7 @@ data:
       title: syntactic_analysis/parsetree.hpp
   - name: unionfind
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/fully_persistent_uf.hpp
       title: unionfind/fully_persistent_uf.hpp
     - icon: ':warning:'
@@ -367,11 +367,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: unionfind/weighted_unionfind.hpp
       title: unionfind/weighted_unionfind.hpp
-  - name: unionfind/test
-    pages:
-    - icon: ':warning:'
-      path: unionfind/test/fully_persistent_uf.cpp
-      title: unionfind/test/fully_persistent_uf.cpp
   - name: utilities
     pages:
     - icon: ':warning:'
@@ -708,6 +703,9 @@ data:
       title: string/test/z_algorithm.test.cpp
   - name: unionfind/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: unionfind/test/fully_persistent_uf.test.cpp
+      title: unionfind/test/fully_persistent_uf.test.cpp
     - icon: ':heavy_check_mark:'
       path: unionfind/test/unionfind.test.cpp
       title: unionfind/test/unionfind.test.cpp

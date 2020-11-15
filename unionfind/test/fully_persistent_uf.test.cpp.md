@@ -1,17 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: other_data_structures/persistent_array.hpp
     title: other_data_structures/persistent_array.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: unionfind/fully_persistent_uf.hpp
     title: unionfind/fully_persistent_uf.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/persistent_unionfind
     links:
     - https://judge.yosupo.jp/problem/persistent_unionfind
   bundledCode: "#line 2 \"other_data_structures/persistent_array.hpp\"\n#include <algorithm>\n\
@@ -55,7 +57,7 @@ data:
     \  }\n        }\n        return savepoints.emplace_back(ptr), x != y;\n    }\n\
     \    int count(int t, int x) const {\n        return -par.get(savepoints[t], find(t,\
     \ x));\n    }\n    bool same(int t, int x, int y) const {\n        return find(t,\
-    \ x) == find(t, y);\n    }\n};\n#line 2 \"unionfind/test/fully_persistent_uf.cpp\"\
+    \ x) == find(t, y);\n    }\n};\n#line 2 \"unionfind/test/fully_persistent_uf.test.cpp\"\
     \n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\
     \nusing namespace std;\n\nint main()\n{\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N, Q;\n    cin >> N >> Q;\n    PersistentUnionFind uf(N);\n    while\
@@ -74,16 +76,16 @@ data:
   dependsOn:
   - unionfind/fully_persistent_uf.hpp
   - other_data_structures/persistent_array.hpp
-  isVerificationFile: false
-  path: unionfind/test/fully_persistent_uf.cpp
+  isVerificationFile: true
+  path: unionfind/test/fully_persistent_uf.test.cpp
   requiredBy: []
-  timestamp: '2020-11-14 20:14:03+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2020-11-15 10:02:47+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: unionfind/test/fully_persistent_uf.cpp
+documentation_of: unionfind/test/fully_persistent_uf.test.cpp
 layout: document
 redirect_from:
-- /library/unionfind/test/fully_persistent_uf.cpp
-- /library/unionfind/test/fully_persistent_uf.cpp.html
-title: unionfind/test/fully_persistent_uf.cpp
+- /verify/unionfind/test/fully_persistent_uf.test.cpp
+- /verify/unionfind/test/fully_persistent_uf.test.cpp.html
+title: unionfind/test/fully_persistent_uf.test.cpp
 ---
