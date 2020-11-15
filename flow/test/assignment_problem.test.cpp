@@ -9,16 +9,18 @@ std::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> c
     int N = cost.size();
     MinCostFlow<long long, long long> mcf(N * 2 + 2);
     int S = N * 2, T = N * 2 + 1;
-    for (int i = 0; i < N; i++)
-    {
+    TC bias_total_cost = 0;
+    for (int i = 0; i < N; i++) {
+        TC lo = *min_element(cost[i].begin(), cost[i].end());
+        bias_total_cost += lo;
         mcf.add_edge(S, i, 1, 0);
         mcf.add_edge(N + i, T, 1, 0);
         for (int j = 0; j < N; j++)
         {
-            mcf.add_edge(i, N + j, 1, cost[i][j]);
+            mcf.add_edge(i, N + j, 1, cost[i][j] - lo);
         }
     }
-    auto total_cost = mcf.flow(S, T, N).second;
+    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;
     std::vector<int> ret;
 
     for (int i = 0; i < N; i++)
