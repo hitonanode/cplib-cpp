@@ -177,6 +177,9 @@ data:
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
+      path: linear_algebra_matrix/toeplitz.hpp
+      title: linear_algebra_matrix/toeplitz.hpp
+    - icon: ':warning:'
       path: linear_algebra_matrix/transpose.hpp
       title: linear_algebra_matrix/transpose.hpp
     - icon: ':warning:'
