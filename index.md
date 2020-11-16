@@ -372,7 +372,7 @@ data:
       title: unionfind/weighted_unionfind.hpp
   - name: utilities
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: utilities/floor_sum.hpp
       title: utilities/floor_sum.hpp
     - icon: ':warning:'
@@ -384,6 +384,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/int_kth_root.hpp
       title: utilities/int_kth_root.hpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/integer_segments.hpp
+      title: utilities/integer_segments.hpp
     - icon: ':warning:'
       path: utilities/momentum_deque.hpp
       title: utilities/momentum_deque.hpp
@@ -723,6 +726,12 @@ data:
       title: unionfind/test/weighted_unionfind.test.cpp
   - name: utilities/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/floor_sum.test.cpp
+      title: utilities/test/floor_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/integer_segments.test.cpp
+      title: utilities/test/integer_segments.test.cpp
     - icon: ':heavy_check_mark:'
       path: utilities/test/kth_root_integer.test.cpp
       title: utilities/test/kth_root_integer.test.cpp
