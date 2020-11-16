@@ -9,7 +9,7 @@
 // [ t_(N-1) t_(N-2) ... t_1 t_0     ]
 // [ t_N     t_(N-1) ... t_2 t_1     ]
 // [ ...                             ]
-// [ t_(N*2-1)       ...     t_(N-1) ]]
+// [ t_(N*2-2)       ...     t_(N-1) ]]
 //
 // Complexity: O(N^2)
 // Reference: <https://en.wikipedia.org/wiki/Levinson_recursion>
