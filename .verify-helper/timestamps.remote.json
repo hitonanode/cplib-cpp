@@ -95,5 +95,7 @@
 "unionfind/test/unionfind_plain.test.cpp": "2020-03-07 22:54:47 +0900",
 "unionfind/test/unionfind_rankbased.test.cpp": "2020-03-07 22:54:47 +0900",
 "unionfind/test/weighted_unionfind.test.cpp": "2020-03-07 22:54:47 +0900",
+"utilities/test/floor_sum.test.cpp": "2020-11-16 12:55:05 +0900",
+"utilities/test/integer_segments.test.cpp": "2020-11-16 12:55:05 +0900",
 "utilities/test/kth_root_integer.test.cpp": "2020-11-15 01:44:41 +0900"
 }
