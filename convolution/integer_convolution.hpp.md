@@ -9,10 +9,10 @@ data:
     links:
     - https://yukicoder.me/submissions/385043>
     - https://yukicoder.me/submissions/385120>
-  bundledCode: "#line 1 \"convolution/integer_convolution/integer_convolution.hpp\"\
-    \n#include <vector>\n\n// f[n]\u306En >= 1\u306B\u5BFE\u3057\u3066\u3001\u5168\
-    \u3066\u306E\u500D\u6570n*i\u306B\u5BFE\u3059\u308Bf[n*i]\u306E\u548C\u304C\u51FA\
-    \u3066\u304F\u308B \u8A08\u7B97\u91CFO(NlogN)\ntemplate <typename T>\nvoid integer_zeta(std::vector<T>\
+  bundledCode: "#line 1 \"convolution/integer_convolution.hpp\"\n#include <vector>\n\
+    \n// f[n]\u306En >= 1\u306B\u5BFE\u3057\u3066\u3001\u5168\u3066\u306E\u500D\u6570\
+    n*i\u306B\u5BFE\u3059\u308Bf[n*i]\u306E\u548C\u304C\u51FA\u3066\u304F\u308B \u8A08\
+    \u7B97\u91CFO(NlogN)\ntemplate <typename T>\nvoid integer_zeta(std::vector<T>\
     \ &f)\n{\n    int N = f.size() - 1;\n    for (int i = 1; i <= N; i++) {\n    \
     \    for (int j = i * 2; j <= N; j += i) {\n            f[i] += f[j];\n      \
     \  }\n    }\n}\n\n// f[n]\u306B\u5BFE\u3057\u3066\u3001\u5168\u3066\u306En\u306E\
@@ -52,15 +52,15 @@ data:
     \ f[j];\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: convolution/integer_convolution/integer_convolution.hpp
+  path: convolution/integer_convolution.hpp
   requiredBy: []
-  timestamp: '2020-04-05 20:29:36+09:00'
+  timestamp: '2020-11-16 23:42:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: convolution/integer_convolution/integer_convolution.hpp
+documentation_of: convolution/integer_convolution.hpp
 layout: document
 redirect_from:
-- /library/convolution/integer_convolution/integer_convolution.hpp
-- /library/convolution/integer_convolution/integer_convolution.hpp.html
-title: convolution/integer_convolution/integer_convolution.hpp
+- /library/convolution/integer_convolution.hpp
+- /library/convolution/integer_convolution.hpp.html
+title: convolution/integer_convolution.hpp
 ---

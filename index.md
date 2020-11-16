@@ -25,6 +25,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/fft_double.hpp
       title: convolution/fft_double.hpp
+    - icon: ':warning:'
+      path: convolution/integer_convolution.hpp
+      title: convolution/integer_convolution.hpp
     - icon: ':heavy_check_mark:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
@@ -34,11 +37,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/walsh-hadamard.hpp
       title: convolution/walsh-hadamard.hpp
-  - name: convolution/integer_convolution
-    pages:
-    - icon: ':warning:'
-      path: convolution/integer_convolution/integer_convolution.hpp
-      title: convolution/integer_convolution/integer_convolution.hpp
   - name: flow
     pages:
     - icon: ':warning:'
@@ -177,9 +175,6 @@ data:
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
-      path: linear_algebra_matrix/toeplitz.hpp
-      title: linear_algebra_matrix/toeplitz.hpp
-    - icon: ':warning:'
       path: linear_algebra_matrix/transpose.hpp
       title: linear_algebra_matrix/transpose.hpp
     - icon: ':warning:'
@@ -285,6 +280,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/binary_indexed_tree.hpp
       title: segmenttree/binary_indexed_tree.hpp
+    - icon: ':warning:'
+      path: segmenttree/binary_indexed_tree_2d.hpp
+      title: segmenttree/binary_indexed_tree_2d.hpp
     - icon: ':warning:'
       path: segmenttree/count_less_than.hpp
       title: segmenttree/count_less_than.hpp
