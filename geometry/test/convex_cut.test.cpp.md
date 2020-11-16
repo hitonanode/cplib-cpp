@@ -18,49 +18,45 @@ data:
     \ <vector>\n\n\n// CUT begin\ntemplate <typename T_P>\nstruct P\n{\n    static\
     \ T_P EPS;\n    static void set_eps(T_P e)\n    {\n        EPS = e;\n    }\n \
     \   T_P x, y;\n    P() : x(0), y(0) {}\n    P(T_P x, T_P y) : x(x), y(y) {}\n\
-    \    P(std::pair<T_P, T_P> p) : x(p.first), y(p.second) {}\n    static T_P add_w_error(T_P\
-    \ a, T_P b) noexcept { return (std::abs(a + b) < P::EPS * (std::abs(a) + std::abs(b)))\
-    \ ? 0 : a + b; }\n    P operator+(const P &p) const noexcept { return P(add_w_error(x,\
-    \ p.x), add_w_error(y, p.y)); }\n    P operator-(const P &p) const noexcept {\
-    \ return P(add_w_error(x, -p.x), add_w_error(y, -p.y)); }\n    P operator*(const\
-    \ P &p) const noexcept { return P(add_w_error(x * p.x,  -y * p.y), add_w_error(x\
-    \ * p.y, y * p.x)); }\n    P operator*(T_P d) const noexcept { return P(x * d,\
-    \ y * d); }\n    P operator/(T_P d) const noexcept { return P(x / d, y / d); }\n\
-    \    P inv() const { return conj() / norm2(); }\n    P operator/(const P &p) const\
-    \ { return (*this) * p.inv(); }\n    bool operator<(const P &r) const noexcept\
-    \ { return x != r.x ? x < r.x : y < r.y; }\n    bool operator==(const P &r) const\
-    \ noexcept { return add_w_error(x, -r.x) == 0 and add_w_error(y, -r.y) == 0; }\n\
-    \    bool operator!=(const P &r) const noexcept { return !((*this) == r); }\n\
-    \    T_P dot(P p) const noexcept { return add_w_error(x * p.x, y * p.y); }\n \
-    \   T_P det(P p) const noexcept { return add_w_error(x * p.y, -y * p.x); }\n \
-    \   T_P norm() const noexcept { return std::sqrt(x * x + y * y); }\n    T_P norm2()\
-    \ const noexcept { return x * x + y * y; }\n    T_P arg() const noexcept { return\
-    \ std::atan2(y, x); }\n    // rotate point/vector by rad\n    P rotate(T_P rad)\
-    \ noexcept { return P(add_w_error(x * std::cos(rad), -y * std::sin(rad)), add_w_error(x\
-    \ * std::sin(rad), y * std::cos(rad))); }\n    P normalized() const { return (*this)\
-    \ / this->norm(); }\n    P conj() const noexcept { return P(x, -y); }\n    friend\
-    \ std::istream &operator>>(std::istream &is, P &p) { T_P x, y; is >> x >> y; p\
-    \ = P(x, y); return is; }\n    friend std::ostream &operator<<(std::ostream &os,\
-    \ const P &p) { os << '(' << p.x << ',' << p.y << ')'; return os; }\n};\ntemplate\
-    \ <>\ndouble P<double>::EPS = 1e-9;\ntemplate <>\nlong double P<long double>::EPS\
-    \ = 1e-12;\n\n\ntemplate <typename T_P>\nint ccw(const P<T_P> &a, const P<T_P>\
-    \ &b, const P<T_P> &c) // a->b->c\u306E\u66F2\u304C\u308A\u65B9\n{\n    P<T_P>\
-    \ v1 = b - a;\n    P<T_P> v2 = c - a;\n    if (v1.det(v2) > P<T_P>::EPS) return\
-    \ 1; // \u5DE6\u6298\n    if (v1.det(v2) < -P<T_P>::EPS) return -1; // \u53F3\u6298\
-    \n    if (v1.dot(v2) < -P<T_P>::EPS) return 2; // c-a-b\n    if (v1.norm() < v2.norm())\
-    \ return -2; // a-b-c\n    return 0; // a-c-b\n}\n\n\n// Convex hull \uFF08\u51F8\
-    \u5305\uFF09\n// return: IDs of vertices used for convex hull, counterclockwise\n\
-    // include_boundary: If true, interior angle pi is allowed\ntemplate <typename\
-    \ T_P>\nstd::vector<int> convex_hull(const std::vector<P<T_P>> &ps, bool include_boundary\
-    \ = false)\n{\n    int n = ps.size();\n    if (n <= 1) return std::vector<int>(n,\
-    \ 0);\n    std::vector<std::pair<P<T_P>, int>> points(n);\n    for (size_t i =\
-    \ 0; i < ps.size(); i++) points[i] = std::make_pair(ps[i], i);\n    std::sort(points.begin(),\
-    \ points.end());\n    int k = 0;\n    std::vector<std::pair<P<T_P>, int>> qs(2\
-    \ * n);\n    auto ccw_check = [&](int c) {\n        if (include_boundary) return\
-    \ c == -1;\n        else return c <= 0;\n    };\n    for (int i = 0; i < n; i++)\n\
-    \    {\n        while (k > 1 and ccw_check(ccw(qs[k - 2].first, qs[k - 1].first,\
-    \ points[i].first))) k--;\n        qs[k++] = points[i]; \n    }\n    for (int\
-    \ i = n - 2, t = k; i >= 0; i--) {\n        while (k > t and ccw_check(ccw(qs[k\
+    \    P(std::pair<T_P, T_P> p) : x(p.first), y(p.second) {}\n    P operator+(const\
+    \ P &p) const noexcept { return P(x + p.x, y + p.y); }\n    P operator-(const\
+    \ P &p) const noexcept { return P(x - p.x, y - p.y); }\n    P operator*(const\
+    \ P &p) const noexcept { return P(x * p.x - y * p.y, x * p.y + y * p.x); }\n \
+    \   P operator*(T_P d) const noexcept { return P(x * d, y * d); }\n    P operator/(T_P\
+    \ d) const noexcept { return P(x / d, y / d); }\n    P inv() const { return conj()\
+    \ / norm2(); }\n    P operator/(const P &p) const { return (*this) * p.inv();\
+    \ }\n    bool operator<(const P &r) const noexcept { return x != r.x ? x < r.x\
+    \ : y < r.y; }\n    bool operator==(const P &r) const noexcept { return x == r.x\
+    \ and y  == r.y; }\n    bool operator!=(const P &r) const noexcept { return !((*this)\
+    \ == r); }\n    T_P dot(P p) const noexcept { return x * p.x + y * p.y; }\n  \
+    \  T_P det(P p) const noexcept { return x * p.y - y * p.x; }\n    T_P norm() const\
+    \ noexcept { return std::sqrt(x * x + y * y); }\n    T_P norm2() const noexcept\
+    \ { return x * x + y * y; }\n    T_P arg() const noexcept { return std::atan2(y,\
+    \ x); }\n    // rotate point/vector by rad\n    P rotate(T_P rad) noexcept { return\
+    \ P(x * std::cos(rad) - y * std::sin(rad), x * std::sin(rad) + y * std::cos(rad));\
+    \ }\n    P normalized() const { return (*this) / this->norm(); }\n    P conj()\
+    \ const noexcept { return P(x, -y); }\n    friend std::istream &operator>>(std::istream\
+    \ &is, P &p) { T_P x, y; is >> x >> y; p = P(x, y); return is; }\n    friend std::ostream\
+    \ &operator<<(std::ostream &os, const P &p) { os << '(' << p.x << ',' << p.y <<\
+    \ ')'; return os; }\n};\ntemplate <>\ndouble P<double>::EPS = 1e-9;\ntemplate\
+    \ <>\nlong double P<long double>::EPS = 1e-12;\n\n\ntemplate <typename T_P>\n\
+    int ccw(const P<T_P> &a, const P<T_P> &b, const P<T_P> &c) // a->b->c\u306E\u66F2\
+    \u304C\u308A\u65B9\n{\n    P<T_P> v1 = b - a;\n    P<T_P> v2 = c - a;\n    if\
+    \ (v1.det(v2) > P<T_P>::EPS) return 1; // \u5DE6\u6298\n    if (v1.det(v2) < -P<T_P>::EPS)\
+    \ return -1; // \u53F3\u6298\n    if (v1.dot(v2) < -P<T_P>::EPS) return 2; //\
+    \ c-a-b\n    if (v1.norm() < v2.norm()) return -2; // a-b-c\n    return 0; //\
+    \ a-c-b\n}\n\n\n// Convex hull \uFF08\u51F8\u5305\uFF09\n// return: IDs of vertices\
+    \ used for convex hull, counterclockwise\n// include_boundary: If true, interior\
+    \ angle pi is allowed\ntemplate <typename T_P>\nstd::vector<int> convex_hull(const\
+    \ std::vector<P<T_P>> &ps, bool include_boundary = false)\n{\n    int n = ps.size();\n\
+    \    if (n <= 1) return std::vector<int>(n, 0);\n    std::vector<std::pair<P<T_P>,\
+    \ int>> points(n);\n    for (size_t i = 0; i < ps.size(); i++) points[i] = std::make_pair(ps[i],\
+    \ i);\n    std::sort(points.begin(), points.end());\n    int k = 0;\n    std::vector<std::pair<P<T_P>,\
+    \ int>> qs(2 * n);\n    auto ccw_check = [&](int c) {\n        if (include_boundary)\
+    \ return c == -1;\n        else return c <= 0;\n    };\n    for (int i = 0; i\
+    \ < n; i++)\n    {\n        while (k > 1 and ccw_check(ccw(qs[k - 2].first, qs[k\
+    \ - 1].first, points[i].first))) k--;\n        qs[k++] = points[i]; \n    }\n\
+    \    for (int i = n - 2, t = k; i >= 0; i--) {\n        while (k > t and ccw_check(ccw(qs[k\
     \ - 2].first, qs[k - 1].first, points[i].first))) k--;\n        qs[k++] = points[i];\n\
     \    }\n    std::vector<int> ret(k - 1);\n    for (int i = 0; i < k - 1; i++)\
     \ ret[i] = qs[i].second;\n    return ret;\n}\n\n// Solve r1 + t1 * v1 == r2 +\
@@ -123,7 +119,7 @@ data:
   isVerificationFile: true
   path: geometry/test/convex_cut.test.cpp
   requiredBy: []
-  timestamp: '2020-10-29 23:07:35+09:00'
+  timestamp: '2020-11-16 12:44:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: geometry/test/convex_cut.test.cpp

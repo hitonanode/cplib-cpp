@@ -78,7 +78,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -86,6 +86,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: geometry/geometry2d.hpp
       title: geometry/geometry2d.hpp
+    - icon: ':warning:'
+      path: geometry/point2d_w_error.hpp
+      title: geometry/point2d_w_error.hpp
     - icon: ':warning:'
       path: geometry/problem_of_apollonius.hpp
       title: geometry/problem_of_apollonius.hpp
@@ -246,7 +249,7 @@ data:
     - icon: ':warning:'
       path: other_data_structures/rbst_fast.cpp
       title: other_data_structures/rbst_fast.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/sliding_window_aggregation.hpp
       title: other_data_structures/sliding_window_aggregation.hpp
     - icon: ':heavy_check_mark:'
@@ -260,13 +263,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: random/rand_nondeterministic.hpp
       title: random/rand_nondeterministic.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: random/rolling_hash_1d_general.hpp
       title: random/rolling_hash_1d_general.hpp
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -282,13 +285,13 @@ data:
     - icon: ':warning:'
       path: segmenttree/count_less_than.hpp
       title: segmenttree/count_less_than.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
     - icon: ':warning:'
       path: segmenttree/range-add-range-min.hpp
       title: segmenttree/range-add-range-min.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range-update-range-get.hpp
       title: segmenttree/range-update-range-get.hpp
     - icon: ':heavy_check_mark:'
@@ -627,7 +630,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/test/persistent_queue.test.cpp
       title: other_data_structures/test/persistent_queue.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/queue_operate_all_composite.test.cpp
       title: other_data_structures/test/queue_operate_all_composite.test.cpp
     - icon: ':heavy_check_mark:'
@@ -638,7 +641,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: random/test/rolling_hash.test.cpp
       title: random/test/rolling_hash.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: random/test/rolling_hash_w_modint.test.cpp
       title: random/test/rolling_hash_w_modint.test.cpp
   - name: segmenttree/test
@@ -652,13 +655,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/range-affine-range-sum.test.cpp
       title: segmenttree/test/range-affine-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
