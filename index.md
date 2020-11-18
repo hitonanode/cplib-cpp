@@ -22,7 +22,7 @@ data:
     - icon: ':warning:'
       path: convolution/fft_arbitrary_mod.hpp
       title: convolution/fft_arbitrary_mod.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/fft_double.hpp
       title: convolution/fft_double.hpp
     - icon: ':warning:'
@@ -101,22 +101,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/bipartite_matching(slow).hpp
       title: graph/bipartite_matching(slow).hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/bipartite_matching.hpp
       title: graph/bipartite_matching.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/general_matching.hpp
       title: graph/general_matching.hpp
     - icon: ':warning:'
       path: graph/grid_graph_template.hpp
       title: graph/grid_graph_template.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/incremental_bridge_connectivity.hpp
       title: graph/incremental_bridge_connectivity.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/lowlink.hpp
       title: graph/lowlink.hpp
     - icon: ':heavy_check_mark:'
@@ -128,27 +128,27 @@ data:
     - icon: ':warning:'
       path: graph/shortest_cycle.hpp
       title: graph/shortest_cycle.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/shortest_path.hpp
       title: graph/shortest_path.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/strongly_connected_components.hpp
       title: graph/strongly_connected_components.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/strongly_connected_components_bitset.hpp
       title: graph/strongly_connected_components_bitset.hpp
   - name: graph-tree
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/centroid_decomposition.hpp
       title: graph-tree/centroid_decomposition.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/eulertour.hpp
       title: graph-tree/eulertour.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/heavy_light_decomposition.hpp
       title: graph-tree/heavy_light_decomposition.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/lowest_common_ancestor.hpp
       title: graph-tree/lowest_common_ancestor.hpp
     - icon: ':warning:'
@@ -156,19 +156,19 @@ data:
       title: graph-tree/tree_isomorphism.hpp
   - name: linear_algebra_matrix
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/det_of_sparse_matrix.hpp
       title: linear_algebra_matrix/det_of_sparse_matrix.hpp
     - icon: ':x:'
       path: linear_algebra_matrix/linalg_bitset.hpp
       title: linear_algebra_matrix/linalg_bitset.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: linear_algebra_matrix/linalg_modint.hpp
       title: linear_algebra_matrix/linalg_modint.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: linear_algebra_matrix/linear_recurrence.hpp
       title: linear_algebra_matrix/linear_recurrence.hpp
     - icon: ':x:'
@@ -258,7 +258,7 @@ data:
     - icon: ':warning:'
       path: random/custom_hash.hpp
       title: random/custom_hash.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: random/rand_nondeterministic.hpp
       title: random/rand_nondeterministic.hpp
     - icon: ':x:'
@@ -286,7 +286,7 @@ data:
     - icon: ':warning:'
       path: segmenttree/count_less_than.hpp
       title: segmenttree/count_less_than.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
     - icon: ':warning:'
@@ -362,7 +362,7 @@ data:
     - icon: ':warning:'
       path: unionfind/undo_unionfind.hpp
       title: unionfind/undo_unionfind.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: unionfind/unionfind.hpp
       title: unionfind/unionfind.hpp
     - icon: ':x:'
@@ -518,71 +518,71 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/bipartite_matching(slow).test.cpp
       title: graph/test/bipartite_matching(slow).test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/bipartite_matching.test.cpp
       title: graph/test/bipartite_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/bridge.test.cpp
       title: graph/test/bridge.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/cycle_detection_directed.test.cpp
       title: graph/test/cycle_detection_directed.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/dijkstra.test.cpp
       title: graph/test/dijkstra.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/general_matching.test.cpp
       title: graph/test/general_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/incremental-bridge-connectivity.test.cpp
       title: graph/test/incremental-bridge-connectivity.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/maximum_independent_set.test.cpp
       title: graph/test/maximum_independent_set.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/strongly_connected_components.test.cpp
       title: graph/test/strongly_connected_components.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/strongly_connected_components_bitset.test.cpp
       title: graph/test/strongly_connected_components_bitset.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/topological_sort.test.cpp
       title: graph/test/topological_sort.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/two-edge-connected-components.test.cpp
       title: graph/test/two-edge-connected-components.test.cpp
   - name: graph-tree/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/test/frequency_table_of_tree_distance.test.cpp
       title: graph-tree/test/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/test/hl_decomposition.test.cpp
       title: graph-tree/test/hl_decomposition.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/test/lca.test.cpp
       title: graph-tree/test/lca.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/test/vertex-add-subtree-sum.test.cpp
       title: graph-tree/test/vertex-add-subtree-sum.test.cpp
   - name: linear_algebra_matrix/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_bitset.test.cpp
       title: linear_algebra_matrix/test/linalg_bitset.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
       title: linear_algebra_matrix/test/linalg_ll_det.test.cpp
     - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
       title: linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     - icon: ':x:'

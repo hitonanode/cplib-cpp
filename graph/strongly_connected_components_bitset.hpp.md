@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/strongly_connected_components_bitset.test.cpp
     title: graph/test/strongly_connected_components_bitset.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://codeforces.com/contest/1268/submission/68125495>
@@ -57,7 +57,7 @@ data:
   path: graph/strongly_connected_components_bitset.hpp
   requiredBy: []
   timestamp: '2020-03-07 22:40:57+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/strongly_connected_components_bitset.test.cpp
 documentation_of: graph/strongly_connected_components_bitset.hpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: random/rand_nondeterministic.hpp
     title: random/rand_nondeterministic.hpp
   - icon: ':x:'

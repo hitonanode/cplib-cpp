@@ -40,49 +40,49 @@ data:
     \ }\n    std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) { return slope(s,\
     \ t, flow_limit).back(); }\n    std::vector<std::pair<Cap, Cost>> slope(int s,\
     \ int t) { return slope(s, t, std::numeric_limits<Cap>::max()); }\n\n    std::vector<Cost>\
-    \ dual, dist;\n    std::vector<int> pv, pe;\n    std::vector<bool> vis;\n    bool\
-    \ _dual_ref(int s, int t) {\n        std::fill(dist.begin(), dist.end(), std::numeric_limits<Cost>::max());\n\
-    \        std::fill(pv.begin(), pv.end(), -1);\n        std::fill(pe.begin(), pe.end(),\
-    \ -1);\n        std::fill(vis.begin(), vis.end(), false);\n        struct Q {\n\
-    \            Cost key;\n            int to;\n            bool operator<(Q r) const\
-    \ { return key > r.key; }\n        };\n        std::priority_queue<Q> que;\n \
-    \       dist[s] = 0;\n        que.push(Q{0, s});\n        while (!que.empty())\
-    \ {\n            int v = que.top().to;\n            que.pop();\n            if\
-    \ (vis[v]) continue;\n            vis[v] = true;\n            if (v == t) break;\n\
-    \            // dist[v] = shortest(s, v) + dual[s] - dual[v]\n            // dist[v]\
-    \ >= 0 (all reduced cost are positive)\n            // dist[v] <= (n-1)C\n   \
-    \         for (int i = 0; i < int(g[v].size()); i++) {\n                auto e\
-    \ = g[v][i];\n                if (vis[e.to] || !e.cap) continue;\n           \
-    \     // |-dual[e.to] + dual[v]| <= (n-1)C\n                // cost <= C - -(n-1)C\
-    \ + 0 = nC\n                Cost cost = e.cost - dual[e.to] + dual[v];\n     \
-    \           if (dist[e.to] - dist[v] > cost) {\n                    dist[e.to]\
+    \ dual, dist;\n    std::vector<int> pv, pe;\n    std::vector<bool> vis;\n    struct\
+    \ Q {\n        Cost key;\n        int to;\n        bool operator<(Q r) const {\
+    \ return key > r.key; }\n    };\n    std::vector<Q> que;\n    bool _dual_ref(int\
+    \ s, int t) {\n        std::fill(dist.begin(), dist.end(), std::numeric_limits<Cost>::max());\n\
+    \        std::fill(vis.begin(), vis.end(), false);\n        que.clear();\n\n \
+    \       dist[s] = 0;\n        que.push_back(Q{0, s});\n        std::push_heap(que.begin(),\
+    \ que.end());\n        while (!que.empty()) {\n            int v = que.front().to;\n\
+    \            std::pop_heap(que.begin(), que.end());\n            que.pop_back();\n\
+    \            if (vis[v]) continue;\n            vis[v] = true;\n            if\
+    \ (v == t) break;\n            // dist[v] = shortest(s, v) + dual[s] - dual[v]\n\
+    \            // dist[v] >= 0 (all reduced cost are positive)\n            // dist[v]\
+    \ <= (n-1)C\n            for (int i = 0; i < int(g[v].size()); i++) {\n      \
+    \          auto e = g[v][i];\n                if (vis[e.to] || !e.cap) continue;\n\
+    \                // |-dual[e.to] + dual[v]| <= (n-1)C\n                // cost\
+    \ <= C - -(n-1)C + 0 = nC\n                Cost cost = e.cost - dual[e.to] + dual[v];\n\
+    \                if (dist[e.to] - dist[v] > cost) {\n                    dist[e.to]\
     \ = dist[v] + cost;\n                    pv[e.to] = v;\n                    pe[e.to]\
-    \ = i;\n                    que.push(Q{dist[e.to], e.to});\n                }\n\
-    \            }\n        }\n        if (!vis[t]) { return false; }\n\n        for\
-    \ (int v = 0; v < _n; v++) {\n            if (!vis[v]) continue;\n           \
-    \ // dual[v] = dual[v] - dist[t] + dist[v]\n            //         = dual[v] -\
-    \ (shortest(s, t) + dual[s] - dual[t]) + (shortest(s, v) + dual[s] - dual[v])\n\
-    \            //         = - shortest(s, t) + dual[t] + shortest(s, v)\n      \
-    \      //         = shortest(s, v) - shortest(s, t) >= 0 - (n-1)C\n          \
-    \  dual[v] -= dist[t] - dist[v];\n        }\n        return true;\n    }\n\n \
-    \   std::vector<std::pair<Cap, Cost>> slope(int s, int t, Cap flow_limit) {\n\
-    \        assert(0 <= s && s < _n);\n        assert(0 <= t && t < _n);\n      \
-    \  assert(s != t);\n        // variants (C = maxcost):\n        // -(n-1)C <=\
-    \ dual[s] <= dual[i] <= dual[t] = 0\n        // reduced cost (= e.cost + dual[e.from]\
-    \ - dual[e.to]) >= 0 for all edge\n        dual.assign(_n, 0), dist.assign(_n,\
-    \ 0);\n        pv.assign(_n, 0), pe.assign(_n, 0);\n        vis.assign(_n, false);\n\
-    \        Cap flow = 0;\n        Cost cost = 0, prev_cost_per_flow = -1;\n    \
-    \    std::vector<std::pair<Cap, Cost>> result;\n        result.push_back({flow,\
-    \ cost});\n        while (flow < flow_limit) {\n            if (!_dual_ref(s,\
-    \ t)) break;\n            Cap c = flow_limit - flow;\n            for (int v =\
-    \ t; v != s; v = pv[v]) { c = std::min(c, g[pv[v]][pe[v]].cap); }\n          \
-    \  for (int v = t; v != s; v = pv[v]) {\n                auto& e = g[pv[v]][pe[v]];\n\
-    \                e.cap -= c;\n                g[v][e.rev].cap += c;\n        \
-    \    }\n            Cost d = -dual[s];\n            flow += c;\n            cost\
-    \ += c * d;\n            if (prev_cost_per_flow == d) { result.pop_back(); }\n\
-    \            result.push_back({flow, cost});\n            prev_cost_per_flow =\
-    \ d;\n        }\n        return result;\n    }\n\n    struct _edge {\n       \
-    \ int to, rev;\n        Cap cap;\n        Cost cost;\n    };\n\n    int _n;\n\
+    \ = i;\n                    que.push_back(Q{dist[e.to], e.to});\n            \
+    \        std::push_heap(que.begin(), que.end());\n                }\n        \
+    \    }\n        }\n        if (!vis[t]) { return false; }\n\n        for (int\
+    \ v = 0; v < _n; v++) {\n            if (!vis[v]) continue;\n            // dual[v]\
+    \ = dual[v] - dist[t] + dist[v]\n            //         = dual[v] - (shortest(s,\
+    \ t) + dual[s] - dual[t]) + (shortest(s, v) + dual[s] - dual[v])\n           \
+    \ //         = - shortest(s, t) + dual[t] + shortest(s, v)\n            //   \
+    \      = shortest(s, v) - shortest(s, t) >= 0 - (n-1)C\n            dual[v] -=\
+    \ dist[t] - dist[v];\n        }\n        return true;\n    }\n\n    std::vector<std::pair<Cap,\
+    \ Cost>> slope(int s, int t, Cap flow_limit) {\n        assert(0 <= s && s < _n);\n\
+    \        assert(0 <= t && t < _n);\n        assert(s != t);\n        // variants\
+    \ (C = maxcost):\n        // -(n-1)C <= dual[s] <= dual[i] <= dual[t] = 0\n  \
+    \      // reduced cost (= e.cost + dual[e.from] - dual[e.to]) >= 0 for all edge\n\
+    \        dual.assign(_n, 0), dist.assign(_n, 0);\n        pv.assign(_n, 0), pe.assign(_n,\
+    \ 0);\n        vis.assign(_n, false);\n        Cap flow = 0;\n        Cost cost\
+    \ = 0, prev_cost_per_flow = -1;\n        std::vector<std::pair<Cap, Cost>> result;\n\
+    \        result.push_back({flow, cost});\n        while (flow < flow_limit) {\n\
+    \            if (!_dual_ref(s, t)) break;\n            Cap c = flow_limit - flow;\n\
+    \            for (int v = t; v != s; v = pv[v]) { c = std::min(c, g[pv[v]][pe[v]].cap);\
+    \ }\n            for (int v = t; v != s; v = pv[v]) {\n                auto& e\
+    \ = g[pv[v]][pe[v]];\n                e.cap -= c;\n                g[v][e.rev].cap\
+    \ += c;\n            }\n            Cost d = -dual[s];\n            flow += c;\n\
+    \            cost += c * d;\n            if (prev_cost_per_flow == d) { result.pop_back();\
+    \ }\n            result.push_back({flow, cost});\n            prev_cost_per_flow\
+    \ = d;\n        }\n        return result;\n    }\n\n    struct _edge {\n     \
+    \   int to, rev;\n        Cap cap;\n        Cost cost;\n    };\n\n    int _n;\n\
     \    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
     \ g;\n};\n#line 3 \"flow/mincostflow_bellmanford.hpp\"\n#include <iostream>\n\
     #line 7 \"flow/mincostflow_bellmanford.hpp\"\n\n// CUT begin\n/*\nMinCostFlow:\
@@ -166,7 +166,7 @@ data:
   isVerificationFile: true
   path: flow/test/mincostflow.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-11-18 21:07:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: flow/test/mincostflow.test.cpp

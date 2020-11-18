@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph-tree/test/vertex-add-subtree-sum.test.cpp
     title: graph-tree/test/vertex-add-subtree-sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph-tree/eulertour.hpp\"\n#include <cassert>\n#include\
@@ -40,7 +40,7 @@ data:
   path: graph-tree/eulertour.hpp
   requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph-tree/test/vertex-add-subtree-sum.test.cpp
 documentation_of: graph-tree/eulertour.hpp

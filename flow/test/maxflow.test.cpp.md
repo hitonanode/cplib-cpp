@@ -55,25 +55,25 @@ data:
     \ == 0) continue;\n            Cap d = _dfs(e.to, s, std::min(up - res, g[e.to][e.rev].cap));\n\
     \            if (d <= 0) continue;\n            g[v][i].cap += d;\n          \
     \  g[e.to][e.rev].cap -= d;\n            res += d;\n            if (res == up)\
-    \ break;\n        }\n        return res;\n    }\n\n    Cap flow(int s, int t)\
-    \ { return flow(s, t, std::numeric_limits<Cap>::max()); }\n    Cap flow(int s,\
-    \ int t, Cap flow_limit) {\n        assert(0 <= s && s < _n);\n        assert(0\
-    \ <= t && t < _n);\n        assert(s != t);\n\n        level.assign(_n, 0), iter.assign(_n,\
-    \ 0);\n        que.clear();\n\n        Cap flow = 0;\n        while (flow < flow_limit)\
-    \ {\n            _bfs(s, t);\n            if (level[t] == -1) break;\n       \
-    \     std::fill(iter.begin(), iter.end(), 0);\n            while (flow < flow_limit)\
-    \ {\n                Cap f = _dfs(t, s, flow_limit - flow);\n                if\
-    \ (!f) break;\n                flow += f;\n            }\n        }\n        return\
-    \ flow;\n    }\n\n    std::vector<bool> min_cut(int s) {\n        std::vector<bool>\
-    \ visited(_n);\n        simple_queue_int que;\n        que.push(s);\n        while\
-    \ (!que.empty()) {\n            int p = que.front();\n            que.pop();\n\
-    \            visited[p] = true;\n            for (auto e : g[p]) {\n         \
-    \       if (e.cap && !visited[e.to]) {\n                    visited[e.to] = true;\n\
-    \                    que.push(e.to);\n                }\n            }\n     \
-    \   }\n        return visited;\n    }\n\n    int _n;\n    struct _edge {\n   \
-    \     int to, rev;\n        Cap cap;\n    };\n    std::vector<std::pair<int, int>>\
-    \ pos;\n    std::vector<std::vector<_edge>> g;\n};\n#line 3 \"flow/test/maxflow.test.cpp\"\
-    \n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
+    \ return res;\n        }\n        level[v] = _n;\n        return res;\n    }\n\
+    \n    Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max());\
+    \ }\n    Cap flow(int s, int t, Cap flow_limit) {\n        assert(0 <= s && s\
+    \ < _n);\n        assert(0 <= t && t < _n);\n        assert(s != t);\n\n     \
+    \   level.assign(_n, 0), iter.assign(_n, 0);\n        que.clear();\n\n       \
+    \ Cap flow = 0;\n        while (flow < flow_limit) {\n            _bfs(s, t);\n\
+    \            if (level[t] == -1) break;\n            std::fill(iter.begin(), iter.end(),\
+    \ 0);\n            Cap f = _dfs(t, s, flow_limit - flow);\n            if (!f)\
+    \ break;\n            flow += f;\n        }\n        return flow;\n    }\n\n \
+    \   std::vector<bool> min_cut(int s) {\n        std::vector<bool> visited(_n);\n\
+    \        simple_queue_int que;\n        que.push(s);\n        while (!que.empty())\
+    \ {\n            int p = que.front();\n            que.pop();\n            visited[p]\
+    \ = true;\n            for (auto e : g[p]) {\n                if (e.cap && !visited[e.to])\
+    \ {\n                    visited[e.to] = true;\n                    que.push(e.to);\n\
+    \                }\n            }\n        }\n        return visited;\n    }\n\
+    \n    int _n;\n    struct _edge {\n        int to, rev;\n        Cap cap;\n  \
+    \  };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
+    \ g;\n};\n#line 3 \"flow/test/maxflow.test.cpp\"\n#include <iostream>\n#define\
+    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
     \n\nint main() {\n    int V, E;\n    std::cin >> V >> E;\n    mf_graph<int> graph(V);\n\
     \    while (E--) {\n        int u, v, c;\n        std::cin >> u >> v >> c;\n \
     \       graph.add_edge(u, v, c);\n    }\n    std::cout << graph.flow(0, V - 1)\
@@ -89,7 +89,7 @@ data:
   isVerificationFile: true
   path: flow/test/maxflow.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-11-18 21:07:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: flow/test/maxflow.test.cpp

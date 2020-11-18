@@ -6,17 +6,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/2sat_solver.test.cpp
     title: graph/test/2sat_solver.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/cycle_detection_directed.test.cpp
     title: graph/test/cycle_detection_directed.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/strongly_connected_components.test.cpp
     title: graph/test/strongly_connected_components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/topological_sort.test.cpp
     title: graph/test/topological_sort.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/strongly_connected_components.hpp\"\n#include <cassert>\n\
@@ -134,7 +134,7 @@ data:
   path: graph/strongly_connected_components.hpp
   requiredBy: []
   timestamp: '2020-09-05 20:52:47+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/topological_sort.test.cpp
   - graph/test/strongly_connected_components.test.cpp
