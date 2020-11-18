@@ -4,15 +4,12 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int N, Q;
     cin >> N >> Q;
     vector<int> A(N);
-    for (auto &a : A) {
-        cin >> a;
-    }
+    for (auto &a : A) { cin >> a; }
     StaticRangeInversion riq(A);
 
     while (Q--) {

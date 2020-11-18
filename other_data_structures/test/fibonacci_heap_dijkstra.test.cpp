@@ -5,35 +5,32 @@
 #include <vector>
 using namespace std;
 
-int main()
-{
-    cin.tie(NULL);
-    ios::sync_with_stdio(false);
+int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
 
     int V, E, R;
     cin >> V >> E >> R;
 
-    using lint = long long int;
+    using lint = long long;
     using plint = pair<lint, lint>;
     heap<lint> fib(V, 1e18);
     fib.chmin(R, 0);
 
     vector<vector<plint>> to(V);
-    while (E--)
-    {
+    while (E--) {
         int s, t, d;
         cin >> s >> t >> d;
         to[s].emplace_back(t, d);
     }
-    while (fib.size())
-    {
+    while (fib.size()) {
         int now = fib.pop().second;
         for (auto p : to[now]) fib.chmin(p.first, fib[now] + p.second);
     }
 
-    for (auto x : fib.result)
-    {
-        if (x == 1e18) cout << "INF\n";
-        else cout << x << '\n';
+    for (auto x : fib.result) {
+        if (x == 1e18)
+            cout << "INF\n";
+        else
+            cout << x << '\n';
     }
 }

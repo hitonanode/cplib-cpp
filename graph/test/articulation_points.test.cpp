@@ -1,9 +1,8 @@
-#include <iostream>
 #include "graph/lowlink.hpp"
+#include <iostream>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A"
 
-int main()
-{
+int main() {
     int V, E;
     std::cin >> V >> E;
     UndirectedGraph graph(V);
@@ -14,8 +13,6 @@ int main()
     }
     graph.detectBridge();
     for (int i = 0; i < V; i++) {
-        if (graph.is_articulation[i]) {
-            printf("%d\n", i);
-        }
+        if (graph.is_articulation[i]) { printf("%d\n", i); }
     }
 }

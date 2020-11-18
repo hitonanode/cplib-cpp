@@ -6,9 +6,7 @@
 // m0 = \sum_i ai, m1 = \sum_i (i * ai), m2 = \sum_i (i^2 * ai)
 // Verify: <https://atcoder.jp/contests/otemae2019/submissions/17097802>
 // Be careful for overflow
-template <typename DTYPE_DEQUE>
-struct deque_momentum
-{
+template <typename DTYPE_DEQUE> struct deque_momentum {
     std::deque<DTYPE_DEQUE> deq;
     DTYPE_DEQUE m0, m1, m2;
     deque_momentum() : m0(0), m1(0), m2(0) {}

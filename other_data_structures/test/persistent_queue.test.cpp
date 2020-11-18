@@ -2,10 +2,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_queue"
 #include <iostream>
 
-int main()
-{
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
+int main() {
+    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);
 
     pqueue<int, 18> pq;
     int Q;
@@ -17,8 +15,7 @@ int main()
             int x;
             std::cin >> x;
             pq.push(t + 1, x);
-        }
-        else {
+        } else {
             std::cout << pq.pop(t + 1).second << '\n';
         }
     }

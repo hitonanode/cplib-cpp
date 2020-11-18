@@ -1,11 +1,10 @@
-#include "sparse_table/sparse_table.hpp"
 #include "sparse_table/rmq_sparse_table.hpp"
+#include "sparse_table/sparse_table.hpp"
 #include <cassert>
 #include <cstdio>
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-int main()
-{
+int main() {
     int N, Q;
     scanf("%d %d", &N, &Q);
     std::vector<int> A(N);

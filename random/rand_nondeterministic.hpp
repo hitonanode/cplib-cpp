@@ -4,8 +4,7 @@
 using namespace std;
 
 // CUT begin
-struct rand_int_
-{
+struct rand_int_ {
     using lint = long long;
     mt19937 mt;
     rand_int_() : mt(chrono::steady_clock::now().time_since_epoch().count()) {}

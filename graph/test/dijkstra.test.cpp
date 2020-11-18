@@ -1,14 +1,13 @@
+#include "graph/dijkstra.hpp"
+#include "graph/shortest_path.hpp"
 #include <cassert>
 #include <iostream>
 #include <vector>
-#include "graph/dijkstra.hpp"
-#include "graph/shortest_path.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
 
 wedges e;
 
-int main()
-{
+int main() {
     int V, E, r;
     cin >> V >> E >> r;
     e.resize(V);
@@ -23,7 +22,8 @@ int main()
     graph.Dijkstra(r);
 
     for (int i = 0; i < V; i++) {
-        if (ret.first[i] == INF) puts("INF");
+        if (ret.first[i] == INF)
+            puts("INF");
         else {
             assert(ret.first[i] == graph.dist[i]);
             printf("%lld\n", ret.first[i]);

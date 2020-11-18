@@ -1,10 +1,9 @@
-#include "sparse_table/sparse_table.hpp"
 #include "sparse_table/rmq_sparse_table.hpp"
+#include "sparse_table/sparse_table.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #include <cstdio>
-int main()
-{
+int main() {
     int N, L;
     scanf("%d %d", &N, &L);
     std::vector<int> A(N);

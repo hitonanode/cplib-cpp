@@ -5,11 +5,9 @@
 #include <stdio.h>
 #include <string>
 
-
 int main() {
 
-    std::cin.tie(0);
-    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);
     std::string s;
     int N, M;
     std::cin >> s >> s >> N >> M;
@@ -24,8 +22,7 @@ int main() {
         printf("v ");
         for (int i = 0; i < N; i++) printf("%d ", (solver.solution[i] ? 1 : -1) * (i + 1));
         puts("0");
-    }
-    else {
+    } else {
         puts("s UNSATISFIABLE");
     }
 }

@@ -12,8 +12,7 @@
 // Rererence: <https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html>
 //            <http://web.cs.unlv.edu/larmore/Courses/CSC477/monge.pdf>
 // Verify: <https://codeforces.com/contest/1423/submission/98368491>
-template <typename T>
-struct SMAWK {
+template <typename T> struct SMAWK {
     std::vector<std::pair<int, T>> minima;
     std::function<T(int, int)> oracle;
     std::vector<std::unordered_map<int, T>> memo;
@@ -30,12 +29,8 @@ struct SMAWK {
         std::vector<int> js2;
         int i = ib;
         for (auto j : js) {
-            while (!js2.empty() and _query(i, js2.back()) >= _query(i, j)) {
-                js2.pop_back(), i -= id;
-            }
-            if (int(js2.size()) != (ie - ib) / id) {
-                js2.push_back(j), i += id;
-            }
+            while (!js2.empty() and _query(i, js2.back()) >= _query(i, j)) { js2.pop_back(), i -= id; }
+            if (int(js2.size()) != (ie - ib) / id) { js2.push_back(j), i += id; }
         }
         _smawk_rec(js2, ib + id, ie, id * 2);
 
@@ -45,13 +40,9 @@ struct SMAWK {
             bool init = true;
             for (; q < int(js.size()); ++q) {
                 T fq = _query(i, js[q]);
-                if (init or fm > fq) {
-                    fm = fq, minima[i] = std::make_pair(js[q], fq);
-                }
+                if (init or fm > fq) { fm = fq, minima[i] = std::make_pair(js[q], fq); }
                 init = false;
-                if (js[q] == jt) {
-                    break;
-                }
+                if (js[q] == jt) { break; }
             }
         }
     }

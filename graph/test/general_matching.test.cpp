@@ -6,9 +6,8 @@
 
 using namespace std;
 
-int main()
-{
-    cin.tie(NULL), ios::sync_with_stdio(false);
+int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
 
     int N, M;
     cin >> N >> M;
@@ -20,7 +19,5 @@ int main()
     }
     vector<pair<int, int>> ret = generalMatching(N, edges);
     cout << ret.size() << '\n';
-    for (auto [a, b] : ret) {
-        cout << a << ' ' << b << '\n';
-    }
+    for (auto [a, b] : ret) { cout << a << ' ' << b << '\n'; }
 }

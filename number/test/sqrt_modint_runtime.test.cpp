@@ -1,10 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
-#include <iostream>
 #include "number/modint_runtime.hpp"
+#include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     int T;
     cin >> T;
     while (T--) {
@@ -15,7 +14,7 @@ int main()
         if (Y) {
             m = m.sqrt();
             cout << (m ? m.val : -1) << endl;
-        }
-        else cout << 0 << endl;
+        } else
+            cout << 0 << endl;
     }
 }

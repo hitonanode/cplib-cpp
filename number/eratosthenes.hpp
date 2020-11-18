@@ -9,8 +9,7 @@
 // (*this)[i] = (divisor of i, greater than 1)
 // Example: [0, 1, 2, 3, 2, 5, 3, 7, 2, 3, 2, 11, ...]
 // Complexity: Space O(MAXN), Time (construction) O(MAXNloglogMAXN)
-struct SieveOfEratosthenes : std::vector<int>
-{
+struct SieveOfEratosthenes : std::vector<int> {
     std::vector<int> primes;
     SieveOfEratosthenes(int MAXN) : std::vector<int>(MAXN + 1) {
         std::iota(begin(), end(), 0);
@@ -33,8 +32,7 @@ struct SieveOfEratosthenes : std::vector<int>
                 ret[(*this)[x]]++;
                 x /= (*this)[x];
             }
-        }
-        else {
+        } else {
             for (auto p : primes) {
                 while (!(x % p)) x /= p, ret[p]++;
                 if (x == 1) break;
@@ -61,9 +59,12 @@ struct SieveOfEratosthenes : std::vector<int>
     std::vector<int> GenerateMoebiusFunctionTable() {
         std::vector<int> ret(size());
         for (int i = 1; i < int(size()); i++) {
-            if (i == 1) ret[i] = 1;
-            else if ((i / (*this)[i]) % (*this)[i] == 0) ret[i] = 0;
-            else ret[i] = -ret[i / (*this)[i]];
+            if (i == 1)
+                ret[i] = 1;
+            else if ((i / (*this)[i]) % (*this)[i] == 0)
+                ret[i] = 0;
+            else
+                ret[i] = -ret[i / (*this)[i]];
         }
         return ret;
     }

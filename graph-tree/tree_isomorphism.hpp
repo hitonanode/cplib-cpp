@@ -16,8 +16,7 @@ using mint = ModInt<1000000007>;
 // using mint = ModIntRuntime;
 // int ModIntRuntime::mod = 1000000007;
 using DoubleHash = pair<mint, mint>;
-struct UndirectedTree
-{
+struct UndirectedTree {
     using Edges = vector<vector<int>>; // vector<set<int>>;
     int V;
     Edges e;
@@ -39,30 +38,28 @@ struct UndirectedTree
         return {splitmix64(x.first.val + FIXED_RANDOM), splitmix64(x.second.val + FIXED_RANDOM)};
     }
 
-    static void add_hash(DoubleHash &l, const DoubleHash &r) {
-        l.first += r.first, l.second += r.second;
-    }
-    static DoubleHash subtract_hash(const DoubleHash &l, const DoubleHash &r) {
-        return {l.first - r.first, l.second - r.second};
-    }
+    static void add_hash(DoubleHash &l, const DoubleHash &r) { l.first += r.first, l.second += r.second; }
+    static DoubleHash subtract_hash(const DoubleHash &l, const DoubleHash &r) { return {l.first - r.first, l.second - r.second}; }
 
-    vector<DoubleHash> hash; // hash of the tree, each node regarded as root
+    vector<DoubleHash> hash;         // hash of the tree, each node regarded as root
     vector<DoubleHash> hash_subtree; // hash of the subtree
-    vector<DoubleHash> hash_par; // hash of the subtree whose root is parent[i], not containing i
-    DoubleHash hash_p; // \in [1, hmod), should be set randomly
+    vector<DoubleHash> hash_par;     // hash of the subtree whose root is parent[i], not containing i
+    DoubleHash hash_p;               // \in [1, hmod), should be set randomly
     DoubleHash hash_dfs1_(int now, int prv) {
         hash_subtree[now] = hash_p;
-        for (auto nxt : e[now]) if (nxt != prv) add_hash(hash_subtree[now], hash_dfs1_(nxt, now));
+        for (auto nxt : e[now])
+            if (nxt != prv) add_hash(hash_subtree[now], hash_dfs1_(nxt, now));
         return get_hash(hash_subtree[now]);
     }
     void hash_dfs2_(int now, int prv) {
         add_hash(hash[now], hash_subtree[now]);
         if (prv >= 0) hash_par[now] = subtract_hash(hash[prv], get_hash(hash_subtree[now]));
-        for (auto nxt : e[now]) if (nxt != prv) {
-            DoubleHash tmp = subtract_hash(hash[now], get_hash(hash_subtree[nxt]));
-            add_hash(hash[nxt], get_hash(tmp));
-            hash_dfs2_(nxt, now);
-        }
+        for (auto nxt : e[now])
+            if (nxt != prv) {
+                DoubleHash tmp = subtract_hash(hash[now], get_hash(hash_subtree[nxt]));
+                add_hash(hash[nxt], get_hash(tmp));
+                hash_dfs2_(nxt, now);
+            }
     }
     void build_hash(int root, int p1, int p2) {
         hash_p = make_pair(p1, p2);

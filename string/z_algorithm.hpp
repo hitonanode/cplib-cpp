@@ -6,8 +6,7 @@
 // Z algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)
 // Complexity: O(N)
 // <http://snuke.hatenablog.com/entry/2014/12/03/214243>
-template <typename T>
-std::vector<int> z_algorithm(const std::vector<T> &s) {
+template <typename T> std::vector<int> z_algorithm(const std::vector<T> &s) {
     const int N = s.size();
     if (N == 0) return {};
     std::vector<int> ans(N);

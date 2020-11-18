@@ -11,24 +11,21 @@ Verification: Codeforces #190 Div.1 C <https://codeforces.com/contest/321/submis
 fix_root(int r): Build information of the tree which `r` belongs to.
 detect_centroid(int r): Enumerate centroid(s) of the tree which `r` belongs to.
 */
-struct CentroidDecomposition
-{
+struct CentroidDecomposition {
     int NO_PARENT = -1;
     int V;
     int E;
-    std::vector<std::vector<std::pair<int, int>>> to;  // (node_id, edge_id)
-    std::vector<int> par;               // parent node_id par[root] = -1
-    std::vector<std::vector<int>> chi;  // children id's
-    std::vector<int> subtree_size;      // size of each subtree
-    std::vector<int> available_edge;    // If 0, ignore the corresponding edge.
+    std::vector<std::vector<std::pair<int, int>>> to; // (node_id, edge_id)
+    std::vector<int> par;                             // parent node_id par[root] = -1
+    std::vector<std::vector<int>> chi;                // children id's
+    std::vector<int> subtree_size;                    // size of each subtree
+    std::vector<int> available_edge;                  // If 0, ignore the corresponding edge.
 
     CentroidDecomposition(int v = 0) : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v) {}
     CentroidDecomposition(const std::vector<std::vector<int>> &to_) : CentroidDecomposition(to_.size()) {
         for (int i = 0; i < V; i++) {
             for (auto j : to_[i]) {
-                if (i < j) {
-                    add_edge(i, j);
-                }
+                if (i < j) { add_edge(i, j); }
             }
         }
     }
@@ -72,8 +69,10 @@ struct CentroidDecomposition
         while (par[r] != NO_PARENT) r = par[r];
         int n = subtree_size[r];
         _dfs_detect_centroids(r, -1, n);
-        if (centroid_cand_tmp.size() == 1) return std::make_pair(centroid_cand_tmp[0], -1);
-        else return std::make_pair(centroid_cand_tmp[0], centroid_cand_tmp[1]);
+        if (centroid_cand_tmp.size() == 1)
+            return std::make_pair(centroid_cand_tmp[0], -1);
+        else
+            return std::make_pair(centroid_cand_tmp[0], centroid_cand_tmp[1]);
     }
 
     std::vector<int> _cd_vertices;

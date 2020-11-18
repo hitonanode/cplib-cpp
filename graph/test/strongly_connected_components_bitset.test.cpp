@@ -4,14 +4,12 @@
 #include <cassert>
 #include <stdio.h>
 constexpr int VMAX = 10000;
-int main()
-{
+int main() {
     int V, E;
     scanf("%d %d", &V, &E);
     assert(V <= VMAX);
     std::vector<std::bitset<VMAX>> e(V), einv(V);
-    while (E--)
-    {
+    while (E--) {
         int s, t;
         scanf("%d %d", &s, &t);
         e[s][t] = einv[t][s] = 1;
@@ -20,8 +18,7 @@ int main()
 
     int Q;
     scanf("%d", &Q);
-    while (Q--)
-    {
+    while (Q--) {
         int u, v;
         scanf("%d %d", &u, &v);
         printf("%d\n", graph.cmp[u] == graph.cmp[v]);

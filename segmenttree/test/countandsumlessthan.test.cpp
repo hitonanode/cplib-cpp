@@ -3,13 +3,12 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     int N, Q;
     cin >> N >> Q;
-    vector<long long int> A(N);
+    vector<long long> A(N);
     for (auto &a : A) cin >> a;
-    CountAndSumLessThan<long long int> segtree(A);
+    CountAndSumLessThan<long long> segtree(A);
     while (Q--) {
         int q, l, r, x;
         cin >> q >> l >> r >> x;

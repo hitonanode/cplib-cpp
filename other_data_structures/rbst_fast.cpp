@@ -3,9 +3,8 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#define FOR(i, begin, end) for(int i=(begin);i<(end);i++)
-#define REP(i, n) FOR(i,0,n)
-
+#define FOR(i, begin, end) for (int i = (begin); i < (end); i++)
+#define REP(i, n) FOR(i, 0, n)
 
 using lint = long long;
 struct node {
@@ -16,9 +15,7 @@ struct node {
 
 using VAL = node;
 using DVAL = lint;
-template <uint32_t len>
-struct RandomizedBinarySearchTree
-{
+template <uint32_t len> struct RandomizedBinarySearchTree {
     // Do your RuBeSTy! ⌒°( ・ω・)°⌒
     /*
     struct rand_int_ // non-deterministic
@@ -37,26 +34,26 @@ struct RandomizedBinarySearchTree
     {
         static uint32_t x = 123456789, y = 362436069, z = 521288629, w = 88675123;
         uint32_t t = x ^ (x << 11);
-        x = y; y = z; z = w; return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
+        x = y;
+        y = z;
+        z = w;
+        return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
     }
     // */
 
     // 各ノードに持たせるデータ型と代数構造
     DVAL Idval;
-    struct Node
-    {
+    struct Node {
         Node *l, *r;
         uint32_t sz; // 自身を頂点とする部分木のサイズ
-        VAL val; // 自身がrootの部分木を記述, dval==Idvalのときのみ単独で意味を持つ
-        DVAL dval; // 自身とその部分木に対する遅延評価
-        Node(const VAL &v, const DVAL &dv)
-        : l(nullptr), r(nullptr), sz(1), val(v), dval(dv) {}
+        VAL val;     // 自身がrootの部分木を記述, dval==Idvalのときのみ単独で意味を持つ
+        DVAL dval;   // 自身とその部分木に対する遅延評価
+        Node(const VAL &v, const DVAL &dv) : l(nullptr), r(nullptr), sz(1), val(v), dval(dv) {}
         Node() {}
     };
     inline Node *_revise_val(Node *t) // （tの子に関する外的操作後に呼んで）szとvalを適切に直す tの子の遅延評価が済んでいるとは限らない
     {
-        if (t)
-        {
+        if (t) {
             t->sz = size(t->l) + size(t->r) + 1;
             t->val.sum = t->val.val + (t->l ? t->l->val.sum + t->l->sz * t->l->dval : 0) + (t->r ? t->r->val.sum + t->r->sz * t->r->dval : 0);
         };
@@ -74,16 +71,17 @@ struct RandomizedBinarySearchTree
     vector<Node> data;
     uint32_t d_ptr;
 
-    RandomizedBinarySearchTree(DVAL idval)
-    : Idval(idval), d_ptr(0) { data.resize(len); }
+    RandomizedBinarySearchTree(DVAL idval) : Idval(idval), d_ptr(0) { data.resize(len); }
 
     Node *new_tree() { return nullptr; } // 新たな木を作成
     static inline uint32_t size(const Node *t) { return t ? t->sz : 0; }
     inline int mem_used() { return (int)d_ptr; }
     inline bool empty(Node *t) { return !t; }
-    inline Node *_make_node(const VAL &val) { if (d_ptr >= len) exit(1); return &(data[d_ptr++] = Node(val, Idval)); }
+    inline Node *_make_node(const VAL &val) {
+        if (d_ptr >= len) exit(1);
+        return &(data[d_ptr++] = Node(val, Idval));
+    }
     virtual void _duplicate_node(Node *&) {}
-
 
     inline void _resolve_dval(Node *&t) // 対象の遅延評価を解決
     {
@@ -104,17 +102,13 @@ struct RandomizedBinarySearchTree
     }
 
     // lとrをrootとする木同士を結合して，新たなrootを返す
-    Node *merge(Node *l, Node *r)
-    {
+    Node *merge(Node *l, Node *r) {
         if (l == nullptr || r == nullptr) return l ? l : r;
-        if (_rand() % (l->sz + r->sz) < l->sz)
-        {
+        if (_rand() % (l->sz + r->sz) < l->sz) {
             _resolve_dval(l);
             l->r = merge(l->r, r);
             return _revise_val(l);
-        }
-        else
-        {
+        } else {
             _resolve_dval(r);
             r->l = merge(l, r->l);
             return _revise_val(r);
@@ -123,7 +117,7 @@ struct RandomizedBinarySearchTree
 
     // [0, k)の木と[k, root->size())の木に分けて各root
     // （部分木の要素数が0ならnullptr）を返す
-    pair<Node*, Node*> split(Node *&root, int k) // rootの子孫からあとk個欲しい
+    pair<Node *, Node *> split(Node *&root, int k) // rootの子孫からあとk個欲しい
     {
         if (root == nullptr) return make_pair(nullptr, nullptr);
         _resolve_dval(root);
@@ -132,9 +126,7 @@ struct RandomizedBinarySearchTree
             auto p = split(root->l, k);
             root->l = p.second;
             return make_pair(p.first, _revise_val(root));
-        }
-        else
-        {
+        } else {
             auto p = split(root->r, k - size(root->l) - 1);
             root->r = p.first;
             return make_pair(_revise_val(root), p.second);
@@ -142,31 +134,27 @@ struct RandomizedBinarySearchTree
     }
 
     // 0-indexedでarray[pos]の手前に新たな要素newvalを挿入する
-    void insert(Node *&root, int pos, const VAL &newval)
-    {
+    void insert(Node *&root, int pos, const VAL &newval) {
         auto p = split(root, pos);
         root = merge(p.first, merge(_make_node(newval), p.second));
     }
 
     // 0-indexedでarray[pos]を削除する（先頭からpos+1個目の要素）
-    void erase(Node *&root, int pos)
-    {
+    void erase(Node *&root, int pos) {
         auto p = split(root, pos);
         auto p2 = split(p.second, 1);
         root = merge(p.first, p2.second);
     }
 
     // 1点更新 array[pos].valにupdvalを入れる
-    void set(Node *&root, int pos, const VAL &updval)
-    {
+    void set(Node *&root, int pos, const VAL &updval) {
         auto p = split(root, pos);
         auto p2 = split(p.second, 1);
         root = merge(p.first, merge(_make_node(updval), p2.second));
     }
 
     // 遅延評価を利用した範囲更新 [l, r)
-    void range_set(Node *&root, int l, int r, const DVAL &adddval)
-    {
+    void range_set(Node *&root, int l, int r, const DVAL &adddval) {
         auto p = split(root, l);
         auto p2 = split(p.second, r - l);
         _propagate_dval(p2.first->dval, adddval);
@@ -174,8 +162,7 @@ struct RandomizedBinarySearchTree
     }
 
     // array[pos].valを取得する
-    Node range_get(Node *&root, int l, int r)
-    {
+    Node range_get(Node *&root, int l, int r) {
         auto p = split(root, l);
         auto p2 = split(p.second, r - l);
         _resolve_dval(p2.first);
@@ -183,27 +170,21 @@ struct RandomizedBinarySearchTree
         root = merge(p.first, merge(p2.first, p2.second));
         return res;
     }
-    Node get(Node *&root, int pos)
-    {
-        return range_get(root, pos, pos + 1);
-    }
+    Node get(Node *&root, int pos) { return range_get(root, pos, pos + 1); }
 
     // 普通のlower_bound
-    int lower_bound(Node *root, const VAL &v)
-    {
+    int lower_bound(Node *root, const VAL &v) {
         if (root == nullptr) return 0;
         return (v <= root->val) ? lower_bound(root->l, v) : lower_bound(root->r, v) + size(root->l) + 1;
     }
 
     // データを壊して新規にinitの内容を詰める
-    void assign(Node *&root, const vector<VAL> &init)
-    {
+    void assign(Node *&root, const vector<VAL> &init) {
         d_ptr = 0;
         int N = init.size();
         root = N ? _assign_range(0, N, init) : new_tree();
     }
-    Node *_assign_range(int l, int r, const vector<VAL> &init)
-    {
+    Node *_assign_range(int l, int r, const vector<VAL> &init) {
         if (r - l == 1) {
             auto t = _make_node(init[l]);
             return _revise_val(t);
@@ -212,8 +193,7 @@ struct RandomizedBinarySearchTree
     }
 
     // データをvecへ書き出し
-    void dump(Node *t, vector<VAL> &vec)
-    {
+    void dump(Node *t, vector<VAL> &vec) {
         if (t == nullptr) return;
         _resolve_dval(t);
         dump(t->l, vec);
@@ -222,25 +202,20 @@ struct RandomizedBinarySearchTree
     }
 
     // gc
-    void re_alloc(Node *&root)
-    {
+    void re_alloc(Node *&root) {
         vector<VAL> mem;
         dump(root, mem);
         assign(root, mem);
     }
 };
 
-
 // 永続化
-template<uint32_t len>
-struct PersistentRBST : RandomizedBinarySearchTree<len>
-{
+template <uint32_t len> struct PersistentRBST : RandomizedBinarySearchTree<len> {
     using RBST = RandomizedBinarySearchTree<len>;
     using Node = typename RBST::Node;
     PersistentRBST(DVAL idval) : RBST(idval) {}
 
-    void _duplicate_node(Node *&t) override
-    {
+    void _duplicate_node(Node *&t) override {
         if (t == nullptr) return;
         if (RBST::d_ptr >= len) exit(1);
         t = &(RBST::data[RBST::d_ptr++] = *t);
@@ -257,9 +232,7 @@ struct PersistentRBST : RandomizedBinarySearchTree<len>
     }
 };
 
-
-int main()
-{
+int main() {
     constexpr int mem_size = 13000000;
     PersistentRBST<mem_size> rbst(0LL);
 
@@ -267,12 +240,12 @@ int main()
     int N, Q;
     cin >> N >> Q;
     REP(i, N) {
-        int xi; cin >> xi;
+        int xi;
+        cin >> xi;
         rbst.insert(S, i, node(xi));
     }
 
-    REP(_, Q)
-    {
+    REP(_, Q) {
         int type, a, b, c, d, v;
         cin >> type;
         if (type == 1) {

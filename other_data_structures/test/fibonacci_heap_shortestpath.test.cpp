@@ -6,10 +6,8 @@
 #include <utility>
 #include <vector>
 
-int main()
-{
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
+int main() {
+    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);
 
     int N, M, s, t;
     std::cin >> N >> M >> s >> t;
@@ -21,49 +19,37 @@ int main()
     std::vector<int> prev(N, -1);
     D[s] = 0;
     std::vector<fibonacci_heap<P>::Node *> handler(N);
-    for (int i = 0; i < N; i++)
-    {
-        handler[i] = heap.push(std::make_pair(D[i], i));
-    }
+    for (int i = 0; i < N; i++) { handler[i] = heap.push(std::make_pair(D[i], i)); }
 
     std::vector<std::vector<std::pair<int, int>>> to(N);
-    while (M--)
-    {
+    while (M--) {
         int a, b, c;
         std::cin >> a >> b >> c;
         to[a].emplace_back(b, c);
     }
 
-    while (heap.size())
-    {
+    while (heap.size()) {
         int now = heap.top().second;
         if (now == t) break;
         heap.pop();
-        for (const auto [nxt, len] : to[now])
-        {
-            if (D[nxt] > D[now] + len)
-            {
+        for (const auto [nxt, len] : to[now]) {
+            if (D[nxt] > D[now] + len) {
                 D[nxt] = D[now] + len, prev[nxt] = now;
                 heap.decrease(handler[nxt], std::make_pair(D[nxt], nxt));
             }
         }
     }
 
-    if (D[t] == INF)
-    {
+    if (D[t] == INF) {
         std::cout << -1 << '\n';
         return 0;
     }
 
     std::stack<int> path;
     int now = t;
-    while (now != s)
-    {
-        path.push(now), now = prev[now], path.push(now);
-    }
+    while (now != s) { path.push(now), now = prev[now], path.push(now); }
     std::cout << D[t] << ' ' << path.size() / 2 << '\n';
-    while (path.size())
-    {
+    while (path.size()) {
         std::cout << path.top() << ' ';
         path.pop();
         std::cout << path.top() << '\n';

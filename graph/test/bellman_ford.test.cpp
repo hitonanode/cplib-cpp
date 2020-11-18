@@ -1,13 +1,12 @@
+#include "graph/bellman_ford.hpp"
+#include "graph/shortest_path.hpp"
 #include <iostream>
 #include <vector>
-#include "graph/shortest_path.hpp"
-#include "graph/bellman_ford.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B"
 
 wedges e;
 
-int main()
-{
+int main() {
     int V, E, r;
     cin >> V >> E >> r;
     ShortestPath<long long int> graph(V);
@@ -29,8 +28,7 @@ int main()
         if (graph.dist[i] >= INF) {
             assert(ret[i] == INF);
             puts("INF");
-        }
-        else {
+        } else {
             assert(ret[i] == graph.dist[i]);
             printf("%lld\n", graph.dist[i]);
         }

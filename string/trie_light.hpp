@@ -2,8 +2,7 @@
 #include <vector>
 
 // CUT begin
-struct Trie
-{
+struct Trie {
     char a_init;
     int D;
     int INVALID = -1;

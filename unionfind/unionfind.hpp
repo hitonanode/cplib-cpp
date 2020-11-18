@@ -5,17 +5,14 @@
 
 // CUT begin
 // UnionFind Tree (0-indexed), based on size of each disjoint set
-struct UnionFind
-{
+struct UnionFind {
     std::vector<int> par, cou;
-    UnionFind(int N = 0) : par(N), cou(N, 1) {
-        iota(par.begin(), par.end(), 0);
-    }
+    UnionFind(int N = 0) : par(N), cou(N, 1) { iota(par.begin(), par.end(), 0); }
     int find(int x) { return (par[x] == x) ? x : (par[x] = find(par[x])); }
     bool unite(int x, int y) {
         x = find(x), y = find(y);
         if (x == y) return false;
-        if (cou[x] < cou[y]) std::swap(x, y); 
+        if (cou[x] < cou[y]) std::swap(x, y);
         par[y] = x, cou[x] += cou[y];
         return true;
     }

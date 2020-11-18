@@ -2,8 +2,7 @@
 #define PROBLEM "https://yukicoder.me/problems/1967"
 #include <iostream>
 
-int main()
-{
+int main() {
     int Q;
     std::cin >> Q;
     while (Q--) {

@@ -8,17 +8,17 @@
 // CUT begin
 using lint = long long;
 // Solve ax+by=gcd(a, b)
-lint extgcd(lint a, lint b, lint &x, lint &y)
-{
+lint extgcd(lint a, lint b, lint &x, lint &y) {
     lint d = a;
-    if (b != 0) d = extgcd(b, a % b, y, x), y -= (a / b) * x;
-    else x = 1, y = 0;
+    if (b != 0)
+        d = extgcd(b, a % b, y, x), y -= (a / b) * x;
+    else
+        x = 1, y = 0;
     return d;
 }
 // Calculate a^(-1) (MOD m) s if gcd(a, m) == 1
 // Calculate x s.t. ax == gcd(a, m) MOD m
-lint mod_inverse(lint a, lint m)
-{
+lint mod_inverse(lint a, lint m) {
     lint x, y;
     extgcd(a, m, x, y);
     x %= m;
@@ -27,8 +27,7 @@ lint mod_inverse(lint a, lint m)
 
 // Require: 1 <= b
 // return: (g, x) s.t. g = gcd(a, b), xa = g MOD b, 0 <= x < b/g
-template <typename Int>
-constexpr std::pair<Int, Int> inv_gcd(Int a, Int b) {
+template <typename Int> constexpr std::pair<Int, Int> inv_gcd(Int a, Int b) {
     a %= b;
     if (a < 0) a += b;
     if (a == 0) return {b, 0};
@@ -43,10 +42,7 @@ constexpr std::pair<Int, Int> inv_gcd(Int a, Int b) {
     return {s, m0};
 }
 
-template <typename Int>
-constexpr std::pair<Int, Int> crt(const std::vector<Int> &r,
-                                  const std::vector<Int> &m)
-{
+template <typename Int> constexpr std::pair<Int, Int> crt(const std::vector<Int> &r, const std::vector<Int> &m) {
     assert(r.size() == m.size());
     int n = int(r.size());
     // Contracts: 0 <= r0 < m0
@@ -82,10 +78,7 @@ constexpr std::pair<Int, Int> crt(const std::vector<Int> &r,
 // 連立線形合同式 A * x = B mod M の解
 // Requirement: M[i] > 0
 // Output: x = first MOD second (if solution exists), (0, 0) (otherwise)
-std::pair<lint, lint> linear_congruence(const std::vector<lint> &A,
-                                        const std::vector<lint> &B,
-                                        const std::vector<lint> &M)
-{
+std::pair<lint, lint> linear_congruence(const std::vector<lint> &A, const std::vector<lint> &B, const std::vector<lint> &M) {
     lint r = 0, m = 1;
     assert(A.size() == M.size());
     assert(B.size() == M.size());
@@ -103,15 +96,14 @@ std::pair<lint, lint> linear_congruence(const std::vector<lint> &A,
     return std::make_pair((r < 0 ? r + m : r), m);
 }
 
-lint power(lint x, lint n, lint MOD)
-{
+lint power(lint x, lint n, lint MOD) {
     lint ans = 1;
     while (n > 0) {
         if (n & 1) (ans *= x) %= MOD;
         (x *= x) %= MOD;
-       n >>= 1;
+        n >>= 1;
     }
-   return ans;
+    return ans;
 }
 
 // Find smallest primitive root for given prime P （最小の原始根探索）
@@ -124,8 +116,7 @@ lint power(lint x, lint n, lint MOD)
 //  - 2 -> 1
 //  - 1 -> -1
 
-lint find_smallest_primitive_root(lint p)
-{
+lint find_smallest_primitive_root(lint p) {
     std::vector<lint> fac;
     lint v = p - 1;
     for (lint pp = 2; pp * pp <= v; pp++) // prime factorization of (p - 1)
@@ -136,14 +127,11 @@ lint find_smallest_primitive_root(lint p)
     }
     if (v > 1) fac.push_back(v);
 
-    for (lint g = 1; g < p; g++)
-    {
+    for (lint g = 1; g < p; g++) {
         if (power(g, p - 1, p) != 1) return -1;
         bool ok = true;
-        for (auto pp : fac)
-        {
-            if (power(g, (p - 1) / pp, p) == 1)
-            {
+        for (auto pp : fac) {
+            if (power(g, (p - 1) / pp, p) == 1) {
                 ok = false;
                 break;
             }

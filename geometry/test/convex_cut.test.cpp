@@ -6,16 +6,13 @@
 #include <vector>
 using namespace std;
 
-int main()
-{
+int main() {
     int N;
     cin >> N;
 
     using Pt = P<double>;
     vector<Pt> G(N);
-    for (auto &x : G) {
-        cin >> x;
-    }
+    for (auto &x : G) { cin >> x; }
 
     cout << fixed << setprecision(8);
     int Q;

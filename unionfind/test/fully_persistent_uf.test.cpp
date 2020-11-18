@@ -3,8 +3,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_unionfind"
 using namespace std;
 
-int main()
-{
+int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
 
     int N, Q;

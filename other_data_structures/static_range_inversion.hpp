@@ -1,7 +1,7 @@
 #pragma once
+#include <algorithm>
 #include <cassert>
 #include <cmath>
-#include <algorithm>
 #include <utility>
 #include <vector>
 
@@ -9,8 +9,7 @@
 // Static Range Inversion Query (Online)
 // Complexity: O((N + Q)sqrt(N)) time, O(Nsqrt(N)) space (~128MB for N=1e5)
 // Reference: <https://stackoverflow.com/questions/21763392/counting-inversions-in-ranges>
-template <typename T>
-struct StaticRangeInversion {
+template <typename T> struct StaticRangeInversion {
     const int N;
     const int bs;    // bucket size
     const int nb_bc; // # of buckets
@@ -37,21 +36,13 @@ struct StaticRangeInversion {
             const int L = ibc * bs, R = std::min(L + bs, N);
             std::sort(vals_sorted.begin() + L, vals_sorted.begin() + R);
             std::vector<int> cnt(D + 1);
-            for (int i = L; i < R; i++) {
-                cnt[vals[i] + 1]++;
-            }
-            for (int i = 0; i < D; i++) {
-                cnt[i + 1] += cnt[i];
-            }
+            for (int i = L; i < R; i++) { cnt[vals[i] + 1]++; }
+            for (int i = 0; i < D; i++) { cnt[i + 1] += cnt[i]; }
             for (int b = 0; b < ibc; b++) {
-                for (int i = (b + 1) * bs - 1; i >= b * bs; i--) {
-                    presuf[ibc][i] = presuf[ibc][i + 1] + cnt[vals[i]];
-                }
+                for (int i = (b + 1) * bs - 1; i >= b * bs; i--) { presuf[ibc][i] = presuf[ibc][i + 1] + cnt[vals[i]]; }
             }
             for (int b = ibc + 1; b < bs; b++) {
-                for (int i = b * bs; i < std::min((b + 1) * bs, N); i++) {
-                    presuf[ibc][i] = (i == b * bs ? 0 : presuf[ibc][i - 1]) + cnt.back() - cnt[vals[i] + 1];
-                }
+                for (int i = b * bs; i < std::min((b + 1) * bs, N); i++) { presuf[ibc][i] = (i == b * bs ? 0 : presuf[ibc][i - 1]) + cnt.back() - cnt[vals[i] + 1]; }
             }
             for (int i = L + 1; i < R; i++) {
                 preH[i] = preH[i - 1] + std::count_if(vals.begin() + L, vals.begin() + i, [&](int x) { return x > vals[i]; });
@@ -64,9 +55,7 @@ struct StaticRangeInversion {
         R.resize(nb_bc, std::vector<long long>(nb_bc));
         for (int i = nb_bc - 1; i >= 0; i--) {
             R[i][i] = sufG[i * bs];
-            for (int j = i + 1; j < nb_bc; j++) {
-                R[i][j] = R[i][j - 1] + R[i + 1][j] - R[i + 1][j - 1] + presuf[j][i * bs];
-            }
+            for (int j = i + 1; j < nb_bc; j++) { R[i][j] = R[i][j - 1] + R[i + 1][j] - R[i + 1][j - 1] + presuf[j][i * bs]; }
         }
     }
     long long get(int l, int r) const {
@@ -86,22 +75,16 @@ struct StaticRangeInversion {
         ret += R[lb][rb];
         if (bs * lb > l) {
             ret += sufG[l];
-            for (int b = lb; b <= rb; b++) {
-                ret += presuf[b][l];
-            }
+            for (int b = lb; b <= rb; b++) { ret += presuf[b][l]; }
         }
         if (bs * (rb + 1) < r) {
             ret += preH[r - 1];
-            for (int b = lb; b <= rb; b++) {
-                ret += presuf[b][r - 1];
-            }
+            for (int b = lb; b <= rb; b++) { ret += presuf[b][r - 1]; }
         }
         int less_cnt = 0, j = (rb + 1) * bs;
         for (int p = std::max(0, (lb - 1) * bs), q = lb * bs; p < q; p++) {
             if (vals_sorted[p].second >= l) {
-                while (j < std::min(N, (rb + 2) * bs) and (vals_sorted[j].second >= r or vals_sorted[j].first < vals_sorted[p].first)) {
-                    less_cnt += (vals_sorted[j].second < r), j++;
-                }
+                while (j < std::min(N, (rb + 2) * bs) and (vals_sorted[j].second >= r or vals_sorted[j].first < vals_sorted[p].first)) { less_cnt += (vals_sorted[j].second < r), j++; }
                 ret += less_cnt;
             }
         }

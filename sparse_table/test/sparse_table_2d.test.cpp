@@ -5,15 +5,15 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     auto f = [](int l, int r) { return min(l, r); };
     while (true) {
         int H, W, Q;
         cin >> H >> W >> Q;
         if (!H) break;
         vector<vector<int>> mat(H, vector<int>(W));
-        for (auto &vec : mat) for (auto &x : vec) cin >> x;
+        for (auto &vec : mat)
+            for (auto &x : vec) cin >> x;
         SparseTable2D<int, decltype(f)> rmq(mat, (1LL << 31) - 1, f);
         while (Q--) {
             int xl, yl, xr, yr;

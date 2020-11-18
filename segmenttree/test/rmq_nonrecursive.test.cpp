@@ -3,8 +3,7 @@
 using namespace std;
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"
 
-int main()
-{
+int main() {
     int N, Q;
     cin >> N >> Q;
     vector<int> A(N, (1LL << 31) - 1);
@@ -12,7 +11,9 @@ int main()
     while (Q--) {
         int c, x, y;
         cin >> c >> x >> y;
-        if (c == 0) rmq.update(x, y);
-        else cout << rmq.get(x, y + 1) << endl;
+        if (c == 0)
+            rmq.update(x, y);
+        else
+            cout << rmq.get(x, y + 1) << endl;
     }
 }

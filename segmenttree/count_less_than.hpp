@@ -8,8 +8,7 @@ using namespace std;
 // Count elements in [A_begin, ..., A_{end-1}] which satisfy A_i < query
 // Complexity: O(N log^2 N) for initialization, O(log^2 N) for each query
 // Verified: cntLess <https://codeforces.com/contest/1288/submission/68865506>
-struct CountLessThan
-{
+struct CountLessThan {
     using T = int;
     int N;
     int head;
@@ -31,8 +30,9 @@ struct CountLessThan
     }
     CountLessThan() = default;
     CountLessThan(const vector<T> &vec) : N(vec.size()) {
-        int N_tmp = 1; while (N_tmp < N) N_tmp <<= 1;
-        x.resize(N_tmp*2), head = N_tmp - 1;
+        int N_tmp = 1;
+        while (N_tmp < N) N_tmp <<= 1;
+        x.resize(N_tmp * 2), head = N_tmp - 1;
         for (int i = 0; i < N; i++) x[head + i] = {vec[i]};
         for (int i = head - 1; i >= 0; i--) merge(i);
     }
@@ -50,7 +50,6 @@ struct CountLessThan
     friend ostream &operator<<(ostream &os, const CountLessThan &clt) {
         os << '[';
         for (int i = 0; i < clt.N; i++) os << clt.x[clt.head + i][0] << ',';
-        os << ']';
-        return os;
+        return os << ']';
     }
 };

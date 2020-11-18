@@ -3,14 +3,9 @@
 #include <iostream>
 #include <utility>
 
-template <typename T_P>
-struct P
-{
+template <typename T_P> struct P {
     static T_P EPS;
-    static void set_eps(T_P e)
-    {
-        EPS = e;
-    }
+    static void set_eps(T_P e) { EPS = e; }
     T_P x, y;
     P() : x(0), y(0) {}
     P(T_P x, T_P y) : x(x), y(y) {}
@@ -18,7 +13,7 @@ struct P
     static T_P add_w_error(T_P a, T_P b) noexcept { return (std::abs(a + b) < P::EPS * (std::abs(a) + std::abs(b))) ? 0 : a + b; }
     P operator+(const P &p) const noexcept { return P(add_w_error(x, p.x), add_w_error(y, p.y)); }
     P operator-(const P &p) const noexcept { return P(add_w_error(x, -p.x), add_w_error(y, -p.y)); }
-    P operator*(const P &p) const noexcept { return P(add_w_error(x * p.x,  -y * p.y), add_w_error(x * p.y, y * p.x)); }
+    P operator*(const P &p) const noexcept { return P(add_w_error(x * p.x, -y * p.y), add_w_error(x * p.y, y * p.x)); }
     P operator*(T_P d) const noexcept { return P(x * d, y * d); }
     P operator/(T_P d) const noexcept { return P(x / d, y / d); }
     P inv() const { return conj() / norm2(); }
@@ -35,10 +30,16 @@ struct P
     P rotate(T_P rad) noexcept { return P(add_w_error(x * std::cos(rad), -y * std::sin(rad)), add_w_error(x * std::sin(rad), y * std::cos(rad))); }
     P normalized() const { return (*this) / this->norm(); }
     P conj() const noexcept { return P(x, -y); }
-    friend std::istream &operator>>(std::istream &is, P &p) { T_P x, y; is >> x >> y; p = P(x, y); return is; }
-    friend std::ostream &operator<<(std::ostream &os, const P &p) { os << '(' << p.x << ',' << p.y << ')'; return os; }
+    friend std::istream &operator>>(std::istream &is, P &p) {
+        T_P x, y;
+        is >> x >> y;
+        p = P(x, y);
+        return is;
+    }
+    friend std::ostream &operator<<(std::ostream &os, const P &p) {
+        os << '(' << p.x << ',' << p.y << ')';
+        return os;
+    }
 };
-template <>
-double P<double>::EPS = 1e-9;
-template <>
-long double P<long double>::EPS = 1e-12;
+template <> double P<double>::EPS = 1e-9;
+template <> long double P<long double>::EPS = 1e-12;

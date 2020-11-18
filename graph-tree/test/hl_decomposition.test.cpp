@@ -1,9 +1,8 @@
-#include <iostream>
 #include "graph-tree/heavy_light_decomposition.hpp"
+#include <iostream>
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
-int main()
-{
+int main() {
     int N, Q, p, u, v;
     std::cin >> N >> Q;
     HeavyLightDecomposition hld(N);

@@ -9,8 +9,7 @@
 #include <vector>
 using namespace std;
 
-int main()
-{
+int main() {
     int H, W, T, Q;
     cin >> H >> W >> T >> Q;
 

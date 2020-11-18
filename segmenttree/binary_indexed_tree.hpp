@@ -4,9 +4,7 @@
 
 // CUT begin
 // 1-indexed BIT (i : [1, len])
-template <typename T>
-struct BIT : std::vector<T>
-{
+template <typename T> struct BIT : std::vector<T> {
     BIT(int len = 0) : std::vector<T>(len + 1) {}
     void reset() { fill(this->begin(), this->end(), 0); }
     void add(int pos, T v) {
@@ -25,7 +23,6 @@ struct BIT : std::vector<T>
             os << now - prv << ",";
             prv = now;
         }
-        os << ']';
-        return os;
+        return os << ']';
     }
 };

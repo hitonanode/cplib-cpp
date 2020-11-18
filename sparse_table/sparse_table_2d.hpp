@@ -6,8 +6,7 @@
 // CUT begin
 // Static matrix sparse table
 // Complexity; O(HWlogHlogW) for precalculation, O(1) per query
-template<typename T, typename F>
-struct SparseTable2D {
+template <typename T, typename F> struct SparseTable2D {
     int H, lgH, W;
     T defaultT;
     F func;

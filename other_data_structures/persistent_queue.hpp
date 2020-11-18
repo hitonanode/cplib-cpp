@@ -5,9 +5,7 @@
 
 // CUT begin
 // Fully persistent queue
-template<typename T, int D>
-struct pqueue
-{
+template <typename T, int D> struct pqueue {
     int now;
 
     std::vector<T> data;               // Elements on each node of tree
@@ -20,20 +18,19 @@ struct pqueue
 
     // Complexity: O(lgD)
     // return: (curret_time, popped element)
-    std::pair<int, T> pop(int t)
-    {
+    std::pair<int, T> pop(int t) {
         now++;
         assert(now < 1 << (D + 1));
         int r = back_id[t], len = size[t] - 1;
         back_id.emplace_back(r), size.emplace_back(len);
-        for (int d = 0; d < D; d++) if ((len >> d) & 1) r = par[r][d];
+        for (int d = 0; d < D; d++)
+            if ((len >> d) & 1) r = par[r][d];
         return std::make_pair(now, data[r]);
     }
 
     // Complexity: O(lgD)
     // return: curret_time
-    int push(int t, const T &dat)
-    {
+    int push(int t, const T &dat) {
         now++;
         assert(now < 1 << (D + 1));
         int newid = data.size();

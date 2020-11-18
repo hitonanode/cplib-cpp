@@ -7,16 +7,14 @@
 // 構文解析木の構築
 // Verification: codeFlyer E
 // Example: <https://atcoder.jp/contests/bitflyer2018-final-open/submissions/3529930>
-struct Parser
-{
+struct Parser {
     // 構文木情報
     int root_id;
     std::vector<std::pair<int, int>> child;
     std::string S;
 
     // 木のノードの情報（問題毎に書き換える）
-    struct Node
-    {
+    struct Node {
         long long val, val2;
         char type;
         int a_id;
@@ -26,8 +24,7 @@ struct Parser
     std::vector<Node> node;
 
     int len;
-    void allocate(int newlen)
-    {
+    void allocate(int newlen) {
         len = newlen;
         child.assign(len, std::make_pair(-1, -1));
         node.assign(len, {});
@@ -40,17 +37,14 @@ struct Parser
 
     int a_now;
     int iter;
-    int interpret()
-    {
+    int interpret() {
         iter = a_now = 0;
         return root_id = expr(iter);
     }
 
-    int expr(int &begin)
-    {
+    int expr(int &begin) {
         int left = term(begin);
-        while (S[begin] == '+' || S[begin] == '-')
-        {
+        while (S[begin] == '+' || S[begin] == '-') {
             char nxt_token = S[begin];
             int new_node = _new_node();
             begin++;
@@ -62,11 +56,9 @@ struct Parser
         return left;
     }
 
-    int term(int &begin)
-    {
+    int term(int &begin) {
         int left = value(begin);
-        while (S[begin] == '*')
-        {
+        while (S[begin] == '*') {
             int new_node = _new_node();
             begin++;
             int right = value(begin);
@@ -77,17 +69,13 @@ struct Parser
         return left;
     }
 
-    int value(int &begin)
-    {
-        if (S[begin] == '(')
-        {
+    int value(int &begin) {
+        if (S[begin] == '(') {
             begin++;
             int ret = expr(begin);
             begin++;
             return ret;
-        }
-        else
-        {
+        } else {
             int ret = _new_node();
             node[ret].type = 'a';
             node[ret].a_id = a_now++;
@@ -96,8 +84,7 @@ struct Parser
         }
     }
 
-    void dfs(int now)
-    {
+    void dfs(int now) {
         int l = child[now].first, r = child[now].second;
         /* operations for node[now], node[l], node[r] here */
         if (l >= 0) dfs(child[now].first);

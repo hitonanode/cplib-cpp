@@ -1,13 +1,12 @@
+#include "string/manacher.hpp"
+#include "string/mp_algorithm.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
-#include "string/manacher.hpp"
-#include "string/mp_algorithm.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2934"
 using namespace std;
 
-int main()
-{
+int main() {
     int N;
     string T;
     cin >> N >> T;
@@ -16,10 +15,8 @@ int main()
     vector<int> mana = manacher(T);
 
     int rep = N - mp[N];
-    for (int i = 2; i <= N; i++)
-    {
-        if (i + mana[i - 1] - 1 == N)
-        {
+    for (int i = 2; i <= N; i++) {
+        if (i + mana[i - 1] - 1 == N) {
             cout << i << endl;
             return 0;
         }

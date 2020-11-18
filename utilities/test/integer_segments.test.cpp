@@ -5,8 +5,7 @@
 #include <set>
 using namespace std;
 
-int main()
-{
+int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     long long D;
     int Q;

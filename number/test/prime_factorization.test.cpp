@@ -3,8 +3,7 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A"
 using namespace std;
 
-int main()
-{
+int main() {
     SieveOfEratosthenes sieve(40000);
     int N;
     cin >> N;

@@ -5,8 +5,7 @@
 
 // CUT begin
 // Partially persistent UnionFind
-struct PartiallyPersistentUnionFind
-{
+struct PartiallyPersistentUnionFind {
     std::vector<int> parsz, t_unite;
     std::vector<std::map<int, int>> size_history;
     PartiallyPersistentUnionFind(int N) : parsz(N, 1), t_unite(N, 2000000000), size_history(N) {

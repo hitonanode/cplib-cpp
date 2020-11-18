@@ -6,10 +6,8 @@
 #include <utility>
 #include <vector>
 
-int main()
-{
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
+int main() {
+    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);
 
     int V, E;
     std::cin >> V >> E;
@@ -25,19 +23,15 @@ int main()
 
     std::vector<std::pair<int, int>> bridges;
     for (int i = 0; i < E; i++) {
-        if (graph.is_bridge[i]) {
-            bridges.emplace_back(graph.edges[i]);
-        }
+        if (graph.is_bridge[i]) { bridges.emplace_back(graph.edges[i]); }
     }
     std::cout << graph.tecc_num << '\n';
     std::vector<std::vector<int>> vids(V);
-    for (int i = 0; i < V; i++)
-    {
-        vids[graph.tecc_id[i]].push_back(i);
-    }
-    for (const auto &v : vids) if (!v.empty()) {
-        std::cout << v.size();
-        for (auto x : v) std::cout << ' ' << x;
-        std::cout << '\n';
-    }
+    for (int i = 0; i < V; i++) { vids[graph.tecc_id[i]].push_back(i); }
+    for (const auto &v : vids)
+        if (!v.empty()) {
+            std::cout << v.size();
+            for (auto x : v) std::cout << ' ' << x;
+            std::cout << '\n';
+        }
 }

@@ -5,8 +5,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     int N, Q;
     cin >> N >> Q;
     vector<long long int> A(N);
@@ -32,8 +31,7 @@ int main()
             int u;
             cin >> u;
             printf("%lld\n", rsq.get(tour.subtree_begin[u], tour.subtree_end[u]));
-        }
-        else {
+        } else {
             int u, x;
             cin >> u >> x;
             A[u] += x;

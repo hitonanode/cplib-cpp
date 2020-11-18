@@ -10,8 +10,7 @@
 // Sample:
 // - `sakanakanandaka` -> [1, 1, 2, 1, 4, 1, 4, 1, 2, 2, 1, 1, 1, 2, 1]
 // Reference: <https://snuke.hatenablog.com/entry/2014/12/02/235837>
-std::vector<int> manacher(std::string S)
-{
+std::vector<int> manacher(std::string S) {
     std::vector<int> res(S.length());
     int i = 0, j = 0;
     while (i < (int)S.size()) {

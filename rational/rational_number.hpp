@@ -11,14 +11,17 @@ struct Rational {
         if (a < 0) a = -a;
         if (b < 0) b = -b;
         while (a and b) {
-            if (a > b) a %= b;
-            else b %= a;
+            if (a > b)
+                a %= b;
+            else
+                b %= a;
         }
         return a + b;
     }
     Rational(Int num = 0, Int den = 1) : num(num), den(den) { normalize(); }
     void normalize() { // reduction and making denominator nonnegative
-        Int g = my_gcd(num, den); num /= g, den /= g;
+        Int g = my_gcd(num, den);
+        num /= g, den /= g;
         if (den < 0) num = -num, den = -den;
     }
     Rational operator+(const Rational &r) const { return Rational(num * r.den + den * r.num, den * r.den); }
@@ -34,15 +37,19 @@ struct Rational {
     bool operator==(const Rational &r) const { return num == r.num and den == r.den; }
     bool operator!=(const Rational &r) const { return num != r.num or den != r.den; }
     bool operator<(const Rational &r) const {
-        if (den == 0 and r.den == 0) return num < r.num;
-        else if (den == 0) return num < 0;
-        else if (r.den == 0) return r.num > 0;
-        else return num * r.den < den * r.num;
+        if (den == 0 and r.den == 0)
+            return num < r.num;
+        else if (den == 0)
+            return num < 0;
+        else if (r.den == 0)
+            return r.num > 0;
+        else
+            return num * r.den < den * r.num;
     }
     bool operator<=(const Rational &r) const { return (*this == r) or (*this < r); }
     bool operator>(const Rational &r) const { return r < *this; }
     bool operator>=(const Rational &r) const { return (r == *this) or (r < *this); }
     explicit operator double() const { return (double)num / (double)den; }
     explicit operator long double() const { return (long double)num / (long double)den; }
-    friend std::ostream &operator<<(std::ostream &os, const Rational &x) { os << x.num << '/' << x.den; return os; }
+    friend std::ostream &operator<<(std::ostream &os, const Rational &x) { return os << x.num << '/' << x.den; }
 };

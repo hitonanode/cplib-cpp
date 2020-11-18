@@ -13,25 +13,18 @@
 // - `set(root, k, data)`: make new array whose k-th element is updated to data
 // - `ch(root, k, data)` : change k-th element and implicitly update root
 // Verify: Codeforces 707D <https://codeforces.com/contest/707/problem/D>
-template <typename T, int LOG>
-struct persistent_array {
+template <typename T, int LOG> struct persistent_array {
     T zero;
     struct node {
         T data;
-        std::array<node*, 1 << LOG> child;
-        node(const T &d) : data(d) {
-            std::fill(child.begin(), child.end(), nullptr);
-        }
-        node(const node &n) : data(n.data) {
-            std::copy(n.child.begin(), n.child.end(), child.begin());
-        }
+        std::array<node *, 1 << LOG> child;
+        node(const T &d) : data(d) { std::fill(child.begin(), child.end(), nullptr); }
+        node(const node &n) : data(n.data) { std::copy(n.child.begin(), n.child.end(), child.begin()); }
     };
     persistent_array(T zero) : zero(zero) {}
 
     T get(node *t, int k) const {
-        if (t == nullptr) {
-            return zero;
-        }
+        if (t == nullptr) { return zero; }
         return k ? get(t->child[k & ((1 << LOG) - 1)], k >> LOG) : t->data;
     }
 
@@ -46,15 +39,11 @@ struct persistent_array {
         return t;
     }
 
-    void ch(node *&t, int k, const T &data) {
-        t = set(t, k, data);
-    }
+    void ch(node *&t, int k, const T &data) { t = set(t, k, data); }
 
     [[nodiscard]] node *build(const std::vector<T> &vec) {
-        node* root = nullptr;
-        for (size_t i = 0; i < vec.size(); i++) {
-            root = set(root, i, vec[i]);
-        }
+        node *root = nullptr;
+        for (size_t i = 0; i < vec.size(); i++) { root = set(root, i, vec[i]); }
         return root;
     }
 };

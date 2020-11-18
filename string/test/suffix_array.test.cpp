@@ -3,8 +3,7 @@
 #include <iostream>
 #include <string>
 
-int main()
-{
+int main() {
     std::string S;
     std::cin >> S;
     SuffixArray<decltype(S)> sa(S, false);

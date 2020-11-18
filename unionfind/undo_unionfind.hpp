@@ -1,21 +1,18 @@
-#pragma once 
-#include <stack>
-#include <vector>
+#pragma once
 #include <numeric>
+#include <stack>
 #include <utility>
+#include <vector>
 
 // CUT begin
 // UnionFind, able to rewind to the previous state by undo()
 // Written for Educational Codeforces 62 F, although not verified yet.
-struct UndoUnionFind
-{
+struct UndoUnionFind {
     using pint = std::pair<int, int>;
     std::vector<int> par, cou;
     std::stack<std::pair<int, pint>> history;
-    UndoUnionFind(int N) : par(N), cou(N, 1) {
-        std::iota(par.begin(), par.end(), 0);
-    }
-    int find(int x) { return (par[x] == x) ? x :find(par[x]); }
+    UndoUnionFind(int N) : par(N), cou(N, 1) { std::iota(par.begin(), par.end(), 0); }
+    int find(int x) { return (par[x] == x) ? x : find(par[x]); }
     void unite(int x, int y) {
         x = find(x), y = find(y);
         if (cou[x] < cou[y]) std::swap(x, y);

@@ -1,9 +1,8 @@
-#include <iostream>
 #include "graph-tree/lowest_common_ancestor.hpp"
+#include <iostream>
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
-int main()
-{
+int main() {
     int N, Q, p, u, v;
     cin >> N >> Q;
     UndirectedWeightedTree graph(N);
