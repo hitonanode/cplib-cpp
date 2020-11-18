@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: unionfind/test/weighted_unionfind.test.cpp
     title: unionfind/test/weighted_unionfind.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"unionfind/weighted_unionfind.hpp\"\n#include <numeric>\n\
@@ -56,7 +56,7 @@ data:
   path: unionfind/weighted_unionfind.hpp
   requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - unionfind/test/weighted_unionfind.test.cpp
 documentation_of: unionfind/weighted_unionfind.hpp

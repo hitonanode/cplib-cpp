@@ -9,11 +9,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/incremental-bridge-connectivity.test.cpp
     title: graph/test/incremental-bridge-connectivity.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: unionfind/test/unionfind.test.cpp
     title: unionfind/test/unionfind.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"unionfind/unionfind.hpp\"\n#include <numeric>\n#include\
@@ -41,7 +41,7 @@ data:
   requiredBy:
   - graph/incremental_bridge_connectivity.hpp
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - unionfind/test/unionfind.test.cpp
   - graph/test/incremental-bridge-connectivity.test.cpp

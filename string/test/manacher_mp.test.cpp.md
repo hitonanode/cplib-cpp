@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/manacher.hpp
     title: string/manacher.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/mp_algorithm.hpp
     title: string/mp_algorithm.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2934
@@ -57,7 +57,7 @@ data:
   path: string/test/manacher_mp.test.cpp
   requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/manacher_mp.test.cpp
 layout: document

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/disjoint_sparse_table.hpp
     title: sparse_table/disjoint_sparse_table.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_sum
@@ -54,7 +54,7 @@ data:
   path: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
   requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
 layout: document

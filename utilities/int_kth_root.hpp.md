@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: utilities/test/kth_root_integer.test.cpp
     title: utilities/test/kth_root_integer.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"utilities/int_kth_root.hpp\"\n\n// floor(a^(1/k)) (the largest\
@@ -32,7 +32,7 @@ data:
   path: utilities/int_kth_root.hpp
   requiredBy: []
   timestamp: '2020-11-15 01:44:41+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - utilities/test/kth_root_integer.test.cpp
 documentation_of: utilities/int_kth_root.hpp

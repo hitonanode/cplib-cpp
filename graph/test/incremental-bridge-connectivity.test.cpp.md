@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/incremental_bridge_connectivity.hpp
     title: graph/incremental_bridge_connectivity.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: unionfind/unionfind.hpp
     title: unionfind/unionfind.hpp
   _extendedRequiredBy: []

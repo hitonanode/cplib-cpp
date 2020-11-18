@@ -2,21 +2,21 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/sparse_table_2d.hpp
     title: sparse_table/sparse_table_2d.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table.test.cpp
     title: sparse_table/test/sparse_table.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table_2d.test.cpp
     title: sparse_table/test/sparse_table_2d.test.cpp
   - icon: ':x:'
     path: sparse_table/test/sparse_table_aoj.test.cpp
     title: sparse_table/test/sparse_table_aoj.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"sparse_table/sparse_table.hpp\"\n#include <cassert>\n#include\
@@ -55,7 +55,7 @@ data:
   requiredBy:
   - sparse_table/sparse_table_2d.hpp
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - sparse_table/test/sparse_table_aoj.test.cpp
   - sparse_table/test/sparse_table.test.cpp

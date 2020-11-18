@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: sparse_table/rmq_sparse_table.hpp
     title: sparse_table/rmq_sparse_table.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: sparse_table/sparse_table.hpp
     title: sparse_table/sparse_table.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/staticrmq
@@ -68,7 +68,7 @@ data:
   path: sparse_table/test/sparse_table.test.cpp
   requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: sparse_table/test/sparse_table.test.cpp
 layout: document

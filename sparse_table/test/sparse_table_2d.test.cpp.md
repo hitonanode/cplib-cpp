@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: sparse_table/sparse_table.hpp
     title: sparse_table/sparse_table.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/sparse_table_2d.hpp
     title: sparse_table/sparse_table_2d.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068
@@ -76,7 +76,7 @@ data:
   path: sparse_table/test/sparse_table_2d.test.cpp
   requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: sparse_table/test/sparse_table_2d.test.cpp
 layout: document

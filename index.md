@@ -238,7 +238,7 @@ data:
     - icon: ':warning:'
       path: other_data_structures/link_cut_tree.cpp
       title: other_data_structures/link_cut_tree.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/persistent_array.hpp
       title: other_data_structures/persistent_array.hpp
     - icon: ':heavy_check_mark:'
@@ -278,6 +278,15 @@ data:
   - name: segmenttree
     pages:
     - icon: ':heavy_check_mark:'
+      path: segmenttree/acl_lazysegtree.hpp
+      title: segmenttree/acl_lazysegtree.hpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/acl_range-affine-range-sum.hpp
+      title: segmenttree/acl_range-affine-range-sum.hpp
+    - icon: ':warning:'
+      path: segmenttree/acl_range-update-range-sum-min.hpp
+      title: segmenttree/acl_range-update-range-sum-min.hpp
+    - icon: ':heavy_check_mark:'
       path: segmenttree/binary_indexed_tree.hpp
       title: segmenttree/binary_indexed_tree.hpp
     - icon: ':warning:'
@@ -303,16 +312,16 @@ data:
       title: segmenttree/segment_tree_2d.hpp
   - name: sparse_table
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/disjoint_sparse_table.hpp
       title: sparse_table/disjoint_sparse_table.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: sparse_table/rmq_sparse_table.hpp
       title: sparse_table/rmq_sparse_table.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: sparse_table/sparse_table.hpp
       title: sparse_table/sparse_table.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/sparse_table_2d.hpp
       title: sparse_table/sparse_table_2d.hpp
   - name: string
@@ -320,19 +329,19 @@ data:
     - icon: ':warning:'
       path: string/aho_corasick.hpp
       title: string/aho_corasick.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/manacher.hpp
       title: string/manacher.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/mp_algorithm.hpp
       title: string/mp_algorithm.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/suffix_array.hpp
       title: string/suffix_array.hpp
     - icon: ':warning:'
       path: string/trie_light.hpp
       title: string/trie_light.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/z_algorithm.hpp
       title: string/z_algorithm.hpp
   - name: string/test
@@ -350,7 +359,7 @@ data:
       title: syntactic_analysis/parsetree.hpp
   - name: unionfind
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/fully_persistent_uf.hpp
       title: unionfind/fully_persistent_uf.hpp
     - icon: ':warning:'
@@ -362,18 +371,18 @@ data:
     - icon: ':warning:'
       path: unionfind/undo_unionfind.hpp
       title: unionfind/undo_unionfind.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/unionfind.hpp
       title: unionfind/unionfind.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/unionfind_rankbased.hpp
       title: unionfind/unionfind_rankbased.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/weighted_unionfind.hpp
       title: unionfind/weighted_unionfind.hpp
   - name: utilities
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/floor_sum.hpp
       title: utilities/floor_sum.hpp
     - icon: ':warning:'
@@ -382,10 +391,10 @@ data:
     - icon: ':warning:'
       path: utilities/int128.hpp
       title: utilities/int128.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/int_kth_root.hpp
       title: utilities/int_kth_root.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/integer_segments.hpp
       title: utilities/integer_segments.hpp
     - icon: ':warning:'
@@ -651,6 +660,9 @@ data:
   - name: segmenttree/test
     pages:
     - icon: ':heavy_check_mark:'
+      path: segmenttree/test/acl_range-affine-range-sum.test.cpp
+      title: segmenttree/test/acl_range-affine-range-sum.test.cpp
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -679,16 +691,16 @@ data:
       title: segmenttree/test/segment_tree_2d_pointadd.test.cpp
   - name: sparse_table/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/test/disjoint_sparse_table_rmq.test.cpp
       title: sparse_table/test/disjoint_sparse_table_rmq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
       title: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/test/sparse_table.test.cpp
       title: sparse_table/test/sparse_table.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/test/sparse_table_2d.test.cpp
       title: sparse_table/test/sparse_table_2d.test.cpp
     - icon: ':x:'
@@ -696,41 +708,41 @@ data:
       title: sparse_table/test/sparse_table_aoj.test.cpp
   - name: string/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/lcp.test.cpp
       title: string/test/lcp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/manacher_mp.test.cpp
       title: string/test/manacher_mp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/suffix_array.test.cpp
       title: string/test/suffix_array.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/z_algorithm.test.cpp
       title: string/test/z_algorithm.test.cpp
   - name: unionfind/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/test/fully_persistent_uf.test.cpp
       title: unionfind/test/fully_persistent_uf.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/test/unionfind.test.cpp
       title: unionfind/test/unionfind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/test/unionfind_rankbased.test.cpp
       title: unionfind/test/unionfind_rankbased.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/test/weighted_unionfind.test.cpp
       title: unionfind/test/weighted_unionfind.test.cpp
   - name: utilities/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/test/floor_sum.test.cpp
       title: utilities/test/floor_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/test/integer_segments.test.cpp
       title: utilities/test/integer_segments.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/test/kth_root_integer.test.cpp
       title: utilities/test/kth_root_integer.test.cpp
 layout: toppage
