@@ -100,8 +100,9 @@ template <class Cap> struct mf_graph {
             g[v][i].cap += d;
             g[e.to][e.rev].cap -= d;
             res += d;
-            if (res == up) break;
+            if (res == up) return res;
         }
+        level[v] = _n;
         return res;
     }
 
@@ -119,11 +120,9 @@ template <class Cap> struct mf_graph {
             _bfs(s, t);
             if (level[t] == -1) break;
             std::fill(iter.begin(), iter.end(), 0);
-            while (flow < flow_limit) {
-                Cap f = _dfs(t, s, flow_limit - flow);
-                if (!f) break;
-                flow += f;
-            }
+            Cap f = _dfs(t, s, flow_limit - flow);
+            if (!f) break;
+            flow += f;
         }
         return flow;
     }
