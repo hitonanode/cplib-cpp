@@ -3,14 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: random/test/rolling_hash.test.cpp
     title: random/test/rolling_hash.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: random/test/rolling_hash_w_modint.test.cpp
     title: random/test/rolling_hash_w_modint.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"random/rolling_hash_1d_general.hpp\"\n#include <string>\n\
@@ -68,7 +68,7 @@ data:
   path: random/rolling_hash_1d_general.hpp
   requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - random/test/rolling_hash_w_modint.test.cpp
   - random/test/rolling_hash.test.cpp

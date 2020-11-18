@@ -6,14 +6,14 @@ data:
     path: number/cyclotomic_polynomials.hpp
     title: number/cyclotomic_polynomials.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/gen_primes.test.cpp
     title: number/test/gen_primes.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/prime_factorization.test.cpp
     title: number/test/prime_factorization.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/eratosthenes.hpp\"\n#include <cassert>\n#include\
@@ -82,7 +82,7 @@ data:
   requiredBy:
   - number/cyclotomic_polynomials.hpp
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/gen_primes.test.cpp
   - number/test/prime_factorization.test.cpp

@@ -10,7 +10,9 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624
+    IGNORE: ''
+    IGNORE_IF_CLANG: ''
+    IGNORE_IF_GCC: ''
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624
   bundledCode: "#line 2 \"linear_algebra_matrix/linalg_longlong.hpp\"\n#include <cassert>\n\
@@ -55,48 +57,50 @@ data:
     \ res(X.size(), vector<lint>(X.size()));\n    for (int i = 0; i < (int)res.size();\
     \ i++) res[i][i] = 1;\n    while (n) {\n        if (n & 1) res = matmul(res, X,\
     \ mod);\n        X = matmul(X, X, mod);\n        n >>= 1;\n    }\n    return res;\n\
-    }\n#line 2 \"linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp\"\n\
-    #include <iostream>\n#include <numeric>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624\"\
-    \n\ntemplate <typename T> istream &operator>>(istream &is, vector<T> &vec) {\n\
-    \    for (auto &v : vec) is >> v;\n    return is;\n}\n\nint main() {\n    int\
-    \ N, T;\n    cin >> N;\n    vector<vector<lint>> A(N, vector<lint>(N));\n    cin\
-    \ >> A;\n    vector<lint> v(N);\n    cin >> v >> T;\n    A = matpower(A, T, 2);\n\
-    \    vector<vector<lint>> B = A;\n    for (int i = 0; i < N; i++) B[i].push_back(v[i]);\n\
-    \    B = gauss_jordan(B, 2);\n    for (int i = 0; i < N; i++) {\n        if (accumulate(B[i].begin(),\
-    \ B[i].begin() + N, 0) == 0 and B[i][N]) {\n            cout << \"none\" << endl;\n\
+    }\n#line 2 \"linear_algebra_matrix/test/linalg_longlong.test.cpp\"\n#include <iostream>\n\
+    #include <numeric>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624\"\
+    \n#define IGNORE\n\ntemplate <typename T> istream &operator>>(istream &is, vector<T>\
+    \ &vec) {\n    for (auto &v : vec) is >> v;\n    return is;\n}\n\nint main() {\n\
+    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N, T;\n    cin\
+    \ >> N;\n    vector<vector<lint>> A(N, vector<lint>(N));\n    cin >> A;\n    vector<lint>\
+    \ v(N);\n    cin >> v >> T;\n    A = matpower(A, T, 2);\n    vector<vector<lint>>\
+    \ B = A;\n    for (int i = 0; i < N; i++) B[i].push_back(v[i]);\n    B = gauss_jordan(B,\
+    \ 2);\n    for (int i = 0; i < N; i++) {\n        if (accumulate(B[i].begin(),\
+    \ B[i].begin() + N, 0) == 0 and B[i][N]) {\n            cout << \"none\\n\";\n\
     \            return 0;\n        }\n    }\n    int rnk = rank_gauss_jordan(B);\n\
-    \    if (rnk < N) {\n        cout << \"ambiguous\" << endl;\n        return 0;\n\
-    \    }\n    vector<lint> ret(N);\n    for (int i = N - 1; i >= 0; i--) {\n   \
-    \     int a = 0;\n        for (int j = i + 1; j < N; j++) a += ret[j] * B[i][j];\n\
-    \        ret[i] = (a % 2 != B[i][N]);\n    }\n    for (auto v : ret) printf(\"\
-    %lld \", v);\n    puts(\"\");\n}\n"
+    \    if (rnk < N) {\n        cout << \"ambiguous\\n\";\n        return 0;\n  \
+    \  }\n    vector<lint> ret(N);\n    for (int i = N - 1; i >= 0; i--) {\n     \
+    \   int a = 0;\n        for (int j = i + 1; j < N; j++) a += ret[j] * B[i][j];\n\
+    \        ret[i] = (a % 2 != B[i][N]);\n    }\n\n    for (int i = 0; i < N; i++)\
+    \ cout << ret[i] << (i + 1 == N ? '\\n' : ' ');\n}\n"
   code: "#include \"linear_algebra_matrix/linalg_longlong.hpp\"\n#include <iostream>\n\
     #include <numeric>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624\"\
-    \n\ntemplate <typename T> istream &operator>>(istream &is, vector<T> &vec) {\n\
-    \    for (auto &v : vec) is >> v;\n    return is;\n}\n\nint main() {\n    int\
-    \ N, T;\n    cin >> N;\n    vector<vector<lint>> A(N, vector<lint>(N));\n    cin\
-    \ >> A;\n    vector<lint> v(N);\n    cin >> v >> T;\n    A = matpower(A, T, 2);\n\
-    \    vector<vector<lint>> B = A;\n    for (int i = 0; i < N; i++) B[i].push_back(v[i]);\n\
-    \    B = gauss_jordan(B, 2);\n    for (int i = 0; i < N; i++) {\n        if (accumulate(B[i].begin(),\
-    \ B[i].begin() + N, 0) == 0 and B[i][N]) {\n            cout << \"none\" << endl;\n\
+    \n#define IGNORE\n\ntemplate <typename T> istream &operator>>(istream &is, vector<T>\
+    \ &vec) {\n    for (auto &v : vec) is >> v;\n    return is;\n}\n\nint main() {\n\
+    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N, T;\n    cin\
+    \ >> N;\n    vector<vector<lint>> A(N, vector<lint>(N));\n    cin >> A;\n    vector<lint>\
+    \ v(N);\n    cin >> v >> T;\n    A = matpower(A, T, 2);\n    vector<vector<lint>>\
+    \ B = A;\n    for (int i = 0; i < N; i++) B[i].push_back(v[i]);\n    B = gauss_jordan(B,\
+    \ 2);\n    for (int i = 0; i < N; i++) {\n        if (accumulate(B[i].begin(),\
+    \ B[i].begin() + N, 0) == 0 and B[i][N]) {\n            cout << \"none\\n\";\n\
     \            return 0;\n        }\n    }\n    int rnk = rank_gauss_jordan(B);\n\
-    \    if (rnk < N) {\n        cout << \"ambiguous\" << endl;\n        return 0;\n\
-    \    }\n    vector<lint> ret(N);\n    for (int i = N - 1; i >= 0; i--) {\n   \
-    \     int a = 0;\n        for (int j = i + 1; j < N; j++) a += ret[j] * B[i][j];\n\
-    \        ret[i] = (a % 2 != B[i][N]);\n    }\n    for (auto v : ret) printf(\"\
-    %lld \", v);\n    puts(\"\");\n}\n"
+    \    if (rnk < N) {\n        cout << \"ambiguous\\n\";\n        return 0;\n  \
+    \  }\n    vector<lint> ret(N);\n    for (int i = N - 1; i >= 0; i--) {\n     \
+    \   int a = 0;\n        for (int j = i + 1; j < N; j++) a += ret[j] * B[i][j];\n\
+    \        ret[i] = (a % 2 != B[i][N]);\n    }\n\n    for (int i = 0; i < N; i++)\
+    \ cout << ret[i] << (i + 1 == N ? '\\n' : ' ');\n}\n"
   dependsOn:
   - linear_algebra_matrix/linalg_longlong.hpp
   isVerificationFile: true
-  path: linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
+  path: linear_algebra_matrix/test/linalg_longlong.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-11-18 21:29:24+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
+documentation_of: linear_algebra_matrix/test/linalg_longlong.test.cpp
 layout: document
 redirect_from:
-- /verify/linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
-- /verify/linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp.html
-title: linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
+- /verify/linear_algebra_matrix/test/linalg_longlong.test.cpp
+- /verify/linear_algebra_matrix/test/linalg_longlong.test.cpp.html
+title: linear_algebra_matrix/test/linalg_longlong.test.cpp
 ---

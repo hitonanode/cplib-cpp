@@ -76,7 +76,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -159,19 +159,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/det_of_sparse_matrix.hpp
       title: linear_algebra_matrix/det_of_sparse_matrix.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_bitset.hpp
       title: linear_algebra_matrix/linalg_bitset.hpp
     - icon: ':question:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_modint.hpp
       title: linear_algebra_matrix/linalg_modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linear_recurrence.hpp
       title: linear_algebra_matrix/linear_recurrence.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
@@ -195,7 +195,7 @@ data:
       title: multithread/multithread_example.cpp
   - name: number
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -204,22 +204,22 @@ data:
     - icon: ':warning:'
       path: number/cyclotomic_polynomials.hpp
       title: number/cyclotomic_polynomials.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/discrete_logarithm.hpp
       title: number/discrete_logarithm.hpp
     - icon: ':warning:'
       path: number/enumerate_partitions.hpp
       title: number/enumerate_partitions.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/eratosthenes.hpp
       title: number/eratosthenes.hpp
     - icon: ':warning:'
       path: number/euler_totient_phi.hpp
       title: number/euler_totient_phi.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
   - name: other_algorithms
@@ -229,10 +229,10 @@ data:
       title: other_algorithms/smawk.hpp
   - name: other_data_structures
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/binary_trie.hpp
       title: other_data_structures/binary_trie.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/fibonacci_heap.hpp
       title: other_data_structures/fibonacci_heap.hpp
     - icon: ':warning:'
@@ -241,16 +241,16 @@ data:
     - icon: ':x:'
       path: other_data_structures/persistent_array.hpp
       title: other_data_structures/persistent_array.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/persistent_queue.hpp
       title: other_data_structures/persistent_queue.hpp
     - icon: ':warning:'
       path: other_data_structures/rbst_fast.cpp
       title: other_data_structures/rbst_fast.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/sliding_window_aggregation.hpp
       title: other_data_structures/sliding_window_aggregation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/static_range_inversion.hpp
       title: other_data_structures/static_range_inversion.hpp
   - name: random
@@ -258,16 +258,16 @@ data:
     - icon: ':warning:'
       path: random/custom_hash.hpp
       title: random/custom_hash.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: random/rand_nondeterministic.hpp
       title: random/rand_nondeterministic.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: random/rolling_hash_1d_general.hpp
       title: random/rolling_hash_1d_general.hpp
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -277,7 +277,7 @@ data:
       title: rational/rational_number.hpp
   - name: segmenttree
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/binary_indexed_tree.hpp
       title: segmenttree/binary_indexed_tree.hpp
     - icon: ':warning:'
@@ -286,19 +286,19 @@ data:
     - icon: ':warning:'
       path: segmenttree/count_less_than.hpp
       title: segmenttree/count_less_than.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
     - icon: ':warning:'
       path: segmenttree/range-add-range-min.hpp
       title: segmenttree/range-add-range-min.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range-update-range-get.hpp
       title: segmenttree/range-update-range-get.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range_minimum_query.hpp
       title: segmenttree/range_minimum_query.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/segment_tree_2d.hpp
       title: segmenttree/segment_tree_2d.hpp
   - name: sparse_table
@@ -570,111 +570,111 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_bitset.test.cpp
       title: linear_algebra_matrix/test/linalg_bitset.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
       title: linear_algebra_matrix/test/linalg_ll_det.test.cpp
     - icon: ':x:'
-      path: linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
-      title: linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
+      path: linear_algebra_matrix/test/linalg_longlong.test.cpp
+      title: linear_algebra_matrix/test/linalg_longlong.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linear_recurrence.test.cpp
       title: linear_algebra_matrix/test/linear_recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/discrete_logarithm.test.cpp
       title: number/test/discrete_logarithm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/factorize_longlong.test.cpp
       title: number/test/factorize_longlong.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/gen_primes.test.cpp
       title: number/test/gen_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/miller-rabin.test.cpp
       title: number/test/miller-rabin.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
   - name: other_data_structures/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/assosiative_array.test.cpp
       title: other_data_structures/test/assosiative_array.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/binary_trie.test.cpp
       title: other_data_structures/test/binary_trie.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/fibonacci_heap_dijkstra.test.cpp
       title: other_data_structures/test/fibonacci_heap_dijkstra.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
       title: other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
       title: other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/persistent_queue.test.cpp
       title: other_data_structures/test/persistent_queue.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/queue_operate_all_composite.test.cpp
       title: other_data_structures/test/queue_operate_all_composite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_data_structures/test/static_range_inversion.test.cpp
       title: other_data_structures/test/static_range_inversion.test.cpp
   - name: random/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: random/test/rolling_hash.test.cpp
       title: random/test/rolling_hash.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: random/test/rolling_hash_w_modint.test.cpp
       title: random/test/rolling_hash_w_modint.test.cpp
   - name: segmenttree/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/countandsumlessthan.test.cpp
       title: segmenttree/test/countandsumlessthan.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/range-affine-range-sum.test.cpp
       title: segmenttree/test/range-affine-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/rmq_nonrecursive.test.cpp
       title: segmenttree/test/rmq_nonrecursive.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/segment_tree_2d.test.cpp
       title: segmenttree/test/segment_tree_2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/segment_tree_2d_pointadd.test.cpp
       title: segmenttree/test/segment_tree_2d_pointadd.test.cpp
   - name: sparse_table/test

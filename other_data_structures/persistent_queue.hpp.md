@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other_data_structures/test/persistent_queue.test.cpp
     title: other_data_structures/test/persistent_queue.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"other_data_structures/persistent_queue.hpp\"\n#include <cassert>\n\
@@ -51,7 +51,7 @@ data:
   path: other_data_structures/persistent_queue.hpp
   requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_data_structures/test/persistent_queue.test.cpp
 documentation_of: other_data_structures/persistent_queue.hpp

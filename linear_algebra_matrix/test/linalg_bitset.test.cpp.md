@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linalg_bitset.hpp
     title: linear_algebra_matrix/linalg_bitset.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624
@@ -51,42 +51,44 @@ data:
     \    }\n    return std::make_tuple(true, x, D);\n}\n#line 2 \"linear_algebra_matrix/test/linalg_bitset.test.cpp\"\
     \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624\"\
     \n#include <iostream>\n#include <numeric>\nusing namespace std;\n\nint main()\
-    \ {\n    int N, T;\n    cin >> N;\n    vector<bitset<Wmax>> A(N);\n    for (int\
-    \ i = 0; i < N; i++) {\n        for (int j = 0; j < N; j++) {\n            int\
-    \ t;\n            cin >> t;\n            A[i][j] = t;\n        }\n    }\n    bitset<Wmax>\
-    \ v(N);\n    for (int i = 0; i < N; i++) {\n        int t;\n        cin >> t;\n\
-    \        v[i] = t;\n    }\n    cin >> T;\n    A = matpower(A, T);\n    for (int\
-    \ i = 0; i < N; i++) A[i][N] = v[i];\n    A = gauss_jordan(N + 1, A);\n\n    for\
-    \ (int i = 0; i < N; i++) {\n        if (A[i].count() == 1 and A[i][N]) {\n  \
-    \          cout << \"none\" << endl;\n            return 0;\n        }\n    }\n\
-    \    if (!A[N - 1][N - 1]) {\n        cout << \"ambiguous\" << endl;\n       \
-    \ return 0;\n    }\n    bitset<Wmax> ret;\n    for (int i = N - 1; i >= 0; i--)\
-    \ {\n        int a = 0;\n        for (int j = i + 1; j < N; j++) a ^= ret[j] *\
-    \ A[i][j];\n        ret[i] = (a != A[i][N]);\n    }\n    for (int i = 0; i < N;\
-    \ i++) { printf(\"%d \", ret[i] ? 1 : 0); }\n    puts(\"\");\n}\n"
-  code: "#include \"linear_algebra_matrix/linalg_bitset.hpp\"\n#define PROBLEM \"\
-    http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624\"\n#include <iostream>\n\
-    #include <numeric>\nusing namespace std;\n\nint main() {\n    int N, T;\n    cin\
-    \ >> N;\n    vector<bitset<Wmax>> A(N);\n    for (int i = 0; i < N; i++) {\n \
-    \       for (int j = 0; j < N; j++) {\n            int t;\n            cin >>\
+    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N, T;\n   \
+    \ cin >> N;\n    vector<bitset<Wmax>> A(N);\n    for (int i = 0; i < N; i++) {\n\
+    \        for (int j = 0; j < N; j++) {\n            int t;\n            cin >>\
     \ t;\n            A[i][j] = t;\n        }\n    }\n    bitset<Wmax> v(N);\n   \
     \ for (int i = 0; i < N; i++) {\n        int t;\n        cin >> t;\n        v[i]\
-    \ = t;\n    }\n    cin >> T;\n    A = matpower(A, T);\n    for (int i = 0; i <\
-    \ N; i++) A[i][N] = v[i];\n    A = gauss_jordan(N + 1, A);\n\n    for (int i =\
-    \ 0; i < N; i++) {\n        if (A[i].count() == 1 and A[i][N]) {\n           \
-    \ cout << \"none\" << endl;\n            return 0;\n        }\n    }\n    if (!A[N\
-    \ - 1][N - 1]) {\n        cout << \"ambiguous\" << endl;\n        return 0;\n\
-    \    }\n    bitset<Wmax> ret;\n    for (int i = N - 1; i >= 0; i--) {\n      \
-    \  int a = 0;\n        for (int j = i + 1; j < N; j++) a ^= ret[j] * A[i][j];\n\
-    \        ret[i] = (a != A[i][N]);\n    }\n    for (int i = 0; i < N; i++) { printf(\"\
-    %d \", ret[i] ? 1 : 0); }\n    puts(\"\");\n}\n"
+    \ = t;\n    }\n\n    cin >> T;\n    A = matpower(A, T);\n    for (int i = 0; i\
+    \ < N; i++) A[i][N] = v[i];\n    A = gauss_jordan(N + 1, A);\n\n    for (int i\
+    \ = 0; i < N; i++) {\n        if (A[i].count() == 1 and A[i][N]) {\n         \
+    \   cout << \"none\\n\";\n            return 0;\n        }\n    }\n    if (!A[N\
+    \ - 1][N - 1]) {\n        cout << \"ambiguous\\n\";\n        return 0;\n    }\n\
+    \    bitset<Wmax> ret;\n    for (int i = N - 1; i >= 0; i--) {\n        int a\
+    \ = 0;\n        for (int j = i + 1; j < N; j++) a ^= ret[j] * A[i][j];\n     \
+    \   ret[i] = (a != A[i][N]);\n    }\n    for (int i = 0; i < N; i++) cout << ret[i]\
+    \ << (i == N - 1 ? '\\n' : ' ');\n}\n"
+  code: "#include \"linear_algebra_matrix/linalg_bitset.hpp\"\n#define PROBLEM \"\
+    http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624\"\n#include <iostream>\n\
+    #include <numeric>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n\n    int N, T;\n    cin >> N;\n    vector<bitset<Wmax>>\
+    \ A(N);\n    for (int i = 0; i < N; i++) {\n        for (int j = 0; j < N; j++)\
+    \ {\n            int t;\n            cin >> t;\n            A[i][j] = t;\n   \
+    \     }\n    }\n    bitset<Wmax> v(N);\n    for (int i = 0; i < N; i++) {\n  \
+    \      int t;\n        cin >> t;\n        v[i] = t;\n    }\n\n    cin >> T;\n\
+    \    A = matpower(A, T);\n    for (int i = 0; i < N; i++) A[i][N] = v[i];\n  \
+    \  A = gauss_jordan(N + 1, A);\n\n    for (int i = 0; i < N; i++) {\n        if\
+    \ (A[i].count() == 1 and A[i][N]) {\n            cout << \"none\\n\";\n      \
+    \      return 0;\n        }\n    }\n    if (!A[N - 1][N - 1]) {\n        cout\
+    \ << \"ambiguous\\n\";\n        return 0;\n    }\n    bitset<Wmax> ret;\n    for\
+    \ (int i = N - 1; i >= 0; i--) {\n        int a = 0;\n        for (int j = i +\
+    \ 1; j < N; j++) a ^= ret[j] * A[i][j];\n        ret[i] = (a != A[i][N]);\n  \
+    \  }\n    for (int i = 0; i < N; i++) cout << ret[i] << (i == N - 1 ? '\\n' :\
+    \ ' ');\n}\n"
   dependsOn:
   - linear_algebra_matrix/linalg_bitset.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_bitset.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-18 21:29:24+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_bitset.test.cpp
 layout: document

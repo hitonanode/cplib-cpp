@@ -7,8 +7,8 @@ data:
     path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
     title: linear_algebra_matrix/test/linalg_ll_det.test.cpp
   - icon: ':x:'
-    path: linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
-    title: linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
+    path: linear_algebra_matrix/test/linalg_longlong.test.cpp
+    title: linear_algebra_matrix/test/linalg_longlong.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
     title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
@@ -109,8 +109,8 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - linear_algebra_matrix/test/linalg_ll_det.test.cpp
-  - linear_algebra_matrix/test/linalg_longlong.test.deprecated.cpp
   - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong.test.cpp
 documentation_of: linear_algebra_matrix/linalg_longlong.hpp
 layout: document
 redirect_from:

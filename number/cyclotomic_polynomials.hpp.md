@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/eratosthenes.hpp
     title: number/eratosthenes.hpp
   _extendedRequiredBy: []
