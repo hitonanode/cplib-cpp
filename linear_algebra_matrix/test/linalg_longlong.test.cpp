@@ -2,6 +2,7 @@
 #include <iostream>
 #include <numeric>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624"
+#define IGNORE
 
 template <typename T> istream &operator>>(istream &is, vector<T> &vec) {
     for (auto &v : vec) is >> v;
@@ -9,6 +10,8 @@ template <typename T> istream &operator>>(istream &is, vector<T> &vec) {
 }
 
 int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
+
     int N, T;
     cin >> N;
     vector<vector<lint>> A(N, vector<lint>(N));
@@ -21,13 +24,13 @@ int main() {
     B = gauss_jordan(B, 2);
     for (int i = 0; i < N; i++) {
         if (accumulate(B[i].begin(), B[i].begin() + N, 0) == 0 and B[i][N]) {
-            cout << "none" << endl;
+            cout << "none\n";
             return 0;
         }
     }
     int rnk = rank_gauss_jordan(B);
     if (rnk < N) {
-        cout << "ambiguous" << endl;
+        cout << "ambiguous\n";
         return 0;
     }
     vector<lint> ret(N);
@@ -36,6 +39,6 @@ int main() {
         for (int j = i + 1; j < N; j++) a += ret[j] * B[i][j];
         ret[i] = (a % 2 != B[i][N]);
     }
-    for (auto v : ret) printf("%lld ", v);
-    puts("");
+
+    for (int i = 0; i < N; i++) cout << ret[i] << (i + 1 == N ? '\n' : ' ');
 }

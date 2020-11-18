@@ -5,6 +5,8 @@
 using namespace std;
 
 int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
+
     int N, T;
     cin >> N;
     vector<bitset<Wmax>> A(N);
@@ -21,6 +23,7 @@ int main() {
         cin >> t;
         v[i] = t;
     }
+
     cin >> T;
     A = matpower(A, T);
     for (int i = 0; i < N; i++) A[i][N] = v[i];
@@ -28,12 +31,12 @@ int main() {
 
     for (int i = 0; i < N; i++) {
         if (A[i].count() == 1 and A[i][N]) {
-            cout << "none" << endl;
+            cout << "none\n";
             return 0;
         }
     }
     if (!A[N - 1][N - 1]) {
-        cout << "ambiguous" << endl;
+        cout << "ambiguous\n";
         return 0;
     }
     bitset<Wmax> ret;
@@ -42,6 +45,5 @@ int main() {
         for (int j = i + 1; j < N; j++) a ^= ret[j] * A[i][j];
         ret[i] = (a != A[i][N]);
     }
-    for (int i = 0; i < N; i++) { printf("%d ", ret[i] ? 1 : 0); }
-    puts("");
+    for (int i = 0; i < N; i++) cout << ret[i] << (i == N - 1 ? '\n' : ' ');
 }
