@@ -85,6 +85,7 @@
 "sparse_table/test/disjoint_sparse_table_rsq.test.cpp": "2020-11-18 20:25:12 +0900",
 "sparse_table/test/sparse_table.test.cpp": "2020-11-18 20:25:12 +0900",
 "sparse_table/test/sparse_table_2d.test.cpp": "2020-11-18 20:25:12 +0900",
+"sparse_table/test/sparse_table_aoj.test.cpp": "2020-11-18 23:31:57 +0900",
 "string/test/lcp.test.cpp": "2020-11-18 20:25:12 +0900",
 "string/test/manacher_mp.test.cpp": "2020-11-18 20:25:12 +0900",
 "string/test/suffix_array.test.cpp": "2020-11-18 20:25:12 +0900",
