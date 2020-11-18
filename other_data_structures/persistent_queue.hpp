@@ -1,20 +1,20 @@
 #pragma once
+#include <array>
 #include <cassert>
 #include <utility>
 #include <vector>
 
 // CUT begin
 // Fully persistent queue
-template <typename T, int D> struct pqueue {
+template <typename T, int D> struct persistent_queue {
     int now;
 
-    std::vector<T> data;               // Elements on each node of tree
-    std::vector<std::vector<int>> par; // binary-lifted parents
+    std::vector<T> data;                 // Elements on each node of tree
+    std::vector<std::array<int, D>> par; // binary-lifted parents
+    std::vector<int> back_id;            // back_id[t] = leaf id of the tree at time t
+    std::vector<int> size;               // size[t] = size of the queue at time t
 
-    std::vector<int> back_id; // back_id[t] = leaf id of the tree at time t
-    std::vector<int> size;    // size[t] = size of the queue at time t
-
-    pqueue() : now(0), data(1), par(1, std::vector<int>(D)), back_id(1, 0), size(1, 0) {}
+    persistent_queue() : now(0), data(1), par(1), back_id(1, 0), size(1, 0) {}
 
     // Complexity: O(lgD)
     // return: (curret_time, popped element)
@@ -35,7 +35,7 @@ template <typename T, int D> struct pqueue {
         assert(now < 1 << (D + 1));
         int newid = data.size();
         data.emplace_back(dat);
-        par.emplace_back(std::vector<int>(D, back_id[t]));
+        par.push_back({}), par.back()[0] = back_id[t];
         back_id.emplace_back(newid), size.emplace_back(size[t] + 1);
         for (int d = 1; d < D; d++) par[newid][d] = par[par[newid][d - 1]][d - 1];
         return now;

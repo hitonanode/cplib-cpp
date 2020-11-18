@@ -2,7 +2,6 @@
 #include <iostream>
 #include <numeric>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624"
-#define IGNORE
 
 template <typename T> istream &operator>>(istream &is, vector<T> &vec) {
     for (auto &v : vec) is >> v;
