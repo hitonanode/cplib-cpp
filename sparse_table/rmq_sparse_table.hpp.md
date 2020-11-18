@@ -6,11 +6,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table.test.cpp
     title: sparse_table/test/sparse_table.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table_aoj.test.cpp
     title: sparse_table/test/sparse_table_aoj.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"sparse_table/rmq_sparse_table.hpp\"\n#include <algorithm>\n\
@@ -49,7 +49,7 @@ data:
   path: sparse_table/rmq_sparse_table.hpp
   requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - sparse_table/test/sparse_table_aoj.test.cpp
   - sparse_table/test/sparse_table.test.cpp

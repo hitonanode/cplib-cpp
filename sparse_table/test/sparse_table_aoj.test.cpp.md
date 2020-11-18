@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/rmq_sparse_table.hpp
     title: sparse_table/rmq_sparse_table.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/sparse_table.hpp
     title: sparse_table/sparse_table.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D
@@ -46,29 +46,32 @@ data:
     \ r) { // [l, r), 0-indexed\n        assert(l >= 0 and r <= N);\n        if (l\
     \ >= r) return defaultT;\n        int d = lgx_table[r - l];\n        return func(data[d][l],\
     \ data[d][r - (1 << d)]);\n    }\n};\n#line 3 \"sparse_table/test/sparse_table_aoj.test.cpp\"\
+    \n#include <iostream>\n#line 5 \"sparse_table/test/sparse_table_aoj.test.cpp\"\
     \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D\"\
-    \n\n#include <cstdio>\nint main() {\n    int N, L;\n    scanf(\"%d %d\", &N, &L);\n\
-    \    std::vector<int> A(N);\n    for (auto &a : A) scanf(\"%d\", &a);\n    auto\
-    \ f = [](int l, int r) { return std::min(l, r); };\n    SparseTable<int, decltype(f)>\
-    \ sp1(A, 1e9, f);\n    StaticRMQ<int> sp2(A, 1e9);\n    for (int l = 0; l + L\
-    \ <= N; l++) {\n        int a = sp1.get(l, l + L);\n        int b = sp2.get(l,\
-    \ l + L);\n        assert(a == b);\n        printf(\"%d \", a);\n    }\n}\n"
+    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n    int N, L;\n    cin >> N >> L;\n    vector<int> A(N);\n    for (auto &a :\
+    \ A) cin >> a;\n    auto f = [](int l, int r) { return min(l, r); };\n    SparseTable<int,\
+    \ decltype(f)> sp1(A, 1e9, f);\n    StaticRMQ<int> sp2(A, 1e9);\n    for (int\
+    \ l = 0; l + L <= N; l++) {\n        int a = sp1.get(l, l + L);\n        int b\
+    \ = sp2.get(l, l + L);\n        assert(a == b);\n        cout << a << (l + L ==\
+    \ N ? '\\n' : ' ');\n    }\n}\n"
   code: "#include \"sparse_table/rmq_sparse_table.hpp\"\n#include \"sparse_table/sparse_table.hpp\"\
-    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D\"\
-    \n\n#include <cstdio>\nint main() {\n    int N, L;\n    scanf(\"%d %d\", &N, &L);\n\
-    \    std::vector<int> A(N);\n    for (auto &a : A) scanf(\"%d\", &a);\n    auto\
-    \ f = [](int l, int r) { return std::min(l, r); };\n    SparseTable<int, decltype(f)>\
-    \ sp1(A, 1e9, f);\n    StaticRMQ<int> sp2(A, 1e9);\n    for (int l = 0; l + L\
-    \ <= N; l++) {\n        int a = sp1.get(l, l + L);\n        int b = sp2.get(l,\
-    \ l + L);\n        assert(a == b);\n        printf(\"%d \", a);\n    }\n}\n"
+    \n#include <iostream>\n#include <vector>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D\"\
+    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n    int N, L;\n    cin >> N >> L;\n    vector<int> A(N);\n    for (auto &a :\
+    \ A) cin >> a;\n    auto f = [](int l, int r) { return min(l, r); };\n    SparseTable<int,\
+    \ decltype(f)> sp1(A, 1e9, f);\n    StaticRMQ<int> sp2(A, 1e9);\n    for (int\
+    \ l = 0; l + L <= N; l++) {\n        int a = sp1.get(l, l + L);\n        int b\
+    \ = sp2.get(l, l + L);\n        assert(a == b);\n        cout << a << (l + L ==\
+    \ N ? '\\n' : ' ');\n    }\n}\n"
   dependsOn:
   - sparse_table/rmq_sparse_table.hpp
   - sparse_table/sparse_table.hpp
   isVerificationFile: true
   path: sparse_table/test/sparse_table_aoj.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-18 23:31:57+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: sparse_table/test/sparse_table_aoj.test.cpp
 layout: document

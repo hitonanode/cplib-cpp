@@ -315,10 +315,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: sparse_table/disjoint_sparse_table.hpp
       title: sparse_table/disjoint_sparse_table.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/rmq_sparse_table.hpp
       title: sparse_table/rmq_sparse_table.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/sparse_table.hpp
       title: sparse_table/sparse_table.hpp
     - icon: ':heavy_check_mark:'
@@ -703,7 +703,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: sparse_table/test/sparse_table_2d.test.cpp
       title: sparse_table/test/sparse_table_2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/test/sparse_table_aoj.test.cpp
       title: sparse_table/test/sparse_table_aoj.test.cpp
   - name: string/test
