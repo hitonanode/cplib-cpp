@@ -17,9 +17,9 @@ data:
     #include <limits>\n#include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder\
     \ Library, single class, no namespace, no private variables, compatible with C++11\n\
     // Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
-    template <class Cap>\nstruct mf_graph {\n    struct simple_queue_int {\n     \
-    \   std::vector<int> payload;\n        int pos = 0;\n        void reserve(int\
-    \ n) { payload.reserve(n); }\n        int size() const { return int(payload.size())\
+    template <class Cap> struct mf_graph {\n    struct simple_queue_int {\n      \
+    \  std::vector<int> payload;\n        int pos = 0;\n        void reserve(int n)\
+    \ { payload.reserve(n); }\n        int size() const { return int(payload.size())\
     \ - pos; }\n        bool empty() const { return pos == int(payload.size()); }\n\
     \        void push(const int &t) { payload.push_back(t); }\n        int &front()\
     \ { return payload[pos]; }\n        void clear() {\n            payload.clear();\n\
@@ -36,10 +36,10 @@ data:
     \        auto _re = g[_e.to][_e.rev];\n        return edge{pos[i].first, _e.to,\
     \ _e.cap + _re.cap, _re.cap};\n    }\n    std::vector<edge> edges() {\n      \
     \  int m = int(pos.size());\n        std::vector<edge> result;\n        for (int\
-    \ i = 0; i < m; i++) {\n            result.push_back(get_edge(i));\n        }\n\
-    \        return result;\n    }\n    void change_edge(int i, Cap new_cap, Cap new_flow)\
-    \ {\n        int m = int(pos.size());\n        assert(0 <= i && i < m);\n    \
-    \    assert(0 <= new_flow && new_flow <= new_cap);\n        auto &_e = g[pos[i].first][pos[i].second];\n\
+    \ i = 0; i < m; i++) { result.push_back(get_edge(i)); }\n        return result;\n\
+    \    }\n    void change_edge(int i, Cap new_cap, Cap new_flow) {\n        int\
+    \ m = int(pos.size());\n        assert(0 <= i && i < m);\n        assert(0 <=\
+    \ new_flow && new_flow <= new_cap);\n        auto &_e = g[pos[i].first][pos[i].second];\n\
     \        auto &_re = g[_e.to][_e.rev];\n        _e.cap = new_cap - new_flow;\n\
     \        _re.cap = new_flow;\n    }\n\n    std::vector<int> level, iter;\n   \
     \ simple_queue_int que;\n\n    void _bfs(int s, int t) {\n        std::fill(level.begin(),\
@@ -56,32 +56,31 @@ data:
     \            if (d <= 0) continue;\n            g[v][i].cap += d;\n          \
     \  g[e.to][e.rev].cap -= d;\n            res += d;\n            if (res == up)\
     \ break;\n        }\n        return res;\n    }\n\n    Cap flow(int s, int t)\
-    \ {\n        return flow(s, t, std::numeric_limits<Cap>::max());\n    }\n    Cap\
-    \ flow(int s, int t, Cap flow_limit) {\n        assert(0 <= s && s < _n);\n  \
-    \      assert(0 <= t && t < _n);\n        assert(s != t);\n\n        level.assign(_n,\
-    \ 0), iter.assign(_n, 0);\n        que.clear();\n\n        Cap flow = 0;\n   \
-    \     while (flow < flow_limit) {\n            _bfs(s, t);\n            if (level[t]\
-    \ == -1) break;\n            std::fill(iter.begin(), iter.end(), 0);\n       \
-    \     while (flow < flow_limit) {\n                Cap f = _dfs(t, s, flow_limit\
-    \ - flow);\n                if (!f) break;\n                flow += f;\n     \
-    \       }\n        }\n        return flow;\n    }\n\n    std::vector<bool> min_cut(int\
-    \ s) {\n        std::vector<bool> visited(_n);\n        simple_queue_int que;\n\
-    \        que.push(s);\n        while (!que.empty()) {\n            int p = que.front();\n\
-    \            que.pop();\n            visited[p] = true;\n            for (auto\
-    \ e : g[p]) {\n                if (e.cap && !visited[e.to]) {\n              \
-    \      visited[e.to] = true;\n                    que.push(e.to);\n          \
-    \      }\n            }\n        }\n        return visited;\n    }\n\n    int\
-    \ _n;\n    struct _edge {\n        int to, rev;\n        Cap cap;\n    };\n  \
-    \  std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
-    \ g;\n};\n#line 3 \"flow/test/maxflow.test.cpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
-    \n\nint main()\n{\n    int V, E;\n    std::cin >> V >> E;\n    mf_graph<int> graph(V);\n\
+    \ { return flow(s, t, std::numeric_limits<Cap>::max()); }\n    Cap flow(int s,\
+    \ int t, Cap flow_limit) {\n        assert(0 <= s && s < _n);\n        assert(0\
+    \ <= t && t < _n);\n        assert(s != t);\n\n        level.assign(_n, 0), iter.assign(_n,\
+    \ 0);\n        que.clear();\n\n        Cap flow = 0;\n        while (flow < flow_limit)\
+    \ {\n            _bfs(s, t);\n            if (level[t] == -1) break;\n       \
+    \     std::fill(iter.begin(), iter.end(), 0);\n            while (flow < flow_limit)\
+    \ {\n                Cap f = _dfs(t, s, flow_limit - flow);\n                if\
+    \ (!f) break;\n                flow += f;\n            }\n        }\n        return\
+    \ flow;\n    }\n\n    std::vector<bool> min_cut(int s) {\n        std::vector<bool>\
+    \ visited(_n);\n        simple_queue_int que;\n        que.push(s);\n        while\
+    \ (!que.empty()) {\n            int p = que.front();\n            que.pop();\n\
+    \            visited[p] = true;\n            for (auto e : g[p]) {\n         \
+    \       if (e.cap && !visited[e.to]) {\n                    visited[e.to] = true;\n\
+    \                    que.push(e.to);\n                }\n            }\n     \
+    \   }\n        return visited;\n    }\n\n    int _n;\n    struct _edge {\n   \
+    \     int to, rev;\n        Cap cap;\n    };\n    std::vector<std::pair<int, int>>\
+    \ pos;\n    std::vector<std::vector<_edge>> g;\n};\n#line 3 \"flow/test/maxflow.test.cpp\"\
+    \n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
+    \n\nint main() {\n    int V, E;\n    std::cin >> V >> E;\n    mf_graph<int> graph(V);\n\
     \    while (E--) {\n        int u, v, c;\n        std::cin >> u >> v >> c;\n \
     \       graph.add_edge(u, v, c);\n    }\n    std::cout << graph.flow(0, V - 1)\
     \ << std::endl;\n}\n"
   code: "#include \"flow/maxflow.hpp\"\n#include <cassert>\n#include <iostream>\n\
     #define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
-    \n\nint main()\n{\n    int V, E;\n    std::cin >> V >> E;\n    mf_graph<int> graph(V);\n\
+    \n\nint main() {\n    int V, E;\n    std::cin >> V >> E;\n    mf_graph<int> graph(V);\n\
     \    while (E--) {\n        int u, v, c;\n        std::cin >> u >> v >> c;\n \
     \       graph.add_edge(u, v, c);\n    }\n    std::cout << graph.flow(0, V - 1)\
     \ << std::endl;\n}\n"
@@ -90,7 +89,7 @@ data:
   isVerificationFile: true
   path: flow/test/maxflow.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 16:42:59+09:00'
+  timestamp: '2020-11-18 20:06:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: flow/test/maxflow.test.cpp

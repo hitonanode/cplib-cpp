@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/range-affine-range-sum.test.cpp
     title: segmenttree/test/range-affine-range-sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segmenttree/range-update-range-get.hpp\"\n#include <algorithm>\n\
@@ -133,7 +133,7 @@ data:
   path: segmenttree/range-update-range-get.hpp
   requiredBy: []
   timestamp: '2020-09-04 23:33:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - segmenttree/test/range-affine-range-sum.test.cpp
 documentation_of: segmenttree/range-update-range-get.hpp

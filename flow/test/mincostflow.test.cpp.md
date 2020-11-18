@@ -16,12 +16,11 @@ data:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
-  bundledCode: "#line 1 \"flow/test/mincostflow.test.cpp\"\n#include <cassert>\n#include\
-    \ <iostream>\n#line 2 \"flow/mincostflow.hpp\"\n#include <algorithm>\n#line 4\
-    \ \"flow/mincostflow.hpp\"\n#include <limits>\n#include <queue>\n#include <vector>\n\
-    \n// CUT begin\n// MinCostFlow based on AtCoder Library, no namespace, no private\
-    \ variables, compatible with C++11\n// Reference: <https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html>\n\
-    // **NO NEGATIVE COST EDGES**\ntemplate <class Cap, class Cost>\nstruct mcf_graph\
+  bundledCode: "#line 2 \"flow/mincostflow.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <limits>\n#include <queue>\n#include <vector>\n\n// CUT begin\n// MinCostFlow\
+    \ based on AtCoder Library, no namespace, no private variables, compatible with\
+    \ C++11\n// Reference: <https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html>\n\
+    // **NO NEGATIVE COST EDGES**\ntemplate <class Cap, class Cost> struct mcf_graph\
     \ {\n    mcf_graph() {}\n    mcf_graph(int n) : _n(n), g(n) {}\n\n    int add_edge(int\
     \ from, int to, Cap cap, Cost cost) {\n        assert(0 <= from && from < _n);\n\
     \        assert(0 <= to && to < _n);\n        assert(0 <= cap);\n        assert(0\
@@ -36,12 +35,11 @@ data:
     \      return edge{\n            pos[i].first, _e.to, _e.cap + _re.cap, _re.cap,\
     \ _e.cost,\n        };\n    }\n    std::vector<edge> edges() {\n        int m\
     \ = int(pos.size());\n        std::vector<edge> result(m);\n        for (int i\
-    \ = 0; i < m; i++) {\n            result[i] = get_edge(i);\n        }\n      \
-    \  return result;\n    }\n\n    std::pair<Cap, Cost> flow(int s, int t) {\n  \
-    \      return flow(s, t, std::numeric_limits<Cap>::max());\n    }\n    std::pair<Cap,\
-    \ Cost> flow(int s, int t, Cap flow_limit) {\n        return slope(s, t, flow_limit).back();\n\
-    \    }\n    std::vector<std::pair<Cap, Cost>> slope(int s, int t) {\n        return\
-    \ slope(s, t, std::numeric_limits<Cap>::max());\n    }\n\n    std::vector<Cost>\
+    \ = 0; i < m; i++) { result[i] = get_edge(i); }\n        return result;\n    }\n\
+    \n    std::pair<Cap, Cost> flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max());\
+    \ }\n    std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) { return slope(s,\
+    \ t, flow_limit).back(); }\n    std::vector<std::pair<Cap, Cost>> slope(int s,\
+    \ int t) { return slope(s, t, std::numeric_limits<Cap>::max()); }\n\n    std::vector<Cost>\
     \ dual, dist;\n    std::vector<int> pv, pe;\n    std::vector<bool> vis;\n    bool\
     \ _dual_ref(int s, int t) {\n        std::fill(dist.begin(), dist.end(), std::numeric_limits<Cost>::max());\n\
     \        std::fill(pv.begin(), pv.end(), -1);\n        std::fill(pe.begin(), pe.end(),\
@@ -60,57 +58,58 @@ data:
     \           if (dist[e.to] - dist[v] > cost) {\n                    dist[e.to]\
     \ = dist[v] + cost;\n                    pv[e.to] = v;\n                    pe[e.to]\
     \ = i;\n                    que.push(Q{dist[e.to], e.to});\n                }\n\
-    \            }\n        }\n        if (!vis[t]) {\n            return false;\n\
-    \        }\n\n        for (int v = 0; v < _n; v++) {\n            if (!vis[v])\
-    \ continue;\n            // dual[v] = dual[v] - dist[t] + dist[v]\n          \
-    \  //         = dual[v] - (shortest(s, t) + dual[s] - dual[t]) + (shortest(s,\
-    \ v) + dual[s] - dual[v])\n            //         = - shortest(s, t) + dual[t]\
-    \ + shortest(s, v)\n            //         = shortest(s, v) - shortest(s, t) >=\
-    \ 0 - (n-1)C\n            dual[v] -= dist[t] - dist[v];\n        }\n        return\
-    \ true;\n    }\n\n    std::vector<std::pair<Cap, Cost>> slope(int s, int t, Cap\
-    \ flow_limit) {\n        assert(0 <= s && s < _n);\n        assert(0 <= t && t\
-    \ < _n);\n        assert(s != t);\n        // variants (C = maxcost):\n      \
-    \  // -(n-1)C <= dual[s] <= dual[i] <= dual[t] = 0\n        // reduced cost (=\
-    \ e.cost + dual[e.from] - dual[e.to]) >= 0 for all edge\n        dual.assign(_n,\
-    \ 0), dist.assign(_n, 0);\n        pv.assign(_n, 0), pe.assign(_n, 0);\n     \
-    \   vis.assign(_n, false);\n        Cap flow = 0;\n        Cost cost = 0, prev_cost_per_flow\
-    \ = -1;\n        std::vector<std::pair<Cap, Cost>> result;\n        result.push_back({flow,\
+    \            }\n        }\n        if (!vis[t]) { return false; }\n\n        for\
+    \ (int v = 0; v < _n; v++) {\n            if (!vis[v]) continue;\n           \
+    \ // dual[v] = dual[v] - dist[t] + dist[v]\n            //         = dual[v] -\
+    \ (shortest(s, t) + dual[s] - dual[t]) + (shortest(s, v) + dual[s] - dual[v])\n\
+    \            //         = - shortest(s, t) + dual[t] + shortest(s, v)\n      \
+    \      //         = shortest(s, v) - shortest(s, t) >= 0 - (n-1)C\n          \
+    \  dual[v] -= dist[t] - dist[v];\n        }\n        return true;\n    }\n\n \
+    \   std::vector<std::pair<Cap, Cost>> slope(int s, int t, Cap flow_limit) {\n\
+    \        assert(0 <= s && s < _n);\n        assert(0 <= t && t < _n);\n      \
+    \  assert(s != t);\n        // variants (C = maxcost):\n        // -(n-1)C <=\
+    \ dual[s] <= dual[i] <= dual[t] = 0\n        // reduced cost (= e.cost + dual[e.from]\
+    \ - dual[e.to]) >= 0 for all edge\n        dual.assign(_n, 0), dist.assign(_n,\
+    \ 0);\n        pv.assign(_n, 0), pe.assign(_n, 0);\n        vis.assign(_n, false);\n\
+    \        Cap flow = 0;\n        Cost cost = 0, prev_cost_per_flow = -1;\n    \
+    \    std::vector<std::pair<Cap, Cost>> result;\n        result.push_back({flow,\
     \ cost});\n        while (flow < flow_limit) {\n            if (!_dual_ref(s,\
     \ t)) break;\n            Cap c = flow_limit - flow;\n            for (int v =\
-    \ t; v != s; v = pv[v]) {\n                c = std::min(c, g[pv[v]][pe[v]].cap);\n\
-    \            }\n            for (int v = t; v != s; v = pv[v]) {\n           \
-    \     auto& e = g[pv[v]][pe[v]];\n                e.cap -= c;\n              \
-    \  g[v][e.rev].cap += c;\n            }\n            Cost d = -dual[s];\n    \
-    \        flow += c;\n            cost += c * d;\n            if (prev_cost_per_flow\
-    \ == d) {\n                result.pop_back();\n            }\n            result.push_back({flow,\
-    \ cost});\n            prev_cost_per_flow = d;\n        }\n        return result;\n\
-    \    }\n\n    struct _edge {\n        int to, rev;\n        Cap cap;\n       \
-    \ Cost cost;\n    };\n\n    int _n;\n    std::vector<std::pair<int, int>> pos;\n\
-    \    std::vector<std::vector<_edge>> g;\n};\n#line 7 \"flow/mincostflow_bellmanford.hpp\"\
-    \n\n// CUT begin\n/*\nMinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE\
-    \ CYCLE (just negative cost edge is allowed)\nVerified by SRM 770 Div1 Medium\
-    \ <https://community.topcoder.com/stat?c=problem_statement&pm=15702>\n*/\ntemplate\
-    \ <typename CAP = long long, typename COST = long long>\nstruct MinCostFlow\n\
-    {\n    const COST INF_COST = std::numeric_limits<COST>::max() / 2;\n    struct\
+    \ t; v != s; v = pv[v]) { c = std::min(c, g[pv[v]][pe[v]].cap); }\n          \
+    \  for (int v = t; v != s; v = pv[v]) {\n                auto& e = g[pv[v]][pe[v]];\n\
+    \                e.cap -= c;\n                g[v][e.rev].cap += c;\n        \
+    \    }\n            Cost d = -dual[s];\n            flow += c;\n            cost\
+    \ += c * d;\n            if (prev_cost_per_flow == d) { result.pop_back(); }\n\
+    \            result.push_back({flow, cost});\n            prev_cost_per_flow =\
+    \ d;\n        }\n        return result;\n    }\n\n    struct _edge {\n       \
+    \ int to, rev;\n        Cap cap;\n        Cost cost;\n    };\n\n    int _n;\n\
+    \    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
+    \ g;\n};\n#line 3 \"flow/mincostflow_bellmanford.hpp\"\n#include <iostream>\n\
+    #line 7 \"flow/mincostflow_bellmanford.hpp\"\n\n// CUT begin\n/*\nMinCostFlow:\
+    \ Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE (just negative cost\
+    \ edge is allowed)\nVerified by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>\n\
+    */\ntemplate <typename CAP = long long, typename COST = long long> struct MinCostFlow\
+    \ {\n    const COST INF_COST = std::numeric_limits<COST>::max() / 2;\n    struct\
     \ edge {\n        int to, rev;\n        CAP cap;\n        COST cost;\n       \
     \ friend std::ostream &operator<<(std::ostream &os, const edge &e) {\n       \
     \     os << '(' << e.to << ',' << e.rev << ',' << e.cap << ',' << e.cost << ')';\n\
     \            return os;\n        }\n    };\n    int V;\n    std::vector<std::vector<edge>>\
     \ g;\n    std::vector<COST> dist;\n    std::vector<int> prevv, preve;\n    std::vector<COST>\
-    \ dual;  // dual[V]: potential\n    std::vector<std::pair<int, int>> pos;\n\n\
-    \    bool _calc_distance_bellman_ford(int s) {  // O(VE), able to detect negative\
+    \ dual; // dual[V]: potential\n    std::vector<std::pair<int, int>> pos;\n\n \
+    \   bool _calc_distance_bellman_ford(int s) { // O(VE), able to detect negative\
     \ cycle\n        dist.assign(V, INF_COST);\n        dist[s] = 0;\n        bool\
     \ upd = true;\n        int cnt = 0;\n        while (upd) {\n            upd =\
-    \ false;\n            cnt++;\n            if (cnt > V) return false;  // Negative\
-    \ cycle existence\n            for (int v = 0; v < V; v++) if (dist[v] != INF_COST)\
-    \ {\n                for (int i = 0; i < (int)g[v].size(); i++) {\n          \
-    \          edge &e = g[v][i];\n                    COST c = dist[v] + e.cost +\
-    \ dual[v] - dual[e.to];\n                    if (e.cap > 0 and dist[e.to] > c)\
-    \ {\n                        dist[e.to] = c, prevv[e.to] = v, preve[e.to] = i;\n\
-    \                        upd = true;\n                    }\n                }\n\
-    \            }\n        }\n        return true;\n    }\n\n    bool _calc_distance_dijkstra(int\
-    \ s) {  // O(ElogV)\n        dist.assign(V, INF_COST);\n        dist[s] = 0;\n\
-    \        using P = std::pair<COST, int>;\n        std::priority_queue<P, std::vector<P>,\
+    \ false;\n            cnt++;\n            if (cnt > V) return false; // Negative\
+    \ cycle existence\n            for (int v = 0; v < V; v++)\n                if\
+    \ (dist[v] != INF_COST) {\n                    for (int i = 0; i < (int)g[v].size();\
+    \ i++) {\n                        edge &e = g[v][i];\n                       \
+    \ COST c = dist[v] + e.cost + dual[v] - dual[e.to];\n                        if\
+    \ (e.cap > 0 and dist[e.to] > c) {\n                            dist[e.to] = c,\
+    \ prevv[e.to] = v, preve[e.to] = i;\n                            upd = true;\n\
+    \                        }\n                    }\n                }\n       \
+    \ }\n        return true;\n    }\n\n    bool _calc_distance_dijkstra(int s) {\
+    \ // O(ElogV)\n        dist.assign(V, INF_COST);\n        dist[s] = 0;\n     \
+    \   using P = std::pair<COST, int>;\n        std::priority_queue<P, std::vector<P>,\
     \ std::greater<P>> q;\n        q.emplace(0, s);\n        while (!q.empty()) {\n\
     \            P p = q.top();\n            q.pop();\n            int v = p.second;\n\
     \            if (dist[v] < p.first) continue;\n            for (int i = 0; i <\
@@ -119,9 +118,9 @@ data:
     \ > 0 and dist[e.to] > c) {\n                    dist[e.to] = c, prevv[e.to] =\
     \ v, preve[e.to] = i;\n                    q.emplace(dist[e.to], e.to);\n    \
     \            }\n            }\n        }\n        return true;\n    }\n\n    MinCostFlow(int\
-    \ V=0) : V(V), g(V) {}\n\n    void add_edge(int from, int to, CAP cap, COST cost)\
-    \ {\n        assert(0 <= from and from < V);\n        assert(0 <= to and to <\
-    \ V);\n        pos.emplace_back(from, g[from].size());\n        g[from].emplace_back(edge{to,\
+    \ V = 0) : V(V), g(V) {}\n\n    void add_edge(int from, int to, CAP cap, COST\
+    \ cost) {\n        assert(0 <= from and from < V);\n        assert(0 <= to and\
+    \ to < V);\n        pos.emplace_back(from, g[from].size());\n        g[from].emplace_back(edge{to,\
     \ (int)g[to].size() + (from == to), cap, cost});\n        g[to].emplace_back(edge{from,\
     \ (int)g[from].size() - 1, (CAP)0, -cost});\n    }\n\n    std::pair<CAP, COST>\
     \ flow(int s, int t, const CAP &f) {\n        /*\n        Flush amount of `f`\
@@ -132,30 +131,30 @@ data:
     \        while (frem > 0) {\n            _calc_distance_dijkstra(s);\n       \
     \     if (dist[t] == INF_COST) break;\n            for (int v = 0; v < V; v++)\
     \ dual[v] = std::min(dual[v] + dist[v], INF_COST);\n            CAP d = frem;\n\
-    \            for (int v = t; v != s; v = prevv[v]) {\n                d = std::min(d,\
-    \ g[prevv[v]][preve[v]].cap);\n            }\n            frem -= d;\n       \
-    \     ret += d * dual[t];\n            for (int v = t; v != s; v = prevv[v]) {\n\
-    \                edge &e = g[prevv[v]][preve[v]];\n                e.cap -= d;\n\
-    \                g[v][e.rev].cap += d;\n            }\n        }\n        return\
-    \ std::make_pair(f - frem, ret);\n    }\n\n    friend std::ostream &operator<<(std::ostream\
-    \ &os, const MinCostFlow &mcf) {\n        os << \"[MinCostFlow]V=\" << mcf.V <<\
-    \ \":\";\n        for (int i = 0; i < (int)mcf.g.size(); i++) for (auto &e : mcf.g[i])\
-    \ {\n            os << \"\\n\" << i << \"->\" << e.to << \": cap=\" << e.cap <<\
-    \ \", cost=\" << e.cost;\n        }\n        return os;\n    }\n};\n#line 5 \"\
-    flow/test/mincostflow.test.cpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
-    \n\nint main()\n{\n    int V, E, F;\n    std::cin >> V >> E >> F;\n    mcf_graph<long\
+    \            for (int v = t; v != s; v = prevv[v]) { d = std::min(d, g[prevv[v]][preve[v]].cap);\
+    \ }\n            frem -= d;\n            ret += d * dual[t];\n            for\
+    \ (int v = t; v != s; v = prevv[v]) {\n                edge &e = g[prevv[v]][preve[v]];\n\
+    \                e.cap -= d;\n                g[v][e.rev].cap += d;\n        \
+    \    }\n        }\n        return std::make_pair(f - frem, ret);\n    }\n\n  \
+    \  friend std::ostream &operator<<(std::ostream &os, const MinCostFlow &mcf) {\n\
+    \        os << \"[MinCostFlow]V=\" << mcf.V << \":\";\n        for (int i = 0;\
+    \ i < (int)mcf.g.size(); i++)\n            for (auto &e : mcf.g[i]) { os << \"\
+    \\n\" << i << \"->\" << e.to << \": cap=\" << e.cap << \", cost=\" << e.cost;\
+    \ }\n        return os;\n    }\n};\n#line 5 \"flow/test/mincostflow.test.cpp\"\
+    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
+    \n\nint main() {\n    int V, E, F;\n    std::cin >> V >> E >> F;\n    mcf_graph<long\
     \ long, long long> mcf_ac(V);\n    MinCostFlow<long long, long long> mcf_bf(V);\n\
-    \    for (int i = 0; i < E; i++)\n    {\n        int u, v, c, d;\n        std::cin\
+    \    for (int i = 0; i < E; i++) {\n        int u, v, c, d;\n        std::cin\
     \ >> u >> v >> c >> d;\n        mcf_ac.add_edge(u, v, c, d);\n        mcf_bf.add_edge(u,\
     \ v, c, d);\n    }\n\n    auto [cap_ac, cost_ac] = mcf_ac.flow(0, V - 1, F);\n\
     \    auto [cap_bf, cost_bf] = mcf_bf.flow(0, V - 1, F);\n    assert(cap_ac ==\
     \ cap_bf and cost_ac == cost_bf);\n    std::cout << (cap_ac == F ? cost_ac : -1)\
     \ << '\\n';\n}\n"
-  code: "#include <cassert>\n#include <iostream>\n#include \"flow/mincostflow.hpp\"\
-    \n#include \"flow/mincostflow_bellmanford.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
-    \n\nint main()\n{\n    int V, E, F;\n    std::cin >> V >> E >> F;\n    mcf_graph<long\
+  code: "#include \"flow/mincostflow.hpp\"\n#include \"flow/mincostflow_bellmanford.hpp\"\
+    \n#include <cassert>\n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
+    \n\nint main() {\n    int V, E, F;\n    std::cin >> V >> E >> F;\n    mcf_graph<long\
     \ long, long long> mcf_ac(V);\n    MinCostFlow<long long, long long> mcf_bf(V);\n\
-    \    for (int i = 0; i < E; i++)\n    {\n        int u, v, c, d;\n        std::cin\
+    \    for (int i = 0; i < E; i++) {\n        int u, v, c, d;\n        std::cin\
     \ >> u >> v >> c >> d;\n        mcf_ac.add_edge(u, v, c, d);\n        mcf_bf.add_edge(u,\
     \ v, c, d);\n    }\n\n    auto [cap_ac, cost_ac] = mcf_ac.flow(0, V - 1, F);\n\
     \    auto [cap_bf, cost_bf] = mcf_bf.flow(0, V - 1, F);\n    assert(cap_ac ==\
@@ -167,7 +166,7 @@ data:
   isVerificationFile: true
   path: flow/test/mincostflow.test.cpp
   requiredBy: []
-  timestamp: '2020-09-29 17:16:20+09:00'
+  timestamp: '2020-11-18 20:06:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: flow/test/mincostflow.test.cpp

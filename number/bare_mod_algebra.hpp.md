@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>
@@ -131,7 +131,7 @@ data:
   path: number/bare_mod_algebra.hpp
   requiredBy: []
   timestamp: '2020-11-15 09:50:04+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 documentation_of: number/bare_mod_algebra.hpp
