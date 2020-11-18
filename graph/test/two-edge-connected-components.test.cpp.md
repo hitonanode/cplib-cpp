@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_edge_connected_components
@@ -72,38 +72,38 @@ data:
     \            }\n            }\n            tecc_num++;\n        }\n    }\n};\n\
     #line 3 \"graph/test/two-edge-connected-components.test.cpp\"\n\n#line 5 \"graph/test/two-edge-connected-components.test.cpp\"\
     \n#include <iostream>\n#line 8 \"graph/test/two-edge-connected-components.test.cpp\"\
-    \n\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
+    \n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
     \n    int V, E;\n    std::cin >> V >> E;\n    UndirectedGraph graph(V);\n    while\
     \ (E--) {\n        int s, t;\n        std::cin >> s >> t;\n        graph.add_edge(s,\
     \ t);\n    }\n\n    graph.detectBridge();\n    graph.two_edge_connected_components();\n\
     \n    std::vector<std::pair<int, int>> bridges;\n    for (int i = 0; i < E; i++)\
-    \ {\n        if (graph.is_bridge[i]) {\n            bridges.emplace_back(graph.edges[i]);\n\
-    \        }\n    }\n    std::cout << graph.tecc_num << '\\n';\n    std::vector<std::vector<int>>\
-    \ vids(V);\n    for (int i = 0; i < V; i++)\n    {\n        vids[graph.tecc_id[i]].push_back(i);\n\
-    \    }\n    for (const auto &v : vids) if (!v.empty()) {\n        std::cout <<\
-    \ v.size();\n        for (auto x : v) std::cout << ' ' << x;\n        std::cout\
-    \ << '\\n';\n    }\n}\n"
+    \ {\n        if (graph.is_bridge[i]) { bridges.emplace_back(graph.edges[i]); }\n\
+    \    }\n    std::cout << graph.tecc_num << '\\n';\n    std::vector<std::vector<int>>\
+    \ vids(V);\n    for (int i = 0; i < V; i++) { vids[graph.tecc_id[i]].push_back(i);\
+    \ }\n    for (const auto &v : vids)\n        if (!v.empty()) {\n            std::cout\
+    \ << v.size();\n            for (auto x : v) std::cout << ' ' << x;\n        \
+    \    std::cout << '\\n';\n        }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_edge_connected_components\"\
     \n#include \"graph/lowlink.hpp\"\n\n#include <algorithm>\n#include <iostream>\n\
-    #include <utility>\n#include <vector>\n\nint main()\n{\n    std::cin.tie(NULL);\n\
-    \    std::ios::sync_with_stdio(false);\n\n    int V, E;\n    std::cin >> V >>\
-    \ E;\n    UndirectedGraph graph(V);\n    while (E--) {\n        int s, t;\n  \
-    \      std::cin >> s >> t;\n        graph.add_edge(s, t);\n    }\n\n    graph.detectBridge();\n\
+    #include <utility>\n#include <vector>\n\nint main() {\n    std::cin.tie(nullptr),\
+    \ std::ios::sync_with_stdio(false);\n\n    int V, E;\n    std::cin >> V >> E;\n\
+    \    UndirectedGraph graph(V);\n    while (E--) {\n        int s, t;\n       \
+    \ std::cin >> s >> t;\n        graph.add_edge(s, t);\n    }\n\n    graph.detectBridge();\n\
     \    graph.two_edge_connected_components();\n\n    std::vector<std::pair<int,\
     \ int>> bridges;\n    for (int i = 0; i < E; i++) {\n        if (graph.is_bridge[i])\
-    \ {\n            bridges.emplace_back(graph.edges[i]);\n        }\n    }\n   \
-    \ std::cout << graph.tecc_num << '\\n';\n    std::vector<std::vector<int>> vids(V);\n\
-    \    for (int i = 0; i < V; i++)\n    {\n        vids[graph.tecc_id[i]].push_back(i);\n\
-    \    }\n    for (const auto &v : vids) if (!v.empty()) {\n        std::cout <<\
-    \ v.size();\n        for (auto x : v) std::cout << ' ' << x;\n        std::cout\
-    \ << '\\n';\n    }\n}\n"
+    \ { bridges.emplace_back(graph.edges[i]); }\n    }\n    std::cout << graph.tecc_num\
+    \ << '\\n';\n    std::vector<std::vector<int>> vids(V);\n    for (int i = 0; i\
+    \ < V; i++) { vids[graph.tecc_id[i]].push_back(i); }\n    for (const auto &v :\
+    \ vids)\n        if (!v.empty()) {\n            std::cout << v.size();\n     \
+    \       for (auto x : v) std::cout << ' ' << x;\n            std::cout << '\\\
+    n';\n        }\n}\n"
   dependsOn:
   - graph/lowlink.hpp
   isVerificationFile: true
   path: graph/test/two-edge-connected-components.test.cpp
   requiredBy: []
-  timestamp: '2020-10-06 01:41:58+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/two-edge-connected-components.test.cpp
 layout: document

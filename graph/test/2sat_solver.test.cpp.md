@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
   _extendedRequiredBy: []
@@ -69,32 +69,31 @@ data:
     \ i = 0; i < nb_sat_vars; i++) {\n            if (cmp[i] == cmp[i + nb_sat_vars])\
     \ return false;\n            solution[i] = cmp[i] > cmp[i + nb_sat_vars];\n  \
     \      }\n        return true;\n    }\n};\n#line 4 \"graph/test/2sat_solver.test.cpp\"\
-    \n#include <iostream>\n#include <stdio.h>\n#include <string>\n\n\nint main() {\n\
-    \n    std::cin.tie(0);\n    std::ios::sync_with_stdio(false);\n    std::string\
+    \n#include <iostream>\n#include <stdio.h>\n#include <string>\n\nint main() {\n\
+    \n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n    std::string\
     \ s;\n    int N, M;\n    std::cin >> s >> s >> N >> M;\n    SATSolver solver(N);\n\
     \    while (M--) {\n        int a, b;\n        std::cin >> a >> b >> s;\n    \
     \    solver.add_x_or_y_constraint(a > 0, abs(a) - 1, b > 0, abs(b) - 1);\n   \
     \ }\n    if (solver.run()) {\n        puts(\"s SATISFIABLE\");\n        printf(\"\
     v \");\n        for (int i = 0; i < N; i++) printf(\"%d \", (solver.solution[i]\
-    \ ? 1 : -1) * (i + 1));\n        puts(\"0\");\n    }\n    else {\n        puts(\"\
-    s UNSATISFIABLE\");\n    }\n}\n"
+    \ ? 1 : -1) * (i + 1));\n        puts(\"0\");\n    } else {\n        puts(\"s\
+    \ UNSATISFIABLE\");\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\n#include \"\
     graph/strongly_connected_components.hpp\"\n#include <cassert>\n#include <iostream>\n\
-    #include <stdio.h>\n#include <string>\n\n\nint main() {\n\n    std::cin.tie(0);\n\
-    \    std::ios::sync_with_stdio(false);\n    std::string s;\n    int N, M;\n  \
-    \  std::cin >> s >> s >> N >> M;\n    SATSolver solver(N);\n    while (M--) {\n\
-    \        int a, b;\n        std::cin >> a >> b >> s;\n        solver.add_x_or_y_constraint(a\
+    #include <stdio.h>\n#include <string>\n\nint main() {\n\n    std::cin.tie(nullptr),\
+    \ std::ios::sync_with_stdio(false);\n    std::string s;\n    int N, M;\n    std::cin\
+    \ >> s >> s >> N >> M;\n    SATSolver solver(N);\n    while (M--) {\n        int\
+    \ a, b;\n        std::cin >> a >> b >> s;\n        solver.add_x_or_y_constraint(a\
     \ > 0, abs(a) - 1, b > 0, abs(b) - 1);\n    }\n    if (solver.run()) {\n     \
     \   puts(\"s SATISFIABLE\");\n        printf(\"v \");\n        for (int i = 0;\
     \ i < N; i++) printf(\"%d \", (solver.solution[i] ? 1 : -1) * (i + 1));\n    \
-    \    puts(\"0\");\n    }\n    else {\n        puts(\"s UNSATISFIABLE\");\n   \
-    \ }\n}\n"
+    \    puts(\"0\");\n    } else {\n        puts(\"s UNSATISFIABLE\");\n    }\n}\n"
   dependsOn:
   - graph/strongly_connected_components.hpp
   isVerificationFile: true
   path: graph/test/2sat_solver.test.cpp
   requiredBy: []
-  timestamp: '2020-09-05 20:52:47+09:00'
+  timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/2sat_solver.test.cpp

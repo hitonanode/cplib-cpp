@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/floor_sum.hpp
     title: utilities/floor_sum.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_floor_of_linear
@@ -24,13 +24,13 @@ data:
     \ m - b);\n    if (y_max == 0) return ans;\n    ans += (n - (x_max + a - 1) /\
     \ a) * y_max;\n    ans += floor_sum(y_max, a, m, (a - x_max % a) % a);\n    return\
     \ ans;\n}\n#line 3 \"utilities/test/floor_sum.test.cpp\"\n#include <iostream>\n\
-    using namespace std;\n\nint main()\n{\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int T;\n    cin >> T;\n    while (T--) {\n        int N, M, A, B;\n     \
     \   cin >> N >> M >> A >> B;\n        cout << floor_sum(N, M, A, B) << '\\n';\n\
     \    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_floor_of_linear\"\
     \n#include \"utilities/floor_sum.hpp\"\n#include <iostream>\nusing namespace std;\n\
-    \nint main()\n{\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int T;\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int T;\n\
     \    cin >> T;\n    while (T--) {\n        int N, M, A, B;\n        cin >> N >>\
     \ M >> A >> B;\n        cout << floor_sum(N, M, A, B) << '\\n';\n    }\n}\n"
   dependsOn:
@@ -38,8 +38,8 @@ data:
   isVerificationFile: true
   path: utilities/test/floor_sum.test.cpp
   requiredBy: []
-  timestamp: '2020-11-16 12:55:05+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: utilities/test/floor_sum.test.cpp
 layout: document

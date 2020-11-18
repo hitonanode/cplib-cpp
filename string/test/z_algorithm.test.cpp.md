@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/z_algorithm.hpp
     title: string/z_algorithm.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
@@ -16,7 +16,7 @@ data:
   bundledCode: "#line 2 \"string/z_algorithm.hpp\"\n#include <string>\n#include <vector>\n\
     \n// CUT begin\n// Z algorithm (length of longest common prefix for s[0:N] & s[i:N]\
     \ for each i)\n// Complexity: O(N)\n// <http://snuke.hatenablog.com/entry/2014/12/03/214243>\n\
-    template <typename T>\nstd::vector<int> z_algorithm(const std::vector<T> &s) {\n\
+    template <typename T> std::vector<int> z_algorithm(const std::vector<T> &s) {\n\
     \    const int N = s.size();\n    if (N == 0) return {};\n    std::vector<int>\
     \ ans(N);\n    ans[0] = N;\n    int i = 1, j = 0;\n    while (i < N) {\n     \
     \   while (i + j < N and s[j] == s[i + j]) ++j;\n        ans[i] = j;\n       \
@@ -27,19 +27,19 @@ data:
     \ v(N);\n    for (int i = 0; i < N; i++) v[i] = s[i];\n    return z_algorithm(v);\n\
     }\n#line 2 \"string/test/z_algorithm.test.cpp\"\n#include <cstdio>\n#include <iostream>\n\
     #line 5 \"string/test/z_algorithm.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\
-    \n\nint main()\n{\n    std::string S;\n    std::cin >> S;\n    for (auto x : z_algorithm(S))\n\
-    \    {\n        printf(\"%d \", x);\n    }\n}\n"
+    \n\nint main() {\n    std::string S;\n    std::cin >> S;\n    for (auto x : z_algorithm(S))\
+    \ { printf(\"%d \", x); }\n}\n"
   code: "#include \"string/z_algorithm.hpp\"\n#include <cstdio>\n#include <iostream>\n\
     #include <string>\n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\
-    \n\nint main()\n{\n    std::string S;\n    std::cin >> S;\n    for (auto x : z_algorithm(S))\n\
-    \    {\n        printf(\"%d \", x);\n    }\n}\n"
+    \n\nint main() {\n    std::string S;\n    std::cin >> S;\n    for (auto x : z_algorithm(S))\
+    \ { printf(\"%d \", x); }\n}\n"
   dependsOn:
   - string/z_algorithm.hpp
   isVerificationFile: true
   path: string/test/z_algorithm.test.cpp
   requiredBy: []
-  timestamp: '2020-09-28 19:06:56+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: string/test/z_algorithm.test.cpp
 layout: document

@@ -12,7 +12,7 @@ data:
     \ of number <= N \uFF08\u81EA\u7136\u6570\u306E\u5206\u5272\u306E\u5217\u6319\uFF09\
     \n// - can be used for N less than ~50\n// - Example:\n//   - 1 => [[1,],]\n//\
     \   - 2 => [[1,],[1,1,],[2,],]\n//   - 3 => [[1,],[1,1,],[1,1,1,],[2,],[2,1,],[3,],]\n\
-    struct\n{\n    std::vector<std::vector<int>> ret;\n    std::vector<int> now;\n\
+    struct {\n    std::vector<std::vector<int>> ret;\n    std::vector<int> now;\n\
     \    int num;\n    void _partition_dfs() {\n        int rem = num - std::accumulate(now.begin(),\
     \ now.end(), 0);\n        if (!now.empty()) rem = std::min(rem, now.back());\n\
     \n        now.push_back(0);\n        for (int j = 1; j <= rem; j++) {\n      \
@@ -24,7 +24,7 @@ data:
     // Enumerate Partitions of number <= N \uFF08\u81EA\u7136\u6570\u306E\u5206\u5272\
     \u306E\u5217\u6319\uFF09\n// - can be used for N less than ~50\n// - Example:\n\
     //   - 1 => [[1,],]\n//   - 2 => [[1,],[1,1,],[2,],]\n//   - 3 => [[1,],[1,1,],[1,1,1,],[2,],[2,1,],[3,],]\n\
-    struct\n{\n    std::vector<std::vector<int>> ret;\n    std::vector<int> now;\n\
+    struct {\n    std::vector<std::vector<int>> ret;\n    std::vector<int> now;\n\
     \    int num;\n    void _partition_dfs() {\n        int rem = num - std::accumulate(now.begin(),\
     \ now.end(), 0);\n        if (!now.empty()) rem = std::min(rem, now.back());\n\
     \n        now.push_back(0);\n        for (int j = 1; j <= rem; j++) {\n      \
@@ -36,7 +36,7 @@ data:
   isVerificationFile: false
   path: number/enumerate_partitions.hpp
   requiredBy: []
-  timestamp: '2020-03-07 22:32:10+09:00'
+  timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: number/enumerate_partitions.hpp

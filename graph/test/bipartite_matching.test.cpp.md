@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/bipartite_matching.hpp
     title: graph/bipartite_matching.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bipartitematching
@@ -55,38 +55,40 @@ data:
     \ i++) if (bm.match[i] > i)\n        {\n            os << '(' << i << '-' << bm.match[i]\
     \ << \"),\";\n        }\n        os << '}';\n        return os;\n    }\n};\n#line\
     \ 2 \"graph/test/bipartite_matching.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\
-    \n\n#include <algorithm>\n#include <numeric>\n#include <random>\n\nint main()\n\
-    {\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\n    int L,\
+    \n\n#include <algorithm>\n#include <numeric>\n#include <random>\n\nint main()\
+    \ {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\n    int L,\
     \ R, M;\n    std::cin >> L >> R >> M;\n\n    std::vector<int> perm(L + R), perm_inv(L\
     \ + R);\n    std::iota(perm.begin(), perm.end(), 0);\n    std::random_device rd;\n\
     \    std::mt19937 g(rd());\n    std::shuffle(perm.begin(), perm.end(), g);\n \
-    \   for (int i = 0; i < L + R; i++)\n    {\n        perm_inv[perm[i]] = i;\n \
-    \   }\n\n    BipartiteMatching bm(L + R);\n    while (M--)\n    {\n        int\
-    \ a, b;\n        std::cin >> a >> b;\n        bm.add_edge(perm[a], perm[L + b]);\n\
-    \    }\n\n    std::cout << bm.solve() << '\\n';\n    for (int j = 0; j < L + R;\
-    \ j++) if (bm.match[j] > j) {\n        int a = perm_inv[j], b = perm_inv[bm.match[j]];\n\
-    \        if (a > b) std::cout << b << ' ' << a - L << '\\n';\n        else std::cout\
-    \ << a << ' ' << b - L << '\\n';\n    }\n}\n"
+    \   for (int i = 0; i < L + R; i++) { perm_inv[perm[i]] = i; }\n\n    BipartiteMatching\
+    \ bm(L + R);\n    while (M--) {\n        int a, b;\n        std::cin >> a >> b;\n\
+    \        bm.add_edge(perm[a], perm[L + b]);\n    }\n\n    std::cout << bm.solve()\
+    \ << '\\n';\n    for (int j = 0; j < L + R; j++)\n        if (bm.match[j] > j)\
+    \ {\n            int a = perm_inv[j], b = perm_inv[bm.match[j]];\n           \
+    \ if (a > b)\n                std::cout << b << ' ' << a - L << '\\n';\n     \
+    \       else\n                std::cout << a << ' ' << b - L << '\\n';\n     \
+    \   }\n}\n"
   code: "#include \"graph/bipartite_matching.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\
-    \n\n#include <algorithm>\n#include <numeric>\n#include <random>\n\nint main()\n\
-    {\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\n    int L,\
+    \n\n#include <algorithm>\n#include <numeric>\n#include <random>\n\nint main()\
+    \ {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\n    int L,\
     \ R, M;\n    std::cin >> L >> R >> M;\n\n    std::vector<int> perm(L + R), perm_inv(L\
     \ + R);\n    std::iota(perm.begin(), perm.end(), 0);\n    std::random_device rd;\n\
     \    std::mt19937 g(rd());\n    std::shuffle(perm.begin(), perm.end(), g);\n \
-    \   for (int i = 0; i < L + R; i++)\n    {\n        perm_inv[perm[i]] = i;\n \
-    \   }\n\n    BipartiteMatching bm(L + R);\n    while (M--)\n    {\n        int\
-    \ a, b;\n        std::cin >> a >> b;\n        bm.add_edge(perm[a], perm[L + b]);\n\
-    \    }\n\n    std::cout << bm.solve() << '\\n';\n    for (int j = 0; j < L + R;\
-    \ j++) if (bm.match[j] > j) {\n        int a = perm_inv[j], b = perm_inv[bm.match[j]];\n\
-    \        if (a > b) std::cout << b << ' ' << a - L << '\\n';\n        else std::cout\
-    \ << a << ' ' << b - L << '\\n';\n    }\n}\n"
+    \   for (int i = 0; i < L + R; i++) { perm_inv[perm[i]] = i; }\n\n    BipartiteMatching\
+    \ bm(L + R);\n    while (M--) {\n        int a, b;\n        std::cin >> a >> b;\n\
+    \        bm.add_edge(perm[a], perm[L + b]);\n    }\n\n    std::cout << bm.solve()\
+    \ << '\\n';\n    for (int j = 0; j < L + R; j++)\n        if (bm.match[j] > j)\
+    \ {\n            int a = perm_inv[j], b = perm_inv[bm.match[j]];\n           \
+    \ if (a > b)\n                std::cout << b << ' ' << a - L << '\\n';\n     \
+    \       else\n                std::cout << a << ' ' << b - L << '\\n';\n     \
+    \   }\n}\n"
   dependsOn:
   - graph/bipartite_matching.hpp
   isVerificationFile: true
   path: graph/test/bipartite_matching.test.cpp
   requiredBy: []
-  timestamp: '2020-04-18 19:20:50+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/bipartite_matching.test.cpp
 layout: document

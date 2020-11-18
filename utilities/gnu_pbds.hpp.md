@@ -14,9 +14,9 @@ data:
 
     #include <ext/pb_ds/assoc_container.hpp>
 
-    #include <ext/pb_ds/tree_policy.hpp>
-
     #include <ext/pb_ds/tag_and_trait.hpp>
+
+    #include <ext/pb_ds/tree_policy.hpp>
 
     using namespace __gnu_pbds; // find_by_order(), order_of_key()
 
@@ -34,9 +34,9 @@ data:
 
     #include <ext/pb_ds/assoc_container.hpp>
 
-    #include <ext/pb_ds/tree_policy.hpp>
-
     #include <ext/pb_ds/tag_and_trait.hpp>
+
+    #include <ext/pb_ds/tree_policy.hpp>
 
     using namespace __gnu_pbds; // find_by_order(), order_of_key()
 
@@ -51,7 +51,7 @@ data:
   isVerificationFile: false
   path: utilities/gnu_pbds.hpp
   requiredBy: []
-  timestamp: '2020-09-29 18:47:04+09:00'
+  timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: utilities/gnu_pbds.hpp

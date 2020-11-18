@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C
@@ -70,27 +70,27 @@ data:
     \ i = 0; i < nb_sat_vars; i++) {\n            if (cmp[i] == cmp[i + nb_sat_vars])\
     \ return false;\n            solution[i] = cmp[i] > cmp[i + nb_sat_vars];\n  \
     \      }\n        return true;\n    }\n};\n#line 3 \"graph/test/strongly_connected_components.test.cpp\"\
-    \n\n#include <stdio.h>\n\nint main()\n{\n    int V, E;\n    scanf(\"%d %d\", &V,\
-    \ &E);\n    DirectedGraphSCC graph(V);\n    while (E--)\n    {\n        int s,\
-    \ t;\n        scanf(\"%d %d\", &s, &t);\n        graph.add_edge(s, t);\n    }\n\
-    \n    graph.FindStronglyConnectedComponents();\n\n    int Q;\n    scanf(\"%d\"\
-    , &Q);\n    while (Q--)\n    {\n        int u, v;\n        scanf(\"%d %d\", &u,\
-    \ &v);\n        printf(\"%d\\n\", graph.cmp[u] == graph.cmp[v]);\n    }\n}\n"
+    \n\n#include <stdio.h>\n\nint main() {\n    int V, E;\n    scanf(\"%d %d\", &V,\
+    \ &E);\n    DirectedGraphSCC graph(V);\n    while (E--) {\n        int s, t;\n\
+    \        scanf(\"%d %d\", &s, &t);\n        graph.add_edge(s, t);\n    }\n\n \
+    \   graph.FindStronglyConnectedComponents();\n\n    int Q;\n    scanf(\"%d\",\
+    \ &Q);\n    while (Q--) {\n        int u, v;\n        scanf(\"%d %d\", &u, &v);\n\
+    \        printf(\"%d\\n\", graph.cmp[u] == graph.cmp[v]);\n    }\n}\n"
   code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C\"\
     \n#include \"graph/strongly_connected_components.hpp\"\n\n#include <stdio.h>\n\
-    \nint main()\n{\n    int V, E;\n    scanf(\"%d %d\", &V, &E);\n    DirectedGraphSCC\
-    \ graph(V);\n    while (E--)\n    {\n        int s, t;\n        scanf(\"%d %d\"\
-    , &s, &t);\n        graph.add_edge(s, t);\n    }\n\n    graph.FindStronglyConnectedComponents();\n\
-    \n    int Q;\n    scanf(\"%d\", &Q);\n    while (Q--)\n    {\n        int u, v;\n\
-    \        scanf(\"%d %d\", &u, &v);\n        printf(\"%d\\n\", graph.cmp[u] ==\
-    \ graph.cmp[v]);\n    }\n}"
+    \nint main() {\n    int V, E;\n    scanf(\"%d %d\", &V, &E);\n    DirectedGraphSCC\
+    \ graph(V);\n    while (E--) {\n        int s, t;\n        scanf(\"%d %d\", &s,\
+    \ &t);\n        graph.add_edge(s, t);\n    }\n\n    graph.FindStronglyConnectedComponents();\n\
+    \n    int Q;\n    scanf(\"%d\", &Q);\n    while (Q--) {\n        int u, v;\n \
+    \       scanf(\"%d %d\", &u, &v);\n        printf(\"%d\\n\", graph.cmp[u] == graph.cmp[v]);\n\
+    \    }\n}"
   dependsOn:
   - graph/strongly_connected_components.hpp
   isVerificationFile: true
   path: graph/test/strongly_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2020-09-05 20:52:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/strongly_connected_components.test.cpp
 layout: document

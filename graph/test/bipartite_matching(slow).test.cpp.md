@@ -13,9 +13,9 @@ data:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A
-  bundledCode: "#line 1 \"graph/test/bipartite_matching(slow).test.cpp\"\n#include\
-    \ <iostream>\n#line 3 \"graph/bipartite_matching(slow).hpp\"\n#include <vector>\n\
-    \n// CUT begin\n// Bipartite matching of undirected bipartite graph\n// <https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>\n\
+  bundledCode: "#line 2 \"graph/bipartite_matching(slow).hpp\"\n#include <iostream>\n\
+    #include <vector>\n\n// CUT begin\n// Bipartite matching of undirected bipartite\
+    \ graph\n// <https://ei1333.github.io/luzhiled/snippets/graph/bipartite-matching.html>\n\
     // Comprexity: O(VE)\nstruct BipartiteMatching\n{\n    int V;                \
     \               // # of vertices\n    std::vector<std::vector<int>> edges; //\
     \ Adjacency list\n    std::vector<int> match;              // match[i] = (Partner\
@@ -36,24 +36,24 @@ data:
     \ << \"-\" << bm.match[i] << \"),\";\n        }\n        os << \"}\";\n      \
     \  return os;\n    }\n};\n#line 3 \"graph/test/bipartite_matching(slow).test.cpp\"\
     \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A\"\
-    \n\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
+    \n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
     \n    int X, Y, E;\n    std::cin >> X >> Y >> E;\n    BipartiteMatching graph(X\
-    \ + Y);\n    while (E--)\n    {\n        int s, t;\n        std::cin >> s >> t;\n\
-    \        graph.add_edge(s, X + t);\n    }\n    std::cout << graph.solve() << '\\\
+    \ + Y);\n    while (E--) {\n        int s, t;\n        std::cin >> s >> t;\n \
+    \       graph.add_edge(s, X + t);\n    }\n    std::cout << graph.solve() << '\\\
     n';\n}\n"
-  code: "#include <iostream>\n#include \"graph/bipartite_matching(slow).hpp\"\n#define\
+  code: "#include \"graph/bipartite_matching(slow).hpp\"\n#include <iostream>\n#define\
     \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A\"\
-    \n\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
+    \n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
     \n    int X, Y, E;\n    std::cin >> X >> Y >> E;\n    BipartiteMatching graph(X\
-    \ + Y);\n    while (E--)\n    {\n        int s, t;\n        std::cin >> s >> t;\n\
-    \        graph.add_edge(s, X + t);\n    }\n    std::cout << graph.solve() << '\\\
+    \ + Y);\n    while (E--) {\n        int s, t;\n        std::cin >> s >> t;\n \
+    \       graph.add_edge(s, X + t);\n    }\n    std::cout << graph.solve() << '\\\
     n';\n}\n"
   dependsOn:
   - graph/bipartite_matching(slow).hpp
   isVerificationFile: true
   path: graph/test/bipartite_matching(slow).test.cpp
   requiredBy: []
-  timestamp: '2020-04-18 18:32:38+09:00'
+  timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/bipartite_matching(slow).test.cpp

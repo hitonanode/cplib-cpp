@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/strongly_connected_components_bitset.hpp
     title: graph/strongly_connected_components_bitset.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C
@@ -36,29 +36,29 @@ data:
     \ i++) if (unvisited[i]) _dfs(i);\n        unvisited.set();\n        for (int\
     \ i = (int)vs.size() - 1; i >= 0; i--) if (unvisited[vs[i]]) {\n            _rdfs(vs[i],\
     \ scc_num++);\n        }\n    }\n};\n#line 3 \"graph/test/strongly_connected_components_bitset.test.cpp\"\
-    \n\n#include <cassert>\n#include <stdio.h>\nconstexpr int VMAX = 10000;\nint main()\n\
-    {\n    int V, E;\n    scanf(\"%d %d\", &V, &E);\n    assert(V <= VMAX);\n    std::vector<std::bitset<VMAX>>\
-    \ e(V), einv(V);\n    while (E--)\n    {\n        int s, t;\n        scanf(\"\
-    %d %d\", &s, &t);\n        e[s][t] = einv[t][s] = 1;\n    }\n    DirectedGraphSCC64<VMAX>\
-    \ graph(e, einv);\n\n    int Q;\n    scanf(\"%d\", &Q);\n    while (Q--)\n   \
-    \ {\n        int u, v;\n        scanf(\"%d %d\", &u, &v);\n        printf(\"%d\\\
-    n\", graph.cmp[u] == graph.cmp[v]);\n    }\n}\n"
+    \n\n#include <cassert>\n#include <stdio.h>\nconstexpr int VMAX = 10000;\nint main()\
+    \ {\n    int V, E;\n    scanf(\"%d %d\", &V, &E);\n    assert(V <= VMAX);\n  \
+    \  std::vector<std::bitset<VMAX>> e(V), einv(V);\n    while (E--) {\n        int\
+    \ s, t;\n        scanf(\"%d %d\", &s, &t);\n        e[s][t] = einv[t][s] = 1;\n\
+    \    }\n    DirectedGraphSCC64<VMAX> graph(e, einv);\n\n    int Q;\n    scanf(\"\
+    %d\", &Q);\n    while (Q--) {\n        int u, v;\n        scanf(\"%d %d\", &u,\
+    \ &v);\n        printf(\"%d\\n\", graph.cmp[u] == graph.cmp[v]);\n    }\n}\n"
   code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C\"\
     \n#include \"graph/strongly_connected_components_bitset.hpp\"\n\n#include <cassert>\n\
-    #include <stdio.h>\nconstexpr int VMAX = 10000;\nint main()\n{\n    int V, E;\n\
+    #include <stdio.h>\nconstexpr int VMAX = 10000;\nint main() {\n    int V, E;\n\
     \    scanf(\"%d %d\", &V, &E);\n    assert(V <= VMAX);\n    std::vector<std::bitset<VMAX>>\
-    \ e(V), einv(V);\n    while (E--)\n    {\n        int s, t;\n        scanf(\"\
-    %d %d\", &s, &t);\n        e[s][t] = einv[t][s] = 1;\n    }\n    DirectedGraphSCC64<VMAX>\
-    \ graph(e, einv);\n\n    int Q;\n    scanf(\"%d\", &Q);\n    while (Q--)\n   \
-    \ {\n        int u, v;\n        scanf(\"%d %d\", &u, &v);\n        printf(\"%d\\\
-    n\", graph.cmp[u] == graph.cmp[v]);\n    }\n}\n"
+    \ e(V), einv(V);\n    while (E--) {\n        int s, t;\n        scanf(\"%d %d\"\
+    , &s, &t);\n        e[s][t] = einv[t][s] = 1;\n    }\n    DirectedGraphSCC64<VMAX>\
+    \ graph(e, einv);\n\n    int Q;\n    scanf(\"%d\", &Q);\n    while (Q--) {\n \
+    \       int u, v;\n        scanf(\"%d %d\", &u, &v);\n        printf(\"%d\\n\"\
+    , graph.cmp[u] == graph.cmp[v]);\n    }\n}\n"
   dependsOn:
   - graph/strongly_connected_components_bitset.hpp
   isVerificationFile: true
   path: graph/test/strongly_connected_components_bitset.test.cpp
   requiredBy: []
-  timestamp: '2020-03-07 22:40:57+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/strongly_connected_components_bitset.test.cpp
 layout: document

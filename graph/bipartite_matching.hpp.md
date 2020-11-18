@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/bipartite_matching.test.cpp
     title: graph/test/bipartite_matching.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://ei1333.github.io/luzhiled/snippets/graph/hopcroft-karp.html>
@@ -98,7 +98,7 @@ data:
   path: graph/bipartite_matching.hpp
   requiredBy: []
   timestamp: '2020-04-18 19:20:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - graph/test/bipartite_matching.test.cpp
 documentation_of: graph/bipartite_matching.hpp

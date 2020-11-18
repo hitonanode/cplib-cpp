@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: unionfind/unionfind.hpp
     title: unionfind/unionfind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/incremental-bridge-connectivity.test.cpp
     title: graph/test/incremental-bridge-connectivity.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://ei1333.github.io/library/graph/connected-components/incremental-bridge-connectivity.cpp>
     - https://scrapbox.io/data-structures/Incremental_Bridge-Connectivity>
   bundledCode: "#line 2 \"unionfind/unionfind.hpp\"\n#include <numeric>\n#include\
     \ <utility>\n#include <vector>\n\n// CUT begin\n// UnionFind Tree (0-indexed),\
-    \ based on size of each disjoint set\nstruct UnionFind\n{\n    std::vector<int>\
-    \ par, cou;\n    UnionFind(int N = 0) : par(N), cou(N, 1) {\n        iota(par.begin(),\
-    \ par.end(), 0);\n    }\n    int find(int x) { return (par[x] == x) ? x : (par[x]\
-    \ = find(par[x])); }\n    bool unite(int x, int y) {\n        x = find(x), y =\
-    \ find(y);\n        if (x == y) return false;\n        if (cou[x] < cou[y]) std::swap(x,\
-    \ y); \n        par[y] = x, cou[x] += cou[y];\n        return true;\n    }\n \
-    \   int count(int x) { return cou[find(x)]; }\n    bool same(int x, int y) { return\
+    \ based on size of each disjoint set\nstruct UnionFind {\n    std::vector<int>\
+    \ par, cou;\n    UnionFind(int N = 0) : par(N), cou(N, 1) { iota(par.begin(),\
+    \ par.end(), 0); }\n    int find(int x) { return (par[x] == x) ? x : (par[x] =\
+    \ find(par[x])); }\n    bool unite(int x, int y) {\n        x = find(x), y = find(y);\n\
+    \        if (x == y) return false;\n        if (cou[x] < cou[y]) std::swap(x,\
+    \ y);\n        par[y] = x, cou[x] += cou[y];\n        return true;\n    }\n  \
+    \  int count(int x) { return cou[find(x)]; }\n    bool same(int x, int y) { return\
     \ find(x) == find(y); }\n};\n#line 3 \"graph/incremental_bridge_connectivity.hpp\"\
     \n#include <cassert>\n#line 5 \"graph/incremental_bridge_connectivity.hpp\"\n\
     #include <unordered_set>\n#line 7 \"graph/incremental_bridge_connectivity.hpp\"\
@@ -82,8 +82,8 @@ data:
   isVerificationFile: false
   path: graph/incremental_bridge_connectivity.hpp
   requiredBy: []
-  timestamp: '2020-10-31 12:12:16+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - graph/test/incremental-bridge-connectivity.test.cpp
 documentation_of: graph/incremental_bridge_connectivity.hpp

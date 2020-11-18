@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/bellman_ford.hpp
     title: graph/bellman_ford.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: graph/shortest_path.hpp
   _extendedRequiredBy: []
@@ -16,11 +16,20 @@ data:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B
-  bundledCode: "#line 1 \"graph/test/bellman_ford.test.cpp\"\n#include <iostream>\n\
-    #include <vector>\n#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include\
-    \ <deque>\n#include <functional>\n#include <limits>\n#include <queue>\n#include\
-    \ <utility>\n#line 9 \"graph/shortest_path.hpp\"\n\n// CUT begin\ntemplate<typename\
-    \ T>\nstruct ShortestPath\n{\n    int V, E;\n    int INVALID = -1;\n    std::vector<std::vector<std::pair<int,\
+  bundledCode: "#line 2 \"graph/bellman_ford.hpp\"\n#include <utility>\n#include <vector>\n\
+    using namespace std;\n\n// CUT begin\nusing wedges = vector<vector<pair<long long\
+    \ int, long long int>>>; // (to, weight)\nconstexpr long long int INF = 1e17;\n\
+    vector<long long int> bellman_ford(int s, const wedges &w, int T)\n{\n    int\
+    \ N = w.size();\n    vector<long long int> d(N, INF);\n    d[s] = 0;\n    for(int\
+    \ l = 0; l < T; l++) {\n        bool upd = false;\n        for (int i = 0; i <\
+    \ N; i++)\n        {\n            if (d[i] >= INF) continue;\n            for\
+    \ (auto pa : w[i]) {\n                if (d[pa.first] > d[i] + pa.second) {\n\
+    \                    d[pa.first] = d[i] + pa.second;\n                    upd\
+    \ = true;\n                }\n            }\n        }\n        if (!upd) break;\n\
+    \    }\n    return d;\n}\n#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n\
+    #include <deque>\n#include <functional>\n#include <limits>\n#include <queue>\n\
+    #line 9 \"graph/shortest_path.hpp\"\n\n// CUT begin\ntemplate<typename T>\nstruct\
+    \ ShortestPath\n{\n    int V, E;\n    int INVALID = -1;\n    std::vector<std::vector<std::pair<int,\
     \ T>>> to;\n    ShortestPath() = default;\n    ShortestPath(int V) : V(V), E(0),\
     \ to(V) {}\n    void add_edge(int s, int t, T len) {\n        assert(0 <= s and\
     \ s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t, len);\n\
@@ -65,46 +74,37 @@ data:
     \ j < V; j++) {\n                    if (dist2d[k][j] = std::numeric_limits<T>::max())\
     \ continue;\n                    dist2d[i][j] = min(dist2d[i][j], dist2d[i][k]\
     \ + dist2d[k][j]);\n                }\n            }\n        }\n    }\n};\n#line\
-    \ 4 \"graph/bellman_ford.hpp\"\nusing namespace std;\n\n// CUT begin\nusing wedges\
-    \ = vector<vector<pair<long long int, long long int>>>; // (to, weight)\nconstexpr\
-    \ long long int INF = 1e17;\nvector<long long int> bellman_ford(int s, const wedges\
-    \ &w, int T)\n{\n    int N = w.size();\n    vector<long long int> d(N, INF);\n\
-    \    d[s] = 0;\n    for(int l = 0; l < T; l++) {\n        bool upd = false;\n\
-    \        for (int i = 0; i < N; i++)\n        {\n            if (d[i] >= INF)\
-    \ continue;\n            for (auto pa : w[i]) {\n                if (d[pa.first]\
-    \ > d[i] + pa.second) {\n                    d[pa.first] = d[i] + pa.second;\n\
-    \                    upd = true;\n                }\n            }\n        }\n\
-    \        if (!upd) break;\n    }\n    return d;\n}\n#line 5 \"graph/test/bellman_ford.test.cpp\"\
+    \ 3 \"graph/test/bellman_ford.test.cpp\"\n#include <iostream>\n#line 5 \"graph/test/bellman_ford.test.cpp\"\
     \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B\"\
-    \n\nwedges e;\n\nint main()\n{\n    int V, E, r;\n    cin >> V >> E >> r;\n  \
-    \  ShortestPath<long long int> graph(V);\n    e.resize(V);\n    for (int i = 0;\
+    \n\nwedges e;\n\nint main() {\n    int V, E, r;\n    cin >> V >> E >> r;\n   \
+    \ ShortestPath<long long int> graph(V);\n    e.resize(V);\n    for (int i = 0;\
     \ i < E; i++) {\n        int s, t, d;\n        cin >> s >> t >> d;\n        e[s].emplace_back(t,\
     \ d);\n        graph.add_edge(s, t, d);\n    }\n    vector<long long int> ret\
     \ = bellman_ford(r, e, V);\n\n    if (!graph.BellmanFord(r, V + 1)) {\n      \
     \  puts(\"NEGATIVE CYCLE\");\n        return 0;\n    }\n\n    for (int i = 0;\
     \ i < V; i++) {\n        if (graph.dist[i] >= INF) {\n            assert(ret[i]\
-    \ == INF);\n            puts(\"INF\");\n        }\n        else {\n          \
-    \  assert(ret[i] == graph.dist[i]);\n            printf(\"%lld\\n\", graph.dist[i]);\n\
-    \        }\n    }\n}\n"
-  code: "#include <iostream>\n#include <vector>\n#include \"graph/shortest_path.hpp\"\
-    \n#include \"graph/bellman_ford.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B\"\
-    \n\nwedges e;\n\nint main()\n{\n    int V, E, r;\n    cin >> V >> E >> r;\n  \
-    \  ShortestPath<long long int> graph(V);\n    e.resize(V);\n    for (int i = 0;\
+    \ == INF);\n            puts(\"INF\");\n        } else {\n            assert(ret[i]\
+    \ == graph.dist[i]);\n            printf(\"%lld\\n\", graph.dist[i]);\n      \
+    \  }\n    }\n}\n"
+  code: "#include \"graph/bellman_ford.hpp\"\n#include \"graph/shortest_path.hpp\"\
+    \n#include <iostream>\n#include <vector>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B\"\
+    \n\nwedges e;\n\nint main() {\n    int V, E, r;\n    cin >> V >> E >> r;\n   \
+    \ ShortestPath<long long int> graph(V);\n    e.resize(V);\n    for (int i = 0;\
     \ i < E; i++) {\n        int s, t, d;\n        cin >> s >> t >> d;\n        e[s].emplace_back(t,\
     \ d);\n        graph.add_edge(s, t, d);\n    }\n    vector<long long int> ret\
     \ = bellman_ford(r, e, V);\n\n    if (!graph.BellmanFord(r, V + 1)) {\n      \
     \  puts(\"NEGATIVE CYCLE\");\n        return 0;\n    }\n\n    for (int i = 0;\
     \ i < V; i++) {\n        if (graph.dist[i] >= INF) {\n            assert(ret[i]\
-    \ == INF);\n            puts(\"INF\");\n        }\n        else {\n          \
-    \  assert(ret[i] == graph.dist[i]);\n            printf(\"%lld\\n\", graph.dist[i]);\n\
-    \        }\n    }\n}\n"
+    \ == INF);\n            puts(\"INF\");\n        } else {\n            assert(ret[i]\
+    \ == graph.dist[i]);\n            printf(\"%lld\\n\", graph.dist[i]);\n      \
+    \  }\n    }\n}\n"
   dependsOn:
-  - graph/shortest_path.hpp
   - graph/bellman_ford.hpp
+  - graph/shortest_path.hpp
   isVerificationFile: true
   path: graph/test/bellman_ford.test.cpp
   requiredBy: []
-  timestamp: '2020-10-04 15:46:40+09:00'
+  timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/bellman_ford.test.cpp

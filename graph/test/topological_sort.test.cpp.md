@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/scc
@@ -69,32 +69,32 @@ data:
     \ i = 0; i < nb_sat_vars; i++) {\n            if (cmp[i] == cmp[i + nb_sat_vars])\
     \ return false;\n            solution[i] = cmp[i] > cmp[i + nb_sat_vars];\n  \
     \      }\n        return true;\n    }\n};\n#line 3 \"graph/test/topological_sort.test.cpp\"\
-    \n\n#include <iostream>\n\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
+    \n\n#include <iostream>\n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
     \n    int V, E;\n    std::cin >> V >> E;\n    DirectedGraphSCC graph(V);\n   \
-    \ while (E--)\n    {\n        int s, t;\n        std::cin >> s >> t;\n       \
-    \ graph.add_edge(s, t);\n    }\n\n    graph.FindStronglyConnectedComponents();\n\
-    \n    int K = graph.scc_num;\n    std::vector<std::vector<int>> components(K);\n\
-    \    for (int i = 0; i < V; i++)\n    {\n        components[graph.cmp[i]].emplace_back(i);\n\
-    \    }\n    std::cout << K << '\\n';\n    for (const auto &vec : components)\n\
-    \    {\n        std::cout << vec.size();\n        for (auto x : vec) std::cout\
-    \ << ' ' << x;\n        std::cout << '\\n';\n    }\n}\n"
+    \ while (E--) {\n        int s, t;\n        std::cin >> s >> t;\n        graph.add_edge(s,\
+    \ t);\n    }\n\n    graph.FindStronglyConnectedComponents();\n\n    int K = graph.scc_num;\n\
+    \    std::vector<std::vector<int>> components(K);\n    for (int i = 0; i < V;\
+    \ i++) { components[graph.cmp[i]].emplace_back(i); }\n    std::cout << K << '\\\
+    n';\n    for (const auto &vec : components) {\n        std::cout << vec.size();\n\
+    \        for (auto x : vec) std::cout << ' ' << x;\n        std::cout << '\\n';\n\
+    \    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#include \"graph/strongly_connected_components.hpp\"\
-    \n\n#include <iostream>\n\nint main()\n{\n    std::cin.tie(NULL);\n    std::ios::sync_with_stdio(false);\n\
+    \n\n#include <iostream>\n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
     \n    int V, E;\n    std::cin >> V >> E;\n    DirectedGraphSCC graph(V);\n   \
-    \ while (E--)\n    {\n        int s, t;\n        std::cin >> s >> t;\n       \
-    \ graph.add_edge(s, t);\n    }\n\n    graph.FindStronglyConnectedComponents();\n\
-    \n    int K = graph.scc_num;\n    std::vector<std::vector<int>> components(K);\n\
-    \    for (int i = 0; i < V; i++)\n    {\n        components[graph.cmp[i]].emplace_back(i);\n\
-    \    }\n    std::cout << K << '\\n';\n    for (const auto &vec : components)\n\
-    \    {\n        std::cout << vec.size();\n        for (auto x : vec) std::cout\
-    \ << ' ' << x;\n        std::cout << '\\n';\n    }\n}\n"
+    \ while (E--) {\n        int s, t;\n        std::cin >> s >> t;\n        graph.add_edge(s,\
+    \ t);\n    }\n\n    graph.FindStronglyConnectedComponents();\n\n    int K = graph.scc_num;\n\
+    \    std::vector<std::vector<int>> components(K);\n    for (int i = 0; i < V;\
+    \ i++) { components[graph.cmp[i]].emplace_back(i); }\n    std::cout << K << '\\\
+    n';\n    for (const auto &vec : components) {\n        std::cout << vec.size();\n\
+    \        for (auto x : vec) std::cout << ' ' << x;\n        std::cout << '\\n';\n\
+    \    }\n}\n"
   dependsOn:
   - graph/strongly_connected_components.hpp
   isVerificationFile: true
   path: graph/test/topological_sort.test.cpp
   requiredBy: []
-  timestamp: '2020-09-05 20:52:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/topological_sort.test.cpp
 layout: document

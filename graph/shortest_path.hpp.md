@@ -6,11 +6,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/bellman_ford.test.cpp
     title: graph/test/bellman_ford.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/dijkstra.test.cpp
     title: graph/test/dijkstra.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include\
@@ -114,7 +114,7 @@ data:
   path: graph/shortest_path.hpp
   requiredBy: []
   timestamp: '2020-10-04 15:46:40+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - graph/test/bellman_ford.test.cpp
   - graph/test/dijkstra.test.cpp

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/int_kth_root.hpp
     title: utilities/int_kth_root.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_root_integer
@@ -23,13 +23,13 @@ data:
     \ c;\n            for (int t = 0; t < k - 1; t++) {\n                p *= c;\n\
     \                if (p > a) break;\n            }\n            (p > a ? ng : ok)\
     \ = c;\n        }\n        return ok;\n    }\n}\n#line 3 \"utilities/test/kth_root_integer.test.cpp\"\
-    \n#include <iostream>\nusing namespace std;\n\nint main()\n{\n    cin.tie(nullptr),\
+    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    int T;\n    cin >> T;\n    while (T--) {\n\
     \        unsigned long long a;\n        int k;\n        cin >> a >> k;\n     \
     \   cout << int_kth_root(a, k) << '\\n';\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/kth_root_integer\"\n#include\
     \ \"utilities/int_kth_root.hpp\"\n#include <iostream>\nusing namespace std;\n\n\
-    int main()\n{\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int T;\n\
+    int main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int T;\n\
     \    cin >> T;\n    while (T--) {\n        unsigned long long a;\n        int\
     \ k;\n        cin >> a >> k;\n        cout << int_kth_root(a, k) << '\\n';\n \
     \   }\n}\n"
@@ -38,8 +38,8 @@ data:
   isVerificationFile: true
   path: utilities/test/kth_root_integer.test.cpp
   requiredBy: []
-  timestamp: '2020-11-15 01:44:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: utilities/test/kth_root_integer.test.cpp
 layout: document

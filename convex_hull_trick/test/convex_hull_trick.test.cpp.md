@@ -67,22 +67,22 @@ data:
     \n#include <cassert>\n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/line_add_get_min\"\
     \n\nConvexHullTrick<__int128> cht_min(true), cht_max(false);\n\nvoid add_line()\
     \ {\n    long long int a, b;\n    std::cin >> a >> b;\n    cht_min.add_line(a,\
-    \ b);\n    cht_max.add_line(-a, -b);\n}\n\nint main() {\n    std::cin.tie(NULL);\n\
-    \    std::ios::sync_with_stdio(false);\n\n    int N, Q;\n    std::cin >> N >>\
-    \ Q;\n    while (N--) add_line();\n    while (Q--) {\n        int q;\n       \
-    \ std::cin >> q;\n        if (q) {\n            int p;\n            std::cin >>\
-    \ p;\n            auto ret1 = cht_min.get(p);\n            auto ret2 = cht_max.get(p);\n\
+    \ b);\n    cht_max.add_line(-a, -b);\n}\n\nint main() {\n    std::cin.tie(nullptr),\
+    \ std::ios::sync_with_stdio(false);\n\n    int N, Q;\n    std::cin >> N >> Q;\n\
+    \    while (N--) add_line();\n    while (Q--) {\n        int q;\n        std::cin\
+    \ >> q;\n        if (q) {\n            int p;\n            std::cin >> p;\n  \
+    \          auto ret1 = cht_min.get(p);\n            auto ret2 = cht_max.get(p);\n\
     \            assert(ret1.first == -ret2.first);\n            std::cout << ret1.first\
     \ << '\\n';\n        } else {\n            add_line();\n        }\n    }\n}\n"
   code: "#include \"convex_hull_trick/convex_hull_trick.hpp\"\n#include <cassert>\n\
     #include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/line_add_get_min\"\
     \n\nConvexHullTrick<__int128> cht_min(true), cht_max(false);\n\nvoid add_line()\
     \ {\n    long long int a, b;\n    std::cin >> a >> b;\n    cht_min.add_line(a,\
-    \ b);\n    cht_max.add_line(-a, -b);\n}\n\nint main() {\n    std::cin.tie(NULL);\n\
-    \    std::ios::sync_with_stdio(false);\n\n    int N, Q;\n    std::cin >> N >>\
-    \ Q;\n    while (N--) add_line();\n    while (Q--) {\n        int q;\n       \
-    \ std::cin >> q;\n        if (q) {\n            int p;\n            std::cin >>\
-    \ p;\n            auto ret1 = cht_min.get(p);\n            auto ret2 = cht_max.get(p);\n\
+    \ b);\n    cht_max.add_line(-a, -b);\n}\n\nint main() {\n    std::cin.tie(nullptr),\
+    \ std::ios::sync_with_stdio(false);\n\n    int N, Q;\n    std::cin >> N >> Q;\n\
+    \    while (N--) add_line();\n    while (Q--) {\n        int q;\n        std::cin\
+    \ >> q;\n        if (q) {\n            int p;\n            std::cin >> p;\n  \
+    \          auto ret1 = cht_min.get(p);\n            auto ret2 = cht_max.get(p);\n\
     \            assert(ret1.first == -ret2.first);\n            std::cout << ret1.first\
     \ << '\\n';\n        } else {\n            add_line();\n        }\n    }\n}\n"
   dependsOn:
@@ -90,7 +90,7 @@ data:
   isVerificationFile: true
   path: convex_hull_trick/test/convex_hull_trick.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-11-18 20:33:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convex_hull_trick/test/convex_hull_trick.test.cpp

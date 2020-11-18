@@ -14,10 +14,10 @@ data:
     links:
     - https://judge.yosupo.jp/problem/sqrt_mod
   bundledCode: "#line 1 \"number/test/sqrt_modint_runtime.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include <iostream>\n#line 3 \"\
-    number/modint_runtime.hpp\"\n#include <set>\n#include <vector>\n\n// CUT begin\n\
-    struct ModIntRuntime {\n    using lint = long long int;\n    static int get_mod()\
-    \ { return mod; }\n    int val;\n    static int mod;\n    static std::vector<ModIntRuntime>\
+    \ \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#line 2 \"number/modint_runtime.hpp\"\
+    \n#include <iostream>\n#include <set>\n#include <vector>\n\n// CUT begin\nstruct\
+    \ ModIntRuntime {\n    using lint = long long int;\n    static int get_mod() {\
+    \ return mod; }\n    int val;\n    static int mod;\n    static std::vector<ModIntRuntime>\
     \ &facs() {\n        static std::vector<ModIntRuntime> facs_;\n        return\
     \ facs_;\n    }\n    static int &get_primitive_root() {\n        static int primitive_root_\
     \ = 0;\n        if (!primitive_root_) {\n            primitive_root_ = [&]() {\n\
@@ -81,23 +81,24 @@ data:
     \ != 1) j++, t *= t;\n            z = z.power(1LL << (e - j - 1));\n         \
     \   x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModIntRuntime(std::min(x.val,\
     \ mod - x.val));\n    }\n};\nint ModIntRuntime::mod = 1;\n#line 4 \"number/test/sqrt_modint_runtime.test.cpp\"\
-    \nusing namespace std;\n\nint main()\n{\n    int T;\n    cin >> T;\n    while\
-    \ (T--) {\n        int Y, P;\n        cin >> Y >> P;\n        ModIntRuntime::mod\
-    \ = P;\n        ModIntRuntime m = Y;\n        if (Y) {\n            m = m.sqrt();\n\
-    \            cout << (m ? m.val : -1) << endl;\n        }\n        else cout <<\
-    \ 0 << endl;\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include <iostream>\n\
-    #include \"number/modint_runtime.hpp\"\nusing namespace std;\n\nint main()\n{\n\
-    \    int T;\n    cin >> T;\n    while (T--) {\n        int Y, P;\n        cin\
-    \ >> Y >> P;\n        ModIntRuntime::mod = P;\n        ModIntRuntime m = Y;\n\
-    \        if (Y) {\n            m = m.sqrt();\n            cout << (m ? m.val :\
-    \ -1) << endl;\n        }\n        else cout << 0 << endl;\n    }\n}\n"
+    \nusing namespace std;\n\nint main() {\n    int T;\n    cin >> T;\n    while (T--)\
+    \ {\n        int Y, P;\n        cin >> Y >> P;\n        ModIntRuntime::mod = P;\n\
+    \        ModIntRuntime m = Y;\n        if (Y) {\n            m = m.sqrt();\n \
+    \           cout << (m ? m.val : -1) << endl;\n        } else\n            cout\
+    \ << 0 << endl;\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include \"\
+    number/modint_runtime.hpp\"\n#include <iostream>\nusing namespace std;\n\nint\
+    \ main() {\n    int T;\n    cin >> T;\n    while (T--) {\n        int Y, P;\n\
+    \        cin >> Y >> P;\n        ModIntRuntime::mod = P;\n        ModIntRuntime\
+    \ m = Y;\n        if (Y) {\n            m = m.sqrt();\n            cout << (m\
+    \ ? m.val : -1) << endl;\n        } else\n            cout << 0 << endl;\n   \
+    \ }\n}\n"
   dependsOn:
   - number/modint_runtime.hpp
   isVerificationFile: true
   path: number/test/sqrt_modint_runtime.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/sqrt_modint_runtime.test.cpp

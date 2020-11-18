@@ -6,14 +6,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/articulation_points.test.cpp
     title: graph/test/articulation_points.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/bridge.test.cpp
     title: graph/test/bridge.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/two-edge-connected-components.test.cpp
     title: graph/test/two-edge-connected-components.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/lowlink.hpp\"\n#include <algorithm>\n#include <cassert>\n\
@@ -132,7 +132,7 @@ data:
   path: graph/lowlink.hpp
   requiredBy: []
   timestamp: '2020-10-06 01:41:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - graph/test/two-edge-connected-components.test.cpp
   - graph/test/articulation_points.test.cpp

@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/test/floor_sum.test.cpp
     title: utilities/test/floor_sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"utilities/floor_sum.hpp\"\n\n// CUT begin\n// \\sum_{i=0}^{n-1}\
@@ -33,7 +33,7 @@ data:
   path: utilities/floor_sum.hpp
   requiredBy: []
   timestamp: '2020-09-29 00:37:21+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - utilities/test/floor_sum.test.cpp
 documentation_of: utilities/floor_sum.hpp

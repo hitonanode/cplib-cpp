@@ -227,20 +227,20 @@ data:
     \          }\n                }\n            }\n            std::swap(fi, fj);\n\
     \        }\n    }\n    return ret;\n}\n#line 5 \"graph/test/general_matching.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/general_matching\"\n\nusing\
-    \ namespace std;\n\nint main()\n{\n    cin.tie(NULL), ios::sync_with_stdio(false);\n\
+    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N, M;\n    cin >> N >> M;\n    vector<pair<int, int>> edges;\n    while\
     \ (M--) {\n        int u, v;\n        cin >> u >> v;\n        edges.emplace_back(u,\
     \ v);\n    }\n    vector<pair<int, int>> ret = generalMatching(N, edges);\n  \
-    \  cout << ret.size() << '\\n';\n    for (auto [a, b] : ret) {\n        cout <<\
-    \ a << ' ' << b << '\\n';\n    }\n}\n"
+    \  cout << ret.size() << '\\n';\n    for (auto [a, b] : ret) { cout << a << '\
+    \ ' << b << '\\n'; }\n}\n"
   code: "#include \"graph/general_matching.hpp\"\n#include <iostream>\n#include <utility>\n\
     #include <vector>\n#define PROBLEM \"https://judge.yosupo.jp/problem/general_matching\"\
-    \n\nusing namespace std;\n\nint main()\n{\n    cin.tie(NULL), ios::sync_with_stdio(false);\n\
+    \n\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N, M;\n    cin >> N >> M;\n    vector<pair<int, int>> edges;\n    while\
     \ (M--) {\n        int u, v;\n        cin >> u >> v;\n        edges.emplace_back(u,\
     \ v);\n    }\n    vector<pair<int, int>> ret = generalMatching(N, edges);\n  \
-    \  cout << ret.size() << '\\n';\n    for (auto [a, b] : ret) {\n        cout <<\
-    \ a << ' ' << b << '\\n';\n    }\n}\n"
+    \  cout << ret.size() << '\\n';\n    for (auto [a, b] : ret) { cout << a << '\
+    \ ' << b << '\\n'; }\n}\n"
   dependsOn:
   - graph/general_matching.hpp
   - modint.hpp
@@ -248,7 +248,7 @@ data:
   isVerificationFile: true
   path: graph/test/general_matching.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/general_matching.test.cpp

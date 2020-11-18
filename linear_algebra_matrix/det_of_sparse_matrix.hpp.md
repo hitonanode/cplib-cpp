@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: linear_algebra_matrix/linear_recurrence.hpp
     title: linear_algebra_matrix/linear_recurrence.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: random/rand_nondeterministic.hpp
     title: random/rand_nondeterministic.hpp
   _extendedRequiredBy: []
@@ -44,7 +44,7 @@ data:
     \            C_reversed = adjust(C_reversed, B, d, b, m++);\n    }\n    return\
     \ std::make_pair(L, C_reversed);\n}\n#line 2 \"random/rand_nondeterministic.hpp\"\
     \n#include <chrono>\n#include <random>\nusing namespace std;\n\n// CUT begin\n\
-    struct rand_int_\n{\n    using lint = long long;\n    mt19937 mt;\n    rand_int_()\
+    struct rand_int_ {\n    using lint = long long;\n    mt19937 mt;\n    rand_int_()\
     \ : mt(chrono::steady_clock::now().time_since_epoch().count()) {}\n    lint operator()(lint\
     \ x) { return this->operator()(0, x); } // [0, x)\n    lint operator()(lint l,\
     \ lint r) {\n        uniform_int_distribution<lint> d(l, r - 1);\n        return\
@@ -106,7 +106,7 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/det_of_sparse_matrix.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/cycle_detection
@@ -71,27 +71,27 @@ data:
     \      }\n        return true;\n    }\n};\n#line 3 \"graph/test/cycle_detection_directed.test.cpp\"\
     \n\n#line 5 \"graph/test/cycle_detection_directed.test.cpp\"\n#include <iostream>\n\
     #include <utility>\n#line 8 \"graph/test/cycle_detection_directed.test.cpp\"\n\
-    using namespace std;\n\nint main()\n{\n    cin.tie(NULL);\n    ios::sync_with_stdio(false);\n\
+    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int V, E;\n    cin >> V >> E;\n    DirectedGraphSCC graph(V);\n    vector<pair<pair<int,\
-    \ int>, int>> edges;\n    for (int i = 0; i < E; i++)\n    {\n        int s, t;\n\
-    \        cin >> s >> t;\n        graph.add_edge(s, t);\n        edges.emplace_back(make_pair(make_pair(s,\
+    \ int>, int>> edges;\n    for (int i = 0; i < E; i++) {\n        int s, t;\n \
+    \       cin >> s >> t;\n        graph.add_edge(s, t);\n        edges.emplace_back(make_pair(make_pair(s,\
     \ t), i));\n    }\n    sort(edges.begin(), edges.end());\n\n    auto cycle = graph.DetectCycle();\n\
-    \    if (cycle.empty())\n    {\n        cout << \"-1\\n\";\n    }\n    else\n\
-    \    {\n        cout << cycle.size() << '\\n';\n        for (int i = 0; i < int(cycle.size());\
-    \ i++)\n        {\n            pair<int, int> p{cycle[i], cycle[(i + 1) % cycle.size()]};\n\
+    \    if (cycle.empty()) {\n        cout << \"-1\\n\";\n    } else {\n        cout\
+    \ << cycle.size() << '\\n';\n        for (int i = 0; i < int(cycle.size()); i++)\
+    \ {\n            pair<int, int> p{cycle[i], cycle[(i + 1) % cycle.size()]};\n\
     \            int eid = lower_bound(edges.begin(), edges.end(), make_pair(p, 0))->second;\n\
     \            cout << eid << '\\n';\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/cycle_detection\"\n#include\
     \ \"graph/strongly_connected_components.hpp\"\n\n#include <algorithm>\n#include\
     \ <iostream>\n#include <utility>\n#include <vector>\nusing namespace std;\n\n\
-    int main()\n{\n    cin.tie(NULL);\n    ios::sync_with_stdio(false);\n\n    int\
-    \ V, E;\n    cin >> V >> E;\n    DirectedGraphSCC graph(V);\n    vector<pair<pair<int,\
-    \ int>, int>> edges;\n    for (int i = 0; i < E; i++)\n    {\n        int s, t;\n\
-    \        cin >> s >> t;\n        graph.add_edge(s, t);\n        edges.emplace_back(make_pair(make_pair(s,\
+    int main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int V,\
+    \ E;\n    cin >> V >> E;\n    DirectedGraphSCC graph(V);\n    vector<pair<pair<int,\
+    \ int>, int>> edges;\n    for (int i = 0; i < E; i++) {\n        int s, t;\n \
+    \       cin >> s >> t;\n        graph.add_edge(s, t);\n        edges.emplace_back(make_pair(make_pair(s,\
     \ t), i));\n    }\n    sort(edges.begin(), edges.end());\n\n    auto cycle = graph.DetectCycle();\n\
-    \    if (cycle.empty())\n    {\n        cout << \"-1\\n\";\n    }\n    else\n\
-    \    {\n        cout << cycle.size() << '\\n';\n        for (int i = 0; i < int(cycle.size());\
-    \ i++)\n        {\n            pair<int, int> p{cycle[i], cycle[(i + 1) % cycle.size()]};\n\
+    \    if (cycle.empty()) {\n        cout << \"-1\\n\";\n    } else {\n        cout\
+    \ << cycle.size() << '\\n';\n        for (int i = 0; i < int(cycle.size()); i++)\
+    \ {\n            pair<int, int> p{cycle[i], cycle[(i + 1) % cycle.size()]};\n\
     \            int eid = lower_bound(edges.begin(), edges.end(), make_pair(p, 0))->second;\n\
     \            cout << eid << '\\n';\n        }\n    }\n}\n"
   dependsOn:
@@ -99,8 +99,8 @@ data:
   isVerificationFile: true
   path: graph/test/cycle_detection_directed.test.cpp
   requiredBy: []
-  timestamp: '2020-09-05 20:52:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-18 20:25:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/cycle_detection_directed.test.cpp
 layout: document
