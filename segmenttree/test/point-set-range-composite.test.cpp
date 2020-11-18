@@ -15,8 +15,7 @@ template <typename T> struct PointSetRangeComposite : public NonrecursiveSegment
 };
 
 int main() {
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);
 
     int N, Q;
     std::cin >> N >> Q;

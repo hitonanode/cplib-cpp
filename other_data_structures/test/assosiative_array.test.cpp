@@ -22,8 +22,7 @@ struct custom_hash {
 using namespace __gnu_pbds;
 
 int main() {
-    std::cin.tie(NULL);
-    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);
     // std::unordered_map<long long, long long, custom_hash> mp;
     gp_hash_table<long long, long long, custom_hash> mp;
 
