@@ -6,14 +6,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
     title: linear_algebra_matrix/test/linalg_ll_det.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_longlong.test.cpp
     title: linear_algebra_matrix/test/linalg_longlong.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
     title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/linalg_longlong.hpp\"\n#include <cassert>\n\
@@ -106,7 +106,7 @@ data:
   path: linear_algebra_matrix/linalg_longlong.hpp
   requiredBy: []
   timestamp: '2020-11-18 20:06:08+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/linalg_ll_det.test.cpp
   - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp

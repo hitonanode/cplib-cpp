@@ -1,18 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linalg_longlong.hpp
     title: linear_algebra_matrix/linalg_longlong.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    IGNORE: ''
-    IGNORE_IF_CLANG: ''
-    IGNORE_IF_GCC: ''
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624
   bundledCode: "#line 2 \"linear_algebra_matrix/linalg_longlong.hpp\"\n#include <cassert>\n\
@@ -59,43 +57,43 @@ data:
     \ mod);\n        X = matmul(X, X, mod);\n        n >>= 1;\n    }\n    return res;\n\
     }\n#line 2 \"linear_algebra_matrix/test/linalg_longlong.test.cpp\"\n#include <iostream>\n\
     #include <numeric>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624\"\
-    \n#define IGNORE\n\ntemplate <typename T> istream &operator>>(istream &is, vector<T>\
-    \ &vec) {\n    for (auto &v : vec) is >> v;\n    return is;\n}\n\nint main() {\n\
-    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N, T;\n    cin\
-    \ >> N;\n    vector<vector<lint>> A(N, vector<lint>(N));\n    cin >> A;\n    vector<lint>\
-    \ v(N);\n    cin >> v >> T;\n    A = matpower(A, T, 2);\n    vector<vector<lint>>\
-    \ B = A;\n    for (int i = 0; i < N; i++) B[i].push_back(v[i]);\n    B = gauss_jordan(B,\
-    \ 2);\n    for (int i = 0; i < N; i++) {\n        if (accumulate(B[i].begin(),\
-    \ B[i].begin() + N, 0) == 0 and B[i][N]) {\n            cout << \"none\\n\";\n\
-    \            return 0;\n        }\n    }\n    int rnk = rank_gauss_jordan(B);\n\
-    \    if (rnk < N) {\n        cout << \"ambiguous\\n\";\n        return 0;\n  \
-    \  }\n    vector<lint> ret(N);\n    for (int i = N - 1; i >= 0; i--) {\n     \
-    \   int a = 0;\n        for (int j = i + 1; j < N; j++) a += ret[j] * B[i][j];\n\
-    \        ret[i] = (a % 2 != B[i][N]);\n    }\n\n    for (int i = 0; i < N; i++)\
-    \ cout << ret[i] << (i + 1 == N ? '\\n' : ' ');\n}\n"
+    \n\ntemplate <typename T> istream &operator>>(istream &is, vector<T> &vec) {\n\
+    \    for (auto &v : vec) is >> v;\n    return is;\n}\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n\n    int N, T;\n    cin >> N;\n    vector<vector<lint>>\
+    \ A(N, vector<lint>(N));\n    cin >> A;\n    vector<lint> v(N);\n    cin >> v\
+    \ >> T;\n    A = matpower(A, T, 2);\n    vector<vector<lint>> B = A;\n    for\
+    \ (int i = 0; i < N; i++) B[i].push_back(v[i]);\n    B = gauss_jordan(B, 2);\n\
+    \    for (int i = 0; i < N; i++) {\n        if (accumulate(B[i].begin(), B[i].begin()\
+    \ + N, 0) == 0 and B[i][N]) {\n            cout << \"none\\n\";\n            return\
+    \ 0;\n        }\n    }\n    int rnk = rank_gauss_jordan(B);\n    if (rnk < N)\
+    \ {\n        cout << \"ambiguous\\n\";\n        return 0;\n    }\n    vector<lint>\
+    \ ret(N);\n    for (int i = N - 1; i >= 0; i--) {\n        int a = 0;\n      \
+    \  for (int j = i + 1; j < N; j++) a += ret[j] * B[i][j];\n        ret[i] = (a\
+    \ % 2 != B[i][N]);\n    }\n\n    for (int i = 0; i < N; i++) cout << ret[i] <<\
+    \ (i + 1 == N ? '\\n' : ' ');\n}\n"
   code: "#include \"linear_algebra_matrix/linalg_longlong.hpp\"\n#include <iostream>\n\
     #include <numeric>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624\"\
-    \n#define IGNORE\n\ntemplate <typename T> istream &operator>>(istream &is, vector<T>\
-    \ &vec) {\n    for (auto &v : vec) is >> v;\n    return is;\n}\n\nint main() {\n\
-    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N, T;\n    cin\
-    \ >> N;\n    vector<vector<lint>> A(N, vector<lint>(N));\n    cin >> A;\n    vector<lint>\
-    \ v(N);\n    cin >> v >> T;\n    A = matpower(A, T, 2);\n    vector<vector<lint>>\
-    \ B = A;\n    for (int i = 0; i < N; i++) B[i].push_back(v[i]);\n    B = gauss_jordan(B,\
-    \ 2);\n    for (int i = 0; i < N; i++) {\n        if (accumulate(B[i].begin(),\
-    \ B[i].begin() + N, 0) == 0 and B[i][N]) {\n            cout << \"none\\n\";\n\
-    \            return 0;\n        }\n    }\n    int rnk = rank_gauss_jordan(B);\n\
-    \    if (rnk < N) {\n        cout << \"ambiguous\\n\";\n        return 0;\n  \
-    \  }\n    vector<lint> ret(N);\n    for (int i = N - 1; i >= 0; i--) {\n     \
-    \   int a = 0;\n        for (int j = i + 1; j < N; j++) a += ret[j] * B[i][j];\n\
-    \        ret[i] = (a % 2 != B[i][N]);\n    }\n\n    for (int i = 0; i < N; i++)\
-    \ cout << ret[i] << (i + 1 == N ? '\\n' : ' ');\n}\n"
+    \n\ntemplate <typename T> istream &operator>>(istream &is, vector<T> &vec) {\n\
+    \    for (auto &v : vec) is >> v;\n    return is;\n}\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n\n    int N, T;\n    cin >> N;\n    vector<vector<lint>>\
+    \ A(N, vector<lint>(N));\n    cin >> A;\n    vector<lint> v(N);\n    cin >> v\
+    \ >> T;\n    A = matpower(A, T, 2);\n    vector<vector<lint>> B = A;\n    for\
+    \ (int i = 0; i < N; i++) B[i].push_back(v[i]);\n    B = gauss_jordan(B, 2);\n\
+    \    for (int i = 0; i < N; i++) {\n        if (accumulate(B[i].begin(), B[i].begin()\
+    \ + N, 0) == 0 and B[i][N]) {\n            cout << \"none\\n\";\n            return\
+    \ 0;\n        }\n    }\n    int rnk = rank_gauss_jordan(B);\n    if (rnk < N)\
+    \ {\n        cout << \"ambiguous\\n\";\n        return 0;\n    }\n    vector<lint>\
+    \ ret(N);\n    for (int i = N - 1; i >= 0; i--) {\n        int a = 0;\n      \
+    \  for (int j = i + 1; j < N; j++) a += ret[j] * B[i][j];\n        ret[i] = (a\
+    \ % 2 != B[i][N]);\n    }\n\n    for (int i = 0; i < N; i++) cout << ret[i] <<\
+    \ (i + 1 == N ? '\\n' : ' ');\n}\n"
   dependsOn:
   - linear_algebra_matrix/linalg_longlong.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_longlong.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 21:29:24+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-19 00:13:36+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_longlong.test.cpp
 layout: document

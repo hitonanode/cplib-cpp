@@ -162,7 +162,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_bitset.hpp
       title: linear_algebra_matrix/linalg_bitset.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
     - icon: ':heavy_check_mark:'
@@ -585,7 +585,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
       title: linear_algebra_matrix/test/linalg_ll_det.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_longlong.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong.test.cpp
     - icon: ':heavy_check_mark:'
