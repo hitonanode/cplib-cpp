@@ -8,8 +8,7 @@
 // CUT begin
 // MaxFlow based and AtCoder Library, single class, no namespace, no private variables, compatible with C++11
 // Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>
-template <class Cap>
-struct mf_graph {
+template <class Cap> struct mf_graph {
     struct simple_queue_int {
         std::vector<int> payload;
         int pos = 0;
@@ -57,9 +56,7 @@ struct mf_graph {
     std::vector<edge> edges() {
         int m = int(pos.size());
         std::vector<edge> result;
-        for (int i = 0; i < m; i++) {
-            result.push_back(get_edge(i));
-        }
+        for (int i = 0; i < m; i++) { result.push_back(get_edge(i)); }
         return result;
     }
     void change_edge(int i, Cap new_cap, Cap new_flow) {
@@ -108,9 +105,7 @@ struct mf_graph {
         return res;
     }
 
-    Cap flow(int s, int t) {
-        return flow(s, t, std::numeric_limits<Cap>::max());
-    }
+    Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max()); }
     Cap flow(int s, int t, Cap flow_limit) {
         assert(0 <= s && s < _n);
         assert(0 <= t && t < _n);

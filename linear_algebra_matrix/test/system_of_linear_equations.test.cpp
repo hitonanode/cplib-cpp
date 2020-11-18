@@ -1,11 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/system_of_linear_equations"
-#include "modint.hpp"
 #include "linear_algebra_matrix/system_of_linear_equations.hpp"
+#include "modint.hpp"
 #include <iostream>
 using mint = ModInt<998244353>;
 
-int main()
-{
+int main() {
     int N, M;
     std::cin >> N >> M;
     matrix<mint> A(N, M);
@@ -13,9 +12,9 @@ int main()
     std::vector<mint> b(N);
     for (auto &x : b) std::cin >> x;
     auto ret = system_of_linear_equations(A, b);
-    if (ret.first.empty()) std::cout << -1 << "\n";
-    else
-    {
+    if (ret.first.empty())
+        std::cout << -1 << "\n";
+    else {
         std::cout << ret.second.size() << "\n";
         for (auto x : ret.first) std::cout << x << " ";
         std::cout << "\n";

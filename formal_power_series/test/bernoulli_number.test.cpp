@@ -1,11 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bernoulli_number"
-#include <iostream>
-#include "modint.hpp"
 #include "formal_power_series/formal_power_series.hpp"
+#include "modint.hpp"
+#include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     int N;
     cin >> N;
     using mint = ModInt<998244353>;

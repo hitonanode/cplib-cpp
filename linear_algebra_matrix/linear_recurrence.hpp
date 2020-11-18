@@ -19,9 +19,7 @@
 // - []                 -> (0, [1])
 // - [0, 0, 0]          -> (0, [1])
 // - [-2]               -> (1, [1, 2])
-template <typename Tfield>
-std::pair<int, std::vector<Tfield>> linear_recurrence(const std::vector<Tfield> &S)
-{
+template <typename Tfield> std::pair<int, std::vector<Tfield>> linear_recurrence(const std::vector<Tfield> &S) {
     int N = S.size();
     using poly = std::vector<Tfield>;
     poly C_reversed{1}, B{1};
@@ -40,7 +38,8 @@ std::pair<int, std::vector<Tfield>> linear_recurrence(const std::vector<Tfield> 
         Tfield d = S[n];
         for (int i = 1; i <= L; i++) d += C_reversed[i] * S[n - i];
 
-        if (d == 0) m++;
+        if (d == 0)
+            m++;
         else if (2 * L <= n) {
             poly T = C_reversed;
             C_reversed = adjust(C_reversed, B, d, b, m);
@@ -48,8 +47,8 @@ std::pair<int, std::vector<Tfield>> linear_recurrence(const std::vector<Tfield> 
             B = T;
             b = d;
             m = 1;
-        }
-        else C_reversed = adjust(C_reversed, B, d, b, m++);
+        } else
+            C_reversed = adjust(C_reversed, B, d, b, m++);
     }
     return std::make_pair(L, C_reversed);
 }

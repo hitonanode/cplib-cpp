@@ -1,14 +1,13 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/polynomial_interpolation"
-#include "modint.hpp"
 #include "formal_power_series/formal_power_series.hpp"
 #include "formal_power_series/multipoint_evaluation.hpp"
+#include "modint.hpp"
 #include <iostream>
 using namespace std;
 
 using mint = ModInt<998244353>;
 
-int main()
-{
+int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
 
     int N;

@@ -10,7 +10,7 @@ using namespace std;
 // Based on <https://ei1333.github.io/luzhiled/snippets/math/arbitrary-mod-convolution.html>
 using T_FFT = long double;
 constexpr int D_FFT = 15;
-struct cmplx{
+struct cmplx {
     T_FFT x, y;
     cmplx() : x(0), y(0) {}
     cmplx(T_FFT x, T_FFT y) : x(x), y(y) {}
@@ -26,9 +26,7 @@ void ensure_base(int nbase) {
     if (nbase <= fftbase) return;
     fftrev.resize(1 << nbase);
     fftrts.resize(1 << nbase);
-    for (int i = 0; i < (1 << nbase); i++) {
-        fftrev[i] = (fftrev[i >> 1] >> 1) + ((i & 1) << (nbase - 1));
-    }
+    for (int i = 0; i < (1 << nbase); i++) { fftrev[i] = (fftrev[i >> 1] >> 1) + ((i & 1) << (nbase - 1)); }
     while (fftbase < nbase) {
         T_FFT angle = acosl(-1.0L) * 2.0L / (1 << (fftbase + 1));
         for (int i = 1 << (fftbase - 1); i < (1 << fftbase); i++) {
@@ -45,9 +43,7 @@ void fft(int n, vector<cmplx> &a) {
     ensure_base(zeros);
     int shift = fftbase - zeros;
     for (int i = 0; i < n; i++) {
-        if (i < (fftrev[i] >> shift)) {
-            swap(a[i], a[fftrev[i] >> shift]);
-        }
+        if (i < (fftrev[i] >> shift)) { swap(a[i], a[fftrev[i] >> shift]); }
     }
     for (int k = 1; k < n; k <<= 1) {
         for (int i = 0; i < n; i += 2 * k) {
@@ -60,12 +56,9 @@ void fft(int n, vector<cmplx> &a) {
     }
 }
 
-
 // Convolution for ModInt class
 // retval[i] = \sum_j a[j] b[i - j]
-template <typename MODINT>
-vector<MODINT> convolution_mod(vector<MODINT> a, vector<MODINT> b)
-{
+template <typename MODINT> vector<MODINT> convolution_mod(vector<MODINT> a, vector<MODINT> b) {
     int need = int(a.size() + b.size()) - 1;
     int nbase = 0;
     while ((1 << nbase) < need) nbase++;
@@ -74,7 +67,8 @@ vector<MODINT> convolution_mod(vector<MODINT> a, vector<MODINT> b)
     for (int i = 0; i < (int)a.size(); i++) fa[i] = {(T_FFT)(a[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val >> D_FFT)};
     fft(sz, fa);
     vector<cmplx> fb(sz);
-    if (a == b) fb = fa;
+    if (a == b)
+        fb = fa;
     else {
         for (int i = 0; i < (int)b.size(); i++) fb[i] = {(T_FFT)(b[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(b[i].val >> D_FFT)};
         fft(sz, fb);

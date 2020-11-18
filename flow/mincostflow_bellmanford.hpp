@@ -10,9 +10,7 @@
 MinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE CYCLE (just negative cost edge is allowed)
 Verified by SRM 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>
 */
-template <typename CAP = long long, typename COST = long long>
-struct MinCostFlow
-{
+template <typename CAP = long long, typename COST = long long> struct MinCostFlow {
     const COST INF_COST = std::numeric_limits<COST>::max() / 2;
     struct edge {
         int to, rev;
@@ -27,10 +25,10 @@ struct MinCostFlow
     std::vector<std::vector<edge>> g;
     std::vector<COST> dist;
     std::vector<int> prevv, preve;
-    std::vector<COST> dual;  // dual[V]: potential
+    std::vector<COST> dual; // dual[V]: potential
     std::vector<std::pair<int, int>> pos;
 
-    bool _calc_distance_bellman_ford(int s) {  // O(VE), able to detect negative cycle
+    bool _calc_distance_bellman_ford(int s) { // O(VE), able to detect negative cycle
         dist.assign(V, INF_COST);
         dist[s] = 0;
         bool upd = true;
@@ -38,22 +36,23 @@ struct MinCostFlow
         while (upd) {
             upd = false;
             cnt++;
-            if (cnt > V) return false;  // Negative cycle existence
-            for (int v = 0; v < V; v++) if (dist[v] != INF_COST) {
-                for (int i = 0; i < (int)g[v].size(); i++) {
-                    edge &e = g[v][i];
-                    COST c = dist[v] + e.cost + dual[v] - dual[e.to];
-                    if (e.cap > 0 and dist[e.to] > c) {
-                        dist[e.to] = c, prevv[e.to] = v, preve[e.to] = i;
-                        upd = true;
+            if (cnt > V) return false; // Negative cycle existence
+            for (int v = 0; v < V; v++)
+                if (dist[v] != INF_COST) {
+                    for (int i = 0; i < (int)g[v].size(); i++) {
+                        edge &e = g[v][i];
+                        COST c = dist[v] + e.cost + dual[v] - dual[e.to];
+                        if (e.cap > 0 and dist[e.to] > c) {
+                            dist[e.to] = c, prevv[e.to] = v, preve[e.to] = i;
+                            upd = true;
+                        }
                     }
                 }
-            }
         }
         return true;
     }
 
-    bool _calc_distance_dijkstra(int s) {  // O(ElogV)
+    bool _calc_distance_dijkstra(int s) { // O(ElogV)
         dist.assign(V, INF_COST);
         dist[s] = 0;
         using P = std::pair<COST, int>;
@@ -76,7 +75,7 @@ struct MinCostFlow
         return true;
     }
 
-    MinCostFlow(int V=0) : V(V), g(V) {}
+    MinCostFlow(int V = 0) : V(V), g(V) {}
 
     void add_edge(int from, int to, CAP cap, COST cost) {
         assert(0 <= from and from < V);
@@ -102,9 +101,7 @@ struct MinCostFlow
             if (dist[t] == INF_COST) break;
             for (int v = 0; v < V; v++) dual[v] = std::min(dual[v] + dist[v], INF_COST);
             CAP d = frem;
-            for (int v = t; v != s; v = prevv[v]) {
-                d = std::min(d, g[prevv[v]][preve[v]].cap);
-            }
+            for (int v = t; v != s; v = prevv[v]) { d = std::min(d, g[prevv[v]][preve[v]].cap); }
             frem -= d;
             ret += d * dual[t];
             for (int v = t; v != s; v = prevv[v]) {
@@ -118,9 +115,8 @@ struct MinCostFlow
 
     friend std::ostream &operator<<(std::ostream &os, const MinCostFlow &mcf) {
         os << "[MinCostFlow]V=" << mcf.V << ":";
-        for (int i = 0; i < (int)mcf.g.size(); i++) for (auto &e : mcf.g[i]) {
-            os << "\n" << i << "->" << e.to << ": cap=" << e.cap << ", cost=" << e.cost;
-        }
+        for (int i = 0; i < (int)mcf.g.size(); i++)
+            for (auto &e : mcf.g[i]) { os << "\n" << i << "->" << e.to << ": cap=" << e.cap << ", cost=" << e.cost; }
         return os;
     }
 };

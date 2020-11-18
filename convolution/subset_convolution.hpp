@@ -5,55 +5,48 @@
 // CUT begin
 // Subset sum (fast zeta transform)
 // Complexity: O(N 2^N) for array of size 2^N
-template <typename T>
-void subset_sum(std::vector<T> &f)
-{
+template <typename T> void subset_sum(std::vector<T> &f) {
     const int sz = f.size(), n = __builtin_ctz(sz);
     assert(__builtin_popcount(sz) == 1);
     for (int d = 0; d < n; d++) {
-        for (int S = 0; S < 1 << n; S++) if (S & (1 << d)) f[S] += f[S ^ (1 << d)];
+        for (int S = 0; S < 1 << n; S++)
+            if (S & (1 << d)) f[S] += f[S ^ (1 << d)];
     }
 }
 // Inverse of subset sum (fast moebius transform)
 // Complexity: O(N 2^N) for array of size 2^N
-template <typename T>
-void subset_sum_inv(std::vector<T> &g)
-{
+template <typename T> void subset_sum_inv(std::vector<T> &g) {
     const int sz = g.size(), n = __builtin_ctz(sz);
     assert(__builtin_popcount(sz) == 1);
     for (int d = 0; d < n; d++) {
-        for (int S = 0; S < 1 << n; S++) if (S & (1 << d)) g[S] -= g[S ^ (1 << d)];
+        for (int S = 0; S < 1 << n; S++)
+            if (S & (1 << d)) g[S] -= g[S ^ (1 << d)];
     }
 }
 
 // Superset sum / its inverse (fast zeta/moebius transform)
 // Complexity: O(N 2^N) for array of size 2^N
-template <typename T>
-void superset_sum(std::vector<T> &f)
-{
+template <typename T> void superset_sum(std::vector<T> &f) {
     const int sz = f.size(), n = __builtin_ctz(sz);
     assert(__builtin_popcount(sz) == 1);
     for (int d = 0; d < n; d++) {
-        for (int S = 0; S < 1 << n; S++) if (!(S & (1 << d))) f[S] += f[S | (1 << d)];
+        for (int S = 0; S < 1 << n; S++)
+            if (!(S & (1 << d))) f[S] += f[S | (1 << d)];
     }
 }
-template <typename T>
-void superset_sum_inv(std::vector<T> &g)
-{
+template <typename T> void superset_sum_inv(std::vector<T> &g) {
     const int sz = g.size(), n = __builtin_ctz(sz);
     assert(__builtin_popcount(sz) == 1);
     for (int d = 0; d < n; d++) {
-        for (int S = 0; S < 1 << n; S++) if (!(S & (1 << d))) g[S] -= g[S | (1 << d)];
+        for (int S = 0; S < 1 << n; S++)
+            if (!(S & (1 << d))) g[S] -= g[S | (1 << d)];
     }
 }
-
 
 // Subset convolution
 // h[S] = \sum_T f[T] * g[S - T]
 // Complexity: O(N^2 2^N) for arrays of size 2^N
-template <typename T>
-std::vector<T> subset_convolution(std::vector<T> f, std::vector<T> g)
-{
+template <typename T> std::vector<T> subset_convolution(std::vector<T> f, std::vector<T> g) {
     const int sz = f.size(), m = __builtin_ctz(sz) + 1;
     assert(__builtin_popcount(sz) == 1 and f.size() == g.size());
 

@@ -6,9 +6,7 @@
 #include <vector>
 
 // CUT begin
-template <typename T>
-struct matrix
-{
+template <typename T> struct matrix {
     int H, W;
     std::vector<T> elem;
     typename std::vector<T>::iterator operator[](int i) { return elem.begin() + i * W; }
@@ -32,18 +30,36 @@ struct matrix
         return ret;
     }
 
-    matrix operator-() const { matrix ret(H, W); for (int i = 0; i < H * W; i++) ret.elem[i] = -elem[i]; return ret; }
-    matrix operator*(const T &v) const { matrix ret = *this; for (auto &x : ret.elem) x *= v; return ret; }
-    matrix operator/(const T &v) const { matrix ret = *this; for (auto &x : ret.elem) x /= v; return ret; }
-    matrix operator+(const matrix &r) const { matrix ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i]; return ret; }
-    matrix operator-(const matrix &r) const { matrix ret = *this; for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i]; return ret; }
+    matrix operator-() const {
+        matrix ret(H, W);
+        for (int i = 0; i < H * W; i++) ret.elem[i] = -elem[i];
+        return ret;
+    }
+    matrix operator*(const T &v) const {
+        matrix ret = *this;
+        for (auto &x : ret.elem) x *= v;
+        return ret;
+    }
+    matrix operator/(const T &v) const {
+        matrix ret = *this;
+        for (auto &x : ret.elem) x /= v;
+        return ret;
+    }
+    matrix operator+(const matrix &r) const {
+        matrix ret = *this;
+        for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i];
+        return ret;
+    }
+    matrix operator-(const matrix &r) const {
+        matrix ret = *this;
+        for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i];
+        return ret;
+    }
     matrix operator*(const matrix &r) const {
         matrix ret(H, r.W);
         for (int i = 0; i < H; i++) {
             for (int k = 0; k < W; k++) {
-                for (int j = 0; j < r.W; j++) {
-                    ret.at(i, j) += this->get(i, k) * r.get(k, j);
-                }
+                for (int j = 0; j < r.W; j++) { ret.at(i, j) += this->get(i, k) * r.get(k, j); }
             }
         }
         return ret;
@@ -67,7 +83,8 @@ struct matrix
     }
     matrix transpose() const {
         matrix ret(W, H);
-        for (int i = 0; i < H; i++) for (int j = 0; j < W; j++) ret.at(j, i) = this->get(i, j);
+        for (int i = 0; i < H; i++)
+            for (int j = 0; j < W; j++) ret.at(j, i) = this->get(i, j);
         return ret;
     }
     // Gauss-Jordan elimination
@@ -79,29 +96,34 @@ struct matrix
         for (int h = 0; h < H; h++) {
             if (c == W) break;
             int piv = -1;
-            for (int j = h; j < H; j++) if (mtr.get(j, c)) {
-                piv = j;
-                break;
+            for (int j = h; j < H; j++)
+                if (mtr.get(j, c)) {
+                    piv = j;
+                    break;
+                }
+            if (piv == -1) {
+                c++;
+                h--;
+                continue;
             }
-            if (piv == -1) { c++; h--; continue; }
             if (h != piv) {
                 for (int w = 0; w < W; w++) {
                     std::swap(mtr[piv][w], mtr[h][w]);
                     mtr.at(piv, w) *= -1; // To preserve sign of determinant
                 }
             }
-            for (int hh = 0; hh < H; hh++) if (hh != h) {
-                T coeff = mtr.at(hh, c) * mtr.at(h, c).inv();
-                for (int w = W - 1; w >= c; w--) {
-                    mtr.at(hh, w) -= mtr.at(h, w) * coeff;
+            for (int hh = 0; hh < H; hh++)
+                if (hh != h) {
+                    T coeff = mtr.at(hh, c) * mtr.at(h, c).inv();
+                    for (int w = W - 1; w >= c; w--) { mtr.at(hh, w) -= mtr.at(h, w) * coeff; }
                 }
-            }
             c++;
         }
         return mtr;
     }
     int rank_of_gauss_jordan() const {
-        for (int i = H * W - 1; i >= 0; i--) if (elem[i]) return i / W + 1;
+        for (int i = H * W - 1; i >= 0; i--)
+            if (elem[i]) return i / W + 1;
         return 0;
     }
     T determinant_of_upper_triangle() const {
@@ -116,25 +138,19 @@ struct matrix
         for (int i = 0; i < H; i++) {
             int ti = i;
             while (ti < H and tmp[ti][i] == 0) ti++;
-            if (ti == H) continue;
-            else rank++;
+            if (ti == H)
+                continue;
+            else
+                rank++;
             ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);
             T inv = tmp[i][i].inv();
-            for (int j = 0; j < W; j++) {
-                ret[i][j] *= inv;
-            }
-            for (int j = i + 1; j < W; j++) {
-                tmp[i][j] *= inv;
-            }
+            for (int j = 0; j < W; j++) { ret[i][j] *= inv; }
+            for (int j = i + 1; j < W; j++) { tmp[i][j] *= inv; }
             for (int h = 0; h < H; h++) {
                 if (i == h) continue;
                 const T c = -tmp[h][i];
-                for (int j = 0; j < W; j++) {
-                    ret[h][j] += ret[i][j] * c;
-                }
-                for (int j = i + 1; j < W; j++) {
-                    tmp[h][j] += tmp[i][j] * c;
-                }
+                for (int j = 0; j < W; j++) { ret[h][j] += ret[i][j] * c; }
+                for (int j = i + 1; j < W; j++) { tmp[h][j] += tmp[i][j] * c; }
             }
         }
         *this = ret;
@@ -144,9 +160,7 @@ struct matrix
         assert(m.W == int(v.size()));
         std::vector<T> ret(m.H);
         for (int i = 0; i < m.H; i++) {
-            for (int j = 0; j < m.W; j++) {
-                ret[i] += m.get(i, j) * v[j];
-            }
+            for (int j = 0; j < m.W; j++) { ret[i] += m.get(i, j) * v[j]; }
         }
         return ret;
     }
@@ -154,9 +168,7 @@ struct matrix
         assert(int(v.size()) == m.H);
         std::vector<T> ret(m.W);
         for (int i = 0; i < m.H; i++) {
-            for (int j = 0; j < m.W; j++) {
-                ret[j] += v[i] * m.get(i, j);
-            }
+            for (int j = 0; j < m.W; j++) { ret[j] += v[i] * m.get(i, j); }
         }
         return ret;
     }
@@ -183,12 +195,9 @@ struct matrix
     }
 };
 
-
 // Fibonacci numbers f(n) = af(n - 1) + bf(n - 2)
 // Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...
-template <typename T>
-T Fibonacci(long long int k, int a = 1, int b = 1)
-{
+template <typename T> T Fibonacci(long long int k, int a = 1, int b = 1) {
     matrix<T> mat(2, 2);
     mat[0][1] = 1;
     mat[1][0] = b;

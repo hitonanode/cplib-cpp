@@ -4,8 +4,7 @@
 #include <numeric>
 using namespace std;
 
-int main()
-{
+int main() {
     int N, T;
     cin >> N;
     vector<bitset<Wmax>> A(N);
@@ -27,28 +26,22 @@ int main()
     for (int i = 0; i < N; i++) A[i][N] = v[i];
     A = gauss_jordan(N + 1, A);
 
-    for (int i = 0; i < N; i++)
-    {
-        if (A[i].count() == 1 and A[i][N])
-        {
+    for (int i = 0; i < N; i++) {
+        if (A[i].count() == 1 and A[i][N]) {
             cout << "none" << endl;
             return 0;
         }
     }
-    if (!A[N - 1][N - 1])
-    {
+    if (!A[N - 1][N - 1]) {
         cout << "ambiguous" << endl;
         return 0;
     }
     bitset<Wmax> ret;
-    for (int i = N - 1; i >= 0; i--)
-    {
+    for (int i = N - 1; i >= 0; i--) {
         int a = 0;
         for (int j = i + 1; j < N; j++) a ^= ret[j] * A[i][j];
         ret[i] = (a != A[i][N]);
     }
-    for (int i = 0; i < N; i++) {
-        printf("%d ", ret[i] ? 1 : 0);
-    }
+    for (int i = 0; i < N; i++) { printf("%d ", ret[i] ? 1 : 0); }
     puts("");
 }

@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/log_of_formal_power_series"
-#include <iostream>
-#include "modint.hpp"
 #include "formal_power_series/formal_power_series.hpp"
+#include "modint.hpp"
+#include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
     int N;
     cin >> N;
     FormalPowerSeries<ModInt<998244353>> A(N);

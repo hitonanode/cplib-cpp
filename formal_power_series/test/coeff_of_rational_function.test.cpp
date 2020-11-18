@@ -1,31 +1,27 @@
 #define PROBLEM "https://yukicoder.me/problems/no/215"
-#include "modint.hpp"
 #include "convolution/ntt.hpp"
 #include "formal_power_series/coeff_of_rational_function.hpp"
+#include "modint.hpp"
 
 using mint = ModInt<1000000007>;
 
 #include <iostream>
 
-std::vector<mint> gen_dp(std::vector<int> v, int n)
-{
+std::vector<mint> gen_dp(std::vector<int> v, int n) {
     std::vector<std::vector<mint>> dp(n + 1, std::vector<mint>(v.back() * n + 1));
     dp[0][0] = 1;
-    for (auto x : v)
-    {
-        for (int i = n - 1; i >= 0; i--)
-        {
-            for (int j = 0; j < dp[i].size(); j++) if (dp[i][j])
-            {
-                for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];
-            }
+    for (auto x : v) {
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = 0; j < dp[i].size(); j++)
+                if (dp[i][j]) {
+                    for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];
+                }
         }
     }
     return dp.back();
 }
 
-int main()
-{
+int main() {
     long long N;
     int P, C;
     std::cin >> N >> P >> C;

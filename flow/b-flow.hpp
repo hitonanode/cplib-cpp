@@ -3,11 +3,8 @@
 #include <algorithm>
 #include <vector>
 
-
 // CUT begin
-template <typename CAP, typename COST>
-struct B_Flow
-{
+template <typename CAP, typename COST> struct B_Flow {
     int N, E;
     COST cost_bias;
     bool infeasible;
@@ -31,8 +28,10 @@ struct B_Flow
         }
         E++;
         if (s == t) {
-            if (cost > 0) upper_cap = lower_cap;
-            else lower_cap = upper_cap;
+            if (cost > 0)
+                upper_cap = lower_cap;
+            else
+                lower_cap = upper_cap;
         }
         if (cost < 0) {
             fbias.emplace_back(lower_cap);
@@ -59,21 +58,13 @@ struct B_Flow
     }
 
     std::pair<bool, COST> solve() {
-        if (infeasible) {
-            return std::make_pair(false, 0);
-        }
+        if (infeasible) { return std::make_pair(false, 0); }
         CAP bsum = 0, bsum_negative = 0;
         for (int i = 0; i < N; i++) {
-            if (b[i] > 0) {
-                mcf.add_edge(N, i, b[i], 0), bsum += b[i];
-            }
-            if (b[i] < 0) {
-                mcf.add_edge(i, N + 1, -b[i], 0), bsum_negative -= b[i];
-            }
+            if (b[i] > 0) { mcf.add_edge(N, i, b[i], 0), bsum += b[i]; }
+            if (b[i] < 0) { mcf.add_edge(i, N + 1, -b[i], 0), bsum_negative -= b[i]; }
         }
-        if (bsum != bsum_negative) {
-            return std::make_pair(false, 0);
-        }
+        if (bsum != bsum_negative) { return std::make_pair(false, 0); }
         std::fill(b.begin(), b.end(), 0);
         auto ret = mcf.flow(N, N + 1, bsum);
         potential = mcf.dual, potential.resize(N);

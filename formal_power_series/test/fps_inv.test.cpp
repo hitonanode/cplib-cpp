@@ -1,11 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/inv_of_formal_power_series"
-#include <iostream>
-#include "modint.hpp"
 #include "formal_power_series/formal_power_series.hpp"
+#include "modint.hpp"
+#include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     int N;
     cin >> N;
     FormalPowerSeries<ModInt<998244353>> A(N);

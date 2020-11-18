@@ -8,14 +8,12 @@
 // <https://snuke.hatenablog.com/entry/2016/07/10/043918>
 // <https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>
 // flush(s, t): Calculate maxflow (if solution exists), -1 (otherwise)
-template <typename Cap>
-struct MaxFlowLowerBound {
+template <typename Cap> struct MaxFlowLowerBound {
     int N;
     mf_graph<Cap> mf;
     std::vector<Cap> in;
     MaxFlowLowerBound(int N = 0) : N(N), mf(N + 2), in(N) {}
-    int add_edge(int from, int to, Cap cap_lo, Cap cap_hi)
-    {
+    int add_edge(int from, int to, Cap cap_lo, Cap cap_hi) {
         assert(0 <= from and from < N);
         assert(0 <= to and to < N);
         assert(0 <= cap_lo and cap_lo <= cap_hi);

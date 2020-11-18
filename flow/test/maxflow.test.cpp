@@ -3,8 +3,7 @@
 #include <iostream>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A"
 
-int main()
-{
+int main() {
     int V, E;
     std::cin >> V >> E;
     mf_graph<int> graph(V);

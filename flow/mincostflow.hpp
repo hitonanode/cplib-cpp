@@ -9,8 +9,7 @@
 // MinCostFlow based on AtCoder Library, no namespace, no private variables, compatible with C++11
 // Reference: <https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html>
 // **NO NEGATIVE COST EDGES**
-template <class Cap, class Cost>
-struct mcf_graph {
+template <class Cap, class Cost> struct mcf_graph {
     mcf_graph() {}
     mcf_graph(int n) : _n(n), g(n) {}
 
@@ -47,21 +46,13 @@ struct mcf_graph {
     std::vector<edge> edges() {
         int m = int(pos.size());
         std::vector<edge> result(m);
-        for (int i = 0; i < m; i++) {
-            result[i] = get_edge(i);
-        }
+        for (int i = 0; i < m; i++) { result[i] = get_edge(i); }
         return result;
     }
 
-    std::pair<Cap, Cost> flow(int s, int t) {
-        return flow(s, t, std::numeric_limits<Cap>::max());
-    }
-    std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) {
-        return slope(s, t, flow_limit).back();
-    }
-    std::vector<std::pair<Cap, Cost>> slope(int s, int t) {
-        return slope(s, t, std::numeric_limits<Cap>::max());
-    }
+    std::pair<Cap, Cost> flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max()); }
+    std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) { return slope(s, t, flow_limit).back(); }
+    std::vector<std::pair<Cap, Cost>> slope(int s, int t) { return slope(s, t, std::numeric_limits<Cap>::max()); }
 
     std::vector<Cost> dual, dist;
     std::vector<int> pv, pe;
@@ -102,9 +93,7 @@ struct mcf_graph {
                 }
             }
         }
-        if (!vis[t]) {
-            return false;
-        }
+        if (!vis[t]) { return false; }
 
         for (int v = 0; v < _n; v++) {
             if (!vis[v]) continue;
@@ -134,9 +123,7 @@ struct mcf_graph {
         while (flow < flow_limit) {
             if (!_dual_ref(s, t)) break;
             Cap c = flow_limit - flow;
-            for (int v = t; v != s; v = pv[v]) {
-                c = std::min(c, g[pv[v]][pe[v]].cap);
-            }
+            for (int v = t; v != s; v = pv[v]) { c = std::min(c, g[pv[v]][pe[v]].cap); }
             for (int v = t; v != s; v = pv[v]) {
                 auto& e = g[pv[v]][pe[v]];
                 e.cap -= c;
@@ -145,9 +132,7 @@ struct mcf_graph {
             Cost d = -dual[s];
             flow += c;
             cost += c * d;
-            if (prev_cost_per_flow == d) {
-                result.pop_back();
-            }
+            if (prev_cost_per_flow == d) { result.pop_back(); }
             result.push_back({flow, cost});
             prev_cost_per_flow = d;
         }

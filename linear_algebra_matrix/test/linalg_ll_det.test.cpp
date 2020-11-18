@@ -1,10 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
-#include <iostream>
 #include "linear_algebra_matrix/linalg_longlong.hpp"
+#include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     int N;
     cin >> N;
     vector<vector<long long int>> M(N, vector<long long int>(N));

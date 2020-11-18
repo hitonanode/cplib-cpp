@@ -9,9 +9,8 @@ constexpr int MOD = 998244353;
 using mint = ModInt<MOD>;
 using mintr = ModIntRuntime;
 
-int main()
-{
-    cin.tie(nullptr),  ios::sync_with_stdio(false);
+int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
 
     mintr::set_mod(MOD);
     int N, M;

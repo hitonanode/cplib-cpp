@@ -8,13 +8,13 @@ using namespace std;
 // CUT begin
 // Formal Power Series (形式的冪級数) based on ModInt<mod> / ModIntRuntime
 // Reference: <https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>
-template<typename T>
-struct FormalPowerSeries : vector<T>
-{
+template <typename T> struct FormalPowerSeries : vector<T> {
     using vector<T>::vector;
     using P = FormalPowerSeries;
 
-    void shrink() { while (this->size() and this->back() == T(0)) this->pop_back(); }
+    void shrink() {
+        while (this->size() and this->back() == T(0)) this->pop_back();
+    }
 
     P operator+(const P &r) const { return P(*this) += r; }
     P operator+(const T &v) const { return P(*this) += v; }
@@ -56,7 +56,8 @@ struct FormalPowerSeries : vector<T>
         return *this;
     }
     P &operator*=(const P &r) {
-        if (this->empty() || r.empty()) this->clear();
+        if (this->empty() || r.empty())
+            this->clear();
         else {
             auto ret = nttconv(*this, r);
             *this = P(ret.begin(), ret.end());
@@ -87,9 +88,9 @@ struct FormalPowerSeries : vector<T>
         return *this = (reversed().pre(n) * r.reversed().inv(n)).pre(n).reversed(n);
     }
     P pre(int sz) const {
-         P ret(this->begin(), this->begin() + min((int)this->size(), sz));
-         ret.shrink();
-         return ret;
+        P ret(this->begin(), this->begin() + min((int)this->size(), sz));
+        ret.shrink();
+        return ret;
     }
     P operator>>(int sz) const {
         if ((int)this->size() <= sz) return {};
@@ -132,9 +133,7 @@ struct FormalPowerSeries : vector<T>
         const int n = this->size();
         if (deg == -1) deg = n;
         P ret({T(1) / (*this)[0]});
-        for (int i = 1; i < deg; i <<= 1) {
-            ret = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1);
-        }
+        for (int i = 1; i < deg; i <<= 1) { ret = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1); }
         ret = ret.pre(deg);
         ret.shrink();
         return ret;
@@ -155,10 +154,11 @@ struct FormalPowerSeries : vector<T>
         if (deg == -1) deg = n;
         if (this->empty()) return {};
         if ((*this)[0] == T(0)) {
-            for (int i = 1; i < n; i++) if ((*this)[i] != T(0)) {
-                if ((i & 1) or deg - i / 2 <= 0) return {};
-                return (*this >> i).sqrt(deg - i / 2) << (i / 2);
-            }
+            for (int i = 1; i < n; i++)
+                if ((*this)[i] != T(0)) {
+                    if ((i & 1) or deg - i / 2 <= 0) return {};
+                    return (*this >> i).sqrt(deg - i / 2) << (i / 2);
+                }
             return {};
         }
         T sqrtf0 = (*this)[0].sqrt();
@@ -166,9 +166,7 @@ struct FormalPowerSeries : vector<T>
 
         P y = (*this) / (*this)[0], ret({T(1)});
         T inv2 = T(1) / T(2);
-        for (int i = 1; i < deg; i <<= 1) {
-            ret = (ret + y.pre(i << 1) * ret.inv(i << 1)) * inv2;
-        }
+        for (int i = 1; i < deg; i <<= 1) { ret = (ret + y.pre(i << 1) * ret.inv(i << 1)) * inv2; }
         return ret.pre(deg) * sqrtf0;
     }
 
@@ -178,9 +176,7 @@ struct FormalPowerSeries : vector<T>
         const int n = (int)this->size();
         if (deg == -1) deg = n;
         P ret({T(1)});
-        for (int i = 1; i < deg; i <<= 1) {
-            ret = (ret * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1);
-        }
+        for (int i = 1; i < deg; i <<= 1) { ret = (ret * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1); }
         return ret.pre(deg);
     }
 
@@ -210,19 +206,13 @@ struct FormalPowerSeries : vector<T>
     P shift(T c) const {
         const int n = (int)this->size();
         P ret = *this;
-        for (int i = 0; i < n; i++) {
-            ret[i] *= T(i).fac();
-        }
+        for (int i = 0; i < n; i++) { ret[i] *= T(i).fac(); }
         reverse(ret.begin(), ret.end());
         P exp_cx(n, 1);
-        for (int i = 1; i < n; i++) {
-            exp_cx[i] = exp_cx[i - 1] * c / i;
-        }
+        for (int i = 1; i < n; i++) { exp_cx[i] = exp_cx[i - 1] * c / i; }
         ret = (ret * exp_cx), ret.resize(n);
         reverse(ret.begin(), ret.end());
-        for (int i = 0; i < n; i++) {
-            ret[i] /= T(i).fac();
-        }
+        for (int i = 0; i < n; i++) { ret[i] /= T(i).fac(); }
         return ret;
     }
 

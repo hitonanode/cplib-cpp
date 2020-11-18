@@ -1,11 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/pow_of_formal_power_series"
-#include <iostream>
-#include "modint.hpp"
 #include "formal_power_series/formal_power_series.hpp"
+#include "modint.hpp"
+#include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
 
     int N, M;
@@ -15,8 +14,7 @@ int main()
     int i = 0;
     int bias = 0;
     while (i < N and !A[i]) i++;
-    if (i < N)
-    {
+    if (i < N) {
         auto a0 = A[i];
         A /= a0;
         A = A >> i;

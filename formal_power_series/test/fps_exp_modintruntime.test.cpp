@@ -4,8 +4,8 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
+int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
     int N;
     cin >> N;
     ModIntRuntime::mod = 998244353;

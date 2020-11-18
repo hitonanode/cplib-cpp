@@ -1,18 +1,18 @@
 #include "convex_hull_trick/convex_hull_trick.hpp"
-#include <iostream>
 #include <cassert>
+#include <iostream>
 #define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
 
 ConvexHullTrick<__int128> cht_min(true), cht_max(false);
-void add_line()
-{
+
+void add_line() {
     long long int a, b;
     std::cin >> a >> b;
     cht_min.add_line(a, b);
     cht_max.add_line(-a, -b);
 }
-int main()
-{
+
+int main() {
     std::cin.tie(NULL);
     std::ios::sync_with_stdio(false);
 
@@ -29,7 +29,8 @@ int main()
             auto ret2 = cht_max.get(p);
             assert(ret1.first == -ret2.first);
             std::cout << ret1.first << '\n';
+        } else {
+            add_line();
         }
-        else add_line();
     }
 }

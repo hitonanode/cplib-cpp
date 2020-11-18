@@ -5,12 +5,14 @@
 
 // CUT begin
 // MaxFlow (Dinic algorithm)
-template <typename T>
-struct [[deprecated("use ACL based mf_graph")]] MaxFlow
-{
-    struct edge { int to; T cap; int rev; };
+template <typename T> struct [[deprecated("use ACL based mf_graph")]] MaxFlow {
+    struct edge {
+        int to;
+        T cap;
+        int rev;
+    };
     std::vector<std::vector<edge>> edges;
-    std::vector<int> level;  // level[i] = distance between vertex S and i (Default: -1)
+    std::vector<int> level; // level[i] = distance between vertex S and i (Default: -1)
     std::vector<int> iter;  // iteration counter, used for Dinic's DFS
     std::vector<int> used;  // Used for Ford-Fulkerson's Algorithm
 
@@ -28,8 +30,7 @@ struct [[deprecated("use ACL based mf_graph")]] MaxFlow
         }
         void pop() { pos++; }
     };
-    void bfs(int s)
-    {
+    void bfs(int s) {
         level.assign(edges.size(), -1);
         simple_queue_int q;
         level[s] = 0;
@@ -45,9 +46,8 @@ struct [[deprecated("use ACL based mf_graph")]] MaxFlow
             }
         }
     }
- 
-    T dfs_dinic(int v, int goal, T f)
-    {
+
+    T dfs_dinic(int v, int goal, T f) {
         if (v == goal) return f;
         for (int &i = iter[v]; i < (int)edges[v].size(); i++) {
             edge &e = edges[v][i];
@@ -62,9 +62,8 @@ struct [[deprecated("use ACL based mf_graph")]] MaxFlow
         }
         return 0;
     }
- 
-    T dfs_ff(int v, int goal, T f)
-    {
+
+    T dfs_ff(int v, int goal, T f) {
         if (v == goal) return f;
         used[v] = true;
         for (edge &e : edges[v]) {
@@ -81,16 +80,14 @@ struct [[deprecated("use ACL based mf_graph")]] MaxFlow
     }
 
     MaxFlow(int N) { edges.resize(N); }
-    void add_edge(int from, int to, T capacity)
-    {
+    void add_edge(int from, int to, T capacity) {
         edges[from].push_back(edge{to, capacity, (int)edges[to].size()});
         edges[to].push_back(edge{from, (T)0, (int)edges[from].size() - 1});
     }
- 
+
     // Dinic algorithm
     // Complexity: O(VE)
-    T Dinic(int s, int t, T req)
-    {
+    T Dinic(int s, int t, T req) {
         T flow = 0;
         while (req > 0) {
             bfs(s);
@@ -101,15 +98,11 @@ struct [[deprecated("use ACL based mf_graph")]] MaxFlow
         }
         return flow;
     }
-    T Dinic(int s, int t)
-    {
-        return Dinic(s, t, std::numeric_limits<T>::max());
-    }
+    T Dinic(int s, int t) { return Dinic(s, t, std::numeric_limits<T>::max()); }
 
     // Ford-Fulkerson algorithm
     // Complexity: O(EF)
-    T FF(int s, int t)
-    {
+    T FF(int s, int t) {
         constexpr T INF = std::numeric_limits<T>::max();
         T flow = 0;
         while (true) {
@@ -120,20 +113,18 @@ struct [[deprecated("use ACL based mf_graph")]] MaxFlow
         }
     }
 
-    void back_flow(int s, int t, int s_e, int t_e, T capacity_reduce)
-    {
+    void back_flow(int s, int t, int s_e, int t_e, T capacity_reduce) {
         int i;
-        for (i=0; edges[s_e][i].to != t_e; ) i++;
+        for (i = 0; edges[s_e][i].to != t_e;) i++;
         edge &e = edges[s_e][i];
- 
+
         if (capacity_reduce <= e.cap) {
             e.cap -= capacity_reduce;
-        }
-        else {
+        } else {
             T flow = capacity_reduce - e.cap;
             e.cap = 0;
             edges[e.to][e.rev].cap -= flow;
- 
+
             T f_sum = 0;
             while (f_sum != flow) {
                 used.assign(edges.size(), 0);
