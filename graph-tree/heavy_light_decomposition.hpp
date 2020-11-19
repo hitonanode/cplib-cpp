@@ -86,20 +86,42 @@ struct HeavyLightDecomposition {
         }
     }
 
+    template <typename Monoid> std::vector<Monoid> segtree_rearrange(const std::vector<Monoid>& data) const {
+        assert(int(data.size()) == V);
+        std::vector<Monoid> ret;
+        ret.reserve(V);
+        for (int i = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);
+        return ret;
+    }
+
     // query for vertices on path [u, v] (INCLUSIVE)
-    void for_each_vertex(int u, int v, const std::function<void(int, int)>& f) {
+    void for_each_vertex(int u, int v, const std::function<void(int ancestor, int descendant)>& f) const {
         while (true) {
             if (aligned_id[u] > aligned_id[v]) std::swap(u, v);
             f(std::max(aligned_id[head[v]], aligned_id[u]), aligned_id[v]);
-            if (head[u] != head[v])
-                v = par[head[v]];
-            else
-                break;
+            if (head[u] == head[v]) break;
+            v = par[head[v]];
         }
     }
 
+    void for_each_vertex_noncommutative(int from, int to, const std::function<void(int ancestor, int descendant)>& fup, const std::function<void(int ancestor, int descendant)>& fdown) const {
+        int u = from, v = to;
+        const int lca = lowest_common_ancestor(u, v), dlca = depth[lca];
+        while (u >= 0 and depth[u] > dlca) {
+            const int p = (depth[head[u]] > dlca ? head[u] : lca);
+            fup(aligned_id[p] + (p == lca), aligned_id[u]), u = par[p];
+        }
+        std::vector<std::pair<int, int>> lrs;
+        while (v >= 0 and depth[v] >= dlca) {
+            const int p = (depth[head[v]] >= dlca ? head[v] : lca);
+            lrs.emplace_back(p, v), v = par[p];
+        }
+        std::reverse(lrs.begin(), lrs.end());
+        for (const auto& lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);
+    }
+
     // query for edges on path [u, v]
-    void for_each_edge(int u, int v, const std::function<void(int, int)>& f) {
+    void for_each_edge(int u, int v, const std::function<void(int, int)>& f) const {
         while (true) {
             if (aligned_id[u] > aligned_id[v]) std::swap(u, v);
             if (head[u] != head[v]) {
@@ -113,7 +135,7 @@ struct HeavyLightDecomposition {
     }
 
     // lowest_common_ancestor: O(logV)
-    int lowest_common_ancestor(int u, int v) {
+    int lowest_common_ancestor(int u, int v) const {
         assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);
         while (true) {
             if (aligned_id[u] > aligned_id[v]) std::swap(u, v);
@@ -122,7 +144,7 @@ struct HeavyLightDecomposition {
         }
     }
 
-    int distance(int u, int v) {
+    int distance(int u, int v) const {
         assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);
         return depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];
     }
