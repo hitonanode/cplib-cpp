@@ -66,8 +66,8 @@ data:
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - string/test/lcp.test.cpp
   - string/test/suffix_array.test.cpp
+  - string/test/lcp.test.cpp
 documentation_of: string/suffix_array.hpp
 layout: document
 redirect_from:

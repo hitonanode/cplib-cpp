@@ -572,8 +572,14 @@ data:
       path: graph-tree/test/lca.test.cpp
       title: graph-tree/test/lca.test.cpp
     - icon: ':heavy_check_mark:'
+      path: graph-tree/test/vertex-add-path-sum.test.cpp
+      title: graph-tree/test/vertex-add-path-sum.test.cpp
+    - icon: ':heavy_check_mark:'
       path: graph-tree/test/vertex-add-subtree-sum.test.cpp
       title: graph-tree/test/vertex-add-subtree-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph-tree/test/vertex-set-path-composite.test.cpp
+      title: graph-tree/test/vertex-set-path-composite.test.cpp
   - name: linear_algebra_matrix/test
     pages:
     - icon: ':heavy_check_mark:'

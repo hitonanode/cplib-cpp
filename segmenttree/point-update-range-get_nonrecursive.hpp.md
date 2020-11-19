@@ -4,8 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: graph-tree/test/vertex-add-path-sum.test.cpp
+    title: graph-tree/test/vertex-add-path-sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph-tree/test/vertex-add-subtree-sum.test.cpp
     title: graph-tree/test/vertex-add-subtree-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph-tree/test/vertex-set-path-composite.test.cpp
+    title: graph-tree/test/vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/countandsumlessthan.test.cpp
     title: segmenttree/test/countandsumlessthan.test.cpp
@@ -201,10 +207,12 @@ data:
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - segmenttree/test/countandsumlessthan.test.cpp
   - segmenttree/test/rmq_nonrecursive.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
-  - segmenttree/test/countandsumlessthan.test.cpp
+  - graph-tree/test/vertex-set-path-composite.test.cpp
   - graph-tree/test/vertex-add-subtree-sum.test.cpp
+  - graph-tree/test/vertex-add-path-sum.test.cpp
 documentation_of: segmenttree/point-update-range-get_nonrecursive.hpp
 layout: document
 redirect_from:

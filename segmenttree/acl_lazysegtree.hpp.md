@@ -173,8 +173,8 @@ data:
   isVerificationFile: false
   path: segmenttree/acl_lazysegtree.hpp
   requiredBy:
-  - segmenttree/acl_range-update-range-sum-min.hpp
   - segmenttree/acl_range-affine-range-sum.hpp
+  - segmenttree/acl_range-update-range-sum-min.hpp
   timestamp: '2020-11-18 23:19:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

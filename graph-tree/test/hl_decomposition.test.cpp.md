@@ -58,31 +58,46 @@ data:
     \ }\n            nb_heavy_path++;\n        }\n    }\n\n    void build(std::vector<int>\
     \ roots = {0}) {\n        int tree_id_now = 0;\n        for (auto r : roots) {\n\
     \            _build_dfs(r);\n            _build_bfs(r, tree_id_now++);\n     \
-    \   }\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n    void\
-    \ for_each_vertex(int u, int v, const std::function<void(int, int)>& f) {\n  \
-    \      while (true) {\n            if (aligned_id[u] > aligned_id[v]) std::swap(u,\
-    \ v);\n            f(std::max(aligned_id[head[v]], aligned_id[u]), aligned_id[v]);\n\
-    \            if (head[u] != head[v])\n                v = par[head[v]];\n    \
-    \        else\n                break;\n        }\n    }\n\n    // query for edges\
-    \ on path [u, v]\n    void for_each_edge(int u, int v, const std::function<void(int,\
-    \ int)>& f) {\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
-    \ std::swap(u, v);\n            if (head[u] != head[v]) {\n                f(aligned_id[head[v]],\
-    \ aligned_id[v]);\n                v = par[head[v]];\n            } else {\n \
-    \               if (u != v) f(aligned_id[u] + 1, aligned_id[v]);\n           \
-    \     break;\n            }\n        }\n    }\n\n    // lowest_common_ancestor:\
-    \ O(logV)\n    int lowest_common_ancestor(int u, int v) {\n        assert(tree_id[u]\
-    \ == tree_id[v] and tree_id[u] >= 0);\n        while (true) {\n            if\
-    \ (aligned_id[u] > aligned_id[v]) std::swap(u, v);\n            if (head[u] ==\
-    \ head[v]) return u;\n            v = par[head[v]];\n        }\n    }\n\n    int\
-    \ distance(int u, int v) {\n        assert(tree_id[u] == tree_id[v] and tree_id[u]\
-    \ >= 0);\n        return depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u,\
-    \ v)];\n    }\n};\n#line 2 \"graph-tree/test/hl_decomposition.test.cpp\"\n#include\
-    \ <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\nint main()\
-    \ {\n    int N, Q, p, u, v;\n    std::cin >> N >> Q;\n    HeavyLightDecomposition\
-    \ hld(N);\n    for (int i = 1; i <= N - 1; i++) {\n        std::cin >> p;\n  \
-    \      hld.add_edge(i, p);\n    }\n    hld.build();\n\n    while (Q--) {\n   \
-    \     std::cin >> u >> v;\n        std::cout << hld.lowest_common_ancestor(u,\
-    \ v) << \"\\n\";\n    }\n}\n"
+    \   }\n    }\n\n    template <typename Monoid> std::vector<Monoid> segtree_rearrange(const\
+    \ std::vector<Monoid>& data) const {\n        assert(int(data.size()) == V);\n\
+    \        std::vector<Monoid> ret;\n        ret.reserve(V);\n        for (int i\
+    \ = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);\n        return\
+    \ ret;\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n    void\
+    \ for_each_vertex(int u, int v, const std::function<void(int ancestor, int descendant)>&\
+    \ f) const {\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
+    \ std::swap(u, v);\n            f(std::max(aligned_id[head[v]], aligned_id[u]),\
+    \ aligned_id[v]);\n            if (head[u] == head[v]) break;\n            v =\
+    \ par[head[v]];\n        }\n    }\n\n    void for_each_vertex_noncommutative(int\
+    \ from, int to, const std::function<void(int ancestor, int descendant)>& fup,\
+    \ const std::function<void(int ancestor, int descendant)>& fdown) const {\n  \
+    \      int u = from, v = to;\n        const int lca = lowest_common_ancestor(u,\
+    \ v), dlca = depth[lca];\n        while (u >= 0 and depth[u] > dlca) {\n     \
+    \       const int p = (depth[head[u]] > dlca ? head[u] : lca);\n            fup(aligned_id[p]\
+    \ + (p == lca), aligned_id[u]), u = par[p];\n        }\n        std::vector<std::pair<int,\
+    \ int>> lrs;\n        while (v >= 0 and depth[v] >= dlca) {\n            const\
+    \ int p = (depth[head[v]] >= dlca ? head[v] : lca);\n            lrs.emplace_back(p,\
+    \ v), v = par[p];\n        }\n        std::reverse(lrs.begin(), lrs.end());\n\
+    \        for (const auto& lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);\n\
+    \    }\n\n    // query for edges on path [u, v]\n    void for_each_edge(int u,\
+    \ int v, const std::function<void(int, int)>& f) const {\n        while (true)\
+    \ {\n            if (aligned_id[u] > aligned_id[v]) std::swap(u, v);\n       \
+    \     if (head[u] != head[v]) {\n                f(aligned_id[head[v]], aligned_id[v]);\n\
+    \                v = par[head[v]];\n            } else {\n                if (u\
+    \ != v) f(aligned_id[u] + 1, aligned_id[v]);\n                break;\n       \
+    \     }\n        }\n    }\n\n    // lowest_common_ancestor: O(logV)\n    int lowest_common_ancestor(int\
+    \ u, int v) const {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >=\
+    \ 0);\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
+    \ std::swap(u, v);\n            if (head[u] == head[v]) return u;\n          \
+    \  v = par[head[v]];\n        }\n    }\n\n    int distance(int u, int v) const\
+    \ {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);\n        return\
+    \ depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];\n    }\n};\n\
+    #line 2 \"graph-tree/test/hl_decomposition.test.cpp\"\n#include <iostream>\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\nint main() {\n    int N,\
+    \ Q, p, u, v;\n    std::cin >> N >> Q;\n    HeavyLightDecomposition hld(N);\n\
+    \    for (int i = 1; i <= N - 1; i++) {\n        std::cin >> p;\n        hld.add_edge(i,\
+    \ p);\n    }\n    hld.build();\n\n    while (Q--) {\n        std::cin >> u >>\
+    \ v;\n        std::cout << hld.lowest_common_ancestor(u, v) << \"\\n\";\n    }\n\
+    }\n"
   code: "#include \"graph-tree/heavy_light_decomposition.hpp\"\n#include <iostream>\n\
     #define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\nint main() {\n    int\
     \ N, Q, p, u, v;\n    std::cin >> N >> Q;\n    HeavyLightDecomposition hld(N);\n\
@@ -95,7 +110,7 @@ data:
   isVerificationFile: true
   path: graph-tree/test/hl_decomposition.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2020-11-19 23:13:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph-tree/test/hl_decomposition.test.cpp
