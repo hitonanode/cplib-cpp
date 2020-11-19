@@ -22,6 +22,9 @@ data:
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/montmort_number_mod.test.cpp
+    title: number/test/montmort_number_mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/sqrt_modint_runtime.test.cpp
     title: number/test/sqrt_modint_runtime.test.cpp
   _pathExtension: hpp
@@ -173,6 +176,7 @@ data:
   - convolution/test/ntt.test.cpp
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
+  - number/test/montmort_number_mod.test.cpp
   - number/test/sqrt_modint_runtime.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp

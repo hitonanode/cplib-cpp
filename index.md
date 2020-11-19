@@ -627,6 +627,9 @@ data:
       path: number/test/miller-rabin.test.cpp
       title: number/test/miller-rabin.test.cpp
     - icon: ':heavy_check_mark:'
+      path: number/test/montmort_number_mod.test.cpp
+      title: number/test/montmort_number_mod.test.cpp
+    - icon: ':heavy_check_mark:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
     - icon: ':heavy_check_mark:'
