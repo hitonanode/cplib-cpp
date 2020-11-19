@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: other_data_structures/range_kth_smallest_offline.hpp
+    title: other_data_structures/range_kth_smallest_offline.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: other_data_structures/test/range_kth_smallest_offline.test.cpp
+    title: other_data_structures/test/range_kth_smallest_offline.test.cpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/binary_indexed_tree.test.cpp
     title: segmenttree/test/binary_indexed_tree.test.cpp
@@ -39,10 +45,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: segmenttree/binary_indexed_tree.hpp
-  requiredBy: []
+  requiredBy:
+  - other_data_structures/range_kth_smallest_offline.hpp
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - other_data_structures/test/range_kth_smallest_offline.test.cpp
   - segmenttree/test/point-add-range-sum.test.cpp
   - segmenttree/test/binary_indexed_tree.test.cpp
 documentation_of: segmenttree/binary_indexed_tree.hpp

@@ -244,6 +244,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/persistent_queue.hpp
       title: other_data_structures/persistent_queue.hpp
+    - icon: ':heavy_check_mark:'
+      path: other_data_structures/range_kth_smallest_offline.hpp
+      title: other_data_structures/range_kth_smallest_offline.hpp
     - icon: ':warning:'
       path: other_data_structures/rbst_fast.cpp
       title: other_data_structures/rbst_fast.cpp
@@ -652,6 +655,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/test/queue_operate_all_composite.test.cpp
       title: other_data_structures/test/queue_operate_all_composite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_data_structures/test/range_kth_smallest_offline.test.cpp
+      title: other_data_structures/test/range_kth_smallest_offline.test.cpp
     - icon: ':heavy_check_mark:'
       path: other_data_structures/test/static_range_inversion.test.cpp
       title: other_data_structures/test/static_range_inversion.test.cpp
