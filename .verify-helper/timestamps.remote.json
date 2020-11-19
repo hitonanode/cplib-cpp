@@ -71,6 +71,7 @@
 "other_data_structures/test/fibonacci_heap_spanningtree.test.cpp": "2020-11-18 20:25:12 +0900",
 "other_data_structures/test/persistent_queue.test.cpp": "2020-11-19 00:13:36 +0900",
 "other_data_structures/test/queue_operate_all_composite.test.cpp": "2020-11-18 20:25:12 +0900",
+"other_data_structures/test/range_kth_smallest_offline.test.cpp": "2020-11-19 23:44:18 +0900",
 "other_data_structures/test/static_range_inversion.test.cpp": "2020-11-18 20:25:12 +0900",
 "random/test/rolling_hash.test.cpp": "2020-11-18 20:25:12 +0900",
 "random/test/rolling_hash_w_modint.test.cpp": "2020-11-18 20:25:12 +0900",
