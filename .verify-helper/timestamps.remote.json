@@ -62,6 +62,7 @@
 "number/test/factorize_longlong.test.cpp": "2020-11-18 20:25:12 +0900",
 "number/test/gen_primes.test.cpp": "2020-11-18 20:25:12 +0900",
 "number/test/miller-rabin.test.cpp": "2020-11-18 20:25:12 +0900",
+"number/test/montmort_number_mod.test.cpp": "2020-11-20 01:01:31 +0900",
 "number/test/prime_factorization.test.cpp": "2020-11-18 20:25:12 +0900",
 "number/test/sqrt_modint_runtime.test.cpp": "2020-11-18 20:25:12 +0900",
 "other_data_structures/test/assosiative_array.test.cpp": "2020-11-18 20:33:55 +0900",
