@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
-#include "graph/strongly_connected_components.hpp"
+#include "../strongly_connected_components.hpp"
 
 #include <algorithm>
 #include <iostream>

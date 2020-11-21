@@ -1,4 +1,4 @@
-#include "graph-tree/lowest_common_ancestor.hpp"
+#include "../lowest_common_ancestor.hpp"
 #include <iostream>
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 

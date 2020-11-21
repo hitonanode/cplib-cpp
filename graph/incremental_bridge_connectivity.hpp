@@ -1,5 +1,5 @@
 #pragma once
-#include "unionfind/unionfind.hpp"
+#include "../unionfind/unionfind.hpp"
 #include <cassert>
 #include <numeric>
 #include <unordered_set>
@@ -16,16 +16,12 @@ struct IncrementalBridgeConnectivity {
     UnionFind con, bicon;
     std::vector<int> bbf;
 
-    int _bicon_par(int x) {
-        return bbf[x] == -1 ? -1 : bicon.find(bbf[x]);
-    }
+    int _bicon_par(int x) { return bbf[x] == -1 ? -1 : bicon.find(bbf[x]); }
     int _lca(int x, int y) {
         std::unordered_set<int> us;
         while (true) {
             if (x != -1) {
-                if (!us.insert(x).second) {
-                    return x;
-                }
+                if (!us.insert(x).second) { return x; }
                 x = _bicon_par(x);
             }
             std::swap(x, y);
@@ -56,13 +52,7 @@ struct IncrementalBridgeConnectivity {
             con.unite(u, v), nb_bridge++;
         }
     }
-    int count_bridge() const {
-        return nb_bridge;
-    }
-    bool two_edge_connected(int x, int y) {
-        return bicon.same(x, y);
-    }
-    int find(int x) {
-        return bicon.find(x);
-    }
+    int count_bridge() const { return nb_bridge; }
+    bool two_edge_connected(int x, int y) { return bicon.same(x, y); }
+    int find(int x) { return bicon.find(x); }
 };

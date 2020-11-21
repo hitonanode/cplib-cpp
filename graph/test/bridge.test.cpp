@@ -1,4 +1,4 @@
-#include "graph/lowlink.hpp"
+#include "../lowlink.hpp"
 #include <algorithm>
 #include <iostream>
 #include <utility>

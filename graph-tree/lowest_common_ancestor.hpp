@@ -1,23 +1,23 @@
 #pragma once
+#include <utility>
 #include <vector>
-using namespace std;
 
 // CUT begin
 // lowest common ancestor (LCA) class for undirected weighted tree
 // 無向重み付きグラフの最小共通祖先
 // <https://yukicoder.me/submissions/392383>
 struct UndirectedWeightedTree {
-    using T = long long int; // Arbitrary data structure (operator+, operator- must be defined)
+    using T = long long; // Arbitrary data structure (operator+, operator- must be defined)
     int INVALID = -1;
     int V, lgV;
     int E;
     int root;
-    vector<vector<pair<int, int>>> adj; // (nxt_vertex, edge_id)
-    // vector<pint> edge;  // edges[edge_id] = (vertex_id, vertex_id)
-    vector<T> weight;     // w[edge_id]
-    vector<int> par;      // parent_vertex_id[vertex_id]
-    vector<int> depth;    // depth_from_root[vertex_id]
-    vector<T> acc_weight; // w_sum_from_root[vertex_id]
+    std::vector<std::vector<std::pair<int, int>>> adj; // (nxt_vertex, edge_id)
+    // vector<pint> edge; // edges[edge_id] = (vertex_id, vertex_id)
+    std::vector<T> weight;     // w[edge_id]
+    std::vector<int> par;      // parent_vertex_id[vertex_id]
+    std::vector<int> depth;    // depth_from_root[vertex_id]
+    std::vector<T> acc_weight; // w_sum_from_root[vertex_id]
 
     void _fix_root_dfs(int now, int prv, int prv_edge_id) {
         par[now] = prv;
@@ -53,9 +53,9 @@ struct UndirectedWeightedTree {
         _fix_root_dfs(root, INVALID, INVALID);
     }
 
-    vector<vector<int>> doubling;
+    std::vector<std::vector<int>> doubling;
     void doubling_precalc() {
-        doubling.assign(lgV, vector<int>(V));
+        doubling.assign(lgV, std::vector<int>(V));
         doubling[0] = par;
         for (int d = 0; d < lgV - 1; d++)
             for (int i = 0; i < V; i++) {
@@ -76,7 +76,7 @@ struct UndirectedWeightedTree {
     }
 
     int lowest_common_ancestor(int u, int v) {
-        if (depth[u] > depth[v]) swap(u, v);
+        if (depth[u] > depth[v]) std::swap(u, v);
 
         v = kth_parent(v, depth[v] - depth[u]);
         if (u == v) return u;

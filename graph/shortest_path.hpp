@@ -8,9 +8,7 @@
 #include <vector>
 
 // CUT begin
-template<typename T>
-struct ShortestPath
-{
+template <typename T> struct ShortestPath {
     int V, E;
     int INVALID = -1;
     std::vector<std::vector<std::pair<int, T>>> to;
@@ -35,7 +33,7 @@ struct ShortestPath
         using P = std::pair<T, int>;
         std::priority_queue<P, std::vector<P>, std::greater<P>> pq;
         pq.emplace(0, s);
-        while(!pq.empty()) {
+        while (!pq.empty()) {
             T d;
             int v;
             std::tie(d, v) = pq.top();

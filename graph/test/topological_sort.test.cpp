@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
-#include "graph/strongly_connected_components.hpp"
+#include "../strongly_connected_components.hpp"
 
 #include <iostream>
 

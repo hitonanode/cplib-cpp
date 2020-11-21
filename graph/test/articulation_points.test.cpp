@@ -1,4 +1,4 @@
-#include "graph/lowlink.hpp"
+#include "../lowlink.hpp"
 #include <iostream>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A"
 

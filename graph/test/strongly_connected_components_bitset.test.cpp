@@ -1,8 +1,8 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C"
-#include "graph/strongly_connected_components_bitset.hpp"
-
+#include "../strongly_connected_components_bitset.hpp"
 #include <cassert>
 #include <stdio.h>
+
 constexpr int VMAX = 10000;
 int main() {
     int V, E;

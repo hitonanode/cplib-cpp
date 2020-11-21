@@ -1,6 +1,6 @@
 #pragma once
-#include <cassert>
 #include <algorithm>
+#include <cassert>
 #include <vector>
 
 // CUT begin
@@ -10,7 +10,7 @@
 struct DirectedGraphSCC {
     int V; // # of Vertices
     std::vector<std::vector<int>> to, from;
-    std::vector<int> used;  // Only true/false
+    std::vector<int> used; // Only true/false
     std::vector<int> vs;
     std::vector<int> cmp;
     int scc_num = -1;
@@ -19,13 +19,15 @@ struct DirectedGraphSCC {
 
     void _dfs(int v) {
         used[v] = true;
-        for (auto t : to[v]) if (!used[t]) _dfs(t);
+        for (auto t : to[v])
+            if (!used[t]) _dfs(t);
         vs.push_back(v);
     }
     void _rdfs(int v, int k) {
         used[v] = true;
         cmp[v] = k;
-        for (auto t : from[v]) if (!used[t]) _rdfs(t, k);
+        for (auto t : from[v])
+            if (!used[t]) _rdfs(t, k);
     }
 
     void add_edge(int from_, int to_) {
@@ -39,18 +41,19 @@ struct DirectedGraphSCC {
     int FindStronglyConnectedComponents() {
         used.assign(V, false);
         vs.clear();
-        for (int v = 0; v < V; v++) if (!used[v]) _dfs(v);
+        for (int v = 0; v < V; v++)
+            if (!used[v]) _dfs(v);
         used.assign(V, false);
         scc_num = 0;
-        for (int i = (int)vs.size() - 1; i >= 0; i--) if (!used[vs[i]]) _rdfs(vs[i], scc_num++);
+        for (int i = (int)vs.size() - 1; i >= 0; i--)
+            if (!used[vs[i]]) _rdfs(vs[i], scc_num++);
         return scc_num;
     }
 
     // Find and output the vertices that form a closed cycle.
     // output: {v_1, ..., v_C}, where C is the length of cycle,
     //         {} if there's NO cycle (graph is DAG)
-    std::vector<int> DetectCycle()
-    {
+    std::vector<int> DetectCycle() {
         int ns = FindStronglyConnectedComponents();
         if (ns == V) return {};
         std::vector<int> cnt(ns);
@@ -61,12 +64,12 @@ struct DirectedGraphSCC {
         std::vector<int> ret;
         auto dfs = [&](auto &&dfs, int now, bool b0) -> bool {
             if (now == init and b0) return true;
-            for (auto nxt : to[now]) if (cmp[nxt] == c and !used[nxt])
-            {
-                ret.emplace_back(nxt), used[nxt] = 1;
-                if (dfs(dfs, nxt, true)) return true;
-                ret.pop_back();
-            }
+            for (auto nxt : to[now])
+                if (cmp[nxt] == c and !used[nxt]) {
+                    ret.emplace_back(nxt), used[nxt] = 1;
+                    if (dfs(dfs, nxt, true)) return true;
+                    ret.pop_back();
+                }
             return false;
         };
         dfs(dfs, init, false);
@@ -77,9 +80,10 @@ struct DirectedGraphSCC {
     // belonging to the same component(The resultant graph is DAG).
     DirectedGraphSCC GenerateTopologicalGraph() {
         DirectedGraphSCC newgraph(scc_num);
-        for (int s = 0; s < V; s++) for (auto t : to[s]) {
-            if (cmp[s] != cmp[t]) newgraph.add_edge(cmp[s], cmp[t]);
-        }
+        for (int s = 0; s < V; s++)
+            for (auto t : to[s]) {
+                if (cmp[s] != cmp[t]) newgraph.add_edge(cmp[s], cmp[t]);
+            }
         return newgraph;
     }
 };

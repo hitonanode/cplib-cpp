@@ -1,4 +1,4 @@
-#include "graph/bipartite_matching(slow).hpp"
+#include "../bipartite_matching(slow).hpp"
 #include <iostream>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_7_A"
 

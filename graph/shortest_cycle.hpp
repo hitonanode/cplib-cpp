@@ -1,7 +1,7 @@
 #pragma once
 #include <cassert>
-#include <limits>
 #include <deque>
+#include <limits>
 #include <utility>
 #include <vector>
 
@@ -10,11 +10,10 @@
 // Assumption: only two types of edges are permitted: weight = 0 or W ( > 0)
 // Complexity: O(E)
 // Verified: <https://codeforces.com/contest/1325/problem/E>
-struct ShortestCycle01
-{
+struct ShortestCycle01 {
     int V, E;
     int INVALID = -1;
-    std::vector<std::vector<std::pair<int, int>>> to;  // (nxt, weight)
+    std::vector<std::vector<std::pair<int, int>>> to; // (nxt, weight)
     ShortestCycle01() = default;
     ShortestCycle01(int V) : V(V), E(0), to(V) {}
     void add_edge(int s, int t, int len) {
@@ -43,15 +42,18 @@ struct ShortestCycle01
         while (!bfsq.empty()) {
             int now = bfsq.front().first, prv = bfsq.front().second;
             bfsq.pop_front();
-            for (auto nxt : to[now]) if (nxt.first != prv) {
-                if (dist[nxt.first] == std::numeric_limits<int>::max()) {
-                    dist[nxt.first] = dist[now] + nxt.second;
-                    prev[nxt.first] = now;
-                    if (nxt.second) bfsq.emplace_back(nxt.first, now);
-                    else bfsq.emplace_front(nxt.first, now);
+            for (auto nxt : to[now])
+                if (nxt.first != prv) {
+                    if (dist[nxt.first] == std::numeric_limits<int>::max()) {
+                        dist[nxt.first] = dist[now] + nxt.second;
+                        prev[nxt.first] = now;
+                        if (nxt.second)
+                            bfsq.emplace_back(nxt.first, now);
+                        else
+                            bfsq.emplace_front(nxt.first, now);
+                    } else
+                        add_edge.emplace_back(std::make_pair(now, nxt.first), nxt.second);
                 }
-                else add_edge.emplace_back(std::make_pair(now, nxt.first), nxt.second);
-            }
         }
         int minimum_cycle = std::numeric_limits<int>::max();
         int s = -1, t = -1;

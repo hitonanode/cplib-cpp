@@ -1,6 +1,6 @@
 #pragma once
-#include <cassert>
 #include <algorithm>
+#include <cassert>
 #include <deque>
 #include <limits>
 #include <queue>
@@ -10,9 +10,7 @@
 // CUT begin
 // 区間に辺を張って最短距離問題を解く
 // Verify: Codeforces Round #406 (Div. 1), problem: (B) Legacy <https://codeforces.com/contest/786/submission/93412867>
-template <typename T = long long>
-struct SegmentEdgeShortestPath
-{
+template <typename T = long long> struct SegmentEdgeShortestPath {
     int V;
     int h;
     int INVALID = -1;
@@ -45,11 +43,10 @@ struct SegmentEdgeShortestPath
         from_vs.clear(), to_vs.clear();
         _add_dfs(1, from_l, from_r, 0, h, from_vs);
         _add_dfs(1, to_l, to_r, 0, h, to_vs);
-        for (auto &x : from_vs) if (x < h) x += h * 2;
+        for (auto &x : from_vs)
+            if (x < h) x += h * 2;
         for (const auto s : from_vs) {
-            for (const auto t : to_vs) {
-                to[s].emplace_back(t, len);
-            }
+            for (const auto t : to_vs) { to[s].emplace_back(t, len); }
         }
     }
     std::vector<T> dist;
@@ -68,8 +65,10 @@ struct SegmentEdgeShortestPath
                 const int nxt = p.first, d = p.second;
                 if (_d_tmp[nxt] > _d_tmp[now] + d) {
                     _d_tmp[nxt] = _d_tmp[now] + d;
-                    if (d) q.emplace_back(nxt);
-                    else q.emplace_front(nxt);
+                    if (d)
+                        q.emplace_back(nxt);
+                    else
+                        q.emplace_front(nxt);
                 }
             }
         }
@@ -90,8 +89,7 @@ struct SegmentEdgeShortestPath
             pq.pop();
             int now = a.second;
             if (_d_tmp[now] < a.first) continue;
-            for (const auto p : to[now])
-            {
+            for (const auto p : to[now]) {
                 int nxt = p.first;
                 T d = p.second;
                 if (_d_tmp[nxt] > _d_tmp[now] + d) {

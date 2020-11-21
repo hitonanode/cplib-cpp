@@ -1,4 +1,4 @@
-#include "graph/incremental_bridge_connectivity.hpp"
+#include "../incremental_bridge_connectivity.hpp"
 #include <algorithm>
 #include <iostream>
 #include <vector>

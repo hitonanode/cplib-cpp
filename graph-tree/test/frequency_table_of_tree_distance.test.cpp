@@ -1,5 +1,5 @@
-#include "convolution/fft_double.hpp"
-#include "graph-tree/centroid_decomposition.hpp"
+#include "../../convolution/fft_double.hpp"
+#include "../centroid_decomposition.hpp"
 #include <algorithm>
 #include <iostream>
 #include <unordered_set>

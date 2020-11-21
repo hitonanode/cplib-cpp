@@ -1,5 +1,5 @@
-#include "graph/bellman_ford.hpp"
-#include "graph/shortest_path.hpp"
+#include "../bellman_ford.hpp"
+#include "../shortest_path.hpp"
 #include <iostream>
 #include <vector>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B"
@@ -9,7 +9,7 @@ wedges e;
 int main() {
     int V, E, r;
     cin >> V >> E >> r;
-    ShortestPath<long long int> graph(V);
+    ShortestPath<long long> graph(V);
     e.resize(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
@@ -17,7 +17,7 @@ int main() {
         e[s].emplace_back(t, d);
         graph.add_edge(s, t, d);
     }
-    vector<long long int> ret = bellman_ford(r, e, V);
+    vector<long long> ret = bellman_ford(r, e, V);
 
     if (!graph.BellmanFord(r, V + 1)) {
         puts("NEGATIVE CYCLE");

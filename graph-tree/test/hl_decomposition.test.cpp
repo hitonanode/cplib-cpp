@@ -1,4 +1,4 @@
-#include "graph-tree/heavy_light_decomposition.hpp"
+#include "../heavy_light_decomposition.hpp"
 #include <iostream>
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 

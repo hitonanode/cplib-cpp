@@ -1,4 +1,4 @@
-#include "graph/bipartite_matching.hpp"
+#include "../bipartite_matching.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/bipartitematching"
 
 #include <algorithm>

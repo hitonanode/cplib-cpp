@@ -1,5 +1,5 @@
-#include "graph/dijkstra.hpp"
-#include "graph/shortest_path.hpp"
+#include "../dijkstra.hpp"
+#include "../shortest_path.hpp"
 #include <cassert>
 #include <iostream>
 #include <vector>

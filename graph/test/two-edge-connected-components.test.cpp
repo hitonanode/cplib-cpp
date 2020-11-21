@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
-#include "graph/lowlink.hpp"
+#include "../lowlink.hpp"
 
 #include <algorithm>
 #include <iostream>

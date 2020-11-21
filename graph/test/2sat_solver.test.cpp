@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
-#include "graph/strongly_connected_components.hpp"
+#include "../strongly_connected_components.hpp"
 #include <cassert>
 #include <iostream>
 #include <stdio.h>

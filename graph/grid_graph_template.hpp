@@ -6,8 +6,7 @@
 #include <vector>
 
 // CUT begin
-struct GridGraph
-{
+struct GridGraph {
 
     int H, W;
     const std::vector<int> dx{1, -1, 0, 0};
@@ -19,14 +18,11 @@ struct GridGraph
     /* Implement here. */
     using T_E = long long int;
     const T_E INF = 1e18;
-    inline T_E edge_cost(int x_s, int y_s, int x_t, int y_t)
-    {
-        return 0;
-    }
+    inline T_E edge_cost(int x_s, int y_s, int x_t, int y_t) { return 0; }
 
     // Dijkstra's algorithm
     // Complexity: O(HWlog(HW))
-    std::vector<std::vector<T_E>> dij; // Distance from (x_s, y_s)
+    std::vector<std::vector<T_E>> dij;                     // Distance from (x_s, y_s)
     std::vector<std::vector<std::pair<int, int>>> dij_prv; // Previous node for Dijkstra optimal path
     void dijkstra(int x_s, int y_s) {
         dij.assign(H, std::vector<T_E>(W, INF));
