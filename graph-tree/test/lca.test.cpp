@@ -1,6 +1,7 @@
 #include "../lowest_common_ancestor.hpp"
 #include <iostream>
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
+using namespace std;
 
 int main() {
     int N, Q, p, u, v;
