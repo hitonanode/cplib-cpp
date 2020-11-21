@@ -31,58 +31,56 @@ data:
     // Reference: <https://scrapbox.io/data-structures/Incremental_Bridge-Connectivity>\n\
     //            <https://ei1333.github.io/library/graph/connected-components/incremental-bridge-connectivity.cpp>\n\
     struct IncrementalBridgeConnectivity {\n    int V;\n    int nb_bridge;\n    UnionFind\
-    \ con, bicon;\n    std::vector<int> bbf;\n\n    int _bicon_par(int x) {\n    \
-    \    return bbf[x] == -1 ? -1 : bicon.find(bbf[x]);\n    }\n    int _lca(int x,\
-    \ int y) {\n        std::unordered_set<int> us;\n        while (true) {\n    \
-    \        if (x != -1) {\n                if (!us.insert(x).second) {\n       \
-    \             return x;\n                }\n                x = _bicon_par(x);\n\
-    \            }\n            std::swap(x, y);\n        }\n    }\n    void _compress(int\
-    \ now, int lca) {\n        while (bicon.find(now) != bicon.find(lca)) {\n    \
-    \        int nxt = _bicon_par(now);\n            bbf[now] = bbf[lca], bicon.unite(now,\
-    \ lca), now = nxt, nb_bridge--;\n        }\n    }\n\n    IncrementalBridgeConnectivity(int\
-    \ v = 0) : V(v), nb_bridge(0), con(v), bicon(v), bbf(v, -1) {}\n\n    void add_edge(int\
-    \ u, int v) {\n        assert(u >= 0 and u < V);\n        assert(v >= 0 and v\
-    \ < V);\n        u = bicon.find(u), v = bicon.find(v);\n        if (con.find(u)\
-    \ == con.find(v)) {\n            int lca = _lca(u, v);\n            _compress(u,\
-    \ lca), _compress(v, lca);\n        } else {\n            if (con.count(u) > con.count(v))\
-    \ std::swap(u, v);\n            for (int now = u, pre = v; now != -1;) {\n   \
-    \             int nxt = _bicon_par(now);\n                bbf[now] = pre, pre\
-    \ = now, now = nxt;\n            }\n            con.unite(u, v), nb_bridge++;\n\
-    \        }\n    }\n    int count_bridge() const {\n        return nb_bridge;\n\
-    \    }\n    bool two_edge_connected(int x, int y) {\n        return bicon.same(x,\
-    \ y);\n    }\n    int find(int x) {\n        return bicon.find(x);\n    }\n};\n"
-  code: "#pragma once\n#include \"unionfind/unionfind.hpp\"\n#include <cassert>\n\
+    \ con, bicon;\n    std::vector<int> bbf;\n\n    int _bicon_par(int x) { return\
+    \ bbf[x] == -1 ? -1 : bicon.find(bbf[x]); }\n    int _lca(int x, int y) {\n  \
+    \      std::unordered_set<int> us;\n        while (true) {\n            if (x\
+    \ != -1) {\n                if (!us.insert(x).second) { return x; }\n        \
+    \        x = _bicon_par(x);\n            }\n            std::swap(x, y);\n   \
+    \     }\n    }\n    void _compress(int now, int lca) {\n        while (bicon.find(now)\
+    \ != bicon.find(lca)) {\n            int nxt = _bicon_par(now);\n            bbf[now]\
+    \ = bbf[lca], bicon.unite(now, lca), now = nxt, nb_bridge--;\n        }\n    }\n\
+    \n    IncrementalBridgeConnectivity(int v = 0) : V(v), nb_bridge(0), con(v), bicon(v),\
+    \ bbf(v, -1) {}\n\n    void add_edge(int u, int v) {\n        assert(u >= 0 and\
+    \ u < V);\n        assert(v >= 0 and v < V);\n        u = bicon.find(u), v = bicon.find(v);\n\
+    \        if (con.find(u) == con.find(v)) {\n            int lca = _lca(u, v);\n\
+    \            _compress(u, lca), _compress(v, lca);\n        } else {\n       \
+    \     if (con.count(u) > con.count(v)) std::swap(u, v);\n            for (int\
+    \ now = u, pre = v; now != -1;) {\n                int nxt = _bicon_par(now);\n\
+    \                bbf[now] = pre, pre = now, now = nxt;\n            }\n      \
+    \      con.unite(u, v), nb_bridge++;\n        }\n    }\n    int count_bridge()\
+    \ const { return nb_bridge; }\n    bool two_edge_connected(int x, int y) { return\
+    \ bicon.same(x, y); }\n    int find(int x) { return bicon.find(x); }\n};\n"
+  code: "#pragma once\n#include \"../unionfind/unionfind.hpp\"\n#include <cassert>\n\
     #include <numeric>\n#include <unordered_set>\n#include <vector>\n\n// CUT begin\n\
     // Incremental Bridge-Connectivity\n// two-edge-connected components\n// Reference:\
     \ <https://scrapbox.io/data-structures/Incremental_Bridge-Connectivity>\n//  \
     \          <https://ei1333.github.io/library/graph/connected-components/incremental-bridge-connectivity.cpp>\n\
     struct IncrementalBridgeConnectivity {\n    int V;\n    int nb_bridge;\n    UnionFind\
-    \ con, bicon;\n    std::vector<int> bbf;\n\n    int _bicon_par(int x) {\n    \
-    \    return bbf[x] == -1 ? -1 : bicon.find(bbf[x]);\n    }\n    int _lca(int x,\
-    \ int y) {\n        std::unordered_set<int> us;\n        while (true) {\n    \
-    \        if (x != -1) {\n                if (!us.insert(x).second) {\n       \
-    \             return x;\n                }\n                x = _bicon_par(x);\n\
-    \            }\n            std::swap(x, y);\n        }\n    }\n    void _compress(int\
-    \ now, int lca) {\n        while (bicon.find(now) != bicon.find(lca)) {\n    \
-    \        int nxt = _bicon_par(now);\n            bbf[now] = bbf[lca], bicon.unite(now,\
-    \ lca), now = nxt, nb_bridge--;\n        }\n    }\n\n    IncrementalBridgeConnectivity(int\
-    \ v = 0) : V(v), nb_bridge(0), con(v), bicon(v), bbf(v, -1) {}\n\n    void add_edge(int\
-    \ u, int v) {\n        assert(u >= 0 and u < V);\n        assert(v >= 0 and v\
-    \ < V);\n        u = bicon.find(u), v = bicon.find(v);\n        if (con.find(u)\
-    \ == con.find(v)) {\n            int lca = _lca(u, v);\n            _compress(u,\
-    \ lca), _compress(v, lca);\n        } else {\n            if (con.count(u) > con.count(v))\
-    \ std::swap(u, v);\n            for (int now = u, pre = v; now != -1;) {\n   \
-    \             int nxt = _bicon_par(now);\n                bbf[now] = pre, pre\
-    \ = now, now = nxt;\n            }\n            con.unite(u, v), nb_bridge++;\n\
-    \        }\n    }\n    int count_bridge() const {\n        return nb_bridge;\n\
-    \    }\n    bool two_edge_connected(int x, int y) {\n        return bicon.same(x,\
-    \ y);\n    }\n    int find(int x) {\n        return bicon.find(x);\n    }\n};\n"
+    \ con, bicon;\n    std::vector<int> bbf;\n\n    int _bicon_par(int x) { return\
+    \ bbf[x] == -1 ? -1 : bicon.find(bbf[x]); }\n    int _lca(int x, int y) {\n  \
+    \      std::unordered_set<int> us;\n        while (true) {\n            if (x\
+    \ != -1) {\n                if (!us.insert(x).second) { return x; }\n        \
+    \        x = _bicon_par(x);\n            }\n            std::swap(x, y);\n   \
+    \     }\n    }\n    void _compress(int now, int lca) {\n        while (bicon.find(now)\
+    \ != bicon.find(lca)) {\n            int nxt = _bicon_par(now);\n            bbf[now]\
+    \ = bbf[lca], bicon.unite(now, lca), now = nxt, nb_bridge--;\n        }\n    }\n\
+    \n    IncrementalBridgeConnectivity(int v = 0) : V(v), nb_bridge(0), con(v), bicon(v),\
+    \ bbf(v, -1) {}\n\n    void add_edge(int u, int v) {\n        assert(u >= 0 and\
+    \ u < V);\n        assert(v >= 0 and v < V);\n        u = bicon.find(u), v = bicon.find(v);\n\
+    \        if (con.find(u) == con.find(v)) {\n            int lca = _lca(u, v);\n\
+    \            _compress(u, lca), _compress(v, lca);\n        } else {\n       \
+    \     if (con.count(u) > con.count(v)) std::swap(u, v);\n            for (int\
+    \ now = u, pre = v; now != -1;) {\n                int nxt = _bicon_par(now);\n\
+    \                bbf[now] = pre, pre = now, now = nxt;\n            }\n      \
+    \      con.unite(u, v), nb_bridge++;\n        }\n    }\n    int count_bridge()\
+    \ const { return nb_bridge; }\n    bool two_edge_connected(int x, int y) { return\
+    \ bicon.same(x, y); }\n    int find(int x) { return bicon.find(x); }\n};\n"
   dependsOn:
   - unionfind/unionfind.hpp
   isVerificationFile: false
   path: graph/incremental_bridge_connectivity.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2020-11-21 18:08:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/incremental-bridge-connectivity.test.cpp

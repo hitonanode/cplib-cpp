@@ -98,9 +98,9 @@ data:
     \ p);\n    }\n    hld.build();\n\n    while (Q--) {\n        std::cin >> u >>\
     \ v;\n        std::cout << hld.lowest_common_ancestor(u, v) << \"\\n\";\n    }\n\
     }\n"
-  code: "#include \"graph-tree/heavy_light_decomposition.hpp\"\n#include <iostream>\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\nint main() {\n    int\
-    \ N, Q, p, u, v;\n    std::cin >> N >> Q;\n    HeavyLightDecomposition hld(N);\n\
+  code: "#include \"../heavy_light_decomposition.hpp\"\n#include <iostream>\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\nint main() {\n    int N,\
+    \ Q, p, u, v;\n    std::cin >> N >> Q;\n    HeavyLightDecomposition hld(N);\n\
     \    for (int i = 1; i <= N - 1; i++) {\n        std::cin >> p;\n        hld.add_edge(i,\
     \ p);\n    }\n    hld.build();\n\n    while (Q--) {\n        std::cin >> u >>\
     \ v;\n        std::cout << hld.lowest_common_ancestor(u, v) << \"\\n\";\n    }\n\
@@ -110,7 +110,7 @@ data:
   isVerificationFile: true
   path: graph-tree/test/hl_decomposition.test.cpp
   requiredBy: []
-  timestamp: '2020-11-19 23:13:47+09:00'
+  timestamp: '2020-11-21 18:08:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph-tree/test/hl_decomposition.test.cpp

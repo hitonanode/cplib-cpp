@@ -18,31 +18,31 @@ data:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A
   bundledCode: "#line 2 \"graph/dijkstra.hpp\"\n#include <queue>\n#include <utility>\n\
     #include <vector>\nusing namespace std;\n\nusing wedges = vector<vector<pair<long\
-    \ long int, long long int>>>; // (to, weight)\n\nconstexpr long long int INF =\
-    \ 1e17;\npair<vector<long long int>, vector<int>> dijkstra(int N, int s, const\
-    \ wedges &w)\n{\n    using lint = long long int;\n    using plint = pair<long\
-    \ long int, long long int>;\n    vector<lint> dist(N, INF);\n    dist[s] = 0;\n\
-    \    vector<int> prev(N, -1);\n    priority_queue<plint, vector<plint>, greater<plint>>\
-    \ pq;\n    pq.emplace(0, s);\n    while (!pq.empty())\n    {\n        plint p\
-    \ = pq.top();\n        pq.pop();\n        int v = p.second;\n        if (dist[v]\
-    \ < p.first) continue;\n        for (auto nx : w[v])\n        {\n            lint\
-    \ dnx = p.first + nx.second;\n            if (dist[nx.first] > dnx)\n        \
-    \    {\n                dist[nx.first] = dnx, prev[nx.first] = v;\n          \
-    \      pq.emplace(dnx, nx.first);\n            }\n        }\n    }\n    return\
-    \ make_pair(dist, prev); // (distance, previous_node)\n}\n#line 2 \"graph/shortest_path.hpp\"\
-    \n#include <cassert>\n#include <deque>\n#include <functional>\n#include <limits>\n\
-    #line 9 \"graph/shortest_path.hpp\"\n\n// CUT begin\ntemplate<typename T>\nstruct\
-    \ ShortestPath\n{\n    int V, E;\n    int INVALID = -1;\n    std::vector<std::vector<std::pair<int,\
-    \ T>>> to;\n    ShortestPath() = default;\n    ShortestPath(int V) : V(V), E(0),\
-    \ to(V) {}\n    void add_edge(int s, int t, T len) {\n        assert(0 <= s and\
-    \ s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t, len);\n\
-    \        E++;\n    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\
-    \    // Dijkstra algorithm\n    // Complexity: O(E log E)\n    void Dijkstra(int\
-    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, std::numeric_limits<T>::max());\n\
-    \        dist[s] = 0;\n        prev.assign(V, INVALID);\n        using P = std::pair<T,\
+    \ long, long long>>>; // (to, weight)\n\nconstexpr long long int INF = 1e17;\n\
+    pair<vector<long long int>, vector<int>> dijkstra(int N, int s, const wedges &w)\
+    \ {\n    using lint = long long;\n    using plint = pair<long long, long long>;\n\
+    \    vector<lint> dist(N, INF);\n    dist[s] = 0;\n    vector<int> prev(N, -1);\n\
+    \    priority_queue<plint, vector<plint>, greater<plint>> pq;\n    pq.emplace(0,\
+    \ s);\n    while (!pq.empty()) {\n        plint p = pq.top();\n        pq.pop();\n\
+    \        int v = p.second;\n        if (dist[v] < p.first) continue;\n       \
+    \ for (auto nx : w[v]) {\n            lint dnx = p.first + nx.second;\n      \
+    \      if (dist[nx.first] > dnx) {\n                dist[nx.first] = dnx, prev[nx.first]\
+    \ = v;\n                pq.emplace(dnx, nx.first);\n            }\n        }\n\
+    \    }\n    return make_pair(dist, prev); // (distance, previous_node)\n}\n#line\
+    \ 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include <deque>\n#include\
+    \ <functional>\n#include <limits>\n#line 9 \"graph/shortest_path.hpp\"\n\n// CUT\
+    \ begin\ntemplate <typename T> struct ShortestPath {\n    int V, E;\n    int INVALID\
+    \ = -1;\n    std::vector<std::vector<std::pair<int, T>>> to;\n    ShortestPath()\
+    \ = default;\n    ShortestPath(int V) : V(V), E(0), to(V) {}\n    void add_edge(int\
+    \ s, int t, T len) {\n        assert(0 <= s and s < V);\n        assert(0 <= t\
+    \ and t < V);\n        to[s].emplace_back(t, len);\n        E++;\n    }\n\n  \
+    \  std::vector<T> dist;\n    std::vector<int> prev;\n    // Dijkstra algorithm\n\
+    \    // Complexity: O(E log E)\n    void Dijkstra(int s) {\n        assert(0 <=\
+    \ s and s < V);\n        dist.assign(V, std::numeric_limits<T>::max());\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        using P = std::pair<T,\
     \ int>;\n        std::priority_queue<P, std::vector<P>, std::greater<P>> pq;\n\
-    \        pq.emplace(0, s);\n        while(!pq.empty()) {\n            T d;\n \
-    \           int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \        pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n\
+    \            int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
     \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
     \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
     \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
@@ -87,7 +87,7 @@ data:
     \ (ret.first[i] == INF)\n            puts(\"INF\");\n        else {\n        \
     \    assert(ret.first[i] == graph.dist[i]);\n            printf(\"%lld\\n\", ret.first[i]);\n\
     \        }\n    }\n}\n"
-  code: "#include \"graph/dijkstra.hpp\"\n#include \"graph/shortest_path.hpp\"\n#include\
+  code: "#include \"../dijkstra.hpp\"\n#include \"../shortest_path.hpp\"\n#include\
     \ <cassert>\n#include <iostream>\n#include <vector>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A\"\
     \n\nwedges e;\n\nint main() {\n    int V, E, r;\n    cin >> V >> E >> r;\n   \
     \ e.resize(V);\n    ShortestPath<int> graph(V);\n    for (int i = 0; i < E; i++)\
@@ -103,7 +103,7 @@ data:
   isVerificationFile: true
   path: graph/test/dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2020-11-21 18:08:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/dijkstra.test.cpp

@@ -117,7 +117,7 @@ data:
     \    }\n\n    const vector<long long> ret = frequency_table_of_tree_distance(to);\n\
     \    for (int i = 1; i < N; i++) { cout << ret[i] << ' '; }\n    cout << '\\n';\n\
     }\n"
-  code: "#include \"convolution/fft_double.hpp\"\n#include \"graph-tree/centroid_decomposition.hpp\"\
+  code: "#include \"../../convolution/fft_double.hpp\"\n#include \"../centroid_decomposition.hpp\"\
     \n#include <algorithm>\n#include <iostream>\n#include <unordered_set>\n#include\
     \ <vector>\n#define PROBLEM \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
     \nusing namespace std;\n\nstruct frequency_table_of_tree_distance_ {\n    vector<unordered_set<int>>\
@@ -152,7 +152,7 @@ data:
   isVerificationFile: true
   path: graph-tree/test/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2020-11-21 18:08:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph-tree/test/frequency_table_of_tree_distance.test.cpp

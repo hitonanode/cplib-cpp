@@ -18,72 +18,9 @@ data:
     links:
     - https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h>
     - https://kopricky.github.io/code/Academic/maximum_matching.html>
-  bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
-    \ <vector>\n\n// CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus\
-    \ >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using\
-    \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
-    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
-    \ {\n            primitive_root = [&]() {\n                std::set<int> fac;\n\
-    \                int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
-    \ i++)\n                    while (v % i == 0) fac.insert(i), v /= i;\n      \
-    \          if (v > 1) fac.insert(v);\n                for (int g = 1; g < mod;\
-    \ g++) {\n                    bool ok = true;\n                    for (auto i\
-    \ : fac)\n                        if (ModInt(g).power((mod - 1) / i) == 1) {\n\
-    \                            ok = false;\n                            break;\n\
-    \                        }\n                    if (ok) return g;\n          \
-    \      }\n                return -1;\n            }();\n        }\n        return\
-    \ primitive_root;\n    }\n    int val;\n    MDCONST ModInt() : val(0) {}\n   \
-    \ MDCONST ModInt &_setval(lint v) {\n        val = (v >= mod ? v - mod : v);\n\
-    \        return *this;\n    }\n    MDCONST ModInt(lint v) { _setval(v % mod +\
-    \ mod); }\n    explicit operator bool() const { return val != 0; }\n    MDCONST\
-    \ ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ - x.val + mod); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.val % mod); }\n    MDCONST ModInt operator/(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % mod); }\n \
-    \   MDCONST ModInt operator-() const { return ModInt()._setval(mod - val); }\n\
-    \    MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
-    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
-    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
-    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % mod + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
-    \ &x) { return ModInt()._setval(a % mod - x.val + mod); }\n    friend MDCONST\
-    \ ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a % mod\
-    \ * x.val % mod); }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
-    \ &x) { return ModInt()._setval(a % mod * x.inv() % mod); }\n    MDCONST bool\
-    \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
-    \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
-    \ operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt,\
-    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
-    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
-    \ os << x.val; }\n    MDCONST lint power(lint n) const {\n        lint ans = 1,\
-    \ tmp = this->val;\n        while (n) {\n            if (n & 1) ans = ans * tmp\
-    \ % mod;\n            tmp = tmp * tmp % mod, n /= 2;\n        }\n        return\
-    \ ans;\n    }\n    MDCONST ModInt pow(lint n) const { return power(n); }\n   \
-    \ MDCONST lint inv() const { return this->power(mod - 2); }\n    ModInt fac()\
-    \ const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
-    \        if (l0 > this->val) return facs[this->val];\n\n        facs.resize(this->val\
-    \ + 1);\n        for (int i = l0; i <= this->val; i++) facs[i] = (i == 0 ? ModInt(1)\
-    \ : facs[i - 1] * ModInt(i));\n        return facs[this->val];\n    }\n\n    ModInt\
-    \ doublefac() const {\n        lint k = (this->val + 1) / 2;\n        return (this->val\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac()) : ModInt(k).fac()\
-    \ * ModInt(2).pow(k);\n    }\n    ModInt nCr(const ModInt &r) const { return (this->val\
-    \ < r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac()); }\n\n    ModInt\
-    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
-    \ val;\n        if (power((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
-    \        while (b.power((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
-    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = power((m\
-    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.power(m);\n\
-    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
-    \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
-    \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#line 5 \"linear_algebra_matrix/linalg_modint.hpp\"\
-    \n#include <iterator>\n#line 7 \"linear_algebra_matrix/linalg_modint.hpp\"\n\n\
-    // CUT begin\ntemplate <typename T> struct matrix {\n    int H, W;\n    std::vector<T>\
+  bundledCode: "#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#include <iostream>\n#include <iterator>\n#include <vector>\n\
+    \n// CUT begin\ntemplate <typename T> struct matrix {\n    int H, W;\n    std::vector<T>\
     \ elem;\n    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
     \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
     \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    operator std::vector<std::vector<T>>()\
@@ -173,35 +110,95 @@ data:
     \ numbers f(n) = af(n - 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2,\
     \ 3=>3, 4=>5, ...\ntemplate <typename T> T Fibonacci(long long int k, int a =\
     \ 1, int b = 1) {\n    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0]\
-    \ = b;\n    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 5 \"graph/general_matching.hpp\"\
+    \ = b;\n    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 3 \"modint.hpp\"\
+    \n#include <set>\n#line 5 \"modint.hpp\"\n\n// CUT begin\ntemplate <int mod> struct\
+    \ ModInt {\n#if __cplusplus >= 201402L\n#define MDCONST constexpr\n#else\n#define\
+    \ MDCONST\n#endif\n    using lint = long long;\n    static int get_mod() { return\
+    \ mod; }\n    static int get_primitive_root() {\n        static int primitive_root\
+    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&]() {\n\
+    \                std::set<int> fac;\n                int v = mod - 1;\n      \
+    \          for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
+    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
+    \              for (int g = 1; g < mod; g++) {\n                    bool ok =\
+    \ true;\n                    for (auto i : fac)\n                        if (ModInt(g).power((mod\
+    \ - 1) / i) == 1) {\n                            ok = false;\n               \
+    \             break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root;\n    }\n    int val;\n    MDCONST ModInt()\
+    \ : val(0) {}\n    MDCONST ModInt &_setval(lint v) {\n        val = (v >= mod\
+    \ ? v - mod : v);\n        return *this;\n    }\n    MDCONST ModInt(lint v) {\
+    \ _setval(v % mod + mod); }\n    explicit operator bool() const { return val !=\
+    \ 0; }\n    MDCONST ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ - x.val + mod); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
+    \ ModInt()._setval((lint)val * x.val % mod); }\n    MDCONST ModInt operator/(const\
+    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % mod); }\n \
+    \   MDCONST ModInt operator-() const { return ModInt()._setval(mod - val); }\n\
+    \    MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
+    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
+    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
+    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
+    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
+    \ % mod + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
+    \ &x) { return ModInt()._setval(a % mod - x.val + mod); }\n    friend MDCONST\
+    \ ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a % mod\
+    \ * x.val % mod); }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
+    \ &x) { return ModInt()._setval(a % mod * x.inv() % mod); }\n    MDCONST bool\
+    \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
+    \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
+    \ operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt,\
+    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
+    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
+    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
+    \ os << x.val; }\n    MDCONST lint power(lint n) const {\n        lint ans = 1,\
+    \ tmp = this->val;\n        while (n) {\n            if (n & 1) ans = ans * tmp\
+    \ % mod;\n            tmp = tmp * tmp % mod, n /= 2;\n        }\n        return\
+    \ ans;\n    }\n    MDCONST ModInt pow(lint n) const { return power(n); }\n   \
+    \ MDCONST lint inv() const { return this->power(mod - 2); }\n    ModInt fac()\
+    \ const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
+    \        if (l0 > this->val) return facs[this->val];\n\n        facs.resize(this->val\
+    \ + 1);\n        for (int i = l0; i <= this->val; i++) facs[i] = (i == 0 ? ModInt(1)\
+    \ : facs[i - 1] * ModInt(i));\n        return facs[this->val];\n    }\n\n    ModInt\
+    \ doublefac() const {\n        lint k = (this->val + 1) / 2;\n        return (this->val\
+    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac()) : ModInt(k).fac()\
+    \ * ModInt(2).pow(k);\n    }\n    ModInt nCr(const ModInt &r) const { return (this->val\
+    \ < r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac()); }\n\n    ModInt\
+    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
+    \ val;\n        if (power((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
+    \        while (b.power((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
+    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = power((m\
+    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.power(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
+    \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"graph/general_matching.hpp\"\
     \n#include <chrono>\n#include <queue>\n#include <random>\n#include <utility>\n\
     #line 10 \"graph/general_matching.hpp\"\n\n// CUT begin\n// Find maximum matchings\
     \ in general graph using the Tutte matrix (The Rabin-Vazirani algorithm)\n// Complexity:\
     \ O(N^3)\n// Reference: <https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h>\n\
     //            <https://kopricky.github.io/code/Academic/maximum_matching.html>\n\
     std::vector<std::pair<int, int>> generalMatching(int N, std::vector<std::pair<int,\
-    \ int>> ed)\n{\n    using MODINT = ModInt<1000000007>;\n    std::vector<std::pair<int,\
-    \ int>> ed_tmp;\n    for (auto p : ed) {\n        if (p.first != p.second) {\n\
-    \            ed_tmp.emplace_back(std::minmax(p.first, p.second));\n        }\n\
-    \    }\n    ed = ed_tmp, std::sort(ed.begin(), ed.end()), ed.erase(std::unique(ed.begin(),\
+    \ int>> ed) {\n    using MODINT = ModInt<1000000007>;\n    std::vector<std::pair<int,\
+    \ int>> ed_tmp;\n    for (auto p : ed) {\n        if (p.first != p.second) { ed_tmp.emplace_back(std::minmax(p.first,\
+    \ p.second)); }\n    }\n    ed = ed_tmp, std::sort(ed.begin(), ed.end()), ed.erase(std::unique(ed.begin(),\
     \ ed.end()), ed.end());\n    std::vector<std::pair<int, int>> ret;\n\n    std::vector<int>\
     \ deg(N), used(N);\n    std::vector<std::vector<int>> conn(N);\n    for (auto\
     \ p : ed) {\n        deg[p.first]++, deg[p.second]++;\n        conn[p.first].emplace_back(p.second),\
     \ conn[p.second].emplace_back(p.first);\n    }\n    std::queue<int> q_deg1;\n\
-    \    for (int i = 0; i < N; i++) {\n        if (deg[i] == 1) {\n            q_deg1.emplace(i);\n\
-    \        }\n    }\n    while (q_deg1.size()) {\n        int i = q_deg1.front(),\
-    \ j = -1;\n        q_deg1.pop();\n        if (!used[i]) {\n            for (auto\
-    \ k : conn[i]) {\n                if (!used[k]) {\n                    j = k,\
-    \ ret.emplace_back(i, j);\n                    break;\n                }\n   \
-    \         }\n        }\n        for (int t = 0; t < 2; t++) {\n            if\
-    \ (i >= 0 and !used[i]) {\n                used[i] = 1;\n                for (auto\
-    \ k : conn[i]) {\n                    deg[k]--;\n                    if (deg[k]\
-    \ == 1) {\n                        q_deg1.emplace(k);\n                    }\n\
-    \                }\n            }\n            std::swap(i, j);\n        }\n \
-    \   }\n\n    std::vector<int> idx(N, -1), idx_inv;\n    for (int i = 0; i < N;\
-    \ i++) {\n        if (deg[i] > 0 and !used[i]) {\n            idx[i] = idx_inv.size(),\
-    \ idx_inv.emplace_back(i);\n        }\n    }\n\n    const int D = idx_inv.size();\n\
-    \    if (D == 0) {\n        return ret;\n    }\n    std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \    for (int i = 0; i < N; i++) {\n        if (deg[i] == 1) { q_deg1.emplace(i);\
+    \ }\n    }\n    while (q_deg1.size()) {\n        int i = q_deg1.front(), j = -1;\n\
+    \        q_deg1.pop();\n        if (!used[i]) {\n            for (auto k : conn[i])\
+    \ {\n                if (!used[k]) {\n                    j = k, ret.emplace_back(i,\
+    \ j);\n                    break;\n                }\n            }\n        }\n\
+    \        for (int t = 0; t < 2; t++) {\n            if (i >= 0 and !used[i]) {\n\
+    \                used[i] = 1;\n                for (auto k : conn[i]) {\n    \
+    \                deg[k]--;\n                    if (deg[k] == 1) { q_deg1.emplace(k);\
+    \ }\n                }\n            }\n            std::swap(i, j);\n        }\n\
+    \    }\n\n    std::vector<int> idx(N, -1), idx_inv;\n    for (int i = 0; i < N;\
+    \ i++) {\n        if (deg[i] > 0 and !used[i]) { idx[i] = idx_inv.size(), idx_inv.emplace_back(i);\
+    \ }\n    }\n\n    const int D = idx_inv.size();\n    if (D == 0) { return ret;\
+    \ }\n    std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
     \    std::uniform_int_distribution<int> d(MODINT::get_mod());\n\n    std::vector<std::vector<MODINT>>\
     \ mat(D, std::vector<MODINT>(D));\n    for (auto p : ed) {\n        int a = idx[p.first],\
     \ b = idx[p.second];\n        if (a < 0 or b < 0) continue;\n        mat[a][b]\
@@ -209,51 +206,48 @@ data:
     \ int rank = A.inverse(), M = 2 * D - rank;\n    if (M != D) {\n        do {\n\
     \            mat.resize(M, std::vector<MODINT>(M));\n            for (int i =\
     \ 0; i < D; i++) {\n                mat[i].resize(M);\n                for (int\
-    \ j = D; j < M; j++) {\n                    mat[i][j] = d(mt), mat[j][i] = -mat[i][j];\n\
-    \                }\n            }\n            A = mat;\n        } while (A.inverse()\
-    \ != M);\n    }\n\n    std::vector<int> has(M, 1);\n    int fi = -1, fj = -1;\n\
-    \    for (int it = 0; it < M / 2; it++) {\n        [&]() {\n            for (int\
-    \ i = 0; i < M; i++) {\n                if (has[i]) {\n                    for\
-    \ (int j = i + 1; j < M; j++) {\n                        if (A[i][j] and mat[i][j])\
-    \ {\n                            fi = i, fj = j;\n                           \
-    \ return;\n                        }\n                    }\n                }\n\
-    \            }\n        }();\n        if (fj < D) {\n            ret.emplace_back(idx_inv[fi],\
-    \ idx_inv[fj]);\n        }\n        has[fi] = has[fj] = 0;\n        for (int sw\
-    \ = 0; sw < 2; sw++) {\n            MODINT a = A[fi][fj].inv();\n            for\
-    \ (int i = 0; i < M; i++) {\n                if (has[i] and A[i][fj]) {\n    \
-    \                MODINT b = A[i][fj] * a;\n                    for (int j = 0;\
-    \ j < M; j++) {\n                        A[i][j] -= A[fi][j] * b;\n          \
-    \          }\n                }\n            }\n            std::swap(fi, fj);\n\
-    \        }\n    }\n    return ret;\n}\n"
-  code: "#pragma once\n#include \"modint.hpp\"\n#include \"linear_algebra_matrix/linalg_modint.hpp\"\
-    \n#include <algorithm>\n#include <chrono>\n#include <queue>\n#include <random>\n\
-    #include <utility>\n#include <vector>\n\n// CUT begin\n// Find maximum matchings\
-    \ in general graph using the Tutte matrix (The Rabin-Vazirani algorithm)\n// Complexity:\
-    \ O(N^3)\n// Reference: <https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h>\n\
+    \ j = D; j < M; j++) { mat[i][j] = d(mt), mat[j][i] = -mat[i][j]; }\n        \
+    \    }\n            A = mat;\n        } while (A.inverse() != M);\n    }\n\n \
+    \   std::vector<int> has(M, 1);\n    int fi = -1, fj = -1;\n    for (int it =\
+    \ 0; it < M / 2; it++) {\n        [&]() {\n            for (int i = 0; i < M;\
+    \ i++) {\n                if (has[i]) {\n                    for (int j = i +\
+    \ 1; j < M; j++) {\n                        if (A[i][j] and mat[i][j]) {\n   \
+    \                         fi = i, fj = j;\n                            return;\n\
+    \                        }\n                    }\n                }\n       \
+    \     }\n        }();\n        if (fj < D) { ret.emplace_back(idx_inv[fi], idx_inv[fj]);\
+    \ }\n        has[fi] = has[fj] = 0;\n        for (int sw = 0; sw < 2; sw++) {\n\
+    \            MODINT a = A[fi][fj].inv();\n            for (int i = 0; i < M; i++)\
+    \ {\n                if (has[i] and A[i][fj]) {\n                    MODINT b\
+    \ = A[i][fj] * a;\n                    for (int j = 0; j < M; j++) { A[i][j] -=\
+    \ A[fi][j] * b; }\n                }\n            }\n            std::swap(fi,\
+    \ fj);\n        }\n    }\n    return ret;\n}\n"
+  code: "#pragma once\n#include \"linear_algebra_matrix/linalg_modint.hpp\"\n#include\
+    \ \"modint.hpp\"\n#include <algorithm>\n#include <chrono>\n#include <queue>\n\
+    #include <random>\n#include <utility>\n#include <vector>\n\n// CUT begin\n// Find\
+    \ maximum matchings in general graph using the Tutte matrix (The Rabin-Vazirani\
+    \ algorithm)\n// Complexity: O(N^3)\n// Reference: <https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h>\n\
     //            <https://kopricky.github.io/code/Academic/maximum_matching.html>\n\
     std::vector<std::pair<int, int>> generalMatching(int N, std::vector<std::pair<int,\
-    \ int>> ed)\n{\n    using MODINT = ModInt<1000000007>;\n    std::vector<std::pair<int,\
-    \ int>> ed_tmp;\n    for (auto p : ed) {\n        if (p.first != p.second) {\n\
-    \            ed_tmp.emplace_back(std::minmax(p.first, p.second));\n        }\n\
-    \    }\n    ed = ed_tmp, std::sort(ed.begin(), ed.end()), ed.erase(std::unique(ed.begin(),\
+    \ int>> ed) {\n    using MODINT = ModInt<1000000007>;\n    std::vector<std::pair<int,\
+    \ int>> ed_tmp;\n    for (auto p : ed) {\n        if (p.first != p.second) { ed_tmp.emplace_back(std::minmax(p.first,\
+    \ p.second)); }\n    }\n    ed = ed_tmp, std::sort(ed.begin(), ed.end()), ed.erase(std::unique(ed.begin(),\
     \ ed.end()), ed.end());\n    std::vector<std::pair<int, int>> ret;\n\n    std::vector<int>\
     \ deg(N), used(N);\n    std::vector<std::vector<int>> conn(N);\n    for (auto\
     \ p : ed) {\n        deg[p.first]++, deg[p.second]++;\n        conn[p.first].emplace_back(p.second),\
     \ conn[p.second].emplace_back(p.first);\n    }\n    std::queue<int> q_deg1;\n\
-    \    for (int i = 0; i < N; i++) {\n        if (deg[i] == 1) {\n            q_deg1.emplace(i);\n\
-    \        }\n    }\n    while (q_deg1.size()) {\n        int i = q_deg1.front(),\
-    \ j = -1;\n        q_deg1.pop();\n        if (!used[i]) {\n            for (auto\
-    \ k : conn[i]) {\n                if (!used[k]) {\n                    j = k,\
-    \ ret.emplace_back(i, j);\n                    break;\n                }\n   \
-    \         }\n        }\n        for (int t = 0; t < 2; t++) {\n            if\
-    \ (i >= 0 and !used[i]) {\n                used[i] = 1;\n                for (auto\
-    \ k : conn[i]) {\n                    deg[k]--;\n                    if (deg[k]\
-    \ == 1) {\n                        q_deg1.emplace(k);\n                    }\n\
-    \                }\n            }\n            std::swap(i, j);\n        }\n \
-    \   }\n\n    std::vector<int> idx(N, -1), idx_inv;\n    for (int i = 0; i < N;\
-    \ i++) {\n        if (deg[i] > 0 and !used[i]) {\n            idx[i] = idx_inv.size(),\
-    \ idx_inv.emplace_back(i);\n        }\n    }\n\n    const int D = idx_inv.size();\n\
-    \    if (D == 0) {\n        return ret;\n    }\n    std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \    for (int i = 0; i < N; i++) {\n        if (deg[i] == 1) { q_deg1.emplace(i);\
+    \ }\n    }\n    while (q_deg1.size()) {\n        int i = q_deg1.front(), j = -1;\n\
+    \        q_deg1.pop();\n        if (!used[i]) {\n            for (auto k : conn[i])\
+    \ {\n                if (!used[k]) {\n                    j = k, ret.emplace_back(i,\
+    \ j);\n                    break;\n                }\n            }\n        }\n\
+    \        for (int t = 0; t < 2; t++) {\n            if (i >= 0 and !used[i]) {\n\
+    \                used[i] = 1;\n                for (auto k : conn[i]) {\n    \
+    \                deg[k]--;\n                    if (deg[k] == 1) { q_deg1.emplace(k);\
+    \ }\n                }\n            }\n            std::swap(i, j);\n        }\n\
+    \    }\n\n    std::vector<int> idx(N, -1), idx_inv;\n    for (int i = 0; i < N;\
+    \ i++) {\n        if (deg[i] > 0 and !used[i]) { idx[i] = idx_inv.size(), idx_inv.emplace_back(i);\
+    \ }\n    }\n\n    const int D = idx_inv.size();\n    if (D == 0) { return ret;\
+    \ }\n    std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
     \    std::uniform_int_distribution<int> d(MODINT::get_mod());\n\n    std::vector<std::vector<MODINT>>\
     \ mat(D, std::vector<MODINT>(D));\n    for (auto p : ed) {\n        int a = idx[p.first],\
     \ b = idx[p.second];\n        if (a < 0 or b < 0) continue;\n        mat[a][b]\
@@ -261,29 +255,28 @@ data:
     \ int rank = A.inverse(), M = 2 * D - rank;\n    if (M != D) {\n        do {\n\
     \            mat.resize(M, std::vector<MODINT>(M));\n            for (int i =\
     \ 0; i < D; i++) {\n                mat[i].resize(M);\n                for (int\
-    \ j = D; j < M; j++) {\n                    mat[i][j] = d(mt), mat[j][i] = -mat[i][j];\n\
-    \                }\n            }\n            A = mat;\n        } while (A.inverse()\
-    \ != M);\n    }\n\n    std::vector<int> has(M, 1);\n    int fi = -1, fj = -1;\n\
-    \    for (int it = 0; it < M / 2; it++) {\n        [&]() {\n            for (int\
-    \ i = 0; i < M; i++) {\n                if (has[i]) {\n                    for\
-    \ (int j = i + 1; j < M; j++) {\n                        if (A[i][j] and mat[i][j])\
-    \ {\n                            fi = i, fj = j;\n                           \
-    \ return;\n                        }\n                    }\n                }\n\
-    \            }\n        }();\n        if (fj < D) {\n            ret.emplace_back(idx_inv[fi],\
-    \ idx_inv[fj]);\n        }\n        has[fi] = has[fj] = 0;\n        for (int sw\
-    \ = 0; sw < 2; sw++) {\n            MODINT a = A[fi][fj].inv();\n            for\
-    \ (int i = 0; i < M; i++) {\n                if (has[i] and A[i][fj]) {\n    \
-    \                MODINT b = A[i][fj] * a;\n                    for (int j = 0;\
-    \ j < M; j++) {\n                        A[i][j] -= A[fi][j] * b;\n          \
-    \          }\n                }\n            }\n            std::swap(fi, fj);\n\
-    \        }\n    }\n    return ret;\n}\n"
+    \ j = D; j < M; j++) { mat[i][j] = d(mt), mat[j][i] = -mat[i][j]; }\n        \
+    \    }\n            A = mat;\n        } while (A.inverse() != M);\n    }\n\n \
+    \   std::vector<int> has(M, 1);\n    int fi = -1, fj = -1;\n    for (int it =\
+    \ 0; it < M / 2; it++) {\n        [&]() {\n            for (int i = 0; i < M;\
+    \ i++) {\n                if (has[i]) {\n                    for (int j = i +\
+    \ 1; j < M; j++) {\n                        if (A[i][j] and mat[i][j]) {\n   \
+    \                         fi = i, fj = j;\n                            return;\n\
+    \                        }\n                    }\n                }\n       \
+    \     }\n        }();\n        if (fj < D) { ret.emplace_back(idx_inv[fi], idx_inv[fj]);\
+    \ }\n        has[fi] = has[fj] = 0;\n        for (int sw = 0; sw < 2; sw++) {\n\
+    \            MODINT a = A[fi][fj].inv();\n            for (int i = 0; i < M; i++)\
+    \ {\n                if (has[i] and A[i][fj]) {\n                    MODINT b\
+    \ = A[i][fj] * a;\n                    for (int j = 0; j < M; j++) { A[i][j] -=\
+    \ A[fi][j] * b; }\n                }\n            }\n            std::swap(fi,\
+    \ fj);\n        }\n    }\n    return ret;\n}\n"
   dependsOn:
-  - modint.hpp
   - linear_algebra_matrix/linalg_modint.hpp
+  - modint.hpp
   isVerificationFile: false
   path: graph/general_matching.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-11-21 18:08:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/general_matching.test.cpp

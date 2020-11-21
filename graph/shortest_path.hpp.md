@@ -15,8 +15,8 @@ data:
     links: []
   bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include\
     \ <deque>\n#include <functional>\n#include <limits>\n#include <queue>\n#include\
-    \ <utility>\n#include <vector>\n\n// CUT begin\ntemplate<typename T>\nstruct ShortestPath\n\
-    {\n    int V, E;\n    int INVALID = -1;\n    std::vector<std::vector<std::pair<int,\
+    \ <utility>\n#include <vector>\n\n// CUT begin\ntemplate <typename T> struct ShortestPath\
+    \ {\n    int V, E;\n    int INVALID = -1;\n    std::vector<std::vector<std::pair<int,\
     \ T>>> to;\n    ShortestPath() = default;\n    ShortestPath(int V) : V(V), E(0),\
     \ to(V) {}\n    void add_edge(int s, int t, T len) {\n        assert(0 <= s and\
     \ s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t, len);\n\
@@ -25,8 +25,8 @@ data:
     \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, std::numeric_limits<T>::max());\n\
     \        dist[s] = 0;\n        prev.assign(V, INVALID);\n        using P = std::pair<T,\
     \ int>;\n        std::priority_queue<P, std::vector<P>, std::greater<P>> pq;\n\
-    \        pq.emplace(0, s);\n        while(!pq.empty()) {\n            T d;\n \
-    \           int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \        pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n\
+    \            int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
     \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
     \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
     \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
@@ -63,9 +63,9 @@ data:
     \ + dist2d[k][j]);\n                }\n            }\n        }\n    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <deque>\n#include <functional>\n\
     #include <limits>\n#include <queue>\n#include <utility>\n#include <vector>\n\n\
-    // CUT begin\ntemplate<typename T>\nstruct ShortestPath\n{\n    int V, E;\n  \
-    \  int INVALID = -1;\n    std::vector<std::vector<std::pair<int, T>>> to;\n  \
-    \  ShortestPath() = default;\n    ShortestPath(int V) : V(V), E(0), to(V) {}\n\
+    // CUT begin\ntemplate <typename T> struct ShortestPath {\n    int V, E;\n   \
+    \ int INVALID = -1;\n    std::vector<std::vector<std::pair<int, T>>> to;\n   \
+    \ ShortestPath() = default;\n    ShortestPath(int V) : V(V), E(0), to(V) {}\n\
     \    void add_edge(int s, int t, T len) {\n        assert(0 <= s and s < V);\n\
     \        assert(0 <= t and t < V);\n        to[s].emplace_back(t, len);\n    \
     \    E++;\n    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n   \
@@ -73,8 +73,8 @@ data:
     \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, std::numeric_limits<T>::max());\n\
     \        dist[s] = 0;\n        prev.assign(V, INVALID);\n        using P = std::pair<T,\
     \ int>;\n        std::priority_queue<P, std::vector<P>, std::greater<P>> pq;\n\
-    \        pq.emplace(0, s);\n        while(!pq.empty()) {\n            T d;\n \
-    \           int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \        pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n\
+    \            int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
     \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
     \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
     \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
@@ -113,7 +113,7 @@ data:
   isVerificationFile: false
   path: graph/shortest_path.hpp
   requiredBy: []
-  timestamp: '2020-10-04 15:46:40+09:00'
+  timestamp: '2020-11-21 18:08:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/bellman_ford.test.cpp
