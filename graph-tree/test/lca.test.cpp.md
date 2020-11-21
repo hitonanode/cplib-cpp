@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph-tree/lowest_common_ancestor.hpp
     title: graph-tree/lowest_common_ancestor.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/lca
@@ -54,25 +54,26 @@ data:
     \ = lowest_common_ancestor(u, v);\n        return (acc_weight[u] - acc_weight[r])\
     \ + (acc_weight[v] - acc_weight[r]);\n    }\n};\n#line 2 \"graph-tree/test/lca.test.cpp\"\
     \n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\
-    \n\nint main() {\n    int N, Q, p, u, v;\n    cin >> N >> Q;\n    UndirectedWeightedTree\
+    \nusing namespace std;\n\nint main() {\n    int N, Q, p, u, v;\n    cin >> N >>\
+    \ Q;\n    UndirectedWeightedTree graph(N);\n    for (int i = 1; i <= N - 1; i++)\
+    \ {\n        cin >> p;\n        graph.add_edge(i, p, 1);\n    }\n    graph.fix_root(0);\n\
+    \    graph.doubling_precalc();\n\n    for (int i = 0; i < Q; i++) {\n        cin\
+    \ >> u >> v;\n        cout << graph.lowest_common_ancestor(u, v) << endl;\n  \
+    \  }\n}\n"
+  code: "#include \"../lowest_common_ancestor.hpp\"\n#include <iostream>\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\nusing namespace std;\n\nint\
+    \ main() {\n    int N, Q, p, u, v;\n    cin >> N >> Q;\n    UndirectedWeightedTree\
     \ graph(N);\n    for (int i = 1; i <= N - 1; i++) {\n        cin >> p;\n     \
     \   graph.add_edge(i, p, 1);\n    }\n    graph.fix_root(0);\n    graph.doubling_precalc();\n\
     \n    for (int i = 0; i < Q; i++) {\n        cin >> u >> v;\n        cout << graph.lowest_common_ancestor(u,\
-    \ v) << endl;\n    }\n}\n"
-  code: "#include \"../lowest_common_ancestor.hpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\nint main() {\n    int N,\
-    \ Q, p, u, v;\n    cin >> N >> Q;\n    UndirectedWeightedTree graph(N);\n    for\
-    \ (int i = 1; i <= N - 1; i++) {\n        cin >> p;\n        graph.add_edge(i,\
-    \ p, 1);\n    }\n    graph.fix_root(0);\n    graph.doubling_precalc();\n\n   \
-    \ for (int i = 0; i < Q; i++) {\n        cin >> u >> v;\n        cout << graph.lowest_common_ancestor(u,\
     \ v) << endl;\n    }\n}\n"
   dependsOn:
   - graph-tree/lowest_common_ancestor.hpp
   isVerificationFile: true
   path: graph-tree/test/lca.test.cpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-21 18:37:08+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph-tree/test/lca.test.cpp
 layout: document

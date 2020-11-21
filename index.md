@@ -148,7 +148,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph-tree/heavy_light_decomposition.hpp
       title: graph-tree/heavy_light_decomposition.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/lowest_common_ancestor.hpp
       title: graph-tree/lowest_common_ancestor.hpp
     - icon: ':warning:'
@@ -571,7 +571,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph-tree/test/hl_decomposition.test.cpp
       title: graph-tree/test/hl_decomposition.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph-tree/test/lca.test.cpp
       title: graph-tree/test/lca.test.cpp
     - icon: ':heavy_check_mark:'
