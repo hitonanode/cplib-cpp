@@ -8,12 +8,15 @@ data:
       title: binary_lifting(doubling)/doubling.hpp
   - name: convex_hull_trick
     pages:
+    - icon: ':warning:'
+      path: convex_hull_trick/add-get-monotone_cht.hpp
+      title: convex_hull_trick/add-get-monotone_cht.hpp
+    - icon: ':warning:'
+      path: convex_hull_trick/add-monotone_cht.hpp
+      title: convex_hull_trick/add-monotone_cht.hpp
     - icon: ':heavy_check_mark:'
       path: convex_hull_trick/convex_hull_trick.hpp
       title: convex_hull_trick/convex_hull_trick.hpp
-    - icon: ':warning:'
-      path: convex_hull_trick/monotone_cht.hpp
-      title: convex_hull_trick/monotone_cht.hpp
   - name: convolution
     pages:
     - icon: ':warning:'

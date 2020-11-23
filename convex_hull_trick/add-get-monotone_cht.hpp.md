@@ -8,7 +8,7 @@ data:
   attributes:
     links:
     - https://yukicoder.me/submissions/409156>
-  bundledCode: "#line 2 \"convex_hull_trick/monotone_cht.hpp\"\n#include <cassert>\n\
+  bundledCode: "#line 2 \"convex_hull_trick/add-get-monotone_cht.hpp\"\n#include <cassert>\n\
     #include <deque>\n#include <utility>\n\n// CUT begin\n// Convex Hull Trick for\
     \ monotone increasing queries, monotone decreasing slopes\n// Each operation is\
     \ amortized O(1)\n// - add_line(a, b): Add `y = ax + b`, a must be monotone decreasing\
@@ -65,15 +65,15 @@ data:
     \ parabola_get(T_CHT c, T_CHT x) { return get(x) + c * x * x; }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: convex_hull_trick/monotone_cht.hpp
+  path: convex_hull_trick/add-get-monotone_cht.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-11-23 16:24:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: convex_hull_trick/monotone_cht.hpp
+documentation_of: convex_hull_trick/add-get-monotone_cht.hpp
 layout: document
 redirect_from:
-- /library/convex_hull_trick/monotone_cht.hpp
-- /library/convex_hull_trick/monotone_cht.hpp.html
-title: convex_hull_trick/monotone_cht.hpp
+- /library/convex_hull_trick/add-get-monotone_cht.hpp
+- /library/convex_hull_trick/add-get-monotone_cht.hpp.html
+title: convex_hull_trick/add-get-monotone_cht.hpp
 ---
