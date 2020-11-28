@@ -5,16 +5,16 @@ data:
   - icon: ':warning:'
     path: convolution/convolutive_translation_2d.hpp
     title: convolution/convolutive_translation_2d.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/coeff_of_rational_function.hpp
     title: formal_power_series/coeff_of_rational_function.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
   - icon: ':warning:'
@@ -72,22 +72,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
     title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/poly_taylor_shift.test.cpp
     title: formal_power_series/test/poly_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/stirling_number_of_2nd.test.cpp
   - icon: ':heavy_check_mark:'
@@ -127,7 +127,7 @@ data:
     path: segmenttree/test/range-affine-range-sum.test.cpp
     title: segmenttree/test/range-affine-range-sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -269,7 +269,7 @@ data:
   - graph/general_matching.hpp
   - graph-tree/tree_isomorphism.hpp
   timestamp: '2020-11-18 20:06:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - other_data_structures/test/queue_operate_all_composite.test.cpp
   - random/test/rolling_hash_w_modint.test.cpp

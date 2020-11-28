@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/polynomial_taylor_shift
@@ -213,20 +213,20 @@ data:
     \       const int n = (int)this->size();\n        if (deg == -1) deg = n;\n  \
     \      P ret({T(1)});\n        for (int i = 1; i < deg; i <<= 1) { ret = (ret\
     \ * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1); }\n        return ret.pre(deg);\n\
-    \    }\n\n    P pow(long long int k, int deg = -1) const {\n        assert(deg\
-    \ >= -1);\n        const int n = (int)this->size();\n        if (deg == -1) deg\
-    \ = n;\n        for (int i = 0; i < n; i++) {\n            if ((*this)[i] != T(0))\
-    \ {\n                T rev = T(1) / (*this)[i];\n                P C(*this * rev);\n\
-    \                P D(n - i);\n                for (int j = i; j < n; j++) D[j\
-    \ - i] = C[j];\n                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].power(k);\n\
-    \                P E(deg);\n                if (k * (i > 0) > deg or k * i > deg)\
-    \ return {};\n                long long int S = i * k;\n                for (int\
-    \ j = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];\n          \
-    \      E.shrink();\n                return E;\n            }\n        }\n    \
-    \    return *this;\n    }\n\n    // Calculate f(X + c) from f(X), O(NlogN)\n \
-    \   P shift(T c) const {\n        const int n = (int)this->size();\n        P\
-    \ ret = *this;\n        for (int i = 0; i < n; i++) { ret[i] *= T(i).fac(); }\n\
-    \        reverse(ret.begin(), ret.end());\n        P exp_cx(n, 1);\n        for\
+    \    }\n\n    P pow(long long k, int deg = -1) const {\n        assert(deg >=\
+    \ -1);\n        const int n = (int)this->size();\n        if (deg == -1) deg =\
+    \ n;\n        for (int i = 0; i < n; i++) {\n            if ((*this)[i] != T(0))\
+    \ {\n                T rev = T(1) / (*this)[i];\n                P C = (*this)\
+    \ * rev, D(n - i);\n                for (int j = i; j < n; j++) D[j - i] = C.coeff(j);\n\
+    \                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].pow(k);\n     \
+    \           if (k * (i > 0) > deg or k * i > deg) return {};\n               \
+    \ P E(deg);\n                long long S = i * k;\n                for (int j\
+    \ = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];\n            \
+    \    E.shrink();\n                return E;\n            }\n        }\n      \
+    \  return *this;\n    }\n\n    // Calculate f(X + c) from f(X), O(NlogN)\n   \
+    \ P shift(T c) const {\n        const int n = (int)this->size();\n        P ret\
+    \ = *this;\n        for (int i = 0; i < n; i++) { ret[i] *= T(i).fac(); }\n  \
+    \      reverse(ret.begin(), ret.end());\n        P exp_cx(n, 1);\n        for\
     \ (int i = 1; i < n; i++) { exp_cx[i] = exp_cx[i - 1] * c / i; }\n        ret\
     \ = (ret * exp_cx), ret.resize(n);\n        reverse(ret.begin(), ret.end());\n\
     \        for (int i = 0; i < n; i++) { ret[i] /= T(i).fac(); }\n        return\
@@ -251,8 +251,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/poly_taylor_shift.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-28 13:37:16+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/poly_taylor_shift.test.cpp
 layout: document

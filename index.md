@@ -31,7 +31,7 @@ data:
     - icon: ':warning:'
       path: convolution/integer_convolution.hpp
       title: convolution/integer_convolution.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
     - icon: ':heavy_check_mark:'
@@ -65,13 +65,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: formal_power_series/coeff_of_rational_function.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/monomial_mod_polynomial.hpp
       title: formal_power_series/monomial_mod_polynomial.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
   - name: .
@@ -79,7 +79,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -490,22 +490,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
       title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/poly_taylor_shift.test.cpp
       title: formal_power_series/test/poly_taylor_shift.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/stirling_number_of_1st.test.cpp
       title: formal_power_series/test/stirling_number_of_1st.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/stirling_number_of_2nd.test.cpp
   - name: geometry/test
