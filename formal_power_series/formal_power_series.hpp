@@ -180,20 +180,19 @@ template <typename T> struct FormalPowerSeries : vector<T> {
         return ret.pre(deg);
     }
 
-    P pow(long long int k, int deg = -1) const {
+    P pow(long long k, int deg = -1) const {
         assert(deg >= -1);
         const int n = (int)this->size();
         if (deg == -1) deg = n;
         for (int i = 0; i < n; i++) {
             if ((*this)[i] != T(0)) {
                 T rev = T(1) / (*this)[i];
-                P C(*this * rev);
-                P D(n - i);
-                for (int j = i; j < n; j++) D[j - i] = C[j];
-                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].power(k);
-                P E(deg);
+                P C = (*this) * rev, D(n - i);
+                for (int j = i; j < n; j++) D[j - i] = C.coeff(j);
+                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].pow(k);
                 if (k * (i > 0) > deg or k * i > deg) return {};
-                long long int S = i * k;
+                P E(deg);
+                long long S = i * k;
                 for (int j = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];
                 E.shrink();
                 return E;
