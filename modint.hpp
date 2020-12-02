@@ -48,7 +48,7 @@ template <int mod> struct ModInt {
     MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }
     MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }
     MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }
-    MDCONST ModInt &operator/=(const ModInt &x) const { return *this = *this / x; }
+    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }
     friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a % mod + x.val); }
     friend MDCONST ModInt operator-(lint a, const ModInt &x) { return ModInt()._setval(a % mod - x.val + mod); }
     friend MDCONST ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a % mod * x.val % mod); }
