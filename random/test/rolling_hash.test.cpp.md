@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: random/rand_nondeterministic.hpp
     title: random/rand_nondeterministic.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: random/rolling_hash_1d_general.hpp
     title: random/rolling_hash_1d_general.hpp
   _extendedRequiredBy: []

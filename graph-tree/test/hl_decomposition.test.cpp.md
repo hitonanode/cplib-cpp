@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph-tree/heavy_light_decomposition.hpp
     title: graph-tree/heavy_light_decomposition.hpp
   _extendedRequiredBy: []

@@ -55,9 +55,9 @@ data:
     \ d1 + c2 * d2 * r5;\n            fb[i] = c1 * d2 + c2 * d1;\n        }\n    \
     \    fa[j] = a1 * b1 + a2 * b2 * r5;\n        fb[j] = a1 * b2 + a2 * b1;\n   \
     \ }\n    fft(sz, fa);\n    fft(sz, fb);\n    vector<MODINT> ret(sz);\n    long\
-    \ long int bp = MODINT(2).power(D_FFT);\n    long long int cp = MODINT(2).power(D_FFT\
-    \ * 2);\n    for (int i = 0; i < need; i++) {\n        long long int aa = llround(fa[i].x);\n\
-    \        long long int bb = llround(fb[i].x);\n        long long int cc = llround(fa[i].y);\n\
+    \ long bp = MODINT(2).pow(D_FFT).val;\n    long long cp = MODINT(2).pow(D_FFT\
+    \ * 2).val;\n    for (int i = 0; i < need; i++) {\n        long long aa = llround(fa[i].x);\n\
+    \        long long bb = llround(fb[i].x);\n        long long cc = llround(fa[i].y);\n\
     \        aa = MODINT(aa).val, bb = MODINT(bb).val, cc = MODINT(cc).val;\n    \
     \    ret[i] = aa + (bb * bp) + (cc * cp);\n        //   ret[i] = aa + (bb << DFFT)\
     \ + (cc << (DFFT * 2));\n    }\n    return ret;\n}\n"
@@ -107,9 +107,9 @@ data:
     \ d1 + c2 * d2 * r5;\n            fb[i] = c1 * d2 + c2 * d1;\n        }\n    \
     \    fa[j] = a1 * b1 + a2 * b2 * r5;\n        fb[j] = a1 * b2 + a2 * b1;\n   \
     \ }\n    fft(sz, fa);\n    fft(sz, fb);\n    vector<MODINT> ret(sz);\n    long\
-    \ long int bp = MODINT(2).power(D_FFT);\n    long long int cp = MODINT(2).power(D_FFT\
-    \ * 2);\n    for (int i = 0; i < need; i++) {\n        long long int aa = llround(fa[i].x);\n\
-    \        long long int bb = llround(fb[i].x);\n        long long int cc = llround(fa[i].y);\n\
+    \ long bp = MODINT(2).pow(D_FFT).val;\n    long long cp = MODINT(2).pow(D_FFT\
+    \ * 2).val;\n    for (int i = 0; i < need; i++) {\n        long long aa = llround(fa[i].x);\n\
+    \        long long bb = llround(fb[i].x);\n        long long cc = llround(fa[i].y);\n\
     \        aa = MODINT(aa).val, bb = MODINT(bb).val, cc = MODINT(cc).val;\n    \
     \    ret[i] = aa + (bb * bp) + (cc * cp);\n        //   ret[i] = aa + (bb << DFFT)\
     \ + (cc << (DFFT * 2));\n    }\n    return ret;\n}\n"
@@ -117,7 +117,7 @@ data:
   isVerificationFile: false
   path: convolution/fft_arbitrary_mod.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-12-02 23:28:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: convolution/fft_arbitrary_mod.hpp

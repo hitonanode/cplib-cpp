@@ -18,21 +18,21 @@ data:
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
     \ <vector>\n\n// CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus\
     \ >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using\
-    \ lint = long long;\n    static int get_mod() { return mod; }\n    static int\
-    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
-    \ {\n            primitive_root = [&]() {\n                std::set<int> fac;\n\
-    \                int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
-    \ i++)\n                    while (v % i == 0) fac.insert(i), v /= i;\n      \
-    \          if (v > 1) fac.insert(v);\n                for (int g = 1; g < mod;\
-    \ g++) {\n                    bool ok = true;\n                    for (auto i\
-    \ : fac)\n                        if (ModInt(g).power((mod - 1) / i) == 1) {\n\
-    \                            ok = false;\n                            break;\n\
-    \                        }\n                    if (ok) return g;\n          \
-    \      }\n                return -1;\n            }();\n        }\n        return\
-    \ primitive_root;\n    }\n    int val;\n    MDCONST ModInt() : val(0) {}\n   \
-    \ MDCONST ModInt &_setval(lint v) {\n        val = (v >= mod ? v - mod : v);\n\
-    \        return *this;\n    }\n    MDCONST ModInt(lint v) { _setval(v % mod +\
-    \ mod); }\n    explicit operator bool() const { return val != 0; }\n    MDCONST\
+    \ lint = long long;\n    MDCONST static int get_mod() { return mod; }\n    static\
+    \ int get_primitive_root() {\n        static int primitive_root = 0;\n       \
+    \ if (!primitive_root) {\n            primitive_root = [&]() {\n             \
+    \   std::set<int> fac;\n                int v = mod - 1;\n                for\
+    \ (lint i = 2; i * i <= v; i++)\n                    while (v % i == 0) fac.insert(i),\
+    \ v /= i;\n                if (v > 1) fac.insert(v);\n                for (int\
+    \ g = 1; g < mod; g++) {\n                    bool ok = true;\n              \
+    \      for (auto i : fac)\n                        if (ModInt(g).pow((mod - 1)\
+    \ / i) == 1) {\n                            ok = false;\n                    \
+    \        break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root;\n    }\n    int val;\n    MDCONST ModInt()\
+    \ : val(0) {}\n    MDCONST ModInt &_setval(lint v) { return val = (v >= mod ?\
+    \ v - mod : v), *this; }\n    MDCONST ModInt(lint v) { _setval(v % mod + mod);\
+    \ }\n    MDCONST explicit operator bool() const { return val != 0; }\n    MDCONST\
     \ ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
     \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
     \ - x.val + mod); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
@@ -42,12 +42,12 @@ data:
     \    MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
     \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
     \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
-    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % mod + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
-    \ &x) { return ModInt()._setval(a % mod - x.val + mod); }\n    friend MDCONST\
-    \ ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a % mod\
-    \ * x.val % mod); }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
+    \    MDCONST ModInt &operator/=(const ModInt &x) const { return *this = *this\
+    \ / x; }\n    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return\
+    \ ModInt()._setval(a % mod + x.val); }\n    friend MDCONST ModInt operator-(lint\
+    \ a, const ModInt &x) { return ModInt()._setval(a % mod - x.val + mod); }\n  \
+    \  friend MDCONST ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a\
+    \ % mod * x.val % mod); }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
     \ &x) { return ModInt()._setval(a % mod * x.inv() % mod); }\n    MDCONST bool\
     \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
     \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
@@ -55,29 +55,37 @@ data:
     \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
     \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
     \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
-    \ os << x.val; }\n    MDCONST lint power(lint n) const {\n        lint ans = 1,\
+    \ os << x.val; }\n    MDCONST ModInt pow(lint n) const {\n        lint ans = 1,\
     \ tmp = this->val;\n        while (n) {\n            if (n & 1) ans = ans * tmp\
     \ % mod;\n            tmp = tmp * tmp % mod, n /= 2;\n        }\n        return\
-    \ ans;\n    }\n    MDCONST ModInt pow(lint n) const { return power(n); }\n   \
-    \ MDCONST lint inv() const { return this->power(mod - 2); }\n    ModInt fac()\
-    \ const {\n        static std::vector<ModInt> facs;\n        int l0 = facs.size();\n\
-    \        if (l0 > this->val) return facs[this->val];\n\n        facs.resize(this->val\
-    \ + 1);\n        for (int i = l0; i <= this->val; i++) facs[i] = (i == 0 ? ModInt(1)\
-    \ : facs[i - 1] * ModInt(i));\n        return facs[this->val];\n    }\n\n    ModInt\
-    \ doublefac() const {\n        lint k = (this->val + 1) / 2;\n        return (this->val\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac()) : ModInt(k).fac()\
-    \ * ModInt(2).pow(k);\n    }\n    ModInt nCr(const ModInt &r) const { return (this->val\
-    \ < r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac()); }\n\n    ModInt\
-    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
-    \ val;\n        if (power((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
-    \        while (b.power((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
-    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = power((m\
-    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.power(m);\n\
-    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
-    \            while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e -\
-    \ j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"graph-tree/tree_isomorphism.hpp\"\
+    \ ans;\n    }\n\n    static std::vector<long long> facs, invs;\n    MDCONST static\
+    \ void _precalculation(int N) {\n        int l0 = facs.size();\n        if (N\
+    \ <= l0) return;\n        facs.resize(N), invs.resize(N);\n        for (int i\
+    \ = l0; i < N; i++) facs[i] = facs[i - 1] * i % mod;\n        long long facinv\
+    \ = ModInt(facs.back()).pow(mod - 2).val;\n        for (int i = N - 1; i >= l0;\
+    \ i--) {\n            invs[i] = facinv * facs[i - 1] % mod;\n            facinv\
+    \ = facinv * i % mod;\n        }\n    }\n    MDCONST lint inv() const {\n    \
+    \    if (this->val < 1 << 20) {\n            while (this->val >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n            return invs[this->val];\n   \
+    \     } else {\n            return this->pow(mod - 2).val;\n        }\n    }\n\
+    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\n\
+    \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
+    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\
+    \ : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST ModInt nCr(const ModInt\
+    \ &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac()\
+    \ * r.fac()); }\n\n    ModInt sqrt() const {\n        if (val == 0) return 0;\n\
+    \        if (mod == 2) return val;\n        if (pow((mod - 1) / 2) != 1) return\
+    \ 0;\n        ModInt b = 1;\n        while (b.pow((mod - 1) / 2) == 1) b += 1;\n\
+    \        int e = 0, m = mod - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n \
+    \       ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
+    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
+    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
+    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
+    \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
+    \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
+    template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
+    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"graph-tree/tree_isomorphism.hpp\"\
     \n// #include \"number/modint_runtime.hpp\"\n#include <chrono>\n#include <utility>\n\
     #line 7 \"graph-tree/tree_isomorphism.hpp\"\nusing namespace std;\n\n// CUT begin\n\
     // Tree isomorphism with hashing \uFF08\u30CF\u30C3\u30B7\u30E5\u306B\u3088\u308B\
@@ -159,7 +167,7 @@ data:
   isVerificationFile: false
   path: graph-tree/tree_isomorphism.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2020-12-02 23:28:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph-tree/tree_isomorphism.hpp
