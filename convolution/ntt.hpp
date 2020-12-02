@@ -1,5 +1,5 @@
 #pragma once
-#include "modint.hpp"
+#include "../modint.hpp"
 
 #include <algorithm>
 #include <array>
@@ -30,7 +30,7 @@ template <typename MODINT> void ntt(std::vector<MODINT> &a, bool is_inverse = fa
 
     static std::vector<MODINT> w{1}, iw{1};
     for (int m = w.size(); m < n / 2; m *= 2) {
-        MODINT dw = root.power((mod - 1) / (4 * m)), dwinv = 1 / dw;
+        MODINT dw = root.pow((mod - 1) / (4 * m)), dwinv = 1 / dw;
         w.resize(m * 2), iw.resize(m * 2);
         for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;
     }

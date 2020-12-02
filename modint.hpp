@@ -11,7 +11,7 @@ template <int mod> struct ModInt {
 #define MDCONST
 #endif
     using lint = long long;
-    static int get_mod() { return mod; }
+    MDCONST static int get_mod() { return mod; }
     static int get_primitive_root() {
         static int primitive_root = 0;
         if (!primitive_root) {
@@ -24,7 +24,7 @@ template <int mod> struct ModInt {
                 for (int g = 1; g < mod; g++) {
                     bool ok = true;
                     for (auto i : fac)
-                        if (ModInt(g).power((mod - 1) / i) == 1) {
+                        if (ModInt(g).pow((mod - 1) / i) == 1) {
                             ok = false;
                             break;
                         }
@@ -37,12 +37,9 @@ template <int mod> struct ModInt {
     }
     int val;
     MDCONST ModInt() : val(0) {}
-    MDCONST ModInt &_setval(lint v) {
-        val = (v >= mod ? v - mod : v);
-        return *this;
-    }
+    MDCONST ModInt &_setval(lint v) { return val = (v >= mod ? v - mod : v), *this; }
     MDCONST ModInt(lint v) { _setval(v % mod + mod); }
-    explicit operator bool() const { return val != 0; }
+    MDCONST explicit operator bool() const { return val != 0; }
     MDCONST ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val + x.val); }
     MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val - x.val + mod); }
     MDCONST ModInt operator*(const ModInt &x) const { return ModInt()._setval((lint)val * x.val % mod); }
@@ -51,7 +48,7 @@ template <int mod> struct ModInt {
     MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }
     MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }
     MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }
-    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }
+    MDCONST ModInt &operator/=(const ModInt &x) const { return *this = *this / x; }
     friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a % mod + x.val); }
     friend MDCONST ModInt operator-(lint a, const ModInt &x) { return ModInt()._setval(a % mod - x.val + mod); }
     friend MDCONST ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a % mod * x.val % mod); }
@@ -64,7 +61,7 @@ template <int mod> struct ModInt {
         return is >> t, x = ModInt(t), is;
     }
     MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return os << x.val; }
-    MDCONST lint power(lint n) const {
+    MDCONST ModInt pow(lint n) const {
         lint ans = 1, tmp = this->val;
         while (n) {
             if (n & 1) ans = ans * tmp % mod;
@@ -72,45 +69,62 @@ template <int mod> struct ModInt {
         }
         return ans;
     }
-    MDCONST ModInt pow(lint n) const { return power(n); }
-    MDCONST lint inv() const { return this->power(mod - 2); }
-    ModInt fac() const {
-        static std::vector<ModInt> facs;
-        int l0 = facs.size();
-        if (l0 > this->val) return facs[this->val];
 
-        facs.resize(this->val + 1);
-        for (int i = l0; i <= this->val; i++) facs[i] = (i == 0 ? ModInt(1) : facs[i - 1] * ModInt(i));
+    static std::vector<long long> facs, invs;
+    MDCONST static void _precalculation(int N) {
+        int l0 = facs.size();
+        if (N <= l0) return;
+        facs.resize(N), invs.resize(N);
+        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i % mod;
+        long long facinv = ModInt(facs.back()).pow(mod - 2).val;
+        for (int i = N - 1; i >= l0; i--) {
+            invs[i] = facinv * facs[i - 1] % mod;
+            facinv = facinv * i % mod;
+        }
+    }
+    MDCONST lint inv() const {
+        if (this->val < 1 << 20) {
+            while (this->val >= int(facs.size())) _precalculation(facs.size() * 2);
+            return invs[this->val];
+        } else {
+            return this->pow(mod - 2).val;
+        }
+    }
+    MDCONST ModInt fac() const {
+        while (this->val >= int(facs.size())) _precalculation(facs.size() * 2);
         return facs[this->val];
     }
 
-    ModInt doublefac() const {
+    MDCONST ModInt doublefac() const {
         lint k = (this->val + 1) / 2;
         return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac()) : ModInt(k).fac() * ModInt(2).pow(k);
     }
-    ModInt nCr(const ModInt &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac()); }
+    MDCONST ModInt nCr(const ModInt &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac()); }
 
     ModInt sqrt() const {
         if (val == 0) return 0;
         if (mod == 2) return val;
-        if (power((mod - 1) / 2) != 1) return 0;
+        if (pow((mod - 1) / 2) != 1) return 0;
         ModInt b = 1;
-        while (b.power((mod - 1) / 2) == 1) b += 1;
+        while (b.pow((mod - 1) / 2) == 1) b += 1;
         int e = 0, m = mod - 1;
         while (m % 2 == 0) m >>= 1, e++;
-        ModInt x = power((m - 1) / 2), y = (*this) * x * x;
+        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;
         x *= (*this);
-        ModInt z = b.power(m);
+        ModInt z = b.pow(m);
         while (y != 1) {
             int j = 0;
             ModInt t = y;
             while (t != 1) j++, t *= t;
-            z = z.power(1LL << (e - j - 1));
+            z = z.pow(1LL << (e - j - 1));
             x *= z, z *= z, y *= z;
             e = j;
         }
         return ModInt(std::min(x.val, mod - x.val));
     }
 };
+template <int mod> std::vector<long long> ModInt<mod>::facs = {1};
+template <int mod> std::vector<long long> ModInt<mod>::invs = {0};
+
 // using mint = ModInt<998244353>;
 // using mint = ModInt<1000000007>;

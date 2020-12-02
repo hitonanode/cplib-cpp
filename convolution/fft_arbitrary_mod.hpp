@@ -95,12 +95,12 @@ template <typename MODINT> vector<MODINT> convolution_mod(vector<MODINT> a, vect
     fft(sz, fa);
     fft(sz, fb);
     vector<MODINT> ret(sz);
-    long long int bp = MODINT(2).power(D_FFT);
-    long long int cp = MODINT(2).power(D_FFT * 2);
+    long long bp = MODINT(2).pow(D_FFT).val;
+    long long cp = MODINT(2).pow(D_FFT * 2).val;
     for (int i = 0; i < need; i++) {
-        long long int aa = llround(fa[i].x);
-        long long int bb = llround(fb[i].x);
-        long long int cc = llround(fa[i].y);
+        long long aa = llround(fa[i].x);
+        long long bb = llround(fb[i].x);
+        long long cc = llround(fa[i].y);
         aa = MODINT(aa).val, bb = MODINT(bb).val, cc = MODINT(cc).val;
         ret[i] = aa + (bb * bp) + (cc * cp);
         //   ret[i] = aa + (bb << DFFT) + (cc << (DFFT * 2));

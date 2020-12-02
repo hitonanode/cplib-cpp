@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
-#include "convolution/ntt.hpp"
-#include "modint.hpp"
-#include "number/modint_runtime.hpp"
+#include "../../modint.hpp"
+#include "../../number/modint_runtime.hpp"
+#include "../ntt.hpp"
 #include <iostream>
 using namespace std;
 

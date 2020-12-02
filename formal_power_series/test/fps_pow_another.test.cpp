@@ -20,7 +20,7 @@ int main() {
         A = A >> i;
         A = (A.log(N + 10) * M).exp();
         bias += 1LL * i * M;
-        A *= a0.power(M);
+        A *= a0.pow(M);
     }
     for (int i = 0; i < N; i++) cout << A.coeff(i - bias) << ' ';
 }
