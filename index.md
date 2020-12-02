@@ -481,13 +481,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow.test.cpp
       title: formal_power_series/test/fps_pow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow_another.test.cpp
       title: formal_power_series/test/fps_pow_another.test.cpp
     - icon: ':x:'
       path: formal_power_series/test/fps_sqrt.test.cpp
       title: formal_power_series/test/fps_sqrt.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
       title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     - icon: ':x:'

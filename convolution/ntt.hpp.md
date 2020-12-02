@@ -48,13 +48,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_pow.test.cpp
     title: formal_power_series/test/fps_pow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_pow_another.test.cpp
     title: formal_power_series/test/fps_pow_another.test.cpp
   - icon: ':x:'
     path: formal_power_series/test/fps_sqrt.test.cpp
     title: formal_power_series/test/fps_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - icon: ':x:'
@@ -109,12 +109,12 @@ data:
     \    MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
     \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
     \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) const { return *this = *this\
-    \ / x; }\n    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return\
-    \ ModInt()._setval(a % mod + x.val); }\n    friend MDCONST ModInt operator-(lint\
-    \ a, const ModInt &x) { return ModInt()._setval(a % mod - x.val + mod); }\n  \
-    \  friend MDCONST ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % mod * x.val % mod); }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
+    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
+    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
+    \ % mod + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
+    \ &x) { return ModInt()._setval(a % mod - x.val + mod); }\n    friend MDCONST\
+    \ ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a % mod\
+    \ * x.val % mod); }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
     \ &x) { return ModInt()._setval(a % mod * x.inv() % mod); }\n    MDCONST bool\
     \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
     \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
@@ -274,7 +274,7 @@ data:
   - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/formal_power_series.hpp
   - formal_power_series/multipoint_evaluation.hpp
-  timestamp: '2020-12-02 23:28:27+09:00'
+  timestamp: '2020-12-02 23:44:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - convolution/test/ntt_arbitrary_mod.test.cpp

@@ -42,12 +42,12 @@ data:
     \    MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
     \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
     \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) const { return *this = *this\
-    \ / x; }\n    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return\
-    \ ModInt()._setval(a % mod + x.val); }\n    friend MDCONST ModInt operator-(lint\
-    \ a, const ModInt &x) { return ModInt()._setval(a % mod - x.val + mod); }\n  \
-    \  friend MDCONST ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % mod * x.val % mod); }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
+    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
+    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
+    \ % mod + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
+    \ &x) { return ModInt()._setval(a % mod - x.val + mod); }\n    friend MDCONST\
+    \ ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a % mod\
+    \ * x.val % mod); }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
     \ &x) { return ModInt()._setval(a % mod * x.inv() % mod); }\n    MDCONST bool\
     \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
     \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
@@ -167,7 +167,7 @@ data:
   isVerificationFile: false
   path: graph-tree/tree_isomorphism.hpp
   requiredBy: []
-  timestamp: '2020-12-02 23:28:27+09:00'
+  timestamp: '2020-12-02 23:44:04+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph-tree/tree_isomorphism.hpp
