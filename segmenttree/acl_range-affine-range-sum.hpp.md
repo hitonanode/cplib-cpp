@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
     title: segmenttree/acl_lazysegtree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -221,7 +221,7 @@ data:
   path: segmenttree/acl_range-affine-range-sum.hpp
   requiredBy: []
   timestamp: '2020-12-02 23:44:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
 documentation_of: segmenttree/acl_range-affine-range-sum.hpp

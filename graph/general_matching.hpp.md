@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h>
@@ -285,7 +285,7 @@ data:
   path: graph/general_matching.hpp
   requiredBy: []
   timestamp: '2020-12-02 23:44:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/general_matching.test.cpp
 documentation_of: graph/general_matching.hpp

@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph-tree/heavy_light_decomposition.hpp
     title: graph-tree/heavy_light_decomposition.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -322,7 +322,7 @@ data:
   path: graph-tree/test/vertex-set-path-composite.test.cpp
   requiredBy: []
   timestamp: '2020-12-02 23:44:04+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph-tree/test/vertex-set-path-composite.test.cpp
 layout: document

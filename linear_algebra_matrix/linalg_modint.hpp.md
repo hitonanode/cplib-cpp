@@ -2,27 +2,27 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/system_of_linear_equations.hpp
     title: linear_algebra_matrix/system_of_linear_equations.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\n#include <algorithm>\n\
@@ -215,15 +215,15 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/linalg_modint.hpp
   requiredBy:
-  - graph/general_matching.hpp
   - linear_algebra_matrix/system_of_linear_equations.hpp
+  - graph/general_matching.hpp
   timestamp: '2020-11-18 20:06:08+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/general_matching.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+  - graph/test/general_matching.test.cpp
 documentation_of: linear_algebra_matrix/linalg_modint.hpp
 layout: document
 redirect_from:

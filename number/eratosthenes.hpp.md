@@ -84,8 +84,8 @@ data:
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/gen_primes.test.cpp
   - number/test/prime_factorization.test.cpp
+  - number/test/gen_primes.test.cpp
 documentation_of: number/eratosthenes.hpp
 layout: document
 redirect_from:

@@ -2,18 +2,18 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/acl_range-affine-range-sum.hpp
     title: segmenttree/acl_range-affine-range-sum.hpp
   - icon: ':warning:'
     path: segmenttree/acl_range-update-range-sum-min.hpp
     title: segmenttree/acl_range-update-range-sum-min.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/document_ja/lazysegtree.html>
@@ -176,7 +176,7 @@ data:
   - segmenttree/acl_range-affine-range-sum.hpp
   - segmenttree/acl_range-update-range-sum-min.hpp
   timestamp: '2020-11-18 23:19:38+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
 documentation_of: segmenttree/acl_lazysegtree.hpp

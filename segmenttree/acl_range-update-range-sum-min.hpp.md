@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
     title: segmenttree/acl_lazysegtree.hpp
   _extendedRequiredBy: []
