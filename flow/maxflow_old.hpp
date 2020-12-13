@@ -86,7 +86,7 @@ template <typename T> struct [[deprecated("use ACL based mf_graph")]] MaxFlow {
     }
 
     // Dinic algorithm
-    // Complexity: O(VE)
+    // Complexity: O(V^2 E)
     T Dinic(int s, int t, T req) {
         T flow = 0;
         while (req > 0) {
