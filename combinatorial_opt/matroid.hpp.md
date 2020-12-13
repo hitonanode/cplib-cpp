@@ -1,20 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: matroid/vector_matroid.hpp
-    title: matroid/vector_matroid.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
     - http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/>
-  bundledCode: "#line 2 \"matroid/matroid.hpp\"\n#include <cassert>\n#include <queue>\n\
-    #include <utility>\n#include <vector>\nusing namespace std;\n\n// CUT begin\n\
-    using Element = int;\nusing State = vector<bool>;\n\nstruct MatroidExample {\n\
-    \    int M; // # of elements of set we consider\n\n    // If I is independent\
+  bundledCode: "#line 2 \"combinatorial_opt/matroid.hpp\"\n#include <cassert>\n#include\
+    \ <queue>\n#include <utility>\n#include <vector>\nusing namespace std;\n\n// CUT\
+    \ begin\nusing Element = int;\nusing State = vector<bool>;\n\nstruct MatroidExample\
+    \ {\n    int M; // # of elements of set we consider\n\n    // If I is independent\
     \ and I + {e} is not, return elements of the circuit.\n    // If e \\in I, or\
     \ I + {e} is independent, return empty vector.\n    // If I is NOT independent,\
     \ undefined.\n    vector<Element> circuit(State I, Element e);\n};\n\n// Matroid\
@@ -131,16 +128,15 @@ data:
     \    if (I[x]) ret.push_back(x);\n        }\n        return ret;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: matroid/matroid.hpp
-  requiredBy:
-  - matroid/vector_matroid.hpp
-  timestamp: '2020-11-18 20:25:12+09:00'
+  path: combinatorial_opt/matroid.hpp
+  requiredBy: []
+  timestamp: '2020-12-14 02:23:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: matroid/matroid.hpp
+documentation_of: combinatorial_opt/matroid.hpp
 layout: document
 redirect_from:
-- /library/matroid/matroid.hpp
-- /library/matroid/matroid.hpp.html
-title: matroid/matroid.hpp
+- /library/combinatorial_opt/matroid.hpp
+- /library/combinatorial_opt/matroid.hpp.html
+title: combinatorial_opt/matroid.hpp
 ---

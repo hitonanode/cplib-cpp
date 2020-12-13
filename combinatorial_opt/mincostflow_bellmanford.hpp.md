@@ -2,29 +2,23 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: flow/test/assignment_problem.test.cpp
-    title: flow/test/assignment_problem.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: flow/test/mincostflow.test.cpp
-    title: flow/test/mincostflow.test.cpp
+  _extendedVerifiedWith: []
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links:
     - https://community.topcoder.com/stat?c=problem_statement&pm=15702>
-  bundledCode: "#line 2 \"flow/mincostflow_bellmanford.hpp\"\n#include <cassert>\n\
-    #include <iostream>\n#include <limits>\n#include <queue>\n#include <vector>\n\n\
-    // CUT begin\n/*\nMinCostFlow: Minimum-cost flow problem solver WITH NO NEGATIVE\
-    \ CYCLE (just negative cost edge is allowed)\nVerified by SRM 770 Div1 Medium\
-    \ <https://community.topcoder.com/stat?c=problem_statement&pm=15702>\n*/\ntemplate\
-    \ <typename CAP = long long, typename COST = long long> struct MinCostFlow {\n\
-    \    const COST INF_COST = std::numeric_limits<COST>::max() / 2;\n    struct edge\
-    \ {\n        int to, rev;\n        CAP cap;\n        COST cost;\n        friend\
-    \ std::ostream &operator<<(std::ostream &os, const edge &e) {\n            os\
-    \ << '(' << e.to << ',' << e.rev << ',' << e.cap << ',' << e.cost << ')';\n  \
-    \          return os;\n        }\n    };\n    int V;\n    std::vector<std::vector<edge>>\
+  bundledCode: "#line 2 \"combinatorial_opt/mincostflow_bellmanford.hpp\"\n#include\
+    \ <cassert>\n#include <iostream>\n#include <limits>\n#include <queue>\n#include\
+    \ <vector>\n\n// CUT begin\n/*\nMinCostFlow: Minimum-cost flow problem solver\
+    \ WITH NO NEGATIVE CYCLE (just negative cost edge is allowed)\nVerified by SRM\
+    \ 770 Div1 Medium <https://community.topcoder.com/stat?c=problem_statement&pm=15702>\n\
+    */\ntemplate <typename CAP = long long, typename COST = long long> struct MinCostFlow\
+    \ {\n    const COST INF_COST = std::numeric_limits<COST>::max() / 2;\n    struct\
+    \ edge {\n        int to, rev;\n        CAP cap;\n        COST cost;\n       \
+    \ friend std::ostream &operator<<(std::ostream &os, const edge &e) {\n       \
+    \     os << '(' << e.to << ',' << e.rev << ',' << e.cap << ',' << e.cost << ')';\n\
+    \            return os;\n        }\n    };\n    int V;\n    std::vector<std::vector<edge>>\
     \ g;\n    std::vector<COST> dist;\n    std::vector<int> prevv, preve;\n    std::vector<COST>\
     \ dual; // dual[V]: potential\n    std::vector<std::pair<int, int>> pos;\n\n \
     \   bool _calc_distance_bellman_ford(int s) { // O(VE), able to detect negative\
@@ -131,17 +125,15 @@ data:
     \ }\n        return os;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: flow/mincostflow_bellmanford.hpp
+  path: combinatorial_opt/mincostflow_bellmanford.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - flow/test/assignment_problem.test.cpp
-  - flow/test/mincostflow.test.cpp
-documentation_of: flow/mincostflow_bellmanford.hpp
+  timestamp: '2020-12-14 02:23:38+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: combinatorial_opt/mincostflow_bellmanford.hpp
 layout: document
 redirect_from:
-- /library/flow/mincostflow_bellmanford.hpp
-- /library/flow/mincostflow_bellmanford.hpp.html
-title: flow/mincostflow_bellmanford.hpp
+- /library/combinatorial_opt/mincostflow_bellmanford.hpp
+- /library/combinatorial_opt/mincostflow_bellmanford.hpp.html
+title: combinatorial_opt/mincostflow_bellmanford.hpp
 ---

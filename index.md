@@ -6,6 +6,35 @@ data:
     - icon: ':warning:'
       path: binary_lifting(doubling)/doubling.hpp
       title: binary_lifting(doubling)/doubling.hpp
+  - name: combinatorial_opt
+    pages:
+    - icon: ':warning:'
+      path: combinatorial_opt/b-flow.hpp
+      title: combinatorial_opt/b-flow.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/basepolyhedron.hpp
+      title: combinatorial_opt/basepolyhedron.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/matroid.hpp
+      title: combinatorial_opt/matroid.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/maxflow.hpp
+      title: combinatorial_opt/maxflow.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/maxflow_lb.hpp
+      title: combinatorial_opt/maxflow_lb.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/maxflow_old.hpp
+      title: combinatorial_opt/maxflow_old.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/mincostflow.hpp
+      title: combinatorial_opt/mincostflow.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/mincostflow_bellmanford.hpp
+      title: combinatorial_opt/mincostflow_bellmanford.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/vector_matroid.hpp
+      title: combinatorial_opt/vector_matroid.hpp
   - name: convex_hull_trick
     pages:
     - icon: ':warning:'
@@ -40,26 +69,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/walsh-hadamard.hpp
       title: convolution/walsh-hadamard.hpp
-  - name: flow
-    pages:
-    - icon: ':warning:'
-      path: flow/b-flow.hpp
-      title: flow/b-flow.hpp
-    - icon: ':heavy_check_mark:'
-      path: flow/maxflow.hpp
-      title: flow/maxflow.hpp
-    - icon: ':warning:'
-      path: flow/maxflow_lb.hpp
-      title: flow/maxflow_lb.hpp
-    - icon: ':warning:'
-      path: flow/maxflow_old.hpp
-      title: flow/maxflow_old.hpp
-    - icon: ':heavy_check_mark:'
-      path: flow/mincostflow.hpp
-      title: flow/mincostflow.hpp
-    - icon: ':heavy_check_mark:'
-      path: flow/mincostflow_bellmanford.hpp
-      title: flow/mincostflow_bellmanford.hpp
   - name: formal_power_series
     pages:
     - icon: ':heavy_check_mark:'
@@ -178,19 +187,14 @@ data:
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
+      path: linear_algebra_matrix/toeplitz.hpp
+      title: linear_algebra_matrix/toeplitz.hpp
+    - icon: ':warning:'
       path: linear_algebra_matrix/transpose.hpp
       title: linear_algebra_matrix/transpose.hpp
     - icon: ':warning:'
       path: linear_algebra_matrix/tropical_matrix.hpp
       title: linear_algebra_matrix/tropical_matrix.hpp
-  - name: matroid
-    pages:
-    - icon: ':warning:'
-      path: matroid/matroid.hpp
-      title: matroid/matroid.hpp
-    - icon: ':warning:'
-      path: matroid/vector_matroid.hpp
-      title: matroid/vector_matroid.hpp
   - name: multithread
     pages:
     - icon: ':warning:'
@@ -425,6 +429,17 @@ data:
       path: utilities/timer.hpp
       title: utilities/timer.hpp
   verificationCategories:
+  - name: combinatorial_opt/test
+    pages:
+    - icon: ':x:'
+      path: combinatorial_opt/test/assignment_problem.test.cpp
+      title: combinatorial_opt/test/assignment_problem.test.cpp
+    - icon: ':x:'
+      path: combinatorial_opt/test/maxflow.test.cpp
+      title: combinatorial_opt/test/maxflow.test.cpp
+    - icon: ':x:'
+      path: combinatorial_opt/test/mincostflow.test.cpp
+      title: combinatorial_opt/test/mincostflow.test.cpp
   - name: convex_hull_trick/test
     pages:
     - icon: ':heavy_check_mark:'
@@ -444,17 +459,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/walsh-hadamard_xor.test.cpp
       title: convolution/test/walsh-hadamard_xor.test.cpp
-  - name: flow/test
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: flow/test/assignment_problem.test.cpp
-      title: flow/test/assignment_problem.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: flow/test/maxflow.test.cpp
-      title: flow/test/maxflow.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: flow/test/mincostflow.test.cpp
-      title: flow/test/mincostflow.test.cpp
   - name: formal_power_series/test
     pages:
     - icon: ':heavy_check_mark:'

@@ -1,23 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: flow/b-flow.hpp
-    title: flow/b-flow.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: flow/test/mincostflow.test.cpp
-    title: flow/test/mincostflow.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html>
-  bundledCode: "#line 2 \"flow/mincostflow.hpp\"\n#include <algorithm>\n#include <cassert>\n\
-    #include <limits>\n#include <queue>\n#include <vector>\n\n// CUT begin\n// MinCostFlow\
-    \ based on AtCoder Library, no namespace, no private variables, compatible with\
-    \ C++11\n// Reference: <https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html>\n\
+  bundledCode: "#line 2 \"combinatorial_opt/mincostflow.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#include <limits>\n#include <queue>\n#include <vector>\n\n\
+    // CUT begin\n// MinCostFlow based on AtCoder Library, no namespace, no private\
+    \ variables, compatible with C++11\n// Reference: <https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html>\n\
     // **NO NEGATIVE COST EDGES**\ntemplate <class Cap, class Cost> struct mcf_graph\
     \ {\n    mcf_graph() {}\n    mcf_graph(int n) : _n(n), g(n) {}\n\n    int add_edge(int\
     \ from, int to, Cap cap, Cost cost) {\n        assert(0 <= from && from < _n);\n\
@@ -154,17 +148,15 @@ data:
     \ g;\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: flow/mincostflow.hpp
-  requiredBy:
-  - flow/b-flow.hpp
-  timestamp: '2020-11-18 21:07:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - flow/test/mincostflow.test.cpp
-documentation_of: flow/mincostflow.hpp
+  path: combinatorial_opt/mincostflow.hpp
+  requiredBy: []
+  timestamp: '2020-12-14 02:23:38+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: combinatorial_opt/mincostflow.hpp
 layout: document
 redirect_from:
-- /library/flow/mincostflow.hpp
-- /library/flow/mincostflow.hpp.html
-title: flow/mincostflow.hpp
+- /library/combinatorial_opt/mincostflow.hpp
+- /library/combinatorial_opt/mincostflow.hpp.html
+title: combinatorial_opt/mincostflow.hpp
 ---
