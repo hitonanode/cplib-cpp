@@ -42,7 +42,7 @@ data:
     \  void add_edge(int from, int to, T capacity) {\n        edges[from].push_back(edge{to,\
     \ capacity, (int)edges[to].size()});\n        edges[to].push_back(edge{from, (T)0,\
     \ (int)edges[from].size() - 1});\n    }\n\n    // Dinic algorithm\n    // Complexity:\
-    \ O(VE)\n    T Dinic(int s, int t, T req) {\n        T flow = 0;\n        while\
+    \ O(V^2 E)\n    T Dinic(int s, int t, T req) {\n        T flow = 0;\n        while\
     \ (req > 0) {\n            bfs(s);\n            if (level[t] < 0) break;\n   \
     \         iter.assign(edges.size(), 0);\n            T f;\n            while ((f\
     \ = dfs_dinic(s, t, req)) > 0) flow += f, req -= f;\n        }\n        return\
@@ -97,7 +97,7 @@ data:
     \  void add_edge(int from, int to, T capacity) {\n        edges[from].push_back(edge{to,\
     \ capacity, (int)edges[to].size()});\n        edges[to].push_back(edge{from, (T)0,\
     \ (int)edges[from].size() - 1});\n    }\n\n    // Dinic algorithm\n    // Complexity:\
-    \ O(VE)\n    T Dinic(int s, int t, T req) {\n        T flow = 0;\n        while\
+    \ O(V^2 E)\n    T Dinic(int s, int t, T req) {\n        T flow = 0;\n        while\
     \ (req > 0) {\n            bfs(s);\n            if (level[t] < 0) break;\n   \
     \         iter.assign(edges.size(), 0);\n            T f;\n            while ((f\
     \ = dfs_dinic(s, t, req)) > 0) flow += f, req -= f;\n        }\n        return\
@@ -121,7 +121,7 @@ data:
   isVerificationFile: false
   path: flow/maxflow_old.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-12-13 22:27:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: flow/maxflow_old.hpp

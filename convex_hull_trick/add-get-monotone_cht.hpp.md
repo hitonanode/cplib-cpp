@@ -24,9 +24,12 @@ data:
     \ min. Otherwise, calculates max.\n    MonotoneConvexHullTrick(bool is_minimizer)\
     \ : is_minimizer(is_minimizer) {}\n    void add_line(T_CHT a, T_CHT b) { // Add\
     \ y = ax + b\n        if (!is_minimizer) a = -a, b = -b;\n        assert(this->empty()\
-    \ or this->back().first > a);\n        while (this->size() > 1u) {\n         \
-    \   int sz = this->size();\n            T_MP l = (T_MP)(this->back().second -\
-    \ (*this)[sz - 2].second) * (this->back().first - a); // Overflow might occur\
+    \ or this->back().first >= a);\n        while (this->size() > 1u) {\n        \
+    \    if (this->back().first == a) {\n                if (this->back().second <=\
+    \ b) {\n                    return;\n                } else {\n              \
+    \      this->pop_back();\n                    continue;\n                }\n \
+    \           }\n            int sz = this->size();\n            T_MP l = (T_MP)(this->back().second\
+    \ - (*this)[sz - 2].second) * (this->back().first - a); // Overflow might occur\
     \ here.\n            T_MP r = (T_MP)(b - this->back().second) * ((*this)[sz -\
     \ 2].first - this->back().first);\n            if (l < r) break;\n           \
     \ this->pop_back();\n        }\n        this->emplace_back(a, b);\n    }\n   \
@@ -51,9 +54,12 @@ data:
     \ is_minimizer; // If true, this instance calculates min. Otherwise, calculates\
     \ max.\n    MonotoneConvexHullTrick(bool is_minimizer) : is_minimizer(is_minimizer)\
     \ {}\n    void add_line(T_CHT a, T_CHT b) { // Add y = ax + b\n        if (!is_minimizer)\
-    \ a = -a, b = -b;\n        assert(this->empty() or this->back().first > a);\n\
-    \        while (this->size() > 1u) {\n            int sz = this->size();\n   \
-    \         T_MP l = (T_MP)(this->back().second - (*this)[sz - 2].second) * (this->back().first\
+    \ a = -a, b = -b;\n        assert(this->empty() or this->back().first >= a);\n\
+    \        while (this->size() > 1u) {\n            if (this->back().first == a)\
+    \ {\n                if (this->back().second <= b) {\n                    return;\n\
+    \                } else {\n                    this->pop_back();\n           \
+    \         continue;\n                }\n            }\n            int sz = this->size();\n\
+    \            T_MP l = (T_MP)(this->back().second - (*this)[sz - 2].second) * (this->back().first\
     \ - a); // Overflow might occur here.\n            T_MP r = (T_MP)(b - this->back().second)\
     \ * ((*this)[sz - 2].first - this->back().first);\n            if (l < r) break;\n\
     \            this->pop_back();\n        }\n        this->emplace_back(a, b);\n\
@@ -67,7 +73,7 @@ data:
   isVerificationFile: false
   path: convex_hull_trick/add-get-monotone_cht.hpp
   requiredBy: []
-  timestamp: '2020-11-23 16:24:10+09:00'
+  timestamp: '2020-12-13 22:27:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: convex_hull_trick/add-get-monotone_cht.hpp
