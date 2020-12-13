@@ -1,4 +1,4 @@
-#include "flow/b-flow.hpp"
+#include "../b-flow.hpp"
 #include "utilities/int128.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/min_cost_b_flow"
 

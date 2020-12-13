@@ -1,5 +1,5 @@
 #pragma once
-#include "matroid/matroid.hpp"
+#include "matroid.hpp"
 #include <bitset>
 #include <cassert>
 #include <unordered_map>

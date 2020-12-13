@@ -1,5 +1,5 @@
 #pragma once
-#include "flow/mincostflow.hpp"
+#include "mincostflow.hpp"
 #include <algorithm>
 #include <vector>
 

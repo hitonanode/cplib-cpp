@@ -1,5 +1,5 @@
 #pragma once
-#include "flow/maxflow.hpp"
+#include "maxflow.hpp"
 #include <cassert>
 #include <vector>
 

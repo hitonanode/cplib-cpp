@@ -1,4 +1,4 @@
-#include "flow/mincostflow_bellmanford.hpp"
+#include "../mincostflow_bellmanford.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/assignment"
 #include <algorithm>
 #include <iostream>
