@@ -20,8 +20,16 @@ struct MonotoneConvexHullTrick : std::deque<std::pair<T_CHT, T_CHT>> // (a, b) m
     MonotoneConvexHullTrick(bool is_minimizer) : is_minimizer(is_minimizer) {}
     void add_line(T_CHT a, T_CHT b) { // Add y = ax + b
         if (!is_minimizer) a = -a, b = -b;
-        assert(this->empty() or this->back().first > a);
+        assert(this->empty() or this->back().first >= a);
         while (this->size() > 1u) {
+            if (this->back().first == a) {
+                if (this->back().second <= b) {
+                    return;
+                } else {
+                    this->pop_back();
+                    continue;
+                }
+            }
             int sz = this->size();
             T_MP l = (T_MP)(this->back().second - (*this)[sz - 2].second) * (this->back().first - a); // Overflow might occur here.
             T_MP r = (T_MP)(b - this->back().second) * ((*this)[sz - 2].first - this->back().first);
