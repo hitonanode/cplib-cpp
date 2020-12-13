@@ -1,10 +1,16 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: combinatorial_opt/b-flow.hpp
+    title: combinatorial_opt/b-flow.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/mincostflow.test.cpp
+    title: combinatorial_opt/test/mincostflow.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html>
@@ -149,10 +155,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: combinatorial_opt/mincostflow.hpp
-  requiredBy: []
+  requiredBy:
+  - combinatorial_opt/b-flow.hpp
   timestamp: '2020-12-14 02:23:38+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - combinatorial_opt/test/mincostflow.test.cpp
 documentation_of: combinatorial_opt/mincostflow.hpp
 layout: document
 redirect_from:

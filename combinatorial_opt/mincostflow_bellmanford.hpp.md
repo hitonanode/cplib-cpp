@@ -2,9 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/assignment_problem.test.cpp
+    title: combinatorial_opt/test/assignment_problem.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/mincostflow.test.cpp
+    title: combinatorial_opt/test/mincostflow.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://community.topcoder.com/stat?c=problem_statement&pm=15702>
@@ -128,8 +134,10 @@ data:
   path: combinatorial_opt/mincostflow_bellmanford.hpp
   requiredBy: []
   timestamp: '2020-12-14 02:23:38+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - combinatorial_opt/test/assignment_problem.test.cpp
+  - combinatorial_opt/test/mincostflow.test.cpp
 documentation_of: combinatorial_opt/mincostflow_bellmanford.hpp
 layout: document
 redirect_from:

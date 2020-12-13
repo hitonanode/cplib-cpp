@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: combinatorial_opt/vector_matroid.hpp
+    title: combinatorial_opt/vector_matroid.hpp
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
@@ -129,7 +132,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: combinatorial_opt/matroid.hpp
-  requiredBy: []
+  requiredBy:
+  - combinatorial_opt/vector_matroid.hpp
   timestamp: '2020-12-14 02:23:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

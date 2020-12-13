@@ -17,19 +17,19 @@ data:
     - icon: ':warning:'
       path: combinatorial_opt/matroid.hpp
       title: combinatorial_opt/matroid.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/maxflow.hpp
       title: combinatorial_opt/maxflow.hpp
     - icon: ':warning:'
-      path: combinatorial_opt/maxflow_lb.hpp
-      title: combinatorial_opt/maxflow_lb.hpp
+      path: combinatorial_opt/maxflow_lowerbound.hpp
+      title: combinatorial_opt/maxflow_lowerbound.hpp
     - icon: ':warning:'
       path: combinatorial_opt/maxflow_old.hpp
       title: combinatorial_opt/maxflow_old.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/mincostflow.hpp
       title: combinatorial_opt/mincostflow.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/mincostflow_bellmanford.hpp
       title: combinatorial_opt/mincostflow_bellmanford.hpp
     - icon: ':warning:'
@@ -431,13 +431,13 @@ data:
   verificationCategories:
   - name: combinatorial_opt/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/assignment_problem.test.cpp
       title: combinatorial_opt/test/assignment_problem.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/maxflow.test.cpp
       title: combinatorial_opt/test/maxflow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/mincostflow.test.cpp
       title: combinatorial_opt/test/mincostflow.test.cpp
   - name: convex_hull_trick/test
