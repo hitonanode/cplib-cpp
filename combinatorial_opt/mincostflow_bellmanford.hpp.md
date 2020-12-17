@@ -136,8 +136,8 @@ data:
   timestamp: '2020-12-14 02:23:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/assignment_problem.test.cpp
   - combinatorial_opt/test/mincostflow.test.cpp
+  - combinatorial_opt/test/assignment_problem.test.cpp
 documentation_of: combinatorial_opt/mincostflow_bellmanford.hpp
 layout: document
 redirect_from:

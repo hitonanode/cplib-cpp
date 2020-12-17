@@ -8,7 +8,7 @@ data:
   attributes:
     links:
     - https://codeforces.com/contest/1325/problem/E>
-  bundledCode: "#line 2 \"graph/shortest_cycle.hpp\"\n#include <cassert>\n#include\
+  bundledCode: "#line 2 \"graph/shortest_cycle01.hpp\"\n#include <cassert>\n#include\
     \ <deque>\n#include <limits>\n#include <utility>\n#include <vector>\n\n// CUT\
     \ begin\n// Shortest cycle detection of UNDIRECTED SIMPLE graphs based on 01-BFS\n\
     // Assumption: only two types of edges are permitted: weight = 0 or W ( > 0)\n\
@@ -75,15 +75,15 @@ data:
     \ std::make_pair(s, t));\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: graph/shortest_cycle.hpp
+  path: graph/shortest_cycle01.hpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2020-12-17 00:57:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: graph/shortest_cycle.hpp
+documentation_of: graph/shortest_cycle01.hpp
 layout: document
 redirect_from:
-- /library/graph/shortest_cycle.hpp
-- /library/graph/shortest_cycle.hpp.html
-title: graph/shortest_cycle.hpp
+- /library/graph/shortest_cycle01.hpp
+- /library/graph/shortest_cycle01.hpp.html
+title: graph/shortest_cycle01.hpp
 ---

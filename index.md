@@ -138,8 +138,11 @@ data:
       path: graph/segment_edge_shortest_path.hpp
       title: graph/segment_edge_shortest_path.hpp
     - icon: ':warning:'
-      path: graph/shortest_cycle.hpp
-      title: graph/shortest_cycle.hpp
+      path: graph/shortest_cycle01.hpp
+      title: graph/shortest_cycle01.hpp
+    - icon: ':warning:'
+      path: graph/shortest_cycle_weighted.hpp
+      title: graph/shortest_cycle_weighted.hpp
     - icon: ':heavy_check_mark:'
       path: graph/shortest_path.hpp
       title: graph/shortest_path.hpp

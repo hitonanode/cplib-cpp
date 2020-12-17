@@ -70,8 +70,8 @@ data:
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - random/test/rolling_hash_w_modint.test.cpp
   - random/test/rolling_hash.test.cpp
+  - random/test/rolling_hash_w_modint.test.cpp
 documentation_of: random/rolling_hash_1d_general.hpp
 layout: document
 redirect_from:
