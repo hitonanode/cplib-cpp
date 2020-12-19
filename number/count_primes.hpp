@@ -1,7 +1,5 @@
 #pragma once
 #include <algorithm>
-#include <array>
-#include <cassert>
 #include <cmath>
 #include <vector>
 
@@ -12,12 +10,12 @@ struct CountPrimes {
     // Reference: <https://min-25.hatenablog.com/entry/2018/11/11/172216>
     using Int = long long;
     Int n, n2, n3, n6;
-    std::array<bool, 1000000> is_prime;
-    std::vector<Int> primes;
+    std::vector<int> is_prime; // [0, 0, 1, 1, 0, 1, 0, 1, ...]
+    std::vector<Int> primes;   // primes up to O(N^(1/2)), [2, 3, 5, 7, ...]
 
     int s;               // size of vs
     std::vector<Int> vs; // [N, ..., n2, n2 - 1, n2 - 2, ..., 3, 2, 1]
-    std::vector<Int> pi; // pi[i] = (# of primes s.t. <= vs[i])
+    std::vector<Int> pi; // pi[i] = (# of primes s.t. <= vs[i]) is finally obtained
 
     std::vector<int> _fenwick;
 
@@ -31,7 +29,7 @@ struct CountPrimes {
     }
 
     CountPrimes(Int n_) : n(n_), n2((Int)sqrtl(n)), n3((Int)cbrtl(n)), n6((Int)sqrtl(n3)) {
-        std::fill(is_prime.begin() + 2, is_prime.end(), 1);
+        is_prime.assign(n2 + 300, 1), is_prime[0] = is_prime[1] = 0; // `+ 300`: <https://en.wikipedia.org/wiki/Prime_gap>
         for (size_t p = 2; p < is_prime.size(); p++) {
             if (is_prime[p]) {
                 primes.push_back(p);
