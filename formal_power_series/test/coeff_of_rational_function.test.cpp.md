@@ -146,21 +146,22 @@ data:
     \ bi);\n        auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2\
     \ = nttconv_<nttprimes[2]>(ai, bi);\n        a.resize(n + m - 1);\n        for\
     \ (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val,\
-    \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 3 \"formal_power_series/coeff_of_rational_function.hpp\"\
-    \n\n#line 5 \"formal_power_series/coeff_of_rational_function.hpp\"\n\n// CUT begin\n\
-    // Calculate [x^N](num(x) / den(x))\n// Coplexity: O(LlgLlgN) ( L = size(num)\
-    \ + size(den) )\ntemplate <typename Tp> Tp coefficient_of_rational_function(long\
-    \ long N, std::vector<Tp> num, std::vector<Tp> den) {\n    assert(N >= 0);\n \
-    \   while (den.size() and den.back() == 0) den.pop_back();\n    assert(den.size());\n\
-    \    int h = 0;\n    while (den[h] == 0) h++;\n    N += h;\n    den.erase(den.begin(),\
-    \ den.begin() + h);\n\n    if (den.size() == 1) {\n        assert(N < int(num.size()));\n\
-    \        return num[N] / den[0];\n    }\n\n    while (N) {\n        std::vector<Tp>\
-    \ g = den;\n        for (size_t i = 1; i < g.size(); i += 2) { g[i] = -g[i]; }\n\
-    \        auto conv_num_g = nttconv(num, g);\n        num.resize((conv_num_g.size()\
-    \ + 1 - (N & 1)) / 2);\n        for (size_t i = 0; i < num.size(); i++) { num[i]\
-    \ = conv_num_g[i * 2 + (N & 1)]; }\n        auto conv_den_g = nttconv(den, g);\n\
-    \        for (size_t i = 0; i < den.size(); i++) { den[i] = conv_den_g[i * 2];\
-    \ }\n        N >>= 1;\n    }\n    return num[0] / den[0];\n}\n#line 5 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
+    \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 4 \"formal_power_series/coeff_of_rational_function.hpp\"\
+    \n\n// CUT begin\n// Calculate [x^N](num(x) / den(x))\n// - Coplexity: O(LlgLlgN)\
+    \ ( L = size(num) + size(den) )\n// - Reference: `Bostan\u2013Mori algorithm`\
+    \ <https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>\ntemplate <typename Tp>\
+    \ Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vector<Tp>\
+    \ den) {\n    assert(N >= 0);\n    while (den.size() and den.back() == 0) den.pop_back();\n\
+    \    assert(den.size());\n    int h = 0;\n    while (den[h] == 0) h++;\n    N\
+    \ += h;\n    den.erase(den.begin(), den.begin() + h);\n\n    if (den.size() ==\
+    \ 1) {\n        assert(N < int(num.size()));\n        return num[N] / den[0];\n\
+    \    }\n\n    while (N) {\n        std::vector<Tp> g = den;\n        for (size_t\
+    \ i = 1; i < g.size(); i += 2) { g[i] = -g[i]; }\n        auto conv_num_g = nttconv(num,\
+    \ g);\n        num.resize((conv_num_g.size() + 1 - (N & 1)) / 2);\n        for\
+    \ (size_t i = 0; i < num.size(); i++) { num[i] = conv_num_g[i * 2 + (N & 1)];\
+    \ }\n        auto conv_den_g = nttconv(den, g);\n        for (size_t i = 0; i\
+    \ < den.size(); i++) { den[i] = conv_den_g[i * 2]; }\n        N >>= 1;\n    }\n\
+    \    return num[0] / den[0];\n}\n#line 5 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
     \n\nusing mint = ModInt<1000000007>;\n\n#line 9 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
     \n\nstd::vector<mint> gen_dp(std::vector<int> v, int n) {\n    std::vector<std::vector<mint>>\
     \ dp(n + 1, std::vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for\
@@ -196,7 +197,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/coeff_of_rational_function.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2020-12-20 04:07:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/coeff_of_rational_function.test.cpp

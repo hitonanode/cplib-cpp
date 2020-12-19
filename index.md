@@ -57,6 +57,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/fft_double.hpp
       title: convolution/fft_double.hpp
+    - icon: ':heavy_check_mark:'
+      path: convolution/hadamard.hpp
+      title: convolution/hadamard.hpp
     - icon: ':warning:'
       path: convolution/integer_convolution.hpp
       title: convolution/integer_convolution.hpp
@@ -66,9 +69,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/subset_convolution.hpp
       title: convolution/subset_convolution.hpp
-    - icon: ':heavy_check_mark:'
-      path: convolution/walsh-hadamard.hpp
-      title: convolution/walsh-hadamard.hpp
   - name: formal_power_series
     pages:
     - icon: ':heavy_check_mark:'
@@ -211,6 +211,9 @@ data:
     - icon: ':warning:'
       path: number/big_combination_logarithm.hpp
       title: number/big_combination_logarithm.hpp
+    - icon: ':heavy_check_mark:'
+      path: number/count_primes.hpp
+      title: number/count_primes.hpp
     - icon: ':warning:'
       path: number/cyclotomic_polynomials.hpp
       title: number/cyclotomic_polynomials.hpp
@@ -451,6 +454,15 @@ data:
   - name: convolution/test
     pages:
     - icon: ':heavy_check_mark:'
+      path: convolution/test/bitwise_and_conv.test.cpp
+      title: convolution/test/bitwise_and_conv.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: convolution/test/bitwise_xor_conv.test.cpp
+      title: convolution/test/bitwise_xor_conv.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: convolution/test/hadamard_xor.test.cpp
+      title: convolution/test/hadamard_xor.test.cpp
+    - icon: ':heavy_check_mark:'
       path: convolution/test/ntt.test.cpp
       title: convolution/test/ntt.test.cpp
     - icon: ':heavy_check_mark:'
@@ -459,9 +471,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/subset_convolution.test.cpp
       title: convolution/test/subset_convolution.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: convolution/test/walsh-hadamard_xor.test.cpp
-      title: convolution/test/walsh-hadamard_xor.test.cpp
   - name: formal_power_series/test
     pages:
     - icon: ':heavy_check_mark:'
@@ -627,6 +636,9 @@ data:
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: number/test/count_primes.test.cpp
+      title: number/test/count_primes.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/discrete_logarithm.test.cpp
       title: number/test/discrete_logarithm.test.cpp

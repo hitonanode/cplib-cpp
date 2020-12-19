@@ -28,6 +28,12 @@ data:
     title: segmenttree/acl_range-affine-range-sum.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: convolution/test/bitwise_and_conv.test.cpp
+    title: convolution/test/bitwise_and_conv.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/bitwise_xor_conv.test.cpp
+    title: convolution/test/bitwise_xor_conv.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
   - icon: ':heavy_check_mark:'
@@ -318,6 +324,8 @@ data:
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - convolution/test/ntt_arbitrary_mod.test.cpp
   - convolution/test/ntt.test.cpp
+  - convolution/test/bitwise_and_conv.test.cpp
+  - convolution/test/bitwise_xor_conv.test.cpp
   - convolution/test/subset_convolution.test.cpp
   - graph-tree/test/vertex-set-path-composite.test.cpp
 documentation_of: modint.hpp

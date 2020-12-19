@@ -15,10 +15,10 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"formal_power_series/coeff_of_rational_function.hpp\"\n#include\
-    \ <vector>\n\n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#line\
-    \ 5 \"modint.hpp\"\n\n// CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus\
+    links:
+    - https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>
+  bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
+    \ <vector>\n\n// CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus\
     \ >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using\
     \ lint = long long;\n    MDCONST static int get_mod() { return mod; }\n    static\
     \ int get_primitive_root() {\n        static int primitive_root = 0;\n       \
@@ -143,41 +143,45 @@ data:
     \ bi);\n        auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2\
     \ = nttconv_<nttprimes[2]>(ai, bi);\n        a.resize(n + m - 1);\n        for\
     \ (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val,\
-    \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 5 \"formal_power_series/coeff_of_rational_function.hpp\"\
-    \n\n// CUT begin\n// Calculate [x^N](num(x) / den(x))\n// Coplexity: O(LlgLlgN)\
-    \ ( L = size(num) + size(den) )\ntemplate <typename Tp> Tp coefficient_of_rational_function(long\
-    \ long N, std::vector<Tp> num, std::vector<Tp> den) {\n    assert(N >= 0);\n \
-    \   while (den.size() and den.back() == 0) den.pop_back();\n    assert(den.size());\n\
-    \    int h = 0;\n    while (den[h] == 0) h++;\n    N += h;\n    den.erase(den.begin(),\
-    \ den.begin() + h);\n\n    if (den.size() == 1) {\n        assert(N < int(num.size()));\n\
-    \        return num[N] / den[0];\n    }\n\n    while (N) {\n        std::vector<Tp>\
-    \ g = den;\n        for (size_t i = 1; i < g.size(); i += 2) { g[i] = -g[i]; }\n\
-    \        auto conv_num_g = nttconv(num, g);\n        num.resize((conv_num_g.size()\
-    \ + 1 - (N & 1)) / 2);\n        for (size_t i = 0; i < num.size(); i++) { num[i]\
-    \ = conv_num_g[i * 2 + (N & 1)]; }\n        auto conv_den_g = nttconv(den, g);\n\
-    \        for (size_t i = 0; i < den.size(); i++) { den[i] = conv_den_g[i * 2];\
-    \ }\n        N >>= 1;\n    }\n    return num[0] / den[0];\n}\n"
-  code: "#pragma once\n#include <vector>\n\n#include \"convolution/ntt.hpp\"\n\n//\
-    \ CUT begin\n// Calculate [x^N](num(x) / den(x))\n// Coplexity: O(LlgLlgN) ( L\
-    \ = size(num) + size(den) )\ntemplate <typename Tp> Tp coefficient_of_rational_function(long\
-    \ long N, std::vector<Tp> num, std::vector<Tp> den) {\n    assert(N >= 0);\n \
-    \   while (den.size() and den.back() == 0) den.pop_back();\n    assert(den.size());\n\
-    \    int h = 0;\n    while (den[h] == 0) h++;\n    N += h;\n    den.erase(den.begin(),\
-    \ den.begin() + h);\n\n    if (den.size() == 1) {\n        assert(N < int(num.size()));\n\
-    \        return num[N] / den[0];\n    }\n\n    while (N) {\n        std::vector<Tp>\
-    \ g = den;\n        for (size_t i = 1; i < g.size(); i += 2) { g[i] = -g[i]; }\n\
-    \        auto conv_num_g = nttconv(num, g);\n        num.resize((conv_num_g.size()\
-    \ + 1 - (N & 1)) / 2);\n        for (size_t i = 0; i < num.size(); i++) { num[i]\
-    \ = conv_num_g[i * 2 + (N & 1)]; }\n        auto conv_den_g = nttconv(den, g);\n\
-    \        for (size_t i = 0; i < den.size(); i++) { den[i] = conv_den_g[i * 2];\
-    \ }\n        N >>= 1;\n    }\n    return num[0] / den[0];\n}\n"
+    \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 4 \"formal_power_series/coeff_of_rational_function.hpp\"\
+    \n\n// CUT begin\n// Calculate [x^N](num(x) / den(x))\n// - Coplexity: O(LlgLlgN)\
+    \ ( L = size(num) + size(den) )\n// - Reference: `Bostan\u2013Mori algorithm`\
+    \ <https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>\ntemplate <typename Tp>\
+    \ Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vector<Tp>\
+    \ den) {\n    assert(N >= 0);\n    while (den.size() and den.back() == 0) den.pop_back();\n\
+    \    assert(den.size());\n    int h = 0;\n    while (den[h] == 0) h++;\n    N\
+    \ += h;\n    den.erase(den.begin(), den.begin() + h);\n\n    if (den.size() ==\
+    \ 1) {\n        assert(N < int(num.size()));\n        return num[N] / den[0];\n\
+    \    }\n\n    while (N) {\n        std::vector<Tp> g = den;\n        for (size_t\
+    \ i = 1; i < g.size(); i += 2) { g[i] = -g[i]; }\n        auto conv_num_g = nttconv(num,\
+    \ g);\n        num.resize((conv_num_g.size() + 1 - (N & 1)) / 2);\n        for\
+    \ (size_t i = 0; i < num.size(); i++) { num[i] = conv_num_g[i * 2 + (N & 1)];\
+    \ }\n        auto conv_den_g = nttconv(den, g);\n        for (size_t i = 0; i\
+    \ < den.size(); i++) { den[i] = conv_den_g[i * 2]; }\n        N >>= 1;\n    }\n\
+    \    return num[0] / den[0];\n}\n"
+  code: "#pragma once\n#include \"../convolution/ntt.hpp\"\n#include <vector>\n\n\
+    // CUT begin\n// Calculate [x^N](num(x) / den(x))\n// - Coplexity: O(LlgLlgN)\
+    \ ( L = size(num) + size(den) )\n// - Reference: `Bostan\u2013Mori algorithm`\
+    \ <https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>\ntemplate <typename Tp>\
+    \ Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vector<Tp>\
+    \ den) {\n    assert(N >= 0);\n    while (den.size() and den.back() == 0) den.pop_back();\n\
+    \    assert(den.size());\n    int h = 0;\n    while (den[h] == 0) h++;\n    N\
+    \ += h;\n    den.erase(den.begin(), den.begin() + h);\n\n    if (den.size() ==\
+    \ 1) {\n        assert(N < int(num.size()));\n        return num[N] / den[0];\n\
+    \    }\n\n    while (N) {\n        std::vector<Tp> g = den;\n        for (size_t\
+    \ i = 1; i < g.size(); i += 2) { g[i] = -g[i]; }\n        auto conv_num_g = nttconv(num,\
+    \ g);\n        num.resize((conv_num_g.size() + 1 - (N & 1)) / 2);\n        for\
+    \ (size_t i = 0; i < num.size(); i++) { num[i] = conv_num_g[i * 2 + (N & 1)];\
+    \ }\n        auto conv_den_g = nttconv(den, g);\n        for (size_t i = 0; i\
+    \ < den.size(); i++) { den[i] = conv_den_g[i * 2]; }\n        N >>= 1;\n    }\n\
+    \    return num[0] / den[0];\n}\n"
   dependsOn:
   - convolution/ntt.hpp
   - modint.hpp
   isVerificationFile: false
   path: formal_power_series/coeff_of_rational_function.hpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2020-12-20 04:07:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/coeff_of_rational_function.test.cpp

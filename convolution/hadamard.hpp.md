@@ -4,15 +4,21 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: convolution/test/walsh-hadamard_xor.test.cpp
-    title: convolution/test/walsh-hadamard_xor.test.cpp
+    path: convolution/test/bitwise_and_conv.test.cpp
+    title: convolution/test/bitwise_and_conv.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/bitwise_xor_conv.test.cpp
+    title: convolution/test/bitwise_xor_conv.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/hadamard_xor.test.cpp
+    title: convolution/test/hadamard_xor.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://codeforces.com/blog/entry/71899>
     - https://csacademy.com/blog/fast-fourier-transform-and-variations-of-it>
-  bundledCode: "#line 2 \"convolution/walsh-hadamard.hpp\"\n#include <cassert>\n#include\
+  bundledCode: "#line 2 \"convolution/hadamard.hpp\"\n#include <cassert>\n#include\
     \ <vector>\n\n// CUT begin\n// Fast Walsh-Hadamard transform and its abstraction\n\
     // Tutorials: <https://codeforces.com/blog/entry/71899>\n//            <https://csacademy.com/blog/fast-fourier-transform-and-variations-of-it>\n\
     template <typename T, typename F> void abstract_fwht(std::vector<T>& seq, F f)\
@@ -68,16 +74,18 @@ data:
     \ hi) { hi += lo; }, [](T& lo, T& hi) { hi -= lo; });\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: convolution/walsh-hadamard.hpp
+  path: convolution/hadamard.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-12-20 04:05:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - convolution/test/walsh-hadamard_xor.test.cpp
-documentation_of: convolution/walsh-hadamard.hpp
+  - convolution/test/hadamard_xor.test.cpp
+  - convolution/test/bitwise_and_conv.test.cpp
+  - convolution/test/bitwise_xor_conv.test.cpp
+documentation_of: convolution/hadamard.hpp
 layout: document
 redirect_from:
-- /library/convolution/walsh-hadamard.hpp
-- /library/convolution/walsh-hadamard.hpp.html
-title: convolution/walsh-hadamard.hpp
+- /library/convolution/hadamard.hpp
+- /library/convolution/hadamard.hpp.html
+title: convolution/hadamard.hpp
 ---

@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: convolution/walsh-hadamard.hpp
-    title: convolution/walsh-hadamard.hpp
+    path: convolution/hadamard.hpp
+    title: convolution/hadamard.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -13,7 +13,7 @@ data:
     PROBLEM: https://yukicoder.me/problems/no/1240
     links:
     - https://yukicoder.me/problems/no/1240
-  bundledCode: "#line 2 \"convolution/walsh-hadamard.hpp\"\n#include <cassert>\n#include\
+  bundledCode: "#line 2 \"convolution/hadamard.hpp\"\n#include <cassert>\n#include\
     \ <vector>\n\n// CUT begin\n// Fast Walsh-Hadamard transform and its abstraction\n\
     // Tutorials: <https://codeforces.com/blog/entry/71899>\n//            <https://csacademy.com/blog/fast-fourier-transform-and-variations-of-it>\n\
     template <typename T, typename F> void abstract_fwht(std::vector<T>& seq, F f)\
@@ -39,7 +39,7 @@ data:
     \ [](T& lo, T& hi) { lo -= hi; });\n}\n\n// bitwise OR convolution\n// ret[i]\
     \ = \\sum_{(j | k) == i} x[j] * y[k]\ntemplate <typename T> std::vector<T> orconv(std::vector<T>\
     \ x, std::vector<T> y) {\n    return bitwise_conv(\n        x, y, [](T& lo, T&\
-    \ hi) { hi += lo; }, [](T& lo, T& hi) { hi -= lo; });\n}\n#line 2 \"convolution/test/walsh-hadamard_xor.test.cpp\"\
+    \ hi) { hi += lo; }, [](T& lo, T& hi) { hi -= lo; });\n}\n#line 2 \"convolution/test/hadamard_xor.test.cpp\"\
     \n#define PROBLEM \"https://yukicoder.me/problems/no/1240\"\n#include <iostream>\n\
     using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N, X;\n    cin >> N >> X;\n    vector<int> A(N);\n    for (auto &x :\
@@ -50,7 +50,7 @@ data:
     \     if (((a >> d) & 1) == 0) { cntd[a]++, nd++; }\n        cntd = xorconv(cntd,\
     \ cntd);\n        cntd[0] -= nd;\n        for (int i = 0; i < X; i++) { ret +=\
     \ (1LL << d) * (cnt[i] - cntd[i]) / 2; }\n    }\n    cout << ret << '\\n';\n}\n"
-  code: "#include \"convolution/walsh-hadamard.hpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/1240\"\
+  code: "#include \"../hadamard.hpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/1240\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    int N, X;\n    cin >> N >> X;\n    vector<int>\
     \ A(N);\n    for (auto &x : A) { cin >> x; }\n    const int D = 18;\n    vector<long\
@@ -62,17 +62,17 @@ data:
     \ X; i++) { ret += (1LL << d) * (cnt[i] - cntd[i]) / 2; }\n    }\n    cout <<\
     \ ret << '\\n';\n}\n"
   dependsOn:
-  - convolution/walsh-hadamard.hpp
+  - convolution/hadamard.hpp
   isVerificationFile: true
-  path: convolution/test/walsh-hadamard_xor.test.cpp
+  path: convolution/test/hadamard_xor.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2020-12-20 04:05:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: convolution/test/walsh-hadamard_xor.test.cpp
+documentation_of: convolution/test/hadamard_xor.test.cpp
 layout: document
 redirect_from:
-- /verify/convolution/test/walsh-hadamard_xor.test.cpp
-- /verify/convolution/test/walsh-hadamard_xor.test.cpp.html
-title: convolution/test/walsh-hadamard_xor.test.cpp
+- /verify/convolution/test/hadamard_xor.test.cpp
+- /verify/convolution/test/hadamard_xor.test.cpp.html
+title: convolution/test/hadamard_xor.test.cpp
 ---
