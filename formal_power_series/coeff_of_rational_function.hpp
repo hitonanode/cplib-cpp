@@ -1,11 +1,11 @@
 #pragma once
+#include "../convolution/ntt.hpp"
 #include <vector>
-
-#include "convolution/ntt.hpp"
 
 // CUT begin
 // Calculate [x^N](num(x) / den(x))
-// Coplexity: O(LlgLlgN) ( L = size(num) + size(den) )
+// - Coplexity: O(LlgLlgN) ( L = size(num) + size(den) )
+// - Reference: `Bostan–Mori algorithm` <https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>
 template <typename Tp> Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vector<Tp> den) {
     assert(N >= 0);
     while (den.size() and den.back() == 0) den.pop_back();
