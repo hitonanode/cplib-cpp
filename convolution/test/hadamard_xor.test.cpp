@@ -1,4 +1,4 @@
-#include "convolution/walsh-hadamard.hpp"
+#include "../hadamard.hpp"
 #define PROBLEM "https://yukicoder.me/problems/no/1240"
 #include <iostream>
 using namespace std;
