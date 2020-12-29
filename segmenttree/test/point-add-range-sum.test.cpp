@@ -7,11 +7,11 @@
 template <typename T> struct PointAddRangeSum {
     BIT<T> bit;
     PointAddRangeSum(const std::vector<T> &A) : bit(A.size()) {
-        for (unsigned i = 0; i < A.size(); i++) bit.add(i + 1, A[i]);
+        for (unsigned i = 0; i < A.size(); i++) bit.add(i, A[i]);
     }
-    void add(int i, T val) { bit.add(i + 1, val); }
+    void add(int i, T val) { bit.add(i, val); }
     // sum [l, r)
-    T get(int l, int r) const { return bit.sum(r) - bit.sum(l); }
+    T get(int l, int r) const { return bit.sum(l, r); }
 };
 
 int main() {
@@ -20,7 +20,7 @@ int main() {
     int N, Q;
     std::cin >> N >> Q;
     std::vector<long long> A(N);
-    for (auto &a : A) { std::cin >> a; }
+    for (auto &a : A) std::cin >> a;
     PointAddRangeSum<long long> s(A);
     while (Q--) {
         int q, l, r;

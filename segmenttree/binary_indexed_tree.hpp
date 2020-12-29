@@ -1,27 +1,33 @@
 #pragma once
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
 // CUT begin
-// 1-indexed BIT (i : [1, len])
-template <typename T> struct BIT : std::vector<T> {
-    BIT(int len = 0) : std::vector<T>(len + 1) {}
-    void reset() { fill(this->begin(), this->end(), 0); }
-    void add(int pos, T v) {
-        while (pos > 0 and pos < (int)this->size()) (*this)[pos] += v, pos += pos & -pos;
+// 0-indexed BIT (binary indexed tree / Fenwick tree) (i : [0, len))
+template <typename T> struct BIT {
+    int n;
+    std::vector<T> data;
+    BIT(int len = 0) : n(len), data(len) {}
+    void reset() { std::fill(data.begin(), data.end(), T(0)); }
+    void add(int pos, T v) { // a[pos] += v
+        pos++;
+        while (pos > 0 and pos <= n) data[pos - 1] += v, pos += pos & -pos;
     }
-    T sum(int pos) const { // (0, pos]
+    T sum(int k) const { // a[0] + ... + a[k - 1]
         T res = 0;
-        while (pos > 0) res += (*this)[pos], pos -= pos & -pos;
+        while (k > 0) res += data[k - 1], k -= k & -k;
         return res;
     }
+
+    T sum(int l, int r) const { return sum(r) - sum(l); } // a[l] + ... + a[r - 1]
+
     friend std::ostream &operator<<(std::ostream &os, const BIT &bit) {
         T prv = 0;
         os << '[';
-        for (int i = 1; i < (int)bit.size(); i++) {
+        for (int i = 1; i <= bit.n; i++) {
             T now = bit.sum(i);
-            os << now - prv << ",";
-            prv = now;
+            os << now - prv << ',', prv = now;
         }
         return os << ']';
     }

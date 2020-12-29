@@ -1,17 +1,21 @@
 #include "segmenttree/binary_indexed_tree.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
-#include <cstdio>
+#include <iostream>
+using namespace std;
 
 int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
+
     int N, Q;
-    scanf("%d %d", &N, &Q);
+    cin >> N >> Q;
     BIT<int> bit(N);
     while (Q--) {
         int c, x, y;
-        scanf("%d %d %d", &c, &x, &y);
-        if (c)
-            printf("%d\n", bit.sum(y) - bit.sum(x - 1));
-        else
-            bit.add(x, y);
+        cin >> c >> x >> y;
+        if (c) {
+            cout << bit.sum(x - 1, y) << '\n';
+        } else {
+            bit.add(x - 1, y);
+        }
     }
 }
