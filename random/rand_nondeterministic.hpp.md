@@ -9,9 +9,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: random/test/rolling_hash.test.cpp
-    title: random/test/rolling_hash.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -36,7 +33,6 @@ data:
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - random/test/rolling_hash.test.cpp
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
 documentation_of: random/rand_nondeterministic.hpp
 layout: document

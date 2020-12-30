@@ -277,13 +277,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: random/rand_nondeterministic.hpp
       title: random/rand_nondeterministic.hpp
-    - icon: ':heavy_check_mark:'
-      path: random/rolling_hash_1d_general.hpp
-      title: random/rolling_hash_1d_general.hpp
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -351,6 +348,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/mp_algorithm.hpp
       title: string/mp_algorithm.hpp
+    - icon: ':heavy_check_mark:'
+      path: string/rolling_hash_1d.hpp
+      title: string/rolling_hash_1d.hpp
     - icon: ':heavy_check_mark:'
       path: string/suffix_array.hpp
       title: string/suffix_array.hpp
@@ -689,14 +689,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/test/static_range_inversion.test.cpp
       title: other_data_structures/test/static_range_inversion.test.cpp
-  - name: random/test
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: random/test/rolling_hash.test.cpp
-      title: random/test/rolling_hash.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: random/test/rolling_hash_w_modint.test.cpp
-      title: random/test/rolling_hash_w_modint.test.cpp
   - name: segmenttree/test
     pages:
     - icon: ':heavy_check_mark:'
@@ -754,6 +746,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/manacher_mp.test.cpp
       title: string/test/manacher_mp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/rolling_hash.test.cpp
+      title: string/test/rolling_hash.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/rolling_hash_w_modint.test.cpp
+      title: string/test/rolling_hash_w_modint.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/suffix_array.test.cpp
       title: string/test/suffix_array.test.cpp

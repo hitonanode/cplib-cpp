@@ -121,9 +121,6 @@ data:
     path: other_data_structures/test/queue_operate_all_composite.test.cpp
     title: other_data_structures/test/queue_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: random/test/rolling_hash_w_modint.test.cpp
-    title: random/test/rolling_hash_w_modint.test.cpp
-  - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -132,6 +129,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/range-affine-range-sum.test.cpp
     title: segmenttree/test/range-affine-range-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: string/test/rolling_hash_w_modint.test.cpp
+    title: string/test/rolling_hash_w_modint.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -293,7 +293,6 @@ data:
   timestamp: '2020-12-02 23:44:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - random/test/rolling_hash_w_modint.test.cpp
   - other_data_structures/test/queue_operate_all_composite.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
@@ -316,6 +315,7 @@ data:
   - formal_power_series/test/division_number.test.cpp
   - formal_power_series/test/fps_inv.test.cpp
   - formal_power_series/test/fps_exp.test.cpp
+  - string/test/rolling_hash_w_modint.test.cpp
   - graph/test/general_matching.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/linear_recurrence.test.cpp

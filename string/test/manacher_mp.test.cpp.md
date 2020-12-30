@@ -27,6 +27,10 @@ data:
     \        int k = 1;\n        while (i - k >= 0 and i + k < (int)S.size() and k\
     \ + res[i - k] < j) res[i + k] = res[i - k], k++;\n        i += k, j -= k;\n \
     \   }\n    return res;\n}\n#line 4 \"string/mp_algorithm.hpp\"\n\n// CUT begin\n\
+    // MP (Morris-Pratt) algorithm (length of longest nontrivial matching for prefix\
+    \ & suffix of s[0:i] for each i)\n// Input: std::string of length N\n// Output:\
+    \ std::vector<int> of size N + 1\n// Complexity: O(N)\n// Sample:\n// - `teletelepathy`\
+    \ -> [-1, 0, 0, 0, 0, 1, 2, 3, 4, 0, 0, 1, 0, 0]\n// Reference: <https://snuke.hatenablog.com/entry/2014/12/01/235807>\n\
     std::vector<int> mp_algorithm(std::string s) {\n    int N = s.length();\n    std::vector<int>\
     \ ret(N + 1, -1);\n    int j = -1;\n    for (int i = 0; i < N; i++) {\n      \
     \  while (j >= 0 and s[i] != s[j]) j = ret[j];\n        ret[i + 1] = ++j;\n  \
@@ -56,7 +60,7 @@ data:
   isVerificationFile: true
   path: string/test/manacher_mp.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2020-12-31 05:31:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/manacher_mp.test.cpp

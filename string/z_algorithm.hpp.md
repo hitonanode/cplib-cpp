@@ -13,7 +13,9 @@ data:
     - http://snuke.hatenablog.com/entry/2014/12/03/214243>
   bundledCode: "#line 2 \"string/z_algorithm.hpp\"\n#include <string>\n#include <vector>\n\
     \n// CUT begin\n// Z algorithm (length of longest common prefix for s[0:N] & s[i:N]\
-    \ for each i)\n// Complexity: O(N)\n// <http://snuke.hatenablog.com/entry/2014/12/03/214243>\n\
+    \ for each i)\n// Input: std::vector<T> / std::string of length N\n// Output:\
+    \ std::vector<int> of size N\n// Complexity: O(N)\n// Sample:\n// - `teletelepathy`\
+    \ -> [13, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0]\n// Reference: <http://snuke.hatenablog.com/entry/2014/12/03/214243>\n\
     template <typename T> std::vector<int> z_algorithm(const std::vector<T> &s) {\n\
     \    const int N = s.size();\n    if (N == 0) return {};\n    std::vector<int>\
     \ ans(N);\n    ans[0] = N;\n    int i = 1, j = 0;\n    while (i < N) {\n     \
@@ -26,7 +28,9 @@ data:
     }\n"
   code: "#pragma once\n#include <string>\n#include <vector>\n\n// CUT begin\n// Z\
     \ algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)\n\
-    // Complexity: O(N)\n// <http://snuke.hatenablog.com/entry/2014/12/03/214243>\n\
+    // Input: std::vector<T> / std::string of length N\n// Output: std::vector<int>\
+    \ of size N\n// Complexity: O(N)\n// Sample:\n// - `teletelepathy` -> [13, 0,\
+    \ 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0]\n// Reference: <http://snuke.hatenablog.com/entry/2014/12/03/214243>\n\
     template <typename T> std::vector<int> z_algorithm(const std::vector<T> &s) {\n\
     \    const int N = s.size();\n    if (N == 0) return {};\n    std::vector<int>\
     \ ans(N);\n    ans[0] = N;\n    int i = 1, j = 0;\n    while (i < N) {\n     \
@@ -41,7 +45,7 @@ data:
   isVerificationFile: false
   path: string/z_algorithm.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2020-12-31 05:31:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/z_algorithm.test.cpp

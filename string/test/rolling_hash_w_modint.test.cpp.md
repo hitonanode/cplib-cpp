@@ -5,11 +5,8 @@ data:
     path: modint.hpp
     title: modint.hpp
   - icon: ':heavy_check_mark:'
-    path: random/rolling_hash_1d_general.hpp
-    title: random/rolling_hash_1d_general.hpp
-  - icon: ':heavy_check_mark:'
-    path: random/xorshift.hpp
-    title: random/xorshift.hpp
+    path: string/rolling_hash_1d.hpp
+    title: string/rolling_hash_1d.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -89,69 +86,69 @@ data:
     \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
     \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
     template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
-    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"random/rolling_hash_1d_general.hpp\"\
-    \n#include <string>\n#line 4 \"random/rolling_hash_1d_general.hpp\"\nusing namespace\
-    \ std;\n\n// CUT begin\n// Rolling Hash (Rabin-Karp), 1dim\ntemplate <typename\
-    \ V> struct rolling_hash {\n    V B;\n    vector<V> hash;  // hash[i] = s[0] *\
-    \ B^(i - 1) + ... + s[i - 1]\n    vector<V> power; // power[i] = B^i\n    rolling_hash()\
-    \ {}\n    rolling_hash(const string &s, V b) : B(b) {\n        int N = s.length();\n\
-    \        hash.resize(N + 1), power.resize(N + 1, 1);\n        for (int i = 0;\
-    \ i < N; i++) {\n            power[i + 1] = power[i] * B;\n            hash[i\
-    \ + 1] = hash[i] * B + s[i];\n        }\n    }\n    V get_hash(int l, int r) //\
-    \ s[l] * B^(r - l - 1) + ... + s[r - 1]\n    {\n        return hash[r] - hash[l]\
-    \ * power[r - l];\n    }\n};\n\nusing lint = long long;\nusing plint = pair<lint,\
-    \ lint>;\nstruct DoubleHash : public plint {\n    static plint MODs;\n    DoubleHash(plint\
-    \ x) : plint(x) {}\n    DoubleHash(lint x, lint y) : plint(x, y) {}\n    DoubleHash(lint\
+    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"string/rolling_hash_1d.hpp\"\
+    \n#include <chrono>\n#include <random>\n#include <string>\n#line 6 \"string/rolling_hash_1d.hpp\"\
+    \nusing namespace std;\n\n// CUT begin\nstruct DoubleHash : public pair<unsigned,\
+    \ unsigned> {\n    using ull = unsigned long long;\n    static pair<unsigned,\
+    \ unsigned> MODs;\n    DoubleHash(pair<unsigned, unsigned> x) : pair(x) {}\n \
+    \   DoubleHash(unsigned x, unsigned y) : pair(x, y) {}\n    DoubleHash(unsigned\
     \ x) : DoubleHash(x, x) {}\n    DoubleHash() : DoubleHash(0) {}\n    static inline\
-    \ DoubleHash mod_subtract(plint x) {\n        if (x.first >= MODs.first) x.first\
-    \ -= MODs.first;\n        if (x.second >= MODs.second) x.second -= MODs.second;\n\
-    \        return x;\n    }\n    DoubleHash operator+(const DoubleHash &x) const\
-    \ { return mod_subtract(plint(this->first + x.first, this->second + x.second));\
-    \ }\n    DoubleHash operator+(lint x) const { return mod_subtract(plint(this->first\
-    \ + x, this->second + x)); }\n    DoubleHash operator-(const DoubleHash &x) const\
-    \ { return mod_subtract(plint(this->first - x.first + MODs.first, this->second\
-    \ - x.second + MODs.second)); }\n    DoubleHash operator*(const DoubleHash &x)\
-    \ const { return make_pair(this->first * x.first % MODs.first, this->second *\
-    \ x.second % MODs.second); }\n    DoubleHash operator*(lint x) const { return\
-    \ make_pair(this->first * x % MODs.first, this->second * x % MODs.second); }\n\
-    };\nplint DoubleHash::MODs = plint(1000000007, 998244353);\n#line 2 \"random/xorshift.hpp\"\
-    \n#include <cstdint>\n\n// CUT begin\nuint32_t rand_int() // XorShift random integer\
-    \ generator\n{\n    static uint32_t x = 123456789, y = 362436069, z = 521288629,\
-    \ w = 88675123;\n    uint32_t t = x ^ (x << 11);\n    x = y;\n    y = z;\n   \
-    \ z = w;\n    return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n}\ndouble rand_double()\
-    \ { return (double)rand_int() / UINT32_MAX; }\n#line 6 \"random/test/rolling_hash_w_modint.test.cpp\"\
-    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
-    \nusing namespace std;\n\nusing mint = ModInt<998244353>;\nint main() {\n    mint\
-    \ b1(rand_int() % 1000000 + 1), b2(rand_int() % 1000000 + 1);\n\n    string T,\
-    \ P;\n    cin >> T >> P;\n    rolling_hash<mint> rh_T1(T, b1), rh_P1(P, b1);\n\
-    \    rolling_hash<mint> rh_T2(T, b2), rh_P2(P, b2);\n\n    for (int l = 0; l <\
-    \ (int)(T.length() - P.length() + 1); l++) {\n        if (rh_T1.get_hash(l, l\
-    \ + P.length()) == rh_P1.get_hash(0, P.length()) and rh_T2.get_hash(l, l + P.length())\
-    \ == rh_P2.get_hash(0, P.length())) { cout << l << endl; }\n    }\n}\n"
-  code: "#include \"modint.hpp\"\n#include \"random/rolling_hash_1d_general.hpp\"\n\
-    #include \"random/xorshift.hpp\"\n#include <iostream>\n#include <string>\n#define\
+    \ DoubleHash mod_subtract(pair<unsigned, unsigned> x) {\n        if (x.first >=\
+    \ MODs.first) x.first -= MODs.first;\n        if (x.second >= MODs.second) x.second\
+    \ -= MODs.second;\n        return x;\n    }\n    DoubleHash operator+(const DoubleHash\
+    \ &x) const { return mod_subtract({this->first + x.first, this->second + x.second});\
+    \ }\n    DoubleHash operator+(unsigned x) const { return mod_subtract({this->first\
+    \ + x, this->second + x}); }\n    DoubleHash operator-(const DoubleHash &x) const\
+    \ { return mod_subtract({this->first + MODs.first - x.first, this->second + MODs.second\
+    \ - x.second}); }\n    DoubleHash operator*(const DoubleHash &x) const { return\
+    \ {unsigned(ull(this->first) * x.first % MODs.first), unsigned(ull(this->second)\
+    \ * x.second % MODs.second)}; }\n    DoubleHash operator*(unsigned x) const {\
+    \ return {unsigned(ull(this->first) * x % MODs.first), unsigned(ull(this->second)\
+    \ * x % MODs.second)}; }\n    static DoubleHash gen_b(bool force_update = false)\
+    \ {\n        static DoubleHash b{0, 0};\n        if (b == DoubleHash{0, 0} or\
+    \ force_update) {\n            mt19937 mt(chrono::steady_clock::now().time_since_epoch().count());\n\
+    \            uniform_int_distribution<unsigned> d(1 << 16, 1 << 29);\n       \
+    \     b = {d(mt), d(mt)};\n        }\n        return b;\n    }\n};\npair<unsigned,\
+    \ unsigned> DoubleHash::MODs{1000000007, 998244353};\n\n// Rolling Hash (Rabin-Karp),\
+    \ 1dim\ntemplate <typename V = DoubleHash> struct rolling_hash {\n    int N;\n\
+    \    V B;\n    vector<V> hash;  // hash[i] = s[0] * B^(i - 1) + ... + s[i - 1]\n\
+    \    vector<V> power; // power[i] = B^i\n    rolling_hash(const string &s = \"\
+    \", V b = V::gen_b()) : B(b) {\n        N = s.length();\n        hash.resize(N\
+    \ + 1), power.resize(N + 1, 1);\n        for (int i = 0; i < N; i++) {\n     \
+    \       power[i + 1] = power[i] * B;\n            hash[i + 1] = hash[i] * B +\
+    \ s[i];\n        }\n    }\n    void addchar(const char &c) {\n        V hnew =\
+    \ hash[N] * B + c, pnew = power[N] * B;\n        N++, hash.emplace_back(hnew),\
+    \ power.emplace_back(pnew);\n    }\n    V get(int l, int r) const { // s[l] *\
+    \ B^(r - l - 1) + ... + s[r - 1]\n        return hash[r] - hash[l] * power[r -\
+    \ l];\n    }\n};\n#line 5 \"string/test/rolling_hash_w_modint.test.cpp\"\n#define\
     \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
     \nusing namespace std;\n\nusing mint = ModInt<998244353>;\nint main() {\n    mint\
-    \ b1(rand_int() % 1000000 + 1), b2(rand_int() % 1000000 + 1);\n\n    string T,\
-    \ P;\n    cin >> T >> P;\n    rolling_hash<mint> rh_T1(T, b1), rh_P1(P, b1);\n\
-    \    rolling_hash<mint> rh_T2(T, b2), rh_P2(P, b2);\n\n    for (int l = 0; l <\
-    \ (int)(T.length() - P.length() + 1); l++) {\n        if (rh_T1.get_hash(l, l\
-    \ + P.length()) == rh_P1.get_hash(0, P.length()) and rh_T2.get_hash(l, l + P.length())\
-    \ == rh_P2.get_hash(0, P.length())) { cout << l << endl; }\n    }\n}\n"
+    \ b1 = 51152368, b2 = 1537689;\n\n    string T, P;\n    cin >> T >> P;\n    rolling_hash<mint>\
+    \ rh_T1(T, b1), rh_P1(P, b1);\n    rolling_hash<mint> rh_T2(T, b2), rh_P2(P, b2);\n\
+    \n    for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {\n       \
+    \ if (rh_T1.get(l, l + P.length()) == rh_P1.get(0, P.length()) and rh_T2.get(l,\
+    \ l + P.length()) == rh_P2.get(0, P.length())) cout << l << '\\n';\n    }\n}\n"
+  code: "#include \"../../modint.hpp\"\n#include \"../rolling_hash_1d.hpp\"\n#include\
+    \ <iostream>\n#include <string>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
+    \nusing namespace std;\n\nusing mint = ModInt<998244353>;\nint main() {\n    mint\
+    \ b1 = 51152368, b2 = 1537689;\n\n    string T, P;\n    cin >> T >> P;\n    rolling_hash<mint>\
+    \ rh_T1(T, b1), rh_P1(P, b1);\n    rolling_hash<mint> rh_T2(T, b2), rh_P2(P, b2);\n\
+    \n    for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {\n       \
+    \ if (rh_T1.get(l, l + P.length()) == rh_P1.get(0, P.length()) and rh_T2.get(l,\
+    \ l + P.length()) == rh_P2.get(0, P.length())) cout << l << '\\n';\n    }\n}\n"
   dependsOn:
   - modint.hpp
-  - random/rolling_hash_1d_general.hpp
-  - random/xorshift.hpp
+  - string/rolling_hash_1d.hpp
   isVerificationFile: true
-  path: random/test/rolling_hash_w_modint.test.cpp
+  path: string/test/rolling_hash_w_modint.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2020-12-31 05:31:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: random/test/rolling_hash_w_modint.test.cpp
+documentation_of: string/test/rolling_hash_w_modint.test.cpp
 layout: document
 redirect_from:
-- /verify/random/test/rolling_hash_w_modint.test.cpp
-- /verify/random/test/rolling_hash_w_modint.test.cpp.html
-title: random/test/rolling_hash_w_modint.test.cpp
+- /verify/string/test/rolling_hash_w_modint.test.cpp
+- /verify/string/test/rolling_hash_w_modint.test.cpp.html
+title: string/test/rolling_hash_w_modint.test.cpp
 ---
