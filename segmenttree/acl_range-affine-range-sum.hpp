@@ -3,6 +3,7 @@
 #include "acl_lazysegtree.hpp"
 #include <utility>
 
+// CUT begin
 namespace rangeaffinerangesum {
 using T = ModInt<998244353>;
 using S = std::pair<T, size_t>;

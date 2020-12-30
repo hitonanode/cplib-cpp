@@ -1,6 +1,3 @@
-// Reference: <https://atcoder.github.io/ac-library/document_ja/lazysegtree.html>
-//            <https://betrue12.hateblo.jp/entry/2020/09/22/194541>
-//            <https://betrue12.hateblo.jp/entry/2020/09/23/005940>
 #ifndef ATCODER_INTERNAL_BITOP_HPP
 #define ATCODER_INTERNAL_BITOP_HPP 1
 
@@ -215,3 +212,23 @@ private:
 };
 } // namespace atcoder
 #endif // ATCODER_LAZYSEGTREE_HPP
+
+// Reference: <https://atcoder.github.io/ac-library/document_ja/lazysegtree.html>
+//            <https://betrue12.hateblo.jp/entry/2020/09/22/194541>
+//            <https://betrue12.hateblo.jp/entry/2020/09/23/005940>
+/*
+struct S {};
+S op(S l, S r) {
+    return {};
+}
+S e() { return {}; };
+using F = bool;
+S mp(F f, S x) {
+    return x;
+}
+F composition(F f, F g) { return f ^ g; }
+F id() { return false; }
+
+vector<S> A;
+atcoder::lazy_segtree<S, op, e, F, mp, composition, id> seg(A);
+*/
