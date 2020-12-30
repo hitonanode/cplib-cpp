@@ -4,8 +4,12 @@
 
 // CUT begin
 // Z algorithm (length of longest common prefix for s[0:N] & s[i:N] for each i)
+// Input: std::vector<T> / std::string of length N
+// Output: std::vector<int> of size N
 // Complexity: O(N)
-// <http://snuke.hatenablog.com/entry/2014/12/03/214243>
+// Sample:
+// - `teletelepathy` -> [13, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0]
+// Reference: <http://snuke.hatenablog.com/entry/2014/12/03/214243>
 template <typename T> std::vector<int> z_algorithm(const std::vector<T> &s) {
     const int N = s.size();
     if (N == 0) return {};
