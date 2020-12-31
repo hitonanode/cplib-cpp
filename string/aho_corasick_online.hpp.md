@@ -8,14 +8,15 @@ data:
     path: string/aho_corasick.hpp
     title: string/aho_corasick.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _pathExtension: cpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: string/test/aho_corasick_online.test.cpp
+    title: string/test/aho_corasick_online.test.cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D
+    - https://codeforces.com/blog/entry/10725?#comment-160742>
   bundledCode: "#line 2 \"other_data_structures/light_forward_list.hpp\"\n#include\
     \ <vector>\n\n// CUT begin\n// Simple forward_list for MLE-sensitive situations\n\
     // Verify: <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\n\
@@ -86,31 +87,58 @@ data:
     \ (*this)[d] : 0; }\n    void setch(int d, int i) { (*this)[d] = i; }\n};\n\n\
     int c2i0aA(char c) { return isdigit(c) ? c - '0' : islower(c) ? c - 'a' + 10 :\
     \ c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL, c2i0aA> trie(62);\ntrie.add(P);\n\
-    trie.build();\nvector<int> ret = trie.match();\n*/\n#line 2 \"string/test/aho_corasick_unorderedmap.test.cpp\"\
-    \n#include <iostream>\nusing namespace std;\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D\"\
-    \n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    AhoCorasick<TrieNodeUM,\
-    \ c2i0aA> trie(62);\n    string T, P;\n    int Q;\n    cin >> T >> Q;\n    while\
-    \ (Q--) cin >> P, trie.add(P);\n\n    for (auto n : trie.match(T)) cout << !!n\
-    \ << '\\n';\n}\n"
-  code: "#include \"../aho_corasick.hpp\"\n#include <iostream>\nusing namespace std;\n\
-    #define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D\"\
-    \n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    AhoCorasick<TrieNodeUM,\
-    \ c2i0aA> trie(62);\n    string T, P;\n    int Q;\n    cin >> T >> Q;\n    while\
-    \ (Q--) cin >> P, trie.add(P);\n\n    for (auto n : trie.match(T)) cout << !!n\
-    \ << '\\n';\n}\n"
+    trie.build();\nvector<int> ret = trie.match();\n*/\n#line 5 \"string/aho_corasick_online.hpp\"\
+    \n\n// CUT begin\n// Aho-Corasick, Online keyword addition\n// Implementation\
+    \ idea: <https://codeforces.com/blog/entry/10725?#comment-160742>\nstruct OnlineAhoCorasick\
+    \ {\n    int n_keywords;\n    int D = 62;\n    using AC = AhoCorasick<TrieNodeFL,\
+    \ c2i0aA>;\n    std::vector<std::string> keywords;\n    std::vector<std::vector<int>>\
+    \ kwd_ids;\n    std::vector<AC> automata;\n    OnlineAhoCorasick() : n_keywords(0),\
+    \ kwd_ids(30), automata(30, D) {}\n\n    // O(lg(n_keywords) |keyword|) amortized\n\
+    \    void add(const std::string &keyword) {\n        int pos = __builtin_clz(~n_keywords);\n\
+    \        keywords.push_back(keyword), kwd_ids[pos].push_back(n_keywords);\n  \
+    \      automata[pos].add(keyword);\n        n_keywords++;\n        for (int p\
+    \ = 0; p < pos; p++) {\n            for (auto i : kwd_ids[p]) automata[pos].add(keywords[i]);\n\
+    \            kwd_ids[pos].insert(kwd_ids[pos].end(), kwd_ids[p].begin(), kwd_ids[p].end());\n\
+    \            kwd_ids[p].clear(), automata[p] = AC(D);\n        }\n    }\n\n  \
+    \  // O(lg(n_keywords) |str| + \\sum_i |keyword_i|)\n    std::vector<int> match(const\
+    \ std::string &str) {\n        std::vector<int> ret(keywords.size());\n      \
+    \  for (unsigned p = 0; p < kwd_ids.size(); p++) {\n            std::vector<int>\
+    \ subret = automata[p].match(str);\n            for (unsigned i = 0; i < kwd_ids[p].size();\
+    \ i++) ret[kwd_ids[p][i]] = subret[i];\n        }\n        return ret;\n    }\n\
+    };\n"
+  code: "#pragma once\n#include \"aho_corasick.hpp\"\n#include <string>\n#include\
+    \ <vector>\n\n// CUT begin\n// Aho-Corasick, Online keyword addition\n// Implementation\
+    \ idea: <https://codeforces.com/blog/entry/10725?#comment-160742>\nstruct OnlineAhoCorasick\
+    \ {\n    int n_keywords;\n    int D = 62;\n    using AC = AhoCorasick<TrieNodeFL,\
+    \ c2i0aA>;\n    std::vector<std::string> keywords;\n    std::vector<std::vector<int>>\
+    \ kwd_ids;\n    std::vector<AC> automata;\n    OnlineAhoCorasick() : n_keywords(0),\
+    \ kwd_ids(30), automata(30, D) {}\n\n    // O(lg(n_keywords) |keyword|) amortized\n\
+    \    void add(const std::string &keyword) {\n        int pos = __builtin_clz(~n_keywords);\n\
+    \        keywords.push_back(keyword), kwd_ids[pos].push_back(n_keywords);\n  \
+    \      automata[pos].add(keyword);\n        n_keywords++;\n        for (int p\
+    \ = 0; p < pos; p++) {\n            for (auto i : kwd_ids[p]) automata[pos].add(keywords[i]);\n\
+    \            kwd_ids[pos].insert(kwd_ids[pos].end(), kwd_ids[p].begin(), kwd_ids[p].end());\n\
+    \            kwd_ids[p].clear(), automata[p] = AC(D);\n        }\n    }\n\n  \
+    \  // O(lg(n_keywords) |str| + \\sum_i |keyword_i|)\n    std::vector<int> match(const\
+    \ std::string &str) {\n        std::vector<int> ret(keywords.size());\n      \
+    \  for (unsigned p = 0; p < kwd_ids.size(); p++) {\n            std::vector<int>\
+    \ subret = automata[p].match(str);\n            for (unsigned i = 0; i < kwd_ids[p].size();\
+    \ i++) ret[kwd_ids[p][i]] = subret[i];\n        }\n        return ret;\n    }\n\
+    };\n"
   dependsOn:
   - string/aho_corasick.hpp
   - other_data_structures/light_forward_list.hpp
-  isVerificationFile: true
-  path: string/test/aho_corasick_unorderedmap.test.cpp
+  isVerificationFile: false
+  path: string/aho_corasick_online.hpp
   requiredBy: []
   timestamp: '2021-01-01 03:55:13+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: string/test/aho_corasick_unorderedmap.test.cpp
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - string/test/aho_corasick_online.test.cpp
+documentation_of: string/aho_corasick_online.hpp
 layout: document
 redirect_from:
-- /verify/string/test/aho_corasick_unorderedmap.test.cpp
-- /verify/string/test/aho_corasick_unorderedmap.test.cpp.html
-title: string/test/aho_corasick_unorderedmap.test.cpp
+- /library/string/aho_corasick_online.hpp
+- /library/string/aho_corasick_online.hpp.html
+title: string/aho_corasick_online.hpp
 ---

@@ -35,7 +35,8 @@ data:
     \ O(|keyword_i|)\n// - build_aho_corasick(): O(\\sum_i |keyword_i|)\n// - match()\
     \ : O(\\sum_i |keyword_i| + |str|)\ntemplate <class T, int (*char2int)(char)>\
     \ struct AhoCorasick {\n    bool built;\n    const int D;\n    std::vector<T>\
-    \ node;\n    AhoCorasick(int D_) : built(false), D(D_), node(1, D) {}\n\n    void\
+    \ node;\n    AhoCorasick(int D_) : built(false), D(D_), node(1, D) {}\n    AhoCorasick\
+    \ operator=(const AhoCorasick &rhs) { return AhoCorasick(rhs.D); }\n\n    void\
     \ enter_child(int n, int nn, int c) { node[n].setch(c, nn); }\n\n    std::vector<int>\
     \ endpos;\n    int add(const std::string &keyword) { // Enter_in_tree() in [1]\n\
     \        built = false;\n        int n = 0;\n        for (const auto &cc : keyword)\
@@ -103,7 +104,7 @@ data:
   isVerificationFile: true
   path: string/test/aho_corasick_forwardlist.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 02:26:22+09:00'
+  timestamp: '2021-01-01 03:55:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/aho_corasick_forwardlist.test.cpp
