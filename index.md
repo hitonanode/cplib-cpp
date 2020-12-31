@@ -346,6 +346,9 @@ data:
       path: string/aho_corasick.hpp
       title: string/aho_corasick.hpp
     - icon: ':heavy_check_mark:'
+      path: string/incremental_matching.hpp
+      title: string/incremental_matching.hpp
+    - icon: ':heavy_check_mark:'
       path: string/manacher.hpp
       title: string/manacher.hpp
     - icon: ':heavy_check_mark:'
@@ -747,6 +750,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/aho_corasick_vector.test.cpp
       title: string/test/aho_corasick_vector.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/incremental_matching.test.cpp
+      title: string/test/incremental_matching.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/lcp.test.cpp
       title: string/test/lcp.test.cpp
