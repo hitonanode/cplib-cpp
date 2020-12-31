@@ -248,6 +248,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_data_structures/fibonacci_heap.hpp
       title: other_data_structures/fibonacci_heap.hpp
+    - icon: ':heavy_check_mark:'
+      path: other_data_structures/light_forward_list.hpp
+      title: other_data_structures/light_forward_list.hpp
     - icon: ':warning:'
       path: other_data_structures/link_cut_tree.cpp
       title: other_data_structures/link_cut_tree.cpp
@@ -339,7 +342,7 @@ data:
       title: sparse_table/sparse_table_2d.hpp
   - name: string
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: string/aho_corasick.hpp
       title: string/aho_corasick.hpp
     - icon: ':heavy_check_mark:'
@@ -735,7 +738,7 @@ data:
       title: sparse_table/test/sparse_table_aoj.test.cpp
   - name: string/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/aho_corasick_forwardlist.test.cpp
       title: string/test/aho_corasick_forwardlist.test.cpp
     - icon: ':heavy_check_mark:'
