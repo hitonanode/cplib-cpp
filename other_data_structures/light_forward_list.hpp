@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 
+// CUT begin
 // Simple forward_list for MLE-sensitive situations
 // Verify: <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>
 template <typename T> struct light_forward_list {
