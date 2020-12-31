@@ -360,11 +360,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/z_algorithm.hpp
       title: string/z_algorithm.hpp
-  - name: string/test
-    pages:
-    - icon: ':warning:'
-      path: string/test/aho_corasick.deprecated.cpp
-      title: string/test/aho_corasick.deprecated.cpp
   - name: syntactic_analysis
     pages:
     - icon: ':warning:'
@@ -740,6 +735,9 @@ data:
       title: sparse_table/test/sparse_table_aoj.test.cpp
   - name: string/test
     pages:
+    - icon: ':x:'
+      path: string/test/aho_corasick_forwardlist.test.cpp
+      title: string/test/aho_corasick_forwardlist.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/lcp.test.cpp
       title: string/test/lcp.test.cpp
