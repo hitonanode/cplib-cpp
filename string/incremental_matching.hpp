@@ -1,38 +1,36 @@
 #pragma once
 #include "../other_data_structures/light_forward_list.hpp"
-#include <cassert>
 #include <iostream>
+#include <list>
 #include <string>
-#include <unordered_set>
 #include <vector>
 
 // CUT begin
 // [1] B. Meyer, "Incremental String Matching," Information Processing Letters, 21(5), 1985.
 //
 // (Dynamic version of Aho-Corasick algorithm)
-// Complexity:
-// - add(): O(|keyword_i|)
-// - match() : O(\sum_i |keyword_i| + |str|)
+// Overall complexity: O(K * (\sum_i |keyword_i|) * (\max_i |keyword_i|))
 template <class T, int (*char2int)(char)> struct IncrementalMatching {
+    bool built;
     const int D;
     std::vector<T> node;
-    IncrementalMatching(int D_) : D(D_), node(1, D) {}
+    IncrementalMatching(int D_) : built(false), D(D_), node(1, D) {}
 
     void enter_child(int n, int nn, int c) {
         complete_failure(n, nn, c);
         node[n].setch(c, nn);
         int fnn = node[nn].fail;
-        node[fnn].inv_fail.insert(nn);
+        node[fnn].inv_fail.push_back(nn);
         complete_inverse(n, nn, c);
     }
 
     void complete_inverse(const int y, const int nn, const int c) {
-        for (auto x : node[y].inv_fail) {
-            const int xx = node[x].Goto(c);
+        for (auto it = node[y].inv_fail.begin();; it++) {
+            while (it != node[y].inv_fail.end() and node[*it].fail != y) it = node[y].inv_fail.erase(it);
+            if (it == node[y].inv_fail.end()) return;
+            const int x = *it, xx = node[x].Goto(c);
             if (xx) {
-                const int fxx = node[xx].fail;
-                node[fxx].inv_fail.erase(xx);
-                node[xx].fail = nn, node[nn].inv_fail.insert(xx);
+                node[xx].fail = nn, node[nn].inv_fail.push_back(xx);
             } else {
                 complete_inverse(x, nn, c);
             }
@@ -41,7 +39,7 @@ template <class T, int (*char2int)(char)> struct IncrementalMatching {
 
     std::vector<int> endpos;
     int add(const std::string &keyword) { // Enter_in_tree() in [1]
-        assert(keyword.length() > 0);
+        built = false;
         int n = 0;
         for (const auto &cc : keyword) {
             int c = char2int(cc), nn = node[n].Goto(c);
@@ -61,17 +59,12 @@ template <class T, int (*char2int)(char)> struct IncrementalMatching {
     }
 
     std::vector<int> visorder; // BFS order of node ids
-    void build_bfs() {         // Build_failure() in [1]
-        visorder.clear();
-        for (int c = 0; c < D; c++) {
-            int u = node[0].Goto(c);
-            if (u) visorder.push_back(u);
-        }
+    void build() {             // Build_failure() in [1]
+        built = true;
+        visorder = {0};
         for (size_t p = 0; p < visorder.size(); p++) {
-            int n = visorder[p];
-            for (int c = 0; c < D; c++) {
-                const int nn = node[n].Goto(c);
-                if (nn) visorder.push_back(nn);
+            for (auto p : node[visorder[p]]) {
+                if (p.second) visorder.push_back(p.second);
             }
         }
     }
@@ -83,6 +76,7 @@ template <class T, int (*char2int)(char)> struct IncrementalMatching {
 
     // Count occurences of each added keyword in `str`
     std::vector<int> match(const std::string &str) {
+        if (!built) build();
         std::vector<int> freq(node.size());
         int now = 0;
         for (const auto &c : str) freq[now = step(now, char2int(c))]++;
@@ -97,7 +91,7 @@ template <class T, int (*char2int)(char)> struct IncrementalMatching {
 struct TrieNodeFL {
     static const int B = 8, mask = (1 << B) - 1;
     light_forward_list<unsigned> chlist; // 下位 B bits が文字種，上位 bit が行き先
-    std::unordered_set<int> inv_fail;
+    std::list<int> inv_fail;
     int fail;
     TrieNodeFL(int = 0) : fail(0) {}
     int Goto(int c) {
