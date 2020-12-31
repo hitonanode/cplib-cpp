@@ -18,6 +18,7 @@ template <class T, int (*char2int)(char)> struct AhoCorasick {
     const int D;
     std::vector<T> node;
     AhoCorasick(int D_) : built(false), D(D_), node(1, D) {}
+    AhoCorasick operator=(const AhoCorasick &rhs) { return AhoCorasick(rhs.D); }
 
     void enter_child(int n, int nn, int c) { node[n].setch(c, nn); }
 
