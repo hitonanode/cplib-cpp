@@ -11,6 +11,5 @@ int main() {
     cin >> T >> Q;
     while (Q--) cin >> P, trie.add(P);
 
-    trie.build_aho_corasick();
     for (auto n : trie.match(T)) cout << !!n << '\n';
 }
