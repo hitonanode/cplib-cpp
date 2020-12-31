@@ -742,6 +742,12 @@ data:
       path: string/test/aho_corasick_forwardlist.test.cpp
       title: string/test/aho_corasick_forwardlist.test.cpp
     - icon: ':heavy_check_mark:'
+      path: string/test/aho_corasick_unorderedmap.test.cpp
+      title: string/test/aho_corasick_unorderedmap.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/aho_corasick_vector.test.cpp
+      title: string/test/aho_corasick_vector.test.cpp
+    - icon: ':heavy_check_mark:'
       path: string/test/lcp.test.cpp
       title: string/test/lcp.test.cpp
     - icon: ':heavy_check_mark:'

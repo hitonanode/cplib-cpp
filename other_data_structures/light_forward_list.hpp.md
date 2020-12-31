@@ -9,6 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/aho_corasick_forwardlist.test.cpp
     title: string/test/aho_corasick_forwardlist.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: string/test/aho_corasick_unorderedmap.test.cpp
+    title: string/test/aho_corasick_unorderedmap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: string/test/aho_corasick_vector.test.cpp
+    title: string/test/aho_corasick_vector.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -45,7 +51,9 @@ data:
   timestamp: '2020-12-31 18:21:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - string/test/aho_corasick_vector.test.cpp
   - string/test/aho_corasick_forwardlist.test.cpp
+  - string/test/aho_corasick_unorderedmap.test.cpp
 documentation_of: other_data_structures/light_forward_list.hpp
 layout: document
 redirect_from:
