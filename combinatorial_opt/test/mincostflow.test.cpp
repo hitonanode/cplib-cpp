@@ -16,8 +16,8 @@ int main() {
         mcf_bf.add_edge(u, v, c, d);
     }
 
-    auto [cap_ac, cost_ac] = mcf_ac.flow(0, V - 1, F);
-    auto [cap_bf, cost_bf] = mcf_bf.flow(0, V - 1, F);
-    assert(cap_ac == cap_bf and cost_ac == cost_bf);
-    std::cout << (cap_ac == F ? cost_ac : -1) << '\n';
+    auto capcost_ac = mcf_ac.flow(0, V - 1, F);
+    auto capcost_bf = mcf_bf.flow(0, V - 1, F);
+    assert(capcost_ac == capcost_bf);
+    std::cout << (capcost_ac.first == F ? capcost_ac.second : -1) << '\n';
 }

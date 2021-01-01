@@ -1,17 +1,22 @@
-#include "linear_algebra_matrix/linear_recurrence.hpp"
-#include "modint.hpp"
+#include "../../modint.hpp"
+#include "../linear_recurrence.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
 #include <iostream>
+using namespace std;
 
 using mint = ModInt<998244353>;
 int main() {
-    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);
+    cin.tie(nullptr), ios::sync_with_stdio(false);
     int N;
-    std::cin >> N;
-    std::vector<mint> A(N);
-    for (auto &a : A) { std::cin >> a; }
-    auto [L, poly] = linear_recurrence(A);
-    std::cout << L << '\n';
-    for (int i = 1; i <= L; i++) std::cout << -poly[i] << ' ';
-    std::cout << '\n';
+    cin >> N;
+    vector<mint> A(N);
+    for (auto &a : A) cin >> a;
+
+    auto L_poly = linear_recurrence(A);
+    auto L = L_poly.first;
+    auto poly = L_poly.second;
+
+    cout << L << '\n';
+    for (int i = 1; i <= L; i++) cout << -poly[i] << ' ';
+    cout << '\n';
 }

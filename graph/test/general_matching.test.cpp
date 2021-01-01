@@ -19,5 +19,5 @@ int main() {
     }
     vector<pair<int, int>> ret = generalMatching(N, edges);
     cout << ret.size() << '\n';
-    for (auto [a, b] : ret) { cout << a << ' ' << b << '\n'; }
+    for (auto p : ret) cout << p.first << ' ' << p.second << '\n';
 }

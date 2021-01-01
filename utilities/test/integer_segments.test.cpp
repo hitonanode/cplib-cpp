@@ -1,8 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/674"
-#include "utilities/integer_segments.hpp"
+#include "../integer_segments.hpp"
 
 #include <iostream>
-#include <set>
 using namespace std;
 
 int main() {
@@ -16,8 +15,8 @@ int main() {
     while (Q--) {
         long long a, b;
         cin >> a >> b;
-        auto [l, r] = seg.insert(a, b);
-        ret = max(ret, r - l + 1);
+        auto lr = seg.insert(a, b);
+        ret = max(ret, lr.second - lr.first + 1);
         cout << ret << '\n';
     }
 }

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
 
-#include "other_data_structures/fibonacci_heap.hpp"
+#include "../fibonacci_heap.hpp"
 #include <iostream>
 #include <stack>
 #include <utility>
@@ -32,7 +32,8 @@ int main() {
         int now = heap.top().second;
         if (now == t) break;
         heap.pop();
-        for (const auto [nxt, len] : to[now]) {
+        for (const auto &nxtlen : to[now]) {
+            const auto nxt = nxtlen.first, len = nxtlen.second;
             if (D[nxt] > D[now] + len) {
                 D[nxt] = D[now] + len, prev[nxt] = now;
                 heap.decrease(handler[nxt], std::make_pair(D[nxt], nxt));
