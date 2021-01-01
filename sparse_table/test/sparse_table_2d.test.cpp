@@ -1,4 +1,4 @@
-#include "sparse_table/sparse_table_2d.hpp"
+#include "../sparse_table_2d.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068"
 // Very slow (worst case: 6sec, memory 3GB)
 

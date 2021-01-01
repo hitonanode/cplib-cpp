@@ -1,4 +1,4 @@
-#include "segmenttree/segment_tree_2d.hpp"
+#include "../segment_tree_2d.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068"
 
 #include <iostream>

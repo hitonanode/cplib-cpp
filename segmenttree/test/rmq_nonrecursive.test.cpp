@@ -1,4 +1,4 @@
-#include "segmenttree/point-update-range-get_nonrecursive.hpp"
+#include "../point-update-range-get_nonrecursive.hpp"
 #include <iostream>
 using namespace std;
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"

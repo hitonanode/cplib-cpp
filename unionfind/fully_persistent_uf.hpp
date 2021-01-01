@@ -1,7 +1,8 @@
 #pragma once
-#include "other_data_structures/persistent_array.hpp"
+#include "../other_data_structures/persistent_array.hpp"
 #include <vector>
 
+// CUT begin
 // Fully persistent UnionFind
 // - find(t, x) : find the root of DSU tree x belongs to, when unite() is called t times.
 // Complexity: O(logN) for each query

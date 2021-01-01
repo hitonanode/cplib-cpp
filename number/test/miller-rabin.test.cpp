@@ -1,4 +1,4 @@
-#include "number/factorize.hpp"
+#include "../factorize.hpp"
 #define PROBLEM "https://yukicoder.me/problems/1967"
 #include <iostream>
 

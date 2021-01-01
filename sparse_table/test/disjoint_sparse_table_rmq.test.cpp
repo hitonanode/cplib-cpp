@@ -1,4 +1,4 @@
-#include "sparse_table/disjoint_sparse_table.hpp"
+#include "../disjoint_sparse_table.hpp"
 #include <cassert>
 #include <cstdio>
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"

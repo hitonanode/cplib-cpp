@@ -1,4 +1,4 @@
-#include "segmenttree/binary_indexed_tree.hpp"
+#include "../binary_indexed_tree.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
 #include <iostream>
 using namespace std;

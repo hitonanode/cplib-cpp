@@ -1,4 +1,4 @@
-#include "string/z_algorithm.hpp"
+#include "../z_algorithm.hpp"
 #include <cstdio>
 #include <iostream>
 #include <string>
@@ -7,5 +7,5 @@
 int main() {
     std::string S;
     std::cin >> S;
-    for (auto x : z_algorithm(S)) { printf("%d ", x); }
+    for (auto x : z_algorithm(S)) printf("%d ", x);
 }

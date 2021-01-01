@@ -1,4 +1,4 @@
-#include "segmenttree/point-update-range-get_nonrecursive.hpp"
+#include "../point-update-range-get_nonrecursive.hpp"
 #define PROBLEM "https://yukicoder.me/problems/no/877"
 #include <iostream>
 using namespace std;

@@ -1,4 +1,4 @@
-#include "unionfind/unionfind.hpp"
+#include "../unionfind.hpp"
 #include <iostream>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp"
 using namespace std;

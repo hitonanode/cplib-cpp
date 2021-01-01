@@ -1,5 +1,5 @@
-#include "string/manacher.hpp"
-#include "string/mp_algorithm.hpp"
+#include "../manacher.hpp"
+#include "../mp_algorithm.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -17,12 +17,12 @@ int main() {
     int rep = N - mp[N];
     for (int i = 2; i <= N; i++) {
         if (i + mana[i - 1] - 1 == N) {
-            cout << i << endl;
+            cout << i << '\n';
             return 0;
         }
         if (mana[i - 1] < i) continue;
         if ((2 * i - 2) % rep == 0) {
-            cout << i << endl;
+            cout << i << '\n';
             return 0;
         }
     }

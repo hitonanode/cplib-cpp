@@ -1,4 +1,4 @@
-#include "other_data_structures/binary_trie.hpp"
+#include "../binary_trie.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/set_xor_min"
 
 #include <iostream>

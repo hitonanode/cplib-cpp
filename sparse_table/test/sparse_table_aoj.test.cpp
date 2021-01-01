@@ -1,5 +1,5 @@
-#include "sparse_table/rmq_sparse_table.hpp"
-#include "sparse_table/sparse_table.hpp"
+#include "../rmq_sparse_table.hpp"
+#include "../sparse_table.hpp"
 #include <iostream>
 #include <vector>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"

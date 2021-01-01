@@ -1,4 +1,4 @@
-#include "segmenttree/binary_indexed_tree.hpp"
+#include "../binary_indexed_tree.hpp"
 #include <iostream>
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 

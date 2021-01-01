@@ -1,5 +1,5 @@
-#include "sparse_table/rmq_sparse_table.hpp"
-#include "sparse_table/sparse_table.hpp"
+#include "../rmq_sparse_table.hpp"
+#include "../sparse_table.hpp"
 #include <cassert>
 #include <cstdio>
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"

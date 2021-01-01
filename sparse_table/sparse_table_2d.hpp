@@ -1,5 +1,5 @@
 #pragma once
-#include "sparse_table/sparse_table.hpp"
+#include "sparse_table.hpp"
 #include <cassert>
 #include <vector>
 

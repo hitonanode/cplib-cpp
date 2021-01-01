@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sum_of_floor_of_linear"
-#include "utilities/floor_sum.hpp"
+#include "../floor_sum.hpp"
 #include <iostream>
 using namespace std;
 

@@ -1,5 +1,5 @@
+#include "../../modint.hpp"
 #include "../acl_range-affine-range-sum.hpp"
-#include "modint.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 using namespace std;
 

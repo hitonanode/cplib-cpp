@@ -1,4 +1,4 @@
-#include "unionfind/fully_persistent_uf.hpp"
+#include "../fully_persistent_uf.hpp"
 #include <iostream>
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_unionfind"
 using namespace std;

@@ -1,4 +1,4 @@
-#include "segmenttree/range_minimum_query.hpp"
+#include "../range_minimum_query.hpp"
 #include <iostream>
 using namespace std;
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"
