@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: string/suffix_array.hpp
-    title: string/suffix_array.hpp
+    path: string/suffix_array_doubling.hpp
+    title: string/suffix_array_doubling.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -13,14 +13,15 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/number_of_substrings
     links:
     - https://judge.yosupo.jp/problem/number_of_substrings
-  bundledCode: "#line 2 \"string/suffix_array.hpp\"\n#include <algorithm>\n#include\
-    \ <numeric>\n#include <vector>\n\n// CUT begin\n// Suffix Array / Longest Common\
-    \ Prefix Array Construction\n// Comlexity: O(N(log N)^2)\ntemplate <typename T>\
-    \ struct SuffixArray {\n    T S;                   // size: N\n    std::vector<int>\
-    \ SA;   // Suffix Array (size: N + 1, SA[0] == N) SA[i] means S[SA[i]:]\n    std::vector<int>\
-    \ rank; // Rank (inverse of SA) (size: N + 1, rank[N] == 0)\n    std::vector<int>\
-    \ lcp;  // Longest Common Prefix Array (size: N) betw. S[SA[i]:] & S[SA[i + 1]:]\n\
-    \n    SuffixArray(const T &str, bool gen_lcp = true) : S(str) {\n        int N\
+  bundledCode: "#line 2 \"string/suffix_array_doubling.hpp\"\n#include <algorithm>\n\
+    #include <numeric>\n#include <vector>\n\n// CUT begin\n// Suffix Array / Longest\
+    \ Common Prefix Array Construction\n// Comlexity: O(N(log N)^2)\ntemplate <typename\
+    \ T> struct [[deprecated(\"use ACL based suffix array\")]] SuffixArray {\n   \
+    \ T S;                   // size: N\n    std::vector<int> SA;   // Suffix Array\
+    \ (size: N + 1, SA[0] == N) SA[i] means S[SA[i]:]\n    std::vector<int> rank;\
+    \ // Rank (inverse of SA) (size: N + 1, rank[N] == 0)\n    std::vector<int> lcp;\
+    \  // Longest Common Prefix Array (size: N) betw. S[SA[i]:] & S[SA[i + 1]:]\n\n\
+    \    SuffixArray(const T &str, bool gen_lcp = true) : S(str) {\n        int N\
     \ = S.size();\n        SA.resize(N + 1);\n        std::iota(SA.begin(), SA.end(),\
     \ 0);\n        rank.assign(N + 1, -1);\n        for (int i = 0; i < N; i++) rank[i]\
     \ = S[i];\n        int _ord_mm = 1;\n\n        auto _comp_suffarr = [&](int i,\
@@ -38,20 +39,20 @@ data:
     \ S[i + h]) break;\n            lcp[rank[i] - 1] = h;\n        }\n    }\n};\n\
     #line 2 \"string/test/lcp.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\
     \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
-    \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, true);\n\n    int N =\
-    \ S.length();\n    long long int ret = 0;\n    for (int i = 0; i < N; i++) ret\
-    \ += N - sa.SA[i + 1] - sa.lcp[i];\n    std::cout << ret << std::endl;\n}\n"
-  code: "#include \"../suffix_array.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\
+    \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, true);\n\n    long long\
+    \ ret = (long long)S.length() * (S.length() + 1) / 2;\n    std::cout << ret -\
+    \ std::accumulate(sa.lcp.begin(), sa.lcp.end(), 0LL) << '\\n';\n}\n"
+  code: "#include \"../suffix_array_doubling.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\
     \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
-    \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, true);\n\n    int N =\
-    \ S.length();\n    long long int ret = 0;\n    for (int i = 0; i < N; i++) ret\
-    \ += N - sa.SA[i + 1] - sa.lcp[i];\n    std::cout << ret << std::endl;\n}\n"
+    \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, true);\n\n    long long\
+    \ ret = (long long)S.length() * (S.length() + 1) / 2;\n    std::cout << ret -\
+    \ std::accumulate(sa.lcp.begin(), sa.lcp.end(), 0LL) << '\\n';\n}\n"
   dependsOn:
-  - string/suffix_array.hpp
+  - string/suffix_array_doubling.hpp
   isVerificationFile: true
   path: string/test/lcp.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:52:32+09:00'
+  timestamp: '2021-01-02 00:51:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/lcp.test.cpp

@@ -363,6 +363,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/suffix_array.hpp
       title: string/suffix_array.hpp
+    - icon: ':heavy_check_mark:'
+      path: string/suffix_array_doubling.hpp
+      title: string/suffix_array_doubling.hpp
     - icon: ':warning:'
       path: string/trie_light.hpp
       title: string/trie_light.hpp
@@ -771,6 +774,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_w_modint.test.cpp
       title: string/test/rolling_hash_w_modint.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/sa_count_keyword.test.cpp
+      title: string/test/sa_count_keyword.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/suffix_array.test.cpp
       title: string/test/suffix_array.test.cpp

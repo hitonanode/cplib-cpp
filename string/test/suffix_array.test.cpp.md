@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: string/suffix_array.hpp
-    title: string/suffix_array.hpp
+    path: string/suffix_array_doubling.hpp
+    title: string/suffix_array_doubling.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -13,14 +13,15 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/suffixarray
     links:
     - https://judge.yosupo.jp/problem/suffixarray
-  bundledCode: "#line 2 \"string/suffix_array.hpp\"\n#include <algorithm>\n#include\
-    \ <numeric>\n#include <vector>\n\n// CUT begin\n// Suffix Array / Longest Common\
-    \ Prefix Array Construction\n// Comlexity: O(N(log N)^2)\ntemplate <typename T>\
-    \ struct SuffixArray {\n    T S;                   // size: N\n    std::vector<int>\
-    \ SA;   // Suffix Array (size: N + 1, SA[0] == N) SA[i] means S[SA[i]:]\n    std::vector<int>\
-    \ rank; // Rank (inverse of SA) (size: N + 1, rank[N] == 0)\n    std::vector<int>\
-    \ lcp;  // Longest Common Prefix Array (size: N) betw. S[SA[i]:] & S[SA[i + 1]:]\n\
-    \n    SuffixArray(const T &str, bool gen_lcp = true) : S(str) {\n        int N\
+  bundledCode: "#line 2 \"string/suffix_array_doubling.hpp\"\n#include <algorithm>\n\
+    #include <numeric>\n#include <vector>\n\n// CUT begin\n// Suffix Array / Longest\
+    \ Common Prefix Array Construction\n// Comlexity: O(N(log N)^2)\ntemplate <typename\
+    \ T> struct [[deprecated(\"use ACL based suffix array\")]] SuffixArray {\n   \
+    \ T S;                   // size: N\n    std::vector<int> SA;   // Suffix Array\
+    \ (size: N + 1, SA[0] == N) SA[i] means S[SA[i]:]\n    std::vector<int> rank;\
+    \ // Rank (inverse of SA) (size: N + 1, rank[N] == 0)\n    std::vector<int> lcp;\
+    \  // Longest Common Prefix Array (size: N) betw. S[SA[i]:] & S[SA[i + 1]:]\n\n\
+    \    SuffixArray(const T &str, bool gen_lcp = true) : S(str) {\n        int N\
     \ = S.size();\n        SA.resize(N + 1);\n        std::iota(SA.begin(), SA.end(),\
     \ 0);\n        rank.assign(N + 1, -1);\n        for (int i = 0; i < N; i++) rank[i]\
     \ = S[i];\n        int _ord_mm = 1;\n\n        auto _comp_suffarr = [&](int i,\
@@ -40,16 +41,16 @@ data:
     \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
     \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, false);\n\n    for (size_t\
     \ i = 1; i <= S.length(); i++) std::cout << sa.SA[i] << ' ';\n}\n"
-  code: "#include \"../suffix_array.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\
+  code: "#include \"../suffix_array_doubling.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\
     \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
     \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, false);\n\n    for (size_t\
     \ i = 1; i <= S.length(); i++) std::cout << sa.SA[i] << ' ';\n}\n"
   dependsOn:
-  - string/suffix_array.hpp
+  - string/suffix_array_doubling.hpp
   isVerificationFile: true
   path: string/test/suffix_array.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:52:32+09:00'
+  timestamp: '2021-01-02 00:51:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/suffix_array.test.cpp
