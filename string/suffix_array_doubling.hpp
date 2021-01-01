@@ -6,7 +6,7 @@
 // CUT begin
 // Suffix Array / Longest Common Prefix Array Construction
 // Comlexity: O(N(log N)^2)
-template <typename T> struct SuffixArray {
+template <typename T> struct [[deprecated("use ACL based suffix array")]] SuffixArray {
     T S;                   // size: N
     std::vector<int> SA;   // Suffix Array (size: N + 1, SA[0] == N) SA[i] means S[SA[i]:]
     std::vector<int> rank; // Rank (inverse of SA) (size: N + 1, rank[N] == 0)

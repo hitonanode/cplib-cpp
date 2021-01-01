@@ -1,4 +1,4 @@
-#include "../suffix_array.hpp"
+#include "../suffix_array_doubling.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 #include <iostream>
 #include <string>

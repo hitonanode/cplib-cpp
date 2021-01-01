@@ -1,4 +1,4 @@
-#include "../suffix_array.hpp"
+#include "../suffix_array_doubling.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
 #include <iostream>
 #include <string>
@@ -8,8 +8,6 @@ int main() {
     std::cin >> S;
     SuffixArray<decltype(S)> sa(S, true);
 
-    int N = S.length();
-    long long int ret = 0;
-    for (int i = 0; i < N; i++) ret += N - sa.SA[i + 1] - sa.lcp[i];
-    std::cout << ret << std::endl;
+    long long ret = (long long)S.length() * (S.length() + 1) / 2;
+    std::cout << ret - std::accumulate(sa.lcp.begin(), sa.lcp.end(), 0LL) << '\n';
 }
