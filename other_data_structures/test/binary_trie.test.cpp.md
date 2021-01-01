@@ -41,7 +41,7 @@ data:
     \   int q, x;\n        cin >> q >> x;\n        if (q == 0)\n            bt.insert(x);\n\
     \        else if (q == 1)\n            bt.erase(x);\n        else\n          \
     \  cout << bt.xor_min(x) << '\\n';\n    }\n}\n"
-  code: "#include \"other_data_structures/binary_trie.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/set_xor_min\"\
+  code: "#include \"../binary_trie.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/set_xor_min\"\
     \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    int Q;\n    cin >> Q;\n    BinaryTrie bt(30);\n\
     \    while (Q--) {\n        int q, x;\n        cin >> q >> x;\n        if (q ==\
@@ -52,7 +52,7 @@ data:
   isVerificationFile: true
   path: other_data_structures/test/binary_trie.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: other_data_structures/test/binary_trie.test.cpp

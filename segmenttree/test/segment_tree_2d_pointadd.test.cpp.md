@@ -86,21 +86,21 @@ data:
     \ int m = s2.get(h, h2, w, w2, -1);\n            int n = s1.get(h, h2, w, w2,\
     \ -1);\n            printf(\"%d %d\\n\", m, n);\n        }\n    }\n}\n"
   code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842\"\
-    \n#include \"segmenttree/segment_tree_2d.hpp\"\n\n#include <cstdio>\n#include\
-    \ <iostream>\n#include <queue>\n#include <tuple>\n#include <utility>\n#include\
-    \ <vector>\nusing namespace std;\n\nint main() {\n    int H, W, T, Q;\n    cin\
-    \ >> H >> W >> T >> Q;\n\n    // Point add, range sum (like binary-indexed-tree)\n\
-    \    vector<vector<int>> mat(H, vector<int>(W));\n    auto f = [](int l, int r)\
-    \ { return l + r; };\n    auto g = [](int x, int q) { return x; };\n    SegmentTree2D<int,\
-    \ int, int, decltype(f), decltype(g), decltype(f)> s1(mat, 0, f, g, f), s2(mat,\
-    \ 0, f, g, f);\n\n    queue<pair<int, pair<int, int>>> q;\n    while (Q--) {\n\
-    \        int t, c, h, w;\n        cin >> t >> c >> h >> w;\n        h--, w--;\n\
-    \        while (q.size() and q.front().first <= t) {\n            int x, y;\n\
-    \            tie(x, y) = q.front().second;\n            mat[x][y] = 2;\n     \
-    \       s1.update(x, y, 0);\n            s2.update(x, y, 1);\n            q.pop();\n\
-    \        }\n        if (c == 0) {\n            mat[h][w] = 1;\n            s1.update(h,\
-    \ w, 1);\n            q.emplace(t + T, make_pair(h, w));\n        }\n        if\
-    \ (c == 1) {\n            if (mat[h][w] == 2) {\n                mat[h][w] = 0;\n\
+    \n#include \"../segment_tree_2d.hpp\"\n\n#include <cstdio>\n#include <iostream>\n\
+    #include <queue>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
+    \ namespace std;\n\nint main() {\n    int H, W, T, Q;\n    cin >> H >> W >> T\
+    \ >> Q;\n\n    // Point add, range sum (like binary-indexed-tree)\n    vector<vector<int>>\
+    \ mat(H, vector<int>(W));\n    auto f = [](int l, int r) { return l + r; };\n\
+    \    auto g = [](int x, int q) { return x; };\n    SegmentTree2D<int, int, int,\
+    \ decltype(f), decltype(g), decltype(f)> s1(mat, 0, f, g, f), s2(mat, 0, f, g,\
+    \ f);\n\n    queue<pair<int, pair<int, int>>> q;\n    while (Q--) {\n        int\
+    \ t, c, h, w;\n        cin >> t >> c >> h >> w;\n        h--, w--;\n        while\
+    \ (q.size() and q.front().first <= t) {\n            int x, y;\n            tie(x,\
+    \ y) = q.front().second;\n            mat[x][y] = 2;\n            s1.update(x,\
+    \ y, 0);\n            s2.update(x, y, 1);\n            q.pop();\n        }\n \
+    \       if (c == 0) {\n            mat[h][w] = 1;\n            s1.update(h, w,\
+    \ 1);\n            q.emplace(t + T, make_pair(h, w));\n        }\n        if (c\
+    \ == 1) {\n            if (mat[h][w] == 2) {\n                mat[h][w] = 0;\n\
     \                s2.update(h, w, 0);\n            }\n        }\n        if (c\
     \ == 2) {\n            int h2, w2;\n            cin >> h2 >> w2;\n           \
     \ int m = s2.get(h, h2, w, w2, -1);\n            int n = s1.get(h, h2, w, w2,\
@@ -110,7 +110,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/segment_tree_2d_pointadd.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/segment_tree_2d_pointadd.test.cpp

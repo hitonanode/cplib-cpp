@@ -193,7 +193,7 @@ data:
     \ l >> r >> x;\n        if (q) {\n            auto ret = s.get(l, r);\n      \
     \      std::cout << ret.first * x + ret.second << '\\n';\n        } else {\n \
     \           s.update(l, std::make_pair(r, x));\n        }\n    }\n}\n"
-  code: "#include \"modint.hpp\"\n#include \"segmenttree/point-update-range-get_nonrecursive.hpp\"\
+  code: "#include \"../../modint.hpp\"\n#include \"../point-update-range-get_nonrecursive.hpp\"\
     \n#include <iostream>\n#include <utility>\n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \nusing mint = ModInt<998244353>;\n\ntemplate <typename T> struct PointSetRangeComposite\
     \ : public NonrecursiveSegmentTree<std::pair<T, T>, std::pair<T, T>, bool> {\n\
@@ -217,7 +217,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/point-set-range-composite.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/point-set-range-composite.test.cpp

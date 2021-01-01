@@ -58,7 +58,7 @@ data:
     \nint main() {\n    int Q;\n    std::cin >> Q;\n    while (Q--) {\n        long\
     \ long n;\n        std::cin >> n;\n        std::cout << n << ' ' << is_prime(n)\
     \ << '\\n';\n    }\n}\n"
-  code: "#include \"number/factorize.hpp\"\n#define PROBLEM \"https://yukicoder.me/problems/1967\"\
+  code: "#include \"../factorize.hpp\"\n#define PROBLEM \"https://yukicoder.me/problems/1967\"\
     \n#include <iostream>\n\nint main() {\n    int Q;\n    std::cin >> Q;\n    while\
     \ (Q--) {\n        long long n;\n        std::cin >> n;\n        std::cout <<\
     \ n << ' ' << is_prime(n) << '\\n';\n    }\n}\n"
@@ -67,7 +67,7 @@ data:
   isVerificationFile: true
   path: number/test/miller-rabin.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/miller-rabin.test.cpp

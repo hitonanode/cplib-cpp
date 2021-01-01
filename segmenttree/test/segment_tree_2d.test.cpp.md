@@ -75,7 +75,7 @@ data:
     \       while (Q--) {\n            int xl, yl, xr, yr;\n            cin >> xl\
     \ >> yl >> xr >> yr;\n            printf(\"%d\\n\", rmq.get(xl, xr + 1, yl, yr\
     \ + 1, -1));\n        }\n    }\n}\n"
-  code: "#include \"segmenttree/segment_tree_2d.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068\"\
+  code: "#include \"../segment_tree_2d.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068\"\
     \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    auto f = [](int\
     \ l, int r) { return min(l, r); };\n    auto g = [](int x, int q) { return x;\
     \ };\n    while (true) {\n        int H, W, Q;\n        cin >> H >> W >> Q;\n\
@@ -91,7 +91,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/segment_tree_2d.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/segment_tree_2d.test.cpp

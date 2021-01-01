@@ -30,9 +30,9 @@ data:
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
-  code: "#include \"../acl_range-affine-range-sum.hpp\"\n#include \"modint.hpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\nusing\
-    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+  code: "#include \"../../modint.hpp\"\n#include \"../acl_range-affine-range-sum.hpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\
+    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N, Q;\n    cin >> N >> Q;\n\n    vector<S> A(N);\n    for (auto &a :\
     \ A) cin >> a.first, a.second = 1;\n    RangeAffineRangeSum segtree(A);\n    while\
     \ (Q--) {\n        int q, l, r;\n        cin >> q >> l >> r;\n        if (q) {\n\
@@ -40,13 +40,13 @@ data:
     \          F f;\n            cin >> f.first >> f.second;\n            segtree.apply(l,\
     \ r, f);\n        }\n    }\n}\n"
   dependsOn:
-  - segmenttree/acl_range-affine-range-sum.hpp
   - modint.hpp
+  - segmenttree/acl_range-affine-range-sum.hpp
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: true
   path: segmenttree/test/acl_range-affine-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-12-30 23:06:06+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/acl_range-affine-range-sum.test.cpp

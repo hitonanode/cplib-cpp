@@ -109,20 +109,20 @@ data:
     \        auto r1 = segtree.get(l - 1, r, x);\n        auto r2 = segtree.get(l\
     \ - 1, r, 1e18);\n        printf(\"%lld\\n\", r2.second - r1.second - 1LL * (r2.first\
     \ - r1.first) * x);\n    }\n}\n"
-  code: "#include \"segmenttree/point-update-range-get_nonrecursive.hpp\"\n#define\
-    \ PROBLEM \"https://yukicoder.me/problems/no/877\"\n#include <iostream>\nusing\
-    \ namespace std;\n\nint main() {\n    int N, Q;\n    cin >> N >> Q;\n    vector<long\
-    \ long> A(N);\n    for (auto &a : A) cin >> a;\n    CountAndSumLessThan<long long>\
-    \ segtree(A);\n    while (Q--) {\n        int q, l, r, x;\n        cin >> q >>\
-    \ l >> r >> x;\n        auto r1 = segtree.get(l - 1, r, x);\n        auto r2 =\
-    \ segtree.get(l - 1, r, 1e18);\n        printf(\"%lld\\n\", r2.second - r1.second\
-    \ - 1LL * (r2.first - r1.first) * x);\n    }\n}\n"
+  code: "#include \"../point-update-range-get_nonrecursive.hpp\"\n#define PROBLEM\
+    \ \"https://yukicoder.me/problems/no/877\"\n#include <iostream>\nusing namespace\
+    \ std;\n\nint main() {\n    int N, Q;\n    cin >> N >> Q;\n    vector<long long>\
+    \ A(N);\n    for (auto &a : A) cin >> a;\n    CountAndSumLessThan<long long> segtree(A);\n\
+    \    while (Q--) {\n        int q, l, r, x;\n        cin >> q >> l >> r >> x;\n\
+    \        auto r1 = segtree.get(l - 1, r, x);\n        auto r2 = segtree.get(l\
+    \ - 1, r, 1e18);\n        printf(\"%lld\\n\", r2.second - r1.second - 1LL * (r2.first\
+    \ - r1.first) * x);\n    }\n}\n"
   dependsOn:
   - segmenttree/point-update-range-get_nonrecursive.hpp
   isVerificationFile: true
   path: segmenttree/test/countandsumlessthan.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/countandsumlessthan.test.cpp

@@ -30,17 +30,17 @@ data:
     }\n#line 2 \"string/test/z_algorithm.test.cpp\"\n#include <cstdio>\n#include <iostream>\n\
     #line 5 \"string/test/z_algorithm.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\
     \n\nint main() {\n    std::string S;\n    std::cin >> S;\n    for (auto x : z_algorithm(S))\
-    \ { printf(\"%d \", x); }\n}\n"
-  code: "#include \"string/z_algorithm.hpp\"\n#include <cstdio>\n#include <iostream>\n\
+    \ printf(\"%d \", x);\n}\n"
+  code: "#include \"../z_algorithm.hpp\"\n#include <cstdio>\n#include <iostream>\n\
     #include <string>\n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\
     \n\nint main() {\n    std::string S;\n    std::cin >> S;\n    for (auto x : z_algorithm(S))\
-    \ { printf(\"%d \", x); }\n}\n"
+    \ printf(\"%d \", x);\n}\n"
   dependsOn:
   - string/z_algorithm.hpp
   isVerificationFile: true
   path: string/test/z_algorithm.test.cpp
   requiredBy: []
-  timestamp: '2020-12-31 05:31:49+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/z_algorithm.test.cpp

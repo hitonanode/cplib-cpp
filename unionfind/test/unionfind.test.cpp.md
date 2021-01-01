@@ -28,8 +28,7 @@ data:
     \  UnionFind uf(n);\n    for (int i = 0; i < q; i++) {\n        int c, x, y;\n\
     \        cin >> c >> x >> y;\n        if (c)\n            cout << (int)uf.same(x,\
     \ y) << endl;\n        else\n            uf.unite(x, y);\n    }\n}\n"
-  code: "#include \"unionfind/unionfind.hpp\"\n#include <iostream>\n#define PROBLEM\
-    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp\"\
+  code: "#include \"../unionfind.hpp\"\n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp\"\
     \nusing namespace std;\n\nint main() {\n    int n, q;\n    cin >> n >> q;\n  \
     \  UnionFind uf(n);\n    for (int i = 0; i < q; i++) {\n        int c, x, y;\n\
     \        cin >> c >> x >> y;\n        if (c)\n            cout << (int)uf.same(x,\
@@ -39,7 +38,7 @@ data:
   isVerificationFile: true
   path: unionfind/test/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: unionfind/test/unionfind.test.cpp

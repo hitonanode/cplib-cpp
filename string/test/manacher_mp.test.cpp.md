@@ -40,27 +40,26 @@ data:
     \ std;\n\nint main() {\n    int N;\n    string T;\n    cin >> N >> T;\n\n    vector<int>\
     \ mp = mp_algorithm(T);\n    vector<int> mana = manacher(T);\n\n    int rep =\
     \ N - mp[N];\n    for (int i = 2; i <= N; i++) {\n        if (i + mana[i - 1]\
-    \ - 1 == N) {\n            cout << i << endl;\n            return 0;\n       \
-    \ }\n        if (mana[i - 1] < i) continue;\n        if ((2 * i - 2) % rep ==\
-    \ 0) {\n            cout << i << endl;\n            return 0;\n        }\n   \
-    \ }\n}\n"
-  code: "#include \"string/manacher.hpp\"\n#include \"string/mp_algorithm.hpp\"\n\
-    #include <iostream>\n#include <string>\n#include <vector>\n#define PROBLEM \"\
-    http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2934\"\nusing namespace\
-    \ std;\n\nint main() {\n    int N;\n    string T;\n    cin >> N >> T;\n\n    vector<int>\
-    \ mp = mp_algorithm(T);\n    vector<int> mana = manacher(T);\n\n    int rep =\
-    \ N - mp[N];\n    for (int i = 2; i <= N; i++) {\n        if (i + mana[i - 1]\
-    \ - 1 == N) {\n            cout << i << endl;\n            return 0;\n       \
-    \ }\n        if (mana[i - 1] < i) continue;\n        if ((2 * i - 2) % rep ==\
-    \ 0) {\n            cout << i << endl;\n            return 0;\n        }\n   \
-    \ }\n}\n"
+    \ - 1 == N) {\n            cout << i << '\\n';\n            return 0;\n      \
+    \  }\n        if (mana[i - 1] < i) continue;\n        if ((2 * i - 2) % rep ==\
+    \ 0) {\n            cout << i << '\\n';\n            return 0;\n        }\n  \
+    \  }\n}\n"
+  code: "#include \"../manacher.hpp\"\n#include \"../mp_algorithm.hpp\"\n#include\
+    \ <iostream>\n#include <string>\n#include <vector>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2934\"\
+    \nusing namespace std;\n\nint main() {\n    int N;\n    string T;\n    cin >>\
+    \ N >> T;\n\n    vector<int> mp = mp_algorithm(T);\n    vector<int> mana = manacher(T);\n\
+    \n    int rep = N - mp[N];\n    for (int i = 2; i <= N; i++) {\n        if (i\
+    \ + mana[i - 1] - 1 == N) {\n            cout << i << '\\n';\n            return\
+    \ 0;\n        }\n        if (mana[i - 1] < i) continue;\n        if ((2 * i -\
+    \ 2) % rep == 0) {\n            cout << i << '\\n';\n            return 0;\n \
+    \       }\n    }\n}\n"
   dependsOn:
   - string/manacher.hpp
   - string/mp_algorithm.hpp
   isVerificationFile: true
   path: string/test/manacher_mp.test.cpp
   requiredBy: []
-  timestamp: '2020-12-31 05:31:49+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/manacher_mp.test.cpp

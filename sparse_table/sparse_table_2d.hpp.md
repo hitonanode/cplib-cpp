@@ -47,32 +47,32 @@ data:
     \ >= xr) return defaultT;\n        int d = lgx_table[xr - xl];\n        return\
     \ func(data[d][xl].get(yl, yr), data[d][xr - (1 << d)].get(yl, yr));\n    }\n\
     };\n"
-  code: "#pragma once\n#include \"sparse_table/sparse_table.hpp\"\n#include <cassert>\n\
-    #include <vector>\n\n// CUT begin\n// Static matrix sparse table\n// Complexity;\
-    \ O(HWlogHlogW) for precalculation, O(1) per query\ntemplate <typename T, typename\
-    \ F> struct SparseTable2D {\n    int H, lgH, W;\n    T defaultT;\n    F func;\n\
-    \    std::vector<std::vector<SparseTable<T, F>>> data;\n    std::vector<int> lgx_table;\n\
-    \    SparseTable2D(F func) : func(func) {}\n    SparseTable2D(const std::vector<std::vector<T>>\
-    \ &matrix, T defaultT, F func) : defaultT(defaultT), func(func) {\n        H =\
-    \ matrix.size(), W = (matrix.size() ? matrix[0].size() : 0);\n        lgx_table.resize(H\
-    \ + 1);\n        for (int i = 2; i < H + 1; i++) lgx_table[i] = lgx_table[i >>\
-    \ 1] + 1;\n        lgH = lgx_table[H] + 1;\n        data.resize(lgH);\n      \
-    \  for (auto v : matrix) data[0].emplace_back(SparseTable<T, F>(v, defaultT, func));\n\
-    \        for (int d = 1; d < lgH; d++) {\n            for (int i = 0; i + (1 <<\
-    \ d) <= H; i++) {\n                std::vector<T> v(W);\n                for (int\
-    \ j = 0; j < W; j++) v[j] = func(data[d - 1][i].data[0][j], data[d - 1][i + (1\
-    \ << (d - 1))].data[0][j]);\n                data[d].emplace_back(SparseTable<T,\
-    \ F>(v, defaultT, func));\n            }\n        }\n    }\n    T get(int xl,\
-    \ int xr, int yl, int yr) {\n        assert(xl >= 0 and xr <= H and yl >= 0 and\
-    \ yr <= W);\n        if (xl >= xr) return defaultT;\n        int d = lgx_table[xr\
-    \ - xl];\n        return func(data[d][xl].get(yl, yr), data[d][xr - (1 << d)].get(yl,\
-    \ yr));\n    }\n};\n"
+  code: "#pragma once\n#include \"sparse_table.hpp\"\n#include <cassert>\n#include\
+    \ <vector>\n\n// CUT begin\n// Static matrix sparse table\n// Complexity; O(HWlogHlogW)\
+    \ for precalculation, O(1) per query\ntemplate <typename T, typename F> struct\
+    \ SparseTable2D {\n    int H, lgH, W;\n    T defaultT;\n    F func;\n    std::vector<std::vector<SparseTable<T,\
+    \ F>>> data;\n    std::vector<int> lgx_table;\n    SparseTable2D(F func) : func(func)\
+    \ {}\n    SparseTable2D(const std::vector<std::vector<T>> &matrix, T defaultT,\
+    \ F func) : defaultT(defaultT), func(func) {\n        H = matrix.size(), W = (matrix.size()\
+    \ ? matrix[0].size() : 0);\n        lgx_table.resize(H + 1);\n        for (int\
+    \ i = 2; i < H + 1; i++) lgx_table[i] = lgx_table[i >> 1] + 1;\n        lgH =\
+    \ lgx_table[H] + 1;\n        data.resize(lgH);\n        for (auto v : matrix)\
+    \ data[0].emplace_back(SparseTable<T, F>(v, defaultT, func));\n        for (int\
+    \ d = 1; d < lgH; d++) {\n            for (int i = 0; i + (1 << d) <= H; i++)\
+    \ {\n                std::vector<T> v(W);\n                for (int j = 0; j <\
+    \ W; j++) v[j] = func(data[d - 1][i].data[0][j], data[d - 1][i + (1 << (d - 1))].data[0][j]);\n\
+    \                data[d].emplace_back(SparseTable<T, F>(v, defaultT, func));\n\
+    \            }\n        }\n    }\n    T get(int xl, int xr, int yl, int yr) {\n\
+    \        assert(xl >= 0 and xr <= H and yl >= 0 and yr <= W);\n        if (xl\
+    \ >= xr) return defaultT;\n        int d = lgx_table[xr - xl];\n        return\
+    \ func(data[d][xl].get(yl, yr), data[d][xr - (1 << d)].get(yl, yr));\n    }\n\
+    };\n"
   dependsOn:
   - sparse_table/sparse_table.hpp
   isVerificationFile: false
   path: sparse_table/sparse_table_2d.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - sparse_table/test/sparse_table_2d.test.cpp

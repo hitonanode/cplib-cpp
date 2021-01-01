@@ -41,7 +41,7 @@ data:
     \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, true);\n\n    int N =\
     \ S.length();\n    long long int ret = 0;\n    for (int i = 0; i < N; i++) ret\
     \ += N - sa.SA[i + 1] - sa.lcp[i];\n    std::cout << ret << std::endl;\n}\n"
-  code: "#include \"string/suffix_array.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\
+  code: "#include \"../suffix_array.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\
     \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
     \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, true);\n\n    int N =\
     \ S.length();\n    long long int ret = 0;\n    for (int i = 0; i < N; i++) ret\
@@ -51,7 +51,7 @@ data:
   isVerificationFile: true
   path: string/test/lcp.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/lcp.test.cpp

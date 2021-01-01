@@ -55,8 +55,8 @@ data:
     \ l = 0; l + L <= N; l++) {\n        int a = sp1.get(l, l + L);\n        int b\
     \ = sp2.get(l, l + L);\n        assert(a == b);\n        cout << a << (l + L ==\
     \ N ? '\\n' : ' ');\n    }\n}\n"
-  code: "#include \"sparse_table/rmq_sparse_table.hpp\"\n#include \"sparse_table/sparse_table.hpp\"\
-    \n#include <iostream>\n#include <vector>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D\"\
+  code: "#include \"../rmq_sparse_table.hpp\"\n#include \"../sparse_table.hpp\"\n\
+    #include <iostream>\n#include <vector>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N, L;\n    cin >> N >> L;\n    vector<int> A(N);\n    for (auto &a :\
     \ A) cin >> a;\n    auto f = [](int l, int r) { return min(l, r); };\n    SparseTable<int,\
@@ -70,7 +70,7 @@ data:
   isVerificationFile: true
   path: sparse_table/test/sparse_table_aoj.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 23:31:57+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: sparse_table/test/sparse_table_aoj.test.cpp

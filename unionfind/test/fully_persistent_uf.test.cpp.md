@@ -38,9 +38,10 @@ data:
     \ k, const T &data) { t = set(t, k, data); }\n\n    [[nodiscard]] node *build(const\
     \ std::vector<T> &vec) {\n        node *root = nullptr;\n        for (size_t i\
     \ = 0; i < vec.size(); i++) { root = set(root, i, vec[i]); }\n        return root;\n\
-    \    }\n};\n#line 4 \"unionfind/fully_persistent_uf.hpp\"\n\n// Fully persistent\
-    \ UnionFind\n// - find(t, x) : find the root of DSU tree x belongs to, when unite()\
-    \ is called t times.\n// Complexity: O(logN) for each query\n// Reference: <https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>\n\
+    \    }\n};\n#line 4 \"unionfind/fully_persistent_uf.hpp\"\n\n// CUT begin\n//\
+    \ Fully persistent UnionFind\n// - find(t, x) : find the root of DSU tree x belongs\
+    \ to, when unite() is called t times.\n// Complexity: O(logN) for each query\n\
+    // Reference: <https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>\n\
     struct PersistentUnionFind {\n    int N;\n    using Array = persistent_array<int,\
     \ 4>;\n    Array par;\n    std::vector<Array::node*> savepoints; // Tree structure\
     \ is saved after every `unite()` operation\n    PersistentUnionFind(int N) : N(N),\
@@ -62,21 +63,21 @@ data:
     \ if (t == 0) {\n            uf.unite(k + 1, u, v);\n        } else {\n      \
     \      uf.unite(k + 1, 0, 0);\n            cout << uf.same(k + 1, u, v) << '\\\
     n';\n        }\n    }\n}\n"
-  code: "#include \"unionfind/fully_persistent_uf.hpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\nusing namespace\
-    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n\
-    \    int N, Q;\n    cin >> N >> Q;\n    PersistentUnionFind uf(N);\n    while\
-    \ (Q--) {\n        int t, k, u, v;\n        cin >> t >> k >> u >> v;\n       \
-    \ if (t == 0) {\n            uf.unite(k + 1, u, v);\n        } else {\n      \
-    \      uf.unite(k + 1, 0, 0);\n            cout << uf.same(k + 1, u, v) << '\\\
-    n';\n        }\n    }\n}\n"
+  code: "#include \"../fully_persistent_uf.hpp\"\n#include <iostream>\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/persistent_unionfind\"\nusing namespace std;\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int\
+    \ N, Q;\n    cin >> N >> Q;\n    PersistentUnionFind uf(N);\n    while (Q--) {\n\
+    \        int t, k, u, v;\n        cin >> t >> k >> u >> v;\n        if (t == 0)\
+    \ {\n            uf.unite(k + 1, u, v);\n        } else {\n            uf.unite(k\
+    \ + 1, 0, 0);\n            cout << uf.same(k + 1, u, v) << '\\n';\n        }\n\
+    \    }\n}\n"
   dependsOn:
   - unionfind/fully_persistent_uf.hpp
   - other_data_structures/persistent_array.hpp
   isVerificationFile: true
   path: unionfind/test/fully_persistent_uf.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: unionfind/test/fully_persistent_uf.test.cpp

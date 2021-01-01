@@ -40,11 +40,11 @@ data:
     \ long, decltype(f)> st(A, f);\n    while (Q--) {\n        int l, r;\n       \
     \ scanf(\"%d %d\", &l, &r);\n        long long a = st.get(l, r);\n        printf(\"\
     %lld\\n\", a);\n    }\n}\n"
-  code: "#include \"sparse_table/disjoint_sparse_table.hpp\"\n#include <cassert>\n\
-    #include <cstdio>\n#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_sum\"\
-    \n\nint main() {\n    int N, Q;\n    scanf(\"%d %d\", &N, &Q);\n    std::vector<long\
-    \ long> A(N);\n    for (int i = 0; i < N; i++) { scanf(\"%lld\", &A[i]); }\n \
-    \   auto f = [](long long l, long long r) { return l + r; };\n    DisjointSparseTable<long\
+  code: "#include \"../disjoint_sparse_table.hpp\"\n#include <cassert>\n#include <cstdio>\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/static_range_sum\"\n\nint main()\
+    \ {\n    int N, Q;\n    scanf(\"%d %d\", &N, &Q);\n    std::vector<long long>\
+    \ A(N);\n    for (int i = 0; i < N; i++) { scanf(\"%lld\", &A[i]); }\n    auto\
+    \ f = [](long long l, long long r) { return l + r; };\n    DisjointSparseTable<long\
     \ long, decltype(f)> st(A, f);\n    while (Q--) {\n        int l, r;\n       \
     \ scanf(\"%d %d\", &l, &r);\n        long long a = st.get(l, r);\n        printf(\"\
     %lld\\n\", a);\n    }\n}\n"
@@ -53,7 +53,7 @@ data:
   isVerificationFile: true
   path: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: sparse_table/test/disjoint_sparse_table_rsq.test.cpp

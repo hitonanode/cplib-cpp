@@ -42,8 +42,8 @@ data:
     \            } else {\n                cout << \"?\" << endl;\n            }\n\
     \        } else {\n            cin >> x >> y >> z;\n            uf.unite(x, y,\
     \ z);\n        }\n    }\n}\n"
-  code: "#include \"unionfind/weighted_unionfind.hpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B&lang=jp\"\
+  code: "#include \"../weighted_unionfind.hpp\"\n#include <iostream>\n#define PROBLEM\
+    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B&lang=jp\"\
     \nusing namespace std;\n\nint main() {\n    int N, Q, x, y, z;\n    cin >> N >>\
     \ Q;\n    WeightedUnionFind<int> uf(N);\n    for (int i = 0; i < Q; i++) {\n \
     \       int c;\n        cin >> c;\n        if (c) {\n            cin >> x >> y;\n\
@@ -56,7 +56,7 @@ data:
   isVerificationFile: true
   path: unionfind/test/weighted_unionfind.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: unionfind/test/weighted_unionfind.test.cpp

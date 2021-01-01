@@ -40,20 +40,20 @@ data:
     \ decltype(f)> rmq(A, f);\n    while (Q--) {\n        int l, r;\n        scanf(\"\
     %d %d\", &l, &r);\n        int a = rmq.get(l, r);\n        printf(\"%d\\n\", a);\n\
     \    }\n}\n"
-  code: "#include \"sparse_table/disjoint_sparse_table.hpp\"\n#include <cassert>\n\
-    #include <cstdio>\n#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\
-    \n\nint main() {\n    int N, Q;\n    scanf(\"%d %d\", &N, &Q);\n    std::vector<int>\
-    \ A(N);\n    for (int i = 0; i < N; i++) { scanf(\"%d\", &A[i]); }\n    auto f\
-    \ = [](int l, int r) { return std::min(l, r); };\n    DisjointSparseTable<int,\
-    \ decltype(f)> rmq(A, f);\n    while (Q--) {\n        int l, r;\n        scanf(\"\
-    %d %d\", &l, &r);\n        int a = rmq.get(l, r);\n        printf(\"%d\\n\", a);\n\
-    \    }\n}\n"
+  code: "#include \"../disjoint_sparse_table.hpp\"\n#include <cassert>\n#include <cstdio>\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n\nint main() {\n\
+    \    int N, Q;\n    scanf(\"%d %d\", &N, &Q);\n    std::vector<int> A(N);\n  \
+    \  for (int i = 0; i < N; i++) { scanf(\"%d\", &A[i]); }\n    auto f = [](int\
+    \ l, int r) { return std::min(l, r); };\n    DisjointSparseTable<int, decltype(f)>\
+    \ rmq(A, f);\n    while (Q--) {\n        int l, r;\n        scanf(\"%d %d\", &l,\
+    \ &r);\n        int a = rmq.get(l, r);\n        printf(\"%d\\n\", a);\n    }\n\
+    }\n"
   dependsOn:
   - sparse_table/disjoint_sparse_table.hpp
   isVerificationFile: true
   path: sparse_table/test/disjoint_sparse_table_rmq.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: sparse_table/test/disjoint_sparse_table_rmq.test.cpp

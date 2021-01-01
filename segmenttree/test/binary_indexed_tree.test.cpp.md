@@ -34,7 +34,7 @@ data:
     \ int c, x, y;\n        cin >> c >> x >> y;\n        if (c) {\n            cout\
     \ << bit.sum(x - 1, y) << '\\n';\n        } else {\n            bit.add(x - 1,\
     \ y);\n        }\n    }\n}\n"
-  code: "#include \"segmenttree/binary_indexed_tree.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B\"\
+  code: "#include \"../binary_indexed_tree.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    int N, Q;\n    cin >> N >> Q;\n    BIT<int>\
     \ bit(N);\n    while (Q--) {\n        int c, x, y;\n        cin >> c >> x >> y;\n\
@@ -45,7 +45,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/binary_indexed_tree.test.cpp
   requiredBy: []
-  timestamp: '2020-12-29 19:26:14+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/binary_indexed_tree.test.cpp

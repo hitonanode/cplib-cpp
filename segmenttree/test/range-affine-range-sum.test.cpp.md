@@ -174,7 +174,7 @@ data:
     \ '\\n';\n        } else {\n            mint b, c;\n            std::cin >> b\
     \ >> c;\n            segtree.update(l, r, std::make_pair(b, c));\n        }\n\
     \    }\n}\n"
-  code: "#include \"modint.hpp\"\n#include \"segmenttree/range-update-range-get.hpp\"\
+  code: "#include \"../../modint.hpp\"\n#include \"../range-update-range-get.hpp\"\
     \n#include <utility>\n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n\n// RangeAffineRangeSum\n// - update: x_i -> a * x_i + b for i in [l, r)\n\
     // - get: return x_l + ... + x_{r - 1}\ntemplate <typename T> struct RangeAffineRangeSum\
@@ -209,7 +209,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/range-affine-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/range-affine-range-sum.test.cpp

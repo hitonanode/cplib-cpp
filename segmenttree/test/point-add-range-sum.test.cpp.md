@@ -39,8 +39,8 @@ data:
     \    while (Q--) {\n        int q, l, r;\n        std::cin >> q >> l >> r;\n \
     \       if (q) {\n            std::cout << s.get(l, r) << '\\n';\n        } else\
     \ {\n            s.add(l, r);\n        }\n    }\n}\n"
-  code: "#include \"segmenttree/binary_indexed_tree.hpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\n// PointAddRangeSum\
+  code: "#include \"../binary_indexed_tree.hpp\"\n#include <iostream>\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\n// PointAddRangeSum\
     \ (BIT based) 0-indexed\n// Complexity: O(lg N) for each query\ntemplate <typename\
     \ T> struct PointAddRangeSum {\n    BIT<T> bit;\n    PointAddRangeSum(const std::vector<T>\
     \ &A) : bit(A.size()) {\n        for (unsigned i = 0; i < A.size(); i++) bit.add(i,\
@@ -57,7 +57,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/point-add-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-12-29 19:26:14+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/point-add-range-sum.test.cpp

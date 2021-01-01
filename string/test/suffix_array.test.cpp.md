@@ -40,7 +40,7 @@ data:
     \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
     \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, false);\n\n    for (size_t\
     \ i = 1; i <= S.length(); i++) std::cout << sa.SA[i] << ' ';\n}\n"
-  code: "#include \"string/suffix_array.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\
+  code: "#include \"../suffix_array.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\
     \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
     \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, false);\n\n    for (size_t\
     \ i = 1; i <= S.length(); i++) std::cout << sa.SA[i] << ' ';\n}\n"
@@ -49,7 +49,7 @@ data:
   isVerificationFile: true
   path: string/test/suffix_array.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/suffix_array.test.cpp

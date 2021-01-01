@@ -29,8 +29,8 @@ data:
     \   cin >> N >> M >> A >> B;\n        cout << floor_sum(N, M, A, B) << '\\n';\n\
     \    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_floor_of_linear\"\
-    \n#include \"utilities/floor_sum.hpp\"\n#include <iostream>\nusing namespace std;\n\
-    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int T;\n\
+    \n#include \"../floor_sum.hpp\"\n#include <iostream>\nusing namespace std;\n\n\
+    int main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int T;\n\
     \    cin >> T;\n    while (T--) {\n        int N, M, A, B;\n        cin >> N >>\
     \ M >> A >> B;\n        cout << floor_sum(N, M, A, B) << '\\n';\n    }\n}\n"
   dependsOn:
@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: utilities/test/floor_sum.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: utilities/test/floor_sum.test.cpp

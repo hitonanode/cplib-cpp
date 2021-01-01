@@ -36,9 +36,10 @@ data:
     \ k, const T &data) { t = set(t, k, data); }\n\n    [[nodiscard]] node *build(const\
     \ std::vector<T> &vec) {\n        node *root = nullptr;\n        for (size_t i\
     \ = 0; i < vec.size(); i++) { root = set(root, i, vec[i]); }\n        return root;\n\
-    \    }\n};\n#line 4 \"unionfind/fully_persistent_uf.hpp\"\n\n// Fully persistent\
-    \ UnionFind\n// - find(t, x) : find the root of DSU tree x belongs to, when unite()\
-    \ is called t times.\n// Complexity: O(logN) for each query\n// Reference: <https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>\n\
+    \    }\n};\n#line 4 \"unionfind/fully_persistent_uf.hpp\"\n\n// CUT begin\n//\
+    \ Fully persistent UnionFind\n// - find(t, x) : find the root of DSU tree x belongs\
+    \ to, when unite() is called t times.\n// Complexity: O(logN) for each query\n\
+    // Reference: <https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>\n\
     struct PersistentUnionFind {\n    int N;\n    using Array = persistent_array<int,\
     \ 4>;\n    Array par;\n    std::vector<Array::node*> savepoints; // Tree structure\
     \ is saved after every `unite()` operation\n    PersistentUnionFind(int N) : N(N),\
@@ -53,10 +54,10 @@ data:
     \ savepoints.emplace_back(ptr), x != y;\n    }\n    int count(int t, int x) const\
     \ { return -par.get(savepoints[t], find(t, x)); }\n    bool same(int t, int x,\
     \ int y) const { return find(t, x) == find(t, y); }\n};\n"
-  code: "#pragma once\n#include \"other_data_structures/persistent_array.hpp\"\n#include\
-    \ <vector>\n\n// Fully persistent UnionFind\n// - find(t, x) : find the root of\
-    \ DSU tree x belongs to, when unite() is called t times.\n// Complexity: O(logN)\
-    \ for each query\n// Reference: <https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>\n\
+  code: "#pragma once\n#include \"../other_data_structures/persistent_array.hpp\"\n\
+    #include <vector>\n\n// CUT begin\n// Fully persistent UnionFind\n// - find(t,\
+    \ x) : find the root of DSU tree x belongs to, when unite() is called t times.\n\
+    // Complexity: O(logN) for each query\n// Reference: <https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>\n\
     struct PersistentUnionFind {\n    int N;\n    using Array = persistent_array<int,\
     \ 4>;\n    Array par;\n    std::vector<Array::node*> savepoints; // Tree structure\
     \ is saved after every `unite()` operation\n    PersistentUnionFind(int N) : N(N),\
@@ -76,7 +77,7 @@ data:
   isVerificationFile: false
   path: unionfind/fully_persistent_uf.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - unionfind/test/fully_persistent_uf.test.cpp

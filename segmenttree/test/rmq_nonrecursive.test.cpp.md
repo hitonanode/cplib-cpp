@@ -108,8 +108,8 @@ data:
     \        int c, x, y;\n        cin >> c >> x >> y;\n        if (c == 0)\n    \
     \        rmq.update(x, y);\n        else\n            cout << rmq.get(x, y + 1)\
     \ << endl;\n    }\n}\n"
-  code: "#include \"segmenttree/point-update-range-get_nonrecursive.hpp\"\n#include\
-    \ <iostream>\nusing namespace std;\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A\"\
+  code: "#include \"../point-update-range-get_nonrecursive.hpp\"\n#include <iostream>\n\
+    using namespace std;\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A\"\
     \n\nint main() {\n    int N, Q;\n    cin >> N >> Q;\n    vector<int> A(N, (1LL\
     \ << 31) - 1);\n    RangeMinimumQuery<int> rmq(A, A[0]);\n    while (Q--) {\n\
     \        int c, x, y;\n        cin >> c >> x >> y;\n        if (c == 0)\n    \
@@ -120,7 +120,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/rmq_nonrecursive.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/rmq_nonrecursive.test.cpp
