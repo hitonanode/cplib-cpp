@@ -36,19 +36,19 @@ data:
     \            if (!used[vs[i]]) _rdfs(vs[i], scc_num++);\n        return scc_num;\n\
     \    }\n\n    // Find and output the vertices that form a closed cycle.\n    //\
     \ output: {v_1, ..., v_C}, where C is the length of cycle,\n    //         {}\
-    \ if there's NO cycle (graph is DAG)\n    std::vector<int> DetectCycle() {\n \
-    \       int ns = FindStronglyConnectedComponents();\n        if (ns == V) return\
-    \ {};\n        std::vector<int> cnt(ns);\n        for (auto x : cmp) cnt[x]++;\n\
-    \        const int c = std::find_if(cnt.begin(), cnt.end(), [](int x) { return\
-    \ x > 1; }) - cnt.begin();\n        const int init = std::find(cmp.begin(), cmp.end(),\
-    \ c) - cmp.begin();\n        used.assign(V, false);\n        std::vector<int>\
-    \ ret;\n        auto dfs = [&](auto &&dfs, int now, bool b0) -> bool {\n     \
-    \       if (now == init and b0) return true;\n            for (auto nxt : to[now])\n\
-    \                if (cmp[nxt] == c and !used[nxt]) {\n                    ret.emplace_back(nxt),\
-    \ used[nxt] = 1;\n                    if (dfs(dfs, nxt, true)) return true;\n\
-    \                    ret.pop_back();\n                }\n            return false;\n\
-    \        };\n        dfs(dfs, init, false);\n        return ret;\n    }\n\n  \
-    \  // After calling `FindStronglyConnectedComponents()`, generate a new graph\
+    \ if there's NO cycle (graph is DAG)\n    int _c, _init;\n    std::vector<int>\
+    \ _ret_cycle;\n    bool _dfs_detectcycle(int now, bool b0) {\n        if (now\
+    \ == _init and b0) return true;\n        for (auto nxt : to[now])\n          \
+    \  if (cmp[nxt] == _c and !used[nxt]) {\n                _ret_cycle.emplace_back(nxt),\
+    \ used[nxt] = 1;\n                if (_dfs_detectcycle(nxt, true)) return true;\n\
+    \                _ret_cycle.pop_back();\n            }\n        return false;\n\
+    \    }\n    std::vector<int> DetectCycle() {\n        int ns = FindStronglyConnectedComponents();\n\
+    \        if (ns == V) return {};\n        std::vector<int> cnt(ns);\n        for\
+    \ (auto x : cmp) cnt[x]++;\n        _c = std::find_if(cnt.begin(), cnt.end(),\
+    \ [](int x) { return x > 1; }) - cnt.begin();\n        _init = std::find(cmp.begin(),\
+    \ cmp.end(), _c) - cmp.begin();\n        used.assign(V, false);\n        _ret_cycle.clear();\n\
+    \        _dfs_detectcycle(_init, false);\n        return _ret_cycle;\n    }\n\n\
+    \    // After calling `FindStronglyConnectedComponents()`, generate a new graph\
     \ by uniting all vertices\n    // belonging to the same component(The resultant\
     \ graph is DAG).\n    DirectedGraphSCC GenerateTopologicalGraph() {\n        DirectedGraphSCC\
     \ newgraph(scc_num);\n        for (int s = 0; s < V; s++)\n            for (auto\
@@ -94,7 +94,7 @@ data:
   isVerificationFile: true
   path: graph/test/topological_sort.test.cpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/topological_sort.test.cpp

@@ -49,25 +49,25 @@ data:
     \ order_of_key(Int x) const {\n        Int ret = 0;\n        for (auto p : x)\
     \ {\n            if (p.first >= x) break;\n            ret += std::min(x - 1,\
     \ p.second) - p.first + 1;\n        }\n        return ret;\n    }\n};\n#line 3\
-    \ \"utilities/test/integer_segments.test.cpp\"\n\n#include <iostream>\n#include\
-    \ <set>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    long long D;\n    int Q;\n    cin >> D >> Q;\n    integer_segments<long long>\
+    \ \"utilities/test/integer_segments.test.cpp\"\n\n#include <iostream>\nusing namespace\
+    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n \
+    \   long long D;\n    int Q;\n    cin >> D >> Q;\n    integer_segments<long long>\
     \ seg;\n\n    long long ret = 0;\n    while (Q--) {\n        long long a, b;\n\
-    \        cin >> a >> b;\n        auto [l, r] = seg.insert(a, b);\n        ret\
-    \ = max(ret, r - l + 1);\n        cout << ret << '\\n';\n    }\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/674\"\n#include \"utilities/integer_segments.hpp\"\
-    \n\n#include <iostream>\n#include <set>\nusing namespace std;\n\nint main() {\n\
-    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n    long long D;\n    int\
-    \ Q;\n    cin >> D >> Q;\n    integer_segments<long long> seg;\n\n    long long\
-    \ ret = 0;\n    while (Q--) {\n        long long a, b;\n        cin >> a >> b;\n\
-    \        auto [l, r] = seg.insert(a, b);\n        ret = max(ret, r - l + 1);\n\
-    \        cout << ret << '\\n';\n    }\n}\n"
+    \        cin >> a >> b;\n        auto lr = seg.insert(a, b);\n        ret = max(ret,\
+    \ lr.second - lr.first + 1);\n        cout << ret << '\\n';\n    }\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/674\"\n#include \"../integer_segments.hpp\"\
+    \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    long long D;\n    int Q;\n    cin >> D >>\
+    \ Q;\n    integer_segments<long long> seg;\n\n    long long ret = 0;\n    while\
+    \ (Q--) {\n        long long a, b;\n        cin >> a >> b;\n        auto lr =\
+    \ seg.insert(a, b);\n        ret = max(ret, lr.second - lr.first + 1);\n     \
+    \   cout << ret << '\\n';\n    }\n}\n"
   dependsOn:
   - utilities/integer_segments.hpp
   isVerificationFile: true
   path: utilities/test/integer_segments.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 03:41:06+09:00'
+  timestamp: '2021-01-01 15:35:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: utilities/test/integer_segments.test.cpp

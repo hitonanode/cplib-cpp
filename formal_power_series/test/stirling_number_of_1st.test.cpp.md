@@ -242,32 +242,30 @@ data:
     \ i or i < 0) return T(0);\n        return (*this)[i];\n    }\n\n    T eval(T\
     \ x) const {\n        T ret = 0, w = 1;\n        for (auto &v : *this) ret +=\
     \ w * v, w *= x;\n        return ret;\n    }\n};\n#line 5 \"formal_power_series/test/stirling_number_of_1st.test.cpp\"\
-    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \n    int N;\n    cin >> N;\n    using fps = FormalPowerSeries<ModInt<998244353>>;\n\
-    \n    auto solve = [&](auto&& self, int N) -> fps {\n        // Calculate \\prod_{i=0}^{N-1}\
-    \ (x-i)\n        if (N == 0) { return {1}; }\n        if (N == 1) { return {0,\
-    \ 1}; }\n        int k = N / 2;\n        fps f = self(self, k);\n        f *=\
-    \ f.shift(-k);\n        if (N % 2) { f *= fps{-(N - 1), 1}; }\n        return\
-    \ f;\n    };\n\n    fps ret = solve(solve, N);\n    for (int i = 0; i <= N; i++)\
-    \ { cout << ret.coeff(i) << (i == N ? '\\n' : ' '); }\n}\n"
+    \nusing namespace std;\n\nFormalPowerSeries<ModInt<998244353>> solve(int N) {\n\
+    \    if (N == 0) { return {1}; }\n    if (N == 1) { return {0, 1}; }\n    int\
+    \ k = N / 2;\n    auto f = solve(k);\n    f *= f.shift(-k);\n    if (N % 2) {\
+    \ f *= {-(N - 1), 1}; }\n    return f;\n}\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N;\n    cin >> N;\n    auto ret = solve(N);\n\
+    \    for (int i = 0; i <= N; i++) cout << ret.coeff(i) << (i == N ? '\\n' : '\
+    \ ');\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
-    \n#include \"formal_power_series/formal_power_series.hpp\"\n#include \"modint.hpp\"\
-    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n\n    int N;\n    cin >> N;\n    using fps = FormalPowerSeries<ModInt<998244353>>;\n\
-    \n    auto solve = [&](auto&& self, int N) -> fps {\n        // Calculate \\prod_{i=0}^{N-1}\
-    \ (x-i)\n        if (N == 0) { return {1}; }\n        if (N == 1) { return {0,\
-    \ 1}; }\n        int k = N / 2;\n        fps f = self(self, k);\n        f *=\
-    \ f.shift(-k);\n        if (N % 2) { f *= fps{-(N - 1), 1}; }\n        return\
-    \ f;\n    };\n\n    fps ret = solve(solve, N);\n    for (int i = 0; i <= N; i++)\
-    \ { cout << ret.coeff(i) << (i == N ? '\\n' : ' '); }\n}\n"
+    \n#include \"../../modint.hpp\"\n#include \"../formal_power_series.hpp\"\n#include\
+    \ <iostream>\nusing namespace std;\n\nFormalPowerSeries<ModInt<998244353>> solve(int\
+    \ N) {\n    if (N == 0) { return {1}; }\n    if (N == 1) { return {0, 1}; }\n\
+    \    int k = N / 2;\n    auto f = solve(k);\n    f *= f.shift(-k);\n    if (N\
+    \ % 2) { f *= {-(N - 1), 1}; }\n    return f;\n}\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N;\n    cin >> N;\n    auto ret = solve(N);\n\
+    \    for (int i = 0; i <= N; i++) cout << ret.coeff(i) << (i == N ? '\\n' : '\
+    \ ');\n}\n"
   dependsOn:
+  - modint.hpp
   - formal_power_series/formal_power_series.hpp
   - convolution/ntt.hpp
-  - modint.hpp
   isVerificationFile: true
   path: formal_power_series/test/stirling_number_of_1st.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/stirling_number_of_1st.test.cpp

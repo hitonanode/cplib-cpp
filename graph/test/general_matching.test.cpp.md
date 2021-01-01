@@ -235,16 +235,16 @@ data:
     \n    int N, M;\n    cin >> N >> M;\n    vector<pair<int, int>> edges;\n    while\
     \ (M--) {\n        int u, v;\n        cin >> u >> v;\n        edges.emplace_back(u,\
     \ v);\n    }\n    vector<pair<int, int>> ret = generalMatching(N, edges);\n  \
-    \  cout << ret.size() << '\\n';\n    for (auto [a, b] : ret) { cout << a << '\
-    \ ' << b << '\\n'; }\n}\n"
+    \  cout << ret.size() << '\\n';\n    for (auto p : ret) cout << p.first << ' '\
+    \ << p.second << '\\n';\n}\n"
   code: "#include \"../general_matching.hpp\"\n#include <iostream>\n#include <utility>\n\
     #include <vector>\n#define PROBLEM \"https://judge.yosupo.jp/problem/general_matching\"\
     \n\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N, M;\n    cin >> N >> M;\n    vector<pair<int, int>> edges;\n    while\
     \ (M--) {\n        int u, v;\n        cin >> u >> v;\n        edges.emplace_back(u,\
     \ v);\n    }\n    vector<pair<int, int>> ret = generalMatching(N, edges);\n  \
-    \  cout << ret.size() << '\\n';\n    for (auto [a, b] : ret) { cout << a << '\
-    \ ' << b << '\\n'; }\n}\n"
+    \  cout << ret.size() << '\\n';\n    for (auto p : ret) cout << p.first << ' '\
+    \ << p.second << '\\n';\n}\n"
   dependsOn:
   - graph/general_matching.hpp
   - linear_algebra_matrix/linalg_modint.hpp
@@ -252,7 +252,7 @@ data:
   isVerificationFile: true
   path: graph/test/general_matching.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2021-01-01 15:35:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/general_matching.test.cpp

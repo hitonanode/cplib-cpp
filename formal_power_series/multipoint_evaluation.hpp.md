@@ -13,8 +13,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-    title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
+    path: formal_power_series/test/multipoint_evaluation.test.cpp
+    title: formal_power_series/test/multipoint_evaluation.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
@@ -242,7 +242,7 @@ data:
     \ ret;\n    }\n\n    T coeff(int i) const {\n        if ((int)this->size() <=\
     \ i or i < 0) return T(0);\n        return (*this)[i];\n    }\n\n    T eval(T\
     \ x) const {\n        T ret = 0, w = 1;\n        for (auto &v : *this) ret +=\
-    \ w * v, w *= x;\n        return ret;\n    }\n};\n#line 3 \"formal_power_series/multipoint_evaluation.hpp\"\
+    \ w * v, w *= x;\n        return ret;\n    }\n};\n#line 5 \"formal_power_series/multipoint_evaluation.hpp\"\
     \n\n// CUT begin\n// multipoint polynomial evaluation\n// input: xs = [x_0, ...,\
     \ x_{N - 1}]: points to evaluate\n//        f = \\sum_i^M f_i x^i\n// Complexity:\
     \ O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename\
@@ -251,49 +251,48 @@ data:
     \ &xs) : nx(xs.size()) {\n        segtree.resize(nx * 2 - 1);\n        for (int\
     \ i = 0; i < nx; i++) { segtree[nx - 1 + i] = {-xs[i], 1}; }\n        for (int\
     \ i = nx - 2; i >= 0; i--) { segtree[i] = segtree[2 * i + 1] * segtree[2 * i +\
-    \ 2]; }\n    }\n    std::vector<Tfield> ret;\n    std::vector<Tfield> evaluate_polynomial(polynomial\
-    \ f) {\n        ret.resize(nx);\n        auto rec = [&](auto &&rec, polynomial\
-    \ f, int now) -> void {\n            f %= segtree[now];\n            if (now -\
-    \ (nx - 1) >= 0) {\n                ret[now - (nx - 1)] = f.coeff(0);\n      \
-    \          return;\n            }\n            rec(rec, f, 2 * now + 1);\n   \
-    \         rec(rec, f, 2 * now + 2);\n        };\n        rec(rec, f, 0);\n   \
-    \     return ret;\n    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n   \
-    \ std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys) {\n   \
-    \     assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
+    \ 2]; }\n    }\n    std::vector<Tfield> ret;\n    void _eval_rec(polynomial f,\
+    \ int now) {\n        f %= segtree[now];\n        if (now - (nx - 1) >= 0) {\n\
+    \            ret[now - (nx - 1)] = f.coeff(0);\n            return;\n        }\n\
+    \        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f, 2 * now + 2);\n    }\n\
+    \    std::vector<Tfield> evaluate_polynomial(polynomial f) {\n        ret.resize(nx);\n\
+    \        _eval_rec(f, 0);\n        return ret;\n    }\n\n    std::vector<Tfield>\
+    \ _interpolate_coeffs;\n    polynomial _rec_interpolation(int now, const std::vector<Tfield>\
+    \ &ys) const {\n        int i = now - (nx - 1);\n        if (i >= 0) return {ys[i]};\n\
+    \        auto retl = _rec_interpolation(2 * now + 1, ys);\n        auto retr =\
+    \ _rec_interpolation(2 * now + 2, ys);\n        return retl * segtree[2 * now\
+    \ + 2] + retr * segtree[2 * now + 1];\n    }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield>\
+    \ ys) {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
     \ {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
     \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
-    \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n\n      \
-    \  auto rec = [&](auto &&rec, int now) -> polynomial {\n            int i = now\
-    \ - (nx - 1);\n            if (i >= 0) return {ys[i]};\n            auto retl\
-    \ = rec(rec, 2 * now + 1);\n            auto retr = rec(rec, 2 * now + 2);\n \
-    \           return retl * segtree[2 * now + 2] + retr * segtree[2 * now + 1];\n\
-    \        };\n        return rec(rec, 0);\n    }\n};\n"
-  code: "#pragma once\n#include \"formal_power_series/formal_power_series.hpp\"\n\n\
-    // CUT begin\n// multipoint polynomial evaluation\n// input: xs = [x_0, ..., x_{N\
-    \ - 1}]: points to evaluate\n//        f = \\sum_i^M f_i x^i\n// Complexity: O(N\
-    \ (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename Tfield>\
-    \ struct MultipointEvaluation {\n    int nx;\n    using polynomial = FormalPowerSeries<Tfield>;\n\
-    \    std::vector<polynomial> segtree;\n    MultipointEvaluation(const std::vector<Tfield>\
-    \ &xs) : nx(xs.size()) {\n        segtree.resize(nx * 2 - 1);\n        for (int\
-    \ i = 0; i < nx; i++) { segtree[nx - 1 + i] = {-xs[i], 1}; }\n        for (int\
-    \ i = nx - 2; i >= 0; i--) { segtree[i] = segtree[2 * i + 1] * segtree[2 * i +\
-    \ 2]; }\n    }\n    std::vector<Tfield> ret;\n    std::vector<Tfield> evaluate_polynomial(polynomial\
-    \ f) {\n        ret.resize(nx);\n        auto rec = [&](auto &&rec, polynomial\
-    \ f, int now) -> void {\n            f %= segtree[now];\n            if (now -\
-    \ (nx - 1) >= 0) {\n                ret[now - (nx - 1)] = f.coeff(0);\n      \
-    \          return;\n            }\n            rec(rec, f, 2 * now + 1);\n   \
-    \         rec(rec, f, 2 * now + 2);\n        };\n        rec(rec, f, 0);\n   \
-    \     return ret;\n    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n   \
-    \ std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys) {\n   \
-    \     assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
+    \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n        return\
+    \ _rec_interpolation(0, ys);\n    }\n};\n"
+  code: "#pragma once\n#include \"formal_power_series.hpp\"\n#include <cassert>\n\
+    #include <vector>\n\n// CUT begin\n// multipoint polynomial evaluation\n// input:\
+    \ xs = [x_0, ..., x_{N - 1}]: points to evaluate\n//        f = \\sum_i^M f_i\
+    \ x^i\n// Complexity: O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\n\
+    template <typename Tfield> struct MultipointEvaluation {\n    int nx;\n    using\
+    \ polynomial = FormalPowerSeries<Tfield>;\n    std::vector<polynomial> segtree;\n\
+    \    MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size()) {\n \
+    \       segtree.resize(nx * 2 - 1);\n        for (int i = 0; i < nx; i++) { segtree[nx\
+    \ - 1 + i] = {-xs[i], 1}; }\n        for (int i = nx - 2; i >= 0; i--) { segtree[i]\
+    \ = segtree[2 * i + 1] * segtree[2 * i + 2]; }\n    }\n    std::vector<Tfield>\
+    \ ret;\n    void _eval_rec(polynomial f, int now) {\n        f %= segtree[now];\n\
+    \        if (now - (nx - 1) >= 0) {\n            ret[now - (nx - 1)] = f.coeff(0);\n\
+    \            return;\n        }\n        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f,\
+    \ 2 * now + 2);\n    }\n    std::vector<Tfield> evaluate_polynomial(polynomial\
+    \ f) {\n        ret.resize(nx);\n        _eval_rec(f, 0);\n        return ret;\n\
+    \    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial _rec_interpolation(int\
+    \ now, const std::vector<Tfield> &ys) const {\n        int i = now - (nx - 1);\n\
+    \        if (i >= 0) return {ys[i]};\n        auto retl = _rec_interpolation(2\
+    \ * now + 1, ys);\n        auto retr = _rec_interpolation(2 * now + 2, ys);\n\
+    \        return retl * segtree[2 * now + 2] + retr * segtree[2 * now + 1];\n \
+    \   }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys)\
+    \ {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
     \ {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
     \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
-    \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n\n      \
-    \  auto rec = [&](auto &&rec, int now) -> polynomial {\n            int i = now\
-    \ - (nx - 1);\n            if (i >= 0) return {ys[i]};\n            auto retl\
-    \ = rec(rec, 2 * now + 1);\n            auto retr = rec(rec, 2 * now + 2);\n \
-    \           return retl * segtree[2 * now + 2] + retr * segtree[2 * now + 1];\n\
-    \        };\n        return rec(rec, 0);\n    }\n};\n"
+    \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n        return\
+    \ _rec_interpolation(0, ys);\n    }\n};\n"
   dependsOn:
   - formal_power_series/formal_power_series.hpp
   - convolution/ntt.hpp
@@ -301,10 +300,10 @@ data:
   isVerificationFile: false
   path: formal_power_series/multipoint_evaluation.hpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
+  - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
 documentation_of: formal_power_series/multipoint_evaluation.hpp
 layout: document

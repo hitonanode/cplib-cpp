@@ -514,8 +514,8 @@ data:
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
     - icon: ':heavy_check_mark:'
-      path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-      title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
+      path: formal_power_series/test/multipoint_evaluation.test.cpp
+      title: formal_power_series/test/multipoint_evaluation.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/poly_taylor_shift.test.cpp
       title: formal_power_series/test/poly_taylor_shift.test.cpp

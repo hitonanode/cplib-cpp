@@ -79,8 +79,8 @@ data:
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
   - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
-    title: formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
+    path: formal_power_series/test/multipoint_evaluation.test.cpp
+    title: formal_power_series/test/multipoint_evaluation.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/poly_taylor_shift.test.cpp
     title: formal_power_series/test/poly_taylor_shift.test.cpp
@@ -304,11 +304,11 @@ data:
   - formal_power_series/test/stirling_number_of_1st.test.cpp
   - formal_power_series/test/stirling_number_of_2nd.test.cpp
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - formal_power_series/test/multipoint_evaluation_arbitrary_mod.test.cpp
   - formal_power_series/test/poly_taylor_shift.test.cpp
   - formal_power_series/test/fps_pow_another.test.cpp
   - formal_power_series/test/coeff_of_rational_function.test.cpp
   - formal_power_series/test/fps_log.test.cpp
+  - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/bernoulli_number.test.cpp
   - formal_power_series/test/sharp_p_subset_sum.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp

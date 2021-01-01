@@ -18,11 +18,10 @@ data:
     \ with monoid operation\n// - Each operation is amortized O(1)\n// - Verification:\
     \ <https://www.hackerrank.com/contests/tsg-live-4-programming-contest/challenges/tsg-live-4-procon-lcm-interval/submissions/code/1317888077>\n\
     // - Reference: <https://github.com/NiMiLib/NoshiMochiLibrary/blob/queue_aggregation/lib/data_structure/sequence/queue_aggregation.hpp>\n\
-    template <typename T_VAL, typename T_PROD, typename VAL2PROD, typename MERGE>\
-    \ struct SlidingWindowAggregation {\n    stack<pair<T_VAL, T_PROD>> front_stack,\
-    \ back_stack;\n    VAL2PROD val2prod;\n    MERGE merge;\n    T_PROD ID_;\n\n \
-    \   SlidingWindowAggregation(VAL2PROD v2p, MERGE pp2p, T_PROD id_prod) : val2prod(v2p),\
-    \ merge(pp2p), ID_(id_prod) {}\n    bool empty() const { return front_stack.empty()\
+    template <typename T_VAL, typename T_PROD, T_PROD (*val2prod)(T_VAL), T_PROD (*merge)(T_PROD,\
+    \ T_PROD)> struct SlidingWindowAggregation {\n    std::stack<std::pair<T_VAL,\
+    \ T_PROD>> front_stack, back_stack;\n    T_PROD ID_;\n\n    SlidingWindowAggregation(T_PROD\
+    \ id_prod) : ID_(id_prod) {}\n    bool empty() const { return front_stack.empty()\
     \ and back_stack.empty(); }\n    int size() const { return front_stack.size()\
     \ + back_stack.size(); }\n    T_PROD fold_all() const {\n        if (empty())\n\
     \            return ID_;\n        else if (front_stack.empty())\n            return\
@@ -37,24 +36,23 @@ data:
     \                front_stack.emplace(t, merge(val2prod(t), front_stack.top().second));\n\
     \                back_stack.pop();\n            }\n        }\n        T_VAL t\
     \ = front_stack.top().first;\n        front_stack.pop();\n        return t;\n\
-    \    }\n};\n\nauto swag_op_id = [](auto x) { return x; };\nauto swag_op_linear_merge\
-    \ = [](auto l, auto r) { return make_pair(l.first * r.first, l.second * r.first\
-    \ + r.second); };\n\n// Linear function composition\n// `f(x) = first * x + second`,\
-    \ operate most recently added function first\ntemplate <typename T> struct LinearFunctionQueue\
-    \ : public SlidingWindowAggregation<pair<T, T>, pair<T, T>, decltype(swag_op_id),\
-    \ decltype(swag_op_linear_merge)> {\n    LinearFunctionQueue() : SlidingWindowAggregation<pair<T,\
-    \ T>, pair<T, T>, decltype(swag_op_id), decltype(swag_op_linear_merge)>::SlidingWindowAggregation(swag_op_id,\
-    \ swag_op_linear_merge, pair<T, T>(1, 0)) {}\n};\n"
+    \    }\n};\n\ntemplate <typename T> T swag_op_id(T x) { return x; };\ntemplate\
+    \ <typename T> T swag_op_linear_merge(T l, T r) { return make_pair(l.first * r.first,\
+    \ l.second * r.first + r.second); };\n\n// Linear function composition\n// `f(x)\
+    \ = first * x + second`, operate most recently added function first\ntemplate\
+    \ <typename T> struct LinearFunctionQueue : public SlidingWindowAggregation<pair<T,\
+    \ T>, pair<T, T>, swag_op_id, swag_op_linear_merge> {\n    LinearFunctionQueue()\
+    \ : SlidingWindowAggregation<pair<T, T>, pair<T, T>, swag_op_id, swag_op_linear_merge>::SlidingWindowAggregation(pair<T,\
+    \ T>(1, 0)) {}\n};\n"
   code: "#pragma once\n#include <stack>\n#include <utility>\nusing namespace std;\n\
     \n// CUT begin\n// Sliding-Window Aggregation based queue\n// - `std::queue`-like\
     \ data structure with monoid operation\n// - Each operation is amortized O(1)\n\
     // - Verification: <https://www.hackerrank.com/contests/tsg-live-4-programming-contest/challenges/tsg-live-4-procon-lcm-interval/submissions/code/1317888077>\n\
     // - Reference: <https://github.com/NiMiLib/NoshiMochiLibrary/blob/queue_aggregation/lib/data_structure/sequence/queue_aggregation.hpp>\n\
-    template <typename T_VAL, typename T_PROD, typename VAL2PROD, typename MERGE>\
-    \ struct SlidingWindowAggregation {\n    stack<pair<T_VAL, T_PROD>> front_stack,\
-    \ back_stack;\n    VAL2PROD val2prod;\n    MERGE merge;\n    T_PROD ID_;\n\n \
-    \   SlidingWindowAggregation(VAL2PROD v2p, MERGE pp2p, T_PROD id_prod) : val2prod(v2p),\
-    \ merge(pp2p), ID_(id_prod) {}\n    bool empty() const { return front_stack.empty()\
+    template <typename T_VAL, typename T_PROD, T_PROD (*val2prod)(T_VAL), T_PROD (*merge)(T_PROD,\
+    \ T_PROD)> struct SlidingWindowAggregation {\n    std::stack<std::pair<T_VAL,\
+    \ T_PROD>> front_stack, back_stack;\n    T_PROD ID_;\n\n    SlidingWindowAggregation(T_PROD\
+    \ id_prod) : ID_(id_prod) {}\n    bool empty() const { return front_stack.empty()\
     \ and back_stack.empty(); }\n    int size() const { return front_stack.size()\
     \ + back_stack.size(); }\n    T_PROD fold_all() const {\n        if (empty())\n\
     \            return ID_;\n        else if (front_stack.empty())\n            return\
@@ -69,19 +67,19 @@ data:
     \                front_stack.emplace(t, merge(val2prod(t), front_stack.top().second));\n\
     \                back_stack.pop();\n            }\n        }\n        T_VAL t\
     \ = front_stack.top().first;\n        front_stack.pop();\n        return t;\n\
-    \    }\n};\n\nauto swag_op_id = [](auto x) { return x; };\nauto swag_op_linear_merge\
-    \ = [](auto l, auto r) { return make_pair(l.first * r.first, l.second * r.first\
-    \ + r.second); };\n\n// Linear function composition\n// `f(x) = first * x + second`,\
-    \ operate most recently added function first\ntemplate <typename T> struct LinearFunctionQueue\
-    \ : public SlidingWindowAggregation<pair<T, T>, pair<T, T>, decltype(swag_op_id),\
-    \ decltype(swag_op_linear_merge)> {\n    LinearFunctionQueue() : SlidingWindowAggregation<pair<T,\
-    \ T>, pair<T, T>, decltype(swag_op_id), decltype(swag_op_linear_merge)>::SlidingWindowAggregation(swag_op_id,\
-    \ swag_op_linear_merge, pair<T, T>(1, 0)) {}\n};\n"
+    \    }\n};\n\ntemplate <typename T> T swag_op_id(T x) { return x; };\ntemplate\
+    \ <typename T> T swag_op_linear_merge(T l, T r) { return make_pair(l.first * r.first,\
+    \ l.second * r.first + r.second); };\n\n// Linear function composition\n// `f(x)\
+    \ = first * x + second`, operate most recently added function first\ntemplate\
+    \ <typename T> struct LinearFunctionQueue : public SlidingWindowAggregation<pair<T,\
+    \ T>, pair<T, T>, swag_op_id, swag_op_linear_merge> {\n    LinearFunctionQueue()\
+    \ : SlidingWindowAggregation<pair<T, T>, pair<T, T>, swag_op_id, swag_op_linear_merge>::SlidingWindowAggregation(pair<T,\
+    \ T>(1, 0)) {}\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: other_data_structures/sliding_window_aggregation.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_data_structures/test/queue_operate_all_composite.test.cpp

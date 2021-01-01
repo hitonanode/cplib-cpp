@@ -28,17 +28,16 @@ data:
     \        unsigned long long a;\n        int k;\n        cin >> a >> k;\n     \
     \   cout << int_kth_root(a, k) << '\\n';\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/kth_root_integer\"\n#include\
-    \ \"utilities/int_kth_root.hpp\"\n#include <iostream>\nusing namespace std;\n\n\
-    int main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int T;\n\
-    \    cin >> T;\n    while (T--) {\n        unsigned long long a;\n        int\
-    \ k;\n        cin >> a >> k;\n        cout << int_kth_root(a, k) << '\\n';\n \
-    \   }\n}\n"
+    \ \"../int_kth_root.hpp\"\n#include <iostream>\nusing namespace std;\n\nint main()\
+    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int T;\n    cin\
+    \ >> T;\n    while (T--) {\n        unsigned long long a;\n        int k;\n  \
+    \      cin >> a >> k;\n        cout << int_kth_root(a, k) << '\\n';\n    }\n}\n"
   dependsOn:
   - utilities/int_kth_root.hpp
   isVerificationFile: true
   path: utilities/test/kth_root_integer.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: utilities/test/kth_root_integer.test.cpp

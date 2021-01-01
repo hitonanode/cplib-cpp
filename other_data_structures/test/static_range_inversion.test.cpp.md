@@ -70,22 +70,21 @@ data:
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
     \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int N, Q;\n    cin >> N >> Q;\n    vector<int>\
-    \ A(N);\n    for (auto &a : A) { cin >> a; }\n    StaticRangeInversion riq(A);\n\
+    \ A(N);\n    for (auto &a : A) cin >> a;\n    StaticRangeInversion<int> riq(A);\n\
     \n    while (Q--) {\n        int l, r;\n        cin >> l >> r;\n        cout <<\
     \ riq.get(l, r) << '\\n';\n    }\n}\n"
-  code: "#include \"other_data_structures/static_range_inversion.hpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\n\n#include\
-    \ <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N, Q;\n    cin >> N >> Q;\n    vector<int> A(N);\n    for (auto &a :\
-    \ A) { cin >> a; }\n    StaticRangeInversion riq(A);\n\n    while (Q--) {\n  \
-    \      int l, r;\n        cin >> l >> r;\n        cout << riq.get(l, r) << '\\\
-    n';\n    }\n}\n"
+  code: "#include \"../static_range_inversion.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
+    \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N, Q;\n    cin >> N >> Q;\n    vector<int>\
+    \ A(N);\n    for (auto &a : A) cin >> a;\n    StaticRangeInversion<int> riq(A);\n\
+    \n    while (Q--) {\n        int l, r;\n        cin >> l >> r;\n        cout <<\
+    \ riq.get(l, r) << '\\n';\n    }\n}\n"
   dependsOn:
   - other_data_structures/static_range_inversion.hpp
   isVerificationFile: true
   path: other_data_structures/test/static_range_inversion.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: other_data_structures/test/static_range_inversion.test.cpp

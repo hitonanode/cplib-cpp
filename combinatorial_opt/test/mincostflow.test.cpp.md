@@ -147,27 +147,27 @@ data:
     \ long, long long> mcf_ac(V);\n    MinCostFlow<long long, long long> mcf_bf(V);\n\
     \    for (int i = 0; i < E; i++) {\n        int u, v, c, d;\n        std::cin\
     \ >> u >> v >> c >> d;\n        mcf_ac.add_edge(u, v, c, d);\n        mcf_bf.add_edge(u,\
-    \ v, c, d);\n    }\n\n    auto [cap_ac, cost_ac] = mcf_ac.flow(0, V - 1, F);\n\
-    \    auto [cap_bf, cost_bf] = mcf_bf.flow(0, V - 1, F);\n    assert(cap_ac ==\
-    \ cap_bf and cost_ac == cost_bf);\n    std::cout << (cap_ac == F ? cost_ac : -1)\
-    \ << '\\n';\n}\n"
+    \ v, c, d);\n    }\n\n    auto capcost_ac = mcf_ac.flow(0, V - 1, F);\n    auto\
+    \ capcost_bf = mcf_bf.flow(0, V - 1, F);\n    assert(capcost_ac == capcost_bf);\n\
+    \    std::cout << (capcost_ac.first == F ? capcost_ac.second : -1) << '\\n';\n\
+    }\n"
   code: "#include \"../mincostflow.hpp\"\n#include \"../mincostflow_bellmanford.hpp\"\
     \n#include <cassert>\n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
     \n\nint main() {\n    int V, E, F;\n    std::cin >> V >> E >> F;\n    mcf_graph<long\
     \ long, long long> mcf_ac(V);\n    MinCostFlow<long long, long long> mcf_bf(V);\n\
     \    for (int i = 0; i < E; i++) {\n        int u, v, c, d;\n        std::cin\
     \ >> u >> v >> c >> d;\n        mcf_ac.add_edge(u, v, c, d);\n        mcf_bf.add_edge(u,\
-    \ v, c, d);\n    }\n\n    auto [cap_ac, cost_ac] = mcf_ac.flow(0, V - 1, F);\n\
-    \    auto [cap_bf, cost_bf] = mcf_bf.flow(0, V - 1, F);\n    assert(cap_ac ==\
-    \ cap_bf and cost_ac == cost_bf);\n    std::cout << (cap_ac == F ? cost_ac : -1)\
-    \ << '\\n';\n}\n"
+    \ v, c, d);\n    }\n\n    auto capcost_ac = mcf_ac.flow(0, V - 1, F);\n    auto\
+    \ capcost_bf = mcf_bf.flow(0, V - 1, F);\n    assert(capcost_ac == capcost_bf);\n\
+    \    std::cout << (capcost_ac.first == F ? capcost_ac.second : -1) << '\\n';\n\
+    }\n"
   dependsOn:
   - combinatorial_opt/mincostflow.hpp
   - combinatorial_opt/mincostflow_bellmanford.hpp
   isVerificationFile: true
   path: combinatorial_opt/test/mincostflow.test.cpp
   requiredBy: []
-  timestamp: '2020-12-14 02:27:33+09:00'
+  timestamp: '2021-01-01 15:35:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/mincostflow.test.cpp

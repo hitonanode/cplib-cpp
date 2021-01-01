@@ -59,18 +59,17 @@ data:
     \ long a;\n        std::cin >> a;\n        auto ret = FactorizeLonglong(a);\n\
     \        std::cout << ret.size();\n        for (auto p : ret) std::cout << ' '\
     \ << p;\n        std::cout << '\\n';\n    }\n}\n"
-  code: "#include \"number/factorize.hpp\"\n#include <iostream>\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/factorize\"\n\nint main() {\n    int Q;\n    std::cin\
-    \ >> Q;\n    while (Q--) {\n        long long a;\n        std::cin >> a;\n   \
-    \     auto ret = FactorizeLonglong(a);\n        std::cout << ret.size();\n   \
-    \     for (auto p : ret) std::cout << ' ' << p;\n        std::cout << '\\n';\n\
-    \    }\n}\n"
+  code: "#include \"../factorize.hpp\"\n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\
+    \n\nint main() {\n    int Q;\n    std::cin >> Q;\n    while (Q--) {\n        long\
+    \ long a;\n        std::cin >> a;\n        auto ret = FactorizeLonglong(a);\n\
+    \        std::cout << ret.size();\n        for (auto p : ret) std::cout << ' '\
+    \ << p;\n        std::cout << '\\n';\n    }\n}\n"
   dependsOn:
   - number/factorize.hpp
   isVerificationFile: true
   path: number/test/factorize_longlong.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/factorize_longlong.test.cpp
