@@ -1,5 +1,5 @@
-#include "modint.hpp"
-#include "other_data_structures/sliding_window_aggregation.hpp"
+#include "../../modint.hpp"
+#include "../sliding_window_aggregation.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 #include <iostream>
 

@@ -1,4 +1,4 @@
-#include "other_data_structures/fibonacci_heap.hpp"
+#include "../fibonacci_heap.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
 
 #include <iostream>

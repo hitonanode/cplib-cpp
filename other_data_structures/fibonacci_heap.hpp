@@ -50,39 +50,38 @@ template <typename Tp> struct fibonacci_heap {
     bool empty() const noexcept { return sz == 0; }
     int size() const noexcept { return sz; }
 
-    void _consolidate() {
-        std::array<Node *, 30> arr;
-        arr.fill(nullptr);
-
-        auto fmerge = [&](auto &&func, Node *ptr) -> void {
-            int d = ptr->deg;
-            if (arr[d] == nullptr)
-                arr[d] = ptr;
+    std::array<Node *, 30> _arr;
+    void _fmerge(Node *ptr) {
+        int d = ptr->deg;
+        if (_arr[d] == nullptr)
+            _arr[d] = ptr;
+        else {
+            Node *cptr = _arr[d];
+            if (cptr->val < ptr->val) std::swap(ptr, cptr);
+            ptr->deg++;
+            cptr->parent = ptr;
+            if (ptr->child == nullptr)
+                ptr->child = cptr;
             else {
-                Node *cptr = arr[d];
-                if (cptr->val < ptr->val) std::swap(ptr, cptr);
-                ptr->deg++;
-                cptr->parent = ptr;
-                if (ptr->child == nullptr)
-                    ptr->child = cptr;
-                else {
-                    Node *cl = ptr->child, *cr = ptr->child->right;
-                    assert(cl->right == cr and cr->left == cl);
-                    cptr->left = cl, cptr->right = cr, cl->right = cr->left = cptr;
-                }
-                arr[d] = nullptr;
-                func(func, ptr);
+                Node *cl = ptr->child, *cr = ptr->child->right;
+                assert(cl->right == cr and cr->left == cl);
+                cptr->left = cl, cptr->right = cr, cl->right = cr->left = cptr;
             }
-        };
+            _arr[d] = nullptr;
+            _fmerge(ptr);
+        }
+    }
+    void _consolidate() {
+        _arr.fill(nullptr);
         for (auto ptr : roots)
             if (ptr != nullptr) {
                 if (ptr->deg < 0)
                     delete ptr;
                 else
-                    fmerge(fmerge, ptr);
+                    _fmerge(ptr);
             }
         roots.clear(), ptop = nullptr;
-        for (auto ptr : arr)
+        for (auto ptr : _arr)
             if (ptr != nullptr) _add_tree(ptr);
     }
 
@@ -123,16 +122,16 @@ template <typename Tp> struct fibonacci_heap {
         _consolidate();
     }
 
+    void _deldfs(Node *now) {
+        while (now != nullptr) {
+            if (now->child != nullptr) _deldfs(now->child);
+            Node *nxt = now->right;
+            delete now;
+            now = nxt;
+        }
+    }
     void clear() {
-        auto deldfs = [&](auto &&f, Node *now) -> void {
-            while (now != nullptr) {
-                if (now->child != nullptr) f(f, now->child);
-                Node *nxt = now->right;
-                delete now;
-                now = nxt;
-            }
-        };
-        for (auto root : roots) { deldfs(deldfs, root); }
+        for (auto root : roots) _deldfs(root);
         sz = 0;
         roots.clear();
         ptop = nullptr;

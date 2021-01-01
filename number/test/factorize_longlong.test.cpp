@@ -1,4 +1,4 @@
-#include "number/factorize.hpp"
+#include "../factorize.hpp"
 #include <iostream>
 #define PROBLEM "https://judge.yosupo.jp/problem/factorize"
 

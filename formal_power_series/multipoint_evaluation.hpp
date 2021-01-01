@@ -1,5 +1,7 @@
 #pragma once
-#include "formal_power_series/formal_power_series.hpp"
+#include "formal_power_series.hpp"
+#include <cassert>
+#include <vector>
 
 // CUT begin
 // multipoint polynomial evaluation
@@ -16,22 +18,29 @@ template <typename Tfield> struct MultipointEvaluation {
         for (int i = nx - 2; i >= 0; i--) { segtree[i] = segtree[2 * i + 1] * segtree[2 * i + 2]; }
     }
     std::vector<Tfield> ret;
+    void _eval_rec(polynomial f, int now) {
+        f %= segtree[now];
+        if (now - (nx - 1) >= 0) {
+            ret[now - (nx - 1)] = f.coeff(0);
+            return;
+        }
+        _eval_rec(f, 2 * now + 1);
+        _eval_rec(f, 2 * now + 2);
+    }
     std::vector<Tfield> evaluate_polynomial(polynomial f) {
         ret.resize(nx);
-        auto rec = [&](auto &&rec, polynomial f, int now) -> void {
-            f %= segtree[now];
-            if (now - (nx - 1) >= 0) {
-                ret[now - (nx - 1)] = f.coeff(0);
-                return;
-            }
-            rec(rec, f, 2 * now + 1);
-            rec(rec, f, 2 * now + 2);
-        };
-        rec(rec, f, 0);
+        _eval_rec(f, 0);
         return ret;
     }
 
     std::vector<Tfield> _interpolate_coeffs;
+    polynomial _rec_interpolation(int now, const std::vector<Tfield> &ys) const {
+        int i = now - (nx - 1);
+        if (i >= 0) return {ys[i]};
+        auto retl = _rec_interpolation(2 * now + 1, ys);
+        auto retr = _rec_interpolation(2 * now + 2, ys);
+        return retl * segtree[2 * now + 2] + retr * segtree[2 * now + 1];
+    }
     std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys) {
         assert(nx == int(ys.size()));
         if (_interpolate_coeffs.empty()) {
@@ -39,14 +48,6 @@ template <typename Tfield> struct MultipointEvaluation {
             for (auto &x : _interpolate_coeffs) x = x.inv();
         }
         for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];
-
-        auto rec = [&](auto &&rec, int now) -> polynomial {
-            int i = now - (nx - 1);
-            if (i >= 0) return {ys[i]};
-            auto retl = rec(rec, 2 * now + 1);
-            auto retr = rec(rec, 2 * now + 2);
-            return retl * segtree[2 * now + 2] + retr * segtree[2 * now + 1];
-        };
-        return rec(rec, 0);
+        return _rec_interpolation(0, ys);
     }
 };

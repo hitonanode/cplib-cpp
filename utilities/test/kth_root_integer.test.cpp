@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/kth_root_integer"
-#include "utilities/int_kth_root.hpp"
+#include "../int_kth_root.hpp"
 #include <iostream>
 using namespace std;
 

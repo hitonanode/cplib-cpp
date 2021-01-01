@@ -53,27 +53,29 @@ struct DirectedGraphSCC {
     // Find and output the vertices that form a closed cycle.
     // output: {v_1, ..., v_C}, where C is the length of cycle,
     //         {} if there's NO cycle (graph is DAG)
+    int _c, _init;
+    std::vector<int> _ret_cycle;
+    bool _dfs_detectcycle(int now, bool b0) {
+        if (now == _init and b0) return true;
+        for (auto nxt : to[now])
+            if (cmp[nxt] == _c and !used[nxt]) {
+                _ret_cycle.emplace_back(nxt), used[nxt] = 1;
+                if (_dfs_detectcycle(nxt, true)) return true;
+                _ret_cycle.pop_back();
+            }
+        return false;
+    }
     std::vector<int> DetectCycle() {
         int ns = FindStronglyConnectedComponents();
         if (ns == V) return {};
         std::vector<int> cnt(ns);
         for (auto x : cmp) cnt[x]++;
-        const int c = std::find_if(cnt.begin(), cnt.end(), [](int x) { return x > 1; }) - cnt.begin();
-        const int init = std::find(cmp.begin(), cmp.end(), c) - cmp.begin();
+        _c = std::find_if(cnt.begin(), cnt.end(), [](int x) { return x > 1; }) - cnt.begin();
+        _init = std::find(cmp.begin(), cmp.end(), _c) - cmp.begin();
         used.assign(V, false);
-        std::vector<int> ret;
-        auto dfs = [&](auto &&dfs, int now, bool b0) -> bool {
-            if (now == init and b0) return true;
-            for (auto nxt : to[now])
-                if (cmp[nxt] == c and !used[nxt]) {
-                    ret.emplace_back(nxt), used[nxt] = 1;
-                    if (dfs(dfs, nxt, true)) return true;
-                    ret.pop_back();
-                }
-            return false;
-        };
-        dfs(dfs, init, false);
-        return ret;
+        _ret_cycle.clear();
+        _dfs_detectcycle(_init, false);
+        return _ret_cycle;
     }
 
     // After calling `FindStronglyConnectedComponents()`, generate a new graph by uniting all vertices
