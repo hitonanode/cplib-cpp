@@ -67,22 +67,22 @@ struct AddMonotoneConvexHullTrick {
 
     static AddMonotoneConvexHullTrick merge(const AddMonotoneConvexHullTrick &cht1, const AddMonotoneConvexHullTrick &cht2) {
         AddMonotoneConvexHullTrick ret;
-        unsigned i1 = 0, i2 = 0;
+        auto i1 = cht1.q.begin(), i2 = cht2.q.begin();
         static const T_CHT sgn = is_minimizer ? 1 : -1;
-        while (i1 < cht1.q.size() and i2 < cht2.q.size()) {
-            T_CHT a = -1, b = -1;
-            if (cht1.q[i1].first == cht2.q[i2].first) {
-                a = cht1.q[i1].first, b = std::min(cht1.q[i1].second, cht2.q[i2].second);
+        T_CHT a = 0, b = 0;
+        while (i1 != cht1.q.end() and i2 != cht2.q.end()) {
+            if (i1->first == i2->first) {
+                a = i1->first, b = std::min(i1->second, i2->second);
                 i1++, i2++;
-            } else if (cht1.q[i1].first > cht2.q[i2].first) {
-                a = cht1.q[i1].first, b = cht1.q[i1].second, i1++;
+            } else if (i1->first > i2->first) {
+                a = i1->first, b = i1->second, i1++;
             } else {
-                a = cht2.q[i2].first, b = cht2.q[i2].second, i2++;
+                a = i2->first, b = i2->second, i2++;
             }
             ret.add_line(a * sgn, b * sgn);
         }
-        while (i1 < cht1.q.size()) ret.add_line(cht1.q[i1].first * sgn, cht1.q[i1].second * sgn), i1++;
-        while (i2 < cht2.q.size()) ret.add_line(cht2.q[i2].first * sgn, cht2.q[i2].second * sgn), i2++;
+        while (i1 != cht1.q.end()) ret.add_line(i1->first * sgn, i1->second * sgn), i1++;
+        while (i2 != cht2.q.end()) ret.add_line(i2->first * sgn, i2->second * sgn), i2++;
         return ret;
     }
 };
