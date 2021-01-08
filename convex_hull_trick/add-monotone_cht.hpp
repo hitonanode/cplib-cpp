@@ -9,17 +9,26 @@
 // - add_convex_parabola(c, a, b): Add `y = c(x - a)^2 + b`, c is constant
 // - get(x): Calculate min/max. value of `y = ax + b`'s at point x, O(logN)
 // - parabola_get(c, x): Caclculate min/max. value of `y = c(x - a)^2 + b`'s
-// Verifyed: <https://codeforces.com/gym/101806/problem/R>
+// - merge(): merge two CHTs in linear time
+// Verified: <https://codeforces.com/gym/101806/problem/R>
+//           <https://atcoder.jp/contests/pakencamp-2020-day2/submissions/19262614>
 template <bool is_minimizer, typename T_CHT = long long, typename T_MP = __int128, T_CHT INF = 1LL << 61>
-struct AddMonotoneConvexHullTrick // (a, b) means `y = ax + b`
-{
-    std::deque<std::pair<T_CHT, T_CHT>> q;
+struct AddMonotoneConvexHullTrick {
+    std::deque<std::pair<T_CHT, T_CHT>> q; // [(a0, b0), ..., (ai, bi), ...], a0 > a1 > a2 > ...
     AddMonotoneConvexHullTrick() {}
     void add_line(T_CHT a, T_CHT b) { // Add y = ax + b
         if (!is_minimizer) a = -a, b = -b;
-        if (q.empty())
+        if (q.empty()) {
             q.emplace_back(a, b);
-        else if (q.back().first >= a) {
+        } else if (q.size() == 1) {
+            if (q.front().first == a) {
+                if (b < q.front().second) q.front().second = b;
+            } else if (q.front().first > a) {
+                q.emplace_back(a, b);
+            } else {
+                q.emplace_front(a, b);
+            }
+        } else if (q.back().first >= a) {
             while (q.size() > 1u) {
                 if (q.back().first == a and q.back().second <= b) return;
                 int sz = q.size();
@@ -52,6 +61,28 @@ struct AddMonotoneConvexHullTrick // (a, b) means `y = ax + b`
         }
         return _get_idx(l, x) * (is_minimizer ? 1 : -1);
     }
-    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); } // Add y = c(x - a)^2 + b
+
+    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); }
     T_CHT parabola_get(T_CHT c, T_CHT x) const { return get(x) + c * x * x; }
+
+    static AddMonotoneConvexHullTrick merge(const AddMonotoneConvexHullTrick &cht1, const AddMonotoneConvexHullTrick &cht2) {
+        AddMonotoneConvexHullTrick ret;
+        unsigned i1 = 0, i2 = 0;
+        static const T_CHT sgn = is_minimizer ? 1 : -1;
+        while (i1 < cht1.q.size() and i2 < cht2.q.size()) {
+            T_CHT a = -1, b = -1;
+            if (cht1.q[i1].first == cht2.q[i2].first) {
+                a = cht1.q[i1].first, b = std::min(cht1.q[i1].second, cht2.q[i2].second);
+                i1++, i2++;
+            } else if (cht1.q[i1].first > cht2.q[i2].first) {
+                a = cht1.q[i1].first, b = cht1.q[i1].second, i1++;
+            } else {
+                a = cht2.q[i2].first, b = cht2.q[i2].second, i2++;
+            }
+            ret.add_line(a * sgn, b * sgn);
+        }
+        while (i1 < cht1.q.size()) ret.add_line(cht1.q[i1].first * sgn, cht1.q[i1].second * sgn), i1++;
+        while (i2 < cht2.q.size()) ret.add_line(cht2.q[i2].first * sgn, cht2.q[i2].second * sgn), i2++;
+        return ret;
+    }
 };
