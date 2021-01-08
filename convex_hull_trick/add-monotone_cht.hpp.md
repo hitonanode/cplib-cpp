@@ -48,18 +48,17 @@ data:
     \ a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); }\n    T_CHT parabola_get(T_CHT\
     \ c, T_CHT x) const { return get(x) + c * x * x; }\n\n    static AddMonotoneConvexHullTrick\
     \ merge(const AddMonotoneConvexHullTrick &cht1, const AddMonotoneConvexHullTrick\
-    \ &cht2) {\n        AddMonotoneConvexHullTrick ret;\n        unsigned i1 = 0,\
-    \ i2 = 0;\n        static const T_CHT sgn = is_minimizer ? 1 : -1;\n        while\
-    \ (i1 < cht1.q.size() and i2 < cht2.q.size()) {\n            T_CHT a = -1, b =\
-    \ -1;\n            if (cht1.q[i1].first == cht2.q[i2].first) {\n             \
-    \   a = cht1.q[i1].first, b = std::min(cht1.q[i1].second, cht2.q[i2].second);\n\
-    \                i1++, i2++;\n            } else if (cht1.q[i1].first > cht2.q[i2].first)\
-    \ {\n                a = cht1.q[i1].first, b = cht1.q[i1].second, i1++;\n    \
-    \        } else {\n                a = cht2.q[i2].first, b = cht2.q[i2].second,\
-    \ i2++;\n            }\n            ret.add_line(a * sgn, b * sgn);\n        }\n\
-    \        while (i1 < cht1.q.size()) ret.add_line(cht1.q[i1].first * sgn, cht1.q[i1].second\
-    \ * sgn), i1++;\n        while (i2 < cht2.q.size()) ret.add_line(cht2.q[i2].first\
-    \ * sgn, cht2.q[i2].second * sgn), i2++;\n        return ret;\n    }\n};\n"
+    \ &cht2) {\n        AddMonotoneConvexHullTrick ret;\n        auto i1 = cht1.q.begin(),\
+    \ i2 = cht2.q.begin();\n        static const T_CHT sgn = is_minimizer ? 1 : -1;\n\
+    \        T_CHT a = 0, b = 0;\n        while (i1 != cht1.q.end() and i2 != cht2.q.end())\
+    \ {\n            if (i1->first == i2->first) {\n                a = i1->first,\
+    \ b = std::min(i1->second, i2->second);\n                i1++, i2++;\n       \
+    \     } else if (i1->first > i2->first) {\n                a = i1->first, b =\
+    \ i1->second, i1++;\n            } else {\n                a = i2->first, b =\
+    \ i2->second, i2++;\n            }\n            ret.add_line(a * sgn, b * sgn);\n\
+    \        }\n        while (i1 != cht1.q.end()) ret.add_line(i1->first * sgn, i1->second\
+    \ * sgn), i1++;\n        while (i2 != cht2.q.end()) ret.add_line(i2->first * sgn,\
+    \ i2->second * sgn), i2++;\n        return ret;\n    }\n};\n"
   code: "#pragma once\n#include <deque>\n#include <utility>\n\n// CUT begin\n// Convex\
     \ Hull Trick for monotone insertions\n// - is_minimizer: if true, calculates min.\
     \ Otherwise, calculates max.\n// - add_line(a, b): Add `y = ax + b`, O(1) if `a`\
@@ -99,23 +98,22 @@ data:
     \ a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); }\n    T_CHT parabola_get(T_CHT\
     \ c, T_CHT x) const { return get(x) + c * x * x; }\n\n    static AddMonotoneConvexHullTrick\
     \ merge(const AddMonotoneConvexHullTrick &cht1, const AddMonotoneConvexHullTrick\
-    \ &cht2) {\n        AddMonotoneConvexHullTrick ret;\n        unsigned i1 = 0,\
-    \ i2 = 0;\n        static const T_CHT sgn = is_minimizer ? 1 : -1;\n        while\
-    \ (i1 < cht1.q.size() and i2 < cht2.q.size()) {\n            T_CHT a = -1, b =\
-    \ -1;\n            if (cht1.q[i1].first == cht2.q[i2].first) {\n             \
-    \   a = cht1.q[i1].first, b = std::min(cht1.q[i1].second, cht2.q[i2].second);\n\
-    \                i1++, i2++;\n            } else if (cht1.q[i1].first > cht2.q[i2].first)\
-    \ {\n                a = cht1.q[i1].first, b = cht1.q[i1].second, i1++;\n    \
-    \        } else {\n                a = cht2.q[i2].first, b = cht2.q[i2].second,\
-    \ i2++;\n            }\n            ret.add_line(a * sgn, b * sgn);\n        }\n\
-    \        while (i1 < cht1.q.size()) ret.add_line(cht1.q[i1].first * sgn, cht1.q[i1].second\
-    \ * sgn), i1++;\n        while (i2 < cht2.q.size()) ret.add_line(cht2.q[i2].first\
-    \ * sgn, cht2.q[i2].second * sgn), i2++;\n        return ret;\n    }\n};\n"
+    \ &cht2) {\n        AddMonotoneConvexHullTrick ret;\n        auto i1 = cht1.q.begin(),\
+    \ i2 = cht2.q.begin();\n        static const T_CHT sgn = is_minimizer ? 1 : -1;\n\
+    \        T_CHT a = 0, b = 0;\n        while (i1 != cht1.q.end() and i2 != cht2.q.end())\
+    \ {\n            if (i1->first == i2->first) {\n                a = i1->first,\
+    \ b = std::min(i1->second, i2->second);\n                i1++, i2++;\n       \
+    \     } else if (i1->first > i2->first) {\n                a = i1->first, b =\
+    \ i1->second, i1++;\n            } else {\n                a = i2->first, b =\
+    \ i2->second, i2++;\n            }\n            ret.add_line(a * sgn, b * sgn);\n\
+    \        }\n        while (i1 != cht1.q.end()) ret.add_line(i1->first * sgn, i1->second\
+    \ * sgn), i1++;\n        while (i2 != cht2.q.end()) ret.add_line(i2->first * sgn,\
+    \ i2->second * sgn), i2++;\n        return ret;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: convex_hull_trick/add-monotone_cht.hpp
   requiredBy: []
-  timestamp: '2021-01-08 18:14:29+09:00'
+  timestamp: '2021-01-08 19:10:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: convex_hull_trick/add-monotone_cht.hpp
