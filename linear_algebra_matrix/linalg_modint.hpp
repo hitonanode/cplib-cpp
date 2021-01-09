@@ -14,7 +14,8 @@ template <typename T> struct matrix {
     inline T get(int i, int j) const { return elem[i * W + j]; }
     operator std::vector<std::vector<T>>() const {
         std::vector<std::vector<T>> ret(H);
-        for (int i = 0; i < H; i++) std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));
+        for (int i = 0; i < H; i++)
+            std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));
         return ret;
     }
 
@@ -93,6 +94,8 @@ template <typename T> struct matrix {
     matrix gauss_jordan() const {
         int c = 0;
         matrix mtr(*this);
+        std::vector<int> ws;
+        ws.reserve(W);
         for (int h = 0; h < H; h++) {
             if (c == W) break;
             int piv = -1;
@@ -112,10 +115,15 @@ template <typename T> struct matrix {
                     mtr.at(piv, w) *= -1; // To preserve sign of determinant
                 }
             }
+            ws.clear();
+            for (int w = c; w < W; w++) {
+                if (mtr.at(h, w) != 0) ws.emplace_back(w);
+            }
+            const T hcinv = mtr.at(h, c).inv();
             for (int hh = 0; hh < H; hh++)
                 if (hh != h) {
-                    T coeff = mtr.at(hh, c) * mtr.at(h, c).inv();
-                    for (int w = W - 1; w >= c; w--) { mtr.at(hh, w) -= mtr.at(h, w) * coeff; }
+                    const T coeff = mtr.at(hh, c) * hcinv;
+                    for (auto w : ws) mtr.at(hh, w) -= mtr.at(h, w) * coeff;
                 }
             c++;
         }

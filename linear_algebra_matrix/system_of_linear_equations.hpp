@@ -1,5 +1,5 @@
 #pragma once
-#include "linear_algebra_matrix/linalg_modint.hpp"
+#include "linalg_modint.hpp"
 #include <utility>
 #include <vector>
 
@@ -10,7 +10,8 @@
 // Complexity:
 // - Yield one of the possible solutions: O(H^2 W) (H: # of eqs., W: # of variables)
 // - Enumerate all of the bases: O(HW(H + W))
-template <typename T> std::pair<std::vector<T>, std::vector<std::vector<T>>> system_of_linear_equations(matrix<T> A, std::vector<T> b) {
+template <typename T>
+std::pair<std::vector<T>, std::vector<std::vector<T>>> system_of_linear_equations(matrix<T> A, std::vector<T> b) {
     int H = A.H, W = A.W;
     matrix<T> M(H, W + 1);
     for (int i = 0; i < H; i++) {

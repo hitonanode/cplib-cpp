@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/system_of_linear_equations"
-#include "linear_algebra_matrix/system_of_linear_equations.hpp"
-#include "modint.hpp"
+#include "../../modint.hpp"
+#include "../system_of_linear_equations.hpp"
 #include <iostream>
 using mint = ModInt<998244353>;
 

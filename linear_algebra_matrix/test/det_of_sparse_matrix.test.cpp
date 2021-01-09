@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sparse_matrix_det"
-#include "linear_algebra_matrix/det_of_sparse_matrix.hpp"
-#include "modint.hpp"
+#include "../../modint.hpp"
+#include "../det_of_sparse_matrix.hpp"
 #include <iostream>
 
 int main() {
