@@ -212,6 +212,9 @@ data:
       path: number/big_combination_logarithm.hpp
       title: number/big_combination_logarithm.hpp
     - icon: ':heavy_check_mark:'
+      path: number/bs_sieve.hpp
+      title: number/bs_sieve.hpp
+    - icon: ':heavy_check_mark:'
       path: number/count_primes.hpp
       title: number/count_primes.hpp
     - icon: ':warning:'
@@ -646,6 +649,9 @@ data:
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: number/test/bs_sieve.test.cpp
+      title: number/test/bs_sieve.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/count_primes.test.cpp
       title: number/test/count_primes.test.cpp
