@@ -223,7 +223,7 @@ data:
     - icon: ':warning:'
       path: number/enumerate_partitions.hpp
       title: number/enumerate_partitions.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: number/eratosthenes.hpp
       title: number/eratosthenes.hpp
     - icon: ':warning:'
@@ -235,6 +235,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
+    - icon: ':heavy_check_mark:'
+      path: number/sieve.hpp
+      title: number/sieve.hpp
   - name: other_algorithms
     pages:
     - icon: ':warning:'
@@ -649,6 +652,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/discrete_logarithm.test.cpp
       title: number/test/discrete_logarithm.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/enumerate_primes.test.cpp
+      title: number/test/enumerate_primes.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/factorize_longlong.test.cpp
       title: number/test/factorize_longlong.test.cpp

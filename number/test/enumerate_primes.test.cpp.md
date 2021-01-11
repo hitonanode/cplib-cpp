@@ -10,17 +10,18 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A
+    PROBLEM: https://judge.yosupo.jp/problem/enumerate_primes
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A
-  bundledCode: "#line 2 \"number/sieve.hpp\"\n#include <cassert>\n#include <map>\n\
-    #include <vector>\n\n// CUT begin\n// Linear sieve algorithm for fast prime factorization\n\
-    // Complexity: O(N) time, O(N) space:\n// - MAXN = 10^7:  ~44 MB,  80~100 ms (Codeforces\
-    \ / AtCoder GCC, C++17)\n// - MAXN = 10^8: ~435 MB, 810~980 ms (Codeforces / AtCoder\
-    \ GCC, C++17)\n// Reference:\n// [1] D. Gries, J. Misra, \"A Linear Sieve Algorithm\
-    \ for Finding Prime Numbers,\"\n//     Communications of the ACM, 21(12), 999-1003,\
-    \ 1978.\n// - <https://cp-algorithms.com/algebra/prime-sieve-linear.html>\n//\
-    \ - <https://37zigen.com/linear-sieve/>\nstruct Sieve {\n    std::vector<int>\
+    - https://judge.yosupo.jp/problem/enumerate_primes
+  bundledCode: "#line 1 \"number/test/enumerate_primes.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#line 2 \"number/sieve.hpp\"\
+    \n#include <cassert>\n#include <map>\n#include <vector>\n\n// CUT begin\n// Linear\
+    \ sieve algorithm for fast prime factorization\n// Complexity: O(N) time, O(N)\
+    \ space:\n// - MAXN = 10^7:  ~44 MB,  80~100 ms (Codeforces / AtCoder GCC, C++17)\n\
+    // - MAXN = 10^8: ~435 MB, 810~980 ms (Codeforces / AtCoder GCC, C++17)\n// Reference:\n\
+    // [1] D. Gries, J. Misra, \"A Linear Sieve Algorithm for Finding Prime Numbers,\"\
+    \n//     Communications of the ACM, 21(12), 999-1003, 1978.\n// - <https://cp-algorithms.com/algebra/prime-sieve-linear.html>\n\
+    // - <https://37zigen.com/linear-sieve/>\nstruct Sieve {\n    std::vector<int>\
     \ min_factor;\n    std::vector<int> primes;\n    Sieve(int MAXN) : min_factor(MAXN\
     \ + 1) {\n        for (int d = 2; d <= MAXN; d++) {\n            if (!min_factor[d])\
     \ {\n                min_factor[d] = d;\n                primes.emplace_back(d);\n\
@@ -52,29 +53,32 @@ data:
     \ if ((i / min_factor[i]) % min_factor[i] == 0)\n                ret[i] = 0;\n\
     \            else\n                ret[i] = -ret[i / min_factor[i]];\n       \
     \ }\n        return ret;\n    }\n};\n// Sieve sieve(1 << 15);  // (can factorize\
-    \ n <= 10^9)\n#line 2 \"number/test/prime_factorization.test.cpp\"\n#include <iostream>\n\
-    #define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A\"\
-    \nusing namespace std;\n\nint main() {\n    Sieve sieve(1 << 15);\n    int N;\n\
-    \    cin >> N;\n    map<long long int, int> factors = sieve.factorize<long long>(N);\n\
-    \    cout << N << ':';\n    for (auto p : factors) {\n        while (p.second--)\
-    \ cout << ' ' << p.first;\n    }\n    cout << '\\n';\n}\n"
-  code: "#include \"../sieve.hpp\"\n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A\"\
-    \nusing namespace std;\n\nint main() {\n    Sieve sieve(1 << 15);\n    int N;\n\
-    \    cin >> N;\n    map<long long int, int> factors = sieve.factorize<long long>(N);\n\
-    \    cout << N << ':';\n    for (auto p : factors) {\n        while (p.second--)\
-    \ cout << ' ' << p.first;\n    }\n    cout << '\\n';\n}\n"
+    \ n <= 10^9)\n#line 3 \"number/test/enumerate_primes.test.cpp\"\n#include <iostream>\n\
+    #line 5 \"number/test/enumerate_primes.test.cpp\"\nusing namespace std;\n\nint\
+    \ main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n    Sieve sieve(N);\n \
+    \   vector<int> ret;\n    for (unsigned i = 0; A * i + B < sieve.primes.size();\
+    \ i++) ret.push_back(sieve.primes[A * i + B]);\n    cout << sieve.primes.size()\
+    \ << ' ' << ret.size() << '\\n';\n    for (auto p : ret) cout << p << ' ';\n \
+    \   cout << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
+    \ \"../sieve.hpp\"\n#include <iostream>\n#include <vector>\nusing namespace std;\n\
+    \nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n    Sieve sieve(N);\n\
+    \    vector<int> ret;\n    for (unsigned i = 0; A * i + B < sieve.primes.size();\
+    \ i++) ret.push_back(sieve.primes[A * i + B]);\n    cout << sieve.primes.size()\
+    \ << ' ' << ret.size() << '\\n';\n    for (auto p : ret) cout << p << ' ';\n \
+    \   cout << '\\n';\n}\n"
   dependsOn:
   - number/sieve.hpp
   isVerificationFile: true
-  path: number/test/prime_factorization.test.cpp
+  path: number/test/enumerate_primes.test.cpp
   requiredBy: []
   timestamp: '2021-01-12 01:46:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: number/test/prime_factorization.test.cpp
+documentation_of: number/test/enumerate_primes.test.cpp
 layout: document
 redirect_from:
-- /verify/number/test/prime_factorization.test.cpp
-- /verify/number/test/prime_factorization.test.cpp.html
-title: number/test/prime_factorization.test.cpp
+- /verify/number/test/enumerate_primes.test.cpp
+- /verify/number/test/enumerate_primes.test.cpp.html
+title: number/test/enumerate_primes.test.cpp
 ---
