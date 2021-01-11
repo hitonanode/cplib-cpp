@@ -1,12 +1,12 @@
 #pragma once
-#include "number/eratosthenes.hpp"
+#include "sieve.hpp"
 #include <vector>
 
 // CUT begin
 // cyclotomic polynominals : 円分多項式
 // ret[i][j] = [x^j]\Phi_i(x) for i <= Nmax, which are known to be integers
 std::vector<std::vector<int>> cyclotomic_polynomials(int Nmax) {
-    std::vector<int> moebius = SieveOfEratosthenes(Nmax).GenerateMoebiusFunctionTable();
+    std::vector<int> moebius = Sieve(Nmax).GenerateMoebiusFunctionTable();
     std::vector<std::vector<int>> ret(Nmax + 1);
     auto multiply = [](const std::vector<int> &a, const std::vector<int> &b) { // a * b
         std::vector<int> ret(int(a.size() + b.size()) - 1);

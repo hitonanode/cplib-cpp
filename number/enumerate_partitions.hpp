@@ -4,11 +4,12 @@
 
 // CUT begin
 // Enumerate Partitions of number <= N （自然数の分割の列挙）
-// - can be used for N less than ~50
+// N = 50: 221 MB, 274 ms (length = 1295970) (g++, C++17, AtCoder)
 // - Example:
 //   - 1 => [[1,],]
 //   - 2 => [[1,],[1,1,],[2,],]
 //   - 3 => [[1,],[1,1,],[1,1,1,],[2,],[2,1,],[3,],]
+// 分割数の一覧：<https://oeis.org/A000041/list>
 struct {
     std::vector<std::vector<int>> ret;
     std::vector<int> now;

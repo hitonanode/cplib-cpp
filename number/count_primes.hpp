@@ -5,7 +5,7 @@
 
 // CUT begin
 struct CountPrimes {
-    // Count Primes less than x (\pi(x)) for each x = N / i (i = 1, ..., N) in O(N^(2/3)) time
+    // Count Primes less than or equal to x (\pi(x)) for each x = N / i (i = 1, ..., N) in O(N^(2/3)) time
     // Learned this algorihtm from <https://old.yosupo.jp/submission/14650>
     // Reference: <https://min-25.hatenablog.com/entry/2018/11/11/172216>
     using Int = long long;
@@ -36,7 +36,8 @@ struct CountPrimes {
                 for (size_t j = p * 2; j < is_prime.size(); j += p) is_prime[j] = 0;
             }
         }
-        for (Int now = n; now; now = n / (n / now + 1)) vs.push_back(now); // [N, N / 2, ..., 1], Relevant integers (decreasing) length ~= 2sqrt(N)
+        for (Int now = n; now; now = n / (n / now + 1))
+            vs.push_back(now); // [N, N / 2, ..., 1], Relevant integers (decreasing) length ~= 2sqrt(N)
         s = vs.size();
 
         // pi[i] = (# of integers x s.t. x <= vs[i],  (x is prime or all factors of x >= p))
@@ -74,8 +75,9 @@ struct CountPrimes {
         };
         for (; primes[ip] <= n3; ip++, pre++) {
             const auto &p = primes[ip];
-            for (int i = 0; i < n3 and p * p <= vs[i]; i++) trans2(i, p); // upto n3, total trans2 times: O(N^(2/3) / logN)
-            _fenwick_rec_update(ip, primes[ip], true);                    // total update times: O(N^(2/3) / logN)
+            for (int i = 0; i < n3 and p * p <= vs[i]; i++)
+                trans2(i, p);                          // upto n3, total trans2 times: O(N^(2/3) / logN)
+            _fenwick_rec_update(ip, primes[ip], true); // total update times: O(N^(2/3) / logN)
         }
         for (int i = s - n3 - 1; i >= 0; i--) {
             int j = i + ((i + 1) & (-i - 1));

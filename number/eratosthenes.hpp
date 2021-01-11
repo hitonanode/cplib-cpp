@@ -9,7 +9,7 @@
 // (*this)[i] = (divisor of i, greater than 1)
 // Example: [0, 1, 2, 3, 2, 5, 3, 7, 2, 3, 2, 11, ...]
 // Complexity: Space O(MAXN), Time (construction) O(MAXNloglogMAXN)
-struct SieveOfEratosthenes : std::vector<int> {
+struct [[deprecated("Use sieve.hpp (linear time complexity)")]] SieveOfEratosthenes : std::vector<int> {
     std::vector<int> primes;
     SieveOfEratosthenes(int MAXN) : std::vector<int>(MAXN + 1) {
         std::iota(begin(), end(), 0);
