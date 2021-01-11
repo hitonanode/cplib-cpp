@@ -60,6 +60,7 @@
 "linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp": "2021-01-10 04:11:55 +0900",
 "linear_algebra_matrix/test/linear_recurrence.test.cpp": "2021-01-01 15:35:34 +0900",
 "linear_algebra_matrix/test/system_of_linear_equations.test.cpp": "2021-01-10 04:11:55 +0900",
+"number/test/bs_sieve.test.cpp": "2021-01-12 02:12:53 +0900",
 "number/test/count_primes.test.cpp": "2021-01-12 01:46:09 +0900",
 "number/test/discrete_logarithm.test.cpp": "2020-11-18 20:25:12 +0900",
 "number/test/enumerate_primes.test.cpp": "2021-01-12 01:46:09 +0900",
