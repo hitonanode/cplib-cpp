@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph-tree/test/vertex-add-subtree-sum.test.cpp
     title: graph-tree/test/vertex-add-subtree-sum.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

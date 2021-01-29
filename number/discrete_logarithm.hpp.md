@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/discrete_logarithm.test.cpp
     title: number/test/discrete_logarithm.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

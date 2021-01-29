@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: unionfind/test/unionfind_rankbased.test.cpp
     title: unionfind/test/unionfind_rankbased.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

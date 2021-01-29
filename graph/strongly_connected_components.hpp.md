@@ -15,6 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/topological_sort.test.cpp
     title: graph/test/topological_sort.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -138,10 +139,10 @@ data:
   timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/strongly_connected_components.test.cpp
-  - graph/test/2sat_solver.test.cpp
-  - graph/test/cycle_detection_directed.test.cpp
   - graph/test/topological_sort.test.cpp
+  - graph/test/strongly_connected_components.test.cpp
+  - graph/test/cycle_detection_directed.test.cpp
+  - graph/test/2sat_solver.test.cpp
 documentation_of: graph/strongly_connected_components.hpp
 layout: document
 redirect_from:

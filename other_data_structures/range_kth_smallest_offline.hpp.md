@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: other_data_structures/test/range_kth_smallest_offline.test.cpp
     title: other_data_structures/test/range_kth_smallest_offline.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

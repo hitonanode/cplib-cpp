@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table_2d.test.cpp
     title: sparse_table/test/sparse_table_2d.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

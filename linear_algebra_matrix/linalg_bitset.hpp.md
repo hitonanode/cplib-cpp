@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_bitset.test.cpp
     title: linear_algebra_matrix/test/linalg_bitset.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

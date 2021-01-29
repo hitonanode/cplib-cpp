@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/strongly_connected_components_bitset.test.cpp
     title: graph/test/strongly_connected_components_bitset.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph-tree/test/vertex-set-path-composite.test.cpp
     title: graph-tree/test/vertex-set-path-composite.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -179,8 +180,8 @@ data:
   timestamp: '2020-11-19 23:13:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph-tree/test/vertex-add-path-sum.test.cpp
   - graph-tree/test/vertex-set-path-composite.test.cpp
+  - graph-tree/test/vertex-add-path-sum.test.cpp
   - graph-tree/test/hl_decomposition.test.cpp
 documentation_of: graph-tree/heavy_light_decomposition.hpp
 layout: document

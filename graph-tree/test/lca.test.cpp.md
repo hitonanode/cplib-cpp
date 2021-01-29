@@ -6,6 +6,7 @@ data:
     title: graph-tree/lowest_common_ancestor.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

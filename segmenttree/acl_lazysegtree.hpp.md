@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -110,8 +111,8 @@ data:
   isVerificationFile: false
   path: segmenttree/acl_lazysegtree.hpp
   requiredBy:
-  - segmenttree/acl_range-update-range-sum-min.hpp
   - segmenttree/acl_range-affine-range-sum.hpp
+  - segmenttree/acl_range-update-range-sum-min.hpp
   timestamp: '2020-12-30 23:06:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

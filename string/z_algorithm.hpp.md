@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/z_algorithm.test.cpp
     title: string/test/z_algorithm.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

@@ -15,6 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/prime_factorization.test.cpp
     title: number/test/prime_factorization.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -112,9 +113,9 @@ data:
   timestamp: '2021-01-12 01:46:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/enumerate_primes.test.cpp
   - number/test/prime_factorization.test.cpp
   - number/test/gen_primes.test.cpp
+  - number/test/enumerate_primes.test.cpp
 documentation_of: number/sieve.hpp
 layout: document
 redirect_from:

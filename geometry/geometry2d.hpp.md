@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: geometry/test/convex_hull.test.cpp
     title: geometry/test/convex_hull.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -196,8 +197,8 @@ data:
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - geometry/test/convex_cut.test.cpp
   - geometry/test/convex_hull.test.cpp
+  - geometry/test/convex_cut.test.cpp
 documentation_of: geometry/geometry2d.hpp
 layout: document
 redirect_from:

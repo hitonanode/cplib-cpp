@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/point-update-range-min.test.cpp
     title: segmenttree/test/point-update-range-min.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

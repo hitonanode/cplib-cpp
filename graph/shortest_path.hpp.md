@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/dijkstra.test.cpp
     title: graph/test/dijkstra.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -116,8 +117,8 @@ data:
   timestamp: '2020-11-21 18:08:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/bellman_ford.test.cpp
   - graph/test/dijkstra.test.cpp
+  - graph/test/bellman_ford.test.cpp
 documentation_of: graph/shortest_path.hpp
 layout: document
 redirect_from:

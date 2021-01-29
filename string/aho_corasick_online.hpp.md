@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/aho_corasick_online.test.cpp
     title: string/test/aho_corasick_online.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

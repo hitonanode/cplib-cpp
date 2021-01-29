@@ -18,6 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -303,8 +304,8 @@ data:
   timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
+  - formal_power_series/test/multipoint_evaluation.test.cpp
 documentation_of: formal_power_series/multipoint_evaluation.hpp
 layout: document
 redirect_from:

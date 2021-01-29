@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/incremental_matching.test.cpp
     title: string/test/incremental_matching.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

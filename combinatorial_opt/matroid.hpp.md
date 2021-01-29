@@ -6,6 +6,7 @@ data:
     path: combinatorial_opt/vector_matroid.hpp
     title: combinatorial_opt/vector_matroid.hpp
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:

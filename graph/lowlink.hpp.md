@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/two-edge-connected-components.test.cpp
     title: graph/test/two-edge-connected-components.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

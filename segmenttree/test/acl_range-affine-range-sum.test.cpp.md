@@ -12,6 +12,7 @@ data:
     title: segmenttree/acl_range-affine-range-sum.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

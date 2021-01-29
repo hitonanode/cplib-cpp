@@ -6,6 +6,7 @@ data:
     path: geometry/problem_of_apollonius.hpp
     title: geometry/problem_of_apollonius.hpp
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:

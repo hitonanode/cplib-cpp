@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph-tree/test/frequency_table_of_tree_distance.test.cpp
     title: graph-tree/test/frequency_table_of_tree_distance.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

@@ -6,6 +6,7 @@ data:
     title: segmenttree/acl_lazysegtree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:

@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: unionfind/test/fully_persistent_uf.test.cpp
     title: unionfind/test/fully_persistent_uf.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

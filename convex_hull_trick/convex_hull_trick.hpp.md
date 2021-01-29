@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: convex_hull_trick/test/convex_hull_trick.test.cpp
     title: convex_hull_trick/test/convex_hull_trick.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

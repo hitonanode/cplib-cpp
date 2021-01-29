@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/miller-rabin.test.cpp
     title: number/test/miller-rabin.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -104,8 +105,8 @@ data:
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/factorize_longlong.test.cpp
   - number/test/miller-rabin.test.cpp
+  - number/test/factorize_longlong.test.cpp
 documentation_of: number/factorize.hpp
 layout: document
 redirect_from:

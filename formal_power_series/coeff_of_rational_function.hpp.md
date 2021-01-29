@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/coeff_of_rational_function.test.cpp
     title: formal_power_series/test/coeff_of_rational_function.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

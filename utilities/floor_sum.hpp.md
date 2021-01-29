@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: utilities/test/floor_sum.test.cpp
     title: utilities/test/floor_sum.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

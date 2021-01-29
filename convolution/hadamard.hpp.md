@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/hadamard_xor.test.cpp
     title: convolution/test/hadamard_xor.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -80,8 +81,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/hadamard_xor.test.cpp
-  - convolution/test/bitwise_and_conv.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
+  - convolution/test/bitwise_and_conv.test.cpp
 documentation_of: convolution/hadamard.hpp
 layout: document
 redirect_from:

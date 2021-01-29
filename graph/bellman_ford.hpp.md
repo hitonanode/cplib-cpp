@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/bellman_ford.test.cpp
     title: graph/test/bellman_ford.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

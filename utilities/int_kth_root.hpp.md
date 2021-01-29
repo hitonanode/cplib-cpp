@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: utilities/test/kth_root_integer.test.cpp
     title: utilities/test/kth_root_integer.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

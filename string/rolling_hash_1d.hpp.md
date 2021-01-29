@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/rolling_hash_w_modint.test.cpp
     title: string/test/rolling_hash_w_modint.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

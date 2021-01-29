@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/dijkstra.test.cpp
     title: graph/test/dijkstra.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

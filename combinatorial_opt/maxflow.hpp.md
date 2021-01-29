@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/maxflow.test.cpp
     title: combinatorial_opt/test/maxflow.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

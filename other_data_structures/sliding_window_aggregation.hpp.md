@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: other_data_structures/test/queue_operate_all_composite.test.cpp
     title: other_data_structures/test/queue_operate_all_composite.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

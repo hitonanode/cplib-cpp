@@ -27,6 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/incremental_matching.test.cpp
     title: string/test/incremental_matching.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -59,17 +60,17 @@ data:
   isVerificationFile: false
   path: other_data_structures/light_forward_list.hpp
   requiredBy:
-  - string/aho_corasick.hpp
   - string/aho_corasick_online.hpp
+  - string/aho_corasick.hpp
   - string/incremental_matching.hpp
   timestamp: '2020-12-31 21:32:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - string/test/aho_corasick_online.test.cpp
-  - string/test/aho_corasick_vector.test.cpp
-  - string/test/aho_corasick_forwardlist.test.cpp
   - string/test/incremental_matching.test.cpp
+  - string/test/aho_corasick_vector.test.cpp
   - string/test/aho_corasick_unorderedmap.test.cpp
+  - string/test/aho_corasick_forwardlist.test.cpp
+  - string/test/aho_corasick_online.test.cpp
 documentation_of: other_data_structures/light_forward_list.hpp
 layout: document
 redirect_from:
