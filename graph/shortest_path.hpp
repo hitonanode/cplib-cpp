@@ -8,7 +8,7 @@
 #include <vector>
 
 // CUT begin
-template <typename T> struct ShortestPath {
+template <typename T, T INF = std::numeric_limits<T>::max() / 2> struct ShortestPath {
     int V, E;
     int INVALID = -1;
     std::vector<std::vector<std::pair<int, T>>> to;
@@ -27,7 +27,7 @@ template <typename T> struct ShortestPath {
     // Complexity: O(E log E)
     void Dijkstra(int s) {
         assert(0 <= s and s < V);
-        dist.assign(V, std::numeric_limits<T>::max());
+        dist.assign(V, INF);
         dist[s] = 0;
         prev.assign(V, INVALID);
         using P = std::pair<T, int>;
@@ -53,13 +53,13 @@ template <typename T> struct ShortestPath {
     // Complexity: O(VE)
     bool BellmanFord(int s, int nb_loop) {
         assert(0 <= s and s < V);
-        dist.assign(V, std::numeric_limits<T>::max());
+        dist.assign(V, INF);
         dist[s] = 0;
         prev.assign(V, INVALID);
         for (int l = 0; l < nb_loop; l++) {
             bool upd = false;
             for (int v = 0; v < V; v++) {
-                if (dist[v] == std::numeric_limits<T>::max()) continue;
+                if (dist[v] == INF) continue;
                 for (auto nx : to[v]) {
                     T dnx = dist[v] + nx.second;
                     if (dist[nx.first] > dnx) {
@@ -75,7 +75,7 @@ template <typename T> struct ShortestPath {
 
     void ZeroOneBFS(int s) {
         assert(0 <= s and s < V);
-        dist.assign(V, std::numeric_limits<T>::max());
+        dist.assign(V, INF);
         dist[s] = 0;
         prev.assign(V, INVALID);
         std::deque<int> que;
@@ -101,16 +101,16 @@ template <typename T> struct ShortestPath {
     // Complexity: O(E + V^3)
     std::vector<std::vector<T>> dist2d;
     void WarshallFloyd() {
-        dist2d.assign(V, std::vector<T>(V, std::numeric_limits<T>::max()));
+        dist2d.assign(V, std::vector<T>(V, INF));
         for (int i = 0; i < V; i++) {
             dist2d[i][i] = 0;
             for (auto p : to[i]) dist2d[i][p.first] = min(dist2d[i][p.first], p.second);
         }
         for (int k = 0; k < V; k++) {
             for (int i = 0; i < V; i++) {
-                if (dist2d[i][k] = std::numeric_limits<T>::max()) continue;
+                if (dist2d[i][k] = INF) continue;
                 for (int j = 0; j < V; j++) {
-                    if (dist2d[k][j] = std::numeric_limits<T>::max()) continue;
+                    if (dist2d[k][j] = INF) continue;
                     dist2d[i][j] = min(dist2d[i][j], dist2d[i][k] + dist2d[k][j]);
                 }
             }
