@@ -26,9 +26,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
-    - https://atcoder.github.io/ac-library/document_ja/lazysegtree.html>
-    - https://betrue12.hateblo.jp/entry/2020/09/22/194541>
-    - https://betrue12.hateblo.jp/entry/2020/09/23/005940>
+    - https://atcoder.github.io/ac-library/document_ja/lazysegtree.html
+    - https://betrue12.hateblo.jp/entry/2020/09/22/194541
+    - https://betrue12.hateblo.jp/entry/2020/09/23/005940
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
@@ -109,10 +109,10 @@ data:
     \ Modified\n        d[k] = mapping(f, d[k]);\n        if (k < size) lz[k] = composition(f,\
     \ lz[k]);\n    }\n    void push(int k) {\n        all_apply(2 * k, lz[k]);\n \
     \       all_apply(2 * k + 1, lz[k]);\n        lz[k] = id();\n    }\n};\n} // namespace\
-    \ atcoder\n#endif // ATCODER_LAZYSEGTREE_HPP\n\n// Reference: <https://atcoder.github.io/ac-library/document_ja/lazysegtree.html>\n\
-    //            <https://betrue12.hateblo.jp/entry/2020/09/22/194541>\n//      \
-    \      <https://betrue12.hateblo.jp/entry/2020/09/23/005940>\n/*\nstruct S {};\n\
-    S op(S l, S r) {\n    return {};\n}\nS e() { return {}; };\nusing F = bool;\n\
+    \ atcoder\n#endif // ATCODER_LAZYSEGTREE_HPP\n\n// Reference: https://atcoder.github.io/ac-library/document_ja/lazysegtree.html\n\
+    //            https://betrue12.hateblo.jp/entry/2020/09/22/194541\n//        \
+    \    https://betrue12.hateblo.jp/entry/2020/09/23/005940\n/*\nstruct S {};\nS\
+    \ op(S l, S r) {\n    return {};\n}\nS e() { return {}; };\nusing F = bool;\n\
     S mp(F f, S x) {\n    return x;\n}\nF composition(F fnew, F gold) { return fnew\
     \ ^ gold; }\nF id() { return false; }\n\nvector<S> A;\natcoder::lazy_segtree<S,\
     \ op, e, F, mp, composition, id> seg(A);\n*/\n"
@@ -123,7 +123,7 @@ data:
   - segmenttree/acl_beats.hpp
   - segmenttree/acl_range-affine-range-sum.hpp
   - segmenttree/acl_range-update-range-sum-min.hpp
-  timestamp: '2021-01-30 19:57:35+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp

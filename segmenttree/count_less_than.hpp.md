@@ -8,12 +8,12 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
-    - https://codeforces.com/contest/1288/submission/68865506>
+    - https://codeforces.com/contest/1288/submission/68865506
   bundledCode: "#line 2 \"segmenttree/count_less_than.hpp\"\n#include <algorithm>\n\
     #include <iostream>\n#include <vector>\nusing namespace std;\n\n// CUT begin\n\
     // Count elements in [A_begin, ..., A_{end-1}] which satisfy A_i < query\n// Complexity:\
     \ O(N log N) for initialization, O(log^2 N) for each query\n// Verified: cntLess\
-    \ <https://codeforces.com/contest/1288/submission/68865506>\ntemplate <typename\
+    \ https://codeforces.com/contest/1288/submission/68865506\ntemplate <typename\
     \ T> struct CountLessThan {\n    int N;\n    vector<vector<T>> x;\n    CountLessThan()\
     \ = default;\n    CountLessThan(const vector<T> &vec) : N(vec.size()) {\n    \
     \    x.resize(N * 2);\n        for (int i = 0; i < N; i++) x[N + i] = {vec[i]};\n\
@@ -40,7 +40,7 @@ data:
   code: "#pragma once\n#include <algorithm>\n#include <iostream>\n#include <vector>\n\
     using namespace std;\n\n// CUT begin\n// Count elements in [A_begin, ..., A_{end-1}]\
     \ which satisfy A_i < query\n// Complexity: O(N log N) for initialization, O(log^2\
-    \ N) for each query\n// Verified: cntLess <https://codeforces.com/contest/1288/submission/68865506>\n\
+    \ N) for each query\n// Verified: cntLess https://codeforces.com/contest/1288/submission/68865506\n\
     template <typename T> struct CountLessThan {\n    int N;\n    vector<vector<T>>\
     \ x;\n    CountLessThan() = default;\n    CountLessThan(const vector<T> &vec)\
     \ : N(vec.size()) {\n        x.resize(N * 2);\n        for (int i = 0; i < N;\
@@ -68,7 +68,7 @@ data:
   isVerificationFile: false
   path: segmenttree/count_less_than.hpp
   requiredBy: []
-  timestamp: '2021-01-29 20:39:47+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: segmenttree/count_less_than.hpp

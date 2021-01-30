@@ -17,7 +17,7 @@ data:
   bundledCode: "#line 1 \"utilities/test/integer_segments.test.cpp\"\n#define PROBLEM\
     \ \"https://yukicoder.me/problems/no/674\"\n#line 2 \"utilities/integer_segments.hpp\"\
     \n#include <map>\n#include <utility>\n\n// CUT begin\n// Add/erase ranges on \\\
-    mathbb{Z}\n// Basic implementation idea: <https://satanic0258.github.io/snippets/data-structure/SegmentMap.html>\n\
+    mathbb{Z}\n// Basic implementation idea: https://satanic0258.github.io/snippets/data-structure/SegmentMap.html\n\
     template <typename Int> struct integer_segments {\n    const Int INVALID = -1;\n\
     \    Int _sz;\n    std::map<Int, Int> mp;\n    integer_segments() : _sz(0) {}\n\
     \n    // Get the range [l, r] that satisfies l <= x <= r, or [INVALID, INVALID]\
@@ -68,7 +68,7 @@ data:
   isVerificationFile: true
   path: utilities/test/integer_segments.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 15:35:34+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: utilities/test/integer_segments.test.cpp

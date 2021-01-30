@@ -66,7 +66,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/beats_gcd.test.cpp
   requiredBy: []
-  timestamp: '2021-01-30 23:34:39+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/beats_gcd.test.cpp

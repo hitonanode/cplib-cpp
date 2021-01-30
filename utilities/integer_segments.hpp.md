@@ -11,10 +11,10 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
-    - https://satanic0258.github.io/snippets/data-structure/SegmentMap.html>
+    - https://satanic0258.github.io/snippets/data-structure/SegmentMap.html
   bundledCode: "#line 2 \"utilities/integer_segments.hpp\"\n#include <map>\n#include\
     \ <utility>\n\n// CUT begin\n// Add/erase ranges on \\mathbb{Z}\n// Basic implementation\
-    \ idea: <https://satanic0258.github.io/snippets/data-structure/SegmentMap.html>\n\
+    \ idea: https://satanic0258.github.io/snippets/data-structure/SegmentMap.html\n\
     template <typename Int> struct integer_segments {\n    const Int INVALID = -1;\n\
     \    Int _sz;\n    std::map<Int, Int> mp;\n    integer_segments() : _sz(0) {}\n\
     \n    // Get the range [l, r] that satisfies l <= x <= r, or [INVALID, INVALID]\
@@ -48,7 +48,7 @@ data:
     \ {\n            if (p.first >= x) break;\n            ret += std::min(x - 1,\
     \ p.second) - p.first + 1;\n        }\n        return ret;\n    }\n};\n"
   code: "#pragma once\n#include <map>\n#include <utility>\n\n// CUT begin\n// Add/erase\
-    \ ranges on \\mathbb{Z}\n// Basic implementation idea: <https://satanic0258.github.io/snippets/data-structure/SegmentMap.html>\n\
+    \ ranges on \\mathbb{Z}\n// Basic implementation idea: https://satanic0258.github.io/snippets/data-structure/SegmentMap.html\n\
     template <typename Int> struct integer_segments {\n    const Int INVALID = -1;\n\
     \    Int _sz;\n    std::map<Int, Int> mp;\n    integer_segments() : _sz(0) {}\n\
     \n    // Get the range [l, r] that satisfies l <= x <= r, or [INVALID, INVALID]\
@@ -85,7 +85,7 @@ data:
   isVerificationFile: false
   path: utilities/integer_segments.hpp
   requiredBy: []
-  timestamp: '2020-12-05 03:41:06+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - utilities/test/integer_segments.test.cpp

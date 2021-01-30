@@ -58,10 +58,10 @@ data:
     \  vector<int> belong;\n    vector<int> maxi;\n    PartitionMatroid() = default;\n\
     \    // parts: partition of [0, 1, ..., M - 1]\n    // maxi: only maxi[i] elements\
     \ from parts[i] can be chosen for each i.\n    PartitionMatroid(int M, const vector<vector<int>>\
-    \ &parts, const vector<int> &maxi) : M(M), parts(parts), belong(M, -1), maxi(maxi)\
-    \ {\n        assert(parts.size() == maxi.size());\n        for (size_t i = 0;\
-    \ i < parts.size(); i++) {\n            for (Element x : parts[i]) belong[x] =\
-    \ i;\n        }\n        for (Element e = 0; e < M; e++) {\n            // assert(belong[e]\
+    \ &parts, const vector<int> &maxi)\n        : M(M), parts(parts), belong(M, -1),\
+    \ maxi(maxi) {\n        assert(parts.size() == maxi.size());\n        for (size_t\
+    \ i = 0; i < parts.size(); i++) {\n            for (Element x : parts[i]) belong[x]\
+    \ = i;\n        }\n        for (Element e = 0; e < M; e++) {\n            // assert(belong[e]\
     \ != -1);\n            if (belong[e] == -1) {\n                belong[e] = this->parts.size();\n\
     \                this->parts.emplace_back(vector<int>{e});\n                this->maxi.push_back(1);\n\
     \            }\n        }\n    }\n\n    vector<Element> circuit(const State &I,\
@@ -131,7 +131,7 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/vector_matroid.hpp
   requiredBy: []
-  timestamp: '2020-12-14 02:27:33+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: combinatorial_opt/vector_matroid.hpp

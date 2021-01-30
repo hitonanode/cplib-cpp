@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
-    - https://atcoder.github.io/ac-library/document_ja/segtree.html>
+    - https://atcoder.github.io/ac-library/document_ja/segtree.html
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
@@ -64,7 +64,7 @@ data:
     \ sm);\n        } while ((r & -r) != r);\n        return 0;\n    }\n\nprivate:\n\
     \    int _n, size, log;\n    std::vector<S> d;\n\n    void update(int k) { d[k]\
     \ = op(d[2 * k], d[2 * k + 1]); }\n};\n\n} // namespace atcoder\n\n#endif // ATCODER_SEGTREE_HPP\n\
-    \n// Reference: <https://atcoder.github.io/ac-library/document_ja/segtree.html>\n\
+    \n// Reference: https://atcoder.github.io/ac-library/document_ja/segtree.html\n\
     /* usage:\nstruct S {\n    long long su;\n    int nb;\n};\nS e() { return {0,\
     \ 0}; }\nS op(S l, S r) { return {l.su + r.su, l.nb + r.nb}; }\nvector<S> seginit(100000,\
     \ e());\natcoder::segtree<S, op, e> segtree(seginit);\n*/\n"
@@ -72,7 +72,7 @@ data:
   isVerificationFile: false
   path: segmenttree/acl_segtree.hpp
   requiredBy: []
-  timestamp: '2021-01-30 23:34:39+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: segmenttree/acl_segtree.hpp

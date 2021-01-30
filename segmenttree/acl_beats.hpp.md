@@ -79,7 +79,7 @@ data:
   isVerificationFile: false
   path: segmenttree/acl_beats.hpp
   requiredBy: []
-  timestamp: '2021-01-30 23:34:39+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats.test.cpp

@@ -8,21 +8,21 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
-    - https://blank-note.sakura.ne.jp/topics/clipboard_history.html>
+    - https://blank-note.sakura.ne.jp/topics/clipboard_history.html
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "#!/usr/bin/env python3\n# \"Config.txt\" generator for \"Clipboard History\"\
-    , snippet manager\n# <https://blank-note.sakura.ne.jp/topics/clipboard_history.html>\n\
-    \nimport os\nimport re\n\nrootdir = './'\nconfig_header = [\n    '@NoteHotkey=Shift,400'\n\
-    ]\n\ndef read_hpp(filepath):\n    ret = [os.path.basename(filepath) + '|']\n \
-    \   with open(filepath, 'r') as file:\n        for line in file.read().splitlines():\n\
+    , snippet manager\n# \"https://blank-note.sakura.ne.jp/topics/clipboard_history.html\"\
+    \n\nimport os\nimport re\n\nrootdir = './'\nconfig_header = [\n    '@NoteHotkey=Shift,400'\n\
+    ]\n\n\ndef read_hpp(filepath):\n    ret = [os.path.basename(filepath) + '|']\n\
+    \    with open(filepath, 'r') as file:\n        for line in file.read().splitlines():\n\
     \            if line[:12] == '// CUT begin':\n                ret = ret[:1]\n\
     \            else:\n                line = re.sub('([|`])', '`\\\\1', line)\n\
     \                if len(line) and line[0] in ['+', '*', '.', ';', ' ']:\n    \
     \                line = '`' + line\n                ret.append(line)\n    ret.append('/E')\n\
-    \    return ret\n\ndef dfs(current_dir):\n    ret = list()\n    for ch in os.listdir(current_dir):\n\
+    \    return ret\n\n\ndef dfs(current_dir):\n    ret = list()\n    for ch in os.listdir(current_dir):\n\
     \        filepath = os.path.join(current_dir, ch)\n        if os.path.isdir(filepath):\n\
     \            ch_info = dfs(filepath)\n            if ch_info:\n              \
     \  ret += ['+' + ch]\n                ret += ch_info\n                ret += ['..']\n\

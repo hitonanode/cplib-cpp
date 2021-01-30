@@ -11,7 +11,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
-    - https://codeforces.com/contest/1439/submission/98816580>
+    - https://codeforces.com/contest/1439/submission/98816580
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
@@ -31,13 +31,13 @@ data:
     \ }\nF id() { return std::make_pair(false, INF); }\nusing RangeUpdateRangeSumMin\
     \ = atcoder::lazy_segtree<S, op, e, F, mapping, composition, id>;\n}; // namespace\
     \ rangeupdaterangesummin\nusing rangeupdaterangesummin::RangeUpdateRangeSumMin;\n\
-    using rangeupdaterangesummin::S;\n// Example of usage <https://codeforces.com/contest/1439/submission/98816580>\n"
+    using rangeupdaterangesummin::S;\n// Example of usage: https://codeforces.com/contest/1439/submission/98816580\n"
   dependsOn:
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: false
   path: segmenttree/acl_range-update-range-sum-min.hpp
   requiredBy: []
-  timestamp: '2021-01-30 19:57:35+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: segmenttree/acl_range-update-range-sum-min.hpp

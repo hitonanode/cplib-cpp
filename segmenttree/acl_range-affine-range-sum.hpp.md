@@ -27,23 +27,22 @@ data:
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
   code: "#pragma once\n#include \"../modint.hpp\"\n#include \"acl_lazysegtree.hpp\"\
-    \n#include <utility>\n\n// CUT begin\nnamespace rangeaffinerangesum {\nusing T\
+    \n#include <utility>\n\n// CUT begin\nnamespace RangeAffineRangeSum {\nusing T\
     \ = ModInt<998244353>;\nusing S = std::pair<T, size_t>;\nusing F = std::pair<T,\
     \ T>;\nS op(S l, S r) { return std::make_pair(l.first + r.first, l.second + r.second);\
     \ }\nS mapping(F f, S x) { return std::make_pair(f.first * x.first + f.second\
     \ * x.second, x.second); }\nF composition(F later, F conv) {\n    return std::make_pair(conv.first\
     \ * later.first, later.second + later.first * conv.second);\n}\nS e() { return\
-    \ std::make_pair(0, 0); }\nF id() { return std::make_pair(1, 0); }\nusing RangeAffineRangeSum\
+    \ std::make_pair(0, 0); }\nF id() { return std::make_pair(1, 0); }\nusing segtree\
     \ = atcoder::lazy_segtree<S, op, e, F, mapping, composition, id>;\n}; // namespace\
-    \ rangeaffinerangesum\nusing rangeaffinerangesum::F;\nusing rangeaffinerangesum::RangeAffineRangeSum;\n\
-    using rangeaffinerangesum::S;\n"
+    \ RangeAffineRangeSum\n"
   dependsOn:
   - modint.hpp
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: false
   path: segmenttree/acl_range-affine-range-sum.hpp
   requiredBy: []
-  timestamp: '2021-01-30 19:57:35+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp

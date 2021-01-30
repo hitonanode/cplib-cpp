@@ -34,12 +34,13 @@ data:
   code: "#include \"../../modint.hpp\"\n#include \"../acl_range-affine-range-sum.hpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\
     using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \n    int N, Q;\n    cin >> N >> Q;\n\n    vector<S> A(N);\n    for (auto &a :\
-    \ A) cin >> a.first, a.second = 1;\n    RangeAffineRangeSum segtree(A);\n    while\
-    \ (Q--) {\n        int q, l, r;\n        cin >> q >> l >> r;\n        if (q) {\n\
-    \            cout << segtree.prod(l, r).first << '\\n';\n        } else {\n  \
-    \          F f;\n            cin >> f.first >> f.second;\n            segtree.apply(l,\
-    \ r, f);\n        }\n    }\n}\n"
+    \n    int N, Q;\n    cin >> N >> Q;\n\n    vector<RangeAffineRangeSum::S> A(N);\n\
+    \    for (auto &a : A) cin >> a.first, a.second = 1;\n    RangeAffineRangeSum::segtree\
+    \ segtree(A);\n    while (Q--) {\n        int q, l, r;\n        cin >> q >> l\
+    \ >> r;\n        if (q) {\n            cout << segtree.prod(l, r).first << '\\\
+    n';\n        } else {\n            RangeAffineRangeSum::F f;\n            cin\
+    \ >> f.first >> f.second;\n            segtree.apply(l, r, f);\n        }\n  \
+    \  }\n}\n"
   dependsOn:
   - modint.hpp
   - segmenttree/acl_range-affine-range-sum.hpp
@@ -47,7 +48,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/acl_range-affine-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2021-01-30 19:57:35+09:00'
+  timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/acl_range-affine-range-sum.test.cpp
