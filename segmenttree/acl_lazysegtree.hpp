@@ -46,7 +46,8 @@ int bsf(unsigned int n) {
 
 namespace atcoder {
 
-template <class S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F, F), F (*id)()> struct lazy_segtree {
+template <class S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
+struct lazy_segtree {
 public:
     lazy_segtree() : lazy_segtree(0) {}
     lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e())) {}
@@ -194,13 +195,13 @@ public:
         return 0;
     }
 
-private:
+protected: // Modified
     int _n, size, log;
     std::vector<S> d;
     std::vector<F> lz;
 
     void update(int k) { d[k] = op(d[2 * k], d[2 * k + 1]); }
-    void all_apply(int k, F f) {
+    virtual void all_apply(int k, F f) { // Modified
         d[k] = mapping(f, d[k]);
         if (k < size) lz[k] = composition(f, lz[k]);
     }
@@ -226,7 +227,7 @@ using F = bool;
 S mp(F f, S x) {
     return x;
 }
-F composition(F f, F g) { return f ^ g; }
+F composition(F fnew, F gold) { return fnew ^ gold; }
 F id() { return false; }
 
 vector<S> A;
