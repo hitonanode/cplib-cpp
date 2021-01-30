@@ -311,6 +311,9 @@ data:
     - icon: ':warning:'
       path: segmenttree/acl_range-update-range-sum-min.hpp
       title: segmenttree/acl_range-update-range-sum-min.hpp
+    - icon: ':warning:'
+      path: segmenttree/acl_segtree.hpp
+      title: segmenttree/acl_segtree.hpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/binary_indexed_tree.hpp
       title: segmenttree/binary_indexed_tree.hpp
@@ -719,6 +722,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats.test.cpp
       title: segmenttree/test/beats.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/test/beats_gcd.test.cpp
+      title: segmenttree/test/beats_gcd.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp

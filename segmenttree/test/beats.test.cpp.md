@@ -31,22 +31,23 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
     \n#include \"../acl_beats.hpp\"\n#include <iostream>\n#include <vector>\nusing\
     \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N, Q;\n    cin >> N >> Q;\n    vector<BNode> A(N);\n    for (auto &a\
-    \ : A) {\n        long long tmp;\n        cin >> tmp, a = BNode(tmp, 1);\n   \
-    \ }\n    segtree_beats<BNode, bop, be, BF, bmapping, bcomposition, bid> segtree(A);\n\
-    \    while (Q--) {\n        int q, l, r;\n        long long b;\n        cin >>\
-    \ q >> l >> r;\n        if (q < 3) {\n            cin >> b;\n            if (q\
-    \ == 0) segtree.apply(l, r, BF::chmin(b));\n            if (q == 1) segtree.apply(l,\
-    \ r, BF::chmax(b));\n            if (q == 2) segtree.apply(l, r, BF::add(b));\n\
-    \        } else {\n            long long ret = segtree.prod(l, r).sum;\n     \
-    \       cout << ret << '\\n';\n        }\n    }\n}\n"
+    \    int N, Q;\n    cin >> N >> Q;\n    vector<RangeChMinMaxAddSum::S> A(N);\n\
+    \    for (auto &a : A) {\n        long long tmp;\n        cin >> tmp, a = {tmp,\
+    \ 1};\n    }\n    RangeChMinMaxAddSum::segtree segtree(A);\n    while (Q--) {\n\
+    \        int q, l, r;\n        long long b;\n        cin >> q >> l >> r;\n   \
+    \     if (q < 3) {\n            cin >> b;\n            if (q == 0) segtree.apply(l,\
+    \ r, RangeChMinMaxAddSum::F::chmin(b));\n            if (q == 1) segtree.apply(l,\
+    \ r, RangeChMinMaxAddSum::F::chmax(b));\n            if (q == 2) segtree.apply(l,\
+    \ r, RangeChMinMaxAddSum::F::add(b));\n        } else {\n            long long\
+    \ ret = segtree.prod(l, r).sum;\n            cout << ret << '\\n';\n        }\n\
+    \    }\n}\n"
   dependsOn:
   - segmenttree/acl_beats.hpp
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: true
   path: segmenttree/test/beats.test.cpp
   requiredBy: []
-  timestamp: '2021-01-30 19:57:35+09:00'
+  timestamp: '2021-01-30 23:34:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/beats.test.cpp

@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/beats.test.cpp
     title: segmenttree/test/beats.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/test/beats_gcd.test.cpp
+    title: segmenttree/test/beats_gcd.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -125,6 +128,7 @@ data:
   verifiedWith:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - segmenttree/test/beats.test.cpp
+  - segmenttree/test/beats_gcd.test.cpp
 documentation_of: segmenttree/acl_lazysegtree.hpp
 layout: document
 redirect_from:
