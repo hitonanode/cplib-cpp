@@ -8,21 +8,21 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int N, Q;
     cin >> N >> Q;
-    vector<BNode> A(N);
+    vector<RangeChMinMaxAddSum::S> A(N);
     for (auto &a : A) {
         long long tmp;
-        cin >> tmp, a = BNode(tmp, 1);
+        cin >> tmp, a = {tmp, 1};
     }
-    segtree_beats<BNode, bop, be, BF, bmapping, bcomposition, bid> segtree(A);
+    RangeChMinMaxAddSum::segtree segtree(A);
     while (Q--) {
         int q, l, r;
         long long b;
         cin >> q >> l >> r;
         if (q < 3) {
             cin >> b;
-            if (q == 0) segtree.apply(l, r, BF::chmin(b));
-            if (q == 1) segtree.apply(l, r, BF::chmax(b));
-            if (q == 2) segtree.apply(l, r, BF::add(b));
+            if (q == 0) segtree.apply(l, r, RangeChMinMaxAddSum::F::chmin(b));
+            if (q == 1) segtree.apply(l, r, RangeChMinMaxAddSum::F::chmax(b));
+            if (q == 2) segtree.apply(l, r, RangeChMinMaxAddSum::F::add(b));
         } else {
             long long ret = segtree.prod(l, r).sum;
             cout << ret << '\n';
