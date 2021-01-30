@@ -23,4 +23,4 @@ template <typename T> struct light_forward_list {
     iterator end() { return {0}; }
 };
 template <typename T> std::vector<unsigned> light_forward_list<T>::ptr = {0};
-template <typename T> std::vector<T> light_forward_list<T>::val = {0};
+template <typename T> std::vector<T> light_forward_list<T>::val = {T()};
