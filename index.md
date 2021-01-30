@@ -300,6 +300,9 @@ data:
   - name: segmenttree
     pages:
     - icon: ':heavy_check_mark:'
+      path: segmenttree/acl_beats.hpp
+      title: segmenttree/acl_beats.hpp
+    - icon: ':heavy_check_mark:'
       path: segmenttree/acl_lazysegtree.hpp
       title: segmenttree/acl_lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -713,6 +716,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/acl_range-affine-range-sum.test.cpp
       title: segmenttree/test/acl_range-affine-range-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/test/beats.test.cpp
+      title: segmenttree/test/beats.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp

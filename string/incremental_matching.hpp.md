@@ -25,7 +25,7 @@ data:
     \ { return val[p]; }\n        bool operator!=(const iterator &rhs) { return p\
     \ != rhs.p; }\n    };\n    iterator begin() { return {head}; }\n    iterator end()\
     \ { return {0}; }\n};\ntemplate <typename T> std::vector<unsigned> light_forward_list<T>::ptr\
-    \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {0};\n\
+    \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {T()};\n\
     #line 3 \"string/incremental_matching.hpp\"\n#include <iostream>\n#include <list>\n\
     #include <string>\n#line 7 \"string/incremental_matching.hpp\"\n\n// CUT begin\n\
     // [1] B. Meyer, \"Incremental String Matching,\" Information Processing Letters,\
@@ -141,7 +141,7 @@ data:
   isVerificationFile: false
   path: string/incremental_matching.hpp
   requiredBy: []
-  timestamp: '2021-01-01 03:16:20+09:00'
+  timestamp: '2021-01-30 19:37:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/incremental_matching.test.cpp

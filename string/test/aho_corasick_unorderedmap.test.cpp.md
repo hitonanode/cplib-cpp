@@ -28,7 +28,7 @@ data:
     \ { return val[p]; }\n        bool operator!=(const iterator &rhs) { return p\
     \ != rhs.p; }\n    };\n    iterator begin() { return {head}; }\n    iterator end()\
     \ { return {0}; }\n};\ntemplate <typename T> std::vector<unsigned> light_forward_list<T>::ptr\
-    \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {0};\n\
+    \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {T()};\n\
     #line 3 \"string/aho_corasick.hpp\"\n#include <cassert>\n#include <string>\n#include\
     \ <unordered_map>\n#line 7 \"string/aho_corasick.hpp\"\n\n// CUT begin\n// Aho-Corasick\
     \ algorithm\n// Verify: <http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=5101653>\n\
@@ -105,7 +105,7 @@ data:
   isVerificationFile: true
   path: string/test/aho_corasick_unorderedmap.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 03:55:13+09:00'
+  timestamp: '2021-01-30 19:37:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/aho_corasick_unorderedmap.test.cpp

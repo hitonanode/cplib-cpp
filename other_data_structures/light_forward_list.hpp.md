@@ -44,7 +44,7 @@ data:
     \ { return val[p]; }\n        bool operator!=(const iterator &rhs) { return p\
     \ != rhs.p; }\n    };\n    iterator begin() { return {head}; }\n    iterator end()\
     \ { return {0}; }\n};\ntemplate <typename T> std::vector<unsigned> light_forward_list<T>::ptr\
-    \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {0};\n"
+    \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {T()};\n"
   code: "#pragma once\n#include <vector>\n\n// CUT begin\n// Simple forward_list for\
     \ MLE-sensitive situations\n// Verify: <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\n\
     template <typename T> struct light_forward_list {\n    static std::vector<unsigned>\
@@ -55,7 +55,7 @@ data:
     \ { return val[p]; }\n        bool operator!=(const iterator &rhs) { return p\
     \ != rhs.p; }\n    };\n    iterator begin() { return {head}; }\n    iterator end()\
     \ { return {0}; }\n};\ntemplate <typename T> std::vector<unsigned> light_forward_list<T>::ptr\
-    \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {0};\n"
+    \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {T()};\n"
   dependsOn: []
   isVerificationFile: false
   path: other_data_structures/light_forward_list.hpp
@@ -63,7 +63,7 @@ data:
   - string/aho_corasick_online.hpp
   - string/aho_corasick.hpp
   - string/incremental_matching.hpp
-  timestamp: '2020-12-31 21:32:32+09:00'
+  timestamp: '2021-01-30 19:37:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/incremental_matching.test.cpp

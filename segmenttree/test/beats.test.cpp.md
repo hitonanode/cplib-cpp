@@ -2,14 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: modint.hpp
-    title: modint.hpp
+    path: segmenttree/acl_beats.hpp
+    title: segmenttree/acl_beats.hpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
     title: segmenttree/acl_lazysegtree.hpp
-  - icon: ':heavy_check_mark:'
-    path: segmenttree/acl_range-affine-range-sum.hpp
-    title: segmenttree/acl_range-affine-range-sum.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -17,9 +14,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
+    PROBLEM: https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
     links:
-    - https://judge.yosupo.jp/problem/range_affine_range_sum
+    - https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
@@ -31,29 +28,31 @@ data:
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
-  code: "#include \"../../modint.hpp\"\n#include \"../acl_range-affine-range-sum.hpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\
-    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \n    int N, Q;\n    cin >> N >> Q;\n\n    vector<S> A(N);\n    for (auto &a :\
-    \ A) cin >> a.first, a.second = 1;\n    RangeAffineRangeSum segtree(A);\n    while\
-    \ (Q--) {\n        int q, l, r;\n        cin >> q >> l >> r;\n        if (q) {\n\
-    \            cout << segtree.prod(l, r).first << '\\n';\n        } else {\n  \
-    \          F f;\n            cin >> f.first >> f.second;\n            segtree.apply(l,\
-    \ r, f);\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
+    \n#include \"../acl_beats.hpp\"\n#include <iostream>\n#include <vector>\nusing\
+    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, Q;\n    cin >> N >> Q;\n    vector<BNode> A(N);\n    for (auto &a\
+    \ : A) {\n        long long tmp;\n        cin >> tmp, a = BNode(tmp, 1);\n   \
+    \ }\n    segtree_beats<BNode, bop, be, BF, bmapping, bcomposition, bid> segtree(A);\n\
+    \    while (Q--) {\n        int q, l, r;\n        long long b;\n        cin >>\
+    \ q >> l >> r;\n        if (q < 3) {\n            cin >> b;\n            if (q\
+    \ == 0) segtree.apply(l, r, BF::chmin(b));\n            if (q == 1) segtree.apply(l,\
+    \ r, BF::chmax(b));\n            if (q == 2) segtree.apply(l, r, BF::add(b));\n\
+    \        } else {\n            long long ret = segtree.prod(l, r).sum;\n     \
+    \       cout << ret << '\\n';\n        }\n    }\n}\n"
   dependsOn:
-  - modint.hpp
-  - segmenttree/acl_range-affine-range-sum.hpp
+  - segmenttree/acl_beats.hpp
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: true
-  path: segmenttree/test/acl_range-affine-range-sum.test.cpp
+  path: segmenttree/test/beats.test.cpp
   requiredBy: []
   timestamp: '2021-01-30 19:57:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: segmenttree/test/acl_range-affine-range-sum.test.cpp
+documentation_of: segmenttree/test/beats.test.cpp
 layout: document
 redirect_from:
-- /verify/segmenttree/test/acl_range-affine-range-sum.test.cpp
-- /verify/segmenttree/test/acl_range-affine-range-sum.test.cpp.html
-title: segmenttree/test/acl_range-affine-range-sum.test.cpp
+- /verify/segmenttree/test/beats.test.cpp
+- /verify/segmenttree/test/beats.test.cpp.html
+title: segmenttree/test/beats.test.cpp
 ---
