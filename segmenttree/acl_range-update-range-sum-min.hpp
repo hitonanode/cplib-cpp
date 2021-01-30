@@ -21,4 +21,4 @@ using RangeUpdateRangeSumMin = atcoder::lazy_segtree<S, op, e, F, mapping, compo
 }; // namespace rangeupdaterangesummin
 using rangeupdaterangesummin::RangeUpdateRangeSumMin;
 using rangeupdaterangesummin::S;
-// Example of usage <https://codeforces.com/contest/1439/submission/98816580>
+// Example of usage: https://codeforces.com/contest/1439/submission/98816580

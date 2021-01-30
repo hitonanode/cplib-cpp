@@ -107,7 +107,8 @@ struct PartitionMatroid {
     PartitionMatroid() = default;
     // parts: partition of [0, 1, ..., M - 1]
     // maxi: only maxi[i] elements from parts[i] can be chosen for each i.
-    PartitionMatroid(int M, const vector<vector<int>> &parts, const vector<int> &maxi) : M(M), parts(parts), belong(M, -1), maxi(maxi) {
+    PartitionMatroid(int M, const vector<vector<int>> &parts, const vector<int> &maxi)
+        : M(M), parts(parts), belong(M, -1), maxi(maxi) {
         assert(parts.size() == maxi.size());
         for (size_t i = 0; i < parts.size(); i++) {
             for (Element x : parts[i]) belong[x] = i;

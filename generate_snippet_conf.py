@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # "Config.txt" generator for "Clipboard History", snippet manager
-# <https://blank-note.sakura.ne.jp/topics/clipboard_history.html>
+# "https://blank-note.sakura.ne.jp/topics/clipboard_history.html"
 
 import os
 import re
@@ -9,6 +9,7 @@ rootdir = './'
 config_header = [
     '@NoteHotkey=Shift,400'
 ]
+
 
 def read_hpp(filepath):
     ret = [os.path.basename(filepath) + '|']
@@ -23,6 +24,7 @@ def read_hpp(filepath):
                 ret.append(line)
     ret.append('/E')
     return ret
+
 
 def dfs(current_dir):
     ret = list()

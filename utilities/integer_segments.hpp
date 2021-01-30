@@ -4,7 +4,7 @@
 
 // CUT begin
 // Add/erase ranges on \mathbb{Z}
-// Basic implementation idea: <https://satanic0258.github.io/snippets/data-structure/SegmentMap.html>
+// Basic implementation idea: https://satanic0258.github.io/snippets/data-structure/SegmentMap.html
 template <typename Int> struct integer_segments {
     const Int INVALID = -1;
     Int _sz;

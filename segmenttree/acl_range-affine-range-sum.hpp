@@ -4,7 +4,7 @@
 #include <utility>
 
 // CUT begin
-namespace rangeaffinerangesum {
+namespace RangeAffineRangeSum {
 using T = ModInt<998244353>;
 using S = std::pair<T, size_t>;
 using F = std::pair<T, T>;
@@ -15,8 +15,5 @@ F composition(F later, F conv) {
 }
 S e() { return std::make_pair(0, 0); }
 F id() { return std::make_pair(1, 0); }
-using RangeAffineRangeSum = atcoder::lazy_segtree<S, op, e, F, mapping, composition, id>;
-}; // namespace rangeaffinerangesum
-using rangeaffinerangesum::F;
-using rangeaffinerangesum::RangeAffineRangeSum;
-using rangeaffinerangesum::S;
+using segtree = atcoder::lazy_segtree<S, op, e, F, mapping, composition, id>;
+}; // namespace RangeAffineRangeSum
