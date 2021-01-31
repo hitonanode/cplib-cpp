@@ -1,6 +1,6 @@
 #pragma once
-#include "../modint.hpp"
-#include "acl_lazysegtree.hpp"
+#include "../../modint.hpp"
+#include "../acl_lazysegtree.hpp"
 #include <utility>
 
 // CUT begin
