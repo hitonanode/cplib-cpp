@@ -140,7 +140,7 @@ data:
     - icon: ':warning:'
       path: graph/shortest_cycle01.hpp
       title: graph/shortest_cycle01.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/shortest_cycle_weighted.hpp
       title: graph/shortest_cycle_weighted.hpp
     - icon: ':heavy_check_mark:'
@@ -600,6 +600,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/maximum_independent_set.test.cpp
       title: graph/test/maximum_independent_set.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/shortest_cycle.test.cpp
+      title: graph/test/shortest_cycle.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/strongly_connected_components.test.cpp
       title: graph/test/strongly_connected_components.test.cpp
