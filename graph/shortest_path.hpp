@@ -8,21 +8,26 @@
 #include <vector>
 
 // CUT begin
-template <typename T, T INF = std::numeric_limits<T>::max() / 2> struct ShortestPath {
+template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath {
     int V, E;
-    int INVALID = -1;
+    bool single_positive_weight;
+    T wmin, wmax;
     std::vector<std::vector<std::pair<int, T>>> to;
-    ShortestPath() = default;
-    ShortestPath(int V) : V(V), E(0), to(V) {}
-    void add_edge(int s, int t, T len) {
+
+    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0), wmax(0), to(V) {}
+    void add_edge(int s, int t, T w) {
         assert(0 <= s and s < V);
         assert(0 <= t and t < V);
-        to[s].emplace_back(t, len);
+        to[s].emplace_back(t, w);
         E++;
+        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight = false;
+        wmin = std::min(wmin, w);
+        wmax = std::max(wmax, w);
     }
 
     std::vector<T> dist;
     std::vector<int> prev;
+
     // Dijkstra algorithm
     // Complexity: O(E log E)
     void Dijkstra(int s) {
@@ -53,19 +58,15 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2> struct Shortest
     // Complexity: O(VE)
     bool BellmanFord(int s, int nb_loop) {
         assert(0 <= s and s < V);
-        dist.assign(V, INF);
+        dist.assign(V, INF), prev.assign(V, INVALID);
         dist[s] = 0;
-        prev.assign(V, INVALID);
         for (int l = 0; l < nb_loop; l++) {
             bool upd = false;
             for (int v = 0; v < V; v++) {
                 if (dist[v] == INF) continue;
                 for (auto nx : to[v]) {
                     T dnx = dist[v] + nx.second;
-                    if (dist[nx.first] > dnx) {
-                        dist[nx.first] = dnx, prev[nx.first] = v;
-                        upd = true;
-                    }
+                    if (dist[nx.first] > dnx) dist[nx.first] = dnx, prev[nx.first] = v, upd = true;
                 }
             }
             if (!upd) return true;
@@ -75,9 +76,8 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2> struct Shortest
 
     void ZeroOneBFS(int s) {
         assert(0 <= s and s < V);
-        dist.assign(V, INF);
+        dist.assign(V, INF), prev.assign(V, INVALID);
         dist[s] = 0;
-        prev.assign(V, INVALID);
         std::deque<int> que;
         que.push_back(s);
         while (!que.empty()) {
@@ -94,6 +94,18 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2> struct Shortest
                     }
                 }
             }
+        }
+    }
+
+    void solve(int s) {
+        if (wmin >= 0) {
+            if (single_positive_weight) {
+                ZeroOneBFS(s);
+            } else {
+                Dijkstra(s);
+            }
+        } else {
+            BellmanFord(s, V);
         }
     }
 
