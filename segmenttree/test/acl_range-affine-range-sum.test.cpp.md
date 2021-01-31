@@ -8,8 +8,8 @@ data:
     path: segmenttree/acl_lazysegtree.hpp
     title: segmenttree/acl_lazysegtree.hpp
   - icon: ':heavy_check_mark:'
-    path: segmenttree/acl_range-affine-range-sum.hpp
-    title: segmenttree/acl_range-affine-range-sum.hpp
+    path: segmenttree/trees/acl_range-affine-range-sum.hpp
+    title: segmenttree/trees/acl_range-affine-range-sum.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -31,7 +31,7 @@ data:
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
-  code: "#include \"../../modint.hpp\"\n#include \"../acl_range-affine-range-sum.hpp\"\
+  code: "#include \"../../modint.hpp\"\n#include \"../trees/acl_range-affine-range-sum.hpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\
     using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N, Q;\n    cin >> N >> Q;\n\n    vector<RangeAffineRangeSum::S> A(N);\n\
@@ -43,12 +43,12 @@ data:
     \  }\n}\n"
   dependsOn:
   - modint.hpp
-  - segmenttree/acl_range-affine-range-sum.hpp
+  - segmenttree/trees/acl_range-affine-range-sum.hpp
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: true
   path: segmenttree/test/acl_range-affine-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2021-01-31 00:11:18+09:00'
+  timestamp: '2021-01-31 14:32:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/acl_range-affine-range-sum.test.cpp

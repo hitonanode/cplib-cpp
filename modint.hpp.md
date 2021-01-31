@@ -24,8 +24,8 @@ data:
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
   - icon: ':heavy_check_mark:'
-    path: segmenttree/acl_range-affine-range-sum.hpp
-    title: segmenttree/acl_range-affine-range-sum.hpp
+    path: segmenttree/trees/acl_range-affine-range-sum.hpp
+    title: segmenttree/trees/acl_range-affine-range-sum.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: convolution/test/bitwise_and_conv.test.cpp
@@ -285,7 +285,7 @@ data:
   requiredBy:
   - graph-tree/tree_isomorphism.hpp
   - graph/general_matching.hpp
-  - segmenttree/acl_range-affine-range-sum.hpp
+  - segmenttree/trees/acl_range-affine-range-sum.hpp
   - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/multipoint_evaluation.hpp
   - formal_power_series/formal_power_series.hpp

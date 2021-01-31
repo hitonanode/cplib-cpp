@@ -305,12 +305,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/acl_lazysegtree.hpp
       title: segmenttree/acl_lazysegtree.hpp
-    - icon: ':heavy_check_mark:'
-      path: segmenttree/acl_range-affine-range-sum.hpp
-      title: segmenttree/acl_range-affine-range-sum.hpp
-    - icon: ':warning:'
-      path: segmenttree/acl_range-update-range-sum-min.hpp
-      title: segmenttree/acl_range-update-range-sum-min.hpp
     - icon: ':warning:'
       path: segmenttree/acl_segtree.hpp
       title: segmenttree/acl_segtree.hpp
@@ -338,6 +332,20 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/segment_tree_2d.hpp
       title: segmenttree/segment_tree_2d.hpp
+  - name: segmenttree/trees
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/trees/acl_range-affine-range-sum.hpp
+      title: segmenttree/trees/acl_range-affine-range-sum.hpp
+    - icon: ':warning:'
+      path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
+      title: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
+      title: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
+    - icon: ':warning:'
+      path: segmenttree/trees/acl_range-update-range-sum-min.hpp
+      title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   - name: sparse_table
     pages:
     - icon: ':heavy_check_mark:'

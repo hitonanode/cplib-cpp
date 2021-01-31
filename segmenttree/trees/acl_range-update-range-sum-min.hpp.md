@@ -21,29 +21,28 @@ data:
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
-  code: "#pragma once\n#include <algorithm>\n\n// CUT begin\n#include \"acl_lazysegtree.hpp\"\
-    \nnamespace rangeupdaterangesummin {\nusing Int = long long;\nconst Int INF =\
-    \ 101010101010LL;\nstruct S {\n    Int sum;\n    int sz;\n    Int minval;\n};\n\
-    using F = std::pair<bool, Int>;\nS op(S a, S b) { return S{a.sum + b.sum, a.sz\
-    \ + b.sz, std::min(a.minval, b.minval)}; }\nS mapping(F f, S x) { return f.first\
-    \ ? S{x.sz * f.second, x.sz, f.second} : x; }\nF composition(F later, F conventional)\
-    \ { return later.first ? later : conventional; }\nS e() { return S{0, 0, INF};\
-    \ }\nF id() { return std::make_pair(false, INF); }\nusing RangeUpdateRangeSumMin\
+  code: "#pragma once\n#include \"../acl_lazysegtree.hpp\"\n#include <algorithm>\n\
+    \n// CUT begin\nnamespace RangeUpdateRangeSumMin {\nusing Int = long long;\nconst\
+    \ Int INF = 101010101010LL;\nstruct S {\n    Int sum;\n    int sz;\n    Int minval;\n\
+    };\nusing F = std::pair<bool, Int>;\nS op(S a, S b) { return S{a.sum + b.sum,\
+    \ a.sz + b.sz, std::min(a.minval, b.minval)}; }\nS mapping(F f, S x) { return\
+    \ f.first ? S{x.sz * f.second, x.sz, f.second} : x; }\nF composition(F later,\
+    \ F conventional) { return later.first ? later : conventional; }\nS e() { return\
+    \ S{0, 0, INF}; }\nF id() { return std::make_pair(false, INF); }\nusing segtree\
     \ = atcoder::lazy_segtree<S, op, e, F, mapping, composition, id>;\n}; // namespace\
-    \ rangeupdaterangesummin\nusing rangeupdaterangesummin::RangeUpdateRangeSumMin;\n\
-    using rangeupdaterangesummin::S;\n// Example of usage: https://codeforces.com/contest/1439/submission/98816580\n"
+    \ RangeUpdateRangeSumMin\n// Example of usage: https://codeforces.com/contest/1439/submission/98816580\n"
   dependsOn:
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: false
-  path: segmenttree/acl_range-update-range-sum-min.hpp
+  path: segmenttree/trees/acl_range-update-range-sum-min.hpp
   requiredBy: []
-  timestamp: '2021-01-31 00:11:18+09:00'
+  timestamp: '2021-01-31 14:32:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: segmenttree/acl_range-update-range-sum-min.hpp
+documentation_of: segmenttree/trees/acl_range-update-range-sum-min.hpp
 layout: document
 redirect_from:
-- /library/segmenttree/acl_range-update-range-sum-min.hpp
-- /library/segmenttree/acl_range-update-range-sum-min.hpp.html
-title: segmenttree/acl_range-update-range-sum-min.hpp
+- /library/segmenttree/trees/acl_range-update-range-sum-min.hpp
+- /library/segmenttree/trees/acl_range-update-range-sum-min.hpp.html
+title: segmenttree/trees/acl_range-update-range-sum-min.hpp
 ---

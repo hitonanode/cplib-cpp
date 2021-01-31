@@ -4,7 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
     title: segmenttree/acl_lazysegtree.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
+    title: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
+    title: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/beats.test.cpp
@@ -78,7 +84,9 @@ data:
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: false
   path: segmenttree/acl_beats.hpp
-  requiredBy: []
+  requiredBy:
+  - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
+  - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

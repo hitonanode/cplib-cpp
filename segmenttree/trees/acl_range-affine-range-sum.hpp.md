@@ -26,7 +26,7 @@ data:
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
-  code: "#pragma once\n#include \"../modint.hpp\"\n#include \"acl_lazysegtree.hpp\"\
+  code: "#pragma once\n#include \"../../modint.hpp\"\n#include \"../acl_lazysegtree.hpp\"\
     \n#include <utility>\n\n// CUT begin\nnamespace RangeAffineRangeSum {\nusing T\
     \ = ModInt<998244353>;\nusing S = std::pair<T, size_t>;\nusing F = std::pair<T,\
     \ T>;\nS op(S l, S r) { return std::make_pair(l.first + r.first, l.second + r.second);\
@@ -40,16 +40,16 @@ data:
   - modint.hpp
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: false
-  path: segmenttree/acl_range-affine-range-sum.hpp
+  path: segmenttree/trees/acl_range-affine-range-sum.hpp
   requiredBy: []
-  timestamp: '2021-01-31 00:11:18+09:00'
+  timestamp: '2021-01-31 14:32:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
-documentation_of: segmenttree/acl_range-affine-range-sum.hpp
+documentation_of: segmenttree/trees/acl_range-affine-range-sum.hpp
 layout: document
 redirect_from:
-- /library/segmenttree/acl_range-affine-range-sum.hpp
-- /library/segmenttree/acl_range-affine-range-sum.hpp.html
-title: segmenttree/acl_range-affine-range-sum.hpp
+- /library/segmenttree/trees/acl_range-affine-range-sum.hpp
+- /library/segmenttree/trees/acl_range-affine-range-sum.hpp.html
+title: segmenttree/trees/acl_range-affine-range-sum.hpp
 ---
