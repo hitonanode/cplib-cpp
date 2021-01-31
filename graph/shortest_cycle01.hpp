@@ -11,6 +11,7 @@
 // Complexity: O(E)
 // Verified: <https://codeforces.com/contest/1325/problem/E>
 struct ShortestCycle01 {
+    const int INF = std::numeric_limits<int>::max() / 2;
     int V, E;
     int INVALID = -1;
     std::vector<std::vector<std::pair<int, int>>> to; // (nxt, weight)
@@ -29,11 +30,11 @@ struct ShortestCycle01 {
     std::vector<int> prev;
     // Find minimum length simple cycle which passes vertex `v`
     // - return: (LEN, (a, b))
-    //   - LEN: length of the shortest cycles if exists, numeric_limits<int>::max() otherwise.
+    //   - LEN: length of the shortest cycles if exists, INF otherwise.
     //   - the cycle consists of vertices [v, ..., prev[prev[a]], prev[a], a, b, prev[b], prev[prev[b]], ..., v]
     std::pair<int, std::pair<int, int>> Solve(int v) {
         assert(0 <= v and v < V);
-        dist.assign(V, std::numeric_limits<int>::max());
+        dist.assign(V, INF);
         dist[v] = 0;
         prev.assign(V, -1);
         std::deque<std::pair<int, int>> bfsq;
@@ -44,7 +45,7 @@ struct ShortestCycle01 {
             bfsq.pop_front();
             for (auto nxt : to[now])
                 if (nxt.first != prv) {
-                    if (dist[nxt.first] == std::numeric_limits<int>::max()) {
+                    if (dist[nxt.first] == INF) {
                         dist[nxt.first] = dist[now] + nxt.second;
                         prev[nxt.first] = now;
                         if (nxt.second)
@@ -55,7 +56,7 @@ struct ShortestCycle01 {
                         add_edge.emplace_back(std::make_pair(now, nxt.first), nxt.second);
                 }
         }
-        int minimum_cycle = std::numeric_limits<int>::max();
+        int minimum_cycle = INF;
         int s = -1, t = -1;
         for (auto edge : add_edge) {
             int a = edge.first.first, b = edge.first.second;

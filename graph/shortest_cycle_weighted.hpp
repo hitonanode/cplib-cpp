@@ -7,12 +7,11 @@
 
 // Shortest cycle detection of UNDIRECTED SIMPLE graphs
 // Verified: <https://yukicoder.me/submissions/594507>
-template <typename T> struct ShortestCycleOfUndirectedWeighted {
+template <typename T, T INF = std::numeric_limits<T>::max() / 2> struct ShortestCycleOfUndirectedWeighted {
     int V, E;
     std::vector<std::vector<std::pair<int, T>>> to; // (nxt, weight)
-    const T INF;
     ShortestCycleOfUndirectedWeighted() = default;
-    ShortestCycleOfUndirectedWeighted(int V) : V(V), E(0), to(V), INF(std::numeric_limits<T>::max() / 2) {}
+    ShortestCycleOfUndirectedWeighted(int V) : V(V), E(0), to(V) {}
     void add_edge(int s, int t, T len) {
         assert(0 <= s and s < V);
         assert(0 <= t and t < V);
