@@ -57,7 +57,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   requiredBy: []
-  timestamp: '2021-01-31 14:32:32+09:00'
+  timestamp: '2021-01-31 16:39:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats_gcd.test.cpp

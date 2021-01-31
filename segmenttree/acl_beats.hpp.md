@@ -37,7 +37,7 @@ data:
     \ F), F (*id)()>\nclass segtree_beats : public atcoder::lazy_segtree<S, op, e,\
     \ F, mapping, composition, id> {\n    using Base = atcoder::lazy_segtree<S, op,\
     \ e, F, mapping, composition, id>;\n    using Base::lazy_segtree;\n    void all_apply(int\
-    \ k, F f) override {\n        Base::d[k] = mapping(f, this->d[k]);\n        if\
+    \ k, F f) override {\n        Base::d[k] = mapping(f, Base::d[k]);\n        if\
     \ (k < Base::size) {\n            Base::lz[k] = composition(f, Base::lz[k]);\n\
     \            if (Base::d[k].fail) Base::push(k), Base::update(k);\n        }\n\
     \    }\n};\n\nnamespace RangeChMinMaxAddSum {\n#include <algorithm>\n\ntemplate\
@@ -87,7 +87,7 @@ data:
   requiredBy:
   - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-  timestamp: '2021-01-31 00:11:18+09:00'
+  timestamp: '2021-01-31 16:39:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats.test.cpp
