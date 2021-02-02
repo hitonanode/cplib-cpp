@@ -5,6 +5,9 @@ data:
     path: segmenttree/acl_lazysegtree.hpp
     title: segmenttree/acl_lazysegtree.hpp
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
+    title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
   - icon: ':warning:'
     path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
     title: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
@@ -18,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/beats_gcd.test.cpp
     title: segmenttree/test/beats_gcd.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
+    title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -86,12 +92,14 @@ data:
   path: segmenttree/acl_beats.hpp
   requiredBy:
   - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
+  - segmenttree/trees/acl_range-add-chmax-range-sum.hpp
   - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   timestamp: '2021-01-31 16:39:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats.test.cpp
   - segmenttree/test/beats_gcd.test.cpp
+  - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
 documentation_of: segmenttree/acl_beats.hpp
 layout: document
 redirect_from:

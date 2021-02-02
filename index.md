@@ -335,6 +335,9 @@ data:
   - name: segmenttree/trees
     pages:
     - icon: ':heavy_check_mark:'
+      path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
+      title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
+    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-affine-range-sum.hpp
       title: segmenttree/trees/acl_range-affine-range-sum.hpp
     - icon: ':warning:'
@@ -736,6 +739,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats_gcd.test.cpp
       title: segmenttree/test/beats_gcd.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
+      title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp
