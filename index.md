@@ -1,11 +1,6 @@
 ---
 data:
   libraryCategories:
-  - name: binary_lifting(doubling)
-    pages:
-    - icon: ':warning:'
-      path: binary_lifting(doubling)/doubling.hpp
-      title: binary_lifting(doubling)/doubling.hpp
   - name: combinatorial_opt
     pages:
     - icon: ':warning:'
@@ -246,6 +241,9 @@ data:
       title: number/sieve.hpp
   - name: other_algorithms
     pages:
+    - icon: ':warning:'
+      path: other_algorithms/doubling.hpp
+      title: other_algorithms/doubling.hpp
     - icon: ':warning:'
       path: other_algorithms/smawk.hpp
       title: other_algorithms/smawk.hpp

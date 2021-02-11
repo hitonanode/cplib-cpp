@@ -23,13 +23,14 @@ data:
     \                if len(line) and line[0] in ['+', '*', '.', ';', ' ']:\n    \
     \                line = '`' + line\n                ret.append(line)\n    ret.append('/E')\n\
     \    return ret\n\n\ndef dfs(current_dir):\n    ret = list()\n    for ch in os.listdir(current_dir):\n\
-    \        filepath = os.path.join(current_dir, ch)\n        if os.path.isdir(filepath):\n\
-    \            ch_info = dfs(filepath)\n            if ch_info:\n              \
-    \  ret += ['+' + ch]\n                ret += ch_info\n                ret += ['..']\n\
-    \        if os.path.isfile(filepath) and len(filepath) > 4 and filepath[-4:] ==\
-    \ '.hpp':\n            ret += read_hpp(filepath)\n    return ret\n\n\nif __name__\
-    \ == '__main__':\n    ret = config_header + dfs(rootdir)\n    with open('Config.txt',\
-    \ 'w') as f:\n        for line in ret:\n            f.write(line + '\\r\\n')\n"
+    \        filepath = os.path.join(current_dir, ch)\n        if os.path.isdir(filepath)\
+    \ and filepath[2] != '.':\n            ch_info = dfs(filepath)\n            if\
+    \ ch_info:\n                ret += ['+' + ch]\n                ret += ch_info\n\
+    \                ret += ['..']\n        if os.path.isfile(filepath) and len(filepath)\
+    \ > 4 and filepath[-4:] == '.hpp':\n            ret += read_hpp(filepath)\n  \
+    \  return ret\n\n\nif __name__ == '__main__':\n    ret = config_header + dfs(rootdir)\n\
+    \    with open('Config.txt', 'w') as f:\n        for line in ret:\n          \
+    \  f.write(line + '\\r\\n')\n"
   dependsOn: []
   isVerificationFile: false
   path: generate_snippet_conf.py

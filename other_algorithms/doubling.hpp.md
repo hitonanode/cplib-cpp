@@ -9,9 +9,9 @@ data:
   attributes:
     links:
     - https://atcoder.jp/contests/arc060/submissions/7039451>
-  bundledCode: "#line 2 \"binary_lifting(doubling)/doubling.hpp\"\n#include <cstdlib>\n\
-    #include <vector>\n\n// CUT begin\n// Binary lifting / `Doubling`\n// Complexity:\
-    \ O(NlogN) precalculation / O(logN) per query\n// <https://atcoder.jp/contests/arc060/submissions/7039451>\n\
+  bundledCode: "#line 2 \"other_algorithms/doubling.hpp\"\n#include <cstdlib>\n#include\
+    \ <vector>\n\n// CUT begin\n// Binary lifting / `Doubling`\n// Complexity: O(NlogN)\
+    \ precalculation / O(logN) per query\n// <https://atcoder.jp/contests/arc060/submissions/7039451>\n\
     struct BinaryLifting {\n    int N, INVALID, lgD;\n    std::vector<std::vector<int>>\
     \ mat;\n    BinaryLifting() : N(0), lgD(0) {}\n    BinaryLifting(const std::vector<int>\
     \ &vec_nxt, int INVALID = -1, int lgd = 0) : N(vec_nxt.size()), INVALID(INVALID),\
@@ -53,15 +53,15 @@ data:
     \ Unable to reach\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: binary_lifting(doubling)/doubling.hpp
+  path: other_algorithms/doubling.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2021-02-11 22:40:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: binary_lifting(doubling)/doubling.hpp
+documentation_of: other_algorithms/doubling.hpp
 layout: document
 redirect_from:
-- /library/binary_lifting(doubling)/doubling.hpp
-- /library/binary_lifting(doubling)/doubling.hpp.html
-title: binary_lifting(doubling)/doubling.hpp
+- /library/other_algorithms/doubling.hpp
+- /library/other_algorithms/doubling.hpp.html
+title: other_algorithms/doubling.hpp
 ---
