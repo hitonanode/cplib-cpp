@@ -83,6 +83,7 @@
 "segmenttree/test/acl_range-affine-range-sum.test.cpp": "2021-01-31 14:32:32 +0900",
 "segmenttree/test/beats.test.cpp": "2021-01-31 16:39:51 +0900",
 "segmenttree/test/beats_gcd.test.cpp": "2021-01-31 16:39:51 +0900",
+"segmenttree/test/beats_range-add-chmax-range-sum.test.cpp": "2021-02-03 01:14:58 +0900",
 "segmenttree/test/binary_indexed_tree.test.cpp": "2021-01-01 16:52:32 +0900",
 "segmenttree/test/countandsumlessthan.test.cpp": "2021-01-01 16:52:32 +0900",
 "segmenttree/test/point-add-range-sum.test.cpp": "2021-01-01 16:52:32 +0900",
