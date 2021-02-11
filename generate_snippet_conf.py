@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # "Config.txt" generator for "Clipboard History", snippet manager
-# "https://blank-note.sakura.ne.jp/topics/clipboard_history.html"
+# https://blank-note.sakura.ne.jp/topics/clipboard_history.html
 
 import os
 import re
