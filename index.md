@@ -33,6 +33,9 @@ data:
       path: combinatorial_opt/mincostflow_bellmanford.hpp
       title: combinatorial_opt/mincostflow_bellmanford.hpp
     - icon: ':warning:'
+      path: combinatorial_opt/simplex.hpp
+      title: "Simplex method \uFF08\u5358\u4F53\u6CD5\uFF09"
+    - icon: ':warning:'
       path: combinatorial_opt/vector_matroid.hpp
       title: combinatorial_opt/vector_matroid.hpp
   - name: convex_hull_trick
@@ -191,7 +194,7 @@ data:
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
       path: linear_algebra_matrix/toeplitz.hpp
-      title: linear_algebra_matrix/toeplitz.hpp
+      title: Fast operations on Toeplitz matrices
     - icon: ':warning:'
       path: linear_algebra_matrix/transpose.hpp
       title: linear_algebra_matrix/transpose.hpp
@@ -301,7 +304,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: segmenttree/acl_beats.hpp
-      title: segmenttree/acl_beats.hpp
+      title: Segment Tree Beats (based on atcoder::lazy_segtree)
     - icon: ':heavy_check_mark:'
       path: segmenttree/acl_lazysegtree.hpp
       title: segmenttree/acl_lazysegtree.hpp

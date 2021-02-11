@@ -175,10 +175,10 @@ data:
   verifiedWith:
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - number/test/sqrt_modint_runtime.test.cpp
   - number/test/montmort_number_mod.test.cpp
+  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+  - formal_power_series/test/fps_exp_modintruntime.test.cpp
   - convolution/test/ntt.test.cpp
   - convolution/test/ntt_arbitrary_mod.test.cpp
 documentation_of: number/modint_runtime.hpp

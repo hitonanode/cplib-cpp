@@ -56,8 +56,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_data_structures/test/range_kth_smallest_offline.test.cpp
-  - segmenttree/test/binary_indexed_tree.test.cpp
   - segmenttree/test/point-add-range-sum.test.cpp
+  - segmenttree/test/binary_indexed_tree.test.cpp
 documentation_of: segmenttree/binary_indexed_tree.hpp
 layout: document
 redirect_from:

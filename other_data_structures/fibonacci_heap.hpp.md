@@ -202,9 +202,9 @@ data:
   timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
-  - other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
   - other_data_structures/test/fibonacci_heap_dijkstra.test.cpp
+  - other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
+  - other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
 documentation_of: other_data_structures/fibonacci_heap.hpp
 layout: document
 redirect_from:

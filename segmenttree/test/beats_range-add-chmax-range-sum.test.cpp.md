@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_beats.hpp
-    title: segmenttree/acl_beats.hpp
+    title: Segment Tree Beats (based on atcoder::lazy_segtree)
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
     title: segmenttree/acl_lazysegtree.hpp

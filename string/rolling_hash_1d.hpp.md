@@ -89,8 +89,8 @@ data:
   timestamp: '2020-12-31 05:31:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - string/test/rolling_hash.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
+  - string/test/rolling_hash.test.cpp
 documentation_of: string/rolling_hash_1d.hpp
 layout: document
 redirect_from:

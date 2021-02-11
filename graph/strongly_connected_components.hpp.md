@@ -141,8 +141,8 @@ data:
   verifiedWith:
   - graph/test/topological_sort.test.cpp
   - graph/test/strongly_connected_components.test.cpp
-  - graph/test/cycle_detection_directed.test.cpp
   - graph/test/2sat_solver.test.cpp
+  - graph/test/cycle_detection_directed.test.cpp
 documentation_of: graph/strongly_connected_components.hpp
 layout: document
 redirect_from:

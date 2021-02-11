@@ -14,8 +14,8 @@ data:
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.1/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 96, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "#!/usr/bin/env python3\n# \"Config.txt\" generator for \"Clipboard History\"\
-    , snippet manager\n# \"https://blank-note.sakura.ne.jp/topics/clipboard_history.html\"\
-    \n\nimport os\nimport re\n\nrootdir = './'\nconfig_header = [\n    '@NoteHotkey=Shift,400'\n\
+    , snippet manager\n# https://blank-note.sakura.ne.jp/topics/clipboard_history.html\n\
+    \nimport os\nimport re\n\nrootdir = './'\nconfig_header = [\n    '@NoteHotkey=Shift,400'\n\
     ]\n\n\ndef read_hpp(filepath):\n    ret = [os.path.basename(filepath) + '|']\n\
     \    with open(filepath, 'r') as file:\n        for line in file.read().splitlines():\n\
     \            if line[:12] == '// CUT begin':\n                ret = ret[:1]\n\

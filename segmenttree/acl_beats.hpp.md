@@ -98,12 +98,16 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats.test.cpp
-  - segmenttree/test/beats_gcd.test.cpp
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
+  - segmenttree/test/beats_gcd.test.cpp
 documentation_of: segmenttree/acl_beats.hpp
 layout: document
-redirect_from:
-- /library/segmenttree/acl_beats.hpp
-- /library/segmenttree/acl_beats.hpp.html
-title: segmenttree/acl_beats.hpp
+title: Segment Tree Beats (based on atcoder::lazy_segtree)
 ---
+
+ACL-based [segment tree beats](https://codeforces.com/blog/entry/57319)
+
+## Link
+
+- https://atcoder.github.io/ac-library/production/document_ja/lazysegtree.html
+- https://rsm9.hatenablog.com/entry/2021/02/01/220408

@@ -62,8 +62,13 @@ data:
   verifiedWith: []
 documentation_of: linear_algebra_matrix/toeplitz.hpp
 layout: document
-redirect_from:
-- /library/linear_algebra_matrix/toeplitz.hpp
-- /library/linear_algebra_matrix/toeplitz.hpp.html
-title: linear_algebra_matrix/toeplitz.hpp
+title: Fast operations on Toeplitz matrices
 ---
+
+## Levinson recursion
+
+Solve Toeplitz system $\mathbf{T} \mathbf{x} = \mathbf{y}$, where $\mathbf{T}$ is Topelitz and every its principal submatrix is regular.
+
+### Complexity:
+
+$O(N^2)$, where $N$ is the dimension of $\mathbf{T}$

@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_beats.hpp
-    title: segmenttree/acl_beats.hpp
+    title: Segment Tree Beats (based on atcoder::lazy_segtree)
   - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
     title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
@@ -141,10 +141,10 @@ data:
   timestamp: '2021-01-31 00:11:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - segmenttree/test/beats.test.cpp
-  - segmenttree/test/beats_gcd.test.cpp
+  - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
+  - segmenttree/test/beats_gcd.test.cpp
 documentation_of: segmenttree/acl_lazysegtree.hpp
 layout: document
 redirect_from:
