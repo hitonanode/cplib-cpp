@@ -27,7 +27,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/mincostflow_bellmanford.hpp
       title: combinatorial_opt/mincostflow_bellmanford.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/simplex.hpp
       title: "Simplex method \uFF08\u5358\u4F53\u6CD5\uFF09"
     - icon: ':warning:'
@@ -477,6 +477,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/mincostflow.test.cpp
       title: combinatorial_opt/test/mincostflow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/simplex.easy.test.cpp
+      title: combinatorial_opt/test/simplex.easy.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/simplex.multiprecision.test.cpp
+      title: combinatorial_opt/test/simplex.multiprecision.test.cpp
   - name: convex_hull_trick/test
     pages:
     - icon: ':heavy_check_mark:'
