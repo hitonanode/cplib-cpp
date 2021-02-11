@@ -7,9 +7,8 @@
 // Maximize cx s.t. Ax <= b, x >= 0
 // Implementation idea: https://kopricky.github.io/code/Computation_Advanced/simplex.html
 // Refer to https://hitonanode.github.io/cplib-cpp/combinatorial_opt/simplex.hpp
-struct Simplex {
-    using Float = double;
-    static constexpr Float EPS = 1e-9;
+template <typename Float = double, int DEPS = 30> struct Simplex {
+    const Float EPS = Float(1.0) / (1LL << DEPS);
     int N, M;
     std::vector<int> idx;
     std::vector<std::vector<Float>> a;
@@ -32,21 +31,22 @@ struct Simplex {
         std::iota(idx.begin(), idx.end(), 0);
     }
 
+    inline Float abs_(Float x) noexcept { return x > -x ? x : -x; }
     void solve() {
         std::vector<int> jupd;
         for (j_ch = N;;) {
             if (i_ch < M) {
                 std::swap(idx[j_ch], idx[i_ch + N + 1]);
-                a[i_ch][j_ch] = 1 / a[i_ch][j_ch];
+                a[i_ch][j_ch] = Float(1) / a[i_ch][j_ch];
                 jupd.clear();
                 for (int j = 0; j < N + 2; j++) {
                     if (j != j_ch) {
                         a[i_ch][j] *= -a[i_ch][j_ch];
-                        if (std::abs(a[i_ch][j]) > EPS) jupd.push_back(j);
+                        if (abs_(a[i_ch][j]) > EPS) jupd.push_back(j);
                     }
                 }
                 for (int i = 0; i < M + 2; i++) {
-                    if (std::abs(a[i][j_ch]) < EPS or i == i_ch) continue;
+                    if (abs_(a[i][j_ch]) < EPS or i == i_ch) continue;
                     for (auto j : jupd) a[i][j] += a[i][j_ch] * a[i_ch][j];
                     a[i][j_ch] *= a[i_ch][j_ch];
                 }
@@ -55,7 +55,7 @@ struct Simplex {
             j_ch = -1;
             for (int j = 0; j < N + 1; j++) {
                 if (j_ch < 0 or idx[j_ch] > idx[j]) {
-                    if (a[M + 1][j] > EPS or (std::abs(a[M + 1][j]) < EPS and a[M][j] > EPS)) j_ch = j;
+                    if (a[M + 1][j] > EPS or (abs_(a[M + 1][j]) < EPS and a[M][j] > EPS)) j_ch = j;
                 }
             }
             if (j_ch < 0) break;
