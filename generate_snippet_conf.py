@@ -30,7 +30,7 @@ def dfs(current_dir):
     ret = list()
     for ch in os.listdir(current_dir):
         filepath = os.path.join(current_dir, ch)
-        if os.path.isdir(filepath):
+        if os.path.isdir(filepath) and filepath[2] != '.':
             ch_info = dfs(filepath)
             if ch_info:
                 ret += ['+' + ch]
