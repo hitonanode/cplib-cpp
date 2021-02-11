@@ -7,8 +7,14 @@ data:
     path: combinatorial_opt/test/simplex.easy.test.cpp
     title: combinatorial_opt/test/simplex.easy.test.cpp
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/simplex.maxflow.test.cpp
+    title: combinatorial_opt/test/simplex.maxflow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/simplex.multiprecision.test.cpp
     title: combinatorial_opt/test/simplex.multiprecision.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/simplex.shortestpath.test.cpp
+    title: combinatorial_opt/test/simplex.shortestpath.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -118,6 +124,8 @@ data:
   verifiedWith:
   - combinatorial_opt/test/simplex.easy.test.cpp
   - combinatorial_opt/test/simplex.multiprecision.test.cpp
+  - combinatorial_opt/test/simplex.shortestpath.test.cpp
+  - combinatorial_opt/test/simplex.maxflow.test.cpp
 documentation_of: combinatorial_opt/simplex.hpp
 layout: document
 title: "Simplex method \uFF08\u5358\u4F53\u6CD5\uFF09"

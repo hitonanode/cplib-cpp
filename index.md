@@ -481,8 +481,14 @@ data:
       path: combinatorial_opt/test/simplex.easy.test.cpp
       title: combinatorial_opt/test/simplex.easy.test.cpp
     - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/simplex.maxflow.test.cpp
+      title: combinatorial_opt/test/simplex.maxflow.test.cpp
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/simplex.multiprecision.test.cpp
       title: combinatorial_opt/test/simplex.multiprecision.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/simplex.shortestpath.test.cpp
+      title: combinatorial_opt/test/simplex.shortestpath.test.cpp
   - name: convex_hull_trick/test
     pages:
     - icon: ':heavy_check_mark:'
