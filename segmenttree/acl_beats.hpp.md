@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
-    title: segmenttree/acl_lazysegtree.hpp
+    title: Lazy Segtree (based on atcoder::lazy_segtree)
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
@@ -43,8 +43,8 @@ data:
     \ F), F (*id)()>\nclass segtree_beats : public atcoder::lazy_segtree<S, op, e,\
     \ F, mapping, composition, id> {\n    using Base = atcoder::lazy_segtree<S, op,\
     \ e, F, mapping, composition, id>;\n    using Base::lazy_segtree;\n    void all_apply(int\
-    \ k, F f) override {\n        Base::d[k] = mapping(f, Base::d[k]);\n        if\
-    \ (k < Base::size) {\n            Base::lz[k] = composition(f, Base::lz[k]);\n\
+    \ k, F f) const override {\n        Base::d[k] = mapping(f, Base::d[k]);\n   \
+    \     if (k < Base::size) {\n            Base::lz[k] = composition(f, Base::lz[k]);\n\
     \            if (Base::d[k].fail) Base::push(k), Base::update(k);\n        }\n\
     \    }\n};\n\nnamespace RangeChMinMaxAddSum {\n#include <algorithm>\n\ntemplate\
     \ <typename Num> inline Num second_lowest(Num a, Num a2, Num c, Num c2) noexcept\
@@ -94,7 +94,7 @@ data:
   - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   - segmenttree/trees/acl_range-add-chmax-range-sum.hpp
   - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-  timestamp: '2021-01-31 16:39:51+09:00'
+  timestamp: '2021-02-13 02:26:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats.test.cpp
@@ -109,5 +109,5 @@ ACL-based [segment tree beats](https://codeforces.com/blog/entry/57319)
 
 ## Link
 
-- https://atcoder.github.io/ac-library/production/document_ja/lazysegtree.html
-- https://rsm9.hatenablog.com/entry/2021/02/01/220408
+- [ACL reference](https://atcoder.github.io/ac-library/production/document_ja/lazysegtree.html)
+- [My blog](https://rsm9.hatenablog.com/entry/2021/02/01/220408)

@@ -6,7 +6,7 @@ data:
     title: modint.hpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
-    title: segmenttree/acl_lazysegtree.hpp
+    title: Lazy Segtree (based on atcoder::lazy_segtree)
   - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
@@ -48,7 +48,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/acl_range-affine-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2021-01-31 14:32:32+09:00'
+  timestamp: '2021-02-13 02:26:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/acl_range-affine-range-sum.test.cpp

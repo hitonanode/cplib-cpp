@@ -6,7 +6,7 @@ data:
     title: Segment Tree Beats (based on atcoder::lazy_segtree)
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
-    title: segmenttree/acl_lazysegtree.hpp
+    title: Lazy Segtree (based on atcoder::lazy_segtree)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -49,7 +49,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   requiredBy: []
-  timestamp: '2021-01-31 16:39:51+09:00'
+  timestamp: '2021-02-13 02:26:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp

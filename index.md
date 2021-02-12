@@ -305,8 +305,8 @@ data:
       title: Segment Tree Beats (based on atcoder::lazy_segtree)
     - icon: ':heavy_check_mark:'
       path: segmenttree/acl_lazysegtree.hpp
-      title: segmenttree/acl_lazysegtree.hpp
-    - icon: ':warning:'
+      title: Lazy Segtree (based on atcoder::lazy_segtree)
+    - icon: ':heavy_check_mark:'
       path: segmenttree/acl_segtree.hpp
       title: segmenttree/acl_segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -323,7 +323,7 @@ data:
       title: segmenttree/point-update-range-get_nonrecursive.hpp
     - icon: ':warning:'
       path: segmenttree/range-add-range-min.hpp
-      title: segmenttree/range-add-range-min.hpp
+      title: Range Add Range Min (known as the Starry sky tree)
     - icon: ':heavy_check_mark:'
       path: segmenttree/range-update-range-get.hpp
       title: segmenttree/range-update-range-get.hpp
@@ -749,6 +749,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/acl_range-affine-range-sum.test.cpp
       title: segmenttree/test/acl_range-affine-range-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/test/acl_rmq.test.cpp
+      title: segmenttree/test/acl_rmq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/test/acl_rsq.test.cpp
+      title: segmenttree/test/acl_rsq.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats.test.cpp
       title: segmenttree/test/beats.test.cpp

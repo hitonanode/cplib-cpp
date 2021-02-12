@@ -6,7 +6,7 @@ data:
     title: Segment Tree Beats (based on atcoder::lazy_segtree)
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
-    title: segmenttree/acl_lazysegtree.hpp
+    title: Lazy Segtree (based on atcoder::lazy_segtree)
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -58,7 +58,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
   requiredBy: []
-  timestamp: '2021-02-03 01:14:58+09:00'
+  timestamp: '2021-02-13 02:26:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
