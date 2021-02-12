@@ -68,7 +68,7 @@ public:
         for (int i = 1; i <= log; i++) update(p >> i);
     }
 
-    S get(int p) {
+    S get(int p) const {
         assert(0 <= p && p < _n);
         p += size;
         for (int i = log; i >= 1; i--) push(p >> i);
@@ -98,7 +98,7 @@ public:
         return op(sml, smr);
     }
 
-    S all_prod() { return d[1]; }
+    S all_prod() const { return d[1]; }
 
     void apply(int p, F f) {
         assert(0 <= p && p < _n);
@@ -137,10 +137,10 @@ public:
         }
     }
 
-    template <bool (*g)(S)> int max_right(int l) {
+    template <bool (*g)(S)> int max_right(int l) const {
         return max_right(l, [](S x) { return g(x); });
     }
-    template <class G> int max_right(int l, G g) {
+    template <class G> int max_right(int l, G g) const {
         assert(0 <= l && l <= _n);
         assert(g(e()));
         if (l == _n) return _n;
@@ -166,10 +166,10 @@ public:
         return _n;
     }
 
-    template <bool (*g)(S)> int min_left(int r) {
+    template <bool (*g)(S)> int min_left(int r) const {
         return min_left(r, [](S x) { return g(x); });
     }
-    template <class G> int min_left(int r, G g) {
+    template <class G> int min_left(int r, G g) const {
         assert(0 <= r && r <= _n);
         assert(g(e()));
         if (r == 0) return 0;
@@ -197,15 +197,15 @@ public:
 
 protected: // Modified
     int _n, size, log;
-    std::vector<S> d;
-    std::vector<F> lz;
+    mutable std::vector<S> d;
+    mutable std::vector<F> lz;
 
-    void update(int k) { d[k] = op(d[2 * k], d[2 * k + 1]); }
-    virtual void all_apply(int k, F f) { // Modified
+    void update(int k) const { d[k] = op(d[2 * k], d[2 * k + 1]); }
+    virtual void all_apply(int k, F f) const { // Modified
         d[k] = mapping(f, d[k]);
         if (k < size) lz[k] = composition(f, lz[k]);
     }
-    void push(int k) {
+    void push(int k) const {
         all_apply(2 * k, lz[k]);
         all_apply(2 * k + 1, lz[k]);
         lz[k] = id();

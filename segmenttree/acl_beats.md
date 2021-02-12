@@ -7,5 +7,5 @@ ACL-based [segment tree beats](https://codeforces.com/blog/entry/57319)
 
 ## Link
 
-- https://atcoder.github.io/ac-library/production/document_ja/lazysegtree.html
-- https://rsm9.hatenablog.com/entry/2021/02/01/220408
+- [ACL reference](https://atcoder.github.io/ac-library/production/document_ja/lazysegtree.html)
+- [My blog](https://rsm9.hatenablog.com/entry/2021/02/01/220408)

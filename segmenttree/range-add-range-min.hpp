@@ -4,14 +4,16 @@
 
 // CUT begin
 // StarrySkyTree: segment tree for Range Minimum Query & Range Add Query
-// Complexity: O(N) (construction), O(lg N) (add / get)
+// Complexity: $O(N)$ (construction), $O(\log N)$ (add / get)
 template <typename Tp> struct RangeAddRangeMin {
     int N, head;
     Tp defaultMin;
     std::vector<Tp> range_min, range_add;
     static inline Tp f(Tp x, Tp y) noexcept { return std::min(x, y); }
 
-    inline void _merge(int pos) { range_min[pos] = f(range_min[pos * 2] + range_add[pos * 2], range_min[pos * 2 + 1] + range_add[pos * 2 + 1]); }
+    inline void _merge(int pos) {
+        range_min[pos] = f(range_min[pos * 2] + range_add[pos * 2], range_min[pos * 2 + 1] + range_add[pos * 2 + 1]);
+    }
     void initialize(const std::vector<Tp> &data_init, Tp default_min) {
         N = data_init.size(), head = 1;
         while (head < N) head <<= 1;

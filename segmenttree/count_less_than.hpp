@@ -5,7 +5,7 @@
 using namespace std;
 
 // CUT begin
-// Count elements in $[A_begin, ..., A_{end-1}]$ which satisfy $A_i < query$
+// Count elements in $[A_\mathrm{begin}, ..., A_{\mathrm{end}-1}]$ which satisfy $A_i < \mathrm{query}$
 // Complexity: $O(N \log N)$ for initialization, $O(\log^2 N)$ for each query
 // Verified: cntLess https://codeforces.com/contest/1288/submission/68865506
 template <typename T> struct CountLessThan {
