@@ -4,6 +4,7 @@
 "combinatorial_opt/test/mincostflow.test.cpp": "2021-01-01 15:35:34 +0900",
 "combinatorial_opt/test/simplex.easy.test.cpp": "2021-02-11 23:53:14 +0900",
 "combinatorial_opt/test/simplex.maxflow.test.cpp": "2021-02-12 01:58:16 +0900",
+"combinatorial_opt/test/simplex.mcf.test.cpp": "2021-02-12 23:56:28 +0900",
 "combinatorial_opt/test/simplex.multiprecision.test.cpp": "2021-02-11 23:53:14 +0900",
 "combinatorial_opt/test/simplex.shortestpath.test.cpp": "2021-02-12 01:58:16 +0900",
 "convex_hull_trick/test/convex_hull_trick.test.cpp": "2020-11-18 20:33:55 +0900",
