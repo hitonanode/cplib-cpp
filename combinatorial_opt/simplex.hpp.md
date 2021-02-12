@@ -10,6 +10,9 @@ data:
     path: combinatorial_opt/test/simplex.maxflow.test.cpp
     title: combinatorial_opt/test/simplex.maxflow.test.cpp
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/simplex.mcf.test.cpp
+    title: combinatorial_opt/test/simplex.mcf.test.cpp
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/simplex.multiprecision.test.cpp
     title: combinatorial_opt/test/simplex.multiprecision.test.cpp
   - icon: ':heavy_check_mark:'
@@ -124,6 +127,7 @@ data:
   verifiedWith:
   - combinatorial_opt/test/simplex.easy.test.cpp
   - combinatorial_opt/test/simplex.multiprecision.test.cpp
+  - combinatorial_opt/test/simplex.mcf.test.cpp
   - combinatorial_opt/test/simplex.shortestpath.test.cpp
   - combinatorial_opt/test/simplex.maxflow.test.cpp
 documentation_of: combinatorial_opt/simplex.hpp

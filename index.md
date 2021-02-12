@@ -484,6 +484,9 @@ data:
       path: combinatorial_opt/test/simplex.maxflow.test.cpp
       title: combinatorial_opt/test/simplex.maxflow.test.cpp
     - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/simplex.mcf.test.cpp
+      title: combinatorial_opt/test/simplex.mcf.test.cpp
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/simplex.multiprecision.test.cpp
       title: combinatorial_opt/test/simplex.multiprecision.test.cpp
     - icon: ':heavy_check_mark:'
