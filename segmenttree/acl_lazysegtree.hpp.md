@@ -116,13 +116,15 @@ data:
     \                        r--;\n                    }\n                }\n    \
     \            return r + 1 - size;\n            }\n            sm = op(d[r], sm);\n\
     \        } while ((r & -r) != r);\n        return 0;\n    }\n\nprotected: // Modified\n\
-    \    int _n, size, log;\n    mutable std::vector<S> d;\n    mutable std::vector<F>\
-    \ lz;\n\n    void update(int k) const { d[k] = op(d[2 * k], d[2 * k + 1]); }\n\
-    \    virtual void all_apply(int k, F f) const { // Modified\n        d[k] = mapping(f,\
-    \ d[k]);\n        if (k < size) lz[k] = composition(f, lz[k]);\n    }\n    void\
-    \ push(int k) const {\n        all_apply(2 * k, lz[k]);\n        all_apply(2 *\
-    \ k + 1, lz[k]);\n        lz[k] = id();\n    }\n};\n} // namespace atcoder\n#endif\
-    \ // ATCODER_LAZYSEGTREE_HPP\n\n// Reference: https://atcoder.github.io/ac-library/document_ja/lazysegtree.html\n\
+    \    int _n, size, log;\n    std::vector<S> d;\n    std::vector<F> lz;\n\n   \
+    \ void update(int k) const { const_cast<lazy_segtree*>(this)->d[k] = op(d[2 *\
+    \ k], d[2 * k + 1]); }\n    virtual void all_apply(int k, F f) const { // Modified\n\
+    \        const_cast<lazy_segtree*>(this)->d[k] = mapping(f, d[k]);\n        if\
+    \ (k < size) const_cast<lazy_segtree*>(this)->lz[k] = composition(f, lz[k]);\n\
+    \    }\n    void push(int k) const {\n        all_apply(2 * k, lz[k]);\n     \
+    \   all_apply(2 * k + 1, lz[k]);\n        const_cast<lazy_segtree*>(this)->lz[k]\
+    \ = id();\n    }\n};\n} // namespace atcoder\n#endif // ATCODER_LAZYSEGTREE_HPP\n\
+    \n// Reference: https://atcoder.github.io/ac-library/document_ja/lazysegtree.html\n\
     //            https://betrue12.hateblo.jp/entry/2020/09/22/194541\n//        \
     \    https://betrue12.hateblo.jp/entry/2020/09/23/005940\n/*\nstruct S {};\nS\
     \ op(S l, S r) {\n    return {};\n}\nS e() { return {}; };\nusing F = bool;\n\
@@ -139,7 +141,7 @@ data:
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   - segmenttree/trees/acl_range-update-range-sum-min.hpp
   - segmenttree/acl_beats.hpp
-  timestamp: '2021-02-13 02:26:53+09:00'
+  timestamp: '2021-02-13 18:38:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats.test.cpp

@@ -18,9 +18,6 @@ data:
     - icon: ':warning:'
       path: combinatorial_opt/maxflow_lowerbound.hpp
       title: combinatorial_opt/maxflow_lowerbound.hpp
-    - icon: ':warning:'
-      path: combinatorial_opt/maxflow_old.hpp
-      title: combinatorial_opt/maxflow_old.hpp
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/mincostflow.hpp
       title: combinatorial_opt/mincostflow.hpp
@@ -224,9 +221,6 @@ data:
     - icon: ':warning:'
       path: number/enumerate_partitions.hpp
       title: number/enumerate_partitions.hpp
-    - icon: ':warning:'
-      path: number/eratosthenes.hpp
-      title: number/eratosthenes.hpp
     - icon: ':warning:'
       path: number/euler_totient_phi.hpp
       title: number/euler_totient_phi.hpp

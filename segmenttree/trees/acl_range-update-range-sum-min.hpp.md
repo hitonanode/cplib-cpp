@@ -36,7 +36,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-update-range-sum-min.hpp
   requiredBy: []
-  timestamp: '2021-02-13 02:26:53+09:00'
+  timestamp: '2021-02-13 18:38:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: segmenttree/trees/acl_range-update-range-sum-min.hpp
