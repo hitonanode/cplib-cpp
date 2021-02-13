@@ -197,18 +197,18 @@ public:
 
 protected: // Modified
     int _n, size, log;
-    mutable std::vector<S> d;
-    mutable std::vector<F> lz;
+    std::vector<S> d;
+    std::vector<F> lz;
 
-    void update(int k) const { d[k] = op(d[2 * k], d[2 * k + 1]); }
+    void update(int k) const { const_cast<lazy_segtree*>(this)->d[k] = op(d[2 * k], d[2 * k + 1]); }
     virtual void all_apply(int k, F f) const { // Modified
-        d[k] = mapping(f, d[k]);
-        if (k < size) lz[k] = composition(f, lz[k]);
+        const_cast<lazy_segtree*>(this)->d[k] = mapping(f, d[k]);
+        if (k < size) const_cast<lazy_segtree*>(this)->lz[k] = composition(f, lz[k]);
     }
     void push(int k) const {
         all_apply(2 * k, lz[k]);
         all_apply(2 * k + 1, lz[k]);
-        lz[k] = id();
+        const_cast<lazy_segtree*>(this)->lz[k] = id();
     }
 };
 } // namespace atcoder
