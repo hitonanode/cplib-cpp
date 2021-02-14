@@ -7,7 +7,7 @@ using namespace std;
 // CUT begin
 // Arbitrary mod (<1e9) FFT/convolution
 // MAXA*MAXB*N <= 1e15 (double), 1e19 (long double)
-// Based on <https://ei1333.github.io/luzhiled/snippets/math/arbitrary-mod-convolution.html>
+// Based on https://ei1333.github.io/luzhiled/snippets/math/arbitrary-mod-convolution.html
 using T_FFT = long double;
 constexpr int D_FFT = 15;
 struct cmplx {
@@ -64,13 +64,15 @@ template <typename MODINT> vector<MODINT> convolution_mod(vector<MODINT> a, vect
     while ((1 << nbase) < need) nbase++;
     int sz = 1 << nbase;
     vector<cmplx> fa(sz);
-    for (int i = 0; i < (int)a.size(); i++) fa[i] = {(T_FFT)(a[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val >> D_FFT)};
+    for (int i = 0; i < (int)a.size(); i++)
+        fa[i] = {(T_FFT)(a[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val >> D_FFT)};
     fft(sz, fa);
     vector<cmplx> fb(sz);
     if (a == b)
         fb = fa;
     else {
-        for (int i = 0; i < (int)b.size(); i++) fb[i] = {(T_FFT)(b[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(b[i].val >> D_FFT)};
+        for (int i = 0; i < (int)b.size(); i++)
+            fb[i] = {(T_FFT)(b[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(b[i].val >> D_FFT)};
         fft(sz, fb);
     }
     T_FFT ratio = 0.25L / sz;

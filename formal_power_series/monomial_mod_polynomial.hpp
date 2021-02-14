@@ -3,15 +3,16 @@
 #include <vector>
 
 // CUT begin
-// Calculate x^N mod f(x)
+// Calculate $x^N \bmod f(x)$
 // Known as `Kitamasa method`
 // Input: f_reversed: monic, reversed (f_reversed[0] = 1)
-// Complexity: O(K^2 lgN) (K: deg. of f)
+// Complexity: $O(K^2 \log N)$ ($K$: deg. of $f$)
 // Example: (4, [1, -1, -1]) -> [2, 3]
 //          ( x^4 = (x^2 + x + 2)(x^2 - x - 1) + 3x + 2 )
-// Reference: <http://misawa.github.io/others/fast_kitamasa_method.html>
-//            <http://sugarknri.hatenablog.com/entry/2017/11/18/233936>
-template <typename Tfield> std::vector<Tfield> monomial_mod_polynomial(long long N, const std::vector<Tfield> &f_reversed) {
+// Reference: http://misawa.github.io/others/fast_kitamasa_method.html
+//            http://sugarknri.hatenablog.com/entry/2017/11/18/233936
+template <typename Tfield>
+std::vector<Tfield> monomial_mod_polynomial(long long N, const std::vector<Tfield> &f_reversed) {
     assert(!f_reversed.empty() and f_reversed[0] == 1);
     int K = f_reversed.size() - 1;
     if (!K) return {};
