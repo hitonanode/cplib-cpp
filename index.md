@@ -214,7 +214,7 @@ data:
       title: number/count_primes.hpp
     - icon: ':warning:'
       path: number/cyclotomic_polynomials.hpp
-      title: number/cyclotomic_polynomials.hpp
+      title: "Cyclotomic polynomials \uFF08\u5186\u5206\u591A\u9805\u5F0F\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/discrete_logarithm.hpp
       title: number/discrete_logarithm.hpp

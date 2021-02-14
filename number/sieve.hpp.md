@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: number/cyclotomic_polynomials.hpp
-    title: number/cyclotomic_polynomials.hpp
+    title: "Cyclotomic polynomials \uFF08\u5186\u5206\u591A\u9805\u5F0F\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: number/test/enumerate_primes.test.cpp

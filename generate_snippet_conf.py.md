@@ -29,8 +29,8 @@ data:
     \                ret += ['..']\n        if os.path.isfile(filepath) and len(filepath)\
     \ > 4 and filepath[-4:] == '.hpp':\n            ret += read_hpp(filepath)\n  \
     \  return ret\n\n\nif __name__ == '__main__':\n    ret = config_header + dfs(rootdir)\n\
-    \    with open('Config.txt', 'w') as f:\n        for line in ret:\n          \
-    \  f.write(line + '\\r\\n')\n"
+    \    with open('ClipBoardHistoryConfig.txt', 'w') as f:\n        for line in ret:\n\
+    \            f.write(line + '\\r\\n')\n"
   dependsOn: []
   isVerificationFile: false
   path: generate_snippet_conf.py
