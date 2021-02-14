@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/multipoint_evaluation.test.cpp
     title: formal_power_series/test/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -151,7 +151,7 @@ data:
     \ (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val,\
     \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 6 \"formal_power_series/formal_power_series.hpp\"\
     \nusing namespace std;\n\n// CUT begin\n// Formal Power Series (\u5F62\u5F0F\u7684\
-    \u51AA\u7D1A\u6570) based on ModInt<mod> / ModIntRuntime\n// Reference: <https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html>\n\
+    \u51AA\u7D1A\u6570) based on ModInt<mod> / ModIntRuntime\n// Reference: https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html\n\
     template <typename T> struct FormalPowerSeries : vector<T> {\n    using vector<T>::vector;\n\
     \    using P = FormalPowerSeries;\n\n    void shrink() {\n        while (this->size()\
     \ and this->back() == T(0)) this->pop_back();\n    }\n\n    P operator+(const\
@@ -301,8 +301,8 @@ data:
   isVerificationFile: false
   path: formal_power_series/multipoint_evaluation.hpp
   requiredBy: []
-  timestamp: '2021-01-01 16:38:37+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-02-14 23:48:54+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp

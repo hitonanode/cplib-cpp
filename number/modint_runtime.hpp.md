@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_exp_modintruntime.test.cpp
     title: formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - icon: ':heavy_check_mark:'
@@ -27,9 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/sqrt_modint_runtime.test.cpp
     title: number/test/sqrt_modint_runtime.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/modint_runtime.hpp\"\n#include <iostream>\n#include\
@@ -171,7 +171,7 @@ data:
   path: number/modint_runtime.hpp
   requiredBy: []
   timestamp: '2020-11-18 20:06:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp

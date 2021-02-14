@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/monomial_mod_polynomial.hpp
     title: formal_power_series/monomial_mod_polynomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/214
@@ -148,16 +148,16 @@ data:
     \ = nttconv_<nttprimes[2]>(ai, bi);\n        a.resize(n + m - 1);\n        for\
     \ (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val,\
     \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 4 \"formal_power_series/monomial_mod_polynomial.hpp\"\
-    \n\n// CUT begin\n// Calculate x^N mod f(x)\n// Known as `Kitamasa method`\n//\
-    \ Input: f_reversed: monic, reversed (f_reversed[0] = 1)\n// Complexity: O(K^2\
-    \ lgN) (K: deg. of f)\n// Example: (4, [1, -1, -1]) -> [2, 3]\n//          ( x^4\
-    \ = (x^2 + x + 2)(x^2 - x - 1) + 3x + 2 )\n// Reference: <http://misawa.github.io/others/fast_kitamasa_method.html>\n\
-    //            <http://sugarknri.hatenablog.com/entry/2017/11/18/233936>\ntemplate\
-    \ <typename Tfield> std::vector<Tfield> monomial_mod_polynomial(long long N, const\
-    \ std::vector<Tfield> &f_reversed) {\n    assert(!f_reversed.empty() and f_reversed[0]\
-    \ == 1);\n    int K = f_reversed.size() - 1;\n    if (!K) return {};\n    int\
-    \ D = 64 - __builtin_clzll(N);\n    std::vector<Tfield> ret(K, 0);\n    ret[0]\
-    \ = 1;\n    auto self_conv = [](std::vector<Tfield> x) -> std::vector<Tfield>\
+    \n\n// CUT begin\n// Calculate $x^N \\bmod f(x)$\n// Known as `Kitamasa method`\n\
+    // Input: f_reversed: monic, reversed (f_reversed[0] = 1)\n// Complexity: $O(K^2\
+    \ \\log N)$ ($K$: deg. of $f$)\n// Example: (4, [1, -1, -1]) -> [2, 3]\n//   \
+    \       ( x^4 = (x^2 + x + 2)(x^2 - x - 1) + 3x + 2 )\n// Reference: http://misawa.github.io/others/fast_kitamasa_method.html\n\
+    //            http://sugarknri.hatenablog.com/entry/2017/11/18/233936\ntemplate\
+    \ <typename Tfield>\nstd::vector<Tfield> monomial_mod_polynomial(long long N,\
+    \ const std::vector<Tfield> &f_reversed) {\n    assert(!f_reversed.empty() and\
+    \ f_reversed[0] == 1);\n    int K = f_reversed.size() - 1;\n    if (!K) return\
+    \ {};\n    int D = 64 - __builtin_clzll(N);\n    std::vector<Tfield> ret(K, 0);\n\
+    \    ret[0] = 1;\n    auto self_conv = [](std::vector<Tfield> x) -> std::vector<Tfield>\
     \ {\n        int d = x.size();\n        std::vector<Tfield> ret(d * 2 - 1);\n\
     \        for (int i = 0; i < d; i++) {\n            ret[i * 2] += x[i] * x[i];\n\
     \            for (int j = 0; j < i; j++) ret[i + j] += x[i] * x[j] * 2;\n    \
@@ -227,8 +227,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/kitamasa.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-14 23:48:54+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/kitamasa.test.cpp
 layout: document
