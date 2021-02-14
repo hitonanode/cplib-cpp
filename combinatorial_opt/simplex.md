@@ -70,6 +70,9 @@ $
 ## 問題例
 
 - [AtCoder jag2018summer-day3 H - Enlarge Circles](https://atcoder.jp/contests/jag2018summer-day3/tasks/jag2018summer_day3_h)
+- [SRM 694 Div.1 900 SRMDiv0Easy](https://community.topcoder.com/tc?module=ProblemDetail&rd=16766&pm=14319)
+  - $N - 1$ 個の等式制約（$2(N - 1)$ 個の不等式制約に翻訳）と $Q$ 個の不等式制約下での $Q$ 変数 LP として本ソルバに与える
+  - System Test Passed (34 ms)
 
 ## Reference
 

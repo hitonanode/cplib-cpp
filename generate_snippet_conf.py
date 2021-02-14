@@ -43,6 +43,6 @@ def dfs(current_dir):
 
 if __name__ == '__main__':
     ret = config_header + dfs(rootdir)
-    with open('Config.txt', 'w') as f:
+    with open('ClipBoardHistoryConfig.txt', 'w') as f:
         for line in ret:
             f.write(line + '\r\n')
