@@ -58,7 +58,7 @@ data:
     - icon: ':warning:'
       path: convolution/integer_convolution.hpp
       title: convolution/integer_convolution.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
     - icon: ':heavy_check_mark:'
@@ -69,13 +69,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: formal_power_series/coeff_of_rational_function.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/monomial_mod_polynomial.hpp
       title: formal_power_series/monomial_mod_polynomial.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
   - name: .
@@ -83,7 +83,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -227,7 +227,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
@@ -294,10 +294,10 @@ data:
       title: rational/rational_number.hpp
   - name: segmenttree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/acl_beats.hpp
       title: Segment Tree Beats (based on atcoder::lazy_segtree)
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: segmenttree/acl_lazysegtree.hpp
       title: Lazy Segtree (based on atcoder::lazy_segtree)
     - icon: ':heavy_check_mark:'
@@ -329,7 +329,7 @@ data:
       title: segmenttree/segment_tree_2d.hpp
   - name: segmenttree/trees
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
       title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
     - icon: ':heavy_check_mark:'
@@ -338,7 +338,7 @@ data:
     - icon: ':warning:'
       path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
       title: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
       title: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
     - icon: ':warning:'
@@ -537,34 +537,34 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow.test.cpp
       title: formal_power_series/test/fps_pow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow_another.test.cpp
       title: formal_power_series/test/fps_pow_another.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt.test.cpp
       title: formal_power_series/test/fps_sqrt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
       title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/multipoint_evaluation.test.cpp
       title: formal_power_series/test/multipoint_evaluation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/poly_taylor_shift.test.cpp
       title: formal_power_series/test/poly_taylor_shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_1st.test.cpp
       title: formal_power_series/test/stirling_number_of_1st.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/stirling_number_of_2nd.test.cpp
   - name: geometry/test
@@ -749,13 +749,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/acl_rsq.test.cpp
       title: segmenttree/test/acl_rsq.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/beats.test.cpp
       title: segmenttree/test/beats.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/beats_gcd.test.cpp
       title: segmenttree/test/beats_gcd.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
       title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     - icon: ':heavy_check_mark:'

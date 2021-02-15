@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph-tree/heavy_light_decomposition.hpp
     title: graph-tree/heavy_light_decomposition.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   - icon: ':heavy_check_mark:'

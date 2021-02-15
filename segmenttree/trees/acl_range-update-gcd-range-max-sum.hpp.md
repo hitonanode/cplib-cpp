@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/acl_beats.hpp
     title: Segment Tree Beats (based on atcoder::lazy_segtree)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segmenttree/acl_lazysegtree.hpp
     title: Lazy Segtree (based on atcoder::lazy_segtree)
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/beats_gcd.test.cpp
     title: segmenttree/test/beats_gcd.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://yukicoder.me/submissions/611774
@@ -57,8 +57,8 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   requiredBy: []
-  timestamp: '2021-02-13 18:38:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-02-15 23:59:04+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - segmenttree/test/beats_gcd.test.cpp
 documentation_of: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp

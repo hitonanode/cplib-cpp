@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/acl_beats.hpp
     title: Segment Tree Beats (based on atcoder::lazy_segtree)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segmenttree/acl_lazysegtree.hpp
     title: Lazy Segtree (based on atcoder::lazy_segtree)
   _extendedRequiredBy: []
@@ -49,7 +49,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   requiredBy: []
-  timestamp: '2021-02-13 18:38:53+09:00'
+  timestamp: '2021-02-15 23:59:04+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp

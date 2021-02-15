@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segmenttree/acl_lazysegtree.hpp
     title: Lazy Segtree (based on atcoder::lazy_segtree)
   _extendedRequiredBy: []
@@ -42,7 +42,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-affine-range-sum.hpp
   requiredBy: []
-  timestamp: '2021-02-13 18:38:53+09:00'
+  timestamp: '2021-02-15 23:59:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp

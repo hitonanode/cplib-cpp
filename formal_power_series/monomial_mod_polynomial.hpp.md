@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://misawa.github.io/others/fast_kitamasa_method.html
@@ -61,7 +61,7 @@ data:
   path: formal_power_series/monomial_mod_polynomial.hpp
   requiredBy: []
   timestamp: '2021-02-14 23:48:54+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/kitamasa.test.cpp
 documentation_of: formal_power_series/monomial_mod_polynomial.hpp

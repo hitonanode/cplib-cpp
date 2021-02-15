@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/acl_beats.hpp
     title: Segment Tree Beats (based on atcoder::lazy_segtree)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segmenttree/acl_lazysegtree.hpp
     title: Lazy Segtree (based on atcoder::lazy_segtree)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
@@ -47,8 +47,8 @@ data:
   isVerificationFile: true
   path: segmenttree/test/beats.test.cpp
   requiredBy: []
-  timestamp: '2021-02-13 18:38:53+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-15 23:59:04+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: segmenttree/test/beats.test.cpp
 layout: document

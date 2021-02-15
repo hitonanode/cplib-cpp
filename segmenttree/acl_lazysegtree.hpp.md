@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/acl_beats.hpp
     title: Segment Tree Beats (based on atcoder::lazy_segtree)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
     title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
   - icon: ':heavy_check_mark:'
@@ -14,7 +14,7 @@ data:
   - icon: ':warning:'
     path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
     title: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
     title: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   - icon: ':warning:'
@@ -24,18 +24,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/beats.test.cpp
     title: segmenttree/test/beats.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/beats_gcd.test.cpp
     title: segmenttree/test/beats_gcd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/document_ja/lazysegtree.html
@@ -62,69 +62,67 @@ data:
     // #include \"atcoder/internal_bit\"\n\nnamespace atcoder {\n\ntemplate <class\
     \ S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F,\
     \ F), F (*id)()>\nstruct lazy_segtree {\npublic:\n    lazy_segtree() : lazy_segtree(0)\
-    \ {}\n    lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e())) {}\n    lazy_segtree(const\
-    \ std::vector<S>& v) : _n(int(v.size())) {\n        log = internal::ceil_pow2(_n);\n\
-    \        size = 1 << log;\n        d = std::vector<S>(2 * size, e());\n      \
-    \  lz = std::vector<F>(size, id());\n        for (int i = 0; i < _n; i++) d[size\
-    \ + i] = v[i];\n        for (int i = size - 1; i >= 1; i--) { update(i); }\n \
-    \   }\n\n    void set(int p, S x) {\n        assert(0 <= p && p < _n);\n     \
-    \   p += size;\n        for (int i = log; i >= 1; i--) push(p >> i);\n       \
-    \ d[p] = x;\n        for (int i = 1; i <= log; i++) update(p >> i);\n    }\n\n\
-    \    S get(int p) const {\n        assert(0 <= p && p < _n);\n        p += size;\n\
-    \        for (int i = log; i >= 1; i--) push(p >> i);\n        return d[p];\n\
-    \    }\n\n    S prod(int l, int r) {\n        assert(0 <= l && l <= r && r <=\
-    \ _n);\n        if (l == r) return e();\n\n        l += size;\n        r += size;\n\
-    \n        for (int i = log; i >= 1; i--) {\n            if (((l >> i) << i) !=\
-    \ l) push(l >> i);\n            if (((r >> i) << i) != r) push(r >> i);\n    \
-    \    }\n\n        S sml = e(), smr = e();\n        while (l < r) {\n         \
-    \   if (l & 1) sml = op(sml, d[l++]);\n            if (r & 1) smr = op(d[--r],\
-    \ smr);\n            l >>= 1;\n            r >>= 1;\n        }\n\n        return\
-    \ op(sml, smr);\n    }\n\n    S all_prod() const { return d[1]; }\n\n    void\
-    \ apply(int p, F f) {\n        assert(0 <= p && p < _n);\n        p += size;\n\
-    \        for (int i = log; i >= 1; i--) push(p >> i);\n        d[p] = mapping(f,\
-    \ d[p]);\n        for (int i = 1; i <= log; i++) update(p >> i);\n    }\n    void\
-    \ apply(int l, int r, F f) {\n        assert(0 <= l && l <= r && r <= _n);\n \
-    \       if (l == r) return;\n\n        l += size;\n        r += size;\n\n    \
-    \    for (int i = log; i >= 1; i--) {\n            if (((l >> i) << i) != l) push(l\
-    \ >> i);\n            if (((r >> i) << i) != r) push((r - 1) >> i);\n        }\n\
-    \n        {\n            int l2 = l, r2 = r;\n            while (l < r) {\n  \
-    \              if (l & 1) all_apply(l++, f);\n                if (r & 1) all_apply(--r,\
-    \ f);\n                l >>= 1;\n                r >>= 1;\n            }\n   \
-    \         l = l2;\n            r = r2;\n        }\n\n        for (int i = 1; i\
-    \ <= log; i++) {\n            if (((l >> i) << i) != l) update(l >> i);\n    \
-    \        if (((r >> i) << i) != r) update((r - 1) >> i);\n        }\n    }\n\n\
-    \    template <bool (*g)(S)> int max_right(int l) const {\n        return max_right(l,\
-    \ [](S x) { return g(x); });\n    }\n    template <class G> int max_right(int\
-    \ l, G g) const {\n        assert(0 <= l && l <= _n);\n        assert(g(e()));\n\
-    \        if (l == _n) return _n;\n        l += size;\n        for (int i = log;\
-    \ i >= 1; i--) push(l >> i);\n        S sm = e();\n        do {\n            while\
-    \ (l % 2 == 0) l >>= 1;\n            if (!g(op(sm, d[l]))) {\n               \
-    \ while (l < size) {\n                    push(l);\n                    l = (2\
-    \ * l);\n                    if (g(op(sm, d[l]))) {\n                        sm\
-    \ = op(sm, d[l]);\n                        l++;\n                    }\n     \
-    \           }\n                return l - size;\n            }\n            sm\
-    \ = op(sm, d[l]);\n            l++;\n        } while ((l & -l) != l);\n      \
-    \  return _n;\n    }\n\n    template <bool (*g)(S)> int min_left(int r) const\
-    \ {\n        return min_left(r, [](S x) { return g(x); });\n    }\n    template\
-    \ <class G> int min_left(int r, G g) const {\n        assert(0 <= r && r <= _n);\n\
-    \        assert(g(e()));\n        if (r == 0) return 0;\n        r += size;\n\
-    \        for (int i = log; i >= 1; i--) push((r - 1) >> i);\n        S sm = e();\n\
-    \        do {\n            r--;\n            while (r > 1 && (r % 2)) r >>= 1;\n\
-    \            if (!g(op(d[r], sm))) {\n                while (r < size) {\n   \
-    \                 push(r);\n                    r = (2 * r + 1);\n           \
-    \         if (g(op(d[r], sm))) {\n                        sm = op(d[r], sm);\n\
-    \                        r--;\n                    }\n                }\n    \
-    \            return r + 1 - size;\n            }\n            sm = op(d[r], sm);\n\
-    \        } while ((r & -r) != r);\n        return 0;\n    }\n\nprotected: // Modified\n\
-    \    int _n, size, log;\n    std::vector<S> d;\n    std::vector<F> lz;\n\n   \
-    \ void update(int k) const { const_cast<lazy_segtree*>(this)->d[k] = op(d[2 *\
-    \ k], d[2 * k + 1]); }\n    virtual void all_apply(int k, F f) const { // Modified\n\
-    \        const_cast<lazy_segtree*>(this)->d[k] = mapping(f, d[k]);\n        if\
-    \ (k < size) const_cast<lazy_segtree*>(this)->lz[k] = composition(f, lz[k]);\n\
-    \    }\n    void push(int k) const {\n        all_apply(2 * k, lz[k]);\n     \
-    \   all_apply(2 * k + 1, lz[k]);\n        const_cast<lazy_segtree*>(this)->lz[k]\
-    \ = id();\n    }\n};\n} // namespace atcoder\n#endif // ATCODER_LAZYSEGTREE_HPP\n\
-    \n// Reference: https://atcoder.github.io/ac-library/document_ja/lazysegtree.html\n\
+    \ {}\n    explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e()))\
+    \ {}\n    explicit lazy_segtree(const std::vector<S>& v) : _n(int(v.size())) {\n\
+    \        log = internal::ceil_pow2(_n);\n        size = 1 << log;\n        d =\
+    \ std::vector<S>(2 * size, e());\n        lz = std::vector<F>(size, id());\n \
+    \       for (int i = 0; i < _n; i++) d[size + i] = v[i];\n        for (int i =\
+    \ size - 1; i >= 1; i--) { update(i); }\n    }\n\n    void set(int p, S x) {\n\
+    \        assert(0 <= p && p < _n);\n        p += size;\n        for (int i = log;\
+    \ i >= 1; i--) push(p >> i);\n        d[p] = x;\n        for (int i = 1; i <=\
+    \ log; i++) update(p >> i);\n    }\n\n    S get(int p) const {\n        assert(0\
+    \ <= p && p < _n);\n        p += size;\n        for (int i = log; i >= 1; i--)\
+    \ push(p >> i);\n        return d[p];\n    }\n\n    S prod(int l, int r) const\
+    \ {\n        assert(0 <= l && l <= r && r <= _n);\n        if (l == r) return\
+    \ e();\n\n        l += size;\n        r += size;\n\n        for (int i = log;\
+    \ i >= 1; i--) {\n            if (((l >> i) << i) != l) push(l >> i);\n      \
+    \      if (((r >> i) << i) != r) push((r - 1) >> i);\n        }\n\n        S sml\
+    \ = e(), smr = e();\n        while (l < r) {\n            if (l & 1) sml = op(sml,\
+    \ d[l++]);\n            if (r & 1) smr = op(d[--r], smr);\n            l >>= 1;\n\
+    \            r >>= 1;\n        }\n\n        return op(sml, smr);\n    }\n\n  \
+    \  S all_prod() const { return d[1]; }\n\n    void apply(int p, F f) {\n     \
+    \   assert(0 <= p && p < _n);\n        p += size;\n        for (int i = log; i\
+    \ >= 1; i--) push(p >> i);\n        d[p] = mapping(f, d[p]);\n        for (int\
+    \ i = 1; i <= log; i++) update(p >> i);\n    }\n    void apply(int l, int r, F\
+    \ f) {\n        assert(0 <= l && l <= r && r <= _n);\n        if (l == r) return;\n\
+    \n        l += size;\n        r += size;\n\n        for (int i = log; i >= 1;\
+    \ i--) {\n            if (((l >> i) << i) != l) push(l >> i);\n            if\
+    \ (((r >> i) << i) != r) push((r - 1) >> i);\n        }\n\n        {\n       \
+    \     int l2 = l, r2 = r;\n            while (l < r) {\n                if (l\
+    \ & 1) all_apply(l++, f);\n                if (r & 1) all_apply(--r, f);\n   \
+    \             l >>= 1;\n                r >>= 1;\n            }\n            l\
+    \ = l2;\n            r = r2;\n        }\n\n        for (int i = 1; i <= log; i++)\
+    \ {\n            if (((l >> i) << i) != l) update(l >> i);\n            if (((r\
+    \ >> i) << i) != r) update((r - 1) >> i);\n        }\n    }\n\n    template <bool\
+    \ (*g)(S)> int max_right(int l) const {\n        return max_right(l, [](S x) {\
+    \ return g(x); });\n    }\n    template <class G> int max_right(int l, G g) const\
+    \ {\n        assert(0 <= l && l <= _n);\n        assert(g(e()));\n        if (l\
+    \ == _n) return _n;\n        l += size;\n        for (int i = log; i >= 1; i--)\
+    \ push(l >> i);\n        S sm = e();\n        do {\n            while (l % 2 ==\
+    \ 0) l >>= 1;\n            if (!g(op(sm, d[l]))) {\n                while (l <\
+    \ size) {\n                    push(l);\n                    l = (2 * l);\n  \
+    \                  if (g(op(sm, d[l]))) {\n                        sm = op(sm,\
+    \ d[l]);\n                        l++;\n                    }\n              \
+    \  }\n                return l - size;\n            }\n            sm = op(sm,\
+    \ d[l]);\n            l++;\n        } while ((l & -l) != l);\n        return _n;\n\
+    \    }\n\n    template <bool (*g)(S)> int min_left(int r) const {\n        return\
+    \ min_left(r, [](S x) { return g(x); });\n    }\n    template <class G> int min_left(int\
+    \ r, G g) const {\n        assert(0 <= r && r <= _n);\n        assert(g(e()));\n\
+    \        if (r == 0) return 0;\n        r += size;\n        for (int i = log;\
+    \ i >= 1; i--) push((r - 1) >> i);\n        S sm = e();\n        do {\n      \
+    \      r--;\n            while (r > 1 && (r % 2)) r >>= 1;\n            if (!g(op(d[r],\
+    \ sm))) {\n                while (r < size) {\n                    push(r);\n\
+    \                    r = (2 * r + 1);\n                    if (g(op(d[r], sm)))\
+    \ {\n                        sm = op(d[r], sm);\n                        r--;\n\
+    \                    }\n                }\n                return r + 1 - size;\n\
+    \            }\n            sm = op(d[r], sm);\n        } while ((r & -r) != r);\n\
+    \        return 0;\n    }\n\nprotected:\n    int _n, size, log;\n    mutable std::vector<S>\
+    \ d;\n    mutable std::vector<F> lz;\n\n    void update(int k) const { d[k] =\
+    \ op(d[2 * k], d[2 * k + 1]); }\n    virtual void all_apply(int k, F f) const\
+    \ {\n        d[k] = mapping(f, d[k]);\n        if (k < size) lz[k] = composition(f,\
+    \ lz[k]);\n    }\n    void push(int k) const {\n        all_apply(2 * k, lz[k]);\n\
+    \        all_apply(2 * k + 1, lz[k]);\n        lz[k] = id();\n    }\n};\n} //\
+    \ namespace atcoder\n#endif // ATCODER_LAZYSEGTREE_HPP\n// Reference: https://atcoder.github.io/ac-library/document_ja/lazysegtree.html\n\
     //            https://betrue12.hateblo.jp/entry/2020/09/22/194541\n//        \
     \    https://betrue12.hateblo.jp/entry/2020/09/23/005940\n/*\nstruct S {};\nS\
     \ op(S l, S r) {\n    return {};\n}\nS e() { return {}; };\nusing F = bool;\n\
@@ -141,8 +139,8 @@ data:
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   - segmenttree/trees/acl_range-update-range-sum-min.hpp
   - segmenttree/acl_beats.hpp
-  timestamp: '2021-02-13 18:38:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-02-15 23:59:04+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - segmenttree/test/beats.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
