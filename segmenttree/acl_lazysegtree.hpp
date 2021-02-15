@@ -50,8 +50,8 @@ template <class S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*com
 struct lazy_segtree {
 public:
     lazy_segtree() : lazy_segtree(0) {}
-    lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e())) {}
-    lazy_segtree(const std::vector<S>& v) : _n(int(v.size())) {
+    explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e())) {}
+    explicit lazy_segtree(const std::vector<S>& v) : _n(int(v.size())) {
         log = internal::ceil_pow2(_n);
         size = 1 << log;
         d = std::vector<S>(2 * size, e());
@@ -75,7 +75,7 @@ public:
         return d[p];
     }
 
-    S prod(int l, int r) {
+    S prod(int l, int r) const {
         assert(0 <= l && l <= r && r <= _n);
         if (l == r) return e();
 
@@ -84,7 +84,7 @@ public:
 
         for (int i = log; i >= 1; i--) {
             if (((l >> i) << i) != l) push(l >> i);
-            if (((r >> i) << i) != r) push(r >> i);
+            if (((r >> i) << i) != r) push((r - 1) >> i);
         }
 
         S sml = e(), smr = e();
@@ -195,25 +195,24 @@ public:
         return 0;
     }
 
-protected: // Modified
+protected:
     int _n, size, log;
-    std::vector<S> d;
-    std::vector<F> lz;
+    mutable std::vector<S> d;
+    mutable std::vector<F> lz;
 
-    void update(int k) const { const_cast<lazy_segtree*>(this)->d[k] = op(d[2 * k], d[2 * k + 1]); }
-    virtual void all_apply(int k, F f) const { // Modified
-        const_cast<lazy_segtree*>(this)->d[k] = mapping(f, d[k]);
-        if (k < size) const_cast<lazy_segtree*>(this)->lz[k] = composition(f, lz[k]);
+    void update(int k) const { d[k] = op(d[2 * k], d[2 * k + 1]); }
+    virtual void all_apply(int k, F f) const {
+        d[k] = mapping(f, d[k]);
+        if (k < size) lz[k] = composition(f, lz[k]);
     }
     void push(int k) const {
         all_apply(2 * k, lz[k]);
         all_apply(2 * k + 1, lz[k]);
-        const_cast<lazy_segtree*>(this)->lz[k] = id();
+        lz[k] = id();
     }
 };
 } // namespace atcoder
 #endif // ATCODER_LAZYSEGTREE_HPP
-
 // Reference: https://atcoder.github.io/ac-library/document_ja/lazysegtree.html
 //            https://betrue12.hateblo.jp/entry/2020/09/22/194541
 //            https://betrue12.hateblo.jp/entry/2020/09/23/005940
