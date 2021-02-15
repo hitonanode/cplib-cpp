@@ -294,10 +294,10 @@ data:
       title: rational/rational_number.hpp
   - name: segmenttree
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/acl_beats.hpp
       title: Segment Tree Beats (based on atcoder::lazy_segtree)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/acl_lazysegtree.hpp
       title: Lazy Segtree (based on atcoder::lazy_segtree)
     - icon: ':heavy_check_mark:'
@@ -329,7 +329,7 @@ data:
       title: segmenttree/segment_tree_2d.hpp
   - name: segmenttree/trees
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
       title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
     - icon: ':heavy_check_mark:'
@@ -338,7 +338,7 @@ data:
     - icon: ':warning:'
       path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
       title: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
       title: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
     - icon: ':warning:'
@@ -749,13 +749,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/acl_rsq.test.cpp
       title: segmenttree/test/acl_rsq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats.test.cpp
       title: segmenttree/test/beats.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats_gcd.test.cpp
       title: segmenttree/test/beats_gcd.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
       title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     - icon: ':heavy_check_mark:'

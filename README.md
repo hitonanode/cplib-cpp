@@ -2,6 +2,8 @@
 
 [![Actions Status](https://github.com/rsm9/cplib-cpp/workflows/verify/badge.svg)](https://github.com/rsm9/cplib-cpp/actions)
 
+[Library Document](https://hitonanode.github.io/cplib-cpp/)
+
 ## Policy
 
 - "Copy-and-paste-then-run" in any platforms
