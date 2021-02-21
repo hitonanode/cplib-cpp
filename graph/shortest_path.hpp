@@ -148,14 +148,14 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
         dist2d.assign(V, std::vector<T>(V, INF));
         for (int i = 0; i < V; i++) {
             dist2d[i][i] = 0;
-            for (auto p : to[i]) dist2d[i][p.first] = min(dist2d[i][p.first], p.second);
+            for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first], p.second);
         }
         for (int k = 0; k < V; k++) {
             for (int i = 0; i < V; i++) {
                 if (dist2d[i][k] == INF) continue;
                 for (int j = 0; j < V; j++) {
                     if (dist2d[k][j] == INF) continue;
-                    dist2d[i][j] = min(dist2d[i][j], dist2d[i][k] + dist2d[k][j]);
+                    dist2d[i][j] = std::min(dist2d[i][j], dist2d[i][k] + dist2d[k][j]);
                 }
             }
         }

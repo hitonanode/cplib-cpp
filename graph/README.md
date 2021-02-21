@@ -2,16 +2,6 @@
 
 Algorithms for trees are not here.
 
-## Contents
-
-- Shortest path
-  - `bellman_ford.hpp`
-  - `dijkstra.hpp`
-- Lowlink technique
-  - `lowlink.hpp`
-- Flow
-  - `flow_mincost.hpp` : Minimum-cost flow problem solver for graphs with no negative cycle
-
 ## Lowlinkについて
 
 - Articulation points （関節点）
