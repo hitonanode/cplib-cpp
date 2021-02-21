@@ -152,9 +152,9 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
         }
         for (int k = 0; k < V; k++) {
             for (int i = 0; i < V; i++) {
-                if (dist2d[i][k] = INF) continue;
+                if (dist2d[i][k] == INF) continue;
                 for (int j = 0; j < V; j++) {
-                    if (dist2d[k][j] = INF) continue;
+                    if (dist2d[k][j] == INF) continue;
                     dist2d[i][j] = min(dist2d[i][j], dist2d[i][k] + dist2d[k][j]);
                 }
             }
