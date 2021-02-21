@@ -112,9 +112,6 @@ data:
       path: graph/bipartite_matching.hpp
       title: graph/bipartite_matching.hpp
     - icon: ':heavy_check_mark:'
-      path: graph/dijkstra.hpp
-      title: graph/dijkstra.hpp
-    - icon: ':heavy_check_mark:'
       path: graph/general_matching.hpp
       title: graph/general_matching.hpp
     - icon: ':warning:'
@@ -602,9 +599,6 @@ data:
       path: graph/test/cycle_detection_directed.test.cpp
       title: graph/test/cycle_detection_directed.test.cpp
     - icon: ':heavy_check_mark:'
-      path: graph/test/dijkstra.test.cpp
-      title: graph/test/dijkstra.test.cpp
-    - icon: ':heavy_check_mark:'
       path: graph/test/general_matching.test.cpp
       title: graph/test/general_matching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -617,6 +611,12 @@ data:
       path: graph/test/shortest_cycle.test.cpp
       title: graph/test/shortest_cycle.test.cpp
     - icon: ':heavy_check_mark:'
+      path: graph/test/shortest_path.test.cpp
+      title: graph/test/shortest_path.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/spfa.test.cpp
+      title: graph/test/spfa.test.cpp
+    - icon: ':heavy_check_mark:'
       path: graph/test/strongly_connected_components.test.cpp
       title: graph/test/strongly_connected_components.test.cpp
     - icon: ':heavy_check_mark:'
@@ -628,6 +628,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/two-edge-connected-components.test.cpp
       title: graph/test/two-edge-connected-components.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/warshallfloyd.test.cpp
+      title: graph/test/warshallfloyd.test.cpp
   - name: graph-tree/test
     pages:
     - icon: ':heavy_check_mark:'

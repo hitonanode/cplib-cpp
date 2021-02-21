@@ -7,11 +7,17 @@ data:
     path: graph/test/bellman_ford.test.cpp
     title: graph/test/bellman_ford.test.cpp
   - icon: ':heavy_check_mark:'
-    path: graph/test/dijkstra.test.cpp
-    title: graph/test/dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
     path: graph/test/shortest_cycle.test.cpp
     title: graph/test/shortest_cycle.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/shortest_path.test.cpp
+    title: graph/test/shortest_path.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/spfa.test.cpp
+    title: graph/test/spfa.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/warshallfloyd.test.cpp
+    title: graph/test/warshallfloyd.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -77,12 +83,13 @@ data:
     \ }\n\n    // Warshall-Floyd algorithm\n    // Complexity: O(E + V^3)\n    std::vector<std::vector<T>>\
     \ dist2d;\n    void WarshallFloyd() {\n        dist2d.assign(V, std::vector<T>(V,\
     \ INF));\n        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n\
-    \            for (auto p : to[i]) dist2d[i][p.first] = min(dist2d[i][p.first],\
+    \            for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
     \ p.second);\n        }\n        for (int k = 0; k < V; k++) {\n            for\
-    \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] = INF) continue;\n\
+    \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
     \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
-    \ = INF) continue;\n                    dist2d[i][j] = min(dist2d[i][j], dist2d[i][k]\
-    \ + dist2d[k][j]);\n                }\n            }\n        }\n    }\n};\n"
+    \ == INF) continue;\n                    dist2d[i][j] = std::min(dist2d[i][j],\
+    \ dist2d[i][k] + dist2d[k][j]);\n                }\n            }\n        }\n\
+    \    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <deque>\n#include <functional>\n\
     #include <limits>\n#include <queue>\n#include <utility>\n#include <vector>\n\n\
     // CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max() / 2,\
@@ -143,21 +150,24 @@ data:
     \ }\n\n    // Warshall-Floyd algorithm\n    // Complexity: O(E + V^3)\n    std::vector<std::vector<T>>\
     \ dist2d;\n    void WarshallFloyd() {\n        dist2d.assign(V, std::vector<T>(V,\
     \ INF));\n        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n\
-    \            for (auto p : to[i]) dist2d[i][p.first] = min(dist2d[i][p.first],\
+    \            for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
     \ p.second);\n        }\n        for (int k = 0; k < V; k++) {\n            for\
-    \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] = INF) continue;\n\
+    \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
     \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
-    \ = INF) continue;\n                    dist2d[i][j] = min(dist2d[i][j], dist2d[i][k]\
-    \ + dist2d[k][j]);\n                }\n            }\n        }\n    }\n};\n"
+    \ == INF) continue;\n                    dist2d[i][j] = std::min(dist2d[i][j],\
+    \ dist2d[i][k] + dist2d[k][j]);\n                }\n            }\n        }\n\
+    \    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/shortest_path.hpp
   requiredBy: []
-  timestamp: '2021-02-21 14:54:44+09:00'
+  timestamp: '2021-02-21 15:19:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/dijkstra.test.cpp
+  - graph/test/shortest_path.test.cpp
   - graph/test/shortest_cycle.test.cpp
+  - graph/test/spfa.test.cpp
+  - graph/test/warshallfloyd.test.cpp
   - graph/test/bellman_ford.test.cpp
 documentation_of: graph/shortest_path.hpp
 layout: document

@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/dijkstra.hpp
-    title: graph/dijkstra.hpp
-  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
     title: graph/shortest_path.hpp
   _extendedRequiredBy: []
@@ -14,30 +11,17 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A
+    PROBLEM: https://judge.yosupo.jp/problem/shortest_path
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A
-  bundledCode: "#line 2 \"graph/dijkstra.hpp\"\n#include <queue>\n#include <utility>\n\
-    #include <vector>\nusing namespace std;\n\nusing wedges = vector<vector<pair<long\
-    \ long, long long>>>; // (to, weight)\n\nconstexpr long long int INF = 1e17;\n\
-    pair<vector<long long int>, vector<int>> dijkstra(int N, int s, const wedges &w)\
-    \ {\n    using lint = long long;\n    using plint = pair<long long, long long>;\n\
-    \    vector<lint> dist(N, INF);\n    dist[s] = 0;\n    vector<int> prev(N, -1);\n\
-    \    priority_queue<plint, vector<plint>, greater<plint>> pq;\n    pq.emplace(0,\
-    \ s);\n    while (!pq.empty()) {\n        plint p = pq.top();\n        pq.pop();\n\
-    \        int v = p.second;\n        if (dist[v] < p.first) continue;\n       \
-    \ for (auto nx : w[v]) {\n            lint dnx = p.first + nx.second;\n      \
-    \      if (dist[nx.first] > dnx) {\n                dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                pq.emplace(dnx, nx.first);\n            }\n        }\n\
-    \    }\n    return make_pair(dist, prev); // (distance, previous_node)\n}\n#line\
-    \ 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include <deque>\n#include\
-    \ <functional>\n#include <limits>\n#line 9 \"graph/shortest_path.hpp\"\n\n// CUT\
-    \ begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max() / 2, int\
-    \ INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
-    \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
-    \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
-    \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
-    \ <= s and s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t,\
+    - https://judge.yosupo.jp/problem/shortest_path
+  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include\
+    \ <deque>\n#include <functional>\n#include <limits>\n#include <queue>\n#include\
+    \ <utility>\n#include <vector>\n\n// CUT begin\ntemplate <typename T, T INF =\
+    \ std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath {\n\
+    \    int V, E;\n    bool single_positive_weight;\n    T wmin, wmax;\n    std::vector<std::vector<std::pair<int,\
+    \ T>>> to;\n\n    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true),\
+    \ wmin(0), wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n       \
+    \ assert(0 <= s and s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t,\
     \ w);\n        E++;\n        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight\
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
@@ -90,45 +74,49 @@ data:
     \ }\n\n    // Warshall-Floyd algorithm\n    // Complexity: O(E + V^3)\n    std::vector<std::vector<T>>\
     \ dist2d;\n    void WarshallFloyd() {\n        dist2d.assign(V, std::vector<T>(V,\
     \ INF));\n        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n\
-    \            for (auto p : to[i]) dist2d[i][p.first] = min(dist2d[i][p.first],\
+    \            for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
     \ p.second);\n        }\n        for (int k = 0; k < V; k++) {\n            for\
-    \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] = INF) continue;\n\
+    \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
     \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
-    \ = INF) continue;\n                    dist2d[i][j] = min(dist2d[i][j], dist2d[i][k]\
-    \ + dist2d[k][j]);\n                }\n            }\n        }\n    }\n};\n#line\
-    \ 4 \"graph/test/dijkstra.test.cpp\"\n#include <iostream>\n#line 6 \"graph/test/dijkstra.test.cpp\"\
-    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A\"\
-    \n\nwedges e;\n\nint main() {\n    int V, E, r;\n    cin >> V >> E >> r;\n   \
-    \ e.resize(V);\n    ShortestPath<int> graph(V);\n    for (int i = 0; i < E; i++)\
-    \ {\n        int s, t, d;\n        cin >> s >> t >> d;\n        e[s].emplace_back(t,\
-    \ d);\n        graph.add_edge(s, t, d);\n    }\n    auto ret = dijkstra(V, r,\
-    \ e);\n    graph.Dijkstra(r);\n\n    for (int i = 0; i < V; i++) {\n        if\
-    \ (ret.first[i] == INF)\n            puts(\"INF\");\n        else {\n        \
-    \    assert(ret.first[i] == graph.dist[i]);\n            printf(\"%lld\\n\", ret.first[i]);\n\
-    \        }\n    }\n}\n"
-  code: "#include \"../dijkstra.hpp\"\n#include \"../shortest_path.hpp\"\n#include\
-    \ <cassert>\n#include <iostream>\n#include <vector>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A\"\
-    \n\nwedges e;\n\nint main() {\n    int V, E, r;\n    cin >> V >> E >> r;\n   \
-    \ e.resize(V);\n    ShortestPath<int> graph(V);\n    for (int i = 0; i < E; i++)\
-    \ {\n        int s, t, d;\n        cin >> s >> t >> d;\n        e[s].emplace_back(t,\
-    \ d);\n        graph.add_edge(s, t, d);\n    }\n    auto ret = dijkstra(V, r,\
-    \ e);\n    graph.Dijkstra(r);\n\n    for (int i = 0; i < V; i++) {\n        if\
-    \ (ret.first[i] == INF)\n            puts(\"INF\");\n        else {\n        \
-    \    assert(ret.first[i] == graph.dist[i]);\n            printf(\"%lld\\n\", ret.first[i]);\n\
-    \        }\n    }\n}"
+    \ == INF) continue;\n                    dist2d[i][j] = std::min(dist2d[i][j],\
+    \ dist2d[i][k] + dist2d[k][j]);\n                }\n            }\n        }\n\
+    \    }\n};\n#line 2 \"graph/test/shortest_path.test.cpp\"\n#include <algorithm>\n\
+    #include <iostream>\n#line 5 \"graph/test/shortest_path.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/shortest_path\"\nusing namespace std;\n\n\
+    int main() {\n    int N, M, s, t;\n    cin >> N >> M >> s >> t;\n    constexpr\
+    \ long long INF = 1LL << 60;\n    ShortestPath<long long, INF> graph(N);\n   \
+    \ while (M--) {\n        int a, b, c;\n        cin >> a >> b >> c;\n        graph.add_edge(a,\
+    \ b, c);\n    }\n\n    graph.Dijkstra(s);\n\n    if (graph.dist[t] == INF) {\n\
+    \        cout << \"-1\\n\";\n        return 0;\n    }\n\n    vector<int> path;\n\
+    \    int now = t;\n    while (true) {\n        path.push_back(now);\n        if\
+    \ (now == s) break;\n        now = graph.prev[now];\n    }\n    std::reverse(path.begin(),\
+    \ path.end());\n    cout << graph.dist[t] << ' ' << path.size() - 1 << '\\n';\n\
+    \    for (unsigned i = 0; i + 1 < path.size(); i++) cout << path[i] << ' ' <<\
+    \ path[i + 1] << '\\n';\n}\n"
+  code: "#include \"../shortest_path.hpp\"\n#include <algorithm>\n#include <iostream>\n\
+    #include <vector>\n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\
+    \nusing namespace std;\n\nint main() {\n    int N, M, s, t;\n    cin >> N >> M\
+    \ >> s >> t;\n    constexpr long long INF = 1LL << 60;\n    ShortestPath<long\
+    \ long, INF> graph(N);\n    while (M--) {\n        int a, b, c;\n        cin >>\
+    \ a >> b >> c;\n        graph.add_edge(a, b, c);\n    }\n\n    graph.Dijkstra(s);\n\
+    \n    if (graph.dist[t] == INF) {\n        cout << \"-1\\n\";\n        return\
+    \ 0;\n    }\n\n    vector<int> path;\n    int now = t;\n    while (true) {\n \
+    \       path.push_back(now);\n        if (now == s) break;\n        now = graph.prev[now];\n\
+    \    }\n    std::reverse(path.begin(), path.end());\n    cout << graph.dist[t]\
+    \ << ' ' << path.size() - 1 << '\\n';\n    for (unsigned i = 0; i + 1 < path.size();\
+    \ i++) cout << path[i] << ' ' << path[i + 1] << '\\n';\n}\n"
   dependsOn:
-  - graph/dijkstra.hpp
   - graph/shortest_path.hpp
   isVerificationFile: true
-  path: graph/test/dijkstra.test.cpp
+  path: graph/test/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2021-02-21 14:54:44+09:00'
+  timestamp: '2021-02-21 15:19:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph/test/dijkstra.test.cpp
+documentation_of: graph/test/shortest_path.test.cpp
 layout: document
 redirect_from:
-- /verify/graph/test/dijkstra.test.cpp
-- /verify/graph/test/dijkstra.test.cpp.html
-title: graph/test/dijkstra.test.cpp
+- /verify/graph/test/shortest_path.test.cpp
+- /verify/graph/test/shortest_path.test.cpp.html
+title: graph/test/shortest_path.test.cpp
 ---

@@ -110,23 +110,23 @@ data:
     \ }\n\n    // Warshall-Floyd algorithm\n    // Complexity: O(E + V^3)\n    std::vector<std::vector<T>>\
     \ dist2d;\n    void WarshallFloyd() {\n        dist2d.assign(V, std::vector<T>(V,\
     \ INF));\n        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n\
-    \            for (auto p : to[i]) dist2d[i][p.first] = min(dist2d[i][p.first],\
+    \            for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
     \ p.second);\n        }\n        for (int k = 0; k < V; k++) {\n            for\
-    \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] = INF) continue;\n\
+    \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
     \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
-    \ = INF) continue;\n                    dist2d[i][j] = min(dist2d[i][j], dist2d[i][k]\
-    \ + dist2d[k][j]);\n                }\n            }\n        }\n    }\n};\n#line\
-    \ 5 \"graph/test/shortest_cycle.test.cpp\"\n\n#include <iostream>\n#line 8 \"\
-    graph/test/shortest_cycle.test.cpp\"\nusing namespace std;\n\nint main() {\n \
-    \   int T, N, M;\n    cin >> T >> N >> M;\n    const long long INF = 1LL << 60;\n\
-    \    long long ret = INF;\n\n    if (T == 1) {\n        // Directed graph\n  \
-    \      vector<vector<pair<int, int>>> to(N);\n        while (M--) {\n        \
-    \    int u, v, w;\n            cin >> u >> v >> w;\n            u--, v--;\n  \
-    \          to[u].emplace_back(v, w);\n        }\n        for (int s = 0; s < N;\
-    \ s++) {\n            ShortestPath<long long, INF> graph(N + 1);\n           \
-    \ for (int i = 0; i < N; i++) {\n                for (auto [j, w] : to[i]) {\n\
-    \                    graph.add_edge(i, j, w);\n                    if (j == s)\
-    \ graph.add_edge(i, N, w);\n                }\n            }\n            graph.solve(s);\n\
+    \ == INF) continue;\n                    dist2d[i][j] = std::min(dist2d[i][j],\
+    \ dist2d[i][k] + dist2d[k][j]);\n                }\n            }\n        }\n\
+    \    }\n};\n#line 5 \"graph/test/shortest_cycle.test.cpp\"\n\n#include <iostream>\n\
+    #line 8 \"graph/test/shortest_cycle.test.cpp\"\nusing namespace std;\n\nint main()\
+    \ {\n    int T, N, M;\n    cin >> T >> N >> M;\n    const long long INF = 1LL\
+    \ << 60;\n    long long ret = INF;\n\n    if (T == 1) {\n        // Directed graph\n\
+    \        vector<vector<pair<int, int>>> to(N);\n        while (M--) {\n      \
+    \      int u, v, w;\n            cin >> u >> v >> w;\n            u--, v--;\n\
+    \            to[u].emplace_back(v, w);\n        }\n        for (int s = 0; s <\
+    \ N; s++) {\n            ShortestPath<long long, INF> graph(N + 1);\n        \
+    \    for (int i = 0; i < N; i++) {\n                for (auto [j, w] : to[i])\
+    \ {\n                    graph.add_edge(i, j, w);\n                    if (j ==\
+    \ s) graph.add_edge(i, N, w);\n                }\n            }\n            graph.solve(s);\n\
     \            ret = min(ret, graph.dist[N]);\n        }\n    } else {\n       \
     \ // Undirected graph\n        ShortestCycleOfUndirectedWeighted<long long, INF>\
     \ graph(N);\n        while (M--) {\n            int u, v, w;\n            cin\
@@ -157,7 +157,7 @@ data:
   isVerificationFile: true
   path: graph/test/shortest_cycle.test.cpp
   requiredBy: []
-  timestamp: '2021-02-21 14:54:44+09:00'
+  timestamp: '2021-02-21 15:19:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_cycle.test.cpp
