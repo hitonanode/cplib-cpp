@@ -74,6 +74,38 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
         return false;
     }
 
+    // Bellman-ford algorithm using queue (deque)
+    // Complexity: O(VE)
+    // Requirement: no negative loop
+    void SPFA(int s) {
+        assert(0 <= s and s < V);
+        dist.assign(V, INF);
+        prev.assign(V, INVALID);
+        std::deque<int> q;
+        std::vector<char> in_queue(V);
+        dist[s] = 0;
+        q.push_back(s), in_queue[s] = 1;
+        while (!q.empty()) {
+            int now = q.front();
+            q.pop_front(), in_queue[now] = 0;
+            for (auto nx : to[now]) {
+                T dnx = dist[now] + nx.second;
+                int nxt = nx.first;
+                if (dist[nxt] > dnx) {
+                    dist[nxt] = dnx;
+                    if (!in_queue[nxt]) {
+                        if (q.size() and dnx < dist[q.front()]) { // Small label first optimization
+                            q.push_front(nxt);
+                        } else {
+                            q.push_back(nxt);
+                        }
+                        prev[nxt] = now, in_queue[nxt] = 1;
+                    }
+                }
+            }
+        }
+    }
+
     void ZeroOneBFS(int s) {
         assert(0 <= s and s < V);
         dist.assign(V, INF), prev.assign(V, INVALID);
