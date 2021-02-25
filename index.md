@@ -390,6 +390,9 @@ data:
       path: tree/heavy_light_decomposition.hpp
       title: tree/heavy_light_decomposition.hpp
     - icon: ':heavy_check_mark:'
+      path: tree/lca_rmq.hpp
+      title: tree/lca_rmq.hpp
+    - icon: ':heavy_check_mark:'
       path: tree/lowest_common_ancestor.hpp
       title: tree/lowest_common_ancestor.hpp
     - icon: ':warning:'
@@ -834,6 +837,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/lca.test.cpp
       title: tree/test/lca.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/lca_rmq.test.cpp
+      title: tree/test/lca_rmq.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-path-sum.test.cpp
       title: tree/test/vertex-add-path-sum.test.cpp
