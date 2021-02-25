@@ -2,14 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph-tree/heavy_light_decomposition.hpp
-    title: graph-tree/heavy_light_decomposition.hpp
-  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/heavy_light_decomposition.hpp
+    title: tree/heavy_light_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,7 +20,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
     links:
     - https://judge.yosupo.jp/problem/vertex_set_path_composite
-  bundledCode: "#line 1 \"graph-tree/test/vertex-set-path-composite.test.cpp\"\n#define\
+  bundledCode: "#line 1 \"tree/test/vertex-set-path-composite.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\n#line\
     \ 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include <vector>\n\n\
     // CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus >= 201402L\n\
@@ -181,9 +181,9 @@ data:
     \ TRET, TQUERY>;\n    CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree()\
     \ {\n        std::vector<TDATA> init;\n        for (auto x : seq) init.emplace_back(TDATA{std::pair<T,\
     \ T>(x, x)});\n        SegTree::initialize(init, TRET(0, 0));\n    }\n};\n#line\
-    \ 5 \"graph-tree/heavy_light_decomposition.hpp\"\n#include <queue>\n#line 7 \"\
-    graph-tree/heavy_light_decomposition.hpp\"\n#include <utility>\n#line 9 \"graph-tree/heavy_light_decomposition.hpp\"\
-    \n\n// CUT begin\n// Heavy-Light Decomposition of trees\n// Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>\n\
+    \ 5 \"tree/heavy_light_decomposition.hpp\"\n#include <queue>\n#line 7 \"tree/heavy_light_decomposition.hpp\"\
+    \n#include <utility>\n#line 9 \"tree/heavy_light_decomposition.hpp\"\n\n// CUT\
+    \ begin\n// Heavy-Light Decomposition of trees\n// Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>\n\
     struct HeavyLightDecomposition {\n    int V;\n    int k;\n    int nb_heavy_path;\n\
     \    std::vector<std::vector<int>> e;\n    std::vector<int> par;             \
     \           // par[i] = parent of vertex i (Default: -1)\n    std::vector<int>\
@@ -258,21 +258,21 @@ data:
     \  v = par[head[v]];\n        }\n    }\n\n    int distance(int u, int v) const\
     \ {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);\n        return\
     \ depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];\n    }\n};\n\
-    #line 7 \"graph-tree/test/vertex-set-path-composite.test.cpp\"\nusing namespace\
-    \ std;\nusing mint = ModInt<998244353>;\n\nusing P = pair<mint, mint>;\nstruct\
-    \ PointSetRangeComposite : public NonrecursiveSegmentTree<P, P, bool> {\n    using\
-    \ SegTree = NonrecursiveSegmentTree<P, P, bool>;\n    P merge_data(const P &vl,\
-    \ const P &vr) override { return make_pair(vl.first * vr.first, vr.first * vl.second\
-    \ + vr.second); };\n    P data2ret(const P &v, const bool &q) override { return\
-    \ v; }\n    P merge_ret(const P &vl, const P &vr) override { return merge_data(vl,\
-    \ vr); };\n    PointSetRangeComposite(const std::vector<P> &seq, P zero) : SegTree::NonrecursiveSegmentTree()\
-    \ { SegTree::initialize(seq, zero); };\n};\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n\n    int N, Q;\n    cin >> N >> Q;\n    vector<P>\
-    \ V(N);\n    for (auto &x : V) cin >> x.first >> x.second;\n\n    HeavyLightDecomposition\
-    \ hld(N);\n    for (int i = 0; i < N - 1; i++) {\n        int u, v;\n        cin\
-    \ >> u >> v;\n        hld.add_edge(u, v);\n    }\n\n    hld.build();\n    vector<P>\
-    \ stinit = hld.segtree_rearrange(V);\n\n    PointSetRangeComposite segtree(stinit,\
-    \ P{1, 0});\n    reverse(stinit.begin(), stinit.end());\n    PointSetRangeComposite\
+    #line 7 \"tree/test/vertex-set-path-composite.test.cpp\"\nusing namespace std;\n\
+    using mint = ModInt<998244353>;\n\nusing P = pair<mint, mint>;\nstruct PointSetRangeComposite\
+    \ : public NonrecursiveSegmentTree<P, P, bool> {\n    using SegTree = NonrecursiveSegmentTree<P,\
+    \ P, bool>;\n    P merge_data(const P &vl, const P &vr) override { return make_pair(vl.first\
+    \ * vr.first, vr.first * vl.second + vr.second); };\n    P data2ret(const P &v,\
+    \ const bool &q) override { return v; }\n    P merge_ret(const P &vl, const P\
+    \ &vr) override { return merge_data(vl, vr); };\n    PointSetRangeComposite(const\
+    \ std::vector<P> &seq, P zero) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq,\
+    \ zero); };\n};\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n    int N, Q;\n    cin >> N >> Q;\n    vector<P> V(N);\n    for (auto &x : V)\
+    \ cin >> x.first >> x.second;\n\n    HeavyLightDecomposition hld(N);\n    for\
+    \ (int i = 0; i < N - 1; i++) {\n        int u, v;\n        cin >> u >> v;\n \
+    \       hld.add_edge(u, v);\n    }\n\n    hld.build();\n    vector<P> stinit =\
+    \ hld.segtree_rearrange(V);\n\n    PointSetRangeComposite segtree(stinit, P{1,\
+    \ 0});\n    reverse(stinit.begin(), stinit.end());\n    PointSetRangeComposite\
     \ segtreeinv(stinit, P{1, 0});\n    while (Q--) {\n        int q, u, v, x;\n \
     \       cin >> q >> u >> v >> x;\n        if (q == 0) {\n            segtree.update(hld.aligned_id[u],\
     \ P{v, x});\n            segtreeinv.update(N - 1 - hld.aligned_id[u], P{v, x});\n\
@@ -318,17 +318,17 @@ data:
   dependsOn:
   - modint.hpp
   - segmenttree/point-update-range-get_nonrecursive.hpp
-  - graph-tree/heavy_light_decomposition.hpp
+  - tree/heavy_light_decomposition.hpp
   isVerificationFile: true
-  path: graph-tree/test/vertex-set-path-composite.test.cpp
+  path: tree/test/vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph-tree/test/vertex-set-path-composite.test.cpp
+documentation_of: tree/test/vertex-set-path-composite.test.cpp
 layout: document
 redirect_from:
-- /verify/graph-tree/test/vertex-set-path-composite.test.cpp
-- /verify/graph-tree/test/vertex-set-path-composite.test.cpp.html
-title: graph-tree/test/vertex-set-path-composite.test.cpp
+- /verify/tree/test/vertex-set-path-composite.test.cpp
+- /verify/tree/test/vertex-set-path-composite.test.cpp.html
+title: tree/test/vertex-set-path-composite.test.cpp
 ---

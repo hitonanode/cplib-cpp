@@ -86,9 +86,9 @@ data:
     \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
     \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
     template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
-    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"graph-tree/tree_isomorphism.hpp\"\
+    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"tree/tree_isomorphism.hpp\"\
     \n// #include \"number/modint_runtime.hpp\"\n#include <chrono>\n#include <utility>\n\
-    #line 7 \"graph-tree/tree_isomorphism.hpp\"\nusing namespace std;\n\n// CUT begin\n\
+    #line 7 \"tree/tree_isomorphism.hpp\"\nusing namespace std;\n\n// CUT begin\n\
     // Tree isomorphism with hashing \uFF08\u30CF\u30C3\u30B7\u30E5\u306B\u3088\u308B\
     \u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09\n// Dependence: ModInt or ModIntRuntime\n\
     // Reference: <https://snuke.hatenablog.com/entry/2017/02/03/054210>\n// Verified:\
@@ -166,15 +166,15 @@ data:
   dependsOn:
   - modint.hpp
   isVerificationFile: false
-  path: graph-tree/tree_isomorphism.hpp
+  path: tree/tree_isomorphism.hpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: graph-tree/tree_isomorphism.hpp
+documentation_of: tree/tree_isomorphism.hpp
 layout: document
 redirect_from:
-- /library/graph-tree/tree_isomorphism.hpp
-- /library/graph-tree/tree_isomorphism.hpp.html
-title: graph-tree/tree_isomorphism.hpp
+- /library/tree/tree_isomorphism.hpp
+- /library/tree/tree_isomorphism.hpp.html
+title: tree/tree_isomorphism.hpp
 ---

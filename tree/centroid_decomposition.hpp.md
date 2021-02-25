@@ -4,17 +4,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: graph-tree/test/frequency_table_of_tree_distance.test.cpp
-    title: graph-tree/test/frequency_table_of_tree_distance.test.cpp
+    path: tree/test/frequency_table_of_tree_distance.test.cpp
+    title: tree/test/frequency_table_of_tree_distance.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://codeforces.com/contest/321/submission/59093583>
-  bundledCode: "#line 2 \"graph-tree/centroid_decomposition.hpp\"\n#include <tuple>\n\
-    #include <utility>\n#include <vector>\n\n// CUT begin\n/*\n(Recursive) Centroid\
-    \ Decomposition\nVerification: Codeforces #190 Div.1 C <https://codeforces.com/contest/321/submission/59093583>\n\
+  bundledCode: "#line 2 \"tree/centroid_decomposition.hpp\"\n#include <tuple>\n#include\
+    \ <utility>\n#include <vector>\n\n// CUT begin\n/*\n(Recursive) Centroid Decomposition\n\
+    Verification: Codeforces #190 Div.1 C <https://codeforces.com/contest/321/submission/59093583>\n\
     \nfix_root(int r): Build information of the tree which `r` belongs to.\ndetect_centroid(int\
     \ r): Enumerate centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
     \ {\n    int NO_PARENT = -1;\n    int V;\n    int E;\n    std::vector<std::vector<std::pair<int,\
@@ -104,16 +104,16 @@ data:
     \ _cd_vertices;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: graph-tree/centroid_decomposition.hpp
+  path: tree/centroid_decomposition.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph-tree/test/frequency_table_of_tree_distance.test.cpp
-documentation_of: graph-tree/centroid_decomposition.hpp
+  - tree/test/frequency_table_of_tree_distance.test.cpp
+documentation_of: tree/centroid_decomposition.hpp
 layout: document
 redirect_from:
-- /library/graph-tree/centroid_decomposition.hpp
-- /library/graph-tree/centroid_decomposition.hpp.html
-title: graph-tree/centroid_decomposition.hpp
+- /library/tree/centroid_decomposition.hpp
+- /library/tree/centroid_decomposition.hpp.html
+title: tree/centroid_decomposition.hpp
 ---

@@ -144,23 +144,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/strongly_connected_components_bitset.hpp
       title: graph/strongly_connected_components_bitset.hpp
-  - name: graph-tree
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/centroid_decomposition.hpp
-      title: graph-tree/centroid_decomposition.hpp
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/eulertour.hpp
-      title: graph-tree/eulertour.hpp
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/heavy_light_decomposition.hpp
-      title: graph-tree/heavy_light_decomposition.hpp
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/lowest_common_ancestor.hpp
-      title: graph-tree/lowest_common_ancestor.hpp
-    - icon: ':warning:'
-      path: graph-tree/tree_isomorphism.hpp
-      title: graph-tree/tree_isomorphism.hpp
   - name: linear_algebra_matrix
     pages:
     - icon: ':heavy_check_mark:'
@@ -395,6 +378,23 @@ data:
     - icon: ':warning:'
       path: syntactic_analysis/parsetree.hpp
       title: syntactic_analysis/parsetree.hpp
+  - name: tree
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: tree/centroid_decomposition.hpp
+      title: tree/centroid_decomposition.hpp
+    - icon: ':heavy_check_mark:'
+      path: tree/eulertour.hpp
+      title: tree/eulertour.hpp
+    - icon: ':heavy_check_mark:'
+      path: tree/heavy_light_decomposition.hpp
+      title: tree/heavy_light_decomposition.hpp
+    - icon: ':heavy_check_mark:'
+      path: tree/lowest_common_ancestor.hpp
+      title: tree/lowest_common_ancestor.hpp
+    - icon: ':warning:'
+      path: tree/tree_isomorphism.hpp
+      title: tree/tree_isomorphism.hpp
   - name: unionfind
     pages:
     - icon: ':heavy_check_mark:'
@@ -631,26 +631,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/warshallfloyd.test.cpp
       title: graph/test/warshallfloyd.test.cpp
-  - name: graph-tree/test
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/test/frequency_table_of_tree_distance.test.cpp
-      title: graph-tree/test/frequency_table_of_tree_distance.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/test/hl_decomposition.test.cpp
-      title: graph-tree/test/hl_decomposition.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/test/lca.test.cpp
-      title: graph-tree/test/lca.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/test/vertex-add-path-sum.test.cpp
-      title: graph-tree/test/vertex-add-path-sum.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/test/vertex-add-subtree-sum.test.cpp
-      title: graph-tree/test/vertex-add-subtree-sum.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: graph-tree/test/vertex-set-path-composite.test.cpp
-      title: graph-tree/test/vertex-set-path-composite.test.cpp
   - name: linear_algebra_matrix/test
     pages:
     - icon: ':heavy_check_mark:'
@@ -843,6 +823,26 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/z_algorithm.test.cpp
       title: string/test/z_algorithm.test.cpp
+  - name: tree/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: tree/test/frequency_table_of_tree_distance.test.cpp
+      title: tree/test/frequency_table_of_tree_distance.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/hl_decomposition.test.cpp
+      title: tree/test/hl_decomposition.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/lca.test.cpp
+      title: tree/test/lca.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/vertex-add-path-sum.test.cpp
+      title: tree/test/vertex-add-path-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/vertex-add-subtree-sum.test.cpp
+      title: tree/test/vertex-add-subtree-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/vertex-set-path-composite.test.cpp
+      title: tree/test/vertex-set-path-composite.test.cpp
   - name: unionfind/test
     pages:
     - icon: ':heavy_check_mark:'

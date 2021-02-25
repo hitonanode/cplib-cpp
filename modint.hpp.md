@@ -17,15 +17,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
-  - icon: ':warning:'
-    path: graph-tree/tree_isomorphism.hpp
-    title: graph-tree/tree_isomorphism.hpp
   - icon: ':heavy_check_mark:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
+  - icon: ':warning:'
+    path: tree/tree_isomorphism.hpp
+    title: tree/tree_isomorphism.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: convolution/test/bitwise_and_conv.test.cpp
@@ -97,9 +97,6 @@ data:
     path: formal_power_series/test/stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/stirling_number_of_2nd.test.cpp
   - icon: ':heavy_check_mark:'
-    path: graph-tree/test/vertex-set-path-composite.test.cpp
-    title: graph-tree/test/vertex-set-path-composite.test.cpp
-  - icon: ':heavy_check_mark:'
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
   - icon: ':heavy_check_mark:'
@@ -132,6 +129,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/rolling_hash_w_modint.test.cpp
     title: string/test/rolling_hash_w_modint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: tree/test/vertex-set-path-composite.test.cpp
+    title: tree/test/vertex-set-path-composite.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -283,8 +283,8 @@ data:
   isVerificationFile: false
   path: modint.hpp
   requiredBy:
-  - graph-tree/tree_isomorphism.hpp
   - segmenttree/trees/acl_range-affine-range-sum.hpp
+  - tree/tree_isomorphism.hpp
   - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/formal_power_series.hpp
   - formal_power_series/multipoint_evaluation.hpp
@@ -294,7 +294,6 @@ data:
   timestamp: '2020-12-02 23:44:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph-tree/test/vertex-set-path-composite.test.cpp
   - linear_algebra_matrix/test/linear_recurrence.test.cpp
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
@@ -304,6 +303,7 @@ data:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - segmenttree/test/range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
+  - tree/test/vertex-set-path-composite.test.cpp
   - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/fps_inv.test.cpp

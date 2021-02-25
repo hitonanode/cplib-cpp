@@ -4,21 +4,21 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: graph-tree/test/hl_decomposition.test.cpp
-    title: graph-tree/test/hl_decomposition.test.cpp
+    path: tree/test/hl_decomposition.test.cpp
+    title: tree/test/hl_decomposition.test.cpp
   - icon: ':heavy_check_mark:'
-    path: graph-tree/test/vertex-add-path-sum.test.cpp
-    title: graph-tree/test/vertex-add-path-sum.test.cpp
+    path: tree/test/vertex-add-path-sum.test.cpp
+    title: tree/test/vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: graph-tree/test/vertex-set-path-composite.test.cpp
-    title: graph-tree/test/vertex-set-path-composite.test.cpp
+    path: tree/test/vertex-set-path-composite.test.cpp
+    title: tree/test/vertex-set-path-composite.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>
-  bundledCode: "#line 2 \"graph-tree/heavy_light_decomposition.hpp\"\n#include <algorithm>\n\
+  bundledCode: "#line 2 \"tree/heavy_light_decomposition.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <functional>\n#include <queue>\n#include <stack>\n\
     #include <utility>\n#include <vector>\n\n// CUT begin\n// Heavy-Light Decomposition\
     \ of trees\n// Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>\n\
@@ -175,18 +175,18 @@ data:
     \ depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: graph-tree/heavy_light_decomposition.hpp
+  path: tree/heavy_light_decomposition.hpp
   requiredBy: []
-  timestamp: '2020-11-19 23:13:47+09:00'
+  timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph-tree/test/vertex-add-path-sum.test.cpp
-  - graph-tree/test/vertex-set-path-composite.test.cpp
-  - graph-tree/test/hl_decomposition.test.cpp
-documentation_of: graph-tree/heavy_light_decomposition.hpp
+  - tree/test/vertex-add-path-sum.test.cpp
+  - tree/test/vertex-set-path-composite.test.cpp
+  - tree/test/hl_decomposition.test.cpp
+documentation_of: tree/heavy_light_decomposition.hpp
 layout: document
 redirect_from:
-- /library/graph-tree/heavy_light_decomposition.hpp
-- /library/graph-tree/heavy_light_decomposition.hpp.html
-title: graph-tree/heavy_light_decomposition.hpp
+- /library/tree/heavy_light_decomposition.hpp
+- /library/tree/heavy_light_decomposition.hpp.html
+title: tree/heavy_light_decomposition.hpp
 ---

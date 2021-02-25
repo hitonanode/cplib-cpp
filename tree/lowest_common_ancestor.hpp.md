@@ -4,15 +4,15 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: graph-tree/test/lca.test.cpp
-    title: graph-tree/test/lca.test.cpp
+    path: tree/test/lca.test.cpp
+    title: tree/test/lca.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://yukicoder.me/submissions/392383>
-  bundledCode: "#line 2 \"graph-tree/lowest_common_ancestor.hpp\"\n#include <utility>\n\
+  bundledCode: "#line 2 \"tree/lowest_common_ancestor.hpp\"\n#include <utility>\n\
     #include <vector>\n\n// CUT begin\n// lowest common ancestor (LCA) class for undirected\
     \ weighted tree\n// \u7121\u5411\u91CD\u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u306E\
     \u6700\u5C0F\u5171\u901A\u7956\u5148\n// <https://yukicoder.me/submissions/392383>\n\
@@ -94,16 +94,16 @@ data:
     \ + (acc_weight[v] - acc_weight[r]);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: graph-tree/lowest_common_ancestor.hpp
+  path: tree/lowest_common_ancestor.hpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph-tree/test/lca.test.cpp
-documentation_of: graph-tree/lowest_common_ancestor.hpp
+  - tree/test/lca.test.cpp
+documentation_of: tree/lowest_common_ancestor.hpp
 layout: document
 redirect_from:
-- /library/graph-tree/lowest_common_ancestor.hpp
-- /library/graph-tree/lowest_common_ancestor.hpp.html
-title: graph-tree/lowest_common_ancestor.hpp
+- /library/tree/lowest_common_ancestor.hpp
+- /library/tree/lowest_common_ancestor.hpp.html
+title: tree/lowest_common_ancestor.hpp
 ---

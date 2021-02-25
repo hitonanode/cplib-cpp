@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph-tree/heavy_light_decomposition.hpp
-    title: graph-tree/heavy_light_decomposition.hpp
-  - icon: ':heavy_check_mark:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/heavy_light_decomposition.hpp
+    title: tree/heavy_light_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -17,19 +17,18 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
     links:
     - https://judge.yosupo.jp/problem/vertex_add_path_sum
-  bundledCode: "#line 1 \"graph-tree/test/vertex-add-path-sum.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n#line 2 \"\
-    segmenttree/point-update-range-get_nonrecursive.hpp\"\n#include <algorithm>\n\
-    #include <cassert>\n#include <functional>\n#include <iostream>\n#include <stack>\n\
-    #include <vector>\n\n// CUT begin\n// Nonrecursive Segment Tree (point-update,\
-    \ range-get)\n// - Conditions for operations:\n//   - merge_data: [TDATA, TDATA]\
-    \ -> TDATA, e(x, y) == e(y, x)\n//   - data2ret: [TDATA, TQUERY] -> TRET\n// \
-    \  - merge_ret: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)\n\
-    //   - commutability f(e(x, y), q) == g(f(x, q), f(y, q))\ntemplate <typename\
-    \ TDATA, typename TRET, typename TQUERY> struct NonrecursiveSegmentTree {\n  \
-    \  int N;\n    TRET defaultRET;\n    virtual TDATA merge_data(const TDATA &, const\
-    \ TDATA &) = 0;\n    virtual TRET data2ret(const TDATA &, const TQUERY &) = 0;\n\
-    \    virtual TRET merge_ret(const TRET &, const TRET &) = 0;\n    std::vector<TDATA>\
+  bundledCode: "#line 1 \"tree/test/vertex-add-path-sum.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n#line 2 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <functional>\n#include <iostream>\n\
+    #include <stack>\n#include <vector>\n\n// CUT begin\n// Nonrecursive Segment Tree\
+    \ (point-update, range-get)\n// - Conditions for operations:\n//   - merge_data:\
+    \ [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)\n//   - data2ret: [TDATA, TQUERY]\
+    \ -> TRET\n//   - merge_ret: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x,\
+    \ y) = g(y, x)\n//   - commutability f(e(x, y), q) == g(f(x, q), f(y, q))\ntemplate\
+    \ <typename TDATA, typename TRET, typename TQUERY> struct NonrecursiveSegmentTree\
+    \ {\n    int N;\n    TRET defaultRET;\n    virtual TDATA merge_data(const TDATA\
+    \ &, const TDATA &) = 0;\n    virtual TRET data2ret(const TDATA &, const TQUERY\
+    \ &) = 0;\n    virtual TRET merge_ret(const TRET &, const TRET &) = 0;\n    std::vector<TDATA>\
     \ data;\n    inline TDATA &at(int i) { return data[i]; }\n\n    inline void _merge(int\
     \ i) { at(i) = merge_data(at(i << 1), at((i << 1) + 1)); }\n    void initialize(const\
     \ std::vector<TDATA> &seq, TRET RET_ZERO) {\n        N = seq.size();\n       \
@@ -107,9 +106,9 @@ data:
     \ TRET, TQUERY>;\n    CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree()\
     \ {\n        std::vector<TDATA> init;\n        for (auto x : seq) init.emplace_back(TDATA{std::pair<T,\
     \ T>(x, x)});\n        SegTree::initialize(init, TRET(0, 0));\n    }\n};\n#line\
-    \ 5 \"graph-tree/heavy_light_decomposition.hpp\"\n#include <queue>\n#line 7 \"\
-    graph-tree/heavy_light_decomposition.hpp\"\n#include <utility>\n#line 9 \"graph-tree/heavy_light_decomposition.hpp\"\
-    \n\n// CUT begin\n// Heavy-Light Decomposition of trees\n// Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>\n\
+    \ 5 \"tree/heavy_light_decomposition.hpp\"\n#include <queue>\n#line 7 \"tree/heavy_light_decomposition.hpp\"\
+    \n#include <utility>\n#line 9 \"tree/heavy_light_decomposition.hpp\"\n\n// CUT\
+    \ begin\n// Heavy-Light Decomposition of trees\n// Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>\n\
     struct HeavyLightDecomposition {\n    int V;\n    int k;\n    int nb_heavy_path;\n\
     \    std::vector<std::vector<int>> e;\n    std::vector<int> par;             \
     \           // par[i] = parent of vertex i (Default: -1)\n    std::vector<int>\
@@ -184,12 +183,12 @@ data:
     \  v = par[head[v]];\n        }\n    }\n\n    int distance(int u, int v) const\
     \ {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);\n        return\
     \ depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];\n    }\n};\n\
-    #line 6 \"graph-tree/test/vertex-add-path-sum.test.cpp\"\nusing namespace std;\n\
-    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int\
-    \ N, Q, q, u, v;\n    cin >> N >> Q;\n\n    vector<long long> A(N);\n    for (auto\
-    \ &x : A) cin >> x;\n    HeavyLightDecomposition hld(N);\n    for (int i = 0;\
-    \ i < N - 1; i++) {\n        cin >> u >> v;\n        hld.add_edge(u, v);\n   \
-    \ }\n\n    hld.build();\n    PointUpdateRangeSum<long long> segtree(hld.segtree_rearrange(A),\
+    #line 6 \"tree/test/vertex-add-path-sum.test.cpp\"\nusing namespace std;\n\nint\
+    \ main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N, Q,\
+    \ q, u, v;\n    cin >> N >> Q;\n\n    vector<long long> A(N);\n    for (auto &x\
+    \ : A) cin >> x;\n    HeavyLightDecomposition hld(N);\n    for (int i = 0; i <\
+    \ N - 1; i++) {\n        cin >> u >> v;\n        hld.add_edge(u, v);\n    }\n\n\
+    \    hld.build();\n    PointUpdateRangeSum<long long> segtree(hld.segtree_rearrange(A),\
     \ 0LL);\n\n    while (Q--) {\n        cin >> q >> u >> v;\n        if (q) {\n\
     \            long long ret = 0;\n            hld.for_each_vertex(u, v, [&](int\
     \ l, int r) -> void { ret += segtree.get(l, r + 1); });\n            cout << ret\
@@ -210,17 +209,17 @@ data:
     \ A[u]);\n        }\n    }\n}\n"
   dependsOn:
   - segmenttree/point-update-range-get_nonrecursive.hpp
-  - graph-tree/heavy_light_decomposition.hpp
+  - tree/heavy_light_decomposition.hpp
   isVerificationFile: true
-  path: graph-tree/test/vertex-add-path-sum.test.cpp
+  path: tree/test/vertex-add-path-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-11-19 23:13:47+09:00'
+  timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph-tree/test/vertex-add-path-sum.test.cpp
+documentation_of: tree/test/vertex-add-path-sum.test.cpp
 layout: document
 redirect_from:
-- /verify/graph-tree/test/vertex-add-path-sum.test.cpp
-- /verify/graph-tree/test/vertex-add-path-sum.test.cpp.html
-title: graph-tree/test/vertex-add-path-sum.test.cpp
+- /verify/tree/test/vertex-add-path-sum.test.cpp
+- /verify/tree/test/vertex-add-path-sum.test.cpp.html
+title: tree/test/vertex-add-path-sum.test.cpp
 ---

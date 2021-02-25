@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: graph-tree/test/frequency_table_of_tree_distance.test.cpp
-    title: graph-tree/test/frequency_table_of_tree_distance.test.cpp
+    path: tree/test/frequency_table_of_tree_distance.test.cpp
+    title: tree/test/frequency_table_of_tree_distance.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -74,7 +74,7 @@ data:
   timestamp: '2020-11-18 20:06:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph-tree/test/frequency_table_of_tree_distance.test.cpp
+  - tree/test/frequency_table_of_tree_distance.test.cpp
 documentation_of: convolution/fft_double.hpp
 layout: document
 redirect_from:

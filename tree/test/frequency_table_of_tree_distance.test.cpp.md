@@ -5,8 +5,8 @@ data:
     path: convolution/fft_double.hpp
     title: convolution/fft_double.hpp
   - icon: ':heavy_check_mark:'
-    path: graph-tree/centroid_decomposition.hpp
-    title: graph-tree/centroid_decomposition.hpp
+    path: tree/centroid_decomposition.hpp
+    title: tree/centroid_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -43,12 +43,12 @@ data:
     \ fftconv(const std::vector<T> &a, const std::vector<T> &b) {\n    std::vector<cmplx>\
     \ ans = conv_cmplx(a, b);\n    std::vector<long long int> ret(ans.size());\n \
     \   for (int i = 0; i < (int)ans.size(); i++) ret[i] = floor(ans[i].real() + 0.5);\n\
-    \    ret.resize(a.size() + b.size() - 1);\n    return ret;\n}\n#line 2 \"graph-tree/centroid_decomposition.hpp\"\
-    \n#include <tuple>\n#line 5 \"graph-tree/centroid_decomposition.hpp\"\n\n// CUT\
-    \ begin\n/*\n(Recursive) Centroid Decomposition\nVerification: Codeforces #190\
-    \ Div.1 C <https://codeforces.com/contest/321/submission/59093583>\n\nfix_root(int\
-    \ r): Build information of the tree which `r` belongs to.\ndetect_centroid(int\
-    \ r): Enumerate centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
+    \    ret.resize(a.size() + b.size() - 1);\n    return ret;\n}\n#line 2 \"tree/centroid_decomposition.hpp\"\
+    \n#include <tuple>\n#line 5 \"tree/centroid_decomposition.hpp\"\n\n// CUT begin\n\
+    /*\n(Recursive) Centroid Decomposition\nVerification: Codeforces #190 Div.1 C\
+    \ <https://codeforces.com/contest/321/submission/59093583>\n\nfix_root(int r):\
+    \ Build information of the tree which `r` belongs to.\ndetect_centroid(int r):\
+    \ Enumerate centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
     \ {\n    int NO_PARENT = -1;\n    int V;\n    int E;\n    std::vector<std::vector<std::pair<int,\
     \ int>>> to; // (node_id, edge_id)\n    std::vector<int> par;                \
     \             // parent node_id par[root] = -1\n    std::vector<std::vector<int>>\
@@ -88,11 +88,11 @@ data:
     \            available_edge[eid] = 0;\n            _centroid_decomposition(nxt);\n\
     \        }\n    }\n    std::vector<int> centroid_decomposition(int x) {\n    \
     \    _cd_vertices.clear();\n        _centroid_decomposition(x);\n        return\
-    \ _cd_vertices;\n    }\n};\n#line 3 \"graph-tree/test/frequency_table_of_tree_distance.test.cpp\"\
+    \ _cd_vertices;\n    }\n};\n#line 3 \"tree/test/frequency_table_of_tree_distance.test.cpp\"\
     \n#include <algorithm>\n#include <iostream>\n#include <unordered_set>\n#line 7\
-    \ \"graph-tree/test/frequency_table_of_tree_distance.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\nusing\
-    \ namespace std;\n\nstruct frequency_table_of_tree_distance_ {\n    vector<unordered_set<int>>\
+    \ \"tree/test/frequency_table_of_tree_distance.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\nusing namespace\
+    \ std;\n\nstruct frequency_table_of_tree_distance_ {\n    vector<unordered_set<int>>\
     \ tos;\n    vector<int> tmp;\n\n    void _dfs(int now, int prv, int depth) {\n\
     \        if (int(tmp.size()) <= depth) { tmp.resize(depth + 1, 0); }\n       \
     \ tmp[depth]++;\n        for (auto nxt : tos[now]) {\n            if (nxt != prv)\
@@ -149,17 +149,17 @@ data:
     }\n"
   dependsOn:
   - convolution/fft_double.hpp
-  - graph-tree/centroid_decomposition.hpp
+  - tree/centroid_decomposition.hpp
   isVerificationFile: true
-  path: graph-tree/test/frequency_table_of_tree_distance.test.cpp
+  path: tree/test/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph-tree/test/frequency_table_of_tree_distance.test.cpp
+documentation_of: tree/test/frequency_table_of_tree_distance.test.cpp
 layout: document
 redirect_from:
-- /verify/graph-tree/test/frequency_table_of_tree_distance.test.cpp
-- /verify/graph-tree/test/frequency_table_of_tree_distance.test.cpp.html
-title: graph-tree/test/frequency_table_of_tree_distance.test.cpp
+- /verify/tree/test/frequency_table_of_tree_distance.test.cpp
+- /verify/tree/test/frequency_table_of_tree_distance.test.cpp.html
+title: tree/test/frequency_table_of_tree_distance.test.cpp
 ---

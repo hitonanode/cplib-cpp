@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph-tree/heavy_light_decomposition.hpp
-    title: graph-tree/heavy_light_decomposition.hpp
+    path: tree/heavy_light_decomposition.hpp
+    title: tree/heavy_light_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,7 +14,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/lca
     links:
     - https://judge.yosupo.jp/problem/lca
-  bundledCode: "#line 2 \"graph-tree/heavy_light_decomposition.hpp\"\n#include <algorithm>\n\
+  bundledCode: "#line 2 \"tree/heavy_light_decomposition.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <functional>\n#include <queue>\n#include <stack>\n\
     #include <utility>\n#include <vector>\n\n// CUT begin\n// Heavy-Light Decomposition\
     \ of trees\n// Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>\n\
@@ -92,7 +92,7 @@ data:
     \  v = par[head[v]];\n        }\n    }\n\n    int distance(int u, int v) const\
     \ {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);\n        return\
     \ depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];\n    }\n};\n\
-    #line 2 \"graph-tree/test/hl_decomposition.test.cpp\"\n#include <iostream>\n#define\
+    #line 2 \"tree/test/hl_decomposition.test.cpp\"\n#include <iostream>\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\nint main() {\n    int N,\
     \ Q, p, u, v;\n    std::cin >> N >> Q;\n    HeavyLightDecomposition hld(N);\n\
     \    for (int i = 1; i <= N - 1; i++) {\n        std::cin >> p;\n        hld.add_edge(i,\
@@ -107,17 +107,17 @@ data:
     \ v;\n        std::cout << hld.lowest_common_ancestor(u, v) << \"\\n\";\n    }\n\
     }\n"
   dependsOn:
-  - graph-tree/heavy_light_decomposition.hpp
+  - tree/heavy_light_decomposition.hpp
   isVerificationFile: true
-  path: graph-tree/test/hl_decomposition.test.cpp
+  path: tree/test/hl_decomposition.test.cpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph-tree/test/hl_decomposition.test.cpp
+documentation_of: tree/test/hl_decomposition.test.cpp
 layout: document
 redirect_from:
-- /verify/graph-tree/test/hl_decomposition.test.cpp
-- /verify/graph-tree/test/hl_decomposition.test.cpp.html
-title: graph-tree/test/hl_decomposition.test.cpp
+- /verify/tree/test/hl_decomposition.test.cpp
+- /verify/tree/test/hl_decomposition.test.cpp.html
+title: tree/test/hl_decomposition.test.cpp
 ---

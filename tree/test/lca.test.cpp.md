@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph-tree/lowest_common_ancestor.hpp
-    title: graph-tree/lowest_common_ancestor.hpp
+    path: tree/lowest_common_ancestor.hpp
+    title: tree/lowest_common_ancestor.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,7 +14,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/lca
     links:
     - https://judge.yosupo.jp/problem/lca
-  bundledCode: "#line 2 \"graph-tree/lowest_common_ancestor.hpp\"\n#include <utility>\n\
+  bundledCode: "#line 2 \"tree/lowest_common_ancestor.hpp\"\n#include <utility>\n\
     #include <vector>\n\n// CUT begin\n// lowest common ancestor (LCA) class for undirected\
     \ weighted tree\n// \u7121\u5411\u91CD\u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u306E\
     \u6700\u5C0F\u5171\u901A\u7956\u5148\n// <https://yukicoder.me/submissions/392383>\n\
@@ -53,7 +53,7 @@ data:
     \ v = doubling[d][v];\n        }\n        return par[u];\n    }\n\n    T path_length(int\
     \ u, int v) {\n        // Not distance, but the sum of weights\n        int r\
     \ = lowest_common_ancestor(u, v);\n        return (acc_weight[u] - acc_weight[r])\
-    \ + (acc_weight[v] - acc_weight[r]);\n    }\n};\n#line 2 \"graph-tree/test/lca.test.cpp\"\
+    \ + (acc_weight[v] - acc_weight[r]);\n    }\n};\n#line 2 \"tree/test/lca.test.cpp\"\
     \n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\
     \nusing namespace std;\n\nint main() {\n    int N, Q, p, u, v;\n    cin >> N >>\
     \ Q;\n    UndirectedWeightedTree graph(N);\n    for (int i = 1; i <= N - 1; i++)\
@@ -69,17 +69,17 @@ data:
     \n    for (int i = 0; i < Q; i++) {\n        cin >> u >> v;\n        cout << graph.lowest_common_ancestor(u,\
     \ v) << endl;\n    }\n}\n"
   dependsOn:
-  - graph-tree/lowest_common_ancestor.hpp
+  - tree/lowest_common_ancestor.hpp
   isVerificationFile: true
-  path: graph-tree/test/lca.test.cpp
+  path: tree/test/lca.test.cpp
   requiredBy: []
-  timestamp: '2020-11-21 18:37:08+09:00'
+  timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph-tree/test/lca.test.cpp
+documentation_of: tree/test/lca.test.cpp
 layout: document
 redirect_from:
-- /verify/graph-tree/test/lca.test.cpp
-- /verify/graph-tree/test/lca.test.cpp.html
-title: graph-tree/test/lca.test.cpp
+- /verify/tree/test/lca.test.cpp
+- /verify/tree/test/lca.test.cpp.html
+title: tree/test/lca.test.cpp
 ---
