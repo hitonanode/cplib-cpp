@@ -22,6 +22,7 @@
 "data_structure/test/persistent_queue.test.cpp": "2021-02-26 23:47:50 +0900",
 "data_structure/test/queue_operate_all_composite.test.cpp": "2021-02-26 23:47:50 +0900",
 "data_structure/test/range_kth_smallest_offline.test.cpp": "2021-02-26 23:47:50 +0900",
+"data_structure/test/rectange_sum.test.cpp": "2021-02-26 23:57:31 +0900",
 "data_structure/test/static_range_inversion.test.cpp": "2021-02-26 23:47:50 +0900",
 "formal_power_series/test/bernoulli_number.test.cpp": "2021-02-14 23:48:54 +0900",
 "formal_power_series/test/coeff_of_rational_function.test.cpp": "2020-12-20 04:07:33 +0900",
