@@ -1,5 +1,5 @@
 #pragma once
-#include "../other_data_structures/light_forward_list.hpp"
+#include "../data_structure/light_forward_list.hpp"
 #include <iostream>
 #include <list>
 #include <string>

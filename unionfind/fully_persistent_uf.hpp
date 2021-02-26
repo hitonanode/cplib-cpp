@@ -1,5 +1,5 @@
 #pragma once
-#include "../other_data_structures/persistent_array.hpp"
+#include "../data_structure/persistent_array.hpp"
 #include <vector>
 
 // CUT begin
