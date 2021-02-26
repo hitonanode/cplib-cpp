@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/persistent_array.hpp
-    title: other_data_structures/persistent_array.hpp
+    path: data_structure/persistent_array.hpp
+    title: data_structure/persistent_array.hpp
   - icon: ':heavy_check_mark:'
     path: unionfind/fully_persistent_uf.hpp
     title: unionfind/fully_persistent_uf.hpp
@@ -17,7 +17,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/persistent_unionfind
     links:
     - https://judge.yosupo.jp/problem/persistent_unionfind
-  bundledCode: "#line 2 \"other_data_structures/persistent_array.hpp\"\n#include <algorithm>\n\
+  bundledCode: "#line 2 \"data_structure/persistent_array.hpp\"\n#include <algorithm>\n\
     #include <array>\n#include <vector>\n\n// CUT begin\n// Persistent Array\n// Reference:\
     \ <https://qiita.com/hotman78/items/9c643feae1de087e6fc5>\n//            <https://ei1333.github.io/luzhiled/snippets/structure/persistent-array.html>\n\
     // - (2^LOG)-ary tree-based\n// - Fully persistent\n// - `get(root, k)`:  get\
@@ -74,11 +74,11 @@ data:
     \    }\n}\n"
   dependsOn:
   - unionfind/fully_persistent_uf.hpp
-  - other_data_structures/persistent_array.hpp
+  - data_structure/persistent_array.hpp
   isVerificationFile: true
   path: unionfind/test/fully_persistent_uf.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:52:32+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: unionfind/test/fully_persistent_uf.test.cpp

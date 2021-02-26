@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/light_forward_list.hpp
-    title: other_data_structures/light_forward_list.hpp
+    path: data_structure/light_forward_list.hpp
+    title: data_structure/light_forward_list.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: string/aho_corasick_online.hpp
@@ -28,11 +28,11 @@ data:
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=5101653>
     - https://yukicoder.me/submissions/598606>
-  bundledCode: "#line 2 \"other_data_structures/light_forward_list.hpp\"\n#include\
-    \ <vector>\n\n// CUT begin\n// Simple forward_list for MLE-sensitive situations\n\
-    // Verify: <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\n\
-    template <typename T> struct light_forward_list {\n    static std::vector<unsigned>\
-    \ ptr;\n    static std::vector<T> val;\n    unsigned head;\n    light_forward_list()\
+  bundledCode: "#line 2 \"data_structure/light_forward_list.hpp\"\n#include <vector>\n\
+    \n// CUT begin\n// Simple forward_list for MLE-sensitive situations\n// Verify:\
+    \ <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\ntemplate\
+    \ <typename T> struct light_forward_list {\n    static std::vector<unsigned> ptr;\n\
+    \    static std::vector<T> val;\n    unsigned head;\n    light_forward_list()\
     \ : head(0) {}\n    void push_front(T x) {\n        ptr.push_back(head), val.push_back(x);\n\
     \        head = ptr.size() - 1;\n    }\n    struct iterator {\n        unsigned\
     \ p;\n        iterator operator++() { return {p = ptr[p]}; }\n        T &operator*()\
@@ -99,9 +99,9 @@ data:
     int c2i0aA(char c) { return isdigit(c) ? c - '0' : islower(c) ? c - 'a' + 10 :\
     \ c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL, c2i0aA> trie(62);\ntrie.add(P);\n\
     trie.build();\nvector<int> ret = trie.match();\n*/\n"
-  code: "#pragma once\n#include \"../other_data_structures/light_forward_list.hpp\"\
-    \n#include <cassert>\n#include <string>\n#include <unordered_map>\n#include <vector>\n\
-    \n// CUT begin\n// Aho-Corasick algorithm\n// Verify: <http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=5101653>\n\
+  code: "#pragma once\n#include \"../data_structure/light_forward_list.hpp\"\n#include\
+    \ <cassert>\n#include <string>\n#include <unordered_map>\n#include <vector>\n\n\
+    // CUT begin\n// Aho-Corasick algorithm\n// Verify: <http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=5101653>\n\
     //         <https://yukicoder.me/submissions/598606>\n// Complexity:\n// - add():\
     \ O(|keyword_i|)\n// - build_aho_corasick(): O(\\sum_i |keyword_i|)\n// - match()\
     \ : O(\\sum_i |keyword_i| + |str|)\ntemplate <class T, int (*char2int)(char)>\
@@ -159,12 +159,12 @@ data:
     \ c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL, c2i0aA> trie(62);\ntrie.add(P);\n\
     trie.build();\nvector<int> ret = trie.match();\n*/\n"
   dependsOn:
-  - other_data_structures/light_forward_list.hpp
+  - data_structure/light_forward_list.hpp
   isVerificationFile: false
   path: string/aho_corasick.hpp
   requiredBy:
   - string/aho_corasick_online.hpp
-  timestamp: '2021-01-30 19:37:15+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/aho_corasick_forwardlist.test.cpp

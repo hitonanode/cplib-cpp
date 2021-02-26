@@ -4,19 +4,18 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/static_range_inversion.test.cpp
-    title: other_data_structures/test/static_range_inversion.test.cpp
+    path: data_structure/test/static_range_inversion.test.cpp
+    title: data_structure/test/static_range_inversion.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://stackoverflow.com/questions/21763392/counting-inversions-in-ranges>
-  bundledCode: "#line 2 \"other_data_structures/static_range_inversion.hpp\"\n#include\
-    \ <algorithm>\n#include <cassert>\n#include <cmath>\n#include <utility>\n#include\
-    \ <vector>\n\n// CUT begin\n// Static Range Inversion Query (Online)\n// Complexity:\
-    \ O((N + Q)sqrt(N)) time, O(Nsqrt(N)) space (~128MB for N=1e5)\n// Reference:\
-    \ <https://stackoverflow.com/questions/21763392/counting-inversions-in-ranges>\n\
+  bundledCode: "#line 2 \"data_structure/static_range_inversion.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#include <cmath>\n#include <utility>\n#include <vector>\n\n\
+    // CUT begin\n// Static Range Inversion Query (Online)\n// Complexity: O((N +\
+    \ Q)sqrt(N)) time, O(Nsqrt(N)) space (~128MB for N=1e5)\n// Reference: <https://stackoverflow.com/questions/21763392/counting-inversions-in-ranges>\n\
     template <typename T> struct StaticRangeInversion {\n    const int N;\n    const\
     \ int bs;    // bucket size\n    const int nb_bc; // # of buckets\n    std::vector<int>\
     \ vals;\n    std::vector<std::pair<int, int>> vals_sorted;\n    std::vector<std::vector<int>>\
@@ -121,16 +120,16 @@ data:
     \       return ret;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: other_data_structures/static_range_inversion.hpp
+  path: data_structure/static_range_inversion.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_data_structures/test/static_range_inversion.test.cpp
-documentation_of: other_data_structures/static_range_inversion.hpp
+  - data_structure/test/static_range_inversion.test.cpp
+documentation_of: data_structure/static_range_inversion.hpp
 layout: document
 redirect_from:
-- /library/other_data_structures/static_range_inversion.hpp
-- /library/other_data_structures/static_range_inversion.hpp.html
-title: other_data_structures/static_range_inversion.hpp
+- /library/data_structure/static_range_inversion.hpp
+- /library/data_structure/static_range_inversion.hpp.html
+title: data_structure/static_range_inversion.hpp
 ---

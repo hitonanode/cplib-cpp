@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/persistent_array.hpp
-    title: other_data_structures/persistent_array.hpp
+    path: data_structure/persistent_array.hpp
+    title: data_structure/persistent_array.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -15,7 +15,7 @@ data:
   attributes:
     links:
     - https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>
-  bundledCode: "#line 2 \"other_data_structures/persistent_array.hpp\"\n#include <algorithm>\n\
+  bundledCode: "#line 2 \"data_structure/persistent_array.hpp\"\n#include <algorithm>\n\
     #include <array>\n#include <vector>\n\n// CUT begin\n// Persistent Array\n// Reference:\
     \ <https://qiita.com/hotman78/items/9c643feae1de087e6fc5>\n//            <https://ei1333.github.io/luzhiled/snippets/structure/persistent-array.html>\n\
     // - (2^LOG)-ary tree-based\n// - Fully persistent\n// - `get(root, k)`:  get\
@@ -55,10 +55,10 @@ data:
     \ savepoints.emplace_back(ptr), x != y;\n    }\n    int count(int t, int x) const\
     \ { return -par.get(savepoints[t], find(t, x)); }\n    bool same(int t, int x,\
     \ int y) const { return find(t, x) == find(t, y); }\n};\n"
-  code: "#pragma once\n#include \"../other_data_structures/persistent_array.hpp\"\n\
-    #include <vector>\n\n// CUT begin\n// Fully persistent UnionFind\n// - find(t,\
-    \ x) : find the root of DSU tree x belongs to, when unite() is called t times.\n\
-    // Complexity: O(logN) for each query\n// Reference: <https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>\n\
+  code: "#pragma once\n#include \"../data_structure/persistent_array.hpp\"\n#include\
+    \ <vector>\n\n// CUT begin\n// Fully persistent UnionFind\n// - find(t, x) : find\
+    \ the root of DSU tree x belongs to, when unite() is called t times.\n// Complexity:\
+    \ O(logN) for each query\n// Reference: <https://ei1333.github.io/library/structure/union-find/persistent-union-find.cpp>\n\
     struct PersistentUnionFind {\n    int N;\n    using Array = persistent_array<int,\
     \ 4>;\n    Array par;\n    std::vector<Array::node*> savepoints; // Tree structure\
     \ is saved after every `unite()` operation\n    PersistentUnionFind(int N) : N(N),\
@@ -74,11 +74,11 @@ data:
     \ { return -par.get(savepoints[t], find(t, x)); }\n    bool same(int t, int x,\
     \ int y) const { return find(t, x) == find(t, y); }\n};\n"
   dependsOn:
-  - other_data_structures/persistent_array.hpp
+  - data_structure/persistent_array.hpp
   isVerificationFile: false
   path: unionfind/fully_persistent_uf.hpp
   requiredBy: []
-  timestamp: '2021-01-01 16:52:32+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - unionfind/test/fully_persistent_uf.test.cpp

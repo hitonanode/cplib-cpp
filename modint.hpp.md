@@ -43,6 +43,9 @@ data:
     path: convolution/test/subset_convolution.test.cpp
     title: convolution/test/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/queue_operate_all_composite.test.cpp
+    title: data_structure/test/queue_operate_all_composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/bernoulli_number.test.cpp
     title: formal_power_series/test/bernoulli_number.test.cpp
   - icon: ':heavy_check_mark:'
@@ -114,9 +117,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/queue_operate_all_composite.test.cpp
-    title: other_data_structures/test/queue_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
@@ -294,12 +294,12 @@ data:
   timestamp: '2020-12-02 23:44:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - data_structure/test/queue_operate_all_composite.test.cpp
   - linear_algebra_matrix/test/linear_recurrence.test.cpp
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - other_data_structures/test/queue_operate_all_composite.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - segmenttree/test/range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp

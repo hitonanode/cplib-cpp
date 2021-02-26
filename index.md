@@ -64,6 +64,38 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/subset_convolution.hpp
       title: convolution/subset_convolution.hpp
+  - name: data_structure
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: data_structure/binary_trie.hpp
+      title: data_structure/binary_trie.hpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/fibonacci_heap.hpp
+      title: data_structure/fibonacci_heap.hpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/light_forward_list.hpp
+      title: data_structure/light_forward_list.hpp
+    - icon: ':warning:'
+      path: data_structure/link_cut_tree.cpp
+      title: data_structure/link_cut_tree.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/persistent_array.hpp
+      title: data_structure/persistent_array.hpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/persistent_queue.hpp
+      title: data_structure/persistent_queue.hpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/range_kth_smallest_offline.hpp
+      title: data_structure/range_kth_smallest_offline.hpp
+    - icon: ':warning:'
+      path: data_structure/rbst_fast.cpp
+      title: data_structure/rbst_fast.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/sliding_window_aggregation.hpp
+      title: data_structure/sliding_window_aggregation.hpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/static_range_inversion.hpp
+      title: data_structure/static_range_inversion.hpp
   - name: formal_power_series
     pages:
     - icon: ':heavy_check_mark:'
@@ -221,38 +253,6 @@ data:
     - icon: ':warning:'
       path: other_algorithms/smawk.hpp
       title: other_algorithms/smawk.hpp
-  - name: other_data_structures
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/binary_trie.hpp
-      title: other_data_structures/binary_trie.hpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/fibonacci_heap.hpp
-      title: other_data_structures/fibonacci_heap.hpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/light_forward_list.hpp
-      title: other_data_structures/light_forward_list.hpp
-    - icon: ':warning:'
-      path: other_data_structures/link_cut_tree.cpp
-      title: other_data_structures/link_cut_tree.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/persistent_array.hpp
-      title: other_data_structures/persistent_array.hpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/persistent_queue.hpp
-      title: other_data_structures/persistent_queue.hpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/range_kth_smallest_offline.hpp
-      title: other_data_structures/range_kth_smallest_offline.hpp
-    - icon: ':warning:'
-      path: other_data_structures/rbst_fast.cpp
-      title: other_data_structures/rbst_fast.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/sliding_window_aggregation.hpp
-      title: other_data_structures/sliding_window_aggregation.hpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/static_range_inversion.hpp
-      title: other_data_structures/static_range_inversion.hpp
   - name: random
     pages:
     - icon: ':warning:'
@@ -511,6 +511,35 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/subset_convolution.test.cpp
       title: convolution/test/subset_convolution.test.cpp
+  - name: data_structure/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/assosiative_array.test.cpp
+      title: data_structure/test/assosiative_array.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/binary_trie.test.cpp
+      title: data_structure/test/binary_trie.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/fibonacci_heap_dijkstra.test.cpp
+      title: data_structure/test/fibonacci_heap_dijkstra.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/fibonacci_heap_shortestpath.test.cpp
+      title: data_structure/test/fibonacci_heap_shortestpath.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/fibonacci_heap_spanningtree.test.cpp
+      title: data_structure/test/fibonacci_heap_spanningtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/persistent_queue.test.cpp
+      title: data_structure/test/persistent_queue.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/queue_operate_all_composite.test.cpp
+      title: data_structure/test/queue_operate_all_composite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/range_kth_smallest_offline.test.cpp
+      title: data_structure/test/range_kth_smallest_offline.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/static_range_inversion.test.cpp
+      title: data_structure/test/static_range_inversion.test.cpp
   - name: formal_power_series/test
     pages:
     - icon: ':heavy_check_mark:'
@@ -695,35 +724,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
-  - name: other_data_structures/test
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/test/assosiative_array.test.cpp
-      title: other_data_structures/test/assosiative_array.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/test/binary_trie.test.cpp
-      title: other_data_structures/test/binary_trie.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/test/fibonacci_heap_dijkstra.test.cpp
-      title: other_data_structures/test/fibonacci_heap_dijkstra.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
-      title: other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
-      title: other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/test/persistent_queue.test.cpp
-      title: other_data_structures/test/persistent_queue.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/test/queue_operate_all_composite.test.cpp
-      title: other_data_structures/test/queue_operate_all_composite.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/test/range_kth_smallest_offline.test.cpp
-      title: other_data_structures/test/range_kth_smallest_offline.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: other_data_structures/test/static_range_inversion.test.cpp
-      title: other_data_structures/test/static_range_inversion.test.cpp
   - name: segmenttree/test
     pages:
     - icon: ':heavy_check_mark:'

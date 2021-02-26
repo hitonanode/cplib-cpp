@@ -4,24 +4,24 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/binary_trie.test.cpp
-    title: other_data_structures/test/binary_trie.test.cpp
+    path: data_structure/test/binary_trie.test.cpp
+    title: data_structure/test/binary_trie.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"other_data_structures/binary_trie.hpp\"\n#include <vector>\n\
-    \n// CUT begin\nstruct BinaryTrie {\n    using Int = int;\n    int maxD;\n   \
-    \ std::vector<int> deg, sz;\n    std::vector<int> ch0, ch1, par;\n\n    int _new_node(int\
-    \ id_par) {\n        deg.emplace_back(0);\n        sz.emplace_back(0);\n     \
-    \   ch0.emplace_back(-1);\n        ch1.emplace_back(-1);\n        par.emplace_back(id_par);\n\
-    \        return ch0.size() - 1;\n    }\n\n    BinaryTrie(int maxD = 0) : maxD(maxD)\
-    \ { _new_node(-1); }\n    int _goto(Int x) {\n        int now = 0;\n        for\
-    \ (int d = maxD - 1; d >= 0; d--) {\n            int nxt = ((x >> d) & 1) ? ch1[now]\
-    \ : ch0[now];\n            if (nxt == -1) {\n                nxt = _new_node(now);\n\
-    \                (((x >> d) & 1) ? ch1[now] : ch0[now]) = nxt;\n            }\n\
-    \            now = nxt;\n        }\n        return now;\n    }\n\n    void insert(Int\
+  bundledCode: "#line 2 \"data_structure/binary_trie.hpp\"\n#include <vector>\n\n\
+    // CUT begin\nstruct BinaryTrie {\n    using Int = int;\n    int maxD;\n    std::vector<int>\
+    \ deg, sz;\n    std::vector<int> ch0, ch1, par;\n\n    int _new_node(int id_par)\
+    \ {\n        deg.emplace_back(0);\n        sz.emplace_back(0);\n        ch0.emplace_back(-1);\n\
+    \        ch1.emplace_back(-1);\n        par.emplace_back(id_par);\n        return\
+    \ ch0.size() - 1;\n    }\n\n    BinaryTrie(int maxD = 0) : maxD(maxD) { _new_node(-1);\
+    \ }\n    int _goto(Int x) {\n        int now = 0;\n        for (int d = maxD -\
+    \ 1; d >= 0; d--) {\n            int nxt = ((x >> d) & 1) ? ch1[now] : ch0[now];\n\
+    \            if (nxt == -1) {\n                nxt = _new_node(now);\n       \
+    \         (((x >> d) & 1) ? ch1[now] : ch0[now]) = nxt;\n            }\n     \
+    \       now = nxt;\n        }\n        return now;\n    }\n\n    void insert(Int\
     \ x) {\n        int now = _goto(x);\n        if (deg[now] == 0) {\n          \
     \  deg[now] = 1;\n            while (now >= 0) { sz[now]++, now = par[now]; }\n\
     \        }\n    }\n\n    void erase(Int x) {\n        int now = _goto(x);\n  \
@@ -56,16 +56,16 @@ data:
     \ ^ y;\n            }\n        }\n        return ret;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: other_data_structures/binary_trie.hpp
+  path: data_structure/binary_trie.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_data_structures/test/binary_trie.test.cpp
-documentation_of: other_data_structures/binary_trie.hpp
+  - data_structure/test/binary_trie.test.cpp
+documentation_of: data_structure/binary_trie.hpp
 layout: document
 redirect_from:
-- /library/other_data_structures/binary_trie.hpp
-- /library/other_data_structures/binary_trie.hpp.html
-title: other_data_structures/binary_trie.hpp
+- /library/data_structure/binary_trie.hpp
+- /library/data_structure/binary_trie.hpp.html
+title: data_structure/binary_trie.hpp
 ---

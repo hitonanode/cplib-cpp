@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/light_forward_list.hpp
-    title: other_data_structures/light_forward_list.hpp
+    path: data_structure/light_forward_list.hpp
+    title: data_structure/light_forward_list.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -14,11 +14,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"other_data_structures/light_forward_list.hpp\"\n#include\
-    \ <vector>\n\n// CUT begin\n// Simple forward_list for MLE-sensitive situations\n\
-    // Verify: <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\n\
-    template <typename T> struct light_forward_list {\n    static std::vector<unsigned>\
-    \ ptr;\n    static std::vector<T> val;\n    unsigned head;\n    light_forward_list()\
+  bundledCode: "#line 2 \"data_structure/light_forward_list.hpp\"\n#include <vector>\n\
+    \n// CUT begin\n// Simple forward_list for MLE-sensitive situations\n// Verify:\
+    \ <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\ntemplate\
+    \ <typename T> struct light_forward_list {\n    static std::vector<unsigned> ptr;\n\
+    \    static std::vector<T> val;\n    unsigned head;\n    light_forward_list()\
     \ : head(0) {}\n    void push_front(T x) {\n        ptr.push_back(head), val.push_back(x);\n\
     \        head = ptr.size() - 1;\n    }\n    struct iterator {\n        unsigned\
     \ p;\n        iterator operator++() { return {p = ptr[p]}; }\n        T &operator*()\
@@ -81,10 +81,10 @@ data:
     \ return {chlist.begin()}; }\n    iterator end() { return {chlist.end()}; }\n\
     };\n\nint c2i_0aA(char c) { return isdigit(c) ? c - '0' : islower(c) ? c - 'a'\
     \ + 10 : c - 'A' + 36; }\n"
-  code: "#pragma once\n#include \"../other_data_structures/light_forward_list.hpp\"\
-    \n#include <iostream>\n#include <list>\n#include <string>\n#include <vector>\n\
-    \n// CUT begin\n// [1] B. Meyer, \"Incremental String Matching,\" Information\
-    \ Processing Letters, 21(5), 1985.\n//\n// (Dynamic version of Aho-Corasick algorithm)\n\
+  code: "#pragma once\n#include \"../data_structure/light_forward_list.hpp\"\n#include\
+    \ <iostream>\n#include <list>\n#include <string>\n#include <vector>\n\n// CUT\
+    \ begin\n// [1] B. Meyer, \"Incremental String Matching,\" Information Processing\
+    \ Letters, 21(5), 1985.\n//\n// (Dynamic version of Aho-Corasick algorithm)\n\
     // Overall complexity: O(K * (\\sum_i |keyword_i|) * (\\max_i |keyword_i|))\n\
     template <class T, int (*char2int)(char)> struct IncrementalMatching {\n    bool\
     \ built;\n    const int D;\n    std::vector<T> node;\n    IncrementalMatching(int\
@@ -137,11 +137,11 @@ data:
     \ }\n    iterator end() { return {chlist.end()}; }\n};\n\nint c2i_0aA(char c)\
     \ { return isdigit(c) ? c - '0' : islower(c) ? c - 'a' + 10 : c - 'A' + 36; }\n"
   dependsOn:
-  - other_data_structures/light_forward_list.hpp
+  - data_structure/light_forward_list.hpp
   isVerificationFile: false
   path: string/incremental_matching.hpp
   requiredBy: []
-  timestamp: '2021-01-30 19:37:15+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/incremental_matching.test.cpp

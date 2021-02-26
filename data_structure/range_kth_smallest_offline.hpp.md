@@ -7,8 +7,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/range_kth_smallest_offline.test.cpp
-    title: other_data_structures/test/range_kth_smallest_offline.test.cpp
+    path: data_structure/test/range_kth_smallest_offline.test.cpp
+    title: data_structure/test/range_kth_smallest_offline.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -28,8 +28,8 @@ data:
     \ std::ostream &operator<<(std::ostream &os, const BIT &bit) {\n        T prv\
     \ = 0;\n        os << '[';\n        for (int i = 1; i <= bit.n; i++) {\n     \
     \       T now = bit.sum(i);\n            os << now - prv << ',', prv = now;\n\
-    \        }\n        return os << ']';\n    }\n};\n#line 4 \"other_data_structures/range_kth_smallest_offline.hpp\"\
-    \n#include <cassert>\n#include <numeric>\n#line 7 \"other_data_structures/range_kth_smallest_offline.hpp\"\
+    \        }\n        return os << ']';\n    }\n};\n#line 4 \"data_structure/range_kth_smallest_offline.hpp\"\
+    \n#include <cassert>\n#include <numeric>\n#line 7 \"data_structure/range_kth_smallest_offline.hpp\"\
     \n\n// Offline solver to find k-th smallest elements in continuous subsequences\n\
     // - Problem statement: <https://judge.yosupo.jp/problem/range_kth_smallest>\n\
     // - Complexity: O((N + Q) lg(N + Q))\nstruct range_kth_smallest {\n    int N;\n\
@@ -81,16 +81,16 @@ data:
   dependsOn:
   - segmenttree/binary_indexed_tree.hpp
   isVerificationFile: false
-  path: other_data_structures/range_kth_smallest_offline.hpp
+  path: data_structure/range_kth_smallest_offline.hpp
   requiredBy: []
-  timestamp: '2020-12-29 19:26:14+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_data_structures/test/range_kth_smallest_offline.test.cpp
-documentation_of: other_data_structures/range_kth_smallest_offline.hpp
+  - data_structure/test/range_kth_smallest_offline.test.cpp
+documentation_of: data_structure/range_kth_smallest_offline.hpp
 layout: document
 redirect_from:
-- /library/other_data_structures/range_kth_smallest_offline.hpp
-- /library/other_data_structures/range_kth_smallest_offline.hpp.html
-title: other_data_structures/range_kth_smallest_offline.hpp
+- /library/data_structure/range_kth_smallest_offline.hpp
+- /library/data_structure/range_kth_smallest_offline.hpp.html
+title: data_structure/range_kth_smallest_offline.hpp
 ---

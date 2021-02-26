@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/light_forward_list.hpp
-    title: other_data_structures/light_forward_list.hpp
+    path: data_structure/light_forward_list.hpp
+    title: data_structure/light_forward_list.hpp
   - icon: ':heavy_check_mark:'
     path: string/aho_corasick.hpp
     title: string/aho_corasick.hpp
@@ -20,11 +20,11 @@ data:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D
-  bundledCode: "#line 2 \"other_data_structures/light_forward_list.hpp\"\n#include\
-    \ <vector>\n\n// CUT begin\n// Simple forward_list for MLE-sensitive situations\n\
-    // Verify: <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\n\
-    template <typename T> struct light_forward_list {\n    static std::vector<unsigned>\
-    \ ptr;\n    static std::vector<T> val;\n    unsigned head;\n    light_forward_list()\
+  bundledCode: "#line 2 \"data_structure/light_forward_list.hpp\"\n#include <vector>\n\
+    \n// CUT begin\n// Simple forward_list for MLE-sensitive situations\n// Verify:\
+    \ <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\ntemplate\
+    \ <typename T> struct light_forward_list {\n    static std::vector<unsigned> ptr;\n\
+    \    static std::vector<T> val;\n    unsigned head;\n    light_forward_list()\
     \ : head(0) {}\n    void push_front(T x) {\n        ptr.push_back(head), val.push_back(x);\n\
     \        head = ptr.size() - 1;\n    }\n    struct iterator {\n        unsigned\
     \ p;\n        iterator operator++() { return {p = ptr[p]}; }\n        T &operator*()\
@@ -123,11 +123,11 @@ data:
   dependsOn:
   - string/aho_corasick_online.hpp
   - string/aho_corasick.hpp
-  - other_data_structures/light_forward_list.hpp
+  - data_structure/light_forward_list.hpp
   isVerificationFile: true
   path: string/test/aho_corasick_online.test.cpp
   requiredBy: []
-  timestamp: '2021-01-30 19:37:15+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/aho_corasick_online.test.cpp

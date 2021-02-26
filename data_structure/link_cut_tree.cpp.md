@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"other_data_structures/link_cut_tree.cpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 1 \"data_structure/link_cut_tree.cpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n#define FOR(i, begin, end) for (int i = (begin), i##_end_\
     \ = (end); i < i##_end_; i++)\n#define REP(i, n) FOR(i, 0, n)\n\n// using VAL\
     \ = pair<lint, lint>;\nusing VAL = long long;\nusing LAZY = long long;\nconstexpr\
@@ -147,15 +147,15 @@ data:
     \ U >> V;\n        cout << lct.lca(vec[V], vec[U])->key << endl;\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: other_data_structures/link_cut_tree.cpp
+  path: data_structure/link_cut_tree.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:33:55+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: other_data_structures/link_cut_tree.cpp
+documentation_of: data_structure/link_cut_tree.cpp
 layout: document
 redirect_from:
-- /library/other_data_structures/link_cut_tree.cpp
-- /library/other_data_structures/link_cut_tree.cpp.html
-title: other_data_structures/link_cut_tree.cpp
+- /library/data_structure/link_cut_tree.cpp
+- /library/data_structure/link_cut_tree.cpp.html
+title: data_structure/link_cut_tree.cpp
 ---

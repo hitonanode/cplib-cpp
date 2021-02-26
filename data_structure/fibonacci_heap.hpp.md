@@ -4,14 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/fibonacci_heap_dijkstra.test.cpp
-    title: other_data_structures/test/fibonacci_heap_dijkstra.test.cpp
+    path: data_structure/test/fibonacci_heap_dijkstra.test.cpp
+    title: data_structure/test/fibonacci_heap_dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
-    title: other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
+    path: data_structure/test/fibonacci_heap_shortestpath.test.cpp
+    title: data_structure/test/fibonacci_heap_shortestpath.test.cpp
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
-    title: other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
+    path: data_structure/test/fibonacci_heap_spanningtree.test.cpp
+    title: data_structure/test/fibonacci_heap_spanningtree.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -19,7 +19,7 @@ data:
     links:
     - https://rsk0315.hatenablog.com/entry/2019/10/29/151823>
     - https://www.cs.princeton.edu/~wayne/teaching/fibonacci-heap.pdf>
-  bundledCode: "#line 2 \"other_data_structures/fibonacci_heap.hpp\"\n#include <array>\n\
+  bundledCode: "#line 2 \"data_structure/fibonacci_heap.hpp\"\n#include <array>\n\
     #include <cassert>\n#include <iostream>\n#include <list>\n\n// CUT begin\n// Fibonacci\
     \ heap\n// - Complexity:\n//   - empty(), size(), top(), push(), meld(): O(1)\n\
     //   - pop(), decrease(): O(lg N) amortized\n// - Reference:\n//   - \"Introduction\
@@ -197,18 +197,18 @@ data:
     \ }\n    bool empty() { return _heap.empty(); }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: other_data_structures/fibonacci_heap.hpp
+  path: data_structure/fibonacci_heap.hpp
   requiredBy: []
-  timestamp: '2021-01-01 16:38:37+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_data_structures/test/fibonacci_heap_dijkstra.test.cpp
-  - other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
-  - other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
-documentation_of: other_data_structures/fibonacci_heap.hpp
+  - data_structure/test/fibonacci_heap_dijkstra.test.cpp
+  - data_structure/test/fibonacci_heap_shortestpath.test.cpp
+  - data_structure/test/fibonacci_heap_spanningtree.test.cpp
+documentation_of: data_structure/fibonacci_heap.hpp
 layout: document
 redirect_from:
-- /library/other_data_structures/fibonacci_heap.hpp
-- /library/other_data_structures/fibonacci_heap.hpp.html
-title: other_data_structures/fibonacci_heap.hpp
+- /library/data_structure/fibonacci_heap.hpp
+- /library/data_structure/fibonacci_heap.hpp.html
+title: data_structure/fibonacci_heap.hpp
 ---

@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/fibonacci_heap.hpp
-    title: other_data_structures/fibonacci_heap.hpp
+    path: data_structure/fibonacci_heap.hpp
+    title: data_structure/fibonacci_heap.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,7 +14,7 @@ data:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A
-  bundledCode: "#line 2 \"other_data_structures/fibonacci_heap.hpp\"\n#include <array>\n\
+  bundledCode: "#line 2 \"data_structure/fibonacci_heap.hpp\"\n#include <array>\n\
     #include <cassert>\n#include <iostream>\n#include <list>\n\n// CUT begin\n// Fibonacci\
     \ heap\n// - Complexity:\n//   - empty(), size(), top(), push(), meld(): O(1)\n\
     //   - pop(), decrease(): O(lg N) amortized\n// - Reference:\n//   - \"Introduction\
@@ -101,10 +101,10 @@ data:
     \    }\n    Tp operator[](int i) const { return result.at(i); }\n    P top() {\
     \ return _heap.top(); }\n    P pop() {\n        P ret = _heap.top();\n       \
     \ _heap.pop();\n        return ret;\n    }\n    int size() { return _heap.size();\
-    \ }\n    bool empty() { return _heap.empty(); }\n};\n#line 2 \"other_data_structures/test/fibonacci_heap_spanningtree.test.cpp\"\
+    \ }\n    bool empty() { return _heap.empty(); }\n};\n#line 2 \"data_structure/test/fibonacci_heap_spanningtree.test.cpp\"\
     \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A\"\
-    \n\n#line 6 \"other_data_structures/test/fibonacci_heap_spanningtree.test.cpp\"\
-    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n\n#line 6 \"data_structure/test/fibonacci_heap_spanningtree.test.cpp\"\nusing\
+    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int V, E;\n    cin >> V >> E;\n    fibonacci_heap<pair<int, int>> hp;\n\n\
     \    vector<vector<pair<int, int>>> to(V);\n    vector<int> belong(V);\n    while\
     \ (E--) {\n        int s, t, w;\n        cin >> s >> t >> w;\n        to[s].emplace_back(w,\
@@ -128,17 +128,17 @@ data:
     \        belong[i] = 1;\n        for (auto p : to[i])\n            if (!belong[p.second])\
     \ hp.push(p);\n    }\n    cout << ret << '\\n';\n}\n"
   dependsOn:
-  - other_data_structures/fibonacci_heap.hpp
+  - data_structure/fibonacci_heap.hpp
   isVerificationFile: true
-  path: other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
+  path: data_structure/test/fibonacci_heap_spanningtree.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:38:37+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
+documentation_of: data_structure/test/fibonacci_heap_spanningtree.test.cpp
 layout: document
 redirect_from:
-- /verify/other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
-- /verify/other_data_structures/test/fibonacci_heap_spanningtree.test.cpp.html
-title: other_data_structures/test/fibonacci_heap_spanningtree.test.cpp
+- /verify/data_structure/test/fibonacci_heap_spanningtree.test.cpp
+- /verify/data_structure/test/fibonacci_heap_spanningtree.test.cpp.html
+title: data_structure/test/fibonacci_heap_spanningtree.test.cpp
 ---

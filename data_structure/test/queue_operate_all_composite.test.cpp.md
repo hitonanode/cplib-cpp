@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: data_structure/sliding_window_aggregation.hpp
+    title: data_structure/sliding_window_aggregation.hpp
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
-    path: other_data_structures/sliding_window_aggregation.hpp
-    title: other_data_structures/sliding_window_aggregation.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -87,7 +87,7 @@ data:
     \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
     \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
     template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
-    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"other_data_structures/sliding_window_aggregation.hpp\"\
+    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"data_structure/sliding_window_aggregation.hpp\"\
     \n#include <stack>\n#include <utility>\nusing namespace std;\n\n// CUT begin\n\
     // Sliding-Window Aggregation based queue\n// - `std::queue`-like data structure\
     \ with monoid operation\n// - Each operation is amortized O(1)\n// - Verification:\
@@ -118,13 +118,13 @@ data:
     \ <typename T> struct LinearFunctionQueue : public SlidingWindowAggregation<pair<T,\
     \ T>, pair<T, T>, swag_op_id, swag_op_linear_merge> {\n    LinearFunctionQueue()\
     \ : SlidingWindowAggregation<pair<T, T>, pair<T, T>, swag_op_id, swag_op_linear_merge>::SlidingWindowAggregation(pair<T,\
-    \ T>(1, 0)) {}\n};\n#line 3 \"other_data_structures/test/queue_operate_all_composite.test.cpp\"\
+    \ T>(1, 0)) {}\n};\n#line 3 \"data_structure/test/queue_operate_all_composite.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
-    \n#line 5 \"other_data_structures/test/queue_operate_all_composite.test.cpp\"\n\
-    \nusing mint = ModInt<998244353>;\nint main() {\n    LinearFunctionQueue<mint>\
-    \ swag;\n    int Q;\n    cin >> Q;\n    while (Q--) {\n        int q;\n      \
-    \  cin >> q;\n        if (q == 0) {\n            mint a, b;\n            cin >>\
-    \ a >> b;\n            swag.push({a, b});\n        }\n        if (q == 1) swag.pop();\n\
+    \n#line 5 \"data_structure/test/queue_operate_all_composite.test.cpp\"\n\nusing\
+    \ mint = ModInt<998244353>;\nint main() {\n    LinearFunctionQueue<mint> swag;\n\
+    \    int Q;\n    cin >> Q;\n    while (Q--) {\n        int q;\n        cin >>\
+    \ q;\n        if (q == 0) {\n            mint a, b;\n            cin >> a >> b;\n\
+    \            swag.push({a, b});\n        }\n        if (q == 1) swag.pop();\n\
     \        if (q == 2) {\n            mint x;\n            cin >> x;\n         \
     \   pair<mint, mint> f = swag.fold_all();\n            printf(\"%d\\n\", (f.first\
     \ * x + f.second).val);\n        }\n    }\n}\n"
@@ -139,17 +139,17 @@ data:
     \ * x + f.second).val);\n        }\n    }\n}\n"
   dependsOn:
   - modint.hpp
-  - other_data_structures/sliding_window_aggregation.hpp
+  - data_structure/sliding_window_aggregation.hpp
   isVerificationFile: true
-  path: other_data_structures/test/queue_operate_all_composite.test.cpp
+  path: data_structure/test/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:38:37+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: other_data_structures/test/queue_operate_all_composite.test.cpp
+documentation_of: data_structure/test/queue_operate_all_composite.test.cpp
 layout: document
 redirect_from:
-- /verify/other_data_structures/test/queue_operate_all_composite.test.cpp
-- /verify/other_data_structures/test/queue_operate_all_composite.test.cpp.html
-title: other_data_structures/test/queue_operate_all_composite.test.cpp
+- /verify/data_structure/test/queue_operate_all_composite.test.cpp
+- /verify/data_structure/test/queue_operate_all_composite.test.cpp.html
+title: data_structure/test/queue_operate_all_composite.test.cpp
 ---

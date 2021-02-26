@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/persistent_queue.hpp
-    title: other_data_structures/persistent_queue.hpp
+    path: data_structure/persistent_queue.hpp
+    title: data_structure/persistent_queue.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,7 +14,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/persistent_queue
     links:
     - https://judge.yosupo.jp/problem/persistent_queue
-  bundledCode: "#line 2 \"other_data_structures/persistent_queue.hpp\"\n#include <array>\n\
+  bundledCode: "#line 2 \"data_structure/persistent_queue.hpp\"\n#include <array>\n\
     #include <cassert>\n#include <utility>\n#include <vector>\n\n// CUT begin\n//\
     \ Fully persistent queue\ntemplate <typename T, int D> struct persistent_queue\
     \ {\n    int now;\n\n    std::vector<T> data;                 // Elements on each\
@@ -33,8 +33,8 @@ data:
     \        par.push_back({}), par.back()[0] = back_id[t];\n        back_id.emplace_back(newid),\
     \ size.emplace_back(size[t] + 1);\n        for (int d = 1; d < D; d++) par[newid][d]\
     \ = par[par[newid][d - 1]][d - 1];\n        return now;\n    }\n};\n#line 2 \"\
-    other_data_structures/test/persistent_queue.test.cpp\"\n#include <iostream>\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/persistent_queue\"\nusing namespace\
+    data_structure/test/persistent_queue.test.cpp\"\n#include <iostream>\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/persistent_queue\"\nusing namespace\
     \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n\
     \    persistent_queue<int, 18> pq;\n    int Q;\n    cin >> Q;\n    while (Q--)\
     \ {\n        int q, t;\n        cin >> q >> t;\n        if (q == 0) {\n      \
@@ -49,17 +49,17 @@ data:
     \  cin >> x;\n            pq.push(t + 1, x);\n        } else {\n            cout\
     \ << pq.pop(t + 1).second << '\\n';\n        }\n    }\n}\n"
   dependsOn:
-  - other_data_structures/persistent_queue.hpp
+  - data_structure/persistent_queue.hpp
   isVerificationFile: true
-  path: other_data_structures/test/persistent_queue.test.cpp
+  path: data_structure/test/persistent_queue.test.cpp
   requiredBy: []
-  timestamp: '2020-11-19 00:13:36+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: other_data_structures/test/persistent_queue.test.cpp
+documentation_of: data_structure/test/persistent_queue.test.cpp
 layout: document
 redirect_from:
-- /verify/other_data_structures/test/persistent_queue.test.cpp
-- /verify/other_data_structures/test/persistent_queue.test.cpp.html
-title: other_data_structures/test/persistent_queue.test.cpp
+- /verify/data_structure/test/persistent_queue.test.cpp
+- /verify/data_structure/test/persistent_queue.test.cpp.html
+title: data_structure/test/persistent_queue.test.cpp
 ---

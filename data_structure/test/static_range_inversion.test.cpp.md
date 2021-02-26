@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/static_range_inversion.hpp
-    title: other_data_structures/static_range_inversion.hpp
+    path: data_structure/static_range_inversion.hpp
+    title: data_structure/static_range_inversion.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,11 +14,10 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/static_range_inversions_query
     links:
     - https://judge.yosupo.jp/problem/static_range_inversions_query
-  bundledCode: "#line 2 \"other_data_structures/static_range_inversion.hpp\"\n#include\
-    \ <algorithm>\n#include <cassert>\n#include <cmath>\n#include <utility>\n#include\
-    \ <vector>\n\n// CUT begin\n// Static Range Inversion Query (Online)\n// Complexity:\
-    \ O((N + Q)sqrt(N)) time, O(Nsqrt(N)) space (~128MB for N=1e5)\n// Reference:\
-    \ <https://stackoverflow.com/questions/21763392/counting-inversions-in-ranges>\n\
+  bundledCode: "#line 2 \"data_structure/static_range_inversion.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#include <cmath>\n#include <utility>\n#include <vector>\n\n\
+    // CUT begin\n// Static Range Inversion Query (Online)\n// Complexity: O((N +\
+    \ Q)sqrt(N)) time, O(Nsqrt(N)) space (~128MB for N=1e5)\n// Reference: <https://stackoverflow.com/questions/21763392/counting-inversions-in-ranges>\n\
     template <typename T> struct StaticRangeInversion {\n    const int N;\n    const\
     \ int bs;    // bucket size\n    const int nb_bc; // # of buckets\n    std::vector<int>\
     \ vals;\n    std::vector<std::pair<int, int>> vals_sorted;\n    std::vector<std::vector<int>>\
@@ -67,7 +66,7 @@ data:
     \            while (j < std::min(N, (rb + 2) * bs) and (vals_sorted[j].second\
     \ >= r or vals_sorted[j].first < vals_sorted[p].first)) { less_cnt += (vals_sorted[j].second\
     \ < r), j++; }\n                ret += less_cnt;\n            }\n        }\n \
-    \       return ret;\n    }\n};\n#line 2 \"other_data_structures/test/static_range_inversion.test.cpp\"\
+    \       return ret;\n    }\n};\n#line 2 \"data_structure/test/static_range_inversion.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
     \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int N, Q;\n    cin >> N >> Q;\n    vector<int>\
@@ -81,17 +80,17 @@ data:
     \n    while (Q--) {\n        int l, r;\n        cin >> l >> r;\n        cout <<\
     \ riq.get(l, r) << '\\n';\n    }\n}\n"
   dependsOn:
-  - other_data_structures/static_range_inversion.hpp
+  - data_structure/static_range_inversion.hpp
   isVerificationFile: true
-  path: other_data_structures/test/static_range_inversion.test.cpp
+  path: data_structure/test/static_range_inversion.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:38:37+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: other_data_structures/test/static_range_inversion.test.cpp
+documentation_of: data_structure/test/static_range_inversion.test.cpp
 layout: document
 redirect_from:
-- /verify/other_data_structures/test/static_range_inversion.test.cpp
-- /verify/other_data_structures/test/static_range_inversion.test.cpp.html
-title: other_data_structures/test/static_range_inversion.test.cpp
+- /verify/data_structure/test/static_range_inversion.test.cpp
+- /verify/data_structure/test/static_range_inversion.test.cpp.html
+title: data_structure/test/static_range_inversion.test.cpp
 ---

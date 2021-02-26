@@ -4,14 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/persistent_queue.test.cpp
-    title: other_data_structures/test/persistent_queue.test.cpp
+    path: data_structure/test/persistent_queue.test.cpp
+    title: data_structure/test/persistent_queue.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"other_data_structures/persistent_queue.hpp\"\n#include <array>\n\
+  bundledCode: "#line 2 \"data_structure/persistent_queue.hpp\"\n#include <array>\n\
     #include <cassert>\n#include <utility>\n#include <vector>\n\n// CUT begin\n//\
     \ Fully persistent queue\ntemplate <typename T, int D> struct persistent_queue\
     \ {\n    int now;\n\n    std::vector<T> data;                 // Elements on each\
@@ -51,16 +51,16 @@ data:
     \        return now;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: other_data_structures/persistent_queue.hpp
+  path: data_structure/persistent_queue.hpp
   requiredBy: []
-  timestamp: '2020-11-19 00:13:36+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_data_structures/test/persistent_queue.test.cpp
-documentation_of: other_data_structures/persistent_queue.hpp
+  - data_structure/test/persistent_queue.test.cpp
+documentation_of: data_structure/persistent_queue.hpp
 layout: document
 redirect_from:
-- /library/other_data_structures/persistent_queue.hpp
-- /library/other_data_structures/persistent_queue.hpp.html
-title: other_data_structures/persistent_queue.hpp
+- /library/data_structure/persistent_queue.hpp
+- /library/data_structure/persistent_queue.hpp.html
+title: data_structure/persistent_queue.hpp
 ---

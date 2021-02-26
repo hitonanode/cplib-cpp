@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/fibonacci_heap.hpp
-    title: other_data_structures/fibonacci_heap.hpp
+    path: data_structure/fibonacci_heap.hpp
+    title: data_structure/fibonacci_heap.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -11,16 +11,14 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/shortest_path
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A
     links:
-    - https://judge.yosupo.jp/problem/shortest_path
-  bundledCode: "#line 1 \"other_data_structures/test/fibonacci_heap_shortestpath.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n\n#line 2\
-    \ \"other_data_structures/fibonacci_heap.hpp\"\n#include <array>\n#include <cassert>\n\
-    #include <iostream>\n#include <list>\n\n// CUT begin\n// Fibonacci heap\n// -\
-    \ Complexity:\n//   - empty(), size(), top(), push(), meld(): O(1)\n//   - pop(),\
-    \ decrease(): O(lg N) amortized\n// - Reference:\n//   - \"Introduction to Algorithms,\
-    \ Third Edition\", Chapter 19\n//   - <https://www.cs.princeton.edu/~wayne/teaching/fibonacci-heap.pdf>\n\
+    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A
+  bundledCode: "#line 2 \"data_structure/fibonacci_heap.hpp\"\n#include <array>\n\
+    #include <cassert>\n#include <iostream>\n#include <list>\n\n// CUT begin\n// Fibonacci\
+    \ heap\n// - Complexity:\n//   - empty(), size(), top(), push(), meld(): O(1)\n\
+    //   - pop(), decrease(): O(lg N) amortized\n// - Reference:\n//   - \"Introduction\
+    \ to Algorithms, Third Edition\", Chapter 19\n//   - <https://www.cs.princeton.edu/~wayne/teaching/fibonacci-heap.pdf>\n\
     //   - <https://rsk0315.hatenablog.com/entry/2019/10/29/151823>\ntemplate <typename\
     \ Tp> struct fibonacci_heap {\n    struct Node {\n        Tp val;\n        int\
     \ deg;\n        Node *parent, *left, *right, *child;\n        bool mark;\n   \
@@ -103,60 +101,41 @@ data:
     \    }\n    Tp operator[](int i) const { return result.at(i); }\n    P top() {\
     \ return _heap.top(); }\n    P pop() {\n        P ret = _heap.top();\n       \
     \ _heap.pop();\n        return ret;\n    }\n    int size() { return _heap.size();\
-    \ }\n    bool empty() { return _heap.empty(); }\n};\n#line 5 \"other_data_structures/test/fibonacci_heap_shortestpath.test.cpp\"\
-    \n#include <stack>\n#line 8 \"other_data_structures/test/fibonacci_heap_shortestpath.test.cpp\"\
-    \n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
-    \n    int N, M, s, t;\n    std::cin >> N >> M >> s >> t;\n    using P = std::pair<long\
-    \ long, int>;\n    fibonacci_heap<P> heap;\n\n    constexpr long long INF = 1e18;\n\
-    \    std::vector<long long> D(N, INF);\n    std::vector<int> prev(N, -1);\n  \
-    \  D[s] = 0;\n    std::vector<fibonacci_heap<P>::Node *> handler(N);\n    for\
-    \ (int i = 0; i < N; i++) { handler[i] = heap.push(std::make_pair(D[i], i)); }\n\
-    \n    std::vector<std::vector<std::pair<int, int>>> to(N);\n    while (M--) {\n\
-    \        int a, b, c;\n        std::cin >> a >> b >> c;\n        to[a].emplace_back(b,\
-    \ c);\n    }\n\n    while (heap.size()) {\n        int now = heap.top().second;\n\
-    \        if (now == t) break;\n        heap.pop();\n        for (const auto &nxtlen\
-    \ : to[now]) {\n            const auto nxt = nxtlen.first, len = nxtlen.second;\n\
-    \            if (D[nxt] > D[now] + len) {\n                D[nxt] = D[now] + len,\
-    \ prev[nxt] = now;\n                heap.decrease(handler[nxt], std::make_pair(D[nxt],\
-    \ nxt));\n            }\n        }\n    }\n\n    if (D[t] == INF) {\n        std::cout\
-    \ << -1 << '\\n';\n        return 0;\n    }\n\n    std::stack<int> path;\n   \
-    \ int now = t;\n    while (now != s) { path.push(now), now = prev[now], path.push(now);\
-    \ }\n    std::cout << D[t] << ' ' << path.size() / 2 << '\\n';\n    while (path.size())\
-    \ {\n        std::cout << path.top() << ' ';\n        path.pop();\n        std::cout\
-    \ << path.top() << '\\n';\n        path.pop();\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n\n#include\
-    \ \"../fibonacci_heap.hpp\"\n#include <iostream>\n#include <stack>\n#include <utility>\n\
-    #include <vector>\n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
-    \n    int N, M, s, t;\n    std::cin >> N >> M >> s >> t;\n    using P = std::pair<long\
-    \ long, int>;\n    fibonacci_heap<P> heap;\n\n    constexpr long long INF = 1e18;\n\
-    \    std::vector<long long> D(N, INF);\n    std::vector<int> prev(N, -1);\n  \
-    \  D[s] = 0;\n    std::vector<fibonacci_heap<P>::Node *> handler(N);\n    for\
-    \ (int i = 0; i < N; i++) { handler[i] = heap.push(std::make_pair(D[i], i)); }\n\
-    \n    std::vector<std::vector<std::pair<int, int>>> to(N);\n    while (M--) {\n\
-    \        int a, b, c;\n        std::cin >> a >> b >> c;\n        to[a].emplace_back(b,\
-    \ c);\n    }\n\n    while (heap.size()) {\n        int now = heap.top().second;\n\
-    \        if (now == t) break;\n        heap.pop();\n        for (const auto &nxtlen\
-    \ : to[now]) {\n            const auto nxt = nxtlen.first, len = nxtlen.second;\n\
-    \            if (D[nxt] > D[now] + len) {\n                D[nxt] = D[now] + len,\
-    \ prev[nxt] = now;\n                heap.decrease(handler[nxt], std::make_pair(D[nxt],\
-    \ nxt));\n            }\n        }\n    }\n\n    if (D[t] == INF) {\n        std::cout\
-    \ << -1 << '\\n';\n        return 0;\n    }\n\n    std::stack<int> path;\n   \
-    \ int now = t;\n    while (now != s) { path.push(now), now = prev[now], path.push(now);\
-    \ }\n    std::cout << D[t] << ' ' << path.size() / 2 << '\\n';\n    while (path.size())\
-    \ {\n        std::cout << path.top() << ' ';\n        path.pop();\n        std::cout\
-    \ << path.top() << '\\n';\n        path.pop();\n    }\n}\n"
+    \ }\n    bool empty() { return _heap.empty(); }\n};\n#line 2 \"data_structure/test/fibonacci_heap_dijkstra.test.cpp\"\
+    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A\"\
+    \n\n#line 6 \"data_structure/test/fibonacci_heap_dijkstra.test.cpp\"\nusing namespace\
+    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n\
+    \    int V, E, R;\n    cin >> V >> E >> R;\n\n    using lint = long long;\n  \
+    \  using plint = pair<lint, lint>;\n    heap<lint> fib(V, 1e18);\n    fib.chmin(R,\
+    \ 0);\n\n    vector<vector<plint>> to(V);\n    while (E--) {\n        int s, t,\
+    \ d;\n        cin >> s >> t >> d;\n        to[s].emplace_back(t, d);\n    }\n\
+    \    while (fib.size()) {\n        int now = fib.pop().second;\n        for (auto\
+    \ p : to[now]) fib.chmin(p.first, fib[now] + p.second);\n    }\n\n    for (auto\
+    \ x : fib.result) {\n        if (x == 1e18)\n            cout << \"INF\\n\";\n\
+    \        else\n            cout << x << '\\n';\n    }\n}\n"
+  code: "#include \"../fibonacci_heap.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A\"\
+    \n\n#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main()\
+    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int V, E, R;\n\
+    \    cin >> V >> E >> R;\n\n    using lint = long long;\n    using plint = pair<lint,\
+    \ lint>;\n    heap<lint> fib(V, 1e18);\n    fib.chmin(R, 0);\n\n    vector<vector<plint>>\
+    \ to(V);\n    while (E--) {\n        int s, t, d;\n        cin >> s >> t >> d;\n\
+    \        to[s].emplace_back(t, d);\n    }\n    while (fib.size()) {\n        int\
+    \ now = fib.pop().second;\n        for (auto p : to[now]) fib.chmin(p.first, fib[now]\
+    \ + p.second);\n    }\n\n    for (auto x : fib.result) {\n        if (x == 1e18)\n\
+    \            cout << \"INF\\n\";\n        else\n            cout << x << '\\n';\n\
+    \    }\n}\n"
   dependsOn:
-  - other_data_structures/fibonacci_heap.hpp
+  - data_structure/fibonacci_heap.hpp
   isVerificationFile: true
-  path: other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
+  path: data_structure/test/fibonacci_heap_dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:38:37+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
+documentation_of: data_structure/test/fibonacci_heap_dijkstra.test.cpp
 layout: document
 redirect_from:
-- /verify/other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
-- /verify/other_data_structures/test/fibonacci_heap_shortestpath.test.cpp.html
-title: other_data_structures/test/fibonacci_heap_shortestpath.test.cpp
+- /verify/data_structure/test/fibonacci_heap_dijkstra.test.cpp
+- /verify/data_structure/test/fibonacci_heap_dijkstra.test.cpp.html
+title: data_structure/test/fibonacci_heap_dijkstra.test.cpp
 ---

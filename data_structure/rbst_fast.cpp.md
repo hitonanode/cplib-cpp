@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"other_data_structures/rbst_fast.cpp\"\n// Persistent Randomized\
+  bundledCode: "#line 1 \"data_structure/rbst_fast.cpp\"\n// Persistent Randomized\
     \ Binary Search Tree\n// Verified : ARC033C\u30FBARC030D\n\n#include <bits/stdc++.h>\n\
     using namespace std;\n#define FOR(i, begin, end) for (int i = (begin); i < (end);\
     \ i++)\n#define REP(i, n) FOR(i, 0, n)\n\nusing lint = long long;\nstruct node\
@@ -260,15 +260,15 @@ data:
     \ > mem_size * 0.8) rbst.re_alloc(S);\n    }\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: other_data_structures/rbst_fast.cpp
+  path: data_structure/rbst_fast.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: other_data_structures/rbst_fast.cpp
+documentation_of: data_structure/rbst_fast.cpp
 layout: document
 redirect_from:
-- /library/other_data_structures/rbst_fast.cpp
-- /library/other_data_structures/rbst_fast.cpp.html
-title: other_data_structures/rbst_fast.cpp
+- /library/data_structure/rbst_fast.cpp
+- /library/data_structure/rbst_fast.cpp.html
+title: data_structure/rbst_fast.cpp
 ---

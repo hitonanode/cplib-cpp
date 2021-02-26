@@ -33,11 +33,11 @@ data:
   attributes:
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>
-  bundledCode: "#line 2 \"other_data_structures/light_forward_list.hpp\"\n#include\
-    \ <vector>\n\n// CUT begin\n// Simple forward_list for MLE-sensitive situations\n\
-    // Verify: <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\n\
-    template <typename T> struct light_forward_list {\n    static std::vector<unsigned>\
-    \ ptr;\n    static std::vector<T> val;\n    unsigned head;\n    light_forward_list()\
+  bundledCode: "#line 2 \"data_structure/light_forward_list.hpp\"\n#include <vector>\n\
+    \n// CUT begin\n// Simple forward_list for MLE-sensitive situations\n// Verify:\
+    \ <http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>\ntemplate\
+    \ <typename T> struct light_forward_list {\n    static std::vector<unsigned> ptr;\n\
+    \    static std::vector<T> val;\n    unsigned head;\n    light_forward_list()\
     \ : head(0) {}\n    void push_front(T x) {\n        ptr.push_back(head), val.push_back(x);\n\
     \        head = ptr.size() - 1;\n    }\n    struct iterator {\n        unsigned\
     \ p;\n        iterator operator++() { return {p = ptr[p]}; }\n        T &operator*()\
@@ -58,12 +58,12 @@ data:
     \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {T()};\n"
   dependsOn: []
   isVerificationFile: false
-  path: other_data_structures/light_forward_list.hpp
+  path: data_structure/light_forward_list.hpp
   requiredBy:
   - string/aho_corasick.hpp
   - string/aho_corasick_online.hpp
   - string/incremental_matching.hpp
-  timestamp: '2021-01-30 19:37:15+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/aho_corasick_forwardlist.test.cpp
@@ -71,10 +71,10 @@ data:
   - string/test/incremental_matching.test.cpp
   - string/test/aho_corasick_unorderedmap.test.cpp
   - string/test/aho_corasick_vector.test.cpp
-documentation_of: other_data_structures/light_forward_list.hpp
+documentation_of: data_structure/light_forward_list.hpp
 layout: document
 redirect_from:
-- /library/other_data_structures/light_forward_list.hpp
-- /library/other_data_structures/light_forward_list.hpp.html
-title: other_data_structures/light_forward_list.hpp
+- /library/data_structure/light_forward_list.hpp
+- /library/data_structure/light_forward_list.hpp.html
+title: data_structure/light_forward_list.hpp
 ---

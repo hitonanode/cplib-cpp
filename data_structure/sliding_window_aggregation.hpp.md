@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: other_data_structures/test/queue_operate_all_composite.test.cpp
-    title: other_data_structures/test/queue_operate_all_composite.test.cpp
+    path: data_structure/test/queue_operate_all_composite.test.cpp
+    title: data_structure/test/queue_operate_all_composite.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -13,11 +13,10 @@ data:
     links:
     - https://github.com/NiMiLib/NoshiMochiLibrary/blob/queue_aggregation/lib/data_structure/sequence/queue_aggregation.hpp>
     - https://www.hackerrank.com/contests/tsg-live-4-programming-contest/challenges/tsg-live-4-procon-lcm-interval/submissions/code/1317888077>
-  bundledCode: "#line 2 \"other_data_structures/sliding_window_aggregation.hpp\"\n\
-    #include <stack>\n#include <utility>\nusing namespace std;\n\n// CUT begin\n//\
-    \ Sliding-Window Aggregation based queue\n// - `std::queue`-like data structure\
-    \ with monoid operation\n// - Each operation is amortized O(1)\n// - Verification:\
-    \ <https://www.hackerrank.com/contests/tsg-live-4-programming-contest/challenges/tsg-live-4-procon-lcm-interval/submissions/code/1317888077>\n\
+  bundledCode: "#line 2 \"data_structure/sliding_window_aggregation.hpp\"\n#include\
+    \ <stack>\n#include <utility>\nusing namespace std;\n\n// CUT begin\n// Sliding-Window\
+    \ Aggregation based queue\n// - `std::queue`-like data structure with monoid operation\n\
+    // - Each operation is amortized O(1)\n// - Verification: <https://www.hackerrank.com/contests/tsg-live-4-programming-contest/challenges/tsg-live-4-procon-lcm-interval/submissions/code/1317888077>\n\
     // - Reference: <https://github.com/NiMiLib/NoshiMochiLibrary/blob/queue_aggregation/lib/data_structure/sequence/queue_aggregation.hpp>\n\
     template <typename T_VAL, typename T_PROD, T_PROD (*val2prod)(T_VAL), T_PROD (*merge)(T_PROD,\
     \ T_PROD)> struct SlidingWindowAggregation {\n    std::stack<std::pair<T_VAL,\
@@ -78,16 +77,16 @@ data:
     \ T>(1, 0)) {}\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: other_data_structures/sliding_window_aggregation.hpp
+  path: data_structure/sliding_window_aggregation.hpp
   requiredBy: []
-  timestamp: '2021-01-01 16:38:37+09:00'
+  timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_data_structures/test/queue_operate_all_composite.test.cpp
-documentation_of: other_data_structures/sliding_window_aggregation.hpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
+documentation_of: data_structure/sliding_window_aggregation.hpp
 layout: document
 redirect_from:
-- /library/other_data_structures/sliding_window_aggregation.hpp
-- /library/other_data_structures/sliding_window_aggregation.hpp.html
-title: other_data_structures/sliding_window_aggregation.hpp
+- /library/data_structure/sliding_window_aggregation.hpp
+- /library/data_structure/sliding_window_aggregation.hpp.html
+title: data_structure/sliding_window_aggregation.hpp
 ---
