@@ -5,10 +5,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/range_kth_smallest_offline.hpp
     title: data_structure/range_kth_smallest_offline.hpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/rectangle_sum.hpp
+    title: data_structure/rectangle_sum.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/range_kth_smallest_offline.test.cpp
     title: data_structure/test/range_kth_smallest_offline.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/rectange_sum.test.cpp
+    title: data_structure/test/rectange_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/binary_indexed_tree.test.cpp
     title: segmenttree/test/binary_indexed_tree.test.cpp
@@ -52,9 +58,11 @@ data:
   path: segmenttree/binary_indexed_tree.hpp
   requiredBy:
   - data_structure/range_kth_smallest_offline.hpp
+  - data_structure/rectangle_sum.hpp
   timestamp: '2020-12-29 19:26:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - data_structure/test/rectange_sum.test.cpp
   - data_structure/test/range_kth_smallest_offline.test.cpp
   - segmenttree/test/point-add-range-sum.test.cpp
   - segmenttree/test/binary_indexed_tree.test.cpp

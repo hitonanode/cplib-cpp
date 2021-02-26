@@ -91,6 +91,9 @@ data:
       path: data_structure/rbst_fast.cpp
       title: data_structure/rbst_fast.cpp
     - icon: ':heavy_check_mark:'
+      path: data_structure/rectangle_sum.hpp
+      title: data_structure/rectangle_sum.hpp
+    - icon: ':heavy_check_mark:'
       path: data_structure/sliding_window_aggregation.hpp
       title: data_structure/sliding_window_aggregation.hpp
     - icon: ':heavy_check_mark:'
@@ -537,6 +540,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/range_kth_smallest_offline.test.cpp
       title: data_structure/test/range_kth_smallest_offline.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/rectange_sum.test.cpp
+      title: data_structure/test/rectange_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/static_range_inversion.test.cpp
       title: data_structure/test/static_range_inversion.test.cpp
