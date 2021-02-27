@@ -7,11 +7,12 @@
 
 // CUT begin
 // MinCostFlow based on AtCoder Library, no namespace, no private variables, compatible with C++11
-// Reference: <https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html>
 // **NO NEGATIVE COST EDGES**
+// Reference: https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html
+// Remark: You can use [radix heap](https://github.com/iwiwi/radix-heap) for Dijkstra acceleration
 template <class Cap, class Cost> struct mcf_graph {
     mcf_graph() {}
-    mcf_graph(int n) : _n(n), g(n) {}
+    mcf_graph(int n) : _n(n), g(n) { static_assert(std::numeric_limits<Cap>::max() > 0); }
 
     int add_edge(int from, int to, Cap cap, Cost cost) {
         assert(0 <= from && from < _n);
