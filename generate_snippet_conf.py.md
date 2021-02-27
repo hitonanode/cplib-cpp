@@ -31,13 +31,13 @@ data:
     \ json_info = dfs(filepath)\n            json_ret.update(json_info)\n        \
     \    if ch_info:\n                ret += ['+' + ch]\n                ret += ch_info\n\
     \                ret += ['..']\n        if os.path.isfile(filepath) and len(filepath)\
-    \ > 4 and filepath[-4:] == '.hpp':\n            ret += read_hpp(filepath)\n  \
-    \          json_ret[filepath[2:-4]] = filepath\n    return ret, json_ret\n\n\n\
-    if __name__ == '__main__':\n    ret, json_ret = dfs(rootdir)\n    ret = config_header\
-    \ + ret\n\n    with open('ClipBoardHistoryConfig.txt', 'w') as f:\n        for\
-    \ line in ret:\n            f.write(line + '\\r\\n')\n\n    with open('SnippetConfig.json',\
-    \ 'w') as f:\n        json.dump(json_ret, f, ensure_ascii=False, sort_keys=True,\
-    \ indent=4)\n"
+    \ > 4 and (filepath[-4:] == '.hpp' or filepath[-2:] == '.h'):\n            ret\
+    \ += read_hpp(filepath)\n            json_ret[filepath[2:-4]] = filepath\n   \
+    \ return ret, json_ret\n\n\nif __name__ == '__main__':\n    ret, json_ret = dfs(rootdir)\n\
+    \    ret = config_header + ret\n\n    with open('ClipBoardHistoryConfig.txt',\
+    \ 'w') as f:\n        for line in ret:\n            f.write(line + '\\r\\n')\n\
+    \n    with open('SnippetConfig.json', 'w') as f:\n        json.dump(json_ret,\
+    \ f, ensure_ascii=False, sort_keys=True, indent=4)\n"
   dependsOn: []
   isVerificationFile: false
   path: generate_snippet_conf.py
