@@ -45,7 +45,7 @@ def dfs(current_dir):
                 ret += ['+' + ch]
                 ret += ch_info
                 ret += ['..']
-        if os.path.isfile(filepath) and len(filepath) > 4 and filepath[-4:] == '.hpp':
+        if os.path.isfile(filepath) and len(filepath) > 4 and (filepath[-4:] == '.hpp' or filepath[-2:] == '.h'):
             ret += read_hpp(filepath)
             json_ret[filepath[2:-4]] = filepath
     return ret, json_ret

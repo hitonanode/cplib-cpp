@@ -10,7 +10,7 @@
   - C++11-friendly (for topcoder SRM)
   - No macro such as `REP(i, n)`
 - Easy to remember usage of codes which have not been used for long time
-  - Concise usage on `.hpp` files
+  - Concise usage on `.hpp` / `.h` files
   - Less code length
 - Proactively introducing non-essential codes (such as UnionFind for 2D grids) to realize fast AC
 
