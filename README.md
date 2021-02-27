@@ -28,9 +28,9 @@ You can easily insert the snippets using [Clipboard History](https://blank-note.
 
 ## License
 
-The programs written by the owner of the repo is under the MIT License, but you can freely use or modify C++ codes without any notice for programming contests or online judges.
+Some files in this repo (such as `network-simplex.hpp`) contains peculiar license statements. These files are under the particular license.
 
-Some scripts for CI are borrowed from https://github.com/kmyk/online-judge-verify-helper.
+Except such snippets, the programs written by the owner of the repo is under the MIT License, but you can freely use or modify C++ codes without any notice for programming contests or online judges.
 
 ## Format
 
