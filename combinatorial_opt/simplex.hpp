@@ -1,15 +1,19 @@
 #pragma once
+#include <algorithm>
+#include <chrono>
 #include <cmath>
 #include <numeric>
+#include <random>
 #include <vector>
 
 // CUT begin
 // Maximize cx s.t. Ax <= b, x >= 0
 // Implementation idea: https://kopricky.github.io/code/Computation_Advanced/simplex.html
 // Refer to https://hitonanode.github.io/cplib-cpp/combinatorial_opt/simplex.hpp
-template <typename Float = double, int DEPS = 30> struct Simplex {
+template <typename Float = double, int DEPS = 30, bool Randomize = true> struct Simplex {
     const Float EPS = Float(1.0) / (1LL << DEPS);
     int N, M;
+    std::vector<int> shuffle_idx;
     std::vector<int> idx;
     std::vector<std::vector<Float>> mat;
     int i_ch, j_ch;
@@ -35,7 +39,7 @@ private:
     inline Float abs_(Float x) noexcept { return x > -x ? x : -x; }
     void _solve() {
         std::vector<int> jupd;
-        for (j_ch = N;;) {
+        for (nb_iter = 0, j_ch = N;; nb_iter++) {
             if (i_ch < M) {
                 std::swap(idx[j_ch], idx[i_ch + N + 1]);
                 mat[i_ch][j_ch] = Float(1) / mat[i_ch][j_ch];
@@ -90,11 +94,38 @@ private:
     }
 
 public:
-    Simplex(const std::vector<std::vector<Float>> &A, const std::vector<Float> &b, const std::vector<Float> &c) {
+    Simplex(std::vector<std::vector<Float>> A, std::vector<Float> b, std::vector<Float> c) {
         is_infty = infeasible = false;
+
+        if (Randomize) {
+            std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+
+            std::vector<std::pair<std::vector<Float>, Float>> Abs;
+            for (unsigned i = 0; i < A.size(); i++) Abs.emplace_back(A[i], b[i]);
+            std::shuffle(Abs.begin(), Abs.end(), rng);
+            A.clear(), b.clear();
+            for (auto &&Ab : Abs) A.emplace_back(Ab.first), b.emplace_back(Ab.second);
+
+            shuffle_idx.resize(c.size());
+            std::iota(shuffle_idx.begin(), shuffle_idx.end(), 0);
+            std::shuffle(shuffle_idx.begin(), shuffle_idx.end(), rng);
+            auto Atmp = A;
+            auto ctmp = c;
+            for (unsigned i = 0; i < A.size(); i++) {
+                for (unsigned j = 0; j < A[i].size(); j++) A[i][j] = Atmp[i][shuffle_idx[j]];
+            }
+            for (unsigned j = 0; j < c.size(); j++) c[j] = ctmp[shuffle_idx[j]];
+        }
+
         _initialize(A, b, c);
         _solve();
+
+        if (Randomize) {
+            auto xtmp = x;
+            for (unsigned j = 0; j < c.size(); j++) x[shuffle_idx[j]] = xtmp[j];
+        }
     }
+    unsigned nb_iter;
     bool is_infty;
     bool infeasible;
     std::vector<Float> x;
