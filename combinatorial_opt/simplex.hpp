@@ -14,7 +14,8 @@ template <typename Float = double, int DEPS = 30> struct Simplex {
     std::vector<std::vector<Float>> mat;
     int i_ch, j_ch;
 
-    void initialize(const std::vector<std::vector<Float>> &A, const std::vector<Float> &b, const std::vector<Float> &c) {
+private:
+    void _initialize(const std::vector<std::vector<Float>> &A, const std::vector<Float> &b, const std::vector<Float> &c) {
         N = c.size(), M = A.size();
 
         mat.assign(M + 2, std::vector<Float>(N + 2));
@@ -32,7 +33,7 @@ template <typename Float = double, int DEPS = 30> struct Simplex {
     }
 
     inline Float abs_(Float x) noexcept { return x > -x ? x : -x; }
-    void solve() {
+    void _solve() {
         std::vector<int> jupd;
         for (j_ch = N;;) {
             if (i_ch < M) {
@@ -87,10 +88,12 @@ template <typename Float = double, int DEPS = 30> struct Simplex {
         }
         ans = mat[M][N + 1];
     }
+
+public:
     Simplex(const std::vector<std::vector<Float>> &A, const std::vector<Float> &b, const std::vector<Float> &c) {
         is_infty = infeasible = false;
-        initialize(A, b, c);
-        solve();
+        _initialize(A, b, c);
+        _solve();
     }
     bool is_infty;
     bool infeasible;
