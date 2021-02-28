@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/simplex.maxflow.test.cpp
     title: combinatorial_opt/test/simplex.maxflow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/simplex.mcf.test.cpp
     title: combinatorial_opt/test/simplex.mcf.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,9 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/simplex.shortestpath.test.cpp
     title: combinatorial_opt/test/simplex.shortestpath.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://hitonanode.github.io/cplib-cpp/combinatorial_opt/simplex.hpp
@@ -82,11 +82,11 @@ data:
     \ (unsigned i = 0; i < A.size(); i++) {\n                for (unsigned j = 0;\
     \ j < A[i].size(); j++) A[i][j] = Atmp[i][shuffle_idx[j]];\n            }\n  \
     \          for (unsigned j = 0; j < c.size(); j++) c[j] = ctmp[shuffle_idx[j]];\n\
-    \        }\n\n        _initialize(A, b, c);\n        _solve();\n\n        if (Randomize)\
-    \ {\n            auto xtmp = x;\n            for (unsigned j = 0; j < c.size();\
-    \ j++) x[shuffle_idx[j]] = xtmp[j];\n        }\n    }\n    unsigned nb_iter;\n\
-    \    bool is_infty;\n    bool infeasible;\n    std::vector<Float> x;\n    Float\
-    \ ans;\n};\n"
+    \        }\n\n        _initialize(A, b, c);\n        _solve();\n\n        if (Randomize\
+    \ and x.size() == c.size()) {\n            auto xtmp = x;\n            for (unsigned\
+    \ j = 0; j < c.size(); j++) x[shuffle_idx[j]] = xtmp[j];\n        }\n    }\n \
+    \   unsigned nb_iter;\n    bool is_infty;\n    bool infeasible;\n    std::vector<Float>\
+    \ x;\n    Float ans;\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <chrono>\n#include <cmath>\n\
     #include <numeric>\n#include <random>\n#include <vector>\n\n// CUT begin\n// Maximize\
     \ cx s.t. Ax <= b, x >= 0\n// Implementation idea: https://kopricky.github.io/code/Computation_Advanced/simplex.html\n\
@@ -143,17 +143,17 @@ data:
     \ (unsigned i = 0; i < A.size(); i++) {\n                for (unsigned j = 0;\
     \ j < A[i].size(); j++) A[i][j] = Atmp[i][shuffle_idx[j]];\n            }\n  \
     \          for (unsigned j = 0; j < c.size(); j++) c[j] = ctmp[shuffle_idx[j]];\n\
-    \        }\n\n        _initialize(A, b, c);\n        _solve();\n\n        if (Randomize)\
-    \ {\n            auto xtmp = x;\n            for (unsigned j = 0; j < c.size();\
-    \ j++) x[shuffle_idx[j]] = xtmp[j];\n        }\n    }\n    unsigned nb_iter;\n\
-    \    bool is_infty;\n    bool infeasible;\n    std::vector<Float> x;\n    Float\
-    \ ans;\n};\n"
+    \        }\n\n        _initialize(A, b, c);\n        _solve();\n\n        if (Randomize\
+    \ and x.size() == c.size()) {\n            auto xtmp = x;\n            for (unsigned\
+    \ j = 0; j < c.size(); j++) x[shuffle_idx[j]] = xtmp[j];\n        }\n    }\n \
+    \   unsigned nb_iter;\n    bool is_infty;\n    bool infeasible;\n    std::vector<Float>\
+    \ x;\n    Float ans;\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: combinatorial_opt/simplex.hpp
   requiredBy: []
-  timestamp: '2021-02-28 16:35:09+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-02-28 16:53:36+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/simplex.easy.test.cpp
   - combinatorial_opt/test/simplex.multiprecision.test.cpp
@@ -229,10 +229,11 @@ $
   - さもなくば原点が実行可能領域から飛び出るので
   - 複数存在する場合は添字番号最小（Bland's rule）
 
-#### ワーストケースの回避
+### ワーストケースの回避
 
 - 指数回のステップを要する恣意的なケースが知られている．
 - 特に [1] の p.43 (2.71) で挙げられているケースに関しては，変数・制約の順序をランダムに取り換えることで回避が可能であることを経験的に確認したので，デフォルトでこれを行うことにした．
+- ただし，常にシャッフルした方がよいわけではなく，[最小費用流の問題](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B) ではむしろ遅くなった．
 
 ## 問題例
 

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/simplex.hpp
     title: "Simplex method \uFF08\u5358\u4F53\u6CD5\uFF09"
   _extendedRequiredBy: []
@@ -71,11 +71,11 @@ data:
     \ (unsigned i = 0; i < A.size(); i++) {\n                for (unsigned j = 0;\
     \ j < A[i].size(); j++) A[i][j] = Atmp[i][shuffle_idx[j]];\n            }\n  \
     \          for (unsigned j = 0; j < c.size(); j++) c[j] = ctmp[shuffle_idx[j]];\n\
-    \        }\n\n        _initialize(A, b, c);\n        _solve();\n\n        if (Randomize)\
-    \ {\n            auto xtmp = x;\n            for (unsigned j = 0; j < c.size();\
-    \ j++) x[shuffle_idx[j]] = xtmp[j];\n        }\n    }\n    unsigned nb_iter;\n\
-    \    bool is_infty;\n    bool infeasible;\n    std::vector<Float> x;\n    Float\
-    \ ans;\n};\n#line 2 \"combinatorial_opt/test/simplex.multiprecision.test.cpp\"\
+    \        }\n\n        _initialize(A, b, c);\n        _solve();\n\n        if (Randomize\
+    \ and x.size() == c.size()) {\n            auto xtmp = x;\n            for (unsigned\
+    \ j = 0; j < c.size(); j++) x[shuffle_idx[j]] = xtmp[j];\n        }\n    }\n \
+    \   unsigned nb_iter;\n    bool is_infty;\n    bool infeasible;\n    std::vector<Float>\
+    \ x;\n    Float ans;\n};\n#line 2 \"combinatorial_opt/test/simplex.multiprecision.test.cpp\"\
     \n#include <boost/multiprecision/cpp_dec_float.hpp>\n#include <iostream>\n#line\
     \ 5 \"combinatorial_opt/test/simplex.multiprecision.test.cpp\"\n#define PROBLEM\
     \ \"https://yukicoder.me/problems/no/1122\"\nusing namespace std;\n\nint main()\
@@ -98,7 +98,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/simplex.multiprecision.test.cpp
   requiredBy: []
-  timestamp: '2021-02-28 16:35:09+09:00'
+  timestamp: '2021-02-28 16:53:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/simplex.multiprecision.test.cpp

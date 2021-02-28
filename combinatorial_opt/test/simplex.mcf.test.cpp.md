@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/simplex.hpp
     title: "Simplex method \uFF08\u5358\u4F53\u6CD5\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
@@ -71,13 +71,13 @@ data:
     \ (unsigned i = 0; i < A.size(); i++) {\n                for (unsigned j = 0;\
     \ j < A[i].size(); j++) A[i][j] = Atmp[i][shuffle_idx[j]];\n            }\n  \
     \          for (unsigned j = 0; j < c.size(); j++) c[j] = ctmp[shuffle_idx[j]];\n\
-    \        }\n\n        _initialize(A, b, c);\n        _solve();\n\n        if (Randomize)\
-    \ {\n            auto xtmp = x;\n            for (unsigned j = 0; j < c.size();\
-    \ j++) x[shuffle_idx[j]] = xtmp[j];\n        }\n    }\n    unsigned nb_iter;\n\
-    \    bool is_infty;\n    bool infeasible;\n    std::vector<Float> x;\n    Float\
-    \ ans;\n};\n#line 2 \"combinatorial_opt/test/simplex.mcf.test.cpp\"\n#include\
-    \ <iostream>\n#line 4 \"combinatorial_opt/test/simplex.mcf.test.cpp\"\n#define\
-    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
+    \        }\n\n        _initialize(A, b, c);\n        _solve();\n\n        if (Randomize\
+    \ and x.size() == c.size()) {\n            auto xtmp = x;\n            for (unsigned\
+    \ j = 0; j < c.size(); j++) x[shuffle_idx[j]] = xtmp[j];\n        }\n    }\n \
+    \   unsigned nb_iter;\n    bool is_infty;\n    bool infeasible;\n    std::vector<Float>\
+    \ x;\n    Float ans;\n};\n#line 2 \"combinatorial_opt/test/simplex.mcf.test.cpp\"\
+    \n#include <iostream>\n#line 4 \"combinatorial_opt/test/simplex.mcf.test.cpp\"\
+    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
     \nusing namespace std;\n\nint main() {\n    int V, E, F;\n    cin >> V >> E >>\
     \ F;\n    using Float = double;\n    vector<vector<Float>> A(V * 2, vector<Float>(E,\
     \ 0));\n    vector<Float> b(V * 2);\n    vector<Float> c;\n    b[0] = b[2 * V\
@@ -85,8 +85,9 @@ data:
     \   int u, v, cap, cost;\n        cin >> u >> v >> cap >> cost;\n        A[u][e]\
     \ += 1, A[u + V][e] -= 1;\n        A[v][e] -= 1, A[v + V][e] += 1;\n        vector<Float>\
     \ vec(E);\n        vec[e]++;\n        A.push_back(vec);\n        b.push_back(cap);\n\
-    \        c.push_back(-cost);\n    }\n    Simplex<Float, 20> simplex(A, b, c);\n\
-    \    cout << (simplex.infeasible ? -1 : -llround(simplex.ans)) << '\\n';\n}\n"
+    \        c.push_back(-cost);\n    }\n    Simplex<Float, 20, false> simplex(A,\
+    \ b, c);\n    cout << (simplex.infeasible ? -1 : -llround(simplex.ans)) << '\\\
+    n';\n}\n"
   code: "#include \"../simplex.hpp\"\n#include <iostream>\n#include <vector>\n#define\
     \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
     \nusing namespace std;\n\nint main() {\n    int V, E, F;\n    cin >> V >> E >>\
@@ -96,15 +97,16 @@ data:
     \   int u, v, cap, cost;\n        cin >> u >> v >> cap >> cost;\n        A[u][e]\
     \ += 1, A[u + V][e] -= 1;\n        A[v][e] -= 1, A[v + V][e] += 1;\n        vector<Float>\
     \ vec(E);\n        vec[e]++;\n        A.push_back(vec);\n        b.push_back(cap);\n\
-    \        c.push_back(-cost);\n    }\n    Simplex<Float, 20> simplex(A, b, c);\n\
-    \    cout << (simplex.infeasible ? -1 : -llround(simplex.ans)) << '\\n';\n}\n"
+    \        c.push_back(-cost);\n    }\n    Simplex<Float, 20, false> simplex(A,\
+    \ b, c);\n    cout << (simplex.infeasible ? -1 : -llround(simplex.ans)) << '\\\
+    n';\n}\n"
   dependsOn:
   - combinatorial_opt/simplex.hpp
   isVerificationFile: true
   path: combinatorial_opt/test/simplex.mcf.test.cpp
   requiredBy: []
-  timestamp: '2021-02-28 16:35:09+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-02-28 16:53:36+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/simplex.mcf.test.cpp
 layout: document
