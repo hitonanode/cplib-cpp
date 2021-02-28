@@ -120,7 +120,7 @@ public:
         _initialize(A, b, c);
         _solve();
 
-        if (Randomize) {
+        if (Randomize and x.size() == c.size()) {
             auto xtmp = x;
             for (unsigned j = 0; j < c.size(); j++) x[shuffle_idx[j]] = xtmp[j];
         }

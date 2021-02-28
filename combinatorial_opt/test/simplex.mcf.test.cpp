@@ -24,6 +24,6 @@ int main() {
         b.push_back(cap);
         c.push_back(-cost);
     }
-    Simplex<Float, 20> simplex(A, b, c);
+    Simplex<Float, 20, false> simplex(A, b, c);
     cout << (simplex.infeasible ? -1 : -llround(simplex.ans)) << '\n';
 }
