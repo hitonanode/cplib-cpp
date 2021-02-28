@@ -28,7 +28,7 @@ data:
       path: combinatorial_opt/networksimplex.hpp
       title: "Network simplex method \uFF08\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\
         \u4F53\u6CD5\uFF0Cbased on LEMON\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: combinatorial_opt/simplex.hpp
       title: "Simplex method \uFF08\u5358\u4F53\u6CD5\uFF09"
     - icon: ':warning:'
@@ -487,7 +487,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/simplex.maxflow.test.cpp
       title: combinatorial_opt/test/simplex.maxflow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: combinatorial_opt/test/simplex.mcf.test.cpp
       title: combinatorial_opt/test/simplex.mcf.test.cpp
     - icon: ':heavy_check_mark:'
