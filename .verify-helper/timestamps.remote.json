@@ -12,6 +12,7 @@
 "convolution/test/bitwise_and_conv.test.cpp": "2020-12-20 04:05:21 +0900",
 "convolution/test/bitwise_xor_conv.test.cpp": "2020-12-20 04:05:21 +0900",
 "convolution/test/hadamard_xor.test.cpp": "2020-12-20 04:05:21 +0900",
+"convolution/test/multivar_ntt.test.cpp": "2021-03-05 02:54:52 +0900",
 "convolution/test/ntt.test.cpp": "2020-12-02 23:44:04 +0900",
 "convolution/test/ntt_arbitrary_mod.test.cpp": "2020-12-02 23:44:04 +0900",
 "convolution/test/subset_convolution.test.cpp": "2020-12-02 23:44:04 +0900",
