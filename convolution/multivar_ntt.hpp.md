@@ -17,7 +17,8 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
-    - https://rushcheyo.blog.uoj.ac/blog/6547W
+    - https://hitonanode.github.io/cplib-cpp/convolution/multivar_ntt.hpp
+    - https://rushcheyo.blog.uoj.ac/blog/6547
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
     \ <vector>\n\n// CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus\
     \ >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using\
@@ -145,39 +146,11 @@ data:
     \ = nttconv_<nttprimes[2]>(ai, bi);\n        a.resize(n + m - 1);\n        for\
     \ (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val,\
     \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 4 \"convolution/multivar_ntt.hpp\"\
-    \n#include <numeric>\n#line 6 \"convolution/multivar_ntt.hpp\"\n\n// Multivariate\
-    \ convolution (Linear, overflow cutoff)\n// Complexity: $O(kN \\log N + k^2 N)$\n\
-    // Note that the vectors store the infomation in **column-major order**\n// Implementation\
-    \ idea: https://rushcheyo.blog.uoj.ac/blog/6547W\ntemplate <typename MODINT> struct\
-    \ multivar_ntt {\n    int K, N, fftlen;\n    std::vector<int> dim;\n    std::vector<int>\
-    \ chi;\n    MODINT invfftlen;\n\nprivate:\n    void _initialize(const std::vector<int>\
-    \ &dim_) {\n        dim = dim_;\n        K = dim_.size();\n        N = std::accumulate(dim_.begin(),\
-    \ dim_.end(), 1, [&](int l, int r) { return l * r; });\n        fftlen = 1;\n\
-    \        while (fftlen < N * 2) fftlen <<= 1;\n        invfftlen = MODINT(fftlen).inv();\n\
-    \n        chi.resize(fftlen);\n        int t = 1;\n        for (auto d : dim_)\
-    \ {\n            t *= d;\n            for (int s = t; s < fftlen; s += t) chi[s]\
-    \ += 1;\n        }\n        for (int i = 0; i + 1 < fftlen; i++) {\n         \
-    \   chi[i + 1] += chi[i];\n            if (chi[i + 1] >= K) chi[i + 1] -= K;\n\
-    \        }\n    }\n\n    std::vector<MODINT> _convolve(const std::vector<MODINT>\
-    \ &f, const std::vector<MODINT> &g) {\n        assert(int(f.size()) == N);\n \
-    \       assert(int(g.size()) == N);\n        if (dim.empty()) return {f[0] * g[0]};\n\
-    \        std::vector<std::vector<MODINT>> fex(K, std::vector<MODINT>(fftlen)),\
-    \ gex(K, std::vector<MODINT>(fftlen));\n        for (int i = 0; i < N; i++) fex[chi[i]][i]\
-    \ = f[i], gex[chi[i]][i] = g[i];\n        for (auto &vec : fex) ntt(vec, false);\n\
-    \        for (auto &vec : gex) ntt(vec, false);\n        std::vector<std::vector<MODINT>>\
-    \ hex(K, std::vector<MODINT>(fftlen));\n        for (int df = 0; df < K; df++)\
-    \ {\n            for (int dg = 0; dg < K; dg++) {\n                int dh = (df\
-    \ + dg < K) ? df + dg : df + dg - K;\n                for (int i = 0; i < fftlen;\
-    \ i++) hex[dh][i] += fex[df][i] * gex[dg][i];\n            }\n        }\n    \
-    \    for (auto &vec : hex) ntt(vec, true);\n        std::vector<MODINT> ret(N);\n\
-    \        for (int i = 0; i < N; i++) ret[i] = hex[chi[i]][i];\n        return\
-    \ ret;\n    }\n\npublic:\n    multivar_ntt(const std::vector<int> &dim_) { _initialize(dim_);\
-    \ }\n    std::vector<MODINT> operator()(const std::vector<MODINT> &f, const std::vector<MODINT>\
-    \ &g) {\n        return _convolve(f, g);\n    }\n};\n"
-  code: "#pragma once\n#include \"ntt.hpp\"\n#include <cassert>\n#include <numeric>\n\
-    #include <vector>\n\n// Multivariate convolution (Linear, overflow cutoff)\n//\
-    \ Complexity: $O(kN \\log N + k^2 N)$\n// Note that the vectors store the infomation\
-    \ in **column-major order**\n// Implementation idea: https://rushcheyo.blog.uoj.ac/blog/6547W\n\
+    \n#include <numeric>\n#line 6 \"convolution/multivar_ntt.hpp\"\n\n// CUT begin\n\
+    // Multivariate convolution (Linear, overflow cutoff)\n// Complexity: $O(kN \\\
+    log N + k^2 N)$\n// Note that the vectors store the infomation in **column-major\
+    \ order**\n// Implementation idea: https://rushcheyo.blog.uoj.ac/blog/6547\n//\
+    \ Details of my implementation: https://hitonanode.github.io/cplib-cpp/convolution/multivar_ntt.hpp\n\
     template <typename MODINT> struct multivar_ntt {\n    int K, N, fftlen;\n    std::vector<int>\
     \ dim;\n    std::vector<int> chi;\n    MODINT invfftlen;\n\nprivate:\n    void\
     \ _initialize(const std::vector<int> &dim_) {\n        dim = dim_;\n        K\
@@ -188,9 +161,9 @@ data:
     \        for (int s = t; s < fftlen; s += t) chi[s] += 1;\n        }\n       \
     \ for (int i = 0; i + 1 < fftlen; i++) {\n            chi[i + 1] += chi[i];\n\
     \            if (chi[i + 1] >= K) chi[i + 1] -= K;\n        }\n    }\n\n    std::vector<MODINT>\
-    \ _convolve(const std::vector<MODINT> &f, const std::vector<MODINT> &g) {\n  \
-    \      assert(int(f.size()) == N);\n        assert(int(g.size()) == N);\n    \
-    \    if (dim.empty()) return {f[0] * g[0]};\n        std::vector<std::vector<MODINT>>\
+    \ _convolve(const std::vector<MODINT> &f, const std::vector<MODINT> &g) const\
+    \ {\n        assert(int(f.size()) == N);\n        assert(int(g.size()) == N);\n\
+    \        if (dim.empty()) return {f[0] * g[0]};\n        std::vector<std::vector<MODINT>>\
     \ fex(K, std::vector<MODINT>(fftlen)), gex(K, std::vector<MODINT>(fftlen));\n\
     \        for (int i = 0; i < N; i++) fex[chi[i]][i] = f[i], gex[chi[i]][i] = g[i];\n\
     \        for (auto &vec : fex) ntt(vec, false);\n        for (auto &vec : gex)\
@@ -202,15 +175,46 @@ data:
     \     std::vector<MODINT> ret(N);\n        for (int i = 0; i < N; i++) ret[i]\
     \ = hex[chi[i]][i];\n        return ret;\n    }\n\npublic:\n    multivar_ntt(const\
     \ std::vector<int> &dim_) { _initialize(dim_); }\n    std::vector<MODINT> operator()(const\
-    \ std::vector<MODINT> &f, const std::vector<MODINT> &g) {\n        return _convolve(f,\
-    \ g);\n    }\n};\n"
+    \ std::vector<MODINT> &f, const std::vector<MODINT> &g) const {\n        return\
+    \ _convolve(f, g);\n    }\n};\n"
+  code: "#pragma once\n#include \"ntt.hpp\"\n#include <cassert>\n#include <numeric>\n\
+    #include <vector>\n\n// CUT begin\n// Multivariate convolution (Linear, overflow\
+    \ cutoff)\n// Complexity: $O(kN \\log N + k^2 N)$\n// Note that the vectors store\
+    \ the infomation in **column-major order**\n// Implementation idea: https://rushcheyo.blog.uoj.ac/blog/6547\n\
+    // Details of my implementation: https://hitonanode.github.io/cplib-cpp/convolution/multivar_ntt.hpp\n\
+    template <typename MODINT> struct multivar_ntt {\n    int K, N, fftlen;\n    std::vector<int>\
+    \ dim;\n    std::vector<int> chi;\n    MODINT invfftlen;\n\nprivate:\n    void\
+    \ _initialize(const std::vector<int> &dim_) {\n        dim = dim_;\n        K\
+    \ = dim_.size();\n        N = std::accumulate(dim_.begin(), dim_.end(), 1, [&](int\
+    \ l, int r) { return l * r; });\n        fftlen = 1;\n        while (fftlen <\
+    \ N * 2) fftlen <<= 1;\n        invfftlen = MODINT(fftlen).inv();\n\n        chi.resize(fftlen);\n\
+    \        int t = 1;\n        for (auto d : dim_) {\n            t *= d;\n    \
+    \        for (int s = t; s < fftlen; s += t) chi[s] += 1;\n        }\n       \
+    \ for (int i = 0; i + 1 < fftlen; i++) {\n            chi[i + 1] += chi[i];\n\
+    \            if (chi[i + 1] >= K) chi[i + 1] -= K;\n        }\n    }\n\n    std::vector<MODINT>\
+    \ _convolve(const std::vector<MODINT> &f, const std::vector<MODINT> &g) const\
+    \ {\n        assert(int(f.size()) == N);\n        assert(int(g.size()) == N);\n\
+    \        if (dim.empty()) return {f[0] * g[0]};\n        std::vector<std::vector<MODINT>>\
+    \ fex(K, std::vector<MODINT>(fftlen)), gex(K, std::vector<MODINT>(fftlen));\n\
+    \        for (int i = 0; i < N; i++) fex[chi[i]][i] = f[i], gex[chi[i]][i] = g[i];\n\
+    \        for (auto &vec : fex) ntt(vec, false);\n        for (auto &vec : gex)\
+    \ ntt(vec, false);\n        std::vector<std::vector<MODINT>> hex(K, std::vector<MODINT>(fftlen));\n\
+    \        for (int df = 0; df < K; df++) {\n            for (int dg = 0; dg < K;\
+    \ dg++) {\n                int dh = (df + dg < K) ? df + dg : df + dg - K;\n \
+    \               for (int i = 0; i < fftlen; i++) hex[dh][i] += fex[df][i] * gex[dg][i];\n\
+    \            }\n        }\n        for (auto &vec : hex) ntt(vec, true);\n   \
+    \     std::vector<MODINT> ret(N);\n        for (int i = 0; i < N; i++) ret[i]\
+    \ = hex[chi[i]][i];\n        return ret;\n    }\n\npublic:\n    multivar_ntt(const\
+    \ std::vector<int> &dim_) { _initialize(dim_); }\n    std::vector<MODINT> operator()(const\
+    \ std::vector<MODINT> &f, const std::vector<MODINT> &g) const {\n        return\
+    \ _convolve(f, g);\n    }\n};\n"
   dependsOn:
   - convolution/ntt.hpp
   - modint.hpp
   isVerificationFile: false
   path: convolution/multivar_ntt.hpp
   requiredBy: []
-  timestamp: '2021-03-05 02:54:52+09:00'
+  timestamp: '2021-03-05 03:10:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/multivar_ntt.test.cpp
@@ -236,7 +240,7 @@ $
 
 を計算（線形畳み込み，「はみ出し」分は無視）．
 
-### アルゴリズム（要点）
+## アルゴリズム（要点）
 
 [参考](https://rushcheyo.blog.uoj.ac/blog/6547)
 
