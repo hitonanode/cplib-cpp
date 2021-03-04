@@ -4,10 +4,12 @@
 #include <numeric>
 #include <vector>
 
+// CUT begin
 // Multivariate convolution (Linear, overflow cutoff)
 // Complexity: $O(kN \log N + k^2 N)$
 // Note that the vectors store the infomation in **column-major order**
-// Implementation idea: https://rushcheyo.blog.uoj.ac/blog/6547W
+// Implementation idea: https://rushcheyo.blog.uoj.ac/blog/6547
+// Details of my implementation: https://hitonanode.github.io/cplib-cpp/convolution/multivar_ntt.hpp
 template <typename MODINT> struct multivar_ntt {
     int K, N, fftlen;
     std::vector<int> dim;
@@ -35,7 +37,7 @@ private:
         }
     }
 
-    std::vector<MODINT> _convolve(const std::vector<MODINT> &f, const std::vector<MODINT> &g) {
+    std::vector<MODINT> _convolve(const std::vector<MODINT> &f, const std::vector<MODINT> &g) const {
         assert(int(f.size()) == N);
         assert(int(g.size()) == N);
         if (dim.empty()) return {f[0] * g[0]};
@@ -58,7 +60,7 @@ private:
 
 public:
     multivar_ntt(const std::vector<int> &dim_) { _initialize(dim_); }
-    std::vector<MODINT> operator()(const std::vector<MODINT> &f, const std::vector<MODINT> &g) {
+    std::vector<MODINT> operator()(const std::vector<MODINT> &f, const std::vector<MODINT> &g) const {
         return _convolve(f, g);
     }
 };
