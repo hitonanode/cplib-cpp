@@ -63,6 +63,10 @@ data:
       path: convolution/integer_convolution.hpp
       title: convolution/integer_convolution.hpp
     - icon: ':heavy_check_mark:'
+      path: convolution/multivar_ntt.hpp
+      title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
+        \u7573\u307F\u8FBC\u307F\uFF09"
+    - icon: ':heavy_check_mark:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
     - icon: ':heavy_check_mark:'
@@ -512,6 +516,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/hadamard_xor.test.cpp
       title: convolution/test/hadamard_xor.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: convolution/test/multivar_ntt.test.cpp
+      title: convolution/test/multivar_ntt.test.cpp
     - icon: ':heavy_check_mark:'
       path: convolution/test/ntt.test.cpp
       title: convolution/test/ntt.test.cpp

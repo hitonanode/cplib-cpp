@@ -164,10 +164,10 @@ data:
   timestamp: '2021-02-21 15:19:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/shortest_path.test.cpp
-  - graph/test/shortest_cycle.test.cpp
   - graph/test/spfa.test.cpp
   - graph/test/warshallfloyd.test.cpp
+  - graph/test/shortest_cycle.test.cpp
+  - graph/test/shortest_path.test.cpp
   - graph/test/bellman_ford.test.cpp
 documentation_of: graph/shortest_path.hpp
 layout: document

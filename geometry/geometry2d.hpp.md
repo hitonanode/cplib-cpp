@@ -197,8 +197,8 @@ data:
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - geometry/test/convex_hull.test.cpp
   - geometry/test/convex_cut.test.cpp
+  - geometry/test/convex_hull.test.cpp
 documentation_of: geometry/geometry2d.hpp
 layout: document
 redirect_from:

@@ -180,8 +180,8 @@ data:
   timestamp: '2021-02-26 00:36:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/vertex-add-path-sum.test.cpp
   - tree/test/vertex-set-path-composite.test.cpp
+  - tree/test/vertex-add-path-sum.test.cpp
   - tree/test/hl_decomposition.test.cpp
 documentation_of: tree/heavy_light_decomposition.hpp
 layout: document

@@ -6,6 +6,10 @@ data:
     path: convolution/convolutive_translation_2d.hpp
     title: convolution/convolutive_translation_2d.hpp
   - icon: ':heavy_check_mark:'
+    path: convolution/multivar_ntt.hpp
+    title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
+      \u307F\u8FBC\u307F\uFF09"
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
@@ -33,6 +37,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/bitwise_xor_conv.test.cpp
     title: convolution/test/bitwise_xor_conv.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/multivar_ntt.test.cpp
+    title: convolution/test/multivar_ntt.test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
@@ -283,52 +290,54 @@ data:
   isVerificationFile: false
   path: modint.hpp
   requiredBy:
-  - segmenttree/trees/acl_range-affine-range-sum.hpp
-  - tree/tree_isomorphism.hpp
-  - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/formal_power_series.hpp
+  - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/multipoint_evaluation.hpp
   - graph/general_matching.hpp
-  - convolution/convolutive_translation_2d.hpp
+  - convolution/multivar_ntt.hpp
   - convolution/ntt.hpp
+  - convolution/convolutive_translation_2d.hpp
+  - tree/tree_isomorphism.hpp
+  - segmenttree/trees/acl_range-affine-range-sum.hpp
   timestamp: '2020-12-02 23:44:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/queue_operate_all_composite.test.cpp
-  - linear_algebra_matrix/test/linear_recurrence.test.cpp
-  - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - segmenttree/test/range-affine-range-sum.test.cpp
-  - segmenttree/test/point-set-range-composite.test.cpp
-  - tree/test/vertex-set-path-composite.test.cpp
   - formal_power_series/test/multipoint_evaluation.test.cpp
-  - formal_power_series/test/kitamasa.test.cpp
-  - formal_power_series/test/fps_inv.test.cpp
-  - formal_power_series/test/stirling_number_of_2nd.test.cpp
+  - formal_power_series/test/fps_log.test.cpp
+  - formal_power_series/test/fps_exp.test.cpp
+  - formal_power_series/test/bernoulli_number.test.cpp
   - formal_power_series/test/division_number.test.cpp
   - formal_power_series/test/coeff_of_rational_function.test.cpp
-  - formal_power_series/test/fps_pow_another.test.cpp
   - formal_power_series/test/fps_pow.test.cpp
+  - formal_power_series/test/fps_inv.test.cpp
+  - formal_power_series/test/fps_pow_another.test.cpp
+  - formal_power_series/test/stirling_number_of_2nd.test.cpp
+  - formal_power_series/test/kitamasa.test.cpp
+  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - formal_power_series/test/poly_taylor_shift.test.cpp
-  - formal_power_series/test/bernoulli_number.test.cpp
   - formal_power_series/test/sharp_p_subset_sum.test.cpp
   - formal_power_series/test/fps_sqrt.test.cpp
-  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+  - formal_power_series/test/stirling_number_of_1st.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
-  - formal_power_series/test/fps_exp.test.cpp
-  - formal_power_series/test/fps_log.test.cpp
-  - formal_power_series/test/stirling_number_of_1st.test.cpp
-  - string/test/rolling_hash_w_modint.test.cpp
   - graph/test/general_matching.test.cpp
+  - convolution/test/subset_convolution.test.cpp
+  - convolution/test/ntt.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
-  - convolution/test/ntt.test.cpp
-  - convolution/test/subset_convolution.test.cpp
   - convolution/test/ntt_arbitrary_mod.test.cpp
+  - convolution/test/multivar_ntt.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/linear_recurrence.test.cpp
+  - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
+  - tree/test/vertex-set-path-composite.test.cpp
+  - string/test/rolling_hash_w_modint.test.cpp
+  - segmenttree/test/range-affine-range-sum.test.cpp
+  - segmenttree/test/acl_range-affine-range-sum.test.cpp
+  - segmenttree/test/point-set-range-composite.test.cpp
 documentation_of: modint.hpp
 layout: document
 redirect_from:

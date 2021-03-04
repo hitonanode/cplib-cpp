@@ -60,8 +60,8 @@ data:
   timestamp: '2021-02-26 01:22:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - sparse_table/test/sparse_table_aoj.test.cpp
   - sparse_table/test/sparse_table.test.cpp
+  - sparse_table/test/sparse_table_aoj.test.cpp
   - tree/test/lca_rmq.test.cpp
 documentation_of: sparse_table/rmq_sparse_table.hpp
 layout: document

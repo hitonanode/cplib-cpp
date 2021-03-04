@@ -57,8 +57,8 @@ data:
   isVerificationFile: false
   path: segmenttree/binary_indexed_tree.hpp
   requiredBy:
-  - data_structure/range_kth_smallest_offline.hpp
   - data_structure/rectangle_sum.hpp
+  - data_structure/range_kth_smallest_offline.hpp
   timestamp: '2020-12-29 19:26:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
