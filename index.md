@@ -154,6 +154,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/bipartite_matching.hpp
       title: graph/bipartite_matching.hpp
+    - icon: ':warning:'
+      path: graph/chromatic_number.hpp
+      title: graph/chromatic_number.hpp
     - icon: ':heavy_check_mark:'
       path: graph/general_matching.hpp
       title: graph/general_matching.hpp
