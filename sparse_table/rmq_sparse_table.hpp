@@ -5,9 +5,9 @@
 
 // CUT begin
 // Range Minimum Query for static sequence by sparse table
-// Complexity: O(NlogN) for precalculation, O(1) per query
+// Complexity: $O(N \log N)$ for precalculation, $O(1)$ per query
 template <typename T> struct StaticRMQ {
-    inline T func(const T &l, const T &r) noexcept { return std::min<T>(l, r); }
+    inline T func(const T &l, const T &r) const noexcept { return std::min<T>(l, r); }
     int N, lgN;
     T defaultT;
     std::vector<std::vector<T>> data;
@@ -25,7 +25,7 @@ template <typename T> struct StaticRMQ {
             }
         }
     }
-    T get(int l, int r) { // [l, r), 0-indexed
+    T get(int l, int r) const { // [l, r), 0-indexed
         assert(l >= 0 and r <= N);
         if (l >= r) return defaultT;
         int d = lgx_table[r - l];

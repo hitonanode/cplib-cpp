@@ -72,6 +72,9 @@ template <typename V = DoubleHash> struct rolling_hash {
     V get(int l, int r) const { // s[l] * B^(r - l - 1) + ... + s[r - 1]
         return hash[r] - hash[l] * power[r - l];
     }
+    int lcplen(int l1, int l2) const {
+        return longest_common_prefix(*this, l1, *this, l2);
+    }
 };
 template <typename V> std::vector<V> rolling_hash<V>::power{1};
 

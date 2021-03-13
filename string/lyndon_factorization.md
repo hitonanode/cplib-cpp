@@ -29,8 +29,18 @@ vector<pair<int, int>> ret = lyndon_factorization(s);
 ### longest_lyndon_prefixes
 
 ``` cpp
-vector<int> ret = longest_lyndon_prefixes(s, rolling_hash_of_s);
+vector<int> ret = longest_lyndon_prefixes(s, LCPLEN_Callable_obj);
 ```
 
 - 各 suffix `s[i:N)` に関する最長な Lyndon prefix `s[i:i+len(i))` の長さ `len(i)` を格納した配列を出力
-- 計算量 $O(N \log N)$
+- 計算量 $O(NL)$
+  - $L$ は `s[i:)` と `s[j:)` の longest common prefix 長の計算一回に要する計算量
+
+### run_enumerate
+
+``` cpp
+ret = run_enumerate<LCPLEN_Callable>(s);
+```
+
+- 各 run について `(c, l, r)` （`s[l:r)` が最小周期 `c`，2 周期以上）を全列挙
+- 計算量 $O(NL)$

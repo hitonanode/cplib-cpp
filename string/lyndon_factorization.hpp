@@ -1,5 +1,4 @@
 #pragma once
-#include "rolling_hash_1d.hpp"
 #include <algorithm>
 #include <string>
 #include <tuple>
@@ -36,21 +35,21 @@ std::vector<std::pair<int, int>> lyndon_factorization(const std::string &s) {
 }
 
 // Compute the longest Lyndon prefix for each suffix s[i:N]
-// (Our implementation is $O(N \log N)$)
+// (Our implementation is $O(N \cdot (complexity of lcplen()))$)
 // Example:
 // - `teletelepathy` -> [1,4,1,2,1,4,1,2,1,4,1,2,1]
 // Reference:
 // [1] H. Bannai et al., "The "Runs" Theorem,"
 // SIAM Journal on Computing, 46.5, 1501-1514, 2017.
-template <typename String, typename Hash>
-std::vector<int> longest_lyndon_prefixes(const String &s, const rolling_hash<Hash> &rh) {
+template <typename String, typename LCPLENCallable>
+std::vector<int> longest_lyndon_prefixes(const String &s, const LCPLENCallable &lcp) {
     const int N = s.size();
     std::vector<std::pair<int, int>> st{{N, N}};
     std::vector<int> ret(N);
     for (int i = N - 1, j = i; i >= 0; i--, j = i) {
         while (st.size() > 1) {
             int iv = st.back().first, jv = st.back().second;
-            int l = longest_common_prefix(rh, i, rh, iv);
+            int l = lcp.lcplen(i, iv);
             if (!(iv + l < N and s[i + l] < s[iv + l])) break;
             j = jv;
             st.pop_back();
@@ -62,27 +61,31 @@ std::vector<int> longest_lyndon_prefixes(const String &s, const rolling_hash<Has
 }
 
 // Compute all runs in given string
-// Complexity: $O(N \log N)$ in this implementation (Theoretically $O(N)$ achievable)
-// N = 2e5 -> ~800 ms
+// Complexity: $O(N \cdot (complexity of lcplen()))$ in this implementation
+// (Theoretically $O(N)$ achievable)
+// N = 2e5 -> ~120 ms
 // Reference:
 // [1] H. Bannai et al., "The "Runs" Theorem,"
 // SIAM Journal on Computing, 46.5, 1501-1514, 2017.
-std::vector<std::tuple<int, int, int>> run_enumerate(const std::string &s) {
+template <typename LCPLENCallable, typename String>
+std::vector<std::tuple<int, int, int>> run_enumerate(String s) {
     if (s.empty()) return {};
-    const rolling_hash<DoubleHash> rh(s);
-
+    LCPLENCallable lcp(s);
+    std::reverse(s.begin(), s.end());
+    LCPLENCallable revlcp(s);
+    std::reverse(s.begin(), s.end());
     auto t = s;
     auto lo = *std::min_element(s.begin(), s.end()), hi = *std::max_element(s.begin(), s.end());
     for (auto &c : t) c = hi - (c - lo);
-    const auto l1 = longest_lyndon_prefixes(s, rh), l2 = longest_lyndon_prefixes(t, rh);
+    auto l1 = longest_lyndon_prefixes(s, lcp), l2 = longest_lyndon_prefixes(t, lcp);
     int N = s.size();
     std::vector<std::tuple<int, int, int>> ret;
     for (int i = 0; i < N; i++) {
-        int j = i + l1[i], L = i - longest_common_suffix(rh, i, rh, j), R = j + longest_common_prefix(rh, i, rh, j);
+        int j = i + l1[i], L = i - revlcp.lcplen(N - i, N - j), R = j + lcp.lcplen(i, j);
         if (R - L >= (j - i) * 2) ret.emplace_back(j - i, L, R);
 
         if (l1[i] != l2[i]) {
-            j = i + l2[i], L = i - longest_common_suffix(rh, i, rh, j), R = j + longest_common_prefix(rh, i, rh, j);
+            j = i + l2[i], L = i - revlcp.lcplen(N - i, N - j), R = j + lcp.lcplen(i, j);
             if (R - L >= (j  - i) * 2) ret.emplace_back(j - i, L, R);
         }
     }
