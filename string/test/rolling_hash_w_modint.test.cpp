@@ -7,6 +7,8 @@ using namespace std;
 
 using mint = ModInt<998244353>;
 int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
+
     mint b1 = 51152368, b2 = 1537689;
 
     string T, P;
@@ -15,6 +17,8 @@ int main() {
     rolling_hash<mint> rh_T2(T, b2), rh_P2(P, b2);
 
     for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {
-        if (rh_T1.get(l, l + P.length()) == rh_P1.get(0, P.length()) and rh_T2.get(l, l + P.length()) == rh_P2.get(0, P.length())) cout << l << '\n';
+        if (rh_T1.get(l, l + P.length()) == rh_P1.get(0, P.length()) and rh_T2.get(l, l + P.length()) == rh_P2.get(0, P.length())) {
+            cout << l << '\n';
+        }
     }
 }
