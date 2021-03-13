@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: string/longest_common_prefix.hpp
+    title: string/longest_common_prefix.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: string/test/run_enumerate_lyndon_rmq.test.cpp
+    title: string/test/run_enumerate_lyndon_rmq.test.cpp
   - icon: ':heavy_check_mark:'
     path: string/test/sa_count_keyword.test.cpp
     title: string/test/sa_count_keyword.test.cpp
@@ -209,10 +215,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: string/suffix_array.hpp
-  requiredBy: []
+  requiredBy:
+  - string/longest_common_prefix.hpp
   timestamp: '2021-01-02 01:50:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - string/test/run_enumerate_lyndon_rmq.test.cpp
   - string/test/sa_count_keyword.test.cpp
 documentation_of: string/suffix_array.hpp
 layout: document

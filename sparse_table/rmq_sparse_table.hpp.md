@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: string/longest_common_prefix.hpp
+    title: string/longest_common_prefix.hpp
+  - icon: ':heavy_check_mark:'
     path: tree/lca_rmq.hpp
     title: tree/lca_rmq.hpp
   _extendedVerifiedWith:
@@ -13,6 +16,9 @@ data:
     path: sparse_table/test/sparse_table_aoj.test.cpp
     title: sparse_table/test/sparse_table_aoj.test.cpp
   - icon: ':heavy_check_mark:'
+    path: string/test/run_enumerate_lyndon_rmq.test.cpp
+    title: string/test/run_enumerate_lyndon_rmq.test.cpp
+  - icon: ':heavy_check_mark:'
     path: tree/test/lca_rmq.test.cpp
     title: tree/test/lca_rmq.test.cpp
   _isVerificationFailed: false
@@ -22,9 +28,9 @@ data:
     links: []
   bundledCode: "#line 2 \"sparse_table/rmq_sparse_table.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <vector>\n\n// CUT begin\n// Range Minimum Query\
-    \ for static sequence by sparse table\n// Complexity: O(NlogN) for precalculation,\
-    \ O(1) per query\ntemplate <typename T> struct StaticRMQ {\n    inline T func(const\
-    \ T &l, const T &r) noexcept { return std::min<T>(l, r); }\n    int N, lgN;\n\
+    \ for static sequence by sparse table\n// Complexity: $O(N \\log N)$ for precalculation,\
+    \ $O(1)$ per query\ntemplate <typename T> struct StaticRMQ {\n    inline T func(const\
+    \ T &l, const T &r) const noexcept { return std::min<T>(l, r); }\n    int N, lgN;\n\
     \    T defaultT;\n    std::vector<std::vector<T>> data;\n    std::vector<int>\
     \ lgx_table;\n    StaticRMQ() = default;\n    StaticRMQ(const std::vector<T> &sequence,\
     \ T defaultT) : N(sequence.size()), defaultT(defaultT) {\n        lgx_table.resize(N\
@@ -33,14 +39,15 @@ data:
     \ defaultT));\n        data[0] = sequence;\n        for (int d = 1; d < lgN; d++)\
     \ {\n            for (int i = 0; i + (1 << d) <= N; i++) {\n                data[d][i]\
     \ = func(data[d - 1][i], data[d - 1][i + (1 << (d - 1))]);\n            }\n  \
-    \      }\n    }\n    T get(int l, int r) { // [l, r), 0-indexed\n        assert(l\
-    \ >= 0 and r <= N);\n        if (l >= r) return defaultT;\n        int d = lgx_table[r\
-    \ - l];\n        return func(data[d][l], data[d][r - (1 << d)]);\n    }\n};\n"
+    \      }\n    }\n    T get(int l, int r) const { // [l, r), 0-indexed\n      \
+    \  assert(l >= 0 and r <= N);\n        if (l >= r) return defaultT;\n        int\
+    \ d = lgx_table[r - l];\n        return func(data[d][l], data[d][r - (1 << d)]);\n\
+    \    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <vector>\n\
     \n// CUT begin\n// Range Minimum Query for static sequence by sparse table\n//\
-    \ Complexity: O(NlogN) for precalculation, O(1) per query\ntemplate <typename\
-    \ T> struct StaticRMQ {\n    inline T func(const T &l, const T &r) noexcept {\
-    \ return std::min<T>(l, r); }\n    int N, lgN;\n    T defaultT;\n    std::vector<std::vector<T>>\
+    \ Complexity: $O(N \\log N)$ for precalculation, $O(1)$ per query\ntemplate <typename\
+    \ T> struct StaticRMQ {\n    inline T func(const T &l, const T &r) const noexcept\
+    \ { return std::min<T>(l, r); }\n    int N, lgN;\n    T defaultT;\n    std::vector<std::vector<T>>\
     \ data;\n    std::vector<int> lgx_table;\n    StaticRMQ() = default;\n    StaticRMQ(const\
     \ std::vector<T> &sequence, T defaultT) : N(sequence.size()), defaultT(defaultT)\
     \ {\n        lgx_table.resize(N + 1);\n        for (int i = 2; i < N + 1; i++)\
@@ -49,20 +56,22 @@ data:
     \        for (int d = 1; d < lgN; d++) {\n            for (int i = 0; i + (1 <<\
     \ d) <= N; i++) {\n                data[d][i] = func(data[d - 1][i], data[d -\
     \ 1][i + (1 << (d - 1))]);\n            }\n        }\n    }\n    T get(int l,\
-    \ int r) { // [l, r), 0-indexed\n        assert(l >= 0 and r <= N);\n        if\
-    \ (l >= r) return defaultT;\n        int d = lgx_table[r - l];\n        return\
-    \ func(data[d][l], data[d][r - (1 << d)]);\n    }\n};\n"
+    \ int r) const { // [l, r), 0-indexed\n        assert(l >= 0 and r <= N);\n  \
+    \      if (l >= r) return defaultT;\n        int d = lgx_table[r - l];\n     \
+    \   return func(data[d][l], data[d][r - (1 << d)]);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: sparse_table/rmq_sparse_table.hpp
   requiredBy:
   - tree/lca_rmq.hpp
-  timestamp: '2021-02-26 01:22:52+09:00'
+  - string/longest_common_prefix.hpp
+  timestamp: '2021-03-13 17:28:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - sparse_table/test/sparse_table.test.cpp
   - sparse_table/test/sparse_table_aoj.test.cpp
   - tree/test/lca_rmq.test.cpp
+  - string/test/run_enumerate_lyndon_rmq.test.cpp
 documentation_of: sparse_table/rmq_sparse_table.hpp
 layout: document
 redirect_from:

@@ -11,9 +11,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
+    PROBLEM: https://yukicoder.me/problems/1408
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
+    - https://yukicoder.me/problems/1408
   bundledCode: "#line 2 \"string/rolling_hash_1d.hpp\"\n#include <algorithm>\n#include\
     \ <chrono>\n#include <random>\n#include <string>\n#include <vector>\n\n// CUT\
     \ begin\nstruct DoubleHash : public std::pair<unsigned, unsigned> {\n    using\
@@ -65,33 +65,43 @@ data:
     \ &rh1, int r1, const rolling_hash<T> &rh2, int r2) {\n    int lo = 0, hi = std::min(r1,\
     \ r2) + 1;\n    while (hi - lo > 1) {\n        const int c = (lo + hi) / 2;\n\
     \        auto h1 = rh1.get(r1 - c, r1), h2 = rh2.get(r2 - c, r2);\n        (h1\
-    \ == h2 ? lo : hi) = c;\n    }\n    return lo;\n}\n#line 2 \"string/test/rolling_hash.test.cpp\"\
-    \n#include <iostream>\n#line 4 \"string/test/rolling_hash.test.cpp\"\n#define\
-    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
-    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    string T, P;\n    cin >> T >> P;\n    rolling_hash<DoubleHash> rh_T(T), rh_P(P);\n\
-    \n    for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {\n       \
-    \ if (rh_T.get(l, l + P.length()) == rh_P.get(0, P.length())) cout << l << '\\\
-    n';\n    }\n}\n"
-  code: "#include \"../rolling_hash_1d.hpp\"\n#include <iostream>\n#include <string>\n\
-    #define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
-    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    string T, P;\n    cin >> T >> P;\n    rolling_hash<DoubleHash> rh_T(T), rh_P(P);\n\
-    \n    for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {\n       \
-    \ if (rh_T.get(l, l + P.length()) == rh_P.get(0, P.length())) cout << l << '\\\
-    n';\n    }\n}\n"
+    \ == h2 ? lo : hi) = c;\n    }\n    return lo;\n}\n#line 2 \"string/test/rolling_hash_lcp.test.cpp\"\
+    \n#include <cassert>\n#include <iostream>\n#line 5 \"string/test/rolling_hash_lcp.test.cpp\"\
+    \n#define PROBLEM \"https://yukicoder.me/problems/1408\"\nusing namespace std;\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N;\n\
+    \    cin >> N;\n    vector<rolling_hash<DoubleHash>> rhs, rhs_rev;\n    for (int\
+    \ i = 0; i < N; i++) {\n        string s;\n        cin >> s;\n        rhs.emplace_back(s);\n\
+    \        reverse(s.begin(), s.end());\n        rhs_rev.emplace_back(s);\n    }\n\
+    \n    int M;\n    long long x, d, ret = 0;\n    cin >> M >> x >> d;\n\n    while\
+    \ (M--) {\n        int i = x / (N - 1);\n        int j = x % (N - 1);\n      \
+    \  if (i <= j) j++;\n        x = (x + d) % (static_cast<long long>(N) * (N - 1));\n\
+    \        auto tmp = longest_common_prefix(rhs[i], 0, rhs[j], 0);\n        assert(tmp\
+    \ == longest_common_suffix(rhs_rev[i], rhs_rev[i].N, rhs_rev[j], rhs_rev[j].N));\n\
+    \        ret += tmp;\n    }\n    cout << ret << '\\n';\n}\n"
+  code: "#include \"../rolling_hash_1d.hpp\"\n#include <cassert>\n#include <iostream>\n\
+    #include <string>\n#define PROBLEM \"https://yukicoder.me/problems/1408\"\nusing\
+    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N;\n    cin >> N;\n    vector<rolling_hash<DoubleHash>> rhs, rhs_rev;\n\
+    \    for (int i = 0; i < N; i++) {\n        string s;\n        cin >> s;\n   \
+    \     rhs.emplace_back(s);\n        reverse(s.begin(), s.end());\n        rhs_rev.emplace_back(s);\n\
+    \    }\n\n    int M;\n    long long x, d, ret = 0;\n    cin >> M >> x >> d;\n\n\
+    \    while (M--) {\n        int i = x / (N - 1);\n        int j = x % (N - 1);\n\
+    \        if (i <= j) j++;\n        x = (x + d) % (static_cast<long long>(N) *\
+    \ (N - 1));\n        auto tmp = longest_common_prefix(rhs[i], 0, rhs[j], 0);\n\
+    \        assert(tmp == longest_common_suffix(rhs_rev[i], rhs_rev[i].N, rhs_rev[j],\
+    \ rhs_rev[j].N));\n        ret += tmp;\n    }\n    cout << ret << '\\n';\n}\n"
   dependsOn:
   - string/rolling_hash_1d.hpp
   isVerificationFile: true
-  path: string/test/rolling_hash.test.cpp
+  path: string/test/rolling_hash_lcp.test.cpp
   requiredBy: []
   timestamp: '2021-03-13 17:28:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: string/test/rolling_hash.test.cpp
+documentation_of: string/test/rolling_hash_lcp.test.cpp
 layout: document
 redirect_from:
-- /verify/string/test/rolling_hash.test.cpp
-- /verify/string/test/rolling_hash.test.cpp.html
-title: string/test/rolling_hash.test.cpp
+- /verify/string/test/rolling_hash_lcp.test.cpp
+- /verify/string/test/rolling_hash_lcp.test.cpp.html
+title: string/test/rolling_hash_lcp.test.cpp
 ---

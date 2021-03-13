@@ -364,6 +364,12 @@ data:
       path: string/incremental_matching.hpp
       title: string/incremental_matching.hpp
     - icon: ':heavy_check_mark:'
+      path: string/longest_common_prefix.hpp
+      title: string/longest_common_prefix.hpp
+    - icon: ':heavy_check_mark:'
+      path: string/lyndon_factorization.hpp
+      title: "Lyndon factorization \uFF08Lyndon \u5206\u89E3\uFF09"
+    - icon: ':heavy_check_mark:'
       path: string/manacher.hpp
       title: string/manacher.hpp
     - icon: ':heavy_check_mark:'
@@ -838,8 +844,17 @@ data:
       path: string/test/rolling_hash.test.cpp
       title: string/test/rolling_hash.test.cpp
     - icon: ':heavy_check_mark:'
+      path: string/test/rolling_hash_lcp.test.cpp
+      title: string/test/rolling_hash_lcp.test.cpp
+    - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_w_modint.test.cpp
       title: string/test/rolling_hash_w_modint.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/run_enumerate_lyndon_hash.test.cpp
+      title: string/test/run_enumerate_lyndon_hash.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/run_enumerate_lyndon_rmq.test.cpp
+      title: string/test/run_enumerate_lyndon_rmq.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/sa_count_keyword.test.cpp
       title: string/test/sa_count_keyword.test.cpp

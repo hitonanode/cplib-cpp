@@ -16,9 +16,9 @@ data:
     links: []
   bundledCode: "#line 2 \"sparse_table/rmq_sparse_table.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <vector>\n\n// CUT begin\n// Range Minimum Query\
-    \ for static sequence by sparse table\n// Complexity: O(NlogN) for precalculation,\
-    \ O(1) per query\ntemplate <typename T> struct StaticRMQ {\n    inline T func(const\
-    \ T &l, const T &r) noexcept { return std::min<T>(l, r); }\n    int N, lgN;\n\
+    \ for static sequence by sparse table\n// Complexity: $O(N \\log N)$ for precalculation,\
+    \ $O(1)$ per query\ntemplate <typename T> struct StaticRMQ {\n    inline T func(const\
+    \ T &l, const T &r) const noexcept { return std::min<T>(l, r); }\n    int N, lgN;\n\
     \    T defaultT;\n    std::vector<std::vector<T>> data;\n    std::vector<int>\
     \ lgx_table;\n    StaticRMQ() = default;\n    StaticRMQ(const std::vector<T> &sequence,\
     \ T defaultT) : N(sequence.size()), defaultT(defaultT) {\n        lgx_table.resize(N\
@@ -27,10 +27,10 @@ data:
     \ defaultT));\n        data[0] = sequence;\n        for (int d = 1; d < lgN; d++)\
     \ {\n            for (int i = 0; i + (1 << d) <= N; i++) {\n                data[d][i]\
     \ = func(data[d - 1][i], data[d - 1][i + (1 << (d - 1))]);\n            }\n  \
-    \      }\n    }\n    T get(int l, int r) { // [l, r), 0-indexed\n        assert(l\
-    \ >= 0 and r <= N);\n        if (l >= r) return defaultT;\n        int d = lgx_table[r\
-    \ - l];\n        return func(data[d][l], data[d][r - (1 << d)]);\n    }\n};\n\
-    #line 5 \"tree/lca_rmq.hpp\"\n#include <utility>\n#line 7 \"tree/lca_rmq.hpp\"\
+    \      }\n    }\n    T get(int l, int r) const { // [l, r), 0-indexed\n      \
+    \  assert(l >= 0 and r <= N);\n        if (l >= r) return defaultT;\n        int\
+    \ d = lgx_table[r - l];\n        return func(data[d][l], data[d][r - (1 << d)]);\n\
+    \    }\n};\n#line 5 \"tree/lca_rmq.hpp\"\n#include <utility>\n#line 7 \"tree/lca_rmq.hpp\"\
     \n\nstruct TreeLCA {\n    const int N;\n    std::vector<std::vector<int>> to;\n\
     \    bool built;\n    TreeLCA(int V = 0) : N(V), to(V), built(false) {}\n\n  \
     \  void add_edge(int u, int v) {\n        assert(0 <= u and u < N);\n        assert(0\
@@ -74,7 +74,7 @@ data:
   isVerificationFile: false
   path: tree/lca_rmq.hpp
   requiredBy: []
-  timestamp: '2021-02-26 01:22:52+09:00'
+  timestamp: '2021-03-13 17:28:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/lca_rmq.test.cpp
