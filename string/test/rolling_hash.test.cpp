@@ -5,6 +5,7 @@
 using namespace std;
 
 int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
     string T, P;
     cin >> T >> P;
     rolling_hash<DoubleHash> rh_T(T), rh_P(P);
