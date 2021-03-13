@@ -35,31 +35,31 @@ data:
     \  return lyndon_factorization<int>(v);\n}\n\n// Compute the longest Lyndon prefix\
     \ for each suffix s[i:N]\n// (Our implementation is $O(N \\cdot (complexity of\
     \ lcplen()))$)\n// Example:\n// - `teletelepathy` -> [1,4,1,2,1,4,1,2,1,4,1,2,1]\n\
-    // Reference:\n// [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n// SIAM Journal\
-    \ on Computing, 46.5, 1501-1514, 2017.\ntemplate <typename String, typename LCPLENCallable>\n\
-    std::vector<int> longest_lyndon_prefixes(const String &s, const LCPLENCallable\
-    \ &lcp) {\n    const int N = s.size();\n    std::vector<std::pair<int, int>> st{{N,\
-    \ N}};\n    std::vector<int> ret(N);\n    for (int i = N - 1, j = i; i >= 0; i--,\
-    \ j = i) {\n        while (st.size() > 1) {\n            int iv = st.back().first,\
-    \ jv = st.back().second;\n            int l = lcp.lcplen(i, iv);\n           \
-    \ if (!(iv + l < N and s[i + l] < s[iv + l])) break;\n            j = jv;\n  \
-    \          st.pop_back();\n        }\n        st.emplace_back(i, j);\n       \
-    \ ret[i] = j - i + 1;\n    }\n    return ret;\n}\n\n// Compute all runs in given\
-    \ string\n// Complexity: $O(N \\cdot (complexity of lcplen()))$ in this implementation\n\
-    // (Theoretically $O(N)$ achievable)\n// N = 2e5 -> ~120 ms\n// Reference:\n//\
-    \ [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n// SIAM Journal on Computing,\
-    \ 46.5, 1501-1514, 2017.\ntemplate <typename LCPLENCallable, typename String>\n\
-    std::vector<std::tuple<int, int, int>> run_enumerate(String s) {\n    if (s.empty())\
-    \ return {};\n    LCPLENCallable lcp(s);\n    std::reverse(s.begin(), s.end());\n\
-    \    LCPLENCallable revlcp(s);\n    std::reverse(s.begin(), s.end());\n    auto\
-    \ t = s;\n    auto lo = *std::min_element(s.begin(), s.end()), hi = *std::max_element(s.begin(),\
+    // Reference:\n// [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n//     SIAM\
+    \ Journal on Computing, 46.5, 1501-1514, 2017.\ntemplate <typename String, typename\
+    \ LCPLENCallable>\nstd::vector<int> longest_lyndon_prefixes(const String &s, const\
+    \ LCPLENCallable &lcp) {\n    const int N = s.size();\n    std::vector<std::pair<int,\
+    \ int>> st{{N, N}};\n    std::vector<int> ret(N);\n    for (int i = N - 1, j =\
+    \ i; i >= 0; i--, j = i) {\n        while (st.size() > 1) {\n            int iv\
+    \ = st.back().first, jv = st.back().second;\n            int l = lcp.lcplen(i,\
+    \ iv);\n            if (!(iv + l < N and s[i + l] < s[iv + l])) break;\n     \
+    \       j = jv;\n            st.pop_back();\n        }\n        st.emplace_back(i,\
+    \ j);\n        ret[i] = j - i + 1;\n    }\n    return ret;\n}\n\n// Compute all\
+    \ runs in given string\n// Complexity: $O(N \\cdot (complexity of lcplen()))$\
+    \ in this implementation\n// (Theoretically $O(N)$ achievable)\n// N = 2e5 ->\
+    \ ~120 ms\n// Reference:\n// [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n\
+    //     SIAM Journal on Computing, 46.5, 1501-1514, 2017.\ntemplate <typename LCPLENCallable,\
+    \ typename String> std::vector<std::tuple<int, int, int>> run_enumerate(String\
+    \ s) {\n    if (s.empty()) return {};\n    LCPLENCallable lcp(s);\n    std::reverse(s.begin(),\
+    \ s.end());\n    LCPLENCallable revlcp(s);\n    std::reverse(s.begin(), s.end());\n\
+    \    auto t = s;\n    auto lo = *std::min_element(s.begin(), s.end()), hi = *std::max_element(s.begin(),\
     \ s.end());\n    for (auto &c : t) c = hi - (c - lo);\n    auto l1 = longest_lyndon_prefixes(s,\
     \ lcp), l2 = longest_lyndon_prefixes(t, lcp);\n    int N = s.size();\n    std::vector<std::tuple<int,\
     \ int, int>> ret;\n    for (int i = 0; i < N; i++) {\n        int j = i + l1[i],\
     \ L = i - revlcp.lcplen(N - i, N - j), R = j + lcp.lcplen(i, j);\n        if (R\
     \ - L >= (j - i) * 2) ret.emplace_back(j - i, L, R);\n\n        if (l1[i] != l2[i])\
     \ {\n            j = i + l2[i], L = i - revlcp.lcplen(N - i, N - j), R = j + lcp.lcplen(i,\
-    \ j);\n            if (R - L >= (j  - i) * 2) ret.emplace_back(j - i, L, R);\n\
+    \ j);\n            if (R - L >= (j - i) * 2) ret.emplace_back(j - i, L, R);\n\
     \        }\n    }\n    std::sort(ret.begin(), ret.end());\n    ret.erase(std::unique(ret.begin(),\
     \ ret.end()), ret.end());\n    return ret;\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <string>\n#include <tuple>\n\
@@ -80,38 +80,38 @@ data:
     \  return lyndon_factorization<int>(v);\n}\n\n// Compute the longest Lyndon prefix\
     \ for each suffix s[i:N]\n// (Our implementation is $O(N \\cdot (complexity of\
     \ lcplen()))$)\n// Example:\n// - `teletelepathy` -> [1,4,1,2,1,4,1,2,1,4,1,2,1]\n\
-    // Reference:\n// [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n// SIAM Journal\
-    \ on Computing, 46.5, 1501-1514, 2017.\ntemplate <typename String, typename LCPLENCallable>\n\
-    std::vector<int> longest_lyndon_prefixes(const String &s, const LCPLENCallable\
-    \ &lcp) {\n    const int N = s.size();\n    std::vector<std::pair<int, int>> st{{N,\
-    \ N}};\n    std::vector<int> ret(N);\n    for (int i = N - 1, j = i; i >= 0; i--,\
-    \ j = i) {\n        while (st.size() > 1) {\n            int iv = st.back().first,\
-    \ jv = st.back().second;\n            int l = lcp.lcplen(i, iv);\n           \
-    \ if (!(iv + l < N and s[i + l] < s[iv + l])) break;\n            j = jv;\n  \
-    \          st.pop_back();\n        }\n        st.emplace_back(i, j);\n       \
-    \ ret[i] = j - i + 1;\n    }\n    return ret;\n}\n\n// Compute all runs in given\
-    \ string\n// Complexity: $O(N \\cdot (complexity of lcplen()))$ in this implementation\n\
-    // (Theoretically $O(N)$ achievable)\n// N = 2e5 -> ~120 ms\n// Reference:\n//\
-    \ [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n// SIAM Journal on Computing,\
-    \ 46.5, 1501-1514, 2017.\ntemplate <typename LCPLENCallable, typename String>\n\
-    std::vector<std::tuple<int, int, int>> run_enumerate(String s) {\n    if (s.empty())\
-    \ return {};\n    LCPLENCallable lcp(s);\n    std::reverse(s.begin(), s.end());\n\
-    \    LCPLENCallable revlcp(s);\n    std::reverse(s.begin(), s.end());\n    auto\
-    \ t = s;\n    auto lo = *std::min_element(s.begin(), s.end()), hi = *std::max_element(s.begin(),\
+    // Reference:\n// [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n//     SIAM\
+    \ Journal on Computing, 46.5, 1501-1514, 2017.\ntemplate <typename String, typename\
+    \ LCPLENCallable>\nstd::vector<int> longest_lyndon_prefixes(const String &s, const\
+    \ LCPLENCallable &lcp) {\n    const int N = s.size();\n    std::vector<std::pair<int,\
+    \ int>> st{{N, N}};\n    std::vector<int> ret(N);\n    for (int i = N - 1, j =\
+    \ i; i >= 0; i--, j = i) {\n        while (st.size() > 1) {\n            int iv\
+    \ = st.back().first, jv = st.back().second;\n            int l = lcp.lcplen(i,\
+    \ iv);\n            if (!(iv + l < N and s[i + l] < s[iv + l])) break;\n     \
+    \       j = jv;\n            st.pop_back();\n        }\n        st.emplace_back(i,\
+    \ j);\n        ret[i] = j - i + 1;\n    }\n    return ret;\n}\n\n// Compute all\
+    \ runs in given string\n// Complexity: $O(N \\cdot (complexity of lcplen()))$\
+    \ in this implementation\n// (Theoretically $O(N)$ achievable)\n// N = 2e5 ->\
+    \ ~120 ms\n// Reference:\n// [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n\
+    //     SIAM Journal on Computing, 46.5, 1501-1514, 2017.\ntemplate <typename LCPLENCallable,\
+    \ typename String> std::vector<std::tuple<int, int, int>> run_enumerate(String\
+    \ s) {\n    if (s.empty()) return {};\n    LCPLENCallable lcp(s);\n    std::reverse(s.begin(),\
+    \ s.end());\n    LCPLENCallable revlcp(s);\n    std::reverse(s.begin(), s.end());\n\
+    \    auto t = s;\n    auto lo = *std::min_element(s.begin(), s.end()), hi = *std::max_element(s.begin(),\
     \ s.end());\n    for (auto &c : t) c = hi - (c - lo);\n    auto l1 = longest_lyndon_prefixes(s,\
     \ lcp), l2 = longest_lyndon_prefixes(t, lcp);\n    int N = s.size();\n    std::vector<std::tuple<int,\
     \ int, int>> ret;\n    for (int i = 0; i < N; i++) {\n        int j = i + l1[i],\
     \ L = i - revlcp.lcplen(N - i, N - j), R = j + lcp.lcplen(i, j);\n        if (R\
     \ - L >= (j - i) * 2) ret.emplace_back(j - i, L, R);\n\n        if (l1[i] != l2[i])\
     \ {\n            j = i + l2[i], L = i - revlcp.lcplen(N - i, N - j), R = j + lcp.lcplen(i,\
-    \ j);\n            if (R - L >= (j  - i) * 2) ret.emplace_back(j - i, L, R);\n\
+    \ j);\n            if (R - L >= (j - i) * 2) ret.emplace_back(j - i, L, R);\n\
     \        }\n    }\n    std::sort(ret.begin(), ret.end());\n    ret.erase(std::unique(ret.begin(),\
     \ ret.end()), ret.end());\n    return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: string/lyndon_factorization.hpp
   requiredBy: []
-  timestamp: '2021-03-13 17:28:18+09:00'
+  timestamp: '2021-03-13 17:44:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/run_enumerate_lyndon_rmq.test.cpp
