@@ -50,18 +50,24 @@ template <typename V = DoubleHash> struct rolling_hash {
     const V B;
     std::vector<V> hash;         // hash[i] = s[0] * B^(i - 1) + ... + s[i - 1]
     static std::vector<V> power; // power[i] = B^i
-    rolling_hash(const std::string &s = "", V b = V::gen_b()) : B(b) {
-        N = s.length();
-        hash.resize(N + 1);
-        for (int i = 0; i < N; i++) hash[i + 1] = hash[i] * B + s[i];
+    void _extend_powvec() {
         while (static_cast<int>(power.size()) <= N) {
             auto tmp = power.back() * B;
             power.push_back(tmp);
         }
     }
+    template <typename Int> rolling_hash(const std::vector<Int> &s, V b = V::gen_b()) : N(s.size()), B(b), hash(N + 1) {
+        for (int i = 0; i < N; i++) hash[i + 1] = hash[i] * B + s[i];
+        _extend_powvec();
+    }
+    rolling_hash(const std::string &s = "", V b = V::gen_b()) : N(s.size()), B(b), hash(N + 1) {
+        for (int i = 0; i < N; i++) hash[i + 1] = hash[i] * B + s[i];
+        _extend_powvec();
+    }
     void addchar(const char &c) {
-        V hnew = hash[N] * B + c, pnew = power[N] * B;
-        N++, hash.emplace_back(hnew), power.emplace_back(pnew);
+        V hnew = hash[N] * B + c;
+        N++, hash.emplace_back(hnew);
+        _extend_powvec();
     }
     V get(int l, int r) const { // s[l] * B^(r - l - 1) + ... + s[r - 1]
         return hash[r] - hash[l] * power[r - l];
