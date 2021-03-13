@@ -1,5 +1,5 @@
-#include "../lyndon_factorization.hpp"
 #include "../longest_common_prefix.hpp"
+#include "../lyndon_factorization.hpp"
 #include <iostream>
 #include <string>
 #define PROBLEM "https://judge.yosupo.jp/problem/runenumerate"
@@ -11,7 +11,5 @@ int main() {
     cin >> S;
     auto ret = run_enumerate<LCPsparsetable>(S);
     cout << ret.size() << '\n';
-    for (auto p : ret) {
-        cout << get<0>(p) << ' ' << get<1>(p) << ' ' << get<2>(p) << '\n';
-    }
+    for (auto p : ret) cout << get<0>(p) << ' ' << get<1>(p) << ' ' << get<2>(p) << '\n';
 }

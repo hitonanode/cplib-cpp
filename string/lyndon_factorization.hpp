@@ -40,7 +40,7 @@ std::vector<std::pair<int, int>> lyndon_factorization(const std::string &s) {
 // - `teletelepathy` -> [1,4,1,2,1,4,1,2,1,4,1,2,1]
 // Reference:
 // [1] H. Bannai et al., "The "Runs" Theorem,"
-// SIAM Journal on Computing, 46.5, 1501-1514, 2017.
+//     SIAM Journal on Computing, 46.5, 1501-1514, 2017.
 template <typename String, typename LCPLENCallable>
 std::vector<int> longest_lyndon_prefixes(const String &s, const LCPLENCallable &lcp) {
     const int N = s.size();
@@ -66,9 +66,8 @@ std::vector<int> longest_lyndon_prefixes(const String &s, const LCPLENCallable &
 // N = 2e5 -> ~120 ms
 // Reference:
 // [1] H. Bannai et al., "The "Runs" Theorem,"
-// SIAM Journal on Computing, 46.5, 1501-1514, 2017.
-template <typename LCPLENCallable, typename String>
-std::vector<std::tuple<int, int, int>> run_enumerate(String s) {
+//     SIAM Journal on Computing, 46.5, 1501-1514, 2017.
+template <typename LCPLENCallable, typename String> std::vector<std::tuple<int, int, int>> run_enumerate(String s) {
     if (s.empty()) return {};
     LCPLENCallable lcp(s);
     std::reverse(s.begin(), s.end());
@@ -86,7 +85,7 @@ std::vector<std::tuple<int, int, int>> run_enumerate(String s) {
 
         if (l1[i] != l2[i]) {
             j = i + l2[i], L = i - revlcp.lcplen(N - i, N - j), R = j + lcp.lcplen(i, j);
-            if (R - L >= (j  - i) * 2) ret.emplace_back(j - i, L, R);
+            if (R - L >= (j - i) * 2) ret.emplace_back(j - i, L, R);
         }
     }
     std::sort(ret.begin(), ret.end());
