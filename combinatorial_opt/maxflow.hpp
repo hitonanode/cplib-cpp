@@ -2,7 +2,9 @@
 
 #include <algorithm>
 #include <cassert>
+#include <fstream>
 #include <limits>
+#include <string>
 #include <vector>
 
 // CUT begin
@@ -143,6 +145,19 @@ template <class Cap> struct mf_graph {
             }
         }
         return visited;
+    }
+
+    void dump_graphviz(std::string filename = "maxflow") const {
+        std::ofstream ss(filename + ".DOT");
+        ss << "digraph{\n";
+        for (int i = 0; i < _n; i++) {
+            for (const auto &e : g[i]) {
+                if (e.cap > 0) ss << i << "->" << e.to << "[label=" << e.cap << "];\n";
+            }
+        }
+        ss << "}\n";
+        ss.close();
+        return;
     }
 
     int _n;
