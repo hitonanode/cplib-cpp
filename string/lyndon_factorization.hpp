@@ -22,7 +22,8 @@ template <typename T> std::vector<std::pair<int, int>> lyndon_factorization(cons
     for (int l = 0; l < N;) {
         int i = l, j = i + 1;
         while (j < N and S[i] <= S[j]) i = (S[i] == S[j] ? i + 1 : l), j++;
-        ret.emplace_back(l, j - i), l += j - i;
+        int n = (j - l) / (j - i);
+        for (int t = 0; t < n; t++) ret.emplace_back(l, j - i), l += j - i;
     }
     return ret;
 }
