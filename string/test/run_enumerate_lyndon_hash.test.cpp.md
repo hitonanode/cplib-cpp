@@ -29,7 +29,8 @@ data:
     \ std::vector<std::pair<int, int>> lyndon_factorization(const std::vector<T> &S)\
     \ {\n    const int N = S.size();\n    std::vector<std::pair<int, int>> ret;\n\
     \    for (int l = 0; l < N;) {\n        int i = l, j = i + 1;\n        while (j\
-    \ < N and S[i] <= S[j]) i = (S[i] == S[j] ? i + 1 : l), j++;\n        ret.emplace_back(l,\
+    \ < N and S[i] <= S[j]) i = (S[i] == S[j] ? i + 1 : l), j++;\n        int n =\
+    \ (j - l) / (j - i);\n        for (int t = 0; t < n; t++) ret.emplace_back(l,\
     \ j - i), l += j - i;\n    }\n    return ret;\n}\n\nstd::vector<std::pair<int,\
     \ int>> lyndon_factorization(const std::string &s) {\n    const int N = int(s.size());\n\
     \    std::vector<int> v(N);\n    for (int i = 0; i < N; i++) v[i] = s[i];\n  \
@@ -132,7 +133,7 @@ data:
   isVerificationFile: true
   path: string/test/run_enumerate_lyndon_hash.test.cpp
   requiredBy: []
-  timestamp: '2021-03-13 17:44:39+09:00'
+  timestamp: '2021-03-14 17:31:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/run_enumerate_lyndon_hash.test.cpp

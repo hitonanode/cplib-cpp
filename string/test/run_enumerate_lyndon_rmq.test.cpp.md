@@ -155,16 +155,17 @@ data:
     \ std::vector<T> &S) {\n    const int N = S.size();\n    std::vector<std::pair<int,\
     \ int>> ret;\n    for (int l = 0; l < N;) {\n        int i = l, j = i + 1;\n \
     \       while (j < N and S[i] <= S[j]) i = (S[i] == S[j] ? i + 1 : l), j++;\n\
-    \        ret.emplace_back(l, j - i), l += j - i;\n    }\n    return ret;\n}\n\n\
-    std::vector<std::pair<int, int>> lyndon_factorization(const std::string &s) {\n\
-    \    const int N = int(s.size());\n    std::vector<int> v(N);\n    for (int i\
-    \ = 0; i < N; i++) v[i] = s[i];\n    return lyndon_factorization<int>(v);\n}\n\
-    \n// Compute the longest Lyndon prefix for each suffix s[i:N]\n// (Our implementation\
-    \ is $O(N \\cdot (complexity of lcplen()))$)\n// Example:\n// - `teletelepathy`\
-    \ -> [1,4,1,2,1,4,1,2,1,4,1,2,1]\n// Reference:\n// [1] H. Bannai et al., \"The\
-    \ \"Runs\" Theorem,\"\n//     SIAM Journal on Computing, 46.5, 1501-1514, 2017.\n\
-    template <typename String, typename LCPLENCallable>\nstd::vector<int> longest_lyndon_prefixes(const\
-    \ String &s, const LCPLENCallable &lcp) {\n    const int N = s.size();\n    std::vector<std::pair<int,\
+    \        int n = (j - l) / (j - i);\n        for (int t = 0; t < n; t++) ret.emplace_back(l,\
+    \ j - i), l += j - i;\n    }\n    return ret;\n}\n\nstd::vector<std::pair<int,\
+    \ int>> lyndon_factorization(const std::string &s) {\n    const int N = int(s.size());\n\
+    \    std::vector<int> v(N);\n    for (int i = 0; i < N; i++) v[i] = s[i];\n  \
+    \  return lyndon_factorization<int>(v);\n}\n\n// Compute the longest Lyndon prefix\
+    \ for each suffix s[i:N]\n// (Our implementation is $O(N \\cdot (complexity of\
+    \ lcplen()))$)\n// Example:\n// - `teletelepathy` -> [1,4,1,2,1,4,1,2,1,4,1,2,1]\n\
+    // Reference:\n// [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n//     SIAM\
+    \ Journal on Computing, 46.5, 1501-1514, 2017.\ntemplate <typename String, typename\
+    \ LCPLENCallable>\nstd::vector<int> longest_lyndon_prefixes(const String &s, const\
+    \ LCPLENCallable &lcp) {\n    const int N = s.size();\n    std::vector<std::pair<int,\
     \ int>> st{{N, N}};\n    std::vector<int> ret(N);\n    for (int i = N - 1, j =\
     \ i; i >= 0; i--, j = i) {\n        while (st.size() > 1) {\n            int iv\
     \ = st.back().first, jv = st.back().second;\n            int l = lcp.lcplen(i,\
@@ -208,7 +209,7 @@ data:
   isVerificationFile: true
   path: string/test/run_enumerate_lyndon_rmq.test.cpp
   requiredBy: []
-  timestamp: '2021-03-13 17:44:39+09:00'
+  timestamp: '2021-03-14 17:31:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/run_enumerate_lyndon_rmq.test.cpp
