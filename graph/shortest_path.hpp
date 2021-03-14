@@ -1,9 +1,11 @@
 #pragma once
 #include <cassert>
 #include <deque>
+#include <fstream>
 #include <functional>
 #include <limits>
 #include <queue>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -159,5 +161,16 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
                 }
             }
         }
+    }
+
+    void dump_graphviz(std::string filename = "shortest_path") const {
+        std::ofstream ss(filename + ".DOT");
+        ss << "digraph{\n";
+        for (int i = 0; i < V; i++) {
+            for (const auto &e : to[i]) ss << i << "->" << e.first << "[label=" << e.second << "];\n";
+        }
+        ss << "}\n";
+        ss.close();
+        return;
     }
 };
