@@ -146,9 +146,6 @@ data:
   - name: graph
     pages:
     - icon: ':heavy_check_mark:'
-      path: graph/bellman_ford.hpp
-      title: graph/bellman_ford.hpp
-    - icon: ':heavy_check_mark:'
       path: graph/bipartite_matching(slow).hpp
       title: graph/bipartite_matching(slow).hpp
     - icon: ':heavy_check_mark:'

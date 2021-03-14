@@ -15,13 +15,14 @@ data:
     links:
     - https://judge.yosupo.jp/problem/shortest_path
   bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include\
-    \ <deque>\n#include <functional>\n#include <limits>\n#include <queue>\n#include\
-    \ <utility>\n#include <vector>\n\n// CUT begin\ntemplate <typename T, T INF =\
-    \ std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath {\n\
-    \    int V, E;\n    bool single_positive_weight;\n    T wmin, wmax;\n    std::vector<std::vector<std::pair<int,\
-    \ T>>> to;\n\n    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true),\
-    \ wmin(0), wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n       \
-    \ assert(0 <= s and s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t,\
+    \ <deque>\n#include <fstream>\n#include <functional>\n#include <limits>\n#include\
+    \ <queue>\n#include <string>\n#include <utility>\n#include <vector>\n\n// CUT\
+    \ begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max() / 2, int\
+    \ INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
+    \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
+    \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
+    \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
+    \ <= s and s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t,\
     \ w);\n        E++;\n        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight\
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
@@ -80,6 +81,11 @@ data:
     \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
     \ == INF) continue;\n                    dist2d[i][j] = std::min(dist2d[i][j],\
     \ dist2d[i][k] + dist2d[k][j]);\n                }\n            }\n        }\n\
+    \    }\n\n    void dump_graphviz(std::string filename = \"shortest_path\") const\
+    \ {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
+    n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
+    \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
+    ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
     \    }\n};\n#line 2 \"graph/test/shortest_path.test.cpp\"\n#include <algorithm>\n\
     #include <iostream>\n#line 5 \"graph/test/shortest_path.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/shortest_path\"\nusing namespace std;\n\n\
@@ -110,7 +116,7 @@ data:
   isVerificationFile: true
   path: graph/test/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2021-02-21 15:19:18+09:00'
+  timestamp: '2021-03-14 20:53:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_path.test.cpp

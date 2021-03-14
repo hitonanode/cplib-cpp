@@ -14,9 +14,10 @@ data:
     - https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>
     - https://snuke.hatenablog.com/entry/2016/07/10/043918>
   bundledCode: "#line 2 \"combinatorial_opt/maxflow.hpp\"\n\n#include <algorithm>\n\
-    #include <cassert>\n#include <limits>\n#include <vector>\n\n// CUT begin\n// MaxFlow\
-    \ based and AtCoder Library, single class, no namespace, no private variables,\
-    \ compatible with C++11\n// Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
+    #include <cassert>\n#include <fstream>\n#include <limits>\n#include <string>\n\
+    #include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder Library, single\
+    \ class, no namespace, no private variables, compatible with C++11\n// Reference:\
+    \ <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
     template <class Cap> struct mf_graph {\n    struct simple_queue_int {\n      \
     \  std::vector<int> payload;\n        int pos = 0;\n        void reserve(int n)\
     \ { payload.reserve(n); }\n        int size() const { return int(payload.size())\
@@ -70,8 +71,13 @@ data:
     \ = true;\n            for (auto e : g[p]) {\n                if (e.cap && !visited[e.to])\
     \ {\n                    visited[e.to] = true;\n                    que.push(e.to);\n\
     \                }\n            }\n        }\n        return visited;\n    }\n\
-    \n    int _n;\n    struct _edge {\n        int to, rev;\n        Cap cap;\n  \
-    \  };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
+    \n    void dump_graphviz(std::string filename = \"maxflow\") const {\n       \
+    \ std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\n\";\n   \
+    \     for (int i = 0; i < _n; i++) {\n            for (const auto &e : g[i]) {\n\
+    \                if (e.cap > 0) ss << i << \"->\" << e.to << \"[label=\" << e.cap\
+    \ << \"];\\n\";\n            }\n        }\n        ss << \"}\\n\";\n        ss.close();\n\
+    \        return;\n    }\n\n    int _n;\n    struct _edge {\n        int to, rev;\n\
+    \        Cap cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
     \ g;\n};\n#line 5 \"combinatorial_opt/maxflow_lowerbound.hpp\"\n\n// CUT begin\n\
     // MaxFlow with lower bound\n// <https://snuke.hatenablog.com/entry/2016/07/10/043918>\n\
     // <https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>\n// flush(s,\
@@ -111,7 +117,7 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/maxflow_lowerbound.hpp
   requiredBy: []
-  timestamp: '2020-12-14 02:27:33+09:00'
+  timestamp: '2021-03-14 20:53:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: combinatorial_opt/maxflow_lowerbound.hpp
