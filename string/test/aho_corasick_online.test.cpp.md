@@ -65,51 +65,48 @@ data:
     \ freq[now = step(now, char2int(c))]++;\n\n        for (auto i = visorder.rbegin();\
     \ i != visorder.rend(); i++) freq[node[*i].fail] += freq[*i];\n        std::vector<int>\
     \ ret;\n        for (auto x : endpos) ret.push_back(freq[x]);\n        return\
-    \ ret;\n    }\n};\n\nstruct TrieNodeFL {\n    static const int B = 8, mask = (1\
-    \ << B) - 1;\n    light_forward_list<unsigned> chlist; // \u4E0B\u4F4D B bits\
-    \ \u304C\u6587\u5B57\u7A2E\uFF0C\u4E0A\u4F4D bit \u304C\u884C\u304D\u5148\n  \
-    \  int fail;\n    TrieNodeFL(int = 0) : fail(0) {}\n    int Goto(int c) {\n  \
-    \      for (const auto x : chlist) {\n            if ((x & mask) == c) return\
-    \ x >> B;\n        }\n        return 0;\n    }\n    void setch(int c, int i) {\
-    \ chlist.push_front(c + (i << B)); }\n\n    struct iterator {\n        light_forward_list<unsigned>::iterator\
-    \ iter;\n        iterator operator++() { return {++iter}; }\n        std::pair<int,\
-    \ int> operator*() {\n            unsigned val = *iter;\n            return std::make_pair(val\
-    \ & mask, val >> B); // (char, next_pos)\n        }\n        bool operator!=(const\
-    \ iterator &rhs) { return iter != rhs.iter; }\n    };\n    iterator begin() {\
-    \ return {chlist.begin()}; }\n    iterator end() { return {chlist.end()}; }\n\
-    };\n\nstruct TrieNodeV {\n    std::vector<int> ch; // \u5168 bit \u304C\u884C\u304D\
-    \u5148\n    int fail;\n    TrieNodeV(int D = 0) : ch(D), fail(0) {}\n    int Goto(int\
-    \ d) { return ch[d]; }\n    void setch(int d, int i) { ch[d] = i; }\n\n    struct\
-    \ iterator {\n        int i;\n        std::vector<int>::iterator iter;\n     \
-    \   iterator operator++() { return {++i, ++iter}; }\n        std::pair<int, int>\
-    \ operator*() { return std::make_pair(i, *iter); }\n        bool operator!=(const\
-    \ iterator &rhs) { return iter != rhs.iter; }\n    };\n    iterator begin() {\
-    \ return {0, ch.begin()}; }\n    iterator end() { return {int(ch.size()), ch.end()};\
-    \ }\n};\n\nstruct TrieNodeUM : std::unordered_map<int, int> {\n    int fail;\n\
-    \    TrieNodeUM(int = 0) : fail(0) {}\n    int Goto(int d) { return count(d) ?\
-    \ (*this)[d] : 0; }\n    void setch(int d, int i) { (*this)[d] = i; }\n};\n\n\
-    int c2i0aA(char c) { return isdigit(c) ? c - '0' : islower(c) ? c - 'a' + 10 :\
-    \ c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL, c2i0aA> trie(62);\ntrie.add(P);\n\
-    trie.build();\nvector<int> ret = trie.match();\n*/\n#line 5 \"string/aho_corasick_online.hpp\"\
-    \n\n// CUT begin\n// Aho-Corasick, Online keyword addition\n// Implementation\
-    \ idea: <https://codeforces.com/blog/entry/10725?#comment-160742>\nstruct OnlineAhoCorasick\
-    \ {\n    int n_keywords;\n    int D = 62;\n    using AC = AhoCorasick<TrieNodeFL,\
-    \ c2i0aA>;\n    std::vector<std::string> keywords;\n    std::vector<std::vector<int>>\
-    \ kwd_ids;\n    std::vector<AC> automata;\n    OnlineAhoCorasick() : n_keywords(0),\
-    \ kwd_ids(30), automata(30, D) {}\n\n    // O(lg(n_keywords) |keyword|) amortized\n\
-    \    void add(const std::string &keyword) {\n        int pos = __builtin_clz(~n_keywords);\n\
-    \        keywords.push_back(keyword), kwd_ids[pos].push_back(n_keywords);\n  \
-    \      automata[pos].add(keyword);\n        n_keywords++;\n        for (int p\
-    \ = 0; p < pos; p++) {\n            for (auto i : kwd_ids[p]) automata[pos].add(keywords[i]);\n\
-    \            kwd_ids[pos].insert(kwd_ids[pos].end(), kwd_ids[p].begin(), kwd_ids[p].end());\n\
-    \            kwd_ids[p].clear(), automata[p] = AC(D);\n        }\n    }\n\n  \
-    \  // O(lg(n_keywords) |str| + \\sum_i |keyword_i|)\n    std::vector<int> match(const\
-    \ std::string &str) {\n        std::vector<int> ret(keywords.size());\n      \
-    \  for (unsigned p = 0; p < kwd_ids.size(); p++) {\n            std::vector<int>\
-    \ subret = automata[p].match(str);\n            for (unsigned i = 0; i < kwd_ids[p].size();\
-    \ i++) ret[kwd_ids[p][i]] = subret[i];\n        }\n        return ret;\n    }\n\
-    };\n#line 2 \"string/test/aho_corasick_online.test.cpp\"\n#include <iostream>\n\
-    using namespace std;\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D\"\
+    \ ret;\n    }\n};\n\nstruct TrieNodeFL {\n    struct smallpii {\n        int first\
+    \ : 8;\n        int second : 24;\n    };\n    light_forward_list<smallpii> chlist;\n\
+    \    int fail;\n    TrieNodeFL(int = 0) : fail(0) {}\n    int Goto(int c) {\n\
+    \        for (const auto x : chlist) {\n            if (x.first == c) return x.second;\n\
+    \        }\n        return 0;\n    }\n    void setch(int c, int i) { chlist.push_front({c,\
+    \ i}); }\n\n    struct iterator {\n        light_forward_list<smallpii>::iterator\
+    \ iter;\n        iterator operator++() { return {++iter}; }\n        smallpii\
+    \ operator*() { return *iter; }\n        bool operator!=(const iterator &rhs)\
+    \ { return iter != rhs.iter; }\n    };\n    iterator begin() { return {chlist.begin()};\
+    \ }\n    iterator end() { return {chlist.end()}; }\n};\n\nstruct TrieNodeV {\n\
+    \    std::vector<int> ch; // \u5168 bit \u304C\u884C\u304D\u5148\n    int fail;\n\
+    \    TrieNodeV(int D = 0) : ch(D), fail(0) {}\n    int Goto(int d) { return ch[d];\
+    \ }\n    void setch(int d, int i) { ch[d] = i; }\n\n    struct iterator {\n  \
+    \      int i;\n        std::vector<int>::iterator iter;\n        iterator operator++()\
+    \ { return {++i, ++iter}; }\n        std::pair<int, int> operator*() { return\
+    \ std::make_pair(i, *iter); }\n        bool operator!=(const iterator &rhs) {\
+    \ return iter != rhs.iter; }\n    };\n    iterator begin() { return {0, ch.begin()};\
+    \ }\n    iterator end() { return {int(ch.size()), ch.end()}; }\n};\n\nstruct TrieNodeUM\
+    \ : std::unordered_map<int, int> {\n    int fail;\n    TrieNodeUM(int = 0) : fail(0)\
+    \ {}\n    int Goto(int d) { return count(d) ? (*this)[d] : 0; }\n    void setch(int\
+    \ d, int i) { (*this)[d] = i; }\n};\n\nint c2i0aA(char c) { return isdigit(c)\
+    \ ? c - '0' : islower(c) ? c - 'a' + 10 : c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL,\
+    \ c2i0aA> trie(62);\ntrie.add(P);\ntrie.build();\nvector<int> ret = trie.match();\n\
+    */\n#line 5 \"string/aho_corasick_online.hpp\"\n\n// CUT begin\n// Aho-Corasick,\
+    \ Online keyword addition\n// Implementation idea: <https://codeforces.com/blog/entry/10725?#comment-160742>\n\
+    struct OnlineAhoCorasick {\n    int n_keywords;\n    int D = 62;\n    using AC\
+    \ = AhoCorasick<TrieNodeFL, c2i0aA>;\n    std::vector<std::string> keywords;\n\
+    \    std::vector<std::vector<int>> kwd_ids;\n    std::vector<AC> automata;\n \
+    \   OnlineAhoCorasick() : n_keywords(0), kwd_ids(30), automata(30, D) {}\n\n \
+    \   // O(lg(n_keywords) |keyword|) amortized\n    void add(const std::string &keyword)\
+    \ {\n        int pos = __builtin_clz(~n_keywords);\n        keywords.push_back(keyword),\
+    \ kwd_ids[pos].push_back(n_keywords);\n        automata[pos].add(keyword);\n \
+    \       n_keywords++;\n        for (int p = 0; p < pos; p++) {\n            for\
+    \ (auto i : kwd_ids[p]) automata[pos].add(keywords[i]);\n            kwd_ids[pos].insert(kwd_ids[pos].end(),\
+    \ kwd_ids[p].begin(), kwd_ids[p].end());\n            kwd_ids[p].clear(), automata[p]\
+    \ = AC(D);\n        }\n    }\n\n    // O(lg(n_keywords) |str| + \\sum_i |keyword_i|)\n\
+    \    std::vector<int> match(const std::string &str) {\n        std::vector<int>\
+    \ ret(keywords.size());\n        for (unsigned p = 0; p < kwd_ids.size(); p++)\
+    \ {\n            std::vector<int> subret = automata[p].match(str);\n         \
+    \   for (unsigned i = 0; i < kwd_ids[p].size(); i++) ret[kwd_ids[p][i]] = subret[i];\n\
+    \        }\n        return ret;\n    }\n};\n#line 2 \"string/test/aho_corasick_online.test.cpp\"\
+    \n#include <iostream>\nusing namespace std;\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D\"\
     \n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    OnlineAhoCorasick\
     \ oac;\n    string T, P;\n    int Q;\n    cin >> T >> Q;\n    while (Q--) cin\
     \ >> P, oac.add(P);\n\n    for (auto n : oac.match(T)) cout << !!n << '\\n';\n\
@@ -127,7 +124,7 @@ data:
   isVerificationFile: true
   path: string/test/aho_corasick_online.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 23:47:50+09:00'
+  timestamp: '2021-03-20 13:33:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/aho_corasick_online.test.cpp

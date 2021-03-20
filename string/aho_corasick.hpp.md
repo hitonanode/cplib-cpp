@@ -73,32 +73,30 @@ data:
     \ freq[now = step(now, char2int(c))]++;\n\n        for (auto i = visorder.rbegin();\
     \ i != visorder.rend(); i++) freq[node[*i].fail] += freq[*i];\n        std::vector<int>\
     \ ret;\n        for (auto x : endpos) ret.push_back(freq[x]);\n        return\
-    \ ret;\n    }\n};\n\nstruct TrieNodeFL {\n    static const int B = 8, mask = (1\
-    \ << B) - 1;\n    light_forward_list<unsigned> chlist; // \u4E0B\u4F4D B bits\
-    \ \u304C\u6587\u5B57\u7A2E\uFF0C\u4E0A\u4F4D bit \u304C\u884C\u304D\u5148\n  \
-    \  int fail;\n    TrieNodeFL(int = 0) : fail(0) {}\n    int Goto(int c) {\n  \
-    \      for (const auto x : chlist) {\n            if ((x & mask) == c) return\
-    \ x >> B;\n        }\n        return 0;\n    }\n    void setch(int c, int i) {\
-    \ chlist.push_front(c + (i << B)); }\n\n    struct iterator {\n        light_forward_list<unsigned>::iterator\
-    \ iter;\n        iterator operator++() { return {++iter}; }\n        std::pair<int,\
-    \ int> operator*() {\n            unsigned val = *iter;\n            return std::make_pair(val\
-    \ & mask, val >> B); // (char, next_pos)\n        }\n        bool operator!=(const\
-    \ iterator &rhs) { return iter != rhs.iter; }\n    };\n    iterator begin() {\
-    \ return {chlist.begin()}; }\n    iterator end() { return {chlist.end()}; }\n\
-    };\n\nstruct TrieNodeV {\n    std::vector<int> ch; // \u5168 bit \u304C\u884C\u304D\
-    \u5148\n    int fail;\n    TrieNodeV(int D = 0) : ch(D), fail(0) {}\n    int Goto(int\
-    \ d) { return ch[d]; }\n    void setch(int d, int i) { ch[d] = i; }\n\n    struct\
-    \ iterator {\n        int i;\n        std::vector<int>::iterator iter;\n     \
-    \   iterator operator++() { return {++i, ++iter}; }\n        std::pair<int, int>\
-    \ operator*() { return std::make_pair(i, *iter); }\n        bool operator!=(const\
-    \ iterator &rhs) { return iter != rhs.iter; }\n    };\n    iterator begin() {\
-    \ return {0, ch.begin()}; }\n    iterator end() { return {int(ch.size()), ch.end()};\
-    \ }\n};\n\nstruct TrieNodeUM : std::unordered_map<int, int> {\n    int fail;\n\
-    \    TrieNodeUM(int = 0) : fail(0) {}\n    int Goto(int d) { return count(d) ?\
-    \ (*this)[d] : 0; }\n    void setch(int d, int i) { (*this)[d] = i; }\n};\n\n\
-    int c2i0aA(char c) { return isdigit(c) ? c - '0' : islower(c) ? c - 'a' + 10 :\
-    \ c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL, c2i0aA> trie(62);\ntrie.add(P);\n\
-    trie.build();\nvector<int> ret = trie.match();\n*/\n"
+    \ ret;\n    }\n};\n\nstruct TrieNodeFL {\n    struct smallpii {\n        int first\
+    \ : 8;\n        int second : 24;\n    };\n    light_forward_list<smallpii> chlist;\n\
+    \    int fail;\n    TrieNodeFL(int = 0) : fail(0) {}\n    int Goto(int c) {\n\
+    \        for (const auto x : chlist) {\n            if (x.first == c) return x.second;\n\
+    \        }\n        return 0;\n    }\n    void setch(int c, int i) { chlist.push_front({c,\
+    \ i}); }\n\n    struct iterator {\n        light_forward_list<smallpii>::iterator\
+    \ iter;\n        iterator operator++() { return {++iter}; }\n        smallpii\
+    \ operator*() { return *iter; }\n        bool operator!=(const iterator &rhs)\
+    \ { return iter != rhs.iter; }\n    };\n    iterator begin() { return {chlist.begin()};\
+    \ }\n    iterator end() { return {chlist.end()}; }\n};\n\nstruct TrieNodeV {\n\
+    \    std::vector<int> ch; // \u5168 bit \u304C\u884C\u304D\u5148\n    int fail;\n\
+    \    TrieNodeV(int D = 0) : ch(D), fail(0) {}\n    int Goto(int d) { return ch[d];\
+    \ }\n    void setch(int d, int i) { ch[d] = i; }\n\n    struct iterator {\n  \
+    \      int i;\n        std::vector<int>::iterator iter;\n        iterator operator++()\
+    \ { return {++i, ++iter}; }\n        std::pair<int, int> operator*() { return\
+    \ std::make_pair(i, *iter); }\n        bool operator!=(const iterator &rhs) {\
+    \ return iter != rhs.iter; }\n    };\n    iterator begin() { return {0, ch.begin()};\
+    \ }\n    iterator end() { return {int(ch.size()), ch.end()}; }\n};\n\nstruct TrieNodeUM\
+    \ : std::unordered_map<int, int> {\n    int fail;\n    TrieNodeUM(int = 0) : fail(0)\
+    \ {}\n    int Goto(int d) { return count(d) ? (*this)[d] : 0; }\n    void setch(int\
+    \ d, int i) { (*this)[d] = i; }\n};\n\nint c2i0aA(char c) { return isdigit(c)\
+    \ ? c - '0' : islower(c) ? c - 'a' + 10 : c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL,\
+    \ c2i0aA> trie(62);\ntrie.add(P);\ntrie.build();\nvector<int> ret = trie.match();\n\
+    */\n"
   code: "#pragma once\n#include \"../data_structure/light_forward_list.hpp\"\n#include\
     \ <cassert>\n#include <string>\n#include <unordered_map>\n#include <vector>\n\n\
     // CUT begin\n// Aho-Corasick algorithm\n// Verify: <http://judge.u-aizu.ac.jp/onlinejudge/review.jsp?rid=5101653>\n\
@@ -132,39 +130,37 @@ data:
     \ freq[now = step(now, char2int(c))]++;\n\n        for (auto i = visorder.rbegin();\
     \ i != visorder.rend(); i++) freq[node[*i].fail] += freq[*i];\n        std::vector<int>\
     \ ret;\n        for (auto x : endpos) ret.push_back(freq[x]);\n        return\
-    \ ret;\n    }\n};\n\nstruct TrieNodeFL {\n    static const int B = 8, mask = (1\
-    \ << B) - 1;\n    light_forward_list<unsigned> chlist; // \u4E0B\u4F4D B bits\
-    \ \u304C\u6587\u5B57\u7A2E\uFF0C\u4E0A\u4F4D bit \u304C\u884C\u304D\u5148\n  \
-    \  int fail;\n    TrieNodeFL(int = 0) : fail(0) {}\n    int Goto(int c) {\n  \
-    \      for (const auto x : chlist) {\n            if ((x & mask) == c) return\
-    \ x >> B;\n        }\n        return 0;\n    }\n    void setch(int c, int i) {\
-    \ chlist.push_front(c + (i << B)); }\n\n    struct iterator {\n        light_forward_list<unsigned>::iterator\
-    \ iter;\n        iterator operator++() { return {++iter}; }\n        std::pair<int,\
-    \ int> operator*() {\n            unsigned val = *iter;\n            return std::make_pair(val\
-    \ & mask, val >> B); // (char, next_pos)\n        }\n        bool operator!=(const\
-    \ iterator &rhs) { return iter != rhs.iter; }\n    };\n    iterator begin() {\
-    \ return {chlist.begin()}; }\n    iterator end() { return {chlist.end()}; }\n\
-    };\n\nstruct TrieNodeV {\n    std::vector<int> ch; // \u5168 bit \u304C\u884C\u304D\
-    \u5148\n    int fail;\n    TrieNodeV(int D = 0) : ch(D), fail(0) {}\n    int Goto(int\
-    \ d) { return ch[d]; }\n    void setch(int d, int i) { ch[d] = i; }\n\n    struct\
-    \ iterator {\n        int i;\n        std::vector<int>::iterator iter;\n     \
-    \   iterator operator++() { return {++i, ++iter}; }\n        std::pair<int, int>\
-    \ operator*() { return std::make_pair(i, *iter); }\n        bool operator!=(const\
-    \ iterator &rhs) { return iter != rhs.iter; }\n    };\n    iterator begin() {\
-    \ return {0, ch.begin()}; }\n    iterator end() { return {int(ch.size()), ch.end()};\
-    \ }\n};\n\nstruct TrieNodeUM : std::unordered_map<int, int> {\n    int fail;\n\
-    \    TrieNodeUM(int = 0) : fail(0) {}\n    int Goto(int d) { return count(d) ?\
-    \ (*this)[d] : 0; }\n    void setch(int d, int i) { (*this)[d] = i; }\n};\n\n\
-    int c2i0aA(char c) { return isdigit(c) ? c - '0' : islower(c) ? c - 'a' + 10 :\
-    \ c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL, c2i0aA> trie(62);\ntrie.add(P);\n\
-    trie.build();\nvector<int> ret = trie.match();\n*/\n"
+    \ ret;\n    }\n};\n\nstruct TrieNodeFL {\n    struct smallpii {\n        int first\
+    \ : 8;\n        int second : 24;\n    };\n    light_forward_list<smallpii> chlist;\n\
+    \    int fail;\n    TrieNodeFL(int = 0) : fail(0) {}\n    int Goto(int c) {\n\
+    \        for (const auto x : chlist) {\n            if (x.first == c) return x.second;\n\
+    \        }\n        return 0;\n    }\n    void setch(int c, int i) { chlist.push_front({c,\
+    \ i}); }\n\n    struct iterator {\n        light_forward_list<smallpii>::iterator\
+    \ iter;\n        iterator operator++() { return {++iter}; }\n        smallpii\
+    \ operator*() { return *iter; }\n        bool operator!=(const iterator &rhs)\
+    \ { return iter != rhs.iter; }\n    };\n    iterator begin() { return {chlist.begin()};\
+    \ }\n    iterator end() { return {chlist.end()}; }\n};\n\nstruct TrieNodeV {\n\
+    \    std::vector<int> ch; // \u5168 bit \u304C\u884C\u304D\u5148\n    int fail;\n\
+    \    TrieNodeV(int D = 0) : ch(D), fail(0) {}\n    int Goto(int d) { return ch[d];\
+    \ }\n    void setch(int d, int i) { ch[d] = i; }\n\n    struct iterator {\n  \
+    \      int i;\n        std::vector<int>::iterator iter;\n        iterator operator++()\
+    \ { return {++i, ++iter}; }\n        std::pair<int, int> operator*() { return\
+    \ std::make_pair(i, *iter); }\n        bool operator!=(const iterator &rhs) {\
+    \ return iter != rhs.iter; }\n    };\n    iterator begin() { return {0, ch.begin()};\
+    \ }\n    iterator end() { return {int(ch.size()), ch.end()}; }\n};\n\nstruct TrieNodeUM\
+    \ : std::unordered_map<int, int> {\n    int fail;\n    TrieNodeUM(int = 0) : fail(0)\
+    \ {}\n    int Goto(int d) { return count(d) ? (*this)[d] : 0; }\n    void setch(int\
+    \ d, int i) { (*this)[d] = i; }\n};\n\nint c2i0aA(char c) { return isdigit(c)\
+    \ ? c - '0' : islower(c) ? c - 'a' + 10 : c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL,\
+    \ c2i0aA> trie(62);\ntrie.add(P);\ntrie.build();\nvector<int> ret = trie.match();\n\
+    */\n"
   dependsOn:
   - data_structure/light_forward_list.hpp
   isVerificationFile: false
   path: string/aho_corasick.hpp
   requiredBy:
   - string/aho_corasick_online.hpp
-  timestamp: '2021-02-26 23:47:50+09:00'
+  timestamp: '2021-03-20 13:33:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/aho_corasick_unorderedmap.test.cpp
