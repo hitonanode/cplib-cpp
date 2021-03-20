@@ -79,25 +79,25 @@ template <class T, int (*char2int)(char)> struct AhoCorasick {
 };
 
 struct TrieNodeFL {
-    static const int B = 8, mask = (1 << B) - 1;
-    light_forward_list<unsigned> chlist; // 下位 B bits が文字種，上位 bit が行き先
+    struct smallpii {
+        int first : 8;
+        int second : 24;
+    };
+    light_forward_list<smallpii> chlist;
     int fail;
     TrieNodeFL(int = 0) : fail(0) {}
     int Goto(int c) {
         for (const auto x : chlist) {
-            if ((x & mask) == c) return x >> B;
+            if (x.first == c) return x.second;
         }
         return 0;
     }
-    void setch(int c, int i) { chlist.push_front(c + (i << B)); }
+    void setch(int c, int i) { chlist.push_front({c, i}); }
 
     struct iterator {
-        light_forward_list<unsigned>::iterator iter;
+        light_forward_list<smallpii>::iterator iter;
         iterator operator++() { return {++iter}; }
-        std::pair<int, int> operator*() {
-            unsigned val = *iter;
-            return std::make_pair(val & mask, val >> B); // (char, next_pos)
-        }
+        smallpii operator*() { return *iter; }
         bool operator!=(const iterator &rhs) { return iter != rhs.iter; }
     };
     iterator begin() { return {chlist.begin()}; }
