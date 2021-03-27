@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/det_of_sparse_matrix.hpp
     title: linear_algebra_matrix/det_of_sparse_matrix.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linear_recurrence.test.cpp
     title: linear_algebra_matrix/test/linear_recurrence.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm>
@@ -71,10 +71,10 @@ data:
   requiredBy:
   - linear_algebra_matrix/det_of_sparse_matrix.hpp
   timestamp: '2020-11-18 20:06:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - linear_algebra_matrix/test/linear_recurrence.test.cpp
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - linear_algebra_matrix/test/linear_recurrence.test.cpp
 documentation_of: linear_algebra_matrix/linear_recurrence.hpp
 layout: document
 redirect_from:

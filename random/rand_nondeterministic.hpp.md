@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/det_of_sparse_matrix.hpp
     title: linear_algebra_matrix/det_of_sparse_matrix.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"random/rand_nondeterministic.hpp\"\n#include <chrono>\n\
@@ -32,7 +32,7 @@ data:
   requiredBy:
   - linear_algebra_matrix/det_of_sparse_matrix.hpp
   timestamp: '2020-11-18 20:25:12+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
 documentation_of: random/rand_nondeterministic.hpp

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/sliding_window_aggregation.hpp
     title: data_structure/sliding_window_aggregation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -67,27 +67,28 @@ data:
     \ = ModInt(facs.back()).pow(mod - 2).val;\n        for (int i = N - 1; i >= l0;\
     \ i--) {\n            invs[i] = facinv * facs[i - 1] % mod;\n            facinv\
     \ = facinv * i % mod;\n        }\n    }\n    MDCONST lint inv() const {\n    \
-    \    if (this->val < 1 << 20) {\n            while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n            return invs[this->val];\n   \
-    \     } else {\n            return this->pow(mod - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
+    \    if (this->val < std::min(mod >> 1, 1 << 21)) {\n            while (this->val\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val];\n\
+    \        } else {\n            return this->pow(mod - 2).val;\n        }\n   \
+    \ }\n    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
     \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\n\
     \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\
-    \ : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST ModInt nCr(const ModInt\
-    \ &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac()\
-    \ * r.fac()); }\n\n    ModInt sqrt() const {\n        if (val == 0) return 0;\n\
-    \        if (mod == 2) return val;\n        if (pow((mod - 1) / 2) != 1) return\
-    \ 0;\n        ModInt b = 1;\n        while (b.pow((mod - 1) / 2) == 1) b += 1;\n\
-    \        int e = 0, m = mod - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n \
-    \       ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
-    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
-    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
-    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
-    \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
-    \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
-    template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
-    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"data_structure/sliding_window_aggregation.hpp\"\
+    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
+    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
+    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
+    \ r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac());\n    }\n\n    ModInt\
+    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
+    \ val;\n        if (pow((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
+    \        while (b.pow((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
+    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m -\
+    \ 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\ntemplate <int\
+    \ mod> std::vector<long long> ModInt<mod>::facs = {1};\ntemplate <int mod> std::vector<long\
+    \ long> ModInt<mod>::invs = {0};\n\n// using mint = ModInt<998244353>;\n// using\
+    \ mint = ModInt<1000000007>;\n#line 2 \"data_structure/sliding_window_aggregation.hpp\"\
     \n#include <stack>\n#include <utility>\nusing namespace std;\n\n// CUT begin\n\
     // Sliding-Window Aggregation based queue\n// - `std::queue`-like data structure\
     \ with monoid operation\n// - Each operation is amortized O(1)\n// - Verification:\
@@ -143,7 +144,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 23:47:50+09:00'
+  timestamp: '2021-03-27 19:28:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/queue_operate_all_composite.test.cpp

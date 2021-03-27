@@ -9,22 +9,22 @@ data:
     path: convolution/multivar_ntt.hpp
     title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
       \u307F\u8FBC\u307F\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/coeff_of_rational_function.hpp
     title: formal_power_series/coeff_of_rational_function.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
   - icon: ':warning:'
@@ -76,72 +76,72 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_pow.test.cpp
     title: formal_power_series/test/fps_pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_pow_another.test.cpp
     title: formal_power_series/test/fps_pow_another.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt.test.cpp
     title: formal_power_series/test/fps_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/multipoint_evaluation.test.cpp
     title: formal_power_series/test/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/poly_taylor_shift.test.cpp
     title: formal_power_series/test/poly_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/stirling_number_of_2nd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linear_recurrence.test.cpp
     title: linear_algebra_matrix/test/linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/range-affine-range-sum.test.cpp
     title: segmenttree/test/range-affine-range-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/rolling_hash_w_modint.test.cpp
     title: string/test/rolling_hash_w_modint.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -194,27 +194,28 @@ data:
     \ = ModInt(facs.back()).pow(mod - 2).val;\n        for (int i = N - 1; i >= l0;\
     \ i--) {\n            invs[i] = facinv * facs[i - 1] % mod;\n            facinv\
     \ = facinv * i % mod;\n        }\n    }\n    MDCONST lint inv() const {\n    \
-    \    if (this->val < 1 << 20) {\n            while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n            return invs[this->val];\n   \
-    \     } else {\n            return this->pow(mod - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
+    \    if (this->val < std::min(mod >> 1, 1 << 21)) {\n            while (this->val\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val];\n\
+    \        } else {\n            return this->pow(mod - 2).val;\n        }\n   \
+    \ }\n    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
     \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\n\
     \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\
-    \ : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST ModInt nCr(const ModInt\
-    \ &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac()\
-    \ * r.fac()); }\n\n    ModInt sqrt() const {\n        if (val == 0) return 0;\n\
-    \        if (mod == 2) return val;\n        if (pow((mod - 1) / 2) != 1) return\
-    \ 0;\n        ModInt b = 1;\n        while (b.pow((mod - 1) / 2) == 1) b += 1;\n\
-    \        int e = 0, m = mod - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n \
-    \       ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
-    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
-    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
-    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
-    \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
-    \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
-    template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
-    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n"
+    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
+    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
+    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
+    \ r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac());\n    }\n\n    ModInt\
+    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
+    \ val;\n        if (pow((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
+    \        while (b.pow((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
+    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m -\
+    \ 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\ntemplate <int\
+    \ mod> std::vector<long long> ModInt<mod>::facs = {1};\ntemplate <int mod> std::vector<long\
+    \ long> ModInt<mod>::invs = {0};\n\n// using mint = ModInt<998244353>;\n// using\
+    \ mint = ModInt<1000000007>;\n"
   code: "#pragma once\n#include <iostream>\n#include <set>\n#include <vector>\n\n\
     // CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus >= 201402L\n\
     #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
@@ -265,79 +266,80 @@ data:
     \ = ModInt(facs.back()).pow(mod - 2).val;\n        for (int i = N - 1; i >= l0;\
     \ i--) {\n            invs[i] = facinv * facs[i - 1] % mod;\n            facinv\
     \ = facinv * i % mod;\n        }\n    }\n    MDCONST lint inv() const {\n    \
-    \    if (this->val < 1 << 20) {\n            while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n            return invs[this->val];\n   \
-    \     } else {\n            return this->pow(mod - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
+    \    if (this->val < std::min(mod >> 1, 1 << 21)) {\n            while (this->val\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val];\n\
+    \        } else {\n            return this->pow(mod - 2).val;\n        }\n   \
+    \ }\n    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
     \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\n\
     \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\
-    \ : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST ModInt nCr(const ModInt\
-    \ &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac()\
-    \ * r.fac()); }\n\n    ModInt sqrt() const {\n        if (val == 0) return 0;\n\
-    \        if (mod == 2) return val;\n        if (pow((mod - 1) / 2) != 1) return\
-    \ 0;\n        ModInt b = 1;\n        while (b.pow((mod - 1) / 2) == 1) b += 1;\n\
-    \        int e = 0, m = mod - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n \
-    \       ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
-    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
-    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
-    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
-    \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
-    \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
-    template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
-    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n"
+    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
+    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
+    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
+    \ r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac());\n    }\n\n    ModInt\
+    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
+    \ val;\n        if (pow((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
+    \        while (b.pow((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
+    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m -\
+    \ 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\ntemplate <int\
+    \ mod> std::vector<long long> ModInt<mod>::facs = {1};\ntemplate <int mod> std::vector<long\
+    \ long> ModInt<mod>::invs = {0};\n\n// using mint = ModInt<998244353>;\n// using\
+    \ mint = ModInt<1000000007>;\n"
   dependsOn: []
   isVerificationFile: false
   path: modint.hpp
   requiredBy:
-  - formal_power_series/formal_power_series.hpp
-  - formal_power_series/coeff_of_rational_function.hpp
-  - formal_power_series/multipoint_evaluation.hpp
-  - graph/general_matching.hpp
   - convolution/multivar_ntt.hpp
   - convolution/ntt.hpp
   - convolution/convolutive_translation_2d.hpp
-  - tree/tree_isomorphism.hpp
+  - formal_power_series/coeff_of_rational_function.hpp
+  - formal_power_series/multipoint_evaluation.hpp
+  - formal_power_series/formal_power_series.hpp
+  - graph/general_matching.hpp
   - segmenttree/trees/acl_range-affine-range-sum.hpp
-  timestamp: '2020-12-02 23:44:04+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - tree/tree_isomorphism.hpp
+  timestamp: '2021-03-27 19:28:18+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - formal_power_series/test/multipoint_evaluation.test.cpp
-  - formal_power_series/test/fps_log.test.cpp
-  - formal_power_series/test/fps_exp.test.cpp
+  - string/test/rolling_hash_w_modint.test.cpp
+  - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+  - linear_algebra_matrix/test/linear_recurrence.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - convolution/test/bitwise_xor_conv.test.cpp
+  - convolution/test/ntt.test.cpp
+  - convolution/test/subset_convolution.test.cpp
+  - convolution/test/ntt_arbitrary_mod.test.cpp
+  - convolution/test/bitwise_and_conv.test.cpp
+  - convolution/test/multivar_ntt.test.cpp
+  - formal_power_series/test/sharp_p_subset_sum.test.cpp
+  - formal_power_series/test/polynomial_interpolation.test.cpp
   - formal_power_series/test/bernoulli_number.test.cpp
   - formal_power_series/test/division_number.test.cpp
   - formal_power_series/test/coeff_of_rational_function.test.cpp
   - formal_power_series/test/fps_pow.test.cpp
-  - formal_power_series/test/fps_inv.test.cpp
-  - formal_power_series/test/fps_pow_another.test.cpp
   - formal_power_series/test/stirling_number_of_2nd.test.cpp
+  - formal_power_series/test/multipoint_evaluation.test.cpp
+  - formal_power_series/test/fps_inv.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
-  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - formal_power_series/test/poly_taylor_shift.test.cpp
-  - formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - formal_power_series/test/fps_sqrt.test.cpp
-  - formal_power_series/test/stirling_number_of_1st.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - formal_power_series/test/polynomial_interpolation.test.cpp
+  - formal_power_series/test/fps_log.test.cpp
+  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+  - formal_power_series/test/fps_pow_another.test.cpp
+  - formal_power_series/test/fps_exp.test.cpp
+  - formal_power_series/test/stirling_number_of_1st.test.cpp
+  - formal_power_series/test/fps_sqrt.test.cpp
   - graph/test/general_matching.test.cpp
-  - convolution/test/subset_convolution.test.cpp
-  - convolution/test/ntt.test.cpp
-  - convolution/test/bitwise_xor_conv.test.cpp
-  - convolution/test/bitwise_and_conv.test.cpp
-  - convolution/test/ntt_arbitrary_mod.test.cpp
-  - convolution/test/multivar_ntt.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linear_recurrence.test.cpp
-  - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - data_structure/test/queue_operate_all_composite.test.cpp
-  - tree/test/vertex-set-path-composite.test.cpp
-  - string/test/rolling_hash_w_modint.test.cpp
   - segmenttree/test/range-affine-range-sum.test.cpp
-  - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
+  - segmenttree/test/acl_range-affine-range-sum.test.cpp
+  - tree/test/vertex-set-path-composite.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
 documentation_of: modint.hpp
 layout: document
 redirect_from:

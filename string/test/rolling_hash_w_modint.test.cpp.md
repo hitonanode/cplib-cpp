@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: string/rolling_hash_1d.hpp
     title: string/rolling_hash_1d.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
@@ -67,29 +67,30 @@ data:
     \ = ModInt(facs.back()).pow(mod - 2).val;\n        for (int i = N - 1; i >= l0;\
     \ i--) {\n            invs[i] = facinv * facs[i - 1] % mod;\n            facinv\
     \ = facinv * i % mod;\n        }\n    }\n    MDCONST lint inv() const {\n    \
-    \    if (this->val < 1 << 20) {\n            while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n            return invs[this->val];\n   \
-    \     } else {\n            return this->pow(mod - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
+    \    if (this->val < std::min(mod >> 1, 1 << 21)) {\n            while (this->val\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val];\n\
+    \        } else {\n            return this->pow(mod - 2).val;\n        }\n   \
+    \ }\n    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
     \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\n\
     \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\
-    \ : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST ModInt nCr(const ModInt\
-    \ &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac()\
-    \ * r.fac()); }\n\n    ModInt sqrt() const {\n        if (val == 0) return 0;\n\
-    \        if (mod == 2) return val;\n        if (pow((mod - 1) / 2) != 1) return\
-    \ 0;\n        ModInt b = 1;\n        while (b.pow((mod - 1) / 2) == 1) b += 1;\n\
-    \        int e = 0, m = mod - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n \
-    \       ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
-    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
-    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
-    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
-    \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
-    \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
-    template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
-    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"string/rolling_hash_1d.hpp\"\
-    \n#include <algorithm>\n#include <chrono>\n#include <random>\n#include <string>\n\
-    #line 7 \"string/rolling_hash_1d.hpp\"\n\n// CUT begin\nstruct DoubleHash : public\
+    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
+    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
+    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
+    \ r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac());\n    }\n\n    ModInt\
+    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
+    \ val;\n        if (pow((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
+    \        while (b.pow((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
+    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m -\
+    \ 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\ntemplate <int\
+    \ mod> std::vector<long long> ModInt<mod>::facs = {1};\ntemplate <int mod> std::vector<long\
+    \ long> ModInt<mod>::invs = {0};\n\n// using mint = ModInt<998244353>;\n// using\
+    \ mint = ModInt<1000000007>;\n#line 2 \"string/rolling_hash_1d.hpp\"\n#include\
+    \ <algorithm>\n#include <chrono>\n#include <random>\n#include <string>\n#line\
+    \ 7 \"string/rolling_hash_1d.hpp\"\n\n// CUT begin\nstruct DoubleHash : public\
     \ std::pair<unsigned, unsigned> {\n    using ull = unsigned long long;\n    using\
     \ pair = std::pair<unsigned, unsigned>;\n    static std::pair<unsigned, unsigned>\
     \ MODs;\n    DoubleHash(std::pair<unsigned, unsigned> x) : pair(x) {}\n    DoubleHash(unsigned\
@@ -164,8 +165,8 @@ data:
   isVerificationFile: true
   path: string/test/rolling_hash_w_modint.test.cpp
   requiredBy: []
-  timestamp: '2021-03-13 17:28:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-03-27 19:28:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: string/test/rolling_hash_w_modint.test.cpp
 layout: document

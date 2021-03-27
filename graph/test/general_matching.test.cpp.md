@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/general_matching
@@ -165,30 +165,31 @@ data:
     \ = ModInt(facs.back()).pow(mod - 2).val;\n        for (int i = N - 1; i >= l0;\
     \ i--) {\n            invs[i] = facinv * facs[i - 1] % mod;\n            facinv\
     \ = facinv * i % mod;\n        }\n    }\n    MDCONST lint inv() const {\n    \
-    \    if (this->val < 1 << 20) {\n            while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n            return invs[this->val];\n   \
-    \     } else {\n            return this->pow(mod - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
+    \    if (this->val < std::min(mod >> 1, 1 << 21)) {\n            while (this->val\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val];\n\
+    \        } else {\n            return this->pow(mod - 2).val;\n        }\n   \
+    \ }\n    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
     \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\n\
     \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\
-    \ : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST ModInt nCr(const ModInt\
-    \ &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac()\
-    \ * r.fac()); }\n\n    ModInt sqrt() const {\n        if (val == 0) return 0;\n\
-    \        if (mod == 2) return val;\n        if (pow((mod - 1) / 2) != 1) return\
-    \ 0;\n        ModInt b = 1;\n        while (b.pow((mod - 1) / 2) == 1) b += 1;\n\
-    \        int e = 0, m = mod - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n \
-    \       ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
-    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
-    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
-    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
-    \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
-    \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
-    template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
-    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"graph/general_matching.hpp\"\
-    \n#include <chrono>\n#include <queue>\n#include <random>\n#include <utility>\n\
-    #line 10 \"graph/general_matching.hpp\"\n\n// CUT begin\n// Find maximum matchings\
-    \ in general graph using the Tutte matrix (The Rabin-Vazirani algorithm)\n// Complexity:\
+    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
+    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
+    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
+    \ r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac());\n    }\n\n    ModInt\
+    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
+    \ val;\n        if (pow((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
+    \        while (b.pow((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
+    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m -\
+    \ 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\ntemplate <int\
+    \ mod> std::vector<long long> ModInt<mod>::facs = {1};\ntemplate <int mod> std::vector<long\
+    \ long> ModInt<mod>::invs = {0};\n\n// using mint = ModInt<998244353>;\n// using\
+    \ mint = ModInt<1000000007>;\n#line 5 \"graph/general_matching.hpp\"\n#include\
+    \ <chrono>\n#include <queue>\n#include <random>\n#include <utility>\n#line 10\
+    \ \"graph/general_matching.hpp\"\n\n// CUT begin\n// Find maximum matchings in\
+    \ general graph using the Tutte matrix (The Rabin-Vazirani algorithm)\n// Complexity:\
     \ O(N^3)\n// Reference: <https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h>\n\
     //            <https://kopricky.github.io/code/Academic/maximum_matching.html>\n\
     std::vector<std::pair<int, int>> generalMatching(int N, std::vector<std::pair<int,\
@@ -256,8 +257,8 @@ data:
   isVerificationFile: true
   path: graph/test/general_matching.test.cpp
   requiredBy: []
-  timestamp: '2021-01-10 04:11:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-03-27 19:28:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/general_matching.test.cpp
 layout: document

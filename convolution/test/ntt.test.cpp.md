@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []
@@ -71,45 +71,45 @@ data:
     \ = ModInt(facs.back()).pow(mod - 2).val;\n        for (int i = N - 1; i >= l0;\
     \ i--) {\n            invs[i] = facinv * facs[i - 1] % mod;\n            facinv\
     \ = facinv * i % mod;\n        }\n    }\n    MDCONST lint inv() const {\n    \
-    \    if (this->val < 1 << 20) {\n            while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n            return invs[this->val];\n   \
-    \     } else {\n            return this->pow(mod - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
+    \    if (this->val < std::min(mod >> 1, 1 << 21)) {\n            while (this->val\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val];\n\
+    \        } else {\n            return this->pow(mod - 2).val;\n        }\n   \
+    \ }\n    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
     \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\n\
     \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\
-    \ : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST ModInt nCr(const ModInt\
-    \ &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac()\
-    \ * r.fac()); }\n\n    ModInt sqrt() const {\n        if (val == 0) return 0;\n\
-    \        if (mod == 2) return val;\n        if (pow((mod - 1) / 2) != 1) return\
-    \ 0;\n        ModInt b = 1;\n        while (b.pow((mod - 1) / 2) == 1) b += 1;\n\
-    \        int e = 0, m = mod - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n \
-    \       ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
-    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
-    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
-    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
-    \         e = j;\n        }\n        return ModInt(std::min(x.val, mod - x.val));\n\
-    \    }\n};\ntemplate <int mod> std::vector<long long> ModInt<mod>::facs = {1};\n\
-    template <int mod> std::vector<long long> ModInt<mod>::invs = {0};\n\n// using\
-    \ mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"number/modint_runtime.hpp\"\
-    \n\n// CUT begin\nstruct ModIntRuntime {\n    using lint = long long int;\n  \
-    \  static int get_mod() { return mod; }\n    int val;\n    static int mod;\n \
-    \   static std::vector<ModIntRuntime> &facs() {\n        static std::vector<ModIntRuntime>\
-    \ facs_;\n        return facs_;\n    }\n    static int &get_primitive_root() {\n\
-    \        static int primitive_root_ = 0;\n        if (!primitive_root_) {\n  \
-    \          primitive_root_ = [&]() {\n                std::set<int> fac;\n   \
-    \             int v = mod - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
-    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
-    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < mod; g++) {\n\
-    \                    bool ok = true;\n                    for (auto i : fac)\n\
-    \                        if (ModIntRuntime(g).power((mod - 1) / i) == 1) {\n \
-    \                           ok = false;\n                            break;\n\
-    \                        }\n                    if (ok) return g;\n          \
-    \      }\n                return -1;\n            }();\n        }\n        return\
-    \ primitive_root_;\n    }\n    static void set_mod(const int &m) {\n        if\
-    \ (mod != m) facs().clear();\n        mod = m;\n        get_primitive_root() =\
-    \ 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        val = (v >= mod ? v\
-    \ - mod : v);\n        return *this;\n    }\n    ModIntRuntime() : val(0) {}\n\
+    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
+    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
+    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
+    \ r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac());\n    }\n\n    ModInt\
+    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
+    \ val;\n        if (pow((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
+    \        while (b.pow((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
+    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m -\
+    \ 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\ntemplate <int\
+    \ mod> std::vector<long long> ModInt<mod>::facs = {1};\ntemplate <int mod> std::vector<long\
+    \ long> ModInt<mod>::invs = {0};\n\n// using mint = ModInt<998244353>;\n// using\
+    \ mint = ModInt<1000000007>;\n#line 5 \"number/modint_runtime.hpp\"\n\n// CUT\
+    \ begin\nstruct ModIntRuntime {\n    using lint = long long int;\n    static int\
+    \ get_mod() { return mod; }\n    int val;\n    static int mod;\n    static std::vector<ModIntRuntime>\
+    \ &facs() {\n        static std::vector<ModIntRuntime> facs_;\n        return\
+    \ facs_;\n    }\n    static int &get_primitive_root() {\n        static int primitive_root_\
+    \ = 0;\n        if (!primitive_root_) {\n            primitive_root_ = [&]() {\n\
+    \                std::set<int> fac;\n                int v = mod - 1;\n      \
+    \          for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
+    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
+    \              for (int g = 1; g < mod; g++) {\n                    bool ok =\
+    \ true;\n                    for (auto i : fac)\n                        if (ModIntRuntime(g).power((mod\
+    \ - 1) / i) == 1) {\n                            ok = false;\n               \
+    \             break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root_;\n    }\n    static void set_mod(const int\
+    \ &m) {\n        if (mod != m) facs().clear();\n        mod = m;\n        get_primitive_root()\
+    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        val = (v >= mod ?\
+    \ v - mod : v);\n        return *this;\n    }\n    ModIntRuntime() : val(0) {}\n\
     \    ModIntRuntime(lint v) { _setval(v % mod + mod); }\n    explicit operator\
     \ bool() const { return val != 0; }\n    ModIntRuntime operator+(const ModIntRuntime\
     \ &x) const { return ModIntRuntime()._setval((lint)val + x.val); }\n    ModIntRuntime\
@@ -241,7 +241,7 @@ data:
   isVerificationFile: true
   path: convolution/test/ntt.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 23:44:04+09:00'
+  timestamp: '2021-03-27 19:28:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/ntt.test.cpp
