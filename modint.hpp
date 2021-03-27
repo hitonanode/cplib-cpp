@@ -83,7 +83,7 @@ template <int mod> struct ModInt {
         }
     }
     MDCONST lint inv() const {
-        if (this->val < 1 << 20) {
+        if (this->val < std::min(mod >> 1, 1 << 21)) {
             while (this->val >= int(facs.size())) _precalculation(facs.size() * 2);
             return invs[this->val];
         } else {
@@ -97,9 +97,12 @@ template <int mod> struct ModInt {
 
     MDCONST ModInt doublefac() const {
         lint k = (this->val + 1) / 2;
-        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac()) : ModInt(k).fac() * ModInt(2).pow(k);
+        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())
+                               : ModInt(k).fac() * ModInt(2).pow(k);
     }
-    MDCONST ModInt nCr(const ModInt &r) const { return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac()); }
+    MDCONST ModInt nCr(const ModInt &r) const {
+        return (this->val < r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac());
+    }
 
     ModInt sqrt() const {
         if (val == 0) return 0;
