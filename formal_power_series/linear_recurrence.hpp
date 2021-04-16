@@ -6,7 +6,7 @@
 
 // CUT begin
 // Berlekamp–Massey algorithm
-// <https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm>
+// https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm
 // Complexity: O(N^2)
 // input: S = sequence from field K
 // return: L          = degree of minimal polynomial,

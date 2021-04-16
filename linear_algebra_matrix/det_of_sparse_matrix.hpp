@@ -4,8 +4,8 @@
 #include <utility>
 #include <vector>
 
-#include "linear_algebra_matrix/linear_recurrence.hpp"
-#include "random/rand_nondeterministic.hpp"
+#include "../formal_power_series/linear_recurrence.hpp"
+#include "../random/rand_nondeterministic.hpp"
 
 // CUT begin
 // Sparse matrix on ModInt/ModIntRuntime
@@ -36,7 +36,7 @@ template <typename Tp> struct sparse_matrix {
     }
     // Determinant of sparse matrix
     // Complexity: O(NK + N^2) (K: # of non-zero elements in M)
-    // Reference: <https://yukicoder.me/wiki/black_box_linear_algebra>
+    // Reference: https://yukicoder.me/wiki/black_box_linear_algebra
     Tp Determinant() const {
         assert(H == W);
         const int N = H, hi = Tp::get_mod();
