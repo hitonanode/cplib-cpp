@@ -52,7 +52,7 @@ template <typename Tfield> Tfield find_kth_element(const std::vector<Tfield> &in
     assert(k >= 0);
     if (k < static_cast<long long>(initial_elements.size())) return initial_elements[k];
     const auto f = linear_recurrence<Tfield>(initial_elements).second;
-    const auto g = monomial_mod_polynomial<Tfield>(k, N);
+    const auto g = monomial_mod_polynomial<Tfield>(k, f);
     Tfield ret = 0;
     for (unsigned i = 0; i < g.size(); i++) ret += g[i] * initial_elements[i];
     return ret;
