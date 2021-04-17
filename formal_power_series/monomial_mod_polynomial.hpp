@@ -1,4 +1,5 @@
 #pragma once
+#include "linear_recurrence.hpp"
 #include <cassert>
 #include <vector>
 
@@ -41,5 +42,18 @@ std::vector<Tfield> monomial_mod_polynomial(long long N, const std::vector<Tfiel
             ret = c;
         }
     }
+    return ret;
+}
+
+// Find k-th element of the sequence, assuming linear recurrence
+// initial_elements: 0-ORIGIN
+// Verify: abc198f https://atcoder.jp/contests/abc198/submissions/21837815
+template <typename Tfield> Tfield find_kth_element(const std::vector<Tfield> &initial_elements, long long k) {
+    assert(k >= 0);
+    if (k < static_cast<long long>(initial_elements.size())) return initial_elements[k];
+    const auto f = linear_recurrence<Tfield>(initial_elements).second;
+    const auto g = monomial_mod_polynomial<Tfield>(k, N);
+    Tfield ret = 0;
+    for (unsigned i = 0; i < g.size(); i++) ret += g[i] * initial_elements[i];
     return ret;
 }
