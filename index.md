@@ -66,7 +66,7 @@ data:
       path: convolution/multivar_ntt.hpp
       title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
         \u7573\u307F\u8FBC\u307F\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
     - icon: ':heavy_check_mark:'
@@ -112,13 +112,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: formal_power_series/coeff_of_rational_function.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/linear_recurrence.hpp
       title: formal_power_series/linear_recurrence.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/monomial_mod_polynomial.hpp
       title: formal_power_series/monomial_mod_polynomial.hpp
     - icon: ':heavy_check_mark:'
@@ -129,7 +129,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -157,7 +157,7 @@ data:
     - icon: ':warning:'
       path: graph/chromatic_number.hpp
       title: graph/chromatic_number.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/general_matching.hpp
       title: graph/general_matching.hpp
     - icon: ':warning:'
@@ -192,7 +192,7 @@ data:
       title: graph/strongly_connected_components_bitset.hpp
   - name: linear_algebra_matrix
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/det_of_sparse_matrix.hpp
       title: linear_algebra_matrix/det_of_sparse_matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -201,10 +201,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_modint.hpp
       title: linear_algebra_matrix/linalg_modint.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
@@ -223,7 +223,7 @@ data:
       title: multithread/multithread_example.cpp
   - name: number
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -250,7 +250,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
@@ -269,7 +269,7 @@ data:
     - icon: ':warning:'
       path: random/custom_hash.hpp
       title: random/custom_hash.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: random/rand_nondeterministic.hpp
       title: random/rand_nondeterministic.hpp
     - icon: ':warning:'
@@ -288,7 +288,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/acl_beats.hpp
       title: Segment Tree Beats (based on atcoder::lazy_segtree)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/acl_lazysegtree.hpp
       title: Lazy Segtree (based on atcoder::lazy_segtree)
     - icon: ':heavy_check_mark:'
@@ -303,13 +303,13 @@ data:
     - icon: ':warning:'
       path: segmenttree/count_less_than.hpp
       title: segmenttree/count_less_than.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
     - icon: ':warning:'
       path: segmenttree/range-add-range-min.hpp
       title: Range Add Range Min (known as the Starry sky tree)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range-update-range-get.hpp
       title: segmenttree/range-update-range-get.hpp
     - icon: ':heavy_check_mark:'
@@ -323,7 +323,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
       title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-affine-range-sum.hpp
       title: segmenttree/trees/acl_range-affine-range-sum.hpp
     - icon: ':warning:'
@@ -372,7 +372,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/mp_algorithm.hpp
       title: string/mp_algorithm.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: string/rolling_hash_1d.hpp
       title: string/rolling_hash_1d.hpp
     - icon: ':heavy_check_mark:'
@@ -403,7 +403,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/eulertour.hpp
       title: tree/eulertour.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/heavy_light_decomposition.hpp
       title: tree/heavy_light_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -601,7 +601,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
       title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
     - icon: ':heavy_check_mark:'
@@ -619,10 +619,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_1st.test.cpp
       title: formal_power_series/test/stirling_number_of_1st.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/stirling_number_of_2nd.test.cpp
   - name: geometry/test
@@ -659,7 +659,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/cycle_detection_directed.test.cpp
       title: graph/test/cycle_detection_directed.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/general_matching.test.cpp
       title: graph/test/general_matching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -694,7 +694,7 @@ data:
       title: graph/test/warshallfloyd.test.cpp
   - name: linear_algebra_matrix/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -709,13 +709,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
@@ -752,7 +752,7 @@ data:
       title: number/test/sqrt_modint_runtime.test.cpp
   - name: segmenttree/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/acl_range-affine-range-sum.test.cpp
       title: segmenttree/test/acl_range-affine-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -779,13 +779,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/range-affine-range-sum.test.cpp
       title: segmenttree/test/range-affine-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -843,7 +843,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_lcp.test.cpp
       title: string/test/rolling_hash_lcp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_w_modint.test.cpp
       title: string/test/rolling_hash_w_modint.test.cpp
     - icon: ':heavy_check_mark:'
@@ -881,7 +881,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-subtree-sum.test.cpp
       title: tree/test/vertex-add-subtree-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/vertex-set-path-composite.test.cpp
       title: tree/test/vertex-set-path-composite.test.cpp
   - name: unionfind/test

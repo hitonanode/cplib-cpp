@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/linear_recurrence.hpp
     title: formal_power_series/linear_recurrence.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://misawa.github.io/others/fast_kitamasa_method.html
@@ -66,7 +66,7 @@ data:
     \ <typename Tfield> Tfield find_kth_element(const std::vector<Tfield> &initial_elements,\
     \ long long k) {\n    assert(k >= 0);\n    if (k < static_cast<long long>(initial_elements.size()))\
     \ return initial_elements[k];\n    const auto f = linear_recurrence<Tfield>(initial_elements).second;\n\
-    \    const auto g = monomial_mod_polynomial<Tfield>(k, N);\n    Tfield ret = 0;\n\
+    \    const auto g = monomial_mod_polynomial<Tfield>(k, f);\n    Tfield ret = 0;\n\
     \    for (unsigned i = 0; i < g.size(); i++) ret += g[i] * initial_elements[i];\n\
     \    return ret;\n}\n"
   code: "#pragma once\n#include \"linear_recurrence.hpp\"\n#include <cassert>\n#include\
@@ -95,7 +95,7 @@ data:
     \ <typename Tfield> Tfield find_kth_element(const std::vector<Tfield> &initial_elements,\
     \ long long k) {\n    assert(k >= 0);\n    if (k < static_cast<long long>(initial_elements.size()))\
     \ return initial_elements[k];\n    const auto f = linear_recurrence<Tfield>(initial_elements).second;\n\
-    \    const auto g = monomial_mod_polynomial<Tfield>(k, N);\n    Tfield ret = 0;\n\
+    \    const auto g = monomial_mod_polynomial<Tfield>(k, f);\n    Tfield ret = 0;\n\
     \    for (unsigned i = 0; i < g.size(); i++) ret += g[i] * initial_elements[i];\n\
     \    return ret;\n}\n"
   dependsOn:
@@ -103,8 +103,8 @@ data:
   isVerificationFile: false
   path: formal_power_series/monomial_mod_polynomial.hpp
   requiredBy: []
-  timestamp: '2021-04-17 22:32:14+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-04-17 22:52:06+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/kitamasa.test.cpp
 documentation_of: formal_power_series/monomial_mod_polynomial.hpp

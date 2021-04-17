@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/linear_recurrence.hpp
     title: formal_power_series/linear_recurrence.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/monomial_mod_polynomial.hpp
     title: formal_power_series/monomial_mod_polynomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/214
@@ -199,7 +199,7 @@ data:
     \ <typename Tfield> Tfield find_kth_element(const std::vector<Tfield> &initial_elements,\
     \ long long k) {\n    assert(k >= 0);\n    if (k < static_cast<long long>(initial_elements.size()))\
     \ return initial_elements[k];\n    const auto f = linear_recurrence<Tfield>(initial_elements).second;\n\
-    \    const auto g = monomial_mod_polynomial<Tfield>(k, N);\n    Tfield ret = 0;\n\
+    \    const auto g = monomial_mod_polynomial<Tfield>(k, f);\n    Tfield ret = 0;\n\
     \    for (unsigned i = 0; i < g.size(); i++) ret += g[i] * initial_elements[i];\n\
     \    return ret;\n}\n#line 5 \"formal_power_series/test/kitamasa.test.cpp\"\n\
     using mint = ModInt<1000000007>;\n\n#line 8 \"formal_power_series/test/kitamasa.test.cpp\"\
@@ -262,8 +262,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/kitamasa.test.cpp
   requiredBy: []
-  timestamp: '2021-04-17 22:32:14+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-04-17 22:52:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/kitamasa.test.cpp
 layout: document
