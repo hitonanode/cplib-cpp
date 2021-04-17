@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
-    path: linear_algebra_matrix/linear_recurrence.hpp
-    title: linear_algebra_matrix/linear_recurrence.hpp
+  - icon: ':question:'
+    path: formal_power_series/linear_recurrence.hpp
+    title: formal_power_series/linear_recurrence.hpp
   - icon: ':x:'
     path: random/rand_nondeterministic.hpp
     title: random/rand_nondeterministic.hpp
@@ -17,12 +17,12 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links:
-    - https://yukicoder.me/wiki/black_box_linear_algebra>
+    - https://yukicoder.me/wiki/black_box_linear_algebra
   bundledCode: "#line 2 \"linear_algebra_matrix/det_of_sparse_matrix.hpp\"\n#include\
     \ <cassert>\n#include <numeric>\n#include <utility>\n#include <vector>\n\n#line\
-    \ 2 \"linear_algebra_matrix/linear_recurrence.hpp\"\n#include <algorithm>\n#line\
-    \ 6 \"linear_algebra_matrix/linear_recurrence.hpp\"\n\n// CUT begin\n// Berlekamp\u2013\
-    Massey algorithm\n// <https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm>\n\
+    \ 2 \"formal_power_series/linear_recurrence.hpp\"\n#include <algorithm>\n#line\
+    \ 6 \"formal_power_series/linear_recurrence.hpp\"\n\n// CUT begin\n// Berlekamp\u2013\
+    Massey algorithm\n// https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm\n\
     // Complexity: O(N^2)\n// input: S = sequence from field K\n// return: L     \
     \     = degree of minimal polynomial,\n//         C_reversed = monic min. polynomial\
     \ (size = L + 1, reversed order, C_reversed[0] = 1))\n// Formula: convolve(S,\
@@ -64,7 +64,7 @@ data:
     \ ret(M.H);\n        for (int i = 0; i < M.H; i++) {\n            for (const auto\
     \ &p : M.vals[i]) { ret[i] += p.second * vec[p.first]; }\n        }\n        return\
     \ ret;\n    }\n    // Determinant of sparse matrix\n    // Complexity: O(NK +\
-    \ N^2) (K: # of non-zero elements in M)\n    // Reference: <https://yukicoder.me/wiki/black_box_linear_algebra>\n\
+    \ N^2) (K: # of non-zero elements in M)\n    // Reference: https://yukicoder.me/wiki/black_box_linear_algebra\n\
     \    Tp Determinant() const {\n        assert(H == W);\n        const int N =\
     \ H, hi = Tp::get_mod();\n        std::vector<Tp> b(N), u(N), D(N);\n        for\
     \ (int i = 0; i < N; i++) { b[i] = rnd(1, hi), u[i] = rnd(1, hi), D[i] = rnd(1,\
@@ -75,13 +75,13 @@ data:
     \        Tp det = ret.second.back() * (N % 2 ? -1 : 1);\n        Tp ddet = 1;\n\
     \        for (auto d : D) ddet *= d;\n        return det / ddet;\n    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <numeric>\n#include <utility>\n\
-    #include <vector>\n\n#include \"linear_algebra_matrix/linear_recurrence.hpp\"\n\
-    #include \"random/rand_nondeterministic.hpp\"\n\n// CUT begin\n// Sparse matrix\
-    \ on ModInt/ModIntRuntime\ntemplate <typename Tp> struct sparse_matrix {\n   \
-    \ int H, W;\n    std::vector<std::vector<std::pair<int, Tp>>> vals;\n    sparse_matrix(int\
-    \ H = 0, int W = 0) : H(H), W(W), vals(H) {}\n    void add_element(int i, int\
-    \ j, Tp val) {\n        assert(i >= 0 and i < H);\n        assert(j >= 0 and i\
-    \ < W);\n        vals[i].emplace_back(j, val);\n    }\n    Tp eval_bilinear(const\
+    #include <vector>\n\n#include \"../formal_power_series/linear_recurrence.hpp\"\
+    \n#include \"../random/rand_nondeterministic.hpp\"\n\n// CUT begin\n// Sparse\
+    \ matrix on ModInt/ModIntRuntime\ntemplate <typename Tp> struct sparse_matrix\
+    \ {\n    int H, W;\n    std::vector<std::vector<std::pair<int, Tp>>> vals;\n \
+    \   sparse_matrix(int H = 0, int W = 0) : H(H), W(W), vals(H) {}\n    void add_element(int\
+    \ i, int j, Tp val) {\n        assert(i >= 0 and i < H);\n        assert(j >=\
+    \ 0 and i < W);\n        vals[i].emplace_back(j, val);\n    }\n    Tp eval_bilinear(const\
     \ std::vector<Tp> &vl, const std::vector<Tp> &vr) const {\n        assert(vl.size()\
     \ == H and vr.size() == W);\n        Tp ret = 0;\n        for (int i = 0; i <\
     \ H; i++) {\n            for (const auto &p : vals[i]) { ret += vl[i] * p.second\
@@ -91,7 +91,7 @@ data:
     \ = 0; i < M.H; i++) {\n            for (const auto &p : M.vals[i]) { ret[i] +=\
     \ p.second * vec[p.first]; }\n        }\n        return ret;\n    }\n    // Determinant\
     \ of sparse matrix\n    // Complexity: O(NK + N^2) (K: # of non-zero elements\
-    \ in M)\n    // Reference: <https://yukicoder.me/wiki/black_box_linear_algebra>\n\
+    \ in M)\n    // Reference: https://yukicoder.me/wiki/black_box_linear_algebra\n\
     \    Tp Determinant() const {\n        assert(H == W);\n        const int N =\
     \ H, hi = Tp::get_mod();\n        std::vector<Tp> b(N), u(N), D(N);\n        for\
     \ (int i = 0; i < N; i++) { b[i] = rnd(1, hi), u[i] = rnd(1, hi), D[i] = rnd(1,\
@@ -102,12 +102,12 @@ data:
     \        Tp det = ret.second.back() * (N % 2 ? -1 : 1);\n        Tp ddet = 1;\n\
     \        for (auto d : D) ddet *= d;\n        return det / ddet;\n    }\n};\n"
   dependsOn:
-  - linear_algebra_matrix/linear_recurrence.hpp
+  - formal_power_series/linear_recurrence.hpp
   - random/rand_nondeterministic.hpp
   isVerificationFile: false
   path: linear_algebra_matrix/det_of_sparse_matrix.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-04-16 19:44:59+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp

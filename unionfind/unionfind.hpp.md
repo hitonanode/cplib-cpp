@@ -44,8 +44,8 @@ data:
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/incremental-bridge-connectivity.test.cpp
   - unionfind/test/unionfind.test.cpp
+  - graph/test/incremental-bridge-connectivity.test.cpp
 documentation_of: unionfind/unionfind.hpp
 layout: document
 redirect_from:

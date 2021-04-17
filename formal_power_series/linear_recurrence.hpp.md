@@ -3,24 +3,30 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':x:'
+    path: formal_power_series/monomial_mod_polynomial.hpp
+    title: formal_power_series/monomial_mod_polynomial.hpp
+  - icon: ':x:'
     path: linear_algebra_matrix/det_of_sparse_matrix.hpp
     title: linear_algebra_matrix/det_of_sparse_matrix.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
+    path: formal_power_series/test/kitamasa.test.cpp
+    title: formal_power_series/test/kitamasa.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/linear_recurrence.test.cpp
+    title: formal_power_series/test/linear_recurrence.test.cpp
+  - icon: ':x:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  - icon: ':x:'
-    path: linear_algebra_matrix/test/linear_recurrence.test.cpp
-    title: linear_algebra_matrix/test/linear_recurrence.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
-    - https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm>
-  bundledCode: "#line 2 \"linear_algebra_matrix/linear_recurrence.hpp\"\n#include\
-    \ <algorithm>\n#include <cassert>\n#include <utility>\n#include <vector>\n\n//\
-    \ CUT begin\n// Berlekamp\u2013Massey algorithm\n// <https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm>\n\
+    - https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm
+  bundledCode: "#line 2 \"formal_power_series/linear_recurrence.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#include <utility>\n#include <vector>\n\n// CUT begin\n//\
+    \ Berlekamp\u2013Massey algorithm\n// https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm\n\
     // Complexity: O(N^2)\n// input: S = sequence from field K\n// return: L     \
     \     = degree of minimal polynomial,\n//         C_reversed = monic min. polynomial\
     \ (size = L + 1, reversed order, C_reversed[0] = 1))\n// Formula: convolve(S,\
@@ -43,7 +49,7 @@ data:
     \            C_reversed = adjust(C_reversed, B, d, b, m++);\n    }\n    return\
     \ std::make_pair(L, C_reversed);\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <utility>\n\
-    #include <vector>\n\n// CUT begin\n// Berlekamp\u2013Massey algorithm\n// <https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm>\n\
+    #include <vector>\n\n// CUT begin\n// Berlekamp\u2013Massey algorithm\n// https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm\n\
     // Complexity: O(N^2)\n// input: S = sequence from field K\n// return: L     \
     \     = degree of minimal polynomial,\n//         C_reversed = monic min. polynomial\
     \ (size = L + 1, reversed order, C_reversed[0] = 1))\n// Formula: convolve(S,\
@@ -67,18 +73,20 @@ data:
     \ std::make_pair(L, C_reversed);\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: linear_algebra_matrix/linear_recurrence.hpp
+  path: formal_power_series/linear_recurrence.hpp
   requiredBy:
+  - formal_power_series/monomial_mod_polynomial.hpp
   - linear_algebra_matrix/det_of_sparse_matrix.hpp
-  timestamp: '2020-11-18 20:06:08+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-04-16 19:44:59+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - formal_power_series/test/linear_recurrence.test.cpp
+  - formal_power_series/test/kitamasa.test.cpp
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  - linear_algebra_matrix/test/linear_recurrence.test.cpp
-documentation_of: linear_algebra_matrix/linear_recurrence.hpp
+documentation_of: formal_power_series/linear_recurrence.hpp
 layout: document
 redirect_from:
-- /library/linear_algebra_matrix/linear_recurrence.hpp
-- /library/linear_algebra_matrix/linear_recurrence.hpp.html
-title: linear_algebra_matrix/linear_recurrence.hpp
+- /library/formal_power_series/linear_recurrence.hpp
+- /library/formal_power_series/linear_recurrence.hpp.html
+title: formal_power_series/linear_recurrence.hpp
 ---

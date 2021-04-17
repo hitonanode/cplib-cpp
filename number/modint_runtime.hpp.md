@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_exp_modintruntime.test.cpp
     title: formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - icon: ':x:'
@@ -173,14 +173,14 @@ data:
   timestamp: '2020-11-18 20:06:08+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - convolution/test/ntt.test.cpp
-  - convolution/test/ntt_arbitrary_mod.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - number/test/montmort_number_mod.test.cpp
+  - convolution/test/ntt_arbitrary_mod.test.cpp
+  - convolution/test/ntt.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - number/test/sqrt_modint_runtime.test.cpp
+  - number/test/montmort_number_mod.test.cpp
 documentation_of: number/modint_runtime.hpp
 layout: document
 redirect_from:

@@ -4,6 +4,9 @@ data:
   - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
+  - icon: ':question:'
+    path: formal_power_series/linear_recurrence.hpp
+    title: formal_power_series/linear_recurrence.hpp
   - icon: ':x:'
     path: formal_power_series/monomial_mod_polynomial.hpp
     title: formal_power_series/monomial_mod_polynomial.hpp
@@ -147,7 +150,30 @@ data:
     \        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);\n        auto ntt1 = nttconv_<nttprimes[1]>(ai,\
     \ bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai, bi);\n        a.resize(n\
     \ + m - 1);\n        for (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val,\
-    \ ntt1[i].val, ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 4 \"formal_power_series/monomial_mod_polynomial.hpp\"\
+    \ ntt1[i].val, ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 4 \"formal_power_series/linear_recurrence.hpp\"\
+    \n#include <utility>\n#line 6 \"formal_power_series/linear_recurrence.hpp\"\n\n\
+    // CUT begin\n// Berlekamp\u2013Massey algorithm\n// https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm\n\
+    // Complexity: O(N^2)\n// input: S = sequence from field K\n// return: L     \
+    \     = degree of minimal polynomial,\n//         C_reversed = monic min. polynomial\
+    \ (size = L + 1, reversed order, C_reversed[0] = 1))\n// Formula: convolve(S,\
+    \ C_reversed)[i] = 0 for i >= L\n// Example:\n// - [1, 2, 4, 8, 16]   -> (1, [1,\
+    \ -2])\n// - [1, 1, 2, 3, 5, 8] -> (2, [1, -1, -1])\n// - [0, 0, 0, 0, 1]    ->\
+    \ (5, [1, 0, 0, 0, 0, 998244352]) (mod 998244353)\n// - []                 ->\
+    \ (0, [1])\n// - [0, 0, 0]          -> (0, [1])\n// - [-2]               -> (1,\
+    \ [1, 2])\ntemplate <typename Tfield> std::pair<int, std::vector<Tfield>> linear_recurrence(const\
+    \ std::vector<Tfield> &S) {\n    int N = S.size();\n    using poly = std::vector<Tfield>;\n\
+    \    poly C_reversed{1}, B{1};\n    int L = 0, m = 1;\n    Tfield b = 1;\n\n \
+    \   // adjust: C(x) <- C(x) - (d / b) x^m B(x)\n    auto adjust = [](poly C, const\
+    \ poly &B, Tfield d, Tfield b, int m) -> poly {\n        C.resize(std::max(C.size(),\
+    \ B.size() + m));\n        Tfield a = d / b;\n        for (unsigned i = 0; i <\
+    \ B.size(); i++) C[i + m] -= a * B[i];\n        return C;\n    };\n\n    for (int\
+    \ n = 0; n < N; n++) {\n        Tfield d = S[n];\n        for (int i = 1; i <=\
+    \ L; i++) d += C_reversed[i] * S[n - i];\n\n        if (d == 0)\n            m++;\n\
+    \        else if (2 * L <= n) {\n            poly T = C_reversed;\n          \
+    \  C_reversed = adjust(C_reversed, B, d, b, m);\n            L = n + 1 - L;\n\
+    \            B = T;\n            b = d;\n            m = 1;\n        } else\n\
+    \            C_reversed = adjust(C_reversed, B, d, b, m++);\n    }\n    return\
+    \ std::make_pair(L, C_reversed);\n}\n#line 5 \"formal_power_series/monomial_mod_polynomial.hpp\"\
     \n\n// CUT begin\n// Calculate $x^N \\bmod f(x)$\n// Known as `Kitamasa method`\n\
     // Input: f_reversed: monic, reversed (f_reversed[0] = 1)\n// Complexity: $O(K^2\
     \ \\log N)$ ($K$: deg. of $f$)\n// Example: (4, [1, -1, -1]) -> [2, 3]\n//   \
@@ -167,8 +193,16 @@ data:
     \    }\n        ret.resize(K);\n        if ((N >> d) & 1) {\n            std::vector<Tfield>\
     \ c(K);\n            c[0] = -ret[K - 1] * f_reversed[K];\n            for (int\
     \ i = 1; i < K; i++) { c[i] = ret[i - 1] - ret[K - 1] * f_reversed[K - i]; }\n\
-    \            ret = c;\n        }\n    }\n    return ret;\n}\n#line 5 \"formal_power_series/test/kitamasa.test.cpp\"\
-    \nusing mint = ModInt<1000000007>;\n\n#line 8 \"formal_power_series/test/kitamasa.test.cpp\"\
+    \            ret = c;\n        }\n    }\n    return ret;\n}\n\n// Find k-th element\
+    \ of the sequence, assuming linear recurrence\n// initial_elements: 0-ORIGIN\n\
+    // Verify: abc198f https://atcoder.jp/contests/abc198/submissions/21837815\ntemplate\
+    \ <typename Tfield> Tfield find_kth_element(const std::vector<Tfield> &initial_elements,\
+    \ long long k) {\n    assert(k >= 0);\n    if (k < static_cast<long long>(initial_elements.size()))\
+    \ return initial_elements[k];\n    const auto f = linear_recurrence<Tfield>(initial_elements).second;\n\
+    \    const auto g = monomial_mod_polynomial<Tfield>(k, N);\n    Tfield ret = 0;\n\
+    \    for (unsigned i = 0; i < g.size(); i++) ret += g[i] * initial_elements[i];\n\
+    \    return ret;\n}\n#line 5 \"formal_power_series/test/kitamasa.test.cpp\"\n\
+    using mint = ModInt<1000000007>;\n\n#line 8 \"formal_power_series/test/kitamasa.test.cpp\"\
     \n#include <numeric>\n\nstd::vector<mint> gen_dp(std::vector<int> v, int n) {\n\
     \    std::vector<std::vector<mint>> dp(n + 1, std::vector<mint>(v.back() * n +\
     \ 1));\n    dp[0][0] = 1;\n    for (auto x : v) {\n        for (int i = n - 1;\
@@ -224,10 +258,11 @@ data:
   - convolution/ntt.hpp
   - modint.hpp
   - formal_power_series/monomial_mod_polynomial.hpp
+  - formal_power_series/linear_recurrence.hpp
   isVerificationFile: true
   path: formal_power_series/test/kitamasa.test.cpp
   requiredBy: []
-  timestamp: '2021-03-27 19:28:18+09:00'
+  timestamp: '2021-04-17 22:32:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/kitamasa.test.cpp

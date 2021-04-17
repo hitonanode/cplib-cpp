@@ -62,10 +62,10 @@ data:
   timestamp: '2020-12-29 19:26:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/point-add-range-sum.test.cpp
-  - segmenttree/test/binary_indexed_tree.test.cpp
   - data_structure/test/range_kth_smallest_offline.test.cpp
   - data_structure/test/rectange_sum.test.cpp
+  - segmenttree/test/point-add-range-sum.test.cpp
+  - segmenttree/test/binary_indexed_tree.test.cpp
 documentation_of: segmenttree/binary_indexed_tree.hpp
 layout: document
 redirect_from:

@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
-    path: linear_algebra_matrix/linear_recurrence.hpp
-    title: linear_algebra_matrix/linear_recurrence.hpp
+  - icon: ':question:'
+    path: formal_power_series/linear_recurrence.hpp
+    title: formal_power_series/linear_recurrence.hpp
   - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -88,9 +88,9 @@ data:
     \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\ntemplate <int\
     \ mod> std::vector<long long> ModInt<mod>::facs = {1};\ntemplate <int mod> std::vector<long\
     \ long> ModInt<mod>::invs = {0};\n\n// using mint = ModInt<998244353>;\n// using\
-    \ mint = ModInt<1000000007>;\n#line 2 \"linear_algebra_matrix/linear_recurrence.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#include <utility>\n#line 6 \"linear_algebra_matrix/linear_recurrence.hpp\"\
-    \n\n// CUT begin\n// Berlekamp\u2013Massey algorithm\n// <https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm>\n\
+    \ mint = ModInt<1000000007>;\n#line 2 \"formal_power_series/linear_recurrence.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <utility>\n#line 6 \"formal_power_series/linear_recurrence.hpp\"\
+    \n\n// CUT begin\n// Berlekamp\u2013Massey algorithm\n// https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm\n\
     // Complexity: O(N^2)\n// input: S = sequence from field K\n// return: L     \
     \     = degree of minimal polynomial,\n//         C_reversed = monic min. polynomial\
     \ (size = L + 1, reversed order, C_reversed[0] = 1))\n// Formula: convolve(S,\
@@ -111,9 +111,9 @@ data:
     \  C_reversed = adjust(C_reversed, B, d, b, m);\n            L = n + 1 - L;\n\
     \            B = T;\n            b = d;\n            m = 1;\n        } else\n\
     \            C_reversed = adjust(C_reversed, B, d, b, m++);\n    }\n    return\
-    \ std::make_pair(L, C_reversed);\n}\n#line 3 \"linear_algebra_matrix/test/linear_recurrence.test.cpp\"\
+    \ std::make_pair(L, C_reversed);\n}\n#line 3 \"formal_power_series/test/linear_recurrence.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\n\
-    #line 5 \"linear_algebra_matrix/test/linear_recurrence.test.cpp\"\nusing namespace\
+    #line 5 \"formal_power_series/test/linear_recurrence.test.cpp\"\nusing namespace\
     \ std;\n\nusing mint = ModInt<998244353>;\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int N;\n    cin >> N;\n    vector<mint> A(N);\n\
     \    for (auto &a : A) cin >> a;\n\n    auto L_poly = linear_recurrence(A);\n\
@@ -130,17 +130,17 @@ data:
     \ ' ';\n    cout << '\\n';\n}\n"
   dependsOn:
   - modint.hpp
-  - linear_algebra_matrix/linear_recurrence.hpp
+  - formal_power_series/linear_recurrence.hpp
   isVerificationFile: true
-  path: linear_algebra_matrix/test/linear_recurrence.test.cpp
+  path: formal_power_series/test/linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2021-03-27 19:28:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-04-16 19:44:59+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: linear_algebra_matrix/test/linear_recurrence.test.cpp
+documentation_of: formal_power_series/test/linear_recurrence.test.cpp
 layout: document
 redirect_from:
-- /verify/linear_algebra_matrix/test/linear_recurrence.test.cpp
-- /verify/linear_algebra_matrix/test/linear_recurrence.test.cpp.html
-title: linear_algebra_matrix/test/linear_recurrence.test.cpp
+- /verify/formal_power_series/test/linear_recurrence.test.cpp
+- /verify/formal_power_series/test/linear_recurrence.test.cpp.html
+title: formal_power_series/test/linear_recurrence.test.cpp
 ---
