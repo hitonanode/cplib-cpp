@@ -56,6 +56,30 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
         }
     }
 
+    // Dijkstra algorithm, O(V^2 + E)
+    void DijkstraVquad(int s) {
+        assert(0 <= s and s < V);
+        dist.assign(V, INF);
+        dist[s] = 0;
+        prev.assign(V, INVALID);
+        std::vector<char> fixed(V, false);
+        while (true) {
+            int r = INVALID;
+            T dr = INF;
+            for (int i = 0; i < V; i++) {
+                if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];
+            }
+            if (r == INVALID) break;
+            fixed[r] = true;
+            int nxt;
+            T dx;
+            for (auto p : to[r]) {
+                std::tie(nxt, dx) = p;
+                if (dist[nxt] > dist[r] + dx) dist[nxt] = dist[r] + dx, prev[nxt] = r;
+            }
+        }
+    }
+
     // Bellman-Ford algorithm
     // Complexity: O(VE)
     bool BellmanFord(int s, int nb_loop) {
@@ -136,7 +160,11 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
             if (single_positive_weight) {
                 ZeroOneBFS(s);
             } else {
-                Dijkstra(s);
+                if ((long long)V * V < (E << 4)) {
+                    DijkstraVquad(s);
+                } else {
+                    Dijkstra(s);
+                }
             }
         } else {
             BellmanFord(s, V);
