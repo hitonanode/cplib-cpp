@@ -16,7 +16,7 @@ int main() {
         graph.add_edge(a, b, c);
     }
 
-    graph.Dijkstra(s);
+    graph.solve(s);
 
     if (graph.dist[t] == INF) {
         cout << "-1\n";
