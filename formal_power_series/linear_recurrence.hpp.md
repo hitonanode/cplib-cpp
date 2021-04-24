@@ -75,14 +75,14 @@ data:
   isVerificationFile: false
   path: formal_power_series/linear_recurrence.hpp
   requiredBy:
-  - formal_power_series/monomial_mod_polynomial.hpp
   - linear_algebra_matrix/det_of_sparse_matrix.hpp
+  - formal_power_series/monomial_mod_polynomial.hpp
   timestamp: '2021-04-16 19:44:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/linear_recurrence.test.cpp
-  - formal_power_series/test/kitamasa.test.cpp
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - formal_power_series/test/kitamasa.test.cpp
+  - formal_power_series/test/linear_recurrence.test.cpp
 documentation_of: formal_power_series/linear_recurrence.hpp
 layout: document
 redirect_from:

@@ -114,8 +114,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/prime_factorization.test.cpp
-  - number/test/gen_primes.test.cpp
   - number/test/enumerate_primes.test.cpp
+  - number/test/gen_primes.test.cpp
 documentation_of: number/sieve.hpp
 layout: document
 redirect_from:

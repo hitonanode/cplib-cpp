@@ -716,6 +716,9 @@ data:
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+      title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test

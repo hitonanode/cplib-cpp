@@ -5,9 +5,6 @@ data:
     path: linear_algebra_matrix/linalg_modint.hpp
     title: linear_algebra_matrix/linalg_modint.hpp
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/system_of_linear_equations.hpp
-    title: linear_algebra_matrix/system_of_linear_equations.hpp
-  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -17,31 +14,29 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/system_of_linear_equations
+    PROBLEM: https://yukicoder.me/problems/no/1112
     links:
-    - https://judge.yosupo.jp/problem/system_of_linear_equations
-  bundledCode: "#line 1 \"linear_algebra_matrix/test/system_of_linear_equations.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include <vector>\n\
-    \n// CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus >= 201402L\n\
-    #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
-    \ long;\n    MDCONST static int get_mod() { return mod; }\n    static int get_primitive_root()\
-    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
-    \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
-    \              int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
-    \ i++)\n                    while (v % i == 0) fac.insert(i), v /= i;\n      \
-    \          if (v > 1) fac.insert(v);\n                for (int g = 1; g < mod;\
-    \ g++) {\n                    bool ok = true;\n                    for (auto i\
-    \ : fac)\n                        if (ModInt(g).pow((mod - 1) / i) == 1) {\n \
-    \                           ok = false;\n                            break;\n\
-    \                        }\n                    if (ok) return g;\n          \
-    \      }\n                return -1;\n            }();\n        }\n        return\
-    \ primitive_root;\n    }\n    int val;\n    MDCONST ModInt() : val(0) {}\n   \
-    \ MDCONST ModInt &_setval(lint v) { return val = (v >= mod ? v - mod : v), *this;\
-    \ }\n    MDCONST ModInt(lint v) { _setval(v % mod + mod); }\n    MDCONST explicit\
-    \ operator bool() const { return val != 0; }\n    MDCONST ModInt operator+(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val + x.val); }\n    MDCONST\
-    \ ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
+    - https://yukicoder.me/problems/no/1112
+  bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
+    \ <vector>\n\n// CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus\
+    \ >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using\
+    \ lint = long long;\n    MDCONST static int get_mod() { return mod; }\n    static\
+    \ int get_primitive_root() {\n        static int primitive_root = 0;\n       \
+    \ if (!primitive_root) {\n            primitive_root = [&]() {\n             \
+    \   std::set<int> fac;\n                int v = mod - 1;\n                for\
+    \ (lint i = 2; i * i <= v; i++)\n                    while (v % i == 0) fac.insert(i),\
+    \ v /= i;\n                if (v > 1) fac.insert(v);\n                for (int\
+    \ g = 1; g < mod; g++) {\n                    bool ok = true;\n              \
+    \      for (auto i : fac)\n                        if (ModInt(g).pow((mod - 1)\
+    \ / i) == 1) {\n                            ok = false;\n                    \
+    \        break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root;\n    }\n    int val;\n    MDCONST ModInt()\
+    \ : val(0) {}\n    MDCONST ModInt &_setval(lint v) { return val = (v >= mod ?\
+    \ v - mod : v), *this; }\n    MDCONST ModInt(lint v) { _setval(v % mod + mod);\
+    \ }\n    MDCONST explicit operator bool() const { return val != 0; }\n    MDCONST\
+    \ ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
     \ - x.val + mod); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
     \ ModInt()._setval((lint)val * x.val % mod); }\n    MDCONST ModInt operator/(const\
     \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % mod); }\n \
@@ -194,58 +189,39 @@ data:
     \ numbers f(n) = af(n - 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2,\
     \ 3=>3, 4=>5, ...\ntemplate <typename T> T Fibonacci(long long int k, int a =\
     \ 1, int b = 1) {\n    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0]\
-    \ = b;\n    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 3 \"linear_algebra_matrix/system_of_linear_equations.hpp\"\
-    \n#include <utility>\n#line 5 \"linear_algebra_matrix/system_of_linear_equations.hpp\"\
-    \n\n// CUT begin\n// Solve Ax = b for T = ModInt<PRIME>\n// - retval: {one of\
-    \ the solution, {freedoms}} (if solution exists)\n//           {{}, {}} (otherwise)\n\
-    // Complexity:\n// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs.,\
-    \ W: # of variables)\n// - Enumerate all of the bases: O(HW(H + W))\ntemplate\
-    \ <typename T>\nstd::pair<std::vector<T>, std::vector<std::vector<T>>> system_of_linear_equations(matrix<T>\
-    \ A, std::vector<T> b) {\n    int H = A.H, W = A.W;\n    matrix<T> M(H, W + 1);\n\
-    \    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) M[i][j]\
-    \ = A[i][j];\n        M[i][W] = b[i];\n    }\n    M = M.gauss_jordan();\n    std::vector<int>\
-    \ ss(W, -1);\n    for (int i = 0; i < H; i++) {\n        int j = 0;\n        while\
-    \ (j <= W and M[i][j] == 0) j++;\n        if (j == W) { // No solution\n     \
-    \       return {{}, {}};\n        }\n        if (j < W) ss[j] = i;\n    }\n  \
-    \  std::vector<T> x(W);\n    std::vector<std::vector<T>> D;\n    for (int j =\
-    \ 0; j < W; j++) {\n        if (ss[j] == -1) {\n            std::vector<T> d(W);\n\
-    \            d[j] = 1;\n            for (int jj = 0; jj < j; jj++)\n         \
-    \       if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n           \
-    \ D.emplace_back(d);\n        } else\n            x[j] = M[ss[j]][W] / M[ss[j]][j];\n\
-    \    }\n    return std::make_pair(x, D);\n}\n#line 5 \"linear_algebra_matrix/test/system_of_linear_equations.test.cpp\"\
-    \nusing mint = ModInt<998244353>;\n\nint main() {\n    int N, M;\n    std::cin\
-    \ >> N >> M;\n    matrix<mint> A(N, M);\n    std::cin >> A;\n    std::vector<mint>\
-    \ b(N);\n    for (auto &x : b) std::cin >> x;\n    auto ret = system_of_linear_equations(A,\
-    \ b);\n    if (ret.first.empty())\n        std::cout << -1 << \"\\n\";\n    else\
-    \ {\n        std::cout << ret.second.size() << \"\\n\";\n        for (auto x :\
-    \ ret.first) std::cout << x << \" \";\n        std::cout << \"\\n\";\n\n     \
-    \   for (auto vec : ret.second) {\n            for (auto e : vec) std::cout <<\
-    \ e << \" \";\n            std::cout << \"\\n\";\n        }\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n#include \"../../modint.hpp\"\n#include \"../system_of_linear_equations.hpp\"\
-    \n#include <iostream>\nusing mint = ModInt<998244353>;\n\nint main() {\n    int\
-    \ N, M;\n    std::cin >> N >> M;\n    matrix<mint> A(N, M);\n    std::cin >> A;\n\
-    \    std::vector<mint> b(N);\n    for (auto &x : b) std::cin >> x;\n    auto ret\
-    \ = system_of_linear_equations(A, b);\n    if (ret.first.empty())\n        std::cout\
-    \ << -1 << \"\\n\";\n    else {\n        std::cout << ret.second.size() << \"\\\
-    n\";\n        for (auto x : ret.first) std::cout << x << \" \";\n        std::cout\
-    \ << \"\\n\";\n\n        for (auto vec : ret.second) {\n            for (auto\
-    \ e : vec) std::cout << e << \" \";\n            std::cout << \"\\n\";\n     \
-    \   }\n    }\n}\n"
+    \ = b;\n    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 5 \"linear_algebra_matrix/test/linalg_modint_pow.test.cpp\"\
+    \nusing namespace std;\n#define PROBLEM \"https://yukicoder.me/problems/no/1112\"\
+    \n\nint pq2id(int p2, int p1) { return p2 * 6 + p1; }\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int K, M;\n    long long N;\n    cin >> K\
+    \ >> M >> N;\n    using mint = ModInt<1000000007>;\n    matrix<mint> mat(36, 36);\n\
+    \    while (M--) {\n        int p, q, r;\n        cin >> p >> q >> r;\n      \
+    \  p--, q--, r--;\n        int i = pq2id(p, q), j = pq2id(q, r);\n        mat[j][i]\
+    \ = 1;\n    }\n    vector<mint> vec(36);\n    for (int i = 0; i < K; i++) vec[pq2id(0,\
+    \ i)] = 1;\n    vec = mat.pow(N - 2) * vec;\n    mint ret = 0;\n    for (int i\
+    \ = 0; i < K; i++) ret += vec[pq2id(i, 0)];\n    cout << ret << '\\n';\n}\n"
+  code: "#include \"../../modint.hpp\"\n#include \"../linalg_modint.hpp\"\n#include\
+    \ <iostream>\n#include <vector>\nusing namespace std;\n#define PROBLEM \"https://yukicoder.me/problems/no/1112\"\
+    \n\nint pq2id(int p2, int p1) { return p2 * 6 + p1; }\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int K, M;\n    long long N;\n    cin >> K\
+    \ >> M >> N;\n    using mint = ModInt<1000000007>;\n    matrix<mint> mat(36, 36);\n\
+    \    while (M--) {\n        int p, q, r;\n        cin >> p >> q >> r;\n      \
+    \  p--, q--, r--;\n        int i = pq2id(p, q), j = pq2id(q, r);\n        mat[j][i]\
+    \ = 1;\n    }\n    vector<mint> vec(36);\n    for (int i = 0; i < K; i++) vec[pq2id(0,\
+    \ i)] = 1;\n    vec = mat.pow(N - 2) * vec;\n    mint ret = 0;\n    for (int i\
+    \ = 0; i < K; i++) ret += vec[pq2id(i, 0)];\n    cout << ret << '\\n';\n}\n"
   dependsOn:
   - modint.hpp
-  - linear_algebra_matrix/system_of_linear_equations.hpp
   - linear_algebra_matrix/linalg_modint.hpp
   isVerificationFile: true
-  path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+  path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   requiredBy: []
   timestamp: '2021-04-25 00:44:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+documentation_of: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
 layout: document
 redirect_from:
-- /verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-- /verify/linear_algebra_matrix/test/system_of_linear_equations.test.cpp.html
-title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+- /verify/linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+- /verify/linear_algebra_matrix/test/linalg_modint_pow.test.cpp.html
+title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
 ---
