@@ -14,8 +14,9 @@ template <typename T> struct matrix {
     inline T get(int i, int j) const { return elem[i * W + j]; }
     operator std::vector<std::vector<T>>() const {
         std::vector<std::vector<T>> ret(H);
-        for (int i = 0; i < H; i++)
+        for (int i = 0; i < H; i++) {
             std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));
+        }
         return ret;
     }
 
@@ -43,7 +44,8 @@ template <typename T> struct matrix {
     }
     matrix operator/(const T &v) const {
         matrix ret = *this;
-        for (auto &x : ret.elem) x /= v;
+        const T vinv = v.inv();
+        for (auto &x : ret.elem) x *= vinv;
         return ret;
     }
     matrix operator+(const matrix &r) const {
@@ -60,7 +62,7 @@ template <typename T> struct matrix {
         matrix ret(H, r.W);
         for (int i = 0; i < H; i++) {
             for (int k = 0; k < W; k++) {
-                for (int j = 0; j < r.W; j++) { ret.at(i, j) += this->get(i, k) * r.get(k, j); }
+                for (int j = 0; j < r.W; j++) ret.at(i, j) += this->get(i, k) * r.get(k, j);
             }
         }
         return ret;
@@ -75,17 +77,28 @@ template <typename T> struct matrix {
     bool operator<(const matrix &r) const { return elem < r.elem; }
     matrix pow(int64_t n) const {
         matrix ret = Identity(H);
+        bool ret_is_id = true;
         if (n == 0) return ret;
         for (int i = 63 - __builtin_clzll(n); i >= 0; i--) {
-            ret *= ret;
-            if ((n >> i) & 1) ret *= (*this);
+            if (!ret_is_id) ret *= ret;
+            if ((n >> i) & 1) ret *= (*this), ret_is_id = false;
         }
         return ret;
     }
+    std::vector<T> pow_vec(int64_t n, std::vector<T> vec) const {
+        matrix x = *this;
+        while (n) {
+            if (n & 1) vec = x * vec;
+            x *= x;
+            n >>= 1;
+        }
+        return vec;
+    };
     matrix transpose() const {
         matrix ret(W, H);
-        for (int i = 0; i < H; i++)
+        for (int i = 0; i < H; i++) {
             for (int j = 0; j < W; j++) ret.at(j, i) = this->get(i, j);
+        }
         return ret;
     }
     // Gauss-Jordan elimination
@@ -130,8 +143,9 @@ template <typename T> struct matrix {
         return mtr;
     }
     int rank_of_gauss_jordan() const {
-        for (int i = H * W - 1; i >= 0; i--)
+        for (int i = H * W - 1; i >= 0; i--) {
             if (elem[i]) return i / W + 1;
+        }
         return 0;
     }
     T determinant_of_upper_triangle() const {
@@ -146,19 +160,20 @@ template <typename T> struct matrix {
         for (int i = 0; i < H; i++) {
             int ti = i;
             while (ti < H and tmp[ti][i] == 0) ti++;
-            if (ti == H)
+            if (ti == H) {
                 continue;
-            else
+            } else {
                 rank++;
+            }
             ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);
             T inv = tmp[i][i].inv();
-            for (int j = 0; j < W; j++) { ret[i][j] *= inv; }
-            for (int j = i + 1; j < W; j++) { tmp[i][j] *= inv; }
+            for (int j = 0; j < W; j++) ret[i][j] *= inv;
+            for (int j = i + 1; j < W; j++) tmp[i][j] *= inv;
             for (int h = 0; h < H; h++) {
                 if (i == h) continue;
                 const T c = -tmp[h][i];
-                for (int j = 0; j < W; j++) { ret[h][j] += ret[i][j] * c; }
-                for (int j = i + 1; j < W; j++) { tmp[h][j] += tmp[i][j] * c; }
+                for (int j = 0; j < W; j++) ret[h][j] += ret[i][j] * c;
+                for (int j = i + 1; j < W; j++) tmp[h][j] += tmp[i][j] * c;
             }
         }
         *this = ret;
@@ -168,7 +183,7 @@ template <typename T> struct matrix {
         assert(m.W == int(v.size()));
         std::vector<T> ret(m.H);
         for (int i = 0; i < m.H; i++) {
-            for (int j = 0; j < m.W; j++) { ret[i] += m.get(i, j) * v[j]; }
+            for (int j = 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];
         }
         return ret;
     }
@@ -176,7 +191,7 @@ template <typename T> struct matrix {
         assert(int(v.size()) == m.H);
         std::vector<T> ret(m.W);
         for (int i = 0; i < m.H; i++) {
-            for (int j = 0; j < m.W; j++) { ret[j] += v[i] * m.get(i, j); }
+            for (int j = 0; j < m.W; j++) ret[j] += v[i] * m.get(i, j);
         }
         return ret;
     }
@@ -202,7 +217,6 @@ template <typename T> struct matrix {
         return is;
     }
 };
-
 // Fibonacci numbers f(n) = af(n - 1) + bf(n - 2)
 // Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...
 template <typename T> T Fibonacci(long long int k, int a = 1, int b = 1) {
