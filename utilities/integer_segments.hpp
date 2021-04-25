@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <map>
 #include <utility>
 
@@ -16,6 +17,24 @@ template <typename Int> struct integer_segments {
         auto itr = mp.upper_bound(x);
         if (itr == mp.begin() or (--itr)->second < x) return std::make_pair(INVALID, INVALID);
         return *itr;
+    }
+
+    bool contains(Int x) const { return lower_bound(x) == x; }
+
+    // Find the min. y in the set that satisfies x <= y
+    Int lower_bound(Int x) const {
+        auto itr = mp.upper_bound(x);
+        if (itr != mp.begin() and std::prev(itr)->second >= x) return x;
+        if (itr != mp.end()) return itr->first;
+        return INVALID;
+    }
+
+    // Find the max. y in the set that satisfies y <= x
+    Int inv_lower_bound(Int x) const {
+        auto itr = mp.upper_bound(x);
+        if (itr == mp.begin()) return INVALID;
+        if ((--itr)->second >= x) return x;
+        return itr->second;
     }
 
     void _mp_upd(Int l, Int r) {
@@ -74,5 +93,11 @@ template <typename Int> struct integer_segments {
             ret += std::min(x - 1, p.second) - p.first + 1;
         }
         return ret;
+    }
+
+    friend std::ostream &operator<<(std::ostream &os, const integer_segments &x) {
+        os << '{';
+        for (auto &&p : x.mp) os << '[' << p.first << ',' << p.second << "],";
+        return os << '}';
     }
 };
