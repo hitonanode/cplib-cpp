@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/bflow_ns.test.cpp
     title: combinatorial_opt/test/bflow_ns.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/mcf_ns.test.cpp
+    title: combinatorial_opt/test/mcf_ns.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -1262,6 +1265,7 @@ data:
   timestamp: '2021-02-27 20:43:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - combinatorial_opt/test/mcf_ns.test.cpp
   - combinatorial_opt/test/bflow_ns.test.cpp
 documentation_of: combinatorial_opt/networksimplex.hpp
 layout: document

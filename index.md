@@ -489,6 +489,9 @@ data:
       path: combinatorial_opt/test/maxflow.test.cpp
       title: combinatorial_opt/test/maxflow.test.cpp
     - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/mcf_ns.test.cpp
+      title: combinatorial_opt/test/mcf_ns.test.cpp
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/mincostflow.test.cpp
       title: combinatorial_opt/test/mincostflow.test.cpp
     - icon: ':heavy_check_mark:'
