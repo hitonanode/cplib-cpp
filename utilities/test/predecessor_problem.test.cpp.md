@@ -11,13 +11,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/674
+    PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
     links:
-    - https://yukicoder.me/problems/no/674
-  bundledCode: "#line 1 \"utilities/test/integer_segments.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/674\"\n#line 2 \"utilities/integer_segments.hpp\"\
-    \n#include <iostream>\n#include <map>\n#include <utility>\n\n// CUT begin\n//\
-    \ Add/erase ranges on \\mathbb{Z}\n// Basic implementation idea: https://satanic0258.github.io/snippets/data-structure/SegmentMap.html\n\
+    - https://judge.yosupo.jp/problem/predecessor_problem
+  bundledCode: "#line 2 \"utilities/integer_segments.hpp\"\n#include <iostream>\n\
+    #include <map>\n#include <utility>\n\n// CUT begin\n// Add/erase ranges on \\\
+    mathbb{Z}\n// Basic implementation idea: https://satanic0258.github.io/snippets/data-structure/SegmentMap.html\n\
     template <typename Int> struct integer_segments {\n    const Int INVALID = -1;\n\
     \    Int _sz;\n    std::map<Int, Int> mp;\n    integer_segments() : _sz(0) {}\n\
     \n    // Get the range [l, r] that satisfies l <= x <= r, or [INVALID, INVALID]\
@@ -60,32 +59,40 @@ data:
     \    return ret;\n    }\n\n    friend std::ostream &operator<<(std::ostream &os,\
     \ const integer_segments &x) {\n        os << '{';\n        for (auto &&p : x.mp)\
     \ os << '[' << p.first << ',' << p.second << \"],\";\n        return os << '}';\n\
-    \    }\n};\n#line 3 \"utilities/test/integer_segments.test.cpp\"\n\n#line 5 \"\
-    utilities/test/integer_segments.test.cpp\"\nusing namespace std;\n\nint main()\
-    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    long long D;\n  \
-    \  int Q;\n    cin >> D >> Q;\n    integer_segments<long long> seg;\n\n    long\
-    \ long ret = 0;\n    while (Q--) {\n        long long a, b;\n        cin >> a\
-    \ >> b;\n        auto lr = seg.insert(a, b);\n        ret = max(ret, lr.second\
-    \ - lr.first + 1);\n        cout << ret << '\\n';\n    }\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/674\"\n#include \"../integer_segments.hpp\"\
-    \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n    long long D;\n    int Q;\n    cin >> D >>\
-    \ Q;\n    integer_segments<long long> seg;\n\n    long long ret = 0;\n    while\
-    \ (Q--) {\n        long long a, b;\n        cin >> a >> b;\n        auto lr =\
-    \ seg.insert(a, b);\n        ret = max(ret, lr.second - lr.first + 1);\n     \
-    \   cout << ret << '\\n';\n    }\n}\n"
+    \    }\n};\n#line 3 \"utilities/test/predecessor_problem.test.cpp\"\n#include\
+    \ <string>\nusing namespace std;\n#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\
+    \n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int\
+    \ N, Q;\n    string T;\n    cin >> N >> Q >> T;\n    integer_segments<int> seg;\n\
+    \    T += '0';\n    int l = 0;\n    for (int i = 0; i < int(T.size()); i++) {\n\
+    \        if (T[i] == '0') {\n            if (l <= i - 1) seg.insert(l, i - 1);\n\
+    \            l = i + 1;\n        }\n    }\n    while (Q--) {\n        int c, k;\n\
+    \        cin >> c >> k;\n        if (c == 0) seg.insert(k, k);\n        if (c\
+    \ == 1) seg.remove(k, k);\n        if (c == 2) cout << seg.contains(k) << '\\\
+    n';\n        if (c == 3) cout << seg.lower_bound(k) << '\\n';\n        if (c ==\
+    \ 4) cout << seg.inv_lower_bound(k) << '\\n';\n    }\n}\n"
+  code: "#include \"../integer_segments.hpp\"\n#include <iostream>\n#include <string>\n\
+    using namespace std;\n#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\
+    \n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int\
+    \ N, Q;\n    string T;\n    cin >> N >> Q >> T;\n    integer_segments<int> seg;\n\
+    \    T += '0';\n    int l = 0;\n    for (int i = 0; i < int(T.size()); i++) {\n\
+    \        if (T[i] == '0') {\n            if (l <= i - 1) seg.insert(l, i - 1);\n\
+    \            l = i + 1;\n        }\n    }\n    while (Q--) {\n        int c, k;\n\
+    \        cin >> c >> k;\n        if (c == 0) seg.insert(k, k);\n        if (c\
+    \ == 1) seg.remove(k, k);\n        if (c == 2) cout << seg.contains(k) << '\\\
+    n';\n        if (c == 3) cout << seg.lower_bound(k) << '\\n';\n        if (c ==\
+    \ 4) cout << seg.inv_lower_bound(k) << '\\n';\n    }\n}\n"
   dependsOn:
   - utilities/integer_segments.hpp
   isVerificationFile: true
-  path: utilities/test/integer_segments.test.cpp
+  path: utilities/test/predecessor_problem.test.cpp
   requiredBy: []
   timestamp: '2021-04-25 18:25:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: utilities/test/integer_segments.test.cpp
+documentation_of: utilities/test/predecessor_problem.test.cpp
 layout: document
 redirect_from:
-- /verify/utilities/test/integer_segments.test.cpp
-- /verify/utilities/test/integer_segments.test.cpp.html
-title: utilities/test/integer_segments.test.cpp
+- /verify/utilities/test/predecessor_problem.test.cpp
+- /verify/utilities/test/predecessor_problem.test.cpp.html
+title: utilities/test/predecessor_problem.test.cpp
 ---

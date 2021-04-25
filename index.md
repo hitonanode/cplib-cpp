@@ -912,5 +912,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/kth_root_integer.test.cpp
       title: utilities/test/kth_root_integer.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/predecessor_problem.test.cpp
+      title: utilities/test/predecessor_problem.test.cpp
 layout: toppage
 ---
