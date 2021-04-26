@@ -6,21 +6,21 @@
 #include <vector>
 
 // CUT begin
-using lint = long long;
 // Solve ax+by=gcd(a, b)
-lint extgcd(lint a, lint b, lint &x, lint &y) {
-    lint d = a;
-    if (b != 0)
+template <typename Int> Int extgcd(Int a, Int b, Int &x, Int &y) {
+    Int d = a;
+    if (b != 0) {
         d = extgcd(b, a % b, y, x), y -= (a / b) * x;
-    else
+    } else {
         x = 1, y = 0;
+    }
     return d;
 }
 // Calculate a^(-1) (MOD m) s if gcd(a, m) == 1
 // Calculate x s.t. ax == gcd(a, m) MOD m
-lint mod_inverse(lint a, lint m) {
-    lint x, y;
-    extgcd(a, m, x, y);
+template <typename Int> Int mod_inverse(Int a, Int m) {
+    Int x, y;
+    extgcd<Int>(a, m, x, y);
     x %= m;
     return x + (x < 0) * m;
 }
@@ -78,26 +78,27 @@ template <typename Int> constexpr std::pair<Int, Int> crt(const std::vector<Int>
 // 連立線形合同式 A * x = B mod M の解
 // Requirement: M[i] > 0
 // Output: x = first MOD second (if solution exists), (0, 0) (otherwise)
-std::pair<lint, lint> linear_congruence(const std::vector<lint> &A, const std::vector<lint> &B, const std::vector<lint> &M) {
-    lint r = 0, m = 1;
+template <typename Int>
+std::pair<Int, Int> linear_congruence(const std::vector<Int> &A, const std::vector<Int> &B, const std::vector<Int> &M) {
+    Int r = 0, m = 1;
     assert(A.size() == M.size());
     assert(B.size() == M.size());
     for (int i = 0; i < (int)A.size(); i++) {
         assert(M[i] > 0);
-        const lint ai = A[i] % M[i];
-        lint a = ai * m, b = B[i] - ai * r, d = std::__gcd(M[i], a);
+        const Int ai = A[i] % M[i];
+        Int a = ai * m, b = B[i] - ai * r, d = std::__gcd(M[i], a);
         if (b % d != 0) {
             return std::make_pair(0, 0); // 解なし
         }
-        lint t = b / d * mod_inverse(a / d, M[i] / d) % (M[i] / d);
+        Int t = b / d * mod_inverse<Int>(a / d, M[i] / d) % (M[i] / d);
         r += m * t;
         m *= M[i] / d;
     }
     return std::make_pair((r < 0 ? r + m : r), m);
 }
 
-lint power(lint x, lint n, lint MOD) {
-    lint ans = 1;
+template <typename Int> Int power(Int x, Int n, Int MOD) {
+    Int ans = 1;
     while (n > 0) {
         if (n & 1) (ans *= x) %= MOD;
         (x *= x) %= MOD;
@@ -115,23 +116,21 @@ lint power(lint x, lint n, lint MOD) {
 //  - 163577857 ( = (39 << 22) + 1 ) -> 23
 //  - 2 -> 1
 //  - 1 -> -1
-
-lint find_smallest_primitive_root(lint p) {
-    std::vector<lint> fac;
-    lint v = p - 1;
-    for (lint pp = 2; pp * pp <= v; pp++) // prime factorization of (p - 1)
-    {
+template <typename Int = long long> Int find_smallest_primitive_root(Int p) {
+    std::vector<Int> fac;
+    Int v = p - 1;
+    for (Int pp = 2; pp * pp <= v; pp++) { // prime factorization of (p - 1)
         int e = 0;
         while (v % pp == 0) e++, v /= pp;
         if (e) fac.push_back(pp);
     }
     if (v > 1) fac.push_back(v);
 
-    for (lint g = 1; g < p; g++) {
-        if (power(g, p - 1, p) != 1) return -1;
+    for (Int g = 1; g < p; g++) {
+        if (power<Int>(g, p - 1, p) != 1) return -1;
         bool ok = true;
         for (auto pp : fac) {
-            if (power(g, (p - 1) / pp, p) == 1) {
+            if (power<Int>(g, (p - 1) / pp, p) == 1) {
                 ok = false;
                 break;
             }
