@@ -33,23 +33,23 @@ data:
     \ p.y - y * p.x; }\n    T_P norm() const noexcept { return std::sqrt(x * x + y\
     \ * y); }\n    T_P norm2() const noexcept { return x * x + y * y; }\n    T_P arg()\
     \ const noexcept { return std::atan2(y, x); }\n    // rotate point/vector by rad\n\
-    \    P rotate(T_P rad) noexcept { return P(x * std::cos(rad) - y * std::sin(rad),\
-    \ x * std::sin(rad) + y * std::cos(rad)); }\n    P normalized() const { return\
-    \ (*this) / this->norm(); }\n    P conj() const noexcept { return P(x, -y); }\n\
-    \    friend std::istream &operator>>(std::istream &is, P &p) {\n        T_P x,\
-    \ y;\n        is >> x >> y;\n        p = P(x, y);\n        return is;\n    }\n\
-    \    friend std::ostream &operator<<(std::ostream &os, const P &p) {\n       \
-    \ os << '(' << p.x << ',' << p.y << ')';\n        return os;\n    }\n};\ntemplate\
-    \ <> double P<double>::EPS = 1e-9;\ntemplate <> long double P<long double>::EPS\
-    \ = 1e-12;\n\ntemplate <typename T_P>\nint ccw(const P<T_P> &a, const P<T_P> &b,\
-    \ const P<T_P> &c) // a->b->c\u306E\u66F2\u304C\u308A\u65B9\n{\n    P<T_P> v1\
-    \ = b - a;\n    P<T_P> v2 = c - a;\n    if (v1.det(v2) > P<T_P>::EPS) return 1;\
-    \   // \u5DE6\u6298\n    if (v1.det(v2) < -P<T_P>::EPS) return -1; // \u53F3\u6298\
-    \n    if (v1.dot(v2) < -P<T_P>::EPS) return 2;  // c-a-b\n    if (v1.norm() <\
-    \ v2.norm()) return -2;     // a-b-c\n    return 0;                          \
-    \       // a-c-b\n}\n\n// Convex hull \uFF08\u51F8\u5305\uFF09\n// return: IDs\
-    \ of vertices used for convex hull, counterclockwise\n// include_boundary: If\
-    \ true, interior angle pi is allowed\ntemplate <typename T_P> std::vector<int>\
+    \    P rotate(T_P rad) const noexcept {\n        return P(x * std::cos(rad) -\
+    \ y * std::sin(rad), x * std::sin(rad) + y * std::cos(rad));\n    }\n    P normalized()\
+    \ const { return (*this) / this->norm(); }\n    P conj() const noexcept { return\
+    \ P(x, -y); }\n    friend std::istream &operator>>(std::istream &is, P &p) {\n\
+    \        T_P x, y;\n        is >> x >> y;\n        p = P(x, y);\n        return\
+    \ is;\n    }\n    friend std::ostream &operator<<(std::ostream &os, const P &p)\
+    \ {\n        os << '(' << p.x << ',' << p.y << ')';\n        return os;\n    }\n\
+    };\ntemplate <> double P<double>::EPS = 1e-9;\ntemplate <> long double P<long\
+    \ double>::EPS = 1e-12;\n\ntemplate <typename T_P>\nint ccw(const P<T_P> &a, const\
+    \ P<T_P> &b, const P<T_P> &c) // a->b->c\u306E\u66F2\u304C\u308A\u65B9\n{\n  \
+    \  P<T_P> v1 = b - a;\n    P<T_P> v2 = c - a;\n    if (v1.det(v2) > P<T_P>::EPS)\
+    \ return 1;   // \u5DE6\u6298\n    if (v1.det(v2) < -P<T_P>::EPS) return -1; //\
+    \ \u53F3\u6298\n    if (v1.dot(v2) < -P<T_P>::EPS) return 2;  // c-a-b\n    if\
+    \ (v1.norm() < v2.norm()) return -2;     // a-b-c\n    return 0;             \
+    \                    // a-c-b\n}\n\n// Convex hull \uFF08\u51F8\u5305\uFF09\n\
+    // return: IDs of vertices used for convex hull, counterclockwise\n// include_boundary:\
+    \ If true, interior angle pi is allowed\ntemplate <typename T_P> std::vector<int>\
     \ convex_hull(const std::vector<P<T_P>> &ps, bool include_boundary = false) {\n\
     \    int n = ps.size();\n    if (n <= 1) return std::vector<int>(n, 0);\n    std::vector<std::pair<P<T_P>,\
     \ int>> points(n);\n    for (size_t i = 0; i < ps.size(); i++) points[i] = std::make_pair(ps[i],\
@@ -70,46 +70,47 @@ data:
     \ p2) {\n    assert(p1 != p2);\n    std::vector<P<T_P>> ret;\n    for (int i =\
     \ 0; i < (int)g.size(); i++) {\n        const P<T_P> &now = g[i], &nxt = g[(i\
     \ + 1) % g.size()];\n        if (ccw(p1, p2, now) != -1) ret.push_back(now);\n\
-    \        if ((ccw(p1, p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) { ret.push_back(lines_crosspoint(now,\
-    \ nxt - now, p1, p2 - p1)); }\n    }\n    return ret;\n}\n\n// Circumcenter \uFF08\
-    \u4E09\u89D2\u5F62\u306E\u5916\u5FC3\uFF09\n// - raise exception for collinear\
-    \ points\ntemplate <typename T_P> P<T_P> circumcenter(const P<T_P> &z1, const\
-    \ P<T_P> &z2, const P<T_P> &z3) {\n    assert(abs(ccw(z1, z2, z3)) % 2 == 1);\n\
-    \    P<T_P> a = z2 - z1, b = z3 - z1;\n    return z1 + a * b * (a - b).conj()\
-    \ / (b * a.conj() - a * b.conj());\n}\n\n// 2\u5186\u306E\u4EA4\u70B9 (ABC157F)\n\
-    template <typename T_P> std::vector<P<T_P>> IntersectTwoCircles(const P<T_P> &Ca,\
-    \ double Ra, const P<T_P> &Cb, double Rb) {\n    double d = (Ca - Cb).norm();\n\
-    \    if (Ra + Rb < d) return {};\n    double rc = (d * d + Ra * Ra - Rb * Rb)\
-    \ / (2 * d);\n    double rs = sqrt(Ra * Ra - rc * rc);\n    P<T_P> diff = (Cb\
-    \ - Ca) / d;\n    return {Ca + diff * P<T_P>(rc, rs), Ca + diff * P<T_P>(rc, -rs)};\n\
-    }\n\n// Solve |x0 + vt| = R (SRM 543 Div.1 1000)\ntemplate <typename T_P> std::vector<T_P>\
-    \ IntersectCircleLine(const P<T_P> &x0, const P<T_P> &v, T_P R) {\n    T_P b =\
-    \ x0.dot(v) / v.norm2();\n    T_P c = (x0.norm2() - R * R) / v.norm2();\n    if\
-    \ (b * b - c < 0) return {};\n    T_P ret1;\n    if (b > 0)\n        ret1 = -b\
-    \ - sqrt(b * b - c);\n    else\n        ret1 = -b + sqrt(b * b - c);\n    T_P\
-    \ ret2 = c / ret1;\n    std::vector<T_P> ret{ret1, ret2};\n    std::sort(ret.begin(),\
-    \ ret.end());\n    return ret;\n}\n\n// Distance between point p <-> line ab\n\
-    template <typename T_P> T_P DistancePointLine(const P<T_P> &p, const P<T_P> &a,\
-    \ const P<T_P> &b) {\n    assert(a != b);\n    return std::abs((b - a).det(p -\
-    \ a)) / (b - a).norm();\n}\n\n// Distance between point p <-> line segment ab\n\
-    template <typename T_P> T_P DistancePointSegment(const P<T_P> &p, const P<T_P>\
-    \ &a, const P<T_P> &b) {\n    if (a == b)\n        return (p - a).norm();\n  \
-    \  else if ((p - a).dot(b - a) <= 0)\n        return (p - a).norm();\n    else\
-    \ if ((p - b).dot(a - b) <= 0)\n        return (p - b).norm();\n    else\n   \
-    \     return DistancePointLine(p, a, b);\n}\n\n// Area of polygon (might be negative)\n\
-    template <typename T_P> T_P signed_area_of_polygon(const std::vector<P<T_P>> &poly)\
-    \ {\n    T_P area = 0;\n    for (size_t i = 0; i < poly.size(); i++) { area +=\
-    \ poly[i].det(poly[(i + 1) % poly.size()]); }\n    return area * 0.5;\n}\n#line\
-    \ 5 \"utilities/quadratic_solver.hpp\"\n\n// CUT begin\n// Solve ax^2 + bx + c\
-    \ = 0.\n// retval: (# of solutions (-1 == inf.), solutions(ascending order))\n\
-    // Verify: <https://yukicoder.me/problems/no/955> <https://atcoder.jp/contests/tricky/tasks/tricky_2>\n\
-    template <typename Float> std::pair<int, std::vector<Float>> quadratic_solver(Float\
-    \ A, Float B, Float C) {\n    if (B < 0) A = -A, B = -B, C = -C;\n    if (A ==\
-    \ 0) {\n        if (B == 0) {\n            if (C == 0)\n                return\
-    \ std::make_pair(-1, std::vector<Float>{}); // all real numbers\n            else\n\
-    \                return std::make_pair(0, std::vector<Float>{}); // no solution\n\
-    \        } else\n            return std::make_pair(1, std::vector<Float>{-C /\
-    \ B});\n    }\n    Float D = B * B - 4 * A * C;\n    if (D < 0) return std::make_pair(0,\
+    \        if ((ccw(p1, p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) {\n      \
+    \      ret.push_back(lines_crosspoint(now, nxt - now, p1, p2 - p1));\n       \
+    \ }\n    }\n    return ret;\n}\n\n// Circumcenter \uFF08\u4E09\u89D2\u5F62\u306E\
+    \u5916\u5FC3\uFF09\n// - raise exception for collinear points\ntemplate <typename\
+    \ T_P> P<T_P> circumcenter(const P<T_P> &z1, const P<T_P> &z2, const P<T_P> &z3)\
+    \ {\n    assert(abs(ccw(z1, z2, z3)) % 2 == 1);\n    P<T_P> a = z2 - z1, b = z3\
+    \ - z1;\n    return z1 + a * b * (a - b).conj() / (b * a.conj() - a * b.conj());\n\
+    }\n\n// 2\u5186\u306E\u4EA4\u70B9 (ABC157F)\ntemplate <typename T_P>\nstd::vector<P<T_P>>\
+    \ IntersectTwoCircles(const P<T_P> &Ca, double Ra, const P<T_P> &Cb, double Rb)\
+    \ {\n    double d = (Ca - Cb).norm();\n    if (Ra + Rb < d) return {};\n    double\
+    \ rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);\n    double rs = sqrt(Ra * Ra -\
+    \ rc * rc);\n    P<T_P> diff = (Cb - Ca) / d;\n    return {Ca + diff * P<T_P>(rc,\
+    \ rs), Ca + diff * P<T_P>(rc, -rs)};\n}\n\n// Solve |x0 + vt| = R (SRM 543 Div.1\
+    \ 1000)\ntemplate <typename T_P> std::vector<T_P> IntersectCircleLine(const P<T_P>\
+    \ &x0, const P<T_P> &v, T_P R) {\n    T_P b = x0.dot(v) / v.norm2();\n    T_P\
+    \ c = (x0.norm2() - R * R) / v.norm2();\n    if (b * b - c < 0) return {};\n \
+    \   T_P ret1;\n    if (b > 0)\n        ret1 = -b - sqrt(b * b - c);\n    else\n\
+    \        ret1 = -b + sqrt(b * b - c);\n    T_P ret2 = c / ret1;\n    std::vector<T_P>\
+    \ ret{ret1, ret2};\n    std::sort(ret.begin(), ret.end());\n    return ret;\n\
+    }\n\n// Distance between point p <-> line ab\ntemplate <typename T_P> T_P DistancePointLine(const\
+    \ P<T_P> &p, const P<T_P> &a, const P<T_P> &b) {\n    assert(a != b);\n    return\
+    \ std::abs((b - a).det(p - a)) / (b - a).norm();\n}\n\n// Distance between point\
+    \ p <-> line segment ab\ntemplate <typename T_P> T_P DistancePointSegment(const\
+    \ P<T_P> &p, const P<T_P> &a, const P<T_P> &b) {\n    if (a == b)\n        return\
+    \ (p - a).norm();\n    else if ((p - a).dot(b - a) <= 0)\n        return (p -\
+    \ a).norm();\n    else if ((p - b).dot(a - b) <= 0)\n        return (p - b).norm();\n\
+    \    else\n        return DistancePointLine(p, a, b);\n}\n\n// Area of polygon\
+    \ (might be negative)\ntemplate <typename T_P> T_P signed_area_of_polygon(const\
+    \ std::vector<P<T_P>> &poly) {\n    T_P area = 0;\n    for (size_t i = 0; i <\
+    \ poly.size(); i++) { area += poly[i].det(poly[(i + 1) % poly.size()]); }\n  \
+    \  return area * 0.5;\n}\n#line 5 \"utilities/quadratic_solver.hpp\"\n\n// CUT\
+    \ begin\n// Solve ax^2 + bx + c = 0.\n// retval: (# of solutions (-1 == inf.),\
+    \ solutions(ascending order))\n// Verify: <https://yukicoder.me/problems/no/955>\
+    \ <https://atcoder.jp/contests/tricky/tasks/tricky_2>\ntemplate <typename Float>\
+    \ std::pair<int, std::vector<Float>> quadratic_solver(Float A, Float B, Float\
+    \ C) {\n    if (B < 0) A = -A, B = -B, C = -C;\n    if (A == 0) {\n        if\
+    \ (B == 0) {\n            if (C == 0)\n                return std::make_pair(-1,\
+    \ std::vector<Float>{}); // all real numbers\n            else\n             \
+    \   return std::make_pair(0, std::vector<Float>{}); // no solution\n        }\
+    \ else\n            return std::make_pair(1, std::vector<Float>{-C / B});\n  \
+    \  }\n    Float D = B * B - 4 * A * C;\n    if (D < 0) return std::make_pair(0,\
     \ std::vector<Float>{});\n    if (D == 0) return std::make_pair(1, std::vector<Float>{-B\
     \ / (2 * A)});\n    Float ret1 = (-B - sqrt(D)) / (2 * A), ret2 = C / A / ret1;\n\
     \    if (ret1 > ret2) std::swap(ret1, ret2);\n    return std::make_pair(2, std::vector<Float>{ret1,\
@@ -166,7 +167,7 @@ data:
   isVerificationFile: false
   path: geometry/problem_of_apollonius.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2021-04-28 01:09:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/problem_of_apollonius.hpp
