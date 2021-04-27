@@ -55,6 +55,7 @@
 "graph/test/bipartite_matching.test.cpp": "2020-11-21 18:08:42 +0900",
 "graph/test/bridge.test.cpp": "2020-11-21 18:08:42 +0900",
 "graph/test/cycle_detection_directed.test.cpp": "2021-01-01 16:38:37 +0900",
+"graph/test/directed_mst.aoj.test.cpp": "2021-04-25 18:31:23 +0900",
 "graph/test/general_matching.test.cpp": "2021-04-25 00:44:18 +0900",
 "graph/test/incremental-bridge-connectivity.test.cpp": "2020-11-21 18:08:42 +0900",
 "graph/test/maximum_independent_set.test.cpp": "2020-11-21 18:08:42 +0900",
