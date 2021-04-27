@@ -158,6 +158,9 @@ data:
       path: graph/chromatic_number.hpp
       title: graph/chromatic_number.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/directed_mst.hpp
+      title: graph/directed_mst.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/general_matching.hpp
       title: graph/general_matching.hpp
     - icon: ':warning:'
@@ -662,6 +665,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/cycle_detection_directed.test.cpp
       title: graph/test/cycle_detection_directed.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/directed_mst.aoj.test.cpp
+      title: graph/test/directed_mst.aoj.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/general_matching.test.cpp
       title: graph/test/general_matching.test.cpp
