@@ -30,7 +30,9 @@ template <typename T_P> struct P {
     T_P norm2() const noexcept { return x * x + y * y; }
     T_P arg() const noexcept { return std::atan2(y, x); }
     // rotate point/vector by rad
-    P rotate(T_P rad) noexcept { return P(x * std::cos(rad) - y * std::sin(rad), x * std::sin(rad) + y * std::cos(rad)); }
+    P rotate(T_P rad) const noexcept {
+        return P(x * std::cos(rad) - y * std::sin(rad), x * std::sin(rad) + y * std::cos(rad));
+    }
     P normalized() const { return (*this) / this->norm(); }
     P conj() const noexcept { return P(x, -y); }
     friend std::istream &operator>>(std::istream &is, P &p) {
@@ -103,7 +105,9 @@ template <typename T_P> std::vector<P<T_P>> convex_cut(const std::vector<P<T_P>>
     for (int i = 0; i < (int)g.size(); i++) {
         const P<T_P> &now = g[i], &nxt = g[(i + 1) % g.size()];
         if (ccw(p1, p2, now) != -1) ret.push_back(now);
-        if ((ccw(p1, p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) { ret.push_back(lines_crosspoint(now, nxt - now, p1, p2 - p1)); }
+        if ((ccw(p1, p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) {
+            ret.push_back(lines_crosspoint(now, nxt - now, p1, p2 - p1));
+        }
     }
     return ret;
 }
@@ -117,7 +121,8 @@ template <typename T_P> P<T_P> circumcenter(const P<T_P> &z1, const P<T_P> &z2, 
 }
 
 // 2円の交点 (ABC157F)
-template <typename T_P> std::vector<P<T_P>> IntersectTwoCircles(const P<T_P> &Ca, double Ra, const P<T_P> &Cb, double Rb) {
+template <typename T_P>
+std::vector<P<T_P>> IntersectTwoCircles(const P<T_P> &Ca, double Ra, const P<T_P> &Cb, double Rb) {
     double d = (Ca - Cb).norm();
     if (Ra + Rb < d) return {};
     double rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);
