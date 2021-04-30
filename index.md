@@ -265,6 +265,10 @@ data:
       path: other_algorithms/doubling.hpp
       title: other_algorithms/doubling.hpp
     - icon: ':warning:'
+      path: other_algorithms/mos_algorithm.hpp
+      title: "Mo's algorithm \uFF08\u533A\u9593\u30AF\u30A8\u30EA\u306B\u95A2\u3059\
+        \u308B\u5E73\u65B9\u5206\u5272\u30C6\u30AF\u30CB\u30C3\u30AF\uFF09"
+    - icon: ':warning:'
       path: other_algorithms/smawk.hpp
       title: other_algorithms/smawk.hpp
   - name: random
