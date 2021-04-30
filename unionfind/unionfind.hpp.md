@@ -5,6 +5,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/incremental_bridge_connectivity.hpp
     title: graph/incremental_bridge_connectivity.hpp
+  - icon: ':warning:'
+    path: graph/paths_of_length_two_decomposition.hpp
+    title: "\u7121\u5411\u30B0\u30E9\u30D5\u306E\u9577\u3055 2 \u306E\u30D1\u30B9\u3078\
+      \u306E\u5206\u89E3"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: graph/test/incremental-bridge-connectivity.test.cpp
@@ -41,6 +45,7 @@ data:
   path: unionfind/unionfind.hpp
   requiredBy:
   - graph/incremental_bridge_connectivity.hpp
+  - graph/paths_of_length_two_decomposition.hpp
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -176,6 +176,10 @@ data:
       path: graph/maximum_independent_set.hpp
       title: graph/maximum_independent_set.hpp
     - icon: ':warning:'
+      path: graph/paths_of_length_two_decomposition.hpp
+      title: "\u7121\u5411\u30B0\u30E9\u30D5\u306E\u9577\u3055 2 \u306E\u30D1\u30B9\
+        \u3078\u306E\u5206\u89E3"
+    - icon: ':warning:'
       path: graph/segment_edge_shortest_path.hpp
       title: graph/segment_edge_shortest_path.hpp
     - icon: ':warning:'
