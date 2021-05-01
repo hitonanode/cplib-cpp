@@ -170,6 +170,11 @@ data:
       path: graph/lowlink.hpp
       title: graph/lowlink.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/manhattan_mst.hpp
+      title: "Manhattan MST \uFF08\u4E8C\u6B21\u5143\u5E73\u9762\u4E0A\u306E\u9802\
+        \u70B9\u305F\u3061\u306E\u30DE\u30F3\u30CF\u30C3\u30BF\u30F3\u8DDD\u96E2\u306B\
+        \u3088\u308B\u6700\u5C0F\u5168\u57DF\u6728\u69CB\u6210\uFF09"
+    - icon: ':heavy_check_mark:'
       path: graph/maximum_independent_set.hpp
       title: graph/maximum_independent_set.hpp
     - icon: ':warning:'
@@ -682,6 +687,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/incremental-bridge-connectivity.test.cpp
       title: graph/test/incremental-bridge-connectivity.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/manhattan_mst.test.cpp
+      title: graph/test/manhattan_mst.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/maximum_independent_set.test.cpp
       title: graph/test/maximum_independent_set.test.cpp

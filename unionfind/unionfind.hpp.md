@@ -14,6 +14,9 @@ data:
     path: graph/test/incremental-bridge-connectivity.test.cpp
     title: graph/test/incremental-bridge-connectivity.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/manhattan_mst.test.cpp
+    title: graph/test/manhattan_mst.test.cpp
+  - icon: ':heavy_check_mark:'
     path: unionfind/test/unionfind.test.cpp
     title: unionfind/test/unionfind.test.cpp
   _isVerificationFailed: false
@@ -51,6 +54,7 @@ data:
   verifiedWith:
   - unionfind/test/unionfind.test.cpp
   - graph/test/incremental-bridge-connectivity.test.cpp
+  - graph/test/manhattan_mst.test.cpp
 documentation_of: unionfind/unionfind.hpp
 layout: document
 redirect_from:
