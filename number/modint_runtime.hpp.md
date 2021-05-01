@@ -16,6 +16,9 @@ data:
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/chromatic_number.test.cpp
+    title: graph/test/chromatic_number.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - icon: ':heavy_check_mark:'
@@ -181,6 +184,7 @@ data:
   - number/test/sqrt_modint_runtime.test.cpp
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
+  - graph/test/chromatic_number.test.cpp
 documentation_of: number/modint_runtime.hpp
 layout: document
 redirect_from:

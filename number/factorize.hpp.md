@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: graph/test/chromatic_number.test.cpp
+    title: graph/test/chromatic_number.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/factorize_longlong.test.cpp
     title: number/test/factorize_longlong.test.cpp
   - icon: ':heavy_check_mark:'
@@ -107,6 +110,7 @@ data:
   verifiedWith:
   - number/test/factorize_longlong.test.cpp
   - number/test/miller-rabin.test.cpp
+  - graph/test/chromatic_number.test.cpp
 documentation_of: number/factorize.hpp
 layout: document
 redirect_from:

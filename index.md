@@ -151,9 +151,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/bipartite_matching.hpp
       title: graph/bipartite_matching.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/chromatic_number.hpp
-      title: graph/chromatic_number.hpp
+      title: "Chromatic number of directed graph \uFF08\u7121\u5411\u30B0\u30E9\u30D5\
+        \u306E\u5F69\u8272\u6570\uFF09"
     - icon: ':heavy_check_mark:'
       path: graph/directed_mst.hpp
       title: graph/directed_mst.hpp
@@ -675,6 +676,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/bridge.test.cpp
       title: graph/test/bridge.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/chromatic_number.test.cpp
+      title: graph/test/chromatic_number.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/cycle_detection_directed.test.cpp
       title: graph/test/cycle_detection_directed.test.cpp

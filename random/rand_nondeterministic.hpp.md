@@ -7,6 +7,9 @@ data:
     title: linear_algebra_matrix/det_of_sparse_matrix.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: graph/test/chromatic_number.test.cpp
+    title: graph/test/chromatic_number.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
   _isVerificationFailed: false
@@ -35,6 +38,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - graph/test/chromatic_number.test.cpp
 documentation_of: random/rand_nondeterministic.hpp
 layout: document
 redirect_from:
