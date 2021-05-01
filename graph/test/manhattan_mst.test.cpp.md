@@ -30,13 +30,16 @@ data:
     \ (cou[x] < cou[y]) std::swap(x, y);\n        par[y] = x, cou[x] += cou[y];\n\
     \        return true;\n    }\n    int count(int x) { return cou[find(x)]; }\n\
     \    bool same(int x, int y) { return find(x) == find(y); }\n};\n#line 2 \"graph/manhattan_mst.hpp\"\
-    \n#include <algorithm>\n#include <map>\n#include <tuple>\n#line 6 \"graph/manhattan_mst.hpp\"\
-    \n\n// Manhattan MST: \u4E8C\u6B21\u5143\u5E73\u9762\u4E0A\u306E\u9802\u70B9\u305F\
-    \u3061\u306E\u30DE\u30F3\u30CF\u30C3\u30BF\u30F3\u8DDD\u96E2\u306B\u3088\u308B\
-    \ minimum spanning tree \u306E O(N) \u672C\u306E\u5019\u88DC\u8FBA\u3092\u5217\
-    \u6319\n// Complexity: O(N log N)\n// output: [(weight_uv, u, v), ...]\n// Verified:\
-    \ https://judge.yosupo.jp/problem/manhattanmst, https://www.codechef.com/problems/HKRMAN\n\
-    template <typename T> std::vector<std::tuple<T, int, int>> manhattan_mst(std::vector<T>\
+    \n#include <algorithm>\n#include <map>\n#line 5 \"graph/manhattan_mst.hpp\"\n\
+    #include <tuple>\n#line 7 \"graph/manhattan_mst.hpp\"\n\n// Manhattan MST: \u4E8C\
+    \u6B21\u5143\u5E73\u9762\u4E0A\u306E\u9802\u70B9\u305F\u3061\u306E\u30DE\u30F3\
+    \u30CF\u30C3\u30BF\u30F3\u8DDD\u96E2\u306B\u3088\u308B minimum spanning tree \u306E\
+    \ O(N) \u672C\u306E\u5019\u88DC\u8FBA\u3092\u5217\u6319\n// Complexity: O(N log\
+    \ N)\n// output: [(weight_uv, u, v), ...]\n// Verified: https://judge.yosupo.jp/problem/manhattanmst,\
+    \ https://www.codechef.com/problems/HKRMAN\n// Reference:\n// [1] H. Zhou, N.\
+    \ Shenoy, W. Nicholls,\n//     \"Efficient minimum spanning tree construction\
+    \ without Delaunay triangulation,\"\n//     Information Processing Letters, 81(5),\
+    \ 271-276, 2002.\ntemplate <typename T> std::vector<std::tuple<T, int, int>> manhattan_mst(std::vector<T>\
     \ xs, std::vector<T> ys) {\n    const int n = xs.size();\n    std::vector<int>\
     \ idx(n);\n    std::iota(idx.begin(), idx.end(), 0);\n    std::vector<std::tuple<T,\
     \ int, int>> ret;\n    for (int s = 0; s < 2; s++) {\n        for (int t = 0;\
@@ -72,7 +75,7 @@ data:
   isVerificationFile: true
   path: graph/test/manhattan_mst.test.cpp
   requiredBy: []
-  timestamp: '2021-05-01 16:33:35+09:00'
+  timestamp: '2021-05-01 16:42:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/manhattan_mst.test.cpp
