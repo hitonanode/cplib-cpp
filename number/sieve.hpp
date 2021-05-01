@@ -11,8 +11,8 @@
 // Reference:
 // [1] D. Gries, J. Misra, "A Linear Sieve Algorithm for Finding Prime Numbers,"
 //     Communications of the ACM, 21(12), 999-1003, 1978.
-// - <https://cp-algorithms.com/algebra/prime-sieve-linear.html>
-// - <https://37zigen.com/linear-sieve/>
+// - https://cp-algorithms.com/algebra/prime-sieve-linear.html
+// - https://37zigen.com/linear-sieve/
 struct Sieve {
     std::vector<int> min_factor;
     std::vector<int> primes;
@@ -69,6 +69,20 @@ struct Sieve {
                 ret[i] = 0;
             else
                 ret[i] = -ret[i / min_factor[i]];
+        }
+        return ret;
+    }
+    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)
+    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) {
+        assert(nmax < int(min_factor.size()));
+        std::vector<MODINT> ret(nmax + 1);
+        ret[0] = 0, ret[1] = 1;
+        for (int n = 2; n <= nmax; n++) {
+            if (min_factor[n] == n) {
+                ret[n] = MODINT(n).pow(K);
+            } else {
+                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];
+            }
         }
         return ret;
     }
