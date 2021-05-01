@@ -43,7 +43,7 @@ struct Sieve {
         return ret;
     }
     // Enumerate divisors of 1 <= x <= MAXN^2
-    // Be careful of highly composite numbers <https://oeis.org/A002182/list> <https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt>:
+    // Be careful of highly composite numbers https://oeis.org/A002182/list https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt
     // (n, (# of div. of n)): 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720
     template <typename T> std::vector<T> divisors(T x) {
         std::vector<T> ret{1};
@@ -59,7 +59,7 @@ struct Sieve {
         return ret; // NOT sorted
     }
     // Moebius function Table, (-1)^{# of different prime factors} for square-free x
-    // return: [0=>0, 1=>1, 2=>-1, 3=>-1, 4=>0, 5=>-1, 6=>1, 7=>-1, 8=>0, ...] <https://oeis.org/A008683>
+    // return: [0=>0, 1=>1, 2=>-1, 3=>-1, 4=>0, 5=>-1, 6=>1, 7=>-1, 8=>0, ...] https://oeis.org/A008683
     std::vector<int> GenerateMoebiusFunctionTable() {
         std::vector<int> ret(min_factor.size());
         for (unsigned i = 1; i < min_factor.size(); i++) {
