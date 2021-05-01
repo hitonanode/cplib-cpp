@@ -53,7 +53,7 @@ data:
   - graph/test/chromatic_number.test.cpp
 documentation_of: graph/chromatic_number.hpp
 layout: document
-title: "Chromatic number of directed graph \uFF08\u7121\u5411\u30B0\u30E9\u30D5\u306E\
+title: "Chromatic number of undirected graph \uFF08\u7121\u5411\u30B0\u30E9\u30D5\u306E\
   \u5F69\u8272\u6570\uFF09"
 ---
 

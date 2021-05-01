@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: graph/chromatic_number.hpp
-    title: "Chromatic number of directed graph \uFF08\u7121\u5411\u30B0\u30E9\u30D5\
+    title: "Chromatic number of undirected graph \uFF08\u7121\u5411\u30B0\u30E9\u30D5\
       \u306E\u5F69\u8272\u6570\uFF09"
   - icon: ':heavy_check_mark:'
     path: number/factorize.hpp
