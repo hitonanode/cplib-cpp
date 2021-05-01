@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: number/sieve.hpp
-    title: number/sieve.hpp
+    title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,11 +20,11 @@ data:
     \ / AtCoder GCC, C++17)\n// - MAXN = 10^8: ~435 MB, 810~980 ms (Codeforces / AtCoder\
     \ GCC, C++17)\n// Reference:\n// [1] D. Gries, J. Misra, \"A Linear Sieve Algorithm\
     \ for Finding Prime Numbers,\"\n//     Communications of the ACM, 21(12), 999-1003,\
-    \ 1978.\n// - <https://cp-algorithms.com/algebra/prime-sieve-linear.html>\n//\
-    \ - <https://37zigen.com/linear-sieve/>\nstruct Sieve {\n    std::vector<int>\
-    \ min_factor;\n    std::vector<int> primes;\n    Sieve(int MAXN) : min_factor(MAXN\
-    \ + 1) {\n        for (int d = 2; d <= MAXN; d++) {\n            if (!min_factor[d])\
-    \ {\n                min_factor[d] = d;\n                primes.emplace_back(d);\n\
+    \ 1978.\n// - https://cp-algorithms.com/algebra/prime-sieve-linear.html\n// -\
+    \ https://37zigen.com/linear-sieve/\nstruct Sieve {\n    std::vector<int> min_factor;\n\
+    \    std::vector<int> primes;\n    Sieve(int MAXN) : min_factor(MAXN + 1) {\n\
+    \        for (int d = 2; d <= MAXN; d++) {\n            if (!min_factor[d]) {\n\
+    \                min_factor[d] = d;\n                primes.emplace_back(d);\n\
     \            }\n            for (const auto &p : primes) {\n                if\
     \ (p > min_factor[d] or d * p > MAXN) break;\n                min_factor[d * p]\
     \ = p;\n            }\n        }\n    }\n    // Prime factorization for 1 <= x\
@@ -36,9 +36,9 @@ data:
     \ break;\n            while (!(x % p)) x /= p, ret[p]++;\n        }\n        if\
     \ (x >= T(min_factor.size())) ret[x]++, x = 1;\n        while (x > 1) ret[min_factor[x]]++,\
     \ x /= min_factor[x];\n        return ret;\n    }\n    // Enumerate divisors of\
-    \ 1 <= x <= MAXN^2\n    // Be careful of highly composite numbers <https://oeis.org/A002182/list>\
-    \ <https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt>:\n  \
-    \  // (n, (# of div. of n)): 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720\n\
+    \ 1 <= x <= MAXN^2\n    // Be careful of highly composite numbers https://oeis.org/A002182/list\
+    \ https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt\n    //\
+    \ (n, (# of div. of n)): 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720\n\
     \    template <typename T> std::vector<T> divisors(T x) {\n        std::vector<T>\
     \ ret{1};\n        for (const auto p : factorize(x)) {\n            int n = ret.size();\n\
     \            for (int i = 0; i < n; i++) {\n                for (T a = 1, d =\
@@ -46,15 +46,21 @@ data:
     \      ret.push_back(ret[i] * a);\n                }\n            }\n        }\n\
     \        return ret; // NOT sorted\n    }\n    // Moebius function Table, (-1)^{#\
     \ of different prime factors} for square-free x\n    // return: [0=>0, 1=>1, 2=>-1,\
-    \ 3=>-1, 4=>0, 5=>-1, 6=>1, 7=>-1, 8=>0, ...] <https://oeis.org/A008683>\n   \
-    \ std::vector<int> GenerateMoebiusFunctionTable() {\n        std::vector<int>\
-    \ ret(min_factor.size());\n        for (unsigned i = 1; i < min_factor.size();\
-    \ i++) {\n            if (i == 1)\n                ret[i] = 1;\n            else\
-    \ if ((i / min_factor[i]) % min_factor[i] == 0)\n                ret[i] = 0;\n\
-    \            else\n                ret[i] = -ret[i / min_factor[i]];\n       \
-    \ }\n        return ret;\n    }\n};\n// Sieve sieve(1 << 15);  // (can factorize\
-    \ n <= 10^9)\n#line 2 \"number/test/prime_factorization.test.cpp\"\n#include <iostream>\n\
-    #define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A\"\
+    \ 3=>-1, 4=>0, 5=>-1, 6=>1, 7=>-1, 8=>0, ...] https://oeis.org/A008683\n    std::vector<int>\
+    \ GenerateMoebiusFunctionTable() {\n        std::vector<int> ret(min_factor.size());\n\
+    \        for (unsigned i = 1; i < min_factor.size(); i++) {\n            if (i\
+    \ == 1)\n                ret[i] = 1;\n            else if ((i / min_factor[i])\
+    \ % min_factor[i] == 0)\n                ret[i] = 0;\n            else\n     \
+    \           ret[i] = -ret[i / min_factor[i]];\n        }\n        return ret;\n\
+    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    template <typename\
+    \ MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) {\n  \
+    \      assert(nmax < int(min_factor.size()));\n        std::vector<MODINT> ret(nmax\
+    \ + 1);\n        ret[0] = 0, ret[1] = 1;\n        for (int n = 2; n <= nmax; n++)\
+    \ {\n            if (min_factor[n] == n) {\n                ret[n] = MODINT(n).pow(K);\n\
+    \            } else {\n                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n\
+    \            }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 <<\
+    \ 15);  // (can factorize n <= 10^9)\n#line 2 \"number/test/prime_factorization.test.cpp\"\
+    \n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A\"\
     \nusing namespace std;\n\nint main() {\n    Sieve sieve(1 << 15);\n    int N;\n\
     \    cin >> N;\n    map<long long int, int> factors = sieve.factorize<long long>(N);\n\
     \    cout << N << ':';\n    for (auto p : factors) {\n        while (p.second--)\
@@ -69,7 +75,7 @@ data:
   isVerificationFile: true
   path: number/test/prime_factorization.test.cpp
   requiredBy: []
-  timestamp: '2021-01-12 01:46:09+09:00'
+  timestamp: '2021-05-01 20:07:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/prime_factorization.test.cpp

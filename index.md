@@ -265,7 +265,7 @@ data:
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
-      title: number/sieve.hpp
+      title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
     - icon: ':warning:'
       path: number/zeta_moebius_transform.hpp
       title: number/zeta_moebius_transform.hpp
