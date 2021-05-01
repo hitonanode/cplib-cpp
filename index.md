@@ -385,7 +385,8 @@ data:
       title: "Lyndon factorization \uFF08Lyndon \u5206\u89E3\uFF09"
     - icon: ':heavy_check_mark:'
       path: string/manacher.hpp
-      title: string/manacher.hpp
+      title: "Longest palindromic substring enumeration (Manacher's algorithm) \uFF08\
+        \u56DE\u6587\u9577\u914D\u5217\u69CB\u7BC9\uFF09"
     - icon: ':heavy_check_mark:'
       path: string/mp_algorithm.hpp
       title: string/mp_algorithm.hpp
@@ -866,6 +867,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/lcp.test.cpp
       title: string/test/lcp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/manacher.test.cpp
+      title: string/test/manacher.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/manacher_mp.test.cpp
       title: string/test/manacher_mp.test.cpp
