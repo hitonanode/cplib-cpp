@@ -5,6 +5,7 @@
 #include <utility>
 #include <vector>
 
+// CUT begin
 struct TreeLCA {
     const int N;
     std::vector<std::vector<int>> to;

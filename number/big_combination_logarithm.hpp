@@ -2,6 +2,7 @@
 #include <cmath>
 #include <vector>
 
+// CUT begin
 constexpr double minusloginf = -300;
 std::vector<double> logfac;
 void facInit(int nmax) {

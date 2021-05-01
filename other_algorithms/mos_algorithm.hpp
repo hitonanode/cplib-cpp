@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 
+// CUT begin
 // Mo's algorithm
 // - add_range(l, r) : Add [l, r) as query.
 // - run(Add, Remove, Query) : run Mo's algorithm.

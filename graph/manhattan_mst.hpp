@@ -5,6 +5,7 @@
 #include <tuple>
 #include <vector>
 
+// CUT begin
 // Manhattan MST: 二次元平面上の頂点たちのマンハッタン距離による minimum spanning tree の O(N) 本の候補辺を列挙
 // Complexity: O(N log N)
 // output: [(weight_uv, u, v), ...]

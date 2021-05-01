@@ -1,11 +1,12 @@
 #pragma once
-#include "suffix_array.hpp"
 #include "../sparse_table/rmq_sparse_table.hpp"
+#include "suffix_array.hpp"
 #include <algorithm>
+#include <string>
 #include <utility>
 #include <vector>
-#include <string>
 
+// CUT begin
 struct LCPsparsetable {
     const int N;
     std::vector<int> sainv; // len = N

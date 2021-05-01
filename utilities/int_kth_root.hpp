@@ -1,5 +1,6 @@
 #pragma once
 
+// CUT begin
 // floor(a^(1/k)) (the largest x s.t. x^k doesn't exceed a)
 // Constraints: a >= 0, k > 0
 unsigned long long int_kth_root(unsigned long long a, int k) {

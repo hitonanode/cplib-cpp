@@ -6,6 +6,7 @@
 #include <utility>
 #include <vector>
 
+// CUT begin
 // 無向グラフを長さ2の道（**閉路を含む**）へ分解
 // 各連結成分について，辺の本数が偶数なら完全な分解が可能
 // Complexity: O(V + E)

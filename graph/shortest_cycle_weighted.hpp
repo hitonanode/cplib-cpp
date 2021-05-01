@@ -5,8 +5,9 @@
 #include <utility>
 #include <vector>
 
+// CUT begin
 // Shortest cycle detection of UNDIRECTED SIMPLE graphs
-// Verified: <https://yukicoder.me/submissions/594507>
+// Verified: https://yukicoder.me/submissions/594507
 template <typename T, T INF = std::numeric_limits<T>::max() / 2> struct ShortestCycleOfUndirectedWeighted {
     int V, E;
     std::vector<std::vector<std::pair<int, T>>> to; // (nxt, weight)

@@ -5,6 +5,7 @@
 #include <utility>
 #include <vector>
 
+// CUT begin
 // f[n]に対して、全てのnの倍数n*iに対するf[n*i]の和が出てくる 計算量O(NloglogN)
 // 素数p毎に処理する高速ゼータ変換
 // 使用例 https://yukicoder.me/submissions/385043
