@@ -4,7 +4,7 @@
 
 // CUT begin
 // (vertex) chromatic number: （頂点）彩色数
-// Verify: https://atcoder.jp/contests/abc187/tasks/abc187_f
+// Verified: https://judge.yosupo.jp/problem/chromatic_number, https://atcoder.jp/contests/abc187/tasks/abc187_f
 // Reference:
 // [1] A. Bjorklund and T. Husfeldt, "Inclusion--Exclusion Algorithms for Counting Set Partitions,"
 //     2006 47th Annual IEEE Symposium on Foundations of Computer Science (FOCS'06).
