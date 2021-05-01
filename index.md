@@ -59,9 +59,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/hadamard.hpp
       title: convolution/hadamard.hpp
-    - icon: ':warning:'
-      path: convolution/integer_convolution.hpp
-      title: convolution/integer_convolution.hpp
     - icon: ':heavy_check_mark:'
       path: convolution/multivar_ntt.hpp
       title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
@@ -263,6 +260,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
       title: number/sieve.hpp
+    - icon: ':warning:'
+      path: number/zeta_moebius_transform.hpp
+      title: number/zeta_moebius_transform.hpp
   - name: other_algorithms
     pages:
     - icon: ':warning:'

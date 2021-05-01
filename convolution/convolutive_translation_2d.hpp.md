@@ -140,19 +140,47 @@ data:
     \        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);\n        auto ntt1 = nttconv_<nttprimes[1]>(ai,\
     \ bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai, bi);\n        a.resize(n\
     \ + m - 1);\n        for (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val,\
-    \ ntt1[i].val, ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 3 \"convolution/convolutive_translation_2d.hpp\"\
-    \n#include <utility>\n#line 5 \"convolution/convolutive_translation_2d.hpp\"\n\
+    \ ntt1[i].val, ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 4 \"convolution/convolutive_translation_2d.hpp\"\
+    \n#include <utility>\n#line 6 \"convolution/convolutive_translation_2d.hpp\"\n\
     \n// Two dimensional fast DP using FFT.\n// Complexity: O(HW log (HW)) for each\
     \ step.\n// Verification: TCO 2020 Round 3A 1000 ZombieRPGDice\n// Verification:\
     \ TCO 2020 Round 3B 500 ShortBugPaths\ntemplate <typename MODINT>\nstd::vector<std::vector<MODINT>>\
     \ convolutive_translation_2d(const std::vector<std::vector<MODINT>> &initial_dist,\
-    \                    // size: H * W\n                                        \
-    \                    const std::vector<std::pair<std::pair<int, int>, MODINT>>\
-    \ &trans_coeffs, // [((dx, dy), coefficient), ...]\n                         \
-    \                                   int nb_step = 1) {\n    int H = initial_dist.size(),\
-    \ W = initial_dist[0].size();\n    int xlo = 0, xhi = 0, ylo = 0, yhi = 0;\n\n\
-    \    std::vector<std::pair<std::pair<int, int>, MODINT>> t2c_1d;\n    for (auto\
-    \ p : trans_coeffs)\n        if (p.second != 0) {\n            if (p.first.first\
+    \ // size: H * W\n                                                           \
+    \ const std::vector<std::pair<std::pair<int, int>, MODINT>> &trans_coeffs, //\
+    \ [((dx, dy), coefficient), ...]\n                                           \
+    \                 int nb_step = 1) {\n    int H = initial_dist.size(), W = initial_dist[0].size();\n\
+    \    int xlo = 0, xhi = 0, ylo = 0, yhi = 0;\n\n    std::vector<std::pair<std::pair<int,\
+    \ int>, MODINT>> t2c_1d;\n    for (auto p : trans_coeffs)\n        if (p.second\
+    \ != 0) {\n            if (p.first.first <= -H or p.first.first >= H) continue;\n\
+    \            if (p.first.second <= -W or p.first.second >= W) continue;\n    \
+    \        xlo = std::max(xlo, -p.first.first), xhi = std::max(xhi, p.first.first);\n\
+    \            ylo = std::max(ylo, -p.first.second), yhi = std::max(yhi, p.first.second);\n\
+    \            t2c_1d.emplace_back(p);\n        }\n    const int WW = W + ylo +\
+    \ yhi;\n    std::vector<MODINT> dp((H - 1) * WW + W);\n    for (int i = 0; i <\
+    \ H; i++) { std::copy(initial_dist[i].begin(), initial_dist[i].end(), dp.begin()\
+    \ + i * WW); }\n\n    int tlo = 0, thi = 0;\n    for (auto p : t2c_1d) {\n   \
+    \     int t = p.first.first * WW + p.first.second;\n        tlo = std::max(tlo,\
+    \ -t), thi = std::max(thi, t);\n    }\n\n    std::vector<MODINT> trans1d(tlo +\
+    \ thi + 1);\n    for (auto p : t2c_1d) { trans1d[tlo + p.first.first * WW + p.first.second]\
+    \ += p.second; }\n    for (int t = 0; t < nb_step; t++) {\n        auto dp_nxt\
+    \ = nttconv(dp, trans1d);\n        for (int i = 0; i < H; i++) {\n           \
+    \ std::copy(dp_nxt.begin() + i * WW + tlo, dp_nxt.begin() + i * WW + W + tlo,\
+    \ dp.begin() + i * WW);\n        }\n    }\n    std::vector<std::vector<MODINT>>\
+    \ ret(H);\n    for (int i = 0; i < H; i++) { ret[i].insert(ret[i].end(), dp.begin()\
+    \ + i * WW, dp.begin() + i * WW + W); }\n    return ret;\n}\n"
+  code: "#pragma once\n#include \"convolution/ntt.hpp\"\n#include <algorithm>\n#include\
+    \ <utility>\n#include <vector>\n\n// Two dimensional fast DP using FFT.\n// Complexity:\
+    \ O(HW log (HW)) for each step.\n// Verification: TCO 2020 Round 3A 1000 ZombieRPGDice\n\
+    // Verification: TCO 2020 Round 3B 500 ShortBugPaths\ntemplate <typename MODINT>\n\
+    std::vector<std::vector<MODINT>> convolutive_translation_2d(const std::vector<std::vector<MODINT>>\
+    \ &initial_dist, // size: H * W\n                                            \
+    \                const std::vector<std::pair<std::pair<int, int>, MODINT>> &trans_coeffs,\
+    \ // [((dx, dy), coefficient), ...]\n                                        \
+    \                    int nb_step = 1) {\n    int H = initial_dist.size(), W =\
+    \ initial_dist[0].size();\n    int xlo = 0, xhi = 0, ylo = 0, yhi = 0;\n\n   \
+    \ std::vector<std::pair<std::pair<int, int>, MODINT>> t2c_1d;\n    for (auto p\
+    \ : trans_coeffs)\n        if (p.second != 0) {\n            if (p.first.first\
     \ <= -H or p.first.first >= H) continue;\n            if (p.first.second <= -W\
     \ or p.first.second >= W) continue;\n            xlo = std::max(xlo, -p.first.first),\
     \ xhi = std::max(xhi, p.first.first);\n            ylo = std::max(ylo, -p.first.second),\
@@ -165,46 +193,17 @@ data:
     \ trans1d(tlo + thi + 1);\n    for (auto p : t2c_1d) { trans1d[tlo + p.first.first\
     \ * WW + p.first.second] += p.second; }\n    for (int t = 0; t < nb_step; t++)\
     \ {\n        auto dp_nxt = nttconv(dp, trans1d);\n        for (int i = 0; i <\
-    \ H; i++) { std::copy(dp_nxt.begin() + i * WW + tlo, dp_nxt.begin() + i * WW +\
-    \ W + tlo, dp.begin() + i * WW); }\n    }\n    std::vector<std::vector<MODINT>>\
+    \ H; i++) {\n            std::copy(dp_nxt.begin() + i * WW + tlo, dp_nxt.begin()\
+    \ + i * WW + W + tlo, dp.begin() + i * WW);\n        }\n    }\n    std::vector<std::vector<MODINT>>\
     \ ret(H);\n    for (int i = 0; i < H; i++) { ret[i].insert(ret[i].end(), dp.begin()\
     \ + i * WW, dp.begin() + i * WW + W); }\n    return ret;\n}\n"
-  code: "#include \"convolution/ntt.hpp\"\n#include <algorithm>\n#include <utility>\n\
-    #include <vector>\n\n// Two dimensional fast DP using FFT.\n// Complexity: O(HW\
-    \ log (HW)) for each step.\n// Verification: TCO 2020 Round 3A 1000 ZombieRPGDice\n\
-    // Verification: TCO 2020 Round 3B 500 ShortBugPaths\ntemplate <typename MODINT>\n\
-    std::vector<std::vector<MODINT>> convolutive_translation_2d(const std::vector<std::vector<MODINT>>\
-    \ &initial_dist,                    // size: H * W\n                         \
-    \                                   const std::vector<std::pair<std::pair<int,\
-    \ int>, MODINT>> &trans_coeffs, // [((dx, dy), coefficient), ...]\n          \
-    \                                                  int nb_step = 1) {\n    int\
-    \ H = initial_dist.size(), W = initial_dist[0].size();\n    int xlo = 0, xhi =\
-    \ 0, ylo = 0, yhi = 0;\n\n    std::vector<std::pair<std::pair<int, int>, MODINT>>\
-    \ t2c_1d;\n    for (auto p : trans_coeffs)\n        if (p.second != 0) {\n   \
-    \         if (p.first.first <= -H or p.first.first >= H) continue;\n         \
-    \   if (p.first.second <= -W or p.first.second >= W) continue;\n            xlo\
-    \ = std::max(xlo, -p.first.first), xhi = std::max(xhi, p.first.first);\n     \
-    \       ylo = std::max(ylo, -p.first.second), yhi = std::max(yhi, p.first.second);\n\
-    \            t2c_1d.emplace_back(p);\n        }\n    const int WW = W + ylo +\
-    \ yhi;\n    std::vector<MODINT> dp((H - 1) * WW + W);\n    for (int i = 0; i <\
-    \ H; i++) { std::copy(initial_dist[i].begin(), initial_dist[i].end(), dp.begin()\
-    \ + i * WW); }\n\n    int tlo = 0, thi = 0;\n    for (auto p : t2c_1d) {\n   \
-    \     int t = p.first.first * WW + p.first.second;\n        tlo = std::max(tlo,\
-    \ -t), thi = std::max(thi, t);\n    }\n\n    std::vector<MODINT> trans1d(tlo +\
-    \ thi + 1);\n    for (auto p : t2c_1d) { trans1d[tlo + p.first.first * WW + p.first.second]\
-    \ += p.second; }\n    for (int t = 0; t < nb_step; t++) {\n        auto dp_nxt\
-    \ = nttconv(dp, trans1d);\n        for (int i = 0; i < H; i++) { std::copy(dp_nxt.begin()\
-    \ + i * WW + tlo, dp_nxt.begin() + i * WW + W + tlo, dp.begin() + i * WW); }\n\
-    \    }\n    std::vector<std::vector<MODINT>> ret(H);\n    for (int i = 0; i <\
-    \ H; i++) { ret[i].insert(ret[i].end(), dp.begin() + i * WW, dp.begin() + i *\
-    \ WW + W); }\n    return ret;\n}\n"
   dependsOn:
   - convolution/ntt.hpp
   - modint.hpp
   isVerificationFile: false
   path: convolution/convolutive_translation_2d.hpp
   requiredBy: []
-  timestamp: '2021-03-27 19:28:18+09:00'
+  timestamp: '2021-05-01 11:39:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: convolution/convolutive_translation_2d.hpp

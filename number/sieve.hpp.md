@@ -5,6 +5,9 @@ data:
   - icon: ':warning:'
     path: number/cyclotomic_polynomials.hpp
     title: "Cyclotomic polynomials \uFF08\u5186\u5206\u591A\u9805\u5F0F\uFF09"
+  - icon: ':warning:'
+    path: number/zeta_moebius_transform.hpp
+    title: number/zeta_moebius_transform.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: number/test/enumerate_primes.test.cpp
@@ -109,6 +112,7 @@ data:
   isVerificationFile: false
   path: number/sieve.hpp
   requiredBy:
+  - number/zeta_moebius_transform.hpp
   - number/cyclotomic_polynomials.hpp
   timestamp: '2021-01-12 01:46:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
