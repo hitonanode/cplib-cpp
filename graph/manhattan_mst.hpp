@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <map>
+#include <numeric>
 #include <tuple>
 #include <vector>
 
@@ -8,6 +9,10 @@
 // Complexity: O(N log N)
 // output: [(weight_uv, u, v), ...]
 // Verified: https://judge.yosupo.jp/problem/manhattanmst, https://www.codechef.com/problems/HKRMAN
+// Reference:
+// [1] H. Zhou, N. Shenoy, W. Nicholls,
+//     "Efficient minimum spanning tree construction without Delaunay triangulation,"
+//     Information Processing Letters, 81(5), 271-276, 2002.
 template <typename T> std::vector<std::tuple<T, int, int>> manhattan_mst(std::vector<T> xs, std::vector<T> ys) {
     const int n = xs.size();
     std::vector<int> idx(n);
