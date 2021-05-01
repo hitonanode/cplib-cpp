@@ -11,8 +11,8 @@
 // Reference:
 // [1] D. Gries, J. Misra, "A Linear Sieve Algorithm for Finding Prime Numbers,"
 //     Communications of the ACM, 21(12), 999-1003, 1978.
-// - <https://cp-algorithms.com/algebra/prime-sieve-linear.html>
-// - <https://37zigen.com/linear-sieve/>
+// - https://cp-algorithms.com/algebra/prime-sieve-linear.html
+// - https://37zigen.com/linear-sieve/
 struct Sieve {
     std::vector<int> min_factor;
     std::vector<int> primes;
@@ -43,7 +43,7 @@ struct Sieve {
         return ret;
     }
     // Enumerate divisors of 1 <= x <= MAXN^2
-    // Be careful of highly composite numbers <https://oeis.org/A002182/list> <https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt>:
+    // Be careful of highly composite numbers https://oeis.org/A002182/list https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt
     // (n, (# of div. of n)): 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720
     template <typename T> std::vector<T> divisors(T x) {
         std::vector<T> ret{1};
@@ -59,7 +59,7 @@ struct Sieve {
         return ret; // NOT sorted
     }
     // Moebius function Table, (-1)^{# of different prime factors} for square-free x
-    // return: [0=>0, 1=>1, 2=>-1, 3=>-1, 4=>0, 5=>-1, 6=>1, 7=>-1, 8=>0, ...] <https://oeis.org/A008683>
+    // return: [0=>0, 1=>1, 2=>-1, 3=>-1, 4=>0, 5=>-1, 6=>1, 7=>-1, 8=>0, ...] https://oeis.org/A008683
     std::vector<int> GenerateMoebiusFunctionTable() {
         std::vector<int> ret(min_factor.size());
         for (unsigned i = 1; i < min_factor.size(); i++) {
@@ -69,6 +69,20 @@ struct Sieve {
                 ret[i] = 0;
             else
                 ret[i] = -ret[i / min_factor[i]];
+        }
+        return ret;
+    }
+    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)
+    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) {
+        assert(nmax < int(min_factor.size()));
+        std::vector<MODINT> ret(nmax + 1);
+        ret[0] = 0, ret[1] = 1;
+        for (int n = 2; n <= nmax; n++) {
+            if (min_factor[n] == n) {
+                ret[n] = MODINT(n).pow(K);
+            } else {
+                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];
+            }
         }
         return ret;
     }
