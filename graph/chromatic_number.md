@@ -1,5 +1,5 @@
 ---
-title: Chromatic number of directed graph （無向グラフの彩色数）
+title: Chromatic number of undirected graph （無向グラフの彩色数）
 documentation_of: ./chromatic_number.hpp
 ---
 
