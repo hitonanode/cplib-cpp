@@ -34,13 +34,13 @@ data:
     \  assert(l >= 0 and r <= N);\n        if (l >= r) return defaultT;\n        int\
     \ d = lgx_table[r - l];\n        return func(data[d][l], data[d][r - (1 << d)]);\n\
     \    }\n};\n#line 5 \"tree/lca_rmq.hpp\"\n#include <utility>\n#line 7 \"tree/lca_rmq.hpp\"\
-    \n\nstruct TreeLCA {\n    const int N;\n    std::vector<std::vector<int>> to;\n\
-    \    bool built;\n    TreeLCA(int V = 0) : N(V), to(V), built(false) {}\n\n  \
-    \  void add_edge(int u, int v) {\n        assert(0 <= u and u < N);\n        assert(0\
-    \ <= v and v < N);\n        assert(u != v);\n        to[u].push_back(v);\n   \
-    \     to[v].push_back(u);\n    }\n\n    using P = std::pair<int, int>;\n    std::vector<int>\
-    \ subtree_begin;\n    std::vector<P> vis_order;\n    std::vector<int> depth;\n\
-    \    void _build_dfs(int now, int prv, int dnow) {\n        subtree_begin[now]\
+    \n\n// CUT begin\nstruct TreeLCA {\n    const int N;\n    std::vector<std::vector<int>>\
+    \ to;\n    bool built;\n    TreeLCA(int V = 0) : N(V), to(V), built(false) {}\n\
+    \n    void add_edge(int u, int v) {\n        assert(0 <= u and u < N);\n     \
+    \   assert(0 <= v and v < N);\n        assert(u != v);\n        to[u].push_back(v);\n\
+    \        to[v].push_back(u);\n    }\n\n    using P = std::pair<int, int>;\n  \
+    \  std::vector<int> subtree_begin;\n    std::vector<P> vis_order;\n    std::vector<int>\
+    \ depth;\n    void _build_dfs(int now, int prv, int dnow) {\n        subtree_begin[now]\
     \ = vis_order.size();\n        vis_order.emplace_back(dnow, now);\n        depth[now]\
     \ = dnow;\n        for (auto &&nxt : to[now]) {\n            if (nxt != prv) {\n\
     \                _build_dfs(nxt, now, dnow + 1);\n                vis_order.emplace_back(dnow,\
@@ -68,7 +68,7 @@ data:
   isVerificationFile: true
   path: tree/test/lca_rmq.test.cpp
   requiredBy: []
-  timestamp: '2021-03-13 17:28:18+09:00'
+  timestamp: '2021-05-01 20:55:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/lca_rmq.test.cpp

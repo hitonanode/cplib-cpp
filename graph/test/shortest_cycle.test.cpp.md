@@ -20,9 +20,9 @@ data:
   bundledCode: "#line 1 \"graph/test/shortest_cycle.test.cpp\"\n#define PROBLEM \"\
     https://yukicoder.me/problems/no/1320\"\n\n#line 2 \"graph/shortest_cycle_weighted.hpp\"\
     \n#include <cassert>\n#include <limits>\n#include <queue>\n#include <utility>\n\
-    #include <vector>\n\n// Shortest cycle detection of UNDIRECTED SIMPLE graphs\n\
-    // Verified: <https://yukicoder.me/submissions/594507>\ntemplate <typename T,\
-    \ T INF = std::numeric_limits<T>::max() / 2> struct ShortestCycleOfUndirectedWeighted\
+    #include <vector>\n\n// CUT begin\n// Shortest cycle detection of UNDIRECTED SIMPLE\
+    \ graphs\n// Verified: https://yukicoder.me/submissions/594507\ntemplate <typename\
+    \ T, T INF = std::numeric_limits<T>::max() / 2> struct ShortestCycleOfUndirectedWeighted\
     \ {\n    int V, E;\n    std::vector<std::vector<std::pair<int, T>>> to; // (nxt,\
     \ weight)\n    ShortestCycleOfUndirectedWeighted() = default;\n    ShortestCycleOfUndirectedWeighted(int\
     \ V) : V(V), E(0), to(V) {}\n    void add_edge(int s, int t, T len) {\n      \
@@ -174,7 +174,7 @@ data:
   isVerificationFile: true
   path: graph/test/shortest_cycle.test.cpp
   requiredBy: []
-  timestamp: '2021-04-18 18:54:48+09:00'
+  timestamp: '2021-05-01 20:55:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_cycle.test.cpp

@@ -39,12 +39,12 @@ data:
     \  int count(int x) { return cou[find(x)]; }\n    bool same(int x, int y) { return\
     \ find(x) == find(y); }\n};\n#line 4 \"graph/paths_of_length_two_decomposition.hpp\"\
     \n#include <cassert>\n#include <tuple>\n#line 8 \"graph/paths_of_length_two_decomposition.hpp\"\
-    \n\n// \u7121\u5411\u30B0\u30E9\u30D5\u3092\u9577\u30552\u306E\u9053\uFF08**\u9589\
-    \u8DEF\u3092\u542B\u3080**\uFF09\u3078\u5206\u89E3\n// \u5404\u9023\u7D50\u6210\
-    \u5206\u306B\u3064\u3044\u3066\uFF0C\u8FBA\u306E\u672C\u6570\u304C\u5076\u6570\
-    \u306A\u3089\u5B8C\u5168\u306A\u5206\u89E3\u304C\u53EF\u80FD\n// Complexity: O(V\
-    \ + E)\n// Verify: - https://codeforces.com/contest/1519/problem/E\n//       \
-    \  - https://atcoder.jp/contests/agc035/tasks/agc035_b\nstruct PathsOfLength2Decomposition\
+    \n\n// CUT begin\n// \u7121\u5411\u30B0\u30E9\u30D5\u3092\u9577\u30552\u306E\u9053\
+    \uFF08**\u9589\u8DEF\u3092\u542B\u3080**\uFF09\u3078\u5206\u89E3\n// \u5404\u9023\
+    \u7D50\u6210\u5206\u306B\u3064\u3044\u3066\uFF0C\u8FBA\u306E\u672C\u6570\u304C\
+    \u5076\u6570\u306A\u3089\u5B8C\u5168\u306A\u5206\u89E3\u304C\u53EF\u80FD\n// Complexity:\
+    \ O(V + E)\n// Verify: - https://codeforces.com/contest/1519/problem/E\n//   \
+    \      - https://atcoder.jp/contests/agc035/tasks/agc035_b\nstruct PathsOfLength2Decomposition\
     \ {\n    int V, E;\n    std::vector<std::pair<int, int>> edges;\n    std::vector<light_forward_list<std::pair<int,\
     \ int>>> to_nonmst;\n    std::vector<light_forward_list<std::pair<int, int>>>\
     \ to_mst;\n    UnionFind uf;\n    void _init(int V_) {\n        V = V_, E = 0;\n\
@@ -75,11 +75,11 @@ data:
     \ -1);\n        }\n        return _ret;\n    }\n};\n"
   code: "#pragma once\n#include \"../data_structure/light_forward_list.hpp\"\n#include\
     \ \"../unionfind/unionfind.hpp\"\n#include <cassert>\n#include <tuple>\n#include\
-    \ <utility>\n#include <vector>\n\n// \u7121\u5411\u30B0\u30E9\u30D5\u3092\u9577\
-    \u30552\u306E\u9053\uFF08**\u9589\u8DEF\u3092\u542B\u3080**\uFF09\u3078\u5206\u89E3\
-    \n// \u5404\u9023\u7D50\u6210\u5206\u306B\u3064\u3044\u3066\uFF0C\u8FBA\u306E\u672C\
-    \u6570\u304C\u5076\u6570\u306A\u3089\u5B8C\u5168\u306A\u5206\u89E3\u304C\u53EF\
-    \u80FD\n// Complexity: O(V + E)\n// Verify: - https://codeforces.com/contest/1519/problem/E\n\
+    \ <utility>\n#include <vector>\n\n// CUT begin\n// \u7121\u5411\u30B0\u30E9\u30D5\
+    \u3092\u9577\u30552\u306E\u9053\uFF08**\u9589\u8DEF\u3092\u542B\u3080**\uFF09\u3078\
+    \u5206\u89E3\n// \u5404\u9023\u7D50\u6210\u5206\u306B\u3064\u3044\u3066\uFF0C\u8FBA\
+    \u306E\u672C\u6570\u304C\u5076\u6570\u306A\u3089\u5B8C\u5168\u306A\u5206\u89E3\
+    \u304C\u53EF\u80FD\n// Complexity: O(V + E)\n// Verify: - https://codeforces.com/contest/1519/problem/E\n\
     //         - https://atcoder.jp/contests/agc035/tasks/agc035_b\nstruct PathsOfLength2Decomposition\
     \ {\n    int V, E;\n    std::vector<std::pair<int, int>> edges;\n    std::vector<light_forward_list<std::pair<int,\
     \ int>>> to_nonmst;\n    std::vector<light_forward_list<std::pair<int, int>>>\
@@ -115,7 +115,7 @@ data:
   isVerificationFile: false
   path: graph/paths_of_length_two_decomposition.hpp
   requiredBy: []
-  timestamp: '2021-04-30 17:31:52+09:00'
+  timestamp: '2021-05-01 20:55:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/paths_of_length_two_decomposition.hpp

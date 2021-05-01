@@ -17,9 +17,25 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"string/suffix_array.hpp\"\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <numeric>\n#include <string>\n#include <vector>\n\n// CUT\
-    \ begin\n// Suffix array algorithms from AtCoder Library\n// Document: <https://atcoder.github.io/ac-library/master/document_ja/string.html>\n\
+  bundledCode: "#line 2 \"sparse_table/rmq_sparse_table.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#include <vector>\n\n// CUT begin\n// Range Minimum Query\
+    \ for static sequence by sparse table\n// Complexity: $O(N \\log N)$ for precalculation,\
+    \ $O(1)$ per query\ntemplate <typename T> struct StaticRMQ {\n    inline T func(const\
+    \ T &l, const T &r) const noexcept { return std::min<T>(l, r); }\n    int N, lgN;\n\
+    \    T defaultT;\n    std::vector<std::vector<T>> data;\n    std::vector<int>\
+    \ lgx_table;\n    StaticRMQ() = default;\n    StaticRMQ(const std::vector<T> &sequence,\
+    \ T defaultT) : N(sequence.size()), defaultT(defaultT) {\n        lgx_table.resize(N\
+    \ + 1);\n        for (int i = 2; i < N + 1; i++) lgx_table[i] = lgx_table[i >>\
+    \ 1] + 1;\n        lgN = lgx_table[N] + 1;\n        data.assign(lgN, std::vector<T>(N,\
+    \ defaultT));\n        data[0] = sequence;\n        for (int d = 1; d < lgN; d++)\
+    \ {\n            for (int i = 0; i + (1 << d) <= N; i++) {\n                data[d][i]\
+    \ = func(data[d - 1][i], data[d - 1][i + (1 << (d - 1))]);\n            }\n  \
+    \      }\n    }\n    T get(int l, int r) const { // [l, r), 0-indexed\n      \
+    \  assert(l >= 0 and r <= N);\n        if (l >= r) return defaultT;\n        int\
+    \ d = lgx_table[r - l];\n        return func(data[d][l], data[d][r - (1 << d)]);\n\
+    \    }\n};\n#line 4 \"string/suffix_array.hpp\"\n#include <numeric>\n#include\
+    \ <string>\n#line 7 \"string/suffix_array.hpp\"\n\n// CUT begin\n// Suffix array\
+    \ algorithms from AtCoder Library\n// Document: <https://atcoder.github.io/ac-library/master/document_ja/string.html>\n\
     namespace internal {\n\nstd::vector<int> sa_naive(const std::vector<int>& s) {\n\
     \    int n = int(s.size());\n    std::vector<int> sa(n);\n    std::iota(sa.begin(),\
     \ sa.end(), 0);\n    std::sort(sa.begin(), sa.end(), [&](int l, int r) {\n   \
@@ -113,34 +129,9 @@ data:
     \ return false;\n        }\n        return true;\n    };\n    const auto L = std::partition_point(suffarr.begin(),\
     \ suffarr.end(), f1);\n    const auto R = std::partition_point(L, suffarr.end(),\
     \ f2);\n    return std::distance(L, R);\n    // return std::vector<int>(L, R);\
-    \ // if you need occurence positions\n}\n#line 5 \"sparse_table/rmq_sparse_table.hpp\"\
-    \n\n// CUT begin\n// Range Minimum Query for static sequence by sparse table\n\
-    // Complexity: $O(N \\log N)$ for precalculation, $O(1)$ per query\ntemplate <typename\
-    \ T> struct StaticRMQ {\n    inline T func(const T &l, const T &r) const noexcept\
-    \ { return std::min<T>(l, r); }\n    int N, lgN;\n    T defaultT;\n    std::vector<std::vector<T>>\
-    \ data;\n    std::vector<int> lgx_table;\n    StaticRMQ() = default;\n    StaticRMQ(const\
-    \ std::vector<T> &sequence, T defaultT) : N(sequence.size()), defaultT(defaultT)\
-    \ {\n        lgx_table.resize(N + 1);\n        for (int i = 2; i < N + 1; i++)\
-    \ lgx_table[i] = lgx_table[i >> 1] + 1;\n        lgN = lgx_table[N] + 1;\n   \
-    \     data.assign(lgN, std::vector<T>(N, defaultT));\n        data[0] = sequence;\n\
-    \        for (int d = 1; d < lgN; d++) {\n            for (int i = 0; i + (1 <<\
-    \ d) <= N; i++) {\n                data[d][i] = func(data[d - 1][i], data[d -\
-    \ 1][i + (1 << (d - 1))]);\n            }\n        }\n    }\n    T get(int l,\
-    \ int r) const { // [l, r), 0-indexed\n        assert(l >= 0 and r <= N);\n  \
-    \      if (l >= r) return defaultT;\n        int d = lgx_table[r - l];\n     \
-    \   return func(data[d][l], data[d][r - (1 << d)]);\n    }\n};\n#line 5 \"string/longest_common_prefix.hpp\"\
-    \n#include <utility>\n#line 8 \"string/longest_common_prefix.hpp\"\n\nstruct LCPsparsetable\
-    \ {\n    const int N;\n    std::vector<int> sainv; // len = N\n    StaticRMQ<int>\
-    \ rmq;\n    template <typename String> LCPsparsetable(const String &s) : N(s.size())\
-    \ {\n        auto sa = suffix_array(s);\n        auto lcp = lcp_array(s, sa);\n\
-    \        sainv.resize(N);\n        for (int i = 0; i < N; i++) sainv[sa[i]] =\
-    \ i;\n        rmq = {lcp, N};\n    }\n    int lcplen(int l1, int l2) const {\n\
-    \        if (l1 == l2) return N - l1;\n        if (l1 == N or l2 == N) return\
-    \ 0;\n        l1 = sainv[l1], l2 = sainv[l2];\n        if (l1 > l2) std::swap(l1,\
-    \ l2);\n        return rmq.get(l1, l2);\n    }\n};\n"
-  code: "#pragma once\n#include \"suffix_array.hpp\"\n#include \"../sparse_table/rmq_sparse_table.hpp\"\
-    \n#include <algorithm>\n#include <utility>\n#include <vector>\n#include <string>\n\
-    \nstruct LCPsparsetable {\n    const int N;\n    std::vector<int> sainv; // len\
+    \ // if you need occurence positions\n}\n#line 6 \"string/longest_common_prefix.hpp\"\
+    \n#include <utility>\n#line 8 \"string/longest_common_prefix.hpp\"\n\n// CUT begin\n\
+    struct LCPsparsetable {\n    const int N;\n    std::vector<int> sainv; // len\
     \ = N\n    StaticRMQ<int> rmq;\n    template <typename String> LCPsparsetable(const\
     \ String &s) : N(s.size()) {\n        auto sa = suffix_array(s);\n        auto\
     \ lcp = lcp_array(s, sa);\n        sainv.resize(N);\n        for (int i = 0; i\
@@ -148,13 +139,24 @@ data:
     \ l1, int l2) const {\n        if (l1 == l2) return N - l1;\n        if (l1 ==\
     \ N or l2 == N) return 0;\n        l1 = sainv[l1], l2 = sainv[l2];\n        if\
     \ (l1 > l2) std::swap(l1, l2);\n        return rmq.get(l1, l2);\n    }\n};\n"
+  code: "#pragma once\n#include \"../sparse_table/rmq_sparse_table.hpp\"\n#include\
+    \ \"suffix_array.hpp\"\n#include <algorithm>\n#include <string>\n#include <utility>\n\
+    #include <vector>\n\n// CUT begin\nstruct LCPsparsetable {\n    const int N;\n\
+    \    std::vector<int> sainv; // len = N\n    StaticRMQ<int> rmq;\n    template\
+    \ <typename String> LCPsparsetable(const String &s) : N(s.size()) {\n        auto\
+    \ sa = suffix_array(s);\n        auto lcp = lcp_array(s, sa);\n        sainv.resize(N);\n\
+    \        for (int i = 0; i < N; i++) sainv[sa[i]] = i;\n        rmq = {lcp, N};\n\
+    \    }\n    int lcplen(int l1, int l2) const {\n        if (l1 == l2) return N\
+    \ - l1;\n        if (l1 == N or l2 == N) return 0;\n        l1 = sainv[l1], l2\
+    \ = sainv[l2];\n        if (l1 > l2) std::swap(l1, l2);\n        return rmq.get(l1,\
+    \ l2);\n    }\n};\n"
   dependsOn:
-  - string/suffix_array.hpp
   - sparse_table/rmq_sparse_table.hpp
+  - string/suffix_array.hpp
   isVerificationFile: false
   path: string/longest_common_prefix.hpp
   requiredBy: []
-  timestamp: '2021-03-13 17:28:18+09:00'
+  timestamp: '2021-05-01 20:55:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/run_enumerate_lyndon_rmq.test.cpp

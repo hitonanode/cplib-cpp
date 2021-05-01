@@ -16,14 +16,14 @@ data:
     - https://judge.yosupo.jp/problem/kth_root_integer
   bundledCode: "#line 1 \"utilities/test/kth_root_integer.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/kth_root_integer\"\n#line 2 \"utilities/int_kth_root.hpp\"\
-    \n\n// floor(a^(1/k)) (the largest x s.t. x^k doesn't exceed a)\n// Constraints:\
-    \ a >= 0, k > 0\nunsigned long long int_kth_root(unsigned long long a, int k)\
-    \ {\n    using Int = __int128;\n    if (a == 0) {\n        return 0;\n    } else\
-    \ if (k == 1) {\n        return a;\n    } else {\n        Int ok = 1, ng = Int(a)\
-    \ + 1;\n        while (ng - ok > 1) {\n            Int c = (ok + ng) / 2, p =\
-    \ c;\n            for (int t = 0; t < k - 1; t++) {\n                p *= c;\n\
-    \                if (p > a) break;\n            }\n            (p > a ? ng : ok)\
-    \ = c;\n        }\n        return ok;\n    }\n}\n#line 3 \"utilities/test/kth_root_integer.test.cpp\"\
+    \n\n// CUT begin\n// floor(a^(1/k)) (the largest x s.t. x^k doesn't exceed a)\n\
+    // Constraints: a >= 0, k > 0\nunsigned long long int_kth_root(unsigned long long\
+    \ a, int k) {\n    using Int = __int128;\n    if (a == 0) {\n        return 0;\n\
+    \    } else if (k == 1) {\n        return a;\n    } else {\n        Int ok = 1,\
+    \ ng = Int(a) + 1;\n        while (ng - ok > 1) {\n            Int c = (ok + ng)\
+    \ / 2, p = c;\n            for (int t = 0; t < k - 1; t++) {\n               \
+    \ p *= c;\n                if (p > a) break;\n            }\n            (p >\
+    \ a ? ng : ok) = c;\n        }\n        return ok;\n    }\n}\n#line 3 \"utilities/test/kth_root_integer.test.cpp\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    int T;\n    cin >> T;\n    while (T--) {\n\
     \        unsigned long long a;\n        int k;\n        cin >> a >> k;\n     \
@@ -38,7 +38,7 @@ data:
   isVerificationFile: true
   path: utilities/test/kth_root_integer.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:38:37+09:00'
+  timestamp: '2021-05-01 20:55:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: utilities/test/kth_root_integer.test.cpp
