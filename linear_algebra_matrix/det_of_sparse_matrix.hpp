@@ -48,7 +48,7 @@ template <typename Tp> struct sparse_matrix {
             for (int j = 0; j < N; j++) { b[j] *= D[j]; }
             b = prod(*this, b);
         }
-        auto ret = linear_recurrence<Tp>(uMDib);
+        auto ret = find_linear_recurrence<Tp>(uMDib);
         Tp det = ret.second.back() * (N % 2 ? -1 : 1);
         Tp ddet = 1;
         for (auto d : D) ddet *= d;
