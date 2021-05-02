@@ -1,6 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/214"
-#include "convolution/ntt.hpp"
-#include "formal_power_series/monomial_mod_polynomial.hpp"
+#include "../../convolution/ntt.hpp"
+#include "../linear_recurrence.hpp"
 #include "modint.hpp"
 using mint = ModInt<1000000007>;
 

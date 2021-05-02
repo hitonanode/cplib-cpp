@@ -1,5 +1,6 @@
 #pragma once
 #include "../convolution/ntt.hpp"
+#include <cassert>
 #include <vector>
 
 // CUT begin
@@ -31,4 +32,15 @@ template <typename Tp> Tp coefficient_of_rational_function(long long N, std::vec
         N >>= 1;
     }
     return num[0] / den[0];
+}
+
+// Find the n-th term of the sequence (0-ORIGIN)
+// Complexity: O(K lg K \log N)
+// ainit = [a_0, a_1,..., ]
+// c[0] = 1, \sum_j a_{i - j} * c_j = 0
+template <typename Tp> Tp find_kth_term(std::vector<Tp> ainit, const std::vector<Tp> c, long long n) {
+    assert(ainit.size() + 1 == c.size());
+    auto a = nttconv(ainit, c);
+    a.resize(ainit.size());
+    return coefficient_of_rational_function(n, a, c);
 }

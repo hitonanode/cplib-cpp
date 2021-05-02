@@ -12,7 +12,7 @@ int main() {
     vector<mint> A(N);
     for (auto &a : A) cin >> a;
 
-    auto L_poly = linear_recurrence(A);
+    auto L_poly = find_linear_recurrence(A);
     auto L = L_poly.first;
     auto poly = L_poly.second;
 
