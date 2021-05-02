@@ -6,7 +6,8 @@ data:
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/coeff_of_rational_function.hpp
-    title: formal_power_series/coeff_of_rational_function.hpp
+    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
+      \u7B97\uFF08Bostan-Mori algorithm\uFF09"
   - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
@@ -148,7 +149,7 @@ data:
     \ bi);\n        auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2\
     \ = nttconv_<nttprimes[2]>(ai, bi);\n        a.resize(n + m - 1);\n        for\
     \ (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val,\
-    \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 4 \"formal_power_series/coeff_of_rational_function.hpp\"\
+    \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 5 \"formal_power_series/coeff_of_rational_function.hpp\"\
     \n\n// CUT begin\n// Calculate [x^N](num(x) / den(x))\n// - Coplexity: O(LlgLlgN)\
     \ ( L = size(num) + size(den) )\n// - Reference: `Bostan\u2013Mori algorithm`\
     \ <https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>\ntemplate <typename Tp>\
@@ -163,7 +164,12 @@ data:
     \ (size_t i = 0; i < num.size(); i++) { num[i] = conv_num_g[i * 2 + (N & 1)];\
     \ }\n        auto conv_den_g = nttconv(den, g);\n        for (size_t i = 0; i\
     \ < den.size(); i++) { den[i] = conv_den_g[i * 2]; }\n        N >>= 1;\n    }\n\
-    \    return num[0] / den[0];\n}\n#line 5 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
+    \    return num[0] / den[0];\n}\n\n// Find the n-th term of the sequence (0-ORIGIN)\n\
+    // Complexity: O(K lg K \\log N)\n// ainit = [a_0, a_1,..., ]\n// c[0] = 1, \\\
+    sum_j a_{i - j} * c_j = 0\ntemplate <typename Tp> Tp find_kth_term(std::vector<Tp>\
+    \ ainit, const std::vector<Tp> c, long long n) {\n    assert(ainit.size() + 1\
+    \ == c.size());\n    auto a = nttconv(ainit, c);\n    a.resize(ainit.size());\n\
+    \    return coefficient_of_rational_function(n, a, c);\n}\n#line 5 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
     \n\nusing mint = ModInt<1000000007>;\n\n#line 9 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
     \n\nstd::vector<mint> gen_dp(std::vector<int> v, int n) {\n    std::vector<std::vector<mint>>\
     \ dp(n + 1, std::vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for\
@@ -199,7 +205,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/coeff_of_rational_function.test.cpp
   requiredBy: []
-  timestamp: '2021-03-27 19:28:18+09:00'
+  timestamp: '2021-05-02 16:53:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/coeff_of_rational_function.test.cpp

@@ -6,10 +6,8 @@ data:
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/linear_recurrence.hpp
-    title: formal_power_series/linear_recurrence.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/monomial_mod_polynomial.hpp
-    title: formal_power_series/monomial_mod_polynomial.hpp
+    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
+      \u63A8\u5B9A"
   - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
@@ -160,7 +158,7 @@ data:
     \ -2])\n// - [1, 1, 2, 3, 5, 8] -> (2, [1, -1, -1])\n// - [0, 0, 0, 0, 1]    ->\
     \ (5, [1, 0, 0, 0, 0, 998244352]) (mod 998244353)\n// - []                 ->\
     \ (0, [1])\n// - [0, 0, 0]          -> (0, [1])\n// - [-2]               -> (1,\
-    \ [1, 2])\ntemplate <typename Tfield> std::pair<int, std::vector<Tfield>> linear_recurrence(const\
+    \ [1, 2])\ntemplate <typename Tfield> std::pair<int, std::vector<Tfield>> find_linear_recurrence(const\
     \ std::vector<Tfield> &S) {\n    int N = S.size();\n    using poly = std::vector<Tfield>;\n\
     \    poly C_reversed{1}, B{1};\n    int L = 0, m = 1;\n    Tfield b = 1;\n\n \
     \   // adjust: C(x) <- C(x) - (d / b) x^m B(x)\n    auto adjust = [](poly C, const\
@@ -173,11 +171,11 @@ data:
     \  C_reversed = adjust(C_reversed, B, d, b, m);\n            L = n + 1 - L;\n\
     \            B = T;\n            b = d;\n            m = 1;\n        } else\n\
     \            C_reversed = adjust(C_reversed, B, d, b, m++);\n    }\n    return\
-    \ std::make_pair(L, C_reversed);\n}\n#line 5 \"formal_power_series/monomial_mod_polynomial.hpp\"\
-    \n\n// CUT begin\n// Calculate $x^N \\bmod f(x)$\n// Known as `Kitamasa method`\n\
-    // Input: f_reversed: monic, reversed (f_reversed[0] = 1)\n// Complexity: $O(K^2\
-    \ \\log N)$ ($K$: deg. of $f$)\n// Example: (4, [1, -1, -1]) -> [2, 3]\n//   \
-    \       ( x^4 = (x^2 + x + 2)(x^2 - x - 1) + 3x + 2 )\n// Reference: http://misawa.github.io/others/fast_kitamasa_method.html\n\
+    \ std::make_pair(L, C_reversed);\n}\n\n// Calculate $x^N \\bmod f(x)$\n// Known\
+    \ as `Kitamasa method`\n// Input: f_reversed: monic, reversed (f_reversed[0] =\
+    \ 1)\n// Complexity: $O(K^2 \\log N)$ ($K$: deg. of $f$)\n// Example: (4, [1,\
+    \ -1, -1]) -> [2, 3]\n//          ( x^4 = (x^2 + x + 2)(x^2 - x - 1) + 3x + 2\
+    \ )\n// Reference: http://misawa.github.io/others/fast_kitamasa_method.html\n\
     //            http://sugarknri.hatenablog.com/entry/2017/11/18/233936\ntemplate\
     \ <typename Tfield>\nstd::vector<Tfield> monomial_mod_polynomial(long long N,\
     \ const std::vector<Tfield> &f_reversed) {\n    assert(!f_reversed.empty() and\
@@ -193,12 +191,12 @@ data:
     \    }\n        ret.resize(K);\n        if ((N >> d) & 1) {\n            std::vector<Tfield>\
     \ c(K);\n            c[0] = -ret[K - 1] * f_reversed[K];\n            for (int\
     \ i = 1; i < K; i++) { c[i] = ret[i - 1] - ret[K - 1] * f_reversed[K - i]; }\n\
-    \            ret = c;\n        }\n    }\n    return ret;\n}\n\n// Find k-th element\
+    \            ret = c;\n        }\n    }\n    return ret;\n}\n\n// Guess k-th element\
     \ of the sequence, assuming linear recurrence\n// initial_elements: 0-ORIGIN\n\
     // Verify: abc198f https://atcoder.jp/contests/abc198/submissions/21837815\ntemplate\
-    \ <typename Tfield> Tfield find_kth_element(const std::vector<Tfield> &initial_elements,\
+    \ <typename Tfield> Tfield guess_kth_term(const std::vector<Tfield> &initial_elements,\
     \ long long k) {\n    assert(k >= 0);\n    if (k < static_cast<long long>(initial_elements.size()))\
-    \ return initial_elements[k];\n    const auto f = linear_recurrence<Tfield>(initial_elements).second;\n\
+    \ return initial_elements[k];\n    const auto f = find_linear_recurrence<Tfield>(initial_elements).second;\n\
     \    const auto g = monomial_mod_polynomial<Tfield>(k, f);\n    Tfield ret = 0;\n\
     \    for (unsigned i = 0; i < g.size(); i++) ret += g[i] * initial_elements[i];\n\
     \    return ret;\n}\n#line 5 \"formal_power_series/test/kitamasa.test.cpp\"\n\
@@ -227,15 +225,15 @@ data:
     \ g.end(), dp.begin(), mint(0));\n        ret -= acc * p;\n        g = prod_x(g);\n\
     \        N--;\n        acc += f_reversed[N];\n    }\n    std::cout << ret << '\\\
     n';\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/214\"\n#include \"convolution/ntt.hpp\"\
-    \n#include \"formal_power_series/monomial_mod_polynomial.hpp\"\n#include \"modint.hpp\"\
-    \nusing mint = ModInt<1000000007>;\n\n#include <iostream>\n#include <numeric>\n\
-    \nstd::vector<mint> gen_dp(std::vector<int> v, int n) {\n    std::vector<std::vector<mint>>\
-    \ dp(n + 1, std::vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for\
-    \ (auto x : v) {\n        for (int i = n - 1; i >= 0; i--) {\n            for\
-    \ (int j = 0; j < dp[i].size(); j++)\n                if (dp[i][j]) {\n      \
-    \              for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];\n\
-    \                }\n        }\n    }\n    return dp.back();\n}\n\nint main() {\n\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/214\"\n#include \"../../convolution/ntt.hpp\"\
+    \n#include \"../linear_recurrence.hpp\"\n#include \"modint.hpp\"\nusing mint =\
+    \ ModInt<1000000007>;\n\n#include <iostream>\n#include <numeric>\n\nstd::vector<mint>\
+    \ gen_dp(std::vector<int> v, int n) {\n    std::vector<std::vector<mint>> dp(n\
+    \ + 1, std::vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for (auto\
+    \ x : v) {\n        for (int i = n - 1; i >= 0; i--) {\n            for (int j\
+    \ = 0; j < dp[i].size(); j++)\n                if (dp[i][j]) {\n             \
+    \       for (int k = 1; i + k <= n; k++) dp[i + k][j + x * k] += dp[i][j];\n \
+    \               }\n        }\n    }\n    return dp.back();\n}\n\nint main() {\n\
     \    long long N;\n    int P, C;\n    std::cin >> N >> P >> C;\n    std::vector<mint>\
     \ primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10,\
     \ 12}, C);\n    std::vector<mint> f_reversed = nttconv(primes, composites);\n\
@@ -257,12 +255,11 @@ data:
   dependsOn:
   - convolution/ntt.hpp
   - modint.hpp
-  - formal_power_series/monomial_mod_polynomial.hpp
   - formal_power_series/linear_recurrence.hpp
   isVerificationFile: true
   path: formal_power_series/test/kitamasa.test.cpp
   requiredBy: []
-  timestamp: '2021-04-17 22:52:06+09:00'
+  timestamp: '2021-05-02 16:53:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/kitamasa.test.cpp

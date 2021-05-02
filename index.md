@@ -108,16 +108,15 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/coeff_of_rational_function.hpp
-      title: formal_power_series/coeff_of_rational_function.hpp
+      title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
+        \u7B97\uFF08Bostan-Mori algorithm\uFF09"
     - icon: ':heavy_check_mark:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/linear_recurrence.hpp
-      title: formal_power_series/linear_recurrence.hpp
-    - icon: ':heavy_check_mark:'
-      path: formal_power_series/monomial_mod_polynomial.hpp
-      title: formal_power_series/monomial_mod_polynomial.hpp
+      title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
+        \u63A8\u5B9A"
     - icon: ':heavy_check_mark:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
@@ -625,6 +624,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+      title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/linear_recurrence.test.cpp
       title: formal_power_series/test/linear_recurrence.test.cpp

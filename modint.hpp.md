@@ -14,7 +14,8 @@ data:
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/coeff_of_rational_function.hpp
-    title: formal_power_series/coeff_of_rational_function.hpp
+    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
+      \u7B97\uFF08Bostan-Mori algorithm\uFF09"
   - icon: ':heavy_check_mark:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
@@ -88,6 +89,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/linear_recurrence.test.cpp
     title: formal_power_series/test/linear_recurrence.test.cpp
@@ -325,6 +329,7 @@ data:
   - tree/test/vertex-set-path-composite.test.cpp
   - formal_power_series/test/stirling_number_of_1st.test.cpp
   - formal_power_series/test/fps_log.test.cpp
+  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - formal_power_series/test/stirling_number_of_2nd.test.cpp
   - formal_power_series/test/division_number.test.cpp
   - formal_power_series/test/multipoint_evaluation.test.cpp

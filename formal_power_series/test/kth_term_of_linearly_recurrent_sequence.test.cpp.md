@@ -5,22 +5,22 @@ data:
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/coeff_of_rational_function.hpp
+    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
+      \u7B97\uFF08Bostan-Mori algorithm\uFF09"
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/coeff_of_rational_function.test.cpp
-    title: formal_power_series/test/coeff_of_rational_function.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
     links:
-    - https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>
+    - https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
     \ <vector>\n\n// CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus\
     \ >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using\
@@ -167,67 +167,36 @@ data:
     sum_j a_{i - j} * c_j = 0\ntemplate <typename Tp> Tp find_kth_term(std::vector<Tp>\
     \ ainit, const std::vector<Tp> c, long long n) {\n    assert(ainit.size() + 1\
     \ == c.size());\n    auto a = nttconv(ainit, c);\n    a.resize(ainit.size());\n\
-    \    return coefficient_of_rational_function(n, a, c);\n}\n"
-  code: "#pragma once\n#include \"../convolution/ntt.hpp\"\n#include <cassert>\n#include\
-    \ <vector>\n\n// CUT begin\n// Calculate [x^N](num(x) / den(x))\n// - Coplexity:\
-    \ O(LlgLlgN) ( L = size(num) + size(den) )\n// - Reference: `Bostan\u2013Mori\
-    \ algorithm` <https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>\ntemplate <typename\
-    \ Tp> Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vector<Tp>\
-    \ den) {\n    assert(N >= 0);\n    while (den.size() and den.back() == 0) den.pop_back();\n\
-    \    assert(den.size());\n    int h = 0;\n    while (den[h] == 0) h++;\n    N\
-    \ += h;\n    den.erase(den.begin(), den.begin() + h);\n\n    if (den.size() ==\
-    \ 1) {\n        assert(N < int(num.size()));\n        return num[N] / den[0];\n\
-    \    }\n\n    while (N) {\n        std::vector<Tp> g = den;\n        for (size_t\
-    \ i = 1; i < g.size(); i += 2) { g[i] = -g[i]; }\n        auto conv_num_g = nttconv(num,\
-    \ g);\n        num.resize((conv_num_g.size() + 1 - (N & 1)) / 2);\n        for\
-    \ (size_t i = 0; i < num.size(); i++) { num[i] = conv_num_g[i * 2 + (N & 1)];\
-    \ }\n        auto conv_den_g = nttconv(den, g);\n        for (size_t i = 0; i\
-    \ < den.size(); i++) { den[i] = conv_den_g[i * 2]; }\n        N >>= 1;\n    }\n\
-    \    return num[0] / den[0];\n}\n\n// Find the n-th term of the sequence (0-ORIGIN)\n\
-    // Complexity: O(K lg K \\log N)\n// ainit = [a_0, a_1,..., ]\n// c[0] = 1, \\\
-    sum_j a_{i - j} * c_j = 0\ntemplate <typename Tp> Tp find_kth_term(std::vector<Tp>\
-    \ ainit, const std::vector<Tp> c, long long n) {\n    assert(ainit.size() + 1\
-    \ == c.size());\n    auto a = nttconv(ainit, c);\n    a.resize(ainit.size());\n\
-    \    return coefficient_of_rational_function(n, a, c);\n}\n"
+    \    return coefficient_of_rational_function(n, a, c);\n}\n#line 3 \"formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
+    \n#line 5 \"formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
+    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int D;\n    long long K;\n    cin >> D >> K;\n    vector<ModInt<998244353>>\
+    \ A(D), C(D + 1, 1);\n    for (auto &x : A) cin >> x;\n    for (int d = 1; d <=\
+    \ D; d++) {\n        cin >> C[d];\n        C[d] *= -1;\n    }\n\n    auto ret\
+    \ = find_kth_term(A, C, K);\n    cout << ret << '\\n';\n}\n"
+  code: "#include \"../../modint.hpp\"\n#include \"../coeff_of_rational_function.hpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
+    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int D;\n    long long K;\n    cin >> D >>\
+    \ K;\n    vector<ModInt<998244353>> A(D), C(D + 1, 1);\n    for (auto &x : A)\
+    \ cin >> x;\n    for (int d = 1; d <= D; d++) {\n        cin >> C[d];\n      \
+    \  C[d] *= -1;\n    }\n\n    auto ret = find_kth_term(A, C, K);\n    cout << ret\
+    \ << '\\n';\n}\n"
   dependsOn:
-  - convolution/ntt.hpp
   - modint.hpp
-  isVerificationFile: false
-  path: formal_power_series/coeff_of_rational_function.hpp
+  - formal_power_series/coeff_of_rational_function.hpp
+  - convolution/ntt.hpp
+  isVerificationFile: true
+  path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
   timestamp: '2021-05-02 16:53:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - formal_power_series/test/coeff_of_rational_function.test.cpp
-documentation_of: formal_power_series/coeff_of_rational_function.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 layout: document
-title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\u7B97\
-  \uFF08Bostan-Mori algorithm\uFF09"
+redirect_from:
+- /verify/formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+- /verify/formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp.html
+title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 ---
-
-## 線形漸化式の第 $N$ 項計算
-
-$K$ 次多項式 $P(x), Q(x)$ に対して $\displaystyle [x^N] \frac{P(x)}{Q(x)}$ を計算する（Bostan-Mori algorithm [1]）．時間計算量は $O(K \log K \log N)$．
-
-```cpp
-long long N;
-vector<mint> P, Q;
-mint nth_coeff = coefficient_of_rational_function(N, P, Q);
-```
-
-## 初項と漸化式から第 $N$ 項計算
-
-$K$ 次漸化式と先頭 $K$ 項 $[a_0, a_1, \dots, a_{K-1}]$ から第 $N$ 項 $a_N$ を計算する．時間計算量は $O(K \log K \log N)$．
-
-```cpp
-vector<mint> init = {1, 9, 1, 2}, recurrence = {1, -4, -1, 0, -1};
-mint x = find_kth_term(init, recurrence, 12345678910111213);
-```
-
-実装上は，$A(x) = \sum_{i=0}^{K-1} a_i x^i$ と漸化式である $Q(x)$ を線形畳み込みして（積をとって）長さ $K$ で打ち切ったものを $P(x)$ として用いることで，上の `coefficient_of_rational_function()` 関数が使用可能な形式に帰着させている．
-
-## 文献・リンク
-
-- [1] A. Bostan and R. Mori, “A simple and fast algorithm for computing the N-th term of a linearly recurrent sequence,” SIAM SOSA, pp.118–132, Jan. 11–12 2021.
-- [線形漸化的数列のN項目の計算 - Qiita](https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a)
