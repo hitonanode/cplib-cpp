@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/sum_of_exponential_times_polynomial.hpp
-    title: formal_power_series/sum_of_exponential_times_polynomial.hpp
+    title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp

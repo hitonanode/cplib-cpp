@@ -126,10 +126,10 @@ data:
       title: formal_power_series/multipoint_evaluation.hpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial.hpp
-      title: formal_power_series/sum_of_exponential_times_polynomial.hpp
+      title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
     - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
-      title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
+      title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   - name: .
     pages:
     - icon: ':warning:'
