@@ -5,6 +5,7 @@
 // $d$ 次以下の多項式 $f(x)$ と定数 $r$ について，
 // $\sum_{i=0}^\infty r^i f(i)$ の値を $[f(0), ..., f(d - 1), f(d)]$ の値から $O(d)$ で計算．
 // https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit
+// Document: https://hitonanode.github.io/cplib-cpp/formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
 template <typename MODINT> MODINT sum_of_exponential_times_polynomial_limit(MODINT r, std::vector<MODINT> init) {
     auto &bs = init;
     if (bs.empty()) return 0;

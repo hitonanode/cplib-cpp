@@ -27,10 +27,13 @@ template <typename Tfield> struct MultipointEvaluation {
         _eval_rec(f, 2 * now + 1);
         _eval_rec(f, 2 * now + 2);
     }
-    std::vector<Tfield> evaluate_polynomial(polynomial f) {
+    std::vector<Tfield> evaluate_polynomial(const polynomial &f) {
         ret.resize(nx);
         _eval_rec(f, 0);
         return ret;
+    }
+    std::vector<Tfield> evaluate_polynomial(const std::vector<Tfield> &f) {
+        return evaluate_polynomial(polynomial(f.begin(), f.end()));
     }
 
     std::vector<Tfield> _interpolate_coeffs;
