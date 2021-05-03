@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+    title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -256,13 +259,15 @@ data:
     \ int now) {\n        f %= segtree[now];\n        if (now - (nx - 1) >= 0) {\n\
     \            ret[now - (nx - 1)] = f.coeff(0);\n            return;\n        }\n\
     \        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f, 2 * now + 2);\n    }\n\
-    \    std::vector<Tfield> evaluate_polynomial(polynomial f) {\n        ret.resize(nx);\n\
-    \        _eval_rec(f, 0);\n        return ret;\n    }\n\n    std::vector<Tfield>\
-    \ _interpolate_coeffs;\n    polynomial _rec_interpolation(int now, const std::vector<Tfield>\
-    \ &ys) const {\n        int i = now - (nx - 1);\n        if (i >= 0) return {ys[i]};\n\
-    \        auto retl = _rec_interpolation(2 * now + 1, ys);\n        auto retr =\
-    \ _rec_interpolation(2 * now + 2, ys);\n        return retl * segtree[2 * now\
-    \ + 2] + retr * segtree[2 * now + 1];\n    }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield>\
+    \    std::vector<Tfield> evaluate_polynomial(const polynomial &f) {\n        ret.resize(nx);\n\
+    \        _eval_rec(f, 0);\n        return ret;\n    }\n    std::vector<Tfield>\
+    \ evaluate_polynomial(const std::vector<Tfield> &f) {\n        return evaluate_polynomial(polynomial(f.begin(),\
+    \ f.end()));\n    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial\
+    \ _rec_interpolation(int now, const std::vector<Tfield> &ys) const {\n       \
+    \ int i = now - (nx - 1);\n        if (i >= 0) return {ys[i]};\n        auto retl\
+    \ = _rec_interpolation(2 * now + 1, ys);\n        auto retr = _rec_interpolation(2\
+    \ * now + 2, ys);\n        return retl * segtree[2 * now + 2] + retr * segtree[2\
+    \ * now + 1];\n    }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield>\
     \ ys) {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
     \ {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
     \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
@@ -281,8 +286,10 @@ data:
     \ ret;\n    void _eval_rec(polynomial f, int now) {\n        f %= segtree[now];\n\
     \        if (now - (nx - 1) >= 0) {\n            ret[now - (nx - 1)] = f.coeff(0);\n\
     \            return;\n        }\n        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f,\
-    \ 2 * now + 2);\n    }\n    std::vector<Tfield> evaluate_polynomial(polynomial\
-    \ f) {\n        ret.resize(nx);\n        _eval_rec(f, 0);\n        return ret;\n\
+    \ 2 * now + 2);\n    }\n    std::vector<Tfield> evaluate_polynomial(const polynomial\
+    \ &f) {\n        ret.resize(nx);\n        _eval_rec(f, 0);\n        return ret;\n\
+    \    }\n    std::vector<Tfield> evaluate_polynomial(const std::vector<Tfield>\
+    \ &f) {\n        return evaluate_polynomial(polynomial(f.begin(), f.end()));\n\
     \    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial _rec_interpolation(int\
     \ now, const std::vector<Tfield> &ys) const {\n        int i = now - (nx - 1);\n\
     \        if (i >= 0) return {ys[i]};\n        auto retl = _rec_interpolation(2\
@@ -301,11 +308,12 @@ data:
   isVerificationFile: false
   path: formal_power_series/multipoint_evaluation.hpp
   requiredBy: []
-  timestamp: '2021-03-27 19:28:18+09:00'
+  timestamp: '2021-05-03 13:23:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
 documentation_of: formal_power_series/multipoint_evaluation.hpp
 layout: document
 redirect_from:

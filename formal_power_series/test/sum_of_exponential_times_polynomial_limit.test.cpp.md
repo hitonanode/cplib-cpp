@@ -2,8 +2,17 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: convolution/ntt.hpp
+    title: convolution/ntt.hpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/formal_power_series.hpp
+    title: formal_power_series/formal_power_series.hpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/multipoint_evaluation.hpp
+    title: formal_power_series/multipoint_evaluation.hpp
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
-    title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i i^d)
+    title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
@@ -138,11 +147,188 @@ data:
     \ {\n            if (min_factor[n] == n) {\n                ret[n] = MODINT(n).pow(K);\n\
     \            } else {\n                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n\
     \            }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 <<\
-    \ 15);  // (can factorize n <= 10^9)\n#line 3 \"formal_power_series/sum_of_exponential_times_polynomial_limit.hpp\"\
+    \ 15);  // (can factorize n <= 10^9)\n#line 3 \"convolution/ntt.hpp\"\n\n#include\
+    \ <algorithm>\n#include <array>\n#line 7 \"convolution/ntt.hpp\"\n#include <tuple>\n\
+    #line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution for arbitrary\
+    \ mod\n// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.\n\
+    // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
+    // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
+    \ <typename MODINT> std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
+    \ b, bool skip_garner = false);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
+    \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
+    \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
+    // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
+    \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
+    \    static const int mod = MODINT::get_mod();\n    static const MODINT root =\
+    \ MODINT::get_primitive_root();\n    assert(__builtin_popcount(n) == 1 and (mod\
+    \ - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n    for (int\
+    \ m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod - 1) /\
+    \ (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n    \
+    \    for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;\n\
+    \    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n      \
+    \      for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n                for (int\
+    \ i = s; i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m]\
+    \ * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n             \
+    \   }\n            }\n        }\n    } else {\n        for (int m = 1; m < n;\
+    \ m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n  \
+    \              for (int i = s; i < s + m; i++) {\n                    MODINT x\
+    \ = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
+    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv();\n\
+    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD> std::vector<ModInt<MOD>>\
+    \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
+    \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
+    \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
+    \ ap[i] = a[i], bp[i] = b[i];\n    ntt(ap, false);\n    if (a == b)\n        bp\
+    \ = ap;\n    else\n        ntt(bp, false);\n    for (int i = 0; i < sz; i++) ap[i]\
+    \ *= bp[i];\n    ntt(ap, true);\n    return ap;\n}\nlong long garner_ntt_(int\
+    \ r0, int r1, int r2, int mod) {\n    using mint2 = ModInt<nttprimes[2]>;\n  \
+    \  static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];\n    static\
+    \ const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();\n    static\
+    \ const long long m01_inv_m2 = mint2(m01).inv();\n\n    int v1 = (m0_inv_m1 *\
+    \ (r1 + nttprimes[1] - r0)) % nttprimes[1];\n    auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0])\
+    \ * v1) * m01_inv_m2;\n    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod *\
+    \ v2.val) % mod;\n}\ntemplate <typename MODINT> std::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner) {\n    int sz = 1, n = a.size(),\
+    \ m = b.size();\n    while (sz < n + m) sz <<= 1;\n    if (sz <= 16) {\n     \
+    \   std::vector<MODINT> ret(n + m - 1);\n        for (int i = 0; i < n; i++) {\n\
+    \            for (int j = 0; j < m; j++) ret[i + j] += a[i] * b[j];\n        }\n\
+    \        return ret;\n    }\n    int mod = MODINT::get_mod();\n    if (skip_garner\
+    \ or std::find(std::begin(nttprimes), std::end(nttprimes), mod) != std::end(nttprimes))\
+    \ {\n        a.resize(sz), b.resize(sz);\n        if (a == b) {\n            ntt(a,\
+    \ false);\n            b = a;\n        } else\n            ntt(a, false), ntt(b,\
+    \ false);\n        for (int i = 0; i < sz; i++) a[i] *= b[i];\n        ntt(a,\
+    \ true);\n        a.resize(n + m - 1);\n    } else {\n        std::vector<int>\
+    \ ai(sz), bi(sz);\n        for (int i = 0; i < n; i++) ai[i] = a[i].val;\n   \
+    \     for (int i = 0; i < m; i++) bi[i] = b[i].val;\n        auto ntt0 = nttconv_<nttprimes[0]>(ai,\
+    \ bi);\n        auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2\
+    \ = nttconv_<nttprimes[2]>(ai, bi);\n        a.resize(n + m - 1);\n        for\
+    \ (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val,\
+    \ ntt2[i].val, mod); }\n    }\n    return a;\n}\n#line 6 \"formal_power_series/formal_power_series.hpp\"\
+    \nusing namespace std;\n\n// CUT begin\n// Formal Power Series (\u5F62\u5F0F\u7684\
+    \u51AA\u7D1A\u6570) based on ModInt<mod> / ModIntRuntime\n// Reference: https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html\n\
+    template <typename T> struct FormalPowerSeries : vector<T> {\n    using vector<T>::vector;\n\
+    \    using P = FormalPowerSeries;\n\n    void shrink() {\n        while (this->size()\
+    \ and this->back() == T(0)) this->pop_back();\n    }\n\n    P operator+(const\
+    \ P &r) const { return P(*this) += r; }\n    P operator+(const T &v) const { return\
+    \ P(*this) += v; }\n    P operator-(const P &r) const { return P(*this) -= r;\
+    \ }\n    P operator-(const T &v) const { return P(*this) -= v; }\n    P operator*(const\
+    \ P &r) const { return P(*this) *= r; }\n    P operator*(const T &v) const { return\
+    \ P(*this) *= v; }\n    P operator/(const P &r) const { return P(*this) /= r;\
+    \ }\n    P operator/(const T &v) const { return P(*this) /= v; }\n    P operator%(const\
+    \ P &r) const { return P(*this) %= r; }\n\n    P &operator+=(const P &r) {\n \
+    \       if (r.size() > this->size()) this->resize(r.size());\n        for (int\
+    \ i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n        shrink();\n    \
+    \    return *this;\n    }\n    P &operator+=(const T &v) {\n        if (this->empty())\
+    \ this->resize(1);\n        (*this)[0] += v;\n        shrink();\n        return\
+    \ *this;\n    }\n    P &operator-=(const P &r) {\n        if (r.size() > this->size())\
+    \ this->resize(r.size());\n        for (int i = 0; i < (int)r.size(); i++) (*this)[i]\
+    \ -= r[i];\n        shrink();\n        return *this;\n    }\n    P &operator-=(const\
+    \ T &v) {\n        if (this->empty()) this->resize(1);\n        (*this)[0] -=\
+    \ v;\n        shrink();\n        return *this;\n    }\n    P &operator*=(const\
+    \ T &v) {\n        for (auto &x : (*this)) x *= v;\n        shrink();\n      \
+    \  return *this;\n    }\n    P &operator*=(const P &r) {\n        if (this->empty()\
+    \ || r.empty())\n            this->clear();\n        else {\n            auto\
+    \ ret = nttconv(*this, r);\n            *this = P(ret.begin(), ret.end());\n \
+    \       }\n        return *this;\n    }\n    P &operator%=(const P &r) {\n   \
+    \     *this -= *this / r * r;\n        shrink();\n        return *this;\n    }\n\
+    \    P operator-() const {\n        P ret = *this;\n        for (auto &v : ret)\
+    \ v = -v;\n        return ret;\n    }\n    P &operator/=(const T &v) {\n     \
+    \   assert(v != T(0));\n        for (auto &x : (*this)) x /= v;\n        return\
+    \ *this;\n    }\n    P &operator/=(const P &r) {\n        if (this->size() < r.size())\
+    \ {\n            this->clear();\n            return *this;\n        }\n      \
+    \  int n = (int)this->size() - r.size() + 1;\n        return *this = (reversed().pre(n)\
+    \ * r.reversed().inv(n)).pre(n).reversed(n);\n    }\n    P pre(int sz) const {\n\
+    \        P ret(this->begin(), this->begin() + min((int)this->size(), sz));\n \
+    \       ret.shrink();\n        return ret;\n    }\n    P operator>>(int sz) const\
+    \ {\n        if ((int)this->size() <= sz) return {};\n        return P(this->begin()\
+    \ + sz, this->end());\n    }\n    P operator<<(int sz) const {\n        if (this->empty())\
+    \ return {};\n        P ret(*this);\n        ret.insert(ret.begin(), sz, T(0));\n\
+    \        return ret;\n    }\n\n    P reversed(int deg = -1) const {\n        assert(deg\
+    \ >= -1);\n        P ret(*this);\n        if (deg != -1) ret.resize(deg, T(0));\n\
+    \        reverse(ret.begin(), ret.end());\n        ret.shrink();\n        return\
+    \ ret;\n    }\n\n    P differential() const { // formal derivative (differential)\
+    \ of f.p.s.\n        const int n = (int)this->size();\n        P ret(max(0, n\
+    \ - 1));\n        for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * T(i);\n\
+    \        return ret;\n    }\n\n    P integral() const {\n        const int n =\
+    \ (int)this->size();\n        P ret(n + 1);\n        ret[0] = T(0);\n        for\
+    \ (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / T(i + 1);\n        return\
+    \ ret;\n    }\n\n    P inv(int deg) const {\n        assert(deg >= -1);\n    \
+    \    assert(this->size() and ((*this)[0]) != T(0)); // Requirement: F(0) != 0\n\
+    \        const int n = this->size();\n        if (deg == -1) deg = n;\n      \
+    \  P ret({T(1) / (*this)[0]});\n        for (int i = 1; i < deg; i <<= 1) { ret\
+    \ = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1); }\n        ret = ret.pre(deg);\n\
+    \        ret.shrink();\n        return ret;\n    }\n\n    P log(int deg = -1)\
+    \ const {\n        assert(deg >= -1);\n        assert(this->size() and ((*this)[0])\
+    \ == T(1)); // Requirement: F(0) = 1\n        const int n = (int)this->size();\n\
+    \        if (deg == 0) return {};\n        if (deg == -1) deg = n;\n        return\
+    \ (this->differential() * this->inv(deg)).pre(deg - 1).integral();\n    }\n\n\
+    \    P sqrt(int deg = -1) const {\n        assert(deg >= -1);\n        const int\
+    \ n = (int)this->size();\n        if (deg == -1) deg = n;\n        if (this->empty())\
+    \ return {};\n        if ((*this)[0] == T(0)) {\n            for (int i = 1; i\
+    \ < n; i++)\n                if ((*this)[i] != T(0)) {\n                    if\
+    \ ((i & 1) or deg - i / 2 <= 0) return {};\n                    return (*this\
+    \ >> i).sqrt(deg - i / 2) << (i / 2);\n                }\n            return {};\n\
+    \        }\n        T sqrtf0 = (*this)[0].sqrt();\n        if (sqrtf0 == T(0))\
+    \ return {};\n\n        P y = (*this) / (*this)[0], ret({T(1)});\n        T inv2\
+    \ = T(1) / T(2);\n        for (int i = 1; i < deg; i <<= 1) { ret = (ret + y.pre(i\
+    \ << 1) * ret.inv(i << 1)) * inv2; }\n        return ret.pre(deg) * sqrtf0;\n\
+    \    }\n\n    P exp(int deg = -1) const {\n        assert(deg >= -1);\n      \
+    \  assert(this->empty() or ((*this)[0]) == T(0)); // Requirement: F(0) = 0\n \
+    \       const int n = (int)this->size();\n        if (deg == -1) deg = n;\n  \
+    \      P ret({T(1)});\n        for (int i = 1; i < deg; i <<= 1) { ret = (ret\
+    \ * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1); }\n        return ret.pre(deg);\n\
+    \    }\n\n    P pow(long long k, int deg = -1) const {\n        assert(deg >=\
+    \ -1);\n        const int n = (int)this->size();\n        if (deg == -1) deg =\
+    \ n;\n        for (int i = 0; i < n; i++) {\n            if ((*this)[i] != T(0))\
+    \ {\n                T rev = T(1) / (*this)[i];\n                P C = (*this)\
+    \ * rev, D(n - i);\n                for (int j = i; j < n; j++) D[j - i] = C.coeff(j);\n\
+    \                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].pow(k);\n     \
+    \           if (k * (i > 0) > deg or k * i > deg) return {};\n               \
+    \ P E(deg);\n                long long S = i * k;\n                for (int j\
+    \ = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];\n            \
+    \    E.shrink();\n                return E;\n            }\n        }\n      \
+    \  return *this;\n    }\n\n    // Calculate f(X + c) from f(X), O(NlogN)\n   \
+    \ P shift(T c) const {\n        const int n = (int)this->size();\n        P ret\
+    \ = *this;\n        for (int i = 0; i < n; i++) { ret[i] *= T(i).fac(); }\n  \
+    \      reverse(ret.begin(), ret.end());\n        P exp_cx(n, 1);\n        for\
+    \ (int i = 1; i < n; i++) { exp_cx[i] = exp_cx[i - 1] * c / i; }\n        ret\
+    \ = (ret * exp_cx), ret.resize(n);\n        reverse(ret.begin(), ret.end());\n\
+    \        for (int i = 0; i < n; i++) { ret[i] /= T(i).fac(); }\n        return\
+    \ ret;\n    }\n\n    T coeff(int i) const {\n        if ((int)this->size() <=\
+    \ i or i < 0) return T(0);\n        return (*this)[i];\n    }\n\n    T eval(T\
+    \ x) const {\n        T ret = 0, w = 1;\n        for (auto &v : *this) ret +=\
+    \ w * v, w *= x;\n        return ret;\n    }\n};\n#line 5 \"formal_power_series/multipoint_evaluation.hpp\"\
+    \n\n// CUT begin\n// multipoint polynomial evaluation\n// input: xs = [x_0, ...,\
+    \ x_{N - 1}]: points to evaluate\n//        f = \\sum_i^M f_i x^i\n// Complexity:\
+    \ O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename\
+    \ Tfield> struct MultipointEvaluation {\n    int nx;\n    using polynomial = FormalPowerSeries<Tfield>;\n\
+    \    std::vector<polynomial> segtree;\n    MultipointEvaluation(const std::vector<Tfield>\
+    \ &xs) : nx(xs.size()) {\n        segtree.resize(nx * 2 - 1);\n        for (int\
+    \ i = 0; i < nx; i++) { segtree[nx - 1 + i] = {-xs[i], 1}; }\n        for (int\
+    \ i = nx - 2; i >= 0; i--) { segtree[i] = segtree[2 * i + 1] * segtree[2 * i +\
+    \ 2]; }\n    }\n    std::vector<Tfield> ret;\n    void _eval_rec(polynomial f,\
+    \ int now) {\n        f %= segtree[now];\n        if (now - (nx - 1) >= 0) {\n\
+    \            ret[now - (nx - 1)] = f.coeff(0);\n            return;\n        }\n\
+    \        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f, 2 * now + 2);\n    }\n\
+    \    std::vector<Tfield> evaluate_polynomial(const polynomial &f) {\n        ret.resize(nx);\n\
+    \        _eval_rec(f, 0);\n        return ret;\n    }\n    std::vector<Tfield>\
+    \ evaluate_polynomial(const std::vector<Tfield> &f) {\n        return evaluate_polynomial(polynomial(f.begin(),\
+    \ f.end()));\n    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial\
+    \ _rec_interpolation(int now, const std::vector<Tfield> &ys) const {\n       \
+    \ int i = now - (nx - 1);\n        if (i >= 0) return {ys[i]};\n        auto retl\
+    \ = _rec_interpolation(2 * now + 1, ys);\n        auto retr = _rec_interpolation(2\
+    \ * now + 2, ys);\n        return retl * segtree[2 * now + 2] + retr * segtree[2\
+    \ * now + 1];\n    }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield>\
+    \ ys) {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
+    \ {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
+    \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
+    \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n        return\
+    \ _rec_interpolation(0, ys);\n    }\n};\n#line 3 \"formal_power_series/sum_of_exponential_times_polynomial_limit.hpp\"\
     \n\n// CUT begin\n// $d$ \u6B21\u4EE5\u4E0B\u306E\u591A\u9805\u5F0F $f(x)$ \u3068\
     \u5B9A\u6570 $r$ \u306B\u3064\u3044\u3066\uFF0C\n// $\\sum_{i=0}^\\infty r^i f(i)$\
     \ \u306E\u5024\u3092 $[f(0), ..., f(d - 1), f(d)]$ \u306E\u5024\u304B\u3089 $O(d)$\
     \ \u3067\u8A08\u7B97\uFF0E\n// https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\n\
+    // Document: https://hitonanode.github.io/cplib-cpp/formal_power_series/sum_of_exponential_times_polynomial_limit.hpp\n\
     template <typename MODINT> MODINT sum_of_exponential_times_polynomial_limit(MODINT\
     \ r, std::vector<MODINT> init) {\n    auto &bs = init;\n    if (bs.empty()) return\
     \ 0;\n    const int d = int(bs.size()) - 1;\n    if (d == 0) { return 1 / (1 -\
@@ -150,26 +336,36 @@ data:
     \ bs[i] * rp + bs[i - 1];\n    MODINT ret = 0;\n    rp = 1;\n    for (int i =\
     \ 0; i <= d; i++) {\n        ret += bs[d - i] * MODINT(d + 1).nCr(i) * rp;\n \
     \       rp *= -r;\n    }\n    return ret / MODINT(1 - r).pow(d + 1);\n};\n#line\
-    \ 6 \"formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp\"\
+    \ 8 \"formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp\"\
     \nusing namespace std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    int\
-    \ r, d;\n    cin >> r >> d;\n    auto initial_terms = Sieve(d).enumerate_kth_pows<mint>(d,\
-    \ d);\n    cout << sum_of_exponential_times_polynomial_limit<mint>(r, initial_terms)\
-    \ << '\\n';\n}\n"
+    \ r, d;\n    cin >> r >> d;\n    mint::_precalculation(d + 10);\n    auto initial_terms\
+    \ = Sieve(d).enumerate_kth_pows<mint>(d, d);\n    if (d > 0 and d <= 100000) {\n\
+    \        vector<mint> xs(d + 1);\n        for (int i = 0; i <= d; i++) xs[i] =\
+    \ i;\n        vector<mint> f(d + 1);\n        f[d] = 1;\n        assert(MultipointEvaluation<mint>(xs).evaluate_polynomial(f)\
+    \ == initial_terms);\n    }\n    cout << sum_of_exponential_times_polynomial_limit<mint>(r,\
+    \ initial_terms) << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\"\
     \n#include \"../../modint.hpp\"\n#include \"../../number/sieve.hpp\"\n#include\
-    \ \"../sum_of_exponential_times_polynomial_limit.hpp\"\n#include <iostream>\n\
-    using namespace std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    int\
-    \ r, d;\n    cin >> r >> d;\n    auto initial_terms = Sieve(d).enumerate_kth_pows<mint>(d,\
-    \ d);\n    cout << sum_of_exponential_times_polynomial_limit<mint>(r, initial_terms)\
-    \ << '\\n';\n}\n"
+    \ \"../multipoint_evaluation.hpp\"\n#include \"../sum_of_exponential_times_polynomial_limit.hpp\"\
+    \n#include <cassert>\n#include <iostream>\nusing namespace std;\nusing mint =\
+    \ ModInt<998244353>;\n\nint main() {\n    int r, d;\n    cin >> r >> d;\n    mint::_precalculation(d\
+    \ + 10);\n    auto initial_terms = Sieve(d).enumerate_kth_pows<mint>(d, d);\n\
+    \    if (d > 0 and d <= 100000) {\n        vector<mint> xs(d + 1);\n        for\
+    \ (int i = 0; i <= d; i++) xs[i] = i;\n        vector<mint> f(d + 1);\n      \
+    \  f[d] = 1;\n        assert(MultipointEvaluation<mint>(xs).evaluate_polynomial(f)\
+    \ == initial_terms);\n    }\n    cout << sum_of_exponential_times_polynomial_limit<mint>(r,\
+    \ initial_terms) << '\\n';\n}\n"
   dependsOn:
   - modint.hpp
   - number/sieve.hpp
+  - formal_power_series/multipoint_evaluation.hpp
+  - formal_power_series/formal_power_series.hpp
+  - convolution/ntt.hpp
   - formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
   isVerificationFile: true
   path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2021-05-03 12:51:50+09:00'
+  timestamp: '2021-05-03 13:23:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp

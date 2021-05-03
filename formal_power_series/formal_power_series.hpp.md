@@ -60,6 +60,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/stirling_number_of_2nd.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+    title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -407,6 +410,7 @@ data:
   - formal_power_series/test/fps_sqrt.test.cpp
   - formal_power_series/test/bernoulli_number.test.cpp
   - formal_power_series/test/fps_pow_another.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - formal_power_series/test/poly_taylor_shift.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
 documentation_of: formal_power_series/formal_power_series.hpp
