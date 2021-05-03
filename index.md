@@ -498,8 +498,9 @@ data:
       path: utilities/rotate90.hpp
       title: utilities/rotate90.hpp
     - icon: ':warning:'
-      path: utilities/segtree_relevant_points.hpp
-      title: utilities/segtree_relevant_points.hpp
+      path: utilities/segtree_range_covering_nodes.hpp
+      title: "\u975E\u518D\u5E30\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3067\u533A\u9593\
+        \u306B\u5BFE\u5FDC\u3059\u308B\u9802\u70B9\u756A\u53F7\u306E\u5217\u6319"
     - icon: ':warning:'
       path: utilities/timer.hpp
       title: utilities/timer.hpp
