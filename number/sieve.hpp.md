@@ -10,6 +10,9 @@ data:
     title: number/zeta_moebius_transform.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
+    title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - icon: ':heavy_check_mark:'
@@ -69,14 +72,16 @@ data:
     \ == 1)\n                ret[i] = 1;\n            else if ((i / min_factor[i])\
     \ % min_factor[i] == 0)\n                ret[i] = 0;\n            else\n     \
     \           ret[i] = -ret[i / min_factor[i]];\n        }\n        return ret;\n\
-    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    template <typename\
-    \ MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) {\n  \
-    \      assert(nmax < int(min_factor.size()));\n        std::vector<MODINT> ret(nmax\
-    \ + 1);\n        ret[0] = 0, ret[1] = 1;\n        for (int n = 2; n <= nmax; n++)\
-    \ {\n            if (min_factor[n] == n) {\n                ret[n] = MODINT(n).pow(K);\n\
-    \            } else {\n                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n\
-    \            }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 <<\
-    \ 15);  // (can factorize n <= 10^9)\n"
+    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    // Note: **0^0\
+    \ == 1**\n    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long\
+    \ long K, int nmax) {\n        assert(nmax < int(min_factor.size()));\n      \
+    \  assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax + 1, 1);\n\
+    \        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1] = 1;\n\
+    \        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n] == n)\
+    \ {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n      \
+    \          ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n           \
+    \ }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 << 15);  // (can\
+    \ factorize n <= 10^9)\n"
   code: "#pragma once\n#include <cassert>\n#include <map>\n#include <vector>\n\n//\
     \ CUT begin\n// Linear sieve algorithm for fast prime factorization\n// Complexity:\
     \ O(N) time, O(N) space:\n// - MAXN = 10^7:  ~44 MB,  80~100 ms (Codeforces /\
@@ -115,26 +120,29 @@ data:
     \ == 1)\n                ret[i] = 1;\n            else if ((i / min_factor[i])\
     \ % min_factor[i] == 0)\n                ret[i] = 0;\n            else\n     \
     \           ret[i] = -ret[i / min_factor[i]];\n        }\n        return ret;\n\
-    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    template <typename\
-    \ MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) {\n  \
-    \      assert(nmax < int(min_factor.size()));\n        std::vector<MODINT> ret(nmax\
-    \ + 1);\n        ret[0] = 0, ret[1] = 1;\n        for (int n = 2; n <= nmax; n++)\
-    \ {\n            if (min_factor[n] == n) {\n                ret[n] = MODINT(n).pow(K);\n\
-    \            } else {\n                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n\
-    \            }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 <<\
-    \ 15);  // (can factorize n <= 10^9)\n"
+    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    // Note: **0^0\
+    \ == 1**\n    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long\
+    \ long K, int nmax) {\n        assert(nmax < int(min_factor.size()));\n      \
+    \  assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax + 1, 1);\n\
+    \        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1] = 1;\n\
+    \        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n] == n)\
+    \ {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n      \
+    \          ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n           \
+    \ }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 << 15);  // (can\
+    \ factorize n <= 10^9)\n"
   dependsOn: []
   isVerificationFile: false
   path: number/sieve.hpp
   requiredBy:
   - number/zeta_moebius_transform.hpp
   - number/cyclotomic_polynomials.hpp
-  timestamp: '2021-05-01 20:07:58+09:00'
+  timestamp: '2021-05-03 18:16:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/prime_factorization.test.cpp
   - number/test/enumerate_primes.test.cpp
   - number/test/gen_primes.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
 documentation_of: number/sieve.hpp
 layout: document

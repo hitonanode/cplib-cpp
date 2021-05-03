@@ -53,20 +53,22 @@ data:
     \ == 1)\n                ret[i] = 1;\n            else if ((i / min_factor[i])\
     \ % min_factor[i] == 0)\n                ret[i] = 0;\n            else\n     \
     \           ret[i] = -ret[i / min_factor[i]];\n        }\n        return ret;\n\
-    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    template <typename\
-    \ MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) {\n  \
-    \      assert(nmax < int(min_factor.size()));\n        std::vector<MODINT> ret(nmax\
-    \ + 1);\n        ret[0] = 0, ret[1] = 1;\n        for (int n = 2; n <= nmax; n++)\
-    \ {\n            if (min_factor[n] == n) {\n                ret[n] = MODINT(n).pow(K);\n\
-    \            } else {\n                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n\
-    \            }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 <<\
-    \ 15);  // (can factorize n <= 10^9)\n#line 3 \"number/test/enumerate_primes.test.cpp\"\
-    \n#include <iostream>\n#line 5 \"number/test/enumerate_primes.test.cpp\"\nusing\
-    \ namespace std;\n\nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n\
-    \    Sieve sieve(N);\n    vector<int> ret;\n    for (unsigned i = 0; A * i + B\
-    \ < sieve.primes.size(); i++) ret.push_back(sieve.primes[A * i + B]);\n    cout\
-    \ << sieve.primes.size() << ' ' << ret.size() << '\\n';\n    for (auto p : ret)\
-    \ cout << p << ' ';\n    cout << '\\n';\n}\n"
+    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    // Note: **0^0\
+    \ == 1**\n    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long\
+    \ long K, int nmax) {\n        assert(nmax < int(min_factor.size()));\n      \
+    \  assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax + 1, 1);\n\
+    \        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1] = 1;\n\
+    \        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n] == n)\
+    \ {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n      \
+    \          ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n           \
+    \ }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 << 15);  // (can\
+    \ factorize n <= 10^9)\n#line 3 \"number/test/enumerate_primes.test.cpp\"\n#include\
+    \ <iostream>\n#line 5 \"number/test/enumerate_primes.test.cpp\"\nusing namespace\
+    \ std;\n\nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n    Sieve sieve(N);\n\
+    \    vector<int> ret;\n    for (unsigned i = 0; A * i + B < sieve.primes.size();\
+    \ i++) ret.push_back(sieve.primes[A * i + B]);\n    cout << sieve.primes.size()\
+    \ << ' ' << ret.size() << '\\n';\n    for (auto p : ret) cout << p << ' ';\n \
+    \   cout << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
     \ \"../sieve.hpp\"\n#include <iostream>\n#include <vector>\nusing namespace std;\n\
     \nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n    Sieve sieve(N);\n\
@@ -79,7 +81,7 @@ data:
   isVerificationFile: true
   path: number/test/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-05-01 20:07:58+09:00'
+  timestamp: '2021-05-03 18:16:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/enumerate_primes.test.cpp

@@ -114,6 +114,9 @@ data:
     path: formal_power_series/test/stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/stirling_number_of_2nd.test.cpp
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
+    title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - icon: ':heavy_check_mark:'
@@ -337,6 +340,7 @@ data:
   - formal_power_series/test/division_number.test.cpp
   - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/fps_pow.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - formal_power_series/test/fps_exp.test.cpp
   - formal_power_series/test/fps_inv.test.cpp

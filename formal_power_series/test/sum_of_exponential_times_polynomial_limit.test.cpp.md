@@ -12,7 +12,7 @@ data:
     title: formal_power_series/multipoint_evaluation.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
-    title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
+    title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
   - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
@@ -140,18 +140,20 @@ data:
     \ == 1)\n                ret[i] = 1;\n            else if ((i / min_factor[i])\
     \ % min_factor[i] == 0)\n                ret[i] = 0;\n            else\n     \
     \           ret[i] = -ret[i / min_factor[i]];\n        }\n        return ret;\n\
-    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    template <typename\
-    \ MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) {\n  \
-    \      assert(nmax < int(min_factor.size()));\n        std::vector<MODINT> ret(nmax\
-    \ + 1);\n        ret[0] = 0, ret[1] = 1;\n        for (int n = 2; n <= nmax; n++)\
-    \ {\n            if (min_factor[n] == n) {\n                ret[n] = MODINT(n).pow(K);\n\
-    \            } else {\n                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n\
-    \            }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 <<\
-    \ 15);  // (can factorize n <= 10^9)\n#line 3 \"convolution/ntt.hpp\"\n\n#include\
-    \ <algorithm>\n#include <array>\n#line 7 \"convolution/ntt.hpp\"\n#include <tuple>\n\
-    #line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution for arbitrary\
-    \ mod\n// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.\n\
-    // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
+    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    // Note: **0^0\
+    \ == 1**\n    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long\
+    \ long K, int nmax) {\n        assert(nmax < int(min_factor.size()));\n      \
+    \  assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax + 1, 1);\n\
+    \        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1] = 1;\n\
+    \        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n] == n)\
+    \ {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n      \
+    \          ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n           \
+    \ }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 << 15);  // (can\
+    \ factorize n <= 10^9)\n#line 3 \"convolution/ntt.hpp\"\n\n#include <algorithm>\n\
+    #include <array>\n#line 7 \"convolution/ntt.hpp\"\n#include <tuple>\n#line 9 \"\
+    convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution for arbitrary mod\n\
+    // with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.\n// We\
+    \ skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
     // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
     \ <typename MODINT> std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
     \ b, bool skip_garner = false);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
@@ -323,20 +325,20 @@ data:
     \ {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
     \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
     \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n        return\
-    \ _rec_interpolation(0, ys);\n    }\n};\n#line 3 \"formal_power_series/sum_of_exponential_times_polynomial_limit.hpp\"\
+    \ _rec_interpolation(0, ys);\n    }\n};\n#line 4 \"formal_power_series/sum_of_exponential_times_polynomial_limit.hpp\"\
     \n\n// CUT begin\n// $d$ \u6B21\u4EE5\u4E0B\u306E\u591A\u9805\u5F0F $f(x)$ \u3068\
     \u5B9A\u6570 $r$ \u306B\u3064\u3044\u3066\uFF0C\n// $\\sum_{i=0}^\\infty r^i f(i)$\
     \ \u306E\u5024\u3092 $[f(0), ..., f(d - 1), f(d)]$ \u306E\u5024\u304B\u3089 $O(d)$\
-    \ \u3067\u8A08\u7B97\uFF0E\n// https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\n\
+    \ \u3067\u8A08\u7B97\uFF0E\n// Requirement: r != 1\n// https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\n\
     // Document: https://hitonanode.github.io/cplib-cpp/formal_power_series/sum_of_exponential_times_polynomial_limit.hpp\n\
     template <typename MODINT> MODINT sum_of_exponential_times_polynomial_limit(MODINT\
-    \ r, std::vector<MODINT> init) {\n    auto &bs = init;\n    if (bs.empty()) return\
-    \ 0;\n    const int d = int(bs.size()) - 1;\n    if (d == 0) { return 1 / (1 -\
-    \ r); }\n    MODINT rp = 1;\n    for (int i = 1; i <= d; i++) rp *= r, bs[i] =\
-    \ bs[i] * rp + bs[i - 1];\n    MODINT ret = 0;\n    rp = 1;\n    for (int i =\
-    \ 0; i <= d; i++) {\n        ret += bs[d - i] * MODINT(d + 1).nCr(i) * rp;\n \
-    \       rp *= -r;\n    }\n    return ret / MODINT(1 - r).pow(d + 1);\n};\n#line\
-    \ 8 \"formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp\"\
+    \ r, std::vector<MODINT> init) {\n    assert(r != 1);\n    if (init.empty()) return\
+    \ 0;\n    if (init.size() == 1) return init[0] / (1 - r);\n    auto &bs = init;\n\
+    \    const int d = int(bs.size()) - 1;\n    MODINT rp = 1;\n    for (int i = 1;\
+    \ i <= d; i++) rp *= r, bs[i] = bs[i] * rp + bs[i - 1];\n    MODINT ret = 0;\n\
+    \    rp = 1;\n    for (int i = 0; i <= d; i++) {\n        ret += bs[d - i] * MODINT(d\
+    \ + 1).nCr(i) * rp;\n        rp *= -r;\n    }\n    return ret / MODINT(1 - r).pow(d\
+    \ + 1);\n};\n#line 8 \"formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp\"\
     \nusing namespace std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    int\
     \ r, d;\n    cin >> r >> d;\n    mint::_precalculation(d + 10);\n    auto initial_terms\
     \ = Sieve(d).enumerate_kth_pows<mint>(d, d);\n    if (d > 0 and d <= 100000) {\n\
@@ -365,7 +367,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2021-05-03 13:23:02+09:00'
+  timestamp: '2021-05-03 18:16:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
