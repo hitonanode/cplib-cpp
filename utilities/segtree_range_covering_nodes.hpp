@@ -4,7 +4,7 @@
 
 // CUT begin
 // Enumerate nodes of nonrecursive segtree which cover [l, r)
-std::vector<int> segtree_relevant_points(int N, int l, int r) {
+std::vector<int> segtree_range_covering_nodes(int N, int l, int r) {
     std::vector<int> ret, ret_rev;
     l += N, r += N;
     while (l < r) {
