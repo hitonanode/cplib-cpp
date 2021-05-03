@@ -73,8 +73,11 @@ struct Sieve {
         return ret;
     }
     // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)
+    // Note: **0^0 == 1**
     template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) {
         assert(nmax < int(min_factor.size()));
+        assert(K >= 0);
+        if (K == 0) return std::vector<MODINT>(nmax + 1, 1);
         std::vector<MODINT> ret(nmax + 1);
         ret[0] = 0, ret[1] = 1;
         for (int n = 2; n <= nmax; n++) {
