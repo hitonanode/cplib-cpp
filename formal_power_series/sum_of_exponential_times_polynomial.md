@@ -1,6 +1,6 @@
 ---
 title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-documentation_of: ./sum_of_exponential_times_polynomial_limit.hpp
+documentation_of: ./sum_of_exponential_times_polynomial.hpp
 ---
 
 一般に $f(x)$ を高々 $d$ 次の多項式として，$\displaystyle \sum_{i=0}^{N - 1} r^i f(i)$ を求める．先頭 $d + 1$ 項の値が既知であれば計算量は $O(d)$．関数は分かるが具体的な値が未知の場合は $O\left(d \left(\log d\right)^2\right)$ で先頭 $d + 1$ 項の値の multipoint evaluation を行う必要があると思われる．
