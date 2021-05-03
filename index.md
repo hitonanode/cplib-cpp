@@ -120,6 +120,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
+      title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i i^d)
   - name: .
     pages:
     - icon: ':warning:'
@@ -648,6 +651,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/stirling_number_of_2nd.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+      title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - name: geometry/test
     pages:
     - icon: ':heavy_check_mark:'

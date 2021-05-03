@@ -10,6 +10,9 @@ data:
     title: number/zeta_moebius_transform.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+    title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/enumerate_primes.test.cpp
     title: number/test/enumerate_primes.test.cpp
   - icon: ':heavy_check_mark:'
@@ -132,6 +135,7 @@ data:
   - number/test/prime_factorization.test.cpp
   - number/test/enumerate_primes.test.cpp
   - number/test/gen_primes.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
 documentation_of: number/sieve.hpp
 layout: document
 title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
