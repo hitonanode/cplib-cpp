@@ -265,7 +265,8 @@ data:
       title: number/enumerate_partitions.hpp
     - icon: ':warning:'
       path: number/euler_totient_phi.hpp
-      title: number/euler_totient_phi.hpp
+      title: "Euler's totient function\uFF08\u30AA\u30A4\u30E9\u30FC\u306E\u30C8\u30FC\
+        \u30B7\u30A7\u30F3\u30C8\u95A2\u6570\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
