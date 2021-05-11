@@ -240,10 +240,10 @@ data:
   timestamp: '2021-04-25 00:44:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - graph/test/general_matching.test.cpp
 documentation_of: linear_algebra_matrix/linalg_modint.hpp
 layout: document

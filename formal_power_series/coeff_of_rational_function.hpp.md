@@ -198,8 +198,8 @@ data:
   timestamp: '2021-05-02 16:53:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - formal_power_series/test/coeff_of_rational_function.test.cpp
+  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: formal_power_series/coeff_of_rational_function.hpp
 layout: document
 title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\u7B97\

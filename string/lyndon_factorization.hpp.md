@@ -116,8 +116,8 @@ data:
   timestamp: '2021-03-14 17:31:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - string/test/run_enumerate_lyndon_rmq.test.cpp
   - string/test/run_enumerate_lyndon_hash.test.cpp
+  - string/test/run_enumerate_lyndon_rmq.test.cpp
 documentation_of: string/lyndon_factorization.hpp
 layout: document
 title: "Lyndon factorization \uFF08Lyndon \u5206\u89E3\uFF09"

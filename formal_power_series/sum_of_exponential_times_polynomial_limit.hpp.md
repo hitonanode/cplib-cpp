@@ -56,8 +56,8 @@ data:
   timestamp: '2021-05-03 18:16:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
 documentation_of: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
 layout: document
 title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
