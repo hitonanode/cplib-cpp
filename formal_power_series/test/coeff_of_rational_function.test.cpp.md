@@ -157,19 +157,19 @@ data:
     \ den) {\n    assert(N >= 0);\n    while (den.size() and den.back() == 0) den.pop_back();\n\
     \    assert(den.size());\n    int h = 0;\n    while (den[h] == 0) h++;\n    N\
     \ += h;\n    den.erase(den.begin(), den.begin() + h);\n\n    if (den.size() ==\
-    \ 1) {\n        assert(N < int(num.size()));\n        return num[N] / den[0];\n\
-    \    }\n\n    while (N) {\n        std::vector<Tp> g = den;\n        for (size_t\
-    \ i = 1; i < g.size(); i += 2) { g[i] = -g[i]; }\n        auto conv_num_g = nttconv(num,\
-    \ g);\n        num.resize((conv_num_g.size() + 1 - (N & 1)) / 2);\n        for\
-    \ (size_t i = 0; i < num.size(); i++) { num[i] = conv_num_g[i * 2 + (N & 1)];\
-    \ }\n        auto conv_den_g = nttconv(den, g);\n        for (size_t i = 0; i\
-    \ < den.size(); i++) { den[i] = conv_den_g[i * 2]; }\n        N >>= 1;\n    }\n\
-    \    return num[0] / den[0];\n}\n\n// Find the n-th term of the sequence (0-ORIGIN)\n\
-    // Complexity: O(K lg K \\log N)\n// ainit = [a_0, a_1,..., ]\n// c[0] = 1, \\\
-    sum_j a_{i - j} * c_j = 0\ntemplate <typename Tp> Tp find_kth_term(std::vector<Tp>\
-    \ ainit, const std::vector<Tp> c, long long n) {\n    assert(ainit.size() + 1\
-    \ == c.size());\n    auto a = nttconv(ainit, c);\n    a.resize(ainit.size());\n\
-    \    return coefficient_of_rational_function(n, a, c);\n}\n#line 5 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
+    \ 1) return N < int(num.size()) ? num[N] / den[0] : 0;\n\n    while (N) {\n  \
+    \      std::vector<Tp> g = den;\n        for (size_t i = 1; i < g.size(); i +=\
+    \ 2) { g[i] = -g[i]; }\n        auto conv_num_g = nttconv(num, g);\n        num.resize((conv_num_g.size()\
+    \ + 1 - (N & 1)) / 2);\n        for (size_t i = 0; i < num.size(); i++) { num[i]\
+    \ = conv_num_g[i * 2 + (N & 1)]; }\n        auto conv_den_g = nttconv(den, g);\n\
+    \        for (size_t i = 0; i < den.size(); i++) { den[i] = conv_den_g[i * 2];\
+    \ }\n        N >>= 1;\n    }\n    return num[0] / den[0];\n}\n\n// Find the n-th\
+    \ term of the sequence (0-ORIGIN)\n// Complexity: O(K lg K \\log N)\n// ainit\
+    \ = [a_0, a_1,..., ]\n// c[0] = 1, \\sum_j a_{i - j} * c_j = 0\ntemplate <typename\
+    \ Tp> Tp find_kth_term(std::vector<Tp> ainit, const std::vector<Tp> c, long long\
+    \ n) {\n    assert(ainit.size() + 1 == c.size());\n    auto a = nttconv(ainit,\
+    \ c);\n    a.resize(ainit.size());\n    return coefficient_of_rational_function(n,\
+    \ a, c);\n}\n#line 5 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
     \n\nusing mint = ModInt<1000000007>;\n\n#line 9 \"formal_power_series/test/coeff_of_rational_function.test.cpp\"\
     \n\nstd::vector<mint> gen_dp(std::vector<int> v, int n) {\n    std::vector<std::vector<mint>>\
     \ dp(n + 1, std::vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for\
@@ -205,7 +205,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/coeff_of_rational_function.test.cpp
   requiredBy: []
-  timestamp: '2021-05-02 16:53:28+09:00'
+  timestamp: '2021-05-13 16:48:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/coeff_of_rational_function.test.cpp
