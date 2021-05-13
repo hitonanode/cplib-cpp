@@ -16,10 +16,7 @@ template <typename Tp> Tp coefficient_of_rational_function(long long N, std::vec
     N += h;
     den.erase(den.begin(), den.begin() + h);
 
-    if (den.size() == 1) {
-        assert(N < int(num.size()));
-        return num[N] / den[0];
-    }
+    if (den.size() == 1) return N < int(num.size()) ? num[N] / den[0] : 0;
 
     while (N) {
         std::vector<Tp> g = den;
