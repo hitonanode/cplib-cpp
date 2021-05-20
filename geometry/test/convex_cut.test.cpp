@@ -1,5 +1,6 @@
-#include "geometry/geometry2d.hpp"
+#include "../geometry.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_C"
+#define ERROR 0.000001
 
 #include <iomanip>
 #include <iostream>
@@ -10,9 +11,9 @@ int main() {
     int N;
     cin >> N;
 
-    using Pt = P<double>;
+    using Pt = Point2d<double>;
     vector<Pt> G(N);
-    for (auto &x : G) { cin >> x; }
+    for (auto &x : G) cin >> x;
 
     cout << fixed << setprecision(8);
     int Q;
