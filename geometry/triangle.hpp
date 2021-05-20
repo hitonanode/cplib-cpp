@@ -1,5 +1,6 @@
 #pragma once
 #include "geometry.hpp"
+#include "point3d.hpp"
 #include <complex>
 
 // CUT begin

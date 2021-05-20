@@ -3,18 +3,19 @@
 #include <iostream>
 #include <vector>
 #define PROBLEM "https://judge.yosupo.jp/problem/sort_points_by_argument"
+using namespace std;
 
 int main() {
-    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);
+    cin.tie(nullptr), ios::sync_with_stdio(false);
 
     int N;
-    std::cin >> N;
-    std::vector<P> ps;
+    cin >> N;
+    vector<Point> ps;
     while (N--) {
         long long x, y;
-        std::cin >> x >> y;
+        cin >> x >> y;
         ps.emplace_back(x, y);
     }
-    std::sort(ps.begin(), ps.end());
-    for (auto p : ps) { std::cout << p.X << ' ' << p.Y << '\n'; }
+    sort(ps.begin(), ps.end());
+    for (auto p : ps) cout << p.X << ' ' << p.Y << '\n';
 }
