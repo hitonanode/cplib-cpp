@@ -146,17 +146,23 @@ data:
   - name: geometry
     pages:
     - icon: ':heavy_check_mark:'
-      path: geometry/geometry2d.hpp
-      title: geometry/geometry2d.hpp
+      path: geometry/geometry.hpp
+      title: geometry/geometry.hpp
     - icon: ':warning:'
       path: geometry/point2d_w_error.hpp
       title: geometry/point2d_w_error.hpp
+    - icon: ':heavy_check_mark:'
+      path: geometry/point3d.hpp
+      title: geometry/point3d.hpp
     - icon: ':warning:'
       path: geometry/problem_of_apollonius.hpp
       title: geometry/problem_of_apollonius.hpp
     - icon: ':heavy_check_mark:'
       path: geometry/sort_by_argument.hpp
       title: geometry/sort_by_argument.hpp
+    - icon: ':heavy_check_mark:'
+      path: geometry/triangle.hpp
+      title: geometry/triangle.hpp
   - name: graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -676,6 +682,9 @@ data:
       title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - name: geometry/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: geometry/test/circumcenter.test.cpp
+      title: geometry/test/circumcenter.test.cpp
     - icon: ':heavy_check_mark:'
       path: geometry/test/convex_cut.test.cpp
       title: geometry/test/convex_cut.test.cpp

@@ -4,16 +4,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: geometry/geometry.hpp
     title: geometry/geometry.hpp
+  - icon: ':heavy_check_mark:'
+    path: geometry/point3d.hpp
+    title: geometry/point3d.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: geometry/test/circumcenter.test.cpp
+    title: geometry/test/circumcenter.test.cpp
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_A
-    links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_A
+    links: []
   bundledCode: "#line 2 \"geometry/geometry.hpp\"\n#include <algorithm>\n#include\
     \ <cassert>\n#include <cmath>\n#include <complex>\n#include <iostream>\n#include\
     \ <tuple>\n#include <utility>\n#include <vector>\n\n// CUT begin\ntemplate <typename\
@@ -104,38 +107,64 @@ data:
     \ a, b);\n    }\n}\n\n// Area of polygon (might be negative)\ntemplate <typename\
     \ T_P> T_P signed_area_of_polygon(const std::vector<Point2d<T_P>> &poly) {\n \
     \   T_P area = 0;\n    for (size_t i = 0; i < poly.size(); i++) area += poly[i].det(poly[(i\
-    \ + 1) % poly.size()]);\n    return area * 0.5;\n}\n#line 2 \"geometry/test/convex_hull.test.cpp\"\
-    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_A\"\
-    \n#line 4 \"geometry/test/convex_hull.test.cpp\"\n#include <cstdio>\n#line 6 \"\
-    geometry/test/convex_hull.test.cpp\"\nusing namespace std;\n\nint main() {\n \
-    \   int N;\n    cin >> N;\n    vector<Point2d<double>> P(N);\n    P[0].set_eps(1e-9);\n\
-    \    for (auto &p : P) cin >> p;\n\n    vector<pair<int, int>> ps;\n    for (auto\
-    \ idx : convex_hull(P, true)) ps.emplace_back(llround(P[idx].y), llround(P[idx].x));\n\
-    \    int init = min_element(ps.begin(), ps.end()) - ps.begin();\n\n    printf(\"\
-    %lu\\n\", ps.size());\n    for (size_t i = 0; i < ps.size(); i++) {\n        printf(\"\
-    %d %d\\n\", ps[(i + init) % ps.size()].second, ps[(i + init) % ps.size()].first);\n\
-    \    }\n}\n"
-  code: "#include \"../geometry.hpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_4_A\"\
-    \n#include <cmath>\n#include <cstdio>\n#include <iostream>\nusing namespace std;\n\
-    \nint main() {\n    int N;\n    cin >> N;\n    vector<Point2d<double>> P(N);\n\
-    \    P[0].set_eps(1e-9);\n    for (auto &p : P) cin >> p;\n\n    vector<pair<int,\
-    \ int>> ps;\n    for (auto idx : convex_hull(P, true)) ps.emplace_back(llround(P[idx].y),\
-    \ llround(P[idx].x));\n    int init = min_element(ps.begin(), ps.end()) - ps.begin();\n\
-    \n    printf(\"%lu\\n\", ps.size());\n    for (size_t i = 0; i < ps.size(); i++)\
-    \ {\n        printf(\"%d %d\\n\", ps[(i + init) % ps.size()].second, ps[(i + init)\
-    \ % ps.size()].first);\n    }\n}\n"
+    \ + 1) % poly.size()]);\n    return area * 0.5;\n}\n#line 5 \"geometry/point3d.hpp\"\
+    \n\n// CUT begin\ntemplate <typename T> struct Point3d {\n    T x, y, z;\n   \
+    \ Point3d() : x(0), y(0), z(0) {}\n    Point3d(T x_, T y_, T z_) : x(x_), y(y_),\
+    \ z(z_) {}\n    Point3d(const std::tuple<T, T, T> &init) { std::tie(x, y, z) =\
+    \ init; }\n    Point3d operator+(const Point3d &p) const noexcept { return {x\
+    \ + p.x, y + p.y, z + p.z}; }\n    Point3d operator-(const Point3d &p) const noexcept\
+    \ { return {x - p.x, y - p.y, z - p.z}; }\n    Point3d operator*(T d) const noexcept\
+    \ { return {x * d, y * d, z * d}; }\n    Point3d operator/(T d) const { return\
+    \ {x / d, y / d, z / d}; }\n    bool operator<(const Point3d &r) const noexcept\
+    \ { return x != r.x ? x < r.x : (y != r.y ? y < r.y : z < r.z); }\n    bool operator==(const\
+    \ Point3d &r) const noexcept { return x == r.x and y == r.y and z == r.z; }\n\
+    \    bool operator!=(const Point3d &r) const noexcept { return !((*this) == r);\
+    \ }\n    T dot(const Point3d &p) const noexcept { return x * p.x + y * p.y + z\
+    \ * p.z; }\n    T absdet(const Point3d &p) const noexcept {\n        return Point3d(y\
+    \ * p.z - z * p.y, z * p.x - x * p.z, x * p.y - y * p.x).norm();\n    }\n    T\
+    \ norm() const noexcept { return std::sqrt(x * x + y * y + z * z); }\n    T norm2()\
+    \ const noexcept { return x * x + y * y + z * z; }\n    Point3d normalized() const\
+    \ { return (*this) / this->norm(); }\n    friend std::istream &operator>>(std::istream\
+    \ &is, Point3d &p) { return is >> p.x >> p.y >> p.z; }\n    friend std::ostream\
+    \ &operator<<(std::ostream &os, const Point3d &p) {\n        return os << '('\
+    \ << p.x << ',' << p.y << ',' << p.z << ')';\n    }\n};\n#line 5 \"geometry/triangle.hpp\"\
+    \n\n// CUT begin\n// Circumcenter \uFF08\u4E09\u89D2\u5F62\u306E\u5916\u5FC3\uFF09\
+    \ntemplate <typename Float>\nPoint2d<Float> circumcenter(const Point2d<Float>\
+    \ &A, const Point2d<Float> &B, const Point2d<Float> &C) {\n    std::complex<Float>\
+    \ a = (C - A).to_complex(), b = (B - A).to_complex();\n    return A + Point2d<Float>(a\
+    \ * b * std::conj(a - b) / (std::conj(a) * b - a * std::conj(b)));\n}\ntemplate\
+    \ <typename Float>\nPoint3d<Float> circumcenter(const Point3d<Float> &A, const\
+    \ Point3d<Float> &B, const Point3d<Float> &C) {\n    auto a = (B - C).norm(),\
+    \ b = (C - A).norm(), c = (A - B).norm();\n    auto acosA = a * a * (C - A).dot(B\
+    \ - A);\n    auto bcosB = b * b * (A - B).dot(C - B);\n    auto ccosC = c * c\
+    \ * (B - C).dot(A - C);\n    return (A * acosA + B * bcosB + C * ccosC) / (acosA\
+    \ + bcosB + ccosC);\n}\n"
+  code: "#pragma once\n#include \"geometry.hpp\"\n#include \"point3d.hpp\"\n#include\
+    \ <complex>\n\n// CUT begin\n// Circumcenter \uFF08\u4E09\u89D2\u5F62\u306E\u5916\
+    \u5FC3\uFF09\ntemplate <typename Float>\nPoint2d<Float> circumcenter(const Point2d<Float>\
+    \ &A, const Point2d<Float> &B, const Point2d<Float> &C) {\n    std::complex<Float>\
+    \ a = (C - A).to_complex(), b = (B - A).to_complex();\n    return A + Point2d<Float>(a\
+    \ * b * std::conj(a - b) / (std::conj(a) * b - a * std::conj(b)));\n}\ntemplate\
+    \ <typename Float>\nPoint3d<Float> circumcenter(const Point3d<Float> &A, const\
+    \ Point3d<Float> &B, const Point3d<Float> &C) {\n    auto a = (B - C).norm(),\
+    \ b = (C - A).norm(), c = (A - B).norm();\n    auto acosA = a * a * (C - A).dot(B\
+    \ - A);\n    auto bcosB = b * b * (A - B).dot(C - B);\n    auto ccosC = c * c\
+    \ * (B - C).dot(A - C);\n    return (A * acosA + B * bcosB + C * ccosC) / (acosA\
+    \ + bcosB + ccosC);\n}\n"
   dependsOn:
   - geometry/geometry.hpp
-  isVerificationFile: true
-  path: geometry/test/convex_hull.test.cpp
+  - geometry/point3d.hpp
+  isVerificationFile: false
+  path: geometry/triangle.hpp
   requiredBy: []
   timestamp: '2021-05-20 18:58:10+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: geometry/test/convex_hull.test.cpp
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - geometry/test/circumcenter.test.cpp
+documentation_of: geometry/triangle.hpp
 layout: document
 redirect_from:
-- /verify/geometry/test/convex_hull.test.cpp
-- /verify/geometry/test/convex_hull.test.cpp.html
-title: geometry/test/convex_hull.test.cpp
+- /library/geometry/triangle.hpp
+- /library/geometry/triangle.hpp.html
+title: geometry/triangle.hpp
 ---
