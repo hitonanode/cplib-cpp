@@ -176,15 +176,15 @@ data:
   timestamp: '2020-11-18 20:06:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - convolution/test/ntt.test.cpp
+  - convolution/test/ntt_arbitrary_mod.test.cpp
+  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+  - formal_power_series/test/fps_exp_modintruntime.test.cpp
   - number/test/montmort_number_mod.test.cpp
   - number/test/sqrt_modint_runtime.test.cpp
-  - convolution/test/ntt_arbitrary_mod.test.cpp
-  - convolution/test/ntt.test.cpp
   - graph/test/chromatic_number.test.cpp
-  - formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
 documentation_of: number/modint_runtime.hpp
 layout: document
 redirect_from:

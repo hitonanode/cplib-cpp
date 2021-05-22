@@ -49,7 +49,7 @@ data:
     \ Point2d &r) const noexcept { return !((*this) == r); }\n    T_P dot(Point2d\
     \ p) const noexcept { return x * p.x + y * p.y; }\n    T_P det(Point2d p) const\
     \ noexcept { return x * p.y - y * p.x; }\n    T_P absdet(Point2d p) const noexcept\
-    \ { return std::abs(p.det()); }\n    T_P norm() const noexcept { return std::sqrt(x\
+    \ { return std::abs(det(p)); }\n    T_P norm() const noexcept { return std::sqrt(x\
     \ * x + y * y); }\n    T_P norm2() const noexcept { return x * x + y * y; }\n\
     \    T_P arg() const noexcept { return std::atan2(y, x); }\n    // rotate point/vector\
     \ by rad\n    Point2d rotate(T_P rad) const noexcept {\n        return Point2d(x\
@@ -173,7 +173,7 @@ data:
   isVerificationFile: false
   path: geometry/problem_of_apollonius.hpp
   requiredBy: []
-  timestamp: '2021-05-20 18:58:10+09:00'
+  timestamp: '2021-05-22 23:22:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/problem_of_apollonius.hpp

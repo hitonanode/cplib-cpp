@@ -134,16 +134,16 @@ data:
   isVerificationFile: false
   path: number/sieve.hpp
   requiredBy:
-  - number/cyclotomic_polynomials.hpp
   - number/zeta_moebius_transform.hpp
+  - number/cyclotomic_polynomials.hpp
   timestamp: '2021-05-03 18:16:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/gen_primes.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - number/test/prime_factorization.test.cpp
   - number/test/enumerate_primes.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
+  - number/test/gen_primes.test.cpp
 documentation_of: number/sieve.hpp
 layout: document
 title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
