@@ -30,7 +30,7 @@ template <typename T_P> struct Point2d {
     bool operator!=(const Point2d &r) const noexcept { return !((*this) == r); }
     T_P dot(Point2d p) const noexcept { return x * p.x + y * p.y; }
     T_P det(Point2d p) const noexcept { return x * p.y - y * p.x; }
-    T_P absdet(Point2d p) const noexcept { return std::abs(p.det()); }
+    T_P absdet(Point2d p) const noexcept { return std::abs(det(p)); }
     T_P norm() const noexcept { return std::sqrt(x * x + y * y); }
     T_P norm2() const noexcept { return x * x + y * y; }
     T_P arg() const noexcept { return std::atan2(y, x); }
