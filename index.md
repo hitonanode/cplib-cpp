@@ -222,6 +222,9 @@ data:
       title: graph/strongly_connected_components_bitset.hpp
   - name: linear_algebra_matrix
     pages:
+    - icon: ':warning:'
+      path: linear_algebra_matrix/circular_binary_expansion.hpp
+      title: linear_algebra_matrix/circular_binary_expansion.hpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/det_of_sparse_matrix.hpp
       title: linear_algebra_matrix/det_of_sparse_matrix.hpp
