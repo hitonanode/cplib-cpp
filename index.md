@@ -178,6 +178,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/directed_mst.hpp
       title: graph/directed_mst.hpp
+    - icon: ':warning:'
+      path: graph/eulerian_trail.hpp
+      title: graph/eulerian_trail.hpp
     - icon: ':heavy_check_mark:'
       path: graph/general_matching.hpp
       title: graph/general_matching.hpp
