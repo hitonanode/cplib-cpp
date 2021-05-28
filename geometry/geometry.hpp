@@ -98,6 +98,38 @@ Point2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P> r2,
     return r1 + v1 * (v2.det(r2 - r1) / v2.det(v1));
 }
 
+// Whether two segments s1t1 & s2t2 intersect or not (not include endpoints)
+// Google Code Jam 2013 Round 3 - Rural Planning
+template <typename T> int intersect_open_segments(Point2d<T> s1, Point2d<T> t1, Point2d<T> s2, Point2d<T> t2) {
+    if (s1 == t1 or s2 == t2) return false;
+    Point2d<T> v1 = t1 - s1, v2 = t2 - s2;
+    int nbad = 0;
+    for (int t = 0; t < 2; t++) {
+        T den = v2.det(v1);
+        if (den == 0) {
+            if (s1.det(v1) == s2.det(v1)) {
+                auto L1 = s1.dot(v1), R1 = (s1 + v1).dot(v1);
+                auto L2 = s2.dot(v1), R2 = (s2 + v2).dot(v1);
+                if (L1 > R1) std::swap(L1, R1);
+                if (L2 > R2) std::swap(L2, R2);
+                if (L1 > L2) std::swap(L1, L2), std::swap(R1, R2);
+                return R1 > L2;
+            } else {
+                return false;
+            }
+        }
+        auto num = v2.det(s2 - s1);
+        if (den * num < 0 or (num >= den and den > 0) or (num <= den and den < 0)) {
+            //
+        } else {
+            nbad++;
+        }
+        std::swap(s1, s2);
+        std::swap(v1, v2);
+    }
+    return nbad >= 2;
+}
+
 // Convex cut
 // Cut the convex polygon g by line p1->p2 and return the leftward one
 template <typename T_P>
