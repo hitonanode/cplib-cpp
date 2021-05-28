@@ -80,40 +80,55 @@ data:
     \    return ret;\n}\n\n// Solve r1 + t1 * v1 == r2 + t2 * v2\ntemplate <typename\
     \ T_P>\nPoint2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P>\
     \ r2, Point2d<T_P> v2) {\n    assert(v2.det(v1) != 0);\n    return r1 + v1 * (v2.det(r2\
-    \ - r1) / v2.det(v1));\n}\n\n// Convex cut\n// Cut the convex polygon g by line\
-    \ p1->p2 and return the leftward one\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>>\
-    \ convex_cut(const std::vector<Point2d<T_P>> &g, Point2d<T_P> p1, Point2d<T_P>\
-    \ p2) {\n    assert(p1 != p2);\n    std::vector<Point2d<T_P>> ret;\n    for (int\
-    \ i = 0; i < (int)g.size(); i++) {\n        const Point2d<T_P> &now = g[i], &nxt\
-    \ = g[(i + 1) % g.size()];\n        if (ccw(p1, p2, now) != -1) ret.push_back(now);\n\
-    \        if ((ccw(p1, p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) {\n      \
-    \      ret.push_back(lines_crosspoint(now, nxt - now, p1, p2 - p1));\n       \
-    \ }\n    }\n    return ret;\n}\n\n// 2\u5186\u306E\u4EA4\u70B9 (ABC157F)\ntemplate\
-    \ <typename T_P>\nstd::vector<Point2d<T_P>> IntersectTwoCircles(const Point2d<T_P>\
-    \ &Ca, double Ra, const Point2d<T_P> &Cb, double Rb) {\n    double d = (Ca - Cb).norm();\n\
-    \    if (Ra + Rb < d) return {};\n    double rc = (d * d + Ra * Ra - Rb * Rb)\
-    \ / (2 * d);\n    double rs = sqrt(Ra * Ra - rc * rc);\n    Point2d<T_P> diff\
-    \ = (Cb - Ca) / d;\n    return {Ca + diff * Point2d<T_P>(rc, rs), Ca + diff *\
-    \ Point2d<T_P>(rc, -rs)};\n}\n\n// Solve |x0 + vt| = R (SRM 543 Div.1 1000, GCJ\
-    \ 2016 R3 C)\ntemplate <typename PointNd, typename Float>\nstd::vector<Float>\
-    \ IntersectCircleLine(const PointNd &x0, const PointNd &v, Float R) {\n    Float\
-    \ b = Float(x0.dot(v)) / v.norm2();\n    Float c = Float(x0.norm2() - Float(R)\
-    \ * R) / v.norm2();\n    if (b * b - c < 0) return {};\n    Float ret1 = -b +\
-    \ sqrtl(b * b - c) * (b > 0 ? -1 : 1);\n    Float ret2 = c / ret1;\n    return\
-    \ ret1 < ret2 ? std::vector<Float>{ret1, ret2} : std::vector<Float>{ret2, ret1};\n\
-    }\n\n// Distance between point p <-> line ab\ntemplate <typename PointFloat>\n\
-    decltype(PointFloat::x) DistancePointLine(const PointFloat &p, const PointFloat\
-    \ &a, const PointFloat &b) {\n    assert(a != b);\n    return (b - a).absdet(p\
-    \ - a) / (b - a).norm();\n}\n\n// Distance between point p <-> line segment ab\n\
-    template <typename PointFloat>\ndecltype(PointFloat::x) DistancePointSegment(const\
-    \ PointFloat &p, const PointFloat &a, const PointFloat &b) {\n    if (a == b)\
-    \ {\n        return (p - a).norm();\n    } else if ((p - a).dot(b - a) <= 0) {\n\
-    \        return (p - a).norm();\n    } else if ((p - b).dot(a - b) <= 0) {\n \
-    \       return (p - b).norm();\n    } else {\n        return DistancePointLine<PointFloat>(p,\
-    \ a, b);\n    }\n}\n\n// Area of polygon (might be negative)\ntemplate <typename\
-    \ T_P> T_P signed_area_of_polygon(const std::vector<Point2d<T_P>> &poly) {\n \
-    \   T_P area = 0;\n    for (size_t i = 0; i < poly.size(); i++) area += poly[i].det(poly[(i\
-    \ + 1) % poly.size()]);\n    return area * 0.5;\n}\n"
+    \ - r1) / v2.det(v1));\n}\n\n// Whether two segments s1t1 & s2t2 intersect or\
+    \ not (not include endpoints)\n// Google Code Jam 2013 Round 3 - Rural Planning\n\
+    template <typename T> int intersect_open_segments(Point2d<T> s1, Point2d<T> t1,\
+    \ Point2d<T> s2, Point2d<T> t2) {\n    if (s1 == t1 or s2 == t2) return false;\n\
+    \    Point2d<T> v1 = t1 - s1, v2 = t2 - s2;\n    int nbad = 0;\n    for (int t\
+    \ = 0; t < 2; t++) {\n        T den = v2.det(v1);\n        if (den == 0) {\n \
+    \           if (s1.det(v1) == s2.det(v1)) {\n                auto L1 = s1.dot(v1),\
+    \ R1 = (s1 + v1).dot(v1);\n                auto L2 = s2.dot(v1), R2 = (s2 + v2).dot(v1);\n\
+    \                if (L1 > R1) std::swap(L1, R1);\n                if (L2 > R2)\
+    \ std::swap(L2, R2);\n                if (L1 > L2) std::swap(L1, L2), std::swap(R1,\
+    \ R2);\n                return R1 > L2;\n            } else {\n              \
+    \  return false;\n            }\n        }\n        auto num = v2.det(s2 - s1);\n\
+    \        if (den * num < 0 or (num >= den and den > 0) or (num <= den and den\
+    \ < 0)) {\n            //\n        } else {\n            nbad++;\n        }\n\
+    \        std::swap(s1, s2);\n        std::swap(v1, v2);\n    }\n    return nbad\
+    \ >= 2;\n}\n\n// Convex cut\n// Cut the convex polygon g by line p1->p2 and return\
+    \ the leftward one\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>> convex_cut(const\
+    \ std::vector<Point2d<T_P>> &g, Point2d<T_P> p1, Point2d<T_P> p2) {\n    assert(p1\
+    \ != p2);\n    std::vector<Point2d<T_P>> ret;\n    for (int i = 0; i < (int)g.size();\
+    \ i++) {\n        const Point2d<T_P> &now = g[i], &nxt = g[(i + 1) % g.size()];\n\
+    \        if (ccw(p1, p2, now) != -1) ret.push_back(now);\n        if ((ccw(p1,\
+    \ p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) {\n            ret.push_back(lines_crosspoint(now,\
+    \ nxt - now, p1, p2 - p1));\n        }\n    }\n    return ret;\n}\n\n// 2\u5186\
+    \u306E\u4EA4\u70B9 (ABC157F)\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>>\
+    \ IntersectTwoCircles(const Point2d<T_P> &Ca, double Ra, const Point2d<T_P> &Cb,\
+    \ double Rb) {\n    double d = (Ca - Cb).norm();\n    if (Ra + Rb < d) return\
+    \ {};\n    double rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);\n    double rs =\
+    \ sqrt(Ra * Ra - rc * rc);\n    Point2d<T_P> diff = (Cb - Ca) / d;\n    return\
+    \ {Ca + diff * Point2d<T_P>(rc, rs), Ca + diff * Point2d<T_P>(rc, -rs)};\n}\n\n\
+    // Solve |x0 + vt| = R (SRM 543 Div.1 1000, GCJ 2016 R3 C)\ntemplate <typename\
+    \ PointNd, typename Float>\nstd::vector<Float> IntersectCircleLine(const PointNd\
+    \ &x0, const PointNd &v, Float R) {\n    Float b = Float(x0.dot(v)) / v.norm2();\n\
+    \    Float c = Float(x0.norm2() - Float(R) * R) / v.norm2();\n    if (b * b -\
+    \ c < 0) return {};\n    Float ret1 = -b + sqrtl(b * b - c) * (b > 0 ? -1 : 1);\n\
+    \    Float ret2 = c / ret1;\n    return ret1 < ret2 ? std::vector<Float>{ret1,\
+    \ ret2} : std::vector<Float>{ret2, ret1};\n}\n\n// Distance between point p <->\
+    \ line ab\ntemplate <typename PointFloat>\ndecltype(PointFloat::x) DistancePointLine(const\
+    \ PointFloat &p, const PointFloat &a, const PointFloat &b) {\n    assert(a !=\
+    \ b);\n    return (b - a).absdet(p - a) / (b - a).norm();\n}\n\n// Distance between\
+    \ point p <-> line segment ab\ntemplate <typename PointFloat>\ndecltype(PointFloat::x)\
+    \ DistancePointSegment(const PointFloat &p, const PointFloat &a, const PointFloat\
+    \ &b) {\n    if (a == b) {\n        return (p - a).norm();\n    } else if ((p\
+    \ - a).dot(b - a) <= 0) {\n        return (p - a).norm();\n    } else if ((p -\
+    \ b).dot(a - b) <= 0) {\n        return (p - b).norm();\n    } else {\n      \
+    \  return DistancePointLine<PointFloat>(p, a, b);\n    }\n}\n\n// Area of polygon\
+    \ (might be negative)\ntemplate <typename T_P> T_P signed_area_of_polygon(const\
+    \ std::vector<Point2d<T_P>> &poly) {\n    T_P area = 0;\n    for (size_t i = 0;\
+    \ i < poly.size(); i++) area += poly[i].det(poly[(i + 1) % poly.size()]);\n  \
+    \  return area * 0.5;\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <cmath>\n\
     #include <complex>\n#include <iostream>\n#include <tuple>\n#include <utility>\n\
     #include <vector>\n\n// CUT begin\ntemplate <typename T_P> struct Point2d {\n\
@@ -171,47 +186,62 @@ data:
     \    return ret;\n}\n\n// Solve r1 + t1 * v1 == r2 + t2 * v2\ntemplate <typename\
     \ T_P>\nPoint2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P>\
     \ r2, Point2d<T_P> v2) {\n    assert(v2.det(v1) != 0);\n    return r1 + v1 * (v2.det(r2\
-    \ - r1) / v2.det(v1));\n}\n\n// Convex cut\n// Cut the convex polygon g by line\
-    \ p1->p2 and return the leftward one\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>>\
-    \ convex_cut(const std::vector<Point2d<T_P>> &g, Point2d<T_P> p1, Point2d<T_P>\
-    \ p2) {\n    assert(p1 != p2);\n    std::vector<Point2d<T_P>> ret;\n    for (int\
-    \ i = 0; i < (int)g.size(); i++) {\n        const Point2d<T_P> &now = g[i], &nxt\
-    \ = g[(i + 1) % g.size()];\n        if (ccw(p1, p2, now) != -1) ret.push_back(now);\n\
-    \        if ((ccw(p1, p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) {\n      \
-    \      ret.push_back(lines_crosspoint(now, nxt - now, p1, p2 - p1));\n       \
-    \ }\n    }\n    return ret;\n}\n\n// 2\u5186\u306E\u4EA4\u70B9 (ABC157F)\ntemplate\
-    \ <typename T_P>\nstd::vector<Point2d<T_P>> IntersectTwoCircles(const Point2d<T_P>\
-    \ &Ca, double Ra, const Point2d<T_P> &Cb, double Rb) {\n    double d = (Ca - Cb).norm();\n\
-    \    if (Ra + Rb < d) return {};\n    double rc = (d * d + Ra * Ra - Rb * Rb)\
-    \ / (2 * d);\n    double rs = sqrt(Ra * Ra - rc * rc);\n    Point2d<T_P> diff\
-    \ = (Cb - Ca) / d;\n    return {Ca + diff * Point2d<T_P>(rc, rs), Ca + diff *\
-    \ Point2d<T_P>(rc, -rs)};\n}\n\n// Solve |x0 + vt| = R (SRM 543 Div.1 1000, GCJ\
-    \ 2016 R3 C)\ntemplate <typename PointNd, typename Float>\nstd::vector<Float>\
-    \ IntersectCircleLine(const PointNd &x0, const PointNd &v, Float R) {\n    Float\
-    \ b = Float(x0.dot(v)) / v.norm2();\n    Float c = Float(x0.norm2() - Float(R)\
-    \ * R) / v.norm2();\n    if (b * b - c < 0) return {};\n    Float ret1 = -b +\
-    \ sqrtl(b * b - c) * (b > 0 ? -1 : 1);\n    Float ret2 = c / ret1;\n    return\
-    \ ret1 < ret2 ? std::vector<Float>{ret1, ret2} : std::vector<Float>{ret2, ret1};\n\
-    }\n\n// Distance between point p <-> line ab\ntemplate <typename PointFloat>\n\
-    decltype(PointFloat::x) DistancePointLine(const PointFloat &p, const PointFloat\
-    \ &a, const PointFloat &b) {\n    assert(a != b);\n    return (b - a).absdet(p\
-    \ - a) / (b - a).norm();\n}\n\n// Distance between point p <-> line segment ab\n\
-    template <typename PointFloat>\ndecltype(PointFloat::x) DistancePointSegment(const\
-    \ PointFloat &p, const PointFloat &a, const PointFloat &b) {\n    if (a == b)\
-    \ {\n        return (p - a).norm();\n    } else if ((p - a).dot(b - a) <= 0) {\n\
-    \        return (p - a).norm();\n    } else if ((p - b).dot(a - b) <= 0) {\n \
-    \       return (p - b).norm();\n    } else {\n        return DistancePointLine<PointFloat>(p,\
-    \ a, b);\n    }\n}\n\n// Area of polygon (might be negative)\ntemplate <typename\
-    \ T_P> T_P signed_area_of_polygon(const std::vector<Point2d<T_P>> &poly) {\n \
-    \   T_P area = 0;\n    for (size_t i = 0; i < poly.size(); i++) area += poly[i].det(poly[(i\
-    \ + 1) % poly.size()]);\n    return area * 0.5;\n}\n"
+    \ - r1) / v2.det(v1));\n}\n\n// Whether two segments s1t1 & s2t2 intersect or\
+    \ not (not include endpoints)\n// Google Code Jam 2013 Round 3 - Rural Planning\n\
+    template <typename T> int intersect_open_segments(Point2d<T> s1, Point2d<T> t1,\
+    \ Point2d<T> s2, Point2d<T> t2) {\n    if (s1 == t1 or s2 == t2) return false;\n\
+    \    Point2d<T> v1 = t1 - s1, v2 = t2 - s2;\n    int nbad = 0;\n    for (int t\
+    \ = 0; t < 2; t++) {\n        T den = v2.det(v1);\n        if (den == 0) {\n \
+    \           if (s1.det(v1) == s2.det(v1)) {\n                auto L1 = s1.dot(v1),\
+    \ R1 = (s1 + v1).dot(v1);\n                auto L2 = s2.dot(v1), R2 = (s2 + v2).dot(v1);\n\
+    \                if (L1 > R1) std::swap(L1, R1);\n                if (L2 > R2)\
+    \ std::swap(L2, R2);\n                if (L1 > L2) std::swap(L1, L2), std::swap(R1,\
+    \ R2);\n                return R1 > L2;\n            } else {\n              \
+    \  return false;\n            }\n        }\n        auto num = v2.det(s2 - s1);\n\
+    \        if (den * num < 0 or (num >= den and den > 0) or (num <= den and den\
+    \ < 0)) {\n            //\n        } else {\n            nbad++;\n        }\n\
+    \        std::swap(s1, s2);\n        std::swap(v1, v2);\n    }\n    return nbad\
+    \ >= 2;\n}\n\n// Convex cut\n// Cut the convex polygon g by line p1->p2 and return\
+    \ the leftward one\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>> convex_cut(const\
+    \ std::vector<Point2d<T_P>> &g, Point2d<T_P> p1, Point2d<T_P> p2) {\n    assert(p1\
+    \ != p2);\n    std::vector<Point2d<T_P>> ret;\n    for (int i = 0; i < (int)g.size();\
+    \ i++) {\n        const Point2d<T_P> &now = g[i], &nxt = g[(i + 1) % g.size()];\n\
+    \        if (ccw(p1, p2, now) != -1) ret.push_back(now);\n        if ((ccw(p1,\
+    \ p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) {\n            ret.push_back(lines_crosspoint(now,\
+    \ nxt - now, p1, p2 - p1));\n        }\n    }\n    return ret;\n}\n\n// 2\u5186\
+    \u306E\u4EA4\u70B9 (ABC157F)\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>>\
+    \ IntersectTwoCircles(const Point2d<T_P> &Ca, double Ra, const Point2d<T_P> &Cb,\
+    \ double Rb) {\n    double d = (Ca - Cb).norm();\n    if (Ra + Rb < d) return\
+    \ {};\n    double rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);\n    double rs =\
+    \ sqrt(Ra * Ra - rc * rc);\n    Point2d<T_P> diff = (Cb - Ca) / d;\n    return\
+    \ {Ca + diff * Point2d<T_P>(rc, rs), Ca + diff * Point2d<T_P>(rc, -rs)};\n}\n\n\
+    // Solve |x0 + vt| = R (SRM 543 Div.1 1000, GCJ 2016 R3 C)\ntemplate <typename\
+    \ PointNd, typename Float>\nstd::vector<Float> IntersectCircleLine(const PointNd\
+    \ &x0, const PointNd &v, Float R) {\n    Float b = Float(x0.dot(v)) / v.norm2();\n\
+    \    Float c = Float(x0.norm2() - Float(R) * R) / v.norm2();\n    if (b * b -\
+    \ c < 0) return {};\n    Float ret1 = -b + sqrtl(b * b - c) * (b > 0 ? -1 : 1);\n\
+    \    Float ret2 = c / ret1;\n    return ret1 < ret2 ? std::vector<Float>{ret1,\
+    \ ret2} : std::vector<Float>{ret2, ret1};\n}\n\n// Distance between point p <->\
+    \ line ab\ntemplate <typename PointFloat>\ndecltype(PointFloat::x) DistancePointLine(const\
+    \ PointFloat &p, const PointFloat &a, const PointFloat &b) {\n    assert(a !=\
+    \ b);\n    return (b - a).absdet(p - a) / (b - a).norm();\n}\n\n// Distance between\
+    \ point p <-> line segment ab\ntemplate <typename PointFloat>\ndecltype(PointFloat::x)\
+    \ DistancePointSegment(const PointFloat &p, const PointFloat &a, const PointFloat\
+    \ &b) {\n    if (a == b) {\n        return (p - a).norm();\n    } else if ((p\
+    \ - a).dot(b - a) <= 0) {\n        return (p - a).norm();\n    } else if ((p -\
+    \ b).dot(a - b) <= 0) {\n        return (p - b).norm();\n    } else {\n      \
+    \  return DistancePointLine<PointFloat>(p, a, b);\n    }\n}\n\n// Area of polygon\
+    \ (might be negative)\ntemplate <typename T_P> T_P signed_area_of_polygon(const\
+    \ std::vector<Point2d<T_P>> &poly) {\n    T_P area = 0;\n    for (size_t i = 0;\
+    \ i < poly.size(); i++) area += poly[i].det(poly[(i + 1) % poly.size()]);\n  \
+    \  return area * 0.5;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: geometry/geometry.hpp
   requiredBy:
   - geometry/triangle.hpp
   - geometry/problem_of_apollonius.hpp
-  timestamp: '2021-05-22 23:22:58+09:00'
+  timestamp: '2021-05-28 14:56:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - geometry/test/circumcenter.test.cpp
