@@ -6,27 +6,28 @@
 
 // CUT begin
 namespace SPRP {
-// <http://miller-rabin.appspot.com/>
+// http://miller-rabin.appspot.com/
 const std::vector<std::vector<__int128>> bases{
     {126401071349994536},                              // < 291831
     {336781006125, 9639812373923155},                  // < 1050535501 (1e9)
     {2, 2570940, 211991001, 3749873356},               // < 47636622961201 (4e13)
-    {2, 325, 9375, 28178, 450775, 9780504, 1795265022} // <= 1e64
+    {2, 325, 9375, 28178, 450775, 9780504, 1795265022} // <= 2^64
 };
 inline int get_id(long long n) {
-    if (n < 291831)
+    if (n < 291831) {
         return 0;
-    else if (n < 1050535501)
+    } else if (n < 1050535501) {
         return 1;
-    else if (n < 47636622961201)
+    } else if (n < 47636622961201)
         return 2;
-    else
+    else {
         return 3;
+    }
 }
 } // namespace SPRP
 
 // Miller-Rabin primality test
-// <https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95>
+// https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95
 // Complexity: O(lg n) per query
 struct {
     long long modpow(__int128 x, __int128 n, long long mod) noexcept {
@@ -40,12 +41,13 @@ struct {
         int s = __builtin_ctzll(n - 1);
 
         for (__int128 a : SPRP::bases[SPRP::get_id(n)]) {
+            if (a % n == 0) continue;
             a = modpow(a, (n - 1) >> s, n);
             bool may_composite = true;
-            if (!a) return true;
             if (a == 1) continue;
-            for (int r = s; r--; a = a * a % n)
+            for (int r = s; r--; a = a * a % n) {
                 if (a == n - 1) may_composite = false;
+            }
             if (may_composite) return false;
         }
         return true;

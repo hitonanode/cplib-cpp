@@ -1,5 +1,5 @@
 #include "../factorize.hpp"
-#define PROBLEM "https://yukicoder.me/problems/1967"
+#define PROBLEM "https://yukicoder.me/problems/no/3030"
 #include <iostream>
 
 int main() {
