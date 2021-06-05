@@ -53,6 +53,7 @@ template <typename T_P> struct Point2d {
 };
 template <> double Point2d<double>::EPS = 1e-9;
 template <> long double Point2d<long double>::EPS = 1e-12;
+template <> long long Point2d<long long>::EPS = 0;
 
 template <typename T_P>
 int ccw(const Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) { // a->b->cの曲がり方
@@ -98,18 +99,19 @@ Point2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P> r2,
     return r1 + v1 * (v2.det(r2 - r1) / v2.det(v1));
 }
 
-// Whether two segments s1t1 & s2t2 intersect or not (not include endpoints)
+// Whether two segments s1t1 & s2t2 intersect or not (endpoints not included)
 // Google Code Jam 2013 Round 3 - Rural Planning
-template <typename T> int intersect_open_segments(Point2d<T> s1, Point2d<T> t1, Point2d<T> s2, Point2d<T> t2) {
-    if (s1 == t1 or s2 == t2) return false;
-    Point2d<T> v1 = t1 - s1, v2 = t2 - s2;
+// Google Code Jam 2021 Round 3 - Fence Design
+template <typename T> bool intersect_open_segments(Point2d<T> s1, Point2d<T> t1, Point2d<T> s2, Point2d<T> t2) {
+    if (s1 == t1 or s2 == t2) return false; // Not segment but point
     int nbad = 0;
     for (int t = 0; t < 2; t++) {
+        Point2d<T> v1 = t1 - s1, v2 = t2 - s2;
         T den = v2.det(v1);
         if (den == 0) {
             if (s1.det(v1) == s2.det(v1)) {
-                auto L1 = s1.dot(v1), R1 = (s1 + v1).dot(v1);
-                auto L2 = s2.dot(v1), R2 = (s2 + v2).dot(v1);
+                auto L1 = s1.dot(v1), R1 = t1.dot(v1);
+                auto L2 = s2.dot(v1), R2 = t2.dot(v1);
                 if (L1 > R1) std::swap(L1, R1);
                 if (L2 > R2) std::swap(L2, R2);
                 if (L1 > L2) std::swap(L1, L2), std::swap(R1, R2);
@@ -117,17 +119,25 @@ template <typename T> int intersect_open_segments(Point2d<T> s1, Point2d<T> t1, 
             } else {
                 return false;
             }
-        }
-        auto num = v2.det(s2 - s1);
-        if (den * num < 0 or (num >= den and den > 0) or (num <= den and den < 0)) {
-            //
         } else {
-            nbad++;
+            auto num = v2.det(s2 - s1);
+            if ((0 < num and num < den) or (den < num and num < 0)) nbad++;
         }
         std::swap(s1, s2);
-        std::swap(v1, v2);
+        std::swap(t1, t2);
     }
-    return nbad >= 2;
+    return nbad == 2;
+}
+
+// Whether point p is on segment (s, t) (endpoints not included)
+// Google Code Jam 2013 Round 3 - Rural Planning
+template <typename PointNd> bool is_point_on_open_segment(PointNd s, PointNd t, PointNd p) {
+    if (s == t) return false; // not segment but point
+    if (p == s or p == t) return false;
+    auto v = t - s, w = p - s;
+    if (v.absdet(w)) return false;
+    auto vv = v.dot(v), vw = v.dot(w);
+    return vw > 0 and vw < vv;
 }
 
 // Convex cut
