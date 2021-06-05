@@ -46,20 +46,20 @@ data:
     \ x >> y;\n        p = Point2d(x, y);\n        return is;\n    }\n    friend std::ostream\
     \ &operator<<(std::ostream &os, const Point2d &p) {\n        os << '(' << p.x\
     \ << ',' << p.y << ')';\n        return os;\n    }\n};\ntemplate <> double Point2d<double>::EPS\
-    \ = 1e-9;\ntemplate <> long double Point2d<long double>::EPS = 1e-12;\n\ntemplate\
-    \ <typename T_P>\nint ccw(const Point2d<T_P> &a, const Point2d<T_P> &b, const\
-    \ Point2d<T_P> &c) { // a->b->c\u306E\u66F2\u304C\u308A\u65B9\n    Point2d<T_P>\
-    \ v1 = b - a;\n    Point2d<T_P> v2 = c - a;\n    if (v1.det(v2) > Point2d<T_P>::EPS)\
-    \ return 1;   // \u5DE6\u6298\n    if (v1.det(v2) < -Point2d<T_P>::EPS) return\
-    \ -1; // \u53F3\u6298\n    if (v1.dot(v2) < -Point2d<T_P>::EPS) return 2;  //\
-    \ c-a-b\n    if (v1.norm() < v2.norm()) return -2;           // a-b-c\n    return\
-    \ 0;                                       // a-c-b\n}\n\n// Convex hull \uFF08\
-    \u51F8\u5305\uFF09\n// return: IDs of vertices used for convex hull, counterclockwise\n\
-    // include_boundary: If true, interior angle pi is allowed\ntemplate <typename\
-    \ T_P>\nstd::vector<int> convex_hull(const std::vector<Point2d<T_P>> &ps, bool\
-    \ include_boundary = false) {\n    int n = ps.size();\n    if (n <= 1) return\
-    \ std::vector<int>(n, 0);\n    std::vector<std::pair<Point2d<T_P>, int>> points(n);\n\
-    \    for (size_t i = 0; i < ps.size(); i++) points[i] = std::make_pair(ps[i],\
+    \ = 1e-9;\ntemplate <> long double Point2d<long double>::EPS = 1e-12;\ntemplate\
+    \ <> long long Point2d<long long>::EPS = 0;\n\ntemplate <typename T_P>\nint ccw(const\
+    \ Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) { // a->b->c\u306E\
+    \u66F2\u304C\u308A\u65B9\n    Point2d<T_P> v1 = b - a;\n    Point2d<T_P> v2 =\
+    \ c - a;\n    if (v1.det(v2) > Point2d<T_P>::EPS) return 1;   // \u5DE6\u6298\n\
+    \    if (v1.det(v2) < -Point2d<T_P>::EPS) return -1; // \u53F3\u6298\n    if (v1.dot(v2)\
+    \ < -Point2d<T_P>::EPS) return 2;  // c-a-b\n    if (v1.norm() < v2.norm()) return\
+    \ -2;           // a-b-c\n    return 0;                                      \
+    \ // a-c-b\n}\n\n// Convex hull \uFF08\u51F8\u5305\uFF09\n// return: IDs of vertices\
+    \ used for convex hull, counterclockwise\n// include_boundary: If true, interior\
+    \ angle pi is allowed\ntemplate <typename T_P>\nstd::vector<int> convex_hull(const\
+    \ std::vector<Point2d<T_P>> &ps, bool include_boundary = false) {\n    int n =\
+    \ ps.size();\n    if (n <= 1) return std::vector<int>(n, 0);\n    std::vector<std::pair<Point2d<T_P>,\
+    \ int>> points(n);\n    for (size_t i = 0; i < ps.size(); i++) points[i] = std::make_pair(ps[i],\
     \ i);\n    std::sort(points.begin(), points.end());\n    int k = 0;\n    std::vector<std::pair<Point2d<T_P>,\
     \ int>> qs(2 * n);\n    auto ccw_check = [&](int c) { return include_boundary\
     \ ? (c == -1) : (c <= 0); };\n    for (int i = 0; i < n; i++) {\n        while\
@@ -72,22 +72,28 @@ data:
     \ T_P>\nPoint2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P>\
     \ r2, Point2d<T_P> v2) {\n    assert(v2.det(v1) != 0);\n    return r1 + v1 * (v2.det(r2\
     \ - r1) / v2.det(v1));\n}\n\n// Whether two segments s1t1 & s2t2 intersect or\
-    \ not (not include endpoints)\n// Google Code Jam 2013 Round 3 - Rural Planning\n\
-    template <typename T> int intersect_open_segments(Point2d<T> s1, Point2d<T> t1,\
-    \ Point2d<T> s2, Point2d<T> t2) {\n    if (s1 == t1 or s2 == t2) return false;\n\
-    \    Point2d<T> v1 = t1 - s1, v2 = t2 - s2;\n    int nbad = 0;\n    for (int t\
-    \ = 0; t < 2; t++) {\n        T den = v2.det(v1);\n        if (den == 0) {\n \
-    \           if (s1.det(v1) == s2.det(v1)) {\n                auto L1 = s1.dot(v1),\
-    \ R1 = (s1 + v1).dot(v1);\n                auto L2 = s2.dot(v1), R2 = (s2 + v2).dot(v1);\n\
-    \                if (L1 > R1) std::swap(L1, R1);\n                if (L2 > R2)\
-    \ std::swap(L2, R2);\n                if (L1 > L2) std::swap(L1, L2), std::swap(R1,\
-    \ R2);\n                return R1 > L2;\n            } else {\n              \
-    \  return false;\n            }\n        }\n        auto num = v2.det(s2 - s1);\n\
-    \        if (den * num < 0 or (num >= den and den > 0) or (num <= den and den\
-    \ < 0)) {\n            //\n        } else {\n            nbad++;\n        }\n\
-    \        std::swap(s1, s2);\n        std::swap(v1, v2);\n    }\n    return nbad\
-    \ >= 2;\n}\n\n// Convex cut\n// Cut the convex polygon g by line p1->p2 and return\
-    \ the leftward one\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>> convex_cut(const\
+    \ not (endpoints not included)\n// Google Code Jam 2013 Round 3 - Rural Planning\n\
+    // Google Code Jam 2021 Round 3 - Fence Design\ntemplate <typename T> bool intersect_open_segments(Point2d<T>\
+    \ s1, Point2d<T> t1, Point2d<T> s2, Point2d<T> t2) {\n    if (s1 == t1 or s2 ==\
+    \ t2) return false; // Not segment but point\n    int nbad = 0;\n    for (int\
+    \ t = 0; t < 2; t++) {\n        Point2d<T> v1 = t1 - s1, v2 = t2 - s2;\n     \
+    \   T den = v2.det(v1);\n        if (den == 0) {\n            if (s1.det(v1) ==\
+    \ s2.det(v1)) {\n                auto L1 = s1.dot(v1), R1 = t1.dot(v1);\n    \
+    \            auto L2 = s2.dot(v1), R2 = t2.dot(v1);\n                if (L1 >\
+    \ R1) std::swap(L1, R1);\n                if (L2 > R2) std::swap(L2, R2);\n  \
+    \              if (L1 > L2) std::swap(L1, L2), std::swap(R1, R2);\n          \
+    \      return R1 > L2;\n            } else {\n                return false;\n\
+    \            }\n        } else {\n            auto num = v2.det(s2 - s1);\n  \
+    \          if ((0 < num and num < den) or (den < num and num < 0)) nbad++;\n \
+    \       }\n        std::swap(s1, s2);\n        std::swap(t1, t2);\n    }\n   \
+    \ return nbad == 2;\n}\n\n// Whether point p is on segment (s, t) (endpoints not\
+    \ included)\n// Google Code Jam 2013 Round 3 - Rural Planning\ntemplate <typename\
+    \ PointNd> bool is_point_on_open_segment(PointNd s, PointNd t, PointNd p) {\n\
+    \    if (s == t) return false; // not segment but point\n    if (p == s or p ==\
+    \ t) return false;\n    auto v = t - s, w = p - s;\n    if (v.absdet(w)) return\
+    \ false;\n    auto vv = v.dot(v), vw = v.dot(w);\n    return vw > 0 and vw < vv;\n\
+    }\n\n// Convex cut\n// Cut the convex polygon g by line p1->p2 and return the\
+    \ leftward one\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>> convex_cut(const\
     \ std::vector<Point2d<T_P>> &g, Point2d<T_P> p1, Point2d<T_P> p2) {\n    assert(p1\
     \ != p2);\n    std::vector<Point2d<T_P>> ret;\n    for (int i = 0; i < (int)g.size();\
     \ i++) {\n        const Point2d<T_P> &now = g[i], &nxt = g[(i + 1) % g.size()];\n\
@@ -144,7 +150,7 @@ data:
   isVerificationFile: true
   path: geometry/test/convex_hull.test.cpp
   requiredBy: []
-  timestamp: '2021-05-28 14:56:25+09:00'
+  timestamp: '2021-06-06 03:50:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: geometry/test/convex_hull.test.cpp
