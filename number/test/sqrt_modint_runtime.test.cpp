@@ -9,7 +9,7 @@ int main() {
     while (T--) {
         int Y, P;
         cin >> Y >> P;
-        ModIntRuntime::mod = P;
+        ModIntRuntime::set_mod(P);
         ModIntRuntime m = Y;
         if (Y) {
             m = m.sqrt();
