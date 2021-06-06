@@ -11,8 +11,8 @@
 // CUT begin
 // Find maximum matchings in general graph using the Tutte matrix (The Rabin-Vazirani algorithm)
 // Complexity: O(N^3)
-// Reference: <https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h>
-//            <https://kopricky.github.io/code/Academic/maximum_matching.html>
+// Reference: https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h
+//            https://kopricky.github.io/code/Academic/maximum_matching.html
 std::vector<std::pair<int, int>> generalMatching(int N, std::vector<std::pair<int, int>> ed) {
     using MODINT = ModInt<1000000007>;
     std::vector<std::pair<int, int>> ed_tmp;
@@ -63,7 +63,7 @@ std::vector<std::pair<int, int>> generalMatching(int N, std::vector<std::pair<in
     const int D = idx_inv.size();
     if (D == 0) { return ret; }
     std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());
-    std::uniform_int_distribution<int> d(MODINT::get_mod());
+    std::uniform_int_distribution<int> d(MODINT::mod());
 
     std::vector<std::vector<MODINT>> mat(D, std::vector<MODINT>(D));
     for (auto p : ed) {

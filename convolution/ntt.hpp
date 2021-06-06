@@ -13,7 +13,8 @@
 // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.
 // input: a (size: n), b (size: m)
 // return: vector (size: n + m - 1)
-template <typename MODINT> std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner = false);
+template <typename MODINT>
+std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner = false);
 
 constexpr int nttprimes[3] = {998244353, 167772161, 469762049};
 
@@ -24,7 +25,7 @@ constexpr int nttprimes[3] = {998244353, 167772161, 469762049};
 template <typename MODINT> void ntt(std::vector<MODINT> &a, bool is_inverse = false) {
     int n = a.size();
     if (n == 1) return;
-    static const int mod = MODINT::get_mod();
+    static const int mod = MODINT::mod();
     static const MODINT root = MODINT::get_primitive_root();
     assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);
 
@@ -81,7 +82,9 @@ long long garner_ntt_(int r0, int r1, int r2, int mod) {
     auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0]) * v1) * m01_inv_m2;
     return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val) % mod;
 }
-template <typename MODINT> std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner) {
+template <typename MODINT>
+std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner) {
+    if (a.empty() or b.empty()) return {};
     int sz = 1, n = a.size(), m = b.size();
     while (sz < n + m) sz <<= 1;
     if (sz <= 16) {
@@ -91,14 +94,15 @@ template <typename MODINT> std::vector<MODINT> nttconv(std::vector<MODINT> a, st
         }
         return ret;
     }
-    int mod = MODINT::get_mod();
+    int mod = MODINT::mod();
     if (skip_garner or std::find(std::begin(nttprimes), std::end(nttprimes), mod) != std::end(nttprimes)) {
         a.resize(sz), b.resize(sz);
         if (a == b) {
             ntt(a, false);
             b = a;
-        } else
+        } else {
             ntt(a, false), ntt(b, false);
+        }
         for (int i = 0; i < sz; i++) a[i] *= b[i];
         ntt(a, true);
         a.resize(n + m - 1);
@@ -110,7 +114,7 @@ template <typename MODINT> std::vector<MODINT> nttconv(std::vector<MODINT> a, st
         auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);
         auto ntt2 = nttconv_<nttprimes[2]>(ai, bi);
         a.resize(n + m - 1);
-        for (int i = 0; i < n + m - 1; i++) { a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod); }
+        for (int i = 0; i < n + m - 1; i++) a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);
     }
     return a;
 }
