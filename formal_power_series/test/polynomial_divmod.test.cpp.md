@@ -4,9 +4,9 @@ data:
   - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':question:'
-    path: formal_power_series/formal_power_series.hpp
-    title: formal_power_series/formal_power_series.hpp
+  - icon: ':x:'
+    path: formal_power_series/polynomial_divmod.hpp
+    title: formal_power_series/polynomial_divmod.hpp
   - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
@@ -17,12 +17,12 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
+    PROBLEM: https://judge.yosupo.jp/problem/division_of_polynomials
     links:
-    - https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
-  bundledCode: "#line 1 \"formal_power_series/test/stirling_number_of_1st.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
-    \n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include <vector>\n\
+    - https://judge.yosupo.jp/problem/division_of_polynomials
+  bundledCode: "#line 1 \"formal_power_series/test/polynomial_divmod.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/division_of_polynomials\"\n\
+    #line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include <vector>\n\
     \n// CUT begin\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n\
     #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
     \ long;\n    MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
@@ -152,131 +152,75 @@ data:
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n#line 6 \"formal_power_series/formal_power_series.hpp\"\nusing\
-    \ namespace std;\n\n// CUT begin\n// Formal Power Series (\u5F62\u5F0F\u7684\u51AA\
-    \u7D1A\u6570) based on ModInt<mod> / ModIntRuntime\n// Reference: https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html\n\
-    template <typename T> struct FormalPowerSeries : vector<T> {\n    using vector<T>::vector;\n\
-    \    using P = FormalPowerSeries;\n\n    void shrink() {\n        while (this->size()\
-    \ and this->back() == T(0)) this->pop_back();\n    }\n\n    P operator+(const\
-    \ P &r) const { return P(*this) += r; }\n    P operator+(const T &v) const { return\
-    \ P(*this) += v; }\n    P operator-(const P &r) const { return P(*this) -= r;\
-    \ }\n    P operator-(const T &v) const { return P(*this) -= v; }\n    P operator*(const\
-    \ P &r) const { return P(*this) *= r; }\n    P operator*(const T &v) const { return\
-    \ P(*this) *= v; }\n    P operator/(const P &r) const { return P(*this) /= r;\
-    \ }\n    P operator/(const T &v) const { return P(*this) /= v; }\n    P operator%(const\
-    \ P &r) const { return P(*this) %= r; }\n\n    P &operator+=(const P &r) {\n \
-    \       if (r.size() > this->size()) this->resize(r.size());\n        for (int\
-    \ i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n        shrink();\n    \
-    \    return *this;\n    }\n    P &operator+=(const T &v) {\n        if (this->empty())\
-    \ this->resize(1);\n        (*this)[0] += v;\n        shrink();\n        return\
-    \ *this;\n    }\n    P &operator-=(const P &r) {\n        if (r.size() > this->size())\
-    \ this->resize(r.size());\n        for (int i = 0; i < (int)r.size(); i++) (*this)[i]\
-    \ -= r[i];\n        shrink();\n        return *this;\n    }\n    P &operator-=(const\
-    \ T &v) {\n        if (this->empty()) this->resize(1);\n        (*this)[0] -=\
-    \ v;\n        shrink();\n        return *this;\n    }\n    P &operator*=(const\
-    \ T &v) {\n        for (auto &x : (*this)) x *= v;\n        shrink();\n      \
-    \  return *this;\n    }\n    P &operator*=(const P &r) {\n        if (this->empty()\
-    \ || r.empty())\n            this->clear();\n        else {\n            auto\
-    \ ret = nttconv(*this, r);\n            *this = P(ret.begin(), ret.end());\n \
-    \       }\n        return *this;\n    }\n    P &operator%=(const P &r) {\n   \
-    \     *this -= *this / r * r;\n        shrink();\n        return *this;\n    }\n\
-    \    P operator-() const {\n        P ret = *this;\n        for (auto &v : ret)\
-    \ v = -v;\n        return ret;\n    }\n    P &operator/=(const T &v) {\n     \
-    \   assert(v != T(0));\n        for (auto &x : (*this)) x /= v;\n        return\
-    \ *this;\n    }\n    P &operator/=(const P &r) {\n        if (this->size() < r.size())\
-    \ {\n            this->clear();\n            return *this;\n        }\n      \
-    \  int n = (int)this->size() - r.size() + 1;\n        return *this = (reversed().pre(n)\
-    \ * r.reversed().inv(n)).pre(n).reversed(n);\n    }\n    P pre(int sz) const {\n\
-    \        P ret(this->begin(), this->begin() + min((int)this->size(), sz));\n \
-    \       ret.shrink();\n        return ret;\n    }\n    P operator>>(int sz) const\
-    \ {\n        if ((int)this->size() <= sz) return {};\n        return P(this->begin()\
-    \ + sz, this->end());\n    }\n    P operator<<(int sz) const {\n        if (this->empty())\
-    \ return {};\n        P ret(*this);\n        ret.insert(ret.begin(), sz, T(0));\n\
-    \        return ret;\n    }\n\n    P reversed(int deg = -1) const {\n        assert(deg\
-    \ >= -1);\n        P ret(*this);\n        if (deg != -1) ret.resize(deg, T(0));\n\
-    \        reverse(ret.begin(), ret.end());\n        ret.shrink();\n        return\
-    \ ret;\n    }\n\n    P differential() const { // formal derivative (differential)\
-    \ of f.p.s.\n        const int n = (int)this->size();\n        P ret(max(0, n\
-    \ - 1));\n        for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * T(i);\n\
-    \        return ret;\n    }\n\n    P integral() const {\n        const int n =\
-    \ (int)this->size();\n        P ret(n + 1);\n        ret[0] = T(0);\n        for\
-    \ (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / T(i + 1);\n        return\
-    \ ret;\n    }\n\n    P inv(int deg) const {\n        assert(deg >= -1);\n    \
-    \    assert(this->size() and ((*this)[0]) != T(0)); // Requirement: F(0) != 0\n\
-    \        const int n = this->size();\n        if (deg == -1) deg = n;\n      \
-    \  P ret({T(1) / (*this)[0]});\n        for (int i = 1; i < deg; i <<= 1) { ret\
-    \ = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1); }\n        ret = ret.pre(deg);\n\
-    \        ret.shrink();\n        return ret;\n    }\n\n    P log(int deg = -1)\
-    \ const {\n        assert(deg >= -1);\n        assert(this->size() and ((*this)[0])\
-    \ == T(1)); // Requirement: F(0) = 1\n        const int n = (int)this->size();\n\
-    \        if (deg == 0) return {};\n        if (deg == -1) deg = n;\n        return\
-    \ (this->differential() * this->inv(deg)).pre(deg - 1).integral();\n    }\n\n\
-    \    P sqrt(int deg = -1) const {\n        assert(deg >= -1);\n        const int\
-    \ n = (int)this->size();\n        if (deg == -1) deg = n;\n        if (this->empty())\
-    \ return {};\n        if ((*this)[0] == T(0)) {\n            for (int i = 1; i\
-    \ < n; i++)\n                if ((*this)[i] != T(0)) {\n                    if\
-    \ ((i & 1) or deg - i / 2 <= 0) return {};\n                    return (*this\
-    \ >> i).sqrt(deg - i / 2) << (i / 2);\n                }\n            return {};\n\
-    \        }\n        T sqrtf0 = (*this)[0].sqrt();\n        if (sqrtf0 == T(0))\
-    \ return {};\n\n        P y = (*this) / (*this)[0], ret({T(1)});\n        T inv2\
-    \ = T(1) / T(2);\n        for (int i = 1; i < deg; i <<= 1) { ret = (ret + y.pre(i\
-    \ << 1) * ret.inv(i << 1)) * inv2; }\n        return ret.pre(deg) * sqrtf0;\n\
-    \    }\n\n    P exp(int deg = -1) const {\n        assert(deg >= -1);\n      \
-    \  assert(this->empty() or ((*this)[0]) == T(0)); // Requirement: F(0) = 0\n \
-    \       const int n = (int)this->size();\n        if (deg == -1) deg = n;\n  \
-    \      P ret({T(1)});\n        for (int i = 1; i < deg; i <<= 1) { ret = (ret\
-    \ * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1); }\n        return ret.pre(deg);\n\
-    \    }\n\n    P pow(long long k, int deg = -1) const {\n        assert(deg >=\
-    \ -1);\n        const int n = (int)this->size();\n        if (deg == -1) deg =\
-    \ n;\n        for (int i = 0; i < n; i++) {\n            if ((*this)[i] != T(0))\
-    \ {\n                T rev = T(1) / (*this)[i];\n                P C = (*this)\
-    \ * rev, D(n - i);\n                for (int j = i; j < n; j++) D[j - i] = C.coeff(j);\n\
-    \                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].pow(k);\n     \
-    \           if (k * (i > 0) > deg or k * i > deg) return {};\n               \
-    \ P E(deg);\n                long long S = i * k;\n                for (int j\
-    \ = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];\n            \
-    \    E.shrink();\n                return E;\n            }\n        }\n      \
-    \  return *this;\n    }\n\n    // Calculate f(X + c) from f(X), O(NlogN)\n   \
-    \ P shift(T c) const {\n        const int n = (int)this->size();\n        P ret\
-    \ = *this;\n        for (int i = 0; i < n; i++) { ret[i] *= T(i).fac(); }\n  \
-    \      reverse(ret.begin(), ret.end());\n        P exp_cx(n, 1);\n        for\
-    \ (int i = 1; i < n; i++) { exp_cx[i] = exp_cx[i - 1] * c / i; }\n        ret\
-    \ = (ret * exp_cx), ret.resize(n);\n        reverse(ret.begin(), ret.end());\n\
-    \        for (int i = 0; i < n; i++) { ret[i] /= T(i).fac(); }\n        return\
-    \ ret;\n    }\n\n    T coeff(int i) const {\n        if ((int)this->size() <=\
-    \ i or i < 0) return T(0);\n        return (*this)[i];\n    }\n\n    T eval(T\
-    \ x) const {\n        T ret = 0, w = 1;\n        for (auto &v : *this) ret +=\
-    \ w * v, w *= x;\n        return ret;\n    }\n};\n#line 5 \"formal_power_series/test/stirling_number_of_1st.test.cpp\"\
-    \nusing namespace std;\n\nFormalPowerSeries<ModInt<998244353>> solve(int N) {\n\
-    \    if (N == 0) { return {1}; }\n    if (N == 1) { return {0, 1}; }\n    int\
-    \ k = N / 2;\n    auto f = solve(k);\n    f *= f.shift(-k);\n    if (N % 2) {\
-    \ f *= {-(N - 1), 1}; }\n    return f;\n}\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n    int N;\n    cin >> N;\n    auto ret = solve(N);\n\
-    \    for (int i = 0; i <= N; i++) cout << ret.coeff(i) << (i == N ? '\\n' : '\
-    \ ');\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
-    \n#include \"../../modint.hpp\"\n#include \"../formal_power_series.hpp\"\n#include\
-    \ <iostream>\nusing namespace std;\n\nFormalPowerSeries<ModInt<998244353>> solve(int\
-    \ N) {\n    if (N == 0) { return {1}; }\n    if (N == 1) { return {0, 1}; }\n\
-    \    int k = N / 2;\n    auto f = solve(k);\n    f *= f.shift(-k);\n    if (N\
-    \ % 2) { f *= {-(N - 1), 1}; }\n    return f;\n}\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n    int N;\n    cin >> N;\n    auto ret = solve(N);\n\
-    \    for (int i = 0; i <= N; i++) cout << ret.coeff(i) << (i == N ? '\\n' : '\
-    \ ');\n}\n"
+    \ return a;\n}\n#line 5 \"formal_power_series/polynomial_divmod.hpp\"\n#include\
+    \ <utility>\n#line 7 \"formal_power_series/polynomial_divmod.hpp\"\n\n// CUT begin\n\
+    // Calculate f^{-1}(x) mod x^l: Inverse of polynomial mod x^l in $O(N \\log N)$\
+    \ complexity.\n// return: vector of length l\n// Requirement:\n// - NTT-friendliness\
+    \ for faster implementation.\n// - f[0] has its inverse. Otherwise, return empty\
+    \ vector `{}`.\n// Reference: http://people.csail.mit.edu/madhu/ST12/scribe/lect06.pdf\n\
+    template <typename ModInt> std::vector<ModInt> inv_of_poly_mod_monomial(const\
+    \ std::vector<ModInt> &f, int l) {\n    assert(l >= 0);\n    if (f.empty()) return\
+    \ {};\n    if (l == 0) return {};\n    const ModInt ret0 = f[0].inv();\n    if\
+    \ (ret0 * f[0] != ModInt(1)) return {};\n    std::vector<ModInt> ret{ret0};\n\
+    \    unsigned sz = 1;\n    while (ret.size() < l) {\n        std::vector<ModInt>\
+    \ h0(sz * 2), h1(sz * 2), a(sz * 2);\n        std::copy(ret.begin(), ret.end(),\
+    \ a.begin());\n        std::copy(f.begin(), f.begin() + std::min<unsigned>(sz,\
+    \ f.size()), h0.begin());\n        if (f.size() >= sz) {\n            std::copy(f.begin()\
+    \ + sz, f.begin() + std::min<unsigned>(sz * 2, f.size()), h1.begin());\n     \
+    \   }\n        ntt(a, false);\n        ntt(h0, false);\n        ntt(h1, false);\n\
+    \        for (unsigned i = 0; i < sz * 2; i++) h0[i] *= a[i];\n        for (unsigned\
+    \ i = 0; i < sz * 2; i++) h1[i] *= a[i];\n        ntt(h0, true);\n        ntt(h1,\
+    \ true);\n        for (unsigned i = 0; i < sz; i++) h1[i] += h0[i + sz];\n   \
+    \     std::fill(h1.begin() + sz, h1.end(), 0);\n        ntt(h1, false);\n    \
+    \    for (unsigned i = 0; i < sz * 2; i++) h1[i] *= a[i];\n        ntt(h1, true);\n\
+    \        ret.resize(std::min<unsigned>(sz * 2, l));\n        for (unsigned i =\
+    \ sz; i < ret.size(); i++) ret[i] = -h1[i - sz];\n        sz *= 2;\n    }\n  \
+    \  assert(ret.size() == l);\n    return ret;\n}\n\n// Solve f(x) = g(x) * q(x)\
+    \ + r(x), deg(r) < deg(g) for given f(x) and g(x)\n// return: (q(x), r(x))\n//\
+    \ requirement: f, g: nonzero, f.back() != 0, g.back() != 0\ntemplate <typename\
+    \ ModInt>\nstd::pair<std::vector<ModInt>, std::vector<ModInt>> polynomial_division(const\
+    \ std::vector<ModInt> &f, const std::vector<ModInt> &g) {\n    assert(f.size()\
+    \ and f.back() != 0);\n    assert(g.size() and g.back() != 0);\n    if (f.size()\
+    \ < g.size()) { return {{}, f}; }\n    const int l = f.size() - g.size();\n  \
+    \  std::vector<ModInt> revf(l), revg(l);\n    for (int i = 0; i < l; i++) revf[i]\
+    \ = f[f.size() - 1 - i];\n    for (int i = 0; i < std::min<int>(l, g.size());\
+    \ i++) revg[i] = g[g.size() - 1 - i];\n    auto revginv = inv_of_poly_mod_monomial(revg,\
+    \ l);\n    auto q = nttconv(revginv, revf);\n    q.resize(l + 1);\n    std::reverse(q.begin(),\
+    \ q.end());\n    int d = int(g.size()) - 1;\n    q[0] = f[d];\n    for (int e\
+    \ = std::max(0, d - int(q.size()) + 1); e < d; e++) q[0] -= g[e] * q[d - e];\n\
+    \    q[0] /= g.back();\n    auto gq = nttconv(g, q);\n    std::vector<ModInt>\
+    \ r(g.size() - 1);\n    for (unsigned i = 0; i < r.size(); i++) r[i] = f[i] -\
+    \ gq[i];\n    while (r.size() and r.back() == 0) r.pop_back();\n    return {q,\
+    \ r};\n}\n#line 6 \"formal_power_series/test/polynomial_divmod.test.cpp\"\nusing\
+    \ namespace std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N, M;\n    cin >> N >> M;\n    vector<mint>\
+    \ f(N), g(M), q, r;\n    for (auto &x : f) cin >> x;\n    for (auto &x : g) cin\
+    \ >> x;\n    tie(q, r) = polynomial_division(f, g);\n    cout << q.size() << '\
+    \ ' << r.size() << '\\n';\n    for (auto x : q) cout << x << ' ';\n    cout <<\
+    \ '\\n';\n    for (auto x : r) cout << x << ' ';\n    cout << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/division_of_polynomials\"\
+    \n#include \"../polynomial_divmod.hpp\"\n#include \"../../modint.hpp\"\n#include\
+    \ <tuple>\n#include <vector>\nusing namespace std;\nusing mint = ModInt<998244353>;\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N,\
+    \ M;\n    cin >> N >> M;\n    vector<mint> f(N), g(M), q, r;\n    for (auto &x\
+    \ : f) cin >> x;\n    for (auto &x : g) cin >> x;\n    tie(q, r) = polynomial_division(f,\
+    \ g);\n    cout << q.size() << ' ' << r.size() << '\\n';\n    for (auto x : q)\
+    \ cout << x << ' ';\n    cout << '\\n';\n    for (auto x : r) cout << x << ' ';\n\
+    \    cout << '\\n';\n}\n"
   dependsOn:
-  - modint.hpp
-  - formal_power_series/formal_power_series.hpp
+  - formal_power_series/polynomial_divmod.hpp
   - convolution/ntt.hpp
+  - modint.hpp
   isVerificationFile: true
-  path: formal_power_series/test/stirling_number_of_1st.test.cpp
+  path: formal_power_series/test/polynomial_divmod.test.cpp
   requiredBy: []
   timestamp: '2021-06-06 14:54:00+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: formal_power_series/test/stirling_number_of_1st.test.cpp
+documentation_of: formal_power_series/test/polynomial_divmod.test.cpp
 layout: document
 redirect_from:
-- /verify/formal_power_series/test/stirling_number_of_1st.test.cpp
-- /verify/formal_power_series/test/stirling_number_of_1st.test.cpp.html
-title: formal_power_series/test/stirling_number_of_1st.test.cpp
+- /verify/formal_power_series/test/polynomial_divmod.test.cpp
+- /verify/formal_power_series/test/polynomial_divmod.test.cpp.html
+title: formal_power_series/test/polynomial_divmod.test.cpp
 ---

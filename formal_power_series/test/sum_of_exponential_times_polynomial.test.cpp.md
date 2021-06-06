@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/lagrange_interpolation.hpp
     title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\u9593\
       \uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/sum_of_exponential_times_polynomial.hpp
     title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
     title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
@@ -30,101 +30,104 @@ data:
   bundledCode: "#line 1 \"formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
     \n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include <vector>\n\
-    \n// CUT begin\ntemplate <int mod> struct ModInt {\n#if __cplusplus >= 201402L\n\
+    \n// CUT begin\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n\
     #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
-    \ long;\n    MDCONST static int get_mod() { return mod; }\n    static int get_primitive_root()\
+    \ long;\n    MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
     \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
     \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
-    \              int v = mod - 1;\n                for (lint i = 2; i * i <= v;\
-    \ i++)\n                    while (v % i == 0) fac.insert(i), v /= i;\n      \
-    \          if (v > 1) fac.insert(v);\n                for (int g = 1; g < mod;\
-    \ g++) {\n                    bool ok = true;\n                    for (auto i\
-    \ : fac)\n                        if (ModInt(g).pow((mod - 1) / i) == 1) {\n \
-    \                           ok = false;\n                            break;\n\
-    \                        }\n                    if (ok) return g;\n          \
-    \      }\n                return -1;\n            }();\n        }\n        return\
-    \ primitive_root;\n    }\n    int val;\n    MDCONST ModInt() : val(0) {}\n   \
-    \ MDCONST ModInt &_setval(lint v) { return val = (v >= mod ? v - mod : v), *this;\
-    \ }\n    MDCONST ModInt(lint v) { _setval(v % mod + mod); }\n    MDCONST explicit\
-    \ operator bool() const { return val != 0; }\n    MDCONST ModInt operator+(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val + x.val); }\n    MDCONST\
-    \ ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ - x.val + mod); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.val % mod); }\n    MDCONST ModInt operator/(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % mod); }\n \
-    \   MDCONST ModInt operator-() const { return ModInt()._setval(mod - val); }\n\
-    \    MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
+    \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
+    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
+    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
+    \                    bool ok = true;\n                    for (auto i : fac)\n\
+    \                        if (ModInt(g).pow((md - 1) / i) == 1) {\n           \
+    \                 ok = false;\n                            break;\n          \
+    \              }\n                    if (ok) return g;\n                }\n \
+    \               return -1;\n            }();\n        }\n        return primitive_root;\n\
+    \    }\n    int val;\n    MDCONST ModInt() : val(0) {}\n    MDCONST ModInt &_setval(lint\
+    \ v) { return val = (v >= md ? v - md : v), *this; }\n    MDCONST ModInt(lint\
+    \ v) { _setval(v % md + md); }\n    MDCONST explicit operator bool() const { return\
+    \ val != 0; }\n    MDCONST ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ - x.val + md); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
+    \ ModInt()._setval((lint)val * x.val % md); }\n    MDCONST ModInt operator/(const\
+    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % md); }\n  \
+    \  MDCONST ModInt operator-() const { return ModInt()._setval(md - val); }\n \
+    \   MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
     \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
     \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
     \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
     \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % mod + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
-    \ &x) { return ModInt()._setval(a % mod - x.val + mod); }\n    friend MDCONST\
-    \ ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a % mod\
-    \ * x.val % mod); }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
-    \ &x) { return ModInt()._setval(a % mod * x.inv() % mod); }\n    MDCONST bool\
+    \ % md + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt &x)\
+    \ { return ModInt()._setval(a % md - x.val + md); }\n    friend MDCONST ModInt\
+    \ operator*(lint a, const ModInt &x) { return ModInt()._setval(a % md * x.val\
+    \ % md); }\n    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n \
+    \       return ModInt()._setval(a % md * x.inv() % md);\n    }\n    MDCONST bool\
     \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
     \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
     \ operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt,\
     \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
     \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
     \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
-    \ os << x.val; }\n    MDCONST ModInt pow(lint n) const {\n        lint ans = 1,\
-    \ tmp = this->val;\n        while (n) {\n            if (n & 1) ans = ans * tmp\
-    \ % mod;\n            tmp = tmp * tmp % mod, n /= 2;\n        }\n        return\
-    \ ans;\n    }\n\n    static std::vector<long long> facs, invs;\n    MDCONST static\
-    \ void _precalculation(int N) {\n        int l0 = facs.size();\n        if (N\
-    \ <= l0) return;\n        facs.resize(N), invs.resize(N);\n        for (int i\
-    \ = l0; i < N; i++) facs[i] = facs[i - 1] * i % mod;\n        long long facinv\
-    \ = ModInt(facs.back()).pow(mod - 2).val;\n        for (int i = N - 1; i >= l0;\
-    \ i--) {\n            invs[i] = facinv * facs[i - 1] % mod;\n            facinv\
-    \ = facinv * i % mod;\n        }\n    }\n    MDCONST lint inv() const {\n    \
-    \    if (this->val < std::min(mod >> 1, 1 << 21)) {\n            while (this->val\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val];\n\
-    \        } else {\n            return this->pow(mod - 2).val;\n        }\n   \
-    \ }\n    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\n\
+    \ os << x.val; }\n    MDCONST ModInt pow(lint n) const {\n        ModInt ans =\
+    \ 1, tmp = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n \
+    \           tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n  \
+    \  static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static void _precalculation(int\
+    \ N) {\n        int l0 = facs.size();\n        if (N > md) N = md;\n        if\
+    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
+    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
+    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
+    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
+    \ = facinvs[i] * facs[i - 1];\n    }\n    MDCONST lint inv() const {\n       \
+    \ if (this->val < std::min(md >> 1, 1 << 21)) {\n            while (this->val\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val].val;\n\
+    \        } else {\n            return this->pow(md - 2).val;\n        }\n    }\n\
+    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\
+    \    MDCONST ModInt facinv() const {\n        while (this->val >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val];\n    }\n\
     \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
     \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
     \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
     \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
-    \ r.val) ? 0 : this->fac() / ((*this - r).fac() * r.fac());\n    }\n\n    ModInt\
-    \ sqrt() const {\n        if (val == 0) return 0;\n        if (mod == 2) return\
-    \ val;\n        if (pow((mod - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n\
-    \        while (b.pow((mod - 1) / 2) == 1) b += 1;\n        int e = 0, m = mod\
-    \ - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m -\
-    \ 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
-    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
-    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
-    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val, mod - x.val));\n    }\n};\ntemplate <int\
-    \ mod> std::vector<long long> ModInt<mod>::facs = {1};\ntemplate <int mod> std::vector<long\
-    \ long> ModInt<mod>::invs = {0};\n\n// using mint = ModInt<998244353>;\n// using\
-    \ mint = ModInt<1000000007>;\n#line 2 \"number/sieve.hpp\"\n#include <cassert>\n\
-    #include <map>\n#line 5 \"number/sieve.hpp\"\n\n// CUT begin\n// Linear sieve\
-    \ algorithm for fast prime factorization\n// Complexity: O(N) time, O(N) space:\n\
-    // - MAXN = 10^7:  ~44 MB,  80~100 ms (Codeforces / AtCoder GCC, C++17)\n// -\
-    \ MAXN = 10^8: ~435 MB, 810~980 ms (Codeforces / AtCoder GCC, C++17)\n// Reference:\n\
-    // [1] D. Gries, J. Misra, \"A Linear Sieve Algorithm for Finding Prime Numbers,\"\
-    \n//     Communications of the ACM, 21(12), 999-1003, 1978.\n// - https://cp-algorithms.com/algebra/prime-sieve-linear.html\n\
-    // - https://37zigen.com/linear-sieve/\nstruct Sieve {\n    std::vector<int> min_factor;\n\
-    \    std::vector<int> primes;\n    Sieve(int MAXN) : min_factor(MAXN + 1) {\n\
-    \        for (int d = 2; d <= MAXN; d++) {\n            if (!min_factor[d]) {\n\
-    \                min_factor[d] = d;\n                primes.emplace_back(d);\n\
-    \            }\n            for (const auto &p : primes) {\n                if\
-    \ (p > min_factor[d] or d * p > MAXN) break;\n                min_factor[d * p]\
-    \ = p;\n            }\n        }\n    }\n    // Prime factorization for 1 <= x\
-    \ <= MAXN^2\n    // Complexity: O(log x)           (x <= MAXN)\n    //       \
-    \      O(MAXN / log MAXN) (MAXN < x <= MAXN^2)\n    template <typename T> std::map<T,\
-    \ int> factorize(T x) {\n        std::map<T, int> ret;\n        assert(x > 0 and\
-    \ x <= ((long long)min_factor.size() - 1) * ((long long)min_factor.size() - 1));\n\
-    \        for (const auto &p : primes) {\n            if (x < T(min_factor.size()))\
-    \ break;\n            while (!(x % p)) x /= p, ret[p]++;\n        }\n        if\
-    \ (x >= T(min_factor.size())) ret[x]++, x = 1;\n        while (x > 1) ret[min_factor[x]]++,\
-    \ x /= min_factor[x];\n        return ret;\n    }\n    // Enumerate divisors of\
-    \ 1 <= x <= MAXN^2\n    // Be careful of highly composite numbers https://oeis.org/A002182/list\
-    \ https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt\n    //\
-    \ (n, (# of div. of n)): 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720\n\
+    \ r.val) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST\
+    \ ModInt nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
+    \ : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n\
+    \        if (val == 0) return 0;\n        if (md == 2) return val;\n        if\
+    \ (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md\
+    \ - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m %\
+    \ 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x\
+    \ * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while (y\
+    \ != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
+    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
+    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
+    \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
+    \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"number/sieve.hpp\"\
+    \n#include <cassert>\n#include <map>\n#line 5 \"number/sieve.hpp\"\n\n// CUT begin\n\
+    // Linear sieve algorithm for fast prime factorization\n// Complexity: O(N) time,\
+    \ O(N) space:\n// - MAXN = 10^7:  ~44 MB,  80~100 ms (Codeforces / AtCoder GCC,\
+    \ C++17)\n// - MAXN = 10^8: ~435 MB, 810~980 ms (Codeforces / AtCoder GCC, C++17)\n\
+    // Reference:\n// [1] D. Gries, J. Misra, \"A Linear Sieve Algorithm for Finding\
+    \ Prime Numbers,\"\n//     Communications of the ACM, 21(12), 999-1003, 1978.\n\
+    // - https://cp-algorithms.com/algebra/prime-sieve-linear.html\n// - https://37zigen.com/linear-sieve/\n\
+    struct Sieve {\n    std::vector<int> min_factor;\n    std::vector<int> primes;\n\
+    \    Sieve(int MAXN) : min_factor(MAXN + 1) {\n        for (int d = 2; d <= MAXN;\
+    \ d++) {\n            if (!min_factor[d]) {\n                min_factor[d] = d;\n\
+    \                primes.emplace_back(d);\n            }\n            for (const\
+    \ auto &p : primes) {\n                if (p > min_factor[d] or d * p > MAXN)\
+    \ break;\n                min_factor[d * p] = p;\n            }\n        }\n \
+    \   }\n    // Prime factorization for 1 <= x <= MAXN^2\n    // Complexity: O(log\
+    \ x)           (x <= MAXN)\n    //             O(MAXN / log MAXN) (MAXN < x <=\
+    \ MAXN^2)\n    template <typename T> std::map<T, int> factorize(T x) {\n     \
+    \   std::map<T, int> ret;\n        assert(x > 0 and x <= ((long long)min_factor.size()\
+    \ - 1) * ((long long)min_factor.size() - 1));\n        for (const auto &p : primes)\
+    \ {\n            if (x < T(min_factor.size())) break;\n            while (!(x\
+    \ % p)) x /= p, ret[p]++;\n        }\n        if (x >= T(min_factor.size())) ret[x]++,\
+    \ x = 1;\n        while (x > 1) ret[min_factor[x]]++, x /= min_factor[x];\n  \
+    \      return ret;\n    }\n    // Enumerate divisors of 1 <= x <= MAXN^2\n   \
+    \ // Be careful of highly composite numbers https://oeis.org/A002182/list https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt\n\
+    \    // (n, (# of div. of n)): 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720\n\
     \    template <typename T> std::vector<T> divisors(T x) {\n        std::vector<T>\
     \ ret{1};\n        for (const auto p : factorize(x)) {\n            int n = ret.size();\n\
     \            for (int i = 0; i < n; i++) {\n                for (T a = 1, d =\
@@ -211,8 +214,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2021-05-03 18:16:21+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-06 14:54:00+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
 layout: document

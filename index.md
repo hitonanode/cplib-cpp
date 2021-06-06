@@ -68,7 +68,7 @@ data:
       path: convolution/multivar_ntt.hpp
       title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
         \u7573\u307F\u8FBC\u307F\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
     - icon: ':heavy_check_mark:'
@@ -111,28 +111,31 @@ data:
       title: data_structure/static_range_inversion.hpp
   - name: formal_power_series
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
         \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/lagrange_interpolation.hpp
       title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\
         \u9593\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/linear_recurrence.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
         \u63A8\u5B9A"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: formal_power_series/polynomial_divmod.hpp
+      title: formal_power_series/polynomial_divmod.hpp
+    - icon: ':x:'
       path: formal_power_series/sum_of_exponential_times_polynomial.hpp
       title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
       title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   - name: .
@@ -140,7 +143,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -171,7 +174,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/bipartite_matching.hpp
       title: graph/bipartite_matching.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/chromatic_number.hpp
       title: "Chromatic number of undirected graph \uFF08\u7121\u5411\u30B0\u30E9\u30D5\
         \u306E\u5F69\u8272\u6570\uFF09"
@@ -181,7 +184,7 @@ data:
     - icon: ':warning:'
       path: graph/eulerian_trail.hpp
       title: graph/eulerian_trail.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/general_matching.hpp
       title: graph/general_matching.hpp
     - icon: ':warning:'
@@ -228,7 +231,7 @@ data:
     - icon: ':warning:'
       path: linear_algebra_matrix/circular_binary_expansion.hpp
       title: linear_algebra_matrix/circular_binary_expansion.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/det_of_sparse_matrix.hpp
       title: linear_algebra_matrix/det_of_sparse_matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -237,10 +240,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/linalg_modint.hpp
       title: linear_algebra_matrix/linalg_modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
@@ -262,7 +265,7 @@ data:
     - icon: ':warning:'
       path: number/acl_modint.hpp
       title: number/acl_modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -287,13 +290,13 @@ data:
       path: number/euler_totient_phi.hpp
       title: "Euler's totient function\uFF08\u30AA\u30A4\u30E9\u30FC\u306E\u30C8\u30FC\
         \u30B7\u30A7\u30F3\u30C8\u95A2\u6570\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/factorize.hpp
       title: number/factorize.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
     - icon: ':warning:'
@@ -316,7 +319,7 @@ data:
     - icon: ':warning:'
       path: random/custom_hash.hpp
       title: random/custom_hash.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: random/rand_nondeterministic.hpp
       title: random/rand_nondeterministic.hpp
     - icon: ':warning:'
@@ -335,7 +338,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/acl_beats.hpp
       title: Segment Tree Beats (based on atcoder::lazy_segtree)
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: segmenttree/acl_lazysegtree.hpp
       title: Lazy Segtree (based on atcoder::lazy_segtree)
     - icon: ':heavy_check_mark:'
@@ -350,13 +353,13 @@ data:
     - icon: ':warning:'
       path: segmenttree/count_less_than.hpp
       title: segmenttree/count_less_than.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
     - icon: ':warning:'
       path: segmenttree/range-add-range-min.hpp
       title: Range Add Range Min (known as the Starry sky tree)
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/range-update-range-get.hpp
       title: segmenttree/range-update-range-get.hpp
     - icon: ':heavy_check_mark:'
@@ -370,7 +373,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
       title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/trees/acl_range-affine-range-sum.hpp
       title: segmenttree/trees/acl_range-affine-range-sum.hpp
     - icon: ':warning:'
@@ -420,7 +423,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/mp_algorithm.hpp
       title: string/mp_algorithm.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: string/rolling_hash_1d.hpp
       title: string/rolling_hash_1d.hpp
     - icon: ':heavy_check_mark:'
@@ -451,7 +454,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/eulertour.hpp
       title: tree/eulertour.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: tree/heavy_light_decomposition.hpp
       title: tree/heavy_light_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -647,46 +650,49 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow.test.cpp
       title: formal_power_series/test/fps_pow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_pow_another.test.cpp
       title: formal_power_series/test/fps_pow_another.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_sqrt.test.cpp
       title: formal_power_series/test/fps_sqrt.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
       title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/linear_recurrence.test.cpp
       title: formal_power_series/test/linear_recurrence.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/multipoint_evaluation.test.cpp
       title: formal_power_series/test/multipoint_evaluation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/poly_taylor_shift.test.cpp
       title: formal_power_series/test/poly_taylor_shift.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: formal_power_series/test/polynomial_divmod.test.cpp
+      title: formal_power_series/test/polynomial_divmod.test.cpp
+    - icon: ':x:'
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/stirling_number_of_1st.test.cpp
       title: formal_power_series/test/stirling_number_of_1st.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/stirling_number_of_2nd.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
       title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
       title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - name: geometry/test
@@ -723,7 +729,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/bridge.test.cpp
       title: graph/test/bridge.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/chromatic_number.test.cpp
       title: graph/test/chromatic_number.test.cpp
     - icon: ':heavy_check_mark:'
@@ -732,7 +738,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/directed_mst.aoj.test.cpp
       title: graph/test/directed_mst.aoj.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/general_matching.test.cpp
       title: graph/test/general_matching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -770,7 +776,7 @@ data:
       title: graph/test/warshallfloyd.test.cpp
   - name: linear_algebra_matrix/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -785,16 +791,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
@@ -820,18 +826,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/miller-rabin.test.cpp
       title: number/test/miller-rabin.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/montmort_number_mod.test.cpp
       title: number/test/montmort_number_mod.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
   - name: segmenttree/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/acl_range-affine-range-sum.test.cpp
       title: segmenttree/test/acl_range-affine-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -858,13 +864,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/range-affine-range-sum.test.cpp
       title: segmenttree/test/range-affine-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -925,7 +931,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_lcp.test.cpp
       title: string/test/rolling_hash_lcp.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/test/rolling_hash_w_modint.test.cpp
       title: string/test/rolling_hash_w_modint.test.cpp
     - icon: ':heavy_check_mark:'
@@ -963,7 +969,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-subtree-sum.test.cpp
       title: tree/test/vertex-add-subtree-sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/vertex-set-path-composite.test.cpp
       title: tree/test/vertex-set-path-composite.test.cpp
   - name: unionfind/test

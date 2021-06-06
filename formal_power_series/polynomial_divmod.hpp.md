@@ -2,107 +2,22 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: convolution/ntt.hpp
+    title: convolution/ntt.hpp
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: convolution/convolutive_translation_2d.hpp
-    title: convolution/convolutive_translation_2d.hpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/multivar_ntt.hpp
-    title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
-      \u307F\u8FBC\u307F\uFF09"
-  - icon: ':question:'
-    path: formal_power_series/coeff_of_rational_function.hpp
-    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
-      \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-  - icon: ':question:'
-    path: formal_power_series/formal_power_series.hpp
-    title: formal_power_series/formal_power_series.hpp
-  - icon: ':x:'
-    path: formal_power_series/multipoint_evaluation.hpp
-    title: formal_power_series/multipoint_evaluation.hpp
-  - icon: ':x:'
-    path: formal_power_series/polynomial_divmod.hpp
-    title: formal_power_series/polynomial_divmod.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/multivar_ntt.test.cpp
-    title: convolution/test/multivar_ntt.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/ntt.test.cpp
-    title: convolution/test/ntt.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/ntt_arbitrary_mod.test.cpp
-    title: convolution/test/ntt_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/bernoulli_number.test.cpp
-    title: formal_power_series/test/bernoulli_number.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/coeff_of_rational_function.test.cpp
-    title: formal_power_series/test/coeff_of_rational_function.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/division_number.test.cpp
-    title: formal_power_series/test/division_number.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_exp.test.cpp
-    title: formal_power_series/test/fps_exp.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_exp_modintruntime.test.cpp
-    title: formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_inv.test.cpp
-    title: formal_power_series/test/fps_inv.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_log.test.cpp
-    title: formal_power_series/test/fps_log.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_pow.test.cpp
-    title: formal_power_series/test/fps_pow.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/fps_pow_another.test.cpp
-    title: formal_power_series/test/fps_pow_another.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/fps_sqrt.test.cpp
-    title: formal_power_series/test/fps_sqrt.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/kitamasa.test.cpp
-    title: formal_power_series/test/kitamasa.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/multipoint_evaluation.test.cpp
-    title: formal_power_series/test/multipoint_evaluation.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/poly_taylor_shift.test.cpp
-    title: formal_power_series/test/poly_taylor_shift.test.cpp
   - icon: ':x:'
     path: formal_power_series/test/polynomial_divmod.test.cpp
     title: formal_power_series/test/polynomial_divmod.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/polynomial_interpolation.test.cpp
-    title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/stirling_number_of_1st.test.cpp
-    title: formal_power_series/test/stirling_number_of_1st.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/stirling_number_of_2nd.test.cpp
-    title: formal_power_series/test/stirling_number_of_2nd.test.cpp
-  - icon: ':x:'
-    path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-    title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    links: []
+    links:
+    - http://people.csail.mit.edu/madhu/ST12/scribe/lect06.pdf
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
     \ <vector>\n\n// CUT begin\ntemplate <int md> struct ModInt {\n#if __cplusplus\
     \ >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using\
@@ -234,106 +149,100 @@ data:
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n"
-  code: "#pragma once\n#include \"../modint.hpp\"\n\n#include <algorithm>\n#include\
-    \ <array>\n#include <cassert>\n#include <tuple>\n#include <vector>\n\n// CUT begin\n\
-    // Integer convolution for arbitrary mod\n// with NTT (and Garner's algorithm)\
-    \ for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm if `skip_garner`\
-    \ is true or mod is in `nttprimes`.\n// input: a (size: n), b (size: m)\n// return:\
-    \ vector (size: n + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
-    \ a, std::vector<MODINT> b, bool skip_garner = false);\n\nconstexpr int nttprimes[3]\
-    \ = {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
-    \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
-    \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
-    \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
-    \    if (n == 1) return;\n    static const int mod = MODINT::mod();\n    static\
-    \ const MODINT root = MODINT::get_primitive_root();\n    assert(__builtin_popcount(n)\
-    \ == 1 and (mod - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n\
-    \    for (int m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod\
-    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
-    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
-    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
-    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
-    \  for (int i = s; i < s + m; i++) {\n                    MODINT x = a[i], y =\
-    \ a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n    \
-    \            }\n            }\n        }\n    } else {\n        for (int m = 1;\
-    \ m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++)\
-    \ {\n                for (int i = s; i < s + m; i++) {\n                    MODINT\
-    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
-    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv();\n\
-    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD> std::vector<ModInt<MOD>>\
-    \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
-    \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
-    \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
-    \ ap[i] = a[i], bp[i] = b[i];\n    ntt(ap, false);\n    if (a == b)\n        bp\
-    \ = ap;\n    else\n        ntt(bp, false);\n    for (int i = 0; i < sz; i++) ap[i]\
-    \ *= bp[i];\n    ntt(ap, true);\n    return ap;\n}\nlong long garner_ntt_(int\
-    \ r0, int r1, int r2, int mod) {\n    using mint2 = ModInt<nttprimes[2]>;\n  \
-    \  static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];\n    static\
-    \ const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();\n    static\
-    \ const long long m01_inv_m2 = mint2(m01).inv();\n\n    int v1 = (m0_inv_m1 *\
-    \ (r1 + nttprimes[1] - r0)) % nttprimes[1];\n    auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0])\
-    \ * v1) * m01_inv_m2;\n    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod *\
-    \ v2.val) % mod;\n}\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
-    \ a, std::vector<MODINT> b, bool skip_garner) {\n    if (a.empty() or b.empty())\
-    \ return {};\n    int sz = 1, n = a.size(), m = b.size();\n    while (sz < n +\
-    \ m) sz <<= 1;\n    if (sz <= 16) {\n        std::vector<MODINT> ret(n + m - 1);\n\
-    \        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < m; j++)\
-    \ ret[i + j] += a[i] * b[j];\n        }\n        return ret;\n    }\n    int mod\
-    \ = MODINT::mod();\n    if (skip_garner or std::find(std::begin(nttprimes), std::end(nttprimes),\
-    \ mod) != std::end(nttprimes)) {\n        a.resize(sz), b.resize(sz);\n      \
-    \  if (a == b) {\n            ntt(a, false);\n            b = a;\n        } else\
-    \ {\n            ntt(a, false), ntt(b, false);\n        }\n        for (int i\
-    \ = 0; i < sz; i++) a[i] *= b[i];\n        ntt(a, true);\n        a.resize(n +\
-    \ m - 1);\n    } else {\n        std::vector<int> ai(sz), bi(sz);\n        for\
-    \ (int i = 0; i < n; i++) ai[i] = a[i].val;\n        for (int i = 0; i < m; i++)\
-    \ bi[i] = b[i].val;\n        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);\n   \
-    \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
-    \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
-    \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n"
+    \ return a;\n}\n#line 5 \"formal_power_series/polynomial_divmod.hpp\"\n#include\
+    \ <utility>\n#line 7 \"formal_power_series/polynomial_divmod.hpp\"\n\n// CUT begin\n\
+    // Calculate f^{-1}(x) mod x^l: Inverse of polynomial mod x^l in $O(N \\log N)$\
+    \ complexity.\n// return: vector of length l\n// Requirement:\n// - NTT-friendliness\
+    \ for faster implementation.\n// - f[0] has its inverse. Otherwise, return empty\
+    \ vector `{}`.\n// Reference: http://people.csail.mit.edu/madhu/ST12/scribe/lect06.pdf\n\
+    template <typename ModInt> std::vector<ModInt> inv_of_poly_mod_monomial(const\
+    \ std::vector<ModInt> &f, int l) {\n    assert(l >= 0);\n    if (f.empty()) return\
+    \ {};\n    if (l == 0) return {};\n    const ModInt ret0 = f[0].inv();\n    if\
+    \ (ret0 * f[0] != ModInt(1)) return {};\n    std::vector<ModInt> ret{ret0};\n\
+    \    unsigned sz = 1;\n    while (ret.size() < l) {\n        std::vector<ModInt>\
+    \ h0(sz * 2), h1(sz * 2), a(sz * 2);\n        std::copy(ret.begin(), ret.end(),\
+    \ a.begin());\n        std::copy(f.begin(), f.begin() + std::min<unsigned>(sz,\
+    \ f.size()), h0.begin());\n        if (f.size() >= sz) {\n            std::copy(f.begin()\
+    \ + sz, f.begin() + std::min<unsigned>(sz * 2, f.size()), h1.begin());\n     \
+    \   }\n        ntt(a, false);\n        ntt(h0, false);\n        ntt(h1, false);\n\
+    \        for (unsigned i = 0; i < sz * 2; i++) h0[i] *= a[i];\n        for (unsigned\
+    \ i = 0; i < sz * 2; i++) h1[i] *= a[i];\n        ntt(h0, true);\n        ntt(h1,\
+    \ true);\n        for (unsigned i = 0; i < sz; i++) h1[i] += h0[i + sz];\n   \
+    \     std::fill(h1.begin() + sz, h1.end(), 0);\n        ntt(h1, false);\n    \
+    \    for (unsigned i = 0; i < sz * 2; i++) h1[i] *= a[i];\n        ntt(h1, true);\n\
+    \        ret.resize(std::min<unsigned>(sz * 2, l));\n        for (unsigned i =\
+    \ sz; i < ret.size(); i++) ret[i] = -h1[i - sz];\n        sz *= 2;\n    }\n  \
+    \  assert(ret.size() == l);\n    return ret;\n}\n\n// Solve f(x) = g(x) * q(x)\
+    \ + r(x), deg(r) < deg(g) for given f(x) and g(x)\n// return: (q(x), r(x))\n//\
+    \ requirement: f, g: nonzero, f.back() != 0, g.back() != 0\ntemplate <typename\
+    \ ModInt>\nstd::pair<std::vector<ModInt>, std::vector<ModInt>> polynomial_division(const\
+    \ std::vector<ModInt> &f, const std::vector<ModInt> &g) {\n    assert(f.size()\
+    \ and f.back() != 0);\n    assert(g.size() and g.back() != 0);\n    if (f.size()\
+    \ < g.size()) { return {{}, f}; }\n    const int l = f.size() - g.size();\n  \
+    \  std::vector<ModInt> revf(l), revg(l);\n    for (int i = 0; i < l; i++) revf[i]\
+    \ = f[f.size() - 1 - i];\n    for (int i = 0; i < std::min<int>(l, g.size());\
+    \ i++) revg[i] = g[g.size() - 1 - i];\n    auto revginv = inv_of_poly_mod_monomial(revg,\
+    \ l);\n    auto q = nttconv(revginv, revf);\n    q.resize(l + 1);\n    std::reverse(q.begin(),\
+    \ q.end());\n    int d = int(g.size()) - 1;\n    q[0] = f[d];\n    for (int e\
+    \ = std::max(0, d - int(q.size()) + 1); e < d; e++) q[0] -= g[e] * q[d - e];\n\
+    \    q[0] /= g.back();\n    auto gq = nttconv(g, q);\n    std::vector<ModInt>\
+    \ r(g.size() - 1);\n    for (unsigned i = 0; i < r.size(); i++) r[i] = f[i] -\
+    \ gq[i];\n    while (r.size() and r.back() == 0) r.pop_back();\n    return {q,\
+    \ r};\n}\n"
+  code: "#pragma once\n#include \"../convolution/ntt.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#include <utility>\n#include <vector>\n\n// CUT begin\n//\
+    \ Calculate f^{-1}(x) mod x^l: Inverse of polynomial mod x^l in $O(N \\log N)$\
+    \ complexity.\n// return: vector of length l\n// Requirement:\n// - NTT-friendliness\
+    \ for faster implementation.\n// - f[0] has its inverse. Otherwise, return empty\
+    \ vector `{}`.\n// Reference: http://people.csail.mit.edu/madhu/ST12/scribe/lect06.pdf\n\
+    template <typename ModInt> std::vector<ModInt> inv_of_poly_mod_monomial(const\
+    \ std::vector<ModInt> &f, int l) {\n    assert(l >= 0);\n    if (f.empty()) return\
+    \ {};\n    if (l == 0) return {};\n    const ModInt ret0 = f[0].inv();\n    if\
+    \ (ret0 * f[0] != ModInt(1)) return {};\n    std::vector<ModInt> ret{ret0};\n\
+    \    unsigned sz = 1;\n    while (ret.size() < l) {\n        std::vector<ModInt>\
+    \ h0(sz * 2), h1(sz * 2), a(sz * 2);\n        std::copy(ret.begin(), ret.end(),\
+    \ a.begin());\n        std::copy(f.begin(), f.begin() + std::min<unsigned>(sz,\
+    \ f.size()), h0.begin());\n        if (f.size() >= sz) {\n            std::copy(f.begin()\
+    \ + sz, f.begin() + std::min<unsigned>(sz * 2, f.size()), h1.begin());\n     \
+    \   }\n        ntt(a, false);\n        ntt(h0, false);\n        ntt(h1, false);\n\
+    \        for (unsigned i = 0; i < sz * 2; i++) h0[i] *= a[i];\n        for (unsigned\
+    \ i = 0; i < sz * 2; i++) h1[i] *= a[i];\n        ntt(h0, true);\n        ntt(h1,\
+    \ true);\n        for (unsigned i = 0; i < sz; i++) h1[i] += h0[i + sz];\n   \
+    \     std::fill(h1.begin() + sz, h1.end(), 0);\n        ntt(h1, false);\n    \
+    \    for (unsigned i = 0; i < sz * 2; i++) h1[i] *= a[i];\n        ntt(h1, true);\n\
+    \        ret.resize(std::min<unsigned>(sz * 2, l));\n        for (unsigned i =\
+    \ sz; i < ret.size(); i++) ret[i] = -h1[i - sz];\n        sz *= 2;\n    }\n  \
+    \  assert(ret.size() == l);\n    return ret;\n}\n\n// Solve f(x) = g(x) * q(x)\
+    \ + r(x), deg(r) < deg(g) for given f(x) and g(x)\n// return: (q(x), r(x))\n//\
+    \ requirement: f, g: nonzero, f.back() != 0, g.back() != 0\ntemplate <typename\
+    \ ModInt>\nstd::pair<std::vector<ModInt>, std::vector<ModInt>> polynomial_division(const\
+    \ std::vector<ModInt> &f, const std::vector<ModInt> &g) {\n    assert(f.size()\
+    \ and f.back() != 0);\n    assert(g.size() and g.back() != 0);\n    if (f.size()\
+    \ < g.size()) { return {{}, f}; }\n    const int l = f.size() - g.size();\n  \
+    \  std::vector<ModInt> revf(l), revg(l);\n    for (int i = 0; i < l; i++) revf[i]\
+    \ = f[f.size() - 1 - i];\n    for (int i = 0; i < std::min<int>(l, g.size());\
+    \ i++) revg[i] = g[g.size() - 1 - i];\n    auto revginv = inv_of_poly_mod_monomial(revg,\
+    \ l);\n    auto q = nttconv(revginv, revf);\n    q.resize(l + 1);\n    std::reverse(q.begin(),\
+    \ q.end());\n    int d = int(g.size()) - 1;\n    q[0] = f[d];\n    for (int e\
+    \ = std::max(0, d - int(q.size()) + 1); e < d; e++) q[0] -= g[e] * q[d - e];\n\
+    \    q[0] /= g.back();\n    auto gq = nttconv(g, q);\n    std::vector<ModInt>\
+    \ r(g.size() - 1);\n    for (unsigned i = 0; i < r.size(); i++) r[i] = f[i] -\
+    \ gq[i];\n    while (r.size() and r.back() == 0) r.pop_back();\n    return {q,\
+    \ r};\n}\n"
   dependsOn:
+  - convolution/ntt.hpp
   - modint.hpp
   isVerificationFile: false
-  path: convolution/ntt.hpp
-  requiredBy:
-  - convolution/multivar_ntt.hpp
-  - convolution/convolutive_translation_2d.hpp
-  - formal_power_series/multipoint_evaluation.hpp
-  - formal_power_series/coeff_of_rational_function.hpp
-  - formal_power_series/polynomial_divmod.hpp
-  - formal_power_series/formal_power_series.hpp
+  path: formal_power_series/polynomial_divmod.hpp
+  requiredBy: []
   timestamp: '2021-06-06 14:54:00+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - convolution/test/ntt.test.cpp
-  - convolution/test/ntt_arbitrary_mod.test.cpp
-  - convolution/test/multivar_ntt.test.cpp
   - formal_power_series/test/polynomial_divmod.test.cpp
-  - formal_power_series/test/fps_log.test.cpp
-  - formal_power_series/test/fps_pow_another.test.cpp
-  - formal_power_series/test/kitamasa.test.cpp
-  - formal_power_series/test/multipoint_evaluation.test.cpp
-  - formal_power_series/test/fps_inv.test.cpp
-  - formal_power_series/test/coeff_of_rational_function.test.cpp
-  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - formal_power_series/test/fps_exp.test.cpp
-  - formal_power_series/test/bernoulli_number.test.cpp
-  - formal_power_series/test/fps_sqrt.test.cpp
-  - formal_power_series/test/stirling_number_of_1st.test.cpp
-  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - formal_power_series/test/division_number.test.cpp
-  - formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - formal_power_series/test/poly_taylor_shift.test.cpp
-  - formal_power_series/test/polynomial_interpolation.test.cpp
-  - formal_power_series/test/fps_pow.test.cpp
-  - formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - formal_power_series/test/stirling_number_of_2nd.test.cpp
-documentation_of: convolution/ntt.hpp
+documentation_of: formal_power_series/polynomial_divmod.hpp
 layout: document
 redirect_from:
-- /library/convolution/ntt.hpp
-- /library/convolution/ntt.hpp.html
-title: convolution/ntt.hpp
+- /library/formal_power_series/polynomial_divmod.hpp
+- /library/formal_power_series/polynomial_divmod.hpp.html
+title: formal_power_series/polynomial_divmod.hpp
 ---

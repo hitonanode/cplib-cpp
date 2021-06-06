@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/linear_recurrence.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
       \u63A8\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: random/rand_nondeterministic.hpp
     title: random/rand_nondeterministic.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://yukicoder.me/wiki/black_box_linear_algebra
@@ -94,10 +94,10 @@ data:
     \ ret;\n    }\n    // Determinant of sparse matrix\n    // Complexity: O(NK +\
     \ N^2) (K: # of non-zero elements in M)\n    // Reference: https://yukicoder.me/wiki/black_box_linear_algebra\n\
     \    Tp Determinant() const {\n        assert(H == W);\n        const int N =\
-    \ H, hi = Tp::get_mod();\n        std::vector<Tp> b(N), u(N), D(N);\n        for\
-    \ (int i = 0; i < N; i++) { b[i] = rnd(1, hi), u[i] = rnd(1, hi), D[i] = rnd(1,\
-    \ hi); }\n        std::vector<Tp> uMDib(2 * N);\n        for (int i = 0; i < 2\
-    \ * N; i++) {\n            uMDib[i] = std::inner_product(u.begin(), u.end(), b.begin(),\
+    \ H, hi = Tp::mod();\n        std::vector<Tp> b(N), u(N), D(N);\n        for (int\
+    \ i = 0; i < N; i++) { b[i] = rnd(1, hi), u[i] = rnd(1, hi), D[i] = rnd(1, hi);\
+    \ }\n        std::vector<Tp> uMDib(2 * N);\n        for (int i = 0; i < 2 * N;\
+    \ i++) {\n            uMDib[i] = std::inner_product(u.begin(), u.end(), b.begin(),\
     \ Tp(0));\n            for (int j = 0; j < N; j++) { b[j] *= D[j]; }\n       \
     \     b = prod(*this, b);\n        }\n        auto ret = find_linear_recurrence<Tp>(uMDib);\n\
     \        Tp det = ret.second.back() * (N % 2 ? -1 : 1);\n        Tp ddet = 1;\n\
@@ -121,10 +121,10 @@ data:
     \ of sparse matrix\n    // Complexity: O(NK + N^2) (K: # of non-zero elements\
     \ in M)\n    // Reference: https://yukicoder.me/wiki/black_box_linear_algebra\n\
     \    Tp Determinant() const {\n        assert(H == W);\n        const int N =\
-    \ H, hi = Tp::get_mod();\n        std::vector<Tp> b(N), u(N), D(N);\n        for\
-    \ (int i = 0; i < N; i++) { b[i] = rnd(1, hi), u[i] = rnd(1, hi), D[i] = rnd(1,\
-    \ hi); }\n        std::vector<Tp> uMDib(2 * N);\n        for (int i = 0; i < 2\
-    \ * N; i++) {\n            uMDib[i] = std::inner_product(u.begin(), u.end(), b.begin(),\
+    \ H, hi = Tp::mod();\n        std::vector<Tp> b(N), u(N), D(N);\n        for (int\
+    \ i = 0; i < N; i++) { b[i] = rnd(1, hi), u[i] = rnd(1, hi), D[i] = rnd(1, hi);\
+    \ }\n        std::vector<Tp> uMDib(2 * N);\n        for (int i = 0; i < 2 * N;\
+    \ i++) {\n            uMDib[i] = std::inner_product(u.begin(), u.end(), b.begin(),\
     \ Tp(0));\n            for (int j = 0; j < N; j++) { b[j] *= D[j]; }\n       \
     \     b = prod(*this, b);\n        }\n        auto ret = find_linear_recurrence<Tp>(uMDib);\n\
     \        Tp det = ret.second.back() * (N % 2 ? -1 : 1);\n        Tp ddet = 1;\n\
@@ -135,8 +135,8 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/det_of_sparse_matrix.hpp
   requiredBy: []
-  timestamp: '2021-05-02 16:53:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-06-06 14:54:00+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
 documentation_of: linear_algebra_matrix/det_of_sparse_matrix.hpp
