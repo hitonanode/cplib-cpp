@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sqrt_mod
@@ -86,14 +86,14 @@ data:
     \          e = j;\n        }\n        return ModIntRuntime(std::min(x.val, md\
     \ - x.val));\n    }\n};\nint ModIntRuntime::md = 1;\n#line 4 \"number/test/sqrt_modint_runtime.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    int T;\n    cin >> T;\n    while (T--)\
-    \ {\n        int Y, P;\n        cin >> Y >> P;\n        ModIntRuntime::mod = P;\n\
+    \ {\n        int Y, P;\n        cin >> Y >> P;\n        ModIntRuntime::set_mod(P);\n\
     \        ModIntRuntime m = Y;\n        if (Y) {\n            m = m.sqrt();\n \
     \           cout << (m ? m.val : -1) << endl;\n        } else\n            cout\
     \ << 0 << endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include \"\
     number/modint_runtime.hpp\"\n#include <iostream>\nusing namespace std;\n\nint\
     \ main() {\n    int T;\n    cin >> T;\n    while (T--) {\n        int Y, P;\n\
-    \        cin >> Y >> P;\n        ModIntRuntime::mod = P;\n        ModIntRuntime\
+    \        cin >> Y >> P;\n        ModIntRuntime::set_mod(P);\n        ModIntRuntime\
     \ m = Y;\n        if (Y) {\n            m = m.sqrt();\n            cout << (m\
     \ ? m.val : -1) << endl;\n        } else\n            cout << 0 << endl;\n   \
     \ }\n}\n"
@@ -102,8 +102,8 @@ data:
   isVerificationFile: true
   path: number/test/sqrt_modint_runtime.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 14:54:00+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-06-06 17:00:00+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/sqrt_modint_runtime.test.cpp
 layout: document

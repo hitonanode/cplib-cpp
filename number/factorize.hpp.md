@@ -3,18 +3,21 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/chromatic_number.test.cpp
     title: graph/test/chromatic_number.test.cpp
   - icon: ':heavy_check_mark:'
     path: number/test/factorize_longlong.test.cpp
     title: number/test/factorize_longlong.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/miller-rabin-5e7.test.cpp
+    title: number/test/miller-rabin-5e7.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/miller-rabin.test.cpp
     title: number/test/miller-rabin.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://miller-rabin.appspot.com/
@@ -110,10 +113,11 @@ data:
   path: number/factorize.hpp
   requiredBy: []
   timestamp: '2021-06-04 02:06:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/miller-rabin.test.cpp
   - number/test/factorize_longlong.test.cpp
+  - number/test/miller-rabin-5e7.test.cpp
   - graph/test/chromatic_number.test.cpp
 documentation_of: number/factorize.hpp
 layout: document

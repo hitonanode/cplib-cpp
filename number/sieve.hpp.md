@@ -9,10 +9,10 @@ data:
     path: number/zeta_moebius_transform.hpp
     title: number/zeta_moebius_transform.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - icon: ':heavy_check_mark:'
@@ -22,11 +22,14 @@ data:
     path: number/test/gen_primes.test.cpp
     title: number/test/gen_primes.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/miller-rabin-5e7.test.cpp
+    title: number/test/miller-rabin-5e7.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/prime_factorization.test.cpp
     title: number/test/prime_factorization.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://37zigen.com/linear-sieve/
@@ -137,13 +140,14 @@ data:
   - number/zeta_moebius_transform.hpp
   - number/cyclotomic_polynomials.hpp
   timestamp: '2021-05-03 18:16:21+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - number/test/prime_factorization.test.cpp
   - number/test/enumerate_primes.test.cpp
   - number/test/gen_primes.test.cpp
+  - number/test/miller-rabin-5e7.test.cpp
 documentation_of: number/sieve.hpp
 layout: document
 title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy:
@@ -16,10 +16,10 @@ data:
     path: formal_power_series/coeff_of_rational_function.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
       \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
   - icon: ':heavy_check_mark:'
@@ -86,21 +86,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/stirling_number_of_2nd.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -304,7 +304,7 @@ data:
   - formal_power_series/polynomial_divmod.hpp
   - formal_power_series/formal_power_series.hpp
   timestamp: '2021-06-06 14:54:00+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/ntt.test.cpp
   - convolution/test/ntt_arbitrary_mod.test.cpp

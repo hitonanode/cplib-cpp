@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: convolution/fft_double.hpp
     title: convolution/fft_double.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/centroid_decomposition.hpp
     title: tree/centroid_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -154,7 +154,7 @@ data:
   path: tree/test/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
   timestamp: '2021-06-06 15:23:40+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/frequency_table_of_tree_distance.test.cpp
 layout: document

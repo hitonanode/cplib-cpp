@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/linear_recurrence.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
       \u63A8\u5B9A"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: random/rand_nondeterministic.hpp
     title: random/rand_nondeterministic.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://yukicoder.me/wiki/black_box_linear_algebra
@@ -136,7 +136,7 @@ data:
   path: linear_algebra_matrix/det_of_sparse_matrix.hpp
   requiredBy: []
   timestamp: '2021-06-06 14:54:00+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
 documentation_of: linear_algebra_matrix/det_of_sparse_matrix.hpp
