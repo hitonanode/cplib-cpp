@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/fft_double.hpp
     title: convolution/fft_double.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/centroid_decomposition.hpp
     title: tree/centroid_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -46,9 +46,9 @@ data:
     \    ret.resize(a.size() + b.size() - 1);\n    return ret;\n}\n#line 2 \"tree/centroid_decomposition.hpp\"\
     \n#include <tuple>\n#line 5 \"tree/centroid_decomposition.hpp\"\n\n// CUT begin\n\
     /*\n(Recursive) Centroid Decomposition\nVerification: Codeforces #190 Div.1 C\
-    \ <https://codeforces.com/contest/321/submission/59093583>\n\nfix_root(int r):\
-    \ Build information of the tree which `r` belongs to.\ndetect_centroid(int r):\
-    \ Enumerate centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
+    \ https://codeforces.com/contest/321/submission/59093583\n\nfix_root(int r): Build\
+    \ information of the tree which `r` belongs to.\ndetect_centroid(int r): Enumerate\
+    \ centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
     \ {\n    int NO_PARENT = -1;\n    int V;\n    int E;\n    std::vector<std::vector<std::pair<int,\
     \ int>>> to; // (node_id, edge_id)\n    std::vector<int> par;                \
     \             // parent node_id par[root] = -1\n    std::vector<std::vector<int>>\
@@ -153,8 +153,8 @@ data:
   isVerificationFile: true
   path: tree/test/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 00:36:27+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-06 15:23:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/frequency_table_of_tree_distance.test.cpp
 layout: document

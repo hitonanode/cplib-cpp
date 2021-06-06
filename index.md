@@ -58,7 +58,7 @@ data:
     - icon: ':warning:'
       path: convolution/fft_arbitrary_mod.hpp
       title: convolution/fft_arbitrary_mod.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: convolution/fft_double.hpp
       title: convolution/fft_double.hpp
     - icon: ':heavy_check_mark:'
@@ -111,7 +111,7 @@ data:
       title: data_structure/static_range_inversion.hpp
   - name: formal_power_series
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
         \u7B97\uFF08Bostan-Mori algorithm\uFF09"
@@ -122,14 +122,14 @@ data:
       path: formal_power_series/lagrange_interpolation.hpp
       title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\
         \u9593\uFF09"
-    - icon: ':x:'
+    - icon: ':question:'
       path: formal_power_series/linear_recurrence.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
         \u63A8\u5B9A"
-    - icon: ':x:'
+    - icon: ':question:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/polynomial_divmod.hpp
       title: formal_power_series/polynomial_divmod.hpp
     - icon: ':x:'
@@ -448,13 +448,13 @@ data:
       title: syntactic_analysis/parsetree.hpp
   - name: tree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/centroid_decomposition.hpp
       title: tree/centroid_decomposition.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/eulertour.hpp
       title: tree/eulertour.hpp
-    - icon: ':question:'
+    - icon: ':x:'
       path: tree/heavy_light_decomposition.hpp
       title: tree/heavy_light_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -650,34 +650,34 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow.test.cpp
       title: formal_power_series/test/fps_pow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow_another.test.cpp
       title: formal_power_series/test/fps_pow_another.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt.test.cpp
       title: formal_power_series/test/fps_sqrt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
       title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/linear_recurrence.test.cpp
       title: formal_power_series/test/linear_recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/multipoint_evaluation.test.cpp
       title: formal_power_series/test/multipoint_evaluation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/poly_taylor_shift.test.cpp
       title: formal_power_series/test/poly_taylor_shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/polynomial_divmod.test.cpp
       title: formal_power_series/test/polynomial_divmod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
     - icon: ':x:'
@@ -951,10 +951,10 @@ data:
       title: string/test/z_algorithm.test.cpp
   - name: tree/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/frequency_table_of_tree_distance.test.cpp
       title: tree/test/frequency_table_of_tree_distance.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/hl_decomposition.test.cpp
       title: tree/test/hl_decomposition.test.cpp
     - icon: ':heavy_check_mark:'
@@ -963,10 +963,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/lca_rmq.test.cpp
       title: tree/test/lca_rmq.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/vertex-add-path-sum.test.cpp
       title: tree/test/vertex-add-path-sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/vertex-add-subtree-sum.test.cpp
       title: tree/test/vertex-add-subtree-sum.test.cpp
     - icon: ':x:'

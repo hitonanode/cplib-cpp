@@ -3,18 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.test.cpp
     title: tree/test/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
-    - https://codeforces.com/contest/321/submission/59093583>
+    - https://codeforces.com/contest/321/submission/59093583
   bundledCode: "#line 2 \"tree/centroid_decomposition.hpp\"\n#include <tuple>\n#include\
     \ <utility>\n#include <vector>\n\n// CUT begin\n/*\n(Recursive) Centroid Decomposition\n\
-    Verification: Codeforces #190 Div.1 C <https://codeforces.com/contest/321/submission/59093583>\n\
+    Verification: Codeforces #190 Div.1 C https://codeforces.com/contest/321/submission/59093583\n\
     \nfix_root(int r): Build information of the tree which `r` belongs to.\ndetect_centroid(int\
     \ r): Enumerate centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
     \ {\n    int NO_PARENT = -1;\n    int V;\n    int E;\n    std::vector<std::vector<std::pair<int,\
@@ -59,7 +59,7 @@ data:
     \ _cd_vertices;\n    }\n};\n"
   code: "#pragma once\n#include <tuple>\n#include <utility>\n#include <vector>\n\n\
     // CUT begin\n/*\n(Recursive) Centroid Decomposition\nVerification: Codeforces\
-    \ #190 Div.1 C <https://codeforces.com/contest/321/submission/59093583>\n\nfix_root(int\
+    \ #190 Div.1 C https://codeforces.com/contest/321/submission/59093583\n\nfix_root(int\
     \ r): Build information of the tree which `r` belongs to.\ndetect_centroid(int\
     \ r): Enumerate centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
     \ {\n    int NO_PARENT = -1;\n    int V;\n    int E;\n    std::vector<std::vector<std::pair<int,\
@@ -106,8 +106,8 @@ data:
   isVerificationFile: false
   path: tree/centroid_decomposition.hpp
   requiredBy: []
-  timestamp: '2021-02-26 00:36:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-06-06 15:23:40+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.test.cpp
 documentation_of: tree/centroid_decomposition.hpp

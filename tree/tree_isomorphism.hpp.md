@@ -11,11 +11,11 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
-    - http://xorshift.di.unimi.it/splitmix64.c>
-    - https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698>
-    - https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044745>
-    - https://codeforces.com/blog/entry/62393>
-    - https://snuke.hatenablog.com/entry/2017/02/03/054210>
+    - http://xorshift.di.unimi.it/splitmix64.c
+    - https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698
+    - https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044745
+    - https://codeforces.com/blog/entry/62393
+    - https://snuke.hatenablog.com/entry/2017/02/03/054210
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
     \ <vector>\n\n// CUT begin\ntemplate <int md> struct ModInt {\n#if __cplusplus\
     \ >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using\
@@ -96,16 +96,16 @@ data:
     #line 7 \"tree/tree_isomorphism.hpp\"\nusing namespace std;\n\n// CUT begin\n\
     // Tree isomorphism with hashing \uFF08\u30CF\u30C3\u30B7\u30E5\u306B\u3088\u308B\
     \u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09\n// Dependence: ModInt or ModIntRuntime\n\
-    // Reference: <https://snuke.hatenablog.com/entry/2017/02/03/054210>\n// Verified:\
-    \ <https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698> (ModInt)\n\
-    //           <https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044745>\
+    // Reference: https://snuke.hatenablog.com/entry/2017/02/03/054210\n// Verified:\
+    \ https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698 (ModInt)\n\
+    //           https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044745\
     \ (ModIntRuntime)\nusing mint = ModInt<1000000007>;\n// using mint = ModIntRuntime;\n\
     // int ModIntRuntime::mod = 1000000007;\nusing DoubleHash = pair<mint, mint>;\n\
     struct UndirectedTree {\n    using Edges = vector<vector<int>>; // vector<set<int>>;\n\
     \    int V;\n    Edges e;\n    UndirectedTree(int v) : V(v), e(v) {}\n    void\
     \ add_edge(int u, int v) {\n        e[u].emplace_back(v);\n        e[v].emplace_back(u);\n\
-    \    }\n\n    static uint64_t splitmix64(uint64_t x) {\n        // <https://codeforces.com/blog/entry/62393>\
-    \ <http://xorshift.di.unimi.it/splitmix64.c>\n        x += 0x9e3779b97f4a7c15;\n\
+    \    }\n\n    static uint64_t splitmix64(uint64_t x) {\n        // https://codeforces.com/blog/entry/62393\
+    \ http://xorshift.di.unimi.it/splitmix64.c\n        x += 0x9e3779b97f4a7c15;\n\
     \        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;\n        x = (x ^ (x >> 27))\
     \ * 0x94d049bb133111eb;\n        return x ^ (x >> 31);\n    }\n    DoubleHash\
     \ get_hash(DoubleHash x) const {\n        static const uint64_t FIXED_RANDOM =\
@@ -113,13 +113,13 @@ data:
     \ + FIXED_RANDOM), splitmix64(x.second.val + FIXED_RANDOM)};\n    }\n\n    static\
     \ void add_hash(DoubleHash &l, const DoubleHash &r) { l.first += r.first, l.second\
     \ += r.second; }\n    static DoubleHash subtract_hash(const DoubleHash &l, const\
-    \ DoubleHash &r) { return {l.first - r.first, l.second - r.second}; }\n\n    vector<DoubleHash>\
-    \ hash;         // hash of the tree, each node regarded as root\n    vector<DoubleHash>\
-    \ hash_subtree; // hash of the subtree\n    vector<DoubleHash> hash_par;     //\
-    \ hash of the subtree whose root is parent[i], not containing i\n    DoubleHash\
-    \ hash_p;               // \\in [1, hmod), should be set randomly\n    DoubleHash\
-    \ hash_dfs1_(int now, int prv) {\n        hash_subtree[now] = hash_p;\n      \
-    \  for (auto nxt : e[now])\n            if (nxt != prv) add_hash(hash_subtree[now],\
+    \ DoubleHash &r) {\n        return {l.first - r.first, l.second - r.second};\n\
+    \    }\n\n    vector<DoubleHash> hash;         // hash of the tree, each node\
+    \ regarded as root\n    vector<DoubleHash> hash_subtree; // hash of the subtree\n\
+    \    vector<DoubleHash> hash_par;     // hash of the subtree whose root is parent[i],\
+    \ not containing i\n    DoubleHash hash_p;               // \\in [1, hmod), should\
+    \ be set randomly\n    DoubleHash hash_dfs1_(int now, int prv) {\n        hash_subtree[now]\
+    \ = hash_p;\n        for (auto nxt : e[now])\n            if (nxt != prv) add_hash(hash_subtree[now],\
     \ hash_dfs1_(nxt, now));\n        return get_hash(hash_subtree[now]);\n    }\n\
     \    void hash_dfs2_(int now, int prv) {\n        add_hash(hash[now], hash_subtree[now]);\n\
     \        if (prv >= 0) hash_par[now] = subtract_hash(hash[prv], get_hash(hash_subtree[now]));\n\
@@ -134,16 +134,16 @@ data:
     \n#include <chrono>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
     \n// CUT begin\n// Tree isomorphism with hashing \uFF08\u30CF\u30C3\u30B7\u30E5\
     \u306B\u3088\u308B\u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09\n// Dependence: ModInt\
-    \ or ModIntRuntime\n// Reference: <https://snuke.hatenablog.com/entry/2017/02/03/054210>\n\
-    // Verified: <https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698>\
-    \ (ModInt)\n//           <https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044745>\
+    \ or ModIntRuntime\n// Reference: https://snuke.hatenablog.com/entry/2017/02/03/054210\n\
+    // Verified: https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698\
+    \ (ModInt)\n//           https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044745\
     \ (ModIntRuntime)\nusing mint = ModInt<1000000007>;\n// using mint = ModIntRuntime;\n\
     // int ModIntRuntime::mod = 1000000007;\nusing DoubleHash = pair<mint, mint>;\n\
     struct UndirectedTree {\n    using Edges = vector<vector<int>>; // vector<set<int>>;\n\
     \    int V;\n    Edges e;\n    UndirectedTree(int v) : V(v), e(v) {}\n    void\
     \ add_edge(int u, int v) {\n        e[u].emplace_back(v);\n        e[v].emplace_back(u);\n\
-    \    }\n\n    static uint64_t splitmix64(uint64_t x) {\n        // <https://codeforces.com/blog/entry/62393>\
-    \ <http://xorshift.di.unimi.it/splitmix64.c>\n        x += 0x9e3779b97f4a7c15;\n\
+    \    }\n\n    static uint64_t splitmix64(uint64_t x) {\n        // https://codeforces.com/blog/entry/62393\
+    \ http://xorshift.di.unimi.it/splitmix64.c\n        x += 0x9e3779b97f4a7c15;\n\
     \        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;\n        x = (x ^ (x >> 27))\
     \ * 0x94d049bb133111eb;\n        return x ^ (x >> 31);\n    }\n    DoubleHash\
     \ get_hash(DoubleHash x) const {\n        static const uint64_t FIXED_RANDOM =\
@@ -151,13 +151,13 @@ data:
     \ + FIXED_RANDOM), splitmix64(x.second.val + FIXED_RANDOM)};\n    }\n\n    static\
     \ void add_hash(DoubleHash &l, const DoubleHash &r) { l.first += r.first, l.second\
     \ += r.second; }\n    static DoubleHash subtract_hash(const DoubleHash &l, const\
-    \ DoubleHash &r) { return {l.first - r.first, l.second - r.second}; }\n\n    vector<DoubleHash>\
-    \ hash;         // hash of the tree, each node regarded as root\n    vector<DoubleHash>\
-    \ hash_subtree; // hash of the subtree\n    vector<DoubleHash> hash_par;     //\
-    \ hash of the subtree whose root is parent[i], not containing i\n    DoubleHash\
-    \ hash_p;               // \\in [1, hmod), should be set randomly\n    DoubleHash\
-    \ hash_dfs1_(int now, int prv) {\n        hash_subtree[now] = hash_p;\n      \
-    \  for (auto nxt : e[now])\n            if (nxt != prv) add_hash(hash_subtree[now],\
+    \ DoubleHash &r) {\n        return {l.first - r.first, l.second - r.second};\n\
+    \    }\n\n    vector<DoubleHash> hash;         // hash of the tree, each node\
+    \ regarded as root\n    vector<DoubleHash> hash_subtree; // hash of the subtree\n\
+    \    vector<DoubleHash> hash_par;     // hash of the subtree whose root is parent[i],\
+    \ not containing i\n    DoubleHash hash_p;               // \\in [1, hmod), should\
+    \ be set randomly\n    DoubleHash hash_dfs1_(int now, int prv) {\n        hash_subtree[now]\
+    \ = hash_p;\n        for (auto nxt : e[now])\n            if (nxt != prv) add_hash(hash_subtree[now],\
     \ hash_dfs1_(nxt, now));\n        return get_hash(hash_subtree[now]);\n    }\n\
     \    void hash_dfs2_(int now, int prv) {\n        add_hash(hash[now], hash_subtree[now]);\n\
     \        if (prv >= 0) hash_par[now] = subtract_hash(hash[prv], get_hash(hash_subtree[now]));\n\
@@ -173,7 +173,7 @@ data:
   isVerificationFile: false
   path: tree/tree_isomorphism.hpp
   requiredBy: []
-  timestamp: '2021-06-06 14:54:00+09:00'
+  timestamp: '2021-06-06 15:23:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: tree/tree_isomorphism.hpp

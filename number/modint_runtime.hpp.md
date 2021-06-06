@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_exp_modintruntime.test.cpp
     title: formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - icon: ':x:'

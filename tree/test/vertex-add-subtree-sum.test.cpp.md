@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/eulertour.hpp
     title: tree/eulertour.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
@@ -114,7 +114,7 @@ data:
     \        vis_order.push_back(now);\n        for (auto nxt : edges[now])\n    \
     \        if (nxt != prv) _build_dfs(nxt, now);\n        subtree_end[now] = vis_order.size();\n\
     \    }\n    PreorderEulerTour() = default;\n    PreorderEulerTour(const std::vector<std::vector<int>>\
-    \ &to, int root) : V(to.size()), root(root), edges(to) {\n        assert(root\
+    \ &to, int root)\n        : V(to.size()), root(root), edges(to) {\n        assert(root\
     \ >= 0 and root < V);\n        subtree_begin.resize(V);\n        subtree_end.resize(V);\n\
     \        _build_dfs(root, -1);\n    }\n};\n#line 3 \"tree/test/vertex-add-subtree-sum.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\n\
@@ -150,8 +150,8 @@ data:
   isVerificationFile: true
   path: tree/test/vertex-add-subtree-sum.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 00:36:27+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-06-06 15:23:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/vertex-add-subtree-sum.test.cpp
 layout: document

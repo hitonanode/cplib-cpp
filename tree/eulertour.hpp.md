@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/vertex-add-subtree-sum.test.cpp
     title: tree/test/vertex-add-subtree-sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"tree/eulertour.hpp\"\n#include <cassert>\n#include <vector>\n\
@@ -21,8 +21,8 @@ data:
     \        for (auto nxt : edges[now])\n            if (nxt != prv) _build_dfs(nxt,\
     \ now);\n        subtree_end[now] = vis_order.size();\n    }\n    PreorderEulerTour()\
     \ = default;\n    PreorderEulerTour(const std::vector<std::vector<int>> &to, int\
-    \ root) : V(to.size()), root(root), edges(to) {\n        assert(root >= 0 and\
-    \ root < V);\n        subtree_begin.resize(V);\n        subtree_end.resize(V);\n\
+    \ root)\n        : V(to.size()), root(root), edges(to) {\n        assert(root\
+    \ >= 0 and root < V);\n        subtree_begin.resize(V);\n        subtree_end.resize(V);\n\
     \        _build_dfs(root, -1);\n    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <vector>\n\n// CUT begin\n// Preorder\
     \ Euler Tour\n// \uFF08\u884C\u304D\u304C\u3051\u9806\uFF0C\u90E8\u5206\u6728\u306E\
@@ -33,15 +33,15 @@ data:
     \ = vis_order.size();\n        vis_order.push_back(now);\n        for (auto nxt\
     \ : edges[now])\n            if (nxt != prv) _build_dfs(nxt, now);\n        subtree_end[now]\
     \ = vis_order.size();\n    }\n    PreorderEulerTour() = default;\n    PreorderEulerTour(const\
-    \ std::vector<std::vector<int>> &to, int root) : V(to.size()), root(root), edges(to)\
-    \ {\n        assert(root >= 0 and root < V);\n        subtree_begin.resize(V);\n\
+    \ std::vector<std::vector<int>> &to, int root)\n        : V(to.size()), root(root),\
+    \ edges(to) {\n        assert(root >= 0 and root < V);\n        subtree_begin.resize(V);\n\
     \        subtree_end.resize(V);\n        _build_dfs(root, -1);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: tree/eulertour.hpp
   requiredBy: []
-  timestamp: '2021-02-26 00:36:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-06-06 15:23:40+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/vertex-add-subtree-sum.test.cpp
 documentation_of: tree/eulertour.hpp

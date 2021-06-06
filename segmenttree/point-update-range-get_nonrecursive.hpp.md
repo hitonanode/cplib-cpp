@@ -12,10 +12,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/rmq_nonrecursive.test.cpp
     title: segmenttree/test/rmq_nonrecursive.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/vertex-add-path-sum.test.cpp
     title: tree/test/vertex-add-path-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/vertex-add-subtree-sum.test.cpp
     title: tree/test/vertex-add-subtree-sum.test.cpp
   - icon: ':x:'

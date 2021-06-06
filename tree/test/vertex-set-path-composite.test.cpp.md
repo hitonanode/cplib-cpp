@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: tree/heavy_light_decomposition.hpp
     title: tree/heavy_light_decomposition.hpp
   _extendedRequiredBy: []
@@ -187,42 +187,40 @@ data:
     \ T>(x, x)});\n        SegTree::initialize(init, TRET(0, 0));\n    }\n};\n#line\
     \ 5 \"tree/heavy_light_decomposition.hpp\"\n#include <queue>\n#line 7 \"tree/heavy_light_decomposition.hpp\"\
     \n#include <utility>\n#line 9 \"tree/heavy_light_decomposition.hpp\"\n\n// CUT\
-    \ begin\n// Heavy-Light Decomposition of trees\n// Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>\n\
+    \ begin\n// Heavy-Light Decomposition of trees\n// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\n\
     struct HeavyLightDecomposition {\n    int V;\n    int k;\n    int nb_heavy_path;\n\
-    \    std::vector<std::vector<int>> e;\n    std::vector<int> par;             \
-    \           // par[i] = parent of vertex i (Default: -1)\n    std::vector<int>\
-    \ depth;                      // depth[i] = distance between root and vertex i\n\
-    \    std::vector<int> subtree_sz;                 // subtree_sz[i] = size of subtree\
-    \ whose root is i\n    std::vector<int> heavy_child;                // heavy_child[i]\
+    \    std::vector<std::vector<int>> e;\n    std::vector<int> par;         // par[i]\
+    \ = parent of vertex i (Default: -1)\n    std::vector<int> depth;       // depth[i]\
+    \ = distance between root and vertex i\n    std::vector<int> subtree_sz;  // subtree_sz[i]\
+    \ = size of subtree whose root is i\n    std::vector<int> heavy_child; // heavy_child[i]\
     \ = child of vertex i on heavy path (Default: -1)\n    std::vector<int> tree_id;\
-    \                    // tree_id[i] = id of tree vertex i belongs to\n    std::vector<int>\
-    \ aligned_id, aligned_id_inv; // aligned_id[i] =  aligned id for vertex i (consecutive\
-    \ on heavy edges)\n    std::vector<int> head;                       // head[i]\
-    \ = id of vertex on heavy path of vertex i, nearest to root\n    std::vector<int>\
-    \ head_ids;                   // consist of head vertex id's\n    std::vector<int>\
-    \ heavy_path_id;              // heavy_path_id[i] = heavy_path_id for vertex [i]\n\
-    \n    HeavyLightDecomposition(int sz = 0) : V(sz), k(0), nb_heavy_path(0), e(sz),\
-    \ par(sz), depth(sz), subtree_sz(sz), heavy_child(sz), tree_id(sz, -1), aligned_id(sz),\
-    \ aligned_id_inv(sz), head(sz), heavy_path_id(sz, -1) {}\n    void add_edge(int\
-    \ u, int v) {\n        e[u].emplace_back(v);\n        e[v].emplace_back(u);\n\
-    \    }\n\n    void _build_dfs(int root) {\n        std::stack<std::pair<int, int>>\
-    \ st;\n        par[root] = -1;\n        depth[root] = 0;\n        st.emplace(root,\
-    \ 0);\n        while (!st.empty()) {\n            int now = st.top().first;\n\
-    \            int& i = st.top().second;\n            if (i < (int)e[now].size())\
-    \ {\n                int nxt = e[now][i++];\n                if (nxt == par[now])\
-    \ continue;\n                par[nxt] = now;\n                depth[nxt] = depth[now]\
-    \ + 1;\n                st.emplace(nxt, 0);\n            } else {\n          \
-    \      st.pop();\n                int max_sub_sz = 0;\n                subtree_sz[now]\
-    \ = 1;\n                heavy_child[now] = -1;\n                for (auto nxt\
-    \ : e[now]) {\n                    if (nxt == par[now]) continue;\n          \
-    \          subtree_sz[now] += subtree_sz[nxt];\n                    if (max_sub_sz\
-    \ < subtree_sz[nxt]) max_sub_sz = subtree_sz[nxt], heavy_child[now] = nxt;\n \
-    \               }\n            }\n        }\n    }\n\n    void _build_bfs(int\
-    \ root, int tree_id_now) {\n        std::queue<int> q({root});\n        while\
-    \ (!q.empty()) {\n            int h = q.front();\n            q.pop();\n     \
-    \       head_ids.emplace_back(h);\n            for (int now = h; now != -1; now\
-    \ = heavy_child[now]) {\n                tree_id[now] = tree_id_now;\n       \
-    \         aligned_id[now] = k++;\n                aligned_id_inv[aligned_id[now]]\
+    \     // tree_id[i] = id of tree vertex i belongs to\n    std::vector<int> aligned_id,\
+    \ aligned_id_inv; // aligned_id[i] =  aligned id for vertex i (consecutive on\
+    \ heavy edges)\n    std::vector<int> head;          // head[i] = id of vertex\
+    \ on heavy path of vertex i, nearest to root\n    std::vector<int> head_ids; \
+    \     // consist of head vertex id's\n    std::vector<int> heavy_path_id; // heavy_path_id[i]\
+    \ = heavy_path_id for vertex [i]\n\n    HeavyLightDecomposition(int sz = 0)\n\
+    \        : V(sz), k(0), nb_heavy_path(0), e(sz), par(sz), depth(sz), subtree_sz(sz),\
+    \ heavy_child(sz), tree_id(sz, -1), aligned_id(sz), aligned_id_inv(sz), head(sz),\
+    \ heavy_path_id(sz, -1) {}\n    void add_edge(int u, int v) {\n        e[u].emplace_back(v);\n\
+    \        e[v].emplace_back(u);\n    }\n\n    void _build_dfs(int root) {\n   \
+    \     std::stack<std::pair<int, int>> st;\n        par[root] = -1;\n        depth[root]\
+    \ = 0;\n        st.emplace(root, 0);\n        while (!st.empty()) {\n        \
+    \    int now = st.top().first;\n            int& i = st.top().second;\n      \
+    \      if (i < (int)e[now].size()) {\n                int nxt = e[now][i++];\n\
+    \                if (nxt == par[now]) continue;\n                par[nxt] = now;\n\
+    \                depth[nxt] = depth[now] + 1;\n                st.emplace(nxt,\
+    \ 0);\n            } else {\n                st.pop();\n                int max_sub_sz\
+    \ = 0;\n                subtree_sz[now] = 1;\n                heavy_child[now]\
+    \ = -1;\n                for (auto nxt : e[now]) {\n                    if (nxt\
+    \ == par[now]) continue;\n                    subtree_sz[now] += subtree_sz[nxt];\n\
+    \                    if (max_sub_sz < subtree_sz[nxt]) max_sub_sz = subtree_sz[nxt],\
+    \ heavy_child[now] = nxt;\n                }\n            }\n        }\n    }\n\
+    \n    void _build_bfs(int root, int tree_id_now) {\n        std::queue<int> q({root});\n\
+    \        while (!q.empty()) {\n            int h = q.front();\n            q.pop();\n\
+    \            head_ids.emplace_back(h);\n            for (int now = h; now != -1;\
+    \ now = heavy_child[now]) {\n                tree_id[now] = tree_id_now;\n   \
+    \             aligned_id[now] = k++;\n                aligned_id_inv[aligned_id[now]]\
     \ = now;\n                heavy_path_id[now] = nb_heavy_path;\n              \
     \  head[now] = h;\n                for (int nxt : e[now])\n                  \
     \  if (nxt != par[now] and nxt != heavy_child[now]) q.push(nxt);\n           \
@@ -326,7 +324,7 @@ data:
   isVerificationFile: true
   path: tree/test/vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 14:54:00+09:00'
+  timestamp: '2021-06-06 15:23:40+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/vertex-set-path-composite.test.cpp
