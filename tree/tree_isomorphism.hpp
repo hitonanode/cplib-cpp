@@ -9,9 +9,9 @@ using namespace std;
 // CUT begin
 // Tree isomorphism with hashing （ハッシュによる木の同型判定）
 // Dependence: ModInt or ModIntRuntime
-// Reference: <https://snuke.hatenablog.com/entry/2017/02/03/054210>
-// Verified: <https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698> (ModInt)
-//           <https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044745> (ModIntRuntime)
+// Reference: https://snuke.hatenablog.com/entry/2017/02/03/054210
+// Verified: https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698 (ModInt)
+//           https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044745 (ModIntRuntime)
 using mint = ModInt<1000000007>;
 // using mint = ModIntRuntime;
 // int ModIntRuntime::mod = 1000000007;
@@ -27,7 +27,7 @@ struct UndirectedTree {
     }
 
     static uint64_t splitmix64(uint64_t x) {
-        // <https://codeforces.com/blog/entry/62393> <http://xorshift.di.unimi.it/splitmix64.c>
+        // https://codeforces.com/blog/entry/62393 http://xorshift.di.unimi.it/splitmix64.c
         x += 0x9e3779b97f4a7c15;
         x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
         x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
@@ -39,7 +39,9 @@ struct UndirectedTree {
     }
 
     static void add_hash(DoubleHash &l, const DoubleHash &r) { l.first += r.first, l.second += r.second; }
-    static DoubleHash subtract_hash(const DoubleHash &l, const DoubleHash &r) { return {l.first - r.first, l.second - r.second}; }
+    static DoubleHash subtract_hash(const DoubleHash &l, const DoubleHash &r) {
+        return {l.first - r.first, l.second - r.second};
+    }
 
     vector<DoubleHash> hash;         // hash of the tree, each node regarded as root
     vector<DoubleHash> hash_subtree; // hash of the subtree

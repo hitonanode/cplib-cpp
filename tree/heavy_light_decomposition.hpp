@@ -9,23 +9,24 @@
 
 // CUT begin
 // Heavy-Light Decomposition of trees
-// Based on <http://beet-aizu.hatenablog.com/entry/2017/12/12/235950>
+// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950
 struct HeavyLightDecomposition {
     int V;
     int k;
     int nb_heavy_path;
     std::vector<std::vector<int>> e;
-    std::vector<int> par;                        // par[i] = parent of vertex i (Default: -1)
-    std::vector<int> depth;                      // depth[i] = distance between root and vertex i
-    std::vector<int> subtree_sz;                 // subtree_sz[i] = size of subtree whose root is i
-    std::vector<int> heavy_child;                // heavy_child[i] = child of vertex i on heavy path (Default: -1)
-    std::vector<int> tree_id;                    // tree_id[i] = id of tree vertex i belongs to
+    std::vector<int> par;         // par[i] = parent of vertex i (Default: -1)
+    std::vector<int> depth;       // depth[i] = distance between root and vertex i
+    std::vector<int> subtree_sz;  // subtree_sz[i] = size of subtree whose root is i
+    std::vector<int> heavy_child; // heavy_child[i] = child of vertex i on heavy path (Default: -1)
+    std::vector<int> tree_id;     // tree_id[i] = id of tree vertex i belongs to
     std::vector<int> aligned_id, aligned_id_inv; // aligned_id[i] =  aligned id for vertex i (consecutive on heavy edges)
-    std::vector<int> head;                       // head[i] = id of vertex on heavy path of vertex i, nearest to root
-    std::vector<int> head_ids;                   // consist of head vertex id's
-    std::vector<int> heavy_path_id;              // heavy_path_id[i] = heavy_path_id for vertex [i]
+    std::vector<int> head;          // head[i] = id of vertex on heavy path of vertex i, nearest to root
+    std::vector<int> head_ids;      // consist of head vertex id's
+    std::vector<int> heavy_path_id; // heavy_path_id[i] = heavy_path_id for vertex [i]
 
-    HeavyLightDecomposition(int sz = 0) : V(sz), k(0), nb_heavy_path(0), e(sz), par(sz), depth(sz), subtree_sz(sz), heavy_child(sz), tree_id(sz, -1), aligned_id(sz), aligned_id_inv(sz), head(sz), heavy_path_id(sz, -1) {}
+    HeavyLightDecomposition(int sz = 0)
+        : V(sz), k(0), nb_heavy_path(0), e(sz), par(sz), depth(sz), subtree_sz(sz), heavy_child(sz), tree_id(sz, -1), aligned_id(sz), aligned_id_inv(sz), head(sz), heavy_path_id(sz, -1) {}
     void add_edge(int u, int v) {
         e[u].emplace_back(v);
         e[v].emplace_back(u);

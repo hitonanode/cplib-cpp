@@ -20,7 +20,8 @@ struct PreorderEulerTour {
         subtree_end[now] = vis_order.size();
     }
     PreorderEulerTour() = default;
-    PreorderEulerTour(const std::vector<std::vector<int>> &to, int root) : V(to.size()), root(root), edges(to) {
+    PreorderEulerTour(const std::vector<std::vector<int>> &to, int root)
+        : V(to.size()), root(root), edges(to) {
         assert(root >= 0 and root < V);
         subtree_begin.resize(V);
         subtree_end.resize(V);

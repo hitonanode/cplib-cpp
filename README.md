@@ -37,5 +37,5 @@ Except such snippets, the programs written by the owner of the repo is under the
 Settings of `clang-format`:
 
 ```
-{ BasedOnStyle: LLVM, IndentWidth: 4, AccessModifierOffset: -4, AllowShortBlocksOnASingleLine: true, AllowShortCaseLabelsOnASingleLine: true, AllowShortFunctionsOnASingleLine: All, AllowShortIfStatementsOnASingleLine: true, AllowShortLoopsOnASingleLine: true, AlwaysBreakBeforeMultilineStrings: false, AlwaysBreakTemplateDeclarations: false, ColumnLimit: 120 }
+{ BasedOnStyle: LLVM, IndentWidth: 4, AccessModifierOffset: -4, AllowShortBlocksOnASingleLine: true, AllowShortCaseLabelsOnASingleLine: true, AllowShortFunctionsOnASingleLine: All, AllowShortIfStatementsOnASingleLine: true, AllowShortLoopsOnASingleLine: true, AlwaysBreakBeforeMultilineStrings: false, AlwaysBreakTemplateDeclarations: false, ColumnLimit: 110 }
 ```
