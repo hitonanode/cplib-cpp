@@ -5,7 +5,7 @@
 #include <cstdio>
 
 int main() {
-    int lim = 2e8;
+    int lim = 5e7;
     Sieve sieve(lim);
     for (int x = 1; x <= lim; x++) {
         bool is_prime_1 = (sieve.min_factor[x] == x);
