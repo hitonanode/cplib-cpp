@@ -8,7 +8,7 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int N;
     cin >> N;
-    ModIntRuntime::mod = 998244353;
+    ModIntRuntime::set_mod(998244353);
     FormalPowerSeries<ModIntRuntime> A(N);
     for (int i = 0; i < N; i++) cin >> A[i];
     A.shrink();

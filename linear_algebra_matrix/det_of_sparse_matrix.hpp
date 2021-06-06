@@ -39,7 +39,7 @@ template <typename Tp> struct sparse_matrix {
     // Reference: https://yukicoder.me/wiki/black_box_linear_algebra
     Tp Determinant() const {
         assert(H == W);
-        const int N = H, hi = Tp::get_mod();
+        const int N = H, hi = Tp::mod();
         std::vector<Tp> b(N), u(N), D(N);
         for (int i = 0; i < N; i++) { b[i] = rnd(1, hi), u[i] = rnd(1, hi), D[i] = rnd(1, hi); }
         std::vector<Tp> uMDib(2 * N);
