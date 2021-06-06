@@ -5,10 +5,13 @@
 
 // CUT begin
 struct ModIntRuntime {
-    using lint = long long int;
+private:
+    static int md;
+
+public:
+    using lint = long long;
     static int mod() { return md; }
     int val;
-    static int md;
     static std::vector<ModIntRuntime> &facs() {
         static std::vector<ModIntRuntime> facs_;
         return facs_;
