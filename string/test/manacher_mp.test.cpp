@@ -14,7 +14,7 @@ int main() {
     vector<int> mp = mp_algorithm(T);
     vector<int> mana = manacher(T);
 
-    int rep = N - mp[N];
+    int rep = N - mp[N - 1];
     for (int i = 2; i <= N; i++) {
         if (i + mana[i - 1] - 1 == N) {
             cout << i << '\n';
