@@ -133,6 +133,7 @@
 "string/test/sa_count_keyword.test.cpp": "2021-01-02 01:50:58 +0900",
 "string/test/suffix_array.test.cpp": "2021-01-02 00:51:41 +0900",
 "string/test/z_algorithm.test.cpp": "2021-01-01 16:52:32 +0900",
+"tree/test/diameter.test.cpp": "2021-06-09 00:24:00 +0900",
 "tree/test/frequency_table_of_tree_distance.test.cpp": "2021-06-06 15:23:40 +0900",
 "tree/test/hl_decomposition.test.cpp": "2021-06-06 15:23:40 +0900",
 "tree/test/lca.test.cpp": "2021-02-26 00:36:27 +0900",
