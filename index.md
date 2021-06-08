@@ -455,6 +455,9 @@ data:
       path: tree/centroid_decomposition.hpp
       title: tree/centroid_decomposition.hpp
     - icon: ':heavy_check_mark:'
+      path: tree/diameter.hpp
+      title: "Tree diameter \uFF08\u6728\u306E\u76F4\u5F84\uFF09"
+    - icon: ':heavy_check_mark:'
       path: tree/eulertour.hpp
       title: tree/eulertour.hpp
     - icon: ':heavy_check_mark:'
@@ -960,6 +963,9 @@ data:
       title: string/test/z_algorithm.test.cpp
   - name: tree/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: tree/test/diameter.test.cpp
+      title: tree/test/diameter.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance.test.cpp
       title: tree/test/frequency_table_of_tree_distance.test.cpp
