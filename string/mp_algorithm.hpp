@@ -12,7 +12,7 @@
 // - `teletelepathy` -> [0, 0, 0, 0, 1, 2, 3, 4, 0, 0, 1, 0, 0]
 // https://snuke.hatenablog.com/entry/2014/12/01/235807
 template <typename T> std::vector<int> mp_algorithm(const std::vector<T> &s) {
-    int N = s.length();
+    int N = s.size();
     std::vector<int> ret(N, -1);
     int j = -1;
     for (int i = 0; i < N; i++) {
