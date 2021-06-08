@@ -366,6 +366,9 @@ data:
       path: segmenttree/range_minimum_query.hpp
       title: segmenttree/range_minimum_query.hpp
     - icon: ':heavy_check_mark:'
+      path: segmenttree/rangetree.hpp
+      title: "Range Tree \uFF08\u9818\u57DF\u6728\uFF09"
+    - icon: ':heavy_check_mark:'
       path: segmenttree/segment_tree_2d.hpp
       title: segmenttree/segment_tree_2d.hpp
   - name: segmenttree/trees
@@ -876,6 +879,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/range-affine-range-sum.test.cpp
       title: segmenttree/test/range-affine-range-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/test/rangetree.test.cpp
+      title: segmenttree/test/rangetree.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/rmq_nonrecursive.test.cpp
       title: segmenttree/test/rmq_nonrecursive.test.cpp
