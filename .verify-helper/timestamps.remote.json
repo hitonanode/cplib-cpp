@@ -124,6 +124,7 @@
 "string/test/incremental_matching.test.cpp": "2021-02-26 23:47:50 +0900",
 "string/test/lcp.test.cpp": "2021-01-02 00:51:41 +0900",
 "string/test/manacher.test.cpp": "2021-05-01 18:29:22 +0900",
+"string/test/manacher_mp.test.cpp": "2021-06-08 23:12:48 +0900",
 "string/test/rolling_hash.test.cpp": "2021-03-13 17:28:18 +0900",
 "string/test/rolling_hash_lcp.test.cpp": "2021-03-13 17:28:18 +0900",
 "string/test/rolling_hash_w_modint.test.cpp": "2021-06-06 14:54:00 +0900",
