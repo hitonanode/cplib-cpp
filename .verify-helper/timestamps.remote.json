@@ -108,6 +108,7 @@
 "segmenttree/test/point-set-range-composite.test.cpp": "2021-06-06 14:54:00 +0900",
 "segmenttree/test/point-update-range-min.test.cpp": "2021-04-18 20:20:24 +0900",
 "segmenttree/test/range-affine-range-sum.test.cpp": "2021-06-06 14:54:00 +0900",
+"segmenttree/test/rangetree.test.cpp": "2021-06-08 20:29:11 +0900",
 "segmenttree/test/rmq_nonrecursive.test.cpp": "2021-01-01 16:52:32 +0900",
 "segmenttree/test/segment_tree_2d.test.cpp": "2021-01-01 16:52:32 +0900",
 "segmenttree/test/segment_tree_2d_pointadd.test.cpp": "2021-01-01 16:52:32 +0900",
