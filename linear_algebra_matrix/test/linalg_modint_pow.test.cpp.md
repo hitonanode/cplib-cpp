@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/linalg_modint.hpp
-    title: linear_algebra_matrix/linalg_modint.hpp
+    path: linear_algebra_matrix/matrix.hpp
+    title: linear_algebra_matrix/matrix.hpp
   - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
@@ -92,10 +92,10 @@ data:
     \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"linear_algebra_matrix/linalg_modint.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#line 5 \"linear_algebra_matrix/linalg_modint.hpp\"\
-    \n#include <iterator>\n#line 7 \"linear_algebra_matrix/linalg_modint.hpp\"\n\n\
-    // CUT begin\ntemplate <typename T> struct matrix {\n    int H, W;\n    std::vector<T>\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#line 6 \"linear_algebra_matrix/matrix.hpp\"\
+    \n#include <iterator>\n#include <type_traits>\n#line 9 \"linear_algebra_matrix/matrix.hpp\"\
+    \n\n// CUT begin\ntemplate <typename T> struct matrix {\n    int H, W;\n    std::vector<T>\
     \ elem;\n    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
     \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
     \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    operator std::vector<std::vector<T>>()\
@@ -112,7 +112,7 @@ data:
     \        return ret;\n    }\n    matrix operator*(const T &v) const {\n      \
     \  matrix ret = *this;\n        for (auto &x : ret.elem) x *= v;\n        return\
     \ ret;\n    }\n    matrix operator/(const T &v) const {\n        matrix ret =\
-    \ *this;\n        const T vinv = v.inv();\n        for (auto &x : ret.elem) x\
+    \ *this;\n        const T vinv = T(1) / v;\n        for (auto &x : ret.elem) x\
     \ *= vinv;\n        return ret;\n    }\n    matrix operator+(const matrix &r)\
     \ const {\n        matrix ret = *this;\n        for (int i = 0; i < H * W; i++)\
     \ ret.elem[i] += r.elem[i];\n        return ret;\n    }\n    matrix operator-(const\
@@ -141,59 +141,67 @@ data:
     \ H; i++) {\n            for (int j = 0; j < W; j++) ret.at(j, i) = this->get(i,\
     \ j);\n        }\n        return ret;\n    }\n    // Gauss-Jordan elimination\n\
     \    // - Require inverse for every non-zero element\n    // - Complexity: O(H^2\
-    \ W)\n    matrix gauss_jordan() const {\n        int c = 0;\n        matrix mtr(*this);\n\
-    \        std::vector<int> ws;\n        ws.reserve(W);\n        for (int h = 0;\
-    \ h < H; h++) {\n            if (c == W) break;\n            int piv = -1;\n \
-    \           for (int j = h; j < H; j++)\n                if (mtr.get(j, c)) {\n\
-    \                    piv = j;\n                    break;\n                }\n\
-    \            if (piv == -1) {\n                c++;\n                h--;\n  \
-    \              continue;\n            }\n            if (h != piv) {\n       \
-    \         for (int w = 0; w < W; w++) {\n                    std::swap(mtr[piv][w],\
-    \ mtr[h][w]);\n                    mtr.at(piv, w) *= -1; // To preserve sign of\
-    \ determinant\n                }\n            }\n            ws.clear();\n   \
-    \         for (int w = c; w < W; w++) {\n                if (mtr.at(h, w) != 0)\
-    \ ws.emplace_back(w);\n            }\n            const T hcinv = mtr.at(h, c).inv();\n\
-    \            for (int hh = 0; hh < H; hh++)\n                if (hh != h) {\n\
-    \                    const T coeff = mtr.at(hh, c) * hcinv;\n                \
-    \    for (auto w : ws) mtr.at(hh, w) -= mtr.at(h, w) * coeff;\n              \
-    \  }\n            c++;\n        }\n        return mtr;\n    }\n    int rank_of_gauss_jordan()\
-    \ const {\n        for (int i = H * W - 1; i >= 0; i--) {\n            if (elem[i])\
-    \ return i / W + 1;\n        }\n        return 0;\n    }\n    T determinant_of_upper_triangle()\
-    \ const {\n        T ret = 1;\n        for (int i = 0; i < H; i++) ret *= get(i,\
-    \ i);\n        return ret;\n    }\n    int inverse() {\n        assert(H == W);\n\
-    \        std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n       \
-    \ int rank = 0;\n        for (int i = 0; i < H; i++) {\n            int ti = i;\n\
-    \            while (ti < H and tmp[ti][i] == 0) ti++;\n            if (ti == H)\
-    \ {\n                continue;\n            } else {\n                rank++;\n\
-    \            }\n            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);\n    \
-    \        T inv = tmp[i][i].inv();\n            for (int j = 0; j < W; j++) ret[i][j]\
-    \ *= inv;\n            for (int j = i + 1; j < W; j++) tmp[i][j] *= inv;\n   \
-    \         for (int h = 0; h < H; h++) {\n                if (i == h) continue;\n\
-    \                const T c = -tmp[h][i];\n                for (int j = 0; j <\
-    \ W; j++) ret[h][j] += ret[i][j] * c;\n                for (int j = i + 1; j <\
-    \ W; j++) tmp[h][j] += tmp[i][j] * c;\n            }\n        }\n        *this\
-    \ = ret;\n        return rank;\n    }\n    friend std::vector<T> operator*(const\
-    \ matrix &m, const std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n\
-    \        std::vector<T> ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];\n    \
-    \    }\n        return ret;\n    }\n    friend std::vector<T> operator*(const\
-    \ std::vector<T> &v, const matrix &m) {\n        assert(int(v.size()) == m.H);\n\
-    \        std::vector<T> ret(m.W);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[j] += v[i] * m.get(i, j);\n    \
-    \    }\n        return ret;\n    }\n    friend std::ostream &operator<<(std::ostream\
-    \ &os, const matrix &x) {\n        os << \"[(\" << x.H << \" * \" << x.W << \"\
-    \ matrix)\";\n        os << \"\\n[column sums: \";\n        for (int j = 0; j\
-    \ < x.W; j++) {\n            T s = 0;\n            for (int i = 0; i < x.H; i++)\
-    \ s += x.get(i, j);\n            os << s << \",\";\n        }\n        os << \"\
-    ]\";\n        for (int i = 0; i < x.H; i++) {\n            os << \"\\n[\";\n \
-    \           for (int j = 0; j < x.W; j++) os << x.get(i, j) << \",\";\n      \
-    \      os << \"]\";\n        }\n        os << \"]\\n\";\n        return os;\n\
-    \    }\n    friend std::istream &operator>>(std::istream &is, matrix &x) {\n \
-    \       for (auto &v : x.elem) is >> v;\n        return is;\n    }\n};\n// Fibonacci\
-    \ numbers f(n) = af(n - 1) + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2,\
-    \ 3=>3, 4=>5, ...\ntemplate <typename T> T Fibonacci(long long int k, int a =\
-    \ 1, int b = 1) {\n    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0]\
-    \ = b;\n    mat[1][1] = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 5 \"linear_algebra_matrix/test/linalg_modint_pow.test.cpp\"\
+    \ W)\n    template <typename T2, typename std::enable_if<std::is_floating_point<T2>::value>::type\
+    \ * = nullptr>\n    static int choose_pivot(const matrix<T2> &mtr, int h, int\
+    \ c) noexcept {\n        int piv = -1;\n        for (int j = h; j < mtr.H; j++)\
+    \ {\n            if (mtr.get(j, c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv,\
+    \ c)))) piv = j;\n        }\n        return piv;\n    }\n    template <typename\
+    \ T2, typename std::enable_if<!std::is_floating_point<T2>::value>::type * = nullptr>\n\
+    \    static int choose_pivot(const matrix<T2> &mtr, int h, int c) noexcept {\n\
+    \        for (int j = h; j < mtr.H; j++) {\n            if (mtr.get(j, c)) return\
+    \ j;\n        }\n        return -1;\n    }\n    matrix gauss_jordan() const {\n\
+    \        int c = 0;\n        matrix mtr(*this);\n        std::vector<int> ws;\n\
+    \        ws.reserve(W);\n        for (int h = 0; h < H; h++) {\n            if\
+    \ (c == W) break;\n            int piv = choose_pivot(mtr, h, c);\n          \
+    \  if (piv == -1) {\n                c++;\n                h--;\n            \
+    \    continue;\n            }\n            if (h != piv) {\n                for\
+    \ (int w = 0; w < W; w++) {\n                    std::swap(mtr[piv][w], mtr[h][w]);\n\
+    \                    mtr.at(piv, w) *= -1; // To preserve sign of determinant\n\
+    \                }\n            }\n            ws.clear();\n            for (int\
+    \ w = c; w < W; w++) {\n                if (mtr.at(h, w) != 0) ws.emplace_back(w);\n\
+    \            }\n            const T hcinv = T(1) / mtr.at(h, c);\n           \
+    \ for (int hh = 0; hh < H; hh++)\n                if (hh != h) {\n           \
+    \         const T coeff = mtr.at(hh, c) * hcinv;\n                    for (auto\
+    \ w : ws) mtr.at(hh, w) -= mtr.at(h, w) * coeff;\n                    mtr.at(hh,\
+    \ c) = 0;\n                }\n            c++;\n        }\n        return mtr;\n\
+    \    }\n    int rank_of_gauss_jordan() const {\n        for (int i = H * W - 1;\
+    \ i >= 0; i--) {\n            if (elem[i]) return i / W + 1;\n        }\n    \
+    \    return 0;\n    }\n    T determinant_of_upper_triangle() const {\n       \
+    \ T ret = 1;\n        for (int i = 0; i < H; i++) ret *= get(i, i);\n        return\
+    \ ret;\n    }\n    int inverse() {\n        assert(H == W);\n        std::vector<std::vector<T>>\
+    \ ret = Identity(H), tmp = *this;\n        int rank = 0;\n        for (int i =\
+    \ 0; i < H; i++) {\n            int ti = i;\n            while (ti < H and tmp[ti][i]\
+    \ == 0) ti++;\n            if (ti == H) {\n                continue;\n       \
+    \     } else {\n                rank++;\n            }\n            ret[i].swap(ret[ti]),\
+    \ tmp[i].swap(tmp[ti]);\n            T inv = T(1) / tmp[i][i];\n            for\
+    \ (int j = 0; j < W; j++) ret[i][j] *= inv;\n            for (int j = i + 1; j\
+    \ < W; j++) tmp[i][j] *= inv;\n            for (int h = 0; h < H; h++) {\n   \
+    \             if (i == h) continue;\n                const T c = -tmp[h][i];\n\
+    \                for (int j = 0; j < W; j++) ret[h][j] += ret[i][j] * c;\n   \
+    \             for (int j = i + 1; j < W; j++) tmp[h][j] += tmp[i][j] * c;\n  \
+    \          }\n        }\n        *this = ret;\n        return rank;\n    }\n \
+    \   friend std::vector<T> operator*(const matrix &m, const std::vector<T> &v)\
+    \ {\n        assert(m.W == int(v.size()));\n        std::vector<T> ret(m.H);\n\
+    \        for (int i = 0; i < m.H; i++) {\n            for (int j = 0; j < m.W;\
+    \ j++) ret[i] += m.get(i, j) * v[j];\n        }\n        return ret;\n    }\n\
+    \    friend std::vector<T> operator*(const std::vector<T> &v, const matrix &m)\
+    \ {\n        assert(int(v.size()) == m.H);\n        std::vector<T> ret(m.W);\n\
+    \        for (int i = 0; i < m.H; i++) {\n            for (int j = 0; j < m.W;\
+    \ j++) ret[j] += v[i] * m.get(i, j);\n        }\n        return ret;\n    }\n\
+    \    friend std::ostream &operator<<(std::ostream &os, const matrix &x) {\n  \
+    \      os << \"[(\" << x.H << \" * \" << x.W << \" matrix)\";\n        os << \"\
+    \\n[column sums: \";\n        for (int j = 0; j < x.W; j++) {\n            T s\
+    \ = 0;\n            for (int i = 0; i < x.H; i++) s += x.get(i, j);\n        \
+    \    os << s << \",\";\n        }\n        os << \"]\";\n        for (int i =\
+    \ 0; i < x.H; i++) {\n            os << \"\\n[\";\n            for (int j = 0;\
+    \ j < x.W; j++) os << x.get(i, j) << \",\";\n            os << \"]\";\n      \
+    \  }\n        os << \"]\\n\";\n        return os;\n    }\n    friend std::istream\
+    \ &operator>>(std::istream &is, matrix &x) {\n        for (auto &v : x.elem) is\
+    \ >> v;\n        return is;\n    }\n};\n// Fibonacci numbers f(n) = af(n - 1)\
+    \ + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...\ntemplate\
+    \ <typename T> T Fibonacci(long long int k, int a = 1, int b = 1) {\n    matrix<T>\
+    \ mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n    mat[1][1] = a;\n   \
+    \ return mat.pow(k + 1)[0][1];\n}\n#line 5 \"linear_algebra_matrix/test/linalg_modint_pow.test.cpp\"\
     \nusing namespace std;\n#define PROBLEM \"https://yukicoder.me/problems/no/1112\"\
     \n\nint pq2id(int p2, int p1) { return p2 * 6 + p1; }\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int K, M;\n    long long N;\n    cin >> K\
@@ -203,8 +211,8 @@ data:
     \ = 1;\n    }\n    vector<mint> vec(36);\n    for (int i = 0; i < K; i++) vec[pq2id(0,\
     \ i)] = 1;\n    vec = mat.pow(N - 2) * vec;\n    mint ret = 0;\n    for (int i\
     \ = 0; i < K; i++) ret += vec[pq2id(i, 0)];\n    cout << ret << '\\n';\n}\n"
-  code: "#include \"../../modint.hpp\"\n#include \"../linalg_modint.hpp\"\n#include\
-    \ <iostream>\n#include <vector>\nusing namespace std;\n#define PROBLEM \"https://yukicoder.me/problems/no/1112\"\
+  code: "#include \"../../modint.hpp\"\n#include \"../matrix.hpp\"\n#include <iostream>\n\
+    #include <vector>\nusing namespace std;\n#define PROBLEM \"https://yukicoder.me/problems/no/1112\"\
     \n\nint pq2id(int p2, int p1) { return p2 * 6 + p1; }\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int K, M;\n    long long N;\n    cin >> K\
     \ >> M >> N;\n    using mint = ModInt<1000000007>;\n    matrix<mint> mat(36, 36);\n\
@@ -215,11 +223,11 @@ data:
     \ = 0; i < K; i++) ret += vec[pq2id(i, 0)];\n    cout << ret << '\\n';\n}\n"
   dependsOn:
   - modint.hpp
-  - linear_algebra_matrix/linalg_modint.hpp
+  - linear_algebra_matrix/matrix.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 14:54:00+09:00'
+  timestamp: '2021-06-10 03:00:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_pow.test.cpp

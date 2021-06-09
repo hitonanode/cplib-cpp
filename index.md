@@ -241,8 +241,8 @@ data:
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
     - icon: ':heavy_check_mark:'
-      path: linear_algebra_matrix/linalg_modint.hpp
-      title: linear_algebra_matrix/linalg_modint.hpp
+      path: linear_algebra_matrix/matrix.hpp
+      title: linear_algebra_matrix/matrix.hpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
