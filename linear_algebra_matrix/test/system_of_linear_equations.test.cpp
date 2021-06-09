@@ -1,8 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/system_of_linear_equations"
-#include "../../modint.hpp"
 #include "../system_of_linear_equations.hpp"
+#include "../../modint.hpp"
 #include <iostream>
 using mint = ModInt<998244353>;
+using namespace std;
 
 int main() {
     int N, M;

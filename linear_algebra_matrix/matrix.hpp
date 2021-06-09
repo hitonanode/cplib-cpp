@@ -1,8 +1,10 @@
 #pragma once
 #include <algorithm>
 #include <cassert>
+#include <cmath>
 #include <iostream>
 #include <iterator>
+#include <type_traits>
 #include <vector>
 
 // CUT begin
@@ -44,7 +46,7 @@ template <typename T> struct matrix {
     }
     matrix operator/(const T &v) const {
         matrix ret = *this;
-        const T vinv = v.inv();
+        const T vinv = T(1) / v;
         for (auto &x : ret.elem) x *= vinv;
         return ret;
     }
@@ -104,6 +106,21 @@ template <typename T> struct matrix {
     // Gauss-Jordan elimination
     // - Require inverse for every non-zero element
     // - Complexity: O(H^2 W)
+    template <typename T2, typename std::enable_if<std::is_floating_point<T2>::value>::type * = nullptr>
+    static int choose_pivot(const matrix<T2> &mtr, int h, int c) noexcept {
+        int piv = -1;
+        for (int j = h; j < mtr.H; j++) {
+            if (mtr.get(j, c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv, c)))) piv = j;
+        }
+        return piv;
+    }
+    template <typename T2, typename std::enable_if<!std::is_floating_point<T2>::value>::type * = nullptr>
+    static int choose_pivot(const matrix<T2> &mtr, int h, int c) noexcept {
+        for (int j = h; j < mtr.H; j++) {
+            if (mtr.get(j, c)) return j;
+        }
+        return -1;
+    }
     matrix gauss_jordan() const {
         int c = 0;
         matrix mtr(*this);
@@ -111,12 +128,7 @@ template <typename T> struct matrix {
         ws.reserve(W);
         for (int h = 0; h < H; h++) {
             if (c == W) break;
-            int piv = -1;
-            for (int j = h; j < H; j++)
-                if (mtr.get(j, c)) {
-                    piv = j;
-                    break;
-                }
+            int piv = choose_pivot(mtr, h, c);
             if (piv == -1) {
                 c++;
                 h--;
@@ -132,11 +144,12 @@ template <typename T> struct matrix {
             for (int w = c; w < W; w++) {
                 if (mtr.at(h, w) != 0) ws.emplace_back(w);
             }
-            const T hcinv = mtr.at(h, c).inv();
+            const T hcinv = T(1) / mtr.at(h, c);
             for (int hh = 0; hh < H; hh++)
                 if (hh != h) {
                     const T coeff = mtr.at(hh, c) * hcinv;
                     for (auto w : ws) mtr.at(hh, w) -= mtr.at(h, w) * coeff;
+                    mtr.at(hh, c) = 0;
                 }
             c++;
         }
@@ -166,7 +179,7 @@ template <typename T> struct matrix {
                 rank++;
             }
             ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);
-            T inv = tmp[i][i].inv();
+            T inv = T(1) / tmp[i][i];
             for (int j = 0; j < W; j++) ret[i][j] *= inv;
             for (int j = i + 1; j < W; j++) tmp[i][j] *= inv;
             for (int h = 0; h < H; h++) {
