@@ -1,5 +1,5 @@
 #include "../../modint.hpp"
-#include "../linalg_modint.hpp"
+#include "../matrix.hpp"
 #include <iostream>
 #include <vector>
 using namespace std;

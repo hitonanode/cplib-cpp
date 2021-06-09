@@ -1,5 +1,5 @@
 #pragma once
-#include "linalg_modint.hpp"
+#include "matrix.hpp"
 #include <utility>
 #include <vector>
 
@@ -34,8 +34,9 @@ std::pair<std::vector<T>, std::vector<std::vector<T>>> system_of_linear_equation
         if (ss[j] == -1) {
             std::vector<T> d(W);
             d[j] = 1;
-            for (int jj = 0; jj < j; jj++)
+            for (int jj = 0; jj < j; jj++) {
                 if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];
+            }
             D.emplace_back(d);
         } else
             x[j] = M[ss[j]][W] / M[ss[j]][j];
