@@ -8,14 +8,14 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
-    - https://en.wikipedia.org/wiki/Levinson_recursion>
+    - https://en.wikipedia.org/wiki/Levinson_recursion
   bundledCode: "#line 2 \"linear_algebra_matrix/toeplitz.hpp\"\n#include <cassert>\n\
     #include <vector>\n\n// CUT begin\n// solve Mx = y based on Levinson recursion\n\
     //\n// M = [\n// [ t_(N-1) t_(N-2) ... t_1 t_0     ]\n// [ t_N     t_(N-1) ...\
     \ t_2 t_1     ]\n// [ ...                             ]\n// [ t_(N*2-2)      \
-    \ ...     t_(N-1) ]]\n//\n// Complexity: O(N^2)\n// Reference: <https://en.wikipedia.org/wiki/Levinson_recursion>\n\
+    \ ...     t_(N-1) ]]\n//\n// Complexity: O(N^2)\n// Reference: https://en.wikipedia.org/wiki/Levinson_recursion\n\
     // return: - x = N-dim vector (if all principal minors of M are nonsingular)\n\
-    //         - empty vector     (otherwise)\ntemplate <typename T> std::vector<T>\
+    //         - empty vector     (otherwise)\ntemplate <typename T>\nstd::vector<T>\
     \ levinson_recursion(const std::vector<T> &toeplitz, const std::vector<T> &y)\
     \ {\n    const int N = y.size();\n    assert(int(toeplitz.size()) == N * 2 - 1);\n\
     \    std::vector<T> x(N);\n    std::vector<T> fn(1), en(1);\n    if (toeplitz[N\
@@ -35,9 +35,9 @@ data:
     \ Mx = y based on Levinson recursion\n//\n// M = [\n// [ t_(N-1) t_(N-2) ... t_1\
     \ t_0     ]\n// [ t_N     t_(N-1) ... t_2 t_1     ]\n// [ ...                \
     \             ]\n// [ t_(N*2-2)       ...     t_(N-1) ]]\n//\n// Complexity: O(N^2)\n\
-    // Reference: <https://en.wikipedia.org/wiki/Levinson_recursion>\n// return: -\
-    \ x = N-dim vector (if all principal minors of M are nonsingular)\n//        \
-    \ - empty vector     (otherwise)\ntemplate <typename T> std::vector<T> levinson_recursion(const\
+    // Reference: https://en.wikipedia.org/wiki/Levinson_recursion\n// return: - x\
+    \ = N-dim vector (if all principal minors of M are nonsingular)\n//         -\
+    \ empty vector     (otherwise)\ntemplate <typename T>\nstd::vector<T> levinson_recursion(const\
     \ std::vector<T> &toeplitz, const std::vector<T> &y) {\n    const int N = y.size();\n\
     \    assert(int(toeplitz.size()) == N * 2 - 1);\n    std::vector<T> x(N);\n  \
     \  std::vector<T> fn(1), en(1);\n    if (toeplitz[N - 1] == 0) { return {}; }\n\
@@ -57,7 +57,7 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/toeplitz.hpp
   requiredBy: []
-  timestamp: '2020-12-14 02:23:38+09:00'
+  timestamp: '2021-06-13 04:24:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: linear_algebra_matrix/toeplitz.hpp

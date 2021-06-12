@@ -29,6 +29,9 @@ data:
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/blackbox_linear_algebra.hpp
+    title: linear_algebra_matrix/blackbox_linear_algebra.hpp
+  - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
   - icon: ':warning:'
@@ -129,8 +132,11 @@ data:
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-    title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+    path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+    title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
+    title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
@@ -318,6 +324,7 @@ data:
   isVerificationFile: false
   path: modint.hpp
   requiredBy:
+  - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - convolution/ntt.hpp
   - convolution/multivar_ntt.hpp
   - convolution/convolutive_translation_2d.hpp
@@ -332,9 +339,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
   - convolution/test/ntt.test.cpp

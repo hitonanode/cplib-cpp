@@ -1,17 +1,11 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/det_of_sparse_matrix.hpp
-    title: linear_algebra_matrix/det_of_sparse_matrix.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: graph/test/chromatic_number.test.cpp
     title: graph/test/chromatic_number.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-    title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -32,12 +26,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: random/rand_nondeterministic.hpp
-  requiredBy:
-  - linear_algebra_matrix/det_of_sparse_matrix.hpp
+  requiredBy: []
   timestamp: '2020-11-18 20:25:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
   - graph/test/chromatic_number.test.cpp
 documentation_of: random/rand_nondeterministic.hpp
 layout: document

@@ -228,12 +228,12 @@ data:
       title: graph/strongly_connected_components_bitset.hpp
   - name: linear_algebra_matrix
     pages:
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/blackbox_linear_algebra.hpp
+      title: linear_algebra_matrix/blackbox_linear_algebra.hpp
     - icon: ':warning:'
       path: linear_algebra_matrix/circular_binary_expansion.hpp
       title: linear_algebra_matrix/circular_binary_expansion.hpp
-    - icon: ':heavy_check_mark:'
-      path: linear_algebra_matrix/det_of_sparse_matrix.hpp
-      title: linear_algebra_matrix/det_of_sparse_matrix.hpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_bitset.hpp
       title: linear_algebra_matrix/linalg_bitset.hpp
@@ -783,8 +783,11 @@ data:
   - name: linear_algebra_matrix/test
     pages:
     - icon: ':heavy_check_mark:'
-      path: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
-      title: linear_algebra_matrix/test/det_of_sparse_matrix.test.cpp
+      path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+      title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
+      title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_bitset.test.cpp
       title: linear_algebra_matrix/test/linalg_bitset.test.cpp

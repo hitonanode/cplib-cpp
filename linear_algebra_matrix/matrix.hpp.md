@@ -16,6 +16,9 @@ data:
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+    title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - icon: ':heavy_check_mark:'
@@ -264,6 +267,7 @@ data:
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - graph/test/general_matching.test.cpp
 documentation_of: linear_algebra_matrix/matrix.hpp

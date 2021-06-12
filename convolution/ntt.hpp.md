@@ -25,6 +25,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/polynomial_divmod.hpp
     title: formal_power_series/polynomial_divmod.hpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/blackbox_linear_algebra.hpp
+    title: linear_algebra_matrix/blackbox_linear_algebra.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: convolution/test/multivar_ntt.test.cpp
@@ -98,6 +101,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+    title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
+    title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -297,6 +306,7 @@ data:
   isVerificationFile: false
   path: convolution/ntt.hpp
   requiredBy:
+  - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - convolution/multivar_ntt.hpp
   - convolution/convolutive_translation_2d.hpp
   - formal_power_series/multipoint_evaluation.hpp
@@ -306,6 +316,8 @@ data:
   timestamp: '2021-06-06 14:54:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
+  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - convolution/test/ntt.test.cpp
   - convolution/test/ntt_arbitrary_mod.test.cpp
   - convolution/test/multivar_ntt.test.cpp
