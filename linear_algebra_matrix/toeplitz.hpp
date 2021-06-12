@@ -12,10 +12,11 @@
 // [ t_(N*2-2)       ...     t_(N-1) ]]
 //
 // Complexity: O(N^2)
-// Reference: <https://en.wikipedia.org/wiki/Levinson_recursion>
+// Reference: https://en.wikipedia.org/wiki/Levinson_recursion
 // return: - x = N-dim vector (if all principal minors of M are nonsingular)
 //         - empty vector     (otherwise)
-template <typename T> std::vector<T> levinson_recursion(const std::vector<T> &toeplitz, const std::vector<T> &y) {
+template <typename T>
+std::vector<T> levinson_recursion(const std::vector<T> &toeplitz, const std::vector<T> &y) {
     const int N = y.size();
     assert(int(toeplitz.size()) == N * 2 - 1);
     std::vector<T> x(N);
