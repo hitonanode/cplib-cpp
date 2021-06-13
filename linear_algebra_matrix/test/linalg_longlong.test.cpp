@@ -1,7 +1,8 @@
-#include "linear_algebra_matrix/linalg_longlong.hpp"
+#include "../linalg_longlong.hpp"
 #include <iostream>
 #include <numeric>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624"
+using namespace std;
 
 template <typename T> istream &operator>>(istream &is, vector<T> &vec) {
     for (auto &v : vec) is >> v;
@@ -10,6 +11,7 @@ template <typename T> istream &operator>>(istream &is, vector<T> &vec) {
 
 int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
+    using lint = long long;
 
     int N, T;
     cin >> N;

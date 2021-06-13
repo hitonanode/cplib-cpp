@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sparse_matrix_det"
 #include "../../modint.hpp"
-#include "../blackbox_linear_algebra.hpp"
+#include "../blackbox_algorithm.hpp"
+#include "../blackbox_matrices.hpp"
 #include <iostream>
 using namespace std;
 using mint = ModInt<998244353>;

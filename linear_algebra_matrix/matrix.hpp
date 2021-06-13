@@ -14,14 +14,16 @@ template <typename T> struct matrix {
     typename std::vector<T>::iterator operator[](int i) { return elem.begin() + i * W; }
     inline T &at(int i, int j) { return elem[i * W + j]; }
     inline T get(int i, int j) const { return elem[i * W + j]; }
-    operator std::vector<std::vector<T>>() const {
+    int height() const { return H; }
+    int width() const { return W; }
+    std::vector<std::vector<T>> vecvec() const {
         std::vector<std::vector<T>> ret(H);
         for (int i = 0; i < H; i++) {
             std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));
         }
         return ret;
     }
-
+    operator std::vector<std::vector<T>>() const { return vecvec(); }
     matrix() = default;
     matrix(int H, int W) : H(H), W(W), elem(H * W) {}
     matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ? d[0].size() : 0) {
@@ -208,6 +210,8 @@ template <typename T> struct matrix {
         }
         return ret;
     }
+    std::vector<T> prod(const std::vector<T> &v) const { return (*this) * v; }
+    std::vector<T> prod_left(const std::vector<T> &v) const { return v * (*this); }
     friend std::ostream &operator<<(std::ostream &os, const matrix &x) {
         os << "[(" << x.H << " * " << x.W << " matrix)";
         os << "\n[column sums: ";
@@ -230,8 +234,9 @@ template <typename T> struct matrix {
         return is;
     }
 };
-// Fibonacci numbers f(n) = af(n - 1) + bf(n - 2)
-// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...
+
+// Example: Fibonacci numbers f(n) = af(n - 1) + bf(n - 2)
+// (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...
 template <typename T> T Fibonacci(long long int k, int a = 1, int b = 1) {
     matrix<T> mat(2, 2);
     mat[0][1] = 1;

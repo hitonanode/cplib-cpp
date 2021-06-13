@@ -1,4 +1,4 @@
-#include "linear_algebra_matrix/linalg_bitset.hpp"
+#include "../linalg_bitset.hpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624"
 #include <iostream>
 #include <numeric>
