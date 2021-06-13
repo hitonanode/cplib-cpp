@@ -1,8 +1,20 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/linalg_longlong.hpp
+    title: linear_algebra_matrix/linalg_longlong.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
+    title: linear_algebra_matrix/test/linalg_ll_det.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/linalg_longlong.test.cpp
+    title: linear_algebra_matrix/test/linalg_longlong.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
+    title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
@@ -128,10 +140,14 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: number/bare_mod_algebra.hpp
-  requiredBy: []
+  requiredBy:
+  - linear_algebra_matrix/linalg_longlong.hpp
   timestamp: '2021-04-26 19:53:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - linear_algebra_matrix/test/linalg_longlong.test.cpp
+  - linear_algebra_matrix/test/linalg_ll_det.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 documentation_of: number/bare_mod_algebra.hpp
 layout: document

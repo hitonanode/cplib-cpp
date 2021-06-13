@@ -9,7 +9,7 @@ data:
   attributes:
     links:
     - https://en.wikipedia.org/wiki/Levinson_recursion
-  bundledCode: "#line 2 \"linear_algebra_matrix/toeplitz.hpp\"\n#include <cassert>\n\
+  bundledCode: "#line 2 \"linear_algebra_matrix/levinson.hpp\"\n#include <cassert>\n\
     #include <vector>\n\n// CUT begin\n// solve Mx = y based on Levinson recursion\n\
     //\n// M = [\n// [ t_(N-1) t_(N-2) ... t_1 t_0     ]\n// [ t_N     t_(N-1) ...\
     \ t_2 t_1     ]\n// [ ...                             ]\n// [ t_(N*2-2)      \
@@ -55,20 +55,23 @@ data:
     \    }\n    return x;\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: linear_algebra_matrix/toeplitz.hpp
+  path: linear_algebra_matrix/levinson.hpp
   requiredBy: []
-  timestamp: '2021-06-13 04:24:05+09:00'
+  timestamp: '2021-06-13 19:08:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: linear_algebra_matrix/toeplitz.hpp
+documentation_of: linear_algebra_matrix/levinson.hpp
 layout: document
-title: Fast operations on Toeplitz matrices
+title: Levinson recursion (Levinson-Durbin algorithm)
 ---
 
-## Levinson recursion
+Solve Toeplitz system $\mathbf{T} \mathbf{x} = \mathbf{y}$, where $\mathbf{T}$ is Topelitz and every its principal submatrix is nonsingular.
 
-Solve Toeplitz system $\mathbf{T} \mathbf{x} = \mathbf{y}$, where $\mathbf{T}$ is Topelitz and every its principal submatrix is regular.
-
-### Complexity:
+## Complexity
 
 $O(N^2)$, where $N$ is the dimension of $\mathbf{T}$
+
+## References
+
+- [1] N. Levinson, "The Wiener RMS error criterion in filter design and prediction," J. Math. and Phys., 25, 261-298, 1947.
+- [2] J. Durbin, "The fitting of time series models,", Rev. Inst. Int. Stat. 28, 233-243, 1960.

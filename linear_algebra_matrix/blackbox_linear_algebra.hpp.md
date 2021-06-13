@@ -12,16 +12,10 @@ data:
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-    title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-    title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -435,10 +429,8 @@ data:
   path: linear_algebra_matrix/blackbox_linear_algebra.hpp
   requiredBy: []
   timestamp: '2021-06-13 04:24:05+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: linear_algebra_matrix/blackbox_linear_algebra.hpp
 layout: document
 redirect_from:

@@ -229,13 +229,15 @@ data:
     \ begin\ntemplate <typename T> struct matrix {\n    int H, W;\n    std::vector<T>\
     \ elem;\n    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
     \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
-    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    operator std::vector<std::vector<T>>()\
-    \ const {\n        std::vector<std::vector<T>> ret(H);\n        for (int i = 0;\
-    \ i < H; i++) {\n            std::copy(elem.begin() + i * W, elem.begin() + (i\
-    \ + 1) * W, std::back_inserter(ret[i]));\n        }\n        return ret;\n   \
-    \ }\n\n    matrix() = default;\n    matrix(int H, int W) : H(H), W(W), elem(H\
-    \ * W) {}\n    matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size()\
-    \ ? d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(), raw.end(),\
+    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    int height()\
+    \ const { return H; }\n    int width() const { return W; }\n    std::vector<std::vector<T>>\
+    \ vecvec() const {\n        std::vector<std::vector<T>> ret(H);\n        for (int\
+    \ i = 0; i < H; i++) {\n            std::copy(elem.begin() + i * W, elem.begin()\
+    \ + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n        return ret;\n\
+    \    }\n    operator std::vector<std::vector<T>>() const { return vecvec(); }\n\
+    \    matrix() = default;\n    matrix(int H, int W) : H(H), W(W), elem(H * W) {}\n\
+    \    matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ?\
+    \ d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(), raw.end(),\
     \ std::back_inserter(elem));\n    }\n\n    static matrix Identity(int N) {\n \
     \       matrix ret(N, N);\n        for (int i = 0; i < N; i++) ret.at(i, i) =\
     \ 1;\n        return ret;\n    }\n\n    matrix operator-() const {\n        matrix\
@@ -319,20 +321,22 @@ data:
     \ {\n        assert(int(v.size()) == m.H);\n        std::vector<T> ret(m.W);\n\
     \        for (int i = 0; i < m.H; i++) {\n            for (int j = 0; j < m.W;\
     \ j++) ret[j] += v[i] * m.get(i, j);\n        }\n        return ret;\n    }\n\
-    \    friend std::ostream &operator<<(std::ostream &os, const matrix &x) {\n  \
-    \      os << \"[(\" << x.H << \" * \" << x.W << \" matrix)\";\n        os << \"\
-    \\n[column sums: \";\n        for (int j = 0; j < x.W; j++) {\n            T s\
-    \ = 0;\n            for (int i = 0; i < x.H; i++) s += x.get(i, j);\n        \
-    \    os << s << \",\";\n        }\n        os << \"]\";\n        for (int i =\
-    \ 0; i < x.H; i++) {\n            os << \"\\n[\";\n            for (int j = 0;\
-    \ j < x.W; j++) os << x.get(i, j) << \",\";\n            os << \"]\";\n      \
-    \  }\n        os << \"]\\n\";\n        return os;\n    }\n    friend std::istream\
-    \ &operator>>(std::istream &is, matrix &x) {\n        for (auto &v : x.elem) is\
-    \ >> v;\n        return is;\n    }\n};\n// Fibonacci numbers f(n) = af(n - 1)\
-    \ + bf(n - 2)\n// Example (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...\ntemplate\
-    \ <typename T> T Fibonacci(long long int k, int a = 1, int b = 1) {\n    matrix<T>\
-    \ mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n    mat[1][1] = a;\n   \
-    \ return mat.pow(k + 1)[0][1];\n}\n#line 7 \"linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp\"\
+    \    std::vector<T> prod(const std::vector<T> &v) const { return (*this) * v;\
+    \ }\n    std::vector<T> prod_left(const std::vector<T> &v) const { return v *\
+    \ (*this); }\n    friend std::ostream &operator<<(std::ostream &os, const matrix\
+    \ &x) {\n        os << \"[(\" << x.H << \" * \" << x.W << \" matrix)\";\n    \
+    \    os << \"\\n[column sums: \";\n        for (int j = 0; j < x.W; j++) {\n \
+    \           T s = 0;\n            for (int i = 0; i < x.H; i++) s += x.get(i,\
+    \ j);\n            os << s << \",\";\n        }\n        os << \"]\";\n      \
+    \  for (int i = 0; i < x.H; i++) {\n            os << \"\\n[\";\n            for\
+    \ (int j = 0; j < x.W; j++) os << x.get(i, j) << \",\";\n            os << \"\
+    ]\";\n        }\n        os << \"]\\n\";\n        return os;\n    }\n    friend\
+    \ std::istream &operator>>(std::istream &is, matrix &x) {\n        for (auto &v\
+    \ : x.elem) is >> v;\n        return is;\n    }\n};\n\n// Example: Fibonacci numbers\
+    \ f(n) = af(n - 1) + bf(n - 2)\n// (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5,\
+    \ ...\ntemplate <typename T> T Fibonacci(long long int k, int a = 1, int b = 1)\
+    \ {\n    matrix<T> mat(2, 2);\n    mat[0][1] = 1;\n    mat[1][0] = b;\n    mat[1][1]\
+    \ = a;\n    return mat.pow(k + 1)[0][1];\n}\n#line 7 \"linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp\"\
     \nusing namespace std;\n\nconstexpr int MODfixed = 1000003;\nconstexpr int MODruntime\
     \ = 10007;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int N, M, L;\n    cin >> N >> M >> L;\n    matrix<ModInt<MODfixed>> Afixed(N,\
@@ -370,7 +374,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   requiredBy: []
-  timestamp: '2021-06-10 03:00:14+09:00'
+  timestamp: '2021-06-13 19:08:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp

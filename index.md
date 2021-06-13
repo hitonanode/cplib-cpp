@@ -229,11 +229,20 @@ data:
   - name: linear_algebra_matrix
     pages:
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/blackbox_algorithm.hpp
+      title: linear_algebra_matrix/blackbox_algorithm.hpp
+    - icon: ':warning:'
       path: linear_algebra_matrix/blackbox_linear_algebra.hpp
       title: linear_algebra_matrix/blackbox_linear_algebra.hpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/blackbox_matrices.hpp
+      title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
     - icon: ':warning:'
       path: linear_algebra_matrix/circular_binary_expansion.hpp
       title: linear_algebra_matrix/circular_binary_expansion.hpp
+    - icon: ':warning:'
+      path: linear_algebra_matrix/levinson.hpp
+      title: Levinson recursion (Levinson-Durbin algorithm)
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_bitset.hpp
       title: linear_algebra_matrix/linalg_bitset.hpp
@@ -246,12 +255,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
-    - icon: ':warning:'
-      path: linear_algebra_matrix/toeplitz.hpp
-      title: Fast operations on Toeplitz matrices
-    - icon: ':warning:'
-      path: linear_algebra_matrix/transpose.hpp
-      title: linear_algebra_matrix/transpose.hpp
     - icon: ':warning:'
       path: linear_algebra_matrix/tropical_matrix.hpp
       title: linear_algebra_matrix/tropical_matrix.hpp
@@ -534,6 +537,9 @@ data:
     - icon: ':warning:'
       path: utilities/timer.hpp
       title: utilities/timer.hpp
+    - icon: ':warning:'
+      path: utilities/transpose.hpp
+      title: utilities/transpose.hpp
   verificationCategories:
   - name: combinatorial_opt/test
     pages:

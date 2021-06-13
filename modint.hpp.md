@@ -28,9 +28,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: linear_algebra_matrix/blackbox_linear_algebra.hpp
     title: linear_algebra_matrix/blackbox_linear_algebra.hpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/blackbox_matrices.hpp
+    title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
   - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
@@ -324,6 +327,7 @@ data:
   isVerificationFile: false
   path: modint.hpp
   requiredBy:
+  - linear_algebra_matrix/blackbox_matrices.hpp
   - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - convolution/ntt.hpp
   - convolution/multivar_ntt.hpp
