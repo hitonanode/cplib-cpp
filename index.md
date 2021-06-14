@@ -318,6 +318,11 @@ data:
       path: other_algorithms/mos_algorithm.hpp
       title: "Mo's algorithm \uFF08\u533A\u9593\u30AF\u30A8\u30EA\u306B\u95A2\u3059\
         \u308B\u5E73\u65B9\u5206\u5272\u30C6\u30AF\u30CB\u30C3\u30AF\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/slope_trick.hpp
+      title: "Slope trick \uFF08\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570\u306B\u95A2\
+        \u3059\u308B\u7279\u5B9A\u306E\u66F4\u65B0\u3092\u9AD8\u901F\u306B\u6271\u3046\
+        \u624B\u6CD5\uFF09"
     - icon: ':warning:'
       path: other_algorithms/smawk.hpp
       title: other_algorithms/smawk.hpp
@@ -862,6 +867,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/enumerate_triangles.test.cpp
       title: other_algorithms/test/enumerate_triangles.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/slope_trick_stress.test.cpp
+      title: other_algorithms/test/slope_trick_stress.test.cpp
   - name: segmenttree/test
     pages:
     - icon: ':heavy_check_mark:'
