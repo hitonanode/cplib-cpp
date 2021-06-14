@@ -98,6 +98,7 @@
 "number/test/prime_factorization.test.cpp": "2021-05-03 18:16:21 +0900",
 "number/test/sqrt_modint_runtime.test.cpp": "2021-06-06 17:00:00 +0900",
 "other_algorithms/test/enumerate_triangles.test.cpp": "2021-06-13 19:44:51 +0900",
+"other_algorithms/test/slope_trick_stress.test.cpp": "2021-06-14 21:02:15 +0900",
 "segmenttree/test/acl_range-affine-range-sum.test.cpp": "2021-06-06 14:54:00 +0900",
 "segmenttree/test/acl_rmq.test.cpp": "2021-02-13 02:36:53 +0900",
 "segmenttree/test/acl_rsq.test.cpp": "2021-02-13 02:36:53 +0900",
