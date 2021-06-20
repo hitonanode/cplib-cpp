@@ -237,6 +237,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_matrices.hpp
       title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/characteristic_poly.hpp
+      title: "Characteristic polynomial \uFF08\u884C\u5217\u306E\u7279\u6027\u591A\
+        \u9805\u5F0F\uFF09"
     - icon: ':warning:'
       path: linear_algebra_matrix/circular_binary_expansion.hpp
       title: linear_algebra_matrix/circular_binary_expansion.hpp
@@ -800,6 +804,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
       title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/characteristic_poly.test.cpp
+      title: linear_algebra_matrix/test/characteristic_poly.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp

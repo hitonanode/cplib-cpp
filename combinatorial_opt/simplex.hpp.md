@@ -155,9 +155,9 @@ data:
   timestamp: '2021-02-28 16:53:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/simplex.multiprecision.test.cpp
-  - combinatorial_opt/test/simplex.maxflow.test.cpp
   - combinatorial_opt/test/simplex.mcf.test.cpp
+  - combinatorial_opt/test/simplex.maxflow.test.cpp
+  - combinatorial_opt/test/simplex.multiprecision.test.cpp
   - combinatorial_opt/test/simplex.shortestpath.test.cpp
   - combinatorial_opt/test/simplex.easy.test.cpp
 documentation_of: combinatorial_opt/simplex.hpp
