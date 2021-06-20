@@ -77,6 +77,7 @@
 "graph/test/two-edge-connected-components.test.cpp": "2020-11-21 18:08:42 +0900",
 "graph/test/warshallfloyd.test.cpp": "2021-04-18 18:54:48 +0900",
 "linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp": "2021-06-13 19:08:25 +0900",
+"linear_algebra_matrix/test/characteristic_poly.test.cpp": "2021-06-20 13:41:52 +0900",
 "linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp": "2021-06-13 19:08:25 +0900",
 "linear_algebra_matrix/test/linalg_bitset.test.cpp": "2021-06-13 19:08:25 +0900",
 "linear_algebra_matrix/test/linalg_ll_det.test.cpp": "2021-06-13 19:08:25 +0900",
