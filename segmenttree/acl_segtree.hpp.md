@@ -82,8 +82,8 @@ data:
   timestamp: '2021-02-13 02:26:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/acl_rsq.test.cpp
   - segmenttree/test/acl_rmq.test.cpp
+  - segmenttree/test/acl_rsq.test.cpp
 documentation_of: segmenttree/acl_segtree.hpp
 layout: document
 redirect_from:

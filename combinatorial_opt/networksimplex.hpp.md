@@ -246,32 +246,33 @@ data:
     \npublic:\n    NetworkSimplex(const Digraph &graph)\n        : _graph(graph),\
     \ MAX(std::numeric_limits<Value>::max()), INF(std::numeric_limits<Value>::has_infinity\
     \ ? std::numeric_limits<Value>::infinity() : MAX) {\n        // Check the number\
-    \ types\n        static_assert(std::numeric_limits<Value>::is_signed);\n     \
-    \   static_assert(std::numeric_limits<Cost>::is_signed);\n        static_assert(std::numeric_limits<Value>::max()\
-    \ > 0);\n\n        // Reset data structures\n        reset();\n    }\n\n    template\
-    \ <typename LowerMap> NetworkSimplex &lowerMap(const LowerMap &map) {\n      \
-    \  _has_lower = true;\n        for (Arc a = 0; a < _arc_num; a++) _lower[a] =\
-    \ map[a];\n        return *this;\n    }\n    template <typename UpperMap> NetworkSimplex\
-    \ &upperMap(const UpperMap &map) {\n        for (Arc a = 0; a < _arc_num; a++)\
-    \ _upper[a] = map[a];\n        return *this;\n    }\n    // Set costs of arcs\
-    \ (default value: 1)\n    template <typename CostMap> NetworkSimplex &costMap(const\
-    \ CostMap &map) {\n        for (Arc a = 0; a < _arc_num; a++) _cost[a] = map[a];\n\
-    \        return *this;\n    }\n    template <typename SupplyMap> NetworkSimplex\
-    \ &supplyMap(const SupplyMap &map) {\n        for (Node n = 0; n < _node_num;\
-    \ n++) _supply[n] = map[n];\n        return *this;\n    }\n    NetworkSimplex\
-    \ &stSupply(const Node &s, const Node &t, Value k) { // set s-t flow\n       \
-    \ for (int i = 0; i != _node_num; ++i) _supply[i] = 0;\n        _supply[s] = k,\
-    \ _supply[t] = -k;\n        return *this;\n    }\n\n    /// \\brief Set the type\
-    \ of the supply constraints.\n    ///\n    /// This function sets the type of\
-    \ the supply/demand constraints.\n    /// If it is not used before calling \\\
-    ref run(), the \\ref GEQ supply\n    /// type will be used.\n    NetworkSimplex\
-    \ &supplyType(SupplyType supply_type) {\n        _stype = supply_type;\n     \
-    \   return *this;\n    }\n\n    /// @}\n\n    /// This function can be called\
-    \ more than once. All the given parameters\n    /// are kept for the next call,\
-    \ unless \\ref resetParams() or \\ref reset()\n    /// is used, thus only the\
-    \ modified parameters have to be set again.\n    /// If the underlying digraph\
-    \ was also modified after the construction\n    /// of the class (or the last\
-    \ \\ref reset() call), then the \\ref reset()\n    /// function must be called.\n\
+    \ types\n        static_assert(std::numeric_limits<Value>::is_signed, \"Value\
+    \ must be signed\");\n        static_assert(std::numeric_limits<Cost>::is_signed,\
+    \ \"Cost must be signed\");\n        static_assert(std::numeric_limits<Value>::max()\
+    \ > 0, \"max() must be greater than 0\");\n\n        // Reset data structures\n\
+    \        reset();\n    }\n\n    template <typename LowerMap> NetworkSimplex &lowerMap(const\
+    \ LowerMap &map) {\n        _has_lower = true;\n        for (Arc a = 0; a < _arc_num;\
+    \ a++) _lower[a] = map[a];\n        return *this;\n    }\n    template <typename\
+    \ UpperMap> NetworkSimplex &upperMap(const UpperMap &map) {\n        for (Arc\
+    \ a = 0; a < _arc_num; a++) _upper[a] = map[a];\n        return *this;\n    }\n\
+    \    // Set costs of arcs (default value: 1)\n    template <typename CostMap>\
+    \ NetworkSimplex &costMap(const CostMap &map) {\n        for (Arc a = 0; a < _arc_num;\
+    \ a++) _cost[a] = map[a];\n        return *this;\n    }\n    template <typename\
+    \ SupplyMap> NetworkSimplex &supplyMap(const SupplyMap &map) {\n        for (Node\
+    \ n = 0; n < _node_num; n++) _supply[n] = map[n];\n        return *this;\n   \
+    \ }\n    NetworkSimplex &stSupply(const Node &s, const Node &t, Value k) { //\
+    \ set s-t flow\n        for (int i = 0; i != _node_num; ++i) _supply[i] = 0;\n\
+    \        _supply[s] = k, _supply[t] = -k;\n        return *this;\n    }\n\n  \
+    \  /// \\brief Set the type of the supply constraints.\n    ///\n    /// This\
+    \ function sets the type of the supply/demand constraints.\n    /// If it is not\
+    \ used before calling \\ref run(), the \\ref GEQ supply\n    /// type will be\
+    \ used.\n    NetworkSimplex &supplyType(SupplyType supply_type) {\n        _stype\
+    \ = supply_type;\n        return *this;\n    }\n\n    /// @}\n\n    /// This function\
+    \ can be called more than once. All the given parameters\n    /// are kept for\
+    \ the next call, unless \\ref resetParams() or \\ref reset()\n    /// is used,\
+    \ thus only the modified parameters have to be set again.\n    /// If the underlying\
+    \ digraph was also modified after the construction\n    /// of the class (or the\
+    \ last \\ref reset() call), then the \\ref reset()\n    /// function must be called.\n\
     \    ProblemType run(PivotRule pivot_rule = BLOCK_SEARCH) {\n        if (!init())\
     \ return INFEASIBLE;\n        return start(pivot_rule);\n    }\n\n    /// \\brief\
     \ Reset all the parameters that have been given before.\n    ///\n    /// This\
@@ -445,21 +446,22 @@ data:
     \ _flow and _state vectors\n    void changeFlow(bool change) {\n        // Augment\
     \ along the cycle\n        if (delta > 0) {\n            Value val = _state[in_arc]\
     \ * delta;\n            _flow[in_arc] += val;\n            for (int u = _source[in_arc];\
-    \ u != join; u = _parent[u]) { _flow[_pred[u]] -= _pred_dir[u] * val; }\n    \
-    \        for (int u = _target[in_arc]; u != join; u = _parent[u]) { _flow[_pred[u]]\
-    \ += _pred_dir[u] * val; }\n        }\n        // Update the state of the entering\
-    \ and leaving arcs\n        if (change) {\n            _state[in_arc] = STATE_TREE;\n\
-    \            _state[_pred[u_out]] = (_flow[_pred[u_out]] == 0) ? STATE_LOWER :\
-    \ STATE_UPPER;\n        } else {\n            _state[in_arc] = -_state[in_arc];\n\
-    \        }\n    }\n\n    // Update the tree structure\n    void updateTreeStructure()\
-    \ {\n        int old_rev_thread = _rev_thread[u_out];\n        int old_succ_num\
-    \ = _succ_num[u_out];\n        int old_last_succ = _last_succ[u_out];\n      \
-    \  v_out = _parent[u_out];\n\n        // Check if u_in and u_out coincide\n  \
-    \      if (u_in == u_out) {\n            // Update _parent, _pred, _pred_dir\n\
-    \            _parent[u_in] = v_in;\n            _pred[u_in] = in_arc;\n      \
-    \      _pred_dir[u_in] = u_in == _source[in_arc] ? DIR_UP : DIR_DOWN;\n\n    \
-    \        // Update _thread and _rev_thread\n            if (_thread[v_in] != u_out)\
-    \ {\n                int after = _thread[old_last_succ];\n                _thread[old_rev_thread]\
+    \ u != join; u = _parent[u]) {\n                _flow[_pred[u]] -= _pred_dir[u]\
+    \ * val;\n            }\n            for (int u = _target[in_arc]; u != join;\
+    \ u = _parent[u]) {\n                _flow[_pred[u]] += _pred_dir[u] * val;\n\
+    \            }\n        }\n        // Update the state of the entering and leaving\
+    \ arcs\n        if (change) {\n            _state[in_arc] = STATE_TREE;\n    \
+    \        _state[_pred[u_out]] = (_flow[_pred[u_out]] == 0) ? STATE_LOWER : STATE_UPPER;\n\
+    \        } else {\n            _state[in_arc] = -_state[in_arc];\n        }\n\
+    \    }\n\n    // Update the tree structure\n    void updateTreeStructure() {\n\
+    \        int old_rev_thread = _rev_thread[u_out];\n        int old_succ_num =\
+    \ _succ_num[u_out];\n        int old_last_succ = _last_succ[u_out];\n        v_out\
+    \ = _parent[u_out];\n\n        // Check if u_in and u_out coincide\n        if\
+    \ (u_in == u_out) {\n            // Update _parent, _pred, _pred_dir\n       \
+    \     _parent[u_in] = v_in;\n            _pred[u_in] = in_arc;\n            _pred_dir[u_in]\
+    \ = u_in == _source[in_arc] ? DIR_UP : DIR_DOWN;\n\n            // Update _thread\
+    \ and _rev_thread\n            if (_thread[v_in] != u_out) {\n               \
+    \ int after = _thread[old_last_succ];\n                _thread[old_rev_thread]\
     \ = after;\n                _rev_thread[after] = old_rev_thread;\n           \
     \     after = _thread[v_in];\n                _thread[v_in] = u_out;\n       \
     \         _rev_thread[u_out] = v_in;\n                _thread[old_last_succ] =\
@@ -505,34 +507,35 @@ data:
     \n        // Update _last_succ from v_in towards the root\n        int up_limit_out\
     \ = _last_succ[join] == v_in ? join : -1;\n        int last_succ_out = _last_succ[u_out];\n\
     \        for (int u = v_in; u != -1 && _last_succ[u] == v_in; u = _parent[u])\
-    \ { _last_succ[u] = last_succ_out; }\n\n        // Update _last_succ from v_out\
-    \ towards the root\n        if (join != old_rev_thread && v_in != old_rev_thread)\
+    \ {\n            _last_succ[u] = last_succ_out;\n        }\n\n        // Update\
+    \ _last_succ from v_out towards the root\n        if (join != old_rev_thread &&\
+    \ v_in != old_rev_thread) {\n            for (int u = v_out; u != up_limit_out\
+    \ && _last_succ[u] == old_last_succ; u = _parent[u]) {\n                _last_succ[u]\
+    \ = old_rev_thread;\n            }\n        } else if (last_succ_out != old_last_succ)\
     \ {\n            for (int u = v_out; u != up_limit_out && _last_succ[u] == old_last_succ;\
-    \ u = _parent[u]) {\n                _last_succ[u] = old_rev_thread;\n       \
-    \     }\n        } else if (last_succ_out != old_last_succ) {\n            for\
-    \ (int u = v_out; u != up_limit_out && _last_succ[u] == old_last_succ; u = _parent[u])\
-    \ {\n                _last_succ[u] = last_succ_out;\n            }\n        }\n\
-    \n        // Update _succ_num from v_in to join\n        for (int u = v_in; u\
-    \ != join; u = _parent[u]) { _succ_num[u] += old_succ_num; }\n        // Update\
-    \ _succ_num from v_out to join\n        for (int u = v_out; u != join; u = _parent[u])\
-    \ { _succ_num[u] -= old_succ_num; }\n    }\n\n    // Update potentials in the\
-    \ subtree that has been moved\n    void updatePotential() {\n        Cost sigma\
-    \ = _pi[v_in] - _pi[u_in] - _pred_dir[u_in] * _cost[in_arc];\n        int end\
-    \ = _thread[_last_succ[u_in]];\n        for (int u = u_in; u != end; u = _thread[u])\
-    \ { _pi[u] += sigma; }\n    }\n\n    // Heuristic initial pivots\n    bool initialPivots()\
-    \ {\n        Value curr, total = 0;\n        std::vector<Node> supply_nodes, demand_nodes;\n\
-    \        for (int u = 0; u < _node_num; ++u) {\n            curr = _supply[u];\n\
-    \            if (curr > 0) {\n                total += curr;\n               \
-    \ supply_nodes.push_back(u);\n            } else if (curr < 0) {\n           \
-    \     demand_nodes.push_back(u);\n            }\n        }\n        if (_sum_supply\
-    \ > 0) total -= _sum_supply;\n        if (total <= 0) return true;\n\n       \
-    \ IntVector arc_vector;\n        if (_sum_supply >= 0) {\n            if (supply_nodes.size()\
-    \ == 1 && demand_nodes.size() == 1) {\n                // Perform a reverse graph\
-    \ search from the sink to the source\n                std::vector<char> reached(_node_num,\
-    \ false);\n                Node s = supply_nodes[0], t = demand_nodes[0];\n  \
-    \              std::vector<Node> stack;\n                reached[t] = true;\n\
-    \                stack.push_back(t);\n                while (!stack.empty()) {\n\
-    \                    Node u, v = stack.back();\n                    stack.pop_back();\n\
+    \ u = _parent[u]) {\n                _last_succ[u] = last_succ_out;\n        \
+    \    }\n        }\n\n        // Update _succ_num from v_in to join\n        for\
+    \ (int u = v_in; u != join; u = _parent[u]) { _succ_num[u] += old_succ_num; }\n\
+    \        // Update _succ_num from v_out to join\n        for (int u = v_out; u\
+    \ != join; u = _parent[u]) { _succ_num[u] -= old_succ_num; }\n    }\n\n    //\
+    \ Update potentials in the subtree that has been moved\n    void updatePotential()\
+    \ {\n        Cost sigma = _pi[v_in] - _pi[u_in] - _pred_dir[u_in] * _cost[in_arc];\n\
+    \        int end = _thread[_last_succ[u_in]];\n        for (int u = u_in; u !=\
+    \ end; u = _thread[u]) { _pi[u] += sigma; }\n    }\n\n    // Heuristic initial\
+    \ pivots\n    bool initialPivots() {\n        Value curr, total = 0;\n       \
+    \ std::vector<Node> supply_nodes, demand_nodes;\n        for (int u = 0; u < _node_num;\
+    \ ++u) {\n            curr = _supply[u];\n            if (curr > 0) {\n      \
+    \          total += curr;\n                supply_nodes.push_back(u);\n      \
+    \      } else if (curr < 0) {\n                demand_nodes.push_back(u);\n  \
+    \          }\n        }\n        if (_sum_supply > 0) total -= _sum_supply;\n\
+    \        if (total <= 0) return true;\n\n        IntVector arc_vector;\n     \
+    \   if (_sum_supply >= 0) {\n            if (supply_nodes.size() == 1 && demand_nodes.size()\
+    \ == 1) {\n                // Perform a reverse graph search from the sink to\
+    \ the source\n                std::vector<char> reached(_node_num, false);\n \
+    \               Node s = supply_nodes[0], t = demand_nodes[0];\n             \
+    \   std::vector<Node> stack;\n                reached[t] = true;\n           \
+    \     stack.push_back(t);\n                while (!stack.empty()) {\n        \
+    \            Node u, v = stack.back();\n                    stack.pop_back();\n\
     \                    if (v == s) break;\n                    // for (InArcIt a(_graph,\
     \ v); a != INVALID; ++a) {\n                    for (auto a : _graph.in_eids[v])\
     \ {\n                        if (reached[u = _graph.source(a)]) continue;\n  \
@@ -867,32 +870,33 @@ data:
     \npublic:\n    NetworkSimplex(const Digraph &graph)\n        : _graph(graph),\
     \ MAX(std::numeric_limits<Value>::max()), INF(std::numeric_limits<Value>::has_infinity\
     \ ? std::numeric_limits<Value>::infinity() : MAX) {\n        // Check the number\
-    \ types\n        static_assert(std::numeric_limits<Value>::is_signed);\n     \
-    \   static_assert(std::numeric_limits<Cost>::is_signed);\n        static_assert(std::numeric_limits<Value>::max()\
-    \ > 0);\n\n        // Reset data structures\n        reset();\n    }\n\n    template\
-    \ <typename LowerMap> NetworkSimplex &lowerMap(const LowerMap &map) {\n      \
-    \  _has_lower = true;\n        for (Arc a = 0; a < _arc_num; a++) _lower[a] =\
-    \ map[a];\n        return *this;\n    }\n    template <typename UpperMap> NetworkSimplex\
-    \ &upperMap(const UpperMap &map) {\n        for (Arc a = 0; a < _arc_num; a++)\
-    \ _upper[a] = map[a];\n        return *this;\n    }\n    // Set costs of arcs\
-    \ (default value: 1)\n    template <typename CostMap> NetworkSimplex &costMap(const\
-    \ CostMap &map) {\n        for (Arc a = 0; a < _arc_num; a++) _cost[a] = map[a];\n\
-    \        return *this;\n    }\n    template <typename SupplyMap> NetworkSimplex\
-    \ &supplyMap(const SupplyMap &map) {\n        for (Node n = 0; n < _node_num;\
-    \ n++) _supply[n] = map[n];\n        return *this;\n    }\n    NetworkSimplex\
-    \ &stSupply(const Node &s, const Node &t, Value k) { // set s-t flow\n       \
-    \ for (int i = 0; i != _node_num; ++i) _supply[i] = 0;\n        _supply[s] = k,\
-    \ _supply[t] = -k;\n        return *this;\n    }\n\n    /// \\brief Set the type\
-    \ of the supply constraints.\n    ///\n    /// This function sets the type of\
-    \ the supply/demand constraints.\n    /// If it is not used before calling \\\
-    ref run(), the \\ref GEQ supply\n    /// type will be used.\n    NetworkSimplex\
-    \ &supplyType(SupplyType supply_type) {\n        _stype = supply_type;\n     \
-    \   return *this;\n    }\n\n    /// @}\n\n    /// This function can be called\
-    \ more than once. All the given parameters\n    /// are kept for the next call,\
-    \ unless \\ref resetParams() or \\ref reset()\n    /// is used, thus only the\
-    \ modified parameters have to be set again.\n    /// If the underlying digraph\
-    \ was also modified after the construction\n    /// of the class (or the last\
-    \ \\ref reset() call), then the \\ref reset()\n    /// function must be called.\n\
+    \ types\n        static_assert(std::numeric_limits<Value>::is_signed, \"Value\
+    \ must be signed\");\n        static_assert(std::numeric_limits<Cost>::is_signed,\
+    \ \"Cost must be signed\");\n        static_assert(std::numeric_limits<Value>::max()\
+    \ > 0, \"max() must be greater than 0\");\n\n        // Reset data structures\n\
+    \        reset();\n    }\n\n    template <typename LowerMap> NetworkSimplex &lowerMap(const\
+    \ LowerMap &map) {\n        _has_lower = true;\n        for (Arc a = 0; a < _arc_num;\
+    \ a++) _lower[a] = map[a];\n        return *this;\n    }\n    template <typename\
+    \ UpperMap> NetworkSimplex &upperMap(const UpperMap &map) {\n        for (Arc\
+    \ a = 0; a < _arc_num; a++) _upper[a] = map[a];\n        return *this;\n    }\n\
+    \    // Set costs of arcs (default value: 1)\n    template <typename CostMap>\
+    \ NetworkSimplex &costMap(const CostMap &map) {\n        for (Arc a = 0; a < _arc_num;\
+    \ a++) _cost[a] = map[a];\n        return *this;\n    }\n    template <typename\
+    \ SupplyMap> NetworkSimplex &supplyMap(const SupplyMap &map) {\n        for (Node\
+    \ n = 0; n < _node_num; n++) _supply[n] = map[n];\n        return *this;\n   \
+    \ }\n    NetworkSimplex &stSupply(const Node &s, const Node &t, Value k) { //\
+    \ set s-t flow\n        for (int i = 0; i != _node_num; ++i) _supply[i] = 0;\n\
+    \        _supply[s] = k, _supply[t] = -k;\n        return *this;\n    }\n\n  \
+    \  /// \\brief Set the type of the supply constraints.\n    ///\n    /// This\
+    \ function sets the type of the supply/demand constraints.\n    /// If it is not\
+    \ used before calling \\ref run(), the \\ref GEQ supply\n    /// type will be\
+    \ used.\n    NetworkSimplex &supplyType(SupplyType supply_type) {\n        _stype\
+    \ = supply_type;\n        return *this;\n    }\n\n    /// @}\n\n    /// This function\
+    \ can be called more than once. All the given parameters\n    /// are kept for\
+    \ the next call, unless \\ref resetParams() or \\ref reset()\n    /// is used,\
+    \ thus only the modified parameters have to be set again.\n    /// If the underlying\
+    \ digraph was also modified after the construction\n    /// of the class (or the\
+    \ last \\ref reset() call), then the \\ref reset()\n    /// function must be called.\n\
     \    ProblemType run(PivotRule pivot_rule = BLOCK_SEARCH) {\n        if (!init())\
     \ return INFEASIBLE;\n        return start(pivot_rule);\n    }\n\n    /// \\brief\
     \ Reset all the parameters that have been given before.\n    ///\n    /// This\
@@ -1066,21 +1070,22 @@ data:
     \ _flow and _state vectors\n    void changeFlow(bool change) {\n        // Augment\
     \ along the cycle\n        if (delta > 0) {\n            Value val = _state[in_arc]\
     \ * delta;\n            _flow[in_arc] += val;\n            for (int u = _source[in_arc];\
-    \ u != join; u = _parent[u]) { _flow[_pred[u]] -= _pred_dir[u] * val; }\n    \
-    \        for (int u = _target[in_arc]; u != join; u = _parent[u]) { _flow[_pred[u]]\
-    \ += _pred_dir[u] * val; }\n        }\n        // Update the state of the entering\
-    \ and leaving arcs\n        if (change) {\n            _state[in_arc] = STATE_TREE;\n\
-    \            _state[_pred[u_out]] = (_flow[_pred[u_out]] == 0) ? STATE_LOWER :\
-    \ STATE_UPPER;\n        } else {\n            _state[in_arc] = -_state[in_arc];\n\
-    \        }\n    }\n\n    // Update the tree structure\n    void updateTreeStructure()\
-    \ {\n        int old_rev_thread = _rev_thread[u_out];\n        int old_succ_num\
-    \ = _succ_num[u_out];\n        int old_last_succ = _last_succ[u_out];\n      \
-    \  v_out = _parent[u_out];\n\n        // Check if u_in and u_out coincide\n  \
-    \      if (u_in == u_out) {\n            // Update _parent, _pred, _pred_dir\n\
-    \            _parent[u_in] = v_in;\n            _pred[u_in] = in_arc;\n      \
-    \      _pred_dir[u_in] = u_in == _source[in_arc] ? DIR_UP : DIR_DOWN;\n\n    \
-    \        // Update _thread and _rev_thread\n            if (_thread[v_in] != u_out)\
-    \ {\n                int after = _thread[old_last_succ];\n                _thread[old_rev_thread]\
+    \ u != join; u = _parent[u]) {\n                _flow[_pred[u]] -= _pred_dir[u]\
+    \ * val;\n            }\n            for (int u = _target[in_arc]; u != join;\
+    \ u = _parent[u]) {\n                _flow[_pred[u]] += _pred_dir[u] * val;\n\
+    \            }\n        }\n        // Update the state of the entering and leaving\
+    \ arcs\n        if (change) {\n            _state[in_arc] = STATE_TREE;\n    \
+    \        _state[_pred[u_out]] = (_flow[_pred[u_out]] == 0) ? STATE_LOWER : STATE_UPPER;\n\
+    \        } else {\n            _state[in_arc] = -_state[in_arc];\n        }\n\
+    \    }\n\n    // Update the tree structure\n    void updateTreeStructure() {\n\
+    \        int old_rev_thread = _rev_thread[u_out];\n        int old_succ_num =\
+    \ _succ_num[u_out];\n        int old_last_succ = _last_succ[u_out];\n        v_out\
+    \ = _parent[u_out];\n\n        // Check if u_in and u_out coincide\n        if\
+    \ (u_in == u_out) {\n            // Update _parent, _pred, _pred_dir\n       \
+    \     _parent[u_in] = v_in;\n            _pred[u_in] = in_arc;\n            _pred_dir[u_in]\
+    \ = u_in == _source[in_arc] ? DIR_UP : DIR_DOWN;\n\n            // Update _thread\
+    \ and _rev_thread\n            if (_thread[v_in] != u_out) {\n               \
+    \ int after = _thread[old_last_succ];\n                _thread[old_rev_thread]\
     \ = after;\n                _rev_thread[after] = old_rev_thread;\n           \
     \     after = _thread[v_in];\n                _thread[v_in] = u_out;\n       \
     \         _rev_thread[u_out] = v_in;\n                _thread[old_last_succ] =\
@@ -1126,34 +1131,35 @@ data:
     \n        // Update _last_succ from v_in towards the root\n        int up_limit_out\
     \ = _last_succ[join] == v_in ? join : -1;\n        int last_succ_out = _last_succ[u_out];\n\
     \        for (int u = v_in; u != -1 && _last_succ[u] == v_in; u = _parent[u])\
-    \ { _last_succ[u] = last_succ_out; }\n\n        // Update _last_succ from v_out\
-    \ towards the root\n        if (join != old_rev_thread && v_in != old_rev_thread)\
+    \ {\n            _last_succ[u] = last_succ_out;\n        }\n\n        // Update\
+    \ _last_succ from v_out towards the root\n        if (join != old_rev_thread &&\
+    \ v_in != old_rev_thread) {\n            for (int u = v_out; u != up_limit_out\
+    \ && _last_succ[u] == old_last_succ; u = _parent[u]) {\n                _last_succ[u]\
+    \ = old_rev_thread;\n            }\n        } else if (last_succ_out != old_last_succ)\
     \ {\n            for (int u = v_out; u != up_limit_out && _last_succ[u] == old_last_succ;\
-    \ u = _parent[u]) {\n                _last_succ[u] = old_rev_thread;\n       \
-    \     }\n        } else if (last_succ_out != old_last_succ) {\n            for\
-    \ (int u = v_out; u != up_limit_out && _last_succ[u] == old_last_succ; u = _parent[u])\
-    \ {\n                _last_succ[u] = last_succ_out;\n            }\n        }\n\
-    \n        // Update _succ_num from v_in to join\n        for (int u = v_in; u\
-    \ != join; u = _parent[u]) { _succ_num[u] += old_succ_num; }\n        // Update\
-    \ _succ_num from v_out to join\n        for (int u = v_out; u != join; u = _parent[u])\
-    \ { _succ_num[u] -= old_succ_num; }\n    }\n\n    // Update potentials in the\
-    \ subtree that has been moved\n    void updatePotential() {\n        Cost sigma\
-    \ = _pi[v_in] - _pi[u_in] - _pred_dir[u_in] * _cost[in_arc];\n        int end\
-    \ = _thread[_last_succ[u_in]];\n        for (int u = u_in; u != end; u = _thread[u])\
-    \ { _pi[u] += sigma; }\n    }\n\n    // Heuristic initial pivots\n    bool initialPivots()\
-    \ {\n        Value curr, total = 0;\n        std::vector<Node> supply_nodes, demand_nodes;\n\
-    \        for (int u = 0; u < _node_num; ++u) {\n            curr = _supply[u];\n\
-    \            if (curr > 0) {\n                total += curr;\n               \
-    \ supply_nodes.push_back(u);\n            } else if (curr < 0) {\n           \
-    \     demand_nodes.push_back(u);\n            }\n        }\n        if (_sum_supply\
-    \ > 0) total -= _sum_supply;\n        if (total <= 0) return true;\n\n       \
-    \ IntVector arc_vector;\n        if (_sum_supply >= 0) {\n            if (supply_nodes.size()\
-    \ == 1 && demand_nodes.size() == 1) {\n                // Perform a reverse graph\
-    \ search from the sink to the source\n                std::vector<char> reached(_node_num,\
-    \ false);\n                Node s = supply_nodes[0], t = demand_nodes[0];\n  \
-    \              std::vector<Node> stack;\n                reached[t] = true;\n\
-    \                stack.push_back(t);\n                while (!stack.empty()) {\n\
-    \                    Node u, v = stack.back();\n                    stack.pop_back();\n\
+    \ u = _parent[u]) {\n                _last_succ[u] = last_succ_out;\n        \
+    \    }\n        }\n\n        // Update _succ_num from v_in to join\n        for\
+    \ (int u = v_in; u != join; u = _parent[u]) { _succ_num[u] += old_succ_num; }\n\
+    \        // Update _succ_num from v_out to join\n        for (int u = v_out; u\
+    \ != join; u = _parent[u]) { _succ_num[u] -= old_succ_num; }\n    }\n\n    //\
+    \ Update potentials in the subtree that has been moved\n    void updatePotential()\
+    \ {\n        Cost sigma = _pi[v_in] - _pi[u_in] - _pred_dir[u_in] * _cost[in_arc];\n\
+    \        int end = _thread[_last_succ[u_in]];\n        for (int u = u_in; u !=\
+    \ end; u = _thread[u]) { _pi[u] += sigma; }\n    }\n\n    // Heuristic initial\
+    \ pivots\n    bool initialPivots() {\n        Value curr, total = 0;\n       \
+    \ std::vector<Node> supply_nodes, demand_nodes;\n        for (int u = 0; u < _node_num;\
+    \ ++u) {\n            curr = _supply[u];\n            if (curr > 0) {\n      \
+    \          total += curr;\n                supply_nodes.push_back(u);\n      \
+    \      } else if (curr < 0) {\n                demand_nodes.push_back(u);\n  \
+    \          }\n        }\n        if (_sum_supply > 0) total -= _sum_supply;\n\
+    \        if (total <= 0) return true;\n\n        IntVector arc_vector;\n     \
+    \   if (_sum_supply >= 0) {\n            if (supply_nodes.size() == 1 && demand_nodes.size()\
+    \ == 1) {\n                // Perform a reverse graph search from the sink to\
+    \ the source\n                std::vector<char> reached(_node_num, false);\n \
+    \               Node s = supply_nodes[0], t = demand_nodes[0];\n             \
+    \   std::vector<Node> stack;\n                reached[t] = true;\n           \
+    \     stack.push_back(t);\n                while (!stack.empty()) {\n        \
+    \            Node u, v = stack.back();\n                    stack.pop_back();\n\
     \                    if (v == s) break;\n                    // for (InArcIt a(_graph,\
     \ v); a != INVALID; ++a) {\n                    for (auto a : _graph.in_eids[v])\
     \ {\n                        if (reached[u = _graph.source(a)]) continue;\n  \
@@ -1262,11 +1268,11 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/networksimplex.hpp
   requiredBy: []
-  timestamp: '2021-02-27 20:43:19+09:00'
+  timestamp: '2021-07-06 00:01:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mcf_ns.test.cpp
   - combinatorial_opt/test/bflow_ns.test.cpp
+  - combinatorial_opt/test/mcf_ns.test.cpp
 documentation_of: combinatorial_opt/networksimplex.hpp
 layout: document
 title: "Network simplex method \uFF08\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\

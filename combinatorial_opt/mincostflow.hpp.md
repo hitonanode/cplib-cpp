@@ -23,25 +23,26 @@ data:
     \ https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html\n\
     // Remark: You can use [radix heap](https://github.com/iwiwi/radix-heap) for Dijkstra\
     \ acceleration\ntemplate <class Cap, class Cost> struct mcf_graph {\n    mcf_graph()\
-    \ {}\n    mcf_graph(int n) : _n(n), g(n) { static_assert(std::numeric_limits<Cap>::max()\
-    \ > 0); }\n\n    int add_edge(int from, int to, Cap cap, Cost cost) {\n      \
-    \  assert(0 <= from && from < _n);\n        assert(0 <= to && to < _n);\n    \
-    \    assert(0 <= cap);\n        assert(0 <= cost);\n        int m = int(pos.size());\n\
-    \        pos.push_back({from, int(g[from].size())});\n        int from_id = int(g[from].size());\n\
-    \        int to_id = int(g[to].size());\n        if (from == to) to_id++;\n  \
-    \      g[from].push_back(_edge{to, to_id, cap, cost});\n        g[to].push_back(_edge{from,\
-    \ from_id, 0, -cost});\n        return m;\n    }\n\n    struct edge {\n      \
-    \  int from, to;\n        Cap cap, flow;\n        Cost cost;\n    };\n\n    edge\
-    \ get_edge(int i) {\n        int m = int(pos.size());\n        assert(0 <= i &&\
-    \ i < m);\n        auto _e = g[pos[i].first][pos[i].second];\n        auto _re\
-    \ = g[_e.to][_e.rev];\n        return edge{\n            pos[i].first, _e.to,\
-    \ _e.cap + _re.cap, _re.cap, _e.cost,\n        };\n    }\n    std::vector<edge>\
-    \ edges() {\n        int m = int(pos.size());\n        std::vector<edge> result(m);\n\
-    \        for (int i = 0; i < m; i++) { result[i] = get_edge(i); }\n        return\
-    \ result;\n    }\n\n    std::pair<Cap, Cost> flow(int s, int t) { return flow(s,\
-    \ t, std::numeric_limits<Cap>::max()); }\n    std::pair<Cap, Cost> flow(int s,\
-    \ int t, Cap flow_limit) { return slope(s, t, flow_limit).back(); }\n    std::vector<std::pair<Cap,\
-    \ Cost>> slope(int s, int t) { return slope(s, t, std::numeric_limits<Cap>::max());\
+    \ {}\n    mcf_graph(int n) : _n(n), g(n) {\n        static_assert(std::numeric_limits<Cap>::max()\
+    \ > 0, \"max() must be greater than 0\");\n    }\n\n    int add_edge(int from,\
+    \ int to, Cap cap, Cost cost) {\n        assert(0 <= from && from < _n);\n   \
+    \     assert(0 <= to && to < _n);\n        assert(0 <= cap);\n        assert(0\
+    \ <= cost);\n        int m = int(pos.size());\n        pos.push_back({from, int(g[from].size())});\n\
+    \        int from_id = int(g[from].size());\n        int to_id = int(g[to].size());\n\
+    \        if (from == to) to_id++;\n        g[from].push_back(_edge{to, to_id,\
+    \ cap, cost});\n        g[to].push_back(_edge{from, from_id, 0, -cost});\n   \
+    \     return m;\n    }\n\n    struct edge {\n        int from, to;\n        Cap\
+    \ cap, flow;\n        Cost cost;\n    };\n\n    edge get_edge(int i) {\n     \
+    \   int m = int(pos.size());\n        assert(0 <= i && i < m);\n        auto _e\
+    \ = g[pos[i].first][pos[i].second];\n        auto _re = g[_e.to][_e.rev];\n  \
+    \      return edge{\n            pos[i].first, _e.to, _e.cap + _re.cap, _re.cap,\
+    \ _e.cost,\n        };\n    }\n    std::vector<edge> edges() {\n        int m\
+    \ = int(pos.size());\n        std::vector<edge> result(m);\n        for (int i\
+    \ = 0; i < m; i++) { result[i] = get_edge(i); }\n        return result;\n    }\n\
+    \n    std::pair<Cap, Cost> flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max());\
+    \ }\n    std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) { return slope(s,\
+    \ t, flow_limit).back(); }\n    std::vector<std::pair<Cap, Cost>> slope(int s,\
+    \ int t) {\n        return slope(s, t, std::numeric_limits<Cap>::max());\n   \
     \ }\n\n    std::vector<Cost> dual, dist;\n    std::vector<int> pv, pe;\n    std::vector<bool>\
     \ vis;\n    struct Q {\n        Cost key;\n        int to;\n        bool operator<(Q\
     \ r) const { return key > r.key; }\n    };\n    std::vector<Q> que;\n    bool\
@@ -93,25 +94,26 @@ data:
     \ NEGATIVE COST EDGES**\n// Reference: https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html\n\
     // Remark: You can use [radix heap](https://github.com/iwiwi/radix-heap) for Dijkstra\
     \ acceleration\ntemplate <class Cap, class Cost> struct mcf_graph {\n    mcf_graph()\
-    \ {}\n    mcf_graph(int n) : _n(n), g(n) { static_assert(std::numeric_limits<Cap>::max()\
-    \ > 0); }\n\n    int add_edge(int from, int to, Cap cap, Cost cost) {\n      \
-    \  assert(0 <= from && from < _n);\n        assert(0 <= to && to < _n);\n    \
-    \    assert(0 <= cap);\n        assert(0 <= cost);\n        int m = int(pos.size());\n\
-    \        pos.push_back({from, int(g[from].size())});\n        int from_id = int(g[from].size());\n\
-    \        int to_id = int(g[to].size());\n        if (from == to) to_id++;\n  \
-    \      g[from].push_back(_edge{to, to_id, cap, cost});\n        g[to].push_back(_edge{from,\
-    \ from_id, 0, -cost});\n        return m;\n    }\n\n    struct edge {\n      \
-    \  int from, to;\n        Cap cap, flow;\n        Cost cost;\n    };\n\n    edge\
-    \ get_edge(int i) {\n        int m = int(pos.size());\n        assert(0 <= i &&\
-    \ i < m);\n        auto _e = g[pos[i].first][pos[i].second];\n        auto _re\
-    \ = g[_e.to][_e.rev];\n        return edge{\n            pos[i].first, _e.to,\
-    \ _e.cap + _re.cap, _re.cap, _e.cost,\n        };\n    }\n    std::vector<edge>\
-    \ edges() {\n        int m = int(pos.size());\n        std::vector<edge> result(m);\n\
-    \        for (int i = 0; i < m; i++) { result[i] = get_edge(i); }\n        return\
-    \ result;\n    }\n\n    std::pair<Cap, Cost> flow(int s, int t) { return flow(s,\
-    \ t, std::numeric_limits<Cap>::max()); }\n    std::pair<Cap, Cost> flow(int s,\
-    \ int t, Cap flow_limit) { return slope(s, t, flow_limit).back(); }\n    std::vector<std::pair<Cap,\
-    \ Cost>> slope(int s, int t) { return slope(s, t, std::numeric_limits<Cap>::max());\
+    \ {}\n    mcf_graph(int n) : _n(n), g(n) {\n        static_assert(std::numeric_limits<Cap>::max()\
+    \ > 0, \"max() must be greater than 0\");\n    }\n\n    int add_edge(int from,\
+    \ int to, Cap cap, Cost cost) {\n        assert(0 <= from && from < _n);\n   \
+    \     assert(0 <= to && to < _n);\n        assert(0 <= cap);\n        assert(0\
+    \ <= cost);\n        int m = int(pos.size());\n        pos.push_back({from, int(g[from].size())});\n\
+    \        int from_id = int(g[from].size());\n        int to_id = int(g[to].size());\n\
+    \        if (from == to) to_id++;\n        g[from].push_back(_edge{to, to_id,\
+    \ cap, cost});\n        g[to].push_back(_edge{from, from_id, 0, -cost});\n   \
+    \     return m;\n    }\n\n    struct edge {\n        int from, to;\n        Cap\
+    \ cap, flow;\n        Cost cost;\n    };\n\n    edge get_edge(int i) {\n     \
+    \   int m = int(pos.size());\n        assert(0 <= i && i < m);\n        auto _e\
+    \ = g[pos[i].first][pos[i].second];\n        auto _re = g[_e.to][_e.rev];\n  \
+    \      return edge{\n            pos[i].first, _e.to, _e.cap + _re.cap, _re.cap,\
+    \ _e.cost,\n        };\n    }\n    std::vector<edge> edges() {\n        int m\
+    \ = int(pos.size());\n        std::vector<edge> result(m);\n        for (int i\
+    \ = 0; i < m; i++) { result[i] = get_edge(i); }\n        return result;\n    }\n\
+    \n    std::pair<Cap, Cost> flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max());\
+    \ }\n    std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) { return slope(s,\
+    \ t, flow_limit).back(); }\n    std::vector<std::pair<Cap, Cost>> slope(int s,\
+    \ int t) {\n        return slope(s, t, std::numeric_limits<Cap>::max());\n   \
     \ }\n\n    std::vector<Cost> dual, dist;\n    std::vector<int> pv, pe;\n    std::vector<bool>\
     \ vis;\n    struct Q {\n        Cost key;\n        int to;\n        bool operator<(Q\
     \ r) const { return key > r.key; }\n    };\n    std::vector<Q> que;\n    bool\
@@ -162,7 +164,7 @@ data:
   path: combinatorial_opt/mincostflow.hpp
   requiredBy:
   - combinatorial_opt/b-flow.hpp
-  timestamp: '2021-02-27 23:24:10+09:00'
+  timestamp: '2021-07-06 00:01:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/mincostflow.test.cpp
