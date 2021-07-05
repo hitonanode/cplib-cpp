@@ -506,9 +506,9 @@ public:
     NetworkSimplex(const Digraph &graph)
         : _graph(graph), MAX(std::numeric_limits<Value>::max()), INF(std::numeric_limits<Value>::has_infinity ? std::numeric_limits<Value>::infinity() : MAX) {
         // Check the number types
-        static_assert(std::numeric_limits<Value>::is_signed);
-        static_assert(std::numeric_limits<Cost>::is_signed);
-        static_assert(std::numeric_limits<Value>::max() > 0);
+        static_assert(std::numeric_limits<Value>::is_signed, "Value must be signed");
+        static_assert(std::numeric_limits<Cost>::is_signed, "Cost must be signed");
+        static_assert(std::numeric_limits<Value>::max() > 0, "max() must be greater than 0");
 
         // Reset data structures
         reset();
@@ -945,8 +945,12 @@ private:
         if (delta > 0) {
             Value val = _state[in_arc] * delta;
             _flow[in_arc] += val;
-            for (int u = _source[in_arc]; u != join; u = _parent[u]) { _flow[_pred[u]] -= _pred_dir[u] * val; }
-            for (int u = _target[in_arc]; u != join; u = _parent[u]) { _flow[_pred[u]] += _pred_dir[u] * val; }
+            for (int u = _source[in_arc]; u != join; u = _parent[u]) {
+                _flow[_pred[u]] -= _pred_dir[u] * val;
+            }
+            for (int u = _target[in_arc]; u != join; u = _parent[u]) {
+                _flow[_pred[u]] += _pred_dir[u] * val;
+            }
         }
         // Update the state of the entering and leaving arcs
         if (change) {
@@ -1053,7 +1057,9 @@ private:
         // Update _last_succ from v_in towards the root
         int up_limit_out = _last_succ[join] == v_in ? join : -1;
         int last_succ_out = _last_succ[u_out];
-        for (int u = v_in; u != -1 && _last_succ[u] == v_in; u = _parent[u]) { _last_succ[u] = last_succ_out; }
+        for (int u = v_in; u != -1 && _last_succ[u] == v_in; u = _parent[u]) {
+            _last_succ[u] = last_succ_out;
+        }
 
         // Update _last_succ from v_out towards the root
         if (join != old_rev_thread && v_in != old_rev_thread) {

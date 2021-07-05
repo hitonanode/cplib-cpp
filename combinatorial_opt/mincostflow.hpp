@@ -12,7 +12,9 @@
 // Remark: You can use [radix heap](https://github.com/iwiwi/radix-heap) for Dijkstra acceleration
 template <class Cap, class Cost> struct mcf_graph {
     mcf_graph() {}
-    mcf_graph(int n) : _n(n), g(n) { static_assert(std::numeric_limits<Cap>::max() > 0); }
+    mcf_graph(int n) : _n(n), g(n) {
+        static_assert(std::numeric_limits<Cap>::max() > 0, "max() must be greater than 0");
+    }
 
     int add_edge(int from, int to, Cap cap, Cost cost) {
         assert(0 <= from && from < _n);
@@ -53,7 +55,9 @@ template <class Cap, class Cost> struct mcf_graph {
 
     std::pair<Cap, Cost> flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max()); }
     std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) { return slope(s, t, flow_limit).back(); }
-    std::vector<std::pair<Cap, Cost>> slope(int s, int t) { return slope(s, t, std::numeric_limits<Cap>::max()); }
+    std::vector<std::pair<Cap, Cost>> slope(int s, int t) {
+        return slope(s, t, std::numeric_limits<Cap>::max());
+    }
 
     std::vector<Cost> dual, dist;
     std::vector<int> pv, pe;

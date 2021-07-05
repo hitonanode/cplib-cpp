@@ -34,7 +34,9 @@ template <class T, T INF = std::numeric_limits<T>::max() / 2> class slope_trick 
 
 public:
     // Initialize: f(x) = 0
-    slope_trick() : min_f(0), displacement_l(0), displacement_r(0) { static_assert(INF > 0); }
+    slope_trick() : min_f(0), displacement_l(0), displacement_r(0) {
+        static_assert(INF > 0, "INF must be greater than 0");
+    }
     int sizeL() const { return L.size(); }
     int sizeR() const { return R.size(); }
     // argmin f(x), min f(x)
