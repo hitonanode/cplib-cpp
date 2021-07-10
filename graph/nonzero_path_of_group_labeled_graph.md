@@ -1,6 +1,6 @@
 ---
 title: Shortest Non-zero Path in Group-Labeled Graphs （無向グラフの群ラベル制約付き最短路）
-documentation_of: ./nonzero_path_of_group_labeled_graph.md
+documentation_of: ./nonzero_path_of_group_labeled_graph.hpp
 ---
 
 各辺 $e$ に群ラベル $g_e$ が付いた無向グラフについて，単一始点 $s$ から各頂点 $v$ への（同一頂点を複数回通らない）パス $(e_1, \dots, e_K)$ であって $g_{e_1} \cdot g_{e_2} \cdot \dots \cdot g_{e_K} \neq 1$ を満たすようなもののうち最短のものの長さを計算する．
