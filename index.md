@@ -204,6 +204,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/maximum_independent_set.hpp
       title: graph/maximum_independent_set.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/nonzero_path_of_group_labeled_graph.hpp
+      title: "Shortest Non-zero Path in Group-Labeled Graphs \uFF08\u7121\u5411\u30B0\
+        \u30E9\u30D5\u306E\u7FA4\u30E9\u30D9\u30EB\u5236\u7D04\u4ED8\u304D\u6700\u77ED\
+        \u8DEF\uFF09"
     - icon: ':warning:'
       path: graph/paths_of_length_two_decomposition.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u306E\u9577\u3055 2 \u306E\u30D1\u30B9\
@@ -775,6 +780,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/maximum_independent_set.test.cpp
       title: graph/test/maximum_independent_set.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/nonzero_path_of_group_labeled_graph.test.cpp
+      title: graph/test/nonzero_path_of_group_labeled_graph.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/shortest_cycle.test.cpp
       title: graph/test/shortest_cycle.test.cpp
