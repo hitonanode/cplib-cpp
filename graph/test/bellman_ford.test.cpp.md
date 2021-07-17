@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/shortest_path.hpp
     title: graph/shortest_path.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B
@@ -78,15 +78,22 @@ data:
     \ if (nx.second) {\n                        que.push_back(nx.first);\n       \
     \             } else {\n                        que.push_front(nx.first);\n  \
     \                  }\n                }\n            }\n        }\n    }\n\n \
-    \   void solve(int s) {\n        if (wmin >= 0) {\n            if (single_positive_weight)\
-    \ {\n                ZeroOneBFS(s);\n            } else {\n                if\
-    \ ((long long)V * V < (E << 4)) {\n                    DijkstraVquad(s);\n   \
-    \             } else {\n                    Dijkstra(s);\n                }\n\
-    \            }\n        } else {\n            BellmanFord(s, V);\n        }\n\
-    \    }\n\n    // Warshall-Floyd algorithm\n    // Complexity: O(E + V^3)\n   \
-    \ std::vector<std::vector<T>> dist2d;\n    void WarshallFloyd() {\n        dist2d.assign(V,\
-    \ std::vector<T>(V, INF));\n        for (int i = 0; i < V; i++) {\n          \
-    \  dist2d[i][i] = 0;\n            for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
+    \   // Retrieve a sequence of vertex ids that represents shortest path [s, ...,\
+    \ goal]\n    // If not reachable to goal, return {}\n    std::vector<int> retrieve_path(int\
+    \ goal) const {\n        assert(int(prev.size()) == V);\n        assert(0 <= goal\
+    \ and goal < V);\n        if (dist[goal] == INF) return {};\n        std::vector<int>\
+    \ ret{goal};\n        while (prev[goal] != INVALID) {\n            goal = prev[goal];\n\
+    \            ret.push_back(goal);\n        }\n        std::reverse(ret.begin(),\
+    \ ret.end());\n        return ret;\n    }\n\n    void solve(int s) {\n       \
+    \ if (wmin >= 0) {\n            if (single_positive_weight) {\n              \
+    \  ZeroOneBFS(s);\n            } else {\n                if ((long long)V * V\
+    \ < (E << 4)) {\n                    DijkstraVquad(s);\n                } else\
+    \ {\n                    Dijkstra(s);\n                }\n            }\n    \
+    \    } else {\n            BellmanFord(s, V);\n        }\n    }\n\n    // Warshall-Floyd\
+    \ algorithm\n    // Complexity: O(E + V^3)\n    std::vector<std::vector<T>> dist2d;\n\
+    \    void WarshallFloyd() {\n        dist2d.assign(V, std::vector<T>(V, INF));\n\
+    \        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n      \
+    \      for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
     \ p.second);\n        }\n        for (int k = 0; k < V; k++) {\n            for\
     \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
     \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
@@ -122,8 +129,8 @@ data:
   isVerificationFile: true
   path: graph/test/bellman_ford.test.cpp
   requiredBy: []
-  timestamp: '2021-04-18 18:54:48+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-07-17 19:12:49+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/bellman_ford.test.cpp
 layout: document
