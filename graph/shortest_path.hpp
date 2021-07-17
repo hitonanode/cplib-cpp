@@ -155,6 +155,21 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
         }
     }
 
+    // Retrieve a sequence of vertex ids that represents shortest path [s, ..., goal]
+    // If not reachable to goal, return {}
+    std::vector<int> retrieve_path(int goal) const {
+        assert(int(prev.size()) == V);
+        assert(0 <= goal and goal < V);
+        if (dist[goal] == INF) return {};
+        std::vector<int> ret{goal};
+        while (prev[goal] != INVALID) {
+            goal = prev[goal];
+            ret.push_back(goal);
+        }
+        std::reverse(ret.begin(), ret.end());
+        return ret;
+    }
+
     void solve(int s) {
         if (wmin >= 0) {
             if (single_positive_weight) {
