@@ -219,12 +219,12 @@ data:
     - icon: ':warning:'
       path: graph/shortest_cycle01.hpp
       title: graph/shortest_cycle01.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/shortest_cycle_weighted.hpp
       title: graph/shortest_cycle_weighted.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/shortest_path.hpp
-      title: graph/shortest_path.hpp
+      title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
     - icon: ':heavy_check_mark:'
       path: graph/strongly_connected_components.hpp
       title: graph/strongly_connected_components.hpp
@@ -747,7 +747,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/articulation_points.test.cpp
       title: graph/test/articulation_points.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/bellman_ford.test.cpp
       title: graph/test/bellman_ford.test.cpp
     - icon: ':heavy_check_mark:'
@@ -783,13 +783,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/nonzero_path_of_group_labeled_graph.test.cpp
       title: graph/test/nonzero_path_of_group_labeled_graph.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/shortest_cycle.test.cpp
       title: graph/test/shortest_cycle.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/shortest_path.test.cpp
       title: graph/test/shortest_path.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/spfa.test.cpp
       title: graph/test/spfa.test.cpp
     - icon: ':heavy_check_mark:'
@@ -804,7 +804,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/two-edge-connected-components.test.cpp
       title: graph/test/two-edge-connected-components.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/warshallfloyd.test.cpp
       title: graph/test/warshallfloyd.test.cpp
   - name: linear_algebra_matrix/test

@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
-    title: graph/shortest_path.hpp
+    title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shortest_path
     links:
     - https://judge.yosupo.jp/problem/shortest_path
-  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include\
-    \ <deque>\n#include <fstream>\n#include <functional>\n#include <limits>\n#include\
-    \ <queue>\n#include <string>\n#include <utility>\n#include <vector>\n\n// CUT\
-    \ begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max() / 2, int\
-    \ INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
+  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
+    \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <limits>\n#include <queue>\n#include <string>\n#include <utility>\n#include\
+    \ <vector>\n\n// CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
+    \ / 2, int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
     \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
     \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
     \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
@@ -104,19 +104,18 @@ data:
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
     \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
     ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n#line 2 \"graph/test/shortest_path.test.cpp\"\n#include <algorithm>\n\
-    #include <iostream>\n#line 5 \"graph/test/shortest_path.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/shortest_path\"\nusing namespace std;\n\n\
-    int main() {\n    int N, M, s, t;\n    cin >> N >> M >> s >> t;\n    constexpr\
-    \ long long INF = 1LL << 60;\n    ShortestPath<long long, INF> graph(N);\n   \
-    \ while (M--) {\n        int a, b, c;\n        cin >> a >> b >> c;\n        graph.add_edge(a,\
-    \ b, c);\n    }\n\n    graph.solve(s);\n\n    if (graph.dist[t] == INF) {\n  \
-    \      cout << \"-1\\n\";\n        return 0;\n    }\n\n    vector<int> path;\n\
-    \    int now = t;\n    while (true) {\n        path.push_back(now);\n        if\
-    \ (now == s) break;\n        now = graph.prev[now];\n    }\n    std::reverse(path.begin(),\
-    \ path.end());\n    cout << graph.dist[t] << ' ' << path.size() - 1 << '\\n';\n\
-    \    for (unsigned i = 0; i + 1 < path.size(); i++) cout << path[i] << ' ' <<\
-    \ path[i + 1] << '\\n';\n}\n"
+    \    }\n};\n#line 3 \"graph/test/shortest_path.test.cpp\"\n#include <iostream>\n\
+    #line 5 \"graph/test/shortest_path.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\
+    \nusing namespace std;\n\nint main() {\n    int N, M, s, t;\n    cin >> N >> M\
+    \ >> s >> t;\n    constexpr long long INF = 1LL << 60;\n    ShortestPath<long\
+    \ long, INF> graph(N);\n    while (M--) {\n        int a, b, c;\n        cin >>\
+    \ a >> b >> c;\n        graph.add_edge(a, b, c);\n    }\n\n    graph.solve(s);\n\
+    \n    if (graph.dist[t] == INF) {\n        cout << \"-1\\n\";\n        return\
+    \ 0;\n    }\n\n    vector<int> path;\n    int now = t;\n    while (true) {\n \
+    \       path.push_back(now);\n        if (now == s) break;\n        now = graph.prev[now];\n\
+    \    }\n    std::reverse(path.begin(), path.end());\n    cout << graph.dist[t]\
+    \ << ' ' << path.size() - 1 << '\\n';\n    for (unsigned i = 0; i + 1 < path.size();\
+    \ i++) cout << path[i] << ' ' << path[i + 1] << '\\n';\n}\n"
   code: "#include \"../shortest_path.hpp\"\n#include <algorithm>\n#include <iostream>\n\
     #include <vector>\n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\
     \nusing namespace std;\n\nint main() {\n    int N, M, s, t;\n    cin >> N >> M\
@@ -134,8 +133,8 @@ data:
   isVerificationFile: true
   path: graph/test/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2021-07-17 19:12:49+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-07-17 19:57:35+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_path.test.cpp
 layout: document

@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_cycle_weighted.hpp
     title: graph/shortest_cycle_weighted.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
-    title: graph/shortest_path.hpp
+    title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1320
@@ -50,17 +50,17 @@ data:
     \ (auto edge : add_edge) {\n            int a = edge.first.first, b = edge.first.second;\n\
     \            T L = dist[a] + dist[b] + edge.second;\n            if (L < minimum_cycle)\
     \ minimum_cycle = L, s = a, t = b;\n        }\n        return std::make_pair(minimum_cycle,\
-    \ std::make_pair(s, t));\n    }\n};\n#line 3 \"graph/shortest_path.hpp\"\n#include\
-    \ <deque>\n#include <fstream>\n#include <functional>\n#line 8 \"graph/shortest_path.hpp\"\
-    \n#include <string>\n#line 11 \"graph/shortest_path.hpp\"\n\n// CUT begin\ntemplate\
-    \ <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct\
-    \ ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n    T wmin,\
-    \ wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n    ShortestPath(int\
-    \ V = 0) : V(V), E(0), single_positive_weight(true), wmin(0), wmax(0), to(V) {}\n\
-    \    void add_edge(int s, int t, T w) {\n        assert(0 <= s and s < V);\n \
-    \       assert(0 <= t and t < V);\n        to[s].emplace_back(t, w);\n       \
-    \ E++;\n        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight =\
-    \ false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
+    \ std::make_pair(s, t));\n    }\n};\n#line 2 \"graph/shortest_path.hpp\"\n#include\
+    \ <algorithm>\n#line 4 \"graph/shortest_path.hpp\"\n#include <deque>\n#include\
+    \ <fstream>\n#include <functional>\n#line 9 \"graph/shortest_path.hpp\"\n#include\
+    \ <string>\n#line 12 \"graph/shortest_path.hpp\"\n\n// CUT begin\ntemplate <typename\
+    \ T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath\
+    \ {\n    int V, E;\n    bool single_positive_weight;\n    T wmin, wmax;\n    std::vector<std::vector<std::pair<int,\
+    \ T>>> to;\n\n    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true),\
+    \ wmin(0), wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n       \
+    \ assert(0 <= s and s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t,\
+    \ w);\n        E++;\n        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight\
+    \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    void Dijkstra(int s) {\n     \
     \   assert(0 <= s and s < V);\n        dist.assign(V, INF);\n        dist[s] =\
@@ -181,8 +181,8 @@ data:
   isVerificationFile: true
   path: graph/test/shortest_cycle.test.cpp
   requiredBy: []
-  timestamp: '2021-07-17 19:12:49+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-07-17 19:57:35+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_cycle.test.cpp
 layout: document

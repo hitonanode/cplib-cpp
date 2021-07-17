@@ -3,31 +3,31 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/bellman_ford.test.cpp
     title: graph/test/bellman_ford.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/shortest_cycle.test.cpp
     title: graph/test/shortest_cycle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/shortest_path.test.cpp
     title: graph/test/shortest_path.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/spfa.test.cpp
     title: graph/test/spfa.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/warshallfloyd.test.cpp
     title: graph/test/warshallfloyd.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include\
-    \ <deque>\n#include <fstream>\n#include <functional>\n#include <limits>\n#include\
-    \ <queue>\n#include <string>\n#include <utility>\n#include <vector>\n\n// CUT\
-    \ begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max() / 2, int\
-    \ INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
+  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
+    \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <limits>\n#include <queue>\n#include <string>\n#include <utility>\n#include\
+    \ <vector>\n\n// CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
+    \ / 2, int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
     \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
     \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
     \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
@@ -114,16 +114,17 @@ data:
     \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
     ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
     \    }\n};\n"
-  code: "#pragma once\n#include <cassert>\n#include <deque>\n#include <fstream>\n\
-    #include <functional>\n#include <limits>\n#include <queue>\n#include <string>\n\
-    #include <utility>\n#include <vector>\n\n// CUT begin\ntemplate <typename T, T\
-    \ INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath\
-    \ {\n    int V, E;\n    bool single_positive_weight;\n    T wmin, wmax;\n    std::vector<std::vector<std::pair<int,\
-    \ T>>> to;\n\n    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true),\
-    \ wmin(0), wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n       \
-    \ assert(0 <= s and s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t,\
-    \ w);\n        E++;\n        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight\
-    \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
+  code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <deque>\n\
+    #include <fstream>\n#include <functional>\n#include <limits>\n#include <queue>\n\
+    #include <string>\n#include <utility>\n#include <vector>\n\n// CUT begin\ntemplate\
+    \ <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct\
+    \ ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n    T wmin,\
+    \ wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n    ShortestPath(int\
+    \ V = 0) : V(V), E(0), single_positive_weight(true), wmin(0), wmax(0), to(V) {}\n\
+    \    void add_edge(int s, int t, T w) {\n        assert(0 <= s and s < V);\n \
+    \       assert(0 <= t and t < V);\n        to[s].emplace_back(t, w);\n       \
+    \ E++;\n        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight =\
+    \ false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    void Dijkstra(int s) {\n     \
     \   assert(0 <= s and s < V);\n        dist.assign(V, INF);\n        dist[s] =\
@@ -208,8 +209,8 @@ data:
   isVerificationFile: false
   path: graph/shortest_path.hpp
   requiredBy: []
-  timestamp: '2021-07-17 19:12:49+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-07-17 19:57:35+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/bellman_ford.test.cpp
   - graph/test/spfa.test.cpp
@@ -218,8 +219,33 @@ data:
   - graph/test/shortest_cycle.test.cpp
 documentation_of: graph/shortest_path.hpp
 layout: document
-redirect_from:
-- /library/graph/shortest_path.hpp
-- /library/graph/shortest_path.hpp.html
-title: graph/shortest_path.hpp
+title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
 ---
+
+単一始点最短路問題を解く．`solve(int s)` 関数を用いると以下の要領でアルゴリズムが自動的に選択される．
+
+- 負の重みの辺が存在するならば，Bellman-Ford 法で解く．$O(VE)$
+- 全ての辺重みが非負で，非零の辺重みの値が高々一通りならば， 0-1 BFS で解く．$O(V + E)$
+- それ以外の場合，Dijkstra 法で解く．$O(V^2 + E)$ または $O(E \log E)$
+
+また，SPFA （$O(VE)$），全点対最短路アルゴリズム（Floyd-Warshall 法，$O(E + V^3)$）も実装されている．`retrieve_path(int t)` で最短路の復元が，また `dump_graphviz(string filename)` で `.DOT` 形式のグラフ出力が可能．
+
+## 使用方法
+
+```cpp
+constexpr long long INF = 1LL << 60;
+ShortestPath<long long, INF> graph(N);
+while (M--) {
+    int a, b, c;
+    cin >> a >> b >> c;
+    graph.add_edge(a, b, c);
+}
+
+graph.solve(s);
+cout << graph.dist[t] << '\n';
+
+```
+
+## 問題例
+
+- [Library Checker - Shortest Path](https://judge.yosupo.jp/problem/shortest_path)

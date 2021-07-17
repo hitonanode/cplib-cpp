@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/shortest_cycle.test.cpp
     title: graph/test/shortest_cycle.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://yukicoder.me/submissions/594507
@@ -82,7 +82,7 @@ data:
   path: graph/shortest_cycle_weighted.hpp
   requiredBy: []
   timestamp: '2021-05-01 20:55:29+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/shortest_cycle.test.cpp
 documentation_of: graph/shortest_cycle_weighted.hpp

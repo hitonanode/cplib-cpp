@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
-    title: graph/shortest_path.hpp
+    title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C
-  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <cassert>\n#include\
-    \ <deque>\n#include <fstream>\n#include <functional>\n#include <limits>\n#include\
-    \ <queue>\n#include <string>\n#include <utility>\n#include <vector>\n\n// CUT\
-    \ begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max() / 2, int\
-    \ INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
+  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
+    \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <limits>\n#include <queue>\n#include <string>\n#include <utility>\n#include\
+    \ <vector>\n\n// CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
+    \ / 2, int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
     \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
     \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
     \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
@@ -129,8 +129,8 @@ data:
   isVerificationFile: true
   path: graph/test/warshallfloyd.test.cpp
   requiredBy: []
-  timestamp: '2021-07-17 19:12:49+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-07-17 19:57:35+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/warshallfloyd.test.cpp
 layout: document
