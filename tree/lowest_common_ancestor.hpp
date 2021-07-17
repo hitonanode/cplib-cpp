@@ -5,9 +5,8 @@
 // CUT begin
 // lowest common ancestor (LCA) class for undirected weighted tree
 // 無向重み付きグラフの最小共通祖先
-// <https://yukicoder.me/submissions/392383>
-struct UndirectedWeightedTree {
-    using T = long long; // Arbitrary data structure (operator+, operator- must be defined)
+// https://yukicoder.me/submissions/392383
+template <typename T> struct UndirectedWeightedTree {
     int INVALID = -1;
     int V, lgV;
     int E;
@@ -43,18 +42,8 @@ struct UndirectedWeightedTree {
         E++;
     }
 
-    void fix_root(int r) {
-        root = r;
-        par.resize(V);
-        depth.resize(V);
-        depth[r] = 0;
-        acc_weight.resize(V);
-        acc_weight[r] = 0;
-        _fix_root_dfs(root, INVALID, INVALID);
-    }
-
     std::vector<std::vector<int>> doubling;
-    void doubling_precalc() {
+    void _doubling_precalc() {
         doubling.assign(lgV, std::vector<int>(V));
         doubling[0] = par;
         for (int d = 0; d < lgV - 1; d++)
@@ -64,6 +53,17 @@ struct UndirectedWeightedTree {
                 else
                     doubling[d + 1][i] = doubling[d][doubling[d][i]];
             }
+    }
+
+    void fix_root(int r) {
+        root = r;
+        par.resize(V);
+        depth.resize(V);
+        depth[r] = 0;
+        acc_weight.resize(V);
+        acc_weight[r] = 0;
+        _fix_root_dfs(root, INVALID, INVALID);
+        _doubling_precalc();
     }
 
     int kth_parent(int x, int k) {

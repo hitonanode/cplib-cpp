@@ -4,15 +4,15 @@
 using namespace std;
 
 int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
     int N, Q, p, u, v;
     cin >> N >> Q;
-    UndirectedWeightedTree graph(N);
+    UndirectedWeightedTree<int> graph(N);
     for (int i = 1; i <= N - 1; i++) {
         cin >> p;
         graph.add_edge(i, p, 1);
     }
     graph.fix_root(0);
-    graph.doubling_precalc();
 
     for (int i = 0; i < Q; i++) {
         cin >> u >> v;
