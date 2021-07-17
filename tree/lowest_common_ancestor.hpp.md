@@ -6,23 +6,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/test/lca.test.cpp
     title: tree/test/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: tree/test/lca.yuki898.test.cpp
+    title: tree/test/lca.yuki898.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
-    - https://yukicoder.me/submissions/392383>
+    - https://yukicoder.me/submissions/392383
   bundledCode: "#line 2 \"tree/lowest_common_ancestor.hpp\"\n#include <utility>\n\
     #include <vector>\n\n// CUT begin\n// lowest common ancestor (LCA) class for undirected\
     \ weighted tree\n// \u7121\u5411\u91CD\u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u306E\
-    \u6700\u5C0F\u5171\u901A\u7956\u5148\n// <https://yukicoder.me/submissions/392383>\n\
-    struct UndirectedWeightedTree {\n    using T = long long; // Arbitrary data structure\
-    \ (operator+, operator- must be defined)\n    int INVALID = -1;\n    int V, lgV;\n\
-    \    int E;\n    int root;\n    std::vector<std::vector<std::pair<int, int>>>\
-    \ adj; // (nxt_vertex, edge_id)\n    // vector<pint> edge; // edges[edge_id] =\
-    \ (vertex_id, vertex_id)\n    std::vector<T> weight;     // w[edge_id]\n    std::vector<int>\
-    \ par;      // parent_vertex_id[vertex_id]\n    std::vector<int> depth;    //\
-    \ depth_from_root[vertex_id]\n    std::vector<T> acc_weight; // w_sum_from_root[vertex_id]\n\
+    \u6700\u5C0F\u5171\u901A\u7956\u5148\n// https://yukicoder.me/submissions/392383\n\
+    template <typename T> struct UndirectedWeightedTree {\n    int INVALID = -1;\n\
+    \    int V, lgV;\n    int E;\n    int root;\n    std::vector<std::vector<std::pair<int,\
+    \ int>>> adj; // (nxt_vertex, edge_id)\n    // vector<pint> edge; // edges[edge_id]\
+    \ = (vertex_id, vertex_id)\n    std::vector<T> weight;     // w[edge_id]\n   \
+    \ std::vector<int> par;      // parent_vertex_id[vertex_id]\n    std::vector<int>\
+    \ depth;    // depth_from_root[vertex_id]\n    std::vector<T> acc_weight; // w_sum_from_root[vertex_id]\n\
     \n    void _fix_root_dfs(int now, int prv, int prv_edge_id) {\n        par[now]\
     \ = prv;\n        if (prv_edge_id != INVALID) acc_weight[now] = acc_weight[prv]\
     \ + weight[prv_edge_id];\n        for (auto nxt : adj[now])\n            if (nxt.first\
@@ -32,78 +34,100 @@ data:
     \   lgV = 1;\n        while (1 << lgV < V) lgV++;\n    }\n\n    void add_edge(int\
     \ u, int v, T w) {\n        adj[u].emplace_back(v, E);\n        adj[v].emplace_back(u,\
     \ E);\n        // edge.emplace_back(u, v);\n        weight.emplace_back(w);\n\
-    \        E++;\n    }\n\n    void fix_root(int r) {\n        root = r;\n      \
-    \  par.resize(V);\n        depth.resize(V);\n        depth[r] = 0;\n        acc_weight.resize(V);\n\
+    \        E++;\n    }\n\n    std::vector<std::vector<int>> doubling;\n    void\
+    \ _doubling_precalc() {\n        doubling.assign(lgV, std::vector<int>(V));\n\
+    \        doubling[0] = par;\n        for (int d = 0; d < lgV - 1; d++)\n     \
+    \       for (int i = 0; i < V; i++) {\n                if (doubling[d][i] == INVALID)\n\
+    \                    doubling[d + 1][i] = INVALID;\n                else\n   \
+    \                 doubling[d + 1][i] = doubling[d][doubling[d][i]];\n        \
+    \    }\n    }\n\n    void fix_root(int r) {\n        root = r;\n        par.resize(V);\n\
+    \        depth.resize(V);\n        depth[r] = 0;\n        acc_weight.resize(V);\n\
     \        acc_weight[r] = 0;\n        _fix_root_dfs(root, INVALID, INVALID);\n\
-    \    }\n\n    std::vector<std::vector<int>> doubling;\n    void doubling_precalc()\
-    \ {\n        doubling.assign(lgV, std::vector<int>(V));\n        doubling[0] =\
-    \ par;\n        for (int d = 0; d < lgV - 1; d++)\n            for (int i = 0;\
-    \ i < V; i++) {\n                if (doubling[d][i] == INVALID)\n            \
-    \        doubling[d + 1][i] = INVALID;\n                else\n               \
-    \     doubling[d + 1][i] = doubling[d][doubling[d][i]];\n            }\n    }\n\
-    \n    int kth_parent(int x, int k) {\n        if (depth[x] < k) return INVALID;\n\
-    \        for (int d = 0; d < lgV; d++) {\n            if (x == INVALID) return\
-    \ INVALID;\n            if (k & (1 << d)) x = doubling[d][x];\n        }\n   \
-    \     return x;\n    }\n\n    int lowest_common_ancestor(int u, int v) {\n   \
-    \     if (depth[u] > depth[v]) std::swap(u, v);\n\n        v = kth_parent(v, depth[v]\
-    \ - depth[u]);\n        if (u == v) return u;\n        for (int d = lgV - 1; d\
-    \ >= 0; d--) {\n            if (doubling[d][u] != doubling[d][v]) u = doubling[d][u],\
-    \ v = doubling[d][v];\n        }\n        return par[u];\n    }\n\n    T path_length(int\
-    \ u, int v) {\n        // Not distance, but the sum of weights\n        int r\
-    \ = lowest_common_ancestor(u, v);\n        return (acc_weight[u] - acc_weight[r])\
-    \ + (acc_weight[v] - acc_weight[r]);\n    }\n};\n"
+    \        _doubling_precalc();\n    }\n\n    int kth_parent(int x, int k) {\n \
+    \       if (depth[x] < k) return INVALID;\n        for (int d = 0; d < lgV; d++)\
+    \ {\n            if (x == INVALID) return INVALID;\n            if (k & (1 <<\
+    \ d)) x = doubling[d][x];\n        }\n        return x;\n    }\n\n    int lowest_common_ancestor(int\
+    \ u, int v) {\n        if (depth[u] > depth[v]) std::swap(u, v);\n\n        v\
+    \ = kth_parent(v, depth[v] - depth[u]);\n        if (u == v) return u;\n     \
+    \   for (int d = lgV - 1; d >= 0; d--) {\n            if (doubling[d][u] != doubling[d][v])\
+    \ u = doubling[d][u], v = doubling[d][v];\n        }\n        return par[u];\n\
+    \    }\n\n    T path_length(int u, int v) {\n        // Not distance, but the\
+    \ sum of weights\n        int r = lowest_common_ancestor(u, v);\n        return\
+    \ (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);\n    }\n\
+    };\n"
   code: "#pragma once\n#include <utility>\n#include <vector>\n\n// CUT begin\n// lowest\
     \ common ancestor (LCA) class for undirected weighted tree\n// \u7121\u5411\u91CD\
     \u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\
-    \n// <https://yukicoder.me/submissions/392383>\nstruct UndirectedWeightedTree\
-    \ {\n    using T = long long; // Arbitrary data structure (operator+, operator-\
-    \ must be defined)\n    int INVALID = -1;\n    int V, lgV;\n    int E;\n    int\
-    \ root;\n    std::vector<std::vector<std::pair<int, int>>> adj; // (nxt_vertex,\
-    \ edge_id)\n    // vector<pint> edge; // edges[edge_id] = (vertex_id, vertex_id)\n\
-    \    std::vector<T> weight;     // w[edge_id]\n    std::vector<int> par;     \
-    \ // parent_vertex_id[vertex_id]\n    std::vector<int> depth;    // depth_from_root[vertex_id]\n\
-    \    std::vector<T> acc_weight; // w_sum_from_root[vertex_id]\n\n    void _fix_root_dfs(int\
-    \ now, int prv, int prv_edge_id) {\n        par[now] = prv;\n        if (prv_edge_id\
-    \ != INVALID) acc_weight[now] = acc_weight[prv] + weight[prv_edge_id];\n     \
-    \   for (auto nxt : adj[now])\n            if (nxt.first != prv) {\n         \
-    \       depth[nxt.first] = depth[now] + 1;\n                _fix_root_dfs(nxt.first,\
-    \ now, nxt.second);\n            }\n    }\n\n    UndirectedWeightedTree() = default;\n\
-    \    UndirectedWeightedTree(int N) : V(N), E(0), adj(N) {\n        lgV = 1;\n\
-    \        while (1 << lgV < V) lgV++;\n    }\n\n    void add_edge(int u, int v,\
-    \ T w) {\n        adj[u].emplace_back(v, E);\n        adj[v].emplace_back(u, E);\n\
-    \        // edge.emplace_back(u, v);\n        weight.emplace_back(w);\n      \
-    \  E++;\n    }\n\n    void fix_root(int r) {\n        root = r;\n        par.resize(V);\n\
+    \n// https://yukicoder.me/submissions/392383\ntemplate <typename T> struct UndirectedWeightedTree\
+    \ {\n    int INVALID = -1;\n    int V, lgV;\n    int E;\n    int root;\n    std::vector<std::vector<std::pair<int,\
+    \ int>>> adj; // (nxt_vertex, edge_id)\n    // vector<pint> edge; // edges[edge_id]\
+    \ = (vertex_id, vertex_id)\n    std::vector<T> weight;     // w[edge_id]\n   \
+    \ std::vector<int> par;      // parent_vertex_id[vertex_id]\n    std::vector<int>\
+    \ depth;    // depth_from_root[vertex_id]\n    std::vector<T> acc_weight; // w_sum_from_root[vertex_id]\n\
+    \n    void _fix_root_dfs(int now, int prv, int prv_edge_id) {\n        par[now]\
+    \ = prv;\n        if (prv_edge_id != INVALID) acc_weight[now] = acc_weight[prv]\
+    \ + weight[prv_edge_id];\n        for (auto nxt : adj[now])\n            if (nxt.first\
+    \ != prv) {\n                depth[nxt.first] = depth[now] + 1;\n            \
+    \    _fix_root_dfs(nxt.first, now, nxt.second);\n            }\n    }\n\n    UndirectedWeightedTree()\
+    \ = default;\n    UndirectedWeightedTree(int N) : V(N), E(0), adj(N) {\n     \
+    \   lgV = 1;\n        while (1 << lgV < V) lgV++;\n    }\n\n    void add_edge(int\
+    \ u, int v, T w) {\n        adj[u].emplace_back(v, E);\n        adj[v].emplace_back(u,\
+    \ E);\n        // edge.emplace_back(u, v);\n        weight.emplace_back(w);\n\
+    \        E++;\n    }\n\n    std::vector<std::vector<int>> doubling;\n    void\
+    \ _doubling_precalc() {\n        doubling.assign(lgV, std::vector<int>(V));\n\
+    \        doubling[0] = par;\n        for (int d = 0; d < lgV - 1; d++)\n     \
+    \       for (int i = 0; i < V; i++) {\n                if (doubling[d][i] == INVALID)\n\
+    \                    doubling[d + 1][i] = INVALID;\n                else\n   \
+    \                 doubling[d + 1][i] = doubling[d][doubling[d][i]];\n        \
+    \    }\n    }\n\n    void fix_root(int r) {\n        root = r;\n        par.resize(V);\n\
     \        depth.resize(V);\n        depth[r] = 0;\n        acc_weight.resize(V);\n\
     \        acc_weight[r] = 0;\n        _fix_root_dfs(root, INVALID, INVALID);\n\
-    \    }\n\n    std::vector<std::vector<int>> doubling;\n    void doubling_precalc()\
-    \ {\n        doubling.assign(lgV, std::vector<int>(V));\n        doubling[0] =\
-    \ par;\n        for (int d = 0; d < lgV - 1; d++)\n            for (int i = 0;\
-    \ i < V; i++) {\n                if (doubling[d][i] == INVALID)\n            \
-    \        doubling[d + 1][i] = INVALID;\n                else\n               \
-    \     doubling[d + 1][i] = doubling[d][doubling[d][i]];\n            }\n    }\n\
-    \n    int kth_parent(int x, int k) {\n        if (depth[x] < k) return INVALID;\n\
-    \        for (int d = 0; d < lgV; d++) {\n            if (x == INVALID) return\
-    \ INVALID;\n            if (k & (1 << d)) x = doubling[d][x];\n        }\n   \
-    \     return x;\n    }\n\n    int lowest_common_ancestor(int u, int v) {\n   \
-    \     if (depth[u] > depth[v]) std::swap(u, v);\n\n        v = kth_parent(v, depth[v]\
-    \ - depth[u]);\n        if (u == v) return u;\n        for (int d = lgV - 1; d\
-    \ >= 0; d--) {\n            if (doubling[d][u] != doubling[d][v]) u = doubling[d][u],\
-    \ v = doubling[d][v];\n        }\n        return par[u];\n    }\n\n    T path_length(int\
-    \ u, int v) {\n        // Not distance, but the sum of weights\n        int r\
-    \ = lowest_common_ancestor(u, v);\n        return (acc_weight[u] - acc_weight[r])\
-    \ + (acc_weight[v] - acc_weight[r]);\n    }\n};\n"
+    \        _doubling_precalc();\n    }\n\n    int kth_parent(int x, int k) {\n \
+    \       if (depth[x] < k) return INVALID;\n        for (int d = 0; d < lgV; d++)\
+    \ {\n            if (x == INVALID) return INVALID;\n            if (k & (1 <<\
+    \ d)) x = doubling[d][x];\n        }\n        return x;\n    }\n\n    int lowest_common_ancestor(int\
+    \ u, int v) {\n        if (depth[u] > depth[v]) std::swap(u, v);\n\n        v\
+    \ = kth_parent(v, depth[v] - depth[u]);\n        if (u == v) return u;\n     \
+    \   for (int d = lgV - 1; d >= 0; d--) {\n            if (doubling[d][u] != doubling[d][v])\
+    \ u = doubling[d][u], v = doubling[d][v];\n        }\n        return par[u];\n\
+    \    }\n\n    T path_length(int u, int v) {\n        // Not distance, but the\
+    \ sum of weights\n        int r = lowest_common_ancestor(u, v);\n        return\
+    \ (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);\n    }\n\
+    };\n"
   dependsOn: []
   isVerificationFile: false
   path: tree/lowest_common_ancestor.hpp
   requiredBy: []
-  timestamp: '2021-02-26 00:36:27+09:00'
+  timestamp: '2021-07-17 20:15:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - tree/test/lca.yuki898.test.cpp
   - tree/test/lca.test.cpp
 documentation_of: tree/lowest_common_ancestor.hpp
 layout: document
-redirect_from:
-- /library/tree/lowest_common_ancestor.hpp
-- /library/tree/lowest_common_ancestor.hpp.html
-title: tree/lowest_common_ancestor.hpp
+title: "Lowest common ancestor \uFF08\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
 ---
+
+根を固定した木に対する 2 頂点の最小共通祖先，および 2 頂点間の距離の計算．前処理 $O(N \log N)$, クエリ $O(\log N)$．
+
+## 使用方法
+
+```cpp
+UndirectedWeightedTree<long long> tree(N);
+for (int e = 0; e < N - 1; e++) {
+    int u, v, w;
+    cin >> u >> v >> w;
+    tree.add_edge(u, v, w);
+}
+
+tree.fix_root(0);
+
+cout << tree.lowest_common_ancestor(a, b) << '\n'; // (a, b) の最長共通祖先
+cout << tree.kth_parent(a, k) << '\n';  // 頂点 a の k 世代親
+cout << tree.path_length(a, b) << '\n'; // 2 頂点 a, b の距離
+```
+
+## 問題例
+
+- [Library Checker: Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)
+- [yukicoder No.898 tri-βutree](https://yukicoder.me/problems/no/898)

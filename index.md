@@ -489,7 +489,7 @@ data:
       title: tree/lca_rmq.hpp
     - icon: ':heavy_check_mark:'
       path: tree/lowest_common_ancestor.hpp
-      title: tree/lowest_common_ancestor.hpp
+      title: "Lowest common ancestor \uFF08\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
     - icon: ':warning:'
       path: tree/tree_isomorphism.hpp
       title: tree/tree_isomorphism.hpp
@@ -1016,6 +1016,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/lca.test.cpp
       title: tree/test/lca.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/lca.yuki898.test.cpp
+      title: tree/test/lca.yuki898.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/lca_rmq.test.cpp
       title: tree/test/lca_rmq.test.cpp

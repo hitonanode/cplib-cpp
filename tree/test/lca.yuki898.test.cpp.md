@@ -11,9 +11,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/lca
+    PROBLEM: https://yukicoder.me/problems/no/898
     links:
-    - https://judge.yosupo.jp/problem/lca
+    - https://yukicoder.me/problems/no/898
   bundledCode: "#line 2 \"tree/lowest_common_ancestor.hpp\"\n#include <utility>\n\
     #include <vector>\n\n// CUT begin\n// lowest common ancestor (LCA) class for undirected\
     \ weighted tree\n// \u7121\u5411\u91CD\u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u306E\
@@ -53,34 +53,42 @@ data:
     \    }\n\n    T path_length(int u, int v) {\n        // Not distance, but the\
     \ sum of weights\n        int r = lowest_common_ancestor(u, v);\n        return\
     \ (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);\n    }\n\
-    };\n#line 2 \"tree/test/lca.test.cpp\"\n#include <iostream>\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/lca\"\nusing namespace std;\n\nint main() {\n\
-    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q, p, u, v;\n\
-    \    cin >> N >> Q;\n    UndirectedWeightedTree<int> graph(N);\n    for (int i\
-    \ = 1; i <= N - 1; i++) {\n        cin >> p;\n        graph.add_edge(i, p, 1);\n\
-    \    }\n    graph.fix_root(0);\n\n    for (int i = 0; i < Q; i++) {\n        cin\
-    \ >> u >> v;\n        cout << graph.lowest_common_ancestor(u, v) << endl;\n  \
-    \  }\n}\n"
+    };\n#line 2 \"tree/test/lca.yuki898.test.cpp\"\n#include <iostream>\n#define PROBLEM\
+    \ \"https://yukicoder.me/problems/no/898\"\nusing namespace std;\n\nint main()\
+    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N;\n    cin\
+    \ >> N;\n    UndirectedWeightedTree<long long> g(N);\n    for (int i = 1; i <=\
+    \ N - 1; i++) {\n        int u, v, w;\n        cin >> u >> v >> w;\n        g.add_edge(u,\
+    \ v, w);\n    }\n    g.fix_root(0);\n\n    int Q;\n    cin >> Q;\n\n    while\
+    \ (Q--) {\n        int x, y, z;\n        cin >> x >> y >> z;\n        int xy =\
+    \ g.lowest_common_ancestor(x, y);\n        int xyz = g.lowest_common_ancestor(xy,\
+    \ z);\n        if (xy != xyz) {\n            cout << g.path_length(xy, z) + g.path_length(x,\
+    \ y) << '\\n';\n        } else {\n            int v = g.lowest_common_ancestor(x,\
+    \ z) + g.lowest_common_ancestor(y, z) - xy;\n            cout << g.path_length(x,\
+    \ y) + g.path_length(z, v) << '\\n';\n        }\n    }\n}\n"
   code: "#include \"../lowest_common_ancestor.hpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\nusing namespace std;\n\nint\
-    \ main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q,\
-    \ p, u, v;\n    cin >> N >> Q;\n    UndirectedWeightedTree<int> graph(N);\n  \
-    \  for (int i = 1; i <= N - 1; i++) {\n        cin >> p;\n        graph.add_edge(i,\
-    \ p, 1);\n    }\n    graph.fix_root(0);\n\n    for (int i = 0; i < Q; i++) {\n\
-    \        cin >> u >> v;\n        cout << graph.lowest_common_ancestor(u, v) <<\
-    \ endl;\n    }\n}\n"
+    \ PROBLEM \"https://yukicoder.me/problems/no/898\"\nusing namespace std;\n\nint\
+    \ main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N;\n\
+    \    cin >> N;\n    UndirectedWeightedTree<long long> g(N);\n    for (int i =\
+    \ 1; i <= N - 1; i++) {\n        int u, v, w;\n        cin >> u >> v >> w;\n \
+    \       g.add_edge(u, v, w);\n    }\n    g.fix_root(0);\n\n    int Q;\n    cin\
+    \ >> Q;\n\n    while (Q--) {\n        int x, y, z;\n        cin >> x >> y >> z;\n\
+    \        int xy = g.lowest_common_ancestor(x, y);\n        int xyz = g.lowest_common_ancestor(xy,\
+    \ z);\n        if (xy != xyz) {\n            cout << g.path_length(xy, z) + g.path_length(x,\
+    \ y) << '\\n';\n        } else {\n            int v = g.lowest_common_ancestor(x,\
+    \ z) + g.lowest_common_ancestor(y, z) - xy;\n            cout << g.path_length(x,\
+    \ y) + g.path_length(z, v) << '\\n';\n        }\n    }\n}\n"
   dependsOn:
   - tree/lowest_common_ancestor.hpp
   isVerificationFile: true
-  path: tree/test/lca.test.cpp
+  path: tree/test/lca.yuki898.test.cpp
   requiredBy: []
   timestamp: '2021-07-17 20:15:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: tree/test/lca.test.cpp
+documentation_of: tree/test/lca.yuki898.test.cpp
 layout: document
 redirect_from:
-- /verify/tree/test/lca.test.cpp
-- /verify/tree/test/lca.test.cpp.html
-title: tree/test/lca.test.cpp
+- /verify/tree/test/lca.yuki898.test.cpp
+- /verify/tree/test/lca.yuki898.test.cpp.html
+title: tree/test/lca.yuki898.test.cpp
 ---
