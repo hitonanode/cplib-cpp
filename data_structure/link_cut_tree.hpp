@@ -135,6 +135,7 @@ public:
 
     void link(Node *u, Node *v) {
         if (u->p != nullptr) evert(u);
+        if (v->p != nullptr) evert(v);
         expose(v);
         u->p = v;
         v->r = u;
@@ -170,3 +171,29 @@ public:
         return v->sum;
     }
 };
+/* example usage:
+struct S {
+    int sz, sum, lhi, rhi, inhi;
+    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}
+    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)
+        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}
+};
+using F = pair<bool, int>;
+S op(S l, S r) {
+    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));
+}
+S reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }
+S mapping(F f, S x) {
+    if (f.first) {
+        auto v = f.second;
+        auto sum = x.sz * v;
+        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};
+    } else {
+        return x;
+    }
+}
+F composition(F fnew, F gold) { return fnew.first ? fnew : gold; }
+F id() { return {false, 0}; }
+using LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition, id>;
+vector<LCT::Node*> vs;
+*/
