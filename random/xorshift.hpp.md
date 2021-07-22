@@ -2,10 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+    title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+    title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"random/xorshift.hpp\"\n#include <cstdint>\n\n// CUT begin\n\
@@ -24,8 +30,10 @@ data:
   path: random/xorshift.hpp
   requiredBy: []
   timestamp: '2020-03-07 22:54:47+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
 documentation_of: random/xorshift.hpp
 layout: document
 redirect_from:

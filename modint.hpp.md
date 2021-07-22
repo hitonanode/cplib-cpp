@@ -60,6 +60,15 @@ data:
     path: convolution/test/subset_convolution.test.cpp
     title: convolution/test/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/link_cut_tree.composition.test.cpp
+    title: data_structure/test/link_cut_tree.composition.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+    title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+    title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/queue_operate_all_composite.test.cpp
     title: data_structure/test/queue_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -382,6 +391,9 @@ data:
   - convolution/test/bitwise_xor_conv.test.cpp
   - convolution/test/multivar_ntt.test.cpp
   - convolution/test/ntt.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - data_structure/test/link_cut_tree.composition.test.cpp
+  - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp

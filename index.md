@@ -85,9 +85,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/light_forward_list.hpp
       title: data_structure/light_forward_list.hpp
-    - icon: ':warning:'
-      path: data_structure/link_cut_tree.cpp
-      title: data_structure/link_cut_tree.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/link_cut_tree.hpp
+      title: Link-Cut tree
     - icon: ':heavy_check_mark:'
       path: data_structure/persistent_array.hpp
       title: data_structure/persistent_array.hpp
@@ -346,7 +346,7 @@ data:
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -639,6 +639,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/fibonacci_heap_spanningtree.test.cpp
       title: data_structure/test/fibonacci_heap_spanningtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/link_cut_tree.composition.test.cpp
+      title: data_structure/test/link_cut_tree.composition.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+      title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+      title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/link_cut_tree.sum.test.cpp
+      title: data_structure/test/link_cut_tree.sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/linkcuttree.aoj2450.test.cpp
+      title: data_structure/test/linkcuttree.aoj2450.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/persistent_queue.test.cpp
       title: data_structure/test/persistent_queue.test.cpp

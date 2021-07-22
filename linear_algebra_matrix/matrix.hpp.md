@@ -17,6 +17,9 @@ data:
     title: linear_algebra_matrix/system_of_linear_equations.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+    title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
   - icon: ':heavy_check_mark:'
@@ -286,6 +289,7 @@ data:
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
 documentation_of: linear_algebra_matrix/matrix.hpp
 layout: document
 redirect_from:
