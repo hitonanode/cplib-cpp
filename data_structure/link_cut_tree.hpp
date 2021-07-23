@@ -185,6 +185,11 @@ public:
         }
         return nullptr;
     }
+
+    bool is_connected(Node *u, Node *v) {
+        expose(u), expose(v);
+        return u == v or u->p;
+    }
 };
 /* example usage:
 struct S {
