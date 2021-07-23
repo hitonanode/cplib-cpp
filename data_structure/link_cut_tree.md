@@ -32,6 +32,18 @@ tree.evert(vs[p]); // 頂点 p を含む部分木の根を p に取る（なお�
 auto l = tree.lca(vs[u], vs[v]); // u, v の LCA を求める．
 ```
 
+## 問題例
+
+- [AOJ 2450: Do use segment tree](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2450)
+  - 
+- [13539번: 트리와 쿼리 11](https://www.acmicpc.net/problem/13539) - `lca()`
+- [16912번: 트리와 쿼리 12](https://www.acmicpc.net/problem/16912) - `is_connected()`
+- [3 - 宇宙船 (Spaceships)](https://atcoder.jp/contests/joisc2013-day4/tasks/joisc2013_spaceships) `is_connected()`, `lca()`
+  - [提出 #24456559 - 2013年 日本情報オリンピック春合宿 4日目](https://atcoder.jp/contests/joisc2013-day4/submissions/24456559)
+- [A - かえってきたどうぶつたち と しんりんのさいせい (Return of Animals and Regeneration of Forests)](https://atcoder.jp/contests/ijpc2012-3/tasks/ijpc_animals2) `is_connected()`
+  - [提出 #24457489 - IOIer Japan Programming Contest #3](https://atcoder.jp/contests/ijpc2012-3/submissions/24457489)
+  - 辺に情報を持たせる代わりに，2 頂点間を内分する補助頂点を導入した．
+
 ## 参考文献・リンク・参考にした実装
 
 - [1] D. D. Slator and R. E. Tarjan, "A data structure for dynamic trees,"
