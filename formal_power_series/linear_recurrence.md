@@ -17,7 +17,7 @@ auto [d, Crev] = find_linear_recurrence(a);  // (2, [1, -1, -1])
 推測して得られた $C^\mathrm{rev}$ は，
 
 $\displaystyle
-    \sum_{j=0}^d C^\mathrm{rev}_{i - j} a_{j} = 0
+    \sum_{j=0}^d C_{i - j}^\mathrm{rev} a_{j} = 0
 $
 
 が成立．
