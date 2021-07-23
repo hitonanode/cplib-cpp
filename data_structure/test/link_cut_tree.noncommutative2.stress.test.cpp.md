@@ -83,25 +83,26 @@ data:
     \ > k) {\n                t = t->r;\n            } else {\n                if\
     \ (t->r) k -= t->r->sz;\n                if (k == 0) return t;\n             \
     \   k--;\n                t = t->l;\n            }\n        }\n        return\
-    \ nullptr;\n    }\n};\n/* example usage:\nstruct S {\n    int sz, sum, lhi, rhi,\
-    \ inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int sz_,\
-    \ int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_), lhi(lhi_),\
-    \ rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S l, S r) {\n\
-    \    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
-    \ + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S\
-    \ x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n\
-    \    if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
-    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
-    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
-    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
-    \ F, op, reversal, mapping, composition, id>;\nvector<LCT::Node*> vs;\n*/\n#line\
-    \ 2 \"random/xorshift.hpp\"\n#include <cstdint>\n\n// CUT begin\nuint32_t rand_int()\
-    \ // XorShift random integer generator\n{\n    static uint32_t x = 123456789,\
-    \ y = 362436069, z = 521288629, w = 88675123;\n    uint32_t t = x ^ (x << 11);\n\
-    \    x = y;\n    y = z;\n    z = w;\n    return w = (w ^ (w >> 19)) ^ (t ^ (t\
-    \ >> 8));\n}\ndouble rand_double() { return (double)rand_int() / UINT32_MAX; }\n\
-    #line 4 \"data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp\"\n\
-    \n#include <algorithm>\n#include <cassert>\n#include <iostream>\n#include <unordered_set>\n\
+    \ nullptr;\n    }\n\n    bool is_connected(Node *u, Node *v) {\n        expose(u),\
+    \ expose(v);\n        return u == v or u->p;\n    }\n};\n/* example usage:\nstruct\
+    \ S {\n    int sz, sum, lhi, rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x),\
+    \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
+    \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
+    \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
+    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
+    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
+    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
+    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
+    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
+    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
+    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
+    \ id>;\nvector<LCT::Node*> vs;\n*/\n#line 2 \"random/xorshift.hpp\"\n#include\
+    \ <cstdint>\n\n// CUT begin\nuint32_t rand_int() // XorShift random integer generator\n\
+    {\n    static uint32_t x = 123456789, y = 362436069, z = 521288629, w = 88675123;\n\
+    \    uint32_t t = x ^ (x << 11);\n    x = y;\n    y = z;\n    z = w;\n    return\
+    \ w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n}\ndouble rand_double() { return (double)rand_int()\
+    \ / UINT32_MAX; }\n#line 4 \"data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp\"\
+    \n\n#include <algorithm>\n#include <cassert>\n#include <iostream>\n#include <unordered_set>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\nstruct S {\n  \
     \  int sz, sum, lhi, rhi, inhi;\n    S() = default;\n    S(int x) : sz(1), sum(x),\
     \ lhi(x), rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int\
@@ -245,7 +246,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
   requiredBy: []
-  timestamp: '2021-07-23 14:41:44+09:00'
+  timestamp: '2021-07-23 17:14:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp

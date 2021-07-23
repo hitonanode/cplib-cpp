@@ -92,18 +92,20 @@ data:
     \ > k) {\n                t = t->r;\n            } else {\n                if\
     \ (t->r) k -= t->r->sz;\n                if (k == 0) return t;\n             \
     \   k--;\n                t = t->l;\n            }\n        }\n        return\
-    \ nullptr;\n    }\n};\n/* example usage:\nstruct S {\n    int sz, sum, lhi, rhi,\
-    \ inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int sz_,\
-    \ int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_), lhi(lhi_),\
-    \ rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S l, S r) {\n\
-    \    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
-    \ + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S\
-    \ x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n\
-    \    if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
-    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
-    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
-    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
-    \ F, op, reversal, mapping, composition, id>;\nvector<LCT::Node*> vs;\n*/\n"
+    \ nullptr;\n    }\n\n    bool is_connected(Node *u, Node *v) {\n        expose(u),\
+    \ expose(v);\n        return u == v or u->p;\n    }\n};\n/* example usage:\nstruct\
+    \ S {\n    int sz, sum, lhi, rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x),\
+    \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
+    \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
+    \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
+    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
+    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
+    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
+    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
+    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
+    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
+    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
+    \ id>;\nvector<LCT::Node*> vs;\n*/\n"
   code: "#pragma once\n\n// CUT begin\n// Link-Cut Tree\n// Reference:\n// - https://www.slideshare.net/iwiwi/2-12188845\n\
     // - https://ei1333.github.io/library/structure/lct/link-cut-tree-lazy-path.cpp\n\
     template <class S, class F, S (*op)(S, S), S (*reversal)(S), S (*mapping)(F, S),\
@@ -167,23 +169,25 @@ data:
     \ > k) {\n                t = t->r;\n            } else {\n                if\
     \ (t->r) k -= t->r->sz;\n                if (k == 0) return t;\n             \
     \   k--;\n                t = t->l;\n            }\n        }\n        return\
-    \ nullptr;\n    }\n};\n/* example usage:\nstruct S {\n    int sz, sum, lhi, rhi,\
-    \ inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int sz_,\
-    \ int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_), lhi(lhi_),\
-    \ rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S l, S r) {\n\
-    \    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
-    \ + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S\
-    \ x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n\
-    \    if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
-    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
-    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
-    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
-    \ F, op, reversal, mapping, composition, id>;\nvector<LCT::Node*> vs;\n*/\n"
+    \ nullptr;\n    }\n\n    bool is_connected(Node *u, Node *v) {\n        expose(u),\
+    \ expose(v);\n        return u == v or u->p;\n    }\n};\n/* example usage:\nstruct\
+    \ S {\n    int sz, sum, lhi, rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x),\
+    \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
+    \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
+    \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
+    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
+    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
+    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
+    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
+    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
+    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
+    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
+    \ id>;\nvector<LCT::Node*> vs;\n*/\n"
   dependsOn: []
   isVerificationFile: false
   path: data_structure/link_cut_tree.hpp
   requiredBy: []
-  timestamp: '2021-07-23 14:41:44+09:00'
+  timestamp: '2021-07-23 17:14:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/link_cut_tree.sum.test.cpp
@@ -225,6 +229,18 @@ S ret = tree.prod(vs[u], vs[v]) // u から v までの最短パス上の半群�
 tree.evert(vs[p]); // 頂点 p を含む部分木の根を p に取る（なお上記の操作は根を勝手に変える）．
 auto l = tree.lca(vs[u], vs[v]); // u, v の LCA を求める．
 ```
+
+## 問題例
+
+- [AOJ 2450: Do use segment tree](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2450)
+  - 
+- [13539번: 트리와 쿼리 11](https://www.acmicpc.net/problem/13539) - `lca()`
+- [16912번: 트리와 쿼리 12](https://www.acmicpc.net/problem/16912) - `is_connected()`
+- [3 - 宇宙船 (Spaceships)](https://atcoder.jp/contests/joisc2013-day4/tasks/joisc2013_spaceships) `is_connected()`, `lca()`
+  - [提出 #24456559 - 2013年 日本情報オリンピック春合宿 4日目](https://atcoder.jp/contests/joisc2013-day4/submissions/24456559)
+- [A - かえってきたどうぶつたち と しんりんのさいせい (Return of Animals and Regeneration of Forests)](https://atcoder.jp/contests/ijpc2012-3/tasks/ijpc_animals2) `is_connected()`
+  - [提出 #24457489 - IOIer Japan Programming Contest #3](https://atcoder.jp/contests/ijpc2012-3/submissions/24457489)
+  - 辺に情報を持たせる代わりに，2 頂点間を内分する補助頂点を導入した．
 
 ## 参考文献・リンク・参考にした実装
 

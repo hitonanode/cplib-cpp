@@ -93,69 +93,71 @@ data:
     \ > k) {\n                t = t->r;\n            } else {\n                if\
     \ (t->r) k -= t->r->sz;\n                if (k == 0) return t;\n             \
     \   k--;\n                t = t->l;\n            }\n        }\n        return\
-    \ nullptr;\n    }\n};\n/* example usage:\nstruct S {\n    int sz, sum, lhi, rhi,\
-    \ inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int sz_,\
-    \ int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_), lhi(lhi_),\
-    \ rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S l, S r) {\n\
-    \    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
-    \ + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S\
-    \ x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n\
-    \    if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
-    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
-    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
-    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
-    \ F, op, reversal, mapping, composition, id>;\nvector<LCT::Node*> vs;\n*/\n#line\
-    \ 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n#include <cassert>\n\
-    #include <cmath>\n#include <iostream>\n#include <iterator>\n#include <type_traits>\n\
-    #include <vector>\n\n// CUT begin\ntemplate <typename T> struct matrix {\n   \
-    \ int H, W;\n    std::vector<T> elem;\n    typename std::vector<T>::iterator operator[](int\
-    \ i) { return elem.begin() + i * W; }\n    inline T &at(int i, int j) { return\
-    \ elem[i * W + j]; }\n    inline T get(int i, int j) const { return elem[i * W\
-    \ + j]; }\n    int height() const { return H; }\n    int width() const { return\
-    \ W; }\n    std::vector<std::vector<T>> vecvec() const {\n        std::vector<std::vector<T>>\
-    \ ret(H);\n        for (int i = 0; i < H; i++) {\n            std::copy(elem.begin()\
-    \ + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n\
-    \        return ret;\n    }\n    operator std::vector<std::vector<T>>() const\
-    \ { return vecvec(); }\n    matrix() = default;\n    matrix(int H, int W) : H(H),\
-    \ W(W), elem(H * W) {}\n    matrix(const std::vector<std::vector<T>> &d) : H(d.size()),\
-    \ W(d.size() ? d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(),\
-    \ raw.end(), std::back_inserter(elem));\n    }\n\n    static matrix Identity(int\
-    \ N) {\n        matrix ret(N, N);\n        for (int i = 0; i < N; i++) ret.at(i,\
-    \ i) = 1;\n        return ret;\n    }\n\n    matrix operator-() const {\n    \
-    \    matrix ret(H, W);\n        for (int i = 0; i < H * W; i++) ret.elem[i] =\
-    \ -elem[i];\n        return ret;\n    }\n    matrix operator*(const T &v) const\
-    \ {\n        matrix ret = *this;\n        for (auto &x : ret.elem) x *= v;\n \
-    \       return ret;\n    }\n    matrix operator/(const T &v) const {\n       \
-    \ matrix ret = *this;\n        const T vinv = T(1) / v;\n        for (auto &x\
-    \ : ret.elem) x *= vinv;\n        return ret;\n    }\n    matrix operator+(const\
+    \ nullptr;\n    }\n\n    bool is_connected(Node *u, Node *v) {\n        expose(u),\
+    \ expose(v);\n        return u == v or u->p;\n    }\n};\n/* example usage:\nstruct\
+    \ S {\n    int sz, sum, lhi, rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x),\
+    \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
+    \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
+    \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
+    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
+    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
+    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
+    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
+    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
+    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
+    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
+    \ id>;\nvector<LCT::Node*> vs;\n*/\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iostream>\n\
+    #include <iterator>\n#include <type_traits>\n#include <vector>\n\n// CUT begin\n\
+    template <typename T> struct matrix {\n    int H, W;\n    std::vector<T> elem;\n\
+    \    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
+    \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
+    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    int height()\
+    \ const { return H; }\n    int width() const { return W; }\n    std::vector<std::vector<T>>\
+    \ vecvec() const {\n        std::vector<std::vector<T>> ret(H);\n        for (int\
+    \ i = 0; i < H; i++) {\n            std::copy(elem.begin() + i * W, elem.begin()\
+    \ + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n        return ret;\n\
+    \    }\n    operator std::vector<std::vector<T>>() const { return vecvec(); }\n\
+    \    matrix() = default;\n    matrix(int H, int W) : H(H), W(W), elem(H * W) {}\n\
+    \    matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ?\
+    \ d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(), raw.end(),\
+    \ std::back_inserter(elem));\n    }\n\n    static matrix Identity(int N) {\n \
+    \       matrix ret(N, N);\n        for (int i = 0; i < N; i++) ret.at(i, i) =\
+    \ 1;\n        return ret;\n    }\n\n    matrix operator-() const {\n        matrix\
+    \ ret(H, W);\n        for (int i = 0; i < H * W; i++) ret.elem[i] = -elem[i];\n\
+    \        return ret;\n    }\n    matrix operator*(const T &v) const {\n      \
+    \  matrix ret = *this;\n        for (auto &x : ret.elem) x *= v;\n        return\
+    \ ret;\n    }\n    matrix operator/(const T &v) const {\n        matrix ret =\
+    \ *this;\n        const T vinv = T(1) / v;\n        for (auto &x : ret.elem) x\
+    \ *= vinv;\n        return ret;\n    }\n    matrix operator+(const matrix &r)\
+    \ const {\n        matrix ret = *this;\n        for (int i = 0; i < H * W; i++)\
+    \ ret.elem[i] += r.elem[i];\n        return ret;\n    }\n    matrix operator-(const\
     \ matrix &r) const {\n        matrix ret = *this;\n        for (int i = 0; i <\
-    \ H * W; i++) ret.elem[i] += r.elem[i];\n        return ret;\n    }\n    matrix\
-    \ operator-(const matrix &r) const {\n        matrix ret = *this;\n        for\
-    \ (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i];\n        return ret;\n\
-    \    }\n    matrix operator*(const matrix &r) const {\n        matrix ret(H, r.W);\n\
-    \        for (int i = 0; i < H; i++) {\n            for (int k = 0; k < W; k++)\
-    \ {\n                for (int j = 0; j < r.W; j++) ret.at(i, j) += this->get(i,\
-    \ k) * r.get(k, j);\n            }\n        }\n        return ret;\n    }\n  \
-    \  matrix &operator*=(const T &v) { return *this = *this * v; }\n    matrix &operator/=(const\
-    \ T &v) { return *this = *this / v; }\n    matrix &operator+=(const matrix &r)\
-    \ { return *this = *this + r; }\n    matrix &operator-=(const matrix &r) { return\
-    \ *this = *this - r; }\n    matrix &operator*=(const matrix &r) { return *this\
-    \ = *this * r; }\n    bool operator==(const matrix &r) const { return H == r.H\
-    \ and W == r.W and elem == r.elem; }\n    bool operator!=(const matrix &r) const\
-    \ { return H != r.H or W != r.W or elem != r.elem; }\n    bool operator<(const\
-    \ matrix &r) const { return elem < r.elem; }\n    matrix pow(int64_t n) const\
-    \ {\n        matrix ret = Identity(H);\n        bool ret_is_id = true;\n     \
-    \   if (n == 0) return ret;\n        for (int i = 63 - __builtin_clzll(n); i >=\
-    \ 0; i--) {\n            if (!ret_is_id) ret *= ret;\n            if ((n >> i)\
-    \ & 1) ret *= (*this), ret_is_id = false;\n        }\n        return ret;\n  \
-    \  }\n    std::vector<T> pow_vec(int64_t n, std::vector<T> vec) const {\n    \
-    \    matrix x = *this;\n        while (n) {\n            if (n & 1) vec = x *\
-    \ vec;\n            x *= x;\n            n >>= 1;\n        }\n        return vec;\n\
-    \    };\n    matrix transpose() const {\n        matrix ret(W, H);\n        for\
-    \ (int i = 0; i < H; i++) {\n            for (int j = 0; j < W; j++) ret.at(j,\
-    \ i) = this->get(i, j);\n        }\n        return ret;\n    }\n    // Gauss-Jordan\
-    \ elimination\n    // - Require inverse for every non-zero element\n    // - Complexity:\
-    \ O(H^2 W)\n    template <typename T2, typename std::enable_if<std::is_floating_point<T2>::value>::type\
+    \ H * W; i++) ret.elem[i] -= r.elem[i];\n        return ret;\n    }\n    matrix\
+    \ operator*(const matrix &r) const {\n        matrix ret(H, r.W);\n        for\
+    \ (int i = 0; i < H; i++) {\n            for (int k = 0; k < W; k++) {\n     \
+    \           for (int j = 0; j < r.W; j++) ret.at(i, j) += this->get(i, k) * r.get(k,\
+    \ j);\n            }\n        }\n        return ret;\n    }\n    matrix &operator*=(const\
+    \ T &v) { return *this = *this * v; }\n    matrix &operator/=(const T &v) { return\
+    \ *this = *this / v; }\n    matrix &operator+=(const matrix &r) { return *this\
+    \ = *this + r; }\n    matrix &operator-=(const matrix &r) { return *this = *this\
+    \ - r; }\n    matrix &operator*=(const matrix &r) { return *this = *this * r;\
+    \ }\n    bool operator==(const matrix &r) const { return H == r.H and W == r.W\
+    \ and elem == r.elem; }\n    bool operator!=(const matrix &r) const { return H\
+    \ != r.H or W != r.W or elem != r.elem; }\n    bool operator<(const matrix &r)\
+    \ const { return elem < r.elem; }\n    matrix pow(int64_t n) const {\n       \
+    \ matrix ret = Identity(H);\n        bool ret_is_id = true;\n        if (n ==\
+    \ 0) return ret;\n        for (int i = 63 - __builtin_clzll(n); i >= 0; i--) {\n\
+    \            if (!ret_is_id) ret *= ret;\n            if ((n >> i) & 1) ret *=\
+    \ (*this), ret_is_id = false;\n        }\n        return ret;\n    }\n    std::vector<T>\
+    \ pow_vec(int64_t n, std::vector<T> vec) const {\n        matrix x = *this;\n\
+    \        while (n) {\n            if (n & 1) vec = x * vec;\n            x *=\
+    \ x;\n            n >>= 1;\n        }\n        return vec;\n    };\n    matrix\
+    \ transpose() const {\n        matrix ret(W, H);\n        for (int i = 0; i <\
+    \ H; i++) {\n            for (int j = 0; j < W; j++) ret.at(j, i) = this->get(i,\
+    \ j);\n        }\n        return ret;\n    }\n    // Gauss-Jordan elimination\n\
+    \    // - Require inverse for every non-zero element\n    // - Complexity: O(H^2\
+    \ W)\n    template <typename T2, typename std::enable_if<std::is_floating_point<T2>::value>::type\
     \ * = nullptr>\n    static int choose_pivot(const matrix<T2> &mtr, int h, int\
     \ c) noexcept {\n        int piv = -1;\n        for (int j = h; j < mtr.H; j++)\
     \ {\n            if (mtr.get(j, c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv,\
@@ -438,7 +440,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   requiredBy: []
-  timestamp: '2021-07-23 14:41:44+09:00'
+  timestamp: '2021-07-23 17:14:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp

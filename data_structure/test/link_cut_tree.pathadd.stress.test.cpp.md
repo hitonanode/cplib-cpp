@@ -86,36 +86,38 @@ data:
     \ > k) {\n                t = t->r;\n            } else {\n                if\
     \ (t->r) k -= t->r->sz;\n                if (k == 0) return t;\n             \
     \   k--;\n                t = t->l;\n            }\n        }\n        return\
-    \ nullptr;\n    }\n};\n/* example usage:\nstruct S {\n    int sz, sum, lhi, rhi,\
-    \ inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int sz_,\
-    \ int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_), lhi(lhi_),\
-    \ rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S l, S r) {\n\
-    \    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
-    \ + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S\
-    \ x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n\
-    \    if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
-    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
-    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
-    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
-    \ F, op, reversal, mapping, composition, id>;\nvector<LCT::Node*> vs;\n*/\n#line\
-    \ 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include <vector>\n\n\
-    // CUT begin\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n\
-    #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
-    \ long;\n    MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
-    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
-    \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
-    \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
-    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
-    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
-    \                    bool ok = true;\n                    for (auto i : fac)\n\
-    \                        if (ModInt(g).pow((md - 1) / i) == 1) {\n           \
-    \                 ok = false;\n                            break;\n          \
-    \              }\n                    if (ok) return g;\n                }\n \
-    \               return -1;\n            }();\n        }\n        return primitive_root;\n\
-    \    }\n    int val;\n    MDCONST ModInt() : val(0) {}\n    MDCONST ModInt &_setval(lint\
-    \ v) { return val = (v >= md ? v - md : v), *this; }\n    MDCONST ModInt(lint\
-    \ v) { _setval(v % md + md); }\n    MDCONST explicit operator bool() const { return\
-    \ val != 0; }\n    MDCONST ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ nullptr;\n    }\n\n    bool is_connected(Node *u, Node *v) {\n        expose(u),\
+    \ expose(v);\n        return u == v or u->p;\n    }\n};\n/* example usage:\nstruct\
+    \ S {\n    int sz, sum, lhi, rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x),\
+    \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
+    \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
+    \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
+    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
+    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
+    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
+    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
+    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
+    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
+    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
+    \ id>;\nvector<LCT::Node*> vs;\n*/\n#line 2 \"modint.hpp\"\n#include <iostream>\n\
+    #include <set>\n#include <vector>\n\n// CUT begin\ntemplate <int md> struct ModInt\
+    \ {\n#if __cplusplus >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n\
+    #endif\n    using lint = long long;\n    MDCONST static int mod() { return md;\
+    \ }\n    static int get_primitive_root() {\n        static int primitive_root\
+    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&]() {\n\
+    \                std::set<int> fac;\n                int v = md - 1;\n       \
+    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
+    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
+    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
+    \                    for (auto i : fac)\n                        if (ModInt(g).pow((md\
+    \ - 1) / i) == 1) {\n                            ok = false;\n               \
+    \             break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root;\n    }\n    int val;\n    MDCONST ModInt()\
+    \ : val(0) {}\n    MDCONST ModInt &_setval(lint v) { return val = (v >= md ? v\
+    \ - md : v), *this; }\n    MDCONST ModInt(lint v) { _setval(v % md + md); }\n\
+    \    MDCONST explicit operator bool() const { return val != 0; }\n    MDCONST\
+    \ ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
     \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
     \ - x.val + md); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
     \ ModInt()._setval((lint)val * x.val % md); }\n    MDCONST ModInt operator/(const\
@@ -293,7 +295,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   requiredBy: []
-  timestamp: '2021-07-23 14:41:44+09:00'
+  timestamp: '2021-07-23 17:14:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
