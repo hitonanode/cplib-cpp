@@ -7,6 +7,8 @@ documentation_of: ./link_cut_tree.hpp
 
 ## 使用方法
 
+内部で `evert()` を使用する関数は根を変更してしまうので注意．
+
 ```cpp
 using S = unsigned long long;
 using F = tuple<>;
