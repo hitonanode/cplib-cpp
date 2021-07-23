@@ -1,46 +1,50 @@
-// パス上の頂点更新・パス上の頂点積取得が可能な Link-Cut tree
-// 各頂点に 2x2 行列を載せ，演算として行列積が入る非可換・パス上更新の例．
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A" // DUMMY
 #include "../link_cut_tree.hpp"
-#include "../../linear_algebra_matrix/matrix.hpp"
-#include "../../modint.hpp"
 #include "../../random/xorshift.hpp"
 
 #include <algorithm>
 #include <cassert>
-#include <cstdio>
+#include <iostream>
 #include <unordered_set>
 #include <utility>
+#include <vector>
 using namespace std;
 
-constexpr int md = 998244353;
-const int NTRY = 1000;
-const int VMAX = 50;
-const int QPERTRY = 1000;
-const int dim = 2;
-using mint = ModInt<md>;
-
-using S = tuple<int, matrix<mint>, matrix<mint>>;
-using F = pair<bool, matrix<mint>>;
-S op(S l, S r) {
-    int sl, sr;
-    matrix<mint> ml1, ml2, mr1, mr2;
-    tie(sl, ml1, ml2) = l;
-    tie(sr, mr1, mr2) = r;
-    return {sl + sr, mr1 * ml1, ml2 * mr2};
-}
-S mapping(F f, S x) {
-    int sz = get<0>(x);
-    if (sz) {
-        auto m = f.second.pow(sz);
-        return {sz, m, m};
+struct S {
+    int sz, sum, lhi, rhi, inhi;
+    S() = default;
+    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}
+    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)
+        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}
+    bool operator==(const S &x) const {
+        return sz == x.sz and sum == x.sum and lhi == x.lhi and rhi == x.rhi and inhi == x.inhi;
     }
-    return x;
+    template <class OStream> friend OStream &operator<<(OStream &os, const S &x) {
+        return os << '[' << x.sz << ',' << x.sum << ',' << x.lhi << ',' << x.rhi << ',' << x.inhi << ']';
+    }
+};
+using F = pair<bool, int>;
+S op(S l, S r) {
+    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max({l.inhi, r.inhi, l.rhi + r.lhi}));
 }
-S reversal(S x) { return {get<0>(x), get<2>(x), get<1>(x)}; }
-F composition(F f, F g) { return f.first ? f : g; }
-F id() { return {false, matrix<mint>::Identity(dim)}; }
+S reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }
+S mapping(F f, S x) {
+    if (f.first) {
+        auto v = f.second;
+        auto sum = x.sz * v;
+        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};
+    } else {
+        return x;
+    }
+}
+F composition(F fnew, F gold) { return fnew.first ? fnew : gold; }
+F id() { return {false, 0}; }
 using LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition, id>;
+
+const int NTRY = 1000;
+const int VMAX = 20;
+const int QPERTRY = 10000;
+const int AMAX = 20;
 
 vector<int> connected_vertices(int N, int r, const vector<unordered_set<int>> &to) {
     vector<int> visited(N);
@@ -70,18 +74,11 @@ vector<int> get_rev_path(int s, int t, int prv, const vector<unordered_set<int>>
     return {};
 }
 
-S gen_rand_a() {
-    matrix<mint> ret(dim, dim);
-    for (int i = 0; i < dim; i++) {
-        for (int j = 0; j < dim; j++) ret[i][j] = rand_int() % md;
-    }
-    return {1, ret, ret};
-}
+int gen_rand_a() { return rand_int() % (AMAX * 2 + 1) - AMAX; }
 
 int main() {
     for (int ntry = 0; ntry < NTRY; ntry++) {
         const int N = 2 + rand_int() % (VMAX - 1);
-
         vector<S> A(N);
         LCT tree;
         vector<LCT::Node *> nodes;
@@ -133,7 +130,7 @@ int main() {
                 auto conn = connected_vertices(N, u, to);
                 int v = conn[rand_int() % conn.size()];
                 const auto a = gen_rand_a();
-                tree.apply(nodes[u], nodes[v], {true, get<1>(a)});
+                tree.apply(nodes[u], nodes[v], {true, a});
 
                 for (auto i : get_rev_path(u, v, -1, to)) A[i] = a;
 

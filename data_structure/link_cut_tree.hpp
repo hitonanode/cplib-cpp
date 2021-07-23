@@ -53,7 +53,7 @@ protected:
     }
 
     void push(Node *&t) {
-        if (t and t->lz != id()) {
+        if (t->lz != id()) {
             if (t->l) all_apply(t->l, t->lz);
             if (t->r) all_apply(t->r, t->lz);
             t->lz = id();
@@ -133,13 +133,12 @@ public:
         return rp;
     }
 
-    void link(Node *u, Node *v) {
-        if (u->p != nullptr) evert(u);
-        if (v->p != nullptr) evert(v);
-        expose(v);
-        u->p = v;
-        v->r = u;
-        update(v);
+    void link(Node *chi, Node *par) {
+        evert(chi);
+        expose(par);
+        chi->p = par;
+        par->r = chi;
+        update(par);
     }
 
     void cut(Node *chi) {
@@ -169,6 +168,22 @@ public:
         evert(u);
         expose(v);
         return v->sum;
+    }
+
+    Node *kth_parent(Node *t, int k) {
+        expose(t);
+        while (t) {
+            push(t);
+            if (t->r and t->r->sz > k) {
+                t = t->r;
+            } else {
+                if (t->r) k -= t->r->sz;
+                if (k == 0) return t;
+                k--;
+                t = t->l;
+            }
+        }
+        return nullptr;
     }
 };
 /* example usage:
