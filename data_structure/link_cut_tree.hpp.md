@@ -4,20 +4,23 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/link_cut_tree.aoj2450.test.cpp
+    title: data_structure/test/link_cut_tree.aoj2450.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.composition.test.cpp
     title: data_structure/test/link_cut_tree.composition.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
     title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
+    title: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
     title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.sum.test.cpp
     title: data_structure/test/link_cut_tree.sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: data_structure/test/linkcuttree.aoj2450.test.cpp
-    title: data_structure/test/linkcuttree.aoj2450.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -46,58 +49,61 @@ data:
     \  a->sum = mapping(b, a->sum);\n        a->lz = composition(b, a->lz);\n    }\n\
     \    void _toggle(Node *t) {\n        auto tmp = t->l;\n        t->l = t->r, t->r\
     \ = tmp;\n        t->sum = reversal(t->sum);\n        t->is_reversed ^= true;\n\
-    \    }\n\n    void push(Node *&t) {\n        if (t and t->lz != id()) {\n    \
-    \        if (t->l) all_apply(t->l, t->lz);\n            if (t->r) all_apply(t->r,\
-    \ t->lz);\n            t->lz = id();\n        }\n        if (t->is_reversed) {\n\
-    \            if (t->l) _toggle(t->l);\n            if (t->r) _toggle(t->r);\n\
-    \            t->is_reversed = false;\n        }\n    }\n\n    void _rot_r(Node\
-    \ *t) {\n        Node *x = t->p, *y = x->p;\n        if ((x->l = t->r)) t->r->p\
-    \ = x;\n        t->r = x, x->p = t;\n        update(x), update(t);\n        if\
-    \ ((t->p = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r ==\
-    \ x) y->r = t;\n            update(y);\n        }\n    }\n    void _rot_l(Node\
-    \ *t) {\n        Node *x = t->p, *y = x->p;\n        if ((x->r = t->l)) t->l->p\
-    \ = x;\n        t->l = x, x->p = t;\n        update(x), update(t);\n        if\
-    \ ((t->p = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r ==\
-    \ x) y->r = t;\n            update(y);\n        }\n    }\n\n    void _splay(Node\
-    \ *t) {\n        push(t);\n        while (!t->is_root()) {\n            Node *q\
-    \ = t->p;\n            if (q->is_root()) {\n                push(q), push(t);\n\
-    \                if (q->l == t)\n                    _rot_r(t);\n            \
-    \    else\n                    _rot_l(t);\n            } else {\n            \
-    \    Node *r = q->p;\n                push(r), push(q), push(t);\n           \
-    \     if (r->l == q) {\n                    if (q->l == t)\n                 \
-    \       _rot_r(q), _rot_r(t);\n                    else\n                    \
-    \    _rot_l(t), _rot_r(t);\n                } else {\n                    if (q->r\
-    \ == t)\n                        _rot_l(q), _rot_l(t);\n                    else\n\
-    \                        _rot_r(t), _rot_l(t);\n                }\n          \
-    \  }\n        }\n    }\n\npublic:\n    [[nodiscard]] Node *make_node(S val) {\
-    \ return new Node(val); }\n\n    void evert(Node *t) { expose(t), _toggle(t),\
-    \ push(t); }\n\n    Node *expose(Node *t) {\n        Node *rp = nullptr;\n   \
-    \     for (Node *cur = t; cur; cur = cur->p) {\n            _splay(cur);\n   \
-    \         cur->r = rp;\n            update(cur);\n            rp = cur;\n    \
-    \    }\n        _splay(t);\n        return rp;\n    }\n\n    void link(Node *u,\
-    \ Node *v) {\n        if (u->p != nullptr) evert(u);\n        if (v->p != nullptr)\
-    \ evert(v);\n        expose(v);\n        u->p = v;\n        v->r = u;\n      \
-    \  update(v);\n    }\n\n    void cut(Node *chi) {\n        expose(chi);\n    \
-    \    Node *par = chi->l;\n        chi->l = nullptr;\n        update(chi);\n  \
-    \      par->p = nullptr;\n    }\n\n    void cut(Node *u, Node *v) { evert(u),\
-    \ cut(v); }\n\n    Node *lca(Node *u, Node *v) { return expose(u), expose(v);\
-    \ }\n\n    void set(Node *t, S x) { expose(t), t->d = x, update(t); }\n\n    S\
-    \ get(Node *t) { return expose(t), t->d; }\n\n    void apply(Node *u, Node *v,\
-    \ const F &x) {\n        evert(u);\n        expose(v);\n        all_apply(v, x);\n\
-    \        push(v);\n    }\n\n    S prod(Node *u, Node *v) {\n        evert(u);\n\
-    \        expose(v);\n        return v->sum;\n    }\n};\n/* example usage:\nstruct\
-    \ S {\n    int sz, sum, lhi, rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x),\
-    \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
-    \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
-    \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
-    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
-    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
-    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
-    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
-    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
-    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
-    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
-    \ id>;\nvector<LCT::Node*> vs;\n*/\n"
+    \    }\n\n    void push(Node *&t) {\n        if (t->lz != id()) {\n          \
+    \  if (t->l) all_apply(t->l, t->lz);\n            if (t->r) all_apply(t->r, t->lz);\n\
+    \            t->lz = id();\n        }\n        if (t->is_reversed) {\n       \
+    \     if (t->l) _toggle(t->l);\n            if (t->r) _toggle(t->r);\n       \
+    \     t->is_reversed = false;\n        }\n    }\n\n    void _rot_r(Node *t) {\n\
+    \        Node *x = t->p, *y = x->p;\n        if ((x->l = t->r)) t->r->p = x;\n\
+    \        t->r = x, x->p = t;\n        update(x), update(t);\n        if ((t->p\
+    \ = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r == x) y->r\
+    \ = t;\n            update(y);\n        }\n    }\n    void _rot_l(Node *t) {\n\
+    \        Node *x = t->p, *y = x->p;\n        if ((x->r = t->l)) t->l->p = x;\n\
+    \        t->l = x, x->p = t;\n        update(x), update(t);\n        if ((t->p\
+    \ = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r == x) y->r\
+    \ = t;\n            update(y);\n        }\n    }\n\n    void _splay(Node *t) {\n\
+    \        push(t);\n        while (!t->is_root()) {\n            Node *q = t->p;\n\
+    \            if (q->is_root()) {\n                push(q), push(t);\n        \
+    \        if (q->l == t)\n                    _rot_r(t);\n                else\n\
+    \                    _rot_l(t);\n            } else {\n                Node *r\
+    \ = q->p;\n                push(r), push(q), push(t);\n                if (r->l\
+    \ == q) {\n                    if (q->l == t)\n                        _rot_r(q),\
+    \ _rot_r(t);\n                    else\n                        _rot_l(t), _rot_r(t);\n\
+    \                } else {\n                    if (q->r == t)\n              \
+    \          _rot_l(q), _rot_l(t);\n                    else\n                 \
+    \       _rot_r(t), _rot_l(t);\n                }\n            }\n        }\n \
+    \   }\n\npublic:\n    [[nodiscard]] Node *make_node(S val) { return new Node(val);\
+    \ }\n\n    void evert(Node *t) { expose(t), _toggle(t), push(t); }\n\n    Node\
+    \ *expose(Node *t) {\n        Node *rp = nullptr;\n        for (Node *cur = t;\
+    \ cur; cur = cur->p) {\n            _splay(cur);\n            cur->r = rp;\n \
+    \           update(cur);\n            rp = cur;\n        }\n        _splay(t);\n\
+    \        return rp;\n    }\n\n    void link(Node *chi, Node *par) {\n        evert(chi);\n\
+    \        expose(par);\n        chi->p = par;\n        par->r = chi;\n        update(par);\n\
+    \    }\n\n    void cut(Node *chi) {\n        expose(chi);\n        Node *par =\
+    \ chi->l;\n        chi->l = nullptr;\n        update(chi);\n        par->p = nullptr;\n\
+    \    }\n\n    void cut(Node *u, Node *v) { evert(u), cut(v); }\n\n    Node *lca(Node\
+    \ *u, Node *v) { return expose(u), expose(v); }\n\n    void set(Node *t, S x)\
+    \ { expose(t), t->d = x, update(t); }\n\n    S get(Node *t) { return expose(t),\
+    \ t->d; }\n\n    void apply(Node *u, Node *v, const F &x) {\n        evert(u);\n\
+    \        expose(v);\n        all_apply(v, x);\n        push(v);\n    }\n\n   \
+    \ S prod(Node *u, Node *v) {\n        evert(u);\n        expose(v);\n        return\
+    \ v->sum;\n    }\n\n    Node *kth_parent(Node *t, int k) {\n        expose(t);\n\
+    \        while (t) {\n            push(t);\n            if (t->r and t->r->sz\
+    \ > k) {\n                t = t->r;\n            } else {\n                if\
+    \ (t->r) k -= t->r->sz;\n                if (k == 0) return t;\n             \
+    \   k--;\n                t = t->l;\n            }\n        }\n        return\
+    \ nullptr;\n    }\n};\n/* example usage:\nstruct S {\n    int sz, sum, lhi, rhi,\
+    \ inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int sz_,\
+    \ int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_), lhi(lhi_),\
+    \ rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S l, S r) {\n\
+    \    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
+    \ + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S\
+    \ x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n\
+    \    if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
+    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
+    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
+    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
+    \ F, op, reversal, mapping, composition, id>;\nvector<LCT::Node*> vs;\n*/\n"
   code: "#pragma once\n\n// CUT begin\n// Link-Cut Tree\n// Reference:\n// - https://www.slideshare.net/iwiwi/2-12188845\n\
     // - https://ei1333.github.io/library/structure/lct/link-cut-tree-lazy-path.cpp\n\
     template <class S, class F, S (*op)(S, S), S (*reversal)(S), S (*mapping)(F, S),\
@@ -118,69 +124,73 @@ data:
     \  a->sum = mapping(b, a->sum);\n        a->lz = composition(b, a->lz);\n    }\n\
     \    void _toggle(Node *t) {\n        auto tmp = t->l;\n        t->l = t->r, t->r\
     \ = tmp;\n        t->sum = reversal(t->sum);\n        t->is_reversed ^= true;\n\
-    \    }\n\n    void push(Node *&t) {\n        if (t and t->lz != id()) {\n    \
-    \        if (t->l) all_apply(t->l, t->lz);\n            if (t->r) all_apply(t->r,\
-    \ t->lz);\n            t->lz = id();\n        }\n        if (t->is_reversed) {\n\
-    \            if (t->l) _toggle(t->l);\n            if (t->r) _toggle(t->r);\n\
-    \            t->is_reversed = false;\n        }\n    }\n\n    void _rot_r(Node\
-    \ *t) {\n        Node *x = t->p, *y = x->p;\n        if ((x->l = t->r)) t->r->p\
-    \ = x;\n        t->r = x, x->p = t;\n        update(x), update(t);\n        if\
-    \ ((t->p = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r ==\
-    \ x) y->r = t;\n            update(y);\n        }\n    }\n    void _rot_l(Node\
-    \ *t) {\n        Node *x = t->p, *y = x->p;\n        if ((x->r = t->l)) t->l->p\
-    \ = x;\n        t->l = x, x->p = t;\n        update(x), update(t);\n        if\
-    \ ((t->p = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r ==\
-    \ x) y->r = t;\n            update(y);\n        }\n    }\n\n    void _splay(Node\
-    \ *t) {\n        push(t);\n        while (!t->is_root()) {\n            Node *q\
-    \ = t->p;\n            if (q->is_root()) {\n                push(q), push(t);\n\
-    \                if (q->l == t)\n                    _rot_r(t);\n            \
-    \    else\n                    _rot_l(t);\n            } else {\n            \
-    \    Node *r = q->p;\n                push(r), push(q), push(t);\n           \
-    \     if (r->l == q) {\n                    if (q->l == t)\n                 \
-    \       _rot_r(q), _rot_r(t);\n                    else\n                    \
-    \    _rot_l(t), _rot_r(t);\n                } else {\n                    if (q->r\
-    \ == t)\n                        _rot_l(q), _rot_l(t);\n                    else\n\
-    \                        _rot_r(t), _rot_l(t);\n                }\n          \
-    \  }\n        }\n    }\n\npublic:\n    [[nodiscard]] Node *make_node(S val) {\
-    \ return new Node(val); }\n\n    void evert(Node *t) { expose(t), _toggle(t),\
-    \ push(t); }\n\n    Node *expose(Node *t) {\n        Node *rp = nullptr;\n   \
-    \     for (Node *cur = t; cur; cur = cur->p) {\n            _splay(cur);\n   \
-    \         cur->r = rp;\n            update(cur);\n            rp = cur;\n    \
-    \    }\n        _splay(t);\n        return rp;\n    }\n\n    void link(Node *u,\
-    \ Node *v) {\n        if (u->p != nullptr) evert(u);\n        if (v->p != nullptr)\
-    \ evert(v);\n        expose(v);\n        u->p = v;\n        v->r = u;\n      \
-    \  update(v);\n    }\n\n    void cut(Node *chi) {\n        expose(chi);\n    \
-    \    Node *par = chi->l;\n        chi->l = nullptr;\n        update(chi);\n  \
-    \      par->p = nullptr;\n    }\n\n    void cut(Node *u, Node *v) { evert(u),\
-    \ cut(v); }\n\n    Node *lca(Node *u, Node *v) { return expose(u), expose(v);\
-    \ }\n\n    void set(Node *t, S x) { expose(t), t->d = x, update(t); }\n\n    S\
-    \ get(Node *t) { return expose(t), t->d; }\n\n    void apply(Node *u, Node *v,\
-    \ const F &x) {\n        evert(u);\n        expose(v);\n        all_apply(v, x);\n\
-    \        push(v);\n    }\n\n    S prod(Node *u, Node *v) {\n        evert(u);\n\
-    \        expose(v);\n        return v->sum;\n    }\n};\n/* example usage:\nstruct\
-    \ S {\n    int sz, sum, lhi, rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x),\
-    \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
-    \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
-    \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
-    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
-    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
-    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
-    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
-    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
-    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
-    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
-    \ id>;\nvector<LCT::Node*> vs;\n*/\n"
+    \    }\n\n    void push(Node *&t) {\n        if (t->lz != id()) {\n          \
+    \  if (t->l) all_apply(t->l, t->lz);\n            if (t->r) all_apply(t->r, t->lz);\n\
+    \            t->lz = id();\n        }\n        if (t->is_reversed) {\n       \
+    \     if (t->l) _toggle(t->l);\n            if (t->r) _toggle(t->r);\n       \
+    \     t->is_reversed = false;\n        }\n    }\n\n    void _rot_r(Node *t) {\n\
+    \        Node *x = t->p, *y = x->p;\n        if ((x->l = t->r)) t->r->p = x;\n\
+    \        t->r = x, x->p = t;\n        update(x), update(t);\n        if ((t->p\
+    \ = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r == x) y->r\
+    \ = t;\n            update(y);\n        }\n    }\n    void _rot_l(Node *t) {\n\
+    \        Node *x = t->p, *y = x->p;\n        if ((x->r = t->l)) t->l->p = x;\n\
+    \        t->l = x, x->p = t;\n        update(x), update(t);\n        if ((t->p\
+    \ = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r == x) y->r\
+    \ = t;\n            update(y);\n        }\n    }\n\n    void _splay(Node *t) {\n\
+    \        push(t);\n        while (!t->is_root()) {\n            Node *q = t->p;\n\
+    \            if (q->is_root()) {\n                push(q), push(t);\n        \
+    \        if (q->l == t)\n                    _rot_r(t);\n                else\n\
+    \                    _rot_l(t);\n            } else {\n                Node *r\
+    \ = q->p;\n                push(r), push(q), push(t);\n                if (r->l\
+    \ == q) {\n                    if (q->l == t)\n                        _rot_r(q),\
+    \ _rot_r(t);\n                    else\n                        _rot_l(t), _rot_r(t);\n\
+    \                } else {\n                    if (q->r == t)\n              \
+    \          _rot_l(q), _rot_l(t);\n                    else\n                 \
+    \       _rot_r(t), _rot_l(t);\n                }\n            }\n        }\n \
+    \   }\n\npublic:\n    [[nodiscard]] Node *make_node(S val) { return new Node(val);\
+    \ }\n\n    void evert(Node *t) { expose(t), _toggle(t), push(t); }\n\n    Node\
+    \ *expose(Node *t) {\n        Node *rp = nullptr;\n        for (Node *cur = t;\
+    \ cur; cur = cur->p) {\n            _splay(cur);\n            cur->r = rp;\n \
+    \           update(cur);\n            rp = cur;\n        }\n        _splay(t);\n\
+    \        return rp;\n    }\n\n    void link(Node *chi, Node *par) {\n        evert(chi);\n\
+    \        expose(par);\n        chi->p = par;\n        par->r = chi;\n        update(par);\n\
+    \    }\n\n    void cut(Node *chi) {\n        expose(chi);\n        Node *par =\
+    \ chi->l;\n        chi->l = nullptr;\n        update(chi);\n        par->p = nullptr;\n\
+    \    }\n\n    void cut(Node *u, Node *v) { evert(u), cut(v); }\n\n    Node *lca(Node\
+    \ *u, Node *v) { return expose(u), expose(v); }\n\n    void set(Node *t, S x)\
+    \ { expose(t), t->d = x, update(t); }\n\n    S get(Node *t) { return expose(t),\
+    \ t->d; }\n\n    void apply(Node *u, Node *v, const F &x) {\n        evert(u);\n\
+    \        expose(v);\n        all_apply(v, x);\n        push(v);\n    }\n\n   \
+    \ S prod(Node *u, Node *v) {\n        evert(u);\n        expose(v);\n        return\
+    \ v->sum;\n    }\n\n    Node *kth_parent(Node *t, int k) {\n        expose(t);\n\
+    \        while (t) {\n            push(t);\n            if (t->r and t->r->sz\
+    \ > k) {\n                t = t->r;\n            } else {\n                if\
+    \ (t->r) k -= t->r->sz;\n                if (k == 0) return t;\n             \
+    \   k--;\n                t = t->l;\n            }\n        }\n        return\
+    \ nullptr;\n    }\n};\n/* example usage:\nstruct S {\n    int sz, sum, lhi, rhi,\
+    \ inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int sz_,\
+    \ int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_), lhi(lhi_),\
+    \ rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S l, S r) {\n\
+    \    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
+    \ + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S\
+    \ x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n\
+    \    if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
+    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
+    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
+    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
+    \ F, op, reversal, mapping, composition, id>;\nvector<LCT::Node*> vs;\n*/\n"
   dependsOn: []
   isVerificationFile: false
   path: data_structure/link_cut_tree.hpp
   requiredBy: []
-  timestamp: '2021-07-23 02:21:15+09:00'
+  timestamp: '2021-07-23 14:41:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/link_cut_tree.sum.test.cpp
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - data_structure/test/link_cut_tree.composition.test.cpp
-  - data_structure/test/linkcuttree.aoj2450.test.cpp
+  - data_structure/test/link_cut_tree.aoj2450.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
 documentation_of: data_structure/link_cut_tree.hpp
 layout: document
@@ -190,6 +200,8 @@ title: Link-Cut tree
 パス上の頂点更新・パス上の頂点積取得が可能な Link-Cut tree．インターフェースを `atcoder::lazy_segtree` に寄せている．
 
 ## 使用方法
+
+内部で `evert()` を使用する関数は根を変更してしまうので注意．
 
 ```cpp
 using S = unsigned long long;

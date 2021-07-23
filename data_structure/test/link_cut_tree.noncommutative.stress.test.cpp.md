@@ -50,109 +50,112 @@ data:
     \  a->sum = mapping(b, a->sum);\n        a->lz = composition(b, a->lz);\n    }\n\
     \    void _toggle(Node *t) {\n        auto tmp = t->l;\n        t->l = t->r, t->r\
     \ = tmp;\n        t->sum = reversal(t->sum);\n        t->is_reversed ^= true;\n\
-    \    }\n\n    void push(Node *&t) {\n        if (t and t->lz != id()) {\n    \
-    \        if (t->l) all_apply(t->l, t->lz);\n            if (t->r) all_apply(t->r,\
-    \ t->lz);\n            t->lz = id();\n        }\n        if (t->is_reversed) {\n\
-    \            if (t->l) _toggle(t->l);\n            if (t->r) _toggle(t->r);\n\
-    \            t->is_reversed = false;\n        }\n    }\n\n    void _rot_r(Node\
-    \ *t) {\n        Node *x = t->p, *y = x->p;\n        if ((x->l = t->r)) t->r->p\
-    \ = x;\n        t->r = x, x->p = t;\n        update(x), update(t);\n        if\
-    \ ((t->p = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r ==\
-    \ x) y->r = t;\n            update(y);\n        }\n    }\n    void _rot_l(Node\
-    \ *t) {\n        Node *x = t->p, *y = x->p;\n        if ((x->r = t->l)) t->l->p\
-    \ = x;\n        t->l = x, x->p = t;\n        update(x), update(t);\n        if\
-    \ ((t->p = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r ==\
-    \ x) y->r = t;\n            update(y);\n        }\n    }\n\n    void _splay(Node\
-    \ *t) {\n        push(t);\n        while (!t->is_root()) {\n            Node *q\
-    \ = t->p;\n            if (q->is_root()) {\n                push(q), push(t);\n\
-    \                if (q->l == t)\n                    _rot_r(t);\n            \
-    \    else\n                    _rot_l(t);\n            } else {\n            \
-    \    Node *r = q->p;\n                push(r), push(q), push(t);\n           \
-    \     if (r->l == q) {\n                    if (q->l == t)\n                 \
-    \       _rot_r(q), _rot_r(t);\n                    else\n                    \
-    \    _rot_l(t), _rot_r(t);\n                } else {\n                    if (q->r\
-    \ == t)\n                        _rot_l(q), _rot_l(t);\n                    else\n\
-    \                        _rot_r(t), _rot_l(t);\n                }\n          \
-    \  }\n        }\n    }\n\npublic:\n    [[nodiscard]] Node *make_node(S val) {\
-    \ return new Node(val); }\n\n    void evert(Node *t) { expose(t), _toggle(t),\
-    \ push(t); }\n\n    Node *expose(Node *t) {\n        Node *rp = nullptr;\n   \
-    \     for (Node *cur = t; cur; cur = cur->p) {\n            _splay(cur);\n   \
-    \         cur->r = rp;\n            update(cur);\n            rp = cur;\n    \
-    \    }\n        _splay(t);\n        return rp;\n    }\n\n    void link(Node *u,\
-    \ Node *v) {\n        if (u->p != nullptr) evert(u);\n        if (v->p != nullptr)\
-    \ evert(v);\n        expose(v);\n        u->p = v;\n        v->r = u;\n      \
-    \  update(v);\n    }\n\n    void cut(Node *chi) {\n        expose(chi);\n    \
-    \    Node *par = chi->l;\n        chi->l = nullptr;\n        update(chi);\n  \
-    \      par->p = nullptr;\n    }\n\n    void cut(Node *u, Node *v) { evert(u),\
-    \ cut(v); }\n\n    Node *lca(Node *u, Node *v) { return expose(u), expose(v);\
-    \ }\n\n    void set(Node *t, S x) { expose(t), t->d = x, update(t); }\n\n    S\
-    \ get(Node *t) { return expose(t), t->d; }\n\n    void apply(Node *u, Node *v,\
-    \ const F &x) {\n        evert(u);\n        expose(v);\n        all_apply(v, x);\n\
-    \        push(v);\n    }\n\n    S prod(Node *u, Node *v) {\n        evert(u);\n\
-    \        expose(v);\n        return v->sum;\n    }\n};\n/* example usage:\nstruct\
-    \ S {\n    int sz, sum, lhi, rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x),\
-    \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
-    \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
-    \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
-    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
-    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
-    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
-    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
-    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
-    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
-    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
-    \ id>;\nvector<LCT::Node*> vs;\n*/\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iostream>\n\
-    #include <iterator>\n#include <type_traits>\n#include <vector>\n\n// CUT begin\n\
-    template <typename T> struct matrix {\n    int H, W;\n    std::vector<T> elem;\n\
-    \    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
-    \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
-    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    int height()\
-    \ const { return H; }\n    int width() const { return W; }\n    std::vector<std::vector<T>>\
-    \ vecvec() const {\n        std::vector<std::vector<T>> ret(H);\n        for (int\
-    \ i = 0; i < H; i++) {\n            std::copy(elem.begin() + i * W, elem.begin()\
-    \ + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n        return ret;\n\
-    \    }\n    operator std::vector<std::vector<T>>() const { return vecvec(); }\n\
-    \    matrix() = default;\n    matrix(int H, int W) : H(H), W(W), elem(H * W) {}\n\
-    \    matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ?\
-    \ d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(), raw.end(),\
-    \ std::back_inserter(elem));\n    }\n\n    static matrix Identity(int N) {\n \
-    \       matrix ret(N, N);\n        for (int i = 0; i < N; i++) ret.at(i, i) =\
-    \ 1;\n        return ret;\n    }\n\n    matrix operator-() const {\n        matrix\
-    \ ret(H, W);\n        for (int i = 0; i < H * W; i++) ret.elem[i] = -elem[i];\n\
-    \        return ret;\n    }\n    matrix operator*(const T &v) const {\n      \
-    \  matrix ret = *this;\n        for (auto &x : ret.elem) x *= v;\n        return\
-    \ ret;\n    }\n    matrix operator/(const T &v) const {\n        matrix ret =\
-    \ *this;\n        const T vinv = T(1) / v;\n        for (auto &x : ret.elem) x\
-    \ *= vinv;\n        return ret;\n    }\n    matrix operator+(const matrix &r)\
-    \ const {\n        matrix ret = *this;\n        for (int i = 0; i < H * W; i++)\
-    \ ret.elem[i] += r.elem[i];\n        return ret;\n    }\n    matrix operator-(const\
+    \    }\n\n    void push(Node *&t) {\n        if (t->lz != id()) {\n          \
+    \  if (t->l) all_apply(t->l, t->lz);\n            if (t->r) all_apply(t->r, t->lz);\n\
+    \            t->lz = id();\n        }\n        if (t->is_reversed) {\n       \
+    \     if (t->l) _toggle(t->l);\n            if (t->r) _toggle(t->r);\n       \
+    \     t->is_reversed = false;\n        }\n    }\n\n    void _rot_r(Node *t) {\n\
+    \        Node *x = t->p, *y = x->p;\n        if ((x->l = t->r)) t->r->p = x;\n\
+    \        t->r = x, x->p = t;\n        update(x), update(t);\n        if ((t->p\
+    \ = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r == x) y->r\
+    \ = t;\n            update(y);\n        }\n    }\n    void _rot_l(Node *t) {\n\
+    \        Node *x = t->p, *y = x->p;\n        if ((x->r = t->l)) t->l->p = x;\n\
+    \        t->l = x, x->p = t;\n        update(x), update(t);\n        if ((t->p\
+    \ = y)) {\n            if (y->l == x) y->l = t;\n            if (y->r == x) y->r\
+    \ = t;\n            update(y);\n        }\n    }\n\n    void _splay(Node *t) {\n\
+    \        push(t);\n        while (!t->is_root()) {\n            Node *q = t->p;\n\
+    \            if (q->is_root()) {\n                push(q), push(t);\n        \
+    \        if (q->l == t)\n                    _rot_r(t);\n                else\n\
+    \                    _rot_l(t);\n            } else {\n                Node *r\
+    \ = q->p;\n                push(r), push(q), push(t);\n                if (r->l\
+    \ == q) {\n                    if (q->l == t)\n                        _rot_r(q),\
+    \ _rot_r(t);\n                    else\n                        _rot_l(t), _rot_r(t);\n\
+    \                } else {\n                    if (q->r == t)\n              \
+    \          _rot_l(q), _rot_l(t);\n                    else\n                 \
+    \       _rot_r(t), _rot_l(t);\n                }\n            }\n        }\n \
+    \   }\n\npublic:\n    [[nodiscard]] Node *make_node(S val) { return new Node(val);\
+    \ }\n\n    void evert(Node *t) { expose(t), _toggle(t), push(t); }\n\n    Node\
+    \ *expose(Node *t) {\n        Node *rp = nullptr;\n        for (Node *cur = t;\
+    \ cur; cur = cur->p) {\n            _splay(cur);\n            cur->r = rp;\n \
+    \           update(cur);\n            rp = cur;\n        }\n        _splay(t);\n\
+    \        return rp;\n    }\n\n    void link(Node *chi, Node *par) {\n        evert(chi);\n\
+    \        expose(par);\n        chi->p = par;\n        par->r = chi;\n        update(par);\n\
+    \    }\n\n    void cut(Node *chi) {\n        expose(chi);\n        Node *par =\
+    \ chi->l;\n        chi->l = nullptr;\n        update(chi);\n        par->p = nullptr;\n\
+    \    }\n\n    void cut(Node *u, Node *v) { evert(u), cut(v); }\n\n    Node *lca(Node\
+    \ *u, Node *v) { return expose(u), expose(v); }\n\n    void set(Node *t, S x)\
+    \ { expose(t), t->d = x, update(t); }\n\n    S get(Node *t) { return expose(t),\
+    \ t->d; }\n\n    void apply(Node *u, Node *v, const F &x) {\n        evert(u);\n\
+    \        expose(v);\n        all_apply(v, x);\n        push(v);\n    }\n\n   \
+    \ S prod(Node *u, Node *v) {\n        evert(u);\n        expose(v);\n        return\
+    \ v->sum;\n    }\n\n    Node *kth_parent(Node *t, int k) {\n        expose(t);\n\
+    \        while (t) {\n            push(t);\n            if (t->r and t->r->sz\
+    \ > k) {\n                t = t->r;\n            } else {\n                if\
+    \ (t->r) k -= t->r->sz;\n                if (k == 0) return t;\n             \
+    \   k--;\n                t = t->l;\n            }\n        }\n        return\
+    \ nullptr;\n    }\n};\n/* example usage:\nstruct S {\n    int sz, sum, lhi, rhi,\
+    \ inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int sz_,\
+    \ int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_), lhi(lhi_),\
+    \ rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S l, S r) {\n\
+    \    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
+    \ + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S\
+    \ x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n\
+    \    if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
+    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
+    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
+    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
+    \ F, op, reversal, mapping, composition, id>;\nvector<LCT::Node*> vs;\n*/\n#line\
+    \ 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <cmath>\n#include <iostream>\n#include <iterator>\n#include <type_traits>\n\
+    #include <vector>\n\n// CUT begin\ntemplate <typename T> struct matrix {\n   \
+    \ int H, W;\n    std::vector<T> elem;\n    typename std::vector<T>::iterator operator[](int\
+    \ i) { return elem.begin() + i * W; }\n    inline T &at(int i, int j) { return\
+    \ elem[i * W + j]; }\n    inline T get(int i, int j) const { return elem[i * W\
+    \ + j]; }\n    int height() const { return H; }\n    int width() const { return\
+    \ W; }\n    std::vector<std::vector<T>> vecvec() const {\n        std::vector<std::vector<T>>\
+    \ ret(H);\n        for (int i = 0; i < H; i++) {\n            std::copy(elem.begin()\
+    \ + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n\
+    \        return ret;\n    }\n    operator std::vector<std::vector<T>>() const\
+    \ { return vecvec(); }\n    matrix() = default;\n    matrix(int H, int W) : H(H),\
+    \ W(W), elem(H * W) {}\n    matrix(const std::vector<std::vector<T>> &d) : H(d.size()),\
+    \ W(d.size() ? d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(),\
+    \ raw.end(), std::back_inserter(elem));\n    }\n\n    static matrix Identity(int\
+    \ N) {\n        matrix ret(N, N);\n        for (int i = 0; i < N; i++) ret.at(i,\
+    \ i) = 1;\n        return ret;\n    }\n\n    matrix operator-() const {\n    \
+    \    matrix ret(H, W);\n        for (int i = 0; i < H * W; i++) ret.elem[i] =\
+    \ -elem[i];\n        return ret;\n    }\n    matrix operator*(const T &v) const\
+    \ {\n        matrix ret = *this;\n        for (auto &x : ret.elem) x *= v;\n \
+    \       return ret;\n    }\n    matrix operator/(const T &v) const {\n       \
+    \ matrix ret = *this;\n        const T vinv = T(1) / v;\n        for (auto &x\
+    \ : ret.elem) x *= vinv;\n        return ret;\n    }\n    matrix operator+(const\
     \ matrix &r) const {\n        matrix ret = *this;\n        for (int i = 0; i <\
-    \ H * W; i++) ret.elem[i] -= r.elem[i];\n        return ret;\n    }\n    matrix\
-    \ operator*(const matrix &r) const {\n        matrix ret(H, r.W);\n        for\
-    \ (int i = 0; i < H; i++) {\n            for (int k = 0; k < W; k++) {\n     \
-    \           for (int j = 0; j < r.W; j++) ret.at(i, j) += this->get(i, k) * r.get(k,\
-    \ j);\n            }\n        }\n        return ret;\n    }\n    matrix &operator*=(const\
-    \ T &v) { return *this = *this * v; }\n    matrix &operator/=(const T &v) { return\
-    \ *this = *this / v; }\n    matrix &operator+=(const matrix &r) { return *this\
-    \ = *this + r; }\n    matrix &operator-=(const matrix &r) { return *this = *this\
-    \ - r; }\n    matrix &operator*=(const matrix &r) { return *this = *this * r;\
-    \ }\n    bool operator==(const matrix &r) const { return H == r.H and W == r.W\
-    \ and elem == r.elem; }\n    bool operator!=(const matrix &r) const { return H\
-    \ != r.H or W != r.W or elem != r.elem; }\n    bool operator<(const matrix &r)\
-    \ const { return elem < r.elem; }\n    matrix pow(int64_t n) const {\n       \
-    \ matrix ret = Identity(H);\n        bool ret_is_id = true;\n        if (n ==\
-    \ 0) return ret;\n        for (int i = 63 - __builtin_clzll(n); i >= 0; i--) {\n\
-    \            if (!ret_is_id) ret *= ret;\n            if ((n >> i) & 1) ret *=\
-    \ (*this), ret_is_id = false;\n        }\n        return ret;\n    }\n    std::vector<T>\
-    \ pow_vec(int64_t n, std::vector<T> vec) const {\n        matrix x = *this;\n\
-    \        while (n) {\n            if (n & 1) vec = x * vec;\n            x *=\
-    \ x;\n            n >>= 1;\n        }\n        return vec;\n    };\n    matrix\
-    \ transpose() const {\n        matrix ret(W, H);\n        for (int i = 0; i <\
-    \ H; i++) {\n            for (int j = 0; j < W; j++) ret.at(j, i) = this->get(i,\
-    \ j);\n        }\n        return ret;\n    }\n    // Gauss-Jordan elimination\n\
-    \    // - Require inverse for every non-zero element\n    // - Complexity: O(H^2\
-    \ W)\n    template <typename T2, typename std::enable_if<std::is_floating_point<T2>::value>::type\
+    \ H * W; i++) ret.elem[i] += r.elem[i];\n        return ret;\n    }\n    matrix\
+    \ operator-(const matrix &r) const {\n        matrix ret = *this;\n        for\
+    \ (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i];\n        return ret;\n\
+    \    }\n    matrix operator*(const matrix &r) const {\n        matrix ret(H, r.W);\n\
+    \        for (int i = 0; i < H; i++) {\n            for (int k = 0; k < W; k++)\
+    \ {\n                for (int j = 0; j < r.W; j++) ret.at(i, j) += this->get(i,\
+    \ k) * r.get(k, j);\n            }\n        }\n        return ret;\n    }\n  \
+    \  matrix &operator*=(const T &v) { return *this = *this * v; }\n    matrix &operator/=(const\
+    \ T &v) { return *this = *this / v; }\n    matrix &operator+=(const matrix &r)\
+    \ { return *this = *this + r; }\n    matrix &operator-=(const matrix &r) { return\
+    \ *this = *this - r; }\n    matrix &operator*=(const matrix &r) { return *this\
+    \ = *this * r; }\n    bool operator==(const matrix &r) const { return H == r.H\
+    \ and W == r.W and elem == r.elem; }\n    bool operator!=(const matrix &r) const\
+    \ { return H != r.H or W != r.W or elem != r.elem; }\n    bool operator<(const\
+    \ matrix &r) const { return elem < r.elem; }\n    matrix pow(int64_t n) const\
+    \ {\n        matrix ret = Identity(H);\n        bool ret_is_id = true;\n     \
+    \   if (n == 0) return ret;\n        for (int i = 63 - __builtin_clzll(n); i >=\
+    \ 0; i--) {\n            if (!ret_is_id) ret *= ret;\n            if ((n >> i)\
+    \ & 1) ret *= (*this), ret_is_id = false;\n        }\n        return ret;\n  \
+    \  }\n    std::vector<T> pow_vec(int64_t n, std::vector<T> vec) const {\n    \
+    \    matrix x = *this;\n        while (n) {\n            if (n & 1) vec = x *\
+    \ vec;\n            x *= x;\n            n >>= 1;\n        }\n        return vec;\n\
+    \    };\n    matrix transpose() const {\n        matrix ret(W, H);\n        for\
+    \ (int i = 0; i < H; i++) {\n            for (int j = 0; j < W; j++) ret.at(j,\
+    \ i) = this->get(i, j);\n        }\n        return ret;\n    }\n    // Gauss-Jordan\
+    \ elimination\n    // - Require inverse for every non-zero element\n    // - Complexity:\
+    \ O(H^2 W)\n    template <typename T2, typename std::enable_if<std::is_floating_point<T2>::value>::type\
     \ * = nullptr>\n    static int choose_pivot(const matrix<T2> &mtr, int h, int\
     \ c) noexcept {\n        int piv = -1;\n        for (int j = h; j < mtr.H; j++)\
     \ {\n            if (mtr.get(j, c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv,\
@@ -298,7 +301,7 @@ data:
     \n\n#line 11 \"data_structure/test/link_cut_tree.noncommutative.stress.test.cpp\"\
     \n#include <cstdio>\n#include <unordered_set>\n#include <utility>\nusing namespace\
     \ std;\n\nconstexpr int md = 998244353;\nconst int NTRY = 1000;\nconst int VMAX\
-    \ = 50;\nconst int QPERTRY = 500;\nconst int dim = 2;\nusing mint = ModInt<md>;\n\
+    \ = 50;\nconst int QPERTRY = 1000;\nconst int dim = 2;\nusing mint = ModInt<md>;\n\
     \nusing S = tuple<int, matrix<mint>, matrix<mint>>;\nusing F = pair<bool, matrix<mint>>;\n\
     S op(S l, S r) {\n    int sl, sr;\n    matrix<mint> ml1, ml2, mr1, mr2;\n    tie(sl,\
     \ ml1, ml2) = l;\n    tie(sr, mr1, mr2) = r;\n    return {sl + sr, mr1 * ml1,\
@@ -316,47 +319,48 @@ data:
     \ int prv, const vector<unordered_set<int>> &to) {\n    if (s == t) return {s};\n\
     \    for (auto nxt : to[s]) {\n        if (nxt == prv) continue;\n        auto\
     \ v = get_rev_path(nxt, t, s, to);\n        if (v.size()) {\n            v.push_back(s);\n\
-    \            return v;\n        }\n    }\n    return {};\n}\n\nmatrix<mint> gen_random_mat()\
+    \            return v;\n        }\n    }\n    return {};\n}\n\nS gen_rand_a()\
     \ {\n    matrix<mint> ret(dim, dim);\n    for (int i = 0; i < dim; i++) {\n  \
     \      for (int j = 0; j < dim; j++) ret[i][j] = rand_int() % md;\n    }\n   \
-    \ return ret;\n}\nvector<mint> gen_random_vec() {\n    vector<mint> ret(dim);\n\
-    \    for (auto &x : ret) x = rand_int() % md;\n    return ret;\n}\n\nint main()\
-    \ {\n    for (int ntry = 0; ntry < NTRY; ntry++) {\n        const int N = 2 +\
-    \ rand_int() % (VMAX - 1);\n        const int W = rand_int() % N + 1;\n      \
-    \  vector<matrix<mint>> A(N);\n        LCT tree;\n        vector<LCT::Node *>\
-    \ nodes;\n\n        for (int i = 0; i < N; i++) {\n            A[i] = gen_random_mat();\n\
-    \            nodes.push_back(tree.make_node({1, A[i], A[i]}));\n        }\n  \
-    \      vector<pair<int, int>> edges;\n        vector<unordered_set<int>> to(N);\n\
-    \n        for (int i = 1; i < N; i++) {\n            int j = max<int>(0, i - 1\
-    \ - rand_int() % W);\n            edges.emplace_back(i, j);\n            to[i].insert(j);\n\
-    \            to[j].insert(i);\n            tree.link(nodes[i], nodes[j]);\n  \
-    \      }\n\n        for (int q = 0; q < QPERTRY; q++) {\n            const int\
-    \ tp = rand_int() % 5;\n            if (tp == 0) {\n                // cut() &\
-    \ link()\n                int e = rand_int() % edges.size();\n               \
-    \ int a = edges[e].first, b = edges[e].second;\n\n                to[a].erase(b),\
-    \ to[b].erase(a);\n                tree.cut(nodes[a], nodes[b]);\n\n         \
-    \       vector<int> va = connected_vertices(N, a, to), vb = connected_vertices(N,\
-    \ b, to);\n                assert(int(va.size() + vb.size()) == N);\n        \
-    \        a = va[rand_int() % va.size()], b = vb[rand_int() % vb.size()];\n   \
-    \             to[a].insert(b), to[b].insert(a);\n                edges[e] = {a,\
-    \ b};\n                tree.link(nodes[a], nodes[b]);\n            } else if (tp\
-    \ == 1) {\n                // apply()\n                const int u = rand_int()\
-    \ % N, v = rand_int() % N;\n                const auto a = gen_random_mat();\n\
-    \                tree.apply(nodes[u], nodes[v], {true, a});\n\n              \
-    \  for (auto i : get_rev_path(u, v, -1, to)) A[i] = a;\n\n            } else if\
-    \ (tp == 2) {\n                // prod()\n                const int u = rand_int()\
-    \ % N, v = rand_int() % N;\n                const auto x = gen_random_vec();\n\
-    \                S p = tree.prod(nodes[u], nodes[v]);\n                auto ret1\
-    \ = get<1>(p) * x;\n\n                auto ret2 = x;\n                for (auto\
-    \ i : get_rev_path(v, u, -1, to)) ret2 = A[i] * ret2;\n                assert(ret1\
-    \ == ret2);\n\n            } else if (tp == 3) {\n                // set()\n \
-    \               const int u = rand_int() % N;\n                const auto a =\
-    \ gen_random_mat();\n                tree.set(nodes[u], {1, a, a});\n        \
-    \        A[u] = a;\n\n            } else if (tp == 4) {\n                // get()\n\
-    \                const int u = rand_int() % N;\n                const S a = tree.get(nodes[u]);\n\
-    \                assert(a == make_tuple(1, A[u], A[u]));\n            } else {\n\
-    \                exit(8);\n            }\n        }\n    }\n    puts(\"Hello World\"\
-    );\n}\n"
+    \ return {1, ret, ret};\n}\n\nint main() {\n    for (int ntry = 0; ntry < NTRY;\
+    \ ntry++) {\n        const int N = 2 + rand_int() % (VMAX - 1);\n\n        vector<S>\
+    \ A(N);\n        LCT tree;\n        vector<LCT::Node *> nodes;\n\n        for\
+    \ (int i = 0; i < N; i++) {\n            A[i] = gen_rand_a();\n            nodes.push_back(tree.make_node(A[i]));\n\
+    \        }\n        vector<pair<int, int>> edges;\n        vector<unordered_set<int>>\
+    \ to(N);\n\n        auto try_to_add_edge = [&]() {\n            int a = rand_int()\
+    \ % N;\n            vector<int> is_cmp(N, 1);\n            for (auto i : connected_vertices(N,\
+    \ a, to)) is_cmp[i] = 0;\n            vector<int> cmp;\n            for (int i\
+    \ = 0; i < N; i++) {\n                if (is_cmp[i]) cmp.push_back(i);\n     \
+    \       }\n            if (cmp.empty()) return;\n            int b = cmp[rand_int()\
+    \ % cmp.size()];\n\n            edges.emplace_back(a, b);\n            to[a].insert(b),\
+    \ to[b].insert(a);\n            tree.link(nodes[a], nodes[b]);\n        };\n\n\
+    \        for (int i = 0; i < N / 2; i++) try_to_add_edge();\n\n        for (int\
+    \ q = 0; q < QPERTRY; q++) {\n            const int tp = rand_int() % 6;\n   \
+    \         if (tp == 0) {\n                // cut() if possible\n             \
+    \   if (edges.empty()) continue;\n                int e = rand_int() % edges.size();\n\
+    \                int a = edges[e].first, b = edges[e].second;\n\n            \
+    \    edges.erase(edges.begin() + e);\n                to[a].erase(b), to[b].erase(a);\n\
+    \                tree.cut(nodes[a], nodes[b]);\n\n            } else if (tp ==\
+    \ 1) {\n                // link() if possible\n                try_to_add_edge();\n\
+    \n            } else if (tp == 2) {\n                // apply()\n            \
+    \    const int u = rand_int() % N;\n                auto conn = connected_vertices(N,\
+    \ u, to);\n                int v = conn[rand_int() % conn.size()];\n         \
+    \       const auto a = gen_rand_a();\n                tree.apply(nodes[u], nodes[v],\
+    \ {true, get<1>(a)});\n\n                for (auto i : get_rev_path(u, v, -1,\
+    \ to)) A[i] = a;\n\n            } else if (tp == 3) {\n                // prod()\n\
+    \                const int u = rand_int() % N;\n                auto conn = connected_vertices(N,\
+    \ u, to);\n                int v = conn[rand_int() % conn.size()];\n         \
+    \       S ret1 = tree.prod(nodes[u], nodes[v]);\n\n                auto ret2 =\
+    \ S(A[u]);\n                for (auto i : get_rev_path(v, u, -1, to)) {\n    \
+    \                if (i != u) ret2 = op(ret2, A[i]);\n                }\n     \
+    \           assert(ret1 == ret2);\n\n            } else if (tp == 4) {\n     \
+    \           // set()\n                const int u = rand_int() % N;\n        \
+    \        const auto a = gen_rand_a();\n                tree.set(nodes[u], a);\n\
+    \                A[u] = a;\n\n            } else if (tp == 5) {\n            \
+    \    // get()\n                const int u = rand_int() % N;\n               \
+    \ const S a = tree.get(nodes[u]);\n                assert(a == A[u]);\n      \
+    \      } else {\n                exit(8);\n            }\n        }\n    }\n \
+    \   puts(\"Hello World\");\n}\n"
   code: "// \u30D1\u30B9\u4E0A\u306E\u9802\u70B9\u66F4\u65B0\u30FB\u30D1\u30B9\u4E0A\
     \u306E\u9802\u70B9\u7A4D\u53D6\u5F97\u304C\u53EF\u80FD\u306A Link-Cut tree\n//\
     \ \u5404\u9802\u70B9\u306B 2x2 \u884C\u5217\u3092\u8F09\u305B\uFF0C\u6F14\u7B97\
@@ -366,7 +370,7 @@ data:
     \n#include \"../../modint.hpp\"\n#include \"../../random/xorshift.hpp\"\n\n#include\
     \ <algorithm>\n#include <cassert>\n#include <cstdio>\n#include <unordered_set>\n\
     #include <utility>\nusing namespace std;\n\nconstexpr int md = 998244353;\nconst\
-    \ int NTRY = 1000;\nconst int VMAX = 50;\nconst int QPERTRY = 500;\nconst int\
+    \ int NTRY = 1000;\nconst int VMAX = 50;\nconst int QPERTRY = 1000;\nconst int\
     \ dim = 2;\nusing mint = ModInt<md>;\n\nusing S = tuple<int, matrix<mint>, matrix<mint>>;\n\
     using F = pair<bool, matrix<mint>>;\nS op(S l, S r) {\n    int sl, sr;\n    matrix<mint>\
     \ ml1, ml2, mr1, mr2;\n    tie(sl, ml1, ml2) = l;\n    tie(sr, mr1, mr2) = r;\n\
@@ -384,47 +388,48 @@ data:
     \ int prv, const vector<unordered_set<int>> &to) {\n    if (s == t) return {s};\n\
     \    for (auto nxt : to[s]) {\n        if (nxt == prv) continue;\n        auto\
     \ v = get_rev_path(nxt, t, s, to);\n        if (v.size()) {\n            v.push_back(s);\n\
-    \            return v;\n        }\n    }\n    return {};\n}\n\nmatrix<mint> gen_random_mat()\
+    \            return v;\n        }\n    }\n    return {};\n}\n\nS gen_rand_a()\
     \ {\n    matrix<mint> ret(dim, dim);\n    for (int i = 0; i < dim; i++) {\n  \
     \      for (int j = 0; j < dim; j++) ret[i][j] = rand_int() % md;\n    }\n   \
-    \ return ret;\n}\nvector<mint> gen_random_vec() {\n    vector<mint> ret(dim);\n\
-    \    for (auto &x : ret) x = rand_int() % md;\n    return ret;\n}\n\nint main()\
-    \ {\n    for (int ntry = 0; ntry < NTRY; ntry++) {\n        const int N = 2 +\
-    \ rand_int() % (VMAX - 1);\n        const int W = rand_int() % N + 1;\n      \
-    \  vector<matrix<mint>> A(N);\n        LCT tree;\n        vector<LCT::Node *>\
-    \ nodes;\n\n        for (int i = 0; i < N; i++) {\n            A[i] = gen_random_mat();\n\
-    \            nodes.push_back(tree.make_node({1, A[i], A[i]}));\n        }\n  \
-    \      vector<pair<int, int>> edges;\n        vector<unordered_set<int>> to(N);\n\
-    \n        for (int i = 1; i < N; i++) {\n            int j = max<int>(0, i - 1\
-    \ - rand_int() % W);\n            edges.emplace_back(i, j);\n            to[i].insert(j);\n\
-    \            to[j].insert(i);\n            tree.link(nodes[i], nodes[j]);\n  \
-    \      }\n\n        for (int q = 0; q < QPERTRY; q++) {\n            const int\
-    \ tp = rand_int() % 5;\n            if (tp == 0) {\n                // cut() &\
-    \ link()\n                int e = rand_int() % edges.size();\n               \
-    \ int a = edges[e].first, b = edges[e].second;\n\n                to[a].erase(b),\
-    \ to[b].erase(a);\n                tree.cut(nodes[a], nodes[b]);\n\n         \
-    \       vector<int> va = connected_vertices(N, a, to), vb = connected_vertices(N,\
-    \ b, to);\n                assert(int(va.size() + vb.size()) == N);\n        \
-    \        a = va[rand_int() % va.size()], b = vb[rand_int() % vb.size()];\n   \
-    \             to[a].insert(b), to[b].insert(a);\n                edges[e] = {a,\
-    \ b};\n                tree.link(nodes[a], nodes[b]);\n            } else if (tp\
-    \ == 1) {\n                // apply()\n                const int u = rand_int()\
-    \ % N, v = rand_int() % N;\n                const auto a = gen_random_mat();\n\
-    \                tree.apply(nodes[u], nodes[v], {true, a});\n\n              \
-    \  for (auto i : get_rev_path(u, v, -1, to)) A[i] = a;\n\n            } else if\
-    \ (tp == 2) {\n                // prod()\n                const int u = rand_int()\
-    \ % N, v = rand_int() % N;\n                const auto x = gen_random_vec();\n\
-    \                S p = tree.prod(nodes[u], nodes[v]);\n                auto ret1\
-    \ = get<1>(p) * x;\n\n                auto ret2 = x;\n                for (auto\
-    \ i : get_rev_path(v, u, -1, to)) ret2 = A[i] * ret2;\n                assert(ret1\
-    \ == ret2);\n\n            } else if (tp == 3) {\n                // set()\n \
-    \               const int u = rand_int() % N;\n                const auto a =\
-    \ gen_random_mat();\n                tree.set(nodes[u], {1, a, a});\n        \
-    \        A[u] = a;\n\n            } else if (tp == 4) {\n                // get()\n\
-    \                const int u = rand_int() % N;\n                const S a = tree.get(nodes[u]);\n\
-    \                assert(a == make_tuple(1, A[u], A[u]));\n            } else {\n\
-    \                exit(8);\n            }\n        }\n    }\n    puts(\"Hello World\"\
-    );\n}\n"
+    \ return {1, ret, ret};\n}\n\nint main() {\n    for (int ntry = 0; ntry < NTRY;\
+    \ ntry++) {\n        const int N = 2 + rand_int() % (VMAX - 1);\n\n        vector<S>\
+    \ A(N);\n        LCT tree;\n        vector<LCT::Node *> nodes;\n\n        for\
+    \ (int i = 0; i < N; i++) {\n            A[i] = gen_rand_a();\n            nodes.push_back(tree.make_node(A[i]));\n\
+    \        }\n        vector<pair<int, int>> edges;\n        vector<unordered_set<int>>\
+    \ to(N);\n\n        auto try_to_add_edge = [&]() {\n            int a = rand_int()\
+    \ % N;\n            vector<int> is_cmp(N, 1);\n            for (auto i : connected_vertices(N,\
+    \ a, to)) is_cmp[i] = 0;\n            vector<int> cmp;\n            for (int i\
+    \ = 0; i < N; i++) {\n                if (is_cmp[i]) cmp.push_back(i);\n     \
+    \       }\n            if (cmp.empty()) return;\n            int b = cmp[rand_int()\
+    \ % cmp.size()];\n\n            edges.emplace_back(a, b);\n            to[a].insert(b),\
+    \ to[b].insert(a);\n            tree.link(nodes[a], nodes[b]);\n        };\n\n\
+    \        for (int i = 0; i < N / 2; i++) try_to_add_edge();\n\n        for (int\
+    \ q = 0; q < QPERTRY; q++) {\n            const int tp = rand_int() % 6;\n   \
+    \         if (tp == 0) {\n                // cut() if possible\n             \
+    \   if (edges.empty()) continue;\n                int e = rand_int() % edges.size();\n\
+    \                int a = edges[e].first, b = edges[e].second;\n\n            \
+    \    edges.erase(edges.begin() + e);\n                to[a].erase(b), to[b].erase(a);\n\
+    \                tree.cut(nodes[a], nodes[b]);\n\n            } else if (tp ==\
+    \ 1) {\n                // link() if possible\n                try_to_add_edge();\n\
+    \n            } else if (tp == 2) {\n                // apply()\n            \
+    \    const int u = rand_int() % N;\n                auto conn = connected_vertices(N,\
+    \ u, to);\n                int v = conn[rand_int() % conn.size()];\n         \
+    \       const auto a = gen_rand_a();\n                tree.apply(nodes[u], nodes[v],\
+    \ {true, get<1>(a)});\n\n                for (auto i : get_rev_path(u, v, -1,\
+    \ to)) A[i] = a;\n\n            } else if (tp == 3) {\n                // prod()\n\
+    \                const int u = rand_int() % N;\n                auto conn = connected_vertices(N,\
+    \ u, to);\n                int v = conn[rand_int() % conn.size()];\n         \
+    \       S ret1 = tree.prod(nodes[u], nodes[v]);\n\n                auto ret2 =\
+    \ S(A[u]);\n                for (auto i : get_rev_path(v, u, -1, to)) {\n    \
+    \                if (i != u) ret2 = op(ret2, A[i]);\n                }\n     \
+    \           assert(ret1 == ret2);\n\n            } else if (tp == 4) {\n     \
+    \           // set()\n                const int u = rand_int() % N;\n        \
+    \        const auto a = gen_rand_a();\n                tree.set(nodes[u], a);\n\
+    \                A[u] = a;\n\n            } else if (tp == 5) {\n            \
+    \    // get()\n                const int u = rand_int() % N;\n               \
+    \ const S a = tree.get(nodes[u]);\n                assert(a == A[u]);\n      \
+    \      } else {\n                exit(8);\n            }\n        }\n    }\n \
+    \   puts(\"Hello World\");\n}\n"
   dependsOn:
   - data_structure/link_cut_tree.hpp
   - linear_algebra_matrix/matrix.hpp
@@ -433,7 +438,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   requiredBy: []
-  timestamp: '2021-07-23 02:21:15+09:00'
+  timestamp: '2021-07-23 14:41:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp

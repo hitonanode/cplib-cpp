@@ -640,20 +640,23 @@ data:
       path: data_structure/test/fibonacci_heap_spanningtree.test.cpp
       title: data_structure/test/fibonacci_heap_spanningtree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: data_structure/test/link_cut_tree.aoj2450.test.cpp
+      title: data_structure/test/link_cut_tree.aoj2450.test.cpp
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.composition.test.cpp
       title: data_structure/test/link_cut_tree.composition.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
       title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
     - icon: ':heavy_check_mark:'
+      path: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
+      title: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
       title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.sum.test.cpp
       title: data_structure/test/link_cut_tree.sum.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: data_structure/test/linkcuttree.aoj2450.test.cpp
-      title: data_structure/test/linkcuttree.aoj2450.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/persistent_queue.test.cpp
       title: data_structure/test/persistent_queue.test.cpp

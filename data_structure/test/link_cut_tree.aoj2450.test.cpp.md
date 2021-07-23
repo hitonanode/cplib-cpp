@@ -11,12 +11,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2450
     links:
-    - https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
-  bundledCode: "#line 1 \"data_structure/test/link_cut_tree.sum.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
-    \n#line 2 \"data_structure/link_cut_tree.hpp\"\n\n// CUT begin\n// Link-Cut Tree\n\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2450
+  bundledCode: "#line 1 \"data_structure/test/link_cut_tree.aoj2450.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2450\"\n\
+    #line 2 \"data_structure/link_cut_tree.hpp\"\n\n// CUT begin\n// Link-Cut Tree\n\
     // Reference:\n// - https://www.slideshare.net/iwiwi/2-12188845\n// - https://ei1333.github.io/library/structure/lct/link-cut-tree-lazy-path.cpp\n\
     template <class S, class F, S (*op)(S, S), S (*reversal)(S), S (*mapping)(F, S),\
     \ F (*composition)(F, F), F (*id)()>\nclass lazy_linkcuttree {\npublic:\n    struct\
@@ -91,55 +91,61 @@ data:
     \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
     \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
     \ F, op, reversal, mapping, composition, id>;\nvector<LCT::Node*> vs;\n*/\n#line\
-    \ 3 \"data_structure/test/link_cut_tree.sum.test.cpp\"\n#include <iostream>\n\
-    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
-    \nusing S = unsigned long long;\nusing F = tuple<>;\n\nF id() noexcept { return\
-    \ {}; }\nS op(S l, S r) noexcept { return l + r; }\nS mapping(F f, S x) noexcept\
-    \ { return x; }\nS reversal(S x) noexcept { return x; }\nF composition(F f, F\
-    \ g) noexcept { return {}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal,\
-    \ mapping, composition, id>;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N, Q;\n    cin >> N >> Q;\n    LCT lct;\n    vector<LCT::Node *> vs;\n\
-    \    vector<unsigned long long> A(N);\n    for (auto &a : A) {\n        cin >>\
-    \ a;\n        vs.push_back(lct.make_node(a));\n    }\n    for (int e = 0; e <\
-    \ N - 1; e++) {\n        int u, v;\n        cin >> u >> v;\n        lct.link(vs[u],\
-    \ vs[v]);\n    }\n    while (Q--) {\n        int tp;\n        cin >> tp;\n   \
-    \     if (tp == 0) {\n            int u, v, w, x;\n            cin >> u >> v >>\
-    \ w >> x;\n            lct.cut(vs[u], vs[v]);\n            lct.link(vs[w], vs[x]);\n\
-    \        }\n        if (tp == 1) {\n            int p, x;\n            cin >>\
-    \ p >> x;\n            A[p] += x;\n            lct.set(vs[p], A[p]);\n       \
-    \ }\n        if (tp == 2) {\n            int u, v;\n            cin >> u >> v;\n\
-    \            cout << lct.prod(vs[u], vs[v]) << '\\n';\n        }\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
-    \n#include \"../link_cut_tree.hpp\"\n#include <iostream>\n#include <tuple>\n#include\
-    \ <utility>\n#include <vector>\nusing namespace std;\n\nusing S = unsigned long\
-    \ long;\nusing F = tuple<>;\n\nF id() noexcept { return {}; }\nS op(S l, S r)\
-    \ noexcept { return l + r; }\nS mapping(F f, S x) noexcept { return x; }\nS reversal(S\
-    \ x) noexcept { return x; }\nF composition(F f, F g) noexcept { return {}; }\n\
-    using LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition, id>;\n\n\
-    int main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q;\n\
-    \    cin >> N >> Q;\n    LCT lct;\n    vector<LCT::Node *> vs;\n    vector<unsigned\
-    \ long long> A(N);\n    for (auto &a : A) {\n        cin >> a;\n        vs.push_back(lct.make_node(a));\n\
+    \ 3 \"data_structure/test/link_cut_tree.aoj2450.test.cpp\"\n#include <algorithm>\n\
+    #include <iostream>\n#include <utility>\nusing namespace std;\n\nstruct S {\n\
+    \    int sz, sum, lhi, rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x),\
+    \ inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n      \
+    \  : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool,\
+    \ int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum\
+    \ + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi\
+    \ + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi);\
+    \ }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n \
+    \       auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
+    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
+    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
+    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
+    \ id>;\nLCT::Node* vs[200000];\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, Q;\n    cin >> N >> Q;\n    LCT tree;\n    for (int i = 0; i < N;\
+    \ i++) {\n        int w;\n        cin >> w;\n        vs[i] = tree.make_node(w);\n\
     \    }\n    for (int e = 0; e < N - 1; e++) {\n        int u, v;\n        cin\
-    \ >> u >> v;\n        lct.link(vs[u], vs[v]);\n    }\n    while (Q--) {\n    \
-    \    int tp;\n        cin >> tp;\n        if (tp == 0) {\n            int u, v,\
-    \ w, x;\n            cin >> u >> v >> w >> x;\n            lct.cut(vs[u], vs[v]);\n\
-    \            lct.link(vs[w], vs[x]);\n        }\n        if (tp == 1) {\n    \
-    \        int p, x;\n            cin >> p >> x;\n            A[p] += x;\n     \
-    \       lct.set(vs[p], A[p]);\n        }\n        if (tp == 2) {\n           \
-    \ int u, v;\n            cin >> u >> v;\n            cout << lct.prod(vs[u], vs[v])\
-    \ << '\\n';\n        }\n    }\n}\n"
+    \ >> u >> v;\n        u--, v--;\n        tree.link(vs[u], vs[v]);\n    }\n   \
+    \ while (Q--) {\n        int t, a, b, c;\n        cin >> t >> a >> b >> c;\n \
+    \       a--, b--;\n        if (t == 1) tree.apply(vs[a], vs[b], {true, c});\n\
+    \        if (t == 2) cout << tree.prod(vs[a], vs[b]).inhi << '\\n';\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2450\"\
+    \n#include \"../link_cut_tree.hpp\"\n#include <algorithm>\n#include <iostream>\n\
+    #include <utility>\nusing namespace std;\n\nstruct S {\n    int sz, sum, lhi,\
+    \ rhi, inhi;\n    S(int x) : sz(1), sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int\
+    \ sz_, int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_),\
+    \ lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S\
+    \ l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi),\
+    \ max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\n\
+    S reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F\
+    \ f, S x) {\n    if (f.first) {\n        auto v = f.second;\n        auto sum\
+    \ = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n\
+    \    } else {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return\
+    \ fnew.first ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
+    \ F, op, reversal, mapping, composition, id>;\nLCT::Node* vs[200000];\n\nint main()\
+    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q;\n    cin\
+    \ >> N >> Q;\n    LCT tree;\n    for (int i = 0; i < N; i++) {\n        int w;\n\
+    \        cin >> w;\n        vs[i] = tree.make_node(w);\n    }\n    for (int e\
+    \ = 0; e < N - 1; e++) {\n        int u, v;\n        cin >> u >> v;\n        u--,\
+    \ v--;\n        tree.link(vs[u], vs[v]);\n    }\n    while (Q--) {\n        int\
+    \ t, a, b, c;\n        cin >> t >> a >> b >> c;\n        a--, b--;\n        if\
+    \ (t == 1) tree.apply(vs[a], vs[b], {true, c});\n        if (t == 2) cout << tree.prod(vs[a],\
+    \ vs[b]).inhi << '\\n';\n    }\n}\n"
   dependsOn:
   - data_structure/link_cut_tree.hpp
   isVerificationFile: true
-  path: data_structure/test/link_cut_tree.sum.test.cpp
+  path: data_structure/test/link_cut_tree.aoj2450.test.cpp
   requiredBy: []
   timestamp: '2021-07-23 14:41:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: data_structure/test/link_cut_tree.sum.test.cpp
+documentation_of: data_structure/test/link_cut_tree.aoj2450.test.cpp
 layout: document
 redirect_from:
-- /verify/data_structure/test/link_cut_tree.sum.test.cpp
-- /verify/data_structure/test/link_cut_tree.sum.test.cpp.html
-title: data_structure/test/link_cut_tree.sum.test.cpp
+- /verify/data_structure/test/link_cut_tree.aoj2450.test.cpp
+- /verify/data_structure/test/link_cut_tree.aoj2450.test.cpp.html
+title: data_structure/test/link_cut_tree.aoj2450.test.cpp
 ---
