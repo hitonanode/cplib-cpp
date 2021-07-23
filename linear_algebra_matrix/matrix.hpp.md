@@ -29,6 +29,9 @@ data:
     path: linear_algebra_matrix/test/characteristic_poly.test.cpp
     title: linear_algebra_matrix/test/characteristic_poly.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/inverse_matrix.test.cpp
+    title: linear_algebra_matrix/test/inverse_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - icon: ':heavy_check_mark:'
@@ -285,6 +288,7 @@ data:
   - graph/test/general_matching.test.cpp
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+  - linear_algebra_matrix/test/inverse_matrix.test.cpp
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
