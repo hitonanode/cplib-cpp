@@ -1,50 +1,29 @@
 #pragma once
+#include "acl_segtree.hpp"
 #include <algorithm>
 #include <cassert>
 #include <utility>
 #include <vector>
 
 // CUT begin
-// 領域木
-template <class S, void (*opadd)(S &, S), void (*opsub)(S &, S), S (*e)(), class Coordinate> class rangetree {
+// 逆元を要求しない領域木
+template <class S, S (*op)(S, S), S (*e)(), class Coordinate> class rangetree {
     int n;
     std::vector<std::pair<Coordinate, Coordinate>> _pts;
-    struct BIT {
-        std::vector<S> data;
-        BIT(int len) : data(len, e()) {}
-        void add(int pos, S v) {
-            for (pos++; pos and pos <= int(data.size()); pos += pos & -pos) opadd(data[pos - 1], v);
-        }
-        S sum(int r) const {
-            S ret = e();
-            while (r) opadd(ret, data[r - 1]), r -= r & -r;
-            return ret;
-        }
-    };
-
     std::vector<std::vector<Coordinate>> _range2ys;
-    std::vector<BIT> bits;
-    void _add_singlenode(int v, Coordinate y, S val) {
+    std::vector<atcoder::segtree<S, op, e>> segtrees;
+    void _set(int v, Coordinate y, S val) {
         auto i = std::distance(_range2ys[v].begin(), std::lower_bound(_range2ys[v].begin(), _range2ys[v].end(), y));
-        bits[v].add(i, val);
+        segtrees[v].set(i, val);
     }
-    S _get_singlenode(int v, Coordinate y) const {
+    void _add(int v, Coordinate y, S val) {
         auto i = std::distance(_range2ys[v].begin(), std::lower_bound(_range2ys[v].begin(), _range2ys[v].end(), y));
-        return bits[v].sum(i);
+        segtrees[v].set(i, op(segtrees[v].get(i), val));
     }
-    S _sum(Coordinate xl, Coordinate xr, Coordinate yr) const { // [xl, xr) * (-INF, yr)
-        auto compx = [](std::pair<Coordinate, Coordinate> l, std::pair<Coordinate, Coordinate> r) {
-            return l.first < r.first;
-        };
-        int l = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(xl, yr), compx));
-        int r = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(xr, yr), compx));
-        S ret = e();
-        while (l < r) {
-            if (l & 1) opadd(ret, _get_singlenode(l++, yr));
-            if (r & 1) opadd(ret, _get_singlenode(--r, yr));
-            l >>= 1, r >>= 1;
-        }
-        return ret;
+    S _prod(int v, Coordinate yl, Coordinate yr) const {
+        auto il = std::distance(_range2ys[v].begin(), std::lower_bound(_range2ys[v].begin(), _range2ys[v].end(), yl));
+        auto ir = std::distance(_range2ys[v].begin(), std::lower_bound(_range2ys[v].begin(), _range2ys[v].end(), yr));
+        return segtrees[v].prod(il, ir);
     }
 
 public:
@@ -63,17 +42,30 @@ public:
             std::merge(lch.begin(), lch.end(), rch.begin(), rch.end(), std::back_inserter(_range2ys[i]));
             _range2ys[i].erase(std::unique(_range2ys[i].begin(), _range2ys[i].end()), _range2ys[i].end());
         }
-        for (const auto &v : _range2ys) bits.push_back(BIT(v.size()));
+        for (const auto &v : _range2ys) segtrees.emplace_back(v.size());
+    }
+    void set(Coordinate x, Coordinate y, S val) {
+        int i = std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(x, y)));
+        assert(i < n and _pts[i] == std::make_pair(x, y));
+        for (i += n; i; i >>= 1) _set(i, y, val);
     }
     void add(Coordinate x, Coordinate y, S val) {
         int i = std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(x, y)));
         assert(i < n and _pts[i] == std::make_pair(x, y));
-        for (i += n; i; i >>= 1) _add_singlenode(i, y, val);
+        for (i += n; i; i >>= 1) _add(i, y, val);
     }
     S sum(Coordinate xl, Coordinate xr, Coordinate yl, Coordinate yr) const {
-        auto ret_r = _sum(xl, xr, yr);
-        auto ret_l = _sum(xl, xr, yl);
-        opsub(ret_r, ret_l);
-        return ret_r;
+        auto compx = [](std::pair<Coordinate, Coordinate> l, std::pair<Coordinate, Coordinate> r) {
+            return l.first < r.first;
+        };
+        int l = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(xl, yr), compx));
+        int r = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(xr, yr), compx));
+        S ret = e();
+        while (l < r) {
+            if (l & 1) ret = op(ret, _prod(l++, yl, yr));
+            if (r & 1) ret = op(ret, _prod(--r, yl, yr));
+            l >>= 1, r >>= 1;
+        }
+        return ret;
     }
 };
