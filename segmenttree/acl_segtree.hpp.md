@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/rangetree.hpp
+    title: "Range Tree \uFF08\u9818\u57DF\u6728\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_rmq.test.cpp
@@ -9,6 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_rsq.test.cpp
     title: segmenttree/test/acl_rsq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/test/rangetree.test.cpp
+    title: segmenttree/test/rangetree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/test/rangetree.yuki1625.test.cpp
+    title: segmenttree/test/rangetree.yuki1625.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -78,12 +87,15 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: segmenttree/acl_segtree.hpp
-  requiredBy: []
+  requiredBy:
+  - segmenttree/rangetree.hpp
   timestamp: '2021-02-13 02:26:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_rmq.test.cpp
+  - segmenttree/test/rangetree.yuki1625.test.cpp
   - segmenttree/test/acl_rsq.test.cpp
+  - segmenttree/test/rangetree.test.cpp
 documentation_of: segmenttree/acl_segtree.hpp
 layout: document
 redirect_from:
