@@ -129,5 +129,5 @@ y = f.get_destructive(x); // y = f(x), f(x) broken                        O(log 
 
 ## Links
 
-- [slope trick (1) 解説編 | maspyのHP](https://maspypy.com/slope-trick-1-%E8%A7%A3%E8%AA%AC%E7%B7%A8)
-- [Slope-Trick | Luzhiled’s Library](https://ei1333.github.io/library/structure/others/slope-trick.cpp)
+- [slope trick (1) 解説編 \| maspyのHP](https://maspypy.com/slope-trick-1-%E8%A7%A3%E8%AA%AC%E7%B7%A8)
+- [Slope-Trick \| Luzhiled’s Library](https://ei1333.github.io/library/structure/others/slope-trick.cpp)

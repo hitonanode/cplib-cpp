@@ -219,4 +219,4 @@ auto l = tree.lca(vs[u], vs[v]); // u, v の LCA を求める．
 - [1] D. D. Slator and R. E. Tarjan, "A data structure for dynamic trees,"
   Journal of computer and system sciences, 26(3), 362-391, 1983.
 - [プログラミングコンテストでのデータ構造 2　～動的木編～](https://www.slideshare.net/iwiwi/2-12188845)
-- [Link-Cut-Tree-Lazy-Path | Luzhiled’s Library](https://ei1333.github.io/library/structure/lct/link-cut-tree-lazy-path.cpp)
+- [Link-Cut-Tree-Lazy-Path \| Luzhiled’s Library](https://ei1333.github.io/library/structure/lct/link-cut-tree-lazy-path.cpp)

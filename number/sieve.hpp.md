@@ -176,5 +176,5 @@ vector vs = enumerate_kth_pows<ModInt<998244353>>(3, 10); // v = [0,1,8,27,64,12
 ## 文献・リンク
 
 - [1] D. Gries, J. Misra, "A Linear Sieve Algorithm for Finding Prime Numbers," Communications of the ACM, 21(12), 999-1003, 1978.
-- https://cp-algorithms.com/algebra/prime-sieve-linear.html
-- https://37zigen.com/linear-sieve/
+- [Sieve of Eratosthenes With Linear Time Complexity - Competitive Programming Algorithms](https://cp-algorithms.com/algebra/prime-sieve-linear.html)
+- [線形篩 – 37zigenのHP](https://37zigen.com/linear-sieve/)
