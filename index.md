@@ -523,13 +523,13 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: utilities/floor_sum.hpp
-      title: utilities/floor_sum.hpp
+      title: floor sum
     - icon: ':warning:'
       path: utilities/gnu_pbds.hpp
       title: utilities/gnu_pbds.hpp
     - icon: ':warning:'
       path: utilities/int128.hpp
-      title: utilities/int128.hpp
+      title: floor sum
     - icon: ':heavy_check_mark:'
       path: utilities/int_kth_root.hpp
       title: utilities/int_kth_root.hpp
