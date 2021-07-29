@@ -37,9 +37,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
-  - icon: ':warning:'
-    path: tree/tree_isomorphism.hpp
-    title: tree/tree_isomorphism.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: convolution/test/bitwise_and_conv.test.cpp
@@ -179,6 +176,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/rolling_hash_w_modint.test.cpp
     title: string/test/rolling_hash_w_modint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: tree/test/tree_isomorphism.aoj1613.test.cpp
+    title: tree/test/tree_isomorphism.aoj1613.test.cpp
   - icon: ':heavy_check_mark:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
@@ -343,7 +343,6 @@ data:
   path: modint.hpp
   requiredBy:
   - segmenttree/trees/acl_range-affine-range-sum.hpp
-  - tree/tree_isomorphism.hpp
   - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
   - formal_power_series/multipoint_evaluation.hpp
@@ -361,6 +360,7 @@ data:
   - segmenttree/test/point-set-range-composite.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - tree/test/vertex-set-path-composite.test.cpp
+  - tree/test/tree_isomorphism.aoj1613.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp

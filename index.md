@@ -493,15 +493,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/lowest_common_ancestor.hpp
       title: "Lowest common ancestor \uFF08\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: tree/tree_isomorphism.hpp
-      title: tree/tree_isomorphism.hpp
+      title: "Tree isomrphism \uFF08\u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09"
   - name: unionfind
     pages:
     - icon: ':heavy_check_mark:'
       path: unionfind/fully_persistent_uf.hpp
       title: unionfind/fully_persistent_uf.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/grid_unionfind.hpp
       title: unionfind/grid_unionfind.hpp
     - icon: ':warning:'
@@ -1052,6 +1052,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/lca_rmq.test.cpp
       title: tree/test/lca_rmq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/tree_isomorphism.aoj1613.test.cpp
+      title: tree/test/tree_isomorphism.aoj1613.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-path-sum.test.cpp
       title: tree/test/vertex-add-path-sum.test.cpp
