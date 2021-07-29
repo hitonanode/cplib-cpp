@@ -1,10 +1,7 @@
 #pragma once
-#include "modint.hpp"
-// #include "number/modint_runtime.hpp"
 #include <chrono>
 #include <utility>
 #include <vector>
-using namespace std;
 
 // CUT begin
 // Tree isomorphism with hashing （ハッシュによる木の同型判定）
@@ -12,15 +9,12 @@ using namespace std;
 // Reference: https://snuke.hatenablog.com/entry/2017/02/03/054210
 // Verified: https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044698 (ModInt)
 //           https://atcoder.jp/contests/nikkei2019-2-final/submissions/9044745 (ModIntRuntime)
-using mint = ModInt<1000000007>;
-// using mint = ModIntRuntime;
-// int ModIntRuntime::mod = 1000000007;
-using DoubleHash = pair<mint, mint>;
-struct UndirectedTree {
-    using Edges = vector<vector<int>>; // vector<set<int>>;
+template <typename ModInt> struct tree_isomorphism {
+    using DoubleHash = std::pair<ModInt, ModInt>;
+    using Edges = std::vector<std::vector<int>>; // vector<set<int>>;
     int V;
     Edges e;
-    UndirectedTree(int v) : V(v), e(v) {}
+    tree_isomorphism(int v) : V(v), e(v) {}
     void add_edge(int u, int v) {
         e[u].emplace_back(v);
         e[v].emplace_back(u);
@@ -34,7 +28,7 @@ struct UndirectedTree {
         return x ^ (x >> 31);
     }
     DoubleHash get_hash(DoubleHash x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+        static const uint64_t FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();
         return {splitmix64(x.first.val + FIXED_RANDOM), splitmix64(x.second.val + FIXED_RANDOM)};
     }
 
@@ -43,14 +37,15 @@ struct UndirectedTree {
         return {l.first - r.first, l.second - r.second};
     }
 
-    vector<DoubleHash> hash;         // hash of the tree, each node regarded as root
-    vector<DoubleHash> hash_subtree; // hash of the subtree
-    vector<DoubleHash> hash_par;     // hash of the subtree whose root is parent[i], not containing i
-    DoubleHash hash_p;               // \in [1, hmod), should be set randomly
+    std::vector<DoubleHash> hash;         // hash of the tree, each node regarded as root
+    std::vector<DoubleHash> hash_subtree; // hash of the subtree
+    std::vector<DoubleHash> hash_par;     // hash of the subtree whose root is parent[i], not containing i
+    DoubleHash hash_p;                    // \in [1, hmod), should be set randomly
     DoubleHash hash_dfs1_(int now, int prv) {
         hash_subtree[now] = hash_p;
-        for (auto nxt : e[now])
+        for (auto nxt : e[now]) {
             if (nxt != prv) add_hash(hash_subtree[now], hash_dfs1_(nxt, now));
+        }
         return get_hash(hash_subtree[now]);
     }
     void hash_dfs2_(int now, int prv) {
@@ -64,7 +59,7 @@ struct UndirectedTree {
             }
     }
     void build_hash(int root, int p1, int p2) {
-        hash_p = make_pair(p1, p2);
+        hash_p = std::make_pair(p1, p2);
         hash.resize(V), hash_subtree.resize(V), hash_par.resize(V);
         hash_dfs1_(root, -1);
         hash_dfs2_(root, -1);
