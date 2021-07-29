@@ -68,10 +68,10 @@ data:
   timestamp: '2021-03-13 17:28:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - sparse_table/test/sparse_table_aoj.test.cpp
-  - sparse_table/test/sparse_table.test.cpp
   - tree/test/lca_rmq.test.cpp
   - string/test/run_enumerate_lyndon_rmq.test.cpp
+  - sparse_table/test/sparse_table_aoj.test.cpp
+  - sparse_table/test/sparse_table.test.cpp
 documentation_of: sparse_table/rmq_sparse_table.hpp
 layout: document
 redirect_from:

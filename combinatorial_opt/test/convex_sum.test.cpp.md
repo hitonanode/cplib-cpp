@@ -4,8 +4,8 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/convex_sum.hpp
     title: "\u5F15\u6570\u7DCF\u548C\u306B\u95A2\u3059\u308B\u7B49\u5F0F\u5236\u7D04\
-      \u4E0B\u306E\u3082\u3068\u3067\u306E\u4E92\u3044\u306B\u72EC\u7ACB\u306A\u96E2\
-      \u6563\u51F8\u95A2\u6570\u7DCF\u548C\u306E\u6700\u5C0F\u5316"
+      \u4E0B\u306E\u4E92\u3044\u306B\u72EC\u7ACB\u306A\u4E00\u5F15\u6570\u96E2\u6563\
+      \u51F8\u95A2\u6570\u548C\u306E\u6700\u5C0F\u5316"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false

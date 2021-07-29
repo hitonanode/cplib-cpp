@@ -36,8 +36,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
-  - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
 documentation_of: random/xorshift.hpp
 layout: document
 redirect_from:
