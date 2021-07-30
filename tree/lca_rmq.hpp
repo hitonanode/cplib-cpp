@@ -56,4 +56,6 @@ struct TreeLCA {
         if (a > b) std::swap(a, b);
         return rmq.get(a, b + 1).second;
     };
+
+    int path_length(int u, int v) { return depth[u] + depth[v] - depth[lca(u, v)] * 2; }
 };

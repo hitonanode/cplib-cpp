@@ -3,9 +3,7 @@
 #include <vector>
 
 // CUT begin
-// lowest common ancestor (LCA) class for undirected weighted tree
-// 無向重み付きグラフの最小共通祖先
-// https://yukicoder.me/submissions/392383
+// lowest common ancestor (LCA) for undirected weighted tree
 template <typename T> struct UndirectedWeightedTree {
     int INVALID = -1;
     int V, lgV;
