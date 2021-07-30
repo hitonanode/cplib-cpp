@@ -5,9 +5,9 @@
 
 // CUT begin
 // Weighted UnionFind
-template <typename T> struct WeightedUnionFind {
+template <class S> struct WeightedUnionFind {
     std::vector<int> par, sz;
-    std::vector<T> pot;
+    std::vector<S> pot;
     WeightedUnionFind(int N = 0) : par(N), sz(N, 1), pot(N) { std::iota(par.begin(), par.end(), 0); }
     int find(int x) {
         if (par[x] != x) {
@@ -16,7 +16,7 @@ template <typename T> struct WeightedUnionFind {
         }
         return par[x];
     }
-    bool unite(int s, int t, T rel_diff) {
+    bool unite(int s, int t, S rel_diff) {
         // Relate s and t by t = s + rel_diff
         // Return false iff contradiction happens.
         rel_diff = rel_diff + weight(s) + (-weight(t));
@@ -25,24 +25,17 @@ template <typename T> struct WeightedUnionFind {
         par[t] = s, sz[s] += sz[t], pot[t] = rel_diff;
         return true;
     }
-    T weight(int x) {
-        find(x);
-        return pot[x];
-    }
-    T diff(int s, int t) { return weight(t) + (-weight(s)); }
+    S weight(int x) { return find(x), pot[x]; }
+    S diff(int s, int t) { return weight(t) + (-weight(s)); }
     int count(int x) { return sz[find(x)]; }
     bool same(int s, int t) { return find(s) == find(t); }
 };
 
-// sample data structure T for WeightedUnionFind<T>
-/*
-struct Monoid {
-    int data;
-    Monoid() : data(0) {}
-    Monoid(int d) : data(d) {}
-    Monoid operator+(const Monoid &x) const { return Monoid(this->data + x.data); }
-    Monoid operator-() const { return Monoid(-data); }
-    bool operator==(const Monoid &x) const { return data == x.data; }
+template <typename Int> struct F2vec {
+    Int val;
+    F2vec(Int x = 0) : val(x) {}
+    F2vec operator+(const F2vec &y) const { return F2vec(y.val ^ val); }
+    F2vec operator-() const { return *this; }
+    bool operator==(const F2vec &x) const { return val == x.val; }
+    template <class OStream> friend OStream &operator<<(OStream &os, const F2vec &x) { return os << x.val; }
 };
-WeightedUnionFind<Monoid> wuf(10000);
-*/
