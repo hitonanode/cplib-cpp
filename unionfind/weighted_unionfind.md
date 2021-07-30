@@ -7,7 +7,8 @@ documentation_of: ./weighted_unionfind.hpp
 
 ## 使用方法
 
-- ポテンシャルが（ふつうの）整数の場合．
+ポテンシャルが（ふつうの）整数の場合．
+
 ```cpp
 WeightedUnionFind<int> uf(N);
 uf.unite(s, t, diff);  // f[t] = f[s] + diff を要請．これまでの要請と矛盾すれば false を返す．
@@ -15,7 +16,8 @@ uf.unite(s, t, diff);  // f[t] = f[s] + diff を要請．これまでの要請�
 auto x = uf.diff(s, t);  // f[t] - f[s] （として考えられる値の一つ）を出力．
 ```
 
-- ポテンシャルが $\mathbb{F}_2$ 上のベクトルの場合．
+ポテンシャルが $\mathbb{F}_{2}$ 上のベクトルの場合．
+
 ```cpp
 WeightedUnionFind<F2vec<unsigned>> uf(N);
 ```
