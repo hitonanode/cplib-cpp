@@ -1,4 +1,5 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1420"
+#define ERROR 1 // Check only whether the answer is -1 or not
 #include "../weighted_unionfind.hpp"
 #include <iostream>
 using namespace std;
