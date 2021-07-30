@@ -489,7 +489,8 @@ data:
       title: tree/heavy_light_decomposition.hpp
     - icon: ':heavy_check_mark:'
       path: tree/lca_rmq.hpp
-      title: tree/lca_rmq.hpp
+      title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\
+        \u30EA $O(1)$ \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
     - icon: ':heavy_check_mark:'
       path: tree/lowest_common_ancestor.hpp
       title: "Lowest common ancestor \uFF08\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"

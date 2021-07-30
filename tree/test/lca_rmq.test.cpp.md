@@ -6,7 +6,8 @@ data:
     title: sparse_table/rmq_sparse_table.hpp
   - icon: ':heavy_check_mark:'
     path: tree/lca_rmq.hpp
-    title: tree/lca_rmq.hpp
+    title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\
+      \u30EA $O(1)$ \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -51,12 +52,14 @@ data:
     \ P{N, -1}};\n    }\n\n    int lca(int u, int v) {\n        assert(0 <= u and\
     \ u < N);\n        assert(0 <= v and v < N);\n        if (!built) build();\n\n\
     \        auto a = subtree_begin[u], b = subtree_begin[v];\n        if (a > b)\
-    \ std::swap(a, b);\n        return rmq.get(a, b + 1).second;\n    };\n};\n#line\
-    \ 2 \"tree/test/lca_rmq.test.cpp\"\n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\
-    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \n    int N, Q, p, u, v;\n    cin >> N >> Q;\n    TreeLCA tree(N);\n    for (int\
-    \ i = 1; i <= N - 1; i++) cin >> p, tree.add_edge(i, p);\n\n    while (Q--) cout\
-    \ << tree.lca((cin >> u, u), (cin >> v, v)) << '\\n';\n}\n"
+    \ std::swap(a, b);\n        return rmq.get(a, b + 1).second;\n    };\n\n    int\
+    \ path_length(int u, int v) { return depth[u] + depth[v] - depth[lca(u, v)] *\
+    \ 2; }\n};\n#line 2 \"tree/test/lca_rmq.test.cpp\"\n#include <iostream>\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\nusing namespace std;\n\nint\
+    \ main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N, Q,\
+    \ p, u, v;\n    cin >> N >> Q;\n    TreeLCA tree(N);\n    for (int i = 1; i <=\
+    \ N - 1; i++) cin >> p, tree.add_edge(i, p);\n\n    while (Q--) cout << tree.lca((cin\
+    \ >> u, u), (cin >> v, v)) << '\\n';\n}\n"
   code: "#include \"../lca_rmq.hpp\"\n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N, Q, p, u, v;\n    cin >> N >> Q;\n    TreeLCA tree(N);\n    for (int\
@@ -68,7 +71,7 @@ data:
   isVerificationFile: true
   path: tree/test/lca_rmq.test.cpp
   requiredBy: []
-  timestamp: '2021-05-01 20:55:29+09:00'
+  timestamp: '2021-07-30 23:28:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/lca_rmq.test.cpp

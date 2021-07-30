@@ -15,11 +15,9 @@ data:
     links:
     - https://judge.yosupo.jp/problem/lca
   bundledCode: "#line 2 \"tree/lowest_common_ancestor.hpp\"\n#include <utility>\n\
-    #include <vector>\n\n// CUT begin\n// lowest common ancestor (LCA) class for undirected\
-    \ weighted tree\n// \u7121\u5411\u91CD\u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u306E\
-    \u6700\u5C0F\u5171\u901A\u7956\u5148\n// https://yukicoder.me/submissions/392383\n\
-    template <typename T> struct UndirectedWeightedTree {\n    int INVALID = -1;\n\
-    \    int V, lgV;\n    int E;\n    int root;\n    std::vector<std::vector<std::pair<int,\
+    #include <vector>\n\n// CUT begin\n// lowest common ancestor (LCA) for undirected\
+    \ weighted tree\ntemplate <typename T> struct UndirectedWeightedTree {\n    int\
+    \ INVALID = -1;\n    int V, lgV;\n    int E;\n    int root;\n    std::vector<std::vector<std::pair<int,\
     \ int>>> adj; // (nxt_vertex, edge_id)\n    // vector<pint> edge; // edges[edge_id]\
     \ = (vertex_id, vertex_id)\n    std::vector<T> weight;     // w[edge_id]\n   \
     \ std::vector<int> par;      // parent_vertex_id[vertex_id]\n    std::vector<int>\
@@ -74,7 +72,7 @@ data:
   isVerificationFile: true
   path: tree/test/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-07-17 20:15:48+09:00'
+  timestamp: '2021-07-30 23:28:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/lca.test.cpp

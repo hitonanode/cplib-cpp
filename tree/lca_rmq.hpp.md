@@ -48,7 +48,9 @@ data:
     \ P{N, -1}};\n    }\n\n    int lca(int u, int v) {\n        assert(0 <= u and\
     \ u < N);\n        assert(0 <= v and v < N);\n        if (!built) build();\n\n\
     \        auto a = subtree_begin[u], b = subtree_begin[v];\n        if (a > b)\
-    \ std::swap(a, b);\n        return rmq.get(a, b + 1).second;\n    };\n};\n"
+    \ std::swap(a, b);\n        return rmq.get(a, b + 1).second;\n    };\n\n    int\
+    \ path_length(int u, int v) { return depth[u] + depth[v] - depth[lca(u, v)] *\
+    \ 2; }\n};\n"
   code: "#pragma once\n#include \"../sparse_table/rmq_sparse_table.hpp\"\n#include\
     \ <algorithm>\n#include <cassert>\n#include <utility>\n#include <vector>\n\n//\
     \ CUT begin\nstruct TreeLCA {\n    const int N;\n    std::vector<std::vector<int>>\
@@ -68,20 +70,40 @@ data:
     \ P{N, -1}};\n    }\n\n    int lca(int u, int v) {\n        assert(0 <= u and\
     \ u < N);\n        assert(0 <= v and v < N);\n        if (!built) build();\n\n\
     \        auto a = subtree_begin[u], b = subtree_begin[v];\n        if (a > b)\
-    \ std::swap(a, b);\n        return rmq.get(a, b + 1).second;\n    };\n};\n"
+    \ std::swap(a, b);\n        return rmq.get(a, b + 1).second;\n    };\n\n    int\
+    \ path_length(int u, int v) { return depth[u] + depth[v] - depth[lca(u, v)] *\
+    \ 2; }\n};\n"
   dependsOn:
   - sparse_table/rmq_sparse_table.hpp
   isVerificationFile: false
   path: tree/lca_rmq.hpp
   requiredBy: []
-  timestamp: '2021-05-01 20:55:29+09:00'
+  timestamp: '2021-07-30 23:28:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/lca_rmq.test.cpp
 documentation_of: tree/lca_rmq.hpp
 layout: document
-redirect_from:
-- /library/tree/lca_rmq.hpp
-- /library/tree/lca_rmq.hpp.html
-title: tree/lca_rmq.hpp
+title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\u30EA\
+  \ $O(1)$ \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
 ---
+
+根を固定した木に対する 2 頂点の最小共通祖先，および 2 頂点間の距離の計算．前処理 $O(N \log N)$, 空間 $O(N \log N)$, クエリ $O(1)$．
+
+## 使用方法
+
+```cpp
+TreeLCA tree(N);
+for (int e = 0; e < N - 1; e++) {
+    int u, v;
+    cin >> u >> v;
+    tree.add_edge(u, v);
+}
+
+cout << tree.lca(a, b) << '\n'; // (a, b) の最長共通祖先
+cout << tree.path_length(a, b) << '\n'; // 2 頂点 a, b の距離
+```
+
+## 問題例
+
+- [Library Checker: Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)

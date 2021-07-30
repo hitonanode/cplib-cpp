@@ -7,7 +7,8 @@ data:
     title: string/longest_common_prefix.hpp
   - icon: ':heavy_check_mark:'
     path: tree/lca_rmq.hpp
-    title: tree/lca_rmq.hpp
+    title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\
+      \u30EA $O(1)$ \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table.test.cpp
