@@ -3,7 +3,7 @@ title: Lowest common ancestor （最小共通祖先）
 documentation_of: ./lowest_common_ancestor.hpp
 ---
 
-根を固定した木に対する 2 頂点の最小共通祖先，および 2 頂点間の距離の計算．前処理 $O(N \log N)$, クエリ $O(\log N)$．
+根を固定した木に対する 2 頂点の最小共通祖先，および 2 頂点間の距離，$k$ 番目の親の計算．前処理 $O(N \log N)$, クエリ $O(\log N)$．
 
 ## 使用方法
 
