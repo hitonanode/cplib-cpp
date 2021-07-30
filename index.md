@@ -510,7 +510,7 @@ data:
       title: unionfind/partially_persistent_uf.hpp
     - icon: ':warning:'
       path: unionfind/undo_unionfind.hpp
-      title: unionfind/undo_unionfind.hpp
+      title: "UnionFind with Undo operation \uFF08Undo \u53EF\u80FD UnionFind\uFF09"
     - icon: ':heavy_check_mark:'
       path: unionfind/unionfind.hpp
       title: unionfind/unionfind.hpp
@@ -519,7 +519,7 @@ data:
       title: unionfind/unionfind_rankbased.hpp
     - icon: ':heavy_check_mark:'
       path: unionfind/weighted_unionfind.hpp
-      title: unionfind/weighted_unionfind.hpp
+      title: "Weighted UnionFind \uFF08\u91CD\u307F\u4ED8\u304D UnionFind\uFF09"
   - name: utilities
     pages:
     - icon: ':heavy_check_mark:'
@@ -1079,6 +1079,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: unionfind/test/weighted_unionfind.test.cpp
       title: unionfind/test/weighted_unionfind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
+      title: unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: unionfind/test/weighted_unionfind_int.aoj3142.test.cpp
+      title: unionfind/test/weighted_unionfind_int.aoj3142.test.cpp
   - name: utilities/test
     pages:
     - icon: ':heavy_check_mark:'
