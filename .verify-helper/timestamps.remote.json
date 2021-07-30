@@ -161,6 +161,7 @@
 "unionfind/test/unionfind.test.cpp": "2021-01-01 16:52:32 +0900",
 "unionfind/test/unionfind_rankbased.test.cpp": "2021-01-01 16:52:32 +0900",
 "unionfind/test/weighted_unionfind.test.cpp": "2021-07-31 00:20:47 +0900",
+"unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp": "2021-07-31 00:25:49 +0900",
 "unionfind/test/weighted_unionfind_int.aoj3142.test.cpp": "2021-07-31 00:20:47 +0900",
 "utilities/test/floor_sum.test.cpp": "2021-07-25 00:32:12 +0900",
 "utilities/test/integer_segments.test.cpp": "2021-04-25 18:25:53 +0900",
