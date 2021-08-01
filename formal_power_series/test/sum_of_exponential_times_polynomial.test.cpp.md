@@ -119,8 +119,8 @@ data:
     \ break;\n                min_factor[d * p] = p;\n            }\n        }\n \
     \   }\n    // Prime factorization for 1 <= x <= MAXN^2\n    // Complexity: O(log\
     \ x)           (x <= MAXN)\n    //             O(MAXN / log MAXN) (MAXN < x <=\
-    \ MAXN^2)\n    template <typename T> std::map<T, int> factorize(T x) {\n     \
-    \   std::map<T, int> ret;\n        assert(x > 0 and x <= ((long long)min_factor.size()\
+    \ MAXN^2)\n    template <typename T> std::map<T, int> factorize(T x) const {\n\
+    \        std::map<T, int> ret;\n        assert(x > 0 and x <= ((long long)min_factor.size()\
     \ - 1) * ((long long)min_factor.size() - 1));\n        for (const auto &p : primes)\
     \ {\n            if (x < T(min_factor.size())) break;\n            while (!(x\
     \ % p)) x /= p, ret[p]++;\n        }\n        if (x >= T(min_factor.size())) ret[x]++,\
@@ -128,31 +128,42 @@ data:
     \      return ret;\n    }\n    // Enumerate divisors of 1 <= x <= MAXN^2\n   \
     \ // Be careful of highly composite numbers https://oeis.org/A002182/list https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt\n\
     \    // (n, (# of div. of n)): 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720\n\
-    \    template <typename T> std::vector<T> divisors(T x) {\n        std::vector<T>\
+    \    template <typename T> std::vector<T> divisors(T x) const {\n        std::vector<T>\
     \ ret{1};\n        for (const auto p : factorize(x)) {\n            int n = ret.size();\n\
     \            for (int i = 0; i < n; i++) {\n                for (T a = 1, d =\
     \ 1; d <= p.second; d++) {\n                    a *= p.first;\n              \
     \      ret.push_back(ret[i] * a);\n                }\n            }\n        }\n\
-    \        return ret; // NOT sorted\n    }\n    // Moebius function Table, (-1)^{#\
-    \ of different prime factors} for square-free x\n    // return: [0=>0, 1=>1, 2=>-1,\
-    \ 3=>-1, 4=>0, 5=>-1, 6=>1, 7=>-1, 8=>0, ...] https://oeis.org/A008683\n    std::vector<int>\
-    \ GenerateMoebiusFunctionTable() {\n        std::vector<int> ret(min_factor.size());\n\
+    \        return ret; // NOT sorted\n    }\n    // Euler phi functions of divisors\
+    \ of given x\n    // Verified: ABC212 G https://atcoder.jp/contests/abc212/tasks/abc212_g\n\
+    \    // Complexity: O(sqrt(x) + d(x))\n    template <typename T> std::map<T, T>\
+    \ euler_of_divisors(T x) const {\n        assert(x >= 1);\n        std::map<T,\
+    \ T> ret;\n        ret[1] = 1;\n        std::vector<T> divs{1};\n        for (auto\
+    \ p : factorize(x)) {\n            int n = ret.size();\n            for (int i\
+    \ = 0; i < n; i++) {\n                ret[divs[i] * p.first] = ret[divs[i]] *\
+    \ (p.first - 1);\n                divs.push_back(divs[i] * p.first);\n       \
+    \         for (T a = divs[i] * p.first, d = 1; d < p.second; a *= p.first, d++)\
+    \ {\n                    ret[a * p.first] = ret[a] * p.first;\n              \
+    \      divs.push_back(a * p.first);\n                }\n            }\n      \
+    \  }\n        return ret;\n    }\n    // Moebius function Table, (-1)^{# of different\
+    \ prime factors} for square-free x\n    // return: [0=>0, 1=>1, 2=>-1, 3=>-1,\
+    \ 4=>0, 5=>-1, 6=>1, 7=>-1, 8=>0, ...] https://oeis.org/A008683\n    std::vector<int>\
+    \ GenerateMoebiusFunctionTable() const {\n        std::vector<int> ret(min_factor.size());\n\
     \        for (unsigned i = 1; i < min_factor.size(); i++) {\n            if (i\
-    \ == 1)\n                ret[i] = 1;\n            else if ((i / min_factor[i])\
-    \ % min_factor[i] == 0)\n                ret[i] = 0;\n            else\n     \
-    \           ret[i] = -ret[i / min_factor[i]];\n        }\n        return ret;\n\
-    \    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n    // Note: **0^0\
-    \ == 1**\n    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long\
-    \ long K, int nmax) {\n        assert(nmax < int(min_factor.size()));\n      \
-    \  assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax + 1, 1);\n\
-    \        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1] = 1;\n\
-    \        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n] == n)\
-    \ {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n      \
-    \          ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n           \
-    \ }\n        }\n        return ret;\n    }\n};\n// Sieve sieve(1 << 15);  // (can\
-    \ factorize n <= 10^9)\n#line 3 \"formal_power_series/lagrange_interpolation.hpp\"\
-    \n\n// CUT begin\n// Lagrange interpolation\n// Input: [f(0), ..., f(N-1)] (length\
-    \ = N), deg(f) < N\n// Output: f(x_eval)\n// Complexity: O(N)\n// Verified: https://atcoder.jp/contests/arc033/tasks/arc033_4\n\
+    \ == 1) {\n                ret[i] = 1;\n            } else if ((i / min_factor[i])\
+    \ % min_factor[i] == 0) {\n                ret[i] = 0;\n            } else {\n\
+    \                ret[i] = -ret[i / min_factor[i]];\n            }\n        }\n\
+    \        return ret;\n    }\n    // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)\n\
+    \    // Note: **0^0 == 1**\n    template <typename MODINT> std::vector<MODINT>\
+    \ enumerate_kth_pows(long long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
+    \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
+    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
+    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
+    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
+    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
+    #line 3 \"formal_power_series/lagrange_interpolation.hpp\"\n\n// CUT begin\n//\
+    \ Lagrange interpolation\n// Input: [f(0), ..., f(N-1)] (length = N), deg(f) <\
+    \ N\n// Output: f(x_eval)\n// Complexity: O(N)\n// Verified: https://atcoder.jp/contests/arc033/tasks/arc033_4\n\
     template <typename MODINT> MODINT interpolate_iota(const std::vector<MODINT> ys,\
     \ MODINT x_eval) {\n    const int N = ys.size();\n    if (x_eval.val < N) return\
     \ ys[x_eval.val];\n    std::vector<MODINT> facinv(N);\n    facinv[N - 1] = MODINT(N\
@@ -214,7 +225,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 14:54:00+09:00'
+  timestamp: '2021-08-01 19:15:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp

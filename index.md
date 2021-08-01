@@ -888,6 +888,9 @@ data:
       path: number/test/enumerate_primes.test.cpp
       title: number/test/enumerate_primes.test.cpp
     - icon: ':heavy_check_mark:'
+      path: number/test/factorize_aoj.test.cpp
+      title: number/test/factorize_aoj.test.cpp
+    - icon: ':heavy_check_mark:'
       path: number/test/factorize_longlong.test.cpp
       title: number/test/factorize_longlong.test.cpp
     - icon: ':heavy_check_mark:'
@@ -905,6 +908,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/sieve.stress.test.cpp
+      title: number/test/sieve.stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp

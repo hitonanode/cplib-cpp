@@ -28,6 +28,9 @@ data:
     path: number/test/montmort_number_mod.test.cpp
     title: number/test/montmort_number_mod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/sieve.stress.test.cpp
+    title: number/test/sieve.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/sqrt_modint_runtime.test.cpp
     title: number/test/sqrt_modint_runtime.test.cpp
   _isVerificationFailed: false
@@ -189,6 +192,7 @@ data:
   - convolution/test/ntt.test.cpp
   - graph/test/chromatic_number.test.cpp
   - number/test/montmort_number_mod.test.cpp
+  - number/test/sieve.stress.test.cpp
   - number/test/sqrt_modint_runtime.test.cpp
 documentation_of: number/modint_runtime.hpp
 layout: document
