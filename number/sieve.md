@@ -19,6 +19,9 @@ map<lint, int> mp = sieve.factorize(x);
 // 約数列挙（昇順とは限らない）
 vector<lint> divs = sieve.divisors(x);
 
+// 約数の Euler phi function 列挙
+map<lint, lint> phi = sieve.euler_of_divisors(x);
+
 // i = 0, 1, ..., n について i^k を格納した配列を生成． O(n)
 vector vs = enumerate_kth_pows<ModInt<998244353>>(3, 10); // v = [0,1,8,27,64,125,216,343,512,729,1000,]
 ```
