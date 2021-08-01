@@ -31,7 +31,7 @@ struct Sieve {
     // Prime factorization for 1 <= x <= MAXN^2
     // Complexity: O(log x)           (x <= MAXN)
     //             O(MAXN / log MAXN) (MAXN < x <= MAXN^2)
-    template <typename T> std::map<T, int> factorize(T x) {
+    template <typename T> std::map<T, int> factorize(T x) const {
         std::map<T, int> ret;
         assert(x > 0 and x <= ((long long)min_factor.size() - 1) * ((long long)min_factor.size() - 1));
         for (const auto &p : primes) {
@@ -45,7 +45,7 @@ struct Sieve {
     // Enumerate divisors of 1 <= x <= MAXN^2
     // Be careful of highly composite numbers https://oeis.org/A002182/list https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt
     // (n, (# of div. of n)): 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720
-    template <typename T> std::vector<T> divisors(T x) {
+    template <typename T> std::vector<T> divisors(T x) const {
         std::vector<T> ret{1};
         for (const auto p : factorize(x)) {
             int n = ret.size();
@@ -58,23 +58,45 @@ struct Sieve {
         }
         return ret; // NOT sorted
     }
+    // Euler phi functions of divisors of given x
+    // Verified: ABC212 G https://atcoder.jp/contests/abc212/tasks/abc212_g
+    // Complexity: O(sqrt(x) + d(x))
+    template <typename T> std::map<T, T> euler_of_divisors(T x) const {
+        assert(x >= 1);
+        std::map<T, T> ret;
+        ret[1] = 1;
+        std::vector<T> divs{1};
+        for (auto p : factorize(x)) {
+            int n = ret.size();
+            for (int i = 0; i < n; i++) {
+                ret[divs[i] * p.first] = ret[divs[i]] * (p.first - 1);
+                divs.push_back(divs[i] * p.first);
+                for (T a = divs[i] * p.first, d = 1; d < p.second; a *= p.first, d++) {
+                    ret[a * p.first] = ret[a] * p.first;
+                    divs.push_back(a * p.first);
+                }
+            }
+        }
+        return ret;
+    }
     // Moebius function Table, (-1)^{# of different prime factors} for square-free x
     // return: [0=>0, 1=>1, 2=>-1, 3=>-1, 4=>0, 5=>-1, 6=>1, 7=>-1, 8=>0, ...] https://oeis.org/A008683
-    std::vector<int> GenerateMoebiusFunctionTable() {
+    std::vector<int> GenerateMoebiusFunctionTable() const {
         std::vector<int> ret(min_factor.size());
         for (unsigned i = 1; i < min_factor.size(); i++) {
-            if (i == 1)
+            if (i == 1) {
                 ret[i] = 1;
-            else if ((i / min_factor[i]) % min_factor[i] == 0)
+            } else if ((i / min_factor[i]) % min_factor[i] == 0) {
                 ret[i] = 0;
-            else
+            } else {
                 ret[i] = -ret[i / min_factor[i]];
+            }
         }
         return ret;
     }
     // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)
     // Note: **0^0 == 1**
-    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) {
+    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) const {
         assert(nmax < int(min_factor.size()));
         assert(K >= 0);
         if (K == 0) return std::vector<MODINT>(nmax + 1, 1);
@@ -90,4 +112,4 @@ struct Sieve {
         return ret;
     }
 };
-// Sieve sieve(1 << 15);  // (can factorize n <= 10^9)
+Sieve sieve(1 << 20);
