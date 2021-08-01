@@ -10,6 +10,9 @@ data:
     path: string/test/run_enumerate_lyndon_rmq.test.cpp
     title: string/test/run_enumerate_lyndon_rmq.test.cpp
   - icon: ':heavy_check_mark:'
+    path: string/test/sa_count_keyword.reader.test.cpp
+    title: string/test/sa_count_keyword.reader.test.cpp
+  - icon: ':heavy_check_mark:'
     path: string/test/sa_count_keyword.test.cpp
     title: string/test/sa_count_keyword.test.cpp
   _isVerificationFailed: false
@@ -222,6 +225,7 @@ data:
   verifiedWith:
   - string/test/sa_count_keyword.test.cpp
   - string/test/run_enumerate_lyndon_rmq.test.cpp
+  - string/test/sa_count_keyword.reader.test.cpp
 documentation_of: string/suffix_array.hpp
 layout: document
 redirect_from:

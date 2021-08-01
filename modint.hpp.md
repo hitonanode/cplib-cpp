@@ -165,6 +165,9 @@ data:
     path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_product.test.cpp
+    title: linear_algebra_matrix/test/matrix_product.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
@@ -367,6 +370,7 @@ data:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - tree/test/vertex-set-path-composite.test.cpp
   - tree/test/tree_isomorphism.aoj1613.test.cpp
+  - linear_algebra_matrix/test/matrix_product.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp

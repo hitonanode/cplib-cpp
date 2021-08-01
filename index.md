@@ -558,6 +558,9 @@ data:
     - icon: ':warning:'
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/reader.hpp
+      title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
     - icon: ':warning:'
       path: utilities/rotate90.hpp
       title: utilities/rotate90.hpp
@@ -877,6 +880,9 @@ data:
       path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/matrix_product.test.cpp
+      title: linear_algebra_matrix/test/matrix_product.test.cpp
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
@@ -1042,6 +1048,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/run_enumerate_lyndon_rmq.test.cpp
       title: string/test/run_enumerate_lyndon_rmq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/sa_count_keyword.reader.test.cpp
+      title: string/test/sa_count_keyword.reader.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/sa_count_keyword.test.cpp
       title: string/test/sa_count_keyword.test.cpp

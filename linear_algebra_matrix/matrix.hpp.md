@@ -41,6 +41,9 @@ data:
     path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_product.test.cpp
+    title: linear_algebra_matrix/test/matrix_product.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   _isVerificationFailed: false
@@ -285,6 +288,7 @@ data:
   timestamp: '2021-06-13 19:08:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - linear_algebra_matrix/test/matrix_product.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
