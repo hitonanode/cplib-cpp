@@ -112,4 +112,4 @@ struct Sieve {
         return ret;
     }
 };
-Sieve sieve(1 << 20);
+// Sieve sieve((1 << 20));
