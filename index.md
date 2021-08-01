@@ -83,6 +83,9 @@ data:
       path: data_structure/fibonacci_heap.hpp
       title: data_structure/fibonacci_heap.hpp
     - icon: ':heavy_check_mark:'
+      path: data_structure/lazy_rbst.hpp
+      title: Randomized binary search tree with lazy propagation
+    - icon: ':heavy_check_mark:'
       path: data_structure/light_forward_list.hpp
       title: data_structure/light_forward_list.hpp
     - icon: ':heavy_check_mark:'
@@ -643,6 +646,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/fibonacci_heap_spanningtree.test.cpp
       title: data_structure/test/fibonacci_heap_spanningtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/lazy_rbst.test.cpp
+      title: data_structure/test/lazy_rbst.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.aoj2450.test.cpp
       title: data_structure/test/link_cut_tree.aoj2450.test.cpp

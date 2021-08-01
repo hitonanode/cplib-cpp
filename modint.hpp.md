@@ -57,6 +57,9 @@ data:
     path: convolution/test/subset_convolution.test.cpp
     title: convolution/test/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/lazy_rbst.test.cpp
+    title: data_structure/test/lazy_rbst.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.composition.test.cpp
     title: data_structure/test/link_cut_tree.composition.test.cpp
   - icon: ':heavy_check_mark:'
@@ -401,6 +404,7 @@ data:
   - convolution/test/bitwise_and_conv.test.cpp
   - graph/test/general_matching.test.cpp
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - data_structure/test/lazy_rbst.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/link_cut_tree.composition.test.cpp
