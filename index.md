@@ -549,6 +549,12 @@ data:
     - icon: ':warning:'
       path: utilities/next_combination.hpp
       title: utilities/next_combination.hpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/pow.hpp
+      title: "Power \uFF08\u7D2F\u4E57\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: utilities/pow_sum.hpp
+      title: "power sum \uFF08\u7D2F\u4E57\u548C\uFF09"
     - icon: ':warning:'
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
@@ -1108,6 +1114,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/kth_root_integer.test.cpp
       title: utilities/test/kth_root_integer.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/pow.test.cpp
+      title: utilities/test/pow.test.cpp
     - icon: ':heavy_check_mark:'
       path: utilities/test/predecessor_problem.test.cpp
       title: utilities/test/predecessor_problem.test.cpp

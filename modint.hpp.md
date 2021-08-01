@@ -185,6 +185,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: utilities/test/pow.test.cpp
+    title: utilities/test/pow.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -396,6 +399,7 @@ data:
   - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/coeff_of_rational_function.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
+  - utilities/test/pow.test.cpp
   - convolution/test/multivar_ntt.test.cpp
   - convolution/test/ntt_arbitrary_mod.test.cpp
   - convolution/test/subset_convolution.test.cpp
