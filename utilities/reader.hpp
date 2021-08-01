@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdio>
+#include <string>
 
 // CUT begin
 template <typename T> T rd_integer() {
@@ -14,3 +15,10 @@ template <typename T> T rd_integer() {
 }
 int rdi() { return rd_integer<int>(); }
 long long rdll() { return rd_integer<long long>(); }
+std::string rdstr() {
+    std::string ret;
+    char c = getchar_unlocked();
+    while (!isgraph(c)) c = getchar_unlocked();
+    while (isgraph(c)) ret += c, c = getchar_unlocked();
+    return ret;
+}
