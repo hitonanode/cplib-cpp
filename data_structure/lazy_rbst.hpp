@@ -6,7 +6,7 @@
 #include <vector>
 
 // Lazy randomized binary search tree
-template <int LEN, class S, S (*op)(S, S), class F, S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
+template <int LEN, class S, S (*op)(S, S), class F, S (*reversal)(S), S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
 struct lazy_rbst {
     // Do your RuBeSTy! ⌒°( ・ω・)°⌒
     inline uint32_t _rand() { // XorShift
@@ -20,12 +20,19 @@ struct lazy_rbst {
 
     struct Node {
         Node *l, *r;
-        int sz;
-        S val;
-        S sum;
+        S val, sum;
         F lz;
-        Node(const S &v) : l(nullptr), r(nullptr), sz(1), val(v), sum(v), lz(id()) {}
-        Node() : l(nullptr), r(nullptr), sz(0) {}
+        bool is_reversed;
+        int sz;
+        Node(const S &v) : l(nullptr), r(nullptr), val(v), sum(v), lz(id()), is_reversed(false), sz(1) {}
+        Node() : l(nullptr), r(nullptr), lz(id()), is_reversed(false), sz(0) {}
+        template <class OStream> friend OStream &operator<<(OStream &os, const Node &n) {
+            os << '[';
+            if (n.l) os << *(n.l) << ',';
+            os << n.val << ',';
+            if (n.r) os << *(n.r);
+            return os << ']';
+        }
     };
     using Nptr = Node *;
     std::array<Node, LEN> data;
@@ -39,11 +46,11 @@ protected:
     Nptr update(Nptr t) {
         t->sz = 1;
         t->sum = t->val;
-        if (t->l != nullptr) {
+        if (t->l) {
             t->sz += t->l->sz;
             t->sum = op(t->l->sum, t->sum);
         }
-        if (t->r != nullptr) {
+        if (t->r) {
             t->sz += t->r->sz;
             t->sum = op(t->sum, t->r->sum);
         }
@@ -55,21 +62,33 @@ protected:
         t->sum = mapping(f, t->sum);
         t->lz = composition(f, t->lz);
     }
+    void _toggle(Nptr t) {
+        auto tmp = t->l;
+        t->l = t->r, t->r = tmp;
+        t->sum = reversal(t->sum);
+        t->is_reversed ^= true;
+    }
 
     void push(Nptr &t) {
         _duplicate_node(t);
         if (t->lz != id()) {
-            if (t->l != nullptr) {
+            if (t->l) {
                 _duplicate_node(t->l);
                 all_apply(t->l, t->lz);
             }
-            if (t->r != nullptr) {
+            if (t->r) {
                 _duplicate_node(t->r);
                 all_apply(t->r, t->lz);
             }
             t->lz = id();
         }
+        if (t->is_reversed) {
+            if (t->l) _toggle(t->l);
+            if (t->r) _toggle(t->r);
+            t->is_reversed = false;
+        }
     }
+
     virtual void _duplicate_node(Nptr &) {}
 
     Nptr _make_node(const S &val) {
@@ -155,6 +174,14 @@ public:
 
     S get(Nptr &root, int pos) { return prod(root, pos, pos + 1); }
 
+    void reverse(Nptr &root) { _duplicate_node(root), _toggle(root); }
+    void reverse(Nptr &root, int l, int r) {
+        auto p2 = split(root, r);
+        auto p1 = split(p2.first, l);
+        reverse(p1.second);
+        root = merge(merge(p1.first, p1.second), p2.second);
+    }
+
     // データを壊して新規にinitの内容を詰める
     void assign(Nptr &root, const std::vector<S> &init) {
         d_ptr = 0;
@@ -189,9 +216,9 @@ public:
 // Persistent lazy randomized binary search tree
 // Verified: https://atcoder.jp/contests/arc030/tasks/arc030_4
 // CAUTION: https://yosupo.hatenablog.com/entry/2015/10/29/222536
-template <int LEN, class S, S (*op)(S, S), class F, S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
-struct persistent_lazy_rbst : lazy_rbst<LEN, S, op, F, mapping, composition, id> {
-    using RBST = lazy_rbst<LEN, S, op, F, mapping, composition, id>;
+template <int LEN, class S, S (*op)(S, S), class F, S (*reversal)(S), S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
+struct persistent_lazy_rbst : lazy_rbst<LEN, S, op, F, reversal, mapping, composition, id> {
+    using RBST = lazy_rbst<LEN, S, op, F, reversal, mapping, composition, id>;
     using Node = typename RBST::Node;
     using Nptr = typename RBST::Nptr;
     persistent_lazy_rbst() : RBST() {}
