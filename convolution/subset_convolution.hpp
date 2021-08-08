@@ -69,3 +69,49 @@ template <typename T> std::vector<T> subset_convolution(std::vector<T> f, std::v
     for (int i = 0; i < sz; i++) ret[i] = fh[__builtin_popcount(i)][i];
     return ret;
 }
+
+template <class T, class Function> void subset_func(std::vector<T> &f, const Function &func) {
+    const int sz = f.size(), m = __builtin_ctz(sz) + 1;
+    assert(__builtin_popcount(sz) == 1);
+    std::vector<std::vector<T>> ff(m, std::vector<T>(sz));
+    for (int i = 0; i < sz; i++) ff[__builtin_popcount(i)][i] += f[i];
+    for (auto &vec : ff) subset_sum(vec);
+
+    std::vector<T> p(m);
+    for (int i = 0; i < sz; i++) {
+        for (int d = 0; d < m; d++) p[d] = ff[d][i];
+        p = func(p);
+        for (int d = 0; d < m; d++) ff[d][i] = p[d];
+    }
+
+    for (auto &vec : ff) subset_sum_inv(vec);
+    for (int i = 0; i < sz; i++) f[i] = ff[__builtin_popcount(i)][i];
+}
+
+template <class T> struct poly_log {
+    int maxlen;
+    std::vector<T> invs;
+    poly_log(int maxlen) : maxlen(maxlen), invs(maxlen) {
+        for (int d = 1; d < maxlen; d++) invs[d] = T(d).inv();
+    }
+    std::vector<T> operator()(const std::vector<T> &f) const {
+        assert(f.at(0) == T(1));
+        const int m = f.size();
+        std::vector<T> finv(m);
+        for (int d = 0; d < m; d++) {
+            finv[d] = (d == 0);
+            for (int e = 0; e < d; e++) finv[d] -= finv[e] * f[d - e];
+        }
+        std::vector<T> ret(m);
+        for (int d = 1; d < m; d++) {
+            for (int e = 0; d + e < m; e++) ret[d + e] += f[d] * d * finv[e] * invs[d + e];
+        }
+        return ret;
+    }
+};
+
+// log(f(S)) for set function f(S), f(0) == 1
+// https://atcoder.jp/contests/abc213/tasks/abc213_g
+template <class T> void subset_log(std::vector<T> &f) {
+    subset_func(f, poly_log<T>(__builtin_ctz(f.size()) + 1));
+}
