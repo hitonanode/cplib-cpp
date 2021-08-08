@@ -113,5 +113,5 @@ template <class T> struct poly_log {
 // log(f(S)) for set function f(S), f(0) == 1
 // https://atcoder.jp/contests/abc213/tasks/abc213_g
 template <class T> void subset_log(std::vector<T> &f) {
-    subset_func(f, poly_log<mint>(__builtin_ctz(f.size()) + 1));
+    subset_func(f, poly_log<T>(__builtin_ctz(f.size()) + 1));
 }
