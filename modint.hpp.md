@@ -54,9 +54,6 @@ data:
     path: convolution/test/ntt_arbitrary_mod.test.cpp
     title: convolution/test/ntt_arbitrary_mod.test.cpp
   - icon: ':heavy_check_mark:'
-    path: convolution/test/subset_convolution.test.cpp
-    title: convolution/test/subset_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
     path: data_structure/test/lazy_rbst.test.cpp
     title: data_structure/test/lazy_rbst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -179,6 +176,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/range-affine-range-sum.test.cpp
     title: segmenttree/test/range-affine-range-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: set_power_series/test/subset_conv.test.cpp
+    title: set_power_series/test/subset_conv.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: set_power_series/test/subset_exp.stress.test.cpp
+    title: set_power_series/test/subset_exp.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: set_power_series/test/subset_log.test.cpp
+    title: set_power_series/test/subset_log.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: set_power_series/test/subset_pow.stress.test.cpp
+    title: set_power_series/test/subset_pow.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: set_power_series/test/subset_pow.yuki1594.test.cpp
+    title: set_power_series/test/subset_pow.yuki1594.test.cpp
   - icon: ':heavy_check_mark:'
     path: string/test/rolling_hash_w_modint.test.cpp
     title: string/test/rolling_hash_w_modint.test.cpp
@@ -406,7 +418,6 @@ data:
   - utilities/test/pow.test.cpp
   - convolution/test/multivar_ntt.test.cpp
   - convolution/test/ntt_arbitrary_mod.test.cpp
-  - convolution/test/subset_convolution.test.cpp
   - convolution/test/ntt.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
@@ -416,6 +427,11 @@ data:
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/link_cut_tree.composition.test.cpp
+  - set_power_series/test/subset_log.test.cpp
+  - set_power_series/test/subset_conv.test.cpp
+  - set_power_series/test/subset_pow.yuki1594.test.cpp
+  - set_power_series/test/subset_pow.stress.test.cpp
+  - set_power_series/test/subset_exp.stress.test.cpp
 documentation_of: modint.hpp
 layout: document
 redirect_from:

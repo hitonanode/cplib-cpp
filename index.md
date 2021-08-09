@@ -71,9 +71,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
-    - icon: ':heavy_check_mark:'
-      path: convolution/subset_convolution.hpp
-      title: convolution/subset_convolution.hpp
   - name: data_structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -415,6 +412,12 @@ data:
     - icon: ':warning:'
       path: segmenttree/trees/acl_range-update-range-sum-min.hpp
       title: segmenttree/trees/acl_range-update-range-sum-min.hpp
+  - name: set_power_series
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: set_power_series/subset_convolution.hpp
+      title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
+        \u7B97\uFF09"
   - name: sparse_table
     pages:
     - icon: ':heavy_check_mark:'
@@ -635,9 +638,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/ntt_arbitrary_mod.test.cpp
       title: convolution/test/ntt_arbitrary_mod.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: convolution/test/subset_convolution.test.cpp
-      title: convolution/test/subset_convolution.test.cpp
   - name: data_structure/test
     pages:
     - icon: ':heavy_check_mark:'
@@ -990,6 +990,23 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/segment_tree_2d_pointadd.test.cpp
       title: segmenttree/test/segment_tree_2d_pointadd.test.cpp
+  - name: set_power_series/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: set_power_series/test/subset_conv.test.cpp
+      title: set_power_series/test/subset_conv.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: set_power_series/test/subset_exp.stress.test.cpp
+      title: set_power_series/test/subset_exp.stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: set_power_series/test/subset_log.test.cpp
+      title: set_power_series/test/subset_log.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: set_power_series/test/subset_pow.stress.test.cpp
+      title: set_power_series/test/subset_pow.stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: set_power_series/test/subset_pow.yuki1594.test.cpp
+      title: set_power_series/test/subset_pow.yuki1594.test.cpp
   - name: sparse_table/test
     pages:
     - icon: ':heavy_check_mark:'

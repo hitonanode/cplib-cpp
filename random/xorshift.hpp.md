@@ -12,6 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
     title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: set_power_series/test/subset_exp.stress.test.cpp
+    title: set_power_series/test/subset_exp.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: set_power_series/test/subset_pow.stress.test.cpp
+    title: set_power_series/test/subset_pow.stress.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -38,6 +44,8 @@ data:
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
+  - set_power_series/test/subset_pow.stress.test.cpp
+  - set_power_series/test/subset_exp.stress.test.cpp
 documentation_of: random/xorshift.hpp
 layout: document
 redirect_from:
