@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/subset_convolution"
-#include "convolution/subset_convolution.hpp"
+#include "../subset_convolution.hpp"
 #include "modint.hpp"
 #include <iostream>
 using namespace std;

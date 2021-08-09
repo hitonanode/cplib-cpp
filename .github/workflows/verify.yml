@@ -23,4 +23,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
+        DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
       run: oj-verify all --jobs 2
