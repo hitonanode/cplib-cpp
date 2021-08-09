@@ -1,5 +1,5 @@
 #include "../mincostflow.hpp"
-#include "../mincostflow_bellmanford.hpp"
+#include "../mincostflow_nonegativeloop.hpp"
 #include <cassert>
 #include <iostream>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
