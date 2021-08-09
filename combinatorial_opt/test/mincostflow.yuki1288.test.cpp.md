@@ -12,13 +12,14 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/assignment
+    PROBLEM: https://yukicoder.me/problems/no/1288
     links:
-    - https://judge.yosupo.jp/problem/assignment
-  bundledCode: "#line 2 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\n#include\
-    \ <cassert>\n#include <limits>\n#include <queue>\n#include <vector>\n\n// CUT\
-    \ begin\n// Minimum cost flow WITH NO NEGATIVE CYCLE (just negative cost edge\
-    \ is allowed)\n// Verified:\n// - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
+    - https://yukicoder.me/problems/no/1288
+  bundledCode: "#line 1 \"combinatorial_opt/test/mincostflow.yuki1288.test.cpp\"\n\
+    #define PROBLEM \"https://yukicoder.me/problems/no/1288\"\n#line 2 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\
+    \n#include <cassert>\n#include <limits>\n#include <queue>\n#include <vector>\n\
+    \n// CUT begin\n// Minimum cost flow WITH NO NEGATIVE CYCLE (just negative cost\
+    \ edge is allowed)\n// Verified:\n// - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
     // - CodeChef LTIME98 Ancient Magic https://www.codechef.com/problems/ANCT\ntemplate\
     \ <class Cap = long long, class Cost = long long, Cost INF_COST = std::numeric_limits<Cost>::max()\
     \ / 2>\nstruct MinCostFlow {\n    struct _edge {\n        int to, rev;\n     \
@@ -94,55 +95,45 @@ data:
     \        os << \"[MinCostFlow]V=\" << mcf.V << \":\";\n        for (int i = 0;\
     \ i < mcf.V; i++) {\n            for (auto &e : mcf.g[i]) os << \"\\n\" << i <<\
     \ \"->\" << e.to << \":cap\" << e.cap << \",$\" << e.cost;\n        }\n      \
-    \  return os;\n    }\n};\n#line 2 \"combinatorial_opt/test/assignment_problem.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n#include <algorithm>\n\
-    #include <iostream>\n\ntemplate <typename TC> std::pair<TC, std::vector<int>>\
-    \ AssignmentProblem(std::vector<std::vector<TC>> cost) {\n    int N = cost.size();\n\
-    \    MinCostFlow<int, TC> mcf(N * 2 + 2);\n    int S = N * 2, T = N * 2 + 1;\n\
-    \    TC bias_total_cost = 0;\n    for (int i = 0; i < N; i++) {\n        TC lo\
-    \ = *min_element(cost[i].begin(), cost[i].end());\n        bias_total_cost +=\
-    \ lo;\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N + i, T, 1, 0);\n\
-    \        for (int j = 0; j < N; j++) mcf.add_edge(i, N + j, 1, cost[i][j] - lo);\n\
-    \    }\n    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;\n  \
-    \  std::vector<int> ret;\n\n    for (int i = 0; i < N; i++) {\n        for (const\
-    \ auto &g : mcf.g[i]) {\n            if (g.to != S and !g.cap) {\n           \
-    \     ret.emplace_back(g.to - N);\n                break;\n            }\n   \
-    \     }\n    }\n    return std::make_pair(total_cost, ret);\n}\n\nint main() {\n\
-    \    int N;\n    std::cin >> N;\n    std::vector<std::vector<long long>> A(N,\
-    \ std::vector<long long>(N));\n    for (auto &vec : A) {\n        for (auto &x\
-    \ : vec) { std::cin >> x; }\n    }\n    auto ret = AssignmentProblem(A);\n   \
-    \ std::cout << ret.first << '\\n';\n    for (auto x : ret.second) std::cout <<\
-    \ x << ' ';\n    std::cout << '\\n';\n}\n"
-  code: "#include \"../mincostflow_nonegativeloop.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\
-    \n#include <algorithm>\n#include <iostream>\n\ntemplate <typename TC> std::pair<TC,\
-    \ std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost) {\n \
-    \   int N = cost.size();\n    MinCostFlow<int, TC> mcf(N * 2 + 2);\n    int S\
-    \ = N * 2, T = N * 2 + 1;\n    TC bias_total_cost = 0;\n    for (int i = 0; i\
-    \ < N; i++) {\n        TC lo = *min_element(cost[i].begin(), cost[i].end());\n\
-    \        bias_total_cost += lo;\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N\
-    \ + i, T, 1, 0);\n        for (int j = 0; j < N; j++) mcf.add_edge(i, N + j, 1,\
-    \ cost[i][j] - lo);\n    }\n    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;\n\
-    \    std::vector<int> ret;\n\n    for (int i = 0; i < N; i++) {\n        for (const\
-    \ auto &g : mcf.g[i]) {\n            if (g.to != S and !g.cap) {\n           \
-    \     ret.emplace_back(g.to - N);\n                break;\n            }\n   \
-    \     }\n    }\n    return std::make_pair(total_cost, ret);\n}\n\nint main() {\n\
-    \    int N;\n    std::cin >> N;\n    std::vector<std::vector<long long>> A(N,\
-    \ std::vector<long long>(N));\n    for (auto &vec : A) {\n        for (auto &x\
-    \ : vec) { std::cin >> x; }\n    }\n    auto ret = AssignmentProblem(A);\n   \
-    \ std::cout << ret.first << '\\n';\n    for (auto x : ret.second) std::cout <<\
-    \ x << ' ';\n    std::cout << '\\n';\n}\n"
+    \  return os;\n    }\n};\n#line 3 \"combinatorial_opt/test/mincostflow.yuki1288.test.cpp\"\
+    \n#include <iostream>\n#include <numeric>\n#include <string>\n#line 7 \"combinatorial_opt/test/mincostflow.yuki1288.test.cpp\"\
+    \nusing namespace std;\n\nint main() {\n    int N;\n    string S;\n    cin >>\
+    \ N >> S;\n    vector<long long> V(N);\n    for (auto &x : V) cin >> x;\n\n  \
+    \  const int s = N * 5, t = s + 1;\n    MinCostFlow<int, long long> graph(t +\
+    \ 1);\n    for (int d = 0; d < 5; d++) {\n        for (int i = 0; i < N - 1; i++)\
+    \ graph.add_edge(d * N + i, d * N + i + 1, N / 4, 0);\n    }\n    graph.add_edge(s\
+    \ - 1, 0, N / 4, 0);\n\n    for (int i = 0; i < N; i++) {\n        int b = 0;\n\
+    \        if (S[i] == 'u') b = N * 1;\n        if (S[i] == 'k') b = N * 2;\n  \
+    \      if (S[i] == 'i') b = N * 3;\n        int fr = b + i + N, to = b + i;\n\
+    \        graph.add_edge(s, fr, 1, 0);\n        graph.add_edge(fr, to, 1, V[i]);\n\
+    \        graph.add_edge(to, t, 1, 0);\n    }\n    auto cost = graph.flow(s, t,\
+    \ N).second;\n    cout << accumulate(V.begin(), V.end(), 0LL) - cost << '\\n';\n\
+    }\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1288\"\n#include \"../mincostflow_nonegativeloop.hpp\"\
+    \n#include <iostream>\n#include <numeric>\n#include <string>\n#include <vector>\n\
+    using namespace std;\n\nint main() {\n    int N;\n    string S;\n    cin >> N\
+    \ >> S;\n    vector<long long> V(N);\n    for (auto &x : V) cin >> x;\n\n    const\
+    \ int s = N * 5, t = s + 1;\n    MinCostFlow<int, long long> graph(t + 1);\n \
+    \   for (int d = 0; d < 5; d++) {\n        for (int i = 0; i < N - 1; i++) graph.add_edge(d\
+    \ * N + i, d * N + i + 1, N / 4, 0);\n    }\n    graph.add_edge(s - 1, 0, N /\
+    \ 4, 0);\n\n    for (int i = 0; i < N; i++) {\n        int b = 0;\n        if\
+    \ (S[i] == 'u') b = N * 1;\n        if (S[i] == 'k') b = N * 2;\n        if (S[i]\
+    \ == 'i') b = N * 3;\n        int fr = b + i + N, to = b + i;\n        graph.add_edge(s,\
+    \ fr, 1, 0);\n        graph.add_edge(fr, to, 1, V[i]);\n        graph.add_edge(to,\
+    \ t, 1, 0);\n    }\n    auto cost = graph.flow(s, t, N).second;\n    cout << accumulate(V.begin(),\
+    \ V.end(), 0LL) - cost << '\\n';\n}\n"
   dependsOn:
   - combinatorial_opt/mincostflow_nonegativeloop.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/assignment_problem.test.cpp
+  path: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
   requiredBy: []
   timestamp: '2021-08-09 23:08:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/assignment_problem.test.cpp
+documentation_of: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/assignment_problem.test.cpp
-- /verify/combinatorial_opt/test/assignment_problem.test.cpp.html
-title: combinatorial_opt/test/assignment_problem.test.cpp
+- /verify/combinatorial_opt/test/mincostflow.yuki1288.test.cpp
+- /verify/combinatorial_opt/test/mincostflow.yuki1288.test.cpp.html
+title: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
 ---

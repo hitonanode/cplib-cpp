@@ -27,8 +27,9 @@ data:
       path: combinatorial_opt/mincostflow.hpp
       title: combinatorial_opt/mincostflow.hpp
     - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/mincostflow_bellmanford.hpp
-      title: combinatorial_opt/mincostflow_bellmanford.hpp
+      path: combinatorial_opt/mincostflow_nonegativeloop.hpp
+      title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\
+        \u30D7\u306A\u3057\u306E\u6700\u5C0F\u8CBB\u7528\u6D41\uFF09"
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/networksimplex.hpp
       title: "Network simplex method \uFF08\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\
@@ -598,6 +599,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/mincostflow.test.cpp
       title: combinatorial_opt/test/mincostflow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
+      title: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/mincostflow.yuki1324.test.cpp
+      title: combinatorial_opt/test/mincostflow.yuki1324.test.cpp
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/simplex.easy.test.cpp
       title: combinatorial_opt/test/simplex.easy.test.cpp
