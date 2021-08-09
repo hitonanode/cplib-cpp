@@ -239,7 +239,7 @@ auto h = subset_convolution(f, g);  // T ∪ U = S なる T, U に関する積�
 subset_log(f);                      // f(φ) == 1 なる f について，log(f(S))．O(n^2 2^n)
 subset_exp(f);                      // f(φ) == 0 なる f について，exp(f(S))．O(n^2 2^n)
 subset_sqrt(f);                     // f(φ) == 1 なる f について，sqrt(f(S))．O(n^2 2^n)
-subset_pow(f);                      // f(S)^k (O(n^2 2^n))
+subset_pow(f, k);                      // f(S)^k (O(n^2 2^n))
 ```
 
 ## 問題例
