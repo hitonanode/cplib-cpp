@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/maxflow.test.cpp
     title: combinatorial_opt/test/maxflow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/mcf_costscaling.test.cpp
+    title: combinatorial_opt/test/mcf_costscaling.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -155,6 +158,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/maxflow.test.cpp
+  - combinatorial_opt/test/mcf_costscaling.test.cpp
 documentation_of: combinatorial_opt/maxflow.hpp
 layout: document
 redirect_from:

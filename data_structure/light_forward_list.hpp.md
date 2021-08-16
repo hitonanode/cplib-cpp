@@ -2,6 +2,11 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/mcf_costscaling.hpp
+    title: "Cost scaling minimum cost flow (Goldberg, Tarjan) \uFF08\u30B3\u30B9\u30C8\
+      \u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\u306B\u3088\u308B\u6700\u5C0F\u8CBB\u7528\
+      \u6D41\uFF09"
   - icon: ':warning:'
     path: graph/paths_of_length_two_decomposition.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u306E\u9577\u3055 2 \u306E\u30D1\u30B9\u3078\
@@ -16,6 +21,9 @@ data:
     path: string/incremental_matching.hpp
     title: string/incremental_matching.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/mcf_costscaling.test.cpp
+    title: combinatorial_opt/test/mcf_costscaling.test.cpp
   - icon: ':heavy_check_mark:'
     path: string/test/aho_corasick_forwardlist.test.cpp
     title: string/test/aho_corasick_forwardlist.test.cpp
@@ -64,6 +72,7 @@ data:
   isVerificationFile: false
   path: data_structure/light_forward_list.hpp
   requiredBy:
+  - combinatorial_opt/mcf_costscaling.hpp
   - string/aho_corasick_online.hpp
   - string/incremental_matching.hpp
   - string/aho_corasick.hpp
@@ -71,6 +80,7 @@ data:
   timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - combinatorial_opt/test/mcf_costscaling.test.cpp
   - string/test/aho_corasick_forwardlist.test.cpp
   - string/test/aho_corasick_online.test.cpp
   - string/test/aho_corasick_unorderedmap.test.cpp
