@@ -1,12 +1,13 @@
 #pragma once
 #include "maxflow.hpp"
 #include <cassert>
+#include <limits>
 #include <vector>
 
 // CUT begin
 // MaxFlow with lower bound
-// <https://snuke.hatenablog.com/entry/2016/07/10/043918>
-// <https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>
+// https://snuke.hatenablog.com/entry/2016/07/10/043918
+// https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp
 // flush(s, t): Calculate maxflow (if solution exists), -1 (otherwise)
 template <typename Cap> struct MaxFlowLowerBound {
     int N;
@@ -30,7 +31,7 @@ template <typename Cap> struct MaxFlowLowerBound {
             if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];
             if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);
         }
-        auto erev = mf.add_edge(t, s, numeric_limits<Cap>::max());
+        auto erev = mf.add_edge(t, s, std::numeric_limits<Cap>::max());
         if (mf.flow(N, N + 1) < sum) return -1;
         return mf.get_edge(erev).flow + mf.flow(s, t);
     }

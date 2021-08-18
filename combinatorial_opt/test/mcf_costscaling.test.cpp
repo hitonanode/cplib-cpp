@@ -20,6 +20,6 @@ int main() {
     if (mf.flow(0, V - 1) < F) {
         cout << "-1" << '\n';
     } else {
-        cout << mcf.flow() << '\n';
+        cout << mcf.solve() << '\n';
     }
 }
