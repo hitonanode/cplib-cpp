@@ -35,7 +35,9 @@ Bellman-Ford のアルゴリズムは愚直に実行すると $O(nm)$ の計算�
 ## 問題例
 
 - [Library Checker: Minimum cost b-flow](https://judge.yosupo.jp/problem/min_cost_b_flow)
+- [AtCoder Library Practice Contest E - MinCostFlow](https://atcoder.jp/contests/practice2/tasks/practice2_e)
 - [No.1615 Double Down - yukicoder](https://yukicoder.me/problems/no/1615) （非想定解）
+
 ## Reference
 
 - [1] A. V. Goldberg and R. E. Tarjan, "Finding minimum-cost circulations by successive approximation,"
