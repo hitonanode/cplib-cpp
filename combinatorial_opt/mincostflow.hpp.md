@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: combinatorial_opt/b-flow.hpp
-    title: combinatorial_opt/b-flow.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/mincostflow.test.cpp
@@ -162,8 +159,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: combinatorial_opt/mincostflow.hpp
-  requiredBy:
-  - combinatorial_opt/b-flow.hpp
+  requiredBy: []
   timestamp: '2021-07-06 00:01:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -5,6 +5,9 @@ data:
     path: combinatorial_opt/maxflow.hpp
     title: combinatorial_opt/maxflow.hpp
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/maxflow_lowerbound.hpp
+    title: combinatorial_opt/maxflow_lowerbound.hpp
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/mcf_costscaling.hpp
     title: "Cost scaling minimum cost flow (Goldberg, Tarjan) \uFF08\u30B3\u30B9\u30C8\
       \u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\u306B\u3088\u308B\u6700\u5C0F\u8CBB\u7528\
@@ -16,21 +19,21 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
+    PROBLEM: https://judge.yosupo.jp/problem/min_cost_b_flow
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
-  bundledCode: "#line 1 \"combinatorial_opt/test/mcf_costscaling.test.cpp\"\n#define\
-    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
-    \n#line 2 \"combinatorial_opt/mcf_costscaling.hpp\"\n#include <cassert>\n#include\
-    \ <vector>\n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\n\
-    template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20> struct\
-    \ mcf_costscaling {\n    mcf_costscaling() = default;\n    mcf_costscaling(int\
-    \ n) : _n(n), to(n), b(n), p(n) {}\n\n    int _n;\n    std::vector<Cap> cap;\n\
-    \    std::vector<Cost> cost;\n    std::vector<int> opposite;\n    std::vector<std::vector<int>>\
-    \ to;\n    std::vector<Cap> b;\n    std::vector<Cost> p;\n\n    int add_edge(int\
-    \ from_, int to_, Cap cap_, Cost cost_) {\n        assert(0 <= from_ and from_\
-    \ < _n);\n        assert(0 <= to_ and to_ < _n);\n        assert(0 <= cap_);\n\
-    \        cost_ *= (_n + 1);\n        const int e = int(cap.size());\n        to[from_].push_back(e);\n\
+    - https://judge.yosupo.jp/problem/min_cost_b_flow
+  bundledCode: "#line 1 \"combinatorial_opt/test/mcf_costscaling.bflow.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n#line 2 \"\
+    combinatorial_opt/mcf_costscaling.hpp\"\n#include <cassert>\n#include <vector>\n\
+    \n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\ntemplate <class\
+    \ Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20> struct mcf_costscaling\
+    \ {\n    mcf_costscaling() = default;\n    mcf_costscaling(int n) : _n(n), to(n),\
+    \ b(n), p(n) {}\n\n    int _n;\n    std::vector<Cap> cap;\n    std::vector<Cost>\
+    \ cost;\n    std::vector<int> opposite;\n    std::vector<std::vector<int>> to;\n\
+    \    std::vector<Cap> b;\n    std::vector<Cost> p;\n\n    int add_edge(int from_,\
+    \ int to_, Cap cap_, Cost cost_) {\n        assert(0 <= from_ and from_ < _n);\n\
+    \        assert(0 <= to_ and to_ < _n);\n        assert(0 <= cap_);\n        cost_\
+    \ *= (_n + 1);\n        const int e = int(cap.size());\n        to[from_].push_back(e);\n\
     \        cap.push_back(cap_);\n        cost.push_back(cost_);\n        opposite.push_back(to_);\n\
     \n        to[to_].push_back(e + 1);\n        cap.push_back(0);\n        cost.push_back(-cost_);\n\
     \        opposite.push_back(from_);\n        return e / 2;\n    }\n    void add_supply(int\
@@ -150,36 +153,89 @@ data:
     \ << \"];\\n\";\n            }\n        }\n        ss << \"}\\n\";\n        ss.close();\n\
     \        return;\n    }\n\n    int _n;\n    struct _edge {\n        int to, rev;\n\
     \        Cap cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
-    \ g;\n};\n#line 4 \"combinatorial_opt/test/mcf_costscaling.test.cpp\"\n#include\
-    \ <iostream>\nusing namespace std;\n\nint main() {\n    int V, E, F;\n    cin\
-    \ >> V >> E >> F;\n    mcf_costscaling<int, long long> mcf(V);\n    mf_graph<int>\
-    \ mf(V);\n    while (E--) {\n        int u, v, c, d;\n        cin >> u >> v >>\
-    \ c >> d;\n        mcf.add_edge(u, v, c, d);\n        mf.add_edge(u, v, c);\n\
-    \    }\n\n    mcf.add_supply(0, F), mcf.add_supply(V - 1, -F);\n    if (mf.flow(0,\
-    \ V - 1) < F) {\n        cout << \"-1\" << '\\n';\n    } else {\n        cout\
-    \ << mcf.solve() << '\\n';\n    }\n}\n"
-  code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
-    \n#include \"../mcf_costscaling.hpp\"\n#include \"../maxflow.hpp\"\n#include <iostream>\n\
-    using namespace std;\n\nint main() {\n    int V, E, F;\n    cin >> V >> E >> F;\n\
-    \    mcf_costscaling<int, long long> mcf(V);\n    mf_graph<int> mf(V);\n    while\
-    \ (E--) {\n        int u, v, c, d;\n        cin >> u >> v >> c >> d;\n       \
-    \ mcf.add_edge(u, v, c, d);\n        mf.add_edge(u, v, c);\n    }\n\n    mcf.add_supply(0,\
-    \ F), mcf.add_supply(V - 1, -F);\n    if (mf.flow(0, V - 1) < F) {\n        cout\
-    \ << \"-1\" << '\\n';\n    } else {\n        cout << mcf.solve() << '\\n';\n \
-    \   }\n}\n"
+    \ g;\n};\n#line 6 \"combinatorial_opt/maxflow_lowerbound.hpp\"\n\n// CUT begin\n\
+    // MaxFlow with lower bound\n// https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
+    // https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp\n// flush(s,\
+    \ t): Calculate maxflow (if solution exists), -1 (otherwise)\ntemplate <typename\
+    \ Cap> struct MaxFlowLowerBound {\n    int N;\n    mf_graph<Cap> mf;\n    std::vector<Cap>\
+    \ in;\n    MaxFlowLowerBound(int N = 0) : N(N), mf(N + 2), in(N) {}\n    int add_edge(int\
+    \ from, int to, Cap cap_lo, Cap cap_hi) {\n        assert(0 <= from and from <\
+    \ N);\n        assert(0 <= to and to < N);\n        assert(0 <= cap_lo and cap_lo\
+    \ <= cap_hi);\n        in[from] -= cap_lo;\n        in[to] += cap_lo;\n      \
+    \  return mf.add_edge(from, to, cap_hi - cap_lo);\n    }\n    Cap flow(int s,\
+    \ int t) {\n        assert(s != t);\n        assert(0 <= s and s < N);\n     \
+    \   assert(0 <= t and t < N);\n        Cap sum = 0;\n        for (int i = 0; i\
+    \ < N; i++) {\n            if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];\n\
+    \            if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);\n        }\n      \
+    \  auto erev = mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if\
+    \ (mf.flow(N, N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow\
+    \ + mf.flow(s, t);\n    }\n};\n#line 5 \"combinatorial_opt/test/mcf_costscaling.bflow.test.cpp\"\
+    \n#include <iostream>\nusing namespace std;\n\nstd::ostream &operator<<(std::ostream\
+    \ &os, const __int128 &x) {\n    __int128 tmp = x;\n    if (tmp == 0) return os\
+    \ << 0;\n    std::vector<int> ds;\n    if (tmp < 0) {\n        os << '-';\n  \
+    \      while (tmp) {\n            int d = tmp % 10;\n            if (d > 0) d\
+    \ -= 10;\n            ds.emplace_back(-d), tmp = (tmp - d) / 10;\n        }\n\
+    \    } else {\n        while (tmp) ds.emplace_back(tmp % 10), tmp /= 10;\n   \
+    \ }\n    std::reverse(ds.begin(), ds.end());\n    for (auto i : ds) os << i;\n\
+    \    return os;\n}\n\nint main() {\n    int N, M;\n    cin >> N >> M;\n    MaxFlowLowerBound<long\
+    \ long> mf(N + 2);\n    long long amount = 0, amount2 = 0;\n    mcf_costscaling<long\
+    \ long, long long, 3, 10> mcf(N);\n    for (int i = 0; i < N; i++) {\n       \
+    \ int b;\n        cin >> b;\n        mcf.add_supply(i, b);\n        if (b > 0)\
+    \ mf.add_edge(N, i, 0, b), amount += b;\n        if (b < 0) mf.add_edge(i, N +\
+    \ 1, 0, -b), amount2 -= b;\n    }\n    __int128 ret_bias = 0;\n    vector<long\
+    \ long> flow_bias;\n    while (M--) {\n        int s, t, l, u;\n        long long\
+    \ c;\n        cin >> s >> t >> l >> u >> c;\n        if (u < 0) {\n          \
+    \  mf.add_edge(t, s, -u, -l);\n        } else if (l > 0) {\n            mf.add_edge(s,\
+    \ t, l, u);\n        } else {\n            if (l < 0) mf.add_edge(t, s, 0, -l);\n\
+    \            if (u > 0) mf.add_edge(s, t, 0, u);\n        }\n        ret_bias\
+    \ += __int128(l) * c;\n        flow_bias.push_back(l);\n        mcf.add_edge(s,\
+    \ t, u - l, c);\n        mcf.add_demand(s, l);\n        mcf.add_supply(t, l);\n\
+    \    }\n    if (amount != amount2 or mf.flow(N, N + 1) < amount) {\n        cout\
+    \ << \"infeasible\\n\";\n    } else {\n        cout << mcf.solve<__int128>() +\
+    \ ret_bias << '\\n';\n        for (auto x : mcf.potential()) cout << x << '\\\
+    n';\n        auto edges = mcf.edges();\n        for (int e = 0; e < int(edges.size());\
+    \ e++) cout << edges[e].flow + flow_bias[e] << '\\n';\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n#include\
+    \ \"../mcf_costscaling.hpp\"\n#include \"../maxflow_lowerbound.hpp\"\n#include\
+    \ <algorithm>\n#include <iostream>\nusing namespace std;\n\nstd::ostream &operator<<(std::ostream\
+    \ &os, const __int128 &x) {\n    __int128 tmp = x;\n    if (tmp == 0) return os\
+    \ << 0;\n    std::vector<int> ds;\n    if (tmp < 0) {\n        os << '-';\n  \
+    \      while (tmp) {\n            int d = tmp % 10;\n            if (d > 0) d\
+    \ -= 10;\n            ds.emplace_back(-d), tmp = (tmp - d) / 10;\n        }\n\
+    \    } else {\n        while (tmp) ds.emplace_back(tmp % 10), tmp /= 10;\n   \
+    \ }\n    std::reverse(ds.begin(), ds.end());\n    for (auto i : ds) os << i;\n\
+    \    return os;\n}\n\nint main() {\n    int N, M;\n    cin >> N >> M;\n    MaxFlowLowerBound<long\
+    \ long> mf(N + 2);\n    long long amount = 0, amount2 = 0;\n    mcf_costscaling<long\
+    \ long, long long, 3, 10> mcf(N);\n    for (int i = 0; i < N; i++) {\n       \
+    \ int b;\n        cin >> b;\n        mcf.add_supply(i, b);\n        if (b > 0)\
+    \ mf.add_edge(N, i, 0, b), amount += b;\n        if (b < 0) mf.add_edge(i, N +\
+    \ 1, 0, -b), amount2 -= b;\n    }\n    __int128 ret_bias = 0;\n    vector<long\
+    \ long> flow_bias;\n    while (M--) {\n        int s, t, l, u;\n        long long\
+    \ c;\n        cin >> s >> t >> l >> u >> c;\n        if (u < 0) {\n          \
+    \  mf.add_edge(t, s, -u, -l);\n        } else if (l > 0) {\n            mf.add_edge(s,\
+    \ t, l, u);\n        } else {\n            if (l < 0) mf.add_edge(t, s, 0, -l);\n\
+    \            if (u > 0) mf.add_edge(s, t, 0, u);\n        }\n        ret_bias\
+    \ += __int128(l) * c;\n        flow_bias.push_back(l);\n        mcf.add_edge(s,\
+    \ t, u - l, c);\n        mcf.add_demand(s, l);\n        mcf.add_supply(t, l);\n\
+    \    }\n    if (amount != amount2 or mf.flow(N, N + 1) < amount) {\n        cout\
+    \ << \"infeasible\\n\";\n    } else {\n        cout << mcf.solve<__int128>() +\
+    \ ret_bias << '\\n';\n        for (auto x : mcf.potential()) cout << x << '\\\
+    n';\n        auto edges = mcf.edges();\n        for (int e = 0; e < int(edges.size());\
+    \ e++) cout << edges[e].flow + flow_bias[e] << '\\n';\n    }\n}\n"
   dependsOn:
   - combinatorial_opt/mcf_costscaling.hpp
+  - combinatorial_opt/maxflow_lowerbound.hpp
   - combinatorial_opt/maxflow.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/mcf_costscaling.test.cpp
+  path: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
   requiredBy: []
   timestamp: '2021-08-18 23:55:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/mcf_costscaling.test.cpp
+documentation_of: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/mcf_costscaling.test.cpp
-- /verify/combinatorial_opt/test/mcf_costscaling.test.cpp.html
-title: combinatorial_opt/test/mcf_costscaling.test.cpp
+- /verify/combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
+- /verify/combinatorial_opt/test/mcf_costscaling.bflow.test.cpp.html
+title: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
 ---

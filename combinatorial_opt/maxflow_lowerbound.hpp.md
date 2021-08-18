@@ -5,14 +5,17 @@ data:
     path: combinatorial_opt/maxflow.hpp
     title: combinatorial_opt/maxflow.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
+    title: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
-    - https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>
-    - https://snuke.hatenablog.com/entry/2016/07/10/043918>
+    - https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp
+    - https://snuke.hatenablog.com/entry/2016/07/10/043918
   bundledCode: "#line 2 \"combinatorial_opt/maxflow.hpp\"\n\n#include <algorithm>\n\
     #include <cassert>\n#include <fstream>\n#include <limits>\n#include <string>\n\
     #include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder Library, single\
@@ -78,9 +81,9 @@ data:
     \ << \"];\\n\";\n            }\n        }\n        ss << \"}\\n\";\n        ss.close();\n\
     \        return;\n    }\n\n    int _n;\n    struct _edge {\n        int to, rev;\n\
     \        Cap cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
-    \ g;\n};\n#line 5 \"combinatorial_opt/maxflow_lowerbound.hpp\"\n\n// CUT begin\n\
-    // MaxFlow with lower bound\n// <https://snuke.hatenablog.com/entry/2016/07/10/043918>\n\
-    // <https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>\n// flush(s,\
+    \ g;\n};\n#line 6 \"combinatorial_opt/maxflow_lowerbound.hpp\"\n\n// CUT begin\n\
+    // MaxFlow with lower bound\n// https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
+    // https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp\n// flush(s,\
     \ t): Calculate maxflow (if solution exists), -1 (otherwise)\ntemplate <typename\
     \ Cap> struct MaxFlowLowerBound {\n    int N;\n    mf_graph<Cap> mf;\n    std::vector<Cap>\
     \ in;\n    MaxFlowLowerBound(int N = 0) : N(N), mf(N + 2), in(N) {}\n    int add_edge(int\
@@ -92,12 +95,12 @@ data:
     \   assert(0 <= t and t < N);\n        Cap sum = 0;\n        for (int i = 0; i\
     \ < N; i++) {\n            if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];\n\
     \            if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);\n        }\n      \
-    \  auto erev = mf.add_edge(t, s, numeric_limits<Cap>::max());\n        if (mf.flow(N,\
-    \ N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow + mf.flow(s,\
-    \ t);\n    }\n};\n"
-  code: "#pragma once\n#include \"maxflow.hpp\"\n#include <cassert>\n#include <vector>\n\
-    \n// CUT begin\n// MaxFlow with lower bound\n// <https://snuke.hatenablog.com/entry/2016/07/10/043918>\n\
-    // <https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp>\n// flush(s,\
+    \  auto erev = mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if\
+    \ (mf.flow(N, N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow\
+    \ + mf.flow(s, t);\n    }\n};\n"
+  code: "#pragma once\n#include \"maxflow.hpp\"\n#include <cassert>\n#include <limits>\n\
+    #include <vector>\n\n// CUT begin\n// MaxFlow with lower bound\n// https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
+    // https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp\n// flush(s,\
     \ t): Calculate maxflow (if solution exists), -1 (otherwise)\ntemplate <typename\
     \ Cap> struct MaxFlowLowerBound {\n    int N;\n    mf_graph<Cap> mf;\n    std::vector<Cap>\
     \ in;\n    MaxFlowLowerBound(int N = 0) : N(N), mf(N + 2), in(N) {}\n    int add_edge(int\
@@ -109,17 +112,18 @@ data:
     \   assert(0 <= t and t < N);\n        Cap sum = 0;\n        for (int i = 0; i\
     \ < N; i++) {\n            if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];\n\
     \            if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);\n        }\n      \
-    \  auto erev = mf.add_edge(t, s, numeric_limits<Cap>::max());\n        if (mf.flow(N,\
-    \ N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow + mf.flow(s,\
-    \ t);\n    }\n};\n"
+    \  auto erev = mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if\
+    \ (mf.flow(N, N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow\
+    \ + mf.flow(s, t);\n    }\n};\n"
   dependsOn:
   - combinatorial_opt/maxflow.hpp
   isVerificationFile: false
   path: combinatorial_opt/maxflow_lowerbound.hpp
   requiredBy: []
-  timestamp: '2021-03-14 20:53:10+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-08-18 23:55:14+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
 documentation_of: combinatorial_opt/maxflow_lowerbound.hpp
 layout: document
 redirect_from:

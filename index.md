@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: combinatorial_opt
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/b-flow.hpp
       title: combinatorial_opt/b-flow.hpp
     - icon: ':warning:'
@@ -20,7 +20,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/maxflow.hpp
       title: combinatorial_opt/maxflow.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/maxflow_lowerbound.hpp
       title: combinatorial_opt/maxflow_lowerbound.hpp
     - icon: ':heavy_check_mark:'
@@ -590,6 +590,9 @@ data:
       path: combinatorial_opt/test/assignment_problem.test.cpp
       title: combinatorial_opt/test/assignment_problem.test.cpp
     - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/b_flow.test.cpp
+      title: combinatorial_opt/test/b_flow.test.cpp
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/bflow_ns.test.cpp
       title: combinatorial_opt/test/bflow_ns.test.cpp
     - icon: ':heavy_check_mark:'
@@ -599,8 +602,14 @@ data:
       path: combinatorial_opt/test/maxflow.test.cpp
       title: combinatorial_opt/test/maxflow.test.cpp
     - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
+      title: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/mcf_costscaling.test.cpp
       title: combinatorial_opt/test/mcf_costscaling.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
+      title: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/mcf_ns.test.cpp
       title: combinatorial_opt/test/mcf_ns.test.cpp
