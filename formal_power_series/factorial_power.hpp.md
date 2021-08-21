@@ -230,7 +230,7 @@ $
 
 ## 階乗冪・サンプリング値の変換
 
-高々 $(N - 1)$ 次の多項式 $f(x)$ について，値の列 $[f(0), \dots, f(N - 1)]$ と下降冪による展開係数 $\{ a_i \}_{i=0, \dots, N - 1}$ は $O(N \log N)$ で相互に変換可能．関数 `ys_to_factorial(vector<T> ys)` によって前者から後者の， `factorial_to_ys(vector<T> as)` によって後者から前者の変換がそれぞれ可能．
+高々 $(N - 1)$ 次の多項式 $f(x)$ について，値の列 $[f(0), \dots, f(N - 1)]$ と下降冪による展開係数 $[a_i]_{i=0, \dots, N - 1}$ は $O(N \log N)$ で相互に変換可能．関数 `ys_to_factorial(vector<T> ys)` によって前者から後者の， `factorial_to_ys(vector<T> as)` によって後者から前者の変換がそれぞれ可能．
 
 ### アルゴリズムの概要
 
@@ -250,7 +250,7 @@ $
 
 ## 下降冪係数表現された多項式のシフト
 
-多項式 $f(x)$ の下降冪表現 $\{a_i\}_{i = 0, \dots, N - 1}$ から $f(x + c)$ の下降冪表現は $O(N \log N)$ で計算可能．関数 `shift_of_factorial(vector<T> as, T shift)` が実装されている．
+多項式 $f(x)$ の下降冪表現 $[a_i]_{i = 0, \dots, N - 1}$ から $f(x + c)$ の下降冪表現は $O(N \log N)$ で計算可能．関数 `shift_of_factorial(vector<T> as, T shift)` が実装されている．
 
 ### アルゴリズムの概要
 
