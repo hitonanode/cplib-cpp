@@ -168,7 +168,7 @@ data:
   - combinatorial_opt/test/mcf_costscaling.test.cpp
 documentation_of: combinatorial_opt/mcf_costscaling.hpp
 layout: document
-title: "Cost scaling minimum cost flow (Goldberg, Tarjan) \uFF08\u30B3\u30B9\u30C8\
+title: "Minimum cost flow (cost scaling, Goldberg & Tarjan) \uFF08\u30B3\u30B9\u30C8\
   \u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\u306B\u3088\u308B\u6700\u5C0F\u8CBB\u7528\u6D41\
   \uFF09"
 ---
@@ -214,4 +214,7 @@ Bellman-Ford のアルゴリズムは愚直に実行すると $O(nm)$ の計算�
       Mathematics of Operations Research, 15(3), 430-466, 1990.
 - [2] A. V. Goldberg, "An Efficient Implementation of a Scaling Minimum-Cost Flow Algorithm,"
       Journal of algorithms, 22(1), 1-29, 1997.
+- [3] U, Bünnagel, B Korte, J Vygen,
+      "Efficient implementation of the Goldberg-Tarjan minimum-cost flow algorithm,"
+      Optimization Methods and Software, 10(2), 157-174, 1998.
 - [ORIE 633: Network Flows](https://people.orie.cornell.edu/dpw/orie633/)

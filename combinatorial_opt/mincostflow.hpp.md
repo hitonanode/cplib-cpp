@@ -166,8 +166,7 @@ data:
   - combinatorial_opt/test/mincostflow.test.cpp
 documentation_of: combinatorial_opt/mincostflow.hpp
 layout: document
-redirect_from:
-- /library/combinatorial_opt/mincostflow.hpp
-- /library/combinatorial_opt/mincostflow.hpp.html
-title: combinatorial_opt/mincostflow.hpp
+title: Minimum cost flow (primal-dual)
 ---
+
+[AC Library](https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html) 由来の最小費用流．負辺は張れない．

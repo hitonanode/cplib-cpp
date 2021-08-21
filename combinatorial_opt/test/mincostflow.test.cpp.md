@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/mincostflow.hpp
-    title: combinatorial_opt/mincostflow.hpp
+    title: Minimum cost flow (primal-dual)
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/mincostflow_nonegativeloop.hpp
     title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\
