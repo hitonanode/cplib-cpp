@@ -17,6 +17,10 @@ data:
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
       \u7B97\uFF08Bostan-Mori algorithm\uFF09"
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/factorial_power.hpp
+    title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\
+      \u7B97\uFF09"
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
   - icon: ':heavy_check_mark:'
@@ -78,6 +82,9 @@ data:
     path: formal_power_series/test/division_number.test.cpp
     title: formal_power_series/test/division_number.test.cpp
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+    title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_exp.test.cpp
     title: formal_power_series/test/fps_exp.test.cpp
   - icon: ':heavy_check_mark:'
@@ -125,6 +132,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/shift_of_sampling_points.test.cpp
+    title: formal_power_series/test/shift_of_sampling_points.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
@@ -366,6 +376,7 @@ data:
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
+  - formal_power_series/factorial_power.hpp
   - formal_power_series/multipoint_evaluation.hpp
   - formal_power_series/formal_power_series.hpp
   - formal_power_series/coeff_of_rational_function.hpp
@@ -393,6 +404,7 @@ data:
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
+  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - formal_power_series/test/linear_recurrence.test.cpp
   - formal_power_series/test/bernoulli_number.test.cpp
@@ -404,6 +416,7 @@ data:
   - formal_power_series/test/fps_pow_another.test.cpp
   - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - formal_power_series/test/fps_sqrt.test.cpp
+  - formal_power_series/test/shift_of_sampling_points.test.cpp
   - formal_power_series/test/stirling_number_of_1st.test.cpp
   - formal_power_series/test/sharp_p_subset_sum.test.cpp
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp

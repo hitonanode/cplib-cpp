@@ -10,6 +10,9 @@ data:
     title: number/zeta_moebius_transform.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+    title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -166,6 +169,7 @@ data:
   timestamp: '2021-08-01 19:15:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - number/test/enumerate_primes.test.cpp
