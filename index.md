@@ -290,6 +290,9 @@ data:
       path: number/big_combination_logarithm.hpp
       title: number/big_combination_logarithm.hpp
     - icon: ':heavy_check_mark:'
+      path: number/binary_gcd.hpp
+      title: Binary GCD
+    - icon: ':heavy_check_mark:'
       path: number/bs_sieve.hpp
       title: number/bs_sieve.hpp
     - icon: ':heavy_check_mark:'
@@ -911,6 +914,9 @@ data:
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: number/test/binary_gcd.stress.test.cpp
+      title: number/test/binary_gcd.stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/bs_sieve.test.cpp
       title: number/test/bs_sieve.test.cpp
