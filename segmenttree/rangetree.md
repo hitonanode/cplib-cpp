@@ -16,7 +16,7 @@ documentation_of: ./rangetree.hpp
 - `rangetree<S, op, e, Int>()` コンストラクタ．`S` は可換な群，`S op(S, S)`, は `S` 上の可換な演算，`e()` は `S` の零元を返す．`Int` は座標を表す数値の型．
 - `void build()` 時間計算量，空間計算量とも $O(N \log N)$ （$N$ は候補点の個数）．
 - `void add(Int x, Int y, S w)`, `void set(Int x, Int y, S w)` 時間計算量 $O(N (\log N)^2)$．
-- `S sum(Int xl, Int xr, Int yl, Int yr)` 時間計算量 $O(N (\log N)^2)$．
+- `S prod(Int xl, Int xr, Int yl, Int yr)` 時間計算量 $O(N (\log N)^2)$．
 
 ## 使用例
 
@@ -38,5 +38,6 @@ int main() {
 
 ## 問題例
 
+- [技術室奥プログラミングコンテスト#6 Day1 N - Jump and Walk](https://atcoder.jp/contests/tkppc6-1/tasks/tkppc6_1_n)
 - [Library Checker: Point Add Rectangle Sum](https://judge.yosupo.jp/problem/point_add_rectangle_sum)
 - [Codeforces Round #499 (Div. 1) E. Store](https://codeforces.com/contest/1010/problem/E)
