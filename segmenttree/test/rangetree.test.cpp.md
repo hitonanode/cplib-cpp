@@ -45,7 +45,7 @@ data:
     \ y[i], w[i]);\n    for (auto q : qs) {\n        if (std::get<0>(q) == 0) {\n\
     \            int t, x, y, w, z;\n            tie(t, x, y, w, z) = q;\n       \
     \     tree.add(x, y, w);\n        } else {\n            int t, l, r, d, u;\n \
-    \           tie(t, l, r, d, u) = q;\n            cout << tree.sum(l, r, d, u)\
+    \           tie(t, l, r, d, u) = q;\n            cout << tree.prod(l, r, d, u)\
     \ << '\\n';\n        }\n    }\n}"
   dependsOn:
   - segmenttree/rangetree.hpp
@@ -53,7 +53,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/rangetree.test.cpp
   requiredBy: []
-  timestamp: '2021-07-24 01:04:31+09:00'
+  timestamp: '2021-08-22 17:31:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/rangetree.test.cpp
