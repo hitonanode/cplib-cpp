@@ -21,3 +21,4 @@ vector<long long> values = f.vals(); // [f[0], ..., f[N - 1]] の一括取得
 ## 問題例
 
 - [AtCoder Regular Contest 125 E - Snack](https://atcoder.jp/contests/arc125/tasks/arc125_e)
+- [AtCoder Grand Contest 052 E - 3 Letters](https://atcoder.jp/contests/agc052/tasks/agc052_e)

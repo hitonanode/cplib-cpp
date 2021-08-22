@@ -26,18 +26,26 @@ template <class T> struct offline_sum_of_linear {
             tmp[l + 1] += df;
             tmp[r] -= df;
         }
-        for (int i = 1; i < N; i++) tmp[i] += tmp[i - 1];
+        for (int i = 0; i < N; i++) tmp[i + 1] += tmp[i];
         for (const auto &q : upds) {
             std::tie(l, r, f0, df) = q;
             tmp[l] += f0;
             tmp[r] -= f0 + (r - l - 1) * df;
         }
         upds.clear();
-        for (int i = 1; i < N; i++) tmp[i] += tmp[i - 1], ret[i] += tmp[i];
+        for (int i = 0; i < N; i++) tmp[i + 1] += tmp[i], ret[i] += tmp[i];
     }
     T operator[](int i) {
         assert(0 <= i and i < N);
-        return ret[i];
+        return run(), ret[i];
     }
     std::vector<T> vals() { return run(), ret; }
+    int size() const { return N; }
+    template <class OStream> friend OStream &operator<<(OStream &os, const offline_sum_of_linear &x) {
+        auto y = x;
+        y.run();
+        os << '[';
+        for (auto v : y.ret) os << v << ',';
+        return os << ']';
+    }
 };
