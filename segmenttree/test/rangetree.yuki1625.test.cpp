@@ -2,6 +2,7 @@
 #include "../rangetree.hpp"
 #include <algorithm>
 #include <iostream>
+#include <tuple>
 #include <utility>
 #include <vector>
 using namespace std;
@@ -66,8 +67,9 @@ int main() {
         if (TP[q] == 1) {
             add_tri(tris_add[q]);
         } else {
-            auto [l, r] = qs[q];
-            cout << tree.sum(l, r + 1, l, r + 1) << '\n';
+            int l, r;
+            tie(l, r) = qs[q];
+            cout << tree.prod(l, r + 1, l, r + 1) << '\n';
         }
     }
 }

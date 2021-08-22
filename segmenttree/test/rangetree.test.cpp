@@ -45,7 +45,7 @@ int main() {
         } else {
             int t, l, r, d, u;
             tie(t, l, r, d, u) = q;
-            cout << tree.sum(l, r, d, u) << '\n';
+            cout << tree.prod(l, r, d, u) << '\n';
         }
     }
 }
