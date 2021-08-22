@@ -565,6 +565,11 @@ data:
     - icon: ':warning:'
       path: utilities/next_combination.hpp
       title: utilities/next_combination.hpp
+    - icon: ':warning:'
+      path: utilities/offline_sum_of_linear.hpp
+      title: "Offline sum of linear segments \uFF08\u533A\u9593\u4E00\u6B21\u95A2\u6570\
+        \u52A0\u7B97\u30AF\u30A8\u30EA\u306E\u7D2F\u7A4D\u548C\u3092\u7528\u3044\u305F\
+        \u30AA\u30D5\u30E9\u30A4\u30F3\u51E6\u7406\uFF09"
     - icon: ':heavy_check_mark:'
       path: utilities/pow.hpp
       title: "Power \uFF08\u7D2F\u4E57\uFF09"
