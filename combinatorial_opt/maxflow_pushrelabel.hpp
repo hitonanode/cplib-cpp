@@ -6,7 +6,8 @@
 
 // Maxflow (push-relabel, highest-label)
 // Complexity: O(N^2 M^(1/2))
-template <class Cap, Cap INF = std::numeric_limits<Cap>::max() / 2> struct mf_pushrelabel {
+template <class Cap, Cap INF = std::numeric_limits<Cap>::max() / 2, bool UseGlobalRelabeling = false>
+struct mf_pushrelabel {
     int _n;
     struct _edge {
         int to, rev;
@@ -35,17 +36,38 @@ template <class Cap, Cap INF = std::numeric_limits<Cap>::max() / 2> struct mf_pu
         h2v[dist[i]].push_back(i);
         if (dist[i] > max_height) max_height = dist[i];
     }
-    Cap flow(int s, int t) {
+    void global_relabeling(int t) {
+        if (!UseGlobalRelabeling) return;
+        dist.assign(_n, _n), dist[t] = 0;
+        static std::vector<int> q;
+        q = {t};
+        int qh = 0;
+        h2v.assign(_n * 2, {});
+        max_height = -1;
+        while (qh < int(q.size())) {
+            int now = q[qh++];
+            if (excess[now] > 0) activate(now);
+            for (const auto &e : g[now]) {
+                if (g[e.to][e.rev].cap and dist[e.to] == _n) {
+                    dist[e.to] = dist[now] + 1;
+                    q.push_back(e.to);
+                }
+            }
+        }
+    }
+    Cap flow(const int &s, const int &t) {
         assert(0 <= s and s < _n);
         assert(0 <= t and t < _n);
         assert(s != t);
-        dist.assign(_n, 0);
-        dist[s] = _n;
         excess.assign(_n, 0);
         excess[s] = INF, excess[t] = -INF;
+        dist.assign(_n, 0);
+        dist[s] = _n;
         h2v.assign(_n * 2, {});
         max_height = -1;
         for (auto &e : g[s]) push(s, e);
+        global_relabeling(t);
+        int tick = _n;
         while (max_height >= 0) {
             if (h2v[max_height].empty()) {
                 max_height--;
@@ -67,8 +89,9 @@ template <class Cap, Cap INF = std::numeric_limits<Cap>::max() / 2> struct mf_pu
                 dist[i] = dnxt;
                 activate(i);
             }
+            if (--tick == 0) tick = _n, global_relabeling(t);
         }
-        return INF - excess[s];
+        return excess[t] + INF;
     }
 
     void push(int i, _edge &e) {
