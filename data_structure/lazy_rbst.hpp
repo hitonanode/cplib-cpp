@@ -156,14 +156,15 @@ public:
 
     // 遅延評価を利用した範囲更新 [l, r)
     void apply(Nptr &root, int l, int r, const F &f) {
+        if (l == r) return;
         auto p = split(root, l);
         auto p2 = split(p.second, r - l);
         all_apply(p2.first, f);
         root = merge(p.first, merge(p2.first, p2.second));
     }
 
-    // array[pos].valを取得する
     S prod(Nptr &root, int l, int r) {
+        assert(l < r);
         auto p = split(root, l);
         auto p2 = split(p.second, r - l);
         if (p2.first != nullptr) push(p2.first);
@@ -172,6 +173,7 @@ public:
         return res;
     }
 
+    // array[pos].valを取得する
     S get(Nptr &root, int pos) { return prod(root, pos, pos + 1); }
 
     template <bool (*g)(S)> int max_right(Nptr root, const S &e) {
@@ -246,7 +248,6 @@ public:
 
     // データを壊して新規にinitの内容を詰める
     void assign(Nptr &root, const std::vector<S> &init) {
-        d_ptr = 0;
         int N = init.size();
         root = N ? _assign_range(0, N, init) : new_tree();
     }
@@ -271,6 +272,7 @@ public:
     void re_alloc(Nptr &root) {
         std::vector<S> mem;
         dump(root, mem);
+        d_ptr = 0;
         assign(root, mem);
     }
 };
