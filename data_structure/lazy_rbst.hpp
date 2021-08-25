@@ -156,14 +156,15 @@ public:
 
     // 遅延評価を利用した範囲更新 [l, r)
     void apply(Nptr &root, int l, int r, const F &f) {
+        if (l == r) return;
         auto p = split(root, l);
         auto p2 = split(p.second, r - l);
         all_apply(p2.first, f);
         root = merge(p.first, merge(p2.first, p2.second));
     }
 
-    // array[pos].valを取得する
     S prod(Nptr &root, int l, int r) {
+        assert(l < r);
         auto p = split(root, l);
         auto p2 = split(p.second, r - l);
         if (p2.first != nullptr) push(p2.first);
@@ -172,7 +173,70 @@ public:
         return res;
     }
 
+    // array[pos].valを取得する
     S get(Nptr &root, int pos) { return prod(root, pos, pos + 1); }
+
+    template <bool (*g)(S)> int max_right(Nptr root, const S &e) {
+        return max_right(root, e, [](S x) { return g(x); });
+    }
+    template <class G> int max_right(Nptr root, const S &e, G g) {
+        assert(g(e));
+        if (root == nullptr) return 0;
+        push(root);
+        Nptr now = root;
+        S prod_now = e;
+        int sz = 0;
+        while (true) {
+            if (now->l != nullptr) {
+                push(now->l);
+                auto pl = op(prod_now, now->l->sum);
+                if (g(pl)) {
+                    prod_now = pl;
+                    sz += now->l->sz;
+                } else {
+                    now = now->l;
+                    continue;
+                }
+            }
+            auto pl = op(prod_now, now->val);
+            if (!g(pl)) return sz;
+            prod_now = pl, sz++;
+            if (now->r == nullptr) return sz;
+            push(now->r);
+            now = now->r;
+        }
+    }
+
+    template <bool (*g)(S)> int min_left(Nptr root, const S &e) {
+        return min_left(root, e, [](S x) { return g(x); });
+    }
+    template <class G> int min_left(Nptr root, const S &e, G g) {
+        assert(g(e));
+        if (root == nullptr) return 0;
+        push(root);
+        Nptr now = root;
+        S prod_now = e;
+        int sz = size(root);
+        while (true) {
+            if (now->r != nullptr) {
+                push(now->r);
+                auto pr = op(now->r->sum, prod_now);
+                if (g(pr)) {
+                    prod_now = pr;
+                    sz -= now->r->sz;
+                } else {
+                    now = now->r;
+                    continue;
+                }
+            }
+            auto pr = op(now->val, prod_now);
+            if (!g(pr)) return sz;
+            prod_now = pr, sz--;
+            if (now->l == nullptr) return sz;
+            push(now->l);
+            now = now->l;
+        }
+    }
 
     void reverse(Nptr &root) { _duplicate_node(root), _toggle(root); }
     void reverse(Nptr &root, int l, int r) {
@@ -184,7 +248,6 @@ public:
 
     // データを壊して新規にinitの内容を詰める
     void assign(Nptr &root, const std::vector<S> &init) {
-        d_ptr = 0;
         int N = init.size();
         root = N ? _assign_range(0, N, init) : new_tree();
     }
@@ -209,6 +272,7 @@ public:
     void re_alloc(Nptr &root) {
         std::vector<S> mem;
         dump(root, mem);
+        d_ptr = 0;
         assign(root, mem);
     }
 };
