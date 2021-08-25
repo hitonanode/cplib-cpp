@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/lazy_rbst.stress.test.cpp
+    title: data_structure/test/lazy_rbst.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
     title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -43,6 +46,7 @@ data:
   verifiedWith:
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+  - data_structure/test/lazy_rbst.stress.test.cpp
   - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp

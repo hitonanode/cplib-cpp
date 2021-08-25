@@ -692,6 +692,9 @@ data:
       path: data_structure/test/fibonacci_heap_spanningtree.test.cpp
       title: data_structure/test/fibonacci_heap_spanningtree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: data_structure/test/lazy_rbst.stress.test.cpp
+      title: data_structure/test/lazy_rbst.stress.test.cpp
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/lazy_rbst.test.cpp
       title: data_structure/test/lazy_rbst.test.cpp
     - icon: ':heavy_check_mark:'

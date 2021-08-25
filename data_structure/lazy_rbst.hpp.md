@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/lazy_rbst.stress.test.cpp
+    title: data_structure/test/lazy_rbst.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/lazy_rbst.test.cpp
     title: data_structure/test/lazy_rbst.test.cpp
   _isVerificationFailed: false
@@ -80,21 +83,46 @@ data:
     \        _duplicate_node(p2.first);\n        *p2.first = Node(x);\n        root\
     \ = merge(p.first, merge(p2.first, p2.second));\n    }\n\n    // \u9045\u5EF6\u8A55\
     \u4FA1\u3092\u5229\u7528\u3057\u305F\u7BC4\u56F2\u66F4\u65B0 [l, r)\n    void\
-    \ apply(Nptr &root, int l, int r, const F &f) {\n        auto p = split(root,\
-    \ l);\n        auto p2 = split(p.second, r - l);\n        all_apply(p2.first,\
-    \ f);\n        root = merge(p.first, merge(p2.first, p2.second));\n    }\n\n \
-    \   // array[pos].val\u3092\u53D6\u5F97\u3059\u308B\n    S prod(Nptr &root, int\
-    \ l, int r) {\n        auto p = split(root, l);\n        auto p2 = split(p.second,\
-    \ r - l);\n        if (p2.first != nullptr) push(p2.first);\n        S res = p2.first->sum;\n\
+    \ apply(Nptr &root, int l, int r, const F &f) {\n        if (l == r) return;\n\
+    \        auto p = split(root, l);\n        auto p2 = split(p.second, r - l);\n\
+    \        all_apply(p2.first, f);\n        root = merge(p.first, merge(p2.first,\
+    \ p2.second));\n    }\n\n    S prod(Nptr &root, int l, int r) {\n        assert(l\
+    \ < r);\n        auto p = split(root, l);\n        auto p2 = split(p.second, r\
+    \ - l);\n        if (p2.first != nullptr) push(p2.first);\n        S res = p2.first->sum;\n\
     \        root = merge(p.first, merge(p2.first, p2.second));\n        return res;\n\
-    \    }\n\n    S get(Nptr &root, int pos) { return prod(root, pos, pos + 1); }\n\
-    \n    void reverse(Nptr &root) { _duplicate_node(root), _toggle(root); }\n   \
-    \ void reverse(Nptr &root, int l, int r) {\n        auto p2 = split(root, r);\n\
-    \        auto p1 = split(p2.first, l);\n        reverse(p1.second);\n        root\
-    \ = merge(merge(p1.first, p1.second), p2.second);\n    }\n\n    // \u30C7\u30FC\
-    \u30BF\u3092\u58CA\u3057\u3066\u65B0\u898F\u306Binit\u306E\u5185\u5BB9\u3092\u8A70\
-    \u3081\u308B\n    void assign(Nptr &root, const std::vector<S> &init) {\n    \
-    \    d_ptr = 0;\n        int N = init.size();\n        root = N ? _assign_range(0,\
+    \    }\n\n    // array[pos].val\u3092\u53D6\u5F97\u3059\u308B\n    S get(Nptr\
+    \ &root, int pos) { return prod(root, pos, pos + 1); }\n\n    template <bool (*g)(S)>\
+    \ int max_right(Nptr root, const S &e) {\n        return max_right(root, e, [](S\
+    \ x) { return g(x); });\n    }\n    template <class G> int max_right(Nptr root,\
+    \ const S &e, G g) {\n        assert(g(e));\n        if (root == nullptr) return\
+    \ 0;\n        push(root);\n        Nptr now = root;\n        S prod_now = e;\n\
+    \        int sz = 0;\n        while (true) {\n            if (now->l != nullptr)\
+    \ {\n                push(now->l);\n                auto pl = op(prod_now, now->l->sum);\n\
+    \                if (g(pl)) {\n                    prod_now = pl;\n          \
+    \          sz += now->l->sz;\n                } else {\n                    now\
+    \ = now->l;\n                    continue;\n                }\n            }\n\
+    \            auto pl = op(prod_now, now->val);\n            if (!g(pl)) return\
+    \ sz;\n            prod_now = pl, sz++;\n            if (now->r == nullptr) return\
+    \ sz;\n            push(now->r);\n            now = now->r;\n        }\n    }\n\
+    \n    template <bool (*g)(S)> int min_left(Nptr root, const S &e) {\n        return\
+    \ min_left(root, e, [](S x) { return g(x); });\n    }\n    template <class G>\
+    \ int min_left(Nptr root, const S &e, G g) {\n        assert(g(e));\n        if\
+    \ (root == nullptr) return 0;\n        push(root);\n        Nptr now = root;\n\
+    \        S prod_now = e;\n        int sz = size(root);\n        while (true) {\n\
+    \            if (now->r != nullptr) {\n                push(now->r);\n       \
+    \         auto pr = op(now->r->sum, prod_now);\n                if (g(pr)) {\n\
+    \                    prod_now = pr;\n                    sz -= now->r->sz;\n \
+    \               } else {\n                    now = now->r;\n                \
+    \    continue;\n                }\n            }\n            auto pr = op(now->val,\
+    \ prod_now);\n            if (!g(pr)) return sz;\n            prod_now = pr, sz--;\n\
+    \            if (now->l == nullptr) return sz;\n            push(now->l);\n  \
+    \          now = now->l;\n        }\n    }\n\n    void reverse(Nptr &root) { _duplicate_node(root),\
+    \ _toggle(root); }\n    void reverse(Nptr &root, int l, int r) {\n        auto\
+    \ p2 = split(root, r);\n        auto p1 = split(p2.first, l);\n        reverse(p1.second);\n\
+    \        root = merge(merge(p1.first, p1.second), p2.second);\n    }\n\n    //\
+    \ \u30C7\u30FC\u30BF\u3092\u58CA\u3057\u3066\u65B0\u898F\u306Binit\u306E\u5185\
+    \u5BB9\u3092\u8A70\u3081\u308B\n    void assign(Nptr &root, const std::vector<S>\
+    \ &init) {\n        int N = init.size();\n        root = N ? _assign_range(0,\
     \ N, init) : new_tree();\n    }\n    Nptr _assign_range(int l, int r, const std::vector<S>\
     \ &init) {\n        if (r - l == 1) {\n            Nptr t = _make_node(init[l]);\n\
     \            return update(t);\n        }\n        return merge(_assign_range(l,\
@@ -103,8 +131,8 @@ data:
     \ &vec) {\n        if (t == nullptr) return;\n        push(t);\n        dump(t->l,\
     \ vec);\n        vec.push_back(t->val);\n        dump(t->r, vec);\n    }\n\n \
     \   // gc\n    void re_alloc(Nptr &root) {\n        std::vector<S> mem;\n    \
-    \    dump(root, mem);\n        assign(root, mem);\n    }\n};\n\n// Persistent\
-    \ lazy randomized binary search tree\n// Verified: https://atcoder.jp/contests/arc030/tasks/arc030_4\n\
+    \    dump(root, mem);\n        d_ptr = 0;\n        assign(root, mem);\n    }\n\
+    };\n\n// Persistent lazy randomized binary search tree\n// Verified: https://atcoder.jp/contests/arc030/tasks/arc030_4\n\
     // CAUTION: https://yosupo.hatenablog.com/entry/2015/10/29/222536\ntemplate <int\
     \ LEN, class S, S (*op)(S, S), class F, S (*reversal)(S), S (*mapping)(F, S),\
     \ F (*composition)(F, F), F (*id)()>\nstruct persistent_lazy_rbst : lazy_rbst<LEN,\
@@ -187,21 +215,46 @@ data:
     \        _duplicate_node(p2.first);\n        *p2.first = Node(x);\n        root\
     \ = merge(p.first, merge(p2.first, p2.second));\n    }\n\n    // \u9045\u5EF6\u8A55\
     \u4FA1\u3092\u5229\u7528\u3057\u305F\u7BC4\u56F2\u66F4\u65B0 [l, r)\n    void\
-    \ apply(Nptr &root, int l, int r, const F &f) {\n        auto p = split(root,\
-    \ l);\n        auto p2 = split(p.second, r - l);\n        all_apply(p2.first,\
-    \ f);\n        root = merge(p.first, merge(p2.first, p2.second));\n    }\n\n \
-    \   // array[pos].val\u3092\u53D6\u5F97\u3059\u308B\n    S prod(Nptr &root, int\
-    \ l, int r) {\n        auto p = split(root, l);\n        auto p2 = split(p.second,\
-    \ r - l);\n        if (p2.first != nullptr) push(p2.first);\n        S res = p2.first->sum;\n\
+    \ apply(Nptr &root, int l, int r, const F &f) {\n        if (l == r) return;\n\
+    \        auto p = split(root, l);\n        auto p2 = split(p.second, r - l);\n\
+    \        all_apply(p2.first, f);\n        root = merge(p.first, merge(p2.first,\
+    \ p2.second));\n    }\n\n    S prod(Nptr &root, int l, int r) {\n        assert(l\
+    \ < r);\n        auto p = split(root, l);\n        auto p2 = split(p.second, r\
+    \ - l);\n        if (p2.first != nullptr) push(p2.first);\n        S res = p2.first->sum;\n\
     \        root = merge(p.first, merge(p2.first, p2.second));\n        return res;\n\
-    \    }\n\n    S get(Nptr &root, int pos) { return prod(root, pos, pos + 1); }\n\
-    \n    void reverse(Nptr &root) { _duplicate_node(root), _toggle(root); }\n   \
-    \ void reverse(Nptr &root, int l, int r) {\n        auto p2 = split(root, r);\n\
-    \        auto p1 = split(p2.first, l);\n        reverse(p1.second);\n        root\
-    \ = merge(merge(p1.first, p1.second), p2.second);\n    }\n\n    // \u30C7\u30FC\
-    \u30BF\u3092\u58CA\u3057\u3066\u65B0\u898F\u306Binit\u306E\u5185\u5BB9\u3092\u8A70\
-    \u3081\u308B\n    void assign(Nptr &root, const std::vector<S> &init) {\n    \
-    \    d_ptr = 0;\n        int N = init.size();\n        root = N ? _assign_range(0,\
+    \    }\n\n    // array[pos].val\u3092\u53D6\u5F97\u3059\u308B\n    S get(Nptr\
+    \ &root, int pos) { return prod(root, pos, pos + 1); }\n\n    template <bool (*g)(S)>\
+    \ int max_right(Nptr root, const S &e) {\n        return max_right(root, e, [](S\
+    \ x) { return g(x); });\n    }\n    template <class G> int max_right(Nptr root,\
+    \ const S &e, G g) {\n        assert(g(e));\n        if (root == nullptr) return\
+    \ 0;\n        push(root);\n        Nptr now = root;\n        S prod_now = e;\n\
+    \        int sz = 0;\n        while (true) {\n            if (now->l != nullptr)\
+    \ {\n                push(now->l);\n                auto pl = op(prod_now, now->l->sum);\n\
+    \                if (g(pl)) {\n                    prod_now = pl;\n          \
+    \          sz += now->l->sz;\n                } else {\n                    now\
+    \ = now->l;\n                    continue;\n                }\n            }\n\
+    \            auto pl = op(prod_now, now->val);\n            if (!g(pl)) return\
+    \ sz;\n            prod_now = pl, sz++;\n            if (now->r == nullptr) return\
+    \ sz;\n            push(now->r);\n            now = now->r;\n        }\n    }\n\
+    \n    template <bool (*g)(S)> int min_left(Nptr root, const S &e) {\n        return\
+    \ min_left(root, e, [](S x) { return g(x); });\n    }\n    template <class G>\
+    \ int min_left(Nptr root, const S &e, G g) {\n        assert(g(e));\n        if\
+    \ (root == nullptr) return 0;\n        push(root);\n        Nptr now = root;\n\
+    \        S prod_now = e;\n        int sz = size(root);\n        while (true) {\n\
+    \            if (now->r != nullptr) {\n                push(now->r);\n       \
+    \         auto pr = op(now->r->sum, prod_now);\n                if (g(pr)) {\n\
+    \                    prod_now = pr;\n                    sz -= now->r->sz;\n \
+    \               } else {\n                    now = now->r;\n                \
+    \    continue;\n                }\n            }\n            auto pr = op(now->val,\
+    \ prod_now);\n            if (!g(pr)) return sz;\n            prod_now = pr, sz--;\n\
+    \            if (now->l == nullptr) return sz;\n            push(now->l);\n  \
+    \          now = now->l;\n        }\n    }\n\n    void reverse(Nptr &root) { _duplicate_node(root),\
+    \ _toggle(root); }\n    void reverse(Nptr &root, int l, int r) {\n        auto\
+    \ p2 = split(root, r);\n        auto p1 = split(p2.first, l);\n        reverse(p1.second);\n\
+    \        root = merge(merge(p1.first, p1.second), p2.second);\n    }\n\n    //\
+    \ \u30C7\u30FC\u30BF\u3092\u58CA\u3057\u3066\u65B0\u898F\u306Binit\u306E\u5185\
+    \u5BB9\u3092\u8A70\u3081\u308B\n    void assign(Nptr &root, const std::vector<S>\
+    \ &init) {\n        int N = init.size();\n        root = N ? _assign_range(0,\
     \ N, init) : new_tree();\n    }\n    Nptr _assign_range(int l, int r, const std::vector<S>\
     \ &init) {\n        if (r - l == 1) {\n            Nptr t = _make_node(init[l]);\n\
     \            return update(t);\n        }\n        return merge(_assign_range(l,\
@@ -210,8 +263,8 @@ data:
     \ &vec) {\n        if (t == nullptr) return;\n        push(t);\n        dump(t->l,\
     \ vec);\n        vec.push_back(t->val);\n        dump(t->r, vec);\n    }\n\n \
     \   // gc\n    void re_alloc(Nptr &root) {\n        std::vector<S> mem;\n    \
-    \    dump(root, mem);\n        assign(root, mem);\n    }\n};\n\n// Persistent\
-    \ lazy randomized binary search tree\n// Verified: https://atcoder.jp/contests/arc030/tasks/arc030_4\n\
+    \    dump(root, mem);\n        d_ptr = 0;\n        assign(root, mem);\n    }\n\
+    };\n\n// Persistent lazy randomized binary search tree\n// Verified: https://atcoder.jp/contests/arc030/tasks/arc030_4\n\
     // CAUTION: https://yosupo.hatenablog.com/entry/2015/10/29/222536\ntemplate <int\
     \ LEN, class S, S (*op)(S, S), class F, S (*reversal)(S), S (*mapping)(F, S),\
     \ F (*composition)(F, F), F (*id)()>\nstruct persistent_lazy_rbst : lazy_rbst<LEN,\
@@ -231,10 +284,11 @@ data:
   isVerificationFile: false
   path: data_structure/lazy_rbst.hpp
   requiredBy: []
-  timestamp: '2021-08-01 16:49:00+09:00'
+  timestamp: '2021-08-26 00:10:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/lazy_rbst.test.cpp
+  - data_structure/test/lazy_rbst.stress.test.cpp
 documentation_of: data_structure/lazy_rbst.hpp
 layout: document
 title: Randomized binary search tree with lazy propagation
@@ -268,6 +322,10 @@ rbst.insert(root, i, S{x, 1});
 rbst.erase(root, i);
 rbst.reverse(root, l, r);
 rbst.apply(root, l, r, F{true, {b, c}});
+
+const S e;  // 単位元
+int i = rbst.max_right(root, e, [](S f) { return e < f; }); // rbst.prod(root, 0, i) が true となるような最大の i を返す．単調性を仮定．atcoder::lazy_segtree と同じ．
+int j = rbst.min_left(root, e, [](S f) { return e < f; }); // rbst.prod(root, j, size(root)) が true となるような最小の j を返す．単調性を仮定．atcoder::lazy_segtree と同じ．
 cout << rbst.prod(root, l, r).sum << '\n';
 ```
 
@@ -275,6 +333,7 @@ cout << rbst.prod(root, l, r).sum << '\n';
 
 - [D - グラフではない](https://atcoder.jp/contests/arc030/tasks/arc030_4)
 - [Dashboard - Algorithms Thread Treaps Contest - Codeforces](https://codeforces.com/gym/102787)
+- [Codeforces Round #740 (Div. 1, based on VK Cup 2021 - Final (Engine)) D. Top-Notch Insertions - Codeforces](https://codeforces.com/contest/1558/problem/D)
 
 ## 参考文献・リンク・参考にした実装
 
