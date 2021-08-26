@@ -30,3 +30,4 @@ int f = graph.flow(s, t);
 - [ORIE 633: Network Flows](https://people.orie.cornell.edu/dpw/orie633/)
 - [ORIE 6330: Network Flows](https://people.orie.cornell.edu/dpw/orie6330/)
 - [TL Issue in the #659 (Div. 1) Problem F - Codeforces](https://codeforces.com/blog/entry/80627) 時間制限が厳しい最大流の問題．
+- [or-tools/max_flow.h at stable · google/or-tools](https://github.com/google/or-tools/blob/stable/ortools/graph/max_flow.h) highest-label を高速に管理するデータ構造の実装が参考になる．

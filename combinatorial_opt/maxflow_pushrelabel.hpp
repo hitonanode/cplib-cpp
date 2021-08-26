@@ -50,15 +50,15 @@ struct mf_pushrelabel {
     std::vector<int> dist;
     std::vector<int> dcnt;
     std::vector<Cap> excess;
+    std::vector<int> q;
     int gap;
     void global_relabeling(int t) {
         dist.assign(_n, _n), dist[t] = 0;
-        static std::vector<int> q;
         if (q.empty()) q.resize(_n);
         q[0] = t;
         int qb = 0, qe = 1;
         pque.clear();
-        if (UseGapRelabeling) gap = 1, dcnt.assign(_n * 2, 0);
+        if (UseGapRelabeling) gap = 1, dcnt.assign(_n + 1, 0);
 
         while (qb < qe) {
             int now = q[qb++];
@@ -80,9 +80,9 @@ struct mf_pushrelabel {
         excess[s] = INF, excess[t] = -INF;
         dist.assign(_n, 0);
         dist[s] = _n;
+        if (UseGapRelabeling) gap = 1, dcnt.assign(_n + 1, 0), dcnt[0] = _n - 1;
         pque.init(_n);
         for (auto &e : g[s]) push(s, e);
-        if (UseGapRelabeling) gap = 1, dcnt.assign(_n * 2, 0), dcnt[0] = _n - 1;
         if (UseGlobalRelabeling) global_relabeling(t);
         int tick = _n;
         while (!pque.empty()) {
@@ -100,13 +100,11 @@ struct mf_pushrelabel {
             }
             if (excess[i] > 0) {
                 if (UseGapRelabeling) {
-                    if (dnxt != dist[i]) {
-                        dcnt[dist[i]]--, dcnt[dnxt]++;
-                        if (!dcnt[dist[i]] and dist[i] < gap) gap = dist[i];
-                    }
+                    if (dnxt != dist[i] and dcnt[dist[i]] == 1 and dist[i] < gap) gap = dist[i];
                     if (dnxt == gap) gap++;
                     while (pque.highest() > gap) pque.pop();
                     if (dnxt > gap) dnxt = _n;
+                    if (dist[i] != dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;
                 }
                 dist[i] = dnxt;
                 if (!UseGapRelabeling or dist[i] < gap) pque.push(i, dist[i]);
@@ -120,6 +118,8 @@ struct mf_pushrelabel {
         Cap delta = e.cap < excess[i] ? e.cap : excess[i];
         excess[i] -= delta, e.cap -= delta;
         excess[e.to] += delta, g[e.to][e.rev].cap += delta;
-        if (excess[e.to] > 0 and excess[e.to] <= delta) pque.push(e.to, dist[e.to]);
+        if (excess[e.to] > 0 and excess[e.to] <= delta) {
+            if (!UseGapRelabeling or dist[e.to] <= gap) pque.push(e.to, dist[e.to]);
+        }
     }
 };
