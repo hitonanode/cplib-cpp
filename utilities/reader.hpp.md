@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
+    title: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_product.test.cpp
     title: linear_algebra_matrix/test/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
@@ -39,6 +42,7 @@ data:
   timestamp: '2021-08-01 21:42:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
   - string/test/sa_count_keyword.reader.test.cpp
 documentation_of: utilities/reader.hpp
