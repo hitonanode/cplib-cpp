@@ -8,10 +8,10 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int V, E;
     cin >> V >> E;
-    mf_pushrelabel<int, 1 << 29, false, false> g00(V);
-    mf_pushrelabel<int, 1 << 29, false, true> g01(V);
-    mf_pushrelabel<int, 1 << 29, true, false> g10(V);
-    mf_pushrelabel<int, 1 << 29, true, true> g11(V);
+    mf_pushrelabel<int, 1 << 29, 0, false> g00(V);
+    mf_pushrelabel<int, 1 << 29, 0, true> g01(V);
+    mf_pushrelabel<int, 1 << 29, 2, false> g10(V);
+    mf_pushrelabel<int, 1 << 29, 2, true> g11(V);
     while (E--) {
         int u, v, c;
         cin >> u >> v >> c;

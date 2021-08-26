@@ -19,7 +19,7 @@ int main() {
     for (auto &x : C) x = rdi(), tot += x;
 
     int Z = 1 + H + W;
-    mf_pushrelabel<long long> g(Z + 1);
+    mf_pushrelabel<long long, 1LL << 60, 6, true> g(Z + 1);
 
     for (int i = 0; i < H; i++) {
         auto gtot = accumulate(G[i].begin(), G[i].end(), 0LL);

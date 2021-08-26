@@ -6,7 +6,7 @@
 
 // Maxflow (push-relabel, highest-label)
 // Complexity: O(N^2 M^(1/2))
-template <class Cap, Cap INF = std::numeric_limits<Cap>::max() / 2, bool UseGlobalRelabeling = true, bool UseGapRelabeling = true>
+template <class Cap, Cap INF = std::numeric_limits<Cap>::max() / 2, int GlobalRelabelFreq = 5, bool UseGapRelabeling = true>
 struct mf_pushrelabel {
     struct pque_ {
         std::vector<std::pair<int, int>> even_, odd_;
@@ -34,7 +34,10 @@ struct mf_pushrelabel {
     };
     std::vector<std::vector<_edge>> g;
     std::vector<std::pair<int, int>> pos;
-    mf_pushrelabel(int n) : _n(n), g(n) { static_assert(INF > 0, "INF must be positive."); }
+    mf_pushrelabel(int n) : _n(n), g(n) {
+        static_assert(GlobalRelabelFreq >= 0, "Global relabel parameter must be nonnegative.");
+        static_assert(INF > 0, "INF must be positive.");
+    }
     int add_edge(int from, int to, Cap cap) {
         assert(0 <= from and from < _n);
         assert(0 <= to and to < _n);
@@ -83,8 +86,8 @@ struct mf_pushrelabel {
         if (UseGapRelabeling) gap = 1, dcnt.assign(_n + 1, 0), dcnt[0] = _n - 1;
         pque.init(_n);
         for (auto &e : g[s]) push(s, e);
-        if (UseGlobalRelabeling) global_relabeling(t);
-        int tick = _n;
+        if (GlobalRelabelFreq) global_relabeling(t);
+        int tick = pos.size() * GlobalRelabelFreq;
         while (!pque.empty()) {
             int i = pque.pop();
             if (UseGapRelabeling and dist[i] > gap) continue;
@@ -109,7 +112,9 @@ struct mf_pushrelabel {
                 dist[i] = dnxt;
                 if (!UseGapRelabeling or dist[i] < gap) pque.push(i, dist[i]);
             }
-            if (UseGlobalRelabeling and --tick == 0) tick = _n, global_relabeling(t);
+            if (GlobalRelabelFreq and --tick == 0) {
+                tick = pos.size() * GlobalRelabelFreq, global_relabeling(t);
+            }
         }
         return excess[t] + INF;
     }
