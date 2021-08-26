@@ -6,7 +6,7 @@
 
 // Maxflow (push-relabel, highest-label)
 // Complexity: O(N^2 M^(1/2))
-template <class Cap, Cap INF = std::numeric_limits<Cap>::max() / 2, bool UseGlobalRelabeling = false>
+template <class Cap, Cap INF = std::numeric_limits<Cap>::max() / 2, bool UseGlobalRelabeling = true, bool UseGapRelabeling = true>
 struct mf_pushrelabel {
     struct pque_ {
         std::vector<std::pair<int, int>> even_, odd_;
@@ -15,6 +15,10 @@ struct mf_pushrelabel {
         void clear() { se = so = 0; }
         bool empty() const { return se + so == 0; }
         void push(int i, int h) { (h & 1 ? odd_[so++] : even_[se++]) = {i, h}; }
+        int highest() const {
+            int a = se ? even_[se - 1].second : -1, b = so ? odd_[so - 1].second : -1;
+            return a > b ? a : b;
+        }
         int pop() {
             if (!se or (so and odd_[so - 1].second > even_[se - 1].second)) {
                 return odd_[--so].first;
@@ -44,21 +48,26 @@ struct mf_pushrelabel {
     }
 
     std::vector<int> dist;
+    std::vector<int> dcnt;
     std::vector<Cap> excess;
+    int gap;
     void global_relabeling(int t) {
-        if (!UseGlobalRelabeling) return;
         dist.assign(_n, _n), dist[t] = 0;
         static std::vector<int> q;
-        q = {t};
-        int qh = 0;
+        if (q.empty()) q.resize(_n);
+        q[0] = t;
+        int qb = 0, qe = 1;
         pque.clear();
-        while (qh < int(q.size())) {
-            int now = q[qh++];
+        if (UseGapRelabeling) gap = 1, dcnt.assign(_n * 2, 0);
+
+        while (qb < qe) {
+            int now = q[qb++];
+            if (UseGapRelabeling) gap = dist[now] + 1, dcnt[dist[now]]++;
             if (excess[now] > 0) pque.push(now, dist[now]);
             for (const auto &e : g[now]) {
                 if (g[e.to][e.rev].cap and dist[e.to] == _n) {
                     dist[e.to] = dist[now] + 1;
-                    q.push_back(e.to);
+                    q[qe++] = e.to;
                 }
             }
         }
@@ -73,10 +82,12 @@ struct mf_pushrelabel {
         dist[s] = _n;
         pque.init(_n);
         for (auto &e : g[s]) push(s, e);
-        global_relabeling(t);
+        if (UseGapRelabeling) gap = 1, dcnt.assign(_n * 2, 0), dcnt[0] = _n - 1;
+        if (UseGlobalRelabeling) global_relabeling(t);
         int tick = _n;
         while (!pque.empty()) {
             int i = pque.pop();
+            if (UseGapRelabeling and dist[i] > gap) continue;
             int dnxt = _n * 2 - 1;
             for (auto &e : g[i]) {
                 if (!e.cap) continue;
@@ -87,8 +98,20 @@ struct mf_pushrelabel {
                     if (dist[e.to] + 1 < dnxt) dnxt = dist[e.to] + 1;
                 }
             }
-            if (excess[i] > 0) pque.push(i, dist[i] = dnxt);
-            if (--tick == 0) tick = _n, global_relabeling(t);
+            if (excess[i] > 0) {
+                if (UseGapRelabeling) {
+                    if (dnxt != dist[i]) {
+                        dcnt[dist[i]]--, dcnt[dnxt]++;
+                        if (!dcnt[dist[i]] and dist[i] < gap) gap = dist[i];
+                    }
+                    if (dnxt == gap) gap++;
+                    while (pque.highest() > gap) pque.pop();
+                    if (dnxt > gap) dnxt = _n;
+                }
+                dist[i] = dnxt;
+                if (!UseGapRelabeling or dist[i] < gap) pque.push(i, dist[i]);
+            }
+            if (UseGlobalRelabeling and --tick == 0) tick = _n, global_relabeling(t);
         }
         return excess[t] + INF;
     }
