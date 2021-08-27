@@ -156,6 +156,35 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
         }
     }
 
+    bool dag_solver(int s) {
+        assert(0 <= s and s < V);
+        std::vector<int> indeg(V, 0);
+        std::queue<int> que;
+        que.push(s);
+        while (que.size()) {
+            int now = que.front();
+            que.pop();
+            for (auto nx : to[now]) {
+                indeg[nx.first]++;
+                if (indeg[nx.first] == 1) que.push(nx.first);
+            }
+        }
+        dist.assign(V, INF), prev.assign(V, INVALID);
+        dist[s] = 0;
+        que.push(s);
+        while (que.size()) {
+            int now = que.front();
+            que.pop();
+            for (auto nx : to[now]) {
+                indeg[nx.first]--;
+                if (dist[nx.first] > dist[now] + nx.second)
+                    dist[nx.first] = dist[now] + nx.second, prev[nx.first] = now;
+                if (indeg[nx.first] == 0) que.push(nx.first);
+            }
+        }
+        return *max_element(indeg.begin(), indeg.end()) == 0;
+    }
+
     // Retrieve a sequence of vertex ids that represents shortest path [s, ..., goal]
     // If not reachable to goal, return {}
     std::vector<int> retrieve_path(int goal) const {
