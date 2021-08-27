@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: number/count_primes.hpp
-    title: number/count_primes.hpp
+    title: "Counting primes \uFF08\u7D20\u6570\u306E\u500B\u6570\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,7 +19,7 @@ data:
     \n#include <algorithm>\n#include <cmath>\n#include <vector>\n\n// CUT begin\n\
     struct CountPrimes {\n    // Count Primes less than or equal to x (\\pi(x)) for\
     \ each x = N / i (i = 1, ..., N) in O(N^(2/3)) time\n    // Learned this algorihtm\
-    \ from <https://old.yosupo.jp/submission/14650>\n    // Reference: <https://min-25.hatenablog.com/entry/2018/11/11/172216>\n\
+    \ from https://old.yosupo.jp/submission/14650\n    // Reference: https://min-25.hatenablog.com/entry/2018/11/11/172216\n\
     \    using Int = long long;\n    Int n, n2, n3, n6;\n    std::vector<int> is_prime;\
     \ // [0, 0, 1, 1, 0, 1, 0, 1, ...]\n    std::vector<Int> primes;   // primes up\
     \ to O(N^(1/2)), [2, 3, 5, 7, ...]\n\n    int s;               // size of vs\n\
@@ -35,7 +35,7 @@ data:
     \ j++) _fenwick_rec_update(j, cur * primes[j], false);\n    }\n\n    CountPrimes(Int\
     \ n_) : n(n_), n2((Int)sqrtl(n)), n3((Int)cbrtl(n)), n6((Int)sqrtl(n3)) {\n  \
     \      is_prime.assign(n2 + 300, 1), is_prime[0] = is_prime[1] = 0; // `+ 300`:\
-    \ <https://en.wikipedia.org/wiki/Prime_gap>\n        for (size_t p = 2; p < is_prime.size();\
+    \ https://en.wikipedia.org/wiki/Prime_gap\n        for (size_t p = 2; p < is_prime.size();\
     \ p++) {\n            if (is_prime[p]) {\n                primes.push_back(p);\n\
     \                for (size_t j = p * 2; j < is_prime.size(); j += p) is_prime[j]\
     \ = 0;\n            }\n        }\n        for (Int now = n; now; now = n / (n\
@@ -76,9 +76,9 @@ data:
     \ = \\sum_{i=1}^{N^(1/3)} \\pi(\\sqrt(vs[i])))\n        //                   \
     \                                               = sqrt(N) \\sum_i^{N^(1/3)} i^{-1/2}\
     \ / logN = O(N^(2/3) / logN)\n        //     (Note: \\sum_{i=1}^{N} i^{-1/2} =\
-    \ O(sqrt N) <https://math.stackexchange.com/questions/2600796/finding-summation-of-inverse-of-square-roots>)\n\
-    \        for (; primes[ip] <= n2; ip++, pre++) {\n            const auto &p =\
-    \ primes[ip];\n            for (int i = 0; p * p <= vs[i]; i++) trans(i, p);\n\
+    \ O(sqrt N) https://math.stackexchange.com/questions/2600796/finding-summation-of-inverse-of-square-roots\
+    \ )\n        for (; primes[ip] <= n2; ip++, pre++) {\n            const auto &p\
+    \ = primes[ip];\n            for (int i = 0; p * p <= vs[i]; i++) trans(i, p);\n\
     \        }\n    }\n};\n#line 3 \"number/test/count_primes.test.cpp\"\n#include\
     \ <iostream>\n\nint main() {\n    long long N;\n    std::cout << CountPrimes((std::cin\
     \ >> N, N)).pi[0] << '\\n';\n}\n"
@@ -90,7 +90,7 @@ data:
   isVerificationFile: true
   path: number/test/count_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-01-12 01:46:09+09:00'
+  timestamp: '2021-08-27 23:43:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/count_primes.test.cpp

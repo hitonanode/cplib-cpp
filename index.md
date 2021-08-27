@@ -305,7 +305,7 @@ data:
       title: number/bs_sieve.hpp
     - icon: ':heavy_check_mark:'
       path: number/count_primes.hpp
-      title: number/count_primes.hpp
+      title: "Counting primes \uFF08\u7D20\u6570\u306E\u500B\u6570\uFF09"
     - icon: ':warning:'
       path: number/cyclotomic_polynomials.hpp
       title: "Cyclotomic polynomials \uFF08\u5186\u5206\u591A\u9805\u5F0F\uFF09"
