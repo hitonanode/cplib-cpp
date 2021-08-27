@@ -882,6 +882,9 @@ data:
       path: graph/test/shortest_path.test.cpp
       title: graph/test/shortest_path.test.cpp
     - icon: ':heavy_check_mark:'
+      path: graph/test/shortest_path_dag.test.cpp
+      title: graph/test/shortest_path_dag.test.cpp
+    - icon: ':heavy_check_mark:'
       path: graph/test/spfa.test.cpp
       title: graph/test/spfa.test.cpp
     - icon: ':heavy_check_mark:'

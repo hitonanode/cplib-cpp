@@ -11,18 +11,19 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C
+    PROBLEM: https://yukicoder.me/problems/no/1660
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C
-  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
-    \ <limits>\n#include <queue>\n#include <string>\n#include <utility>\n#include\
-    \ <vector>\n\n// CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
-    \ / 2, int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
-    \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
-    \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
-    \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
-    \ <= s and s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t,\
+    - https://yukicoder.me/problems/no/1660
+  bundledCode: "#line 1 \"graph/test/shortest_path_dag.test.cpp\"\n#define PROBLEM\
+    \ \"https://yukicoder.me/problems/no/1660\"\n#line 2 \"graph/shortest_path.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <deque>\n#include <fstream>\n\
+    #include <functional>\n#include <limits>\n#include <queue>\n#include <string>\n\
+    #include <utility>\n#include <vector>\n\n// CUT begin\ntemplate <typename T, T\
+    \ INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath\
+    \ {\n    int V, E;\n    bool single_positive_weight;\n    T wmin, wmax;\n    std::vector<std::vector<std::pair<int,\
+    \ T>>> to;\n\n    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true),\
+    \ wmin(0), wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n       \
+    \ assert(0 <= s and s < V);\n        assert(0 <= t and t < V);\n        to[s].emplace_back(t,\
     \ w);\n        E++;\n        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight\
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
@@ -116,38 +117,38 @@ data:
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
     \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
     ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n#line 2 \"graph/test/warshallfloyd.test.cpp\"\n#include <iostream>\n\
-    #line 4 \"graph/test/warshallfloyd.test.cpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C\"\
-    \nusing namespace std;\n\nint main() {\n    int V, E;\n    cin >> V >> E;\n  \
-    \  constexpr int INF = 2000000000;\n    ShortestPath<int, INF> graph(V);\n   \
-    \ while (E--) {\n        int s, t, d;\n        cin >> s >> t >> d;\n        graph.add_edge(s,\
-    \ t, d);\n    }\n\n    graph.WarshallFloyd();\n    for (int i = 0; i < V; i++)\
-    \ {\n        if (graph.dist2d[i][i] < 0) {\n            cout << \"NEGATIVE CYCLE\\\
-    n\";\n            return 0;\n        }\n    }\n\n    for (auto vec : graph.dist2d)\
-    \ {\n        for (int i = 0; i < V; i++) cout << (vec[i] < INF ? to_string(vec[i])\
-    \ : \"INF\") << (i + 1 == V ? '\\n' : ' ');\n    }\n}\n"
-  code: "#include \"../shortest_path.hpp\"\n#include <iostream>\n#include <string>\n\
-    #define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C\"\
-    \nusing namespace std;\n\nint main() {\n    int V, E;\n    cin >> V >> E;\n  \
-    \  constexpr int INF = 2000000000;\n    ShortestPath<int, INF> graph(V);\n   \
-    \ while (E--) {\n        int s, t, d;\n        cin >> s >> t >> d;\n        graph.add_edge(s,\
-    \ t, d);\n    }\n\n    graph.WarshallFloyd();\n    for (int i = 0; i < V; i++)\
-    \ {\n        if (graph.dist2d[i][i] < 0) {\n            cout << \"NEGATIVE CYCLE\\\
-    n\";\n            return 0;\n        }\n    }\n\n    for (auto vec : graph.dist2d)\
-    \ {\n        for (int i = 0; i < V; i++) cout << (vec[i] < INF ? to_string(vec[i])\
-    \ : \"INF\") << (i + 1 == V ? '\\n' : ' ');\n    }\n}\n"
+    \    }\n};\n#line 4 \"graph/test/shortest_path_dag.test.cpp\"\n#include <iostream>\n\
+    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, K;\n    cin >> N >> K;\n    ShortestPath<int> graph(N + 1);\n    vector<int>\
+    \ indeg(N);\n    while (K--) {\n        int r, c;\n        cin >> r >> c;\n  \
+    \      r--, c--;\n        if (r == c) {\n            cout << \"-1\\n\";\n    \
+    \        return 0;\n        }\n        indeg[c]++;\n        graph.add_edge(r,\
+    \ c, -1);\n    }\n    for (int i = 0; i < N; i++) graph.add_edge(N, i, -1);\n\
+    \    if (graph.dag_solver(N)) {\n        cout << -(*min_element(graph.dist.begin(),\
+    \ graph.dist.end())) << '\\n';\n    } else {\n        cout << \"-1\\n\";\n   \
+    \ }\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1660\"\n#include \"../shortest_path.hpp\"\
+    \n#include <algorithm>\n#include <iostream>\nusing namespace std;\n\nint main()\
+    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, K;\n    cin\
+    \ >> N >> K;\n    ShortestPath<int> graph(N + 1);\n    vector<int> indeg(N);\n\
+    \    while (K--) {\n        int r, c;\n        cin >> r >> c;\n        r--, c--;\n\
+    \        if (r == c) {\n            cout << \"-1\\n\";\n            return 0;\n\
+    \        }\n        indeg[c]++;\n        graph.add_edge(r, c, -1);\n    }\n  \
+    \  for (int i = 0; i < N; i++) graph.add_edge(N, i, -1);\n    if (graph.dag_solver(N))\
+    \ {\n        cout << -(*min_element(graph.dist.begin(), graph.dist.end())) <<\
+    \ '\\n';\n    } else {\n        cout << \"-1\\n\";\n    }\n}\n"
   dependsOn:
   - graph/shortest_path.hpp
   isVerificationFile: true
-  path: graph/test/warshallfloyd.test.cpp
+  path: graph/test/shortest_path_dag.test.cpp
   requiredBy: []
   timestamp: '2021-08-28 00:57:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph/test/warshallfloyd.test.cpp
+documentation_of: graph/test/shortest_path_dag.test.cpp
 layout: document
 redirect_from:
-- /verify/graph/test/warshallfloyd.test.cpp
-- /verify/graph/test/warshallfloyd.test.cpp.html
-title: graph/test/warshallfloyd.test.cpp
+- /verify/graph/test/shortest_path_dag.test.cpp
+- /verify/graph/test/shortest_path_dag.test.cpp.html
+title: graph/test/shortest_path_dag.test.cpp
 ---

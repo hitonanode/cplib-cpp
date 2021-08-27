@@ -13,6 +13,9 @@ data:
     path: graph/test/shortest_path.test.cpp
     title: graph/test/shortest_path.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/shortest_path_dag.test.cpp
+    title: graph/test/shortest_path_dag.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/spfa.test.cpp
     title: graph/test/spfa.test.cpp
   - icon: ':heavy_check_mark:'
@@ -87,22 +90,34 @@ data:
     \ if (nx.second) {\n                        que.push_back(nx.first);\n       \
     \             } else {\n                        que.push_front(nx.first);\n  \
     \                  }\n                }\n            }\n        }\n    }\n\n \
-    \   // Retrieve a sequence of vertex ids that represents shortest path [s, ...,\
-    \ goal]\n    // If not reachable to goal, return {}\n    std::vector<int> retrieve_path(int\
-    \ goal) const {\n        assert(int(prev.size()) == V);\n        assert(0 <= goal\
-    \ and goal < V);\n        if (dist[goal] == INF) return {};\n        std::vector<int>\
-    \ ret{goal};\n        while (prev[goal] != INVALID) {\n            goal = prev[goal];\n\
-    \            ret.push_back(goal);\n        }\n        std::reverse(ret.begin(),\
-    \ ret.end());\n        return ret;\n    }\n\n    void solve(int s) {\n       \
-    \ if (wmin >= 0) {\n            if (single_positive_weight) {\n              \
-    \  ZeroOneBFS(s);\n            } else {\n                if ((long long)V * V\
-    \ < (E << 4)) {\n                    DijkstraVquad(s);\n                } else\
-    \ {\n                    Dijkstra(s);\n                }\n            }\n    \
-    \    } else {\n            BellmanFord(s, V);\n        }\n    }\n\n    // Warshall-Floyd\
-    \ algorithm\n    // Complexity: O(E + V^3)\n    std::vector<std::vector<T>> dist2d;\n\
-    \    void WarshallFloyd() {\n        dist2d.assign(V, std::vector<T>(V, INF));\n\
-    \        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n      \
-    \      for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
+    \   bool dag_solver(int s) {\n        assert(0 <= s and s < V);\n        std::vector<int>\
+    \ indeg(V, 0);\n        std::queue<int> que;\n        que.push(s);\n        while\
+    \ (que.size()) {\n            int now = que.front();\n            que.pop();\n\
+    \            for (auto nx : to[now]) {\n                indeg[nx.first]++;\n \
+    \               if (indeg[nx.first] == 1) que.push(nx.first);\n            }\n\
+    \        }\n        dist.assign(V, INF), prev.assign(V, INVALID);\n        dist[s]\
+    \ = 0;\n        que.push(s);\n        while (que.size()) {\n            int now\
+    \ = que.front();\n            que.pop();\n            for (auto nx : to[now])\
+    \ {\n                indeg[nx.first]--;\n                if (dist[nx.first] >\
+    \ dist[now] + nx.second)\n                    dist[nx.first] = dist[now] + nx.second,\
+    \ prev[nx.first] = now;\n                if (indeg[nx.first] == 0) que.push(nx.first);\n\
+    \            }\n        }\n        return *max_element(indeg.begin(), indeg.end())\
+    \ == 0;\n    }\n\n    // Retrieve a sequence of vertex ids that represents shortest\
+    \ path [s, ..., goal]\n    // If not reachable to goal, return {}\n    std::vector<int>\
+    \ retrieve_path(int goal) const {\n        assert(int(prev.size()) == V);\n  \
+    \      assert(0 <= goal and goal < V);\n        if (dist[goal] == INF) return\
+    \ {};\n        std::vector<int> ret{goal};\n        while (prev[goal] != INVALID)\
+    \ {\n            goal = prev[goal];\n            ret.push_back(goal);\n      \
+    \  }\n        std::reverse(ret.begin(), ret.end());\n        return ret;\n   \
+    \ }\n\n    void solve(int s) {\n        if (wmin >= 0) {\n            if (single_positive_weight)\
+    \ {\n                ZeroOneBFS(s);\n            } else {\n                if\
+    \ ((long long)V * V < (E << 4)) {\n                    DijkstraVquad(s);\n   \
+    \             } else {\n                    Dijkstra(s);\n                }\n\
+    \            }\n        } else {\n            BellmanFord(s, V);\n        }\n\
+    \    }\n\n    // Warshall-Floyd algorithm\n    // Complexity: O(E + V^3)\n   \
+    \ std::vector<std::vector<T>> dist2d;\n    void WarshallFloyd() {\n        dist2d.assign(V,\
+    \ std::vector<T>(V, INF));\n        for (int i = 0; i < V; i++) {\n          \
+    \  dist2d[i][i] = 0;\n            for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
     \ p.second);\n        }\n        for (int k = 0; k < V; k++) {\n            for\
     \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
     \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
@@ -178,22 +193,34 @@ data:
     \ if (nx.second) {\n                        que.push_back(nx.first);\n       \
     \             } else {\n                        que.push_front(nx.first);\n  \
     \                  }\n                }\n            }\n        }\n    }\n\n \
-    \   // Retrieve a sequence of vertex ids that represents shortest path [s, ...,\
-    \ goal]\n    // If not reachable to goal, return {}\n    std::vector<int> retrieve_path(int\
-    \ goal) const {\n        assert(int(prev.size()) == V);\n        assert(0 <= goal\
-    \ and goal < V);\n        if (dist[goal] == INF) return {};\n        std::vector<int>\
-    \ ret{goal};\n        while (prev[goal] != INVALID) {\n            goal = prev[goal];\n\
-    \            ret.push_back(goal);\n        }\n        std::reverse(ret.begin(),\
-    \ ret.end());\n        return ret;\n    }\n\n    void solve(int s) {\n       \
-    \ if (wmin >= 0) {\n            if (single_positive_weight) {\n              \
-    \  ZeroOneBFS(s);\n            } else {\n                if ((long long)V * V\
-    \ < (E << 4)) {\n                    DijkstraVquad(s);\n                } else\
-    \ {\n                    Dijkstra(s);\n                }\n            }\n    \
-    \    } else {\n            BellmanFord(s, V);\n        }\n    }\n\n    // Warshall-Floyd\
-    \ algorithm\n    // Complexity: O(E + V^3)\n    std::vector<std::vector<T>> dist2d;\n\
-    \    void WarshallFloyd() {\n        dist2d.assign(V, std::vector<T>(V, INF));\n\
-    \        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n      \
-    \      for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
+    \   bool dag_solver(int s) {\n        assert(0 <= s and s < V);\n        std::vector<int>\
+    \ indeg(V, 0);\n        std::queue<int> que;\n        que.push(s);\n        while\
+    \ (que.size()) {\n            int now = que.front();\n            que.pop();\n\
+    \            for (auto nx : to[now]) {\n                indeg[nx.first]++;\n \
+    \               if (indeg[nx.first] == 1) que.push(nx.first);\n            }\n\
+    \        }\n        dist.assign(V, INF), prev.assign(V, INVALID);\n        dist[s]\
+    \ = 0;\n        que.push(s);\n        while (que.size()) {\n            int now\
+    \ = que.front();\n            que.pop();\n            for (auto nx : to[now])\
+    \ {\n                indeg[nx.first]--;\n                if (dist[nx.first] >\
+    \ dist[now] + nx.second)\n                    dist[nx.first] = dist[now] + nx.second,\
+    \ prev[nx.first] = now;\n                if (indeg[nx.first] == 0) que.push(nx.first);\n\
+    \            }\n        }\n        return *max_element(indeg.begin(), indeg.end())\
+    \ == 0;\n    }\n\n    // Retrieve a sequence of vertex ids that represents shortest\
+    \ path [s, ..., goal]\n    // If not reachable to goal, return {}\n    std::vector<int>\
+    \ retrieve_path(int goal) const {\n        assert(int(prev.size()) == V);\n  \
+    \      assert(0 <= goal and goal < V);\n        if (dist[goal] == INF) return\
+    \ {};\n        std::vector<int> ret{goal};\n        while (prev[goal] != INVALID)\
+    \ {\n            goal = prev[goal];\n            ret.push_back(goal);\n      \
+    \  }\n        std::reverse(ret.begin(), ret.end());\n        return ret;\n   \
+    \ }\n\n    void solve(int s) {\n        if (wmin >= 0) {\n            if (single_positive_weight)\
+    \ {\n                ZeroOneBFS(s);\n            } else {\n                if\
+    \ ((long long)V * V < (E << 4)) {\n                    DijkstraVquad(s);\n   \
+    \             } else {\n                    Dijkstra(s);\n                }\n\
+    \            }\n        } else {\n            BellmanFord(s, V);\n        }\n\
+    \    }\n\n    // Warshall-Floyd algorithm\n    // Complexity: O(E + V^3)\n   \
+    \ std::vector<std::vector<T>> dist2d;\n    void WarshallFloyd() {\n        dist2d.assign(V,\
+    \ std::vector<T>(V, INF));\n        for (int i = 0; i < V; i++) {\n          \
+    \  dist2d[i][i] = 0;\n            for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first],\
     \ p.second);\n        }\n        for (int k = 0; k < V; k++) {\n            for\
     \ (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
     \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
@@ -209,13 +236,14 @@ data:
   isVerificationFile: false
   path: graph/shortest_path.hpp
   requiredBy: []
-  timestamp: '2021-07-17 19:57:35+09:00'
+  timestamp: '2021-08-28 00:57:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/shortest_cycle.test.cpp
   - graph/test/spfa.test.cpp
   - graph/test/bellman_ford.test.cpp
   - graph/test/shortest_path.test.cpp
+  - graph/test/shortest_path_dag.test.cpp
   - graph/test/warshallfloyd.test.cpp
 documentation_of: graph/shortest_path.hpp
 layout: document
@@ -228,7 +256,7 @@ title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
 - 全ての辺重みが非負で，非零の辺重みの値が高々一通りならば， 0-1 BFS で解く．$O(V + E)$
 - それ以外の場合，Dijkstra 法で解く．$O(V^2 + E)$ または $O(E \log E)$
 
-また，SPFA （$O(VE)$），全点対最短路アルゴリズム（Floyd-Warshall 法，$O(E + V^3)$）も実装されている．`retrieve_path(int t)` で最短路の復元が，また `dump_graphviz(string filename)` で `.DOT` 形式のグラフ出力が可能．
+また，SPFA （$O(VE)$），全点対最短路アルゴリズム（Floyd-Warshall 法，$O(E + V^3)$），DAG用ソルバー（$O(V + E)$）も実装されている．`retrieve_path(int t)` で最短路の復元が，また `dump_graphviz(string filename)` で `.DOT` 形式のグラフ出力が可能．
 
 ## 使用方法
 
@@ -249,3 +277,4 @@ cout << graph.dist[t] << '\n';
 ## 問題例
 
 - [Library Checker - Shortest Path](https://judge.yosupo.jp/problem/shortest_path)
+- [No.1660 Matrix Exponentiation - yukicoder](https://yukicoder.me/problems/no/1660) DAG の場合．
