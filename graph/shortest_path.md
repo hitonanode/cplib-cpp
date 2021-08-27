@@ -9,7 +9,7 @@ documentation_of: ./shortest_path.hpp
 - 全ての辺重みが非負で，非零の辺重みの値が高々一通りならば， 0-1 BFS で解く．$O(V + E)$
 - それ以外の場合，Dijkstra 法で解く．$O(V^2 + E)$ または $O(E \log E)$
 
-また，SPFA （$O(VE)$），全点対最短路アルゴリズム（Floyd-Warshall 法，$O(E + V^3)$）も実装されている．`retrieve_path(int t)` で最短路の復元が，また `dump_graphviz(string filename)` で `.DOT` 形式のグラフ出力が可能．
+また，SPFA （$O(VE)$），全点対最短路アルゴリズム（Floyd-Warshall 法，$O(E + V^3)$），DAG用ソルバー（$O(V + E)$）も実装されている．`retrieve_path(int t)` で最短路の復元が，また `dump_graphviz(string filename)` で `.DOT` 形式のグラフ出力が可能．
 
 ## 使用方法
 
@@ -30,3 +30,4 @@ cout << graph.dist[t] << '\n';
 ## 問題例
 
 - [Library Checker - Shortest Path](https://judge.yosupo.jp/problem/shortest_path)
+- [No.1660 Matrix Exponentiation - yukicoder](https://yukicoder.me/problems/no/1660) DAG の場合．
