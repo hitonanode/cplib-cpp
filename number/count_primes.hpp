@@ -6,8 +6,8 @@
 // CUT begin
 struct CountPrimes {
     // Count Primes less than or equal to x (\pi(x)) for each x = N / i (i = 1, ..., N) in O(N^(2/3)) time
-    // Learned this algorihtm from <https://old.yosupo.jp/submission/14650>
-    // Reference: <https://min-25.hatenablog.com/entry/2018/11/11/172216>
+    // Learned this algorihtm from https://old.yosupo.jp/submission/14650
+    // Reference: https://min-25.hatenablog.com/entry/2018/11/11/172216
     using Int = long long;
     Int n, n2, n3, n6;
     std::vector<int> is_prime; // [0, 0, 1, 1, 0, 1, 0, 1, ...]
@@ -29,7 +29,7 @@ struct CountPrimes {
     }
 
     CountPrimes(Int n_) : n(n_), n2((Int)sqrtl(n)), n3((Int)cbrtl(n)), n6((Int)sqrtl(n3)) {
-        is_prime.assign(n2 + 300, 1), is_prime[0] = is_prime[1] = 0; // `+ 300`: <https://en.wikipedia.org/wiki/Prime_gap>
+        is_prime.assign(n2 + 300, 1), is_prime[0] = is_prime[1] = 0; // `+ 300`: https://en.wikipedia.org/wiki/Prime_gap
         for (size_t p = 2; p < is_prime.size(); p++) {
             if (is_prime[p]) {
                 primes.push_back(p);
@@ -89,7 +89,7 @@ struct CountPrimes {
         // - Complexity of this part: O(N^(2/3) / logN)
         //     \sum_i (# of factors of vs[i] of the form p^2, p >= N^(1/3)) = \sum_{i=1}^{N^(1/3)} \pi(\sqrt(vs[i])))
         //                                                                  = sqrt(N) \sum_i^{N^(1/3)} i^{-1/2} / logN = O(N^(2/3) / logN)
-        //     (Note: \sum_{i=1}^{N} i^{-1/2} = O(sqrt N) <https://math.stackexchange.com/questions/2600796/finding-summation-of-inverse-of-square-roots>)
+        //     (Note: \sum_{i=1}^{N} i^{-1/2} = O(sqrt N) https://math.stackexchange.com/questions/2600796/finding-summation-of-inverse-of-square-roots )
         for (; primes[ip] <= n2; ip++, pre++) {
             const auto &p = primes[ip];
             for (int i = 0; p * p <= vs[i]; i++) trans(i, p);
