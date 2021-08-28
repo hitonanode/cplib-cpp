@@ -8,10 +8,10 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int V, E;
     cin >> V >> E;
-    mf_pushrelabel<int, 1 << 29, 0, false> g00(V);
-    mf_pushrelabel<int, 1 << 29, 0, true> g01(V);
-    mf_pushrelabel<int, 1 << 29, 2, false> g10(V);
-    mf_pushrelabel<int, 1 << 29, 2, true> g11(V);
+    mf_pushrelabel<int, 0, false> g00(V);
+    mf_pushrelabel<int, 0, true> g01(V);
+    mf_pushrelabel<int, 2, false> g10(V);
+    mf_pushrelabel<int, 2, true> g11(V);
     while (E--) {
         int u, v, c;
         cin >> u >> v >> c;
@@ -20,10 +20,10 @@ int main() {
         g10.add_edge(u, v, c);
         g11.add_edge(u, v, c);
     }
-    auto f00 = g00.flow(0, V - 1);
-    auto f01 = g01.flow(0, V - 1);
-    auto f10 = g10.flow(0, V - 1);
-    auto f11 = g11.flow(0, V - 1);
+    auto f00 = g00.flow(0, V - 1, true);
+    auto f01 = g01.flow(0, V - 1, true);
+    auto f10 = g10.flow(0, V - 1, true);
+    auto f11 = g11.flow(0, V - 1, true);
     assert(f00 == f01);
     assert(f00 == f10);
     assert(f00 == f11);

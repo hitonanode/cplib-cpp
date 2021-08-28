@@ -19,7 +19,7 @@ int main() {
     for (auto &x : C) x = rdi(), tot += x;
 
     int Z = 1 + H + W;
-    mf_pushrelabel<long long, 1LL << 60, 6, true> g(Z + 1);
+    mf_pushrelabel<long long, 6, true> g(Z + 1);
 
     for (int i = 0; i < H; i++) {
         auto gtot = accumulate(G[i].begin(), G[i].end(), 0LL);
@@ -29,5 +29,5 @@ int main() {
         for (int j = 0; j < W; j++) g.add_edge(i + 1, H + 1 + j, G[i][j]);
     }
     for (int j = 0; j < W; j++) g.add_edge(H + 1 + j, Z, C[j]);
-    cout << tot - g.flow(0, Z) << '\n';
+    cout << tot - g.flow(0, Z, false) << '\n';
 }
