@@ -388,9 +388,11 @@ data:
     - icon: ':warning:'
       path: segmenttree/binary_indexed_tree_2d.hpp
       title: segmenttree/binary_indexed_tree_2d.hpp
-    - icon: ':warning:'
-      path: segmenttree/count_less_than.hpp
-      title: segmenttree/count_less_than.hpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/merge_sort_tree.hpp
+      title: "Merge sort tree \uFF08\u9759\u7684\u306A\u5217\u306E\u90E8\u5206\u5217\
+        \u306B\u542B\u307E\u308C\u308B\u95BE\u5024\u4EE5\u4E0B\u306E\u8981\u7D20\u6570\
+        \u30AF\u30A8\u30EA\uFF09"
     - icon: ':heavy_check_mark:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
@@ -1021,6 +1023,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/countandsumlessthan.test.cpp
       title: segmenttree/test/countandsumlessthan.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/test/merge_sort_tree.aoj2426.test.cpp
+      title: segmenttree/test/merge_sort_tree.aoj2426.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
