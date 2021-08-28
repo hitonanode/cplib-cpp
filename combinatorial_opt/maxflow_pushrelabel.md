@@ -7,9 +7,9 @@ Push-relabel による最大流．Highest-label rule に従うことで時間計
 
 ## 使用方法
 
-- `mf_pushrelabel<CapType, CapType INF, int GlobalRelabelFreq, bool UseGapRelabeling> graph(int N)` : $N$ 頂点のグラフを作成する．辺容量は整数型 `CapType`．`GlobalRelabelFreq` の値 $k$ が正の場合，グラフの辺の本数を $m$ として $km$ 回の反復毎に global relabelling heuristics を行う．また，`UseGapRelabeling` が真の場合，gap relabeling heuristics を行う．いずれかの heuristics を有効化する場合，アルゴリズムの停止時点で変数（プリフロー）がフロー条件を必ずしも満たさないことに注意．
+- `mf_pushrelabel<CapType, int GlobalRelabelFreq, bool UseGapRelabeling> graph(int N)` : $N$ 頂点のグラフを作成する．辺容量は整数型 `CapType`．`GlobalRelabelFreq` の値 $k$ が正の場合，グラフの辺の本数を $m$ として $km$ 回の反復毎に global relabelling heuristics を行う．また，`UseGapRelabeling` が真の場合，gap relabeling heuristics を行う．いずれかの heuristics を有効化し，かつ `flow()` の引数で `retrieve = false` を選択した場合，アルゴリズムの停止時点で変数（プリフロー）がフロー条件を必ずしも満たさないことに注意．その他インターフェースは AC Library と同様．
 - `graph.add_edge(int u, int v, CapType cap)` 辺を張る．
-- `CapType ret = graph.flow(s, t)` 最大流を求める．
+- `CapType ret = graph.flow(s, t, flow_limit, retrieve)` 最大流を求める．
 
 ```cpp
 mf_pushrelabel<int, 1 << 29, 10, true> graph(N);
@@ -24,6 +24,8 @@ int f = graph.flow(s, t);
 ## 問題例
 
 - [No.957 植林 - yukicoder](https://yukicoder.me/problems/no/957)
+- [AtCoder Library Practice Contest D - Maxflow](https://atcoder.jp/contests/practice2/tasks/practice2_d)
+- [CPSCO2019 Session2 F - Treasure Collector](https://atcoder.jp/contests/cpsco2019-s2/tasks/cpsco2019_s2_f)
 
 ## リンク
 

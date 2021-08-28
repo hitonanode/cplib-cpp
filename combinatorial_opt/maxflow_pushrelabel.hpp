@@ -6,8 +6,7 @@
 
 // Maxflow (push-relabel, highest-label)
 // Complexity: O(N^2 M^(1/2))
-template <class Cap, Cap INF = std::numeric_limits<Cap>::max() / 2, int GlobalRelabelFreq = 5, bool UseGapRelabeling = true>
-struct mf_pushrelabel {
+template <class Cap, int GlobalRelabelFreq = 5, bool UseGapRelabeling = true> struct mf_pushrelabel {
     struct pque_ {
         std::vector<std::pair<int, int>> even_, odd_;
         int se, so;
@@ -20,11 +19,8 @@ struct mf_pushrelabel {
             return a > b ? a : b;
         }
         int pop() {
-            if (!se or (so and odd_[so - 1].second > even_[se - 1].second)) {
-                return odd_[--so].first;
-            } else {
-                return even_[--se].first;
-            }
+            if (!se or (so and odd_[so - 1].second > even_[se - 1].second)) return odd_[--so].first;
+            return even_[--se].first;
         }
     } pque;
     int _n;
@@ -36,7 +32,6 @@ struct mf_pushrelabel {
     std::vector<std::pair<int, int>> pos;
     mf_pushrelabel(int n) : _n(n), g(n) {
         static_assert(GlobalRelabelFreq >= 0, "Global relabel parameter must be nonnegative.");
-        static_assert(INF > 0, "INF must be positive.");
     }
     int add_edge(int from, int to, Cap cap) {
         assert(0 <= from and from < _n);
@@ -50,13 +45,30 @@ struct mf_pushrelabel {
         return m;
     }
 
+    struct edge {
+        int from, to;
+        Cap cap, flow;
+    };
+
+    edge get_edge(int i) const {
+        int m = int(pos.size());
+        assert(0 <= i and i < m);
+        auto e = g[pos[i].first][pos[i].second], re = g[e.to][e.rev];
+        return edge{pos[i].first, e.co, e.cap + re.cap, re.cap};
+    }
+    std::vector<edge> edges() const {
+        std::vector<edge> ret(pos.size());
+        for (int i = 0; i < int(pos.size()); i++) ret[i] = get_edge(i);
+        return ret;
+    }
+
     std::vector<int> dist;
     std::vector<int> dcnt;
     std::vector<Cap> excess;
-    std::vector<int> q;
     int gap;
     void global_relabeling(int t) {
         dist.assign(_n, _n), dist[t] = 0;
+        static std::vector<int> q;
         if (q.empty()) q.resize(_n);
         q[0] = t;
         int qb = 0, qe = 1;
@@ -75,17 +87,31 @@ struct mf_pushrelabel {
             }
         }
     }
-    Cap flow(const int &s, const int &t) {
+    Cap flow(int s, int t, bool retrieve = true) {
+        return flow(s, t, std::numeric_limits<Cap>::max(), retrieve);
+    }
+    Cap flow(int s, int t, Cap flow_limit, bool retrieve = true) {
         assert(0 <= s and s < _n);
         assert(0 <= t and t < _n);
         assert(s != t);
         excess.assign(_n, 0);
-        excess[s] = INF, excess[t] = -INF;
+        excess[s] = flow_limit, excess[t] = -flow_limit;
         dist.assign(_n, 0);
         dist[s] = _n;
         if (UseGapRelabeling) gap = 1, dcnt.assign(_n + 1, 0), dcnt[0] = _n - 1;
         pque.init(_n);
-        for (auto &e : g[s]) push(s, e);
+        for (auto &e : g[s]) _push(s, e);
+        _run(t);
+        Cap ret = excess[t] + flow_limit;
+        excess[s] += excess[t], excess[t] = 0;
+        if (retrieve) {
+            global_relabeling(s);
+            _run(s);
+            assert(excess == std::vector<Cap>(_n, 0));
+        }
+        return ret;
+    }
+    void _run(int t) {
         if (GlobalRelabelFreq) global_relabeling(t);
         int tick = pos.size() * GlobalRelabelFreq;
         while (!pque.empty()) {
@@ -95,7 +121,7 @@ struct mf_pushrelabel {
             for (auto &e : g[i]) {
                 if (!e.cap) continue;
                 if (dist[e.to] == dist[i] - 1) {
-                    push(i, e);
+                    _push(i, e);
                     if (excess[i] == 0) break;
                 } else {
                     if (dist[e.to] + 1 < dnxt) dnxt = dist[e.to] + 1;
@@ -116,10 +142,10 @@ struct mf_pushrelabel {
                 tick = pos.size() * GlobalRelabelFreq, global_relabeling(t);
             }
         }
-        return excess[t] + INF;
+        return;
     }
 
-    void push(int i, _edge &e) {
+    void _push(int i, _edge &e) {
         Cap delta = e.cap < excess[i] ? e.cap : excess[i];
         excess[i] -= delta, e.cap -= delta;
         excess[e.to] += delta, g[e.to][e.rev].cap += delta;
