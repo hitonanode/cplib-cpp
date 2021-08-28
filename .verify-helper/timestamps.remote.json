@@ -132,6 +132,7 @@
 "segmenttree/test/beats_range-add-chmax-range-sum.test.cpp": "2021-02-15 23:59:04 +0900",
 "segmenttree/test/binary_indexed_tree.test.cpp": "2021-01-01 16:52:32 +0900",
 "segmenttree/test/countandsumlessthan.test.cpp": "2021-01-01 16:52:32 +0900",
+"segmenttree/test/merge_sort_tree.aoj2426.test.cpp": "2021-08-28 13:36:31 +0900",
 "segmenttree/test/point-add-range-sum.test.cpp": "2021-01-01 16:52:32 +0900",
 "segmenttree/test/point-set-range-composite.test.cpp": "2021-06-06 14:54:00 +0900",
 "segmenttree/test/point-update-range-min.test.cpp": "2021-04-18 20:20:24 +0900",
