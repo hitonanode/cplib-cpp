@@ -94,8 +94,8 @@ template <class Cap, int GlobalRelabelFreq = 5, bool UseGapRelabeling = true> st
         assert(0 <= s and s < _n);
         assert(0 <= t and t < _n);
         assert(s != t);
-        excess.assign(_n, 0);
-        excess[s] = flow_limit, excess[t] = -flow_limit;
+        excess.resize(_n, 0);
+        excess[s] += flow_limit, excess[t] -= flow_limit;
         dist.assign(_n, 0);
         dist[s] = _n;
         if (UseGapRelabeling) gap = 1, dcnt.assign(_n + 1, 0), dcnt[0] = _n - 1;
