@@ -1,18 +1,16 @@
 #pragma once
 #include <algorithm>
-#include <iostream>
 #include <vector>
-using namespace std;
 
 // CUT begin
 // Count elements in $[A_\mathrm{begin}, ..., A_{\mathrm{end}-1}]$ which satisfy $A_i < \mathrm{query}$
 // Complexity: $O(N \log N)$ for initialization, $O(\log^2 N)$ for each query
-// Verified: cntLess https://codeforces.com/contest/1288/submission/68865506
-template <typename T> struct CountLessThan {
+// Verified: https://codeforces.com/contest/1288/submission/68865506
+template <typename T> struct merge_sort_tree {
     int N;
-    vector<vector<T>> x;
-    CountLessThan() = default;
-    CountLessThan(const vector<T> &vec) : N(vec.size()) {
+    std::vector<std::vector<T>> x;
+    merge_sort_tree() = default;
+    merge_sort_tree(const std::vector<T> &vec) : N(vec.size()) {
         x.resize(N * 2);
         for (int i = 0; i < N; i++) x[N + i] = {vec[i]};
         for (int i = N - 1; i; i--) {
@@ -40,15 +38,15 @@ template <typename T> struct CountLessThan {
         return ret;
     }
     int cntMore(int begin, int end, T query) const {
-        int tot = max(0, min(end, N) - max(begin, 0));
+        int tot = std::max(0, std::min(end, N) - std::max(begin, 0));
         return tot - cntLesseq(begin, end, query);
     }
     int cntMoreeq(int begin, int end, T query) const {
-        int tot = max(0, min(end, N) - max(begin, 0));
+        int tot = std::max(0, std::min(end, N) - std::max(begin, 0));
         return tot - cntLess(begin, end, query);
     }
 
-    friend ostream &operator<<(ostream &os, const CountLessThan &clt) {
+    template <class OStream> friend OStream &operator<<(OStream &os, const merge_sort_tree &clt) {
         os << '[';
         for (int i = 0; i < clt.N; i++) os << clt.x[clt.N + i][0] << ',';
         return os << ']';
