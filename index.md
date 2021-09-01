@@ -15,8 +15,9 @@ data:
         \u4E0B\u306E\u4E92\u3044\u306B\u72EC\u7ACB\u306A\u4E00\u5F15\u6570\u96E2\u6563\
         \u51F8\u95A2\u6570\u548C\u306E\u6700\u5C0F\u5316"
     - icon: ':warning:'
-      path: combinatorial_opt/matroid.hpp
-      title: combinatorial_opt/matroid.hpp
+      path: combinatorial_opt/matroid_intersection.hpp
+      title: "(Weighted) matroid intersecition \uFF08\uFF08\u91CD\u307F\u3064\u304D\
+        \uFF09\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/maxflow.hpp
       title: combinatorial_opt/maxflow.hpp
@@ -46,9 +47,20 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/simplex.hpp
       title: "Simplex method \uFF08\u5358\u4F53\u6CD5\uFF09"
+  - name: combinatorial_opt/matroids
+    pages:
     - icon: ':warning:'
-      path: combinatorial_opt/vector_matroid.hpp
-      title: combinatorial_opt/vector_matroid.hpp
+      path: combinatorial_opt/matroids/graph_matroid.hpp
+      title: combinatorial_opt/matroids/graph_matroid.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/matroids/matroid_example.hpp
+      title: combinatorial_opt/matroids/matroid_example.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/matroids/partition_matroid.hpp
+      title: combinatorial_opt/matroids/partition_matroid.hpp
+    - icon: ':warning:'
+      path: combinatorial_opt/matroids/vector_matroid.hpp
+      title: combinatorial_opt/matroids/vector_matroid.hpp
   - name: convex_hull_trick
     pages:
     - icon: ':warning:'
