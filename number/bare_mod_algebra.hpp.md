@@ -18,9 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+    title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>
@@ -143,12 +146,13 @@ data:
   requiredBy:
   - linear_algebra_matrix/linalg_longlong.hpp
   timestamp: '2021-04-26 19:53:40+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
   - linear_algebra_matrix/test/linalg_ll_det.test.cpp
   - linear_algebra_matrix/test/linalg_longlong.test.cpp
+  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
 documentation_of: number/bare_mod_algebra.hpp
 layout: document
 redirect_from:

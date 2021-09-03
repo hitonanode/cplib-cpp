@@ -133,15 +133,15 @@ data:
       title: data_structure/static_range_inversion.hpp
   - name: formal_power_series
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
         \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/factorial_power.hpp
       title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\
         \u7B97\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
     - icon: ':heavy_check_mark:'
@@ -152,16 +152,16 @@ data:
       path: formal_power_series/linear_recurrence.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
         \u63A8\u5B9A"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/polynomial_divmod.hpp
       title: formal_power_series/polynomial_divmod.hpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial.hpp
       title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
       title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   - name: .
@@ -248,7 +248,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/shortest_cycle_weighted.hpp
       title: graph/shortest_cycle_weighted.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/shortest_path.hpp
       title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
     - icon: ':heavy_check_mark:'
@@ -259,13 +259,13 @@ data:
       title: graph/strongly_connected_components_bitset.hpp
   - name: linear_algebra_matrix
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: linear_algebra_matrix/blackbox_algorithm.hpp
       title: linear_algebra_matrix/blackbox_algorithm.hpp
     - icon: ':warning:'
       path: linear_algebra_matrix/blackbox_linear_algebra.hpp
       title: linear_algebra_matrix/blackbox_linear_algebra.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: linear_algebra_matrix/blackbox_matrices.hpp
       title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -303,7 +303,7 @@ data:
     - icon: ':warning:'
       path: number/acl_modint.hpp
       title: number/acl_modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -334,10 +334,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
     - icon: ':warning:'
@@ -375,7 +375,7 @@ data:
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -512,7 +512,7 @@ data:
       title: syntactic_analysis/parsetree.hpp
   - name: tree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: tree/centroid_decomposition.hpp
       title: tree/centroid_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -521,6 +521,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/eulertour.hpp
       title: tree/eulertour.hpp
+    - icon: ':question:'
+      path: tree/frequency_table_of_tree_distance.hpp
+      title: Frequency table of tree distance
     - icon: ':heavy_check_mark:'
       path: tree/heavy_light_decomposition.hpp
       title: tree/heavy_light_decomposition.hpp
@@ -783,52 +786,52 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow.test.cpp
       title: formal_power_series/test/fps_pow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow_another.test.cpp
       title: formal_power_series/test/fps_pow_another.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt.test.cpp
       title: formal_power_series/test/fps_sqrt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
       title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/linear_recurrence.test.cpp
       title: formal_power_series/test/linear_recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/multipoint_evaluation.test.cpp
       title: formal_power_series/test/multipoint_evaluation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/poly_taylor_shift.test.cpp
       title: formal_power_series/test/poly_taylor_shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/polynomial_divmod.test.cpp
       title: formal_power_series/test/polynomial_divmod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/shift_of_sampling_points.test.cpp
       title: formal_power_series/test/shift_of_sampling_points.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_1st.test.cpp
       title: formal_power_series/test/stirling_number_of_1st.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/stirling_number_of_2nd.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
       title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
       title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - name: geometry/test
@@ -924,7 +927,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/characteristic_poly.test.cpp
       title: linear_algebra_matrix/test/characteristic_poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1160,9 +1163,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/diameter.test.cpp
       title: tree/test/diameter.test.cpp
+    - icon: ':x:'
+      path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
+      title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance.test.cpp
       title: tree/test/frequency_table_of_tree_distance.test.cpp
+    - icon: ':x:'
+      path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+      title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/hl_decomposition.test.cpp
       title: tree/test/hl_decomposition.test.cpp

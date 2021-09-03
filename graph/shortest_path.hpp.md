@@ -25,9 +25,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/warshallfloyd.test.cpp
     title: graph/test/warshallfloyd.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
+    title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
@@ -242,7 +245,7 @@ data:
   requiredBy:
   - combinatorial_opt/matroid_intersection.hpp
   timestamp: '2021-08-28 00:57:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - graph/test/shortest_path.test.cpp
   - graph/test/warshallfloyd.test.cpp
@@ -250,6 +253,7 @@ data:
   - graph/test/bellman_ford.test.cpp
   - graph/test/spfa.test.cpp
   - graph/test/shortest_path_dag.test.cpp
+  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
 documentation_of: graph/shortest_path.hpp
 layout: document
 title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
