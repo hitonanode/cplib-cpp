@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/polynomial_divmod.hpp
     title: formal_power_series/polynomial_divmod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/division_of_polynomials
@@ -103,7 +103,7 @@ data:
     // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
     // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
     \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
-    \ b, bool skip_garner = false);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
+    \ b, bool skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
     \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
     \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
     // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
@@ -152,7 +152,9 @@ data:
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n#line 5 \"formal_power_series/polynomial_divmod.hpp\"\n#include\
+    \ return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
+    \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
+    \ b, false);\n}\n#line 5 \"formal_power_series/polynomial_divmod.hpp\"\n#include\
     \ <utility>\n#line 7 \"formal_power_series/polynomial_divmod.hpp\"\n\n// CUT begin\n\
     // Calculate f^{-1}(x) mod x^l: Inverse of polynomial mod x^l in $O(N \\log N)$\
     \ complexity.\n// return: vector of length l\n// Requirement:\n// - NTT-friendliness\
@@ -214,8 +216,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/polynomial_divmod.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 14:54:00+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-09-04 00:38:32+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/polynomial_divmod.test.cpp
 layout: document

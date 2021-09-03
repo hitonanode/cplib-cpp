@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
     title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit
@@ -170,10 +170,10 @@ data:
     \ if `skip_garner` is true or mod is in `nttprimes`.\n// input: a (size: n), b\
     \ (size: m)\n// return: vector (size: n + m - 1)\ntemplate <typename MODINT>\n\
     std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool\
-    \ skip_garner = false);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
-    \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
-    \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
-    // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
+    \ skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161, 469762049};\n\
+    \n// Integer FFT (Fast Fourier Transform) for ModInt class\n// (Also known as\
+    \ Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n// ** Input\
+    \ size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
     \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
     \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
     \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
@@ -219,7 +219,9 @@ data:
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n#line 6 \"formal_power_series/formal_power_series.hpp\"\nusing\
+    \ return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
+    \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
+    \ b, false);\n}\n#line 6 \"formal_power_series/formal_power_series.hpp\"\nusing\
     \ namespace std;\n\n// CUT begin\n// Formal Power Series (\u5F62\u5F0F\u7684\u51AA\
     \u7D1A\u6570) based on ModInt<mod> / ModIntRuntime\n// Reference: https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html\n\
     template <typename T> struct FormalPowerSeries : vector<T> {\n    using vector<T>::vector;\n\
@@ -381,8 +383,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2021-08-01 19:15:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-09-04 00:38:32+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
 layout: document

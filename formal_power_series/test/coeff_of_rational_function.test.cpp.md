@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/coeff_of_rational_function.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
       \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -104,7 +104,7 @@ data:
     // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
     // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
     \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
-    \ b, bool skip_garner = false);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
+    \ b, bool skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
     \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
     \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
     // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
@@ -153,7 +153,9 @@ data:
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n#line 5 \"formal_power_series/coeff_of_rational_function.hpp\"\
+    \ return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
+    \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
+    \ b, false);\n}\n#line 5 \"formal_power_series/coeff_of_rational_function.hpp\"\
     \n\n// CUT begin\n// Calculate [x^N](num(x) / den(x))\n// - Coplexity: O(LlgLlgN)\
     \ ( L = size(num) + size(den) )\n// - Reference: `Bostan\u2013Mori algorithm`\
     \ <https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>\ntemplate <typename Tp>\
@@ -209,7 +211,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/coeff_of_rational_function.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 14:54:00+09:00'
+  timestamp: '2021-09-04 00:38:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/coeff_of_rational_function.test.cpp

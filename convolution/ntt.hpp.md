@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy:
@@ -12,27 +12,27 @@ data:
     path: convolution/multivar_ntt.hpp
     title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
       \u307F\u8FBC\u307F\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/coeff_of_rational_function.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
       \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/factorial_power.hpp
     title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\
       \u7B97\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/polynomial_divmod.hpp
     title: formal_power_series/polynomial_divmod.hpp
   - icon: ':warning:'
     path: linear_algebra_matrix/blackbox_linear_algebra.hpp
     title: linear_algebra_matrix/blackbox_linear_algebra.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
   _extendedVerifiedWith:
@@ -72,57 +72,57 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/fps_pow.test.cpp
     title: formal_power_series/test/fps_pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_pow_another.test.cpp
     title: formal_power_series/test/fps_pow_another.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt.test.cpp
     title: formal_power_series/test/fps_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
     title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/multipoint_evaluation.test.cpp
     title: formal_power_series/test/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/poly_taylor_shift.test.cpp
     title: formal_power_series/test/poly_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/polynomial_divmod.test.cpp
     title: formal_power_series/test/polynomial_divmod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/shift_of_sampling_points.test.cpp
     title: formal_power_series/test/shift_of_sampling_points.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/stirling_number_of_2nd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -207,7 +207,7 @@ data:
     // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
     // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
     \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
-    \ b, bool skip_garner = false);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
+    \ b, bool skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
     \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
     \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
     // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
@@ -256,15 +256,17 @@ data:
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n"
+    \ return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
+    \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
+    \ b, false);\n}\n"
   code: "#pragma once\n#include \"../modint.hpp\"\n\n#include <algorithm>\n#include\
     \ <array>\n#include <cassert>\n#include <tuple>\n#include <vector>\n\n// CUT begin\n\
     // Integer convolution for arbitrary mod\n// with NTT (and Garner's algorithm)\
     \ for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm if `skip_garner`\
     \ is true or mod is in `nttprimes`.\n// input: a (size: n), b (size: m)\n// return:\
     \ vector (size: n + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
-    \ a, std::vector<MODINT> b, bool skip_garner = false);\n\nconstexpr int nttprimes[3]\
-    \ = {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
+    \ a, std::vector<MODINT> b, bool skip_garner);\n\nconstexpr int nttprimes[3] =\
+    \ {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
     \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
     \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
     \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
@@ -313,52 +315,54 @@ data:
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n"
+    \ return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
+    \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
+    \ b, false);\n}\n"
   dependsOn:
   - modint.hpp
   isVerificationFile: false
   path: convolution/ntt.hpp
   requiredBy:
-  - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
-  - formal_power_series/factorial_power.hpp
-  - formal_power_series/multipoint_evaluation.hpp
-  - formal_power_series/formal_power_series.hpp
-  - formal_power_series/coeff_of_rational_function.hpp
-  - formal_power_series/polynomial_divmod.hpp
+  - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - convolution/multivar_ntt.hpp
   - convolution/convolutive_translation_2d.hpp
-  timestamp: '2021-06-06 14:54:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - formal_power_series/formal_power_series.hpp
+  - formal_power_series/multipoint_evaluation.hpp
+  - formal_power_series/polynomial_divmod.hpp
+  - formal_power_series/coeff_of_rational_function.hpp
+  - formal_power_series/factorial_power.hpp
+  timestamp: '2021-09-04 00:38:32+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - formal_power_series/test/bernoulli_number.test.cpp
+  - convolution/test/ntt.test.cpp
+  - convolution/test/ntt_arbitrary_mod.test.cpp
+  - convolution/test/multivar_ntt.test.cpp
+  - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/fps_inv.test.cpp
   - formal_power_series/test/polynomial_divmod.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - formal_power_series/test/division_number.test.cpp
-  - formal_power_series/test/fps_pow.test.cpp
-  - formal_power_series/test/fps_pow_another.test.cpp
-  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - formal_power_series/test/fps_sqrt.test.cpp
-  - formal_power_series/test/shift_of_sampling_points.test.cpp
-  - formal_power_series/test/stirling_number_of_1st.test.cpp
-  - formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - formal_power_series/test/poly_taylor_shift.test.cpp
-  - formal_power_series/test/fps_exp.test.cpp
   - formal_power_series/test/stirling_number_of_2nd.test.cpp
+  - formal_power_series/test/poly_taylor_shift.test.cpp
+  - formal_power_series/test/fps_exp_modintruntime.test.cpp
+  - formal_power_series/test/fps_exp.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
-  - formal_power_series/test/fps_log.test.cpp
-  - formal_power_series/test/multipoint_evaluation.test.cpp
-  - formal_power_series/test/coeff_of_rational_function.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
-  - convolution/test/multivar_ntt.test.cpp
-  - convolution/test/ntt_arbitrary_mod.test.cpp
-  - convolution/test/ntt.test.cpp
+  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - formal_power_series/test/fps_pow_another.test.cpp
+  - formal_power_series/test/stirling_number_of_1st.test.cpp
+  - formal_power_series/test/shift_of_sampling_points.test.cpp
+  - formal_power_series/test/fps_pow.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - formal_power_series/test/fps_log.test.cpp
+  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - formal_power_series/test/division_number.test.cpp
+  - formal_power_series/test/coeff_of_rational_function.test.cpp
+  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+  - formal_power_series/test/bernoulli_number.test.cpp
+  - formal_power_series/test/sharp_p_subset_sum.test.cpp
 documentation_of: convolution/ntt.hpp
 layout: document
 redirect_from:

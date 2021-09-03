@@ -65,9 +65,9 @@ data:
   timestamp: '2021-07-31 00:27:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
   - unionfind/test/weighted_unionfind.test.cpp
   - unionfind/test/weighted_unionfind_int.aoj3142.test.cpp
-  - unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
 documentation_of: unionfind/weighted_unionfind.hpp
 layout: document
 title: "Weighted UnionFind \uFF08\u91CD\u307F\u4ED8\u304D UnionFind\uFF09"

@@ -5,10 +5,10 @@ data:
     path: convolution/multivar_ntt.hpp
     title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
       \u307F\u8FBC\u307F\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -104,7 +104,7 @@ data:
     // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
     // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
     \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
-    \ b, bool skip_garner = false);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
+    \ b, bool skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
     \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
     \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
     // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
@@ -153,7 +153,9 @@ data:
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
     \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
     \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n#line 4 \"convolution/multivar_ntt.hpp\"\n#include <numeric>\n\
+    \ return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
+    \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
+    \ b, false);\n}\n#line 4 \"convolution/multivar_ntt.hpp\"\n#include <numeric>\n\
     #line 6 \"convolution/multivar_ntt.hpp\"\n\n// CUT begin\n// Multivariate convolution\
     \ (Linear, overflow cutoff)\n// Complexity: $O(kN \\log N + k^2 N)$\n// Note that\
     \ the vectors store the infomation in **column-major order**\n// Implementation\
@@ -207,7 +209,7 @@ data:
   isVerificationFile: true
   path: convolution/test/multivar_ntt.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 14:54:00+09:00'
+  timestamp: '2021-09-04 00:38:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/multivar_ntt.test.cpp

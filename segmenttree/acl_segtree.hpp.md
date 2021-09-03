@@ -93,8 +93,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_rmq.test.cpp
-  - segmenttree/test/acl_rsq.test.cpp
   - segmenttree/test/rangetree.yuki1625.test.cpp
+  - segmenttree/test/acl_rsq.test.cpp
   - segmenttree/test/rangetree.test.cpp
 documentation_of: segmenttree/acl_segtree.hpp
 layout: document

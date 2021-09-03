@@ -90,7 +90,7 @@ data:
       path: convolution/multivar_ntt.hpp
       title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
         \u7573\u307F\u8FBC\u307F\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
   - name: data_structure
@@ -133,35 +133,35 @@ data:
       title: data_structure/static_range_inversion.hpp
   - name: formal_power_series
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
         \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/factorial_power.hpp
       title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\
         \u7B97\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/lagrange_interpolation.hpp
       title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\
         \u9593\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/linear_recurrence.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
         \u63A8\u5B9A"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/polynomial_divmod.hpp
       title: formal_power_series/polynomial_divmod.hpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial.hpp
       title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
       title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   - name: .
@@ -169,7 +169,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -259,13 +259,13 @@ data:
       title: graph/strongly_connected_components_bitset.hpp
   - name: linear_algebra_matrix
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/blackbox_algorithm.hpp
       title: linear_algebra_matrix/blackbox_algorithm.hpp
     - icon: ':warning:'
       path: linear_algebra_matrix/blackbox_linear_algebra.hpp
       title: linear_algebra_matrix/blackbox_linear_algebra.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/blackbox_matrices.hpp
       title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -284,7 +284,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: linear_algebra_matrix/matrix.hpp
       title: linear_algebra_matrix/matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -334,10 +334,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
     - icon: ':warning:'
@@ -783,52 +783,52 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_pow.test.cpp
       title: formal_power_series/test/fps_pow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_pow_another.test.cpp
       title: formal_power_series/test/fps_pow_another.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_sqrt.test.cpp
       title: formal_power_series/test/fps_sqrt.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
       title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/linear_recurrence.test.cpp
       title: formal_power_series/test/linear_recurrence.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/multipoint_evaluation.test.cpp
       title: formal_power_series/test/multipoint_evaluation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/poly_taylor_shift.test.cpp
       title: formal_power_series/test/poly_taylor_shift.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/polynomial_divmod.test.cpp
       title: formal_power_series/test/polynomial_divmod.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/shift_of_sampling_points.test.cpp
       title: formal_power_series/test/shift_of_sampling_points.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/stirling_number_of_1st.test.cpp
       title: formal_power_series/test/stirling_number_of_1st.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/stirling_number_of_2nd.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
       title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
       title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - name: geometry/test
@@ -918,13 +918,13 @@ data:
       title: graph/test/warshallfloyd.test.cpp
   - name: linear_algebra_matrix/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
       title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/characteristic_poly.test.cpp
       title: linear_algebra_matrix/test/characteristic_poly.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     - icon: ':heavy_check_mark:'

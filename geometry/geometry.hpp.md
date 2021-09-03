@@ -251,14 +251,14 @@ data:
   isVerificationFile: false
   path: geometry/geometry.hpp
   requiredBy:
-  - geometry/problem_of_apollonius.hpp
   - geometry/triangle.hpp
+  - geometry/problem_of_apollonius.hpp
   timestamp: '2021-06-06 03:50:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - geometry/test/convex_cut.test.cpp
   - geometry/test/convex_hull.test.cpp
   - geometry/test/circumcenter.test.cpp
-  - geometry/test/convex_cut.test.cpp
 documentation_of: geometry/geometry.hpp
 layout: document
 redirect_from:

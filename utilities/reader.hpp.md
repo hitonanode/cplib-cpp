@@ -42,9 +42,9 @@ data:
   timestamp: '2021-08-01 21:42:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
-  - linear_algebra_matrix/test/matrix_product.test.cpp
   - string/test/sa_count_keyword.reader.test.cpp
+  - linear_algebra_matrix/test/matrix_product.test.cpp
+  - combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
 documentation_of: utilities/reader.hpp
 layout: document
 title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"

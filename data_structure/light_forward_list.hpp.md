@@ -72,10 +72,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/aho_corasick_forwardlist.test.cpp
-  - string/test/aho_corasick_online.test.cpp
   - string/test/aho_corasick_unorderedmap.test.cpp
-  - string/test/incremental_matching.test.cpp
   - string/test/aho_corasick_vector.test.cpp
+  - string/test/incremental_matching.test.cpp
+  - string/test/aho_corasick_online.test.cpp
 documentation_of: data_structure/light_forward_list.hpp
 layout: document
 redirect_from:
