@@ -14,7 +14,7 @@
 // input: a (size: n), b (size: m)
 // return: vector (size: n + m - 1)
 template <typename MODINT>
-std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner = false);
+std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner);
 
 constexpr int nttprimes[3] = {998244353, 167772161, 469762049};
 
@@ -117,4 +117,9 @@ std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool s
         for (int i = 0; i < n + m - 1; i++) a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);
     }
     return a;
+}
+
+template <typename MODINT>
+std::vector<MODINT> nttconv(const std::vector<MODINT> &a, const std::vector<MODINT> &b) {
+    return nttconv<MODINT>(a, b, false);
 }
