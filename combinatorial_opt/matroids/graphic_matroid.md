@@ -16,7 +16,7 @@ edges.emplace_back(1, 4);
 edges.emplace_back(3, 4);
 edges.emplace_back(2, 4);
 
-GraphMatroid M(5, edges);
+GraphicMatroid M(5, edges);
 vector<bool> state{1, 1, 1, 1, 0, 0};
 M.set(state);
 vector<int> c1 = M.circuit(4); // [4, 2, 3]
