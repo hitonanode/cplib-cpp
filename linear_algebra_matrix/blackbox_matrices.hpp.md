@@ -9,15 +9,15 @@ data:
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -290,7 +290,7 @@ data:
   path: linear_algebra_matrix/blackbox_matrices.hpp
   requiredBy: []
   timestamp: '2021-09-04 00:38:32+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp

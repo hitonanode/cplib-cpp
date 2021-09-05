@@ -148,7 +148,7 @@ data:
       path: formal_power_series/lagrange_interpolation.hpp
       title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\
         \u9593\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/linear_recurrence.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
         \u63A8\u5B9A"
@@ -248,7 +248,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/shortest_cycle_weighted.hpp
       title: graph/shortest_cycle_weighted.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/shortest_path.hpp
       title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
     - icon: ':heavy_check_mark:'
@@ -259,13 +259,13 @@ data:
       title: graph/strongly_connected_components_bitset.hpp
   - name: linear_algebra_matrix
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_algorithm.hpp
       title: linear_algebra_matrix/blackbox_algorithm.hpp
     - icon: ':warning:'
       path: linear_algebra_matrix/blackbox_linear_algebra.hpp
       title: linear_algebra_matrix/blackbox_linear_algebra.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_matrices.hpp
       title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -284,7 +284,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/matrix.hpp
       title: linear_algebra_matrix/matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -375,7 +375,7 @@ data:
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -921,7 +921,7 @@ data:
       title: graph/test/warshallfloyd.test.cpp
   - name: linear_algebra_matrix/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
       title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1163,7 +1163,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/diameter.test.cpp
       title: tree/test/diameter.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
       title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     - icon: ':heavy_check_mark:'

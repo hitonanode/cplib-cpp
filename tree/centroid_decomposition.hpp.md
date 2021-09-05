@@ -6,7 +6,7 @@ data:
     path: tree/frequency_table_of_tree_distance.hpp
     title: Frequency table of tree distance
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - icon: ':heavy_check_mark:'

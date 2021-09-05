@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -46,9 +46,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n\
@@ -286,7 +286,7 @@ data:
   - linear_algebra_matrix/system_of_linear_equations.hpp
   - graph/general_matching.hpp
   timestamp: '2021-06-13 19:08:25+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp

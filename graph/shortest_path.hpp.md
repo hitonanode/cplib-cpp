@@ -25,12 +25,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/warshallfloyd.test.cpp
     title: graph/test/warshallfloyd.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
@@ -245,7 +245,7 @@ data:
   requiredBy:
   - combinatorial_opt/matroid_intersection.hpp
   timestamp: '2021-08-28 00:57:49+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/shortest_path.test.cpp
   - graph/test/warshallfloyd.test.cpp

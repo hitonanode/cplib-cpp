@@ -32,7 +32,7 @@ data:
   - icon: ':warning:'
     path: linear_algebra_matrix/blackbox_linear_algebra.hpp
     title: linear_algebra_matrix/blackbox_linear_algebra.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
   _extendedVerifiedWith:
@@ -114,13 +114,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - icon: ':x:'

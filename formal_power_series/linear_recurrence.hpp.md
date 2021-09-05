@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/blackbox_algorithm.hpp
     title: linear_algebra_matrix/blackbox_algorithm.hpp
   - icon: ':warning:'
@@ -15,15 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/linear_recurrence.test.cpp
     title: formal_power_series/test/linear_recurrence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://misawa.github.io/others/fast_kitamasa_method.html
@@ -140,7 +140,7 @@ data:
   - linear_algebra_matrix/blackbox_algorithm.hpp
   - linear_algebra_matrix/blackbox_linear_algebra.hpp
   timestamp: '2021-05-02 16:53:28+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
