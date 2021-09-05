@@ -74,7 +74,9 @@ $
 ## 使用例
 
 ```cpp
-vector<vector<int>> grp{{0, 2, 5}, {1, 3}}; // 登場しない要素があってもよい（それらは制約なしとして扱われる）
+vector<vector<int>> grp; // 登場しない要素があってもよい（それらは制約なしとして扱われる）
+grp.push_back({0, 2, 5});
+grp.push_back({1, 3});
 vector<int> lim{2, 1};
 PartitionMatroid M(6, grp, lim);
 
