@@ -27,7 +27,7 @@ template <typename Int> Int mod_inverse(Int a, Int m) {
 
 // Require: 1 <= b
 // return: (g, x) s.t. g = gcd(a, b), xa = g MOD b, 0 <= x < b/g
-template <typename Int> constexpr std::pair<Int, Int> inv_gcd(Int a, Int b) {
+template <typename Int> /* constexpr */ std::pair<Int, Int> inv_gcd(Int a, Int b) {
     a %= b;
     if (a < 0) a += b;
     if (a == 0) return {b, 0};
@@ -42,7 +42,8 @@ template <typename Int> constexpr std::pair<Int, Int> inv_gcd(Int a, Int b) {
     return {s, m0};
 }
 
-template <typename Int> constexpr std::pair<Int, Int> crt(const std::vector<Int> &r, const std::vector<Int> &m) {
+template <typename Int>
+/* constexpr */ std::pair<Int, Int> crt(const std::vector<Int> &r, const std::vector<Int> &m) {
     assert(r.size() == m.size());
     int n = int(r.size());
     // Contracts: 0 <= r0 < m0
