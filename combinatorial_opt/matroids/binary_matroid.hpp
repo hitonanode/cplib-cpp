@@ -3,10 +3,10 @@
 #include <vector>
 
 // CUT begin
-// Vector matroid on F2 : linearly independent vectors
+// Binary matroid (vector matroid on F2) : linearly independent vectors
 // VDIM: max. dimension of vector space
 // Verified: SRM526.5 1000 (Used only for linear independence check)
-template <int VDIM> class F2VectorMatroid {
+template <int VDIM> class BinaryMatroid {
     using Element = int;
     static void chxormin(std::bitset<VDIM> &l, const std::bitset<VDIM> &r) {
         int i = r._Find_first();
@@ -17,8 +17,8 @@ template <int VDIM> class F2VectorMatroid {
     std::vector<std::vector<std::bitset<VDIM>>> bs;
 
 public:
-    F2VectorMatroid() = default;
-    F2VectorMatroid(const std::vector<std::bitset<VDIM>> &bitmat) : mat(bitmat) {}
+    BinaryMatroid() = default;
+    BinaryMatroid(const std::vector<std::bitset<VDIM>> &bitmat) : mat(bitmat) {}
 
     int size() const { return mat.size(); }
 
