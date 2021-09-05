@@ -26,6 +26,7 @@ std::vector<bool> maxindepset = MatroidIntersection(m1, m2, weights);
 
 - [Hello 2020 G. Seollal - Codeforces](https://codeforces.com/contest/1284/problem/G) グラフマトロイドと分割マトロイドの交差に帰着される．
 - [Deltix Round, Summer 2021 H. DIY Tree - Codeforces](https://codeforces.com/contest/1556/problem/H) グラフマトロイドと分割マトロイドの最小重み共通独立集合問題に帰着される．
+- [2019 Petrozavodsk Winter Camp, Yandex Cup D. Pick Your Own Nim - Codeforces](https://codeforces.com/gym/102156/problem/D) 二値マトロイドと分割マトロイドの交差．
 
 ## 文献・リンク集
 
