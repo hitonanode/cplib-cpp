@@ -50,17 +50,19 @@ data:
   - name: combinatorial_opt/matroids
     pages:
     - icon: ':warning:'
-      path: combinatorial_opt/matroids/graph_matroid.hpp
-      title: combinatorial_opt/matroids/graph_matroid.hpp
+      path: combinatorial_opt/matroids/binary_matroid.hpp
+      title: "Binary matroid \uFF08\u4E8C\u5024\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
+    - icon: ':warning:'
+      path: combinatorial_opt/matroids/graphic_matroid.hpp
+      title: "Graphic matroid \uFF08\u30B0\u30E9\u30D5\u30DE\u30C8\u30ED\u30A4\u30C9\
+        \uFF09"
     - icon: ':warning:'
       path: combinatorial_opt/matroids/matroid_example.hpp
-      title: combinatorial_opt/matroids/matroid_example.hpp
+      title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u30AF\u30E9\u30B9\u306E\u30A4\u30F3\u30BF\
+        \u30FC\u30D5\u30A7\u30FC\u30B9\u306E\u8AAC\u660E"
     - icon: ':warning:'
       path: combinatorial_opt/matroids/partition_matroid.hpp
-      title: combinatorial_opt/matroids/partition_matroid.hpp
-    - icon: ':warning:'
-      path: combinatorial_opt/matroids/vector_matroid.hpp
-      title: combinatorial_opt/matroids/vector_matroid.hpp
+      title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
   - name: convex_hull_trick
     pages:
     - icon: ':warning:'

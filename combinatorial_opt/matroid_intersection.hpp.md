@@ -115,7 +115,7 @@ data:
     \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
     ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
     \    }\n};\n#line 5 \"combinatorial_opt/matroid_intersection.hpp\"\n\n// CUT begin\n\
-    // (Min weight) Matroid intersection solver\n// Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
+    // (Min weight) matroid intersection solver\n// Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
     // Complexity: O(CE^2 + E^3) (C : circuit query, non-weighted)\ntemplate <class\
     \ M1, class M2, class T = int>\nstd::vector<bool> MatroidIntersection(M1 matroid1,\
     \ M2 matroid2, std::vector<T> weights = {}) {\n    using State = std::vector<bool>;\n\
@@ -135,7 +135,7 @@ data:
     \         if (e != gs and e != gt) I[e] = !I[e];\n        }\n    }\n    return\
     \ I;\n}\n"
   code: "#pragma once\n#include \"../graph/shortest_path.hpp\"\n#include <cassert>\n\
-    #include <vector>\n\n// CUT begin\n// (Min weight) Matroid intersection solver\n\
+    #include <vector>\n\n// CUT begin\n// (Min weight) matroid intersection solver\n\
     // Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
     // Complexity: O(CE^2 + E^3) (C : circuit query, non-weighted)\ntemplate <class\
     \ M1, class M2, class T = int>\nstd::vector<bool> MatroidIntersection(M1 matroid1,\
@@ -160,7 +160,7 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/matroid_intersection.hpp
   requiredBy: []
-  timestamp: '2021-09-01 23:53:05+09:00'
+  timestamp: '2021-09-05 18:41:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: combinatorial_opt/matroid_intersection.hpp
@@ -191,7 +191,12 @@ std::vector<bool> maxindepset = MatroidIntersection(m1, m2, weights);
 ## 問題例
 
 - [Hello 2020 G. Seollal - Codeforces](https://codeforces.com/contest/1284/problem/G) グラフマトロイドと分割マトロイドの交差に帰着される．
-- [Deltix Round, Summer 2021 H. DIY Tree - Codeforces](https://codeforces.com/contest/1556/problem/H) グラフマトロイドと分割マトロイドの最小重み共通独立集合問題に帰着される．
+- [Deltix Round, Summer 2021 H. DIY Tree - Codeforces](https://codeforces.com/contest/1556/problem/H) 少数の頂点に次数制約がついた最小全域木問題．グラフマトロイドと分割マトロイドの最小重み共通独立集合問題に帰着される．
+- [2019 Petrozavodsk Winter Camp, Yandex Cup D. Pick Your Own Nim - Codeforces](https://codeforces.com/gym/102156/problem/D) 二値マトロイドと分割マトロイドの交差．
+- [2128 - Demonstration of Honesty! - URI Online Judge](https://www.urionlinejudge.com.br/judge/en/problems/view/2128) 各辺に色がついている無向グラフで，同色の辺は一度しか使えない全域木構築判定問題．グラフマトロイドと分割マトロイドの交差．このライブラリでは TL が厳しいが，独立性を満たす範囲で乱択のアプローチ等によりある程度 $I$ に要素を追加した状態から増加路アルゴリズムを回すことで定数倍高速化し TL に間に合わせられる．
+- [CodeChef October Challenge 2019: Faulty System](https://www.codechef.com/problems/CNNCT2) グラフマトロイドとグラフマトロイドの交差．
+- [Rainbow Graph – Kattis, NAIPC 2018](https://naipc18.kattis.com/problems/rainbowgraph)
+- [Google Code Jam 2019 Round 3 Datacenter Duplex](https://codingcompetitions.withgoogle.com/codejam/round/0000000000051707/0000000000158f1c)
 
 ## 文献・リンク集
 
@@ -200,3 +205,4 @@ std::vector<bool> maxindepset = MatroidIntersection(m1, m2, weights);
 - [2] C. Brezovec, G. Cornuéjols, and F. Glover, "Two algorithms for weighted matroid intersection,"
   Mathematical Programming, 36(1), 39-53, 1986.
 - [離散最適化基礎論 (2015年度後学期) 組合せ最適化におけるマトロイドの役割](http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/) とても初学者向き．
+- [[Tutorial] Matroid intersection in simple words - Codeforces](https://codeforces.com/blog/entry/69287) コメント欄に問題例が多い．
