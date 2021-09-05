@@ -92,7 +92,7 @@ data:
       path: convolution/multivar_ntt.hpp
       title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
         \u7573\u307F\u8FBC\u307F\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
   - name: data_structure
@@ -171,7 +171,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -305,7 +305,7 @@ data:
     - icon: ':warning:'
       path: number/acl_modint.hpp
       title: number/acl_modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -514,7 +514,7 @@ data:
       title: syntactic_analysis/parsetree.hpp
   - name: tree
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/centroid_decomposition.hpp
       title: tree/centroid_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -523,7 +523,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/eulertour.hpp
       title: tree/eulertour.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/frequency_table_of_tree_distance.hpp
       title: Frequency table of tree distance
     - icon: ':heavy_check_mark:'
@@ -1171,7 +1171,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance.test.cpp
       title: tree/test/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
       title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     - icon: ':heavy_check_mark:'

@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
   - icon: ':heavy_check_mark:'
@@ -109,13 +109,13 @@ data:
     \ m\ntemplate <typename Int> Int mod_inverse(Int a, Int m) {\n    Int x, y;\n\
     \    extgcd<Int>(a, m, x, y);\n    x %= m;\n    return x + (x < 0) * m;\n}\n\n\
     // Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a, b), xa = g MOD b, 0 <= x\
-    \ < b/g\ntemplate <typename Int> constexpr std::pair<Int, Int> inv_gcd(Int a,\
-    \ Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a == 0) return {b, 0};\n\
-    \    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n        Int u = s / t;\n\
-    \        s -= t * u, m0 -= m1 * u;\n        auto tmp = s;\n        s = t, t =\
-    \ tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0 < 0) m0 += b / s;\n   \
-    \ return {s, m0};\n}\n\ntemplate <typename Int> constexpr std::pair<Int, Int>\
-    \ crt(const std::vector<Int> &r, const std::vector<Int> &m) {\n    assert(r.size()\
+    \ < b/g\ntemplate <typename Int> /* constexpr */ std::pair<Int, Int> inv_gcd(Int\
+    \ a, Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a == 0) return {b,\
+    \ 0};\n    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n        Int u =\
+    \ s / t;\n        s -= t * u, m0 -= m1 * u;\n        auto tmp = s;\n        s\
+    \ = t, t = tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0 < 0) m0 += b /\
+    \ s;\n    return {s, m0};\n}\n\ntemplate <typename Int>\n/* constexpr */ std::pair<Int,\
+    \ Int> crt(const std::vector<Int> &r, const std::vector<Int> &m) {\n    assert(r.size()\
     \ == m.size());\n    int n = int(r.size());\n    // Contracts: 0 <= r0 < m0\n\
     \    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n; i++) {\n        assert(1\
     \ <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n        if (r1 < 0) r1\
@@ -374,7 +374,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   requiredBy: []
-  timestamp: '2021-06-13 19:08:25+09:00'
+  timestamp: '2021-09-05 19:07:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp

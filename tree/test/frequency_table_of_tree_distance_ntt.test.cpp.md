@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/centroid_decomposition.hpp
     title: tree/centroid_decomposition.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/frequency_table_of_tree_distance.hpp
     title: Frequency table of tree distance
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -168,13 +168,13 @@ data:
     \ m\ntemplate <typename Int> Int mod_inverse(Int a, Int m) {\n    Int x, y;\n\
     \    extgcd<Int>(a, m, x, y);\n    x %= m;\n    return x + (x < 0) * m;\n}\n\n\
     // Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a, b), xa = g MOD b, 0 <= x\
-    \ < b/g\ntemplate <typename Int> constexpr std::pair<Int, Int> inv_gcd(Int a,\
-    \ Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a == 0) return {b, 0};\n\
-    \    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n        Int u = s / t;\n\
-    \        s -= t * u, m0 -= m1 * u;\n        auto tmp = s;\n        s = t, t =\
-    \ tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0 < 0) m0 += b / s;\n   \
-    \ return {s, m0};\n}\n\ntemplate <typename Int> constexpr std::pair<Int, Int>\
-    \ crt(const std::vector<Int> &r, const std::vector<Int> &m) {\n    assert(r.size()\
+    \ < b/g\ntemplate <typename Int> /* constexpr */ std::pair<Int, Int> inv_gcd(Int\
+    \ a, Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a == 0) return {b,\
+    \ 0};\n    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n        Int u =\
+    \ s / t;\n        s -= t * u, m0 -= m1 * u;\n        auto tmp = s;\n        s\
+    \ = t, t = tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0 < 0) m0 += b /\
+    \ s;\n    return {s, m0};\n}\n\ntemplate <typename Int>\n/* constexpr */ std::pair<Int,\
+    \ Int> crt(const std::vector<Int> &r, const std::vector<Int> &m) {\n    assert(r.size()\
     \ == m.size());\n    int n = int(r.size());\n    // Contracts: 0 <= r0 < m0\n\
     \    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n; i++) {\n        assert(1\
     \ <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n        if (r1 < 0) r1\
@@ -320,8 +320,8 @@ data:
   isVerificationFile: true
   path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   requiredBy: []
-  timestamp: '2021-09-04 01:18:16+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-09-05 19:07:53+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
 layout: document
