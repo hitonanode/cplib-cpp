@@ -3,10 +3,11 @@
 #include <vector>
 
 // CUT begin
-// Vector matroid on F2 : linearly independent vectors
+// Binary matroid (vector matroid on F2) : linearly independent vectors
 // VDIM: max. dimension of vector space
 // Verified: SRM526.5 1000 (Used only for linear independence check)
-template <int VDIM> class F2VectorMatroid {
+// Verified: CF102156D 2019 Petrozavodsk Winter Camp, Yandex Cup D. Pick Your Own Nim
+template <int VDIM> class BinaryMatroid {
     using Element = int;
     static void chxormin(std::bitset<VDIM> &l, const std::bitset<VDIM> &r) {
         int i = r._Find_first();
@@ -17,8 +18,8 @@ template <int VDIM> class F2VectorMatroid {
     std::vector<std::vector<std::bitset<VDIM>>> bs;
 
 public:
-    F2VectorMatroid() = default;
-    F2VectorMatroid(const std::vector<std::bitset<VDIM>> &bitmat) : mat(bitmat) {}
+    BinaryMatroid() = default;
+    BinaryMatroid(const std::vector<std::bitset<VDIM>> &bitmat) : mat(bitmat) {}
 
     int size() const { return mat.size(); }
 
@@ -28,26 +29,25 @@ public:
             if (I[e]) Iset.push_back(e);
         }
         bs.assign(Iset.size() + 1, {});
-        for (int i = 0; i < int(Iset.size()); i++) {
-            for (int j = i; j < int(Iset.size()); j++) {
+        for (int i = 0; i < int(Iset.size()) + 1; i++) {
+            for (int j = 0; j < int(Iset.size()); j++) {
+                if (i == j) continue;
                 auto v = mat[Iset[j]];
-                for (auto b : bs[i]) chxormin(v, b);
-                bs[i].push_back(v);
+                for (const auto &b : bs[i]) chxormin(v, b);
+                if (v.any()) bs[i].push_back(v);
             }
         }
     }
     std::vector<Element> circuit(const Element &e) const {
         std::bitset<VDIM> v = mat[e];
-        for (auto b : bs[0]) chxormin(v, b);
+        for (const auto &b : bs.back()) chxormin(v, b);
         if (v.any()) return {}; // I + {e} is independent
 
         std::vector<Element> ret{e};
-        v = mat[e];
         for (int i = 0; i < int(Iset.size()); i++) {
-            std::bitset<VDIM> w = v;
-            for (auto b : bs[i + 1]) chxormin(w, b);
+            std::bitset<VDIM> w = mat[e];
+            for (const auto &b : bs[i]) chxormin(w, b);
             if (w.any()) ret.push_back(Iset[i]);
-            chxormin(v, bs[0][i]);
         }
         return ret;
     }

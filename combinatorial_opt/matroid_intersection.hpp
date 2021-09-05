@@ -4,7 +4,7 @@
 #include <vector>
 
 // CUT begin
-// (Min weight) Matroid intersection solver
+// (Min weight) matroid intersection solver
 // Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/
 // Complexity: O(CE^2 + E^3) (C : circuit query, non-weighted)
 template <class M1, class M2, class T = int>
