@@ -33,13 +33,13 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
 
     // Dijkstra algorithm
     // Complexity: O(E log E)
-    void Dijkstra(int s) {
+    using Pque = std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;
+    template <class Heap = Pque> void Dijkstra(int s) {
         assert(0 <= s and s < V);
         dist.assign(V, INF);
         dist[s] = 0;
         prev.assign(V, INVALID);
-        using P = std::pair<T, int>;
-        std::priority_queue<P, std::vector<P>, std::greater<P>> pq;
+        Heap pq;
         pq.emplace(0, s);
         while (!pq.empty()) {
             T d;

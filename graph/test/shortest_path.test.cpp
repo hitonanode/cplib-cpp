@@ -1,4 +1,5 @@
 #include "../shortest_path.hpp"
+#include "../../data_structure/radix_heap.hpp"
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -16,7 +17,11 @@ int main() {
         graph.add_edge(a, b, c);
     }
 
+    graph.Dijkstra<radix_heap<unsigned long long, int>>(s);
+    auto d_radix = graph.dist;
+
     graph.solve(s);
+    assert(graph.dist == d_radix);
 
     if (graph.dist[t] == INF) {
         cout << "-1\n";
