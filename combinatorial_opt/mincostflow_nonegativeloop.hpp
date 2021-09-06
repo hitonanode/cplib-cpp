@@ -76,22 +76,21 @@ struct MinCostFlow {
         return !_is_dual_infeasible or _initialize_dual_dag() or _initialize_dual_spfa();
     }
 
-    void _dijkstra(int s) { // O(ElogV)
+    template <class heap> void _dijkstra(int s) { // O(ElogV)
         prevv.assign(V, -1);
         preve.assign(V, -1);
         dist.assign(V, INF_COST);
         dist[s] = 0;
-        using P = std::pair<Cost, int>;
-        std::priority_queue<P, std::vector<P>, std::greater<P>> q;
+        heap q;
         q.emplace(0, s);
         while (!q.empty()) {
-            P p = q.top();
+            auto p = q.top();
             q.pop();
             int v = p.second;
-            if (dist[v] < p.first) continue;
+            if (dist[v] < Cost(p.first)) continue;
             for (int i = 0; i < (int)g[v].size(); i++) {
                 _edge &e = g[v][i];
-                Cost c = dist[v] + e.cost + dual[v] - dual[e.to];
+                auto c = dist[v] + e.cost + dual[v] - dual[e.to];
                 if (e.cap > 0 and dist[e.to] > c) {
                     dist[e.to] = c, prevv[e.to] = v, preve[e.to] = i;
                     q.emplace(dist[e.to], e.to);
@@ -116,12 +115,14 @@ struct MinCostFlow {
     }
 
     // Flush flow f from s to t. Graph must not have negative cycle.
-    std::pair<Cap, Cost> flow(int s, int t, const Cap &flow_limit) {
+    using Pque = std::priority_queue<std::pair<Cost, int>, std::vector<std::pair<Cost, int>>, std::greater<std::pair<Cost, int>>>;
+    template <class heap = Pque> std::pair<Cap, Cost> flow(int s, int t, const Cap &flow_limit) {
+        // You can also use radix_heap<typename std::make_unsigned<Cost>::type, int> as prique
         if (!initialize_dual()) throw; // Fail to find feasible dual
         Cost cost = 0;
         Cap flow_rem = flow_limit;
         while (flow_rem > 0) {
-            _dijkstra(s);
+            _dijkstra<heap>(s);
             if (dist[t] == INF_COST) break;
             for (int v = 0; v < V; v++) dual[v] = std::min(dual[v] + dist[v], INF_COST);
             Cap d = flow_rem;
