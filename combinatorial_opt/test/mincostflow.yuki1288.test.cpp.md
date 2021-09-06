@@ -51,14 +51,13 @@ data:
     \  if (!in_queue[e.to]) in_queue[e.to] = true, q.push(e.to);\n               \
     \ }\n            }\n        }\n        return true;\n    }\n\n    bool initialize_dual()\
     \ {\n        return !_is_dual_infeasible or _initialize_dual_dag() or _initialize_dual_spfa();\n\
-    \    }\n\n    void _dijkstra(int s) { // O(ElogV)\n        prevv.assign(V, -1);\n\
-    \        preve.assign(V, -1);\n        dist.assign(V, INF_COST);\n        dist[s]\
-    \ = 0;\n        using P = std::pair<Cost, int>;\n        std::priority_queue<P,\
-    \ std::vector<P>, std::greater<P>> q;\n        q.emplace(0, s);\n        while\
-    \ (!q.empty()) {\n            P p = q.top();\n            q.pop();\n         \
-    \   int v = p.second;\n            if (dist[v] < p.first) continue;\n        \
-    \    for (int i = 0; i < (int)g[v].size(); i++) {\n                _edge &e =\
-    \ g[v][i];\n                Cost c = dist[v] + e.cost + dual[v] - dual[e.to];\n\
+    \    }\n\n    template <class heap> void _dijkstra(int s) { // O(ElogV)\n    \
+    \    prevv.assign(V, -1);\n        preve.assign(V, -1);\n        dist.assign(V,\
+    \ INF_COST);\n        dist[s] = 0;\n        heap q;\n        q.emplace(0, s);\n\
+    \        while (!q.empty()) {\n            auto p = q.top();\n            q.pop();\n\
+    \            int v = p.second;\n            if (dist[v] < Cost(p.first)) continue;\n\
+    \            for (int i = 0; i < (int)g[v].size(); i++) {\n                _edge\
+    \ &e = g[v][i];\n                auto c = dist[v] + e.cost + dual[v] - dual[e.to];\n\
     \                if (e.cap > 0 and dist[e.to] > c) {\n                    dist[e.to]\
     \ = c, prevv[e.to] = v, preve[e.to] = i;\n                    q.emplace(dist[e.to],\
     \ e.to);\n                }\n            }\n        }\n    }\n\n    MinCostFlow(int\
@@ -70,11 +69,14 @@ data:
     \        g[from].push_back({to, (int)g[to].size() + (from == to), cap, cost});\n\
     \        g[to].push_back({from, (int)g[from].size() - 1, (Cap)0, -cost});\n  \
     \      return int(pos.size()) - 1;\n    }\n\n    // Flush flow f from s to t.\
-    \ Graph must not have negative cycle.\n    std::pair<Cap, Cost> flow(int s, int\
-    \ t, const Cap &flow_limit) {\n        if (!initialize_dual()) throw; // Fail\
-    \ to find feasible dual\n        Cost cost = 0;\n        Cap flow_rem = flow_limit;\n\
-    \        while (flow_rem > 0) {\n            _dijkstra(s);\n            if (dist[t]\
-    \ == INF_COST) break;\n            for (int v = 0; v < V; v++) dual[v] = std::min(dual[v]\
+    \ Graph must not have negative cycle.\n    using Pque = std::priority_queue<std::pair<Cost,\
+    \ int>, std::vector<std::pair<Cost, int>>, std::greater<std::pair<Cost, int>>>;\n\
+    \    template <class heap = Pque> std::pair<Cap, Cost> flow(int s, int t, const\
+    \ Cap &flow_limit) {\n        // You can also use radix_heap<typename std::make_unsigned<Cost>::type,\
+    \ int> as prique\n        if (!initialize_dual()) throw; // Fail to find feasible\
+    \ dual\n        Cost cost = 0;\n        Cap flow_rem = flow_limit;\n        while\
+    \ (flow_rem > 0) {\n            _dijkstra<heap>(s);\n            if (dist[t] ==\
+    \ INF_COST) break;\n            for (int v = 0; v < V; v++) dual[v] = std::min(dual[v]\
     \ + dist[v], INF_COST);\n            Cap d = flow_rem;\n            for (int v\
     \ = t; v != s; v = prevv[v]) d = std::min(d, g[prevv[v]][preve[v]].cap);\n   \
     \         flow_rem -= d;\n            cost += d * (dual[t] - dual[s]);\n     \
@@ -127,7 +129,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
   requiredBy: []
-  timestamp: '2021-08-09 23:08:55+09:00'
+  timestamp: '2021-09-07 01:07:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/mincostflow.yuki1288.test.cpp

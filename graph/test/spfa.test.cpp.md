@@ -26,19 +26,19 @@ data:
     \ w);\n        E++;\n        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight\
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
-    \ algorithm\n    // Complexity: O(E log E)\n    void Dijkstra(int s) {\n     \
-    \   assert(0 <= s and s < V);\n        dist.assign(V, INF);\n        dist[s] =\
-    \ 0;\n        prev.assign(V, INVALID);\n        using P = std::pair<T, int>;\n\
-    \        std::priority_queue<P, std::vector<P>, std::greater<P>> pq;\n       \
-    \ pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n       \
-    \     int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
-    \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
-    \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
-    \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
-    \                pq.emplace(dnx, nx.first);\n                }\n            }\n\
-    \        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void DijkstraVquad(int\
-    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
-    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
+    \ algorithm\n    // Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
+    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;\n  \
+    \  template <class Heap = Pque> void Dijkstra(int s) {\n        assert(0 <= s\
+    \ and s < V);\n        dist.assign(V, INF);\n        dist[s] = 0;\n        prev.assign(V,\
+    \ INVALID);\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
+    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
+    \            pq.pop();\n            if (dist[v] < d) continue;\n            for\
+    \ (auto nx : to[v]) {\n                T dnx = d + nx.second;\n              \
+    \  if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
+    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
+    \          }\n        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void\
+    \ DijkstraVquad(int s) {\n        assert(0 <= s and s < V);\n        dist.assign(V,\
+    \ INF);\n        dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
     \ fixed(V, false);\n        while (true) {\n            int r = INVALID;\n   \
     \         T dr = INF;\n            for (int i = 0; i < V; i++) {\n           \
     \     if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];\n            }\n  \
@@ -139,7 +139,7 @@ data:
   isVerificationFile: true
   path: graph/test/spfa.test.cpp
   requiredBy: []
-  timestamp: '2021-08-28 00:57:49+09:00'
+  timestamp: '2021-09-07 01:07:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/spfa.test.cpp

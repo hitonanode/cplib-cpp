@@ -5,6 +5,9 @@ data:
     path: combinatorial_opt/mincostflow_nonegativeloop.hpp
     title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\
       \u30D7\u306A\u3057\u306E\u6700\u5C0F\u8CBB\u7528\u6D41\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: data_structure/radix_heap.hpp
+    title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -12,13 +15,44 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/assignment
+    PROBLEM: https://yukicoder.me/problems/no/1288
     links:
-    - https://judge.yosupo.jp/problem/assignment
-  bundledCode: "#line 2 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\n#include\
-    \ <cassert>\n#include <limits>\n#include <queue>\n#include <vector>\n\n// CUT\
-    \ begin\n// Minimum cost flow WITH NO NEGATIVE CYCLE (just negative cost edge\
-    \ is allowed)\n// Verified:\n// - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
+    - https://yukicoder.me/problems/no/1288
+  bundledCode: "#line 1 \"combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp\"\
+    \n#define PROBLEM \"https://yukicoder.me/problems/no/1288\"\n#line 2 \"data_structure/radix_heap.hpp\"\
+    \n#include <array>\n#include <cstddef>\n#include <limits>\n#include <tuple>\n\
+    #include <type_traits>\n#include <utility>\n#include <vector>\n\n// Radix heap\
+    \ for unsigned integer\n// https://github.com/iwiwi/radix-heap\ntemplate <class\
+    \ Uint, class Label, typename std::enable_if<std::is_unsigned<Uint>::value>::type\
+    \ * = nullptr>\nclass radix_heap {\n    int sz;\n    Uint last;\n    std::array<std::vector<std::pair<Uint,\
+    \ Label>>, std::numeric_limits<Uint>::digits + 1> v;\n\n    template <class U,\
+    \ typename std::enable_if<sizeof(U) == 4>::type * = nullptr>\n    static inline\
+    \ int bucket(U x) noexcept {\n        return x ? 32 - __builtin_clz(x) : 0;\n\
+    \    }\n    template <class U, typename std::enable_if<sizeof(U) == 8>::type *\
+    \ = nullptr>\n    static inline int bucket(U x) noexcept {\n        return x ?\
+    \ 64 - __builtin_clzll(x) : 0;\n    }\n\n    void pull() {\n        if (!v[0].empty())\
+    \ return;\n        int i = 1;\n        while (v[i].empty()) ++i;\n        last\
+    \ = v[i].back().first;\n        for (int j = 0; j < int(v[i].size()); j++) last\
+    \ = std::min(last, v[i][j].first);\n        for (int j = 0; j < int(v[i].size());\
+    \ j++) {\n            v[bucket(v[i][j].first ^ last)].emplace_back(std::move(v[i][j]));\n\
+    \        }\n        v[i].clear();\n    }\n\npublic:\n    radix_heap() : sz(0),\
+    \ last(0) { static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid type.\"\
+    ); }\n    std::size_t size() const noexcept { return sz; }\n    bool empty() const\
+    \ noexcept { return sz == 0; }\n    void push(Uint x, const Label &val) { ++sz,\
+    \ v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint x, Label &&val)\
+    \ { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val)); }\n    template\
+    \ <class... Args> void emplace(Uint x, Args &&...args) {\n        ++sz, v[bucket(x\
+    \ ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x), std::forward_as_tuple(args...));\n\
+    \    }\n    void pop() { pull(), --sz, v[0].pop_back(); }\n    std::pair<Uint,\
+    \ Label> top() { return pull(), v[0].back(); }\n    Uint top_key() { return pull(),\
+    \ last; }\n    Label &top_label() { return pull(), v[0].back().second; }\n   \
+    \ void clear() noexcept {\n        sz = 0, last = 0;\n        for (auto &vec :\
+    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) { std::swap(sz,\
+    \ a.sz), std::swap(last, a.last), v.swap(a.v); }\n};\n#line 2 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\
+    \n#include <cassert>\n#line 4 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\
+    \n#include <queue>\n#line 6 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\
+    \n\n// CUT begin\n// Minimum cost flow WITH NO NEGATIVE CYCLE (just negative cost\
+    \ edge is allowed)\n// Verified:\n// - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
     // - CodeChef LTIME98 Ancient Magic https://www.codechef.com/problems/ANCT\ntemplate\
     \ <class Cap = long long, class Cost = long long, Cost INF_COST = std::numeric_limits<Cost>::max()\
     \ / 2>\nstruct MinCostFlow {\n    struct _edge {\n        int to, rev;\n     \
@@ -96,55 +130,48 @@ data:
     \        os << \"[MinCostFlow]V=\" << mcf.V << \":\";\n        for (int i = 0;\
     \ i < mcf.V; i++) {\n            for (auto &e : mcf.g[i]) os << \"\\n\" << i <<\
     \ \"->\" << e.to << \":cap\" << e.cap << \",$\" << e.cost;\n        }\n      \
-    \  return os;\n    }\n};\n#line 2 \"combinatorial_opt/test/assignment_problem.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n#include <algorithm>\n\
-    #include <iostream>\n\ntemplate <typename TC> std::pair<TC, std::vector<int>>\
-    \ AssignmentProblem(std::vector<std::vector<TC>> cost) {\n    int N = cost.size();\n\
-    \    MinCostFlow<int, TC> mcf(N * 2 + 2);\n    int S = N * 2, T = N * 2 + 1;\n\
-    \    TC bias_total_cost = 0;\n    for (int i = 0; i < N; i++) {\n        TC lo\
-    \ = *min_element(cost[i].begin(), cost[i].end());\n        bias_total_cost +=\
-    \ lo;\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N + i, T, 1, 0);\n\
-    \        for (int j = 0; j < N; j++) mcf.add_edge(i, N + j, 1, cost[i][j] - lo);\n\
-    \    }\n    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;\n  \
-    \  std::vector<int> ret;\n\n    for (int i = 0; i < N; i++) {\n        for (const\
-    \ auto &g : mcf.g[i]) {\n            if (g.to != S and !g.cap) {\n           \
-    \     ret.emplace_back(g.to - N);\n                break;\n            }\n   \
-    \     }\n    }\n    return std::make_pair(total_cost, ret);\n}\n\nint main() {\n\
-    \    int N;\n    std::cin >> N;\n    std::vector<std::vector<long long>> A(N,\
-    \ std::vector<long long>(N));\n    for (auto &vec : A) {\n        for (auto &x\
-    \ : vec) { std::cin >> x; }\n    }\n    auto ret = AssignmentProblem(A);\n   \
-    \ std::cout << ret.first << '\\n';\n    for (auto x : ret.second) std::cout <<\
-    \ x << ' ';\n    std::cout << '\\n';\n}\n"
-  code: "#include \"../mincostflow_nonegativeloop.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\
-    \n#include <algorithm>\n#include <iostream>\n\ntemplate <typename TC> std::pair<TC,\
-    \ std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost) {\n \
-    \   int N = cost.size();\n    MinCostFlow<int, TC> mcf(N * 2 + 2);\n    int S\
-    \ = N * 2, T = N * 2 + 1;\n    TC bias_total_cost = 0;\n    for (int i = 0; i\
-    \ < N; i++) {\n        TC lo = *min_element(cost[i].begin(), cost[i].end());\n\
-    \        bias_total_cost += lo;\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N\
-    \ + i, T, 1, 0);\n        for (int j = 0; j < N; j++) mcf.add_edge(i, N + j, 1,\
-    \ cost[i][j] - lo);\n    }\n    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;\n\
-    \    std::vector<int> ret;\n\n    for (int i = 0; i < N; i++) {\n        for (const\
-    \ auto &g : mcf.g[i]) {\n            if (g.to != S and !g.cap) {\n           \
-    \     ret.emplace_back(g.to - N);\n                break;\n            }\n   \
-    \     }\n    }\n    return std::make_pair(total_cost, ret);\n}\n\nint main() {\n\
-    \    int N;\n    std::cin >> N;\n    std::vector<std::vector<long long>> A(N,\
-    \ std::vector<long long>(N));\n    for (auto &vec : A) {\n        for (auto &x\
-    \ : vec) { std::cin >> x; }\n    }\n    auto ret = AssignmentProblem(A);\n   \
-    \ std::cout << ret.first << '\\n';\n    for (auto x : ret.second) std::cout <<\
-    \ x << ' ';\n    std::cout << '\\n';\n}\n"
+    \  return os;\n    }\n};\n#line 4 \"combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp\"\
+    \n#include <iostream>\n#include <numeric>\n#include <string>\n#line 8 \"combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp\"\
+    \nusing namespace std;\n\nint main() {\n    int N;\n    string S;\n    cin >>\
+    \ N >> S;\n    vector<long long> V(N);\n    for (auto &x : V) cin >> x;\n\n  \
+    \  const int s = N * 5, t = s + 1;\n    MinCostFlow<int, long long> graph(t +\
+    \ 1);\n    for (int d = 0; d < 5; d++) {\n        for (int i = 0; i < N - 1; i++)\
+    \ graph.add_edge(d * N + i, d * N + i + 1, N / 4, 0);\n    }\n    graph.add_edge(s\
+    \ - 1, 0, N / 4, 0);\n\n    for (int i = 0; i < N; i++) {\n        int b = 0;\n\
+    \        if (S[i] == 'u') b = N * 1;\n        if (S[i] == 'k') b = N * 2;\n  \
+    \      if (S[i] == 'i') b = N * 3;\n        int fr = b + i + N, to = b + i;\n\
+    \        graph.add_edge(s, fr, 1, 0);\n        graph.add_edge(fr, to, 1, V[i]);\n\
+    \        graph.add_edge(to, t, 1, 0);\n    }\n    auto cost = graph.flow<radix_heap<unsigned\
+    \ long long, int>>(s, t, N).second;\n    cout << accumulate(V.begin(), V.end(),\
+    \ 0LL) - cost << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1288\"\n#include \"../../data_structure/radix_heap.hpp\"\
+    \n#include \"../mincostflow_nonegativeloop.hpp\"\n#include <iostream>\n#include\
+    \ <numeric>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint\
+    \ main() {\n    int N;\n    string S;\n    cin >> N >> S;\n    vector<long long>\
+    \ V(N);\n    for (auto &x : V) cin >> x;\n\n    const int s = N * 5, t = s + 1;\n\
+    \    MinCostFlow<int, long long> graph(t + 1);\n    for (int d = 0; d < 5; d++)\
+    \ {\n        for (int i = 0; i < N - 1; i++) graph.add_edge(d * N + i, d * N +\
+    \ i + 1, N / 4, 0);\n    }\n    graph.add_edge(s - 1, 0, N / 4, 0);\n\n    for\
+    \ (int i = 0; i < N; i++) {\n        int b = 0;\n        if (S[i] == 'u') b =\
+    \ N * 1;\n        if (S[i] == 'k') b = N * 2;\n        if (S[i] == 'i') b = N\
+    \ * 3;\n        int fr = b + i + N, to = b + i;\n        graph.add_edge(s, fr,\
+    \ 1, 0);\n        graph.add_edge(fr, to, 1, V[i]);\n        graph.add_edge(to,\
+    \ t, 1, 0);\n    }\n    auto cost = graph.flow<radix_heap<unsigned long long,\
+    \ int>>(s, t, N).second;\n    cout << accumulate(V.begin(), V.end(), 0LL) - cost\
+    \ << '\\n';\n}\n"
   dependsOn:
+  - data_structure/radix_heap.hpp
   - combinatorial_opt/mincostflow_nonegativeloop.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/assignment_problem.test.cpp
+  path: combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
   requiredBy: []
   timestamp: '2021-09-07 01:07:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/assignment_problem.test.cpp
+documentation_of: combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/assignment_problem.test.cpp
-- /verify/combinatorial_opt/test/assignment_problem.test.cpp.html
-title: combinatorial_opt/test/assignment_problem.test.cpp
+- /verify/combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
+- /verify/combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp.html
+title: combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
 ---
