@@ -35,6 +35,9 @@ pq.swap(pq2);
 cout << pq.top_label() << ' ' << pq2.top_label() << '\n'; // heap2 heap1
 ```
 
+## 問題例
+
+- [No.1288 yuki collection - yukicoder](https://yukicoder.me/problems/no/1288) 最小費用流の計算中に使用するヒープを `std::priority_queue` から `radix_heap` に変更することで定数倍が改善される（[2,261 ms](https://yukicoder.me/submissions/696945) → [886 ms](https://yukicoder.me/submissions/696946)）．
 ## リンク
 
 - [1] R. K. Ahuja et al., "Faster algorithms for the shortest path problem,"
