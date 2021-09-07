@@ -91,7 +91,7 @@ layout: document
 title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
 ---
 
-`std::priroity_queue` と同様の機能を提供するヒープだが，「最後に取り出した値以上の値しか追加できない」という制約があり，また本実装では符号なし整数型に使用が限られる．ヒープがキーとして持つ整数型のビット数を $D$ とおくと，一度追加した要素に対しては演算が高々 $O(D)$ 回しか発生しないため，クエリ毎の計算量は償却 $O(D)$ で，定数倍にも優れているとされる．Dijkstra 法や各種フローアルゴリズムの定数倍高速化などに活用できる．
+`std::priroity_queue` と同様の機能を提供するヒープだが，「最後に取り出した値以上の値しか追加できない」という制約があり（本実装では更に，`top()` などのクエリで最後に「見た」以上の値しか追加できないという制約も加わる），また本実装では符号なし整数型に使用が限られる．ヒープがキーとして持つ整数型のビット数を $D$ とおくと，一度追加した要素に対しては演算が高々 $O(D)$ 回しか発生しないため，クエリ毎の計算量は償却 $O(D)$ で，定数倍にも優れているとされる．Dijkstra 法や各種フローアルゴリズムの定数倍高速化などに活用できる．
 
 ## 使用方法
 
@@ -126,6 +126,7 @@ cout << pq.top_label() << ' ' << pq2.top_label() << '\n'; // heap2 heap1
 ## 問題例
 
 - [No.1288 yuki collection - yukicoder](https://yukicoder.me/problems/no/1288) 最小費用流の計算中に使用するヒープを `std::priority_queue` から `radix_heap` に変更することで定数倍が改善される（[2,261 ms](https://yukicoder.me/submissions/696945) → [886 ms](https://yukicoder.me/submissions/696946)）．
+
 ## リンク
 
 - [1] R. K. Ahuja et al., "Faster algorithms for the shortest path problem,"
