@@ -21,7 +21,6 @@ int main() {
     dist[t] = 0;
     radix_heap<unsigned long long, int> pq;
     pq.push(0, t);
-    cerr << "OK" << endl;
     while (!pq.empty()) {
         auto p = pq.top();
         pq.pop();
