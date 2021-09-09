@@ -1,3 +1,0 @@
-[submodule "submodule/radix-heap"]
-	path = submodule/radix-heap
-	url = https://github.com/iwiwi/radix-heap
