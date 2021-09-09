@@ -126,6 +126,10 @@ data:
       path: data_structure/radix_heap.hpp
       title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
     - icon: ':heavy_check_mark:'
+      path: data_structure/radix_heap_array.hpp
+      title: "Array-like radix heap with decrease query\uFF08`chmin()` \u64CD\u4F5C\
+        \u304C\u53EF\u80FD\u306A\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
+    - icon: ':heavy_check_mark:'
       path: data_structure/range_kth_smallest_offline.hpp
       title: data_structure/range_kth_smallest_offline.hpp
     - icon: ':warning:'
@@ -665,6 +669,9 @@ data:
       path: combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
       title: combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
     - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/mincostflow.radixheaparray.yuki1288.test.cpp
+      title: combinatorial_opt/test/mincostflow.radixheaparray.yuki1288.test.cpp
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/mincostflow.test.cpp
       title: combinatorial_opt/test/mincostflow.test.cpp
     - icon: ':heavy_check_mark:'
@@ -763,6 +770,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/radix_heap.dijkstra.test.cpp
       title: data_structure/test/radix_heap.dijkstra.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/radix_heap_array.dijkstra.test.cpp
+      title: data_structure/test/radix_heap_array.dijkstra.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/range_kth_smallest_offline.test.cpp
       title: data_structure/test/range_kth_smallest_offline.test.cpp

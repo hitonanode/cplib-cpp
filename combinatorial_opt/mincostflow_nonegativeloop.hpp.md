@@ -10,6 +10,9 @@ data:
     path: combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
     title: combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/mincostflow.radixheaparray.yuki1288.test.cpp
+    title: combinatorial_opt/test/mincostflow.radixheaparray.yuki1288.test.cpp
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/mincostflow.test.cpp
     title: combinatorial_opt/test/mincostflow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -196,6 +199,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
+  - combinatorial_opt/test/mincostflow.radixheaparray.yuki1288.test.cpp
   - combinatorial_opt/test/mincostflow.test.cpp
   - combinatorial_opt/test/mincostflow.yuki1288.test.cpp
   - combinatorial_opt/test/mincostflow.yuki1324.test.cpp
