@@ -64,18 +64,17 @@ data:
     \ rdi();\n        to[b].emplace_back(a, c);\n    }\n    vector<unsigned long long>\
     \ dist(N, numeric_limits<unsigned long long>::max());\n    vector<int> prv(N,\
     \ -1);\n    dist[t] = 0;\n    radix_heap<unsigned long long, int> pq;\n    pq.push(0,\
-    \ t);\n    cerr << \"OK\" << endl;\n    while (!pq.empty()) {\n        auto p\
-    \ = pq.top();\n        pq.pop();\n        int now = p.second;\n        if (now\
-    \ == s) break;\n        if (dist[now] < p.first) continue;\n        for (const\
-    \ auto &nx : to[now]) {\n            int nxt = nx.first;\n            if (dist[nxt]\
-    \ > dist[now] + nx.second) {\n                dist[nxt] = dist[now] + nx.second;\n\
-    \                prv[nxt] = now;\n                pq.push(dist[nxt], nxt);\n \
-    \           }\n        }\n    }\n    if (dist[s] == numeric_limits<unsigned long\
-    \ long>::max()) {\n        cout << \"-1\\n\";\n        return 0;\n    }\n\n  \
-    \  std::vector<int> path;\n    for (int now = s; now != -1; now = prv[now]) path.push_back(now);\n\
-    \    cout << dist[s] << ' ' << path.size() - 1 << '\\n';\n    for (int i = 1;\
-    \ i < int(path.size()); i++) cout << path[i - 1] << ' ' << path[i] << '\\n';\n\
-    }\n"
+    \ t);\n    while (!pq.empty()) {\n        auto p = pq.top();\n        pq.pop();\n\
+    \        int now = p.second;\n        if (now == s) break;\n        if (dist[now]\
+    \ < p.first) continue;\n        for (const auto &nx : to[now]) {\n           \
+    \ int nxt = nx.first;\n            if (dist[nxt] > dist[now] + nx.second) {\n\
+    \                dist[nxt] = dist[now] + nx.second;\n                prv[nxt]\
+    \ = now;\n                pq.push(dist[nxt], nxt);\n            }\n        }\n\
+    \    }\n    if (dist[s] == numeric_limits<unsigned long long>::max()) {\n    \
+    \    cout << \"-1\\n\";\n        return 0;\n    }\n\n    std::vector<int> path;\n\
+    \    for (int now = s; now != -1; now = prv[now]) path.push_back(now);\n    cout\
+    \ << dist[s] << ' ' << path.size() - 1 << '\\n';\n    for (int i = 1; i < int(path.size());\
+    \ i++) cout << path[i - 1] << ' ' << path[i] << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n#include\
     \ \"../radix_heap.hpp\"\n#include \"../../utilities/reader.hpp\"\n#include <iostream>\n\
     #include <limits>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
@@ -85,25 +84,24 @@ data:
     \      to[b].emplace_back(a, c);\n    }\n    vector<unsigned long long> dist(N,\
     \ numeric_limits<unsigned long long>::max());\n    vector<int> prv(N, -1);\n \
     \   dist[t] = 0;\n    radix_heap<unsigned long long, int> pq;\n    pq.push(0,\
-    \ t);\n    cerr << \"OK\" << endl;\n    while (!pq.empty()) {\n        auto p\
-    \ = pq.top();\n        pq.pop();\n        int now = p.second;\n        if (now\
-    \ == s) break;\n        if (dist[now] < p.first) continue;\n        for (const\
-    \ auto &nx : to[now]) {\n            int nxt = nx.first;\n            if (dist[nxt]\
-    \ > dist[now] + nx.second) {\n                dist[nxt] = dist[now] + nx.second;\n\
-    \                prv[nxt] = now;\n                pq.push(dist[nxt], nxt);\n \
-    \           }\n        }\n    }\n    if (dist[s] == numeric_limits<unsigned long\
-    \ long>::max()) {\n        cout << \"-1\\n\";\n        return 0;\n    }\n\n  \
-    \  std::vector<int> path;\n    for (int now = s; now != -1; now = prv[now]) path.push_back(now);\n\
-    \    cout << dist[s] << ' ' << path.size() - 1 << '\\n';\n    for (int i = 1;\
-    \ i < int(path.size()); i++) cout << path[i - 1] << ' ' << path[i] << '\\n';\n\
-    }\n"
+    \ t);\n    while (!pq.empty()) {\n        auto p = pq.top();\n        pq.pop();\n\
+    \        int now = p.second;\n        if (now == s) break;\n        if (dist[now]\
+    \ < p.first) continue;\n        for (const auto &nx : to[now]) {\n           \
+    \ int nxt = nx.first;\n            if (dist[nxt] > dist[now] + nx.second) {\n\
+    \                dist[nxt] = dist[now] + nx.second;\n                prv[nxt]\
+    \ = now;\n                pq.push(dist[nxt], nxt);\n            }\n        }\n\
+    \    }\n    if (dist[s] == numeric_limits<unsigned long long>::max()) {\n    \
+    \    cout << \"-1\\n\";\n        return 0;\n    }\n\n    std::vector<int> path;\n\
+    \    for (int now = s; now != -1; now = prv[now]) path.push_back(now);\n    cout\
+    \ << dist[s] << ' ' << path.size() - 1 << '\\n';\n    for (int i = 1; i < int(path.size());\
+    \ i++) cout << path[i - 1] << ' ' << path[i] << '\\n';\n}\n"
   dependsOn:
   - data_structure/radix_heap.hpp
   - utilities/reader.hpp
   isVerificationFile: true
   path: data_structure/test/radix_heap.dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2021-09-07 01:07:11+09:00'
+  timestamp: '2021-09-09 22:54:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/radix_heap.dijkstra.test.cpp
