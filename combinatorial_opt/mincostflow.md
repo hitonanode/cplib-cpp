@@ -1,5 +1,5 @@
 ---
-title: Minimum cost flow (primal-dual)
+title: Minimum cost flow (primal-dual, based on AC Library)
 documentation_of: ./mincostflow.hpp
 ---
 
