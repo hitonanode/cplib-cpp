@@ -583,7 +583,7 @@ data:
       title: utilities/gnu_pbds.hpp
     - icon: ':warning:'
       path: utilities/int128.hpp
-      title: floor sum
+      title: int128
     - icon: ':heavy_check_mark:'
       path: utilities/int_kth_root.hpp
       title: utilities/int_kth_root.hpp
