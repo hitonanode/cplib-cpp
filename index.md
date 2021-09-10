@@ -39,7 +39,7 @@ data:
         \u7528\u6D41\uFF09"
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/mincostflow.hpp
-      title: Minimum cost flow (primal-dual)
+      title: Minimum cost flow (primal-dual, based on AC Library)
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/mincostflow_nonegativeloop.hpp
       title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\
