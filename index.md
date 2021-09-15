@@ -78,6 +78,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: convex_hull_trick/convex_hull_trick.hpp
       title: convex_hull_trick/convex_hull_trick.hpp
+    - icon: ':heavy_check_mark:'
+      path: convex_hull_trick/li_chao_tree.hpp
+      title: Li-Chao tree
   - name: convolution
     pages:
     - icon: ':warning:'
@@ -700,6 +703,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: convex_hull_trick/test/convex_hull_trick.test.cpp
       title: convex_hull_trick/test/convex_hull_trick.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: convex_hull_trick/test/li_chao_tree.test.cpp
+      title: convex_hull_trick/test/li_chao_tree.test.cpp
   - name: convolution/test
     pages:
     - icon: ':heavy_check_mark:'
