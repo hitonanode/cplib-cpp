@@ -164,8 +164,8 @@ data:
   verifiedWith:
   - combinatorial_opt/test/mcf_costscaling.test.cpp
   - combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
-  - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
   - combinatorial_opt/test/b_flow.test.cpp
+  - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
 documentation_of: combinatorial_opt/mcf_costscaling.hpp
 layout: document
 title: "Minimum cost flow (cost scaling, Goldberg & Tarjan) \uFF08\u30B3\u30B9\u30C8\

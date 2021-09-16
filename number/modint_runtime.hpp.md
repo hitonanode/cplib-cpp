@@ -184,16 +184,16 @@ data:
   timestamp: '2021-06-06 14:54:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - graph/test/chromatic_number.test.cpp
-  - convolution/test/ntt.test.cpp
-  - convolution/test/ntt_arbitrary_mod.test.cpp
-  - formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - number/test/sqrt_modint_runtime.test.cpp
   - number/test/sieve.stress.test.cpp
   - number/test/montmort_number_mod.test.cpp
+  - graph/test/chromatic_number.test.cpp
+  - convolution/test/ntt.test.cpp
+  - convolution/test/ntt_arbitrary_mod.test.cpp
+  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+  - formal_power_series/test/fps_exp_modintruntime.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
 documentation_of: number/modint_runtime.hpp
 layout: document
 redirect_from:

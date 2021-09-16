@@ -169,14 +169,14 @@ data:
   timestamp: '2021-08-01 19:15:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - number/test/enumerate_primes.test.cpp
-  - number/test/sieve.stress.test.cpp
   - number/test/gen_primes.test.cpp
-  - number/test/miller-rabin-5e7.test.cpp
   - number/test/prime_factorization.test.cpp
+  - number/test/sieve.stress.test.cpp
+  - number/test/enumerate_primes.test.cpp
+  - number/test/miller-rabin-5e7.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
 documentation_of: number/sieve.hpp
 layout: document
 title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"

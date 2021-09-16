@@ -123,7 +123,7 @@ layout: document
 title: Li-Chao tree
 ---
 
-Li-Chao tree の実装．一次関数 $ax + b$ による区間 chmin，一点での最小値取得が，最小値取得が可能な $x$ の個数 $N$ に対してクエリ $O(\log N)$ の計算量で可能．
+Li-Chao tree の実装．一次関数 $ax + b$ による区間 chmin が $O((\log N)^2)$，一点での最小値取得が $O(\log N)$ の計算量で可能（$N$ は最小値取得を行う $x$ の個数）．
 
 ## 使用方法
 
