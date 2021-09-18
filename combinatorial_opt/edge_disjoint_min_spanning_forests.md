@@ -8,7 +8,7 @@ $n$ 頂点 $m$ 辺の重み付き無向グラフを入力として，辺を共�
 
 ## アルゴリズムの概要
 
-アルゴリズムの大枠は [Matroid union （マトロイドの合併） | cplib-cpp](https://hitonanode.github.io/cplib-cpp/combinatorial_opt/matroid_union.hpp) と同様．
+アルゴリズムの大枠は [Matroid union （マトロイドの合併） \| cplib-cpp](https://hitonanode.github.io/cplib-cpp/combinatorial_opt/matroid_union.hpp) と同様．
 
 ## 使用方法
 
