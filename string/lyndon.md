@@ -1,9 +1,9 @@
 ---
-title: Lyndon factorization （Lyndon 分解）
-documentation_of: ./lyndon_factorization.hpp
+title: Lyndon words （Lyndon 文字列に関する各種関数）
+documentation_of: ./lyndon.hpp
 ---
 
-文字列・数列などの比較可能なものの列に対して Lyndon 分解を行う．
+文字列・数列などの比較可能なものの列に対して Lyndon 分解を行う関数や，Lyndon 列の列挙など．
 
 ## Lyndon 文字列
 
