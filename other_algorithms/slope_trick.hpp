@@ -30,7 +30,6 @@ template <class T, T INF = std::numeric_limits<T>::max() / 2> class slope_trick 
         if (L.size()) L.pop();
         return ret;
     }
-    int size() const { return L.size() + R.size8(); }
 
 public:
     // Initialize: f(x) = 0
@@ -39,23 +38,32 @@ public:
     }
     int sizeL() const { return L.size(); }
     int sizeR() const { return R.size(); }
+
     // argmin f(x), min f(x)
     using Q = struct { T min, lo, hi; };
     Q get_min() const { return {min_f, topL(), topR()}; }
+
     // f(x) += b
     void add_const(const T &b) { min_f += b; }
+
     // f(x) += max(x - a, 0)  _/
     void add_relu(const T &a) { min_f += std::max(T(0), topL() - a), pushL(a), pushR(popL()); }
+
     // f(x) += max(a - x, 0)  \_
     void add_irelu(const T &a) { min_f += std::max(T(0), a - topR()), pushR(a), pushL(popR()); }
+
     // f(x) += |x - a|  \/
     void add_abs(const T &a) { add_relu(a), add_irelu(a); }
+
     // f(x) <- min_{0 <= y <= w} f(x + y)  .\ -> \_
     void move_left_curve(const T &w) { assert(w >= 0), displacement_l += w; }
+
     // f(x) <- min_{0 <= y <= w} f(x - y)  /. -> _/
     void move_right_curve(const T &w) { assert(w >= 0), displacement_r += w; }
+
     // f(x) <- f(x - dx) \/. -> .\/
     void translate(const T &dx) { displacement_l -= dx, displacement_r += dx; }
+
     // return f(x), f destructive
     T get_destructive(const T &x) {
         T ret = get_min().min;
@@ -63,6 +71,7 @@ public:
         while (R.size()) ret += std::max(T(0), x - popR());
         return ret;
     }
+
     // f(x) += g(x), g destructive
     void merge_destructive(slope_trick<T, INF> &g) {
         if (sizeL() + sizeR() > g.sizeL() + g.sizeR()) {
