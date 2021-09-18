@@ -27,26 +27,26 @@ data:
     \        return ret;\n    }\n    void pushL(const T &a) { L.push(a + displacement_l);\
     \ }\n    T topL() const { return L.empty() ? -INF : L.top() - displacement_l;\
     \ }\n    T popL() {\n        auto ret = topL();\n        if (L.size()) L.pop();\n\
-    \        return ret;\n    }\n    int size() const { return L.size() + R.size8();\
-    \ }\n\npublic:\n    // Initialize: f(x) = 0\n    slope_trick() : min_f(0), displacement_l(0),\
-    \ displacement_r(0) {\n        static_assert(INF > 0, \"INF must be greater than\
-    \ 0\");\n    }\n    int sizeL() const { return L.size(); }\n    int sizeR() const\
-    \ { return R.size(); }\n    // argmin f(x), min f(x)\n    using Q = struct { T\
-    \ min, lo, hi; };\n    Q get_min() const { return {min_f, topL(), topR()}; }\n\
-    \    // f(x) += b\n    void add_const(const T &b) { min_f += b; }\n    // f(x)\
-    \ += max(x - a, 0)  _/\n    void add_relu(const T &a) { min_f += std::max(T(0),\
-    \ topL() - a), pushL(a), pushR(popL()); }\n    // f(x) += max(a - x, 0)  \\_\n\
-    \    void add_irelu(const T &a) { min_f += std::max(T(0), a - topR()), pushR(a),\
-    \ pushL(popR()); }\n    // f(x) += |x - a|  \\/\n    void add_abs(const T &a)\
-    \ { add_relu(a), add_irelu(a); }\n    // f(x) <- min_{0 <= y <= w} f(x + y)  .\\\
-    \ -> \\_\n    void move_left_curve(const T &w) { assert(w >= 0), displacement_l\
-    \ += w; }\n    // f(x) <- min_{0 <= y <= w} f(x - y)  /. -> _/\n    void move_right_curve(const\
-    \ T &w) { assert(w >= 0), displacement_r += w; }\n    // f(x) <- f(x - dx) \\\
-    /. -> .\\/\n    void translate(const T &dx) { displacement_l -= dx, displacement_r\
-    \ += dx; }\n    // return f(x), f destructive\n    T get_destructive(const T &x)\
-    \ {\n        T ret = get_min().min;\n        while (L.size()) ret += std::max(T(0),\
-    \ popL() - x);\n        while (R.size()) ret += std::max(T(0), x - popR());\n\
-    \        return ret;\n    }\n    // f(x) += g(x), g destructive\n    void merge_destructive(slope_trick<T,\
+    \        return ret;\n    }\n\npublic:\n    // Initialize: f(x) = 0\n    slope_trick()\
+    \ : min_f(0), displacement_l(0), displacement_r(0) {\n        static_assert(INF\
+    \ > 0, \"INF must be greater than 0\");\n    }\n    int sizeL() const { return\
+    \ L.size(); }\n    int sizeR() const { return R.size(); }\n\n    // argmin f(x),\
+    \ min f(x)\n    using Q = struct { T min, lo, hi; };\n    Q get_min() const {\
+    \ return {min_f, topL(), topR()}; }\n\n    // f(x) += b\n    void add_const(const\
+    \ T &b) { min_f += b; }\n\n    // f(x) += max(x - a, 0)  _/\n    void add_relu(const\
+    \ T &a) { min_f += std::max(T(0), topL() - a), pushL(a), pushR(popL()); }\n\n\
+    \    // f(x) += max(a - x, 0)  \\_\n    void add_irelu(const T &a) { min_f +=\
+    \ std::max(T(0), a - topR()), pushR(a), pushL(popR()); }\n\n    // f(x) += |x\
+    \ - a|  \\/\n    void add_abs(const T &a) { add_relu(a), add_irelu(a); }\n\n \
+    \   // f(x) <- min_{0 <= y <= w} f(x + y)  .\\ -> \\_\n    void move_left_curve(const\
+    \ T &w) { assert(w >= 0), displacement_l += w; }\n\n    // f(x) <- min_{0 <= y\
+    \ <= w} f(x - y)  /. -> _/\n    void move_right_curve(const T &w) { assert(w >=\
+    \ 0), displacement_r += w; }\n\n    // f(x) <- f(x - dx) \\/. -> .\\/\n    void\
+    \ translate(const T &dx) { displacement_l -= dx, displacement_r += dx; }\n\n \
+    \   // return f(x), f destructive\n    T get_destructive(const T &x) {\n     \
+    \   T ret = get_min().min;\n        while (L.size()) ret += std::max(T(0), popL()\
+    \ - x);\n        while (R.size()) ret += std::max(T(0), x - popR());\n       \
+    \ return ret;\n    }\n\n    // f(x) += g(x), g destructive\n    void merge_destructive(slope_trick<T,\
     \ INF> &g) {\n        if (sizeL() + sizeR() > g.sizeL() + g.sizeR()) {\n     \
     \       std::swap(min_f, g.min_f);\n            std::swap(displacement_l, g.displacement_l);\n\
     \            std::swap(displacement_r, g.displacement_r);\n            std::swap(L,\
@@ -66,26 +66,26 @@ data:
     \        return ret;\n    }\n    void pushL(const T &a) { L.push(a + displacement_l);\
     \ }\n    T topL() const { return L.empty() ? -INF : L.top() - displacement_l;\
     \ }\n    T popL() {\n        auto ret = topL();\n        if (L.size()) L.pop();\n\
-    \        return ret;\n    }\n    int size() const { return L.size() + R.size8();\
-    \ }\n\npublic:\n    // Initialize: f(x) = 0\n    slope_trick() : min_f(0), displacement_l(0),\
-    \ displacement_r(0) {\n        static_assert(INF > 0, \"INF must be greater than\
-    \ 0\");\n    }\n    int sizeL() const { return L.size(); }\n    int sizeR() const\
-    \ { return R.size(); }\n    // argmin f(x), min f(x)\n    using Q = struct { T\
-    \ min, lo, hi; };\n    Q get_min() const { return {min_f, topL(), topR()}; }\n\
-    \    // f(x) += b\n    void add_const(const T &b) { min_f += b; }\n    // f(x)\
-    \ += max(x - a, 0)  _/\n    void add_relu(const T &a) { min_f += std::max(T(0),\
-    \ topL() - a), pushL(a), pushR(popL()); }\n    // f(x) += max(a - x, 0)  \\_\n\
-    \    void add_irelu(const T &a) { min_f += std::max(T(0), a - topR()), pushR(a),\
-    \ pushL(popR()); }\n    // f(x) += |x - a|  \\/\n    void add_abs(const T &a)\
-    \ { add_relu(a), add_irelu(a); }\n    // f(x) <- min_{0 <= y <= w} f(x + y)  .\\\
-    \ -> \\_\n    void move_left_curve(const T &w) { assert(w >= 0), displacement_l\
-    \ += w; }\n    // f(x) <- min_{0 <= y <= w} f(x - y)  /. -> _/\n    void move_right_curve(const\
-    \ T &w) { assert(w >= 0), displacement_r += w; }\n    // f(x) <- f(x - dx) \\\
-    /. -> .\\/\n    void translate(const T &dx) { displacement_l -= dx, displacement_r\
-    \ += dx; }\n    // return f(x), f destructive\n    T get_destructive(const T &x)\
-    \ {\n        T ret = get_min().min;\n        while (L.size()) ret += std::max(T(0),\
-    \ popL() - x);\n        while (R.size()) ret += std::max(T(0), x - popR());\n\
-    \        return ret;\n    }\n    // f(x) += g(x), g destructive\n    void merge_destructive(slope_trick<T,\
+    \        return ret;\n    }\n\npublic:\n    // Initialize: f(x) = 0\n    slope_trick()\
+    \ : min_f(0), displacement_l(0), displacement_r(0) {\n        static_assert(INF\
+    \ > 0, \"INF must be greater than 0\");\n    }\n    int sizeL() const { return\
+    \ L.size(); }\n    int sizeR() const { return R.size(); }\n\n    // argmin f(x),\
+    \ min f(x)\n    using Q = struct { T min, lo, hi; };\n    Q get_min() const {\
+    \ return {min_f, topL(), topR()}; }\n\n    // f(x) += b\n    void add_const(const\
+    \ T &b) { min_f += b; }\n\n    // f(x) += max(x - a, 0)  _/\n    void add_relu(const\
+    \ T &a) { min_f += std::max(T(0), topL() - a), pushL(a), pushR(popL()); }\n\n\
+    \    // f(x) += max(a - x, 0)  \\_\n    void add_irelu(const T &a) { min_f +=\
+    \ std::max(T(0), a - topR()), pushR(a), pushL(popR()); }\n\n    // f(x) += |x\
+    \ - a|  \\/\n    void add_abs(const T &a) { add_relu(a), add_irelu(a); }\n\n \
+    \   // f(x) <- min_{0 <= y <= w} f(x + y)  .\\ -> \\_\n    void move_left_curve(const\
+    \ T &w) { assert(w >= 0), displacement_l += w; }\n\n    // f(x) <- min_{0 <= y\
+    \ <= w} f(x - y)  /. -> _/\n    void move_right_curve(const T &w) { assert(w >=\
+    \ 0), displacement_r += w; }\n\n    // f(x) <- f(x - dx) \\/. -> .\\/\n    void\
+    \ translate(const T &dx) { displacement_l -= dx, displacement_r += dx; }\n\n \
+    \   // return f(x), f destructive\n    T get_destructive(const T &x) {\n     \
+    \   T ret = get_min().min;\n        while (L.size()) ret += std::max(T(0), popL()\
+    \ - x);\n        while (R.size()) ret += std::max(T(0), x - popR());\n       \
+    \ return ret;\n    }\n\n    // f(x) += g(x), g destructive\n    void merge_destructive(slope_trick<T,\
     \ INF> &g) {\n        if (sizeL() + sizeR() > g.sizeL() + g.sizeR()) {\n     \
     \       std::swap(min_f, g.min_f);\n            std::swap(displacement_l, g.displacement_l);\n\
     \            std::swap(displacement_r, g.displacement_r);\n            std::swap(L,\
@@ -96,7 +96,7 @@ data:
   isVerificationFile: false
   path: other_algorithms/slope_trick.hpp
   requiredBy: []
-  timestamp: '2021-07-06 00:01:07+09:00'
+  timestamp: '2021-09-18 11:42:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_algorithms/test/slope_trick_stress.test.cpp
@@ -126,6 +126,7 @@ y = f.get_destructive(x); // y = f(x), f(x) broken                        O(log 
 ## 問題例
 
 - [Codeforces LATOKEN Round 1 (Div. 1 + Div. 2) G. A New Beginning](https://codeforces.com/contest/1534/problem/G)
+- [AtCoder Beginner Contest 217 H - Snuketoon](https://atcoder.jp/contests/abc217/tasks/abc217_h)
 
 ## Links
 
