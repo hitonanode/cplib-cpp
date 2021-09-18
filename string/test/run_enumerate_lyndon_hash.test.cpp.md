@@ -2,8 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: string/lyndon_factorization.hpp
-    title: "Lyndon factorization \uFF08Lyndon \u5206\u89E3\uFF09"
+    path: string/lyndon.hpp
+    title: "Lyndon words \uFF08Lyndon \u6587\u5B57\u5217\u306B\u95A2\u3059\u308B\u5404\
+      \u7A2E\u95A2\u6570\uFF09"
   - icon: ':heavy_check_mark:'
     path: string/rolling_hash_1d.hpp
     title: string/rolling_hash_1d.hpp
@@ -17,17 +18,17 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/runenumerate
     links:
     - https://judge.yosupo.jp/problem/runenumerate
-  bundledCode: "#line 2 \"string/lyndon_factorization.hpp\"\n#include <algorithm>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\n\n\
-    // CUT begin\n// Lyndon factorization based on Duval's algorithm\n// **NOT VERIFIED\
-    \ YET**\n// Reference:\n// [1] K. T. Chen, R. H. Fox, R. C. Lyndon,\n//     \"\
-    Free Differential Calculus, IV. The Quotient Groups of the Lower Central Series,\"\
-    \n//     Annals of Mathematics, 81-95, 1958.\n// [2] J. P. Duval, \"Factorizing\
-    \ words over an ordered alphabet,\"\n//     Journal of Algorithms, 4(4), 363-381,\
-    \ 1983.\n// - https://cp-algorithms.com/string/lyndon_factorization.html\n// -\
-    \ https://qiita.com/nakashi18/items/66882bd6e0127174267a\ntemplate <typename T>\
-    \ std::vector<std::pair<int, int>> lyndon_factorization(const std::vector<T> &S)\
-    \ {\n    const int N = S.size();\n    std::vector<std::pair<int, int>> ret;\n\
+  bundledCode: "#line 2 \"string/lyndon.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <functional>\n#include <string>\n#include <tuple>\n#include <utility>\n\
+    #include <vector>\n\n// CUT begin\n// Lyndon factorization based on Duval's algorithm\n\
+    // **NOT VERIFIED YET**\n// Reference:\n// [1] K. T. Chen, R. H. Fox, R. C. Lyndon,\n\
+    //     \"Free Differential Calculus, IV. The Quotient Groups of the Lower Central\
+    \ Series,\"\n//     Annals of Mathematics, 68(1), 81-95, 1958.\n// [2] J. P. Duval,\
+    \ \"Factorizing words over an ordered alphabet,\"\n//     Journal of Algorithms,\
+    \ 4(4), 363-381, 1983.\n// - https://cp-algorithms.com/string/lyndon_factorization.html\n\
+    // - https://qiita.com/nakashi18/items/66882bd6e0127174267a\ntemplate <typename\
+    \ T>\nstd::vector<std::pair<int, int>> lyndon_factorization(const std::vector<T>\
+    \ &S) {\n    const int N = S.size();\n    std::vector<std::pair<int, int>> ret;\n\
     \    for (int l = 0; l < N;) {\n        int i = l, j = i + 1;\n        while (j\
     \ < N and S[i] <= S[j]) i = (S[i] == S[j] ? i + 1 : l), j++;\n        int n =\
     \ (j - l) / (j - i);\n        for (int t = 0; t < n; t++) ret.emplace_back(l,\
@@ -38,7 +39,7 @@ data:
     \ for each suffix s[i:N]\n// (Our implementation is $O(N \\cdot (complexity of\
     \ lcplen()))$)\n// Example:\n// - `teletelepathy` -> [1,4,1,2,1,4,1,2,1,4,1,2,1]\n\
     // Reference:\n// [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n//     SIAM\
-    \ Journal on Computing, 46.5, 1501-1514, 2017.\ntemplate <typename String, typename\
+    \ Journal on Computing, 46(5), 1501-1514, 2017.\ntemplate <typename String, typename\
     \ LCPLENCallable>\nstd::vector<int> longest_lyndon_prefixes(const String &s, const\
     \ LCPLENCallable &lcp) {\n    const int N = s.size();\n    std::vector<std::pair<int,\
     \ int>> st{{N, N}};\n    std::vector<int> ret(N);\n    for (int i = N - 1, j =\
@@ -50,8 +51,8 @@ data:
     \ runs in given string\n// Complexity: $O(N \\cdot (complexity of lcplen()))$\
     \ in this implementation\n// (Theoretically $O(N)$ achievable)\n// N = 2e5 ->\
     \ ~120 ms\n// Reference:\n// [1] H. Bannai et al., \"The \"Runs\" Theorem,\"\n\
-    //     SIAM Journal on Computing, 46.5, 1501-1514, 2017.\ntemplate <typename LCPLENCallable,\
-    \ typename String> std::vector<std::tuple<int, int, int>> run_enumerate(String\
+    //     SIAM Journal on Computing, 46(5), 1501-1514, 2017.\ntemplate <typename\
+    \ LCPLENCallable, typename String>\nstd::vector<std::tuple<int, int, int>> run_enumerate(String\
     \ s) {\n    if (s.empty()) return {};\n    LCPLENCallable lcp(s);\n    std::reverse(s.begin(),\
     \ s.end());\n    LCPLENCallable revlcp(s);\n    std::reverse(s.begin(), s.end());\n\
     \    auto t = s;\n    auto lo = *std::min_element(s.begin(), s.end()), hi = *std::max_element(s.begin(),\
@@ -63,30 +64,42 @@ data:
     \ {\n            j = i + l2[i], L = i - revlcp.lcplen(N - i, N - j), R = j + lcp.lcplen(i,\
     \ j);\n            if (R - L >= (j - i) * 2) ret.emplace_back(j - i, L, R);\n\
     \        }\n    }\n    std::sort(ret.begin(), ret.end());\n    ret.erase(std::unique(ret.begin(),\
-    \ ret.end()), ret.end());\n    return ret;\n}\n#line 3 \"string/rolling_hash_1d.hpp\"\
-    \n#include <chrono>\n#include <random>\n#line 7 \"string/rolling_hash_1d.hpp\"\
-    \n\n// CUT begin\nstruct DoubleHash : public std::pair<unsigned, unsigned> {\n\
-    \    using ull = unsigned long long;\n    using pair = std::pair<unsigned, unsigned>;\n\
-    \    static std::pair<unsigned, unsigned> MODs;\n    DoubleHash(std::pair<unsigned,\
-    \ unsigned> x) : pair(x) {}\n    DoubleHash(unsigned x, unsigned y) : pair(x,\
-    \ y) {}\n    DoubleHash(unsigned x) : DoubleHash(x, x) {}\n    DoubleHash() :\
-    \ DoubleHash(0) {}\n    static inline DoubleHash mod_subtract(pair x) {\n    \
-    \    if (x.first >= MODs.first) x.first -= MODs.first;\n        if (x.second >=\
-    \ MODs.second) x.second -= MODs.second;\n        return x;\n    }\n    DoubleHash\
-    \ operator+(const DoubleHash &x) const {\n        return mod_subtract({this->first\
-    \ + x.first, this->second + x.second});\n    }\n    DoubleHash operator+(unsigned\
-    \ x) const { return mod_subtract({this->first + x, this->second + x}); }\n   \
-    \ DoubleHash operator-(const DoubleHash &x) const {\n        return mod_subtract({this->first\
-    \ + MODs.first - x.first, this->second + MODs.second - x.second});\n    }\n  \
-    \  DoubleHash operator*(const DoubleHash &x) const {\n        return {unsigned(ull(this->first)\
-    \ * x.first % MODs.first), unsigned(ull(this->second) * x.second % MODs.second)};\n\
-    \    }\n    DoubleHash operator*(unsigned x) const {\n        return {unsigned(ull(this->first)\
-    \ * x % MODs.first), unsigned(ull(this->second) * x % MODs.second)};\n    }\n\
-    \    static DoubleHash gen_b(bool force_update = false) {\n        static DoubleHash\
-    \ b{0, 0};\n        if (b == DoubleHash{0, 0} or force_update) {\n           \
-    \ std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
-    \            std::uniform_int_distribution<unsigned> d(1 << 16, 1 << 29);\n  \
-    \          b = {d(mt), d(mt)};\n        }\n        return b;\n    }\n};\nstd::pair<unsigned,\
+    \ ret.end()), ret.end());\n    return ret;\n}\n\n// Enumerate Lyndon words up\
+    \ to length n in lexical order\n// https://github.com/bqi343/USACO/blob/master/Implementations/content/combinatorial%20(11.2)/DeBruijnSeq.h\n\
+    // Example: k=2, n=4 => [[0,],[0,0,0,1,],[0,0,1,],[0,0,1,1,],[0,1,],[0,1,1,],[0,1,1,1,],[1,],]\n\
+    // Verified: https://codeforces.com/gym/102001/problem/C / https://codeforces.com/gym/100162/problem/G\n\
+    std::vector<std::vector<int>> enumerate_lyndon_words(int k, int n) {\n    assert(k\
+    \ > 0);\n    assert(n > 0);\n    std::vector<std::vector<int>> ret;\n    std::vector<int>\
+    \ aux(n + 1);\n\n    std::function<void(int, int)> gen = [&](int t, int p) {\n\
+    \        // t: current length\n        // p: current min cycle length\n      \
+    \  if (t == n) {\n            std::vector<int> tmp(aux.begin() + 1, aux.begin()\
+    \ + p + 1);\n            ret.push_back(std::move(tmp));\n        } else {\n  \
+    \          ++t;\n            aux[t] = aux[t - p];\n            gen(t, p);\n  \
+    \          while (++aux[t] < k) gen(t, t);\n        }\n    };\n    gen(0, 1);\n\
+    \    return ret;\n}\n#line 3 \"string/rolling_hash_1d.hpp\"\n#include <chrono>\n\
+    #include <random>\n#line 7 \"string/rolling_hash_1d.hpp\"\n\n// CUT begin\nstruct\
+    \ DoubleHash : public std::pair<unsigned, unsigned> {\n    using ull = unsigned\
+    \ long long;\n    using pair = std::pair<unsigned, unsigned>;\n    static std::pair<unsigned,\
+    \ unsigned> MODs;\n    DoubleHash(std::pair<unsigned, unsigned> x) : pair(x) {}\n\
+    \    DoubleHash(unsigned x, unsigned y) : pair(x, y) {}\n    DoubleHash(unsigned\
+    \ x) : DoubleHash(x, x) {}\n    DoubleHash() : DoubleHash(0) {}\n    static inline\
+    \ DoubleHash mod_subtract(pair x) {\n        if (x.first >= MODs.first) x.first\
+    \ -= MODs.first;\n        if (x.second >= MODs.second) x.second -= MODs.second;\n\
+    \        return x;\n    }\n    DoubleHash operator+(const DoubleHash &x) const\
+    \ {\n        return mod_subtract({this->first + x.first, this->second + x.second});\n\
+    \    }\n    DoubleHash operator+(unsigned x) const { return mod_subtract({this->first\
+    \ + x, this->second + x}); }\n    DoubleHash operator-(const DoubleHash &x) const\
+    \ {\n        return mod_subtract({this->first + MODs.first - x.first, this->second\
+    \ + MODs.second - x.second});\n    }\n    DoubleHash operator*(const DoubleHash\
+    \ &x) const {\n        return {unsigned(ull(this->first) * x.first % MODs.first),\
+    \ unsigned(ull(this->second) * x.second % MODs.second)};\n    }\n    DoubleHash\
+    \ operator*(unsigned x) const {\n        return {unsigned(ull(this->first) * x\
+    \ % MODs.first), unsigned(ull(this->second) * x % MODs.second)};\n    }\n    static\
+    \ DoubleHash gen_b(bool force_update = false) {\n        static DoubleHash b{0,\
+    \ 0};\n        if (b == DoubleHash{0, 0} or force_update) {\n            std::mt19937\
+    \ mt(std::chrono::steady_clock::now().time_since_epoch().count());\n         \
+    \   std::uniform_int_distribution<unsigned> d(1 << 16, 1 << 29);\n           \
+    \ b = {d(mt), d(mt)};\n        }\n        return b;\n    }\n};\nstd::pair<unsigned,\
     \ unsigned> DoubleHash::MODs{1000000007, 998244353};\n\n// Rolling Hash (Rabin-Karp),\
     \ 1dim\ntemplate <typename V = DoubleHash> struct rolling_hash {\n    int N;\n\
     \    const V B;\n    std::vector<V> hash;         // hash[i] = s[0] * B^(i - 1)\
@@ -121,19 +134,19 @@ data:
     \   string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<DoubleHash>>(S);\n\
     \    cout << ret.size() << '\\n';\n    for (auto p : ret) cout << get<0>(p) <<\
     \ ' ' << get<1>(p) << ' ' << get<2>(p) << '\\n';\n}\n"
-  code: "#include \"../lyndon_factorization.hpp\"\n#include \"../rolling_hash_1d.hpp\"\
-    \n#include <iostream>\n#include <string>\n#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\
+  code: "#include \"../lyndon.hpp\"\n#include \"../rolling_hash_1d.hpp\"\n#include\
+    \ <iostream>\n#include <string>\n#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<DoubleHash>>(S);\n\
     \    cout << ret.size() << '\\n';\n    for (auto p : ret) cout << get<0>(p) <<\
     \ ' ' << get<1>(p) << ' ' << get<2>(p) << '\\n';\n}\n"
   dependsOn:
-  - string/lyndon_factorization.hpp
+  - string/lyndon.hpp
   - string/rolling_hash_1d.hpp
   isVerificationFile: true
   path: string/test/run_enumerate_lyndon_hash.test.cpp
   requiredBy: []
-  timestamp: '2021-03-14 17:31:33+09:00'
+  timestamp: '2021-09-18 15:03:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/run_enumerate_lyndon_hash.test.cpp

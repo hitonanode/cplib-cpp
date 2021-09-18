@@ -494,8 +494,9 @@ data:
       path: string/longest_common_prefix.hpp
       title: string/longest_common_prefix.hpp
     - icon: ':heavy_check_mark:'
-      path: string/lyndon_factorization.hpp
-      title: "Lyndon factorization \uFF08Lyndon \u5206\u89E3\uFF09"
+      path: string/lyndon.hpp
+      title: "Lyndon words \uFF08Lyndon \u6587\u5B57\u5217\u306B\u95A2\u3059\u308B\
+        \u5404\u7A2E\u95A2\u6570\uFF09"
     - icon: ':heavy_check_mark:'
       path: string/manacher.hpp
       title: "Longest palindromic substring enumeration (Manacher's algorithm) \uFF08\
