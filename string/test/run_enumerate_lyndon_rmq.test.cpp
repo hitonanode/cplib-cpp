@@ -1,5 +1,5 @@
 #include "../longest_common_prefix.hpp"
-#include "../lyndon_factorization.hpp"
+#include "../lyndon.hpp"
 #include <iostream>
 #include <string>
 #define PROBLEM "https://judge.yosupo.jp/problem/runenumerate"

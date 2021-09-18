@@ -1,4 +1,4 @@
-#include "../lyndon_factorization.hpp"
+#include "../lyndon.hpp"
 #include "../rolling_hash_1d.hpp"
 #include <iostream>
 #include <string>
