@@ -210,7 +210,7 @@ $\|E\| = n$ として，$e = 1, \dots, n$ に $s$, $t$ を加えた $n + 2$ 頂�
 
 - [Hamel Paths \| CodeChef](https://www.codechef.com/problems/HAMEL) 無向グラフから2つの全域木を作る．
 - [SRM 685 Div.1 450 FoxAirline2](https://community.topcoder.com/stat?c=problem_statement&pm=14194&rd=16689) 無向グラフから2つの全域木を作れるか判定する．
-- [2018 TCO Round 3A 1000 ColoringEdgesDiv1](https://community.topcoder.com/stat?c=problem_statement&pm=14909&rd=17198) 各頂点の次数が3の単純無向グラフ（$n \le 1000, m = 3n/2$）の辺を2つの全域森に分割する方法を構成する．最初に乱択で辺を追加して全域森2つの初期解を構成し，その後全ての辺を割り当て終えるまで `augment_union_matroid()` を真面目に使用するというヒューリスティックによって最大 200 ms 程度の実行時間で用意された全ケースに通る（ただし，後述するように無向グラフの全域森への分割にはより高速なアルゴリズムが存在する）．
+- [2018 TCO Round 3A 1000 ColoringEdgesDiv1](https://community.topcoder.com/stat?c=problem_statement&pm=14909&rd=17198) 各頂点の次数が3の単純無向グラフ（$n \le 1000, m = 3n/2$）の辺を2つの全域森に分割する方法を構成する．最初に乱択で辺を追加して全域森2つの初期解を構成し，その後全ての辺を割り当て終えるまで `augment_union_matroid()` を真面目に使用するというヒューリスティックによって [最大 200 ms 程度の実行時間で用意された全ケースに通る](https://vjudge.net/solution/32788901)（ただし，後述するように無向グラフの全域森への分割にはより高速なアルゴリズムが存在する：`edge_disjoint_min_spanning_forests.hpp` 参照）．
 
 ## 参考文献・リンク
 

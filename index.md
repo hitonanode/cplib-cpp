@@ -15,6 +15,11 @@ data:
         \u4E0B\u306E\u4E92\u3044\u306B\u72EC\u7ACB\u306A\u4E00\u5F15\u6570\u96E2\u6563\
         \u51F8\u95A2\u6570\u548C\u306E\u6700\u5C0F\u5316"
     - icon: ':warning:'
+      path: combinatorial_opt/edge_disjoint_min_spanning_forests.hpp
+      title: "Edge disjoint minimum spanning forests \uFF08\u7121\u5411\u30B0\u30E9\
+        \u30D5\u306B\u304A\u3051\u308B\u6700\u5927\u8FBA\u6570\u6700\u5C0F\u91CD\u307F\
+        \u306E\u8FBA\u7D20\u306A\u4E8C\u3064\u306E\u5168\u57DF\u68EE\uFF09"
+    - icon: ':warning:'
       path: combinatorial_opt/matroid_intersection.hpp
       title: "(Weighted) matroid intersecition \uFF08\uFF08\u91CD\u307F\u3064\u304D\
         \uFF09\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
