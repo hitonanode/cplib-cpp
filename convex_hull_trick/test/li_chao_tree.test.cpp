@@ -36,7 +36,7 @@ int main() {
 
     for (auto q : qs) {
         tie(tp, l, r, a, b) = q;
-        if (tp == 0) tree.add_segment(l, r, a, b, 0);
+        if (tp == 0) tree.insert_segment(l, r, a, b, 0);
         if (tp == 1) {
             auto ret = tree.get(l);
             if (ret.is_valid) {

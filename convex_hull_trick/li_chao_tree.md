@@ -13,7 +13,7 @@ vector<long long> xs;
 li_chao_tree<long long, __int128> tree;
 tree.init(xs); // xs が昇順である必要はない
 
-tree.add_segment(l, r, a, b, 0); // chmin by ax + b in [l, r)
+tree.insert_segment(l, r, a, b, 0); // chmin by ax + b in [l, r)
 
 ret = tree.get(x);
 cout << ret.minval << endl;

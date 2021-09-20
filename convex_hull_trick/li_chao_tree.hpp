@@ -6,7 +6,7 @@
 
 // Li-Chao tree
 // init() : set x's where we will execute get(x) queries
-// add_segment(l, r, a, b): update by ax + b in [l, r)
+// insert_segment(l, r, a, b): update by ax + b in [l, r)
 // get(x): get min
 template <class T, class T_MP> struct li_chao_tree {
     int _n, _head;
@@ -78,12 +78,12 @@ template <class T, class T_MP> struct li_chao_tree {
         }
     }
 
-    void add_line(T a, T b, int idx = -1) {
+    void insert_line(T a, T b, int idx = -1) {
         il = 0, ir = _n;
         if (il >= ir) return;
         _rec(1, 0, _head, _Line{a, b, idx, true});
     }
-    void add_segment(T xl, T xr, T a, T b, int idx = -1) {
+    void insert_segment(T xl, T xr, T a, T b, int idx = -1) {
         il = std::lower_bound(xs.begin(), xs.end(), xl) - xs.begin();
         ir = std::lower_bound(xs.begin(), xs.end(), xr) - xs.begin();
         if (il >= ir) return;
