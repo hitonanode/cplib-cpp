@@ -83,9 +83,9 @@ data:
   timestamp: '2021-09-07 01:07:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
-  - data_structure/test/radix_heap.dijkstra.test.cpp
   - graph/test/shortest_path.test.cpp
+  - data_structure/test/radix_heap.dijkstra.test.cpp
+  - combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
 documentation_of: data_structure/radix_heap.hpp
 layout: document
 title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"

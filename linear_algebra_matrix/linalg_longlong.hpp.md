@@ -168,8 +168,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/linalg_ll_det.test.cpp
-  - linear_algebra_matrix/test/linalg_longlong.test.cpp
   - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong.test.cpp
 documentation_of: linear_algebra_matrix/linalg_longlong.hpp
 layout: document
 redirect_from:

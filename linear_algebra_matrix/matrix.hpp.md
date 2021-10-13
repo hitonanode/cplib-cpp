@@ -281,23 +281,23 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/matrix.hpp
   requiredBy:
-  - graph/general_matching.hpp
   - linear_algebra_matrix/system_of_linear_equations.hpp
-  - linear_algebra_matrix/characteristic_poly.hpp
   - linear_algebra_matrix/circular_binary_expansion.hpp
+  - linear_algebra_matrix/characteristic_poly.hpp
+  - graph/general_matching.hpp
   timestamp: '2021-06-13 19:08:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
-  - graph/test/general_matching.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+  - linear_algebra_matrix/test/matrix_product.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
   - linear_algebra_matrix/test/inverse_matrix.test.cpp
-  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
-  - linear_algebra_matrix/test/matrix_product.test.cpp
+  - graph/test/general_matching.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
 documentation_of: linear_algebra_matrix/matrix.hpp
 layout: document
 redirect_from:

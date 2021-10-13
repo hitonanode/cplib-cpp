@@ -77,8 +77,8 @@ data:
   timestamp: '2021-08-22 17:31:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/rangetree.test.cpp
   - segmenttree/test/rangetree.yuki1625.test.cpp
+  - segmenttree/test/rangetree.test.cpp
 documentation_of: segmenttree/rangetree.hpp
 layout: document
 title: "Range Tree \uFF08\u9818\u57DF\u6728\uFF09"

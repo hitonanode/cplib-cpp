@@ -535,6 +535,9 @@ data:
   - name: tree
     pages:
     - icon: ':heavy_check_mark:'
+      path: tree/cartesian_tree.hpp
+      title: Cartesian tree
+    - icon: ':heavy_check_mark:'
       path: tree/centroid_decomposition.hpp
       title: tree/centroid_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -1197,6 +1200,9 @@ data:
       title: string/test/z_algorithm.test.cpp
   - name: tree/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: tree/test/cartesian_tree.test.cpp
+      title: tree/test/cartesian_tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/diameter.test.cpp
       title: tree/test/diameter.test.cpp

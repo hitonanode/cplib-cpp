@@ -163,10 +163,10 @@ data:
   timestamp: '2021-03-20 13:33:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - string/test/aho_corasick_vector.test.cpp
-  - string/test/aho_corasick_forwardlist.test.cpp
   - string/test/aho_corasick_unorderedmap.test.cpp
   - string/test/aho_corasick_online.test.cpp
+  - string/test/aho_corasick_forwardlist.test.cpp
+  - string/test/aho_corasick_vector.test.cpp
 documentation_of: string/aho_corasick.hpp
 layout: document
 redirect_from:
