@@ -151,6 +151,7 @@
 "segmenttree/test/segment_tree_2d_pointadd.test.cpp": "2021-01-01 16:52:32 +0900",
 "set_power_series/test/subset_conv.test.cpp": "2021-10-16 14:40:57 +0900",
 "set_power_series/test/subset_exp.stress.test.cpp": "2021-10-16 14:40:57 +0900",
+"set_power_series/test/subset_log.test.cpp": "2021-10-16 14:40:57 +0900",
 "set_power_series/test/subset_pow.stress.test.cpp": "2021-10-16 14:40:57 +0900",
 "set_power_series/test/subset_pow.yuki1594.test.cpp": "2021-10-16 14:40:57 +0900",
 "sparse_table/test/disjoint_sparse_table_rmq.test.cpp": "2021-01-01 16:52:32 +0900",
