@@ -44,40 +44,48 @@ template <typename T> void superset_sum_inv(std::vector<T> &g) {
     }
 }
 
+template <typename T> std::vector<std::vector<T>> build_zeta_(int D, const std::vector<T> &f) {
+    int n = f.size();
+    std::vector<std::vector<T>> ret(D, std::vector<T>(n));
+    for (int i = 0; i < n; i++) ret[__builtin_popcount(i)][i] += f[i];
+    for (auto &vec : ret) subset_sum(vec);
+    return ret;
+}
+
+template <typename T>
+std::vector<T> get_moebius_of_prod_(const std::vector<std::vector<T>> &mat1,
+                                    const std::vector<std::vector<T>> &mat2) {
+    int D = mat1.size(), n = mat1[0].size();
+    std::vector<std::vector<int>> pc2i(D);
+    for (int i = 0; i < n; i++) pc2i[__builtin_popcount(i)].push_back(i);
+    std::vector<T> tmp, ret(mat1[0].size());
+    for (int d = 0; d < D; d++) {
+        tmp.assign(mat1[d].size(), 0);
+        for (int e = 0; e <= d; e++) {
+            for (int i = 0; i < int(tmp.size()); i++) tmp[i] += mat1[e][i] * mat2[d - e][i];
+        }
+        subset_sum_inv(tmp);
+        for (auto i : pc2i[d]) ret[i] = tmp[i];
+    }
+    return ret;
+};
+
 // Subset convolution
 // h[S] = \sum_T f[T] * g[S - T]
 // Complexity: O(N^2 2^N) for arrays of size 2^N
 template <typename T> std::vector<T> subset_convolution(std::vector<T> f, std::vector<T> g) {
     const int sz = f.size(), m = __builtin_ctz(sz) + 1;
     assert(__builtin_popcount(sz) == 1 and f.size() == g.size());
-
-    std::vector<std::vector<T>> ff(m, std::vector<T>(sz)), fg(m, std::vector<T>(sz));
-    for (int i = 0; i < sz; i++) {
-        int pc = __builtin_popcount(i);
-        ff[pc][i] += f[i], fg[pc][i] += g[i];
-    }
-    for (auto &vec : ff) subset_sum(vec);
-    for (auto &vec : fg) subset_sum(vec);
-
-    std::vector<std::vector<T>> fh(m, std::vector<T>(sz));
-    for (int d = 0; d < m; d++) {
-        for (int e = 0; d + e < m; e++) {
-            for (int i = 0; i < sz; i++) fh[d + e][i] += ff[d][i] * fg[e][i];
-        }
-    }
-    for (auto &vec : fh) subset_sum_inv(vec);
-    std::vector<T> ret(sz);
-    for (int i = 0; i < sz; i++) ret[i] = fh[__builtin_popcount(i)][i];
-    return ret;
+    auto ff = build_zeta_(m, f), fg = build_zeta_(m, g);
+    return get_moebius_of_prod_(ff, fg);
 }
 
 // https://hos-lyric.hatenablog.com/entry/2021/01/14/201231
 template <class T, class Function> void subset_func(std::vector<T> &f, const Function &func) {
     const int sz = f.size(), m = __builtin_ctz(sz) + 1;
     assert(__builtin_popcount(sz) == 1);
-    std::vector<std::vector<T>> ff(m, std::vector<T>(sz));
-    for (int i = 0; i < sz; i++) ff[__builtin_popcount(i)][i] += f[i];
-    for (auto &vec : ff) subset_sum(vec);
+
+    auto ff = build_zeta_(m, f);
 
     std::vector<T> p(m);
     for (int i = 0; i < sz; i++) {
