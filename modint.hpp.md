@@ -192,7 +192,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_log.test.cpp
     title: set_power_series/test/subset_log.test.cpp
   - icon: ':heavy_check_mark:'
@@ -219,9 +219,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: utilities/test/pow.test.cpp
     title: utilities/test/pow.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -391,7 +391,7 @@ data:
   - formal_power_series/formal_power_series.hpp
   - graph/general_matching.hpp
   timestamp: '2021-06-06 14:54:00+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/ntt.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp

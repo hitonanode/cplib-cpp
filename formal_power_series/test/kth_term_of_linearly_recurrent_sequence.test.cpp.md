@@ -8,7 +8,7 @@ data:
     path: formal_power_series/coeff_of_rational_function.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
       \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []

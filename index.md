@@ -190,7 +190,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -468,7 +468,7 @@ data:
       title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   - name: set_power_series
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/subset_convolution.hpp
       title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
         \u7B97\uFF09"
@@ -1124,7 +1124,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_exp.stress.test.cpp
       title: set_power_series/test/subset_exp.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_log.test.cpp
       title: set_power_series/test/subset_log.test.cpp
     - icon: ':heavy_check_mark:'
