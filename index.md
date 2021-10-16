@@ -190,7 +190,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -293,6 +293,11 @@ data:
     - icon: ':warning:'
       path: linear_algebra_matrix/circular_binary_expansion.hpp
       title: linear_algebra_matrix/circular_binary_expansion.hpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/hafnian.hpp
+      title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\
+        \u7121\u5411\u30B0\u30E9\u30D5\u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\
+        \u306E\u6570\u3048\u4E0A\u3052\uFF09"
     - icon: ':warning:'
       path: linear_algebra_matrix/levinson.hpp
       title: Levinson recursion (Levinson-Durbin algorithm)
@@ -463,7 +468,7 @@ data:
       title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   - name: set_power_series
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: set_power_series/subset_convolution.hpp
       title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
         \u7B97\uFF09"
@@ -968,6 +973,9 @@ data:
       path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/hafnian.test.cpp
+      title: linear_algebra_matrix/test/hafnian.test.cpp
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/inverse_matrix.test.cpp
       title: linear_algebra_matrix/test/inverse_matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1116,7 +1124,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_exp.stress.test.cpp
       title: set_power_series/test/subset_exp.stress.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: set_power_series/test/subset_log.test.cpp
       title: set_power_series/test/subset_log.test.cpp
     - icon: ':heavy_check_mark:'

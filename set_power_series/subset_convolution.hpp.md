@@ -1,15 +1,23 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/hafnian.hpp
+    title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\u7121\
+      \u5411\u30B0\u30E9\u30D5\u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u306E\
+      \u6570\u3048\u4E0A\u3052\uFF09"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/hafnian.test.cpp
+    title: linear_algebra_matrix/test/hafnian.test.cpp
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_conv.test.cpp
     title: set_power_series/test/subset_conv.test.cpp
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: set_power_series/test/subset_log.test.cpp
     title: set_power_series/test/subset_log.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,9 +26,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_pow.yuki1594.test.cpp
     title: set_power_series/test/subset_pow.yuki1594.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://atcoder.jp/contests/abc213/tasks/abc213_g
@@ -47,27 +55,31 @@ data:
     \ int sz = g.size(), n = __builtin_ctz(sz);\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    for (int d = 0; d < n; d++) {\n        for (int S = 0; S < 1 <<\
     \ n; S++)\n            if (!(S & (1 << d))) g[S] -= g[S | (1 << d)];\n    }\n\
-    }\n\n// Subset convolution\n// h[S] = \\sum_T f[T] * g[S - T]\n// Complexity:\
-    \ O(N^2 2^N) for arrays of size 2^N\ntemplate <typename T> std::vector<T> subset_convolution(std::vector<T>\
+    }\n\ntemplate <typename T> std::vector<std::vector<T>> build_zeta_(int D, const\
+    \ std::vector<T> &f) {\n    int n = f.size();\n    std::vector<std::vector<T>>\
+    \ ret(D, std::vector<T>(n));\n    for (int i = 0; i < n; i++) ret[__builtin_popcount(i)][i]\
+    \ += f[i];\n    for (auto &vec : ret) subset_sum(vec);\n    return ret;\n}\n\n\
+    template <typename T>\nstd::vector<T> get_moebius_of_prod_(const std::vector<std::vector<T>>\
+    \ &mat1,\n                                    const std::vector<std::vector<T>>\
+    \ &mat2) {\n    int D = mat1.size(), n = mat1[0].size();\n    std::vector<std::vector<int>>\
+    \ pc2i(D);\n    for (int i = 0; i < n; i++) pc2i[__builtin_popcount(i)].push_back(i);\n\
+    \    std::vector<T> tmp, ret(mat1[0].size());\n    for (int d = 0; d < D; d++)\
+    \ {\n        tmp.assign(mat1[d].size(), 0);\n        for (int e = 0; e <= d; e++)\
+    \ {\n            for (int i = 0; i < int(tmp.size()); i++) tmp[i] += mat1[e][i]\
+    \ * mat2[d - e][i];\n        }\n        subset_sum_inv(tmp);\n        for (auto\
+    \ i : pc2i[d]) ret[i] = tmp[i];\n    }\n    return ret;\n};\n\n// Subset convolution\n\
+    // h[S] = \\sum_T f[T] * g[S - T]\n// Complexity: O(N^2 2^N) for arrays of size\
+    \ 2^N\ntemplate <typename T> std::vector<T> subset_convolution(std::vector<T>\
     \ f, std::vector<T> g) {\n    const int sz = f.size(), m = __builtin_ctz(sz) +\
-    \ 1;\n    assert(__builtin_popcount(sz) == 1 and f.size() == g.size());\n\n  \
-    \  std::vector<std::vector<T>> ff(m, std::vector<T>(sz)), fg(m, std::vector<T>(sz));\n\
-    \    for (int i = 0; i < sz; i++) {\n        int pc = __builtin_popcount(i);\n\
-    \        ff[pc][i] += f[i], fg[pc][i] += g[i];\n    }\n    for (auto &vec : ff)\
-    \ subset_sum(vec);\n    for (auto &vec : fg) subset_sum(vec);\n\n    std::vector<std::vector<T>>\
-    \ fh(m, std::vector<T>(sz));\n    for (int d = 0; d < m; d++) {\n        for (int\
-    \ e = 0; d + e < m; e++) {\n            for (int i = 0; i < sz; i++) fh[d + e][i]\
-    \ += ff[d][i] * fg[e][i];\n        }\n    }\n    for (auto &vec : fh) subset_sum_inv(vec);\n\
-    \    std::vector<T> ret(sz);\n    for (int i = 0; i < sz; i++) ret[i] = fh[__builtin_popcount(i)][i];\n\
-    \    return ret;\n}\n\n// https://hos-lyric.hatenablog.com/entry/2021/01/14/201231\n\
-    template <class T, class Function> void subset_func(std::vector<T> &f, const Function\
+    \ 1;\n    assert(__builtin_popcount(sz) == 1 and f.size() == g.size());\n    auto\
+    \ ff = build_zeta_(m, f), fg = build_zeta_(m, g);\n    return get_moebius_of_prod_(ff,\
+    \ fg);\n}\n\n// https://hos-lyric.hatenablog.com/entry/2021/01/14/201231\ntemplate\
+    \ <class T, class Function> void subset_func(std::vector<T> &f, const Function\
     \ &func) {\n    const int sz = f.size(), m = __builtin_ctz(sz) + 1;\n    assert(__builtin_popcount(sz)\
-    \ == 1);\n    std::vector<std::vector<T>> ff(m, std::vector<T>(sz));\n    for\
-    \ (int i = 0; i < sz; i++) ff[__builtin_popcount(i)][i] += f[i];\n    for (auto\
-    \ &vec : ff) subset_sum(vec);\n\n    std::vector<T> p(m);\n    for (int i = 0;\
-    \ i < sz; i++) {\n        for (int d = 0; d < m; d++) p[d] = ff[d][i];\n     \
-    \   func(p);\n        for (int d = 0; d < m; d++) ff[d][i] = p[d];\n    }\n\n\
-    \    for (auto &vec : ff) subset_sum_inv(vec);\n    for (int i = 0; i < sz; i++)\
+    \ == 1);\n\n    auto ff = build_zeta_(m, f);\n\n    std::vector<T> p(m);\n   \
+    \ for (int i = 0; i < sz; i++) {\n        for (int d = 0; d < m; d++) p[d] = ff[d][i];\n\
+    \        func(p);\n        for (int d = 0; d < m; d++) ff[d][i] = p[d];\n    }\n\
+    \n    for (auto &vec : ff) subset_sum_inv(vec);\n    for (int i = 0; i < sz; i++)\
     \ f[i] = ff[__builtin_popcount(i)][i];\n}\n\n// log(f(x)) for f(x), f(0) == 1\n\
     // Requires inv()\ntemplate <class T> void poly_log(std::vector<T> &f) {\n   \
     \ assert(f.at(0) == T(1));\n    static std::vector<T> invs{0};\n    const int\
@@ -137,27 +149,31 @@ data:
     \ int sz = g.size(), n = __builtin_ctz(sz);\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    for (int d = 0; d < n; d++) {\n        for (int S = 0; S < 1 <<\
     \ n; S++)\n            if (!(S & (1 << d))) g[S] -= g[S | (1 << d)];\n    }\n\
-    }\n\n// Subset convolution\n// h[S] = \\sum_T f[T] * g[S - T]\n// Complexity:\
-    \ O(N^2 2^N) for arrays of size 2^N\ntemplate <typename T> std::vector<T> subset_convolution(std::vector<T>\
+    }\n\ntemplate <typename T> std::vector<std::vector<T>> build_zeta_(int D, const\
+    \ std::vector<T> &f) {\n    int n = f.size();\n    std::vector<std::vector<T>>\
+    \ ret(D, std::vector<T>(n));\n    for (int i = 0; i < n; i++) ret[__builtin_popcount(i)][i]\
+    \ += f[i];\n    for (auto &vec : ret) subset_sum(vec);\n    return ret;\n}\n\n\
+    template <typename T>\nstd::vector<T> get_moebius_of_prod_(const std::vector<std::vector<T>>\
+    \ &mat1,\n                                    const std::vector<std::vector<T>>\
+    \ &mat2) {\n    int D = mat1.size(), n = mat1[0].size();\n    std::vector<std::vector<int>>\
+    \ pc2i(D);\n    for (int i = 0; i < n; i++) pc2i[__builtin_popcount(i)].push_back(i);\n\
+    \    std::vector<T> tmp, ret(mat1[0].size());\n    for (int d = 0; d < D; d++)\
+    \ {\n        tmp.assign(mat1[d].size(), 0);\n        for (int e = 0; e <= d; e++)\
+    \ {\n            for (int i = 0; i < int(tmp.size()); i++) tmp[i] += mat1[e][i]\
+    \ * mat2[d - e][i];\n        }\n        subset_sum_inv(tmp);\n        for (auto\
+    \ i : pc2i[d]) ret[i] = tmp[i];\n    }\n    return ret;\n};\n\n// Subset convolution\n\
+    // h[S] = \\sum_T f[T] * g[S - T]\n// Complexity: O(N^2 2^N) for arrays of size\
+    \ 2^N\ntemplate <typename T> std::vector<T> subset_convolution(std::vector<T>\
     \ f, std::vector<T> g) {\n    const int sz = f.size(), m = __builtin_ctz(sz) +\
-    \ 1;\n    assert(__builtin_popcount(sz) == 1 and f.size() == g.size());\n\n  \
-    \  std::vector<std::vector<T>> ff(m, std::vector<T>(sz)), fg(m, std::vector<T>(sz));\n\
-    \    for (int i = 0; i < sz; i++) {\n        int pc = __builtin_popcount(i);\n\
-    \        ff[pc][i] += f[i], fg[pc][i] += g[i];\n    }\n    for (auto &vec : ff)\
-    \ subset_sum(vec);\n    for (auto &vec : fg) subset_sum(vec);\n\n    std::vector<std::vector<T>>\
-    \ fh(m, std::vector<T>(sz));\n    for (int d = 0; d < m; d++) {\n        for (int\
-    \ e = 0; d + e < m; e++) {\n            for (int i = 0; i < sz; i++) fh[d + e][i]\
-    \ += ff[d][i] * fg[e][i];\n        }\n    }\n    for (auto &vec : fh) subset_sum_inv(vec);\n\
-    \    std::vector<T> ret(sz);\n    for (int i = 0; i < sz; i++) ret[i] = fh[__builtin_popcount(i)][i];\n\
-    \    return ret;\n}\n\n// https://hos-lyric.hatenablog.com/entry/2021/01/14/201231\n\
-    template <class T, class Function> void subset_func(std::vector<T> &f, const Function\
+    \ 1;\n    assert(__builtin_popcount(sz) == 1 and f.size() == g.size());\n    auto\
+    \ ff = build_zeta_(m, f), fg = build_zeta_(m, g);\n    return get_moebius_of_prod_(ff,\
+    \ fg);\n}\n\n// https://hos-lyric.hatenablog.com/entry/2021/01/14/201231\ntemplate\
+    \ <class T, class Function> void subset_func(std::vector<T> &f, const Function\
     \ &func) {\n    const int sz = f.size(), m = __builtin_ctz(sz) + 1;\n    assert(__builtin_popcount(sz)\
-    \ == 1);\n    std::vector<std::vector<T>> ff(m, std::vector<T>(sz));\n    for\
-    \ (int i = 0; i < sz; i++) ff[__builtin_popcount(i)][i] += f[i];\n    for (auto\
-    \ &vec : ff) subset_sum(vec);\n\n    std::vector<T> p(m);\n    for (int i = 0;\
-    \ i < sz; i++) {\n        for (int d = 0; d < m; d++) p[d] = ff[d][i];\n     \
-    \   func(p);\n        for (int d = 0; d < m; d++) ff[d][i] = p[d];\n    }\n\n\
-    \    for (auto &vec : ff) subset_sum_inv(vec);\n    for (int i = 0; i < sz; i++)\
+    \ == 1);\n\n    auto ff = build_zeta_(m, f);\n\n    std::vector<T> p(m);\n   \
+    \ for (int i = 0; i < sz; i++) {\n        for (int d = 0; d < m; d++) p[d] = ff[d][i];\n\
+    \        func(p);\n        for (int d = 0; d < m; d++) ff[d][i] = p[d];\n    }\n\
+    \n    for (auto &vec : ff) subset_sum_inv(vec);\n    for (int i = 0; i < sz; i++)\
     \ f[i] = ff[__builtin_popcount(i)][i];\n}\n\n// log(f(x)) for f(x), f(0) == 1\n\
     // Requires inv()\ntemplate <class T> void poly_log(std::vector<T> &f) {\n   \
     \ assert(f.at(0) == T(1));\n    static std::vector<T> invs{0};\n    const int\
@@ -210,10 +226,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: set_power_series/subset_convolution.hpp
-  requiredBy: []
-  timestamp: '2021-08-09 14:30:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  requiredBy:
+  - linear_algebra_matrix/hafnian.hpp
+  timestamp: '2021-10-16 14:40:57+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - linear_algebra_matrix/test/hafnian.test.cpp
   - set_power_series/test/subset_conv.test.cpp
   - set_power_series/test/subset_log.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp

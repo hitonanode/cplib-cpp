@@ -157,6 +157,9 @@ data:
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/hafnian.test.cpp
+    title: linear_algebra_matrix/test/hafnian.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/inverse_matrix.test.cpp
     title: linear_algebra_matrix/test/inverse_matrix.test.cpp
   - icon: ':heavy_check_mark:'
@@ -189,7 +192,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: set_power_series/test/subset_log.test.cpp
     title: set_power_series/test/subset_log.test.cpp
   - icon: ':heavy_check_mark:'
@@ -216,9 +219,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: utilities/test/pow.test.cpp
     title: utilities/test/pow.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -388,7 +391,7 @@ data:
   - formal_power_series/formal_power_series.hpp
   - graph/general_matching.hpp
   timestamp: '2021-06-06 14:54:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - convolution/test/ntt.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
@@ -406,6 +409,7 @@ data:
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
+  - linear_algebra_matrix/test/hafnian.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp

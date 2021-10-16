@@ -1,6 +1,11 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/hafnian.hpp
+    title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\u7121\
+      \u5411\u30B0\u30E9\u30D5\u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u306E\
+      \u6570\u3048\u4E0A\u3052\uFF09"
   - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
@@ -15,11 +20,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
+    PROBLEM: https://judge.yosupo.jp/problem/hafnian_of_matrix
     links:
-    - https://judge.yosupo.jp/problem/subset_convolution
-  bundledCode: "#line 1 \"set_power_series/test/subset_conv.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/subset_convolution\"\n#line 2 \"set_power_series/subset_convolution.hpp\"\
+    - https://judge.yosupo.jp/problem/hafnian_of_matrix
+  bundledCode: "#line 1 \"linear_algebra_matrix/test/hafnian.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/hafnian_of_matrix\"\n#line 2 \"set_power_series/subset_convolution.hpp\"\
     \n#include <algorithm>\n#include <cassert>\n#include <vector>\n\n// CUT begin\n\
     // Subset sum (fast zeta transform)\n// Complexity: O(N 2^N) for array of size\
     \ 2^N\ntemplate <typename T> void subset_sum(std::vector<T> &f) {\n    const int\
@@ -113,25 +118,47 @@ data:
     \ &x : f) x *= f0inv;\n        poly_log(f);\n        for (auto &x : f) x *= k;\n\
     \        poly_exp(f);\n        for (auto &x : f) x *= f0pow;\n        f.resize(rem,\
     \ 0);\n        f.insert(f.begin(), m - int(f.size()), T(0));\n    };\n    subset_func(f,\
-    \ poly_pow);\n}\n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n\
-    #line 5 \"modint.hpp\"\n\n// CUT begin\ntemplate <int md> struct ModInt {\n#if\
-    \ __cplusplus >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n\
-    #endif\n    using lint = long long;\n    MDCONST static int mod() { return md;\
-    \ }\n    static int get_primitive_root() {\n        static int primitive_root\
-    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&]() {\n\
-    \                std::set<int> fac;\n                int v = md - 1;\n       \
-    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
-    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
-    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
-    \                    for (auto i : fac)\n                        if (ModInt(g).pow((md\
-    \ - 1) / i) == 1) {\n                            ok = false;\n               \
-    \             break;\n                        }\n                    if (ok) return\
-    \ g;\n                }\n                return -1;\n            }();\n      \
-    \  }\n        return primitive_root;\n    }\n    int val;\n    MDCONST ModInt()\
-    \ : val(0) {}\n    MDCONST ModInt &_setval(lint v) { return val = (v >= md ? v\
-    \ - md : v), *this; }\n    MDCONST ModInt(lint v) { _setval(v % md + md); }\n\
-    \    MDCONST explicit operator bool() const { return val != 0; }\n    MDCONST\
-    \ ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ poly_pow);\n}\n#line 4 \"linear_algebra_matrix/hafnian.hpp\"\n\n// Count perfect\
+    \ matchings of undirected graph (Hafnian of the matrix)\n// Assumption: mat[i][j]\
+    \ == mat[j][i], mat[i][i] == 0\n// Complexity: O(n^2 2^n)\n// [1] A. Bj\xF6rklund,\
+    \ \"Counting Perfect Matchings as Fast as Ryser,\n//     Proc. of 23rd ACM-SIAM\
+    \ symposium on Discrete Algorithms, pp.914-921, 2012.\ntemplate <class T> T hafnian(const\
+    \ std::vector<std::vector<T>> &mat) {\n    const int N = mat.size();\n    if (N\
+    \ % 2) return 0;\n    std::vector<std::vector<std::vector<T>>> B(N, std::vector<std::vector<T>>(N));\n\
+    \    for (int i = 0; i < N; i++) {\n        for (int j = 0; j < N; j++) B[i][j]\
+    \ = std::vector<T>{mat[i][j]};\n    }\n\n    std::vector<int> pc(1 << (N / 2));\n\
+    \    std::vector<std::vector<int>> pc2i(N / 2 + 1);\n    for (int i = 0; i < int(pc.size());\
+    \ i++) {\n        pc[i] = __builtin_popcount(i);\n        pc2i[pc[i]].push_back(i);\n\
+    \    }\n\n    std::vector<T> h{1};\n    for (int i = 1; i < N / 2; i++) {\n  \
+    \      int r1 = N - i * 2, r2 = r1 + 1;\n        auto h_add = subset_convolution(h,\
+    \ B[r2][r1]);\n        h.insert(h.end(), h_add.begin(), h_add.end());\n\n    \
+    \    std::vector<std::vector<std::vector<T>>> B1(r1), B2(r1);\n        for (int\
+    \ j = 0; j < r1; j++) {\n            B1[j] = build_zeta_(i, B[r1][j]);\n     \
+    \       B2[j] = build_zeta_(i, B[r2][j]);\n        }\n\n        for (int j = 0;\
+    \ j < r1; j++) {\n            for (int k = 0; k < j; k++) {\n                auto\
+    \ Sijk1 = get_moebius_of_prod_(B1[j], B2[k]);\n                auto Sijk2 = get_moebius_of_prod_(B1[k],\
+    \ B2[j]);\n                for (int s = 0; s < int(Sijk2.size()); s++) Sijk1[s]\
+    \ += Sijk2[s];\n                B[j][k].insert(B[j][k].end(), Sijk1.begin(), Sijk1.end());\n\
+    \            }\n        }\n    }\n    T ret = 0;\n    for (int i = 0; i < int(h.size());\
+    \ i++) ret += h[i] * B[1][0][h.size() - 1 - i];\n    return ret;\n}\n#line 2 \"\
+    modint.hpp\"\n#include <iostream>\n#include <set>\n#line 5 \"modint.hpp\"\n\n\
+    // CUT begin\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n\
+    #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
+    \ long;\n    MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
+    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
+    \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
+    \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
+    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
+    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
+    \                    bool ok = true;\n                    for (auto i : fac)\n\
+    \                        if (ModInt(g).pow((md - 1) / i) == 1) {\n           \
+    \                 ok = false;\n                            break;\n          \
+    \              }\n                    if (ok) return g;\n                }\n \
+    \               return -1;\n            }();\n        }\n        return primitive_root;\n\
+    \    }\n    int val;\n    MDCONST ModInt() : val(0) {}\n    MDCONST ModInt &_setval(lint\
+    \ v) { return val = (v >= md ? v - md : v), *this; }\n    MDCONST ModInt(lint\
+    \ v) { _setval(v % md + md); }\n    MDCONST explicit operator bool() const { return\
+    \ val != 0; }\n    MDCONST ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
     \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
     \ - x.val + md); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
     \ ModInt()._setval((lint)val * x.val % md); }\n    MDCONST ModInt operator/(const\
@@ -188,30 +215,31 @@ data:
     \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"set_power_series/test/subset_conv.test.cpp\"\
-    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N;\n    cin >> N;\n    vector<ModInt<998244353>> A(1 << N), B(1 << N);\n\
-    \    for (auto &x : A) cin >> x;\n    for (auto &x : B) cin >> x;\n\n    for (auto\
-    \ x : subset_convolution(A, B)) cout << x << ' ';\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\
-    #include \"../subset_convolution.hpp\"\n#include \"modint.hpp\"\n#include <iostream>\n\
-    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N;\n    cin >> N;\n    vector<ModInt<998244353>> A(1 << N), B(1 << N);\n\
-    \    for (auto &x : A) cin >> x;\n    for (auto &x : B) cin >> x;\n\n    for (auto\
-    \ x : subset_convolution(A, B)) cout << x << ' ';\n}\n"
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"linear_algebra_matrix/test/hafnian.test.cpp\"\
+    \nusing namespace std;\n\nusing mint = ModInt<998244353>;\n\nint main() {\n  \
+    \  int N;\n    cin >> N;\n    vector<vector<mint>> A(N, vector<mint>(N));\n  \
+    \  for (auto &vec : A) {\n        for (auto &x : vec) cin >> x;\n    }\n    cout\
+    \ << hafnian(A) << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/hafnian_of_matrix\"\n#include\
+    \ \"../hafnian.hpp\"\n#include \"../../modint.hpp\"\n#include <vector>\nusing\
+    \ namespace std;\n\nusing mint = ModInt<998244353>;\n\nint main() {\n    int N;\n\
+    \    cin >> N;\n    vector<vector<mint>> A(N, vector<mint>(N));\n    for (auto\
+    \ &vec : A) {\n        for (auto &x : vec) cin >> x;\n    }\n    cout << hafnian(A)\
+    \ << '\\n';\n}\n"
   dependsOn:
+  - linear_algebra_matrix/hafnian.hpp
   - set_power_series/subset_convolution.hpp
   - modint.hpp
   isVerificationFile: true
-  path: set_power_series/test/subset_conv.test.cpp
+  path: linear_algebra_matrix/test/hafnian.test.cpp
   requiredBy: []
   timestamp: '2021-10-16 14:40:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: set_power_series/test/subset_conv.test.cpp
+documentation_of: linear_algebra_matrix/test/hafnian.test.cpp
 layout: document
 redirect_from:
-- /verify/set_power_series/test/subset_conv.test.cpp
-- /verify/set_power_series/test/subset_conv.test.cpp.html
-title: set_power_series/test/subset_conv.test.cpp
+- /verify/linear_algebra_matrix/test/hafnian.test.cpp
+- /verify/linear_algebra_matrix/test/hafnian.test.cpp.html
+title: linear_algebra_matrix/test/hafnian.test.cpp
 ---
