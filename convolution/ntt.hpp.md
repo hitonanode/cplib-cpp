@@ -29,9 +29,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/polynomial_divmod.hpp
     title: formal_power_series/polynomial_divmod.hpp
-  - icon: ':warning:'
-    path: linear_algebra_matrix/blackbox_linear_algebra.hpp
-    title: linear_algebra_matrix/blackbox_linear_algebra.hpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
@@ -331,7 +328,6 @@ data:
   requiredBy:
   - convolution/multivar_ntt.hpp
   - convolution/convolutive_translation_2d.hpp
-  - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
   - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/multipoint_evaluation.hpp

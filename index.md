@@ -283,9 +283,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_algorithm.hpp
       title: linear_algebra_matrix/blackbox_algorithm.hpp
-    - icon: ':warning:'
-      path: linear_algebra_matrix/blackbox_linear_algebra.hpp
-      title: linear_algebra_matrix/blackbox_linear_algebra.hpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_matrices.hpp
       title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"

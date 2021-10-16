@@ -32,9 +32,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
-  - icon: ':warning:'
-    path: linear_algebra_matrix/blackbox_linear_algebra.hpp
-    title: linear_algebra_matrix/blackbox_linear_algebra.hpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
@@ -383,7 +380,6 @@ data:
   - convolution/ntt.hpp
   - convolution/convolutive_translation_2d.hpp
   - segmenttree/trees/acl_range-affine-range-sum.hpp
-  - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
   - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/multipoint_evaluation.hpp

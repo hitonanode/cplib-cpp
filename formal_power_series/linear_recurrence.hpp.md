@@ -5,9 +5,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/blackbox_algorithm.hpp
     title: linear_algebra_matrix/blackbox_algorithm.hpp
-  - icon: ':warning:'
-    path: linear_algebra_matrix/blackbox_linear_algebra.hpp
-    title: linear_algebra_matrix/blackbox_linear_algebra.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/kitamasa.test.cpp
@@ -137,7 +134,6 @@ data:
   isVerificationFile: false
   path: formal_power_series/linear_recurrence.hpp
   requiredBy:
-  - linear_algebra_matrix/blackbox_linear_algebra.hpp
   - linear_algebra_matrix/blackbox_algorithm.hpp
   timestamp: '2021-05-02 16:53:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
