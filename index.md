@@ -562,6 +562,9 @@ data:
       path: tree/lowest_common_ancestor.hpp
       title: "Lowest common ancestor \uFF08\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
     - icon: ':heavy_check_mark:'
+      path: tree/rerooting.hpp
+      title: "Rerooting \uFF08\u5168\u65B9\u4F4D\u6728 DP\uFF09"
+    - icon: ':heavy_check_mark:'
       path: tree/tree_isomorphism.hpp
       title: "Tree isomrphism \uFF08\u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09"
   - name: unionfind
@@ -1232,6 +1235,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/lca_rmq.test.cpp
       title: tree/test/lca_rmq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/rerooting.aoj1595.test.cpp
+      title: tree/test/rerooting.aoj1595.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/rerooting.yuki1718.test.cpp
+      title: tree/test/rerooting.yuki1718.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/tree_isomorphism.aoj1613.test.cpp
       title: tree/test/tree_isomorphism.aoj1613.test.cpp
