@@ -178,6 +178,9 @@ data:
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
+    title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -441,6 +444,7 @@ data:
   - formal_power_series/test/polynomial_divmod.test.cpp
   - formal_power_series/test/fps_log.test.cpp
   - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - graph/test/general_matching.test.cpp
   - set_power_series/test/subset_conv.test.cpp
   - set_power_series/test/subset_log.test.cpp
