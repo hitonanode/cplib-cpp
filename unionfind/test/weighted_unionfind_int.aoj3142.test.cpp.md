@@ -19,25 +19,20 @@ data:
     \n#line 2 \"unionfind/weighted_unionfind.hpp\"\n#include <numeric>\n#include <utility>\n\
     #include <vector>\n\n// CUT begin\n// Weighted UnionFind\ntemplate <class S> struct\
     \ WeightedUnionFind {\n    std::vector<int> par, sz;\n    std::vector<S> pot;\n\
-    \    WeightedUnionFind(int N = 0) : par(N), sz(N, 1), pot(N) { std::iota(par.begin(),\
-    \ par.end(), 0); }\n    int find(int x) {\n        if (par[x] != x) {\n      \
-    \      int r = find(par[x]);\n            pot[x] = pot[x] + pot[par[x]], par[x]\
-    \ = r;\n        }\n        return par[x];\n    }\n    bool unite(int s, int t,\
-    \ S rel_diff) {\n        // Relate s and t by t = s + rel_diff\n        // Return\
-    \ false iff contradiction happens.\n        rel_diff = rel_diff + weight(s) +\
-    \ (-weight(t));\n        if ((s = find(s)) == (t = find(t))) return rel_diff ==\
-    \ 0;\n        if (sz[s] < sz[t]) std::swap(s, t), rel_diff = -rel_diff;\n    \
-    \    par[t] = s, sz[s] += sz[t], pot[t] = rel_diff;\n        return true;\n  \
-    \  }\n    S weight(int x) { return find(x), pot[x]; }\n    S diff(int s, int t)\
-    \ { return weight(t) + (-weight(s)); }\n    int count(int x) { return sz[find(x)];\
-    \ }\n    bool same(int s, int t) { return find(s) == find(t); }\n};\n\ntemplate\
-    \ <typename Int> struct F2vec {\n    Int val;\n    F2vec(Int x = 0) : val(x) {}\n\
-    \    F2vec operator+(const F2vec &y) const { return F2vec(y.val ^ val); }\n  \
-    \  F2vec operator-() const { return *this; }\n    bool operator==(const F2vec\
-    \ &x) const { return val == x.val; }\n    template <class OStream> friend OStream\
-    \ &operator<<(OStream &os, const F2vec &x) { return os << x.val; }\n};\n#line\
-    \ 3 \"unionfind/test/weighted_unionfind_int.aoj3142.test.cpp\"\n#include <algorithm>\n\
-    #include <iostream>\n#line 6 \"unionfind/test/weighted_unionfind_int.aoj3142.test.cpp\"\
+    \    WeightedUnionFind(int N = 0) : par(N), sz(N, 1), pot(N) {\n        std::iota(par.begin(),\
+    \ par.end(), 0);\n    }\n    int find(int x) {\n        if (par[x] != x) {\n \
+    \           int r = find(par[x]);\n            pot[x] = pot[x] + pot[par[x]],\
+    \ par[x] = r;\n        }\n        return par[x];\n    }\n    bool unite(int s,\
+    \ int t, S rel_diff) {\n        // Relate s and t by f[t] = f[s] + rel_diff\n\
+    \        // Return false iff contradiction happens.\n        rel_diff = rel_diff\
+    \ + weight(s) + (-weight(t));\n        if ((s = find(s)) == (t = find(t))) return\
+    \ rel_diff == 0;\n        if (sz[s] < sz[t]) std::swap(s, t), rel_diff = -rel_diff;\n\
+    \        par[t] = s, sz[s] += sz[t], pot[t] = rel_diff;\n        return true;\n\
+    \    }\n    S weight(int x) { return find(x), pot[x]; }\n    S diff(int s, int\
+    \ t) { return weight(t) + (-weight(s)); } // return f[t] - f[s]\n    int count(int\
+    \ x) { return sz[find(x)]; }\n    bool same(int s, int t) { return find(s) ==\
+    \ find(t); }\n};\n#line 3 \"unionfind/test/weighted_unionfind_int.aoj3142.test.cpp\"\
+    \n#include <algorithm>\n#include <iostream>\n#line 6 \"unionfind/test/weighted_unionfind_int.aoj3142.test.cpp\"\
     \nusing namespace std;\n\nint N;\nvector<vector<int>> to;\nvector<int> A, B;\n\
     WeightedUnionFind<long long> uf;\n\nlong long dfs(int now, int prv) {\n    long\
     \ long acc = B[now] - A[now];\n    for (auto nxt : to[now]) {\n        if (nxt\
@@ -73,7 +68,7 @@ data:
   isVerificationFile: true
   path: unionfind/test/weighted_unionfind_int.aoj3142.test.cpp
   requiredBy: []
-  timestamp: '2021-07-31 00:27:36+09:00'
+  timestamp: '2021-10-27 23:41:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: unionfind/test/weighted_unionfind_int.aoj3142.test.cpp

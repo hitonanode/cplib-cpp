@@ -361,6 +361,9 @@ data:
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
+      path: number/nimber.hpp
+      title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}\\_{2^{64}}$\uFF09"
+    - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
     - icon: ':warning:'
@@ -1046,6 +1049,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/montmort_number_mod.test.cpp
       title: number/test/montmort_number_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/nimber.test.cpp
+      title: number/test/nimber.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
