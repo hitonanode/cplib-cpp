@@ -19,7 +19,7 @@ auto x = uf.diff(s, t);  // f[t] - f[s] （として考えられる値の一つ�
 ポテンシャルが $\mathbb{F}_{2}$ 上のベクトルの場合．
 
 ```cpp
-WeightedUnionFind<F2vec<unsigned>> uf(N);
+WeightedUnionFind<Nimber> uf(N);
 ```
 
 ## 問題例
