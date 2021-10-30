@@ -178,6 +178,9 @@ data:
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/primitive_root.test.cpp
+    title: number/test/primitive_root.test.cpp
+  - icon: ':heavy_check_mark:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - icon: ':heavy_check_mark:'
@@ -452,6 +455,7 @@ data:
   - set_power_series/test/subset_pow.yuki1594.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
   - utilities/test/pow.test.cpp
+  - number/test/primitive_root.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/link_cut_tree.composition.test.cpp
   - data_structure/test/lazy_rbst.test.cpp

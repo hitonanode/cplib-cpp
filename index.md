@@ -339,6 +339,10 @@ data:
       path: number/bs_sieve.hpp
       title: number/bs_sieve.hpp
     - icon: ':heavy_check_mark:'
+      path: number/combination.hpp
+      title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
+        \u7406\u306E\u62E1\u5F35\uFF09"
+    - icon: ':heavy_check_mark:'
       path: number/count_primes.hpp
       title: "Counting primes \uFF08\u7D20\u6570\u306E\u500B\u6570\uFF09"
     - icon: ':warning:'
@@ -363,6 +367,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/nimber.hpp
       title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}\\_{2^{64}}$\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: number/primitive_root.hpp
+      title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
@@ -1023,6 +1030,12 @@ data:
       path: number/test/bs_sieve.test.cpp
       title: number/test/bs_sieve.test.cpp
     - icon: ':heavy_check_mark:'
+      path: number/test/combination.stress.test.cpp
+      title: number/test/combination.stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/combination.test.cpp
+      title: number/test/combination.test.cpp
+    - icon: ':heavy_check_mark:'
       path: number/test/count_primes.test.cpp
       title: number/test/count_primes.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1055,6 +1068,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/primitive_root.test.cpp
+      title: number/test/primitive_root.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/sieve.stress.test.cpp
       title: number/test/sieve.stress.test.cpp

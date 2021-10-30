@@ -118,6 +118,9 @@ data:
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/primitive_root.test.cpp
+    title: number/test/primitive_root.test.cpp
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -367,6 +370,7 @@ data:
   - formal_power_series/test/polynomial_divmod.test.cpp
   - formal_power_series/test/fps_log.test.cpp
   - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - number/test/primitive_root.test.cpp
 documentation_of: convolution/ntt.hpp
 layout: document
 redirect_from:
