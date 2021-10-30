@@ -1,5 +1,5 @@
 ---
-title: (Weighted) matroid intersecition （（重みつき）マトロイド交叉）
+title: (Weighted) matroid intersection （（重みつき）マトロイド交叉）
 documentation_of: ./matroid_intersection.hpp
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Nimber, Nim product （ニム数，$\mathbb{F}\_{2^{64}}$）
+title: Nimber, Nim product （ニム数，$\mathbb{F}_{2^{64}}$）
 documentation_of: ./nimber.hpp
 ---
 
