@@ -3,7 +3,7 @@ title: Combination （${}_n \mathrm{C}_r \bmod{m}$，Lucas の定理の拡張）
 documentation_of: ./combination.hpp
 ---
 
-固定された正整数 $m ( \le 10^7)$ について，$\binom{n}{r} \bmod{m}$ の値を計算する．前計算 $O(m)$，クエリ $O(\mathrm{polylog}(n))$．
+固定された正整数 $m = p\_1^{q\_1} \dots p\_{k}^{1\_k} ( \le 10^7)$ について，$\binom{n}{r} \bmod{m}$ の値を計算する．前計算 $O(\sum_i p\_i^{q\_i})$，クエリ $O(k \mathrm{log}(n))$．
 
 ## 原理
 

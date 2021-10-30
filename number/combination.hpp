@@ -4,7 +4,8 @@
 #include <vector>
 
 // nCr mod m = p^q (p: prime, q >= 1)
-// Complexity: O(m) space (construction), O(log(n) + log(m)) (per query)
+// Can be used for n, r <= 1e18, m <= 1e7
+// Complexity: O(m) (construction), O(log(n)) (per query)
 // https://ferin-tech.hatenablog.com/entry/2018/01/17/010829
 struct combination_prime_pow {
     int p, q, m;
@@ -28,13 +29,13 @@ struct combination_prime_pow {
 
     int nCr(long long n, long long r) const {
         if (r < 0 or n < r) return 0;
-        if (p == 2 and q == 1) return !((~n) & r);
+        if (p == 2 and q == 1) return !((~n) & r); // Lucas
         long long k = n - r;
         long long e0 = _ej(n / p) - _ej(r / p) - _ej(k / p);
         if (e0 >= q) return 0;
 
         long long ret = ppow[e0];
-        if (q == 1) {
+        if (q == 1) { // Lucas
             while (n) {
                 ret = __int128(ret) * fac[n % p] * invfac[r % p] * invfac[k % p] % p;
                 n /= p, r /= p, k /= p;
@@ -52,7 +53,7 @@ struct combination_prime_pow {
 };
 
 // nCr mod m
-// Complexity: O(m) space worst (construction), O(polylog(n)) (per query)
+// Complexity: O(m) space worst (construction), O(log(n) log(m)) (per query)
 // Input: pairs of (prime, degree), such as vector<pair<int, int>> and map<int, int>
 // https://judge.yosupo.jp/problem/binomial_coefficient
 struct combination {
