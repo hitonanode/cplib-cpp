@@ -7,7 +7,7 @@
 
 // CUT begin
 // Solve ax+by=gcd(a, b)
-template <typename Int> Int extgcd(Int a, Int b, Int &x, Int &y) {
+template <class Int> Int extgcd(Int a, Int b, Int &x, Int &y) {
     Int d = a;
     if (b != 0) {
         d = extgcd(b, a % b, y, x), y -= (a / b) * x;
@@ -18,7 +18,7 @@ template <typename Int> Int extgcd(Int a, Int b, Int &x, Int &y) {
 }
 // Calculate a^(-1) (MOD m) s if gcd(a, m) == 1
 // Calculate x s.t. ax == gcd(a, m) MOD m
-template <typename Int> Int mod_inverse(Int a, Int m) {
+template <class Int> Int mod_inverse(Int a, Int m) {
     Int x, y;
     extgcd<Int>(a, m, x, y);
     x %= m;
@@ -27,7 +27,7 @@ template <typename Int> Int mod_inverse(Int a, Int m) {
 
 // Require: 1 <= b
 // return: (g, x) s.t. g = gcd(a, b), xa = g MOD b, 0 <= x < b/g
-template <typename Int> /* constexpr */ std::pair<Int, Int> inv_gcd(Int a, Int b) {
+template <class Int> /* constexpr */ std::pair<Int, Int> inv_gcd(Int a, Int b) {
     a %= b;
     if (a < 0) a += b;
     if (a == 0) return {b, 0};
@@ -42,7 +42,7 @@ template <typename Int> /* constexpr */ std::pair<Int, Int> inv_gcd(Int a, Int b
     return {s, m0};
 }
 
-template <typename Int>
+template <class Int>
 /* constexpr */ std::pair<Int, Int> crt(const std::vector<Int> &r, const std::vector<Int> &m) {
     assert(r.size() == m.size());
     int n = int(r.size());
@@ -79,8 +79,9 @@ template <typename Int>
 // 連立線形合同式 A * x = B mod M の解
 // Requirement: M[i] > 0
 // Output: x = first MOD second (if solution exists), (0, 0) (otherwise)
-template <typename Int>
-std::pair<Int, Int> linear_congruence(const std::vector<Int> &A, const std::vector<Int> &B, const std::vector<Int> &M) {
+template <class Int>
+std::pair<Int, Int>
+linear_congruence(const std::vector<Int> &A, const std::vector<Int> &B, const std::vector<Int> &M) {
     Int r = 0, m = 1;
     assert(A.size() == M.size());
     assert(B.size() == M.size());
@@ -98,45 +99,13 @@ std::pair<Int, Int> linear_congruence(const std::vector<Int> &A, const std::vect
     return std::make_pair((r < 0 ? r + m : r), m);
 }
 
-template <typename Int> Int power(Int x, Int n, Int MOD) {
-    Int ans = 1;
+int pow_mod(int x, long long n, int md) {
+    if (md == 1) return 0;
+    long long ans = 1;
     while (n > 0) {
-        if (n & 1) (ans *= x) %= MOD;
-        (x *= x) %= MOD;
+        if (n & 1) ans = ans * x % md;
+        x = (long long)x * x % md;
         n >>= 1;
     }
     return ans;
-}
-
-// Find smallest primitive root for given prime P （最小の原始根探索）
-// Complexity: maybe O(sqrt(p))
-// Algorithm: <http://kirika-comp.hatenablog.com/entry/2018/03/12/210446>
-// Verified: <https://yukicoder.me/submissions/405938>
-// Sample:
-//  - 998244353 ( = (119 << 23) + 1 ) -> 3
-//  - 163577857 ( = (39 << 22) + 1 ) -> 23
-//  - 2 -> 1
-//  - 1 -> -1
-template <typename Int = long long> Int find_smallest_primitive_root(Int p) {
-    std::vector<Int> fac;
-    Int v = p - 1;
-    for (Int pp = 2; pp * pp <= v; pp++) { // prime factorization of (p - 1)
-        int e = 0;
-        while (v % pp == 0) e++, v /= pp;
-        if (e) fac.push_back(pp);
-    }
-    if (v > 1) fac.push_back(v);
-
-    for (Int g = 1; g < p; g++) {
-        if (power<Int>(g, p - 1, p) != 1) return -1;
-        bool ok = true;
-        for (auto pp : fac) {
-            if (power<Int>(g, (p - 1) / pp, p) == 1) {
-                ok = false;
-                break;
-            }
-        }
-        if (ok) return g;
-    }
-    return -1;
 }

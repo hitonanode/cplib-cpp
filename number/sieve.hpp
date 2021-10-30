@@ -31,9 +31,10 @@ struct Sieve {
     // Prime factorization for 1 <= x <= MAXN^2
     // Complexity: O(log x)           (x <= MAXN)
     //             O(MAXN / log MAXN) (MAXN < x <= MAXN^2)
-    template <typename T> std::map<T, int> factorize(T x) const {
+    template <class T> std::map<T, int> factorize(T x) const {
         std::map<T, int> ret;
-        assert(x > 0 and x <= ((long long)min_factor.size() - 1) * ((long long)min_factor.size() - 1));
+        assert(x > 0 and
+               x <= ((long long)min_factor.size() - 1) * ((long long)min_factor.size() - 1));
         for (const auto &p : primes) {
             if (x < T(min_factor.size())) break;
             while (!(x % p)) x /= p, ret[p]++;
@@ -43,9 +44,10 @@ struct Sieve {
         return ret;
     }
     // Enumerate divisors of 1 <= x <= MAXN^2
-    // Be careful of highly composite numbers https://oeis.org/A002182/list https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt
-    // (n, (# of div. of n)): 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720
-    template <typename T> std::vector<T> divisors(T x) const {
+    // Be careful of highly composite numbers https://oeis.org/A002182/list
+    // https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt (n, (# of div. of n)):
+    // 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720
+    template <class T> std::vector<T> divisors(T x) const {
         std::vector<T> ret{1};
         for (const auto p : factorize(x)) {
             int n = ret.size();
@@ -61,7 +63,7 @@ struct Sieve {
     // Euler phi functions of divisors of given x
     // Verified: ABC212 G https://atcoder.jp/contests/abc212/tasks/abc212_g
     // Complexity: O(sqrt(x) + d(x))
-    template <typename T> std::map<T, T> euler_of_divisors(T x) const {
+    template <class T> std::map<T, T> euler_of_divisors(T x) const {
         assert(x >= 1);
         std::map<T, T> ret;
         ret[1] = 1;
@@ -96,7 +98,7 @@ struct Sieve {
     }
     // Calculate [0^K, 1^K, ..., nmax^K] in O(nmax)
     // Note: **0^0 == 1**
-    template <typename MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) const {
+    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long long K, int nmax) const {
         assert(nmax < int(min_factor.size()));
         assert(K >= 0);
         if (K == 0) return std::vector<MODINT>(nmax + 1, 1);
