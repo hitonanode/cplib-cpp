@@ -108,7 +108,7 @@ data:
   - number/test/nimber.test.cpp
 documentation_of: number/nimber.hpp
 layout: document
-title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}\\_{2^{64}}$\uFF09"
+title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"
 ---
 
 Nimber の実装．Nimber は非負整数として表されるが，特殊な和 $\oplus$ （実は bitwise xor 演算）と積 $\otimes$ が定義され，特に以下の性質を満たす：

@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: combinatorial_opt/matroid_intersection.hpp
-    title: "(Weighted) matroid intersecition \uFF08\uFF08\u91CD\u307F\u3064\u304D\uFF09\
+    title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\uFF09\
       \u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
   - icon: ':warning:'
     path: combinatorial_opt/matroid_union.hpp

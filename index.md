@@ -21,7 +21,7 @@ data:
         \u306E\u8FBA\u7D20\u306A\u4E8C\u3064\u306E\u5168\u57DF\u68EE\uFF09"
     - icon: ':warning:'
       path: combinatorial_opt/matroid_intersection.hpp
-      title: "(Weighted) matroid intersecition \uFF08\uFF08\u91CD\u307F\u3064\u304D\
+      title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\
         \uFF09\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
     - icon: ':warning:'
       path: combinatorial_opt/matroid_union.hpp
@@ -366,7 +366,7 @@ data:
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
       path: number/nimber.hpp
-      title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}\\_{2^{64}}$\uFF09"
+      title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/primitive_root.hpp
       title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
