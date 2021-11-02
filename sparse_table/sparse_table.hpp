@@ -5,27 +5,27 @@
 // CUT begin
 // Static sequence sparse table
 // Complexity: O(NlogN) for precalculation, O(1) per query
-template <typename T, typename F> struct SparseTable {
+template <class S, S (*op)(S, S), S (*e)()> struct sparse_table {
     int N, lgN;
-    T defaultT;
-    F func;
-    std::vector<std::vector<T>> data;
+    std::vector<std::vector<S>> d;
     std::vector<int> lgx_table;
-    SparseTable(F func) : func(func) {}
-    SparseTable(const std::vector<T> &sequence, T defaultT, F func) : N(sequence.size()), defaultT(defaultT), func(func) {
+    sparse_table() {}
+    sparse_table(const std::vector<S> &sequence) : N(sequence.size()) {
         lgx_table.resize(N + 1);
-        for (int i = 2; i < N + 1; i++) lgx_table[i] = lgx_table[i >> 1] + 1;
+        for (int i = 2; i < N + 1; ++i) lgx_table[i] = lgx_table[i >> 1] + 1;
         lgN = lgx_table[N] + 1;
-        data.assign(lgN, std::vector<T>(N, defaultT));
-        data[0] = sequence;
-        for (int d = 1; d < lgN; d++) {
-            for (int i = 0; i + (1 << d) <= N; i++) { data[d][i] = func(data[d - 1][i], data[d - 1][i + (1 << (d - 1))]); }
+        d.assign(lgN, std::vector<S>(N, e()));
+        d[0] = sequence;
+        for (int h = 1; h < lgN; ++h) {
+            for (int i = 0; i + (1 << h) <= N; ++i) {
+                d[h][i] = op(d[h - 1][i], d[h - 1][i + (1 << (h - 1))]);
+            }
         }
     }
-    T get(int l, int r) { // [l, r), 0-indexed
+    S prod(int l, int r) const { // [l, r), 0-indexed
         assert(l >= 0 and r <= N);
-        if (l >= r) return defaultT;
-        int d = lgx_table[r - l];
-        return func(data[d][l], data[d][r - (1 << d)]);
+        if (l >= r) return e();
+        int h = lgx_table[r - l];
+        return op(d[h][l], d[h][r - (1 << h)]);
     }
 };
