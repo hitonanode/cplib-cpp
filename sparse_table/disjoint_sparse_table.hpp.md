@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: sparse_table/disjoint_sparse_table_2d.hpp
-    title: sparse_table/disjoint_sparse_table_2d.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: sparse_table/test/disjoint_sparse_table_rmq.test.cpp
@@ -60,8 +57,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: sparse_table/disjoint_sparse_table.hpp
-  requiredBy:
-  - sparse_table/disjoint_sparse_table_2d.hpp
+  requiredBy: []
   timestamp: '2021-11-02 23:36:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

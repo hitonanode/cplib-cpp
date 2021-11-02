@@ -490,9 +490,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: sparse_table/disjoint_sparse_table.hpp
       title: Disjoint sparse table
-    - icon: ':warning:'
-      path: sparse_table/disjoint_sparse_table_2d.hpp
-      title: sparse_table/disjoint_sparse_table_2d.hpp
     - icon: ':heavy_check_mark:'
       path: sparse_table/rmq_sparse_table.hpp
       title: sparse_table/rmq_sparse_table.hpp
