@@ -252,11 +252,11 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - graph/test/shortest_cycle.test.cpp
   - graph/test/shortest_path_dag.test.cpp
+  - graph/test/bellman_ford.test.cpp
+  - graph/test/shortest_cycle.test.cpp
   - graph/test/warshallfloyd.test.cpp
   - graph/test/spfa.test.cpp
-  - graph/test/bellman_ford.test.cpp
   - graph/test/shortest_path.test.cpp
 documentation_of: graph/shortest_path.hpp
 layout: document

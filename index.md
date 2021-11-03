@@ -220,7 +220,7 @@ data:
       title: graph/bipartite_matching(slow).hpp
     - icon: ':heavy_check_mark:'
       path: graph/bipartite_matching.hpp
-      title: graph/bipartite_matching.hpp
+      title: "Bipartite matching (Hopcroft\u2013Karp)"
     - icon: ':heavy_check_mark:'
       path: graph/chromatic_number.hpp
       title: "Chromatic number of undirected graph \uFF08\u7121\u5411\u30B0\u30E9\u30D5\
@@ -228,6 +228,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/directed_mst.hpp
       title: graph/directed_mst.hpp
+    - icon: ':warning:'
+      path: graph/dulmage_mendelsohn.hpp
+      title: graph/dulmage_mendelsohn.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/dulmage_mendelsohn_decomposition.hpp
+      title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
     - icon: ':warning:'
       path: graph/eulerian_trail.hpp
       title: graph/eulerian_trail.hpp
@@ -935,6 +941,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/directed_mst.aoj.test.cpp
       title: graph/test/directed_mst.aoj.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/dulmage_mendelsohn.yuki1615.test.cpp
+      title: graph/test/dulmage_mendelsohn.yuki1615.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/general_matching.test.cpp
       title: graph/test/general_matching.test.cpp

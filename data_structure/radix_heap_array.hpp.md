@@ -86,8 +86,8 @@ data:
   timestamp: '2021-09-09 22:48:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/radix_heap_array.dijkstra.test.cpp
   - combinatorial_opt/test/mincostflow.radixheaparray.yuki1288.test.cpp
+  - data_structure/test/radix_heap_array.dijkstra.test.cpp
 documentation_of: data_structure/radix_heap_array.hpp
 layout: document
 title: "Array-like radix heap with decrease query\uFF08`chmin()` \u64CD\u4F5C\u304C\

@@ -1271,8 +1271,8 @@ data:
   timestamp: '2021-07-06 00:01:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mcf_ns.test.cpp
   - combinatorial_opt/test/bflow_ns.test.cpp
+  - combinatorial_opt/test/mcf_ns.test.cpp
 documentation_of: combinatorial_opt/networksimplex.hpp
 layout: document
 title: "Network simplex method \uFF08\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\

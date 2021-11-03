@@ -101,8 +101,8 @@ data:
   timestamp: '2021-10-23 00:38:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/rerooting.aoj1595.test.cpp
   - tree/test/rerooting.yuki1718.test.cpp
+  - tree/test/rerooting.aoj1595.test.cpp
 documentation_of: tree/rerooting.hpp
 layout: document
 title: "Rerooting \uFF08\u5168\u65B9\u4F4D\u6728 DP\uFF09"

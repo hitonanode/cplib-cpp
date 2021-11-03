@@ -91,15 +91,15 @@ data:
   isVerificationFile: false
   path: segmenttree/acl_beats.hpp
   requiredBy:
-  - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-  - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   - segmenttree/trees/acl_range-add-chmax-range-sum.hpp
+  - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
+  - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   timestamp: '2021-02-15 23:59:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/beats.test.cpp
-  - segmenttree/test/beats_gcd.test.cpp
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
+  - segmenttree/test/beats_gcd.test.cpp
+  - segmenttree/test/beats.test.cpp
 documentation_of: segmenttree/acl_beats.hpp
 layout: document
 title: Segment Tree Beats (based on atcoder::lazy_segtree)

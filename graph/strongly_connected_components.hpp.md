@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/dulmage_mendelsohn.hpp
+    title: graph/dulmage_mendelsohn.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/dulmage_mendelsohn_decomposition.hpp
+    title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: graph/test/2sat_solver.test.cpp
@@ -9,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/cycle_detection_directed.test.cpp
     title: graph/test/cycle_detection_directed.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/dulmage_mendelsohn.yuki1615.test.cpp
+    title: graph/test/dulmage_mendelsohn.yuki1615.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/strongly_connected_components.test.cpp
     title: graph/test/strongly_connected_components.test.cpp
@@ -135,14 +144,17 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: graph/strongly_connected_components.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/dulmage_mendelsohn_decomposition.hpp
+  - graph/dulmage_mendelsohn.hpp
   timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/strongly_connected_components.test.cpp
   - graph/test/topological_sort.test.cpp
   - graph/test/cycle_detection_directed.test.cpp
   - graph/test/2sat_solver.test.cpp
+  - graph/test/strongly_connected_components.test.cpp
+  - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
 documentation_of: graph/strongly_connected_components.hpp
 layout: document
 redirect_from:
