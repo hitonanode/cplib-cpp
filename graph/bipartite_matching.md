@@ -7,7 +7,7 @@ documentation_of: ./bipartite_matching.hpp
 
 ## 使用方法
 
-入力の際，
+グラフを明示的に二部グラフとして入力する必要はなく，最大マッチング構築の実行時に自動的に判定が行われる．
 
 `solve()` 関数は与えられたグラフが二部グラフの場合は最大マッチングのサイズを，二部グラフではない場合は `-1` を返す．
 
@@ -25,3 +25,7 @@ int j = bm.match[i];
 ## 問題例
 
 - [Library Checker: Matching on Bipartite Graph](https://judge.yosupo.jp/problem/bipartitematching)
+
+## リンク
+
+- [二部グラフの最大マッチング(Hopcroft-Karp) \| Luzhiled’s memo](https://ei1333.github.io/luzhiled/snippets/graph/hopcroft-karp.html)
