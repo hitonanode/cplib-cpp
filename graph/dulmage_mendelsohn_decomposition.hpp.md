@@ -240,10 +240,10 @@ vector<pair<int, int>> edges;
 // L: 左側頂点集合サイズ
 // R: 右側頂点集合サイズ
 // edges: 0 <= u < L, 0 <= v < R を満たす辺 (u, v) からなる
-vector<pair<vector<int>, vector<int>>> dm = dulmage_mendelsohn(L, R, edges);
+vector<pair<vector<int>, vector<int>>> ret = dulmage_mendelsohn(L, R, edges);
 ```
 
-戻り値 `edges` は必ず（$L = R = 0$ であっても）長さ 2 以上で，特に `edges` の先頭と最後の要素の各 `vector` は空である可能性がある．
+戻り値 `ret` は必ず（$L = R = 0$ であっても）長さ 2 以上の `vector` で，特に `ret` の先頭と最後の要素に関する `first`, `second` の各 `vector` は空である可能性がある．
 
 `edges` に含まれる各 `pair<vector<int>, vector<int>>` について，`first` の第 $i$ 要素が指す $V^+$ の頂点と `second` の第 $i$ 要素が指す $V^-$ の頂点の間には必ず辺が存在する（すなわち，この戻り値を元に即座に最大マッチングが復元できる）．
 
