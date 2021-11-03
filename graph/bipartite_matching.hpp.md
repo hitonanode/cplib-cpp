@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: graph/dulmage_mendelsohn.hpp
-    title: graph/dulmage_mendelsohn.hpp
   - icon: ':heavy_check_mark:'
     path: graph/dulmage_mendelsohn_decomposition.hpp
     title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
@@ -107,7 +104,6 @@ data:
   path: graph/bipartite_matching.hpp
   requiredBy:
   - graph/dulmage_mendelsohn_decomposition.hpp
-  - graph/dulmage_mendelsohn.hpp
   timestamp: '2021-11-03 21:38:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -122,7 +118,7 @@ title: "Bipartite matching (Hopcroft\u2013Karp)"
 
 ## 使用方法
 
-入力の際，
+グラフを明示的に二部グラフとして入力する必要はなく，最大マッチング構築の実行時に自動的に判定が行われる．
 
 `solve()` 関数は与えられたグラフが二部グラフの場合は最大マッチングのサイズを，二部グラフではない場合は `-1` を返す．
 
@@ -140,3 +136,7 @@ int j = bm.match[i];
 ## 問題例
 
 - [Library Checker: Matching on Bipartite Graph](https://judge.yosupo.jp/problem/bipartitematching)
+
+## リンク
+
+- [二部グラフの最大マッチング(Hopcroft-Karp) \| Luzhiled’s memo](https://ei1333.github.io/luzhiled/snippets/graph/hopcroft-karp.html)

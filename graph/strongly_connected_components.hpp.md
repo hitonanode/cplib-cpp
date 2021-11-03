@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: graph/dulmage_mendelsohn.hpp
-    title: graph/dulmage_mendelsohn.hpp
   - icon: ':heavy_check_mark:'
     path: graph/dulmage_mendelsohn_decomposition.hpp
     title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
@@ -146,7 +143,6 @@ data:
   path: graph/strongly_connected_components.hpp
   requiredBy:
   - graph/dulmage_mendelsohn_decomposition.hpp
-  - graph/dulmage_mendelsohn.hpp
   timestamp: '2021-01-01 16:38:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

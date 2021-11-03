@@ -228,9 +228,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/directed_mst.hpp
       title: graph/directed_mst.hpp
-    - icon: ':warning:'
-      path: graph/dulmage_mendelsohn.hpp
-      title: graph/dulmage_mendelsohn.hpp
     - icon: ':heavy_check_mark:'
       path: graph/dulmage_mendelsohn_decomposition.hpp
       title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
