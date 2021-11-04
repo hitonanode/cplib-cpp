@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: combinatorial_opt/matroids/transversal_matroid.hpp
+    title: "Transversal matroid \uFF08\u6A2A\u65AD\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
   - icon: ':heavy_check_mark:'
     path: graph/dulmage_mendelsohn_decomposition.hpp
     title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
@@ -103,6 +106,7 @@ data:
   isVerificationFile: false
   path: graph/bipartite_matching.hpp
   requiredBy:
+  - combinatorial_opt/matroids/transversal_matroid.hpp
   - graph/dulmage_mendelsohn_decomposition.hpp
   timestamp: '2021-11-03 21:38:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
