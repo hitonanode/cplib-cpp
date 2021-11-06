@@ -115,6 +115,7 @@
 "linear_algebra_matrix/test/linalg_modint_pow.test.cpp": "2021-06-13 19:08:25 +0900",
 "linear_algebra_matrix/test/matrix_product.test.cpp": "2021-08-01 21:42:17 +0900",
 "linear_algebra_matrix/test/system_of_linear_equations.test.cpp": "2021-06-13 19:08:25 +0900",
+"number/test/arithmetic_function_totient.test.cpp": "2021-11-06 18:40:31 +0900",
 "number/test/binary_gcd.stress.test.cpp": "2021-08-21 15:46:09 +0900",
 "number/test/bs_sieve.test.cpp": "2021-01-12 02:12:53 +0900",
 "number/test/combination.stress.test.cpp": "2021-10-30 11:40:58 +0900",
