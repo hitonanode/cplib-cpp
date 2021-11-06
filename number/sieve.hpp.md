@@ -2,6 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: number/arithmetic_cumsum.hpp
+    title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\u6570\
+      \u306E\u7D2F\u7A4D\u548C\uFF09"
   - icon: ':warning:'
     path: number/cyclotomic_polynomials.hpp
     title: "Cyclotomic polynomials \uFF08\u5186\u5206\u591A\u9805\u5F0F\uFF09"
@@ -18,6 +22,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/arithmetic_function_totient.test.cpp
+    title: number/test/arithmetic_function_totient.test.cpp
   - icon: ':heavy_check_mark:'
     path: number/test/combination.stress.test.cpp
     title: number/test/combination.stress.test.cpp
@@ -170,6 +177,7 @@ data:
   isVerificationFile: false
   path: number/sieve.hpp
   requiredBy:
+  - number/arithmetic_cumsum.hpp
   - number/cyclotomic_polynomials.hpp
   - number/zeta_moebius_transform.hpp
   timestamp: '2021-10-30 11:24:11+09:00'
@@ -178,6 +186,7 @@ data:
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - number/test/arithmetic_function_totient.test.cpp
   - number/test/sieve.stress.test.cpp
   - number/test/combination.test.cpp
   - number/test/gen_primes.test.cpp

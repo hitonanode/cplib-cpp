@@ -334,6 +334,10 @@ data:
       path: number/acl_modint.hpp
       title: number/acl_modint.hpp
     - icon: ':heavy_check_mark:'
+      path: number/arithmetic_cumsum.hpp
+      title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\
+        \u6570\u306E\u7D2F\u7A4D\u548C\uFF09"
+    - icon: ':heavy_check_mark:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -1034,6 +1038,9 @@ data:
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: number/test/arithmetic_function_totient.test.cpp
+      title: number/test/arithmetic_function_totient.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/binary_gcd.stress.test.cpp
       title: number/test/binary_gcd.stress.test.cpp

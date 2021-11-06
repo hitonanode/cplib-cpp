@@ -178,6 +178,9 @@ data:
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/arithmetic_function_totient.test.cpp
+    title: number/test/arithmetic_function_totient.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
   - icon: ':heavy_check_mark:'
@@ -432,6 +435,7 @@ data:
   - segmenttree/test/range-affine-range-sum.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
+  - number/test/arithmetic_function_totient.test.cpp
   - number/test/primitive_root.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
