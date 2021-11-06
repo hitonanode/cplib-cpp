@@ -1,11 +1,10 @@
 #pragma once
 #include <algorithm>
-#include <iostream>
 #include <vector>
 
 // CUT begin
 // 0-indexed BIT (binary indexed tree / Fenwick tree) (i : [0, len))
-template <typename T> struct BIT {
+template <class T> struct BIT {
     int n;
     std::vector<T> data;
     BIT(int len = 0) : n(len), data(len) {}
@@ -22,7 +21,7 @@ template <typename T> struct BIT {
 
     T sum(int l, int r) const { return sum(r) - sum(l); } // a[l] + ... + a[r - 1]
 
-    friend std::ostream &operator<<(std::ostream &os, const BIT &bit) {
+    template <class OStream> friend OStream &operator<<(OStream &os, const BIT &bit) {
         T prv = 0;
         os << '[';
         for (int i = 1; i <= bit.n; i++) {
