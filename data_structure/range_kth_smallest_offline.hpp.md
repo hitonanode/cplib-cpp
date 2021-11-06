@@ -3,7 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: segmenttree/binary_indexed_tree.hpp
-    title: segmenttree/binary_indexed_tree.hpp
+    title: "Binary indexed tree / Fenwick tree \uFF08BIT\u30FB\u30D5\u30A7\u30CB\u30C3\
+      \u30AF\u6728\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -16,20 +17,20 @@ data:
     links:
     - https://judge.yosupo.jp/problem/range_kth_smallest>
   bundledCode: "#line 2 \"segmenttree/binary_indexed_tree.hpp\"\n#include <algorithm>\n\
-    #include <iostream>\n#include <vector>\n\n// CUT begin\n// 0-indexed BIT (binary\
-    \ indexed tree / Fenwick tree) (i : [0, len))\ntemplate <typename T> struct BIT\
-    \ {\n    int n;\n    std::vector<T> data;\n    BIT(int len = 0) : n(len), data(len)\
-    \ {}\n    void reset() { std::fill(data.begin(), data.end(), T(0)); }\n    void\
-    \ add(int pos, T v) { // a[pos] += v\n        pos++;\n        while (pos > 0 and\
-    \ pos <= n) data[pos - 1] += v, pos += pos & -pos;\n    }\n    T sum(int k) const\
-    \ { // a[0] + ... + a[k - 1]\n        T res = 0;\n        while (k > 0) res +=\
-    \ data[k - 1], k -= k & -k;\n        return res;\n    }\n\n    T sum(int l, int\
-    \ r) const { return sum(r) - sum(l); } // a[l] + ... + a[r - 1]\n\n    friend\
-    \ std::ostream &operator<<(std::ostream &os, const BIT &bit) {\n        T prv\
-    \ = 0;\n        os << '[';\n        for (int i = 1; i <= bit.n; i++) {\n     \
-    \       T now = bit.sum(i);\n            os << now - prv << ',', prv = now;\n\
-    \        }\n        return os << ']';\n    }\n};\n#line 4 \"data_structure/range_kth_smallest_offline.hpp\"\
-    \n#include <cassert>\n#include <numeric>\n#line 7 \"data_structure/range_kth_smallest_offline.hpp\"\
+    #include <vector>\n\n// CUT begin\n// 0-indexed BIT (binary indexed tree / Fenwick\
+    \ tree) (i : [0, len))\ntemplate <class T> struct BIT {\n    int n;\n    std::vector<T>\
+    \ data;\n    BIT(int len = 0) : n(len), data(len) {}\n    void reset() { std::fill(data.begin(),\
+    \ data.end(), T(0)); }\n    void add(int pos, T v) { // a[pos] += v\n        pos++;\n\
+    \        while (pos > 0 and pos <= n) data[pos - 1] += v, pos += pos & -pos;\n\
+    \    }\n    T sum(int k) const { // a[0] + ... + a[k - 1]\n        T res = 0;\n\
+    \        while (k > 0) res += data[k - 1], k -= k & -k;\n        return res;\n\
+    \    }\n\n    T sum(int l, int r) const { return sum(r) - sum(l); } // a[l] +\
+    \ ... + a[r - 1]\n\n    template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const BIT &bit) {\n        T prv = 0;\n        os << '[';\n        for\
+    \ (int i = 1; i <= bit.n; i++) {\n            T now = bit.sum(i);\n          \
+    \  os << now - prv << ',', prv = now;\n        }\n        return os << ']';\n\
+    \    }\n};\n#line 4 \"data_structure/range_kth_smallest_offline.hpp\"\n#include\
+    \ <cassert>\n#include <numeric>\n#line 7 \"data_structure/range_kth_smallest_offline.hpp\"\
     \n\n// Offline solver to find k-th smallest elements in continuous subsequences\n\
     // - Problem statement: <https://judge.yosupo.jp/problem/range_kth_smallest>\n\
     // - Complexity: O((N + Q) lg(N + Q))\nstruct range_kth_smallest {\n    int N;\n\
@@ -83,7 +84,7 @@ data:
   isVerificationFile: false
   path: data_structure/range_kth_smallest_offline.hpp
   requiredBy: []
-  timestamp: '2021-02-26 23:47:50+09:00'
+  timestamp: '2021-11-06 11:36:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/range_kth_smallest_offline.test.cpp
