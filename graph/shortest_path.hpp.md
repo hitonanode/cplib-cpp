@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/matroid_intersection.hpp
     title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\uFF09\
       \u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
@@ -10,6 +10,9 @@ data:
     path: combinatorial_opt/matroid_union.hpp
     title: "Matroid union \uFF08\u30DE\u30C8\u30ED\u30A4\u30C9\u306E\u5408\u4F75\uFF09"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
+    title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/bellman_ford.test.cpp
     title: graph/test/bellman_ford.test.cpp
@@ -252,6 +255,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
+  - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   - graph/test/shortest_path_dag.test.cpp
   - graph/test/bellman_ford.test.cpp
   - graph/test/shortest_cycle.test.cpp

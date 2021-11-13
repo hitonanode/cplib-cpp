@@ -19,7 +19,7 @@ data:
       title: "Edge disjoint minimum spanning forests \uFF08\u7121\u5411\u30B0\u30E9\
         \u30D5\u306B\u304A\u3051\u308B\u6700\u5927\u8FBA\u6570\u6700\u5C0F\u91CD\u307F\
         \u306E\u8FBA\u7D20\u306A\u4E8C\u3064\u306E\u5168\u57DF\u68EE\uFF09"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/matroid_intersection.hpp
       title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\
         \uFF09\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
@@ -61,7 +61,7 @@ data:
     - icon: ':warning:'
       path: combinatorial_opt/matroids/binary_matroid.hpp
       title: "Binary matroid \uFF08\u4E8C\u5024\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/matroids/graphic_matroid.hpp
       title: "Graphic matroid \uFF08\u30B0\u30E9\u30D5\u30DE\u30C8\u30ED\u30A4\u30C9\
         \uFF09"
@@ -69,7 +69,7 @@ data:
       path: combinatorial_opt/matroids/matroid_example.hpp
       title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u30AF\u30E9\u30B9\u306E\u30A4\u30F3\u30BF\
         \u30FC\u30D5\u30A7\u30FC\u30B9\u306E\u8AAC\u660E"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/matroids/partition_matroid.hpp
       title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
     - icon: ':warning:'
@@ -686,6 +686,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/convex_sum.test.cpp
       title: combinatorial_opt/test/convex_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
+      title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
       title: combinatorial_opt/test/maxflow.pushrelabel.test.cpp

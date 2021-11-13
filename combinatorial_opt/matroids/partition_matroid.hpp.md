@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
+    title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"combinatorial_opt/matroids/partition_matroid.hpp\"\n#include\
@@ -58,8 +61,9 @@ data:
   path: combinatorial_opt/matroids/partition_matroid.hpp
   requiredBy: []
   timestamp: '2021-09-01 23:53:05+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
 documentation_of: combinatorial_opt/matroids/partition_matroid.hpp
 layout: document
 title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
