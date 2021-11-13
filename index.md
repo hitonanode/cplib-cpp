@@ -690,6 +690,9 @@ data:
       path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
       title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
     - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
+      title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
       title: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
     - icon: ':heavy_check_mark:'

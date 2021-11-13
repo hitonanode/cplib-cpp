@@ -2,27 +2,36 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/matroid_intersection.hpp
+    title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\uFF09\
+      \u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/matroids/graphic_matroid.hpp
+    title: "Graphic matroid \uFF08\u30B0\u30E9\u30D5\u30DE\u30C8\u30ED\u30A4\u30C9\
+      \uFF09"
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/matroids/partition_matroid.hpp
+    title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
-    title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
-    title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B
     links:
-    - http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/
-  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
-    \ <limits>\n#include <queue>\n#include <string>\n#include <utility>\n#include\
-    \ <vector>\n\n// CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
-    \ / 2, int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B
+  bundledCode: "#line 1 \"combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp\"\
+    \n#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B\"\
+    \n#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <deque>\n#include <fstream>\n#include <functional>\n#include <limits>\n\
+    #include <queue>\n#include <string>\n#include <utility>\n#include <vector>\n\n\
+    // CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max() / 2,\
+    \ int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
     \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
     \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
     \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
@@ -139,81 +148,97 @@ data:
     \            }\n        }\n        sssp.solve(gs);\n        auto aug_path = sssp.retrieve_path(gt);\n\
     \        if (aug_path.empty()) break;\n        for (auto e : aug_path) {\n   \
     \         if (e != gs and e != gt) I[e] = !I[e];\n        }\n    }\n    return\
-    \ I;\n}\n"
-  code: "#pragma once\n#include \"../graph/shortest_path.hpp\"\n#include <cassert>\n\
-    #include <vector>\n\n// CUT begin\n// (Min weight) matroid intersection solver\n\
-    // Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
-    // Complexity: O(CE^2 + E^3) (C : circuit query, non-weighted)\ntemplate <class\
-    \ M1, class M2, class T = int>\nstd::vector<bool> MatroidIntersection(M1 matroid1,\
-    \ M2 matroid2, std::vector<T> weights = {}) {\n    using State = std::vector<bool>;\n\
-    \    using Element = int;\n    assert(matroid1.size() == matroid2.size());\n \
-    \   const int M = matroid1.size();\n\n    for (auto &x : weights) x *= M + 1;\n\
-    \    if (weights.empty()) weights.assign(M, 0);\n\n    const Element gs = M, gt\
-    \ = M + 1;\n    State I(M);\n\n    while (true) {\n        ShortestPath<T> sssp(M\
-    \ + 2);\n        matroid1.set(I);\n        matroid2.set(I);\n        for (int\
-    \ e = 0; e < M; e++) {\n            if (I[e]) continue;\n            auto c1 =\
-    \ matroid1.circuit(e), c2 = matroid2.circuit(e);\n            if (c1.empty())\
-    \ sssp.add_edge(e, gt, 0);\n            for (Element f : c1) {\n             \
-    \   if (f != e) sssp.add_edge(e, f, -weights[f] + 1);\n            }\n       \
-    \     if (c2.empty()) sssp.add_edge(gs, e, weights[e] + 1);\n            for (Element\
-    \ f : c2) {\n                if (f != e) sssp.add_edge(f, e, weights[e] + 1);\n\
-    \            }\n        }\n        sssp.solve(gs);\n        auto aug_path = sssp.retrieve_path(gt);\n\
-    \        if (aug_path.empty()) break;\n        for (auto e : aug_path) {\n   \
-    \         if (e != gs and e != gt) I[e] = !I[e];\n        }\n    }\n    return\
-    \ I;\n}\n"
+    \ I;\n}\n#line 5 \"combinatorial_opt/matroids/graphic_matroid.hpp\"\n\n// GraphicMatroid:\
+    \ subgraph of undirected graphs, without loops\nclass GraphicMatroid {\n    using\
+    \ Vertex = int;\n    using Element = int;\n    int M;\n    int V; // # of vertices\
+    \ of graph\n    std::vector<std::vector<std::pair<Vertex, Element>>> to;\n   \
+    \ std::vector<std::pair<Vertex, Vertex>> edges;\n    std::vector<Element> backtrack;\n\
+    \    std::vector<Vertex> vprev;\n    std::vector<int> depth, root;\n\npublic:\n\
+    \    GraphicMatroid(int V, const std::vector<std::pair<Vertex, Vertex>> &edges_)\n\
+    \        : M(edges_.size()), V(V), to(V), edges(edges_) {\n        for (int e\
+    \ = 0; e < int(edges_.size()); e++) {\n            int u = edges_[e].first, v\
+    \ = edges_[e].second;\n            assert(0 <= u and u < V);\n            assert(0\
+    \ <= v and v < V);\n            if (u != v) {\n                to[u].emplace_back(v,\
+    \ e);\n                to[v].emplace_back(u, e);\n            }\n        }\n \
+    \   }\n    int size() const { return M; }\n\n    std::vector<Vertex> que;\n  \
+    \  template <class State> void set(State I) {\n        assert(int(I.size()) ==\
+    \ M);\n        backtrack.assign(V, -1);\n        vprev.assign(V, -1);\n      \
+    \  depth.assign(V, -1);\n        root.assign(V, -1);\n        que.resize(V);\n\
+    \        int qb = 0, qe = 0;\n        for (Vertex i = 0; i < V; i++) {\n     \
+    \       if (backtrack[i] >= 0) continue;\n            que[qb = 0] = i, qe = 1,\
+    \ depth[i] = 0;\n            while (qb < qe) {\n                Vertex now = que[qb++];\n\
+    \                root[now] = i;\n                for (auto nxt : to[now]) {\n\
+    \                    if (depth[nxt.first] < 0 and I[nxt.second]) {\n         \
+    \               backtrack[nxt.first] = nxt.second;\n                        vprev[nxt.first]\
+    \ = now;\n                        depth[nxt.first] = depth[now] + 1;\n       \
+    \                 que[qe++] = nxt.first;\n                    }\n            \
+    \    }\n            }\n        }\n    }\n\n    std::vector<Element> circuit(const\
+    \ Element e) const {\n        assert(0 <= e and e < M);\n        Vertex s = edges[e].first,\
+    \ t = edges[e].second;\n        if (root[s] != root[t]) return {};\n        std::vector<Element>\
+    \ ret{e};\n        auto step = [&](Vertex &i) { ret.push_back(backtrack[i]), i\
+    \ = vprev[i]; };\n        int ddepth = depth[s] - depth[t];\n        for (; ddepth\
+    \ > 0; --ddepth) step(s);\n        for (; ddepth < 0; ++ddepth) step(t);\n   \
+    \     while (s != t) step(s), step(t);\n        return ret;\n    }\n};\n#line\
+    \ 4 \"combinatorial_opt/matroids/partition_matroid.hpp\"\n\n// Partition matroid\
+    \ (partitional matroid) : direct sum of uniform matroids\nclass PartitionMatroid\
+    \ {\n    using Element = int;\n    int M;\n    std::vector<std::vector<Element>>\
+    \ parts;\n    std::vector<int> belong;\n    std::vector<int> R;\n    std::vector<int>\
+    \ cnt;\n    std::vector<std::vector<Element>> circuits;\n\npublic:\n    // parts:\
+    \ partition of [0, 1, ..., M - 1]\n    // R: only R[i] elements from parts[i]\
+    \ can be chosen for each i.\n    PartitionMatroid(int M, const std::vector<std::vector<int>>\
+    \ &parts_, const std::vector<int> &R_)\n        : M(M), parts(parts_), belong(M,\
+    \ -1), R(R_) {\n        assert(parts.size() == R.size());\n        for (int i\
+    \ = 0; i < int(parts.size()); i++) {\n            for (Element e : parts[i]) belong[e]\
+    \ = i;\n        }\n        for (Element e = 0; e < M; e++) {\n            // assert(belong[e]\
+    \ != -1);\n            if (belong[e] == -1) {\n                belong[e] = parts.size();\n\
+    \                parts.push_back({e});\n                R.push_back(1);\n    \
+    \        }\n        }\n    }\n    int size() const { return M; }\n\n    template\
+    \ <class State> void set(const State &I) {\n        cnt = R;\n        for (int\
+    \ e = 0; e < M; e++) {\n            if (I[e]) cnt[belong[e]]--;\n        }\n \
+    \       circuits.assign(cnt.size(), {});\n        for (int e = 0; e < M; e++)\
+    \ {\n            if (I[e] and cnt[belong[e]] == 0) circuits[belong[e]].push_back(e);\n\
+    \        }\n    }\n\n    std::vector<Element> circuit(const Element e) const {\n\
+    \        assert(0 <= e and e < M);\n        int p = belong[e];\n        if (cnt[p]\
+    \ == 0) {\n            auto ret = circuits[p];\n            ret.push_back(e);\n\
+    \            return ret;\n        }\n        return {};\n    }\n};\n#line 5 \"\
+    combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp\"\n#include <iostream>\n\
+    #line 8 \"combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp\"\n\
+    using namespace std;\n\nint main() {\n    int V, E, r;\n    cin >> V >> E >> r;\n\
+    \    vector<vector<int>> partition(V);\n    vector<int> R(V, 1);\n    R[r] = 0;\n\
+    \    vector<pair<int, int>> edges;\n    vector<int> weights;\n    for (int e =\
+    \ 0; e < E; ++e) {\n        int s, t, w;\n        cin >> s >> t >> w;\n      \
+    \  partition[t].push_back(e);\n        edges.emplace_back(s, t);\n        weights.emplace_back(w);\n\
+    \    }\n\n    PartitionMatroid M1(E, partition, R);\n    GraphicMatroid M2(V,\
+    \ edges);\n\n    auto sol = MatroidIntersection(M1, M2, weights);\n    int ret\
+    \ = 0;\n    for (int e = 0; e < E; ++e) ret += sol[e] * weights[e];\n    cout\
+    \ << ret << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B\"\
+    \n#include \"../matroid_intersection.hpp\"\n#include \"../matroids/graphic_matroid.hpp\"\
+    \n#include \"../matroids/partition_matroid.hpp\"\n#include <iostream>\n#include\
+    \ <utility>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int\
+    \ V, E, r;\n    cin >> V >> E >> r;\n    vector<vector<int>> partition(V);\n \
+    \   vector<int> R(V, 1);\n    R[r] = 0;\n    vector<pair<int, int>> edges;\n \
+    \   vector<int> weights;\n    for (int e = 0; e < E; ++e) {\n        int s, t,\
+    \ w;\n        cin >> s >> t >> w;\n        partition[t].push_back(e);\n      \
+    \  edges.emplace_back(s, t);\n        weights.emplace_back(w);\n    }\n\n    PartitionMatroid\
+    \ M1(E, partition, R);\n    GraphicMatroid M2(V, edges);\n\n    auto sol = MatroidIntersection(M1,\
+    \ M2, weights);\n    int ret = 0;\n    for (int e = 0; e < E; ++e) ret += sol[e]\
+    \ * weights[e];\n    cout << ret << '\\n';\n}\n"
   dependsOn:
+  - combinatorial_opt/matroid_intersection.hpp
   - graph/shortest_path.hpp
-  isVerificationFile: false
-  path: combinatorial_opt/matroid_intersection.hpp
+  - combinatorial_opt/matroids/graphic_matroid.hpp
+  - combinatorial_opt/matroids/partition_matroid.hpp
+  isVerificationFile: true
+  path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
   requiredBy: []
-  timestamp: '2021-09-07 01:07:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
-  - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
-documentation_of: combinatorial_opt/matroid_intersection.hpp
+  timestamp: '2021-11-13 15:23:32+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
 layout: document
-title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\uFF09\
-  \u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
+redirect_from:
+- /verify/combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
+- /verify/combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp.html
+title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
 ---
-
-マトロイド交叉（交差）問題 (matroid intersection)・共通独立集合問題とは，同じ台集合 $E$ を持つ二つのマトロイド
-$M\_{1} = (E, \mathcal{I}\_{1}), M_{2} = (E, \mathcal{I}\_{2})$ が与えられたとき，$X \in \mathcal{I}\_{1} \cap \mathcal{I}\_{2}$ を満たす要素数最大の $X \subset E$ の一つを求めるもの．本問題は更に，重み関数 $f(e) : E \rightarrow \mathbb{R}$ が与えられたとき，要素数最大のもののうち特に $\sum\_{e \in X} f(e)$ を最小化（最大化）するようなものを求める重みつき共通独立集合問題 （weighted matroid intersection problem） に一般化される．
-
-本コードは，$n = \|E\|$，解となる集合の要素数の上界（例えば各マトロイドのランクの最小値）を $r$，マトロイドクラスのサーキットクエリ一回あたりの計算量を $c$ として，（重みなしの）マトロイド交叉を $O(nr(n + c))$ で求める．重みつきの場合は最短増加路を求めるパートが Bellman-Ford 法に置き換えられ，計算量は $O(nr(n^2 + c))$ となる（この計算量は例えば [2] のアルゴリズムを用いることで $O(nr(r + c + \log n))$ まで改善可能）．
-
-## 使用方法
-
-`weights` を与えた場合，最小重み共通独立集合を求める．
-
-```cpp
-UserDefinedMatroid m1, m2;
-vector<int> weights(M);
-
-assert(m1.size() == M);
-assert(m2.size() == M);
-
-std::vector<bool> maxindepset = MatroidIntersection(m1, m2, weights);
-```
-
-## 問題例
-
-- [Hello 2020 G. Seollal - Codeforces](https://codeforces.com/contest/1284/problem/G) グラフマトロイドと分割マトロイドの交差に帰着される．
-- [Deltix Round, Summer 2021 H. DIY Tree - Codeforces](https://codeforces.com/contest/1556/problem/H) 少数の頂点に次数制約がついた最小全域木問題．グラフマトロイドと分割マトロイドの最小重み共通独立集合問題に帰着される．
-- [2019 Petrozavodsk Winter Camp, Yandex Cup D. Pick Your Own Nim - Codeforces](https://codeforces.com/gym/102156/problem/D) 二値マトロイドと分割マトロイドの交差．
-- [2128 - Demonstration of Honesty! - URI Online Judge](https://www.urionlinejudge.com.br/judge/en/problems/view/2128) 各辺に色がついている無向グラフで，同色の辺は一度しか使えない全域木構築判定問題．グラフマトロイドと分割マトロイドの交差．このライブラリでは TL が厳しいが，独立性を満たす範囲で乱択のアプローチ等によりある程度 $I$ に要素を追加した状態から増加路アルゴリズムを回すことで定数倍高速化し TL に間に合わせられる．
-- [CodeChef October Challenge 2019: Faulty System](https://www.codechef.com/problems/CNNCT2) グラフマトロイドとグラフマトロイドの交差．
-- [Rainbow Graph – Kattis, NAIPC 2018](https://naipc18.kattis.com/problems/rainbowgraph)
-- [Google Code Jam 2019 Round 3 Datacenter Duplex](https://codingcompetitions.withgoogle.com/codejam/round/0000000000051707/0000000000158f1c)
-- [AOJ GRL_2_B: 最小全域有向木](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B) 分割マトロイドとグラフマトロイドの重み付き交差でも解ける．
-- [AOJ 1605: Bridge Construction Planning （橋の建造計画）](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1605&lang=ja) 分割マトロイドとグラフマトロイドの重み付き交差．
-- [2021 ICPC Asia Taiwan Online Programming Contest I. ICPC Kingdom - Codeforces](http://codeforces.com/gym/103373/problem/I) 横断マトロイドとグラフマトロイドの重み付き交差（横断マトロイドを考える代わりに辺を仮想的に増やし，分割マトロイドと解釈することも可能）．
-
-## 文献・リンク集
-
-- [1] A. Frank, "A weighted matroid intersection algorithm,"
-  Journal of Algorithms, 2(4), 328-336, 1981.
-- [2] C. Brezovec, G. Cornuéjols, and F. Glover, "Two algorithms for weighted matroid intersection,"
-  Mathematical Programming, 36(1), 39-53, 1986.
-- [離散最適化基礎論 (2015年度後学期) 組合せ最適化におけるマトロイドの役割](http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/) とても初学者向き．
-- [[Tutorial] Matroid intersection in simple words - Codeforces](https://codeforces.com/blog/entry/69287) コメント欄に問題例が多い．

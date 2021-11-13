@@ -14,6 +14,9 @@ data:
     path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
+    title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/bellman_ford.test.cpp
     title: graph/test/bellman_ford.test.cpp
   - icon: ':heavy_check_mark:'
@@ -255,6 +258,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
+  - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
   - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   - graph/test/shortest_path_dag.test.cpp
   - graph/test/bellman_ford.test.cpp
