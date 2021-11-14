@@ -1,5 +1,4 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1615"
-#include "../bipartite_matching.hpp"
 #include "../dulmage_mendelsohn_decomposition.hpp"
 #include <cassert>
 #include <iostream>
