@@ -156,8 +156,8 @@ data:
     \        groups[c].first.push_back(l);\n    }\n    for (int r = 0; r < R; ++r)\
     \ {\n        if (bm.match[L + r] >= 0) continue;\n        int c = cmp_map[scc.cmp[L\
     \ + r]];\n        groups[c].second.push_back(r);\n    }\n\n    return groups;\n\
-    }\n#line 6 \"graph/test/dulmage_mendelsohn.yuki1615.test.cpp\"\n#include <set>\n\
-    #line 9 \"graph/test/dulmage_mendelsohn.yuki1615.test.cpp\"\nusing namespace std;\n\
+    }\n#line 5 \"graph/test/dulmage_mendelsohn.yuki1615.test.cpp\"\n#include <set>\n\
+    #line 8 \"graph/test/dulmage_mendelsohn.yuki1615.test.cpp\"\nusing namespace std;\n\
     \nstd::vector<std::pair<std::vector<int>, std::vector<int>>>\nverify_dulmage_mendelsohn(int\
     \ L, int R, const std::vector<std::pair<int, int>> &edges) {\n    auto ret = dulmage_mendelsohn(L,\
     \ R, edges);\n    assert(ret.size() >= 2);\n    vector<int> lord(L, -1), rord(R,\
@@ -205,64 +205,64 @@ data:
     \       cur++;\n            } else {\n                alive_edges[cur].swap(alive_edges.back());\n\
     \                alive_edges.pop_back();\n            }\n        }\n        nmatch\
     \ = nmatchnxt;\n    }\n    cout << ret << endl;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1615\"\n#include \"../bipartite_matching.hpp\"\
-    \n#include \"../dulmage_mendelsohn_decomposition.hpp\"\n#include <cassert>\n#include\
-    \ <iostream>\n#include <set>\n#include <utility>\n#include <vector>\nusing namespace\
-    \ std;\n\nstd::vector<std::pair<std::vector<int>, std::vector<int>>>\nverify_dulmage_mendelsohn(int\
-    \ L, int R, const std::vector<std::pair<int, int>> &edges) {\n    auto ret = dulmage_mendelsohn(L,\
-    \ R, edges);\n    assert(ret.size() >= 2);\n    vector<int> lord(L, -1), rord(R,\
-    \ -1);\n    set<pair<int, int>> edges_set(edges.begin(), edges.end());\n\n   \
-    \ for (int igrp = 0; igrp < int(ret.size()); ++igrp) {\n        for (int vl :\
-    \ ret[igrp].first) {\n            assert(lord[vl] < 0);\n            lord[vl]\
-    \ = igrp;\n        }\n        for (int vr : ret[igrp].second) {\n            assert(rord[vr]\
-    \ < 0);\n            rord[vr] = igrp;\n        }\n        if (igrp == 0) {\n \
-    \           assert(ret[igrp].first.size() < ret[igrp].second.size() or ret[igrp].first.empty());\n\
-    \        } else if (igrp + 1 == int(ret.size())) {\n            assert(ret[igrp].first.size()\
-    \ > ret[igrp].second.size() or ret[igrp].second.empty());\n        } else {\n\
-    \            assert(ret[igrp].first.size() == ret[igrp].second.size());\n    \
-    \        assert(ret[igrp].first.size());\n        }\n        for (int j = 0; j\
-    \ < min<int>(ret[igrp].first.size(), ret[igrp].second.size()); ++j) {\n      \
-    \      auto u = ret[igrp].first[j], v = ret[igrp].second[j];\n            assert(edges_set.count(make_pair(u,\
-    \ v)));\n        }\n    }\n    assert(count(lord.begin(), lord.end(), -1) == 0);\n\
-    \    assert(count(rord.begin(), rord.end(), -1) == 0);\n\n    for (auto e : edges)\
-    \ {\n        assert(0 <= e.first and e.first < L);\n        assert(0 <= e.second\
-    \ and e.second < R);\n        assert(lord.at(e.first) <= rord.at(e.second)); //\
-    \ Check topological order\n    }\n    return ret;\n}\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n\n    int N, M, K, L;\n    cin >> N >> M >> K\
-    \ >> L;\n    vector<vector<pair<int, int>>> z2xy(K + 1);\n\n    while (L--) {\n\
-    \        int x, y, z;\n        cin >> x >> y >> z;\n        x--, y--;\n      \
-    \  z2xy[K - z].emplace_back(x, y);\n    }\n    vector<int> vtp(N + M, 3);\n\n\
-    \    vector<pair<int, int>> alive_edges;\n\n    long long ret = 0;\n    int nmatch\
-    \ = 0;\n\n    vector<int> experience12(N + M);\n    vector<int> fixed_pair(N,\
-    \ -1);\n\n    for (const auto &xys : z2xy) {\n        for (auto p : xys) {\n \
-    \           int u = p.first, v = p.second;\n            if (experience12[u] or\
-    \ experience12[N + v]) continue;\n            alive_edges.emplace_back(u, v);\n\
-    \        }\n\n        auto dm_ret = verify_dulmage_mendelsohn(N, M, alive_edges);\n\
-    \n        int nmatchnxt = 0;\n        for (const auto &p : dm_ret) nmatchnxt +=\
-    \ min(p.first.size(), p.second.size());\n\n        ret = ret * 2 + nmatchnxt -\
-    \ nmatch;\n\n        for (auto l : dm_ret.front().first) vtp[l] = 2, experience12[l]\
-    \ = 1;\n        for (auto r : dm_ret.front().second) vtp[r + N] = 3;\n       \
-    \ for (auto l : dm_ret.back().first) vtp[l] = 3;\n        for (auto r : dm_ret.back().second)\
-    \ vtp[r + N] = 2, experience12[r + N] = 1;\n\n        for (int i = 1; i + 1 <\
-    \ int(dm_ret.size()); ++i) {\n            for (int j = 0; j < int(dm_ret[i].first.size());\
-    \ ++j) {\n                int l = dm_ret[i].first[j], r = dm_ret[i].second[j];\n\
-    \                if (fixed_pair[l] < 0) {\n                    vtp[l] = vtp[r\
-    \ + N] = 1, fixed_pair[l] = r;\n                    experience12[l] = experience12[r\
-    \ + N] = 1;\n                    alive_edges.emplace_back(l, r);\n           \
-    \     }\n            }\n        }\n\n        for (int cur = 0; cur < int(alive_edges.size());)\
-    \ {\n            int u = alive_edges[cur].first, v = alive_edges[cur].second;\n\
-    \            if (vtp[u] + vtp[v + N] == 5 or fixed_pair[u] == v) {\n         \
-    \       cur++;\n            } else {\n                alive_edges[cur].swap(alive_edges.back());\n\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1615\"\n#include \"../dulmage_mendelsohn_decomposition.hpp\"\
+    \n#include <cassert>\n#include <iostream>\n#include <set>\n#include <utility>\n\
+    #include <vector>\nusing namespace std;\n\nstd::vector<std::pair<std::vector<int>,\
+    \ std::vector<int>>>\nverify_dulmage_mendelsohn(int L, int R, const std::vector<std::pair<int,\
+    \ int>> &edges) {\n    auto ret = dulmage_mendelsohn(L, R, edges);\n    assert(ret.size()\
+    \ >= 2);\n    vector<int> lord(L, -1), rord(R, -1);\n    set<pair<int, int>> edges_set(edges.begin(),\
+    \ edges.end());\n\n    for (int igrp = 0; igrp < int(ret.size()); ++igrp) {\n\
+    \        for (int vl : ret[igrp].first) {\n            assert(lord[vl] < 0);\n\
+    \            lord[vl] = igrp;\n        }\n        for (int vr : ret[igrp].second)\
+    \ {\n            assert(rord[vr] < 0);\n            rord[vr] = igrp;\n       \
+    \ }\n        if (igrp == 0) {\n            assert(ret[igrp].first.size() < ret[igrp].second.size()\
+    \ or ret[igrp].first.empty());\n        } else if (igrp + 1 == int(ret.size()))\
+    \ {\n            assert(ret[igrp].first.size() > ret[igrp].second.size() or ret[igrp].second.empty());\n\
+    \        } else {\n            assert(ret[igrp].first.size() == ret[igrp].second.size());\n\
+    \            assert(ret[igrp].first.size());\n        }\n        for (int j =\
+    \ 0; j < min<int>(ret[igrp].first.size(), ret[igrp].second.size()); ++j) {\n \
+    \           auto u = ret[igrp].first[j], v = ret[igrp].second[j];\n          \
+    \  assert(edges_set.count(make_pair(u, v)));\n        }\n    }\n    assert(count(lord.begin(),\
+    \ lord.end(), -1) == 0);\n    assert(count(rord.begin(), rord.end(), -1) == 0);\n\
+    \n    for (auto e : edges) {\n        assert(0 <= e.first and e.first < L);\n\
+    \        assert(0 <= e.second and e.second < R);\n        assert(lord.at(e.first)\
+    \ <= rord.at(e.second)); // Check topological order\n    }\n    return ret;\n\
+    }\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int\
+    \ N, M, K, L;\n    cin >> N >> M >> K >> L;\n    vector<vector<pair<int, int>>>\
+    \ z2xy(K + 1);\n\n    while (L--) {\n        int x, y, z;\n        cin >> x >>\
+    \ y >> z;\n        x--, y--;\n        z2xy[K - z].emplace_back(x, y);\n    }\n\
+    \    vector<int> vtp(N + M, 3);\n\n    vector<pair<int, int>> alive_edges;\n\n\
+    \    long long ret = 0;\n    int nmatch = 0;\n\n    vector<int> experience12(N\
+    \ + M);\n    vector<int> fixed_pair(N, -1);\n\n    for (const auto &xys : z2xy)\
+    \ {\n        for (auto p : xys) {\n            int u = p.first, v = p.second;\n\
+    \            if (experience12[u] or experience12[N + v]) continue;\n         \
+    \   alive_edges.emplace_back(u, v);\n        }\n\n        auto dm_ret = verify_dulmage_mendelsohn(N,\
+    \ M, alive_edges);\n\n        int nmatchnxt = 0;\n        for (const auto &p :\
+    \ dm_ret) nmatchnxt += min(p.first.size(), p.second.size());\n\n        ret =\
+    \ ret * 2 + nmatchnxt - nmatch;\n\n        for (auto l : dm_ret.front().first)\
+    \ vtp[l] = 2, experience12[l] = 1;\n        for (auto r : dm_ret.front().second)\
+    \ vtp[r + N] = 3;\n        for (auto l : dm_ret.back().first) vtp[l] = 3;\n  \
+    \      for (auto r : dm_ret.back().second) vtp[r + N] = 2, experience12[r + N]\
+    \ = 1;\n\n        for (int i = 1; i + 1 < int(dm_ret.size()); ++i) {\n       \
+    \     for (int j = 0; j < int(dm_ret[i].first.size()); ++j) {\n              \
+    \  int l = dm_ret[i].first[j], r = dm_ret[i].second[j];\n                if (fixed_pair[l]\
+    \ < 0) {\n                    vtp[l] = vtp[r + N] = 1, fixed_pair[l] = r;\n  \
+    \                  experience12[l] = experience12[r + N] = 1;\n              \
+    \      alive_edges.emplace_back(l, r);\n                }\n            }\n   \
+    \     }\n\n        for (int cur = 0; cur < int(alive_edges.size());) {\n     \
+    \       int u = alive_edges[cur].first, v = alive_edges[cur].second;\n       \
+    \     if (vtp[u] + vtp[v + N] == 5 or fixed_pair[u] == v) {\n                cur++;\n\
+    \            } else {\n                alive_edges[cur].swap(alive_edges.back());\n\
     \                alive_edges.pop_back();\n            }\n        }\n        nmatch\
     \ = nmatchnxt;\n    }\n    cout << ret << endl;\n}\n"
   dependsOn:
-  - graph/bipartite_matching.hpp
   - graph/dulmage_mendelsohn_decomposition.hpp
+  - graph/bipartite_matching.hpp
   - graph/strongly_connected_components.hpp
   isVerificationFile: true
   path: graph/test/dulmage_mendelsohn.yuki1615.test.cpp
   requiredBy: []
-  timestamp: '2021-11-03 21:38:41+09:00'
+  timestamp: '2021-11-14 23:08:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/dulmage_mendelsohn.yuki1615.test.cpp

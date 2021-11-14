@@ -957,6 +957,12 @@ data:
       path: graph/test/dulmage_mendelsohn.yuki1615.test.cpp
       title: graph/test/dulmage_mendelsohn.yuki1615.test.cpp
     - icon: ':heavy_check_mark:'
+      path: graph/test/dulmage_mendelsohn.yuki1744.test.cpp
+      title: graph/test/dulmage_mendelsohn.yuki1744.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
+      title: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
+    - icon: ':heavy_check_mark:'
       path: graph/test/general_matching.test.cpp
       title: graph/test/general_matching.test.cpp
     - icon: ':heavy_check_mark:'

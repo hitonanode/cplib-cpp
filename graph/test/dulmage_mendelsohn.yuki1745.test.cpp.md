@@ -5,31 +5,25 @@ data:
     path: graph/bipartite_matching.hpp
     title: "Bipartite matching (Hopcroft\u2013Karp)"
   - icon: ':heavy_check_mark:'
+    path: graph/dulmage_mendelsohn_decomposition.hpp
+    title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
+  - icon: ':heavy_check_mark:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: combinatorial_opt/matroids/transversal_matroid.hpp
-    title: "Transversal matroid \uFF08\u6A2A\u65AD\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: graph/test/dulmage_mendelsohn.yuki1615.test.cpp
-    title: graph/test/dulmage_mendelsohn.yuki1615.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: graph/test/dulmage_mendelsohn.yuki1744.test.cpp
-    title: graph/test/dulmage_mendelsohn.yuki1744.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
-    title: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://yukicoder.me/problems/no/1745
     links:
-    - https://yukicoder.me/problems/no/1615
-  bundledCode: "#line 2 \"graph/bipartite_matching.hpp\"\n#include <cassert>\n#include\
-    \ <iostream>\n#include <vector>\n\n// Bipartite matching of undirected bipartite\
-    \ graph (Hopcroft-Karp)\n// https://ei1333.github.io/luzhiled/snippets/graph/hopcroft-karp.html\n\
+    - https://yukicoder.me/problems/no/1745
+  bundledCode: "#line 1 \"graph/test/dulmage_mendelsohn.yuki1745.test.cpp\"\n#define\
+    \ PROBLEM \"https://yukicoder.me/problems/no/1745\"\n#line 2 \"graph/bipartite_matching.hpp\"\
+    \n#include <cassert>\n#include <iostream>\n#include <vector>\n\n// Bipartite matching\
+    \ of undirected bipartite graph (Hopcroft-Karp)\n// https://ei1333.github.io/luzhiled/snippets/graph/hopcroft-karp.html\n\
     // Comprexity: O((V + E)sqrtV)\n// int solve(): enumerate maximum number of matching\
     \ / return -1 (if graph is not bipartite)\nstruct BipartiteMatching {\n    int\
     \ V;\n    std::vector<std::vector<int>> to; // Adjacency list\n    std::vector<int>\
@@ -162,109 +156,40 @@ data:
     \        groups[c].first.push_back(l);\n    }\n    for (int r = 0; r < R; ++r)\
     \ {\n        if (bm.match[L + r] >= 0) continue;\n        int c = cmp_map[scc.cmp[L\
     \ + r]];\n        groups[c].second.push_back(r);\n    }\n\n    return groups;\n\
-    }\n"
-  code: "#pragma once\n#include \"bipartite_matching.hpp\"\n#include \"strongly_connected_components.hpp\"\
-    \n#include <cassert>\n#include <utility>\n#include <vector>\n\n// Dulmage\u2013\
-    Mendelsohn (DM) decomposition \uFF08DM \u5206\u89E3\uFF09\n// return: [(W+0, W-0),\
-    \ (W+1,W-1),...,(W+(k+1), W-(k+1))]\n//         : sequence of pair (left vetrices,\
-    \ right vertices)\n//         - |W+0| < |W-0| or both empty\n//         - |W+i|\
-    \ = |W-i| (i = 1, ..., k)\n//         - |W+(k+1)| > |W-(k+1)| or both empty\n\
-    //         - W is topologically sorted\n// Example:\n// (2, 2, [(0,0), (0,1),\
-    \ (1,0)]) => [([],[]),([0,],[1,]),([1,],[0,]),([],[]),]\n// Complexity: O(N +\
-    \ (N + M) sqrt(N))\n// Verified: https://yukicoder.me/problems/no/1615\nstd::vector<std::pair<std::vector<int>,\
-    \ std::vector<int>>>\ndulmage_mendelsohn(int L, int R, const std::vector<std::pair<int,\
-    \ int>> &edges) {\n    for (auto p : edges) {\n        assert(0 <= p.first and\
-    \ p.first < L);\n        assert(0 <= p.second and p.second < R);\n    }\n\n  \
-    \  BipartiteMatching bm(L + R);\n    for (auto p : edges) bm.add_edge(p.first,\
-    \ L + p.second);\n    bm.solve();\n\n    DirectedGraphSCC scc(L + R);\n    for\
-    \ (auto p : edges) scc.add_edge(p.first, L + p.second);\n    for (int l = 0; l\
-    \ < L; ++l) {\n        if (bm.match[l] >= L) scc.add_edge(bm.match[l], l);\n \
-    \   }\n\n    int nscc = scc.FindStronglyConnectedComponents();\n    std::vector<int>\
-    \ cmp_map(nscc, -2);\n\n    std::vector<int> vis(L + R);\n    std::vector<int>\
-    \ st;\n    for (int c = 0; c < 2; ++c) {\n        std::vector<std::vector<int>>\
-    \ to(L + R);\n        auto color = [&L](int x) { return x >= L; };\n        for\
-    \ (auto p : edges) {\n            int u = p.first, v = L + p.second;\n       \
-    \     if (color(u) != c) std::swap(u, v);\n            to[u].push_back(v);\n \
-    \           if (bm.match[u] == v) to[v].push_back(u);\n        }\n        for\
-    \ (int i = 0; i < L + R; ++i) {\n            if (bm.match[i] >= 0 or color(i)\
-    \ != c or vis[i]) continue;\n            vis[i] = 1, st = {i};\n            while\
-    \ (!st.empty()) {\n                int now = st.back();\n                cmp_map[scc.cmp[now]]\
-    \ = c - 1;\n                st.pop_back();\n                for (int nxt : to[now])\
-    \ {\n                    if (!vis[nxt]) vis[nxt] = 1, st.push_back(nxt);\n   \
-    \             }\n            }\n        }\n    }\n\n    int nset = 1;\n    for\
-    \ (int n = 0; n < nscc; ++n) {\n        if (cmp_map[n] == -2) cmp_map[n] = nset++;\n\
-    \    }\n    for (auto &x : cmp_map) {\n        if (x == -1) x = nset;\n    }\n\
-    \    nset++;\n\n    std::vector<std::pair<std::vector<int>, std::vector<int>>>\
-    \ groups(nset);\n\n    for (int l = 0; l < L; ++l) {\n        if (bm.match[l]\
-    \ < 0) continue;\n        int c = cmp_map[scc.cmp[l]];\n        groups[c].first.push_back(l);\n\
-    \        groups[c].second.push_back(bm.match[l] - L);\n    }\n    for (int l =\
-    \ 0; l < L; ++l) {\n        if (bm.match[l] >= 0) continue;\n        int c = cmp_map[scc.cmp[l]];\n\
-    \        groups[c].first.push_back(l);\n    }\n    for (int r = 0; r < R; ++r)\
-    \ {\n        if (bm.match[L + r] >= 0) continue;\n        int c = cmp_map[scc.cmp[L\
-    \ + r]];\n        groups[c].second.push_back(r);\n    }\n\n    return groups;\n\
-    }\n"
+    }\n#line 4 \"graph/test/dulmage_mendelsohn.yuki1745.test.cpp\"\n#include <set>\n\
+    #line 7 \"graph/test/dulmage_mendelsohn.yuki1745.test.cpp\"\nusing namespace std;\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int\
+    \ N, M, L;\n    cin >> N >> M >> L;\n    vector<pair<int, int>> edges(L);\n  \
+    \  for (auto &[s, t] : edges) {\n        cin >> s >> t;\n        --s, --t;\n \
+    \   }\n\n    auto dm = dulmage_mendelsohn(N, M, edges);\n    vector<int> grp1(N,\
+    \ -1), grp2(M, -1);\n    for (int g = 0; g < dm.size(); ++g) {\n        for (auto\
+    \ i : dm[g].first) grp1[i] = g;\n        for (auto i : dm[g].second) grp2[i] =\
+    \ g;\n    }\n    for (auto [s, t] : edges) cout << (grp1[s] == grp2[t] ? \"Yes\"\
+    \ : \"No\") << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1745\"\n#include \"../dulmage_mendelsohn_decomposition.hpp\"\
+    \n#include <iostream>\n#include <set>\n#include <utility>\n#include <vector>\n\
+    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n    int N, M, L;\n    cin >> N >> M >> L;\n    vector<pair<int, int>> edges(L);\n\
+    \    for (auto &[s, t] : edges) {\n        cin >> s >> t;\n        --s, --t;\n\
+    \    }\n\n    auto dm = dulmage_mendelsohn(N, M, edges);\n    vector<int> grp1(N,\
+    \ -1), grp2(M, -1);\n    for (int g = 0; g < dm.size(); ++g) {\n        for (auto\
+    \ i : dm[g].first) grp1[i] = g;\n        for (auto i : dm[g].second) grp2[i] =\
+    \ g;\n    }\n    for (auto [s, t] : edges) cout << (grp1[s] == grp2[t] ? \"Yes\"\
+    \ : \"No\") << '\\n';\n}\n"
   dependsOn:
+  - graph/dulmage_mendelsohn_decomposition.hpp
   - graph/bipartite_matching.hpp
   - graph/strongly_connected_components.hpp
-  isVerificationFile: false
-  path: graph/dulmage_mendelsohn_decomposition.hpp
-  requiredBy:
-  - combinatorial_opt/matroids/transversal_matroid.hpp
-  timestamp: '2021-11-03 21:38:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - graph/test/dulmage_mendelsohn.yuki1745.test.cpp
-  - graph/test/dulmage_mendelsohn.yuki1744.test.cpp
-  - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
-documentation_of: graph/dulmage_mendelsohn_decomposition.hpp
+  isVerificationFile: true
+  path: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
+  requiredBy: []
+  timestamp: '2021-11-14 23:08:25+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
 layout: document
-title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
+redirect_from:
+- /verify/graph/test/dulmage_mendelsohn.yuki1745.test.cpp
+- /verify/graph/test/dulmage_mendelsohn.yuki1745.test.cpp.html
+title: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
 ---
-
-二部グラフの Dulmage–Mendelsohn 分解（DM 分解）を行う．計算量は $O((N + M) \sqrt{N})$．
-
-## 概要
-
-左側頂点集合 $V^+$, 右側頂点集合 $V^-$, 辺集合 $E$ からなる二部グラフ $G = (V^+, V^-, E)$ を考える．Dulmage–Mendelsohn 分解とは，この二部グラフの最大マッチングの性質に基づいて，各頂点集合 $V^+, V^-$ を $V^{\pm} = W^{\pm}\_0 + \dots + W^{\pm}\_{K + 1}$ という $(K + 2)$ 個の部分集合 $(K \ge 0)$ へ分割するものである．
-
-具体的には，この分割は以下の性質を満たす：
-
-- グラフ $G$ の最大マッチングに採用されうる辺は $W^+\_k$ と $W^-\_k$ $(k = 0, \dots, K + 1)$ を両端点に持つものに限られる．
-- $W^{\pm}\_0$ は「$G$ の任意の最大マッチングにおいて $W^+\_{0}$ の頂点は必ず使われるが $W^-\_{0}$ の各頂点は必ずしも使われるとは限らない」という性質を満たす．$\|W^+\_0\| < \|W^-\_0\|$ または $W^+\_0 = W^-\_0 = \emptyset$ が成立する．
-- $W^{\pm}\_{k}$ $(k = 1, \dots, K)$ は「$G$ の任意の最大マッチングにおいて $W^+\_k$ と $W^-\_k$ の各頂点が一対一にマッチングする」という性質を満たす．すなわち $\|W^+\_k\| = \|W^-\_k\| > 0$ が成立する．
-- $W^{\pm}\_{K + 1}$ は「$G$ の任意の最大マッチングにおいて $W^-\_{K + 1}$ の頂点は必ず使われるが $W^+\_{K + 1}$ の各頂点は必ずしも使われるとは限らない」という性質を満たす．$\|W^+\_{K + 1}\| > \|W^-\_{K + 1}\|$ または $W^+\_{K + 1} = W^-\_{K + 1} = \emptyset$ が成立する．
-- 全ての辺 $(u, v) \in E \, (u \in V^+, v \in V^-)$ について，$u \in W^+\_a$, $v \in W^-\_b$ とすると $a \le b$ を満たす．すなわち，$W^{\pm}\_k$ たちは全ての辺を $V^+$ から $V^-$ への有向辺とみなした状況においてトポロジカル順序でソートされている．
-
-$K$ が最大となる分割方法は実は（トポロジカル順序に従う並べ方の任意性を除いて）一意で，これが $G$ の DM 分解と呼ばれる．
-
-## アルゴリズムの概要
-
-- まず，与えられたグラフ $G$ の最大マッチング $M$ を具体的に一つ求める．
-- 上記の最大マッチングで使われなかった頂点たちを始点に探索を行い，これらの頂点と交換可能な頂点集合（$M$ で使用されない頂点を使用して別の最大マッチングをとった際に使われなくなりうる頂点集合）を求める．この過程で探索した頂点たちで $W^{\pm}\_0, W^{\pm}\_{K + 1}$ が構成される．
-- 残る頂点について，各辺 $(u, v) \in E, u \in V^+, v \in V^-$ について有向辺 $u \rightarrow v$ を張り，また $M$ でマッチングに使用された辺については逆辺も張る．このグラフ上で強連結成分分解・トポロジカルソートを行い残る $W^{\pm}\_{k}$ たちを構成する．
-
-## 使用方法
-
-```cpp
-int L, R;
-vector<pair<int, int>> edges;
-
-// L: 左側頂点集合サイズ
-// R: 右側頂点集合サイズ
-// edges: 0 <= u < L, 0 <= v < R を満たす辺 (u, v) からなる
-vector<pair<vector<int>, vector<int>>> ret = dulmage_mendelsohn(L, R, edges);
-```
-
-戻り値 `ret` は必ず（$L = R = 0$ であっても）長さ 2 以上の `vector` で，特に `ret` の先頭と最後の要素に関する `first`, `second` の各 `vector` は空である可能性がある．
-
-`ret` に含まれる各 `pair<vector<int>, vector<int>>` について，`first` の第 $i$ 要素が指す $V^+$ の頂点と `second` の第 $i$ 要素が指す $V^-$ の頂点の間には必ず辺が存在する（すなわち，この戻り値を元に即座に最大マッチングが復元できる）．
-
-## 問題例
-
-- [No.1615 Double Down - yukicoder](https://yukicoder.me/problems/no/1615)
-- [AtCoder Beginner Contest 223 G - Vertex Deletion](https://atcoder.jp/contests/abc223/tasks/abc223_g) 与えられた二部グラフ（木）を DM 分解した上で $W^-\_0$ と $W^+\_{K + 1}$ のサイズが求められればよい．
-
-## リンク
-
-- [Dulmage–Mendelsohn分解 (DM分解) - 室田一雄](http://www.misojiro.t.u-tokyo.ac.jp/~murota/lect-ouyousurigaku/dm050410.pdf)
-- 伊理・藤重・大山『講座・数理計画法 7 グラフ・ネットワーク・マトロイド』産業図書 1986.
