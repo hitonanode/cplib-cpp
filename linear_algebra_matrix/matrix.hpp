@@ -120,7 +120,7 @@ template <typename T> struct matrix {
     template <typename T2, typename std::enable_if<!std::is_floating_point<T2>::value>::type * = nullptr>
     static int choose_pivot(const matrix<T2> &mtr, int h, int c) noexcept {
         for (int j = h; j < mtr.H; j++) {
-            if (mtr.get(j, c)) return j;
+            if (mtr.get(j, c) != 0) return j;
         }
         return -1;
     }
@@ -160,7 +160,7 @@ template <typename T> struct matrix {
     }
     int rank_of_gauss_jordan() const {
         for (int i = H * W - 1; i >= 0; i--) {
-            if (elem[i]) return i / W + 1;
+            if (elem[i] != 0) return i / W + 1;
         }
         return 0;
     }
