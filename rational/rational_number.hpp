@@ -24,8 +24,12 @@ struct Rational {
         num /= g, den /= g;
         if (den < 0) num = -num, den = -den;
     }
-    Rational operator+(const Rational &r) const { return Rational(num * r.den + den * r.num, den * r.den); }
-    Rational operator-(const Rational &r) const { return Rational(num * r.den - den * r.num, den * r.den); }
+    Rational operator+(const Rational &r) const {
+        return Rational(num * r.den + den * r.num, den * r.den);
+    }
+    Rational operator-(const Rational &r) const {
+        return Rational(num * r.den - den * r.num, den * r.den);
+    }
     Rational operator*(const Rational &r) const { return Rational(num * r.num, den * r.den); }
     Rational operator/(const Rational &r) const { return Rational(num * r.den, den * r.num); }
     Rational &operator+=(const Rational &r) { return *this = *this + r; }
@@ -51,5 +55,7 @@ struct Rational {
     bool operator>=(const Rational &r) const { return (r == *this) or (r < *this); }
     explicit operator double() const { return (double)num / (double)den; }
     explicit operator long double() const { return (long double)num / (long double)den; }
-    friend std::ostream &operator<<(std::ostream &os, const Rational &x) { return os << x.num << '/' << x.den; }
+    friend std::ostream &operator<<(std::ostream &os, const Rational &x) {
+        return os << x.num << '/' << x.den;
+    }
 };

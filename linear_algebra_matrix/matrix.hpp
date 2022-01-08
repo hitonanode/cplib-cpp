@@ -112,7 +112,8 @@ template <typename T> struct matrix {
     static int choose_pivot(const matrix<T2> &mtr, int h, int c) noexcept {
         int piv = -1;
         for (int j = h; j < mtr.H; j++) {
-            if (mtr.get(j, c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv, c)))) piv = j;
+            if (mtr.get(j, c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv, c))))
+                piv = j;
         }
         return piv;
     }

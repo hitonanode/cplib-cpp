@@ -10,10 +10,15 @@ using mint = ModInt<998244353>;
 using P = pair<mint, mint>;
 struct PointSetRangeComposite : public NonrecursiveSegmentTree<P, P, bool> {
     using SegTree = NonrecursiveSegmentTree<P, P, bool>;
-    P merge_data(const P &vl, const P &vr) override { return make_pair(vl.first * vr.first, vr.first * vl.second + vr.second); };
+    P merge_data(const P &vl, const P &vr) override {
+        return make_pair(vl.first * vr.first, vr.first * vl.second + vr.second);
+    };
     P data2ret(const P &v, const bool &q) override { return v; }
     P merge_ret(const P &vl, const P &vr) override { return merge_data(vl, vr); };
-    PointSetRangeComposite(const std::vector<P> &seq, P zero) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq, zero); };
+    PointSetRangeComposite(const std::vector<P> &seq, P zero)
+        : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, zero);
+    };
 };
 
 int main() {

@@ -13,7 +13,8 @@ template <class Cap, class Cost> struct mcf_graph {
     template <class E> struct csr {
         std::vector<int> start;
         std::vector<E> elist;
-        explicit csr(int n, const std::vector<std::pair<int, E>>& edges) : start(n + 1), elist(edges.size()) {
+        explicit csr(int n, const std::vector<std::pair<int, E>> &edges)
+            : start(n + 1), elist(edges.size()) {
             for (auto e : edges) { start[e.first + 1]++; }
             for (int i = 1; i <= n; i++) { start[i] += start[i - 1]; }
             auto counter = start;
@@ -51,7 +52,9 @@ public:
     std::vector<edge> edges() { return _edges; }
 
     std::pair<Cap, Cost> flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max()); }
-    std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) { return slope(s, t, flow_limit).back(); }
+    std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) {
+        return slope(s, t, flow_limit).back();
+    }
     std::vector<std::pair<Cap, Cost>> slope(int s, int t) {
         return slope(s, t, std::numeric_limits<Cap>::max());
     }
@@ -106,7 +109,7 @@ private:
         Cost cost;
     };
 
-    std::vector<std::pair<Cap, Cost>> slope(csr<_edge>& g, int s, int t, Cap flow_limit) {
+    std::vector<std::pair<Cap, Cost>> slope(csr<_edge> &g, int s, int t, Cap flow_limit) {
         // variants (C = maxcost):
         // -(n-1)C <= dual[s] <= dual[i] <= dual[t] = 0
         // reduced cost (= e.cost + dual[e.from] - dual[e.to]) >= 0 for all edge
@@ -123,7 +126,9 @@ private:
         std::vector<int> que_min;
         std::vector<Q> que;
         auto dual_ref = [&]() {
-            for (int i = 0; i < _n; i++) { dual_dist[i].second = std::numeric_limits<Cost>::max(); }
+            for (int i = 0; i < _n; i++) {
+                dual_dist[i].second = std::numeric_limits<Cost>::max();
+            }
             std::fill(vis.begin(), vis.end(), false);
             que_min.clear();
             que.clear();
@@ -196,7 +201,7 @@ private:
                 c = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);
             }
             for (int v = t; v != s; v = g.elist[prev_e[v]].to) {
-                auto& e = g.elist[prev_e[v]];
+                auto &e = g.elist[prev_e[v]];
                 e.cap += c;
                 g.elist[e.rev].cap -= c;
             }

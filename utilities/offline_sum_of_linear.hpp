@@ -41,7 +41,8 @@ template <class T> struct offline_sum_of_linear {
     }
     std::vector<T> vals() { return run(), ret; }
     int size() const { return N; }
-    template <class OStream> friend OStream &operator<<(OStream &os, const offline_sum_of_linear &x) {
+    template <class OStream>
+    friend OStream &operator<<(OStream &os, const offline_sum_of_linear &x) {
         auto y = x;
         y.run();
         os << '[';

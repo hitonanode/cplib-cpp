@@ -6,7 +6,8 @@
 namespace RangeAddChmaxRangeSum {
 #include <algorithm>
 
-template <typename Num> inline Num second_lowest(Num a, Num a2, Num c, Num c2) noexcept { // a < a2, c < c2
+template <typename Num>
+inline Num second_lowest(Num a, Num a2, Num c, Num c2) noexcept { // a < a2, c < c2
     return a == c ? std::min(a2, c2) : a2 <= c ? a2 : c2 <= a ? c2 : std::max(a, c);
 }
 using Num = int;
@@ -17,7 +18,8 @@ struct S {
     unsigned sz, nlo;
     bool fail;
     S() : lo(INF), lo2(INF), sum(0), sz(0), nlo(0), fail(false) {}
-    S(Num x, unsigned sz_ = 1) : lo(x), lo2(INF), sum(Num(x) * sz_), sz(sz_), nlo(sz_), fail(false) {}
+    S(Num x, unsigned sz_ = 1)
+        : lo(x), lo2(INF), sum(Num(x) * sz_), sz(sz_), nlo(sz_), fail(false) {}
 };
 
 S e() { return S(); }

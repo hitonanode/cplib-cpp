@@ -20,7 +20,7 @@ F id() { return {}; }
 F composition(F, F) { return id(); }
 using LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition, id>;
 
-LCT::Node* vs[200000];
+LCT::Node *vs[200000];
 
 int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);

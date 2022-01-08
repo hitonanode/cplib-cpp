@@ -13,7 +13,9 @@ template <typename T> struct Point3d {
     Point3d operator-(const Point3d &p) const noexcept { return {x - p.x, y - p.y, z - p.z}; }
     Point3d operator*(T d) const noexcept { return {x * d, y * d, z * d}; }
     Point3d operator/(T d) const { return {x / d, y / d, z / d}; }
-    bool operator<(const Point3d &r) const noexcept { return x != r.x ? x < r.x : (y != r.y ? y < r.y : z < r.z); }
+    bool operator<(const Point3d &r) const noexcept {
+        return x != r.x ? x < r.x : (y != r.y ? y < r.y : z < r.z);
+    }
     bool operator==(const Point3d &r) const noexcept { return x == r.x and y == r.y and z == r.z; }
     bool operator!=(const Point3d &r) const noexcept { return !((*this) == r); }
     T dot(const Point3d &p) const noexcept { return x * p.x + y * p.y + z * p.z; }
@@ -23,7 +25,9 @@ template <typename T> struct Point3d {
     T norm() const noexcept { return std::sqrt(x * x + y * y + z * z); }
     T norm2() const noexcept { return x * x + y * y + z * z; }
     Point3d normalized() const { return (*this) / this->norm(); }
-    friend std::istream &operator>>(std::istream &is, Point3d &p) { return is >> p.x >> p.y >> p.z; }
+    friend std::istream &operator>>(std::istream &is, Point3d &p) {
+        return is >> p.x >> p.y >> p.z;
+    }
     friend std::ostream &operator<<(std::ostream &os, const Point3d &p) {
         return os << '(' << p.x << ',' << p.y << ',' << p.z << ')';
     }

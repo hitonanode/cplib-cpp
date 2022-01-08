@@ -6,7 +6,8 @@
 // RangeAffineRangeSum
 // - update: x_i -> a * x_i + b for i in [l, r)
 // - get: return x_l + ... + x_{r - 1}
-template <typename T> struct RangeAffineRangeSum : public LazySegmentTree<std::pair<T, int>, std::pair<T, T>, T, bool> {
+template <typename T>
+struct RangeAffineRangeSum : public LazySegmentTree<std::pair<T, int>, std::pair<T, T>, T, bool> {
     using TDATA = std::pair<T, int>;
     using TLAZY = std::pair<T, T>;
     using SegTree = LazySegmentTree<TDATA, TLAZY, T, bool>;
@@ -19,10 +20,14 @@ template <typename T> struct RangeAffineRangeSum : public LazySegmentTree<std::p
             overlap_lazy(pos * 2, this->lazy[pos]);
             overlap_lazy(pos * 2 + 1, this->lazy[pos]);
         }
-        this->data[pos].first = this->lazy[pos].first * this->data[pos].first + this->lazy[pos].second * this->data[pos].second;
+        this->data[pos].first = this->lazy[pos].first * this->data[pos].first +
+                                this->lazy[pos].second * this->data[pos].second;
         this->lazy[pos] = this->zero_lazy;
     }
-    void overlap_lazy(int pos, const TLAZY &d) { this->lazy[pos] = std::make_pair(this->lazy[pos].first * d.first, this->lazy[pos].second * d.first + d.second); }
+    void overlap_lazy(int pos, const TLAZY &d) {
+        this->lazy[pos] = std::make_pair(
+            this->lazy[pos].first * d.first, this->lazy[pos].second * d.first + d.second);
+    }
     T data2ret(int pos, const bool &) { return this->data[pos].first; }
     T merge_ret(const T &l, const T &r, const bool &) { return l + r; }
     RangeAffineRangeSum(const std::vector<T> &seq) : SegTree::LazySegmentTree() {

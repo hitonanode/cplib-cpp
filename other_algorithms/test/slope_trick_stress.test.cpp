@@ -28,11 +28,13 @@ template <typename Int> pair<slope_trick<Int>, vector<Int>> gen_random_function(
         }
         if (qtype == 1) {
             f.add_relu(a);
-            for (Int x = stupid_lo; x <= stupid_hi; x++) stupid_f[x - stupid_lo] += max<Int>(x - a, 0);
+            for (Int x = stupid_lo; x <= stupid_hi; x++)
+                stupid_f[x - stupid_lo] += max<Int>(x - a, 0);
         }
         if (qtype == 2) {
             f.add_irelu(a);
-            for (Int x = stupid_lo; x <= stupid_hi; x++) stupid_f[x - stupid_lo] += max<Int>(a - x, 0);
+            for (Int x = stupid_lo; x <= stupid_hi; x++)
+                stupid_f[x - stupid_lo] += max<Int>(a - x, 0);
         }
         if (qtype == 3) {
             f.add_abs(a);

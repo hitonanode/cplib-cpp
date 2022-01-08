@@ -8,7 +8,8 @@
 // Requirement: r != 1
 // https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit
 // Document: https://hitonanode.github.io/cplib-cpp/formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
-template <typename MODINT> MODINT sum_of_exponential_times_polynomial_limit(MODINT r, std::vector<MODINT> init) {
+template <typename MODINT>
+MODINT sum_of_exponential_times_polynomial_limit(MODINT r, std::vector<MODINT> init) {
     assert(r != 1);
     if (init.empty()) return 0;
     if (init.size() == 1) return init[0] / (1 - r);

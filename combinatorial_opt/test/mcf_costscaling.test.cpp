@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
-#include "../mcf_costscaling.hpp"
 #include "../maxflow.hpp"
+#include "../mcf_costscaling.hpp"
 #include <iostream>
 using namespace std;
 

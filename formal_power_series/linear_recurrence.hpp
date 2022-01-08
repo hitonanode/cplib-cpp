@@ -19,7 +19,8 @@
 // - []                 -> (0, [1])
 // - [0, 0, 0]          -> (0, [1])
 // - [-2]               -> (1, [1, 2])
-template <typename Tfield> std::pair<int, std::vector<Tfield>> find_linear_recurrence(const std::vector<Tfield> &S) {
+template <typename Tfield>
+std::pair<int, std::vector<Tfield>> find_linear_recurrence(const std::vector<Tfield> &S) {
     int N = S.size();
     using poly = std::vector<Tfield>;
     poly C_reversed{1}, B{1};
@@ -97,7 +98,8 @@ std::vector<Tfield> monomial_mod_polynomial(long long N, const std::vector<Tfiel
 // Guess k-th element of the sequence, assuming linear recurrence
 // initial_elements: 0-ORIGIN
 // Verify: abc198f https://atcoder.jp/contests/abc198/submissions/21837815
-template <typename Tfield> Tfield guess_kth_term(const std::vector<Tfield> &initial_elements, long long k) {
+template <typename Tfield>
+Tfield guess_kth_term(const std::vector<Tfield> &initial_elements, long long k) {
     assert(k >= 0);
     if (k < static_cast<long long>(initial_elements.size())) return initial_elements[k];
     const auto f = find_linear_recurrence<Tfield>(initial_elements).second;

@@ -37,13 +37,16 @@ class radix_heap {
     }
 
 public:
-    radix_heap() : sz(0), last(0) { static_assert(std::numeric_limits<Uint>::digits > 0, "Invalid type."); }
+    radix_heap() : sz(0), last(0) {
+        static_assert(std::numeric_limits<Uint>::digits > 0, "Invalid type.");
+    }
     std::size_t size() const noexcept { return sz; }
     bool empty() const noexcept { return sz == 0; }
     void push(Uint x, const Label &val) { ++sz, v[bucket(x ^ last)].emplace_back(x, val); }
     void push(Uint x, Label &&val) { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val)); }
     template <class... Args> void emplace(Uint x, Args &&...args) {
-        ++sz, v[bucket(x ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x), std::forward_as_tuple(args...));
+        ++sz, v[bucket(x ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x),
+                                               std::forward_as_tuple(args...));
     }
     void pop() { pull(), --sz, v[0].pop_back(); }
     std::pair<Uint, Label> top() { return pull(), v[0].back(); }
@@ -53,5 +56,7 @@ public:
         sz = 0, last = 0;
         for (auto &vec : v) vec.clear();
     }
-    void swap(radix_heap<Uint, Label> &a) { std::swap(sz, a.sz), std::swap(last, a.last), v.swap(a.v); }
+    void swap(radix_heap<Uint, Label> &a) {
+        std::swap(sz, a.sz), std::swap(last, a.last), v.swap(a.v);
+    }
 };

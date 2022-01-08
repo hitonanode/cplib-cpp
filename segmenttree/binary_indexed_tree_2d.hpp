@@ -21,5 +21,7 @@ template <typename T, int lenX, int lenY> struct BIT_2D {
         return res;
     }
     // [xmin, xmax] * [ymin, ymax] の和（閉区間）
-    T sum(int xmin, int xmax, int ymin, int ymax) const noexcept { return sum(xmax, ymax) - sum(xmin - 1, ymax) - sum(xmax, ymin - 1) + sum(xmin - 1, ymin - 1); }
+    T sum(int xmin, int xmax, int ymin, int ymax) const noexcept {
+        return sum(xmax, ymax) - sum(xmin - 1, ymax) - sum(xmax, ymin - 1) + sum(xmin - 1, ymin - 1);
+    }
 };

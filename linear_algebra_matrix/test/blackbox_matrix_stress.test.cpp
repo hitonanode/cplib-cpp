@@ -12,7 +12,8 @@ using namespace std;
 
 mt19937 mt(1010101);
 
-template <class MODINT, class MATRIX, typename std::enable_if<std::is_same<MATRIX, toeplitz_ntt<MODINT>>::value>::type* = nullptr>
+template <class MODINT, class MATRIX,
+          typename std::enable_if<std::is_same<MATRIX, toeplitz_ntt<MODINT>>::value>::type * = nullptr>
 toeplitz_ntt<MODINT> gen_random_matrix() {
     auto rnd = uniform_int_distribution<int>(1, 100);
     int h = rnd(mt), w = max(h, rnd(mt));
@@ -21,16 +22,19 @@ toeplitz_ntt<MODINT> gen_random_matrix() {
     return toeplitz_ntt<MODINT>(vh, vw);
 }
 
-template <class MODINT, class MATRIX, typename std::enable_if<std::is_same<MATRIX, square_toeplitz_ntt<MODINT>>::value>::type* = nullptr>
+template <class MODINT, class MATRIX,
+          typename std::enable_if<std::is_same<MATRIX, square_toeplitz_ntt<MODINT>>::value>::type * = nullptr>
 square_toeplitz_ntt<MODINT> gen_random_matrix() {
     int N = uniform_int_distribution<int>(1, 100)(mt);
     auto v = gen_random_vector<MODINT>(N * 2 - 1);
     return square_toeplitz_ntt<MODINT>(v);
 }
 
-template <class MODINT, class MATRIX, typename std::enable_if<std::is_same<MATRIX, sparse_matrix<MODINT>>::value>::type* = nullptr>
+template <class MODINT, class MATRIX,
+          typename std::enable_if<std::is_same<MATRIX, sparse_matrix<MODINT>>::value>::type * = nullptr>
 sparse_matrix<MODINT> gen_random_matrix() {
-    int H = uniform_int_distribution<int>(1, 20)(mt), W = max(H, uniform_int_distribution<int>(1, 20)(mt));
+    int H = uniform_int_distribution<int>(1, 20)(mt),
+        W = max(H, uniform_int_distribution<int>(1, 20)(mt));
     sparse_matrix<MODINT> M(H, W);
     for (int i = 0; i < H; i++) {
         for (int j = 0; j < W; j++) {
@@ -41,9 +45,11 @@ sparse_matrix<MODINT> gen_random_matrix() {
     return M;
 }
 
-template <class MODINT, class MATRIX, typename std::enable_if<std::is_same<MATRIX, matrix<MODINT>>::value>::type* = nullptr>
+template <class MODINT, class MATRIX,
+          typename std::enable_if<std::is_same<MATRIX, matrix<MODINT>>::value>::type * = nullptr>
 matrix<MODINT> gen_random_matrix() {
-    int H = uniform_int_distribution<int>(1, 20)(mt), W = max(H, uniform_int_distribution<int>(1, 20)(mt));
+    int H = uniform_int_distribution<int>(1, 20)(mt),
+        W = max(H, uniform_int_distribution<int>(1, 20)(mt));
     matrix<MODINT> M(H, W);
     for (int i = 0; i < H; i++) {
         for (int j = 0; j < W; j++) {

@@ -7,7 +7,8 @@
 // Calculate [x^N](num(x) / den(x))
 // - Coplexity: O(LlgLlgN) ( L = size(num) + size(den) )
 // - Reference: `Bostan–Mori algorithm` <https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>
-template <typename Tp> Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vector<Tp> den) {
+template <typename Tp>
+Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vector<Tp> den) {
     assert(N >= 0);
     while (den.size() and den.back() == 0) den.pop_back();
     assert(den.size());
@@ -35,7 +36,8 @@ template <typename Tp> Tp coefficient_of_rational_function(long long N, std::vec
 // Complexity: O(K lg K \log N)
 // ainit = [a_0, a_1,..., ]
 // c[0] = 1, \sum_j a_{i - j} * c_j = 0
-template <typename Tp> Tp find_kth_term(std::vector<Tp> ainit, const std::vector<Tp> c, long long n) {
+template <typename Tp>
+Tp find_kth_term(std::vector<Tp> ainit, const std::vector<Tp> c, long long n) {
     assert(ainit.size() + 1 == c.size());
     auto a = nttconv(ainit, c);
     a.resize(ainit.size());

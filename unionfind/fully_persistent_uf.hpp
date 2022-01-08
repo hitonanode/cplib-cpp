@@ -11,7 +11,7 @@ struct PersistentUnionFind {
     int N;
     using Array = persistent_array<int, 4>;
     Array par;
-    std::vector<Array::node*> savepoints; // Tree structure is saved after every `unite()` operation
+    std::vector<Array::node *> savepoints; // Tree structure is saved after every `unite()` operation
     PersistentUnionFind(int N) : N(N), par(-1) { savepoints.emplace_back(nullptr); }
     int find(int t, int x) const {
         const int p = par.get(savepoints[t], x);

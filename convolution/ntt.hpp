@@ -58,7 +58,8 @@ template <typename MODINT> void ntt(std::vector<MODINT> &a, bool is_inverse = fa
         for (auto &v : a) v *= n_inv;
     }
 }
-template <int MOD> std::vector<ModInt<MOD>> nttconv_(const std::vector<int> &a, const std::vector<int> &b) {
+template <int MOD>
+std::vector<ModInt<MOD>> nttconv_(const std::vector<int> &a, const std::vector<int> &b) {
     int sz = a.size();
     assert(a.size() == b.size() and __builtin_popcount(sz) == 1);
     std::vector<ModInt<MOD>> ap(sz), bp(sz);
@@ -95,7 +96,8 @@ std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool s
         return ret;
     }
     int mod = MODINT::mod();
-    if (skip_garner or std::find(std::begin(nttprimes), std::end(nttprimes), mod) != std::end(nttprimes)) {
+    if (skip_garner or
+        std::find(std::begin(nttprimes), std::end(nttprimes), mod) != std::end(nttprimes)) {
         a.resize(sz), b.resize(sz);
         if (a == b) {
             ntt(a, false);
@@ -114,7 +116,8 @@ std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool s
         auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);
         auto ntt2 = nttconv_<nttprimes[2]>(ai, bi);
         a.resize(n + m - 1);
-        for (int i = 0; i < n + m - 1; i++) a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);
+        for (int i = 0; i < n + m - 1; i++)
+            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);
     }
     return a;
 }

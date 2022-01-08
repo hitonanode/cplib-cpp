@@ -22,15 +22,20 @@ struct DoubleHash : public std::pair<unsigned, unsigned> {
     DoubleHash operator+(const DoubleHash &x) const {
         return mod_subtract({this->first + x.first, this->second + x.second});
     }
-    DoubleHash operator+(unsigned x) const { return mod_subtract({this->first + x, this->second + x}); }
+    DoubleHash operator+(unsigned x) const {
+        return mod_subtract({this->first + x, this->second + x});
+    }
     DoubleHash operator-(const DoubleHash &x) const {
-        return mod_subtract({this->first + MODs.first - x.first, this->second + MODs.second - x.second});
+        return mod_subtract(
+            {this->first + MODs.first - x.first, this->second + MODs.second - x.second});
     }
     DoubleHash operator*(const DoubleHash &x) const {
-        return {unsigned(ull(this->first) * x.first % MODs.first), unsigned(ull(this->second) * x.second % MODs.second)};
+        return {unsigned(ull(this->first) * x.first % MODs.first),
+                unsigned(ull(this->second) * x.second % MODs.second)};
     }
     DoubleHash operator*(unsigned x) const {
-        return {unsigned(ull(this->first) * x % MODs.first), unsigned(ull(this->second) * x % MODs.second)};
+        return {unsigned(ull(this->first) * x % MODs.first),
+                unsigned(ull(this->second) * x % MODs.second)};
     }
     static DoubleHash gen_b(bool force_update = false) {
         static DoubleHash b{0, 0};
@@ -56,7 +61,8 @@ template <typename V = DoubleHash> struct rolling_hash {
             power.push_back(tmp);
         }
     }
-    template <typename Int> rolling_hash(const std::vector<Int> &s, V b = V::gen_b()) : N(s.size()), B(b), hash(N + 1) {
+    template <typename Int>
+    rolling_hash(const std::vector<Int> &s, V b = V::gen_b()) : N(s.size()), B(b), hash(N + 1) {
         for (int i = 0; i < N; i++) hash[i + 1] = hash[i] * B + s[i];
         _extend_powvec();
     }
@@ -72,9 +78,7 @@ template <typename V = DoubleHash> struct rolling_hash {
     V get(int l, int r) const { // s[l] * B^(r - l - 1) + ... + s[r - 1]
         return hash[r] - hash[l] * power[r - l];
     }
-    int lcplen(int l1, int l2) const {
-        return longest_common_prefix(*this, l1, *this, l2);
-    }
+    int lcplen(int l1, int l2) const { return longest_common_prefix(*this, l1, *this, l2); }
 };
 template <typename V> std::vector<V> rolling_hash<V>::power{1};
 

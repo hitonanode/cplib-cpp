@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind"
-#include "../factorial_power.hpp"
 #include "../../modint.hpp"
 #include "../../number/sieve.hpp"
+#include "../factorial_power.hpp"
 #include <iostream>
 using namespace std;
 

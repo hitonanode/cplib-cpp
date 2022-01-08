@@ -10,7 +10,8 @@ struct BinaryLifting {
     int N, INVALID, lgD;
     std::vector<std::vector<int>> mat;
     BinaryLifting() : N(0), lgD(0) {}
-    BinaryLifting(const std::vector<int> &vec_nxt, int INVALID = -1, int lgd = 0) : N(vec_nxt.size()), INVALID(INVALID), lgD(lgd) {
+    BinaryLifting(const std::vector<int> &vec_nxt, int INVALID = -1, int lgd = 0)
+        : N(vec_nxt.size()), INVALID(INVALID), lgD(lgd) {
         while ((1LL << lgD) < N) lgD++;
         mat.assign(lgD, std::vector<int>(N, INVALID));
         mat[0] = vec_nxt;

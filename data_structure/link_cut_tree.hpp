@@ -5,7 +5,8 @@
 // Reference:
 // - https://www.slideshare.net/iwiwi/2-12188845
 // - https://ei1333.github.io/library/structure/lct/link-cut-tree-lazy-path.cpp
-template <class S, class F, S (*op)(S, S), S (*reversal)(S), S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
+template <class S, class F, S (*op)(S, S), S (*reversal)(S), S (*mapping)(F, S),
+          F (*composition)(F, F), F (*id)()>
 class lazy_linkcuttree {
 public:
     struct Node {
@@ -15,7 +16,8 @@ public:
         bool is_reversed;
         int sz;
         Node(S val)
-            : l(nullptr), r(nullptr), p(nullptr), d(val), sum(val), lz(id()), is_reversed(false), sz(1) {}
+            : l(nullptr), r(nullptr), p(nullptr), d(val), sum(val), lz(id()), is_reversed(false),
+              sz(1) {}
         bool is_root() const { return !p || (p->l != this and p->r != this); }
         template <class OStream> friend OStream &operator<<(OStream &os, const Node &n) {
             os << '[';
@@ -200,7 +202,8 @@ struct S {
 };
 using F = pair<bool, int>;
 S op(S l, S r) {
-    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));
+    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi),
+max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));
 }
 S reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }
 S mapping(F f, S x) {

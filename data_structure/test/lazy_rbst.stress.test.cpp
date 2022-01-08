@@ -17,7 +17,8 @@ struct S {
 S genS(long long x) { return S{x, x, x, 1}; }
 
 S op(S l, S r) {
-    return {l.lsum + r.lsum + l.sz * r.sum, l.rsum + r.rsum + r.sz * l.sum, l.sum + r.sum, l.sz + r.sz};
+    return {l.lsum + r.lsum + l.sz * r.sum, l.rsum + r.rsum + r.sz * l.sum, l.sum + r.sum,
+            l.sz + r.sz};
 }
 using F = std::pair<bool, long long>;
 S reversal(S x) { return {x.rsum, x.lsum, x.sum, x.sz}; }

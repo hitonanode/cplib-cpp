@@ -14,17 +14,25 @@ template <class S, S (*op)(S, S), S (*e)(), class Coordinate> class rangetree {
     std::vector<std::vector<Pt>> _range2yxs;
     std::vector<atcoder::segtree<S, op, e>> segtrees;
     void _set(int v, Pt p, S val) {
-        auto i = std::distance(_range2yxs[v].begin(), std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{p.second, p.first}));
+        auto i = std::distance(
+            _range2yxs[v].begin(),
+            std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{p.second, p.first}));
         segtrees[v].set(i, val);
     }
     void _add(int v, Pt p, S val) {
-        auto i = std::distance(_range2yxs[v].begin(), std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{p.second, p.first}));
+        auto i = std::distance(
+            _range2yxs[v].begin(),
+            std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{p.second, p.first}));
         segtrees[v].set(i, op(segtrees[v].get(i), val));
     }
     S _prod(int v, Coordinate yl, Coordinate yr) const {
         auto comp = [&](const Pt &l, const Pt &r) { return l.first < r.first; };
-        auto il = std::distance(_range2yxs[v].begin(), std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{yl, yl}, comp));
-        auto ir = std::distance(_range2yxs[v].begin(), std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{yr, yr}, comp));
+        auto il = std::distance(
+            _range2yxs[v].begin(),
+            std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{yl, yl}, comp));
+        auto ir = std::distance(
+            _range2yxs[v].begin(),
+            std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{yr, yr}, comp));
         return segtrees[v].prod(il, ir);
     }
 
@@ -41,8 +49,10 @@ public:
         for (int i = n - 1; i > 0; i--) {
             auto &lch = _range2yxs[i * 2];
             auto &rch = _range2yxs[i * 2 + 1];
-            std::merge(lch.begin(), lch.end(), rch.begin(), rch.end(), std::back_inserter(_range2yxs[i]));
-            _range2yxs[i].erase(std::unique(_range2yxs[i].begin(), _range2yxs[i].end()), _range2yxs[i].end());
+            std::merge(
+                lch.begin(), lch.end(), rch.begin(), rch.end(), std::back_inserter(_range2yxs[i]));
+            _range2yxs[i].erase(
+                std::unique(_range2yxs[i].begin(), _range2yxs[i].end()), _range2yxs[i].end());
         }
         for (const auto &v : _range2yxs) segtrees.emplace_back(v.size());
     }
@@ -58,8 +68,10 @@ public:
     }
     S prod(Coordinate xl, Coordinate xr, Coordinate yl, Coordinate yr) const {
         auto comp = [](const Pt &l, const Pt &r) { return l.first < r.first; };
-        int l = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), Pt{xl, yr}, comp));
-        int r = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), Pt{xr, yr}, comp));
+        int l = n + std::distance(_pts.begin(),
+                                  std::lower_bound(_pts.begin(), _pts.end(), Pt{xl, yr}, comp));
+        int r = n + std::distance(_pts.begin(),
+                                  std::lower_bound(_pts.begin(), _pts.end(), Pt{xr, yr}, comp));
         S ret = e();
         while (l < r) {
             if (l & 1) ret = op(ret, _prod(l++, yl, yr));

@@ -46,12 +46,13 @@ int bsf(unsigned int n) {
 
 namespace atcoder {
 
-template <class S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
+template <class S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F, F),
+          F (*id)()>
 struct lazy_segtree {
 public:
     lazy_segtree() : lazy_segtree(0) {}
     explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e())) {}
-    explicit lazy_segtree(const std::vector<S>& v) : _n(int(v.size())) {
+    explicit lazy_segtree(const std::vector<S> &v) : _n(int(v.size())) {
         log = internal::ceil_pow2(_n);
         size = 1 << log;
         d = std::vector<S>(2 * size, e());

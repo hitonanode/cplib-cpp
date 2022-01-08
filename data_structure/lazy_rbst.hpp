@@ -6,7 +6,8 @@
 #include <vector>
 
 // Lazy randomized binary search tree
-template <int LEN, class S, S (*op)(S, S), class F, S (*reversal)(S), S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
+template <int LEN, class S, S (*op)(S, S), class F, S (*reversal)(S), S (*mapping)(F, S),
+          F (*composition)(F, F), F (*id)()>
 struct lazy_rbst {
     // Do your RuBeSTy! ⌒°( ・ω・)°⌒
     inline uint32_t _rand() { // XorShift
@@ -24,7 +25,8 @@ struct lazy_rbst {
         F lz;
         bool is_reversed;
         int sz;
-        Node(const S &v) : l(nullptr), r(nullptr), val(v), sum(v), lz(id()), is_reversed(false), sz(1) {}
+        Node(const S &v)
+            : l(nullptr), r(nullptr), val(v), sum(v), lz(id()), is_reversed(false), sz(1) {}
         Node() : l(nullptr), r(nullptr), lz(id()), is_reversed(false), sz(0) {}
         template <class OStream> friend OStream &operator<<(OStream &os, const Node &n) {
             os << '[';
@@ -280,7 +282,8 @@ public:
 // Persistent lazy randomized binary search tree
 // Verified: https://atcoder.jp/contests/arc030/tasks/arc030_4
 // CAUTION: https://yosupo.hatenablog.com/entry/2015/10/29/222536
-template <int LEN, class S, S (*op)(S, S), class F, S (*reversal)(S), S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
+template <int LEN, class S, S (*op)(S, S), class F, S (*reversal)(S), S (*mapping)(F, S),
+          F (*composition)(F, F), F (*id)()>
 struct persistent_lazy_rbst : lazy_rbst<LEN, S, op, F, reversal, mapping, composition, id> {
     using RBST = lazy_rbst<LEN, S, op, F, reversal, mapping, composition, id>;
     using Node = typename RBST::Node;

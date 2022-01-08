@@ -10,8 +10,8 @@
 // - get(x): Calculate min/max. value of `y = ax + b`'s at point x, O(logN)
 // - parabola_get(c, x): Caclculate min/max. value of `y = c(x - a)^2 + b`'s
 // - merge(): merge two CHTs in linear time
-// Verified: <https://codeforces.com/gym/101806/problem/R>
-//           <https://atcoder.jp/contests/pakencamp-2020-day2/submissions/19262614>
+// Verified: https://codeforces.com/gym/101806/problem/R
+//           https://atcoder.jp/contests/pakencamp-2020-day2/submissions/19262614
 template <bool is_minimizer, typename T_CHT = long long, typename T_MP = __int128, T_CHT INF = 1LL << 61>
 struct AddMonotoneConvexHullTrick {
     std::deque<std::pair<T_CHT, T_CHT>> q; // [(a0, b0), ..., (ai, bi), ...], a0 > a1 > a2 > ...
@@ -32,7 +32,8 @@ struct AddMonotoneConvexHullTrick {
             while (q.size() > 1u) {
                 if (q.back().first == a and q.back().second <= b) return;
                 int sz = q.size();
-                T_MP l = (T_MP)(q.back().second - q[sz - 2].second) * (q.back().first - a); // Overflow might occur here.
+                T_MP l = (T_MP)(q.back().second - q[sz - 2].second) *
+                         (q.back().first - a); // Overflow might occur here.
                 T_MP r = (T_MP)(b - q.back().second) * (q[sz - 2].first - q.back().first);
                 if (l < r) break;
                 q.pop_back();
@@ -65,7 +66,8 @@ struct AddMonotoneConvexHullTrick {
     void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); }
     T_CHT parabola_get(T_CHT c, T_CHT x) const { return get(x) + c * x * x; }
 
-    static AddMonotoneConvexHullTrick merge(const AddMonotoneConvexHullTrick &cht1, const AddMonotoneConvexHullTrick &cht2) {
+    static AddMonotoneConvexHullTrick
+    merge(const AddMonotoneConvexHullTrick &cht1, const AddMonotoneConvexHullTrick &cht2) {
         AddMonotoneConvexHullTrick ret;
         auto i1 = cht1.q.begin(), i2 = cht2.q.begin();
         static const T_CHT sgn = is_minimizer ? 1 : -1;

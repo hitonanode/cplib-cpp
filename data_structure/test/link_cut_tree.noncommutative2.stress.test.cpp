@@ -20,12 +20,14 @@ struct S {
         return sz == x.sz and sum == x.sum and lhi == x.lhi and rhi == x.rhi and inhi == x.inhi;
     }
     template <class OStream> friend OStream &operator<<(OStream &os, const S &x) {
-        return os << '[' << x.sz << ',' << x.sum << ',' << x.lhi << ',' << x.rhi << ',' << x.inhi << ']';
+        return os << '[' << x.sz << ',' << x.sum << ',' << x.lhi << ',' << x.rhi << ',' << x.inhi
+                  << ']';
     }
 };
 using F = pair<bool, int>;
 S op(S l, S r) {
-    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max({l.inhi, r.inhi, l.rhi + r.lhi}));
+    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi),
+             max({l.inhi, r.inhi, l.rhi + r.lhi}));
 }
 S reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }
 S mapping(F f, S x) {

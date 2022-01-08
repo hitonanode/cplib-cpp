@@ -16,7 +16,9 @@ struct cmplx {
     cmplx(T_FFT x, T_FFT y) : x(x), y(y) {}
     inline cmplx operator+(const cmplx &r) const { return cmplx(x + r.x, y + r.y); }
     inline cmplx operator-(const cmplx &r) const { return cmplx(x - r.x, y - r.y); }
-    inline cmplx operator*(const cmplx &r) const { return cmplx(x * r.x - y * r.y, x * r.y + y * r.x); }
+    inline cmplx operator*(const cmplx &r) const {
+        return cmplx(x * r.x - y * r.y, x * r.y + y * r.x);
+    }
     inline cmplx conj() const { return cmplx(x, -y); }
 };
 int fftbase = 1;
@@ -26,7 +28,9 @@ void ensure_base(int nbase) {
     if (nbase <= fftbase) return;
     fftrev.resize(1 << nbase);
     fftrts.resize(1 << nbase);
-    for (int i = 0; i < (1 << nbase); i++) { fftrev[i] = (fftrev[i >> 1] >> 1) + ((i & 1) << (nbase - 1)); }
+    for (int i = 0; i < (1 << nbase); i++) {
+        fftrev[i] = (fftrev[i >> 1] >> 1) + ((i & 1) << (nbase - 1));
+    }
     while (fftbase < nbase) {
         T_FFT angle = acosl(-1.0L) * 2.0L / (1 << (fftbase + 1));
         for (int i = 1 << (fftbase - 1); i < (1 << fftbase); i++) {

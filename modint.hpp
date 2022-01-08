@@ -41,28 +41,44 @@ template <int md> struct ModInt {
     MDCONST ModInt(lint v) { _setval(v % md + md); }
     MDCONST explicit operator bool() const { return val != 0; }
     MDCONST ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val + x.val); }
-    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val - x.val + md); }
-    MDCONST ModInt operator*(const ModInt &x) const { return ModInt()._setval((lint)val * x.val % md); }
-    MDCONST ModInt operator/(const ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % md); }
+    MDCONST ModInt operator-(const ModInt &x) const {
+        return ModInt()._setval((lint)val - x.val + md);
+    }
+    MDCONST ModInt operator*(const ModInt &x) const {
+        return ModInt()._setval((lint)val * x.val % md);
+    }
+    MDCONST ModInt operator/(const ModInt &x) const {
+        return ModInt()._setval((lint)val * x.inv() % md);
+    }
     MDCONST ModInt operator-() const { return ModInt()._setval(md - val); }
     MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }
     MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }
     MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }
     MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }
-    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a % md + x.val); }
-    friend MDCONST ModInt operator-(lint a, const ModInt &x) { return ModInt()._setval(a % md - x.val + md); }
-    friend MDCONST ModInt operator*(lint a, const ModInt &x) { return ModInt()._setval(a % md * x.val % md); }
+    friend MDCONST ModInt operator+(lint a, const ModInt &x) {
+        return ModInt()._setval(a % md + x.val);
+    }
+    friend MDCONST ModInt operator-(lint a, const ModInt &x) {
+        return ModInt()._setval(a % md - x.val + md);
+    }
+    friend MDCONST ModInt operator*(lint a, const ModInt &x) {
+        return ModInt()._setval(a % md * x.val % md);
+    }
     friend MDCONST ModInt operator/(lint a, const ModInt &x) {
         return ModInt()._setval(a % md * x.inv() % md);
     }
     MDCONST bool operator==(const ModInt &x) const { return val == x.val; }
     MDCONST bool operator!=(const ModInt &x) const { return val != x.val; }
-    MDCONST bool operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt, T>
+    MDCONST bool operator<(const ModInt &x) const {
+        return val < x.val;
+    } // To use std::map<ModInt, T>
     friend std::istream &operator>>(std::istream &is, ModInt &x) {
         lint t;
         return is >> t, x = ModInt(t), is;
     }
-    MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return os << x.val; }
+    MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {
+        return os << x.val;
+    }
     MDCONST ModInt pow(lint n) const {
         ModInt ans = 1, tmp = *this;
         while (n) {

@@ -53,12 +53,14 @@ int main() {
     ret.resize(TC);
     done.assign(TC, 0);
 
-    size_t n_thread = thread::hardware_concurrency(); // スレッド数を自動取得． 8や16と手で設定してもよい
+    size_t n_thread =
+        thread::hardware_concurrency(); // スレッド数を自動取得． 8や16と手で設定してもよい
     if (n_thread == 0) n_thread = 1;
 
     vector<thread> threads(n_thread);
     REP(i, n_thread) { threads[i] = thread(run); }
     REP(i, n_thread) { threads[i].join(); }
     REP(tc, TC) { cout << "Case #" << tc + 1 << ": " << ret[tc] << endl; }
-    dbg(chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - START).count());
+    dbg(chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - START)
+            .count());
 }

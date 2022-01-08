@@ -3,7 +3,8 @@
 #include <vector>
 
 // CUT begin
-// MP (Morris-Pratt) algorithm (length of longest nontrivial matching for prefix & suffix of s[0:i] for each i)
+// MP (Morris-Pratt) algorithm (length of longest nontrivial matching for
+// prefix & suffix of s[0:i] for each i)
 // Input: std::string of length N
 // Output: std::vector<int> of size N + 1
 // Complexity: O(N)

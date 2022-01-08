@@ -24,6 +24,7 @@ int main() {
     }
 
     for (auto vec : graph.dist2d) {
-        for (int i = 0; i < V; i++) cout << (vec[i] < INF ? to_string(vec[i]) : "INF") << (i + 1 == V ? '\n' : ' ');
+        for (int i = 0; i < V; i++)
+            cout << (vec[i] < INF ? to_string(vec[i]) : "INF") << (i + 1 == V ? '\n' : ' ');
     }
 }

@@ -6,7 +6,8 @@
 
 // Maxflow (push-relabel, highest-label)
 // Complexity: O(N^2 M^(1/2))
-template <class Cap, int GlobalRelabelFreq = 5, bool UseGapRelabeling = true> struct mf_pushrelabel {
+template <class Cap, int GlobalRelabelFreq = 5, bool UseGapRelabeling = true>
+struct mf_pushrelabel {
     struct pque_ {
         std::vector<std::pair<int, int>> even_, odd_;
         int se, so;
@@ -19,7 +20,8 @@ template <class Cap, int GlobalRelabelFreq = 5, bool UseGapRelabeling = true> st
             return a > b ? a : b;
         }
         int pop() {
-            if (!se or (so and odd_[so - 1].second > even_[se - 1].second)) return odd_[--so].first;
+            if (!se or (so and odd_[so - 1].second > even_[se - 1].second))
+                return odd_[--so].first;
             return even_[--se].first;
         }
     } pque;

@@ -28,7 +28,9 @@ struct UndirectedGraph {
     int tvcc_num;             // 二重頂点連結成分数
     std::vector<int> tvcc_id; // 各辺が何個目の二重頂点連結成分か
 
-    UndirectedGraph(int V) : V(V), E(0), k(0), to(V), is_articulation(V, 0), order(V, -1), lowlink(V, -1), tecc_num(0), tvcc_num(0) {}
+    UndirectedGraph(int V)
+        : V(V), E(0), k(0), to(V), is_articulation(V, 0), order(V, -1), lowlink(V, -1),
+          tecc_num(0), tvcc_num(0) {}
 
     void add_edge(int v1, int v2) {
         assert(v1 >= 0 and v1 < V);
@@ -61,13 +63,19 @@ struct UndirectedGraph {
                     dfs_lowlink(nxt.first, nxt.second);
                     lowlink[now] = std::min(lowlink[now], lowlink[nxt.first]);
 
-                    if ((order[now] == _root_now and order[nxt.first] != _root_now + 1) or (order[now] != _root_now and lowlink[nxt.first] >= order[now])) { is_articulation[now] = 1; }
+                    if ((order[now] == _root_now and order[nxt.first] != _root_now + 1) or
+                        (order[now] != _root_now and lowlink[nxt.first] >= order[now])) {
+                        is_articulation[now] = 1;
+                    }
                     if (lowlink[nxt.first] >= order[now]) {
                         while (true) {
                             int e = _edge_stack.back();
                             tvcc_id[e] = tvcc_num;
                             _edge_stack.pop_back();
-                            if (std::minmax(edges[e].first, edges[e].second) == std::minmax(now, nxt.first)) { break; }
+                            if (std::minmax(edges[e].first, edges[e].second) ==
+                                std::minmax(now, nxt.first)) {
+                                break;
+                            }
                         }
                         tvcc_num++;
                     }

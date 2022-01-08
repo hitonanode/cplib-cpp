@@ -14,14 +14,20 @@ template <typename T_P> struct P {
         return (std::abs(a + b) < P::EPS * (std::abs(a) + std::abs(b))) ? 0 : a + b;
     }
     P operator+(const P &p) const noexcept { return P(add_w_error(x, p.x), add_w_error(y, p.y)); }
-    P operator-(const P &p) const noexcept { return P(add_w_error(x, -p.x), add_w_error(y, -p.y)); }
-    P operator*(const P &p) const noexcept { return P(add_w_error(x * p.x, -y * p.y), add_w_error(x * p.y, y * p.x)); }
+    P operator-(const P &p) const noexcept {
+        return P(add_w_error(x, -p.x), add_w_error(y, -p.y));
+    }
+    P operator*(const P &p) const noexcept {
+        return P(add_w_error(x * p.x, -y * p.y), add_w_error(x * p.y, y * p.x));
+    }
     P operator*(T_P d) const noexcept { return P(x * d, y * d); }
     P operator/(T_P d) const noexcept { return P(x / d, y / d); }
     P inv() const { return conj() / norm2(); }
     P operator/(const P &p) const { return (*this) * p.inv(); }
     bool operator<(const P &r) const noexcept { return x != r.x ? x < r.x : y < r.y; }
-    bool operator==(const P &r) const noexcept { return add_w_error(x, -r.x) == 0 and add_w_error(y, -r.y) == 0; }
+    bool operator==(const P &r) const noexcept {
+        return add_w_error(x, -r.x) == 0 and add_w_error(y, -r.y) == 0;
+    }
     bool operator!=(const P &r) const noexcept { return !((*this) == r); }
     T_P dot(P p) const noexcept { return add_w_error(x * p.x, y * p.y); }
     T_P det(P p) const noexcept { return add_w_error(x * p.y, -y * p.x); }
@@ -31,7 +37,8 @@ template <typename T_P> struct P {
     T_P arg() const noexcept { return std::atan2(y, x); }
     // rotate point/vector by rad
     P rotate(T_P rad) noexcept {
-        return P(add_w_error(x * std::cos(rad), -y * std::sin(rad)), add_w_error(x * std::sin(rad), y * std::cos(rad)));
+        return P(add_w_error(x * std::cos(rad), -y * std::sin(rad)),
+                 add_w_error(x * std::sin(rad), y * std::cos(rad)));
     }
     P normalized() const { return (*this) / this->norm(); }
     P conj() const noexcept { return P(x, -y); }

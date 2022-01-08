@@ -30,7 +30,9 @@ template <typename T> struct [[deprecated("use ACL based suffix array")]] Suffix
         for (_ord_mm = 1; _ord_mm <= N; _ord_mm *= 2) {
             std::sort(SA.begin(), SA.end(), _comp_suffarr);
             tmp[SA[0]] = 0;
-            for (int i = 1; i <= N; i++) { tmp[SA[i]] = tmp[SA[i - 1]] + _comp_suffarr(SA[i - 1], SA[i]); }
+            for (int i = 1; i <= N; i++) {
+                tmp[SA[i]] = tmp[SA[i - 1]] + _comp_suffarr(SA[i - 1], SA[i]);
+            }
             rank = tmp;
         }
         if (!gen_lcp) return;

@@ -24,7 +24,9 @@ template <typename Tp> struct fibonacci_heap {
         Node(Node &&) = default;
         Node &operator=(Node const &) = default;
         Node &operator=(Node &&) = default;
-        Node(Tp v) : val(v), deg(0), parent(nullptr), left(nullptr), right(nullptr), child(nullptr), mark(false) {}
+        Node(Tp v)
+            : val(v), deg(0), parent(nullptr), left(nullptr), right(nullptr), child(nullptr),
+              mark(false) {}
         friend std::ostream &operator<<(std::ostream &os, const Node &n) {
             os << '(' << n.val << ',';
             if (n.child != nullptr) os << *(n.child) << ',';
@@ -188,7 +190,8 @@ template <typename Tp> struct fibonacci_heap {
         return ptop->val;
     }
     friend std::ostream &operator<<(std::ostream &os, const fibonacci_heap &hp) {
-        os << "[(fibonacci_heap: sz=" << hp.sz << ", top=" << hp.ptop->val << ", #tree = " << hp.roots.size() << ")";
+        os << "[(fibonacci_heap: sz=" << hp.sz << ", top=" << hp.ptop->val
+           << ", #tree = " << hp.roots.size() << ")";
         for (auto x : hp.roots) { os << *x << ", "; }
         os << ']';
         return os;

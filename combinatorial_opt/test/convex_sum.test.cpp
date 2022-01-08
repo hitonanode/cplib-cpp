@@ -20,7 +20,8 @@ long long solve() {
     }
     vector<Quadratic> costs;
     for (int i = 0; i < N; i++) costs.emplace_back(a[i], b[i], c[i], 0, K);
-    auto sol = MinConvexSumUnderLinearConstraint<Quadratic, lint, 1LL << 60>(vector<lint>(N, 1), costs, K);
+    auto sol =
+        MinConvexSumUnderLinearConstraint<Quadratic, lint, 1LL << 60>(vector<lint>(N, 1), costs, K);
     return sol.first;
 }
 

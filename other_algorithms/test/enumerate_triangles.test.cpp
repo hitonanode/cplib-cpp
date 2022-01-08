@@ -18,7 +18,9 @@ int main() {
     }
     unsigned long long ret = 0;
     constexpr unsigned md = 998244353;
-    auto f = [&](int i, int j, int k) { (ret += (unsigned long long)X[i] * X[j] % md * X[k]) %= md; };
+    auto f = [&](int i, int j, int k) {
+        (ret += (unsigned long long)X[i] * X[j] % md * X[k]) %= md;
+    };
     graph.run(f);
     cout << ret << '\n';
 }

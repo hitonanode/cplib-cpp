@@ -19,7 +19,8 @@ template <typename Float = double, int DEPS = 30, bool Randomize = true> struct 
     int i_ch, j_ch;
 
 private:
-    void _initialize(const std::vector<std::vector<Float>> &A, const std::vector<Float> &b, const std::vector<Float> &c) {
+    void _initialize(const std::vector<std::vector<Float>> &A, const std::vector<Float> &b,
+                     const std::vector<Float> &c) {
         N = c.size(), M = A.size();
 
         mat.assign(M + 2, std::vector<Float>(N + 2));
@@ -60,7 +61,8 @@ private:
             j_ch = -1;
             for (int j = 0; j < N + 1; j++) {
                 if (j_ch < 0 or idx[j_ch] > idx[j]) {
-                    if (mat[M + 1][j] > EPS or (abs_(mat[M + 1][j]) < EPS and mat[M][j] > EPS)) j_ch = j;
+                    if (mat[M + 1][j] > EPS or (abs_(mat[M + 1][j]) < EPS and mat[M][j] > EPS))
+                        j_ch = j;
                 }
             }
             if (j_ch < 0) break;
@@ -70,9 +72,12 @@ private:
                 if (mat[i][j_ch] < -EPS) {
                     if (i_ch < 0) {
                         i_ch = i;
-                    } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch] < -EPS) {
+                    } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch] <
+                               -EPS) {
                         i_ch = i;
-                    } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch] < EPS and idx[i_ch] > idx[i]) {
+                    } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch] <
+                                   EPS and
+                               idx[i_ch] > idx[i]) {
                         i_ch = i;
                     }
                 }
@@ -130,4 +135,17 @@ public:
     bool infeasible;
     std::vector<Float> x;
     Float ans;
+
+    static void
+    dual(std::vector<std::vector<Float>> &A, std::vector<Float> &b, std::vector<Float> &c) {
+        const int n = b.size(), m = c.size();
+        std::vector<std::vector<Float>> At(m, std::vector<Float>(n));
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) At[j][i] = -A[i][j];
+        }
+        A = At;
+        for (int i = 0; i < n; ++i) b[i] = -b[i];
+        for (int j = 0; j < m; ++j) c[j] = -c[j];
+        b.swap(c);
+    }
 };

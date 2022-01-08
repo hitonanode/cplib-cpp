@@ -7,7 +7,8 @@
 // Solve ax^2 + bx + c = 0.
 // retval: (# of solutions (-1 == inf.), solutions(ascending order))
 // Verify: <https://yukicoder.me/problems/no/955> <https://atcoder.jp/contests/tricky/tasks/tricky_2>
-template <typename Float> std::pair<int, std::vector<Float>> quadratic_solver(Float A, Float B, Float C) {
+template <typename Float>
+std::pair<int, std::vector<Float>> quadratic_solver(Float A, Float B, Float C) {
     if (B < 0) A = -A, B = -B, C = -C;
     if (A == 0) {
         if (B == 0) {

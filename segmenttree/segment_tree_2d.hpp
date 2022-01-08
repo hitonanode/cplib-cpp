@@ -10,7 +10,8 @@
 //   - data2ret: [TDATA, TQUERY] -> TRET, f(defaultDATA, q) == defaultRET
 //   - merge_ret: [TRET, TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)
 //   - commutability f(e(x, y), q) == g(f(x, q), f(y, q))
-template <typename TDATA, typename TRET, typename TQUERY, typename E, typename F, typename G> struct SegmentTree2D {
+template <typename TDATA, typename TRET, typename TQUERY, typename E, typename F, typename G>
+struct SegmentTree2D {
     int H, W;
     int hhead, whead;
     TDATA defaultDATA;
@@ -38,7 +39,11 @@ template <typename TDATA, typename TRET, typename TQUERY, typename E, typename F
         else
             at(h, w) = defaultDATA;
     }
-    SegmentTree2D(const std::vector<std::vector<TDATA>> &mat, TDATA defaultDATA, E merge_data, F data2ret, G merge_ret) : H(mat.size()), W(mat[0].size()), defaultDATA(defaultDATA), defaultRET(data2ret(defaultDATA, TQUERY(0))), merge_data(merge_data), data2ret(data2ret), merge_ret(merge_ret) {
+    SegmentTree2D(const std::vector<std::vector<TDATA>> &mat, TDATA defaultDATA, E merge_data,
+                  F data2ret, G merge_ret)
+        : H(mat.size()), W(mat[0].size()), defaultDATA(defaultDATA),
+          defaultRET(data2ret(defaultDATA, TQUERY(0))), merge_data(merge_data), data2ret(data2ret),
+          merge_ret(merge_ret) {
         int Htmp = 1, Wtmp = 1;
         while (Htmp < H) Htmp <<= 1;
         while (Wtmp < W) Wtmp <<= 1;
@@ -73,15 +78,19 @@ template <typename TDATA, typename TRET, typename TQUERY, typename E, typename F
     TRET _get_h(int hl, int hr, int wl, int wr, int lo, int hi, int id_, TQUERY q) {
         if (hr <= lo or hi <= hl) return defaultRET;
         if (hl <= lo and hi <= hr) return _get_w(wl, wr, 0, whead + 1, id_, 0, q);
-        return merge_ret(_get_h(hl, hr, wl, wr, lo, (lo + hi) / 2, 2 * id_ + 1, q), _get_h(hl, hr, wl, wr, (lo + hi) / 2, hi, 2 * id_ + 2, q));
+        return merge_ret(_get_h(hl, hr, wl, wr, lo, (lo + hi) / 2, 2 * id_ + 1, q),
+                         _get_h(hl, hr, wl, wr, (lo + hi) / 2, hi, 2 * id_ + 2, q));
     }
     TRET _get_w(int wl, int wr, int lo, int hi, int id_h, int id_w, TQUERY q) {
         if (wr <= lo or hi <= wl) return defaultRET;
         if (wl <= lo and hi <= wr) return data2ret(at(id_h, id_w), q);
-        return merge_ret(_get_w(wl, wr, lo, (lo + hi) / 2, id_h, 2 * id_w + 1, q), _get_w(wl, wr, (lo + hi) / 2, hi, id_h, 2 * id_w + 2, q));
+        return merge_ret(_get_w(wl, wr, lo, (lo + hi) / 2, id_h, 2 * id_w + 1, q),
+                         _get_w(wl, wr, (lo + hi) / 2, hi, id_h, 2 * id_w + 2, q));
     }
     // [hl, hr) * [wl, wr)
-    TRET get(int hl, int hr, int wl, int wr, TQUERY q) { return _get_h(hl, hr, wl, wr, 0, hhead + 1, 0, q); }
+    TRET get(int hl, int hr, int wl, int wr, TQUERY q) {
+        return _get_h(hl, hr, wl, wr, 0, hhead + 1, 0, q);
+    }
     friend std::ostream &operator<<(std::ostream &os, SegmentTree2D s) {
         os << "[SegmentTree" << s.H << "*" << s.W << "\n";
         for (int h = 0; h < s.H; h++) {

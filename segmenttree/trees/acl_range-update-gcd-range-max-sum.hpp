@@ -14,7 +14,8 @@ struct S {
     bool fail;
     bool all_same;
     S() : max(0), lcm(1), sz(1), sum(0), fail(0), all_same(0) {}
-    S(uint32_t x, uint32_t sz_ = 1) : max(x), lcm(x), sz(sz_), sum((uint64_t)x * sz_), fail(0), all_same(1) {}
+    S(uint32_t x, uint32_t sz_ = 1)
+        : max(x), lcm(x), sz(sz_), sum((uint64_t)x * sz_), fail(0), all_same(1) {}
 };
 
 S e() { return S(); }
@@ -25,7 +26,9 @@ S op(S l, S r) {
     S ret;
     ret.max = std::max(l.max, r.max);
     ret.sum = l.sum + r.sum;
-    ret.lcm = (l.lcm >= BINF or r.lcm >= BINF) ? BINF : std::min<uint64_t>(BINF, (uint64_t)l.lcm * r.lcm / std::__gcd(l.lcm, r.lcm));
+    ret.lcm = (l.lcm >= BINF or r.lcm >= BINF)
+                  ? BINF
+                  : std::min<uint64_t>(BINF, (uint64_t)l.lcm * r.lcm / std::__gcd(l.lcm, r.lcm));
     ret.sz = l.sz + r.sz;
     if (l.all_same and r.all_same and l.max == r.max) ret.all_same = true;
     return ret;
@@ -39,7 +42,9 @@ struct F {
     static F update(uint32_t a) noexcept { return F(0, a); }
 };
 
-F composition(F fnew, F fold) { return fnew.reset ? fnew : F(std::__gcd(fnew.dogcd, fold.dogcd), fold.reset); }
+F composition(F fnew, F fold) {
+    return fnew.reset ? fnew : F(std::__gcd(fnew.dogcd, fold.dogcd), fold.reset);
+}
 
 F id() { return F(); }
 

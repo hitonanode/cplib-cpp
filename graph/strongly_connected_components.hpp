@@ -78,8 +78,8 @@ struct DirectedGraphSCC {
         return _ret_cycle;
     }
 
-    // After calling `FindStronglyConnectedComponents()`, generate a new graph by uniting all vertices
-    // belonging to the same component(The resultant graph is DAG).
+    // After calling `FindStronglyConnectedComponents()`, generate a new graph by uniting all
+    // vertices belonging to the same component(The resultant graph is DAG).
     DirectedGraphSCC GenerateTopologicalGraph() {
         DirectedGraphSCC newgraph(scc_num);
         for (int s = 0; s < V; s++)
@@ -98,7 +98,8 @@ struct DirectedGraphSCC {
 struct SATSolver : DirectedGraphSCC {
     int nb_sat_vars;
     std::vector<int> solution;
-    SATSolver(int nb_variables = 0) : DirectedGraphSCC(nb_variables * 2), nb_sat_vars(nb_variables), solution(nb_sat_vars) {}
+    SATSolver(int nb_variables = 0)
+        : DirectedGraphSCC(nb_variables * 2), nb_sat_vars(nb_variables), solution(nb_sat_vars) {}
     void add_x_or_y_constraint(bool is_x_true, int x, bool is_y_true, int y) {
         assert(x >= 0 and x < nb_sat_vars);
         assert(y >= 0 and y < nb_sat_vars);

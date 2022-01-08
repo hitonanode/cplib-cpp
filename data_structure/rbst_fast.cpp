@@ -46,16 +46,18 @@ template <uint32_t len> struct RandomizedBinarySearchTree {
     struct Node {
         Node *l, *r;
         uint32_t sz; // 自身を頂点とする部分木のサイズ
-        VAL val;     // 自身がrootの部分木を記述, dval==Idvalのときのみ単独で意味を持つ
-        DVAL dval;   // 自身とその部分木に対する遅延評価
+        VAL val; // 自身がrootの部分木を記述, dval==Idvalのときのみ単独で意味を持つ
+        DVAL dval; // 自身とその部分木に対する遅延評価
         Node(const VAL &v, const DVAL &dv) : l(nullptr), r(nullptr), sz(1), val(v), dval(dv) {}
         Node() {}
     };
-    inline Node *_revise_val(Node *t) // （tの子に関する外的操作後に呼んで）szとvalを適切に直す tの子の遅延評価が済んでいるとは限らない
+    inline Node *_revise_val(Node *t) // （tの子に関する外的操作後に呼んで）szとvalを適切に直す
+                                      // tの子の遅延評価が済んでいるとは限らない
     {
         if (t) {
             t->sz = size(t->l) + size(t->r) + 1;
-            t->val.sum = t->val.val + (t->l ? t->l->val.sum + t->l->sz * t->l->dval : 0) + (t->r ? t->r->val.sum + t->r->sz * t->r->dval : 0);
+            t->val.sum = t->val.val + (t->l ? t->l->val.sum + t->l->sz * t->l->dval : 0) +
+                         (t->r ? t->r->val.sum + t->r->sz * t->r->dval : 0);
         };
         return t;
     }
@@ -175,7 +177,8 @@ template <uint32_t len> struct RandomizedBinarySearchTree {
     // 普通のlower_bound
     int lower_bound(Node *root, const VAL &v) {
         if (root == nullptr) return 0;
-        return (v <= root->val) ? lower_bound(root->l, v) : lower_bound(root->r, v) + size(root->l) + 1;
+        return (v <= root->val) ? lower_bound(root->l, v)
+                                : lower_bound(root->r, v) + size(root->l) + 1;
     }
 
     // データを壊して新規にinitの内容を詰める

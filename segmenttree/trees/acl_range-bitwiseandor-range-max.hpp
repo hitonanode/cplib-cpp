@@ -34,7 +34,9 @@ struct F {
     static F b_or(UINT a) noexcept { return {mask, a}; }
 };
 
-F composition(F fnew, F fold) { return F{fnew.bit_and & fold.bit_and, fnew.bit_or | (fnew.bit_and & fold.bit_or)}; }
+F composition(F fnew, F fold) {
+    return F{fnew.bit_and & fold.bit_and, fnew.bit_or | (fnew.bit_and & fold.bit_or)};
+}
 
 F id() { return F(); }
 

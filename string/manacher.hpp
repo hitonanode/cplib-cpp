@@ -18,7 +18,8 @@ template <typename T> std::vector<int> manacher(const std::vector<T> &S) {
         while (i - j >= 0 and i + j < int(S.size()) and S[i - j] == S[i + j]) j++;
         res[i] = j;
         int k = 1;
-        while (i - k >= 0 and i + k < int(S.size()) and k + res[i - k] < j) res[i + k] = res[i - k], k++;
+        while (i - k >= 0 and i + k < int(S.size()) and k + res[i - k] < j)
+            res[i + k] = res[i - k], k++;
         i += k, j -= k;
     }
     return res;
@@ -29,7 +30,8 @@ std::vector<int> manacher(const std::string &S) {
     return manacher(v);
 }
 
-template <typename T> std::vector<std::pair<int, int>> enumerate_palindromes(const std::vector<T> &vec) {
+template <typename T>
+std::vector<std::pair<int, int>> enumerate_palindromes(const std::vector<T> &vec) {
     std::vector<T> v;
     const int N = vec.size();
     for (int i = 0; i < N - 1; i++) {

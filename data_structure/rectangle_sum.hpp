@@ -17,7 +17,9 @@ template <typename Int, typename Weight> struct RectangleSum {
     std::vector<Rectangle> queries;
     std::vector<std::tuple<Int, Int, Weight>> points;
 
-    void add_point(Int x, Int y, Weight weight) noexcept { points.push_back({x + 1, y + 1, weight}); }
+    void add_point(Int x, Int y, Weight weight) noexcept {
+        points.push_back({x + 1, y + 1, weight});
+    }
     void add_query(Int L, Int R, Int D, Int U) noexcept { queries.push_back({L, R, D, U}); }
 
     std::vector<Weight> solve() const {

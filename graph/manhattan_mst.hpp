@@ -14,7 +14,8 @@
 // [1] H. Zhou, N. Shenoy, W. Nicholls,
 //     "Efficient minimum spanning tree construction without Delaunay triangulation,"
 //     Information Processing Letters, 81(5), 271-276, 2002.
-template <typename T> std::vector<std::tuple<T, int, int>> manhattan_mst(std::vector<T> xs, std::vector<T> ys) {
+template <typename T>
+std::vector<std::tuple<T, int, int>> manhattan_mst(std::vector<T> xs, std::vector<T> ys) {
     const int n = xs.size();
     std::vector<int> idx(n);
     std::iota(idx.begin(), idx.end(), 0);

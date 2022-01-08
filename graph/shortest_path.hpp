@@ -11,7 +11,8 @@
 #include <vector>
 
 // CUT begin
-template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath {
+template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1>
+struct ShortestPath {
     int V, E;
     bool single_positive_weight;
     T wmin, wmax;
@@ -33,7 +34,8 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
 
     // Dijkstra algorithm
     // Complexity: O(E log E)
-    using Pque = std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;
+    using Pque = std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>,
+                                     std::greater<std::pair<T, int>>>;
     template <class Heap = Pque> void Dijkstra(int s) {
         assert(0 <= s and s < V);
         dist.assign(V, INF);
@@ -240,7 +242,8 @@ template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -
         std::ofstream ss(filename + ".DOT");
         ss << "digraph{\n";
         for (int i = 0; i < V; i++) {
-            for (const auto &e : to[i]) ss << i << "->" << e.first << "[label=" << e.second << "];\n";
+            for (const auto &e : to[i])
+                ss << i << "->" << e.first << "[label=" << e.second << "];\n";
         }
         ss << "}\n";
         ss.close();

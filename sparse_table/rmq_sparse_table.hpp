@@ -13,7 +13,8 @@ template <typename T> struct StaticRMQ {
     std::vector<std::vector<T>> data;
     std::vector<int> lgx_table;
     StaticRMQ() = default;
-    StaticRMQ(const std::vector<T> &sequence, T defaultT) : N(sequence.size()), defaultT(defaultT) {
+    StaticRMQ(const std::vector<T> &sequence, T defaultT)
+        : N(sequence.size()), defaultT(defaultT) {
         lgx_table.resize(N + 1);
         for (int i = 2; i < N + 1; i++) lgx_table[i] = lgx_table[i >> 1] + 1;
         lgN = lgx_table[N] + 1;

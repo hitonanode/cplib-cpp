@@ -82,12 +82,16 @@ public:
     }
     bool operator==(const ModIntRuntime &x) const { return val == x.val; }
     bool operator!=(const ModIntRuntime &x) const { return val != x.val; }
-    bool operator<(const ModIntRuntime &x) const { return val < x.val; } // To use std::map<ModIntRuntime, T>
+    bool operator<(const ModIntRuntime &x) const {
+        return val < x.val;
+    } // To use std::map<ModIntRuntime, T>
     friend std::istream &operator>>(std::istream &is, ModIntRuntime &x) {
         lint t;
         return is >> t, x = ModIntRuntime(t), is;
     }
-    friend std::ostream &operator<<(std::ostream &os, const ModIntRuntime &x) { return os << x.val; }
+    friend std::ostream &operator<<(std::ostream &os, const ModIntRuntime &x) {
+        return os << x.val;
+    }
 
     lint power(lint n) const {
         lint ans = 1, tmp = this->val;
@@ -113,8 +117,9 @@ public:
 
     ModIntRuntime doublefac() const {
         lint k = (this->val + 1) / 2;
-        return (this->val & 1) ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k) * ModIntRuntime(k).fac())
-                               : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);
+        return (this->val & 1)
+                   ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k) * ModIntRuntime(k).fac())
+                   : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);
     }
 
     ModIntRuntime nCr(const ModIntRuntime &r) const {

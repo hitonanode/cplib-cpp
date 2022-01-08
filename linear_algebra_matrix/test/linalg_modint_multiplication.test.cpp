@@ -30,7 +30,8 @@ int main() {
 
     for (int i = 0; i < N; i++) {
         for (int l = 0; l < L; l++) {
-            cout << linear_congruence<long long>({1, 1}, {Cfixed[i][l].val, Cruntime[i][l].val}, {MODfixed, MODruntime})
+            cout << linear_congruence<long long>(
+                        {1, 1}, {Cfixed[i][l].val, Cruntime[i][l].val}, {MODfixed, MODruntime})
                         .first;
             cout << (l == L - 1 ? "\n" : " ");
         }

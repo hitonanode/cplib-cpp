@@ -17,8 +17,8 @@ template <typename TDATA, typename TLAZY, typename TRET, typename TQUERY> struct
     // Assumptions: `lazy[pos] = lazy[l] = lazy[r] = zero_lazy`
     virtual void merge_data(int pos) = 0;
 
-    // Here, you must propagate lazy[pos] and update data[pos] by reflecting lazy[pos], without inconsistency
-    // After this, lazy[pos] must be zero_lazy.
+    // Here, you must propagate lazy[pos] and update data[pos] by reflecting lazy[pos], without
+    // inconsistency After this, lazy[pos] must be zero_lazy.
     virtual void reflect_lazy(int pos) = 0;
 
     // operate d to lazy[pos] (merge two TLAZY's)
@@ -31,7 +31,8 @@ template <typename TDATA, typename TLAZY, typename TRET, typename TQUERY> struct
 
     ////// general description //////
     LazySegmentTree() = default;
-    void initialize(const std::vector<TDATA> &data_init, const TDATA &zero_data, const TLAZY &zero_lazy_, const TRET &zero_ret_) {
+    void initialize(const std::vector<TDATA> &data_init, const TDATA &zero_data,
+                    const TLAZY &zero_lazy_, const TRET &zero_ret_) {
         N = data_init.size();
         head = 1;
         while (head < N) head <<= 1;
@@ -60,7 +61,8 @@ template <typename TDATA, typename TLAZY, typename TRET, typename TQUERY> struct
 
     void update(int begin, int end, const TLAZY &delay) { _update(begin, end, delay, 1, 0, head); }
 
-    TRET _get(int begin, int end, int pos, int l, int r, const TQUERY &query) // Get value in [begin, end)
+    TRET _get(int begin, int end, int pos, int l, int r,
+              const TQUERY &query) // Get value in [begin, end)
     {
         reflect_lazy(pos);
         if (begin <= l and r <= end)
@@ -72,19 +74,26 @@ template <typename TDATA, typename TLAZY, typename TRET, typename TQUERY> struct
         } else
             return zero_ret;
     }
-    TRET get(int begin, int end, const TQUERY &query = NULL) { return _get(begin, end, 1, 0, head, query); }
+    TRET get(int begin, int end, const TQUERY &query = NULL) {
+        return _get(begin, end, 1, 0, head, query);
+    }
 };
 
 // Range Update & Range Sum
 // - get(l, r): return x_l + ... + x_{r - 1}
 // - update(l, r, val): x_l, ..., x_{r - 1} <- val
-template <typename T> struct RangeUpdateRangeSum : public LazySegmentTree<std::pair<T, size_t>, std::pair<T, bool>, T, std::tuple<>> {
+template <typename T>
+struct RangeUpdateRangeSum
+    : public LazySegmentTree<std::pair<T, size_t>, std::pair<T, bool>, T, std::tuple<>> {
     using TDATA = std::pair<T, size_t>;
     using TLAZY = std::pair<T, bool>;
     using SegTree = LazySegmentTree<TDATA, TLAZY, T, std::tuple<>>;
     using SegTree::data;
     using SegTree::lazy;
-    void merge_data(int i) override { data[i] = std::make_pair(data[i * 2].first + data[i * 2 + 1].first, data[i * 2].second + data[i * 2 + 1].second); };
+    void merge_data(int i) override {
+        data[i] = std::make_pair(data[i * 2].first + data[i * 2 + 1].first,
+                                 data[i * 2].second + data[i * 2 + 1].second);
+    };
     void reflect_lazy(int i) override {
         if (lazy[i].second) {
             if (i < SegTree::head) overlap_lazy(i * 2, lazy[i]), overlap_lazy(i * 2 + 1, lazy[i]);

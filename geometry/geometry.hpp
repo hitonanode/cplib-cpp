@@ -72,7 +72,8 @@ template <> long double Point2d<long double>::EPS = 1e-12;
 template <> long long Point2d<long long>::EPS = 0;
 
 template <typename T_P>
-int ccw(const Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) { // a->b->cの曲がり方
+int ccw(const Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) {
+    // a->b->cの曲がり方
     Point2d<T_P> v1 = b - a;
     Point2d<T_P> v2 = c - a;
     if (v1.det(v2) > Point2d<T_P>::EPS) return 1;   // 左折

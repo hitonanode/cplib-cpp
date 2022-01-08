@@ -20,13 +20,15 @@ struct HeavyLightDecomposition {
     std::vector<int> subtree_sz;  // subtree_sz[i] = size of subtree whose root is i
     std::vector<int> heavy_child; // heavy_child[i] = child of vertex i on heavy path (Default: -1)
     std::vector<int> tree_id;     // tree_id[i] = id of tree vertex i belongs to
-    std::vector<int> aligned_id, aligned_id_inv; // aligned_id[i] =  aligned id for vertex i (consecutive on heavy edges)
-    std::vector<int> head;          // head[i] = id of vertex on heavy path of vertex i, nearest to root
+    std::vector<int> aligned_id,
+        aligned_id_inv;    // aligned_id[i] =  aligned id for vertex i (consecutive on heavy edges)
+    std::vector<int> head; // head[i] = id of vertex on heavy path of vertex i, nearest to root
     std::vector<int> head_ids;      // consist of head vertex id's
     std::vector<int> heavy_path_id; // heavy_path_id[i] = heavy_path_id for vertex [i]
 
     HeavyLightDecomposition(int sz = 0)
-        : V(sz), k(0), nb_heavy_path(0), e(sz), par(sz), depth(sz), subtree_sz(sz), heavy_child(sz), tree_id(sz, -1), aligned_id(sz), aligned_id_inv(sz), head(sz), heavy_path_id(sz, -1) {}
+        : V(sz), k(0), nb_heavy_path(0), e(sz), par(sz), depth(sz), subtree_sz(sz), heavy_child(sz),
+          tree_id(sz, -1), aligned_id(sz), aligned_id_inv(sz), head(sz), heavy_path_id(sz, -1) {}
     void add_edge(int u, int v) {
         e[u].emplace_back(v);
         e[v].emplace_back(u);
@@ -39,7 +41,7 @@ struct HeavyLightDecomposition {
         st.emplace(root, 0);
         while (!st.empty()) {
             int now = st.top().first;
-            int& i = st.top().second;
+            int &i = st.top().second;
             if (i < (int)e[now].size()) {
                 int nxt = e[now][i++];
                 if (nxt == par[now]) continue;
@@ -54,7 +56,8 @@ struct HeavyLightDecomposition {
                 for (auto nxt : e[now]) {
                     if (nxt == par[now]) continue;
                     subtree_sz[now] += subtree_sz[nxt];
-                    if (max_sub_sz < subtree_sz[nxt]) max_sub_sz = subtree_sz[nxt], heavy_child[now] = nxt;
+                    if (max_sub_sz < subtree_sz[nxt])
+                        max_sub_sz = subtree_sz[nxt], heavy_child[now] = nxt;
                 }
             }
         }
@@ -87,7 +90,8 @@ struct HeavyLightDecomposition {
         }
     }
 
-    template <typename Monoid> std::vector<Monoid> segtree_rearrange(const std::vector<Monoid>& data) const {
+    template <typename Monoid>
+    std::vector<Monoid> segtree_rearrange(const std::vector<Monoid> &data) const {
         assert(int(data.size()) == V);
         std::vector<Monoid> ret;
         ret.reserve(V);
@@ -96,7 +100,8 @@ struct HeavyLightDecomposition {
     }
 
     // query for vertices on path [u, v] (INCLUSIVE)
-    void for_each_vertex(int u, int v, const std::function<void(int ancestor, int descendant)>& f) const {
+    void
+    for_each_vertex(int u, int v, const std::function<void(int ancestor, int descendant)> &f) const {
         while (true) {
             if (aligned_id[u] > aligned_id[v]) std::swap(u, v);
             f(std::max(aligned_id[head[v]], aligned_id[u]), aligned_id[v]);
@@ -105,7 +110,9 @@ struct HeavyLightDecomposition {
         }
     }
 
-    void for_each_vertex_noncommutative(int from, int to, const std::function<void(int ancestor, int descendant)>& fup, const std::function<void(int ancestor, int descendant)>& fdown) const {
+    void for_each_vertex_noncommutative(
+        int from, int to, const std::function<void(int ancestor, int descendant)> &fup,
+        const std::function<void(int ancestor, int descendant)> &fdown) const {
         int u = from, v = to;
         const int lca = lowest_common_ancestor(u, v), dlca = depth[lca];
         while (u >= 0 and depth[u] > dlca) {
@@ -118,11 +125,11 @@ struct HeavyLightDecomposition {
             lrs.emplace_back(p, v), v = par[p];
         }
         std::reverse(lrs.begin(), lrs.end());
-        for (const auto& lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);
+        for (const auto &lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);
     }
 
     // query for edges on path [u, v]
-    void for_each_edge(int u, int v, const std::function<void(int, int)>& f) const {
+    void for_each_edge(int u, int v, const std::function<void(int, int)> &f) const {
         while (true) {
             if (aligned_id[u] > aligned_id[v]) std::swap(u, v);
             if (head[u] != head[v]) {

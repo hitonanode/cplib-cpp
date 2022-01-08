@@ -14,7 +14,8 @@ class rangetree_bit {
         std::vector<S> data;
         BIT(int len) : data(len, e()) {}
         void add(int pos, S v) {
-            for (pos++; pos and pos <= int(data.size()); pos += pos & -pos) opadd(data[pos - 1], v);
+            for (pos++; pos and pos <= int(data.size()); pos += pos & -pos)
+                opadd(data[pos - 1], v);
         }
         S sum(int r) const {
             S ret = e();
@@ -26,19 +27,23 @@ class rangetree_bit {
     std::vector<std::vector<Coordinate>> _range2ys;
     std::vector<BIT> bits;
     void _add_singlenode(int v, Coordinate y, S val) {
-        auto i = std::distance(_range2ys[v].begin(), std::lower_bound(_range2ys[v].begin(), _range2ys[v].end(), y));
+        auto i = std::distance(
+            _range2ys[v].begin(), std::lower_bound(_range2ys[v].begin(), _range2ys[v].end(), y));
         bits[v].add(i, val);
     }
     S _get_singlenode(int v, Coordinate y) const {
-        auto i = std::distance(_range2ys[v].begin(), std::lower_bound(_range2ys[v].begin(), _range2ys[v].end(), y));
+        auto i = std::distance(
+            _range2ys[v].begin(), std::lower_bound(_range2ys[v].begin(), _range2ys[v].end(), y));
         return bits[v].sum(i);
     }
     S _sum(Coordinate xl, Coordinate xr, Coordinate yr) const { // [xl, xr) * (-INF, yr)
         auto compx = [](std::pair<Coordinate, Coordinate> l, std::pair<Coordinate, Coordinate> r) {
             return l.first < r.first;
         };
-        int l = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(xl, yr), compx));
-        int r = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(xr, yr), compx));
+        int l = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(),
+                                                                 std::make_pair(xl, yr), compx));
+        int r = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(),
+                                                                 std::make_pair(xr, yr), compx));
         S ret = e();
         while (l < r) {
             if (l & 1) opadd(ret, _get_singlenode(l++, yr));
@@ -61,13 +66,16 @@ public:
         for (int i = n - 1; i > 0; i--) {
             auto &lch = _range2ys[i * 2];
             auto &rch = _range2ys[i * 2 + 1];
-            std::merge(lch.begin(), lch.end(), rch.begin(), rch.end(), std::back_inserter(_range2ys[i]));
-            _range2ys[i].erase(std::unique(_range2ys[i].begin(), _range2ys[i].end()), _range2ys[i].end());
+            std::merge(
+                lch.begin(), lch.end(), rch.begin(), rch.end(), std::back_inserter(_range2ys[i]));
+            _range2ys[i].erase(
+                std::unique(_range2ys[i].begin(), _range2ys[i].end()), _range2ys[i].end());
         }
         for (const auto &v : _range2ys) bits.push_back(BIT(v.size()));
     }
     void add(Coordinate x, Coordinate y, S val) {
-        int i = std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(x, y)));
+        int i = std::distance(
+            _pts.begin(), std::lower_bound(_pts.begin(), _pts.end(), std::make_pair(x, y)));
         assert(i < n and _pts[i] == std::make_pair(x, y));
         for (i += n; i; i >>= 1) _add_singlenode(i, y, val);
     }

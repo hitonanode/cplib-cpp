@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <iostream>
 
-template <typename TC> std::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost) {
+template <typename TC>
+std::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost) {
     int N = cost.size();
     MinCostFlow<int, TC> mcf(N * 2 + 2);
     int S = N * 2, T = N * 2 + 1;

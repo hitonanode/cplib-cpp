@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/multipoint_evaluation"
+#include "../multipoint_evaluation.hpp"
 #include "../../modint.hpp"
 #include "../formal_power_series.hpp"
-#include "../multipoint_evaluation.hpp"
 #include <iostream>
 using namespace std;
 

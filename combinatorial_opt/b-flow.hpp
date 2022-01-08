@@ -69,7 +69,8 @@ template <typename CAP, typename COST> struct B_Flow {
             if (b[i] > 0) {
                 mf.add_edge(N, i, b[i]), mcf.add_edge(N, i, b[i], 0), bsum += b[i];
             } else {
-                mf.add_edge(i, N + 1, -b[i]), mcf.add_edge(i, N + 1, -b[i], 0), bsum_negative -= b[i];
+                mf.add_edge(i, N + 1, -b[i]), mcf.add_edge(i, N + 1, -b[i], 0),
+                    bsum_negative -= b[i];
             }
         }
         if (bsum != bsum_negative or mf.flow(N, N + 1) < bsum) return std::make_pair(false, 0);

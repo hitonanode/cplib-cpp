@@ -40,7 +40,8 @@ struct Cubic {
 // https://yukicoder.me/problems/no/1495
 // return: (y, [[(x_i, # of such x_i), ... ], ...])
 template <typename F, typename Int, Int INF>
-std::pair<Int, std::vector<std::vector<std::pair<Int, Int>>>> MinConvexSumUnderLinearConstraint(const std::vector<Int> &k, const std::vector<F> &f, Int C) {
+std::pair<Int, std::vector<std::vector<std::pair<Int, Int>>>>
+MinConvexSumUnderLinearConstraint(const std::vector<Int> &k, const std::vector<F> &f, Int C) {
     assert(k.size() == f.size());
     assert(k.size() > 0);
     Int lbsum = 0, ubsum = 0;

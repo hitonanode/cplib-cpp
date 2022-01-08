@@ -1,5 +1,5 @@
-#include "../../modint.hpp"
 #include "../linear_recurrence.hpp"
+#include "../../modint.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
 #include <iostream>
 using namespace std;

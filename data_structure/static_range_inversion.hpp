@@ -19,9 +19,11 @@ template <typename T> struct StaticRangeInversion {
     std::vector<int> sufG, preH;
     std::vector<std::vector<long long>> R;
 
-    StaticRangeInversion(const std::vector<T> &sequence) : N(sequence.size()), bs(ceil(sqrt(std::max(N, 1)))), nb_bc((N + bs - 1) / bs) {
+    StaticRangeInversion(const std::vector<T> &sequence)
+        : N(sequence.size()), bs(ceil(sqrt(std::max(N, 1)))), nb_bc((N + bs - 1) / bs) {
         std::vector<T> dict = sequence;
-        std::sort(dict.begin(), dict.end()), dict.erase(std::unique(dict.begin(), dict.end()), dict.end());
+        std::sort(dict.begin(), dict.end()),
+            dict.erase(std::unique(dict.begin(), dict.end()), dict.end());
         const int D = dict.size();
         vals.reserve(N), vals_sorted.reserve(N);
         for (auto x : sequence) {
@@ -39,23 +41,32 @@ template <typename T> struct StaticRangeInversion {
             for (int i = L; i < R; i++) { cnt[vals[i] + 1]++; }
             for (int i = 0; i < D; i++) { cnt[i + 1] += cnt[i]; }
             for (int b = 0; b < ibc; b++) {
-                for (int i = (b + 1) * bs - 1; i >= b * bs; i--) { presuf[ibc][i] = presuf[ibc][i + 1] + cnt[vals[i]]; }
+                for (int i = (b + 1) * bs - 1; i >= b * bs; i--) {
+                    presuf[ibc][i] = presuf[ibc][i + 1] + cnt[vals[i]];
+                }
             }
             for (int b = ibc + 1; b < bs; b++) {
-                for (int i = b * bs; i < std::min((b + 1) * bs, N); i++) { presuf[ibc][i] = (i == b * bs ? 0 : presuf[ibc][i - 1]) + cnt.back() - cnt[vals[i] + 1]; }
+                for (int i = b * bs; i < std::min((b + 1) * bs, N); i++) {
+                    presuf[ibc][i] =
+                        (i == b * bs ? 0 : presuf[ibc][i - 1]) + cnt.back() - cnt[vals[i] + 1];
+                }
             }
             for (int i = L + 1; i < R; i++) {
-                preH[i] = preH[i - 1] + std::count_if(vals.begin() + L, vals.begin() + i, [&](int x) { return x > vals[i]; });
+                preH[i] = preH[i - 1] + std::count_if(vals.begin() + L, vals.begin() + i,
+                                                      [&](int x) { return x > vals[i]; });
             }
             for (int i = R - 2; i >= L; i--) {
-                sufG[i] = sufG[i + 1] + std::count_if(vals.begin() + i + 1, vals.begin() + R, [&](int x) { return x < vals[i]; });
+                sufG[i] = sufG[i + 1] + std::count_if(vals.begin() + i + 1, vals.begin() + R,
+                                                      [&](int x) { return x < vals[i]; });
             }
         }
 
         R.resize(nb_bc, std::vector<long long>(nb_bc));
         for (int i = nb_bc - 1; i >= 0; i--) {
             R[i][i] = sufG[i * bs];
-            for (int j = i + 1; j < nb_bc; j++) { R[i][j] = R[i][j - 1] + R[i + 1][j] - R[i + 1][j - 1] + presuf[j][i * bs]; }
+            for (int j = i + 1; j < nb_bc; j++) {
+                R[i][j] = R[i][j - 1] + R[i + 1][j] - R[i + 1][j - 1] + presuf[j][i * bs];
+            }
         }
     }
     long long get(int l, int r) const {
@@ -84,7 +95,10 @@ template <typename T> struct StaticRangeInversion {
         int less_cnt = 0, j = (rb + 1) * bs;
         for (int p = std::max(0, (lb - 1) * bs), q = lb * bs; p < q; p++) {
             if (vals_sorted[p].second >= l) {
-                while (j < std::min(N, (rb + 2) * bs) and (vals_sorted[j].second >= r or vals_sorted[j].first < vals_sorted[p].first)) { less_cnt += (vals_sorted[j].second < r), j++; }
+                while (j < std::min(N, (rb + 2) * bs) and
+                       (vals_sorted[j].second >= r or vals_sorted[j].first < vals_sorted[p].first)) {
+                    less_cnt += (vals_sorted[j].second < r), j++;
+                }
                 ret += less_cnt;
             }
         }

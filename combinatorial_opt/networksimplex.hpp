@@ -9,7 +9,8 @@
 #include <vector>
 
 // CUT begin
-// This program is the modificatiosn of the [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)
+// This program is the modificatiosn of the
+// [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)
 //
 /* -*- mode: C++; indent-tabs-mode: nil; -*-
  *
@@ -183,7 +184,8 @@ private:
     public:
         // Constructor
         FirstEligiblePivotRule(NetworkSimplex &ns)
-            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state), _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0) {}
+            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state),
+              _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0) {}
 
         // Find next entering arc
         bool findEnteringArc() {
@@ -224,7 +226,8 @@ private:
     public:
         // Constructor
         BestEligiblePivotRule(NetworkSimplex &ns)
-            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state), _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num) {}
+            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state),
+              _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num) {}
 
         // Find next entering arc
         bool findEnteringArc() {
@@ -260,12 +263,14 @@ private:
     public:
         // Constructor
         BlockSearchPivotRule(NetworkSimplex &ns)
-            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state), _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0) {
+            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state),
+              _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0) {
             // The main parameters of the pivot rule
             const double BLOCK_SIZE_FACTOR = 1.0;
             const int MIN_BLOCK_SIZE = 10;
 
-            _block_size = std::max(int(BLOCK_SIZE_FACTOR * std::sqrt(double(_search_arc_num))), MIN_BLOCK_SIZE);
+            _block_size = std::max(
+                int(BLOCK_SIZE_FACTOR * std::sqrt(double(_search_arc_num))), MIN_BLOCK_SIZE);
         }
 
         // Find next entering arc
@@ -325,14 +330,16 @@ private:
     public:
         /// Constructor
         CandidateListPivotRule(NetworkSimplex &ns)
-            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state), _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0) {
+            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state),
+              _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0) {
             // The main parameters of the pivot rule
             const double LIST_LENGTH_FACTOR = 0.25;
             const int MIN_LIST_LENGTH = 10;
             const double MINOR_LIMIT_FACTOR = 0.1;
             const int MIN_MINOR_LIMIT = 3;
 
-            _list_length = std::max(int(LIST_LENGTH_FACTOR * std::sqrt(double(_search_arc_num))), MIN_LIST_LENGTH);
+            _list_length = std::max(
+                int(LIST_LENGTH_FACTOR * std::sqrt(double(_search_arc_num))), MIN_LIST_LENGTH);
             _minor_limit = std::max(int(MINOR_LIMIT_FACTOR * _list_length), MIN_MINOR_LIMIT);
             _curr_length = _minor_count = 0;
             _candidates.resize(_list_length);
@@ -428,14 +435,17 @@ private:
     public:
         // Constructor
         AlteringListPivotRule(NetworkSimplex &ns)
-            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state), _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0), _cand_cost(ns._search_arc_num), _sort_func(_cand_cost) {
+            : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state),
+              _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0),
+              _cand_cost(ns._search_arc_num), _sort_func(_cand_cost) {
             // The main parameters of the pivot rule
             const double BLOCK_SIZE_FACTOR = 1.0;
             const int MIN_BLOCK_SIZE = 10;
             const double HEAD_LENGTH_FACTOR = 0.01;
             const int MIN_HEAD_LENGTH = 3;
 
-            _block_size = std::max(int(BLOCK_SIZE_FACTOR * std::sqrt(double(_search_arc_num))), MIN_BLOCK_SIZE);
+            _block_size = std::max(
+                int(BLOCK_SIZE_FACTOR * std::sqrt(double(_search_arc_num))), MIN_BLOCK_SIZE);
             _head_length = std::max(int(HEAD_LENGTH_FACTOR * _block_size), MIN_HEAD_LENGTH);
             _candidates.resize(_head_length + _block_size);
             _curr_length = 0;
@@ -490,7 +500,8 @@ private:
 
             // Perform partial sort operation on the candidate list
             int new_length = std::min(_head_length + 1, _curr_length);
-            std::partial_sort(_candidates.begin(), _candidates.begin() + new_length, _candidates.begin() + _curr_length, _sort_func);
+            std::partial_sort(_candidates.begin(), _candidates.begin() + new_length,
+                              _candidates.begin() + _curr_length, _sort_func);
 
             // Select the entering arc and remove it from the list
             _in_arc = _candidates[0];
@@ -504,7 +515,9 @@ private:
 
 public:
     NetworkSimplex(const Digraph &graph)
-        : _graph(graph), MAX(std::numeric_limits<Value>::max()), INF(std::numeric_limits<Value>::has_infinity ? std::numeric_limits<Value>::infinity() : MAX) {
+        : _graph(graph), MAX(std::numeric_limits<Value>::max()),
+          INF(std::numeric_limits<Value>::has_infinity ? std::numeric_limits<Value>::infinity()
+                                                       : MAX) {
         // Check the number types
         static_assert(std::numeric_limits<Value>::is_signed, "Value must be signed");
         static_assert(std::numeric_limits<Cost>::is_signed, "Cost must be signed");
@@ -693,7 +706,8 @@ private:
         // Check the sum of supply values
         _sum_supply = 0;
         for (int i = 0; i != _node_num; ++i) { _sum_supply += _supply[i]; }
-        if (!((_stype == GEQ && _sum_supply <= 0) || (_stype == LEQ && _sum_supply >= 0))) return false;
+        if (!((_stype == GEQ && _sum_supply <= 0) || (_stype == LEQ && _sum_supply >= 0)))
+            return false;
 
         // Check lower and upper bounds
         // LEMON_DEBUG(checkBoundMaps(), "Upper bounds must be greater or equal to the lower bounds");
@@ -1018,7 +1032,8 @@ private:
                 stem = next_stem;
 
                 // Update last and after
-                last = _last_succ[stem] == _last_succ[par_stem] ? _rev_thread[par_stem] : _last_succ[stem];
+                last = _last_succ[stem] == _last_succ[par_stem] ? _rev_thread[par_stem]
+                                                                : _last_succ[stem];
                 after = _thread[last];
             }
             _parent[u_out] = par_stem;
@@ -1161,7 +1176,8 @@ private:
         // Perform heuristic initial pivots
         for (int i = 0; i != int(arc_vector.size()); ++i) {
             in_arc = arc_vector[i];
-            if (_state[in_arc] * (_cost[in_arc] + _pi[_source[in_arc]] - _pi[_target[in_arc]]) >= 0) continue;
+            if (_state[in_arc] * (_cost[in_arc] + _pi[_source[in_arc]] - _pi[_target[in_arc]]) >= 0)
+                continue;
             findJoinNode();
             bool change = findLeavingArc();
             if (delta >= MAX) return false;
@@ -1296,7 +1312,7 @@ template <typename Capacity = long long, typename Weight = long long> struct mcf
     std::vector<Capacity> flow;
     std::vector<Capacity> potential;
 
-    template <typename RetVal = __int128> [[nodiscard]] RetVal solve() {
+    template <typename RetVal = __int128>[[nodiscard]] RetVal solve() {
         std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 
         std::vector<int> vid(n), eid(Edges.size());
@@ -1324,7 +1340,8 @@ template <typename Capacity = long long, typename Weight = long long> struct mcf
         }
 
         NetworkSimplex<Digraph, Capacity, Weight> ns(graph);
-        auto status = ns.supplyMap(supplies).costMap(weights).lowerMap(lowers).upperMap(uppers).run(decltype(ns)::BLOCK_SEARCH);
+        auto status = ns.supplyMap(supplies).costMap(weights).lowerMap(lowers).upperMap(uppers).run(
+            decltype(ns)::BLOCK_SEARCH);
 
         if (status == decltype(ns)::INFEASIBLE) {
             return infeasible = true, 0;

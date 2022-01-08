@@ -19,7 +19,9 @@ template <typename T, int LOG> struct persistent_array {
         T data;
         std::array<node *, 1 << LOG> child;
         node(const T &d) : data(d) { std::fill(child.begin(), child.end(), nullptr); }
-        node(const node &n) : data(n.data) { std::copy(n.child.begin(), n.child.end(), child.begin()); }
+        node(const node &n) : data(n.data) {
+            std::copy(n.child.begin(), n.child.end(), child.begin());
+        }
     };
     persistent_array(T zero) : zero(zero) {}
 

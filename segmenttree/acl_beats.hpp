@@ -2,7 +2,8 @@
 #include "acl_lazysegtree.hpp"
 
 // CUT begin
-template <class S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F, F), F (*id)()>
+template <class S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F, F),
+          F (*id)()>
 class segtree_beats : public atcoder::lazy_segtree<S, op, e, F, mapping, composition, id> {
     using Base = atcoder::lazy_segtree<S, op, e, F, mapping, composition, id>;
     using Base::lazy_segtree;
@@ -18,10 +19,12 @@ class segtree_beats : public atcoder::lazy_segtree<S, op, e, F, mapping, composi
 namespace RangeChMinMaxAddSum {
 #include <algorithm>
 
-template <typename Num> inline Num second_lowest(Num a, Num a2, Num c, Num c2) noexcept { // a < a2, c < c2
+template <typename Num>
+inline Num second_lowest(Num a, Num a2, Num c, Num c2) noexcept { // a < a2, c < c2
     return a == c ? std::min(a2, c2) : a2 <= c ? a2 : c2 <= a ? c2 : std::max(a, c);
 }
-template <typename Num> inline Num second_highest(Num a, Num a2, Num b, Num b2) noexcept { // a > a2, b > b2
+template <typename Num>
+inline Num second_highest(Num a, Num a2, Num b, Num b2) noexcept { // a > a2, b > b2
     return a == b ? std::max(a2, b2) : a2 >= b ? a2 : b2 >= a ? b2 : std::min(a, b);
 }
 
@@ -36,7 +39,8 @@ struct S {
     S(BNum x, unsigned sz_ = 1)
         : lo(x), hi(x), lo2(BINF), hi2(-BINF), sum(x * sz_), sz(sz_), nlo(sz_), nhi(sz_), fail(0) {}
     friend std::ostream &operator<<(std::ostream &os, const S s) {
-        return os << "[(" << s.lo << "x" << s.nlo << ", " << s.lo2 << ", " << s.hi2 << ", " << s.hi << "x" << s.nhi << "), sz=" << s.sz << ", sum=" << s.sum << "]";
+        return os << "[(" << s.lo << "x" << s.nlo << ", " << s.lo2 << ", " << s.hi2 << ", " << s.hi
+                  << "x" << s.nhi << "), sz=" << s.sz << ", sum=" << s.sum << "]";
     }
 };
 
@@ -46,7 +50,8 @@ S op(S l, S r) {
     if (r.lo > r.hi) return l;
     S ret;
     ret.lo = std::min(l.lo, r.lo), ret.hi = std::max(l.hi, r.hi);
-    ret.lo2 = second_lowest(l.lo, l.lo2, r.lo, r.lo2), ret.hi2 = second_highest(l.hi, l.hi2, r.hi, r.hi2);
+    ret.lo2 = second_lowest(l.lo, l.lo2, r.lo, r.lo2),
+    ret.hi2 = second_highest(l.hi, l.hi2, r.hi, r.hi2);
     ret.sum = l.sum + r.sum, ret.sz = l.sz + r.sz;
     ret.nlo = l.nlo * (l.lo <= r.lo) + r.nlo * (r.lo <= l.lo);
     ret.nhi = l.nhi * (l.hi >= r.hi) + r.nhi * (r.hi >= l.hi);

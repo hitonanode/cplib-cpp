@@ -16,11 +16,11 @@ template <class Uint> class radix_heap_array {
     };
     std::vector<smallpii> i2bj;
 
-    template <class U, typename std::enable_if<sizeof(U) == 4>::type* = nullptr>
+    template <class U, typename std::enable_if<sizeof(U) == 4>::type * = nullptr>
     static inline unsigned bucket(U x) noexcept {
         return x ? 32 - __builtin_clz(x) : 0;
     }
-    template <class U, typename std::enable_if<sizeof(U) == 8>::type* = nullptr>
+    template <class U, typename std::enable_if<sizeof(U) == 8>::type * = nullptr>
     static inline unsigned bucket(U x) noexcept {
         return x ? 64 - __builtin_clzll(x) : 0;
     }
@@ -69,7 +69,9 @@ public:
 
     void pop() { argmin_pop(); }
     std::pair<Uint, int> top() { return pull(), v[0].back(); }
-    [[deprecated("NOT usual emplace() opeation!")]] void emplace(Uint vnew, int i) { chmin(vnew, i); }
+    [[deprecated("NOT usual emplace() opeation!")]] void emplace(Uint vnew, int i) {
+        chmin(vnew, i);
+    }
 
     void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }
 };

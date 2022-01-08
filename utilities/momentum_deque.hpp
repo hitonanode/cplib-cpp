@@ -12,7 +12,9 @@ template <typename DTYPE_DEQUE> struct deque_momentum {
     deque_momentum() : m0(0), m1(0), m2(0) {}
 
     int size() const { return int(deq.size()); }
-    DTYPE_DEQUE front() const { return deq.front(); } // `front() const` => `&front()` makes faster, but unsafe.
+    DTYPE_DEQUE front() const {
+        return deq.front();
+    } // `front() const` => `&front()` makes faster, but unsafe.
     DTYPE_DEQUE back() const { return deq.back(); }
     void push_back(DTYPE_DEQUE x) noexcept {
         m0 += x;
