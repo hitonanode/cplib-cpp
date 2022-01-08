@@ -1,5 +1,6 @@
 #include "../simplex.hpp"
 #include <boost/multiprecision/cpp_dec_float.hpp>
+#include <boost/serialization/nvp.hpp> // https://github.com/boostorg/serialization/issues/186
 #include <iostream>
 #include <vector>
 #define PROBLEM "https://yukicoder.me/problems/no/1122"
