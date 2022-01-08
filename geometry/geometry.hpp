@@ -20,10 +20,19 @@ template <typename T_P> struct Point2d {
     std::complex<T_P> to_complex() const noexcept { return {x, y}; }
     Point2d operator+(const Point2d &p) const noexcept { return Point2d(x + p.x, y + p.y); }
     Point2d operator-(const Point2d &p) const noexcept { return Point2d(x - p.x, y - p.y); }
-    Point2d operator*(const Point2d &p) const noexcept { return Point2d(x * p.x - y * p.y, x * p.y + y * p.x); }
+    Point2d operator*(const Point2d &p) const noexcept {
+        static_assert(std::is_floating_point<T_P>::value == true);
+        return Point2d(x * p.x - y * p.y, x * p.y + y * p.x);
+    }
     Point2d operator*(T_P d) const noexcept { return Point2d(x * d, y * d); }
-    Point2d operator/(T_P d) const noexcept { return Point2d(x / d, y / d); }
-    Point2d inv() const { return conj() / norm2(); }
+    Point2d operator/(T_P d) const noexcept {
+        static_assert(std::is_floating_point<T_P>::value == true);
+        return Point2d(x / d, y / d);
+    }
+    Point2d inv() const {
+        static_assert(std::is_floating_point<T_P>::value == true);
+        return conj() / norm2();
+    }
     Point2d operator/(const Point2d &p) const { return (*this) * p.inv(); }
     bool operator<(const Point2d &r) const noexcept { return x != r.x ? x < r.x : y < r.y; }
     bool operator==(const Point2d &r) const noexcept { return x == r.x and y == r.y; }
@@ -31,24 +40,31 @@ template <typename T_P> struct Point2d {
     T_P dot(Point2d p) const noexcept { return x * p.x + y * p.y; }
     T_P det(Point2d p) const noexcept { return x * p.y - y * p.x; }
     T_P absdet(Point2d p) const noexcept { return std::abs(det(p)); }
-    T_P norm() const noexcept { return std::sqrt(x * x + y * y); }
+    T_P norm() const noexcept {
+        static_assert(std::is_floating_point<T_P>::value == true);
+        return std::sqrt(x * x + y * y);
+    }
     T_P norm2() const noexcept { return x * x + y * y; }
     T_P arg() const noexcept { return std::atan2(y, x); }
     // rotate point/vector by rad
     Point2d rotate(T_P rad) const noexcept {
+        static_assert(std::is_floating_point<T_P>::value == true);
         return Point2d(x * std::cos(rad) - y * std::sin(rad), x * std::sin(rad) + y * std::cos(rad));
     }
-    Point2d normalized() const { return (*this) / this->norm(); }
+    Point2d normalized() const {
+        static_assert(std::is_floating_point<T_P>::value == true);
+        return (*this) / this->norm();
+    }
     Point2d conj() const noexcept { return Point2d(x, -y); }
-    friend std::istream &operator>>(std::istream &is, Point2d &p) {
+
+    template <class IStream> friend IStream &operator>>(IStream &is, Point2d &p) {
         T_P x, y;
         is >> x >> y;
         p = Point2d(x, y);
         return is;
     }
-    friend std::ostream &operator<<(std::ostream &os, const Point2d &p) {
-        os << '(' << p.x << ',' << p.y << ')';
-        return os;
+    template <class OStream> friend OStream &operator<<(OStream &os, const Point2d &p) {
+        return os << '(' << p.x << ',' << p.y << ')';
     }
 };
 template <> double Point2d<double>::EPS = 1e-9;
@@ -93,8 +109,9 @@ std::vector<int> convex_hull(const std::vector<Point2d<T_P>> &ps, bool include_b
 }
 
 // Solve r1 + t1 * v1 == r2 + t2 * v2
-template <typename T_P>
+template <typename T_P, typename std::enable_if<std::is_floating_point<T_P>::value>::type * = nullptr>
 Point2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P> r2, Point2d<T_P> v2) {
+    static_assert(std::is_floating_point<T_P>::value == true);
     assert(v2.det(v1) != 0);
     return r1 + v1 * (v2.det(r2 - r1) / v2.det(v1));
 }
@@ -102,7 +119,8 @@ Point2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P> r2,
 // Whether two segments s1t1 & s2t2 intersect or not (endpoints not included)
 // Google Code Jam 2013 Round 3 - Rural Planning
 // Google Code Jam 2021 Round 3 - Fence Design
-template <typename T> bool intersect_open_segments(Point2d<T> s1, Point2d<T> t1, Point2d<T> s2, Point2d<T> t2) {
+template <typename T>
+bool intersect_open_segments(Point2d<T> s1, Point2d<T> t1, Point2d<T> s2, Point2d<T> t2) {
     if (s1 == t1 or s2 == t2) return false; // Not segment but point
     int nbad = 0;
     for (int t = 0; t < 2; t++) {
@@ -143,7 +161,9 @@ template <typename PointNd> bool is_point_on_open_segment(PointNd s, PointNd t, 
 // Convex cut
 // Cut the convex polygon g by line p1->p2 and return the leftward one
 template <typename T_P>
-std::vector<Point2d<T_P>> convex_cut(const std::vector<Point2d<T_P>> &g, Point2d<T_P> p1, Point2d<T_P> p2) {
+std::vector<Point2d<T_P>>
+convex_cut(const std::vector<Point2d<T_P>> &g, Point2d<T_P> p1, Point2d<T_P> p2) {
+    static_assert(std::is_floating_point<T_P>::value == true);
     assert(p1 != p2);
     std::vector<Point2d<T_P>> ret;
     for (int i = 0; i < (int)g.size(); i++) {
@@ -156,13 +176,17 @@ std::vector<Point2d<T_P>> convex_cut(const std::vector<Point2d<T_P>> &g, Point2d
     return ret;
 }
 
-// 2円の交点 (ABC157F)
+// 2円の交点 (ABC157F, SRM 559 Div.1 900)
 template <typename T_P>
-std::vector<Point2d<T_P>> IntersectTwoCircles(const Point2d<T_P> &Ca, double Ra, const Point2d<T_P> &Cb, double Rb) {
-    double d = (Ca - Cb).norm();
+std::vector<Point2d<T_P>>
+IntersectTwoCircles(const Point2d<T_P> &Ca, T_P Ra, const Point2d<T_P> &Cb, T_P Rb) {
+    static_assert(std::is_floating_point<T_P>::value == true);
+    T_P d = (Ca - Cb).norm();
     if (Ra + Rb < d) return {};
-    double rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);
-    double rs = sqrt(Ra * Ra - rc * rc);
+    T_P rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);
+    T_P rs2 = Ra * Ra - rc * rc;
+    if (rs2 < 0) return {};
+    T_P rs = std::sqrt(rs2);
     Point2d<T_P> diff = (Cb - Ca) / d;
     return {Ca + diff * Point2d<T_P>(rc, rs), Ca + diff * Point2d<T_P>(rc, -rs)};
 }
@@ -170,6 +194,7 @@ std::vector<Point2d<T_P>> IntersectTwoCircles(const Point2d<T_P> &Ca, double Ra,
 // Solve |x0 + vt| = R (SRM 543 Div.1 1000, GCJ 2016 R3 C)
 template <typename PointNd, typename Float>
 std::vector<Float> IntersectCircleLine(const PointNd &x0, const PointNd &v, Float R) {
+    static_assert(std::is_floating_point<Float>::value == true);
     Float b = Float(x0.dot(v)) / v.norm2();
     Float c = Float(x0.norm2() - Float(R) * R) / v.norm2();
     if (b * b - c < 0) return {};
@@ -180,14 +205,16 @@ std::vector<Float> IntersectCircleLine(const PointNd &x0, const PointNd &v, Floa
 
 // Distance between point p <-> line ab
 template <typename PointFloat>
-decltype(PointFloat::x) DistancePointLine(const PointFloat &p, const PointFloat &a, const PointFloat &b) {
+decltype(PointFloat::x)
+DistancePointLine(const PointFloat &p, const PointFloat &a, const PointFloat &b) {
     assert(a != b);
     return (b - a).absdet(p - a) / (b - a).norm();
 }
 
 // Distance between point p <-> line segment ab
 template <typename PointFloat>
-decltype(PointFloat::x) DistancePointSegment(const PointFloat &p, const PointFloat &a, const PointFloat &b) {
+decltype(PointFloat::x)
+DistancePointSegment(const PointFloat &p, const PointFloat &a, const PointFloat &b) {
     if (a == b) {
         return (p - a).norm();
     } else if ((p - a).dot(b - a) <= 0) {
@@ -201,6 +228,7 @@ decltype(PointFloat::x) DistancePointSegment(const PointFloat &p, const PointFlo
 
 // Area of polygon (might be negative)
 template <typename T_P> T_P signed_area_of_polygon(const std::vector<Point2d<T_P>> &poly) {
+    static_assert(std::is_floating_point<T_P>::value == true);
     T_P area = 0;
     for (size_t i = 0; i < poly.size(); i++) area += poly[i].det(poly[(i + 1) % poly.size()]);
     return area * 0.5;
