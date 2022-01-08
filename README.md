@@ -35,10 +35,6 @@ Some files in this repo (such as `network-simplex.hpp`) contains peculiar licens
 
 Except such snippets, the programs written by the owner of the repo is under the MIT License, but you can freely use or modify C++ codes without any notice for programming contests or online judges.
 
-## Format
+## Formatting
 
-Settings of `clang-format`:
-
-```
-{ BasedOnStyle: LLVM, IndentWidth: 4, AccessModifierOffset: -4, AllowShortBlocksOnASingleLine: true, AllowShortCaseLabelsOnASingleLine: true, AllowShortFunctionsOnASingleLine: All, AllowShortIfStatementsOnASingleLine: true, AllowShortLoopsOnASingleLine: true, AlwaysBreakBeforeMultilineStrings: false, AlwaysBreakTemplateDeclarations: false, ColumnLimit: 110 }
-```
+`clang-format-10` is used (config file: `.clang-format`).
