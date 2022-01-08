@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/light_forward_list.hpp
     title: data_structure/light_forward_list.hpp
   - icon: ':heavy_check_mark:'

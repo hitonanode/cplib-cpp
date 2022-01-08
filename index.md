@@ -122,7 +122,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/lazy_rbst.hpp
       title: Randomized binary search tree with lazy propagation
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/light_forward_list.hpp
       title: data_structure/light_forward_list.hpp
     - icon: ':heavy_check_mark:'
@@ -392,7 +392,7 @@ data:
     - icon: ':warning:'
       path: other_algorithms/doubling.hpp
       title: other_algorithms/doubling.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/enumerate_triangles.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u306B\u542B\u307E\u308C\u308B\u4E09\u89D2\
         \u5F62\u306E\u5217\u6319"
@@ -400,10 +400,10 @@ data:
       path: other_algorithms/mos_algorithm.hpp
       title: "Mo's algorithm \uFF08\u533A\u9593\u30AF\u30A8\u30EA\u306B\u95A2\u3059\
         \u308B\u5E73\u65B9\u5206\u5272\u30C6\u30AF\u30CB\u30C3\u30AF\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/permutation_tree.hpp
       title: "Permutation tree \uFF08\u9806\u5217\u6728\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/slope_trick.hpp
       title: "Slope trick \uFF08\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570\u306B\u95A2\
         \u3059\u308B\u7279\u5B9A\u306E\u66F4\u65B0\u3092\u9AD8\u901F\u306B\u6271\u3046\
@@ -432,13 +432,13 @@ data:
       title: rational/rational_number.hpp
   - name: segmenttree
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/acl_beats.hpp
       title: Segment Tree Beats (based on atcoder::lazy_segtree)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/acl_lazysegtree.hpp
       title: Lazy Segtree (based on atcoder::lazy_segtree)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/acl_segtree.hpp
       title: segmenttree/acl_segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -448,44 +448,44 @@ data:
     - icon: ':warning:'
       path: segmenttree/binary_indexed_tree_2d.hpp
       title: segmenttree/binary_indexed_tree_2d.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/merge_sort_tree.hpp
       title: "Merge sort tree \uFF08\u9759\u7684\u306A\u5217\u306E\u90E8\u5206\u5217\
         \u306B\u542B\u307E\u308C\u308B\u95BE\u5024\u4EE5\u4E0B\u306E\u8981\u7D20\u6570\
         \u30AF\u30A8\u30EA\uFF09"
-    - icon: ':x:'
+    - icon: ':question:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range-add-range-min.hpp
       title: Range Add Range Min (known as the Starry sky tree)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range-update-range-get.hpp
       title: segmenttree/range-update-range-get.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range_minimum_query.hpp
       title: segmenttree/range_minimum_query.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/rangetree.hpp
       title: "Range Tree \uFF08\u9818\u57DF\u6728\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/rangetree_bit.hpp
       title: "Range Tree with binary indexed tree \uFF08\u9818\u57DF\u6728\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/segment_tree_2d.hpp
       title: segmenttree/segment_tree_2d.hpp
   - name: segmenttree/trees
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
       title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-affine-range-sum.hpp
       title: segmenttree/trees/acl_range-affine-range-sum.hpp
     - icon: ':warning:'
       path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
       title: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
       title: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
     - icon: ':warning:'
@@ -493,7 +493,7 @@ data:
       title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   - name: set_power_series
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/subset_convolution.hpp
       title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
         \u7B97\uFF09"
@@ -502,10 +502,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: sparse_table/disjoint_sparse_table.hpp
       title: Disjoint sparse table
-    - icon: ':x:'
+    - icon: ':question:'
       path: sparse_table/rmq_sparse_table.hpp
       title: sparse_table/rmq_sparse_table.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/sparse_table.hpp
       title: Sparse table
     - icon: ':heavy_check_mark:'
@@ -513,36 +513,36 @@ data:
       title: 2D sparse table
   - name: string
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/aho_corasick.hpp
       title: string/aho_corasick.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/aho_corasick_online.hpp
       title: string/aho_corasick_online.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/incremental_matching.hpp
       title: string/incremental_matching.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/longest_common_prefix.hpp
       title: string/longest_common_prefix.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/lyndon.hpp
       title: "Lyndon words \uFF08Lyndon \u6587\u5B57\u5217\u306B\u95A2\u3059\u308B\
         \u5404\u7A2E\u95A2\u6570\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/manacher.hpp
       title: "Longest palindromic substring enumeration (Manacher's algorithm) \uFF08\
         \u56DE\u6587\u9577\u914D\u5217\u69CB\u7BC9\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/mp_algorithm.hpp
       title: string/mp_algorithm.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/rolling_hash_1d.hpp
       title: string/rolling_hash_1d.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/suffix_array.hpp
       title: string/suffix_array.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/suffix_array_doubling.hpp
       title: string/suffix_array_doubling.hpp
     - icon: ':warning:'
@@ -655,9 +655,12 @@ data:
     - icon: ':warning:'
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: utilities/reader.hpp
       title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
+    - icon: ':warning:'
+      path: utilities/readline.hpp
+      title: "\u4E00\u884C\u5165\u529B"
     - icon: ':warning:'
       path: utilities/rotate90.hpp
       title: utilities/rotate90.hpp
@@ -671,6 +674,9 @@ data:
     - icon: ':warning:'
       path: utilities/transpose.hpp
       title: utilities/transpose.hpp
+    - icon: ':warning:'
+      path: utilities/writer.hpp
+      title: "\u6A19\u6E96\u51FA\u529B"
   verificationCategories:
   - name: combinatorial_opt/test
     pages:
@@ -1103,89 +1109,89 @@ data:
       title: number/test/sqrt_modint_runtime.test.cpp
   - name: other_algorithms/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/enumerate_triangles.test.cpp
       title: other_algorithms/test/enumerate_triangles.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
       title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/slope_trick_stress.test.cpp
       title: other_algorithms/test/slope_trick_stress.test.cpp
   - name: segmenttree/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/acl_range-affine-range-sum.test.cpp
       title: segmenttree/test/acl_range-affine-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/acl_rmq.test.cpp
       title: segmenttree/test/acl_rmq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/acl_rsq.test.cpp
       title: segmenttree/test/acl_rsq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats.test.cpp
       title: segmenttree/test/beats.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats_gcd.test.cpp
       title: segmenttree/test/beats_gcd.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
       title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/countandsumlessthan.test.cpp
       title: segmenttree/test/countandsumlessthan.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/merge_sort_tree.aoj2426.test.cpp
       title: segmenttree/test/merge_sort_tree.aoj2426.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/range-affine-range-sum.test.cpp
       title: segmenttree/test/range-affine-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/rangetree.test.cpp
       title: segmenttree/test/rangetree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/rangetree.yuki1625.test.cpp
       title: segmenttree/test/rangetree.yuki1625.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/rangetree_bit.test.cpp
       title: segmenttree/test/rangetree_bit.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/rmq_nonrecursive.test.cpp
       title: segmenttree/test/rmq_nonrecursive.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/segment_tree_2d.test.cpp
       title: segmenttree/test/segment_tree_2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/segment_tree_2d_pointadd.test.cpp
       title: segmenttree/test/segment_tree_2d_pointadd.test.cpp
   - name: set_power_series/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_conv.test.cpp
       title: set_power_series/test/subset_conv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_exp.stress.test.cpp
       title: set_power_series/test/subset_exp.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_log.test.cpp
       title: set_power_series/test/subset_log.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_pow.stress.test.cpp
       title: set_power_series/test/subset_pow.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_pow.yuki1594.test.cpp
       title: set_power_series/test/subset_pow.yuki1594.test.cpp
   - name: sparse_table/test
@@ -1196,63 +1202,63 @@ data:
     - icon: ':heavy_check_mark:'
       path: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
       title: sparse_table/test/disjoint_sparse_table_rsq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/test/sparse_table.test.cpp
       title: sparse_table/test/sparse_table.test.cpp
     - icon: ':heavy_check_mark:'
       path: sparse_table/test/sparse_table_2d.test.cpp
       title: sparse_table/test/sparse_table_2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/test/sparse_table_aoj.test.cpp
       title: sparse_table/test/sparse_table_aoj.test.cpp
   - name: string/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/aho_corasick_forwardlist.test.cpp
       title: string/test/aho_corasick_forwardlist.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/aho_corasick_online.test.cpp
       title: string/test/aho_corasick_online.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/aho_corasick_unorderedmap.test.cpp
       title: string/test/aho_corasick_unorderedmap.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/aho_corasick_vector.test.cpp
       title: string/test/aho_corasick_vector.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/incremental_matching.test.cpp
       title: string/test/incremental_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/lcp.test.cpp
       title: string/test/lcp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/manacher.test.cpp
       title: string/test/manacher.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/manacher_mp.test.cpp
       title: string/test/manacher_mp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash.test.cpp
       title: string/test/rolling_hash.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_lcp.test.cpp
       title: string/test/rolling_hash_lcp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_w_modint.test.cpp
       title: string/test/rolling_hash_w_modint.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/run_enumerate_lyndon_hash.test.cpp
       title: string/test/run_enumerate_lyndon_hash.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/run_enumerate_lyndon_rmq.test.cpp
       title: string/test/run_enumerate_lyndon_rmq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/sa_count_keyword.reader.test.cpp
       title: string/test/sa_count_keyword.reader.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/sa_count_keyword.test.cpp
       title: string/test/sa_count_keyword.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/suffix_array.test.cpp
       title: string/test/suffix_array.test.cpp
     - icon: ':heavy_check_mark:'

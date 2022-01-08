@@ -2,40 +2,40 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/acl_beats.hpp
     title: Segment Tree Beats (based on atcoder::lazy_segtree)
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
     title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
   - icon: ':warning:'
     path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
     title: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
     title: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   - icon: ':warning:'
     path: segmenttree/trees/acl_range-update-range-sum-min.hpp
     title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/beats.test.cpp
     title: segmenttree/test/beats.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/beats_gcd.test.cpp
     title: segmenttree/test/beats_gcd.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/document_ja/lazysegtree.html
@@ -140,7 +140,7 @@ data:
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   - segmenttree/acl_beats.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats_gcd.test.cpp
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp

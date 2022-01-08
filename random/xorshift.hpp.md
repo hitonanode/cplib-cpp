@@ -15,10 +15,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
     title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_pow.stress.test.cpp
     title: set_power_series/test/subset_pow.stress.test.cpp
   - icon: ':x:'

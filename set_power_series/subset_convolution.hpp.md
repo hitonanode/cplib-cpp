@@ -11,24 +11,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/hafnian.test.cpp
     title: linear_algebra_matrix/test/hafnian.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_conv.test.cpp
     title: set_power_series/test/subset_conv.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_log.test.cpp
     title: set_power_series/test/subset_log.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_pow.stress.test.cpp
     title: set_power_series/test/subset_pow.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_pow.yuki1594.test.cpp
     title: set_power_series/test/subset_pow.yuki1594.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://atcoder.jp/contests/abc213/tasks/abc213_g
@@ -229,7 +229,7 @@ data:
   requiredBy:
   - linear_algebra_matrix/hafnian.hpp
   timestamp: '2021-10-16 14:40:57+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - set_power_series/test/subset_log.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp

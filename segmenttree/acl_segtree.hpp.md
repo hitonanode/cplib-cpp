@@ -2,25 +2,25 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/rangetree.hpp
     title: "Range Tree \uFF08\u9818\u57DF\u6728\uFF09"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_rmq.test.cpp
     title: segmenttree/test/acl_rmq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_rsq.test.cpp
     title: segmenttree/test/acl_rsq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/rangetree.test.cpp
     title: segmenttree/test/rangetree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/rangetree.yuki1625.test.cpp
     title: segmenttree/test/rangetree.yuki1625.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/document_ja/segtree.html
@@ -90,7 +90,7 @@ data:
   requiredBy:
   - segmenttree/rangetree.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_rsq.test.cpp
   - segmenttree/test/rangetree.yuki1625.test.cpp

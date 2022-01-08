@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_product.test.cpp
     title: linear_algebra_matrix/test/matrix_product.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/test/sa_count_keyword.reader.test.cpp
     title: string/test/sa_count_keyword.reader.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"utilities/reader.hpp\"\n#include <cstdio>\n#include <string>\n\
@@ -46,7 +46,7 @@ data:
   path: utilities/reader.hpp
   requiredBy: []
   timestamp: '2021-08-01 21:42:17+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
   - string/test/sa_count_keyword.reader.test.cpp

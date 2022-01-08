@@ -6,18 +6,18 @@ data:
     path: sparse_table/sparse_table_2d.hpp
     title: 2D sparse table
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table.test.cpp
     title: sparse_table/test/sparse_table.test.cpp
   - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table_2d.test.cpp
     title: sparse_table/test/sparse_table_2d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/test/sparse_table_aoj.test.cpp
     title: sparse_table/test/sparse_table_aoj.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"sparse_table/sparse_table.hpp\"\n#include <cassert>\n#include\
@@ -54,7 +54,7 @@ data:
   requiredBy:
   - sparse_table/sparse_table_2d.hpp
   timestamp: '2021-11-02 23:36:31+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - sparse_table/test/sparse_table_2d.test.cpp
   - sparse_table/test/sparse_table.test.cpp
