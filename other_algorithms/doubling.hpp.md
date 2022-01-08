@@ -14,7 +14,7 @@ data:
     \ precalculation / O(logN) per query\n// <https://atcoder.jp/contests/arc060/submissions/7039451>\n\
     struct BinaryLifting {\n    int N, INVALID, lgD;\n    std::vector<std::vector<int>>\
     \ mat;\n    BinaryLifting() : N(0), lgD(0) {}\n    BinaryLifting(const std::vector<int>\
-    \ &vec_nxt, int INVALID = -1, int lgd = 0) : N(vec_nxt.size()), INVALID(INVALID),\
+    \ &vec_nxt, int INVALID = -1, int lgd = 0)\n        : N(vec_nxt.size()), INVALID(INVALID),\
     \ lgD(lgd) {\n        while ((1LL << lgD) < N) lgD++;\n        mat.assign(lgD,\
     \ std::vector<int>(N, INVALID));\n        mat[0] = vec_nxt;\n        for (int\
     \ i = 0; i < N; i++)\n            if (mat[0][i] < 0 or mat[0][i] >= N) mat[0][i]\
@@ -35,8 +35,8 @@ data:
     // <https://atcoder.jp/contests/arc060/submissions/7039451>\nstruct BinaryLifting\
     \ {\n    int N, INVALID, lgD;\n    std::vector<std::vector<int>> mat;\n    BinaryLifting()\
     \ : N(0), lgD(0) {}\n    BinaryLifting(const std::vector<int> &vec_nxt, int INVALID\
-    \ = -1, int lgd = 0) : N(vec_nxt.size()), INVALID(INVALID), lgD(lgd) {\n     \
-    \   while ((1LL << lgD) < N) lgD++;\n        mat.assign(lgD, std::vector<int>(N,\
+    \ = -1, int lgd = 0)\n        : N(vec_nxt.size()), INVALID(INVALID), lgD(lgd)\
+    \ {\n        while ((1LL << lgD) < N) lgD++;\n        mat.assign(lgD, std::vector<int>(N,\
     \ INVALID));\n        mat[0] = vec_nxt;\n        for (int i = 0; i < N; i++)\n\
     \            if (mat[0][i] < 0 or mat[0][i] >= N) mat[0][i] = INVALID;\n     \
     \   for (int d = 0; d < lgD - 1; d++) {\n            for (int i = 0; i < N; i++)\n\
@@ -55,7 +55,7 @@ data:
   isVerificationFile: false
   path: other_algorithms/doubling.hpp
   requiredBy: []
-  timestamp: '2021-02-11 22:40:18+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: other_algorithms/doubling.hpp

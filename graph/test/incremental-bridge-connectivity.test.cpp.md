@@ -60,8 +60,8 @@ data:
     \    while (E--) {\n        int s, t;\n        cin >> s >> t;\n        graph.add_edge(s,\
     \ t);\n    }\n\n    vector<vector<int>> ret(V);\n    for (int i = 0; i < V; i++)\
     \ { ret[graph.find(i)].emplace_back(i); }\n    int K = count_if(ret.begin(), ret.end(),\
-    \ [](const vector<int>& v) { return v.size() > 0; });\n    cout << K << '\\n';\n\
-    \    for (const auto& vec : ret) {\n        if (vec.size()) {\n            cout\
+    \ [](const vector<int> &v) { return v.size() > 0; });\n    cout << K << '\\n';\n\
+    \    for (const auto &vec : ret) {\n        if (vec.size()) {\n            cout\
     \ << vec.size();\n            for (auto x : vec) { cout << ' ' << x; }\n     \
     \       cout << '\\n';\n        }\n    }\n}\n"
   code: "#include \"../incremental_bridge_connectivity.hpp\"\n#include <algorithm>\n\
@@ -71,8 +71,8 @@ data:
     \    while (E--) {\n        int s, t;\n        cin >> s >> t;\n        graph.add_edge(s,\
     \ t);\n    }\n\n    vector<vector<int>> ret(V);\n    for (int i = 0; i < V; i++)\
     \ { ret[graph.find(i)].emplace_back(i); }\n    int K = count_if(ret.begin(), ret.end(),\
-    \ [](const vector<int>& v) { return v.size() > 0; });\n    cout << K << '\\n';\n\
-    \    for (const auto& vec : ret) {\n        if (vec.size()) {\n            cout\
+    \ [](const vector<int> &v) { return v.size() > 0; });\n    cout << K << '\\n';\n\
+    \    for (const auto &vec : ret) {\n        if (vec.size()) {\n            cout\
     \ << vec.size();\n            for (auto x : vec) { cout << ' ' << x; }\n     \
     \       cout << '\\n';\n        }\n    }\n}\n"
   dependsOn:
@@ -81,7 +81,7 @@ data:
   isVerificationFile: true
   path: graph/test/incremental-bridge-connectivity.test.cpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/incremental-bridge-connectivity.test.cpp

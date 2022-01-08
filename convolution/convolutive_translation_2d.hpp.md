@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -33,59 +33,61 @@ data:
     \ }\n    MDCONST ModInt(lint v) { _setval(v % md + md); }\n    MDCONST explicit\
     \ operator bool() const { return val != 0; }\n    MDCONST ModInt operator+(const\
     \ ModInt &x) const { return ModInt()._setval((lint)val + x.val); }\n    MDCONST\
-    \ ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ - x.val + md); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.val % md); }\n    MDCONST ModInt operator/(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % md); }\n  \
-    \  MDCONST ModInt operator-() const { return ModInt()._setval(md - val); }\n \
-    \   MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
-    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
-    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
-    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % md + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt &x)\
-    \ { return ModInt()._setval(a % md - x.val + md); }\n    friend MDCONST ModInt\
-    \ operator*(lint a, const ModInt &x) { return ModInt()._setval(a % md * x.val\
-    \ % md); }\n    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n \
-    \       return ModInt()._setval(a % md * x.inv() % md);\n    }\n    MDCONST bool\
-    \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
-    \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
-    \ operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt,\
+    \ ModInt operator-(const ModInt &x) const {\n        return ModInt()._setval((lint)val\
+    \ - x.val + md);\n    }\n    MDCONST ModInt operator*(const ModInt &x) const {\n\
+    \        return ModInt()._setval((lint)val * x.val % md);\n    }\n    MDCONST\
+    \ ModInt operator/(const ModInt &x) const {\n        return ModInt()._setval((lint)val\
+    \ * x.inv() % md);\n    }\n    MDCONST ModInt operator-() const { return ModInt()._setval(md\
+    \ - val); }\n    MDCONST ModInt &operator+=(const ModInt &x) { return *this =\
+    \ *this + x; }\n    MDCONST ModInt &operator-=(const ModInt &x) { return *this\
+    \ = *this - x; }\n    MDCONST ModInt &operator*=(const ModInt &x) { return *this\
+    \ = *this * x; }\n    MDCONST ModInt &operator/=(const ModInt &x) { return *this\
+    \ = *this / x; }\n    friend MDCONST ModInt operator+(lint a, const ModInt &x)\
+    \ {\n        return ModInt()._setval(a % md + x.val);\n    }\n    friend MDCONST\
+    \ ModInt operator-(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md - x.val + md);\n    }\n    friend MDCONST ModInt operator*(lint a, const\
+    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.val % md);\n    }\n\
+    \    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n        return\
+    \ ModInt()._setval(a % md * x.inv() % md);\n    }\n    MDCONST bool operator==(const\
+    \ ModInt &x) const { return val == x.val; }\n    MDCONST bool operator!=(const\
+    \ ModInt &x) const { return val != x.val; }\n    MDCONST bool operator<(const\
+    \ ModInt &x) const {\n        return val < x.val;\n    } // To use std::map<ModInt,\
     \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
     \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
-    \ os << x.val; }\n    MDCONST ModInt pow(lint n) const {\n        ModInt ans =\
-    \ 1, tmp = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n \
-    \           tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n  \
-    \  static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static void _precalculation(int\
-    \ N) {\n        int l0 = facs.size();\n        if (N > md) N = md;\n        if\
-    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
-    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
-    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
-    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
-    \ = facinvs[i] * facs[i - 1];\n    }\n    MDCONST lint inv() const {\n       \
-    \ if (this->val < std::min(md >> 1, 1 << 21)) {\n            while (this->val\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val].val;\n\
-    \        } else {\n            return this->pow(md - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\
-    \    MDCONST ModInt facinv() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val];\n    }\n\
-    \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
-    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
-    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
-    \ r.val) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST\
-    \ ModInt nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
-    \ : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n\
-    \        if (val == 0) return 0;\n        if (md == 2) return val;\n        if\
-    \ (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md\
-    \ - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m %\
-    \ 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x\
-    \ * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while (y\
-    \ != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
-    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
-    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
+    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {\n     \
+    \   return os << x.val;\n    }\n    MDCONST ModInt pow(lint n) const {\n     \
+    \   ModInt ans = 1, tmp = *this;\n        while (n) {\n            if (n & 1)\
+    \ ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return ans;\n\
+    \    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static\
+    \ void _precalculation(int N) {\n        int l0 = facs.size();\n        if (N\
+    \ > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N), facinvs.resize(N),\
+    \ invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i] = facs[i - 1]\
+    \ * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n        for (int i\
+    \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
+    \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
+    \ lint inv() const {\n        if (this->val < std::min(md >> 1, 1 << 21)) {\n\
+    \            while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n            return invs[this->val].val;\n        } else {\n         \
+    \   return this->pow(md - 2).val;\n        }\n    }\n    MDCONST ModInt fac()\
+    \ const {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facs[this->val];\n    }\n    MDCONST ModInt facinv() const\
+    \ {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facinvs[this->val];\n    }\n    MDCONST ModInt doublefac()\
+    \ const {\n        lint k = (this->val + 1) / 2;\n        return (this->val &\
+    \ 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n          \
+    \                     : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
+    \ ModInt nCr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
+    \ : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
+    \ nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0 : this->fac()\
+    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val\
+    \ == 0) return 0;\n        if (md == 2) return val;\n        if (pow((md - 1)\
+    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
+    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
+    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
+    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
+    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
+    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
     \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
@@ -116,25 +118,26 @@ data:
     \ i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m];\n    \
     \                a[i] = x + y, a[i + m] = (x - y) * iw[k];\n                }\n\
     \            }\n        }\n        int n_inv = MODINT(n).inv();\n        for (auto\
-    \ &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD> std::vector<ModInt<MOD>> nttconv_(const\
-    \ std::vector<int> &a, const std::vector<int> &b) {\n    int sz = a.size();\n\
-    \    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n    std::vector<ModInt<MOD>>\
-    \ ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++) ap[i] = a[i], bp[i] = b[i];\n\
-    \    ntt(ap, false);\n    if (a == b)\n        bp = ap;\n    else\n        ntt(bp,\
-    \ false);\n    for (int i = 0; i < sz; i++) ap[i] *= bp[i];\n    ntt(ap, true);\n\
-    \    return ap;\n}\nlong long garner_ntt_(int r0, int r1, int r2, int mod) {\n\
-    \    using mint2 = ModInt<nttprimes[2]>;\n    static const long long m01 = 1LL\
-    \ * nttprimes[0] * nttprimes[1];\n    static const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();\n\
-    \    static const long long m01_inv_m2 = mint2(m01).inv();\n\n    int v1 = (m0_inv_m1\
-    \ * (r1 + nttprimes[1] - r0)) % nttprimes[1];\n    auto v2 = (mint2(r2) - r0 -\
-    \ mint2(nttprimes[0]) * v1) * m01_inv_m2;\n    return (r0 + 1LL * nttprimes[0]\
-    \ * v1 + m01 % mod * v2.val) % mod;\n}\ntemplate <typename MODINT>\nstd::vector<MODINT>\
-    \ nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner) {\n\
-    \    if (a.empty() or b.empty()) return {};\n    int sz = 1, n = a.size(), m =\
-    \ b.size();\n    while (sz < n + m) sz <<= 1;\n    if (sz <= 16) {\n        std::vector<MODINT>\
-    \ ret(n + m - 1);\n        for (int i = 0; i < n; i++) {\n            for (int\
-    \ j = 0; j < m; j++) ret[i + j] += a[i] * b[j];\n        }\n        return ret;\n\
-    \    }\n    int mod = MODINT::mod();\n    if (skip_garner or std::find(std::begin(nttprimes),\
+    \ &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
+    \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
+    \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
+    \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
+    \ ap[i] = a[i], bp[i] = b[i];\n    ntt(ap, false);\n    if (a == b)\n        bp\
+    \ = ap;\n    else\n        ntt(bp, false);\n    for (int i = 0; i < sz; i++) ap[i]\
+    \ *= bp[i];\n    ntt(ap, true);\n    return ap;\n}\nlong long garner_ntt_(int\
+    \ r0, int r1, int r2, int mod) {\n    using mint2 = ModInt<nttprimes[2]>;\n  \
+    \  static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];\n    static\
+    \ const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();\n    static\
+    \ const long long m01_inv_m2 = mint2(m01).inv();\n\n    int v1 = (m0_inv_m1 *\
+    \ (r1 + nttprimes[1] - r0)) % nttprimes[1];\n    auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0])\
+    \ * v1) * m01_inv_m2;\n    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod *\
+    \ v2.val) % mod;\n}\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner) {\n    if (a.empty() or b.empty())\
+    \ return {};\n    int sz = 1, n = a.size(), m = b.size();\n    while (sz < n +\
+    \ m) sz <<= 1;\n    if (sz <= 16) {\n        std::vector<MODINT> ret(n + m - 1);\n\
+    \        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < m; j++)\
+    \ ret[i + j] += a[i] * b[j];\n        }\n        return ret;\n    }\n    int mod\
+    \ = MODINT::mod();\n    if (skip_garner or\n        std::find(std::begin(nttprimes),\
     \ std::end(nttprimes), mod) != std::end(nttprimes)) {\n        a.resize(sz), b.resize(sz);\n\
     \        if (a == b) {\n            ntt(a, false);\n            b = a;\n     \
     \   } else {\n            ntt(a, false), ntt(b, false);\n        }\n        for\
@@ -143,74 +146,76 @@ data:
     \ (int i = 0; i < n; i++) ai[i] = a[i].val;\n        for (int i = 0; i < m; i++)\
     \ bi[i] = b[i].val;\n        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);\n   \
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
-    \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
-    \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
+    \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\n\
+    \            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n\
+    \    }\n    return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
     \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
     \ b, false);\n}\n#line 4 \"convolution/convolutive_translation_2d.hpp\"\n#include\
     \ <utility>\n#line 6 \"convolution/convolutive_translation_2d.hpp\"\n\n// Two\
     \ dimensional fast DP using FFT.\n// Complexity: O(HW log (HW)) for each step.\n\
     // Verification: TCO 2020 Round 3A 1000 ZombieRPGDice\n// Verification: TCO 2020\
-    \ Round 3B 500 ShortBugPaths\ntemplate <typename MODINT>\nstd::vector<std::vector<MODINT>>\
-    \ convolutive_translation_2d(const std::vector<std::vector<MODINT>> &initial_dist,\
-    \ // size: H * W\n                                                           \
-    \ const std::vector<std::pair<std::pair<int, int>, MODINT>> &trans_coeffs, //\
-    \ [((dx, dy), coefficient), ...]\n                                           \
-    \                 int nb_step = 1) {\n    int H = initial_dist.size(), W = initial_dist[0].size();\n\
-    \    int xlo = 0, xhi = 0, ylo = 0, yhi = 0;\n\n    std::vector<std::pair<std::pair<int,\
-    \ int>, MODINT>> t2c_1d;\n    for (auto p : trans_coeffs)\n        if (p.second\
-    \ != 0) {\n            if (p.first.first <= -H or p.first.first >= H) continue;\n\
-    \            if (p.first.second <= -W or p.first.second >= W) continue;\n    \
-    \        xlo = std::max(xlo, -p.first.first), xhi = std::max(xhi, p.first.first);\n\
-    \            ylo = std::max(ylo, -p.first.second), yhi = std::max(yhi, p.first.second);\n\
+    \ Round 3B 500 ShortBugPaths\ntemplate <typename MODINT>\nstd::vector<std::vector<MODINT>>\n\
+    convolutive_translation_2d(const std::vector<std::vector<MODINT>> &initial_dist,\
+    \ // size: H * W\n                           const std::vector<std::pair<std::pair<int,\
+    \ int>, MODINT>>\n                               &trans_coeffs, // [((dx, dy),\
+    \ coefficient), ...]\n                           int nb_step = 1) {\n    int H\
+    \ = initial_dist.size(), W = initial_dist[0].size();\n    int xlo = 0, xhi = 0,\
+    \ ylo = 0, yhi = 0;\n\n    std::vector<std::pair<std::pair<int, int>, MODINT>>\
+    \ t2c_1d;\n    for (auto p : trans_coeffs)\n        if (p.second != 0) {\n   \
+    \         if (p.first.first <= -H or p.first.first >= H) continue;\n         \
+    \   if (p.first.second <= -W or p.first.second >= W) continue;\n            xlo\
+    \ = std::max(xlo, -p.first.first), xhi = std::max(xhi, p.first.first);\n     \
+    \       ylo = std::max(ylo, -p.first.second), yhi = std::max(yhi, p.first.second);\n\
     \            t2c_1d.emplace_back(p);\n        }\n    const int WW = W + ylo +\
     \ yhi;\n    std::vector<MODINT> dp((H - 1) * WW + W);\n    for (int i = 0; i <\
-    \ H; i++) { std::copy(initial_dist[i].begin(), initial_dist[i].end(), dp.begin()\
-    \ + i * WW); }\n\n    int tlo = 0, thi = 0;\n    for (auto p : t2c_1d) {\n   \
-    \     int t = p.first.first * WW + p.first.second;\n        tlo = std::max(tlo,\
-    \ -t), thi = std::max(thi, t);\n    }\n\n    std::vector<MODINT> trans1d(tlo +\
-    \ thi + 1);\n    for (auto p : t2c_1d) { trans1d[tlo + p.first.first * WW + p.first.second]\
-    \ += p.second; }\n    for (int t = 0; t < nb_step; t++) {\n        auto dp_nxt\
-    \ = nttconv(dp, trans1d);\n        for (int i = 0; i < H; i++) {\n           \
-    \ std::copy(dp_nxt.begin() + i * WW + tlo, dp_nxt.begin() + i * WW + W + tlo,\
-    \ dp.begin() + i * WW);\n        }\n    }\n    std::vector<std::vector<MODINT>>\
-    \ ret(H);\n    for (int i = 0; i < H; i++) { ret[i].insert(ret[i].end(), dp.begin()\
-    \ + i * WW, dp.begin() + i * WW + W); }\n    return ret;\n}\n"
-  code: "#pragma once\n#include \"convolution/ntt.hpp\"\n#include <algorithm>\n#include\
-    \ <utility>\n#include <vector>\n\n// Two dimensional fast DP using FFT.\n// Complexity:\
-    \ O(HW log (HW)) for each step.\n// Verification: TCO 2020 Round 3A 1000 ZombieRPGDice\n\
-    // Verification: TCO 2020 Round 3B 500 ShortBugPaths\ntemplate <typename MODINT>\n\
-    std::vector<std::vector<MODINT>> convolutive_translation_2d(const std::vector<std::vector<MODINT>>\
-    \ &initial_dist, // size: H * W\n                                            \
-    \                const std::vector<std::pair<std::pair<int, int>, MODINT>> &trans_coeffs,\
-    \ // [((dx, dy), coefficient), ...]\n                                        \
-    \                    int nb_step = 1) {\n    int H = initial_dist.size(), W =\
-    \ initial_dist[0].size();\n    int xlo = 0, xhi = 0, ylo = 0, yhi = 0;\n\n   \
-    \ std::vector<std::pair<std::pair<int, int>, MODINT>> t2c_1d;\n    for (auto p\
-    \ : trans_coeffs)\n        if (p.second != 0) {\n            if (p.first.first\
-    \ <= -H or p.first.first >= H) continue;\n            if (p.first.second <= -W\
-    \ or p.first.second >= W) continue;\n            xlo = std::max(xlo, -p.first.first),\
-    \ xhi = std::max(xhi, p.first.first);\n            ylo = std::max(ylo, -p.first.second),\
-    \ yhi = std::max(yhi, p.first.second);\n            t2c_1d.emplace_back(p);\n\
-    \        }\n    const int WW = W + ylo + yhi;\n    std::vector<MODINT> dp((H -\
-    \ 1) * WW + W);\n    for (int i = 0; i < H; i++) { std::copy(initial_dist[i].begin(),\
-    \ initial_dist[i].end(), dp.begin() + i * WW); }\n\n    int tlo = 0, thi = 0;\n\
-    \    for (auto p : t2c_1d) {\n        int t = p.first.first * WW + p.first.second;\n\
-    \        tlo = std::max(tlo, -t), thi = std::max(thi, t);\n    }\n\n    std::vector<MODINT>\
+    \ H; i++) {\n        std::copy(initial_dist[i].begin(), initial_dist[i].end(),\
+    \ dp.begin() + i * WW);\n    }\n\n    int tlo = 0, thi = 0;\n    for (auto p :\
+    \ t2c_1d) {\n        int t = p.first.first * WW + p.first.second;\n        tlo\
+    \ = std::max(tlo, -t), thi = std::max(thi, t);\n    }\n\n    std::vector<MODINT>\
     \ trans1d(tlo + thi + 1);\n    for (auto p : t2c_1d) { trans1d[tlo + p.first.first\
     \ * WW + p.first.second] += p.second; }\n    for (int t = 0; t < nb_step; t++)\
     \ {\n        auto dp_nxt = nttconv(dp, trans1d);\n        for (int i = 0; i <\
     \ H; i++) {\n            std::copy(dp_nxt.begin() + i * WW + tlo, dp_nxt.begin()\
-    \ + i * WW + W + tlo, dp.begin() + i * WW);\n        }\n    }\n    std::vector<std::vector<MODINT>>\
-    \ ret(H);\n    for (int i = 0; i < H; i++) { ret[i].insert(ret[i].end(), dp.begin()\
-    \ + i * WW, dp.begin() + i * WW + W); }\n    return ret;\n}\n"
+    \ + i * WW + W + tlo,\n                      dp.begin() + i * WW);\n        }\n\
+    \    }\n    std::vector<std::vector<MODINT>> ret(H);\n    for (int i = 0; i <\
+    \ H; i++) {\n        ret[i].insert(ret[i].end(), dp.begin() + i * WW, dp.begin()\
+    \ + i * WW + W);\n    }\n    return ret;\n}\n"
+  code: "#pragma once\n#include \"convolution/ntt.hpp\"\n#include <algorithm>\n#include\
+    \ <utility>\n#include <vector>\n\n// Two dimensional fast DP using FFT.\n// Complexity:\
+    \ O(HW log (HW)) for each step.\n// Verification: TCO 2020 Round 3A 1000 ZombieRPGDice\n\
+    // Verification: TCO 2020 Round 3B 500 ShortBugPaths\ntemplate <typename MODINT>\n\
+    std::vector<std::vector<MODINT>>\nconvolutive_translation_2d(const std::vector<std::vector<MODINT>>\
+    \ &initial_dist, // size: H * W\n                           const std::vector<std::pair<std::pair<int,\
+    \ int>, MODINT>>\n                               &trans_coeffs, // [((dx, dy),\
+    \ coefficient), ...]\n                           int nb_step = 1) {\n    int H\
+    \ = initial_dist.size(), W = initial_dist[0].size();\n    int xlo = 0, xhi = 0,\
+    \ ylo = 0, yhi = 0;\n\n    std::vector<std::pair<std::pair<int, int>, MODINT>>\
+    \ t2c_1d;\n    for (auto p : trans_coeffs)\n        if (p.second != 0) {\n   \
+    \         if (p.first.first <= -H or p.first.first >= H) continue;\n         \
+    \   if (p.first.second <= -W or p.first.second >= W) continue;\n            xlo\
+    \ = std::max(xlo, -p.first.first), xhi = std::max(xhi, p.first.first);\n     \
+    \       ylo = std::max(ylo, -p.first.second), yhi = std::max(yhi, p.first.second);\n\
+    \            t2c_1d.emplace_back(p);\n        }\n    const int WW = W + ylo +\
+    \ yhi;\n    std::vector<MODINT> dp((H - 1) * WW + W);\n    for (int i = 0; i <\
+    \ H; i++) {\n        std::copy(initial_dist[i].begin(), initial_dist[i].end(),\
+    \ dp.begin() + i * WW);\n    }\n\n    int tlo = 0, thi = 0;\n    for (auto p :\
+    \ t2c_1d) {\n        int t = p.first.first * WW + p.first.second;\n        tlo\
+    \ = std::max(tlo, -t), thi = std::max(thi, t);\n    }\n\n    std::vector<MODINT>\
+    \ trans1d(tlo + thi + 1);\n    for (auto p : t2c_1d) { trans1d[tlo + p.first.first\
+    \ * WW + p.first.second] += p.second; }\n    for (int t = 0; t < nb_step; t++)\
+    \ {\n        auto dp_nxt = nttconv(dp, trans1d);\n        for (int i = 0; i <\
+    \ H; i++) {\n            std::copy(dp_nxt.begin() + i * WW + tlo, dp_nxt.begin()\
+    \ + i * WW + W + tlo,\n                      dp.begin() + i * WW);\n        }\n\
+    \    }\n    std::vector<std::vector<MODINT>> ret(H);\n    for (int i = 0; i <\
+    \ H; i++) {\n        ret[i].insert(ret[i].end(), dp.begin() + i * WW, dp.begin()\
+    \ + i * WW + W);\n    }\n    return ret;\n}\n"
   dependsOn:
   - convolution/ntt.hpp
   - modint.hpp
   isVerificationFile: false
   path: convolution/convolutive_translation_2d.hpp
   requiredBy: []
-  timestamp: '2021-09-04 00:38:32+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: convolution/convolutive_translation_2d.hpp

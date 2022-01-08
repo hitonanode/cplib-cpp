@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/shortest_cycle_weighted.hpp
     title: graph/shortest_cycle_weighted.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
@@ -22,7 +22,7 @@ data:
     \n#include <cassert>\n#include <limits>\n#include <queue>\n#include <utility>\n\
     #include <vector>\n\n// CUT begin\n// Shortest cycle detection of UNDIRECTED SIMPLE\
     \ graphs\n// Verified: https://yukicoder.me/submissions/594507\ntemplate <typename\
-    \ T, T INF = std::numeric_limits<T>::max() / 2> struct ShortestCycleOfUndirectedWeighted\
+    \ T, T INF = std::numeric_limits<T>::max() / 2>\nstruct ShortestCycleOfUndirectedWeighted\
     \ {\n    int V, E;\n    std::vector<std::vector<std::pair<int, T>>> to; // (nxt,\
     \ weight)\n    ShortestCycleOfUndirectedWeighted() = default;\n    ShortestCycleOfUndirectedWeighted(int\
     \ V) : V(V), E(0), to(V) {}\n    void add_edge(int s, int t, T len) {\n      \
@@ -54,7 +54,7 @@ data:
     \ <algorithm>\n#line 4 \"graph/shortest_path.hpp\"\n#include <deque>\n#include\
     \ <fstream>\n#include <functional>\n#line 9 \"graph/shortest_path.hpp\"\n#include\
     \ <string>\n#line 12 \"graph/shortest_path.hpp\"\n\n// CUT begin\ntemplate <typename\
-    \ T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath\
+    \ T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1>\nstruct ShortestPath\
     \ {\n    int V, E;\n    bool single_positive_weight;\n    T wmin, wmax;\n    std::vector<std::vector<std::pair<int,\
     \ T>>> to;\n\n    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true),\
     \ wmin(0), wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n       \
@@ -63,18 +63,19 @@ data:
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
-    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;\n  \
-    \  template <class Heap = Pque> void Dijkstra(int s) {\n        assert(0 <= s\
-    \ and s < V);\n        dist.assign(V, INF);\n        dist[s] = 0;\n        prev.assign(V,\
-    \ INVALID);\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
-    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
-    \            pq.pop();\n            if (dist[v] < d) continue;\n            for\
-    \ (auto nx : to[v]) {\n                T dnx = d + nx.second;\n              \
-    \  if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
-    \          }\n        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void\
-    \ DijkstraVquad(int s) {\n        assert(0 <= s and s < V);\n        dist.assign(V,\
-    \ INF);\n        dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
+    \ int>, std::vector<std::pair<T, int>>,\n                                    \
+    \ std::greater<std::pair<T, int>>>;\n    template <class Heap = Pque> void Dijkstra(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        Heap pq;\n      \
+    \  pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n      \
+    \      int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
+    \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
+    \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
+    \                pq.emplace(dnx, nx.first);\n                }\n            }\n\
+    \        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void DijkstraVquad(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
     \ fixed(V, false);\n        while (true) {\n            int r = INVALID;\n   \
     \         T dr = INF;\n            for (int i = 0; i < V; i++) {\n           \
     \     if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];\n            }\n  \
@@ -150,24 +151,24 @@ data:
     \    }\n\n    void dump_graphviz(std::string filename = \"shortest_path\") const\
     \ {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
-    \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
-    ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n#line 5 \"graph/test/shortest_cycle.test.cpp\"\n\n#include <iostream>\n\
-    #line 8 \"graph/test/shortest_cycle.test.cpp\"\nusing namespace std;\n\nint main()\
-    \ {\n    int T, N, M;\n    cin >> T >> N >> M;\n    const long long INF = 1LL\
-    \ << 60;\n    long long ret = INF;\n\n    if (T == 1) {\n        // Directed graph\n\
-    \        vector<vector<pair<int, int>>> to(N);\n        while (M--) {\n      \
-    \      int u, v, w;\n            cin >> u >> v >> w;\n            u--, v--;\n\
-    \            to[u].emplace_back(v, w);\n        }\n        for (int s = 0; s <\
-    \ N; s++) {\n            ShortestPath<long long, INF> graph(N + 1);\n        \
-    \    for (int i = 0; i < N; i++) {\n                for (auto [j, w] : to[i])\
-    \ {\n                    graph.add_edge(i, j, w);\n                    if (j ==\
-    \ s) graph.add_edge(i, N, w);\n                }\n            }\n            graph.solve(s);\n\
-    \            ret = min(ret, graph.dist[N]);\n        }\n    } else {\n       \
-    \ // Undirected graph\n        ShortestCycleOfUndirectedWeighted<long long, INF>\
-    \ graph(N);\n        while (M--) {\n            int u, v, w;\n            cin\
-    \ >> u >> v >> w;\n            u--, v--;\n            graph.add_edge(u, v, w);\n\
-    \        }\n        for (int i = 0; i < N; i++) ret = min(ret, graph.Solve(i).first);\n\
+    \ to[i])\n                ss << i << \"->\" << e.first << \"[label=\" << e.second\
+    \ << \"];\\n\";\n        }\n        ss << \"}\\n\";\n        ss.close();\n   \
+    \     return;\n    }\n};\n#line 5 \"graph/test/shortest_cycle.test.cpp\"\n\n#include\
+    \ <iostream>\n#line 8 \"graph/test/shortest_cycle.test.cpp\"\nusing namespace\
+    \ std;\n\nint main() {\n    int T, N, M;\n    cin >> T >> N >> M;\n    const long\
+    \ long INF = 1LL << 60;\n    long long ret = INF;\n\n    if (T == 1) {\n     \
+    \   // Directed graph\n        vector<vector<pair<int, int>>> to(N);\n       \
+    \ while (M--) {\n            int u, v, w;\n            cin >> u >> v >> w;\n \
+    \           u--, v--;\n            to[u].emplace_back(v, w);\n        }\n    \
+    \    for (int s = 0; s < N; s++) {\n            ShortestPath<long long, INF> graph(N\
+    \ + 1);\n            for (int i = 0; i < N; i++) {\n                for (auto\
+    \ [j, w] : to[i]) {\n                    graph.add_edge(i, j, w);\n          \
+    \          if (j == s) graph.add_edge(i, N, w);\n                }\n         \
+    \   }\n            graph.solve(s);\n            ret = min(ret, graph.dist[N]);\n\
+    \        }\n    } else {\n        // Undirected graph\n        ShortestCycleOfUndirectedWeighted<long\
+    \ long, INF> graph(N);\n        while (M--) {\n            int u, v, w;\n    \
+    \        cin >> u >> v >> w;\n            u--, v--;\n            graph.add_edge(u,\
+    \ v, w);\n        }\n        for (int i = 0; i < N; i++) ret = min(ret, graph.Solve(i).first);\n\
     \    }\n    cout << (ret < INF ? ret : -1) << '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1320\"\n\n#include \"\
     ../shortest_cycle_weighted.hpp\"\n#include \"../shortest_path.hpp\"\n\n#include\
@@ -193,7 +194,7 @@ data:
   isVerificationFile: true
   path: graph/test/shortest_cycle.test.cpp
   requiredBy: []
-  timestamp: '2021-09-07 01:07:11+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_cycle.test.cpp

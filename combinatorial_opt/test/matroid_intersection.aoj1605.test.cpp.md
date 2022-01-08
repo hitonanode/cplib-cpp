@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/matroids/partition_matroid.hpp
     title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
@@ -31,7 +31,7 @@ data:
     #include <deque>\n#include <fstream>\n#include <functional>\n#include <limits>\n\
     #include <queue>\n#include <string>\n#include <utility>\n#include <vector>\n\n\
     // CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max() / 2,\
-    \ int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
+    \ int INVALID = -1>\nstruct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
     \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
     \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
     \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
@@ -40,18 +40,19 @@ data:
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
-    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;\n  \
-    \  template <class Heap = Pque> void Dijkstra(int s) {\n        assert(0 <= s\
-    \ and s < V);\n        dist.assign(V, INF);\n        dist[s] = 0;\n        prev.assign(V,\
-    \ INVALID);\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
-    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
-    \            pq.pop();\n            if (dist[v] < d) continue;\n            for\
-    \ (auto nx : to[v]) {\n                T dnx = d + nx.second;\n              \
-    \  if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
-    \          }\n        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void\
-    \ DijkstraVquad(int s) {\n        assert(0 <= s and s < V);\n        dist.assign(V,\
-    \ INF);\n        dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
+    \ int>, std::vector<std::pair<T, int>>,\n                                    \
+    \ std::greater<std::pair<T, int>>>;\n    template <class Heap = Pque> void Dijkstra(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        Heap pq;\n      \
+    \  pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n      \
+    \      int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
+    \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
+    \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
+    \                pq.emplace(dnx, nx.first);\n                }\n            }\n\
+    \        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void DijkstraVquad(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
     \ fixed(V, false);\n        while (true) {\n            int r = INVALID;\n   \
     \         T dr = INF;\n            for (int i = 0; i < V; i++) {\n           \
     \     if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];\n            }\n  \
@@ -127,37 +128,37 @@ data:
     \    }\n\n    void dump_graphviz(std::string filename = \"shortest_path\") const\
     \ {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
-    \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
-    ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n#line 5 \"combinatorial_opt/matroid_intersection.hpp\"\n\n// CUT begin\n\
-    // (Min weight) matroid intersection solver\n// Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
-    // Complexity: O(CE^2 + E^3) (C : circuit query, non-weighted)\ntemplate <class\
-    \ M1, class M2, class T = int>\nstd::vector<bool> MatroidIntersection(M1 matroid1,\
-    \ M2 matroid2, std::vector<T> weights = {}) {\n    using State = std::vector<bool>;\n\
-    \    using Element = int;\n    assert(matroid1.size() == matroid2.size());\n \
-    \   const int M = matroid1.size();\n\n    for (auto &x : weights) x *= M + 1;\n\
-    \    if (weights.empty()) weights.assign(M, 0);\n\n    const Element gs = M, gt\
-    \ = M + 1;\n    State I(M);\n\n    while (true) {\n        ShortestPath<T> sssp(M\
-    \ + 2);\n        matroid1.set(I);\n        matroid2.set(I);\n        for (int\
-    \ e = 0; e < M; e++) {\n            if (I[e]) continue;\n            auto c1 =\
-    \ matroid1.circuit(e), c2 = matroid2.circuit(e);\n            if (c1.empty())\
-    \ sssp.add_edge(e, gt, 0);\n            for (Element f : c1) {\n             \
-    \   if (f != e) sssp.add_edge(e, f, -weights[f] + 1);\n            }\n       \
-    \     if (c2.empty()) sssp.add_edge(gs, e, weights[e] + 1);\n            for (Element\
-    \ f : c2) {\n                if (f != e) sssp.add_edge(f, e, weights[e] + 1);\n\
-    \            }\n        }\n        sssp.solve(gs);\n        auto aug_path = sssp.retrieve_path(gt);\n\
-    \        if (aug_path.empty()) break;\n        for (auto e : aug_path) {\n   \
-    \         if (e != gs and e != gt) I[e] = !I[e];\n        }\n    }\n    return\
-    \ I;\n}\n#line 5 \"combinatorial_opt/matroids/graphic_matroid.hpp\"\n\n// GraphicMatroid:\
-    \ subgraph of undirected graphs, without loops\nclass GraphicMatroid {\n    using\
-    \ Vertex = int;\n    using Element = int;\n    int M;\n    int V; // # of vertices\
-    \ of graph\n    std::vector<std::vector<std::pair<Vertex, Element>>> to;\n   \
-    \ std::vector<std::pair<Vertex, Vertex>> edges;\n    std::vector<Element> backtrack;\n\
-    \    std::vector<Vertex> vprev;\n    std::vector<int> depth, root;\n\npublic:\n\
-    \    GraphicMatroid(int V, const std::vector<std::pair<Vertex, Vertex>> &edges_)\n\
-    \        : M(edges_.size()), V(V), to(V), edges(edges_) {\n        for (int e\
-    \ = 0; e < int(edges_.size()); e++) {\n            int u = edges_[e].first, v\
-    \ = edges_[e].second;\n            assert(0 <= u and u < V);\n            assert(0\
+    \ to[i])\n                ss << i << \"->\" << e.first << \"[label=\" << e.second\
+    \ << \"];\\n\";\n        }\n        ss << \"}\\n\";\n        ss.close();\n   \
+    \     return;\n    }\n};\n#line 5 \"combinatorial_opt/matroid_intersection.hpp\"\
+    \n\n// CUT begin\n// (Min weight) matroid intersection solver\n// Algorithm based\
+    \ on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n// Complexity: O(CE^2\
+    \ + E^3) (C : circuit query, non-weighted)\ntemplate <class M1, class M2, class\
+    \ T = int>\nstd::vector<bool> MatroidIntersection(M1 matroid1, M2 matroid2, std::vector<T>\
+    \ weights = {}) {\n    using State = std::vector<bool>;\n    using Element = int;\n\
+    \    assert(matroid1.size() == matroid2.size());\n    const int M = matroid1.size();\n\
+    \n    for (auto &x : weights) x *= M + 1;\n    if (weights.empty()) weights.assign(M,\
+    \ 0);\n\n    const Element gs = M, gt = M + 1;\n    State I(M);\n\n    while (true)\
+    \ {\n        ShortestPath<T> sssp(M + 2);\n        matroid1.set(I);\n        matroid2.set(I);\n\
+    \        for (int e = 0; e < M; e++) {\n            if (I[e]) continue;\n    \
+    \        auto c1 = matroid1.circuit(e), c2 = matroid2.circuit(e);\n          \
+    \  if (c1.empty()) sssp.add_edge(e, gt, 0);\n            for (Element f : c1)\
+    \ {\n                if (f != e) sssp.add_edge(e, f, -weights[f] + 1);\n     \
+    \       }\n            if (c2.empty()) sssp.add_edge(gs, e, weights[e] + 1);\n\
+    \            for (Element f : c2) {\n                if (f != e) sssp.add_edge(f,\
+    \ e, weights[e] + 1);\n            }\n        }\n        sssp.solve(gs);\n   \
+    \     auto aug_path = sssp.retrieve_path(gt);\n        if (aug_path.empty()) break;\n\
+    \        for (auto e : aug_path) {\n            if (e != gs and e != gt) I[e]\
+    \ = !I[e];\n        }\n    }\n    return I;\n}\n#line 5 \"combinatorial_opt/matroids/graphic_matroid.hpp\"\
+    \n\n// GraphicMatroid: subgraph of undirected graphs, without loops\nclass GraphicMatroid\
+    \ {\n    using Vertex = int;\n    using Element = int;\n    int M;\n    int V;\
+    \ // # of vertices of graph\n    std::vector<std::vector<std::pair<Vertex, Element>>>\
+    \ to;\n    std::vector<std::pair<Vertex, Vertex>> edges;\n    std::vector<Element>\
+    \ backtrack;\n    std::vector<Vertex> vprev;\n    std::vector<int> depth, root;\n\
+    \npublic:\n    GraphicMatroid(int V, const std::vector<std::pair<Vertex, Vertex>>\
+    \ &edges_)\n        : M(edges_.size()), V(V), to(V), edges(edges_) {\n       \
+    \ for (int e = 0; e < int(edges_.size()); e++) {\n            int u = edges_[e].first,\
+    \ v = edges_[e].second;\n            assert(0 <= u and u < V);\n            assert(0\
     \ <= v and v < V);\n            if (u != v) {\n                to[u].emplace_back(v,\
     \ e);\n                to[v].emplace_back(u, e);\n            }\n        }\n \
     \   }\n    int size() const { return M; }\n\n    std::vector<Vertex> que;\n  \
@@ -243,7 +244,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   requiredBy: []
-  timestamp: '2021-11-13 15:02:16+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp

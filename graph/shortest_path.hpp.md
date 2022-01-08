@@ -34,19 +34,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/warshallfloyd.test.cpp
     title: graph/test/warshallfloyd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
     \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
     \ <limits>\n#include <queue>\n#include <string>\n#include <utility>\n#include\
     \ <vector>\n\n// CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
-    \ / 2, int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
+    \ / 2, int INVALID = -1>\nstruct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
     \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
     \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
     \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
@@ -55,18 +55,19 @@ data:
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
-    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;\n  \
-    \  template <class Heap = Pque> void Dijkstra(int s) {\n        assert(0 <= s\
-    \ and s < V);\n        dist.assign(V, INF);\n        dist[s] = 0;\n        prev.assign(V,\
-    \ INVALID);\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
-    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
-    \            pq.pop();\n            if (dist[v] < d) continue;\n            for\
-    \ (auto nx : to[v]) {\n                T dnx = d + nx.second;\n              \
-    \  if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
-    \          }\n        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void\
-    \ DijkstraVquad(int s) {\n        assert(0 <= s and s < V);\n        dist.assign(V,\
-    \ INF);\n        dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
+    \ int>, std::vector<std::pair<T, int>>,\n                                    \
+    \ std::greater<std::pair<T, int>>>;\n    template <class Heap = Pque> void Dijkstra(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        Heap pq;\n      \
+    \  pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n      \
+    \      int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
+    \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
+    \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
+    \                pq.emplace(dnx, nx.first);\n                }\n            }\n\
+    \        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void DijkstraVquad(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
     \ fixed(V, false);\n        while (true) {\n            int r = INVALID;\n   \
     \         T dr = INF;\n            for (int i = 0; i < V; i++) {\n           \
     \     if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];\n            }\n  \
@@ -142,15 +143,15 @@ data:
     \    }\n\n    void dump_graphviz(std::string filename = \"shortest_path\") const\
     \ {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
-    \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
-    ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n"
+    \ to[i])\n                ss << i << \"->\" << e.first << \"[label=\" << e.second\
+    \ << \"];\\n\";\n        }\n        ss << \"}\\n\";\n        ss.close();\n   \
+    \     return;\n    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <deque>\n\
     #include <fstream>\n#include <functional>\n#include <limits>\n#include <queue>\n\
     #include <string>\n#include <utility>\n#include <vector>\n\n// CUT begin\ntemplate\
-    \ <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct\
-    \ ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n    T wmin,\
-    \ wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n    ShortestPath(int\
+    \ <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1>\n\
+    struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n    T\
+    \ wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n    ShortestPath(int\
     \ V = 0) : V(V), E(0), single_positive_weight(true), wmin(0), wmax(0), to(V) {}\n\
     \    void add_edge(int s, int t, T w) {\n        assert(0 <= s and s < V);\n \
     \       assert(0 <= t and t < V);\n        to[s].emplace_back(t, w);\n       \
@@ -158,18 +159,19 @@ data:
     \ false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
-    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;\n  \
-    \  template <class Heap = Pque> void Dijkstra(int s) {\n        assert(0 <= s\
-    \ and s < V);\n        dist.assign(V, INF);\n        dist[s] = 0;\n        prev.assign(V,\
-    \ INVALID);\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
-    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
-    \            pq.pop();\n            if (dist[v] < d) continue;\n            for\
-    \ (auto nx : to[v]) {\n                T dnx = d + nx.second;\n              \
-    \  if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
-    \          }\n        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void\
-    \ DijkstraVquad(int s) {\n        assert(0 <= s and s < V);\n        dist.assign(V,\
-    \ INF);\n        dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
+    \ int>, std::vector<std::pair<T, int>>,\n                                    \
+    \ std::greater<std::pair<T, int>>>;\n    template <class Heap = Pque> void Dijkstra(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        Heap pq;\n      \
+    \  pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n      \
+    \      int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
+    \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
+    \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
+    \                pq.emplace(dnx, nx.first);\n                }\n            }\n\
+    \        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void DijkstraVquad(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
     \ fixed(V, false);\n        while (true) {\n            int r = INVALID;\n   \
     \         T dr = INF;\n            for (int i = 0; i < V; i++) {\n           \
     \     if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];\n            }\n  \
@@ -245,17 +247,17 @@ data:
     \    }\n\n    void dump_graphviz(std::string filename = \"shortest_path\") const\
     \ {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
-    \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
-    ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n"
+    \ to[i])\n                ss << i << \"->\" << e.first << \"[label=\" << e.second\
+    \ << \"];\\n\";\n        }\n        ss << \"}\\n\";\n        ss.close();\n   \
+    \     return;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/shortest_path.hpp
   requiredBy:
   - combinatorial_opt/matroid_intersection.hpp
   - combinatorial_opt/matroid_union.hpp
-  timestamp: '2021-09-07 01:07:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp

@@ -17,7 +17,7 @@ data:
   bundledCode: "#line 2 \"combinatorial_opt/maxflow_pushrelabel.hpp\"\n#include <cassert>\n\
     #include <limits>\n#include <utility>\n#include <vector>\n\n// Maxflow (push-relabel,\
     \ highest-label)\n// Complexity: O(N^2 M^(1/2))\ntemplate <class Cap, int GlobalRelabelFreq\
-    \ = 5, bool UseGapRelabeling = true> struct mf_pushrelabel {\n    struct pque_\
+    \ = 5, bool UseGapRelabeling = true>\nstruct mf_pushrelabel {\n    struct pque_\
     \ {\n        std::vector<std::pair<int, int>> even_, odd_;\n        int se, so;\n\
     \        void init(int n) { even_.resize(n), odd_.resize(n), se = so = 0; };\n\
     \        void clear() { se = so = 0; }\n        bool empty() const { return se\
@@ -25,9 +25,9 @@ data:
     \ = {i, h}; }\n        int highest() const {\n            int a = se ? even_[se\
     \ - 1].second : -1, b = so ? odd_[so - 1].second : -1;\n            return a >\
     \ b ? a : b;\n        }\n        int pop() {\n            if (!se or (so and odd_[so\
-    \ - 1].second > even_[se - 1].second)) return odd_[--so].first;\n            return\
-    \ even_[--se].first;\n        }\n    } pque;\n    int _n;\n    struct _edge {\n\
-    \        int to, rev;\n        Cap cap;\n    };\n    std::vector<std::vector<_edge>>\
+    \ - 1].second > even_[se - 1].second))\n                return odd_[--so].first;\n\
+    \            return even_[--se].first;\n        }\n    } pque;\n    int _n;\n\
+    \    struct _edge {\n        int to, rev;\n        Cap cap;\n    };\n    std::vector<std::vector<_edge>>\
     \ g;\n    std::vector<std::pair<int, int>> pos;\n    mf_pushrelabel(int n) : _n(n),\
     \ g(n) {\n        static_assert(GlobalRelabelFreq >= 0, \"Global relabel parameter\
     \ must be nonnegative.\");\n    }\n    int add_edge(int from, int to, Cap cap)\
@@ -89,18 +89,18 @@ data:
   code: "#pragma once\n#include <cassert>\n#include <limits>\n#include <utility>\n\
     #include <vector>\n\n// Maxflow (push-relabel, highest-label)\n// Complexity:\
     \ O(N^2 M^(1/2))\ntemplate <class Cap, int GlobalRelabelFreq = 5, bool UseGapRelabeling\
-    \ = true> struct mf_pushrelabel {\n    struct pque_ {\n        std::vector<std::pair<int,\
+    \ = true>\nstruct mf_pushrelabel {\n    struct pque_ {\n        std::vector<std::pair<int,\
     \ int>> even_, odd_;\n        int se, so;\n        void init(int n) { even_.resize(n),\
     \ odd_.resize(n), se = so = 0; };\n        void clear() { se = so = 0; }\n   \
     \     bool empty() const { return se + so == 0; }\n        void push(int i, int\
     \ h) { (h & 1 ? odd_[so++] : even_[se++]) = {i, h}; }\n        int highest() const\
     \ {\n            int a = se ? even_[se - 1].second : -1, b = so ? odd_[so - 1].second\
     \ : -1;\n            return a > b ? a : b;\n        }\n        int pop() {\n \
-    \           if (!se or (so and odd_[so - 1].second > even_[se - 1].second)) return\
-    \ odd_[--so].first;\n            return even_[--se].first;\n        }\n    } pque;\n\
-    \    int _n;\n    struct _edge {\n        int to, rev;\n        Cap cap;\n   \
-    \ };\n    std::vector<std::vector<_edge>> g;\n    std::vector<std::pair<int, int>>\
-    \ pos;\n    mf_pushrelabel(int n) : _n(n), g(n) {\n        static_assert(GlobalRelabelFreq\
+    \           if (!se or (so and odd_[so - 1].second > even_[se - 1].second))\n\
+    \                return odd_[--so].first;\n            return even_[--se].first;\n\
+    \        }\n    } pque;\n    int _n;\n    struct _edge {\n        int to, rev;\n\
+    \        Cap cap;\n    };\n    std::vector<std::vector<_edge>> g;\n    std::vector<std::pair<int,\
+    \ int>> pos;\n    mf_pushrelabel(int n) : _n(n), g(n) {\n        static_assert(GlobalRelabelFreq\
     \ >= 0, \"Global relabel parameter must be nonnegative.\");\n    }\n    int add_edge(int\
     \ from, int to, Cap cap) {\n        assert(0 <= from and from < _n);\n       \
     \ assert(0 <= to and to < _n);\n        assert(0 <= cap);\n        int m = int(pos.size());\n\
@@ -161,7 +161,7 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/maxflow_pushrelabel.hpp
   requiredBy: []
-  timestamp: '2021-08-28 13:06:43+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp

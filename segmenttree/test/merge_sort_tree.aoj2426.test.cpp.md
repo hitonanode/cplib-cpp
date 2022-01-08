@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/merge_sort_tree.hpp
     title: "Merge sort tree \uFF08\u9759\u7684\u306A\u5217\u306E\u90E8\u5206\u5217\
       \u306B\u542B\u307E\u308C\u308B\u95BE\u5024\u4EE5\u4E0B\u306E\u8981\u7D20\u6570\
       \u30AF\u30A8\u30EA\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2426
@@ -27,17 +27,18 @@ data:
     \ &vec) : N(vec.size()) {\n        x.resize(N * 2);\n        for (int i = 0; i\
     \ < N; i++) x[N + i] = {vec[i]};\n        for (int i = N - 1; i; i--) {\n    \
     \        std::merge(x[i * 2].begin(), x[i * 2].end(), x[i * 2 + 1].begin(), x[i\
-    \ * 2 + 1].end(), std::back_inserter(x[i]));\n        }\n    }\n    int cntLess(int\
-    \ l, int r, T query) const {\n        l += N, r += N;\n        int ret = 0;\n\
-    \        while (l < r) {\n            if (l & 1) ret += std::lower_bound(x[l].begin(),\
-    \ x[l].end(), query) - x[l].begin(), l++;\n            if (r & 1) r--, ret +=\
-    \ std::lower_bound(x[r].begin(), x[r].end(), query) - x[r].begin();\n        \
-    \    l >>= 1, r >>= 1;\n        }\n        return ret;\n    }\n    int cntLesseq(int\
-    \ l, int r, T query) const {\n        l += N, r += N;\n        int ret = 0;\n\
-    \        while (l < r) {\n            if (l & 1) ret += std::upper_bound(x[l].begin(),\
-    \ x[l].end(), query) - x[l].begin(), l++;\n            if (r & 1) r--, ret +=\
-    \ std::upper_bound(x[r].begin(), x[r].end(), query) - x[r].begin();\n        \
-    \    l >>= 1, r >>= 1;\n        }\n        return ret;\n    }\n    int cntMore(int\
+    \ * 2 + 1].end(),\n                       std::back_inserter(x[i]));\n       \
+    \ }\n    }\n    int cntLess(int l, int r, T query) const {\n        l += N, r\
+    \ += N;\n        int ret = 0;\n        while (l < r) {\n            if (l & 1)\n\
+    \                ret += std::lower_bound(x[l].begin(), x[l].end(), query) - x[l].begin(),\
+    \ l++;\n            if (r & 1)\n                r--, ret += std::lower_bound(x[r].begin(),\
+    \ x[r].end(), query) - x[r].begin();\n            l >>= 1, r >>= 1;\n        }\n\
+    \        return ret;\n    }\n    int cntLesseq(int l, int r, T query) const {\n\
+    \        l += N, r += N;\n        int ret = 0;\n        while (l < r) {\n    \
+    \        if (l & 1)\n                ret += std::upper_bound(x[l].begin(), x[l].end(),\
+    \ query) - x[l].begin(), l++;\n            if (r & 1)\n                r--, ret\
+    \ += std::upper_bound(x[r].begin(), x[r].end(), query) - x[r].begin();\n     \
+    \       l >>= 1, r >>= 1;\n        }\n        return ret;\n    }\n    int cntMore(int\
     \ begin, int end, T query) const {\n        int tot = std::max(0, std::min(end,\
     \ N) - std::max(begin, 0));\n        return tot - cntLesseq(begin, end, query);\n\
     \    }\n    int cntMoreeq(int begin, int end, T query) const {\n        int tot\
@@ -73,8 +74,8 @@ data:
   isVerificationFile: true
   path: segmenttree/test/merge_sort_tree.aoj2426.test.cpp
   requiredBy: []
-  timestamp: '2021-08-28 13:42:28+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: segmenttree/test/merge_sort_tree.aoj2426.test.cpp
 layout: document

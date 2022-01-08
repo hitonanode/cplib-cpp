@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/tree_isomorphism.hpp
     title: "Tree isomrphism \uFF08\u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: unionfind/grid_unionfind.hpp
     title: unionfind/grid_unionfind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1613
@@ -37,16 +37,16 @@ data:
     \        x += 0x9e3779b97f4a7c15;\n        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;\n\
     \        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;\n        return x ^ (x >> 31);\n\
     \    }\n    DoubleHash get_hash(DoubleHash x) const {\n        static const uint64_t\
-    \ FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();\n\
+    \ FIXED_RANDOM =\n            std::chrono::steady_clock::now().time_since_epoch().count();\n\
     \        return {splitmix64(x.first.val + FIXED_RANDOM), splitmix64(x.second.val\
     \ + FIXED_RANDOM)};\n    }\n\n    static void add_hash(DoubleHash &l, const DoubleHash\
-    \ &r) { l.first += r.first, l.second += r.second; }\n    static DoubleHash subtract_hash(const\
-    \ DoubleHash &l, const DoubleHash &r) {\n        return {l.first - r.first, l.second\
-    \ - r.second};\n    }\n\n    std::vector<DoubleHash> hash;         // hash of\
-    \ the tree, each node regarded as root\n    std::vector<DoubleHash> hash_subtree;\
-    \ // hash of the subtree\n    std::vector<DoubleHash> hash_par;     // hash of\
-    \ the subtree whose root is parent[i], not containing i\n    DoubleHash hash_p;\
-    \                    // \\in [1, hmod), should be set randomly\n    DoubleHash\
+    \ &r) {\n        l.first += r.first, l.second += r.second;\n    }\n    static\
+    \ DoubleHash subtract_hash(const DoubleHash &l, const DoubleHash &r) {\n     \
+    \   return {l.first - r.first, l.second - r.second};\n    }\n\n    std::vector<DoubleHash>\
+    \ hash;         // hash of the tree, each node regarded as root\n    std::vector<DoubleHash>\
+    \ hash_subtree; // hash of the subtree\n    std::vector<DoubleHash> hash_par;\
+    \ // hash of the subtree whose root is parent[i], not containing i\n    DoubleHash\
+    \ hash_p;                // \\in [1, hmod), should be set randomly\n    DoubleHash\
     \ hash_dfs1_(int now, int prv) {\n        hash_subtree[now] = hash_p;\n      \
     \  for (auto nxt : e[now]) {\n            if (nxt != prv) add_hash(hash_subtree[now],\
     \ hash_dfs1_(nxt, now));\n        }\n        return get_hash(hash_subtree[now]);\n\
@@ -77,59 +77,61 @@ data:
     \ - md : v), *this; }\n    MDCONST ModInt(lint v) { _setval(v % md + md); }\n\
     \    MDCONST explicit operator bool() const { return val != 0; }\n    MDCONST\
     \ ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ - x.val + md); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.val % md); }\n    MDCONST ModInt operator/(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % md); }\n  \
-    \  MDCONST ModInt operator-() const { return ModInt()._setval(md - val); }\n \
-    \   MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
-    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
-    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
-    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % md + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt &x)\
-    \ { return ModInt()._setval(a % md - x.val + md); }\n    friend MDCONST ModInt\
-    \ operator*(lint a, const ModInt &x) { return ModInt()._setval(a % md * x.val\
-    \ % md); }\n    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n \
-    \       return ModInt()._setval(a % md * x.inv() % md);\n    }\n    MDCONST bool\
-    \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
-    \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
-    \ operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt,\
-    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
-    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
-    \ os << x.val; }\n    MDCONST ModInt pow(lint n) const {\n        ModInt ans =\
-    \ 1, tmp = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n \
-    \           tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n  \
-    \  static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static void _precalculation(int\
-    \ N) {\n        int l0 = facs.size();\n        if (N > md) N = md;\n        if\
-    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
-    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
-    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
-    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
-    \ = facinvs[i] * facs[i - 1];\n    }\n    MDCONST lint inv() const {\n       \
-    \ if (this->val < std::min(md >> 1, 1 << 21)) {\n            while (this->val\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val].val;\n\
-    \        } else {\n            return this->pow(md - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\
-    \    MDCONST ModInt facinv() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val];\n    }\n\
-    \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
-    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
-    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
-    \ r.val) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST\
-    \ ModInt nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
-    \ : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n\
-    \        if (val == 0) return 0;\n        if (md == 2) return val;\n        if\
-    \ (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md\
-    \ - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m %\
-    \ 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x\
-    \ * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while (y\
-    \ != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
-    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
-    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
+    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const {\n       \
+    \ return ModInt()._setval((lint)val - x.val + md);\n    }\n    MDCONST ModInt\
+    \ operator*(const ModInt &x) const {\n        return ModInt()._setval((lint)val\
+    \ * x.val % md);\n    }\n    MDCONST ModInt operator/(const ModInt &x) const {\n\
+    \        return ModInt()._setval((lint)val * x.inv() % md);\n    }\n    MDCONST\
+    \ ModInt operator-() const { return ModInt()._setval(md - val); }\n    MDCONST\
+    \ ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n    MDCONST\
+    \ ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n    MDCONST\
+    \ ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n    MDCONST\
+    \ ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n    friend\
+    \ MDCONST ModInt operator+(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md + x.val);\n    }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
+    \ &x) {\n        return ModInt()._setval(a % md - x.val + md);\n    }\n    friend\
+    \ MDCONST ModInt operator*(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md * x.val % md);\n    }\n    friend MDCONST ModInt operator/(lint a, const\
+    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.inv() % md);\n    }\n\
+    \    MDCONST bool operator==(const ModInt &x) const { return val == x.val; }\n\
+    \    MDCONST bool operator!=(const ModInt &x) const { return val != x.val; }\n\
+    \    MDCONST bool operator<(const ModInt &x) const {\n        return val < x.val;\n\
+    \    } // To use std::map<ModInt, T>\n    friend std::istream &operator>>(std::istream\
+    \ &is, ModInt &x) {\n        lint t;\n        return is >> t, x = ModInt(t), is;\n\
+    \    }\n    MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt\
+    \ &x) {\n        return os << x.val;\n    }\n    MDCONST ModInt pow(lint n) const\
+    \ {\n        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if\
+    \ (n & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
+    \ ans;\n    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST\
+    \ static void _precalculation(int N) {\n        int l0 = facs.size();\n      \
+    \  if (N > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N),\
+    \ facinvs.resize(N), invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i]\
+    \ = facs[i - 1] * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n    \
+    \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
+    \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
+    \    }\n    MDCONST lint inv() const {\n        if (this->val < std::min(md >>\
+    \ 1, 1 << 21)) {\n            while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n            return invs[this->val].val;\n        } else {\n         \
+    \   return this->pow(md - 2).val;\n        }\n    }\n    MDCONST ModInt fac()\
+    \ const {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facs[this->val];\n    }\n    MDCONST ModInt facinv() const\
+    \ {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facinvs[this->val];\n    }\n    MDCONST ModInt doublefac()\
+    \ const {\n        lint k = (this->val + 1) / 2;\n        return (this->val &\
+    \ 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n          \
+    \                     : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
+    \ ModInt nCr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
+    \ : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
+    \ nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0 : this->fac()\
+    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val\
+    \ == 0) return 0;\n        if (md == 2) return val;\n        if (pow((md - 1)\
+    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
+    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
+    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
+    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
+    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
+    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
     \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
@@ -172,13 +174,13 @@ data:
     \ S) {\n    for (auto &s : S) s = \".\" + s + \".\";\n    const int W = S[0].size();\n\
     \    S.insert(S.begin(), string(W, '.'));\n    S.push_back(string(W, '.'));\n\
     \    const int H = S.size();\n    GridUnionFind uf(H, W);\n    vector<pair<int,\
-    \ int>> dx4{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};\n    vector<pair<int, int>> dx8{{1,\
-    \ 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};\n    auto\
-    \ is_inner = [&](int i, int j) { return i >= 0 and i < H and j >= 0 and j < W;\
-    \ };\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) {\n\
-    \            vector<pair<int, int>> *ptr = S[i][j] == '#' ? &dx8 : &dx4;\n   \
-    \         for (auto p : *ptr) {\n                int nx = i + p.first, ny = j\
-    \ + p.second;\n                if (is_inner(nx, ny) and S[i][j] == S[nx][ny])\
+    \ int>> dx4{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};\n    vector<pair<int, int>> dx8{\n\
+    \        {1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};\n\
+    \    auto is_inner = [&](int i, int j) { return i >= 0 and i < H and j >= 0 and\
+    \ j < W; };\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W;\
+    \ j++) {\n            vector<pair<int, int>> *ptr = S[i][j] == '#' ? &dx8 : &dx4;\n\
+    \            for (auto p : *ptr) {\n                int nx = i + p.first, ny =\
+    \ j + p.second;\n                if (is_inner(nx, ny) and S[i][j] == S[nx][ny])\
     \ uf.unite(i, j, nx, ny);\n            }\n        }\n    }\n    std::vector<int>\
     \ roots;\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++)\
     \ roots.push_back(uf.find(i, j));\n    }\n    sort(roots.begin(), roots.end());\n\
@@ -209,13 +211,13 @@ data:
     \ S) {\n    for (auto &s : S) s = \".\" + s + \".\";\n    const int W = S[0].size();\n\
     \    S.insert(S.begin(), string(W, '.'));\n    S.push_back(string(W, '.'));\n\
     \    const int H = S.size();\n    GridUnionFind uf(H, W);\n    vector<pair<int,\
-    \ int>> dx4{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};\n    vector<pair<int, int>> dx8{{1,\
-    \ 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};\n    auto\
-    \ is_inner = [&](int i, int j) { return i >= 0 and i < H and j >= 0 and j < W;\
-    \ };\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) {\n\
-    \            vector<pair<int, int>> *ptr = S[i][j] == '#' ? &dx8 : &dx4;\n   \
-    \         for (auto p : *ptr) {\n                int nx = i + p.first, ny = j\
-    \ + p.second;\n                if (is_inner(nx, ny) and S[i][j] == S[nx][ny])\
+    \ int>> dx4{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};\n    vector<pair<int, int>> dx8{\n\
+    \        {1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};\n\
+    \    auto is_inner = [&](int i, int j) { return i >= 0 and i < H and j >= 0 and\
+    \ j < W; };\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W;\
+    \ j++) {\n            vector<pair<int, int>> *ptr = S[i][j] == '#' ? &dx8 : &dx4;\n\
+    \            for (auto p : *ptr) {\n                int nx = i + p.first, ny =\
+    \ j + p.second;\n                if (is_inner(nx, ny) and S[i][j] == S[nx][ny])\
     \ uf.unite(i, j, nx, ny);\n            }\n        }\n    }\n    std::vector<int>\
     \ roots;\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++)\
     \ roots.push_back(uf.find(i, j));\n    }\n    sort(roots.begin(), roots.end());\n\
@@ -245,8 +247,8 @@ data:
   isVerificationFile: true
   path: tree/test/tree_isomorphism.aoj1613.test.cpp
   requiredBy: []
-  timestamp: '2021-07-30 01:44:42+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/tree_isomorphism.aoj1613.test.cpp
 layout: document

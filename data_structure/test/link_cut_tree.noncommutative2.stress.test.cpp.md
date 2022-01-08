@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/link_cut_tree.hpp
     title: Link-Cut tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp
   _extendedRequiredBy: []
@@ -22,14 +22,14 @@ data:
     \ // DUMMY\n#line 2 \"data_structure/link_cut_tree.hpp\"\n\n// CUT begin\n// Link-Cut\
     \ Tree\n// Reference:\n// - https://www.slideshare.net/iwiwi/2-12188845\n// -\
     \ https://ei1333.github.io/library/structure/lct/link-cut-tree-lazy-path.cpp\n\
-    template <class S, class F, S (*op)(S, S), S (*reversal)(S), S (*mapping)(F, S),\
-    \ F (*composition)(F, F), F (*id)()>\nclass lazy_linkcuttree {\npublic:\n    struct\
-    \ Node {\n        Node *l, *r, *p;\n        S d, sum;\n        F lz;\n       \
-    \ bool is_reversed;\n        int sz;\n        Node(S val)\n            : l(nullptr),\
-    \ r(nullptr), p(nullptr), d(val), sum(val), lz(id()), is_reversed(false), sz(1)\
-    \ {}\n        bool is_root() const { return !p || (p->l != this and p->r != this);\
-    \ }\n        template <class OStream> friend OStream &operator<<(OStream &os,\
-    \ const Node &n) {\n            os << '[';\n            if (n.l) os << *(n.l)\
+    template <class S, class F, S (*op)(S, S), S (*reversal)(S), S (*mapping)(F, S),\n\
+    \          F (*composition)(F, F), F (*id)()>\nclass lazy_linkcuttree {\npublic:\n\
+    \    struct Node {\n        Node *l, *r, *p;\n        S d, sum;\n        F lz;\n\
+    \        bool is_reversed;\n        int sz;\n        Node(S val)\n           \
+    \ : l(nullptr), r(nullptr), p(nullptr), d(val), sum(val), lz(id()), is_reversed(false),\n\
+    \              sz(1) {}\n        bool is_root() const { return !p || (p->l !=\
+    \ this and p->r != this); }\n        template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const Node &n) {\n            os << '[';\n            if (n.l) os << *(n.l)\
     \ << ',';\n            os << n.d << ',';\n            if (n.r) os << *(n.r);\n\
     \            return os << ']';\n        }\n    };\n\nprotected:\n    void update(Node\
     \ *t) {\n        if (t == nullptr) return;\n        t->sz = 1;\n        t->sum\
@@ -89,7 +89,7 @@ data:
     \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
     \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
     \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
-    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
+    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi),\nmax<int>({l.inhi, r.inhi,\
     \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
     \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
     \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
@@ -111,65 +111,65 @@ data:
     \ x.sum and lhi == x.lhi and rhi == x.rhi and inhi == x.inhi;\n    }\n    template\
     \ <class OStream> friend OStream &operator<<(OStream &os, const S &x) {\n    \
     \    return os << '[' << x.sz << ',' << x.sum << ',' << x.lhi << ',' << x.rhi\
-    \ << ',' << x.inhi << ']';\n    }\n};\nusing F = pair<bool, int>;\nS op(S l, S\
-    \ r) {\n    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
-    \ + r.sum, r.rhi), max({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S x)\
-    \ { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n  \
-    \  if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
-    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
-    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
-    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
-    \ F, op, reversal, mapping, composition, id>;\n\nconst int NTRY = 1000;\nconst\
-    \ int VMAX = 20;\nconst int QPERTRY = 10000;\nconst int AMAX = 20;\n\nvector<int>\
-    \ connected_vertices(int N, int r, const vector<unordered_set<int>> &to) {\n \
-    \   vector<int> visited(N);\n    vector<int> ret, tmp{r};\n    while (tmp.size())\
-    \ {\n        int now = tmp.back();\n        tmp.pop_back();\n        ret.push_back(now);\n\
-    \        visited[now] = 1;\n        for (auto nxt : to[now]) {\n            if\
-    \ (!visited[nxt]) tmp.push_back(nxt);\n        }\n    }\n    return ret;\n}\n\n\
-    vector<int> get_rev_path(int s, int t, int prv, const vector<unordered_set<int>>\
-    \ &to) {\n    if (s == t) return {s};\n    for (auto nxt : to[s]) {\n        if\
-    \ (nxt == prv) continue;\n        auto v = get_rev_path(nxt, t, s, to);\n    \
-    \    if (v.size()) {\n            v.push_back(s);\n            return v;\n   \
-    \     }\n    }\n    return {};\n}\n\nint gen_rand_a() { return rand_int() % (AMAX\
-    \ * 2 + 1) - AMAX; }\n\nint main() {\n    for (int ntry = 0; ntry < NTRY; ntry++)\
-    \ {\n        const int N = 2 + rand_int() % (VMAX - 1);\n        vector<S> A(N);\n\
-    \        LCT tree;\n        vector<LCT::Node *> nodes;\n\n        for (int i =\
-    \ 0; i < N; i++) {\n            A[i] = gen_rand_a();\n            nodes.push_back(tree.make_node(A[i]));\n\
-    \        }\n        vector<pair<int, int>> edges;\n        vector<unordered_set<int>>\
-    \ to(N);\n\n        auto try_to_add_edge = [&]() {\n            int a = rand_int()\
-    \ % N;\n            vector<int> is_cmp(N, 1);\n            for (auto i : connected_vertices(N,\
-    \ a, to)) is_cmp[i] = 0;\n            vector<int> cmp;\n            for (int i\
-    \ = 0; i < N; i++) {\n                if (is_cmp[i]) cmp.push_back(i);\n     \
-    \       }\n            if (cmp.empty()) return;\n            int b = cmp[rand_int()\
-    \ % cmp.size()];\n\n            edges.emplace_back(a, b);\n            to[a].insert(b),\
-    \ to[b].insert(a);\n            tree.link(nodes[a], nodes[b]);\n        };\n\n\
-    \        for (int i = 0; i < N / 2; i++) try_to_add_edge();\n\n        for (int\
-    \ q = 0; q < QPERTRY; q++) {\n            const int tp = rand_int() % 6;\n   \
-    \         if (tp == 0) {\n                // cut() if possible\n             \
-    \   if (edges.empty()) continue;\n                int e = rand_int() % edges.size();\n\
-    \                int a = edges[e].first, b = edges[e].second;\n\n            \
-    \    edges.erase(edges.begin() + e);\n                to[a].erase(b), to[b].erase(a);\n\
-    \                tree.cut(nodes[a], nodes[b]);\n\n            } else if (tp ==\
-    \ 1) {\n                // link() if possible\n                try_to_add_edge();\n\
-    \n            } else if (tp == 2) {\n                // apply()\n            \
-    \    const int u = rand_int() % N;\n                auto conn = connected_vertices(N,\
-    \ u, to);\n                int v = conn[rand_int() % conn.size()];\n         \
-    \       const auto a = gen_rand_a();\n                tree.apply(nodes[u], nodes[v],\
-    \ {true, a});\n\n                for (auto i : get_rev_path(u, v, -1, to)) A[i]\
-    \ = a;\n\n            } else if (tp == 3) {\n                // prod()\n     \
-    \           const int u = rand_int() % N;\n                auto conn = connected_vertices(N,\
-    \ u, to);\n                int v = conn[rand_int() % conn.size()];\n         \
-    \       S ret1 = tree.prod(nodes[u], nodes[v]);\n\n                auto ret2 =\
-    \ S(A[u]);\n                for (auto i : get_rev_path(v, u, -1, to)) {\n    \
-    \                if (i != u) ret2 = op(ret2, A[i]);\n                }\n     \
-    \           assert(ret1 == ret2);\n\n            } else if (tp == 4) {\n     \
-    \           // set()\n                const int u = rand_int() % N;\n        \
-    \        const auto a = gen_rand_a();\n                tree.set(nodes[u], a);\n\
-    \                A[u] = a;\n\n            } else if (tp == 5) {\n            \
-    \    // get()\n                const int u = rand_int() % N;\n               \
-    \ const S a = tree.get(nodes[u]);\n                assert(a == A[u]);\n      \
-    \      } else {\n                exit(8);\n            }\n        }\n    }\n \
-    \   puts(\"Hello World\");\n}\n"
+    \ << ',' << x.inhi\n                  << ']';\n    }\n};\nusing F = pair<bool,\
+    \ int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum\
+    \ + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi),\n             max({l.inhi, r.inhi,\
+    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
+    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
+    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
+    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
+    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
+    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
+    \ id>;\n\nconst int NTRY = 1000;\nconst int VMAX = 20;\nconst int QPERTRY = 10000;\n\
+    const int AMAX = 20;\n\nvector<int> connected_vertices(int N, int r, const vector<unordered_set<int>>\
+    \ &to) {\n    vector<int> visited(N);\n    vector<int> ret, tmp{r};\n    while\
+    \ (tmp.size()) {\n        int now = tmp.back();\n        tmp.pop_back();\n   \
+    \     ret.push_back(now);\n        visited[now] = 1;\n        for (auto nxt :\
+    \ to[now]) {\n            if (!visited[nxt]) tmp.push_back(nxt);\n        }\n\
+    \    }\n    return ret;\n}\n\nvector<int> get_rev_path(int s, int t, int prv,\
+    \ const vector<unordered_set<int>> &to) {\n    if (s == t) return {s};\n    for\
+    \ (auto nxt : to[s]) {\n        if (nxt == prv) continue;\n        auto v = get_rev_path(nxt,\
+    \ t, s, to);\n        if (v.size()) {\n            v.push_back(s);\n         \
+    \   return v;\n        }\n    }\n    return {};\n}\n\nint gen_rand_a() { return\
+    \ rand_int() % (AMAX * 2 + 1) - AMAX; }\n\nint main() {\n    for (int ntry = 0;\
+    \ ntry < NTRY; ntry++) {\n        const int N = 2 + rand_int() % (VMAX - 1);\n\
+    \        vector<S> A(N);\n        LCT tree;\n        vector<LCT::Node *> nodes;\n\
+    \n        for (int i = 0; i < N; i++) {\n            A[i] = gen_rand_a();\n  \
+    \          nodes.push_back(tree.make_node(A[i]));\n        }\n        vector<pair<int,\
+    \ int>> edges;\n        vector<unordered_set<int>> to(N);\n\n        auto try_to_add_edge\
+    \ = [&]() {\n            int a = rand_int() % N;\n            vector<int> is_cmp(N,\
+    \ 1);\n            for (auto i : connected_vertices(N, a, to)) is_cmp[i] = 0;\n\
+    \            vector<int> cmp;\n            for (int i = 0; i < N; i++) {\n   \
+    \             if (is_cmp[i]) cmp.push_back(i);\n            }\n            if\
+    \ (cmp.empty()) return;\n            int b = cmp[rand_int() % cmp.size()];\n\n\
+    \            edges.emplace_back(a, b);\n            to[a].insert(b), to[b].insert(a);\n\
+    \            tree.link(nodes[a], nodes[b]);\n        };\n\n        for (int i\
+    \ = 0; i < N / 2; i++) try_to_add_edge();\n\n        for (int q = 0; q < QPERTRY;\
+    \ q++) {\n            const int tp = rand_int() % 6;\n            if (tp == 0)\
+    \ {\n                // cut() if possible\n                if (edges.empty())\
+    \ continue;\n                int e = rand_int() % edges.size();\n            \
+    \    int a = edges[e].first, b = edges[e].second;\n\n                edges.erase(edges.begin()\
+    \ + e);\n                to[a].erase(b), to[b].erase(a);\n                tree.cut(nodes[a],\
+    \ nodes[b]);\n\n            } else if (tp == 1) {\n                // link() if\
+    \ possible\n                try_to_add_edge();\n\n            } else if (tp ==\
+    \ 2) {\n                // apply()\n                const int u = rand_int() %\
+    \ N;\n                auto conn = connected_vertices(N, u, to);\n            \
+    \    int v = conn[rand_int() % conn.size()];\n                const auto a = gen_rand_a();\n\
+    \                tree.apply(nodes[u], nodes[v], {true, a});\n\n              \
+    \  for (auto i : get_rev_path(u, v, -1, to)) A[i] = a;\n\n            } else if\
+    \ (tp == 3) {\n                // prod()\n                const int u = rand_int()\
+    \ % N;\n                auto conn = connected_vertices(N, u, to);\n          \
+    \      int v = conn[rand_int() % conn.size()];\n                S ret1 = tree.prod(nodes[u],\
+    \ nodes[v]);\n\n                auto ret2 = S(A[u]);\n                for (auto\
+    \ i : get_rev_path(v, u, -1, to)) {\n                    if (i != u) ret2 = op(ret2,\
+    \ A[i]);\n                }\n                assert(ret1 == ret2);\n\n       \
+    \     } else if (tp == 4) {\n                // set()\n                const int\
+    \ u = rand_int() % N;\n                const auto a = gen_rand_a();\n        \
+    \        tree.set(nodes[u], a);\n                A[u] = a;\n\n            } else\
+    \ if (tp == 5) {\n                // get()\n                const int u = rand_int()\
+    \ % N;\n                const S a = tree.get(nodes[u]);\n                assert(a\
+    \ == A[u]);\n            } else {\n                exit(8);\n            }\n \
+    \       }\n    }\n    puts(\"Hello World\");\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \ // DUMMY\n#include \"../link_cut_tree.hpp\"\n#include \"../../random/xorshift.hpp\"\
     \n\n#include <algorithm>\n#include <cassert>\n#include <iostream>\n#include <unordered_set>\n\
@@ -181,72 +181,72 @@ data:
     \ x.sum and lhi == x.lhi and rhi == x.rhi and inhi == x.inhi;\n    }\n    template\
     \ <class OStream> friend OStream &operator<<(OStream &os, const S &x) {\n    \
     \    return os << '[' << x.sz << ',' << x.sum << ',' << x.lhi << ',' << x.rhi\
-    \ << ',' << x.inhi << ']';\n    }\n};\nusing F = pair<bool, int>;\nS op(S l, S\
-    \ r) {\n    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi\
-    \ + r.sum, r.rhi), max({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S x)\
-    \ { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n  \
-    \  if (f.first) {\n        auto v = f.second;\n        auto sum = x.sz * v;\n\
-    \        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else\
-    \ {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first\
-    \ ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
-    \ F, op, reversal, mapping, composition, id>;\n\nconst int NTRY = 1000;\nconst\
-    \ int VMAX = 20;\nconst int QPERTRY = 10000;\nconst int AMAX = 20;\n\nvector<int>\
-    \ connected_vertices(int N, int r, const vector<unordered_set<int>> &to) {\n \
-    \   vector<int> visited(N);\n    vector<int> ret, tmp{r};\n    while (tmp.size())\
-    \ {\n        int now = tmp.back();\n        tmp.pop_back();\n        ret.push_back(now);\n\
-    \        visited[now] = 1;\n        for (auto nxt : to[now]) {\n            if\
-    \ (!visited[nxt]) tmp.push_back(nxt);\n        }\n    }\n    return ret;\n}\n\n\
-    vector<int> get_rev_path(int s, int t, int prv, const vector<unordered_set<int>>\
-    \ &to) {\n    if (s == t) return {s};\n    for (auto nxt : to[s]) {\n        if\
-    \ (nxt == prv) continue;\n        auto v = get_rev_path(nxt, t, s, to);\n    \
-    \    if (v.size()) {\n            v.push_back(s);\n            return v;\n   \
-    \     }\n    }\n    return {};\n}\n\nint gen_rand_a() { return rand_int() % (AMAX\
-    \ * 2 + 1) - AMAX; }\n\nint main() {\n    for (int ntry = 0; ntry < NTRY; ntry++)\
-    \ {\n        const int N = 2 + rand_int() % (VMAX - 1);\n        vector<S> A(N);\n\
-    \        LCT tree;\n        vector<LCT::Node *> nodes;\n\n        for (int i =\
-    \ 0; i < N; i++) {\n            A[i] = gen_rand_a();\n            nodes.push_back(tree.make_node(A[i]));\n\
-    \        }\n        vector<pair<int, int>> edges;\n        vector<unordered_set<int>>\
-    \ to(N);\n\n        auto try_to_add_edge = [&]() {\n            int a = rand_int()\
-    \ % N;\n            vector<int> is_cmp(N, 1);\n            for (auto i : connected_vertices(N,\
-    \ a, to)) is_cmp[i] = 0;\n            vector<int> cmp;\n            for (int i\
-    \ = 0; i < N; i++) {\n                if (is_cmp[i]) cmp.push_back(i);\n     \
-    \       }\n            if (cmp.empty()) return;\n            int b = cmp[rand_int()\
-    \ % cmp.size()];\n\n            edges.emplace_back(a, b);\n            to[a].insert(b),\
-    \ to[b].insert(a);\n            tree.link(nodes[a], nodes[b]);\n        };\n\n\
-    \        for (int i = 0; i < N / 2; i++) try_to_add_edge();\n\n        for (int\
-    \ q = 0; q < QPERTRY; q++) {\n            const int tp = rand_int() % 6;\n   \
-    \         if (tp == 0) {\n                // cut() if possible\n             \
-    \   if (edges.empty()) continue;\n                int e = rand_int() % edges.size();\n\
-    \                int a = edges[e].first, b = edges[e].second;\n\n            \
-    \    edges.erase(edges.begin() + e);\n                to[a].erase(b), to[b].erase(a);\n\
-    \                tree.cut(nodes[a], nodes[b]);\n\n            } else if (tp ==\
-    \ 1) {\n                // link() if possible\n                try_to_add_edge();\n\
-    \n            } else if (tp == 2) {\n                // apply()\n            \
-    \    const int u = rand_int() % N;\n                auto conn = connected_vertices(N,\
-    \ u, to);\n                int v = conn[rand_int() % conn.size()];\n         \
-    \       const auto a = gen_rand_a();\n                tree.apply(nodes[u], nodes[v],\
-    \ {true, a});\n\n                for (auto i : get_rev_path(u, v, -1, to)) A[i]\
-    \ = a;\n\n            } else if (tp == 3) {\n                // prod()\n     \
-    \           const int u = rand_int() % N;\n                auto conn = connected_vertices(N,\
-    \ u, to);\n                int v = conn[rand_int() % conn.size()];\n         \
-    \       S ret1 = tree.prod(nodes[u], nodes[v]);\n\n                auto ret2 =\
-    \ S(A[u]);\n                for (auto i : get_rev_path(v, u, -1, to)) {\n    \
-    \                if (i != u) ret2 = op(ret2, A[i]);\n                }\n     \
-    \           assert(ret1 == ret2);\n\n            } else if (tp == 4) {\n     \
-    \           // set()\n                const int u = rand_int() % N;\n        \
-    \        const auto a = gen_rand_a();\n                tree.set(nodes[u], a);\n\
-    \                A[u] = a;\n\n            } else if (tp == 5) {\n            \
-    \    // get()\n                const int u = rand_int() % N;\n               \
-    \ const S a = tree.get(nodes[u]);\n                assert(a == A[u]);\n      \
-    \      } else {\n                exit(8);\n            }\n        }\n    }\n \
-    \   puts(\"Hello World\");\n}\n"
+    \ << ',' << x.inhi\n                  << ']';\n    }\n};\nusing F = pair<bool,\
+    \ int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum\
+    \ + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi),\n             max({l.inhi, r.inhi,\
+    \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
+    \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
+    \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
+    \ sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\nF composition(F\
+    \ fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return {false,\
+    \ 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
+    \ id>;\n\nconst int NTRY = 1000;\nconst int VMAX = 20;\nconst int QPERTRY = 10000;\n\
+    const int AMAX = 20;\n\nvector<int> connected_vertices(int N, int r, const vector<unordered_set<int>>\
+    \ &to) {\n    vector<int> visited(N);\n    vector<int> ret, tmp{r};\n    while\
+    \ (tmp.size()) {\n        int now = tmp.back();\n        tmp.pop_back();\n   \
+    \     ret.push_back(now);\n        visited[now] = 1;\n        for (auto nxt :\
+    \ to[now]) {\n            if (!visited[nxt]) tmp.push_back(nxt);\n        }\n\
+    \    }\n    return ret;\n}\n\nvector<int> get_rev_path(int s, int t, int prv,\
+    \ const vector<unordered_set<int>> &to) {\n    if (s == t) return {s};\n    for\
+    \ (auto nxt : to[s]) {\n        if (nxt == prv) continue;\n        auto v = get_rev_path(nxt,\
+    \ t, s, to);\n        if (v.size()) {\n            v.push_back(s);\n         \
+    \   return v;\n        }\n    }\n    return {};\n}\n\nint gen_rand_a() { return\
+    \ rand_int() % (AMAX * 2 + 1) - AMAX; }\n\nint main() {\n    for (int ntry = 0;\
+    \ ntry < NTRY; ntry++) {\n        const int N = 2 + rand_int() % (VMAX - 1);\n\
+    \        vector<S> A(N);\n        LCT tree;\n        vector<LCT::Node *> nodes;\n\
+    \n        for (int i = 0; i < N; i++) {\n            A[i] = gen_rand_a();\n  \
+    \          nodes.push_back(tree.make_node(A[i]));\n        }\n        vector<pair<int,\
+    \ int>> edges;\n        vector<unordered_set<int>> to(N);\n\n        auto try_to_add_edge\
+    \ = [&]() {\n            int a = rand_int() % N;\n            vector<int> is_cmp(N,\
+    \ 1);\n            for (auto i : connected_vertices(N, a, to)) is_cmp[i] = 0;\n\
+    \            vector<int> cmp;\n            for (int i = 0; i < N; i++) {\n   \
+    \             if (is_cmp[i]) cmp.push_back(i);\n            }\n            if\
+    \ (cmp.empty()) return;\n            int b = cmp[rand_int() % cmp.size()];\n\n\
+    \            edges.emplace_back(a, b);\n            to[a].insert(b), to[b].insert(a);\n\
+    \            tree.link(nodes[a], nodes[b]);\n        };\n\n        for (int i\
+    \ = 0; i < N / 2; i++) try_to_add_edge();\n\n        for (int q = 0; q < QPERTRY;\
+    \ q++) {\n            const int tp = rand_int() % 6;\n            if (tp == 0)\
+    \ {\n                // cut() if possible\n                if (edges.empty())\
+    \ continue;\n                int e = rand_int() % edges.size();\n            \
+    \    int a = edges[e].first, b = edges[e].second;\n\n                edges.erase(edges.begin()\
+    \ + e);\n                to[a].erase(b), to[b].erase(a);\n                tree.cut(nodes[a],\
+    \ nodes[b]);\n\n            } else if (tp == 1) {\n                // link() if\
+    \ possible\n                try_to_add_edge();\n\n            } else if (tp ==\
+    \ 2) {\n                // apply()\n                const int u = rand_int() %\
+    \ N;\n                auto conn = connected_vertices(N, u, to);\n            \
+    \    int v = conn[rand_int() % conn.size()];\n                const auto a = gen_rand_a();\n\
+    \                tree.apply(nodes[u], nodes[v], {true, a});\n\n              \
+    \  for (auto i : get_rev_path(u, v, -1, to)) A[i] = a;\n\n            } else if\
+    \ (tp == 3) {\n                // prod()\n                const int u = rand_int()\
+    \ % N;\n                auto conn = connected_vertices(N, u, to);\n          \
+    \      int v = conn[rand_int() % conn.size()];\n                S ret1 = tree.prod(nodes[u],\
+    \ nodes[v]);\n\n                auto ret2 = S(A[u]);\n                for (auto\
+    \ i : get_rev_path(v, u, -1, to)) {\n                    if (i != u) ret2 = op(ret2,\
+    \ A[i]);\n                }\n                assert(ret1 == ret2);\n\n       \
+    \     } else if (tp == 4) {\n                // set()\n                const int\
+    \ u = rand_int() % N;\n                const auto a = gen_rand_a();\n        \
+    \        tree.set(nodes[u], a);\n                A[u] = a;\n\n            } else\
+    \ if (tp == 5) {\n                // get()\n                const int u = rand_int()\
+    \ % N;\n                const S a = tree.get(nodes[u]);\n                assert(a\
+    \ == A[u]);\n            } else {\n                exit(8);\n            }\n \
+    \       }\n    }\n    puts(\"Hello World\");\n}\n"
   dependsOn:
   - data_structure/link_cut_tree.hpp
   - random/xorshift.hpp
   isVerificationFile: true
   path: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
   requiredBy: []
-  timestamp: '2021-07-23 17:14:41+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp

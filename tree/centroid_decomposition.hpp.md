@@ -2,22 +2,22 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/frequency_table_of_tree_distance.hpp
     title: Frequency table of tree distance
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.test.cpp
     title: tree/test/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://codeforces.com/contest/321/submission/59093583
@@ -32,19 +32,20 @@ data:
     \ chi;                // children id's\n    std::vector<int> subtree_size;   \
     \                 // size of each subtree\n    std::vector<int> available_edge;\
     \                  // If 0, ignore the corresponding edge.\n\n    CentroidDecomposition(int\
-    \ v = 0) : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v) {}\n\
-    \    CentroidDecomposition(const std::vector<std::vector<int>> &to_) : CentroidDecomposition(to_.size())\
-    \ {\n        for (int i = 0; i < V; i++) {\n            for (auto j : to_[i])\
-    \ {\n                if (i < j) { add_edge(i, j); }\n            }\n        }\n\
-    \    }\n\n    void add_edge(int v1, int v2) {\n        to[v1].emplace_back(v2,\
-    \ E), to[v2].emplace_back(v1, E), E++;\n        available_edge.emplace_back(1);\n\
-    \    }\n\n    int _dfs_fixroot(int now, int prv) {\n        chi[now].clear(),\
-    \ subtree_size[now] = 1;\n        for (auto nxt : to[now]) {\n            if (nxt.first\
-    \ != prv and available_edge[nxt.second]) {\n                par[nxt.first] = now,\
-    \ chi[now].push_back(nxt.first);\n                subtree_size[now] += _dfs_fixroot(nxt.first,\
-    \ now);\n            }\n        }\n        return subtree_size[now];\n    }\n\n\
-    \    void fix_root(int root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root,\
-    \ -1);\n    }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
+    \ v = 0)\n        : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v)\
+    \ {}\n    CentroidDecomposition(const std::vector<std::vector<int>> &to_)\n  \
+    \      : CentroidDecomposition(to_.size()) {\n        for (int i = 0; i < V; i++)\
+    \ {\n            for (auto j : to_[i]) {\n                if (i < j) { add_edge(i,\
+    \ j); }\n            }\n        }\n    }\n\n    void add_edge(int v1, int v2)\
+    \ {\n        to[v1].emplace_back(v2, E), to[v2].emplace_back(v1, E), E++;\n  \
+    \      available_edge.emplace_back(1);\n    }\n\n    int _dfs_fixroot(int now,\
+    \ int prv) {\n        chi[now].clear(), subtree_size[now] = 1;\n        for (auto\
+    \ nxt : to[now]) {\n            if (nxt.first != prv and available_edge[nxt.second])\
+    \ {\n                par[nxt.first] = now, chi[now].push_back(nxt.first);\n  \
+    \              subtree_size[now] += _dfs_fixroot(nxt.first, now);\n          \
+    \  }\n        }\n        return subtree_size[now];\n    }\n\n    void fix_root(int\
+    \ root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root, -1);\n \
+    \   }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
     \    void _dfs_detect_centroids(int now, int prv, int n) {\n        bool is_centroid\
     \ = true;\n        for (auto nxt : to[now]) {\n            if (nxt.first != prv\
     \ and available_edge[nxt.second]) {\n                _dfs_detect_centroids(nxt.first,\
@@ -77,19 +78,20 @@ data:
     \ chi;                // children id's\n    std::vector<int> subtree_size;   \
     \                 // size of each subtree\n    std::vector<int> available_edge;\
     \                  // If 0, ignore the corresponding edge.\n\n    CentroidDecomposition(int\
-    \ v = 0) : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v) {}\n\
-    \    CentroidDecomposition(const std::vector<std::vector<int>> &to_) : CentroidDecomposition(to_.size())\
-    \ {\n        for (int i = 0; i < V; i++) {\n            for (auto j : to_[i])\
-    \ {\n                if (i < j) { add_edge(i, j); }\n            }\n        }\n\
-    \    }\n\n    void add_edge(int v1, int v2) {\n        to[v1].emplace_back(v2,\
-    \ E), to[v2].emplace_back(v1, E), E++;\n        available_edge.emplace_back(1);\n\
-    \    }\n\n    int _dfs_fixroot(int now, int prv) {\n        chi[now].clear(),\
-    \ subtree_size[now] = 1;\n        for (auto nxt : to[now]) {\n            if (nxt.first\
-    \ != prv and available_edge[nxt.second]) {\n                par[nxt.first] = now,\
-    \ chi[now].push_back(nxt.first);\n                subtree_size[now] += _dfs_fixroot(nxt.first,\
-    \ now);\n            }\n        }\n        return subtree_size[now];\n    }\n\n\
-    \    void fix_root(int root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root,\
-    \ -1);\n    }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
+    \ v = 0)\n        : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v)\
+    \ {}\n    CentroidDecomposition(const std::vector<std::vector<int>> &to_)\n  \
+    \      : CentroidDecomposition(to_.size()) {\n        for (int i = 0; i < V; i++)\
+    \ {\n            for (auto j : to_[i]) {\n                if (i < j) { add_edge(i,\
+    \ j); }\n            }\n        }\n    }\n\n    void add_edge(int v1, int v2)\
+    \ {\n        to[v1].emplace_back(v2, E), to[v2].emplace_back(v1, E), E++;\n  \
+    \      available_edge.emplace_back(1);\n    }\n\n    int _dfs_fixroot(int now,\
+    \ int prv) {\n        chi[now].clear(), subtree_size[now] = 1;\n        for (auto\
+    \ nxt : to[now]) {\n            if (nxt.first != prv and available_edge[nxt.second])\
+    \ {\n                par[nxt.first] = now, chi[now].push_back(nxt.first);\n  \
+    \              subtree_size[now] += _dfs_fixroot(nxt.first, now);\n          \
+    \  }\n        }\n        return subtree_size[now];\n    }\n\n    void fix_root(int\
+    \ root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root, -1);\n \
+    \   }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
     \    void _dfs_detect_centroids(int now, int prv, int n) {\n        bool is_centroid\
     \ = true;\n        for (auto nxt : to[now]) {\n            if (nxt.first != prv\
     \ and available_edge[nxt.second]) {\n                _dfs_detect_centroids(nxt.first,\
@@ -116,8 +118,8 @@ data:
   path: tree/centroid_decomposition.hpp
   requiredBy:
   - tree/frequency_table_of_tree_distance.hpp
-  timestamp: '2021-06-06 15:23:40+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp

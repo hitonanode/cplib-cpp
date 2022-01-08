@@ -19,8 +19,8 @@ data:
   bundledCode: "#line 1 \"combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp\"\
     \n#define PROBLEM \"https://yukicoder.me/problems/no/1615\"\n#line 2 \"combinatorial_opt/mcf_costscaling.hpp\"\
     \n#include <cassert>\n#include <vector>\n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\n\
-    template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20> struct\
-    \ mcf_costscaling {\n    mcf_costscaling() = default;\n    mcf_costscaling(int\
+    template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20>\n\
+    struct mcf_costscaling {\n    mcf_costscaling() = default;\n    mcf_costscaling(int\
     \ n) : _n(n), to(n), b(n), p(n) {}\n\n    int _n;\n    std::vector<Cap> cap;\n\
     \    std::vector<Cost> cost;\n    std::vector<int> opposite;\n    std::vector<std::vector<int>>\
     \ to;\n    std::vector<Cap> b;\n    std::vector<Cost> p;\n\n    int add_edge(int\
@@ -41,47 +41,48 @@ data:
     \ {\n                    bool flg = false;\n                    for (int e = 0;\
     \ e < int(cap.size()); e++) {\n                        if (!cap[e]) continue;\n\
     \                        int i = opposite[e ^ 1], j = opposite[e];\n         \
-    \               if (pp[j] > pp[i] + cost[e] + eps) pp[j] = pp[i] + cost[e] + eps,\
-    \ flg = true;\n                    }\n                    if (!flg) return p =\
-    \ pp, true;\n                }\n                return false;\n            };\n\
-    \            if (no_admissible_cycle()) continue; // Refine\n\n            for\
-    \ (int e = 0; e < int(cap.size()); e++) {\n                const int i = opposite[e\
-    \ ^ 1], j = opposite[e];\n                const Cost cp_ij = cost[e] + p[i] -\
-    \ p[j];\n                if (cap[e] and cp_ij < 0) b[i] -= cap[e], b[j] += cap[e],\
-    \ cap[e ^ 1] += cap[e], cap[e] = 0;\n            }\n            que.clear();\n\
-    \            int qh = 0;\n            for (int i = 0; i < _n; i++) {\n       \
-    \         if (b[i] > 0) que.push_back(i);\n            }\n            std::vector<int>\
-    \ iters(_n);\n            while (qh < int(que.size())) {\n                const\
-    \ int i = que[qh++];\n                for (; iters[i] < int(to[i].size()) and\
-    \ b[i]; ++iters[i]) { // Push\n                    int e = to[i][iters[i]];\n\
-    \                    if (!cap[e]) continue;\n                    int j = opposite[e];\n\
-    \                    Cost cp_ij = cost[e] + p[i] - p[j];\n                   \
-    \ if (cp_ij >= 0) continue;\n                    Cap f = b[i] > cap[e] ? cap[e]\
-    \ : b[i];\n                    if (b[j] <= 0 and b[j] + f > 0) que.push_back(j);\n\
-    \                    b[i] -= f, b[j] += f, cap[e] -= f, cap[e ^ 1] += f;\n   \
-    \             }\n\n                if (b[i] > 0) { // Relabel\n              \
-    \      bool flg = false;\n                    for (int e : to[i]) {\n        \
-    \                if (!cap[e]) continue;\n                        Cost x = p[opposite[e]]\
-    \ - cost[e] - eps;\n                        if (!flg or x > p[i]) flg = true,\
-    \ p[i] = x;\n                    }\n                    que.push_back(i), iters[i]\
-    \ = 0;\n                }\n            }\n        }\n        RetCost ret = 0;\n\
-    \        for (int e = 0; e < int(cap.size()); e += 2) ret += RetCost(cost[e])\
-    \ * cap[e ^ 1];\n        return ret / (_n + 1);\n    }\n    std::vector<Cost>\
-    \ potential() const {\n        std::vector<Cost> ret = p, c0 = cost;\n       \
-    \ for (auto &x : ret) x /= (_n + 1);\n        for (auto &x : c0) x /= (_n + 1);\n\
-    \        while (true) {\n            bool flg = false;\n            for (int i\
-    \ = 0; i < _n; i++) {\n                for (const auto e : to[i]) {\n        \
-    \            if (!cap[e]) continue;\n                    int j = opposite[e];\n\
-    \                    auto y = ret[i] + c0[e];\n                    if (ret[j]\
-    \ > y) ret[j] = y, flg = true;\n                }\n            }\n           \
-    \ if (!flg) break;\n        }\n        return ret;\n    }\n    struct edge {\n\
-    \        int from, to;\n        Cap cap, flow;\n        Cost cost;\n    };\n \
-    \   edge get_edge(int e) const {\n        int m = cap.size() / 2;\n        assert(e\
-    \ >= 0 and e < m);\n        return {opposite[e * 2 + 1], opposite[e * 2], cap[e\
-    \ * 2] + cap[e * 2 + 1], cap[e * 2 + 1], cost[e * 2] / (_n + 1)};\n    }\n   \
-    \ std::vector<edge> edges() const {\n        int m = cap.size() / 2;\n       \
-    \ std::vector<edge> result(m);\n        for (int i = 0; i < m; i++) result[i]\
-    \ = get_edge(i);\n        return result;\n    }\n};\n#line 3 \"combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp\"\
+    \               if (pp[j] > pp[i] + cost[e] + eps)\n                         \
+    \   pp[j] = pp[i] + cost[e] + eps, flg = true;\n                    }\n      \
+    \              if (!flg) return p = pp, true;\n                }\n           \
+    \     return false;\n            };\n            if (no_admissible_cycle()) continue;\
+    \ // Refine\n\n            for (int e = 0; e < int(cap.size()); e++) {\n     \
+    \           const int i = opposite[e ^ 1], j = opposite[e];\n                const\
+    \ Cost cp_ij = cost[e] + p[i] - p[j];\n                if (cap[e] and cp_ij <\
+    \ 0)\n                    b[i] -= cap[e], b[j] += cap[e], cap[e ^ 1] += cap[e],\
+    \ cap[e] = 0;\n            }\n            que.clear();\n            int qh = 0;\n\
+    \            for (int i = 0; i < _n; i++) {\n                if (b[i] > 0) que.push_back(i);\n\
+    \            }\n            std::vector<int> iters(_n);\n            while (qh\
+    \ < int(que.size())) {\n                const int i = que[qh++];\n           \
+    \     for (; iters[i] < int(to[i].size()) and b[i]; ++iters[i]) { // Push\n  \
+    \                  int e = to[i][iters[i]];\n                    if (!cap[e])\
+    \ continue;\n                    int j = opposite[e];\n                    Cost\
+    \ cp_ij = cost[e] + p[i] - p[j];\n                    if (cp_ij >= 0) continue;\n\
+    \                    Cap f = b[i] > cap[e] ? cap[e] : b[i];\n                \
+    \    if (b[j] <= 0 and b[j] + f > 0) que.push_back(j);\n                    b[i]\
+    \ -= f, b[j] += f, cap[e] -= f, cap[e ^ 1] += f;\n                }\n\n      \
+    \          if (b[i] > 0) { // Relabel\n                    bool flg = false;\n\
+    \                    for (int e : to[i]) {\n                        if (!cap[e])\
+    \ continue;\n                        Cost x = p[opposite[e]] - cost[e] - eps;\n\
+    \                        if (!flg or x > p[i]) flg = true, p[i] = x;\n       \
+    \             }\n                    que.push_back(i), iters[i] = 0;\n       \
+    \         }\n            }\n        }\n        RetCost ret = 0;\n        for (int\
+    \ e = 0; e < int(cap.size()); e += 2) ret += RetCost(cost[e]) * cap[e ^ 1];\n\
+    \        return ret / (_n + 1);\n    }\n    std::vector<Cost> potential() const\
+    \ {\n        std::vector<Cost> ret = p, c0 = cost;\n        for (auto &x : ret)\
+    \ x /= (_n + 1);\n        for (auto &x : c0) x /= (_n + 1);\n        while (true)\
+    \ {\n            bool flg = false;\n            for (int i = 0; i < _n; i++) {\n\
+    \                for (const auto e : to[i]) {\n                    if (!cap[e])\
+    \ continue;\n                    int j = opposite[e];\n                    auto\
+    \ y = ret[i] + c0[e];\n                    if (ret[j] > y) ret[j] = y, flg = true;\n\
+    \                }\n            }\n            if (!flg) break;\n        }\n \
+    \       return ret;\n    }\n    struct edge {\n        int from, to;\n       \
+    \ Cap cap, flow;\n        Cost cost;\n    };\n    edge get_edge(int e) const {\n\
+    \        int m = cap.size() / 2;\n        assert(e >= 0 and e < m);\n        return\
+    \ {opposite[e * 2 + 1], opposite[e * 2], cap[e * 2] + cap[e * 2 + 1], cap[e *\
+    \ 2 + 1],\n                cost[e * 2] / (_n + 1)};\n    }\n    std::vector<edge>\
+    \ edges() const {\n        int m = cap.size() / 2;\n        std::vector<edge>\
+    \ result(m);\n        for (int i = 0; i < m; i++) result[i] = get_edge(i);\n \
+    \       return result;\n    }\n};\n#line 3 \"combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int N, M, K, L;\n    cin >> N >> M >> K >>\
     \ L;\n    mcf_costscaling<int, long long, 1, 10> mcf(N + M + 1);\n    for (int\
@@ -104,7 +105,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
   requiredBy: []
-  timestamp: '2021-08-18 23:55:14+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp

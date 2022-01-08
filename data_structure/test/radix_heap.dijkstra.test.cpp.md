@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/radix_heap.hpp
     title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: utilities/reader.hpp
     title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
   _extendedRequiredBy: []
@@ -35,28 +35,29 @@ data:
     \ = std::min(last, v[i][j].first);\n        for (int j = 0; j < int(v[i].size());\
     \ j++) {\n            v[bucket(v[i][j].first ^ last)].emplace_back(std::move(v[i][j]));\n\
     \        }\n        v[i].clear();\n    }\n\npublic:\n    radix_heap() : sz(0),\
-    \ last(0) { static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid type.\"\
-    ); }\n    std::size_t size() const noexcept { return sz; }\n    bool empty() const\
-    \ noexcept { return sz == 0; }\n    void push(Uint x, const Label &val) { ++sz,\
-    \ v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint x, Label &&val)\
-    \ { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val)); }\n    template\
-    \ <class... Args> void emplace(Uint x, Args &&...args) {\n        ++sz, v[bucket(x\
-    \ ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x), std::forward_as_tuple(args...));\n\
+    \ last(0) {\n        static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid\
+    \ type.\");\n    }\n    std::size_t size() const noexcept { return sz; }\n   \
+    \ bool empty() const noexcept { return sz == 0; }\n    void push(Uint x, const\
+    \ Label &val) { ++sz, v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint\
+    \ x, Label &&val) { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val));\
+    \ }\n    template <class... Args> void emplace(Uint x, Args &&...args) {\n   \
+    \     ++sz, v[bucket(x ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x),\n\
+    \                                               std::forward_as_tuple(args...));\n\
     \    }\n    void pop() { pull(), --sz, v[0].pop_back(); }\n    std::pair<Uint,\
     \ Label> top() { return pull(), v[0].back(); }\n    Uint top_key() { return pull(),\
     \ last; }\n    Label &top_label() { return pull(), v[0].back().second; }\n   \
     \ void clear() noexcept {\n        sz = 0, last = 0;\n        for (auto &vec :\
-    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) { std::swap(sz,\
-    \ a.sz), std::swap(last, a.last), v.swap(a.v); }\n};\n#line 2 \"utilities/reader.hpp\"\
-    \n#include <cstdio>\n#include <string>\n\n// CUT begin\ntemplate <typename T>\
-    \ T rd_integer() {\n    T ret = 0;\n    bool minus = false;\n\n    char c = getchar_unlocked();\n\
-    \    while (!isdigit(c)) minus |= (c == '-'), c = getchar_unlocked();\n    while\
-    \ (isdigit(c)) ret = (ret << 1) + (ret << 3) + (c ^ 48), c = getchar_unlocked();\n\
-    \n    return minus ? -ret : ret;\n}\nint rdi() { return rd_integer<int>(); }\n\
-    long long rdll() { return rd_integer<long long>(); }\nstd::string rdstr() {\n\
-    \    std::string ret;\n    char c = getchar_unlocked();\n    while (!isgraph(c))\
-    \ c = getchar_unlocked();\n    while (isgraph(c)) ret += c, c = getchar_unlocked();\n\
-    \    return ret;\n}\n#line 4 \"data_structure/test/radix_heap.dijkstra.test.cpp\"\
+    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) {\n      \
+    \  std::swap(sz, a.sz), std::swap(last, a.last), v.swap(a.v);\n    }\n};\n#line\
+    \ 2 \"utilities/reader.hpp\"\n#include <cstdio>\n#include <string>\n\n// CUT begin\n\
+    template <typename T> T rd_integer() {\n    T ret = 0;\n    bool minus = false;\n\
+    \n    char c = getchar_unlocked();\n    while (!isdigit(c)) minus |= (c == '-'),\
+    \ c = getchar_unlocked();\n    while (isdigit(c)) ret = (ret << 1) + (ret << 3)\
+    \ + (c ^ 48), c = getchar_unlocked();\n\n    return minus ? -ret : ret;\n}\nint\
+    \ rdi() { return rd_integer<int>(); }\nlong long rdll() { return rd_integer<long\
+    \ long>(); }\nstd::string rdstr() {\n    std::string ret;\n    char c = getchar_unlocked();\n\
+    \    while (!isgraph(c)) c = getchar_unlocked();\n    while (isgraph(c)) ret +=\
+    \ c, c = getchar_unlocked();\n    return ret;\n}\n#line 4 \"data_structure/test/radix_heap.dijkstra.test.cpp\"\
     \n#include <iostream>\n#line 8 \"data_structure/test/radix_heap.dijkstra.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int N = rdi(), M = rdi(), s = rdi(), t = rdi();\n\n    vector<vector<pair<int,\
@@ -101,7 +102,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/radix_heap.dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2021-09-09 22:54:13+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/radix_heap.dijkstra.test.cpp

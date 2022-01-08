@@ -2,29 +2,29 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/longest_common_prefix.hpp
     title: string/longest_common_prefix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/lca_rmq.hpp
     title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\
       \u30EA $O(1)$ \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: sparse_table/test/sparse_table.test.cpp
     title: sparse_table/test/sparse_table.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: sparse_table/test/sparse_table_aoj.test.cpp
     title: sparse_table/test/sparse_table_aoj.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/run_enumerate_lyndon_rmq.test.cpp
     title: string/test/run_enumerate_lyndon_rmq.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/lca_rmq.test.cpp
     title: tree/test/lca_rmq.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"sparse_table/rmq_sparse_table.hpp\"\n#include <algorithm>\n\
@@ -34,7 +34,7 @@ data:
     \ T &l, const T &r) const noexcept { return std::min<T>(l, r); }\n    int N, lgN;\n\
     \    T defaultT;\n    std::vector<std::vector<T>> data;\n    std::vector<int>\
     \ lgx_table;\n    StaticRMQ() = default;\n    StaticRMQ(const std::vector<T> &sequence,\
-    \ T defaultT) : N(sequence.size()), defaultT(defaultT) {\n        lgx_table.resize(N\
+    \ T defaultT)\n        : N(sequence.size()), defaultT(defaultT) {\n        lgx_table.resize(N\
     \ + 1);\n        for (int i = 2; i < N + 1; i++) lgx_table[i] = lgx_table[i >>\
     \ 1] + 1;\n        lgN = lgx_table[N] + 1;\n        data.assign(lgN, std::vector<T>(N,\
     \ defaultT));\n        data[0] = sequence;\n        for (int d = 1; d < lgN; d++)\
@@ -50,7 +50,7 @@ data:
     \ T> struct StaticRMQ {\n    inline T func(const T &l, const T &r) const noexcept\
     \ { return std::min<T>(l, r); }\n    int N, lgN;\n    T defaultT;\n    std::vector<std::vector<T>>\
     \ data;\n    std::vector<int> lgx_table;\n    StaticRMQ() = default;\n    StaticRMQ(const\
-    \ std::vector<T> &sequence, T defaultT) : N(sequence.size()), defaultT(defaultT)\
+    \ std::vector<T> &sequence, T defaultT)\n        : N(sequence.size()), defaultT(defaultT)\
     \ {\n        lgx_table.resize(N + 1);\n        for (int i = 2; i < N + 1; i++)\
     \ lgx_table[i] = lgx_table[i >> 1] + 1;\n        lgN = lgx_table[N] + 1;\n   \
     \     data.assign(lgN, std::vector<T>(N, defaultT));\n        data[0] = sequence;\n\
@@ -66,8 +66,8 @@ data:
   requiredBy:
   - string/longest_common_prefix.hpp
   - tree/lca_rmq.hpp
-  timestamp: '2021-03-13 17:28:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - sparse_table/test/sparse_table.test.cpp
   - sparse_table/test/sparse_table_aoj.test.cpp

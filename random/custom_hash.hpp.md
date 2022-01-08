@@ -16,7 +16,7 @@ data:
     \        x += 0x9e3779b97f4a7c15;\n        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;\n\
     \        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;\n        return x ^ (x >> 31);\n\
     \    }\n\n    size_t operator()(uint64_t x) const {\n        static const uint64_t\
-    \ FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();\n\
+    \ FIXED_RANDOM =\n            std::chrono::steady_clock::now().time_since_epoch().count();\n\
     \        return splitmix64(x + FIXED_RANDOM);\n    }\n};\n\n// Usage\n#include\
     \ <unordered_map>\nunordered_map<int, int, custom_hash> robust_unordered_map;\n\
     \n#include <ext/pb_ds/assoc_container.hpp>\nusing namespace __gnu_pbds;\ngp_hash_table<int,\
@@ -27,7 +27,7 @@ data:
     \        x += 0x9e3779b97f4a7c15;\n        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;\n\
     \        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;\n        return x ^ (x >> 31);\n\
     \    }\n\n    size_t operator()(uint64_t x) const {\n        static const uint64_t\
-    \ FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();\n\
+    \ FIXED_RANDOM =\n            std::chrono::steady_clock::now().time_since_epoch().count();\n\
     \        return splitmix64(x + FIXED_RANDOM);\n    }\n};\n\n// Usage\n#include\
     \ <unordered_map>\nunordered_map<int, int, custom_hash> robust_unordered_map;\n\
     \n#include <ext/pb_ds/assoc_container.hpp>\nusing namespace __gnu_pbds;\ngp_hash_table<int,\
@@ -36,7 +36,7 @@ data:
   isVerificationFile: false
   path: random/custom_hash.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: random/custom_hash.hpp

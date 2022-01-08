@@ -17,7 +17,7 @@ data:
   bundledCode: "#line 2 \"combinatorial_opt/maxflow.hpp\"\n\n#include <algorithm>\n\
     #include <cassert>\n#include <fstream>\n#include <limits>\n#include <string>\n\
     #include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder Library, single\
-    \ class, no namespace, no private variables, compatible with C++11\n// Reference:\
+    \ class, no namespace, no private variables, compatible\n// with C++11 Reference:\
     \ <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
     template <class Cap> struct mf_graph {\n    struct simple_queue_int {\n      \
     \  std::vector<int> payload;\n        int pos = 0;\n        void reserve(int n)\
@@ -96,7 +96,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/maxflow.test.cpp
   requiredBy: []
-  timestamp: '2021-03-14 20:53:10+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/maxflow.test.cpp

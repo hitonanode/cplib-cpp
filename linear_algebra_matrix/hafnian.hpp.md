@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: set_power_series/subset_convolution.hpp
     title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
       \u7B97\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/hafnian.test.cpp
     title: linear_algebra_matrix/test/hafnian.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"set_power_series/subset_convolution.hpp\"\n#include <algorithm>\n\
@@ -161,7 +161,7 @@ data:
   path: linear_algebra_matrix/hafnian.hpp
   requiredBy: []
   timestamp: '2021-10-16 14:40:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - linear_algebra_matrix/test/hafnian.test.cpp
 documentation_of: linear_algebra_matrix/hafnian.hpp

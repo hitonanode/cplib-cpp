@@ -6,21 +6,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/chromatic_number.test.cpp
     title: graph/test/chromatic_number.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/factorize_aoj.test.cpp
     title: number/test/factorize_aoj.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/factorize_longlong.test.cpp
     title: number/test/factorize_longlong.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/miller-rabin-5e7.test.cpp
     title: number/test/miller-rabin-5e7.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/miller-rabin.test.cpp
     title: number/test/miller-rabin.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - http://miller-rabin.appspot.com/
@@ -55,13 +55,13 @@ data:
     \ = 1, g, q = 1;\n            do {\n                x = y;\n                for\
     \ (int i = r; i--;) y = f(y);\n                long long k = 0;\n            \
     \    do {\n                    ys = y;\n                    for (int i = std::min(m,\
-    \ r - k); i--;) y = f(y), q = __int128(q) * std::abs(x - y) % n;\n           \
-    \         g = std::__gcd<long long>(q, n);\n                    k += m;\n    \
-    \            } while (k < r and g <= 1);\n                r <<= 1;\n         \
-    \   } while (g <= 1);\n            if (g == n) {\n                do {\n     \
-    \               ys = f(ys);\n                    g = std::__gcd(std::abs(x - ys),\
-    \ n);\n                } while (g <= 1);\n            }\n            if (g !=\
-    \ n) return g;\n        }\n    }\n\n    std::vector<long long> operator()(long\
+    \ r - k); i--;)\n                        y = f(y), q = __int128(q) * std::abs(x\
+    \ - y) % n;\n                    g = std::__gcd<long long>(q, n);\n          \
+    \          k += m;\n                } while (k < r and g <= 1);\n            \
+    \    r <<= 1;\n            } while (g <= 1);\n            if (g == n) {\n    \
+    \            do {\n                    ys = f(ys);\n                    g = std::__gcd(std::abs(x\
+    \ - ys), n);\n                } while (g <= 1);\n            }\n            if\
+    \ (g != n) return g;\n        }\n    }\n\n    std::vector<long long> operator()(long\
     \ long n) {\n        std::vector<long long> ret;\n        while (n > 1) {\n  \
     \          long long f = find_factor(n);\n            if (f < n) {\n         \
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
@@ -98,13 +98,13 @@ data:
     \ = 1, g, q = 1;\n            do {\n                x = y;\n                for\
     \ (int i = r; i--;) y = f(y);\n                long long k = 0;\n            \
     \    do {\n                    ys = y;\n                    for (int i = std::min(m,\
-    \ r - k); i--;) y = f(y), q = __int128(q) * std::abs(x - y) % n;\n           \
-    \         g = std::__gcd<long long>(q, n);\n                    k += m;\n    \
-    \            } while (k < r and g <= 1);\n                r <<= 1;\n         \
-    \   } while (g <= 1);\n            if (g == n) {\n                do {\n     \
-    \               ys = f(ys);\n                    g = std::__gcd(std::abs(x - ys),\
-    \ n);\n                } while (g <= 1);\n            }\n            if (g !=\
-    \ n) return g;\n        }\n    }\n\n    std::vector<long long> operator()(long\
+    \ r - k); i--;)\n                        y = f(y), q = __int128(q) * std::abs(x\
+    \ - y) % n;\n                    g = std::__gcd<long long>(q, n);\n          \
+    \          k += m;\n                } while (k < r and g <= 1);\n            \
+    \    r <<= 1;\n            } while (g <= 1);\n            if (g == n) {\n    \
+    \            do {\n                    ys = f(ys);\n                    g = std::__gcd(std::abs(x\
+    \ - ys), n);\n                } while (g <= 1);\n            }\n            if\
+    \ (g != n) return g;\n        }\n    }\n\n    std::vector<long long> operator()(long\
     \ long n) {\n        std::vector<long long> ret;\n        while (n > 1) {\n  \
     \          long long f = find_factor(n);\n            if (f < n) {\n         \
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
@@ -115,8 +115,8 @@ data:
   isVerificationFile: false
   path: number/factorize.hpp
   requiredBy: []
-  timestamp: '2021-06-04 02:06:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - number/test/factorize_longlong.test.cpp
   - number/test/miller-rabin.test.cpp

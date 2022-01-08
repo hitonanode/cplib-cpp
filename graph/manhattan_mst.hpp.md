@@ -22,7 +22,7 @@ data:
     \ https://judge.yosupo.jp/problem/manhattanmst, https://www.codechef.com/problems/HKRMAN\n\
     // Reference:\n// [1] H. Zhou, N. Shenoy, W. Nicholls,\n//     \"Efficient minimum\
     \ spanning tree construction without Delaunay triangulation,\"\n//     Information\
-    \ Processing Letters, 81(5), 271-276, 2002.\ntemplate <typename T> std::vector<std::tuple<T,\
+    \ Processing Letters, 81(5), 271-276, 2002.\ntemplate <typename T>\nstd::vector<std::tuple<T,\
     \ int, int>> manhattan_mst(std::vector<T> xs, std::vector<T> ys) {\n    const\
     \ int n = xs.size();\n    std::vector<int> idx(n);\n    std::iota(idx.begin(),\
     \ idx.end(), 0);\n    std::vector<std::tuple<T, int, int>> ret;\n    for (int\
@@ -45,25 +45,25 @@ data:
     \ https://www.codechef.com/problems/HKRMAN\n// Reference:\n// [1] H. Zhou, N.\
     \ Shenoy, W. Nicholls,\n//     \"Efficient minimum spanning tree construction\
     \ without Delaunay triangulation,\"\n//     Information Processing Letters, 81(5),\
-    \ 271-276, 2002.\ntemplate <typename T> std::vector<std::tuple<T, int, int>> manhattan_mst(std::vector<T>\
-    \ xs, std::vector<T> ys) {\n    const int n = xs.size();\n    std::vector<int>\
-    \ idx(n);\n    std::iota(idx.begin(), idx.end(), 0);\n    std::vector<std::tuple<T,\
-    \ int, int>> ret;\n    for (int s = 0; s < 2; s++) {\n        for (int t = 0;\
-    \ t < 2; t++) {\n            auto cmp = [&](int i, int j) { return xs[i] + ys[i]\
-    \ < xs[j] + ys[j]; };\n            std::sort(idx.begin(), idx.end(), cmp);\n \
-    \           std::map<T, int> sweep;\n            for (int i : idx) {\n       \
-    \         for (auto it = sweep.lower_bound(-ys[i]); it != sweep.end(); it = sweep.erase(it))\
-    \ {\n                    int j = it->second;\n                    if (xs[i] -\
-    \ xs[j] < ys[i] - ys[j]) break;\n                    ret.emplace_back(std::abs(xs[i]\
-    \ - xs[j]) + std::abs(ys[i] - ys[j]), i, j);\n                }\n            \
-    \    sweep[-ys[i]] = i;\n            }\n            std::swap(xs, ys);\n     \
-    \   }\n        for (auto &x : xs) x = -x;\n    }\n    std::sort(ret.begin(), ret.end());\n\
-    \    return ret;\n}\n"
+    \ 271-276, 2002.\ntemplate <typename T>\nstd::vector<std::tuple<T, int, int>>\
+    \ manhattan_mst(std::vector<T> xs, std::vector<T> ys) {\n    const int n = xs.size();\n\
+    \    std::vector<int> idx(n);\n    std::iota(idx.begin(), idx.end(), 0);\n   \
+    \ std::vector<std::tuple<T, int, int>> ret;\n    for (int s = 0; s < 2; s++) {\n\
+    \        for (int t = 0; t < 2; t++) {\n            auto cmp = [&](int i, int\
+    \ j) { return xs[i] + ys[i] < xs[j] + ys[j]; };\n            std::sort(idx.begin(),\
+    \ idx.end(), cmp);\n            std::map<T, int> sweep;\n            for (int\
+    \ i : idx) {\n                for (auto it = sweep.lower_bound(-ys[i]); it !=\
+    \ sweep.end(); it = sweep.erase(it)) {\n                    int j = it->second;\n\
+    \                    if (xs[i] - xs[j] < ys[i] - ys[j]) break;\n             \
+    \       ret.emplace_back(std::abs(xs[i] - xs[j]) + std::abs(ys[i] - ys[j]), i,\
+    \ j);\n                }\n                sweep[-ys[i]] = i;\n            }\n\
+    \            std::swap(xs, ys);\n        }\n        for (auto &x : xs) x = -x;\n\
+    \    }\n    std::sort(ret.begin(), ret.end());\n    return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/manhattan_mst.hpp
   requiredBy: []
-  timestamp: '2021-05-01 20:55:29+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/manhattan_mst.test.cpp

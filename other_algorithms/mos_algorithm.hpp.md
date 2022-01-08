@@ -29,15 +29,15 @@ data:
     \            int b1 = (ranges[q1].first - nmin) / szbucket, b2 = (ranges[q2].first\
     \ - nmin) / szbucket;\n            if (b1 != b2)\n                return b1 <\
     \ b2;\n            else {\n                return (b1 & 1) ? (ranges[q1].second\
-    \ > ranges[q2].second) : (ranges[q1].second < ranges[q2].second);\n          \
-    \  }\n        });\n\n        int l = ranges[qs[0]].first, r = l;\n        for\
-    \ (auto q : qs) {\n            while (r < ranges[q].second) AddRight(r++);\n \
-    \           while (l > ranges[q].first) AddLeft(--l);\n            while (r >\
-    \ ranges[q].second) RemoveRight(--r);\n            while (l < ranges[q].first)\
-    \ RemoveLeft(l++);\n            assert(l == ranges[q].first and r == ranges[q].second);\n\
-    \            Query(q);\n        }\n    }\n    template <typename F1, typename\
-    \ F3, typename F5> void run(F1 Add, F3 Remove, F5 Query) {\n        run(Add, Add,\
-    \ Remove, Remove, Query);\n    }\n};\n"
+    \ > ranges[q2].second)\n                                : (ranges[q1].second <\
+    \ ranges[q2].second);\n            }\n        });\n\n        int l = ranges[qs[0]].first,\
+    \ r = l;\n        for (auto q : qs) {\n            while (r < ranges[q].second)\
+    \ AddRight(r++);\n            while (l > ranges[q].first) AddLeft(--l);\n    \
+    \        while (r > ranges[q].second) RemoveRight(--r);\n            while (l\
+    \ < ranges[q].first) RemoveLeft(l++);\n            assert(l == ranges[q].first\
+    \ and r == ranges[q].second);\n            Query(q);\n        }\n    }\n    template\
+    \ <typename F1, typename F3, typename F5> void run(F1 Add, F3 Remove, F5 Query)\
+    \ {\n        run(Add, Add, Remove, Remove, Query);\n    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <cmath>\n#include <utility>\n\
     #include <vector>\n\n// CUT begin\n// Mo's algorithm\n// - add_range(l, r) : Add\
     \ [l, r) as query.\n// - run(Add, Remove, Query) : run Mo's algorithm.\n//   -\
@@ -57,21 +57,21 @@ data:
     \     std::sort(qs.begin(), qs.end(), [&](int q1, int q2) {\n            int b1\
     \ = (ranges[q1].first - nmin) / szbucket, b2 = (ranges[q2].first - nmin) / szbucket;\n\
     \            if (b1 != b2)\n                return b1 < b2;\n            else\
-    \ {\n                return (b1 & 1) ? (ranges[q1].second > ranges[q2].second)\
-    \ : (ranges[q1].second < ranges[q2].second);\n            }\n        });\n\n \
-    \       int l = ranges[qs[0]].first, r = l;\n        for (auto q : qs) {\n   \
-    \         while (r < ranges[q].second) AddRight(r++);\n            while (l >\
-    \ ranges[q].first) AddLeft(--l);\n            while (r > ranges[q].second) RemoveRight(--r);\n\
-    \            while (l < ranges[q].first) RemoveLeft(l++);\n            assert(l\
-    \ == ranges[q].first and r == ranges[q].second);\n            Query(q);\n    \
-    \    }\n    }\n    template <typename F1, typename F3, typename F5> void run(F1\
-    \ Add, F3 Remove, F5 Query) {\n        run(Add, Add, Remove, Remove, Query);\n\
-    \    }\n};\n"
+    \ {\n                return (b1 & 1) ? (ranges[q1].second > ranges[q2].second)\n\
+    \                                : (ranges[q1].second < ranges[q2].second);\n\
+    \            }\n        });\n\n        int l = ranges[qs[0]].first, r = l;\n \
+    \       for (auto q : qs) {\n            while (r < ranges[q].second) AddRight(r++);\n\
+    \            while (l > ranges[q].first) AddLeft(--l);\n            while (r >\
+    \ ranges[q].second) RemoveRight(--r);\n            while (l < ranges[q].first)\
+    \ RemoveLeft(l++);\n            assert(l == ranges[q].first and r == ranges[q].second);\n\
+    \            Query(q);\n        }\n    }\n    template <typename F1, typename\
+    \ F3, typename F5> void run(F1 Add, F3 Remove, F5 Query) {\n        run(Add, Add,\
+    \ Remove, Remove, Query);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: other_algorithms/mos_algorithm.hpp
   requiredBy: []
-  timestamp: '2021-05-01 20:55:29+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: other_algorithms/mos_algorithm.hpp

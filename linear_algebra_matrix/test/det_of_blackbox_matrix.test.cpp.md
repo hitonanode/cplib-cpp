@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/linear_recurrence.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
       \u63A8\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/blackbox_algorithm.hpp
     title: linear_algebra_matrix/blackbox_algorithm.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sparse_matrix_det
@@ -47,59 +47,61 @@ data:
     \ v) { return val = (v >= md ? v - md : v), *this; }\n    MDCONST ModInt(lint\
     \ v) { _setval(v % md + md); }\n    MDCONST explicit operator bool() const { return\
     \ val != 0; }\n    MDCONST ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ - x.val + md); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.val % md); }\n    MDCONST ModInt operator/(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % md); }\n  \
-    \  MDCONST ModInt operator-() const { return ModInt()._setval(md - val); }\n \
-    \   MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
-    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
-    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
-    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % md + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt &x)\
-    \ { return ModInt()._setval(a % md - x.val + md); }\n    friend MDCONST ModInt\
-    \ operator*(lint a, const ModInt &x) { return ModInt()._setval(a % md * x.val\
-    \ % md); }\n    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n \
-    \       return ModInt()._setval(a % md * x.inv() % md);\n    }\n    MDCONST bool\
-    \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
-    \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
-    \ operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt,\
-    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
-    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
-    \ os << x.val; }\n    MDCONST ModInt pow(lint n) const {\n        ModInt ans =\
-    \ 1, tmp = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n \
-    \           tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n  \
-    \  static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static void _precalculation(int\
-    \ N) {\n        int l0 = facs.size();\n        if (N > md) N = md;\n        if\
-    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
-    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
-    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
-    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
-    \ = facinvs[i] * facs[i - 1];\n    }\n    MDCONST lint inv() const {\n       \
-    \ if (this->val < std::min(md >> 1, 1 << 21)) {\n            while (this->val\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val].val;\n\
-    \        } else {\n            return this->pow(md - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\
-    \    MDCONST ModInt facinv() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val];\n    }\n\
-    \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
-    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
-    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
-    \ r.val) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST\
-    \ ModInt nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
-    \ : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n\
-    \        if (val == 0) return 0;\n        if (md == 2) return val;\n        if\
-    \ (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md\
-    \ - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m %\
-    \ 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x\
-    \ * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while (y\
-    \ != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
-    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
-    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
+    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const {\n       \
+    \ return ModInt()._setval((lint)val - x.val + md);\n    }\n    MDCONST ModInt\
+    \ operator*(const ModInt &x) const {\n        return ModInt()._setval((lint)val\
+    \ * x.val % md);\n    }\n    MDCONST ModInt operator/(const ModInt &x) const {\n\
+    \        return ModInt()._setval((lint)val * x.inv() % md);\n    }\n    MDCONST\
+    \ ModInt operator-() const { return ModInt()._setval(md - val); }\n    MDCONST\
+    \ ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n    MDCONST\
+    \ ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n    MDCONST\
+    \ ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n    MDCONST\
+    \ ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n    friend\
+    \ MDCONST ModInt operator+(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md + x.val);\n    }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
+    \ &x) {\n        return ModInt()._setval(a % md - x.val + md);\n    }\n    friend\
+    \ MDCONST ModInt operator*(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md * x.val % md);\n    }\n    friend MDCONST ModInt operator/(lint a, const\
+    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.inv() % md);\n    }\n\
+    \    MDCONST bool operator==(const ModInt &x) const { return val == x.val; }\n\
+    \    MDCONST bool operator!=(const ModInt &x) const { return val != x.val; }\n\
+    \    MDCONST bool operator<(const ModInt &x) const {\n        return val < x.val;\n\
+    \    } // To use std::map<ModInt, T>\n    friend std::istream &operator>>(std::istream\
+    \ &is, ModInt &x) {\n        lint t;\n        return is >> t, x = ModInt(t), is;\n\
+    \    }\n    MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt\
+    \ &x) {\n        return os << x.val;\n    }\n    MDCONST ModInt pow(lint n) const\
+    \ {\n        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if\
+    \ (n & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
+    \ ans;\n    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST\
+    \ static void _precalculation(int N) {\n        int l0 = facs.size();\n      \
+    \  if (N > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N),\
+    \ facinvs.resize(N), invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i]\
+    \ = facs[i - 1] * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n    \
+    \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
+    \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
+    \    }\n    MDCONST lint inv() const {\n        if (this->val < std::min(md >>\
+    \ 1, 1 << 21)) {\n            while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n            return invs[this->val].val;\n        } else {\n         \
+    \   return this->pow(md - 2).val;\n        }\n    }\n    MDCONST ModInt fac()\
+    \ const {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facs[this->val];\n    }\n    MDCONST ModInt facinv() const\
+    \ {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facinvs[this->val];\n    }\n    MDCONST ModInt doublefac()\
+    \ const {\n        lint k = (this->val + 1) / 2;\n        return (this->val &\
+    \ 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n          \
+    \                     : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
+    \ ModInt nCr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
+    \ : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
+    \ nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0 : this->fac()\
+    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val\
+    \ == 0) return 0;\n        if (md == 2) return val;\n        if (pow((md - 1)\
+    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
+    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
+    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
+    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
+    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
+    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
     \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
@@ -113,7 +115,7 @@ data:
     \ -2])\n// - [1, 1, 2, 3, 5, 8] -> (2, [1, -1, -1])\n// - [0, 0, 0, 0, 1]    ->\
     \ (5, [1, 0, 0, 0, 0, 998244352]) (mod 998244353)\n// - []                 ->\
     \ (0, [1])\n// - [0, 0, 0]          -> (0, [1])\n// - [-2]               -> (1,\
-    \ [1, 2])\ntemplate <typename Tfield> std::pair<int, std::vector<Tfield>> find_linear_recurrence(const\
+    \ [1, 2])\ntemplate <typename Tfield>\nstd::pair<int, std::vector<Tfield>> find_linear_recurrence(const\
     \ std::vector<Tfield> &S) {\n    int N = S.size();\n    using poly = std::vector<Tfield>;\n\
     \    poly C_reversed{1}, B{1};\n    int L = 0, m = 1;\n    Tfield b = 1;\n\n \
     \   // adjust: C(x) <- C(x) - (d / b) x^m B(x)\n    auto adjust = [](poly C, const\
@@ -149,7 +151,7 @@ data:
     \            ret = c;\n        }\n    }\n    return ret;\n}\n\n// Guess k-th element\
     \ of the sequence, assuming linear recurrence\n// initial_elements: 0-ORIGIN\n\
     // Verify: abc198f https://atcoder.jp/contests/abc198/submissions/21837815\ntemplate\
-    \ <typename Tfield> Tfield guess_kth_term(const std::vector<Tfield> &initial_elements,\
+    \ <typename Tfield>\nTfield guess_kth_term(const std::vector<Tfield> &initial_elements,\
     \ long long k) {\n    assert(k >= 0);\n    if (k < static_cast<long long>(initial_elements.size()))\
     \ return initial_elements[k];\n    const auto f = find_linear_recurrence<Tfield>(initial_elements).second;\n\
     \    const auto g = monomial_mod_polynomial<Tfield>(k, f);\n    Tfield ret = 0;\n\
@@ -167,68 +169,70 @@ data:
     \ <typename Matrix, typename T>\nstd::vector<T> linear_system_solver_lanczos(const\
     \ Matrix &A, const std::vector<T> &b) {\n    assert(A.height() == int(b.size()));\n\
     \    const int M = A.height(), N = A.width();\n\n    const std::vector<T> D1 =\
-    \ gen_random_vector<T>(N), D2 = gen_random_vector<T>(M), v = gen_random_vector<T>(N);\n\
-    \    auto applyD1 = [&D1](std::vector<T> v) {\n        for (int i = 0; i < int(v.size());\
-    \ i++) v[i] *= D1[i];\n        return v;\n    };\n    auto applyD2 = [&D2](std::vector<T>\
-    \ v) {\n        for (int i = 0; i < int(v.size()); i++) v[i] *= D2[i];\n     \
-    \   return v;\n    };\n    auto applyAtilde = [&](std::vector<T> v) -> std::vector<T>\
-    \ {\n        v = applyD1(v);\n        v = A.prod(v);\n        v = applyD2(v);\n\
-    \        v = A.prod_left(v);\n        v = applyD1(v);\n        return v;\n   \
-    \ };\n    auto dot = [&](const std::vector<T> &vl, const std::vector<T> &vr) ->\
-    \ T {\n        return std::inner_product(vl.begin(), vl.end(), vr.begin(), T(0));\n\
-    \    };\n    auto scalar_vec = [&](const T &x, std::vector<T> vec) -> std::vector<T>\
-    \ {\n        for (auto &v : vec) v *= x;\n        return vec;\n    };\n\n    auto\
-    \ btilde1 = applyD1(A.prod_left(applyD2(b))), btilde2 = applyAtilde(v);\n    std::vector<T>\
-    \ btilde(N);\n    for (int i = 0; i < N; i++) btilde[i] = btilde1[i] + btilde2[i];\n\
-    \n    std::vector<T> w0 = btilde, v1 = applyAtilde(w0);\n    std::vector<T> wm1(w0.size()),\
-    \ v0(v1.size());\n    T t0 = dot(v1, w0), gamma = dot(btilde, w0) / t0, tm1 =\
-    \ 1;\n    std::vector<T> x = scalar_vec(gamma, w0);\n    while (true) {\n    \
-    \    if (!t0 or !std::count_if(w0.begin(), w0.end(), [](T x) { return x != T(0);\
-    \ })) break;\n        T alpha = dot(v1, v1) / t0, beta = dot(v1, v0) / tm1;\n\
-    \        std::vector<T> w1(N);\n        for (int i = 0; i < N; i++) w1[i] = v1[i]\
-    \ - alpha * w0[i] - beta * wm1[i];\n        std::vector<T> v2 = applyAtilde(w1);\n\
-    \        T t1 = dot(w1, v2);\n        gamma = dot(btilde, w1) / t1;\n        for\
-    \ (int i = 0; i < N; i++) x[i] += gamma * w1[i];\n\n        wm1 = w0, w0 = w1;\n\
-    \        v0 = v1, v1 = v2;\n        tm1 = t0, t0 = t1;\n    }\n    for (int i\
-    \ = 0; i < N; i++) x[i] -= v[i];\n    return applyD1(x);\n}\n\n// Probabilistic\
-    \ algorithm to calculate determinant of matrices\n// Complexity: O(n T(n) + n^2)\n\
-    // Reference:\n// [1] D. H. Wiedmann, \"Solving sparse linear equations over finite\
-    \ fields,\"\n//     IEEE Trans. on Information Theory, 32(1), 54-62, 1986.\ntemplate\
-    \ <class Matrix, class Tp> Tp blackbox_determinant(const Matrix &M) {\n    assert(M.height()\
-    \ == M.width());\n    const int N = M.height();\n    std::vector<Tp> b = gen_random_vector<Tp>(N),\
-    \ u = gen_random_vector<Tp>(N), D = gen_random_vector<Tp>(N);\n    std::vector<Tp>\
-    \ uMDib(2 * N);\n    for (int i = 0; i < 2 * N; i++) {\n        uMDib[i] = std::inner_product(u.begin(),\
-    \ u.end(), b.begin(), Tp(0));\n        for (int j = 0; j < N; j++) b[j] *= D[j];\n\
-    \        b = M.prod(b);\n    }\n    auto ret = find_linear_recurrence<Tp>(uMDib);\n\
-    \    Tp det = ret.second.back() * (N % 2 ? -1 : 1);\n    Tp ddet = 1;\n    for\
-    \ (auto d : D) ddet *= d;\n    return det / ddet;\n}\n#line 3 \"convolution/ntt.hpp\"\
-    \n\n#line 5 \"convolution/ntt.hpp\"\n#include <array>\n#line 7 \"convolution/ntt.hpp\"\
-    \n#include <tuple>\n#line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer\
-    \ convolution for arbitrary mod\n// with NTT (and Garner's algorithm) for ModInt\
-    \ / ModIntRuntime class.\n// We skip Garner's algorithm if `skip_garner` is true\
-    \ or mod is in `nttprimes`.\n// input: a (size: n), b (size: m)\n// return: vector\
-    \ (size: n + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
-    \ a, std::vector<MODINT> b, bool skip_garner);\n\nconstexpr int nttprimes[3] =\
-    \ {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
-    \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
-    \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
-    \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
-    \    if (n == 1) return;\n    static const int mod = MODINT::mod();\n    static\
-    \ const MODINT root = MODINT::get_primitive_root();\n    assert(__builtin_popcount(n)\
-    \ == 1 and (mod - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n\
-    \    for (int m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod\
-    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
-    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
-    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
-    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
-    \  for (int i = s; i < s + m; i++) {\n                    MODINT x = a[i], y =\
-    \ a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n    \
-    \            }\n            }\n        }\n    } else {\n        for (int m = 1;\
-    \ m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++)\
-    \ {\n                for (int i = s; i < s + m; i++) {\n                    MODINT\
-    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
-    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv();\n\
-    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD> std::vector<ModInt<MOD>>\
+    \ gen_random_vector<T>(N), D2 = gen_random_vector<T>(M),\n                   \
+    \      v = gen_random_vector<T>(N);\n    auto applyD1 = [&D1](std::vector<T> v)\
+    \ {\n        for (int i = 0; i < int(v.size()); i++) v[i] *= D1[i];\n        return\
+    \ v;\n    };\n    auto applyD2 = [&D2](std::vector<T> v) {\n        for (int i\
+    \ = 0; i < int(v.size()); i++) v[i] *= D2[i];\n        return v;\n    };\n   \
+    \ auto applyAtilde = [&](std::vector<T> v) -> std::vector<T> {\n        v = applyD1(v);\n\
+    \        v = A.prod(v);\n        v = applyD2(v);\n        v = A.prod_left(v);\n\
+    \        v = applyD1(v);\n        return v;\n    };\n    auto dot = [&](const\
+    \ std::vector<T> &vl, const std::vector<T> &vr) -> T {\n        return std::inner_product(vl.begin(),\
+    \ vl.end(), vr.begin(), T(0));\n    };\n    auto scalar_vec = [&](const T &x,\
+    \ std::vector<T> vec) -> std::vector<T> {\n        for (auto &v : vec) v *= x;\n\
+    \        return vec;\n    };\n\n    auto btilde1 = applyD1(A.prod_left(applyD2(b))),\
+    \ btilde2 = applyAtilde(v);\n    std::vector<T> btilde(N);\n    for (int i = 0;\
+    \ i < N; i++) btilde[i] = btilde1[i] + btilde2[i];\n\n    std::vector<T> w0 =\
+    \ btilde, v1 = applyAtilde(w0);\n    std::vector<T> wm1(w0.size()), v0(v1.size());\n\
+    \    T t0 = dot(v1, w0), gamma = dot(btilde, w0) / t0, tm1 = 1;\n    std::vector<T>\
+    \ x = scalar_vec(gamma, w0);\n    while (true) {\n        if (!t0 or !std::count_if(w0.begin(),\
+    \ w0.end(), [](T x) { return x != T(0); })) break;\n        T alpha = dot(v1,\
+    \ v1) / t0, beta = dot(v1, v0) / tm1;\n        std::vector<T> w1(N);\n       \
+    \ for (int i = 0; i < N; i++) w1[i] = v1[i] - alpha * w0[i] - beta * wm1[i];\n\
+    \        std::vector<T> v2 = applyAtilde(w1);\n        T t1 = dot(w1, v2);\n \
+    \       gamma = dot(btilde, w1) / t1;\n        for (int i = 0; i < N; i++) x[i]\
+    \ += gamma * w1[i];\n\n        wm1 = w0, w0 = w1;\n        v0 = v1, v1 = v2;\n\
+    \        tm1 = t0, t0 = t1;\n    }\n    for (int i = 0; i < N; i++) x[i] -= v[i];\n\
+    \    return applyD1(x);\n}\n\n// Probabilistic algorithm to calculate determinant\
+    \ of matrices\n// Complexity: O(n T(n) + n^2)\n// Reference:\n// [1] D. H. Wiedmann,\
+    \ \"Solving sparse linear equations over finite fields,\"\n//     IEEE Trans.\
+    \ on Information Theory, 32(1), 54-62, 1986.\ntemplate <class Matrix, class Tp>\
+    \ Tp blackbox_determinant(const Matrix &M) {\n    assert(M.height() == M.width());\n\
+    \    const int N = M.height();\n    std::vector<Tp> b = gen_random_vector<Tp>(N),\
+    \ u = gen_random_vector<Tp>(N),\n                    D = gen_random_vector<Tp>(N);\n\
+    \    std::vector<Tp> uMDib(2 * N);\n    for (int i = 0; i < 2 * N; i++) {\n  \
+    \      uMDib[i] = std::inner_product(u.begin(), u.end(), b.begin(), Tp(0));\n\
+    \        for (int j = 0; j < N; j++) b[j] *= D[j];\n        b = M.prod(b);\n \
+    \   }\n    auto ret = find_linear_recurrence<Tp>(uMDib);\n    Tp det = ret.second.back()\
+    \ * (N % 2 ? -1 : 1);\n    Tp ddet = 1;\n    for (auto d : D) ddet *= d;\n   \
+    \ return det / ddet;\n}\n#line 3 \"convolution/ntt.hpp\"\n\n#line 5 \"convolution/ntt.hpp\"\
+    \n#include <array>\n#line 7 \"convolution/ntt.hpp\"\n#include <tuple>\n#line 9\
+    \ \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution for arbitrary\
+    \ mod\n// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.\n\
+    // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
+    // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
+    \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
+    \ b, bool skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
+    \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
+    \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
+    // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
+    \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
+    \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
+    \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
+    \ std::vector<MODINT> w{1}, iw{1};\n    for (int m = w.size(); m < n / 2; m *=\
+    \ 2) {\n        MODINT dw = root.pow((mod - 1) / (4 * m)), dwinv = 1 / dw;\n \
+    \       w.resize(m * 2), iw.resize(m * 2);\n        for (int i = 0; i < m; i++)\
+    \ w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;\n    }\n\n    if (!is_inverse)\
+    \ {\n        for (int m = n; m >>= 1;) {\n            for (int s = 0, k = 0; s\
+    \ < n; s += 2 * m, k++) {\n                for (int i = s; i < s + m; i++) {\n\
+    \                    MODINT x = a[i], y = a[i + m] * w[k];\n                 \
+    \   a[i] = x + y, a[i + m] = x - y;\n                }\n            }\n      \
+    \  }\n    } else {\n        for (int m = 1; m < n; m *= 2) {\n            for\
+    \ (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n                for (int i = s;\
+    \ i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m];\n    \
+    \                a[i] = x + y, a[i + m] = (x - y) * iw[k];\n                }\n\
+    \            }\n        }\n        int n_inv = MODINT(n).inv();\n        for (auto\
+    \ &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
     \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
     \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
     \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
@@ -247,18 +251,18 @@ data:
     \ m) sz <<= 1;\n    if (sz <= 16) {\n        std::vector<MODINT> ret(n + m - 1);\n\
     \        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < m; j++)\
     \ ret[i + j] += a[i] * b[j];\n        }\n        return ret;\n    }\n    int mod\
-    \ = MODINT::mod();\n    if (skip_garner or std::find(std::begin(nttprimes), std::end(nttprimes),\
-    \ mod) != std::end(nttprimes)) {\n        a.resize(sz), b.resize(sz);\n      \
-    \  if (a == b) {\n            ntt(a, false);\n            b = a;\n        } else\
-    \ {\n            ntt(a, false), ntt(b, false);\n        }\n        for (int i\
-    \ = 0; i < sz; i++) a[i] *= b[i];\n        ntt(a, true);\n        a.resize(n +\
-    \ m - 1);\n    } else {\n        std::vector<int> ai(sz), bi(sz);\n        for\
+    \ = MODINT::mod();\n    if (skip_garner or\n        std::find(std::begin(nttprimes),\
+    \ std::end(nttprimes), mod) != std::end(nttprimes)) {\n        a.resize(sz), b.resize(sz);\n\
+    \        if (a == b) {\n            ntt(a, false);\n            b = a;\n     \
+    \   } else {\n            ntt(a, false), ntt(b, false);\n        }\n        for\
+    \ (int i = 0; i < sz; i++) a[i] *= b[i];\n        ntt(a, true);\n        a.resize(n\
+    \ + m - 1);\n    } else {\n        std::vector<int> ai(sz), bi(sz);\n        for\
     \ (int i = 0; i < n; i++) ai[i] = a[i].val;\n        for (int i = 0; i < m; i++)\
     \ bi[i] = b[i].val;\n        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);\n   \
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
-    \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
-    \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
+    \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\n\
+    \            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n\
+    \    }\n    return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
     \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
     \ b, false);\n}\n#line 5 \"linear_algebra_matrix/blackbox_matrices.hpp\"\n#include\
     \ <numeric>\n#line 8 \"linear_algebra_matrix/blackbox_matrices.hpp\"\n\n// Sparse\
@@ -346,8 +350,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   requiredBy: []
-  timestamp: '2021-09-04 00:38:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
 layout: document

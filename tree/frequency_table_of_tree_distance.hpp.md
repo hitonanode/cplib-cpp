@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/centroid_decomposition.hpp
     title: tree/centroid_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.test.cpp
     title: tree/test/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"tree/centroid_decomposition.hpp\"\n#include <tuple>\n#include\
@@ -31,19 +31,20 @@ data:
     \ chi;                // children id's\n    std::vector<int> subtree_size;   \
     \                 // size of each subtree\n    std::vector<int> available_edge;\
     \                  // If 0, ignore the corresponding edge.\n\n    CentroidDecomposition(int\
-    \ v = 0) : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v) {}\n\
-    \    CentroidDecomposition(const std::vector<std::vector<int>> &to_) : CentroidDecomposition(to_.size())\
-    \ {\n        for (int i = 0; i < V; i++) {\n            for (auto j : to_[i])\
-    \ {\n                if (i < j) { add_edge(i, j); }\n            }\n        }\n\
-    \    }\n\n    void add_edge(int v1, int v2) {\n        to[v1].emplace_back(v2,\
-    \ E), to[v2].emplace_back(v1, E), E++;\n        available_edge.emplace_back(1);\n\
-    \    }\n\n    int _dfs_fixroot(int now, int prv) {\n        chi[now].clear(),\
-    \ subtree_size[now] = 1;\n        for (auto nxt : to[now]) {\n            if (nxt.first\
-    \ != prv and available_edge[nxt.second]) {\n                par[nxt.first] = now,\
-    \ chi[now].push_back(nxt.first);\n                subtree_size[now] += _dfs_fixroot(nxt.first,\
-    \ now);\n            }\n        }\n        return subtree_size[now];\n    }\n\n\
-    \    void fix_root(int root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root,\
-    \ -1);\n    }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
+    \ v = 0)\n        : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v)\
+    \ {}\n    CentroidDecomposition(const std::vector<std::vector<int>> &to_)\n  \
+    \      : CentroidDecomposition(to_.size()) {\n        for (int i = 0; i < V; i++)\
+    \ {\n            for (auto j : to_[i]) {\n                if (i < j) { add_edge(i,\
+    \ j); }\n            }\n        }\n    }\n\n    void add_edge(int v1, int v2)\
+    \ {\n        to[v1].emplace_back(v2, E), to[v2].emplace_back(v1, E), E++;\n  \
+    \      available_edge.emplace_back(1);\n    }\n\n    int _dfs_fixroot(int now,\
+    \ int prv) {\n        chi[now].clear(), subtree_size[now] = 1;\n        for (auto\
+    \ nxt : to[now]) {\n            if (nxt.first != prv and available_edge[nxt.second])\
+    \ {\n                par[nxt.first] = now, chi[now].push_back(nxt.first);\n  \
+    \              subtree_size[now] += _dfs_fixroot(nxt.first, now);\n          \
+    \  }\n        }\n        return subtree_size[now];\n    }\n\n    void fix_root(int\
+    \ root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root, -1);\n \
+    \   }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
     \    void _dfs_detect_centroids(int now, int prv, int n) {\n        bool is_centroid\
     \ = true;\n        for (auto nxt : to[now]) {\n            if (nxt.first != prv\
     \ and available_edge[nxt.second]) {\n                _dfs_detect_centroids(nxt.first,\
@@ -73,11 +74,11 @@ data:
     \ tmp[depth]++;\n        tmp.emplace_back(now, depth);\n        for (auto nxt\
     \ : tos[now]) {\n            if (alive[nxt] and nxt != prv) _dfs(nxt, now, depth\
     \ + 1);\n        }\n    }\n    std::vector<std::pair<int, int>> cnt_dfs(int root)\
-    \ { return tmp.clear(), _dfs(root, -1, 0), tmp; }\n    frequency_table_of_tree_distance(const\
-    \ std::vector<std::vector<int>>& to) {\n        tos = to;\n        cd = CentroidDecomposition(to).centroid_decomposition(0);\n\
-    \    }\n    template <class S, std::vector<S> (*conv)(const std::vector<S>&, const\
-    \ std::vector<S>&)>\n    std::vector<S> solve(const std::vector<S>& weight) {\n\
-    \        alive.assign(tos.size(), 1);\n        std::vector<S> ret(tos.size());\n\
+    \ {\n        return tmp.clear(), _dfs(root, -1, 0), tmp;\n    }\n    frequency_table_of_tree_distance(const\
+    \ std::vector<std::vector<int>> &to) {\n        tos = to;\n        cd = CentroidDecomposition(to).centroid_decomposition(0);\n\
+    \    }\n    template <class S, std::vector<S> (*conv)(const std::vector<S> &,\
+    \ const std::vector<S> &)>\n    std::vector<S> solve(const std::vector<S> &weight)\
+    \ {\n        alive.assign(tos.size(), 1);\n        std::vector<S> ret(tos.size());\n\
     \        std::vector<S> v;\n        for (auto root : cd) {\n            std::vector<std::vector<S>>\
     \ vv;\n            alive[root] = 0;\n            for (auto nxt : tos[root]) {\n\
     \                if (!alive[nxt]) continue;\n                v.clear();\n    \
@@ -85,13 +86,13 @@ data:
     \ <= p.second) v.push_back(S(0));\n                    v[p.second] += weight[p.first];\n\
     \                }\n                for (int i = 0; i < int(v.size()); i++) ret[i\
     \ + 1] += v[i] * weight[root];\n                vv.emplace_back(v);\n        \
-    \    }\n            std::sort(vv.begin(), vv.end(),\n                      [&](const\
-    \ std::vector<S>& l, const std::vector<S>& r) { return l.size() < r.size(); });\n\
-    \            for (size_t j = 1; j < vv.size(); j++) {\n                const std::vector<S>\
-    \ c = conv(vv[j - 1], vv[j]);\n                for (size_t i = 0; i < c.size();\
-    \ i++) ret[i + 2] += c[i];\n                for (size_t i = 0; i < vv[j - 1].size();\
-    \ i++) vv[j][i] += vv[j - 1][i];\n            }\n            tos[root].clear();\n\
-    \        }\n        return ret;\n    }\n};\n"
+    \    }\n            std::sort(vv.begin(), vv.end(), [&](const std::vector<S> &l,\
+    \ const std::vector<S> &r) {\n                return l.size() < r.size();\n  \
+    \          });\n            for (size_t j = 1; j < vv.size(); j++) {\n       \
+    \         const std::vector<S> c = conv(vv[j - 1], vv[j]);\n                for\
+    \ (size_t i = 0; i < c.size(); i++) ret[i + 2] += c[i];\n                for (size_t\
+    \ i = 0; i < vv[j - 1].size(); i++) vv[j][i] += vv[j - 1][i];\n            }\n\
+    \            tos[root].clear();\n        }\n        return ret;\n    }\n};\n"
   code: "#include \"centroid_decomposition.hpp\"\n#include <algorithm>\n#include <utility>\n\
     #include <vector>\n\nstruct frequency_table_of_tree_distance {\n    std::vector<std::vector<int>>\
     \ tos;\n    std::vector<int> cd;\n    std::vector<std::pair<int, int>> tmp;\n\
@@ -100,11 +101,11 @@ data:
     \ tmp[depth]++;\n        tmp.emplace_back(now, depth);\n        for (auto nxt\
     \ : tos[now]) {\n            if (alive[nxt] and nxt != prv) _dfs(nxt, now, depth\
     \ + 1);\n        }\n    }\n    std::vector<std::pair<int, int>> cnt_dfs(int root)\
-    \ { return tmp.clear(), _dfs(root, -1, 0), tmp; }\n    frequency_table_of_tree_distance(const\
-    \ std::vector<std::vector<int>>& to) {\n        tos = to;\n        cd = CentroidDecomposition(to).centroid_decomposition(0);\n\
-    \    }\n    template <class S, std::vector<S> (*conv)(const std::vector<S>&, const\
-    \ std::vector<S>&)>\n    std::vector<S> solve(const std::vector<S>& weight) {\n\
-    \        alive.assign(tos.size(), 1);\n        std::vector<S> ret(tos.size());\n\
+    \ {\n        return tmp.clear(), _dfs(root, -1, 0), tmp;\n    }\n    frequency_table_of_tree_distance(const\
+    \ std::vector<std::vector<int>> &to) {\n        tos = to;\n        cd = CentroidDecomposition(to).centroid_decomposition(0);\n\
+    \    }\n    template <class S, std::vector<S> (*conv)(const std::vector<S> &,\
+    \ const std::vector<S> &)>\n    std::vector<S> solve(const std::vector<S> &weight)\
+    \ {\n        alive.assign(tos.size(), 1);\n        std::vector<S> ret(tos.size());\n\
     \        std::vector<S> v;\n        for (auto root : cd) {\n            std::vector<std::vector<S>>\
     \ vv;\n            alive[root] = 0;\n            for (auto nxt : tos[root]) {\n\
     \                if (!alive[nxt]) continue;\n                v.clear();\n    \
@@ -112,20 +113,20 @@ data:
     \ <= p.second) v.push_back(S(0));\n                    v[p.second] += weight[p.first];\n\
     \                }\n                for (int i = 0; i < int(v.size()); i++) ret[i\
     \ + 1] += v[i] * weight[root];\n                vv.emplace_back(v);\n        \
-    \    }\n            std::sort(vv.begin(), vv.end(),\n                      [&](const\
-    \ std::vector<S>& l, const std::vector<S>& r) { return l.size() < r.size(); });\n\
-    \            for (size_t j = 1; j < vv.size(); j++) {\n                const std::vector<S>\
-    \ c = conv(vv[j - 1], vv[j]);\n                for (size_t i = 0; i < c.size();\
-    \ i++) ret[i + 2] += c[i];\n                for (size_t i = 0; i < vv[j - 1].size();\
-    \ i++) vv[j][i] += vv[j - 1][i];\n            }\n            tos[root].clear();\n\
-    \        }\n        return ret;\n    }\n};\n"
+    \    }\n            std::sort(vv.begin(), vv.end(), [&](const std::vector<S> &l,\
+    \ const std::vector<S> &r) {\n                return l.size() < r.size();\n  \
+    \          });\n            for (size_t j = 1; j < vv.size(); j++) {\n       \
+    \         const std::vector<S> c = conv(vv[j - 1], vv[j]);\n                for\
+    \ (size_t i = 0; i < c.size(); i++) ret[i + 2] += c[i];\n                for (size_t\
+    \ i = 0; i < vv[j - 1].size(); i++) vv[j][i] += vv[j - 1][i];\n            }\n\
+    \            tos[root].clear();\n        }\n        return ret;\n    }\n};\n"
   dependsOn:
   - tree/centroid_decomposition.hpp
   isVerificationFile: false
   path: tree/frequency_table_of_tree_distance.hpp
   requiredBy: []
-  timestamp: '2021-09-04 01:18:16+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp

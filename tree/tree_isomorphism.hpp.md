@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/tree_isomorphism.aoj1613.test.cpp
     title: tree/test/tree_isomorphism.aoj1613.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - http://xorshift.di.unimi.it/splitmix64.c
@@ -31,16 +31,16 @@ data:
     \        x += 0x9e3779b97f4a7c15;\n        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;\n\
     \        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;\n        return x ^ (x >> 31);\n\
     \    }\n    DoubleHash get_hash(DoubleHash x) const {\n        static const uint64_t\
-    \ FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();\n\
+    \ FIXED_RANDOM =\n            std::chrono::steady_clock::now().time_since_epoch().count();\n\
     \        return {splitmix64(x.first.val + FIXED_RANDOM), splitmix64(x.second.val\
     \ + FIXED_RANDOM)};\n    }\n\n    static void add_hash(DoubleHash &l, const DoubleHash\
-    \ &r) { l.first += r.first, l.second += r.second; }\n    static DoubleHash subtract_hash(const\
-    \ DoubleHash &l, const DoubleHash &r) {\n        return {l.first - r.first, l.second\
-    \ - r.second};\n    }\n\n    std::vector<DoubleHash> hash;         // hash of\
-    \ the tree, each node regarded as root\n    std::vector<DoubleHash> hash_subtree;\
-    \ // hash of the subtree\n    std::vector<DoubleHash> hash_par;     // hash of\
-    \ the subtree whose root is parent[i], not containing i\n    DoubleHash hash_p;\
-    \                    // \\in [1, hmod), should be set randomly\n    DoubleHash\
+    \ &r) {\n        l.first += r.first, l.second += r.second;\n    }\n    static\
+    \ DoubleHash subtract_hash(const DoubleHash &l, const DoubleHash &r) {\n     \
+    \   return {l.first - r.first, l.second - r.second};\n    }\n\n    std::vector<DoubleHash>\
+    \ hash;         // hash of the tree, each node regarded as root\n    std::vector<DoubleHash>\
+    \ hash_subtree; // hash of the subtree\n    std::vector<DoubleHash> hash_par;\
+    \ // hash of the subtree whose root is parent[i], not containing i\n    DoubleHash\
+    \ hash_p;                // \\in [1, hmod), should be set randomly\n    DoubleHash\
     \ hash_dfs1_(int now, int prv) {\n        hash_subtree[now] = hash_p;\n      \
     \  for (auto nxt : e[now]) {\n            if (nxt != prv) add_hash(hash_subtree[now],\
     \ hash_dfs1_(nxt, now));\n        }\n        return get_hash(hash_subtree[now]);\n\
@@ -68,16 +68,16 @@ data:
     \        x += 0x9e3779b97f4a7c15;\n        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;\n\
     \        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;\n        return x ^ (x >> 31);\n\
     \    }\n    DoubleHash get_hash(DoubleHash x) const {\n        static const uint64_t\
-    \ FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();\n\
+    \ FIXED_RANDOM =\n            std::chrono::steady_clock::now().time_since_epoch().count();\n\
     \        return {splitmix64(x.first.val + FIXED_RANDOM), splitmix64(x.second.val\
     \ + FIXED_RANDOM)};\n    }\n\n    static void add_hash(DoubleHash &l, const DoubleHash\
-    \ &r) { l.first += r.first, l.second += r.second; }\n    static DoubleHash subtract_hash(const\
-    \ DoubleHash &l, const DoubleHash &r) {\n        return {l.first - r.first, l.second\
-    \ - r.second};\n    }\n\n    std::vector<DoubleHash> hash;         // hash of\
-    \ the tree, each node regarded as root\n    std::vector<DoubleHash> hash_subtree;\
-    \ // hash of the subtree\n    std::vector<DoubleHash> hash_par;     // hash of\
-    \ the subtree whose root is parent[i], not containing i\n    DoubleHash hash_p;\
-    \                    // \\in [1, hmod), should be set randomly\n    DoubleHash\
+    \ &r) {\n        l.first += r.first, l.second += r.second;\n    }\n    static\
+    \ DoubleHash subtract_hash(const DoubleHash &l, const DoubleHash &r) {\n     \
+    \   return {l.first - r.first, l.second - r.second};\n    }\n\n    std::vector<DoubleHash>\
+    \ hash;         // hash of the tree, each node regarded as root\n    std::vector<DoubleHash>\
+    \ hash_subtree; // hash of the subtree\n    std::vector<DoubleHash> hash_par;\
+    \ // hash of the subtree whose root is parent[i], not containing i\n    DoubleHash\
+    \ hash_p;                // \\in [1, hmod), should be set randomly\n    DoubleHash\
     \ hash_dfs1_(int now, int prv) {\n        hash_subtree[now] = hash_p;\n      \
     \  for (auto nxt : e[now]) {\n            if (nxt != prv) add_hash(hash_subtree[now],\
     \ hash_dfs1_(nxt, now));\n        }\n        return get_hash(hash_subtree[now]);\n\
@@ -94,8 +94,8 @@ data:
   isVerificationFile: false
   path: tree/tree_isomorphism.hpp
   requiredBy: []
-  timestamp: '2021-07-30 01:44:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/tree_isomorphism.aoj1613.test.cpp
 documentation_of: tree/tree_isomorphism.hpp

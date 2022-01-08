@@ -35,13 +35,13 @@ data:
     \ $\\sum_i \\sum_j^{k_i} f_i(x_{ij})$\n// https://codeforces.com/contest/1344/problem/D\n\
     // https://yukicoder.me/problems/no/1495\n// return: (y, [[(x_i, # of such x_i),\
     \ ... ], ...])\ntemplate <typename F, typename Int, Int INF>\nstd::pair<Int, std::vector<std::vector<std::pair<Int,\
-    \ Int>>>> MinConvexSumUnderLinearConstraint(const std::vector<Int> &k, const std::vector<F>\
-    \ &f, Int C) {\n    assert(k.size() == f.size());\n    assert(k.size() > 0);\n\
-    \    Int lbsum = 0, ubsum = 0;\n    for (auto func : f) lbsum += func.lb, ubsum\
-    \ += func.ub;\n    if (lbsum > C or ubsum < C) return {};\n\n    const int N =\
-    \ k.size();\n    Int few = -INF, enough = INF;\n    while (enough - few > 1) {\n\
-    \        auto slope = few + (enough - few) / 2;\n        Int cnt = 0;\n      \
-    \  for (int i = 0; i < N; i++) {\n            auto tmp = f[i].slope(slope);\n\
+    \ Int>>>>\nMinConvexSumUnderLinearConstraint(const std::vector<Int> &k, const\
+    \ std::vector<F> &f, Int C) {\n    assert(k.size() == f.size());\n    assert(k.size()\
+    \ > 0);\n    Int lbsum = 0, ubsum = 0;\n    for (auto func : f) lbsum += func.lb,\
+    \ ubsum += func.ub;\n    if (lbsum > C or ubsum < C) return {};\n\n    const int\
+    \ N = k.size();\n    Int few = -INF, enough = INF;\n    while (enough - few >\
+    \ 1) {\n        auto slope = few + (enough - few) / 2;\n        Int cnt = 0;\n\
+    \        for (int i = 0; i < N; i++) {\n            auto tmp = f[i].slope(slope);\n\
     \            cnt += tmp * k[i];\n            if (cnt >= C) break;\n        }\n\
     \        (cnt >= C ? enough : few) = slope;\n    }\n\n    std::vector<std::vector<std::pair<Int,\
     \ Int>>> ret(N);\n    std::vector<int> additional;\n    Int ctmp = 0;\n    Int\
@@ -61,7 +61,7 @@ data:
     \    while (M--) {\n        int x;\n        lint y;\n        cin >> x >> y;\n\
     \        x--;\n        a[x]++;\n        b[x] -= y * 2;\n        c[x] += y * y;\n\
     \    }\n    vector<Quadratic> costs;\n    for (int i = 0; i < N; i++) costs.emplace_back(a[i],\
-    \ b[i], c[i], 0, K);\n    auto sol = MinConvexSumUnderLinearConstraint<Quadratic,\
+    \ b[i], c[i], 0, K);\n    auto sol =\n        MinConvexSumUnderLinearConstraint<Quadratic,\
     \ lint, 1LL << 60>(vector<lint>(N, 1), costs, K);\n    return sol.first;\n}\n\n\
     int main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int T;\n\
     \    cin >> T;\n    while (T--) cout << solve() << '\\n';\n}\n"
@@ -72,16 +72,16 @@ data:
     \     int x;\n        lint y;\n        cin >> x >> y;\n        x--;\n        a[x]++;\n\
     \        b[x] -= y * 2;\n        c[x] += y * y;\n    }\n    vector<Quadratic>\
     \ costs;\n    for (int i = 0; i < N; i++) costs.emplace_back(a[i], b[i], c[i],\
-    \ 0, K);\n    auto sol = MinConvexSumUnderLinearConstraint<Quadratic, lint, 1LL\
-    \ << 60>(vector<lint>(N, 1), costs, K);\n    return sol.first;\n}\n\nint main()\
-    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int T;\n    cin >>\
-    \ T;\n    while (T--) cout << solve() << '\\n';\n}\n"
+    \ 0, K);\n    auto sol =\n        MinConvexSumUnderLinearConstraint<Quadratic,\
+    \ lint, 1LL << 60>(vector<lint>(N, 1), costs, K);\n    return sol.first;\n}\n\n\
+    int main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int T;\n\
+    \    cin >> T;\n    while (T--) cout << solve() << '\\n';\n}\n"
   dependsOn:
   - combinatorial_opt/convex_sum.hpp
   isVerificationFile: true
   path: combinatorial_opt/test/convex_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-05-11 22:29:33+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/convex_sum.test.cpp

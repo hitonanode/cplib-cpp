@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
@@ -16,7 +16,7 @@ data:
     \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
     \ <limits>\n#include <queue>\n#include <string>\n#include <utility>\n#include\
     \ <vector>\n\n// CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
-    \ / 2, int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
+    \ / 2, int INVALID = -1>\nstruct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
     \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
     \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
     \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
@@ -25,18 +25,19 @@ data:
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
-    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;\n  \
-    \  template <class Heap = Pque> void Dijkstra(int s) {\n        assert(0 <= s\
-    \ and s < V);\n        dist.assign(V, INF);\n        dist[s] = 0;\n        prev.assign(V,\
-    \ INVALID);\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
-    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
-    \            pq.pop();\n            if (dist[v] < d) continue;\n            for\
-    \ (auto nx : to[v]) {\n                T dnx = d + nx.second;\n              \
-    \  if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
-    \          }\n        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void\
-    \ DijkstraVquad(int s) {\n        assert(0 <= s and s < V);\n        dist.assign(V,\
-    \ INF);\n        dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
+    \ int>, std::vector<std::pair<T, int>>,\n                                    \
+    \ std::greater<std::pair<T, int>>>;\n    template <class Heap = Pque> void Dijkstra(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        Heap pq;\n      \
+    \  pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n      \
+    \      int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
+    \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
+    \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
+    \                pq.emplace(dnx, nx.first);\n                }\n            }\n\
+    \        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void DijkstraVquad(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
     \ fixed(V, false);\n        while (true) {\n            int r = INVALID;\n   \
     \         T dr = INF;\n            for (int i = 0; i < V; i++) {\n           \
     \     if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];\n            }\n  \
@@ -112,37 +113,38 @@ data:
     \    }\n\n    void dump_graphviz(std::string filename = \"shortest_path\") const\
     \ {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
-    \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
-    ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n#line 6 \"combinatorial_opt/matroid_union.hpp\"\n\n// CUT begin\n\
-    // Union matroid augment\n// From I1, I2 (independent, exclusive),\n// - find\
-    \ I1' and I2' s.t. |I1'| + |I2'| = |I1| + |I2| + 1 and return true\n// - or return\
-    \ false\n// Complexity: O(n(c + r)) (r: current rank, c: circuit query)\n// Algorithm\
-    \ based on https://math.mit.edu/~goemans/18438F09/lec13.pdf\n// Verified: CodeChef\
-    \ HAMEL\ntemplate <class M1, class M2, class State1, class State2, class T = int>\n\
-    bool augment_union_matroid(M1 &matroid1, M2 &matroid2, State1 &I1, State2 &I2,\
-    \ const std::vector<T> &weights) {\n    const int M = matroid1.size();\n    const\
-    \ int gs = M, gt = M + 1;\n    ShortestPath<T> sssp(M + 2);\n    std::vector<int>\
-    \ color(M, -1);\n    matroid1.set(I1);\n    matroid2.set(I2);\n    for (int e\
-    \ = 0; e < M; e++) {\n        if (!I1[e] and !I2[e]) sssp.add_edge(gs, e, weights.size()\
-    \ ? weights[e] : 0);\n        if (!I1[e]) {\n            auto c = matroid1.circuit(e);\n\
-    \            if (c.empty()) sssp.add_edge(e, gt, 0), color[e] = 0;\n         \
-    \   for (int f : c) {\n                if (f != e) sssp.add_edge(e, f, 1);\n \
-    \           }\n        }\n        if (!I2[e]) {\n            auto c = matroid2.circuit(e);\n\
-    \            if (c.empty()) sssp.add_edge(e, gt, 0), color[e] = 1;\n         \
-    \   for (int f : c) {\n                if (f != e) sssp.add_edge(e, f, 1);\n \
-    \           }\n        }\n    }\n    sssp.solve(gs);\n    auto aug_path = sssp.retrieve_path(gt);\n\
-    \    if (aug_path.empty()) return false;\n    assert(aug_path.size() >= 3);\n\
-    \    int c0 = -1;\n    if (I1[aug_path[aug_path.size() - 2]]) c0 = 1;\n    if\
-    \ (I2[aug_path[aug_path.size() - 2]]) c0 = 0;\n    if (c0 < 0) c0 = color[aug_path[aug_path.size()\
-    \ - 2]];\n    for (int k = int(aug_path.size()) - 2, e = aug_path[k]; k; e = aug_path[--k])\
-    \ {\n        (c0 ? I2 : I1)[e] = 1, (c0 ? I1 : I2)[e] = 0;\n        c0 ^= 1;\n\
-    \    }\n    return true;\n}\n\n// (Min weight) matroid partition\ntemplate <class\
-    \ M1, class M2, class T = int>\nstd::pair<std::vector<bool>, std::vector<bool>>\
-    \ MinWeightMaxIndepSetInUnionMatroid(M1 mat1, M2 mat2, const std::vector<T> &weights\
-    \ = {}) {\n    using State = std::vector<bool>;\n    assert(mat1.size() == mat2.size());\n\
-    \    const int M = mat1.size();\n    State I1(M), I2(M);\n    while (augment_union_matroid(mat1,\
-    \ mat2, I1, I2, weights)) {}\n    return {I1, I2};\n}\n"
+    \ to[i])\n                ss << i << \"->\" << e.first << \"[label=\" << e.second\
+    \ << \"];\\n\";\n        }\n        ss << \"}\\n\";\n        ss.close();\n   \
+    \     return;\n    }\n};\n#line 6 \"combinatorial_opt/matroid_union.hpp\"\n\n\
+    // CUT begin\n// Union matroid augment\n// From I1, I2 (independent, exclusive),\n\
+    // - find I1' and I2' s.t. |I1'| + |I2'| = |I1| + |I2| + 1 and return true\n//\
+    \ - or return false\n// Complexity: O(n(c + r)) (r: current rank, c: circuit query)\n\
+    // Algorithm based on https://math.mit.edu/~goemans/18438F09/lec13.pdf\n// Verified:\
+    \ CodeChef HAMEL\ntemplate <class M1, class M2, class State1, class State2, class\
+    \ T = int>\nbool augment_union_matroid(M1 &matroid1, M2 &matroid2, State1 &I1,\
+    \ State2 &I2,\n                           const std::vector<T> &weights) {\n \
+    \   const int M = matroid1.size();\n    const int gs = M, gt = M + 1;\n    ShortestPath<T>\
+    \ sssp(M + 2);\n    std::vector<int> color(M, -1);\n    matroid1.set(I1);\n  \
+    \  matroid2.set(I2);\n    for (int e = 0; e < M; e++) {\n        if (!I1[e] and\
+    \ !I2[e]) sssp.add_edge(gs, e, weights.size() ? weights[e] : 0);\n        if (!I1[e])\
+    \ {\n            auto c = matroid1.circuit(e);\n            if (c.empty()) sssp.add_edge(e,\
+    \ gt, 0), color[e] = 0;\n            for (int f : c) {\n                if (f\
+    \ != e) sssp.add_edge(e, f, 1);\n            }\n        }\n        if (!I2[e])\
+    \ {\n            auto c = matroid2.circuit(e);\n            if (c.empty()) sssp.add_edge(e,\
+    \ gt, 0), color[e] = 1;\n            for (int f : c) {\n                if (f\
+    \ != e) sssp.add_edge(e, f, 1);\n            }\n        }\n    }\n    sssp.solve(gs);\n\
+    \    auto aug_path = sssp.retrieve_path(gt);\n    if (aug_path.empty()) return\
+    \ false;\n    assert(aug_path.size() >= 3);\n    int c0 = -1;\n    if (I1[aug_path[aug_path.size()\
+    \ - 2]]) c0 = 1;\n    if (I2[aug_path[aug_path.size() - 2]]) c0 = 0;\n    if (c0\
+    \ < 0) c0 = color[aug_path[aug_path.size() - 2]];\n    for (int k = int(aug_path.size())\
+    \ - 2, e = aug_path[k]; k; e = aug_path[--k]) {\n        (c0 ? I2 : I1)[e] = 1,\
+    \ (c0 ? I1 : I2)[e] = 0;\n        c0 ^= 1;\n    }\n    return true;\n}\n\n// (Min\
+    \ weight) matroid partition\ntemplate <class M1, class M2, class T = int>\nstd::pair<std::vector<bool>,\
+    \ std::vector<bool>>\nMinWeightMaxIndepSetInUnionMatroid(M1 mat1, M2 mat2, const\
+    \ std::vector<T> &weights = {}) {\n    using State = std::vector<bool>;\n    assert(mat1.size()\
+    \ == mat2.size());\n    const int M = mat1.size();\n    State I1(M), I2(M);\n\
+    \    while (augment_union_matroid(mat1, mat2, I1, I2, weights)) {}\n    return\
+    \ {I1, I2};\n}\n"
   code: "#pragma once\n#include \"../graph/shortest_path.hpp\"\n#include <cassert>\n\
     #include <utility>\n#include <vector>\n\n// CUT begin\n// Union matroid augment\n\
     // From I1, I2 (independent, exclusive),\n// - find I1' and I2' s.t. |I1'| + |I2'|\
@@ -150,25 +152,26 @@ data:
     \ + r)) (r: current rank, c: circuit query)\n// Algorithm based on https://math.mit.edu/~goemans/18438F09/lec13.pdf\n\
     // Verified: CodeChef HAMEL\ntemplate <class M1, class M2, class State1, class\
     \ State2, class T = int>\nbool augment_union_matroid(M1 &matroid1, M2 &matroid2,\
-    \ State1 &I1, State2 &I2, const std::vector<T> &weights) {\n    const int M =\
-    \ matroid1.size();\n    const int gs = M, gt = M + 1;\n    ShortestPath<T> sssp(M\
-    \ + 2);\n    std::vector<int> color(M, -1);\n    matroid1.set(I1);\n    matroid2.set(I2);\n\
-    \    for (int e = 0; e < M; e++) {\n        if (!I1[e] and !I2[e]) sssp.add_edge(gs,\
-    \ e, weights.size() ? weights[e] : 0);\n        if (!I1[e]) {\n            auto\
-    \ c = matroid1.circuit(e);\n            if (c.empty()) sssp.add_edge(e, gt, 0),\
-    \ color[e] = 0;\n            for (int f : c) {\n                if (f != e) sssp.add_edge(e,\
-    \ f, 1);\n            }\n        }\n        if (!I2[e]) {\n            auto c\
-    \ = matroid2.circuit(e);\n            if (c.empty()) sssp.add_edge(e, gt, 0),\
-    \ color[e] = 1;\n            for (int f : c) {\n                if (f != e) sssp.add_edge(e,\
-    \ f, 1);\n            }\n        }\n    }\n    sssp.solve(gs);\n    auto aug_path\
-    \ = sssp.retrieve_path(gt);\n    if (aug_path.empty()) return false;\n    assert(aug_path.size()\
-    \ >= 3);\n    int c0 = -1;\n    if (I1[aug_path[aug_path.size() - 2]]) c0 = 1;\n\
-    \    if (I2[aug_path[aug_path.size() - 2]]) c0 = 0;\n    if (c0 < 0) c0 = color[aug_path[aug_path.size()\
+    \ State1 &I1, State2 &I2,\n                           const std::vector<T> &weights)\
+    \ {\n    const int M = matroid1.size();\n    const int gs = M, gt = M + 1;\n \
+    \   ShortestPath<T> sssp(M + 2);\n    std::vector<int> color(M, -1);\n    matroid1.set(I1);\n\
+    \    matroid2.set(I2);\n    for (int e = 0; e < M; e++) {\n        if (!I1[e]\
+    \ and !I2[e]) sssp.add_edge(gs, e, weights.size() ? weights[e] : 0);\n       \
+    \ if (!I1[e]) {\n            auto c = matroid1.circuit(e);\n            if (c.empty())\
+    \ sssp.add_edge(e, gt, 0), color[e] = 0;\n            for (int f : c) {\n    \
+    \            if (f != e) sssp.add_edge(e, f, 1);\n            }\n        }\n \
+    \       if (!I2[e]) {\n            auto c = matroid2.circuit(e);\n           \
+    \ if (c.empty()) sssp.add_edge(e, gt, 0), color[e] = 1;\n            for (int\
+    \ f : c) {\n                if (f != e) sssp.add_edge(e, f, 1);\n            }\n\
+    \        }\n    }\n    sssp.solve(gs);\n    auto aug_path = sssp.retrieve_path(gt);\n\
+    \    if (aug_path.empty()) return false;\n    assert(aug_path.size() >= 3);\n\
+    \    int c0 = -1;\n    if (I1[aug_path[aug_path.size() - 2]]) c0 = 1;\n    if\
+    \ (I2[aug_path[aug_path.size() - 2]]) c0 = 0;\n    if (c0 < 0) c0 = color[aug_path[aug_path.size()\
     \ - 2]];\n    for (int k = int(aug_path.size()) - 2, e = aug_path[k]; k; e = aug_path[--k])\
     \ {\n        (c0 ? I2 : I1)[e] = 1, (c0 ? I1 : I2)[e] = 0;\n        c0 ^= 1;\n\
     \    }\n    return true;\n}\n\n// (Min weight) matroid partition\ntemplate <class\
-    \ M1, class M2, class T = int>\nstd::pair<std::vector<bool>, std::vector<bool>>\
-    \ MinWeightMaxIndepSetInUnionMatroid(M1 mat1, M2 mat2, const std::vector<T> &weights\
+    \ M1, class M2, class T = int>\nstd::pair<std::vector<bool>, std::vector<bool>>\n\
+    MinWeightMaxIndepSetInUnionMatroid(M1 mat1, M2 mat2, const std::vector<T> &weights\
     \ = {}) {\n    using State = std::vector<bool>;\n    assert(mat1.size() == mat2.size());\n\
     \    const int M = mat1.size();\n    State I1(M), I2(M);\n    while (augment_union_matroid(mat1,\
     \ mat2, I1, I2, weights)) {}\n    return {I1, I2};\n}\n"
@@ -177,7 +180,7 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/matroid_union.hpp
   requiredBy: []
-  timestamp: '2021-09-09 22:42:49+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: combinatorial_opt/matroid_union.hpp

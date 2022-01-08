@@ -4,9 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
-    title: combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
-  - icon: ':heavy_check_mark:'
     path: data_structure/test/radix_heap.dijkstra.test.cpp
     title: data_structure/test/radix_heap.dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
@@ -34,19 +31,20 @@ data:
     \ = std::min(last, v[i][j].first);\n        for (int j = 0; j < int(v[i].size());\
     \ j++) {\n            v[bucket(v[i][j].first ^ last)].emplace_back(std::move(v[i][j]));\n\
     \        }\n        v[i].clear();\n    }\n\npublic:\n    radix_heap() : sz(0),\
-    \ last(0) { static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid type.\"\
-    ); }\n    std::size_t size() const noexcept { return sz; }\n    bool empty() const\
-    \ noexcept { return sz == 0; }\n    void push(Uint x, const Label &val) { ++sz,\
-    \ v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint x, Label &&val)\
-    \ { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val)); }\n    template\
-    \ <class... Args> void emplace(Uint x, Args &&...args) {\n        ++sz, v[bucket(x\
-    \ ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x), std::forward_as_tuple(args...));\n\
+    \ last(0) {\n        static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid\
+    \ type.\");\n    }\n    std::size_t size() const noexcept { return sz; }\n   \
+    \ bool empty() const noexcept { return sz == 0; }\n    void push(Uint x, const\
+    \ Label &val) { ++sz, v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint\
+    \ x, Label &&val) { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val));\
+    \ }\n    template <class... Args> void emplace(Uint x, Args &&...args) {\n   \
+    \     ++sz, v[bucket(x ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x),\n\
+    \                                               std::forward_as_tuple(args...));\n\
     \    }\n    void pop() { pull(), --sz, v[0].pop_back(); }\n    std::pair<Uint,\
     \ Label> top() { return pull(), v[0].back(); }\n    Uint top_key() { return pull(),\
     \ last; }\n    Label &top_label() { return pull(), v[0].back().second; }\n   \
     \ void clear() noexcept {\n        sz = 0, last = 0;\n        for (auto &vec :\
-    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) { std::swap(sz,\
-    \ a.sz), std::swap(last, a.last), v.swap(a.v); }\n};\n"
+    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) {\n      \
+    \  std::swap(sz, a.sz), std::swap(last, a.last), v.swap(a.v);\n    }\n};\n"
   code: "#pragma once\n#include <array>\n#include <cstddef>\n#include <limits>\n#include\
     \ <tuple>\n#include <type_traits>\n#include <utility>\n#include <vector>\n\n//\
     \ Radix heap for unsigned integer\n// https://github.com/iwiwi/radix-heap\ntemplate\
@@ -63,27 +61,27 @@ data:
     \ = std::min(last, v[i][j].first);\n        for (int j = 0; j < int(v[i].size());\
     \ j++) {\n            v[bucket(v[i][j].first ^ last)].emplace_back(std::move(v[i][j]));\n\
     \        }\n        v[i].clear();\n    }\n\npublic:\n    radix_heap() : sz(0),\
-    \ last(0) { static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid type.\"\
-    ); }\n    std::size_t size() const noexcept { return sz; }\n    bool empty() const\
-    \ noexcept { return sz == 0; }\n    void push(Uint x, const Label &val) { ++sz,\
-    \ v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint x, Label &&val)\
-    \ { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val)); }\n    template\
-    \ <class... Args> void emplace(Uint x, Args &&...args) {\n        ++sz, v[bucket(x\
-    \ ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x), std::forward_as_tuple(args...));\n\
+    \ last(0) {\n        static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid\
+    \ type.\");\n    }\n    std::size_t size() const noexcept { return sz; }\n   \
+    \ bool empty() const noexcept { return sz == 0; }\n    void push(Uint x, const\
+    \ Label &val) { ++sz, v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint\
+    \ x, Label &&val) { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val));\
+    \ }\n    template <class... Args> void emplace(Uint x, Args &&...args) {\n   \
+    \     ++sz, v[bucket(x ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x),\n\
+    \                                               std::forward_as_tuple(args...));\n\
     \    }\n    void pop() { pull(), --sz, v[0].pop_back(); }\n    std::pair<Uint,\
     \ Label> top() { return pull(), v[0].back(); }\n    Uint top_key() { return pull(),\
     \ last; }\n    Label &top_label() { return pull(), v[0].back().second; }\n   \
     \ void clear() noexcept {\n        sz = 0, last = 0;\n        for (auto &vec :\
-    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) { std::swap(sz,\
-    \ a.sz), std::swap(last, a.last), v.swap(a.v); }\n};\n"
+    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) {\n      \
+    \  std::swap(sz, a.sz), std::swap(last, a.last), v.swap(a.v);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: data_structure/radix_heap.hpp
   requiredBy: []
-  timestamp: '2021-09-07 01:07:11+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mincostflow.radixheap.yuki1288.test.cpp
   - graph/test/shortest_path.test.cpp
   - data_structure/test/radix_heap.dijkstra.test.cpp
 documentation_of: data_structure/radix_heap.hpp

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/radix_heap.hpp
     title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
@@ -17,11 +17,41 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/shortest_path
     links:
     - https://judge.yosupo.jp/problem/shortest_path
-  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
-    \ <limits>\n#include <queue>\n#include <string>\n#include <utility>\n#include\
-    \ <vector>\n\n// CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
-    \ / 2, int INVALID = -1> struct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
+  bundledCode: "#line 2 \"data_structure/radix_heap.hpp\"\n#include <array>\n#include\
+    \ <cstddef>\n#include <limits>\n#include <tuple>\n#include <type_traits>\n#include\
+    \ <utility>\n#include <vector>\n\n// Radix heap for unsigned integer\n// https://github.com/iwiwi/radix-heap\n\
+    template <class Uint, class Label, typename std::enable_if<std::is_unsigned<Uint>::value>::type\
+    \ * = nullptr>\nclass radix_heap {\n    int sz;\n    Uint last;\n    std::array<std::vector<std::pair<Uint,\
+    \ Label>>, std::numeric_limits<Uint>::digits + 1> v;\n\n    template <class U,\
+    \ typename std::enable_if<sizeof(U) == 4>::type * = nullptr>\n    static inline\
+    \ int bucket(U x) noexcept {\n        return x ? 32 - __builtin_clz(x) : 0;\n\
+    \    }\n    template <class U, typename std::enable_if<sizeof(U) == 8>::type *\
+    \ = nullptr>\n    static inline int bucket(U x) noexcept {\n        return x ?\
+    \ 64 - __builtin_clzll(x) : 0;\n    }\n\n    void pull() {\n        if (!v[0].empty())\
+    \ return;\n        int i = 1;\n        while (v[i].empty()) ++i;\n        last\
+    \ = v[i].back().first;\n        for (int j = 0; j < int(v[i].size()); j++) last\
+    \ = std::min(last, v[i][j].first);\n        for (int j = 0; j < int(v[i].size());\
+    \ j++) {\n            v[bucket(v[i][j].first ^ last)].emplace_back(std::move(v[i][j]));\n\
+    \        }\n        v[i].clear();\n    }\n\npublic:\n    radix_heap() : sz(0),\
+    \ last(0) {\n        static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid\
+    \ type.\");\n    }\n    std::size_t size() const noexcept { return sz; }\n   \
+    \ bool empty() const noexcept { return sz == 0; }\n    void push(Uint x, const\
+    \ Label &val) { ++sz, v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint\
+    \ x, Label &&val) { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val));\
+    \ }\n    template <class... Args> void emplace(Uint x, Args &&...args) {\n   \
+    \     ++sz, v[bucket(x ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x),\n\
+    \                                               std::forward_as_tuple(args...));\n\
+    \    }\n    void pop() { pull(), --sz, v[0].pop_back(); }\n    std::pair<Uint,\
+    \ Label> top() { return pull(), v[0].back(); }\n    Uint top_key() { return pull(),\
+    \ last; }\n    Label &top_label() { return pull(), v[0].back().second; }\n   \
+    \ void clear() noexcept {\n        sz = 0, last = 0;\n        for (auto &vec :\
+    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) {\n      \
+    \  std::swap(sz, a.sz), std::swap(last, a.last), v.swap(a.v);\n    }\n};\n#line\
+    \ 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include <cassert>\n#include\
+    \ <deque>\n#include <fstream>\n#include <functional>\n#line 8 \"graph/shortest_path.hpp\"\
+    \n#include <queue>\n#include <string>\n#line 12 \"graph/shortest_path.hpp\"\n\n\
+    // CUT begin\ntemplate <typename T, T INF = std::numeric_limits<T>::max() / 2,\
+    \ int INVALID = -1>\nstruct ShortestPath {\n    int V, E;\n    bool single_positive_weight;\n\
     \    T wmin, wmax;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\n  \
     \  ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0),\
     \ wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n        assert(0\
@@ -30,18 +60,19 @@ data:
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
-    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;\n  \
-    \  template <class Heap = Pque> void Dijkstra(int s) {\n        assert(0 <= s\
-    \ and s < V);\n        dist.assign(V, INF);\n        dist[s] = 0;\n        prev.assign(V,\
-    \ INVALID);\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
-    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
-    \            pq.pop();\n            if (dist[v] < d) continue;\n            for\
-    \ (auto nx : to[v]) {\n                T dnx = d + nx.second;\n              \
-    \  if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
-    \          }\n        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void\
-    \ DijkstraVquad(int s) {\n        assert(0 <= s and s < V);\n        dist.assign(V,\
-    \ INF);\n        dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
+    \ int>, std::vector<std::pair<T, int>>,\n                                    \
+    \ std::greater<std::pair<T, int>>>;\n    template <class Heap = Pque> void Dijkstra(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        Heap pq;\n      \
+    \  pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n      \
+    \      int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
+    \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
+    \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
+    \                pq.emplace(dnx, nx.first);\n                }\n            }\n\
+    \        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void DijkstraVquad(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
     \ fixed(V, false);\n        while (true) {\n            int r = INVALID;\n   \
     \         T dr = INF;\n            for (int i = 0; i < V; i++) {\n           \
     \     if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];\n            }\n  \
@@ -117,43 +148,14 @@ data:
     \    }\n\n    void dump_graphviz(std::string filename = \"shortest_path\") const\
     \ {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
-    \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
-    ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n#line 2 \"data_structure/radix_heap.hpp\"\n#include <array>\n#include\
-    \ <cstddef>\n#line 5 \"data_structure/radix_heap.hpp\"\n#include <tuple>\n#include\
-    \ <type_traits>\n#line 9 \"data_structure/radix_heap.hpp\"\n\n// Radix heap for\
-    \ unsigned integer\n// https://github.com/iwiwi/radix-heap\ntemplate <class Uint,\
-    \ class Label, typename std::enable_if<std::is_unsigned<Uint>::value>::type *\
-    \ = nullptr>\nclass radix_heap {\n    int sz;\n    Uint last;\n    std::array<std::vector<std::pair<Uint,\
-    \ Label>>, std::numeric_limits<Uint>::digits + 1> v;\n\n    template <class U,\
-    \ typename std::enable_if<sizeof(U) == 4>::type * = nullptr>\n    static inline\
-    \ int bucket(U x) noexcept {\n        return x ? 32 - __builtin_clz(x) : 0;\n\
-    \    }\n    template <class U, typename std::enable_if<sizeof(U) == 8>::type *\
-    \ = nullptr>\n    static inline int bucket(U x) noexcept {\n        return x ?\
-    \ 64 - __builtin_clzll(x) : 0;\n    }\n\n    void pull() {\n        if (!v[0].empty())\
-    \ return;\n        int i = 1;\n        while (v[i].empty()) ++i;\n        last\
-    \ = v[i].back().first;\n        for (int j = 0; j < int(v[i].size()); j++) last\
-    \ = std::min(last, v[i][j].first);\n        for (int j = 0; j < int(v[i].size());\
-    \ j++) {\n            v[bucket(v[i][j].first ^ last)].emplace_back(std::move(v[i][j]));\n\
-    \        }\n        v[i].clear();\n    }\n\npublic:\n    radix_heap() : sz(0),\
-    \ last(0) { static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid type.\"\
-    ); }\n    std::size_t size() const noexcept { return sz; }\n    bool empty() const\
-    \ noexcept { return sz == 0; }\n    void push(Uint x, const Label &val) { ++sz,\
-    \ v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint x, Label &&val)\
-    \ { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val)); }\n    template\
-    \ <class... Args> void emplace(Uint x, Args &&...args) {\n        ++sz, v[bucket(x\
-    \ ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x), std::forward_as_tuple(args...));\n\
-    \    }\n    void pop() { pull(), --sz, v[0].pop_back(); }\n    std::pair<Uint,\
-    \ Label> top() { return pull(), v[0].back(); }\n    Uint top_key() { return pull(),\
-    \ last; }\n    Label &top_label() { return pull(), v[0].back().second; }\n   \
-    \ void clear() noexcept {\n        sz = 0, last = 0;\n        for (auto &vec :\
-    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) { std::swap(sz,\
-    \ a.sz), std::swap(last, a.last), v.swap(a.v); }\n};\n#line 4 \"graph/test/shortest_path.test.cpp\"\
-    \n#include <iostream>\n#line 6 \"graph/test/shortest_path.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\nusing namespace std;\n\
-    \nint main() {\n    int N, M, s, t;\n    cin >> N >> M >> s >> t;\n    constexpr\
-    \ long long INF = 1LL << 60;\n    ShortestPath<long long, INF> graph(N);\n   \
-    \ while (M--) {\n        int a, b, c;\n        cin >> a >> b >> c;\n        graph.add_edge(a,\
+    \ to[i])\n                ss << i << \"->\" << e.first << \"[label=\" << e.second\
+    \ << \"];\\n\";\n        }\n        ss << \"}\\n\";\n        ss.close();\n   \
+    \     return;\n    }\n};\n#line 4 \"graph/test/shortest_path.test.cpp\"\n#include\
+    \ <iostream>\n#line 6 \"graph/test/shortest_path.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/shortest_path\"\nusing namespace std;\n\nint main()\
+    \ {\n    int N, M, s, t;\n    cin >> N >> M >> s >> t;\n    constexpr long long\
+    \ INF = 1LL << 60;\n    ShortestPath<long long, INF> graph(N);\n    while (M--)\
+    \ {\n        int a, b, c;\n        cin >> a >> b >> c;\n        graph.add_edge(a,\
     \ b, c);\n    }\n\n    graph.Dijkstra<radix_heap<unsigned long long, int>>(s);\n\
     \    auto d_radix = graph.dist;\n\n    graph.solve(s);\n    assert(graph.dist\
     \ == d_radix);\n\n    if (graph.dist[t] == INF) {\n        cout << \"-1\\n\";\n\
@@ -163,7 +165,7 @@ data:
     \    cout << graph.dist[t] << ' ' << path.size() - 1 << '\\n';\n    for (unsigned\
     \ i = 0; i + 1 < path.size(); i++) cout << path[i] << ' ' << path[i + 1] << '\\\
     n';\n}\n"
-  code: "#include \"../shortest_path.hpp\"\n#include \"../../data_structure/radix_heap.hpp\"\
+  code: "#include \"../../data_structure/radix_heap.hpp\"\n#include \"../shortest_path.hpp\"\
     \n#include <algorithm>\n#include <iostream>\n#include <vector>\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/shortest_path\"\nusing namespace std;\n\n\
     int main() {\n    int N, M, s, t;\n    cin >> N >> M >> s >> t;\n    constexpr\
@@ -179,12 +181,12 @@ data:
     \ i = 0; i + 1 < path.size(); i++) cout << path[i] << ' ' << path[i + 1] << '\\\
     n';\n}\n"
   dependsOn:
-  - graph/shortest_path.hpp
   - data_structure/radix_heap.hpp
+  - graph/shortest_path.hpp
   isVerificationFile: true
   path: graph/test/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2021-09-07 01:07:11+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_path.test.cpp

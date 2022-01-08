@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/permutation_tree.hpp
     title: "Permutation tree \uFF08\u9806\u5217\u6728\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/range-add-range-min.hpp
     title: Range Add Range Min (known as the Starry sky tree)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1720
@@ -32,28 +32,29 @@ data:
     \ / 2> struct RangeAddRangeMin {\n    int N, head;\n    std::vector<Tp> range_min,\
     \ range_add;\n    static inline Tp f(Tp x, Tp y) noexcept { return std::min(x,\
     \ y); }\n\n    inline void _merge(int pos) {\n        range_min[pos] = f(range_min[pos\
-    \ * 2] + range_add[pos * 2], range_min[pos * 2 + 1] + range_add[pos * 2 + 1]);\n\
-    \    }\n    void initialize(const std::vector<Tp> &data_init) {\n        N = data_init.size(),\
-    \ head = 1;\n        while (head < N) head <<= 1;\n        range_min.assign(head\
-    \ * 2, defaultT);\n        range_add.assign(head * 2, 0);\n        std::copy(data_init.begin(),\
-    \ data_init.end(), range_min.begin() + head);\n        for (int pos = head; --pos;)\
-    \ _merge(pos);\n    }\n    RangeAddRangeMin() = default;\n    RangeAddRangeMin(const\
-    \ std::vector<Tp> &data_init) { initialize(data_init); }\n    void _add(int begin,\
-    \ int end, int pos, int l, int r, Tp vadd) noexcept {\n        if (r <= begin\
-    \ or end <= l) return;\n        if (begin <= l and r <= end) {\n            range_add[pos]\
-    \ += vadd;\n            return;\n        }\n        _add(begin, end, pos * 2,\
-    \ l, (l + r) / 2, vadd);\n        _add(begin, end, pos * 2 + 1, (l + r) / 2, r,\
-    \ vadd);\n        _merge(pos);\n    }\n    // Add `vadd` to (x_begin, ..., x_{end\
-    \ - 1})\n    void add(int begin, int end, Tp vadd) noexcept { return _add(begin,\
-    \ end, 1, 0, head, vadd); }\n    Tp _get(int begin, int end, int pos, int l, int\
-    \ r) const noexcept {\n        if (r <= begin or end <= l) return defaultT;\n\
-    \        if (begin <= l and r <= end) return range_min[pos] + range_add[pos];\n\
-    \        return f(_get(begin, end, pos * 2, l, (l + r) / 2), _get(begin, end,\
-    \ pos * 2 + 1, (l + r) / 2, r)) + range_add[pos];\n    }\n    // Return f(x_begin,\
-    \ ..., x_{end - 1})\n    Tp get(int pos) const noexcept { return prod(pos, pos\
-    \ + 1); }\n    Tp prod(int begin, int end) const noexcept { return _get(begin,\
-    \ end, 1, 0, head); }\n};\n#line 4 \"other_algorithms/permutation_tree.hpp\"\n\
-    #include <cassert>\n#include <fstream>\n#include <string>\n#line 8 \"other_algorithms/permutation_tree.hpp\"\
+    \ * 2] + range_add[pos * 2],\n                           range_min[pos * 2 + 1]\
+    \ + range_add[pos * 2 + 1]);\n    }\n    void initialize(const std::vector<Tp>\
+    \ &data_init) {\n        N = data_init.size(), head = 1;\n        while (head\
+    \ < N) head <<= 1;\n        range_min.assign(head * 2, defaultT);\n        range_add.assign(head\
+    \ * 2, 0);\n        std::copy(data_init.begin(), data_init.end(), range_min.begin()\
+    \ + head);\n        for (int pos = head; --pos;) _merge(pos);\n    }\n    RangeAddRangeMin()\
+    \ = default;\n    RangeAddRangeMin(const std::vector<Tp> &data_init) { initialize(data_init);\
+    \ }\n    void _add(int begin, int end, int pos, int l, int r, Tp vadd) noexcept\
+    \ {\n        if (r <= begin or end <= l) return;\n        if (begin <= l and r\
+    \ <= end) {\n            range_add[pos] += vadd;\n            return;\n      \
+    \  }\n        _add(begin, end, pos * 2, l, (l + r) / 2, vadd);\n        _add(begin,\
+    \ end, pos * 2 + 1, (l + r) / 2, r, vadd);\n        _merge(pos);\n    }\n    //\
+    \ Add `vadd` to (x_begin, ..., x_{end - 1})\n    void add(int begin, int end,\
+    \ Tp vadd) noexcept { return _add(begin, end, 1, 0, head, vadd); }\n    Tp _get(int\
+    \ begin, int end, int pos, int l, int r) const noexcept {\n        if (r <= begin\
+    \ or end <= l) return defaultT;\n        if (begin <= l and r <= end) return range_min[pos]\
+    \ + range_add[pos];\n        return f(_get(begin, end, pos * 2, l, (l + r) / 2),\n\
+    \                 _get(begin, end, pos * 2 + 1, (l + r) / 2, r)) +\n         \
+    \      range_add[pos];\n    }\n    // Return f(x_begin, ..., x_{end - 1})\n  \
+    \  Tp get(int pos) const noexcept { return prod(pos, pos + 1); }\n    Tp prod(int\
+    \ begin, int end) const noexcept { return _get(begin, end, 1, 0, head); }\n};\n\
+    #line 4 \"other_algorithms/permutation_tree.hpp\"\n#include <cassert>\n#include\
+    \ <fstream>\n#include <string>\n#line 8 \"other_algorithms/permutation_tree.hpp\"\
     \n\n// Permutation tree\n// Complexity: O(N log N)\n// https://codeforces.com/blog/entry/78898\
     \ https://yukicoder.me/problems/no/1720\nstruct permutation_tree {\n    enum NodeType\
     \ {\n        JoinAsc,\n        JoinDesc,\n        Cut,\n        Leaf,\n      \
@@ -140,59 +141,61 @@ data:
     \ - md : v), *this; }\n    MDCONST ModInt(lint v) { _setval(v % md + md); }\n\
     \    MDCONST explicit operator bool() const { return val != 0; }\n    MDCONST\
     \ ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ - x.val + md); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.val % md); }\n    MDCONST ModInt operator/(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % md); }\n  \
-    \  MDCONST ModInt operator-() const { return ModInt()._setval(md - val); }\n \
-    \   MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
-    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
-    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
-    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % md + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt &x)\
-    \ { return ModInt()._setval(a % md - x.val + md); }\n    friend MDCONST ModInt\
-    \ operator*(lint a, const ModInt &x) { return ModInt()._setval(a % md * x.val\
-    \ % md); }\n    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n \
-    \       return ModInt()._setval(a % md * x.inv() % md);\n    }\n    MDCONST bool\
-    \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
-    \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
-    \ operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt,\
-    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
-    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
-    \ os << x.val; }\n    MDCONST ModInt pow(lint n) const {\n        ModInt ans =\
-    \ 1, tmp = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n \
-    \           tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n  \
-    \  static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static void _precalculation(int\
-    \ N) {\n        int l0 = facs.size();\n        if (N > md) N = md;\n        if\
-    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
-    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
-    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
-    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
-    \ = facinvs[i] * facs[i - 1];\n    }\n    MDCONST lint inv() const {\n       \
-    \ if (this->val < std::min(md >> 1, 1 << 21)) {\n            while (this->val\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val].val;\n\
-    \        } else {\n            return this->pow(md - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\
-    \    MDCONST ModInt facinv() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val];\n    }\n\
-    \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
-    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
-    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
-    \ r.val) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST\
-    \ ModInt nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
-    \ : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n\
-    \        if (val == 0) return 0;\n        if (md == 2) return val;\n        if\
-    \ (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md\
-    \ - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m %\
-    \ 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x\
-    \ * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while (y\
-    \ != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
-    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
-    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
+    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const {\n       \
+    \ return ModInt()._setval((lint)val - x.val + md);\n    }\n    MDCONST ModInt\
+    \ operator*(const ModInt &x) const {\n        return ModInt()._setval((lint)val\
+    \ * x.val % md);\n    }\n    MDCONST ModInt operator/(const ModInt &x) const {\n\
+    \        return ModInt()._setval((lint)val * x.inv() % md);\n    }\n    MDCONST\
+    \ ModInt operator-() const { return ModInt()._setval(md - val); }\n    MDCONST\
+    \ ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n    MDCONST\
+    \ ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n    MDCONST\
+    \ ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n    MDCONST\
+    \ ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n    friend\
+    \ MDCONST ModInt operator+(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md + x.val);\n    }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
+    \ &x) {\n        return ModInt()._setval(a % md - x.val + md);\n    }\n    friend\
+    \ MDCONST ModInt operator*(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md * x.val % md);\n    }\n    friend MDCONST ModInt operator/(lint a, const\
+    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.inv() % md);\n    }\n\
+    \    MDCONST bool operator==(const ModInt &x) const { return val == x.val; }\n\
+    \    MDCONST bool operator!=(const ModInt &x) const { return val != x.val; }\n\
+    \    MDCONST bool operator<(const ModInt &x) const {\n        return val < x.val;\n\
+    \    } // To use std::map<ModInt, T>\n    friend std::istream &operator>>(std::istream\
+    \ &is, ModInt &x) {\n        lint t;\n        return is >> t, x = ModInt(t), is;\n\
+    \    }\n    MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt\
+    \ &x) {\n        return os << x.val;\n    }\n    MDCONST ModInt pow(lint n) const\
+    \ {\n        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if\
+    \ (n & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
+    \ ans;\n    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST\
+    \ static void _precalculation(int N) {\n        int l0 = facs.size();\n      \
+    \  if (N > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N),\
+    \ facinvs.resize(N), invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i]\
+    \ = facs[i - 1] * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n    \
+    \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
+    \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
+    \    }\n    MDCONST lint inv() const {\n        if (this->val < std::min(md >>\
+    \ 1, 1 << 21)) {\n            while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n            return invs[this->val].val;\n        } else {\n         \
+    \   return this->pow(md - 2).val;\n        }\n    }\n    MDCONST ModInt fac()\
+    \ const {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facs[this->val];\n    }\n    MDCONST ModInt facinv() const\
+    \ {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facinvs[this->val];\n    }\n    MDCONST ModInt doublefac()\
+    \ const {\n        lint k = (this->val + 1) / 2;\n        return (this->val &\
+    \ 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n          \
+    \                     : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
+    \ ModInt nCr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
+    \ : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
+    \ nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0 : this->fac()\
+    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val\
+    \ == 0) return 0;\n        if (md == 2) return val;\n        if (pow((md - 1)\
+    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
+    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
+    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
+    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
+    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
+    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
     \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
@@ -232,8 +235,8 @@ data:
   isVerificationFile: true
   path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
   requiredBy: []
-  timestamp: '2021-10-25 23:23:00+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: other_algorithms/test/permutation_tree.yuki1720.test.cpp
 layout: document

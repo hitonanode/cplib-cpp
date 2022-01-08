@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
@@ -19,7 +19,7 @@ data:
     \n#include <algorithm>\n#include <cassert>\n#include <deque>\n#include <fstream>\n\
     #include <functional>\n#include <limits>\n#include <queue>\n#include <string>\n\
     #include <utility>\n#include <vector>\n\n// CUT begin\ntemplate <typename T, T\
-    \ INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath\
+    \ INF = std::numeric_limits<T>::max() / 2, int INVALID = -1>\nstruct ShortestPath\
     \ {\n    int V, E;\n    bool single_positive_weight;\n    T wmin, wmax;\n    std::vector<std::vector<std::pair<int,\
     \ T>>> to;\n\n    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true),\
     \ wmin(0), wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n       \
@@ -28,18 +28,19 @@ data:
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
-    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;\n  \
-    \  template <class Heap = Pque> void Dijkstra(int s) {\n        assert(0 <= s\
-    \ and s < V);\n        dist.assign(V, INF);\n        dist[s] = 0;\n        prev.assign(V,\
-    \ INVALID);\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
-    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
-    \            pq.pop();\n            if (dist[v] < d) continue;\n            for\
-    \ (auto nx : to[v]) {\n                T dnx = d + nx.second;\n              \
-    \  if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
-    \          }\n        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void\
-    \ DijkstraVquad(int s) {\n        assert(0 <= s and s < V);\n        dist.assign(V,\
-    \ INF);\n        dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
+    \ int>, std::vector<std::pair<T, int>>,\n                                    \
+    \ std::greater<std::pair<T, int>>>;\n    template <class Heap = Pque> void Dijkstra(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        Heap pq;\n      \
+    \  pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n      \
+    \      int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
+    \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
+    \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
+    \                pq.emplace(dnx, nx.first);\n                }\n            }\n\
+    \        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void DijkstraVquad(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
     \ fixed(V, false);\n        while (true) {\n            int r = INVALID;\n   \
     \         T dr = INF;\n            for (int i = 0; i < V; i++) {\n           \
     \     if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];\n            }\n  \
@@ -115,16 +116,16 @@ data:
     \    }\n\n    void dump_graphviz(std::string filename = \"shortest_path\") const\
     \ {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
-    \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
-    ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n#line 4 \"graph/test/shortest_path_dag.test.cpp\"\n#include <iostream>\n\
-    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N, K;\n    cin >> N >> K;\n    ShortestPath<int> graph(N + 1);\n    vector<int>\
-    \ indeg(N);\n    while (K--) {\n        int r, c;\n        cin >> r >> c;\n  \
-    \      r--, c--;\n        if (r == c) {\n            cout << \"-1\\n\";\n    \
-    \        return 0;\n        }\n        indeg[c]++;\n        graph.add_edge(r,\
-    \ c, -1);\n    }\n    for (int i = 0; i < N; i++) graph.add_edge(N, i, -1);\n\
-    \    if (graph.dag_solver(N)) {\n        cout << -(*min_element(graph.dist.begin(),\
+    \ to[i])\n                ss << i << \"->\" << e.first << \"[label=\" << e.second\
+    \ << \"];\\n\";\n        }\n        ss << \"}\\n\";\n        ss.close();\n   \
+    \     return;\n    }\n};\n#line 4 \"graph/test/shortest_path_dag.test.cpp\"\n\
+    #include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N, K;\n    cin >> N >> K;\n    ShortestPath<int>\
+    \ graph(N + 1);\n    vector<int> indeg(N);\n    while (K--) {\n        int r,\
+    \ c;\n        cin >> r >> c;\n        r--, c--;\n        if (r == c) {\n     \
+    \       cout << \"-1\\n\";\n            return 0;\n        }\n        indeg[c]++;\n\
+    \        graph.add_edge(r, c, -1);\n    }\n    for (int i = 0; i < N; i++) graph.add_edge(N,\
+    \ i, -1);\n    if (graph.dag_solver(N)) {\n        cout << -(*min_element(graph.dist.begin(),\
     \ graph.dist.end())) << '\\n';\n    } else {\n        cout << \"-1\\n\";\n   \
     \ }\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1660\"\n#include \"../shortest_path.hpp\"\
@@ -142,7 +143,7 @@ data:
   isVerificationFile: true
   path: graph/test/shortest_path_dag.test.cpp
   requiredBy: []
-  timestamp: '2021-09-07 01:07:11+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_path_dag.test.cpp

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/slope_trick.hpp
     title: "Slope trick \uFF08\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570\u306B\u95A2\
       \u3059\u308B\u7279\u5B9A\u306E\u66F4\u65B0\u3092\u9AD8\u901F\u306B\u6271\u3046\
       \u624B\u6CD5\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -70,37 +70,37 @@ data:
     \ 10000)(mt);\n            f.add_const(b);\n            for (Int x = stupid_lo;\
     \ x <= stupid_hi; x++) stupid_f[x - stupid_lo] += b;\n        }\n        if (qtype\
     \ == 1) {\n            f.add_relu(a);\n            for (Int x = stupid_lo; x <=\
-    \ stupid_hi; x++) stupid_f[x - stupid_lo] += max<Int>(x - a, 0);\n        }\n\
-    \        if (qtype == 2) {\n            f.add_irelu(a);\n            for (Int\
-    \ x = stupid_lo; x <= stupid_hi; x++) stupid_f[x - stupid_lo] += max<Int>(a -\
-    \ x, 0);\n        }\n        if (qtype == 3) {\n            f.add_abs(a);\n  \
-    \          for (Int x = stupid_lo; x <= stupid_hi; x++) stupid_f[x - stupid_lo]\
-    \ += abs(x - a);\n        }\n        if (qtype == 4) {\n            f.move_left_curve(w);\n\
-    \            for (Int x = stupid_lo; x <= stupid_hi; x++) {\n                for\
-    \ (Int y = x + 1; y <= min(stupid_hi, x + w); y++) {\n                    stupid_f[x\
+    \ stupid_hi; x++)\n                stupid_f[x - stupid_lo] += max<Int>(x - a,\
+    \ 0);\n        }\n        if (qtype == 2) {\n            f.add_irelu(a);\n   \
+    \         for (Int x = stupid_lo; x <= stupid_hi; x++)\n                stupid_f[x\
+    \ - stupid_lo] += max<Int>(a - x, 0);\n        }\n        if (qtype == 3) {\n\
+    \            f.add_abs(a);\n            for (Int x = stupid_lo; x <= stupid_hi;\
+    \ x++) stupid_f[x - stupid_lo] += abs(x - a);\n        }\n        if (qtype ==\
+    \ 4) {\n            f.move_left_curve(w);\n            for (Int x = stupid_lo;\
+    \ x <= stupid_hi; x++) {\n                for (Int y = x + 1; y <= min(stupid_hi,\
+    \ x + w); y++) {\n                    stupid_f[x - stupid_lo] = min(stupid_f[x\
+    \ - stupid_lo], stupid_f[y - stupid_lo]);\n                }\n            }\n\
+    \        }\n        if (qtype == 5) {\n            f.move_right_curve(w);\n  \
+    \          for (Int x = stupid_hi; x >= stupid_lo; x--) {\n                for\
+    \ (Int y = x - 1; y >= max(stupid_lo, x - w); y--) {\n                    stupid_f[x\
     \ - stupid_lo] = min(stupid_f[x - stupid_lo], stupid_f[y - stupid_lo]);\n    \
-    \            }\n            }\n        }\n        if (qtype == 5) {\n        \
-    \    f.move_right_curve(w);\n            for (Int x = stupid_hi; x >= stupid_lo;\
-    \ x--) {\n                for (Int y = x - 1; y >= max(stupid_lo, x - w); y--)\
-    \ {\n                    stupid_f[x - stupid_lo] = min(stupid_f[x - stupid_lo],\
-    \ stupid_f[y - stupid_lo]);\n                }\n            }\n        }\n   \
-    \     if (qtype == 6) {\n            Int dx = uniform_int_distribution<Int>(-dxmax,\
-    \ dxmax)(mt);\n            f.translate(dx);\n            auto g = stupid_f;\n\
-    \            for (Int x = stupid_lo; x <= stupid_hi; x++) {\n                Int\
-    \ y = x - dx;\n                if (y >= stupid_lo and y <= stupid_hi) g[x - stupid_lo]\
-    \ = stupid_f[y - stupid_lo];\n            }\n            stupid_f = g;\n     \
-    \   }\n    }\n    vector<Int> fvals;\n    for (Int x = lo; x <= hi; x++) {\n \
-    \       Int ret1 = stupid_f[x - stupid_lo];\n        auto g = f;\n        Int\
-    \ ret2 = g.get_destructive(x);\n        fvals.push_back(ret2);\n        assert(ret1\
-    \ == ret2);\n    }\n    return {f, fvals};\n}\n\ntemplate <typename Int> void\
-    \ merge_verify() {\n    const Int lo = uniform_int_distribution<Int>(-10000, 10000)(mt);\n\
-    \    const Int hi = lo + 1000;\n    slope_trick<Int> f, g;\n    vector<Int> fval,\
-    \ gval;\n    tie(f, fval) = gen_random_function(lo, hi);\n    tie(g, gval) = gen_random_function(lo,\
-    \ hi);\n    f.merge_destructive(g);\n    for (Int x = lo; x <= hi; x++) {\n  \
-    \      auto tmp = f;\n        assert(tmp.get_destructive(x) == fval.at(x - lo)\
-    \ + gval.at(x - lo));\n    }\n}\n\nint main() {\n    for (int t = 0; t < 1000;\
-    \ t++) {\n        merge_verify<int>();\n        merge_verify<long long>();\n \
-    \   }\n    puts(\"Hello World\");\n}\n"
+    \            }\n            }\n        }\n        if (qtype == 6) {\n        \
+    \    Int dx = uniform_int_distribution<Int>(-dxmax, dxmax)(mt);\n            f.translate(dx);\n\
+    \            auto g = stupid_f;\n            for (Int x = stupid_lo; x <= stupid_hi;\
+    \ x++) {\n                Int y = x - dx;\n                if (y >= stupid_lo\
+    \ and y <= stupid_hi) g[x - stupid_lo] = stupid_f[y - stupid_lo];\n          \
+    \  }\n            stupid_f = g;\n        }\n    }\n    vector<Int> fvals;\n  \
+    \  for (Int x = lo; x <= hi; x++) {\n        Int ret1 = stupid_f[x - stupid_lo];\n\
+    \        auto g = f;\n        Int ret2 = g.get_destructive(x);\n        fvals.push_back(ret2);\n\
+    \        assert(ret1 == ret2);\n    }\n    return {f, fvals};\n}\n\ntemplate <typename\
+    \ Int> void merge_verify() {\n    const Int lo = uniform_int_distribution<Int>(-10000,\
+    \ 10000)(mt);\n    const Int hi = lo + 1000;\n    slope_trick<Int> f, g;\n   \
+    \ vector<Int> fval, gval;\n    tie(f, fval) = gen_random_function(lo, hi);\n \
+    \   tie(g, gval) = gen_random_function(lo, hi);\n    f.merge_destructive(g);\n\
+    \    for (Int x = lo; x <= hi; x++) {\n        auto tmp = f;\n        assert(tmp.get_destructive(x)\
+    \ == fval.at(x - lo) + gval.at(x - lo));\n    }\n}\n\nint main() {\n    for (int\
+    \ t = 0; t < 1000; t++) {\n        merge_verify<int>();\n        merge_verify<long\
+    \ long>();\n    }\n    puts(\"Hello World\");\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \ // DUMMY\n#include \"../slope_trick.hpp\"\n#include <cstdio>\n#include <random>\n\
     #include <tuple>\n#include <utility>\nusing namespace std;\n\nmt19937 mt(1010101);\n\
@@ -115,14 +115,14 @@ data:
     \            f.add_const(b);\n            for (Int x = stupid_lo; x <= stupid_hi;\
     \ x++) stupid_f[x - stupid_lo] += b;\n        }\n        if (qtype == 1) {\n \
     \           f.add_relu(a);\n            for (Int x = stupid_lo; x <= stupid_hi;\
-    \ x++) stupid_f[x - stupid_lo] += max<Int>(x - a, 0);\n        }\n        if (qtype\
-    \ == 2) {\n            f.add_irelu(a);\n            for (Int x = stupid_lo; x\
-    \ <= stupid_hi; x++) stupid_f[x - stupid_lo] += max<Int>(a - x, 0);\n        }\n\
-    \        if (qtype == 3) {\n            f.add_abs(a);\n            for (Int x\
-    \ = stupid_lo; x <= stupid_hi; x++) stupid_f[x - stupid_lo] += abs(x - a);\n \
-    \       }\n        if (qtype == 4) {\n            f.move_left_curve(w);\n    \
-    \        for (Int x = stupid_lo; x <= stupid_hi; x++) {\n                for (Int\
-    \ y = x + 1; y <= min(stupid_hi, x + w); y++) {\n                    stupid_f[x\
+    \ x++)\n                stupid_f[x - stupid_lo] += max<Int>(x - a, 0);\n     \
+    \   }\n        if (qtype == 2) {\n            f.add_irelu(a);\n            for\
+    \ (Int x = stupid_lo; x <= stupid_hi; x++)\n                stupid_f[x - stupid_lo]\
+    \ += max<Int>(a - x, 0);\n        }\n        if (qtype == 3) {\n            f.add_abs(a);\n\
+    \            for (Int x = stupid_lo; x <= stupid_hi; x++) stupid_f[x - stupid_lo]\
+    \ += abs(x - a);\n        }\n        if (qtype == 4) {\n            f.move_left_curve(w);\n\
+    \            for (Int x = stupid_lo; x <= stupid_hi; x++) {\n                for\
+    \ (Int y = x + 1; y <= min(stupid_hi, x + w); y++) {\n                    stupid_f[x\
     \ - stupid_lo] = min(stupid_f[x - stupid_lo], stupid_f[y - stupid_lo]);\n    \
     \            }\n            }\n        }\n        if (qtype == 5) {\n        \
     \    f.move_right_curve(w);\n            for (Int x = stupid_hi; x >= stupid_lo;\
@@ -151,8 +151,8 @@ data:
   isVerificationFile: true
   path: other_algorithms/test/slope_trick_stress.test.cpp
   requiredBy: []
-  timestamp: '2021-09-18 11:42:06+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: other_algorithms/test/slope_trick_stress.test.cpp
 layout: document

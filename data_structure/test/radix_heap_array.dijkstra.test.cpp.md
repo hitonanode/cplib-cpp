@@ -5,7 +5,7 @@ data:
     path: data_structure/radix_heap_array.hpp
     title: "Array-like radix heap with decrease query\uFF08`chmin()` \u64CD\u4F5C\u304C\
       \u53EF\u80FD\u306A\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: utilities/reader.hpp
     title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
   _extendedRequiredBy: []
@@ -25,10 +25,10 @@ data:
     \ class radix_heap_array {\n    int sz;\n    Uint last;\n    std::array<std::vector<std::pair<Uint,\
     \ int>>, std::numeric_limits<Uint>::digits + 1> v;\n\n    struct smallpii {\n\
     \        unsigned b : 7;\n        int j : 25;\n    };\n    std::vector<smallpii>\
-    \ i2bj;\n\n    template <class U, typename std::enable_if<sizeof(U) == 4>::type*\
-    \ = nullptr>\n    static inline unsigned bucket(U x) noexcept {\n        return\
+    \ i2bj;\n\n    template <class U, typename std::enable_if<sizeof(U) == 4>::type\
+    \ * = nullptr>\n    static inline unsigned bucket(U x) noexcept {\n        return\
     \ x ? 32 - __builtin_clz(x) : 0;\n    }\n    template <class U, typename std::enable_if<sizeof(U)\
-    \ == 8>::type* = nullptr>\n    static inline unsigned bucket(U x) noexcept {\n\
+    \ == 8>::type * = nullptr>\n    static inline unsigned bucket(U x) noexcept {\n\
     \        return x ? 64 - __builtin_clzll(x) : 0;\n    }\n\n    void pull() {\n\
     \        if (!v[0].empty()) return;\n        int b = 1;\n        while (v[b].empty())\
     \ ++b;\n        last = v[b].back().first;\n        for (int j = 0; j < int(v[b].size());\
@@ -50,16 +50,16 @@ data:
     \ i), v[bold].pop_back();\n            } else {\n                v[bold][i2bj[i].j].first\
     \ = vnew;\n            }\n        }\n    }\n\n    void pop() { argmin_pop(); }\n\
     \    std::pair<Uint, int> top() { return pull(), v[0].back(); }\n    [[deprecated(\"\
-    NOT usual emplace() opeation!\")]] void emplace(Uint vnew, int i) { chmin(vnew,\
-    \ i); }\n\n    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }\n};\n\
-    #line 2 \"utilities/reader.hpp\"\n#include <cstdio>\n#include <string>\n\n// CUT\
-    \ begin\ntemplate <typename T> T rd_integer() {\n    T ret = 0;\n    bool minus\
-    \ = false;\n\n    char c = getchar_unlocked();\n    while (!isdigit(c)) minus\
-    \ |= (c == '-'), c = getchar_unlocked();\n    while (isdigit(c)) ret = (ret <<\
-    \ 1) + (ret << 3) + (c ^ 48), c = getchar_unlocked();\n\n    return minus ? -ret\
-    \ : ret;\n}\nint rdi() { return rd_integer<int>(); }\nlong long rdll() { return\
-    \ rd_integer<long long>(); }\nstd::string rdstr() {\n    std::string ret;\n  \
-    \  char c = getchar_unlocked();\n    while (!isgraph(c)) c = getchar_unlocked();\n\
+    NOT usual emplace() opeation!\")]] void emplace(Uint vnew, int i) {\n        chmin(vnew,\
+    \ i);\n    }\n\n    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }\n\
+    };\n#line 2 \"utilities/reader.hpp\"\n#include <cstdio>\n#include <string>\n\n\
+    // CUT begin\ntemplate <typename T> T rd_integer() {\n    T ret = 0;\n    bool\
+    \ minus = false;\n\n    char c = getchar_unlocked();\n    while (!isdigit(c))\
+    \ minus |= (c == '-'), c = getchar_unlocked();\n    while (isdigit(c)) ret = (ret\
+    \ << 1) + (ret << 3) + (c ^ 48), c = getchar_unlocked();\n\n    return minus ?\
+    \ -ret : ret;\n}\nint rdi() { return rd_integer<int>(); }\nlong long rdll() {\
+    \ return rd_integer<long long>(); }\nstd::string rdstr() {\n    std::string ret;\n\
+    \    char c = getchar_unlocked();\n    while (!isgraph(c)) c = getchar_unlocked();\n\
     \    while (isgraph(c)) ret += c, c = getchar_unlocked();\n    return ret;\n}\n\
     #line 4 \"data_structure/test/radix_heap_array.dijkstra.test.cpp\"\n#include <iostream>\n\
     #line 8 \"data_structure/test/radix_heap_array.dijkstra.test.cpp\"\nusing namespace\
@@ -104,7 +104,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/radix_heap_array.dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2021-09-09 22:48:03+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/radix_heap_array.dijkstra.test.cpp

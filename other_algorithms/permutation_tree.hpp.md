@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/range-add-range-min.hpp
     title: Range Add Range Min (known as the Starry sky tree)
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://codeforces.com/blog/entry/78898
@@ -27,28 +27,29 @@ data:
     \ RangeAddRangeMin {\n    int N, head;\n    std::vector<Tp> range_min, range_add;\n\
     \    static inline Tp f(Tp x, Tp y) noexcept { return std::min(x, y); }\n\n  \
     \  inline void _merge(int pos) {\n        range_min[pos] = f(range_min[pos * 2]\
-    \ + range_add[pos * 2], range_min[pos * 2 + 1] + range_add[pos * 2 + 1]);\n  \
-    \  }\n    void initialize(const std::vector<Tp> &data_init) {\n        N = data_init.size(),\
-    \ head = 1;\n        while (head < N) head <<= 1;\n        range_min.assign(head\
-    \ * 2, defaultT);\n        range_add.assign(head * 2, 0);\n        std::copy(data_init.begin(),\
-    \ data_init.end(), range_min.begin() + head);\n        for (int pos = head; --pos;)\
-    \ _merge(pos);\n    }\n    RangeAddRangeMin() = default;\n    RangeAddRangeMin(const\
-    \ std::vector<Tp> &data_init) { initialize(data_init); }\n    void _add(int begin,\
-    \ int end, int pos, int l, int r, Tp vadd) noexcept {\n        if (r <= begin\
-    \ or end <= l) return;\n        if (begin <= l and r <= end) {\n            range_add[pos]\
-    \ += vadd;\n            return;\n        }\n        _add(begin, end, pos * 2,\
-    \ l, (l + r) / 2, vadd);\n        _add(begin, end, pos * 2 + 1, (l + r) / 2, r,\
-    \ vadd);\n        _merge(pos);\n    }\n    // Add `vadd` to (x_begin, ..., x_{end\
-    \ - 1})\n    void add(int begin, int end, Tp vadd) noexcept { return _add(begin,\
-    \ end, 1, 0, head, vadd); }\n    Tp _get(int begin, int end, int pos, int l, int\
-    \ r) const noexcept {\n        if (r <= begin or end <= l) return defaultT;\n\
-    \        if (begin <= l and r <= end) return range_min[pos] + range_add[pos];\n\
-    \        return f(_get(begin, end, pos * 2, l, (l + r) / 2), _get(begin, end,\
-    \ pos * 2 + 1, (l + r) / 2, r)) + range_add[pos];\n    }\n    // Return f(x_begin,\
-    \ ..., x_{end - 1})\n    Tp get(int pos) const noexcept { return prod(pos, pos\
-    \ + 1); }\n    Tp prod(int begin, int end) const noexcept { return _get(begin,\
-    \ end, 1, 0, head); }\n};\n#line 4 \"other_algorithms/permutation_tree.hpp\"\n\
-    #include <cassert>\n#include <fstream>\n#include <string>\n#line 8 \"other_algorithms/permutation_tree.hpp\"\
+    \ + range_add[pos * 2],\n                           range_min[pos * 2 + 1] + range_add[pos\
+    \ * 2 + 1]);\n    }\n    void initialize(const std::vector<Tp> &data_init) {\n\
+    \        N = data_init.size(), head = 1;\n        while (head < N) head <<= 1;\n\
+    \        range_min.assign(head * 2, defaultT);\n        range_add.assign(head\
+    \ * 2, 0);\n        std::copy(data_init.begin(), data_init.end(), range_min.begin()\
+    \ + head);\n        for (int pos = head; --pos;) _merge(pos);\n    }\n    RangeAddRangeMin()\
+    \ = default;\n    RangeAddRangeMin(const std::vector<Tp> &data_init) { initialize(data_init);\
+    \ }\n    void _add(int begin, int end, int pos, int l, int r, Tp vadd) noexcept\
+    \ {\n        if (r <= begin or end <= l) return;\n        if (begin <= l and r\
+    \ <= end) {\n            range_add[pos] += vadd;\n            return;\n      \
+    \  }\n        _add(begin, end, pos * 2, l, (l + r) / 2, vadd);\n        _add(begin,\
+    \ end, pos * 2 + 1, (l + r) / 2, r, vadd);\n        _merge(pos);\n    }\n    //\
+    \ Add `vadd` to (x_begin, ..., x_{end - 1})\n    void add(int begin, int end,\
+    \ Tp vadd) noexcept { return _add(begin, end, 1, 0, head, vadd); }\n    Tp _get(int\
+    \ begin, int end, int pos, int l, int r) const noexcept {\n        if (r <= begin\
+    \ or end <= l) return defaultT;\n        if (begin <= l and r <= end) return range_min[pos]\
+    \ + range_add[pos];\n        return f(_get(begin, end, pos * 2, l, (l + r) / 2),\n\
+    \                 _get(begin, end, pos * 2 + 1, (l + r) / 2, r)) +\n         \
+    \      range_add[pos];\n    }\n    // Return f(x_begin, ..., x_{end - 1})\n  \
+    \  Tp get(int pos) const noexcept { return prod(pos, pos + 1); }\n    Tp prod(int\
+    \ begin, int end) const noexcept { return _get(begin, end, 1, 0, head); }\n};\n\
+    #line 4 \"other_algorithms/permutation_tree.hpp\"\n#include <cassert>\n#include\
+    \ <fstream>\n#include <string>\n#line 8 \"other_algorithms/permutation_tree.hpp\"\
     \n\n// Permutation tree\n// Complexity: O(N log N)\n// https://codeforces.com/blog/entry/78898\
     \ https://yukicoder.me/problems/no/1720\nstruct permutation_tree {\n    enum NodeType\
     \ {\n        JoinAsc,\n        JoinDesc,\n        Cut,\n        Leaf,\n      \
@@ -192,8 +193,8 @@ data:
   isVerificationFile: false
   path: other_algorithms/permutation_tree.hpp
   requiredBy: []
-  timestamp: '2021-10-25 23:23:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
 documentation_of: other_algorithms/permutation_tree.hpp

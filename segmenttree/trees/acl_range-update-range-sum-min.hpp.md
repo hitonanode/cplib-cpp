@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/acl_lazysegtree.hpp
     title: Lazy Segtree (based on atcoder::lazy_segtree)
   _extendedRequiredBy: []
@@ -36,7 +36,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-update-range-sum-min.hpp
   requiredBy: []
-  timestamp: '2021-02-15 23:59:04+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: segmenttree/trees/acl_range-update-range-sum-min.hpp

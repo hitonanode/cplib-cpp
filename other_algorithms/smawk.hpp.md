@@ -16,8 +16,8 @@ data:
     \n// CUT begin\n// SMAWK: finding minima of totally monotone function f(i, j)\
     \ (0 <= i < N, 0 <= j < M) for each i\n// Constraints: every submatrix of f(i,\
     \ j) is monotone.\n// Complexity: O(N + M)\n// Option: `Memorization`: Memorize\
-    \ all query results using hashmaps, effective when each query requires heavy complexity\n\
-    // Rererence: <https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html>\n\
+    \ all query results using hashmaps, effective when each query\n// requires heavy\
+    \ complexity Rererence:\n// <https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html>\n\
     //            <http://web.cs.unlv.edu/larmore/Courses/CSC477/monge.pdf>\n// Verify:\
     \ <https://codeforces.com/contest/1423/submission/98368491>\ntemplate <typename\
     \ T, bool Memorization> struct SMAWK {\n    std::vector<std::pair<int, T>> minima;\n\
@@ -45,7 +45,7 @@ data:
     \ of totally monotone function f(i, j) (0 <= i < N, 0 <= j < M) for each i\n//\
     \ Constraints: every submatrix of f(i, j) is monotone.\n// Complexity: O(N + M)\n\
     // Option: `Memorization`: Memorize all query results using hashmaps, effective\
-    \ when each query requires heavy complexity\n// Rererence: <https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html>\n\
+    \ when each query\n// requires heavy complexity Rererence:\n// <https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html>\n\
     //            <http://web.cs.unlv.edu/larmore/Courses/CSC477/monge.pdf>\n// Verify:\
     \ <https://codeforces.com/contest/1423/submission/98368491>\ntemplate <typename\
     \ T, bool Memorization> struct SMAWK {\n    std::vector<std::pair<int, T>> minima;\n\
@@ -72,7 +72,7 @@ data:
   isVerificationFile: false
   path: other_algorithms/smawk.hpp
   requiredBy: []
-  timestamp: '2020-11-23 12:20:49+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: other_algorithms/smawk.hpp

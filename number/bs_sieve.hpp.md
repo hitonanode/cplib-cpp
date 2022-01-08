@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/bs_sieve.test.cpp
     title: number/test/bs_sieve.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/bs_sieve.hpp\"\n#include <algorithm>\n#include <bitset>\n\
@@ -42,7 +42,7 @@ data:
   path: number/bs_sieve.hpp
   requiredBy: []
   timestamp: '2021-01-12 02:12:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number/test/bs_sieve.test.cpp
 documentation_of: number/bs_sieve.hpp

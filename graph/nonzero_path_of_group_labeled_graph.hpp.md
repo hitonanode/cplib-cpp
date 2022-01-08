@@ -34,42 +34,43 @@ data:
     \ s_) {\n        s = s_;\n        assert(s >= 0 and s < V);\n\n        // Solve\
     \ SSSP\n        {\n            dist_sp.assign(V, INF);\n            depth_sp.assign(V,\
     \ -1), parent_sp.assign(V, -1);\n            psi.assign(V, G());\n           \
-    \ std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T,\
-    \ int>>> que;\n            dist_sp[s] = 0, depth_sp[s] = 0;\n            que.emplace(0,\
+    \ std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>,\n   \
+    \                             std::greater<std::pair<T, int>>>\n             \
+    \   que;\n            dist_sp[s] = 0, depth_sp[s] = 0;\n            que.emplace(0,\
     \ s);\n            while (que.size()) {\n                T d, l;\n           \
     \     int u, v;\n                G g;\n                std::tie(d, u) = que.top();\n\
     \                que.pop();\n                if (dist_sp[u] != d) continue;\n\
     \                for (const auto &p : to[u]) {\n                    std::tie(v,\
     \ l, g) = p;\n                    const auto d2 = d + l;\n                   \
     \ if (dist_sp[v] > d2) {\n                        dist_sp[v] = d2, depth_sp[v]\
-    \ = depth_sp[u] + 1, parent_sp[v] = u, psi[v] = psi[u] + g;\n                \
-    \        que.emplace(d2, v);\n                    }\n                }\n     \
-    \       }\n        }\n\n        uf_ps.assign(V, -1);\n        using P = std::tuple<T,\
-    \ int, int>;\n        std::priority_queue<P, std::vector<P>, std::greater<P>>\
-    \ que;\n        for (int u = 0; u < V; u++) {\n            if (dist_sp[u] == INF)\
-    \ continue;\n            for (int i = 0; i < int(to[u].size()); i++) {\n     \
-    \           int v;\n                T l;\n                G g;\n             \
-    \   std::tie(v, l, g) = to[u][i];\n                if (u < v and !(psi[u] + g\
-    \ == psi[v])) que.emplace(dist_sp[u] + dist_sp[v] + l, u, i);\n            }\n\
-    \        }\n\n        dist.assign(V, INF);\n        while (que.size()) {\n   \
-    \         T h;\n            int u0, i;\n            std::tie(h, u0, i) = que.top();\n\
-    \            que.pop();\n            const int v0 = std::get<0>(to[u0][i]);\n\
-    \            int u = _find(u0), v = _find(v0);\n            std::vector<int> bs;\n\
-    \            while (u != v) {\n                if (depth_sp[u] > depth_sp[v])\
-    \ {\n                    bs.push_back(u), u = _find(parent_sp[u]);\n         \
-    \       } else {\n                    bs.push_back(v), v = _find(parent_sp[v]);\n\
-    \                }\n            }\n            for (const int x : bs) {\n    \
-    \            _unite(u, x);\n                dist[x] = h - dist_sp[x];\n      \
-    \          for (int i = 0; i < int(to[x].size()); i++) {\n                   \
-    \ int y;\n                    T l;\n                    G g;\n               \
-    \     std::tie(y, l, g) = to[x][i];\n                    if (psi[x] + g == psi[y])\
-    \ { que.emplace(dist[x] + dist_sp[y] + l, x, i); }\n                }\n      \
-    \      }\n        }\n        for (int i = 0; i < V; i++) {\n            if (!(psi[i]\
-    \ == G()) and dist_sp[i] < dist[i]) dist[i] = dist_sp[i];\n        }\n    }\n\
-    };\n/* Example of group G:\nstruct G {\n    unsigned g;\n    G(unsigned x = 0)\
-    \ : g(x) {}\n    G operator-() const noexcept { return *this; }\n    G operator+(const\
-    \ G &r) const noexcept { return G(g ^ r.g); }\n    bool operator==(const G &x)\
-    \ const noexcept { return g == x.g; }\n};\n*/\n"
+    \ = depth_sp[u] + 1, parent_sp[v] = u,\n                        psi[v] = psi[u]\
+    \ + g;\n                        que.emplace(d2, v);\n                    }\n \
+    \               }\n            }\n        }\n\n        uf_ps.assign(V, -1);\n\
+    \        using P = std::tuple<T, int, int>;\n        std::priority_queue<P, std::vector<P>,\
+    \ std::greater<P>> que;\n        for (int u = 0; u < V; u++) {\n            if\
+    \ (dist_sp[u] == INF) continue;\n            for (int i = 0; i < int(to[u].size());\
+    \ i++) {\n                int v;\n                T l;\n                G g;\n\
+    \                std::tie(v, l, g) = to[u][i];\n                if (u < v and\
+    \ !(psi[u] + g == psi[v]))\n                    que.emplace(dist_sp[u] + dist_sp[v]\
+    \ + l, u, i);\n            }\n        }\n\n        dist.assign(V, INF);\n    \
+    \    while (que.size()) {\n            T h;\n            int u0, i;\n        \
+    \    std::tie(h, u0, i) = que.top();\n            que.pop();\n            const\
+    \ int v0 = std::get<0>(to[u0][i]);\n            int u = _find(u0), v = _find(v0);\n\
+    \            std::vector<int> bs;\n            while (u != v) {\n            \
+    \    if (depth_sp[u] > depth_sp[v]) {\n                    bs.push_back(u), u\
+    \ = _find(parent_sp[u]);\n                } else {\n                    bs.push_back(v),\
+    \ v = _find(parent_sp[v]);\n                }\n            }\n            for\
+    \ (const int x : bs) {\n                _unite(u, x);\n                dist[x]\
+    \ = h - dist_sp[x];\n                for (int i = 0; i < int(to[x].size()); i++)\
+    \ {\n                    int y;\n                    T l;\n                  \
+    \  G g;\n                    std::tie(y, l, g) = to[x][i];\n                 \
+    \   if (psi[x] + g == psi[y]) { que.emplace(dist[x] + dist_sp[y] + l, x, i); }\n\
+    \                }\n            }\n        }\n        for (int i = 0; i < V; i++)\
+    \ {\n            if (!(psi[i] == G()) and dist_sp[i] < dist[i]) dist[i] = dist_sp[i];\n\
+    \        }\n    }\n};\n/* Example of group G:\nstruct G {\n    unsigned g;\n \
+    \   G(unsigned x = 0) : g(x) {}\n    G operator-() const noexcept { return *this;\
+    \ }\n    G operator+(const G &r) const noexcept { return G(g ^ r.g); }\n    bool\
+    \ operator==(const G &x) const noexcept { return g == x.g; }\n};\n*/\n"
   code: "#pragma once\n#include <cassert>\n#include <queue>\n#include <tuple>\n#include\
     \ <vector>\n\n// CUT begin\n// Single-source unorthodox shortest paths\n// Complexity:\
     \ O(M log M)\n// This implementation is based on: https://gist.github.com/wata-orz/d3037bd0b919c76dd9ddc0379e1e3192\n\
@@ -90,47 +91,48 @@ data:
     \ s_) {\n        s = s_;\n        assert(s >= 0 and s < V);\n\n        // Solve\
     \ SSSP\n        {\n            dist_sp.assign(V, INF);\n            depth_sp.assign(V,\
     \ -1), parent_sp.assign(V, -1);\n            psi.assign(V, G());\n           \
-    \ std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T,\
-    \ int>>> que;\n            dist_sp[s] = 0, depth_sp[s] = 0;\n            que.emplace(0,\
+    \ std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>,\n   \
+    \                             std::greater<std::pair<T, int>>>\n             \
+    \   que;\n            dist_sp[s] = 0, depth_sp[s] = 0;\n            que.emplace(0,\
     \ s);\n            while (que.size()) {\n                T d, l;\n           \
     \     int u, v;\n                G g;\n                std::tie(d, u) = que.top();\n\
     \                que.pop();\n                if (dist_sp[u] != d) continue;\n\
     \                for (const auto &p : to[u]) {\n                    std::tie(v,\
     \ l, g) = p;\n                    const auto d2 = d + l;\n                   \
     \ if (dist_sp[v] > d2) {\n                        dist_sp[v] = d2, depth_sp[v]\
-    \ = depth_sp[u] + 1, parent_sp[v] = u, psi[v] = psi[u] + g;\n                \
-    \        que.emplace(d2, v);\n                    }\n                }\n     \
-    \       }\n        }\n\n        uf_ps.assign(V, -1);\n        using P = std::tuple<T,\
-    \ int, int>;\n        std::priority_queue<P, std::vector<P>, std::greater<P>>\
-    \ que;\n        for (int u = 0; u < V; u++) {\n            if (dist_sp[u] == INF)\
-    \ continue;\n            for (int i = 0; i < int(to[u].size()); i++) {\n     \
-    \           int v;\n                T l;\n                G g;\n             \
-    \   std::tie(v, l, g) = to[u][i];\n                if (u < v and !(psi[u] + g\
-    \ == psi[v])) que.emplace(dist_sp[u] + dist_sp[v] + l, u, i);\n            }\n\
-    \        }\n\n        dist.assign(V, INF);\n        while (que.size()) {\n   \
-    \         T h;\n            int u0, i;\n            std::tie(h, u0, i) = que.top();\n\
-    \            que.pop();\n            const int v0 = std::get<0>(to[u0][i]);\n\
-    \            int u = _find(u0), v = _find(v0);\n            std::vector<int> bs;\n\
-    \            while (u != v) {\n                if (depth_sp[u] > depth_sp[v])\
-    \ {\n                    bs.push_back(u), u = _find(parent_sp[u]);\n         \
-    \       } else {\n                    bs.push_back(v), v = _find(parent_sp[v]);\n\
-    \                }\n            }\n            for (const int x : bs) {\n    \
-    \            _unite(u, x);\n                dist[x] = h - dist_sp[x];\n      \
-    \          for (int i = 0; i < int(to[x].size()); i++) {\n                   \
-    \ int y;\n                    T l;\n                    G g;\n               \
-    \     std::tie(y, l, g) = to[x][i];\n                    if (psi[x] + g == psi[y])\
-    \ { que.emplace(dist[x] + dist_sp[y] + l, x, i); }\n                }\n      \
-    \      }\n        }\n        for (int i = 0; i < V; i++) {\n            if (!(psi[i]\
-    \ == G()) and dist_sp[i] < dist[i]) dist[i] = dist_sp[i];\n        }\n    }\n\
-    };\n/* Example of group G:\nstruct G {\n    unsigned g;\n    G(unsigned x = 0)\
-    \ : g(x) {}\n    G operator-() const noexcept { return *this; }\n    G operator+(const\
-    \ G &r) const noexcept { return G(g ^ r.g); }\n    bool operator==(const G &x)\
-    \ const noexcept { return g == x.g; }\n};\n*/\n"
+    \ = depth_sp[u] + 1, parent_sp[v] = u,\n                        psi[v] = psi[u]\
+    \ + g;\n                        que.emplace(d2, v);\n                    }\n \
+    \               }\n            }\n        }\n\n        uf_ps.assign(V, -1);\n\
+    \        using P = std::tuple<T, int, int>;\n        std::priority_queue<P, std::vector<P>,\
+    \ std::greater<P>> que;\n        for (int u = 0; u < V; u++) {\n            if\
+    \ (dist_sp[u] == INF) continue;\n            for (int i = 0; i < int(to[u].size());\
+    \ i++) {\n                int v;\n                T l;\n                G g;\n\
+    \                std::tie(v, l, g) = to[u][i];\n                if (u < v and\
+    \ !(psi[u] + g == psi[v]))\n                    que.emplace(dist_sp[u] + dist_sp[v]\
+    \ + l, u, i);\n            }\n        }\n\n        dist.assign(V, INF);\n    \
+    \    while (que.size()) {\n            T h;\n            int u0, i;\n        \
+    \    std::tie(h, u0, i) = que.top();\n            que.pop();\n            const\
+    \ int v0 = std::get<0>(to[u0][i]);\n            int u = _find(u0), v = _find(v0);\n\
+    \            std::vector<int> bs;\n            while (u != v) {\n            \
+    \    if (depth_sp[u] > depth_sp[v]) {\n                    bs.push_back(u), u\
+    \ = _find(parent_sp[u]);\n                } else {\n                    bs.push_back(v),\
+    \ v = _find(parent_sp[v]);\n                }\n            }\n            for\
+    \ (const int x : bs) {\n                _unite(u, x);\n                dist[x]\
+    \ = h - dist_sp[x];\n                for (int i = 0; i < int(to[x].size()); i++)\
+    \ {\n                    int y;\n                    T l;\n                  \
+    \  G g;\n                    std::tie(y, l, g) = to[x][i];\n                 \
+    \   if (psi[x] + g == psi[y]) { que.emplace(dist[x] + dist_sp[y] + l, x, i); }\n\
+    \                }\n            }\n        }\n        for (int i = 0; i < V; i++)\
+    \ {\n            if (!(psi[i] == G()) and dist_sp[i] < dist[i]) dist[i] = dist_sp[i];\n\
+    \        }\n    }\n};\n/* Example of group G:\nstruct G {\n    unsigned g;\n \
+    \   G(unsigned x = 0) : g(x) {}\n    G operator-() const noexcept { return *this;\
+    \ }\n    G operator+(const G &r) const noexcept { return G(g ^ r.g); }\n    bool\
+    \ operator==(const G &x) const noexcept { return g == x.g; }\n};\n*/\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/nonzero_path_of_group_labeled_graph.hpp
   requiredBy: []
-  timestamp: '2021-07-10 17:32:41+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/nonzero_path_of_group_labeled_graph.test.cpp

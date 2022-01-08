@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/centroid_decomposition.hpp
     title: tree/centroid_decomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/frequency_table_of_tree_distance.hpp
     title: Frequency table of tree distance
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -42,19 +42,20 @@ data:
     \ chi;                // children id's\n    std::vector<int> subtree_size;   \
     \                 // size of each subtree\n    std::vector<int> available_edge;\
     \                  // If 0, ignore the corresponding edge.\n\n    CentroidDecomposition(int\
-    \ v = 0) : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v) {}\n\
-    \    CentroidDecomposition(const std::vector<std::vector<int>> &to_) : CentroidDecomposition(to_.size())\
-    \ {\n        for (int i = 0; i < V; i++) {\n            for (auto j : to_[i])\
-    \ {\n                if (i < j) { add_edge(i, j); }\n            }\n        }\n\
-    \    }\n\n    void add_edge(int v1, int v2) {\n        to[v1].emplace_back(v2,\
-    \ E), to[v2].emplace_back(v1, E), E++;\n        available_edge.emplace_back(1);\n\
-    \    }\n\n    int _dfs_fixroot(int now, int prv) {\n        chi[now].clear(),\
-    \ subtree_size[now] = 1;\n        for (auto nxt : to[now]) {\n            if (nxt.first\
-    \ != prv and available_edge[nxt.second]) {\n                par[nxt.first] = now,\
-    \ chi[now].push_back(nxt.first);\n                subtree_size[now] += _dfs_fixroot(nxt.first,\
-    \ now);\n            }\n        }\n        return subtree_size[now];\n    }\n\n\
-    \    void fix_root(int root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root,\
-    \ -1);\n    }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
+    \ v = 0)\n        : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v)\
+    \ {}\n    CentroidDecomposition(const std::vector<std::vector<int>> &to_)\n  \
+    \      : CentroidDecomposition(to_.size()) {\n        for (int i = 0; i < V; i++)\
+    \ {\n            for (auto j : to_[i]) {\n                if (i < j) { add_edge(i,\
+    \ j); }\n            }\n        }\n    }\n\n    void add_edge(int v1, int v2)\
+    \ {\n        to[v1].emplace_back(v2, E), to[v2].emplace_back(v1, E), E++;\n  \
+    \      available_edge.emplace_back(1);\n    }\n\n    int _dfs_fixroot(int now,\
+    \ int prv) {\n        chi[now].clear(), subtree_size[now] = 1;\n        for (auto\
+    \ nxt : to[now]) {\n            if (nxt.first != prv and available_edge[nxt.second])\
+    \ {\n                par[nxt.first] = now, chi[now].push_back(nxt.first);\n  \
+    \              subtree_size[now] += _dfs_fixroot(nxt.first, now);\n          \
+    \  }\n        }\n        return subtree_size[now];\n    }\n\n    void fix_root(int\
+    \ root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root, -1);\n \
+    \   }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
     \    void _dfs_detect_centroids(int now, int prv, int n) {\n        bool is_centroid\
     \ = true;\n        for (auto nxt : to[now]) {\n            if (nxt.first != prv\
     \ and available_edge[nxt.second]) {\n                _dfs_detect_centroids(nxt.first,\
@@ -84,11 +85,11 @@ data:
     \ tmp[depth]++;\n        tmp.emplace_back(now, depth);\n        for (auto nxt\
     \ : tos[now]) {\n            if (alive[nxt] and nxt != prv) _dfs(nxt, now, depth\
     \ + 1);\n        }\n    }\n    std::vector<std::pair<int, int>> cnt_dfs(int root)\
-    \ { return tmp.clear(), _dfs(root, -1, 0), tmp; }\n    frequency_table_of_tree_distance(const\
-    \ std::vector<std::vector<int>>& to) {\n        tos = to;\n        cd = CentroidDecomposition(to).centroid_decomposition(0);\n\
-    \    }\n    template <class S, std::vector<S> (*conv)(const std::vector<S>&, const\
-    \ std::vector<S>&)>\n    std::vector<S> solve(const std::vector<S>& weight) {\n\
-    \        alive.assign(tos.size(), 1);\n        std::vector<S> ret(tos.size());\n\
+    \ {\n        return tmp.clear(), _dfs(root, -1, 0), tmp;\n    }\n    frequency_table_of_tree_distance(const\
+    \ std::vector<std::vector<int>> &to) {\n        tos = to;\n        cd = CentroidDecomposition(to).centroid_decomposition(0);\n\
+    \    }\n    template <class S, std::vector<S> (*conv)(const std::vector<S> &,\
+    \ const std::vector<S> &)>\n    std::vector<S> solve(const std::vector<S> &weight)\
+    \ {\n        alive.assign(tos.size(), 1);\n        std::vector<S> ret(tos.size());\n\
     \        std::vector<S> v;\n        for (auto root : cd) {\n            std::vector<std::vector<S>>\
     \ vv;\n            alive[root] = 0;\n            for (auto nxt : tos[root]) {\n\
     \                if (!alive[nxt]) continue;\n                v.clear();\n    \
@@ -96,84 +97,86 @@ data:
     \ <= p.second) v.push_back(S(0));\n                    v[p.second] += weight[p.first];\n\
     \                }\n                for (int i = 0; i < int(v.size()); i++) ret[i\
     \ + 1] += v[i] * weight[root];\n                vv.emplace_back(v);\n        \
-    \    }\n            std::sort(vv.begin(), vv.end(),\n                      [&](const\
-    \ std::vector<S>& l, const std::vector<S>& r) { return l.size() < r.size(); });\n\
-    \            for (size_t j = 1; j < vv.size(); j++) {\n                const std::vector<S>\
-    \ c = conv(vv[j - 1], vv[j]);\n                for (size_t i = 0; i < c.size();\
-    \ i++) ret[i + 2] += c[i];\n                for (size_t i = 0; i < vv[j - 1].size();\
-    \ i++) vv[j][i] += vv[j - 1][i];\n            }\n            tos[root].clear();\n\
-    \        }\n        return ret;\n    }\n};\n#line 2 \"modint.hpp\"\n#include <iostream>\n\
-    #include <set>\n#line 5 \"modint.hpp\"\n\n// CUT begin\ntemplate <int md> struct\
-    \ ModInt {\n#if __cplusplus >= 201402L\n#define MDCONST constexpr\n#else\n#define\
-    \ MDCONST\n#endif\n    using lint = long long;\n    MDCONST static int mod() {\
-    \ return md; }\n    static int get_primitive_root() {\n        static int primitive_root\
-    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&]() {\n\
-    \                std::set<int> fac;\n                int v = md - 1;\n       \
-    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
-    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
-    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
-    \                    for (auto i : fac)\n                        if (ModInt(g).pow((md\
-    \ - 1) / i) == 1) {\n                            ok = false;\n               \
-    \             break;\n                        }\n                    if (ok) return\
-    \ g;\n                }\n                return -1;\n            }();\n      \
-    \  }\n        return primitive_root;\n    }\n    int val;\n    MDCONST ModInt()\
-    \ : val(0) {}\n    MDCONST ModInt &_setval(lint v) { return val = (v >= md ? v\
-    \ - md : v), *this; }\n    MDCONST ModInt(lint v) { _setval(v % md + md); }\n\
-    \    MDCONST explicit operator bool() const { return val != 0; }\n    MDCONST\
-    \ ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ - x.val + md); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.val % md); }\n    MDCONST ModInt operator/(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % md); }\n  \
-    \  MDCONST ModInt operator-() const { return ModInt()._setval(md - val); }\n \
-    \   MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
-    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
-    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
-    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % md + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt &x)\
-    \ { return ModInt()._setval(a % md - x.val + md); }\n    friend MDCONST ModInt\
-    \ operator*(lint a, const ModInt &x) { return ModInt()._setval(a % md * x.val\
-    \ % md); }\n    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n \
-    \       return ModInt()._setval(a % md * x.inv() % md);\n    }\n    MDCONST bool\
-    \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
-    \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
-    \ operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt,\
-    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
-    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
-    \ os << x.val; }\n    MDCONST ModInt pow(lint n) const {\n        ModInt ans =\
-    \ 1, tmp = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n \
-    \           tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n  \
-    \  static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static void _precalculation(int\
-    \ N) {\n        int l0 = facs.size();\n        if (N > md) N = md;\n        if\
-    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
-    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
-    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
-    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
-    \ = facinvs[i] * facs[i - 1];\n    }\n    MDCONST lint inv() const {\n       \
-    \ if (this->val < std::min(md >> 1, 1 << 21)) {\n            while (this->val\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val].val;\n\
-    \        } else {\n            return this->pow(md - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\
-    \    MDCONST ModInt facinv() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val];\n    }\n\
-    \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
-    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
-    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
-    \ r.val) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST\
-    \ ModInt nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
-    \ : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n\
-    \        if (val == 0) return 0;\n        if (md == 2) return val;\n        if\
-    \ (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md\
-    \ - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m %\
-    \ 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x\
-    \ * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while (y\
-    \ != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
-    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
-    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
+    \    }\n            std::sort(vv.begin(), vv.end(), [&](const std::vector<S> &l,\
+    \ const std::vector<S> &r) {\n                return l.size() < r.size();\n  \
+    \          });\n            for (size_t j = 1; j < vv.size(); j++) {\n       \
+    \         const std::vector<S> c = conv(vv[j - 1], vv[j]);\n                for\
+    \ (size_t i = 0; i < c.size(); i++) ret[i + 2] += c[i];\n                for (size_t\
+    \ i = 0; i < vv[j - 1].size(); i++) vv[j][i] += vv[j - 1][i];\n            }\n\
+    \            tos[root].clear();\n        }\n        return ret;\n    }\n};\n#line\
+    \ 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#line 5 \"modint.hpp\"\
+    \n\n// CUT begin\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n\
+    #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
+    \ long;\n    MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
+    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
+    \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
+    \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
+    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
+    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
+    \                    bool ok = true;\n                    for (auto i : fac)\n\
+    \                        if (ModInt(g).pow((md - 1) / i) == 1) {\n           \
+    \                 ok = false;\n                            break;\n          \
+    \              }\n                    if (ok) return g;\n                }\n \
+    \               return -1;\n            }();\n        }\n        return primitive_root;\n\
+    \    }\n    int val;\n    MDCONST ModInt() : val(0) {}\n    MDCONST ModInt &_setval(lint\
+    \ v) { return val = (v >= md ? v - md : v), *this; }\n    MDCONST ModInt(lint\
+    \ v) { _setval(v % md + md); }\n    MDCONST explicit operator bool() const { return\
+    \ val != 0; }\n    MDCONST ModInt operator+(const ModInt &x) const { return ModInt()._setval((lint)val\
+    \ + x.val); }\n    MDCONST ModInt operator-(const ModInt &x) const {\n       \
+    \ return ModInt()._setval((lint)val - x.val + md);\n    }\n    MDCONST ModInt\
+    \ operator*(const ModInt &x) const {\n        return ModInt()._setval((lint)val\
+    \ * x.val % md);\n    }\n    MDCONST ModInt operator/(const ModInt &x) const {\n\
+    \        return ModInt()._setval((lint)val * x.inv() % md);\n    }\n    MDCONST\
+    \ ModInt operator-() const { return ModInt()._setval(md - val); }\n    MDCONST\
+    \ ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n    MDCONST\
+    \ ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n    MDCONST\
+    \ ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n    MDCONST\
+    \ ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n    friend\
+    \ MDCONST ModInt operator+(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md + x.val);\n    }\n    friend MDCONST ModInt operator-(lint a, const ModInt\
+    \ &x) {\n        return ModInt()._setval(a % md - x.val + md);\n    }\n    friend\
+    \ MDCONST ModInt operator*(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md * x.val % md);\n    }\n    friend MDCONST ModInt operator/(lint a, const\
+    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.inv() % md);\n    }\n\
+    \    MDCONST bool operator==(const ModInt &x) const { return val == x.val; }\n\
+    \    MDCONST bool operator!=(const ModInt &x) const { return val != x.val; }\n\
+    \    MDCONST bool operator<(const ModInt &x) const {\n        return val < x.val;\n\
+    \    } // To use std::map<ModInt, T>\n    friend std::istream &operator>>(std::istream\
+    \ &is, ModInt &x) {\n        lint t;\n        return is >> t, x = ModInt(t), is;\n\
+    \    }\n    MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt\
+    \ &x) {\n        return os << x.val;\n    }\n    MDCONST ModInt pow(lint n) const\
+    \ {\n        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if\
+    \ (n & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
+    \ ans;\n    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST\
+    \ static void _precalculation(int N) {\n        int l0 = facs.size();\n      \
+    \  if (N > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N),\
+    \ facinvs.resize(N), invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i]\
+    \ = facs[i - 1] * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n    \
+    \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
+    \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
+    \    }\n    MDCONST lint inv() const {\n        if (this->val < std::min(md >>\
+    \ 1, 1 << 21)) {\n            while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n            return invs[this->val].val;\n        } else {\n         \
+    \   return this->pow(md - 2).val;\n        }\n    }\n    MDCONST ModInt fac()\
+    \ const {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facs[this->val];\n    }\n    MDCONST ModInt facinv() const\
+    \ {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facinvs[this->val];\n    }\n    MDCONST ModInt doublefac()\
+    \ const {\n        lint k = (this->val + 1) / 2;\n        return (this->val &\
+    \ 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n          \
+    \                     : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
+    \ ModInt nCr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
+    \ : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
+    \ nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0 : this->fac()\
+    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val\
+    \ == 0) return 0;\n        if (md == 2) return val;\n        if (pow((md - 1)\
+    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
+    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
+    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
+    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
+    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
+    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
     \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
@@ -204,25 +207,26 @@ data:
     \ i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m];\n    \
     \                a[i] = x + y, a[i + m] = (x - y) * iw[k];\n                }\n\
     \            }\n        }\n        int n_inv = MODINT(n).inv();\n        for (auto\
-    \ &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD> std::vector<ModInt<MOD>> nttconv_(const\
-    \ std::vector<int> &a, const std::vector<int> &b) {\n    int sz = a.size();\n\
-    \    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n    std::vector<ModInt<MOD>>\
-    \ ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++) ap[i] = a[i], bp[i] = b[i];\n\
-    \    ntt(ap, false);\n    if (a == b)\n        bp = ap;\n    else\n        ntt(bp,\
-    \ false);\n    for (int i = 0; i < sz; i++) ap[i] *= bp[i];\n    ntt(ap, true);\n\
-    \    return ap;\n}\nlong long garner_ntt_(int r0, int r1, int r2, int mod) {\n\
-    \    using mint2 = ModInt<nttprimes[2]>;\n    static const long long m01 = 1LL\
-    \ * nttprimes[0] * nttprimes[1];\n    static const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();\n\
-    \    static const long long m01_inv_m2 = mint2(m01).inv();\n\n    int v1 = (m0_inv_m1\
-    \ * (r1 + nttprimes[1] - r0)) % nttprimes[1];\n    auto v2 = (mint2(r2) - r0 -\
-    \ mint2(nttprimes[0]) * v1) * m01_inv_m2;\n    return (r0 + 1LL * nttprimes[0]\
-    \ * v1 + m01 % mod * v2.val) % mod;\n}\ntemplate <typename MODINT>\nstd::vector<MODINT>\
-    \ nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner) {\n\
-    \    if (a.empty() or b.empty()) return {};\n    int sz = 1, n = a.size(), m =\
-    \ b.size();\n    while (sz < n + m) sz <<= 1;\n    if (sz <= 16) {\n        std::vector<MODINT>\
-    \ ret(n + m - 1);\n        for (int i = 0; i < n; i++) {\n            for (int\
-    \ j = 0; j < m; j++) ret[i + j] += a[i] * b[j];\n        }\n        return ret;\n\
-    \    }\n    int mod = MODINT::mod();\n    if (skip_garner or std::find(std::begin(nttprimes),\
+    \ &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
+    \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
+    \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
+    \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
+    \ ap[i] = a[i], bp[i] = b[i];\n    ntt(ap, false);\n    if (a == b)\n        bp\
+    \ = ap;\n    else\n        ntt(bp, false);\n    for (int i = 0; i < sz; i++) ap[i]\
+    \ *= bp[i];\n    ntt(ap, true);\n    return ap;\n}\nlong long garner_ntt_(int\
+    \ r0, int r1, int r2, int mod) {\n    using mint2 = ModInt<nttprimes[2]>;\n  \
+    \  static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];\n    static\
+    \ const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();\n    static\
+    \ const long long m01_inv_m2 = mint2(m01).inv();\n\n    int v1 = (m0_inv_m1 *\
+    \ (r1 + nttprimes[1] - r0)) % nttprimes[1];\n    auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0])\
+    \ * v1) * m01_inv_m2;\n    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod *\
+    \ v2.val) % mod;\n}\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner) {\n    if (a.empty() or b.empty())\
+    \ return {};\n    int sz = 1, n = a.size(), m = b.size();\n    while (sz < n +\
+    \ m) sz <<= 1;\n    if (sz <= 16) {\n        std::vector<MODINT> ret(n + m - 1);\n\
+    \        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < m; j++)\
+    \ ret[i + j] += a[i] * b[j];\n        }\n        return ret;\n    }\n    int mod\
+    \ = MODINT::mod();\n    if (skip_garner or\n        std::find(std::begin(nttprimes),\
     \ std::end(nttprimes), mod) != std::end(nttprimes)) {\n        a.resize(sz), b.resize(sz);\n\
     \        if (a == b) {\n            ntt(a, false);\n            b = a;\n     \
     \   } else {\n            ntt(a, false), ntt(b, false);\n        }\n        for\
@@ -231,14 +235,14 @@ data:
     \ (int i = 0; i < n; i++) ai[i] = a[i].val;\n        for (int i = 0; i < m; i++)\
     \ bi[i] = b[i].val;\n        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);\n   \
     \     auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
-    \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\
-    \ a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n    }\n   \
-    \ return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
+    \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\n\
+    \            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n\
+    \    }\n    return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
     \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
     \ b, false);\n}\n#line 4 \"graph/shortest_path.hpp\"\n#include <deque>\n#include\
     \ <fstream>\n#include <functional>\n#include <limits>\n#include <queue>\n#include\
     \ <string>\n#line 12 \"graph/shortest_path.hpp\"\n\n// CUT begin\ntemplate <typename\
-    \ T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1> struct ShortestPath\
+    \ T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1>\nstruct ShortestPath\
     \ {\n    int V, E;\n    bool single_positive_weight;\n    T wmin, wmax;\n    std::vector<std::vector<std::pair<int,\
     \ T>>> to;\n\n    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true),\
     \ wmin(0), wmax(0), to(V) {}\n    void add_edge(int s, int t, T w) {\n       \
@@ -247,18 +251,19 @@ data:
     \ = false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
     \    }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
     \ algorithm\n    // Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
-    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>;\n  \
-    \  template <class Heap = Pque> void Dijkstra(int s) {\n        assert(0 <= s\
-    \ and s < V);\n        dist.assign(V, INF);\n        dist[s] = 0;\n        prev.assign(V,\
-    \ INVALID);\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
-    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
-    \            pq.pop();\n            if (dist[v] < d) continue;\n            for\
-    \ (auto nx : to[v]) {\n                T dnx = d + nx.second;\n              \
-    \  if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
-    \          }\n        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void\
-    \ DijkstraVquad(int s) {\n        assert(0 <= s and s < V);\n        dist.assign(V,\
-    \ INF);\n        dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
+    \ int>, std::vector<std::pair<T, int>>,\n                                    \
+    \ std::greater<std::pair<T, int>>>;\n    template <class Heap = Pque> void Dijkstra(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        Heap pq;\n      \
+    \  pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n      \
+    \      int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
+    \            if (dist[v] < d) continue;\n            for (auto nx : to[v]) {\n\
+    \                T dnx = d + nx.second;\n                if (dist[nx.first] >\
+    \ dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n    \
+    \                pq.emplace(dnx, nx.first);\n                }\n            }\n\
+    \        }\n    }\n\n    // Dijkstra algorithm, O(V^2 + E)\n    void DijkstraVquad(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        dist.assign(V, INF);\n    \
+    \    dist[s] = 0;\n        prev.assign(V, INVALID);\n        std::vector<char>\
     \ fixed(V, false);\n        while (true) {\n            int r = INVALID;\n   \
     \         T dr = INF;\n            for (int i = 0; i < V; i++) {\n           \
     \     if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];\n            }\n  \
@@ -334,13 +339,13 @@ data:
     \    }\n\n    void dump_graphviz(std::string filename = \"shortest_path\") const\
     \ {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
     n\";\n        for (int i = 0; i < V; i++) {\n            for (const auto &e :\
-    \ to[i]) ss << i << \"->\" << e.first << \"[label=\" << e.second << \"];\\n\"\
-    ;\n        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n\
-    \    }\n};\n#line 2 \"random/xorshift.hpp\"\n#include <cstdint>\n\n// CUT begin\n\
-    uint32_t rand_int() // XorShift random integer generator\n{\n    static uint32_t\
-    \ x = 123456789, y = 362436069, z = 521288629, w = 88675123;\n    uint32_t t =\
-    \ x ^ (x << 11);\n    x = y;\n    y = z;\n    z = w;\n    return w = (w ^ (w >>\
-    \ 19)) ^ (t ^ (t >> 8));\n}\ndouble rand_double() { return (double)rand_int()\
+    \ to[i])\n                ss << i << \"->\" << e.first << \"[label=\" << e.second\
+    \ << \"];\\n\";\n        }\n        ss << \"}\\n\";\n        ss.close();\n   \
+    \     return;\n    }\n};\n#line 2 \"random/xorshift.hpp\"\n#include <cstdint>\n\
+    \n// CUT begin\nuint32_t rand_int() // XorShift random integer generator\n{\n\
+    \    static uint32_t x = 123456789, y = 362436069, z = 521288629, w = 88675123;\n\
+    \    uint32_t t = x ^ (x << 11);\n    x = y;\n    y = z;\n    z = w;\n    return\
+    \ w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n}\ndouble rand_double() { return (double)rand_int()\
     \ / UINT32_MAX; }\n#line 10 \"tree/test/frequency_table_of_tree_distance.stress.test.cpp\"\
     \nusing namespace std;\n\nusing mint = ModInt<998244353>;\n\nint main() {\n  \
     \  for (int t = 0; t < 10000; t++) {\n        int n = rand_int() % 100 + 1;\n\
@@ -382,8 +387,8 @@ data:
   isVerificationFile: true
   path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
   requiredBy: []
-  timestamp: '2021-09-07 01:07:11+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/frequency_table_of_tree_distance.stress.test.cpp
 layout: document

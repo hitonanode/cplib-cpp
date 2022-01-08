@@ -6,34 +6,34 @@ data:
     path: graph/paths_of_length_two_decomposition.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u306E\u9577\u3055 2 \u306E\u30D1\u30B9\u3078\
       \u306E\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/aho_corasick.hpp
     title: string/aho_corasick.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/aho_corasick_online.hpp
     title: string/aho_corasick_online.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/incremental_matching.hpp
     title: string/incremental_matching.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/aho_corasick_forwardlist.test.cpp
     title: string/test/aho_corasick_forwardlist.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/aho_corasick_online.test.cpp
     title: string/test/aho_corasick_online.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/aho_corasick_unorderedmap.test.cpp
     title: string/test/aho_corasick_unorderedmap.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/aho_corasick_vector.test.cpp
     title: string/test/aho_corasick_vector.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/incremental_matching.test.cpp
     title: string/test/incremental_matching.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D>
@@ -69,7 +69,7 @@ data:
   - string/incremental_matching.hpp
   - string/aho_corasick_online.hpp
   timestamp: '2021-02-26 23:47:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - string/test/aho_corasick_online.test.cpp
   - string/test/aho_corasick_unorderedmap.test.cpp

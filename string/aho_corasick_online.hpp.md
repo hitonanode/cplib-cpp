@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/light_forward_list.hpp
     title: data_structure/light_forward_list.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/aho_corasick.hpp
     title: string/aho_corasick.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/aho_corasick_online.test.cpp
     title: string/test/aho_corasick_online.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://codeforces.com/blog/entry/10725?#comment-160742>
@@ -61,14 +61,14 @@ data:
     \ std::string &str) {\n        if (!built) build();\n        std::vector<int>\
     \ freq(node.size());\n        int now = 0;\n        for (const auto &c : str)\
     \ freq[now = step(now, char2int(c))]++;\n\n        for (auto i = visorder.rbegin();\
-    \ i != visorder.rend(); i++) freq[node[*i].fail] += freq[*i];\n        std::vector<int>\
-    \ ret;\n        for (auto x : endpos) ret.push_back(freq[x]);\n        return\
-    \ ret;\n    }\n};\n\nstruct TrieNodeFL {\n    struct smallpii {\n        int first\
-    \ : 8;\n        int second : 24;\n    };\n    light_forward_list<smallpii> chlist;\n\
-    \    int fail;\n    TrieNodeFL(int = 0) : fail(0) {}\n    int Goto(int c) {\n\
-    \        for (const auto x : chlist) {\n            if (x.first == c) return x.second;\n\
-    \        }\n        return 0;\n    }\n    void setch(int c, int i) { chlist.push_front({c,\
-    \ i}); }\n\n    struct iterator {\n        light_forward_list<smallpii>::iterator\
+    \ i != visorder.rend(); i++)\n            freq[node[*i].fail] += freq[*i];\n \
+    \       std::vector<int> ret;\n        for (auto x : endpos) ret.push_back(freq[x]);\n\
+    \        return ret;\n    }\n};\n\nstruct TrieNodeFL {\n    struct smallpii {\n\
+    \        int first : 8;\n        int second : 24;\n    };\n    light_forward_list<smallpii>\
+    \ chlist;\n    int fail;\n    TrieNodeFL(int = 0) : fail(0) {}\n    int Goto(int\
+    \ c) {\n        for (const auto x : chlist) {\n            if (x.first == c) return\
+    \ x.second;\n        }\n        return 0;\n    }\n    void setch(int c, int i)\
+    \ { chlist.push_front({c, i}); }\n\n    struct iterator {\n        light_forward_list<smallpii>::iterator\
     \ iter;\n        iterator operator++() { return {++iter}; }\n        smallpii\
     \ operator*() { return *iter; }\n        bool operator!=(const iterator &rhs)\
     \ { return iter != rhs.iter; }\n    };\n    iterator begin() { return {chlist.begin()};\
@@ -129,8 +129,8 @@ data:
   isVerificationFile: false
   path: string/aho_corasick_online.hpp
   requiredBy: []
-  timestamp: '2021-03-20 13:33:37+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - string/test/aho_corasick_online.test.cpp
 documentation_of: string/aho_corasick_online.hpp

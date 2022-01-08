@@ -28,19 +28,20 @@ data:
     \u305F\u305B\u308B\u30C7\u30FC\u30BF\u578B\u3068\u4EE3\u6570\u69CB\u9020\n   \
     \ DVAL Idval;\n    struct Node {\n        Node *l, *r;\n        uint32_t sz; //\
     \ \u81EA\u8EAB\u3092\u9802\u70B9\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\
-    \u30A4\u30BA\n        VAL val;     // \u81EA\u8EAB\u304Croot\u306E\u90E8\u5206\
-    \u6728\u3092\u8A18\u8FF0, dval==Idval\u306E\u3068\u304D\u306E\u307F\u5358\u72EC\
-    \u3067\u610F\u5473\u3092\u6301\u3064\n        DVAL dval;   // \u81EA\u8EAB\u3068\
-    \u305D\u306E\u90E8\u5206\u6728\u306B\u5BFE\u3059\u308B\u9045\u5EF6\u8A55\u4FA1\
-    \n        Node(const VAL &v, const DVAL &dv) : l(nullptr), r(nullptr), sz(1),\
-    \ val(v), dval(dv) {}\n        Node() {}\n    };\n    inline Node *_revise_val(Node\
-    \ *t) // \uFF08t\u306E\u5B50\u306B\u95A2\u3059\u308B\u5916\u7684\u64CD\u4F5C\u5F8C\
-    \u306B\u547C\u3093\u3067\uFF09sz\u3068val\u3092\u9069\u5207\u306B\u76F4\u3059\
-    \ t\u306E\u5B50\u306E\u9045\u5EF6\u8A55\u4FA1\u304C\u6E08\u3093\u3067\u3044\u308B\
-    \u3068\u306F\u9650\u3089\u306A\u3044\n    {\n        if (t) {\n            t->sz\
-    \ = size(t->l) + size(t->r) + 1;\n            t->val.sum = t->val.val + (t->l\
-    \ ? t->l->val.sum + t->l->sz * t->l->dval : 0) + (t->r ? t->r->val.sum + t->r->sz\
-    \ * t->r->dval : 0);\n        };\n        return t;\n    }\n    inline void _propagate_dval(DVAL\
+    \u30A4\u30BA\n        VAL val; // \u81EA\u8EAB\u304Croot\u306E\u90E8\u5206\u6728\
+    \u3092\u8A18\u8FF0, dval==Idval\u306E\u3068\u304D\u306E\u307F\u5358\u72EC\u3067\
+    \u610F\u5473\u3092\u6301\u3064\n        DVAL dval; // \u81EA\u8EAB\u3068\u305D\
+    \u306E\u90E8\u5206\u6728\u306B\u5BFE\u3059\u308B\u9045\u5EF6\u8A55\u4FA1\n   \
+    \     Node(const VAL &v, const DVAL &dv) : l(nullptr), r(nullptr), sz(1), val(v),\
+    \ dval(dv) {}\n        Node() {}\n    };\n    inline Node *_revise_val(Node *t)\
+    \ // \uFF08t\u306E\u5B50\u306B\u95A2\u3059\u308B\u5916\u7684\u64CD\u4F5C\u5F8C\
+    \u306B\u547C\u3093\u3067\uFF09sz\u3068val\u3092\u9069\u5207\u306B\u76F4\u3059\n\
+    \                                      // t\u306E\u5B50\u306E\u9045\u5EF6\u8A55\
+    \u4FA1\u304C\u6E08\u3093\u3067\u3044\u308B\u3068\u306F\u9650\u3089\u306A\u3044\
+    \n    {\n        if (t) {\n            t->sz = size(t->l) + size(t->r) + 1;\n\
+    \            t->val.sum = t->val.val + (t->l ? t->l->val.sum + t->l->sz * t->l->dval\
+    \ : 0) +\n                         (t->r ? t->r->val.sum + t->r->sz * t->r->dval\
+    \ : 0);\n        };\n        return t;\n    }\n    inline void _propagate_dval(DVAL\
     \ &a, DVAL b) // \u9045\u5EF6\u8A55\u4FA1\u4F1D\u64AD\n    {\n        a += b;\n\
     \    }\n    inline void _reflect_dval(Node *a, DVAL b) // \u9045\u5EF6\u8A55\u4FA1\
     \u53CD\u6620\n    {\n        a->val.val += b;\n        a->val.sum += a->sz * b;\n\
@@ -98,23 +99,23 @@ data:
     \    Node get(Node *&root, int pos) { return range_get(root, pos, pos + 1); }\n\
     \n    // \u666E\u901A\u306Elower_bound\n    int lower_bound(Node *root, const\
     \ VAL &v) {\n        if (root == nullptr) return 0;\n        return (v <= root->val)\
-    \ ? lower_bound(root->l, v) : lower_bound(root->r, v) + size(root->l) + 1;\n \
-    \   }\n\n    // \u30C7\u30FC\u30BF\u3092\u58CA\u3057\u3066\u65B0\u898F\u306Binit\u306E\
-    \u5185\u5BB9\u3092\u8A70\u3081\u308B\n    void assign(Node *&root, const vector<VAL>\
-    \ &init) {\n        d_ptr = 0;\n        int N = init.size();\n        root = N\
-    \ ? _assign_range(0, N, init) : new_tree();\n    }\n    Node *_assign_range(int\
-    \ l, int r, const vector<VAL> &init) {\n        if (r - l == 1) {\n          \
-    \  auto t = _make_node(init[l]);\n            return _revise_val(t);\n       \
-    \ }\n        return merge(_assign_range(l, (l + r) / 2, init), _assign_range((l\
-    \ + r) / 2, r, init));\n    }\n\n    // \u30C7\u30FC\u30BF\u3092vec\u3078\u66F8\
-    \u304D\u51FA\u3057\n    void dump(Node *t, vector<VAL> &vec) {\n        if (t\
-    \ == nullptr) return;\n        _resolve_dval(t);\n        dump(t->l, vec);\n \
-    \       vec.push_back(t->val);\n        dump(t->r, vec);\n    }\n\n    // gc\n\
-    \    void re_alloc(Node *&root) {\n        vector<VAL> mem;\n        dump(root,\
-    \ mem);\n        assign(root, mem);\n    }\n};\n\n// \u6C38\u7D9A\u5316\ntemplate\
-    \ <uint32_t len> struct PersistentRBST : RandomizedBinarySearchTree<len> {\n \
-    \   using RBST = RandomizedBinarySearchTree<len>;\n    using Node = typename RBST::Node;\n\
-    \    PersistentRBST(DVAL idval) : RBST(idval) {}\n\n    void _duplicate_node(Node\
+    \ ? lower_bound(root->l, v)\n                                : lower_bound(root->r,\
+    \ v) + size(root->l) + 1;\n    }\n\n    // \u30C7\u30FC\u30BF\u3092\u58CA\u3057\
+    \u3066\u65B0\u898F\u306Binit\u306E\u5185\u5BB9\u3092\u8A70\u3081\u308B\n    void\
+    \ assign(Node *&root, const vector<VAL> &init) {\n        d_ptr = 0;\n       \
+    \ int N = init.size();\n        root = N ? _assign_range(0, N, init) : new_tree();\n\
+    \    }\n    Node *_assign_range(int l, int r, const vector<VAL> &init) {\n   \
+    \     if (r - l == 1) {\n            auto t = _make_node(init[l]);\n         \
+    \   return _revise_val(t);\n        }\n        return merge(_assign_range(l, (l\
+    \ + r) / 2, init), _assign_range((l + r) / 2, r, init));\n    }\n\n    // \u30C7\
+    \u30FC\u30BF\u3092vec\u3078\u66F8\u304D\u51FA\u3057\n    void dump(Node *t, vector<VAL>\
+    \ &vec) {\n        if (t == nullptr) return;\n        _resolve_dval(t);\n    \
+    \    dump(t->l, vec);\n        vec.push_back(t->val);\n        dump(t->r, vec);\n\
+    \    }\n\n    // gc\n    void re_alloc(Node *&root) {\n        vector<VAL> mem;\n\
+    \        dump(root, mem);\n        assign(root, mem);\n    }\n};\n\n// \u6C38\u7D9A\
+    \u5316\ntemplate <uint32_t len> struct PersistentRBST : RandomizedBinarySearchTree<len>\
+    \ {\n    using RBST = RandomizedBinarySearchTree<len>;\n    using Node = typename\
+    \ RBST::Node;\n    PersistentRBST(DVAL idval) : RBST(idval) {}\n\n    void _duplicate_node(Node\
     \ *&t) override {\n        if (t == nullptr) return;\n        if (RBST::d_ptr\
     \ >= len) exit(1);\n        t = &(RBST::data[RBST::d_ptr++] = *t);\n    }\n\n\
     \    void copy(Node *&root, int l, int d, int target_l) // [target_l, )\u306B\
@@ -153,19 +154,20 @@ data:
     \u305F\u305B\u308B\u30C7\u30FC\u30BF\u578B\u3068\u4EE3\u6570\u69CB\u9020\n   \
     \ DVAL Idval;\n    struct Node {\n        Node *l, *r;\n        uint32_t sz; //\
     \ \u81EA\u8EAB\u3092\u9802\u70B9\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\
-    \u30A4\u30BA\n        VAL val;     // \u81EA\u8EAB\u304Croot\u306E\u90E8\u5206\
-    \u6728\u3092\u8A18\u8FF0, dval==Idval\u306E\u3068\u304D\u306E\u307F\u5358\u72EC\
-    \u3067\u610F\u5473\u3092\u6301\u3064\n        DVAL dval;   // \u81EA\u8EAB\u3068\
-    \u305D\u306E\u90E8\u5206\u6728\u306B\u5BFE\u3059\u308B\u9045\u5EF6\u8A55\u4FA1\
-    \n        Node(const VAL &v, const DVAL &dv) : l(nullptr), r(nullptr), sz(1),\
-    \ val(v), dval(dv) {}\n        Node() {}\n    };\n    inline Node *_revise_val(Node\
-    \ *t) // \uFF08t\u306E\u5B50\u306B\u95A2\u3059\u308B\u5916\u7684\u64CD\u4F5C\u5F8C\
-    \u306B\u547C\u3093\u3067\uFF09sz\u3068val\u3092\u9069\u5207\u306B\u76F4\u3059\
-    \ t\u306E\u5B50\u306E\u9045\u5EF6\u8A55\u4FA1\u304C\u6E08\u3093\u3067\u3044\u308B\
-    \u3068\u306F\u9650\u3089\u306A\u3044\n    {\n        if (t) {\n            t->sz\
-    \ = size(t->l) + size(t->r) + 1;\n            t->val.sum = t->val.val + (t->l\
-    \ ? t->l->val.sum + t->l->sz * t->l->dval : 0) + (t->r ? t->r->val.sum + t->r->sz\
-    \ * t->r->dval : 0);\n        };\n        return t;\n    }\n    inline void _propagate_dval(DVAL\
+    \u30A4\u30BA\n        VAL val; // \u81EA\u8EAB\u304Croot\u306E\u90E8\u5206\u6728\
+    \u3092\u8A18\u8FF0, dval==Idval\u306E\u3068\u304D\u306E\u307F\u5358\u72EC\u3067\
+    \u610F\u5473\u3092\u6301\u3064\n        DVAL dval; // \u81EA\u8EAB\u3068\u305D\
+    \u306E\u90E8\u5206\u6728\u306B\u5BFE\u3059\u308B\u9045\u5EF6\u8A55\u4FA1\n   \
+    \     Node(const VAL &v, const DVAL &dv) : l(nullptr), r(nullptr), sz(1), val(v),\
+    \ dval(dv) {}\n        Node() {}\n    };\n    inline Node *_revise_val(Node *t)\
+    \ // \uFF08t\u306E\u5B50\u306B\u95A2\u3059\u308B\u5916\u7684\u64CD\u4F5C\u5F8C\
+    \u306B\u547C\u3093\u3067\uFF09sz\u3068val\u3092\u9069\u5207\u306B\u76F4\u3059\n\
+    \                                      // t\u306E\u5B50\u306E\u9045\u5EF6\u8A55\
+    \u4FA1\u304C\u6E08\u3093\u3067\u3044\u308B\u3068\u306F\u9650\u3089\u306A\u3044\
+    \n    {\n        if (t) {\n            t->sz = size(t->l) + size(t->r) + 1;\n\
+    \            t->val.sum = t->val.val + (t->l ? t->l->val.sum + t->l->sz * t->l->dval\
+    \ : 0) +\n                         (t->r ? t->r->val.sum + t->r->sz * t->r->dval\
+    \ : 0);\n        };\n        return t;\n    }\n    inline void _propagate_dval(DVAL\
     \ &a, DVAL b) // \u9045\u5EF6\u8A55\u4FA1\u4F1D\u64AD\n    {\n        a += b;\n\
     \    }\n    inline void _reflect_dval(Node *a, DVAL b) // \u9045\u5EF6\u8A55\u4FA1\
     \u53CD\u6620\n    {\n        a->val.val += b;\n        a->val.sum += a->sz * b;\n\
@@ -223,23 +225,23 @@ data:
     \    Node get(Node *&root, int pos) { return range_get(root, pos, pos + 1); }\n\
     \n    // \u666E\u901A\u306Elower_bound\n    int lower_bound(Node *root, const\
     \ VAL &v) {\n        if (root == nullptr) return 0;\n        return (v <= root->val)\
-    \ ? lower_bound(root->l, v) : lower_bound(root->r, v) + size(root->l) + 1;\n \
-    \   }\n\n    // \u30C7\u30FC\u30BF\u3092\u58CA\u3057\u3066\u65B0\u898F\u306Binit\u306E\
-    \u5185\u5BB9\u3092\u8A70\u3081\u308B\n    void assign(Node *&root, const vector<VAL>\
-    \ &init) {\n        d_ptr = 0;\n        int N = init.size();\n        root = N\
-    \ ? _assign_range(0, N, init) : new_tree();\n    }\n    Node *_assign_range(int\
-    \ l, int r, const vector<VAL> &init) {\n        if (r - l == 1) {\n          \
-    \  auto t = _make_node(init[l]);\n            return _revise_val(t);\n       \
-    \ }\n        return merge(_assign_range(l, (l + r) / 2, init), _assign_range((l\
-    \ + r) / 2, r, init));\n    }\n\n    // \u30C7\u30FC\u30BF\u3092vec\u3078\u66F8\
-    \u304D\u51FA\u3057\n    void dump(Node *t, vector<VAL> &vec) {\n        if (t\
-    \ == nullptr) return;\n        _resolve_dval(t);\n        dump(t->l, vec);\n \
-    \       vec.push_back(t->val);\n        dump(t->r, vec);\n    }\n\n    // gc\n\
-    \    void re_alloc(Node *&root) {\n        vector<VAL> mem;\n        dump(root,\
-    \ mem);\n        assign(root, mem);\n    }\n};\n\n// \u6C38\u7D9A\u5316\ntemplate\
-    \ <uint32_t len> struct PersistentRBST : RandomizedBinarySearchTree<len> {\n \
-    \   using RBST = RandomizedBinarySearchTree<len>;\n    using Node = typename RBST::Node;\n\
-    \    PersistentRBST(DVAL idval) : RBST(idval) {}\n\n    void _duplicate_node(Node\
+    \ ? lower_bound(root->l, v)\n                                : lower_bound(root->r,\
+    \ v) + size(root->l) + 1;\n    }\n\n    // \u30C7\u30FC\u30BF\u3092\u58CA\u3057\
+    \u3066\u65B0\u898F\u306Binit\u306E\u5185\u5BB9\u3092\u8A70\u3081\u308B\n    void\
+    \ assign(Node *&root, const vector<VAL> &init) {\n        d_ptr = 0;\n       \
+    \ int N = init.size();\n        root = N ? _assign_range(0, N, init) : new_tree();\n\
+    \    }\n    Node *_assign_range(int l, int r, const vector<VAL> &init) {\n   \
+    \     if (r - l == 1) {\n            auto t = _make_node(init[l]);\n         \
+    \   return _revise_val(t);\n        }\n        return merge(_assign_range(l, (l\
+    \ + r) / 2, init), _assign_range((l + r) / 2, r, init));\n    }\n\n    // \u30C7\
+    \u30FC\u30BF\u3092vec\u3078\u66F8\u304D\u51FA\u3057\n    void dump(Node *t, vector<VAL>\
+    \ &vec) {\n        if (t == nullptr) return;\n        _resolve_dval(t);\n    \
+    \    dump(t->l, vec);\n        vec.push_back(t->val);\n        dump(t->r, vec);\n\
+    \    }\n\n    // gc\n    void re_alloc(Node *&root) {\n        vector<VAL> mem;\n\
+    \        dump(root, mem);\n        assign(root, mem);\n    }\n};\n\n// \u6C38\u7D9A\
+    \u5316\ntemplate <uint32_t len> struct PersistentRBST : RandomizedBinarySearchTree<len>\
+    \ {\n    using RBST = RandomizedBinarySearchTree<len>;\n    using Node = typename\
+    \ RBST::Node;\n    PersistentRBST(DVAL idval) : RBST(idval) {}\n\n    void _duplicate_node(Node\
     \ *&t) override {\n        if (t == nullptr) return;\n        if (RBST::d_ptr\
     \ >= len) exit(1);\n        t = &(RBST::data[RBST::d_ptr++] = *t);\n    }\n\n\
     \    void copy(Node *&root, int l, int d, int target_l) // [target_l, )\u306B\
@@ -262,7 +264,7 @@ data:
   isVerificationFile: false
   path: data_structure/rbst_fast.cpp
   requiredBy: []
-  timestamp: '2021-02-26 23:47:50+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: data_structure/rbst_fast.cpp

@@ -50,7 +50,7 @@ data:
     \ cmp.end(), _c) - cmp.begin();\n        used.assign(V, false);\n        _ret_cycle.clear();\n\
     \        _dfs_detectcycle(_init, false);\n        return _ret_cycle;\n    }\n\n\
     \    // After calling `FindStronglyConnectedComponents()`, generate a new graph\
-    \ by uniting all vertices\n    // belonging to the same component(The resultant\
+    \ by uniting all\n    // vertices belonging to the same component(The resultant\
     \ graph is DAG).\n    DirectedGraphSCC GenerateTopologicalGraph() {\n        DirectedGraphSCC\
     \ newgraph(scc_num);\n        for (int s = 0; s < V; s++)\n            for (auto\
     \ t : to[s]) {\n                if (cmp[s] != cmp[t]) newgraph.add_edge(cmp[s],\
@@ -59,27 +59,27 @@ data:
     \ Number of variables\n// - Considering a graph with `2 * nb_sat_vars` vertices\n\
     // - Vertices [0, nb_sat_vars) means `Ai`\n// - vertices [nb_sat_vars, 2 * nb_sat_vars)\
     \ means `not Ai`\nstruct SATSolver : DirectedGraphSCC {\n    int nb_sat_vars;\n\
-    \    std::vector<int> solution;\n    SATSolver(int nb_variables = 0) : DirectedGraphSCC(nb_variables\
-    \ * 2), nb_sat_vars(nb_variables), solution(nb_sat_vars) {}\n    void add_x_or_y_constraint(bool\
-    \ is_x_true, int x, bool is_y_true, int y) {\n        assert(x >= 0 and x < nb_sat_vars);\n\
-    \        assert(y >= 0 and y < nb_sat_vars);\n        if (!is_x_true) x += nb_sat_vars;\n\
-    \        if (!is_y_true) y += nb_sat_vars;\n        add_edge((x + nb_sat_vars)\
-    \ % (nb_sat_vars * 2), y);\n        add_edge((y + nb_sat_vars) % (nb_sat_vars\
-    \ * 2), x);\n    }\n    // Solve the 2-SAT problem. If no solution exists, return\
-    \ `false`.\n    // Otherwise, dump one solution to `solution` and return `true`.\n\
-    \    bool run() {\n        FindStronglyConnectedComponents();\n        for (int\
-    \ i = 0; i < nb_sat_vars; i++) {\n            if (cmp[i] == cmp[i + nb_sat_vars])\
-    \ return false;\n            solution[i] = cmp[i] > cmp[i + nb_sat_vars];\n  \
-    \      }\n        return true;\n    }\n};\n#line 4 \"graph/test/2sat_solver.test.cpp\"\
-    \n#include <iostream>\n#include <stdio.h>\n#include <string>\n\nint main() {\n\
-    \n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n    std::string\
-    \ s;\n    int N, M;\n    std::cin >> s >> s >> N >> M;\n    SATSolver solver(N);\n\
-    \    while (M--) {\n        int a, b;\n        std::cin >> a >> b >> s;\n    \
-    \    solver.add_x_or_y_constraint(a > 0, abs(a) - 1, b > 0, abs(b) - 1);\n   \
-    \ }\n    if (solver.run()) {\n        puts(\"s SATISFIABLE\");\n        printf(\"\
-    v \");\n        for (int i = 0; i < N; i++) printf(\"%d \", (solver.solution[i]\
-    \ ? 1 : -1) * (i + 1));\n        puts(\"0\");\n    } else {\n        puts(\"s\
-    \ UNSATISFIABLE\");\n    }\n}\n"
+    \    std::vector<int> solution;\n    SATSolver(int nb_variables = 0)\n       \
+    \ : DirectedGraphSCC(nb_variables * 2), nb_sat_vars(nb_variables), solution(nb_sat_vars)\
+    \ {}\n    void add_x_or_y_constraint(bool is_x_true, int x, bool is_y_true, int\
+    \ y) {\n        assert(x >= 0 and x < nb_sat_vars);\n        assert(y >= 0 and\
+    \ y < nb_sat_vars);\n        if (!is_x_true) x += nb_sat_vars;\n        if (!is_y_true)\
+    \ y += nb_sat_vars;\n        add_edge((x + nb_sat_vars) % (nb_sat_vars * 2), y);\n\
+    \        add_edge((y + nb_sat_vars) % (nb_sat_vars * 2), x);\n    }\n    // Solve\
+    \ the 2-SAT problem. If no solution exists, return `false`.\n    // Otherwise,\
+    \ dump one solution to `solution` and return `true`.\n    bool run() {\n     \
+    \   FindStronglyConnectedComponents();\n        for (int i = 0; i < nb_sat_vars;\
+    \ i++) {\n            if (cmp[i] == cmp[i + nb_sat_vars]) return false;\n    \
+    \        solution[i] = cmp[i] > cmp[i + nb_sat_vars];\n        }\n        return\
+    \ true;\n    }\n};\n#line 4 \"graph/test/2sat_solver.test.cpp\"\n#include <iostream>\n\
+    #include <stdio.h>\n#include <string>\n\nint main() {\n\n    std::cin.tie(nullptr),\
+    \ std::ios::sync_with_stdio(false);\n    std::string s;\n    int N, M;\n    std::cin\
+    \ >> s >> s >> N >> M;\n    SATSolver solver(N);\n    while (M--) {\n        int\
+    \ a, b;\n        std::cin >> a >> b >> s;\n        solver.add_x_or_y_constraint(a\
+    \ > 0, abs(a) - 1, b > 0, abs(b) - 1);\n    }\n    if (solver.run()) {\n     \
+    \   puts(\"s SATISFIABLE\");\n        printf(\"v \");\n        for (int i = 0;\
+    \ i < N; i++) printf(\"%d \", (solver.solution[i] ? 1 : -1) * (i + 1));\n    \
+    \    puts(\"0\");\n    } else {\n        puts(\"s UNSATISFIABLE\");\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\n#include \"\
     ../strongly_connected_components.hpp\"\n#include <cassert>\n#include <iostream>\n\
     #include <stdio.h>\n#include <string>\n\nint main() {\n\n    std::cin.tie(nullptr),\
@@ -95,7 +95,7 @@ data:
   isVerificationFile: true
   path: graph/test/2sat_solver.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:38:37+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/2sat_solver.test.cpp

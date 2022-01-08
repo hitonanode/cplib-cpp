@@ -22,7 +22,7 @@ data:
   bundledCode: "#line 2 \"combinatorial_opt/maxflow.hpp\"\n\n#include <algorithm>\n\
     #include <cassert>\n#include <fstream>\n#include <limits>\n#include <string>\n\
     #include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder Library, single\
-    \ class, no namespace, no private variables, compatible with C++11\n// Reference:\
+    \ class, no namespace, no private variables, compatible\n// with C++11 Reference:\
     \ <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
     template <class Cap> struct mf_graph {\n    struct simple_queue_int {\n      \
     \  std::vector<int> payload;\n        int pos = 0;\n        void reserve(int n)\
@@ -86,7 +86,7 @@ data:
     \        Cap cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
     \ g;\n};\n#line 4 \"combinatorial_opt/mcf_costscaling.hpp\"\n\n// Cost scaling\n\
     // https://people.orie.cornell.edu/dpw/orie633/\ntemplate <class Cap, class Cost,\
-    \ int SCALING = 1, int REFINEMENT_ITER = 20> struct mcf_costscaling {\n    mcf_costscaling()\
+    \ int SCALING = 1, int REFINEMENT_ITER = 20>\nstruct mcf_costscaling {\n    mcf_costscaling()\
     \ = default;\n    mcf_costscaling(int n) : _n(n), to(n), b(n), p(n) {}\n\n   \
     \ int _n;\n    std::vector<Cap> cap;\n    std::vector<Cost> cost;\n    std::vector<int>\
     \ opposite;\n    std::vector<std::vector<int>> to;\n    std::vector<Cap> b;\n\
@@ -108,50 +108,51 @@ data:
     \ {\n                    bool flg = false;\n                    for (int e = 0;\
     \ e < int(cap.size()); e++) {\n                        if (!cap[e]) continue;\n\
     \                        int i = opposite[e ^ 1], j = opposite[e];\n         \
-    \               if (pp[j] > pp[i] + cost[e] + eps) pp[j] = pp[i] + cost[e] + eps,\
-    \ flg = true;\n                    }\n                    if (!flg) return p =\
-    \ pp, true;\n                }\n                return false;\n            };\n\
-    \            if (no_admissible_cycle()) continue; // Refine\n\n            for\
-    \ (int e = 0; e < int(cap.size()); e++) {\n                const int i = opposite[e\
-    \ ^ 1], j = opposite[e];\n                const Cost cp_ij = cost[e] + p[i] -\
-    \ p[j];\n                if (cap[e] and cp_ij < 0) b[i] -= cap[e], b[j] += cap[e],\
-    \ cap[e ^ 1] += cap[e], cap[e] = 0;\n            }\n            que.clear();\n\
-    \            int qh = 0;\n            for (int i = 0; i < _n; i++) {\n       \
-    \         if (b[i] > 0) que.push_back(i);\n            }\n            std::vector<int>\
-    \ iters(_n);\n            while (qh < int(que.size())) {\n                const\
-    \ int i = que[qh++];\n                for (; iters[i] < int(to[i].size()) and\
-    \ b[i]; ++iters[i]) { // Push\n                    int e = to[i][iters[i]];\n\
-    \                    if (!cap[e]) continue;\n                    int j = opposite[e];\n\
-    \                    Cost cp_ij = cost[e] + p[i] - p[j];\n                   \
-    \ if (cp_ij >= 0) continue;\n                    Cap f = b[i] > cap[e] ? cap[e]\
-    \ : b[i];\n                    if (b[j] <= 0 and b[j] + f > 0) que.push_back(j);\n\
-    \                    b[i] -= f, b[j] += f, cap[e] -= f, cap[e ^ 1] += f;\n   \
-    \             }\n\n                if (b[i] > 0) { // Relabel\n              \
-    \      bool flg = false;\n                    for (int e : to[i]) {\n        \
-    \                if (!cap[e]) continue;\n                        Cost x = p[opposite[e]]\
-    \ - cost[e] - eps;\n                        if (!flg or x > p[i]) flg = true,\
-    \ p[i] = x;\n                    }\n                    que.push_back(i), iters[i]\
-    \ = 0;\n                }\n            }\n        }\n        RetCost ret = 0;\n\
-    \        for (int e = 0; e < int(cap.size()); e += 2) ret += RetCost(cost[e])\
-    \ * cap[e ^ 1];\n        return ret / (_n + 1);\n    }\n    std::vector<Cost>\
-    \ potential() const {\n        std::vector<Cost> ret = p, c0 = cost;\n       \
-    \ for (auto &x : ret) x /= (_n + 1);\n        for (auto &x : c0) x /= (_n + 1);\n\
-    \        while (true) {\n            bool flg = false;\n            for (int i\
-    \ = 0; i < _n; i++) {\n                for (const auto e : to[i]) {\n        \
-    \            if (!cap[e]) continue;\n                    int j = opposite[e];\n\
-    \                    auto y = ret[i] + c0[e];\n                    if (ret[j]\
-    \ > y) ret[j] = y, flg = true;\n                }\n            }\n           \
-    \ if (!flg) break;\n        }\n        return ret;\n    }\n    struct edge {\n\
-    \        int from, to;\n        Cap cap, flow;\n        Cost cost;\n    };\n \
-    \   edge get_edge(int e) const {\n        int m = cap.size() / 2;\n        assert(e\
-    \ >= 0 and e < m);\n        return {opposite[e * 2 + 1], opposite[e * 2], cap[e\
-    \ * 2] + cap[e * 2 + 1], cap[e * 2 + 1], cost[e * 2] / (_n + 1)};\n    }\n   \
-    \ std::vector<edge> edges() const {\n        int m = cap.size() / 2;\n       \
-    \ std::vector<edge> result(m);\n        for (int i = 0; i < m; i++) result[i]\
-    \ = get_edge(i);\n        return result;\n    }\n};\n#line 6 \"combinatorial_opt/b-flow.hpp\"\
-    \n\n// CUT begin\ntemplate <typename CAP, typename COST> struct B_Flow {\n   \
-    \ int N, E;\n    COST cost_bias;\n    bool infeasible;\n    mf_graph<CAP> mf;\n\
-    \    mcf_costscaling<CAP, COST> mcf;\n    std::vector<CAP> b;\n    std::vector<CAP>\
+    \               if (pp[j] > pp[i] + cost[e] + eps)\n                         \
+    \   pp[j] = pp[i] + cost[e] + eps, flg = true;\n                    }\n      \
+    \              if (!flg) return p = pp, true;\n                }\n           \
+    \     return false;\n            };\n            if (no_admissible_cycle()) continue;\
+    \ // Refine\n\n            for (int e = 0; e < int(cap.size()); e++) {\n     \
+    \           const int i = opposite[e ^ 1], j = opposite[e];\n                const\
+    \ Cost cp_ij = cost[e] + p[i] - p[j];\n                if (cap[e] and cp_ij <\
+    \ 0)\n                    b[i] -= cap[e], b[j] += cap[e], cap[e ^ 1] += cap[e],\
+    \ cap[e] = 0;\n            }\n            que.clear();\n            int qh = 0;\n\
+    \            for (int i = 0; i < _n; i++) {\n                if (b[i] > 0) que.push_back(i);\n\
+    \            }\n            std::vector<int> iters(_n);\n            while (qh\
+    \ < int(que.size())) {\n                const int i = que[qh++];\n           \
+    \     for (; iters[i] < int(to[i].size()) and b[i]; ++iters[i]) { // Push\n  \
+    \                  int e = to[i][iters[i]];\n                    if (!cap[e])\
+    \ continue;\n                    int j = opposite[e];\n                    Cost\
+    \ cp_ij = cost[e] + p[i] - p[j];\n                    if (cp_ij >= 0) continue;\n\
+    \                    Cap f = b[i] > cap[e] ? cap[e] : b[i];\n                \
+    \    if (b[j] <= 0 and b[j] + f > 0) que.push_back(j);\n                    b[i]\
+    \ -= f, b[j] += f, cap[e] -= f, cap[e ^ 1] += f;\n                }\n\n      \
+    \          if (b[i] > 0) { // Relabel\n                    bool flg = false;\n\
+    \                    for (int e : to[i]) {\n                        if (!cap[e])\
+    \ continue;\n                        Cost x = p[opposite[e]] - cost[e] - eps;\n\
+    \                        if (!flg or x > p[i]) flg = true, p[i] = x;\n       \
+    \             }\n                    que.push_back(i), iters[i] = 0;\n       \
+    \         }\n            }\n        }\n        RetCost ret = 0;\n        for (int\
+    \ e = 0; e < int(cap.size()); e += 2) ret += RetCost(cost[e]) * cap[e ^ 1];\n\
+    \        return ret / (_n + 1);\n    }\n    std::vector<Cost> potential() const\
+    \ {\n        std::vector<Cost> ret = p, c0 = cost;\n        for (auto &x : ret)\
+    \ x /= (_n + 1);\n        for (auto &x : c0) x /= (_n + 1);\n        while (true)\
+    \ {\n            bool flg = false;\n            for (int i = 0; i < _n; i++) {\n\
+    \                for (const auto e : to[i]) {\n                    if (!cap[e])\
+    \ continue;\n                    int j = opposite[e];\n                    auto\
+    \ y = ret[i] + c0[e];\n                    if (ret[j] > y) ret[j] = y, flg = true;\n\
+    \                }\n            }\n            if (!flg) break;\n        }\n \
+    \       return ret;\n    }\n    struct edge {\n        int from, to;\n       \
+    \ Cap cap, flow;\n        Cost cost;\n    };\n    edge get_edge(int e) const {\n\
+    \        int m = cap.size() / 2;\n        assert(e >= 0 and e < m);\n        return\
+    \ {opposite[e * 2 + 1], opposite[e * 2], cap[e * 2] + cap[e * 2 + 1], cap[e *\
+    \ 2 + 1],\n                cost[e * 2] / (_n + 1)};\n    }\n    std::vector<edge>\
+    \ edges() const {\n        int m = cap.size() / 2;\n        std::vector<edge>\
+    \ result(m);\n        for (int i = 0; i < m; i++) result[i] = get_edge(i);\n \
+    \       return result;\n    }\n};\n#line 6 \"combinatorial_opt/b-flow.hpp\"\n\n\
+    // CUT begin\ntemplate <typename CAP, typename COST> struct B_Flow {\n    int\
+    \ N, E;\n    COST cost_bias;\n    bool infeasible;\n    mf_graph<CAP> mf;\n  \
+    \  mcf_costscaling<CAP, COST> mcf;\n    std::vector<CAP> b;\n    std::vector<CAP>\
     \ fbias;\n    std::vector<int> fdir;\n    std::vector<CAP> f;\n    std::vector<COST>\
     \ potential;\n\n    B_Flow(int N = 0) : N(N), E(0), cost_bias(0), infeasible(false),\
     \ mf(N + 2), mcf(N + 2), b(N) {}\n\n    void add_supply(int v, CAP supply) { b[v]\
@@ -178,15 +179,15 @@ data:
     \ = 0, bsum_negative = 0;\n        for (int i = 0; i < N; i++) {\n           \
     \ if (b[i] > 0) {\n                mf.add_edge(N, i, b[i]), mcf.add_edge(N, i,\
     \ b[i], 0), bsum += b[i];\n            } else {\n                mf.add_edge(i,\
-    \ N + 1, -b[i]), mcf.add_edge(i, N + 1, -b[i], 0), bsum_negative -= b[i];\n  \
-    \          }\n        }\n        if (bsum != bsum_negative or mf.flow(N, N + 1)\
-    \ < bsum) return std::make_pair(false, 0);\n        std::fill(b.begin(), b.end(),\
-    \ 0);\n        mcf.add_supply(N, bsum);\n        mcf.add_demand(N + 1, bsum);\n\
-    \        COST ret = mcf.solve();\n        potential = mcf.potential(), potential.resize(N);\n\
-    \        COST cost_ret = cost_bias + ret;\n        cost_bias = 0;\n        f =\
-    \ fbias;\n        auto edges = mcf.edges();\n        for (int e = 0; e < E; e++)\
-    \ f[e] -= fdir[e] * (edges[e].cap - edges[e].flow);\n        return std::make_pair(true,\
-    \ cost_ret);\n    }\n};\n"
+    \ N + 1, -b[i]), mcf.add_edge(i, N + 1, -b[i], 0),\n                    bsum_negative\
+    \ -= b[i];\n            }\n        }\n        if (bsum != bsum_negative or mf.flow(N,\
+    \ N + 1) < bsum) return std::make_pair(false, 0);\n        std::fill(b.begin(),\
+    \ b.end(), 0);\n        mcf.add_supply(N, bsum);\n        mcf.add_demand(N + 1,\
+    \ bsum);\n        COST ret = mcf.solve();\n        potential = mcf.potential(),\
+    \ potential.resize(N);\n        COST cost_ret = cost_bias + ret;\n        cost_bias\
+    \ = 0;\n        f = fbias;\n        auto edges = mcf.edges();\n        for (int\
+    \ e = 0; e < E; e++) f[e] -= fdir[e] * (edges[e].cap - edges[e].flow);\n     \
+    \   return std::make_pair(true, cost_ret);\n    }\n};\n"
   code: "#pragma once\n#include \"maxflow.hpp\"\n#include \"mcf_costscaling.hpp\"\n\
     #include <algorithm>\n#include <vector>\n\n// CUT begin\ntemplate <typename CAP,\
     \ typename COST> struct B_Flow {\n    int N, E;\n    COST cost_bias;\n    bool\
@@ -218,21 +219,22 @@ data:
     \  for (int i = 0; i < N; i++) {\n            if (b[i] > 0) {\n              \
     \  mf.add_edge(N, i, b[i]), mcf.add_edge(N, i, b[i], 0), bsum += b[i];\n     \
     \       } else {\n                mf.add_edge(i, N + 1, -b[i]), mcf.add_edge(i,\
-    \ N + 1, -b[i], 0), bsum_negative -= b[i];\n            }\n        }\n       \
-    \ if (bsum != bsum_negative or mf.flow(N, N + 1) < bsum) return std::make_pair(false,\
-    \ 0);\n        std::fill(b.begin(), b.end(), 0);\n        mcf.add_supply(N, bsum);\n\
-    \        mcf.add_demand(N + 1, bsum);\n        COST ret = mcf.solve();\n     \
-    \   potential = mcf.potential(), potential.resize(N);\n        COST cost_ret =\
-    \ cost_bias + ret;\n        cost_bias = 0;\n        f = fbias;\n        auto edges\
-    \ = mcf.edges();\n        for (int e = 0; e < E; e++) f[e] -= fdir[e] * (edges[e].cap\
-    \ - edges[e].flow);\n        return std::make_pair(true, cost_ret);\n    }\n};\n"
+    \ N + 1, -b[i], 0),\n                    bsum_negative -= b[i];\n            }\n\
+    \        }\n        if (bsum != bsum_negative or mf.flow(N, N + 1) < bsum) return\
+    \ std::make_pair(false, 0);\n        std::fill(b.begin(), b.end(), 0);\n     \
+    \   mcf.add_supply(N, bsum);\n        mcf.add_demand(N + 1, bsum);\n        COST\
+    \ ret = mcf.solve();\n        potential = mcf.potential(), potential.resize(N);\n\
+    \        COST cost_ret = cost_bias + ret;\n        cost_bias = 0;\n        f =\
+    \ fbias;\n        auto edges = mcf.edges();\n        for (int e = 0; e < E; e++)\
+    \ f[e] -= fdir[e] * (edges[e].cap - edges[e].flow);\n        return std::make_pair(true,\
+    \ cost_ret);\n    }\n};\n"
   dependsOn:
   - combinatorial_opt/maxflow.hpp
   - combinatorial_opt/mcf_costscaling.hpp
   isVerificationFile: false
   path: combinatorial_opt/b-flow.hpp
   requiredBy: []
-  timestamp: '2021-08-18 23:55:14+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/b_flow.test.cpp

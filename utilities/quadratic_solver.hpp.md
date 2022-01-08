@@ -17,7 +17,7 @@ data:
     \ <utility>\n#include <vector>\n\n// CUT begin\n// Solve ax^2 + bx + c = 0.\n\
     // retval: (# of solutions (-1 == inf.), solutions(ascending order))\n// Verify:\
     \ <https://yukicoder.me/problems/no/955> <https://atcoder.jp/contests/tricky/tasks/tricky_2>\n\
-    template <typename Float> std::pair<int, std::vector<Float>> quadratic_solver(Float\
+    template <typename Float>\nstd::pair<int, std::vector<Float>> quadratic_solver(Float\
     \ A, Float B, Float C) {\n    if (B < 0) A = -A, B = -B, C = -C;\n    if (A ==\
     \ 0) {\n        if (B == 0) {\n            if (C == 0)\n                return\
     \ std::make_pair(-1, std::vector<Float>{}); // all real numbers\n            else\n\
@@ -31,10 +31,10 @@ data:
   code: "#pragma once\n#include <cmath>\n#include <utility>\n#include <vector>\n\n\
     // CUT begin\n// Solve ax^2 + bx + c = 0.\n// retval: (# of solutions (-1 == inf.),\
     \ solutions(ascending order))\n// Verify: <https://yukicoder.me/problems/no/955>\
-    \ <https://atcoder.jp/contests/tricky/tasks/tricky_2>\ntemplate <typename Float>\
-    \ std::pair<int, std::vector<Float>> quadratic_solver(Float A, Float B, Float\
-    \ C) {\n    if (B < 0) A = -A, B = -B, C = -C;\n    if (A == 0) {\n        if\
-    \ (B == 0) {\n            if (C == 0)\n                return std::make_pair(-1,\
+    \ <https://atcoder.jp/contests/tricky/tasks/tricky_2>\ntemplate <typename Float>\n\
+    std::pair<int, std::vector<Float>> quadratic_solver(Float A, Float B, Float C)\
+    \ {\n    if (B < 0) A = -A, B = -B, C = -C;\n    if (A == 0) {\n        if (B\
+    \ == 0) {\n            if (C == 0)\n                return std::make_pair(-1,\
     \ std::vector<Float>{}); // all real numbers\n            else\n             \
     \   return std::make_pair(0, std::vector<Float>{}); // no solution\n        }\
     \ else\n            return std::make_pair(1, std::vector<Float>{-C / B});\n  \
@@ -48,7 +48,7 @@ data:
   path: utilities/quadratic_solver.hpp
   requiredBy:
   - geometry/problem_of_apollonius.hpp
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: utilities/quadratic_solver.hpp

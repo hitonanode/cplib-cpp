@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/bs_sieve.hpp
     title: number/bs_sieve.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/enumerate_primes
@@ -31,14 +31,14 @@ data:
     \ <iostream>\n#line 5 \"number/test/bs_sieve.test.cpp\"\nusing namespace std;\n\
     \nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n    BitsetSieve<500000001>\
     \ sieve(N);\n    vector<int> ret;\n    for (unsigned i = 0; A * i + B < sieve.primes.size();\
-    \ i++) ret.push_back(sieve.primes[A * i + B]);\n    cout << sieve.primes.size()\
+    \ i++)\n        ret.push_back(sieve.primes[A * i + B]);\n    cout << sieve.primes.size()\
     \ << ' ' << ret.size() << '\\n';\n    for (auto p : ret) cout << p << ' ';\n \
     \   cout << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
     \ \"../bs_sieve.hpp\"\n#include <iostream>\n#include <vector>\nusing namespace\
     \ std;\n\nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n    BitsetSieve<500000001>\
     \ sieve(N);\n    vector<int> ret;\n    for (unsigned i = 0; A * i + B < sieve.primes.size();\
-    \ i++) ret.push_back(sieve.primes[A * i + B]);\n    cout << sieve.primes.size()\
+    \ i++)\n        ret.push_back(sieve.primes[A * i + B]);\n    cout << sieve.primes.size()\
     \ << ' ' << ret.size() << '\\n';\n    for (auto p : ret) cout << p << ' ';\n \
     \   cout << '\\n';\n}\n"
   dependsOn:
@@ -46,8 +46,8 @@ data:
   isVerificationFile: true
   path: number/test/bs_sieve.test.cpp
   requiredBy: []
-  timestamp: '2021-01-12 02:12:53+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/bs_sieve.test.cpp
 layout: document

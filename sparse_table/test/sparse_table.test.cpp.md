@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: sparse_table/rmq_sparse_table.hpp
     title: sparse_table/rmq_sparse_table.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: sparse_table/sparse_table.hpp
     title: Sparse table
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/staticrmq
@@ -39,7 +39,7 @@ data:
     \    inline T func(const T &l, const T &r) const noexcept { return std::min<T>(l,\
     \ r); }\n    int N, lgN;\n    T defaultT;\n    std::vector<std::vector<T>> data;\n\
     \    std::vector<int> lgx_table;\n    StaticRMQ() = default;\n    StaticRMQ(const\
-    \ std::vector<T> &sequence, T defaultT) : N(sequence.size()), defaultT(defaultT)\
+    \ std::vector<T> &sequence, T defaultT)\n        : N(sequence.size()), defaultT(defaultT)\
     \ {\n        lgx_table.resize(N + 1);\n        for (int i = 2; i < N + 1; i++)\
     \ lgx_table[i] = lgx_table[i >> 1] + 1;\n        lgN = lgx_table[N] + 1;\n   \
     \     data.assign(lgN, std::vector<T>(N, defaultT));\n        data[0] = sequence;\n\
@@ -71,8 +71,8 @@ data:
   isVerificationFile: true
   path: sparse_table/test/sparse_table.test.cpp
   requiredBy: []
-  timestamp: '2021-11-02 23:36:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: sparse_table/test/sparse_table.test.cpp
 layout: document

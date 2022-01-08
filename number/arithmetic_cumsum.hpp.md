@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/lagrange_interpolation.hpp
     title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\u9593\
       \uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/sum_of_exponential_times_polynomial.hpp
     title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
     title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/arithmetic_function_totient.test.cpp
     title: number/test/arithmetic_function_totient.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://maspypy.com/dirichlet-%e7%a9%8d%e3%81%a8%e3%80%81%e6%95%b0%e8%ab%96%e9%96%a2%e6%95%b0%e3%81%ae%e7%b4%af%e7%a9%8d%e5%92%8c
@@ -45,7 +45,7 @@ data:
     \ \u306E\u5024\u3092 $[f(0), ..., f(d - 1), f(d)]$ \u306E\u5024\u304B\u3089 $O(d)$\
     \ \u3067\u8A08\u7B97\uFF0E\n// Requirement: r != 1\n// https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\n\
     // Document: https://hitonanode.github.io/cplib-cpp/formal_power_series/sum_of_exponential_times_polynomial_limit.hpp\n\
-    template <typename MODINT> MODINT sum_of_exponential_times_polynomial_limit(MODINT\
+    template <typename MODINT>\nMODINT sum_of_exponential_times_polynomial_limit(MODINT\
     \ r, std::vector<MODINT> init) {\n    assert(r != 1);\n    if (init.empty()) return\
     \ 0;\n    if (init.size() == 1) return init[0] / (1 - r);\n    auto &bs = init;\n\
     \    const int d = int(bs.size()) - 1;\n    MODINT rp = 1;\n    for (int i = 1;\
@@ -291,8 +291,8 @@ data:
   isVerificationFile: false
   path: number/arithmetic_cumsum.hpp
   requiredBy: []
-  timestamp: '2021-11-06 18:40:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number/test/arithmetic_function_totient.test.cpp
 documentation_of: number/arithmetic_cumsum.hpp

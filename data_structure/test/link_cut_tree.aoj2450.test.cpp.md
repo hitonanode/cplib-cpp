@@ -18,14 +18,14 @@ data:
     \ PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2450\"\n\
     #line 2 \"data_structure/link_cut_tree.hpp\"\n\n// CUT begin\n// Link-Cut Tree\n\
     // Reference:\n// - https://www.slideshare.net/iwiwi/2-12188845\n// - https://ei1333.github.io/library/structure/lct/link-cut-tree-lazy-path.cpp\n\
-    template <class S, class F, S (*op)(S, S), S (*reversal)(S), S (*mapping)(F, S),\
-    \ F (*composition)(F, F), F (*id)()>\nclass lazy_linkcuttree {\npublic:\n    struct\
-    \ Node {\n        Node *l, *r, *p;\n        S d, sum;\n        F lz;\n       \
-    \ bool is_reversed;\n        int sz;\n        Node(S val)\n            : l(nullptr),\
-    \ r(nullptr), p(nullptr), d(val), sum(val), lz(id()), is_reversed(false), sz(1)\
-    \ {}\n        bool is_root() const { return !p || (p->l != this and p->r != this);\
-    \ }\n        template <class OStream> friend OStream &operator<<(OStream &os,\
-    \ const Node &n) {\n            os << '[';\n            if (n.l) os << *(n.l)\
+    template <class S, class F, S (*op)(S, S), S (*reversal)(S), S (*mapping)(F, S),\n\
+    \          F (*composition)(F, F), F (*id)()>\nclass lazy_linkcuttree {\npublic:\n\
+    \    struct Node {\n        Node *l, *r, *p;\n        S d, sum;\n        F lz;\n\
+    \        bool is_reversed;\n        int sz;\n        Node(S val)\n           \
+    \ : l(nullptr), r(nullptr), p(nullptr), d(val), sum(val), lz(id()), is_reversed(false),\n\
+    \              sz(1) {}\n        bool is_root() const { return !p || (p->l !=\
+    \ this and p->r != this); }\n        template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const Node &n) {\n            os << '[';\n            if (n.l) os << *(n.l)\
     \ << ',';\n            os << n.d << ',';\n            if (n.r) os << *(n.r);\n\
     \            return os << ']';\n        }\n    };\n\nprotected:\n    void update(Node\
     \ *t) {\n        if (t == nullptr) return;\n        t->sz = 1;\n        t->sum\
@@ -85,7 +85,7 @@ data:
     \ rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_, int inhi_)\n\
     \        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing\
     \ F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum,\
-    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi,\
+    \ max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi),\nmax<int>({l.inhi, r.inhi,\
     \ l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi,\
     \ x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v = f.second;\n\
     \        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v,\
@@ -98,21 +98,22 @@ data:
     \ sum(x), lhi(x), rhi(x), inhi(x) {}\n    S(int sz_, int sum_, int lhi_, int rhi_,\
     \ int inhi_)\n        : sz(sz_), sum(sum_), lhi(lhi_), rhi(rhi_), inhi(inhi_)\
     \ {}\n};\nusing F = pair<bool, int>;\nS op(S l, S r) {\n    return S(l.sz + r.sz,\
-    \ l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi), max<int>({l.inhi,\
-    \ r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S x) { return S(x.sz, x.sum, x.rhi,\
-    \ x.lhi, x.inhi); }\nS mapping(F f, S x) {\n    if (f.first) {\n        auto v\
-    \ = f.second;\n        auto sum = x.sz * v;\n        return S{x.sz, sum, max(v,\
-    \ sum), max(v, sum), max(v, sum)};\n    } else {\n        return x;\n    }\n}\n\
-    F composition(F fnew, F gold) { return fnew.first ? fnew : gold; }\nF id() { return\
-    \ {false, 0}; }\nusing LCT = lazy_linkcuttree<S, F, op, reversal, mapping, composition,\
-    \ id>;\nLCT::Node* vs[200000];\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N, Q;\n    cin >> N >> Q;\n    LCT tree;\n    for (int i = 0; i < N;\
-    \ i++) {\n        int w;\n        cin >> w;\n        vs[i] = tree.make_node(w);\n\
-    \    }\n    for (int e = 0; e < N - 1; e++) {\n        int u, v;\n        cin\
-    \ >> u >> v;\n        u--, v--;\n        tree.link(vs[u], vs[v]);\n    }\n   \
-    \ while (Q--) {\n        int t, a, b, c;\n        cin >> t >> a >> b >> c;\n \
-    \       a--, b--;\n        if (t == 1) tree.apply(vs[a], vs[b], {true, c});\n\
-    \        if (t == 2) cout << tree.prod(vs[a], vs[b]).inhi << '\\n';\n    }\n}\n"
+    \ l.sum + r.sum, max(l.sum + r.lhi, l.lhi), max(l.rhi + r.sum, r.rhi),\n     \
+    \        max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\nS reversal(S x) { return\
+    \ S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F f, S x) {\n    if (f.first)\
+    \ {\n        auto v = f.second;\n        auto sum = x.sz * v;\n        return\
+    \ S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n    } else {\n       \
+    \ return x;\n    }\n}\nF composition(F fnew, F gold) { return fnew.first ? fnew\
+    \ : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S, F,\
+    \ op, reversal, mapping, composition, id>;\nLCT::Node *vs[200000];\n\nint main()\
+    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q;\n    cin\
+    \ >> N >> Q;\n    LCT tree;\n    for (int i = 0; i < N; i++) {\n        int w;\n\
+    \        cin >> w;\n        vs[i] = tree.make_node(w);\n    }\n    for (int e\
+    \ = 0; e < N - 1; e++) {\n        int u, v;\n        cin >> u >> v;\n        u--,\
+    \ v--;\n        tree.link(vs[u], vs[v]);\n    }\n    while (Q--) {\n        int\
+    \ t, a, b, c;\n        cin >> t >> a >> b >> c;\n        a--, b--;\n        if\
+    \ (t == 1) tree.apply(vs[a], vs[b], {true, c});\n        if (t == 2) cout << tree.prod(vs[a],\
+    \ vs[b]).inhi << '\\n';\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2450\"\
     \n#include \"../link_cut_tree.hpp\"\n#include <algorithm>\n#include <iostream>\n\
     #include <utility>\nusing namespace std;\n\nstruct S {\n    int sz, sum, lhi,\
@@ -120,13 +121,13 @@ data:
     \ sz_, int sum_, int lhi_, int rhi_, int inhi_)\n        : sz(sz_), sum(sum_),\
     \ lhi(lhi_), rhi(rhi_), inhi(inhi_) {}\n};\nusing F = pair<bool, int>;\nS op(S\
     \ l, S r) {\n    return S(l.sz + r.sz, l.sum + r.sum, max(l.sum + r.lhi, l.lhi),\
-    \ max(l.rhi + r.sum, r.rhi), max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n}\n\
-    S reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F\
+    \ max(l.rhi + r.sum, r.rhi),\n             max<int>({l.inhi, r.inhi, l.rhi + r.lhi}));\n\
+    }\nS reversal(S x) { return S(x.sz, x.sum, x.rhi, x.lhi, x.inhi); }\nS mapping(F\
     \ f, S x) {\n    if (f.first) {\n        auto v = f.second;\n        auto sum\
     \ = x.sz * v;\n        return S{x.sz, sum, max(v, sum), max(v, sum), max(v, sum)};\n\
     \    } else {\n        return x;\n    }\n}\nF composition(F fnew, F gold) { return\
     \ fnew.first ? fnew : gold; }\nF id() { return {false, 0}; }\nusing LCT = lazy_linkcuttree<S,\
-    \ F, op, reversal, mapping, composition, id>;\nLCT::Node* vs[200000];\n\nint main()\
+    \ F, op, reversal, mapping, composition, id>;\nLCT::Node *vs[200000];\n\nint main()\
     \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q;\n    cin\
     \ >> N >> Q;\n    LCT tree;\n    for (int i = 0; i < N; i++) {\n        int w;\n\
     \        cin >> w;\n        vs[i] = tree.make_node(w);\n    }\n    for (int e\
@@ -140,7 +141,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/link_cut_tree.aoj2450.test.cpp
   requiredBy: []
-  timestamp: '2021-07-23 17:14:41+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/link_cut_tree.aoj2450.test.cpp

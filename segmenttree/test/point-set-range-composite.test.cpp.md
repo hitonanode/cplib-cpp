@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
@@ -36,59 +36,61 @@ data:
     \ }\n    MDCONST ModInt(lint v) { _setval(v % md + md); }\n    MDCONST explicit\
     \ operator bool() const { return val != 0; }\n    MDCONST ModInt operator+(const\
     \ ModInt &x) const { return ModInt()._setval((lint)val + x.val); }\n    MDCONST\
-    \ ModInt operator-(const ModInt &x) const { return ModInt()._setval((lint)val\
-    \ - x.val + md); }\n    MDCONST ModInt operator*(const ModInt &x) const { return\
-    \ ModInt()._setval((lint)val * x.val % md); }\n    MDCONST ModInt operator/(const\
-    \ ModInt &x) const { return ModInt()._setval((lint)val * x.inv() % md); }\n  \
-    \  MDCONST ModInt operator-() const { return ModInt()._setval(md - val); }\n \
-    \   MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
-    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
-    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
-    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) { return ModInt()._setval(a\
-    \ % md + x.val); }\n    friend MDCONST ModInt operator-(lint a, const ModInt &x)\
-    \ { return ModInt()._setval(a % md - x.val + md); }\n    friend MDCONST ModInt\
-    \ operator*(lint a, const ModInt &x) { return ModInt()._setval(a % md * x.val\
-    \ % md); }\n    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n \
-    \       return ModInt()._setval(a % md * x.inv() % md);\n    }\n    MDCONST bool\
-    \ operator==(const ModInt &x) const { return val == x.val; }\n    MDCONST bool\
-    \ operator!=(const ModInt &x) const { return val != x.val; }\n    MDCONST bool\
-    \ operator<(const ModInt &x) const { return val < x.val; } // To use std::map<ModInt,\
+    \ ModInt operator-(const ModInt &x) const {\n        return ModInt()._setval((lint)val\
+    \ - x.val + md);\n    }\n    MDCONST ModInt operator*(const ModInt &x) const {\n\
+    \        return ModInt()._setval((lint)val * x.val % md);\n    }\n    MDCONST\
+    \ ModInt operator/(const ModInt &x) const {\n        return ModInt()._setval((lint)val\
+    \ * x.inv() % md);\n    }\n    MDCONST ModInt operator-() const { return ModInt()._setval(md\
+    \ - val); }\n    MDCONST ModInt &operator+=(const ModInt &x) { return *this =\
+    \ *this + x; }\n    MDCONST ModInt &operator-=(const ModInt &x) { return *this\
+    \ = *this - x; }\n    MDCONST ModInt &operator*=(const ModInt &x) { return *this\
+    \ = *this * x; }\n    MDCONST ModInt &operator/=(const ModInt &x) { return *this\
+    \ = *this / x; }\n    friend MDCONST ModInt operator+(lint a, const ModInt &x)\
+    \ {\n        return ModInt()._setval(a % md + x.val);\n    }\n    friend MDCONST\
+    \ ModInt operator-(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md - x.val + md);\n    }\n    friend MDCONST ModInt operator*(lint a, const\
+    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.val % md);\n    }\n\
+    \    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n        return\
+    \ ModInt()._setval(a % md * x.inv() % md);\n    }\n    MDCONST bool operator==(const\
+    \ ModInt &x) const { return val == x.val; }\n    MDCONST bool operator!=(const\
+    \ ModInt &x) const { return val != x.val; }\n    MDCONST bool operator<(const\
+    \ ModInt &x) const {\n        return val < x.val;\n    } // To use std::map<ModInt,\
     \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
     \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) { return\
-    \ os << x.val; }\n    MDCONST ModInt pow(lint n) const {\n        ModInt ans =\
-    \ 1, tmp = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n \
-    \           tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n  \
-    \  static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static void _precalculation(int\
-    \ N) {\n        int l0 = facs.size();\n        if (N > md) N = md;\n        if\
-    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
-    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
-    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
-    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
-    \ = facinvs[i] * facs[i - 1];\n    }\n    MDCONST lint inv() const {\n       \
-    \ if (this->val < std::min(md >> 1, 1 << 21)) {\n            while (this->val\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val].val;\n\
-    \        } else {\n            return this->pow(md - 2).val;\n        }\n    }\n\
-    \    MDCONST ModInt fac() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facs[this->val];\n    }\n\
-    \    MDCONST ModInt facinv() const {\n        while (this->val >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val];\n    }\n\
-    \    MDCONST ModInt doublefac() const {\n        lint k = (this->val + 1) / 2;\n\
-    \        return (this->val & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n\
-    \                               : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\
-    \    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val <\
-    \ r.val) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST\
-    \ ModInt nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
-    \ : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n\
-    \        if (val == 0) return 0;\n        if (md == 2) return val;\n        if\
-    \ (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md\
-    \ - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m %\
-    \ 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x\
-    \ * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while (y\
-    \ != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
-    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
-    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
+    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {\n     \
+    \   return os << x.val;\n    }\n    MDCONST ModInt pow(lint n) const {\n     \
+    \   ModInt ans = 1, tmp = *this;\n        while (n) {\n            if (n & 1)\
+    \ ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return ans;\n\
+    \    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static\
+    \ void _precalculation(int N) {\n        int l0 = facs.size();\n        if (N\
+    \ > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N), facinvs.resize(N),\
+    \ invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i] = facs[i - 1]\
+    \ * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n        for (int i\
+    \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
+    \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
+    \ lint inv() const {\n        if (this->val < std::min(md >> 1, 1 << 21)) {\n\
+    \            while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n            return invs[this->val].val;\n        } else {\n         \
+    \   return this->pow(md - 2).val;\n        }\n    }\n    MDCONST ModInt fac()\
+    \ const {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facs[this->val];\n    }\n    MDCONST ModInt facinv() const\
+    \ {\n        while (this->val >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facinvs[this->val];\n    }\n    MDCONST ModInt doublefac()\
+    \ const {\n        lint k = (this->val + 1) / 2;\n        return (this->val &\
+    \ 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n          \
+    \                     : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
+    \ ModInt nCr(const ModInt &r) const {\n        return (this->val < r.val) ? 0\
+    \ : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
+    \ nPr(const ModInt &r) const {\n        return (this->val < r.val) ? 0 : this->fac()\
+    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val\
+    \ == 0) return 0;\n        if (md == 2) return val;\n        if (pow((md - 1)\
+    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
+    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
+    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
+    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
+    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
+    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val,\
     \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
@@ -139,60 +141,63 @@ data:
     \                        l *= 2;\n                    else\n                 \
     \       retl = ret_tmp, l = l * 2 + 1;\n                }\n                return\
     \ l - N;\n            }\n            retl = ret_tmp;\n        }\n        return\
-    \ N;\n    }\n\n    template <typename T1, typename T2, typename T3> friend std::ostream\
-    \ &operator<<(std::ostream &os, NonrecursiveSegmentTree<T1, T2, T3> s) {\n   \
-    \     os << \"[SegmentTree (len: \" << s.N << ')';\n        for (int i = 0; i\
-    \ < s.N; i++) os << s.at(i + s.N) << ',';\n        os << \"]\";\n        return\
-    \ os;\n    }\n};\n\n// Range Minimum Query\n// - get: return min(x_l, ..., x_{r\
-    \ - 1})\ntemplate <typename T> struct RangeMinimumQuery : public NonrecursiveSegmentTree<T,\
+    \ N;\n    }\n\n    template <typename T1, typename T2, typename T3>\n    friend\
+    \ std::ostream &operator<<(std::ostream &os, NonrecursiveSegmentTree<T1, T2, T3>\
+    \ s) {\n        os << \"[SegmentTree (len: \" << s.N << ')';\n        for (int\
+    \ i = 0; i < s.N; i++) os << s.at(i + s.N) << ',';\n        os << \"]\";\n   \
+    \     return os;\n    }\n};\n\n// Range Minimum Query\n// - get: return min(x_l,\
+    \ ..., x_{r - 1})\ntemplate <typename T> struct RangeMinimumQuery : public NonrecursiveSegmentTree<T,\
     \ T, bool> {\n    using SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T\
     \ merge_data(const T &vl, const T &vr) override { return std::min(vl, vr); };\n\
     \    T data2ret(const T &v, const bool &q) override { return v; }\n    T merge_ret(const\
     \ T &vl, const T &vr) override { return std::min(vl, vr); };\n    RangeMinimumQuery(const\
-    \ std::vector<T> &seq, T defaultmin) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq,\
-    \ defaultmin); };\n};\n\n// Range Maximum Query\n// - get: return max(x_l, ...,\
-    \ x_{r - 1})\ntemplate <typename T> struct RangeMaximumQuery : public NonrecursiveSegmentTree<T,\
-    \ T, bool> {\n    using SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T\
-    \ merge_data(const T &vl, const T &vr) override { return std::max(vl, vr); };\n\
-    \    T data2ret(const T &v, const bool &q) override { return v; }\n    T merge_ret(const\
-    \ T &vl, const T &vr) override { return std::max(vl, vr); };\n    RangeMaximumQuery(const\
-    \ std::vector<T> &seq, T defaultmax) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq,\
-    \ defaultmax); };\n};\n\ntemplate <typename T> struct PointUpdateRangeSum : public\
-    \ NonrecursiveSegmentTree<T, T, bool> {\n    using SegTree = NonrecursiveSegmentTree<T,\
-    \ T, bool>;\n    T merge_data(const T &vl, const T &vr) override { return vl +\
-    \ vr; };\n    T data2ret(const T &v, const bool &q) override { return v; }\n \
-    \   T merge_ret(const T &vl, const T &vr) override { return vl + vr; };\n    PointUpdateRangeSum(const\
-    \ std::vector<T> &seq, T zero) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq,\
-    \ zero); };\n};\n\n// Range Counting less than q Query\n// - get: return (#{i\
-    \ | l <= i < r, x_i < q}, total sum of them).\ntemplate <typename T> struct CountAndSumLessThan\
-    \ : public NonrecursiveSegmentTree<std::vector<std::pair<T, T>>, std::pair<int,\
-    \ T>, T> {\n    using TDATA = std::vector<std::pair<T, T>>;\n    using TRET =\
-    \ std::pair<int, T>;\n    using TQUERY = T;\n    TDATA merge_data(const TDATA\
-    \ &vl, const TDATA &vr) override {\n        TDATA ret = vl;\n        ret.insert(ret.end(),\
+    \ std::vector<T> &seq, T defaultmin)\n        : SegTree::NonrecursiveSegmentTree()\
+    \ {\n        SegTree::initialize(seq, defaultmin);\n    };\n};\n\n// Range Maximum\
+    \ Query\n// - get: return max(x_l, ..., x_{r - 1})\ntemplate <typename T> struct\
+    \ RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool> {\n    using\
+    \ SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T merge_data(const T &vl,\
+    \ const T &vr) override { return std::max(vl, vr); };\n    T data2ret(const T\
+    \ &v, const bool &q) override { return v; }\n    T merge_ret(const T &vl, const\
+    \ T &vr) override { return std::max(vl, vr); };\n    RangeMaximumQuery(const std::vector<T>\
+    \ &seq, T defaultmax)\n        : SegTree::NonrecursiveSegmentTree() {\n      \
+    \  SegTree::initialize(seq, defaultmax);\n    };\n};\n\ntemplate <typename T>\
+    \ struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool> {\n\
+    \    using SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T merge_data(const\
+    \ T &vl, const T &vr) override { return vl + vr; };\n    T data2ret(const T &v,\
+    \ const bool &q) override { return v; }\n    T merge_ret(const T &vl, const T\
+    \ &vr) override { return vl + vr; };\n    PointUpdateRangeSum(const std::vector<T>\
+    \ &seq, T zero) : SegTree::NonrecursiveSegmentTree() {\n        SegTree::initialize(seq,\
+    \ zero);\n    };\n};\n\n// Range Counting less than q Query\n// - get: return\
+    \ (#{i | l <= i < r, x_i < q}, total sum of them).\ntemplate <typename T>\nstruct\
+    \ CountAndSumLessThan\n    : public NonrecursiveSegmentTree<std::vector<std::pair<T,\
+    \ T>>, std::pair<int, T>, T> {\n    using TDATA = std::vector<std::pair<T, T>>;\n\
+    \    using TRET = std::pair<int, T>;\n    using TQUERY = T;\n    TDATA merge_data(const\
+    \ TDATA &vl, const TDATA &vr) override {\n        TDATA ret = vl;\n        ret.insert(ret.end(),\
     \ vr.begin(), vr.end());\n        std::sort(ret.begin(), ret.end());\n       \
     \ if (ret.size()) {\n            ret[0].second = ret[0].first;\n            for\
-    \ (size_t i = 1; i < ret.size(); i++) ret[i].second = ret[i - 1].second + ret[i].first;\n\
-    \        }\n        return ret;\n    }\n    TRET data2ret(const TDATA &vec, const\
-    \ TQUERY &q) override {\n        int i = std::lower_bound(vec.begin(), vec.end(),\
-    \ std::make_pair(q, q)) - vec.begin();\n        if (!i)\n            return std::make_pair(0,\
-    \ 0);\n        else\n            return std::make_pair(i, vec[i - 1].second);\n\
-    \    }\n    TRET merge_ret(const TRET &l, const TRET &r) override { return std::make_pair(l.first\
-    \ + r.first, l.second + r.second); }\n    using SegTree = NonrecursiveSegmentTree<TDATA,\
-    \ TRET, TQUERY>;\n    CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree()\
+    \ (size_t i = 1; i < ret.size(); i++)\n                ret[i].second = ret[i -\
+    \ 1].second + ret[i].first;\n        }\n        return ret;\n    }\n    TRET data2ret(const\
+    \ TDATA &vec, const TQUERY &q) override {\n        int i = std::lower_bound(vec.begin(),\
+    \ vec.end(), std::make_pair(q, q)) - vec.begin();\n        if (!i)\n         \
+    \   return std::make_pair(0, 0);\n        else\n            return std::make_pair(i,\
+    \ vec[i - 1].second);\n    }\n    TRET merge_ret(const TRET &l, const TRET &r)\
+    \ override {\n        return std::make_pair(l.first + r.first, l.second + r.second);\n\
+    \    }\n    using SegTree = NonrecursiveSegmentTree<TDATA, TRET, TQUERY>;\n  \
+    \  CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree()\
     \ {\n        std::vector<TDATA> init;\n        for (auto x : seq) init.emplace_back(TDATA{std::pair<T,\
     \ T>(x, x)});\n        SegTree::initialize(init, TRET(0, 0));\n    }\n};\n#line\
     \ 4 \"segmenttree/test/point-set-range-composite.test.cpp\"\n#include <utility>\n\
     #define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\n\
-    using mint = ModInt<998244353>;\n\ntemplate <typename T> struct PointSetRangeComposite\
-    \ : public NonrecursiveSegmentTree<std::pair<T, T>, std::pair<T, T>, bool> {\n\
-    \    using T_NODE = std::pair<T, T>;\n    using SegTree = NonrecursiveSegmentTree<T_NODE,\
+    using mint = ModInt<998244353>;\n\ntemplate <typename T>\nstruct PointSetRangeComposite\n\
+    \    : public NonrecursiveSegmentTree<std::pair<T, T>, std::pair<T, T>, bool>\
+    \ {\n    using T_NODE = std::pair<T, T>;\n    using SegTree = NonrecursiveSegmentTree<T_NODE,\
     \ T_NODE, bool>;\n    T_NODE merge_data(const T_NODE &vl, const T_NODE &vr) override\
-    \ { return std::make_pair(vl.first * vr.first, vr.first * vl.second + vr.second);\
-    \ };\n    T_NODE data2ret(const T_NODE &v, const bool &q) override { return v;\
-    \ }\n    T_NODE merge_ret(const T_NODE &vl, const T_NODE &vr) override { return\
-    \ merge_data(vl, vr); };\n    PointSetRangeComposite(const std::vector<T_NODE>\
-    \ &seq) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq, T_NODE(1,\
-    \ 0)); };\n};\n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
+    \ {\n        return std::make_pair(vl.first * vr.first, vr.first * vl.second +\
+    \ vr.second);\n    };\n    T_NODE data2ret(const T_NODE &v, const bool &q) override\
+    \ { return v; }\n    T_NODE merge_ret(const T_NODE &vl, const T_NODE &vr) override\
+    \ { return merge_data(vl, vr); };\n    PointSetRangeComposite(const std::vector<T_NODE>\
+    \ &seq) : SegTree::NonrecursiveSegmentTree() {\n        SegTree::initialize(seq,\
+    \ T_NODE(1, 0));\n    };\n};\n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
     \n    int N, Q;\n    std::cin >> N >> Q;\n    std::vector<std::pair<mint, mint>>\
     \ A(N);\n    for (auto &p : A) { std::cin >> p.first >> p.second; }\n    PointSetRangeComposite<mint>\
     \ s(A);\n    while (Q--) {\n        int q, l, r, x;\n        std::cin >> q >>\
@@ -201,16 +206,16 @@ data:
     \           s.update(l, std::make_pair(r, x));\n        }\n    }\n}\n"
   code: "#include \"../../modint.hpp\"\n#include \"../point-update-range-get_nonrecursive.hpp\"\
     \n#include <iostream>\n#include <utility>\n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
-    \nusing mint = ModInt<998244353>;\n\ntemplate <typename T> struct PointSetRangeComposite\
-    \ : public NonrecursiveSegmentTree<std::pair<T, T>, std::pair<T, T>, bool> {\n\
-    \    using T_NODE = std::pair<T, T>;\n    using SegTree = NonrecursiveSegmentTree<T_NODE,\
+    \nusing mint = ModInt<998244353>;\n\ntemplate <typename T>\nstruct PointSetRangeComposite\n\
+    \    : public NonrecursiveSegmentTree<std::pair<T, T>, std::pair<T, T>, bool>\
+    \ {\n    using T_NODE = std::pair<T, T>;\n    using SegTree = NonrecursiveSegmentTree<T_NODE,\
     \ T_NODE, bool>;\n    T_NODE merge_data(const T_NODE &vl, const T_NODE &vr) override\
-    \ { return std::make_pair(vl.first * vr.first, vr.first * vl.second + vr.second);\
-    \ };\n    T_NODE data2ret(const T_NODE &v, const bool &q) override { return v;\
-    \ }\n    T_NODE merge_ret(const T_NODE &vl, const T_NODE &vr) override { return\
-    \ merge_data(vl, vr); };\n    PointSetRangeComposite(const std::vector<T_NODE>\
-    \ &seq) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq, T_NODE(1,\
-    \ 0)); };\n};\n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
+    \ {\n        return std::make_pair(vl.first * vr.first, vr.first * vl.second +\
+    \ vr.second);\n    };\n    T_NODE data2ret(const T_NODE &v, const bool &q) override\
+    \ { return v; }\n    T_NODE merge_ret(const T_NODE &vl, const T_NODE &vr) override\
+    \ { return merge_data(vl, vr); };\n    PointSetRangeComposite(const std::vector<T_NODE>\
+    \ &seq) : SegTree::NonrecursiveSegmentTree() {\n        SegTree::initialize(seq,\
+    \ T_NODE(1, 0));\n    };\n};\n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
     \n    int N, Q;\n    std::cin >> N >> Q;\n    std::vector<std::pair<mint, mint>>\
     \ A(N);\n    for (auto &p : A) { std::cin >> p.first >> p.second; }\n    PointSetRangeComposite<mint>\
     \ s(A);\n    while (Q--) {\n        int q, l, r, x;\n        std::cin >> q >>\
@@ -223,8 +228,8 @@ data:
   isVerificationFile: true
   path: segmenttree/test/point-set-range-composite.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 14:54:00+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: segmenttree/test/point-set-range-composite.test.cpp
 layout: document

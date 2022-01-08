@@ -17,19 +17,19 @@ data:
     \ x, y;\n    cmplx() : x(0), y(0) {}\n    cmplx(T_FFT x, T_FFT y) : x(x), y(y)\
     \ {}\n    inline cmplx operator+(const cmplx &r) const { return cmplx(x + r.x,\
     \ y + r.y); }\n    inline cmplx operator-(const cmplx &r) const { return cmplx(x\
-    \ - r.x, y - r.y); }\n    inline cmplx operator*(const cmplx &r) const { return\
-    \ cmplx(x * r.x - y * r.y, x * r.y + y * r.x); }\n    inline cmplx conj() const\
-    \ { return cmplx(x, -y); }\n};\nint fftbase = 1;\nvector<cmplx> fftrts = {{0,\
-    \ 0}, {1, 0}};\nvector<int> fftrev = {0, 1};\nvoid ensure_base(int nbase) {\n\
-    \    if (nbase <= fftbase) return;\n    fftrev.resize(1 << nbase);\n    fftrts.resize(1\
-    \ << nbase);\n    for (int i = 0; i < (1 << nbase); i++) { fftrev[i] = (fftrev[i\
-    \ >> 1] >> 1) + ((i & 1) << (nbase - 1)); }\n    while (fftbase < nbase) {\n \
-    \       T_FFT angle = acosl(-1.0L) * 2.0L / (1 << (fftbase + 1));\n        for\
-    \ (int i = 1 << (fftbase - 1); i < (1 << fftbase); i++) {\n            fftrts[i\
-    \ << 1] = fftrts[i];\n            T_FFT angle_i = angle * (2 * i + 1 - (1 << fftbase));\n\
-    \            fftrts[(i << 1) + 1] = {cos(angle_i), sin(angle_i)};\n        }\n\
-    \        ++fftbase;\n    }\n}\nvoid fft(int n, vector<cmplx> &a) {\n    assert((n\
-    \ & (n - 1)) == 0);\n    int zeros = __builtin_ctz(n);\n    ensure_base(zeros);\n\
+    \ - r.x, y - r.y); }\n    inline cmplx operator*(const cmplx &r) const {\n   \
+    \     return cmplx(x * r.x - y * r.y, x * r.y + y * r.x);\n    }\n    inline cmplx\
+    \ conj() const { return cmplx(x, -y); }\n};\nint fftbase = 1;\nvector<cmplx> fftrts\
+    \ = {{0, 0}, {1, 0}};\nvector<int> fftrev = {0, 1};\nvoid ensure_base(int nbase)\
+    \ {\n    if (nbase <= fftbase) return;\n    fftrev.resize(1 << nbase);\n    fftrts.resize(1\
+    \ << nbase);\n    for (int i = 0; i < (1 << nbase); i++) {\n        fftrev[i]\
+    \ = (fftrev[i >> 1] >> 1) + ((i & 1) << (nbase - 1));\n    }\n    while (fftbase\
+    \ < nbase) {\n        T_FFT angle = acosl(-1.0L) * 2.0L / (1 << (fftbase + 1));\n\
+    \        for (int i = 1 << (fftbase - 1); i < (1 << fftbase); i++) {\n       \
+    \     fftrts[i << 1] = fftrts[i];\n            T_FFT angle_i = angle * (2 * i\
+    \ + 1 - (1 << fftbase));\n            fftrts[(i << 1) + 1] = {cos(angle_i), sin(angle_i)};\n\
+    \        }\n        ++fftbase;\n    }\n}\nvoid fft(int n, vector<cmplx> &a) {\n\
+    \    assert((n & (n - 1)) == 0);\n    int zeros = __builtin_ctz(n);\n    ensure_base(zeros);\n\
     \    int shift = fftbase - zeros;\n    for (int i = 0; i < n; i++) {\n       \
     \ if (i < (fftrev[i] >> shift)) { swap(a[i], a[fftrev[i] >> shift]); }\n    }\n\
     \    for (int k = 1; k < n; k <<= 1) {\n        for (int i = 0; i < n; i += 2\
@@ -69,19 +69,19 @@ data:
     \ x, y;\n    cmplx() : x(0), y(0) {}\n    cmplx(T_FFT x, T_FFT y) : x(x), y(y)\
     \ {}\n    inline cmplx operator+(const cmplx &r) const { return cmplx(x + r.x,\
     \ y + r.y); }\n    inline cmplx operator-(const cmplx &r) const { return cmplx(x\
-    \ - r.x, y - r.y); }\n    inline cmplx operator*(const cmplx &r) const { return\
-    \ cmplx(x * r.x - y * r.y, x * r.y + y * r.x); }\n    inline cmplx conj() const\
-    \ { return cmplx(x, -y); }\n};\nint fftbase = 1;\nvector<cmplx> fftrts = {{0,\
-    \ 0}, {1, 0}};\nvector<int> fftrev = {0, 1};\nvoid ensure_base(int nbase) {\n\
-    \    if (nbase <= fftbase) return;\n    fftrev.resize(1 << nbase);\n    fftrts.resize(1\
-    \ << nbase);\n    for (int i = 0; i < (1 << nbase); i++) { fftrev[i] = (fftrev[i\
-    \ >> 1] >> 1) + ((i & 1) << (nbase - 1)); }\n    while (fftbase < nbase) {\n \
-    \       T_FFT angle = acosl(-1.0L) * 2.0L / (1 << (fftbase + 1));\n        for\
-    \ (int i = 1 << (fftbase - 1); i < (1 << fftbase); i++) {\n            fftrts[i\
-    \ << 1] = fftrts[i];\n            T_FFT angle_i = angle * (2 * i + 1 - (1 << fftbase));\n\
-    \            fftrts[(i << 1) + 1] = {cos(angle_i), sin(angle_i)};\n        }\n\
-    \        ++fftbase;\n    }\n}\nvoid fft(int n, vector<cmplx> &a) {\n    assert((n\
-    \ & (n - 1)) == 0);\n    int zeros = __builtin_ctz(n);\n    ensure_base(zeros);\n\
+    \ - r.x, y - r.y); }\n    inline cmplx operator*(const cmplx &r) const {\n   \
+    \     return cmplx(x * r.x - y * r.y, x * r.y + y * r.x);\n    }\n    inline cmplx\
+    \ conj() const { return cmplx(x, -y); }\n};\nint fftbase = 1;\nvector<cmplx> fftrts\
+    \ = {{0, 0}, {1, 0}};\nvector<int> fftrev = {0, 1};\nvoid ensure_base(int nbase)\
+    \ {\n    if (nbase <= fftbase) return;\n    fftrev.resize(1 << nbase);\n    fftrts.resize(1\
+    \ << nbase);\n    for (int i = 0; i < (1 << nbase); i++) {\n        fftrev[i]\
+    \ = (fftrev[i >> 1] >> 1) + ((i & 1) << (nbase - 1));\n    }\n    while (fftbase\
+    \ < nbase) {\n        T_FFT angle = acosl(-1.0L) * 2.0L / (1 << (fftbase + 1));\n\
+    \        for (int i = 1 << (fftbase - 1); i < (1 << fftbase); i++) {\n       \
+    \     fftrts[i << 1] = fftrts[i];\n            T_FFT angle_i = angle * (2 * i\
+    \ + 1 - (1 << fftbase));\n            fftrts[(i << 1) + 1] = {cos(angle_i), sin(angle_i)};\n\
+    \        }\n        ++fftbase;\n    }\n}\nvoid fft(int n, vector<cmplx> &a) {\n\
+    \    assert((n & (n - 1)) == 0);\n    int zeros = __builtin_ctz(n);\n    ensure_base(zeros);\n\
     \    int shift = fftbase - zeros;\n    for (int i = 0; i < n; i++) {\n       \
     \ if (i < (fftrev[i] >> shift)) { swap(a[i], a[fftrev[i] >> shift]); }\n    }\n\
     \    for (int k = 1; k < n; k <<= 1) {\n        for (int i = 0; i < n; i += 2\
@@ -118,7 +118,7 @@ data:
   isVerificationFile: false
   path: convolution/fft_arbitrary_mod.hpp
   requiredBy: []
-  timestamp: '2021-02-14 23:48:54+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: convolution/fft_arbitrary_mod.hpp

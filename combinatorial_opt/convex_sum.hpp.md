@@ -32,13 +32,13 @@ data:
     \ $\\sum_i \\sum_j^{k_i} f_i(x_{ij})$\n// https://codeforces.com/contest/1344/problem/D\n\
     // https://yukicoder.me/problems/no/1495\n// return: (y, [[(x_i, # of such x_i),\
     \ ... ], ...])\ntemplate <typename F, typename Int, Int INF>\nstd::pair<Int, std::vector<std::vector<std::pair<Int,\
-    \ Int>>>> MinConvexSumUnderLinearConstraint(const std::vector<Int> &k, const std::vector<F>\
-    \ &f, Int C) {\n    assert(k.size() == f.size());\n    assert(k.size() > 0);\n\
-    \    Int lbsum = 0, ubsum = 0;\n    for (auto func : f) lbsum += func.lb, ubsum\
-    \ += func.ub;\n    if (lbsum > C or ubsum < C) return {};\n\n    const int N =\
-    \ k.size();\n    Int few = -INF, enough = INF;\n    while (enough - few > 1) {\n\
-    \        auto slope = few + (enough - few) / 2;\n        Int cnt = 0;\n      \
-    \  for (int i = 0; i < N; i++) {\n            auto tmp = f[i].slope(slope);\n\
+    \ Int>>>>\nMinConvexSumUnderLinearConstraint(const std::vector<Int> &k, const\
+    \ std::vector<F> &f, Int C) {\n    assert(k.size() == f.size());\n    assert(k.size()\
+    \ > 0);\n    Int lbsum = 0, ubsum = 0;\n    for (auto func : f) lbsum += func.lb,\
+    \ ubsum += func.ub;\n    if (lbsum > C or ubsum < C) return {};\n\n    const int\
+    \ N = k.size();\n    Int few = -INF, enough = INF;\n    while (enough - few >\
+    \ 1) {\n        auto slope = few + (enough - few) / 2;\n        Int cnt = 0;\n\
+    \        for (int i = 0; i < N; i++) {\n            auto tmp = f[i].slope(slope);\n\
     \            cnt += tmp * k[i];\n            if (cnt >= C) break;\n        }\n\
     \        (cnt >= C ? enough : few) = slope;\n    }\n\n    std::vector<std::vector<std::pair<Int,\
     \ Int>>> ret(N);\n    std::vector<int> additional;\n    Int ctmp = 0;\n    Int\
@@ -70,13 +70,13 @@ data:
     \ x + 1 - a; }\n};\n\n// \\minimize $\\sum_i \\sum_j^{k_i} f_i(x_{ij})$\n// https://codeforces.com/contest/1344/problem/D\n\
     // https://yukicoder.me/problems/no/1495\n// return: (y, [[(x_i, # of such x_i),\
     \ ... ], ...])\ntemplate <typename F, typename Int, Int INF>\nstd::pair<Int, std::vector<std::vector<std::pair<Int,\
-    \ Int>>>> MinConvexSumUnderLinearConstraint(const std::vector<Int> &k, const std::vector<F>\
-    \ &f, Int C) {\n    assert(k.size() == f.size());\n    assert(k.size() > 0);\n\
-    \    Int lbsum = 0, ubsum = 0;\n    for (auto func : f) lbsum += func.lb, ubsum\
-    \ += func.ub;\n    if (lbsum > C or ubsum < C) return {};\n\n    const int N =\
-    \ k.size();\n    Int few = -INF, enough = INF;\n    while (enough - few > 1) {\n\
-    \        auto slope = few + (enough - few) / 2;\n        Int cnt = 0;\n      \
-    \  for (int i = 0; i < N; i++) {\n            auto tmp = f[i].slope(slope);\n\
+    \ Int>>>>\nMinConvexSumUnderLinearConstraint(const std::vector<Int> &k, const\
+    \ std::vector<F> &f, Int C) {\n    assert(k.size() == f.size());\n    assert(k.size()\
+    \ > 0);\n    Int lbsum = 0, ubsum = 0;\n    for (auto func : f) lbsum += func.lb,\
+    \ ubsum += func.ub;\n    if (lbsum > C or ubsum < C) return {};\n\n    const int\
+    \ N = k.size();\n    Int few = -INF, enough = INF;\n    while (enough - few >\
+    \ 1) {\n        auto slope = few + (enough - few) / 2;\n        Int cnt = 0;\n\
+    \        for (int i = 0; i < N; i++) {\n            auto tmp = f[i].slope(slope);\n\
     \            cnt += tmp * k[i];\n            if (cnt >= C) break;\n        }\n\
     \        (cnt >= C ? enough : few) = slope;\n    }\n\n    std::vector<std::vector<std::pair<Int,\
     \ Int>>> ret(N);\n    std::vector<int> additional;\n    Int ctmp = 0;\n    Int\
@@ -94,7 +94,7 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/convex_sum.hpp
   requiredBy: []
-  timestamp: '2021-05-11 22:29:33+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/convex_sum.test.cpp

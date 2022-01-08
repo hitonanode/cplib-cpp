@@ -21,28 +21,29 @@ data:
     \ i) { return elem.begin() + i * W; }\n    inline T &at(int i, int j) { return\
     \ elem[i * W + j]; }\n    inline T get(int i, int j) const { return elem[i * W\
     \ + j]; }\n    operator std::vector<std::vector<T>>() const {\n        std::vector<std::vector<T>>\
-    \ ret(H);\n        for (int i = 0; i < H; i++) std::copy(elem.begin() + i * W,\
-    \ elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        return ret;\n\
-    \    }\n\n    tropical_matrix(int H = 0, int W = 0) : H(H), W(W), elem(H * W,\
-    \ INF) {}\n    tropical_matrix(const std::vector<std::vector<T>> &d) : H(d.size()),\
-    \ W(d.size() ? d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(),\
-    \ raw.end(), std::back_inserter(elem));\n    }\n\n    static tropical_matrix Identity(int\
-    \ N) {\n        tropical_matrix ret(N, N);\n        for (int i = 0; i < N; i++)\
-    \ ret.at(i, i) = 0;\n        return ret;\n    }\n\n    tropical_matrix operator+(const\
-    \ tropical_matrix &r) const {\n        tropical_matrix ret(H, W);\n        for\
-    \ (int i = 0; i < H * W; i++) _chmin(ret.elem[i], r.elem[i]);\n        return\
-    \ ret;\n    }\n    tropical_matrix operator*(const tropical_matrix &r) const {\n\
-    \        tropical_matrix ret(H, r.W);\n        for (int i = 0; i < H; i++) {\n\
-    \            for (int k = 0; k < W; k++) {\n                for (int j = 0; j\
-    \ < r.W; j++) { _chmin(ret.at(i, j), this->get(i, k) + r.get(k, j)); }\n     \
-    \       }\n        }\n        return ret;\n    }\n    tropical_matrix &operator+=(const\
-    \ tropical_matrix &r) { return *this = *this + r; }\n    tropical_matrix &operator*=(const\
-    \ tropical_matrix &r) { return *this = *this * r; }\n    bool operator==(const\
-    \ tropical_matrix &r) const { return H == r.H and W == r.W and elem == r.elem;\
-    \ }\n    bool operator!=(const tropical_matrix &r) const { return H != r.H or\
-    \ W != r.W or elem != r.elem; }\n    bool operator<(const tropical_matrix &r)\
-    \ const { return elem < r.elem; }\n    tropical_matrix pow(int64_t n) const {\n\
-    \        tropical_matrix ret = Identity(H);\n        if (n == 0) return ret;\n\
+    \ ret(H);\n        for (int i = 0; i < H; i++)\n            std::copy(elem.begin()\
+    \ + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        return\
+    \ ret;\n    }\n\n    tropical_matrix(int H = 0, int W = 0) : H(H), W(W), elem(H\
+    \ * W, INF) {}\n    tropical_matrix(const std::vector<std::vector<T>> &d)\n  \
+    \      : H(d.size()), W(d.size() ? d[0].size() : 0) {\n        for (auto &raw\
+    \ : d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));\n    }\n\n\
+    \    static tropical_matrix Identity(int N) {\n        tropical_matrix ret(N,\
+    \ N);\n        for (int i = 0; i < N; i++) ret.at(i, i) = 0;\n        return ret;\n\
+    \    }\n\n    tropical_matrix operator+(const tropical_matrix &r) const {\n  \
+    \      tropical_matrix ret(H, W);\n        for (int i = 0; i < H * W; i++) _chmin(ret.elem[i],\
+    \ r.elem[i]);\n        return ret;\n    }\n    tropical_matrix operator*(const\
+    \ tropical_matrix &r) const {\n        tropical_matrix ret(H, r.W);\n        for\
+    \ (int i = 0; i < H; i++) {\n            for (int k = 0; k < W; k++) {\n     \
+    \           for (int j = 0; j < r.W; j++) {\n                    _chmin(ret.at(i,\
+    \ j), this->get(i, k) + r.get(k, j));\n                }\n            }\n    \
+    \    }\n        return ret;\n    }\n    tropical_matrix &operator+=(const tropical_matrix\
+    \ &r) { return *this = *this + r; }\n    tropical_matrix &operator*=(const tropical_matrix\
+    \ &r) { return *this = *this * r; }\n    bool operator==(const tropical_matrix\
+    \ &r) const {\n        return H == r.H and W == r.W and elem == r.elem;\n    }\n\
+    \    bool operator!=(const tropical_matrix &r) const {\n        return H != r.H\
+    \ or W != r.W or elem != r.elem;\n    }\n    bool operator<(const tropical_matrix\
+    \ &r) const { return elem < r.elem; }\n    tropical_matrix pow(int64_t n) const\
+    \ {\n        tropical_matrix ret = Identity(H);\n        if (n == 0) return ret;\n\
     \        for (int i = 63 - __builtin_clzll(n); i >= 0; i--) {\n            ret\
     \ *= ret;\n            if ((n >> i) & 1) ret *= (*this);\n        }\n        return\
     \ ret;\n    }\n    tropical_matrix transpose() const {\n        tropical_matrix\
@@ -75,28 +76,29 @@ data:
     \ i) { return elem.begin() + i * W; }\n    inline T &at(int i, int j) { return\
     \ elem[i * W + j]; }\n    inline T get(int i, int j) const { return elem[i * W\
     \ + j]; }\n    operator std::vector<std::vector<T>>() const {\n        std::vector<std::vector<T>>\
-    \ ret(H);\n        for (int i = 0; i < H; i++) std::copy(elem.begin() + i * W,\
-    \ elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        return ret;\n\
-    \    }\n\n    tropical_matrix(int H = 0, int W = 0) : H(H), W(W), elem(H * W,\
-    \ INF) {}\n    tropical_matrix(const std::vector<std::vector<T>> &d) : H(d.size()),\
-    \ W(d.size() ? d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(),\
-    \ raw.end(), std::back_inserter(elem));\n    }\n\n    static tropical_matrix Identity(int\
-    \ N) {\n        tropical_matrix ret(N, N);\n        for (int i = 0; i < N; i++)\
-    \ ret.at(i, i) = 0;\n        return ret;\n    }\n\n    tropical_matrix operator+(const\
-    \ tropical_matrix &r) const {\n        tropical_matrix ret(H, W);\n        for\
-    \ (int i = 0; i < H * W; i++) _chmin(ret.elem[i], r.elem[i]);\n        return\
-    \ ret;\n    }\n    tropical_matrix operator*(const tropical_matrix &r) const {\n\
-    \        tropical_matrix ret(H, r.W);\n        for (int i = 0; i < H; i++) {\n\
-    \            for (int k = 0; k < W; k++) {\n                for (int j = 0; j\
-    \ < r.W; j++) { _chmin(ret.at(i, j), this->get(i, k) + r.get(k, j)); }\n     \
-    \       }\n        }\n        return ret;\n    }\n    tropical_matrix &operator+=(const\
-    \ tropical_matrix &r) { return *this = *this + r; }\n    tropical_matrix &operator*=(const\
-    \ tropical_matrix &r) { return *this = *this * r; }\n    bool operator==(const\
-    \ tropical_matrix &r) const { return H == r.H and W == r.W and elem == r.elem;\
-    \ }\n    bool operator!=(const tropical_matrix &r) const { return H != r.H or\
-    \ W != r.W or elem != r.elem; }\n    bool operator<(const tropical_matrix &r)\
-    \ const { return elem < r.elem; }\n    tropical_matrix pow(int64_t n) const {\n\
-    \        tropical_matrix ret = Identity(H);\n        if (n == 0) return ret;\n\
+    \ ret(H);\n        for (int i = 0; i < H; i++)\n            std::copy(elem.begin()\
+    \ + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        return\
+    \ ret;\n    }\n\n    tropical_matrix(int H = 0, int W = 0) : H(H), W(W), elem(H\
+    \ * W, INF) {}\n    tropical_matrix(const std::vector<std::vector<T>> &d)\n  \
+    \      : H(d.size()), W(d.size() ? d[0].size() : 0) {\n        for (auto &raw\
+    \ : d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));\n    }\n\n\
+    \    static tropical_matrix Identity(int N) {\n        tropical_matrix ret(N,\
+    \ N);\n        for (int i = 0; i < N; i++) ret.at(i, i) = 0;\n        return ret;\n\
+    \    }\n\n    tropical_matrix operator+(const tropical_matrix &r) const {\n  \
+    \      tropical_matrix ret(H, W);\n        for (int i = 0; i < H * W; i++) _chmin(ret.elem[i],\
+    \ r.elem[i]);\n        return ret;\n    }\n    tropical_matrix operator*(const\
+    \ tropical_matrix &r) const {\n        tropical_matrix ret(H, r.W);\n        for\
+    \ (int i = 0; i < H; i++) {\n            for (int k = 0; k < W; k++) {\n     \
+    \           for (int j = 0; j < r.W; j++) {\n                    _chmin(ret.at(i,\
+    \ j), this->get(i, k) + r.get(k, j));\n                }\n            }\n    \
+    \    }\n        return ret;\n    }\n    tropical_matrix &operator+=(const tropical_matrix\
+    \ &r) { return *this = *this + r; }\n    tropical_matrix &operator*=(const tropical_matrix\
+    \ &r) { return *this = *this * r; }\n    bool operator==(const tropical_matrix\
+    \ &r) const {\n        return H == r.H and W == r.W and elem == r.elem;\n    }\n\
+    \    bool operator!=(const tropical_matrix &r) const {\n        return H != r.H\
+    \ or W != r.W or elem != r.elem;\n    }\n    bool operator<(const tropical_matrix\
+    \ &r) const { return elem < r.elem; }\n    tropical_matrix pow(int64_t n) const\
+    \ {\n        tropical_matrix ret = Identity(H);\n        if (n == 0) return ret;\n\
     \        for (int i = 63 - __builtin_clzll(n); i >= 0; i--) {\n            ret\
     \ *= ret;\n            if ((n >> i) & 1) ret *= (*this);\n        }\n        return\
     \ ret;\n    }\n    tropical_matrix transpose() const {\n        tropical_matrix\
@@ -122,7 +124,7 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/tropical_matrix.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: linear_algebra_matrix/tropical_matrix.hpp

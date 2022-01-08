@@ -54,7 +54,7 @@ data:
     \ << ',' << p.y << ')';\n    }\n};\ntemplate <> double Point2d<double>::EPS =\
     \ 1e-9;\ntemplate <> long double Point2d<long double>::EPS = 1e-12;\ntemplate\
     \ <> long long Point2d<long long>::EPS = 0;\n\ntemplate <typename T_P>\nint ccw(const\
-    \ Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) { // a->b->c\u306E\
+    \ Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) {\n    // a->b->c\u306E\
     \u66F2\u304C\u308A\u65B9\n    Point2d<T_P> v1 = b - a;\n    Point2d<T_P> v2 =\
     \ c - a;\n    if (v1.det(v2) > Point2d<T_P>::EPS) return 1;   // \u5DE6\u6298\n\
     \    if (v1.det(v2) < -Point2d<T_P>::EPS) return -1; // \u53F3\u6298\n    if (v1.dot(v2)\
@@ -160,7 +160,7 @@ data:
   isVerificationFile: true
   path: geometry/test/convex_hull.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 19:18:14+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: geometry/test/convex_hull.test.cpp

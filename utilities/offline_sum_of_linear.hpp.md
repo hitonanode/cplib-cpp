@@ -25,10 +25,10 @@ data:
     \        for (int i = 0; i < N; i++) tmp[i + 1] += tmp[i], ret[i] += tmp[i];\n\
     \    }\n    T operator[](int i) {\n        assert(0 <= i and i < N);\n       \
     \ return run(), ret[i];\n    }\n    std::vector<T> vals() { return run(), ret;\
-    \ }\n    int size() const { return N; }\n    template <class OStream> friend OStream\
-    \ &operator<<(OStream &os, const offline_sum_of_linear &x) {\n        auto y =\
-    \ x;\n        y.run();\n        os << '[';\n        for (auto v : y.ret) os <<\
-    \ v << ',';\n        return os << ']';\n    }\n};\n"
+    \ }\n    int size() const { return N; }\n    template <class OStream>\n    friend\
+    \ OStream &operator<<(OStream &os, const offline_sum_of_linear &x) {\n       \
+    \ auto y = x;\n        y.run();\n        os << '[';\n        for (auto v : y.ret)\
+    \ os << v << ',';\n        return os << ']';\n    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <tuple>\n#include <vector>\n\n\
     // CUT begin\n// Offline sum of linear segments\ntemplate <class T> struct offline_sum_of_linear\
     \ {\n    int N;\n    std::vector<T> ret;\n    std::vector<std::tuple<int, int,\
@@ -46,14 +46,14 @@ data:
     \ tmp[i], ret[i] += tmp[i];\n    }\n    T operator[](int i) {\n        assert(0\
     \ <= i and i < N);\n        return run(), ret[i];\n    }\n    std::vector<T> vals()\
     \ { return run(), ret; }\n    int size() const { return N; }\n    template <class\
-    \ OStream> friend OStream &operator<<(OStream &os, const offline_sum_of_linear\
+    \ OStream>\n    friend OStream &operator<<(OStream &os, const offline_sum_of_linear\
     \ &x) {\n        auto y = x;\n        y.run();\n        os << '[';\n        for\
     \ (auto v : y.ret) os << v << ',';\n        return os << ']';\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: utilities/offline_sum_of_linear.hpp
   requiredBy: []
-  timestamp: '2021-08-23 00:20:07+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: utilities/offline_sum_of_linear.hpp

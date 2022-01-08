@@ -20,7 +20,7 @@ data:
     \        x += 0x9e3779b97f4a7c15;\n        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;\n\
     \        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;\n        return x ^ (x >> 31);\n\
     \    }\n\n    size_t operator()(uint64_t x) const {\n        static const uint64_t\
-    \ FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();\n\
+    \ FIXED_RANDOM =\n            std::chrono::steady_clock::now().time_since_epoch().count();\n\
     \        return splitmix64(x + FIXED_RANDOM);\n    }\n};\n#include <ext/pb_ds/assoc_container.hpp>\n\
     using namespace __gnu_pbds;\n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
     \    // std::unordered_map<long long, long long, custom_hash> mp;\n    gp_hash_table<long\
@@ -35,7 +35,7 @@ data:
     \ x) {\n        // http://xorshift.di.unimi.it/splitmix64.c\n        x += 0x9e3779b97f4a7c15;\n\
     \        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;\n        x = (x ^ (x >> 27))\
     \ * 0x94d049bb133111eb;\n        return x ^ (x >> 31);\n    }\n\n    size_t operator()(uint64_t\
-    \ x) const {\n        static const uint64_t FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();\n\
+    \ x) const {\n        static const uint64_t FIXED_RANDOM =\n            std::chrono::steady_clock::now().time_since_epoch().count();\n\
     \        return splitmix64(x + FIXED_RANDOM);\n    }\n};\n#include <ext/pb_ds/assoc_container.hpp>\n\
     using namespace __gnu_pbds;\n\nint main() {\n    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\
     \    // std::unordered_map<long long, long long, custom_hash> mp;\n    gp_hash_table<long\
@@ -48,7 +48,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/assosiative_array.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 23:47:50+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/assosiative_array.test.cpp

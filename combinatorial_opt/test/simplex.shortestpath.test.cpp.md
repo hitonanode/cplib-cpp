@@ -23,13 +23,13 @@ data:
     \ Simplex {\n    const Float EPS = Float(1.0) / (1LL << DEPS);\n    int N, M;\n\
     \    std::vector<int> shuffle_idx;\n    std::vector<int> idx;\n    std::vector<std::vector<Float>>\
     \ mat;\n    int i_ch, j_ch;\n\nprivate:\n    void _initialize(const std::vector<std::vector<Float>>\
-    \ &A, const std::vector<Float> &b, const std::vector<Float> &c) {\n        N =\
-    \ c.size(), M = A.size();\n\n        mat.assign(M + 2, std::vector<Float>(N +\
-    \ 2));\n        i_ch = M;\n        for (int i = 0; i < M; i++) {\n           \
-    \ for (int j = 0; j < N; j++) mat[i][j] = -A[i][j];\n            mat[i][N] = 1,\
-    \ mat[i][N + 1] = b[i];\n            if (mat[i_ch][N + 1] > mat[i][N + 1]) i_ch\
-    \ = i;\n        }\n        for (int j = 0; j < N; j++) mat[M][j] = c[j];\n   \
-    \     mat[M + 1][N] = -1;\n\n        idx.resize(N + M + 1);\n        std::iota(idx.begin(),\
+    \ &A, const std::vector<Float> &b,\n                     const std::vector<Float>\
+    \ &c) {\n        N = c.size(), M = A.size();\n\n        mat.assign(M + 2, std::vector<Float>(N\
+    \ + 2));\n        i_ch = M;\n        for (int i = 0; i < M; i++) {\n         \
+    \   for (int j = 0; j < N; j++) mat[i][j] = -A[i][j];\n            mat[i][N] =\
+    \ 1, mat[i][N + 1] = b[i];\n            if (mat[i_ch][N + 1] > mat[i][N + 1])\
+    \ i_ch = i;\n        }\n        for (int j = 0; j < N; j++) mat[M][j] = c[j];\n\
+    \        mat[M + 1][N] = -1;\n\n        idx.resize(N + M + 1);\n        std::iota(idx.begin(),\
     \ idx.end(), 0);\n    }\n\n    inline Float abs_(Float x) noexcept { return x\
     \ > -x ? x : -x; }\n    void _solve() {\n        std::vector<int> jupd;\n    \
     \    for (nb_iter = 0, j_ch = N;; nb_iter++) {\n            if (i_ch < M) {\n\
@@ -45,22 +45,24 @@ data:
     \         }\n\n            j_ch = -1;\n            for (int j = 0; j < N + 1;\
     \ j++) {\n                if (j_ch < 0 or idx[j_ch] > idx[j]) {\n            \
     \        if (mat[M + 1][j] > EPS or (abs_(mat[M + 1][j]) < EPS and mat[M][j] >\
-    \ EPS)) j_ch = j;\n                }\n            }\n            if (j_ch < 0)\
-    \ break;\n\n            i_ch = -1;\n            for (int i = 0; i < M; i++) {\n\
-    \                if (mat[i][j_ch] < -EPS) {\n                    if (i_ch < 0)\
-    \ {\n                        i_ch = i;\n                    } else if (mat[i_ch][N\
-    \ + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch] < -EPS) {\n          \
-    \              i_ch = i;\n                    } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch]\
-    \ - mat[i][N + 1] / mat[i][j_ch] < EPS and idx[i_ch] > idx[i]) {\n           \
-    \             i_ch = i;\n                    }\n                }\n          \
-    \  }\n            if (i_ch < 0) {\n                is_infty = true;\n        \
-    \        break;\n            }\n        }\n        if (mat[M + 1][N + 1] < -EPS)\
-    \ {\n            infeasible = true;\n            return;\n        }\n        x.assign(N,\
-    \ 0);\n        for (int i = 0; i < M; i++) {\n            if (idx[N + 1 + i] <\
-    \ N) x[idx[N + 1 + i]] = mat[i][N + 1];\n        }\n        ans = mat[M][N + 1];\n\
-    \    }\n\npublic:\n    Simplex(std::vector<std::vector<Float>> A, std::vector<Float>\
-    \ b, std::vector<Float> c) {\n        is_infty = infeasible = false;\n\n     \
-    \   if (Randomize) {\n            std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \ EPS))\n                        j_ch = j;\n                }\n            }\n\
+    \            if (j_ch < 0) break;\n\n            i_ch = -1;\n            for (int\
+    \ i = 0; i < M; i++) {\n                if (mat[i][j_ch] < -EPS) {\n         \
+    \           if (i_ch < 0) {\n                        i_ch = i;\n             \
+    \       } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch]\
+    \ <\n                               -EPS) {\n                        i_ch = i;\n\
+    \                    } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N\
+    \ + 1] / mat[i][j_ch] <\n                                   EPS and\n        \
+    \                       idx[i_ch] > idx[i]) {\n                        i_ch =\
+    \ i;\n                    }\n                }\n            }\n            if\
+    \ (i_ch < 0) {\n                is_infty = true;\n                break;\n   \
+    \         }\n        }\n        if (mat[M + 1][N + 1] < -EPS) {\n            infeasible\
+    \ = true;\n            return;\n        }\n        x.assign(N, 0);\n        for\
+    \ (int i = 0; i < M; i++) {\n            if (idx[N + 1 + i] < N) x[idx[N + 1 +\
+    \ i]] = mat[i][N + 1];\n        }\n        ans = mat[M][N + 1];\n    }\n\npublic:\n\
+    \    Simplex(std::vector<std::vector<Float>> A, std::vector<Float> b, std::vector<Float>\
+    \ c) {\n        is_infty = infeasible = false;\n\n        if (Randomize) {\n \
+    \           std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());\n\
     \n            std::vector<std::pair<std::vector<Float>, Float>> Abs;\n       \
     \     for (unsigned i = 0; i < A.size(); i++) Abs.emplace_back(A[i], b[i]);\n\
     \            std::shuffle(Abs.begin(), Abs.end(), rng);\n            A.clear(),\
@@ -75,7 +77,13 @@ data:
     \ and x.size() == c.size()) {\n            auto xtmp = x;\n            for (unsigned\
     \ j = 0; j < c.size(); j++) x[shuffle_idx[j]] = xtmp[j];\n        }\n    }\n \
     \   unsigned nb_iter;\n    bool is_infty;\n    bool infeasible;\n    std::vector<Float>\
-    \ x;\n    Float ans;\n};\n#line 2 \"combinatorial_opt/test/simplex.shortestpath.test.cpp\"\
+    \ x;\n    Float ans;\n\n    static void\n    dual(std::vector<std::vector<Float>>\
+    \ &A, std::vector<Float> &b, std::vector<Float> &c) {\n        const int n = b.size(),\
+    \ m = c.size();\n        std::vector<std::vector<Float>> At(m, std::vector<Float>(n));\n\
+    \        for (int i = 0; i < n; ++i) {\n            for (int j = 0; j < m; ++j)\
+    \ At[j][i] = -A[i][j];\n        }\n        A = At;\n        for (int i = 0; i\
+    \ < n; ++i) b[i] = -b[i];\n        for (int j = 0; j < m; ++j) c[j] = -c[j];\n\
+    \        b.swap(c);\n    }\n};\n#line 2 \"combinatorial_opt/test/simplex.shortestpath.test.cpp\"\
     \n#include <iostream>\n#line 4 \"combinatorial_opt/test/simplex.shortestpath.test.cpp\"\
     \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_12_B\"\
     \nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    using Float\
@@ -101,7 +109,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/simplex.shortestpath.test.cpp
   requiredBy: []
-  timestamp: '2021-02-28 16:53:36+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/simplex.shortestpath.test.cpp

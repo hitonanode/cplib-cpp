@@ -2,40 +2,40 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/acl_beats.hpp
     title: Segment Tree Beats (based on atcoder::lazy_segtree)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
     title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
   - icon: ':warning:'
     path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
     title: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
     title: segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   - icon: ':warning:'
     path: segmenttree/trees/acl_range-update-range-sum-min.hpp
     title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/beats.test.cpp
     title: segmenttree/test/beats.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/beats_gcd.test.cpp
     title: segmenttree/test/beats_gcd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/document_ja/lazysegtree.html
@@ -61,13 +61,13 @@ data:
     \ <algorithm>\n#include <cassert>\n#include <iostream>\n#include <vector>\n\n\
     // #include \"atcoder/internal_bit\"\n\nnamespace atcoder {\n\ntemplate <class\
     \ S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F,\
-    \ F), F (*id)()>\nstruct lazy_segtree {\npublic:\n    lazy_segtree() : lazy_segtree(0)\
-    \ {}\n    explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e()))\
-    \ {}\n    explicit lazy_segtree(const std::vector<S>& v) : _n(int(v.size())) {\n\
-    \        log = internal::ceil_pow2(_n);\n        size = 1 << log;\n        d =\
-    \ std::vector<S>(2 * size, e());\n        lz = std::vector<F>(size, id());\n \
-    \       for (int i = 0; i < _n; i++) d[size + i] = v[i];\n        for (int i =\
-    \ size - 1; i >= 1; i--) { update(i); }\n    }\n\n    void set(int p, S x) {\n\
+    \ F),\n          F (*id)()>\nstruct lazy_segtree {\npublic:\n    lazy_segtree()\
+    \ : lazy_segtree(0) {}\n    explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n,\
+    \ e())) {}\n    explicit lazy_segtree(const std::vector<S> &v) : _n(int(v.size()))\
+    \ {\n        log = internal::ceil_pow2(_n);\n        size = 1 << log;\n      \
+    \  d = std::vector<S>(2 * size, e());\n        lz = std::vector<F>(size, id());\n\
+    \        for (int i = 0; i < _n; i++) d[size + i] = v[i];\n        for (int i\
+    \ = size - 1; i >= 1; i--) { update(i); }\n    }\n\n    void set(int p, S x) {\n\
     \        assert(0 <= p && p < _n);\n        p += size;\n        for (int i = log;\
     \ i >= 1; i--) push(p >> i);\n        d[p] = x;\n        for (int i = 1; i <=\
     \ log; i++) update(p >> i);\n    }\n\n    S get(int p) const {\n        assert(0\
@@ -139,8 +139,8 @@ data:
   - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   - segmenttree/acl_beats.hpp
-  timestamp: '2021-02-15 23:59:04+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - segmenttree/test/beats_gcd.test.cpp
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp

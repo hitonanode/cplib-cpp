@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/test/enumerate_triangles.test.cpp
     title: other_algorithms/test/enumerate_triangles.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://www.slideshare.net/catupper/trianguler
@@ -53,7 +53,7 @@ data:
   path: other_algorithms/enumerate_triangles.hpp
   requiredBy: []
   timestamp: '2021-06-13 19:44:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - other_algorithms/test/enumerate_triangles.test.cpp
 documentation_of: other_algorithms/enumerate_triangles.hpp

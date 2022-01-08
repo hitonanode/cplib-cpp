@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/suffix_array_doubling.hpp
     title: string/suffix_array_doubling.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/suffixarray
@@ -32,16 +32,17 @@ data:
     \            return ri < rj;\n        };\n        std::vector<int> tmp(N + 1);\n\
     \        for (_ord_mm = 1; _ord_mm <= N; _ord_mm *= 2) {\n            std::sort(SA.begin(),\
     \ SA.end(), _comp_suffarr);\n            tmp[SA[0]] = 0;\n            for (int\
-    \ i = 1; i <= N; i++) { tmp[SA[i]] = tmp[SA[i - 1]] + _comp_suffarr(SA[i - 1],\
-    \ SA[i]); }\n            rank = tmp;\n        }\n        if (!gen_lcp) return;\n\
-    \n        lcp.assign(N, 0);\n        int h = 0;\n        for (int i = 0; i < N;\
-    \ i++) {\n            int j = SA[rank[i] - 1];\n            if (h) h--;\n    \
-    \        for (; j + h < N and i + h < N; h++)\n                if (S[j + h] !=\
-    \ S[i + h]) break;\n            lcp[rank[i] - 1] = h;\n        }\n    }\n};\n\
-    #line 2 \"string/test/suffix_array.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\
-    \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
-    \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, false);\n\n    for (size_t\
-    \ i = 1; i <= S.length(); i++) std::cout << sa.SA[i] << ' ';\n}\n"
+    \ i = 1; i <= N; i++) {\n                tmp[SA[i]] = tmp[SA[i - 1]] + _comp_suffarr(SA[i\
+    \ - 1], SA[i]);\n            }\n            rank = tmp;\n        }\n        if\
+    \ (!gen_lcp) return;\n\n        lcp.assign(N, 0);\n        int h = 0;\n      \
+    \  for (int i = 0; i < N; i++) {\n            int j = SA[rank[i] - 1];\n     \
+    \       if (h) h--;\n            for (; j + h < N and i + h < N; h++)\n      \
+    \          if (S[j + h] != S[i + h]) break;\n            lcp[rank[i] - 1] = h;\n\
+    \        }\n    }\n};\n#line 2 \"string/test/suffix_array.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\n#include <iostream>\n\
+    #include <string>\n\nint main() {\n    std::string S;\n    std::cin >> S;\n  \
+    \  SuffixArray<decltype(S)> sa(S, false);\n\n    for (size_t i = 1; i <= S.length();\
+    \ i++) std::cout << sa.SA[i] << ' ';\n}\n"
   code: "#include \"../suffix_array_doubling.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\
     \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
     \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, false);\n\n    for (size_t\
@@ -51,8 +52,8 @@ data:
   isVerificationFile: true
   path: string/test/suffix_array.test.cpp
   requiredBy: []
-  timestamp: '2021-01-02 00:51:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: string/test/suffix_array.test.cpp
 layout: document

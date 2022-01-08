@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/factorize.hpp
     title: number/factorize.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A
@@ -46,13 +46,13 @@ data:
     \ = 1, g, q = 1;\n            do {\n                x = y;\n                for\
     \ (int i = r; i--;) y = f(y);\n                long long k = 0;\n            \
     \    do {\n                    ys = y;\n                    for (int i = std::min(m,\
-    \ r - k); i--;) y = f(y), q = __int128(q) * std::abs(x - y) % n;\n           \
-    \         g = std::__gcd<long long>(q, n);\n                    k += m;\n    \
-    \            } while (k < r and g <= 1);\n                r <<= 1;\n         \
-    \   } while (g <= 1);\n            if (g == n) {\n                do {\n     \
-    \               ys = f(ys);\n                    g = std::__gcd(std::abs(x - ys),\
-    \ n);\n                } while (g <= 1);\n            }\n            if (g !=\
-    \ n) return g;\n        }\n    }\n\n    std::vector<long long> operator()(long\
+    \ r - k); i--;)\n                        y = f(y), q = __int128(q) * std::abs(x\
+    \ - y) % n;\n                    g = std::__gcd<long long>(q, n);\n          \
+    \          k += m;\n                } while (k < r and g <= 1);\n            \
+    \    r <<= 1;\n            } while (g <= 1);\n            if (g == n) {\n    \
+    \            do {\n                    ys = f(ys);\n                    g = std::__gcd(std::abs(x\
+    \ - ys), n);\n                } while (g <= 1);\n            }\n            if\
+    \ (g != n) return g;\n        }\n    }\n\n    std::vector<long long> operator()(long\
     \ long n) {\n        std::vector<long long> ret;\n        while (n > 1) {\n  \
     \          long long f = find_factor(n);\n            if (f < n) {\n         \
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
@@ -72,8 +72,8 @@ data:
   isVerificationFile: true
   path: number/test/factorize_aoj.test.cpp
   requiredBy: []
-  timestamp: '2021-08-01 19:15:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/factorize_aoj.test.cpp
 layout: document

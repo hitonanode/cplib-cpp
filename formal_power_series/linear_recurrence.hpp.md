@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/blackbox_algorithm.hpp
     title: linear_algebra_matrix/blackbox_algorithm.hpp
   _extendedVerifiedWith:
@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - http://misawa.github.io/others/fast_kitamasa_method.html
@@ -37,7 +37,7 @@ data:
     \ -2])\n// - [1, 1, 2, 3, 5, 8] -> (2, [1, -1, -1])\n// - [0, 0, 0, 0, 1]    ->\
     \ (5, [1, 0, 0, 0, 0, 998244352]) (mod 998244353)\n// - []                 ->\
     \ (0, [1])\n// - [0, 0, 0]          -> (0, [1])\n// - [-2]               -> (1,\
-    \ [1, 2])\ntemplate <typename Tfield> std::pair<int, std::vector<Tfield>> find_linear_recurrence(const\
+    \ [1, 2])\ntemplate <typename Tfield>\nstd::pair<int, std::vector<Tfield>> find_linear_recurrence(const\
     \ std::vector<Tfield> &S) {\n    int N = S.size();\n    using poly = std::vector<Tfield>;\n\
     \    poly C_reversed{1}, B{1};\n    int L = 0, m = 1;\n    Tfield b = 1;\n\n \
     \   // adjust: C(x) <- C(x) - (d / b) x^m B(x)\n    auto adjust = [](poly C, const\
@@ -73,7 +73,7 @@ data:
     \            ret = c;\n        }\n    }\n    return ret;\n}\n\n// Guess k-th element\
     \ of the sequence, assuming linear recurrence\n// initial_elements: 0-ORIGIN\n\
     // Verify: abc198f https://atcoder.jp/contests/abc198/submissions/21837815\ntemplate\
-    \ <typename Tfield> Tfield guess_kth_term(const std::vector<Tfield> &initial_elements,\
+    \ <typename Tfield>\nTfield guess_kth_term(const std::vector<Tfield> &initial_elements,\
     \ long long k) {\n    assert(k >= 0);\n    if (k < static_cast<long long>(initial_elements.size()))\
     \ return initial_elements[k];\n    const auto f = find_linear_recurrence<Tfield>(initial_elements).second;\n\
     \    const auto g = monomial_mod_polynomial<Tfield>(k, f);\n    Tfield ret = 0;\n\
@@ -88,7 +88,7 @@ data:
     \ -2])\n// - [1, 1, 2, 3, 5, 8] -> (2, [1, -1, -1])\n// - [0, 0, 0, 0, 1]    ->\
     \ (5, [1, 0, 0, 0, 0, 998244352]) (mod 998244353)\n// - []                 ->\
     \ (0, [1])\n// - [0, 0, 0]          -> (0, [1])\n// - [-2]               -> (1,\
-    \ [1, 2])\ntemplate <typename Tfield> std::pair<int, std::vector<Tfield>> find_linear_recurrence(const\
+    \ [1, 2])\ntemplate <typename Tfield>\nstd::pair<int, std::vector<Tfield>> find_linear_recurrence(const\
     \ std::vector<Tfield> &S) {\n    int N = S.size();\n    using poly = std::vector<Tfield>;\n\
     \    poly C_reversed{1}, B{1};\n    int L = 0, m = 1;\n    Tfield b = 1;\n\n \
     \   // adjust: C(x) <- C(x) - (d / b) x^m B(x)\n    auto adjust = [](poly C, const\
@@ -124,7 +124,7 @@ data:
     \            ret = c;\n        }\n    }\n    return ret;\n}\n\n// Guess k-th element\
     \ of the sequence, assuming linear recurrence\n// initial_elements: 0-ORIGIN\n\
     // Verify: abc198f https://atcoder.jp/contests/abc198/submissions/21837815\ntemplate\
-    \ <typename Tfield> Tfield guess_kth_term(const std::vector<Tfield> &initial_elements,\
+    \ <typename Tfield>\nTfield guess_kth_term(const std::vector<Tfield> &initial_elements,\
     \ long long k) {\n    assert(k >= 0);\n    if (k < static_cast<long long>(initial_elements.size()))\
     \ return initial_elements[k];\n    const auto f = find_linear_recurrence<Tfield>(initial_elements).second;\n\
     \    const auto g = monomial_mod_polynomial<Tfield>(k, f);\n    Tfield ret = 0;\n\
@@ -135,8 +135,8 @@ data:
   path: formal_power_series/linear_recurrence.hpp
   requiredBy:
   - linear_algebra_matrix/blackbox_algorithm.hpp
-  timestamp: '2021-05-02 16:53:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/linear_recurrence.test.cpp
   - formal_power_series/test/kitamasa.test.cpp

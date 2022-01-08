@@ -49,11 +49,11 @@ data:
     \              if (lo[q] + 1 < hi[q]) {\n                    stop = false;\n \
     \                   vs[(lo[q] + hi[q]) / 2].emplace_back(q);\n               \
     \ }\n            }\n            if (stop) break;\n            BIT<int> bit(N);\n\
-    \            for (int t = 0; t < N; t++) {\n                for (auto q : vs[t])\
-    \ (bit.sum(QR[q]) - bit.sum(QL[q]) <= QK[q] ? lo[q] : hi[q]) = t;\n          \
-    \      bit.add(idx[t], 1);\n                vs[t].clear();\n            }\n  \
-    \      }\n        _ret_arg.resize(Q);\n        for (int i = 0; i < Q; i++) _ret_arg[i]\
-    \ = idx[lo[i]];\n        return _ret_arg;\n    }\n};\n"
+    \            for (int t = 0; t < N; t++) {\n                for (auto q : vs[t])\n\
+    \                    (bit.sum(QR[q]) - bit.sum(QL[q]) <= QK[q] ? lo[q] : hi[q])\
+    \ = t;\n                bit.add(idx[t], 1);\n                vs[t].clear();\n\
+    \            }\n        }\n        _ret_arg.resize(Q);\n        for (int i = 0;\
+    \ i < Q; i++) _ret_arg[i] = idx[lo[i]];\n        return _ret_arg;\n    }\n};\n"
   code: "#pragma once\n#include \"../segmenttree/binary_indexed_tree.hpp\"\n#include\
     \ <algorithm>\n#include <cassert>\n#include <numeric>\n#include <vector>\n\n//\
     \ Offline solver to find k-th smallest elements in continuous subsequences\n//\
@@ -74,17 +74,17 @@ data:
     \              if (lo[q] + 1 < hi[q]) {\n                    stop = false;\n \
     \                   vs[(lo[q] + hi[q]) / 2].emplace_back(q);\n               \
     \ }\n            }\n            if (stop) break;\n            BIT<int> bit(N);\n\
-    \            for (int t = 0; t < N; t++) {\n                for (auto q : vs[t])\
-    \ (bit.sum(QR[q]) - bit.sum(QL[q]) <= QK[q] ? lo[q] : hi[q]) = t;\n          \
-    \      bit.add(idx[t], 1);\n                vs[t].clear();\n            }\n  \
-    \      }\n        _ret_arg.resize(Q);\n        for (int i = 0; i < Q; i++) _ret_arg[i]\
-    \ = idx[lo[i]];\n        return _ret_arg;\n    }\n};\n"
+    \            for (int t = 0; t < N; t++) {\n                for (auto q : vs[t])\n\
+    \                    (bit.sum(QR[q]) - bit.sum(QL[q]) <= QK[q] ? lo[q] : hi[q])\
+    \ = t;\n                bit.add(idx[t], 1);\n                vs[t].clear();\n\
+    \            }\n        }\n        _ret_arg.resize(Q);\n        for (int i = 0;\
+    \ i < Q; i++) _ret_arg[i] = idx[lo[i]];\n        return _ret_arg;\n    }\n};\n"
   dependsOn:
   - segmenttree/binary_indexed_tree.hpp
   isVerificationFile: false
   path: data_structure/range_kth_smallest_offline.hpp
   requiredBy: []
-  timestamp: '2021-11-06 11:36:55+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/range_kth_smallest_offline.test.cpp

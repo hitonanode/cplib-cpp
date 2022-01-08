@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/lagrange_interpolation.hpp
     title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\u9593\
       \uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
     title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/arithmetic_cumsum.hpp
     title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\u6570\
       \u306E\u7D2F\u7A4D\u548C\uFF09"
@@ -17,12 +17,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/arithmetic_function_totient.test.cpp
     title: number/test/arithmetic_function_totient.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
@@ -47,7 +47,7 @@ data:
     \ \u306E\u5024\u3092 $[f(0), ..., f(d - 1), f(d)]$ \u306E\u5024\u304B\u3089 $O(d)$\
     \ \u3067\u8A08\u7B97\uFF0E\n// Requirement: r != 1\n// https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\n\
     // Document: https://hitonanode.github.io/cplib-cpp/formal_power_series/sum_of_exponential_times_polynomial_limit.hpp\n\
-    template <typename MODINT> MODINT sum_of_exponential_times_polynomial_limit(MODINT\
+    template <typename MODINT>\nMODINT sum_of_exponential_times_polynomial_limit(MODINT\
     \ r, std::vector<MODINT> init) {\n    assert(r != 1);\n    if (init.empty()) return\
     \ 0;\n    if (init.size() == 1) return init[0] / (1 - r);\n    auto &bs = init;\n\
     \    const int d = int(bs.size()) - 1;\n    MODINT rp = 1;\n    for (int i = 1;\
@@ -94,8 +94,8 @@ data:
   path: formal_power_series/sum_of_exponential_times_polynomial.hpp
   requiredBy:
   - number/arithmetic_cumsum.hpp
-  timestamp: '2021-05-03 18:16:21+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - number/test/arithmetic_function_totient.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp

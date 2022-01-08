@@ -61,7 +61,7 @@ data:
     \ << ',' << p.y << ')';\n    }\n};\ntemplate <> double Point2d<double>::EPS =\
     \ 1e-9;\ntemplate <> long double Point2d<long double>::EPS = 1e-12;\ntemplate\
     \ <> long long Point2d<long long>::EPS = 0;\n\ntemplate <typename T_P>\nint ccw(const\
-    \ Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) { // a->b->c\u306E\
+    \ Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) {\n    // a->b->c\u306E\
     \u66F2\u304C\u308A\u65B9\n    Point2d<T_P> v1 = b - a;\n    Point2d<T_P> v2 =\
     \ c - a;\n    if (v1.det(v2) > Point2d<T_P>::EPS) return 1;   // \u5DE6\u6298\n\
     \    if (v1.det(v2) < -Point2d<T_P>::EPS) return -1; // \u53F3\u6298\n    if (v1.dot(v2)\
@@ -151,34 +151,34 @@ data:
     \ { return {x - p.x, y - p.y, z - p.z}; }\n    Point3d operator*(T d) const noexcept\
     \ { return {x * d, y * d, z * d}; }\n    Point3d operator/(T d) const { return\
     \ {x / d, y / d, z / d}; }\n    bool operator<(const Point3d &r) const noexcept\
-    \ { return x != r.x ? x < r.x : (y != r.y ? y < r.y : z < r.z); }\n    bool operator==(const\
-    \ Point3d &r) const noexcept { return x == r.x and y == r.y and z == r.z; }\n\
-    \    bool operator!=(const Point3d &r) const noexcept { return !((*this) == r);\
-    \ }\n    T dot(const Point3d &p) const noexcept { return x * p.x + y * p.y + z\
-    \ * p.z; }\n    T absdet(const Point3d &p) const noexcept {\n        return Point3d(y\
-    \ * p.z - z * p.y, z * p.x - x * p.z, x * p.y - y * p.x).norm();\n    }\n    T\
-    \ norm() const noexcept { return std::sqrt(x * x + y * y + z * z); }\n    T norm2()\
-    \ const noexcept { return x * x + y * y + z * z; }\n    Point3d normalized() const\
-    \ { return (*this) / this->norm(); }\n    friend std::istream &operator>>(std::istream\
-    \ &is, Point3d &p) { return is >> p.x >> p.y >> p.z; }\n    friend std::ostream\
-    \ &operator<<(std::ostream &os, const Point3d &p) {\n        return os << '('\
-    \ << p.x << ',' << p.y << ',' << p.z << ')';\n    }\n};\n#line 5 \"geometry/triangle.hpp\"\
-    \n\n// CUT begin\n// Circumcenter \uFF08\u4E09\u89D2\u5F62\u306E\u5916\u5FC3\uFF09\
-    \ntemplate <typename Float>\nPoint2d<Float> circumcenter(const Point2d<Float>\
-    \ &A, const Point2d<Float> &B, const Point2d<Float> &C) {\n    std::complex<Float>\
-    \ a = (C - A).to_complex(), b = (B - A).to_complex();\n    return A + Point2d<Float>(a\
-    \ * b * std::conj(a - b) / (std::conj(a) * b - a * std::conj(b)));\n}\ntemplate\
-    \ <typename Float>\nPoint3d<Float> circumcenter(const Point3d<Float> &A, const\
-    \ Point3d<Float> &B, const Point3d<Float> &C) {\n    auto a = (B - C).norm(),\
-    \ b = (C - A).norm(), c = (A - B).norm();\n    auto acosA = a * a * (C - A).dot(B\
-    \ - A);\n    auto bcosB = b * b * (A - B).dot(C - B);\n    auto ccosC = c * c\
-    \ * (B - C).dot(A - C);\n    return (A * acosA + B * bcosB + C * ccosC) / (acosA\
-    \ + bcosB + ccosC);\n}\n#line 3 \"geometry/test/circumcenter.test.cpp\"\n#include\
-    \ <iomanip>\n#line 5 \"geometry/test/circumcenter.test.cpp\"\n#define PROBLEM\
-    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_C\"\n#define\
-    \ ERROR 0.000001\nusing namespace std;\n\nint main() {\n    Point2d<long double>\
-    \ X, Y, Z;\n    cin >> X >> Y >> Z;\n    auto c = circumcenter(X, Y, Z);\n   \
-    \ cout << fixed << setprecision(10) << c.x << ' ' << c.y << ' ' << (X - c).norm()\
+    \ {\n        return x != r.x ? x < r.x : (y != r.y ? y < r.y : z < r.z);\n   \
+    \ }\n    bool operator==(const Point3d &r) const noexcept { return x == r.x and\
+    \ y == r.y and z == r.z; }\n    bool operator!=(const Point3d &r) const noexcept\
+    \ { return !((*this) == r); }\n    T dot(const Point3d &p) const noexcept { return\
+    \ x * p.x + y * p.y + z * p.z; }\n    T absdet(const Point3d &p) const noexcept\
+    \ {\n        return Point3d(y * p.z - z * p.y, z * p.x - x * p.z, x * p.y - y\
+    \ * p.x).norm();\n    }\n    T norm() const noexcept { return std::sqrt(x * x\
+    \ + y * y + z * z); }\n    T norm2() const noexcept { return x * x + y * y + z\
+    \ * z; }\n    Point3d normalized() const { return (*this) / this->norm(); }\n\
+    \    friend std::istream &operator>>(std::istream &is, Point3d &p) {\n       \
+    \ return is >> p.x >> p.y >> p.z;\n    }\n    friend std::ostream &operator<<(std::ostream\
+    \ &os, const Point3d &p) {\n        return os << '(' << p.x << ',' << p.y << ','\
+    \ << p.z << ')';\n    }\n};\n#line 5 \"geometry/triangle.hpp\"\n\n// CUT begin\n\
+    // Circumcenter \uFF08\u4E09\u89D2\u5F62\u306E\u5916\u5FC3\uFF09\ntemplate <typename\
+    \ Float>\nPoint2d<Float>\ncircumcenter(const Point2d<Float> &A, const Point2d<Float>\
+    \ &B, const Point2d<Float> &C) {\n    std::complex<Float> a = (C - A).to_complex(),\
+    \ b = (B - A).to_complex();\n    return A + Point2d<Float>(a * b * std::conj(a\
+    \ - b) / (std::conj(a) * b - a * std::conj(b)));\n}\ntemplate <typename Float>\n\
+    Point3d<Float>\ncircumcenter(const Point3d<Float> &A, const Point3d<Float> &B,\
+    \ const Point3d<Float> &C) {\n    auto a = (B - C).norm(), b = (C - A).norm(),\
+    \ c = (A - B).norm();\n    auto acosA = a * a * (C - A).dot(B - A);\n    auto\
+    \ bcosB = b * b * (A - B).dot(C - B);\n    auto ccosC = c * c * (B - C).dot(A\
+    \ - C);\n    return (A * acosA + B * bcosB + C * ccosC) / (acosA + bcosB + ccosC);\n\
+    }\n#line 3 \"geometry/test/circumcenter.test.cpp\"\n#include <iomanip>\n#line\
+    \ 5 \"geometry/test/circumcenter.test.cpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_C\"\
+    \n#define ERROR 0.000001\nusing namespace std;\n\nint main() {\n    Point2d<long\
+    \ double> X, Y, Z;\n    cin >> X >> Y >> Z;\n    auto c = circumcenter(X, Y, Z);\n\
+    \    cout << fixed << setprecision(10) << c.x << ' ' << c.y << ' ' << (X - c).norm()\
     \ << '\\n';\n}\n"
   code: "#include \"../geometry.hpp\"\n#include \"../triangle.hpp\"\n#include <iomanip>\n\
     #include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_C\"\
@@ -193,7 +193,7 @@ data:
   isVerificationFile: true
   path: geometry/test/circumcenter.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 19:18:14+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: geometry/test/circumcenter.test.cpp

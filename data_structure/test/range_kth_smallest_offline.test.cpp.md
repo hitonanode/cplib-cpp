@@ -53,17 +53,18 @@ data:
     \              if (lo[q] + 1 < hi[q]) {\n                    stop = false;\n \
     \                   vs[(lo[q] + hi[q]) / 2].emplace_back(q);\n               \
     \ }\n            }\n            if (stop) break;\n            BIT<int> bit(N);\n\
-    \            for (int t = 0; t < N; t++) {\n                for (auto q : vs[t])\
-    \ (bit.sum(QR[q]) - bit.sum(QL[q]) <= QK[q] ? lo[q] : hi[q]) = t;\n          \
-    \      bit.add(idx[t], 1);\n                vs[t].clear();\n            }\n  \
-    \      }\n        _ret_arg.resize(Q);\n        for (int i = 0; i < Q; i++) _ret_arg[i]\
-    \ = idx[lo[i]];\n        return _ret_arg;\n    }\n};\n#line 3 \"data_structure/test/range_kth_smallest_offline.test.cpp\"\
-    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n\n    int N, Q;\n    cin >> N >> Q;\n    std::vector<int>\
-    \ A(N);\n    for (auto &x : A) cin >> x;\n    range_kth_smallest solver(A);\n\
-    \    while (Q--) {\n        int l, r, k;\n        cin >> l >> r >> k;\n      \
-    \  solver.add_query(l, r, k);\n    }\n    solver.solve();\n    for (auto i : solver.solve())\
-    \ cout << A[i] << '\\n';\n}\n"
+    \            for (int t = 0; t < N; t++) {\n                for (auto q : vs[t])\n\
+    \                    (bit.sum(QR[q]) - bit.sum(QL[q]) <= QK[q] ? lo[q] : hi[q])\
+    \ = t;\n                bit.add(idx[t], 1);\n                vs[t].clear();\n\
+    \            }\n        }\n        _ret_arg.resize(Q);\n        for (int i = 0;\
+    \ i < Q; i++) _ret_arg[i] = idx[lo[i]];\n        return _ret_arg;\n    }\n};\n\
+    #line 3 \"data_structure/test/range_kth_smallest_offline.test.cpp\"\n#include\
+    \ <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n    int N, Q;\n    cin >> N >> Q;\n    std::vector<int> A(N);\n    for (auto\
+    \ &x : A) cin >> x;\n    range_kth_smallest solver(A);\n    while (Q--) {\n  \
+    \      int l, r, k;\n        cin >> l >> r >> k;\n        solver.add_query(l,\
+    \ r, k);\n    }\n    solver.solve();\n    for (auto i : solver.solve()) cout <<\
+    \ A[i] << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n\
     #include \"../range_kth_smallest_offline.hpp\"\n#include <iostream>\nusing namespace\
     \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n\
@@ -78,7 +79,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/range_kth_smallest_offline.test.cpp
   requiredBy: []
-  timestamp: '2021-11-06 11:36:55+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/range_kth_smallest_offline.test.cpp

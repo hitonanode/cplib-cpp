@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: sparse_table/rmq_sparse_table.hpp
     title: sparse_table/rmq_sparse_table.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/lca_rmq.test.cpp
     title: tree/test/lca_rmq.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"sparse_table/rmq_sparse_table.hpp\"\n#include <algorithm>\n\
@@ -21,7 +21,7 @@ data:
     \ T &l, const T &r) const noexcept { return std::min<T>(l, r); }\n    int N, lgN;\n\
     \    T defaultT;\n    std::vector<std::vector<T>> data;\n    std::vector<int>\
     \ lgx_table;\n    StaticRMQ() = default;\n    StaticRMQ(const std::vector<T> &sequence,\
-    \ T defaultT) : N(sequence.size()), defaultT(defaultT) {\n        lgx_table.resize(N\
+    \ T defaultT)\n        : N(sequence.size()), defaultT(defaultT) {\n        lgx_table.resize(N\
     \ + 1);\n        for (int i = 2; i < N + 1; i++) lgx_table[i] = lgx_table[i >>\
     \ 1] + 1;\n        lgN = lgx_table[N] + 1;\n        data.assign(lgN, std::vector<T>(N,\
     \ defaultT));\n        data[0] = sequence;\n        for (int d = 1; d < lgN; d++)\
@@ -78,8 +78,8 @@ data:
   isVerificationFile: false
   path: tree/lca_rmq.hpp
   requiredBy: []
-  timestamp: '2021-07-30 23:28:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/lca_rmq.test.cpp
 documentation_of: tree/lca_rmq.hpp

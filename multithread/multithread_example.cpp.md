@@ -32,14 +32,14 @@ data:
     \n    int TC;\n    cin >> TC;\n    REP(tc, TC) {\n        int N, M;\n        cin\
     \ >> N >> M;\n        vector<pint> q(M);\n        REP(i, M) cin >> q[i].first\
     \ >> q[i].second;\n        testcase.emplace_back(N, M, q);\n    }\n    ret.resize(TC);\n\
-    \    done.assign(TC, 0);\n\n    size_t n_thread = thread::hardware_concurrency();\
+    \    done.assign(TC, 0);\n\n    size_t n_thread =\n        thread::hardware_concurrency();\
     \ // \u30B9\u30EC\u30C3\u30C9\u6570\u3092\u81EA\u52D5\u53D6\u5F97\uFF0E 8\u3084\
     16\u3068\u624B\u3067\u8A2D\u5B9A\u3057\u3066\u3082\u3088\u3044\n    if (n_thread\
     \ == 0) n_thread = 1;\n\n    vector<thread> threads(n_thread);\n    REP(i, n_thread)\
     \ { threads[i] = thread(run); }\n    REP(i, n_thread) { threads[i].join(); }\n\
     \    REP(tc, TC) { cout << \"Case #\" << tc + 1 << \": \" << ret[tc] << endl;\
     \ }\n    dbg(chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()\
-    \ - START).count());\n}\n"
+    \ - START)\n            .count());\n}\n"
   code: "// \u30DE\u30EB\u30C1\u30B9\u30EC\u30C3\u30C9\u3067\u30ED\u30FC\u30AB\u30EB\
     \u5B9F\u884C\u9AD8\u901F\u5316 \u30B3\u30F3\u30D1\u30A4\u30EB\u6642\u306E\u30AA\
     \u30D7\u30B7\u30E7\u30F3\u306B -pthread \u304C\u5FC5\u8981\n#include <bits/stdc++.h>\n\
@@ -64,18 +64,18 @@ data:
     \  cin >> TC;\n    REP(tc, TC) {\n        int N, M;\n        cin >> N >> M;\n\
     \        vector<pint> q(M);\n        REP(i, M) cin >> q[i].first >> q[i].second;\n\
     \        testcase.emplace_back(N, M, q);\n    }\n    ret.resize(TC);\n    done.assign(TC,\
-    \ 0);\n\n    size_t n_thread = thread::hardware_concurrency(); // \u30B9\u30EC\
-    \u30C3\u30C9\u6570\u3092\u81EA\u52D5\u53D6\u5F97\uFF0E 8\u308416\u3068\u624B\u3067\
-    \u8A2D\u5B9A\u3057\u3066\u3082\u3088\u3044\n    if (n_thread == 0) n_thread =\
-    \ 1;\n\n    vector<thread> threads(n_thread);\n    REP(i, n_thread) { threads[i]\
+    \ 0);\n\n    size_t n_thread =\n        thread::hardware_concurrency(); // \u30B9\
+    \u30EC\u30C3\u30C9\u6570\u3092\u81EA\u52D5\u53D6\u5F97\uFF0E 8\u308416\u3068\u624B\
+    \u3067\u8A2D\u5B9A\u3057\u3066\u3082\u3088\u3044\n    if (n_thread == 0) n_thread\
+    \ = 1;\n\n    vector<thread> threads(n_thread);\n    REP(i, n_thread) { threads[i]\
     \ = thread(run); }\n    REP(i, n_thread) { threads[i].join(); }\n    REP(tc, TC)\
     \ { cout << \"Case #\" << tc + 1 << \": \" << ret[tc] << endl; }\n    dbg(chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()\
-    \ - START).count());\n}\n"
+    \ - START)\n            .count());\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: multithread/multithread_example.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:33:55+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: multithread/multithread_example.cpp

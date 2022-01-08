@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/acl_segtree.hpp
     title: segmenttree/acl_segtree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/rangetree.test.cpp
     title: segmenttree/test/rangetree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/rangetree.yuki1625.test.cpp
     title: segmenttree/test/rangetree.yuki1625.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -32,27 +32,29 @@ data:
     \ S), S (*e)(), class Coordinate> class rangetree {\n    int n;\n    using Pt\
     \ = std::pair<Coordinate, Coordinate>;\n    std::vector<Pt> _pts;\n    std::vector<std::vector<Pt>>\
     \ _range2yxs;\n    std::vector<atcoder::segtree<S, op, e>> segtrees;\n    void\
-    \ _set(int v, Pt p, S val) {\n        auto i = std::distance(_range2yxs[v].begin(),\
-    \ std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{p.second, p.first}));\n\
-    \        segtrees[v].set(i, val);\n    }\n    void _add(int v, Pt p, S val) {\n\
-    \        auto i = std::distance(_range2yxs[v].begin(), std::lower_bound(_range2yxs[v].begin(),\
-    \ _range2yxs[v].end(), Pt{p.second, p.first}));\n        segtrees[v].set(i, op(segtrees[v].get(i),\
-    \ val));\n    }\n    S _prod(int v, Coordinate yl, Coordinate yr) const {\n  \
-    \      auto comp = [&](const Pt &l, const Pt &r) { return l.first < r.first; };\n\
-    \        auto il = std::distance(_range2yxs[v].begin(), std::lower_bound(_range2yxs[v].begin(),\
-    \ _range2yxs[v].end(), Pt{yl, yl}, comp));\n        auto ir = std::distance(_range2yxs[v].begin(),\
-    \ std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{yr, yr}, comp));\n\
-    \        return segtrees[v].prod(il, ir);\n    }\n\npublic:\n    rangetree() =\
-    \ default;\n    void add_point(Coordinate x, Coordinate y) noexcept { _pts.emplace_back(x,\
-    \ y); }\n    void build() {\n        std::sort(_pts.begin(), _pts.end());\n  \
-    \      _pts.erase(std::unique(_pts.begin(), _pts.end()), _pts.end());\n      \
-    \  n = _pts.size();\n\n        _range2yxs.resize(n * 2);\n        for (int i =\
-    \ 0; i < n; i++) _range2yxs[n + i] = {{_pts[i].second, _pts[i].first}};\n    \
-    \    for (int i = n - 1; i > 0; i--) {\n            auto &lch = _range2yxs[i *\
-    \ 2];\n            auto &rch = _range2yxs[i * 2 + 1];\n            std::merge(lch.begin(),\
-    \ lch.end(), rch.begin(), rch.end(), std::back_inserter(_range2yxs[i]));\n   \
-    \         _range2yxs[i].erase(std::unique(_range2yxs[i].begin(), _range2yxs[i].end()),\
-    \ _range2yxs[i].end());\n        }\n        for (const auto &v : _range2yxs) segtrees.emplace_back(v.size());\n\
+    \ _set(int v, Pt p, S val) {\n        auto i = std::distance(\n            _range2yxs[v].begin(),\n\
+    \            std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{p.second,\
+    \ p.first}));\n        segtrees[v].set(i, val);\n    }\n    void _add(int v, Pt\
+    \ p, S val) {\n        auto i = std::distance(\n            _range2yxs[v].begin(),\n\
+    \            std::lower_bound(_range2yxs[v].begin(), _range2yxs[v].end(), Pt{p.second,\
+    \ p.first}));\n        segtrees[v].set(i, op(segtrees[v].get(i), val));\n    }\n\
+    \    S _prod(int v, Coordinate yl, Coordinate yr) const {\n        auto comp =\
+    \ [&](const Pt &l, const Pt &r) { return l.first < r.first; };\n        auto il\
+    \ = std::distance(\n            _range2yxs[v].begin(),\n            std::lower_bound(_range2yxs[v].begin(),\
+    \ _range2yxs[v].end(), Pt{yl, yl}, comp));\n        auto ir = std::distance(\n\
+    \            _range2yxs[v].begin(),\n            std::lower_bound(_range2yxs[v].begin(),\
+    \ _range2yxs[v].end(), Pt{yr, yr}, comp));\n        return segtrees[v].prod(il,\
+    \ ir);\n    }\n\npublic:\n    rangetree() = default;\n    void add_point(Coordinate\
+    \ x, Coordinate y) noexcept { _pts.emplace_back(x, y); }\n    void build() {\n\
+    \        std::sort(_pts.begin(), _pts.end());\n        _pts.erase(std::unique(_pts.begin(),\
+    \ _pts.end()), _pts.end());\n        n = _pts.size();\n\n        _range2yxs.resize(n\
+    \ * 2);\n        for (int i = 0; i < n; i++) _range2yxs[n + i] = {{_pts[i].second,\
+    \ _pts[i].first}};\n        for (int i = n - 1; i > 0; i--) {\n            auto\
+    \ &lch = _range2yxs[i * 2];\n            auto &rch = _range2yxs[i * 2 + 1];\n\
+    \            std::merge(\n                lch.begin(), lch.end(), rch.begin(),\
+    \ rch.end(), std::back_inserter(_range2yxs[i]));\n            _range2yxs[i].erase(\n\
+    \                std::unique(_range2yxs[i].begin(), _range2yxs[i].end()), _range2yxs[i].end());\n\
+    \        }\n        for (const auto &v : _range2yxs) segtrees.emplace_back(v.size());\n\
     \    }\n    void set(Coordinate x, Coordinate y, S val) {\n        int i = std::distance(_pts.begin(),\
     \ std::lower_bound(_pts.begin(), _pts.end(), Pt{x, y}));\n        assert(i < n\
     \ and _pts[i] == std::make_pair(x, y));\n        for (i += n; i; i >>= 1) _set(i,\
@@ -62,20 +64,21 @@ data:
     \      for (i += n; i; i >>= 1) _add(i, {x, y}, val);\n    }\n    S prod(Coordinate\
     \ xl, Coordinate xr, Coordinate yl, Coordinate yr) const {\n        auto comp\
     \ = [](const Pt &l, const Pt &r) { return l.first < r.first; };\n        int l\
-    \ = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(), _pts.end(),\
-    \ Pt{xl, yr}, comp));\n        int r = n + std::distance(_pts.begin(), std::lower_bound(_pts.begin(),\
-    \ _pts.end(), Pt{xr, yr}, comp));\n        S ret = e();\n        while (l < r)\
-    \ {\n            if (l & 1) ret = op(ret, _prod(l++, yl, yr));\n            if\
-    \ (r & 1) ret = op(ret, _prod(--r, yl, yr));\n            l >>= 1, r >>= 1;\n\
-    \        }\n        return ret;\n    }\n    S get(Coordinate x, Coordinate y)\
-    \ const { return prod(x, x + 1, y, y + 1); }\n};\n"
+    \ = n + std::distance(_pts.begin(),\n                                  std::lower_bound(_pts.begin(),\
+    \ _pts.end(), Pt{xl, yr}, comp));\n        int r = n + std::distance(_pts.begin(),\n\
+    \                                  std::lower_bound(_pts.begin(), _pts.end(),\
+    \ Pt{xr, yr}, comp));\n        S ret = e();\n        while (l < r) {\n       \
+    \     if (l & 1) ret = op(ret, _prod(l++, yl, yr));\n            if (r & 1) ret\
+    \ = op(ret, _prod(--r, yl, yr));\n            l >>= 1, r >>= 1;\n        }\n \
+    \       return ret;\n    }\n    S get(Coordinate x, Coordinate y) const { return\
+    \ prod(x, x + 1, y, y + 1); }\n};\n"
   dependsOn:
   - segmenttree/acl_segtree.hpp
   isVerificationFile: false
   path: segmenttree/rangetree.hpp
   requiredBy: []
-  timestamp: '2021-08-22 17:31:59+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - segmenttree/test/rangetree.yuki1625.test.cpp
   - segmenttree/test/rangetree.test.cpp

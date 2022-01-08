@@ -26,24 +26,25 @@ data:
     \ deg;\n        Node *parent, *left, *right, *child;\n        bool mark;\n   \
     \     Node() = default;\n        Node(Node const &) = default;\n        Node(Node\
     \ &&) = default;\n        Node &operator=(Node const &) = default;\n        Node\
-    \ &operator=(Node &&) = default;\n        Node(Tp v) : val(v), deg(0), parent(nullptr),\
-    \ left(nullptr), right(nullptr), child(nullptr), mark(false) {}\n        friend\
-    \ std::ostream &operator<<(std::ostream &os, const Node &n) {\n            os\
-    \ << '(' << n.val << ',';\n            if (n.child != nullptr) os << *(n.child)\
-    \ << ',';\n            Node *now = n.right;\n            while (now != &n) {\n\
-    \                os << now->val << ',';\n                if (now->child != nullptr)\
-    \ os << *now->child << ',';\n                now = now->right;\n            }\n\
-    \            os << ')';\n            return os;\n        }\n    };\n\n    int\
-    \ sz;\n    std::list<Node *> roots;\n    Node *ptop;\n    inline void _chmin(Node\
-    \ *cand) noexcept {\n        if (ptop == nullptr or cand->val < ptop->val) ptop\
-    \ = cand;\n    }\n    fibonacci_heap() : sz(0), roots({}), ptop(nullptr) {}\n\n\
-    \    bool empty() const noexcept { return sz == 0; }\n    int size() const noexcept\
-    \ { return sz; }\n\n    std::array<Node *, 30> _arr;\n    void _fmerge(Node *ptr)\
-    \ {\n        int d = ptr->deg;\n        if (_arr[d] == nullptr)\n            _arr[d]\
-    \ = ptr;\n        else {\n            Node *cptr = _arr[d];\n            if (cptr->val\
-    \ < ptr->val) std::swap(ptr, cptr);\n            ptr->deg++;\n            cptr->parent\
-    \ = ptr;\n            if (ptr->child == nullptr)\n                ptr->child =\
-    \ cptr;\n            else {\n                Node *cl = ptr->child, *cr = ptr->child->right;\n\
+    \ &operator=(Node &&) = default;\n        Node(Tp v)\n            : val(v), deg(0),\
+    \ parent(nullptr), left(nullptr), right(nullptr), child(nullptr),\n          \
+    \    mark(false) {}\n        friend std::ostream &operator<<(std::ostream &os,\
+    \ const Node &n) {\n            os << '(' << n.val << ',';\n            if (n.child\
+    \ != nullptr) os << *(n.child) << ',';\n            Node *now = n.right;\n   \
+    \         while (now != &n) {\n                os << now->val << ',';\n      \
+    \          if (now->child != nullptr) os << *now->child << ',';\n            \
+    \    now = now->right;\n            }\n            os << ')';\n            return\
+    \ os;\n        }\n    };\n\n    int sz;\n    std::list<Node *> roots;\n    Node\
+    \ *ptop;\n    inline void _chmin(Node *cand) noexcept {\n        if (ptop == nullptr\
+    \ or cand->val < ptop->val) ptop = cand;\n    }\n    fibonacci_heap() : sz(0),\
+    \ roots({}), ptop(nullptr) {}\n\n    bool empty() const noexcept { return sz ==\
+    \ 0; }\n    int size() const noexcept { return sz; }\n\n    std::array<Node *,\
+    \ 30> _arr;\n    void _fmerge(Node *ptr) {\n        int d = ptr->deg;\n      \
+    \  if (_arr[d] == nullptr)\n            _arr[d] = ptr;\n        else {\n     \
+    \       Node *cptr = _arr[d];\n            if (cptr->val < ptr->val) std::swap(ptr,\
+    \ cptr);\n            ptr->deg++;\n            cptr->parent = ptr;\n         \
+    \   if (ptr->child == nullptr)\n                ptr->child = cptr;\n         \
+    \   else {\n                Node *cl = ptr->child, *cr = ptr->child->right;\n\
     \                assert(cl->right == cr and cr->left == cl);\n               \
     \ cptr->left = cl, cptr->right = cr, cl->right = cr->left = cptr;\n          \
     \  }\n            _arr[d] = nullptr;\n            _fmerge(ptr);\n        }\n \
@@ -87,9 +88,9 @@ data:
     \        return true;\n    }\n    Tp top() const {\n        assert(ptop != nullptr);\n\
     \        return ptop->val;\n    }\n    friend std::ostream &operator<<(std::ostream\
     \ &os, const fibonacci_heap &hp) {\n        os << \"[(fibonacci_heap: sz=\" <<\
-    \ hp.sz << \", top=\" << hp.ptop->val << \", #tree = \" << hp.roots.size() <<\
-    \ \")\";\n        for (auto x : hp.roots) { os << *x << \", \"; }\n        os\
-    \ << ']';\n        return os;\n    }\n};\n\n#include <utility>\n#include <vector>\n\
+    \ hp.sz << \", top=\" << hp.ptop->val\n           << \", #tree = \" << hp.roots.size()\
+    \ << \")\";\n        for (auto x : hp.roots) { os << *x << \", \"; }\n       \
+    \ os << ']';\n        return os;\n    }\n};\n\n#include <utility>\n#include <vector>\n\
     template <typename Tp> struct heap {\n    using P = std::pair<Tp, int>;\n    fibonacci_heap<P>\
     \ _heap;\n    std::vector<typename fibonacci_heap<P>::Node *> vp;\n    std::vector<Tp>\
     \ result;\n    void initialize(int N, Tp initval) {\n        _heap.clear();\n\
@@ -150,7 +151,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/fibonacci_heap_shortestpath.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 23:47:50+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/fibonacci_heap_shortestpath.test.cpp

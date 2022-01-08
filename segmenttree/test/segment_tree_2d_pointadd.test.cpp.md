@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/segment_tree_2d.hpp
     title: segmenttree/segment_tree_2d.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842
@@ -23,7 +23,7 @@ data:
     \ q) == defaultRET\n//   - merge_ret: [TRET, TRET] -> TRET, g(defaultRET, x) ==\
     \ x, g(x, y) = g(y, x)\n//   - commutability f(e(x, y), q) == g(f(x, q), f(y,\
     \ q))\ntemplate <typename TDATA, typename TRET, typename TQUERY, typename E, typename\
-    \ F, typename G> struct SegmentTree2D {\n    int H, W;\n    int hhead, whead;\n\
+    \ F, typename G>\nstruct SegmentTree2D {\n    int H, W;\n    int hhead, whead;\n\
     \    TDATA defaultDATA;\n    TRET defaultRET;\n    E merge_data;\n    F data2ret;\n\
     \    G merge_ret;\n    int DH, DW;\n    std::vector<TDATA> data;\n    inline TDATA\
     \ &at(int h, int w) { return data[DW * h + w]; }\n\n    inline void _merge_w(int\
@@ -34,9 +34,10 @@ data:
     \            at(h, w) = merge_data(at(2 * h + 1, w), at(2 * h + 2, w));\n    \
     \    else if (2 * h + 2 == DH)\n            at(h, w) = at(2 * h + 1, w);\n   \
     \     else\n            at(h, w) = defaultDATA;\n    }\n    SegmentTree2D(const\
-    \ std::vector<std::vector<TDATA>> &mat, TDATA defaultDATA, E merge_data, F data2ret,\
-    \ G merge_ret) : H(mat.size()), W(mat[0].size()), defaultDATA(defaultDATA), defaultRET(data2ret(defaultDATA,\
-    \ TQUERY(0))), merge_data(merge_data), data2ret(data2ret), merge_ret(merge_ret)\
+    \ std::vector<std::vector<TDATA>> &mat, TDATA defaultDATA, E merge_data,\n   \
+    \               F data2ret, G merge_ret)\n        : H(mat.size()), W(mat[0].size()),\
+    \ defaultDATA(defaultDATA),\n          defaultRET(data2ret(defaultDATA, TQUERY(0))),\
+    \ merge_data(merge_data), data2ret(data2ret),\n          merge_ret(merge_ret)\
     \ {\n        int Htmp = 1, Wtmp = 1;\n        while (Htmp < H) Htmp <<= 1;\n \
     \       while (Wtmp < W) Wtmp <<= 1;\n        hhead = Htmp - 1, whead = Wtmp -\
     \ 1;\n        DH = hhead + H, DW = whead + W;\n        data.assign(DH * DW, defaultDATA);\n\
@@ -54,14 +55,15 @@ data:
     \ wr, int lo, int hi, int id_, TQUERY q) {\n        if (hr <= lo or hi <= hl)\
     \ return defaultRET;\n        if (hl <= lo and hi <= hr) return _get_w(wl, wr,\
     \ 0, whead + 1, id_, 0, q);\n        return merge_ret(_get_h(hl, hr, wl, wr, lo,\
-    \ (lo + hi) / 2, 2 * id_ + 1, q), _get_h(hl, hr, wl, wr, (lo + hi) / 2, hi, 2\
-    \ * id_ + 2, q));\n    }\n    TRET _get_w(int wl, int wr, int lo, int hi, int\
-    \ id_h, int id_w, TQUERY q) {\n        if (wr <= lo or hi <= wl) return defaultRET;\n\
-    \        if (wl <= lo and hi <= wr) return data2ret(at(id_h, id_w), q);\n    \
-    \    return merge_ret(_get_w(wl, wr, lo, (lo + hi) / 2, id_h, 2 * id_w + 1, q),\
-    \ _get_w(wl, wr, (lo + hi) / 2, hi, id_h, 2 * id_w + 2, q));\n    }\n    // [hl,\
-    \ hr) * [wl, wr)\n    TRET get(int hl, int hr, int wl, int wr, TQUERY q) { return\
-    \ _get_h(hl, hr, wl, wr, 0, hhead + 1, 0, q); }\n    friend std::ostream &operator<<(std::ostream\
+    \ (lo + hi) / 2, 2 * id_ + 1, q),\n                         _get_h(hl, hr, wl,\
+    \ wr, (lo + hi) / 2, hi, 2 * id_ + 2, q));\n    }\n    TRET _get_w(int wl, int\
+    \ wr, int lo, int hi, int id_h, int id_w, TQUERY q) {\n        if (wr <= lo or\
+    \ hi <= wl) return defaultRET;\n        if (wl <= lo and hi <= wr) return data2ret(at(id_h,\
+    \ id_w), q);\n        return merge_ret(_get_w(wl, wr, lo, (lo + hi) / 2, id_h,\
+    \ 2 * id_w + 1, q),\n                         _get_w(wl, wr, (lo + hi) / 2, hi,\
+    \ id_h, 2 * id_w + 2, q));\n    }\n    // [hl, hr) * [wl, wr)\n    TRET get(int\
+    \ hl, int hr, int wl, int wr, TQUERY q) {\n        return _get_h(hl, hr, wl, wr,\
+    \ 0, hhead + 1, 0, q);\n    }\n    friend std::ostream &operator<<(std::ostream\
     \ &os, SegmentTree2D s) {\n        os << \"[SegmentTree\" << s.H << \"*\" << s.W\
     \ << \"\\n\";\n        for (int h = 0; h < s.H; h++) {\n            os << \"[\"\
     ;\n            for (int w = 0; w < s.W; w++) os << s.at(h + s.hhead, w + s.whead)\
@@ -73,15 +75,15 @@ data:
     \ >> T >> Q;\n\n    // Point add, range sum (like binary-indexed-tree)\n    vector<vector<int>>\
     \ mat(H, vector<int>(W));\n    auto f = [](int l, int r) { return l + r; };\n\
     \    auto g = [](int x, int q) { return x; };\n    SegmentTree2D<int, int, int,\
-    \ decltype(f), decltype(g), decltype(f)> s1(mat, 0, f, g, f), s2(mat, 0, f, g,\
-    \ f);\n\n    queue<pair<int, pair<int, int>>> q;\n    while (Q--) {\n        int\
-    \ t, c, h, w;\n        cin >> t >> c >> h >> w;\n        h--, w--;\n        while\
-    \ (q.size() and q.front().first <= t) {\n            int x, y;\n            tie(x,\
-    \ y) = q.front().second;\n            mat[x][y] = 2;\n            s1.update(x,\
-    \ y, 0);\n            s2.update(x, y, 1);\n            q.pop();\n        }\n \
-    \       if (c == 0) {\n            mat[h][w] = 1;\n            s1.update(h, w,\
-    \ 1);\n            q.emplace(t + T, make_pair(h, w));\n        }\n        if (c\
-    \ == 1) {\n            if (mat[h][w] == 2) {\n                mat[h][w] = 0;\n\
+    \ decltype(f), decltype(g), decltype(f)> s1(mat, 0, f, g, f),\n        s2(mat,\
+    \ 0, f, g, f);\n\n    queue<pair<int, pair<int, int>>> q;\n    while (Q--) {\n\
+    \        int t, c, h, w;\n        cin >> t >> c >> h >> w;\n        h--, w--;\n\
+    \        while (q.size() and q.front().first <= t) {\n            int x, y;\n\
+    \            tie(x, y) = q.front().second;\n            mat[x][y] = 2;\n     \
+    \       s1.update(x, y, 0);\n            s2.update(x, y, 1);\n            q.pop();\n\
+    \        }\n        if (c == 0) {\n            mat[h][w] = 1;\n            s1.update(h,\
+    \ w, 1);\n            q.emplace(t + T, make_pair(h, w));\n        }\n        if\
+    \ (c == 1) {\n            if (mat[h][w] == 2) {\n                mat[h][w] = 0;\n\
     \                s2.update(h, w, 0);\n            }\n        }\n        if (c\
     \ == 2) {\n            int h2, w2;\n            cin >> h2 >> w2;\n           \
     \ int m = s2.get(h, h2, w, w2, -1);\n            int n = s1.get(h, h2, w, w2,\
@@ -93,15 +95,15 @@ data:
     \ >> Q;\n\n    // Point add, range sum (like binary-indexed-tree)\n    vector<vector<int>>\
     \ mat(H, vector<int>(W));\n    auto f = [](int l, int r) { return l + r; };\n\
     \    auto g = [](int x, int q) { return x; };\n    SegmentTree2D<int, int, int,\
-    \ decltype(f), decltype(g), decltype(f)> s1(mat, 0, f, g, f), s2(mat, 0, f, g,\
-    \ f);\n\n    queue<pair<int, pair<int, int>>> q;\n    while (Q--) {\n        int\
-    \ t, c, h, w;\n        cin >> t >> c >> h >> w;\n        h--, w--;\n        while\
-    \ (q.size() and q.front().first <= t) {\n            int x, y;\n            tie(x,\
-    \ y) = q.front().second;\n            mat[x][y] = 2;\n            s1.update(x,\
-    \ y, 0);\n            s2.update(x, y, 1);\n            q.pop();\n        }\n \
-    \       if (c == 0) {\n            mat[h][w] = 1;\n            s1.update(h, w,\
-    \ 1);\n            q.emplace(t + T, make_pair(h, w));\n        }\n        if (c\
-    \ == 1) {\n            if (mat[h][w] == 2) {\n                mat[h][w] = 0;\n\
+    \ decltype(f), decltype(g), decltype(f)> s1(mat, 0, f, g, f),\n        s2(mat,\
+    \ 0, f, g, f);\n\n    queue<pair<int, pair<int, int>>> q;\n    while (Q--) {\n\
+    \        int t, c, h, w;\n        cin >> t >> c >> h >> w;\n        h--, w--;\n\
+    \        while (q.size() and q.front().first <= t) {\n            int x, y;\n\
+    \            tie(x, y) = q.front().second;\n            mat[x][y] = 2;\n     \
+    \       s1.update(x, y, 0);\n            s2.update(x, y, 1);\n            q.pop();\n\
+    \        }\n        if (c == 0) {\n            mat[h][w] = 1;\n            s1.update(h,\
+    \ w, 1);\n            q.emplace(t + T, make_pair(h, w));\n        }\n        if\
+    \ (c == 1) {\n            if (mat[h][w] == 2) {\n                mat[h][w] = 0;\n\
     \                s2.update(h, w, 0);\n            }\n        }\n        if (c\
     \ == 2) {\n            int h2, w2;\n            cin >> h2 >> w2;\n           \
     \ int m = s2.get(h, h2, w, w2, -1);\n            int n = s1.get(h, h2, w, w2,\
@@ -111,8 +113,8 @@ data:
   isVerificationFile: true
   path: segmenttree/test/segment_tree_2d_pointadd.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 16:52:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: segmenttree/test/segment_tree_2d_pointadd.test.cpp
 layout: document

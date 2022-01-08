@@ -24,8 +24,8 @@ data:
     \ solve() {\n        if (directed) {\n            if (std::count_if(deg.begin(),\
     \ deg.end(), [](int x) { return x != 0; })) return {};\n        } else {\n   \
     \         if (std::count_if(deg.begin(), deg.end(), [](int x) { return (x & 1)\
-    \ != 0; })) return {};\n        }\n        std::vector<std::vector<Edge>> ret;\n\
-    \        for (int i = 0; i < int(to.size()); i++) {\n            if (to[i].empty()\
+    \ != 0; }))\n                return {};\n        }\n        std::vector<std::vector<Edge>>\
+    \ ret;\n        for (int i = 0; i < int(to.size()); i++) {\n            if (to[i].empty()\
     \ or used_vertex[i]) continue;\n            ret.emplace_back(go(i));\n       \
     \ }\n        return ret;\n    }\n\n    std::vector<Edge> go(Vertex s) {\n    \
     \    std::vector<std::pair<Vertex, Edge>> st;\n        std::vector<Edge> ord;\n\
@@ -51,8 +51,8 @@ data:
     \ solve() {\n        if (directed) {\n            if (std::count_if(deg.begin(),\
     \ deg.end(), [](int x) { return x != 0; })) return {};\n        } else {\n   \
     \         if (std::count_if(deg.begin(), deg.end(), [](int x) { return (x & 1)\
-    \ != 0; })) return {};\n        }\n        std::vector<std::vector<Edge>> ret;\n\
-    \        for (int i = 0; i < int(to.size()); i++) {\n            if (to[i].empty()\
+    \ != 0; }))\n                return {};\n        }\n        std::vector<std::vector<Edge>>\
+    \ ret;\n        for (int i = 0; i < int(to.size()); i++) {\n            if (to[i].empty()\
     \ or used_vertex[i]) continue;\n            ret.emplace_back(go(i));\n       \
     \ }\n        return ret;\n    }\n\n    std::vector<Edge> go(Vertex s) {\n    \
     \    std::vector<std::pair<Vertex, Edge>> st;\n        std::vector<Edge> ord;\n\
@@ -68,7 +68,7 @@ data:
   isVerificationFile: false
   path: graph/eulerian_trail.hpp
   requiredBy: []
-  timestamp: '2021-05-27 15:53:52+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/eulerian_trail.hpp

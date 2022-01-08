@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
@@ -106,9 +106,9 @@ data:
     \ a /= p;\n        }\n    }\n    for (int d = 0; d < int(primes.size()); d++)\
     \ {\n        Int p = primes[d];\n        for (auto i : p2is[d]) {\n          \
     \  auto comp = [](const std::pair<Int, Val> &l, const std::pair<Int, Val> &r)\
-    \ { return l.first < r.first; };\n            auto itr = std::lower_bound(f.begin(),\
-    \ f.end(), std::make_pair(f[i].first / p, 0), comp);\n            itr->second\
-    \ -= f[i].second;\n        }\n    }\n}\n"
+    \ {\n                return l.first < r.first;\n            };\n            auto\
+    \ itr = std::lower_bound(f.begin(), f.end(), std::make_pair(f[i].first / p, 0),\
+    \ comp);\n            itr->second -= f[i].second;\n        }\n    }\n}\n"
   code: "#pragma once\n#include \"../number/sieve.hpp\"\n#include <algorithm>\n#include\
     \ <cassert>\n#include <utility>\n#include <vector>\n\n// CUT begin\n// f[n]\u306B\
     \u5BFE\u3057\u3066\u3001\u5168\u3066\u306En\u306E\u500D\u6570n*i\u306B\u5BFE\u3059\
@@ -143,15 +143,15 @@ data:
     \ a /= p;\n        }\n    }\n    for (int d = 0; d < int(primes.size()); d++)\
     \ {\n        Int p = primes[d];\n        for (auto i : p2is[d]) {\n          \
     \  auto comp = [](const std::pair<Int, Val> &l, const std::pair<Int, Val> &r)\
-    \ { return l.first < r.first; };\n            auto itr = std::lower_bound(f.begin(),\
-    \ f.end(), std::make_pair(f[i].first / p, 0), comp);\n            itr->second\
-    \ -= f[i].second;\n        }\n    }\n}\n"
+    \ {\n                return l.first < r.first;\n            };\n            auto\
+    \ itr = std::lower_bound(f.begin(), f.end(), std::make_pair(f[i].first / p, 0),\
+    \ comp);\n            itr->second -= f[i].second;\n        }\n    }\n}\n"
   dependsOn:
   - number/sieve.hpp
   isVerificationFile: false
   path: number/zeta_moebius_transform.hpp
   requiredBy: []
-  timestamp: '2021-10-30 11:24:11+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: number/zeta_moebius_transform.hpp

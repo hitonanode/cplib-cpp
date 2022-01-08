@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/test/slope_trick_stress.test.cpp
     title: other_algorithms/test/slope_trick_stress.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://ei1333.github.io/library/structure/others/slope-trick.cpp
@@ -97,7 +97,7 @@ data:
   path: other_algorithms/slope_trick.hpp
   requiredBy: []
   timestamp: '2021-09-18 11:42:06+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - other_algorithms/test/slope_trick_stress.test.cpp
 documentation_of: other_algorithms/slope_trick.hpp

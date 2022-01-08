@@ -16,7 +16,7 @@ data:
     #include <limits>\n#include <queue>\n#include <utility>\n#include <vector>\n\n\
     // CUT begin\n// Shortest cycle detection of UNDIRECTED SIMPLE graphs\n// Verified:\
     \ https://yukicoder.me/submissions/594507\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
-    \ / 2> struct ShortestCycleOfUndirectedWeighted {\n    int V, E;\n    std::vector<std::vector<std::pair<int,\
+    \ / 2>\nstruct ShortestCycleOfUndirectedWeighted {\n    int V, E;\n    std::vector<std::vector<std::pair<int,\
     \ T>>> to; // (nxt, weight)\n    ShortestCycleOfUndirectedWeighted() = default;\n\
     \    ShortestCycleOfUndirectedWeighted(int V) : V(V), E(0), to(V) {}\n    void\
     \ add_edge(int s, int t, T len) {\n        assert(0 <= s and s < V);\n       \
@@ -48,7 +48,7 @@ data:
   code: "#pragma once\n#include <cassert>\n#include <limits>\n#include <queue>\n#include\
     \ <utility>\n#include <vector>\n\n// CUT begin\n// Shortest cycle detection of\
     \ UNDIRECTED SIMPLE graphs\n// Verified: https://yukicoder.me/submissions/594507\n\
-    template <typename T, T INF = std::numeric_limits<T>::max() / 2> struct ShortestCycleOfUndirectedWeighted\
+    template <typename T, T INF = std::numeric_limits<T>::max() / 2>\nstruct ShortestCycleOfUndirectedWeighted\
     \ {\n    int V, E;\n    std::vector<std::vector<std::pair<int, T>>> to; // (nxt,\
     \ weight)\n    ShortestCycleOfUndirectedWeighted() = default;\n    ShortestCycleOfUndirectedWeighted(int\
     \ V) : V(V), E(0), to(V) {}\n    void add_edge(int s, int t, T len) {\n      \
@@ -81,7 +81,7 @@ data:
   isVerificationFile: false
   path: graph/shortest_cycle_weighted.hpp
   requiredBy: []
-  timestamp: '2021-05-01 20:55:29+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/shortest_cycle.test.cpp

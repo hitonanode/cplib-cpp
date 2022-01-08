@@ -4,9 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mincostflow.radixheaparray.yuki1288.test.cpp
-    title: combinatorial_opt/test/mincostflow.radixheaparray.yuki1288.test.cpp
-  - icon: ':heavy_check_mark:'
     path: data_structure/test/radix_heap_array.dijkstra.test.cpp
     title: data_structure/test/radix_heap_array.dijkstra.test.cpp
   _isVerificationFailed: false
@@ -20,9 +17,9 @@ data:
     \    std::array<std::vector<std::pair<Uint, int>>, std::numeric_limits<Uint>::digits\
     \ + 1> v;\n\n    struct smallpii {\n        unsigned b : 7;\n        int j : 25;\n\
     \    };\n    std::vector<smallpii> i2bj;\n\n    template <class U, typename std::enable_if<sizeof(U)\
-    \ == 4>::type* = nullptr>\n    static inline unsigned bucket(U x) noexcept {\n\
+    \ == 4>::type * = nullptr>\n    static inline unsigned bucket(U x) noexcept {\n\
     \        return x ? 32 - __builtin_clz(x) : 0;\n    }\n    template <class U,\
-    \ typename std::enable_if<sizeof(U) == 8>::type* = nullptr>\n    static inline\
+    \ typename std::enable_if<sizeof(U) == 8>::type * = nullptr>\n    static inline\
     \ unsigned bucket(U x) noexcept {\n        return x ? 64 - __builtin_clzll(x)\
     \ : 0;\n    }\n\n    void pull() {\n        if (!v[0].empty()) return;\n     \
     \   int b = 1;\n        while (v[b].empty()) ++b;\n        last = v[b].back().first;\n\
@@ -45,17 +42,18 @@ data:
     \ i), v[bold].pop_back();\n            } else {\n                v[bold][i2bj[i].j].first\
     \ = vnew;\n            }\n        }\n    }\n\n    void pop() { argmin_pop(); }\n\
     \    std::pair<Uint, int> top() { return pull(), v[0].back(); }\n    [[deprecated(\"\
-    NOT usual emplace() opeation!\")]] void emplace(Uint vnew, int i) { chmin(vnew,\
-    \ i); }\n\n    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }\n};\n"
+    NOT usual emplace() opeation!\")]] void emplace(Uint vnew, int i) {\n        chmin(vnew,\
+    \ i);\n    }\n\n    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }\n\
+    };\n"
   code: "#pragma once\n#include <array>\n#include <limits>\n#include <type_traits>\n\
     #include <utility>\n#include <vector>\n\ntemplate <class Uint> class radix_heap_array\
     \ {\n    int sz;\n    Uint last;\n    std::array<std::vector<std::pair<Uint, int>>,\
     \ std::numeric_limits<Uint>::digits + 1> v;\n\n    struct smallpii {\n       \
     \ unsigned b : 7;\n        int j : 25;\n    };\n    std::vector<smallpii> i2bj;\n\
-    \n    template <class U, typename std::enable_if<sizeof(U) == 4>::type* = nullptr>\n\
+    \n    template <class U, typename std::enable_if<sizeof(U) == 4>::type * = nullptr>\n\
     \    static inline unsigned bucket(U x) noexcept {\n        return x ? 32 - __builtin_clz(x)\
-    \ : 0;\n    }\n    template <class U, typename std::enable_if<sizeof(U) == 8>::type*\
-    \ = nullptr>\n    static inline unsigned bucket(U x) noexcept {\n        return\
+    \ : 0;\n    }\n    template <class U, typename std::enable_if<sizeof(U) == 8>::type\
+    \ * = nullptr>\n    static inline unsigned bucket(U x) noexcept {\n        return\
     \ x ? 64 - __builtin_clzll(x) : 0;\n    }\n\n    void pull() {\n        if (!v[0].empty())\
     \ return;\n        int b = 1;\n        while (v[b].empty()) ++b;\n        last\
     \ = v[b].back().first;\n        for (int j = 0; j < int(v[b].size()); j++) last\
@@ -77,16 +75,16 @@ data:
     \ i), v[bold].pop_back();\n            } else {\n                v[bold][i2bj[i].j].first\
     \ = vnew;\n            }\n        }\n    }\n\n    void pop() { argmin_pop(); }\n\
     \    std::pair<Uint, int> top() { return pull(), v[0].back(); }\n    [[deprecated(\"\
-    NOT usual emplace() opeation!\")]] void emplace(Uint vnew, int i) { chmin(vnew,\
-    \ i); }\n\n    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }\n};\n"
+    NOT usual emplace() opeation!\")]] void emplace(Uint vnew, int i) {\n        chmin(vnew,\
+    \ i);\n    }\n\n    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }\n\
+    };\n"
   dependsOn: []
   isVerificationFile: false
   path: data_structure/radix_heap_array.hpp
   requiredBy: []
-  timestamp: '2021-09-09 22:48:03+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mincostflow.radixheaparray.yuki1288.test.cpp
   - data_structure/test/radix_heap_array.dijkstra.test.cpp
 documentation_of: data_structure/radix_heap_array.hpp
 layout: document

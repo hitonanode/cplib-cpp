@@ -20,7 +20,7 @@ data:
     \ 2 \"combinatorial_opt/networksimplex.hpp\"\n#include <algorithm>\n#include <cassert>\n\
     #include <chrono>\n#include <cmath>\n#include <limits>\n#include <random>\n#include\
     \ <utility>\n#include <vector>\n\n// CUT begin\n// This program is the modificatiosn\
-    \ of the [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)\n\
+    \ of the\n// [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)\n\
     //\n/* -*- mode: C++; indent-tabs-mode: nil; -*-\n *\n * This file is a part of\
     \ LEMON, a generic C++ optimization library.\n *\n * Copyright (C) 2003-2013\n\
     \ * Egervary Jeno Kombinatorikus Optimalizalasi Kutatocsoport\n * (Egervary Research\
@@ -99,7 +99,7 @@ data:
     \ _search_arc_num;\n\n        // Pivot rule data\n        int _next_arc;\n\n \
     \   public:\n        // Constructor\n        FirstEligiblePivotRule(NetworkSimplex\
     \ &ns)\n            : _source(ns._source), _target(ns._target), _cost(ns._cost),\
-    \ _state(ns._state), _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num),\
+    \ _state(ns._state),\n              _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num),\
     \ _next_arc(0) {}\n\n        // Find next entering arc\n        bool findEnteringArc()\
     \ {\n            Cost c;\n            for (int e = _next_arc; e != _search_arc_num;\
     \ ++e) {\n                c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n\
@@ -116,11 +116,11 @@ data:
     \ CostVector &_cost;\n        const CharVector &_state;\n        const CostVector\
     \ &_pi;\n        int &_in_arc;\n        int _search_arc_num;\n\n    public:\n\
     \        // Constructor\n        BestEligiblePivotRule(NetworkSimplex &ns)\n \
-    \           : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state),\
-    \ _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num) {}\n\n\
-    \        // Find next entering arc\n        bool findEnteringArc() {\n       \
-    \     Cost c, min = 0;\n            for (int e = 0; e != _search_arc_num; ++e)\
-    \ {\n                c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n\
+    \           : _source(ns._source), _target(ns._target), _cost(ns._cost), _state(ns._state),\n\
+    \              _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num)\
+    \ {}\n\n        // Find next entering arc\n        bool findEnteringArc() {\n\
+    \            Cost c, min = 0;\n            for (int e = 0; e != _search_arc_num;\
+    \ ++e) {\n                c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n\
     \                if (c < min) {\n                    min = c;\n              \
     \      _in_arc = e;\n                }\n            }\n            return min\
     \ < 0;\n        }\n\n    }; // class BestEligiblePivotRule\n\n    // Implementation\
@@ -131,22 +131,23 @@ data:
     \        int _search_arc_num;\n\n        // Pivot rule data\n        int _block_size;\n\
     \        int _next_arc;\n\n    public:\n        // Constructor\n        BlockSearchPivotRule(NetworkSimplex\
     \ &ns)\n            : _source(ns._source), _target(ns._target), _cost(ns._cost),\
-    \ _state(ns._state), _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num),\
+    \ _state(ns._state),\n              _pi(ns._pi), _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num),\
     \ _next_arc(0) {\n            // The main parameters of the pivot rule\n     \
     \       const double BLOCK_SIZE_FACTOR = 1.0;\n            const int MIN_BLOCK_SIZE\
-    \ = 10;\n\n            _block_size = std::max(int(BLOCK_SIZE_FACTOR * std::sqrt(double(_search_arc_num))),\
-    \ MIN_BLOCK_SIZE);\n        }\n\n        // Find next entering arc\n        bool\
-    \ findEnteringArc() {\n            Cost c, min = 0;\n            int cnt = _block_size;\n\
-    \            int e;\n            for (e = _next_arc; e != _search_arc_num; ++e)\
-    \ {\n                c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n\
-    \                if (c < min) {\n                    min = c;\n              \
-    \      _in_arc = e;\n                }\n                if (--cnt == 0) {\n  \
-    \                  if (min < 0) goto search_end;\n                    cnt = _block_size;\n\
-    \                }\n            }\n            for (e = 0; e != _next_arc; ++e)\
-    \ {\n                c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n\
-    \                if (c < min) {\n                    min = c;\n              \
-    \      _in_arc = e;\n                }\n                if (--cnt == 0) {\n  \
-    \                  if (min < 0) goto search_end;\n                    cnt = _block_size;\n\
+    \ = 10;\n\n            _block_size = std::max(\n                int(BLOCK_SIZE_FACTOR\
+    \ * std::sqrt(double(_search_arc_num))), MIN_BLOCK_SIZE);\n        }\n\n     \
+    \   // Find next entering arc\n        bool findEnteringArc() {\n            Cost\
+    \ c, min = 0;\n            int cnt = _block_size;\n            int e;\n      \
+    \      for (e = _next_arc; e != _search_arc_num; ++e) {\n                c = _state[e]\
+    \ * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n                if (c < min)\
+    \ {\n                    min = c;\n                    _in_arc = e;\n        \
+    \        }\n                if (--cnt == 0) {\n                    if (min < 0)\
+    \ goto search_end;\n                    cnt = _block_size;\n                }\n\
+    \            }\n            for (e = 0; e != _next_arc; ++e) {\n             \
+    \   c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n        \
+    \        if (c < min) {\n                    min = c;\n                    _in_arc\
+    \ = e;\n                }\n                if (--cnt == 0) {\n               \
+    \     if (min < 0) goto search_end;\n                    cnt = _block_size;\n\
     \                }\n            }\n            if (min >= 0) return false;\n\n\
     \        search_end:\n            _next_arc = e;\n            return true;\n \
     \       }\n\n    }; // class BlockSearchPivotRule\n\n    // Implementation of\
@@ -158,38 +159,38 @@ data:
     \ _candidates;\n        int _list_length, _minor_limit;\n        int _curr_length,\
     \ _minor_count;\n        int _next_arc;\n\n    public:\n        /// Constructor\n\
     \        CandidateListPivotRule(NetworkSimplex &ns)\n            : _source(ns._source),\
-    \ _target(ns._target), _cost(ns._cost), _state(ns._state), _pi(ns._pi), _in_arc(ns.in_arc),\
-    \ _search_arc_num(ns._search_arc_num), _next_arc(0) {\n            // The main\
-    \ parameters of the pivot rule\n            const double LIST_LENGTH_FACTOR =\
-    \ 0.25;\n            const int MIN_LIST_LENGTH = 10;\n            const double\
-    \ MINOR_LIMIT_FACTOR = 0.1;\n            const int MIN_MINOR_LIMIT = 3;\n\n  \
-    \          _list_length = std::max(int(LIST_LENGTH_FACTOR * std::sqrt(double(_search_arc_num))),\
-    \ MIN_LIST_LENGTH);\n            _minor_limit = std::max(int(MINOR_LIMIT_FACTOR\
-    \ * _list_length), MIN_MINOR_LIMIT);\n            _curr_length = _minor_count\
-    \ = 0;\n            _candidates.resize(_list_length);\n        }\n\n        ///\
-    \ Find next entering arc\n        bool findEnteringArc() {\n            Cost min,\
-    \ c;\n            int e;\n            if (_curr_length > 0 && _minor_count < _minor_limit)\
-    \ {\n                // Minor iteration: select the best eligible arc from the\n\
-    \                // current candidate list\n                ++_minor_count;\n\
-    \                min = 0;\n                for (int i = 0; i < _curr_length; ++i)\
-    \ {\n                    e = _candidates[i];\n                    c = _state[e]\
-    \ * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n                    if (c\
-    \ < min) {\n                        min = c;\n                        _in_arc\
-    \ = e;\n                    } else if (c >= 0) {\n                        _candidates[i--]\
-    \ = _candidates[--_curr_length];\n                    }\n                }\n \
-    \               if (min < 0) return true;\n            }\n\n            // Major\
-    \ iteration: build a new candidate list\n            min = 0;\n            _curr_length\
-    \ = 0;\n            for (e = _next_arc; e != _search_arc_num; ++e) {\n       \
-    \         c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n  \
-    \              if (c < 0) {\n                    _candidates[_curr_length++] =\
-    \ e;\n                    if (c < min) {\n                        min = c;\n \
-    \                       _in_arc = e;\n                    }\n                \
-    \    if (_curr_length == _list_length) goto search_end;\n                }\n \
-    \           }\n            for (e = 0; e != _next_arc; ++e) {\n              \
-    \  c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n         \
-    \       if (c < 0) {\n                    _candidates[_curr_length++] = e;\n \
-    \                   if (c < min) {\n                        min = c;\n       \
-    \                 _in_arc = e;\n                    }\n                    if\
+    \ _target(ns._target), _cost(ns._cost), _state(ns._state),\n              _pi(ns._pi),\
+    \ _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0) {\n  \
+    \          // The main parameters of the pivot rule\n            const double\
+    \ LIST_LENGTH_FACTOR = 0.25;\n            const int MIN_LIST_LENGTH = 10;\n  \
+    \          const double MINOR_LIMIT_FACTOR = 0.1;\n            const int MIN_MINOR_LIMIT\
+    \ = 3;\n\n            _list_length = std::max(\n                int(LIST_LENGTH_FACTOR\
+    \ * std::sqrt(double(_search_arc_num))), MIN_LIST_LENGTH);\n            _minor_limit\
+    \ = std::max(int(MINOR_LIMIT_FACTOR * _list_length), MIN_MINOR_LIMIT);\n     \
+    \       _curr_length = _minor_count = 0;\n            _candidates.resize(_list_length);\n\
+    \        }\n\n        /// Find next entering arc\n        bool findEnteringArc()\
+    \ {\n            Cost min, c;\n            int e;\n            if (_curr_length\
+    \ > 0 && _minor_count < _minor_limit) {\n                // Minor iteration: select\
+    \ the best eligible arc from the\n                // current candidate list\n\
+    \                ++_minor_count;\n                min = 0;\n                for\
+    \ (int i = 0; i < _curr_length; ++i) {\n                    e = _candidates[i];\n\
+    \                    c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n\
+    \                    if (c < min) {\n                        min = c;\n      \
+    \                  _in_arc = e;\n                    } else if (c >= 0) {\n  \
+    \                      _candidates[i--] = _candidates[--_curr_length];\n     \
+    \               }\n                }\n                if (min < 0) return true;\n\
+    \            }\n\n            // Major iteration: build a new candidate list\n\
+    \            min = 0;\n            _curr_length = 0;\n            for (e = _next_arc;\
+    \ e != _search_arc_num; ++e) {\n                c = _state[e] * (_cost[e] + _pi[_source[e]]\
+    \ - _pi[_target[e]]);\n                if (c < 0) {\n                    _candidates[_curr_length++]\
+    \ = e;\n                    if (c < min) {\n                        min = c;\n\
+    \                        _in_arc = e;\n                    }\n               \
+    \     if (_curr_length == _list_length) goto search_end;\n                }\n\
+    \            }\n            for (e = 0; e != _next_arc; ++e) {\n             \
+    \   c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n        \
+    \        if (c < 0) {\n                    _candidates[_curr_length++] = e;\n\
+    \                    if (c < min) {\n                        min = c;\n      \
+    \                  _in_arc = e;\n                    }\n                    if\
     \ (_curr_length == _list_length) goto search_end;\n                }\n       \
     \     }\n            if (_curr_length == 0) return false;\n\n        search_end:\n\
     \            _minor_count = 1;\n            _next_arc = e;\n            return\
@@ -207,49 +208,50 @@ data:
     \       bool operator()(int left, int right) { return _map[left] < _map[right];\
     \ }\n        };\n\n        SortFunc _sort_func;\n\n    public:\n        // Constructor\n\
     \        AlteringListPivotRule(NetworkSimplex &ns)\n            : _source(ns._source),\
-    \ _target(ns._target), _cost(ns._cost), _state(ns._state), _pi(ns._pi), _in_arc(ns.in_arc),\
-    \ _search_arc_num(ns._search_arc_num), _next_arc(0), _cand_cost(ns._search_arc_num),\
-    \ _sort_func(_cand_cost) {\n            // The main parameters of the pivot rule\n\
-    \            const double BLOCK_SIZE_FACTOR = 1.0;\n            const int MIN_BLOCK_SIZE\
-    \ = 10;\n            const double HEAD_LENGTH_FACTOR = 0.01;\n            const\
-    \ int MIN_HEAD_LENGTH = 3;\n\n            _block_size = std::max(int(BLOCK_SIZE_FACTOR\
-    \ * std::sqrt(double(_search_arc_num))), MIN_BLOCK_SIZE);\n            _head_length\
-    \ = std::max(int(HEAD_LENGTH_FACTOR * _block_size), MIN_HEAD_LENGTH);\n      \
-    \      _candidates.resize(_head_length + _block_size);\n            _curr_length\
-    \ = 0;\n        }\n\n        // Find next entering arc\n        bool findEnteringArc()\
-    \ {\n            // Check the current candidate list\n            int e;\n   \
-    \         Cost c;\n            for (int i = 0; i != _curr_length; ++i) {\n   \
-    \             e = _candidates[i];\n                c = _state[e] * (_cost[e] +\
-    \ _pi[_source[e]] - _pi[_target[e]]);\n                if (c < 0) {\n        \
-    \            _cand_cost[e] = c;\n                } else {\n                  \
-    \  _candidates[i--] = _candidates[--_curr_length];\n                }\n      \
-    \      }\n\n            // Extend the list\n            int cnt = _block_size;\n\
-    \            int limit = _head_length;\n\n            for (e = _next_arc; e !=\
-    \ _search_arc_num; ++e) {\n                c = _state[e] * (_cost[e] + _pi[_source[e]]\
-    \ - _pi[_target[e]]);\n                if (c < 0) {\n                    _cand_cost[e]\
-    \ = c;\n                    _candidates[_curr_length++] = e;\n               \
-    \ }\n                if (--cnt == 0) {\n                    if (_curr_length >\
-    \ limit) goto search_end;\n                    limit = 0;\n                  \
-    \  cnt = _block_size;\n                }\n            }\n            for (e =\
-    \ 0; e != _next_arc; ++e) {\n                c = _state[e] * (_cost[e] + _pi[_source[e]]\
-    \ - _pi[_target[e]]);\n                if (c < 0) {\n                    _cand_cost[e]\
-    \ = c;\n                    _candidates[_curr_length++] = e;\n               \
-    \ }\n                if (--cnt == 0) {\n                    if (_curr_length >\
-    \ limit) goto search_end;\n                    limit = 0;\n                  \
-    \  cnt = _block_size;\n                }\n            }\n            if (_curr_length\
-    \ == 0) return false;\n\n        search_end:\n\n            // Perform partial\
-    \ sort operation on the candidate list\n            int new_length = std::min(_head_length\
-    \ + 1, _curr_length);\n            std::partial_sort(_candidates.begin(), _candidates.begin()\
-    \ + new_length, _candidates.begin() + _curr_length, _sort_func);\n\n         \
-    \   // Select the entering arc and remove it from the list\n            _in_arc\
-    \ = _candidates[0];\n            _next_arc = e;\n            _candidates[0] =\
-    \ _candidates[new_length - 1];\n            _curr_length = new_length - 1;\n \
-    \           return true;\n        }\n\n    }; // class AlteringListPivotRule\n\
-    \npublic:\n    NetworkSimplex(const Digraph &graph)\n        : _graph(graph),\
-    \ MAX(std::numeric_limits<Value>::max()), INF(std::numeric_limits<Value>::has_infinity\
-    \ ? std::numeric_limits<Value>::infinity() : MAX) {\n        // Check the number\
-    \ types\n        static_assert(std::numeric_limits<Value>::is_signed, \"Value\
-    \ must be signed\");\n        static_assert(std::numeric_limits<Cost>::is_signed,\
+    \ _target(ns._target), _cost(ns._cost), _state(ns._state),\n              _pi(ns._pi),\
+    \ _in_arc(ns.in_arc), _search_arc_num(ns._search_arc_num), _next_arc(0),\n   \
+    \           _cand_cost(ns._search_arc_num), _sort_func(_cand_cost) {\n       \
+    \     // The main parameters of the pivot rule\n            const double BLOCK_SIZE_FACTOR\
+    \ = 1.0;\n            const int MIN_BLOCK_SIZE = 10;\n            const double\
+    \ HEAD_LENGTH_FACTOR = 0.01;\n            const int MIN_HEAD_LENGTH = 3;\n\n \
+    \           _block_size = std::max(\n                int(BLOCK_SIZE_FACTOR * std::sqrt(double(_search_arc_num))),\
+    \ MIN_BLOCK_SIZE);\n            _head_length = std::max(int(HEAD_LENGTH_FACTOR\
+    \ * _block_size), MIN_HEAD_LENGTH);\n            _candidates.resize(_head_length\
+    \ + _block_size);\n            _curr_length = 0;\n        }\n\n        // Find\
+    \ next entering arc\n        bool findEnteringArc() {\n            // Check the\
+    \ current candidate list\n            int e;\n            Cost c;\n          \
+    \  for (int i = 0; i != _curr_length; ++i) {\n                e = _candidates[i];\n\
+    \                c = _state[e] * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n\
+    \                if (c < 0) {\n                    _cand_cost[e] = c;\n      \
+    \          } else {\n                    _candidates[i--] = _candidates[--_curr_length];\n\
+    \                }\n            }\n\n            // Extend the list\n        \
+    \    int cnt = _block_size;\n            int limit = _head_length;\n\n       \
+    \     for (e = _next_arc; e != _search_arc_num; ++e) {\n                c = _state[e]\
+    \ * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n                if (c < 0)\
+    \ {\n                    _cand_cost[e] = c;\n                    _candidates[_curr_length++]\
+    \ = e;\n                }\n                if (--cnt == 0) {\n               \
+    \     if (_curr_length > limit) goto search_end;\n                    limit =\
+    \ 0;\n                    cnt = _block_size;\n                }\n            }\n\
+    \            for (e = 0; e != _next_arc; ++e) {\n                c = _state[e]\
+    \ * (_cost[e] + _pi[_source[e]] - _pi[_target[e]]);\n                if (c < 0)\
+    \ {\n                    _cand_cost[e] = c;\n                    _candidates[_curr_length++]\
+    \ = e;\n                }\n                if (--cnt == 0) {\n               \
+    \     if (_curr_length > limit) goto search_end;\n                    limit =\
+    \ 0;\n                    cnt = _block_size;\n                }\n            }\n\
+    \            if (_curr_length == 0) return false;\n\n        search_end:\n\n \
+    \           // Perform partial sort operation on the candidate list\n        \
+    \    int new_length = std::min(_head_length + 1, _curr_length);\n            std::partial_sort(_candidates.begin(),\
+    \ _candidates.begin() + new_length,\n                              _candidates.begin()\
+    \ + _curr_length, _sort_func);\n\n            // Select the entering arc and remove\
+    \ it from the list\n            _in_arc = _candidates[0];\n            _next_arc\
+    \ = e;\n            _candidates[0] = _candidates[new_length - 1];\n          \
+    \  _curr_length = new_length - 1;\n            return true;\n        }\n\n   \
+    \ }; // class AlteringListPivotRule\n\npublic:\n    NetworkSimplex(const Digraph\
+    \ &graph)\n        : _graph(graph), MAX(std::numeric_limits<Value>::max()),\n\
+    \          INF(std::numeric_limits<Value>::has_infinity ? std::numeric_limits<Value>::infinity()\n\
+    \                                                       : MAX) {\n        // Check\
+    \ the number types\n        static_assert(std::numeric_limits<Value>::is_signed,\
+    \ \"Value must be signed\");\n        static_assert(std::numeric_limits<Cost>::is_signed,\
     \ \"Cost must be signed\");\n        static_assert(std::numeric_limits<Value>::max()\
     \ > 0, \"max() must be greater than 0\");\n\n        // Reset data structures\n\
     \        reset();\n    }\n\n    template <typename LowerMap> NetworkSimplex &lowerMap(const\
@@ -339,17 +341,17 @@ data:
     \ == 0) return false;\n\n        // Check the sum of supply values\n        _sum_supply\
     \ = 0;\n        for (int i = 0; i != _node_num; ++i) { _sum_supply += _supply[i];\
     \ }\n        if (!((_stype == GEQ && _sum_supply <= 0) || (_stype == LEQ && _sum_supply\
-    \ >= 0))) return false;\n\n        // Check lower and upper bounds\n        //\
-    \ LEMON_DEBUG(checkBoundMaps(), \"Upper bounds must be greater or equal to the\
-    \ lower bounds\");\n\n        // Remove non-zero lower bounds\n        if (_has_lower)\
-    \ {\n            for (int i = 0; i != _arc_num; ++i) {\n                Value\
-    \ c = _lower[i];\n                if (c >= 0) {\n                    _cap[i] =\
-    \ _upper[i] < MAX ? _upper[i] - c : INF;\n                } else {\n         \
-    \           _cap[i] = _upper[i] < MAX + c ? _upper[i] - c : INF;\n           \
-    \     }\n                _supply[_source[i]] -= c;\n                _supply[_target[i]]\
-    \ += c;\n            }\n        } else {\n            for (int i = 0; i != _arc_num;\
-    \ ++i) { _cap[i] = _upper[i]; }\n        }\n\n        // Initialize artifical\
-    \ cost\n        Cost ART_COST;\n        if (std::numeric_limits<Cost>::is_exact)\
+    \ >= 0)))\n            return false;\n\n        // Check lower and upper bounds\n\
+    \        // LEMON_DEBUG(checkBoundMaps(), \"Upper bounds must be greater or equal\
+    \ to the lower bounds\");\n\n        // Remove non-zero lower bounds\n       \
+    \ if (_has_lower) {\n            for (int i = 0; i != _arc_num; ++i) {\n     \
+    \           Value c = _lower[i];\n                if (c >= 0) {\n            \
+    \        _cap[i] = _upper[i] < MAX ? _upper[i] - c : INF;\n                } else\
+    \ {\n                    _cap[i] = _upper[i] < MAX + c ? _upper[i] - c : INF;\n\
+    \                }\n                _supply[_source[i]] -= c;\n              \
+    \  _supply[_target[i]] += c;\n            }\n        } else {\n            for\
+    \ (int i = 0; i != _arc_num; ++i) { _cap[i] = _upper[i]; }\n        }\n\n    \
+    \    // Initialize artifical cost\n        Cost ART_COST;\n        if (std::numeric_limits<Cost>::is_exact)\
     \ {\n            ART_COST = std::numeric_limits<Cost>::max() / 2 + 1;\n      \
     \  } else {\n            ART_COST = 0;\n            for (int i = 0; i != _arc_num;\
     \ ++i) {\n                if (_cost[i] > ART_COST) ART_COST = _cost[i];\n    \
@@ -487,27 +489,28 @@ data:
     \ = before;\n\n                // Change the parent node and shift stem nodes\n\
     \                _parent[stem] = par_stem;\n                par_stem = stem;\n\
     \                stem = next_stem;\n\n                // Update last and after\n\
-    \                last = _last_succ[stem] == _last_succ[par_stem] ? _rev_thread[par_stem]\
-    \ : _last_succ[stem];\n                after = _thread[last];\n            }\n\
-    \            _parent[u_out] = par_stem;\n            _thread[last] = thread_continue;\n\
-    \            _rev_thread[thread_continue] = last;\n            _last_succ[u_out]\
-    \ = last;\n\n            // Remove the subtree of u_out from the thread list except\
-    \ for\n            // the case when old_rev_thread equals to v_in\n          \
-    \  if (old_rev_thread != v_in) {\n                _thread[old_rev_thread] = after;\n\
-    \                _rev_thread[after] = old_rev_thread;\n            }\n\n     \
-    \       // Update _rev_thread using the new _thread values\n            for (int\
-    \ i = 0; i != int(_dirty_revs.size()); ++i) {\n                int u = _dirty_revs[i];\n\
-    \                _rev_thread[_thread[u]] = u;\n            }\n\n            //\
-    \ Update _pred, _pred_dir, _last_succ and _succ_num for the\n            // stem\
-    \ nodes from u_out to u_in\n            int tmp_sc = 0, tmp_ls = _last_succ[u_out];\n\
-    \            for (int u = u_out, p = _parent[u]; u != u_in; u = p, p = _parent[u])\
-    \ {\n                _pred[u] = _pred[p];\n                _pred_dir[u] = -_pred_dir[p];\n\
-    \                tmp_sc += _succ_num[u] - _succ_num[p];\n                _succ_num[u]\
-    \ = tmp_sc;\n                _last_succ[p] = tmp_ls;\n            }\n        \
-    \    _pred[u_in] = in_arc;\n            _pred_dir[u_in] = u_in == _source[in_arc]\
-    \ ? DIR_UP : DIR_DOWN;\n            _succ_num[u_in] = old_succ_num;\n        }\n\
-    \n        // Update _last_succ from v_in towards the root\n        int up_limit_out\
-    \ = _last_succ[join] == v_in ? join : -1;\n        int last_succ_out = _last_succ[u_out];\n\
+    \                last = _last_succ[stem] == _last_succ[par_stem] ? _rev_thread[par_stem]\n\
+    \                                                                : _last_succ[stem];\n\
+    \                after = _thread[last];\n            }\n            _parent[u_out]\
+    \ = par_stem;\n            _thread[last] = thread_continue;\n            _rev_thread[thread_continue]\
+    \ = last;\n            _last_succ[u_out] = last;\n\n            // Remove the\
+    \ subtree of u_out from the thread list except for\n            // the case when\
+    \ old_rev_thread equals to v_in\n            if (old_rev_thread != v_in) {\n \
+    \               _thread[old_rev_thread] = after;\n                _rev_thread[after]\
+    \ = old_rev_thread;\n            }\n\n            // Update _rev_thread using\
+    \ the new _thread values\n            for (int i = 0; i != int(_dirty_revs.size());\
+    \ ++i) {\n                int u = _dirty_revs[i];\n                _rev_thread[_thread[u]]\
+    \ = u;\n            }\n\n            // Update _pred, _pred_dir, _last_succ and\
+    \ _succ_num for the\n            // stem nodes from u_out to u_in\n          \
+    \  int tmp_sc = 0, tmp_ls = _last_succ[u_out];\n            for (int u = u_out,\
+    \ p = _parent[u]; u != u_in; u = p, p = _parent[u]) {\n                _pred[u]\
+    \ = _pred[p];\n                _pred_dir[u] = -_pred_dir[p];\n               \
+    \ tmp_sc += _succ_num[u] - _succ_num[p];\n                _succ_num[u] = tmp_sc;\n\
+    \                _last_succ[p] = tmp_ls;\n            }\n            _pred[u_in]\
+    \ = in_arc;\n            _pred_dir[u_in] = u_in == _source[in_arc] ? DIR_UP :\
+    \ DIR_DOWN;\n            _succ_num[u_in] = old_succ_num;\n        }\n\n      \
+    \  // Update _last_succ from v_in towards the root\n        int up_limit_out =\
+    \ _last_succ[join] == v_in ? join : -1;\n        int last_succ_out = _last_succ[u_out];\n\
     \        for (int u = v_in; u != -1 && _last_succ[u] == v_in; u = _parent[u])\
     \ {\n            _last_succ[u] = last_succ_out;\n        }\n\n        // Update\
     \ _last_succ from v_out towards the root\n        if (join != old_rev_thread &&\
@@ -565,8 +568,8 @@ data:
     \ }\n            }\n        }\n\n        // Perform heuristic initial pivots\n\
     \        for (int i = 0; i != int(arc_vector.size()); ++i) {\n            in_arc\
     \ = arc_vector[i];\n            if (_state[in_arc] * (_cost[in_arc] + _pi[_source[in_arc]]\
-    \ - _pi[_target[in_arc]]) >= 0) continue;\n            findJoinNode();\n     \
-    \       bool change = findLeavingArc();\n            if (delta >= MAX) return\
+    \ - _pi[_target[in_arc]]) >= 0)\n                continue;\n            findJoinNode();\n\
+    \            bool change = findLeavingArc();\n            if (delta >= MAX) return\
     \ false;\n            changeFlow(change);\n            if (change) {\n       \
     \         updateTreeStructure();\n                updatePotential();\n       \
     \     }\n        }\n        return true;\n    }\n\n    // Execute the algorithm\n\
@@ -622,8 +625,8 @@ data:
     \        Edges.push_back({idnow, from, to, lower, upper, weight});\n        return\
     \ idnow;\n    }\n    void set_supply(int v, Capacity b) {\n        assert(v >=\
     \ 0 and v < n);\n        bs[v] = b;\n    }\n    std::vector<Capacity> flow;\n\
-    \    std::vector<Capacity> potential;\n\n    template <typename RetVal = __int128>\
-    \ [[nodiscard]] RetVal solve() {\n        std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \    std::vector<Capacity> potential;\n\n    template <typename RetVal = __int128>[[nodiscard]]\
+    \ RetVal solve() {\n        std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());\n\
     \n        std::vector<int> vid(n), eid(Edges.size());\n        std::iota(vid.begin(),\
     \ vid.end(), 0);\n        std::shuffle(vid.begin(), vid.end(), rng);\n       \
     \ std::iota(eid.begin(), eid.end(), 0);\n        std::shuffle(eid.begin(), eid.end(),\
@@ -635,10 +638,10 @@ data:
     \ i : eid) {\n            const auto &e = Edges[i];\n            int arc = graph.add_edge(vid[e.from],\
     \ vid[e.to]);\n            lowers[arc] = e.lo;\n            uppers[arc] = e.hi;\n\
     \            weights[arc] = e.weight;\n        }\n\n        NetworkSimplex<Digraph,\
-    \ Capacity, Weight> ns(graph);\n        auto status = ns.supplyMap(supplies).costMap(weights).lowerMap(lowers).upperMap(uppers).run(decltype(ns)::BLOCK_SEARCH);\n\
-    \n        if (status == decltype(ns)::INFEASIBLE) {\n            return infeasible\
-    \ = true, 0;\n        } else {\n            flow.resize(Edges.size());\n     \
-    \       potential.resize(n);\n            for (int i = 0; i < int(Edges.size());\
+    \ Capacity, Weight> ns(graph);\n        auto status = ns.supplyMap(supplies).costMap(weights).lowerMap(lowers).upperMap(uppers).run(\n\
+    \            decltype(ns)::BLOCK_SEARCH);\n\n        if (status == decltype(ns)::INFEASIBLE)\
+    \ {\n            return infeasible = true, 0;\n        } else {\n            flow.resize(Edges.size());\n\
+    \            potential.resize(n);\n            for (int i = 0; i < int(Edges.size());\
     \ i++) flow[eid[i]] = ns.flow(i);\n            for (int i = 0; i < n; i++) potential[i]\
     \ = ns.potential(vid[i]);\n            return ns.template totalCost<RetVal>();\n\
     \        }\n    }\n};\n#line 3 \"combinatorial_opt/test/mcf_ns.test.cpp\"\n#include\
@@ -660,7 +663,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/mcf_ns.test.cpp
   requiredBy: []
-  timestamp: '2021-07-06 00:01:07+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/mcf_ns.test.cpp

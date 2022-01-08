@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/light_forward_list.hpp
     title: data_structure/light_forward_list.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/incremental_matching.hpp
     title: string/incremental_matching.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D
@@ -41,31 +41,32 @@ data:
     \ = node[nn].fail;\n        node[fnn].inv_fail.push_back(nn);\n        complete_inverse(n,\
     \ nn, c);\n    }\n\n    void complete_inverse(const int y, const int nn, const\
     \ int c) {\n        for (auto it = node[y].inv_fail.begin();; it++) {\n      \
-    \      while (it != node[y].inv_fail.end() and node[*it].fail != y) it = node[y].inv_fail.erase(it);\n\
-    \            if (it == node[y].inv_fail.end()) return;\n            const int\
-    \ x = *it, xx = node[x].Goto(c);\n            if (xx) {\n                node[xx].fail\
-    \ = nn, node[nn].inv_fail.push_back(xx);\n            } else {\n             \
-    \   complete_inverse(x, nn, c);\n            }\n        }\n    }\n\n    std::vector<int>\
-    \ endpos;\n    int add(const std::string &keyword) { // Enter_in_tree() in [1]\n\
-    \        built = false;\n        int n = 0;\n        for (const auto &cc : keyword)\
-    \ {\n            int c = char2int(cc), nn = node[n].Goto(c);\n            if (!nn)\
-    \ {\n                nn = node.size();\n                node.emplace_back(D),\
-    \ enter_child(n, nn, c);\n            }\n            n = nn;\n        }\n    \
-    \    return endpos.push_back(n), n;\n    }\n\n    void complete_failure(int n,\
-    \ int nn, int c) {\n        int m = n, Tmc = node[m].Goto(c);\n        while (m\
-    \ and !Tmc) m = node[m].fail, Tmc = node[m].Goto(c);\n        node[nn].fail =\
-    \ Tmc;\n    }\n\n    std::vector<int> visorder; // BFS order of node ids\n   \
-    \ void build() {             // Build_failure() in [1]\n        built = true;\n\
-    \        visorder = {0};\n        for (size_t p = 0; p < visorder.size(); p++)\
-    \ {\n            for (auto p : node[visorder[p]]) {\n                if (p.second)\
-    \ visorder.push_back(p.second);\n            }\n        }\n    }\n\n    int step(int\
-    \ now, int d) {\n        while (now and !node[now].Goto(d)) now = node[now].fail;\n\
-    \        return node[now].Goto(d);\n    }\n\n    // Count occurences of each added\
-    \ keyword in `str`\n    std::vector<int> match(const std::string &str) {\n   \
-    \     if (!built) build();\n        std::vector<int> freq(node.size());\n    \
-    \    int now = 0;\n        for (const auto &c : str) freq[now = step(now, char2int(c))]++;\n\
-    \n        for (auto i = visorder.rbegin(); i != visorder.rend(); i++) freq[node[*i].fail]\
-    \ += freq[*i];\n        std::vector<int> ret;\n        for (auto x : endpos) ret.push_back(freq[x]);\n\
+    \      while (it != node[y].inv_fail.end() and node[*it].fail != y)\n        \
+    \        it = node[y].inv_fail.erase(it);\n            if (it == node[y].inv_fail.end())\
+    \ return;\n            const int x = *it, xx = node[x].Goto(c);\n            if\
+    \ (xx) {\n                node[xx].fail = nn, node[nn].inv_fail.push_back(xx);\n\
+    \            } else {\n                complete_inverse(x, nn, c);\n         \
+    \   }\n        }\n    }\n\n    std::vector<int> endpos;\n    int add(const std::string\
+    \ &keyword) { // Enter_in_tree() in [1]\n        built = false;\n        int n\
+    \ = 0;\n        for (const auto &cc : keyword) {\n            int c = char2int(cc),\
+    \ nn = node[n].Goto(c);\n            if (!nn) {\n                nn = node.size();\n\
+    \                node.emplace_back(D), enter_child(n, nn, c);\n            }\n\
+    \            n = nn;\n        }\n        return endpos.push_back(n), n;\n    }\n\
+    \n    void complete_failure(int n, int nn, int c) {\n        int m = n, Tmc =\
+    \ node[m].Goto(c);\n        while (m and !Tmc) m = node[m].fail, Tmc = node[m].Goto(c);\n\
+    \        node[nn].fail = Tmc;\n    }\n\n    std::vector<int> visorder; // BFS\
+    \ order of node ids\n    void build() {             // Build_failure() in [1]\n\
+    \        built = true;\n        visorder = {0};\n        for (size_t p = 0; p\
+    \ < visorder.size(); p++) {\n            for (auto p : node[visorder[p]]) {\n\
+    \                if (p.second) visorder.push_back(p.second);\n            }\n\
+    \        }\n    }\n\n    int step(int now, int d) {\n        while (now and !node[now].Goto(d))\
+    \ now = node[now].fail;\n        return node[now].Goto(d);\n    }\n\n    // Count\
+    \ occurences of each added keyword in `str`\n    std::vector<int> match(const\
+    \ std::string &str) {\n        if (!built) build();\n        std::vector<int>\
+    \ freq(node.size());\n        int now = 0;\n        for (const auto &c : str)\
+    \ freq[now = step(now, char2int(c))]++;\n\n        for (auto i = visorder.rbegin();\
+    \ i != visorder.rend(); i++)\n            freq[node[*i].fail] += freq[*i];\n \
+    \       std::vector<int> ret;\n        for (auto x : endpos) ret.push_back(freq[x]);\n\
     \        return ret;\n    }\n};\n\nstruct TrieNodeFL {\n    static const int B\
     \ = 8, mask = (1 << B) - 1;\n    light_forward_list<unsigned> chlist; // \u4E0B\
     \u4F4D B bits \u304C\u6587\u5B57\u7A2E\uFF0C\u4E0A\u4F4D bit \u304C\u884C\u304D\
@@ -101,8 +102,8 @@ data:
   isVerificationFile: true
   path: string/test/incremental_matching.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 23:47:50+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: string/test/incremental_matching.test.cpp
 layout: document

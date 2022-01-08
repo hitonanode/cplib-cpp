@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sqrt_mod
@@ -56,40 +56,41 @@ data:
     \ ModIntRuntime &x) {\n        return ModIntRuntime()._setval(a % md * x.inv()\
     \ % md);\n    }\n    bool operator==(const ModIntRuntime &x) const { return val\
     \ == x.val; }\n    bool operator!=(const ModIntRuntime &x) const { return val\
-    \ != x.val; }\n    bool operator<(const ModIntRuntime &x) const { return val <\
-    \ x.val; } // To use std::map<ModIntRuntime, T>\n    friend std::istream &operator>>(std::istream\
-    \ &is, ModIntRuntime &x) {\n        lint t;\n        return is >> t, x = ModIntRuntime(t),\
-    \ is;\n    }\n    friend std::ostream &operator<<(std::ostream &os, const ModIntRuntime\
-    \ &x) { return os << x.val; }\n\n    lint power(lint n) const {\n        lint\
-    \ ans = 1, tmp = this->val;\n        while (n) {\n            if (n & 1) ans =\
-    \ ans * tmp % md;\n            tmp = tmp * tmp % md;\n            n /= 2;\n  \
-    \      }\n        return ans;\n    }\n    ModIntRuntime pow(lint n) const { return\
-    \ power(n); }\n    lint inv() const { return this->power(md - 2); }\n\n    ModIntRuntime\
-    \ fac() const {\n        int l0 = facs().size();\n        if (l0 > this->val)\
-    \ return facs()[this->val];\n\n        facs().resize(this->val + 1);\n       \
-    \ for (int i = l0; i <= this->val; i++)\n            facs()[i] = (i == 0 ? ModIntRuntime(1)\
-    \ : facs()[i - 1] * ModIntRuntime(i));\n        return facs()[this->val];\n  \
-    \  }\n\n    ModIntRuntime doublefac() const {\n        lint k = (this->val + 1)\
-    \ / 2;\n        return (this->val & 1) ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k)\
-    \ * ModIntRuntime(k).fac())\n                               : ModIntRuntime(k).fac()\
-    \ * ModIntRuntime(2).pow(k);\n    }\n\n    ModIntRuntime nCr(const ModIntRuntime\
-    \ &r) const {\n        return (this->val < r.val) ? ModIntRuntime(0) : this->fac()\
-    \ / ((*this - r).fac() * r.fac());\n    }\n\n    ModIntRuntime sqrt() const {\n\
-    \        if (val == 0) return 0;\n        if (md == 2) return val;\n        if\
-    \ (power((md - 1) / 2) != 1) return 0;\n        ModIntRuntime b = 1;\n       \
-    \ while (b.power((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n\
-    \        while (m % 2 == 0) m >>= 1, e++;\n        ModIntRuntime x = power((m\
-    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModIntRuntime\
-    \ z = b.power(m);\n        while (y != 1) {\n            int j = 0;\n        \
-    \    ModIntRuntime t = y;\n            while (t != 1) j++, t *= t;\n         \
-    \   z = z.power(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n  \
-    \          e = j;\n        }\n        return ModIntRuntime(std::min(x.val, md\
-    \ - x.val));\n    }\n};\nint ModIntRuntime::md = 1;\n#line 4 \"number/test/sqrt_modint_runtime.test.cpp\"\
-    \nusing namespace std;\n\nint main() {\n    int T;\n    cin >> T;\n    while (T--)\
-    \ {\n        int Y, P;\n        cin >> Y >> P;\n        ModIntRuntime::set_mod(P);\n\
-    \        ModIntRuntime m = Y;\n        if (Y) {\n            m = m.sqrt();\n \
-    \           cout << (m ? m.val : -1) << endl;\n        } else\n            cout\
-    \ << 0 << endl;\n    }\n}\n"
+    \ != x.val; }\n    bool operator<(const ModIntRuntime &x) const {\n        return\
+    \ val < x.val;\n    } // To use std::map<ModIntRuntime, T>\n    friend std::istream\
+    \ &operator>>(std::istream &is, ModIntRuntime &x) {\n        lint t;\n       \
+    \ return is >> t, x = ModIntRuntime(t), is;\n    }\n    friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModIntRuntime &x) {\n        return os << x.val;\n    }\n\n    lint\
+    \ power(lint n) const {\n        lint ans = 1, tmp = this->val;\n        while\
+    \ (n) {\n            if (n & 1) ans = ans * tmp % md;\n            tmp = tmp *\
+    \ tmp % md;\n            n /= 2;\n        }\n        return ans;\n    }\n    ModIntRuntime\
+    \ pow(lint n) const { return power(n); }\n    lint inv() const { return this->power(md\
+    \ - 2); }\n\n    ModIntRuntime fac() const {\n        int l0 = facs().size();\n\
+    \        if (l0 > this->val) return facs()[this->val];\n\n        facs().resize(this->val\
+    \ + 1);\n        for (int i = l0; i <= this->val; i++)\n            facs()[i]\
+    \ = (i == 0 ? ModIntRuntime(1) : facs()[i - 1] * ModIntRuntime(i));\n        return\
+    \ facs()[this->val];\n    }\n\n    ModIntRuntime doublefac() const {\n       \
+    \ lint k = (this->val + 1) / 2;\n        return (this->val & 1)\n            \
+    \       ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k) * ModIntRuntime(k).fac())\n\
+    \                   : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);\n    }\n\
+    \n    ModIntRuntime nCr(const ModIntRuntime &r) const {\n        return (this->val\
+    \ < r.val) ? ModIntRuntime(0) : this->fac() / ((*this - r).fac() * r.fac());\n\
+    \    }\n\n    ModIntRuntime sqrt() const {\n        if (val == 0) return 0;\n\
+    \        if (md == 2) return val;\n        if (power((md - 1) / 2) != 1) return\
+    \ 0;\n        ModIntRuntime b = 1;\n        while (b.power((md - 1) / 2) == 1)\
+    \ b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0) m >>= 1,\
+    \ e++;\n        ModIntRuntime x = power((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModIntRuntime z = b.power(m);\n        while (y\
+    \ != 1) {\n            int j = 0;\n            ModIntRuntime t = y;\n        \
+    \    while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e - j - 1));\n\
+    \            x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return\
+    \ ModIntRuntime(std::min(x.val, md - x.val));\n    }\n};\nint ModIntRuntime::md\
+    \ = 1;\n#line 4 \"number/test/sqrt_modint_runtime.test.cpp\"\nusing namespace\
+    \ std;\n\nint main() {\n    int T;\n    cin >> T;\n    while (T--) {\n       \
+    \ int Y, P;\n        cin >> Y >> P;\n        ModIntRuntime::set_mod(P);\n    \
+    \    ModIntRuntime m = Y;\n        if (Y) {\n            m = m.sqrt();\n     \
+    \       cout << (m ? m.val : -1) << endl;\n        } else\n            cout <<\
+    \ 0 << endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include \"\
     number/modint_runtime.hpp\"\n#include <iostream>\nusing namespace std;\n\nint\
     \ main() {\n    int T;\n    cin >> T;\n    while (T--) {\n        int Y, P;\n\
@@ -102,8 +103,8 @@ data:
   isVerificationFile: true
   path: number/test/sqrt_modint_runtime.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 17:00:00+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/sqrt_modint_runtime.test.cpp
 layout: document

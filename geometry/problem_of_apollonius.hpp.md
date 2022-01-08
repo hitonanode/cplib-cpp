@@ -18,7 +18,7 @@ data:
     \ <utility>\n#include <vector>\n\n// CUT begin\n// Solve ax^2 + bx + c = 0.\n\
     // retval: (# of solutions (-1 == inf.), solutions(ascending order))\n// Verify:\
     \ <https://yukicoder.me/problems/no/955> <https://atcoder.jp/contests/tricky/tasks/tricky_2>\n\
-    template <typename Float> std::pair<int, std::vector<Float>> quadratic_solver(Float\
+    template <typename Float>\nstd::pair<int, std::vector<Float>> quadratic_solver(Float\
     \ A, Float B, Float C) {\n    if (B < 0) A = -A, B = -B, C = -C;\n    if (A ==\
     \ 0) {\n        if (B == 0) {\n            if (C == 0)\n                return\
     \ std::make_pair(-1, std::vector<Float>{}); // all real numbers\n            else\n\
@@ -68,7 +68,7 @@ data:
     \ << ',' << p.y << ')';\n    }\n};\ntemplate <> double Point2d<double>::EPS =\
     \ 1e-9;\ntemplate <> long double Point2d<long double>::EPS = 1e-12;\ntemplate\
     \ <> long long Point2d<long long>::EPS = 0;\n\ntemplate <typename T_P>\nint ccw(const\
-    \ Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) { // a->b->c\u306E\
+    \ Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) {\n    // a->b->c\u306E\
     \u66F2\u304C\u308A\u65B9\n    Point2d<T_P> v1 = b - a;\n    Point2d<T_P> v2 =\
     \ c - a;\n    if (v1.det(v2) > Point2d<T_P>::EPS) return 1;   // \u5DE6\u6298\n\
     \    if (v1.det(v2) < -Point2d<T_P>::EPS) return -1; // \u53F3\u6298\n    if (v1.dot(v2)\
@@ -157,18 +157,19 @@ data:
     \n// - sgn*    : \u5916\u63A5(-1) / \u5185\u63A5(1)\n// retval:\n// - [(Center,\
     \ Radius), ...] \uFF08\u6761\u4EF6\u3092\u307F\u305F\u3059\u5186\u306F\u8907\u6570\
     \u5B58\u5728\u3057\u3046\u308B\uFF09\ntemplate <typename Float>\nstd::vector<std::pair<Point2d<Float>,\
-    \ Float>> Problem_of_Apollonius(Point2d<Float> Center1, Float Radius1, Point2d<Float>\
-    \ Center2, Float Radius2, Point2d<Float> Center3, Float Radius3, int sgn1, int\
-    \ sgn2, int sgn3) {\n    Center2 = Center2 - Center1, Center3 = Center3 - Center1;\n\
-    \    Float a2 = -Center2.x * 2, b2 = -Center2.y * 2, c2 = (-Radius1 * sgn1 + Radius2\
-    \ * sgn2) * 2,\n          d2 = -Radius1 * Radius1 - Center2.norm2() + Radius2\
-    \ * Radius2;\n    Float a3 = -Center3.x * 2, b3 = -Center3.y * 2, c3 = (-Radius1\
-    \ * sgn1 + Radius3 * sgn3) * 2,\n          d3 = -Radius1 * Radius1 - Center3.norm2()\
-    \ + Radius3 * Radius3;\n    Float denom = a2 * b3 - b2 * a3;\n    std::vector<std::pair<Point2d<Float>,\
-    \ Float>> ret_circles;\n    if (denom == 0) return ret_circles;\n    Point2d<Float>\
-    \ v0((b3 * d2 - b2 * d3) / denom, (-a3 * d2 + a2 * d3) / denom), v1((-b3 * c2\
-    \ + b2 * c3) / denom, (a3 * c2 - a2 * c3) / denom);\n    Float A = v1.norm2()\
-    \ - 1, B = 2 * (v1.dot(v0) + Radius1 * sgn1), C = v0.norm2() - Radius1 * Radius1;\n\
+    \ Float>>\nProblem_of_Apollonius(Point2d<Float> Center1, Float Radius1, Point2d<Float>\
+    \ Center2, Float Radius2,\n                      Point2d<Float> Center3, Float\
+    \ Radius3, int sgn1, int sgn2, int sgn3) {\n    Center2 = Center2 - Center1, Center3\
+    \ = Center3 - Center1;\n    Float a2 = -Center2.x * 2, b2 = -Center2.y * 2, c2\
+    \ = (-Radius1 * sgn1 + Radius2 * sgn2) * 2,\n          d2 = -Radius1 * Radius1\
+    \ - Center2.norm2() + Radius2 * Radius2;\n    Float a3 = -Center3.x * 2, b3 =\
+    \ -Center3.y * 2, c3 = (-Radius1 * sgn1 + Radius3 * sgn3) * 2,\n          d3 =\
+    \ -Radius1 * Radius1 - Center3.norm2() + Radius3 * Radius3;\n    Float denom =\
+    \ a2 * b3 - b2 * a3;\n    std::vector<std::pair<Point2d<Float>, Float>> ret_circles;\n\
+    \    if (denom == 0) return ret_circles;\n    Point2d<Float> v0((b3 * d2 - b2\
+    \ * d3) / denom, (-a3 * d2 + a2 * d3) / denom),\n        v1((-b3 * c2 + b2 * c3)\
+    \ / denom, (a3 * c2 - a2 * c3) / denom);\n    Float A = v1.norm2() - 1, B = 2\
+    \ * (v1.dot(v0) + Radius1 * sgn1),\n          C = v0.norm2() - Radius1 * Radius1;\n\
     \    auto quad_ret = quadratic_solver(A, B, C);\n    for (const auto r : quad_ret.second)\
     \ {\n        if (r >= 0.0) {\n            Point2d<Float> Center = v0 + v1 * r\
     \ + Center1;\n            ret_circles.emplace_back(Center, r);\n        }\n  \
@@ -181,19 +182,20 @@ data:
     \u6A19\n// - Radius* : \u5404\u5186\u306E\u534A\u5F84\n// - sgn*    : \u5916\u63A5\
     (-1) / \u5185\u63A5(1)\n// retval:\n// - [(Center, Radius), ...] \uFF08\u6761\u4EF6\
     \u3092\u307F\u305F\u3059\u5186\u306F\u8907\u6570\u5B58\u5728\u3057\u3046\u308B\
-    \uFF09\ntemplate <typename Float>\nstd::vector<std::pair<Point2d<Float>, Float>>\
-    \ Problem_of_Apollonius(Point2d<Float> Center1, Float Radius1, Point2d<Float>\
-    \ Center2, Float Radius2, Point2d<Float> Center3, Float Radius3, int sgn1, int\
-    \ sgn2, int sgn3) {\n    Center2 = Center2 - Center1, Center3 = Center3 - Center1;\n\
-    \    Float a2 = -Center2.x * 2, b2 = -Center2.y * 2, c2 = (-Radius1 * sgn1 + Radius2\
-    \ * sgn2) * 2,\n          d2 = -Radius1 * Radius1 - Center2.norm2() + Radius2\
-    \ * Radius2;\n    Float a3 = -Center3.x * 2, b3 = -Center3.y * 2, c3 = (-Radius1\
-    \ * sgn1 + Radius3 * sgn3) * 2,\n          d3 = -Radius1 * Radius1 - Center3.norm2()\
-    \ + Radius3 * Radius3;\n    Float denom = a2 * b3 - b2 * a3;\n    std::vector<std::pair<Point2d<Float>,\
-    \ Float>> ret_circles;\n    if (denom == 0) return ret_circles;\n    Point2d<Float>\
-    \ v0((b3 * d2 - b2 * d3) / denom, (-a3 * d2 + a2 * d3) / denom), v1((-b3 * c2\
-    \ + b2 * c3) / denom, (a3 * c2 - a2 * c3) / denom);\n    Float A = v1.norm2()\
-    \ - 1, B = 2 * (v1.dot(v0) + Radius1 * sgn1), C = v0.norm2() - Radius1 * Radius1;\n\
+    \uFF09\ntemplate <typename Float>\nstd::vector<std::pair<Point2d<Float>, Float>>\n\
+    Problem_of_Apollonius(Point2d<Float> Center1, Float Radius1, Point2d<Float> Center2,\
+    \ Float Radius2,\n                      Point2d<Float> Center3, Float Radius3,\
+    \ int sgn1, int sgn2, int sgn3) {\n    Center2 = Center2 - Center1, Center3 =\
+    \ Center3 - Center1;\n    Float a2 = -Center2.x * 2, b2 = -Center2.y * 2, c2 =\
+    \ (-Radius1 * sgn1 + Radius2 * sgn2) * 2,\n          d2 = -Radius1 * Radius1 -\
+    \ Center2.norm2() + Radius2 * Radius2;\n    Float a3 = -Center3.x * 2, b3 = -Center3.y\
+    \ * 2, c3 = (-Radius1 * sgn1 + Radius3 * sgn3) * 2,\n          d3 = -Radius1 *\
+    \ Radius1 - Center3.norm2() + Radius3 * Radius3;\n    Float denom = a2 * b3 -\
+    \ b2 * a3;\n    std::vector<std::pair<Point2d<Float>, Float>> ret_circles;\n \
+    \   if (denom == 0) return ret_circles;\n    Point2d<Float> v0((b3 * d2 - b2 *\
+    \ d3) / denom, (-a3 * d2 + a2 * d3) / denom),\n        v1((-b3 * c2 + b2 * c3)\
+    \ / denom, (a3 * c2 - a2 * c3) / denom);\n    Float A = v1.norm2() - 1, B = 2\
+    \ * (v1.dot(v0) + Radius1 * sgn1),\n          C = v0.norm2() - Radius1 * Radius1;\n\
     \    auto quad_ret = quadratic_solver(A, B, C);\n    for (const auto r : quad_ret.second)\
     \ {\n        if (r >= 0.0) {\n            Point2d<Float> Center = v0 + v1 * r\
     \ + Center1;\n            ret_circles.emplace_back(Center, r);\n        }\n  \
@@ -204,7 +206,7 @@ data:
   isVerificationFile: false
   path: geometry/problem_of_apollonius.hpp
   requiredBy: []
-  timestamp: '2022-01-08 19:18:14+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/problem_of_apollonius.hpp

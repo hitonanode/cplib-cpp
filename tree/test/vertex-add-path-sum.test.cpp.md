@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/heavy_light_decomposition.hpp
     title: tree/heavy_light_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -64,46 +64,49 @@ data:
     \                        l *= 2;\n                    else\n                 \
     \       retl = ret_tmp, l = l * 2 + 1;\n                }\n                return\
     \ l - N;\n            }\n            retl = ret_tmp;\n        }\n        return\
-    \ N;\n    }\n\n    template <typename T1, typename T2, typename T3> friend std::ostream\
-    \ &operator<<(std::ostream &os, NonrecursiveSegmentTree<T1, T2, T3> s) {\n   \
-    \     os << \"[SegmentTree (len: \" << s.N << ')';\n        for (int i = 0; i\
-    \ < s.N; i++) os << s.at(i + s.N) << ',';\n        os << \"]\";\n        return\
-    \ os;\n    }\n};\n\n// Range Minimum Query\n// - get: return min(x_l, ..., x_{r\
-    \ - 1})\ntemplate <typename T> struct RangeMinimumQuery : public NonrecursiveSegmentTree<T,\
+    \ N;\n    }\n\n    template <typename T1, typename T2, typename T3>\n    friend\
+    \ std::ostream &operator<<(std::ostream &os, NonrecursiveSegmentTree<T1, T2, T3>\
+    \ s) {\n        os << \"[SegmentTree (len: \" << s.N << ')';\n        for (int\
+    \ i = 0; i < s.N; i++) os << s.at(i + s.N) << ',';\n        os << \"]\";\n   \
+    \     return os;\n    }\n};\n\n// Range Minimum Query\n// - get: return min(x_l,\
+    \ ..., x_{r - 1})\ntemplate <typename T> struct RangeMinimumQuery : public NonrecursiveSegmentTree<T,\
     \ T, bool> {\n    using SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T\
     \ merge_data(const T &vl, const T &vr) override { return std::min(vl, vr); };\n\
     \    T data2ret(const T &v, const bool &q) override { return v; }\n    T merge_ret(const\
     \ T &vl, const T &vr) override { return std::min(vl, vr); };\n    RangeMinimumQuery(const\
-    \ std::vector<T> &seq, T defaultmin) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq,\
-    \ defaultmin); };\n};\n\n// Range Maximum Query\n// - get: return max(x_l, ...,\
-    \ x_{r - 1})\ntemplate <typename T> struct RangeMaximumQuery : public NonrecursiveSegmentTree<T,\
-    \ T, bool> {\n    using SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T\
-    \ merge_data(const T &vl, const T &vr) override { return std::max(vl, vr); };\n\
-    \    T data2ret(const T &v, const bool &q) override { return v; }\n    T merge_ret(const\
-    \ T &vl, const T &vr) override { return std::max(vl, vr); };\n    RangeMaximumQuery(const\
-    \ std::vector<T> &seq, T defaultmax) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq,\
-    \ defaultmax); };\n};\n\ntemplate <typename T> struct PointUpdateRangeSum : public\
-    \ NonrecursiveSegmentTree<T, T, bool> {\n    using SegTree = NonrecursiveSegmentTree<T,\
-    \ T, bool>;\n    T merge_data(const T &vl, const T &vr) override { return vl +\
-    \ vr; };\n    T data2ret(const T &v, const bool &q) override { return v; }\n \
-    \   T merge_ret(const T &vl, const T &vr) override { return vl + vr; };\n    PointUpdateRangeSum(const\
-    \ std::vector<T> &seq, T zero) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq,\
-    \ zero); };\n};\n\n// Range Counting less than q Query\n// - get: return (#{i\
-    \ | l <= i < r, x_i < q}, total sum of them).\ntemplate <typename T> struct CountAndSumLessThan\
-    \ : public NonrecursiveSegmentTree<std::vector<std::pair<T, T>>, std::pair<int,\
-    \ T>, T> {\n    using TDATA = std::vector<std::pair<T, T>>;\n    using TRET =\
-    \ std::pair<int, T>;\n    using TQUERY = T;\n    TDATA merge_data(const TDATA\
-    \ &vl, const TDATA &vr) override {\n        TDATA ret = vl;\n        ret.insert(ret.end(),\
+    \ std::vector<T> &seq, T defaultmin)\n        : SegTree::NonrecursiveSegmentTree()\
+    \ {\n        SegTree::initialize(seq, defaultmin);\n    };\n};\n\n// Range Maximum\
+    \ Query\n// - get: return max(x_l, ..., x_{r - 1})\ntemplate <typename T> struct\
+    \ RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool> {\n    using\
+    \ SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T merge_data(const T &vl,\
+    \ const T &vr) override { return std::max(vl, vr); };\n    T data2ret(const T\
+    \ &v, const bool &q) override { return v; }\n    T merge_ret(const T &vl, const\
+    \ T &vr) override { return std::max(vl, vr); };\n    RangeMaximumQuery(const std::vector<T>\
+    \ &seq, T defaultmax)\n        : SegTree::NonrecursiveSegmentTree() {\n      \
+    \  SegTree::initialize(seq, defaultmax);\n    };\n};\n\ntemplate <typename T>\
+    \ struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool> {\n\
+    \    using SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T merge_data(const\
+    \ T &vl, const T &vr) override { return vl + vr; };\n    T data2ret(const T &v,\
+    \ const bool &q) override { return v; }\n    T merge_ret(const T &vl, const T\
+    \ &vr) override { return vl + vr; };\n    PointUpdateRangeSum(const std::vector<T>\
+    \ &seq, T zero) : SegTree::NonrecursiveSegmentTree() {\n        SegTree::initialize(seq,\
+    \ zero);\n    };\n};\n\n// Range Counting less than q Query\n// - get: return\
+    \ (#{i | l <= i < r, x_i < q}, total sum of them).\ntemplate <typename T>\nstruct\
+    \ CountAndSumLessThan\n    : public NonrecursiveSegmentTree<std::vector<std::pair<T,\
+    \ T>>, std::pair<int, T>, T> {\n    using TDATA = std::vector<std::pair<T, T>>;\n\
+    \    using TRET = std::pair<int, T>;\n    using TQUERY = T;\n    TDATA merge_data(const\
+    \ TDATA &vl, const TDATA &vr) override {\n        TDATA ret = vl;\n        ret.insert(ret.end(),\
     \ vr.begin(), vr.end());\n        std::sort(ret.begin(), ret.end());\n       \
     \ if (ret.size()) {\n            ret[0].second = ret[0].first;\n            for\
-    \ (size_t i = 1; i < ret.size(); i++) ret[i].second = ret[i - 1].second + ret[i].first;\n\
-    \        }\n        return ret;\n    }\n    TRET data2ret(const TDATA &vec, const\
-    \ TQUERY &q) override {\n        int i = std::lower_bound(vec.begin(), vec.end(),\
-    \ std::make_pair(q, q)) - vec.begin();\n        if (!i)\n            return std::make_pair(0,\
-    \ 0);\n        else\n            return std::make_pair(i, vec[i - 1].second);\n\
-    \    }\n    TRET merge_ret(const TRET &l, const TRET &r) override { return std::make_pair(l.first\
-    \ + r.first, l.second + r.second); }\n    using SegTree = NonrecursiveSegmentTree<TDATA,\
-    \ TRET, TQUERY>;\n    CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree()\
+    \ (size_t i = 1; i < ret.size(); i++)\n                ret[i].second = ret[i -\
+    \ 1].second + ret[i].first;\n        }\n        return ret;\n    }\n    TRET data2ret(const\
+    \ TDATA &vec, const TQUERY &q) override {\n        int i = std::lower_bound(vec.begin(),\
+    \ vec.end(), std::make_pair(q, q)) - vec.begin();\n        if (!i)\n         \
+    \   return std::make_pair(0, 0);\n        else\n            return std::make_pair(i,\
+    \ vec[i - 1].second);\n    }\n    TRET merge_ret(const TRET &l, const TRET &r)\
+    \ override {\n        return std::make_pair(l.first + r.first, l.second + r.second);\n\
+    \    }\n    using SegTree = NonrecursiveSegmentTree<TDATA, TRET, TQUERY>;\n  \
+    \  CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree()\
     \ {\n        std::vector<TDATA> init;\n        for (auto x : seq) init.emplace_back(TDATA{std::pair<T,\
     \ T>(x, x)});\n        SegTree::initialize(init, TRET(0, 0));\n    }\n};\n#line\
     \ 5 \"tree/heavy_light_decomposition.hpp\"\n#include <queue>\n#line 7 \"tree/heavy_light_decomposition.hpp\"\
@@ -115,61 +118,61 @@ data:
     \ = distance between root and vertex i\n    std::vector<int> subtree_sz;  // subtree_sz[i]\
     \ = size of subtree whose root is i\n    std::vector<int> heavy_child; // heavy_child[i]\
     \ = child of vertex i on heavy path (Default: -1)\n    std::vector<int> tree_id;\
-    \     // tree_id[i] = id of tree vertex i belongs to\n    std::vector<int> aligned_id,\
-    \ aligned_id_inv; // aligned_id[i] =  aligned id for vertex i (consecutive on\
-    \ heavy edges)\n    std::vector<int> head;          // head[i] = id of vertex\
-    \ on heavy path of vertex i, nearest to root\n    std::vector<int> head_ids; \
-    \     // consist of head vertex id's\n    std::vector<int> heavy_path_id; // heavy_path_id[i]\
+    \     // tree_id[i] = id of tree vertex i belongs to\n    std::vector<int> aligned_id,\n\
+    \        aligned_id_inv;    // aligned_id[i] =  aligned id for vertex i (consecutive\
+    \ on heavy edges)\n    std::vector<int> head; // head[i] = id of vertex on heavy\
+    \ path of vertex i, nearest to root\n    std::vector<int> head_ids;      // consist\
+    \ of head vertex id's\n    std::vector<int> heavy_path_id; // heavy_path_id[i]\
     \ = heavy_path_id for vertex [i]\n\n    HeavyLightDecomposition(int sz = 0)\n\
     \        : V(sz), k(0), nb_heavy_path(0), e(sz), par(sz), depth(sz), subtree_sz(sz),\
-    \ heavy_child(sz), tree_id(sz, -1), aligned_id(sz), aligned_id_inv(sz), head(sz),\
-    \ heavy_path_id(sz, -1) {}\n    void add_edge(int u, int v) {\n        e[u].emplace_back(v);\n\
-    \        e[v].emplace_back(u);\n    }\n\n    void _build_dfs(int root) {\n   \
-    \     std::stack<std::pair<int, int>> st;\n        par[root] = -1;\n        depth[root]\
-    \ = 0;\n        st.emplace(root, 0);\n        while (!st.empty()) {\n        \
-    \    int now = st.top().first;\n            int& i = st.top().second;\n      \
-    \      if (i < (int)e[now].size()) {\n                int nxt = e[now][i++];\n\
+    \ heavy_child(sz),\n          tree_id(sz, -1), aligned_id(sz), aligned_id_inv(sz),\
+    \ head(sz), heavy_path_id(sz, -1) {}\n    void add_edge(int u, int v) {\n    \
+    \    e[u].emplace_back(v);\n        e[v].emplace_back(u);\n    }\n\n    void _build_dfs(int\
+    \ root) {\n        std::stack<std::pair<int, int>> st;\n        par[root] = -1;\n\
+    \        depth[root] = 0;\n        st.emplace(root, 0);\n        while (!st.empty())\
+    \ {\n            int now = st.top().first;\n            int &i = st.top().second;\n\
+    \            if (i < (int)e[now].size()) {\n                int nxt = e[now][i++];\n\
     \                if (nxt == par[now]) continue;\n                par[nxt] = now;\n\
     \                depth[nxt] = depth[now] + 1;\n                st.emplace(nxt,\
     \ 0);\n            } else {\n                st.pop();\n                int max_sub_sz\
     \ = 0;\n                subtree_sz[now] = 1;\n                heavy_child[now]\
     \ = -1;\n                for (auto nxt : e[now]) {\n                    if (nxt\
     \ == par[now]) continue;\n                    subtree_sz[now] += subtree_sz[nxt];\n\
-    \                    if (max_sub_sz < subtree_sz[nxt]) max_sub_sz = subtree_sz[nxt],\
-    \ heavy_child[now] = nxt;\n                }\n            }\n        }\n    }\n\
-    \n    void _build_bfs(int root, int tree_id_now) {\n        std::queue<int> q({root});\n\
-    \        while (!q.empty()) {\n            int h = q.front();\n            q.pop();\n\
-    \            head_ids.emplace_back(h);\n            for (int now = h; now != -1;\
-    \ now = heavy_child[now]) {\n                tree_id[now] = tree_id_now;\n   \
-    \             aligned_id[now] = k++;\n                aligned_id_inv[aligned_id[now]]\
-    \ = now;\n                heavy_path_id[now] = nb_heavy_path;\n              \
-    \  head[now] = h;\n                for (int nxt : e[now])\n                  \
-    \  if (nxt != par[now] and nxt != heavy_child[now]) q.push(nxt);\n           \
-    \ }\n            nb_heavy_path++;\n        }\n    }\n\n    void build(std::vector<int>\
-    \ roots = {0}) {\n        int tree_id_now = 0;\n        for (auto r : roots) {\n\
-    \            _build_dfs(r);\n            _build_bfs(r, tree_id_now++);\n     \
-    \   }\n    }\n\n    template <typename Monoid> std::vector<Monoid> segtree_rearrange(const\
-    \ std::vector<Monoid>& data) const {\n        assert(int(data.size()) == V);\n\
-    \        std::vector<Monoid> ret;\n        ret.reserve(V);\n        for (int i\
-    \ = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);\n        return\
-    \ ret;\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n    void\
-    \ for_each_vertex(int u, int v, const std::function<void(int ancestor, int descendant)>&\
-    \ f) const {\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
-    \ std::swap(u, v);\n            f(std::max(aligned_id[head[v]], aligned_id[u]),\
-    \ aligned_id[v]);\n            if (head[u] == head[v]) break;\n            v =\
-    \ par[head[v]];\n        }\n    }\n\n    void for_each_vertex_noncommutative(int\
-    \ from, int to, const std::function<void(int ancestor, int descendant)>& fup,\
-    \ const std::function<void(int ancestor, int descendant)>& fdown) const {\n  \
-    \      int u = from, v = to;\n        const int lca = lowest_common_ancestor(u,\
+    \                    if (max_sub_sz < subtree_sz[nxt])\n                     \
+    \   max_sub_sz = subtree_sz[nxt], heavy_child[now] = nxt;\n                }\n\
+    \            }\n        }\n    }\n\n    void _build_bfs(int root, int tree_id_now)\
+    \ {\n        std::queue<int> q({root});\n        while (!q.empty()) {\n      \
+    \      int h = q.front();\n            q.pop();\n            head_ids.emplace_back(h);\n\
+    \            for (int now = h; now != -1; now = heavy_child[now]) {\n        \
+    \        tree_id[now] = tree_id_now;\n                aligned_id[now] = k++;\n\
+    \                aligned_id_inv[aligned_id[now]] = now;\n                heavy_path_id[now]\
+    \ = nb_heavy_path;\n                head[now] = h;\n                for (int nxt\
+    \ : e[now])\n                    if (nxt != par[now] and nxt != heavy_child[now])\
+    \ q.push(nxt);\n            }\n            nb_heavy_path++;\n        }\n    }\n\
+    \n    void build(std::vector<int> roots = {0}) {\n        int tree_id_now = 0;\n\
+    \        for (auto r : roots) {\n            _build_dfs(r);\n            _build_bfs(r,\
+    \ tree_id_now++);\n        }\n    }\n\n    template <typename Monoid>\n    std::vector<Monoid>\
+    \ segtree_rearrange(const std::vector<Monoid> &data) const {\n        assert(int(data.size())\
+    \ == V);\n        std::vector<Monoid> ret;\n        ret.reserve(V);\n        for\
+    \ (int i = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);\n       \
+    \ return ret;\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n\
+    \    void\n    for_each_vertex(int u, int v, const std::function<void(int ancestor,\
+    \ int descendant)> &f) const {\n        while (true) {\n            if (aligned_id[u]\
+    \ > aligned_id[v]) std::swap(u, v);\n            f(std::max(aligned_id[head[v]],\
+    \ aligned_id[u]), aligned_id[v]);\n            if (head[u] == head[v]) break;\n\
+    \            v = par[head[v]];\n        }\n    }\n\n    void for_each_vertex_noncommutative(\n\
+    \        int from, int to, const std::function<void(int ancestor, int descendant)>\
+    \ &fup,\n        const std::function<void(int ancestor, int descendant)> &fdown)\
+    \ const {\n        int u = from, v = to;\n        const int lca = lowest_common_ancestor(u,\
     \ v), dlca = depth[lca];\n        while (u >= 0 and depth[u] > dlca) {\n     \
     \       const int p = (depth[head[u]] > dlca ? head[u] : lca);\n            fup(aligned_id[p]\
     \ + (p == lca), aligned_id[u]), u = par[p];\n        }\n        std::vector<std::pair<int,\
     \ int>> lrs;\n        while (v >= 0 and depth[v] >= dlca) {\n            const\
     \ int p = (depth[head[v]] >= dlca ? head[v] : lca);\n            lrs.emplace_back(p,\
     \ v), v = par[p];\n        }\n        std::reverse(lrs.begin(), lrs.end());\n\
-    \        for (const auto& lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);\n\
+    \        for (const auto &lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);\n\
     \    }\n\n    // query for edges on path [u, v]\n    void for_each_edge(int u,\
-    \ int v, const std::function<void(int, int)>& f) const {\n        while (true)\
+    \ int v, const std::function<void(int, int)> &f) const {\n        while (true)\
     \ {\n            if (aligned_id[u] > aligned_id[v]) std::swap(u, v);\n       \
     \     if (head[u] != head[v]) {\n                f(aligned_id[head[v]], aligned_id[v]);\n\
     \                v = par[head[v]];\n            } else {\n                if (u\
@@ -211,8 +214,8 @@ data:
   isVerificationFile: true
   path: tree/test/vertex-add-path-sum.test.cpp
   requiredBy: []
-  timestamp: '2021-06-06 15:23:40+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/vertex-add-path-sum.test.cpp
 layout: document

@@ -40,13 +40,13 @@ data:
     template <typename Int, typename Weight> struct RectangleSum {\n    RectangleSum()\
     \ = default;\n    struct Rectangle {\n        Int L, R, D, U;\n    };\n    std::vector<Rectangle>\
     \ queries;\n    std::vector<std::tuple<Int, Int, Weight>> points;\n\n    void\
-    \ add_point(Int x, Int y, Weight weight) noexcept { points.push_back({x + 1, y\
-    \ + 1, weight}); }\n    void add_query(Int L, Int R, Int D, Int U) noexcept {\
-    \ queries.push_back({L, R, D, U}); }\n\n    std::vector<Weight> solve() const\
-    \ {\n        std::vector<Int> xs, ys;\n        for (auto rect : queries) {\n \
-    \           xs.push_back(rect.L);\n            xs.push_back(rect.R);\n       \
-    \     ys.push_back(rect.D);\n            ys.push_back(rect.U);\n        }\n\n\
-    \        std::sort(xs.begin(), xs.end());\n        std::sort(ys.begin(), ys.end());\n\
+    \ add_point(Int x, Int y, Weight weight) noexcept {\n        points.push_back({x\
+    \ + 1, y + 1, weight});\n    }\n    void add_query(Int L, Int R, Int D, Int U)\
+    \ noexcept { queries.push_back({L, R, D, U}); }\n\n    std::vector<Weight> solve()\
+    \ const {\n        std::vector<Int> xs, ys;\n        for (auto rect : queries)\
+    \ {\n            xs.push_back(rect.L);\n            xs.push_back(rect.R);\n  \
+    \          ys.push_back(rect.D);\n            ys.push_back(rect.U);\n        }\n\
+    \n        std::sort(xs.begin(), xs.end());\n        std::sort(ys.begin(), ys.end());\n\
     \        xs.erase(std::unique(xs.begin(), xs.end()), xs.end());\n        ys.erase(std::unique(ys.begin(),\
     \ ys.end()), ys.end());\n\n        std::vector<std::vector<std::tuple<int, int,\
     \ Weight>>> ops(ys.size()); // q, x, weight\n        for (auto p : points) {\n\
@@ -88,7 +88,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/rectange_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-11-06 11:36:55+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/rectange_sum.test.cpp

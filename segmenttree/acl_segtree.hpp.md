@@ -2,25 +2,25 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/rangetree.hpp
     title: "Range Tree \uFF08\u9818\u57DF\u6728\uFF09"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/acl_rmq.test.cpp
     title: segmenttree/test/acl_rmq.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/acl_rsq.test.cpp
     title: segmenttree/test/acl_rsq.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/rangetree.test.cpp
     title: segmenttree/test/rangetree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/rangetree.yuki1625.test.cpp
     title: segmenttree/test/rangetree.yuki1625.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/document_ja/segtree.html
@@ -44,7 +44,7 @@ data:
     #include <cassert>\n#include <vector>\n\n// #include \"atcoder/internal_bit\"\n\
     \nnamespace atcoder {\n\ntemplate <class S, S (*op)(S, S), S (*e)()> struct segtree\
     \ {\npublic:\n    segtree() : segtree(0) {}\n    explicit segtree(int n) : segtree(std::vector<S>(n,\
-    \ e())) {}\n    explicit segtree(const std::vector<S>& v) : _n(int(v.size()))\
+    \ e())) {}\n    explicit segtree(const std::vector<S> &v) : _n(int(v.size()))\
     \ {\n        log = internal::ceil_pow2(_n);\n        size = 1 << log;\n      \
     \  d = std::vector<S>(2 * size, e());\n        for (int i = 0; i < _n; i++) d[size\
     \ + i] = v[i];\n        for (int i = size - 1; i >= 1; i--) { update(i); }\n \
@@ -89,8 +89,8 @@ data:
   path: segmenttree/acl_segtree.hpp
   requiredBy:
   - segmenttree/rangetree.hpp
-  timestamp: '2021-02-13 02:26:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - segmenttree/test/acl_rsq.test.cpp
   - segmenttree/test/rangetree.yuki1625.test.cpp

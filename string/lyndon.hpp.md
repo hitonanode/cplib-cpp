@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/run_enumerate_lyndon_hash.test.cpp
     title: string/test/run_enumerate_lyndon_hash.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/run_enumerate_lyndon_rmq.test.cpp
     title: string/test/run_enumerate_lyndon_rmq.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://codeforces.com/gym/100162/problem/G
@@ -142,7 +142,7 @@ data:
   path: string/lyndon.hpp
   requiredBy: []
   timestamp: '2021-09-18 15:03:37+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - string/test/run_enumerate_lyndon_rmq.test.cpp
   - string/test/run_enumerate_lyndon_hash.test.cpp

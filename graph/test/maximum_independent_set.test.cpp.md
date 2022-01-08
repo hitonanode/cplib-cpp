@@ -73,15 +73,15 @@ data:
     \           _tmp_state &= ~(1LL << n);\n        }\n\n        while (st.size())\
     \ {\n            int i = st.top();\n            _avail |= 1LL << i;\n        \
     \    _tmp_state &= ~(1LL << i);\n            st.pop();\n        }\n    }\n   \
-    \ MaximumIndependentSet_Intbased(const E &e) : conn(e.size()), V(e.size()), nret(-1),\
-    \ _avail((1LL << V) - 1), _tmp_state(0) {\n        assert(V <= 63);\n        for\
-    \ (int i = 0; i < V; i++)\n            for (auto &j : e[i])\n                if\
-    \ (i != j) conn[i] |= 1LL << j, conn[j] |= 1LL << i;\n        mis_dfs();\n   \
-    \ }\n};\n#line 3 \"graph/test/maximum_independent_set.test.cpp\"\n\n#line 5 \"\
-    graph/test/maximum_independent_set.test.cpp\"\n#include <iostream>\n#line 7 \"\
-    graph/test/maximum_independent_set.test.cpp\"\n\nint main() {\n    int N, M;\n\
-    \    std::cin >> N >> M;\n    std::vector<std::vector<int>> edges(N);\n    while\
-    \ (M--) {\n        int u, v;\n        std::cin >> u >> v;\n        edges[u].emplace_back(v);\n\
+    \ MaximumIndependentSet_Intbased(const E &e)\n        : conn(e.size()), V(e.size()),\
+    \ nret(-1), _avail((1LL << V) - 1), _tmp_state(0) {\n        assert(V <= 63);\n\
+    \        for (int i = 0; i < V; i++)\n            for (auto &j : e[i])\n     \
+    \           if (i != j) conn[i] |= 1LL << j, conn[j] |= 1LL << i;\n        mis_dfs();\n\
+    \    }\n};\n#line 3 \"graph/test/maximum_independent_set.test.cpp\"\n\n#line 5\
+    \ \"graph/test/maximum_independent_set.test.cpp\"\n#include <iostream>\n#line\
+    \ 7 \"graph/test/maximum_independent_set.test.cpp\"\n\nint main() {\n    int N,\
+    \ M;\n    std::cin >> N >> M;\n    std::vector<std::vector<int>> edges(N);\n \
+    \   while (M--) {\n        int u, v;\n        std::cin >> u >> v;\n        edges[u].emplace_back(v);\n\
     \        edges[v].emplace_back(u);\n    }\n    MaximumIndependentSet<decltype(edges),\
     \ 40> mis(edges);\n    MaximumIndependentSet_Intbased<decltype(edges)> misfast(edges);\n\
     \    std::cout << mis.ret.count() << \"\\n\";\n    for (int i = 0; i < N; i++)\
@@ -104,7 +104,7 @@ data:
   isVerificationFile: true
   path: graph/test/maximum_independent_set.test.cpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/maximum_independent_set.test.cpp

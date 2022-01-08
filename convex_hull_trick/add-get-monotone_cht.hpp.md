@@ -14,13 +14,13 @@ data:
     \ monotone increasing queries, monotone decreasing slopes\n// Each operation is\
     \ amortized O(1)\n// - is_minimizer: if true, calculates min. Otherwise, calculates\
     \ max.\n// - add_line(a, b): Add `y = ax + b`, a must be monotone decreasing (if\
-    \ is_minimizer == true) / increasing (otherwise)\n// - add_convex_parabola(c,\
-    \ a, b): Add `y = c(x - a)^2 + b`, c is constant, a is monotone increasing (if\
-    \ is_minimizer == true) / decreasing (otherwise)\n// - get(x): Calculate min/max.\
-    \ value of `y = ax + b`'s at point x, x must be monotone increasing FOR BOTH CASES.\n\
-    // - parabola_get(c, x): Caclculate min/max. value of `y = c(x - a)^2 + b`'s,\
-    \ x must be monotone increasing FOR BOTH CASES.\n// - If you need random access,\
-    \ change `std::list` to `std::deque`\n// Verified: <https://yukicoder.me/submissions/409156>\n\
+    \ is_minimizer == true) /\n// increasing (otherwise)\n// - add_convex_parabola(c,\
+    \ a, b): Add `y = c(x - a)^2 + b`, c is constant, a is monotone\n// increasing\
+    \ (if is_minimizer == true) / decreasing (otherwise)\n// - get(x): Calculate min/max.\
+    \ value of `y = ax + b`'s at point x, x must be monotone increasing\n// FOR BOTH\
+    \ CASES.\n// - parabola_get(c, x): Caclculate min/max. value of `y = c(x - a)^2\
+    \ + b`'s, x must be monotone\n// increasing FOR BOTH CASES.\n// - If you need\
+    \ random access, change `std::list` to `std::deque`\n// Verified: <https://yukicoder.me/submissions/409156>\n\
     template <bool is_minimizer, typename T_CHT = long long, typename T_MP = __int128,\
     \ T_CHT INF = 1LL << 61>\nstruct MonotoneConvexHullTrick : std::list<std::pair<T_CHT,\
     \ T_CHT>> // (a, b) means `y = ax + b`\n{\n    MonotoneConvexHullTrick() = default;\n\
@@ -31,20 +31,21 @@ data:
     \                } else {\n                    this->pop_back();\n           \
     \         continue;\n                }\n            }\n            auto ill =\
     \ std::prev(this->end(), 2);\n            auto l = (T_MP)(this->back().second\
-    \ - ill->second) * (this->back().first - a); // Overflow might occur here.\n \
-    \           auto r = (T_MP)(b - this->back().second) * (ill->first - this->back().first);\n\
-    \            if (l < r) break;\n            this->pop_back();\n        }\n   \
-    \     this->emplace_back(a, b);\n    }\n    T_CHT get(T_CHT x) {\n        while\
-    \ (this->size() > 1u and\n               this->begin()->first * x + this->begin()->second\
-    \ >= (++this->begin())->first * x + (++this->begin())->second)\n            this->pop_front();\n\
-    \        return (this->empty() ? INF : this->begin()->first * x + this->begin()->second)\
-    \ * (is_minimizer ? 1 : -1);\n    }\n    void add_convex_parabola(T_CHT c, T_CHT\
+    \ - ill->second) *\n                     (this->back().first - a); // Overflow\
+    \ might occur here.\n            auto r = (T_MP)(b - this->back().second) * (ill->first\
+    \ - this->back().first);\n            if (l < r) break;\n            this->pop_back();\n\
+    \        }\n        this->emplace_back(a, b);\n    }\n    T_CHT get(T_CHT x) {\n\
+    \        while (this->size() > 1u and this->begin()->first * x + this->begin()->second\
+    \ >=\n                                         (++this->begin())->first * x +\
+    \ (++this->begin())->second)\n            this->pop_front();\n        return (this->empty()\
+    \ ? INF : this->begin()->first * x + this->begin()->second) *\n              \
+    \ (is_minimizer ? 1 : -1);\n    }\n    void add_convex_parabola(T_CHT c, T_CHT\
     \ a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); }\n    T_CHT parabola_get(T_CHT\
-    \ c, T_CHT x) { return get(x) + c * x * x; }\n\n    static MonotoneConvexHullTrick\
-    \ merge(const MonotoneConvexHullTrick &cht1, const MonotoneConvexHullTrick &cht2)\
-    \ {\n        MonotoneConvexHullTrick ret;\n        auto i1 = cht1.begin(), i2\
-    \ = cht2.begin();\n        static const T_CHT sgn = is_minimizer ? 1 : -1;\n \
-    \       T_CHT a = 0, b = 0;\n        while (i1 != cht1.end() and i2 != cht2.end())\
+    \ c, T_CHT x) { return get(x) + c * x * x; }\n\n    static MonotoneConvexHullTrick\n\
+    \    merge(const MonotoneConvexHullTrick &cht1, const MonotoneConvexHullTrick\
+    \ &cht2) {\n        MonotoneConvexHullTrick ret;\n        auto i1 = cht1.begin(),\
+    \ i2 = cht2.begin();\n        static const T_CHT sgn = is_minimizer ? 1 : -1;\n\
+    \        T_CHT a = 0, b = 0;\n        while (i1 != cht1.end() and i2 != cht2.end())\
     \ {\n            if (i1->first == i2->first) {\n                a = i1->first,\
     \ b = std::min(i1->second, i2->second);\n                i1++, i2++;\n       \
     \     } else if (i1->first > i2->first) {\n                a = i1->first, b =\
@@ -57,34 +58,35 @@ data:
     // CUT begin\n// Convex Hull Trick for monotone increasing queries, monotone decreasing\
     \ slopes\n// Each operation is amortized O(1)\n// - is_minimizer: if true, calculates\
     \ min. Otherwise, calculates max.\n// - add_line(a, b): Add `y = ax + b`, a must\
-    \ be monotone decreasing (if is_minimizer == true) / increasing (otherwise)\n\
+    \ be monotone decreasing (if is_minimizer == true) /\n// increasing (otherwise)\n\
     // - add_convex_parabola(c, a, b): Add `y = c(x - a)^2 + b`, c is constant, a\
-    \ is monotone increasing (if is_minimizer == true) / decreasing (otherwise)\n\
+    \ is monotone\n// increasing (if is_minimizer == true) / decreasing (otherwise)\n\
     // - get(x): Calculate min/max. value of `y = ax + b`'s at point x, x must be\
-    \ monotone increasing FOR BOTH CASES.\n// - parabola_get(c, x): Caclculate min/max.\
-    \ value of `y = c(x - a)^2 + b`'s, x must be monotone increasing FOR BOTH CASES.\n\
-    // - If you need random access, change `std::list` to `std::deque`\n// Verified:\
-    \ <https://yukicoder.me/submissions/409156>\ntemplate <bool is_minimizer, typename\
-    \ T_CHT = long long, typename T_MP = __int128, T_CHT INF = 1LL << 61>\nstruct\
-    \ MonotoneConvexHullTrick : std::list<std::pair<T_CHT, T_CHT>> // (a, b) means\
-    \ `y = ax + b`\n{\n    MonotoneConvexHullTrick() = default;\n    void add_line(T_CHT\
+    \ monotone increasing\n// FOR BOTH CASES.\n// - parabola_get(c, x): Caclculate\
+    \ min/max. value of `y = c(x - a)^2 + b`'s, x must be monotone\n// increasing\
+    \ FOR BOTH CASES.\n// - If you need random access, change `std::list` to `std::deque`\n\
+    // Verified: <https://yukicoder.me/submissions/409156>\ntemplate <bool is_minimizer,\
+    \ typename T_CHT = long long, typename T_MP = __int128, T_CHT INF = 1LL << 61>\n\
+    struct MonotoneConvexHullTrick : std::list<std::pair<T_CHT, T_CHT>> // (a, b)\
+    \ means `y = ax + b`\n{\n    MonotoneConvexHullTrick() = default;\n    void add_line(T_CHT\
     \ a, T_CHT b) { // Add y = ax + b\n        if (!is_minimizer) a = -a, b = -b;\n\
     \        assert(this->empty() or this->back().first >= a);\n        while (this->size()\
     \ > 1u) {\n            if (this->back().first == a) {\n                if (this->back().second\
     \ <= b) {\n                    return;\n                } else {\n           \
     \         this->pop_back();\n                    continue;\n                }\n\
     \            }\n            auto ill = std::prev(this->end(), 2);\n          \
-    \  auto l = (T_MP)(this->back().second - ill->second) * (this->back().first -\
-    \ a); // Overflow might occur here.\n            auto r = (T_MP)(b - this->back().second)\
-    \ * (ill->first - this->back().first);\n            if (l < r) break;\n      \
-    \      this->pop_back();\n        }\n        this->emplace_back(a, b);\n    }\n\
-    \    T_CHT get(T_CHT x) {\n        while (this->size() > 1u and\n            \
-    \   this->begin()->first * x + this->begin()->second >= (++this->begin())->first\
-    \ * x + (++this->begin())->second)\n            this->pop_front();\n        return\
-    \ (this->empty() ? INF : this->begin()->first * x + this->begin()->second) * (is_minimizer\
-    \ ? 1 : -1);\n    }\n    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) {\
-    \ add_line(c * a * (-2), c * a * a + b); }\n    T_CHT parabola_get(T_CHT c, T_CHT\
-    \ x) { return get(x) + c * x * x; }\n\n    static MonotoneConvexHullTrick merge(const\
+    \  auto l = (T_MP)(this->back().second - ill->second) *\n                    \
+    \ (this->back().first - a); // Overflow might occur here.\n            auto r\
+    \ = (T_MP)(b - this->back().second) * (ill->first - this->back().first);\n   \
+    \         if (l < r) break;\n            this->pop_back();\n        }\n      \
+    \  this->emplace_back(a, b);\n    }\n    T_CHT get(T_CHT x) {\n        while (this->size()\
+    \ > 1u and this->begin()->first * x + this->begin()->second >=\n             \
+    \                            (++this->begin())->first * x + (++this->begin())->second)\n\
+    \            this->pop_front();\n        return (this->empty() ? INF : this->begin()->first\
+    \ * x + this->begin()->second) *\n               (is_minimizer ? 1 : -1);\n  \
+    \  }\n    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(c * a\
+    \ * (-2), c * a * a + b); }\n    T_CHT parabola_get(T_CHT c, T_CHT x) { return\
+    \ get(x) + c * x * x; }\n\n    static MonotoneConvexHullTrick\n    merge(const\
     \ MonotoneConvexHullTrick &cht1, const MonotoneConvexHullTrick &cht2) {\n    \
     \    MonotoneConvexHullTrick ret;\n        auto i1 = cht1.begin(), i2 = cht2.begin();\n\
     \        static const T_CHT sgn = is_minimizer ? 1 : -1;\n        T_CHT a = 0,\
@@ -101,7 +103,7 @@ data:
   isVerificationFile: false
   path: convex_hull_trick/add-get-monotone_cht.hpp
   requiredBy: []
-  timestamp: '2021-01-08 19:10:55+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: convex_hull_trick/add-get-monotone_cht.hpp

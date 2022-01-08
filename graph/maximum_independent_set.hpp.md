@@ -71,11 +71,11 @@ data:
     \           _tmp_state &= ~(1LL << n);\n        }\n\n        while (st.size())\
     \ {\n            int i = st.top();\n            _avail |= 1LL << i;\n        \
     \    _tmp_state &= ~(1LL << i);\n            st.pop();\n        }\n    }\n   \
-    \ MaximumIndependentSet_Intbased(const E &e) : conn(e.size()), V(e.size()), nret(-1),\
-    \ _avail((1LL << V) - 1), _tmp_state(0) {\n        assert(V <= 63);\n        for\
-    \ (int i = 0; i < V; i++)\n            for (auto &j : e[i])\n                if\
-    \ (i != j) conn[i] |= 1LL << j, conn[j] |= 1LL << i;\n        mis_dfs();\n   \
-    \ }\n};\n"
+    \ MaximumIndependentSet_Intbased(const E &e)\n        : conn(e.size()), V(e.size()),\
+    \ nret(-1), _avail((1LL << V) - 1), _tmp_state(0) {\n        assert(V <= 63);\n\
+    \        for (int i = 0; i < V; i++)\n            for (auto &j : e[i])\n     \
+    \           if (i != j) conn[i] |= 1LL << j, conn[j] |= 1LL << i;\n        mis_dfs();\n\
+    \    }\n};\n"
   code: "#pragma once\n#include <bitset>\n#include <cassert>\n#include <stack>\n#include\
     \ <vector>\n\n// CUT begin\n// Maximum Independent Set for general graph \uFF08\
     \u6700\u5927\u72EC\u7ACB\u96C6\u5408\uFF09\n// Works with reasonable time complexity\
@@ -133,16 +133,16 @@ data:
     \           _tmp_state &= ~(1LL << n);\n        }\n\n        while (st.size())\
     \ {\n            int i = st.top();\n            _avail |= 1LL << i;\n        \
     \    _tmp_state &= ~(1LL << i);\n            st.pop();\n        }\n    }\n   \
-    \ MaximumIndependentSet_Intbased(const E &e) : conn(e.size()), V(e.size()), nret(-1),\
-    \ _avail((1LL << V) - 1), _tmp_state(0) {\n        assert(V <= 63);\n        for\
-    \ (int i = 0; i < V; i++)\n            for (auto &j : e[i])\n                if\
-    \ (i != j) conn[i] |= 1LL << j, conn[j] |= 1LL << i;\n        mis_dfs();\n   \
-    \ }\n};"
+    \ MaximumIndependentSet_Intbased(const E &e)\n        : conn(e.size()), V(e.size()),\
+    \ nret(-1), _avail((1LL << V) - 1), _tmp_state(0) {\n        assert(V <= 63);\n\
+    \        for (int i = 0; i < V; i++)\n            for (auto &j : e[i])\n     \
+    \           if (i != j) conn[i] |= 1LL << j, conn[j] |= 1LL << i;\n        mis_dfs();\n\
+    \    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: graph/maximum_independent_set.hpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/maximum_independent_set.test.cpp

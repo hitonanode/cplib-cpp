@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: sparse_table/sparse_table.hpp
     title: Sparse table
   _extendedRequiredBy: []

@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/suffix_array_doubling.hpp
     title: string/suffix_array_doubling.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/number_of_substrings
@@ -32,17 +32,18 @@ data:
     \            return ri < rj;\n        };\n        std::vector<int> tmp(N + 1);\n\
     \        for (_ord_mm = 1; _ord_mm <= N; _ord_mm *= 2) {\n            std::sort(SA.begin(),\
     \ SA.end(), _comp_suffarr);\n            tmp[SA[0]] = 0;\n            for (int\
-    \ i = 1; i <= N; i++) { tmp[SA[i]] = tmp[SA[i - 1]] + _comp_suffarr(SA[i - 1],\
-    \ SA[i]); }\n            rank = tmp;\n        }\n        if (!gen_lcp) return;\n\
-    \n        lcp.assign(N, 0);\n        int h = 0;\n        for (int i = 0; i < N;\
-    \ i++) {\n            int j = SA[rank[i] - 1];\n            if (h) h--;\n    \
-    \        for (; j + h < N and i + h < N; h++)\n                if (S[j + h] !=\
-    \ S[i + h]) break;\n            lcp[rank[i] - 1] = h;\n        }\n    }\n};\n\
-    #line 2 \"string/test/lcp.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\
-    \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
-    \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, true);\n\n    long long\
-    \ ret = (long long)S.length() * (S.length() + 1) / 2;\n    std::cout << ret -\
-    \ std::accumulate(sa.lcp.begin(), sa.lcp.end(), 0LL) << '\\n';\n}\n"
+    \ i = 1; i <= N; i++) {\n                tmp[SA[i]] = tmp[SA[i - 1]] + _comp_suffarr(SA[i\
+    \ - 1], SA[i]);\n            }\n            rank = tmp;\n        }\n        if\
+    \ (!gen_lcp) return;\n\n        lcp.assign(N, 0);\n        int h = 0;\n      \
+    \  for (int i = 0; i < N; i++) {\n            int j = SA[rank[i] - 1];\n     \
+    \       if (h) h--;\n            for (; j + h < N and i + h < N; h++)\n      \
+    \          if (S[j + h] != S[i + h]) break;\n            lcp[rank[i] - 1] = h;\n\
+    \        }\n    }\n};\n#line 2 \"string/test/lcp.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/number_of_substrings\"\n#include <iostream>\n\
+    #include <string>\n\nint main() {\n    std::string S;\n    std::cin >> S;\n  \
+    \  SuffixArray<decltype(S)> sa(S, true);\n\n    long long ret = (long long)S.length()\
+    \ * (S.length() + 1) / 2;\n    std::cout << ret - std::accumulate(sa.lcp.begin(),\
+    \ sa.lcp.end(), 0LL) << '\\n';\n}\n"
   code: "#include \"../suffix_array_doubling.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\
     \n#include <iostream>\n#include <string>\n\nint main() {\n    std::string S;\n\
     \    std::cin >> S;\n    SuffixArray<decltype(S)> sa(S, true);\n\n    long long\
@@ -53,8 +54,8 @@ data:
   isVerificationFile: true
   path: string/test/lcp.test.cpp
   requiredBy: []
-  timestamp: '2021-01-02 00:51:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 20:23:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: string/test/lcp.test.cpp
 layout: document
