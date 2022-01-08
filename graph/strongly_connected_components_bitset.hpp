@@ -1,5 +1,6 @@
 #pragma once
 #include <bitset>
+#include <iostream>
 #include <vector>
 
 // CUT begin
@@ -15,24 +16,41 @@ template <int VMAX> struct DirectedGraphSCC64 {
     std::vector<int> vs, cmp;
     std::bitset<VMAX> unvisited;
     int scc_num;
-    void _dfs(int now) {
-        unvisited.reset(now);
-        while (true) {
+    std::vector<int> _st;
+
+    void _dfs(int head) {
+        _st = {head};
+        unvisited.reset(head);
+        while (!_st.empty()) {
+            int now = _st.back();
+            unvisited.reset(now);
             int nxt = (unvisited & e[now])._Find_first();
-            if (nxt >= V) break;
-            _dfs(nxt);
-        }
-        vs.push_back(now);
-    }
-    void _rdfs(int now, int k) {
-        unvisited.reset(now);
-        cmp[now] = k;
-        while (true) {
-            int nxt = (unvisited & einv[now])._Find_first();
-            if (nxt >= V) break;
-            _rdfs(nxt, k);
+            if (nxt < V) {
+                unvisited.reset(nxt);
+                _st.push_back(nxt);
+            } else {
+                _st.pop_back();
+                vs.push_back(now);
+            }
         }
     }
+
+    void _rdfs(int head, int k) {
+        _st = {head};
+        unvisited.reset(head);
+        while (!_st.empty()) {
+            int now = _st.back();
+            _st.pop_back();
+            cmp[now] = k;
+            while (true) {
+                int nxt = (unvisited & einv[now])._Find_first();
+                if (nxt >= V) break;
+                _st.push_back(nxt);
+                unvisited.reset(nxt);
+            }
+        }
+    }
+
     // Detect strongly connected components and return # of them.
     // Also, assign each vertex `v` the scc id `cmp[v]` (0-indexed)
     DirectedGraphSCC64(const std::vector<std::bitset<VMAX>> &edge,
