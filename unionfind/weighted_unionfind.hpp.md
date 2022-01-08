@@ -55,8 +55,8 @@ data:
   timestamp: '2021-10-27 23:41:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - unionfind/test/weighted_unionfind_int.aoj3142.test.cpp
   - unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
+  - unionfind/test/weighted_unionfind_int.aoj3142.test.cpp
   - unionfind/test/weighted_unionfind.test.cpp
 documentation_of: unionfind/weighted_unionfind.hpp
 layout: document

@@ -28,28 +28,34 @@ data:
     \   Point2d operator+(const Point2d &p) const noexcept { return Point2d(x + p.x,\
     \ y + p.y); }\n    Point2d operator-(const Point2d &p) const noexcept { return\
     \ Point2d(x - p.x, y - p.y); }\n    Point2d operator*(const Point2d &p) const\
-    \ noexcept { return Point2d(x * p.x - y * p.y, x * p.y + y * p.x); }\n    Point2d\
+    \ noexcept {\n        static_assert(std::is_floating_point<T_P>::value == true);\n\
+    \        return Point2d(x * p.x - y * p.y, x * p.y + y * p.x);\n    }\n    Point2d\
     \ operator*(T_P d) const noexcept { return Point2d(x * d, y * d); }\n    Point2d\
-    \ operator/(T_P d) const noexcept { return Point2d(x / d, y / d); }\n    Point2d\
-    \ inv() const { return conj() / norm2(); }\n    Point2d operator/(const Point2d\
-    \ &p) const { return (*this) * p.inv(); }\n    bool operator<(const Point2d &r)\
-    \ const noexcept { return x != r.x ? x < r.x : y < r.y; }\n    bool operator==(const\
+    \ operator/(T_P d) const noexcept {\n        static_assert(std::is_floating_point<T_P>::value\
+    \ == true);\n        return Point2d(x / d, y / d);\n    }\n    Point2d inv() const\
+    \ {\n        static_assert(std::is_floating_point<T_P>::value == true);\n    \
+    \    return conj() / norm2();\n    }\n    Point2d operator/(const Point2d &p)\
+    \ const { return (*this) * p.inv(); }\n    bool operator<(const Point2d &r) const\
+    \ noexcept { return x != r.x ? x < r.x : y < r.y; }\n    bool operator==(const\
     \ Point2d &r) const noexcept { return x == r.x and y == r.y; }\n    bool operator!=(const\
     \ Point2d &r) const noexcept { return !((*this) == r); }\n    T_P dot(Point2d\
     \ p) const noexcept { return x * p.x + y * p.y; }\n    T_P det(Point2d p) const\
     \ noexcept { return x * p.y - y * p.x; }\n    T_P absdet(Point2d p) const noexcept\
-    \ { return std::abs(det(p)); }\n    T_P norm() const noexcept { return std::sqrt(x\
-    \ * x + y * y); }\n    T_P norm2() const noexcept { return x * x + y * y; }\n\
-    \    T_P arg() const noexcept { return std::atan2(y, x); }\n    // rotate point/vector\
-    \ by rad\n    Point2d rotate(T_P rad) const noexcept {\n        return Point2d(x\
-    \ * std::cos(rad) - y * std::sin(rad), x * std::sin(rad) + y * std::cos(rad));\n\
-    \    }\n    Point2d normalized() const { return (*this) / this->norm(); }\n  \
-    \  Point2d conj() const noexcept { return Point2d(x, -y); }\n    friend std::istream\
-    \ &operator>>(std::istream &is, Point2d &p) {\n        T_P x, y;\n        is >>\
-    \ x >> y;\n        p = Point2d(x, y);\n        return is;\n    }\n    friend std::ostream\
-    \ &operator<<(std::ostream &os, const Point2d &p) {\n        os << '(' << p.x\
-    \ << ',' << p.y << ')';\n        return os;\n    }\n};\ntemplate <> double Point2d<double>::EPS\
-    \ = 1e-9;\ntemplate <> long double Point2d<long double>::EPS = 1e-12;\ntemplate\
+    \ { return std::abs(det(p)); }\n    T_P norm() const noexcept {\n        static_assert(std::is_floating_point<T_P>::value\
+    \ == true);\n        return std::sqrt(x * x + y * y);\n    }\n    T_P norm2()\
+    \ const noexcept { return x * x + y * y; }\n    T_P arg() const noexcept { return\
+    \ std::atan2(y, x); }\n    // rotate point/vector by rad\n    Point2d rotate(T_P\
+    \ rad) const noexcept {\n        static_assert(std::is_floating_point<T_P>::value\
+    \ == true);\n        return Point2d(x * std::cos(rad) - y * std::sin(rad), x *\
+    \ std::sin(rad) + y * std::cos(rad));\n    }\n    Point2d normalized() const {\n\
+    \        static_assert(std::is_floating_point<T_P>::value == true);\n        return\
+    \ (*this) / this->norm();\n    }\n    Point2d conj() const noexcept { return Point2d(x,\
+    \ -y); }\n\n    template <class IStream> friend IStream &operator>>(IStream &is,\
+    \ Point2d &p) {\n        T_P x, y;\n        is >> x >> y;\n        p = Point2d(x,\
+    \ y);\n        return is;\n    }\n    template <class OStream> friend OStream\
+    \ &operator<<(OStream &os, const Point2d &p) {\n        return os << '(' << p.x\
+    \ << ',' << p.y << ')';\n    }\n};\ntemplate <> double Point2d<double>::EPS =\
+    \ 1e-9;\ntemplate <> long double Point2d<long double>::EPS = 1e-12;\ntemplate\
     \ <> long long Point2d<long long>::EPS = 0;\n\ntemplate <typename T_P>\nint ccw(const\
     \ Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) { // a->b->c\u306E\
     \u66F2\u304C\u308A\u65B9\n    Point2d<T_P> v1 = b - a;\n    Point2d<T_P> v2 =\
@@ -72,11 +78,13 @@ data:
     \ 1].first, points[i].first))) k--;\n        qs[k++] = points[i];\n    }\n   \
     \ std::vector<int> ret(k - 1);\n    for (int i = 0; i < k - 1; i++) ret[i] = qs[i].second;\n\
     \    return ret;\n}\n\n// Solve r1 + t1 * v1 == r2 + t2 * v2\ntemplate <typename\
-    \ T_P>\nPoint2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P>\
-    \ r2, Point2d<T_P> v2) {\n    assert(v2.det(v1) != 0);\n    return r1 + v1 * (v2.det(r2\
-    \ - r1) / v2.det(v1));\n}\n\n// Whether two segments s1t1 & s2t2 intersect or\
-    \ not (endpoints not included)\n// Google Code Jam 2013 Round 3 - Rural Planning\n\
-    // Google Code Jam 2021 Round 3 - Fence Design\ntemplate <typename T> bool intersect_open_segments(Point2d<T>\
+    \ T_P, typename std::enable_if<std::is_floating_point<T_P>::value>::type * = nullptr>\n\
+    Point2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P> r2,\
+    \ Point2d<T_P> v2) {\n    static_assert(std::is_floating_point<T_P>::value ==\
+    \ true);\n    assert(v2.det(v1) != 0);\n    return r1 + v1 * (v2.det(r2 - r1)\
+    \ / v2.det(v1));\n}\n\n// Whether two segments s1t1 & s2t2 intersect or not (endpoints\
+    \ not included)\n// Google Code Jam 2013 Round 3 - Rural Planning\n// Google Code\
+    \ Jam 2021 Round 3 - Fence Design\ntemplate <typename T>\nbool intersect_open_segments(Point2d<T>\
     \ s1, Point2d<T> t1, Point2d<T> s2, Point2d<T> t2) {\n    if (s1 == t1 or s2 ==\
     \ t2) return false; // Not segment but point\n    int nbad = 0;\n    for (int\
     \ t = 0; t < 2; t++) {\n        Point2d<T> v1 = t1 - s1, v2 = t2 - s2;\n     \
@@ -96,70 +104,72 @@ data:
     \ t) return false;\n    auto v = t - s, w = p - s;\n    if (v.absdet(w)) return\
     \ false;\n    auto vv = v.dot(v), vw = v.dot(w);\n    return vw > 0 and vw < vv;\n\
     }\n\n// Convex cut\n// Cut the convex polygon g by line p1->p2 and return the\
-    \ leftward one\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>> convex_cut(const\
-    \ std::vector<Point2d<T_P>> &g, Point2d<T_P> p1, Point2d<T_P> p2) {\n    assert(p1\
-    \ != p2);\n    std::vector<Point2d<T_P>> ret;\n    for (int i = 0; i < (int)g.size();\
-    \ i++) {\n        const Point2d<T_P> &now = g[i], &nxt = g[(i + 1) % g.size()];\n\
-    \        if (ccw(p1, p2, now) != -1) ret.push_back(now);\n        if ((ccw(p1,\
-    \ p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) {\n            ret.push_back(lines_crosspoint(now,\
-    \ nxt - now, p1, p2 - p1));\n        }\n    }\n    return ret;\n}\n\n// 2\u5186\
-    \u306E\u4EA4\u70B9 (ABC157F)\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>>\
-    \ IntersectTwoCircles(const Point2d<T_P> &Ca, double Ra, const Point2d<T_P> &Cb,\
-    \ double Rb) {\n    double d = (Ca - Cb).norm();\n    if (Ra + Rb < d) return\
-    \ {};\n    double rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);\n    double rs =\
-    \ sqrt(Ra * Ra - rc * rc);\n    Point2d<T_P> diff = (Cb - Ca) / d;\n    return\
-    \ {Ca + diff * Point2d<T_P>(rc, rs), Ca + diff * Point2d<T_P>(rc, -rs)};\n}\n\n\
-    // Solve |x0 + vt| = R (SRM 543 Div.1 1000, GCJ 2016 R3 C)\ntemplate <typename\
-    \ PointNd, typename Float>\nstd::vector<Float> IntersectCircleLine(const PointNd\
-    \ &x0, const PointNd &v, Float R) {\n    Float b = Float(x0.dot(v)) / v.norm2();\n\
-    \    Float c = Float(x0.norm2() - Float(R) * R) / v.norm2();\n    if (b * b -\
-    \ c < 0) return {};\n    Float ret1 = -b + sqrtl(b * b - c) * (b > 0 ? -1 : 1);\n\
-    \    Float ret2 = c / ret1;\n    return ret1 < ret2 ? std::vector<Float>{ret1,\
-    \ ret2} : std::vector<Float>{ret2, ret1};\n}\n\n// Distance between point p <->\
-    \ line ab\ntemplate <typename PointFloat>\ndecltype(PointFloat::x) DistancePointLine(const\
-    \ PointFloat &p, const PointFloat &a, const PointFloat &b) {\n    assert(a !=\
-    \ b);\n    return (b - a).absdet(p - a) / (b - a).norm();\n}\n\n// Distance between\
-    \ point p <-> line segment ab\ntemplate <typename PointFloat>\ndecltype(PointFloat::x)\
-    \ DistancePointSegment(const PointFloat &p, const PointFloat &a, const PointFloat\
-    \ &b) {\n    if (a == b) {\n        return (p - a).norm();\n    } else if ((p\
-    \ - a).dot(b - a) <= 0) {\n        return (p - a).norm();\n    } else if ((p -\
-    \ b).dot(a - b) <= 0) {\n        return (p - b).norm();\n    } else {\n      \
-    \  return DistancePointLine<PointFloat>(p, a, b);\n    }\n}\n\n// Area of polygon\
-    \ (might be negative)\ntemplate <typename T_P> T_P signed_area_of_polygon(const\
-    \ std::vector<Point2d<T_P>> &poly) {\n    T_P area = 0;\n    for (size_t i = 0;\
-    \ i < poly.size(); i++) area += poly[i].det(poly[(i + 1) % poly.size()]);\n  \
-    \  return area * 0.5;\n}\n#line 5 \"geometry/point3d.hpp\"\n\n// CUT begin\ntemplate\
-    \ <typename T> struct Point3d {\n    T x, y, z;\n    Point3d() : x(0), y(0), z(0)\
-    \ {}\n    Point3d(T x_, T y_, T z_) : x(x_), y(y_), z(z_) {}\n    Point3d(const\
-    \ std::tuple<T, T, T> &init) { std::tie(x, y, z) = init; }\n    Point3d operator+(const\
-    \ Point3d &p) const noexcept { return {x + p.x, y + p.y, z + p.z}; }\n    Point3d\
-    \ operator-(const Point3d &p) const noexcept { return {x - p.x, y - p.y, z - p.z};\
-    \ }\n    Point3d operator*(T d) const noexcept { return {x * d, y * d, z * d};\
-    \ }\n    Point3d operator/(T d) const { return {x / d, y / d, z / d}; }\n    bool\
-    \ operator<(const Point3d &r) const noexcept { return x != r.x ? x < r.x : (y\
-    \ != r.y ? y < r.y : z < r.z); }\n    bool operator==(const Point3d &r) const\
-    \ noexcept { return x == r.x and y == r.y and z == r.z; }\n    bool operator!=(const\
-    \ Point3d &r) const noexcept { return !((*this) == r); }\n    T dot(const Point3d\
-    \ &p) const noexcept { return x * p.x + y * p.y + z * p.z; }\n    T absdet(const\
-    \ Point3d &p) const noexcept {\n        return Point3d(y * p.z - z * p.y, z *\
-    \ p.x - x * p.z, x * p.y - y * p.x).norm();\n    }\n    T norm() const noexcept\
-    \ { return std::sqrt(x * x + y * y + z * z); }\n    T norm2() const noexcept {\
-    \ return x * x + y * y + z * z; }\n    Point3d normalized() const { return (*this)\
-    \ / this->norm(); }\n    friend std::istream &operator>>(std::istream &is, Point3d\
-    \ &p) { return is >> p.x >> p.y >> p.z; }\n    friend std::ostream &operator<<(std::ostream\
-    \ &os, const Point3d &p) {\n        return os << '(' << p.x << ',' << p.y << ','\
-    \ << p.z << ')';\n    }\n};\n#line 5 \"geometry/triangle.hpp\"\n\n// CUT begin\n\
-    // Circumcenter \uFF08\u4E09\u89D2\u5F62\u306E\u5916\u5FC3\uFF09\ntemplate <typename\
-    \ Float>\nPoint2d<Float> circumcenter(const Point2d<Float> &A, const Point2d<Float>\
-    \ &B, const Point2d<Float> &C) {\n    std::complex<Float> a = (C - A).to_complex(),\
-    \ b = (B - A).to_complex();\n    return A + Point2d<Float>(a * b * std::conj(a\
-    \ - b) / (std::conj(a) * b - a * std::conj(b)));\n}\ntemplate <typename Float>\n\
-    Point3d<Float> circumcenter(const Point3d<Float> &A, const Point3d<Float> &B,\
-    \ const Point3d<Float> &C) {\n    auto a = (B - C).norm(), b = (C - A).norm(),\
-    \ c = (A - B).norm();\n    auto acosA = a * a * (C - A).dot(B - A);\n    auto\
-    \ bcosB = b * b * (A - B).dot(C - B);\n    auto ccosC = c * c * (B - C).dot(A\
-    \ - C);\n    return (A * acosA + B * bcosB + C * ccosC) / (acosA + bcosB + ccosC);\n\
-    }\n"
+    \ leftward one\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>>\nconvex_cut(const\
+    \ std::vector<Point2d<T_P>> &g, Point2d<T_P> p1, Point2d<T_P> p2) {\n    static_assert(std::is_floating_point<T_P>::value\
+    \ == true);\n    assert(p1 != p2);\n    std::vector<Point2d<T_P>> ret;\n    for\
+    \ (int i = 0; i < (int)g.size(); i++) {\n        const Point2d<T_P> &now = g[i],\
+    \ &nxt = g[(i + 1) % g.size()];\n        if (ccw(p1, p2, now) != -1) ret.push_back(now);\n\
+    \        if ((ccw(p1, p2, now) == -1) xor (ccw(p1, p2, nxt) == -1)) {\n      \
+    \      ret.push_back(lines_crosspoint(now, nxt - now, p1, p2 - p1));\n       \
+    \ }\n    }\n    return ret;\n}\n\n// 2\u5186\u306E\u4EA4\u70B9 (ABC157F, SRM 559\
+    \ Div.1 900)\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>>\nIntersectTwoCircles(const\
+    \ Point2d<T_P> &Ca, T_P Ra, const Point2d<T_P> &Cb, T_P Rb) {\n    static_assert(std::is_floating_point<T_P>::value\
+    \ == true);\n    T_P d = (Ca - Cb).norm();\n    if (Ra + Rb < d) return {};\n\
+    \    T_P rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);\n    T_P rs2 = Ra * Ra -\
+    \ rc * rc;\n    if (rs2 < 0) return {};\n    T_P rs = std::sqrt(rs2);\n    Point2d<T_P>\
+    \ diff = (Cb - Ca) / d;\n    return {Ca + diff * Point2d<T_P>(rc, rs), Ca + diff\
+    \ * Point2d<T_P>(rc, -rs)};\n}\n\n// Solve |x0 + vt| = R (SRM 543 Div.1 1000,\
+    \ GCJ 2016 R3 C)\ntemplate <typename PointNd, typename Float>\nstd::vector<Float>\
+    \ IntersectCircleLine(const PointNd &x0, const PointNd &v, Float R) {\n    static_assert(std::is_floating_point<Float>::value\
+    \ == true);\n    Float b = Float(x0.dot(v)) / v.norm2();\n    Float c = Float(x0.norm2()\
+    \ - Float(R) * R) / v.norm2();\n    if (b * b - c < 0) return {};\n    Float ret1\
+    \ = -b + sqrtl(b * b - c) * (b > 0 ? -1 : 1);\n    Float ret2 = c / ret1;\n  \
+    \  return ret1 < ret2 ? std::vector<Float>{ret1, ret2} : std::vector<Float>{ret2,\
+    \ ret1};\n}\n\n// Distance between point p <-> line ab\ntemplate <typename PointFloat>\n\
+    decltype(PointFloat::x)\nDistancePointLine(const PointFloat &p, const PointFloat\
+    \ &a, const PointFloat &b) {\n    assert(a != b);\n    return (b - a).absdet(p\
+    \ - a) / (b - a).norm();\n}\n\n// Distance between point p <-> line segment ab\n\
+    template <typename PointFloat>\ndecltype(PointFloat::x)\nDistancePointSegment(const\
+    \ PointFloat &p, const PointFloat &a, const PointFloat &b) {\n    if (a == b)\
+    \ {\n        return (p - a).norm();\n    } else if ((p - a).dot(b - a) <= 0) {\n\
+    \        return (p - a).norm();\n    } else if ((p - b).dot(a - b) <= 0) {\n \
+    \       return (p - b).norm();\n    } else {\n        return DistancePointLine<PointFloat>(p,\
+    \ a, b);\n    }\n}\n\n// Area of polygon (might be negative)\ntemplate <typename\
+    \ T_P> T_P signed_area_of_polygon(const std::vector<Point2d<T_P>> &poly) {\n \
+    \   static_assert(std::is_floating_point<T_P>::value == true);\n    T_P area =\
+    \ 0;\n    for (size_t i = 0; i < poly.size(); i++) area += poly[i].det(poly[(i\
+    \ + 1) % poly.size()]);\n    return area * 0.5;\n}\n#line 5 \"geometry/point3d.hpp\"\
+    \n\n// CUT begin\ntemplate <typename T> struct Point3d {\n    T x, y, z;\n   \
+    \ Point3d() : x(0), y(0), z(0) {}\n    Point3d(T x_, T y_, T z_) : x(x_), y(y_),\
+    \ z(z_) {}\n    Point3d(const std::tuple<T, T, T> &init) { std::tie(x, y, z) =\
+    \ init; }\n    Point3d operator+(const Point3d &p) const noexcept { return {x\
+    \ + p.x, y + p.y, z + p.z}; }\n    Point3d operator-(const Point3d &p) const noexcept\
+    \ { return {x - p.x, y - p.y, z - p.z}; }\n    Point3d operator*(T d) const noexcept\
+    \ { return {x * d, y * d, z * d}; }\n    Point3d operator/(T d) const { return\
+    \ {x / d, y / d, z / d}; }\n    bool operator<(const Point3d &r) const noexcept\
+    \ { return x != r.x ? x < r.x : (y != r.y ? y < r.y : z < r.z); }\n    bool operator==(const\
+    \ Point3d &r) const noexcept { return x == r.x and y == r.y and z == r.z; }\n\
+    \    bool operator!=(const Point3d &r) const noexcept { return !((*this) == r);\
+    \ }\n    T dot(const Point3d &p) const noexcept { return x * p.x + y * p.y + z\
+    \ * p.z; }\n    T absdet(const Point3d &p) const noexcept {\n        return Point3d(y\
+    \ * p.z - z * p.y, z * p.x - x * p.z, x * p.y - y * p.x).norm();\n    }\n    T\
+    \ norm() const noexcept { return std::sqrt(x * x + y * y + z * z); }\n    T norm2()\
+    \ const noexcept { return x * x + y * y + z * z; }\n    Point3d normalized() const\
+    \ { return (*this) / this->norm(); }\n    friend std::istream &operator>>(std::istream\
+    \ &is, Point3d &p) { return is >> p.x >> p.y >> p.z; }\n    friend std::ostream\
+    \ &operator<<(std::ostream &os, const Point3d &p) {\n        return os << '('\
+    \ << p.x << ',' << p.y << ',' << p.z << ')';\n    }\n};\n#line 5 \"geometry/triangle.hpp\"\
+    \n\n// CUT begin\n// Circumcenter \uFF08\u4E09\u89D2\u5F62\u306E\u5916\u5FC3\uFF09\
+    \ntemplate <typename Float>\nPoint2d<Float> circumcenter(const Point2d<Float>\
+    \ &A, const Point2d<Float> &B, const Point2d<Float> &C) {\n    std::complex<Float>\
+    \ a = (C - A).to_complex(), b = (B - A).to_complex();\n    return A + Point2d<Float>(a\
+    \ * b * std::conj(a - b) / (std::conj(a) * b - a * std::conj(b)));\n}\ntemplate\
+    \ <typename Float>\nPoint3d<Float> circumcenter(const Point3d<Float> &A, const\
+    \ Point3d<Float> &B, const Point3d<Float> &C) {\n    auto a = (B - C).norm(),\
+    \ b = (C - A).norm(), c = (A - B).norm();\n    auto acosA = a * a * (C - A).dot(B\
+    \ - A);\n    auto bcosB = b * b * (A - B).dot(C - B);\n    auto ccosC = c * c\
+    \ * (B - C).dot(A - C);\n    return (A * acosA + B * bcosB + C * ccosC) / (acosA\
+    \ + bcosB + ccosC);\n}\n"
   code: "#pragma once\n#include \"geometry.hpp\"\n#include \"point3d.hpp\"\n#include\
     \ <complex>\n\n// CUT begin\n// Circumcenter \uFF08\u4E09\u89D2\u5F62\u306E\u5916\
     \u5FC3\uFF09\ntemplate <typename Float>\nPoint2d<Float> circumcenter(const Point2d<Float>\
@@ -178,7 +188,7 @@ data:
   isVerificationFile: false
   path: geometry/triangle.hpp
   requiredBy: []
-  timestamp: '2021-06-06 03:50:20+09:00'
+  timestamp: '2022-01-08 19:18:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - geometry/test/circumcenter.test.cpp

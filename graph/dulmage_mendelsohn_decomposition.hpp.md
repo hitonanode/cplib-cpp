@@ -213,9 +213,9 @@ data:
   timestamp: '2021-11-03 21:38:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
   - graph/test/dulmage_mendelsohn.yuki1745.test.cpp
   - graph/test/dulmage_mendelsohn.yuki1744.test.cpp
-  - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
 documentation_of: graph/dulmage_mendelsohn_decomposition.hpp
 layout: document
 title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"

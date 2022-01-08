@@ -169,8 +169,8 @@ data:
   timestamp: '2021-09-07 01:07:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
   - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
+  - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
 documentation_of: combinatorial_opt/matroid_intersection.hpp
 layout: document
 title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\uFF09\

@@ -119,9 +119,9 @@ data:
   timestamp: '2021-06-06 15:23:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - tree/test/frequency_table_of_tree_distance.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - tree/test/frequency_table_of_tree_distance.test.cpp
 documentation_of: tree/centroid_decomposition.hpp
 layout: document
 redirect_from:

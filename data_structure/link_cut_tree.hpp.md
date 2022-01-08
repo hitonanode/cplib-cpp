@@ -190,10 +190,10 @@ data:
   timestamp: '2021-07-23 17:14:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/link_cut_tree.aoj2450.test.cpp
-  - data_structure/test/link_cut_tree.composition.test.cpp
-  - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+  - data_structure/test/link_cut_tree.aoj2450.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
+  - data_structure/test/link_cut_tree.composition.test.cpp
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - data_structure/test/link_cut_tree.sum.test.cpp
 documentation_of: data_structure/link_cut_tree.hpp

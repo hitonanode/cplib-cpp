@@ -119,8 +119,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/factorize_longlong.test.cpp
-  - number/test/miller-rabin-5e7.test.cpp
   - number/test/miller-rabin.test.cpp
+  - number/test/miller-rabin-5e7.test.cpp
   - number/test/factorize_aoj.test.cpp
   - graph/test/chromatic_number.test.cpp
 documentation_of: number/factorize.hpp
