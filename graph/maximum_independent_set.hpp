@@ -134,7 +134,8 @@ template <typename E> struct MaximumIndependentSet_Intbased {
             st.pop();
         }
     }
-    MaximumIndependentSet_Intbased(const E &e) : conn(e.size()), V(e.size()), nret(-1), _avail((1LL << V) - 1), _tmp_state(0) {
+    MaximumIndependentSet_Intbased(const E &e)
+        : conn(e.size()), V(e.size()), nret(-1), _avail((1LL << V) - 1), _tmp_state(0) {
         assert(V <= 63);
         for (int i = 0; i < V; i++)
             for (auto &j : e[i])

@@ -24,7 +24,8 @@ std::vector<std::vector<lint>> gauss_jordan(std::vector<std::vector<lint>> mtr, 
         std::swap(mtr[piv], mtr[h]);
         if (h != piv) {
             for (int w = 0; w < W; w++) {
-                mtr[piv][w] = mtr[piv][w] ? mod - mtr[piv][w] : 0; // To preserve sign of determinant
+                mtr[piv][w] =
+                    mtr[piv][w] ? mod - mtr[piv][w] : 0; // To preserve sign of determinant
             }
         }
         lint pivinv = mod_inverse<lint>(mtr[h][c], mod);
@@ -51,7 +52,8 @@ int rank_gauss_jordan(const std::vector<std::vector<lint>> &mtr) // Rank of Gaus
     return 0;
 }
 
-template <typename lint, typename mdint> lint mod_determinant(std::vector<std::vector<lint>> mtr, mdint mod) {
+template <typename lint, typename mdint>
+lint mod_determinant(std::vector<std::vector<lint>> mtr, mdint mod) {
     if (mtr.empty()) return 1 % mod;
     assert(mtr.size() == mtr[0].size());
     lint ans = 1;
@@ -61,7 +63,8 @@ template <typename lint, typename mdint> lint mod_determinant(std::vector<std::v
 }
 
 template <typename lint, typename mdint>
-std::vector<std::vector<lint>> matmul(const std::vector<std::vector<lint>> &A, const std::vector<std::vector<lint>> &B, mdint mod) {
+std::vector<std::vector<lint>>
+matmul(const std::vector<std::vector<lint>> &A, const std::vector<std::vector<lint>> &B, mdint mod) {
     int H = A.size(), W = B[0].size(), K = B.size();
     std::vector<std::vector<lint>> C(H, std::vector<lint>(W));
     for (int i = 0; i < H; i++) {
@@ -73,7 +76,8 @@ std::vector<std::vector<lint>> matmul(const std::vector<std::vector<lint>> &A, c
 }
 
 template <typename lint, typename mdint>
-std::vector<lint> matmul(const std::vector<std::vector<lint>> &A, const std::vector<lint> &v, mdint mod) {
+std::vector<lint>
+matmul(const std::vector<std::vector<lint>> &A, const std::vector<lint> &v, mdint mod) {
     std::vector<lint> res(A.size());
     for (int i = 0; i < (int)A.size(); i++) {
         for (int j = 0; j < (int)v.size(); j++) (res[i] += A[i][j] * v[j]) %= mod;

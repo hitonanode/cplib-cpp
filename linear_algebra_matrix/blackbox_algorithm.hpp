@@ -22,7 +22,8 @@ std::vector<T> linear_system_solver_lanczos(const Matrix &A, const std::vector<T
     assert(A.height() == int(b.size()));
     const int M = A.height(), N = A.width();
 
-    const std::vector<T> D1 = gen_random_vector<T>(N), D2 = gen_random_vector<T>(M), v = gen_random_vector<T>(N);
+    const std::vector<T> D1 = gen_random_vector<T>(N), D2 = gen_random_vector<T>(M),
+                         v = gen_random_vector<T>(N);
     auto applyD1 = [&D1](std::vector<T> v) {
         for (int i = 0; i < int(v.size()); i++) v[i] *= D1[i];
         return v;
@@ -81,7 +82,8 @@ std::vector<T> linear_system_solver_lanczos(const Matrix &A, const std::vector<T
 template <class Matrix, class Tp> Tp blackbox_determinant(const Matrix &M) {
     assert(M.height() == M.width());
     const int N = M.height();
-    std::vector<Tp> b = gen_random_vector<Tp>(N), u = gen_random_vector<Tp>(N), D = gen_random_vector<Tp>(N);
+    std::vector<Tp> b = gen_random_vector<Tp>(N), u = gen_random_vector<Tp>(N),
+                    D = gen_random_vector<Tp>(N);
     std::vector<Tp> uMDib(2 * N);
     for (int i = 0; i < 2 * N; i++) {
         uMDib[i] = std::inner_product(u.begin(), u.end(), b.begin(), Tp(0));

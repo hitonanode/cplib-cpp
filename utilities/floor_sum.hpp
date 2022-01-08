@@ -13,7 +13,8 @@ long long floor_sum(long long n, long long m, long long a, long long b) {
         if (x < 0) x += m;
         return x;
     };
-    auto floor_sum_unsigned = [](unsigned long long n, unsigned long long m, unsigned long long a, unsigned long long b) -> unsigned long long {
+    auto floor_sum_unsigned = [](unsigned long long n, unsigned long long m, unsigned long long a,
+                                 unsigned long long b) -> unsigned long long {
         unsigned long long ans = 0;
         while (true) {
             if (a >= m) {

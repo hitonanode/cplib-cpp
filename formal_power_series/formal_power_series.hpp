@@ -133,7 +133,9 @@ template <typename T> struct FormalPowerSeries : vector<T> {
         const int n = this->size();
         if (deg == -1) deg = n;
         P ret({T(1) / (*this)[0]});
-        for (int i = 1; i < deg; i <<= 1) { ret = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1); }
+        for (int i = 1; i < deg; i <<= 1) {
+            ret = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1);
+        }
         ret = ret.pre(deg);
         ret.shrink();
         return ret;
@@ -176,7 +178,9 @@ template <typename T> struct FormalPowerSeries : vector<T> {
         const int n = (int)this->size();
         if (deg == -1) deg = n;
         P ret({T(1)});
-        for (int i = 1; i < deg; i <<= 1) { ret = (ret * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1); }
+        for (int i = 1; i < deg; i <<= 1) {
+            ret = (ret * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1);
+        }
         return ret.pre(deg);
     }
 

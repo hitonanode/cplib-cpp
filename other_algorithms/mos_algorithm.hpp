@@ -39,7 +39,8 @@ public:
             if (b1 != b2)
                 return b1 < b2;
             else {
-                return (b1 & 1) ? (ranges[q1].second > ranges[q2].second) : (ranges[q1].second < ranges[q2].second);
+                return (b1 & 1) ? (ranges[q1].second > ranges[q2].second)
+                                : (ranges[q1].second < ranges[q2].second);
             }
         });
 

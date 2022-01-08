@@ -7,9 +7,12 @@ using namespace std;
 // Sliding-Window Aggregation based queue
 // - `std::queue`-like data structure with monoid operation
 // - Each operation is amortized O(1)
-// - Verification: <https://www.hackerrank.com/contests/tsg-live-4-programming-contest/challenges/tsg-live-4-procon-lcm-interval/submissions/code/1317888077>
-// - Reference: <https://github.com/NiMiLib/NoshiMochiLibrary/blob/queue_aggregation/lib/data_structure/sequence/queue_aggregation.hpp>
-template <typename T_VAL, typename T_PROD, T_PROD (*val2prod)(T_VAL), T_PROD (*merge)(T_PROD, T_PROD)> struct SlidingWindowAggregation {
+// - Verification:
+// <https://www.hackerrank.com/contests/tsg-live-4-programming-contest/challenges/tsg-live-4-procon-lcm-interval/submissions/code/1317888077>
+// - Reference:
+// <https://github.com/NiMiLib/NoshiMochiLibrary/blob/queue_aggregation/lib/data_structure/sequence/queue_aggregation.hpp>
+template <typename T_VAL, typename T_PROD, T_PROD (*val2prod)(T_VAL), T_PROD (*merge)(T_PROD, T_PROD)>
+struct SlidingWindowAggregation {
     std::stack<std::pair<T_VAL, T_PROD>> front_stack, back_stack;
     T_PROD ID_;
 
@@ -49,10 +52,17 @@ template <typename T_VAL, typename T_PROD, T_PROD (*val2prod)(T_VAL), T_PROD (*m
 };
 
 template <typename T> T swag_op_id(T x) { return x; };
-template <typename T> T swag_op_linear_merge(T l, T r) { return make_pair(l.first * r.first, l.second * r.first + r.second); };
+template <typename T> T swag_op_linear_merge(T l, T r) {
+    return make_pair(l.first * r.first, l.second * r.first + r.second);
+};
 
 // Linear function composition
 // `f(x) = first * x + second`, operate most recently added function first
-template <typename T> struct LinearFunctionQueue : public SlidingWindowAggregation<pair<T, T>, pair<T, T>, swag_op_id, swag_op_linear_merge> {
-    LinearFunctionQueue() : SlidingWindowAggregation<pair<T, T>, pair<T, T>, swag_op_id, swag_op_linear_merge>::SlidingWindowAggregation(pair<T, T>(1, 0)) {}
+template <typename T>
+struct LinearFunctionQueue
+    : public SlidingWindowAggregation<pair<T, T>, pair<T, T>, swag_op_id, swag_op_linear_merge> {
+    LinearFunctionQueue()
+        : SlidingWindowAggregation<pair<T, T>, pair<T, T>, swag_op_id,
+                                   swag_op_linear_merge>::SlidingWindowAggregation(pair<T, T>(1, 0)) {
+    }
 };

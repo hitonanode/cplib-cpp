@@ -50,7 +50,9 @@ public:
             dist_sp.assign(V, INF);
             depth_sp.assign(V, -1), parent_sp.assign(V, -1);
             psi.assign(V, G());
-            std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>> que;
+            std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>,
+                                std::greater<std::pair<T, int>>>
+                que;
             dist_sp[s] = 0, depth_sp[s] = 0;
             que.emplace(0, s);
             while (que.size()) {
@@ -64,7 +66,8 @@ public:
                     std::tie(v, l, g) = p;
                     const auto d2 = d + l;
                     if (dist_sp[v] > d2) {
-                        dist_sp[v] = d2, depth_sp[v] = depth_sp[u] + 1, parent_sp[v] = u, psi[v] = psi[u] + g;
+                        dist_sp[v] = d2, depth_sp[v] = depth_sp[u] + 1, parent_sp[v] = u,
+                        psi[v] = psi[u] + g;
                         que.emplace(d2, v);
                     }
                 }
@@ -81,7 +84,8 @@ public:
                 T l;
                 G g;
                 std::tie(v, l, g) = to[u][i];
-                if (u < v and !(psi[u] + g == psi[v])) que.emplace(dist_sp[u] + dist_sp[v] + l, u, i);
+                if (u < v and !(psi[u] + g == psi[v]))
+                    que.emplace(dist_sp[u] + dist_sp[v] + l, u, i);
             }
         }
 

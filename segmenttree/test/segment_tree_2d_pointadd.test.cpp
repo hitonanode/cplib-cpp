@@ -17,7 +17,8 @@ int main() {
     vector<vector<int>> mat(H, vector<int>(W));
     auto f = [](int l, int r) { return l + r; };
     auto g = [](int x, int q) { return x; };
-    SegmentTree2D<int, int, int, decltype(f), decltype(g), decltype(f)> s1(mat, 0, f, g, f), s2(mat, 0, f, g, f);
+    SegmentTree2D<int, int, int, decltype(f), decltype(g), decltype(f)> s1(mat, 0, f, g, f),
+        s2(mat, 0, f, g, f);
 
     queue<pair<int, pair<int, int>>> q;
     while (Q--) {

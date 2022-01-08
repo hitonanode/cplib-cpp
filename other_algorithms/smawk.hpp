@@ -9,8 +9,9 @@
 // SMAWK: finding minima of totally monotone function f(i, j) (0 <= i < N, 0 <= j < M) for each i
 // Constraints: every submatrix of f(i, j) is monotone.
 // Complexity: O(N + M)
-// Option: `Memorization`: Memorize all query results using hashmaps, effective when each query requires heavy complexity
-// Rererence: <https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html>
+// Option: `Memorization`: Memorize all query results using hashmaps, effective when each query
+// requires heavy complexity Rererence:
+// <https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html>
 //            <http://web.cs.unlv.edu/larmore/Courses/CSC477/monge.pdf>
 // Verify: <https://codeforces.com/contest/1423/submission/98368491>
 template <typename T, bool Memorization> struct SMAWK {

@@ -61,7 +61,9 @@ void sparse_fast_integer_moebius(std::vector<std::pair<Int, Val>> &f, const Siev
     for (int d = 0; d < int(primes.size()); d++) {
         Int p = primes[d];
         for (auto i : p2is[d]) {
-            auto comp = [](const std::pair<Int, Val> &l, const std::pair<Int, Val> &r) { return l.first < r.first; };
+            auto comp = [](const std::pair<Int, Val> &l, const std::pair<Int, Val> &r) {
+                return l.first < r.first;
+            };
             auto itr = std::lower_bound(f.begin(), f.end(), std::make_pair(f[i].first / p, 0), comp);
             itr->second -= f[i].second;
         }

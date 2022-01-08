@@ -45,9 +45,10 @@ template <class T> std::vector<T> shift_of_factorial(const std::vector<T> &as, T
     return ret;
 }
 
-// Compute y[c], ..., y[c + width - 1] from y[0], ..., y[N - 1] where y = f(x) is poly of up to (N - 1)-th
-// degree Complexity: O(N log N)
-template <class T> std::vector<T> shift_of_sampling_points(const std::vector<T> ys, T c, int width) {
+// Compute y[c], ..., y[c + width - 1] from y[0], ..., y[N - 1] where y = f(x) is poly of up to
+// (N - 1)-th degree Complexity: O(N log N)
+template <class T>
+std::vector<T> shift_of_sampling_points(const std::vector<T> ys, T c, int width) {
     auto as = ys_to_factorial(ys);
     as = shift_of_factorial(as, c);
     as.resize(width);

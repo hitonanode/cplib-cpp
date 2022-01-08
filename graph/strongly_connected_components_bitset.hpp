@@ -35,7 +35,9 @@ template <int VMAX> struct DirectedGraphSCC64 {
     }
     // Detect strongly connected components and return # of them.
     // Also, assign each vertex `v` the scc id `cmp[v]` (0-indexed)
-    DirectedGraphSCC64(const std::vector<std::bitset<VMAX>> &edge, const std::vector<std::bitset<VMAX>> &edge_inv) : V(edge.size()), e(edge), einv(edge_inv), cmp(edge.size()), scc_num(0) {
+    DirectedGraphSCC64(const std::vector<std::bitset<VMAX>> &edge,
+                       const std::vector<std::bitset<VMAX>> &edge_inv)
+        : V(edge.size()), e(edge), einv(edge_inv), cmp(edge.size()), scc_num(0) {
         unvisited.set();
         for (int i = 0; i < V; i++)
             if (unvisited[i]) _dfs(i);

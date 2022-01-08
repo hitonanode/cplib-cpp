@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/min_cost_b_flow"
-#include "../mcf_costscaling.hpp"
 #include "../maxflow_lowerbound.hpp"
+#include "../mcf_costscaling.hpp"
 #include <algorithm>
 #include <iostream>
 using namespace std;

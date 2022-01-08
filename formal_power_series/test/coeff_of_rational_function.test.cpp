@@ -1,6 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/215"
-#include "convolution/ntt.hpp"
 #include "formal_power_series/coeff_of_rational_function.hpp"
+#include "convolution/ntt.hpp"
 #include "modint.hpp"
 
 using mint = ModInt<1000000007>;
@@ -25,7 +25,8 @@ int main() {
     long long N;
     int P, C;
     std::cin >> N >> P >> C;
-    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
+    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P),
+                      composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
     std::vector<mint> f = nttconv(primes, composites);
     std::vector<mint> denom = f;
     for (auto &x : denom) x = -x;

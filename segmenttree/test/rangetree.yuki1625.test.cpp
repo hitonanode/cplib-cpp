@@ -19,7 +19,8 @@ using Tri = pair<pair<int, int>, long long>;
 Tri read_tri() {
 
     auto A = read_pint(), B = read_pint(), C = read_pint();
-    long long dx1 = B.first - A.first, dy1 = B.second - A.second, dx2 = C.first - A.first, dy2 = C.second - A.second;
+    long long dx1 = B.first - A.first, dy1 = B.second - A.second, dx2 = C.first - A.first,
+              dy2 = C.second - A.second;
 
     const auto S = abs(dx1 * dy2 - dy1 * dx2);
     const int lo = min({A.first, B.first, C.first}), hi = max({A.first, B.first, C.first});

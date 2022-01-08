@@ -29,7 +29,8 @@ std::vector<std::bitset<Wmax>> gauss_jordan(int W, std::vector<std::bitset<Wmax>
     return mtr;
 }
 
-int rank_gauss_jordan(int W, const std::vector<std::bitset<Wmax>> &mtr) // Rank of Gauss-Jordan eliminated matrix
+int rank_gauss_jordan(
+    int W, const std::vector<std::bitset<Wmax>> &mtr) // Rank of Gauss-Jordan eliminated matrix
 {
     for (int h = (int)mtr.size() - 1; h >= 0; h--) {
         if (mtr[h]._Find_first() < W) return h + 1;
@@ -37,7 +38,8 @@ int rank_gauss_jordan(int W, const std::vector<std::bitset<Wmax>> &mtr) // Rank 
     return 0;
 }
 
-std::vector<std::bitset<Wmax>> matmul(const std::vector<std::bitset<Wmax>> &A, const std::vector<std::bitset<Wmax>> &B) {
+std::vector<std::bitset<Wmax>>
+matmul(const std::vector<std::bitset<Wmax>> &A, const std::vector<std::bitset<Wmax>> &B) {
     int H = A.size(), K = B.size();
     std::vector<std::bitset<Wmax>> C(H);
     for (int i = 0; i < H; i++) {
@@ -62,7 +64,8 @@ std::vector<std::bitset<Wmax>> matpower(std::vector<std::bitset<Wmax>> X, long l
 // Solve Ax = b on F_2
 // - retval: {true, one of the solutions, {freedoms}} (if solution exists)
 //           {false, {}, {}} (otherwise)
-std::tuple<bool, std::bitset<Wmax>, std::vector<std::bitset<Wmax>>> system_of_linear_equations(std::vector<std::bitset<Wmax>> A, std::bitset<Wmax> b, int W) {
+std::tuple<bool, std::bitset<Wmax>, std::vector<std::bitset<Wmax>>>
+system_of_linear_equations(std::vector<std::bitset<Wmax>> A, std::bitset<Wmax> b, int W) {
     int H = A.size();
     assert(W + 1 <= Wmax);
     assert(H <= Wmax);
@@ -73,7 +76,9 @@ std::tuple<bool, std::bitset<Wmax>, std::vector<std::bitset<Wmax>>> system_of_li
     std::vector<int> ss(W, -1);
     for (int i = 0; i < H; i++) {
         int j = M[i]._Find_first();
-        if (j == W) { return std::make_tuple(false, std::bitset<Wmax>(), std::vector<std::bitset<Wmax>>()); }
+        if (j == W) {
+            return std::make_tuple(false, std::bitset<Wmax>(), std::vector<std::bitset<Wmax>>());
+        }
         if (j < W) ss[j] = i;
     }
     std::bitset<Wmax> x;

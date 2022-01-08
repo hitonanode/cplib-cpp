@@ -9,7 +9,8 @@ struct Trie {
     std::vector<std::vector<int>> child;
     using T_NODE = int;
     std::vector<T_NODE> v_info;
-    Trie(char a_init = 'a', int D = 26) : a_init(a_init), D(D), child(1, std::vector<int>(D, INVALID)), v_info(1) {}
+    Trie(char a_init = 'a', int D = 26)
+        : a_init(a_init), D(D), child(1, std::vector<int>(D, INVALID)), v_info(1) {}
     void add_word(const std::string &str, T_NODE info) {
         int now = 0;
         for (auto &c : str) {

@@ -20,7 +20,8 @@ pair<mint, mint> tree_hash(vector<string> S) {
     const int H = S.size();
     GridUnionFind uf(H, W);
     vector<pair<int, int>> dx4{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-    vector<pair<int, int>> dx8{{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+    vector<pair<int, int>> dx8{
+        {1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
     auto is_inner = [&](int i, int j) { return i >= 0 and i < H and j >= 0 and j < W; };
     for (int i = 0; i < H; i++) {
         for (int j = 0; j < W; j++) {

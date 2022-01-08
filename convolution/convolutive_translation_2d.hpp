@@ -9,9 +9,11 @@
 // Verification: TCO 2020 Round 3A 1000 ZombieRPGDice
 // Verification: TCO 2020 Round 3B 500 ShortBugPaths
 template <typename MODINT>
-std::vector<std::vector<MODINT>> convolutive_translation_2d(const std::vector<std::vector<MODINT>> &initial_dist, // size: H * W
-                                                            const std::vector<std::pair<std::pair<int, int>, MODINT>> &trans_coeffs, // [((dx, dy), coefficient), ...]
-                                                            int nb_step = 1) {
+std::vector<std::vector<MODINT>>
+convolutive_translation_2d(const std::vector<std::vector<MODINT>> &initial_dist, // size: H * W
+                           const std::vector<std::pair<std::pair<int, int>, MODINT>>
+                               &trans_coeffs, // [((dx, dy), coefficient), ...]
+                           int nb_step = 1) {
     int H = initial_dist.size(), W = initial_dist[0].size();
     int xlo = 0, xhi = 0, ylo = 0, yhi = 0;
 
@@ -26,7 +28,9 @@ std::vector<std::vector<MODINT>> convolutive_translation_2d(const std::vector<st
         }
     const int WW = W + ylo + yhi;
     std::vector<MODINT> dp((H - 1) * WW + W);
-    for (int i = 0; i < H; i++) { std::copy(initial_dist[i].begin(), initial_dist[i].end(), dp.begin() + i * WW); }
+    for (int i = 0; i < H; i++) {
+        std::copy(initial_dist[i].begin(), initial_dist[i].end(), dp.begin() + i * WW);
+    }
 
     int tlo = 0, thi = 0;
     for (auto p : t2c_1d) {
@@ -39,10 +43,13 @@ std::vector<std::vector<MODINT>> convolutive_translation_2d(const std::vector<st
     for (int t = 0; t < nb_step; t++) {
         auto dp_nxt = nttconv(dp, trans1d);
         for (int i = 0; i < H; i++) {
-            std::copy(dp_nxt.begin() + i * WW + tlo, dp_nxt.begin() + i * WW + W + tlo, dp.begin() + i * WW);
+            std::copy(dp_nxt.begin() + i * WW + tlo, dp_nxt.begin() + i * WW + W + tlo,
+                      dp.begin() + i * WW);
         }
     }
     std::vector<std::vector<MODINT>> ret(H);
-    for (int i = 0; i < H; i++) { ret[i].insert(ret[i].end(), dp.begin() + i * WW, dp.begin() + i * WW + W); }
+    for (int i = 0; i < H; i++) {
+        ret[i].insert(ret[i].end(), dp.begin() + i * WW, dp.begin() + i * WW + W);
+    }
     return ret;
 }

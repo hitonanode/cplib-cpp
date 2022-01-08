@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/manhattanmst"
-#include "../../unionfind/unionfind.hpp"
 #include "../manhattan_mst.hpp"
+#include "../../unionfind/unionfind.hpp"
 
 #include <iostream>
 using namespace std;

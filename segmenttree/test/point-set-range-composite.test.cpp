@@ -5,13 +5,19 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
 using mint = ModInt<998244353>;
 
-template <typename T> struct PointSetRangeComposite : public NonrecursiveSegmentTree<std::pair<T, T>, std::pair<T, T>, bool> {
+template <typename T>
+struct PointSetRangeComposite
+    : public NonrecursiveSegmentTree<std::pair<T, T>, std::pair<T, T>, bool> {
     using T_NODE = std::pair<T, T>;
     using SegTree = NonrecursiveSegmentTree<T_NODE, T_NODE, bool>;
-    T_NODE merge_data(const T_NODE &vl, const T_NODE &vr) override { return std::make_pair(vl.first * vr.first, vr.first * vl.second + vr.second); };
+    T_NODE merge_data(const T_NODE &vl, const T_NODE &vr) override {
+        return std::make_pair(vl.first * vr.first, vr.first * vl.second + vr.second);
+    };
     T_NODE data2ret(const T_NODE &v, const bool &q) override { return v; }
     T_NODE merge_ret(const T_NODE &vl, const T_NODE &vr) override { return merge_data(vl, vr); };
-    PointSetRangeComposite(const std::vector<T_NODE> &seq) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq, T_NODE(1, 0)); };
+    PointSetRangeComposite(const std::vector<T_NODE> &seq) : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, T_NODE(1, 0));
+    };
 };
 
 int main() {

@@ -12,7 +12,8 @@
 // - NTT-friendliness for faster implementation.
 // - f[0] has its inverse. Otherwise, return empty vector `{}`.
 // Reference: http://people.csail.mit.edu/madhu/ST12/scribe/lect06.pdf
-template <typename ModInt> std::vector<ModInt> inv_of_poly_mod_monomial(const std::vector<ModInt> &f, int l) {
+template <typename ModInt>
+std::vector<ModInt> inv_of_poly_mod_monomial(const std::vector<ModInt> &f, int l) {
     assert(l >= 0);
     if (f.empty()) return {};
     if (l == 0) return {};
@@ -51,7 +52,8 @@ template <typename ModInt> std::vector<ModInt> inv_of_poly_mod_monomial(const st
 // return: (q(x), r(x))
 // requirement: f, g: nonzero, f.back() != 0, g.back() != 0
 template <typename ModInt>
-std::pair<std::vector<ModInt>, std::vector<ModInt>> polynomial_division(const std::vector<ModInt> &f, const std::vector<ModInt> &g) {
+std::pair<std::vector<ModInt>, std::vector<ModInt>>
+polynomial_division(const std::vector<ModInt> &f, const std::vector<ModInt> &g) {
     assert(f.size() and f.back() != 0);
     assert(g.size() and g.back() != 0);
     if (f.size() < g.size()) { return {{}, f}; }

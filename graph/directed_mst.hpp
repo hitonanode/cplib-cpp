@@ -98,7 +98,8 @@ template <typename Weight = long long> struct MinimumSpanningArborescence {
     };
 
     Weight ret;
-    MinimumSpanningArborescence(const int N, const std::vector<std::tuple<int, int, Weight>> &edges, int r) {
+    MinimumSpanningArborescence(const int N,
+                                const std::vector<std::tuple<int, int, Weight>> &edges, int r) {
         assert(r >= 0 and r < N);
         std::vector<short> used(N);
         std::vector<skew_heap> incoming_edges(N);
@@ -162,5 +163,6 @@ template <typename Weight = long long> struct MinimumSpanningArborescence {
     }
 };
 template <>
-std::vector<MinimumSpanningArborescence<long long>::skew_heap::node> MinimumSpanningArborescence<long long>::skew_heap::data = {};
+std::vector<MinimumSpanningArborescence<long long>::skew_heap::node>
+    MinimumSpanningArborescence<long long>::skew_heap::data = {};
 template <typename T> unsigned MinimumSpanningArborescence<T>::skew_heap::len = 0;

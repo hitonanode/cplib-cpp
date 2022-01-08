@@ -33,7 +33,8 @@ template <bool directed> struct EulerianTrail {
         if (directed) {
             if (std::count_if(deg.begin(), deg.end(), [](int x) { return x != 0; })) return {};
         } else {
-            if (std::count_if(deg.begin(), deg.end(), [](int x) { return (x & 1) != 0; })) return {};
+            if (std::count_if(deg.begin(), deg.end(), [](int x) { return (x & 1) != 0; }))
+                return {};
         }
         std::vector<std::vector<Edge>> ret;
         for (int i = 0; i < int(to.size()); i++) {

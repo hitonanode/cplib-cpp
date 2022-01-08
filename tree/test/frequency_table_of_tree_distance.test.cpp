@@ -18,7 +18,8 @@ int main() {
         to[s].emplace_back(t), to[t].emplace_back(s);
     }
 
-    auto ret = frequency_table_of_tree_distance(to).solve<long long, fftconv>(std::vector<long long>(N, 1));
+    auto ret =
+        frequency_table_of_tree_distance(to).solve<long long, fftconv>(std::vector<long long>(N, 1));
     for (int i = 1; i < N; i++) cout << ret[i] << ' ';
     cout << '\n';
 }

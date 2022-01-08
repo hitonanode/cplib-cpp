@@ -13,7 +13,9 @@ struct Point {
         double b = theta - r.theta;
         return std::abs(b) > eps ? (b < 0) : (X * r.Y > r.X * Y);
     }
-    bool operator==(const Point &r) const { return std::abs(theta - r.theta) < eps and X * r.Y == r.X * Y; }
+    bool operator==(const Point &r) const {
+        return std::abs(theta - r.theta) < eps and X * r.Y == r.X * Y;
+    }
     void rotate_pi() {
         theta += M_PI;
         X *= -1;

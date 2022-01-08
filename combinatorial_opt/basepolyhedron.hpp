@@ -5,7 +5,8 @@
 #include <vector>
 
 // CUT begin
-// LinearProgrammingOnBasePolyhedron : Maximize/minimize linear function on base polyhedron, using Edmonds' algorithm
+// LinearProgrammingOnBasePolyhedron : Maximize/minimize linear function on base polyhedron, using
+// Edmonds' algorithm
 //
 // maximize/minimize cx s.t. (x on some base polyhedron)
 // Reference: <https://www.amazon.co.jp/dp/B01N6G0579>, Sec. 2.4, Algorithm 2.2-2.3
@@ -24,7 +25,8 @@ template <typename Tvalue> struct LinearProgrammingOnBasePolyhedron {
     std::vector<Tvalue> x;
     bool infeasible;
 
-    void _init(const std::vector<Tvalue> &c_, Tfunc q_, Tvalue xsum_, Tvalue xlowerlimit, bool minimize_) {
+    void _init(const std::vector<Tvalue> &c_, Tfunc q_, Tvalue xsum_, Tvalue xlowerlimit,
+               bool minimize_) {
         N = c_.size();
         c = c_;
         maximize_xi = q_;
@@ -53,7 +55,8 @@ template <typename Tvalue> struct LinearProgrammingOnBasePolyhedron {
         }
     }
 
-    LinearProgrammingOnBasePolyhedron(const std::vector<Tvalue> &c_, Tfunc q_, Tvalue xsum_, Tvalue xlowerlimit, bool minimize_) {
+    LinearProgrammingOnBasePolyhedron(const std::vector<Tvalue> &c_, Tfunc q_, Tvalue xsum_,
+                                      Tvalue xlowerlimit, bool minimize_) {
         _init(c_, q_, xsum_, xlowerlimit, minimize_);
         _solve();
     }

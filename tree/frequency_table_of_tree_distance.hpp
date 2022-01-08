@@ -17,13 +17,15 @@ struct frequency_table_of_tree_distance {
             if (alive[nxt] and nxt != prv) _dfs(nxt, now, depth + 1);
         }
     }
-    std::vector<std::pair<int, int>> cnt_dfs(int root) { return tmp.clear(), _dfs(root, -1, 0), tmp; }
-    frequency_table_of_tree_distance(const std::vector<std::vector<int>>& to) {
+    std::vector<std::pair<int, int>> cnt_dfs(int root) {
+        return tmp.clear(), _dfs(root, -1, 0), tmp;
+    }
+    frequency_table_of_tree_distance(const std::vector<std::vector<int>> &to) {
         tos = to;
         cd = CentroidDecomposition(to).centroid_decomposition(0);
     }
-    template <class S, std::vector<S> (*conv)(const std::vector<S>&, const std::vector<S>&)>
-    std::vector<S> solve(const std::vector<S>& weight) {
+    template <class S, std::vector<S> (*conv)(const std::vector<S> &, const std::vector<S> &)>
+    std::vector<S> solve(const std::vector<S> &weight) {
         alive.assign(tos.size(), 1);
         std::vector<S> ret(tos.size());
         std::vector<S> v;
@@ -40,8 +42,9 @@ struct frequency_table_of_tree_distance {
                 for (int i = 0; i < int(v.size()); i++) ret[i + 1] += v[i] * weight[root];
                 vv.emplace_back(v);
             }
-            std::sort(vv.begin(), vv.end(),
-                      [&](const std::vector<S>& l, const std::vector<S>& r) { return l.size() < r.size(); });
+            std::sort(vv.begin(), vv.end(), [&](const std::vector<S> &l, const std::vector<S> &r) {
+                return l.size() < r.size();
+            });
             for (size_t j = 1; j < vv.size(); j++) {
                 const std::vector<S> c = conv(vv[j - 1], vv[j]);
                 for (size_t i = 0; i < c.size(); i++) ret[i + 2] += c[i];

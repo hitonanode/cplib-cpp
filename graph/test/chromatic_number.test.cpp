@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/chromatic_number"
+#include "../chromatic_number.hpp"
 #include "../../number/factorize.hpp"
 #include "../../number/modint_runtime.hpp"
 #include "../../random/rand_nondeterministic.hpp"
-#include "../chromatic_number.hpp"
 
 #include <iostream>
 #include <vector>

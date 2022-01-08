@@ -97,7 +97,8 @@ template <typename TDATA, typename TRET, typename TQUERY> struct NonrecursiveSeg
         return N;
     }
 
-    template <typename T1, typename T2, typename T3> friend std::ostream &operator<<(std::ostream &os, NonrecursiveSegmentTree<T1, T2, T3> s) {
+    template <typename T1, typename T2, typename T3>
+    friend std::ostream &operator<<(std::ostream &os, NonrecursiveSegmentTree<T1, T2, T3> s) {
         os << "[SegmentTree (len: " << s.N << ')';
         for (int i = 0; i < s.N; i++) os << s.at(i + s.N) << ',';
         os << "]";
@@ -112,7 +113,10 @@ template <typename T> struct RangeMinimumQuery : public NonrecursiveSegmentTree<
     T merge_data(const T &vl, const T &vr) override { return std::min(vl, vr); };
     T data2ret(const T &v, const bool &q) override { return v; }
     T merge_ret(const T &vl, const T &vr) override { return std::min(vl, vr); };
-    RangeMinimumQuery(const std::vector<T> &seq, T defaultmin) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq, defaultmin); };
+    RangeMinimumQuery(const std::vector<T> &seq, T defaultmin)
+        : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, defaultmin);
+    };
 };
 
 // Range Maximum Query
@@ -122,7 +126,10 @@ template <typename T> struct RangeMaximumQuery : public NonrecursiveSegmentTree<
     T merge_data(const T &vl, const T &vr) override { return std::max(vl, vr); };
     T data2ret(const T &v, const bool &q) override { return v; }
     T merge_ret(const T &vl, const T &vr) override { return std::max(vl, vr); };
-    RangeMaximumQuery(const std::vector<T> &seq, T defaultmax) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq, defaultmax); };
+    RangeMaximumQuery(const std::vector<T> &seq, T defaultmax)
+        : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, defaultmax);
+    };
 };
 
 template <typename T> struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool> {
@@ -130,12 +137,16 @@ template <typename T> struct PointUpdateRangeSum : public NonrecursiveSegmentTre
     T merge_data(const T &vl, const T &vr) override { return vl + vr; };
     T data2ret(const T &v, const bool &q) override { return v; }
     T merge_ret(const T &vl, const T &vr) override { return vl + vr; };
-    PointUpdateRangeSum(const std::vector<T> &seq, T zero) : SegTree::NonrecursiveSegmentTree() { SegTree::initialize(seq, zero); };
+    PointUpdateRangeSum(const std::vector<T> &seq, T zero) : SegTree::NonrecursiveSegmentTree() {
+        SegTree::initialize(seq, zero);
+    };
 };
 
 // Range Counting less than q Query
 // - get: return (#{i | l <= i < r, x_i < q}, total sum of them).
-template <typename T> struct CountAndSumLessThan : public NonrecursiveSegmentTree<std::vector<std::pair<T, T>>, std::pair<int, T>, T> {
+template <typename T>
+struct CountAndSumLessThan
+    : public NonrecursiveSegmentTree<std::vector<std::pair<T, T>>, std::pair<int, T>, T> {
     using TDATA = std::vector<std::pair<T, T>>;
     using TRET = std::pair<int, T>;
     using TQUERY = T;
@@ -145,7 +156,8 @@ template <typename T> struct CountAndSumLessThan : public NonrecursiveSegmentTre
         std::sort(ret.begin(), ret.end());
         if (ret.size()) {
             ret[0].second = ret[0].first;
-            for (size_t i = 1; i < ret.size(); i++) ret[i].second = ret[i - 1].second + ret[i].first;
+            for (size_t i = 1; i < ret.size(); i++)
+                ret[i].second = ret[i - 1].second + ret[i].first;
         }
         return ret;
     }
@@ -156,7 +168,9 @@ template <typename T> struct CountAndSumLessThan : public NonrecursiveSegmentTre
         else
             return std::make_pair(i, vec[i - 1].second);
     }
-    TRET merge_ret(const TRET &l, const TRET &r) override { return std::make_pair(l.first + r.first, l.second + r.second); }
+    TRET merge_ret(const TRET &l, const TRET &r) override {
+        return std::make_pair(l.first + r.first, l.second + r.second);
+    }
     using SegTree = NonrecursiveSegmentTree<TDATA, TRET, TQUERY>;
     CountAndSumLessThan(const std::vector<T> &seq) : SegTree::NonrecursiveSegmentTree() {
         std::vector<TDATA> init;

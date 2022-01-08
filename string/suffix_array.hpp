@@ -10,7 +10,7 @@
 // Document: <https://atcoder.github.io/ac-library/master/document_ja/string.html>
 namespace internal {
 
-std::vector<int> sa_naive(const std::vector<int>& s) {
+std::vector<int> sa_naive(const std::vector<int> &s) {
     int n = int(s.size());
     std::vector<int> sa(n);
     std::iota(sa.begin(), sa.end(), 0);
@@ -25,7 +25,7 @@ std::vector<int> sa_naive(const std::vector<int>& s) {
     return sa;
 }
 
-std::vector<int> sa_doubling(const std::vector<int>& s) {
+std::vector<int> sa_doubling(const std::vector<int> &s) {
     int n = int(s.size());
     std::vector<int> sa(n), rnk = s, tmp(n);
     std::iota(sa.begin(), sa.end(), 0);
@@ -38,7 +38,9 @@ std::vector<int> sa_doubling(const std::vector<int>& s) {
         };
         std::sort(sa.begin(), sa.end(), cmp);
         tmp[sa[0]] = 0;
-        for (int i = 1; i < n; i++) { tmp[sa[i]] = tmp[sa[i - 1]] + (cmp(sa[i - 1], sa[i]) ? 1 : 0); }
+        for (int i = 1; i < n; i++) {
+            tmp[sa[i]] = tmp[sa[i - 1]] + (cmp(sa[i - 1], sa[i]) ? 1 : 0);
+        }
         std::swap(tmp, rnk);
     }
     return sa;
@@ -48,7 +50,8 @@ std::vector<int> sa_doubling(const std::vector<int>& s) {
 // Reference:
 // G. Nong, S. Zhang, and W. H. Chan,
 // Two Efficient Algorithms for Linear Time Suffix Array Construction
-template <int THRESHOLD_NAIVE = 10, int THRESHOLD_DOUBLING = 40> std::vector<int> sa_is(const std::vector<int>& s, int upper) {
+template <int THRESHOLD_NAIVE = 10, int THRESHOLD_DOUBLING = 40>
+std::vector<int> sa_is(const std::vector<int> &s, int upper) {
     int n = int(s.size());
     if (n == 0) return {};
     if (n == 1) return {0};
@@ -64,7 +67,9 @@ template <int THRESHOLD_NAIVE = 10, int THRESHOLD_DOUBLING = 40> std::vector<int
 
     std::vector<int> sa(n);
     std::vector<bool> ls(n);
-    for (int i = n - 2; i >= 0; i--) { ls[i] = (s[i] == s[i + 1]) ? ls[i + 1] : (s[i] < s[i + 1]); }
+    for (int i = n - 2; i >= 0; i--) {
+        ls[i] = (s[i] == s[i + 1]) ? ls[i + 1] : (s[i] < s[i + 1]);
+    }
     std::vector<int> sum_l(upper + 1), sum_s(upper + 1);
     for (int i = 0; i < n; i++) {
         if (!ls[i]) {
@@ -78,7 +83,7 @@ template <int THRESHOLD_NAIVE = 10, int THRESHOLD_DOUBLING = 40> std::vector<int
         if (i < upper) sum_l[i + 1] += sum_s[i];
     }
 
-    auto induce = [&](const std::vector<int>& lms) {
+    auto induce = [&](const std::vector<int> &lms) {
         std::fill(sa.begin(), sa.end(), -1);
         std::vector<int> buf(upper + 1);
         std::copy(sum_s.begin(), sum_s.end(), buf.begin());
@@ -150,14 +155,14 @@ template <int THRESHOLD_NAIVE = 10, int THRESHOLD_DOUBLING = 40> std::vector<int
 
 } // namespace internal
 
-std::vector<int> suffix_array(const std::vector<int>& s, int upper) {
+std::vector<int> suffix_array(const std::vector<int> &s, int upper) {
     assert(0 <= upper);
     for (int d : s) { assert(0 <= d && d <= upper); }
     auto sa = internal::sa_is(s, upper);
     return sa;
 }
 
-template <class T> std::vector<int> suffix_array(const std::vector<T>& s) {
+template <class T> std::vector<int> suffix_array(const std::vector<T> &s) {
     int n = int(s.size());
     std::vector<int> idx(n);
     iota(idx.begin(), idx.end(), 0);
@@ -171,7 +176,7 @@ template <class T> std::vector<int> suffix_array(const std::vector<T>& s) {
     return internal::sa_is(s2, now);
 }
 
-std::vector<int> suffix_array(const std::string& s) {
+std::vector<int> suffix_array(const std::string &s) {
     int n = int(s.size());
     std::vector<int> s2(n);
     for (int i = 0; i < n; i++) { s2[i] = s[i]; }
@@ -182,7 +187,8 @@ std::vector<int> suffix_array(const std::string& s) {
 // T. Kasai, G. Lee, H. Arimura, S. Arikawa, and K. Park,
 // Linear-Time Longest-Common-Prefix Computation in Suffix Arrays and Its
 // Applications
-template <class T> std::vector<int> lcp_array(const std::vector<T>& s, const std::vector<int>& sa) {
+template <class T>
+std::vector<int> lcp_array(const std::vector<T> &s, const std::vector<int> &sa) {
     int n = int(s.size());
     assert(n >= 1);
     std::vector<int> rnk(n);
@@ -201,7 +207,7 @@ template <class T> std::vector<int> lcp_array(const std::vector<T>& s, const std
     return lcp;
 }
 
-std::vector<int> lcp_array(const std::string& s, const std::vector<int>& sa) {
+std::vector<int> lcp_array(const std::string &s, const std::vector<int> &sa) {
     int n = int(s.size());
     std::vector<int> s2(n);
     for (int i = 0; i < n; i++) { s2[i] = s[i]; }
@@ -210,7 +216,8 @@ std::vector<int> lcp_array(const std::string& s, const std::vector<int>& sa) {
 
 // Count keyword occurence in str
 // Complexity: O(min(|str|, |keyword|) * lg |str|)
-int count_keyword_occurence(const std::string& str, const std::vector<int>& suffarr, const std::string& keyword) {
+int count_keyword_occurence(const std::string &str, const std::vector<int> &suffarr,
+                            const std::string &keyword) {
     const int n = str.size(), m = keyword.size();
     assert(n == suffarr.size());
     if (n < m) return 0;

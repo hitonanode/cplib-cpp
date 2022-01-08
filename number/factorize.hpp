@@ -71,7 +71,8 @@ struct {
                 long long k = 0;
                 do {
                     ys = y;
-                    for (int i = std::min(m, r - k); i--;) y = f(y), q = __int128(q) * std::abs(x - y) % n;
+                    for (int i = std::min(m, r - k); i--;)
+                        y = f(y), q = __int128(q) * std::abs(x - y) % n;
                     g = std::__gcd<long long>(q, n);
                     k += m;
                 } while (k < r and g <= 1);

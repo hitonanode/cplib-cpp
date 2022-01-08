@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <iostream>
 
-template <typename TC> std::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost) {
+template <typename TC>
+std::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost) {
     int N = cost.size();
     MinCostFlow<int, TC> mcf(N * 2 + 2);
     int S = N * 2, T = N * 2 + 1;
@@ -16,15 +17,10 @@ template <typename TC> std::pair<TC, std::vector<int>> AssignmentProblem(std::ve
         for (int j = 0; j < N; j++) mcf.add_edge(i, N + j, 1, cost[i][j] - lo);
     }
     auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;
-    std::vector<int> ret;
+    std::vector<int> ret(N, -1);
 
-    for (int i = 0; i < N; i++) {
-        for (const auto &g : mcf.g[i]) {
-            if (g.to != S and !g.cap) {
-                ret.emplace_back(g.to - N);
-                break;
-            }
-        }
+    for (auto g : mcf.edges()) {
+        if (g.from >= 0 and g.from < N and g.to != S and g.flow) ret[g.from] = g.to - N;
     }
     return std::make_pair(total_cost, ret);
 }

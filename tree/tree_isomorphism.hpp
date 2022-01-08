@@ -28,19 +28,22 @@ template <typename ModInt> struct tree_isomorphism {
         return x ^ (x >> 31);
     }
     DoubleHash get_hash(DoubleHash x) const {
-        static const uint64_t FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();
+        static const uint64_t FIXED_RANDOM =
+            std::chrono::steady_clock::now().time_since_epoch().count();
         return {splitmix64(x.first.val + FIXED_RANDOM), splitmix64(x.second.val + FIXED_RANDOM)};
     }
 
-    static void add_hash(DoubleHash &l, const DoubleHash &r) { l.first += r.first, l.second += r.second; }
+    static void add_hash(DoubleHash &l, const DoubleHash &r) {
+        l.first += r.first, l.second += r.second;
+    }
     static DoubleHash subtract_hash(const DoubleHash &l, const DoubleHash &r) {
         return {l.first - r.first, l.second - r.second};
     }
 
     std::vector<DoubleHash> hash;         // hash of the tree, each node regarded as root
     std::vector<DoubleHash> hash_subtree; // hash of the subtree
-    std::vector<DoubleHash> hash_par;     // hash of the subtree whose root is parent[i], not containing i
-    DoubleHash hash_p;                    // \in [1, hmod), should be set randomly
+    std::vector<DoubleHash> hash_par; // hash of the subtree whose root is parent[i], not containing i
+    DoubleHash hash_p;                // \in [1, hmod), should be set randomly
     DoubleHash hash_dfs1_(int now, int prv) {
         hash_subtree[now] = hash_p;
         for (auto nxt : e[now]) {

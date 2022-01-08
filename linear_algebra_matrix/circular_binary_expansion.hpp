@@ -5,7 +5,8 @@
 // CUT begin
 // Expansion by the basis of binary (1 / -1) circular vectors such as [1, 1, 1, 1], [1, 1, -1, -1] & [1, -1,
 // 1, -1] Note that transinv has only O(N) nonzero elements. Verified: GCJ 2015 Round 3 River Flow
-template <typename MODINT> std::pair<matrix<MODINT>, matrix<MODINT>> circular_binary_expansion(int lgdim) {
+template <typename MODINT>
+std::pair<matrix<MODINT>, matrix<MODINT>> circular_binary_expansion(int lgdim) {
     const int D = 1 << lgdim;
     const MODINT invD = MODINT(1) / D;
     matrix<MODINT> trans(D, D), transinv(D, D);

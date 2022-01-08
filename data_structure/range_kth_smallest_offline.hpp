@@ -42,7 +42,8 @@ struct range_kth_smallest {
             if (stop) break;
             BIT<int> bit(N);
             for (int t = 0; t < N; t++) {
-                for (auto q : vs[t]) (bit.sum(QR[q]) - bit.sum(QL[q]) <= QK[q] ? lo[q] : hi[q]) = t;
+                for (auto q : vs[t])
+                    (bit.sum(QR[q]) - bit.sum(QL[q]) <= QK[q] ? lo[q] : hi[q]) = t;
                 bit.add(idx[t], 1);
                 vs[t].clear();
             }

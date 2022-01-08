@@ -4,7 +4,8 @@
 
 // Cost scaling
 // https://people.orie.cornell.edu/dpw/orie633/
-template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20> struct mcf_costscaling {
+template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20>
+struct mcf_costscaling {
     mcf_costscaling() = default;
     mcf_costscaling(int n) : _n(n), to(n), b(n), p(n) {}
 
@@ -53,7 +54,8 @@ template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20> stru
                     for (int e = 0; e < int(cap.size()); e++) {
                         if (!cap[e]) continue;
                         int i = opposite[e ^ 1], j = opposite[e];
-                        if (pp[j] > pp[i] + cost[e] + eps) pp[j] = pp[i] + cost[e] + eps, flg = true;
+                        if (pp[j] > pp[i] + cost[e] + eps)
+                            pp[j] = pp[i] + cost[e] + eps, flg = true;
                     }
                     if (!flg) return p = pp, true;
                 }
@@ -64,7 +66,8 @@ template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20> stru
             for (int e = 0; e < int(cap.size()); e++) {
                 const int i = opposite[e ^ 1], j = opposite[e];
                 const Cost cp_ij = cost[e] + p[i] - p[j];
-                if (cap[e] and cp_ij < 0) b[i] -= cap[e], b[j] += cap[e], cap[e ^ 1] += cap[e], cap[e] = 0;
+                if (cap[e] and cp_ij < 0)
+                    b[i] -= cap[e], b[j] += cap[e], cap[e ^ 1] += cap[e], cap[e] = 0;
             }
             que.clear();
             int qh = 0;
@@ -126,7 +129,8 @@ template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20> stru
     edge get_edge(int e) const {
         int m = cap.size() / 2;
         assert(e >= 0 and e < m);
-        return {opposite[e * 2 + 1], opposite[e * 2], cap[e * 2] + cap[e * 2 + 1], cap[e * 2 + 1], cost[e * 2] / (_n + 1)};
+        return {opposite[e * 2 + 1], opposite[e * 2], cap[e * 2] + cap[e * 2 + 1], cap[e * 2 + 1],
+                cost[e * 2] / (_n + 1)};
     }
     std::vector<edge> edges() const {
         int m = cap.size() / 2;

@@ -19,17 +19,23 @@ struct CountPrimes {
 
     std::vector<int> _fenwick;
 
-    int getidx(Int a) const { return a <= n2 ? s - a : n / a - 1; } // vs[i] >= a を満たす最大の i を返す
+    int getidx(Int a) const {
+        return a <= n2 ? s - a : n / a - 1;
+    } // vs[i] >= a を満たす最大の i を返す
 
-    void _fenwick_rec_update(int i, Int cur, bool first) { // pi[n3:] に対して cur * (primes[i] 以上の素因数) の数の寄与を減じる
+    void _fenwick_rec_update(
+        int i, Int cur,
+        bool first) { // pi[n3:] に対して cur * (primes[i] 以上の素因数) の数の寄与を減じる
         if (!first) {
             for (int x = getidx(cur) - n3; x >= 0; x -= (x + 1) & (-x - 1)) _fenwick[x]--;
         }
-        for (int j = i; cur * primes[j] <= vs[n3]; j++) _fenwick_rec_update(j, cur * primes[j], false);
+        for (int j = i; cur * primes[j] <= vs[n3]; j++)
+            _fenwick_rec_update(j, cur * primes[j], false);
     }
 
     CountPrimes(Int n_) : n(n_), n2((Int)sqrtl(n)), n3((Int)cbrtl(n)), n6((Int)sqrtl(n3)) {
-        is_prime.assign(n2 + 300, 1), is_prime[0] = is_prime[1] = 0; // `+ 300`: https://en.wikipedia.org/wiki/Prime_gap
+        is_prime.assign(n2 + 300, 1),
+            is_prime[0] = is_prime[1] = 0; // `+ 300`: https://en.wikipedia.org/wiki/Prime_gap
         for (size_t p = 2; p < is_prime.size(); p++) {
             if (is_prime[p]) {
                 primes.push_back(p);
@@ -37,7 +43,8 @@ struct CountPrimes {
             }
         }
         for (Int now = n; now; now = n / (n / now + 1))
-            vs.push_back(now); // [N, N / 2, ..., 1], Relevant integers (decreasing) length ~= 2sqrt(N)
+            vs.push_back(
+                now); // [N, N / 2, ..., 1], Relevant integers (decreasing) length ~= 2sqrt(N)
         s = vs.size();
 
         // pi[i] = (# of integers x s.t. x <= vs[i],  (x is prime or all factors of x >= p))
@@ -76,7 +83,7 @@ struct CountPrimes {
         for (; primes[ip] <= n3; ip++, pre++) {
             const auto &p = primes[ip];
             for (int i = 0; i < n3 and p * p <= vs[i]; i++)
-                trans2(i, p);                          // upto n3, total trans2 times: O(N^(2/3) / logN)
+                trans2(i, p); // upto n3, total trans2 times: O(N^(2/3) / logN)
             _fenwick_rec_update(ip, primes[ip], true); // total update times: O(N^(2/3) / logN)
         }
         for (int i = s - n3 - 1; i >= 0; i--) {
@@ -88,8 +95,10 @@ struct CountPrimes {
         // [Sieve Part 3] For each prime p satisfying N^(1/3) < p <= N^(1/2), use only simple updates.
         // - Complexity of this part: O(N^(2/3) / logN)
         //     \sum_i (# of factors of vs[i] of the form p^2, p >= N^(1/3)) = \sum_{i=1}^{N^(1/3)} \pi(\sqrt(vs[i])))
-        //                                                                  = sqrt(N) \sum_i^{N^(1/3)} i^{-1/2} / logN = O(N^(2/3) / logN)
-        //     (Note: \sum_{i=1}^{N} i^{-1/2} = O(sqrt N) https://math.stackexchange.com/questions/2600796/finding-summation-of-inverse-of-square-roots )
+        //                                                                  = sqrt(N) \sum_i^{N^(1/3)}
+        //                                                                  i^{-1/2} / logN = O(N^(2/3) / logN)
+        //     (Note: \sum_{i=1}^{N} i^{-1/2} = O(sqrt N)
+        //     https://math.stackexchange.com/questions/2600796/finding-summation-of-inverse-of-square-roots )
         for (; primes[ip] <= n2; ip++, pre++) {
             const auto &p = primes[ip];
             for (int i = 0; p * p <= vs[i]; i++) trans(i, p);

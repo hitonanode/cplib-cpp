@@ -25,7 +25,8 @@ int main() {
     long long N;
     int P, C;
     std::cin >> N >> P >> C;
-    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P), composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
+    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13}, P),
+                      composites = gen_dp({4, 6, 8, 9, 10, 12}, C);
     std::vector<mint> f_reversed = nttconv(primes, composites);
     std::vector<mint> dp(f_reversed.size());
     dp[0] = 1;

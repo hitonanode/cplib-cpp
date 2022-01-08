@@ -71,7 +71,8 @@ template <class T, int (*char2int)(char)> struct AhoCorasick {
         int now = 0;
         for (const auto &c : str) freq[now = step(now, char2int(c))]++;
 
-        for (auto i = visorder.rbegin(); i != visorder.rend(); i++) freq[node[*i].fail] += freq[*i];
+        for (auto i = visorder.rbegin(); i != visorder.rend(); i++)
+            freq[node[*i].fail] += freq[*i];
         std::vector<int> ret;
         for (auto x : endpos) ret.push_back(freq[x]);
         return ret;

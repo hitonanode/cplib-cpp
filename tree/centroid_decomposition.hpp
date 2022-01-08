@@ -21,8 +21,10 @@ struct CentroidDecomposition {
     std::vector<int> subtree_size;                    // size of each subtree
     std::vector<int> available_edge;                  // If 0, ignore the corresponding edge.
 
-    CentroidDecomposition(int v = 0) : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v) {}
-    CentroidDecomposition(const std::vector<std::vector<int>> &to_) : CentroidDecomposition(to_.size()) {
+    CentroidDecomposition(int v = 0)
+        : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v) {}
+    CentroidDecomposition(const std::vector<std::vector<int>> &to_)
+        : CentroidDecomposition(to_.size()) {
         for (int i = 0; i < V; i++) {
             for (auto j : to_[i]) {
                 if (i < j) { add_edge(i, j); }

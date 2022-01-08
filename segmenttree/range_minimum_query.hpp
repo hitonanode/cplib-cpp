@@ -5,8 +5,10 @@
 
 // CUT begin
 // Range Minimum Query
-// - RangeMinimumQuery<T, defaultT>(int N = 0) : Initialize array x = [defaultT, ..., defaultT] of length N, O(N)
-// - RangeMinimumQuery<T, defaultT>(const std::vector<T> &vals) : Initialize array x by [vals[0], ..., vals[-1]], O(N)
+// - RangeMinimumQuery<T, defaultT>(int N = 0) : Initialize array x = [defaultT, ..., defaultT] of
+// length N, O(N)
+// - RangeMinimumQuery<T, defaultT>(const std::vector<T> &vals) : Initialize array x by [vals[0],
+// ..., vals[-1]], O(N)
 // - update(int pos, T val) : x[pos] <- val, O(log N)
 // - get(int begin, int end) : Get min(x_begin, ..., x_(end - 1)), O(log N)
 template <typename T, T defaultT = std::numeric_limits<T>::max() / 2> struct RangeMinimumQuery {
@@ -16,7 +18,8 @@ template <typename T, T defaultT = std::numeric_limits<T>::max() / 2> struct Ran
     T _get(int begin, int end, int pos, int l, int r) const {
         if (r <= begin or l >= end) return defaultT;
         if (l >= begin and r <= end) return x[pos];
-        return std::min(_get(begin, end, 2 * pos + 1, l, (l + r) / 2), _get(begin, end, 2 * pos + 2, (l + r) / 2, r));
+        return std::min(_get(begin, end, 2 * pos + 1, l, (l + r) / 2),
+                        _get(begin, end, 2 * pos + 2, (l + r) / 2, r));
     }
     RangeMinimumQuery(int N = 0) : N(N) {
         int N_tmp = 1;

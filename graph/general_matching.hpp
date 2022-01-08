@@ -19,7 +19,8 @@ std::vector<std::pair<int, int>> generalMatching(int N, std::vector<std::pair<in
     for (auto p : ed) {
         if (p.first != p.second) { ed_tmp.emplace_back(std::minmax(p.first, p.second)); }
     }
-    ed = ed_tmp, std::sort(ed.begin(), ed.end()), ed.erase(std::unique(ed.begin(), ed.end()), ed.end());
+    ed = ed_tmp, std::sort(ed.begin(), ed.end()),
+    ed.erase(std::unique(ed.begin(), ed.end()), ed.end());
     std::vector<std::pair<int, int>> ret;
 
     std::vector<int> deg(N), used(N);

@@ -32,7 +32,8 @@ template <class Tp> void hessenberg_reduction(matrix<Tp> &M) {
 template <class Tp> std::vector<Tp> characteristic_poly(matrix<Tp> M) {
     hessenberg_reduction(M);
     const int N = M.height();
-    std::vector<std::vector<Tp>> p(N + 1); // p[i + 1] = (Characteristic polynomial of i-th leading principal minor)
+    std::vector<std::vector<Tp>> p(
+        N + 1); // p[i + 1] = (Characteristic polynomial of i-th leading principal minor)
     p[0] = {1};
     for (int i = 0; i < N; i++) {
         p[i + 1].assign(i + 2, 0);

@@ -13,7 +13,8 @@
 // Algorithm based on https://math.mit.edu/~goemans/18438F09/lec13.pdf
 // Verified: CodeChef HAMEL
 template <class M1, class M2, class State1, class State2, class T = int>
-bool augment_union_matroid(M1 &matroid1, M2 &matroid2, State1 &I1, State2 &I2, const std::vector<T> &weights) {
+bool augment_union_matroid(M1 &matroid1, M2 &matroid2, State1 &I1, State2 &I2,
+                           const std::vector<T> &weights) {
     const int M = matroid1.size();
     const int gs = M, gt = M + 1;
     ShortestPath<T> sssp(M + 2);
@@ -54,7 +55,8 @@ bool augment_union_matroid(M1 &matroid1, M2 &matroid2, State1 &I1, State2 &I2, c
 
 // (Min weight) matroid partition
 template <class M1, class M2, class T = int>
-std::pair<std::vector<bool>, std::vector<bool>> MinWeightMaxIndepSetInUnionMatroid(M1 mat1, M2 mat2, const std::vector<T> &weights = {}) {
+std::pair<std::vector<bool>, std::vector<bool>>
+MinWeightMaxIndepSetInUnionMatroid(M1 mat1, M2 mat2, const std::vector<T> &weights = {}) {
     using State = std::vector<bool>;
     assert(mat1.size() == mat2.size());
     const int M = mat1.size();

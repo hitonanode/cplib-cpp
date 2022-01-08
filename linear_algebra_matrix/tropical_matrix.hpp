@@ -24,12 +24,14 @@ template <typename T> struct tropical_matrix {
     inline T get(int i, int j) const { return elem[i * W + j]; }
     operator std::vector<std::vector<T>>() const {
         std::vector<std::vector<T>> ret(H);
-        for (int i = 0; i < H; i++) std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));
+        for (int i = 0; i < H; i++)
+            std::copy(elem.begin() + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));
         return ret;
     }
 
     tropical_matrix(int H = 0, int W = 0) : H(H), W(W), elem(H * W, INF) {}
-    tropical_matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ? d[0].size() : 0) {
+    tropical_matrix(const std::vector<std::vector<T>> &d)
+        : H(d.size()), W(d.size() ? d[0].size() : 0) {
         for (auto &raw : d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));
     }
 
@@ -48,15 +50,21 @@ template <typename T> struct tropical_matrix {
         tropical_matrix ret(H, r.W);
         for (int i = 0; i < H; i++) {
             for (int k = 0; k < W; k++) {
-                for (int j = 0; j < r.W; j++) { _chmin(ret.at(i, j), this->get(i, k) + r.get(k, j)); }
+                for (int j = 0; j < r.W; j++) {
+                    _chmin(ret.at(i, j), this->get(i, k) + r.get(k, j));
+                }
             }
         }
         return ret;
     }
     tropical_matrix &operator+=(const tropical_matrix &r) { return *this = *this + r; }
     tropical_matrix &operator*=(const tropical_matrix &r) { return *this = *this * r; }
-    bool operator==(const tropical_matrix &r) const { return H == r.H and W == r.W and elem == r.elem; }
-    bool operator!=(const tropical_matrix &r) const { return H != r.H or W != r.W or elem != r.elem; }
+    bool operator==(const tropical_matrix &r) const {
+        return H == r.H and W == r.W and elem == r.elem;
+    }
+    bool operator!=(const tropical_matrix &r) const {
+        return H != r.H or W != r.W or elem != r.elem;
+    }
     bool operator<(const tropical_matrix &r) const { return elem < r.elem; }
     tropical_matrix pow(int64_t n) const {
         tropical_matrix ret = Identity(H);

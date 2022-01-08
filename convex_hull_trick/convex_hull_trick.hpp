@@ -4,8 +4,8 @@ Convex Hull Trick
 - y = ax + b が順次追加されつつ，最大値/最小値クエリに答える
 - y = c(x - a)^2 + b 型の関数を表す(a, b)たちが順次追加されつつ，最小値クエリに答える
 Verify:
-CF 1179D <https://codeforces.com/contest/1179/submission/59448330>
-CF 1137E <https://codeforces.com/contest/1137/submission/59448399>
+CF 1179D https://codeforces.com/contest/1179/submission/59448330
+CF 1137E https://codeforces.com/contest/1137/submission/59448399
 */
 #include <limits>
 #include <set>
@@ -13,15 +13,17 @@ CF 1137E <https://codeforces.com/contest/1137/submission/59448399>
 #include <vector>
 // CUT begin
 // Convex Hull Trick
-// Implementation Idea: <https://github.com/satanic0258/Cpp_snippet/blob/master/src/technique/ConvexHullTrick.cpp>
+// Implementation Idea:
+// https://github.com/satanic0258/Cpp_snippet/blob/master/src/technique/ConvexHullTrick.cpp
 // #include <boost/multiprecision/cpp_int.hpp>
 // using mpint = boost::multiprecision::cpp_int;
 namespace CHT {
 using T_CHT = long long;
 static const T_CHT T_MIN = std::numeric_limits<T_CHT>::lowest() + 1;
 struct Line {
-    T_CHT a, b;                         // y = ax + b
-    mutable std::pair<T_CHT, T_CHT> rp; // (numerator, denominator) `x` coordinate of the crossing point with next line
+    T_CHT a, b; // y = ax + b
+    mutable std::pair<T_CHT, T_CHT>
+        rp; // (numerator, denominator) `x` coordinate of the crossing point with next line
     Line(T_CHT a, T_CHT b) : a(a), b(b), rp(T_MIN, T_MIN) {}
     static std::pair<T_CHT, T_CHT> cross(const Line &ll, const Line &lr) {
         return std::make_pair(ll.b - lr.b, lr.a - ll.a); // `ll.a < lr.a` is assumed implicitly
@@ -48,7 +50,8 @@ template <typename T_MP> struct Lines : std::multiset<Line> {
             if (nxt == end())
                 return itr->a == prv->a and itr->b <= prv->b;
             else
-                return T_MP(prv->b - itr->b) * (nxt->a - itr->a) >= T_MP(itr->b - nxt->b) * (itr->a - prv->a);
+                return T_MP(prv->b - itr->b) * (nxt->a - itr->a) >=
+                       T_MP(itr->b - nxt->b) * (itr->a - prv->a);
         }
     }
     void add_line(T_CHT a, T_CHT b) {
@@ -57,7 +60,9 @@ template <typename T_MP> struct Lines : std::multiset<Line> {
         if (isNeedless(itr))
             erase(itr);
         else {
-            while (std::next(itr) != end() and isNeedless(std::next(itr))) { erase(std::next(itr)); }
+            while (std::next(itr) != end() and isNeedless(std::next(itr))) {
+                erase(std::next(itr));
+            }
             while (itr != begin() and isNeedless(std::prev(itr))) { erase(std::prev(itr)); }
             if (std::next(itr) != end()) { itr->rp = CHT::Line::cross(*itr, *std::next(itr)); }
             if (itr != begin()) { std::prev(itr)->rp = CHT::Line::cross(*std::prev(itr), *itr); }
@@ -83,6 +88,8 @@ template <typename T_MP> struct ConvexHullTrick {
     ConvexHullTrick(bool is_minimizer) : lines(is_minimizer) {}
     void add_line(T_CHT a, T_CHT b) { lines.add_line(a, b); } // Add y = ax + b
     std::pair<T_CHT, T_CHT> get(T_CHT x) { return lines.get(x); }
-    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) { add_line(c * a * (-2), c * a * a + b); } // Add y = c(x - a)^2 + b
+    void add_convex_parabola(T_CHT c, T_CHT a, T_CHT b) {
+        add_line(c * a * (-2), c * a * a + b);
+    } // Add y = c(x - a)^2 + b
     T_CHT parabola_lower_bound(T_CHT c, T_CHT x) { return lines.get(x).first + c * x * x; }
 };

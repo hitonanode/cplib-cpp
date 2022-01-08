@@ -26,7 +26,8 @@ template <class T, int (*char2int)(char)> struct IncrementalMatching {
 
     void complete_inverse(const int y, const int nn, const int c) {
         for (auto it = node[y].inv_fail.begin();; it++) {
-            while (it != node[y].inv_fail.end() and node[*it].fail != y) it = node[y].inv_fail.erase(it);
+            while (it != node[y].inv_fail.end() and node[*it].fail != y)
+                it = node[y].inv_fail.erase(it);
             if (it == node[y].inv_fail.end()) return;
             const int x = *it, xx = node[x].Goto(c);
             if (xx) {
@@ -81,7 +82,8 @@ template <class T, int (*char2int)(char)> struct IncrementalMatching {
         int now = 0;
         for (const auto &c : str) freq[now = step(now, char2int(c))]++;
 
-        for (auto i = visorder.rbegin(); i != visorder.rend(); i++) freq[node[*i].fail] += freq[*i];
+        for (auto i = visorder.rbegin(); i != visorder.rend(); i++)
+            freq[node[*i].fail] += freq[*i];
         std::vector<int> ret;
         for (auto x : endpos) ret.push_back(freq[x]);
         return ret;

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial"
+#include "../sum_of_exponential_times_polynomial.hpp"
 #include "../../modint.hpp"
 #include "../../number/sieve.hpp"
-#include "../sum_of_exponential_times_polynomial.hpp"
 #include <cassert>
 #include <iostream>
 using namespace std;

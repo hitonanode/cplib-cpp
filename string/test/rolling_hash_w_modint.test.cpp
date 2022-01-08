@@ -19,7 +19,8 @@ int main() {
     rolling_hash<mint2> rh_T2(T, b2), rh_P2(P, b2);
 
     for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {
-        if (rh_T1.get(l, l + P.length()) == rh_P1.get(0, P.length()) and rh_T2.get(l, l + P.length()) == rh_P2.get(0, P.length())) {
+        if (rh_T1.get(l, l + P.length()) == rh_P1.get(0, P.length()) and
+            rh_T2.get(l, l + P.length()) == rh_P2.get(0, P.length())) {
             cout << l << '\n';
         }
     }

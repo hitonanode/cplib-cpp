@@ -9,162 +9,243 @@
 // Verified:
 // - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702
 // - CodeChef LTIME98 Ancient Magic https://www.codechef.com/problems/ANCT
-template <class Cap = long long, class Cost = long long, Cost INF_COST = std::numeric_limits<Cost>::max() / 2>
+template <class Cap, class Cost, Cost INF_COST = std::numeric_limits<Cost>::max() / 2>
 struct MinCostFlow {
-    struct _edge {
-        int to, rev;
-        Cap cap;
-        Cost cost;
-        template <class Ostream> friend Ostream &operator<<(Ostream &os, const _edge &e) {
-            return os << '(' << e.to << ',' << e.rev << ',' << e.cap << ',' << e.cost << ')';
+    template <class E> struct csr {
+        std::vector<int> start;
+        std::vector<E> elist;
+        explicit csr(int n, const std::vector<std::pair<int, E>> &edges)
+            : start(n + 1), elist(edges.size()) {
+            for (auto e : edges) { start[e.first + 1]++; }
+            for (int i = 1; i <= n; i++) { start[i] += start[i - 1]; }
+            auto counter = start;
+            for (auto e : edges) { elist[counter[e.first]++] = e.second; }
         }
     };
-    bool _is_dual_infeasible;
-    int V;
-    std::vector<std::vector<_edge>> g;
-    std::vector<Cost> dist;
-    std::vector<int> prevv, preve;
-    std::vector<Cost> dual; // dual[V]: potential
-    std::vector<std::pair<int, int>> pos;
 
-    bool _initialize_dual_dag() {
-        std::vector<int> deg_in(V);
-        for (int i = 0; i < V; i++) {
-            for (const auto &e : g[i]) deg_in[e.to] += (e.cap > 0);
-        }
-        std::vector<int> st;
-        st.reserve(V);
-        for (int i = 0; i < V; i++) {
-            if (!deg_in[i]) st.push_back(i);
-        }
-        for (int n = 0; n < V; n++) {
-            if (int(st.size()) == n) return false; // Not DAG
-            int now = st[n];
-            for (const auto &e : g[now]) {
-                if (!e.cap) continue;
-                deg_in[e.to]--;
-                if (deg_in[e.to] == 0) st.push_back(e.to);
-                if (dual[e.to] >= dual[now] + e.cost) dual[e.to] = dual[now] + e.cost;
-            }
-        }
-        return true;
-    }
-
-    bool _initialize_dual_spfa() { // Find feasible dual's when negative cost edges exist
-        dual.assign(V, 0);
-        std::queue<int> q;
-        std::vector<int> in_queue(V);
-        std::vector<int> nvis(V);
-        for (int i = 0; i < V; i++) q.push(i), in_queue[i] = true;
-        while (q.size()) {
-            int now = q.front();
-            q.pop(), in_queue[now] = false;
-            if (nvis[now] > V) return false; // Negative cycle exists
-            nvis[now]++;
-            for (const auto &e : g[now]) {
-                if (!e.cap) continue;
-                if (dual[e.to] > dual[now] + e.cost) {
-                    dual[e.to] = dual[now] + e.cost;
-                    if (!in_queue[e.to]) in_queue[e.to] = true, q.push(e.to);
-                }
-            }
-        }
-        return true;
-    }
-
-    bool initialize_dual() {
-        return !_is_dual_infeasible or _initialize_dual_dag() or _initialize_dual_spfa();
-    }
-
-    template <class heap> void _dijkstra(int s) { // O(ElogV)
-        prevv.assign(V, -1);
-        preve.assign(V, -1);
-        dist.assign(V, INF_COST);
-        dist[s] = 0;
-        heap q;
-        q.emplace(0, s);
-        while (!q.empty()) {
-            auto p = q.top();
-            q.pop();
-            int v = p.second;
-            if (dist[v] < Cost(p.first)) continue;
-            for (int i = 0; i < (int)g[v].size(); i++) {
-                _edge &e = g[v][i];
-                auto c = dist[v] + e.cost + dual[v] - dual[e.to];
-                if (e.cap > 0 and dist[e.to] > c) {
-                    dist[e.to] = c, prevv[e.to] = v, preve[e.to] = i;
-                    q.emplace(dist[e.to], e.to);
-                }
-            }
-        }
-    }
-
-    MinCostFlow(int V = 0) : _is_dual_infeasible(false), V(V), g(V), dual(V, 0) {
-        static_assert(INF_COST > 0, "INF_COST must be positive");
+public:
+    MinCostFlow() {}
+    explicit MinCostFlow(int n) : is_dual_infeasible(false), _n(n) {
+        static_assert(std::numeric_limits<Cap>::max() > 0, "max() must be greater than 0");
     }
 
     int add_edge(int from, int to, Cap cap, Cost cost) {
-        assert(0 <= from and from < V);
-        assert(0 <= to and to < V);
-        assert(cap >= 0);
-        if (cost < 0) _is_dual_infeasible = true;
-        pos.emplace_back(from, g[from].size());
-        g[from].push_back({to, (int)g[to].size() + (from == to), cap, cost});
-        g[to].push_back({from, (int)g[from].size() - 1, (Cap)0, -cost});
-        return int(pos.size()) - 1;
-    }
-
-    // Flush flow f from s to t. Graph must not have negative cycle.
-    using Pque = std::priority_queue<std::pair<Cost, int>, std::vector<std::pair<Cost, int>>, std::greater<std::pair<Cost, int>>>;
-    template <class heap = Pque> std::pair<Cap, Cost> flow(int s, int t, const Cap &flow_limit) {
-        // You can also use radix_heap<typename std::make_unsigned<Cost>::type, int> as prique
-        if (!initialize_dual()) throw; // Fail to find feasible dual
-        Cost cost = 0;
-        Cap flow_rem = flow_limit;
-        while (flow_rem > 0) {
-            _dijkstra<heap>(s);
-            if (dist[t] == INF_COST) break;
-            for (int v = 0; v < V; v++) dual[v] = std::min(dual[v] + dist[v], INF_COST);
-            Cap d = flow_rem;
-            for (int v = t; v != s; v = prevv[v]) d = std::min(d, g[prevv[v]][preve[v]].cap);
-            flow_rem -= d;
-            cost += d * (dual[t] - dual[s]);
-            for (int v = t; v != s; v = prevv[v]) {
-                _edge &e = g[prevv[v]][preve[v]];
-                e.cap -= d;
-                g[v][e.rev].cap += d;
-            }
-        }
-        return std::make_pair(flow_limit - flow_rem, cost);
+        assert(0 <= from && from < _n);
+        assert(0 <= to && to < _n);
+        assert(0 <= cap);
+        if (cost < 0) is_dual_infeasible = true;
+        int m = int(_edges.size());
+        _edges.push_back({from, to, cap, 0, cost});
+        return m;
     }
 
     struct edge {
         int from, to;
         Cap cap, flow;
         Cost cost;
-        template <class Ostream> friend Ostream &operator<<(Ostream &os, const edge &e) {
-            return os << '(' << e.from << "->" << e.to << ',' << e.flow << '/' << e.cap << ",$" << e.cost << ')';
-        }
     };
 
-    edge get_edge(int edge_id) const {
-        int m = int(pos.size());
-        assert(0 <= edge_id and edge_id < m);
-        auto _e = g[pos[edge_id].first][pos[edge_id].second];
-        auto _re = g[_e.to][_e.rev];
-        return {pos[edge_id].first, _e.to, _e.cap + _re.cap, _re.cap, _e.cost};
+    edge get_edge(int i) {
+        int m = int(_edges.size());
+        assert(0 <= i && i < m);
+        return _edges[i];
     }
-    std::vector<edge> edges() const {
-        std::vector<edge> ret(pos.size());
-        for (int i = 0; i < int(pos.size()); i++) ret[i] = get_edge(i);
-        return ret;
+    std::vector<edge> edges() { return _edges; }
+
+    std::pair<Cap, Cost> flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max()); }
+    std::pair<Cap, Cost> flow(int s, int t, Cap flow_limit) {
+        return slope(s, t, flow_limit).back();
+    }
+    std::vector<std::pair<Cap, Cost>> slope(int s, int t) {
+        return slope(s, t, std::numeric_limits<Cap>::max());
+    }
+    std::vector<std::pair<Cap, Cost>> slope(int s, int t, Cap flow_limit) {
+        assert(0 <= s && s < _n);
+        assert(0 <= t && t < _n);
+        assert(s != t);
+
+        int m = int(_edges.size());
+        std::vector<int> edge_idx(m);
+
+        auto g = [&]() {
+            std::vector<int> degree(_n), redge_idx(m);
+            std::vector<std::pair<int, _edge>> elist;
+            elist.reserve(2 * m);
+            for (int i = 0; i < m; i++) {
+                auto e = _edges[i];
+                edge_idx[i] = degree[e.from]++;
+                redge_idx[i] = degree[e.to]++;
+                elist.push_back({e.from, {e.to, -1, e.cap - e.flow, e.cost}});
+                elist.push_back({e.to, {e.from, -1, e.flow, -e.cost}});
+            }
+            auto _g = csr<_edge>(_n, elist);
+            for (int i = 0; i < m; i++) {
+                auto e = _edges[i];
+                edge_idx[i] += _g.start[e.from];
+                redge_idx[i] += _g.start[e.to];
+                _g.elist[edge_idx[i]].rev = redge_idx[i];
+                _g.elist[redge_idx[i]].rev = edge_idx[i];
+            }
+            return _g;
+        }();
+
+        auto result = slope(g, s, t, flow_limit);
+
+        for (int i = 0; i < m; i++) {
+            auto e = g.elist[edge_idx[i]];
+            _edges[i].flow = _edges[i].cap - e.cap;
+        }
+
+        return result;
     }
 
-    template <class Ostream> friend Ostream &operator<<(Ostream &os, const MinCostFlow &mcf) {
-        os << "[MinCostFlow]V=" << mcf.V << ":";
-        for (int i = 0; i < mcf.V; i++) {
-            for (auto &e : mcf.g[i]) os << "\n" << i << "->" << e.to << ":cap" << e.cap << ",$" << e.cost;
+private:
+    bool is_dual_infeasible;
+    int _n;
+    std::vector<edge> _edges;
+
+    // inside edge
+    struct _edge {
+        int to, rev;
+        Cap cap;
+        Cost cost;
+    };
+
+    std::vector<std::pair<Cap, Cost>> slope(csr<_edge> &g, int s, int t, Cap flow_limit) {
+        // variants (C = maxcost):
+        // -(n-1)C <= dual[s] <= dual[i] <= dual[t] = 0
+        // reduced cost (= e.cost + dual[e.from] - dual[e.to]) >= 0 for all edge
+
+        // dual_dist[i] = (dual[i], dist[i])
+        std::vector<std::pair<Cost, Cost>> dual_dist(_n);
+        if (is_dual_infeasible) {
+            auto check_dag = [&]() {
+                std::vector<int> deg_in(_n);
+                for (int v = 0; v < _n; v++) {
+                    for (int i = g.start[v]; i < g.start[v + 1]; i++) {
+                        deg_in[g.elist[i].to] += g.elist[i].cap > 0;
+                    }
+                }
+                std::vector<int> st;
+                st.reserve(_n);
+                for (int i = 0; i < _n; i++) {
+                    if (!deg_in[i]) st.push_back(i);
+                }
+                for (int n = 0; n < _n; n++) {
+                    if (int(st.size()) == n) return false; // Not DAG
+                    int now = st[n];
+                    for (int i = g.start[now]; i < g.start[now + 1]; i++) {
+                        const auto &e = g.elist[i];
+                        if (!e.cap) continue;
+                        deg_in[e.to]--;
+                        if (deg_in[e.to] == 0) st.push_back(e.to);
+                        if (dual_dist[e.to].first >= dual_dist[now].first + e.cost)
+                            dual_dist[e.to].first = dual_dist[now].first + e.cost;
+                    }
+                }
+                return true;
+            }();
+            if (!check_dag) throw;
+            auto dt = dual_dist[t].first;
+            for (int v = 0; v < _n; v++) dual_dist[v].first -= dt;
+            is_dual_infeasible = false;
         }
-        return os;
+        std::vector<int> prev_e(_n);
+        std::vector<bool> vis(_n);
+        struct Q {
+            Cost key;
+            int to;
+            bool operator<(Q r) const { return key > r.key; }
+        };
+        std::vector<int> que_min;
+        std::vector<Q> que;
+        auto dual_ref = [&]() {
+            for (int i = 0; i < _n; i++) {
+                dual_dist[i].second = std::numeric_limits<Cost>::max();
+            }
+            std::fill(vis.begin(), vis.end(), false);
+            que_min.clear();
+            que.clear();
+
+            // que[0..heap_r) was heapified
+            unsigned heap_r = 0;
+
+            dual_dist[s].second = 0;
+            que_min.push_back(s);
+            while (!que_min.empty() || !que.empty()) {
+                int v;
+                if (!que_min.empty()) {
+                    v = que_min.back();
+                    que_min.pop_back();
+                } else {
+                    while (heap_r < que.size()) {
+                        heap_r++;
+                        std::push_heap(que.begin(), que.begin() + heap_r);
+                    }
+                    v = que.front().to;
+                    std::pop_heap(que.begin(), que.end());
+                    que.pop_back();
+                    heap_r--;
+                }
+                if (vis[v]) continue;
+                vis[v] = true;
+                if (v == t) break;
+                // dist[v] = shortest(s, v) + dual[s] - dual[v]
+                // dist[v] >= 0 (all reduced cost are positive)
+                // dist[v] <= (n-1)C
+                Cost dual_v = dual_dist[v].first, dist_v = dual_dist[v].second;
+                for (int i = g.start[v]; i < g.start[v + 1]; i++) {
+                    auto e = g.elist[i];
+                    if (!e.cap) continue;
+                    // |-dual[e.to] + dual[v]| <= (n-1)C
+                    // cost <= C - -(n-1)C + 0 = nC
+                    Cost cost = e.cost - dual_dist[e.to].first + dual_v;
+                    if (dual_dist[e.to].second - dist_v > cost) {
+                        Cost dist_to = dist_v + cost;
+                        dual_dist[e.to].second = dist_to;
+                        prev_e[e.to] = e.rev;
+                        if (dist_to == dist_v) {
+                            que_min.push_back(e.to);
+                        } else {
+                            que.push_back(Q{dist_to, e.to});
+                        }
+                    }
+                }
+            }
+            if (!vis[t]) { return false; }
+
+            for (int v = 0; v < _n; v++) {
+                if (!vis[v]) continue;
+                // dual[v] = dual[v] - dist[t] + dist[v]
+                //         = dual[v] - (shortest(s, t) + dual[s] - dual[t]) +
+                //         (shortest(s, v) + dual[s] - dual[v]) = - shortest(s,
+                //         t) + dual[t] + shortest(s, v) = shortest(s, v) -
+                //         shortest(s, t) >= 0 - (n-1)C
+                dual_dist[v].first -= dual_dist[t].second - dual_dist[v].second;
+            }
+            return true;
+        };
+        Cap flow = 0;
+        Cost cost = 0, prev_cost_per_flow = -1;
+        std::vector<std::pair<Cap, Cost>> result = {{Cap(0), Cost(0)}};
+        while (flow < flow_limit) {
+            if (!dual_ref()) break;
+            Cap c = flow_limit - flow;
+            for (int v = t; v != s; v = g.elist[prev_e[v]].to) {
+                c = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);
+            }
+            for (int v = t; v != s; v = g.elist[prev_e[v]].to) {
+                auto &e = g.elist[prev_e[v]];
+                e.cap += c;
+                g.elist[e.rev].cap -= c;
+            }
+            Cost d = -dual_dist[s].first;
+            flow += c;
+            cost += c * d;
+            if (prev_cost_per_flow == d) { result.pop_back(); }
+            result.push_back({flow, cost});
+            prev_cost_per_flow = d;
+        }
+        return result;
     }
 };

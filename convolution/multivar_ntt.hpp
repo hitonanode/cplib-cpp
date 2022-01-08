@@ -41,7 +41,8 @@ private:
         assert(int(f.size()) == N);
         assert(int(g.size()) == N);
         if (dim.empty()) return {f[0] * g[0]};
-        std::vector<std::vector<MODINT>> fex(K, std::vector<MODINT>(fftlen)), gex(K, std::vector<MODINT>(fftlen));
+        std::vector<std::vector<MODINT>> fex(K, std::vector<MODINT>(fftlen)),
+            gex(K, std::vector<MODINT>(fftlen));
         for (int i = 0; i < N; i++) fex[chi[i]][i] = f[i], gex[chi[i]][i] = g[i];
         for (auto &vec : fex) ntt(vec, false);
         for (auto &vec : gex) ntt(vec, false);
@@ -60,7 +61,8 @@ private:
 
 public:
     multivar_ntt(const std::vector<int> &dim_) { _initialize(dim_); }
-    std::vector<MODINT> operator()(const std::vector<MODINT> &f, const std::vector<MODINT> &g) const {
+    std::vector<MODINT>
+    operator()(const std::vector<MODINT> &f, const std::vector<MODINT> &g) const {
         return _convolve(f, g);
     }
 };
