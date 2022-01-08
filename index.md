@@ -169,11 +169,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/lagrange_interpolation.hpp
       title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\
         \u9593\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/linear_recurrence.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
         \u63A8\u5B9A"
@@ -183,10 +183,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/polynomial_divmod.hpp
       title: formal_power_series/polynomial_divmod.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial.hpp
       title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
       title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   - name: .
@@ -282,25 +282,25 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/strongly_connected_components.hpp
       title: graph/strongly_connected_components.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/strongly_connected_components_bitset.hpp
       title: graph/strongly_connected_components_bitset.hpp
   - name: linear_algebra_matrix
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_algorithm.hpp
       title: linear_algebra_matrix/blackbox_algorithm.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_matrices.hpp
       title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/characteristic_poly.hpp
       title: "Characteristic polynomial \uFF08\u884C\u5217\u306E\u7279\u6027\u591A\
         \u9805\u5F0F\uFF09"
     - icon: ':warning:'
       path: linear_algebra_matrix/circular_binary_expansion.hpp
       title: linear_algebra_matrix/circular_binary_expansion.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/hafnian.hpp
       title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\
         \u7121\u5411\u30B0\u30E9\u30D5\u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\
@@ -308,16 +308,16 @@ data:
     - icon: ':warning:'
       path: linear_algebra_matrix/levinson.hpp
       title: Levinson recursion (Levinson-Durbin algorithm)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_bitset.hpp
       title: linear_algebra_matrix/linalg_bitset.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/matrix.hpp
       title: linear_algebra_matrix/matrix.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
     - icon: ':warning:'
@@ -333,7 +333,7 @@ data:
     - icon: ':warning:'
       path: number/acl_modint.hpp
       title: number/acl_modint.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/arithmetic_cumsum.hpp
       title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\
         \u6570\u306E\u7D2F\u7A4D\u548C\uFF09"
@@ -346,14 +346,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/binary_gcd.hpp
       title: Binary GCD
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/bs_sieve.hpp
       title: number/bs_sieve.hpp
     - icon: ':heavy_check_mark:'
       path: number/combination.hpp
       title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
         \u7406\u306E\u62E1\u5F35\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/count_primes.hpp
       title: "Counting primes \uFF08\u7D20\u6570\u306E\u500B\u6570\uFF09"
     - icon: ':warning:'
@@ -369,19 +369,19 @@ data:
       path: number/euler_totient_phi.hpp
       title: "Euler's totient function\uFF08\u30AA\u30A4\u30E9\u30FC\u306E\u30C8\u30FC\
         \u30B7\u30A7\u30F3\u30C8\u95A2\u6570\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
       path: number/nimber.hpp
       title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/primitive_root.hpp
       title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
     - icon: ':warning:'
@@ -493,7 +493,7 @@ data:
       title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   - name: set_power_series
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: set_power_series/subset_convolution.hpp
       title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
         \u7B97\uFF09"
@@ -986,7 +986,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/strongly_connected_components.test.cpp
       title: graph/test/strongly_connected_components.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/strongly_connected_components_bitset.test.cpp
       title: graph/test/strongly_connected_components_bitset.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1003,54 +1003,54 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
       title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/characteristic_poly.test.cpp
       title: linear_algebra_matrix/test/characteristic_poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/hafnian.test.cpp
       title: linear_algebra_matrix/test/hafnian.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/inverse_matrix.test.cpp
       title: linear_algebra_matrix/test/inverse_matrix.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_bitset.test.cpp
       title: linear_algebra_matrix/test/linalg_bitset.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
       title: linear_algebra_matrix/test/linalg_ll_det.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_longlong.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_product.test.cpp
       title: linear_algebra_matrix/test/matrix_product.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/arithmetic_function_totient.test.cpp
       title: number/test/arithmetic_function_totient.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/binary_gcd.stress.test.cpp
       title: number/test/binary_gcd.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/bs_sieve.test.cpp
       title: number/test/bs_sieve.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1059,31 +1059,31 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/combination.test.cpp
       title: number/test/combination.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/count_primes.test.cpp
       title: number/test/count_primes.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/discrete_logarithm.test.cpp
       title: number/test/discrete_logarithm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/enumerate_primes.test.cpp
       title: number/test/enumerate_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/factorize_aoj.test.cpp
       title: number/test/factorize_aoj.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/factorize_longlong.test.cpp
       title: number/test/factorize_longlong.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/gen_primes.test.cpp
       title: number/test/gen_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/miller-rabin-5e7.test.cpp
       title: number/test/miller-rabin-5e7.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/miller-rabin.test.cpp
       title: number/test/miller-rabin.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/montmort_number_mod.test.cpp
       title: number/test/montmort_number_mod.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1092,13 +1092,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/primitive_root.test.cpp
       title: number/test/primitive_root.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/sieve.stress.test.cpp
       title: number/test/sieve.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
   - name: other_algorithms/test
