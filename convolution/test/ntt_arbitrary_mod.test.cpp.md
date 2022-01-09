@@ -1,15 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':question:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
-  - icon: ':question:'
-    path: modint.hpp
-    title: modint.hpp
-  - icon: ':heavy_check_mark:'
-    path: number/modint_runtime.hpp
-    title: number/modint_runtime.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -247,14 +238,11 @@ data:
     \ nttconv(A, B);\n    vector<mintr> retr = nttconv(Ar, Br);\n\n    for (int i\
     \ = 0; i < N + M - 1; i++) {\n        assert(ret[i].val == retr[i].val);\n   \
     \     cout << ret[i].val << ' ';\n    }\n}\n"
-  dependsOn:
-  - convolution/ntt.hpp
-  - modint.hpp
-  - number/modint_runtime.hpp
+  dependsOn: []
   isVerificationFile: true
   path: convolution/test/ntt_arbitrary_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2020-11-18 20:06:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/ntt_arbitrary_mod.test.cpp

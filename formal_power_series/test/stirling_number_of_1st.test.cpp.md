@@ -1,13 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -272,7 +269,6 @@ data:
   dependsOn:
   - modint.hpp
   - formal_power_series/formal_power_series.hpp
-  - convolution/ntt.hpp
   isVerificationFile: true
   path: formal_power_series/test/stirling_number_of_1st.test.cpp
   requiredBy: []

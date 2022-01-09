@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/longest_common_prefix.hpp
     title: string/longest_common_prefix.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/lca_rmq.hpp
     title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\
       \u30EA $O(1)$ \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
@@ -19,12 +19,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/run_enumerate_lyndon_rmq.test.cpp
     title: string/test/run_enumerate_lyndon_rmq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/lca_rmq.test.cpp
     title: tree/test/lca_rmq.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"sparse_table/rmq_sparse_table.hpp\"\n#include <algorithm>\n\
@@ -67,7 +67,7 @@ data:
   - string/longest_common_prefix.hpp
   - tree/lca_rmq.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - sparse_table/test/sparse_table.test.cpp
   - sparse_table/test/sparse_table_aoj.test.cpp

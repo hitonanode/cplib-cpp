@@ -1,16 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':question:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/coeff_of_rational_function.hpp
-    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
-      \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-  - icon: ':question:'
-    path: modint.hpp
-    title: modint.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -208,10 +198,7 @@ data:
     \ denom = f;\n    for (auto &x : denom) x = -x;\n    denom[0] = 1;\n    for (int\
     \ i = f.size() - 1; i > 1; i--) f[i - 1] += f[i];\n    std::cout << coefficient_of_rational_function(N,\
     \ f, denom) << '\\n';\n}\n"
-  dependsOn:
-  - formal_power_series/coeff_of_rational_function.hpp
-  - convolution/ntt.hpp
-  - modint.hpp
+  dependsOn: []
   isVerificationFile: true
   path: formal_power_series/test/coeff_of_rational_function.test.cpp
   requiredBy: []

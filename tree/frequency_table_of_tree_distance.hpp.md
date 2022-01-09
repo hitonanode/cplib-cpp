@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/centroid_decomposition.hpp
     title: tree/centroid_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.test.cpp
     title: tree/test/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"tree/centroid_decomposition.hpp\"\n#include <tuple>\n#include\
@@ -126,7 +126,7 @@ data:
   path: tree/frequency_table_of_tree_distance.hpp
   requiredBy: []
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp

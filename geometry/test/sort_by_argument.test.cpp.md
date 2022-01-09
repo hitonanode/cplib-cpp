@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: geometry/sort_by_argument.hpp
-    title: geometry/sort_by_argument.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -37,12 +34,11 @@ data:
     \  long long x, y;\n        cin >> x >> y;\n        ps.emplace_back(x, y);\n \
     \   }\n    sort(ps.begin(), ps.end());\n    for (auto p : ps) cout << p.X << '\
     \ ' << p.Y << '\\n';\n}\n"
-  dependsOn:
-  - geometry/sort_by_argument.hpp
+  dependsOn: []
   isVerificationFile: true
   path: geometry/test/sort_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2021-05-20 18:58:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: geometry/test/sort_by_argument.test.cpp

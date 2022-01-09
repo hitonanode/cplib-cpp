@@ -1,17 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/coeff_of_rational_function.test.cpp
-    title: formal_power_series/test/coeff_of_rational_function.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
@@ -208,7 +205,6 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/coeff_of_rational_function.test.cpp
   - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: formal_power_series/coeff_of_rational_function.hpp
 layout: document

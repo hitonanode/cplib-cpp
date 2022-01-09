@@ -34,12 +34,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/bare_mod_algebra.hpp\"\n#include <algorithm>\n#include\
@@ -136,7 +136,7 @@ data:
   - number/combination.hpp
   - linear_algebra_matrix/linalg_longlong.hpp
   timestamp: '2021-10-30 11:24:11+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/primitive_root.test.cpp
   - number/test/combination.test.cpp

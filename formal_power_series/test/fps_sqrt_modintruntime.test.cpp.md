@@ -1,18 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':question:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/formal_power_series.hpp
-    title: formal_power_series/formal_power_series.hpp
-  - icon: ':question:'
-    path: modint.hpp
-    title: modint.hpp
-  - icon: ':heavy_check_mark:'
-    path: number/modint_runtime.hpp
-    title: number/modint_runtime.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -339,15 +327,11 @@ data:
     \ >> A[i];\n    A.shrink();\n    auto ret = A.sqrt(N);\n    if (ret.empty() and\
     \ !A.empty())\n        puts(\"-1\");\n    else\n        for (int i = 0; i < N;\
     \ i++) printf(\"%d \", ret.coeff(i).val);\n}\n"
-  dependsOn:
-  - formal_power_series/formal_power_series.hpp
-  - convolution/ntt.hpp
-  - modint.hpp
-  - number/modint_runtime.hpp
+  dependsOn: []
   isVerificationFile: true
   path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2021-06-06 14:54:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/fps_sqrt_modintruntime.test.cpp

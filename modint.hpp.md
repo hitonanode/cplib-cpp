@@ -2,14 +2,11 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: convolution/convolutive_translation_2d.hpp
-    title: convolution/convolutive_translation_2d.hpp
   - icon: ':heavy_check_mark:'
     path: convolution/multivar_ntt.hpp
     title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
       \u307F\u8FBC\u307F\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
@@ -21,17 +18,8 @@ data:
     title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\
       \u7B97\uFF09"
   - icon: ':heavy_check_mark:'
-    path: formal_power_series/formal_power_series.hpp
-    title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/multipoint_evaluation.hpp
-    title: formal_power_series/multipoint_evaluation.hpp
-  - icon: ':heavy_check_mark:'
     path: formal_power_series/polynomial_divmod.hpp
     title: formal_power_series/polynomial_divmod.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/general_matching.hpp
-    title: graph/general_matching.hpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
@@ -52,9 +40,6 @@ data:
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
   - icon: ':heavy_check_mark:'
-    path: convolution/test/ntt_arbitrary_mod.test.cpp
-    title: convolution/test/ntt_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
     path: data_structure/test/lazy_rbst.test.cpp
     title: data_structure/test/lazy_rbst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -70,41 +55,8 @@ data:
     path: data_structure/test/queue_operate_all_composite.test.cpp
     title: data_structure/test/queue_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/bernoulli_number.test.cpp
-    title: formal_power_series/test/bernoulli_number.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/coeff_of_rational_function.test.cpp
-    title: formal_power_series/test/coeff_of_rational_function.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/division_number.test.cpp
-    title: formal_power_series/test/division_number.test.cpp
-  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_exp.test.cpp
-    title: formal_power_series/test/fps_exp.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_exp_modintruntime.test.cpp
-    title: formal_power_series/test/fps_exp_modintruntime.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_inv.test.cpp
-    title: formal_power_series/test/fps_inv.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_log.test.cpp
-    title: formal_power_series/test/fps_log.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_pow.test.cpp
-    title: formal_power_series/test/fps_pow.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_pow_another.test.cpp
-    title: formal_power_series/test/fps_pow_another.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_sqrt.test.cpp
-    title: formal_power_series/test/fps_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
@@ -115,20 +67,11 @@ data:
     path: formal_power_series/test/linear_recurrence.test.cpp
     title: formal_power_series/test/linear_recurrence.test.cpp
   - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/multipoint_evaluation.test.cpp
-    title: formal_power_series/test/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/poly_taylor_shift.test.cpp
-    title: formal_power_series/test/poly_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/polynomial_divmod.test.cpp
     title: formal_power_series/test/polynomial_divmod.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    title: formal_power_series/test/sharp_p_subset_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/shift_of_sampling_points.test.cpp
     title: formal_power_series/test/shift_of_sampling_points.test.cpp
@@ -136,17 +79,11 @@ data:
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
   - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/stirling_number_of_2nd.test.cpp
-    title: formal_power_series/test/stirling_number_of_2nd.test.cpp
-  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: graph/test/general_matching.test.cpp
-    title: graph/test/general_matching.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
@@ -196,9 +133,6 @@ data:
     path: segmenttree/test/range-affine-range-sum.test.cpp
     title: segmenttree/test/range-affine-range-sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: set_power_series/test/subset_conv.test.cpp
-    title: set_power_series/test/subset_conv.test.cpp
-  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -213,24 +147,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/rolling_hash_w_modint.test.cpp
     title: string/test/rolling_hash_w_modint.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/tree_isomorphism.aoj1613.test.cpp
     title: tree/test/tree_isomorphism.aoj1613.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: utilities/test/pow.test.cpp
     title: utilities/test/pow.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -394,57 +328,35 @@ data:
   requiredBy:
   - convolution/multivar_ntt.hpp
   - convolution/ntt.hpp
-  - convolution/convolutive_translation_2d.hpp
-  - graph/general_matching.hpp
   - formal_power_series/coeff_of_rational_function.hpp
-  - formal_power_series/formal_power_series.hpp
   - formal_power_series/factorial_power.hpp
   - formal_power_series/polynomial_divmod.hpp
-  - formal_power_series/multipoint_evaluation.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/arithmetic_function_totient.test.cpp
   - number/test/primitive_root.test.cpp
   - convolution/test/ntt.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
   - convolution/test/multivar_ntt.test.cpp
-  - convolution/test/ntt_arbitrary_mod.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
-  - graph/test/general_matching.test.cpp
   - set_power_series/test/subset_log.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
-  - set_power_series/test/subset_conv.test.cpp
   - set_power_series/test/subset_pow.yuki1594.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
   - formal_power_series/test/polynomial_divmod.test.cpp
-  - formal_power_series/test/fps_sqrt.test.cpp
-  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-  - formal_power_series/test/fps_exp.test.cpp
-  - formal_power_series/test/sharp_p_subset_sum.test.cpp
-  - formal_power_series/test/stirling_number_of_2nd.test.cpp
-  - formal_power_series/test/fps_pow_another.test.cpp
   - formal_power_series/test/stirling_number_of_1st.test.cpp
   - formal_power_series/test/linear_recurrence.test.cpp
-  - formal_power_series/test/poly_taylor_shift.test.cpp
-  - formal_power_series/test/division_number.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - formal_power_series/test/fps_inv.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
-  - formal_power_series/test/multipoint_evaluation.test.cpp
-  - formal_power_series/test/fps_exp_modintruntime.test.cpp
   - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - formal_power_series/test/bernoulli_number.test.cpp
-  - formal_power_series/test/coeff_of_rational_function.test.cpp
   - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - formal_power_series/test/fps_log.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
   - formal_power_series/test/shift_of_sampling_points.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - formal_power_series/test/fps_pow.test.cpp
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp

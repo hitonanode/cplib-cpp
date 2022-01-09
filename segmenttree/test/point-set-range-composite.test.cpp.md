@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
   _extendedRequiredBy: []

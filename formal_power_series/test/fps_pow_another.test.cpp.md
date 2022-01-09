@@ -1,15 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':question:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/formal_power_series.hpp
-    title: formal_power_series/formal_power_series.hpp
-  - icon: ':question:'
-    path: modint.hpp
-    title: modint.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -269,14 +260,11 @@ data:
     \        A /= a0;\n        A = A >> i;\n        A = (A.log(N + 10) * M).exp();\n\
     \        bias += 1LL * i * M;\n        A *= a0.pow(M);\n    }\n    for (int i\
     \ = 0; i < N; i++) cout << A.coeff(i - bias) << ' ';\n}\n"
-  dependsOn:
-  - formal_power_series/formal_power_series.hpp
-  - convolution/ntt.hpp
-  - modint.hpp
+  dependsOn: []
   isVerificationFile: true
   path: formal_power_series/test/fps_pow_another.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2020-12-02 23:28:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/fps_pow_another.test.cpp

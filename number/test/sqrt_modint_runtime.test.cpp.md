@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: number/modint_runtime.hpp
-    title: number/modint_runtime.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -98,12 +95,11 @@ data:
     \ m = Y;\n        if (Y) {\n            m = m.sqrt();\n            cout << (m\
     \ ? m.val : -1) << endl;\n        } else\n            cout << 0 << endl;\n   \
     \ }\n}\n"
-  dependsOn:
-  - number/modint_runtime.hpp
+  dependsOn: []
   isVerificationFile: true
   path: number/test/sqrt_modint_runtime.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2021-06-06 17:00:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/sqrt_modint_runtime.test.cpp

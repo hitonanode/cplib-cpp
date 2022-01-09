@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: utilities/pow.hpp
     title: "Power \uFF08\u7D2F\u4E57\uFF09"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: utilities/pow_sum.hpp
     title: "power sum \uFF08\u7D2F\u4E57\u548C\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
@@ -126,7 +126,7 @@ data:
   path: utilities/test/pow.test.cpp
   requiredBy: []
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: utilities/test/pow.test.cpp
 layout: document

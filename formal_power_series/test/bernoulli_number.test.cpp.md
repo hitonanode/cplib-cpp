@@ -1,15 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':question:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/formal_power_series.hpp
-    title: formal_power_series/formal_power_series.hpp
-  - icon: ':question:'
-    path: modint.hpp
-    title: modint.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -264,14 +255,11 @@ data:
     \    FormalPowerSeries<mint> b = ((x.exp(N + 2) - 1) >> 1).inv(N + 1);\n    for\
     \ (int i = 0; i <= N; i++) printf(\"%d \", (b.coeff(i) * mint(i).fac()).val);\n\
     }\n"
-  dependsOn:
-  - formal_power_series/formal_power_series.hpp
-  - convolution/ntt.hpp
-  - modint.hpp
+  dependsOn: []
   isVerificationFile: true
   path: formal_power_series/test/bernoulli_number.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2020-11-18 20:06:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/bernoulli_number.test.cpp

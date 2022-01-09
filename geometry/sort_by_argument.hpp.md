@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: geometry/test/sort_by_argument.test.cpp
-    title: geometry/test/sort_by_argument.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"geometry/sort_by_argument.hpp\"\n#include <cmath>\n\n//\
@@ -34,9 +31,8 @@ data:
   path: geometry/sort_by_argument.hpp
   requiredBy: []
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - geometry/test/sort_by_argument.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: geometry/sort_by_argument.hpp
 layout: document
 redirect_from:

@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/centroid_decomposition.hpp
     title: tree/centroid_decomposition.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/frequency_table_of_tree_distance.hpp
     title: Frequency table of tree distance
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -313,7 +313,7 @@ data:
   path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   requiredBy: []
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
 layout: document

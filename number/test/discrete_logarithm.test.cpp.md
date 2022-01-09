@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: number/discrete_logarithm.hpp
-    title: number/discrete_logarithm.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -50,8 +47,7 @@ data:
     \ {\n    int T;\n    std::cin >> T;\n    while (T--) {\n        int X, Y, M;\n\
     \        std::cin >> X >> Y >> M;\n        DiscreteLogarithm dl(M, X);\n     \
     \   std::cout << dl.log(Y) << std::endl;\n    }\n}\n"
-  dependsOn:
-  - number/discrete_logarithm.hpp
+  dependsOn: []
   isVerificationFile: true
   path: number/test/discrete_logarithm.test.cpp
   requiredBy: []

@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':question:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
-  - icon: ':question:'
-    path: modint.hpp
-    title: modint.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -209,9 +203,7 @@ data:
     \    }\n    std::vector<std::vector<MODINT>> ret(H);\n    for (int i = 0; i <\
     \ H; i++) {\n        ret[i].insert(ret[i].end(), dp.begin() + i * WW, dp.begin()\
     \ + i * WW + W);\n    }\n    return ret;\n}\n"
-  dependsOn:
-  - convolution/ntt.hpp
-  - modint.hpp
+  dependsOn: []
   isVerificationFile: false
   path: convolution/convolutive_translation_2d.hpp
   requiredBy: []

@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: convex_hull_trick/convex_hull_trick.hpp
-    title: convex_hull_trick/convex_hull_trick.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -86,12 +83,11 @@ data:
     \          auto ret1 = cht_min.get(p);\n            auto ret2 = cht_max.get(p);\n\
     \            assert(ret1.first == -ret2.first);\n            std::cout << ret1.first\
     \ << '\\n';\n        } else {\n            add_line();\n        }\n    }\n}\n"
-  dependsOn:
-  - convex_hull_trick/convex_hull_trick.hpp
+  dependsOn: []
   isVerificationFile: true
   path: convex_hull_trick/test/convex_hull_trick.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2020-11-18 20:33:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convex_hull_trick/test/convex_hull_trick.test.cpp

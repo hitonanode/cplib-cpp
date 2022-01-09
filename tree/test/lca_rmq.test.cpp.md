@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/rmq_sparse_table.hpp
     title: sparse_table/rmq_sparse_table.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/lca_rmq.hpp
     title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\
       \u30EA $O(1)$ \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/lca
@@ -72,7 +72,7 @@ data:
   path: tree/test/lca_rmq.test.cpp
   requiredBy: []
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/lca_rmq.test.cpp
 layout: document

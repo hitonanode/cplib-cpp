@@ -1,9 +1,6 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: modint.hpp
-    title: modint.hpp
   - icon: ':heavy_check_mark:'
     path: set_power_series/subset_convolution.hpp
     title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
@@ -203,11 +200,10 @@ data:
     \ x : subset_convolution(A, B)) cout << x << ' ';\n}\n"
   dependsOn:
   - set_power_series/subset_convolution.hpp
-  - modint.hpp
   isVerificationFile: true
   path: set_power_series/test/subset_conv.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2021-10-16 14:40:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: set_power_series/test/subset_conv.test.cpp

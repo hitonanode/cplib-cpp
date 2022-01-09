@@ -1,15 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':question:'
-    path: modint.hpp
-    title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -314,8 +308,6 @@ data:
     \ _rec_interpolation(0, ys);\n    }\n};\n"
   dependsOn:
   - formal_power_series/formal_power_series.hpp
-  - convolution/ntt.hpp
-  - modint.hpp
   isVerificationFile: false
   path: formal_power_series/multipoint_evaluation.hpp
   requiredBy: []

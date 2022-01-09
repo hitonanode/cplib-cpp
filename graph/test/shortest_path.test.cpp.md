@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/radix_heap.hpp
     title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []

@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/matroids/partition_matroid.hpp
     title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []

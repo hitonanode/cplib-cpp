@@ -1,15 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':question:'
-    path: convolution/ntt.hpp
-    title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/formal_power_series.hpp
-    title: formal_power_series/formal_power_series.hpp
-  - icon: ':question:'
-    path: modint.hpp
-    title: modint.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -263,14 +254,11 @@ data:
     \ ios::sync_with_stdio(false);\n    int N, c;\n    cin >> N >> c;\n    FormalPowerSeries<ModInt<998244353>>\
     \ f(N);\n    for (auto &x : f) { cin >> x; }\n    f = f.shift(c);\n    for (int\
     \ i = 0; i < N; i++) { cout << f.coeff(i) << (i < N - 1 ? ' ' : '\\n'); }\n}\n"
-  dependsOn:
-  - formal_power_series/formal_power_series.hpp
-  - convolution/ntt.hpp
-  - modint.hpp
+  dependsOn: []
   isVerificationFile: true
   path: formal_power_series/test/poly_taylor_shift.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2020-11-18 20:06:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/poly_taylor_shift.test.cpp

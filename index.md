@@ -1,6 +1,212 @@
 ---
 data:
   libraryCategories:
+  - name: ac-library/atcoder
+    pages:
+    - icon: ':warning:'
+      path: ac-library/atcoder/convolution.hpp
+      title: ac-library/atcoder/convolution.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/dsu.hpp
+      title: ac-library/atcoder/dsu.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/fenwicktree.hpp
+      title: ac-library/atcoder/fenwicktree.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/internal_bit.hpp
+      title: ac-library/atcoder/internal_bit.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/internal_csr.hpp
+      title: ac-library/atcoder/internal_csr.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/internal_math.hpp
+      title: ac-library/atcoder/internal_math.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/internal_queue.hpp
+      title: ac-library/atcoder/internal_queue.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/internal_scc.hpp
+      title: ac-library/atcoder/internal_scc.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/internal_type_traits.hpp
+      title: ac-library/atcoder/internal_type_traits.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/lazysegtree.hpp
+      title: ac-library/atcoder/lazysegtree.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/math.hpp
+      title: ac-library/atcoder/math.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/maxflow.hpp
+      title: ac-library/atcoder/maxflow.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/mincostflow.hpp
+      title: ac-library/atcoder/mincostflow.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/modint.hpp
+      title: ac-library/atcoder/modint.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/scc.hpp
+      title: ac-library/atcoder/scc.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/segtree.hpp
+      title: ac-library/atcoder/segtree.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/string.hpp
+      title: ac-library/atcoder/string.hpp
+    - icon: ':warning:'
+      path: ac-library/atcoder/twosat.hpp
+      title: ac-library/atcoder/twosat.hpp
+  - name: ac-library
+    pages:
+    - icon: ':warning:'
+      path: ac-library/expander.py
+      title: ac-library/expander.py
+  - name: ac-library/test/benchmark
+    pages:
+    - icon: ':warning:'
+      path: ac-library/test/benchmark/convolution.cpp
+      title: ac-library/test/benchmark/convolution.cpp
+  - name: ac-library/test/example
+    pages:
+    - icon: ':warning:'
+      path: ac-library/test/example/convolution_int_practice.cpp
+      title: ac-library/test/example/convolution_int_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/convolution_practice.cpp
+      title: ac-library/test/example/convolution_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/dsu_practice.cpp
+      title: ac-library/test/example/dsu_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/fenwick_practice.cpp
+      title: ac-library/test/example/fenwick_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/floor_sum_practice.cpp
+      title: ac-library/test/example/floor_sum_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/lazyseg_practice1.cpp
+      title: ac-library/test/example/lazyseg_practice1.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/lazyseg_practice2.cpp
+      title: ac-library/test/example/lazyseg_practice2.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/maxflow_practice.cpp
+      title: ac-library/test/example/maxflow_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/mincostflow_practice.cpp
+      title: ac-library/test/example/mincostflow_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/modint_usage.cpp
+      title: ac-library/test/example/modint_usage.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/sa_practice.cpp
+      title: ac-library/test/example/sa_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/sa_usage.cpp
+      title: ac-library/test/example/sa_usage.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/scc_practice.cpp
+      title: ac-library/test/example/scc_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/segtree_practice.cpp
+      title: ac-library/test/example/segtree_practice.cpp
+    - icon: ':warning:'
+      path: ac-library/test/example/twosat_practice.cpp
+      title: ac-library/test/example/twosat_practice.cpp
+  - name: ac-library/test/expander
+    pages:
+    - icon: ':warning:'
+      path: ac-library/test/expander/comment_out.cpp
+      title: ac-library/test/expander/comment_out.cpp
+    - icon: ':warning:'
+      path: ac-library/test/expander/include_all.cpp
+      title: ac-library/test/expander/include_all.cpp
+    - icon: ':warning:'
+      path: ac-library/test/expander/include_dsu.cpp
+      title: ac-library/test/expander/include_dsu.cpp
+    - icon: ':warning:'
+      path: ac-library/test/expander/include_unusual_format.cpp
+      title: ac-library/test/expander/include_unusual_format.cpp
+  - name: ac-library/test
+    pages:
+    - icon: ':warning:'
+      path: ac-library/test/test_expander.py
+      title: ac-library/test/test_expander.py
+  - name: ac-library/test/unittest
+    pages:
+    - icon: ':warning:'
+      path: ac-library/test/unittest/basic_test.cpp
+      title: ac-library/test/unittest/basic_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/bit_test.cpp
+      title: ac-library/test/unittest/bit_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/convolution_test.cpp
+      title: ac-library/test/unittest/convolution_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/dsu_test.cpp
+      title: ac-library/test/unittest/dsu_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/fenwicktree_test.cpp
+      title: ac-library/test/unittest/fenwicktree_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/internal_math_test.cpp
+      title: ac-library/test/unittest/internal_math_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/lazysegtree_stress_test.cpp
+      title: ac-library/test/unittest/lazysegtree_stress_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/lazysegtree_test.cpp
+      title: ac-library/test/unittest/lazysegtree_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/math_test.cpp
+      title: ac-library/test/unittest/math_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/maxflow_test.cpp
+      title: ac-library/test/unittest/maxflow_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/mincostflow_test.cpp
+      title: ac-library/test/unittest/mincostflow_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/modint_test.cpp
+      title: ac-library/test/unittest/modint_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/scc_test.cpp
+      title: ac-library/test/unittest/scc_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/segtree_test.cpp
+      title: ac-library/test/unittest/segtree_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/string_test.cpp
+      title: ac-library/test/unittest/string_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/twosat_test.cpp
+      title: ac-library/test/unittest/twosat_test.cpp
+    - icon: ':warning:'
+      path: ac-library/test/unittest/type_traits_test.cpp
+      title: ac-library/test/unittest/type_traits_test.cpp
+  - name: ac-library/test/unittest/utils
+    pages:
+    - icon: ':warning:'
+      path: ac-library/test/unittest/utils/math_test.cpp
+      title: ac-library/test/unittest/utils/math_test.cpp
+  - name: ac-library/test/utils
+    pages:
+    - icon: ':warning:'
+      path: ac-library/test/utils/math.hpp
+      title: ac-library/test/utils/math.hpp
+    - icon: ':warning:'
+      path: ac-library/test/utils/random.hpp
+      title: ac-library/test/utils/random.hpp
+  - name: ac-library/tools
+    pages:
+    - icon: ':warning:'
+      path: ac-library/tools/generate_document.py
+      title: ac-library/tools/generate_document.py
+    - icon: ':warning:'
+      path: ac-library/tools/generate_zip.py
+      title: ac-library/tools/generate_zip.py
   - name: combinatorial_opt
     pages:
     - icon: ':heavy_check_mark:'
@@ -84,7 +290,7 @@ data:
     - icon: ':warning:'
       path: convex_hull_trick/add-monotone_cht.hpp
       title: convex_hull_trick/add-monotone_cht.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: convex_hull_trick/convex_hull_trick.hpp
       title: convex_hull_trick/convex_hull_trick.hpp
     - icon: ':heavy_check_mark:'
@@ -98,7 +304,7 @@ data:
     - icon: ':warning:'
       path: convolution/fft_arbitrary_mod.hpp
       title: convolution/fft_arbitrary_mod.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/fft_double.hpp
       title: convolution/fft_double.hpp
     - icon: ':heavy_check_mark:'
@@ -108,7 +314,7 @@ data:
       path: convolution/multivar_ntt.hpp
       title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
         \u7573\u307F\u8FBC\u307F\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
   - name: data_structure
@@ -128,7 +334,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/link_cut_tree.hpp
       title: Link-Cut tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/persistent_array.hpp
       title: data_structure/persistent_array.hpp
     - icon: ':heavy_check_mark:'
@@ -194,7 +400,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -211,7 +417,7 @@ data:
     - icon: ':warning:'
       path: geometry/problem_of_apollonius.hpp
       title: geometry/problem_of_apollonius.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: geometry/sort_by_argument.hpp
       title: geometry/sort_by_argument.hpp
     - icon: ':heavy_check_mark:'
@@ -276,7 +482,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/shortest_cycle_weighted.hpp
       title: graph/shortest_cycle_weighted.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/shortest_path.hpp
       title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
     - icon: ':heavy_check_mark:'
@@ -337,7 +543,7 @@ data:
       path: number/arithmetic_cumsum.hpp
       title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\
         \u6570\u306E\u7D2F\u7A4D\u548C\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -359,7 +565,7 @@ data:
     - icon: ':warning:'
       path: number/cyclotomic_polynomials.hpp
       title: "Cyclotomic polynomials \uFF08\u5186\u5206\u591A\u9805\u5F0F\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: number/discrete_logarithm.hpp
       title: number/discrete_logarithm.hpp
     - icon: ':warning:'
@@ -422,7 +628,7 @@ data:
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -453,7 +659,7 @@ data:
       title: "Merge sort tree \uFF08\u9759\u7684\u306A\u5217\u306E\u90E8\u5206\u5217\
         \u306B\u542B\u307E\u308C\u308B\u95BE\u5024\u4EE5\u4E0B\u306E\u8981\u7D20\u6570\
         \u30AF\u30A8\u30EA\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
     - icon: ':heavy_check_mark:'
@@ -502,7 +708,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: sparse_table/disjoint_sparse_table.hpp
       title: Disjoint sparse table
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: sparse_table/rmq_sparse_table.hpp
       title: sparse_table/rmq_sparse_table.hpp
     - icon: ':heavy_check_mark:'
@@ -564,22 +770,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/cartesian_tree.hpp
       title: Cartesian tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/centroid_decomposition.hpp
       title: tree/centroid_decomposition.hpp
     - icon: ':heavy_check_mark:'
       path: tree/diameter.hpp
       title: "Tree diameter \uFF08\u6728\u306E\u76F4\u5F84\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/eulertour.hpp
       title: tree/eulertour.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/frequency_table_of_tree_distance.hpp
       title: Frequency table of tree distance
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/heavy_light_decomposition.hpp
       title: tree/heavy_light_decomposition.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/lca_rmq.hpp
       title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\
         \u30EA $O(1)$ \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
@@ -589,15 +795,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/rerooting.hpp
       title: "Rerooting \uFF08\u5168\u65B9\u4F4D\u6728 DP\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/tree_isomorphism.hpp
       title: "Tree isomrphism \uFF08\u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09"
   - name: unionfind
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/fully_persistent_uf.hpp
       title: unionfind/fully_persistent_uf.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/grid_unionfind.hpp
       title: unionfind/grid_unionfind.hpp
     - icon: ':warning:'
@@ -617,7 +823,7 @@ data:
       title: "Weighted UnionFind \uFF08\u91CD\u307F\u4ED8\u304D UnionFind\uFF09"
   - name: utilities
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/floor_sum.hpp
       title: floor sum
     - icon: ':warning:'
@@ -646,10 +852,10 @@ data:
       title: "Offline sum of linear segments \uFF08\u533A\u9593\u4E00\u6B21\u95A2\u6570\
         \u52A0\u7B97\u30AF\u30A8\u30EA\u306E\u7D2F\u7A4D\u548C\u3092\u7528\u3044\u305F\
         \u30AA\u30D5\u30E9\u30A4\u30F3\u51E6\u7406\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/pow.hpp
       title: "Power \uFF08\u7D2F\u4E57\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/pow_sum.hpp
       title: "power sum \uFF08\u7D2F\u4E57\u548C\uFF09"
     - icon: ':warning:'
@@ -1022,6 +1228,9 @@ data:
       path: linear_algebra_matrix/test/inverse_matrix.test.cpp
       title: linear_algebra_matrix/test/inverse_matrix.test.cpp
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp
+      title: linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_bitset.test.cpp
       title: linear_algebra_matrix/test/linalg_bitset.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1272,16 +1481,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/diameter.test.cpp
       title: tree/test/diameter.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
       title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance.test.cpp
       title: tree/test/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
       title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/hl_decomposition.test.cpp
       title: tree/test/hl_decomposition.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1290,7 +1499,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/lca.yuki898.test.cpp
       title: tree/test/lca.yuki898.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/lca_rmq.test.cpp
       title: tree/test/lca_rmq.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1299,21 +1508,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/rerooting.yuki1718.test.cpp
       title: tree/test/rerooting.yuki1718.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/tree_isomorphism.aoj1613.test.cpp
       title: tree/test/tree_isomorphism.aoj1613.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-path-sum.test.cpp
       title: tree/test/vertex-add-path-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-subtree-sum.test.cpp
       title: tree/test/vertex-add-subtree-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/vertex-set-path-composite.test.cpp
       title: tree/test/vertex-set-path-composite.test.cpp
   - name: unionfind/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/test/fully_persistent_uf.test.cpp
       title: unionfind/test/fully_persistent_uf.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1333,7 +1542,7 @@ data:
       title: unionfind/test/weighted_unionfind_int.aoj3142.test.cpp
   - name: utilities/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/test/floor_sum.test.cpp
       title: utilities/test/floor_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1342,7 +1551,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/kth_root_integer.test.cpp
       title: utilities/test/kth_root_integer.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/test/pow.test.cpp
       title: utilities/test/pow.test.cpp
     - icon: ':heavy_check_mark:'

@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: unionfind/fully_persistent_uf.hpp
     title: unionfind/fully_persistent_uf.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: unionfind/test/fully_persistent_uf.test.cpp
     title: unionfind/test/fully_persistent_uf.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://codeforces.com/contest/707/problem/D>
@@ -69,7 +69,7 @@ data:
   requiredBy:
   - unionfind/fully_persistent_uf.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - unionfind/test/fully_persistent_uf.test.cpp
 documentation_of: data_structure/persistent_array.hpp
