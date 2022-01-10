@@ -119,6 +119,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/fibonacci_heap.hpp
       title: data_structure/fibonacci_heap.hpp
+    - icon: ':warning:'
+      path: data_structure/kd_tree_2d.hpp
+      title: k-d tree (2D)
     - icon: ':heavy_check_mark:'
       path: data_structure/lazy_rbst.hpp
       title: Randomized binary search tree with lazy propagation
