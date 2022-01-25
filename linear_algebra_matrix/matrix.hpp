@@ -31,6 +31,13 @@ template <typename T> struct matrix {
     }
 
     static matrix Identity(int N) {
+        static_assert(T() + T() == T(), "Check T() and T(1) satisfy semiring condition");
+        static_assert(T() + T(1) == T(1), "Check T() and T(1) satisfy semiring condition");
+        static_assert(T(1) + T() == T(1), "Check T() and T(1) satisfy semiring condition");
+        static_assert(T() * T() == T(), "Check T() and T(1) satisfy semiring condition");
+        static_assert(T(1) * T() == T(), "Check T() and T(1) satisfy semiring condition");
+        static_assert(T() * T(1) == T(), "Check T() and T(1) satisfy semiring condition");
+        static_assert(T(1) * T(1) == T(1), "Check T() and T(1) satisfy semiring condition");
         matrix ret(N, N);
         for (int i = 0; i < N; i++) ret.at(i, i) = 1;
         return ret;
@@ -235,13 +242,3 @@ template <typename T> struct matrix {
         return is;
     }
 };
-
-// Example: Fibonacci numbers f(n) = af(n - 1) + bf(n - 2)
-// (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...
-template <typename T> T Fibonacci(long long int k, int a = 1, int b = 1) {
-    matrix<T> mat(2, 2);
-    mat[0][1] = 1;
-    mat[1][0] = b;
-    mat[1][1] = a;
-    return mat.pow(k + 1)[0][1];
-}
