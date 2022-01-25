@@ -323,9 +323,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
-    - icon: ':warning:'
-      path: linear_algebra_matrix/tropical_matrix.hpp
-      title: linear_algebra_matrix/tropical_matrix.hpp
   - name: multithread
     pages:
     - icon: ':warning:'
@@ -375,6 +372,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: number/factorize.hpp
+    - icon: ':heavy_check_mark:'
+      path: number/min_max_semiring.hpp
+      title: "Min-max semiring\uFF08(min, max) \u534A\u74B0\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: number/min_plus_semiring.hpp
+      title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\
+        \u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
@@ -1040,6 +1044,9 @@ data:
       path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
       title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
+      title: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1048,6 +1055,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
+      title: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_product.test.cpp
       title: linear_algebra_matrix/test/matrix_product.test.cpp
@@ -1095,6 +1105,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/miller-rabin.test.cpp
       title: number/test/miller-rabin.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/min_max_semiring.test.cpp
+      title: number/test/min_max_semiring.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/montmort_number_mod.test.cpp
       title: number/test/montmort_number_mod.test.cpp

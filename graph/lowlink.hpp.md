@@ -142,9 +142,9 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/two-edge-connected-components.test.cpp
   - graph/test/articulation_points.test.cpp
   - graph/test/bridge.test.cpp
+  - graph/test/two-edge-connected-components.test.cpp
 documentation_of: graph/lowlink.hpp
 layout: document
 redirect_from:

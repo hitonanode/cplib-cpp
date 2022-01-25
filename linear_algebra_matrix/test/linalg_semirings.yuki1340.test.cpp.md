@@ -4,20 +4,69 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-    title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+    path: number/min_max_semiring.hpp
+    title: "Min-max semiring\uFF08(min, max) \u534A\u74B0\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: number/min_plus_semiring.hpp
+    title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\
+      \u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF09"
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n\
-    #include <cassert>\n#include <cmath>\n#include <iterator>\n#include <type_traits>\n\
-    #include <utility>\n#include <vector>\n\nstruct has_id_method_impl {\n    template\
-    \ <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://yukicoder.me/problems/no/1340
+    links:
+    - https://yukicoder.me/problems/no/1340
+  bundledCode: "#line 1 \"linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp\"\
+    \n#define PROBLEM \"https://yukicoder.me/problems/no/1340\"\n\n#line 1 \"number/min_max_semiring.hpp\"\
+    \n#include <limits>\n\n// min-max \u534A\u74B0\uFF08\u52A0\u6CD5\u304C min, \u4E57\
+    \u6CD5\u304C max, \u96F6\u5143\u304C INF, \u5358\u4F4D\u5143\u304C -INF\uFF09\n\
+    // Verified: abc236g\ntemplate <class T> struct min_max_semiring {\n    T val;\n\
+    \    min_max_semiring() : val(std::numeric_limits<T>::max()) {\n        static_assert(std::numeric_limits<T>::max()\
+    \ > 0,\n                      \"std::numeric_limits<>::max() must be properly\
+    \ defined\");\n    }\n    min_max_semiring(T x) : val(x) {}\n    static min_max_semiring\
+    \ id() { return T(std::numeric_limits<T>::min()); }\n    static min_max_semiring\
+    \ max() { return T(); }\n    min_max_semiring operator+(const min_max_semiring\
+    \ &r) const {\n        return (this->val > r.val ? r.val : this->val);\n    }\n\
+    \    min_max_semiring &operator+=(const min_max_semiring &r) { return *this =\
+    \ *this + r; }\n    min_max_semiring operator*(const min_max_semiring &r) const\
+    \ {\n        return (this->val < r.val ? r.val : this->val);\n    }\n    min_max_semiring\
+    \ &operator*=(const min_max_semiring &r) { return *this = *this * r; }\n    bool\
+    \ operator==(const min_max_semiring &r) const { return this->val == r.val; }\n\
+    \    bool operator!=(const min_max_semiring &r) const { return !(*this == r);\
+    \ }\n    template <class OStream> friend OStream &operator<<(OStream &os, const\
+    \ min_max_semiring &x) {\n        return os << x.val;\n    }\n};\n#line 2 \"number/min_plus_semiring.hpp\"\
+    \n\n// min-plus \u534A\u74B0\u30FB\u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF08\
+    \u52A0\u6CD5\u304C min, \u4E57\u6CD5\u304C plus, \u96F6\u5143\u304C INF, \u5358\
+    \u4F4D\u5143\u304C 0\uFF09\n// INF = numeric_limits<T>::max() / 2 \u3092\u8D85\
+    \u3048\u305F\u3089 INF \u306B clamp \u3059\u308B\n// Verified: https://yukicoder.me/problems/no/1340\n\
+    template <class T> struct min_plus_semiring {\n    T val;\n    static const T\
+    \ _T_inf() {\n        static_assert(std::numeric_limits<T>::max() > 0,\n     \
+    \                 \"std::numeric_limits<>::max() must be properly defined\");\n\
+    \        return std::numeric_limits<T>::max() / 2;\n    }\n    min_plus_semiring()\
+    \ : val(_T_inf()) {}\n    min_plus_semiring(T x) : val(x) {}\n    static min_plus_semiring\
+    \ id() { return min_plus_semiring(0); }\n    min_plus_semiring operator+(const\
+    \ min_plus_semiring &r) const {\n        return (this->val > r.val ? r.val : this->val);\n\
+    \    }\n    min_plus_semiring &operator+=(const min_plus_semiring &r) { return\
+    \ *this = *this + r; }\n    min_plus_semiring operator*(const min_plus_semiring\
+    \ &r) const {\n        if (this->val == _T_inf() or r.val == _T_inf()) return\
+    \ min_plus_semiring();\n        T tmp = this->val + r.val; // Watch out for overflow\n\
+    \        return _T_inf() < tmp ? min_plus_semiring() : min_plus_semiring(tmp);\n\
+    \    }\n    min_plus_semiring &operator*=(const min_plus_semiring &r) { return\
+    \ *this = *this * r; }\n    bool operator==(const min_plus_semiring &r) const\
+    \ { return this->val == r.val; }\n    bool operator!=(const min_plus_semiring\
+    \ &r) const { return !(*this == r); }\n    bool operator<(const min_plus_semiring\
+    \ &x) const { return this->val < x.val; }\n    bool operator>(const min_plus_semiring\
+    \ &x) const { return this->val > x.val; }\n    template <class OStream> friend\
+    \ OStream &operator<<(OStream &os, const min_plus_semiring &x) {\n        return\
+    \ os << x.val;\n    }\n};\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include\
+    \ <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iterator>\n#include\
+    \ <type_traits>\n#include <utility>\n#include <vector>\n\nstruct has_id_method_impl\
+    \ {\n    template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
     \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
     \ <class T_> struct has_id_method : decltype(has_id_method_impl::check<T_>(nullptr))\
     \ {};\n\ntemplate <typename T> struct matrix {\n    int H, W;\n    std::vector<T>\
@@ -131,55 +180,47 @@ data:
     \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
     \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
     \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 5 \"linear_algebra_matrix/system_of_linear_equations.hpp\"\n\
-    \n// CUT begin\n// Solve Ax = b for T = ModInt<PRIME>\n// - retval: {one of the\
-    \ solution, {freedoms}} (if solution exists)\n//           {{}, {}} (otherwise)\n\
-    // Complexity:\n// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs.,\
-    \ W: # of variables)\n// - Enumerate all of the bases: O(HW(H + W))\ntemplate\
-    \ <typename T>\nstd::pair<std::vector<T>, std::vector<std::vector<T>>>\nsystem_of_linear_equations(matrix<T>\
-    \ A, std::vector<T> b) {\n    int H = A.H, W = A.W;\n    matrix<T> M(H, W + 1);\n\
-    \    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) M[i][j]\
-    \ = A[i][j];\n        M[i][W] = b[i];\n    }\n    M = M.gauss_jordan();\n    std::vector<int>\
-    \ ss(W, -1);\n    for (int i = 0; i < H; i++) {\n        int j = 0;\n        while\
-    \ (j <= W and M[i][j] == 0) j++;\n        if (j == W) { // No solution\n     \
-    \       return {{}, {}};\n        }\n        if (j < W) ss[j] = i;\n    }\n  \
-    \  std::vector<T> x(W);\n    std::vector<std::vector<T>> D;\n    for (int j =\
-    \ 0; j < W; j++) {\n        if (ss[j] == -1) {\n            std::vector<T> d(W);\n\
-    \            d[j] = 1;\n            for (int jj = 0; jj < j; jj++) {\n       \
-    \         if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n         \
-    \   }\n            D.emplace_back(d);\n        } else\n            x[j] = M[ss[j]][W]\
-    \ / M[ss[j]][j];\n    }\n    return std::make_pair(x, D);\n}\n"
-  code: "#pragma once\n#include \"matrix.hpp\"\n#include <utility>\n#include <vector>\n\
-    \n// CUT begin\n// Solve Ax = b for T = ModInt<PRIME>\n// - retval: {one of the\
-    \ solution, {freedoms}} (if solution exists)\n//           {{}, {}} (otherwise)\n\
-    // Complexity:\n// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs.,\
-    \ W: # of variables)\n// - Enumerate all of the bases: O(HW(H + W))\ntemplate\
-    \ <typename T>\nstd::pair<std::vector<T>, std::vector<std::vector<T>>>\nsystem_of_linear_equations(matrix<T>\
-    \ A, std::vector<T> b) {\n    int H = A.H, W = A.W;\n    matrix<T> M(H, W + 1);\n\
-    \    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) M[i][j]\
-    \ = A[i][j];\n        M[i][W] = b[i];\n    }\n    M = M.gauss_jordan();\n    std::vector<int>\
-    \ ss(W, -1);\n    for (int i = 0; i < H; i++) {\n        int j = 0;\n        while\
-    \ (j <= W and M[i][j] == 0) j++;\n        if (j == W) { // No solution\n     \
-    \       return {{}, {}};\n        }\n        if (j < W) ss[j] = i;\n    }\n  \
-    \  std::vector<T> x(W);\n    std::vector<std::vector<T>> D;\n    for (int j =\
-    \ 0; j < W; j++) {\n        if (ss[j] == -1) {\n            std::vector<T> d(W);\n\
-    \            d[j] = 1;\n            for (int jj = 0; jj < j; jj++) {\n       \
-    \         if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n         \
-    \   }\n            D.emplace_back(d);\n        } else\n            x[j] = M[ss[j]][W]\
-    \ / M[ss[j]][j];\n    }\n    return std::make_pair(x, D);\n}\n"
+    \    }\n};\n#line 6 \"linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp\"\
+    \n\n#line 9 \"linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp\"\n\
+    #include <iostream>\n#line 11 \"linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp\"\
+    \nusing namespace std;\n\ntemplate <class Semiring> int solve(int N, const vector<pair<int,\
+    \ int>> &edges, long long T) {\n    matrix<Semiring> mat(N, N);\n    for (auto\
+    \ edge : edges) mat[edge.second][edge.first] = Semiring::id();\n    vector<Semiring>\
+    \ initvec(N, Semiring());\n    initvec[0] = Semiring::id();\n    vector<Semiring>\
+    \ vec = mat.pow_vec(T, initvec);\n    return count(vec.begin(), vec.end(), Semiring::id());\n\
+    }\n\nint main() {\n    int N, M;\n    long long T;\n    cin >> N >> M >> T;\n\
+    \    vector<pair<int, int>> edges;\n    while (M--) {\n        int a, b;\n   \
+    \     cin >> a >> b;\n        edges.emplace_back(a, b);\n    }\n\n    auto sol1\
+    \ = solve<min_max_semiring<int>>(N, edges, T);\n    auto sol2 = solve<min_plus_semiring<int>>(N,\
+    \ edges, T);\n    assert(sol1 == sol2);\n    cout << sol1 << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1340\"\n\n#include \"\
+    ../../number/min_max_semiring.hpp\"\n#include \"../../number/min_plus_semiring.hpp\"\
+    \n#include \"../matrix.hpp\"\n\n#include <algorithm>\n#include <cassert>\n#include\
+    \ <iostream>\n#include <utility>\nusing namespace std;\n\ntemplate <class Semiring>\
+    \ int solve(int N, const vector<pair<int, int>> &edges, long long T) {\n    matrix<Semiring>\
+    \ mat(N, N);\n    for (auto edge : edges) mat[edge.second][edge.first] = Semiring::id();\n\
+    \    vector<Semiring> initvec(N, Semiring());\n    initvec[0] = Semiring::id();\n\
+    \    vector<Semiring> vec = mat.pow_vec(T, initvec);\n    return count(vec.begin(),\
+    \ vec.end(), Semiring::id());\n}\n\nint main() {\n    int N, M;\n    long long\
+    \ T;\n    cin >> N >> M >> T;\n    vector<pair<int, int>> edges;\n    while (M--)\
+    \ {\n        int a, b;\n        cin >> a >> b;\n        edges.emplace_back(a,\
+    \ b);\n    }\n\n    auto sol1 = solve<min_max_semiring<int>>(N, edges, T);\n \
+    \   auto sol2 = solve<min_plus_semiring<int>>(N, edges, T);\n    assert(sol1 ==\
+    \ sol2);\n    cout << sol1 << '\\n';\n}\n"
   dependsOn:
+  - number/min_max_semiring.hpp
+  - number/min_plus_semiring.hpp
   - linear_algebra_matrix/matrix.hpp
-  isVerificationFile: false
-  path: linear_algebra_matrix/system_of_linear_equations.hpp
+  isVerificationFile: true
+  path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
   requiredBy: []
   timestamp: '2022-01-25 23:27:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-documentation_of: linear_algebra_matrix/system_of_linear_equations.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
 layout: document
 redirect_from:
-- /library/linear_algebra_matrix/system_of_linear_equations.hpp
-- /library/linear_algebra_matrix/system_of_linear_equations.hpp.html
-title: linear_algebra_matrix/system_of_linear_equations.hpp
+- /verify/linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
+- /verify/linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp.html
+title: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
 ---
