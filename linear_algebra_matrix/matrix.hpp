@@ -41,13 +41,6 @@ template <typename T> struct matrix {
     }
     template <typename T2, typename std::enable_if<!has_id_method<T2>::value>::type * = nullptr>
     static T2 _T_id() {
-        static_assert(T2() + T2() == T2(), "Check T() and T(1) satisfy semiring condition");
-        static_assert(T2() + T2(1) == T2(1), "Check T() and T(1) satisfy semiring condition");
-        static_assert(T2(1) + T2() == T2(1), "Check T() and T(1) satisfy semiring condition");
-        static_assert(T2() * T2() == T2(), "Check T() and T(1) satisfy semiring condition");
-        static_assert(T2(1) * T2() == T2(), "Check T() and T(1) satisfy semiring condition");
-        static_assert(T2() * T2(1) == T2(), "Check T() and T(1) satisfy semiring condition");
-        static_assert(T2(1) * T2(1) == T2(1), "Check T() and T(1) satisfy semiring condition");
         return T2(1);
     }
 
