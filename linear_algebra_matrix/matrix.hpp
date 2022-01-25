@@ -2,12 +2,17 @@
 #include <algorithm>
 #include <cassert>
 #include <cmath>
-#include <iostream>
 #include <iterator>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
-// CUT begin
+struct has_id_method_impl {
+    template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());
+    template <class T_> static auto check(...) -> std::false_type;
+};
+template <class T_> struct has_id_method : decltype(has_id_method_impl::check<T_>(nullptr)) {};
+
 template <typename T> struct matrix {
     int H, W;
     std::vector<T> elem;
@@ -30,9 +35,18 @@ template <typename T> struct matrix {
         for (auto &raw : d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));
     }
 
+    template <typename T2, typename std::enable_if<has_id_method<T2>::value>::type * = nullptr>
+    static T2 _T_id() {
+        return T2::id();
+    }
+    template <typename T2, typename std::enable_if<!has_id_method<T2>::value>::type * = nullptr>
+    static T2 _T_id() {
+        return T2(1);
+    }
+
     static matrix Identity(int N) {
         matrix ret(N, N);
-        for (int i = 0; i < N; i++) ret.at(i, i) = 1;
+        for (int i = 0; i < N; i++) ret.at(i, i) = _T_id<T>();
         return ret;
     }
 
@@ -48,7 +62,7 @@ template <typename T> struct matrix {
     }
     matrix operator/(const T &v) const {
         matrix ret = *this;
-        const T vinv = T(1) / v;
+        const T vinv = _T_id<T>() / v;
         for (auto &x : ret.elem) x *= vinv;
         return ret;
     }
@@ -147,7 +161,7 @@ template <typename T> struct matrix {
             for (int w = c; w < W; w++) {
                 if (mtr.at(h, w) != 0) ws.emplace_back(w);
             }
-            const T hcinv = T(1) / mtr.at(h, c);
+            const T hcinv = _T_id<T>() / mtr.at(h, c);
             for (int hh = 0; hh < H; hh++)
                 if (hh != h) {
                     const T coeff = mtr.at(hh, c) * hcinv;
@@ -165,7 +179,7 @@ template <typename T> struct matrix {
         return 0;
     }
     T determinant_of_upper_triangle() const {
-        T ret = 1;
+        T ret = _T_id<T>();
         for (int i = 0; i < H; i++) ret *= get(i, i);
         return ret;
     }
@@ -182,7 +196,7 @@ template <typename T> struct matrix {
                 rank++;
             }
             ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);
-            T inv = T(1) / tmp[i][i];
+            T inv = _T_id<T>() / tmp[i][i];
             for (int j = 0; j < W; j++) ret[i][j] *= inv;
             for (int j = i + 1; j < W; j++) tmp[i][j] *= inv;
             for (int h = 0; h < H; h++) {
@@ -213,7 +227,7 @@ template <typename T> struct matrix {
     }
     std::vector<T> prod(const std::vector<T> &v) const { return (*this) * v; }
     std::vector<T> prod_left(const std::vector<T> &v) const { return v * (*this); }
-    friend std::ostream &operator<<(std::ostream &os, const matrix &x) {
+    template <class OStream> friend OStream &operator<<(OStream &os, const matrix &x) {
         os << "[(" << x.H << " * " << x.W << " matrix)";
         os << "\n[column sums: ";
         for (int j = 0; j < x.W; j++) {
@@ -230,18 +244,8 @@ template <typename T> struct matrix {
         os << "]\n";
         return os;
     }
-    friend std::istream &operator>>(std::istream &is, matrix &x) {
+    template <class IStream> friend IStream &operator>>(IStream &is, matrix &x) {
         for (auto &v : x.elem) is >> v;
         return is;
     }
 };
-
-// Example: Fibonacci numbers f(n) = af(n - 1) + bf(n - 2)
-// (a = b = 1): 0=>1, 1=>1, 2=>2, 3=>3, 4=>5, ...
-template <typename T> T Fibonacci(long long int k, int a = 1, int b = 1) {
-    matrix<T> mat(2, 2);
-    mat[0][1] = 1;
-    mat[1][0] = b;
-    mat[1][1] = a;
-    return mat.pow(k + 1)[0][1];
-}
