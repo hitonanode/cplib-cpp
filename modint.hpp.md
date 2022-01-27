@@ -109,6 +109,9 @@ data:
     path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+    title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_product.test.cpp
     title: linear_algebra_matrix/test/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
@@ -374,6 +377,7 @@ data:
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - linear_algebra_matrix/test/inverse_matrix.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - number/test/primitive_root.test.cpp
   - number/test/arithmetic_function_totient.test.cpp

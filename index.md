@@ -362,6 +362,9 @@ data:
     - icon: ':warning:'
       path: number/discrete_logarithm.hpp
       title: number/discrete_logarithm.hpp
+    - icon: ':heavy_check_mark:'
+      path: number/dual_number.hpp
+      title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
     - icon: ':warning:'
       path: number/enumerate_partitions.hpp
       title: number/enumerate_partitions.hpp
@@ -1058,6 +1061,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
       title: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+      title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_product.test.cpp
       title: linear_algebra_matrix/test/matrix_product.test.cpp

@@ -7,6 +7,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: number/dual_number.hpp
+    title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: unionfind/unionfind.hpp
+    title: unionfind/unionfind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,11 +20,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/inverse_matrix
+    PROBLEM: https://yukicoder.me/problems/no/1303
     links:
-    - https://judge.yosupo.jp/problem/inverse_matrix
-  bundledCode: "#line 1 \"linear_algebra_matrix/test/inverse_matrix.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/inverse_matrix\"\n#line 2 \"modint.hpp\"\
+    - https://yukicoder.me/problems/no/1303
+  bundledCode: "#line 1 \"linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp\"\
+    \n#define PROBLEM \"https://yukicoder.me/problems/no/1303\"\n#line 2 \"modint.hpp\"\
     \n#include <iostream>\n#include <set>\n#include <vector>\n\n// CUT begin\ntemplate\
     \ <int md> struct ModInt {\n#if __cplusplus >= 201402L\n#define MDCONST constexpr\n\
     #else\n#define MDCONST\n#endif\n    using lint = long long;\n    MDCONST static\
@@ -95,9 +101,47 @@ data:
     \ md - x.val));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iterator>\n\
-    #include <type_traits>\n#include <utility>\n#line 9 \"linear_algebra_matrix/matrix.hpp\"\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 1 \"number/dual_number.hpp\"\
+    \n#include <type_traits>\n\nnamespace dual_number_ {\nstruct has_id_method_impl\
+    \ {\n    template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
+    \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
+    \ <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr))\
+    \ {};\n} // namespace dual_number_\n\n// Dual number \uFF08\u4E8C\u91CD\u6570\uFF09\
+    \n// Verified: https://atcoder.jp/contests/abc235/tasks/abc235_f\ntemplate <class\
+    \ T> struct DualNumber {\n    T a, b; // a + bx\n\n    template <typename T2,\
+    \ typename std::enable_if<dual_number_::has_id<T2>::value>::type * = nullptr>\n\
+    \    static T2 _T_id() {\n        return T2::id();\n    }\n    template <typename\
+    \ T2, typename std::enable_if<!dual_number_::has_id<T2>::value>::type * = nullptr>\n\
+    \    static T2 _T_id() {\n        return T2(1);\n    }\n\n    DualNumber(T x =\
+    \ T(), T y = T()) : a(x), b(y) {}\n    static DualNumber id() { return DualNumber(_T_id<T>(),\
+    \ T()); }\n    explicit operator bool() const { return a != T() or b != T(); }\n\
+    \    DualNumber operator+(const DualNumber &x) const { return DualNumber(a + x.a,\
+    \ b + x.b); }\n    DualNumber operator-(const DualNumber &x) const { return DualNumber(a\
+    \ - x.a, b - x.b); }\n    DualNumber operator*(const DualNumber &x) const {\n\
+    \        return DualNumber(a * x.a, b * x.a + a * x.b);\n    }\n    DualNumber\
+    \ operator/(const DualNumber &x) const {\n        T cinv = _T_id<T>() / x.a;\n\
+    \        return DualNumber(a * cinv, (b * x.a - a * x.b) * cinv * cinv);\n   \
+    \ }\n    DualNumber operator-() const { return DualNumber(-a, -b); }\n    DualNumber\
+    \ &operator+=(const DualNumber &x) { return *this = *this + x; }\n    DualNumber\
+    \ &operator-=(const DualNumber &x) { return *this = *this - x; }\n    DualNumber\
+    \ &operator*=(const DualNumber &x) { return *this = *this * x; }\n    DualNumber\
+    \ &operator/=(const DualNumber &x) { return *this = *this / x; }\n    bool operator==(const\
+    \ DualNumber &x) const { return a == x.a and b == x.b; }\n    bool operator!=(const\
+    \ DualNumber &x) const { return !(*this == x); }\n    bool operator<(const DualNumber\
+    \ &x) const { return (a != x.a ? a < x.a : b < x.b); }\n    template <class OStream>\
+    \ friend OStream &operator<<(OStream &os, const DualNumber &x) {\n        return\
+    \ os << '{' << x.a << ',' << x.b << '}';\n    }\n};\n#line 2 \"unionfind/unionfind.hpp\"\
+    \n#include <numeric>\n#include <utility>\n#line 5 \"unionfind/unionfind.hpp\"\n\
+    \n// CUT begin\n// UnionFind Tree (0-indexed), based on size of each disjoint\
+    \ set\nstruct UnionFind {\n    std::vector<int> par, cou;\n    UnionFind(int N\
+    \ = 0) : par(N), cou(N, 1) { iota(par.begin(), par.end(), 0); }\n    int find(int\
+    \ x) { return (par[x] == x) ? x : (par[x] = find(par[x])); }\n    bool unite(int\
+    \ x, int y) {\n        x = find(x), y = find(y);\n        if (x == y) return false;\n\
+    \        if (cou[x] < cou[y]) std::swap(x, y);\n        par[y] = x, cou[x] +=\
+    \ cou[y];\n        return true;\n    }\n    int count(int x) { return cou[find(x)];\
+    \ }\n    bool same(int x, int y) { return find(x) == find(y); }\n};\n#line 2 \"\
+    linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <cmath>\n#include <iterator>\n#line 9 \"linear_algebra_matrix/matrix.hpp\"\
     \n\nnamespace matrix_ {\nstruct has_id_method_impl {\n    template <class T_>\
     \ static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n    template\
     \ <class T_> static auto check(...) -> std::false_type;\n};\ntemplate <class T_>\
@@ -213,34 +257,97 @@ data:
     \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
     \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
     \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 5 \"linear_algebra_matrix/test/inverse_matrix.test.cpp\"\nusing\
-    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N;\n    cin >> N;\n    matrix<ModInt<998244353>> M(N, N);\n    cin >>\
-    \ M;\n    int rank = M.inverse();\n    if (rank < N) {\n        cout << -1 <<\
-    \ '\\n';\n    } else {\n        for (int i = 0; i < N; i++) {\n            for\
-    \ (int j = 0; j < N; j++) cout << M[i][j] << ' ';\n            cout << '\\n';\n\
-    \        }\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inverse_matrix\"\n#include\
-    \ \"../../modint.hpp\"\n#include \"../matrix.hpp\"\n#include <iostream>\nusing\
-    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N;\n    cin >> N;\n    matrix<ModInt<998244353>> M(N, N);\n    cin >>\
-    \ M;\n    int rank = M.inverse();\n    if (rank < N) {\n        cout << -1 <<\
-    \ '\\n';\n    } else {\n        for (int i = 0; i < N; i++) {\n            for\
-    \ (int j = 0; j < N; j++) cout << M[i][j] << ' ';\n            cout << '\\n';\n\
-    \        }\n    }\n}\n"
+    \    }\n};\n#line 6 \"linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp\"\
+    \n\n#line 10 \"linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp\"\
+    \nusing namespace std;\n\nusing mint = ModInt<998244353>;\nusing dual = DualNumber<mint>;\n\
+    \nmint solve1(int N, const vector<pair<int, int>> &edges) {\n    vector<vector<dual>>\
+    \ d(N, vector<dual>(N));\n    for (auto p : edges) {\n        int u = p.first,\
+    \ v = p.second;\n        d[u][u] += dual::id();\n        d[v][v] += dual::id();\n\
+    \        d[u][v] -= dual::id();\n        d[v][u] -= dual::id();\n    }\n    const\
+    \ dual x = dual(0, 1);\n    for (int i = 0; i < N; ++i) {\n        for (int j\
+    \ = 0; j < i; ++j) {\n            if (d[i][j] == dual()) {\n                d[i][i]\
+    \ += x;\n                d[j][j] += x;\n                d[i][j] -= x;\n      \
+    \          d[j][i] -= x;\n            }\n        }\n    }\n    d.resize(N - 1);\n\
+    \    for (auto &v : d) v.resize(N - 1);\n    auto ret = matrix<dual>(d).gauss_jordan().determinant_of_upper_triangle();\n\
+    \    return ret.a + ret.b;\n}\n\nmint solve2(const vector<int> &vs, const vector<pair<int,\
+    \ int>> &edges) {\n    int D = vs.size();\n    matrix<mint> mat(D - 1, D - 1);\n\
+    \    for (auto p : edges) {\n        int i = lower_bound(vs.begin(), vs.end(),\
+    \ p.first) - vs.begin();\n        int j = lower_bound(vs.begin(), vs.end(), p.second)\
+    \ - vs.begin();\n        if (i < D - 1) mat[i][i] += 1;\n        if (j < D - 1)\
+    \ mat[j][j] += 1;\n        if (i + 1 < D and j + 1 < D) mat[i][j] -= 1, mat[j][i]\
+    \ -= 1;\n    }\n    return mat.gauss_jordan().determinant_of_upper_triangle();\n\
+    }\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int\
+    \ N, M;\n    cin >> N >> M;\n    vector<pair<int, int>> edges;\n    UnionFind\
+    \ uf1(N);\n    while (M--) {\n        int u, v;\n        cin >> u >> v;\n    \
+    \    --u, --v;\n        edges.emplace_back(u, v);\n        uf1.unite(u, v);\n\
+    \    }\n\n    if (uf1.count(0) == N) {\n        cout << \"0\\n\" << solve1(N,\
+    \ edges) << '\\n';\n        return 0;\n    }\n\n    int max_red = 0, cntmaxi =\
+    \ 0, fuben = 0;\n    for (int i = 0; i < N; ++i) {\n        for (int j = 0; j\
+    \ < N; ++j) fuben += !uf1.same(i, j);\n    }\n    for (int i = 0; i < N; ++i)\
+    \ {\n        for (int j = 0; j < i; ++j) {\n            if (!uf1.same(i, j)) {\n\
+    \                int s = uf1.count(i) * uf1.count(j);\n                if (s >\
+    \ max_red) {\n                    max_red = s, cntmaxi = 1;\n                }\
+    \ else {\n                    if (max_red == s) cntmaxi++;\n                }\n\
+    \            }\n        }\n    }\n    mint ret = cntmaxi;\n    vector<vector<int>>\
+    \ r2is(N);\n    vector<vector<pair<int, int>>> r2edges(N);\n    for (int i = 0;\
+    \ i < N; ++i) r2is[uf1.find(i)].push_back(i);\n    for (auto p : edges) r2edges[uf1.find(p.first)].push_back(p);\n\
+    \n    for (int r = 0; r < N; ++r) {\n        if (r2is[r].size()) ret *= solve2(r2is[r],\
+    \ r2edges[r]);\n    }\n    cout << fuben - max_red * 2 << '\\n' << ret << '\\\
+    n';\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1303\"\n#include \"../../modint.hpp\"\
+    \n#include \"../../number/dual_number.hpp\"\n#include \"../../unionfind/unionfind.hpp\"\
+    \n#include \"../matrix.hpp\"\n\n#include <iostream>\n#include <utility>\n#include\
+    \ <vector>\nusing namespace std;\n\nusing mint = ModInt<998244353>;\nusing dual\
+    \ = DualNumber<mint>;\n\nmint solve1(int N, const vector<pair<int, int>> &edges)\
+    \ {\n    vector<vector<dual>> d(N, vector<dual>(N));\n    for (auto p : edges)\
+    \ {\n        int u = p.first, v = p.second;\n        d[u][u] += dual::id();\n\
+    \        d[v][v] += dual::id();\n        d[u][v] -= dual::id();\n        d[v][u]\
+    \ -= dual::id();\n    }\n    const dual x = dual(0, 1);\n    for (int i = 0; i\
+    \ < N; ++i) {\n        for (int j = 0; j < i; ++j) {\n            if (d[i][j]\
+    \ == dual()) {\n                d[i][i] += x;\n                d[j][j] += x;\n\
+    \                d[i][j] -= x;\n                d[j][i] -= x;\n            }\n\
+    \        }\n    }\n    d.resize(N - 1);\n    for (auto &v : d) v.resize(N - 1);\n\
+    \    auto ret = matrix<dual>(d).gauss_jordan().determinant_of_upper_triangle();\n\
+    \    return ret.a + ret.b;\n}\n\nmint solve2(const vector<int> &vs, const vector<pair<int,\
+    \ int>> &edges) {\n    int D = vs.size();\n    matrix<mint> mat(D - 1, D - 1);\n\
+    \    for (auto p : edges) {\n        int i = lower_bound(vs.begin(), vs.end(),\
+    \ p.first) - vs.begin();\n        int j = lower_bound(vs.begin(), vs.end(), p.second)\
+    \ - vs.begin();\n        if (i < D - 1) mat[i][i] += 1;\n        if (j < D - 1)\
+    \ mat[j][j] += 1;\n        if (i + 1 < D and j + 1 < D) mat[i][j] -= 1, mat[j][i]\
+    \ -= 1;\n    }\n    return mat.gauss_jordan().determinant_of_upper_triangle();\n\
+    }\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int\
+    \ N, M;\n    cin >> N >> M;\n    vector<pair<int, int>> edges;\n    UnionFind\
+    \ uf1(N);\n    while (M--) {\n        int u, v;\n        cin >> u >> v;\n    \
+    \    --u, --v;\n        edges.emplace_back(u, v);\n        uf1.unite(u, v);\n\
+    \    }\n\n    if (uf1.count(0) == N) {\n        cout << \"0\\n\" << solve1(N,\
+    \ edges) << '\\n';\n        return 0;\n    }\n\n    int max_red = 0, cntmaxi =\
+    \ 0, fuben = 0;\n    for (int i = 0; i < N; ++i) {\n        for (int j = 0; j\
+    \ < N; ++j) fuben += !uf1.same(i, j);\n    }\n    for (int i = 0; i < N; ++i)\
+    \ {\n        for (int j = 0; j < i; ++j) {\n            if (!uf1.same(i, j)) {\n\
+    \                int s = uf1.count(i) * uf1.count(j);\n                if (s >\
+    \ max_red) {\n                    max_red = s, cntmaxi = 1;\n                }\
+    \ else {\n                    if (max_red == s) cntmaxi++;\n                }\n\
+    \            }\n        }\n    }\n    mint ret = cntmaxi;\n    vector<vector<int>>\
+    \ r2is(N);\n    vector<vector<pair<int, int>>> r2edges(N);\n    for (int i = 0;\
+    \ i < N; ++i) r2is[uf1.find(i)].push_back(i);\n    for (auto p : edges) r2edges[uf1.find(p.first)].push_back(p);\n\
+    \n    for (int r = 0; r < N; ++r) {\n        if (r2is[r].size()) ret *= solve2(r2is[r],\
+    \ r2edges[r]);\n    }\n    cout << fuben - max_red * 2 << '\\n' << ret << '\\\
+    n';\n}\n"
   dependsOn:
   - modint.hpp
+  - number/dual_number.hpp
+  - unionfind/unionfind.hpp
   - linear_algebra_matrix/matrix.hpp
   isVerificationFile: true
-  path: linear_algebra_matrix/test/inverse_matrix.test.cpp
+  path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   requiredBy: []
   timestamp: '2022-01-27 23:13:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: linear_algebra_matrix/test/inverse_matrix.test.cpp
+documentation_of: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
 layout: document
 redirect_from:
-- /verify/linear_algebra_matrix/test/inverse_matrix.test.cpp
-- /verify/linear_algebra_matrix/test/inverse_matrix.test.cpp.html
-title: linear_algebra_matrix/test/inverse_matrix.test.cpp
+- /verify/linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+- /verify/linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp.html
+title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
 ---

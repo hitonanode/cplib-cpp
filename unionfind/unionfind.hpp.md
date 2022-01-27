@@ -17,6 +17,9 @@ data:
     path: graph/test/manhattan_mst.test.cpp
     title: graph/test/manhattan_mst.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+    title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+  - icon: ':heavy_check_mark:'
     path: unionfind/test/unionfind.test.cpp
     title: unionfind/test/unionfind.test.cpp
   _isVerificationFailed: false
@@ -55,6 +58,7 @@ data:
   - unionfind/test/unionfind.test.cpp
   - graph/test/manhattan_mst.test.cpp
   - graph/test/incremental-bridge-connectivity.test.cpp
+  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
 documentation_of: unionfind/unionfind.hpp
 layout: document
 redirect_from:

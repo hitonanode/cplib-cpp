@@ -97,24 +97,25 @@ data:
     \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
     \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iterator>\n\
     #include <type_traits>\n#include <utility>\n#line 9 \"linear_algebra_matrix/matrix.hpp\"\
-    \n\nstruct has_id_method_impl {\n    template <class T_> static auto check(T_\
-    \ *) -> decltype(T_::id(), std::true_type());\n    template <class T_> static\
-    \ auto check(...) -> std::false_type;\n};\ntemplate <class T_> struct has_id_method\
-    \ : decltype(has_id_method_impl::check<T_>(nullptr)) {};\n\ntemplate <typename\
-    \ T> struct matrix {\n    int H, W;\n    std::vector<T> elem;\n    typename std::vector<T>::iterator\
-    \ operator[](int i) { return elem.begin() + i * W; }\n    inline T &at(int i,\
-    \ int j) { return elem[i * W + j]; }\n    inline T get(int i, int j) const { return\
-    \ elem[i * W + j]; }\n    int height() const { return H; }\n    int width() const\
-    \ { return W; }\n    std::vector<std::vector<T>> vecvec() const {\n        std::vector<std::vector<T>>\
-    \ ret(H);\n        for (int i = 0; i < H; i++) {\n            std::copy(elem.begin()\
-    \ + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n\
-    \        return ret;\n    }\n    operator std::vector<std::vector<T>>() const\
-    \ { return vecvec(); }\n    matrix() = default;\n    matrix(int H, int W) : H(H),\
-    \ W(W), elem(H * W) {}\n    matrix(const std::vector<std::vector<T>> &d) : H(d.size()),\
-    \ W(d.size() ? d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(),\
-    \ raw.end(), std::back_inserter(elem));\n    }\n\n    template <typename T2, typename\
-    \ std::enable_if<has_id_method<T2>::value>::type * = nullptr>\n    static T2 _T_id()\
-    \ {\n        return T2::id();\n    }\n    template <typename T2, typename std::enable_if<!has_id_method<T2>::value>::type\
+    \n\nnamespace matrix_ {\nstruct has_id_method_impl {\n    template <class T_>\
+    \ static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n    template\
+    \ <class T_> static auto check(...) -> std::false_type;\n};\ntemplate <class T_>\
+    \ struct has_id : decltype(has_id_method_impl::check<T_>(nullptr)) {};\n} // namespace\
+    \ matrix_\n\ntemplate <typename T> struct matrix {\n    int H, W;\n    std::vector<T>\
+    \ elem;\n    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
+    \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
+    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    int height()\
+    \ const { return H; }\n    int width() const { return W; }\n    std::vector<std::vector<T>>\
+    \ vecvec() const {\n        std::vector<std::vector<T>> ret(H);\n        for (int\
+    \ i = 0; i < H; i++) {\n            std::copy(elem.begin() + i * W, elem.begin()\
+    \ + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n        return ret;\n\
+    \    }\n    operator std::vector<std::vector<T>>() const { return vecvec(); }\n\
+    \    matrix() = default;\n    matrix(int H, int W) : H(H), W(W), elem(H * W) {}\n\
+    \    matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ?\
+    \ d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(), raw.end(),\
+    \ std::back_inserter(elem));\n    }\n\n    template <typename T2, typename std::enable_if<matrix_::has_id<T2>::value>::type\
+    \ * = nullptr>\n    static T2 _T_id() {\n        return T2::id();\n    }\n   \
+    \ template <typename T2, typename std::enable_if<!matrix_::has_id<T2>::value>::type\
     \ * = nullptr>\n    static T2 _T_id() {\n        return T2(1);\n    }\n\n    static\
     \ matrix Identity(int N) {\n        matrix ret(N, N);\n        for (int i = 0;\
     \ i < N; i++) ret.at(i, i) = _T_id<T>();\n        return ret;\n    }\n\n    matrix\
@@ -160,21 +161,21 @@ data:
     \ <typename T2, typename std::enable_if<!std::is_floating_point<T2>::value>::type\
     \ * = nullptr>\n    static int choose_pivot(const matrix<T2> &mtr, int h, int\
     \ c) noexcept {\n        for (int j = h; j < mtr.H; j++) {\n            if (mtr.get(j,\
-    \ c) != 0) return j;\n        }\n        return -1;\n    }\n    matrix gauss_jordan()\
+    \ c) != T2()) return j;\n        }\n        return -1;\n    }\n    matrix gauss_jordan()\
     \ const {\n        int c = 0;\n        matrix mtr(*this);\n        std::vector<int>\
     \ ws;\n        ws.reserve(W);\n        for (int h = 0; h < H; h++) {\n       \
     \     if (c == W) break;\n            int piv = choose_pivot(mtr, h, c);\n   \
     \         if (piv == -1) {\n                c++;\n                h--;\n     \
     \           continue;\n            }\n            if (h != piv) {\n          \
     \      for (int w = 0; w < W; w++) {\n                    std::swap(mtr[piv][w],\
-    \ mtr[h][w]);\n                    mtr.at(piv, w) *= -1; // To preserve sign of\
-    \ determinant\n                }\n            }\n            ws.clear();\n   \
-    \         for (int w = c; w < W; w++) {\n                if (mtr.at(h, w) != 0)\
-    \ ws.emplace_back(w);\n            }\n            const T hcinv = _T_id<T>() /\
-    \ mtr.at(h, c);\n            for (int hh = 0; hh < H; hh++)\n                if\
-    \ (hh != h) {\n                    const T coeff = mtr.at(hh, c) * hcinv;\n  \
-    \                  for (auto w : ws) mtr.at(hh, w) -= mtr.at(h, w) * coeff;\n\
-    \                    mtr.at(hh, c) = 0;\n                }\n            c++;\n\
+    \ mtr[h][w]);\n                    mtr.at(piv, w) *= -_T_id<T>(); // To preserve\
+    \ sign of determinant\n                }\n            }\n            ws.clear();\n\
+    \            for (int w = c; w < W; w++) {\n                if (mtr.at(h, w) !=\
+    \ T()) ws.emplace_back(w);\n            }\n            const T hcinv = _T_id<T>()\
+    \ / mtr.at(h, c);\n            for (int hh = 0; hh < H; hh++)\n              \
+    \  if (hh != h) {\n                    const T coeff = mtr.at(hh, c) * hcinv;\n\
+    \                    for (auto w : ws) mtr.at(hh, w) -= mtr.at(h, w) * coeff;\n\
+    \                    mtr.at(hh, c) = T();\n                }\n            c++;\n\
     \        }\n        return mtr;\n    }\n    int rank_of_gauss_jordan() const {\n\
     \        for (int i = H * W - 1; i >= 0; i--) {\n            if (elem[i] != 0)\
     \ return i / W + 1;\n        }\n        return 0;\n    }\n    T determinant_of_upper_triangle()\
@@ -237,7 +238,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   requiredBy: []
-  timestamp: '2022-01-25 23:27:53+09:00'
+  timestamp: '2022-01-27 23:13:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
