@@ -7,11 +7,13 @@
 #include <utility>
 #include <vector>
 
+namespace matrix_ {
 struct has_id_method_impl {
     template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());
     template <class T_> static auto check(...) -> std::false_type;
 };
-template <class T_> struct has_id_method : decltype(has_id_method_impl::check<T_>(nullptr)) {};
+template <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr)) {};
+} // namespace matrix_
 
 template <typename T> struct matrix {
     int H, W;
@@ -35,11 +37,11 @@ template <typename T> struct matrix {
         for (auto &raw : d) std::copy(raw.begin(), raw.end(), std::back_inserter(elem));
     }
 
-    template <typename T2, typename std::enable_if<has_id_method<T2>::value>::type * = nullptr>
+    template <typename T2, typename std::enable_if<matrix_::has_id<T2>::value>::type * = nullptr>
     static T2 _T_id() {
         return T2::id();
     }
-    template <typename T2, typename std::enable_if<!has_id_method<T2>::value>::type * = nullptr>
+    template <typename T2, typename std::enable_if<!matrix_::has_id<T2>::value>::type * = nullptr>
     static T2 _T_id() {
         return T2(1);
     }
@@ -134,7 +136,7 @@ template <typename T> struct matrix {
     template <typename T2, typename std::enable_if<!std::is_floating_point<T2>::value>::type * = nullptr>
     static int choose_pivot(const matrix<T2> &mtr, int h, int c) noexcept {
         for (int j = h; j < mtr.H; j++) {
-            if (mtr.get(j, c) != 0) return j;
+            if (mtr.get(j, c) != T2()) return j;
         }
         return -1;
     }
@@ -154,19 +156,19 @@ template <typename T> struct matrix {
             if (h != piv) {
                 for (int w = 0; w < W; w++) {
                     std::swap(mtr[piv][w], mtr[h][w]);
-                    mtr.at(piv, w) *= -1; // To preserve sign of determinant
+                    mtr.at(piv, w) *= -_T_id<T>(); // To preserve sign of determinant
                 }
             }
             ws.clear();
             for (int w = c; w < W; w++) {
-                if (mtr.at(h, w) != 0) ws.emplace_back(w);
+                if (mtr.at(h, w) != T()) ws.emplace_back(w);
             }
             const T hcinv = _T_id<T>() / mtr.at(h, c);
             for (int hh = 0; hh < H; hh++)
                 if (hh != h) {
                     const T coeff = mtr.at(hh, c) * hcinv;
                     for (auto w : ws) mtr.at(hh, w) -= mtr.at(h, w) * coeff;
-                    mtr.at(hh, c) = 0;
+                    mtr.at(hh, c) = T();
                 }
             c++;
         }
