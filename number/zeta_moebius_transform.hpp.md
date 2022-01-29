@@ -5,12 +5,22 @@ data:
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: number/test/multiple_moebius.yuki1627.test.cpp
+    title: number/test/multiple_moebius.yuki1627.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/multiple_moebius.yuki886.test.cpp
+    title: number/test/multiple_moebius.yuki886.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/zeta_moebius_transform.test.cpp
+    title: number/test/zeta_moebius_transform.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
+    - https://codeforces.com/contest/1630/problem/E
     - https://toph.co/p/height-of-the-trees
     - https://yukicoder.me/submissions/385043
     - https://yukicoder.me/submissions/385120
@@ -74,25 +84,45 @@ data:
     \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
     #line 3 \"number/zeta_moebius_transform.hpp\"\n#include <algorithm>\n#line 5 \"\
     number/zeta_moebius_transform.hpp\"\n#include <utility>\n#line 7 \"number/zeta_moebius_transform.hpp\"\
-    \n\n// CUT begin\n// f[n]\u306B\u5BFE\u3057\u3066\u3001\u5168\u3066\u306En\u306E\
-    \u500D\u6570n*i\u306B\u5BFE\u3059\u308Bf[n*i]\u306E\u548C\u304C\u51FA\u3066\u304F\
-    \u308B \u8A08\u7B97\u91CFO(NloglogN)\n// \u7D20\u6570p\u6BCE\u306B\u51E6\u7406\
-    \u3059\u308B\u9AD8\u901F\u30BC\u30FC\u30BF\u5909\u63DB\n// \u4F7F\u7528\u4F8B\
-    \ https://yukicoder.me/submissions/385043\ntemplate <typename T> void fast_integer_zeta(std::vector<T>\
-    \ &f) {\n    int N = f.size() - 1;\n    std::vector<int> is_prime(N + 1, 1);\n\
-    \    for (int p = 2; p <= N; p++) {\n        if (is_prime[p]) {\n            for\
-    \ (int q = p * 2; q <= N; q += p) is_prime[q] = 0;\n            for (int j = N\
-    \ / p * p; j > 0; j -= p) f[j / p] += f[j];\n        }\n    }\n}\n\n// fast_integer_zeta\u306E\
-    \u9006\u6F14\u7B97 O(NloglogN)\n// \u4F7F\u7528\u4F8B https://yukicoder.me/submissions/385120\n\
-    template <typename T> void fast_integer_moebius(std::vector<T> &f) {\n    int\
-    \ N = f.size() - 1;\n    std::vector<int> is_prime(N + 1, 1);\n    for (int p\
-    \ = 2; p <= N; p++) {\n        if (is_prime[p]) {\n            for (int q = p\
-    \ * 2; q <= N; q += p) is_prime[q] = 0;\n            for (int j = p; j <= N; j\
-    \ += p) f[j / p] -= f[j];\n        }\n    }\n}\n\n// fast_integer_moebius \u306E\
-    \u9AD8\u901F\u5316\uFF08\u767B\u5834\u3057\u306A\u3044\u7D20\u56E0\u6570\u304C\
-    \u591A\u3051\u308C\u3070\u8A08\u7B97\u91CF\u6539\u5584\uFF09\n// Requirement:\
-    \ f \u306E key \u3068\u3057\u3066\u767B\u5834\u3059\u308B\u6B63\u6574\u6570\u306E\
-    \u5168\u3066\u306E\u7D04\u6570\u304C key \u3068\u3057\u3066\u767B\u5834\n// Verified:\
+    \n\n// f[n] \u306B\u5BFE\u3057\u3066\u3001\u5168\u3066\u306E n \u306E\u500D\u6570\
+    \ n*i \u306B\u5BFE\u3059\u308B f[n*i] \u306E\u548C\u304C\u51FA\u3066\u304F\u308B\
+    \ \u8A08\u7B97\u91CF O(N loglog N)\n// \u7D20\u6570p\u6BCE\u306B\u51E6\u7406\u3059\
+    \u308B\u9AD8\u901F\u30BC\u30FC\u30BF\u5909\u63DB\n// \u4F7F\u7528\u4F8B https://yukicoder.me/submissions/385043\n\
+    template <class T> void multiple_zeta(std::vector<T> &f) {\n    int N = int(f.size())\
+    \ - 1;\n    std::vector<int> is_prime(N + 1, 1);\n    for (int p = 2; p <= N;\
+    \ p++) {\n        if (is_prime[p]) {\n            for (int q = p * 2; q <= N;\
+    \ q += p) is_prime[q] = 0;\n            for (int j = N / p; j > 0; --j) f[j] +=\
+    \ f[j * p];\n        }\n    }\n}\n\n// inverse of multiple_zeta O(N loglog N)\n\
+    // \u4F7F\u7528\u4F8B https://yukicoder.me/submissions/385120\ntemplate <class\
+    \ T> void multiple_moebius(std::vector<T> &f) {\n    int N = int(f.size()) - 1;\n\
+    \    std::vector<int> is_prime(N + 1, 1);\n    for (int p = 2; p <= N; p++) {\n\
+    \        if (is_prime[p]) {\n            for (int q = p * 2; q <= N; q += p) is_prime[q]\
+    \ = 0;\n            for (int j = 1; j * p <= N; ++j) f[j] -= f[j * p];\n     \
+    \   }\n    }\n}\n\n// f[n] \u306B\u95A2\u3057\u3066\u3001\u5168\u3066\u306E n\
+    \ \u306E\u7D04\u6570 m \u306B\u5BFE\u3059\u308B f[m] \u306E\u7DCF\u548C\u304C\u51FA\
+    \u3066\u304F\u308B \u8A08\u7B97\u91CF O(N loglog N)\ntemplate <class T> void divisor_zeta(std::vector<T>\
+    \ &f) {\n    int N = int(f.size()) - 1;\n    std::vector<int> is_prime(N + 1,\
+    \ 1);\n    for (int p = 2; p <= N; ++p) {\n        if (is_prime[p]) {\n      \
+    \      for (int q = p * 2; q <= N; q += p) is_prime[q] = 0;\n            for (int\
+    \ j = 1; j * p <= N; ++j) f[j * p] += f[j];\n        }\n    }\n}\n// inverse of\
+    \ divisor_zeta()\n// Verified: https://codeforces.com/contest/1630/problem/E\n\
+    template <class T> void divisor_moebius(std::vector<T> &f) {\n    int N = int(f.size())\
+    \ - 1;\n    std::vector<int> is_prime(N + 1, 1);\n    for (int p = 2; p <= N;\
+    \ ++p) {\n        if (is_prime[p]) {\n            for (int q = p * 2; q <= N;\
+    \ q += p) is_prime[q] = 0;\n            for (int j = N / p; j > 0; --j) f[j *\
+    \ p] -= f[j];\n        }\n    }\n}\n\n// GCD convolution\n// ret[k] = \\sum_{gcd(i,\
+    \ j) = k} f[i] * g[j]\ntemplate <class T> std::vector<T> gcdconv(std::vector<T>\
+    \ f, std::vector<T> g) {\n    assert(f.size() == g.size());\n    multiple_zeta(f);\n\
+    \    multiple_zeta(g);\n    for (int i = 0; i < int(g.size()); ++i) f[i] *= g[i];\n\
+    \    multiple_moebius(f);\n    return f;\n}\n\n// LCM convolution\n// ret[k] =\
+    \ \\sum_{lcm(i, j) = k} f[i] * g[j]\ntemplate <class T> std::vector<T> lcmconv(std::vector<T>\
+    \ f, std::vector<T> g) {\n    assert(f.size() == g.size());\n    divisor_zeta(f);\n\
+    \    divisor_zeta(g);\n    for (int i = 0; i < int(g.size()); ++i) f[i] *= g[i];\n\
+    \    divisor_moebius(f);\n    return f;\n}\n\n// fast_integer_moebius \u306E\u9AD8\
+    \u901F\u5316\uFF08\u767B\u5834\u3057\u306A\u3044\u7D20\u56E0\u6570\u304C\u591A\
+    \u3051\u308C\u3070\u8A08\u7B97\u91CF\u6539\u5584\uFF09\n// Requirement: f \u306E\
+    \ key \u3068\u3057\u3066\u767B\u5834\u3059\u308B\u6B63\u6574\u6570\u306E\u5168\
+    \u3066\u306E\u7D04\u6570\u304C key \u3068\u3057\u3066\u767B\u5834\n// Verified:\
     \ https://toph.co/p/height-of-the-trees\ntemplate <typename Int, typename Val>\n\
     void sparse_fast_integer_moebius(std::vector<std::pair<Int, Val>> &f, const Sieve\
     \ &sieve) {\n    if (f.empty()) return;\n    std::sort(f.begin(), f.end());\n\
@@ -110,26 +140,46 @@ data:
     \ itr = std::lower_bound(f.begin(), f.end(), std::make_pair(f[i].first / p, 0),\
     \ comp);\n            itr->second -= f[i].second;\n        }\n    }\n}\n"
   code: "#pragma once\n#include \"../number/sieve.hpp\"\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <utility>\n#include <vector>\n\n// CUT begin\n// f[n]\u306B\
-    \u5BFE\u3057\u3066\u3001\u5168\u3066\u306En\u306E\u500D\u6570n*i\u306B\u5BFE\u3059\
-    \u308Bf[n*i]\u306E\u548C\u304C\u51FA\u3066\u304F\u308B \u8A08\u7B97\u91CFO(NloglogN)\n\
-    // \u7D20\u6570p\u6BCE\u306B\u51E6\u7406\u3059\u308B\u9AD8\u901F\u30BC\u30FC\u30BF\
-    \u5909\u63DB\n// \u4F7F\u7528\u4F8B https://yukicoder.me/submissions/385043\n\
-    template <typename T> void fast_integer_zeta(std::vector<T> &f) {\n    int N =\
-    \ f.size() - 1;\n    std::vector<int> is_prime(N + 1, 1);\n    for (int p = 2;\
-    \ p <= N; p++) {\n        if (is_prime[p]) {\n            for (int q = p * 2;\
-    \ q <= N; q += p) is_prime[q] = 0;\n            for (int j = N / p * p; j > 0;\
-    \ j -= p) f[j / p] += f[j];\n        }\n    }\n}\n\n// fast_integer_zeta\u306E\
-    \u9006\u6F14\u7B97 O(NloglogN)\n// \u4F7F\u7528\u4F8B https://yukicoder.me/submissions/385120\n\
-    template <typename T> void fast_integer_moebius(std::vector<T> &f) {\n    int\
-    \ N = f.size() - 1;\n    std::vector<int> is_prime(N + 1, 1);\n    for (int p\
-    \ = 2; p <= N; p++) {\n        if (is_prime[p]) {\n            for (int q = p\
-    \ * 2; q <= N; q += p) is_prime[q] = 0;\n            for (int j = p; j <= N; j\
-    \ += p) f[j / p] -= f[j];\n        }\n    }\n}\n\n// fast_integer_moebius \u306E\
-    \u9AD8\u901F\u5316\uFF08\u767B\u5834\u3057\u306A\u3044\u7D20\u56E0\u6570\u304C\
-    \u591A\u3051\u308C\u3070\u8A08\u7B97\u91CF\u6539\u5584\uFF09\n// Requirement:\
-    \ f \u306E key \u3068\u3057\u3066\u767B\u5834\u3059\u308B\u6B63\u6574\u6570\u306E\
-    \u5168\u3066\u306E\u7D04\u6570\u304C key \u3068\u3057\u3066\u767B\u5834\n// Verified:\
+    \ <cassert>\n#include <utility>\n#include <vector>\n\n// f[n] \u306B\u5BFE\u3057\
+    \u3066\u3001\u5168\u3066\u306E n \u306E\u500D\u6570 n*i \u306B\u5BFE\u3059\u308B\
+    \ f[n*i] \u306E\u548C\u304C\u51FA\u3066\u304F\u308B \u8A08\u7B97\u91CF O(N loglog\
+    \ N)\n// \u7D20\u6570p\u6BCE\u306B\u51E6\u7406\u3059\u308B\u9AD8\u901F\u30BC\u30FC\
+    \u30BF\u5909\u63DB\n// \u4F7F\u7528\u4F8B https://yukicoder.me/submissions/385043\n\
+    template <class T> void multiple_zeta(std::vector<T> &f) {\n    int N = int(f.size())\
+    \ - 1;\n    std::vector<int> is_prime(N + 1, 1);\n    for (int p = 2; p <= N;\
+    \ p++) {\n        if (is_prime[p]) {\n            for (int q = p * 2; q <= N;\
+    \ q += p) is_prime[q] = 0;\n            for (int j = N / p; j > 0; --j) f[j] +=\
+    \ f[j * p];\n        }\n    }\n}\n\n// inverse of multiple_zeta O(N loglog N)\n\
+    // \u4F7F\u7528\u4F8B https://yukicoder.me/submissions/385120\ntemplate <class\
+    \ T> void multiple_moebius(std::vector<T> &f) {\n    int N = int(f.size()) - 1;\n\
+    \    std::vector<int> is_prime(N + 1, 1);\n    for (int p = 2; p <= N; p++) {\n\
+    \        if (is_prime[p]) {\n            for (int q = p * 2; q <= N; q += p) is_prime[q]\
+    \ = 0;\n            for (int j = 1; j * p <= N; ++j) f[j] -= f[j * p];\n     \
+    \   }\n    }\n}\n\n// f[n] \u306B\u95A2\u3057\u3066\u3001\u5168\u3066\u306E n\
+    \ \u306E\u7D04\u6570 m \u306B\u5BFE\u3059\u308B f[m] \u306E\u7DCF\u548C\u304C\u51FA\
+    \u3066\u304F\u308B \u8A08\u7B97\u91CF O(N loglog N)\ntemplate <class T> void divisor_zeta(std::vector<T>\
+    \ &f) {\n    int N = int(f.size()) - 1;\n    std::vector<int> is_prime(N + 1,\
+    \ 1);\n    for (int p = 2; p <= N; ++p) {\n        if (is_prime[p]) {\n      \
+    \      for (int q = p * 2; q <= N; q += p) is_prime[q] = 0;\n            for (int\
+    \ j = 1; j * p <= N; ++j) f[j * p] += f[j];\n        }\n    }\n}\n// inverse of\
+    \ divisor_zeta()\n// Verified: https://codeforces.com/contest/1630/problem/E\n\
+    template <class T> void divisor_moebius(std::vector<T> &f) {\n    int N = int(f.size())\
+    \ - 1;\n    std::vector<int> is_prime(N + 1, 1);\n    for (int p = 2; p <= N;\
+    \ ++p) {\n        if (is_prime[p]) {\n            for (int q = p * 2; q <= N;\
+    \ q += p) is_prime[q] = 0;\n            for (int j = N / p; j > 0; --j) f[j *\
+    \ p] -= f[j];\n        }\n    }\n}\n\n// GCD convolution\n// ret[k] = \\sum_{gcd(i,\
+    \ j) = k} f[i] * g[j]\ntemplate <class T> std::vector<T> gcdconv(std::vector<T>\
+    \ f, std::vector<T> g) {\n    assert(f.size() == g.size());\n    multiple_zeta(f);\n\
+    \    multiple_zeta(g);\n    for (int i = 0; i < int(g.size()); ++i) f[i] *= g[i];\n\
+    \    multiple_moebius(f);\n    return f;\n}\n\n// LCM convolution\n// ret[k] =\
+    \ \\sum_{lcm(i, j) = k} f[i] * g[j]\ntemplate <class T> std::vector<T> lcmconv(std::vector<T>\
+    \ f, std::vector<T> g) {\n    assert(f.size() == g.size());\n    divisor_zeta(f);\n\
+    \    divisor_zeta(g);\n    for (int i = 0; i < int(g.size()); ++i) f[i] *= g[i];\n\
+    \    divisor_moebius(f);\n    return f;\n}\n\n// fast_integer_moebius \u306E\u9AD8\
+    \u901F\u5316\uFF08\u767B\u5834\u3057\u306A\u3044\u7D20\u56E0\u6570\u304C\u591A\
+    \u3051\u308C\u3070\u8A08\u7B97\u91CF\u6539\u5584\uFF09\n// Requirement: f \u306E\
+    \ key \u3068\u3057\u3066\u767B\u5834\u3059\u308B\u6B63\u6574\u6570\u306E\u5168\
+    \u3066\u306E\u7D04\u6570\u304C key \u3068\u3057\u3066\u767B\u5834\n// Verified:\
     \ https://toph.co/p/height-of-the-trees\ntemplate <typename Int, typename Val>\n\
     void sparse_fast_integer_moebius(std::vector<std::pair<Int, Val>> &f, const Sieve\
     \ &sieve) {\n    if (f.empty()) return;\n    std::sort(f.begin(), f.end());\n\
@@ -151,13 +201,69 @@ data:
   isVerificationFile: false
   path: number/zeta_moebius_transform.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2022-01-29 16:38:30+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - number/test/multiple_moebius.yuki1627.test.cpp
+  - number/test/multiple_moebius.yuki886.test.cpp
+  - number/test/zeta_moebius_transform.test.cpp
 documentation_of: number/zeta_moebius_transform.hpp
 layout: document
-redirect_from:
-- /library/number/zeta_moebius_transform.hpp
-- /library/number/zeta_moebius_transform.hpp.html
-title: number/zeta_moebius_transform.hpp
+title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
 ---
+
+整除関係に基づくゼータ変換・メビウス変換．またこれらを使用した添字 GCD・添字 LCM 畳み込み．計算量は $O(N \log \log N)$．なお，引数の `vector<>` について第 0 要素（`f[0]`）の値は無視される．
+
+## 実装されている関数
+
+### `void multiple_zeta(vector<T> &f)`
+
+`f[x]` を `f[x * j]` ($j = 1, 2, \dots$) の総和で置き換える．
+
+### `void multiple_moebius(vector<T> &f)`
+
+`multiple_zeta()` の逆関数．
+
+### `void divisor_zeta(vector<T> &f)`
+
+`f[x]` を `f[y]` ($y$ は $x$ の約数) の総和で置き換える．
+
+### `void divisor_moebius(vector<T> &f)`
+
+`divisor_zeta()` の逆関数．
+### `vector<T> gcdconv(vector<T> f, vector<T> g)`
+
+添字 GCD 畳み込み．
+
+$$
+ret[k] = \sum\_\{k = \mathrm{GCD}(i, j)\} f[i] * g[j]
+$$
+
+### `vector<T> lcmconv(vector<T> f, vector<T> g)`
+
+添字 LCM 畳み込み（もとの配列長をはみ出す部分は無視）．
+
+$$
+ret[k] = \sum\_\{k = \mathrm{LCM}(i, j)\} f[i] * g[j]
+$$
+
+## 使用例
+
+```cpp
+int N;
+vector<unsigned long long> dp(N + 1);
+multiple_moebius(dp);
+
+vector<mint> f(N + 1), g(N + 1);
+vector<mint> h = gcdconv(f, g);
+```
+
+## 問題例
+
+- [No.886 Direct - yukicoder](https://yukicoder.me/problems/no/886)
+- [No.1627 三角形の成立 - yukicoder](https://yukicoder.me/problems/no/1627)
+
+## 文献・リンク
+
+- [添え字 gcd での畳み込みで AGC038-C を解く - noshi91のメモ](https://noshi91.hatenablog.com/entry/2019/09/23/002445?_ga=2.226724693.934348036.1570274035-8397580.1533805090)
+- [高速ゼータ変換の約数版 O(N log(log(N))) - noshi91のメモ](https://noshi91.hatenablog.com/entry/2018/12/27/121649)

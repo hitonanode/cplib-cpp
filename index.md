@@ -394,9 +394,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: number/zeta_moebius_transform.hpp
-      title: number/zeta_moebius_transform.hpp
+      title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   - name: other_algorithms
     pages:
     - icon: ':warning:'
@@ -1118,6 +1118,12 @@ data:
       path: number/test/montmort_number_mod.test.cpp
       title: number/test/montmort_number_mod.test.cpp
     - icon: ':heavy_check_mark:'
+      path: number/test/multiple_moebius.yuki1627.test.cpp
+      title: number/test/multiple_moebius.yuki1627.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/multiple_moebius.yuki886.test.cpp
+      title: number/test/multiple_moebius.yuki886.test.cpp
+    - icon: ':heavy_check_mark:'
       path: number/test/nimber.test.cpp
       title: number/test/nimber.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1132,6 +1138,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/zeta_moebius_transform.test.cpp
+      title: number/test/zeta_moebius_transform.test.cpp
   - name: other_algorithms/test
     pages:
     - icon: ':heavy_check_mark:'

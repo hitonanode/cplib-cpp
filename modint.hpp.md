@@ -121,8 +121,17 @@ data:
     path: number/test/arithmetic_function_totient.test.cpp
     title: number/test/arithmetic_function_totient.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/multiple_moebius.yuki1627.test.cpp
+    title: number/test/multiple_moebius.yuki1627.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/multiple_moebius.yuki886.test.cpp
+    title: number/test/multiple_moebius.yuki886.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/zeta_moebius_transform.test.cpp
+    title: number/test/zeta_moebius_transform.test.cpp
   - icon: ':heavy_check_mark:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
@@ -380,7 +389,10 @@ data:
   - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - number/test/primitive_root.test.cpp
+  - number/test/multiple_moebius.yuki1627.test.cpp
+  - number/test/multiple_moebius.yuki886.test.cpp
   - number/test/arithmetic_function_totient.test.cpp
+  - number/test/zeta_moebius_transform.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
   - segmenttree/test/range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
