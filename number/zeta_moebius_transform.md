@@ -27,7 +27,7 @@ documentation_of: ./zeta_moebius_transform.hpp
 添字 GCD 畳み込み．
 
 $$
-ret[k] = \sum\_\{k = \mathrm{GCD}(i, j)\} f[i] * g[j]
+\mathrm{ret}[k] = \sum_{k = \mathrm{GCD}(i, j)} f[i] * g[j]
 $$
 
 ### `vector<T> lcmconv(vector<T> f, vector<T> g)`
@@ -35,7 +35,7 @@ $$
 添字 LCM 畳み込み（もとの配列長をはみ出す部分は無視）．
 
 $$
-ret[k] = \sum\_\{k = \mathrm{LCM}(i, j)\} f[i] * g[j]
+\mathrm{ret}[k] = \sum_{k = \mathrm{LCM}(i, j)} f[i] * g[j]
 $$
 
 ## 使用例
