@@ -40,3 +40,4 @@ $\displaystyle
 
 - [Nimber - Wikipedia](https://en.wikipedia.org/wiki/Nimber)
 - [Nim product - kyopro_friends’ diary](https://kyopro-friends.hatenablog.com/entry/2020/04/07/195850)
+- [Library Checker](https://judge.yosupo.jp/submission/4542) yosupo さんの実装．
