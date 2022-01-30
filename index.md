@@ -366,6 +366,10 @@ data:
       path: number/dual_number.hpp
       title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
     - icon: ':warning:'
+      path: number/dyadic_rational.hpp
+      title: "Dyadic rational, surreal number \uFF08\u4E8C\u9032\u5206\u6570\u30FB\
+        \u56FA\u5B9A\u5C0F\u6570\u70B9\u6570\uFF0CConway \u306E\u69CB\u6210\uFF09"
+    - icon: ':warning:'
       path: number/enumerate_partitions.hpp
       title: number/enumerate_partitions.hpp
     - icon: ':warning:'
