@@ -7,6 +7,12 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: number/test/gcd_convolution.test.cpp
+    title: number/test/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/lcm_convolution.test.cpp
+    title: number/test/lcm_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/multiple_moebius.yuki1627.test.cpp
     title: number/test/multiple_moebius.yuki1627.test.cpp
   - icon: ':heavy_check_mark:'
@@ -204,9 +210,11 @@ data:
   timestamp: '2022-01-29 16:38:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/multiple_moebius.yuki1627.test.cpp
+  - number/test/lcm_convolution.test.cpp
+  - number/test/gcd_convolution.test.cpp
   - number/test/multiple_moebius.yuki886.test.cpp
   - number/test/zeta_moebius_transform.test.cpp
+  - number/test/multiple_moebius.yuki1627.test.cpp
 documentation_of: number/zeta_moebius_transform.hpp
 layout: document
 title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"

@@ -47,13 +47,13 @@ data:
   timestamp: '2020-03-07 22:54:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - set_power_series/test/subset_pow.stress.test.cpp
-  - set_power_series/test/subset_exp.stress.test.cpp
-  - data_structure/test/lazy_rbst.stress.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
-  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - data_structure/test/lazy_rbst.stress.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
+  - set_power_series/test/subset_exp.stress.test.cpp
+  - set_power_series/test/subset_pow.stress.test.cpp
 documentation_of: random/xorshift.hpp
 layout: document
 redirect_from:

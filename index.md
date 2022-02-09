@@ -1107,8 +1107,14 @@ data:
       path: number/test/factorize_longlong.test.cpp
       title: number/test/factorize_longlong.test.cpp
     - icon: ':heavy_check_mark:'
+      path: number/test/gcd_convolution.test.cpp
+      title: number/test/gcd_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
       path: number/test/gen_primes.test.cpp
       title: number/test/gen_primes.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/lcm_convolution.test.cpp
+      title: number/test/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/miller-rabin-5e7.test.cpp
       title: number/test/miller-rabin-5e7.test.cpp
