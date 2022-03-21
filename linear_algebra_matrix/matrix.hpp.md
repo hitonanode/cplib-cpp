@@ -56,6 +56,9 @@ data:
     path: linear_algebra_matrix/test/matrix_product.test.cpp
     title: linear_algebra_matrix/test/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
+    title: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   _isVerificationFailed: false
@@ -321,6 +324,7 @@ data:
   - linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
   - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
+  - linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/inverse_matrix.test.cpp
   - graph/test/general_matching.test.cpp
