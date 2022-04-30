@@ -138,42 +138,42 @@ data:
     // Complexity:\n// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs.,\
     \ W: # of variables)\n// - Enumerate all of the bases: O(HW(H + W))\ntemplate\
     \ <typename T>\nstd::pair<std::vector<T>, std::vector<std::vector<T>>>\nsystem_of_linear_equations(matrix<T>\
-    \ A, std::vector<T> b) {\n    int H = A.H, W = A.W;\n    matrix<T> M(H, W + 1);\n\
-    \    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) M[i][j]\
-    \ = A[i][j];\n        M[i][W] = b[i];\n    }\n    M = M.gauss_jordan();\n    std::vector<int>\
-    \ ss(W, -1);\n    for (int i = 0; i < H; i++) {\n        int j = 0;\n        while\
-    \ (j <= W and M[i][j] == 0) j++;\n        if (j == W) { // No solution\n     \
-    \       return {{}, {}};\n        }\n        if (j < W) ss[j] = i;\n    }\n  \
-    \  std::vector<T> x(W);\n    std::vector<std::vector<T>> D;\n    for (int j =\
-    \ 0; j < W; j++) {\n        if (ss[j] == -1) {\n            std::vector<T> d(W);\n\
-    \            d[j] = 1;\n            for (int jj = 0; jj < j; jj++) {\n       \
-    \         if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n         \
-    \   }\n            D.emplace_back(d);\n        } else\n            x[j] = M[ss[j]][W]\
-    \ / M[ss[j]][j];\n    }\n    return std::make_pair(x, D);\n}\n"
+    \ A, std::vector<T> b) {\n    int H = A.height(), W = A.width();\n    matrix<T>\
+    \ M(H, W + 1);\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j <\
+    \ W; j++) M[i][j] = A[i][j];\n        M[i][W] = b[i];\n    }\n    M = M.gauss_jordan();\n\
+    \    std::vector<int> ss(W, -1);\n    for (int i = 0; i < H; i++) {\n        int\
+    \ j = 0;\n        while (j <= W and M[i][j] == 0) j++;\n        if (j == W) {\
+    \ // No solution\n            return {{}, {}};\n        }\n        if (j < W)\
+    \ ss[j] = i;\n    }\n    std::vector<T> x(W);\n    std::vector<std::vector<T>>\
+    \ D;\n    for (int j = 0; j < W; j++) {\n        if (ss[j] == -1) {\n        \
+    \    std::vector<T> d(W);\n            d[j] = 1;\n            for (int jj = 0;\
+    \ jj < j; jj++) {\n                if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n\
+    \            }\n            D.emplace_back(d);\n        } else\n            x[j]\
+    \ = M[ss[j]][W] / M[ss[j]][j];\n    }\n    return std::make_pair(x, D);\n}\n"
   code: "#pragma once\n#include \"matrix.hpp\"\n#include <utility>\n#include <vector>\n\
     \n// CUT begin\n// Solve Ax = b for T = ModInt<PRIME>\n// - retval: {one of the\
     \ solution, {freedoms}} (if solution exists)\n//           {{}, {}} (otherwise)\n\
     // Complexity:\n// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs.,\
     \ W: # of variables)\n// - Enumerate all of the bases: O(HW(H + W))\ntemplate\
     \ <typename T>\nstd::pair<std::vector<T>, std::vector<std::vector<T>>>\nsystem_of_linear_equations(matrix<T>\
-    \ A, std::vector<T> b) {\n    int H = A.H, W = A.W;\n    matrix<T> M(H, W + 1);\n\
-    \    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) M[i][j]\
-    \ = A[i][j];\n        M[i][W] = b[i];\n    }\n    M = M.gauss_jordan();\n    std::vector<int>\
-    \ ss(W, -1);\n    for (int i = 0; i < H; i++) {\n        int j = 0;\n        while\
-    \ (j <= W and M[i][j] == 0) j++;\n        if (j == W) { // No solution\n     \
-    \       return {{}, {}};\n        }\n        if (j < W) ss[j] = i;\n    }\n  \
-    \  std::vector<T> x(W);\n    std::vector<std::vector<T>> D;\n    for (int j =\
-    \ 0; j < W; j++) {\n        if (ss[j] == -1) {\n            std::vector<T> d(W);\n\
-    \            d[j] = 1;\n            for (int jj = 0; jj < j; jj++) {\n       \
-    \         if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n         \
-    \   }\n            D.emplace_back(d);\n        } else\n            x[j] = M[ss[j]][W]\
-    \ / M[ss[j]][j];\n    }\n    return std::make_pair(x, D);\n}\n"
+    \ A, std::vector<T> b) {\n    int H = A.height(), W = A.width();\n    matrix<T>\
+    \ M(H, W + 1);\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j <\
+    \ W; j++) M[i][j] = A[i][j];\n        M[i][W] = b[i];\n    }\n    M = M.gauss_jordan();\n\
+    \    std::vector<int> ss(W, -1);\n    for (int i = 0; i < H; i++) {\n        int\
+    \ j = 0;\n        while (j <= W and M[i][j] == 0) j++;\n        if (j == W) {\
+    \ // No solution\n            return {{}, {}};\n        }\n        if (j < W)\
+    \ ss[j] = i;\n    }\n    std::vector<T> x(W);\n    std::vector<std::vector<T>>\
+    \ D;\n    for (int j = 0; j < W; j++) {\n        if (ss[j] == -1) {\n        \
+    \    std::vector<T> d(W);\n            d[j] = 1;\n            for (int jj = 0;\
+    \ jj < j; jj++) {\n                if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n\
+    \            }\n            D.emplace_back(d);\n        } else\n            x[j]\
+    \ = M[ss[j]][W] / M[ss[j]][j];\n    }\n    return std::make_pair(x, D);\n}\n"
   dependsOn:
   - linear_algebra_matrix/matrix.hpp
   isVerificationFile: false
   path: linear_algebra_matrix/system_of_linear_equations.hpp
   requiredBy: []
-  timestamp: '2022-05-01 02:11:54+09:00'
+  timestamp: '2022-05-01 03:07:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
