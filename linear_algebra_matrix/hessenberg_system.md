@@ -3,7 +3,7 @@ title: Hessenberg linear system
 documentation_of: ./hessenberg_system.hpp
 ---
 
-体上の $n \times n$ 正則 Hessenberg 行列 $\mahtbf{A}$ と $n$ 次元ベクトル $b$ に対して，線形方程式系 $\mathbf{A} \mathbf{x} = \mathbf{b}$ を解く．計算量は $O(n^2)$．
+体上の $n \times n$ 正則 Hessenberg 行列 $\mathbf{A}$ と $n$ 次元ベクトル $b$ に対して，線形方程式系 $\mathbf{A} \mathbf{x} = \mathbf{b}$ を解く．計算量は $O(n^2)$．
 
 ## 使用方法
 
