@@ -13,7 +13,7 @@
 template <typename T>
 std::pair<std::vector<T>, std::vector<std::vector<T>>>
 system_of_linear_equations(matrix<T> A, std::vector<T> b) {
-    int H = A.H, W = A.W;
+    int H = A.height(), W = A.width();
     matrix<T> M(H, W + 1);
     for (int i = 0; i < H; i++) {
         for (int j = 0; j < W; j++) M[i][j] = A[i][j];
