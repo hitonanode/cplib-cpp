@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/hessenberg_system.hpp
+    title: Hessenberg linear system
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
+    title: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
     title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
@@ -40,7 +46,9 @@ data:
     \ DualNumber &x) const { return !(*this == x); }\n    bool operator<(const DualNumber\
     \ &x) const { return (a != x.a ? a < x.a : b < x.b); }\n    template <class OStream>\
     \ friend OStream &operator<<(OStream &os, const DualNumber &x) {\n        return\
-    \ os << '{' << x.a << ',' << x.b << '}';\n    }\n};\n"
+    \ os << '{' << x.a << ',' << x.b << '}';\n    }\n\n    T eval(const T &x) const\
+    \ { return a + b * x; }\n    T root() const { return (-a) / b; } // Solve a +\
+    \ bx = 0 (b \\neq 0 is assumed)\n};\n"
   code: "#include <type_traits>\n\nnamespace dual_number_ {\nstruct has_id_method_impl\
     \ {\n    template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
     \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
@@ -69,14 +77,18 @@ data:
     \ DualNumber &x) const { return !(*this == x); }\n    bool operator<(const DualNumber\
     \ &x) const { return (a != x.a ? a < x.a : b < x.b); }\n    template <class OStream>\
     \ friend OStream &operator<<(OStream &os, const DualNumber &x) {\n        return\
-    \ os << '{' << x.a << ',' << x.b << '}';\n    }\n};\n"
+    \ os << '{' << x.a << ',' << x.b << '}';\n    }\n\n    T eval(const T &x) const\
+    \ { return a + b * x; }\n    T root() const { return (-a) / b; } // Solve a +\
+    \ bx = 0 (b \\neq 0 is assumed)\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: number/dual_number.hpp
-  requiredBy: []
-  timestamp: '2022-01-27 23:13:25+09:00'
+  requiredBy:
+  - linear_algebra_matrix/hessenberg_system.hpp
+  timestamp: '2022-04-30 23:36:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
   - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
 documentation_of: number/dual_number.hpp
 layout: document

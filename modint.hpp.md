@@ -97,6 +97,9 @@ data:
     path: linear_algebra_matrix/test/hafnian.test.cpp
     title: linear_algebra_matrix/test/hafnian.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
+    title: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/inverse_matrix.test.cpp
     title: linear_algebra_matrix/test/inverse_matrix.test.cpp
   - icon: ':heavy_check_mark:'
@@ -376,6 +379,7 @@ data:
   - convolution/test/multivar_ntt.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
   - utilities/test/pow.test.cpp
+  - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - linear_algebra_matrix/test/hafnian.test.cpp

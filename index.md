@@ -308,6 +308,12 @@ data:
       title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\
         \u7121\u5411\u30B0\u30E9\u30D5\u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\
         \u306E\u6570\u3048\u4E0A\u3052\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/hessenberg_reduction.hpp
+      title: Hessenberg reduction of matrix
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/hessenberg_system.hpp
+      title: Hessenberg linear system
     - icon: ':warning:'
       path: linear_algebra_matrix/levinson.hpp
       title: Levinson recursion (Levinson-Durbin algorithm)
@@ -1032,6 +1038,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/hafnian.test.cpp
       title: linear_algebra_matrix/test/hafnian.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
+      title: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/inverse_matrix.test.cpp
       title: linear_algebra_matrix/test/inverse_matrix.test.cpp

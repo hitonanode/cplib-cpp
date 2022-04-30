@@ -130,8 +130,10 @@ data:
     \ DualNumber &x) const { return !(*this == x); }\n    bool operator<(const DualNumber\
     \ &x) const { return (a != x.a ? a < x.a : b < x.b); }\n    template <class OStream>\
     \ friend OStream &operator<<(OStream &os, const DualNumber &x) {\n        return\
-    \ os << '{' << x.a << ',' << x.b << '}';\n    }\n};\n#line 2 \"unionfind/unionfind.hpp\"\
-    \n#include <algorithm>\n#include <numeric>\n#include <utility>\n#line 6 \"unionfind/unionfind.hpp\"\
+    \ os << '{' << x.a << ',' << x.b << '}';\n    }\n\n    T eval(const T &x) const\
+    \ { return a + b * x; }\n    T root() const { return (-a) / b; } // Solve a +\
+    \ bx = 0 (b \\neq 0 is assumed)\n};\n#line 2 \"unionfind/unionfind.hpp\"\n#include\
+    \ <algorithm>\n#include <numeric>\n#include <utility>\n#line 6 \"unionfind/unionfind.hpp\"\
     \n\n// CUT begin\n// UnionFind Tree (0-indexed), based on size of each disjoint\
     \ set\nstruct UnionFind {\n    std::vector<int> par, cou;\n    UnionFind(int N\
     \ = 0) : par(N), cou(N, 1) { iota(par.begin(), par.end(), 0); }\n    int find(int\
@@ -345,7 +347,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   requiredBy: []
-  timestamp: '2022-04-30 19:41:44+09:00'
+  timestamp: '2022-04-30 23:36:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp

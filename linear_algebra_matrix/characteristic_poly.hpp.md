@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/hessenberg_reduction.hpp
+    title: Hessenberg reduction of matrix
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
   _extendedRequiredBy: []
@@ -13,8 +16,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links:
-    - http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf
+    links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <cmath>\n#include <iterator>\n#include <type_traits>\n\
     #include <utility>\n#include <vector>\n\nnamespace matrix_ {\nstruct has_id_method_impl\
@@ -132,7 +134,7 @@ data:
     \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
     \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
     \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 6 \"linear_algebra_matrix/characteristic_poly.hpp\"\n\n// Upper\
+    \    }\n};\n#line 5 \"linear_algebra_matrix/hessenberg_reduction.hpp\"\n\n// Upper\
     \ Hessenberg reduction of square matrices\n// Complexity: O(n^3)\n// Reference:\n\
     // http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf\ntemplate <class Tp>\
     \ void hessenberg_reduction(matrix<Tp> &M) {\n    assert(M.height() == M.width());\n\
@@ -143,49 +145,39 @@ data:
     \  const auto rinv = Tp(1) / M[r + 1][r];\n        for (int i = r + 2; i < N;\
     \ i++) {\n            const auto n = M[i][r] * rinv;\n            for (int j =\
     \ 0; j < N; j++) M[i][j] -= M[r + 1][j] * n;\n            for (int j = 0; j <\
-    \ N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n\n// Characteristic\
-    \ polynomial of matrix M (|xI - M|)\n// Complexity: O(n^3)\n// R. Rehman, I. C.\
-    \ Ipsen, \"La Budde's Method for Computing Characteristic Polynomials,\" 2011.\n\
-    template <class Tp> std::vector<Tp> characteristic_poly(matrix<Tp> M) {\n    hessenberg_reduction(M);\n\
-    \    const int N = M.height();\n    std::vector<std::vector<Tp>> p(\n        N\
-    \ + 1); // p[i + 1] = (Characteristic polynomial of i-th leading principal minor)\n\
-    \    p[0] = {1};\n    for (int i = 0; i < N; i++) {\n        p[i + 1].assign(i\
-    \ + 2, 0);\n        for (int j = 0; j < i + 1; j++) p[i + 1][j + 1] += p[i][j];\n\
-    \        for (int j = 0; j < i + 1; j++) p[i + 1][j] -= p[i][j] * M[i][i];\n \
-    \       Tp betas = 1;\n        for (int j = i - 1; j >= 0; j--) {\n          \
-    \  betas *= M[j + 1][j];\n            Tp hb = -M[j][i] * betas;\n            for\
-    \ (int k = 0; k < j + 1; k++) p[i + 1][k] += hb * p[j][k];\n        }\n    }\n\
-    \    return p[N];\n}\n"
-  code: "#pragma once\n#include \"matrix.hpp\"\n#include <cassert>\n#include <utility>\n\
-    #include <vector>\n\n// Upper Hessenberg reduction of square matrices\n// Complexity:\
-    \ O(n^3)\n// Reference:\n// http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf\n\
-    template <class Tp> void hessenberg_reduction(matrix<Tp> &M) {\n    assert(M.height()\
-    \ == M.width());\n    const int N = M.height();\n    for (int r = 0; r < N - 2;\
-    \ r++) {\n        int piv = matrix<Tp>::choose_pivot(M, r + 1, r);\n        if\
-    \ (piv < 0) continue;\n        for (int i = 0; i < N; i++) std::swap(M[r + 1][i],\
-    \ M[piv][i]);\n        for (int i = 0; i < N; i++) std::swap(M[i][r + 1], M[i][piv]);\n\
-    \n        const auto rinv = Tp(1) / M[r + 1][r];\n        for (int i = r + 2;\
-    \ i < N; i++) {\n            const auto n = M[i][r] * rinv;\n            for (int\
-    \ j = 0; j < N; j++) M[i][j] -= M[r + 1][j] * n;\n            for (int j = 0;\
-    \ j < N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n\n// Characteristic\
-    \ polynomial of matrix M (|xI - M|)\n// Complexity: O(n^3)\n// R. Rehman, I. C.\
-    \ Ipsen, \"La Budde's Method for Computing Characteristic Polynomials,\" 2011.\n\
-    template <class Tp> std::vector<Tp> characteristic_poly(matrix<Tp> M) {\n    hessenberg_reduction(M);\n\
-    \    const int N = M.height();\n    std::vector<std::vector<Tp>> p(\n        N\
-    \ + 1); // p[i + 1] = (Characteristic polynomial of i-th leading principal minor)\n\
-    \    p[0] = {1};\n    for (int i = 0; i < N; i++) {\n        p[i + 1].assign(i\
-    \ + 2, 0);\n        for (int j = 0; j < i + 1; j++) p[i + 1][j + 1] += p[i][j];\n\
-    \        for (int j = 0; j < i + 1; j++) p[i + 1][j] -= p[i][j] * M[i][i];\n \
-    \       Tp betas = 1;\n        for (int j = i - 1; j >= 0; j--) {\n          \
-    \  betas *= M[j + 1][j];\n            Tp hb = -M[j][i] * betas;\n            for\
-    \ (int k = 0; k < j + 1; k++) p[i + 1][k] += hb * p[j][k];\n        }\n    }\n\
-    \    return p[N];\n}\n"
+    \ N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n#line 4 \"linear_algebra_matrix/characteristic_poly.hpp\"\
+    \n\n// Characteristic polynomial of matrix M (|xI - M|)\n// Complexity: O(n^3)\n\
+    // R. Rehman, I. C. Ipsen, \"La Budde's Method for Computing Characteristic Polynomials,\"\
+    \ 2011.\ntemplate <class Tp> std::vector<Tp> characteristic_poly(matrix<Tp> M)\
+    \ {\n    hessenberg_reduction(M);\n    const int N = M.height();\n    // p[i +\
+    \ 1] = (Characteristic polynomial of i-th leading principal minor)\n    std::vector<std::vector<Tp>>\
+    \ p(N + 1);\n    p[0] = {1};\n    for (int i = 0; i < N; i++) {\n        p[i +\
+    \ 1].assign(i + 2, Tp());\n        for (int j = 0; j < i + 1; j++) p[i + 1][j\
+    \ + 1] += p[i][j];\n        for (int j = 0; j < i + 1; j++) p[i + 1][j] -= p[i][j]\
+    \ * M[i][i];\n        Tp betas = 1;\n        for (int j = i - 1; j >= 0; j--)\
+    \ {\n            betas *= M[j + 1][j];\n            Tp hb = -M[j][i] * betas;\n\
+    \            for (int k = 0; k < j + 1; k++) p[i + 1][k] += hb * p[j][k];\n  \
+    \      }\n    }\n    return p[N];\n}\n"
+  code: "#pragma once\n#include \"hessenberg_reduction.hpp\"\n#include <vector>\n\n\
+    // Characteristic polynomial of matrix M (|xI - M|)\n// Complexity: O(n^3)\n//\
+    \ R. Rehman, I. C. Ipsen, \"La Budde's Method for Computing Characteristic Polynomials,\"\
+    \ 2011.\ntemplate <class Tp> std::vector<Tp> characteristic_poly(matrix<Tp> M)\
+    \ {\n    hessenberg_reduction(M);\n    const int N = M.height();\n    // p[i +\
+    \ 1] = (Characteristic polynomial of i-th leading principal minor)\n    std::vector<std::vector<Tp>>\
+    \ p(N + 1);\n    p[0] = {1};\n    for (int i = 0; i < N; i++) {\n        p[i +\
+    \ 1].assign(i + 2, Tp());\n        for (int j = 0; j < i + 1; j++) p[i + 1][j\
+    \ + 1] += p[i][j];\n        for (int j = 0; j < i + 1; j++) p[i + 1][j] -= p[i][j]\
+    \ * M[i][i];\n        Tp betas = 1;\n        for (int j = i - 1; j >= 0; j--)\
+    \ {\n            betas *= M[j + 1][j];\n            Tp hb = -M[j][i] * betas;\n\
+    \            for (int k = 0; k < j + 1; k++) p[i + 1][k] += hb * p[j][k];\n  \
+    \      }\n    }\n    return p[N];\n}\n"
   dependsOn:
+  - linear_algebra_matrix/hessenberg_reduction.hpp
   - linear_algebra_matrix/matrix.hpp
   isVerificationFile: false
   path: linear_algebra_matrix/characteristic_poly.hpp
   requiredBy: []
-  timestamp: '2022-01-27 23:13:25+09:00'
+  timestamp: '2022-04-30 20:45:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
@@ -199,7 +191,7 @@ title: "Characteristic polynomial \uFF08\u884C\u5217\u306E\u7279\u6027\u591A\u98
 
 ## やっていること
 
-入力として与えられた正方行列 $M$ に (upper) Hessenberg reduction を施した後，これに対して $M$ の首座小行列の特性多項式を再帰的に求めていく（La Budde's method, [1]）．(Upper) Hessenberg reduction とは，行列に相似変換を施すことでその対角成分より2つ以上左下側の成分を全てゼロにするというもので，このような変換は特に Householder 変換の組合せによって可能である（もちろん相似変換で特性多項式は不変）．
+入力として与えられた正方行列 $M$ に (upper) Hessenberg reduction を施した後，これに対して $M$ の首座小行列の特性多項式を再帰的に求めていく（La Budde's method, [1]）．
 
 ## References
 

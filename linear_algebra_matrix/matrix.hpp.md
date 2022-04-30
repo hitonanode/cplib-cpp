@@ -13,6 +13,9 @@ data:
     path: linear_algebra_matrix/circular_binary_expansion.hpp
     title: linear_algebra_matrix/circular_binary_expansion.hpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/hessenberg_reduction.hpp
+    title: Hessenberg reduction of matrix
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/system_of_linear_equations.hpp
     title: linear_algebra_matrix/system_of_linear_equations.hpp
   _extendedVerifiedWith:
@@ -309,6 +312,7 @@ data:
   - graph/general_matching.hpp
   - linear_algebra_matrix/system_of_linear_equations.hpp
   - linear_algebra_matrix/circular_binary_expansion.hpp
+  - linear_algebra_matrix/hessenberg_reduction.hpp
   - linear_algebra_matrix/characteristic_poly.hpp
   timestamp: '2022-01-27 23:13:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
