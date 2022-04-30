@@ -180,6 +180,8 @@ template <typename T> struct matrix {
         }
         return 0;
     }
+    int rank() const { return gauss_jordan().rank_of_gauss_jordan(); }
+
     T determinant_of_upper_triangle() const {
         T ret = _T_id<T>();
         for (int i = 0; i < H; i++) ret *= get(i, i);
