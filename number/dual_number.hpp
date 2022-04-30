@@ -45,4 +45,7 @@ template <class T> struct DualNumber {
     template <class OStream> friend OStream &operator<<(OStream &os, const DualNumber &x) {
         return os << '{' << x.a << ',' << x.b << '}';
     }
+
+    T eval(const T &x) const { return a + b * x; }
+    T root() const { return (-a) / b; } // Solve a + bx = 0 (b \neq 0 is assumed)
 };
