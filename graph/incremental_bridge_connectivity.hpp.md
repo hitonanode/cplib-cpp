@@ -16,16 +16,21 @@ data:
     links:
     - https://ei1333.github.io/library/graph/connected-components/incremental-bridge-connectivity.cpp>
     - https://scrapbox.io/data-structures/Incremental_Bridge-Connectivity>
-  bundledCode: "#line 2 \"unionfind/unionfind.hpp\"\n#include <numeric>\n#include\
-    \ <utility>\n#include <vector>\n\n// CUT begin\n// UnionFind Tree (0-indexed),\
-    \ based on size of each disjoint set\nstruct UnionFind {\n    std::vector<int>\
-    \ par, cou;\n    UnionFind(int N = 0) : par(N), cou(N, 1) { iota(par.begin(),\
-    \ par.end(), 0); }\n    int find(int x) { return (par[x] == x) ? x : (par[x] =\
-    \ find(par[x])); }\n    bool unite(int x, int y) {\n        x = find(x), y = find(y);\n\
-    \        if (x == y) return false;\n        if (cou[x] < cou[y]) std::swap(x,\
-    \ y);\n        par[y] = x, cou[x] += cou[y];\n        return true;\n    }\n  \
-    \  int count(int x) { return cou[find(x)]; }\n    bool same(int x, int y) { return\
-    \ find(x) == find(y); }\n};\n#line 3 \"graph/incremental_bridge_connectivity.hpp\"\
+  bundledCode: "#line 2 \"unionfind/unionfind.hpp\"\n#include <algorithm>\n#include\
+    \ <numeric>\n#include <utility>\n#include <vector>\n\n// CUT begin\n// UnionFind\
+    \ Tree (0-indexed), based on size of each disjoint set\nstruct UnionFind {\n \
+    \   std::vector<int> par, cou;\n    UnionFind(int N = 0) : par(N), cou(N, 1) {\
+    \ iota(par.begin(), par.end(), 0); }\n    int find(int x) { return (par[x] ==\
+    \ x) ? x : (par[x] = find(par[x])); }\n    bool unite(int x, int y) {\n      \
+    \  x = find(x), y = find(y);\n        if (x == y) return false;\n        if (cou[x]\
+    \ < cou[y]) std::swap(x, y);\n        par[y] = x, cou[x] += cou[y];\n        return\
+    \ true;\n    }\n    int count(int x) { return cou[find(x)]; }\n    bool same(int\
+    \ x, int y) { return find(x) == find(y); }\n    std::vector<std::vector<int>>\
+    \ groups() {\n        std::vector<std::vector<int>> ret(par.size());\n       \
+    \ for (int i = 0; i < int(par.size()); ++i) ret[find(i)].push_back(i);\n     \
+    \   ret.erase(std::remove_if(ret.begin(), ret.end(),\n                       \
+    \          [&](const std::vector<int> &v) { return v.empty(); }),\n          \
+    \        ret.end());\n        return ret;\n    }\n};\n#line 3 \"graph/incremental_bridge_connectivity.hpp\"\
     \n#include <cassert>\n#line 5 \"graph/incremental_bridge_connectivity.hpp\"\n\
     #include <unordered_set>\n#line 7 \"graph/incremental_bridge_connectivity.hpp\"\
     \n\n// CUT begin\n// Incremental Bridge-Connectivity\n// two-edge-connected components\n\
@@ -81,7 +86,7 @@ data:
   isVerificationFile: false
   path: graph/incremental_bridge_connectivity.hpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2022-04-30 19:41:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/incremental-bridge-connectivity.test.cpp

@@ -344,67 +344,67 @@ data:
   isVerificationFile: false
   path: modint.hpp
   requiredBy:
-  - convolution/ntt.hpp
-  - convolution/multivar_ntt.hpp
   - formal_power_series/factorial_power.hpp
   - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/polynomial_divmod.hpp
-  - segmenttree/trees/acl_range-affine-range-sum.hpp
+  - convolution/ntt.hpp
+  - convolution/multivar_ntt.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
+  - segmenttree/trees/acl_range-affine-range-sum.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - convolution/test/multivar_ntt.test.cpp
+  - formal_power_series/test/linear_recurrence.test.cpp
+  - formal_power_series/test/kitamasa.test.cpp
+  - formal_power_series/test/stirling_number_of_1st.test.cpp
+  - formal_power_series/test/shift_of_sampling_points.test.cpp
+  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - formal_power_series/test/polynomial_divmod.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
+  - formal_power_series/test/polynomial_interpolation.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - number/test/arithmetic_function_totient.test.cpp
+  - number/test/multiple_moebius.yuki886.test.cpp
+  - number/test/zeta_moebius_transform.test.cpp
+  - number/test/lcm_convolution.test.cpp
+  - number/test/primitive_root.test.cpp
+  - number/test/gcd_convolution.test.cpp
+  - number/test/multiple_moebius.yuki1627.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
   - convolution/test/ntt.test.cpp
+  - convolution/test/multivar_ntt.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
-  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - formal_power_series/test/kitamasa.test.cpp
-  - formal_power_series/test/shift_of_sampling_points.test.cpp
-  - formal_power_series/test/polynomial_divmod.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - formal_power_series/test/stirling_number_of_1st.test.cpp
-  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - formal_power_series/test/polynomial_interpolation.test.cpp
-  - formal_power_series/test/linear_recurrence.test.cpp
-  - data_structure/test/queue_operate_all_composite.test.cpp
-  - data_structure/test/link_cut_tree.composition.test.cpp
-  - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
-  - data_structure/test/lazy_rbst.test.cpp
-  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - utilities/test/pow.test.cpp
+  - linear_algebra_matrix/test/matrix_product.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+  - linear_algebra_matrix/test/hafnian.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+  - linear_algebra_matrix/test/inverse_matrix.test.cpp
+  - linear_algebra_matrix/test/characteristic_poly.test.cpp
+  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
-  - string/test/rolling_hash_w_modint.test.cpp
-  - tree/test/vertex-set-path-composite.test.cpp
+  - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
+  - data_structure/test/lazy_rbst.test.cpp
+  - data_structure/test/link_cut_tree.composition.test.cpp
+  - tree/test/tree_isomorphism.aoj1613.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - tree/test/tree_isomorphism.aoj1613.test.cpp
-  - set_power_series/test/subset_pow.yuki1594.test.cpp
+  - tree/test/vertex-set-path-composite.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
-  - set_power_series/test/subset_log.test.cpp
+  - set_power_series/test/subset_pow.yuki1594.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
-  - utilities/test/pow.test.cpp
-  - segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - segmenttree/test/point-set-range-composite.test.cpp
+  - set_power_series/test/subset_log.test.cpp
   - segmenttree/test/range-affine-range-sum.test.cpp
-  - number/test/lcm_convolution.test.cpp
-  - number/test/gcd_convolution.test.cpp
-  - number/test/multiple_moebius.yuki886.test.cpp
-  - number/test/arithmetic_function_totient.test.cpp
-  - number/test/zeta_moebius_transform.test.cpp
-  - number/test/primitive_root.test.cpp
-  - number/test/multiple_moebius.yuki1627.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
-  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
-  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - linear_algebra_matrix/test/characteristic_poly.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/hafnian.test.cpp
-  - linear_algebra_matrix/test/matrix_product.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - linear_algebra_matrix/test/inverse_matrix.test.cpp
+  - segmenttree/test/point-set-range-composite.test.cpp
+  - segmenttree/test/acl_range-affine-range-sum.test.cpp
+  - string/test/rolling_hash_w_modint.test.cpp
 documentation_of: modint.hpp
 layout: document
 redirect_from:

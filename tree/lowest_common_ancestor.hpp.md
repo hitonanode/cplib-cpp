@@ -97,8 +97,8 @@ data:
   timestamp: '2021-07-30 23:28:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/lca.test.cpp
   - tree/test/lca.yuki898.test.cpp
+  - tree/test/lca.test.cpp
 documentation_of: tree/lowest_common_ancestor.hpp
 layout: document
 title: "Lowest common ancestor \uFF08\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"

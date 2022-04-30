@@ -42,8 +42,8 @@ data:
     \       ret.emplace_back(std::abs(xs[i] - xs[j]) + std::abs(ys[i] - ys[j]), i,\
     \ j);\n                }\n                sweep[-ys[i]] = i;\n            }\n\
     \            std::swap(xs, ys);\n        }\n        for (auto &x : xs) x = -x;\n\
-    \    }\n    std::sort(ret.begin(), ret.end());\n    return ret;\n}\n#line 3 \"\
-    unionfind/unionfind.hpp\"\n#include <utility>\n#line 5 \"unionfind/unionfind.hpp\"\
+    \    }\n    std::sort(ret.begin(), ret.end());\n    return ret;\n}\n#line 4 \"\
+    unionfind/unionfind.hpp\"\n#include <utility>\n#line 6 \"unionfind/unionfind.hpp\"\
     \n\n// CUT begin\n// UnionFind Tree (0-indexed), based on size of each disjoint\
     \ set\nstruct UnionFind {\n    std::vector<int> par, cou;\n    UnionFind(int N\
     \ = 0) : par(N), cou(N, 1) { iota(par.begin(), par.end(), 0); }\n    int find(int\
@@ -51,15 +51,20 @@ data:
     \ x, int y) {\n        x = find(x), y = find(y);\n        if (x == y) return false;\n\
     \        if (cou[x] < cou[y]) std::swap(x, y);\n        par[y] = x, cou[x] +=\
     \ cou[y];\n        return true;\n    }\n    int count(int x) { return cou[find(x)];\
-    \ }\n    bool same(int x, int y) { return find(x) == find(y); }\n};\n#line 4 \"\
-    graph/test/manhattan_mst.test.cpp\"\n\n#include <iostream>\nusing namespace std;\n\
-    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int\
-    \ N;\n    cin >> N;\n    vector<int> xs(N), ys(N);\n    for (int i = 0; i < N;\
-    \ i++) cin >> xs[i] >> ys[i];\n    UnionFind uf(N);\n    long long weight = 0;\n\
-    \    vector<pair<int, int>> edges;\n    for (auto [w, i, j] : manhattan_mst(xs,\
-    \ ys)) {\n        if (uf.unite(i, j)) {\n            weight += w;\n          \
-    \  edges.emplace_back(i, j);\n        }\n    }\n    cout << weight << '\\n';\n\
-    \    for (auto p : edges) cout << p.first << ' ' << p.second << '\\n';\n}\n"
+    \ }\n    bool same(int x, int y) { return find(x) == find(y); }\n    std::vector<std::vector<int>>\
+    \ groups() {\n        std::vector<std::vector<int>> ret(par.size());\n       \
+    \ for (int i = 0; i < int(par.size()); ++i) ret[find(i)].push_back(i);\n     \
+    \   ret.erase(std::remove_if(ret.begin(), ret.end(),\n                       \
+    \          [&](const std::vector<int> &v) { return v.empty(); }),\n          \
+    \        ret.end());\n        return ret;\n    }\n};\n#line 4 \"graph/test/manhattan_mst.test.cpp\"\
+    \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n\n    int N;\n    cin >> N;\n    vector<int> xs(N),\
+    \ ys(N);\n    for (int i = 0; i < N; i++) cin >> xs[i] >> ys[i];\n    UnionFind\
+    \ uf(N);\n    long long weight = 0;\n    vector<pair<int, int>> edges;\n    for\
+    \ (auto [w, i, j] : manhattan_mst(xs, ys)) {\n        if (uf.unite(i, j)) {\n\
+    \            weight += w;\n            edges.emplace_back(i, j);\n        }\n\
+    \    }\n    cout << weight << '\\n';\n    for (auto p : edges) cout << p.first\
+    \ << ' ' << p.second << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/manhattanmst\"\n#include\
     \ \"../manhattan_mst.hpp\"\n#include \"../../unionfind/unionfind.hpp\"\n\n#include\
     \ <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
@@ -75,7 +80,7 @@ data:
   isVerificationFile: true
   path: graph/test/manhattan_mst.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-04-30 19:41:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/manhattan_mst.test.cpp

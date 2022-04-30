@@ -28,16 +28,21 @@ data:
     \ != rhs.p; }\n    };\n    iterator begin() { return {head}; }\n    iterator end()\
     \ { return {0}; }\n};\ntemplate <typename T> std::vector<unsigned> light_forward_list<T>::ptr\
     \ = {0};\ntemplate <typename T> std::vector<T> light_forward_list<T>::val = {T()};\n\
-    #line 2 \"unionfind/unionfind.hpp\"\n#include <numeric>\n#include <utility>\n\
-    #line 5 \"unionfind/unionfind.hpp\"\n\n// CUT begin\n// UnionFind Tree (0-indexed),\
-    \ based on size of each disjoint set\nstruct UnionFind {\n    std::vector<int>\
-    \ par, cou;\n    UnionFind(int N = 0) : par(N), cou(N, 1) { iota(par.begin(),\
-    \ par.end(), 0); }\n    int find(int x) { return (par[x] == x) ? x : (par[x] =\
-    \ find(par[x])); }\n    bool unite(int x, int y) {\n        x = find(x), y = find(y);\n\
-    \        if (x == y) return false;\n        if (cou[x] < cou[y]) std::swap(x,\
-    \ y);\n        par[y] = x, cou[x] += cou[y];\n        return true;\n    }\n  \
-    \  int count(int x) { return cou[find(x)]; }\n    bool same(int x, int y) { return\
-    \ find(x) == find(y); }\n};\n#line 4 \"graph/paths_of_length_two_decomposition.hpp\"\
+    #line 2 \"unionfind/unionfind.hpp\"\n#include <algorithm>\n#include <numeric>\n\
+    #include <utility>\n#line 6 \"unionfind/unionfind.hpp\"\n\n// CUT begin\n// UnionFind\
+    \ Tree (0-indexed), based on size of each disjoint set\nstruct UnionFind {\n \
+    \   std::vector<int> par, cou;\n    UnionFind(int N = 0) : par(N), cou(N, 1) {\
+    \ iota(par.begin(), par.end(), 0); }\n    int find(int x) { return (par[x] ==\
+    \ x) ? x : (par[x] = find(par[x])); }\n    bool unite(int x, int y) {\n      \
+    \  x = find(x), y = find(y);\n        if (x == y) return false;\n        if (cou[x]\
+    \ < cou[y]) std::swap(x, y);\n        par[y] = x, cou[x] += cou[y];\n        return\
+    \ true;\n    }\n    int count(int x) { return cou[find(x)]; }\n    bool same(int\
+    \ x, int y) { return find(x) == find(y); }\n    std::vector<std::vector<int>>\
+    \ groups() {\n        std::vector<std::vector<int>> ret(par.size());\n       \
+    \ for (int i = 0; i < int(par.size()); ++i) ret[find(i)].push_back(i);\n     \
+    \   ret.erase(std::remove_if(ret.begin(), ret.end(),\n                       \
+    \          [&](const std::vector<int> &v) { return v.empty(); }),\n          \
+    \        ret.end());\n        return ret;\n    }\n};\n#line 4 \"graph/paths_of_length_two_decomposition.hpp\"\
     \n#include <cassert>\n#include <tuple>\n#line 8 \"graph/paths_of_length_two_decomposition.hpp\"\
     \n\n// CUT begin\n// \u7121\u5411\u30B0\u30E9\u30D5\u3092\u9577\u30552\u306E\u9053\
     \uFF08**\u9589\u8DEF\u3092\u542B\u3080**\uFF09\u3078\u5206\u89E3\n// \u5404\u9023\
@@ -115,7 +120,7 @@ data:
   isVerificationFile: false
   path: graph/paths_of_length_two_decomposition.hpp
   requiredBy: []
-  timestamp: '2021-05-01 20:55:29+09:00'
+  timestamp: '2022-04-30 19:41:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/paths_of_length_two_decomposition.hpp
