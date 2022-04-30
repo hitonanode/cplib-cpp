@@ -3,6 +3,10 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/linear_matroid_parity.hpp
+    title: "Linear matroid parity (unweighted) \uFF08\u7DDA\u5F62\u30DE\u30C8\u30ED\
+      \u30A4\u30C9\u30D1\u30EA\u30C6\u30A3\uFF09"
+  - icon: ':heavy_check_mark:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
   - icon: ':heavy_check_mark:'
@@ -19,6 +23,12 @@ data:
     path: linear_algebra_matrix/system_of_linear_equations.hpp
     title: linear_algebra_matrix/system_of_linear_equations.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+    title: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+    title: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
     title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
@@ -152,7 +162,8 @@ data:
     \                    mtr.at(hh, c) = T();\n                }\n            c++;\n\
     \        }\n        return mtr;\n    }\n    int rank_of_gauss_jordan() const {\n\
     \        for (int i = H * W - 1; i >= 0; i--) {\n            if (elem[i] != 0)\
-    \ return i / W + 1;\n        }\n        return 0;\n    }\n    T determinant_of_upper_triangle()\
+    \ return i / W + 1;\n        }\n        return 0;\n    }\n    int rank() const\
+    \ { return gauss_jordan().rank_of_gauss_jordan(); }\n\n    T determinant_of_upper_triangle()\
     \ const {\n        T ret = _T_id<T>();\n        for (int i = 0; i < H; i++) ret\
     \ *= get(i, i);\n        return ret;\n    }\n    int inverse() {\n        assert(H\
     \ == W);\n        std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n\
@@ -270,7 +281,8 @@ data:
     \                    mtr.at(hh, c) = T();\n                }\n            c++;\n\
     \        }\n        return mtr;\n    }\n    int rank_of_gauss_jordan() const {\n\
     \        for (int i = H * W - 1; i >= 0; i--) {\n            if (elem[i] != 0)\
-    \ return i / W + 1;\n        }\n        return 0;\n    }\n    T determinant_of_upper_triangle()\
+    \ return i / W + 1;\n        }\n        return 0;\n    }\n    int rank() const\
+    \ { return gauss_jordan().rank_of_gauss_jordan(); }\n\n    T determinant_of_upper_triangle()\
     \ const {\n        T ret = _T_id<T>();\n        for (int i = 0; i < H; i++) ret\
     \ *= get(i, i);\n        return ret;\n    }\n    int inverse() {\n        assert(H\
     \ == W);\n        std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n\
@@ -309,14 +321,17 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/matrix.hpp
   requiredBy:
+  - combinatorial_opt/linear_matroid_parity.hpp
   - graph/general_matching.hpp
   - linear_algebra_matrix/system_of_linear_equations.hpp
   - linear_algebra_matrix/circular_binary_expansion.hpp
   - linear_algebra_matrix/hessenberg_reduction.hpp
   - linear_algebra_matrix/characteristic_poly.hpp
-  timestamp: '2022-01-27 23:13:25+09:00'
+  timestamp: '2022-05-01 02:11:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+  - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
   - graph/test/general_matching.test.cpp
   - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp

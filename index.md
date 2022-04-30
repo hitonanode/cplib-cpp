@@ -20,6 +20,10 @@ data:
         \u30D5\u306B\u304A\u3051\u308B\u6700\u5927\u8FBA\u6570\u6700\u5C0F\u91CD\u307F\
         \u306E\u8FBA\u7D20\u306A\u4E8C\u3064\u306E\u5168\u57DF\u68EE\uFF09"
     - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/linear_matroid_parity.hpp
+      title: "Linear matroid parity (unweighted) \uFF08\u7DDA\u5F62\u30DE\u30C8\u30ED\
+        \u30A4\u30C9\u30D1\u30EA\u30C6\u30A3\uFF09"
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/matroid_intersection.hpp
       title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\
         \uFF09\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
@@ -712,6 +716,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/convex_sum.test.cpp
       title: combinatorial_opt/test/convex_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+      title: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+      title: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
       title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp

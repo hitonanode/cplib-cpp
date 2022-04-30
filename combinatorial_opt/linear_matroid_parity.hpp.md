@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/hessenberg_reduction.hpp
-    title: Hessenberg reduction of matrix
-  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/characteristic_poly.test.cpp
-    title: linear_algebra_matrix/test/characteristic_poly.test.cpp
+    path: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+    title: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+    title: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -135,65 +135,133 @@ data:
     \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
     \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
     \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 5 \"linear_algebra_matrix/hessenberg_reduction.hpp\"\n\n// Upper\
-    \ Hessenberg reduction of square matrices\n// Complexity: O(n^3)\n// Reference:\n\
-    // http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf\ntemplate <class Tp>\
-    \ void hessenberg_reduction(matrix<Tp> &M) {\n    assert(M.height() == M.width());\n\
-    \    const int N = M.height();\n    for (int r = 0; r < N - 2; r++) {\n      \
-    \  int piv = matrix<Tp>::choose_pivot(M, r + 1, r);\n        if (piv < 0) continue;\n\
-    \        for (int i = 0; i < N; i++) std::swap(M[r + 1][i], M[piv][i]);\n    \
-    \    for (int i = 0; i < N; i++) std::swap(M[i][r + 1], M[i][piv]);\n\n      \
-    \  const auto rinv = Tp(1) / M[r + 1][r];\n        for (int i = r + 2; i < N;\
-    \ i++) {\n            const auto n = M[i][r] * rinv;\n            for (int j =\
-    \ 0; j < N; j++) M[i][j] -= M[r + 1][j] * n;\n            for (int j = 0; j <\
-    \ N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n#line 4 \"linear_algebra_matrix/characteristic_poly.hpp\"\
-    \n\n// Characteristic polynomial of matrix M (|xI - M|)\n// Complexity: O(n^3)\n\
-    // R. Rehman, I. C. Ipsen, \"La Budde's Method for Computing Characteristic Polynomials,\"\
-    \ 2011.\ntemplate <class Tp> std::vector<Tp> characteristic_poly(matrix<Tp> M)\
-    \ {\n    hessenberg_reduction(M);\n    const int N = M.height();\n    // p[i +\
-    \ 1] = (Characteristic polynomial of i-th leading principal minor)\n    std::vector<std::vector<Tp>>\
-    \ p(N + 1);\n    p[0] = {1};\n    for (int i = 0; i < N; i++) {\n        p[i +\
-    \ 1].assign(i + 2, Tp());\n        for (int j = 0; j < i + 1; j++) p[i + 1][j\
-    \ + 1] += p[i][j];\n        for (int j = 0; j < i + 1; j++) p[i + 1][j] -= p[i][j]\
-    \ * M[i][i];\n        Tp betas = 1;\n        for (int j = i - 1; j >= 0; j--)\
-    \ {\n            betas *= M[j + 1][j];\n            Tp hb = -M[j][i] * betas;\n\
-    \            for (int k = 0; k < j + 1; k++) p[i + 1][k] += hb * p[j][k];\n  \
-    \      }\n    }\n    return p[N];\n}\n"
-  code: "#pragma once\n#include \"hessenberg_reduction.hpp\"\n#include <vector>\n\n\
-    // Characteristic polynomial of matrix M (|xI - M|)\n// Complexity: O(n^3)\n//\
-    \ R. Rehman, I. C. Ipsen, \"La Budde's Method for Computing Characteristic Polynomials,\"\
-    \ 2011.\ntemplate <class Tp> std::vector<Tp> characteristic_poly(matrix<Tp> M)\
-    \ {\n    hessenberg_reduction(M);\n    const int N = M.height();\n    // p[i +\
-    \ 1] = (Characteristic polynomial of i-th leading principal minor)\n    std::vector<std::vector<Tp>>\
-    \ p(N + 1);\n    p[0] = {1};\n    for (int i = 0; i < N; i++) {\n        p[i +\
-    \ 1].assign(i + 2, Tp());\n        for (int j = 0; j < i + 1; j++) p[i + 1][j\
-    \ + 1] += p[i][j];\n        for (int j = 0; j < i + 1; j++) p[i + 1][j] -= p[i][j]\
-    \ * M[i][i];\n        Tp betas = 1;\n        for (int j = i - 1; j >= 0; j--)\
-    \ {\n            betas *= M[j + 1][j];\n            Tp hb = -M[j][i] * betas;\n\
-    \            for (int k = 0; k < j + 1; k++) p[i + 1][k] += hb * p[j][k];\n  \
-    \      }\n    }\n    return p[N];\n}\n"
+    \    }\n};\n#line 4 \"combinatorial_opt/linear_matroid_parity.hpp\"\n#include\
+    \ <chrono>\n#include <numeric>\n#include <random>\n#line 9 \"combinatorial_opt/linear_matroid_parity.hpp\"\
+    \n\n// Solve linear matroid parity problem and return (especially lexicographically\
+    \ smallest) binary\n// vector\n// Complexity: O(d^2 (d + m)), d: dimension, m:\
+    \ number of input vector pairs\n// Reference:\n// [1] H. Y. Cheung, L. C. Lau,\
+    \ K. M. Leung,\n//     \"Algebraic Algorithms for Linear Matroid Parity Problems,\"\
+    \n//     ACM Transactions on Algorithms, 10(3), 1-26, 2014.\ntemplate <class ModInt>\n\
+    std::vector<bool>\nlinear_matroid_parity(std::vector<std::pair<std::vector<ModInt>,\
+    \ std::vector<ModInt>>> bcs,\n                      long long seed = std::chrono::steady_clock::now().time_since_epoch().count())\
+    \ {\n    if (bcs.empty()) return {};\n    const int r = bcs[0].first.size(), r2\
+    \ = (r + 1) / 2;\n    int m = bcs.size();\n    for (auto &v : bcs) v.first.resize(r2\
+    \ * 2), v.second.resize(r2 * 2);\n\n    std::mt19937 mt(seed);\n    std::uniform_int_distribution<int>\
+    \ d(0, ModInt::mod() - 1);\n\n    std::vector<ModInt> x(m), xadd(r2);\n\n    matrix<ModInt>\
+    \ Yinv; // (r2 * 2) * (r2 * 2) matrix\n    int rankY = -1;\n    while (rankY <\
+    \ r2 * 2) {\n        Yinv = matrix<ModInt>(r2 * 2, r2 * 2);\n\n        auto add_i\
+    \ = [&](int i) {\n            x[i] = d(mt);\n            const auto &b = bcs[i].first,\
+    \ &c = bcs[i].second;\n            for (int j = 0; j < r2 * 2; j++) {\n      \
+    \          for (int k = 0; k < r2 * 2; k++) Yinv[j][k] += x[i] * (b[j] * c[k]\
+    \ - c[j] * b[k]);\n            }\n        };\n        for (int i = 0; i < m; ++i)\
+    \ add_i(i);\n\n        int num_add_vec = (r2 * 2 - Yinv.rank()) / 2;\n\n     \
+    \   bcs.resize(m + num_add_vec,\n                   std::make_pair(std::vector<ModInt>(r2\
+    \ * 2), std::vector<ModInt>(r2 * 2)));\n        x.resize(bcs.size());\n      \
+    \  for (int i = m; i < int(bcs.size()); ++i) {\n            for (auto &x : bcs[i].first)\
+    \ x = d(mt);\n            for (auto &x : bcs[i].second) x = d(mt);\n        }\n\
+    \n        for (int i = m; i < int(bcs.size()); i++) add_i(i);\n        rankY =\
+    \ Yinv.inverse();\n    }\n\n    std::vector<bool> ret(bcs.size(), 1);\n\n    auto\
+    \ try_erase_i = [&](int i) {\n        auto b = bcs[i].first, c = bcs[i].second;\n\
+    \        b.resize(r2 * 2, 0), c.resize(r2 * 2, 0);\n        std::vector<ModInt>\
+    \ Yib = Yinv * b, Yic = Yinv * c;\n        ModInt bYic = std::inner_product(b.begin(),\
+    \ b.end(), Yic.begin(), ModInt());\n        ModInt a00 = bYic * x[i] + 1;\n  \
+    \      if (a00 == ModInt()) return;\n        ret[i] = 0;\n        const ModInt\
+    \ f = x[i] / a00;\n        for (int j = 0; j < r2 * 2; ++j) {\n            for\
+    \ (int k = 0; k < r2 * 2; ++k) {\n                Yinv[j][k] -= f * (Yib[j] *\
+    \ Yic[k] - Yic[j] * Yib[k]);\n            }\n        }\n    };\n\n    for (int\
+    \ i = m; i < int(bcs.size()); ++i) try_erase_i(i);\n    for (int i = 0; i < m;\
+    \ i++) try_erase_i(i);\n    ret.resize(m);\n    return ret;\n}\n\n// Solve linear\
+    \ matroid parity problem, size-only (no construction)\ntemplate <class ModInt>\n\
+    int linear_matroid_parity_size(\n    const std::vector<std::pair<std::vector<ModInt>,\
+    \ std::vector<ModInt>>> &bcs,\n    long long seed = std::chrono::steady_clock::now().time_since_epoch().count())\
+    \ {\n\n    if (bcs.empty()) return 0;\n\n    std::mt19937 mt(seed);\n    std::uniform_int_distribution<int>\
+    \ d(0, ModInt::mod() - 1);\n\n    const int r = bcs[0].first.size();\n    matrix<ModInt>\
+    \ mat(r, r);\n    for (const auto &bc : bcs) {\n        const auto &b = bc.first,\
+    \ &c = bc.second;\n        ModInt x = d(mt);\n        for (int i = 0; i < r; ++i)\
+    \ {\n            for (int j = 0; j < r; ++j) mat[i][j] += x * (b[i] * c[j] - b[j]\
+    \ * c[i]);\n        }\n    }\n    return mat.rank() / 2;\n}\n"
+  code: "#pragma once\n#include \"../linear_algebra_matrix/matrix.hpp\"\n#include\
+    \ <cassert>\n#include <chrono>\n#include <numeric>\n#include <random>\n#include\
+    \ <utility>\n#include <vector>\n\n// Solve linear matroid parity problem and return\
+    \ (especially lexicographically smallest) binary\n// vector\n// Complexity: O(d^2\
+    \ (d + m)), d: dimension, m: number of input vector pairs\n// Reference:\n// [1]\
+    \ H. Y. Cheung, L. C. Lau, K. M. Leung,\n//     \"Algebraic Algorithms for Linear\
+    \ Matroid Parity Problems,\"\n//     ACM Transactions on Algorithms, 10(3), 1-26,\
+    \ 2014.\ntemplate <class ModInt>\nstd::vector<bool>\nlinear_matroid_parity(std::vector<std::pair<std::vector<ModInt>,\
+    \ std::vector<ModInt>>> bcs,\n                      long long seed = std::chrono::steady_clock::now().time_since_epoch().count())\
+    \ {\n    if (bcs.empty()) return {};\n    const int r = bcs[0].first.size(), r2\
+    \ = (r + 1) / 2;\n    int m = bcs.size();\n    for (auto &v : bcs) v.first.resize(r2\
+    \ * 2), v.second.resize(r2 * 2);\n\n    std::mt19937 mt(seed);\n    std::uniform_int_distribution<int>\
+    \ d(0, ModInt::mod() - 1);\n\n    std::vector<ModInt> x(m), xadd(r2);\n\n    matrix<ModInt>\
+    \ Yinv; // (r2 * 2) * (r2 * 2) matrix\n    int rankY = -1;\n    while (rankY <\
+    \ r2 * 2) {\n        Yinv = matrix<ModInt>(r2 * 2, r2 * 2);\n\n        auto add_i\
+    \ = [&](int i) {\n            x[i] = d(mt);\n            const auto &b = bcs[i].first,\
+    \ &c = bcs[i].second;\n            for (int j = 0; j < r2 * 2; j++) {\n      \
+    \          for (int k = 0; k < r2 * 2; k++) Yinv[j][k] += x[i] * (b[j] * c[k]\
+    \ - c[j] * b[k]);\n            }\n        };\n        for (int i = 0; i < m; ++i)\
+    \ add_i(i);\n\n        int num_add_vec = (r2 * 2 - Yinv.rank()) / 2;\n\n     \
+    \   bcs.resize(m + num_add_vec,\n                   std::make_pair(std::vector<ModInt>(r2\
+    \ * 2), std::vector<ModInt>(r2 * 2)));\n        x.resize(bcs.size());\n      \
+    \  for (int i = m; i < int(bcs.size()); ++i) {\n            for (auto &x : bcs[i].first)\
+    \ x = d(mt);\n            for (auto &x : bcs[i].second) x = d(mt);\n        }\n\
+    \n        for (int i = m; i < int(bcs.size()); i++) add_i(i);\n        rankY =\
+    \ Yinv.inverse();\n    }\n\n    std::vector<bool> ret(bcs.size(), 1);\n\n    auto\
+    \ try_erase_i = [&](int i) {\n        auto b = bcs[i].first, c = bcs[i].second;\n\
+    \        b.resize(r2 * 2, 0), c.resize(r2 * 2, 0);\n        std::vector<ModInt>\
+    \ Yib = Yinv * b, Yic = Yinv * c;\n        ModInt bYic = std::inner_product(b.begin(),\
+    \ b.end(), Yic.begin(), ModInt());\n        ModInt a00 = bYic * x[i] + 1;\n  \
+    \      if (a00 == ModInt()) return;\n        ret[i] = 0;\n        const ModInt\
+    \ f = x[i] / a00;\n        for (int j = 0; j < r2 * 2; ++j) {\n            for\
+    \ (int k = 0; k < r2 * 2; ++k) {\n                Yinv[j][k] -= f * (Yib[j] *\
+    \ Yic[k] - Yic[j] * Yib[k]);\n            }\n        }\n    };\n\n    for (int\
+    \ i = m; i < int(bcs.size()); ++i) try_erase_i(i);\n    for (int i = 0; i < m;\
+    \ i++) try_erase_i(i);\n    ret.resize(m);\n    return ret;\n}\n\n// Solve linear\
+    \ matroid parity problem, size-only (no construction)\ntemplate <class ModInt>\n\
+    int linear_matroid_parity_size(\n    const std::vector<std::pair<std::vector<ModInt>,\
+    \ std::vector<ModInt>>> &bcs,\n    long long seed = std::chrono::steady_clock::now().time_since_epoch().count())\
+    \ {\n\n    if (bcs.empty()) return 0;\n\n    std::mt19937 mt(seed);\n    std::uniform_int_distribution<int>\
+    \ d(0, ModInt::mod() - 1);\n\n    const int r = bcs[0].first.size();\n    matrix<ModInt>\
+    \ mat(r, r);\n    for (const auto &bc : bcs) {\n        const auto &b = bc.first,\
+    \ &c = bc.second;\n        ModInt x = d(mt);\n        for (int i = 0; i < r; ++i)\
+    \ {\n            for (int j = 0; j < r; ++j) mat[i][j] += x * (b[i] * c[j] - b[j]\
+    \ * c[i]);\n        }\n    }\n    return mat.rank() / 2;\n}\n"
   dependsOn:
-  - linear_algebra_matrix/hessenberg_reduction.hpp
   - linear_algebra_matrix/matrix.hpp
   isVerificationFile: false
-  path: linear_algebra_matrix/characteristic_poly.hpp
+  path: combinatorial_opt/linear_matroid_parity.hpp
   requiredBy: []
   timestamp: '2022-05-01 02:11:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/characteristic_poly.test.cpp
-documentation_of: linear_algebra_matrix/characteristic_poly.hpp
+  - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+  - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+documentation_of: combinatorial_opt/linear_matroid_parity.hpp
 layout: document
-title: "Characteristic polynomial \uFF08\u884C\u5217\u306E\u7279\u6027\u591A\u9805\
-  \u5F0F\uFF09"
+title: "Linear matroid parity (unweighted) \uFF08\u7DDA\u5F62\u30DE\u30C8\u30ED\u30A4\
+  \u30C9\u30D1\u30EA\u30C6\u30A3\uFF09"
 ---
 
-体上の $n$ 次正方行列 $M$ の特性多項式 $p_M(x) = \det (xI - M)$ を $O(n^3)$ で求める決定的アルゴリズム．
+（重みなし）線形マトロイドパリティ問題とは，$M$ 個のベクトルの組 $(\mathbf{b}_i, \mathbf{c}_i)$ $(i = 1, \dots, M)$ が与えられたとき，${1, \dots, M}$ の部分集合 $S$ であって $2 |S|$ 個のベクトル ${\\{b_i\\}}_{i \in S} + {\\{ c_i \\}}_{i \in S}$ が線形独立であるようなもののうち要素数最大のものを求める問題．
 
-## やっていること
+本コードは，線形マトロイドパリティ問題を $O(r^2 (r + m))$ で解く乱択アルゴリズムである．試行一回あたりの失敗確率は $O(r / p)$ （$p$ は有限体の位数）である．
 
-入力として与えられた正方行列 $M$ に (upper) Hessenberg reduction を施した後，これに対して $M$ の首座小行列の特性多項式を再帰的に求めていく（La Budde's method, [1]）．
+## 使用方法
 
-## References
+```cpp
+vector<pair<mint, mint>> vector_pairs;
 
-- [1] R. Rehman, I. C. Ipsen, "La Budde's Method for Computing Characteristic Polynomials," 2011.
+vector<bool> sol_vec = linear_matroid_parity(vector_pairs);
+
+int answer_size = linear_matroid_parity_size(vector_pairs); // Return size only, a bit faster
+```
+
+## 問題例
+
+- [No.1773 Love Triangle - yukicoder](https://yukicoder.me/problems/no/1773)
+
+## 文献・リンク集
+
+- [1] H. Y. Cheung, L. C. Lau, K. M. Leung,
+      "Algebraic Algorithms for Linear Matroid Parity Problems,"
+      ACM Transactions on Algorithms, 10(3), 1-26, 2014.
+- [Matroid parity problem - Wikipedia](https://en.wikipedia.org/wiki/Matroid_parity_problem)

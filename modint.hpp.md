@@ -28,6 +28,12 @@ data:
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+    title: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+    title: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/bitwise_and_conv.test.cpp
     title: convolution/test/bitwise_and_conv.test.cpp
   - icon: ':heavy_check_mark:'
@@ -378,6 +384,8 @@ data:
   - convolution/test/ntt.test.cpp
   - convolution/test/multivar_ntt.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
+  - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+  - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
   - utilities/test/pow.test.cpp
   - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
