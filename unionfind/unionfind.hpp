@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <numeric>
 #include <utility>
 #include <vector>
@@ -18,4 +19,12 @@ struct UnionFind {
     }
     int count(int x) { return cou[find(x)]; }
     bool same(int x, int y) { return find(x) == find(y); }
+    std::vector<std::vector<int>> groups() {
+        std::vector<std::vector<int>> ret(par.size());
+        for (int i = 0; i < int(par.size()); ++i) ret[find(i)].push_back(i);
+        ret.erase(std::remove_if(ret.begin(), ret.end(),
+                                 [&](const std::vector<int> &v) { return v.empty(); }),
+                  ret.end());
+        return ret;
+    }
 };
