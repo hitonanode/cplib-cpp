@@ -15,15 +15,15 @@ int main() {
         graph.add_edge(s, t, d);
     }
 
-    graph.WarshallFloyd();
+    auto dist2d = graph.WarshallFloyd();
     for (int i = 0; i < V; i++) {
-        if (graph.dist2d[i][i] < 0) {
+        if (dist2d[i][i] < 0) {
             cout << "NEGATIVE CYCLE\n";
             return 0;
         }
     }
 
-    for (auto vec : graph.dist2d) {
+    for (auto vec : dist2d) {
         for (int i = 0; i < V; i++)
             cout << (vec[i] < INF ? to_string(vec[i]) : "INF") << (i + 1 == V ? '\n' : ' ');
     }

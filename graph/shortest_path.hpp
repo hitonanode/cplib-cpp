@@ -7,26 +7,46 @@
 #include <limits>
 #include <queue>
 #include <string>
+#include <tuple>
 #include <utility>
 #include <vector>
 
-// CUT begin
 template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1>
 struct ShortestPath {
     int V, E;
     bool single_positive_weight;
     T wmin, wmax;
-    std::vector<std::vector<std::pair<int, T>>> to;
 
-    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0), wmax(0), to(V) {}
+    std::vector<std::pair<int, T>> tos;
+    std::vector<int> head;
+    std::vector<std::tuple<int, int, T>> edges;
+
+    void build_() {
+        if (int(tos.size()) == E) return;
+        tos.resize(E);
+        head.assign(V + 1, 0);
+        for (const auto &e : edges) ++head[std::get<0>(e) + 1];
+        for (int i = 0; i < V; ++i) head[i + 1] += head[i];
+        auto cur = head;
+        for (const auto &e : edges) {
+            tos[cur[std::get<0>(e)]++] = std::make_pair(std::get<1>(e), std::get<2>(e));
+        }
+    }
+
+    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0), wmax(0) {}
     void add_edge(int s, int t, T w) {
         assert(0 <= s and s < V);
         assert(0 <= t and t < V);
-        to[s].emplace_back(t, w);
-        E++;
+        edges.emplace_back(s, t, w);
+        ++E;
         if (w > 0 and wmax > 0 and wmax != w) single_positive_weight = false;
         wmin = std::min(wmin, w);
         wmax = std::max(wmax, w);
+    }
+
+    void add_bi_edge(int u, int v, T w) {
+        add_edge(u, v, w);
+        add_edge(v, u, w);
     }
 
     std::vector<T> dist;
@@ -38,9 +58,10 @@ struct ShortestPath {
                                      std::greater<std::pair<T, int>>>;
     template <class Heap = Pque> void Dijkstra(int s) {
         assert(0 <= s and s < V);
+        build_();
         dist.assign(V, INF);
-        dist[s] = 0;
         prev.assign(V, INVALID);
+        dist[s] = 0;
         Heap pq;
         pq.emplace(0, s);
         while (!pq.empty()) {
@@ -49,7 +70,8 @@ struct ShortestPath {
             std::tie(d, v) = pq.top();
             pq.pop();
             if (dist[v] < d) continue;
-            for (auto nx : to[v]) {
+            for (int e = head[v]; e < head[v + 1]; ++e) {
+                const auto &nx = tos[e];
                 T dnx = d + nx.second;
                 if (dist[nx.first] > dnx) {
                     dist[nx.first] = dnx, prev[nx.first] = v;
@@ -62,9 +84,10 @@ struct ShortestPath {
     // Dijkstra algorithm, O(V^2 + E)
     void DijkstraVquad(int s) {
         assert(0 <= s and s < V);
+        build_();
         dist.assign(V, INF);
-        dist[s] = 0;
         prev.assign(V, INVALID);
+        dist[s] = 0;
         std::vector<char> fixed(V, false);
         while (true) {
             int r = INVALID;
@@ -76,8 +99,8 @@ struct ShortestPath {
             fixed[r] = true;
             int nxt;
             T dx;
-            for (auto p : to[r]) {
-                std::tie(nxt, dx) = p;
+            for (int e = head[r]; e < head[r + 1]; ++e) {
+                std::tie(nxt, dx) = tos[e];
                 if (dist[nxt] > dist[r] + dx) dist[nxt] = dist[r] + dx, prev[nxt] = r;
             }
         }
@@ -87,13 +110,15 @@ struct ShortestPath {
     // Complexity: O(VE)
     bool BellmanFord(int s, int nb_loop) {
         assert(0 <= s and s < V);
+        build_();
         dist.assign(V, INF), prev.assign(V, INVALID);
         dist[s] = 0;
         for (int l = 0; l < nb_loop; l++) {
             bool upd = false;
             for (int v = 0; v < V; v++) {
                 if (dist[v] == INF) continue;
-                for (auto nx : to[v]) {
+                for (int e = head[v]; e < head[v + 1]; ++e) {
+                    const auto &nx = tos[e];
                     T dnx = dist[v] + nx.second;
                     if (dist[nx.first] > dnx) dist[nx.first] = dnx, prev[nx.first] = v, upd = true;
                 }
@@ -108,16 +133,18 @@ struct ShortestPath {
     // Requirement: no negative loop
     void SPFA(int s) {
         assert(0 <= s and s < V);
+        build_();
         dist.assign(V, INF);
         prev.assign(V, INVALID);
+        dist[s] = 0;
         std::deque<int> q;
         std::vector<char> in_queue(V);
-        dist[s] = 0;
         q.push_back(s), in_queue[s] = 1;
         while (!q.empty()) {
             int now = q.front();
             q.pop_front(), in_queue[now] = 0;
-            for (auto nx : to[now]) {
+            for (int e = head[now]; e < head[now + 1]; ++e) {
+                const auto &nx = tos[e];
                 T dnx = dist[now] + nx.second;
                 int nxt = nx.first;
                 if (dist[nxt] > dnx) {
@@ -137,6 +164,7 @@ struct ShortestPath {
 
     void ZeroOneBFS(int s) {
         assert(0 <= s and s < V);
+        build_();
         dist.assign(V, INF), prev.assign(V, INVALID);
         dist[s] = 0;
         std::deque<int> que;
@@ -144,7 +172,8 @@ struct ShortestPath {
         while (!que.empty()) {
             int v = que.front();
             que.pop_front();
-            for (auto nx : to[v]) {
+            for (int e = head[v]; e < head[v + 1]; ++e) {
+                const auto &nx = tos[e];
                 T dnx = dist[v] + nx.second;
                 if (dist[nx.first] > dnx) {
                     dist[nx.first] = dnx, prev[nx.first] = v;
@@ -160,24 +189,27 @@ struct ShortestPath {
 
     bool dag_solver(int s) {
         assert(0 <= s and s < V);
+        build_();
+        dist.assign(V, INF), prev.assign(V, INVALID);
+        dist[s] = 0;
         std::vector<int> indeg(V, 0);
         std::queue<int> que;
         que.push(s);
         while (que.size()) {
             int now = que.front();
             que.pop();
-            for (auto nx : to[now]) {
+            for (int e = head[now]; e < head[now + 1]; ++e) {
+                const auto &nx = tos[e];
                 indeg[nx.first]++;
                 if (indeg[nx.first] == 1) que.push(nx.first);
             }
         }
-        dist.assign(V, INF), prev.assign(V, INVALID);
-        dist[s] = 0;
         que.push(s);
         while (que.size()) {
             int now = que.front();
             que.pop();
-            for (auto nx : to[now]) {
+            for (int e = head[now]; e < head[now + 1]; ++e) {
+                const auto &nx = tos[e];
                 indeg[nx.first]--;
                 if (dist[nx.first] > dist[now] + nx.second)
                     dist[nx.first] = dist[now] + nx.second, prev[nx.first] = now;
@@ -220,12 +252,15 @@ struct ShortestPath {
 
     // Warshall-Floyd algorithm
     // Complexity: O(E + V^3)
-    std::vector<std::vector<T>> dist2d;
-    void WarshallFloyd() {
-        dist2d.assign(V, std::vector<T>(V, INF));
+    std::vector<std::vector<T>> WarshallFloyd() {
+        build_();
+        std::vector<std::vector<T>> dist2d(V, std::vector<T>(V, INF));
         for (int i = 0; i < V; i++) {
             dist2d[i][i] = 0;
-            for (auto p : to[i]) dist2d[i][p.first] = std::min(dist2d[i][p.first], p.second);
+            for (const auto &e : edges) {
+                int s = std::get<0>(e), t = std::get<1>(e);
+                dist2d[s][t] = std::min(dist2d[s][t], std::get<2>(e));
+            }
         }
         for (int k = 0; k < V; k++) {
             for (int i = 0; i < V; i++) {
@@ -236,14 +271,17 @@ struct ShortestPath {
                 }
             }
         }
+        return dist2d;
     }
 
     void dump_graphviz(std::string filename = "shortest_path") const {
         std::ofstream ss(filename + ".DOT");
         ss << "digraph{\n";
+        build_();
         for (int i = 0; i < V; i++) {
-            for (const auto &e : to[i])
-                ss << i << "->" << e.first << "[label=" << e.second << "];\n";
+            for (int e = head[i]; e < head[i + 1]; ++e) {
+                ss << i << "->" << tos[e].first << "[label=" << tos[e].second << "];\n";
+            }
         }
         ss << "}\n";
         ss.close();
