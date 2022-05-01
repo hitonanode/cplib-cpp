@@ -13,25 +13,25 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/two_edge_connected_components
+    PROBLEM: https://judge.yosupo.jp/problem/biconnected_components
     links:
-    - https://judge.yosupo.jp/problem/two_edge_connected_components
-  bundledCode: "#line 1 \"graph/test/two-edge-connected-components.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/two_edge_connected_components\"\n\
-    #line 2 \"graph/lowlink.hpp\"\n#include <algorithm>\n#include <cassert>\n#include\
-    \ <queue>\n#include <utility>\n#include <vector>\n\nstruct lowlink {\n    int\
-    \ V; // # of vertices\n    int E; // # of edges\n    int k;\n    std::vector<std::vector<std::pair<int,\
-    \ int>>> to;\n    std::vector<std::pair<int, int>> edges;\n    std::vector<int>\
-    \ root_ids; // DFS forest\u306E\u69CB\u7BC9\u3067\u6839\u306B\u306A\u3063\u305F\
-    \u9802\u70B9\n\n    std::vector<int> is_bridge;       // Whether edge i is bridge\
-    \ or not, size = E\n    std::vector<int> is_articulation; // whether vertex i\
-    \ is articulation point or not, size = V\n\n    // lowlink\n    std::vector<int>\
-    \ order;           // visiting order of DFS tree, size = V\n    std::vector<int>\
-    \ lowlink_;        // size = V\n    std::vector<int> is_dfstree_edge; // size\
-    \ = E\n\n    int tecc_num;             // \u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\
-    \u5206\u6570\n    std::vector<int> tecc_id; // \u5404\u9802\u70B9\u304C\u4F55\u500B\
-    \u76EE\u306E\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u304B\n\n    int tvcc_num;\
-    \             // \u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u6210\u5206\u6570\n    std::vector<int>\
+    - https://judge.yosupo.jp/problem/biconnected_components
+  bundledCode: "#line 1 \"graph/test/biconnected_components.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/biconnected_components\"\n#line 2 \"graph/lowlink.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <queue>\n#include <utility>\n\
+    #include <vector>\n\nstruct lowlink {\n    int V; // # of vertices\n    int E;\
+    \ // # of edges\n    int k;\n    std::vector<std::vector<std::pair<int, int>>>\
+    \ to;\n    std::vector<std::pair<int, int>> edges;\n    std::vector<int> root_ids;\
+    \ // DFS forest\u306E\u69CB\u7BC9\u3067\u6839\u306B\u306A\u3063\u305F\u9802\u70B9\
+    \n\n    std::vector<int> is_bridge;       // Whether edge i is bridge or not,\
+    \ size = E\n    std::vector<int> is_articulation; // whether vertex i is articulation\
+    \ point or not, size = V\n\n    // lowlink\n    std::vector<int> order;      \
+    \     // visiting order of DFS tree, size = V\n    std::vector<int> lowlink_;\
+    \        // size = V\n    std::vector<int> is_dfstree_edge; // size = E\n\n  \
+    \  int tecc_num;             // \u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u6570\
+    \n    std::vector<int> tecc_id; // \u5404\u9802\u70B9\u304C\u4F55\u500B\u76EE\u306E\
+    \u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u304B\n\n    int tvcc_num;        \
+    \     // \u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u6210\u5206\u6570\n    std::vector<int>\
     \ tvcc_id; // \u5404\u8FBA\u304C\u4F55\u500B\u76EE\u306E\u4E8C\u91CD\u9802\u70B9\
     \u9023\u7D50\u6210\u5206\u304B\n\n    lowlink(int V)\n        : V(V), E(0), k(0),\
     \ to(V), is_articulation(V, 0), order(V, -1), lowlink_(V, -1),\n          tecc_num(0),\
@@ -80,36 +80,34 @@ data:
     \    std::vector<std::vector<int>> biconnected_components() {\n        build();\n\
     \        std::vector<std::vector<int>> ret(tvcc_num);\n        for (int i = 0;\
     \ i < E; ++i) ret[tvcc_id[i]].push_back(i);\n        return ret;\n    }\n};\n\
-    #line 3 \"graph/test/two-edge-connected-components.test.cpp\"\n#include <iostream>\n\
-    #line 5 \"graph/test/two-edge-connected-components.test.cpp\"\nusing namespace\
-    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n\
-    \    int V, E;\n    cin >> V >> E;\n    lowlink graph(V);\n    while (E--) {\n\
-    \        int s, t;\n        cin >> s >> t;\n        graph.add_edge(s, t);\n  \
-    \  }\n\n    auto ret = graph.two_edge_connected_components();\n    cout << ret.size()\
+    #line 3 \"graph/test/biconnected_components.test.cpp\"\n#include <iostream>\n\
+    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, M;\n    cin >> N >> M;\n    lowlink graph(N);\n    while (M--) {\n\
+    \        int a, b;\n        cin >> a >> b;\n        graph.add_edge(a, b);\n  \
+    \  }\n\n    auto ret = graph.biconnected_components();\n    cout << ret.size()\
     \ << '\\n';\n    for (const auto &vec : ret) {\n        cout << vec.size();\n\
     \        for (auto x : vec) cout << ' ' << x;\n        cout << '\\n';\n    }\n\
     }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_edge_connected_components\"\
-    \n#include \"../lowlink.hpp\"\n#include <iostream>\n#include <vector>\nusing namespace\
-    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n\
-    \    int V, E;\n    cin >> V >> E;\n    lowlink graph(V);\n    while (E--) {\n\
-    \        int s, t;\n        cin >> s >> t;\n        graph.add_edge(s, t);\n  \
-    \  }\n\n    auto ret = graph.two_edge_connected_components();\n    cout << ret.size()\
-    \ << '\\n';\n    for (const auto &vec : ret) {\n        cout << vec.size();\n\
-    \        for (auto x : vec) cout << ' ' << x;\n        cout << '\\n';\n    }\n\
-    }\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/biconnected_components\"\
+    \n#include \"../lowlink.hpp\"\n#include <iostream>\nusing namespace std;\n\nint\
+    \ main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, M;\n\
+    \    cin >> N >> M;\n    lowlink graph(N);\n    while (M--) {\n        int a,\
+    \ b;\n        cin >> a >> b;\n        graph.add_edge(a, b);\n    }\n\n    auto\
+    \ ret = graph.biconnected_components();\n    cout << ret.size() << '\\n';\n  \
+    \  for (const auto &vec : ret) {\n        cout << vec.size();\n        for (auto\
+    \ x : vec) cout << ' ' << x;\n        cout << '\\n';\n    }\n}\n"
   dependsOn:
   - graph/lowlink.hpp
   isVerificationFile: true
-  path: graph/test/two-edge-connected-components.test.cpp
+  path: graph/test/biconnected_components.test.cpp
   requiredBy: []
   timestamp: '2022-05-01 23:08:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph/test/two-edge-connected-components.test.cpp
+documentation_of: graph/test/biconnected_components.test.cpp
 layout: document
 redirect_from:
-- /verify/graph/test/two-edge-connected-components.test.cpp
-- /verify/graph/test/two-edge-connected-components.test.cpp.html
-title: graph/test/two-edge-connected-components.test.cpp
+- /verify/graph/test/biconnected_components.test.cpp
+- /verify/graph/test/biconnected_components.test.cpp.html
+title: graph/test/biconnected_components.test.cpp
 ---

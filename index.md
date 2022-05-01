@@ -256,7 +256,9 @@ data:
       title: graph/incremental_bridge_connectivity.hpp
     - icon: ':heavy_check_mark:'
       path: graph/lowlink.hpp
-      title: graph/lowlink.hpp
+      title: "Lowlink \uFF08\u7121\u5411\u30B0\u30E9\u30D5\u306E DFS tree, lowlink,\
+        \ \u6A4B\u30FB\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u30FB\u95A2\u7BC0\
+        \u70B9\u30FB\u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u6210\u5206\uFF09"
     - icon: ':heavy_check_mark:'
       path: graph/manhattan_mst.hpp
       title: "Manhattan MST \uFF08\u4E8C\u6B21\u5143\u5E73\u9762\u4E0A\u306E\u9802\
@@ -969,6 +971,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/bellman_ford.test.cpp
       title: graph/test/bellman_ford.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/biconnected_components.test.cpp
+      title: graph/test/biconnected_components.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/bipartite_matching(slow).test.cpp
       title: graph/test/bipartite_matching(slow).test.cpp
