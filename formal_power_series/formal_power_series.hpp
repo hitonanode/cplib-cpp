@@ -3,13 +3,11 @@
 #include <algorithm>
 #include <cassert>
 #include <vector>
-using namespace std;
 
-// CUT begin
 // Formal Power Series (形式的冪級数) based on ModInt<mod> / ModIntRuntime
 // Reference: https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html
-template <typename T> struct FormalPowerSeries : vector<T> {
-    using vector<T>::vector;
+template <typename T> struct FormalPowerSeries : std::vector<T> {
+    using std::vector<T>::vector;
     using P = FormalPowerSeries;
 
     void shrink() {
@@ -88,7 +86,7 @@ template <typename T> struct FormalPowerSeries : vector<T> {
         return *this = (reversed().pre(n) * r.reversed().inv(n)).pre(n).reversed(n);
     }
     P pre(int sz) const {
-        P ret(this->begin(), this->begin() + min((int)this->size(), sz));
+        P ret(this->begin(), this->begin() + std::min((int)this->size(), sz));
         ret.shrink();
         return ret;
     }
@@ -114,7 +112,7 @@ template <typename T> struct FormalPowerSeries : vector<T> {
 
     P differential() const { // formal derivative (differential) of f.p.s.
         const int n = (int)this->size();
-        P ret(max(0, n - 1));
+        P ret(std::max(0, n - 1));
         for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * T(i);
         return ret;
     }
@@ -168,7 +166,7 @@ template <typename T> struct FormalPowerSeries : vector<T> {
 
         P y = (*this) / (*this)[0], ret({T(1)});
         T inv2 = T(1) / T(2);
-        for (int i = 1; i < deg; i <<= 1) { ret = (ret + y.pre(i << 1) * ret.inv(i << 1)) * inv2; }
+        for (int i = 1; i < deg; i <<= 1) ret = (ret + y.pre(i << 1) * ret.inv(i << 1)) * inv2;
         return ret.pre(deg) * sqrtf0;
     }
 
@@ -209,13 +207,13 @@ template <typename T> struct FormalPowerSeries : vector<T> {
     P shift(T c) const {
         const int n = (int)this->size();
         P ret = *this;
-        for (int i = 0; i < n; i++) { ret[i] *= T(i).fac(); }
-        reverse(ret.begin(), ret.end());
+        for (int i = 0; i < n; i++) ret[i] *= T(i).fac();
+        std::reverse(ret.begin(), ret.end());
         P exp_cx(n, 1);
-        for (int i = 1; i < n; i++) { exp_cx[i] = exp_cx[i - 1] * c / i; }
+        for (int i = 1; i < n; i++) exp_cx[i] = exp_cx[i - 1] * c / i;
         ret = (ret * exp_cx), ret.resize(n);
-        reverse(ret.begin(), ret.end());
-        for (int i = 0; i < n; i++) { ret[i] /= T(i).fac(); }
+        std::reverse(ret.begin(), ret.end());
+        for (int i = 0; i < n; i++) ret[i] /= T(i).fac();
         return ret;
     }
 

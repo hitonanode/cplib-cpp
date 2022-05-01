@@ -1,11 +1,9 @@
 #pragma once
 #include <chrono>
 #include <cstdlib>
-using namespace std;
 
-// CUT begin
 struct custom_hash {
-    // <https://codeforces.com/blog/entry/62393>
+    // https://codeforces.com/blog/entry/62393
     static uint64_t splitmix64(uint64_t x) {
         // http://xorshift.di.unimi.it/splitmix64.c
         x += 0x9e3779b97f4a7c15;
@@ -23,7 +21,7 @@ struct custom_hash {
 
 // Usage
 #include <unordered_map>
-unordered_map<int, int, custom_hash> robust_unordered_map;
+std::unordered_map<int, int, custom_hash> robust_unordered_map;
 
 #include <ext/pb_ds/assoc_container.hpp>
 using namespace __gnu_pbds;

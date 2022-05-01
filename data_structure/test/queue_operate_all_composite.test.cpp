@@ -2,9 +2,12 @@
 #include "../sliding_window_aggregation.hpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 #include <iostream>
+using namespace std;
 
 using mint = ModInt<998244353>;
+
 int main() {
+    cin.tie(nullptr), ios::sync_with_stdio(false);
     LinearFunctionQueue<mint> swag;
     int Q;
     cin >> Q;
@@ -21,7 +24,7 @@ int main() {
             mint x;
             cin >> x;
             pair<mint, mint> f = swag.fold_all();
-            printf("%d\n", (f.first * x + f.second).val);
+            cout << (f.first * x + f.second).val << '\n';
         }
     }
 }
