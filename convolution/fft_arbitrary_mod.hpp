@@ -2,12 +2,11 @@
 #include <cassert>
 #include <cmath>
 #include <vector>
-using namespace std;
 
-// CUT begin
 // Arbitrary mod (<1e9) FFT/convolution
 // MAXA*MAXB*N <= 1e15 (double), 1e19 (long double)
 // Based on https://ei1333.github.io/luzhiled/snippets/math/arbitrary-mod-convolution.html
+namespace fft_arbitrary_mod {
 using T_FFT = long double;
 constexpr int D_FFT = 15;
 struct cmplx {
@@ -22,8 +21,8 @@ struct cmplx {
     inline cmplx conj() const { return cmplx(x, -y); }
 };
 int fftbase = 1;
-vector<cmplx> fftrts = {{0, 0}, {1, 0}};
-vector<int> fftrev = {0, 1};
+std::vector<cmplx> fftrts = {{0, 0}, {1, 0}};
+std::vector<int> fftrev = {0, 1};
 void ensure_base(int nbase) {
     if (nbase <= fftbase) return;
     fftrev.resize(1 << nbase);
@@ -41,13 +40,13 @@ void ensure_base(int nbase) {
         ++fftbase;
     }
 }
-void fft(int n, vector<cmplx> &a) {
+void fft(int n, std::vector<cmplx> &a) {
     assert((n & (n - 1)) == 0);
     int zeros = __builtin_ctz(n);
     ensure_base(zeros);
     int shift = fftbase - zeros;
     for (int i = 0; i < n; i++) {
-        if (i < (fftrev[i] >> shift)) { swap(a[i], a[fftrev[i] >> shift]); }
+        if (i < (fftrev[i] >> shift)) { std::swap(a[i], a[fftrev[i] >> shift]); }
     }
     for (int k = 1; k < n; k <<= 1) {
         for (int i = 0; i < n; i += 2 * k) {
@@ -62,16 +61,17 @@ void fft(int n, vector<cmplx> &a) {
 
 // Convolution for ModInt class
 // retval[i] = \sum_j a[j] b[i - j]
-template <typename MODINT> vector<MODINT> convolution_mod(vector<MODINT> a, vector<MODINT> b) {
+template <typename MODINT>
+std::vector<MODINT> convolution_mod(std::vector<MODINT> a, std::vector<MODINT> b) {
     int need = int(a.size() + b.size()) - 1;
     int nbase = 0;
     while ((1 << nbase) < need) nbase++;
     int sz = 1 << nbase;
-    vector<cmplx> fa(sz);
+    std::vector<cmplx> fa(sz);
     for (int i = 0; i < (int)a.size(); i++)
         fa[i] = {(T_FFT)(a[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val >> D_FFT)};
     fft(sz, fa);
-    vector<cmplx> fb(sz);
+    std::vector<cmplx> fb(sz);
     if (a == b)
         fb = fa;
     else {
@@ -100,7 +100,7 @@ template <typename MODINT> vector<MODINT> convolution_mod(vector<MODINT> a, vect
     }
     fft(sz, fa);
     fft(sz, fb);
-    vector<MODINT> ret(sz);
+    std::vector<MODINT> ret(sz);
     long long bp = MODINT(2).pow(D_FFT).val;
     long long cp = MODINT(2).pow(D_FFT * 2).val;
     for (int i = 0; i < need; i++) {
@@ -113,3 +113,5 @@ template <typename MODINT> vector<MODINT> convolution_mod(vector<MODINT> a, vect
     }
     return ret;
 }
+
+} // namespace fft_arbitrary_mod
