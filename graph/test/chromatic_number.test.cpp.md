@@ -153,10 +153,10 @@ data:
     \            x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return\
     \ ModIntRuntime(std::min(x.val, md - x.val));\n    }\n};\nint ModIntRuntime::md\
     \ = 1;\n#line 2 \"random/rand_nondeterministic.hpp\"\n#include <chrono>\n#include\
-    \ <random>\nusing namespace std;\n\n// CUT begin\nstruct rand_int_ {\n    using\
-    \ lint = long long;\n    mt19937 mt;\n    rand_int_() : mt(chrono::steady_clock::now().time_since_epoch().count())\
+    \ <random>\n\nstruct rand_int_ {\n    using lint = long long;\n    std::mt19937\
+    \ mt;\n    rand_int_() : mt(std::chrono::steady_clock::now().time_since_epoch().count())\
     \ {}\n    lint operator()(lint x) { return this->operator()(0, x); } // [0, x)\n\
-    \    lint operator()(lint l, lint r) {\n        uniform_int_distribution<lint>\
+    \    lint operator()(lint l, lint r) {\n        std::uniform_int_distribution<lint>\
     \ d(l, r - 1);\n        return d(mt);\n    }\n} rnd;\n#line 6 \"graph/test/chromatic_number.test.cpp\"\
     \n\n#line 9 \"graph/test/chromatic_number.test.cpp\"\nusing namespace std;\n\n\
     int main() {\n    int N, M;\n    cin >> N >> M;\n    vector<int> to(N);\n\n  \
@@ -183,7 +183,7 @@ data:
   isVerificationFile: true
   path: graph/test/chromatic_number.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-05-01 12:00:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/chromatic_number.test.cpp

@@ -12,22 +12,21 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"random/rand_nondeterministic.hpp\"\n#include <chrono>\n\
-    #include <random>\nusing namespace std;\n\n// CUT begin\nstruct rand_int_ {\n\
-    \    using lint = long long;\n    mt19937 mt;\n    rand_int_() : mt(chrono::steady_clock::now().time_since_epoch().count())\
+    #include <random>\n\nstruct rand_int_ {\n    using lint = long long;\n    std::mt19937\
+    \ mt;\n    rand_int_() : mt(std::chrono::steady_clock::now().time_since_epoch().count())\
     \ {}\n    lint operator()(lint x) { return this->operator()(0, x); } // [0, x)\n\
-    \    lint operator()(lint l, lint r) {\n        uniform_int_distribution<lint>\
+    \    lint operator()(lint l, lint r) {\n        std::uniform_int_distribution<lint>\
     \ d(l, r - 1);\n        return d(mt);\n    }\n} rnd;\n"
-  code: "#pragma once\n#include <chrono>\n#include <random>\nusing namespace std;\n\
-    \n// CUT begin\nstruct rand_int_ {\n    using lint = long long;\n    mt19937 mt;\n\
-    \    rand_int_() : mt(chrono::steady_clock::now().time_since_epoch().count())\
+  code: "#pragma once\n#include <chrono>\n#include <random>\n\nstruct rand_int_ {\n\
+    \    using lint = long long;\n    std::mt19937 mt;\n    rand_int_() : mt(std::chrono::steady_clock::now().time_since_epoch().count())\
     \ {}\n    lint operator()(lint x) { return this->operator()(0, x); } // [0, x)\n\
-    \    lint operator()(lint l, lint r) {\n        uniform_int_distribution<lint>\
+    \    lint operator()(lint l, lint r) {\n        std::uniform_int_distribution<lint>\
     \ d(l, r - 1);\n        return d(mt);\n    }\n} rnd;\n"
   dependsOn: []
   isVerificationFile: false
   path: random/rand_nondeterministic.hpp
   requiredBy: []
-  timestamp: '2020-11-18 20:25:12+09:00'
+  timestamp: '2022-05-01 12:00:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/chromatic_number.test.cpp

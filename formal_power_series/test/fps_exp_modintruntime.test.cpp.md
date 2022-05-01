@@ -148,10 +148,10 @@ data:
     \            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);\n\
     \    }\n    return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
     \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
-    \ b, false);\n}\n#line 6 \"formal_power_series/formal_power_series.hpp\"\nusing\
-    \ namespace std;\n\n// CUT begin\n// Formal Power Series (\u5F62\u5F0F\u7684\u51AA\
-    \u7D1A\u6570) based on ModInt<mod> / ModIntRuntime\n// Reference: https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html\n\
-    template <typename T> struct FormalPowerSeries : vector<T> {\n    using vector<T>::vector;\n\
+    \ b, false);\n}\n#line 6 \"formal_power_series/formal_power_series.hpp\"\n\n//\
+    \ Formal Power Series (\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570) based on ModInt<mod>\
+    \ / ModIntRuntime\n// Reference: https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html\n\
+    template <typename T> struct FormalPowerSeries : std::vector<T> {\n    using std::vector<T>::vector;\n\
     \    using P = FormalPowerSeries;\n\n    void shrink() {\n        while (this->size()\
     \ and this->back() == T(0)) this->pop_back();\n    }\n\n    P operator+(const\
     \ P &r) const { return P(*this) += r; }\n    P operator+(const T &v) const { return\
@@ -183,8 +183,8 @@ data:
     \ {\n            this->clear();\n            return *this;\n        }\n      \
     \  int n = (int)this->size() - r.size() + 1;\n        return *this = (reversed().pre(n)\
     \ * r.reversed().inv(n)).pre(n).reversed(n);\n    }\n    P pre(int sz) const {\n\
-    \        P ret(this->begin(), this->begin() + min((int)this->size(), sz));\n \
-    \       ret.shrink();\n        return ret;\n    }\n    P operator>>(int sz) const\
+    \        P ret(this->begin(), this->begin() + std::min((int)this->size(), sz));\n\
+    \        ret.shrink();\n        return ret;\n    }\n    P operator>>(int sz) const\
     \ {\n        if ((int)this->size() <= sz) return {};\n        return P(this->begin()\
     \ + sz, this->end());\n    }\n    P operator<<(int sz) const {\n        if (this->empty())\
     \ return {};\n        P ret(*this);\n        ret.insert(ret.begin(), sz, T(0));\n\
@@ -192,8 +192,8 @@ data:
     \ >= -1);\n        P ret(*this);\n        if (deg != -1) ret.resize(deg, T(0));\n\
     \        reverse(ret.begin(), ret.end());\n        ret.shrink();\n        return\
     \ ret;\n    }\n\n    P differential() const { // formal derivative (differential)\
-    \ of f.p.s.\n        const int n = (int)this->size();\n        P ret(max(0, n\
-    \ - 1));\n        for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * T(i);\n\
+    \ of f.p.s.\n        const int n = (int)this->size();\n        P ret(std::max(0,\
+    \ n - 1));\n        for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * T(i);\n\
     \        return ret;\n    }\n\n    P integral() const {\n        const int n =\
     \ (int)this->size();\n        P ret(n + 1);\n        ret[0] = T(0);\n        for\
     \ (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / T(i + 1);\n        return\
@@ -216,66 +216,65 @@ data:
     \          }\n            return {};\n        }\n        T sqrtf0 = (*this)[0].sqrt();\n\
     \        if (sqrtf0 == T(0)) return {};\n\n        P y = (*this) / (*this)[0],\
     \ ret({T(1)});\n        T inv2 = T(1) / T(2);\n        for (int i = 1; i < deg;\
-    \ i <<= 1) { ret = (ret + y.pre(i << 1) * ret.inv(i << 1)) * inv2; }\n       \
-    \ return ret.pre(deg) * sqrtf0;\n    }\n\n    P exp(int deg = -1) const {\n  \
-    \      assert(deg >= -1);\n        assert(this->empty() or ((*this)[0]) == T(0));\
-    \ // Requirement: F(0) = 0\n        const int n = (int)this->size();\n       \
-    \ if (deg == -1) deg = n;\n        P ret({T(1)});\n        for (int i = 1; i <\
-    \ deg; i <<= 1) {\n            ret = (ret * (pre(i << 1) + T(1) - ret.log(i <<\
-    \ 1))).pre(i << 1);\n        }\n        return ret.pre(deg);\n    }\n\n    P pow(long\
-    \ long k, int deg = -1) const {\n        assert(deg >= -1);\n        const int\
-    \ n = (int)this->size();\n        if (deg == -1) deg = n;\n        for (int i\
-    \ = 0; i < n; i++) {\n            if ((*this)[i] != T(0)) {\n                T\
-    \ rev = T(1) / (*this)[i];\n                P C = (*this) * rev, D(n - i);\n \
-    \               for (int j = i; j < n; j++) D[j - i] = C.coeff(j);\n         \
-    \       D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].pow(k);\n              \
-    \  if (k * (i > 0) > deg or k * i > deg) return {};\n                P E(deg);\n\
-    \                long long S = i * k;\n                for (int j = 0; j + S <\
-    \ deg and j < (int)D.size(); j++) E[j + S] = D[j];\n                E.shrink();\n\
-    \                return E;\n            }\n        }\n        return *this;\n\
-    \    }\n\n    // Calculate f(X + c) from f(X), O(NlogN)\n    P shift(T c) const\
-    \ {\n        const int n = (int)this->size();\n        P ret = *this;\n      \
-    \  for (int i = 0; i < n; i++) { ret[i] *= T(i).fac(); }\n        reverse(ret.begin(),\
-    \ ret.end());\n        P exp_cx(n, 1);\n        for (int i = 1; i < n; i++) {\
-    \ exp_cx[i] = exp_cx[i - 1] * c / i; }\n        ret = (ret * exp_cx), ret.resize(n);\n\
-    \        reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n; i++)\
-    \ { ret[i] /= T(i).fac(); }\n        return ret;\n    }\n\n    T coeff(int i)\
-    \ const {\n        if ((int)this->size() <= i or i < 0) return T(0);\n       \
-    \ return (*this)[i];\n    }\n\n    T eval(T x) const {\n        T ret = 0, w =\
-    \ 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n        return ret;\n\
-    \    }\n};\n#line 5 \"number/modint_runtime.hpp\"\n\n// CUT begin\nstruct ModIntRuntime\
-    \ {\nprivate:\n    static int md;\n\npublic:\n    using lint = long long;\n  \
-    \  static int mod() { return md; }\n    int val;\n    static std::vector<ModIntRuntime>\
-    \ &facs() {\n        static std::vector<ModIntRuntime> facs_;\n        return\
-    \ facs_;\n    }\n    static int &get_primitive_root() {\n        static int primitive_root_\
-    \ = 0;\n        if (!primitive_root_) {\n            primitive_root_ = [&]() {\n\
-    \                std::set<int> fac;\n                int v = md - 1;\n       \
-    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
-    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
-    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
-    \                    for (auto i : fac)\n                        if (ModIntRuntime(g).power((md\
-    \ - 1) / i) == 1) {\n                            ok = false;\n               \
-    \             break;\n                        }\n                    if (ok) return\
-    \ g;\n                }\n                return -1;\n            }();\n      \
-    \  }\n        return primitive_root_;\n    }\n    static void set_mod(const int\
-    \ &m) {\n        if (md != m) facs().clear();\n        md = m;\n        get_primitive_root()\
-    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        val = (v >= md ?\
-    \ v - md : v);\n        return *this;\n    }\n    ModIntRuntime() : val(0) {}\n\
-    \    ModIntRuntime(lint v) { _setval(v % md + md); }\n    explicit operator bool()\
-    \ const { return val != 0; }\n    ModIntRuntime operator+(const ModIntRuntime\
-    \ &x) const {\n        return ModIntRuntime()._setval((lint)val + x.val);\n  \
-    \  }\n    ModIntRuntime operator-(const ModIntRuntime &x) const {\n        return\
-    \ ModIntRuntime()._setval((lint)val - x.val + md);\n    }\n    ModIntRuntime operator*(const\
-    \ ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val\
-    \ * x.val % md);\n    }\n    ModIntRuntime operator/(const ModIntRuntime &x) const\
-    \ {\n        return ModIntRuntime()._setval((lint)val * x.inv() % md);\n    }\n\
-    \    ModIntRuntime operator-() const { return ModIntRuntime()._setval(md - val);\
-    \ }\n    ModIntRuntime &operator+=(const ModIntRuntime &x) { return *this = *this\
-    \ + x; }\n    ModIntRuntime &operator-=(const ModIntRuntime &x) { return *this\
-    \ = *this - x; }\n    ModIntRuntime &operator*=(const ModIntRuntime &x) { return\
-    \ *this = *this * x; }\n    ModIntRuntime &operator/=(const ModIntRuntime &x)\
-    \ { return *this = *this / x; }\n    friend ModIntRuntime operator+(lint a, const\
-    \ ModIntRuntime &x) {\n        return ModIntRuntime()._setval(a % md + x.val);\n\
+    \ i <<= 1) ret = (ret + y.pre(i << 1) * ret.inv(i << 1)) * inv2;\n        return\
+    \ ret.pre(deg) * sqrtf0;\n    }\n\n    P exp(int deg = -1) const {\n        assert(deg\
+    \ >= -1);\n        assert(this->empty() or ((*this)[0]) == T(0)); // Requirement:\
+    \ F(0) = 0\n        const int n = (int)this->size();\n        if (deg == -1) deg\
+    \ = n;\n        P ret({T(1)});\n        for (int i = 1; i < deg; i <<= 1) {\n\
+    \            ret = (ret * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1);\n\
+    \        }\n        return ret.pre(deg);\n    }\n\n    P pow(long long k, int\
+    \ deg = -1) const {\n        assert(deg >= -1);\n        const int n = (int)this->size();\n\
+    \        if (deg == -1) deg = n;\n        for (int i = 0; i < n; i++) {\n    \
+    \        if ((*this)[i] != T(0)) {\n                T rev = T(1) / (*this)[i];\n\
+    \                P C = (*this) * rev, D(n - i);\n                for (int j =\
+    \ i; j < n; j++) D[j - i] = C.coeff(j);\n                D = (D.log(deg) * T(k)).exp(deg)\
+    \ * (*this)[i].pow(k);\n                if (k * (i > 0) > deg or k * i > deg)\
+    \ return {};\n                P E(deg);\n                long long S = i * k;\n\
+    \                for (int j = 0; j + S < deg and j < (int)D.size(); j++) E[j +\
+    \ S] = D[j];\n                E.shrink();\n                return E;\n       \
+    \     }\n        }\n        return *this;\n    }\n\n    // Calculate f(X + c)\
+    \ from f(X), O(NlogN)\n    P shift(T c) const {\n        const int n = (int)this->size();\n\
+    \        P ret = *this;\n        for (int i = 0; i < n; i++) ret[i] *= T(i).fac();\n\
+    \        std::reverse(ret.begin(), ret.end());\n        P exp_cx(n, 1);\n    \
+    \    for (int i = 1; i < n; i++) exp_cx[i] = exp_cx[i - 1] * c / i;\n        ret\
+    \ = (ret * exp_cx), ret.resize(n);\n        std::reverse(ret.begin(), ret.end());\n\
+    \        for (int i = 0; i < n; i++) ret[i] /= T(i).fac();\n        return ret;\n\
+    \    }\n\n    T coeff(int i) const {\n        if ((int)this->size() <= i or i\
+    \ < 0) return T(0);\n        return (*this)[i];\n    }\n\n    T eval(T x) const\
+    \ {\n        T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w\
+    \ *= x;\n        return ret;\n    }\n};\n#line 5 \"number/modint_runtime.hpp\"\
+    \n\n// CUT begin\nstruct ModIntRuntime {\nprivate:\n    static int md;\n\npublic:\n\
+    \    using lint = long long;\n    static int mod() { return md; }\n    int val;\n\
+    \    static std::vector<ModIntRuntime> &facs() {\n        static std::vector<ModIntRuntime>\
+    \ facs_;\n        return facs_;\n    }\n    static int &get_primitive_root() {\n\
+    \        static int primitive_root_ = 0;\n        if (!primitive_root_) {\n  \
+    \          primitive_root_ = [&]() {\n                std::set<int> fac;\n   \
+    \             int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
+    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
+    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
+    \                    bool ok = true;\n                    for (auto i : fac)\n\
+    \                        if (ModIntRuntime(g).power((md - 1) / i) == 1) {\n  \
+    \                          ok = false;\n                            break;\n \
+    \                       }\n                    if (ok) return g;\n           \
+    \     }\n                return -1;\n            }();\n        }\n        return\
+    \ primitive_root_;\n    }\n    static void set_mod(const int &m) {\n        if\
+    \ (md != m) facs().clear();\n        md = m;\n        get_primitive_root() = 0;\n\
+    \    }\n    ModIntRuntime &_setval(lint v) {\n        val = (v >= md ? v - md\
+    \ : v);\n        return *this;\n    }\n    ModIntRuntime() : val(0) {}\n    ModIntRuntime(lint\
+    \ v) { _setval(v % md + md); }\n    explicit operator bool() const { return val\
+    \ != 0; }\n    ModIntRuntime operator+(const ModIntRuntime &x) const {\n     \
+    \   return ModIntRuntime()._setval((lint)val + x.val);\n    }\n    ModIntRuntime\
+    \ operator-(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val\
+    \ - x.val + md);\n    }\n    ModIntRuntime operator*(const ModIntRuntime &x) const\
+    \ {\n        return ModIntRuntime()._setval((lint)val * x.val % md);\n    }\n\
+    \    ModIntRuntime operator/(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val\
+    \ * x.inv() % md);\n    }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(md\
+    \ - val); }\n    ModIntRuntime &operator+=(const ModIntRuntime &x) { return *this\
+    \ = *this + x; }\n    ModIntRuntime &operator-=(const ModIntRuntime &x) { return\
+    \ *this = *this - x; }\n    ModIntRuntime &operator*=(const ModIntRuntime &x)\
+    \ { return *this = *this * x; }\n    ModIntRuntime &operator/=(const ModIntRuntime\
+    \ &x) { return *this = *this / x; }\n    friend ModIntRuntime operator+(lint a,\
+    \ const ModIntRuntime &x) {\n        return ModIntRuntime()._setval(a % md + x.val);\n\
     \    }\n    friend ModIntRuntime operator-(lint a, const ModIntRuntime &x) {\n\
     \        return ModIntRuntime()._setval(a % md - x.val + md);\n    }\n    friend\
     \ ModIntRuntime operator*(lint a, const ModIntRuntime &x) {\n        return ModIntRuntime()._setval(a\

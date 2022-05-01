@@ -95,63 +95,64 @@ data:
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
     \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"data_structure/sliding_window_aggregation.hpp\"\
-    \n#include <stack>\n#include <utility>\nusing namespace std;\n\n// CUT begin\n\
-    // Sliding-Window Aggregation based queue\n// - `std::queue`-like data structure\
+    \n#include <stack>\n#include <utility>\n#line 5 \"data_structure/sliding_window_aggregation.hpp\"\
+    \n\n// Sliding-Window Aggregation based queue\n// - `std::queue`-like data structure\
     \ with monoid operation\n// - Each operation is amortized O(1)\n// - Verification:\n\
-    // <https://www.hackerrank.com/contests/tsg-live-4-programming-contest/challenges/tsg-live-4-procon-lcm-interval/submissions/code/1317888077>\n\
-    // - Reference:\n// <https://github.com/NiMiLib/NoshiMochiLibrary/blob/queue_aggregation/lib/data_structure/sequence/queue_aggregation.hpp>\n\
-    template <typename T_VAL, typename T_PROD, T_PROD (*val2prod)(T_VAL), T_PROD (*merge)(T_PROD,\
-    \ T_PROD)>\nstruct SlidingWindowAggregation {\n    std::stack<std::pair<T_VAL,\
-    \ T_PROD>> front_stack, back_stack;\n    T_PROD ID_;\n\n    SlidingWindowAggregation(T_PROD\
+    // https://www.hackerrank.com/contests/tsg-live-4-programming-contest/challenges/tsg-live-4-procon-lcm-interval/submissions/code/1317888077\n\
+    // - Reference:\n// https://github.com/NiMiLib/NoshiMochiLibrary/blob/queue_aggregation/lib/data_structure/sequence/queue_aggregation.hpp\n\
+    template <typename T_VAL, typename T_PROD, T_PROD (*val2prod)(T_VAL), T_PROD (*op)(T_PROD,\
+    \ T_PROD)>\nstruct swag_queue {\n    std::stack<std::pair<T_VAL, T_PROD>, std::vector<std::pair<T_VAL,\
+    \ T_PROD>>> front_stack,\n        back_stack;\n    T_PROD ID_;\n\n    swag_queue(T_PROD\
     \ id_prod) : ID_(id_prod) {}\n    bool empty() const { return front_stack.empty()\
     \ and back_stack.empty(); }\n    int size() const { return front_stack.size()\
     \ + back_stack.size(); }\n    T_PROD fold_all() const {\n        if (empty())\n\
     \            return ID_;\n        else if (front_stack.empty())\n            return\
     \ back_stack.top().second;\n        else if (back_stack.empty())\n           \
-    \ return front_stack.top().second;\n        else\n            return merge(front_stack.top().second,\
+    \ return front_stack.top().second;\n        else\n            return op(front_stack.top().second,\
     \ back_stack.top().second);\n    }\n    void push(const T_VAL &x) {\n        if\
     \ (back_stack.empty())\n            back_stack.emplace(x, val2prod(x));\n    \
-    \    else\n            back_stack.emplace(x, merge(back_stack.top().second, val2prod(x)));\n\
+    \    else\n            back_stack.emplace(x, op(back_stack.top().second, val2prod(x)));\n\
     \    }\n    T_VAL pop() {\n        if (front_stack.empty()) {\n            front_stack.emplace(back_stack.top().first,\
     \ val2prod(back_stack.top().first));\n            back_stack.pop();\n        \
     \    while (!back_stack.empty()) {\n                T_VAL t = back_stack.top().first;\n\
-    \                front_stack.emplace(t, merge(val2prod(t), front_stack.top().second));\n\
+    \                front_stack.emplace(t, op(val2prod(t), front_stack.top().second));\n\
     \                back_stack.pop();\n            }\n        }\n        T_VAL t\
     \ = front_stack.top().first;\n        front_stack.pop();\n        return t;\n\
     \    }\n};\n\ntemplate <typename T> T swag_op_id(T x) { return x; };\ntemplate\
-    \ <typename T> T swag_op_linear_merge(T l, T r) {\n    return make_pair(l.first\
+    \ <typename T> T swag_op_linear_merge(T l, T r) {\n    return std::make_pair(l.first\
     \ * r.first, l.second * r.first + r.second);\n};\n\n// Linear function composition\n\
     // `f(x) = first * x + second`, operate most recently added function first\ntemplate\
-    \ <typename T>\nstruct LinearFunctionQueue\n    : public SlidingWindowAggregation<pair<T,\
-    \ T>, pair<T, T>, swag_op_id, swag_op_linear_merge> {\n    LinearFunctionQueue()\n\
-    \        : SlidingWindowAggregation<pair<T, T>, pair<T, T>, swag_op_id,\n    \
-    \                               swag_op_linear_merge>::SlidingWindowAggregation(pair<T,\
-    \ T>(1, 0)) {\n    }\n};\n#line 3 \"data_structure/test/queue_operate_all_composite.test.cpp\"\
+    \ <typename T>\nstruct LinearFunctionQueue\n    : public swag_queue<std::pair<T,\
+    \ T>, std::pair<T, T>, swag_op_id, swag_op_linear_merge> {\n    LinearFunctionQueue()\n\
+    \        : swag_queue<std::pair<T, T>, std::pair<T, T>, swag_op_id, swag_op_linear_merge>::swag_queue(\n\
+    \              std::pair<T, T>(1, 0)) {}\n};\n#line 3 \"data_structure/test/queue_operate_all_composite.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
-    \n#line 5 \"data_structure/test/queue_operate_all_composite.test.cpp\"\n\nusing\
-    \ mint = ModInt<998244353>;\nint main() {\n    LinearFunctionQueue<mint> swag;\n\
-    \    int Q;\n    cin >> Q;\n    while (Q--) {\n        int q;\n        cin >>\
-    \ q;\n        if (q == 0) {\n            mint a, b;\n            cin >> a >> b;\n\
-    \            swag.push({a, b});\n        }\n        if (q == 1) swag.pop();\n\
-    \        if (q == 2) {\n            mint x;\n            cin >> x;\n         \
-    \   pair<mint, mint> f = swag.fold_all();\n            printf(\"%d\\n\", (f.first\
-    \ * x + f.second).val);\n        }\n    }\n}\n"
+    \n#line 5 \"data_structure/test/queue_operate_all_composite.test.cpp\"\nusing\
+    \ namespace std;\n\nusing mint = ModInt<998244353>;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    LinearFunctionQueue<mint> swag;\n    int Q;\n\
+    \    cin >> Q;\n    while (Q--) {\n        int q;\n        cin >> q;\n       \
+    \ if (q == 0) {\n            mint a, b;\n            cin >> a >> b;\n        \
+    \    swag.push({a, b});\n        }\n        if (q == 1) swag.pop();\n        if\
+    \ (q == 2) {\n            mint x;\n            cin >> x;\n            pair<mint,\
+    \ mint> f = swag.fold_all();\n            cout << (f.first * x + f.second).val\
+    \ << '\\n';\n        }\n    }\n}\n"
   code: "#include \"../../modint.hpp\"\n#include \"../sliding_window_aggregation.hpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
-    \n#include <iostream>\n\nusing mint = ModInt<998244353>;\nint main() {\n    LinearFunctionQueue<mint>\
+    \n#include <iostream>\nusing namespace std;\n\nusing mint = ModInt<998244353>;\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    LinearFunctionQueue<mint>\
     \ swag;\n    int Q;\n    cin >> Q;\n    while (Q--) {\n        int q;\n      \
     \  cin >> q;\n        if (q == 0) {\n            mint a, b;\n            cin >>\
     \ a >> b;\n            swag.push({a, b});\n        }\n        if (q == 1) swag.pop();\n\
     \        if (q == 2) {\n            mint x;\n            cin >> x;\n         \
-    \   pair<mint, mint> f = swag.fold_all();\n            printf(\"%d\\n\", (f.first\
-    \ * x + f.second).val);\n        }\n    }\n}\n"
+    \   pair<mint, mint> f = swag.fold_all();\n            cout << (f.first * x +\
+    \ f.second).val << '\\n';\n        }\n    }\n}\n"
   dependsOn:
   - modint.hpp
   - data_structure/sliding_window_aggregation.hpp
   isVerificationFile: true
   path: data_structure/test/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-05-01 12:00:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/queue_operate_all_composite.test.cpp
