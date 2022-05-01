@@ -53,7 +53,8 @@ struct shortest_path {
     std::vector<int> prev;
 
     // Dijkstra algorithm
-    // Complexity: O(E log E)
+    // - Requirement: wmin >= 0
+    // - Complexity: O(E log E)
     using Pque = std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>,
                                      std::greater<std::pair<T, int>>>;
     template <class Heap = Pque> void dijkstra(int s, int t = INVALID) {
@@ -82,7 +83,9 @@ struct shortest_path {
         }
     }
 
-    // Dijkstra algorithm, O(V^2 + E)
+    // Dijkstra algorithm
+    // - Requirement: wmin >= 0
+    // - Complexity: O(V^2 + E)
     void dijkstra_vquad(int s, int t = INVALID) {
         assert(0 <= s and s < V);
         build_();
@@ -108,7 +111,8 @@ struct shortest_path {
     }
 
     // Bellman-Ford algorithm
-    // Complexity: O(VE)
+    // - Requirement: no negative loop
+    // - Complexity: O(VE)
     bool bellman_ford(int s, int nb_loop) {
         assert(0 <= s and s < V);
         build_();
@@ -129,9 +133,9 @@ struct shortest_path {
         return false;
     }
 
-    // Bellman-ford algorithm using queue (deque)
-    // Complexity: O(VE)
-    // Requirement: no negative loop
+    // Bellman-ford algorithm using deque
+    // - Requirement: no negative loop
+    // - Complexity: O(VE)
     void spfa(int s) {
         assert(0 <= s and s < V);
         build_();
@@ -163,6 +167,9 @@ struct shortest_path {
         }
     }
 
+    // 01-BFS
+    // - Requirement: all weights must be 0 or w (positive constant).
+    // - Complexity: O(V + E)
     void zero_one_bfs(int s, int t = INVALID) {
         assert(0 <= s and s < V);
         build_();
@@ -189,6 +196,46 @@ struct shortest_path {
         }
     }
 
+    // Dial's algorithm
+    // - Requirement: wmin >= 0
+    // - Complexity: O(wmax * V + E)
+    void dial(int s, int t = INVALID) {
+        assert(0 <= s and s < V);
+        build_();
+        dist.assign(V, INF), prev.assign(V, INVALID);
+        dist[s] = 0;
+        std::vector<std::vector<std::pair<int, T>>> q(wmax + 1);
+        q[0].emplace_back(s, dist[s]);
+        int ninq = 1;
+
+        int cur = 0;
+        T dcur = 0;
+        for (; ninq; ++cur, ++dcur) {
+            if (cur == wmax + 1) cur = 0;
+            while (!q[cur].empty()) {
+                int v = q[cur].back().first;
+                T dnow = q[cur].back().second;
+                q[cur].pop_back(), --ninq;
+                if (v == t) return;
+                if (dist[v] < dnow) continue;
+
+                for (int e = head[v]; e < head[v + 1]; ++e) {
+                    const auto &nx = tos[e];
+                    T dnx = dist[v] + nx.second;
+                    if (dist[nx.first] > dnx) {
+                        dist[nx.first] = dnx, prev[nx.first] = v;
+                        int nxtcur = cur + int(nx.second);
+                        if (nxtcur >= int(q.size())) nxtcur -= q.size();
+                        q[nxtcur].emplace_back(nx.first, dnx), ++ninq;
+                    }
+                }
+            }
+        }
+    }
+
+    // Solver for DAG
+    // - Requirement: graph is DAG
+    // - Complexity: O(V + E)
     bool dag_solver(int s) {
         assert(0 <= s and s < V);
         build_();
@@ -239,13 +286,14 @@ struct shortest_path {
     void solve(int s, int t = INVALID) {
         if (wmin >= 0) {
             if (single_positive_weight) {
-                // zero_one_bfs(s, t);
-                zero_one_bfs(s);
+                zero_one_bfs(s, t);
+            } else if (wmax <= 10) {
+                dial(s, t);
             } else {
                 if ((long long)V * V < (E << 4)) {
-                    dijkstra_vquad(s);
+                    dijkstra_vquad(s, t);
                 } else {
-                    dijkstra(s);
+                    dijkstra(s, t);
                 }
             }
         } else {
@@ -254,7 +302,8 @@ struct shortest_path {
     }
 
     // Warshall-Floyd algorithm
-    // Complexity: O(E + V^3)
+    // - Requirement: no negative loop
+    // - Complexity: O(E + V^3)
     std::vector<std::vector<T>> floyd_warshall() {
         build_();
         std::vector<std::vector<T>> dist2d(V, std::vector<T>(V, INF));
