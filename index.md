@@ -1017,6 +1017,12 @@ data:
       path: graph/test/shortest_path_dag.test.cpp
       title: graph/test/shortest_path_dag.test.cpp
     - icon: ':heavy_check_mark:'
+      path: graph/test/shortest_path_dial.yuki160.test.cpp
+      title: graph/test/shortest_path_dial.yuki160.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/shortest_path_dial.yuki1695.test.cpp
+      title: graph/test/shortest_path_dial.yuki1695.test.cpp
+    - icon: ':heavy_check_mark:'
       path: graph/test/spfa.test.cpp
       title: graph/test/spfa.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1034,6 +1040,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/warshallfloyd.test.cpp
       title: graph/test/warshallfloyd.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/zero_one_bfs.yuki1695.test.cpp
+      title: graph/test/zero_one_bfs.yuki1695.test.cpp
   - name: linear_algebra_matrix/test
     pages:
     - icon: ':heavy_check_mark:'

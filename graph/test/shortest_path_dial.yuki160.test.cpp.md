@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: data_structure/radix_heap.hpp
-    title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
-  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
@@ -14,49 +11,50 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/shortest_path
+    PROBLEM: https://yukicoder.me/problems/no/160
     links:
-    - https://judge.yosupo.jp/problem/shortest_path
-  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
-    \ <limits>\n#include <queue>\n#include <string>\n#include <tuple>\n#include <utility>\n\
-    #include <vector>\n\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
-    \ / 2, int INVALID = -1>\nstruct shortest_path {\n    int V, E;\n    bool single_positive_weight;\n\
-    \    T wmin, wmax;\n\n    std::vector<std::pair<int, T>> tos;\n    std::vector<int>\
-    \ head;\n    std::vector<std::tuple<int, int, T>> edges;\n\n    void build_()\
-    \ {\n        if (int(tos.size()) == E and int(head.size()) == V + 1) return;\n\
-    \        tos.resize(E);\n        head.assign(V + 1, 0);\n        for (const auto\
-    \ &e : edges) ++head[std::get<0>(e) + 1];\n        for (int i = 0; i < V; ++i)\
-    \ head[i + 1] += head[i];\n        auto cur = head;\n        for (const auto &e\
-    \ : edges) {\n            tos[cur[std::get<0>(e)]++] = std::make_pair(std::get<1>(e),\
-    \ std::get<2>(e));\n        }\n    }\n\n    shortest_path(int V = 0) : V(V), E(0),\
-    \ single_positive_weight(true), wmin(0), wmax(0) {}\n    void add_edge(int s,\
-    \ int t, T w) {\n        assert(0 <= s and s < V);\n        assert(0 <= t and\
-    \ t < V);\n        edges.emplace_back(s, t, w);\n        ++E;\n        if (w >\
-    \ 0 and wmax > 0 and wmax != w) single_positive_weight = false;\n        wmin\
-    \ = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n    }\n\n    void add_bi_edge(int\
-    \ u, int v, T w) {\n        add_edge(u, v, w);\n        add_edge(v, u, w);\n \
-    \   }\n\n    std::vector<T> dist;\n    std::vector<int> prev;\n\n    // Dijkstra\
-    \ algorithm\n    // - Requirement: wmin >= 0\n    // - Complexity: O(E log E)\n\
-    \    using Pque = std::priority_queue<std::pair<T, int>, std::vector<std::pair<T,\
-    \ int>>,\n                                     std::greater<std::pair<T, int>>>;\n\
-    \    template <class Heap = Pque> void dijkstra(int s, int t = INVALID) {\n  \
-    \      assert(0 <= s and s < V);\n        build_();\n        dist.assign(V, INF);\n\
-    \        prev.assign(V, INVALID);\n        dist[s] = 0;\n        Heap pq;\n  \
-    \      pq.emplace(0, s);\n        while (!pq.empty()) {\n            T d;\n  \
-    \          int v;\n            std::tie(d, v) = pq.top();\n            pq.pop();\n\
-    \            if (t == v) return;\n            if (dist[v] < d) continue;\n   \
-    \         for (int e = head[v]; e < head[v + 1]; ++e) {\n                const\
-    \ auto &nx = tos[e];\n                T dnx = d + nx.second;\n               \
-    \ if (dist[nx.first] > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first]\
-    \ = v;\n                    pq.emplace(dnx, nx.first);\n                }\n  \
-    \          }\n        }\n    }\n\n    // Dijkstra algorithm\n    // - Requirement:\
-    \ wmin >= 0\n    // - Complexity: O(V^2 + E)\n    void dijkstra_vquad(int s, int\
-    \ t = INVALID) {\n        assert(0 <= s and s < V);\n        build_();\n     \
-    \   dist.assign(V, INF);\n        prev.assign(V, INVALID);\n        dist[s] =\
-    \ 0;\n        std::vector<char> fixed(V, false);\n        while (true) {\n   \
-    \         int r = INVALID;\n            T dr = INF;\n            for (int i =\
-    \ 0; i < V; i++) {\n                if (!fixed[i] and dist[i] < dr) r = i, dr\
+    - https://yukicoder.me/problems/no/160
+  bundledCode: "#line 1 \"graph/test/shortest_path_dial.yuki160.test.cpp\"\n#define\
+    \ PROBLEM \"https://yukicoder.me/problems/no/160\"\n#line 2 \"graph/shortest_path.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <deque>\n#include <fstream>\n\
+    #include <functional>\n#include <limits>\n#include <queue>\n#include <string>\n\
+    #include <tuple>\n#include <utility>\n#include <vector>\n\ntemplate <typename\
+    \ T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1>\nstruct shortest_path\
+    \ {\n    int V, E;\n    bool single_positive_weight;\n    T wmin, wmax;\n\n  \
+    \  std::vector<std::pair<int, T>> tos;\n    std::vector<int> head;\n    std::vector<std::tuple<int,\
+    \ int, T>> edges;\n\n    void build_() {\n        if (int(tos.size()) == E and\
+    \ int(head.size()) == V + 1) return;\n        tos.resize(E);\n        head.assign(V\
+    \ + 1, 0);\n        for (const auto &e : edges) ++head[std::get<0>(e) + 1];\n\
+    \        for (int i = 0; i < V; ++i) head[i + 1] += head[i];\n        auto cur\
+    \ = head;\n        for (const auto &e : edges) {\n            tos[cur[std::get<0>(e)]++]\
+    \ = std::make_pair(std::get<1>(e), std::get<2>(e));\n        }\n    }\n\n    shortest_path(int\
+    \ V = 0) : V(V), E(0), single_positive_weight(true), wmin(0), wmax(0) {}\n   \
+    \ void add_edge(int s, int t, T w) {\n        assert(0 <= s and s < V);\n    \
+    \    assert(0 <= t and t < V);\n        edges.emplace_back(s, t, w);\n       \
+    \ ++E;\n        if (w > 0 and wmax > 0 and wmax != w) single_positive_weight =\
+    \ false;\n        wmin = std::min(wmin, w);\n        wmax = std::max(wmax, w);\n\
+    \    }\n\n    void add_bi_edge(int u, int v, T w) {\n        add_edge(u, v, w);\n\
+    \        add_edge(v, u, w);\n    }\n\n    std::vector<T> dist;\n    std::vector<int>\
+    \ prev;\n\n    // Dijkstra algorithm\n    // - Requirement: wmin >= 0\n    //\
+    \ - Complexity: O(E log E)\n    using Pque = std::priority_queue<std::pair<T,\
+    \ int>, std::vector<std::pair<T, int>>,\n                                    \
+    \ std::greater<std::pair<T, int>>>;\n    template <class Heap = Pque> void dijkstra(int\
+    \ s, int t = INVALID) {\n        assert(0 <= s and s < V);\n        build_();\n\
+    \        dist.assign(V, INF);\n        prev.assign(V, INVALID);\n        dist[s]\
+    \ = 0;\n        Heap pq;\n        pq.emplace(0, s);\n        while (!pq.empty())\
+    \ {\n            T d;\n            int v;\n            std::tie(d, v) = pq.top();\n\
+    \            pq.pop();\n            if (t == v) return;\n            if (dist[v]\
+    \ < d) continue;\n            for (int e = head[v]; e < head[v + 1]; ++e) {\n\
+    \                const auto &nx = tos[e];\n                T dnx = d + nx.second;\n\
+    \                if (dist[nx.first] > dnx) {\n                    dist[nx.first]\
+    \ = dnx, prev[nx.first] = v;\n                    pq.emplace(dnx, nx.first);\n\
+    \                }\n            }\n        }\n    }\n\n    // Dijkstra algorithm\n\
+    \    // - Requirement: wmin >= 0\n    // - Complexity: O(V^2 + E)\n    void dijkstra_vquad(int\
+    \ s, int t = INVALID) {\n        assert(0 <= s and s < V);\n        build_();\n\
+    \        dist.assign(V, INF);\n        prev.assign(V, INVALID);\n        dist[s]\
+    \ = 0;\n        std::vector<char> fixed(V, false);\n        while (true) {\n \
+    \           int r = INVALID;\n            T dr = INF;\n            for (int i\
+    \ = 0; i < V; i++) {\n                if (!fixed[i] and dist[i] < dr) r = i, dr\
     \ = dist[i];\n            }\n            if (r == INVALID or r == t) break;\n\
     \            fixed[r] = true;\n            int nxt;\n            T dx;\n     \
     \       for (int e = head[r]; e < head[r + 1]; ++e) {\n                std::tie(nxt,\
@@ -161,79 +159,43 @@ data:
     \        for (int i = 0; i < V; i++) {\n            for (int e = head[i]; e <\
     \ head[i + 1]; ++e) {\n                ss << i << \"->\" << tos[e].first << \"\
     [label=\" << tos[e].second << \"];\\n\";\n            }\n        }\n        ss\
-    \ << \"}\\n\";\n        ss.close();\n        return;\n    }\n};\n#line 2 \"data_structure/radix_heap.hpp\"\
-    \n#include <array>\n#include <cstddef>\n#line 6 \"data_structure/radix_heap.hpp\"\
-    \n#include <type_traits>\n#line 9 \"data_structure/radix_heap.hpp\"\n\n// Radix\
-    \ heap for unsigned integer\n// https://github.com/iwiwi/radix-heap\ntemplate\
-    \ <class Uint, class Label, typename std::enable_if<std::is_unsigned<Uint>::value>::type\
-    \ * = nullptr>\nclass radix_heap {\n    int sz;\n    Uint last;\n    std::array<std::vector<std::pair<Uint,\
-    \ Label>>, std::numeric_limits<Uint>::digits + 1> v;\n\n    template <class U,\
-    \ typename std::enable_if<sizeof(U) == 4>::type * = nullptr>\n    static inline\
-    \ int bucket(U x) noexcept {\n        return x ? 32 - __builtin_clz(x) : 0;\n\
-    \    }\n    template <class U, typename std::enable_if<sizeof(U) == 8>::type *\
-    \ = nullptr>\n    static inline int bucket(U x) noexcept {\n        return x ?\
-    \ 64 - __builtin_clzll(x) : 0;\n    }\n\n    void pull() {\n        if (!v[0].empty())\
-    \ return;\n        int i = 1;\n        while (v[i].empty()) ++i;\n        last\
-    \ = v[i].back().first;\n        for (int j = 0; j < int(v[i].size()); j++) last\
-    \ = std::min(last, v[i][j].first);\n        for (int j = 0; j < int(v[i].size());\
-    \ j++) {\n            v[bucket(v[i][j].first ^ last)].emplace_back(std::move(v[i][j]));\n\
-    \        }\n        v[i].clear();\n    }\n\npublic:\n    radix_heap() : sz(0),\
-    \ last(0) {\n        static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid\
-    \ type.\");\n    }\n    std::size_t size() const noexcept { return sz; }\n   \
-    \ bool empty() const noexcept { return sz == 0; }\n    void push(Uint x, const\
-    \ Label &val) { ++sz, v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint\
-    \ x, Label &&val) { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val));\
-    \ }\n    template <class... Args> void emplace(Uint x, Args &&...args) {\n   \
-    \     ++sz, v[bucket(x ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x),\n\
-    \                                               std::forward_as_tuple(args...));\n\
-    \    }\n    void pop() { pull(), --sz, v[0].pop_back(); }\n    std::pair<Uint,\
-    \ Label> top() { return pull(), v[0].back(); }\n    Uint top_key() { return pull(),\
-    \ last; }\n    Label &top_label() { return pull(), v[0].back().second; }\n   \
-    \ void clear() noexcept {\n        sz = 0, last = 0;\n        for (auto &vec :\
-    \ v) vec.clear();\n    }\n    void swap(radix_heap<Uint, Label> &a) {\n      \
-    \  std::swap(sz, a.sz), std::swap(last, a.last), v.swap(a.v);\n    }\n};\n#line\
-    \ 4 \"graph/test/shortest_path.test.cpp\"\n#include <iostream>\n#line 6 \"graph/test/shortest_path.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\nusing namespace\
-    \ std;\n\nint main() {\n    int N, M, s, t;\n    cin >> N >> M >> s >> t;\n  \
-    \  constexpr long long INF = 1LL << 60;\n    shortest_path<long long, INF> graph(N);\n\
-    \    while (M--) {\n        int a, b, c;\n        cin >> a >> b >> c;\n      \
-    \  graph.add_edge(a, b, c);\n    }\n\n    graph.dijkstra<radix_heap<unsigned long\
-    \ long, int>>(s, t);\n    auto d_radix = graph.dist;\n\n    graph.solve(s);\n\
-    \    assert(graph.dist[t] == d_radix[t]);\n\n    if (graph.dist[t] == INF) {\n\
-    \        cout << \"-1\\n\";\n        return 0;\n    }\n\n    vector<int> path;\n\
-    \    int now = t;\n    while (true) {\n        path.push_back(now);\n        if\
-    \ (now == s) break;\n        now = graph.prev[now];\n    }\n    std::reverse(path.begin(),\
-    \ path.end());\n    cout << graph.dist[t] << ' ' << path.size() - 1 << '\\n';\n\
-    \    for (unsigned i = 0; i + 1 < path.size(); i++) cout << path[i] << ' ' <<\
-    \ path[i + 1] << '\\n';\n}\n"
-  code: "#include \"../shortest_path.hpp\"\n#include \"../../data_structure/radix_heap.hpp\"\
-    \n#include <algorithm>\n#include <iostream>\n#include <vector>\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/shortest_path\"\nusing namespace std;\n\n\
-    int main() {\n    int N, M, s, t;\n    cin >> N >> M >> s >> t;\n    constexpr\
-    \ long long INF = 1LL << 60;\n    shortest_path<long long, INF> graph(N);\n  \
-    \  while (M--) {\n        int a, b, c;\n        cin >> a >> b >> c;\n        graph.add_edge(a,\
-    \ b, c);\n    }\n\n    graph.dijkstra<radix_heap<unsigned long long, int>>(s,\
-    \ t);\n    auto d_radix = graph.dist;\n\n    graph.solve(s);\n    assert(graph.dist[t]\
-    \ == d_radix[t]);\n\n    if (graph.dist[t] == INF) {\n        cout << \"-1\\n\"\
-    ;\n        return 0;\n    }\n\n    vector<int> path;\n    int now = t;\n    while\
-    \ (true) {\n        path.push_back(now);\n        if (now == s) break;\n     \
-    \   now = graph.prev[now];\n    }\n    std::reverse(path.begin(), path.end());\n\
-    \    cout << graph.dist[t] << ' ' << path.size() - 1 << '\\n';\n    for (unsigned\
-    \ i = 0; i + 1 < path.size(); i++) cout << path[i] << ' ' << path[i + 1] << '\\\
-    n';\n}\n"
+    \ << \"}\\n\";\n        ss.close();\n        return;\n    }\n};\n#line 3 \"graph/test/shortest_path_dial.yuki160.test.cpp\"\
+    \n#include <iostream>\n#line 5 \"graph/test/shortest_path_dial.yuki160.test.cpp\"\
+    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, M, S, G;\n    cin >> N >> M >> S >> G;\n    shortest_path<int> graph(N);\n\
+    \    vector<vector<pair<int, int>>> to(N);\n    while (M--) {\n        int a,\
+    \ b, c;\n        cin >> a >> b >> c;\n        graph.add_bi_edge(a, b, c);\n  \
+    \      to[a].emplace_back(b, c);\n        to[b].emplace_back(a, c);\n    }\n \
+    \   graph.dial(S);\n    auto dS = graph.dist;\n    graph.dial(G);\n    auto dG\
+    \ = graph.dist;\n    cout << S;\n    while (S != G) {\n        int best = N;\n\
+    \        for (auto p : to[S]) {\n            int nxt = p.first, w = p.second;\n\
+    \            if (dS[nxt] + dG[nxt] == dS[G] and dS[nxt] == dS[S] + w) best = min(best,\
+    \ nxt);\n        }\n        S = best;\n        cout << ' ' << S;\n    }\n    cout\
+    \ << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/160\"\n#include \"../shortest_path.hpp\"\
+    \n#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n\
+    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, M, S, G;\n   \
+    \ cin >> N >> M >> S >> G;\n    shortest_path<int> graph(N);\n    vector<vector<pair<int,\
+    \ int>>> to(N);\n    while (M--) {\n        int a, b, c;\n        cin >> a >>\
+    \ b >> c;\n        graph.add_bi_edge(a, b, c);\n        to[a].emplace_back(b,\
+    \ c);\n        to[b].emplace_back(a, c);\n    }\n    graph.dial(S);\n    auto\
+    \ dS = graph.dist;\n    graph.dial(G);\n    auto dG = graph.dist;\n    cout <<\
+    \ S;\n    while (S != G) {\n        int best = N;\n        for (auto p : to[S])\
+    \ {\n            int nxt = p.first, w = p.second;\n            if (dS[nxt] + dG[nxt]\
+    \ == dS[G] and dS[nxt] == dS[S] + w) best = min(best, nxt);\n        }\n     \
+    \   S = best;\n        cout << ' ' << S;\n    }\n    cout << '\\n';\n}\n"
   dependsOn:
   - graph/shortest_path.hpp
-  - data_structure/radix_heap.hpp
   isVerificationFile: true
-  path: graph/test/shortest_path.test.cpp
+  path: graph/test/shortest_path_dial.yuki160.test.cpp
   requiredBy: []
   timestamp: '2022-05-01 15:28:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph/test/shortest_path.test.cpp
+documentation_of: graph/test/shortest_path_dial.yuki160.test.cpp
 layout: document
 redirect_from:
-- /verify/graph/test/shortest_path.test.cpp
-- /verify/graph/test/shortest_path.test.cpp.html
-title: graph/test/shortest_path.test.cpp
+- /verify/graph/test/shortest_path_dial.yuki160.test.cpp
+- /verify/graph/test/shortest_path_dial.yuki160.test.cpp.html
+title: graph/test/shortest_path_dial.yuki160.test.cpp
 ---

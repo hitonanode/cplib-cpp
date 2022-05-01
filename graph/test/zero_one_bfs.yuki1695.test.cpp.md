@@ -4,18 +4,50 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: string/manacher.hpp
+    title: "Longest palindromic substring enumeration (Manacher's algorithm) \uFF08\
+      \u56DE\u6587\u9577\u914D\u5217\u69CB\u7BC9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://yukicoder.me/problems/no/1695
     links:
-    - https://math.mit.edu/~goemans/18438F09/lec13.pdf
-  bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
-    \ <limits>\n#include <queue>\n#include <string>\n#include <tuple>\n#include <utility>\n\
-    #include <vector>\n\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
+    - https://yukicoder.me/problems/no/1695
+  bundledCode: "#line 1 \"graph/test/zero_one_bfs.yuki1695.test.cpp\"\n#define PROBLEM\
+    \ \"https://yukicoder.me/problems/no/1695\"\n#line 2 \"string/manacher.hpp\"\n\
+    #include <string>\n#include <utility>\n#include <vector>\n\n// CUT begin\n// Manacher's\
+    \ Algorithm: radius of palindromes\n// Input: std::string or std::vector<T> of\
+    \ length N\n// Output: std::vector<int> of size N\n// Complexity: O(N)\n// Sample:\n\
+    // - `sakanakanandaka` -> [1, 1, 2, 1, 4, 1, 4, 1, 2, 2, 1, 1, 1, 2, 1]\n// Reference:\
+    \ https://snuke.hatenablog.com/entry/2014/12/02/235837\ntemplate <typename T>\
+    \ std::vector<int> manacher(const std::vector<T> &S) {\n    std::vector<int> res(S.size());\n\
+    \    int i = 0, j = 0;\n    while (i < int(S.size())) {\n        while (i - j\
+    \ >= 0 and i + j < int(S.size()) and S[i - j] == S[i + j]) j++;\n        res[i]\
+    \ = j;\n        int k = 1;\n        while (i - k >= 0 and i + k < int(S.size())\
+    \ and k + res[i - k] < j)\n            res[i + k] = res[i - k], k++;\n       \
+    \ i += k, j -= k;\n    }\n    return res;\n}\nstd::vector<int> manacher(const\
+    \ std::string &S) {\n    std::vector<char> v(S.size());\n    for (int i = 0; i\
+    \ < int(S.size()); i++) v[i] = S[i];\n    return manacher(v);\n}\n\ntemplate <typename\
+    \ T>\nstd::vector<std::pair<int, int>> enumerate_palindromes(const std::vector<T>\
+    \ &vec) {\n    std::vector<T> v;\n    const int N = vec.size();\n    for (int\
+    \ i = 0; i < N - 1; i++) {\n        v.push_back(vec[i]);\n        v.push_back(-1);\n\
+    \    }\n    v.push_back(vec.back());\n    const auto man = manacher(v);\n    std::vector<std::pair<int,\
+    \ int>> ret;\n    for (int i = 0; i < N * 2 - 1; i++) {\n        if (i & 1) {\n\
+    \            int w = man[i] / 2;\n            ret.emplace_back((i + 1) / 2 - w,\
+    \ (i + 1) / 2 + w);\n        } else {\n            int w = (man[i] - 1) / 2;\n\
+    \            ret.emplace_back(i / 2 - w, i / 2 + w + 1);\n        }\n    }\n \
+    \   return ret;\n}\n\nstd::vector<std::pair<int, int>> enumerate_palindromes(const\
+    \ std::string &S) {\n    std::vector<char> v(S.size());\n    for (int i = 0; i\
+    \ < int(S.size()); i++) v[i] = S[i];\n    return enumerate_palindromes<char>(v);\n\
+    }\n#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <deque>\n#include <fstream>\n#include <functional>\n#include <limits>\n\
+    #include <queue>\n#line 10 \"graph/shortest_path.hpp\"\n#include <tuple>\n#line\
+    \ 13 \"graph/shortest_path.hpp\"\n\ntemplate <typename T, T INF = std::numeric_limits<T>::max()\
     \ / 2, int INVALID = -1>\nstruct shortest_path {\n    int V, E;\n    bool single_positive_weight;\n\
     \    T wmin, wmax;\n\n    std::vector<std::pair<int, T>> tos;\n    std::vector<int>\
     \ head;\n    std::vector<std::tuple<int, int, T>> edges;\n\n    void build_()\
@@ -156,112 +188,49 @@ data:
     \        for (int i = 0; i < V; i++) {\n            for (int e = head[i]; e <\
     \ head[i + 1]; ++e) {\n                ss << i << \"->\" << tos[e].first << \"\
     [label=\" << tos[e].second << \"];\\n\";\n            }\n        }\n        ss\
-    \ << \"}\\n\";\n        ss.close();\n        return;\n    }\n};\n#line 6 \"combinatorial_opt/matroid_union.hpp\"\
-    \n\n// CUT begin\n// Union matroid augment\n// From I1, I2 (independent, exclusive),\n\
-    // - find I1' and I2' s.t. |I1'| + |I2'| = |I1| + |I2| + 1 and return true\n//\
-    \ - or return false\n// Complexity: O(n(c + r)) (r: current rank, c: circuit query)\n\
-    // Algorithm based on https://math.mit.edu/~goemans/18438F09/lec13.pdf\n// Verified:\
-    \ CodeChef HAMEL\ntemplate <class M1, class M2, class State1, class State2, class\
-    \ T = int>\nbool augment_union_matroid(M1 &matroid1, M2 &matroid2, State1 &I1,\
-    \ State2 &I2,\n                           const std::vector<T> &weights) {\n \
-    \   const int M = matroid1.size();\n    const int gs = M, gt = M + 1;\n    shortest_path<T>\
-    \ sssp(M + 2);\n    std::vector<int> color(M, -1);\n    matroid1.set(I1);\n  \
-    \  matroid2.set(I2);\n    for (int e = 0; e < M; e++) {\n        if (!I1[e] and\
-    \ !I2[e]) sssp.add_edge(gs, e, weights.size() ? weights[e] : 0);\n        if (!I1[e])\
-    \ {\n            auto c = matroid1.circuit(e);\n            if (c.empty()) sssp.add_edge(e,\
-    \ gt, 0), color[e] = 0;\n            for (int f : c) {\n                if (f\
-    \ != e) sssp.add_edge(e, f, 1);\n            }\n        }\n        if (!I2[e])\
-    \ {\n            auto c = matroid2.circuit(e);\n            if (c.empty()) sssp.add_edge(e,\
-    \ gt, 0), color[e] = 1;\n            for (int f : c) {\n                if (f\
-    \ != e) sssp.add_edge(e, f, 1);\n            }\n        }\n    }\n    sssp.solve(gs,\
-    \ gt);\n    auto aug_path = sssp.retrieve_path(gt);\n    if (aug_path.empty())\
-    \ return false;\n    assert(aug_path.size() >= 3);\n    int c0 = -1;\n    if (I1[aug_path[aug_path.size()\
-    \ - 2]]) c0 = 1;\n    if (I2[aug_path[aug_path.size() - 2]]) c0 = 0;\n    if (c0\
-    \ < 0) c0 = color[aug_path[aug_path.size() - 2]];\n    for (int k = int(aug_path.size())\
-    \ - 2, e = aug_path[k]; k; e = aug_path[--k]) {\n        (c0 ? I2 : I1)[e] = 1,\
-    \ (c0 ? I1 : I2)[e] = 0;\n        c0 ^= 1;\n    }\n    return true;\n}\n\n// (Min\
-    \ weight) matroid partition\ntemplate <class M1, class M2, class T = int>\nstd::pair<std::vector<bool>,\
-    \ std::vector<bool>>\nMinWeightMaxIndepSetInUnionMatroid(M1 mat1, M2 mat2, const\
-    \ std::vector<T> &weights = {}) {\n    using State = std::vector<bool>;\n    assert(mat1.size()\
-    \ == mat2.size());\n    const int M = mat1.size();\n    State I1(M), I2(M);\n\
-    \    while (augment_union_matroid(mat1, mat2, I1, I2, weights)) {}\n    return\
-    \ {I1, I2};\n}\n"
-  code: "#pragma once\n#include \"../graph/shortest_path.hpp\"\n#include <cassert>\n\
-    #include <utility>\n#include <vector>\n\n// CUT begin\n// Union matroid augment\n\
-    // From I1, I2 (independent, exclusive),\n// - find I1' and I2' s.t. |I1'| + |I2'|\
-    \ = |I1| + |I2| + 1 and return true\n// - or return false\n// Complexity: O(n(c\
-    \ + r)) (r: current rank, c: circuit query)\n// Algorithm based on https://math.mit.edu/~goemans/18438F09/lec13.pdf\n\
-    // Verified: CodeChef HAMEL\ntemplate <class M1, class M2, class State1, class\
-    \ State2, class T = int>\nbool augment_union_matroid(M1 &matroid1, M2 &matroid2,\
-    \ State1 &I1, State2 &I2,\n                           const std::vector<T> &weights)\
-    \ {\n    const int M = matroid1.size();\n    const int gs = M, gt = M + 1;\n \
-    \   shortest_path<T> sssp(M + 2);\n    std::vector<int> color(M, -1);\n    matroid1.set(I1);\n\
-    \    matroid2.set(I2);\n    for (int e = 0; e < M; e++) {\n        if (!I1[e]\
-    \ and !I2[e]) sssp.add_edge(gs, e, weights.size() ? weights[e] : 0);\n       \
-    \ if (!I1[e]) {\n            auto c = matroid1.circuit(e);\n            if (c.empty())\
-    \ sssp.add_edge(e, gt, 0), color[e] = 0;\n            for (int f : c) {\n    \
-    \            if (f != e) sssp.add_edge(e, f, 1);\n            }\n        }\n \
-    \       if (!I2[e]) {\n            auto c = matroid2.circuit(e);\n           \
-    \ if (c.empty()) sssp.add_edge(e, gt, 0), color[e] = 1;\n            for (int\
-    \ f : c) {\n                if (f != e) sssp.add_edge(e, f, 1);\n            }\n\
-    \        }\n    }\n    sssp.solve(gs, gt);\n    auto aug_path = sssp.retrieve_path(gt);\n\
-    \    if (aug_path.empty()) return false;\n    assert(aug_path.size() >= 3);\n\
-    \    int c0 = -1;\n    if (I1[aug_path[aug_path.size() - 2]]) c0 = 1;\n    if\
-    \ (I2[aug_path[aug_path.size() - 2]]) c0 = 0;\n    if (c0 < 0) c0 = color[aug_path[aug_path.size()\
-    \ - 2]];\n    for (int k = int(aug_path.size()) - 2, e = aug_path[k]; k; e = aug_path[--k])\
-    \ {\n        (c0 ? I2 : I1)[e] = 1, (c0 ? I1 : I2)[e] = 0;\n        c0 ^= 1;\n\
-    \    }\n    return true;\n}\n\n// (Min weight) matroid partition\ntemplate <class\
-    \ M1, class M2, class T = int>\nstd::pair<std::vector<bool>, std::vector<bool>>\n\
-    MinWeightMaxIndepSetInUnionMatroid(M1 mat1, M2 mat2, const std::vector<T> &weights\
-    \ = {}) {\n    using State = std::vector<bool>;\n    assert(mat1.size() == mat2.size());\n\
-    \    const int M = mat1.size();\n    State I1(M), I2(M);\n    while (augment_union_matroid(mat1,\
-    \ mat2, I1, I2, weights)) {}\n    return {I1, I2};\n}\n"
+    \ << \"}\\n\";\n        ss.close();\n        return;\n    }\n};\n#line 5 \"graph/test/zero_one_bfs.yuki1695.test.cpp\"\
+    \n#include <iostream>\n#line 7 \"graph/test/zero_one_bfs.yuki1695.test.cpp\"\n\
+    using namespace std;\n\nconstexpr int INF = 1 << 28;\n\nint solve(const string\
+    \ &S, const string &T) {\n    int nmatch = 0;\n    while (nmatch < min<int>(S.size(),\
+    \ T.size()) and S[nmatch] == T[nmatch]) nmatch++;\n    if (!nmatch) return INF;\n\
+    \    if (T.size() % 2) return INF;\n    auto trev = T;\n    if (trev != T) return\
+    \ INF;\n    shortest_path<int> graph(T.size() + 1);\n    for (int i = 0; i < int(T.size());\
+    \ ++i) graph.add_edge(i, i + 1, 0);\n    auto ps = enumerate_palindromes(T);\n\
+    \    for (const auto &p : ps) {\n        auto l = p.first, r = p.second;\n   \
+    \     if ((l + r) % 2 == 0) graph.add_edge(r, (l + r) / 2, 1);\n    }\n    graph.zero_one_bfs(T.size(),\
+    \ nmatch);\n    return graph.dist[nmatch];\n}\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N, M;\n    string S, T;\n    cin >> N\
+    \ >> M >> S >> T;\n    int ret = solve(S, T);\n    reverse(S.begin(), S.end());\n\
+    \    ret = min(ret, solve(S, T));\n    cout << (ret < INF ? ret : -1) << '\\n';\n\
+    }\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1695\"\n#include \"../../string/manacher.hpp\"\
+    \n#include \"../shortest_path.hpp\"\n#include <algorithm>\n#include <iostream>\n\
+    #include <string>\nusing namespace std;\n\nconstexpr int INF = 1 << 28;\n\nint\
+    \ solve(const string &S, const string &T) {\n    int nmatch = 0;\n    while (nmatch\
+    \ < min<int>(S.size(), T.size()) and S[nmatch] == T[nmatch]) nmatch++;\n    if\
+    \ (!nmatch) return INF;\n    if (T.size() % 2) return INF;\n    auto trev = T;\n\
+    \    if (trev != T) return INF;\n    shortest_path<int> graph(T.size() + 1);\n\
+    \    for (int i = 0; i < int(T.size()); ++i) graph.add_edge(i, i + 1, 0);\n  \
+    \  auto ps = enumerate_palindromes(T);\n    for (const auto &p : ps) {\n     \
+    \   auto l = p.first, r = p.second;\n        if ((l + r) % 2 == 0) graph.add_edge(r,\
+    \ (l + r) / 2, 1);\n    }\n    graph.zero_one_bfs(T.size(), nmatch);\n    return\
+    \ graph.dist[nmatch];\n}\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, M;\n    string S, T;\n    cin >> N >> M >> S >> T;\n    int ret =\
+    \ solve(S, T);\n    reverse(S.begin(), S.end());\n    ret = min(ret, solve(S,\
+    \ T));\n    cout << (ret < INF ? ret : -1) << '\\n';\n}\n"
   dependsOn:
+  - string/manacher.hpp
   - graph/shortest_path.hpp
-  isVerificationFile: false
-  path: combinatorial_opt/matroid_union.hpp
+  isVerificationFile: true
+  path: graph/test/zero_one_bfs.yuki1695.test.cpp
   requiredBy: []
   timestamp: '2022-05-01 15:28:23+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/matroid_union.hpp
+documentation_of: graph/test/zero_one_bfs.yuki1695.test.cpp
 layout: document
-title: "Matroid union \uFF08\u30DE\u30C8\u30ED\u30A4\u30C9\u306E\u5408\u4F75\uFF09"
+redirect_from:
+- /verify/graph/test/zero_one_bfs.yuki1695.test.cpp
+- /verify/graph/test/zero_one_bfs.yuki1695.test.cpp.html
+title: graph/test/zero_one_bfs.yuki1695.test.cpp
 ---
-
-2つのマトロイド $M\_{1} = (E, \mathcal{I}\_{1}), M_{2} = (E, \mathcal{I}\_{2})$, $\mathcal{I}\_{1}$ に関して独立な集合 $I_1$, $\mathcal{I}\_{2}$ に関して独立な集合 $I\_2$ で $I\_1 \cup I\_2 = \emptyset$ を満たすものが与えられたとき，$I'\_1 + I'\_2 = I\_1 + I\_2 + \\{ e \\}$ を満たす新たな排反な独立集合 $I'\_1, I'\_2$ を見つけるアルゴリズム．特に重み最小の $e$ から貪欲に追加を試すことで，「合併したマトロイド」の最小重みサイズ $k$ 独立集合が $k = 1, 2, \dots$ について順次求められる．
-
-これを応用すると，与えられた重み付き無向グラフについて，辺素な二つの全域木であって重みの総和が最小なものを見つけることも可能．
-
-## アルゴリズムの概要
-
-$\|E\| = n$ として，$e = 1, \dots, n$ に $s$, $t$ を加えた $n + 2$ 頂点のグラフに次の要領で辺を張る：
-
-- $e \notin I\_1 \cup I\_2$ のとき，$s \rightarrow e$ （重み $0$）を張る．
-- $e \notin I\_j$ かつ $I\_j + \\{e \\}$ が $M\_j$ における独立集合のとき， $e \rightarrow t$ （重み $w(e)$）を張る．$(j = 1, 2)$
-- $e \notin I\_j$ かつ $I\_j + \\{e \\}$ が $M\_j$ における従属集合のとき，サーキットに含まれる各 $f$ について $e \rightarrow f$ （重み $1$）を張る．$(j=1, 2)$
-
-このグラフで $s$ から $t$ への最短路を求め，$s$ の次に通った要素が新たに追加される（$s$ から $t$ に到達不能ならば $I\_1 \cup I\_2$ は既に合併したマトロイド上の最大独立集合である）．それ以降に通った要素は既に $I\_1$ または $I\_2$ に含まれているが，これらを集合間で出し入れすることで $I\_1$ と $I\_2$ の独立性が保たれる．
-
-本コードには実装されていないが，3 個以上のマトロイドの合併に対しても同様のアルゴリズムが適用可能である．
-
-## 使用方法
-
-- `bool augment_union_matroid(matroid1, matroid2, I1, I2, weight)` 関数は，上述の追加可能な重み最小要素 $e$ を見つけ，$I\_1$ および $I\_2$ を追加後の状態に更新する．要素の追加が行われたならば `true` を，そうでなければ `false` を返す．
-- `pair<vector<bool>, vector<bool>> MinWeightMaxIndepSetInUnionMatroid(matroid1, matroid2, weight)` 関数は，`augment_union_matroid()` 関数を繰り返し適用することで，2つのマトロイドを合併したマトロイドにおける（重み最小な）最大独立集合を構成する．
-
-## 問題例
-
-- [Hamel Paths \| CodeChef](https://www.codechef.com/problems/HAMEL) 無向グラフから2つの全域木を作る．
-- [SRM 685 Div.1 450 FoxAirline2](https://community.topcoder.com/stat?c=problem_statement&pm=14194&rd=16689) 無向グラフから2つの全域木を作れるか判定する．
-- [2018 TCO Round 3A 1000 ColoringEdgesDiv1](https://community.topcoder.com/stat?c=problem_statement&pm=14909&rd=17198) 各頂点の次数が3の単純無向グラフ（$n \le 1000, m = 3n/2$）の辺を2つの全域森に分割する方法を構成する．最初に乱択で辺を追加して全域森2つの初期解を構成し，その後全ての辺を割り当て終えるまで `augment_union_matroid()` を真面目に使用するというヒューリスティックによって [最大 200 ms 程度の実行時間で用意された全ケースに通る](https://vjudge.net/solution/32788901)（ただし，後述するように無向グラフの全域森への分割にはより高速なアルゴリズムが存在する：`edge_disjoint_min_spanning_forests.hpp` 参照）．
-
-## 参考文献・リンク
-
-- [1] J. Edmonds, "Minimum partition of a matroid into independent subsets,"
-  J. Res. Nat. Bur. Standards Sect. B 69, 67-72, 1965.
-- [18.438: Advanced Combinatorial Optimization, Fall 2009](http://www-math.mit.edu/~goemans/18438F09/18438.html): [lec13.pdf](http://www-math.mit.edu/~goemans/18438F09/lec13.pdf)
-- [Matroid partitioning - Wikipedia](https://en.wikipedia.org/wiki/Matroid_partitioning#cite_ref-e65_3-0)
-- [離散最適化基礎論 (2015年度後学期) 組合せ最適化におけるマトロイドの役割](http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/): [handout12.pdf](http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/handout12.pdf)
-- [AlgoWiki - Matroid](https://wiki.algo.is/Matroid) 問題へのリンクが豊富．
-- [様々な全域木問題](https://www.slideshare.net/tmaehara/ss-17402143) 特に無向グラフのの辺素な全域森への分割を考える場合，より高速なアルゴリズムが存在する．
