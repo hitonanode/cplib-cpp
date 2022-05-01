@@ -8,22 +8,29 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"utilities/rotate90.hpp\"\n#include <vector>\n\n// CUT begin\n\
-    template <typename T> std::vector<std::vector<T>> rotate90(const std::vector<std::vector<T>>\
-    \ &in) {\n    const size_t H = in.size(), W = in[0].size();\n    std::vector<std::vector<T>>\
-    \ ret(W, std::vector<T>(H));\n    for (size_t i = 0; i < H; i++) {\n        for\
-    \ (size_t j = 0; j < W; j++) ret[j][i] = in[i][W - 1 - j];\n    }\n    return\
-    \ ret;\n}\n"
-  code: "#pragma once\n#include <vector>\n\n// CUT begin\ntemplate <typename T> std::vector<std::vector<T>>\
-    \ rotate90(const std::vector<std::vector<T>> &in) {\n    const size_t H = in.size(),\
-    \ W = in[0].size();\n    std::vector<std::vector<T>> ret(W, std::vector<T>(H));\n\
-    \    for (size_t i = 0; i < H; i++) {\n        for (size_t j = 0; j < W; j++)\
-    \ ret[j][i] = in[i][W - 1 - j];\n    }\n    return ret;\n}\n"
+  bundledCode: "#line 2 \"utilities/rotate90.hpp\"\n#include <string>\n#include <vector>\n\
+    \ntemplate <typename T> std::vector<std::vector<T>> rotate90(const std::vector<std::vector<T>>\
+    \ &in) {\n    const int H = in.size(), W = in[0].size();\n    std::vector<std::vector<T>>\
+    \ ret(W, std::vector<T>(H));\n    for (int i = 0; i < H; i++) {\n        for (int\
+    \ j = 0; j < W; j++) ret[j][i] = in[i][W - 1 - j];\n    }\n    return ret;\n}\n\
+    \nstd::vector<std::string> rotate90(const std::vector<std::string> &in) {\n  \
+    \  const int H = in.size(), W = in[0].size();\n    std::vector<std::string> ret(W,\
+    \ std::string(H, '\\0'));\n    for (int i = 0; i < H; i++) {\n        for (int\
+    \ j = 0; j < W; j++) ret[j][i] = in[i][W - 1 - j];\n    }\n    return ret;\n}\n"
+  code: "#pragma once\n#include <string>\n#include <vector>\n\ntemplate <typename\
+    \ T> std::vector<std::vector<T>> rotate90(const std::vector<std::vector<T>> &in)\
+    \ {\n    const int H = in.size(), W = in[0].size();\n    std::vector<std::vector<T>>\
+    \ ret(W, std::vector<T>(H));\n    for (int i = 0; i < H; i++) {\n        for (int\
+    \ j = 0; j < W; j++) ret[j][i] = in[i][W - 1 - j];\n    }\n    return ret;\n}\n\
+    \nstd::vector<std::string> rotate90(const std::vector<std::string> &in) {\n  \
+    \  const int H = in.size(), W = in[0].size();\n    std::vector<std::string> ret(W,\
+    \ std::string(H, '\\0'));\n    for (int i = 0; i < H; i++) {\n        for (int\
+    \ j = 0; j < W; j++) ret[j][i] = in[i][W - 1 - j];\n    }\n    return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: utilities/rotate90.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-05-01 15:34:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: utilities/rotate90.hpp

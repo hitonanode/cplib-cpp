@@ -8,21 +8,29 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"utilities/transpose.hpp\"\n#include <vector>\n\n// CUT begin\n\
-    template <typename T> std::vector<std::vector<T>> trans(std::vector<std::vector<T>>\
-    \ v) {\n    int H = v.size(), W = v[0].size();\n    std::vector<std::vector<T>>\
+  bundledCode: "#line 2 \"utilities/transpose.hpp\"\n#include <string>\n#include <vector>\n\
+    \ntemplate <typename T> std::vector<std::vector<T>> transpose(const std::vector<std::vector<T>>\
+    \ &v) {\n    const int H = v.size(), W = v[0].size();\n    std::vector<std::vector<T>>\
     \ ret(W, std::vector<T>(H));\n    for (int i = 0; i < H; i++) {\n        for (int\
-    \ j = 0; j < W; j++) ret[j][i] = v[i][j];\n    }\n    return ret;\n}\n"
-  code: "#include <vector>\n\n// CUT begin\ntemplate <typename T> std::vector<std::vector<T>>\
-    \ trans(std::vector<std::vector<T>> v) {\n    int H = v.size(), W = v[0].size();\n\
-    \    std::vector<std::vector<T>> ret(W, std::vector<T>(H));\n    for (int i =\
-    \ 0; i < H; i++) {\n        for (int j = 0; j < W; j++) ret[j][i] = v[i][j];\n\
-    \    }\n    return ret;\n}\n"
+    \ j = 0; j < W; j++) ret[j][i] = v[i][j];\n    }\n    return ret;\n}\n\nstd::vector<std::string>\
+    \ transpose(const std::vector<std::string> &v) {\n    const int H = v.size(),\
+    \ W = v[0].size();\n    std::vector<std::string> ret(W, std::string(H, '\\0'));\n\
+    \    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) ret[j][i]\
+    \ = v[i][j];\n    }\n    return ret;\n}\n"
+  code: "#pragma once\n#include <string>\n#include <vector>\n\ntemplate <typename\
+    \ T> std::vector<std::vector<T>> transpose(const std::vector<std::vector<T>> &v)\
+    \ {\n    const int H = v.size(), W = v[0].size();\n    std::vector<std::vector<T>>\
+    \ ret(W, std::vector<T>(H));\n    for (int i = 0; i < H; i++) {\n        for (int\
+    \ j = 0; j < W; j++) ret[j][i] = v[i][j];\n    }\n    return ret;\n}\n\nstd::vector<std::string>\
+    \ transpose(const std::vector<std::string> &v) {\n    const int H = v.size(),\
+    \ W = v[0].size();\n    std::vector<std::string> ret(W, std::string(H, '\\0'));\n\
+    \    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) ret[j][i]\
+    \ = v[i][j];\n    }\n    return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: utilities/transpose.hpp
   requiredBy: []
-  timestamp: '2021-06-13 19:08:25+09:00'
+  timestamp: '2022-05-01 15:34:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: utilities/transpose.hpp
