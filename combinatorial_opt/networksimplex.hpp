@@ -8,7 +8,6 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
 // This program is the modificatiosn of the
 // [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)
 //
@@ -519,8 +518,8 @@ public:
           INF(std::numeric_limits<Value>::has_infinity ? std::numeric_limits<Value>::infinity()
                                                        : MAX) {
         // Check the number types
-        static_assert(std::numeric_limits<Value>::is_signed, "Value must be signed");
-        static_assert(std::numeric_limits<Cost>::is_signed, "Cost must be signed");
+        static_assert(-Value(1) < 0, "Value must be signed");
+        static_assert(-Cost(1) < 0, "Cost must be signed");
         static_assert(std::numeric_limits<Value>::max() > 0, "max() must be greater than 0");
 
         // Reset data structures
@@ -1305,14 +1304,14 @@ template <typename Capacity = long long, typename Weight = long long> struct mcf
         Edges.push_back({idnow, from, to, lower, upper, weight});
         return idnow;
     }
-    void set_supply(int v, Capacity b) {
+    void add_supply(int v, Capacity b) {
         assert(v >= 0 and v < n);
-        bs[v] = b;
+        bs[v] += b;
     }
     std::vector<Capacity> flow;
     std::vector<Capacity> potential;
 
-    template <typename RetVal = __int128>[[nodiscard]] RetVal solve() {
+    template <typename RetVal = __int128> [[nodiscard]] RetVal solve() {
         std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 
         std::vector<int> vid(n), eid(Edges.size());
