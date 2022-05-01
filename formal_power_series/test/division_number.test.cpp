@@ -13,5 +13,5 @@ int main() {
         for (int j = 1; j * i <= N; j++) { b[i * j] += m.coeff(j); }
     }
     b = b.exp(N + 1).inv(N + 1);
-    for (int i = 0; i <= N; i++) printf("%d ", b.coeff(i).val);
+    for (int i = 0; i <= N; i++) printf("%d ", b.coeff(i).val());
 }

@@ -54,7 +54,7 @@ template <typename MODINT> void ntt(std::vector<MODINT> &a, bool is_inverse = fa
                 }
             }
         }
-        int n_inv = MODINT(n).inv();
+        int n_inv = MODINT(n).inv().val();
         for (auto &v : a) v *= n_inv;
     }
 }
@@ -76,12 +76,12 @@ std::vector<ModInt<MOD>> nttconv_(const std::vector<int> &a, const std::vector<i
 long long garner_ntt_(int r0, int r1, int r2, int mod) {
     using mint2 = ModInt<nttprimes[2]>;
     static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];
-    static const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv();
-    static const long long m01_inv_m2 = mint2(m01).inv();
+    static const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv().val();
+    static const long long m01_inv_m2 = mint2(m01).inv().val();
 
     int v1 = (m0_inv_m1 * (r1 + nttprimes[1] - r0)) % nttprimes[1];
     auto v2 = (mint2(r2) - r0 - mint2(nttprimes[0]) * v1) * m01_inv_m2;
-    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val) % mod;
+    return (r0 + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val()) % mod;
 }
 template <typename MODINT>
 std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner) {
@@ -110,14 +110,14 @@ std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool s
         a.resize(n + m - 1);
     } else {
         std::vector<int> ai(sz), bi(sz);
-        for (int i = 0; i < n; i++) ai[i] = a[i].val;
-        for (int i = 0; i < m; i++) bi[i] = b[i].val;
+        for (int i = 0; i < n; i++) ai[i] = a[i].val();
+        for (int i = 0; i < m; i++) bi[i] = b[i].val();
         auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);
         auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);
         auto ntt2 = nttconv_<nttprimes[2]>(ai, bi);
         a.resize(n + m - 1);
         for (int i = 0; i < n + m - 1; i++)
-            a[i] = garner_ntt_(ntt0[i].val, ntt1[i].val, ntt2[i].val, mod);
+            a[i] = garner_ntt_(ntt0[i].val(), ntt1[i].val(), ntt2[i].val(), mod);
     }
     return a;
 }

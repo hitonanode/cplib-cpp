@@ -28,7 +28,7 @@ int main() {
     const vector<mint2> ret2 =
         frequency_table_of_tree_distance(to).solve<mint2, nttconv<mint2>>(std::vector<mint2>(N, 1));
     for (int i = 1; i < N; i++) {
-        auto v = crt<long long>({ret1[i].val, ret2[i].val}, {mint1::mod(), mint2::mod()});
+        auto v = crt<long long>({ret1[i].val(), ret2[i].val()}, {mint1::mod(), mint2::mod()});
         cout << v.first << ' ';
     }
     cout << '\n';

@@ -24,7 +24,7 @@ int main() {
             mint x;
             cin >> x;
             pair<mint, mint> f = swag.fold_all();
-            cout << (f.first * x + f.second).val << '\n';
+            cout << (f.first * x + f.second).val() << '\n';
         }
     }
 }

@@ -13,7 +13,7 @@ int main() {
         ModIntRuntime m = Y;
         if (Y) {
             m = m.sqrt();
-            cout << (m ? m.val : -1) << endl;
+            cout << (m ? m.val() : -1) << endl;
         } else
             cout << 0 << endl;
     }

@@ -18,11 +18,11 @@ int main() {
     cin >> Afixed >> Bfixed;
     matrix<ModIntRuntime> Aruntime(N, M), Bruntime(M, L);
     for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) Aruntime[i][j] = Afixed[i][j].val;
+        for (int j = 0; j < M; j++) Aruntime[i][j] = Afixed[i][j].val();
     }
 
     for (int j = 0; j < M; j++) {
-        for (int k = 0; k < L; k++) Bruntime[j][k] = Bfixed[j][k].val;
+        for (int k = 0; k < L; k++) Bruntime[j][k] = Bfixed[j][k].val();
     }
 
     auto Cfixed = Afixed * Bfixed;
@@ -31,7 +31,7 @@ int main() {
     for (int i = 0; i < N; i++) {
         for (int l = 0; l < L; l++) {
             cout << linear_congruence<long long>(
-                        {1, 1}, {Cfixed[i][l].val, Cruntime[i][l].val}, {MODfixed, MODruntime})
+                        {1, 1}, {Cfixed[i][l].val(), Cruntime[i][l].val()}, {MODfixed, MODruntime})
                         .first;
             cout << (l == L - 1 ? "\n" : " ");
         }

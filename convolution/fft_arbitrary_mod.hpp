@@ -69,14 +69,14 @@ std::vector<MODINT> convolution_mod(std::vector<MODINT> a, std::vector<MODINT> b
     int sz = 1 << nbase;
     std::vector<cmplx> fa(sz);
     for (int i = 0; i < (int)a.size(); i++)
-        fa[i] = {(T_FFT)(a[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val >> D_FFT)};
+        fa[i] = {(T_FFT)(a[i].val() & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val() >> D_FFT)};
     fft(sz, fa);
     std::vector<cmplx> fb(sz);
     if (a == b)
         fb = fa;
     else {
         for (int i = 0; i < (int)b.size(); i++)
-            fb[i] = {(T_FFT)(b[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(b[i].val >> D_FFT)};
+            fb[i] = {(T_FFT)(b[i].val() & ((1LL << D_FFT) - 1)), (T_FFT)(b[i].val() >> D_FFT)};
         fft(sz, fb);
     }
     T_FFT ratio = 0.25L / sz;
@@ -101,13 +101,13 @@ std::vector<MODINT> convolution_mod(std::vector<MODINT> a, std::vector<MODINT> b
     fft(sz, fa);
     fft(sz, fb);
     std::vector<MODINT> ret(sz);
-    long long bp = MODINT(2).pow(D_FFT).val;
-    long long cp = MODINT(2).pow(D_FFT * 2).val;
+    long long bp = MODINT(2).pow(D_FFT).val();
+    long long cp = MODINT(2).pow(D_FFT * 2).val();
     for (int i = 0; i < need; i++) {
         long long aa = llround(fa[i].x);
         long long bb = llround(fb[i].x);
         long long cc = llround(fa[i].y);
-        aa = MODINT(aa).val, bb = MODINT(bb).val, cc = MODINT(cc).val;
+        aa = MODINT(aa).val(), bb = MODINT(bb).val(), cc = MODINT(cc).val();
         ret[i] = aa + (bb * bp) + (cc * cp);
         //   ret[i] = aa + (bb << DFFT) + (cc << (DFFT * 2));
     }

@@ -3,7 +3,6 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
 // Tree isomorphism with hashing （ハッシュによる木の同型判定）
 // Dependence: ModInt or ModIntRuntime
 // Reference: https://snuke.hatenablog.com/entry/2017/02/03/054210
@@ -30,7 +29,7 @@ template <typename ModInt> struct tree_isomorphism {
     DoubleHash get_hash(DoubleHash x) const {
         static const uint64_t FIXED_RANDOM =
             std::chrono::steady_clock::now().time_since_epoch().count();
-        return {splitmix64(x.first.val + FIXED_RANDOM), splitmix64(x.second.val + FIXED_RANDOM)};
+        return {splitmix64(x.first.val() + FIXED_RANDOM), splitmix64(x.second.val() + FIXED_RANDOM)};
     }
 
     static void add_hash(DoubleHash &l, const DoubleHash &r) {

@@ -21,7 +21,7 @@ template <typename MODINT, typename Int> int ChromaticNumber(const std::vector<I
     }
     for (int k = 1; k < V; k++) {
         for (int s = 0; s < S; s++) g[s] *= f[s];
-        if (std::accumulate(g.begin(), g.end(), MODINT(0)).val) return k;
+        if (std::accumulate(g.begin(), g.end(), MODINT()).val()) return k;
     }
     return V;
 };
