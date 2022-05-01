@@ -4,13 +4,12 @@
 #include <stack>
 #include <vector>
 
-// CUT begin
 // Maximum Independent Set for general graph （最大独立集合）
 // Works with reasonable time complexity when N~40
 // Given graph must not have self-edges
-// Verified: <https://judge.yosupo.jp/submission/1864>
-// Reference: <https://www.slideshare.net/wata_orz/ss-12131479>
-template <typename E, int BS = 64> struct MaximumIndependentSet {
+// Verified: https://judge.yosupo.jp/submission/1864 / https://yukicoder.me/problems/no/382
+// Reference: https://www.slideshare.net/wata_orz/ss-12131479
+template <int BS = 64> struct maximum_independent_set {
     std::vector<std::bitset<BS>> conn;
     int V;               // # of vertices
     int nret;            // Largest possible size of independent set
@@ -64,7 +63,8 @@ template <typename E, int BS = 64> struct MaximumIndependentSet {
             st.pop();
         }
     }
-    MaximumIndependentSet(const E &e) : conn(e.size()), V(e.size()), nret(-1) {
+    maximum_independent_set(const std::vector<std::vector<int>> &e)
+        : conn(e.size()), V(e.size()), nret(-1) {
         assert(V <= BS);
         for (int i = 0; i < V; i++)
             for (auto &j : e[i])
@@ -78,7 +78,7 @@ template <typename E, int BS = 64> struct MaximumIndependentSet {
 // A little fast implementation of MaximumIndependentSet
 // by substituting long long int's bit for `ret` & `_tmp_state`
 // Requirement: V <= 64
-template <typename E> struct MaximumIndependentSet_Intbased {
+struct maximum_independent_set_int_based {
     std::vector<long long> conn;
     int V;         // # of vertices
     int nret;      // Largest possible size of independent set
@@ -134,7 +134,7 @@ template <typename E> struct MaximumIndependentSet_Intbased {
             st.pop();
         }
     }
-    MaximumIndependentSet_Intbased(const E &e)
+    maximum_independent_set_int_based(const std::vector<std::vector<int>> &e)
         : conn(e.size()), V(e.size()), nret(-1), _avail((1LL << V) - 1), _tmp_state(0) {
         assert(V <= 63);
         for (int i = 0; i < V; i++)
