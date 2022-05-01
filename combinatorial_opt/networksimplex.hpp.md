@@ -17,8 +17,8 @@ data:
     - http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)
   bundledCode: "#line 2 \"combinatorial_opt/networksimplex.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <chrono>\n#include <cmath>\n#include <limits>\n#include\
-    \ <random>\n#include <utility>\n#include <vector>\n\n// CUT begin\n// This program\
-    \ is the modificatiosn of the\n// [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)\n\
+    \ <random>\n#include <utility>\n#include <vector>\n\n// This program is the modificatiosn\
+    \ of the\n// [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)\n\
     //\n/* -*- mode: C++; indent-tabs-mode: nil; -*-\n *\n * This file is a part of\
     \ LEMON, a generic C++ optimization library.\n *\n * Copyright (C) 2003-2013\n\
     \ * Egervary Jeno Kombinatorikus Optimalizalasi Kutatocsoport\n * (Egervary Research\
@@ -248,9 +248,8 @@ data:
     \ &graph)\n        : _graph(graph), MAX(std::numeric_limits<Value>::max()),\n\
     \          INF(std::numeric_limits<Value>::has_infinity ? std::numeric_limits<Value>::infinity()\n\
     \                                                       : MAX) {\n        // Check\
-    \ the number types\n        static_assert(std::numeric_limits<Value>::is_signed,\
-    \ \"Value must be signed\");\n        static_assert(std::numeric_limits<Cost>::is_signed,\
-    \ \"Cost must be signed\");\n        static_assert(std::numeric_limits<Value>::max()\
+    \ the number types\n        static_assert(-Value(1) < 0, \"Value must be signed\"\
+    );\n        static_assert(-Cost(1) < 0, \"Cost must be signed\");\n        static_assert(std::numeric_limits<Value>::max()\
     \ > 0, \"max() must be greater than 0\");\n\n        // Reset data structures\n\
     \        reset();\n    }\n\n    template <typename LowerMap> NetworkSimplex &lowerMap(const\
     \ LowerMap &map) {\n        _has_lower = true;\n        for (Arc a = 0; a < _arc_num;\
@@ -621,10 +620,10 @@ data:
     \ Capacity lower, Capacity upper, Weight weight) {\n        assert(from >= 0 and\
     \ from < n);\n        assert(to >= 0 and to < n);\n        int idnow = Edges.size();\n\
     \        Edges.push_back({idnow, from, to, lower, upper, weight});\n        return\
-    \ idnow;\n    }\n    void set_supply(int v, Capacity b) {\n        assert(v >=\
-    \ 0 and v < n);\n        bs[v] = b;\n    }\n    std::vector<Capacity> flow;\n\
-    \    std::vector<Capacity> potential;\n\n    template <typename RetVal = __int128>[[nodiscard]]\
-    \ RetVal solve() {\n        std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \ idnow;\n    }\n    void add_supply(int v, Capacity b) {\n        assert(v >=\
+    \ 0 and v < n);\n        bs[v] += b;\n    }\n    std::vector<Capacity> flow;\n\
+    \    std::vector<Capacity> potential;\n\n    template <typename RetVal = __int128>\
+    \ [[nodiscard]] RetVal solve() {\n        std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());\n\
     \n        std::vector<int> vid(n), eid(Edges.size());\n        std::iota(vid.begin(),\
     \ vid.end(), 0);\n        std::shuffle(vid.begin(), vid.end(), rng);\n       \
     \ std::iota(eid.begin(), eid.end(), 0);\n        std::shuffle(eid.begin(), eid.end(),\
@@ -645,7 +644,7 @@ data:
     \        }\n    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <chrono>\n\
     #include <cmath>\n#include <limits>\n#include <random>\n#include <utility>\n#include\
-    \ <vector>\n\n// CUT begin\n// This program is the modificatiosn of the\n// [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)\n\
+    \ <vector>\n\n// This program is the modificatiosn of the\n// [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)\n\
     //\n/* -*- mode: C++; indent-tabs-mode: nil; -*-\n *\n * This file is a part of\
     \ LEMON, a generic C++ optimization library.\n *\n * Copyright (C) 2003-2013\n\
     \ * Egervary Jeno Kombinatorikus Optimalizalasi Kutatocsoport\n * (Egervary Research\
@@ -875,9 +874,8 @@ data:
     \ &graph)\n        : _graph(graph), MAX(std::numeric_limits<Value>::max()),\n\
     \          INF(std::numeric_limits<Value>::has_infinity ? std::numeric_limits<Value>::infinity()\n\
     \                                                       : MAX) {\n        // Check\
-    \ the number types\n        static_assert(std::numeric_limits<Value>::is_signed,\
-    \ \"Value must be signed\");\n        static_assert(std::numeric_limits<Cost>::is_signed,\
-    \ \"Cost must be signed\");\n        static_assert(std::numeric_limits<Value>::max()\
+    \ the number types\n        static_assert(-Value(1) < 0, \"Value must be signed\"\
+    );\n        static_assert(-Cost(1) < 0, \"Cost must be signed\");\n        static_assert(std::numeric_limits<Value>::max()\
     \ > 0, \"max() must be greater than 0\");\n\n        // Reset data structures\n\
     \        reset();\n    }\n\n    template <typename LowerMap> NetworkSimplex &lowerMap(const\
     \ LowerMap &map) {\n        _has_lower = true;\n        for (Arc a = 0; a < _arc_num;\
@@ -1248,10 +1246,10 @@ data:
     \ Capacity lower, Capacity upper, Weight weight) {\n        assert(from >= 0 and\
     \ from < n);\n        assert(to >= 0 and to < n);\n        int idnow = Edges.size();\n\
     \        Edges.push_back({idnow, from, to, lower, upper, weight});\n        return\
-    \ idnow;\n    }\n    void set_supply(int v, Capacity b) {\n        assert(v >=\
-    \ 0 and v < n);\n        bs[v] = b;\n    }\n    std::vector<Capacity> flow;\n\
-    \    std::vector<Capacity> potential;\n\n    template <typename RetVal = __int128>[[nodiscard]]\
-    \ RetVal solve() {\n        std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \ idnow;\n    }\n    void add_supply(int v, Capacity b) {\n        assert(v >=\
+    \ 0 and v < n);\n        bs[v] += b;\n    }\n    std::vector<Capacity> flow;\n\
+    \    std::vector<Capacity> potential;\n\n    template <typename RetVal = __int128>\
+    \ [[nodiscard]] RetVal solve() {\n        std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());\n\
     \n        std::vector<int> vid(n), eid(Edges.size());\n        std::iota(vid.begin(),\
     \ vid.end(), 0);\n        std::shuffle(vid.begin(), vid.end(), rng);\n       \
     \ std::iota(eid.begin(), eid.end(), 0);\n        std::shuffle(eid.begin(), eid.end(),\
@@ -1274,7 +1272,7 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/networksimplex.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-05-01 12:19:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/bflow_ns.test.cpp
