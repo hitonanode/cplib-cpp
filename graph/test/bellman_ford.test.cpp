@@ -7,7 +7,7 @@ using namespace std;
 int main() {
     int V, E, r;
     cin >> V >> E >> r;
-    ShortestPath<long long> graph(V);
+    shortest_path<long long> graph(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
         cin >> s >> t >> d;

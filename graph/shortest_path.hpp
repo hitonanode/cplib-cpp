@@ -12,7 +12,7 @@
 #include <vector>
 
 template <typename T, T INF = std::numeric_limits<T>::max() / 2, int INVALID = -1>
-struct ShortestPath {
+struct shortest_path {
     int V, E;
     bool single_positive_weight;
     T wmin, wmax;
@@ -22,7 +22,7 @@ struct ShortestPath {
     std::vector<std::tuple<int, int, T>> edges;
 
     void build_() {
-        if (int(tos.size()) == E) return;
+        if (int(tos.size()) == E and int(head.size()) == V + 1) return;
         tos.resize(E);
         head.assign(V + 1, 0);
         for (const auto &e : edges) ++head[std::get<0>(e) + 1];
@@ -33,7 +33,7 @@ struct ShortestPath {
         }
     }
 
-    ShortestPath(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0), wmax(0) {}
+    shortest_path(int V = 0) : V(V), E(0), single_positive_weight(true), wmin(0), wmax(0) {}
     void add_edge(int s, int t, T w) {
         assert(0 <= s and s < V);
         assert(0 <= t and t < V);
@@ -56,7 +56,7 @@ struct ShortestPath {
     // Complexity: O(E log E)
     using Pque = std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>,
                                      std::greater<std::pair<T, int>>>;
-    template <class Heap = Pque> void Dijkstra(int s) {
+    template <class Heap = Pque> void dijkstra(int s, int t = INVALID) {
         assert(0 <= s and s < V);
         build_();
         dist.assign(V, INF);
@@ -69,6 +69,7 @@ struct ShortestPath {
             int v;
             std::tie(d, v) = pq.top();
             pq.pop();
+            if (t == v) return;
             if (dist[v] < d) continue;
             for (int e = head[v]; e < head[v + 1]; ++e) {
                 const auto &nx = tos[e];
@@ -82,7 +83,7 @@ struct ShortestPath {
     }
 
     // Dijkstra algorithm, O(V^2 + E)
-    void DijkstraVquad(int s) {
+    void dijkstra_vquad(int s, int t = INVALID) {
         assert(0 <= s and s < V);
         build_();
         dist.assign(V, INF);
@@ -95,7 +96,7 @@ struct ShortestPath {
             for (int i = 0; i < V; i++) {
                 if (!fixed[i] and dist[i] < dr) r = i, dr = dist[i];
             }
-            if (r == INVALID) break;
+            if (r == INVALID or r == t) break;
             fixed[r] = true;
             int nxt;
             T dx;
@@ -162,25 +163,26 @@ struct ShortestPath {
         }
     }
 
-    void ZeroOneBFS(int s) {
+    void zero_one_bfs(int s, int t = INVALID) {
         assert(0 <= s and s < V);
         build_();
         dist.assign(V, INF), prev.assign(V, INVALID);
         dist[s] = 0;
-        std::deque<int> que;
-        que.push_back(s);
-        while (!que.empty()) {
-            int v = que.front();
-            que.pop_front();
+        std::vector<int> q(V * 4);
+        int ql = V * 2, qr = V * 2;
+        q[qr++] = s;
+        while (ql < qr) {
+            int v = q[ql++];
+            if (v == t) return;
             for (int e = head[v]; e < head[v + 1]; ++e) {
                 const auto &nx = tos[e];
                 T dnx = dist[v] + nx.second;
                 if (dist[nx.first] > dnx) {
                     dist[nx.first] = dnx, prev[nx.first] = v;
                     if (nx.second) {
-                        que.push_back(nx.first);
+                        q[qr++] = nx.first;
                     } else {
-                        que.push_front(nx.first);
+                        q[--ql] = nx.first;
                     }
                 }
             }
@@ -193,27 +195,27 @@ struct ShortestPath {
         dist.assign(V, INF), prev.assign(V, INVALID);
         dist[s] = 0;
         std::vector<int> indeg(V, 0);
-        std::queue<int> que;
-        que.push(s);
-        while (que.size()) {
-            int now = que.front();
-            que.pop();
+        std::vector<int> q(V * 2);
+        int ql = 0, qr = 0;
+        q[qr++] = s;
+        while (ql < qr) {
+            int now = q[ql++];
             for (int e = head[now]; e < head[now + 1]; ++e) {
                 const auto &nx = tos[e];
-                indeg[nx.first]++;
-                if (indeg[nx.first] == 1) que.push(nx.first);
+                ++indeg[nx.first];
+                if (indeg[nx.first] == 1) q[qr++] = nx.first;
             }
         }
-        que.push(s);
-        while (que.size()) {
-            int now = que.front();
-            que.pop();
+        ql = qr = 0;
+        q[qr++] = s;
+        while (ql < qr) {
+            int now = q[ql++];
             for (int e = head[now]; e < head[now + 1]; ++e) {
                 const auto &nx = tos[e];
-                indeg[nx.first]--;
+                --indeg[nx.first];
                 if (dist[nx.first] > dist[now] + nx.second)
                     dist[nx.first] = dist[now] + nx.second, prev[nx.first] = now;
-                if (indeg[nx.first] == 0) que.push(nx.first);
+                if (indeg[nx.first] == 0) q[qr++] = nx.first;
             }
         }
         return *max_element(indeg.begin(), indeg.end()) == 0;
@@ -234,15 +236,16 @@ struct ShortestPath {
         return ret;
     }
 
-    void solve(int s) {
+    void solve(int s, int t = INVALID) {
         if (wmin >= 0) {
             if (single_positive_weight) {
-                ZeroOneBFS(s);
+                // zero_one_bfs(s, t);
+                zero_one_bfs(s);
             } else {
                 if ((long long)V * V < (E << 4)) {
-                    DijkstraVquad(s);
+                    dijkstra_vquad(s);
                 } else {
-                    Dijkstra(s);
+                    dijkstra(s);
                 }
             }
         } else {

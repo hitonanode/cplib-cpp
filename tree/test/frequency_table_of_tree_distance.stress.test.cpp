@@ -16,13 +16,12 @@ int main() {
         int n = rand_int() % 100 + 1;
         int w = rand_int() % n + 1;
         vector<vector<int>> to(n);
-        ShortestPath<int> graph(n);
+        shortest_path<int> graph(n);
         for (int i = 1; i < n; i++) {
             int j = max<int>(0, i - 1 - rand_int() % w);
             to[i].push_back(j);
             to[j].push_back(i);
-            graph.add_edge(i, j, 1);
-            graph.add_edge(j, i, 1);
+            graph.add_bi_edge(i, j, 1);
         }
         vector<mint> weight(n);
         for (auto &x : weight) x = rand_int() % mint::mod();

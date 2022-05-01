@@ -8,7 +8,7 @@ int main() {
     int V, E;
     cin >> V >> E;
     constexpr int INF = 2000000000;
-    ShortestPath<int, INF> graph(V);
+    shortest_path<int, INF> graph(V);
     while (E--) {
         int s, t, d;
         cin >> s >> t >> d;

@@ -9,7 +9,7 @@ int main() {
     int V, E, r;
     cin >> V >> E >> r;
     constexpr int INF = 1 << 30;
-    ShortestPath<int, INF> graph(V);
+    shortest_path<int, INF> graph(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
         cin >> s >> t >> d;

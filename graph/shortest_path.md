@@ -15,14 +15,14 @@ documentation_of: ./shortest_path.hpp
 
 ```cpp
 constexpr long long INF = 1LL << 60;
-ShortestPath<long long, INF> graph(N);
+shortest_path<long long, INF> graph(N);
 while (M--) {
     int a, b, c;
     cin >> a >> b >> c;
     graph.add_edge(a, b, c);
 }
 
-graph.solve(s);
+graph.solve(s, t);
 cout << graph.dist[t] << '\n';
 
 ```
