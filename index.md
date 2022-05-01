@@ -679,6 +679,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/pow.hpp
       title: "Power \uFF08\u7D2F\u4E57\uFF09"
+    - icon: ':warning:'
+      path: utilities/pow_op.hpp
+      title: Power (general monoid)
     - icon: ':heavy_check_mark:'
       path: utilities/pow_sum.hpp
       title: "power sum \uFF08\u7D2F\u4E57\u548C\uFF09"
