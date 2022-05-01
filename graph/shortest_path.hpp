@@ -109,7 +109,7 @@ struct shortest_path {
 
     // Bellman-Ford algorithm
     // Complexity: O(VE)
-    bool BellmanFord(int s, int nb_loop) {
+    bool bellman_ford(int s, int nb_loop) {
         assert(0 <= s and s < V);
         build_();
         dist.assign(V, INF), prev.assign(V, INVALID);
@@ -132,7 +132,7 @@ struct shortest_path {
     // Bellman-ford algorithm using queue (deque)
     // Complexity: O(VE)
     // Requirement: no negative loop
-    void SPFA(int s) {
+    void spfa(int s) {
         assert(0 <= s and s < V);
         build_();
         dist.assign(V, INF);
@@ -249,13 +249,13 @@ struct shortest_path {
                 }
             }
         } else {
-            BellmanFord(s, V);
+            bellman_ford(s, V);
         }
     }
 
     // Warshall-Floyd algorithm
     // Complexity: O(E + V^3)
-    std::vector<std::vector<T>> WarshallFloyd() {
+    std::vector<std::vector<T>> floyd_warshall() {
         build_();
         std::vector<std::vector<T>> dist2d(V, std::vector<T>(V, INF));
         for (int i = 0; i < V; i++) {
@@ -277,7 +277,7 @@ struct shortest_path {
         return dist2d;
     }
 
-    void dump_graphviz(std::string filename = "shortest_path") const {
+    void to_dot(std::string filename = "shortest_path") const {
         std::ofstream ss(filename + ".DOT");
         ss << "digraph{\n";
         build_();

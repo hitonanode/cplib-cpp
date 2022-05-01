@@ -14,7 +14,7 @@ int main() {
         graph.add_edge(s, t, d);
     }
 
-    if (!graph.BellmanFord(r, V + 1)) {
+    if (!graph.bellman_ford(r, V + 1)) {
         puts("NEGATIVE CYCLE");
         return 0;
     }

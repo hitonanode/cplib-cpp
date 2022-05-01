@@ -16,7 +16,7 @@ int main() {
         graph.add_edge(s, t, d);
     }
 
-    graph.SPFA(r);
+    graph.spfa(r);
     for (auto d : graph.dist) {
         if (d < INF) {
             cout << d << '\n';

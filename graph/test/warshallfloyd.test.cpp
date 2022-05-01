@@ -15,7 +15,7 @@ int main() {
         graph.add_edge(s, t, d);
     }
 
-    auto dist2d = graph.WarshallFloyd();
+    auto dist2d = graph.floyd_warshall();
     for (int i = 0; i < V; i++) {
         if (dist2d[i][i] < 0) {
             cout << "NEGATIVE CYCLE\n";
