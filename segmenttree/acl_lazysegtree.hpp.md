@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
     title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
   - icon: ':warning:'
@@ -21,7 +21,7 @@ data:
     path: segmenttree/trees/acl_range-update-range-sum-min.hpp
     title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -33,9 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/document_ja/lazysegtree.html
@@ -140,7 +140,7 @@ data:
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   - segmenttree/acl_beats.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - segmenttree/test/beats.test.cpp
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp

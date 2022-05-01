@@ -41,10 +41,10 @@ data:
     \ std::vector<MODINT> b) {\n    int need = int(a.size() + b.size()) - 1;\n   \
     \ int nbase = 0;\n    while ((1 << nbase) < need) nbase++;\n    int sz = 1 <<\
     \ nbase;\n    std::vector<cmplx> fa(sz);\n    for (int i = 0; i < (int)a.size();\
-    \ i++)\n        fa[i] = {(T_FFT)(a[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val\
+    \ i++)\n        fa[i] = {(T_FFT)(a[i].val() & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val()\
     \ >> D_FFT)};\n    fft(sz, fa);\n    std::vector<cmplx> fb(sz);\n    if (a ==\
     \ b)\n        fb = fa;\n    else {\n        for (int i = 0; i < (int)b.size();\
-    \ i++)\n            fb[i] = {(T_FFT)(b[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(b[i].val\
+    \ i++)\n            fb[i] = {(T_FFT)(b[i].val() & ((1LL << D_FFT) - 1)), (T_FFT)(b[i].val()\
     \ >> D_FFT)};\n        fft(sz, fb);\n    }\n    T_FFT ratio = 0.25L / sz;\n  \
     \  cmplx r2(0, -1), r3(ratio, 0), r4(0, -ratio), r5(0, 1);\n    for (int i = 0;\
     \ i <= (sz >> 1); i++) {\n        int j = (sz - i) & (sz - 1);\n        cmplx\
@@ -56,13 +56,13 @@ data:
     \ - fb[i].conj()) * r4;\n            fa[i] = c1 * d1 + c2 * d2 * r5;\n       \
     \     fb[i] = c1 * d2 + c2 * d1;\n        }\n        fa[j] = a1 * b1 + a2 * b2\
     \ * r5;\n        fb[j] = a1 * b2 + a2 * b1;\n    }\n    fft(sz, fa);\n    fft(sz,\
-    \ fb);\n    std::vector<MODINT> ret(sz);\n    long long bp = MODINT(2).pow(D_FFT).val;\n\
-    \    long long cp = MODINT(2).pow(D_FFT * 2).val;\n    for (int i = 0; i < need;\
+    \ fb);\n    std::vector<MODINT> ret(sz);\n    long long bp = MODINT(2).pow(D_FFT).val();\n\
+    \    long long cp = MODINT(2).pow(D_FFT * 2).val();\n    for (int i = 0; i < need;\
     \ i++) {\n        long long aa = llround(fa[i].x);\n        long long bb = llround(fb[i].x);\n\
-    \        long long cc = llround(fa[i].y);\n        aa = MODINT(aa).val, bb = MODINT(bb).val,\
-    \ cc = MODINT(cc).val;\n        ret[i] = aa + (bb * bp) + (cc * cp);\n       \
-    \ //   ret[i] = aa + (bb << DFFT) + (cc << (DFFT * 2));\n    }\n    return ret;\n\
-    }\n\n} // namespace fft_arbitrary_mod\n"
+    \        long long cc = llround(fa[i].y);\n        aa = MODINT(aa).val(), bb =\
+    \ MODINT(bb).val(), cc = MODINT(cc).val();\n        ret[i] = aa + (bb * bp) +\
+    \ (cc * cp);\n        //   ret[i] = aa + (bb << DFFT) + (cc << (DFFT * 2));\n\
+    \    }\n    return ret;\n}\n\n} // namespace fft_arbitrary_mod\n"
   code: "#pragma once\n#include <cassert>\n#include <cmath>\n#include <vector>\n\n\
     // Arbitrary mod (<1e9) FFT/convolution\n// MAXA*MAXB*N <= 1e15 (double), 1e19\
     \ (long double)\n// Based on https://ei1333.github.io/luzhiled/snippets/math/arbitrary-mod-convolution.html\n\
@@ -95,10 +95,10 @@ data:
     \ std::vector<MODINT> b) {\n    int need = int(a.size() + b.size()) - 1;\n   \
     \ int nbase = 0;\n    while ((1 << nbase) < need) nbase++;\n    int sz = 1 <<\
     \ nbase;\n    std::vector<cmplx> fa(sz);\n    for (int i = 0; i < (int)a.size();\
-    \ i++)\n        fa[i] = {(T_FFT)(a[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val\
+    \ i++)\n        fa[i] = {(T_FFT)(a[i].val() & ((1LL << D_FFT) - 1)), (T_FFT)(a[i].val()\
     \ >> D_FFT)};\n    fft(sz, fa);\n    std::vector<cmplx> fb(sz);\n    if (a ==\
     \ b)\n        fb = fa;\n    else {\n        for (int i = 0; i < (int)b.size();\
-    \ i++)\n            fb[i] = {(T_FFT)(b[i].val & ((1LL << D_FFT) - 1)), (T_FFT)(b[i].val\
+    \ i++)\n            fb[i] = {(T_FFT)(b[i].val() & ((1LL << D_FFT) - 1)), (T_FFT)(b[i].val()\
     \ >> D_FFT)};\n        fft(sz, fb);\n    }\n    T_FFT ratio = 0.25L / sz;\n  \
     \  cmplx r2(0, -1), r3(ratio, 0), r4(0, -ratio), r5(0, 1);\n    for (int i = 0;\
     \ i <= (sz >> 1); i++) {\n        int j = (sz - i) & (sz - 1);\n        cmplx\
@@ -110,18 +110,18 @@ data:
     \ - fb[i].conj()) * r4;\n            fa[i] = c1 * d1 + c2 * d2 * r5;\n       \
     \     fb[i] = c1 * d2 + c2 * d1;\n        }\n        fa[j] = a1 * b1 + a2 * b2\
     \ * r5;\n        fb[j] = a1 * b2 + a2 * b1;\n    }\n    fft(sz, fa);\n    fft(sz,\
-    \ fb);\n    std::vector<MODINT> ret(sz);\n    long long bp = MODINT(2).pow(D_FFT).val;\n\
-    \    long long cp = MODINT(2).pow(D_FFT * 2).val;\n    for (int i = 0; i < need;\
+    \ fb);\n    std::vector<MODINT> ret(sz);\n    long long bp = MODINT(2).pow(D_FFT).val();\n\
+    \    long long cp = MODINT(2).pow(D_FFT * 2).val();\n    for (int i = 0; i < need;\
     \ i++) {\n        long long aa = llround(fa[i].x);\n        long long bb = llround(fb[i].x);\n\
-    \        long long cc = llround(fa[i].y);\n        aa = MODINT(aa).val, bb = MODINT(bb).val,\
-    \ cc = MODINT(cc).val;\n        ret[i] = aa + (bb * bp) + (cc * cp);\n       \
-    \ //   ret[i] = aa + (bb << DFFT) + (cc << (DFFT * 2));\n    }\n    return ret;\n\
-    }\n\n} // namespace fft_arbitrary_mod\n"
+    \        long long cc = llround(fa[i].y);\n        aa = MODINT(aa).val(), bb =\
+    \ MODINT(bb).val(), cc = MODINT(cc).val();\n        ret[i] = aa + (bb * bp) +\
+    \ (cc * cp);\n        //   ret[i] = aa + (bb << DFFT) + (cc << (DFFT * 2));\n\
+    \    }\n    return ret;\n}\n\n} // namespace fft_arbitrary_mod\n"
   dependsOn: []
   isVerificationFile: false
   path: convolution/fft_arbitrary_mod.hpp
   requiredBy: []
-  timestamp: '2022-05-01 12:00:28+09:00'
+  timestamp: '2022-05-01 16:11:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: convolution/fft_arbitrary_mod.hpp

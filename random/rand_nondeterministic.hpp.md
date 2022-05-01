@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/chromatic_number.test.cpp
     title: graph/test/chromatic_number.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"random/rand_nondeterministic.hpp\"\n#include <chrono>\n\
@@ -27,7 +27,7 @@ data:
   path: random/rand_nondeterministic.hpp
   requiredBy: []
   timestamp: '2022-05-01 12:00:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - graph/test/chromatic_number.test.cpp
 documentation_of: random/rand_nondeterministic.hpp

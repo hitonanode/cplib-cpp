@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/lagrange_interpolation.hpp
     title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\u9593\
       \uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
     title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/arithmetic_cumsum.hpp
     title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\u6570\
       \u306E\u7D2F\u7A4D\u548C\uFF09"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/arithmetic_function_totient.test.cpp
     title: number/test/arithmetic_function_totient.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
@@ -32,8 +32,8 @@ data:
     \ (length = N), deg(f) < N\n// Output: f(x_eval)\n// Complexity: O(N)\n// Verified:\
     \ https://atcoder.jp/contests/arc033/tasks/arc033_4\ntemplate <typename MODINT>\
     \ MODINT interpolate_iota(const std::vector<MODINT> ys, MODINT x_eval) {\n   \
-    \ const int N = ys.size();\n    if (x_eval.val < N) return ys[x_eval.val];\n \
-    \   std::vector<MODINT> facinv(N);\n    facinv[N - 1] = MODINT(N - 1).fac().inv();\n\
+    \ const int N = ys.size();\n    if (x_eval.val() < N) return ys[x_eval.val()];\n\
+    \    std::vector<MODINT> facinv(N);\n    facinv[N - 1] = MODINT(N - 1).fac().inv();\n\
     \    for (int i = N - 1; i > 0; i--) facinv[i - 1] = facinv[i] * i;\n    std::vector<MODINT>\
     \ numleft(N);\n    MODINT numtmp = 1;\n    for (int i = 0; i < N; i++) {\n   \
     \     numleft[i] = numtmp;\n        numtmp *= x_eval - i;\n    }\n    numtmp =\
@@ -94,8 +94,8 @@ data:
   path: formal_power_series/sum_of_exponential_times_polynomial.hpp
   requiredBy:
   - number/arithmetic_cumsum.hpp
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-05-01 16:11:38+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - number/test/arithmetic_function_totient.test.cpp

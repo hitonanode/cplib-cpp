@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/radix_heap.hpp
     title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: utilities/reader.hpp
     title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
   _extendedRequiredBy: []

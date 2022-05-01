@@ -5,7 +5,7 @@ data:
     path: combinatorial_opt/maxflow_pushrelabel.hpp
     title: "Maxflow (push-relabel, Goldberg & Tarjan) \uFF08Push-relabel \u306B\u3088\
       \u308B\u6700\u5927\u6D41\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: utilities/reader.hpp
     title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
   _extendedRequiredBy: []

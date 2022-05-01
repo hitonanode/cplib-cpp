@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - http://kirika-comp.hatenablog.com/entry/2018/03/12/210446
@@ -92,7 +92,7 @@ data:
   path: number/primitive_root.hpp
   requiredBy: []
   timestamp: '2021-10-30 11:24:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number/test/primitive_root.test.cpp
 documentation_of: number/primitive_root.hpp

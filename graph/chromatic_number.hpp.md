@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/chromatic_number.test.cpp
     title: graph/test/chromatic_number.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://atcoder.jp/contests/abc187/tasks/abc187_f
@@ -27,7 +27,7 @@ data:
     \ & 1) ? 1 : -1;\n    f[0] = 1;\n    for (int s = 1; s < S; s++) {\n        int\
     \ i = __builtin_ctz(s);\n        f[s] = f[s - (1 << i)] + f[(s - (1 << i)) & ~edge[i]];\n\
     \    }\n    for (int k = 1; k < V; k++) {\n        for (int s = 0; s < S; s++)\
-    \ g[s] *= f[s];\n        if (std::accumulate(g.begin(), g.end(), MODINT(0)).val)\
+    \ g[s] *= f[s];\n        if (std::accumulate(g.begin(), g.end(), MODINT()).val())\
     \ return k;\n    }\n    return V;\n};\n"
   code: "#pragma once\n#include <numeric>\n#include <vector>\n\n// CUT begin\n// (vertex)\
     \ chromatic number: \uFF08\u9802\u70B9\uFF09\u5F69\u8272\u6570\n// Verified: https://judge.yosupo.jp/problem/chromatic_number,\
@@ -41,14 +41,14 @@ data:
     \ & 1) ? 1 : -1;\n    f[0] = 1;\n    for (int s = 1; s < S; s++) {\n        int\
     \ i = __builtin_ctz(s);\n        f[s] = f[s - (1 << i)] + f[(s - (1 << i)) & ~edge[i]];\n\
     \    }\n    for (int k = 1; k < V; k++) {\n        for (int s = 0; s < S; s++)\
-    \ g[s] *= f[s];\n        if (std::accumulate(g.begin(), g.end(), MODINT(0)).val)\
+    \ g[s] *= f[s];\n        if (std::accumulate(g.begin(), g.end(), MODINT()).val())\
     \ return k;\n    }\n    return V;\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/chromatic_number.hpp
   requiredBy: []
-  timestamp: '2021-05-01 17:41:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-05-01 16:11:38+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - graph/test/chromatic_number.test.cpp
 documentation_of: graph/chromatic_number.hpp
