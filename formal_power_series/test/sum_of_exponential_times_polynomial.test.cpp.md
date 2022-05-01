@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/lagrange_interpolation.hpp
     title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\u9593\
       \uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/sum_of_exponential_times_polynomial.hpp
     title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
     title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []

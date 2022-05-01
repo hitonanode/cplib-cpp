@@ -9,7 +9,7 @@ data:
     path: number/combination.hpp
     title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
       \u7406\u306E\u62E1\u5F35\uFF09"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/primitive_root.hpp
     title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedVerifiedWith:
@@ -31,15 +31,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/combination.test.cpp
     title: number/test/combination.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/bare_mod_algebra.hpp\"\n#include <algorithm>\n#include\
@@ -136,7 +136,7 @@ data:
   - number/combination.hpp
   - linear_algebra_matrix/linalg_longlong.hpp
   timestamp: '2021-10-30 11:24:11+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/combination.stress.test.cpp
   - number/test/combination.test.cpp

@@ -6,7 +6,7 @@ data:
     path: convolution/multivar_ntt.hpp
     title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
       \u307F\u8FBC\u307F\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
   _extendedVerifiedWith:
@@ -123,75 +123,75 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_product.test.cpp
     title: linear_algebra_matrix/test/matrix_product.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/arithmetic_function_totient.test.cpp
     title: number/test/arithmetic_function_totient.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/gcd_convolution.test.cpp
     title: number/test/gcd_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/lcm_convolution.test.cpp
     title: number/test/lcm_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/multiple_moebius.yuki1627.test.cpp
     title: number/test/multiple_moebius.yuki1627.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/multiple_moebius.yuki886.test.cpp
     title: number/test/multiple_moebius.yuki886.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/zeta_moebius_transform.test.cpp
     title: number/test/zeta_moebius_transform.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/range-affine-range-sum.test.cpp
     title: segmenttree/test/range-affine-range-sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_log.test.cpp
     title: set_power_series/test/subset_log.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_pow.stress.test.cpp
     title: set_power_series/test/subset_pow.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_pow.yuki1594.test.cpp
     title: set_power_series/test/subset_pow.yuki1594.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/test/rolling_hash_w_modint.test.cpp
     title: string/test/rolling_hash_w_modint.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/tree_isomorphism.aoj1613.test.cpp
     title: tree/test/tree_isomorphism.aoj1613.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: utilities/test/pow.test.cpp
     title: utilities/test/pow.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -364,7 +364,7 @@ data:
   - linear_algebra_matrix/blackbox_matrices.hpp
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/linear_recurrence.test.cpp
   - formal_power_series/test/kitamasa.test.cpp

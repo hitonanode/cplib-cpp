@@ -112,7 +112,7 @@ data:
       path: convolution/multivar_ntt.hpp
       title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
         \u7573\u307F\u8FBC\u307F\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
   - name: data_structure
@@ -176,7 +176,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/lagrange_interpolation.hpp
       title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\
         \u9593\uFF09"
@@ -190,10 +190,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/polynomial_divmod.hpp
       title: formal_power_series/polynomial_divmod.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial.hpp
       title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
       title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   - name: .
@@ -201,7 +201,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -263,8 +263,12 @@ data:
         \u70B9\u305F\u3061\u306E\u30DE\u30F3\u30CF\u30C3\u30BF\u30F3\u8DDD\u96E2\u306B\
         \u3088\u308B\u6700\u5C0F\u5168\u57DF\u6728\u69CB\u6210\uFF09"
     - icon: ':heavy_check_mark:'
+      path: graph/max_weight_independent_set.hpp
+      title: "Max weight independent set \uFF08\u91CD\u307F\u6700\u5927\u72EC\u7ACB\
+        \u96C6\u5408\uFF09"
+    - icon: ':heavy_check_mark:'
       path: graph/maximum_independent_set.hpp
-      title: graph/maximum_independent_set.hpp
+      title: "Maximum independent set \uFF08\u6700\u5927\u72EC\u7ACB\u96C6\u5408\uFF09"
     - icon: ':heavy_check_mark:'
       path: graph/nonzero_path_of_group_labeled_graph.hpp
       title: "Shortest Non-zero Path in Group-Labeled Graphs \uFF08\u7121\u5411\u30B0\
@@ -283,7 +287,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/shortest_cycle_weighted.hpp
       title: graph/shortest_cycle_weighted.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/shortest_path.hpp
       title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
     - icon: ':heavy_check_mark:'
@@ -327,10 +331,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/matrix.hpp
       title: linear_algebra_matrix/matrix.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
   - name: multithread
@@ -343,11 +347,11 @@ data:
     - icon: ':warning:'
       path: number/acl_modint.hpp
       title: number/acl_modint.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/arithmetic_cumsum.hpp
       title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\
         \u6570\u306E\u7D2F\u7A4D\u548C\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -396,19 +400,19 @@ data:
       path: number/min_plus_semiring.hpp
       title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\
         \u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
       path: number/nimber.hpp
       title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/primitive_root.hpp
       title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/zeta_moebius_transform.hpp
       title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   - name: other_algorithms
@@ -424,7 +428,7 @@ data:
       path: other_algorithms/mos_algorithm.hpp
       title: "Mo's algorithm \uFF08\u533A\u9593\u30AF\u30A8\u30EA\u306B\u95A2\u3059\
         \u308B\u5E73\u65B9\u5206\u5272\u30C6\u30AF\u30CB\u30C3\u30AF\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/permutation_tree.hpp
       title: "Permutation tree \uFF08\u9806\u5217\u6728\uFF09"
     - icon: ':heavy_check_mark:'
@@ -446,7 +450,7 @@ data:
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -459,7 +463,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/acl_beats.hpp
       title: Segment Tree Beats (based on atcoder::lazy_segtree)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/acl_lazysegtree.hpp
       title: Lazy Segtree (based on atcoder::lazy_segtree)
     - icon: ':heavy_check_mark:'
@@ -477,13 +481,13 @@ data:
       title: "Merge sort tree \uFF08\u9759\u7684\u306A\u5217\u306E\u90E8\u5206\u5217\
         \u306B\u542B\u307E\u308C\u308B\u95BE\u5024\u4EE5\u4E0B\u306E\u8981\u7D20\u6570\
         \u30AF\u30A8\u30EA\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range-add-range-min.hpp
       title: Range Add Range Min (known as the Starry sky tree)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range-update-range-get.hpp
       title: segmenttree/range-update-range-get.hpp
     - icon: ':heavy_check_mark:'
@@ -503,7 +507,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
       title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-affine-range-sum.hpp
       title: segmenttree/trees/acl_range-affine-range-sum.hpp
     - icon: ':warning:'
@@ -517,7 +521,7 @@ data:
       title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   - name: set_power_series
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/subset_convolution.hpp
       title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
         \u7B97\uFF09"
@@ -560,7 +564,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/mp_algorithm.hpp
       title: string/mp_algorithm.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: string/rolling_hash_1d.hpp
       title: string/rolling_hash_1d.hpp
     - icon: ':heavy_check_mark:'
@@ -588,7 +592,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/cartesian_tree.hpp
       title: Cartesian tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/centroid_decomposition.hpp
       title: tree/centroid_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -597,10 +601,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/eulertour.hpp
       title: tree/eulertour.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/frequency_table_of_tree_distance.hpp
       title: Frequency table of tree distance
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/heavy_light_decomposition.hpp
       title: tree/heavy_light_decomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -613,7 +617,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/rerooting.hpp
       title: "Rerooting \uFF08\u5168\u65B9\u4F4D\u6728 DP\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/tree_isomorphism.hpp
       title: "Tree isomrphism \uFF08\u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09"
   - name: unionfind
@@ -621,7 +625,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: unionfind/fully_persistent_uf.hpp
       title: unionfind/fully_persistent_uf.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/grid_unionfind.hpp
       title: unionfind/grid_unionfind.hpp
     - icon: ':warning:'
@@ -670,10 +674,10 @@ data:
       title: "Offline sum of linear segments \uFF08\u533A\u9593\u4E00\u6B21\u95A2\u6570\
         \u52A0\u7B97\u30AF\u30A8\u30EA\u306E\u7D2F\u7A4D\u548C\u3092\u7528\u3044\u305F\
         \u30AA\u30D5\u30E9\u30A4\u30F3\u51E6\u7406\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/pow.hpp
       title: "Power \uFF08\u7D2F\u4E57\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/pow_sum.hpp
       title: "power sum \uFF08\u7D2F\u4E57\u548C\uFF09"
     - icon: ':warning:'
@@ -1002,6 +1006,12 @@ data:
       path: graph/test/manhattan_mst.test.cpp
       title: graph/test/manhattan_mst.test.cpp
     - icon: ':heavy_check_mark:'
+      path: graph/test/max_weight_independent_set.aoj3519.test.cpp
+      title: graph/test/max_weight_independent_set.aoj3519.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/max_weight_independent_set.lc.test.cpp
+      title: graph/test/max_weight_independent_set.lc.test.cpp
+    - icon: ':heavy_check_mark:'
       path: graph/test/maximum_independent_set.test.cpp
       title: graph/test/maximum_independent_set.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1105,12 +1115,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
       title: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/arithmetic_function_totient.test.cpp
       title: number/test/arithmetic_function_totient.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1140,13 +1150,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/factorize_longlong.test.cpp
       title: number/test/factorize_longlong.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/gcd_convolution.test.cpp
       title: number/test/gcd_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/gen_primes.test.cpp
       title: number/test/gen_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/lcm_convolution.test.cpp
       title: number/test/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1158,13 +1168,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/min_max_semiring.test.cpp
       title: number/test/min_max_semiring.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/montmort_number_mod.test.cpp
       title: number/test/montmort_number_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/multiple_moebius.yuki1627.test.cpp
       title: number/test/multiple_moebius.yuki1627.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/multiple_moebius.yuki886.test.cpp
       title: number/test/multiple_moebius.yuki886.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1173,16 +1183,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/primitive_root.test.cpp
       title: number/test/primitive_root.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/sieve.stress.test.cpp
       title: number/test/sieve.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/zeta_moebius_transform.test.cpp
       title: number/test/zeta_moebius_transform.test.cpp
   - name: other_algorithms/test
@@ -1190,7 +1200,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/enumerate_triangles.test.cpp
       title: other_algorithms/test/enumerate_triangles.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
       title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1198,7 +1208,7 @@ data:
       title: other_algorithms/test/slope_trick_stress.test.cpp
   - name: segmenttree/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/acl_range-affine-range-sum.test.cpp
       title: segmenttree/test/acl_range-affine-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1228,13 +1238,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/range-affine-range-sum.test.cpp
       title: segmenttree/test/range-affine-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1260,16 +1270,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_conv.test.cpp
       title: set_power_series/test/subset_conv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_exp.stress.test.cpp
       title: set_power_series/test/subset_exp.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_log.test.cpp
       title: set_power_series/test/subset_log.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_pow.stress.test.cpp
       title: set_power_series/test/subset_pow.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_pow.yuki1594.test.cpp
       title: set_power_series/test/subset_pow.yuki1594.test.cpp
   - name: sparse_table/test
@@ -1321,7 +1331,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_lcp.test.cpp
       title: string/test/rolling_hash_lcp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_w_modint.test.cpp
       title: string/test/rolling_hash_w_modint.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1350,13 +1360,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/diameter.test.cpp
       title: tree/test/diameter.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
       title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance.test.cpp
       title: tree/test/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
       title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1377,7 +1387,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/rerooting.yuki1718.test.cpp
       title: tree/test/rerooting.yuki1718.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/tree_isomorphism.aoj1613.test.cpp
       title: tree/test/tree_isomorphism.aoj1613.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1386,7 +1396,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-subtree-sum.test.cpp
       title: tree/test/vertex-add-subtree-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/test/vertex-set-path-composite.test.cpp
       title: tree/test/vertex-set-path-composite.test.cpp
   - name: unionfind/test
@@ -1420,7 +1430,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/kth_root_integer.test.cpp
       title: utilities/test/kth_root_integer.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: utilities/test/pow.test.cpp
       title: utilities/test/pow.test.cpp
     - icon: ':heavy_check_mark:'

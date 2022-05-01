@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/hessenberg_system.hpp
     title: Hessenberg linear system
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   - icon: ':heavy_check_mark:'
     path: number/dual_number.hpp
     title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp
   _extendedRequiredBy: []
