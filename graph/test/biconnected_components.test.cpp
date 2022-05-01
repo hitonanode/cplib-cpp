@@ -7,7 +7,7 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int N, M;
     cin >> N >> M;
-    UndirectedGraph graph(N);
+    lowlink graph(N);
     while (M--) {
         int a, b;
         cin >> a >> b;
