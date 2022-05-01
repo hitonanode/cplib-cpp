@@ -16,5 +16,5 @@ int main() {
     if (ret.empty() and !A.empty())
         puts("-1");
     else
-        for (int i = 0; i < N; i++) printf("%d ", ret.coeff(i).val);
+        for (int i = 0; i < N; i++) printf("%d ", ret.coeff(i).val());
 }
