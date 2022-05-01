@@ -8,22 +8,22 @@ int main() {
     int V, E;
     cin >> V >> E;
     constexpr int INF = 2000000000;
-    ShortestPath<int, INF> graph(V);
+    shortest_path<int, INF> graph(V);
     while (E--) {
         int s, t, d;
         cin >> s >> t >> d;
         graph.add_edge(s, t, d);
     }
 
-    graph.WarshallFloyd();
+    auto dist2d = graph.floyd_warshall();
     for (int i = 0; i < V; i++) {
-        if (graph.dist2d[i][i] < 0) {
+        if (dist2d[i][i] < 0) {
             cout << "NEGATIVE CYCLE\n";
             return 0;
         }
     }
 
-    for (auto vec : graph.dist2d) {
+    for (auto vec : dist2d) {
         for (int i = 0; i < V; i++)
             cout << (vec[i] < INF ? to_string(vec[i]) : "INF") << (i + 1 == V ? '\n' : ' ');
     }

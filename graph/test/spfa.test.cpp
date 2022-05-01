@@ -9,14 +9,14 @@ int main() {
     int V, E, r;
     cin >> V >> E >> r;
     constexpr int INF = 1 << 30;
-    ShortestPath<int, INF> graph(V);
+    shortest_path<int, INF> graph(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
         cin >> s >> t >> d;
         graph.add_edge(s, t, d);
     }
 
-    graph.SPFA(r);
+    graph.spfa(r);
     for (auto d : graph.dist) {
         if (d < INF) {
             cout << d << '\n';

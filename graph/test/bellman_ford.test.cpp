@@ -7,14 +7,14 @@ using namespace std;
 int main() {
     int V, E, r;
     cin >> V >> E >> r;
-    ShortestPath<long long> graph(V);
+    shortest_path<long long> graph(V);
     for (int i = 0; i < E; i++) {
         int s, t, d;
         cin >> s >> t >> d;
         graph.add_edge(s, t, d);
     }
 
-    if (!graph.BellmanFord(r, V + 1)) {
+    if (!graph.bellman_ford(r, V + 1)) {
         puts("NEGATIVE CYCLE");
         return 0;
     }

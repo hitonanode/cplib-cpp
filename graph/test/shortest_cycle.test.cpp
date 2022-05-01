@@ -23,7 +23,7 @@ int main() {
             to[u].emplace_back(v, w);
         }
         for (int s = 0; s < N; s++) {
-            ShortestPath<long long, INF> graph(N + 1);
+            shortest_path<long long, INF> graph(N + 1);
             for (int i = 0; i < N; i++) {
                 for (auto [j, w] : to[i]) {
                     graph.add_edge(i, j, w);

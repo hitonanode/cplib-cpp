@@ -17,7 +17,7 @@ bool augment_union_matroid(M1 &matroid1, M2 &matroid2, State1 &I1, State2 &I2,
                            const std::vector<T> &weights) {
     const int M = matroid1.size();
     const int gs = M, gt = M + 1;
-    ShortestPath<T> sssp(M + 2);
+    shortest_path<T> sssp(M + 2);
     std::vector<int> color(M, -1);
     matroid1.set(I1);
     matroid2.set(I2);
@@ -38,7 +38,7 @@ bool augment_union_matroid(M1 &matroid1, M2 &matroid2, State1 &I1, State2 &I2,
             }
         }
     }
-    sssp.solve(gs);
+    sssp.solve(gs, gt);
     auto aug_path = sssp.retrieve_path(gt);
     if (aug_path.empty()) return false;
     assert(aug_path.size() >= 3);

@@ -3,7 +3,6 @@
 #include <cassert>
 #include <vector>
 
-// CUT begin
 // (Min weight) matroid intersection solver
 // Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/
 // Complexity: O(CE^2 + E^3) (C : circuit query, non-weighted)
@@ -21,7 +20,7 @@ std::vector<bool> MatroidIntersection(M1 matroid1, M2 matroid2, std::vector<T> w
     State I(M);
 
     while (true) {
-        ShortestPath<T> sssp(M + 2);
+        shortest_path<T> sssp(M + 2);
         matroid1.set(I);
         matroid2.set(I);
         for (int e = 0; e < M; e++) {
@@ -36,7 +35,7 @@ std::vector<bool> MatroidIntersection(M1 matroid1, M2 matroid2, std::vector<T> w
                 if (f != e) sssp.add_edge(f, e, weights[e] + 1);
             }
         }
-        sssp.solve(gs);
+        sssp.solve(gs, gt);
         auto aug_path = sssp.retrieve_path(gt);
         if (aug_path.empty()) break;
         for (auto e : aug_path) {

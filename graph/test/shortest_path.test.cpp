@@ -1,5 +1,5 @@
-#include "../../data_structure/radix_heap.hpp"
 #include "../shortest_path.hpp"
+#include "../../data_structure/radix_heap.hpp"
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -10,18 +10,18 @@ int main() {
     int N, M, s, t;
     cin >> N >> M >> s >> t;
     constexpr long long INF = 1LL << 60;
-    ShortestPath<long long, INF> graph(N);
+    shortest_path<long long, INF> graph(N);
     while (M--) {
         int a, b, c;
         cin >> a >> b >> c;
         graph.add_edge(a, b, c);
     }
 
-    graph.Dijkstra<radix_heap<unsigned long long, int>>(s);
+    graph.dijkstra<radix_heap<unsigned long long, int>>(s, t);
     auto d_radix = graph.dist;
 
     graph.solve(s);
-    assert(graph.dist == d_radix);
+    assert(graph.dist[t] == d_radix[t]);
 
     if (graph.dist[t] == INF) {
         cout << "-1\n";

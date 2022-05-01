@@ -8,7 +8,7 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int N, K;
     cin >> N >> K;
-    ShortestPath<int> graph(N + 1);
+    shortest_path<int> graph(N + 1);
     vector<int> indeg(N);
     while (K--) {
         int r, c;
