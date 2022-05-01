@@ -5,13 +5,13 @@
 int main() {
     int V, E;
     std::cin >> V >> E;
-    UndirectedGraph graph(V);
+    lowlink graph(V);
     for (int i = 0; i < E; i++) {
         int s, t;
         std::cin >> s >> t;
         graph.add_edge(s, t);
     }
-    graph.detectBridge();
+    graph.build();
     for (int i = 0; i < V; i++) {
         if (graph.is_articulation[i]) { printf("%d\n", i); }
     }

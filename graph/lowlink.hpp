@@ -5,8 +5,7 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
-struct UndirectedGraph {
+struct lowlink {
     int V; // # of vertices
     int E; // # of edges
     int k;
@@ -19,7 +18,7 @@ struct UndirectedGraph {
 
     // lowlink
     std::vector<int> order;           // visiting order of DFS tree, size = V
-    std::vector<int> lowlink;         // size = V
+    std::vector<int> lowlink_;        // size = V
     std::vector<int> is_dfstree_edge; // size = E
 
     int tecc_num;             // 二重辺連結成分数
@@ -28,8 +27,8 @@ struct UndirectedGraph {
     int tvcc_num;             // 二重頂点連結成分数
     std::vector<int> tvcc_id; // 各辺が何個目の二重頂点連結成分か
 
-    UndirectedGraph(int V)
-        : V(V), E(0), k(0), to(V), is_articulation(V, 0), order(V, -1), lowlink(V, -1),
+    lowlink(int V)
+        : V(V), E(0), k(0), to(V), is_articulation(V, 0), order(V, -1), lowlink_(V, -1),
           tecc_num(0), tvcc_num(0) {}
 
     void add_edge(int v1, int v2) {
@@ -52,70 +51,83 @@ struct UndirectedGraph {
     void dfs_lowlink(int now, int prv_eid = -1) {
         if (prv_eid < 0) _root_now = k;
         if (prv_eid == -1) root_ids.push_back(now);
-        order[now] = lowlink[now] = k++;
-        for (const auto &nxt : to[now])
-            if (nxt.second != prv_eid) {
-                if (order[nxt.first] < order[now]) _edge_stack.push_back(nxt.second);
-                if (order[nxt.first] >= 0) {
-                    lowlink[now] = std::min(lowlink[now], order[nxt.first]);
-                } else {
-                    is_dfstree_edge[nxt.second] = 1;
-                    dfs_lowlink(nxt.first, nxt.second);
-                    lowlink[now] = std::min(lowlink[now], lowlink[nxt.first]);
+        order[now] = lowlink_[now] = k++;
+        for (const auto &nxt : to[now]) {
+            if (nxt.second == prv_eid) continue;
+            if (order[nxt.first] < order[now]) _edge_stack.push_back(nxt.second);
+            if (order[nxt.first] >= 0) {
+                lowlink_[now] = std::min(lowlink_[now], order[nxt.first]);
+            } else {
+                is_dfstree_edge[nxt.second] = 1;
+                dfs_lowlink(nxt.first, nxt.second);
+                lowlink_[now] = std::min(lowlink_[now], lowlink_[nxt.first]);
 
-                    if ((order[now] == _root_now and order[nxt.first] != _root_now + 1) or
-                        (order[now] != _root_now and lowlink[nxt.first] >= order[now])) {
-                        is_articulation[now] = 1;
+                if ((order[now] == _root_now and order[nxt.first] != _root_now + 1) or
+                    (order[now] != _root_now and lowlink_[nxt.first] >= order[now])) {
+                    is_articulation[now] = 1;
+                }
+                if (lowlink_[nxt.first] >= order[now]) {
+                    while (true) {
+                        int e = _edge_stack.back();
+                        tvcc_id[e] = tvcc_num;
+                        _edge_stack.pop_back();
+                        if (e == nxt.second) break;
                     }
-                    if (lowlink[nxt.first] >= order[now]) {
-                        while (true) {
-                            int e = _edge_stack.back();
-                            tvcc_id[e] = tvcc_num;
-                            _edge_stack.pop_back();
-                            if (std::minmax(edges[e].first, edges[e].second) ==
-                                std::minmax(now, nxt.first)) {
-                                break;
-                            }
-                        }
-                        tvcc_num++;
-                    }
+                    tvcc_num++;
                 }
             }
+        }
     }
 
-    // Find all bridges
-    // Complexity: O(V + E)
-    void detectBridge() {
+    void build() {
+        for (int v = 0; v < V; ++v) {
+            if (order[v] < 0) dfs_lowlink(v);
+        }
+
+        // Find all bridges
+        // Complexity: O(V + E)
         for (int i = 0; i < E; i++) {
             int v1 = edges[i].first, v2 = edges[i].second;
-            if (order[v1] < 0) dfs_lowlink(v1);
             if (order[v1] > order[v2]) std::swap(v1, v2);
-            if (order[v1] < lowlink[v2]) is_bridge[i] = 1;
+            is_bridge[i] = order[v1] < lowlink_[v2];
         }
     }
 
     // Find two-edge-connected components and classify all vertices
-    // Complexity:  O(V + E)
-    void two_edge_connected_components() {
+    // Complexity: O(V + E)
+    std::vector<std::vector<int>> two_edge_connected_components() {
+        build();
         tecc_num = 0;
         tecc_id.assign(V, -1);
 
-        for (int i = 0; i < V; i++)
-            if (tecc_id[i] == -1) {
-                tecc_id[i] = tecc_num;
-                std::queue<int> que;
-                que.push(i);
-                while (!que.empty()) {
-                    int now = que.front();
-                    que.pop();
-                    for (const auto &edge : to[now]) {
-                        int nxt = edge.first;
-                        if (tecc_id[nxt] >= 0 or is_bridge[edge.second]) continue;
-                        tecc_id[nxt] = tecc_num;
-                        que.push(nxt);
-                    }
+        std::vector<int> st;
+        for (int i = 0; i < V; i++) {
+            if (tecc_id[i] != -1) continue;
+            tecc_id[i] = tecc_num;
+            st.push_back(i);
+            while (!st.empty()) {
+                int now = st.back();
+                st.pop_back();
+                for (const auto &edge : to[now]) {
+                    int nxt = edge.first;
+                    if (tecc_id[nxt] >= 0 or is_bridge[edge.second]) continue;
+                    tecc_id[nxt] = tecc_num;
+                    st.push_back(nxt);
                 }
-                tecc_num++;
             }
+            ++tecc_num;
+        }
+        std::vector<std::vector<int>> ret(tecc_num);
+        for (int i = 0; i < V; ++i) ret[tecc_id[i]].push_back(i);
+        return ret;
+    }
+
+    // Find biconnected components and classify all edges
+    // Complexity: O(V + E)
+    std::vector<std::vector<int>> biconnected_components() {
+        build();
+        std::vector<std::vector<int>> ret(tvcc_num);
+        for (int i = 0; i < E; ++i) ret[tvcc_id[i]].push_back(i);
+        return ret;
     }
 };

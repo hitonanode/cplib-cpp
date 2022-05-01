@@ -3,24 +3,25 @@
 #include <iostream>
 #include <utility>
 #include <vector>
+using namespace std;
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B"
 
 int main() {
     int V, E;
-    std::cin >> V >> E;
-    UndirectedGraph graph(V);
+    cin >> V >> E;
+    lowlink graph(V);
     for (int i = 0; i < E; i++) {
         int s, t;
-        std::cin >> s >> t;
-        if (s > t) std::swap(s, t);
+        cin >> s >> t;
+        if (s > t) swap(s, t);
         graph.add_edge(s, t);
     }
-    graph.detectBridge();
+    graph.build();
 
-    std::vector<std::pair<int, int>> bridges;
+    vector<pair<int, int>> bridges;
     for (int i = 0; i < E; i++) {
-        if (graph.is_bridge[i]) { bridges.emplace_back(graph.edges[i]); }
+        if (graph.is_bridge[i]) bridges.emplace_back(graph.edges[i]);
     }
-    std::sort(bridges.begin(), bridges.end());
-    for (auto pa : bridges) { printf("%d %d\n", pa.first, pa.second); }
+    sort(bridges.begin(), bridges.end());
+    for (auto p : bridges) cout << p.first << ' ' << p.second << '\n';
 }
