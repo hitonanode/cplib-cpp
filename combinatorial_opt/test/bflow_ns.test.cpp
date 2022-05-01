@@ -32,7 +32,7 @@ int main() {
     for (int i = 0; i < N; i++) {
         int b;
         cin >> b;
-        bflow.set_supply(i, b);
+        bflow.add_supply(i, b);
     }
     while (M--) {
         int s, t, l, u;

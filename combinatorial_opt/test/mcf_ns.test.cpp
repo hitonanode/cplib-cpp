@@ -13,7 +13,7 @@ int main() {
         mcf.add_edge(u, v, 0, c, d);
     }
 
-    mcf.set_supply(0, F), mcf.set_supply(V - 1, -F);
+    mcf.add_supply(0, F), mcf.add_supply(V - 1, -F);
     auto ret = mcf.solve<int>();
     cout << (mcf.infeasible ? -1 : ret) << '\n';
 }
