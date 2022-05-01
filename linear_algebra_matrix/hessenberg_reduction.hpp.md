@@ -4,18 +4,17 @@ data:
   - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  _extendedRequiredBy:
-  - icon: ':x:'
-    path: linear_algebra_matrix/characteristic_poly.hpp
-    title: "Characteristic polynomial \uFF08\u884C\u5217\u306E\u7279\u6027\u591A\u9805\
-      \u5F0F\uFF09"
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/characteristic_poly.test.cpp
     title: linear_algebra_matrix/test/characteristic_poly.test.cpp
-  _isVerificationFailed: true
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
+    title: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf
@@ -148,7 +147,28 @@ data:
     \  const auto rinv = Tp(1) / M[r + 1][r];\n        for (int i = r + 2; i < N;\
     \ i++) {\n            const auto n = M[i][r] * rinv;\n            for (int j =\
     \ 0; j < N; j++) M[i][j] -= M[r + 1][j] * n;\n            for (int j = 0; j <\
-    \ N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n"
+    \ N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n\ntemplate <class\
+    \ Ring> void ring_hessenberg_reduction(matrix<Ring> &M) {\n    assert(M.height()\
+    \ == M.width());\n    const int N = M.height();\n    for (int r = 0; r < N - 2;\
+    \ r++) {\n        int piv = matrix<Ring>::choose_pivot(M, r + 1, r);\n       \
+    \ if (piv < 0) continue;\n        for (int i = 0; i < N; i++) std::swap(M[r +\
+    \ 1][i], M[piv][i]);\n        for (int i = 0; i < N; i++) std::swap(M[i][r + 1],\
+    \ M[i][piv]);\n\n        for (int i = r + 2; i < N; i++) {\n            if (M[i][r]\
+    \ == Ring()) continue;\n            Ring a = M[r + 1][r], b = M[i][r], m00 = 1,\
+    \ m01 = 0, m10 = 0, m11 = 1;\n            while (a != Ring() and b != Ring())\
+    \ {\n                if (a.val() > b.val()) {\n                    auto d = a.val()\
+    \ / b.val();\n                    a -= b * d, m00 -= m10 * d, m01 -= m11 * d;\n\
+    \                } else {\n                    auto d = b.val() / a.val();\n \
+    \                   b -= a * d, m10 -= m00 * d, m11 -= m01 * d;\n            \
+    \    }\n            }\n            if (a == Ring()) std::swap(a, b), std::swap(m00,\
+    \ m10), std::swap(m01, m11);\n\n            for (int j = 0; j < N; j++) {\n  \
+    \              Ring anew = M[r + 1][j] * m00 + M[i][j] * m01;\n              \
+    \  Ring bnew = M[r + 1][j] * m10 + M[i][j] * m11;\n                M[r + 1][j]\
+    \ = anew;\n                M[i][j] = bnew;\n            }\n            assert(M[i][r]\
+    \ == 0);\n\n            for (int j = 0; j < N; j++) {\n                Ring anew\
+    \ = M[j][r + 1] * m11 - M[j][i] * m10;\n                Ring bnew = -M[j][r +\
+    \ 1] * m01 + M[j][i] * m00;\n                M[j][r + 1] = anew;\n           \
+    \     M[j][i] = bnew;\n            }\n        }\n    }\n}\n"
   code: "#pragma once\n#include \"matrix.hpp\"\n#include <cassert>\n#include <utility>\n\
     \n// Upper Hessenberg reduction of square matrices\n// Complexity: O(n^3)\n//\
     \ Reference:\n// http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf\ntemplate\
@@ -160,17 +180,38 @@ data:
     \n        const auto rinv = Tp(1) / M[r + 1][r];\n        for (int i = r + 2;\
     \ i < N; i++) {\n            const auto n = M[i][r] * rinv;\n            for (int\
     \ j = 0; j < N; j++) M[i][j] -= M[r + 1][j] * n;\n            for (int j = 0;\
-    \ j < N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n"
+    \ j < N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n\ntemplate <class\
+    \ Ring> void ring_hessenberg_reduction(matrix<Ring> &M) {\n    assert(M.height()\
+    \ == M.width());\n    const int N = M.height();\n    for (int r = 0; r < N - 2;\
+    \ r++) {\n        int piv = matrix<Ring>::choose_pivot(M, r + 1, r);\n       \
+    \ if (piv < 0) continue;\n        for (int i = 0; i < N; i++) std::swap(M[r +\
+    \ 1][i], M[piv][i]);\n        for (int i = 0; i < N; i++) std::swap(M[i][r + 1],\
+    \ M[i][piv]);\n\n        for (int i = r + 2; i < N; i++) {\n            if (M[i][r]\
+    \ == Ring()) continue;\n            Ring a = M[r + 1][r], b = M[i][r], m00 = 1,\
+    \ m01 = 0, m10 = 0, m11 = 1;\n            while (a != Ring() and b != Ring())\
+    \ {\n                if (a.val() > b.val()) {\n                    auto d = a.val()\
+    \ / b.val();\n                    a -= b * d, m00 -= m10 * d, m01 -= m11 * d;\n\
+    \                } else {\n                    auto d = b.val() / a.val();\n \
+    \                   b -= a * d, m10 -= m00 * d, m11 -= m01 * d;\n            \
+    \    }\n            }\n            if (a == Ring()) std::swap(a, b), std::swap(m00,\
+    \ m10), std::swap(m01, m11);\n\n            for (int j = 0; j < N; j++) {\n  \
+    \              Ring anew = M[r + 1][j] * m00 + M[i][j] * m01;\n              \
+    \  Ring bnew = M[r + 1][j] * m10 + M[i][j] * m11;\n                M[r + 1][j]\
+    \ = anew;\n                M[i][j] = bnew;\n            }\n            assert(M[i][r]\
+    \ == 0);\n\n            for (int j = 0; j < N; j++) {\n                Ring anew\
+    \ = M[j][r + 1] * m11 - M[j][i] * m10;\n                Ring bnew = -M[j][r +\
+    \ 1] * m01 + M[j][i] * m00;\n                M[j][r + 1] = anew;\n           \
+    \     M[j][i] = bnew;\n            }\n        }\n    }\n}\n"
   dependsOn:
   - linear_algebra_matrix/matrix.hpp
   isVerificationFile: false
   path: linear_algebra_matrix/hessenberg_reduction.hpp
-  requiredBy:
-  - linear_algebra_matrix/characteristic_poly.hpp
-  timestamp: '2022-05-01 02:11:54+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  requiredBy: []
+  timestamp: '2022-05-01 17:04:43+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
+  - linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
 documentation_of: linear_algebra_matrix/hessenberg_reduction.hpp
 layout: document
 title: Hessenberg reduction of matrix
@@ -181,3 +222,24 @@ title: Hessenberg reduction of matrix
 ## やっていること
 
 (Upper) Hessenberg reduction とは，行列に相似変換を施すことでその対角成分より2つ以上左下側の成分を全てゼロにするというもので，このような変換は特に Householder 変換の組合せによって可能である．相似変換で特性多項式は不変なため，本ライブラリでは特性多項式の導出などに応用されている．
+
+## 使用方法
+
+`matrix<T>` に対して upper Hessenberg reduction を行う関数は以下のように使用する．
+### `T` が逆元がとれるデータ構造の場合
+
+```cpp
+matrix<T> mat(N, N);
+hessenberg_reduction(mat);
+```
+
+### `T` が逆元がとれないがユークリッドの互除法が可能なデータ構造の場合（例：合成数 modint）
+
+```cpp
+matrix<T> mat(N, N);
+ring_hessenberg_reduction(mat);
+```
+
+## 問題例
+
+- [Library Checker: Determinant of Matrix (arbitrary mod)](https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod): 任意 mod のケースでも特性多項式が $O(n^3)$ で計算可能である．

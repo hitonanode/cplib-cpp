@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/characteristic_poly.hpp
     title: "Characteristic polynomial \uFF08\u884C\u5217\u306E\u7279\u6027\u591A\u9805\
       \u5F0F\uFF09"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/hessenberg_reduction.hpp
     title: Hessenberg reduction of matrix
   - icon: ':question:'
@@ -16,9 +16,9 @@ data:
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/characteristic_polynomial
@@ -144,83 +144,72 @@ data:
     \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
     \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
     \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 5 \"linear_algebra_matrix/hessenberg_reduction.hpp\"\n\n// Upper\
-    \ Hessenberg reduction of square matrices\n// Complexity: O(n^3)\n// Reference:\n\
-    // http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf\ntemplate <class Tp>\
-    \ void hessenberg_reduction(matrix<Tp> &M) {\n    assert(M.height() == M.width());\n\
-    \    const int N = M.height();\n    for (int r = 0; r < N - 2; r++) {\n      \
-    \  int piv = matrix<Tp>::choose_pivot(M, r + 1, r);\n        if (piv < 0) continue;\n\
-    \        for (int i = 0; i < N; i++) std::swap(M[r + 1][i], M[piv][i]);\n    \
-    \    for (int i = 0; i < N; i++) std::swap(M[i][r + 1], M[i][piv]);\n\n      \
-    \  const auto rinv = Tp(1) / M[r + 1][r];\n        for (int i = r + 2; i < N;\
-    \ i++) {\n            const auto n = M[i][r] * rinv;\n            for (int j =\
-    \ 0; j < N; j++) M[i][j] -= M[r + 1][j] * n;\n            for (int j = 0; j <\
-    \ N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n#line 4 \"linear_algebra_matrix/characteristic_poly.hpp\"\
-    \n\n// Characteristic polynomial of matrix M (|xI - M|)\n// Complexity: O(n^3)\n\
+    \    }\n};\n#line 4 \"linear_algebra_matrix/characteristic_poly.hpp\"\n\n// Characteristic\
+    \ polynomial of upper Hessenberg matrix M (|xI - M|)\n// Complexity: O(n^3)\n\
     // R. Rehman, I. C. Ipsen, \"La Budde's Method for Computing Characteristic Polynomials,\"\
-    \ 2011.\ntemplate <class Tp> std::vector<Tp> characteristic_poly(matrix<Tp> M)\
-    \ {\n    hessenberg_reduction(M);\n    const int N = M.height();\n    // p[i +\
-    \ 1] = (Characteristic polynomial of i-th leading principal minor)\n    std::vector<std::vector<Tp>>\
-    \ p(N + 1);\n    p[0] = {1};\n    for (int i = 0; i < N; i++) {\n        p[i +\
-    \ 1].assign(i + 2, Tp());\n        for (int j = 0; j < i + 1; j++) p[i + 1][j\
-    \ + 1] += p[i][j];\n        for (int j = 0; j < i + 1; j++) p[i + 1][j] -= p[i][j]\
-    \ * M[i][i];\n        Tp betas = 1;\n        for (int j = i - 1; j >= 0; j--)\
-    \ {\n            betas *= M[j + 1][j];\n            Tp hb = -M[j][i] * betas;\n\
-    \            for (int k = 0; k < j + 1; k++) p[i + 1][k] += hb * p[j][k];\n  \
-    \      }\n    }\n    return p[N];\n}\n#line 2 \"modint.hpp\"\n#include <iostream>\n\
-    #include <set>\n#line 5 \"modint.hpp\"\n\ntemplate <int md> struct ModInt {\n\
-    #if __cplusplus >= 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n\
-    #endif\n    using lint = long long;\n    MDCONST static int mod() { return md;\
-    \ }\n    static int get_primitive_root() {\n        static int primitive_root\
-    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&]() {\n\
-    \                std::set<int> fac;\n                int v = md - 1;\n       \
-    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
-    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
-    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
-    \                    for (auto i : fac)\n                        if (ModInt(g).pow((md\
-    \ - 1) / i) == 1) {\n                            ok = false;\n               \
-    \             break;\n                        }\n                    if (ok) return\
-    \ g;\n                }\n                return -1;\n            }();\n      \
-    \  }\n        return primitive_root;\n    }\n    int val_;\n    int val() const\
-    \ noexcept { return val_; }\n    MDCONST ModInt() : val_(0) {}\n    MDCONST ModInt\
-    \ &_setval(lint v) { return val_ = (v >= md ? v - md : v), *this; }\n    MDCONST\
-    \ ModInt(lint v) { _setval(v % md + md); }\n    MDCONST explicit operator bool()\
-    \ const { return val_ != 0; }\n    MDCONST ModInt operator+(const ModInt &x) const\
-    \ {\n        return ModInt()._setval((lint)val_ + x.val_);\n    }\n    MDCONST\
-    \ ModInt operator-(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
-    \ - x.val_ + md);\n    }\n    MDCONST ModInt operator*(const ModInt &x) const\
-    \ {\n        return ModInt()._setval((lint)val_ * x.val_ % md);\n    }\n    MDCONST\
-    \ ModInt operator/(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
-    \ * x.inv().val() % md);\n    }\n    MDCONST ModInt operator-() const { return\
-    \ ModInt()._setval(md - val_); }\n    MDCONST ModInt &operator+=(const ModInt\
-    \ &x) { return *this = *this + x; }\n    MDCONST ModInt &operator-=(const ModInt\
-    \ &x) { return *this = *this - x; }\n    MDCONST ModInt &operator*=(const ModInt\
-    \ &x) { return *this = *this * x; }\n    MDCONST ModInt &operator/=(const ModInt\
-    \ &x) { return *this = *this / x; }\n    friend MDCONST ModInt operator+(lint\
-    \ a, const ModInt &x) {\n        return ModInt()._setval(a % md + x.val_);\n \
-    \   }\n    friend MDCONST ModInt operator-(lint a, const ModInt &x) {\n      \
-    \  return ModInt()._setval(a % md - x.val_ + md);\n    }\n    friend MDCONST ModInt\
-    \ operator*(lint a, const ModInt &x) {\n        return ModInt()._setval(a % md\
-    \ * x.val_ % md);\n    }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
-    \ &x) {\n        return ModInt()._setval(a % md * x.inv().val() % md);\n    }\n\
-    \    MDCONST bool operator==(const ModInt &x) const { return val_ == x.val_; }\n\
-    \    MDCONST bool operator!=(const ModInt &x) const { return val_ != x.val_; }\n\
-    \    MDCONST bool operator<(const ModInt &x) const {\n        return val_ < x.val_;\n\
-    \    } // To use std::map<ModInt, T>\n    friend std::istream &operator>>(std::istream\
-    \ &is, ModInt &x) {\n        lint t;\n        return is >> t, x = ModInt(t), is;\n\
-    \    }\n    MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt\
-    \ &x) {\n        return os << x.val_;\n    }\n    MDCONST ModInt pow(lint n) const\
-    \ {\n        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if\
-    \ (n & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
-    \ ans;\n    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST\
-    \ static void _precalculation(int N) {\n        int l0 = facs.size();\n      \
-    \  if (N > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N),\
-    \ facinvs.resize(N), invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i]\
-    \ = facs[i - 1] * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n    \
-    \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
-    \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
-    \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ 2011.\ntemplate <class Tp> std::vector<Tp> characteristic_poly_of_hessenberg(matrix<Tp>\
+    \ &M) {\n    const int N = M.height();\n    // p[i + 1] = (Characteristic polynomial\
+    \ of i-th leading principal minor)\n    std::vector<std::vector<Tp>> p(N + 1);\n\
+    \    p[0] = {1};\n    for (int i = 0; i < N; i++) {\n        p[i + 1].assign(i\
+    \ + 2, Tp());\n        for (int j = 0; j < i + 1; j++) p[i + 1][j + 1] += p[i][j];\n\
+    \        for (int j = 0; j < i + 1; j++) p[i + 1][j] -= p[i][j] * M[i][i];\n \
+    \       Tp betas = 1;\n        for (int j = i - 1; j >= 0; j--) {\n          \
+    \  betas *= M[j + 1][j];\n            Tp hb = -M[j][i] * betas;\n            for\
+    \ (int k = 0; k < j + 1; k++) p[i + 1][k] += hb * p[j][k];\n        }\n    }\n\
+    \    return p[N];\n}\n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n\
+    #line 5 \"modint.hpp\"\n\ntemplate <int md> struct ModInt {\n#if __cplusplus >=\
+    \ 201402L\n#define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using\
+    \ lint = long long;\n    MDCONST static int mod() { return md; }\n    static int\
+    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
+    \ {\n            primitive_root = [&]() {\n                std::set<int> fac;\n\
+    \                int v = md - 1;\n                for (lint i = 2; i * i <= v;\
+    \ i++)\n                    while (v % i == 0) fac.insert(i), v /= i;\n      \
+    \          if (v > 1) fac.insert(v);\n                for (int g = 1; g < md;\
+    \ g++) {\n                    bool ok = true;\n                    for (auto i\
+    \ : fac)\n                        if (ModInt(g).pow((md - 1) / i) == 1) {\n  \
+    \                          ok = false;\n                            break;\n \
+    \                       }\n                    if (ok) return g;\n           \
+    \     }\n                return -1;\n            }();\n        }\n        return\
+    \ primitive_root;\n    }\n    int val_;\n    int val() const noexcept { return\
+    \ val_; }\n    MDCONST ModInt() : val_(0) {}\n    MDCONST ModInt &_setval(lint\
+    \ v) { return val_ = (v >= md ? v - md : v), *this; }\n    MDCONST ModInt(lint\
+    \ v) { _setval(v % md + md); }\n    MDCONST explicit operator bool() const { return\
+    \ val_ != 0; }\n    MDCONST ModInt operator+(const ModInt &x) const {\n      \
+    \  return ModInt()._setval((lint)val_ + x.val_);\n    }\n    MDCONST ModInt operator-(const\
+    \ ModInt &x) const {\n        return ModInt()._setval((lint)val_ - x.val_ + md);\n\
+    \    }\n    MDCONST ModInt operator*(const ModInt &x) const {\n        return\
+    \ ModInt()._setval((lint)val_ * x.val_ % md);\n    }\n    MDCONST ModInt operator/(const\
+    \ ModInt &x) const {\n        return ModInt()._setval((lint)val_ * x.inv().val()\
+    \ % md);\n    }\n    MDCONST ModInt operator-() const { return ModInt()._setval(md\
+    \ - val_); }\n    MDCONST ModInt &operator+=(const ModInt &x) { return *this =\
+    \ *this + x; }\n    MDCONST ModInt &operator-=(const ModInt &x) { return *this\
+    \ = *this - x; }\n    MDCONST ModInt &operator*=(const ModInt &x) { return *this\
+    \ = *this * x; }\n    MDCONST ModInt &operator/=(const ModInt &x) { return *this\
+    \ = *this / x; }\n    friend MDCONST ModInt operator+(lint a, const ModInt &x)\
+    \ {\n        return ModInt()._setval(a % md + x.val_);\n    }\n    friend MDCONST\
+    \ ModInt operator-(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md - x.val_ + md);\n    }\n    friend MDCONST ModInt operator*(lint a, const\
+    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.val_ % md);\n    }\n\
+    \    friend MDCONST ModInt operator/(lint a, const ModInt &x) {\n        return\
+    \ ModInt()._setval(a % md * x.inv().val() % md);\n    }\n    MDCONST bool operator==(const\
+    \ ModInt &x) const { return val_ == x.val_; }\n    MDCONST bool operator!=(const\
+    \ ModInt &x) const { return val_ != x.val_; }\n    MDCONST bool operator<(const\
+    \ ModInt &x) const {\n        return val_ < x.val_;\n    } // To use std::map<ModInt,\
+    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
+    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
+    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {\n     \
+    \   return os << x.val_;\n    }\n    MDCONST ModInt pow(lint n) const {\n    \
+    \    ModInt ans = 1, tmp = *this;\n        while (n) {\n            if (n & 1)\
+    \ ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return ans;\n\
+    \    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static\
+    \ void _precalculation(int N) {\n        int l0 = facs.size();\n        if (N\
+    \ > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N), facinvs.resize(N),\
+    \ invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i] = facs[i - 1]\
+    \ * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n        for (int i\
+    \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
+    \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
+    \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
+    \            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -245,28 +234,61 @@ data:
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 7 \"linear_algebra_matrix/test/characteristic_poly.test.cpp\"\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"linear_algebra_matrix/hessenberg_reduction.hpp\"\
+    \n\n// Upper Hessenberg reduction of square matrices\n// Complexity: O(n^3)\n\
+    // Reference:\n// http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf\ntemplate\
+    \ <class Tp> void hessenberg_reduction(matrix<Tp> &M) {\n    assert(M.height()\
+    \ == M.width());\n    const int N = M.height();\n    for (int r = 0; r < N - 2;\
+    \ r++) {\n        int piv = matrix<Tp>::choose_pivot(M, r + 1, r);\n        if\
+    \ (piv < 0) continue;\n        for (int i = 0; i < N; i++) std::swap(M[r + 1][i],\
+    \ M[piv][i]);\n        for (int i = 0; i < N; i++) std::swap(M[i][r + 1], M[i][piv]);\n\
+    \n        const auto rinv = Tp(1) / M[r + 1][r];\n        for (int i = r + 2;\
+    \ i < N; i++) {\n            const auto n = M[i][r] * rinv;\n            for (int\
+    \ j = 0; j < N; j++) M[i][j] -= M[r + 1][j] * n;\n            for (int j = 0;\
+    \ j < N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n\ntemplate <class\
+    \ Ring> void ring_hessenberg_reduction(matrix<Ring> &M) {\n    assert(M.height()\
+    \ == M.width());\n    const int N = M.height();\n    for (int r = 0; r < N - 2;\
+    \ r++) {\n        int piv = matrix<Ring>::choose_pivot(M, r + 1, r);\n       \
+    \ if (piv < 0) continue;\n        for (int i = 0; i < N; i++) std::swap(M[r +\
+    \ 1][i], M[piv][i]);\n        for (int i = 0; i < N; i++) std::swap(M[i][r + 1],\
+    \ M[i][piv]);\n\n        for (int i = r + 2; i < N; i++) {\n            if (M[i][r]\
+    \ == Ring()) continue;\n            Ring a = M[r + 1][r], b = M[i][r], m00 = 1,\
+    \ m01 = 0, m10 = 0, m11 = 1;\n            while (a != Ring() and b != Ring())\
+    \ {\n                if (a.val() > b.val()) {\n                    auto d = a.val()\
+    \ / b.val();\n                    a -= b * d, m00 -= m10 * d, m01 -= m11 * d;\n\
+    \                } else {\n                    auto d = b.val() / a.val();\n \
+    \                   b -= a * d, m10 -= m00 * d, m11 -= m01 * d;\n            \
+    \    }\n            }\n            if (a == Ring()) std::swap(a, b), std::swap(m00,\
+    \ m10), std::swap(m01, m11);\n\n            for (int j = 0; j < N; j++) {\n  \
+    \              Ring anew = M[r + 1][j] * m00 + M[i][j] * m01;\n              \
+    \  Ring bnew = M[r + 1][j] * m10 + M[i][j] * m11;\n                M[r + 1][j]\
+    \ = anew;\n                M[i][j] = bnew;\n            }\n            assert(M[i][r]\
+    \ == 0);\n\n            for (int j = 0; j < N; j++) {\n                Ring anew\
+    \ = M[j][r + 1] * m11 - M[j][i] * m10;\n                Ring bnew = -M[j][r +\
+    \ 1] * m01 + M[j][i] * m00;\n                M[j][r + 1] = anew;\n           \
+    \     M[j][i] = bnew;\n            }\n        }\n    }\n}\n#line 8 \"linear_algebra_matrix/test/characteristic_poly.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int N;\n    cin >> N;\n    using mint = ModInt<998244353>;\n    matrix<mint>\
-    \ M(N, N);\n    cin >> M;\n    auto poly = characteristic_poly<mint>(M);\n   \
-    \ for (auto x : poly) cout << x << ' ';\n    cout << '\\n';\n}\n"
+    \ M(N, N);\n    cin >> M;\n    hessenberg_reduction(M);\n    auto poly = characteristic_poly_of_hessenberg<mint>(M);\n\
+    \    for (auto x : poly) cout << x << ' ';\n    cout << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/characteristic_polynomial\"\
     \n#include \"../characteristic_poly.hpp\"\n#include \"../../modint.hpp\"\n#include\
-    \ \"../matrix.hpp\"\n#include <algorithm>\n#include <iostream>\nusing namespace\
-    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n \
-    \   int N;\n    cin >> N;\n    using mint = ModInt<998244353>;\n    matrix<mint>\
-    \ M(N, N);\n    cin >> M;\n    auto poly = characteristic_poly<mint>(M);\n   \
-    \ for (auto x : poly) cout << x << ' ';\n    cout << '\\n';\n}\n"
+    \ \"../hessenberg_reduction.hpp\"\n#include \"../matrix.hpp\"\n#include <algorithm>\n\
+    #include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N;\n    cin >> N;\n    using mint = ModInt<998244353>;\n\
+    \    matrix<mint> M(N, N);\n    cin >> M;\n    hessenberg_reduction(M);\n    auto\
+    \ poly = characteristic_poly_of_hessenberg<mint>(M);\n    for (auto x : poly)\
+    \ cout << x << ' ';\n    cout << '\\n';\n}\n"
   dependsOn:
   - linear_algebra_matrix/characteristic_poly.hpp
-  - linear_algebra_matrix/hessenberg_reduction.hpp
   - linear_algebra_matrix/matrix.hpp
   - modint.hpp
+  - linear_algebra_matrix/hessenberg_reduction.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/characteristic_poly.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-05-01 17:04:43+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/characteristic_poly.test.cpp
 layout: document

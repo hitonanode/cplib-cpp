@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: formal_power_series/sum_of_exponential_times_polynomial.hpp
     title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
   - icon: ':x:'
@@ -10,7 +10,7 @@ data:
     title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\u6570\
       \u306E\u7D2F\u7A4D\u548C\uFF09"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - icon: ':x:'
@@ -18,7 +18,7 @@ data:
     title: number/test/arithmetic_function_totient.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://atcoder.jp/contests/arc033/tasks/arc033_4
@@ -56,7 +56,7 @@ data:
   - formal_power_series/sum_of_exponential_times_polynomial.hpp
   - number/arithmetic_cumsum.hpp
   timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - number/test/arithmetic_function_totient.test.cpp

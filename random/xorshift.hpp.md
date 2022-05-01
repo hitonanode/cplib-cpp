@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
     title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
     title: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
   - icon: ':x:'

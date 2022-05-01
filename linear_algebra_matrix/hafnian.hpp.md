@@ -7,12 +7,12 @@ data:
       \u7B97\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/hafnian.test.cpp
     title: linear_algebra_matrix/test/hafnian.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"set_power_series/subset_convolution.hpp\"\n#include <algorithm>\n\
@@ -161,7 +161,7 @@ data:
   path: linear_algebra_matrix/hafnian.hpp
   requiredBy: []
   timestamp: '2021-10-16 14:40:57+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/hafnian.test.cpp
 documentation_of: linear_algebra_matrix/hafnian.hpp
