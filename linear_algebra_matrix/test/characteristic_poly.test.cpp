@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/characteristic_polynomial"
 #include "../characteristic_poly.hpp"
 #include "../../modint.hpp"
+#include "../hessenberg_reduction.hpp"
 #include "../matrix.hpp"
 #include <algorithm>
 #include <iostream>
@@ -13,7 +14,8 @@ int main() {
     using mint = ModInt<998244353>;
     matrix<mint> M(N, N);
     cin >> M;
-    auto poly = characteristic_poly<mint>(M);
+    hessenberg_reduction(M);
+    auto poly = characteristic_poly_of_hessenberg<mint>(M);
     for (auto x : poly) cout << x << ' ';
     cout << '\n';
 }

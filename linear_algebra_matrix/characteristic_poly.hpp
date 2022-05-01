@@ -1,12 +1,11 @@
 #pragma once
-#include "hessenberg_reduction.hpp"
+#include "matrix.hpp"
 #include <vector>
 
-// Characteristic polynomial of matrix M (|xI - M|)
+// Characteristic polynomial of upper Hessenberg matrix M (|xI - M|)
 // Complexity: O(n^3)
 // R. Rehman, I. C. Ipsen, "La Budde's Method for Computing Characteristic Polynomials," 2011.
-template <class Tp> std::vector<Tp> characteristic_poly(matrix<Tp> M) {
-    hessenberg_reduction(M);
+template <class Tp> std::vector<Tp> characteristic_poly_of_hessenberg(matrix<Tp> &M) {
     const int N = M.height();
     // p[i + 1] = (Characteristic polynomial of i-th leading principal minor)
     std::vector<std::vector<Tp>> p(N + 1);
