@@ -17,6 +17,10 @@ data:
     path: linear_algebra_matrix/circular_binary_expansion.hpp
     title: linear_algebra_matrix/circular_binary_expansion.hpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
+    title: "Determinant of $M_0 + M_1 x$ \uFF08\u5404\u8981\u7D20\u304C\u9AD8\u3005\
+      \ $1$ \u6B21\u306E\u884C\u5217\u306E\u884C\u5217\u5F0F\uFF09"
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/hessenberg_reduction.hpp
     title: Hessenberg reduction of matrix
   - icon: ':heavy_check_mark:'
@@ -44,6 +48,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
     title: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
+    title: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/inverse_matrix.test.cpp
     title: linear_algebra_matrix/test/inverse_matrix.test.cpp
@@ -329,6 +336,7 @@ data:
   - linear_algebra_matrix/system_of_linear_equations.hpp
   - linear_algebra_matrix/circular_binary_expansion.hpp
   - linear_algebra_matrix/hessenberg_reduction.hpp
+  - linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
   - linear_algebra_matrix/characteristic_poly.hpp
   timestamp: '2022-05-01 02:11:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -339,6 +347,7 @@ data:
   - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
   - linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp
+  - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp

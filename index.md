@@ -314,6 +314,10 @@ data:
       path: linear_algebra_matrix/circular_binary_expansion.hpp
       title: linear_algebra_matrix/circular_binary_expansion.hpp
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
+      title: "Determinant of $M_0 + M_1 x$ \uFF08\u5404\u8981\u7D20\u304C\u9AD8\u3005\
+        \ $1$ \u6B21\u306E\u884C\u5217\u306E\u884C\u5217\u5F0F\uFF09"
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/hafnian.hpp
       title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\
         \u7121\u5411\u30B0\u30E9\u30D5\u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\
@@ -1075,6 +1079,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
       title: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
+      title: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/hafnian.test.cpp
       title: linear_algebra_matrix/test/hafnian.test.cpp

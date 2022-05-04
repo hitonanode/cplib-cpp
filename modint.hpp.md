@@ -100,6 +100,9 @@ data:
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
+    title: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/hafnian.test.cpp
     title: linear_algebra_matrix/test/hafnian.test.cpp
   - icon: ':heavy_check_mark:'
@@ -392,6 +395,7 @@ data:
   - utilities/test/pow.test.cpp
   - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
+  - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - linear_algebra_matrix/test/hafnian.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp

@@ -4,7 +4,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
+    title: "Determinant of $M_0 + M_1 x$ \uFF08\u5404\u8981\u7D20\u304C\u9AD8\u3005\
+      \ $1$ \u6B21\u306E\u884C\u5217\u306E\u884C\u5217\u5F0F\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/characteristic_poly.test.cpp
@@ -12,6 +16,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
     title: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
+    title: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -206,10 +213,12 @@ data:
   - linear_algebra_matrix/matrix.hpp
   isVerificationFile: false
   path: linear_algebra_matrix/hessenberg_reduction.hpp
-  requiredBy: []
+  requiredBy:
+  - linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
   timestamp: '2022-05-01 17:04:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
   - linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
 documentation_of: linear_algebra_matrix/hessenberg_reduction.hpp
