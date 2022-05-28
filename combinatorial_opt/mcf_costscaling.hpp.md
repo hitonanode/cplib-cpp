@@ -165,8 +165,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/b_flow.test.cpp
-  - combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
   - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
+  - combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
   - combinatorial_opt/test/mcf_costscaling.test.cpp
 documentation_of: combinatorial_opt/mcf_costscaling.hpp
 layout: document

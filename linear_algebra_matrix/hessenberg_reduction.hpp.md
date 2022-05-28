@@ -218,9 +218,9 @@ data:
   timestamp: '2022-05-01 17:04:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
   - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
-  - linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
 documentation_of: linear_algebra_matrix/hessenberg_reduction.hpp
 layout: document
 title: Hessenberg reduction of matrix

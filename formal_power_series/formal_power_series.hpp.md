@@ -13,6 +13,9 @@ data:
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
   - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+    title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
   - icon: ':heavy_check_mark:'
@@ -360,9 +363,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/stirling_number_of_1st.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
 documentation_of: formal_power_series/formal_power_series.hpp
 layout: document
 redirect_from:

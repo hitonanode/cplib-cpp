@@ -4,76 +4,100 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/pow_of_sparse_fps.hpp
+    title: "Power of sparse formal power series \uFF08\u975E\u96F6\u306A\u9805\u304C\
+      \u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u306E\u7D2F\u4E57\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: modint.hpp
+    title: modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: random/xorshift.hpp
+    title: random/xorshift.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/multipoint_evaluation.test.cpp
-    title: formal_power_series/test/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/polynomial_interpolation.test.cpp
-    title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-    title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
-    \ <vector>\n\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n\
-    #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
-    \ long;\n    MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
-    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
-    \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
-    \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
-    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
-    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
-    \                    bool ok = true;\n                    for (auto i : fac)\n\
-    \                        if (ModInt(g).pow((md - 1) / i) == 1) {\n           \
-    \                 ok = false;\n                            break;\n          \
-    \              }\n                    if (ok) return g;\n                }\n \
-    \               return -1;\n            }();\n        }\n        return primitive_root;\n\
-    \    }\n    int val_;\n    int val() const noexcept { return val_; }\n    MDCONST\
-    \ ModInt() : val_(0) {}\n    MDCONST ModInt &_setval(lint v) { return val_ = (v\
-    \ >= md ? v - md : v), *this; }\n    MDCONST ModInt(lint v) { _setval(v % md +\
-    \ md); }\n    MDCONST explicit operator bool() const { return val_ != 0; }\n \
-    \   MDCONST ModInt operator+(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
-    \ + x.val_);\n    }\n    MDCONST ModInt operator-(const ModInt &x) const {\n \
-    \       return ModInt()._setval((lint)val_ - x.val_ + md);\n    }\n    MDCONST\
-    \ ModInt operator*(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
-    \ * x.val_ % md);\n    }\n    MDCONST ModInt operator/(const ModInt &x) const\
-    \ {\n        return ModInt()._setval((lint)val_ * x.inv().val() % md);\n    }\n\
-    \    MDCONST ModInt operator-() const { return ModInt()._setval(md - val_); }\n\
-    \    MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
-    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
-    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
-    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
-    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) {\n        return\
-    \ ModInt()._setval(a % md + x.val_);\n    }\n    friend MDCONST ModInt operator-(lint\
-    \ a, const ModInt &x) {\n        return ModInt()._setval(a % md - x.val_ + md);\n\
-    \    }\n    friend MDCONST ModInt operator*(lint a, const ModInt &x) {\n     \
-    \   return ModInt()._setval(a % md * x.val_ % md);\n    }\n    friend MDCONST\
-    \ ModInt operator/(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
-    \ % md * x.inv().val() % md);\n    }\n    MDCONST bool operator==(const ModInt\
-    \ &x) const { return val_ == x.val_; }\n    MDCONST bool operator!=(const ModInt\
-    \ &x) const { return val_ != x.val_; }\n    MDCONST bool operator<(const ModInt\
-    \ &x) const {\n        return val_ < x.val_;\n    } // To use std::map<ModInt,\
-    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
-    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {\n     \
-    \   return os << x.val_;\n    }\n    MDCONST ModInt pow(lint n) const {\n    \
-    \    ModInt ans = 1, tmp = *this;\n        while (n) {\n            if (n & 1)\
-    \ ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return ans;\n\
-    \    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static\
-    \ void _precalculation(int N) {\n        int l0 = facs.size();\n        if (N\
-    \ > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N), facinvs.resize(N),\
-    \ invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i] = facs[i - 1]\
-    \ * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n        for (int i\
-    \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
-    \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
-    \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
-    \            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
+  bundledCode: "#line 1 \"formal_power_series/test/pow_of_sparse_fps.stress.test.cpp\"\
+    \n#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
+    \ // DUMMY\n#line 2 \"formal_power_series/pow_of_sparse_fps.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#include <tuple>\n#include <utility>\n#include <vector>\n\n\
+    // Calculate f(x)^k up to x^N\n// Requirement: k > 0\n// Complexity: O(NM) (M\
+    \ : num. of nonzero coefficients of f(x))\ntemplate <class T> std::vector<T> pow_of_sparse_fps(const\
+    \ std::vector<T> &f, int N, long long k) {\n    assert(k > 0);\n    std::vector<std::pair<int,\
+    \ T>> nonzero_terms;\n    int d0 = 0;\n    while (d0 < int(f.size()) and d0 <=\
+    \ N and f[d0] == T()) ++d0;\n    if (d0 == int(f.size()) or d0 > N) return std::vector<T>(N\
+    \ + 1);\n\n    if (d0 and N / d0 < k) return std::vector<T>(N + 1);\n\n    for\
+    \ (int d = d0; d < std::min<int>(N + 1, f.size()); ++d) {\n        if (f[d] !=\
+    \ T()) nonzero_terms.emplace_back(d - d0, f[d]);\n    }\n\n    int Ncalc = N -\
+    \ d0 * k;\n\n    std::vector<T> ret(Ncalc + 1);\n    ret[0] = f[d0].pow(k);\n\
+    \    for (int d = 0; d + 1 < int(ret.size()); ++d) {\n        // Compare [x^d](k\
+    \ f'g - fg')\n        T tmp = T();\n        int i, j;\n        T fi;\n       \
+    \ for (auto i_fi : nonzero_terms) {\n            std::tie(i, fi) = i_fi;\n   \
+    \         if (!i) continue;\n            j = d - i;\n            if (0 <= j) tmp\
+    \ -= fi * ret[j + 1] * (j + 1);\n            j = d - (i - 1);\n            if\
+    \ (0 <= j) tmp += fi * i * ret[j] * T(k);\n        }\n        ret[d + 1] = tmp\
+    \ / (f[d0] * (d + 1));\n    }\n\n    ret.resize(N + 1, T());\n    std::rotate(ret.begin(),\
+    \ ret.end() - d0 * k, ret.end());\n    return ret;\n}\n#line 2 \"modint.hpp\"\n\
+    #include <iostream>\n#include <set>\n#line 5 \"modint.hpp\"\n\ntemplate <int md>\
+    \ struct ModInt {\n#if __cplusplus >= 201402L\n#define MDCONST constexpr\n#else\n\
+    #define MDCONST\n#endif\n    using lint = long long;\n    MDCONST static int mod()\
+    \ { return md; }\n    static int get_primitive_root() {\n        static int primitive_root\
+    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&]() {\n\
+    \                std::set<int> fac;\n                int v = md - 1;\n       \
+    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
+    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
+    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
+    \                    for (auto i : fac)\n                        if (ModInt(g).pow((md\
+    \ - 1) / i) == 1) {\n                            ok = false;\n               \
+    \             break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root;\n    }\n    int val_;\n    int val() const\
+    \ noexcept { return val_; }\n    MDCONST ModInt() : val_(0) {}\n    MDCONST ModInt\
+    \ &_setval(lint v) { return val_ = (v >= md ? v - md : v), *this; }\n    MDCONST\
+    \ ModInt(lint v) { _setval(v % md + md); }\n    MDCONST explicit operator bool()\
+    \ const { return val_ != 0; }\n    MDCONST ModInt operator+(const ModInt &x) const\
+    \ {\n        return ModInt()._setval((lint)val_ + x.val_);\n    }\n    MDCONST\
+    \ ModInt operator-(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
+    \ - x.val_ + md);\n    }\n    MDCONST ModInt operator*(const ModInt &x) const\
+    \ {\n        return ModInt()._setval((lint)val_ * x.val_ % md);\n    }\n    MDCONST\
+    \ ModInt operator/(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
+    \ * x.inv().val() % md);\n    }\n    MDCONST ModInt operator-() const { return\
+    \ ModInt()._setval(md - val_); }\n    MDCONST ModInt &operator+=(const ModInt\
+    \ &x) { return *this = *this + x; }\n    MDCONST ModInt &operator-=(const ModInt\
+    \ &x) { return *this = *this - x; }\n    MDCONST ModInt &operator*=(const ModInt\
+    \ &x) { return *this = *this * x; }\n    MDCONST ModInt &operator/=(const ModInt\
+    \ &x) { return *this = *this / x; }\n    friend MDCONST ModInt operator+(lint\
+    \ a, const ModInt &x) {\n        return ModInt()._setval(a % md + x.val_);\n \
+    \   }\n    friend MDCONST ModInt operator-(lint a, const ModInt &x) {\n      \
+    \  return ModInt()._setval(a % md - x.val_ + md);\n    }\n    friend MDCONST ModInt\
+    \ operator*(lint a, const ModInt &x) {\n        return ModInt()._setval(a % md\
+    \ * x.val_ % md);\n    }\n    friend MDCONST ModInt operator/(lint a, const ModInt\
+    \ &x) {\n        return ModInt()._setval(a % md * x.inv().val() % md);\n    }\n\
+    \    MDCONST bool operator==(const ModInt &x) const { return val_ == x.val_; }\n\
+    \    MDCONST bool operator!=(const ModInt &x) const { return val_ != x.val_; }\n\
+    \    MDCONST bool operator<(const ModInt &x) const {\n        return val_ < x.val_;\n\
+    \    } // To use std::map<ModInt, T>\n    friend std::istream &operator>>(std::istream\
+    \ &is, ModInt &x) {\n        lint t;\n        return is >> t, x = ModInt(t), is;\n\
+    \    }\n    MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt\
+    \ &x) {\n        return os << x.val_;\n    }\n    MDCONST ModInt pow(lint n) const\
+    \ {\n        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if\
+    \ (n & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
+    \ ans;\n    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST\
+    \ static void _precalculation(int N) {\n        int l0 = facs.size();\n      \
+    \  if (N > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N),\
+    \ facinvs.resize(N), invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i]\
+    \ = facs[i - 1] * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n    \
+    \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
+    \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
+    \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
+    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -98,17 +122,22 @@ data:
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
     template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"convolution/ntt.hpp\"\
-    \n\n#include <algorithm>\n#include <array>\n#include <cassert>\n#include <tuple>\n\
-    #line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution for arbitrary\
-    \ mod\n// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.\n\
-    // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
-    // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
-    \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
-    \ b, bool skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
-    \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
-    \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
-    // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
+    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"random/xorshift.hpp\"\
+    \n#include <cstdint>\n\n// CUT begin\nuint32_t rand_int() // XorShift random integer\
+    \ generator\n{\n    static uint32_t x = 123456789, y = 362436069, z = 521288629,\
+    \ w = 88675123;\n    uint32_t t = x ^ (x << 11);\n    x = y;\n    y = z;\n   \
+    \ z = w;\n    return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n}\ndouble rand_double()\
+    \ { return (double)rand_int() / UINT32_MAX; }\n#line 3 \"convolution/ntt.hpp\"\
+    \n\n#line 5 \"convolution/ntt.hpp\"\n#include <array>\n#line 9 \"convolution/ntt.hpp\"\
+    \n\n// CUT begin\n// Integer convolution for arbitrary mod\n// with NTT (and Garner's\
+    \ algorithm) for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm\
+    \ if `skip_garner` is true or mod is in `nttprimes`.\n// input: a (size: n), b\
+    \ (size: m)\n// return: vector (size: n + m - 1)\ntemplate <typename MODINT>\n\
+    std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool\
+    \ skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161, 469762049};\n\
+    \n// Integer FFT (Fast Fourier Transform) for ModInt class\n// (Also known as\
+    \ Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n// ** Input\
+    \ size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
     \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
     \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
     \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
@@ -251,76 +280,58 @@ data:
     \    }\n\n    T coeff(int i) const {\n        if ((int)this->size() <= i or i\
     \ < 0) return T(0);\n        return (*this)[i];\n    }\n\n    T eval(T x) const\
     \ {\n        T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w\
-    \ *= x;\n        return ret;\n    }\n};\n#line 5 \"formal_power_series/multipoint_evaluation.hpp\"\
-    \n\n// CUT begin\n// multipoint polynomial evaluation\n// input: xs = [x_0, ...,\
-    \ x_{N - 1}]: points to evaluate\n//        f = \\sum_i^M f_i x^i\n// Complexity:\
-    \ O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename\
-    \ Tfield> struct MultipointEvaluation {\n    int nx;\n    using polynomial = FormalPowerSeries<Tfield>;\n\
-    \    std::vector<polynomial> segtree;\n    MultipointEvaluation(const std::vector<Tfield>\
-    \ &xs) : nx(xs.size()) {\n        segtree.resize(nx * 2 - 1);\n        for (int\
-    \ i = 0; i < nx; i++) { segtree[nx - 1 + i] = {-xs[i], 1}; }\n        for (int\
-    \ i = nx - 2; i >= 0; i--) { segtree[i] = segtree[2 * i + 1] * segtree[2 * i +\
-    \ 2]; }\n    }\n    std::vector<Tfield> ret;\n    void _eval_rec(polynomial f,\
-    \ int now) {\n        f %= segtree[now];\n        if (now - (nx - 1) >= 0) {\n\
-    \            ret[now - (nx - 1)] = f.coeff(0);\n            return;\n        }\n\
-    \        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f, 2 * now + 2);\n    }\n\
-    \    std::vector<Tfield> evaluate_polynomial(const polynomial &f) {\n        ret.resize(nx);\n\
-    \        _eval_rec(f, 0);\n        return ret;\n    }\n    std::vector<Tfield>\
-    \ evaluate_polynomial(const std::vector<Tfield> &f) {\n        return evaluate_polynomial(polynomial(f.begin(),\
-    \ f.end()));\n    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial\
-    \ _rec_interpolation(int now, const std::vector<Tfield> &ys) const {\n       \
-    \ int i = now - (nx - 1);\n        if (i >= 0) return {ys[i]};\n        auto retl\
-    \ = _rec_interpolation(2 * now + 1, ys);\n        auto retr = _rec_interpolation(2\
-    \ * now + 2, ys);\n        return retl * segtree[2 * now + 2] + retr * segtree[2\
-    \ * now + 1];\n    }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield>\
-    \ ys) {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
-    \ {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
-    \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
-    \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n        return\
-    \ _rec_interpolation(0, ys);\n    }\n};\n"
-  code: "#pragma once\n#include \"formal_power_series.hpp\"\n#include <cassert>\n\
-    #include <vector>\n\n// CUT begin\n// multipoint polynomial evaluation\n// input:\
-    \ xs = [x_0, ..., x_{N - 1}]: points to evaluate\n//        f = \\sum_i^M f_i\
-    \ x^i\n// Complexity: O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\n\
-    template <typename Tfield> struct MultipointEvaluation {\n    int nx;\n    using\
-    \ polynomial = FormalPowerSeries<Tfield>;\n    std::vector<polynomial> segtree;\n\
-    \    MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size()) {\n \
-    \       segtree.resize(nx * 2 - 1);\n        for (int i = 0; i < nx; i++) { segtree[nx\
-    \ - 1 + i] = {-xs[i], 1}; }\n        for (int i = nx - 2; i >= 0; i--) { segtree[i]\
-    \ = segtree[2 * i + 1] * segtree[2 * i + 2]; }\n    }\n    std::vector<Tfield>\
-    \ ret;\n    void _eval_rec(polynomial f, int now) {\n        f %= segtree[now];\n\
-    \        if (now - (nx - 1) >= 0) {\n            ret[now - (nx - 1)] = f.coeff(0);\n\
-    \            return;\n        }\n        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f,\
-    \ 2 * now + 2);\n    }\n    std::vector<Tfield> evaluate_polynomial(const polynomial\
-    \ &f) {\n        ret.resize(nx);\n        _eval_rec(f, 0);\n        return ret;\n\
-    \    }\n    std::vector<Tfield> evaluate_polynomial(const std::vector<Tfield>\
-    \ &f) {\n        return evaluate_polynomial(polynomial(f.begin(), f.end()));\n\
-    \    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial _rec_interpolation(int\
-    \ now, const std::vector<Tfield> &ys) const {\n        int i = now - (nx - 1);\n\
-    \        if (i >= 0) return {ys[i]};\n        auto retl = _rec_interpolation(2\
-    \ * now + 1, ys);\n        auto retr = _rec_interpolation(2 * now + 2, ys);\n\
-    \        return retl * segtree[2 * now + 2] + retr * segtree[2 * now + 1];\n \
-    \   }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys)\
-    \ {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
-    \ {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
-    \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
-    \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n        return\
-    \ _rec_interpolation(0, ys);\n    }\n};\n"
+    \ *= x;\n        return ret;\n    }\n};\n#line 9 \"formal_power_series/test/pow_of_sparse_fps.stress.test.cpp\"\
+    \nusing namespace std;\n\nusing mint = ModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
+    \nint main() {\n    for (int nin = 1; nin <= 6; ++nin) {\n        for (int d0\
+    \ = 0; d0 <= nin; ++d0) {\n            for (int degout = 0; degout <= 12; ++degout)\
+    \ {\n                for (int k = 1; k <= 8; ++k) {\n                    for (int\
+    \ iter = 0; iter < 5; ++iter) {\n                        vector<mint> f(nin);\n\
+    \                        for (int i = d0; i < nin; ++i) f[i] = rand_int();\n\n\
+    \                        auto ret = pow_of_sparse_fps(f, degout, k);\n       \
+    \                 auto ret_fps = fps(f.begin(), f.end()).pow(k, degout + 1);\n\
+    \                        for (int i = 0; i <= degout; ++i) {\n               \
+    \             if (ret[i] != ret_fps.coeff(i)) {\n                            \
+    \    cerr << nin << ' ' << d0 << ' ' << degout << ' ' << k << ' '\n          \
+    \                           << iter << ' ' << i << ' ' << ret[i] << ' '\n    \
+    \                                 << ret_fps.coeff(i) << endl;\n             \
+    \                   exit(1);\n                            }\n                \
+    \        }\n                    }\n                }\n            }\n        }\n\
+    \    }\n    puts(\"Hello World\");\n}\n"
+  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
+    \ // DUMMY\n#include \"../pow_of_sparse_fps.hpp\"\n#include \"../../modint.hpp\"\
+    \n#include \"../../random/xorshift.hpp\"\n#include \"../formal_power_series.hpp\"\
+    \n#include <cassert>\n#include <iostream>\n#include <vector>\nusing namespace\
+    \ std;\n\nusing mint = ModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
+    \nint main() {\n    for (int nin = 1; nin <= 6; ++nin) {\n        for (int d0\
+    \ = 0; d0 <= nin; ++d0) {\n            for (int degout = 0; degout <= 12; ++degout)\
+    \ {\n                for (int k = 1; k <= 8; ++k) {\n                    for (int\
+    \ iter = 0; iter < 5; ++iter) {\n                        vector<mint> f(nin);\n\
+    \                        for (int i = d0; i < nin; ++i) f[i] = rand_int();\n\n\
+    \                        auto ret = pow_of_sparse_fps(f, degout, k);\n       \
+    \                 auto ret_fps = fps(f.begin(), f.end()).pow(k, degout + 1);\n\
+    \                        for (int i = 0; i <= degout; ++i) {\n               \
+    \             if (ret[i] != ret_fps.coeff(i)) {\n                            \
+    \    cerr << nin << ' ' << d0 << ' ' << degout << ' ' << k << ' '\n          \
+    \                           << iter << ' ' << i << ' ' << ret[i] << ' '\n    \
+    \                                 << ret_fps.coeff(i) << endl;\n             \
+    \                   exit(1);\n                            }\n                \
+    \        }\n                    }\n                }\n            }\n        }\n\
+    \    }\n    puts(\"Hello World\");\n}\n"
   dependsOn:
+  - formal_power_series/pow_of_sparse_fps.hpp
+  - modint.hpp
+  - random/xorshift.hpp
   - formal_power_series/formal_power_series.hpp
-  isVerificationFile: false
-  path: formal_power_series/multipoint_evaluation.hpp
+  isVerificationFile: true
+  path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 12:00:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - formal_power_series/test/multipoint_evaluation.test.cpp
-  - formal_power_series/test/polynomial_interpolation.test.cpp
-documentation_of: formal_power_series/multipoint_evaluation.hpp
+  timestamp: '2022-05-29 00:37:50+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
 layout: document
 redirect_from:
-- /library/formal_power_series/multipoint_evaluation.hpp
-- /library/formal_power_series/multipoint_evaluation.hpp.html
-title: formal_power_series/multipoint_evaluation.hpp
+- /verify/formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+- /verify/formal_power_series/test/pow_of_sparse_fps.stress.test.cpp.html
+title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
 ---

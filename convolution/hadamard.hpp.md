@@ -83,8 +83,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/bitwise_and_conv.test.cpp
-  - convolution/test/hadamard_xor.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
+  - convolution/test/hadamard_xor.test.cpp
 documentation_of: convolution/hadamard.hpp
 layout: document
 redirect_from:
