@@ -178,8 +178,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
-  - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
+  - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
 documentation_of: linear_algebra_matrix/characteristic_poly.hpp
 layout: document
 title: "Characteristic polynomial \uFF08\u884C\u5217\u306E\u7279\u6027\u591A\u9805\

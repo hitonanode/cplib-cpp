@@ -693,6 +693,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/pow_sum.hpp
       title: "power sum \uFF08\u7D2F\u4E57\u548C\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: utilities/product_embedding.hpp
+      title: "Static range product query with precalculation \uFF08\u524D\u8A08\u7B97\
+        \u57CB\u3081\u8FBC\u307F\uFF09"
     - icon: ':warning:'
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
@@ -1461,5 +1465,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/predecessor_problem.test.cpp
       title: utilities/test/predecessor_problem.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/product_embedding.test.cpp
+      title: utilities/test/product_embedding.test.cpp
 layout: toppage
 ---
