@@ -31,8 +31,8 @@ template <typename Cap> struct MaxFlowLowerBound {
             if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];
             if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);
         }
-        auto erev = mf.add_edge(t, s, std::numeric_limits<Cap>::max());
+        mf.add_edge(t, s, std::numeric_limits<Cap>::max());
         if (mf.flow(N, N + 1) < sum) return -1;
-        return mf.get_edge(erev).flow + mf.flow(s, t);
+        return mf.flow(s, t);
     }
 };
