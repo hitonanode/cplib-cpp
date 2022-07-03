@@ -95,9 +95,8 @@ data:
     \   assert(0 <= t and t < N);\n        Cap sum = 0;\n        for (int i = 0; i\
     \ < N; i++) {\n            if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];\n\
     \            if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);\n        }\n      \
-    \  auto erev = mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if\
-    \ (mf.flow(N, N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow\
-    \ + mf.flow(s, t);\n    }\n};\n"
+    \  mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if (mf.flow(N,\
+    \ N + 1) < sum) return -1;\n        return mf.flow(s, t);\n    }\n};\n"
   code: "#pragma once\n#include \"maxflow.hpp\"\n#include <cassert>\n#include <limits>\n\
     #include <vector>\n\n// CUT begin\n// MaxFlow with lower bound\n// https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
     // https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp\n// flush(s,\
@@ -112,22 +111,38 @@ data:
     \   assert(0 <= t and t < N);\n        Cap sum = 0;\n        for (int i = 0; i\
     \ < N; i++) {\n            if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];\n\
     \            if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);\n        }\n      \
-    \  auto erev = mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if\
-    \ (mf.flow(N, N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow\
-    \ + mf.flow(s, t);\n    }\n};\n"
+    \  mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if (mf.flow(N,\
+    \ N + 1) < sum) return -1;\n        return mf.flow(s, t);\n    }\n};\n"
   dependsOn:
   - combinatorial_opt/maxflow.hpp
   isVerificationFile: false
   path: combinatorial_opt/maxflow_lowerbound.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-07-03 23:17:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
 documentation_of: combinatorial_opt/maxflow_lowerbound.hpp
 layout: document
-redirect_from:
-- /library/combinatorial_opt/maxflow_lowerbound.hpp
-- /library/combinatorial_opt/maxflow_lowerbound.hpp.html
-title: combinatorial_opt/maxflow_lowerbound.hpp
+title: "Maxflow with lower bound \uFF08\u6D41\u91CF\u4E0B\u9650\u4ED8\u304D\u6700\u5927\
+  \u6D41\uFF09"
 ---
+
+流量下限制約付の最大流を解く．
+
+## 使用方法
+
+```cpp
+MaxFlowLowerBound<long long> mf(N);
+
+int s, t;
+long long lo, hi;
+
+mf.add_edge(s, t, lo, hi);
+
+long long f = mf.flow(s, t);  // f = flow (feasible) / -1 (infeasible)
+```
+
+## リンク
+
+- [最小流量制限付き最大流 - あなたは嘘つきですかと聞かれたら「YES」と答えるブログ](https://snuke.hatenablog.com/entry/2016/07/10/043918)

@@ -36,7 +36,8 @@ data:
       title: combinatorial_opt/maxflow.hpp
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/maxflow_lowerbound.hpp
-      title: combinatorial_opt/maxflow_lowerbound.hpp
+      title: "Maxflow with lower bound \uFF08\u6D41\u91CF\u4E0B\u9650\u4ED8\u304D\u6700\
+        \u5927\u6D41\uFF09"
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/maxflow_pushrelabel.hpp
       title: "Maxflow (push-relabel, Goldberg & Tarjan) \uFF08Push-relabel \u306B\u3088\

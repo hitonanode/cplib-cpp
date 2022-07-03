@@ -271,8 +271,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/assignment_problem.test.cpp
-  - combinatorial_opt/test/mincostflow.yuki1324.test.cpp
   - combinatorial_opt/test/mincostflow.test.cpp
+  - combinatorial_opt/test/mincostflow.yuki1324.test.cpp
   - combinatorial_opt/test/mincostflow.yuki1288.test.cpp
 documentation_of: combinatorial_opt/mincostflow_nonegativeloop.hpp
 layout: document

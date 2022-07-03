@@ -7,7 +7,8 @@ data:
     title: combinatorial_opt/b-flow.hpp
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/maxflow_lowerbound.hpp
-    title: combinatorial_opt/maxflow_lowerbound.hpp
+    title: "Maxflow with lower bound \uFF08\u6D41\u91CF\u4E0B\u9650\u4ED8\u304D\u6700\
+      \u5927\u6D41\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/b_flow.test.cpp
@@ -162,15 +163,15 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/maxflow.hpp
   requiredBy:
-  - combinatorial_opt/maxflow_lowerbound.hpp
   - combinatorial_opt/b-flow.hpp
+  - combinatorial_opt/maxflow_lowerbound.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mcf_costscaling.test.cpp
-  - combinatorial_opt/test/maxflow.test.cpp
-  - combinatorial_opt/test/b_flow.test.cpp
   - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
+  - combinatorial_opt/test/maxflow.test.cpp
+  - combinatorial_opt/test/mcf_costscaling.test.cpp
+  - combinatorial_opt/test/b_flow.test.cpp
 documentation_of: combinatorial_opt/maxflow.hpp
 layout: document
 redirect_from:

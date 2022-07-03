@@ -132,20 +132,20 @@ data:
   isVerificationFile: false
   path: number/bare_mod_algebra.hpp
   requiredBy:
-  - number/combination.hpp
   - number/primitive_root.hpp
+  - number/combination.hpp
   - linear_algebra_matrix/linalg_longlong.hpp
   timestamp: '2021-10-30 11:24:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/primitive_root.test.cpp
   - number/test/combination.test.cpp
+  - number/test/primitive_root.test.cpp
   - number/test/combination.stress.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-  - linear_algebra_matrix/test/linalg_longlong.test.cpp
-  - linear_algebra_matrix/test/linalg_ll_det.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
+  - linear_algebra_matrix/test/linalg_ll_det.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong.test.cpp
 documentation_of: number/bare_mod_algebra.hpp
 layout: document
 redirect_from:

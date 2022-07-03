@@ -6,7 +6,8 @@ data:
     title: combinatorial_opt/maxflow.hpp
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/maxflow_lowerbound.hpp
-    title: combinatorial_opt/maxflow_lowerbound.hpp
+    title: "Maxflow with lower bound \uFF08\u6D41\u91CF\u4E0B\u9650\u4ED8\u304D\u6700\
+      \u5927\u6D41\uFF09"
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/mcf_costscaling.hpp
     title: "Minimum cost flow (cost scaling, Goldberg & Tarjan) \uFF08\u30B3\u30B9\
@@ -102,18 +103,17 @@ data:
     \   assert(0 <= t and t < N);\n        Cap sum = 0;\n        for (int i = 0; i\
     \ < N; i++) {\n            if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];\n\
     \            if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);\n        }\n      \
-    \  auto erev = mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if\
-    \ (mf.flow(N, N + 1) < sum) return -1;\n        return mf.get_edge(erev).flow\
-    \ + mf.flow(s, t);\n    }\n};\n#line 4 \"combinatorial_opt/mcf_costscaling.hpp\"\
-    \n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\ntemplate\
-    \ <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20>\nstruct mcf_costscaling\
-    \ {\n    mcf_costscaling() = default;\n    mcf_costscaling(int n) : _n(n), to(n),\
-    \ b(n), p(n) {}\n\n    int _n;\n    std::vector<Cap> cap;\n    std::vector<Cost>\
-    \ cost;\n    std::vector<int> opposite;\n    std::vector<std::vector<int>> to;\n\
-    \    std::vector<Cap> b;\n    std::vector<Cost> p;\n\n    int add_edge(int from_,\
-    \ int to_, Cap cap_, Cost cost_) {\n        assert(0 <= from_ and from_ < _n);\n\
-    \        assert(0 <= to_ and to_ < _n);\n        assert(0 <= cap_);\n        cost_\
-    \ *= (_n + 1);\n        const int e = int(cap.size());\n        to[from_].push_back(e);\n\
+    \  mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if (mf.flow(N,\
+    \ N + 1) < sum) return -1;\n        return mf.flow(s, t);\n    }\n};\n#line 4\
+    \ \"combinatorial_opt/mcf_costscaling.hpp\"\n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\n\
+    template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20>\n\
+    struct mcf_costscaling {\n    mcf_costscaling() = default;\n    mcf_costscaling(int\
+    \ n) : _n(n), to(n), b(n), p(n) {}\n\n    int _n;\n    std::vector<Cap> cap;\n\
+    \    std::vector<Cost> cost;\n    std::vector<int> opposite;\n    std::vector<std::vector<int>>\
+    \ to;\n    std::vector<Cap> b;\n    std::vector<Cost> p;\n\n    int add_edge(int\
+    \ from_, int to_, Cap cap_, Cost cost_) {\n        assert(0 <= from_ and from_\
+    \ < _n);\n        assert(0 <= to_ and to_ < _n);\n        assert(0 <= cap_);\n\
+    \        cost_ *= (_n + 1);\n        const int e = int(cap.size());\n        to[from_].push_back(e);\n\
     \        cap.push_back(cap_);\n        cost.push_back(cost_);\n        opposite.push_back(to_);\n\
     \n        to[to_].push_back(e + 1);\n        cap.push_back(0);\n        cost.push_back(-cost_);\n\
     \        opposite.push_back(from_);\n        return e / 2;\n    }\n    void add_supply(int\
@@ -229,7 +229,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-07-03 23:17:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp

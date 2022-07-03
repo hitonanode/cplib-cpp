@@ -56,9 +56,9 @@ data:
   timestamp: '2021-11-02 23:36:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - sparse_table/test/sparse_table_aoj.test.cpp
-  - sparse_table/test/sparse_table_2d.test.cpp
   - sparse_table/test/sparse_table.test.cpp
+  - sparse_table/test/sparse_table_2d.test.cpp
+  - sparse_table/test/sparse_table_aoj.test.cpp
 documentation_of: sparse_table/sparse_table.hpp
 layout: document
 title: Sparse table
