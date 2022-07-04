@@ -96,3 +96,37 @@ template <class Matrix, class Tp> Tp blackbox_determinant(const Matrix &M) {
     for (auto d : D) ddet *= d;
     return det / ddet;
 }
+
+// Complexity: O(n T(n) + n^2)
+template <class Matrix, class Tp>
+std::vector<Tp> reversed_minimal_polynomial_of_matrix(const Matrix &M) {
+    assert(M.height() == M.width());
+    const int N = M.height();
+    std::vector<Tp> b = gen_random_vector<Tp>(N), u = gen_random_vector<Tp>(N);
+    std::vector<Tp> uMb(2 * N);
+    for (int i = 0; i < 2 * N; i++) {
+        uMb[i] = std::inner_product(u.begin(), u.end(), b.begin(), Tp());
+        b = M.prod(b);
+    }
+    auto ret = find_linear_recurrence<Tp>(uMb);
+    return ret.second;
+}
+
+// Calculate A^k b
+// Complexity: O(n^2 log k + n T(n))
+// Verified: https://www.codechef.com/submit/COUNTSEQ2
+template <class Matrix, class Tp>
+std::vector<Tp> blackbox_matrix_pow_vec(const Matrix &A, long long k, std::vector<Tp> b) {
+    assert(A.width() == int(b.size()));
+    assert(k >= 0);
+
+    std::vector<Tp> rev_min_poly = reversed_minimal_polynomial_of_matrix<Matrix, Tp>(A);
+    std::vector<Tp> remainder = monomial_mod_polynomial<Tp>(k, rev_min_poly);
+
+    std::vector<Tp> ret(b.size());
+    for (Tp c : remainder) {
+        for (int d = 0; d < int(b.size()); ++d) ret[d] += b[d] * c;
+        b = A.prod(b);
+    }
+    return ret;
+}
