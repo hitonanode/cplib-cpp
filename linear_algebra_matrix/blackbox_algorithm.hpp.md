@@ -17,7 +17,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
+    links:
+    - https://www.codechef.com/submit/COUNTSEQ2
   bundledCode: "#line 2 \"formal_power_series/linear_recurrence.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <utility>\n#include <vector>\n\n// CUT begin\n//\
     \ Berlekamp\u2013Massey algorithm\n// https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm\n\
@@ -118,7 +119,22 @@ data:
     \        for (int j = 0; j < N; j++) b[j] *= D[j];\n        b = M.prod(b);\n \
     \   }\n    auto ret = find_linear_recurrence<Tp>(uMDib);\n    Tp det = ret.second.back()\
     \ * (N % 2 ? -1 : 1);\n    Tp ddet = 1;\n    for (auto d : D) ddet *= d;\n   \
-    \ return det / ddet;\n}\n"
+    \ return det / ddet;\n}\n\n// Complexity: O(n T(n) + n^2)\ntemplate <class Matrix,\
+    \ class Tp>\nstd::vector<Tp> reversed_minimal_polynomial_of_matrix(const Matrix\
+    \ &M) {\n    assert(M.height() == M.width());\n    const int N = M.height();\n\
+    \    std::vector<Tp> b = gen_random_vector<Tp>(N), u = gen_random_vector<Tp>(N);\n\
+    \    std::vector<Tp> uMb(2 * N);\n    for (int i = 0; i < 2 * N; i++) {\n    \
+    \    uMb[i] = std::inner_product(u.begin(), u.end(), b.begin(), Tp());\n     \
+    \   b = M.prod(b);\n    }\n    auto ret = find_linear_recurrence<Tp>(uMb);\n \
+    \   return ret.second;\n}\n\n// Calculate A^k b\n// Complexity: O(n^2 log k +\
+    \ n T(n))\n// Verified: https://www.codechef.com/submit/COUNTSEQ2\ntemplate <class\
+    \ Matrix, class Tp>\nstd::vector<Tp> blackbox_matrix_pow_vec(const Matrix &A,\
+    \ long long k, std::vector<Tp> b) {\n    assert(A.width() == int(b.size()));\n\
+    \    assert(k >= 0);\n\n    std::vector<Tp> rev_min_poly = reversed_minimal_polynomial_of_matrix<Matrix,\
+    \ Tp>(A);\n    std::vector<Tp> remainder = monomial_mod_polynomial<Tp>(k, rev_min_poly);\n\
+    \n    std::vector<Tp> ret(b.size());\n    for (Tp c : remainder) {\n        for\
+    \ (int d = 0; d < int(b.size()); ++d) ret[d] += b[d] * c;\n        b = A.prod(b);\n\
+    \    }\n    return ret;\n}\n"
   code: "#pragma once\n#include \"../formal_power_series/linear_recurrence.hpp\"\n\
     #include <chrono>\n#include <random>\n#include <vector>\n\ntemplate <typename\
     \ ModInt> std::vector<ModInt> gen_random_vector(int len) {\n    static std::mt19937\
@@ -167,21 +183,65 @@ data:
     \        for (int j = 0; j < N; j++) b[j] *= D[j];\n        b = M.prod(b);\n \
     \   }\n    auto ret = find_linear_recurrence<Tp>(uMDib);\n    Tp det = ret.second.back()\
     \ * (N % 2 ? -1 : 1);\n    Tp ddet = 1;\n    for (auto d : D) ddet *= d;\n   \
-    \ return det / ddet;\n}\n"
+    \ return det / ddet;\n}\n\n// Complexity: O(n T(n) + n^2)\ntemplate <class Matrix,\
+    \ class Tp>\nstd::vector<Tp> reversed_minimal_polynomial_of_matrix(const Matrix\
+    \ &M) {\n    assert(M.height() == M.width());\n    const int N = M.height();\n\
+    \    std::vector<Tp> b = gen_random_vector<Tp>(N), u = gen_random_vector<Tp>(N);\n\
+    \    std::vector<Tp> uMb(2 * N);\n    for (int i = 0; i < 2 * N; i++) {\n    \
+    \    uMb[i] = std::inner_product(u.begin(), u.end(), b.begin(), Tp());\n     \
+    \   b = M.prod(b);\n    }\n    auto ret = find_linear_recurrence<Tp>(uMb);\n \
+    \   return ret.second;\n}\n\n// Calculate A^k b\n// Complexity: O(n^2 log k +\
+    \ n T(n))\n// Verified: https://www.codechef.com/submit/COUNTSEQ2\ntemplate <class\
+    \ Matrix, class Tp>\nstd::vector<Tp> blackbox_matrix_pow_vec(const Matrix &A,\
+    \ long long k, std::vector<Tp> b) {\n    assert(A.width() == int(b.size()));\n\
+    \    assert(k >= 0);\n\n    std::vector<Tp> rev_min_poly = reversed_minimal_polynomial_of_matrix<Matrix,\
+    \ Tp>(A);\n    std::vector<Tp> remainder = monomial_mod_polynomial<Tp>(k, rev_min_poly);\n\
+    \n    std::vector<Tp> ret(b.size());\n    for (Tp c : remainder) {\n        for\
+    \ (int d = 0; d < int(b.size()); ++d) ret[d] += b[d] * c;\n        b = A.prod(b);\n\
+    \    }\n    return ret;\n}\n"
   dependsOn:
   - formal_power_series/linear_recurrence.hpp
   isVerificationFile: false
   path: linear_algebra_matrix/blackbox_algorithm.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-07-05 01:52:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
 documentation_of: linear_algebra_matrix/blackbox_algorithm.hpp
 layout: document
-redirect_from:
-- /library/linear_algebra_matrix/blackbox_algorithm.hpp
-- /library/linear_algebra_matrix/blackbox_algorithm.hpp.html
-title: linear_algebra_matrix/blackbox_algorithm.hpp
+title: "Black box linear algebra \u3092\u5229\u7528\u3057\u305F\u5404\u7A2E\u9AD8\u901F\
+  \u8A08\u7B97"
 ---
+
+## 行列式の高速計算
+
+$n \times n$ 行列の行列式を $O(n T(n) + n^2)$ で計算する（$T(n)$ は行列ベクトル積の計算量）．
+
+### 使用方法
+
+```cpp
+sparse_matrix<mint> mat(n, n);
+
+mint det = blackbox_determinant<sparse_matrix<mint>, mint>(mat);
+```
+
+## 行列累乗 DP の高速計算
+
+$n \times n$ 行列 $A$ と $n$ 次元ベクトル $b$ について，$A^k b$ を $O(n^2 \log k + n T(n))$ で計算する（$T(n)$ は行列ベクトル積の計算量）．
+
+### 使用方法
+
+```cpp
+int N;
+
+sparse_matrix<mint> mat(D, D);
+vector<mint> dp(D);
+
+dp = blackbox_matrix_pow_vec(mat, N, dp);
+```
+
+## 問題例
+
+- [Count Sequences \| CodeChef](https://www.codechef.com/submit/COUNTSEQ2?tab=statement) 行列累乗 DP の高速計算．TL には間に合わない．最小多項式を各 $M$ について前計算して埋め込むと間に合う．

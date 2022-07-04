@@ -307,7 +307,8 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_algorithm.hpp
-      title: linear_algebra_matrix/blackbox_algorithm.hpp
+      title: "Black box linear algebra \u3092\u5229\u7528\u3057\u305F\u5404\u7A2E\u9AD8\
+        \u901F\u8A08\u7B97"
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_matrices.hpp
       title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
