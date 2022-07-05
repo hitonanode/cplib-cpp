@@ -61,6 +61,9 @@ data:
     path: data_structure/test/queue_operate_all_composite.test.cpp
     title: data_structure/test/queue_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/rectangle_add_rectangle_sum.test.cpp
+    title: data_structure/test/rectangle_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
   - icon: ':heavy_check_mark:'
@@ -412,6 +415,7 @@ data:
   - set_power_series/test/subset_exp.stress.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
   - set_power_series/test/subset_log.test.cpp
+  - data_structure/test/rectangle_add_rectangle_sum.test.cpp
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/lazy_rbst.test.cpp

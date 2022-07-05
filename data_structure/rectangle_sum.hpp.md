@@ -8,8 +8,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: data_structure/test/rectange_sum.test.cpp
-    title: data_structure/test/rectange_sum.test.cpp
+    path: data_structure/test/rectangle_sum.test.cpp
+    title: data_structure/test/rectangle_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -107,7 +107,7 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/rectange_sum.test.cpp
+  - data_structure/test/rectangle_sum.test.cpp
 documentation_of: data_structure/rectangle_sum.hpp
 layout: document
 redirect_from:

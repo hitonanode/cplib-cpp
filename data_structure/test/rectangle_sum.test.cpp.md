@@ -18,7 +18,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/rectangle_sum
     links:
     - https://judge.yosupo.jp/problem/rectangle_sum
-  bundledCode: "#line 1 \"data_structure/test/rectange_sum.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"data_structure/test/rectangle_sum.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/rectangle_sum\"\n#line 2 \"segmenttree/binary_indexed_tree.hpp\"\
     \n#include <algorithm>\n#include <vector>\n\n// CUT begin\n// 0-indexed BIT (binary\
     \ indexed tree / Fenwick tree) (i : [0, len))\ntemplate <class T> struct BIT {\n\
@@ -66,7 +66,7 @@ data:
     \                const auto w = std::get<2>(p);\n                if (q == -1)\
     \ {\n                    bit.add(x, w);\n                } else {\n          \
     \          ret[q] += bit.sum(x + 1) * w;\n                }\n            }\n \
-    \       }\n        return ret;\n    }\n};\n#line 3 \"data_structure/test/rectange_sum.test.cpp\"\
+    \       }\n        return ret;\n    }\n};\n#line 3 \"data_structure/test/rectangle_sum.test.cpp\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    RectangleSum<int, unsigned long long> rect_sum;\n\
     \n    int N, Q;\n    cin >> N >> Q;\n    while (N--) {\n        int x, y, w;\n\
@@ -86,15 +86,15 @@ data:
   - data_structure/rectangle_sum.hpp
   - segmenttree/binary_indexed_tree.hpp
   isVerificationFile: true
-  path: data_structure/test/rectange_sum.test.cpp
+  path: data_structure/test/rectangle_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-07-05 20:49:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: data_structure/test/rectange_sum.test.cpp
+documentation_of: data_structure/test/rectangle_sum.test.cpp
 layout: document
 redirect_from:
-- /verify/data_structure/test/rectange_sum.test.cpp
-- /verify/data_structure/test/rectange_sum.test.cpp.html
-title: data_structure/test/rectange_sum.test.cpp
+- /verify/data_structure/test/rectangle_sum.test.cpp
+- /verify/data_structure/test/rectangle_sum.test.cpp.html
+title: data_structure/test/rectangle_sum.test.cpp
 ---

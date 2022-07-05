@@ -156,6 +156,10 @@ data:
       path: data_structure/rbst_fast.cpp
       title: data_structure/rbst_fast.cpp
     - icon: ':heavy_check_mark:'
+      path: data_structure/rectangle_add_rectangle_sum.hpp
+      title: "Static rectangle add rectangle sum \uFF08\u77E9\u5F62\u4E00\u69D8\u52A0\
+        \u7B97\u30FB\u77E9\u5F62\u7DCF\u548C\u53D6\u5F97\uFF09"
+    - icon: ':heavy_check_mark:'
       path: data_structure/rectangle_sum.hpp
       title: data_structure/rectangle_sum.hpp
     - icon: ':heavy_check_mark:'
@@ -881,8 +885,14 @@ data:
       path: data_structure/test/range_kth_smallest_offline.test.cpp
       title: data_structure/test/range_kth_smallest_offline.test.cpp
     - icon: ':heavy_check_mark:'
-      path: data_structure/test/rectange_sum.test.cpp
-      title: data_structure/test/rectange_sum.test.cpp
+      path: data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
+      title: data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/rectangle_add_rectangle_sum.test.cpp
+      title: data_structure/test/rectangle_add_rectangle_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/rectangle_sum.test.cpp
+      title: data_structure/test/rectangle_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/static_range_inversion.test.cpp
       title: data_structure/test/static_range_inversion.test.cpp
