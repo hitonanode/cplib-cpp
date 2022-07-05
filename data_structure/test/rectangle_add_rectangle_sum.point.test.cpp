@@ -1,14 +1,12 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/static_rectangle_add_rectangle_sum"
+#define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
 #include "../rectangle_add_rectangle_sum.hpp"
-#include "../../modint.hpp"
 #include <iostream>
 using namespace std;
-using mint = ModInt<998244353>;
 
 int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
 
-    RectangleAddRectangleSum<int, mint> rect_sum;
+    RectangleAddRectangleSum<int, unsigned long long> rect_sum;
 
     const int bias = 500000000;
 
@@ -16,16 +14,12 @@ int main() {
     cin >> N >> Q;
 
     while (N--) {
-        int l, r, d, u;
-        mint w;
-        cin >> l >> d >> r >> u >> w;
-        l -= bias;
-        d -= bias;
-        r -= bias;
-        u -= bias;
-        rect_sum.add_rectangle(l, r, d, u, w);
+        int x, y, w;
+        cin >> x >> y >> w;
+        x -= bias;
+        y -= bias;
+        rect_sum.add_rectangle(x, x + 1, y, y + 1, w);
     }
-
     while (Q--) {
         int l, r, d, u;
         cin >> l >> d >> r >> u;
