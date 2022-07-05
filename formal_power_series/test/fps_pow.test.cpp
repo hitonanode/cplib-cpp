@@ -7,7 +7,8 @@ using namespace std;
 int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
 
-    int N, M;
+    int N;
+    long long M;
     cin >> N >> M;
     FormalPowerSeries<ModInt<998244353>> A(N);
     for (auto &a : A) cin >> a;
