@@ -186,13 +186,21 @@ template <typename T> struct FormalPowerSeries : std::vector<T> {
         assert(deg >= -1);
         const int n = (int)this->size();
         if (deg == -1) deg = n;
+
+        if (k == 0) {
+            P ret(deg);
+            if (deg >= 1) ret[0] = T(1);
+            ret.shrink();
+            return ret;
+        }
+
         for (int i = 0; i < n; i++) {
             if ((*this)[i] != T(0)) {
                 T rev = T(1) / (*this)[i];
                 P C = (*this) * rev, D(n - i);
                 for (int j = i; j < n; j++) D[j - i] = C.coeff(j);
                 D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].pow(k);
-                if (k * (i > 0) > deg or k * i > deg) return {};
+                if (__int128(k) * i > deg) return {};
                 P E(deg);
                 long long S = i * k;
                 for (int j = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];
