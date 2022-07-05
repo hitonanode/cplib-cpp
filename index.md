@@ -926,9 +926,6 @@ data:
       path: formal_power_series/test/fps_pow.test.cpp
       title: formal_power_series/test/fps_pow.test.cpp
     - icon: ':heavy_check_mark:'
-      path: formal_power_series/test/fps_pow_another.test.cpp
-      title: formal_power_series/test/fps_pow_another.test.cpp
-    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt.test.cpp
       title: formal_power_series/test/fps_sqrt.test.cpp
     - icon: ':heavy_check_mark:'

@@ -225,19 +225,21 @@ data:
     \            ret = (ret * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1);\n\
     \        }\n        return ret.pre(deg);\n    }\n\n    P pow(long long k, int\
     \ deg = -1) const {\n        assert(deg >= -1);\n        const int n = (int)this->size();\n\
-    \        if (deg == -1) deg = n;\n        for (int i = 0; i < n; i++) {\n    \
-    \        if ((*this)[i] != T(0)) {\n                T rev = T(1) / (*this)[i];\n\
+    \        if (deg == -1) deg = n;\n\n        if (k == 0) {\n            P ret(deg);\n\
+    \            if (deg >= 1) ret[0] = T(1);\n            ret.shrink();\n       \
+    \     return ret;\n        }\n\n        for (int i = 0; i < n; i++) {\n      \
+    \      if ((*this)[i] != T(0)) {\n                T rev = T(1) / (*this)[i];\n\
     \                P C = (*this) * rev, D(n - i);\n                for (int j =\
     \ i; j < n; j++) D[j - i] = C.coeff(j);\n                D = (D.log(deg) * T(k)).exp(deg)\
-    \ * (*this)[i].pow(k);\n                if (k * (i > 0) > deg or k * i > deg)\
-    \ return {};\n                P E(deg);\n                long long S = i * k;\n\
-    \                for (int j = 0; j + S < deg and j < (int)D.size(); j++) E[j +\
-    \ S] = D[j];\n                E.shrink();\n                return E;\n       \
-    \     }\n        }\n        return *this;\n    }\n\n    // Calculate f(X + c)\
-    \ from f(X), O(NlogN)\n    P shift(T c) const {\n        const int n = (int)this->size();\n\
-    \        P ret = *this;\n        for (int i = 0; i < n; i++) ret[i] *= T(i).fac();\n\
-    \        std::reverse(ret.begin(), ret.end());\n        P exp_cx(n, 1);\n    \
-    \    for (int i = 1; i < n; i++) exp_cx[i] = exp_cx[i - 1] * c / i;\n        ret\
+    \ * (*this)[i].pow(k);\n                if (__int128(k) * i > deg) return {};\n\
+    \                P E(deg);\n                long long S = i * k;\n           \
+    \     for (int j = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];\n\
+    \                E.shrink();\n                return E;\n            }\n     \
+    \   }\n        return *this;\n    }\n\n    // Calculate f(X + c) from f(X), O(NlogN)\n\
+    \    P shift(T c) const {\n        const int n = (int)this->size();\n        P\
+    \ ret = *this;\n        for (int i = 0; i < n; i++) ret[i] *= T(i).fac();\n  \
+    \      std::reverse(ret.begin(), ret.end());\n        P exp_cx(n, 1);\n      \
+    \  for (int i = 1; i < n; i++) exp_cx[i] = exp_cx[i - 1] * c / i;\n        ret\
     \ = (ret * exp_cx), ret.resize(n);\n        std::reverse(ret.begin(), ret.end());\n\
     \        for (int i = 0; i < n; i++) ret[i] /= T(i).fac();\n        return ret;\n\
     \    }\n\n    T coeff(int i) const {\n        if ((int)this->size() <= i or i\
@@ -245,20 +247,21 @@ data:
     \ {\n        T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w\
     \ *= x;\n        return ret;\n    }\n};\n#line 5 \"formal_power_series/test/fps_pow.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \n    int N, M;\n    cin >> N >> M;\n    FormalPowerSeries<ModInt<998244353>>\
+    \n    int N;\n    long long M;\n    cin >> N >> M;\n    FormalPowerSeries<ModInt<998244353>>\
     \ A(N);\n    for (auto &a : A) cin >> a;\n    A.shrink();\n    auto ret = A.pow(M,\
     \ N);\n    for (int i = 0; i < N; i++) cout << ret.coeff(i) << ' ';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
     \n#include \"formal_power_series/formal_power_series.hpp\"\n#include \"modint.hpp\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n\n    int N, M;\n    cin >> N >> M;\n    FormalPowerSeries<ModInt<998244353>>\
-    \ A(N);\n    for (auto &a : A) cin >> a;\n    A.shrink();\n    auto ret = A.pow(M,\
-    \ N);\n    for (int i = 0; i < N; i++) cout << ret.coeff(i) << ' ';\n}\n"
+    \ ios::sync_with_stdio(false);\n\n    int N;\n    long long M;\n    cin >> N >>\
+    \ M;\n    FormalPowerSeries<ModInt<998244353>> A(N);\n    for (auto &a : A) cin\
+    \ >> a;\n    A.shrink();\n    auto ret = A.pow(M, N);\n    for (int i = 0; i <\
+    \ N; i++) cout << ret.coeff(i) << ' ';\n}\n"
   dependsOn: []
   isVerificationFile: true
   path: formal_power_series/test/fps_pow.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2022-07-05 21:55:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/fps_pow.test.cpp
