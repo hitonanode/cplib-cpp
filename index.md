@@ -672,6 +672,9 @@ data:
       path: utilities/gnu_pbds.hpp
       title: utilities/gnu_pbds.hpp
     - icon: ':warning:'
+      path: utilities/groupby.hpp
+      title: groupby
+    - icon: ':warning:'
       path: utilities/int128.hpp
       title: int128
     - icon: ':heavy_check_mark:'
@@ -719,6 +722,10 @@ data:
     - icon: ':warning:'
       path: utilities/rotate90.hpp
       title: utilities/rotate90.hpp
+    - icon: ':warning:'
+      path: utilities/run_length_encoding.hpp
+      title: "Run length encoding \uFF08\u30E9\u30F3\u30EC\u30F3\u30B0\u30B9\u5727\
+        \u7E2E\uFF0C\u9023\u9577\u5727\u7E2E\uFF09"
     - icon: ':warning:'
       path: utilities/segtree_range_covering_nodes.hpp
       title: "\u975E\u518D\u5E30\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3067\u533A\u9593\
