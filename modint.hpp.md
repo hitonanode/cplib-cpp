@@ -40,6 +40,9 @@ data:
     path: convolution/test/bitwise_xor_conv.test.cpp
     title: convolution/test/bitwise_xor_conv.test.cpp
   - icon: ':heavy_check_mark:'
+    path: convolution/test/convolution_on_tree.test.cpp
+    title: convolution/test/convolution_on_tree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/multivar_ntt.test.cpp
     title: convolution/test/multivar_ntt.test.cpp
   - icon: ':heavy_check_mark:'
@@ -402,6 +405,7 @@ data:
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   - utilities/test/pow.test.cpp
+  - convolution/test/convolution_on_tree.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
   - convolution/test/ntt.test.cpp

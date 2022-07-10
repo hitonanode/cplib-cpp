@@ -97,6 +97,10 @@ data:
       title: Li-Chao tree
   - name: convolution
     pages:
+    - icon: ':heavy_check_mark:'
+      path: convolution/convolution_on_tree.hpp
+      title: "Convolution on rooted tree \uFF08\u6839\u4ED8\u304D\u6728\u4E0A\u306E\
+        \u7573\u307F\u8FBC\u307F\uFF09"
     - icon: ':warning:'
       path: convolution/convolutive_translation_2d.hpp
       title: convolution/convolutive_translation_2d.hpp
@@ -816,6 +820,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/bitwise_xor_conv.test.cpp
       title: convolution/test/bitwise_xor_conv.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: convolution/test/convolution_on_tree.test.cpp
+      title: convolution/test/convolution_on_tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: convolution/test/hadamard_xor.test.cpp
       title: convolution/test/hadamard_xor.test.cpp

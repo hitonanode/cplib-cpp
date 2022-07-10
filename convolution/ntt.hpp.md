@@ -25,6 +25,9 @@ data:
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: convolution/test/convolution_on_tree.test.cpp
+    title: convolution/test/convolution_on_tree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/multivar_ntt.test.cpp
     title: convolution/test/multivar_ntt.test.cpp
   - icon: ':heavy_check_mark:'
@@ -281,6 +284,7 @@ data:
   - formal_power_series/test/polynomial_divmod.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - convolution/test/convolution_on_tree.test.cpp
   - convolution/test/ntt.test.cpp
   - convolution/test/multivar_ntt.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
