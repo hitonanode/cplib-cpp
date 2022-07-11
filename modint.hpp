@@ -103,6 +103,7 @@ template <int md> struct ModInt {
     }
     MDCONST ModInt inv() const {
         if (this->val_ < std::min(md >> 1, 1 << 21)) {
+            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};
             while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);
             return invs[this->val_];
         } else {
@@ -154,5 +155,7 @@ template <int md> struct ModInt {
 template <int md> std::vector<ModInt<md>> ModInt<md>::facs = {1};
 template <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};
 template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};
+
+using ModInt998244353 = ModInt<998244353>;
 // using mint = ModInt<998244353>;
 // using mint = ModInt<1000000007>;
