@@ -1,71 +1,71 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/multivar_ntt.hpp
     title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
       \u307F\u8FBC\u307F\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/coeff_of_rational_function.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
       \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/factorial_power.hpp
     title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\
       \u7B97\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/polynomial_divmod.hpp
     title: formal_power_series/polynomial_divmod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/test/convolution_on_tree.test.cpp
     title: convolution/test/convolution_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/test/multivar_ntt.test.cpp
     title: convolution/test/multivar_ntt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/kitamasa.test.cpp
     title: formal_power_series/test/kitamasa.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/polynomial_divmod.test.cpp
     title: formal_power_series/test/polynomial_divmod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/shift_of_sampling_points.test.cpp
     title: formal_power_series/test/shift_of_sampling_points.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -121,59 +121,59 @@ data:
     \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
     \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
     \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
-    \            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
-    \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
-    \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
-    \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
-    \        return facs[this->val_];\n    }\n    MDCONST ModInt facinv() const {\n\
-    \        while (this->val_ >= int(facs.size())) _precalculation(facs.size() *\
-    \ 2);\n        return facinvs[this->val_];\n    }\n    MDCONST ModInt doublefac()\
-    \ const {\n        lint k = (this->val_ + 1) / 2;\n        return (this->val_\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n        \
-    \                        : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
-    \ ModInt nCr(const ModInt &r) const {\n        return (this->val_ < r.val_) ?\
-    \ 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
-    \ nPr(const ModInt &r) const {\n        return (this->val_ < r.val_) ? 0 : this->fac()\
-    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val_\
-    \ == 0) return 0;\n        if (md == 2) return val_;\n        if (pow((md - 1)\
-    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
-    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
-    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
-    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
-    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
-    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
-    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
+    \            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n      \
+    \      while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
+    \            return invs[this->val_];\n        } else {\n            return this->pow(md\
+    \ - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n        while (this->val_\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n        return facs[this->val_];\n\
+    \    }\n    MDCONST ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
+    \ }\n    MDCONST ModInt doublefac() const {\n        lint k = (this->val_ + 1)\
+    \ / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
+    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
+    \    }\n    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val_\
+    \ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n  \
+    \  MDCONST ModInt nPr(const ModInt &r) const {\n        return (this->val_ < r.val_)\
+    \ ? 0 : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const\
+    \ {\n        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n   \
+    \     if (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while\
+    \ (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n       \
+    \ while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this)\
+    \ * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while\
+    \ (y != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
+    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
+    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"convolution/ntt.hpp\"\
-    \n\n#include <algorithm>\n#include <array>\n#include <cassert>\n#include <tuple>\n\
-    #line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution for arbitrary\
-    \ mod\n// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.\n\
-    // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
-    // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
-    \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
-    \ b, bool skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
-    \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
-    \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
-    // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
-    \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
-    \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
-    \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
-    \ std::vector<MODINT> w{1}, iw{1};\n    for (int m = w.size(); m < n / 2; m *=\
-    \ 2) {\n        MODINT dw = root.pow((mod - 1) / (4 * m)), dwinv = 1 / dw;\n \
-    \       w.resize(m * 2), iw.resize(m * 2);\n        for (int i = 0; i < m; i++)\
-    \ w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;\n    }\n\n    if (!is_inverse)\
-    \ {\n        for (int m = n; m >>= 1;) {\n            for (int s = 0, k = 0; s\
-    \ < n; s += 2 * m, k++) {\n                for (int i = s; i < s + m; i++) {\n\
-    \                    MODINT x = a[i], y = a[i + m] * w[k];\n                 \
-    \   a[i] = x + y, a[i + m] = x - y;\n                }\n            }\n      \
-    \  }\n    } else {\n        for (int m = 1; m < n; m *= 2) {\n            for\
-    \ (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n                for (int i = s;\
-    \ i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m];\n    \
-    \                a[i] = x + y, a[i + m] = (x - y) * iw[k];\n                }\n\
-    \            }\n        }\n        int n_inv = MODINT(n).inv().val();\n      \
-    \  for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 3 \"convolution/ntt.hpp\"\n\n#include <algorithm>\n#include <array>\n#include\
+    \ <cassert>\n#include <tuple>\n#line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n\
+    // Integer convolution for arbitrary mod\n// with NTT (and Garner's algorithm)\
+    \ for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm if `skip_garner`\
+    \ is true or mod is in `nttprimes`.\n// input: a (size: n), b (size: m)\n// return:\
+    \ vector (size: n + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner);\n\nconstexpr int nttprimes[3] =\
+    \ {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
+    \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
+    \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
+    \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
+    \    if (n == 1) return;\n    static const int mod = MODINT::mod();\n    static\
+    \ const MODINT root = MODINT::get_primitive_root();\n    assert(__builtin_popcount(n)\
+    \ == 1 and (mod - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n\
+    \    for (int m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod\
+    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
+    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
+    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
+    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
+    \  for (int i = s; i < s + m; i++) {\n                    MODINT x = a[i], y =\
+    \ a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n    \
+    \            }\n            }\n        }\n    } else {\n        for (int m = 1;\
+    \ m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++)\
+    \ {\n                for (int i = s; i < s + m; i++) {\n                    MODINT\
+    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
+    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv().val();\n\
+    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
     \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
     \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
     \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
@@ -275,8 +275,8 @@ data:
   - formal_power_series/polynomial_divmod.hpp
   - convolution/multivar_ntt.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number/test/primitive_root.test.cpp
   - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp

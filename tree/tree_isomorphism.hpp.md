@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/tree_isomorphism.aoj1613.test.cpp
     title: tree/test/tree_isomorphism.aoj1613.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - http://xorshift.di.unimi.it/splitmix64.c
@@ -95,7 +95,7 @@ data:
   path: tree/tree_isomorphism.hpp
   requiredBy: []
   timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/tree_isomorphism.aoj1613.test.cpp
 documentation_of: tree/tree_isomorphism.hpp

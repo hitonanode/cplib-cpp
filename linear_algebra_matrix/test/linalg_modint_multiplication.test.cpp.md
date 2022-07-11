@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D
@@ -78,63 +78,63 @@ data:
     \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
     \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
     \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
-    \            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
-    \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
-    \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
-    \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
-    \        return facs[this->val_];\n    }\n    MDCONST ModInt facinv() const {\n\
-    \        while (this->val_ >= int(facs.size())) _precalculation(facs.size() *\
-    \ 2);\n        return facinvs[this->val_];\n    }\n    MDCONST ModInt doublefac()\
-    \ const {\n        lint k = (this->val_ + 1) / 2;\n        return (this->val_\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n        \
-    \                        : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
-    \ ModInt nCr(const ModInt &r) const {\n        return (this->val_ < r.val_) ?\
-    \ 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
-    \ nPr(const ModInt &r) const {\n        return (this->val_ < r.val_) ? 0 : this->fac()\
-    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val_\
-    \ == 0) return 0;\n        if (md == 2) return val_;\n        if (pow((md - 1)\
-    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
-    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
-    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
-    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
-    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
-    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
-    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
+    \            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n      \
+    \      while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
+    \            return invs[this->val_];\n        } else {\n            return this->pow(md\
+    \ - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n        while (this->val_\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n        return facs[this->val_];\n\
+    \    }\n    MDCONST ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
+    \ }\n    MDCONST ModInt doublefac() const {\n        lint k = (this->val_ + 1)\
+    \ / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
+    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
+    \    }\n    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val_\
+    \ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n  \
+    \  MDCONST ModInt nPr(const ModInt &r) const {\n        return (this->val_ < r.val_)\
+    \ ? 0 : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const\
+    \ {\n        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n   \
+    \     if (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while\
+    \ (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n       \
+    \ while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this)\
+    \ * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while\
+    \ (y != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
+    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
+    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"number/bare_mod_algebra.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#include <tuple>\n#include <utility>\n\
-    #line 7 \"number/bare_mod_algebra.hpp\"\n\n// CUT begin\n// Solve ax+by=gcd(a,\
-    \ b)\ntemplate <class Int> Int extgcd(Int a, Int b, Int &x, Int &y) {\n    Int\
-    \ d = a;\n    if (b != 0) {\n        d = extgcd(b, a % b, y, x), y -= (a / b)\
-    \ * x;\n    } else {\n        x = 1, y = 0;\n    }\n    return d;\n}\n// Calculate\
-    \ a^(-1) (MOD m) s if gcd(a, m) == 1\n// Calculate x s.t. ax == gcd(a, m) MOD\
-    \ m\ntemplate <class Int> Int mod_inverse(Int a, Int m) {\n    Int x, y;\n   \
-    \ extgcd<Int>(a, m, x, y);\n    x %= m;\n    return x + (x < 0) * m;\n}\n\n//\
-    \ Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a, b), xa = g MOD b, 0 <= x\
-    \ < b/g\ntemplate <class Int> /* constexpr */ std::pair<Int, Int> inv_gcd(Int\
-    \ a, Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a == 0) return {b,\
-    \ 0};\n    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n        Int u =\
-    \ s / t;\n        s -= t * u, m0 -= m1 * u;\n        auto tmp = s;\n        s\
-    \ = t, t = tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0 < 0) m0 += b /\
-    \ s;\n    return {s, m0};\n}\n\ntemplate <class Int>\n/* constexpr */ std::pair<Int,\
-    \ Int> crt(const std::vector<Int> &r, const std::vector<Int> &m) {\n    assert(r.size()\
-    \ == m.size());\n    int n = int(r.size());\n    // Contracts: 0 <= r0 < m0\n\
-    \    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n; i++) {\n        assert(1\
-    \ <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n        if (r1 < 0) r1\
-    \ += m1;\n        if (m0 < m1) {\n            std::swap(r0, r1);\n           \
-    \ std::swap(m0, m1);\n        }\n        if (m0 % m1 == 0) {\n            if (r0\
-    \ % m1 != r1) return {0, 0};\n            continue;\n        }\n        Int g,\
-    \ im;\n        std::tie(g, im) = inv_gcd<Int>(m0, m1);\n\n        Int u1 = m1\
-    \ / g;\n        if ((r1 - r0) % g) return {0, 0};\n\n        Int x = (r1 - r0)\
-    \ / g % u1 * im % u1;\n        r0 += x * m0;\n        m0 *= u1;\n        if (r0\
-    \ < 0) r0 += m0;\n    }\n    return {r0, m0};\n}\n\n// \u87FB\u672C P.262\n//\
-    \ \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\u3092\u5229\u7528\u3057\u3066\uFF0C\u8272\
-    \u3005\u306A\u7D20\u6570\u3067\u5272\u3063\u305F\u4F59\u308A\u304B\u3089\u5143\
-    \u306E\u5024\u3092\u5FA9\u5143\n// \u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\
-    \ A * x = B mod M \u306E\u89E3\n// Requirement: M[i] > 0\n// Output: x = first\
-    \ MOD second (if solution exists), (0, 0) (otherwise)\ntemplate <class Int>\n\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"number/bare_mod_algebra.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <tuple>\n#include <utility>\n#line 7 \"number/bare_mod_algebra.hpp\"\n\
+    \n// CUT begin\n// Solve ax+by=gcd(a, b)\ntemplate <class Int> Int extgcd(Int\
+    \ a, Int b, Int &x, Int &y) {\n    Int d = a;\n    if (b != 0) {\n        d =\
+    \ extgcd(b, a % b, y, x), y -= (a / b) * x;\n    } else {\n        x = 1, y =\
+    \ 0;\n    }\n    return d;\n}\n// Calculate a^(-1) (MOD m) s if gcd(a, m) == 1\n\
+    // Calculate x s.t. ax == gcd(a, m) MOD m\ntemplate <class Int> Int mod_inverse(Int\
+    \ a, Int m) {\n    Int x, y;\n    extgcd<Int>(a, m, x, y);\n    x %= m;\n    return\
+    \ x + (x < 0) * m;\n}\n\n// Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a,\
+    \ b), xa = g MOD b, 0 <= x < b/g\ntemplate <class Int> /* constexpr */ std::pair<Int,\
+    \ Int> inv_gcd(Int a, Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a\
+    \ == 0) return {b, 0};\n    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
+    \        Int u = s / t;\n        s -= t * u, m0 -= m1 * u;\n        auto tmp =\
+    \ s;\n        s = t, t = tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0\
+    \ < 0) m0 += b / s;\n    return {s, m0};\n}\n\ntemplate <class Int>\n/* constexpr\
+    \ */ std::pair<Int, Int> crt(const std::vector<Int> &r, const std::vector<Int>\
+    \ &m) {\n    assert(r.size() == m.size());\n    int n = int(r.size());\n    //\
+    \ Contracts: 0 <= r0 < m0\n    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n;\
+    \ i++) {\n        assert(1 <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n\
+    \        if (r1 < 0) r1 += m1;\n        if (m0 < m1) {\n            std::swap(r0,\
+    \ r1);\n            std::swap(m0, m1);\n        }\n        if (m0 % m1 == 0) {\n\
+    \            if (r0 % m1 != r1) return {0, 0};\n            continue;\n      \
+    \  }\n        Int g, im;\n        std::tie(g, im) = inv_gcd<Int>(m0, m1);\n\n\
+    \        Int u1 = m1 / g;\n        if ((r1 - r0) % g) return {0, 0};\n\n     \
+    \   Int x = (r1 - r0) / g % u1 * im % u1;\n        r0 += x * m0;\n        m0 *=\
+    \ u1;\n        if (r0 < 0) r0 += m0;\n    }\n    return {r0, m0};\n}\n\n// \u87FB\
+    \u672C P.262\n// \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\u3092\u5229\u7528\u3057\u3066\
+    \uFF0C\u8272\u3005\u306A\u7D20\u6570\u3067\u5272\u3063\u305F\u4F59\u308A\u304B\
+    \u3089\u5143\u306E\u5024\u3092\u5FA9\u5143\n// \u9023\u7ACB\u7DDA\u5F62\u5408\u540C\
+    \u5F0F A * x = B mod M \u306E\u89E3\n// Requirement: M[i] > 0\n// Output: x =\
+    \ first MOD second (if solution exists), (0, 0) (otherwise)\ntemplate <class Int>\n\
     std::pair<Int, Int>\nlinear_congruence(const std::vector<Int> &A, const std::vector<Int>\
     \ &B, const std::vector<Int> &M) {\n    Int r = 0, m = 1;\n    assert(A.size()\
     \ == M.size());\n    assert(B.size() == M.size());\n    for (int i = 0; i < (int)A.size();\
@@ -371,8 +371,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 layout: document

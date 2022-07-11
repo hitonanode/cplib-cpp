@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
   _extendedRequiredBy: []
@@ -188,35 +188,36 @@ data:
     \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
     \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
     \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
-    \            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
-    \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
-    \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
-    \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
-    \        return facs[this->val_];\n    }\n    MDCONST ModInt facinv() const {\n\
-    \        while (this->val_ >= int(facs.size())) _precalculation(facs.size() *\
-    \ 2);\n        return facinvs[this->val_];\n    }\n    MDCONST ModInt doublefac()\
-    \ const {\n        lint k = (this->val_ + 1) / 2;\n        return (this->val_\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n        \
-    \                        : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
-    \ ModInt nCr(const ModInt &r) const {\n        return (this->val_ < r.val_) ?\
-    \ 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
-    \ nPr(const ModInt &r) const {\n        return (this->val_ < r.val_) ? 0 : this->fac()\
-    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val_\
-    \ == 0) return 0;\n        if (md == 2) return val_;\n        if (pow((md - 1)\
-    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
-    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
-    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
-    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
-    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
-    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
-    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
+    \            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n      \
+    \      while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
+    \            return invs[this->val_];\n        } else {\n            return this->pow(md\
+    \ - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n        while (this->val_\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n        return facs[this->val_];\n\
+    \    }\n    MDCONST ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
+    \ }\n    MDCONST ModInt doublefac() const {\n        lint k = (this->val_ + 1)\
+    \ / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
+    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
+    \    }\n    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val_\
+    \ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n  \
+    \  MDCONST ModInt nPr(const ModInt &r) const {\n        return (this->val_ < r.val_)\
+    \ ? 0 : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const\
+    \ {\n        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n   \
+    \     if (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while\
+    \ (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n       \
+    \ while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this)\
+    \ * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while\
+    \ (y != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
+    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
+    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"graph/general_matching.hpp\"\
-    \n#include <chrono>\n#include <queue>\n#include <random>\n#line 10 \"graph/general_matching.hpp\"\
-    \n\n// CUT begin\n// Find maximum matchings in general graph using the Tutte matrix\
-    \ (The Rabin-Vazirani algorithm)\n// Complexity: O(N^3)\n// Reference: https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h\n\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 5 \"graph/general_matching.hpp\"\n#include <chrono>\n#include <queue>\n\
+    #include <random>\n#line 10 \"graph/general_matching.hpp\"\n\n// CUT begin\n//\
+    \ Find maximum matchings in general graph using the Tutte matrix (The Rabin-Vazirani\
+    \ algorithm)\n// Complexity: O(N^3)\n// Reference: https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h\n\
     //            https://kopricky.github.io/code/Academic/maximum_matching.html\n\
     std::vector<std::pair<int, int>> generalMatching(int N, std::vector<std::pair<int,\
     \ int>> ed) {\n    using MODINT = ModInt<1000000007>;\n    std::vector<std::pair<int,\

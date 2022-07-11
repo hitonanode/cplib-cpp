@@ -5,10 +5,10 @@ data:
     path: combinatorial_opt/linear_matroid_parity.hpp
     title: "Linear matroid parity (unweighted) \uFF08\u7DDA\u5F62\u30DE\u30C8\u30ED\
       \u30A4\u30C9\u30D1\u30EA\u30C6\u30A3\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -238,7 +238,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -262,15 +263,16 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 8 \"combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp\"\
-    \nusing mint = ModInt<1000000007>;\nusing namespace std;\n\nint main() {\n   \
-    \ cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, M;\n    cin >> N\
-    \ >> M;\n    vector<pair<vector<mint>, vector<mint>>> uvs;\n\n    while (M--)\
-    \ {\n        int u, v, w;\n        cin >> u >> v >> w;\n        --u, --v, --w;\n\
-    \        vector<mint> a(N), b(N);\n        a[u] = b[v] = 1, a[w] = b[w] = -1;\n\
-    \        uvs.emplace_back(a, b);\n    }\n\n    auto sol = linear_matroid_parity(uvs,\
-    \ 14786);\n    cout << accumulate(sol.begin(), sol.end(), 0) << '\\n';\n}\n"
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 8 \"combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp\"\nusing\
+    \ mint = ModInt<1000000007>;\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N, M;\n    cin >> N >> M;\n    vector<pair<vector<mint>,\
+    \ vector<mint>>> uvs;\n\n    while (M--) {\n        int u, v, w;\n        cin\
+    \ >> u >> v >> w;\n        --u, --v, --w;\n        vector<mint> a(N), b(N);\n\
+    \        a[u] = b[v] = 1, a[w] = b[w] = -1;\n        uvs.emplace_back(a, b);\n\
+    \    }\n\n    auto sol = linear_matroid_parity(uvs, 14786);\n    cout << accumulate(sol.begin(),\
+    \ sol.end(), 0) << '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1773\"\n#include \"../linear_matroid_parity.hpp\"\
     \n#include \"../../modint.hpp\"\n#include <iostream>\n#include <numeric>\n#include\
     \ <utility>\n#include <vector>\nusing mint = ModInt<1000000007>;\nusing namespace\
@@ -288,7 +290,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2022-07-12 00:34:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp

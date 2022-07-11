@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/test/convolution_on_tree.test.cpp
     title: convolution/test/convolution_on_tree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://yukicoder.me/problems/no/2004
@@ -108,7 +108,7 @@ data:
   path: convolution/convolution_on_tree.hpp
   requiredBy: []
   timestamp: '2022-07-10 22:54:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - convolution/test/convolution_on_tree.test.cpp
 documentation_of: convolution/convolution_on_tree.hpp

@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/test/queue_operate_all_composite.test.cpp
     title: data_structure/test/queue_operate_all_composite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://github.com/NiMiLib/NoshiMochiLibrary/blob/queue_aggregation/lib/data_structure/sequence/queue_aggregation.hpp
@@ -80,7 +80,7 @@ data:
   path: data_structure/sliding_window_aggregation.hpp
   requiredBy: []
   timestamp: '2022-05-01 12:00:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - data_structure/test/queue_operate_all_composite.test.cpp
 documentation_of: data_structure/sliding_window_aggregation.hpp

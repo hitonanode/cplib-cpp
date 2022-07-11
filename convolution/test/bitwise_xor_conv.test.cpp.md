@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/hadamard.hpp
     title: convolution/hadamard.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -71,7 +71,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -95,11 +96,11 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"convolution/hadamard.hpp\"\
-    \n#include <cassert>\n#line 4 \"convolution/hadamard.hpp\"\n\n// CUT begin\n//\
-    \ Fast Walsh-Hadamard transform and its abstraction\n// Tutorials: <https://codeforces.com/blog/entry/71899>\n\
-    //            <https://csacademy.com/blog/fast-fourier-transform-and-variations-of-it>\n\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"convolution/hadamard.hpp\"\n#include <cassert>\n#line 4 \"convolution/hadamard.hpp\"\
+    \n\n// CUT begin\n// Fast Walsh-Hadamard transform and its abstraction\n// Tutorials:\
+    \ <https://codeforces.com/blog/entry/71899>\n//            <https://csacademy.com/blog/fast-fourier-transform-and-variations-of-it>\n\
     template <typename T, typename F> void abstract_fwht(std::vector<T> &seq, F f)\
     \ {\n    const int n = seq.size();\n    assert(__builtin_popcount(n) == 1);\n\
     \    for (int w = 1; w < n; w *= 2) {\n        for (int i = 0; i < n; i += w *\
@@ -141,7 +142,7 @@ data:
   isVerificationFile: true
   path: convolution/test/bitwise_xor_conv.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2022-07-12 00:34:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/bitwise_xor_conv.test.cpp

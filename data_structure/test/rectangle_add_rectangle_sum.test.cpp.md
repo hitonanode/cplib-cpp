@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/rectangle_add_rectangle_sum.hpp
     title: "Static rectangle add rectangle sum \uFF08\u77E9\u5F62\u4E00\u69D8\u52A0\
       \u7B97\u30FB\u77E9\u5F62\u7DCF\u548C\u53D6\u5F97\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segmenttree/binary_indexed_tree.hpp
     title: "Binary indexed tree / Fenwick tree \uFF08BIT\u30FB\u30D5\u30A7\u30CB\u30C3\
       \u30AF\u6728\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_rectangle_add_rectangle_sum
@@ -131,7 +131,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -155,9 +156,10 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"data_structure/test/rectangle_add_rectangle_sum.test.cpp\"\
-    \nusing namespace std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    cin.tie(nullptr),\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 5 \"data_structure/test/rectangle_add_rectangle_sum.test.cpp\"\nusing namespace\
+    \ std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    RectangleAddRectangleSum<int, mint> rect_sum;\n\
     \n    const int bias = 500000000;\n\n    int N, Q;\n    cin >> N >> Q;\n\n   \
     \ while (N--) {\n        int l, r, d, u;\n        mint w;\n        cin >> l >>\
@@ -186,8 +188,8 @@ data:
   isVerificationFile: true
   path: data_structure/test/rectangle_add_rectangle_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-07-05 20:49:30+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: data_structure/test/rectangle_add_rectangle_sum.test.cpp
 layout: document

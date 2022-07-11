@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: string/rolling_hash_1d.hpp
     title: string/rolling_hash_1d.hpp
   _extendedRequiredBy: []

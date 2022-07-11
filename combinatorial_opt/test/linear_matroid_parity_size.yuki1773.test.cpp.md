@@ -5,10 +5,10 @@ data:
     path: combinatorial_opt/linear_matroid_parity.hpp
     title: "Linear matroid parity (unweighted) \uFF08\u7DDA\u5F62\u30DE\u30C8\u30ED\
       \u30A4\u30C9\u30D1\u30EA\u30C6\u30A3\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -75,7 +75,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -99,72 +100,72 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iterator>\n\
-    #include <type_traits>\n#include <utility>\n#line 9 \"linear_algebra_matrix/matrix.hpp\"\
-    \n\nnamespace matrix_ {\nstruct has_id_method_impl {\n    template <class T_>\
-    \ static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n    template\
-    \ <class T_> static auto check(...) -> std::false_type;\n};\ntemplate <class T_>\
-    \ struct has_id : decltype(has_id_method_impl::check<T_>(nullptr)) {};\n} // namespace\
-    \ matrix_\n\ntemplate <typename T> struct matrix {\n    int H, W;\n    std::vector<T>\
-    \ elem;\n    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
-    \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
-    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    int height()\
-    \ const { return H; }\n    int width() const { return W; }\n    std::vector<std::vector<T>>\
-    \ vecvec() const {\n        std::vector<std::vector<T>> ret(H);\n        for (int\
-    \ i = 0; i < H; i++) {\n            std::copy(elem.begin() + i * W, elem.begin()\
-    \ + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n        return ret;\n\
-    \    }\n    operator std::vector<std::vector<T>>() const { return vecvec(); }\n\
-    \    matrix() = default;\n    matrix(int H, int W) : H(H), W(W), elem(H * W) {}\n\
-    \    matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ?\
-    \ d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(), raw.end(),\
-    \ std::back_inserter(elem));\n    }\n\n    template <typename T2, typename std::enable_if<matrix_::has_id<T2>::value>::type\
-    \ * = nullptr>\n    static T2 _T_id() {\n        return T2::id();\n    }\n   \
-    \ template <typename T2, typename std::enable_if<!matrix_::has_id<T2>::value>::type\
-    \ * = nullptr>\n    static T2 _T_id() {\n        return T2(1);\n    }\n\n    static\
-    \ matrix Identity(int N) {\n        matrix ret(N, N);\n        for (int i = 0;\
-    \ i < N; i++) ret.at(i, i) = _T_id<T>();\n        return ret;\n    }\n\n    matrix\
-    \ operator-() const {\n        matrix ret(H, W);\n        for (int i = 0; i <\
-    \ H * W; i++) ret.elem[i] = -elem[i];\n        return ret;\n    }\n    matrix\
-    \ operator*(const T &v) const {\n        matrix ret = *this;\n        for (auto\
-    \ &x : ret.elem) x *= v;\n        return ret;\n    }\n    matrix operator/(const\
-    \ T &v) const {\n        matrix ret = *this;\n        const T vinv = _T_id<T>()\
-    \ / v;\n        for (auto &x : ret.elem) x *= vinv;\n        return ret;\n   \
-    \ }\n    matrix operator+(const matrix &r) const {\n        matrix ret = *this;\n\
-    \        for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i];\n        return\
-    \ ret;\n    }\n    matrix operator-(const matrix &r) const {\n        matrix ret\
-    \ = *this;\n        for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i];\n\
-    \        return ret;\n    }\n    matrix operator*(const matrix &r) const {\n \
-    \       matrix ret(H, r.W);\n        for (int i = 0; i < H; i++) {\n         \
-    \   for (int k = 0; k < W; k++) {\n                for (int j = 0; j < r.W; j++)\
-    \ ret.at(i, j) += this->get(i, k) * r.get(k, j);\n            }\n        }\n \
-    \       return ret;\n    }\n    matrix &operator*=(const T &v) { return *this\
-    \ = *this * v; }\n    matrix &operator/=(const T &v) { return *this = *this /\
-    \ v; }\n    matrix &operator+=(const matrix &r) { return *this = *this + r; }\n\
-    \    matrix &operator-=(const matrix &r) { return *this = *this - r; }\n    matrix\
-    \ &operator*=(const matrix &r) { return *this = *this * r; }\n    bool operator==(const\
-    \ matrix &r) const { return H == r.H and W == r.W and elem == r.elem; }\n    bool\
-    \ operator!=(const matrix &r) const { return H != r.H or W != r.W or elem != r.elem;\
-    \ }\n    bool operator<(const matrix &r) const { return elem < r.elem; }\n   \
-    \ matrix pow(int64_t n) const {\n        matrix ret = Identity(H);\n        bool\
-    \ ret_is_id = true;\n        if (n == 0) return ret;\n        for (int i = 63\
-    \ - __builtin_clzll(n); i >= 0; i--) {\n            if (!ret_is_id) ret *= ret;\n\
-    \            if ((n >> i) & 1) ret *= (*this), ret_is_id = false;\n        }\n\
-    \        return ret;\n    }\n    std::vector<T> pow_vec(int64_t n, std::vector<T>\
-    \ vec) const {\n        matrix x = *this;\n        while (n) {\n            if\
-    \ (n & 1) vec = x * vec;\n            x *= x;\n            n >>= 1;\n        }\n\
-    \        return vec;\n    };\n    matrix transpose() const {\n        matrix ret(W,\
-    \ H);\n        for (int i = 0; i < H; i++) {\n            for (int j = 0; j <\
-    \ W; j++) ret.at(j, i) = this->get(i, j);\n        }\n        return ret;\n  \
-    \  }\n    // Gauss-Jordan elimination\n    // - Require inverse for every non-zero\
-    \ element\n    // - Complexity: O(H^2 W)\n    template <typename T2, typename\
-    \ std::enable_if<std::is_floating_point<T2>::value>::type * = nullptr>\n    static\
-    \ int choose_pivot(const matrix<T2> &mtr, int h, int c) noexcept {\n        int\
-    \ piv = -1;\n        for (int j = h; j < mtr.H; j++) {\n            if (mtr.get(j,\
-    \ c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv, c))))\n \
-    \               piv = j;\n        }\n        return piv;\n    }\n    template\
-    \ <typename T2, typename std::enable_if<!std::is_floating_point<T2>::value>::type\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <cmath>\n#include <iterator>\n#include <type_traits>\n#include <utility>\n\
+    #line 9 \"linear_algebra_matrix/matrix.hpp\"\n\nnamespace matrix_ {\nstruct has_id_method_impl\
+    \ {\n    template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
+    \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
+    \ <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr))\
+    \ {};\n} // namespace matrix_\n\ntemplate <typename T> struct matrix {\n    int\
+    \ H, W;\n    std::vector<T> elem;\n    typename std::vector<T>::iterator operator[](int\
+    \ i) { return elem.begin() + i * W; }\n    inline T &at(int i, int j) { return\
+    \ elem[i * W + j]; }\n    inline T get(int i, int j) const { return elem[i * W\
+    \ + j]; }\n    int height() const { return H; }\n    int width() const { return\
+    \ W; }\n    std::vector<std::vector<T>> vecvec() const {\n        std::vector<std::vector<T>>\
+    \ ret(H);\n        for (int i = 0; i < H; i++) {\n            std::copy(elem.begin()\
+    \ + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n\
+    \        return ret;\n    }\n    operator std::vector<std::vector<T>>() const\
+    \ { return vecvec(); }\n    matrix() = default;\n    matrix(int H, int W) : H(H),\
+    \ W(W), elem(H * W) {}\n    matrix(const std::vector<std::vector<T>> &d) : H(d.size()),\
+    \ W(d.size() ? d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(),\
+    \ raw.end(), std::back_inserter(elem));\n    }\n\n    template <typename T2, typename\
+    \ std::enable_if<matrix_::has_id<T2>::value>::type * = nullptr>\n    static T2\
+    \ _T_id() {\n        return T2::id();\n    }\n    template <typename T2, typename\
+    \ std::enable_if<!matrix_::has_id<T2>::value>::type * = nullptr>\n    static T2\
+    \ _T_id() {\n        return T2(1);\n    }\n\n    static matrix Identity(int N)\
+    \ {\n        matrix ret(N, N);\n        for (int i = 0; i < N; i++) ret.at(i,\
+    \ i) = _T_id<T>();\n        return ret;\n    }\n\n    matrix operator-() const\
+    \ {\n        matrix ret(H, W);\n        for (int i = 0; i < H * W; i++) ret.elem[i]\
+    \ = -elem[i];\n        return ret;\n    }\n    matrix operator*(const T &v) const\
+    \ {\n        matrix ret = *this;\n        for (auto &x : ret.elem) x *= v;\n \
+    \       return ret;\n    }\n    matrix operator/(const T &v) const {\n       \
+    \ matrix ret = *this;\n        const T vinv = _T_id<T>() / v;\n        for (auto\
+    \ &x : ret.elem) x *= vinv;\n        return ret;\n    }\n    matrix operator+(const\
+    \ matrix &r) const {\n        matrix ret = *this;\n        for (int i = 0; i <\
+    \ H * W; i++) ret.elem[i] += r.elem[i];\n        return ret;\n    }\n    matrix\
+    \ operator-(const matrix &r) const {\n        matrix ret = *this;\n        for\
+    \ (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i];\n        return ret;\n\
+    \    }\n    matrix operator*(const matrix &r) const {\n        matrix ret(H, r.W);\n\
+    \        for (int i = 0; i < H; i++) {\n            for (int k = 0; k < W; k++)\
+    \ {\n                for (int j = 0; j < r.W; j++) ret.at(i, j) += this->get(i,\
+    \ k) * r.get(k, j);\n            }\n        }\n        return ret;\n    }\n  \
+    \  matrix &operator*=(const T &v) { return *this = *this * v; }\n    matrix &operator/=(const\
+    \ T &v) { return *this = *this / v; }\n    matrix &operator+=(const matrix &r)\
+    \ { return *this = *this + r; }\n    matrix &operator-=(const matrix &r) { return\
+    \ *this = *this - r; }\n    matrix &operator*=(const matrix &r) { return *this\
+    \ = *this * r; }\n    bool operator==(const matrix &r) const { return H == r.H\
+    \ and W == r.W and elem == r.elem; }\n    bool operator!=(const matrix &r) const\
+    \ { return H != r.H or W != r.W or elem != r.elem; }\n    bool operator<(const\
+    \ matrix &r) const { return elem < r.elem; }\n    matrix pow(int64_t n) const\
+    \ {\n        matrix ret = Identity(H);\n        bool ret_is_id = true;\n     \
+    \   if (n == 0) return ret;\n        for (int i = 63 - __builtin_clzll(n); i >=\
+    \ 0; i--) {\n            if (!ret_is_id) ret *= ret;\n            if ((n >> i)\
+    \ & 1) ret *= (*this), ret_is_id = false;\n        }\n        return ret;\n  \
+    \  }\n    std::vector<T> pow_vec(int64_t n, std::vector<T> vec) const {\n    \
+    \    matrix x = *this;\n        while (n) {\n            if (n & 1) vec = x *\
+    \ vec;\n            x *= x;\n            n >>= 1;\n        }\n        return vec;\n\
+    \    };\n    matrix transpose() const {\n        matrix ret(W, H);\n        for\
+    \ (int i = 0; i < H; i++) {\n            for (int j = 0; j < W; j++) ret.at(j,\
+    \ i) = this->get(i, j);\n        }\n        return ret;\n    }\n    // Gauss-Jordan\
+    \ elimination\n    // - Require inverse for every non-zero element\n    // - Complexity:\
+    \ O(H^2 W)\n    template <typename T2, typename std::enable_if<std::is_floating_point<T2>::value>::type\
+    \ * = nullptr>\n    static int choose_pivot(const matrix<T2> &mtr, int h, int\
+    \ c) noexcept {\n        int piv = -1;\n        for (int j = h; j < mtr.H; j++)\
+    \ {\n            if (mtr.get(j, c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv,\
+    \ c))))\n                piv = j;\n        }\n        return piv;\n    }\n   \
+    \ template <typename T2, typename std::enable_if<!std::is_floating_point<T2>::value>::type\
     \ * = nullptr>\n    static int choose_pivot(const matrix<T2> &mtr, int h, int\
     \ c) noexcept {\n        for (int j = h; j < mtr.H; j++) {\n            if (mtr.get(j,\
     \ c) != T2()) return j;\n        }\n        return -1;\n    }\n    matrix gauss_jordan()\
@@ -287,7 +288,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2022-07-12 00:34:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp

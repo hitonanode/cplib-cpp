@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: set_power_series/subset_convolution.hpp
     title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
       \u7B97\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -76,41 +76,42 @@ data:
     \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
     \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
     \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
-    \            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
-    \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
-    \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
-    \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
-    \        return facs[this->val_];\n    }\n    MDCONST ModInt facinv() const {\n\
-    \        while (this->val_ >= int(facs.size())) _precalculation(facs.size() *\
-    \ 2);\n        return facinvs[this->val_];\n    }\n    MDCONST ModInt doublefac()\
-    \ const {\n        lint k = (this->val_ + 1) / 2;\n        return (this->val_\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n        \
-    \                        : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
-    \ ModInt nCr(const ModInt &r) const {\n        return (this->val_ < r.val_) ?\
-    \ 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
-    \ nPr(const ModInt &r) const {\n        return (this->val_ < r.val_) ? 0 : this->fac()\
-    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val_\
-    \ == 0) return 0;\n        if (md == 2) return val_;\n        if (pow((md - 1)\
-    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
-    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
-    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
-    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
-    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
-    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
-    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
+    \            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n      \
+    \      while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
+    \            return invs[this->val_];\n        } else {\n            return this->pow(md\
+    \ - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n        while (this->val_\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n        return facs[this->val_];\n\
+    \    }\n    MDCONST ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
+    \ }\n    MDCONST ModInt doublefac() const {\n        lint k = (this->val_ + 1)\
+    \ / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
+    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
+    \    }\n    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val_\
+    \ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n  \
+    \  MDCONST ModInt nPr(const ModInt &r) const {\n        return (this->val_ < r.val_)\
+    \ ? 0 : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const\
+    \ {\n        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n   \
+    \     if (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while\
+    \ (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n       \
+    \ while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this)\
+    \ * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while\
+    \ (y != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
+    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
+    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"random/xorshift.hpp\"\
-    \n#include <cstdint>\n\n// CUT begin\nuint32_t rand_int() // XorShift random integer\
-    \ generator\n{\n    static uint32_t x = 123456789, y = 362436069, z = 521288629,\
-    \ w = 88675123;\n    uint32_t t = x ^ (x << 11);\n    x = y;\n    y = z;\n   \
-    \ z = w;\n    return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n}\ndouble rand_double()\
-    \ { return (double)rand_int() / UINT32_MAX; }\n#line 2 \"set_power_series/subset_convolution.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#line 5 \"set_power_series/subset_convolution.hpp\"\
-    \n\n// CUT begin\n// Subset sum (fast zeta transform)\n// Complexity: O(N 2^N)\
-    \ for array of size 2^N\ntemplate <typename T> void subset_sum(std::vector<T>\
-    \ &f) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n    assert(__builtin_popcount(sz)\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"random/xorshift.hpp\"\n#include <cstdint>\n\n// CUT begin\nuint32_t\
+    \ rand_int() // XorShift random integer generator\n{\n    static uint32_t x =\
+    \ 123456789, y = 362436069, z = 521288629, w = 88675123;\n    uint32_t t = x ^\
+    \ (x << 11);\n    x = y;\n    y = z;\n    z = w;\n    return w = (w ^ (w >> 19))\
+    \ ^ (t ^ (t >> 8));\n}\ndouble rand_double() { return (double)rand_int() / UINT32_MAX;\
+    \ }\n#line 2 \"set_power_series/subset_convolution.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#line 5 \"set_power_series/subset_convolution.hpp\"\n\n//\
+    \ CUT begin\n// Subset sum (fast zeta transform)\n// Complexity: O(N 2^N) for\
+    \ array of size 2^N\ntemplate <typename T> void subset_sum(std::vector<T> &f)\
+    \ {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    for (int d = 0; d < n; d++) {\n        for (int S = 0; S < 1 <<\
     \ n; S++)\n            if (S & (1 << d)) f[S] += f[S ^ (1 << d)];\n    }\n}\n\
     // Inverse of subset sum (fast moebius transform)\n// Complexity: O(N 2^N) for\
@@ -227,8 +228,8 @@ data:
   isVerificationFile: true
   path: set_power_series/test/subset_exp.stress.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: set_power_series/test/subset_exp.stress.test.cpp
 layout: document

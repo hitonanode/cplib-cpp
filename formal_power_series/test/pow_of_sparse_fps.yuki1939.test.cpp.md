@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/pow_of_sparse_fps.hpp
     title: "Power of sparse formal power series \uFF08\u975E\u96F6\u306A\u9805\u304C\
       \u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u306E\u7D2F\u4E57\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1939
@@ -91,33 +91,34 @@ data:
     \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
     \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
     \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
-    \            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
-    \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
-    \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
-    \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
-    \        return facs[this->val_];\n    }\n    MDCONST ModInt facinv() const {\n\
-    \        while (this->val_ >= int(facs.size())) _precalculation(facs.size() *\
-    \ 2);\n        return facinvs[this->val_];\n    }\n    MDCONST ModInt doublefac()\
-    \ const {\n        lint k = (this->val_ + 1) / 2;\n        return (this->val_\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n        \
-    \                        : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
-    \ ModInt nCr(const ModInt &r) const {\n        return (this->val_ < r.val_) ?\
-    \ 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
-    \ nPr(const ModInt &r) const {\n        return (this->val_ < r.val_) ? 0 : this->fac()\
-    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val_\
-    \ == 0) return 0;\n        if (md == 2) return val_;\n        if (pow((md - 1)\
-    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
-    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
-    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
-    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
-    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
-    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
-    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
+    \            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n      \
+    \      while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
+    \            return invs[this->val_];\n        } else {\n            return this->pow(md\
+    \ - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n        while (this->val_\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n        return facs[this->val_];\n\
+    \    }\n    MDCONST ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
+    \ }\n    MDCONST ModInt doublefac() const {\n        lint k = (this->val_ + 1)\
+    \ / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
+    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
+    \    }\n    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val_\
+    \ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n  \
+    \  MDCONST ModInt nPr(const ModInt &r) const {\n        return (this->val_ < r.val_)\
+    \ ? 0 : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const\
+    \ {\n        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n   \
+    \     if (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while\
+    \ (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n       \
+    \ while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this)\
+    \ * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while\
+    \ (y != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
+    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
+    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 6 \"formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp\"\
-    \nusing namespace std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    cin.tie(nullptr),\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 6 \"formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp\"\nusing\
+    \ namespace std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int N, M;\n    cin >> N >> M;\n    vector<mint>\
     \ f(N + 1);\n    f[0] = 1;\n    while (M--) {\n        int l;\n        cin >>\
     \ l;\n        f[l] += 1;\n    }\n    cout << pow_of_sparse_fps(f, N, N + 1)[N]\
@@ -135,8 +136,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
   requiredBy: []
-  timestamp: '2022-05-29 00:37:50+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
 layout: document

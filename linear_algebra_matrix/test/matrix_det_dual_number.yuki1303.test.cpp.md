@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/dual_number.hpp
     title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: unionfind/unionfind.hpp
     title: unionfind/unionfind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1303
@@ -77,7 +77,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -101,20 +102,20 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 1 \"number/dual_number.hpp\"\
-    \n#include <type_traits>\n\nnamespace dual_number_ {\nstruct has_id_method_impl\
-    \ {\n    template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
-    \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
-    \ <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr))\
-    \ {};\n} // namespace dual_number_\n\n// Dual number \uFF08\u4E8C\u91CD\u6570\uFF09\
-    \n// Verified: https://atcoder.jp/contests/abc235/tasks/abc235_f\ntemplate <class\
-    \ T> struct DualNumber {\n    T a, b; // a + bx\n\n    template <typename T2,\
-    \ typename std::enable_if<dual_number_::has_id<T2>::value>::type * = nullptr>\n\
-    \    static T2 _T_id() {\n        return T2::id();\n    }\n    template <typename\
-    \ T2, typename std::enable_if<!dual_number_::has_id<T2>::value>::type * = nullptr>\n\
-    \    static T2 _T_id() {\n        return T2(1);\n    }\n\n    DualNumber(T x =\
-    \ T(), T y = T()) : a(x), b(y) {}\n    static DualNumber id() { return DualNumber(_T_id<T>(),\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 1 \"number/dual_number.hpp\"\n#include <type_traits>\n\nnamespace dual_number_\
+    \ {\nstruct has_id_method_impl {\n    template <class T_> static auto check(T_\
+    \ *) -> decltype(T_::id(), std::true_type());\n    template <class T_> static\
+    \ auto check(...) -> std::false_type;\n};\ntemplate <class T_> struct has_id :\
+    \ decltype(has_id_method_impl::check<T_>(nullptr)) {};\n} // namespace dual_number_\n\
+    \n// Dual number \uFF08\u4E8C\u91CD\u6570\uFF09\n// Verified: https://atcoder.jp/contests/abc235/tasks/abc235_f\n\
+    template <class T> struct DualNumber {\n    T a, b; // a + bx\n\n    template\
+    \ <typename T2, typename std::enable_if<dual_number_::has_id<T2>::value>::type\
+    \ * = nullptr>\n    static T2 _T_id() {\n        return T2::id();\n    }\n   \
+    \ template <typename T2, typename std::enable_if<!dual_number_::has_id<T2>::value>::type\
+    \ * = nullptr>\n    static T2 _T_id() {\n        return T2(1);\n    }\n\n    DualNumber(T\
+    \ x = T(), T y = T()) : a(x), b(y) {}\n    static DualNumber id() { return DualNumber(_T_id<T>(),\
     \ T()); }\n    explicit operator bool() const { return a != T() or b != T(); }\n\
     \    DualNumber operator+(const DualNumber &x) const { return DualNumber(a + x.a,\
     \ b + x.b); }\n    DualNumber operator-(const DualNumber &x) const { return DualNumber(a\
@@ -349,8 +350,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
 layout: document

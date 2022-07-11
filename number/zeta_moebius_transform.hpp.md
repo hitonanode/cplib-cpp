@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/gcd_convolution.test.cpp
     title: number/test/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/lcm_convolution.test.cpp
     title: number/test/lcm_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/multiple_moebius.yuki1627.test.cpp
     title: number/test/multiple_moebius.yuki1627.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/multiple_moebius.yuki886.test.cpp
     title: number/test/multiple_moebius.yuki886.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/zeta_moebius_transform.test.cpp
     title: number/test/zeta_moebius_transform.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://codeforces.com/contest/1630/problem/E
@@ -208,7 +208,7 @@ data:
   path: number/zeta_moebius_transform.hpp
   requiredBy: []
   timestamp: '2022-01-29 16:38:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number/test/multiple_moebius.yuki886.test.cpp
   - number/test/gcd_convolution.test.cpp

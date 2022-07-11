@@ -43,12 +43,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/zero_one_bfs.yuki1695.test.cpp
     title: graph/test/zero_one_bfs.yuki1695.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
@@ -348,7 +348,7 @@ data:
   - combinatorial_opt/matroid_intersection.hpp
   - combinatorial_opt/matroid_union.hpp
   timestamp: '2022-05-01 15:28:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - graph/test/bellman_ford.test.cpp

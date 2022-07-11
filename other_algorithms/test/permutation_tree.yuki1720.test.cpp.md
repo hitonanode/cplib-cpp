@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/permutation_tree.hpp
     title: "Permutation tree \uFF08\u9806\u5217\u6728\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/range-add-range-min.hpp
     title: Range Add Range Min (known as the Starry sky tree)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1720
@@ -175,7 +175,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -199,9 +200,10 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 5 \"other_algorithms/test/permutation_tree.yuki1720.test.cpp\"\
-    \n\nusing mint = ModInt<998244353>;\nusing namespace std;\n\nint N, K;\npermutation_tree\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 5 \"other_algorithms/test/permutation_tree.yuki1720.test.cpp\"\n\nusing\
+    \ mint = ModInt<998244353>;\nusing namespace std;\n\nint N, K;\npermutation_tree\
     \ tree;\nvector<vector<mint>> dp;\n\nvoid rec(int now) {\n    const auto &v =\
     \ tree.nodes[now];\n    if (v.tp == permutation_tree::Cut or v.tp == permutation_tree::Leaf)\
     \ {\n        for (int k = 0; k < K; ++k) dp[k + 1][v.R] += dp[k][v.L];\n    }\n\
@@ -236,8 +238,8 @@ data:
   isVerificationFile: true
   path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: other_algorithms/test/permutation_tree.yuki1720.test.cpp
 layout: document

@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: set_power_series/subset_convolution.hpp
     title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
       \u7B97\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1594
@@ -72,7 +72,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -96,17 +97,18 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"set_power_series/subset_convolution.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#line 5 \"set_power_series/subset_convolution.hpp\"\
-    \n\n// CUT begin\n// Subset sum (fast zeta transform)\n// Complexity: O(N 2^N)\
-    \ for array of size 2^N\ntemplate <typename T> void subset_sum(std::vector<T>\
-    \ &f) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n    assert(__builtin_popcount(sz)\
-    \ == 1);\n    for (int d = 0; d < n; d++) {\n        for (int S = 0; S < 1 <<\
-    \ n; S++)\n            if (S & (1 << d)) f[S] += f[S ^ (1 << d)];\n    }\n}\n\
-    // Inverse of subset sum (fast moebius transform)\n// Complexity: O(N 2^N) for\
-    \ array of size 2^N\ntemplate <typename T> void subset_sum_inv(std::vector<T>\
-    \ &g) {\n    const int sz = g.size(), n = __builtin_ctz(sz);\n    assert(__builtin_popcount(sz)\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"set_power_series/subset_convolution.hpp\"\n#include <algorithm>\n#include\
+    \ <cassert>\n#line 5 \"set_power_series/subset_convolution.hpp\"\n\n// CUT begin\n\
+    // Subset sum (fast zeta transform)\n// Complexity: O(N 2^N) for array of size\
+    \ 2^N\ntemplate <typename T> void subset_sum(std::vector<T> &f) {\n    const int\
+    \ sz = f.size(), n = __builtin_ctz(sz);\n    assert(__builtin_popcount(sz) ==\
+    \ 1);\n    for (int d = 0; d < n; d++) {\n        for (int S = 0; S < 1 << n;\
+    \ S++)\n            if (S & (1 << d)) f[S] += f[S ^ (1 << d)];\n    }\n}\n// Inverse\
+    \ of subset sum (fast moebius transform)\n// Complexity: O(N 2^N) for array of\
+    \ size 2^N\ntemplate <typename T> void subset_sum_inv(std::vector<T> &g) {\n \
+    \   const int sz = g.size(), n = __builtin_ctz(sz);\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    for (int d = 0; d < n; d++) {\n        for (int S = 0; S < 1 <<\
     \ n; S++)\n            if (S & (1 << d)) g[S] -= g[S ^ (1 << d)];\n    }\n}\n\n\
     // Superset sum / its inverse (fast zeta/moebius transform)\n// Complexity: O(N\
@@ -215,8 +217,8 @@ data:
   isVerificationFile: true
   path: set_power_series/test/subset_pow.yuki1594.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: set_power_series/test/subset_pow.yuki1594.test.cpp
 layout: document

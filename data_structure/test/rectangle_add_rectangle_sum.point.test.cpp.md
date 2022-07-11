@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/rectangle_add_rectangle_sum.hpp
     title: "Static rectangle add rectangle sum \uFF08\u77E9\u5F62\u4E00\u69D8\u52A0\
       \u7B97\u30FB\u77E9\u5F62\u7DCF\u548C\u53D6\u5F97\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segmenttree/binary_indexed_tree.hpp
     title: "Binary indexed tree / Fenwick tree \uFF08BIT\u30FB\u30D5\u30A7\u30CB\u30C3\
       \u30AF\u6728\uFF09"

@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/heavy_light_decomposition.hpp
     title: tree/heavy_light_decomposition.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -75,56 +75,57 @@ data:
     \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
     \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
     \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
-    \            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
-    \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
-    \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
-    \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
-    \        return facs[this->val_];\n    }\n    MDCONST ModInt facinv() const {\n\
-    \        while (this->val_ >= int(facs.size())) _precalculation(facs.size() *\
-    \ 2);\n        return facinvs[this->val_];\n    }\n    MDCONST ModInt doublefac()\
-    \ const {\n        lint k = (this->val_ + 1) / 2;\n        return (this->val_\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n        \
-    \                        : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
-    \ ModInt nCr(const ModInt &r) const {\n        return (this->val_ < r.val_) ?\
-    \ 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
-    \ nPr(const ModInt &r) const {\n        return (this->val_ < r.val_) ? 0 : this->fac()\
-    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val_\
-    \ == 0) return 0;\n        if (md == 2) return val_;\n        if (pow((md - 1)\
-    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
-    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
-    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
-    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
-    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
-    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
-    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
+    \            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n      \
+    \      while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
+    \            return invs[this->val_];\n        } else {\n            return this->pow(md\
+    \ - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n        while (this->val_\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n        return facs[this->val_];\n\
+    \    }\n    MDCONST ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
+    \ }\n    MDCONST ModInt doublefac() const {\n        lint k = (this->val_ + 1)\
+    \ / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
+    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
+    \    }\n    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val_\
+    \ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n  \
+    \  MDCONST ModInt nPr(const ModInt &r) const {\n        return (this->val_ < r.val_)\
+    \ ? 0 : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const\
+    \ {\n        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n   \
+    \     if (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while\
+    \ (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n       \
+    \ while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this)\
+    \ * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while\
+    \ (y != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
+    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
+    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#include <functional>\n#line 6 \"\
-    segmenttree/point-update-range-get_nonrecursive.hpp\"\n#include <stack>\n#line\
-    \ 8 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\n\n// CUT begin\n\
-    // Nonrecursive Segment Tree (point-update, range-get)\n// - Conditions for operations:\n\
-    //   - merge_data: [TDATA, TDATA] -> TDATA, e(x, y) == e(y, x)\n//   - data2ret:\
-    \ [TDATA, TQUERY] -> TRET\n//   - merge_ret: [TRET, TRET] -> TRET, g(defaultRET,\
-    \ x) == x, g(x, y) = g(y, x)\n//   - commutability f(e(x, y), q) == g(f(x, q),\
-    \ f(y, q))\ntemplate <typename TDATA, typename TRET, typename TQUERY> struct NonrecursiveSegmentTree\
-    \ {\n    int N;\n    TRET defaultRET;\n    virtual TDATA merge_data(const TDATA\
-    \ &, const TDATA &) = 0;\n    virtual TRET data2ret(const TDATA &, const TQUERY\
-    \ &) = 0;\n    virtual TRET merge_ret(const TRET &, const TRET &) = 0;\n    std::vector<TDATA>\
-    \ data;\n    inline TDATA &at(int i) { return data[i]; }\n\n    inline void _merge(int\
-    \ i) { at(i) = merge_data(at(i << 1), at((i << 1) + 1)); }\n    void initialize(const\
-    \ std::vector<TDATA> &seq, TRET RET_ZERO) {\n        N = seq.size();\n       \
-    \ defaultRET = RET_ZERO;\n        data = seq;\n        data.insert(data.end(),\
-    \ seq.begin(), seq.end());\n        for (int i = N - 1; i; i--) _merge(i);\n \
-    \   }\n    NonrecursiveSegmentTree() = default;\n    void update(int pos, const\
-    \ TDATA &x) {\n        assert(pos >= 0 and pos < N);\n        at(pos + N) = x;\n\
-    \        for (int i = pos + N; i > 1;) i >>= 1, _merge(i);\n    }\n\n    // [l,\
-    \ r), 0-indexed\n    TRET get(int l, int r, TQUERY query = NULL) {\n        assert(l\
-    \ >= 0 and r <= N);\n        TRET retl = defaultRET, retr = defaultRET;\n    \
-    \    l += N, r += N;\n        while (l < r) {\n            if (l & 1) retl = merge_ret(retl,\
-    \ data2ret(data[l++], query));\n            if (r & 1) retr = merge_ret(data2ret(data[--r],\
-    \ query), retr);\n            l >>= 1, r >>= 1;\n        }\n        return merge_ret(retl,\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\n#include <algorithm>\n\
+    #include <cassert>\n#include <functional>\n#line 6 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\
+    \n#include <stack>\n#line 8 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\
+    \n\n// CUT begin\n// Nonrecursive Segment Tree (point-update, range-get)\n// -\
+    \ Conditions for operations:\n//   - merge_data: [TDATA, TDATA] -> TDATA, e(x,\
+    \ y) == e(y, x)\n//   - data2ret: [TDATA, TQUERY] -> TRET\n//   - merge_ret: [TRET,\
+    \ TRET] -> TRET, g(defaultRET, x) == x, g(x, y) = g(y, x)\n//   - commutability\
+    \ f(e(x, y), q) == g(f(x, q), f(y, q))\ntemplate <typename TDATA, typename TRET,\
+    \ typename TQUERY> struct NonrecursiveSegmentTree {\n    int N;\n    TRET defaultRET;\n\
+    \    virtual TDATA merge_data(const TDATA &, const TDATA &) = 0;\n    virtual\
+    \ TRET data2ret(const TDATA &, const TQUERY &) = 0;\n    virtual TRET merge_ret(const\
+    \ TRET &, const TRET &) = 0;\n    std::vector<TDATA> data;\n    inline TDATA &at(int\
+    \ i) { return data[i]; }\n\n    inline void _merge(int i) { at(i) = merge_data(at(i\
+    \ << 1), at((i << 1) + 1)); }\n    void initialize(const std::vector<TDATA> &seq,\
+    \ TRET RET_ZERO) {\n        N = seq.size();\n        defaultRET = RET_ZERO;\n\
+    \        data = seq;\n        data.insert(data.end(), seq.begin(), seq.end());\n\
+    \        for (int i = N - 1; i; i--) _merge(i);\n    }\n    NonrecursiveSegmentTree()\
+    \ = default;\n    void update(int pos, const TDATA &x) {\n        assert(pos >=\
+    \ 0 and pos < N);\n        at(pos + N) = x;\n        for (int i = pos + N; i >\
+    \ 1;) i >>= 1, _merge(i);\n    }\n\n    // [l, r), 0-indexed\n    TRET get(int\
+    \ l, int r, TQUERY query = NULL) {\n        assert(l >= 0 and r <= N);\n     \
+    \   TRET retl = defaultRET, retr = defaultRET;\n        l += N, r += N;\n    \
+    \    while (l < r) {\n            if (l & 1) retl = merge_ret(retl, data2ret(data[l++],\
+    \ query));\n            if (r & 1) retr = merge_ret(data2ret(data[--r], query),\
+    \ retr);\n            l >>= 1, r >>= 1;\n        }\n        return merge_ret(retl,\
     \ retr);\n    }\n\n    // Calculate smallest r that satisfies condition(g(f(x_l,\
     \ q), ..., f(x_{r - 1}, q)) == true\n    // Assumption: Monotonicity of g(x_l,\
     \ ..., x_r) about r (l: fixed)\n    // Complexity: O(log N)\n    int binary_search(int\
@@ -331,8 +332,8 @@ data:
   isVerificationFile: true
   path: tree/test/vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/vertex-set-path-composite.test.cpp
 layout: document

@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/tree_isomorphism.hpp
     title: "Tree isomrphism \uFF08\u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: unionfind/grid_unionfind.hpp
     title: unionfind/grid_unionfind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1613
@@ -111,64 +111,64 @@ data:
     \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
     \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
     \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
-    \            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
-    \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
-    \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
-    \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
-    \        return facs[this->val_];\n    }\n    MDCONST ModInt facinv() const {\n\
-    \        while (this->val_ >= int(facs.size())) _precalculation(facs.size() *\
-    \ 2);\n        return facinvs[this->val_];\n    }\n    MDCONST ModInt doublefac()\
-    \ const {\n        lint k = (this->val_ + 1) / 2;\n        return (this->val_\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n        \
-    \                        : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n    MDCONST\
-    \ ModInt nCr(const ModInt &r) const {\n        return (this->val_ < r.val_) ?\
-    \ 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n    MDCONST ModInt\
-    \ nPr(const ModInt &r) const {\n        return (this->val_ < r.val_) ? 0 : this->fac()\
-    \ * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val_\
-    \ == 0) return 0;\n        if (md == 2) return val_;\n        if (pow((md - 1)\
-    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
-    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
-    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
-    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
-    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
-    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
-    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
+    \            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n      \
+    \      while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
+    \            return invs[this->val_];\n        } else {\n            return this->pow(md\
+    \ - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n        while (this->val_\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n        return facs[this->val_];\n\
+    \    }\n    MDCONST ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
+    \ }\n    MDCONST ModInt doublefac() const {\n        lint k = (this->val_ + 1)\
+    \ / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
+    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
+    \    }\n    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val_\
+    \ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n  \
+    \  MDCONST ModInt nPr(const ModInt &r) const {\n        return (this->val_ < r.val_)\
+    \ ? 0 : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const\
+    \ {\n        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n   \
+    \     if (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while\
+    \ (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n       \
+    \ while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this)\
+    \ * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while\
+    \ (y != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
+    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
+    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"unionfind/grid_unionfind.hpp\"\
-    \n#include <cassert>\n#include <iomanip>\n#include <numeric>\n#line 7 \"unionfind/grid_unionfind.hpp\"\
-    \n\n// CUT begin\nstruct GridUnionFind {\n    int H, W;\n    std::vector<int>\
-    \ par, cou;\n    using P = std::pair<int, int>;\n    GridUnionFind(int H_, int\
-    \ W_) : H(H_), W(W_), par(H * W), cou(H * W, 1) {\n        std::iota(par.begin(),\
-    \ par.end(), 0);\n    }\n    inline int id_(int h, int w) { return h * W + w;\
-    \ }\n    inline bool coordinate_valid(int h, int w) { return h >= 0 and h < H\
-    \ and w >= 0 and w < W; }\n    int _find(int x) { return (par[x] == x) ? x : (par[x]\
-    \ = _find(par[x])); }\n    bool _unite(int x, int y) {\n        x = _find(x),\
-    \ y = _find(y);\n        if (x == y) return false;\n        if (cou[x] < cou[y])\
-    \ std::swap(x, y);\n        par[y] = x, cou[x] += cou[y];\n        return true;\n\
-    \    }\n    int find(int h, int w) {\n        assert(coordinate_valid(h, w));\n\
-    \        return _find(id_(h, w));\n    }\n    bool unite(int h, int w, int h2,\
-    \ int w2) {\n        assert(coordinate_valid(h, w) and coordinate_valid(h2, w2));\n\
-    \        return _unite(id_(h, w), id_(h2, w2));\n    }\n    int count(int h, int\
-    \ w) { return cou[find(h, w)]; }\n    bool same(int h, int w, int h2, int w2)\
-    \ { return find(h, w) == find(h2, w2); }\n\n    int find(P p) { return find(p.first,\
-    \ p.second); }\n    bool unite(P p, P p2) { return unite(p.first, p.second, p2.first,\
-    \ p2.second); }\n    int count(P p) { return count(p.first, p.second); }\n   \
-    \ bool same(P p, P p2) { return same(p.first, p.second, p2.first, p2.second);\
-    \ }\n\n    void merge_outer() {\n        for (int h = 0; h < H - 1; h++) unite(h,\
-    \ 0, h + 1, 0), unite(h, W - 1, h + 1, W - 1);\n        for (int w = 0; w < W\
-    \ - 1; w++) unite(0, w, 0, w + 1), unite(H - 1, w, H - 1, w + 1);\n    }\n   \
-    \ template <typename OStream> friend OStream &operator<<(OStream &os, GridUnionFind\
-    \ &g) {\n        constexpr int WW = 3;\n        os << \"[(\" << g.H << \" * \"\
-    \ << g.W << \" grid)\\n\";\n        for (int i = 0; i < g.H; i++) {\n        \
-    \    for (int j = 0; j < g.W - 1; j++) {\n                os << std::setw(WW)\
-    \ << g.find(i, j) << (g.same(i, j, i, j + 1) ? '-' : ' ');\n            }\n  \
-    \          os << std::setw(WW) << g.find(i, g.W - 1) << '\\n';\n            if\
-    \ (i < g.H - 1) {\n                for (int j = 0; j < g.W; j++)\n           \
-    \         os << std::setw(WW + 1) << (g.same(i, j, i + 1, j) ? \"| \" : \"  \"\
-    );\n                os << \"\\n\";\n            }\n        }\n        os << \"\
-    ]\\n\";\n        return os;\n    }\n};\n#line 5 \"tree/test/tree_isomorphism.aoj1613.test.cpp\"\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"unionfind/grid_unionfind.hpp\"\n#include <cassert>\n#include <iomanip>\n\
+    #include <numeric>\n#line 7 \"unionfind/grid_unionfind.hpp\"\n\n// CUT begin\n\
+    struct GridUnionFind {\n    int H, W;\n    std::vector<int> par, cou;\n    using\
+    \ P = std::pair<int, int>;\n    GridUnionFind(int H_, int W_) : H(H_), W(W_),\
+    \ par(H * W), cou(H * W, 1) {\n        std::iota(par.begin(), par.end(), 0);\n\
+    \    }\n    inline int id_(int h, int w) { return h * W + w; }\n    inline bool\
+    \ coordinate_valid(int h, int w) { return h >= 0 and h < H and w >= 0 and w <\
+    \ W; }\n    int _find(int x) { return (par[x] == x) ? x : (par[x] = _find(par[x]));\
+    \ }\n    bool _unite(int x, int y) {\n        x = _find(x), y = _find(y);\n  \
+    \      if (x == y) return false;\n        if (cou[x] < cou[y]) std::swap(x, y);\n\
+    \        par[y] = x, cou[x] += cou[y];\n        return true;\n    }\n    int find(int\
+    \ h, int w) {\n        assert(coordinate_valid(h, w));\n        return _find(id_(h,\
+    \ w));\n    }\n    bool unite(int h, int w, int h2, int w2) {\n        assert(coordinate_valid(h,\
+    \ w) and coordinate_valid(h2, w2));\n        return _unite(id_(h, w), id_(h2,\
+    \ w2));\n    }\n    int count(int h, int w) { return cou[find(h, w)]; }\n    bool\
+    \ same(int h, int w, int h2, int w2) { return find(h, w) == find(h2, w2); }\n\n\
+    \    int find(P p) { return find(p.first, p.second); }\n    bool unite(P p, P\
+    \ p2) { return unite(p.first, p.second, p2.first, p2.second); }\n    int count(P\
+    \ p) { return count(p.first, p.second); }\n    bool same(P p, P p2) { return same(p.first,\
+    \ p.second, p2.first, p2.second); }\n\n    void merge_outer() {\n        for (int\
+    \ h = 0; h < H - 1; h++) unite(h, 0, h + 1, 0), unite(h, W - 1, h + 1, W - 1);\n\
+    \        for (int w = 0; w < W - 1; w++) unite(0, w, 0, w + 1), unite(H - 1, w,\
+    \ H - 1, w + 1);\n    }\n    template <typename OStream> friend OStream &operator<<(OStream\
+    \ &os, GridUnionFind &g) {\n        constexpr int WW = 3;\n        os << \"[(\"\
+    \ << g.H << \" * \" << g.W << \" grid)\\n\";\n        for (int i = 0; i < g.H;\
+    \ i++) {\n            for (int j = 0; j < g.W - 1; j++) {\n                os\
+    \ << std::setw(WW) << g.find(i, j) << (g.same(i, j, i, j + 1) ? '-' : ' ');\n\
+    \            }\n            os << std::setw(WW) << g.find(i, g.W - 1) << '\\n';\n\
+    \            if (i < g.H - 1) {\n                for (int j = 0; j < g.W; j++)\n\
+    \                    os << std::setw(WW + 1) << (g.same(i, j, i + 1, j) ? \"|\
+    \ \" : \"  \");\n                os << \"\\n\";\n            }\n        }\n  \
+    \      os << \"]\\n\";\n        return os;\n    }\n};\n#line 5 \"tree/test/tree_isomorphism.aoj1613.test.cpp\"\
     \n#include <algorithm>\n#include <array>\n#line 8 \"tree/test/tree_isomorphism.aoj1613.test.cpp\"\
     \n#include <string>\n#line 11 \"tree/test/tree_isomorphism.aoj1613.test.cpp\"\n\
     using namespace std;\n\nusing mint = ModInt<998244353>;\n\npair<mint, mint> tree_hash(vector<string>\
@@ -248,8 +248,8 @@ data:
   isVerificationFile: true
   path: tree/test/tree_isomorphism.aoj1613.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/tree_isomorphism.aoj1613.test.cpp
 layout: document

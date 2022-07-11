@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/multivar_ntt.hpp
     title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
       \u307F\u8FBC\u307F\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/multivariate_convolution
@@ -75,7 +75,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -99,35 +100,35 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"convolution/ntt.hpp\"\
-    \n\n#include <algorithm>\n#include <array>\n#include <cassert>\n#include <tuple>\n\
-    #line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution for arbitrary\
-    \ mod\n// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.\n\
-    // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
-    // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
-    \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
-    \ b, bool skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
-    \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
-    \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
-    // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
-    \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
-    \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
-    \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
-    \ std::vector<MODINT> w{1}, iw{1};\n    for (int m = w.size(); m < n / 2; m *=\
-    \ 2) {\n        MODINT dw = root.pow((mod - 1) / (4 * m)), dwinv = 1 / dw;\n \
-    \       w.resize(m * 2), iw.resize(m * 2);\n        for (int i = 0; i < m; i++)\
-    \ w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;\n    }\n\n    if (!is_inverse)\
-    \ {\n        for (int m = n; m >>= 1;) {\n            for (int s = 0, k = 0; s\
-    \ < n; s += 2 * m, k++) {\n                for (int i = s; i < s + m; i++) {\n\
-    \                    MODINT x = a[i], y = a[i + m] * w[k];\n                 \
-    \   a[i] = x + y, a[i + m] = x - y;\n                }\n            }\n      \
-    \  }\n    } else {\n        for (int m = 1; m < n; m *= 2) {\n            for\
-    \ (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n                for (int i = s;\
-    \ i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m];\n    \
-    \                a[i] = x + y, a[i + m] = (x - y) * iw[k];\n                }\n\
-    \            }\n        }\n        int n_inv = MODINT(n).inv().val();\n      \
-    \  for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 3 \"convolution/ntt.hpp\"\n\n#include <algorithm>\n#include <array>\n#include\
+    \ <cassert>\n#include <tuple>\n#line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n\
+    // Integer convolution for arbitrary mod\n// with NTT (and Garner's algorithm)\
+    \ for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm if `skip_garner`\
+    \ is true or mod is in `nttprimes`.\n// input: a (size: n), b (size: m)\n// return:\
+    \ vector (size: n + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner);\n\nconstexpr int nttprimes[3] =\
+    \ {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
+    \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
+    \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
+    \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
+    \    if (n == 1) return;\n    static const int mod = MODINT::mod();\n    static\
+    \ const MODINT root = MODINT::get_primitive_root();\n    assert(__builtin_popcount(n)\
+    \ == 1 and (mod - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n\
+    \    for (int m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod\
+    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
+    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
+    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
+    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
+    \  for (int i = s; i < s + m; i++) {\n                    MODINT x = a[i], y =\
+    \ a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n    \
+    \            }\n            }\n        }\n    } else {\n        for (int m = 1;\
+    \ m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++)\
+    \ {\n                for (int i = s; i < s + m; i++) {\n                    MODINT\
+    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
+    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv().val();\n\
+    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
     \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
     \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
     \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
@@ -213,8 +214,8 @@ data:
   isVerificationFile: true
   path: convolution/test/multivar_ntt.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: convolution/test/multivar_ntt.test.cpp
 layout: document

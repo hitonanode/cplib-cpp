@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/primitive_root.hpp
     title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/931
@@ -133,7 +133,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -157,18 +158,18 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 3 \"convolution/ntt.hpp\"\
-    \n\n#line 5 \"convolution/ntt.hpp\"\n#include <array>\n#line 9 \"convolution/ntt.hpp\"\
-    \n\n// CUT begin\n// Integer convolution for arbitrary mod\n// with NTT (and Garner's\
-    \ algorithm) for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm\
-    \ if `skip_garner` is true or mod is in `nttprimes`.\n// input: a (size: n), b\
-    \ (size: m)\n// return: vector (size: n + m - 1)\ntemplate <typename MODINT>\n\
-    std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool\
-    \ skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161, 469762049};\n\
-    \n// Integer FFT (Fast Fourier Transform) for ModInt class\n// (Also known as\
-    \ Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n// ** Input\
-    \ size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 3 \"convolution/ntt.hpp\"\n\n#line 5 \"convolution/ntt.hpp\"\n#include <array>\n\
+    #line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution for arbitrary\
+    \ mod\n// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime class.\n\
+    // We skip Garner's algorithm if `skip_garner` is true or mod is in `nttprimes`.\n\
+    // input: a (size: n), b (size: m)\n// return: vector (size: n + m - 1)\ntemplate\
+    \ <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT>\
+    \ b, bool skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161,\
+    \ 469762049};\n\n// Integer FFT (Fast Fourier Transform) for ModInt class\n//\
+    \ (Also known as Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n\
+    // ** Input size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
     \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
     \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
     \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
@@ -252,8 +253,8 @@ data:
   isVerificationFile: true
   path: number/test/primitive_root.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/primitive_root.test.cpp
 layout: document

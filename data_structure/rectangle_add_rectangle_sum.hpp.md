@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segmenttree/binary_indexed_tree.hpp
     title: "Binary indexed tree / Fenwick tree \uFF08BIT\u30FB\u30D5\u30A7\u30CB\u30C3\
       \u30AF\u6728\uFF09"
@@ -10,12 +10,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
     title: data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/test/rectangle_add_rectangle_sum.test.cpp
     title: data_structure/test/rectangle_add_rectangle_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segmenttree/binary_indexed_tree.hpp\"\n#include <algorithm>\n\
@@ -121,7 +121,7 @@ data:
   path: data_structure/rectangle_add_rectangle_sum.hpp
   requiredBy: []
   timestamp: '2022-07-05 20:49:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - data_structure/test/rectangle_add_rectangle_sum.test.cpp
   - data_structure/test/rectangle_add_rectangle_sum.point.test.cpp

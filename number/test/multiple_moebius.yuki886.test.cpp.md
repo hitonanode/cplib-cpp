@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/zeta_moebius_transform.hpp
     title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/886
@@ -74,7 +74,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -98,31 +99,31 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"number/sieve.hpp\"\
-    \n#include <cassert>\n#include <map>\n#line 5 \"number/sieve.hpp\"\n\n// CUT begin\n\
-    // Linear sieve algorithm for fast prime factorization\n// Complexity: O(N) time,\
-    \ O(N) space:\n// - MAXN = 10^7:  ~44 MB,  80~100 ms (Codeforces / AtCoder GCC,\
-    \ C++17)\n// - MAXN = 10^8: ~435 MB, 810~980 ms (Codeforces / AtCoder GCC, C++17)\n\
-    // Reference:\n// [1] D. Gries, J. Misra, \"A Linear Sieve Algorithm for Finding\
-    \ Prime Numbers,\"\n//     Communications of the ACM, 21(12), 999-1003, 1978.\n\
-    // - https://cp-algorithms.com/algebra/prime-sieve-linear.html\n// - https://37zigen.com/linear-sieve/\n\
-    struct Sieve {\n    std::vector<int> min_factor;\n    std::vector<int> primes;\n\
-    \    Sieve(int MAXN) : min_factor(MAXN + 1) {\n        for (int d = 2; d <= MAXN;\
-    \ d++) {\n            if (!min_factor[d]) {\n                min_factor[d] = d;\n\
-    \                primes.emplace_back(d);\n            }\n            for (const\
-    \ auto &p : primes) {\n                if (p > min_factor[d] or d * p > MAXN)\
-    \ break;\n                min_factor[d * p] = p;\n            }\n        }\n \
-    \   }\n    // Prime factorization for 1 <= x <= MAXN^2\n    // Complexity: O(log\
-    \ x)           (x <= MAXN)\n    //             O(MAXN / log MAXN) (MAXN < x <=\
-    \ MAXN^2)\n    template <class T> std::map<T, int> factorize(T x) const {\n  \
-    \      std::map<T, int> ret;\n        assert(x > 0 and\n               x <= ((long\
-    \ long)min_factor.size() - 1) * ((long long)min_factor.size() - 1));\n       \
-    \ for (const auto &p : primes) {\n            if (x < T(min_factor.size())) break;\n\
-    \            while (!(x % p)) x /= p, ret[p]++;\n        }\n        if (x >= T(min_factor.size()))\
-    \ ret[x]++, x = 1;\n        while (x > 1) ret[min_factor[x]]++, x /= min_factor[x];\n\
-    \        return ret;\n    }\n    // Enumerate divisors of 1 <= x <= MAXN^2\n \
-    \   // Be careful of highly composite numbers https://oeis.org/A002182/list\n\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"number/sieve.hpp\"\n#include <cassert>\n#include <map>\n#line 5 \"number/sieve.hpp\"\
+    \n\n// CUT begin\n// Linear sieve algorithm for fast prime factorization\n// Complexity:\
+    \ O(N) time, O(N) space:\n// - MAXN = 10^7:  ~44 MB,  80~100 ms (Codeforces /\
+    \ AtCoder GCC, C++17)\n// - MAXN = 10^8: ~435 MB, 810~980 ms (Codeforces / AtCoder\
+    \ GCC, C++17)\n// Reference:\n// [1] D. Gries, J. Misra, \"A Linear Sieve Algorithm\
+    \ for Finding Prime Numbers,\"\n//     Communications of the ACM, 21(12), 999-1003,\
+    \ 1978.\n// - https://cp-algorithms.com/algebra/prime-sieve-linear.html\n// -\
+    \ https://37zigen.com/linear-sieve/\nstruct Sieve {\n    std::vector<int> min_factor;\n\
+    \    std::vector<int> primes;\n    Sieve(int MAXN) : min_factor(MAXN + 1) {\n\
+    \        for (int d = 2; d <= MAXN; d++) {\n            if (!min_factor[d]) {\n\
+    \                min_factor[d] = d;\n                primes.emplace_back(d);\n\
+    \            }\n            for (const auto &p : primes) {\n                if\
+    \ (p > min_factor[d] or d * p > MAXN) break;\n                min_factor[d * p]\
+    \ = p;\n            }\n        }\n    }\n    // Prime factorization for 1 <= x\
+    \ <= MAXN^2\n    // Complexity: O(log x)           (x <= MAXN)\n    //       \
+    \      O(MAXN / log MAXN) (MAXN < x <= MAXN^2)\n    template <class T> std::map<T,\
+    \ int> factorize(T x) const {\n        std::map<T, int> ret;\n        assert(x\
+    \ > 0 and\n               x <= ((long long)min_factor.size() - 1) * ((long long)min_factor.size()\
+    \ - 1));\n        for (const auto &p : primes) {\n            if (x < T(min_factor.size()))\
+    \ break;\n            while (!(x % p)) x /= p, ret[p]++;\n        }\n        if\
+    \ (x >= T(min_factor.size())) ret[x]++, x = 1;\n        while (x > 1) ret[min_factor[x]]++,\
+    \ x /= min_factor[x];\n        return ret;\n    }\n    // Enumerate divisors of\
+    \ 1 <= x <= MAXN^2\n    // Be careful of highly composite numbers https://oeis.org/A002182/list\n\
     \    // https://gist.github.com/dario2994/fb4713f252ca86c1254d#file-list-txt (n,\
     \ (# of div. of n)):\n    // 45360->100, 735134400(<1e9)->1344, 963761198400(<1e12)->6720\n\
     \    template <class T> std::vector<T> divisors(T x) const {\n        std::vector<T>\
@@ -239,8 +240,8 @@ data:
   isVerificationFile: true
   path: number/test/multiple_moebius.yuki886.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/multiple_moebius.yuki886.test.cpp
 layout: document

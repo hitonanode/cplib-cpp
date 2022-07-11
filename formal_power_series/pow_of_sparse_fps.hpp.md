@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
     title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
     title: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"formal_power_series/pow_of_sparse_fps.hpp\"\n#include <algorithm>\n\
@@ -57,7 +57,7 @@ data:
   path: formal_power_series/pow_of_sparse_fps.hpp
   requiredBy: []
   timestamp: '2022-05-29 00:37:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
   - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp

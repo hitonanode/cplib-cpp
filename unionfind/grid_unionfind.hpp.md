@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/tree_isomorphism.aoj1613.test.cpp
     title: tree/test/tree_isomorphism.aoj1613.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"unionfind/grid_unionfind.hpp\"\n#include <cassert>\n#include\
@@ -80,7 +80,7 @@ data:
   path: unionfind/grid_unionfind.hpp
   requiredBy: []
   timestamp: '2021-07-30 01:44:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/tree_isomorphism.aoj1613.test.cpp
 documentation_of: unionfind/grid_unionfind.hpp

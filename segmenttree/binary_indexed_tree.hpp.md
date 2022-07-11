@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/range_kth_smallest_offline.hpp
     title: data_structure/range_kth_smallest_offline.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/rectangle_add_rectangle_sum.hpp
     title: "Static rectangle add rectangle sum \uFF08\u77E9\u5F62\u4E00\u69D8\u52A0\
       \u7B97\u30FB\u77E9\u5F62\u7DCF\u548C\u53D6\u5F97\uFF09"
@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
     title: data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/test/rectangle_add_rectangle_sum.test.cpp
     title: data_structure/test/rectangle_add_rectangle_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -31,9 +31,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/point-add-range-sum.test.cpp
     title: segmenttree/test/point-add-range-sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segmenttree/binary_indexed_tree.hpp\"\n#include <algorithm>\n\
@@ -72,7 +72,7 @@ data:
   - data_structure/rectangle_sum.hpp
   - data_structure/range_kth_smallest_offline.hpp
   timestamp: '2021-11-06 11:36:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - segmenttree/test/binary_indexed_tree.test.cpp
   - segmenttree/test/point-add-range-sum.test.cpp

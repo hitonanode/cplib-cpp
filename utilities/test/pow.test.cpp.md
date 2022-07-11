@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/pow.hpp
     title: "Power \uFF08\u7D2F\u4E57\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/pow_sum.hpp
     title: "power sum \uFF08\u7D2F\u4E57\u548C\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
@@ -76,7 +76,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -100,19 +101,20 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"utilities/pow_sum.hpp\"\
-    \n#include <algorithm>\n#include <utility>\n\n// CUT begin\n// {x^n, x^0 + ...\
-    \ + x^(n - 1)} for n >= 1\n// Verify: ABC212H\ntemplate <typename T, typename\
-    \ Int> std::pair<T, T> pow_sum(T x, Int n) {\n    T sum = 1, p = x; // ans = x^0\
-    \ + ... + x^(len - 1), p = x^len\n    for (int d = std::__lg(n) - 1; d >= 0; d--)\
-    \ {\n        sum = sum * (p + 1);\n        p *= p;\n        if ((n >> d) & 1)\
-    \ {\n            sum += p;\n            p *= x;\n        }\n    }\n    return\
-    \ {p, sum};\n}\n#line 5 \"utilities/test/pow.test.cpp\"\n#include <cassert>\n\
-    #line 7 \"utilities/test/pow.test.cpp\"\nusing namespace std;\n\nint main() {\n\
-    \    ModInt<1000000007> M;\n    int N;\n    cin >> M >> N;\n    auto ret = pow(M,\
-    \ N);\n    assert(pow_sum(M, N).first == ret);\n    assert((pow_sum(M, N).second)\
-    \ * (M - 1) + 1 == ret);\n\n    cout << ret << '\\n';\n}\n"
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"utilities/pow_sum.hpp\"\n#include <algorithm>\n#include <utility>\n\n\
+    // CUT begin\n// {x^n, x^0 + ... + x^(n - 1)} for n >= 1\n// Verify: ABC212H\n\
+    template <typename T, typename Int> std::pair<T, T> pow_sum(T x, Int n) {\n  \
+    \  T sum = 1, p = x; // ans = x^0 + ... + x^(len - 1), p = x^len\n    for (int\
+    \ d = std::__lg(n) - 1; d >= 0; d--) {\n        sum = sum * (p + 1);\n       \
+    \ p *= p;\n        if ((n >> d) & 1) {\n            sum += p;\n            p *=\
+    \ x;\n        }\n    }\n    return {p, sum};\n}\n#line 5 \"utilities/test/pow.test.cpp\"\
+    \n#include <cassert>\n#line 7 \"utilities/test/pow.test.cpp\"\nusing namespace\
+    \ std;\n\nint main() {\n    ModInt<1000000007> M;\n    int N;\n    cin >> M >>\
+    \ N;\n    auto ret = pow(M, N);\n    assert(pow_sum(M, N).first == ret);\n   \
+    \ assert((pow_sum(M, N).second) * (M - 1) + 1 == ret);\n\n    cout << ret << '\\\
+    n';\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B\"\
     \n#include \"../pow.hpp\"\n#include \"../../modint.hpp\"\n#include \"../pow_sum.hpp\"\
     \n#include <cassert>\n#include <iostream>\nusing namespace std;\n\nint main()\
@@ -126,8 +128,8 @@ data:
   isVerificationFile: true
   path: utilities/test/pow.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: utilities/test/pow.test.cpp
 layout: document

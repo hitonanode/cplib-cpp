@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/link_cut_tree.hpp
     title: Link-Cut tree
   _extendedRequiredBy: []

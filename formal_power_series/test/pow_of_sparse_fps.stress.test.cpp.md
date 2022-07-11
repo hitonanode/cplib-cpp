@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: formal_power_series/formal_power_series.hpp
     title: formal_power_series/formal_power_series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/pow_of_sparse_fps.hpp
     title: "Power of sparse formal power series \uFF08\u975E\u96F6\u306A\u9805\u304C\
       \u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u306E\u7D2F\u4E57\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -97,7 +97,8 @@ data:
     \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
     \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
     \    }\n    MDCONST ModInt inv() const {\n        if (this->val_ < std::min(md\
-    \ >> 1, 1 << 21)) {\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
+    \ >> 1, 1 << 21)) {\n            if (facs.empty()) facs = {1}, facinvs = {1},\
+    \ invs = {0};\n            while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
     \ this->pow(md - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n   \
     \     while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
@@ -121,40 +122,40 @@ data:
     \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
     \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
     \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n// using mint\
-    \ = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n#line 2 \"random/xorshift.hpp\"\
-    \n#include <cstdint>\n\n// CUT begin\nuint32_t rand_int() // XorShift random integer\
-    \ generator\n{\n    static uint32_t x = 123456789, y = 362436069, z = 521288629,\
-    \ w = 88675123;\n    uint32_t t = x ^ (x << 11);\n    x = y;\n    y = z;\n   \
-    \ z = w;\n    return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n}\ndouble rand_double()\
-    \ { return (double)rand_int() / UINT32_MAX; }\n#line 3 \"convolution/ntt.hpp\"\
-    \n\n#line 5 \"convolution/ntt.hpp\"\n#include <array>\n#line 9 \"convolution/ntt.hpp\"\
-    \n\n// CUT begin\n// Integer convolution for arbitrary mod\n// with NTT (and Garner's\
-    \ algorithm) for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm\
-    \ if `skip_garner` is true or mod is in `nttprimes`.\n// input: a (size: n), b\
-    \ (size: m)\n// return: vector (size: n + m - 1)\ntemplate <typename MODINT>\n\
-    std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool\
-    \ skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161, 469762049};\n\
-    \n// Integer FFT (Fast Fourier Transform) for ModInt class\n// (Also known as\
-    \ Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n// ** Input\
-    \ size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
-    \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
-    \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
-    \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
-    \ std::vector<MODINT> w{1}, iw{1};\n    for (int m = w.size(); m < n / 2; m *=\
-    \ 2) {\n        MODINT dw = root.pow((mod - 1) / (4 * m)), dwinv = 1 / dw;\n \
-    \       w.resize(m * 2), iw.resize(m * 2);\n        for (int i = 0; i < m; i++)\
-    \ w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;\n    }\n\n    if (!is_inverse)\
-    \ {\n        for (int m = n; m >>= 1;) {\n            for (int s = 0, k = 0; s\
-    \ < n; s += 2 * m, k++) {\n                for (int i = s; i < s + m; i++) {\n\
-    \                    MODINT x = a[i], y = a[i + m] * w[k];\n                 \
-    \   a[i] = x + y, a[i + m] = x - y;\n                }\n            }\n      \
-    \  }\n    } else {\n        for (int m = 1; m < n; m *= 2) {\n            for\
-    \ (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n                for (int i = s;\
-    \ i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m];\n    \
-    \                a[i] = x + y, a[i + m] = (x - y) * iw[k];\n                }\n\
-    \            }\n        }\n        int n_inv = MODINT(n).inv().val();\n      \
-    \  for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"random/xorshift.hpp\"\n#include <cstdint>\n\n// CUT begin\nuint32_t\
+    \ rand_int() // XorShift random integer generator\n{\n    static uint32_t x =\
+    \ 123456789, y = 362436069, z = 521288629, w = 88675123;\n    uint32_t t = x ^\
+    \ (x << 11);\n    x = y;\n    y = z;\n    z = w;\n    return w = (w ^ (w >> 19))\
+    \ ^ (t ^ (t >> 8));\n}\ndouble rand_double() { return (double)rand_int() / UINT32_MAX;\
+    \ }\n#line 3 \"convolution/ntt.hpp\"\n\n#line 5 \"convolution/ntt.hpp\"\n#include\
+    \ <array>\n#line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer convolution\
+    \ for arbitrary mod\n// with NTT (and Garner's algorithm) for ModInt / ModIntRuntime\
+    \ class.\n// We skip Garner's algorithm if `skip_garner` is true or mod is in\
+    \ `nttprimes`.\n// input: a (size: n), b (size: m)\n// return: vector (size: n\
+    \ + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner);\n\nconstexpr int nttprimes[3] =\
+    \ {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
+    \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
+    \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
+    \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
+    \    if (n == 1) return;\n    static const int mod = MODINT::mod();\n    static\
+    \ const MODINT root = MODINT::get_primitive_root();\n    assert(__builtin_popcount(n)\
+    \ == 1 and (mod - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n\
+    \    for (int m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod\
+    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
+    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
+    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
+    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
+    \  for (int i = s; i < s + m; i++) {\n                    MODINT x = a[i], y =\
+    \ a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n    \
+    \            }\n            }\n        }\n    } else {\n        for (int m = 1;\
+    \ m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++)\
+    \ {\n                for (int i = s; i < s + m; i++) {\n                    MODINT\
+    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
+    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv().val();\n\
+    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
     \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
     \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
     \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
@@ -327,8 +328,8 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
   requiredBy: []
-  timestamp: '2022-07-05 21:55:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-07-12 00:34:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
 layout: document

@@ -5,7 +5,7 @@ data:
     path: string/lyndon.hpp
     title: "Lyndon words \uFF08Lyndon \u6587\u5B57\u5217\u306B\u95A2\u3059\u308B\u5404\
       \u7A2E\u95A2\u6570\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: string/rolling_hash_1d.hpp
     title: string/rolling_hash_1d.hpp
   _extendedRequiredBy: []

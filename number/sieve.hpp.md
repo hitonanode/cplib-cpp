@@ -2,27 +2,27 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/arithmetic_cumsum.hpp
     title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\u6570\
       \u306E\u7D2F\u7A4D\u548C\uFF09"
   - icon: ':warning:'
     path: number/cyclotomic_polynomials.hpp
     title: "Cyclotomic polynomials \uFF08\u5186\u5206\u591A\u9805\u5F0F\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/zeta_moebius_transform.hpp
     title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/arithmetic_function_totient.test.cpp
     title: number/test/arithmetic_function_totient.test.cpp
   - icon: ':heavy_check_mark:'
@@ -34,22 +34,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/enumerate_primes.test.cpp
     title: number/test/enumerate_primes.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/gcd_convolution.test.cpp
     title: number/test/gcd_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: number/test/gen_primes.test.cpp
     title: number/test/gen_primes.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/lcm_convolution.test.cpp
     title: number/test/lcm_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: number/test/miller-rabin-5e7.test.cpp
     title: number/test/miller-rabin-5e7.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/multiple_moebius.yuki1627.test.cpp
     title: number/test/multiple_moebius.yuki1627.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/multiple_moebius.yuki886.test.cpp
     title: number/test/multiple_moebius.yuki886.test.cpp
   - icon: ':heavy_check_mark:'
@@ -58,12 +58,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/sieve.stress.test.cpp
     title: number/test/sieve.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/zeta_moebius_transform.test.cpp
     title: number/test/zeta_moebius_transform.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://37zigen.com/linear-sieve/
@@ -196,7 +196,7 @@ data:
   - number/cyclotomic_polynomials.hpp
   - number/zeta_moebius_transform.hpp
   timestamp: '2021-10-30 11:24:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - number/test/prime_factorization.test.cpp
   - number/test/combination.test.cpp

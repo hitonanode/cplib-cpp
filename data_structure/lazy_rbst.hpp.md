@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/lazy_rbst.stress.test.cpp
     title: data_structure/test/lazy_rbst.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/test/lazy_rbst.test.cpp
     title: data_structure/test/lazy_rbst.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://atcoder.jp/contests/arc030/tasks/arc030_4
@@ -286,7 +286,7 @@ data:
   path: data_structure/lazy_rbst.hpp
   requiredBy: []
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - data_structure/test/lazy_rbst.stress.test.cpp
   - data_structure/test/lazy_rbst.test.cpp

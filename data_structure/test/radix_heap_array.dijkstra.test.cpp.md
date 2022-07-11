@@ -5,7 +5,7 @@ data:
     path: data_structure/radix_heap_array.hpp
     title: "Array-like radix heap with decrease query\uFF08`chmin()` \u64CD\u4F5C\u304C\
       \u53EF\u80FD\u306A\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: utilities/reader.hpp
     title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
   _extendedRequiredBy: []
