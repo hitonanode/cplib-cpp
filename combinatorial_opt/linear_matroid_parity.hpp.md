@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
   _extendedRequiredBy: []
@@ -233,8 +233,8 @@ data:
   timestamp: '2022-05-01 02:11:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
   - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+  - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
 documentation_of: combinatorial_opt/linear_matroid_parity.hpp
 layout: document
 title: "Linear matroid parity (unweighted) \uFF08\u7DDA\u5F62\u30DE\u30C8\u30ED\u30A4\

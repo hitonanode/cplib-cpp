@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':question:'
@@ -9,12 +9,12 @@ data:
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/polynomial_divmod.test.cpp
     title: formal_power_series/test/polynomial_divmod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://people.csail.mit.edu/madhu/ST12/scribe/lect06.pdf
@@ -242,7 +242,7 @@ data:
   path: formal_power_series/polynomial_divmod.hpp
   requiredBy: []
   timestamp: '2022-07-12 00:34:46+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/polynomial_divmod.test.cpp
 documentation_of: formal_power_series/polynomial_divmod.hpp

@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
     title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
     title: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"formal_power_series/pow_of_sparse_fps.hpp\"\n#include <algorithm>\n\
@@ -57,10 +57,10 @@ data:
   path: formal_power_series/pow_of_sparse_fps.hpp
   requiredBy: []
   timestamp: '2022-05-29 00:37:50+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
   - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+  - formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
 documentation_of: formal_power_series/pow_of_sparse_fps.hpp
 layout: document
 title: "Power of sparse formal power series \uFF08\u975E\u96F6\u306A\u9805\u304C\u758E\

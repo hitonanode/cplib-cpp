@@ -6,19 +6,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/lazy_rbst.stress.test.cpp
     title: data_structure/test/lazy_rbst.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
     title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
     title: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
     title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
     title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
     title: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
   - icon: ':x:'
@@ -54,14 +54,14 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+  - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
+  - data_structure/test/lazy_rbst.stress.test.cpp
+  - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
-  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
-  - data_structure/test/lazy_rbst.stress.test.cpp
-  - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
-  - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
-  - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
 documentation_of: random/xorshift.hpp
 layout: document
 redirect_from:

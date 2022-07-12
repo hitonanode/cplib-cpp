@@ -97,7 +97,7 @@ data:
       title: Li-Chao tree
   - name: convolution
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/convolution_on_tree.hpp
       title: "Convolution on rooted tree \uFF08\u6839\u4ED8\u304D\u6728\u4E0A\u306E\
         \u7573\u307F\u8FBC\u307F\uFF09"
@@ -113,11 +113,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/hadamard.hpp
       title: convolution/hadamard.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/multivar_ntt.hpp
       title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
         \u7573\u307F\u8FBC\u307F\uFF09"
-    - icon: ':x:'
+    - icon: ':question:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
   - name: data_structure
@@ -131,13 +131,13 @@ data:
     - icon: ':warning:'
       path: data_structure/kd_tree_2d.hpp
       title: k-d tree (2D)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/lazy_rbst.hpp
       title: Randomized binary search tree with lazy propagation
     - icon: ':heavy_check_mark:'
       path: data_structure/light_forward_list.hpp
       title: data_structure/light_forward_list.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/link_cut_tree.hpp
       title: Link-Cut tree
     - icon: ':heavy_check_mark:'
@@ -159,14 +159,14 @@ data:
     - icon: ':warning:'
       path: data_structure/rbst_fast.cpp
       title: data_structure/rbst_fast.cpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/rectangle_add_rectangle_sum.hpp
       title: "Static rectangle add rectangle sum \uFF08\u77E9\u5F62\u4E00\u69D8\u52A0\
         \u7B97\u30FB\u77E9\u5F62\u7DCF\u548C\u53D6\u5F97\uFF09"
     - icon: ':heavy_check_mark:'
       path: data_structure/rectangle_sum.hpp
       title: data_structure/rectangle_sum.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/sliding_window_aggregation.hpp
       title: data_structure/sliding_window_aggregation.hpp
     - icon: ':heavy_check_mark:'
@@ -174,39 +174,39 @@ data:
       title: data_structure/static_range_inversion.hpp
   - name: formal_power_series
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/coeff_of_rational_function.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
         \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/factorial_power.hpp
       title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\
         \u7B97\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/formal_power_series.hpp
       title: formal_power_series/formal_power_series.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/lagrange_interpolation.hpp
       title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\
         \u9593\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/linear_recurrence.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
         \u63A8\u5B9A"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/multipoint_evaluation.hpp
       title: formal_power_series/multipoint_evaluation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/polynomial_divmod.hpp
       title: formal_power_series/polynomial_divmod.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/pow_of_sparse_fps.hpp
       title: "Power of sparse formal power series \uFF08\u975E\u96F6\u306A\u9805\u304C\
         \u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u306E\u7D2F\u4E57\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial.hpp
       title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
       title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
   - name: .
@@ -313,33 +313,33 @@ data:
       title: graph/strongly_connected_components_bitset.hpp
   - name: linear_algebra_matrix
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_algorithm.hpp
       title: "Black box linear algebra \u3092\u5229\u7528\u3057\u305F\u5404\u7A2E\u9AD8\
         \u901F\u8A08\u7B97"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/blackbox_matrices.hpp
       title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/characteristic_poly.hpp
       title: "Characteristic polynomial \uFF08\u884C\u5217\u306E\u7279\u6027\u591A\
         \u9805\u5F0F\uFF09"
     - icon: ':warning:'
       path: linear_algebra_matrix/circular_binary_expansion.hpp
       title: linear_algebra_matrix/circular_binary_expansion.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
       title: "Determinant of $M_0 + M_1 x$ \uFF08\u5404\u8981\u7D20\u304C\u9AD8\u3005\
         \ $1$ \u6B21\u306E\u884C\u5217\u306E\u884C\u5217\u5F0F\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/hafnian.hpp
       title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\
         \u7121\u5411\u30B0\u30E9\u30D5\u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\
         \u306E\u6570\u3048\u4E0A\u3052\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/hessenberg_reduction.hpp
       title: Hessenberg reduction of matrix
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/hessenberg_system.hpp
       title: Hessenberg linear system
     - icon: ':warning:'
@@ -351,10 +351,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/matrix.hpp
       title: linear_algebra_matrix/matrix.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
   - name: multithread
@@ -367,7 +367,7 @@ data:
     - icon: ':warning:'
       path: number/acl_modint.hpp
       title: number/acl_modint.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/arithmetic_cumsum.hpp
       title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\
         \u6570\u306E\u7D2F\u7A4D\u548C\uFF09"
@@ -396,7 +396,7 @@ data:
     - icon: ':warning:'
       path: number/discrete_logarithm.hpp
       title: number/discrete_logarithm.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/dual_number.hpp
       title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
     - icon: ':warning:'
@@ -420,7 +420,7 @@ data:
       path: number/min_plus_semiring.hpp
       title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\
         \u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
@@ -489,7 +489,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/acl_segtree.hpp
       title: segmenttree/acl_segtree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/binary_indexed_tree.hpp
       title: "Binary indexed tree / Fenwick tree \uFF08BIT\u30FB\u30D5\u30A7\u30CB\
         \u30C3\u30AF\u6728\uFF09"
@@ -654,7 +654,7 @@ data:
     - icon: ':warning:'
       path: unionfind/undo_unionfind.hpp
       title: "UnionFind with Undo operation \uFF08Undo \u53EF\u80FD UnionFind\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: unionfind/unionfind.hpp
       title: unionfind/unionfind.hpp
     - icon: ':heavy_check_mark:'
@@ -713,7 +713,7 @@ data:
     - icon: ':warning:'
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: utilities/reader.hpp
       title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
     - icon: ':warning:'
@@ -827,16 +827,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: convolution/test/bitwise_xor_conv.test.cpp
       title: convolution/test/bitwise_xor_conv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/test/convolution_on_tree.test.cpp
       title: convolution/test/convolution_on_tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: convolution/test/hadamard_xor.test.cpp
       title: convolution/test/hadamard_xor.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/test/multivar_ntt.test.cpp
       title: convolution/test/multivar_ntt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: convolution/test/ntt.test.cpp
       title: convolution/test/ntt.test.cpp
     - icon: ':heavy_check_mark:'
@@ -862,22 +862,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/lazy_rbst.stress.test.cpp
       title: data_structure/test/lazy_rbst.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/lazy_rbst.test.cpp
       title: data_structure/test/lazy_rbst.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.aoj2450.test.cpp
       title: data_structure/test/link_cut_tree.aoj2450.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.composition.test.cpp
       title: data_structure/test/link_cut_tree.composition.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
       title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
       title: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
       title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
     - icon: ':heavy_check_mark:'
@@ -886,7 +886,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/persistent_queue.test.cpp
       title: data_structure/test/persistent_queue.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/queue_operate_all_composite.test.cpp
       title: data_structure/test/queue_operate_all_composite.test.cpp
     - icon: ':heavy_check_mark:'
@@ -901,7 +901,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
       title: data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/rectangle_add_rectangle_sum.test.cpp
       title: data_structure/test/rectangle_add_rectangle_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -921,7 +921,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/division_number.test.cpp
       title: formal_power_series/test/division_number.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
     - icon: ':heavy_check_mark:'
@@ -945,13 +945,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
       title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kitamasa.test.cpp
       title: formal_power_series/test/kitamasa.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/linear_recurrence.test.cpp
       title: formal_power_series/test/linear_recurrence.test.cpp
     - icon: ':heavy_check_mark:'
@@ -960,34 +960,34 @@ data:
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/poly_taylor_shift.test.cpp
       title: formal_power_series/test/poly_taylor_shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/polynomial_divmod.test.cpp
       title: formal_power_series/test/polynomial_divmod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
       title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
       title: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/shift_of_sampling_points.test.cpp
       title: formal_power_series/test/shift_of_sampling_points.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_1st.test.cpp
       title: formal_power_series/test/stirling_number_of_1st.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_2nd.test.cpp
       title: formal_power_series/test/stirling_number_of_2nd.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
       title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
       title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - name: geometry/test
@@ -1104,28 +1104,28 @@ data:
       title: graph/test/zero_one_bfs.yuki1695.test.cpp
   - name: linear_algebra_matrix/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
       title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/characteristic_poly.test.cpp
       title: linear_algebra_matrix/test/characteristic_poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
       title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
       title: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
       title: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/hafnian.test.cpp
       title: linear_algebra_matrix/test/hafnian.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
       title: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/inverse_matrix.test.cpp
       title: linear_algebra_matrix/test/inverse_matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1146,33 +1146,33 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
       title: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
       title: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
       title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_product.test.cpp
       title: linear_algebra_matrix/test/matrix_product.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
       title: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/arithmetic_function_totient.test.cpp
       title: number/test/arithmetic_function_totient.test.cpp
     - icon: ':heavy_check_mark:'

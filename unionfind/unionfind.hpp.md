@@ -16,15 +16,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/manhattan_mst.test.cpp
     title: graph/test/manhattan_mst.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
     title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - icon: ':heavy_check_mark:'
     path: unionfind/test/unionfind.test.cpp
     title: unionfind/test/unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"unionfind/unionfind.hpp\"\n#include <algorithm>\n#include\
@@ -63,12 +63,12 @@ data:
   - graph/paths_of_length_two_decomposition.hpp
   - graph/incremental_bridge_connectivity.hpp
   timestamp: '2022-04-30 19:41:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - unionfind/test/unionfind.test.cpp
+  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - graph/test/manhattan_mst.test.cpp
   - graph/test/incremental-bridge-connectivity.test.cpp
-  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+  - unionfind/test/unionfind.test.cpp
 documentation_of: unionfind/unionfind.hpp
 layout: document
 redirect_from:

@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/hafnian.hpp
     title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\u7121\
       \u5411\u30B0\u30E9\u30D5\u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u306E\
       \u6570\u3048\u4E0A\u3052\uFF09"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/hafnian.test.cpp
     title: linear_algebra_matrix/test/hafnian.test.cpp
   - icon: ':heavy_check_mark:'
@@ -231,12 +231,12 @@ data:
   timestamp: '2021-10-16 14:40:57+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - set_power_series/test/subset_pow.yuki1594.test.cpp
+  - linear_algebra_matrix/test/hafnian.test.cpp
+  - set_power_series/test/subset_log.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
+  - set_power_series/test/subset_pow.yuki1594.test.cpp
   - set_power_series/test/subset_conv.test.cpp
-  - set_power_series/test/subset_log.test.cpp
-  - linear_algebra_matrix/test/hafnian.test.cpp
 documentation_of: set_power_series/subset_convolution.hpp
 layout: document
 title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\u7B97\

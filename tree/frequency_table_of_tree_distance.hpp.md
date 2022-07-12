@@ -128,8 +128,8 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - tree/test/frequency_table_of_tree_distance.test.cpp
 documentation_of: tree/frequency_table_of_tree_distance.hpp
 layout: document

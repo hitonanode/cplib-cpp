@@ -151,9 +151,9 @@ data:
   timestamp: '2022-05-01 23:08:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - graph/test/bridge.test.cpp
   - graph/test/biconnected_components.test.cpp
   - graph/test/articulation_points.test.cpp
-  - graph/test/bridge.test.cpp
   - graph/test/two-edge-connected-components.test.cpp
 documentation_of: graph/lowlink.hpp
 layout: document

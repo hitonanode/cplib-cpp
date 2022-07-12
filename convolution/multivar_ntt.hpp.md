@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':question:'
@@ -9,12 +9,12 @@ data:
     title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: convolution/test/multivar_ntt.test.cpp
     title: convolution/test/multivar_ntt.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://hitonanode.github.io/cplib-cpp/convolution/multivar_ntt.hpp
@@ -226,7 +226,7 @@ data:
   path: convolution/multivar_ntt.hpp
   requiredBy: []
   timestamp: '2022-07-12 00:34:46+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/multivar_ntt.test.cpp
 documentation_of: convolution/multivar_ntt.hpp

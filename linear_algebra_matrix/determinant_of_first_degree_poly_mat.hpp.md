@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/characteristic_poly.hpp
     title: "Characteristic polynomial \uFF08\u884C\u5217\u306E\u7279\u6027\u591A\u9805\
       \u5F0F\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/hessenberg_reduction.hpp
     title: Hessenberg reduction of matrix
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
     title: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://yukicoder.me/problems/no/1907
@@ -246,7 +246,7 @@ data:
   path: linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
   requiredBy: []
   timestamp: '2022-05-05 00:02:10+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
 documentation_of: linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp

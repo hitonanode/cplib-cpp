@@ -177,8 +177,8 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - tree/test/hl_decomposition.test.cpp
-  - tree/test/vertex-set-path-composite.test.cpp
   - tree/test/vertex-add-path-sum.test.cpp
+  - tree/test/vertex-set-path-composite.test.cpp
 documentation_of: tree/heavy_light_decomposition.hpp
 layout: document
 redirect_from:

@@ -6,24 +6,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.aoj2450.test.cpp
     title: data_structure/test/link_cut_tree.aoj2450.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.composition.test.cpp
     title: data_structure/test/link_cut_tree.composition.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
     title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
     title: data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
     title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.sum.test.cpp
     title: data_structure/test/link_cut_tree.sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://ei1333.github.io/library/structure/lct/link-cut-tree-lazy-path.cpp
@@ -188,14 +188,14 @@ data:
   path: data_structure/link_cut_tree.hpp
   requiredBy: []
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - data_structure/test/link_cut_tree.composition.test.cpp
+  - data_structure/test/link_cut_tree.sum.test.cpp
   - data_structure/test/link_cut_tree.aoj2450.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
-  - data_structure/test/link_cut_tree.sum.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - data_structure/test/link_cut_tree.noncommutative2.stress.test.cpp
-  - data_structure/test/link_cut_tree.composition.test.cpp
 documentation_of: data_structure/link_cut_tree.hpp
 layout: document
 title: Link-Cut tree

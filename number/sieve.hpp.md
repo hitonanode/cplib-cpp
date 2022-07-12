@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/arithmetic_cumsum.hpp
     title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\u6570\
       \u306E\u7D2F\u7A4D\u548C\uFF09"
@@ -13,16 +13,16 @@ data:
     path: number/zeta_moebius_transform.hpp
     title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/arithmetic_function_totient.test.cpp
     title: number/test/arithmetic_function_totient.test.cpp
   - icon: ':heavy_check_mark:'
@@ -192,28 +192,28 @@ data:
   isVerificationFile: false
   path: number/sieve.hpp
   requiredBy:
-  - number/arithmetic_cumsum.hpp
-  - number/cyclotomic_polynomials.hpp
   - number/zeta_moebius_transform.hpp
+  - number/cyclotomic_polynomials.hpp
+  - number/arithmetic_cumsum.hpp
   timestamp: '2021-10-30 11:24:11+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - number/test/prime_factorization.test.cpp
+  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - number/test/combination.test.cpp
-  - number/test/multiple_moebius.yuki886.test.cpp
-  - number/test/sieve.stress.test.cpp
-  - number/test/gcd_convolution.test.cpp
-  - number/test/combination.stress.test.cpp
-  - number/test/lcm_convolution.test.cpp
-  - number/test/zeta_moebius_transform.test.cpp
   - number/test/gen_primes.test.cpp
   - number/test/arithmetic_function_totient.test.cpp
-  - number/test/multiple_moebius.yuki1627.test.cpp
+  - number/test/zeta_moebius_transform.test.cpp
+  - number/test/lcm_convolution.test.cpp
+  - number/test/gcd_convolution.test.cpp
+  - number/test/combination.stress.test.cpp
   - number/test/miller-rabin-5e7.test.cpp
+  - number/test/multiple_moebius.yuki1627.test.cpp
+  - number/test/multiple_moebius.yuki886.test.cpp
+  - number/test/prime_factorization.test.cpp
+  - number/test/sieve.stress.test.cpp
   - number/test/enumerate_primes.test.cpp
-  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
 documentation_of: number/sieve.hpp
 layout: document
 title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"

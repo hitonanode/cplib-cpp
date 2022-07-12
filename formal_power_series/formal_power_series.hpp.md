@@ -2,28 +2,28 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/multipoint_evaluation.hpp
     title: formal_power_series/multipoint_evaluation.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/multipoint_evaluation.test.cpp
     title: formal_power_series/test/multipoint_evaluation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
     title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://ei1333.github.io/luzhiled/snippets/math/formal-power-series.html
@@ -364,12 +364,12 @@ data:
   requiredBy:
   - formal_power_series/multipoint_evaluation.hpp
   timestamp: '2022-07-05 21:55:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
-  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+  - formal_power_series/test/multipoint_evaluation.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
   - formal_power_series/test/stirling_number_of_1st.test.cpp
 documentation_of: formal_power_series/formal_power_series.hpp
 layout: document
