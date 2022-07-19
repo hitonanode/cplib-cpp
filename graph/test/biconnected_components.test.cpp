@@ -14,7 +14,7 @@ int main() {
         graph.add_edge(a, b);
     }
 
-    auto ret = graph.biconnected_components();
+    auto ret = graph.biconnected_components_by_vertices();
     cout << ret.size() << '\n';
     for (const auto &vec : ret) {
         cout << vec.size();
