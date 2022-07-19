@@ -122,9 +122,31 @@ struct lowlink {
         return ret;
     }
 
+    // Find biconnected components and enumerate vertices for each component.
+    // Complexity: O(V \log V + E)
+    std::vector<std::vector<int>> biconnected_components_by_vertices() {
+        build();
+        std::vector<std::vector<int>> ret(tvcc_num);
+        for (int i = 0; i < E; ++i) {
+            ret[tvcc_id[i]].push_back(edges[i].first);
+            ret[tvcc_id[i]].push_back(edges[i].second);
+        }
+
+        for (auto &vec : ret) {
+            std::sort(vec.begin(), vec.end());
+            vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
+        }
+
+        for (int i = 0; i < V; ++i) {
+            if (to[i].empty()) ret.push_back({i});
+        }
+
+        return ret;
+    }
+
     // Find biconnected components and classify all edges
     // Complexity: O(V + E)
-    std::vector<std::vector<int>> biconnected_components() {
+    std::vector<std::vector<int>> biconnected_components_by_edges() {
         build();
         std::vector<std::vector<int>> ret(tvcc_num);
         for (int i = 0; i < E; ++i) ret[tvcc_id[i]].push_back(i);
