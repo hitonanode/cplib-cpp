@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/fft_double.hpp
     title: convolution/fft_double.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/centroid_decomposition.hpp
     title: tree/centroid_decomposition.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/frequency_table_of_tree_distance.hpp
     title: Frequency table of tree distance
   _extendedRequiredBy: []

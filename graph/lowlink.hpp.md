@@ -78,10 +78,20 @@ data:
     \                }\n            }\n            ++tecc_num;\n        }\n      \
     \  std::vector<std::vector<int>> ret(tecc_num);\n        for (int i = 0; i < V;\
     \ ++i) ret[tecc_id[i]].push_back(i);\n        return ret;\n    }\n\n    // Find\
+    \ biconnected components and enumerate vertices for each component.\n    // Complexity:\
+    \ O(V \\log V + E)\n    std::vector<std::vector<int>> biconnected_components_by_vertices()\
+    \ {\n        build();\n        std::vector<std::vector<int>> ret(tvcc_num);\n\
+    \        for (int i = 0; i < E; ++i) {\n            ret[tvcc_id[i]].push_back(edges[i].first);\n\
+    \            ret[tvcc_id[i]].push_back(edges[i].second);\n        }\n\n      \
+    \  for (auto &vec : ret) {\n            std::sort(vec.begin(), vec.end());\n \
+    \           vec.erase(std::unique(vec.begin(), vec.end()), vec.end());\n     \
+    \   }\n\n        for (int i = 0; i < V; ++i) {\n            if (to[i].empty())\
+    \ ret.push_back({i});\n        }\n\n        return ret;\n    }\n\n    // Find\
     \ biconnected components and classify all edges\n    // Complexity: O(V + E)\n\
-    \    std::vector<std::vector<int>> biconnected_components() {\n        build();\n\
-    \        std::vector<std::vector<int>> ret(tvcc_num);\n        for (int i = 0;\
-    \ i < E; ++i) ret[tvcc_id[i]].push_back(i);\n        return ret;\n    }\n};\n"
+    \    std::vector<std::vector<int>> biconnected_components_by_edges() {\n     \
+    \   build();\n        std::vector<std::vector<int>> ret(tvcc_num);\n        for\
+    \ (int i = 0; i < E; ++i) ret[tvcc_id[i]].push_back(i);\n        return ret;\n\
+    \    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <queue>\n\
     #include <utility>\n#include <vector>\n\nstruct lowlink {\n    int V; // # of\
     \ vertices\n    int E; // # of edges\n    int k;\n    std::vector<std::vector<std::pair<int,\
@@ -140,21 +150,31 @@ data:
     \                }\n            }\n            ++tecc_num;\n        }\n      \
     \  std::vector<std::vector<int>> ret(tecc_num);\n        for (int i = 0; i < V;\
     \ ++i) ret[tecc_id[i]].push_back(i);\n        return ret;\n    }\n\n    // Find\
+    \ biconnected components and enumerate vertices for each component.\n    // Complexity:\
+    \ O(V \\log V + E)\n    std::vector<std::vector<int>> biconnected_components_by_vertices()\
+    \ {\n        build();\n        std::vector<std::vector<int>> ret(tvcc_num);\n\
+    \        for (int i = 0; i < E; ++i) {\n            ret[tvcc_id[i]].push_back(edges[i].first);\n\
+    \            ret[tvcc_id[i]].push_back(edges[i].second);\n        }\n\n      \
+    \  for (auto &vec : ret) {\n            std::sort(vec.begin(), vec.end());\n \
+    \           vec.erase(std::unique(vec.begin(), vec.end()), vec.end());\n     \
+    \   }\n\n        for (int i = 0; i < V; ++i) {\n            if (to[i].empty())\
+    \ ret.push_back({i});\n        }\n\n        return ret;\n    }\n\n    // Find\
     \ biconnected components and classify all edges\n    // Complexity: O(V + E)\n\
-    \    std::vector<std::vector<int>> biconnected_components() {\n        build();\n\
-    \        std::vector<std::vector<int>> ret(tvcc_num);\n        for (int i = 0;\
-    \ i < E; ++i) ret[tvcc_id[i]].push_back(i);\n        return ret;\n    }\n};\n"
+    \    std::vector<std::vector<int>> biconnected_components_by_edges() {\n     \
+    \   build();\n        std::vector<std::vector<int>> ret(tvcc_num);\n        for\
+    \ (int i = 0; i < E; ++i) ret[tvcc_id[i]].push_back(i);\n        return ret;\n\
+    \    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/lowlink.hpp
   requiredBy: []
-  timestamp: '2022-05-01 23:08:31+09:00'
+  timestamp: '2022-07-19 23:53:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/bridge.test.cpp
-  - graph/test/biconnected_components.test.cpp
   - graph/test/articulation_points.test.cpp
+  - graph/test/bridge.test.cpp
   - graph/test/two-edge-connected-components.test.cpp
+  - graph/test/biconnected_components.test.cpp
 documentation_of: graph/lowlink.hpp
 layout: document
 title: "Lowlink \uFF08\u7121\u5411\u30B0\u30E9\u30D5\u306E DFS tree, lowlink, \u6A4B\
@@ -167,7 +187,7 @@ $N$ 頂点 $M$ 辺の無向グラフの DFS tree, lowlink を構築し，この�
 - 橋：その辺 $e$ を消すとグラフの $e$ を含む連結成分が非連結になるような辺．
 - 二重辺連結成分：任意の一辺を削除しても互いに連結であるような部分グラフ（極大頂点集合）．グラフから全ての橋を削除したものをイメージするとよい．一般にグラフの二重辺連結成分分解において，橋となる辺はどの二重辺連結成分にも属さないが，全ての頂点はちょうど一つの二重辺連結成分に属するので，本ライブラリでは各頂点に二重辺連結成分のラベルを付与することで分解を行う．
 - 関節点：その頂点 $v$ を消すとグラフの $v$ に関する連結成分が非連結になるような頂点．
-- 二重頂点連結成分（二重連結成分）：任意の一頂点（とそこから生える辺）を削除しても連結であるような連結部分グラフ．一般にグラフの二重頂点連結成分分解において，ある頂点が複数の二重頂点連結成分に属することがある．一方全ての辺はちょうど一つの二重頂点連結成分に属するので，本ライブラリでは各辺に二重頂点連結成分のラベルを付与することで分解を行う．
+- 二重頂点連結成分（二重連結成分）：任意の一頂点（とそこから生える辺）を削除しても連結であるような連結部分グラフ．一般にグラフの二重頂点連結成分分解において，ある頂点が複数の二重頂点連結成分に属することがある．一方全ての辺はちょうど一つの二重頂点連結成分に属するので，本ライブラリでは各辺に二重頂点連結成分のラベルを付与することで分解を行う（`biconnected_components_by_edges()`）．また，頂点の重複を許容して各成分に所属する頂点集合を出力するメソッドも用意した（`biconnected_components_by_vertices()`）．これは孤立点を含めて列挙を行いたい場合に有用である．
 
 ## 使用方法
 
@@ -179,7 +199,7 @@ while (E--) {
     graph.add_edge(s, t);
 }
 vector<vector<int>> vgrpups = graph.two_edge_connected_components();
-vector<vector<int>> egrpups = graph.biconnected_components();
+vector<vector<int>> egrpups = graph.biconnected_components_by_edges();
 ```
 
 ## 問題例

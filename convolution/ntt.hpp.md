@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy:
@@ -54,18 +54,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
@@ -270,27 +270,27 @@ data:
   isVerificationFile: false
   path: convolution/ntt.hpp
   requiredBy:
-  - formal_power_series/coeff_of_rational_function.hpp
-  - formal_power_series/polynomial_divmod.hpp
-  - formal_power_series/factorial_power.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
   - convolution/multivar_ntt.hpp
+  - formal_power_series/factorial_power.hpp
+  - formal_power_series/coeff_of_rational_function.hpp
+  - formal_power_series/polynomial_divmod.hpp
   timestamp: '2022-07-12 00:34:46+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/polynomial_divmod.test.cpp
-  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - formal_power_series/test/kitamasa.test.cpp
-  - formal_power_series/test/shift_of_sampling_points.test.cpp
-  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - number/test/primitive_root.test.cpp
-  - convolution/test/multivar_ntt.test.cpp
-  - convolution/test/ntt.test.cpp
+  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   - convolution/test/convolution_on_tree.test.cpp
+  - convolution/test/ntt.test.cpp
+  - convolution/test/multivar_ntt.test.cpp
+  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - formal_power_series/test/kitamasa.test.cpp
+  - formal_power_series/test/polynomial_divmod.test.cpp
+  - formal_power_series/test/shift_of_sampling_points.test.cpp
+  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - number/test/primitive_root.test.cpp
 documentation_of: convolution/ntt.hpp
 layout: document
 redirect_from:

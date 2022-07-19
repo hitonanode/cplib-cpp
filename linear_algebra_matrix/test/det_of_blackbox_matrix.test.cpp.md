@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []

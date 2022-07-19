@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other_algorithms/permutation_tree.hpp
     title: "Permutation tree \uFF08\u9806\u5217\u6728\uFF09"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/range-add-range-min.hpp
     title: Range Add Range Min (known as the Starry sky tree)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1720
@@ -239,7 +239,7 @@ data:
   path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
   requiredBy: []
   timestamp: '2022-07-12 00:34:46+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: other_algorithms/test/permutation_tree.yuki1720.test.cpp
 layout: document

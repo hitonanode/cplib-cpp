@@ -76,16 +76,25 @@ data:
     \                }\n            }\n            ++tecc_num;\n        }\n      \
     \  std::vector<std::vector<int>> ret(tecc_num);\n        for (int i = 0; i < V;\
     \ ++i) ret[tecc_id[i]].push_back(i);\n        return ret;\n    }\n\n    // Find\
+    \ biconnected components and enumerate vertices for each component.\n    // Complexity:\
+    \ O(V \\log V + E)\n    std::vector<std::vector<int>> biconnected_components_by_vertices()\
+    \ {\n        build();\n        std::vector<std::vector<int>> ret(tvcc_num);\n\
+    \        for (int i = 0; i < E; ++i) {\n            ret[tvcc_id[i]].push_back(edges[i].first);\n\
+    \            ret[tvcc_id[i]].push_back(edges[i].second);\n        }\n\n      \
+    \  for (auto &vec : ret) {\n            std::sort(vec.begin(), vec.end());\n \
+    \           vec.erase(std::unique(vec.begin(), vec.end()), vec.end());\n     \
+    \   }\n\n        for (int i = 0; i < V; ++i) {\n            if (to[i].empty())\
+    \ ret.push_back({i});\n        }\n\n        return ret;\n    }\n\n    // Find\
     \ biconnected components and classify all edges\n    // Complexity: O(V + E)\n\
-    \    std::vector<std::vector<int>> biconnected_components() {\n        build();\n\
-    \        std::vector<std::vector<int>> ret(tvcc_num);\n        for (int i = 0;\
-    \ i < E; ++i) ret[tvcc_id[i]].push_back(i);\n        return ret;\n    }\n};\n\
-    #line 3 \"graph/test/biconnected_components.test.cpp\"\n#include <iostream>\n\
+    \    std::vector<std::vector<int>> biconnected_components_by_edges() {\n     \
+    \   build();\n        std::vector<std::vector<int>> ret(tvcc_num);\n        for\
+    \ (int i = 0; i < E; ++i) ret[tvcc_id[i]].push_back(i);\n        return ret;\n\
+    \    }\n};\n#line 3 \"graph/test/biconnected_components.test.cpp\"\n#include <iostream>\n\
     using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int N, M;\n    cin >> N >> M;\n    lowlink graph(N);\n    while (M--) {\n\
     \        int a, b;\n        cin >> a >> b;\n        graph.add_edge(a, b);\n  \
-    \  }\n\n    auto ret = graph.biconnected_components();\n    cout << ret.size()\
-    \ << '\\n';\n    for (const auto &vec : ret) {\n        cout << vec.size();\n\
+    \  }\n\n    auto ret = graph.biconnected_components_by_vertices();\n    cout <<\
+    \ ret.size() << '\\n';\n    for (const auto &vec : ret) {\n        cout << vec.size();\n\
     \        for (auto x : vec) cout << ' ' << x;\n        cout << '\\n';\n    }\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/biconnected_components\"\
@@ -93,15 +102,15 @@ data:
     \ main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, M;\n\
     \    cin >> N >> M;\n    lowlink graph(N);\n    while (M--) {\n        int a,\
     \ b;\n        cin >> a >> b;\n        graph.add_edge(a, b);\n    }\n\n    auto\
-    \ ret = graph.biconnected_components();\n    cout << ret.size() << '\\n';\n  \
-    \  for (const auto &vec : ret) {\n        cout << vec.size();\n        for (auto\
-    \ x : vec) cout << ' ' << x;\n        cout << '\\n';\n    }\n}\n"
+    \ ret = graph.biconnected_components_by_vertices();\n    cout << ret.size() <<\
+    \ '\\n';\n    for (const auto &vec : ret) {\n        cout << vec.size();\n   \
+    \     for (auto x : vec) cout << ' ' << x;\n        cout << '\\n';\n    }\n}\n"
   dependsOn:
   - graph/lowlink.hpp
   isVerificationFile: true
   path: graph/test/biconnected_components.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 23:08:31+09:00'
+  timestamp: '2022-07-19 23:53:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/biconnected_components.test.cpp

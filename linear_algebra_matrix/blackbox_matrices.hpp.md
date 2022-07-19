@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -296,8 +296,8 @@ data:
   timestamp: '2022-07-12 00:34:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
 documentation_of: linear_algebra_matrix/blackbox_matrices.hpp
 layout: document
 title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"

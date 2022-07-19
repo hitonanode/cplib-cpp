@@ -66,16 +66,16 @@ data:
   requiredBy:
   - graph/paths_of_length_two_decomposition.hpp
   - string/aho_corasick.hpp
-  - string/incremental_matching.hpp
   - string/aho_corasick_online.hpp
+  - string/incremental_matching.hpp
   timestamp: '2021-02-26 23:47:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - string/test/aho_corasick_online.test.cpp
-  - string/test/aho_corasick_unorderedmap.test.cpp
   - string/test/aho_corasick_vector.test.cpp
   - string/test/incremental_matching.test.cpp
+  - string/test/aho_corasick_unorderedmap.test.cpp
   - string/test/aho_corasick_forwardlist.test.cpp
+  - string/test/aho_corasick_online.test.cpp
 documentation_of: data_structure/light_forward_list.hpp
 layout: document
 redirect_from:

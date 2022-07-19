@@ -74,12 +74,21 @@ data:
     \                }\n            }\n            ++tecc_num;\n        }\n      \
     \  std::vector<std::vector<int>> ret(tecc_num);\n        for (int i = 0; i < V;\
     \ ++i) ret[tecc_id[i]].push_back(i);\n        return ret;\n    }\n\n    // Find\
+    \ biconnected components and enumerate vertices for each component.\n    // Complexity:\
+    \ O(V \\log V + E)\n    std::vector<std::vector<int>> biconnected_components_by_vertices()\
+    \ {\n        build();\n        std::vector<std::vector<int>> ret(tvcc_num);\n\
+    \        for (int i = 0; i < E; ++i) {\n            ret[tvcc_id[i]].push_back(edges[i].first);\n\
+    \            ret[tvcc_id[i]].push_back(edges[i].second);\n        }\n\n      \
+    \  for (auto &vec : ret) {\n            std::sort(vec.begin(), vec.end());\n \
+    \           vec.erase(std::unique(vec.begin(), vec.end()), vec.end());\n     \
+    \   }\n\n        for (int i = 0; i < V; ++i) {\n            if (to[i].empty())\
+    \ ret.push_back({i});\n        }\n\n        return ret;\n    }\n\n    // Find\
     \ biconnected components and classify all edges\n    // Complexity: O(V + E)\n\
-    \    std::vector<std::vector<int>> biconnected_components() {\n        build();\n\
-    \        std::vector<std::vector<int>> ret(tvcc_num);\n        for (int i = 0;\
-    \ i < E; ++i) ret[tvcc_id[i]].push_back(i);\n        return ret;\n    }\n};\n\
-    #line 3 \"graph/test/bridge.test.cpp\"\n#include <iostream>\n#line 6 \"graph/test/bridge.test.cpp\"\
-    \nusing namespace std;\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B\"\
+    \    std::vector<std::vector<int>> biconnected_components_by_edges() {\n     \
+    \   build();\n        std::vector<std::vector<int>> ret(tvcc_num);\n        for\
+    \ (int i = 0; i < E; ++i) ret[tvcc_id[i]].push_back(i);\n        return ret;\n\
+    \    }\n};\n#line 3 \"graph/test/bridge.test.cpp\"\n#include <iostream>\n#line\
+    \ 6 \"graph/test/bridge.test.cpp\"\nusing namespace std;\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B\"\
     \n\nint main() {\n    int V, E;\n    cin >> V >> E;\n    lowlink graph(V);\n \
     \   for (int i = 0; i < E; i++) {\n        int s, t;\n        cin >> s >> t;\n\
     \        if (s > t) swap(s, t);\n        graph.add_edge(s, t);\n    }\n    graph.build();\n\
@@ -102,7 +111,7 @@ data:
   isVerificationFile: true
   path: graph/test/bridge.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 23:08:31+09:00'
+  timestamp: '2022-07-19 23:53:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/bridge.test.cpp

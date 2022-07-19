@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/bare_mod_algebra.hpp
     title: number/bare_mod_algebra.hpp
   - icon: ':heavy_check_mark:'
     path: number/combination.hpp
     title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
       \u7406\u306E\u62E1\u5F35\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []

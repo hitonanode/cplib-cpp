@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/tree_isomorphism.hpp
     title: "Tree isomrphism \uFF08\u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: unionfind/grid_unionfind.hpp
     title: unionfind/grid_unionfind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1613
@@ -249,7 +249,7 @@ data:
   path: tree/test/tree_isomorphism.aoj1613.test.cpp
   requiredBy: []
   timestamp: '2022-07-12 00:34:46+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/tree_isomorphism.aoj1613.test.cpp
 layout: document

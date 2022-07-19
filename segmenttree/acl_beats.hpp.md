@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
     title: Lazy Segtree (based on atcoder::lazy_segtree)
   _extendedRequiredBy:
@@ -98,9 +98,9 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
   - segmenttree/test/beats_gcd.test.cpp
   - segmenttree/test/beats.test.cpp
-  - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
 documentation_of: segmenttree/acl_beats.hpp
 layout: document
 title: Segment Tree Beats (based on atcoder::lazy_segtree)
