@@ -40,25 +40,30 @@ data:
     \    }\n    }\n\n    void fix_root(int r) {\n        root = r;\n        par.resize(V);\n\
     \        depth.resize(V);\n        depth[r] = 0;\n        acc_weight.resize(V);\n\
     \        acc_weight[r] = 0;\n        _fix_root_dfs(root, INVALID, INVALID);\n\
-    \        _doubling_precalc();\n    }\n\n    int kth_parent(int x, int k) {\n \
-    \       if (depth[x] < k) return INVALID;\n        for (int d = 0; d < lgV; d++)\
-    \ {\n            if (x == INVALID) return INVALID;\n            if (k & (1 <<\
-    \ d)) x = doubling[d][x];\n        }\n        return x;\n    }\n\n    int lowest_common_ancestor(int\
-    \ u, int v) {\n        if (depth[u] > depth[v]) std::swap(u, v);\n\n        v\
-    \ = kth_parent(v, depth[v] - depth[u]);\n        if (u == v) return u;\n     \
-    \   for (int d = lgV - 1; d >= 0; d--) {\n            if (doubling[d][u] != doubling[d][v])\
-    \ u = doubling[d][u], v = doubling[d][v];\n        }\n        return par[u];\n\
-    \    }\n\n    T path_length(int u, int v) {\n        // Not distance, but the\
-    \ sum of weights\n        int r = lowest_common_ancestor(u, v);\n        return\
-    \ (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);\n    }\n\
-    };\n#line 2 \"tree/test/lca.test.cpp\"\n#include <iostream>\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/lca\"\nusing namespace std;\n\nint main() {\n\
-    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q, p, u, v;\n\
-    \    cin >> N >> Q;\n    UndirectedWeightedTree<int> graph(N);\n    for (int i\
-    \ = 1; i <= N - 1; i++) {\n        cin >> p;\n        graph.add_edge(i, p, 1);\n\
-    \    }\n    graph.fix_root(0);\n\n    for (int i = 0; i < Q; i++) {\n        cin\
-    \ >> u >> v;\n        cout << graph.lowest_common_ancestor(u, v) << endl;\n  \
-    \  }\n}\n"
+    \        _doubling_precalc();\n    }\n\n    int kth_parent(int x, int k) const\
+    \ {\n        if (depth[x] < k) return INVALID;\n        for (int d = 0; d < lgV;\
+    \ d++) {\n            if (x == INVALID) return INVALID;\n            if (k & (1\
+    \ << d)) x = doubling[d][x];\n        }\n        return x;\n    }\n\n    int lowest_common_ancestor(int\
+    \ u, int v) const {\n        if (depth[u] > depth[v]) std::swap(u, v);\n\n   \
+    \     v = kth_parent(v, depth[v] - depth[u]);\n        if (u == v) return u;\n\
+    \        for (int d = lgV - 1; d >= 0; d--) {\n            if (doubling[d][u]\
+    \ != doubling[d][v]) u = doubling[d][u], v = doubling[d][v];\n        }\n    \
+    \    return par[u];\n    }\n\n    T path_length(int u, int v) const {\n      \
+    \  // Not distance, but the sum of weights\n        int r = lowest_common_ancestor(u,\
+    \ v);\n        return (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);\n\
+    \    }\n\n    int s_to_t_by_k_steps(int s, int t, int k) const {\n        int\
+    \ l = lowest_common_ancestor(s, t);\n        int dsl = depth[s] - depth[l], dtl\
+    \ = depth[t] - depth[l];\n        if (k > dsl + dtl) {\n            return INVALID;\n\
+    \        } else if (k < dsl) {\n            return kth_parent(s, k);\n       \
+    \ } else if (k == dsl) {\n            return l;\n        } else {\n          \
+    \  return kth_parent(t, dsl + dtl - k);\n        }\n    }\n};\n#line 2 \"tree/test/lca.test.cpp\"\
+    \n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\
+    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, Q, p, u, v;\n    cin >> N >> Q;\n    UndirectedWeightedTree<int> graph(N);\n\
+    \    for (int i = 1; i <= N - 1; i++) {\n        cin >> p;\n        graph.add_edge(i,\
+    \ p, 1);\n    }\n    graph.fix_root(0);\n\n    for (int i = 0; i < Q; i++) {\n\
+    \        cin >> u >> v;\n        cout << graph.lowest_common_ancestor(u, v) <<\
+    \ endl;\n    }\n}\n"
   code: "#include \"../lowest_common_ancestor.hpp\"\n#include <iostream>\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\nusing namespace std;\n\nint\
     \ main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q,\
@@ -72,7 +77,7 @@ data:
   isVerificationFile: true
   path: tree/test/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-07-30 23:28:45+09:00'
+  timestamp: '2022-07-31 01:04:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/lca.test.cpp

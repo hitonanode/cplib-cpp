@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: tree/test/jump_on_tree.test.cpp
+    title: tree/test/jump_on_tree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: tree/test/lca.test.cpp
     title: tree/test/lca.test.cpp
   - icon: ':heavy_check_mark:'
@@ -40,18 +43,23 @@ data:
     \    }\n    }\n\n    void fix_root(int r) {\n        root = r;\n        par.resize(V);\n\
     \        depth.resize(V);\n        depth[r] = 0;\n        acc_weight.resize(V);\n\
     \        acc_weight[r] = 0;\n        _fix_root_dfs(root, INVALID, INVALID);\n\
-    \        _doubling_precalc();\n    }\n\n    int kth_parent(int x, int k) {\n \
-    \       if (depth[x] < k) return INVALID;\n        for (int d = 0; d < lgV; d++)\
-    \ {\n            if (x == INVALID) return INVALID;\n            if (k & (1 <<\
-    \ d)) x = doubling[d][x];\n        }\n        return x;\n    }\n\n    int lowest_common_ancestor(int\
-    \ u, int v) {\n        if (depth[u] > depth[v]) std::swap(u, v);\n\n        v\
-    \ = kth_parent(v, depth[v] - depth[u]);\n        if (u == v) return u;\n     \
-    \   for (int d = lgV - 1; d >= 0; d--) {\n            if (doubling[d][u] != doubling[d][v])\
-    \ u = doubling[d][u], v = doubling[d][v];\n        }\n        return par[u];\n\
-    \    }\n\n    T path_length(int u, int v) {\n        // Not distance, but the\
-    \ sum of weights\n        int r = lowest_common_ancestor(u, v);\n        return\
-    \ (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);\n    }\n\
-    };\n"
+    \        _doubling_precalc();\n    }\n\n    int kth_parent(int x, int k) const\
+    \ {\n        if (depth[x] < k) return INVALID;\n        for (int d = 0; d < lgV;\
+    \ d++) {\n            if (x == INVALID) return INVALID;\n            if (k & (1\
+    \ << d)) x = doubling[d][x];\n        }\n        return x;\n    }\n\n    int lowest_common_ancestor(int\
+    \ u, int v) const {\n        if (depth[u] > depth[v]) std::swap(u, v);\n\n   \
+    \     v = kth_parent(v, depth[v] - depth[u]);\n        if (u == v) return u;\n\
+    \        for (int d = lgV - 1; d >= 0; d--) {\n            if (doubling[d][u]\
+    \ != doubling[d][v]) u = doubling[d][u], v = doubling[d][v];\n        }\n    \
+    \    return par[u];\n    }\n\n    T path_length(int u, int v) const {\n      \
+    \  // Not distance, but the sum of weights\n        int r = lowest_common_ancestor(u,\
+    \ v);\n        return (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);\n\
+    \    }\n\n    int s_to_t_by_k_steps(int s, int t, int k) const {\n        int\
+    \ l = lowest_common_ancestor(s, t);\n        int dsl = depth[s] - depth[l], dtl\
+    \ = depth[t] - depth[l];\n        if (k > dsl + dtl) {\n            return INVALID;\n\
+    \        } else if (k < dsl) {\n            return kth_parent(s, k);\n       \
+    \ } else if (k == dsl) {\n            return l;\n        } else {\n          \
+    \  return kth_parent(t, dsl + dtl - k);\n        }\n    }\n};\n"
   code: "#pragma once\n#include <utility>\n#include <vector>\n\n// CUT begin\n// lowest\
     \ common ancestor (LCA) for undirected weighted tree\ntemplate <typename T> struct\
     \ UndirectedWeightedTree {\n    int INVALID = -1;\n    int V, lgV;\n    int E;\n\
@@ -78,26 +86,32 @@ data:
     \n    void fix_root(int r) {\n        root = r;\n        par.resize(V);\n    \
     \    depth.resize(V);\n        depth[r] = 0;\n        acc_weight.resize(V);\n\
     \        acc_weight[r] = 0;\n        _fix_root_dfs(root, INVALID, INVALID);\n\
-    \        _doubling_precalc();\n    }\n\n    int kth_parent(int x, int k) {\n \
-    \       if (depth[x] < k) return INVALID;\n        for (int d = 0; d < lgV; d++)\
-    \ {\n            if (x == INVALID) return INVALID;\n            if (k & (1 <<\
-    \ d)) x = doubling[d][x];\n        }\n        return x;\n    }\n\n    int lowest_common_ancestor(int\
-    \ u, int v) {\n        if (depth[u] > depth[v]) std::swap(u, v);\n\n        v\
-    \ = kth_parent(v, depth[v] - depth[u]);\n        if (u == v) return u;\n     \
-    \   for (int d = lgV - 1; d >= 0; d--) {\n            if (doubling[d][u] != doubling[d][v])\
-    \ u = doubling[d][u], v = doubling[d][v];\n        }\n        return par[u];\n\
-    \    }\n\n    T path_length(int u, int v) {\n        // Not distance, but the\
-    \ sum of weights\n        int r = lowest_common_ancestor(u, v);\n        return\
-    \ (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);\n    }\n\
-    };\n"
+    \        _doubling_precalc();\n    }\n\n    int kth_parent(int x, int k) const\
+    \ {\n        if (depth[x] < k) return INVALID;\n        for (int d = 0; d < lgV;\
+    \ d++) {\n            if (x == INVALID) return INVALID;\n            if (k & (1\
+    \ << d)) x = doubling[d][x];\n        }\n        return x;\n    }\n\n    int lowest_common_ancestor(int\
+    \ u, int v) const {\n        if (depth[u] > depth[v]) std::swap(u, v);\n\n   \
+    \     v = kth_parent(v, depth[v] - depth[u]);\n        if (u == v) return u;\n\
+    \        for (int d = lgV - 1; d >= 0; d--) {\n            if (doubling[d][u]\
+    \ != doubling[d][v]) u = doubling[d][u], v = doubling[d][v];\n        }\n    \
+    \    return par[u];\n    }\n\n    T path_length(int u, int v) const {\n      \
+    \  // Not distance, but the sum of weights\n        int r = lowest_common_ancestor(u,\
+    \ v);\n        return (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);\n\
+    \    }\n\n    int s_to_t_by_k_steps(int s, int t, int k) const {\n        int\
+    \ l = lowest_common_ancestor(s, t);\n        int dsl = depth[s] - depth[l], dtl\
+    \ = depth[t] - depth[l];\n        if (k > dsl + dtl) {\n            return INVALID;\n\
+    \        } else if (k < dsl) {\n            return kth_parent(s, k);\n       \
+    \ } else if (k == dsl) {\n            return l;\n        } else {\n          \
+    \  return kth_parent(t, dsl + dtl - k);\n        }\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: tree/lowest_common_ancestor.hpp
   requiredBy: []
-  timestamp: '2021-07-30 23:28:45+09:00'
+  timestamp: '2022-07-31 01:04:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/lca.yuki898.test.cpp
+  - tree/test/jump_on_tree.test.cpp
   - tree/test/lca.test.cpp
 documentation_of: tree/lowest_common_ancestor.hpp
 layout: document

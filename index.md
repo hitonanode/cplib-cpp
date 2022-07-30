@@ -1425,6 +1425,9 @@ data:
       path: tree/test/hl_decomposition.test.cpp
       title: tree/test/hl_decomposition.test.cpp
     - icon: ':heavy_check_mark:'
+      path: tree/test/jump_on_tree.test.cpp
+      title: tree/test/jump_on_tree.test.cpp
+    - icon: ':heavy_check_mark:'
       path: tree/test/lca.test.cpp
       title: tree/test/lca.test.cpp
     - icon: ':heavy_check_mark:'

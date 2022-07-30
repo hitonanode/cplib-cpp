@@ -11,13 +11,14 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/898
+    PROBLEM: https://judge.yosupo.jp/problem/jump_on_tree
     links:
-    - https://yukicoder.me/problems/no/898
-  bundledCode: "#line 2 \"tree/lowest_common_ancestor.hpp\"\n#include <utility>\n\
-    #include <vector>\n\n// CUT begin\n// lowest common ancestor (LCA) for undirected\
-    \ weighted tree\ntemplate <typename T> struct UndirectedWeightedTree {\n    int\
-    \ INVALID = -1;\n    int V, lgV;\n    int E;\n    int root;\n    std::vector<std::vector<std::pair<int,\
+    - https://judge.yosupo.jp/problem/jump_on_tree
+  bundledCode: "#line 1 \"tree/test/jump_on_tree.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/jump_on_tree\"\
+    \n#line 2 \"tree/lowest_common_ancestor.hpp\"\n#include <utility>\n#include <vector>\n\
+    \n// CUT begin\n// lowest common ancestor (LCA) for undirected weighted tree\n\
+    template <typename T> struct UndirectedWeightedTree {\n    int INVALID = -1;\n\
+    \    int V, lgV;\n    int E;\n    int root;\n    std::vector<std::vector<std::pair<int,\
     \ int>>> adj; // (nxt_vertex, edge_id)\n    // vector<pint> edge; // edges[edge_id]\
     \ = (vertex_id, vertex_id)\n    std::vector<T> weight;     // w[edge_id]\n   \
     \ std::vector<int> par;      // parent_vertex_id[vertex_id]\n    std::vector<int>\
@@ -56,43 +57,33 @@ data:
     \ = depth[t] - depth[l];\n        if (k > dsl + dtl) {\n            return INVALID;\n\
     \        } else if (k < dsl) {\n            return kth_parent(s, k);\n       \
     \ } else if (k == dsl) {\n            return l;\n        } else {\n          \
-    \  return kth_parent(t, dsl + dtl - k);\n        }\n    }\n};\n#line 2 \"tree/test/lca.yuki898.test.cpp\"\
-    \n#include <iostream>\n#define PROBLEM \"https://yukicoder.me/problems/no/898\"\
-    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \n    int N;\n    cin >> N;\n    UndirectedWeightedTree<long long> g(N);\n   \
-    \ for (int i = 1; i <= N - 1; i++) {\n        int u, v, w;\n        cin >> u >>\
-    \ v >> w;\n        g.add_edge(u, v, w);\n    }\n    g.fix_root(0);\n\n    int\
-    \ Q;\n    cin >> Q;\n\n    while (Q--) {\n        int x, y, z;\n        cin >>\
-    \ x >> y >> z;\n        int xy = g.lowest_common_ancestor(x, y);\n        int\
-    \ xyz = g.lowest_common_ancestor(xy, z);\n        if (xy != xyz) {\n         \
-    \   cout << g.path_length(xy, z) + g.path_length(x, y) << '\\n';\n        } else\
-    \ {\n            int v = g.lowest_common_ancestor(x, z) + g.lowest_common_ancestor(y,\
-    \ z) - xy;\n            cout << g.path_length(x, y) + g.path_length(z, v) << '\\\
-    n';\n        }\n    }\n}\n"
-  code: "#include \"../lowest_common_ancestor.hpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"https://yukicoder.me/problems/no/898\"\nusing namespace std;\n\nint\
-    \ main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N;\n\
-    \    cin >> N;\n    UndirectedWeightedTree<long long> g(N);\n    for (int i =\
-    \ 1; i <= N - 1; i++) {\n        int u, v, w;\n        cin >> u >> v >> w;\n \
-    \       g.add_edge(u, v, w);\n    }\n    g.fix_root(0);\n\n    int Q;\n    cin\
-    \ >> Q;\n\n    while (Q--) {\n        int x, y, z;\n        cin >> x >> y >> z;\n\
-    \        int xy = g.lowest_common_ancestor(x, y);\n        int xyz = g.lowest_common_ancestor(xy,\
-    \ z);\n        if (xy != xyz) {\n            cout << g.path_length(xy, z) + g.path_length(x,\
-    \ y) << '\\n';\n        } else {\n            int v = g.lowest_common_ancestor(x,\
-    \ z) + g.lowest_common_ancestor(y, z) - xy;\n            cout << g.path_length(x,\
-    \ y) + g.path_length(z, v) << '\\n';\n        }\n    }\n}\n"
+    \  return kth_parent(t, dsl + dtl - k);\n        }\n    }\n};\n#line 3 \"tree/test/jump_on_tree.test.cpp\"\
+    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N, Q;\n    cin >> N >> Q;\n    UndirectedWeightedTree<int>\
+    \ tree(N);\n    for (int e = 0; e < N - 1; ++e) {\n        int a, b;\n       \
+    \ cin >> a >> b;\n        tree.add_edge(a, b, 1);\n    }\n\n    tree.fix_root(0);\n\
+    \n    while (Q--) {\n        int s, t, i;\n        cin >> s >> t >> i;\n     \
+    \   cout << tree.s_to_t_by_k_steps(s, t, i) << '\\n';\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/jump_on_tree\"\n#include\
+    \ \"../lowest_common_ancestor.hpp\"\n#include <iostream>\nusing namespace std;\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N,\
+    \ Q;\n    cin >> N >> Q;\n    UndirectedWeightedTree<int> tree(N);\n    for (int\
+    \ e = 0; e < N - 1; ++e) {\n        int a, b;\n        cin >> a >> b;\n      \
+    \  tree.add_edge(a, b, 1);\n    }\n\n    tree.fix_root(0);\n\n    while (Q--)\
+    \ {\n        int s, t, i;\n        cin >> s >> t >> i;\n        cout << tree.s_to_t_by_k_steps(s,\
+    \ t, i) << '\\n';\n    }\n}\n"
   dependsOn:
   - tree/lowest_common_ancestor.hpp
   isVerificationFile: true
-  path: tree/test/lca.yuki898.test.cpp
+  path: tree/test/jump_on_tree.test.cpp
   requiredBy: []
   timestamp: '2022-07-31 01:04:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: tree/test/lca.yuki898.test.cpp
+documentation_of: tree/test/jump_on_tree.test.cpp
 layout: document
 redirect_from:
-- /verify/tree/test/lca.yuki898.test.cpp
-- /verify/tree/test/lca.yuki898.test.cpp.html
-title: tree/test/lca.yuki898.test.cpp
+- /verify/tree/test/jump_on_tree.test.cpp
+- /verify/tree/test/jump_on_tree.test.cpp.html
+title: tree/test/jump_on_tree.test.cpp
 ---
