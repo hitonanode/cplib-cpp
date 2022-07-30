@@ -64,7 +64,7 @@ template <typename T> struct UndirectedWeightedTree {
         _doubling_precalc();
     }
 
-    int kth_parent(int x, int k) {
+    int kth_parent(int x, int k) const {
         if (depth[x] < k) return INVALID;
         for (int d = 0; d < lgV; d++) {
             if (x == INVALID) return INVALID;
@@ -73,7 +73,7 @@ template <typename T> struct UndirectedWeightedTree {
         return x;
     }
 
-    int lowest_common_ancestor(int u, int v) {
+    int lowest_common_ancestor(int u, int v) const {
         if (depth[u] > depth[v]) std::swap(u, v);
 
         v = kth_parent(v, depth[v] - depth[u]);
@@ -84,9 +84,23 @@ template <typename T> struct UndirectedWeightedTree {
         return par[u];
     }
 
-    T path_length(int u, int v) {
+    T path_length(int u, int v) const {
         // Not distance, but the sum of weights
         int r = lowest_common_ancestor(u, v);
         return (acc_weight[u] - acc_weight[r]) + (acc_weight[v] - acc_weight[r]);
+    }
+
+    int s_to_t_by_k_steps(int s, int t, int k) const {
+        int l = lowest_common_ancestor(s, t);
+        int dsl = depth[s] - depth[l], dtl = depth[t] - depth[l];
+        if (k > dsl + dtl) {
+            return INVALID;
+        } else if (k < dsl) {
+            return kth_parent(s, k);
+        } else if (k == dsl) {
+            return l;
+        } else {
+            return kth_parent(t, dsl + dtl - k);
+        }
     }
 };
