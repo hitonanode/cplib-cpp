@@ -89,31 +89,37 @@ data:
     \ << \"];\\n\";\n            }\n        }\n        ss << \"}\\n\";\n        ss.close();\n\
     \        return;\n    }\n\n    int _n;\n    struct _edge {\n        int to, rev;\n\
     \        Cap cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
-    \ g;\n};\n#line 6 \"combinatorial_opt/maxflow_lowerbound.hpp\"\n\n// CUT begin\n\
-    // MaxFlow with lower bound\n// https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
-    // https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp\n// flush(s,\
-    \ t): Calculate maxflow (if solution exists), -1 (otherwise)\ntemplate <typename\
-    \ Cap> struct MaxFlowLowerBound {\n    int N;\n    mf_graph<Cap> mf;\n    std::vector<Cap>\
-    \ in;\n    MaxFlowLowerBound(int N = 0) : N(N), mf(N + 2), in(N) {}\n    int add_edge(int\
-    \ from, int to, Cap cap_lo, Cap cap_hi) {\n        assert(0 <= from and from <\
-    \ N);\n        assert(0 <= to and to < N);\n        assert(0 <= cap_lo and cap_lo\
-    \ <= cap_hi);\n        in[from] -= cap_lo;\n        in[to] += cap_lo;\n      \
-    \  return mf.add_edge(from, to, cap_hi - cap_lo);\n    }\n    Cap flow(int s,\
-    \ int t) {\n        assert(s != t);\n        assert(0 <= s and s < N);\n     \
-    \   assert(0 <= t and t < N);\n        Cap sum = 0;\n        for (int i = 0; i\
-    \ < N; i++) {\n            if (in[i] > 0) mf.add_edge(N, i, in[i]), sum += in[i];\n\
-    \            if (in[i] < 0) mf.add_edge(i, N + 1, -in[i]);\n        }\n      \
-    \  mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n        if (mf.flow(N,\
-    \ N + 1) < sum) return -1;\n        return mf.flow(s, t);\n    }\n};\n#line 4\
-    \ \"combinatorial_opt/mcf_costscaling.hpp\"\n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\n\
-    template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20>\n\
-    struct mcf_costscaling {\n    mcf_costscaling() = default;\n    mcf_costscaling(int\
-    \ n) : _n(n), to(n), b(n), p(n) {}\n\n    int _n;\n    std::vector<Cap> cap;\n\
-    \    std::vector<Cost> cost;\n    std::vector<int> opposite;\n    std::vector<std::vector<int>>\
-    \ to;\n    std::vector<Cap> b;\n    std::vector<Cost> p;\n\n    int add_edge(int\
-    \ from_, int to_, Cap cap_, Cost cost_) {\n        assert(0 <= from_ and from_\
-    \ < _n);\n        assert(0 <= to_ and to_ < _n);\n        assert(0 <= cap_);\n\
-    \        cost_ *= (_n + 1);\n        const int e = int(cap.size());\n        to[from_].push_back(e);\n\
+    \ g;\n};\n#line 6 \"combinatorial_opt/maxflow_lowerbound.hpp\"\n\n// MaxFlow with\
+    \ lower bound\n// https://snuke.hatenablog.com/entry/2016/07/10/043918\n// https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp\n\
+    // flush(s, t): Calculate maxflow (if solution exists), -1 (otherwise)\ntemplate\
+    \ <typename Cap> struct MaxFlowLowerBound {\n    using Maxflow = mf_graph<Cap>;\n\
+    \    int N;\n    Maxflow mf;\n    std::vector<Cap> in;\n    MaxFlowLowerBound(int\
+    \ N = 0) : N(N), mf(N + 2), in(N) {}\n\n    std::vector<Cap> cap_lo_info;\n\n\
+    \    int add_edge(int from, int to, Cap cap_lo, Cap cap_hi) {\n        assert(0\
+    \ <= from and from < N);\n        assert(0 <= to and to < N);\n        assert(0\
+    \ <= cap_lo and cap_lo <= cap_hi);\n        in[from] -= cap_lo;\n        in[to]\
+    \ += cap_lo;\n        cap_lo_info.push_back(cap_lo);\n        return mf.add_edge(from,\
+    \ to, cap_hi - cap_lo);\n    }\n\n    Cap flow(int s, int t) {\n        assert(s\
+    \ != t);\n        assert(0 <= s and s < N);\n        assert(0 <= t and t < N);\n\
+    \        Cap sum = 0;\n        for (int i = 0; i < N; i++) {\n            if (in[i]\
+    \ > 0) mf.add_edge(N, i, in[i]), sum += in[i];\n            if (in[i] < 0) mf.add_edge(i,\
+    \ N + 1, -in[i]);\n        }\n        mf.add_edge(t, s, std::numeric_limits<Cap>::max());\n\
+    \        if (mf.flow(N, N + 1) < sum) return -1;\n        return mf.flow(s, t);\n\
+    \    }\n\n    typename Maxflow::edge get_edge(int i) {\n        auto ret = mf.get_edge(i);\n\
+    \        ret.cap += cap_lo_info.at(i);\n        ret.flow += cap_lo_info.at(i);\n\
+    \        return ret;\n    }\n\n    std::vector<typename Maxflow::edge> edges()\
+    \ {\n        std::vector<typename Maxflow::edge> result;\n        for (int i =\
+    \ 0; i < int(cap_lo_info.size()); ++i) result.push_back(get_edge(i));\n      \
+    \  return result;\n    }\n};\n#line 4 \"combinatorial_opt/mcf_costscaling.hpp\"\
+    \n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\ntemplate\
+    \ <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20>\nstruct mcf_costscaling\
+    \ {\n    mcf_costscaling() = default;\n    mcf_costscaling(int n) : _n(n), to(n),\
+    \ b(n), p(n) {}\n\n    int _n;\n    std::vector<Cap> cap;\n    std::vector<Cost>\
+    \ cost;\n    std::vector<int> opposite;\n    std::vector<std::vector<int>> to;\n\
+    \    std::vector<Cap> b;\n    std::vector<Cost> p;\n\n    int add_edge(int from_,\
+    \ int to_, Cap cap_, Cost cost_) {\n        assert(0 <= from_ and from_ < _n);\n\
+    \        assert(0 <= to_ and to_ < _n);\n        assert(0 <= cap_);\n        cost_\
+    \ *= (_n + 1);\n        const int e = int(cap.size());\n        to[from_].push_back(e);\n\
     \        cap.push_back(cap_);\n        cost.push_back(cost_);\n        opposite.push_back(to_);\n\
     \n        to[to_].push_back(e + 1);\n        cap.push_back(0);\n        cost.push_back(-cost_);\n\
     \        opposite.push_back(from_);\n        return e / 2;\n    }\n    void add_supply(int\
@@ -229,7 +235,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
   requiredBy: []
-  timestamp: '2022-07-03 23:17:35+09:00'
+  timestamp: '2022-08-07 17:26:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp

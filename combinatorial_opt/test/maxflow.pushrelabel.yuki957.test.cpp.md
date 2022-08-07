@@ -67,33 +67,33 @@ data:
     \ (const auto &e : g[now]) {\n                if (g[e.to][e.rev].cap and dist[e.to]\
     \ == _n) {\n                    dist[e.to] = dist[now] + 1;\n                \
     \    q[qe++] = e.to;\n                }\n            }\n        }\n    }\n   \
-    \ Cap flow(int s, int t, bool retrieve = true) {\n        return flow(s, t, std::numeric_limits<Cap>::max(),\
-    \ retrieve);\n    }\n    Cap flow(int s, int t, Cap flow_limit, bool retrieve\
-    \ = true) {\n        assert(0 <= s and s < _n);\n        assert(0 <= t and t <\
-    \ _n);\n        assert(s != t);\n        excess.resize(_n, 0);\n        excess[s]\
-    \ += flow_limit, excess[t] -= flow_limit;\n        dist.assign(_n, 0);\n     \
-    \   dist[s] = _n;\n        if (UseGapRelabeling) gap = 1, dcnt.assign(_n + 1,\
-    \ 0), dcnt[0] = _n - 1;\n        pque.init(_n);\n        for (auto &e : g[s])\
-    \ _push(s, e);\n        _run(t);\n        Cap ret = excess[t] + flow_limit;\n\
-    \        excess[s] += excess[t], excess[t] = 0;\n        if (retrieve) {\n   \
-    \         global_relabeling(s);\n            _run(s);\n            assert(excess\
-    \ == std::vector<Cap>(_n, 0));\n        }\n        return ret;\n    }\n    void\
-    \ _run(int t) {\n        if (GlobalRelabelFreq) global_relabeling(t);\n      \
-    \  int tick = pos.size() * GlobalRelabelFreq;\n        while (!pque.empty()) {\n\
-    \            int i = pque.pop();\n            if (UseGapRelabeling and dist[i]\
-    \ > gap) continue;\n            int dnxt = _n * 2 - 1;\n            for (auto\
-    \ &e : g[i]) {\n                if (!e.cap) continue;\n                if (dist[e.to]\
-    \ == dist[i] - 1) {\n                    _push(i, e);\n                    if\
-    \ (excess[i] == 0) break;\n                } else {\n                    if (dist[e.to]\
-    \ + 1 < dnxt) dnxt = dist[e.to] + 1;\n                }\n            }\n     \
-    \       if (excess[i] > 0) {\n                if (UseGapRelabeling) {\n      \
-    \              if (dnxt != dist[i] and dcnt[dist[i]] == 1 and dist[i] < gap) gap\
-    \ = dist[i];\n                    if (dnxt == gap) gap++;\n                  \
-    \  while (pque.highest() > gap) pque.pop();\n                    if (dnxt > gap)\
-    \ dnxt = _n;\n                    if (dist[i] != dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;\n\
-    \                }\n                dist[i] = dnxt;\n                if (!UseGapRelabeling\
-    \ or dist[i] < gap) pque.push(i, dist[i]);\n            }\n            if (GlobalRelabelFreq\
-    \ and --tick == 0) {\n                tick = pos.size() * GlobalRelabelFreq, global_relabeling(t);\n\
+    \ Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max(),\
+    \ true); }\n    Cap flow(int s, int t, Cap flow_limit, bool retrieve = true) {\n\
+    \        assert(0 <= s and s < _n);\n        assert(0 <= t and t < _n);\n    \
+    \    assert(s != t);\n        excess.resize(_n, 0);\n        excess[s] += flow_limit,\
+    \ excess[t] -= flow_limit;\n        dist.assign(_n, 0);\n        dist[s] = _n;\n\
+    \        if (UseGapRelabeling) gap = 1, dcnt.assign(_n + 1, 0), dcnt[0] = _n -\
+    \ 1;\n        pque.init(_n);\n        for (auto &e : g[s]) _push(s, e);\n    \
+    \    _run(t);\n        Cap ret = excess[t] + flow_limit;\n        excess[s] +=\
+    \ excess[t], excess[t] = 0;\n        if (retrieve) {\n            global_relabeling(s);\n\
+    \            _run(s);\n            assert(excess == std::vector<Cap>(_n, 0));\n\
+    \        }\n        return ret;\n    }\n    void _run(int t) {\n        if (GlobalRelabelFreq)\
+    \ global_relabeling(t);\n        int tick = pos.size() * GlobalRelabelFreq;\n\
+    \        while (!pque.empty()) {\n            int i = pque.pop();\n          \
+    \  if (UseGapRelabeling and dist[i] > gap) continue;\n            int dnxt = _n\
+    \ * 2 - 1;\n            for (auto &e : g[i]) {\n                if (!e.cap) continue;\n\
+    \                if (dist[e.to] == dist[i] - 1) {\n                    _push(i,\
+    \ e);\n                    if (excess[i] == 0) break;\n                } else\
+    \ {\n                    if (dist[e.to] + 1 < dnxt) dnxt = dist[e.to] + 1;\n \
+    \               }\n            }\n            if (excess[i] > 0) {\n         \
+    \       if (UseGapRelabeling) {\n                    if (dnxt != dist[i] and dcnt[dist[i]]\
+    \ == 1 and dist[i] < gap) gap = dist[i];\n                    if (dnxt == gap)\
+    \ gap++;\n                    while (pque.highest() > gap) pque.pop();\n     \
+    \               if (dnxt > gap) dnxt = _n;\n                    if (dist[i] !=\
+    \ dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;\n                }\n                dist[i]\
+    \ = dnxt;\n                if (!UseGapRelabeling or dist[i] < gap) pque.push(i,\
+    \ dist[i]);\n            }\n            if (GlobalRelabelFreq and --tick == 0)\
+    \ {\n                tick = pos.size() * GlobalRelabelFreq, global_relabeling(t);\n\
     \            }\n        }\n        return;\n    }\n\n    void _push(int i, _edge\
     \ &e) {\n        Cap delta = e.cap < excess[i] ? e.cap : excess[i];\n        excess[i]\
     \ -= delta, e.cap -= delta;\n        excess[e.to] += delta, g[e.to][e.rev].cap\
@@ -111,8 +111,8 @@ data:
     \     auto f0 = min<long long>(gtot, R[i]);\n        tot -= f0;\n        if (gtot\
     \ > f0) g.add_edge(0, i + 1, gtot - f0);\n        for (int j = 0; j < W; j++)\
     \ g.add_edge(i + 1, H + 1 + j, G[i][j]);\n    }\n    for (int j = 0; j < W; j++)\
-    \ g.add_edge(H + 1 + j, Z, C[j]);\n    cout << tot - g.flow(0, Z, false) << '\\\
-    n';\n}\n"
+    \ g.add_edge(H + 1 + j, Z, C[j]);\n    cout << tot - g.flow(0, Z, numeric_limits<long\
+    \ long>::max(), false) << '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/957\"\n#include \"../../utilities/reader.hpp\"\
     \n#include \"../maxflow_pushrelabel.hpp\"\n#include <algorithm>\n#include <iostream>\n\
     #include <numeric>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
@@ -126,14 +126,14 @@ data:
     \ -= f0;\n        if (gtot > f0) g.add_edge(0, i + 1, gtot - f0);\n        for\
     \ (int j = 0; j < W; j++) g.add_edge(i + 1, H + 1 + j, G[i][j]);\n    }\n    for\
     \ (int j = 0; j < W; j++) g.add_edge(H + 1 + j, Z, C[j]);\n    cout << tot - g.flow(0,\
-    \ Z, false) << '\\n';\n}\n"
+    \ Z, numeric_limits<long long>::max(), false) << '\\n';\n}\n"
   dependsOn:
   - utilities/reader.hpp
   - combinatorial_opt/maxflow_pushrelabel.hpp
   isVerificationFile: true
   path: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-08-07 17:26:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
