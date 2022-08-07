@@ -89,9 +89,7 @@ struct mf_pushrelabel {
             }
         }
     }
-    Cap flow(int s, int t, bool retrieve = true) {
-        return flow(s, t, std::numeric_limits<Cap>::max(), retrieve);
-    }
+    Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max(), true); }
     Cap flow(int s, int t, Cap flow_limit, bool retrieve = true) {
         assert(0 <= s and s < _n);
         assert(0 <= t and t < _n);

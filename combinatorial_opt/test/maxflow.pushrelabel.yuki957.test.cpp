@@ -29,5 +29,5 @@ int main() {
         for (int j = 0; j < W; j++) g.add_edge(i + 1, H + 1 + j, G[i][j]);
     }
     for (int j = 0; j < W; j++) g.add_edge(H + 1 + j, Z, C[j]);
-    cout << tot - g.flow(0, Z, false) << '\n';
+    cout << tot - g.flow(0, Z, numeric_limits<long long>::max(), false) << '\n';
 }
