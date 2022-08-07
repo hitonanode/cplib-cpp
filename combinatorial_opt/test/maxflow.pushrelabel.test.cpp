@@ -20,10 +20,10 @@ int main() {
         g10.add_edge(u, v, c);
         g11.add_edge(u, v, c);
     }
-    auto f00 = g00.flow(0, V - 1, true);
-    auto f01 = g01.flow(0, V - 1, true);
-    auto f10 = g10.flow(0, V - 1, true);
-    auto f11 = g11.flow(0, V - 1, true);
+    auto f00 = g00.flow(0, V - 1);
+    auto f01 = g01.flow(0, V - 1);
+    auto f10 = g10.flow(0, V - 1);
+    auto f11 = g11.flow(0, V - 1);
     assert(f00 == f01);
     assert(f00 == f10);
     assert(f00 == f11);
