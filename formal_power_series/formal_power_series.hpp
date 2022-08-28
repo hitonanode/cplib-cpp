@@ -132,7 +132,10 @@ template <typename T> struct FormalPowerSeries : std::vector<T> {
         if (deg == -1) deg = n;
         P ret({T(1) / (*this)[0]});
         for (int i = 1; i < deg; i <<= 1) {
-            ret = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1);
+            auto h = (pre(i << 1) * ret).pre(i << 1) >> i;
+            auto tmp = (-h * ret).pre(i);
+            ret.insert(ret.end(), tmp.begin(), tmp.end());
+            ret.resize(i << 1);
         }
         ret = ret.pre(deg);
         ret.shrink();
