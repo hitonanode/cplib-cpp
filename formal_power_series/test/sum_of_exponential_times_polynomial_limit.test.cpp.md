@@ -291,72 +291,74 @@ data:
     \    assert(this->size() and ((*this)[0]) != T(0)); // Requirement: F(0) != 0\n\
     \        const int n = this->size();\n        if (deg == -1) deg = n;\n      \
     \  P ret({T(1) / (*this)[0]});\n        for (int i = 1; i < deg; i <<= 1) {\n\
-    \            ret = (ret + ret - ret * ret * pre(i << 1)).pre(i << 1);\n      \
-    \  }\n        ret = ret.pre(deg);\n        ret.shrink();\n        return ret;\n\
-    \    }\n\n    P log(int deg = -1) const {\n        assert(deg >= -1);\n      \
-    \  assert(this->size() and ((*this)[0]) == T(1)); // Requirement: F(0) = 1\n \
-    \       const int n = (int)this->size();\n        if (deg == 0) return {};\n \
-    \       if (deg == -1) deg = n;\n        return (this->differential() * this->inv(deg)).pre(deg\
-    \ - 1).integral();\n    }\n\n    P sqrt(int deg = -1) const {\n        assert(deg\
-    \ >= -1);\n        const int n = (int)this->size();\n        if (deg == -1) deg\
-    \ = n;\n        if (this->empty()) return {};\n        if ((*this)[0] == T(0))\
-    \ {\n            for (int i = 1; i < n; i++)\n                if ((*this)[i] !=\
-    \ T(0)) {\n                    if ((i & 1) or deg - i / 2 <= 0) return {};\n \
-    \                   return (*this >> i).sqrt(deg - i / 2) << (i / 2);\n      \
-    \          }\n            return {};\n        }\n        T sqrtf0 = (*this)[0].sqrt();\n\
-    \        if (sqrtf0 == T(0)) return {};\n\n        P y = (*this) / (*this)[0],\
-    \ ret({T(1)});\n        T inv2 = T(1) / T(2);\n        for (int i = 1; i < deg;\
-    \ i <<= 1) ret = (ret + y.pre(i << 1) * ret.inv(i << 1)) * inv2;\n        return\
-    \ ret.pre(deg) * sqrtf0;\n    }\n\n    P exp(int deg = -1) const {\n        assert(deg\
-    \ >= -1);\n        assert(this->empty() or ((*this)[0]) == T(0)); // Requirement:\
-    \ F(0) = 0\n        const int n = (int)this->size();\n        if (deg == -1) deg\
-    \ = n;\n        P ret({T(1)});\n        for (int i = 1; i < deg; i <<= 1) {\n\
-    \            ret = (ret * (pre(i << 1) + T(1) - ret.log(i << 1))).pre(i << 1);\n\
-    \        }\n        return ret.pre(deg);\n    }\n\n    P pow(long long k, int\
-    \ deg = -1) const {\n        assert(deg >= -1);\n        const int n = (int)this->size();\n\
-    \        if (deg == -1) deg = n;\n\n        if (k == 0) {\n            P ret(deg);\n\
-    \            if (deg >= 1) ret[0] = T(1);\n            ret.shrink();\n       \
-    \     return ret;\n        }\n\n        for (int i = 0; i < n; i++) {\n      \
-    \      if ((*this)[i] != T(0)) {\n                T rev = T(1) / (*this)[i];\n\
-    \                P C = (*this) * rev, D(n - i);\n                for (int j =\
-    \ i; j < n; j++) D[j - i] = C.coeff(j);\n                D = (D.log(deg) * T(k)).exp(deg)\
-    \ * (*this)[i].pow(k);\n                if (__int128(k) * i > deg) return {};\n\
-    \                P E(deg);\n                long long S = i * k;\n           \
-    \     for (int j = 0; j + S < deg and j < (int)D.size(); j++) E[j + S] = D[j];\n\
-    \                E.shrink();\n                return E;\n            }\n     \
-    \   }\n        return *this;\n    }\n\n    // Calculate f(X + c) from f(X), O(NlogN)\n\
-    \    P shift(T c) const {\n        const int n = (int)this->size();\n        P\
-    \ ret = *this;\n        for (int i = 0; i < n; i++) ret[i] *= T(i).fac();\n  \
-    \      std::reverse(ret.begin(), ret.end());\n        P exp_cx(n, 1);\n      \
-    \  for (int i = 1; i < n; i++) exp_cx[i] = exp_cx[i - 1] * c / i;\n        ret\
-    \ = (ret * exp_cx), ret.resize(n);\n        std::reverse(ret.begin(), ret.end());\n\
-    \        for (int i = 0; i < n; i++) ret[i] /= T(i).fac();\n        return ret;\n\
-    \    }\n\n    T coeff(int i) const {\n        if ((int)this->size() <= i or i\
-    \ < 0) return T(0);\n        return (*this)[i];\n    }\n\n    T eval(T x) const\
-    \ {\n        T ret = 0, w = 1;\n        for (auto &v : *this) ret += w * v, w\
-    \ *= x;\n        return ret;\n    }\n};\n#line 5 \"formal_power_series/multipoint_evaluation.hpp\"\
-    \n\n// CUT begin\n// multipoint polynomial evaluation\n// input: xs = [x_0, ...,\
-    \ x_{N - 1}]: points to evaluate\n//        f = \\sum_i^M f_i x^i\n// Complexity:\
-    \ O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename\
-    \ Tfield> struct MultipointEvaluation {\n    int nx;\n    using polynomial = FormalPowerSeries<Tfield>;\n\
-    \    std::vector<polynomial> segtree;\n    MultipointEvaluation(const std::vector<Tfield>\
-    \ &xs) : nx(xs.size()) {\n        segtree.resize(nx * 2 - 1);\n        for (int\
-    \ i = 0; i < nx; i++) { segtree[nx - 1 + i] = {-xs[i], 1}; }\n        for (int\
-    \ i = nx - 2; i >= 0; i--) { segtree[i] = segtree[2 * i + 1] * segtree[2 * i +\
-    \ 2]; }\n    }\n    std::vector<Tfield> ret;\n    void _eval_rec(polynomial f,\
-    \ int now) {\n        f %= segtree[now];\n        if (now - (nx - 1) >= 0) {\n\
-    \            ret[now - (nx - 1)] = f.coeff(0);\n            return;\n        }\n\
-    \        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f, 2 * now + 2);\n    }\n\
-    \    std::vector<Tfield> evaluate_polynomial(const polynomial &f) {\n        ret.resize(nx);\n\
-    \        _eval_rec(f, 0);\n        return ret;\n    }\n    std::vector<Tfield>\
-    \ evaluate_polynomial(const std::vector<Tfield> &f) {\n        return evaluate_polynomial(polynomial(f.begin(),\
-    \ f.end()));\n    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial\
-    \ _rec_interpolation(int now, const std::vector<Tfield> &ys) const {\n       \
-    \ int i = now - (nx - 1);\n        if (i >= 0) return {ys[i]};\n        auto retl\
-    \ = _rec_interpolation(2 * now + 1, ys);\n        auto retr = _rec_interpolation(2\
-    \ * now + 2, ys);\n        return retl * segtree[2 * now + 2] + retr * segtree[2\
-    \ * now + 1];\n    }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield>\
-    \ ys) {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
+    \            auto h = (pre(i << 1) * ret).pre(i << 1) >> i;\n            auto\
+    \ tmp = (-h * ret).pre(i);\n            ret.insert(ret.end(), tmp.begin(), tmp.end());\n\
+    \            ret.resize(i << 1);\n        }\n        ret = ret.pre(deg);\n   \
+    \     ret.shrink();\n        return ret;\n    }\n\n    P log(int deg = -1) const\
+    \ {\n        assert(deg >= -1);\n        assert(this->size() and ((*this)[0])\
+    \ == T(1)); // Requirement: F(0) = 1\n        const int n = (int)this->size();\n\
+    \        if (deg == 0) return {};\n        if (deg == -1) deg = n;\n        return\
+    \ (this->differential() * this->inv(deg)).pre(deg - 1).integral();\n    }\n\n\
+    \    P sqrt(int deg = -1) const {\n        assert(deg >= -1);\n        const int\
+    \ n = (int)this->size();\n        if (deg == -1) deg = n;\n        if (this->empty())\
+    \ return {};\n        if ((*this)[0] == T(0)) {\n            for (int i = 1; i\
+    \ < n; i++)\n                if ((*this)[i] != T(0)) {\n                    if\
+    \ ((i & 1) or deg - i / 2 <= 0) return {};\n                    return (*this\
+    \ >> i).sqrt(deg - i / 2) << (i / 2);\n                }\n            return {};\n\
+    \        }\n        T sqrtf0 = (*this)[0].sqrt();\n        if (sqrtf0 == T(0))\
+    \ return {};\n\n        P y = (*this) / (*this)[0], ret({T(1)});\n        T inv2\
+    \ = T(1) / T(2);\n        for (int i = 1; i < deg; i <<= 1) ret = (ret + y.pre(i\
+    \ << 1) * ret.inv(i << 1)) * inv2;\n        return ret.pre(deg) * sqrtf0;\n  \
+    \  }\n\n    P exp(int deg = -1) const {\n        assert(deg >= -1);\n        assert(this->empty()\
+    \ or ((*this)[0]) == T(0)); // Requirement: F(0) = 0\n        const int n = (int)this->size();\n\
+    \        if (deg == -1) deg = n;\n        P ret({T(1)});\n        for (int i =\
+    \ 1; i < deg; i <<= 1) {\n            ret = (ret * (pre(i << 1) + T(1) - ret.log(i\
+    \ << 1))).pre(i << 1);\n        }\n        return ret.pre(deg);\n    }\n\n   \
+    \ P pow(long long k, int deg = -1) const {\n        assert(deg >= -1);\n     \
+    \   const int n = (int)this->size();\n        if (deg == -1) deg = n;\n\n    \
+    \    if (k == 0) {\n            P ret(deg);\n            if (deg >= 1) ret[0]\
+    \ = T(1);\n            ret.shrink();\n            return ret;\n        }\n\n \
+    \       for (int i = 0; i < n; i++) {\n            if ((*this)[i] != T(0)) {\n\
+    \                T rev = T(1) / (*this)[i];\n                P C = (*this) * rev,\
+    \ D(n - i);\n                for (int j = i; j < n; j++) D[j - i] = C.coeff(j);\n\
+    \                D = (D.log(deg) * T(k)).exp(deg) * (*this)[i].pow(k);\n     \
+    \           if (__int128(k) * i > deg) return {};\n                P E(deg);\n\
+    \                long long S = i * k;\n                for (int j = 0; j + S <\
+    \ deg and j < (int)D.size(); j++) E[j + S] = D[j];\n                E.shrink();\n\
+    \                return E;\n            }\n        }\n        return *this;\n\
+    \    }\n\n    // Calculate f(X + c) from f(X), O(NlogN)\n    P shift(T c) const\
+    \ {\n        const int n = (int)this->size();\n        P ret = *this;\n      \
+    \  for (int i = 0; i < n; i++) ret[i] *= T(i).fac();\n        std::reverse(ret.begin(),\
+    \ ret.end());\n        P exp_cx(n, 1);\n        for (int i = 1; i < n; i++) exp_cx[i]\
+    \ = exp_cx[i - 1] * c / i;\n        ret = (ret * exp_cx), ret.resize(n);\n   \
+    \     std::reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n; i++)\
+    \ ret[i] /= T(i).fac();\n        return ret;\n    }\n\n    T coeff(int i) const\
+    \ {\n        if ((int)this->size() <= i or i < 0) return T(0);\n        return\
+    \ (*this)[i];\n    }\n\n    T eval(T x) const {\n        T ret = 0, w = 1;\n \
+    \       for (auto &v : *this) ret += w * v, w *= x;\n        return ret;\n   \
+    \ }\n};\n#line 5 \"formal_power_series/multipoint_evaluation.hpp\"\n\n// CUT begin\n\
+    // multipoint polynomial evaluation\n// input: xs = [x_0, ..., x_{N - 1}]: points\
+    \ to evaluate\n//        f = \\sum_i^M f_i x^i\n// Complexity: O(N (lgN)^2) building,\
+    \ O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename Tfield> struct MultipointEvaluation\
+    \ {\n    int nx;\n    using polynomial = FormalPowerSeries<Tfield>;\n    std::vector<polynomial>\
+    \ segtree;\n    MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size())\
+    \ {\n        segtree.resize(nx * 2 - 1);\n        for (int i = 0; i < nx; i++)\
+    \ { segtree[nx - 1 + i] = {-xs[i], 1}; }\n        for (int i = nx - 2; i >= 0;\
+    \ i--) { segtree[i] = segtree[2 * i + 1] * segtree[2 * i + 2]; }\n    }\n    std::vector<Tfield>\
+    \ ret;\n    void _eval_rec(polynomial f, int now) {\n        f %= segtree[now];\n\
+    \        if (now - (nx - 1) >= 0) {\n            ret[now - (nx - 1)] = f.coeff(0);\n\
+    \            return;\n        }\n        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f,\
+    \ 2 * now + 2);\n    }\n    std::vector<Tfield> evaluate_polynomial(const polynomial\
+    \ &f) {\n        ret.resize(nx);\n        _eval_rec(f, 0);\n        return ret;\n\
+    \    }\n    std::vector<Tfield> evaluate_polynomial(const std::vector<Tfield>\
+    \ &f) {\n        return evaluate_polynomial(polynomial(f.begin(), f.end()));\n\
+    \    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial _rec_interpolation(int\
+    \ now, const std::vector<Tfield> &ys) const {\n        int i = now - (nx - 1);\n\
+    \        if (i >= 0) return {ys[i]};\n        auto retl = _rec_interpolation(2\
+    \ * now + 1, ys);\n        auto retr = _rec_interpolation(2 * now + 2, ys);\n\
+    \        return retl * segtree[2 * now + 2] + retr * segtree[2 * now + 1];\n \
+    \   }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys)\
+    \ {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
     \ {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
     \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
     \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n        return\
@@ -388,7 +390,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2022-07-12 00:34:46+09:00'
+  timestamp: '2022-08-28 23:29:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp

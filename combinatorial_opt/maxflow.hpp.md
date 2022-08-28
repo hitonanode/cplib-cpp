@@ -168,10 +168,10 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
   - combinatorial_opt/test/maxflow.test.cpp
-  - combinatorial_opt/test/b_flow.test.cpp
+  - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
   - combinatorial_opt/test/mcf_costscaling.test.cpp
+  - combinatorial_opt/test/b_flow.test.cpp
 documentation_of: combinatorial_opt/maxflow.hpp
 layout: document
 redirect_from:
