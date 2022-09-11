@@ -209,7 +209,7 @@ $
 本問題は，$N$ 個の独立変数 $\mathbf{x} = [x_1, \dots, x_N]$ と $M$ 個の従属変数 $\mathbf{y} = [y_1, \dots, y_M], \ y_i = f_i(\mathbf{x})$, $f_i$ はアフィン関数，があって，$\mathbf{x} \ge 0, \ \mathbf{y} \ge 0$ のもとでの何らかのアフィン関数 $g(\mathbf{x})$ の最大化問題とみなせる．このとき，$x_j$ と $y_i$ は対称的な関係にあるから，適宜 $x_j$ と $y_i$ の要素を交換し，別の座標系 $[x_1, \dots, x_{j - 1}, y_i, x_{j + 1}, \dots, x_N]$ に乗り換えてしまっても大丈夫そうである（$N$ 次元 Euclid 空間という多様体に，様々な局所座標が入っているということ）．最大値を求めるのに都合の良い座標系へと次々に乗り換えていく（座標系の原点が，実行可能領域である多面体の特定の頂点に対応する）というのが単体法のやっていることである．
 
 ある時点での独立変数を $\mathbf{x} = [x_1, \dots, x_j, \dots, x_N]$，従属変数を $\mathbf{y} = [y_1, \dots, y_i, \dots, y_M]$ とおいて，$\mathbf{y} = \mathbf{M} \mathbf{x}$ と書けるとする（定数項は適宜ベクトルを拡張して表現したものとする）．
-簡単のため，基底変数 $x_N$ と非基底変数 $y_M$ を取り替えるとする．これを行うには，$\mathbf{y}' = [y_1, \dots, y_{M - 1}, x_N], \ \mathbf{x}' = [x_1, \dots, x_{N - 1}, y_M]$ として，$\mathbf{y}' = \mathbf{M}' \mathbf{x}'$ をみたす $\mathbf{M}'$ を求めればよい．これは，もともと $\mathbf{M}$ が
+簡単のため，非基底変数 $x_N$ と基底変数 $y_M$ を取り替えるとする．これを行うには，$\mathbf{y}' = [y_1, \dots, y_{M - 1}, x_N], \ \mathbf{x}' = [x_1, \dots, x_{N - 1}, y_M]$ として，$\mathbf{y}' = \mathbf{M}' \mathbf{x}'$ をみたす $\mathbf{M}'$ を求めればよい．これは，もともと $\mathbf{M}$ が
 
 $\displaystyle
 \mathbf{M} = 
