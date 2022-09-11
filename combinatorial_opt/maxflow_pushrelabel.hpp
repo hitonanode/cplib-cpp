@@ -56,7 +56,7 @@ struct mf_pushrelabel {
         int m = int(pos.size());
         assert(0 <= i and i < m);
         auto e = g[pos[i].first][pos[i].second], re = g[e.to][e.rev];
-        return edge{pos[i].first, e.co, e.cap + re.cap, re.cap};
+        return edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
     }
     std::vector<edge> edges() const {
         std::vector<edge> ret(pos.size());
@@ -84,6 +84,7 @@ struct mf_pushrelabel {
             for (const auto &e : g[now]) {
                 if (g[e.to][e.rev].cap and dist[e.to] == _n) {
                     dist[e.to] = dist[now] + 1;
+                    while (int(q.size()) <= qe) q.push_back(0);
                     q[qe++] = e.to;
                 }
             }
