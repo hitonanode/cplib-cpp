@@ -53,7 +53,7 @@ data:
     \    }\n\n    struct edge {\n        int from, to;\n        Cap cap, flow;\n \
     \   };\n\n    edge get_edge(int i) const {\n        int m = int(pos.size());\n\
     \        assert(0 <= i and i < m);\n        auto e = g[pos[i].first][pos[i].second],\
-    \ re = g[e.to][e.rev];\n        return edge{pos[i].first, e.co, e.cap + re.cap,\
+    \ re = g[e.to][e.rev];\n        return edge{pos[i].first, e.to, e.cap + re.cap,\
     \ re.cap};\n    }\n    std::vector<edge> edges() const {\n        std::vector<edge>\
     \ ret(pos.size());\n        for (int i = 0; i < int(pos.size()); i++) ret[i] =\
     \ get_edge(i);\n        return ret;\n    }\n\n    std::vector<int> dist;\n   \
@@ -66,18 +66,19 @@ data:
     \            if (excess[now] > 0) pque.push(now, dist[now]);\n            for\
     \ (const auto &e : g[now]) {\n                if (g[e.to][e.rev].cap and dist[e.to]\
     \ == _n) {\n                    dist[e.to] = dist[now] + 1;\n                \
-    \    q[qe++] = e.to;\n                }\n            }\n        }\n    }\n   \
-    \ Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max(),\
-    \ true); }\n    Cap flow(int s, int t, Cap flow_limit, bool retrieve = true) {\n\
-    \        assert(0 <= s and s < _n);\n        assert(0 <= t and t < _n);\n    \
-    \    assert(s != t);\n        excess.resize(_n, 0);\n        excess[s] += flow_limit,\
-    \ excess[t] -= flow_limit;\n        dist.assign(_n, 0);\n        dist[s] = _n;\n\
-    \        if (UseGapRelabeling) gap = 1, dcnt.assign(_n + 1, 0), dcnt[0] = _n -\
-    \ 1;\n        pque.init(_n);\n        for (auto &e : g[s]) _push(s, e);\n    \
-    \    _run(t);\n        Cap ret = excess[t] + flow_limit;\n        excess[s] +=\
-    \ excess[t], excess[t] = 0;\n        if (retrieve) {\n            global_relabeling(s);\n\
-    \            _run(s);\n            assert(excess == std::vector<Cap>(_n, 0));\n\
-    \        }\n        return ret;\n    }\n    void _run(int t) {\n        if (GlobalRelabelFreq)\
+    \    while (int(q.size()) <= qe) q.push_back(0);\n                    q[qe++]\
+    \ = e.to;\n                }\n            }\n        }\n    }\n    Cap flow(int\
+    \ s, int t) { return flow(s, t, std::numeric_limits<Cap>::max(), true); }\n  \
+    \  Cap flow(int s, int t, Cap flow_limit, bool retrieve = true) {\n        assert(0\
+    \ <= s and s < _n);\n        assert(0 <= t and t < _n);\n        assert(s != t);\n\
+    \        excess.resize(_n, 0);\n        excess[s] += flow_limit, excess[t] -=\
+    \ flow_limit;\n        dist.assign(_n, 0);\n        dist[s] = _n;\n        if\
+    \ (UseGapRelabeling) gap = 1, dcnt.assign(_n + 1, 0), dcnt[0] = _n - 1;\n    \
+    \    pque.init(_n);\n        for (auto &e : g[s]) _push(s, e);\n        _run(t);\n\
+    \        Cap ret = excess[t] + flow_limit;\n        excess[s] += excess[t], excess[t]\
+    \ = 0;\n        if (retrieve) {\n            global_relabeling(s);\n         \
+    \   _run(s);\n            assert(excess == std::vector<Cap>(_n, 0));\n       \
+    \ }\n        return ret;\n    }\n    void _run(int t) {\n        if (GlobalRelabelFreq)\
     \ global_relabeling(t);\n        int tick = pos.size() * GlobalRelabelFreq;\n\
     \        while (!pque.empty()) {\n            int i = pque.pop();\n          \
     \  if (UseGapRelabeling and dist[i] > gap) continue;\n            int dnxt = _n\
@@ -133,7 +134,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
   requiredBy: []
-  timestamp: '2022-08-07 17:26:03+09:00'
+  timestamp: '2022-09-11 11:21:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
