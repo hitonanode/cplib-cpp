@@ -7,6 +7,8 @@ documentation_of: ./lca_rmq.hpp
 
 ## 使用方法
 
+`add_edge(int u, int v)` を $N - 1$ 回行って木を構築した後，`build(int root)` によって根を指定する．
+
 ```cpp
 TreeLCA tree(N);
 for (int e = 0; e < N - 1; e++) {
@@ -14,6 +16,8 @@ for (int e = 0; e < N - 1; e++) {
     cin >> u >> v;
     tree.add_edge(u, v);
 }
+
+tree.build(0);
 
 cout << tree.lca(a, b) << '\n'; // (a, b) の最長共通祖先
 cout << tree.path_length(a, b) << '\n'; // 2 頂点 a, b の距離

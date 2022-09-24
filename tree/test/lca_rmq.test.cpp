@@ -11,5 +11,7 @@ int main() {
     TreeLCA tree(N);
     for (int i = 1; i <= N - 1; i++) cin >> p, tree.add_edge(i, p);
 
+    tree.build(0);
+
     while (Q--) cout << tree.lca((cin >> u, u), (cin >> v, v)) << '\n';
 }
