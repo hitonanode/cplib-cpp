@@ -78,10 +78,10 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/zero_one_bfs.yuki1695.test.cpp
-  - graph/test/shortest_path_dial.yuki1695.test.cpp
   - string/test/manacher.test.cpp
   - string/test/manacher_mp.test.cpp
+  - graph/test/zero_one_bfs.yuki1695.test.cpp
+  - graph/test/shortest_path_dial.yuki1695.test.cpp
 documentation_of: string/manacher.hpp
 layout: document
 title: "Longest palindromic substring enumeration (Manacher's algorithm) \uFF08\u56DE\
