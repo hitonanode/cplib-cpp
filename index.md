@@ -658,9 +658,6 @@ data:
       path: unionfind/unionfind.hpp
       title: unionfind/unionfind.hpp
     - icon: ':heavy_check_mark:'
-      path: unionfind/unionfind_rankbased.hpp
-      title: unionfind/unionfind_rankbased.hpp
-    - icon: ':heavy_check_mark:'
       path: unionfind/weighted_unionfind.hpp
       title: "Weighted UnionFind \uFF08\u91CD\u307F\u4ED8\u304D UnionFind\uFF09"
   - name: utilities
@@ -1462,9 +1459,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: unionfind/test/unionfind.test.cpp
       title: unionfind/test/unionfind.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: unionfind/test/unionfind_rankbased.test.cpp
-      title: unionfind/test/unionfind_rankbased.test.cpp
     - icon: ':heavy_check_mark:'
       path: unionfind/test/weighted_unionfind.test.cpp
       title: unionfind/test/weighted_unionfind.test.cpp

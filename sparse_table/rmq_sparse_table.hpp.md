@@ -64,15 +64,15 @@ data:
   isVerificationFile: false
   path: sparse_table/rmq_sparse_table.hpp
   requiredBy:
-  - string/longest_common_prefix.hpp
   - tree/lca_rmq.hpp
+  - string/longest_common_prefix.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - tree/test/lca_rmq.test.cpp
   - string/test/run_enumerate_lyndon_rmq.test.cpp
   - sparse_table/test/sparse_table_aoj.test.cpp
   - sparse_table/test/sparse_table.test.cpp
-  - tree/test/lca_rmq.test.cpp
 documentation_of: sparse_table/rmq_sparse_table.hpp
 layout: document
 redirect_from:

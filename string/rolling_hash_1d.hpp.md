@@ -132,10 +132,10 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - string/test/run_enumerate_lyndon_hash.test.cpp
   - string/test/rolling_hash_lcp.test.cpp
-  - string/test/rolling_hash.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
+  - string/test/rolling_hash.test.cpp
+  - string/test/run_enumerate_lyndon_hash.test.cpp
 documentation_of: string/rolling_hash_1d.hpp
 layout: document
 redirect_from:
