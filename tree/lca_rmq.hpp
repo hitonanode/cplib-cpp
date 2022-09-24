@@ -5,12 +5,11 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
 struct TreeLCA {
     const int N;
     std::vector<std::vector<int>> to;
-    bool built;
-    TreeLCA(int V = 0) : N(V), to(V), built(false) {}
+    int root;
+    TreeLCA(int V = 0) : N(V), to(V), root(-1) {}
 
     void add_edge(int u, int v) {
         assert(0 <= u and u < N);
@@ -37,25 +36,29 @@ struct TreeLCA {
     }
 
     StaticRMQ<P> rmq;
-    void build(int root = 0) {
-        assert(root >= 0 and root < N);
-        built = true;
-        subtree_begin.resize(N);
+    void build(int root_) {
+        assert(root_ >= 0 and root_ < N);
+        if (root == root_) return;
+        root = root_;
+        subtree_begin.assign(N, 0);
+        vis_order.clear();
         vis_order.reserve(N * 2);
-        depth.resize(N);
+        depth.assign(N, 0);
         _build_dfs(root, -1, 0);
         rmq = {vis_order, P{N, -1}};
     }
 
-    int lca(int u, int v) {
+    bool built() const noexcept { return root >= 0; }
+
+    int lca(int u, int v) const {
         assert(0 <= u and u < N);
         assert(0 <= v and v < N);
-        if (!built) build();
+        assert(built());
 
-        auto a = subtree_begin[u], b = subtree_begin[v];
+        int a = subtree_begin[u], b = subtree_begin[v];
         if (a > b) std::swap(a, b);
         return rmq.get(a, b + 1).second;
     };
 
-    int path_length(int u, int v) { return depth[u] + depth[v] - depth[lca(u, v)] * 2; }
+    int path_length(int u, int v) const { return depth[u] + depth[v] - depth[lca(u, v)] * 2; }
 };
