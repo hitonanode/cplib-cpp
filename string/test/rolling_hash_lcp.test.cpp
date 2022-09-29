@@ -9,7 +9,7 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int N;
     cin >> N;
-    vector<rolling_hash<DoubleHash>> rhs, rhs_rev;
+    vector<rolling_hash<DoubleHash<>>> rhs, rhs_rev;
     for (int i = 0; i < N; i++) {
         string s;
         cin >> s;

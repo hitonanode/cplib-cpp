@@ -5,18 +5,17 @@
 #include <string>
 #include <vector>
 
-// CUT begin
-struct DoubleHash : public std::pair<unsigned, unsigned> {
-    using ull = unsigned long long;
-    using pair = std::pair<unsigned, unsigned>;
-    static std::pair<unsigned, unsigned> MODs;
-    DoubleHash(std::pair<unsigned, unsigned> x) : pair(x) {}
-    DoubleHash(unsigned x, unsigned y) : pair(x, y) {}
-    DoubleHash(unsigned x) : DoubleHash(x, x) {}
+template <int MOD1 = 1000000007, int MOD2 = 998244353>
+struct DoubleHash : public std::pair<int, int> {
+    using ll = long long;
+    using pair = std::pair<int, int>;
+    DoubleHash(const pair &x) : pair(x) {}
+    DoubleHash(int x, int y) : pair(x, y) {}
+    explicit DoubleHash(int x) : DoubleHash(x, x) {}
     DoubleHash() : DoubleHash(0) {}
     static inline DoubleHash mod_subtract(pair x) {
-        if (x.first >= MODs.first) x.first -= MODs.first;
-        if (x.second >= MODs.second) x.second -= MODs.second;
+        if (x.first >= MOD1) x.first -= MOD1;
+        if (x.second >= MOD2) x.second -= MOD2;
         return x;
     }
     DoubleHash operator+(const DoubleHash &x) const {
@@ -26,31 +25,24 @@ struct DoubleHash : public std::pair<unsigned, unsigned> {
         return mod_subtract({this->first + x, this->second + x});
     }
     DoubleHash operator-(const DoubleHash &x) const {
-        return mod_subtract(
-            {this->first + MODs.first - x.first, this->second + MODs.second - x.second});
+        return mod_subtract({this->first + MOD1 - x.first, this->second + MOD2 - x.second});
     }
     DoubleHash operator*(const DoubleHash &x) const {
-        return {unsigned(ull(this->first) * x.first % MODs.first),
-                unsigned(ull(this->second) * x.second % MODs.second)};
+        return {int(ll(this->first) * x.first % MOD1), int(ll(this->second) * x.second % MOD2)};
     }
-    DoubleHash operator*(unsigned x) const {
-        return {unsigned(ull(this->first) * x % MODs.first),
-                unsigned(ull(this->second) * x % MODs.second)};
-    }
-    static DoubleHash gen_b(bool force_update = false) {
+    static DoubleHash randgen(bool force_update = false) {
         static DoubleHash b{0, 0};
         if (b == DoubleHash{0, 0} or force_update) {
             std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());
-            std::uniform_int_distribution<unsigned> d(1 << 16, 1 << 29);
+            std::uniform_int_distribution<int> d(1 << 16, 1 << 30);
             b = {d(mt), d(mt)};
         }
         return b;
     }
 };
-std::pair<unsigned, unsigned> DoubleHash::MODs{1000000007, 998244353};
 
 // Rolling Hash (Rabin-Karp), 1dim
-template <typename V = DoubleHash> struct rolling_hash {
+template <typename V = DoubleHash<>> struct rolling_hash {
     int N;
     const V B;
     std::vector<V> hash;         // hash[i] = s[0] * B^(i - 1) + ... + s[i - 1]
@@ -62,11 +54,11 @@ template <typename V = DoubleHash> struct rolling_hash {
         }
     }
     template <typename Int>
-    rolling_hash(const std::vector<Int> &s, V b = V::gen_b()) : N(s.size()), B(b), hash(N + 1) {
+    rolling_hash(const std::vector<Int> &s, V b = V::randgen()) : N(s.size()), B(b), hash(N + 1) {
         for (int i = 0; i < N; i++) hash[i + 1] = hash[i] * B + s[i];
         _extend_powvec();
     }
-    rolling_hash(const std::string &s = "", V b = V::gen_b()) : N(s.size()), B(b), hash(N + 1) {
+    rolling_hash(const std::string &s = "", V b = V::randgen()) : N(s.size()), B(b), hash(N + 1) {
         for (int i = 0; i < N; i++) hash[i + 1] = hash[i] * B + s[i];
         _extend_powvec();
     }
@@ -80,7 +72,7 @@ template <typename V = DoubleHash> struct rolling_hash {
     }
     int lcplen(int l1, int l2) const { return longest_common_prefix(*this, l1, *this, l2); }
 };
-template <typename V> std::vector<V> rolling_hash<V>::power{1};
+template <typename V> std::vector<V> rolling_hash<V>::power{V(1)};
 
 // Longest common prerfix between s1[l1, N1) and s2[l2, N2)
 template <typename T>
