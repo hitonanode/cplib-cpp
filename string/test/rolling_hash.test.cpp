@@ -8,7 +8,7 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     string T, P;
     cin >> T >> P;
-    rolling_hash<DoubleHash> rh_T(T), rh_P(P);
+    rolling_hash<DoubleHash<>> rh_T(T), rh_P(P);
 
     for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {
         if (rh_T.get(l, l + P.length()) == rh_P.get(0, P.length())) cout << l << '\n';
