@@ -288,8 +288,8 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/lazy_rbst.stress.test.cpp
   - data_structure/test/lazy_rbst.test.cpp
+  - data_structure/test/lazy_rbst.stress.test.cpp
 documentation_of: data_structure/lazy_rbst.hpp
 layout: document
 title: Randomized binary search tree with lazy propagation

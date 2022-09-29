@@ -421,6 +421,10 @@ data:
       title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\
         \u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF09"
     - icon: ':heavy_check_mark:'
+      path: number/modint_mersenne61.hpp
+      title: "$\\mathbb{F}_{2^{61} - 1}$ \uFF08\u30CF\u30C3\u30B7\u30E5\u7528\u30E1\
+        \u30EB\u30BB\u30F3\u30CC\u7D20\u6570 modint\uFF09"
+    - icon: ':heavy_check_mark:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
@@ -1381,11 +1385,17 @@ data:
       path: string/test/rolling_hash_lcp.test.cpp
       title: string/test/rolling_hash_lcp.test.cpp
     - icon: ':heavy_check_mark:'
+      path: string/test/rolling_hash_mersenne61.test.cpp
+      title: string/test/rolling_hash_mersenne61.test.cpp
+    - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_w_modint.test.cpp
       title: string/test/rolling_hash_w_modint.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/run_enumerate_lyndon_hash.test.cpp
       title: string/test/run_enumerate_lyndon_hash.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/run_enumerate_lyndon_mersenne61.test.cpp
+      title: string/test/run_enumerate_lyndon_mersenne61.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/run_enumerate_lyndon_rmq.test.cpp
       title: string/test/run_enumerate_lyndon_rmq.test.cpp

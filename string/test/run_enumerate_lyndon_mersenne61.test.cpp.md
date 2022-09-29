@@ -2,6 +2,10 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: number/modint_mersenne61.hpp
+    title: "$\\mathbb{F}_{2^{61} - 1}$ \uFF08\u30CF\u30C3\u30B7\u30E5\u7528\u30E1\u30EB\
+      \u30BB\u30F3\u30CC\u7D20\u6570 modint\uFF09"
+  - icon: ':heavy_check_mark:'
     path: string/lyndon.hpp
     title: "Lyndon words \uFF08Lyndon \u6587\u5B57\u5217\u306B\u95A2\u3059\u308B\u5404\
       \u7A2E\u95A2\u6570\uFF09"
@@ -18,8 +22,47 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/runenumerate
     links:
     - https://judge.yosupo.jp/problem/runenumerate
-  bundledCode: "#line 2 \"string/lyndon.hpp\"\n#include <algorithm>\n#include <cassert>\n\
-    #include <functional>\n#include <string>\n#include <tuple>\n#include <utility>\n\
+  bundledCode: "#line 2 \"number/modint_mersenne61.hpp\"\n#include <cassert>\n#include\
+    \ <chrono>\n#include <random>\n\n// F_p, p = 2^61 - 1\n// https://qiita.com/keymoon/items/11fac5627672a6d6a9f6\n\
+    class ModIntMersenne61 {\n    static const long long md = (1LL << 61) - 1;\n \
+    \   long long _v;\n\n    inline unsigned hi() const noexcept { return _v >> 31;\
+    \ }\n    inline unsigned lo() const noexcept { return _v & ((1LL << 31) - 1);\
+    \ }\n\npublic:\n    static long long mod() { return md; }\n\n    ModIntMersenne61()\
+    \ : _v(0) {}\n    // 0 <= x < md * 2\n    explicit ModIntMersenne61(long long\
+    \ x) : _v(x >= md ? x - md : x) {}\n\n    long long val() const noexcept { return\
+    \ _v; }\n\n    ModIntMersenne61 operator+(const ModIntMersenne61 &x) const {\n\
+    \        return ModIntMersenne61(_v + x._v);\n    }\n\n    ModIntMersenne61 operator-(const\
+    \ ModIntMersenne61 &x) const {\n        return ModIntMersenne61(_v + md - x._v);\n\
+    \    }\n\n    ModIntMersenne61 operator*(const ModIntMersenne61 &x) const {\n\
+    \        using ull = unsigned long long;\n\n        ull uu = (ull)hi() * x.hi()\
+    \ * 2;\n        ull ll = (ull)lo() * x.lo();\n        ull lu = (ull)hi() * x.lo()\
+    \ + (ull)lo() * x.hi();\n\n        ull sum = uu + ll + ((lu & ((1ULL << 30) -\
+    \ 1)) << 31) + (lu >> 30);\n        ull reduced = (sum >> 61) + (sum & ull(md));\n\
+    \        return ModIntMersenne61(reduced);\n    }\n\n    ModIntMersenne61 pow(long\
+    \ long n) const {\n        assert(n >= 0);\n        ModIntMersenne61 ans(1), tmp\
+    \ = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n        \
+    \    tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n    ModIntMersenne61\
+    \ inv() const { return pow(md - 2); }\n\n    ModIntMersenne61 operator/(const\
+    \ ModIntMersenne61 &x) const {\n        return *this * x.inv();\n    }\n\n   \
+    \ ModIntMersenne61 operator-() const { return ModIntMersenne61(md - _v); }\n \
+    \   ModIntMersenne61 &operator+=(const ModIntMersenne61 &x) { return *this = *this\
+    \ + x; }\n    ModIntMersenne61 &operator-=(const ModIntMersenne61 &x) { return\
+    \ *this = *this - x; }\n    ModIntMersenne61 &operator*=(const ModIntMersenne61\
+    \ &x) { return *this = *this * x; }\n    ModIntMersenne61 &operator/=(const ModIntMersenne61\
+    \ &x) { return *this = *this / x; }\n\n    ModIntMersenne61 operator+(unsigned\
+    \ x) const {\n        return ModIntMersenne61(this->_v + x);\n    }\n\n    bool\
+    \ operator==(const ModIntMersenne61 &x) const { return _v == x._v; }\n    bool\
+    \ operator!=(const ModIntMersenne61 &x) const { return _v != x._v; }\n    bool\
+    \ operator<(const ModIntMersenne61 &x) const {\n        return _v < x._v;\n  \
+    \  } // To use std::map\n\n    template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const ModIntMersenne61 &x) {\n        return os << x._v;\n    }\n\n   \
+    \ static ModIntMersenne61 randgen(bool force_update = false) {\n        static\
+    \ ModIntMersenne61 b(0);\n        if (b == ModIntMersenne61(0) or force_update)\
+    \ {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \            std::uniform_int_distribution<long long> d(1, ModIntMersenne61::mod());\n\
+    \            b = ModIntMersenne61(d(mt));\n        }\n        return b;\n    }\n\
+    };\n#line 2 \"string/lyndon.hpp\"\n#include <algorithm>\n#line 4 \"string/lyndon.hpp\"\
+    \n#include <functional>\n#include <string>\n#include <tuple>\n#include <utility>\n\
     #include <vector>\n\n// CUT begin\n// Lyndon factorization based on Duval's algorithm\n\
     // **NOT VERIFIED YET**\n// Reference:\n// [1] K. T. Chen, R. H. Fox, R. C. Lyndon,\n\
     //     \"Free Differential Calculus, IV. The Quotient Groups of the Lower Central\
@@ -76,8 +119,7 @@ data:
     \ + p + 1);\n            ret.push_back(std::move(tmp));\n        } else {\n  \
     \          ++t;\n            aux[t] = aux[t - p];\n            gen(t, p);\n  \
     \          while (++aux[t] < k) gen(t, t);\n        }\n    };\n    gen(0, 1);\n\
-    \    return ret;\n}\n#line 3 \"string/rolling_hash_1d.hpp\"\n#include <chrono>\n\
-    #include <random>\n#line 7 \"string/rolling_hash_1d.hpp\"\n\ntemplate <int MOD1\
+    \    return ret;\n}\n#line 7 \"string/rolling_hash_1d.hpp\"\n\ntemplate <int MOD1\
     \ = 1000000007, int MOD2 = 998244353>\nstruct DoubleHash : public std::pair<int,\
     \ int> {\n    using ll = long long;\n    using pair = std::pair<int, int>;\n \
     \   DoubleHash(const pair &x) : pair(x) {}\n    DoubleHash(int x, int y) : pair(x,\
@@ -122,32 +164,34 @@ data:
     \ &rh1, int r1, const rolling_hash<T> &rh2, int r2) {\n    int lo = 0, hi = std::min(r1,\
     \ r2) + 1;\n    while (hi - lo > 1) {\n        const int c = (lo + hi) / 2;\n\
     \        auto h1 = rh1.get(r1 - c, r1), h2 = rh2.get(r2 - c, r2);\n        (h1\
-    \ == h2 ? lo : hi) = c;\n    }\n    return lo;\n}\n#line 3 \"string/test/run_enumerate_lyndon_hash.test.cpp\"\
-    \n#include <iostream>\n#line 5 \"string/test/run_enumerate_lyndon_hash.test.cpp\"\
+    \ == h2 ? lo : hi) = c;\n    }\n    return lo;\n}\n#line 4 \"string/test/run_enumerate_lyndon_mersenne61.test.cpp\"\
+    \n#include <iostream>\n#line 6 \"string/test/run_enumerate_lyndon_mersenne61.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\nusing namespace\
     \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n \
-    \   string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<DoubleHash<>>>(S);\n\
+    \   string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<ModIntMersenne61>>(S);\n\
     \    cout << ret.size() << '\\n';\n    for (auto p : ret) cout << get<0>(p) <<\
     \ ' ' << get<1>(p) << ' ' << get<2>(p) << '\\n';\n}\n"
-  code: "#include \"../lyndon.hpp\"\n#include \"../rolling_hash_1d.hpp\"\n#include\
-    \ <iostream>\n#include <string>\n#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\
-    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<DoubleHash<>>>(S);\n\
+  code: "#include \"../../number/modint_mersenne61.hpp\"\n#include \"../lyndon.hpp\"\
+    \n#include \"../rolling_hash_1d.hpp\"\n#include <iostream>\n#include <string>\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\nusing namespace\
+    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n \
+    \   string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<ModIntMersenne61>>(S);\n\
     \    cout << ret.size() << '\\n';\n    for (auto p : ret) cout << get<0>(p) <<\
     \ ' ' << get<1>(p) << ' ' << get<2>(p) << '\\n';\n}\n"
   dependsOn:
+  - number/modint_mersenne61.hpp
   - string/lyndon.hpp
   - string/rolling_hash_1d.hpp
   isVerificationFile: true
-  path: string/test/run_enumerate_lyndon_hash.test.cpp
+  path: string/test/run_enumerate_lyndon_mersenne61.test.cpp
   requiredBy: []
   timestamp: '2022-09-30 00:12:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: string/test/run_enumerate_lyndon_hash.test.cpp
+documentation_of: string/test/run_enumerate_lyndon_mersenne61.test.cpp
 layout: document
 redirect_from:
-- /verify/string/test/run_enumerate_lyndon_hash.test.cpp
-- /verify/string/test/run_enumerate_lyndon_hash.test.cpp.html
-title: string/test/run_enumerate_lyndon_hash.test.cpp
+- /verify/string/test/run_enumerate_lyndon_mersenne61.test.cpp
+- /verify/string/test/run_enumerate_lyndon_mersenne61.test.cpp.html
+title: string/test/run_enumerate_lyndon_mersenne61.test.cpp
 ---
