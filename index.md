@@ -590,7 +590,8 @@ data:
       title: string/mp_algorithm.hpp
     - icon: ':heavy_check_mark:'
       path: string/rolling_hash_1d.hpp
-      title: string/rolling_hash_1d.hpp
+      title: "Rolling hash (one dimensional) \uFF08\u4E00\u6B21\u5143\u30ED\u30FC\u30EA\
+        \u30F3\u30B0\u30CF\u30C3\u30B7\u30E5\uFF09"
     - icon: ':heavy_check_mark:'
       path: string/suffix_array.hpp
       title: string/suffix_array.hpp

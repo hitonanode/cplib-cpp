@@ -27,30 +27,41 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"string/rolling_hash_1d.hpp\"\n#include <algorithm>\n#include\
-    \ <chrono>\n#include <random>\n#include <string>\n#include <vector>\n\ntemplate\
-    \ <int MOD1 = 1000000007, int MOD2 = 998244353>\nstruct DoubleHash : public std::pair<int,\
-    \ int> {\n    using ll = long long;\n    using pair = std::pair<int, int>;\n \
-    \   DoubleHash(const pair &x) : pair(x) {}\n    DoubleHash(int x, int y) : pair(x,\
-    \ y) {}\n    explicit DoubleHash(int x) : DoubleHash(x, x) {}\n    DoubleHash()\
-    \ : DoubleHash(0) {}\n    static inline DoubleHash mod_subtract(pair x) {\n  \
-    \      if (x.first >= MOD1) x.first -= MOD1;\n        if (x.second >= MOD2) x.second\
-    \ -= MOD2;\n        return x;\n    }\n    DoubleHash operator+(const DoubleHash\
-    \ &x) const {\n        return mod_subtract({this->first + x.first, this->second\
-    \ + x.second});\n    }\n    DoubleHash operator+(unsigned x) const {\n       \
-    \ return mod_subtract({this->first + x, this->second + x});\n    }\n    DoubleHash\
-    \ operator-(const DoubleHash &x) const {\n        return mod_subtract({this->first\
-    \ + MOD1 - x.first, this->second + MOD2 - x.second});\n    }\n    DoubleHash operator*(const\
-    \ DoubleHash &x) const {\n        return {int(ll(this->first) * x.first % MOD1),\
-    \ int(ll(this->second) * x.second % MOD2)};\n    }\n    static DoubleHash randgen(bool\
-    \ force_update = false) {\n        static DoubleHash b{0, 0};\n        if (b ==\
-    \ DoubleHash{0, 0} or force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
-    \            std::uniform_int_distribution<int> d(1 << 16, 1 << 30);\n       \
-    \     b = {d(mt), d(mt)};\n        }\n        return b;\n    }\n};\n\n// Rolling\
-    \ Hash (Rabin-Karp), 1dim\ntemplate <typename V = DoubleHash<>> struct rolling_hash\
-    \ {\n    int N;\n    const V B;\n    std::vector<V> hash;         // hash[i] =\
-    \ s[0] * B^(i - 1) + ... + s[i - 1]\n    static std::vector<V> power; // power[i]\
-    \ = B^i\n    void _extend_powvec() {\n        while (static_cast<int>(power.size())\
-    \ <= N) {\n            auto tmp = power.back() * B;\n            power.push_back(tmp);\n\
+    \ <chrono>\n#include <random>\n#include <string>\n#include <tuple>\n#include <vector>\n\
+    \ntemplate <class T1, class T2> struct PairHash : public std::pair<T1, T2> {\n\
+    \    using PH = PairHash<T1, T2>;\n    explicit PairHash(T1 x, T2 y) : std::pair<T1,\
+    \ T2>(x, y) {}\n    explicit PairHash(int x) : std::pair<T1, T2>(x, x) {}\n  \
+    \  PairHash() : PairHash(0) {}\n    PH operator+(const PH &x) const { return PH(this->first\
+    \ + x.first, this->second + x.second); }\n    PH operator-(const PH &x) const\
+    \ { return PH(this->first - x.first, this->second - x.second); }\n    PH operator*(const\
+    \ PH &x) const { return PH(this->first * x.first, this->second * x.second); }\n\
+    \    PH operator+(int x) const { return PH(this->first + x, this->second + x);\
+    \ }\n    static PH randgen(bool force_update = false) {\n        static PH b(0);\n\
+    \        if (b == PH(0) or force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \            std::uniform_int_distribution<int> d(1 << 30);\n            b = PH(T1(d(mt)),\
+    \ T2(d(mt)));\n        }\n        return b;\n    }\n};\n\ntemplate <class T1,\
+    \ class T2, class T3> struct TupleHash3 : public std::tuple<T1, T2, T3> {\n  \
+    \  using TH = TupleHash3<T1, T2, T3>;\n    explicit TupleHash3(T1 x, T2 y, T3\
+    \ z) : std::tuple<T1, T2, T3>(x, y, z) {}\n    explicit TupleHash3(int x) : std::tuple<T1,\
+    \ T2, T3>(x, x, x) {}\n    TupleHash3() : TupleHash3(0) {}\n\n    inline const\
+    \ T1 &v1() const noexcept { return std::get<0>(*this); }\n    inline const T2\
+    \ &v2() const noexcept { return std::get<1>(*this); }\n    inline const T3 &v3()\
+    \ const noexcept { return std::get<2>(*this); }\n\n    TH operator+(const TH &x)\
+    \ const { return TH(v1() + x.v1(), v2() + x.v2(), v3() + x.v3()); }\n    TH operator-(const\
+    \ TH &x) const { return TH(v1() - x.v1(), v2() - x.v2(), v3() - x.v3()); }\n \
+    \   TH operator*(const TH &x) const { return TH(v1() * x.v1(), v2() * x.v2(),\
+    \ v3() * x.v3()); }\n    TH operator+(int x) const { return TH(v1() + x, v2()\
+    \ + x, v3() + x); }\n    static TH randgen(bool force_update = false) {\n    \
+    \    static TH b(0);\n        if (b == TH(0) or force_update) {\n            std::mt19937\
+    \ mt(std::chrono::steady_clock::now().time_since_epoch().count());\n         \
+    \   std::uniform_int_distribution<int> d(1 << 30);\n            b = TH(T1(d(mt)),\
+    \ T2(d(mt)), T3(d(mt)));\n        }\n        return b;\n    }\n};\n\n// Rolling\
+    \ Hash (Rabin-Karp), 1dim\ntemplate <typename V> struct rolling_hash {\n    int\
+    \ N;\n    const V B;\n    std::vector<V> hash;         // hash[i] = s[0] * B^(i\
+    \ - 1) + ... + s[i - 1]\n    static std::vector<V> power; // power[i] = B^i\n\
+    \    void _extend_powvec() {\n        if (power.size() > 1 and power.at(1) !=\
+    \ B) power = {V(1)};\n        while (static_cast<int>(power.size()) <= N) {\n\
+    \            auto tmp = power.back() * B;\n            power.push_back(tmp);\n\
     \        }\n    }\n    template <typename Int>\n    rolling_hash(const std::vector<Int>\
     \ &s, V b = V::randgen()) : N(s.size()), B(b), hash(N + 1) {\n        for (int\
     \ i = 0; i < N; i++) hash[i + 1] = hash[i] * B + s[i];\n        _extend_powvec();\n\
@@ -74,30 +85,41 @@ data:
     \        auto h1 = rh1.get(r1 - c, r1), h2 = rh2.get(r2 - c, r2);\n        (h1\
     \ == h2 ? lo : hi) = c;\n    }\n    return lo;\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <chrono>\n#include <random>\n\
-    #include <string>\n#include <vector>\n\ntemplate <int MOD1 = 1000000007, int MOD2\
-    \ = 998244353>\nstruct DoubleHash : public std::pair<int, int> {\n    using ll\
-    \ = long long;\n    using pair = std::pair<int, int>;\n    DoubleHash(const pair\
-    \ &x) : pair(x) {}\n    DoubleHash(int x, int y) : pair(x, y) {}\n    explicit\
-    \ DoubleHash(int x) : DoubleHash(x, x) {}\n    DoubleHash() : DoubleHash(0) {}\n\
-    \    static inline DoubleHash mod_subtract(pair x) {\n        if (x.first >= MOD1)\
-    \ x.first -= MOD1;\n        if (x.second >= MOD2) x.second -= MOD2;\n        return\
-    \ x;\n    }\n    DoubleHash operator+(const DoubleHash &x) const {\n        return\
-    \ mod_subtract({this->first + x.first, this->second + x.second});\n    }\n   \
-    \ DoubleHash operator+(unsigned x) const {\n        return mod_subtract({this->first\
-    \ + x, this->second + x});\n    }\n    DoubleHash operator-(const DoubleHash &x)\
-    \ const {\n        return mod_subtract({this->first + MOD1 - x.first, this->second\
-    \ + MOD2 - x.second});\n    }\n    DoubleHash operator*(const DoubleHash &x) const\
-    \ {\n        return {int(ll(this->first) * x.first % MOD1), int(ll(this->second)\
-    \ * x.second % MOD2)};\n    }\n    static DoubleHash randgen(bool force_update\
-    \ = false) {\n        static DoubleHash b{0, 0};\n        if (b == DoubleHash{0,\
-    \ 0} or force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
-    \            std::uniform_int_distribution<int> d(1 << 16, 1 << 30);\n       \
-    \     b = {d(mt), d(mt)};\n        }\n        return b;\n    }\n};\n\n// Rolling\
-    \ Hash (Rabin-Karp), 1dim\ntemplate <typename V = DoubleHash<>> struct rolling_hash\
-    \ {\n    int N;\n    const V B;\n    std::vector<V> hash;         // hash[i] =\
-    \ s[0] * B^(i - 1) + ... + s[i - 1]\n    static std::vector<V> power; // power[i]\
-    \ = B^i\n    void _extend_powvec() {\n        while (static_cast<int>(power.size())\
-    \ <= N) {\n            auto tmp = power.back() * B;\n            power.push_back(tmp);\n\
+    #include <string>\n#include <tuple>\n#include <vector>\n\ntemplate <class T1,\
+    \ class T2> struct PairHash : public std::pair<T1, T2> {\n    using PH = PairHash<T1,\
+    \ T2>;\n    explicit PairHash(T1 x, T2 y) : std::pair<T1, T2>(x, y) {}\n    explicit\
+    \ PairHash(int x) : std::pair<T1, T2>(x, x) {}\n    PairHash() : PairHash(0) {}\n\
+    \    PH operator+(const PH &x) const { return PH(this->first + x.first, this->second\
+    \ + x.second); }\n    PH operator-(const PH &x) const { return PH(this->first\
+    \ - x.first, this->second - x.second); }\n    PH operator*(const PH &x) const\
+    \ { return PH(this->first * x.first, this->second * x.second); }\n    PH operator+(int\
+    \ x) const { return PH(this->first + x, this->second + x); }\n    static PH randgen(bool\
+    \ force_update = false) {\n        static PH b(0);\n        if (b == PH(0) or\
+    \ force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \            std::uniform_int_distribution<int> d(1 << 30);\n            b = PH(T1(d(mt)),\
+    \ T2(d(mt)));\n        }\n        return b;\n    }\n};\n\ntemplate <class T1,\
+    \ class T2, class T3> struct TupleHash3 : public std::tuple<T1, T2, T3> {\n  \
+    \  using TH = TupleHash3<T1, T2, T3>;\n    explicit TupleHash3(T1 x, T2 y, T3\
+    \ z) : std::tuple<T1, T2, T3>(x, y, z) {}\n    explicit TupleHash3(int x) : std::tuple<T1,\
+    \ T2, T3>(x, x, x) {}\n    TupleHash3() : TupleHash3(0) {}\n\n    inline const\
+    \ T1 &v1() const noexcept { return std::get<0>(*this); }\n    inline const T2\
+    \ &v2() const noexcept { return std::get<1>(*this); }\n    inline const T3 &v3()\
+    \ const noexcept { return std::get<2>(*this); }\n\n    TH operator+(const TH &x)\
+    \ const { return TH(v1() + x.v1(), v2() + x.v2(), v3() + x.v3()); }\n    TH operator-(const\
+    \ TH &x) const { return TH(v1() - x.v1(), v2() - x.v2(), v3() - x.v3()); }\n \
+    \   TH operator*(const TH &x) const { return TH(v1() * x.v1(), v2() * x.v2(),\
+    \ v3() * x.v3()); }\n    TH operator+(int x) const { return TH(v1() + x, v2()\
+    \ + x, v3() + x); }\n    static TH randgen(bool force_update = false) {\n    \
+    \    static TH b(0);\n        if (b == TH(0) or force_update) {\n            std::mt19937\
+    \ mt(std::chrono::steady_clock::now().time_since_epoch().count());\n         \
+    \   std::uniform_int_distribution<int> d(1 << 30);\n            b = TH(T1(d(mt)),\
+    \ T2(d(mt)), T3(d(mt)));\n        }\n        return b;\n    }\n};\n\n// Rolling\
+    \ Hash (Rabin-Karp), 1dim\ntemplate <typename V> struct rolling_hash {\n    int\
+    \ N;\n    const V B;\n    std::vector<V> hash;         // hash[i] = s[0] * B^(i\
+    \ - 1) + ... + s[i - 1]\n    static std::vector<V> power; // power[i] = B^i\n\
+    \    void _extend_powvec() {\n        if (power.size() > 1 and power.at(1) !=\
+    \ B) power = {V(1)};\n        while (static_cast<int>(power.size()) <= N) {\n\
+    \            auto tmp = power.back() * B;\n            power.push_back(tmp);\n\
     \        }\n    }\n    template <typename Int>\n    rolling_hash(const std::vector<Int>\
     \ &s, V b = V::randgen()) : N(s.size()), B(b), hash(N + 1) {\n        for (int\
     \ i = 0; i < N; i++) hash[i + 1] = hash[i] * B + s[i];\n        _extend_powvec();\n\
@@ -124,7 +146,7 @@ data:
   isVerificationFile: false
   path: string/rolling_hash_1d.hpp
   requiredBy: []
-  timestamp: '2022-09-30 00:12:10+09:00'
+  timestamp: '2022-10-09 12:55:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/run_enumerate_lyndon_hash.test.cpp
@@ -135,8 +157,31 @@ data:
   - string/test/run_enumerate_lyndon_mersenne61.test.cpp
 documentation_of: string/rolling_hash_1d.hpp
 layout: document
-redirect_from:
-- /library/string/rolling_hash_1d.hpp
-- /library/string/rolling_hash_1d.hpp.html
-title: string/rolling_hash_1d.hpp
+title: "Rolling hash (one dimensional) \uFF08\u4E00\u6B21\u5143\u30ED\u30FC\u30EA\u30F3\
+  \u30B0\u30CF\u30C3\u30B7\u30E5\uFF09"
 ---
+
+文字列・数列に対する典型的なローリングハッシュ．長さ $N$ の入力に対して時間計算量 $O(N)$ で構築，区間ハッシュ値を $O(1)$ で取得．
+
+## 使用方法
+
+```cpp
+using Hash = ModIntMersenne61;
+
+string S = "sakanakanandaka";
+rolling_hash<Hash> rh(S)
+
+int l, r;
+Hash h = rh.get(l, r);  // S[l:r], 半開区間
+```
+
+ハッシュの型 `PairHash` や `TupleHash3` は入れ子にすることも可能で，例えば
+
+```cpp
+using Hash = ModIntMersenne61;
+using Hash = TupleHash3<ModInt998244353, ModInt998244353, ModInt998244353>>;
+using Hash = TupleHash3<PH, ModInt998244353, PH>>;
+using Hash = PairHash<PH, PairHash<ModInt998244353, ModInt998244353>>>;
+```
+
+は全て動作する．

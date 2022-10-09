@@ -187,8 +187,17 @@ data:
     path: set_power_series/test/subset_pow.yuki1594.test.cpp
     title: set_power_series/test/subset_pow.yuki1594.test.cpp
   - icon: ':heavy_check_mark:'
+    path: string/test/rolling_hash.test.cpp
+    title: string/test/rolling_hash.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: string/test/rolling_hash_lcp.test.cpp
+    title: string/test/rolling_hash_lcp.test.cpp
+  - icon: ':heavy_check_mark:'
     path: string/test/rolling_hash_w_modint.test.cpp
     title: string/test/rolling_hash_w_modint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: string/test/run_enumerate_lyndon_hash.test.cpp
+    title: string/test/run_enumerate_lyndon_hash.test.cpp
   - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
@@ -387,6 +396,9 @@ data:
   - data_structure/test/queue_operate_all_composite.test.cpp
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+  - string/test/run_enumerate_lyndon_hash.test.cpp
+  - string/test/rolling_hash_lcp.test.cpp
+  - string/test/rolling_hash.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
   - segmenttree/test/range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp

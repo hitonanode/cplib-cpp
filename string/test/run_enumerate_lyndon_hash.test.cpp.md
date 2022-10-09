@@ -2,12 +2,16 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: modint.hpp
+    title: modint.hpp
+  - icon: ':heavy_check_mark:'
     path: string/lyndon.hpp
     title: "Lyndon words \uFF08Lyndon \u6587\u5B57\u5217\u306B\u95A2\u3059\u308B\u5404\
       \u7A2E\u95A2\u6570\uFF09"
   - icon: ':heavy_check_mark:'
     path: string/rolling_hash_1d.hpp
-    title: string/rolling_hash_1d.hpp
+    title: "Rolling hash (one dimensional) \uFF08\u4E00\u6B21\u5143\u30ED\u30FC\u30EA\
+      \u30F3\u30B0\u30CF\u30C3\u30B7\u30E5\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -18,14 +22,93 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/runenumerate
     links:
     - https://judge.yosupo.jp/problem/runenumerate
-  bundledCode: "#line 2 \"string/lyndon.hpp\"\n#include <algorithm>\n#include <cassert>\n\
-    #include <functional>\n#include <string>\n#include <tuple>\n#include <utility>\n\
-    #include <vector>\n\n// CUT begin\n// Lyndon factorization based on Duval's algorithm\n\
-    // **NOT VERIFIED YET**\n// Reference:\n// [1] K. T. Chen, R. H. Fox, R. C. Lyndon,\n\
-    //     \"Free Differential Calculus, IV. The Quotient Groups of the Lower Central\
-    \ Series,\"\n//     Annals of Mathematics, 68(1), 81-95, 1958.\n// [2] J. P. Duval,\
-    \ \"Factorizing words over an ordered alphabet,\"\n//     Journal of Algorithms,\
-    \ 4(4), 363-381, 1983.\n// - https://cp-algorithms.com/string/lyndon_factorization.html\n\
+  bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
+    \ <vector>\n\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n\
+    #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
+    \ long;\n    MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
+    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
+    \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
+    \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
+    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
+    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
+    \                    bool ok = true;\n                    for (auto i : fac)\n\
+    \                        if (ModInt(g).pow((md - 1) / i) == 1) {\n           \
+    \                 ok = false;\n                            break;\n          \
+    \              }\n                    if (ok) return g;\n                }\n \
+    \               return -1;\n            }();\n        }\n        return primitive_root;\n\
+    \    }\n    int val_;\n    int val() const noexcept { return val_; }\n    MDCONST\
+    \ ModInt() : val_(0) {}\n    MDCONST ModInt &_setval(lint v) { return val_ = (v\
+    \ >= md ? v - md : v), *this; }\n    MDCONST ModInt(lint v) { _setval(v % md +\
+    \ md); }\n    MDCONST explicit operator bool() const { return val_ != 0; }\n \
+    \   MDCONST ModInt operator+(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
+    \ + x.val_);\n    }\n    MDCONST ModInt operator-(const ModInt &x) const {\n \
+    \       return ModInt()._setval((lint)val_ - x.val_ + md);\n    }\n    MDCONST\
+    \ ModInt operator*(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
+    \ * x.val_ % md);\n    }\n    MDCONST ModInt operator/(const ModInt &x) const\
+    \ {\n        return ModInt()._setval((lint)val_ * x.inv().val() % md);\n    }\n\
+    \    MDCONST ModInt operator-() const { return ModInt()._setval(md - val_); }\n\
+    \    MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }\n\
+    \    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }\n\
+    \    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }\n\
+    \    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }\n\
+    \    friend MDCONST ModInt operator+(lint a, const ModInt &x) {\n        return\
+    \ ModInt()._setval(a % md + x.val_);\n    }\n    friend MDCONST ModInt operator-(lint\
+    \ a, const ModInt &x) {\n        return ModInt()._setval(a % md - x.val_ + md);\n\
+    \    }\n    friend MDCONST ModInt operator*(lint a, const ModInt &x) {\n     \
+    \   return ModInt()._setval(a % md * x.val_ % md);\n    }\n    friend MDCONST\
+    \ ModInt operator/(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
+    \ % md * x.inv().val() % md);\n    }\n    MDCONST bool operator==(const ModInt\
+    \ &x) const { return val_ == x.val_; }\n    MDCONST bool operator!=(const ModInt\
+    \ &x) const { return val_ != x.val_; }\n    MDCONST bool operator<(const ModInt\
+    \ &x) const {\n        return val_ < x.val_;\n    } // To use std::map<ModInt,\
+    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
+    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    MDCONST\
+    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {\n     \
+    \   return os << x.val_;\n    }\n    MDCONST ModInt pow(lint n) const {\n    \
+    \    ModInt ans = 1, tmp = *this;\n        while (n) {\n            if (n & 1)\
+    \ ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return ans;\n\
+    \    }\n\n    static std::vector<ModInt> facs, facinvs, invs;\n    MDCONST static\
+    \ void _precalculation(int N) {\n        int l0 = facs.size();\n        if (N\
+    \ > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N), facinvs.resize(N),\
+    \ invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i] = facs[i - 1]\
+    \ * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n        for (int i\
+    \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
+    \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n    MDCONST\
+    \ ModInt inv() const {\n        if (this->val_ < std::min(md >> 1, 1 << 21)) {\n\
+    \            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n      \
+    \      while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
+    \            return invs[this->val_];\n        } else {\n            return this->pow(md\
+    \ - 2);\n        }\n    }\n    MDCONST ModInt fac() const {\n        while (this->val_\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n        return facs[this->val_];\n\
+    \    }\n    MDCONST ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
+    \ }\n    MDCONST ModInt doublefac() const {\n        lint k = (this->val_ + 1)\
+    \ / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
+    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
+    \    }\n    MDCONST ModInt nCr(const ModInt &r) const {\n        return (this->val_\
+    \ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();\n    }\n  \
+    \  MDCONST ModInt nPr(const ModInt &r) const {\n        return (this->val_ < r.val_)\
+    \ ? 0 : this->fac() * (*this - r).facinv();\n    }\n\n    ModInt sqrt() const\
+    \ {\n        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n   \
+    \     if (pow((md - 1) / 2) != 1) return 0;\n        ModInt b = 1;\n        while\
+    \ (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n       \
+    \ while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this)\
+    \ * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n        while\
+    \ (y != 1) {\n            int j = 0;\n            ModInt t = y;\n            while\
+    \ (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n        \
+    \    x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
+    \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
+    \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 2 \"string/lyndon.hpp\"\n#include <algorithm>\n#include <cassert>\n#include\
+    \ <functional>\n#include <string>\n#include <tuple>\n#include <utility>\n#line\
+    \ 9 \"string/lyndon.hpp\"\n\n// CUT begin\n// Lyndon factorization based on Duval's\
+    \ algorithm\n// **NOT VERIFIED YET**\n// Reference:\n// [1] K. T. Chen, R. H.\
+    \ Fox, R. C. Lyndon,\n//     \"Free Differential Calculus, IV. The Quotient Groups\
+    \ of the Lower Central Series,\"\n//     Annals of Mathematics, 68(1), 81-95,\
+    \ 1958.\n// [2] J. P. Duval, \"Factorizing words over an ordered alphabet,\"\n\
+    //     Journal of Algorithms, 4(4), 363-381, 1983.\n// - https://cp-algorithms.com/string/lyndon_factorization.html\n\
     // - https://qiita.com/nakashi18/items/66882bd6e0127174267a\ntemplate <typename\
     \ T>\nstd::vector<std::pair<int, int>> lyndon_factorization(const std::vector<T>\
     \ &S) {\n    const int N = S.size();\n    std::vector<std::pair<int, int>> ret;\n\
@@ -77,30 +160,41 @@ data:
     \          ++t;\n            aux[t] = aux[t - p];\n            gen(t, p);\n  \
     \          while (++aux[t] < k) gen(t, t);\n        }\n    };\n    gen(0, 1);\n\
     \    return ret;\n}\n#line 3 \"string/rolling_hash_1d.hpp\"\n#include <chrono>\n\
-    #include <random>\n#line 7 \"string/rolling_hash_1d.hpp\"\n\ntemplate <int MOD1\
-    \ = 1000000007, int MOD2 = 998244353>\nstruct DoubleHash : public std::pair<int,\
-    \ int> {\n    using ll = long long;\n    using pair = std::pair<int, int>;\n \
-    \   DoubleHash(const pair &x) : pair(x) {}\n    DoubleHash(int x, int y) : pair(x,\
-    \ y) {}\n    explicit DoubleHash(int x) : DoubleHash(x, x) {}\n    DoubleHash()\
-    \ : DoubleHash(0) {}\n    static inline DoubleHash mod_subtract(pair x) {\n  \
-    \      if (x.first >= MOD1) x.first -= MOD1;\n        if (x.second >= MOD2) x.second\
-    \ -= MOD2;\n        return x;\n    }\n    DoubleHash operator+(const DoubleHash\
-    \ &x) const {\n        return mod_subtract({this->first + x.first, this->second\
-    \ + x.second});\n    }\n    DoubleHash operator+(unsigned x) const {\n       \
-    \ return mod_subtract({this->first + x, this->second + x});\n    }\n    DoubleHash\
-    \ operator-(const DoubleHash &x) const {\n        return mod_subtract({this->first\
-    \ + MOD1 - x.first, this->second + MOD2 - x.second});\n    }\n    DoubleHash operator*(const\
-    \ DoubleHash &x) const {\n        return {int(ll(this->first) * x.first % MOD1),\
-    \ int(ll(this->second) * x.second % MOD2)};\n    }\n    static DoubleHash randgen(bool\
-    \ force_update = false) {\n        static DoubleHash b{0, 0};\n        if (b ==\
-    \ DoubleHash{0, 0} or force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
-    \            std::uniform_int_distribution<int> d(1 << 16, 1 << 30);\n       \
-    \     b = {d(mt), d(mt)};\n        }\n        return b;\n    }\n};\n\n// Rolling\
-    \ Hash (Rabin-Karp), 1dim\ntemplate <typename V = DoubleHash<>> struct rolling_hash\
-    \ {\n    int N;\n    const V B;\n    std::vector<V> hash;         // hash[i] =\
-    \ s[0] * B^(i - 1) + ... + s[i - 1]\n    static std::vector<V> power; // power[i]\
-    \ = B^i\n    void _extend_powvec() {\n        while (static_cast<int>(power.size())\
-    \ <= N) {\n            auto tmp = power.back() * B;\n            power.push_back(tmp);\n\
+    #include <random>\n#line 8 \"string/rolling_hash_1d.hpp\"\n\ntemplate <class T1,\
+    \ class T2> struct PairHash : public std::pair<T1, T2> {\n    using PH = PairHash<T1,\
+    \ T2>;\n    explicit PairHash(T1 x, T2 y) : std::pair<T1, T2>(x, y) {}\n    explicit\
+    \ PairHash(int x) : std::pair<T1, T2>(x, x) {}\n    PairHash() : PairHash(0) {}\n\
+    \    PH operator+(const PH &x) const { return PH(this->first + x.first, this->second\
+    \ + x.second); }\n    PH operator-(const PH &x) const { return PH(this->first\
+    \ - x.first, this->second - x.second); }\n    PH operator*(const PH &x) const\
+    \ { return PH(this->first * x.first, this->second * x.second); }\n    PH operator+(int\
+    \ x) const { return PH(this->first + x, this->second + x); }\n    static PH randgen(bool\
+    \ force_update = false) {\n        static PH b(0);\n        if (b == PH(0) or\
+    \ force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \            std::uniform_int_distribution<int> d(1 << 30);\n            b = PH(T1(d(mt)),\
+    \ T2(d(mt)));\n        }\n        return b;\n    }\n};\n\ntemplate <class T1,\
+    \ class T2, class T3> struct TupleHash3 : public std::tuple<T1, T2, T3> {\n  \
+    \  using TH = TupleHash3<T1, T2, T3>;\n    explicit TupleHash3(T1 x, T2 y, T3\
+    \ z) : std::tuple<T1, T2, T3>(x, y, z) {}\n    explicit TupleHash3(int x) : std::tuple<T1,\
+    \ T2, T3>(x, x, x) {}\n    TupleHash3() : TupleHash3(0) {}\n\n    inline const\
+    \ T1 &v1() const noexcept { return std::get<0>(*this); }\n    inline const T2\
+    \ &v2() const noexcept { return std::get<1>(*this); }\n    inline const T3 &v3()\
+    \ const noexcept { return std::get<2>(*this); }\n\n    TH operator+(const TH &x)\
+    \ const { return TH(v1() + x.v1(), v2() + x.v2(), v3() + x.v3()); }\n    TH operator-(const\
+    \ TH &x) const { return TH(v1() - x.v1(), v2() - x.v2(), v3() - x.v3()); }\n \
+    \   TH operator*(const TH &x) const { return TH(v1() * x.v1(), v2() * x.v2(),\
+    \ v3() * x.v3()); }\n    TH operator+(int x) const { return TH(v1() + x, v2()\
+    \ + x, v3() + x); }\n    static TH randgen(bool force_update = false) {\n    \
+    \    static TH b(0);\n        if (b == TH(0) or force_update) {\n            std::mt19937\
+    \ mt(std::chrono::steady_clock::now().time_since_epoch().count());\n         \
+    \   std::uniform_int_distribution<int> d(1 << 30);\n            b = TH(T1(d(mt)),\
+    \ T2(d(mt)), T3(d(mt)));\n        }\n        return b;\n    }\n};\n\n// Rolling\
+    \ Hash (Rabin-Karp), 1dim\ntemplate <typename V> struct rolling_hash {\n    int\
+    \ N;\n    const V B;\n    std::vector<V> hash;         // hash[i] = s[0] * B^(i\
+    \ - 1) + ... + s[i - 1]\n    static std::vector<V> power; // power[i] = B^i\n\
+    \    void _extend_powvec() {\n        if (power.size() > 1 and power.at(1) !=\
+    \ B) power = {V(1)};\n        while (static_cast<int>(power.size()) <= N) {\n\
+    \            auto tmp = power.back() * B;\n            power.push_back(tmp);\n\
     \        }\n    }\n    template <typename Int>\n    rolling_hash(const std::vector<Int>\
     \ &s, V b = V::randgen()) : N(s.size()), B(b), hash(N + 1) {\n        for (int\
     \ i = 0; i < N; i++) hash[i + 1] = hash[i] * B + s[i];\n        _extend_powvec();\n\
@@ -122,26 +216,26 @@ data:
     \ &rh1, int r1, const rolling_hash<T> &rh2, int r2) {\n    int lo = 0, hi = std::min(r1,\
     \ r2) + 1;\n    while (hi - lo > 1) {\n        const int c = (lo + hi) / 2;\n\
     \        auto h1 = rh1.get(r1 - c, r1), h2 = rh2.get(r2 - c, r2);\n        (h1\
-    \ == h2 ? lo : hi) = c;\n    }\n    return lo;\n}\n#line 3 \"string/test/run_enumerate_lyndon_hash.test.cpp\"\
-    \n#include <iostream>\n#line 5 \"string/test/run_enumerate_lyndon_hash.test.cpp\"\
+    \ == h2 ? lo : hi) = c;\n    }\n    return lo;\n}\n#line 6 \"string/test/run_enumerate_lyndon_hash.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\nusing namespace\
     \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n \
-    \   string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<DoubleHash<>>>(S);\n\
-    \    cout << ret.size() << '\\n';\n    for (auto p : ret) cout << get<0>(p) <<\
-    \ ' ' << get<1>(p) << ' ' << get<2>(p) << '\\n';\n}\n"
-  code: "#include \"../lyndon.hpp\"\n#include \"../rolling_hash_1d.hpp\"\n#include\
-    \ <iostream>\n#include <string>\n#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\
+    \   string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<PairHash<ModInt998244353,\
+    \ ModInt998244353>>>(S);\n    cout << ret.size() << '\\n';\n    for (auto p :\
+    \ ret) cout << get<0>(p) << ' ' << get<1>(p) << ' ' << get<2>(p) << '\\n';\n}\n"
+  code: "#include \"../../modint.hpp\"\n#include \"../lyndon.hpp\"\n#include \"../rolling_hash_1d.hpp\"\
+    \n#include <iostream>\n#include <string>\n#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<DoubleHash<>>>(S);\n\
-    \    cout << ret.size() << '\\n';\n    for (auto p : ret) cout << get<0>(p) <<\
-    \ ' ' << get<1>(p) << ' ' << get<2>(p) << '\\n';\n}\n"
+    \    string S;\n    cin >> S;\n    auto ret = run_enumerate<rolling_hash<PairHash<ModInt998244353,\
+    \ ModInt998244353>>>(S);\n    cout << ret.size() << '\\n';\n    for (auto p :\
+    \ ret) cout << get<0>(p) << ' ' << get<1>(p) << ' ' << get<2>(p) << '\\n';\n}\n"
   dependsOn:
+  - modint.hpp
   - string/lyndon.hpp
   - string/rolling_hash_1d.hpp
   isVerificationFile: true
   path: string/test/run_enumerate_lyndon_hash.test.cpp
   requiredBy: []
-  timestamp: '2022-09-30 00:12:10+09:00'
+  timestamp: '2022-10-09 12:55:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/run_enumerate_lyndon_hash.test.cpp
