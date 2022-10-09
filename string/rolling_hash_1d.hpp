@@ -33,8 +33,8 @@ template <class T1, class T2, class T3> struct TupleHash3 : public std::tuple<T1
     TupleHash3() : TupleHash3(0) {}
 
     inline const T1 &v1() const noexcept { return std::get<0>(*this); }
-    inline const T1 &v2() const noexcept { return std::get<1>(*this); }
-    inline const T1 &v3() const noexcept { return std::get<2>(*this); }
+    inline const T2 &v2() const noexcept { return std::get<1>(*this); }
+    inline const T3 &v3() const noexcept { return std::get<2>(*this); }
 
     TH operator+(const TH &x) const { return TH(v1() + x.v1(), v2() + x.v2(), v3() + x.v3()); }
     TH operator-(const TH &x) const { return TH(v1() - x.v1(), v2() - x.v2(), v3() - x.v3()); }
