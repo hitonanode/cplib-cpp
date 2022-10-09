@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: string/test/rolling_hash_2d.aoj.test.cpp
+    title: string/test/rolling_hash_2d.aoj.test.cpp
+  - icon: ':heavy_check_mark:'
     path: string/test/rolling_hash_mersenne61.test.cpp
     title: string/test/rolling_hash_mersenne61.test.cpp
   - icon: ':heavy_check_mark:'
@@ -102,6 +105,7 @@ data:
   timestamp: '2022-09-30 00:12:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - string/test/rolling_hash_2d.aoj.test.cpp
   - string/test/rolling_hash_mersenne61.test.cpp
   - string/test/run_enumerate_lyndon_mersenne61.test.cpp
 documentation_of: number/modint_mersenne61.hpp

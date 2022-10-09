@@ -593,6 +593,10 @@ data:
       title: "Rolling hash (one dimensional) \uFF08\u4E00\u6B21\u5143\u30ED\u30FC\u30EA\
         \u30F3\u30B0\u30CF\u30C3\u30B7\u30E5\uFF09"
     - icon: ':heavy_check_mark:'
+      path: string/rolling_hash_2d.hpp
+      title: "Rolling hash (two dimensional) \uFF08\u4E8C\u6B21\u5143\u30ED\u30FC\u30EA\
+        \u30F3\u30B0\u30CF\u30C3\u30B7\u30E5\uFF09"
+    - icon: ':heavy_check_mark:'
       path: string/suffix_array.hpp
       title: string/suffix_array.hpp
     - icon: ':heavy_check_mark:'
@@ -1382,6 +1386,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash.test.cpp
       title: string/test/rolling_hash.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/rolling_hash_2d.aoj.test.cpp
+      title: string/test/rolling_hash_2d.aoj.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash_lcp.test.cpp
       title: string/test/rolling_hash_lcp.test.cpp
