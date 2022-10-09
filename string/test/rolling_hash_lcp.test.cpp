@@ -1,3 +1,4 @@
+#include "../../modint.hpp"
 #include "../rolling_hash_1d.hpp"
 #include <cassert>
 #include <iostream>
@@ -9,7 +10,8 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int N;
     cin >> N;
-    vector<rolling_hash<DoubleHash<>>> rhs, rhs_rev;
+    using Hash = PairHash<ModInt998244353, ModInt998244353>;
+    vector<rolling_hash<Hash>> rhs, rhs_rev;
     for (int i = 0; i < N; i++) {
         string s;
         cin >> s;

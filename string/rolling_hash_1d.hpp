@@ -3,51 +3,62 @@
 #include <chrono>
 #include <random>
 #include <string>
+#include <tuple>
 #include <vector>
 
-template <int MOD1 = 1000000007, int MOD2 = 998244353>
-struct DoubleHash : public std::pair<int, int> {
-    using ll = long long;
-    using pair = std::pair<int, int>;
-    DoubleHash(const pair &x) : pair(x) {}
-    DoubleHash(int x, int y) : pair(x, y) {}
-    explicit DoubleHash(int x) : DoubleHash(x, x) {}
-    DoubleHash() : DoubleHash(0) {}
-    static inline DoubleHash mod_subtract(pair x) {
-        if (x.first >= MOD1) x.first -= MOD1;
-        if (x.second >= MOD2) x.second -= MOD2;
-        return x;
-    }
-    DoubleHash operator+(const DoubleHash &x) const {
-        return mod_subtract({this->first + x.first, this->second + x.second});
-    }
-    DoubleHash operator+(unsigned x) const {
-        return mod_subtract({this->first + x, this->second + x});
-    }
-    DoubleHash operator-(const DoubleHash &x) const {
-        return mod_subtract({this->first + MOD1 - x.first, this->second + MOD2 - x.second});
-    }
-    DoubleHash operator*(const DoubleHash &x) const {
-        return {int(ll(this->first) * x.first % MOD1), int(ll(this->second) * x.second % MOD2)};
-    }
-    static DoubleHash randgen(bool force_update = false) {
-        static DoubleHash b{0, 0};
-        if (b == DoubleHash{0, 0} or force_update) {
+template <class T1, class T2> struct PairHash : public std::pair<T1, T2> {
+    using PH = PairHash<T1, T2>;
+    explicit PairHash(T1 x, T2 y) : std::pair<T1, T2>(x, y) {}
+    explicit PairHash(int x) : std::pair<T1, T2>(x, x) {}
+    PairHash() : PairHash(0) {}
+    PH operator+(const PH &x) const { return PH(this->first + x.first, this->second + x.second); }
+    PH operator-(const PH &x) const { return PH(this->first - x.first, this->second - x.second); }
+    PH operator*(const PH &x) const { return PH(this->first * x.first, this->second * x.second); }
+    PH operator+(int x) const { return PH(this->first + x, this->second + x); }
+    static PH randgen(bool force_update = false) {
+        static PH b(0);
+        if (b == PH(0) or force_update) {
             std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());
-            std::uniform_int_distribution<int> d(1 << 16, 1 << 30);
-            b = {d(mt), d(mt)};
+            std::uniform_int_distribution<int> d(1 << 30);
+            b = PH(T1(d(mt)), T2(d(mt)));
+        }
+        return b;
+    }
+};
+
+template <class T1, class T2, class T3> struct TupleHash3 : public std::tuple<T1, T2, T3> {
+    using TH = TupleHash3<T1, T2, T3>;
+    explicit TupleHash3(T1 x, T2 y, T3 z) : std::tuple<T1, T2, T3>(x, y, z) {}
+    explicit TupleHash3(int x) : std::tuple<T1, T2, T3>(x, x, x) {}
+    TupleHash3() : TupleHash3(0) {}
+
+    inline const T1 &v1() const noexcept { return std::get<0>(*this); }
+    inline const T1 &v2() const noexcept { return std::get<1>(*this); }
+    inline const T1 &v3() const noexcept { return std::get<2>(*this); }
+
+    TH operator+(const TH &x) const { return TH(v1() + x.v1(), v2() + x.v2(), v3() + x.v3()); }
+    TH operator-(const TH &x) const { return TH(v1() - x.v1(), v2() - x.v2(), v3() - x.v3()); }
+    TH operator*(const TH &x) const { return TH(v1() * x.v1(), v2() * x.v2(), v3() * x.v3()); }
+    TH operator+(int x) const { return TH(v1() + x, v2() + x, v3() + x); }
+    static TH randgen(bool force_update = false) {
+        static TH b(0);
+        if (b == TH(0) or force_update) {
+            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());
+            std::uniform_int_distribution<int> d(1 << 30);
+            b = TH(T1(d(mt)), T2(d(mt)), T3(d(mt)));
         }
         return b;
     }
 };
 
 // Rolling Hash (Rabin-Karp), 1dim
-template <typename V = DoubleHash<>> struct rolling_hash {
+template <typename V> struct rolling_hash {
     int N;
     const V B;
     std::vector<V> hash;         // hash[i] = s[0] * B^(i - 1) + ... + s[i - 1]
     static std::vector<V> power; // power[i] = B^i
     void _extend_powvec() {
+        if (power.size() > 1 and power.at(1) != B) power = {V(1)};
         while (static_cast<int>(power.size()) <= N) {
             auto tmp = power.back() * B;
             power.push_back(tmp);
