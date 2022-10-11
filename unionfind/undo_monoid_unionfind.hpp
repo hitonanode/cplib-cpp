@@ -8,7 +8,7 @@
 template <class S> struct undo_dsu {
     std::vector<int> par, cou;
     std::vector<S> weights;
-    std::vector<std::tuple<int, int, int, S>> history;
+    std::vector<std::tuple<int, int, S>> history;
 
     explicit undo_dsu(const std::vector<S> &init)
         : par(init.size()), cou(init.size(), 1), weights(init) {
@@ -21,20 +21,20 @@ template <class S> struct undo_dsu {
     bool unite(int x, int y) {
         x = find(x), y = find(y);
         if (cou[x] < cou[y]) std::swap(x, y);
-        history.emplace_back(y, par[y], cou[x], weights[x]);
+        history.emplace_back(y, cou[x], weights[x]);
         return x != y ? par[y] = x, cou[x] += cou[y], weights[x] += weights[y], true : false;
     }
 
     void set_weight(int x, S w) {
         x = find(x);
-        history.emplace_back(x, x, cou[x], weights[x]);
+        history.emplace_back(x, cou[x], weights[x]);
         weights[x] = w;
     }
 
     void undo() {
-        weights[par[std::get<0>(history.back())]] = std::get<3>(history.back());
-        cou[par[std::get<0>(history.back())]] = std::get<2>(history.back());
-        par[std::get<0>(history.back())] = std::get<1>(history.back());
+        weights[par[std::get<0>(history.back())]] = std::get<2>(history.back());
+        cou[par[std::get<0>(history.back())]] = std::get<1>(history.back());
+        par[std::get<0>(history.back())] = std::get<0>(history.back());
         history.pop_back();
     }
 
