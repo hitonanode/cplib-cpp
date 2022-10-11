@@ -141,6 +141,9 @@ data:
       path: data_structure/link_cut_tree.hpp
       title: Link-Cut tree
     - icon: ':heavy_check_mark:'
+      path: data_structure/offline_dynamic_connectivity.hpp
+      title: Offline dynamic connectivity
+    - icon: ':heavy_check_mark:'
       path: data_structure/persistent_array.hpp
       title: data_structure/persistent_array.hpp
     - icon: ':heavy_check_mark:'
@@ -660,6 +663,10 @@ data:
     - icon: ':warning:'
       path: unionfind/partially_persistent_uf.hpp
       title: unionfind/partially_persistent_uf.hpp
+    - icon: ':heavy_check_mark:'
+      path: unionfind/undo_monoid_unionfind.hpp
+      title: "UnionFind with Undo operation, monoid weights \uFF08Undo \u53EF\u80FD\
+        \u30FB\u91CD\u307F\u548C\u53D6\u5F97\u53EF\u80FD UnionFind\uFF09"
     - icon: ':warning:'
       path: unionfind/undo_unionfind.hpp
       title: "UnionFind with Undo operation \uFF08Undo \u53EF\u80FD UnionFind\uFF09"
@@ -856,6 +863,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/binary_trie.test.cpp
       title: data_structure/test/binary_trie.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
+      title: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/fibonacci_heap_dijkstra.test.cpp
       title: data_structure/test/fibonacci_heap_dijkstra.test.cpp
