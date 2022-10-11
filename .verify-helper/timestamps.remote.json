@@ -33,6 +33,7 @@
 "convolution/test/ntt_arbitrary_mod.test.cpp": "2022-05-01 16:11:38 +0900",
 "data_structure/test/assosiative_array.test.cpp": "2022-01-08 20:23:44 +0900",
 "data_structure/test/binary_trie.test.cpp": "2021-02-26 23:47:50 +0900",
+"data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp": "2022-10-11 22:33:58 +0900",
 "data_structure/test/fibonacci_heap_dijkstra.test.cpp": "2022-01-08 20:23:44 +0900",
 "data_structure/test/fibonacci_heap_shortestpath.test.cpp": "2022-01-08 20:23:44 +0900",
 "data_structure/test/fibonacci_heap_spanningtree.test.cpp": "2022-01-08 20:23:44 +0900",
