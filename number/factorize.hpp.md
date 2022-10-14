@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: number/primitive_root.hpp
+    title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: graph/test/chromatic_number.test.cpp
@@ -18,6 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/miller-rabin.test.cpp
     title: number/test/miller-rabin.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/primitive_root.test.cpp
+    title: number/test/primitive_root.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/primitive_root_1e18.test.cpp
+    title: number/test/primitive_root_1e18.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -114,12 +123,15 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: number/factorize.hpp
-  requiredBy: []
+  requiredBy:
+  - number/primitive_root.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/factorize_longlong.test.cpp
+  - number/test/primitive_root.test.cpp
   - number/test/miller-rabin.test.cpp
+  - number/test/primitive_root_1e18.test.cpp
   - number/test/factorize_aoj.test.cpp
   - number/test/miller-rabin-5e7.test.cpp
   - graph/test/chromatic_number.test.cpp

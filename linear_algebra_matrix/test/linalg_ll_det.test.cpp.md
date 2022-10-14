@@ -58,37 +58,38 @@ data:
     \ std::make_pair(0, 0); // \u89E3\u306A\u3057\n        }\n        Int t = b /\
     \ d * mod_inverse<Int>(a / d, M[i] / d) % (M[i] / d);\n        r += m * t;\n \
     \       m *= M[i] / d;\n    }\n    return std::make_pair((r < 0 ? r + m : r),\
-    \ m);\n}\n\nint pow_mod(int x, long long n, int md) {\n    if (md == 1) return\
-    \ 0;\n    long long ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = ans\
-    \ * x % md;\n        x = (long long)x * x % md;\n        n >>= 1;\n    }\n   \
-    \ return ans;\n}\n#line 4 \"linear_algebra_matrix/linalg_longlong.hpp\"\n#include\
-    \ <cstdlib>\n#line 6 \"linear_algebra_matrix/linalg_longlong.hpp\"\n\n// CUT begin\n\
-    template <typename lint, typename mdint>\nstd::vector<std::vector<lint>> gauss_jordan(std::vector<std::vector<lint>>\
-    \ mtr, mdint mod) {\n    // Gauss-Jordan elimination \u884C\u57FA\u672C\u5909\u5F62\
-    \u306E\u307F\u3092\u7528\u3044\u308B\u30AC\u30A6\u30B9\u6D88\u53BB\u6CD5\n   \
-    \ int H = mtr.size(), W = mtr[0].size(), c = 0;\n    for (int h = 0; h < H; h++)\
-    \ {\n        if (c == W) break;\n        int piv = -1;\n        for (int j = h;\
-    \ j < H; j++)\n            if (mtr[j][c]) {\n                if (piv == -1 or\
-    \ abs(mtr[j][c]) > abs(mtr[piv][c])) piv = j;\n            }\n        if (piv\
-    \ == -1) {\n            c++;\n            h--;\n            continue;\n      \
-    \  }\n        std::swap(mtr[piv], mtr[h]);\n        if (h != piv) {\n        \
-    \    for (int w = 0; w < W; w++) {\n                mtr[piv][w] =\n          \
-    \          mtr[piv][w] ? mod - mtr[piv][w] : 0; // To preserve sign of determinant\n\
-    \            }\n        }\n        lint pivinv = mod_inverse<lint>(mtr[h][c],\
-    \ mod);\n        for (int hh = 0; hh < H; hh++) {\n            if (hh == h) continue;\n\
-    \            lint coeff = mtr[hh][c] * pivinv % mod;\n            for (int w =\
-    \ W - 1; w >= c; w--) {\n                mtr[hh][w] = mtr[hh][w] - mtr[h][w] *\
-    \ coeff % mod;\n                if (mtr[hh][w] < 0) mtr[hh][w] += mod;\n     \
-    \       }\n        }\n        c++;\n    }\n    return mtr;\n}\n\ntemplate <typename\
-    \ lint>\nint rank_gauss_jordan(const std::vector<std::vector<lint>> &mtr) // Rank\
-    \ of Gauss-Jordan eliminated matrix\n{\n    for (int h = (int)mtr.size() - 1;\
-    \ h >= 0; h--) {\n        for (auto v : mtr[h])\n            if (v) return h +\
-    \ 1;\n    }\n    return 0;\n}\n\ntemplate <typename lint, typename mdint>\nlint\
-    \ mod_determinant(std::vector<std::vector<lint>> mtr, mdint mod) {\n    if (mtr.empty())\
-    \ return 1 % mod;\n    assert(mtr.size() == mtr[0].size());\n    lint ans = 1;\n\
-    \    mtr = gauss_jordan(mtr, mod);\n    for (int i = 0; i < (int)mtr.size(); i++)\
-    \ ans = ans * mtr[i][i] % mod;\n    return ans;\n}\n\ntemplate <typename lint,\
-    \ typename mdint>\nstd::vector<std::vector<lint>>\nmatmul(const std::vector<std::vector<lint>>\
+    \ m);\n}\n\ntemplate <class Int = int, class Long = long long>\nInt pow_mod(Int\
+    \ x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2 <= sizeof(Long),\
+    \ \"Watch out for overflow\");\n    if (md == 1) return 0;\n    Int ans = 1;\n\
+    \    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x % md;\n        x\
+    \ = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n}\n#line 4 \"\
+    linear_algebra_matrix/linalg_longlong.hpp\"\n#include <cstdlib>\n#line 6 \"linear_algebra_matrix/linalg_longlong.hpp\"\
+    \n\n// CUT begin\ntemplate <typename lint, typename mdint>\nstd::vector<std::vector<lint>>\
+    \ gauss_jordan(std::vector<std::vector<lint>> mtr, mdint mod) {\n    // Gauss-Jordan\
+    \ elimination \u884C\u57FA\u672C\u5909\u5F62\u306E\u307F\u3092\u7528\u3044\u308B\
+    \u30AC\u30A6\u30B9\u6D88\u53BB\u6CD5\n    int H = mtr.size(), W = mtr[0].size(),\
+    \ c = 0;\n    for (int h = 0; h < H; h++) {\n        if (c == W) break;\n    \
+    \    int piv = -1;\n        for (int j = h; j < H; j++)\n            if (mtr[j][c])\
+    \ {\n                if (piv == -1 or abs(mtr[j][c]) > abs(mtr[piv][c])) piv =\
+    \ j;\n            }\n        if (piv == -1) {\n            c++;\n            h--;\n\
+    \            continue;\n        }\n        std::swap(mtr[piv], mtr[h]);\n    \
+    \    if (h != piv) {\n            for (int w = 0; w < W; w++) {\n            \
+    \    mtr[piv][w] =\n                    mtr[piv][w] ? mod - mtr[piv][w] : 0; //\
+    \ To preserve sign of determinant\n            }\n        }\n        lint pivinv\
+    \ = mod_inverse<lint>(mtr[h][c], mod);\n        for (int hh = 0; hh < H; hh++)\
+    \ {\n            if (hh == h) continue;\n            lint coeff = mtr[hh][c] *\
+    \ pivinv % mod;\n            for (int w = W - 1; w >= c; w--) {\n            \
+    \    mtr[hh][w] = mtr[hh][w] - mtr[h][w] * coeff % mod;\n                if (mtr[hh][w]\
+    \ < 0) mtr[hh][w] += mod;\n            }\n        }\n        c++;\n    }\n   \
+    \ return mtr;\n}\n\ntemplate <typename lint>\nint rank_gauss_jordan(const std::vector<std::vector<lint>>\
+    \ &mtr) // Rank of Gauss-Jordan eliminated matrix\n{\n    for (int h = (int)mtr.size()\
+    \ - 1; h >= 0; h--) {\n        for (auto v : mtr[h])\n            if (v) return\
+    \ h + 1;\n    }\n    return 0;\n}\n\ntemplate <typename lint, typename mdint>\n\
+    lint mod_determinant(std::vector<std::vector<lint>> mtr, mdint mod) {\n    if\
+    \ (mtr.empty()) return 1 % mod;\n    assert(mtr.size() == mtr[0].size());\n  \
+    \  lint ans = 1;\n    mtr = gauss_jordan(mtr, mod);\n    for (int i = 0; i < (int)mtr.size();\
+    \ i++) ans = ans * mtr[i][i] % mod;\n    return ans;\n}\n\ntemplate <typename\
+    \ lint, typename mdint>\nstd::vector<std::vector<lint>>\nmatmul(const std::vector<std::vector<lint>>\
     \ &A, const std::vector<std::vector<lint>> &B, mdint mod) {\n    int H = A.size(),\
     \ W = B[0].size(), K = B.size();\n    std::vector<std::vector<lint>> C(H, std::vector<lint>(W));\n\
     \    for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) {\n  \
@@ -118,7 +119,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-10-14 10:52:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_ll_det.test.cpp

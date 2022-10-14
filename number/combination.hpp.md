@@ -58,12 +58,14 @@ data:
     \ (b % d != 0) {\n            return std::make_pair(0, 0); // \u89E3\u306A\u3057\
     \n        }\n        Int t = b / d * mod_inverse<Int>(a / d, M[i] / d) % (M[i]\
     \ / d);\n        r += m * t;\n        m *= M[i] / d;\n    }\n    return std::make_pair((r\
-    \ < 0 ? r + m : r), m);\n}\n\nint pow_mod(int x, long long n, int md) {\n    if\
-    \ (md == 1) return 0;\n    long long ans = 1;\n    while (n > 0) {\n        if\
-    \ (n & 1) ans = ans * x % md;\n        x = (long long)x * x % md;\n        n >>=\
-    \ 1;\n    }\n    return ans;\n}\n#line 5 \"number/combination.hpp\"\n\n// nCr\
-    \ mod m = p^q (p: prime, q >= 1)\n// Can be used for n, r <= 1e18, m <= 1e7\n\
-    // Complexity: O(m) (construction), O(log(n)) (per query)\n// https://ferin-tech.hatenablog.com/entry/2018/01/17/010829\n\
+    \ < 0 ? r + m : r), m);\n}\n\ntemplate <class Int = int, class Long = long long>\n\
+    Int pow_mod(Int x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2 <=\
+    \ sizeof(Long), \"Watch out for overflow\");\n    if (md == 1) return 0;\n   \
+    \ Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x %\
+    \ md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n\
+    }\n#line 5 \"number/combination.hpp\"\n\n// nCr mod m = p^q (p: prime, q >= 1)\n\
+    // Can be used for n, r <= 1e18, m <= 1e7\n// Complexity: O(m) (construction),\
+    \ O(log(n)) (per query)\n// https://ferin-tech.hatenablog.com/entry/2018/01/17/010829\n\
     struct combination_prime_pow {\n    int p, q, m;\n    std::vector<int> fac, invfac,\
     \ ppow;\n\n    long long _ej(long long n) const {\n        long long ret = 0;\n\
     \        while (n) ret += n, n /= p;\n        return ret;\n    }\n\n    combination_prime_pow(int\
@@ -135,7 +137,7 @@ data:
   isVerificationFile: false
   path: number/combination.hpp
   requiredBy: []
-  timestamp: '2021-10-30 11:40:58+09:00'
+  timestamp: '2022-10-14 10:52:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/combination.stress.test.cpp

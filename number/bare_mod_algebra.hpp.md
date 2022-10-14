@@ -35,6 +35,9 @@ data:
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/primitive_root_1e18.test.cpp
+    title: number/test/primitive_root_1e18.test.cpp
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   _isVerificationFailed: false
@@ -81,10 +84,12 @@ data:
     \ (b % d != 0) {\n            return std::make_pair(0, 0); // \u89E3\u306A\u3057\
     \n        }\n        Int t = b / d * mod_inverse<Int>(a / d, M[i] / d) % (M[i]\
     \ / d);\n        r += m * t;\n        m *= M[i] / d;\n    }\n    return std::make_pair((r\
-    \ < 0 ? r + m : r), m);\n}\n\nint pow_mod(int x, long long n, int md) {\n    if\
-    \ (md == 1) return 0;\n    long long ans = 1;\n    while (n > 0) {\n        if\
-    \ (n & 1) ans = ans * x % md;\n        x = (long long)x * x % md;\n        n >>=\
-    \ 1;\n    }\n    return ans;\n}\n"
+    \ < 0 ? r + m : r), m);\n}\n\ntemplate <class Int = int, class Long = long long>\n\
+    Int pow_mod(Int x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2 <=\
+    \ sizeof(Long), \"Watch out for overflow\");\n    if (md == 1) return 0;\n   \
+    \ Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x %\
+    \ md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n\
+    }\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\n\n// CUT begin\n// Solve ax+by=gcd(a, b)\n\
     template <class Int> Int extgcd(Int a, Int b, Int &x, Int &y) {\n    Int d = a;\n\
@@ -124,10 +129,11 @@ data:
     \ std::make_pair(0, 0); // \u89E3\u306A\u3057\n        }\n        Int t = b /\
     \ d * mod_inverse<Int>(a / d, M[i] / d) % (M[i] / d);\n        r += m * t;\n \
     \       m *= M[i] / d;\n    }\n    return std::make_pair((r < 0 ? r + m : r),\
-    \ m);\n}\n\nint pow_mod(int x, long long n, int md) {\n    if (md == 1) return\
-    \ 0;\n    long long ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = ans\
-    \ * x % md;\n        x = (long long)x * x % md;\n        n >>= 1;\n    }\n   \
-    \ return ans;\n}\n"
+    \ m);\n}\n\ntemplate <class Int = int, class Long = long long>\nInt pow_mod(Int\
+    \ x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2 <= sizeof(Long),\
+    \ \"Watch out for overflow\");\n    if (md == 1) return 0;\n    Int ans = 1;\n\
+    \    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x % md;\n        x\
+    \ = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: number/bare_mod_algebra.hpp
@@ -135,7 +141,7 @@ data:
   - linear_algebra_matrix/linalg_longlong.hpp
   - number/combination.hpp
   - number/primitive_root.hpp
-  timestamp: '2021-10-30 11:24:11+09:00'
+  timestamp: '2022-10-14 10:52:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
@@ -143,6 +149,7 @@ data:
   - linear_algebra_matrix/test/linalg_ll_det.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - number/test/primitive_root.test.cpp
+  - number/test/primitive_root_1e18.test.cpp
   - number/test/combination.stress.test.cpp
   - number/test/combination.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
