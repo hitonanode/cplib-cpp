@@ -276,8 +276,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - geometry/test/circumcenter.test.cpp
-  - geometry/test/convex_hull.test.cpp
   - geometry/test/convex_cut.test.cpp
+  - geometry/test/convex_hull.test.cpp
 documentation_of: geometry/geometry.hpp
 layout: document
 redirect_from:

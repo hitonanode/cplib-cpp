@@ -58,10 +58,13 @@ data:
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
     \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
     \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
-    \ return ret;\n    }\n} FactorizeLonglong;\n#line 3 \"number/test/factorize_aoj.test.cpp\"\
-    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin\
-    \ >> n;\n    auto facs = FactorizeLonglong(n);\n    cout << n << ':';\n    for\
-    \ (auto x : facs) cout << ' ' << x;\n    cout << '\\n';\n}\n"
+    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
+    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 3\
+    \ \"number/test/factorize_aoj.test.cpp\"\n#include <iostream>\nusing namespace\
+    \ std;\n\nint main() {\n    int n;\n    cin >> n;\n    auto facs = FactorizeLonglong(n);\n\
+    \    cout << n << ':';\n    for (auto x : facs) cout << ' ' << x;\n    cout <<\
+    \ '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A\"\
     \n#include \"../factorize.hpp\"\n#include <iostream>\nusing namespace std;\n\n\
     int main() {\n    int n;\n    cin >> n;\n    auto facs = FactorizeLonglong(n);\n\
@@ -72,7 +75,7 @@ data:
   isVerificationFile: true
   path: number/test/factorize_aoj.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-10-27 21:31:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/factorize_aoj.test.cpp

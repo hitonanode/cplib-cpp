@@ -82,29 +82,31 @@ data:
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
     \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
     \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
-    \ return ret;\n    }\n} FactorizeLonglong;\n#line 2 \"number/modint_runtime.hpp\"\
-    \n#include <iostream>\n#include <set>\n#line 5 \"number/modint_runtime.hpp\"\n\
-    \nstruct ModIntRuntime {\nprivate:\n    static int md;\n\npublic:\n    using lint\
-    \ = long long;\n    static int mod() { return md; }\n    int val_;\n    static\
-    \ std::vector<ModIntRuntime> &facs() {\n        static std::vector<ModIntRuntime>\
-    \ facs_;\n        return facs_;\n    }\n    static int &get_primitive_root() {\n\
-    \        static int primitive_root_ = 0;\n        if (!primitive_root_) {\n  \
-    \          primitive_root_ = [&]() {\n                std::set<int> fac;\n   \
-    \             int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
-    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
-    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
-    \                    bool ok = true;\n                    for (auto i : fac)\n\
-    \                        if (ModIntRuntime(g).power((md - 1) / i) == 1) {\n  \
-    \                          ok = false;\n                            break;\n \
-    \                       }\n                    if (ok) return g;\n           \
-    \     }\n                return -1;\n            }();\n        }\n        return\
-    \ primitive_root_;\n    }\n    static void set_mod(const int &m) {\n        if\
-    \ (md != m) facs().clear();\n        md = m;\n        get_primitive_root() = 0;\n\
-    \    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ? v - md\
-    \ : v);\n        return *this;\n    }\n    int val() const noexcept { return val_;\
-    \ }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v %\
-    \ md + md); }\n    explicit operator bool() const { return val_ != 0; }\n    ModIntRuntime\
-    \ operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
+    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 2\
+    \ \"number/modint_runtime.hpp\"\n#include <iostream>\n#include <set>\n#line 5\
+    \ \"number/modint_runtime.hpp\"\n\nstruct ModIntRuntime {\nprivate:\n    static\
+    \ int md;\n\npublic:\n    using lint = long long;\n    static int mod() { return\
+    \ md; }\n    int val_;\n    static std::vector<ModIntRuntime> &facs() {\n    \
+    \    static std::vector<ModIntRuntime> facs_;\n        return facs_;\n    }\n\
+    \    static int &get_primitive_root() {\n        static int primitive_root_ =\
+    \ 0;\n        if (!primitive_root_) {\n            primitive_root_ = [&]() {\n\
+    \                std::set<int> fac;\n                int v = md - 1;\n       \
+    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
+    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
+    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
+    \                    for (auto i : fac)\n                        if (ModIntRuntime(g).power((md\
+    \ - 1) / i) == 1) {\n                            ok = false;\n               \
+    \             break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root_;\n    }\n    static void set_mod(const int\
+    \ &m) {\n        if (md != m) facs().clear();\n        md = m;\n        get_primitive_root()\
+    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ?\
+    \ v - md : v);\n        return *this;\n    }\n    int val() const noexcept { return\
+    \ val_; }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v\
+    \ % md + md); }\n    explicit operator bool() const { return val_ != 0; }\n  \
+    \  ModIntRuntime operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
     \ + x.val_);\n    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const\
     \ {\n        return ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n\
     \    ModIntRuntime operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
@@ -184,7 +186,7 @@ data:
   isVerificationFile: true
   path: graph/test/chromatic_number.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2022-10-27 21:31:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/chromatic_number.test.cpp

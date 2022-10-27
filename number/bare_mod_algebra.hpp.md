@@ -11,7 +11,7 @@ data:
       \u7406\u306E\u62E1\u5F35\uFF09"
   - icon: ':heavy_check_mark:'
     path: number/primitive_root.hpp
-    title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
+    title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
@@ -146,12 +146,12 @@ data:
   verifiedWith:
   - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
   - linear_algebra_matrix/test/linalg_longlong.test.cpp
-  - linear_algebra_matrix/test/linalg_ll_det.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - number/test/primitive_root.test.cpp
+  - linear_algebra_matrix/test/linalg_ll_det.test.cpp
   - number/test/primitive_root_1e18.test.cpp
-  - number/test/combination.stress.test.cpp
+  - number/test/primitive_root.test.cpp
   - number/test/combination.test.cpp
+  - number/test/combination.stress.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
 documentation_of: number/bare_mod_algebra.hpp
 layout: document

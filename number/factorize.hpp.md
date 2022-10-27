@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: number/primitive_root.hpp
-    title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
+    title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: graph/test/chromatic_number.test.cpp
@@ -76,7 +76,9 @@ data:
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
     \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
     \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
-    \ return ret;\n    }\n} FactorizeLonglong;\n"
+    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
+    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n"
   code: "#pragma once\n#include <algorithm>\n#include <array>\n#include <cassert>\n\
     #include <vector>\n\n// CUT begin\nnamespace SPRP {\n// http://miller-rabin.appspot.com/\n\
     const std::vector<std::vector<__int128>> bases{\n    {126401071349994536},   \
@@ -119,21 +121,23 @@ data:
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
     \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
     \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
-    \ return ret;\n    }\n} FactorizeLonglong;\n"
+    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
+    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n"
   dependsOn: []
   isVerificationFile: false
   path: number/factorize.hpp
   requiredBy:
   - number/primitive_root.hpp
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-10-27 21:31:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/factorize_longlong.test.cpp
-  - number/test/primitive_root.test.cpp
-  - number/test/miller-rabin.test.cpp
-  - number/test/primitive_root_1e18.test.cpp
   - number/test/factorize_aoj.test.cpp
+  - number/test/primitive_root_1e18.test.cpp
+  - number/test/factorize_longlong.test.cpp
   - number/test/miller-rabin-5e7.test.cpp
+  - number/test/miller-rabin.test.cpp
+  - number/test/primitive_root.test.cpp
   - graph/test/chromatic_number.test.cpp
 documentation_of: number/factorize.hpp
 layout: document

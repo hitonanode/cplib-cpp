@@ -21,6 +21,8 @@ data:
   attributes:
     links:
     - http://kirika-comp.hatenablog.com/entry/2018/03/12/210446
+    - https://community.topcoder.com/stat?c=problem_statement&pm=17877
+    - https://en.wikipedia.org/wiki/Primitive_root_modulo_n)
     - https://judge.yosupo.jp/problem/primitive_root
     - https://yukicoder.me/submissions/405938
   bundledCode: "#line 2 \"number/bare_mod_algebra.hpp\"\n#include <algorithm>\n#include\
@@ -109,59 +111,75 @@ data:
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
     \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
     \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
-    \ return ret;\n    }\n} FactorizeLonglong;\n#line 4 \"number/primitive_root.hpp\"\
-    \n\n// Find smallest primitive root for given prime P \uFF08\u6700\u5C0F\u306E\
-    \u539F\u59CB\u6839\u63A2\u7D22\uFF09\n// Complexity: maybe O(sqrt(p))\n// Algorithm:\
-    \ http://kirika-comp.hatenablog.com/entry/2018/03/12/210446\n// Verified: https://yukicoder.me/submissions/405938\
-    \ https://judge.yosupo.jp/problem/primitive_root\n// Sample:\n//  - 998244353\
-    \ ( = (119 << 23) + 1 ) -> 3\n//  - 163577857 ( = (39 << 22) + 1 ) -> 23\n// \
-    \ - 2 -> 1\n//  - 1 -> -1\nlong long find_smallest_primitive_root(long long p)\
-    \ {\n    std::vector<long long> fac;\n    for (long long q : FactorizeLonglong(p\
-    \ - 1)) {\n        if (fac.empty() or fac.back() != q) fac.push_back(q);\n   \
-    \ }\n\n    for (long long g = 1; g < p; g++) {\n        if (pow_mod<long long,\
-    \ __int128>(g, p - 1, p) != 1) return -1;\n        bool ok = true;\n        for\
-    \ (auto pp : fac) {\n            if (pow_mod<long long, __int128>(g, (p - 1) /\
-    \ pp, p) == 1) {\n                ok = false;\n                break;\n      \
-    \      }\n        }\n        if (ok) return g;\n    }\n    return -1;\n}\n"
+    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
+    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 4\
+    \ \"number/primitive_root.hpp\"\n\n// Find smallest primitive root for given number\
+    \ n \uFF08\u6700\u5C0F\u306E\u539F\u59CB\u6839\u63A2\u7D22\uFF09\n// n must be\
+    \ 2 / 4 / p^k / 2p^k (p: odd prime, k > 0)\n// (https://en.wikipedia.org/wiki/Primitive_root_modulo_n)\n\
+    //\n// Complexity: maybe O(sqrt(n)), if n is\n// prime Algorithm: http://kirika-comp.hatenablog.com/entry/2018/03/12/210446\
+    \ Verified:\n// - https://yukicoder.me/submissions/405938\n// - https://judge.yosupo.jp/problem/primitive_root\n\
+    // - SRM 840 Div.1 900 https://community.topcoder.com/stat?c=problem_statement&pm=17877\n\
+    // Sample:\n//  - 998244353 ( = (119 << 23) + 1 ) -> 3\n//  - 163577857 ( = (39\
+    \ << 22) + 1 ) -> 23\n//  - 2 -> 1\n//  - 1 -> -1\nlong long find_smallest_primitive_root(long\
+    \ long n) {\n    std::vector<long long> fac;\n    const long long phi = FactorizeLonglong.euler_phi(n);\n\
+    \    for (long long q : FactorizeLonglong(phi)) {\n        if (fac.empty() or\
+    \ fac.back() != q) fac.push_back(q);\n    }\n\n    for (long long g = 1; g < n;\
+    \ g++) {\n        if (std::__gcd(n, g) != 1) continue;\n        if (pow_mod<long\
+    \ long, __int128>(g, phi, n) != 1) return -1;\n        bool ok = true;\n     \
+    \   for (auto pp : fac) {\n            if (pow_mod<long long, __int128>(g, phi\
+    \ / pp, n) == 1) {\n                ok = false;\n                break;\n    \
+    \        }\n        }\n        if (ok) return g;\n    }\n    return -1;\n}\n"
   code: "#pragma once\n#include \"bare_mod_algebra.hpp\"\n#include \"factorize.hpp\"\
-    \n\n// Find smallest primitive root for given prime P \uFF08\u6700\u5C0F\u306E\
-    \u539F\u59CB\u6839\u63A2\u7D22\uFF09\n// Complexity: maybe O(sqrt(p))\n// Algorithm:\
-    \ http://kirika-comp.hatenablog.com/entry/2018/03/12/210446\n// Verified: https://yukicoder.me/submissions/405938\
-    \ https://judge.yosupo.jp/problem/primitive_root\n// Sample:\n//  - 998244353\
-    \ ( = (119 << 23) + 1 ) -> 3\n//  - 163577857 ( = (39 << 22) + 1 ) -> 23\n// \
-    \ - 2 -> 1\n//  - 1 -> -1\nlong long find_smallest_primitive_root(long long p)\
-    \ {\n    std::vector<long long> fac;\n    for (long long q : FactorizeLonglong(p\
-    \ - 1)) {\n        if (fac.empty() or fac.back() != q) fac.push_back(q);\n   \
-    \ }\n\n    for (long long g = 1; g < p; g++) {\n        if (pow_mod<long long,\
-    \ __int128>(g, p - 1, p) != 1) return -1;\n        bool ok = true;\n        for\
-    \ (auto pp : fac) {\n            if (pow_mod<long long, __int128>(g, (p - 1) /\
-    \ pp, p) == 1) {\n                ok = false;\n                break;\n      \
-    \      }\n        }\n        if (ok) return g;\n    }\n    return -1;\n}\n"
+    \n\n// Find smallest primitive root for given number n \uFF08\u6700\u5C0F\u306E\
+    \u539F\u59CB\u6839\u63A2\u7D22\uFF09\n// n must be 2 / 4 / p^k / 2p^k (p: odd\
+    \ prime, k > 0)\n// (https://en.wikipedia.org/wiki/Primitive_root_modulo_n)\n\
+    //\n// Complexity: maybe O(sqrt(n)), if n is\n// prime Algorithm: http://kirika-comp.hatenablog.com/entry/2018/03/12/210446\
+    \ Verified:\n// - https://yukicoder.me/submissions/405938\n// - https://judge.yosupo.jp/problem/primitive_root\n\
+    // - SRM 840 Div.1 900 https://community.topcoder.com/stat?c=problem_statement&pm=17877\n\
+    // Sample:\n//  - 998244353 ( = (119 << 23) + 1 ) -> 3\n//  - 163577857 ( = (39\
+    \ << 22) + 1 ) -> 23\n//  - 2 -> 1\n//  - 1 -> -1\nlong long find_smallest_primitive_root(long\
+    \ long n) {\n    std::vector<long long> fac;\n    const long long phi = FactorizeLonglong.euler_phi(n);\n\
+    \    for (long long q : FactorizeLonglong(phi)) {\n        if (fac.empty() or\
+    \ fac.back() != q) fac.push_back(q);\n    }\n\n    for (long long g = 1; g < n;\
+    \ g++) {\n        if (std::__gcd(n, g) != 1) continue;\n        if (pow_mod<long\
+    \ long, __int128>(g, phi, n) != 1) return -1;\n        bool ok = true;\n     \
+    \   for (auto pp : fac) {\n            if (pow_mod<long long, __int128>(g, phi\
+    \ / pp, n) == 1) {\n                ok = false;\n                break;\n    \
+    \        }\n        }\n        if (ok) return g;\n    }\n    return -1;\n}\n"
   dependsOn:
   - number/bare_mod_algebra.hpp
   - number/factorize.hpp
   isVerificationFile: false
   path: number/primitive_root.hpp
   requiredBy: []
-  timestamp: '2022-10-14 10:52:36+09:00'
+  timestamp: '2022-10-27 21:31:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/primitive_root.test.cpp
   - number/test/primitive_root_1e18.test.cpp
+  - number/test/primitive_root.test.cpp
 documentation_of: number/primitive_root.hpp
 layout: document
-title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
+title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
 ---
 
-与えられた素数 $P$ に対して最小の原始根を計算する．$P \le 10^{18}$ を想定．
+与えられた整数 $n$ に対して，乗法群 $\mathbb{Z}^{\times}\_{n}$ に原始根が存在する場合に最小の原始根を計算する．$n \le 10^{18}$ を想定．
+
+## 乗法群の原始根とは
+
+$\mod n$ 上の整数のうち，乗法の逆元が存在するもののみをとって作る群を乗法群 $\mathbb{Z}^{\times}\_{n}$ と呼ぶ．
+
+乗法群 $\mathbb{Z}^{\times}\_{n}$ の元 $r$ について，$r^0, r^1, r^2, \dots$ の集合が $\mathbb{Z}^{\times}\_{n}$ と（集合として）一致するとき，$r$ を乗法群の原始根と呼ぶ．
+
+$\mathbb{Z}^\times\_{n}$ に原始根が存在するような $n$ は限られている．具体的には，$n = 2, 4, p^k, 2p^k$ のみである（$p$ は奇素数，$k$ は正の整数）．
 
 ## 最小の原始根について
 
 本コードの
 ```cpp
-    for (long long g = 1; g < p; g++) {
+    for (long long g = 1; g < n; g++) {
 ```
-の部分について，`g` をインクリメンタルに調べることで最小の原始根を見つけている．$10^{16}$ 以下の範囲では， $p = 6525032504501281$ のとき最小の原始根が $417$ となってこれが最大という（参考文献 [2]）．
+の部分について，`g` をインクリメンタルに調べることで最小の原始根を見つけている．$n$ が素数でかつ $10^{16}$ 以下の範囲では， $n = 6525032504501281$ のとき最小の原始根が $417$ となってこれが最大という（参考文献 [2]）．
 
 上記のようなケースに対して，$g$ について乱択すれば（「最小の」原始根を諦める代わりに）実用上の高速化が可能と思われる [3]．
 
@@ -174,3 +192,4 @@ title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
 - [1] [整数論テクニック集 - kirika_compのブログ](https://kirika-comp.hatenablog.com/entry/2018/03/12/210446)
 - [2] [[2206.14193] Computation of the least primitive root](https://arxiv.org/abs/2206.14193)
 - [3] [原始根のアルゴリズム – 37zigenのHP](https://37zigen.com/primitive-root/)
+- [4] [Primitive root modulo n - Wikipedia](https://en.wikipedia.org/wiki/Primitive_root_modulo_n)

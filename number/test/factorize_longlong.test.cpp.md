@@ -56,12 +56,15 @@ data:
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
     \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
     \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
-    \ return ret;\n    }\n} FactorizeLonglong;\n#line 2 \"number/test/factorize_longlong.test.cpp\"\
-    \n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\
-    \n\nint main() {\n    int Q;\n    std::cin >> Q;\n    while (Q--) {\n        long\
-    \ long a;\n        std::cin >> a;\n        auto ret = FactorizeLonglong(a);\n\
-    \        std::cout << ret.size();\n        for (auto p : ret) std::cout << ' '\
-    \ << p;\n        std::cout << '\\n';\n    }\n}\n"
+    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
+    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 2\
+    \ \"number/test/factorize_longlong.test.cpp\"\n#include <iostream>\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/factorize\"\n\nint main() {\n    int Q;\n\
+    \    std::cin >> Q;\n    while (Q--) {\n        long long a;\n        std::cin\
+    \ >> a;\n        auto ret = FactorizeLonglong(a);\n        std::cout << ret.size();\n\
+    \        for (auto p : ret) std::cout << ' ' << p;\n        std::cout << '\\n';\n\
+    \    }\n}\n"
   code: "#include \"../factorize.hpp\"\n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\
     \n\nint main() {\n    int Q;\n    std::cin >> Q;\n    while (Q--) {\n        long\
     \ long a;\n        std::cin >> a;\n        auto ret = FactorizeLonglong(a);\n\
@@ -72,7 +75,7 @@ data:
   isVerificationFile: true
   path: number/test/factorize_longlong.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-10-27 21:31:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/factorize_longlong.test.cpp

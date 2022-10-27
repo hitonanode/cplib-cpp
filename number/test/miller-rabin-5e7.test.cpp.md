@@ -61,14 +61,17 @@ data:
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
     \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
     \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
-    \ return ret;\n    }\n} FactorizeLonglong;\n#line 3 \"number/sieve.hpp\"\n#include\
-    \ <map>\n#line 5 \"number/sieve.hpp\"\n\n// CUT begin\n// Linear sieve algorithm\
-    \ for fast prime factorization\n// Complexity: O(N) time, O(N) space:\n// - MAXN\
-    \ = 10^7:  ~44 MB,  80~100 ms (Codeforces / AtCoder GCC, C++17)\n// - MAXN = 10^8:\
-    \ ~435 MB, 810~980 ms (Codeforces / AtCoder GCC, C++17)\n// Reference:\n// [1]\
-    \ D. Gries, J. Misra, \"A Linear Sieve Algorithm for Finding Prime Numbers,\"\n\
-    //     Communications of the ACM, 21(12), 999-1003, 1978.\n// - https://cp-algorithms.com/algebra/prime-sieve-linear.html\n\
-    // - https://37zigen.com/linear-sieve/\nstruct Sieve {\n    std::vector<int> min_factor;\n\
+    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
+    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 3\
+    \ \"number/sieve.hpp\"\n#include <map>\n#line 5 \"number/sieve.hpp\"\n\n// CUT\
+    \ begin\n// Linear sieve algorithm for fast prime factorization\n// Complexity:\
+    \ O(N) time, O(N) space:\n// - MAXN = 10^7:  ~44 MB,  80~100 ms (Codeforces /\
+    \ AtCoder GCC, C++17)\n// - MAXN = 10^8: ~435 MB, 810~980 ms (Codeforces / AtCoder\
+    \ GCC, C++17)\n// Reference:\n// [1] D. Gries, J. Misra, \"A Linear Sieve Algorithm\
+    \ for Finding Prime Numbers,\"\n//     Communications of the ACM, 21(12), 999-1003,\
+    \ 1978.\n// - https://cp-algorithms.com/algebra/prime-sieve-linear.html\n// -\
+    \ https://37zigen.com/linear-sieve/\nstruct Sieve {\n    std::vector<int> min_factor;\n\
     \    std::vector<int> primes;\n    Sieve(int MAXN) : min_factor(MAXN + 1) {\n\
     \        for (int d = 2; d <= MAXN; d++) {\n            if (!min_factor[d]) {\n\
     \                min_factor[d] = d;\n                primes.emplace_back(d);\n\
@@ -136,7 +139,7 @@ data:
   isVerificationFile: true
   path: number/test/miller-rabin-5e7.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-10-27 21:31:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/miller-rabin-5e7.test.cpp

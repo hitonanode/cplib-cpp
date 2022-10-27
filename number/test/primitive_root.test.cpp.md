@@ -15,7 +15,7 @@ data:
     title: number/factorize.hpp
   - icon: ':heavy_check_mark:'
     path: number/primitive_root.hpp
-    title: "Primitive root \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
+    title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -113,20 +113,25 @@ data:
     \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
     \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
     \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
-    \ return ret;\n    }\n} FactorizeLonglong;\n#line 4 \"number/primitive_root.hpp\"\
-    \n\n// Find smallest primitive root for given prime P \uFF08\u6700\u5C0F\u306E\
-    \u539F\u59CB\u6839\u63A2\u7D22\uFF09\n// Complexity: maybe O(sqrt(p))\n// Algorithm:\
-    \ http://kirika-comp.hatenablog.com/entry/2018/03/12/210446\n// Verified: https://yukicoder.me/submissions/405938\
-    \ https://judge.yosupo.jp/problem/primitive_root\n// Sample:\n//  - 998244353\
-    \ ( = (119 << 23) + 1 ) -> 3\n//  - 163577857 ( = (39 << 22) + 1 ) -> 23\n// \
-    \ - 2 -> 1\n//  - 1 -> -1\nlong long find_smallest_primitive_root(long long p)\
-    \ {\n    std::vector<long long> fac;\n    for (long long q : FactorizeLonglong(p\
-    \ - 1)) {\n        if (fac.empty() or fac.back() != q) fac.push_back(q);\n   \
-    \ }\n\n    for (long long g = 1; g < p; g++) {\n        if (pow_mod<long long,\
-    \ __int128>(g, p - 1, p) != 1) return -1;\n        bool ok = true;\n        for\
-    \ (auto pp : fac) {\n            if (pow_mod<long long, __int128>(g, (p - 1) /\
-    \ pp, p) == 1) {\n                ok = false;\n                break;\n      \
-    \      }\n        }\n        if (ok) return g;\n    }\n    return -1;\n}\n#line\
+    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
+    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 4\
+    \ \"number/primitive_root.hpp\"\n\n// Find smallest primitive root for given number\
+    \ n \uFF08\u6700\u5C0F\u306E\u539F\u59CB\u6839\u63A2\u7D22\uFF09\n// n must be\
+    \ 2 / 4 / p^k / 2p^k (p: odd prime, k > 0)\n// (https://en.wikipedia.org/wiki/Primitive_root_modulo_n)\n\
+    //\n// Complexity: maybe O(sqrt(n)), if n is\n// prime Algorithm: http://kirika-comp.hatenablog.com/entry/2018/03/12/210446\
+    \ Verified:\n// - https://yukicoder.me/submissions/405938\n// - https://judge.yosupo.jp/problem/primitive_root\n\
+    // - SRM 840 Div.1 900 https://community.topcoder.com/stat?c=problem_statement&pm=17877\n\
+    // Sample:\n//  - 998244353 ( = (119 << 23) + 1 ) -> 3\n//  - 163577857 ( = (39\
+    \ << 22) + 1 ) -> 23\n//  - 2 -> 1\n//  - 1 -> -1\nlong long find_smallest_primitive_root(long\
+    \ long n) {\n    std::vector<long long> fac;\n    const long long phi = FactorizeLonglong.euler_phi(n);\n\
+    \    for (long long q : FactorizeLonglong(phi)) {\n        if (fac.empty() or\
+    \ fac.back() != q) fac.push_back(q);\n    }\n\n    for (long long g = 1; g < n;\
+    \ g++) {\n        if (std::__gcd(n, g) != 1) continue;\n        if (pow_mod<long\
+    \ long, __int128>(g, phi, n) != 1) return -1;\n        bool ok = true;\n     \
+    \   for (auto pp : fac) {\n            if (pow_mod<long long, __int128>(g, phi\
+    \ / pp, n) == 1) {\n                ok = false;\n                break;\n    \
+    \        }\n        }\n        if (ok) return g;\n    }\n    return -1;\n}\n#line\
     \ 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#line 5 \"modint.hpp\"\
     \n\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n#define MDCONST\
     \ constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long long;\n   \
@@ -299,7 +304,7 @@ data:
   isVerificationFile: true
   path: number/test/primitive_root.test.cpp
   requiredBy: []
-  timestamp: '2022-10-14 10:52:36+09:00'
+  timestamp: '2022-10-27 21:31:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/primitive_root.test.cpp
