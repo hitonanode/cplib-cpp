@@ -102,4 +102,9 @@ struct {
         std::sort(ret.begin(), ret.end());
         return ret;
     }
+    long long euler_phi(long long n) {
+        long long ret = 1, last = -1;
+        for (auto p : this->operator()(n)) ret *= p - (last != p), last = p;
+        return ret;
+    }
 } FactorizeLonglong;
