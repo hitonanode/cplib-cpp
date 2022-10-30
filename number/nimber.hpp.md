@@ -18,10 +18,10 @@ data:
     - https://judge.yosupo.jp/submission/4542
     - https://kyopro-friends.hatenablog.com/entry/2020/04/07/195850
   bundledCode: "#line 2 \"number/nimber.hpp\"\n#include <array>\n\n// Nimber (64 bit)\n\
-    // Reference:\n// - https://en.wikipedia.org/wiki/Nimber\n// - https://kyopro-friends.hatenablog.com/entry/2020/04/07/195850\n\
-    // - https://judge.yosupo.jp/submission/4542 (implementation idea)\nstruct Nimber\
-    \ {\n    using ull = unsigned long long;\n    ull v;\n    const static std::array<std::array<unsigned,\
-    \ 256>, 256> small_table;\n    const static std::array<std::array<std::array<ull,\
+    // Reference:\n// - https://judge.yosupo.jp/submission/4542 (Original implementation\
+    \ idea)\n// - https://en.wikipedia.org/wiki/Nimber\n// - https://kyopro-friends.hatenablog.com/entry/2020/04/07/195850\n\
+    struct Nimber {\n    using ull = unsigned long long;\n    ull v;\n    const static\
+    \ std::array<std::array<unsigned, 256>, 256> small_table;\n    const static std::array<std::array<std::array<ull,\
     \ 256>, 8>, 8> precalc;\n\n    explicit operator bool() const { return v != 0;\
     \ }\n    Nimber(ull val = 0) : v(val) {}\n    Nimber operator+(const Nimber &x)\
     \ const { return Nimber(v ^ x.v); }\n    Nimber operator-(const Nimber &x) const\
@@ -58,10 +58,10 @@ data:
     \ (8 * e));\n            for (int i = 0; i < 256; ++i) ret[d][e][i] = _rec(p,\
     \ i);\n        }\n    }\n    return ret;\n}();\n"
   code: "#pragma once\n#include <array>\n\n// Nimber (64 bit)\n// Reference:\n// -\
+    \ https://judge.yosupo.jp/submission/4542 (Original implementation idea)\n// -\
     \ https://en.wikipedia.org/wiki/Nimber\n// - https://kyopro-friends.hatenablog.com/entry/2020/04/07/195850\n\
-    // - https://judge.yosupo.jp/submission/4542 (implementation idea)\nstruct Nimber\
-    \ {\n    using ull = unsigned long long;\n    ull v;\n    const static std::array<std::array<unsigned,\
-    \ 256>, 256> small_table;\n    const static std::array<std::array<std::array<ull,\
+    struct Nimber {\n    using ull = unsigned long long;\n    ull v;\n    const static\
+    \ std::array<std::array<unsigned, 256>, 256> small_table;\n    const static std::array<std::array<std::array<ull,\
     \ 256>, 8>, 8> precalc;\n\n    explicit operator bool() const { return v != 0;\
     \ }\n    Nimber(ull val = 0) : v(val) {}\n    Nimber operator+(const Nimber &x)\
     \ const { return Nimber(v ^ x.v); }\n    Nimber operator-(const Nimber &x) const\
@@ -101,7 +101,7 @@ data:
   isVerificationFile: false
   path: number/nimber.hpp
   requiredBy: []
-  timestamp: '2021-10-27 23:41:07+09:00'
+  timestamp: '2022-10-30 13:35:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/nimber.test.cpp
@@ -111,7 +111,9 @@ layout: document
 title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"
 ---
 
-Nimber の実装．Nimber は非負整数として表されるが，特殊な和 $\oplus$ （実は bitwise xor 演算）と積 $\otimes$ が定義され，特に以下の性質を満たす：
+Nimber の実装．以下の実装方針は [yosupo さんの実装](https://judge.yosupo.jp/submission/4542) から学んだもの．
+
+Nimber は非負整数として表されるが，特殊な和 $\oplus$ （実は bitwise xor 演算）と積 $\otimes$ が定義され，特に以下の性質を満たす：
 
 - 交換・結合法則を満たす．
   - 特に，$2^{2^n}$ 未満のニム数全体はあるガロア体と同型．

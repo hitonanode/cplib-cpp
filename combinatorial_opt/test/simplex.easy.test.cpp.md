@@ -17,9 +17,8 @@ data:
     - https://yukicoder.me/problems/771
   bundledCode: "#line 2 \"combinatorial_opt/simplex.hpp\"\n#include <algorithm>\n\
     #include <chrono>\n#include <cmath>\n#include <numeric>\n#include <random>\n#include\
-    \ <vector>\n\n// CUT begin\n// Maximize cx s.t. Ax <= b, x >= 0\n// Implementation\
-    \ idea: https://kopricky.github.io/code/Computation_Advanced/simplex.html\n//\
-    \ Refer to https://hitonanode.github.io/cplib-cpp/combinatorial_opt/simplex.hpp\n\
+    \ <vector>\n\n// Maximize cx s.t. Ax <= b, x >= 0\n// Implementation idea: https://kopricky.github.io/code/Computation_Advanced/simplex.html\n\
+    // Refer to https://hitonanode.github.io/cplib-cpp/combinatorial_opt/simplex.hpp\n\
     template <typename Float = double, int DEPS = 30, bool Randomize = true> struct\
     \ Simplex {\n    const Float EPS = Float(1.0) / (1LL << DEPS);\n    int N, M;\n\
     \    std::vector<int> shuffle_idx;\n    std::vector<int> idx;\n    std::vector<std::vector<Float>>\
@@ -104,7 +103,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/simplex.easy.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-10-30 13:35:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/simplex.easy.test.cpp

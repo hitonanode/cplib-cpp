@@ -16,10 +16,10 @@ data:
     - https://judge.yosupo.jp/problem/nim_product_64
   bundledCode: "#line 1 \"number/test/nimber.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/nim_product_64\"\
     \n#line 2 \"number/nimber.hpp\"\n#include <array>\n\n// Nimber (64 bit)\n// Reference:\n\
+    // - https://judge.yosupo.jp/submission/4542 (Original implementation idea)\n\
     // - https://en.wikipedia.org/wiki/Nimber\n// - https://kyopro-friends.hatenablog.com/entry/2020/04/07/195850\n\
-    // - https://judge.yosupo.jp/submission/4542 (implementation idea)\nstruct Nimber\
-    \ {\n    using ull = unsigned long long;\n    ull v;\n    const static std::array<std::array<unsigned,\
-    \ 256>, 256> small_table;\n    const static std::array<std::array<std::array<ull,\
+    struct Nimber {\n    using ull = unsigned long long;\n    ull v;\n    const static\
+    \ std::array<std::array<unsigned, 256>, 256> small_table;\n    const static std::array<std::array<std::array<ull,\
     \ 256>, 8>, 8> precalc;\n\n    explicit operator bool() const { return v != 0;\
     \ }\n    Nimber(ull val = 0) : v(val) {}\n    Nimber operator+(const Nimber &x)\
     \ const { return Nimber(v ^ x.v); }\n    Nimber operator-(const Nimber &x) const\
@@ -69,7 +69,7 @@ data:
   isVerificationFile: true
   path: number/test/nimber.test.cpp
   requiredBy: []
-  timestamp: '2021-10-27 23:41:07+09:00'
+  timestamp: '2022-10-30 13:35:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/nimber.test.cpp
