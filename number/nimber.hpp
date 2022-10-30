@@ -3,9 +3,9 @@
 
 // Nimber (64 bit)
 // Reference:
+// - https://judge.yosupo.jp/submission/4542 (Original implementation idea)
 // - https://en.wikipedia.org/wiki/Nimber
 // - https://kyopro-friends.hatenablog.com/entry/2020/04/07/195850
-// - https://judge.yosupo.jp/submission/4542 (implementation idea)
 struct Nimber {
     using ull = unsigned long long;
     ull v;

@@ -6,7 +6,6 @@
 #include <random>
 #include <vector>
 
-// CUT begin
 // Maximize cx s.t. Ax <= b, x >= 0
 // Implementation idea: https://kopricky.github.io/code/Computation_Advanced/simplex.html
 // Refer to https://hitonanode.github.io/cplib-cpp/combinatorial_opt/simplex.hpp

@@ -3,13 +3,13 @@ title: Simplex method （単体法）
 documentation_of: ./simplex.hpp
 ---
 
+本実装のテクニックの大部分は [kopricky さんの実装](https://kopricky.github.io/code/Computation_Advanced/simplex.html) [2] を参考に書かれたものです．
+
 ## 解いてくれる問題
 
 $\mathbf{A} \mathbf{x} \le \mathbf{b}, \ \mathbf{x} \ge \mathbf{0}$ のもと $\mathbf{c}^T \mathbf{x}$ を最大化．
 
 ## コードの要点
-
-本実装のテクニックの大部分は [2] を参考に書かれたものです．
 
 ### initialize() について
 

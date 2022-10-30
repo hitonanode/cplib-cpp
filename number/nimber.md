@@ -3,7 +3,9 @@ title: Nimber, Nim product （ニム数，$\mathbb{F}_{2^{64}}$）
 documentation_of: ./nimber.hpp
 ---
 
-Nimber の実装．Nimber は非負整数として表されるが，特殊な和 $\oplus$ （実は bitwise xor 演算）と積 $\otimes$ が定義され，特に以下の性質を満たす：
+Nimber の実装．以下の実装方針は [yosupo さんの実装](https://judge.yosupo.jp/submission/4542) から学んだもの．
+
+Nimber は非負整数として表されるが，特殊な和 $\oplus$ （実は bitwise xor 演算）と積 $\otimes$ が定義され，特に以下の性質を満たす：
 
 - 交換・結合法則を満たす．
   - 特に，$2^{2^n}$ 未満のニム数全体はあるガロア体と同型．
