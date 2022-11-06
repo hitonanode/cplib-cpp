@@ -143,25 +143,28 @@ data:
     \    }\n};\n#line 5 \"linear_algebra_matrix/system_of_linear_equations.hpp\"\n\
     \n// CUT begin\n// Solve Ax = b for T = ModInt<PRIME>\n// - retval: {one of the\
     \ solution, {freedoms}} (if solution exists)\n//           {{}, {}} (otherwise)\n\
-    // Complexity:\n// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs.,\
-    \ W: # of variables)\n// - Enumerate all of the bases: O(HW(H + W))\ntemplate\
-    \ <typename T>\nstd::pair<std::vector<T>, std::vector<std::vector<T>>>\nsystem_of_linear_equations(matrix<T>\
-    \ A, std::vector<T> b) {\n    int H = A.height(), W = A.width();\n    matrix<T>\
-    \ M(H, W + 1);\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j <\
-    \ W; j++) M[i][j] = A[i][j];\n        M[i][W] = b[i];\n    }\n    M = M.gauss_jordan();\n\
-    \    std::vector<int> ss(W, -1);\n    for (int i = 0; i < H; i++) {\n        int\
-    \ j = 0;\n        while (j <= W and M[i][j] == 0) j++;\n        if (j == W) {\
-    \ // No solution\n            return {{}, {}};\n        }\n        if (j < W)\
-    \ ss[j] = i;\n    }\n    std::vector<T> x(W);\n    std::vector<std::vector<T>>\
-    \ D;\n    for (int j = 0; j < W; j++) {\n        if (ss[j] == -1) {\n        \
-    \    std::vector<T> d(W);\n            d[j] = 1;\n            for (int jj = 0;\
-    \ jj < j; jj++) {\n                if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n\
-    \            }\n            D.emplace_back(d);\n        } else\n            x[j]\
-    \ = M[ss[j]][W] / M[ss[j]][j];\n    }\n    return std::make_pair(x, D);\n}\n#line\
-    \ 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#line 5 \"modint.hpp\"\
-    \n\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n#define MDCONST\
-    \ constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long long;\n   \
-    \ MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
+    // Complexity:\n// - Yield one of the possible solutions: O(HW rank(A)) (H: #\
+    \ of eqs., W: # of variables)\n// - Enumerate all of the bases: O(W(H + W))\n\
+    template <typename T>\nstd::pair<std::vector<T>, std::vector<std::vector<T>>>\n\
+    system_of_linear_equations(matrix<T> A, std::vector<T> b) {\n    int H = A.height(),\
+    \ W = A.width();\n    matrix<T> M(H, W + 1);\n    for (int i = 0; i < H; i++)\
+    \ {\n        for (int j = 0; j < W; j++) M[i][j] = A[i][j];\n        M[i][W] =\
+    \ b[i];\n    }\n    M = M.gauss_jordan();\n    std::vector<int> ss(W, -1), ss_nonneg_js;\n\
+    \    for (int i = 0; i < H; i++) {\n        int j = 0;\n        while (j <= W\
+    \ and M[i][j] == 0) j++;\n        if (j == W) { // No solution\n            return\
+    \ {{}, {}};\n        } else if (j < W) {\n            ss_nonneg_js.push_back(j);\n\
+    \            ss[j] = i;\n        } else {\n            break;\n        }\n   \
+    \ }\n\n    std::vector<T> x(W);\n    std::vector<std::vector<T>> D;\n    for (int\
+    \ j = 0; j < W; j++) {\n        if (ss[j] == -1) {\n            // This part may\
+    \ require W^2 space complexity in output\n            std::vector<T> d(W);\n \
+    \           d[j] = 1;\n            for (int jj : ss_nonneg_js) {\n           \
+    \     if (jj >= j) break;\n                d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n\
+    \            }\n            D.emplace_back(d);\n        } else {\n           \
+    \ x[j] = M[ss[j]][W] / M[ss[j]][j];\n        }\n    }\n    return std::make_pair(x,\
+    \ D);\n}\n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#line 5\
+    \ \"modint.hpp\"\n\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n\
+    #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
+    \ long;\n    MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
     \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
     \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
     \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
@@ -265,7 +268,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2022-07-12 00:34:46+09:00'
+  timestamp: '2022-11-06 22:51:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/system_of_linear_equations.test.cpp

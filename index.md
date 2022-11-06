@@ -350,7 +350,8 @@ data:
       title: Levinson recursion (Levinson-Durbin algorithm)
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_bitset.hpp
-      title: linear_algebra_matrix/linalg_bitset.hpp
+      title: "Linear algebra on $\\mathbb{F}_{2}$ using `std::bitset` ($\\mathbb{F}_{2}$\
+        \ \u7DDA\u5F62\u4EE3\u6570)"
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
@@ -1151,6 +1152,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_bitset.test.cpp
       title: linear_algebra_matrix/test/linalg_bitset.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/linalg_bitset.yuki1421.test.cpp
+      title: linear_algebra_matrix/test/linalg_bitset.yuki1421.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
       title: linear_algebra_matrix/test/linalg_ll_det.test.cpp
