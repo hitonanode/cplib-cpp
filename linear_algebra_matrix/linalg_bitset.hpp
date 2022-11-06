@@ -5,43 +5,49 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
-constexpr int Wmax = 320;
-std::vector<std::bitset<Wmax>> gauss_jordan(int W, std::vector<std::bitset<Wmax>> mtr) {
-    int H = mtr.size(), c = 0;
-    for (int h = 0; h < H; h++, c++) {
-        if (c == W) break;
+// Gauss-Jordan elimination of n * m matrix M
+// Complexity: O(nm + nm rank(M) / 64)
+// Verified: abc276_h (2000 x 8000)
+template <int Wmax>
+std::vector<std::bitset<Wmax>> gauss_jordan(int W, std::vector<std::bitset<Wmax>> M) {
+    assert(W <= Wmax);
+    int H = M.size(), c = 0;
+    for (int h = 0; h < H and c < W; ++h, ++c) {
         int piv = -1;
-        for (int j = h; j < H; j++)
-            if (mtr[j][c]) {
+        for (int j = h; j < H; ++j) {
+            if (M[j][c]) {
                 piv = j;
                 break;
             }
+        }
         if (piv == -1) {
-            h--;
+            --h;
             continue;
         }
-        std::swap(mtr[piv], mtr[h]);
-        for (int hh = 0; hh < H; hh++) {
-            if (hh != h and mtr[hh][c]) mtr[hh] ^= mtr[h];
+        std::swap(M[piv], M[h]);
+        for (int hh = 0; hh < H; ++hh) {
+            if (hh != h and M[hh][c]) M[hh] ^= M[h];
         }
     }
-    return mtr;
+    return M;
 }
 
-int rank_gauss_jordan(
-    int W, const std::vector<std::bitset<Wmax>> &mtr) // Rank of Gauss-Jordan eliminated matrix
-{
-    for (int h = (int)mtr.size() - 1; h >= 0; h--) {
-        if (mtr[h]._Find_first() < W) return h + 1;
+// Rank of Gauss-Jordan eliminated matrix
+template <int Wmax> int rank_gauss_jordan(int W, const std::vector<std::bitset<Wmax>> &M) {
+    assert(W <= Wmax);
+    for (int h = (int)M.size() - 1; h >= 0; h--) {
+        int j = 0;
+        while (j < W and !M[h][j]) ++j;
+        if (j < W) return h + 1;
     }
     return 0;
 }
 
-std::vector<std::bitset<Wmax>>
-matmul(const std::vector<std::bitset<Wmax>> &A, const std::vector<std::bitset<Wmax>> &B) {
+template <int W1, int W2>
+std::vector<std::bitset<W2>>
+matmul(const std::vector<std::bitset<W1>> &A, const std::vector<std::bitset<W2>> &B) {
     int H = A.size(), K = B.size();
-    std::vector<std::bitset<Wmax>> C(H);
+    std::vector<std::bitset<W2>> C(H);
     for (int i = 0; i < H; i++) {
         for (int j = 0; j < K; j++) {
             if (A[i][j]) C[i] ^= B[j];
@@ -50,13 +56,14 @@ matmul(const std::vector<std::bitset<Wmax>> &A, const std::vector<std::bitset<Wm
     return C;
 }
 
+template <int Wmax>
 std::vector<std::bitset<Wmax>> matpower(std::vector<std::bitset<Wmax>> X, long long n) {
     int D = X.size();
     std::vector<std::bitset<Wmax>> ret(D);
     for (int i = 0; i < D; i++) ret[i][i] = 1;
     while (n) {
-        if (n & 1) ret = matmul(ret, X);
-        X = matmul(X, X), n >>= 1;
+        if (n & 1) ret = matmul<Wmax, Wmax>(ret, X);
+        X = matmul<Wmax, Wmax>(X, X), n >>= 1;
     }
     return ret;
 }
@@ -64,34 +71,43 @@ std::vector<std::bitset<Wmax>> matpower(std::vector<std::bitset<Wmax>> X, long l
 // Solve Ax = b on F_2
 // - retval: {true, one of the solutions, {freedoms}} (if solution exists)
 //           {false, {}, {}} (otherwise)
+// Complexity: O(HW + HW rank(A) / 64 + W^2 len(freedoms))
+template <int Wmax, class Vec>
 std::tuple<bool, std::bitset<Wmax>, std::vector<std::bitset<Wmax>>>
-system_of_linear_equations(std::vector<std::bitset<Wmax>> A, std::bitset<Wmax> b, int W) {
+system_of_linear_equations(std::vector<std::bitset<Wmax>> A, Vec b, int W) {
     int H = A.size();
-    assert(W + 1 <= Wmax);
-    assert(H <= Wmax);
+    assert(W <= Wmax);
+    assert(A.size() == b.size());
 
-    std::vector<std::bitset<Wmax>> M = A;
-    for (int i = 0; i < H; i++) M[i][W] = b[i];
-    M = gauss_jordan(W + 1, M);
+    std::vector<std::bitset<Wmax + 1>> M(H);
+    for (int i = 0; i < H; ++i) {
+        for (int j = 0; j < W; ++j) M[i][j] = A[i][j];
+        M[i][W] = b[i];
+    }
+    M = gauss_jordan<Wmax + 1>(W + 1, M);
     std::vector<int> ss(W, -1);
+    std::vector<int> ss_nonneg_js;
     for (int i = 0; i < H; i++) {
-        int j = M[i]._Find_first();
-        if (j == W) {
-            return std::make_tuple(false, std::bitset<Wmax>(), std::vector<std::bitset<Wmax>>());
+        int j = 0;
+        while (j <= W and !M[i][j]) ++j;
+        if (j == W) return {false, 0, {}};
+        if (j < W) {
+            ss_nonneg_js.push_back(j);
+            ss[j] = i;
         }
-        if (j < W) ss[j] = i;
     }
     std::bitset<Wmax> x;
     std::vector<std::bitset<Wmax>> D;
-    for (int j = 0; j < W; j++) {
+    for (int j = 0; j < W; ++j) {
         if (ss[j] == -1) {
+            // This part may require W^2 space complexity in output
             std::bitset<Wmax> d;
             d[j] = 1;
-            for (int jj = 0; jj < W; jj++)
-                if (ss[jj] != -1) d[jj] = M[ss[jj]][j];
+            for (int jj : ss_nonneg_js) d[jj] = M[ss[jj]][j];
             D.emplace_back(d);
-        } else
+        } else {
             x[j] = M[ss[j]][W];
+        }
     }
     return std::make_tuple(true, x, D);
 }
