@@ -126,6 +126,7 @@
 "linear_algebra_matrix/test/inverse_matrix.test.cpp": "2022-07-12 00:34:46 +0900",
 "linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp": "2022-05-01 02:11:54 +0900",
 "linear_algebra_matrix/test/linalg_bitset.test.cpp": "2022-11-06 21:41:23 +0900",
+"linear_algebra_matrix/test/linalg_bitset.yuki1421.test.cpp": "2022-11-06 22:23:26 +0900",
 "linear_algebra_matrix/test/linalg_ll_det.test.cpp": "2022-10-14 10:52:36 +0900",
 "linear_algebra_matrix/test/linalg_longlong.test.cpp": "2022-10-14 10:52:36 +0900",
 "linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp": "2022-10-14 10:52:36 +0900",
