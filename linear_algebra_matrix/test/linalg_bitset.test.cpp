@@ -7,6 +7,7 @@ using namespace std;
 int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
 
+    constexpr int Wmax = 320;
     int N, T;
     cin >> N;
     vector<bitset<Wmax>> A(N);
@@ -25,9 +26,9 @@ int main() {
     }
 
     cin >> T;
-    A = matpower(A, T);
+    A = matpower<Wmax>(A, T);
     for (int i = 0; i < N; i++) A[i][N] = v[i];
-    A = gauss_jordan(N + 1, A);
+    A = gauss_jordan<Wmax>(N + 1, A);
 
     for (int i = 0; i < N; i++) {
         if (A[i].count() == 1 and A[i][N]) {
