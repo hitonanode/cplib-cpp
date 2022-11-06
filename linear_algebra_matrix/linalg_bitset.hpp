@@ -71,6 +71,7 @@ std::vector<std::bitset<Wmax>> matpower(std::vector<std::bitset<Wmax>> X, long l
 // Solve Ax = b on F_2
 // - retval: {true, one of the solutions, {freedoms}} (if solution exists)
 //           {false, {}, {}} (otherwise)
+// Complexity: O(HW + HW rank(A) / 64 + W^2 len(freedoms))
 template <int Wmax, class Vec>
 std::tuple<bool, std::bitset<Wmax>, std::vector<std::bitset<Wmax>>>
 system_of_linear_equations(std::vector<std::bitset<Wmax>> A, Vec b, int W) {
@@ -85,20 +86,24 @@ system_of_linear_equations(std::vector<std::bitset<Wmax>> A, Vec b, int W) {
     }
     M = gauss_jordan<Wmax + 1>(W + 1, M);
     std::vector<int> ss(W, -1);
+    std::vector<int> ss_nonneg_js;
     for (int i = 0; i < H; i++) {
         int j = 0;
         while (j <= W and !M[i][j]) ++j;
         if (j == W) return {false, 0, {}};
-        if (j < W) ss[j] = i;
+        if (j < W) {
+            ss_nonneg_js.push_back(j);
+            ss[j] = i;
+        }
     }
     std::bitset<Wmax> x;
     std::vector<std::bitset<Wmax>> D;
     for (int j = 0; j < W; ++j) {
         if (ss[j] == -1) {
+            // This part may require W^2 space complexity in output
             std::bitset<Wmax> d;
             d[j] = 1;
-            for (int jj = 0; jj < W; jj++)
-                if (ss[jj] != -1) d[jj] = M[ss[jj]][j];
+            for (int jj : ss_nonneg_js) d[jj] = M[ss[jj]][j];
             D.emplace_back(d);
         } else {
             x[j] = M[ss[j]][W];

@@ -8,8 +8,8 @@
 // - retval: {one of the solution, {freedoms}} (if solution exists)
 //           {{}, {}} (otherwise)
 // Complexity:
-// - Yield one of the possible solutions: O(H^2 W) (H: # of eqs., W: # of variables)
-// - Enumerate all of the bases: O(HW(H + W))
+// - Yield one of the possible solutions: O(HW rank(A)) (H: # of eqs., W: # of variables)
+// - Enumerate all of the bases: O(W(H + W))
 template <typename T>
 std::pair<std::vector<T>, std::vector<std::vector<T>>>
 system_of_linear_equations(matrix<T> A, std::vector<T> b) {
@@ -20,27 +20,35 @@ system_of_linear_equations(matrix<T> A, std::vector<T> b) {
         M[i][W] = b[i];
     }
     M = M.gauss_jordan();
-    std::vector<int> ss(W, -1);
+    std::vector<int> ss(W, -1), ss_nonneg_js;
     for (int i = 0; i < H; i++) {
         int j = 0;
         while (j <= W and M[i][j] == 0) j++;
         if (j == W) { // No solution
             return {{}, {}};
+        } else if (j < W) {
+            ss_nonneg_js.push_back(j);
+            ss[j] = i;
+        } else {
+            break;
         }
-        if (j < W) ss[j] = i;
     }
+
     std::vector<T> x(W);
     std::vector<std::vector<T>> D;
     for (int j = 0; j < W; j++) {
         if (ss[j] == -1) {
+            // This part may require W^2 space complexity in output
             std::vector<T> d(W);
             d[j] = 1;
-            for (int jj = 0; jj < j; jj++) {
-                if (ss[jj] != -1) d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];
+            for (int jj : ss_nonneg_js) {
+                if (jj >= j) break;
+                d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];
             }
             D.emplace_back(d);
-        } else
+        } else {
             x[j] = M[ss[j]][W] / M[ss[j]][j];
+        }
     }
     return std::make_pair(x, D);
 }
