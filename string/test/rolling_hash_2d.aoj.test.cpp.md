@@ -42,34 +42,33 @@ data:
     \ = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n        \
     \    tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n    ModIntMersenne61\
     \ inv() const { return pow(md - 2); }\n\n    ModIntMersenne61 operator/(const\
-    \ ModIntMersenne61 &x) const {\n        return *this * x.inv();\n    }\n\n   \
-    \ ModIntMersenne61 operator-() const { return ModIntMersenne61(md - _v); }\n \
-    \   ModIntMersenne61 &operator+=(const ModIntMersenne61 &x) { return *this = *this\
-    \ + x; }\n    ModIntMersenne61 &operator-=(const ModIntMersenne61 &x) { return\
-    \ *this = *this - x; }\n    ModIntMersenne61 &operator*=(const ModIntMersenne61\
-    \ &x) { return *this = *this * x; }\n    ModIntMersenne61 &operator/=(const ModIntMersenne61\
-    \ &x) { return *this = *this / x; }\n\n    ModIntMersenne61 operator+(unsigned\
-    \ x) const {\n        return ModIntMersenne61(this->_v + x);\n    }\n\n    bool\
-    \ operator==(const ModIntMersenne61 &x) const { return _v == x._v; }\n    bool\
-    \ operator!=(const ModIntMersenne61 &x) const { return _v != x._v; }\n    bool\
-    \ operator<(const ModIntMersenne61 &x) const {\n        return _v < x._v;\n  \
-    \  } // To use std::map\n\n    template <class OStream> friend OStream &operator<<(OStream\
-    \ &os, const ModIntMersenne61 &x) {\n        return os << x._v;\n    }\n\n   \
-    \ static ModIntMersenne61 randgen(bool force_update = false) {\n        static\
-    \ ModIntMersenne61 b(0);\n        if (b == ModIntMersenne61(0) or force_update)\
-    \ {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \ ModIntMersenne61 &x) const { return *this * x.inv(); }\n\n    ModIntMersenne61\
+    \ operator-() const { return ModIntMersenne61(md - _v); }\n    ModIntMersenne61\
+    \ &operator+=(const ModIntMersenne61 &x) { return *this = *this + x; }\n    ModIntMersenne61\
+    \ &operator-=(const ModIntMersenne61 &x) { return *this = *this - x; }\n    ModIntMersenne61\
+    \ &operator*=(const ModIntMersenne61 &x) { return *this = *this * x; }\n    ModIntMersenne61\
+    \ &operator/=(const ModIntMersenne61 &x) { return *this = *this / x; }\n\n   \
+    \ ModIntMersenne61 operator+(unsigned x) const { return ModIntMersenne61(this->_v\
+    \ + x); }\n\n    bool operator==(const ModIntMersenne61 &x) const { return _v\
+    \ == x._v; }\n    bool operator!=(const ModIntMersenne61 &x) const { return _v\
+    \ != x._v; }\n    bool operator<(const ModIntMersenne61 &x) const { return _v\
+    \ < x._v; } // To use std::map\n\n    template <class OStream> friend OStream\
+    \ &operator<<(OStream &os, const ModIntMersenne61 &x) {\n        return os <<\
+    \ x._v;\n    }\n\n    static ModIntMersenne61 randgen(bool force_update = false)\
+    \ {\n        static ModIntMersenne61 b(0);\n        if (b == ModIntMersenne61(0)\
+    \ or force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
     \            std::uniform_int_distribution<long long> d(1, ModIntMersenne61::mod());\n\
     \            b = ModIntMersenne61(d(mt));\n        }\n        return b;\n    }\n\
     };\n#line 2 \"string/rolling_hash_2d.hpp\"\n#include <string>\n#include <vector>\n\
-    \n\n// Rolling Hash (Rabin-Karp), 2dim\ntemplate <typename V> struct rolling_hash_2d\
-    \ {\n    const V Bx, By;\n    std::vector<V> powx, powy;  // powx[i] = Bx^i\n\
-    \    std::vector<std::vector<V>> hash;\n\n    void gen_pow(int h, int w) {\n \
-    \       powx.assign(h + 1, V(1));\n        for (int i = 1; i <= h; ++i) powx.at(i)\
+    \n// Rolling Hash (Rabin-Karp), 2dim\ntemplate <typename V> struct rolling_hash_2d\
+    \ {\n    const V Bx, By;\n    std::vector<V> powx, powy; // powx[i] = Bx^i\n \
+    \   std::vector<std::vector<V>> hash;\n\n    void gen_pow(int h, int w) {\n  \
+    \      powx.assign(h + 1, V(1));\n        for (int i = 1; i <= h; ++i) powx.at(i)\
     \ = powx.at(i - 1) * Bx;\n        powy.assign(w + 1, V(1));\n        for (int\
     \ i = 1; i <= w; ++i) powy.at(i) = powy.at(i - 1) * By;\n    }\n\n    inline V\
     \ _at(int x, int y) const noexcept {\n        if (x < 0 or x >= int(hash.size()))\
     \ return V();\n        if (y < 0 or y >= int(hash[x].size())) return V();\n  \
-    \      return hash[x][y];\n    }\n\n    template <typename Int>\n    void build(const\
+    \      return hash[x][y];\n    }\n\n    template <typename Int> void build(const\
     \ std::vector<std::vector<Int>> &s) {\n        const int H = s.size(), W = H ?\
     \ s.at(0).size() : 0;\n        gen_pow(H, W);\n\n        hash.assign(H, std::vector<V>(W,\
     \ V()));\n        for (int i = 0; i < H; ++i) {\n            for (int j = 0; j\
@@ -113,7 +112,7 @@ data:
   isVerificationFile: true
   path: string/test/rolling_hash_2d.aoj.test.cpp
   requiredBy: []
-  timestamp: '2022-10-09 14:11:30+09:00'
+  timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/rolling_hash_2d.aoj.test.cpp

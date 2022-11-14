@@ -61,7 +61,7 @@ data:
     \ std::make_pair(0, 0); // \u89E3\u306A\u3057\n        }\n        Int t = b /\
     \ d * mod_inverse<Int>(a / d, M[i] / d) % (M[i] / d);\n        r += m * t;\n \
     \       m *= M[i] / d;\n    }\n    return std::make_pair((r < 0 ? r + m : r),\
-    \ m);\n}\n\ntemplate <class Int = int, class Long = long long>\nInt pow_mod(Int\
+    \ m);\n}\n\ntemplate <class Int = int, class Long = long long> Int pow_mod(Int\
     \ x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2 <= sizeof(Long),\
     \ \"Watch out for overflow\");\n    if (md == 1) return 0;\n    Int ans = 1;\n\
     \    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x % md;\n        x\
@@ -74,8 +74,8 @@ data:
     \    {2, 325, 9375, 28178, 450775, 9780504, 1795265022} // <= 2^64\n};\ninline\
     \ int get_id(long long n) {\n    if (n < 291831) {\n        return 0;\n    } else\
     \ if (n < 1050535501) {\n        return 1;\n    } else if (n < 47636622961201)\n\
-    \        return 2;\n    else {\n        return 3;\n    }\n}\n} // namespace SPRP\n\
-    \n// Miller-Rabin primality test\n// https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95\n\
+    \        return 2;\n    else { return 3; }\n}\n} // namespace SPRP\n\n// Miller-Rabin\
+    \ primality test\n// https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95\n\
     // Complexity: O(lg n) per query\nstruct {\n    long long modpow(__int128 x, __int128\
     \ n, long long mod) noexcept {\n        __int128 ret = 1;\n        for (x %= mod;\
     \ n; x = x * x % mod, n >>= 1) ret = (n & 1) ? ret * x % mod : ret;\n        return\
@@ -142,7 +142,7 @@ data:
   isVerificationFile: true
   path: number/test/primitive_root_1e18.test.cpp
   requiredBy: []
-  timestamp: '2022-10-27 21:31:53+09:00'
+  timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/primitive_root_1e18.test.cpp

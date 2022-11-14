@@ -12,15 +12,15 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"string/rolling_hash_2d.hpp\"\n#include <string>\n#include\
-    \ <vector>\n\n\n// Rolling Hash (Rabin-Karp), 2dim\ntemplate <typename V> struct\
-    \ rolling_hash_2d {\n    const V Bx, By;\n    std::vector<V> powx, powy;  // powx[i]\
+    \ <vector>\n\n// Rolling Hash (Rabin-Karp), 2dim\ntemplate <typename V> struct\
+    \ rolling_hash_2d {\n    const V Bx, By;\n    std::vector<V> powx, powy; // powx[i]\
     \ = Bx^i\n    std::vector<std::vector<V>> hash;\n\n    void gen_pow(int h, int\
     \ w) {\n        powx.assign(h + 1, V(1));\n        for (int i = 1; i <= h; ++i)\
     \ powx.at(i) = powx.at(i - 1) * Bx;\n        powy.assign(w + 1, V(1));\n     \
     \   for (int i = 1; i <= w; ++i) powy.at(i) = powy.at(i - 1) * By;\n    }\n\n\
     \    inline V _at(int x, int y) const noexcept {\n        if (x < 0 or x >= int(hash.size()))\
     \ return V();\n        if (y < 0 or y >= int(hash[x].size())) return V();\n  \
-    \      return hash[x][y];\n    }\n\n    template <typename Int>\n    void build(const\
+    \      return hash[x][y];\n    }\n\n    template <typename Int> void build(const\
     \ std::vector<std::vector<Int>> &s) {\n        const int H = s.size(), W = H ?\
     \ s.at(0).size() : 0;\n        gen_pow(H, W);\n\n        hash.assign(H, std::vector<V>(W,\
     \ V()));\n        for (int i = 0; i < H; ++i) {\n            for (int j = 0; j\
@@ -36,16 +36,16 @@ data:
     \ - 1, yr - 1) - _at(xl - 1, yr - 1) * powx[xr - xl] -\n               _at(xr\
     \ - 1, yl - 1) * powy[yr - yl] +\n               _at(xl - 1, yl - 1) * powx[xr\
     \ - xl] * powy[yr - yl];\n    }\n};\n"
-  code: "#pragma once\n#include <string>\n#include <vector>\n\n\n// Rolling Hash (Rabin-Karp),\
+  code: "#pragma once\n#include <string>\n#include <vector>\n\n// Rolling Hash (Rabin-Karp),\
     \ 2dim\ntemplate <typename V> struct rolling_hash_2d {\n    const V Bx, By;\n\
-    \    std::vector<V> powx, powy;  // powx[i] = Bx^i\n    std::vector<std::vector<V>>\
+    \    std::vector<V> powx, powy; // powx[i] = Bx^i\n    std::vector<std::vector<V>>\
     \ hash;\n\n    void gen_pow(int h, int w) {\n        powx.assign(h + 1, V(1));\n\
     \        for (int i = 1; i <= h; ++i) powx.at(i) = powx.at(i - 1) * Bx;\n    \
     \    powy.assign(w + 1, V(1));\n        for (int i = 1; i <= w; ++i) powy.at(i)\
     \ = powy.at(i - 1) * By;\n    }\n\n    inline V _at(int x, int y) const noexcept\
     \ {\n        if (x < 0 or x >= int(hash.size())) return V();\n        if (y <\
     \ 0 or y >= int(hash[x].size())) return V();\n        return hash[x][y];\n   \
-    \ }\n\n    template <typename Int>\n    void build(const std::vector<std::vector<Int>>\
+    \ }\n\n    template <typename Int> void build(const std::vector<std::vector<Int>>\
     \ &s) {\n        const int H = s.size(), W = H ? s.at(0).size() : 0;\n       \
     \ gen_pow(H, W);\n\n        hash.assign(H, std::vector<V>(W, V()));\n        for\
     \ (int i = 0; i < H; ++i) {\n            for (int j = 0; j < W; ++j) hash[i][j]\
@@ -65,7 +65,7 @@ data:
   isVerificationFile: false
   path: string/rolling_hash_2d.hpp
   requiredBy: []
-  timestamp: '2022-10-09 14:11:30+09:00'
+  timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/rolling_hash_2d.aoj.test.cpp

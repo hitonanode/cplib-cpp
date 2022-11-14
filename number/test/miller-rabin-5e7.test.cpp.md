@@ -28,8 +28,8 @@ data:
     \ 9780504, 1795265022} // <= 2^64\n};\ninline int get_id(long long n) {\n    if\
     \ (n < 291831) {\n        return 0;\n    } else if (n < 1050535501) {\n      \
     \  return 1;\n    } else if (n < 47636622961201)\n        return 2;\n    else\
-    \ {\n        return 3;\n    }\n}\n} // namespace SPRP\n\n// Miller-Rabin primality\
-    \ test\n// https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95\n\
+    \ { return 3; }\n}\n} // namespace SPRP\n\n// Miller-Rabin primality test\n//\
+    \ https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95\n\
     // Complexity: O(lg n) per query\nstruct {\n    long long modpow(__int128 x, __int128\
     \ n, long long mod) noexcept {\n        __int128 ret = 1;\n        for (x %= mod;\
     \ n; x = x * x % mod, n >>= 1) ret = (n & 1) ? ret * x % mod : ret;\n        return\
@@ -139,7 +139,7 @@ data:
   isVerificationFile: true
   path: number/test/miller-rabin-5e7.test.cpp
   requiredBy: []
-  timestamp: '2022-10-27 21:31:53+09:00'
+  timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/miller-rabin-5e7.test.cpp

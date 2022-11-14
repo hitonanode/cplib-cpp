@@ -157,7 +157,7 @@ data:
     \ == h2 ? lo : hi) = c;\n    }\n    return lo;\n}\n#line 3 \"string/test/rolling_hash.test.cpp\"\
     \n#include <cassert>\n#line 6 \"string/test/rolling_hash.test.cpp\"\n#define PROBLEM\
     \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\nusing\
-    \ namespace std;\n\ntemplate <class Hash>\nvector<int> solve(const string T, const\
+    \ namespace std;\n\ntemplate <class Hash> vector<int> solve(const string T, const\
     \ string P) {\n    rolling_hash<Hash> rh_T(T), rh_P(P);\n    vector<int> ret;\n\
     \    for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {\n        if\
     \ (rh_T.get(l, l + P.length()) == rh_P.get(0, P.length())) ret.push_back(l);\n\
@@ -170,7 +170,7 @@ data:
     }\n"
   code: "#include \"../../modint.hpp\"\n#include \"../rolling_hash_1d.hpp\"\n#include\
     \ <cassert>\n#include <iostream>\n#include <string>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
-    \nusing namespace std;\n\ntemplate <class Hash>\nvector<int> solve(const string\
+    \nusing namespace std;\n\ntemplate <class Hash> vector<int> solve(const string\
     \ T, const string P) {\n    rolling_hash<Hash> rh_T(T), rh_P(P);\n    vector<int>\
     \ ret;\n    for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {\n \
     \       if (rh_T.get(l, l + P.length()) == rh_P.get(0, P.length())) ret.push_back(l);\n\
@@ -187,7 +187,7 @@ data:
   isVerificationFile: true
   path: string/test/rolling_hash.test.cpp
   requiredBy: []
-  timestamp: '2022-10-09 12:55:12+09:00'
+  timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/rolling_hash.test.cpp

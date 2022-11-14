@@ -44,22 +44,21 @@ data:
     \ = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n        \
     \    tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n    ModIntMersenne61\
     \ inv() const { return pow(md - 2); }\n\n    ModIntMersenne61 operator/(const\
-    \ ModIntMersenne61 &x) const {\n        return *this * x.inv();\n    }\n\n   \
-    \ ModIntMersenne61 operator-() const { return ModIntMersenne61(md - _v); }\n \
-    \   ModIntMersenne61 &operator+=(const ModIntMersenne61 &x) { return *this = *this\
-    \ + x; }\n    ModIntMersenne61 &operator-=(const ModIntMersenne61 &x) { return\
-    \ *this = *this - x; }\n    ModIntMersenne61 &operator*=(const ModIntMersenne61\
-    \ &x) { return *this = *this * x; }\n    ModIntMersenne61 &operator/=(const ModIntMersenne61\
-    \ &x) { return *this = *this / x; }\n\n    ModIntMersenne61 operator+(unsigned\
-    \ x) const {\n        return ModIntMersenne61(this->_v + x);\n    }\n\n    bool\
-    \ operator==(const ModIntMersenne61 &x) const { return _v == x._v; }\n    bool\
-    \ operator!=(const ModIntMersenne61 &x) const { return _v != x._v; }\n    bool\
-    \ operator<(const ModIntMersenne61 &x) const {\n        return _v < x._v;\n  \
-    \  } // To use std::map\n\n    template <class OStream> friend OStream &operator<<(OStream\
-    \ &os, const ModIntMersenne61 &x) {\n        return os << x._v;\n    }\n\n   \
-    \ static ModIntMersenne61 randgen(bool force_update = false) {\n        static\
-    \ ModIntMersenne61 b(0);\n        if (b == ModIntMersenne61(0) or force_update)\
-    \ {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \ ModIntMersenne61 &x) const { return *this * x.inv(); }\n\n    ModIntMersenne61\
+    \ operator-() const { return ModIntMersenne61(md - _v); }\n    ModIntMersenne61\
+    \ &operator+=(const ModIntMersenne61 &x) { return *this = *this + x; }\n    ModIntMersenne61\
+    \ &operator-=(const ModIntMersenne61 &x) { return *this = *this - x; }\n    ModIntMersenne61\
+    \ &operator*=(const ModIntMersenne61 &x) { return *this = *this * x; }\n    ModIntMersenne61\
+    \ &operator/=(const ModIntMersenne61 &x) { return *this = *this / x; }\n\n   \
+    \ ModIntMersenne61 operator+(unsigned x) const { return ModIntMersenne61(this->_v\
+    \ + x); }\n\n    bool operator==(const ModIntMersenne61 &x) const { return _v\
+    \ == x._v; }\n    bool operator!=(const ModIntMersenne61 &x) const { return _v\
+    \ != x._v; }\n    bool operator<(const ModIntMersenne61 &x) const { return _v\
+    \ < x._v; } // To use std::map\n\n    template <class OStream> friend OStream\
+    \ &operator<<(OStream &os, const ModIntMersenne61 &x) {\n        return os <<\
+    \ x._v;\n    }\n\n    static ModIntMersenne61 randgen(bool force_update = false)\
+    \ {\n        static ModIntMersenne61 b(0);\n        if (b == ModIntMersenne61(0)\
+    \ or force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
     \            std::uniform_int_distribution<long long> d(1, ModIntMersenne61::mod());\n\
     \            b = ModIntMersenne61(d(mt));\n        }\n        return b;\n    }\n\
     };\n#line 2 \"string/lyndon.hpp\"\n#include <algorithm>\n#line 4 \"string/lyndon.hpp\"\
@@ -197,7 +196,7 @@ data:
   isVerificationFile: true
   path: string/test/run_enumerate_lyndon_mersenne61.test.cpp
   requiredBy: []
-  timestamp: '2022-10-09 12:55:12+09:00'
+  timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/run_enumerate_lyndon_mersenne61.test.cpp

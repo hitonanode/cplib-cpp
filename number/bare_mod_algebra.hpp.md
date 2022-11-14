@@ -84,11 +84,11 @@ data:
     \ (b % d != 0) {\n            return std::make_pair(0, 0); // \u89E3\u306A\u3057\
     \n        }\n        Int t = b / d * mod_inverse<Int>(a / d, M[i] / d) % (M[i]\
     \ / d);\n        r += m * t;\n        m *= M[i] / d;\n    }\n    return std::make_pair((r\
-    \ < 0 ? r + m : r), m);\n}\n\ntemplate <class Int = int, class Long = long long>\n\
-    Int pow_mod(Int x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2 <=\
-    \ sizeof(Long), \"Watch out for overflow\");\n    if (md == 1) return 0;\n   \
-    \ Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x %\
-    \ md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n\
+    \ < 0 ? r + m : r), m);\n}\n\ntemplate <class Int = int, class Long = long long>\
+    \ Int pow_mod(Int x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2\
+    \ <= sizeof(Long), \"Watch out for overflow\");\n    if (md == 1) return 0;\n\
+    \    Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x\
+    \ % md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n\
     }\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\n\n// CUT begin\n// Solve ax+by=gcd(a, b)\n\
@@ -129,7 +129,7 @@ data:
     \ std::make_pair(0, 0); // \u89E3\u306A\u3057\n        }\n        Int t = b /\
     \ d * mod_inverse<Int>(a / d, M[i] / d) % (M[i] / d);\n        r += m * t;\n \
     \       m *= M[i] / d;\n    }\n    return std::make_pair((r < 0 ? r + m : r),\
-    \ m);\n}\n\ntemplate <class Int = int, class Long = long long>\nInt pow_mod(Int\
+    \ m);\n}\n\ntemplate <class Int = int, class Long = long long> Int pow_mod(Int\
     \ x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2 <= sizeof(Long),\
     \ \"Watch out for overflow\");\n    if (md == 1) return 0;\n    Int ans = 1;\n\
     \    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x % md;\n        x\
@@ -141,7 +141,7 @@ data:
   - linear_algebra_matrix/linalg_longlong.hpp
   - number/combination.hpp
   - number/primitive_root.hpp
-  timestamp: '2022-10-14 10:52:36+09:00'
+  timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
