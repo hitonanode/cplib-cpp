@@ -99,8 +99,7 @@ linear_congruence(const std::vector<Int> &A, const std::vector<Int> &B, const st
     return std::make_pair((r < 0 ? r + m : r), m);
 }
 
-template <class Int = int, class Long = long long>
-Int pow_mod(Int x, long long n, Int md) {
+template <class Int = int, class Long = long long> Int pow_mod(Int x, long long n, Int md) {
     static_assert(sizeof(Int) * 2 <= sizeof(Long), "Watch out for overflow");
     if (md == 1) return 0;
     Int ans = 1;

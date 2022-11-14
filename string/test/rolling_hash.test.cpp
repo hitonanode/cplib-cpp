@@ -6,8 +6,7 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 using namespace std;
 
-template <class Hash>
-vector<int> solve(const string T, const string P) {
+template <class Hash> vector<int> solve(const string T, const string P) {
     rolling_hash<Hash> rh_T(T), rh_P(P);
     vector<int> ret;
     for (int l = 0; l < (int)(T.length() - P.length() + 1); l++) {

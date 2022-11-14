@@ -2,11 +2,10 @@
 #include <string>
 #include <vector>
 
-
 // Rolling Hash (Rabin-Karp), 2dim
 template <typename V> struct rolling_hash_2d {
     const V Bx, By;
-    std::vector<V> powx, powy;  // powx[i] = Bx^i
+    std::vector<V> powx, powy; // powx[i] = Bx^i
     std::vector<std::vector<V>> hash;
 
     void gen_pow(int h, int w) {
@@ -22,8 +21,7 @@ template <typename V> struct rolling_hash_2d {
         return hash[x][y];
     }
 
-    template <typename Int>
-    void build(const std::vector<std::vector<Int>> &s) {
+    template <typename Int> void build(const std::vector<std::vector<Int>> &s) {
         const int H = s.size(), W = H ? s.at(0).size() : 0;
         gen_pow(H, W);
 

@@ -20,9 +20,7 @@ inline int get_id(long long n) {
         return 1;
     } else if (n < 47636622961201)
         return 2;
-    else {
-        return 3;
-    }
+    else { return 3; }
 }
 } // namespace SPRP
 
