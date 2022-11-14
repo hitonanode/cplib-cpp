@@ -1,19 +1,19 @@
 #pragma once
+#include <cassert>
 #include <functional>
 #include <numeric>
 #include <unordered_map>
 #include <utility>
 #include <vector>
 
-// CUT begin
 // SMAWK: finding minima of totally monotone function f(i, j) (0 <= i < N, 0 <= j < M) for each i
 // Constraints: every submatrix of f(i, j) is monotone.
 // Complexity: O(N + M)
 // Option: `Memorization`: Memorize all query results using hashmaps, effective when each query
 // requires heavy complexity Rererence:
-// <https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html>
-//            <http://web.cs.unlv.edu/larmore/Courses/CSC477/monge.pdf>
-// Verify: <https://codeforces.com/contest/1423/submission/98368491>
+// https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html
+// http://web.cs.unlv.edu/larmore/Courses/CSC477/monge.pdf
+// Verify: https://codeforces.com/contest/1423/submission/98368491
 template <typename T, bool Memorization> struct SMAWK {
     std::vector<std::pair<int, T>> minima;
     std::function<T(int, int)> oracle;
@@ -54,3 +54,33 @@ template <typename T, bool Memorization> struct SMAWK {
         _smawk_rec(js, 0, N - 1, 1);
     }
 };
+
+// Concave max-plus convolution
+// b must be concave
+// Complexity: O(n + m)
+// Verify: https://www.codechef.com/problems/MAXPREFFLIP
+template <class S, S INF>
+std::vector<S> concave_max_plus_convolution(const std::vector<S> &a, const std::vector<S> &b) {
+    const int n = a.size(), m = b.size();
+
+    auto is_concave = [&](const std::vector<S> &u) -> bool {
+        for (int i = 1; i + 1 < int(u.size()); ++i) {
+            if (u[i - 1] + u[i + 1] > u[i] + u[i]) return false;
+        }
+        return true;
+    };
+
+    bool a_concave = is_concave(a), b_concave = is_concave(b);
+    assert(a_concave or b_concave);
+    if (!b_concave) return concave_max_plus_convolution<S, INF>(b, a);
+
+    auto select = [&](int i, int j) -> S {
+        int aidx = j, bidx = i - j;
+        if (bidx < 0 or bidx >= m or aidx >= n) return INF;
+        return -(a[aidx] + b[bidx]);
+    };
+    SMAWK<S, false> sm(n + m - 1, n, select);
+    std::vector<S> ret;
+    for (auto x : sm.minima) ret.push_back(-x.second);
+    return ret;
+}
