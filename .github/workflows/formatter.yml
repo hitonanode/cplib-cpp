@@ -1,0 +1,21 @@
+name: Formatting
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # https://apt.llvm.org/
+    - name: Install clang-format-14
+      run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+        sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-14 main'
+        sudo apt-get update
+        sudo apt-get install -y clang-format-14
+
+    - name: Check formatting
+      run: find ./ -name "*.hpp" -o -name "*.cpp" -not -iwholename ".verify-helper*" | xargs clang-format-14 --dry-run --Werror -style=file
