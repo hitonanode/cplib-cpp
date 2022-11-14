@@ -9,21 +9,19 @@
 ## Policy
 
 - "Copy-and-paste-then-run" in any platforms
-  - C++11-friendly (for topcoder SRM)
   - No macro such as `REP(i, n)`
 - Easy to remember usage of codes which have not been used for long time
-  - Concise instruction is written directly on `.hpp` / `.h` files
+  - Concise instruction is written directly on `.hpp` files
   - Less lines preferred
 - Proactively introducing non-essential codes (such as UnionFind specialized for 2D grids) for fast AC in real contests
 
-## Environments:
+## Environments
 
 GitHub Actions-based CI is run for the environments below:
 
-- C++11 (GCC): `g++ -std=c++11 -Wall -O2 -fsplit-stack`
-- C++14 (GCC): `g++`
+- C++17 (GCC): `g++ -std=c++17 -O2 -Wall`
 - C++17 (Clang): `clang++ -std=c++17 -O2 -Wall`
- 
+
 ## Installation
 
 You can easily insert the snippets using the tools such as [Clipboard History](https://blank-note.sakura.ne.jp/topics/clipboard_history.html) and [snippet-from-file
@@ -37,4 +35,4 @@ Except such snippets, the programs written by the owner of the repo is under the
 
 ## Formatting
 
-`clang-format-10` is used (config file: `.clang-format`).
+`clang-format` is used (config file: `.clang-format`).
