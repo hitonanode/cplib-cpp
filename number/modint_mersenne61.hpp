@@ -53,9 +53,7 @@ public:
 
     ModIntMersenne61 inv() const { return pow(md - 2); }
 
-    ModIntMersenne61 operator/(const ModIntMersenne61 &x) const {
-        return *this * x.inv();
-    }
+    ModIntMersenne61 operator/(const ModIntMersenne61 &x) const { return *this * x.inv(); }
 
     ModIntMersenne61 operator-() const { return ModIntMersenne61(md - _v); }
     ModIntMersenne61 &operator+=(const ModIntMersenne61 &x) { return *this = *this + x; }
@@ -63,15 +61,11 @@ public:
     ModIntMersenne61 &operator*=(const ModIntMersenne61 &x) { return *this = *this * x; }
     ModIntMersenne61 &operator/=(const ModIntMersenne61 &x) { return *this = *this / x; }
 
-    ModIntMersenne61 operator+(unsigned x) const {
-        return ModIntMersenne61(this->_v + x);
-    }
+    ModIntMersenne61 operator+(unsigned x) const { return ModIntMersenne61(this->_v + x); }
 
     bool operator==(const ModIntMersenne61 &x) const { return _v == x._v; }
     bool operator!=(const ModIntMersenne61 &x) const { return _v != x._v; }
-    bool operator<(const ModIntMersenne61 &x) const {
-        return _v < x._v;
-    } // To use std::map
+    bool operator<(const ModIntMersenne61 &x) const { return _v < x._v; } // To use std::map
 
     template <class OStream> friend OStream &operator<<(OStream &os, const ModIntMersenne61 &x) {
         return os << x._v;
