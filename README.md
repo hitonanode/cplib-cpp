@@ -35,4 +35,4 @@ Except such snippets, the programs written by the owner of the repo is under the
 
 ## Formatting
 
-`clang-format` is used (config file: `.clang-format`).
+`clang-format-14` is used to lint `.cpp` / `.hpp` files. Default configuration file is `.clang-format`. See [formatter.yml](.github/workflows/formatter.yml) for detail.
