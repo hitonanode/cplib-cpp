@@ -11,7 +11,6 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    IGNORE_IF_GCC: ''
     PROBLEM: https://yukicoder.me/problems/no/1773
     links:
     - https://yukicoder.me/problems/no/1773
