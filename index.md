@@ -467,7 +467,7 @@ data:
         \u624B\u6CD5\uFF09"
     - icon: ':warning:'
       path: other_algorithms/smawk.hpp
-      title: other_algorithms/smawk.hpp
+      title: Totally Monotone Matrix Searching (SMAWK)
   - name: random
     pages:
     - icon: ':warning:'
