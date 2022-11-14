@@ -1,7 +1,7 @@
 # C++ Algorithm/Data Structure Library for Competitive Programming
 
 [![Actions Status](https://github.com/hitonanode/cplib-cpp/workflows/verify/badge.svg)](https://github.com/hitonanode/cplib-cpp/actions)
-[![Actions Status](https://github.com/hitonanode/cplib-cpp/workflows/formatter/badge.svg)](https://github.com/hitonanode/cplib-cpp/actions)
+[![Actions Status](https://github.com/hitonanode/cplib-cpp/workflows/clang-format/badge.svg)](https://github.com/hitonanode/cplib-cpp/actions)
 [![hitonanode](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fhitonanode)](https://atcoder.jp/users/hitonanode)
 [![hitonanode](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fcodeforces%2Fjson%2Fhitonanode)](https://codeforces.com/profile/hitonanode)
 
