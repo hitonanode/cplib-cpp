@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: other_algorithms/dual_slope_trick.hpp
+    title: Dual slope trick
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
+    title: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
   - icon: ':heavy_check_mark:'
     path: other_algorithms/test/slope_trick_stress.test.cpp
     title: other_algorithms/test/slope_trick_stress.test.cpp
@@ -15,8 +21,8 @@ data:
     - https://maspypy.com/slope-trick-1-%E8%A7%A3%E8%AA%AC%E7%B7%A8
   bundledCode: "#line 2 \"other_algorithms/slope_trick.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <limits>\n#include <queue>\n#include <utility>\n\n\
-    // CUT begin\n// Slope trick: fast operations for convex piecewise-linear functions\n\
-    //\n// Implementation idea:\n// - https://maspypy.com/slope-trick-1-%E8%A7%A3%E8%AA%AC%E7%B7%A8\n\
+    // Slope trick: fast operations for convex piecewise-linear functions\n// Implementation\
+    \ idea:\n// - https://maspypy.com/slope-trick-1-%E8%A7%A3%E8%AA%AC%E7%B7%A8\n\
     // - https://ei1333.github.io/library/structure/others/slope-trick.cpp\ntemplate\
     \ <class T, T INF = std::numeric_limits<T>::max() / 2> class slope_trick {\n \
     \   T min_f;\n    T displacement_l, displacement_r;\n    std::priority_queue<T,\
@@ -27,35 +33,41 @@ data:
     \        return ret;\n    }\n    void pushL(const T &a) { L.push(a + displacement_l);\
     \ }\n    T topL() const { return L.empty() ? -INF : L.top() - displacement_l;\
     \ }\n    T popL() {\n        auto ret = topL();\n        if (L.size()) L.pop();\n\
-    \        return ret;\n    }\n\npublic:\n    // Initialize: f(x) = 0\n    slope_trick()\
-    \ : min_f(0), displacement_l(0), displacement_r(0) {\n        static_assert(INF\
-    \ > 0, \"INF must be greater than 0\");\n    }\n    int sizeL() const { return\
-    \ L.size(); }\n    int sizeR() const { return R.size(); }\n\n    // argmin f(x),\
-    \ min f(x)\n    using Q = struct { T min, lo, hi; };\n    Q get_min() const {\
-    \ return {min_f, topL(), topR()}; }\n\n    // f(x) += b\n    void add_const(const\
-    \ T &b) { min_f += b; }\n\n    // f(x) += max(x - a, 0)  _/\n    void add_relu(const\
-    \ T &a) { min_f += std::max(T(0), topL() - a), pushL(a), pushR(popL()); }\n\n\
-    \    // f(x) += max(a - x, 0)  \\_\n    void add_irelu(const T &a) { min_f +=\
-    \ std::max(T(0), a - topR()), pushR(a), pushL(popR()); }\n\n    // f(x) += |x\
-    \ - a|  \\/\n    void add_abs(const T &a) { add_relu(a), add_irelu(a); }\n\n \
-    \   // f(x) <- min_{0 <= y <= w} f(x + y)  .\\ -> \\_\n    void move_left_curve(const\
-    \ T &w) { assert(w >= 0), displacement_l += w; }\n\n    // f(x) <- min_{0 <= y\
-    \ <= w} f(x - y)  /. -> _/\n    void move_right_curve(const T &w) { assert(w >=\
-    \ 0), displacement_r += w; }\n\n    // f(x) <- f(x - dx) \\/. -> .\\/\n    void\
-    \ translate(const T &dx) { displacement_l -= dx, displacement_r += dx; }\n\n \
+    \        return ret;\n    }\n\npublic:\n    // Initialize, f(x) = 0 everywhere\n\
+    \    // Complexity: O(1)\n    slope_trick() : min_f(0), displacement_l(0), displacement_r(0)\
+    \ {\n        static_assert(INF > 0, \"INF must be greater than 0\");\n    }\n\
+    \    inline int sizeL() const noexcept { return L.size(); }\n    inline int sizeR()\
+    \ const noexcept { return R.size(); }\n\n    // argmin f(x), min f(x)\n    //\
+    \ Complexity: O(1)\n    using Q = struct { T min, lo, hi; };\n    Q get_min()\
+    \ const { return {min_f, topL(), topR()}; }\n\n    // f(x) += b\n    // Complexity:\
+    \ O(1)\n    slope_trick &add_const(const T &b) { return min_f += b, *this; }\n\
+    \n    // f(x) += max(x - a, 0)  _/\n    // Complexity: O(log n)\n    slope_trick\
+    \ &add_relu(const T &a) {\n        return min_f += std::max(T(0), topL() - a),\
+    \ pushL(a), pushR(popL()), *this;\n    }\n\n    // f(x) += max(a - x, 0)  \\_\n\
+    \    // Complexity: O(log n)\n    slope_trick &add_irelu(const T &a) {\n     \
+    \   return min_f += std::max(T(0), a - topR()), pushR(a), pushL(popR()), *this;\n\
+    \    }\n\n    // f(x) += |x - a|  \\/\n    // Complexity: O(log n)\n    slope_trick\
+    \ &add_abs(const T &a) { return add_relu(a).add_irelu(a); }\n\n    // f(x) <-\
+    \ min_{0 <= y <= w} f(x + y)  .\\ -> \\_\n    // Complexity: O(1)\n    slope_trick\
+    \ &move_left_curve(const T &w) { return assert(w >= 0), displacement_l += w, *this;\
+    \ }\n\n    // f(x) <- min_{0 <= y <= w} f(x - y)  /. -> _/\n    // Complexity:\
+    \ O(1)\n    slope_trick &move_right_curve(const T &w) {\n        return assert(w\
+    \ >= 0), displacement_r += w, *this;\n    }\n\n    // f(x) <- f(x - dx) \\/. ->\
+    \ .\\/\n    // Complexity: O(1)\n    slope_trick &translate(const T &dx) {\n \
+    \       return displacement_l -= dx, displacement_r += dx, *this;\n    }\n\n \
     \   // return f(x), f destructive\n    T get_destructive(const T &x) {\n     \
     \   T ret = get_min().min;\n        while (L.size()) ret += std::max(T(0), popL()\
     \ - x);\n        while (R.size()) ret += std::max(T(0), x - popR());\n       \
-    \ return ret;\n    }\n\n    // f(x) += g(x), g destructive\n    void merge_destructive(slope_trick<T,\
+    \ return ret;\n    }\n\n    // f(x) += g(x), g destructive\n    slope_trick &merge_destructive(slope_trick<T,\
     \ INF> &g) {\n        if (sizeL() + sizeR() > g.sizeL() + g.sizeR()) {\n     \
     \       std::swap(min_f, g.min_f);\n            std::swap(displacement_l, g.displacement_l);\n\
     \            std::swap(displacement_r, g.displacement_r);\n            std::swap(L,\
     \ g.L);\n            std::swap(R, g.R);\n        }\n        min_f += g.get_min().min;\n\
     \        while (g.L.size()) add_irelu(g.popL());\n        while (g.R.size()) add_relu(g.popR());\n\
-    \    }\n};\n"
+    \        return *this;\n    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <limits>\n\
-    #include <queue>\n#include <utility>\n\n// CUT begin\n// Slope trick: fast operations\
-    \ for convex piecewise-linear functions\n//\n// Implementation idea:\n// - https://maspypy.com/slope-trick-1-%E8%A7%A3%E8%AA%AC%E7%B7%A8\n\
+    #include <queue>\n#include <utility>\n\n// Slope trick: fast operations for convex\
+    \ piecewise-linear functions\n// Implementation idea:\n// - https://maspypy.com/slope-trick-1-%E8%A7%A3%E8%AA%AC%E7%B7%A8\n\
     // - https://ei1333.github.io/library/structure/others/slope-trick.cpp\ntemplate\
     \ <class T, T INF = std::numeric_limits<T>::max() / 2> class slope_trick {\n \
     \   T min_f;\n    T displacement_l, displacement_r;\n    std::priority_queue<T,\
@@ -66,39 +78,47 @@ data:
     \        return ret;\n    }\n    void pushL(const T &a) { L.push(a + displacement_l);\
     \ }\n    T topL() const { return L.empty() ? -INF : L.top() - displacement_l;\
     \ }\n    T popL() {\n        auto ret = topL();\n        if (L.size()) L.pop();\n\
-    \        return ret;\n    }\n\npublic:\n    // Initialize: f(x) = 0\n    slope_trick()\
-    \ : min_f(0), displacement_l(0), displacement_r(0) {\n        static_assert(INF\
-    \ > 0, \"INF must be greater than 0\");\n    }\n    int sizeL() const { return\
-    \ L.size(); }\n    int sizeR() const { return R.size(); }\n\n    // argmin f(x),\
-    \ min f(x)\n    using Q = struct { T min, lo, hi; };\n    Q get_min() const {\
-    \ return {min_f, topL(), topR()}; }\n\n    // f(x) += b\n    void add_const(const\
-    \ T &b) { min_f += b; }\n\n    // f(x) += max(x - a, 0)  _/\n    void add_relu(const\
-    \ T &a) { min_f += std::max(T(0), topL() - a), pushL(a), pushR(popL()); }\n\n\
-    \    // f(x) += max(a - x, 0)  \\_\n    void add_irelu(const T &a) { min_f +=\
-    \ std::max(T(0), a - topR()), pushR(a), pushL(popR()); }\n\n    // f(x) += |x\
-    \ - a|  \\/\n    void add_abs(const T &a) { add_relu(a), add_irelu(a); }\n\n \
-    \   // f(x) <- min_{0 <= y <= w} f(x + y)  .\\ -> \\_\n    void move_left_curve(const\
-    \ T &w) { assert(w >= 0), displacement_l += w; }\n\n    // f(x) <- min_{0 <= y\
-    \ <= w} f(x - y)  /. -> _/\n    void move_right_curve(const T &w) { assert(w >=\
-    \ 0), displacement_r += w; }\n\n    // f(x) <- f(x - dx) \\/. -> .\\/\n    void\
-    \ translate(const T &dx) { displacement_l -= dx, displacement_r += dx; }\n\n \
+    \        return ret;\n    }\n\npublic:\n    // Initialize, f(x) = 0 everywhere\n\
+    \    // Complexity: O(1)\n    slope_trick() : min_f(0), displacement_l(0), displacement_r(0)\
+    \ {\n        static_assert(INF > 0, \"INF must be greater than 0\");\n    }\n\
+    \    inline int sizeL() const noexcept { return L.size(); }\n    inline int sizeR()\
+    \ const noexcept { return R.size(); }\n\n    // argmin f(x), min f(x)\n    //\
+    \ Complexity: O(1)\n    using Q = struct { T min, lo, hi; };\n    Q get_min()\
+    \ const { return {min_f, topL(), topR()}; }\n\n    // f(x) += b\n    // Complexity:\
+    \ O(1)\n    slope_trick &add_const(const T &b) { return min_f += b, *this; }\n\
+    \n    // f(x) += max(x - a, 0)  _/\n    // Complexity: O(log n)\n    slope_trick\
+    \ &add_relu(const T &a) {\n        return min_f += std::max(T(0), topL() - a),\
+    \ pushL(a), pushR(popL()), *this;\n    }\n\n    // f(x) += max(a - x, 0)  \\_\n\
+    \    // Complexity: O(log n)\n    slope_trick &add_irelu(const T &a) {\n     \
+    \   return min_f += std::max(T(0), a - topR()), pushR(a), pushL(popR()), *this;\n\
+    \    }\n\n    // f(x) += |x - a|  \\/\n    // Complexity: O(log n)\n    slope_trick\
+    \ &add_abs(const T &a) { return add_relu(a).add_irelu(a); }\n\n    // f(x) <-\
+    \ min_{0 <= y <= w} f(x + y)  .\\ -> \\_\n    // Complexity: O(1)\n    slope_trick\
+    \ &move_left_curve(const T &w) { return assert(w >= 0), displacement_l += w, *this;\
+    \ }\n\n    // f(x) <- min_{0 <= y <= w} f(x - y)  /. -> _/\n    // Complexity:\
+    \ O(1)\n    slope_trick &move_right_curve(const T &w) {\n        return assert(w\
+    \ >= 0), displacement_r += w, *this;\n    }\n\n    // f(x) <- f(x - dx) \\/. ->\
+    \ .\\/\n    // Complexity: O(1)\n    slope_trick &translate(const T &dx) {\n \
+    \       return displacement_l -= dx, displacement_r += dx, *this;\n    }\n\n \
     \   // return f(x), f destructive\n    T get_destructive(const T &x) {\n     \
     \   T ret = get_min().min;\n        while (L.size()) ret += std::max(T(0), popL()\
     \ - x);\n        while (R.size()) ret += std::max(T(0), x - popR());\n       \
-    \ return ret;\n    }\n\n    // f(x) += g(x), g destructive\n    void merge_destructive(slope_trick<T,\
+    \ return ret;\n    }\n\n    // f(x) += g(x), g destructive\n    slope_trick &merge_destructive(slope_trick<T,\
     \ INF> &g) {\n        if (sizeL() + sizeR() > g.sizeL() + g.sizeR()) {\n     \
     \       std::swap(min_f, g.min_f);\n            std::swap(displacement_l, g.displacement_l);\n\
     \            std::swap(displacement_r, g.displacement_r);\n            std::swap(L,\
     \ g.L);\n            std::swap(R, g.R);\n        }\n        min_f += g.get_min().min;\n\
     \        while (g.L.size()) add_irelu(g.popL());\n        while (g.R.size()) add_relu(g.popR());\n\
-    \    }\n};\n"
+    \        return *this;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: other_algorithms/slope_trick.hpp
-  requiredBy: []
-  timestamp: '2021-09-18 11:42:06+09:00'
+  requiredBy:
+  - other_algorithms/dual_slope_trick.hpp
+  timestamp: '2022-12-04 20:53:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
   - other_algorithms/test/slope_trick_stress.test.cpp
 documentation_of: other_algorithms/slope_trick.hpp
 layout: document

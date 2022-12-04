@@ -450,6 +450,9 @@ data:
       path: other_algorithms/doubling.hpp
       title: other_algorithms/doubling.hpp
     - icon: ':heavy_check_mark:'
+      path: other_algorithms/dual_slope_trick.hpp
+      title: Dual slope trick
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/enumerate_triangles.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u306B\u542B\u307E\u308C\u308B\u4E09\u89D2\
         \u5F62\u306E\u5217\u6319"
@@ -1273,6 +1276,9 @@ data:
       title: number/test/zeta_moebius_transform.test.cpp
   - name: other_algorithms/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
+      title: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/enumerate_triangles.test.cpp
       title: other_algorithms/test/enumerate_triangles.test.cpp

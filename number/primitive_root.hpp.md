@@ -156,8 +156,8 @@ data:
   timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/primitive_root_1e18.test.cpp
   - number/test/primitive_root.test.cpp
+  - number/test/primitive_root_1e18.test.cpp
 documentation_of: number/primitive_root.hpp
 layout: document
 title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
