@@ -489,7 +489,7 @@ data:
     pages:
     - icon: ':warning:'
       path: rational/rational_number.hpp
-      title: rational/rational_number.hpp
+      title: "Rational number \uFF08\u6709\u7406\u6570\uFF09"
   - name: segmenttree
     pages:
     - icon: ':heavy_check_mark:'
