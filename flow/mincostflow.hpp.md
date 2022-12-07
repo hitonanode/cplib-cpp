@@ -4,18 +4,18 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mincostflow.test.cpp
-    title: combinatorial_opt/test/mincostflow.test.cpp
+    path: flow/test/mincostflow.test.cpp
+    title: flow/test/mincostflow.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html
-  bundledCode: "#line 2 \"combinatorial_opt/mincostflow.hpp\"\n#include <algorithm>\n\
-    #include <cassert>\n#include <limits>\n#include <utility>\n#include <vector>\n\
-    \n// CUT begin\n// MinCostFlow based on AC Library (no namespace)\n// **NO NEGATIVE\
-    \ COST EDGES**\n// Reference: https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html\n\
+  bundledCode: "#line 2 \"flow/mincostflow.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <limits>\n#include <utility>\n#include <vector>\n\n// CUT begin\n// MinCostFlow\
+    \ based on AC Library (no namespace)\n// **NO NEGATIVE COST EDGES**\n// Reference:\
+    \ https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html\n\
     template <class Cap, class Cost> struct mcf_graph {\n    template <class E> struct\
     \ csr {\n        std::vector<int> start;\n        std::vector<E> elist;\n    \
     \    explicit csr(int n, const std::vector<std::pair<int, E>> &edges)\n      \
@@ -215,13 +215,13 @@ data:
     };\n"
   dependsOn: []
   isVerificationFile: false
-  path: combinatorial_opt/mincostflow.hpp
+  path: flow/mincostflow.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mincostflow.test.cpp
-documentation_of: combinatorial_opt/mincostflow.hpp
+  - flow/test/mincostflow.test.cpp
+documentation_of: flow/mincostflow.hpp
 layout: document
 title: Minimum cost flow (primal-dual, based on AC Library)
 ---

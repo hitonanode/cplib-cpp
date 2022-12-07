@@ -4,14 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
-    title: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
-  - icon: ':heavy_check_mark:'
     path: data_structure/test/radix_heap.dijkstra.test.cpp
     title: data_structure/test/radix_heap.dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/radix_heap_array.dijkstra.test.cpp
     title: data_structure/test/radix_heap_array.dijkstra.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: flow/test/maxflow.pushrelabel.yuki957.test.cpp
+    title: flow/test/maxflow.pushrelabel.yuki957.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_product.test.cpp
     title: linear_algebra_matrix/test/matrix_product.test.cpp
@@ -50,9 +50,9 @@ data:
   verifiedWith:
   - string/test/sa_count_keyword.reader.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
-  - combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
   - data_structure/test/radix_heap_array.dijkstra.test.cpp
   - data_structure/test/radix_heap.dijkstra.test.cpp
+  - flow/test/maxflow.pushrelabel.yuki957.test.cpp
 documentation_of: utilities/reader.hpp
 layout: document
 title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"

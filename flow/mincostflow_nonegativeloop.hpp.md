@@ -4,17 +4,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/assignment_problem.test.cpp
-    title: combinatorial_opt/test/assignment_problem.test.cpp
+    path: flow/test/assignment_problem.test.cpp
+    title: flow/test/assignment_problem.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mincostflow.test.cpp
-    title: combinatorial_opt/test/mincostflow.test.cpp
+    path: flow/test/mincostflow.test.cpp
+    title: flow/test/mincostflow.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
-    title: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
+    path: flow/test/mincostflow.yuki1288.test.cpp
+    title: flow/test/mincostflow.yuki1288.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mincostflow.yuki1324.test.cpp
-    title: combinatorial_opt/test/mincostflow.yuki1324.test.cpp
+    path: flow/test/mincostflow.yuki1324.test.cpp
+    title: flow/test/mincostflow.yuki1324.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -22,10 +22,10 @@ data:
     links:
     - https://community.topcoder.com/stat?c=problem_statement&pm=15702
     - https://www.codechef.com/problems/ANCT
-  bundledCode: "#line 2 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\n#include\
-    \ <cassert>\n#include <limits>\n#include <queue>\n#include <vector>\n\n// CUT\
-    \ begin\n// Minimum cost flow WITH NO NEGATIVE CYCLE (just negative cost edge\
-    \ is allowed)\n// Verified:\n// - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
+  bundledCode: "#line 2 \"flow/mincostflow_nonegativeloop.hpp\"\n#include <cassert>\n\
+    #include <limits>\n#include <queue>\n#include <vector>\n\n// CUT begin\n// Minimum\
+    \ cost flow WITH NO NEGATIVE CYCLE (just negative cost edge is allowed)\n// Verified:\n\
+    // - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
     // - CodeChef LTIME98 Ancient Magic https://www.codechef.com/problems/ANCT\ntemplate\
     \ <class Cap, class Cost, Cost INF_COST = std::numeric_limits<Cost>::max() / 2>\n\
     struct MinCostFlow {\n    template <class E> struct csr {\n        std::vector<int>\
@@ -265,16 +265,16 @@ data:
     \    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: combinatorial_opt/mincostflow_nonegativeloop.hpp
+  path: flow/mincostflow_nonegativeloop.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mincostflow.yuki1288.test.cpp
-  - combinatorial_opt/test/assignment_problem.test.cpp
-  - combinatorial_opt/test/mincostflow.yuki1324.test.cpp
-  - combinatorial_opt/test/mincostflow.test.cpp
-documentation_of: combinatorial_opt/mincostflow_nonegativeloop.hpp
+  - flow/test/mincostflow.yuki1288.test.cpp
+  - flow/test/assignment_problem.test.cpp
+  - flow/test/mincostflow.yuki1324.test.cpp
+  - flow/test/mincostflow.test.cpp
+documentation_of: flow/mincostflow_nonegativeloop.hpp
 layout: document
 title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\u30D7\
   \u306A\u3057\u306E\u6700\u5C0F\u8CBB\u7528\u6D41\uFF09"

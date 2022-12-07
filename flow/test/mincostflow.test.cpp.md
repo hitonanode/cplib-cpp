@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/mincostflow.hpp
+    path: flow/mincostflow.hpp
     title: Minimum cost flow (primal-dual, based on AC Library)
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/mincostflow_nonegativeloop.hpp
+    path: flow/mincostflow_nonegativeloop.hpp
     title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\
       \u30D7\u306A\u3057\u306E\u6700\u5C0F\u8CBB\u7528\u6D41\uFF09"
   _extendedRequiredBy: []
@@ -18,10 +18,10 @@ data:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
-  bundledCode: "#line 2 \"combinatorial_opt/mincostflow.hpp\"\n#include <algorithm>\n\
-    #include <cassert>\n#include <limits>\n#include <utility>\n#include <vector>\n\
-    \n// CUT begin\n// MinCostFlow based on AC Library (no namespace)\n// **NO NEGATIVE\
-    \ COST EDGES**\n// Reference: https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html\n\
+  bundledCode: "#line 2 \"flow/mincostflow.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <limits>\n#include <utility>\n#include <vector>\n\n// CUT begin\n// MinCostFlow\
+    \ based on AC Library (no namespace)\n// **NO NEGATIVE COST EDGES**\n// Reference:\
+    \ https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html\n\
     template <class Cap, class Cost> struct mcf_graph {\n    template <class E> struct\
     \ csr {\n        std::vector<int> start;\n        std::vector<E> elist;\n    \
     \    explicit csr(int n, const std::vector<std::pair<int, E>> &edges)\n      \
@@ -118,10 +118,10 @@ data:
     \            flow += c;\n            cost += c * d;\n            if (prev_cost_per_flow\
     \ == d) { result.pop_back(); }\n            result.push_back({flow, cost});\n\
     \            prev_cost_per_flow = d;\n        }\n        return result;\n    }\n\
-    };\n#line 4 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\n#include <queue>\n\
-    #line 6 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\n\n// CUT begin\n\
-    // Minimum cost flow WITH NO NEGATIVE CYCLE (just negative cost edge is allowed)\n\
-    // Verified:\n// - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
+    };\n#line 4 \"flow/mincostflow_nonegativeloop.hpp\"\n#include <queue>\n#line 6\
+    \ \"flow/mincostflow_nonegativeloop.hpp\"\n\n// CUT begin\n// Minimum cost flow\
+    \ WITH NO NEGATIVE CYCLE (just negative cost edge is allowed)\n// Verified:\n\
+    // - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
     // - CodeChef LTIME98 Ancient Magic https://www.codechef.com/problems/ANCT\ntemplate\
     \ <class Cap, class Cost, Cost INF_COST = std::numeric_limits<Cost>::max() / 2>\n\
     struct MinCostFlow {\n    template <class E> struct csr {\n        std::vector<int>\
@@ -238,8 +238,8 @@ data:
     \ -dual_dist[s].first;\n            flow += c;\n            cost += c * d;\n \
     \           if (prev_cost_per_flow == d) { result.pop_back(); }\n            result.push_back({flow,\
     \ cost});\n            prev_cost_per_flow = d;\n        }\n        return result;\n\
-    \    }\n};\n#line 4 \"combinatorial_opt/test/mincostflow.test.cpp\"\n#include\
-    \ <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
+    \    }\n};\n#line 4 \"flow/test/mincostflow.test.cpp\"\n#include <iostream>\n\
+    #define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
     \n\nint main() {\n    int V, E, F;\n    std::cin >> V >> E >> F;\n    mcf_graph<long\
     \ long, long long> mcf_ac(V);\n    MinCostFlow<long long, long long> mcf_bf(V);\n\
     \    for (int i = 0; i < E; i++) {\n        int u, v, c, d;\n        std::cin\
@@ -259,18 +259,18 @@ data:
     \    std::cout << (capcost_ac.first == F ? capcost_ac.second : -1) << '\\n';\n\
     }\n"
   dependsOn:
-  - combinatorial_opt/mincostflow.hpp
-  - combinatorial_opt/mincostflow_nonegativeloop.hpp
+  - flow/mincostflow.hpp
+  - flow/mincostflow_nonegativeloop.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/mincostflow.test.cpp
+  path: flow/test/mincostflow.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/mincostflow.test.cpp
+documentation_of: flow/test/mincostflow.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/mincostflow.test.cpp
-- /verify/combinatorial_opt/test/mincostflow.test.cpp.html
-title: combinatorial_opt/test/mincostflow.test.cpp
+- /verify/flow/test/mincostflow.test.cpp
+- /verify/flow/test/mincostflow.test.cpp.html
+title: flow/test/mincostflow.test.cpp
 ---

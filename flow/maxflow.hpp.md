@@ -3,36 +3,35 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/b-flow.hpp
-    title: combinatorial_opt/b-flow.hpp
+    path: flow/b-flow.hpp
+    title: flow/b-flow.hpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/maxflow_lowerbound.hpp
+    path: flow/maxflow_lowerbound.hpp
     title: "Maxflow with lower bound \uFF08\u6D41\u91CF\u4E0B\u9650\u4ED8\u304D\u6700\
       \u5927\u6D41\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/b_flow.test.cpp
-    title: combinatorial_opt/test/b_flow.test.cpp
+    path: flow/test/b_flow.test.cpp
+    title: flow/test/b_flow.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/maxflow.test.cpp
-    title: combinatorial_opt/test/maxflow.test.cpp
+    path: flow/test/maxflow.test.cpp
+    title: flow/test/maxflow.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
-    title: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
+    path: flow/test/mcf_costscaling.bflow.test.cpp
+    title: flow/test/mcf_costscaling.bflow.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mcf_costscaling.test.cpp
-    title: combinatorial_opt/test/mcf_costscaling.test.cpp
+    path: flow/test/mcf_costscaling.test.cpp
+    title: flow/test/mcf_costscaling.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>
-  bundledCode: "#line 2 \"combinatorial_opt/maxflow.hpp\"\n\n#include <algorithm>\n\
-    #include <cassert>\n#include <fstream>\n#include <limits>\n#include <string>\n\
-    #include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder Library, single\
-    \ class, no namespace, no private variables, compatible\n// with C++11 Reference:\
-    \ <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
+  bundledCode: "#line 2 \"flow/maxflow.hpp\"\n\n#include <algorithm>\n#include <cassert>\n\
+    #include <fstream>\n#include <limits>\n#include <string>\n#include <vector>\n\n\
+    // CUT begin\n// MaxFlow based and AtCoder Library, single class, no namespace,\
+    \ no private variables, compatible\n// with C++11 Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
     template <class Cap> struct mf_graph {\n    struct simple_queue_int {\n      \
     \  std::vector<int> payload;\n        int pos = 0;\n        void reserve(int n)\
     \ { payload.reserve(n); }\n        int size() const { return int(payload.size())\
@@ -161,21 +160,21 @@ data:
     \ g;\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: combinatorial_opt/maxflow.hpp
+  path: flow/maxflow.hpp
   requiredBy:
-  - combinatorial_opt/b-flow.hpp
-  - combinatorial_opt/maxflow_lowerbound.hpp
-  timestamp: '2022-01-08 20:23:44+09:00'
+  - flow/b-flow.hpp
+  - flow/maxflow_lowerbound.hpp
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mcf_costscaling.test.cpp
-  - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
-  - combinatorial_opt/test/maxflow.test.cpp
-  - combinatorial_opt/test/b_flow.test.cpp
-documentation_of: combinatorial_opt/maxflow.hpp
+  - flow/test/mcf_costscaling.test.cpp
+  - flow/test/mcf_costscaling.bflow.test.cpp
+  - flow/test/maxflow.test.cpp
+  - flow/test/b_flow.test.cpp
+documentation_of: flow/maxflow.hpp
 layout: document
 redirect_from:
-- /library/combinatorial_opt/maxflow.hpp
-- /library/combinatorial_opt/maxflow.hpp.html
-title: combinatorial_opt/maxflow.hpp
+- /library/flow/maxflow.hpp
+- /library/flow/maxflow.hpp.html
+title: flow/maxflow.hpp
 ---

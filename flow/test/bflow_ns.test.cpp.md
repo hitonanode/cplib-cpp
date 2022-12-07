@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/networksimplex.hpp
+    path: flow/networksimplex.hpp
     title: "Network simplex method \uFF08\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\
       \u4F53\u6CD5\uFF0Cbased on LEMON\uFF09"
   _extendedRequiredBy: []
@@ -12,15 +12,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
+    PROBLEM: https://judge.yosupo.jp/problem/min_cost_b_flow
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
-  bundledCode: "#line 1 \"combinatorial_opt/test/mcf_ns.test.cpp\"\n#define PROBLEM\
-    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\n#line\
-    \ 2 \"combinatorial_opt/networksimplex.hpp\"\n#include <algorithm>\n#include <cassert>\n\
-    #include <chrono>\n#include <cmath>\n#include <limits>\n#include <random>\n#include\
-    \ <utility>\n#include <vector>\n\n// This program is the modificatiosn of the\n\
-    // [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)\n\
+    - https://judge.yosupo.jp/problem/min_cost_b_flow
+  bundledCode: "#line 2 \"flow/networksimplex.hpp\"\n#include <algorithm>\n#include\
+    \ <cassert>\n#include <chrono>\n#include <cmath>\n#include <limits>\n#include\
+    \ <random>\n#include <utility>\n#include <vector>\n\n// This program is the modificatiosn\
+    \ of the\n// [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)\n\
     //\n/* -*- mode: C++; indent-tabs-mode: nil; -*-\n *\n * This file is a part of\
     \ LEMON, a generic C++ optimization library.\n *\n * Copyright (C) 2003-2013\n\
     \ * Egervary Jeno Kombinatorikus Optimalizalasi Kutatocsoport\n * (Egervary Research\
@@ -643,32 +641,53 @@ data:
     \            potential.resize(n);\n            for (int i = 0; i < int(Edges.size());\
     \ i++) flow[eid[i]] = ns.flow(i);\n            for (int i = 0; i < n; i++) potential[i]\
     \ = ns.potential(vid[i]);\n            return ns.template totalCost<RetVal>();\n\
-    \        }\n    }\n};\n#line 3 \"combinatorial_opt/test/mcf_ns.test.cpp\"\n#include\
-    \ <iostream>\nusing namespace std;\n\nint main() {\n    int V, E, F;\n    cin\
-    \ >> V >> E >> F;\n    mcf_graph_ns<int, int> mcf(V);\n    while (E--) {\n   \
-    \     int u, v, c, d;\n        cin >> u >> v >> c >> d;\n        mcf.add_edge(u,\
-    \ v, 0, c, d);\n    }\n\n    mcf.add_supply(0, F), mcf.add_supply(V - 1, -F);\n\
-    \    auto ret = mcf.solve<int>();\n    cout << (mcf.infeasible ? -1 : ret) <<\
-    \ '\\n';\n}\n"
-  code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
-    \n#include \"../networksimplex.hpp\"\n#include <iostream>\nusing namespace std;\n\
-    \nint main() {\n    int V, E, F;\n    cin >> V >> E >> F;\n    mcf_graph_ns<int,\
-    \ int> mcf(V);\n    while (E--) {\n        int u, v, c, d;\n        cin >> u >>\
-    \ v >> c >> d;\n        mcf.add_edge(u, v, 0, c, d);\n    }\n\n    mcf.add_supply(0,\
-    \ F), mcf.add_supply(V - 1, -F);\n    auto ret = mcf.solve<int>();\n    cout <<\
-    \ (mcf.infeasible ? -1 : ret) << '\\n';\n}\n"
+    \        }\n    }\n};\n#line 2 \"flow/test/bflow_ns.test.cpp\"\n#include <iostream>\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n\nstd::ostream\
+    \ &operator<<(std::ostream &os, const __int128 &x) {\n    __int128 tmp = x;\n\
+    \    if (tmp == 0) return os << 0;\n    std::vector<int> ds;\n    if (tmp < 0)\
+    \ {\n        os << '-';\n        while (tmp) {\n            int d = tmp % 10;\n\
+    \            if (d > 0) d -= 10;\n            ds.emplace_back(-d), tmp = (tmp\
+    \ - d) / 10;\n        }\n    } else {\n        while (tmp) ds.emplace_back(tmp\
+    \ % 10), tmp /= 10;\n    }\n    std::reverse(ds.begin(), ds.end());\n    for (auto\
+    \ i : ds) os << i;\n    return os;\n}\n\nusing std::cin;\nusing std::cout;\n\n\
+    int main() {\n    int N, M;\n    cin >> N >> M;\n    mcf_graph_ns<long long, long\
+    \ long> bflow(N);\n\n    for (int i = 0; i < N; i++) {\n        int b;\n     \
+    \   cin >> b;\n        bflow.add_supply(i, b);\n    }\n    while (M--) {\n   \
+    \     int s, t, l, u;\n        long long c;\n        cin >> s >> t >> l >> u >>\
+    \ c;\n        bflow.add_edge(s, t, l, u, c);\n    }\n    __int128 ret = bflow.solve<__int128>();\n\
+    \    if (!bflow.infeasible) {\n        cout << ret << '\\n';\n        for (auto\
+    \ p : bflow.potential) cout << p << '\\n';\n        for (auto f : bflow.flow)\
+    \ cout << f << '\\n';\n    } else {\n        cout << \"infeasible\\n\";\n    }\n\
+    }\n"
+  code: "#include \"../networksimplex.hpp\"\n#include <iostream>\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n\nstd::ostream &operator<<(std::ostream\
+    \ &os, const __int128 &x) {\n    __int128 tmp = x;\n    if (tmp == 0) return os\
+    \ << 0;\n    std::vector<int> ds;\n    if (tmp < 0) {\n        os << '-';\n  \
+    \      while (tmp) {\n            int d = tmp % 10;\n            if (d > 0) d\
+    \ -= 10;\n            ds.emplace_back(-d), tmp = (tmp - d) / 10;\n        }\n\
+    \    } else {\n        while (tmp) ds.emplace_back(tmp % 10), tmp /= 10;\n   \
+    \ }\n    std::reverse(ds.begin(), ds.end());\n    for (auto i : ds) os << i;\n\
+    \    return os;\n}\n\nusing std::cin;\nusing std::cout;\n\nint main() {\n    int\
+    \ N, M;\n    cin >> N >> M;\n    mcf_graph_ns<long long, long long> bflow(N);\n\
+    \n    for (int i = 0; i < N; i++) {\n        int b;\n        cin >> b;\n     \
+    \   bflow.add_supply(i, b);\n    }\n    while (M--) {\n        int s, t, l, u;\n\
+    \        long long c;\n        cin >> s >> t >> l >> u >> c;\n        bflow.add_edge(s,\
+    \ t, l, u, c);\n    }\n    __int128 ret = bflow.solve<__int128>();\n    if (!bflow.infeasible)\
+    \ {\n        cout << ret << '\\n';\n        for (auto p : bflow.potential) cout\
+    \ << p << '\\n';\n        for (auto f : bflow.flow) cout << f << '\\n';\n    }\
+    \ else {\n        cout << \"infeasible\\n\";\n    }\n}\n"
   dependsOn:
-  - combinatorial_opt/networksimplex.hpp
+  - flow/networksimplex.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/mcf_ns.test.cpp
+  path: flow/test/bflow_ns.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 12:19:28+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/mcf_ns.test.cpp
+documentation_of: flow/test/bflow_ns.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/mcf_ns.test.cpp
-- /verify/combinatorial_opt/test/mcf_ns.test.cpp.html
-title: combinatorial_opt/test/mcf_ns.test.cpp
+- /verify/flow/test/bflow_ns.test.cpp
+- /verify/flow/test/bflow_ns.test.cpp.html
+title: flow/test/bflow_ns.test.cpp
 ---

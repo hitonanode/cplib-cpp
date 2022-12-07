@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/mincostflow_nonegativeloop.hpp
+    path: flow/mincostflow_nonegativeloop.hpp
     title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\
       \u30D7\u306A\u3057\u306E\u6700\u5C0F\u8CBB\u7528\u6D41\uFF09"
   _extendedRequiredBy: []
@@ -15,10 +15,10 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/assignment
     links:
     - https://judge.yosupo.jp/problem/assignment
-  bundledCode: "#line 2 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\n#include\
-    \ <cassert>\n#include <limits>\n#include <queue>\n#include <vector>\n\n// CUT\
-    \ begin\n// Minimum cost flow WITH NO NEGATIVE CYCLE (just negative cost edge\
-    \ is allowed)\n// Verified:\n// - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
+  bundledCode: "#line 2 \"flow/mincostflow_nonegativeloop.hpp\"\n#include <cassert>\n\
+    #include <limits>\n#include <queue>\n#include <vector>\n\n// CUT begin\n// Minimum\
+    \ cost flow WITH NO NEGATIVE CYCLE (just negative cost edge is allowed)\n// Verified:\n\
+    // - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
     // - CodeChef LTIME98 Ancient Magic https://www.codechef.com/problems/ANCT\ntemplate\
     \ <class Cap, class Cost, Cost INF_COST = std::numeric_limits<Cost>::max() / 2>\n\
     struct MinCostFlow {\n    template <class E> struct csr {\n        std::vector<int>\
@@ -135,24 +135,23 @@ data:
     \ -dual_dist[s].first;\n            flow += c;\n            cost += c * d;\n \
     \           if (prev_cost_per_flow == d) { result.pop_back(); }\n            result.push_back({flow,\
     \ cost});\n            prev_cost_per_flow = d;\n        }\n        return result;\n\
-    \    }\n};\n#line 2 \"combinatorial_opt/test/assignment_problem.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n#include <algorithm>\n\
-    #include <iostream>\n\ntemplate <typename TC>\nstd::pair<TC, std::vector<int>>\
-    \ AssignmentProblem(std::vector<std::vector<TC>> cost) {\n    int N = cost.size();\n\
-    \    MinCostFlow<int, TC> mcf(N * 2 + 2);\n    int S = N * 2, T = N * 2 + 1;\n\
-    \    TC bias_total_cost = 0;\n    for (int i = 0; i < N; i++) {\n        TC lo\
-    \ = *min_element(cost[i].begin(), cost[i].end());\n        bias_total_cost +=\
-    \ lo;\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N + i, T, 1, 0);\n\
-    \        for (int j = 0; j < N; j++) mcf.add_edge(i, N + j, 1, cost[i][j] - lo);\n\
-    \    }\n    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;\n  \
-    \  std::vector<int> ret(N, -1);\n\n    for (auto g : mcf.edges()) {\n        if\
-    \ (g.from >= 0 and g.from < N and g.to != S and g.flow) ret[g.from] = g.to - N;\n\
-    \    }\n    return std::make_pair(total_cost, ret);\n}\n\nint main() {\n    int\
-    \ N;\n    std::cin >> N;\n    std::vector<std::vector<long long>> A(N, std::vector<long\
-    \ long>(N));\n    for (auto &vec : A) {\n        for (auto &x : vec) { std::cin\
-    \ >> x; }\n    }\n    auto ret = AssignmentProblem(A);\n    std::cout << ret.first\
-    \ << '\\n';\n    for (auto x : ret.second) std::cout << x << ' ';\n    std::cout\
-    \ << '\\n';\n}\n"
+    \    }\n};\n#line 2 \"flow/test/assignment_problem.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/assignment\"\n#include <algorithm>\n#include\
+    \ <iostream>\n\ntemplate <typename TC>\nstd::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>>\
+    \ cost) {\n    int N = cost.size();\n    MinCostFlow<int, TC> mcf(N * 2 + 2);\n\
+    \    int S = N * 2, T = N * 2 + 1;\n    TC bias_total_cost = 0;\n    for (int\
+    \ i = 0; i < N; i++) {\n        TC lo = *min_element(cost[i].begin(), cost[i].end());\n\
+    \        bias_total_cost += lo;\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N\
+    \ + i, T, 1, 0);\n        for (int j = 0; j < N; j++) mcf.add_edge(i, N + j, 1,\
+    \ cost[i][j] - lo);\n    }\n    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;\n\
+    \    std::vector<int> ret(N, -1);\n\n    for (auto g : mcf.edges()) {\n      \
+    \  if (g.from >= 0 and g.from < N and g.to != S and g.flow) ret[g.from] = g.to\
+    \ - N;\n    }\n    return std::make_pair(total_cost, ret);\n}\n\nint main() {\n\
+    \    int N;\n    std::cin >> N;\n    std::vector<std::vector<long long>> A(N,\
+    \ std::vector<long long>(N));\n    for (auto &vec : A) {\n        for (auto &x\
+    \ : vec) { std::cin >> x; }\n    }\n    auto ret = AssignmentProblem(A);\n   \
+    \ std::cout << ret.first << '\\n';\n    for (auto x : ret.second) std::cout <<\
+    \ x << ' ';\n    std::cout << '\\n';\n}\n"
   code: "#include \"../mincostflow_nonegativeloop.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\
     \n#include <algorithm>\n#include <iostream>\n\ntemplate <typename TC>\nstd::pair<TC,\
     \ std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost) {\n \
@@ -171,17 +170,17 @@ data:
     \ std::cout << ret.first << '\\n';\n    for (auto x : ret.second) std::cout <<\
     \ x << ' ';\n    std::cout << '\\n';\n}\n"
   dependsOn:
-  - combinatorial_opt/mincostflow_nonegativeloop.hpp
+  - flow/mincostflow_nonegativeloop.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/assignment_problem.test.cpp
+  path: flow/test/assignment_problem.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 23:27:12+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/assignment_problem.test.cpp
+documentation_of: flow/test/assignment_problem.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/assignment_problem.test.cpp
-- /verify/combinatorial_opt/test/assignment_problem.test.cpp.html
-title: combinatorial_opt/test/assignment_problem.test.cpp
+- /verify/flow/test/assignment_problem.test.cpp
+- /verify/flow/test/assignment_problem.test.cpp.html
+title: flow/test/assignment_problem.test.cpp
 ---

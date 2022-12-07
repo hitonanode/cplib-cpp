@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/mcf_costscaling.hpp
+    path: flow/mcf_costscaling.hpp
     title: "Minimum cost flow (cost scaling, Goldberg & Tarjan) \uFF08\u30B3\u30B9\
       \u30C8\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\u306B\u3088\u308B\u6700\u5C0F\u8CBB\
       \u7528\u6D41\uFF09"
@@ -16,8 +16,8 @@ data:
     PROBLEM: https://yukicoder.me/problems/no/1615
     links:
     - https://yukicoder.me/problems/no/1615
-  bundledCode: "#line 1 \"combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp\"\
-    \n#define PROBLEM \"https://yukicoder.me/problems/no/1615\"\n#line 2 \"combinatorial_opt/mcf_costscaling.hpp\"\
+  bundledCode: "#line 1 \"flow/test/mcf_costscaling.yuki1615.test.cpp\"\n#define PROBLEM\
+    \ \"https://yukicoder.me/problems/no/1615\"\n#line 2 \"flow/mcf_costscaling.hpp\"\
     \n#include <cassert>\n#include <vector>\n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\n\
     template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20>\n\
     struct mcf_costscaling {\n    mcf_costscaling() = default;\n    mcf_costscaling(int\
@@ -82,7 +82,7 @@ data:
     \ 2 + 1],\n                cost[e * 2] / (_n + 1)};\n    }\n    std::vector<edge>\
     \ edges() const {\n        int m = cap.size() / 2;\n        std::vector<edge>\
     \ result(m);\n        for (int i = 0; i < m; i++) result[i] = get_edge(i);\n \
-    \       return result;\n    }\n};\n#line 3 \"combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp\"\
+    \       return result;\n    }\n};\n#line 3 \"flow/test/mcf_costscaling.yuki1615.test.cpp\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int N, M, K, L;\n    cin >> N >> M >> K >>\
     \ L;\n    mcf_costscaling<int, long long, 1, 10> mcf(N + M + 1);\n    for (int\
@@ -101,17 +101,17 @@ data:
     \ j = 0; j < M; j++) mcf.add_edge(N + j + 1, gs, 1, 0);\n    cout << -mcf.solve()\
     \ << '\\n';\n}\n"
   dependsOn:
-  - combinatorial_opt/mcf_costscaling.hpp
+  - flow/mcf_costscaling.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
+  path: flow/test/mcf_costscaling.yuki1615.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
+documentation_of: flow/test/mcf_costscaling.yuki1615.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
-- /verify/combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp.html
-title: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
+- /verify/flow/test/mcf_costscaling.yuki1615.test.cpp
+- /verify/flow/test/mcf_costscaling.yuki1615.test.cpp.html
+title: flow/test/mcf_costscaling.yuki1615.test.cpp
 ---

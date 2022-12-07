@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/mincostflow_nonegativeloop.hpp
+    path: flow/mincostflow_nonegativeloop.hpp
     title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\
       \u30D7\u306A\u3057\u306E\u6700\u5C0F\u8CBB\u7528\u6D41\uFF09"
   _extendedRequiredBy: []
@@ -15,8 +15,8 @@ data:
     PROBLEM: https://yukicoder.me/problems/no/1324
     links:
     - https://yukicoder.me/problems/no/1324
-  bundledCode: "#line 1 \"combinatorial_opt/test/mincostflow.yuki1324.test.cpp\"\n\
-    #define PROBLEM \"https://yukicoder.me/problems/no/1324\"\n#line 2 \"combinatorial_opt/mincostflow_nonegativeloop.hpp\"\
+  bundledCode: "#line 1 \"flow/test/mincostflow.yuki1324.test.cpp\"\n#define PROBLEM\
+    \ \"https://yukicoder.me/problems/no/1324\"\n#line 2 \"flow/mincostflow_nonegativeloop.hpp\"\
     \n#include <cassert>\n#include <limits>\n#include <queue>\n#include <vector>\n\
     \n// CUT begin\n// Minimum cost flow WITH NO NEGATIVE CYCLE (just negative cost\
     \ edge is allowed)\n// Verified:\n// - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
@@ -136,19 +136,19 @@ data:
     \ -dual_dist[s].first;\n            flow += c;\n            cost += c * d;\n \
     \           if (prev_cost_per_flow == d) { result.pop_back(); }\n            result.push_back({flow,\
     \ cost});\n            prev_cost_per_flow = d;\n        }\n        return result;\n\
-    \    }\n};\n#line 3 \"combinatorial_opt/test/mincostflow.yuki1324.test.cpp\"\n\
-    #include <iostream>\n#line 5 \"combinatorial_opt/test/mincostflow.yuki1324.test.cpp\"\
-    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N, K;\n    cin >> N >> K;\n    vector<int> A(N), B(N);\n    vector<vector<int>>\
-    \ P(N, vector<int>(N));\n    for (auto &x : A) cin >> x;\n    for (auto &x : B)\
-    \ cin >> x;\n    for (auto &v : P) {\n        for (auto &x : v) cin >> x;\n  \
-    \  }\n\n    const int gs = N * 2, gt = gs + 1;\n    MinCostFlow<int, long long>\
-    \ graph(gt + 1);\n    long long ret = 0;\n    for (int i = 0; i < N; i++) {\n\
-    \        for (int j = 0; j < N; j++) {\n            ret += P[i][j] * P[i][j];\n\
-    \            for (int a = 0; a < A[i]; a++) graph.add_edge(i, j + N, 1, 2 * (a\
-    \ - P[i][j]) + 1);\n        }\n        graph.add_edge(gs, i, A[i], 0);\n     \
-    \   graph.add_edge(i + N, gt, B[i], 0);\n    }\n    cout << ret + graph.flow(gs,\
-    \ gt, K).second << '\\n';\n}\n"
+    \    }\n};\n#line 3 \"flow/test/mincostflow.yuki1324.test.cpp\"\n#include <iostream>\n\
+    #line 5 \"flow/test/mincostflow.yuki1324.test.cpp\"\nusing namespace std;\n\n\
+    int main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, K;\n\
+    \    cin >> N >> K;\n    vector<int> A(N), B(N);\n    vector<vector<int>> P(N,\
+    \ vector<int>(N));\n    for (auto &x : A) cin >> x;\n    for (auto &x : B) cin\
+    \ >> x;\n    for (auto &v : P) {\n        for (auto &x : v) cin >> x;\n    }\n\
+    \n    const int gs = N * 2, gt = gs + 1;\n    MinCostFlow<int, long long> graph(gt\
+    \ + 1);\n    long long ret = 0;\n    for (int i = 0; i < N; i++) {\n        for\
+    \ (int j = 0; j < N; j++) {\n            ret += P[i][j] * P[i][j];\n         \
+    \   for (int a = 0; a < A[i]; a++) graph.add_edge(i, j + N, 1, 2 * (a - P[i][j])\
+    \ + 1);\n        }\n        graph.add_edge(gs, i, A[i], 0);\n        graph.add_edge(i\
+    \ + N, gt, B[i], 0);\n    }\n    cout << ret + graph.flow(gs, gt, K).second <<\
+    \ '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1324\"\n#include \"../mincostflow_nonegativeloop.hpp\"\
     \n#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n\
     \    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, K;\n    cin >>\
@@ -163,17 +163,17 @@ data:
     \ gt, B[i], 0);\n    }\n    cout << ret + graph.flow(gs, gt, K).second << '\\\
     n';\n}\n"
   dependsOn:
-  - combinatorial_opt/mincostflow_nonegativeloop.hpp
+  - flow/mincostflow_nonegativeloop.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/mincostflow.yuki1324.test.cpp
+  path: flow/test/mincostflow.yuki1324.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/mincostflow.yuki1324.test.cpp
+documentation_of: flow/test/mincostflow.yuki1324.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/mincostflow.yuki1324.test.cpp
-- /verify/combinatorial_opt/test/mincostflow.yuki1324.test.cpp.html
-title: combinatorial_opt/test/mincostflow.yuki1324.test.cpp
+- /verify/flow/test/mincostflow.yuki1324.test.cpp
+- /verify/flow/test/mincostflow.yuki1324.test.cpp.html
+title: flow/test/mincostflow.yuki1324.test.cpp
 ---

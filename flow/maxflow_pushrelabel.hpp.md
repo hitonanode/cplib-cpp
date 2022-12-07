@@ -4,18 +4,18 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
-    title: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
+    path: flow/test/maxflow.pushrelabel.test.cpp
+    title: flow/test/maxflow.pushrelabel.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
-    title: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
+    path: flow/test/maxflow.pushrelabel.yuki957.test.cpp
+    title: flow/test/maxflow.pushrelabel.yuki957.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"combinatorial_opt/maxflow_pushrelabel.hpp\"\n#include <cassert>\n\
-    #include <limits>\n#include <utility>\n#include <vector>\n\n// Maxflow (push-relabel,\
+  bundledCode: "#line 2 \"flow/maxflow_pushrelabel.hpp\"\n#include <cassert>\n#include\
+    \ <limits>\n#include <utility>\n#include <vector>\n\n// Maxflow (push-relabel,\
     \ highest-label)\n// Complexity: O(N^2 M^(1/2))\ntemplate <class Cap, int GlobalRelabelFreq\
     \ = 5, bool UseGapRelabeling = true>\nstruct mf_pushrelabel {\n    struct pque_\
     \ {\n        std::vector<std::pair<int, int>> even_, odd_;\n        int se, so;\n\
@@ -160,14 +160,14 @@ data:
     \        }\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: combinatorial_opt/maxflow_pushrelabel.hpp
+  path: flow/maxflow_pushrelabel.hpp
   requiredBy: []
-  timestamp: '2022-09-11 11:21:07+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/maxflow.pushrelabel.test.cpp
-  - combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
-documentation_of: combinatorial_opt/maxflow_pushrelabel.hpp
+  - flow/test/maxflow.pushrelabel.test.cpp
+  - flow/test/maxflow.pushrelabel.yuki957.test.cpp
+documentation_of: flow/maxflow_pushrelabel.hpp
 layout: document
 title: "Maxflow (push-relabel, Goldberg & Tarjan) \uFF08Push-relabel \u306B\u3088\u308B\
   \u6700\u5927\u6D41\uFF09"

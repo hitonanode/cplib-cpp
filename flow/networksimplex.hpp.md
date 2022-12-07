@@ -4,19 +4,19 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/bflow_ns.test.cpp
-    title: combinatorial_opt/test/bflow_ns.test.cpp
+    path: flow/test/bflow_ns.test.cpp
+    title: flow/test/bflow_ns.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mcf_ns.test.cpp
-    title: combinatorial_opt/test/mcf_ns.test.cpp
+    path: flow/test/mcf_ns.test.cpp
+    title: flow/test/mcf_ns.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)
-  bundledCode: "#line 2 \"combinatorial_opt/networksimplex.hpp\"\n#include <algorithm>\n\
-    #include <cassert>\n#include <chrono>\n#include <cmath>\n#include <limits>\n#include\
+  bundledCode: "#line 2 \"flow/networksimplex.hpp\"\n#include <algorithm>\n#include\
+    \ <cassert>\n#include <chrono>\n#include <cmath>\n#include <limits>\n#include\
     \ <random>\n#include <utility>\n#include <vector>\n\n// This program is the modificatiosn\
     \ of the\n// [lemon::NetworkSimplex](http://lemon.cs.elte.hu/pub/doc/latest-svn/a00404.html)\n\
     //\n/* -*- mode: C++; indent-tabs-mode: nil; -*-\n *\n * This file is a part of\
@@ -1270,14 +1270,14 @@ data:
     \        }\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: combinatorial_opt/networksimplex.hpp
+  path: flow/networksimplex.hpp
   requiredBy: []
-  timestamp: '2022-05-01 12:19:28+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mcf_ns.test.cpp
-  - combinatorial_opt/test/bflow_ns.test.cpp
-documentation_of: combinatorial_opt/networksimplex.hpp
+  - flow/test/mcf_ns.test.cpp
+  - flow/test/bflow_ns.test.cpp
+documentation_of: flow/networksimplex.hpp
 layout: document
 title: "Network simplex method \uFF08\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\
   \u6CD5\uFF0Cbased on LEMON\uFF09"

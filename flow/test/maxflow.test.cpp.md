@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/maxflow.hpp
-    title: combinatorial_opt/maxflow.hpp
+    path: flow/maxflow.hpp
+    title: flow/maxflow.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,11 +14,10 @@ data:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
-  bundledCode: "#line 2 \"combinatorial_opt/maxflow.hpp\"\n\n#include <algorithm>\n\
-    #include <cassert>\n#include <fstream>\n#include <limits>\n#include <string>\n\
-    #include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder Library, single\
-    \ class, no namespace, no private variables, compatible\n// with C++11 Reference:\
-    \ <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
+  bundledCode: "#line 2 \"flow/maxflow.hpp\"\n\n#include <algorithm>\n#include <cassert>\n\
+    #include <fstream>\n#include <limits>\n#include <string>\n#include <vector>\n\n\
+    // CUT begin\n// MaxFlow based and AtCoder Library, single class, no namespace,\
+    \ no private variables, compatible\n// with C++11 Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
     template <class Cap> struct mf_graph {\n    struct simple_queue_int {\n      \
     \  std::vector<int> payload;\n        int pos = 0;\n        void reserve(int n)\
     \ { payload.reserve(n); }\n        int size() const { return int(payload.size())\
@@ -79,8 +78,8 @@ data:
     \ << \"];\\n\";\n            }\n        }\n        ss << \"}\\n\";\n        ss.close();\n\
     \        return;\n    }\n\n    int _n;\n    struct _edge {\n        int to, rev;\n\
     \        Cap cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
-    \ g;\n};\n#line 3 \"combinatorial_opt/test/maxflow.test.cpp\"\n#include <iostream>\n\
-    #define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
+    \ g;\n};\n#line 3 \"flow/test/maxflow.test.cpp\"\n#include <iostream>\n#define\
+    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
     \n\nint main() {\n    int V, E;\n    std::cin >> V >> E;\n    mf_graph<int> graph(V);\n\
     \    while (E--) {\n        int u, v, c;\n        std::cin >> u >> v >> c;\n \
     \       graph.add_edge(u, v, c);\n    }\n    std::cout << graph.flow(0, V - 1)\
@@ -92,17 +91,17 @@ data:
     \       graph.add_edge(u, v, c);\n    }\n    std::cout << graph.flow(0, V - 1)\
     \ << std::endl;\n}\n"
   dependsOn:
-  - combinatorial_opt/maxflow.hpp
+  - flow/maxflow.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/maxflow.test.cpp
+  path: flow/test/maxflow.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/maxflow.test.cpp
+documentation_of: flow/test/maxflow.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/maxflow.test.cpp
-- /verify/combinatorial_opt/test/maxflow.test.cpp.html
-title: combinatorial_opt/test/maxflow.test.cpp
+- /verify/flow/test/maxflow.test.cpp
+- /verify/flow/test/maxflow.test.cpp.html
+title: flow/test/maxflow.test.cpp
 ---

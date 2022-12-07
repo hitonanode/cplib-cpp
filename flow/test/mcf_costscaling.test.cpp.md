@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/maxflow.hpp
-    title: combinatorial_opt/maxflow.hpp
+    path: flow/maxflow.hpp
+    title: flow/maxflow.hpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/mcf_costscaling.hpp
+    path: flow/mcf_costscaling.hpp
     title: "Minimum cost flow (cost scaling, Goldberg & Tarjan) \uFF08\u30B3\u30B9\
       \u30C8\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\u306B\u3088\u308B\u6700\u5C0F\u8CBB\
       \u7528\u6D41\uFF09"
@@ -19,12 +19,12 @@ data:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
-  bundledCode: "#line 1 \"combinatorial_opt/test/mcf_costscaling.test.cpp\"\n#define\
-    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\
-    \n#line 2 \"combinatorial_opt/maxflow.hpp\"\n\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <fstream>\n#include <limits>\n#include <string>\n#include\
-    \ <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder Library, single class,\
-    \ no namespace, no private variables, compatible\n// with C++11 Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
+  bundledCode: "#line 1 \"flow/test/mcf_costscaling.test.cpp\"\n#define PROBLEM \"\
+    http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B\"\n#line 2 \"\
+    flow/maxflow.hpp\"\n\n#include <algorithm>\n#include <cassert>\n#include <fstream>\n\
+    #include <limits>\n#include <string>\n#include <vector>\n\n// CUT begin\n// MaxFlow\
+    \ based and AtCoder Library, single class, no namespace, no private variables,\
+    \ compatible\n// with C++11 Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
     template <class Cap> struct mf_graph {\n    struct simple_queue_int {\n      \
     \  std::vector<int> payload;\n        int pos = 0;\n        void reserve(int n)\
     \ { payload.reserve(n); }\n        int size() const { return int(payload.size())\
@@ -85,17 +85,16 @@ data:
     \ << \"];\\n\";\n            }\n        }\n        ss << \"}\\n\";\n        ss.close();\n\
     \        return;\n    }\n\n    int _n;\n    struct _edge {\n        int to, rev;\n\
     \        Cap cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
-    \ g;\n};\n#line 4 \"combinatorial_opt/mcf_costscaling.hpp\"\n\n// Cost scaling\n\
-    // https://people.orie.cornell.edu/dpw/orie633/\ntemplate <class Cap, class Cost,\
-    \ int SCALING = 1, int REFINEMENT_ITER = 20>\nstruct mcf_costscaling {\n    mcf_costscaling()\
-    \ = default;\n    mcf_costscaling(int n) : _n(n), to(n), b(n), p(n) {}\n\n   \
-    \ int _n;\n    std::vector<Cap> cap;\n    std::vector<Cost> cost;\n    std::vector<int>\
-    \ opposite;\n    std::vector<std::vector<int>> to;\n    std::vector<Cap> b;\n\
-    \    std::vector<Cost> p;\n\n    int add_edge(int from_, int to_, Cap cap_, Cost\
-    \ cost_) {\n        assert(0 <= from_ and from_ < _n);\n        assert(0 <= to_\
-    \ and to_ < _n);\n        assert(0 <= cap_);\n        cost_ *= (_n + 1);\n   \
-    \     const int e = int(cap.size());\n        to[from_].push_back(e);\n      \
-    \  cap.push_back(cap_);\n        cost.push_back(cost_);\n        opposite.push_back(to_);\n\
+    \ g;\n};\n#line 4 \"flow/mcf_costscaling.hpp\"\n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\n\
+    template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20>\n\
+    struct mcf_costscaling {\n    mcf_costscaling() = default;\n    mcf_costscaling(int\
+    \ n) : _n(n), to(n), b(n), p(n) {}\n\n    int _n;\n    std::vector<Cap> cap;\n\
+    \    std::vector<Cost> cost;\n    std::vector<int> opposite;\n    std::vector<std::vector<int>>\
+    \ to;\n    std::vector<Cap> b;\n    std::vector<Cost> p;\n\n    int add_edge(int\
+    \ from_, int to_, Cap cap_, Cost cost_) {\n        assert(0 <= from_ and from_\
+    \ < _n);\n        assert(0 <= to_ and to_ < _n);\n        assert(0 <= cap_);\n\
+    \        cost_ *= (_n + 1);\n        const int e = int(cap.size());\n        to[from_].push_back(e);\n\
+    \        cap.push_back(cap_);\n        cost.push_back(cost_);\n        opposite.push_back(to_);\n\
     \n        to[to_].push_back(e + 1);\n        cap.push_back(0);\n        cost.push_back(-cost_);\n\
     \        opposite.push_back(from_);\n        return e / 2;\n    }\n    void add_supply(int\
     \ v, Cap supply) { b[v] += supply; }\n    void add_demand(int v, Cap demand) {\
@@ -150,7 +149,7 @@ data:
     \ 2 + 1],\n                cost[e * 2] / (_n + 1)};\n    }\n    std::vector<edge>\
     \ edges() const {\n        int m = cap.size() / 2;\n        std::vector<edge>\
     \ result(m);\n        for (int i = 0; i < m; i++) result[i] = get_edge(i);\n \
-    \       return result;\n    }\n};\n#line 4 \"combinatorial_opt/test/mcf_costscaling.test.cpp\"\
+    \       return result;\n    }\n};\n#line 4 \"flow/test/mcf_costscaling.test.cpp\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    int V, E, F;\n\
     \    cin >> V >> E >> F;\n    mcf_costscaling<int, long long> mcf(V);\n    mf_graph<int>\
     \ mf(V);\n    while (E--) {\n        int u, v, c, d;\n        cin >> u >> v >>\
@@ -168,18 +167,18 @@ data:
     \ << \"-1\" << '\\n';\n    } else {\n        cout << mcf.solve() << '\\n';\n \
     \   }\n}\n"
   dependsOn:
-  - combinatorial_opt/maxflow.hpp
-  - combinatorial_opt/mcf_costscaling.hpp
+  - flow/maxflow.hpp
+  - flow/mcf_costscaling.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/mcf_costscaling.test.cpp
+  path: flow/test/mcf_costscaling.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/mcf_costscaling.test.cpp
+documentation_of: flow/test/mcf_costscaling.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/mcf_costscaling.test.cpp
-- /verify/combinatorial_opt/test/mcf_costscaling.test.cpp.html
-title: combinatorial_opt/test/mcf_costscaling.test.cpp
+- /verify/flow/test/mcf_costscaling.test.cpp
+- /verify/flow/test/mcf_costscaling.test.cpp.html
+title: flow/test/mcf_costscaling.test.cpp
 ---

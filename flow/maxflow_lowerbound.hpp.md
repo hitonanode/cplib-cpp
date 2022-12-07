@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/maxflow.hpp
-    title: combinatorial_opt/maxflow.hpp
+    path: flow/maxflow.hpp
+    title: flow/maxflow.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
-    title: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
+    path: flow/test/mcf_costscaling.bflow.test.cpp
+    title: flow/test/mcf_costscaling.bflow.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -16,11 +16,10 @@ data:
     links:
     - https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp
     - https://snuke.hatenablog.com/entry/2016/07/10/043918
-  bundledCode: "#line 2 \"combinatorial_opt/maxflow.hpp\"\n\n#include <algorithm>\n\
-    #include <cassert>\n#include <fstream>\n#include <limits>\n#include <string>\n\
-    #include <vector>\n\n// CUT begin\n// MaxFlow based and AtCoder Library, single\
-    \ class, no namespace, no private variables, compatible\n// with C++11 Reference:\
-    \ <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
+  bundledCode: "#line 2 \"flow/maxflow.hpp\"\n\n#include <algorithm>\n#include <cassert>\n\
+    #include <fstream>\n#include <limits>\n#include <string>\n#include <vector>\n\n\
+    // CUT begin\n// MaxFlow based and AtCoder Library, single class, no namespace,\
+    \ no private variables, compatible\n// with C++11 Reference: <https://atcoder.github.io/ac-library/production/document_ja/maxflow.html>\n\
     template <class Cap> struct mf_graph {\n    struct simple_queue_int {\n      \
     \  std::vector<int> payload;\n        int pos = 0;\n        void reserve(int n)\
     \ { payload.reserve(n); }\n        int size() const { return int(payload.size())\
@@ -81,8 +80,8 @@ data:
     \ << \"];\\n\";\n            }\n        }\n        ss << \"}\\n\";\n        ss.close();\n\
     \        return;\n    }\n\n    int _n;\n    struct _edge {\n        int to, rev;\n\
     \        Cap cap;\n    };\n    std::vector<std::pair<int, int>> pos;\n    std::vector<std::vector<_edge>>\
-    \ g;\n};\n#line 6 \"combinatorial_opt/maxflow_lowerbound.hpp\"\n\n// MaxFlow with\
-    \ lower bound\n// https://snuke.hatenablog.com/entry/2016/07/10/043918\n// https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp\n\
+    \ g;\n};\n#line 6 \"flow/maxflow_lowerbound.hpp\"\n\n// MaxFlow with lower bound\n\
+    // https://snuke.hatenablog.com/entry/2016/07/10/043918\n// https://ei1333.github.io/library/graph/flow/maxflow-lower-bound.cpp\n\
     // flush(s, t): Calculate maxflow (if solution exists), -1 (otherwise)\ntemplate\
     \ <typename Cap> struct MaxFlowLowerBound {\n    using Maxflow = mf_graph<Cap>;\n\
     \    int N;\n    Maxflow mf;\n    std::vector<Cap> in;\n    MaxFlowLowerBound(int\
@@ -127,15 +126,15 @@ data:
     \ 0; i < int(cap_lo_info.size()); ++i) result.push_back(get_edge(i));\n      \
     \  return result;\n    }\n};\n"
   dependsOn:
-  - combinatorial_opt/maxflow.hpp
+  - flow/maxflow.hpp
   isVerificationFile: false
-  path: combinatorial_opt/maxflow_lowerbound.hpp
+  path: flow/maxflow_lowerbound.hpp
   requiredBy: []
-  timestamp: '2022-08-07 17:26:03+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
-documentation_of: combinatorial_opt/maxflow_lowerbound.hpp
+  - flow/test/mcf_costscaling.bflow.test.cpp
+documentation_of: flow/maxflow_lowerbound.hpp
 layout: document
 title: "Maxflow with lower bound \uFF08\u6D41\u91CF\u4E0B\u9650\u4ED8\u304D\u6700\u5927\
   \u6D41\uFF09"

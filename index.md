@@ -3,9 +3,6 @@ data:
   libraryCategories:
   - name: combinatorial_opt
     pages:
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/b-flow.hpp
-      title: combinatorial_opt/b-flow.hpp
     - icon: ':warning:'
       path: combinatorial_opt/basepolyhedron.hpp
       title: combinatorial_opt/basepolyhedron.hpp
@@ -31,33 +28,6 @@ data:
       path: combinatorial_opt/matroid_union.hpp
       title: "Matroid union \uFF08\u30DE\u30C8\u30ED\u30A4\u30C9\u306E\u5408\u4F75\
         \uFF09"
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/maxflow.hpp
-      title: combinatorial_opt/maxflow.hpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/maxflow_lowerbound.hpp
-      title: "Maxflow with lower bound \uFF08\u6D41\u91CF\u4E0B\u9650\u4ED8\u304D\u6700\
-        \u5927\u6D41\uFF09"
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/maxflow_pushrelabel.hpp
-      title: "Maxflow (push-relabel, Goldberg & Tarjan) \uFF08Push-relabel \u306B\u3088\
-        \u308B\u6700\u5927\u6D41\uFF09"
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/mcf_costscaling.hpp
-      title: "Minimum cost flow (cost scaling, Goldberg & Tarjan) \uFF08\u30B3\u30B9\
-        \u30C8\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\u306B\u3088\u308B\u6700\u5C0F\u8CBB\
-        \u7528\u6D41\uFF09"
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/mincostflow.hpp
-      title: Minimum cost flow (primal-dual, based on AC Library)
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/mincostflow_nonegativeloop.hpp
-      title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\
-        \u30D7\u306A\u3057\u306E\u6700\u5C0F\u8CBB\u7528\u6D41\uFF09"
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/networksimplex.hpp
-      title: "Network simplex method \uFF08\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\
-        \u4F53\u6CD5\uFF0Cbased on LEMON\uFF09"
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/simplex.hpp
       title: "Simplex method \uFF08\u5358\u4F53\u6CD5\uFF09"
@@ -180,6 +150,38 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/static_range_inversion.hpp
       title: data_structure/static_range_inversion.hpp
+  - name: flow
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: flow/b-flow.hpp
+      title: flow/b-flow.hpp
+    - icon: ':heavy_check_mark:'
+      path: flow/maxflow.hpp
+      title: flow/maxflow.hpp
+    - icon: ':heavy_check_mark:'
+      path: flow/maxflow_lowerbound.hpp
+      title: "Maxflow with lower bound \uFF08\u6D41\u91CF\u4E0B\u9650\u4ED8\u304D\u6700\
+        \u5927\u6D41\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: flow/maxflow_pushrelabel.hpp
+      title: "Maxflow (push-relabel, Goldberg & Tarjan) \uFF08Push-relabel \u306B\u3088\
+        \u308B\u6700\u5927\u6D41\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: flow/mcf_costscaling.hpp
+      title: "Minimum cost flow (cost scaling, Goldberg & Tarjan) \uFF08\u30B3\u30B9\
+        \u30C8\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\u306B\u3088\u308B\u6700\u5C0F\u8CBB\
+        \u7528\u6D41\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: flow/mincostflow.hpp
+      title: Minimum cost flow (primal-dual, based on AC Library)
+    - icon: ':heavy_check_mark:'
+      path: flow/mincostflow_nonegativeloop.hpp
+      title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\
+        \u30D7\u306A\u3057\u306E\u6700\u5C0F\u8CBB\u7528\u6D41\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: flow/networksimplex.hpp
+      title: "Network simplex method \uFF08\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\
+        \u4F53\u6CD5\uFF0Cbased on LEMON\uFF09"
   - name: formal_power_series
     pages:
     - icon: ':heavy_check_mark:'
@@ -766,15 +768,6 @@ data:
   - name: combinatorial_opt/test
     pages:
     - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/assignment_problem.test.cpp
-      title: combinatorial_opt/test/assignment_problem.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/b_flow.test.cpp
-      title: combinatorial_opt/test/b_flow.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/bflow_ns.test.cpp
-      title: combinatorial_opt/test/bflow_ns.test.cpp
-    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/convex_sum.test.cpp
       title: combinatorial_opt/test/convex_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -789,36 +782,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
       title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
-      title: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
-      title: combinatorial_opt/test/maxflow.pushrelabel.yuki957.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/maxflow.test.cpp
-      title: combinatorial_opt/test/maxflow.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
-      title: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/mcf_costscaling.test.cpp
-      title: combinatorial_opt/test/mcf_costscaling.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
-      title: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/mcf_ns.test.cpp
-      title: combinatorial_opt/test/mcf_ns.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/mincostflow.test.cpp
-      title: combinatorial_opt/test/mincostflow.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
-      title: combinatorial_opt/test/mincostflow.yuki1288.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: combinatorial_opt/test/mincostflow.yuki1324.test.cpp
-      title: combinatorial_opt/test/mincostflow.yuki1324.test.cpp
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/simplex.easy.test.cpp
       title: combinatorial_opt/test/simplex.easy.test.cpp
@@ -941,6 +904,47 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/static_range_inversion.test.cpp
       title: data_structure/test/static_range_inversion.test.cpp
+  - name: flow/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: flow/test/assignment_problem.test.cpp
+      title: flow/test/assignment_problem.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/b_flow.test.cpp
+      title: flow/test/b_flow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/bflow_ns.test.cpp
+      title: flow/test/bflow_ns.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/maxflow.pushrelabel.test.cpp
+      title: flow/test/maxflow.pushrelabel.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/maxflow.pushrelabel.yuki957.test.cpp
+      title: flow/test/maxflow.pushrelabel.yuki957.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/maxflow.test.cpp
+      title: flow/test/maxflow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/mcf_costscaling.bflow.test.cpp
+      title: flow/test/mcf_costscaling.bflow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/mcf_costscaling.test.cpp
+      title: flow/test/mcf_costscaling.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/mcf_costscaling.yuki1615.test.cpp
+      title: flow/test/mcf_costscaling.yuki1615.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/mcf_ns.test.cpp
+      title: flow/test/mcf_ns.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/mincostflow.test.cpp
+      title: flow/test/mincostflow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/mincostflow.yuki1288.test.cpp
+      title: flow/test/mincostflow.yuki1288.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/mincostflow.yuki1324.test.cpp
+      title: flow/test/mincostflow.yuki1324.test.cpp
   - name: formal_power_series/test
     pages:
     - icon: ':heavy_check_mark:'

@@ -3,29 +3,29 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/b-flow.hpp
-    title: combinatorial_opt/b-flow.hpp
+    path: flow/b-flow.hpp
+    title: flow/b-flow.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/b_flow.test.cpp
-    title: combinatorial_opt/test/b_flow.test.cpp
+    path: flow/test/b_flow.test.cpp
+    title: flow/test/b_flow.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
-    title: combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
+    path: flow/test/mcf_costscaling.bflow.test.cpp
+    title: flow/test/mcf_costscaling.bflow.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mcf_costscaling.test.cpp
-    title: combinatorial_opt/test/mcf_costscaling.test.cpp
+    path: flow/test/mcf_costscaling.test.cpp
+    title: flow/test/mcf_costscaling.test.cpp
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
-    title: combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
+    path: flow/test/mcf_costscaling.yuki1615.test.cpp
+    title: flow/test/mcf_costscaling.yuki1615.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://people.orie.cornell.edu/dpw/orie633/
-  bundledCode: "#line 2 \"combinatorial_opt/mcf_costscaling.hpp\"\n#include <cassert>\n\
-    #include <vector>\n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\n\
+  bundledCode: "#line 2 \"flow/mcf_costscaling.hpp\"\n#include <cassert>\n#include\
+    \ <vector>\n\n// Cost scaling\n// https://people.orie.cornell.edu/dpw/orie633/\n\
     template <class Cap, class Cost, int SCALING = 1, int REFINEMENT_ITER = 20>\n\
     struct mcf_costscaling {\n    mcf_costscaling() = default;\n    mcf_costscaling(int\
     \ n) : _n(n), to(n), b(n), p(n) {}\n\n    int _n;\n    std::vector<Cap> cap;\n\
@@ -158,17 +158,17 @@ data:
     \       return result;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: combinatorial_opt/mcf_costscaling.hpp
+  path: flow/mcf_costscaling.hpp
   requiredBy:
-  - combinatorial_opt/b-flow.hpp
-  timestamp: '2022-01-08 20:23:44+09:00'
+  - flow/b-flow.hpp
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/mcf_costscaling.test.cpp
-  - combinatorial_opt/test/mcf_costscaling.yuki1615.test.cpp
-  - combinatorial_opt/test/mcf_costscaling.bflow.test.cpp
-  - combinatorial_opt/test/b_flow.test.cpp
-documentation_of: combinatorial_opt/mcf_costscaling.hpp
+  - flow/test/mcf_costscaling.test.cpp
+  - flow/test/mcf_costscaling.yuki1615.test.cpp
+  - flow/test/mcf_costscaling.bflow.test.cpp
+  - flow/test/b_flow.test.cpp
+documentation_of: flow/mcf_costscaling.hpp
 layout: document
 title: "Minimum cost flow (cost scaling, Goldberg & Tarjan) \uFF08\u30B3\u30B9\u30C8\
   \u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\u306B\u3088\u308B\u6700\u5C0F\u8CBB\u7528\u6D41\

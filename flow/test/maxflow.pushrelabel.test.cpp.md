@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: combinatorial_opt/maxflow_pushrelabel.hpp
+    path: flow/maxflow_pushrelabel.hpp
     title: "Maxflow (push-relabel, Goldberg & Tarjan) \uFF08Push-relabel \u306B\u3088\
       \u308B\u6700\u5927\u6D41\uFF09"
   _extendedRequiredBy: []
@@ -15,8 +15,8 @@ data:
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
-  bundledCode: "#line 2 \"combinatorial_opt/maxflow_pushrelabel.hpp\"\n#include <cassert>\n\
-    #include <limits>\n#include <utility>\n#include <vector>\n\n// Maxflow (push-relabel,\
+  bundledCode: "#line 2 \"flow/maxflow_pushrelabel.hpp\"\n#include <cassert>\n#include\
+    \ <limits>\n#include <utility>\n#include <vector>\n\n// Maxflow (push-relabel,\
     \ highest-label)\n// Complexity: O(N^2 M^(1/2))\ntemplate <class Cap, int GlobalRelabelFreq\
     \ = 5, bool UseGapRelabeling = true>\nstruct mf_pushrelabel {\n    struct pque_\
     \ {\n        std::vector<std::pair<int, int>> even_, odd_;\n        int se, so;\n\
@@ -86,8 +86,8 @@ data:
     \ -= delta, e.cap -= delta;\n        excess[e.to] += delta, g[e.to][e.rev].cap\
     \ += delta;\n        if (excess[e.to] > 0 and excess[e.to] <= delta) {\n     \
     \       if (!UseGapRelabeling or dist[e.to] <= gap) pque.push(e.to, dist[e.to]);\n\
-    \        }\n    }\n};\n#line 3 \"combinatorial_opt/test/maxflow.pushrelabel.test.cpp\"\
-    \n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
+    \        }\n    }\n};\n#line 3 \"flow/test/maxflow.pushrelabel.test.cpp\"\n#include\
+    \ <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int V, E;\n    cin >> V >> E;\n    mf_pushrelabel<int, 0, false> g00(V);\n\
     \    mf_pushrelabel<int, 0, true> g01(V);\n    mf_pushrelabel<int, 2, false> g10(V);\n\
@@ -111,17 +111,17 @@ data:
     \ == f01);\n    assert(f00 == f10);\n    assert(f00 == f11);\n    cout << f00\
     \ << '\\n';\n}\n"
   dependsOn:
-  - combinatorial_opt/maxflow_pushrelabel.hpp
+  - flow/maxflow_pushrelabel.hpp
   isVerificationFile: true
-  path: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
+  path: flow/test/maxflow.pushrelabel.test.cpp
   requiredBy: []
-  timestamp: '2022-09-11 11:21:07+09:00'
+  timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
+documentation_of: flow/test/maxflow.pushrelabel.test.cpp
 layout: document
 redirect_from:
-- /verify/combinatorial_opt/test/maxflow.pushrelabel.test.cpp
-- /verify/combinatorial_opt/test/maxflow.pushrelabel.test.cpp.html
-title: combinatorial_opt/test/maxflow.pushrelabel.test.cpp
+- /verify/flow/test/maxflow.pushrelabel.test.cpp
+- /verify/flow/test/maxflow.pushrelabel.test.cpp.html
+title: flow/test/maxflow.pushrelabel.test.cpp
 ---
