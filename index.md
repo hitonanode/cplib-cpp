@@ -81,6 +81,11 @@ data:
       path: combinatorial_opt/matroids/transversal_matroid.hpp
       title: "Transversal matroid \uFF08\u6A2A\u65AD\u30DE\u30C8\u30ED\u30A4\u30C9\
         \uFF09"
+  - name: combinatorics
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: combinatorics/hook_length_formula.hpp
+      title: "Hook length formula (\u30D5\u30C3\u30AF\u9577\u516C\u5F0F)"
   - name: convex_hull_trick
     pages:
     - icon: ':warning:'
@@ -829,6 +834,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/simplex.shortestpath.test.cpp
       title: combinatorial_opt/test/simplex.shortestpath.test.cpp
+  - name: combinatorics/test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: combinatorics/test/hook_length_formulat.yuki2149.test.cpp
+      title: combinatorics/test/hook_length_formulat.yuki2149.test.cpp
   - name: convex_hull_trick/test
     pages:
     - icon: ':heavy_check_mark:'
