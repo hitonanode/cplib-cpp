@@ -12,7 +12,7 @@ Totally monotone な $N \times M$ 行列について，各行の最小値の位�
 列 $a = (a\_0, \dots, a\_{n - 1}), b = (b\_0, \dots, b\_{m - 1})$ で特に $b$ が concave なものが与えられたとき，$a$ と $b$ の max-plus convolution $c = (c\_0, \dots, c\_{n + m - 2})$:
 
 $$
-c\_i = \max_{j + k = i} a\_j + b\_k
+c_i = \max_{j + k = i} a_j + b_k
 $$
 
 は SMAWK を利用することで $O(n + m)$ で計算できる．

@@ -1,5 +1,5 @@
 ---
-title: Array-like radix heap with decrease query（`chmin()` 操作が可能な基数ヒープ）
+title: Array-like radix heap with decrease query（chmin 操作が可能な基数ヒープ）
 documentation_of: ./radix_heap_array.hpp
 ---
 

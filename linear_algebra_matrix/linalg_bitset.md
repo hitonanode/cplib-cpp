@@ -1,5 +1,5 @@
 ---
-title: Linear algebra on $\mathbb{F}_{2}$ using `std::bitset` ($\mathbb{F}_{2}$ 線形代数)
+title: Linear algebra on $\mathbb{F}_{2}$ using std::bitset ($\mathbb{F}_{2}$ 線形代数)
 documentation_of: ./linalg_bitset.hpp
 ---
 
