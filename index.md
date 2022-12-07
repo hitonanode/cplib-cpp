@@ -159,8 +159,8 @@ data:
       title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
     - icon: ':heavy_check_mark:'
       path: data_structure/radix_heap_array.hpp
-      title: "Array-like radix heap with decrease query\uFF08`chmin()` \u64CD\u4F5C\
-        \u304C\u53EF\u80FD\u306A\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
+      title: "Array-like radix heap with decrease query\uFF08chmin \u64CD\u4F5C\u304C\
+        \u53EF\u80FD\u306A\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
     - icon: ':heavy_check_mark:'
       path: data_structure/range_kth_smallest_offline.hpp
       title: data_structure/range_kth_smallest_offline.hpp
@@ -355,7 +355,7 @@ data:
       title: Levinson recursion (Levinson-Durbin algorithm)
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_bitset.hpp
-      title: "Linear algebra on $\\mathbb{F}_{2}$ using `std::bitset` ($\\mathbb{F}_{2}$\
+      title: "Linear algebra on $\\mathbb{F}_{2}$ using std::bitset ($\\mathbb{F}_{2}$\
         \ \u7DDA\u5F62\u4EE3\u6570)"
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp

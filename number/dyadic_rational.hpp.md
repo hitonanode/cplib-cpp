@@ -124,9 +124,11 @@ title: "Dyadic rational, surreal number \uFF08\u4E8C\u9032\u5206\u6570\u30FB\u56
 分母が二冪の有理数 `DyadicRational<Int, Uint = unsigned long long>` の実装，また超現実数の構成法に基づく $\\{ l \mid r \\}$ の計算．組合せゲーム理論などへの応用がある．
 
 `Int` が整数部分を表すための符号付整数型で `int` や `long long` の利用を想定，`Uint` が小数部分を表すための符号なし整数型で `unsigned` や `unsigned long long` の利用を想定（`__uint128_t` も動くかもしれない）．メンバ変数 `integ`, `frac` がそれぞれ整数部分と小数部分に対応し，
-$$
+
+$\displaystyle
 x = \mathrm{integ} + \frac{\mathrm{frac}}{2^\mathrm{FracLen}}
-$$
+$
+
 がこのクラスのインスタンスが表す有理数 $x$ である．
 実装の制約上分母のオーダーは（`Uint = unsigned long long` の場合）$2^{63}$ が上限となる．
 

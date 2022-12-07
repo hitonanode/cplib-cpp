@@ -88,8 +88,8 @@ data:
   - data_structure/test/radix_heap_array.dijkstra.test.cpp
 documentation_of: data_structure/radix_heap_array.hpp
 layout: document
-title: "Array-like radix heap with decrease query\uFF08`chmin()` \u64CD\u4F5C\u304C\
-  \u53EF\u80FD\u306A\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
+title: "Array-like radix heap with decrease query\uFF08chmin \u64CD\u4F5C\u304C\u53EF\
+  \u80FD\u306A\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
 ---
 
 `radix_heap.hpp` におけるラベルを非負整数に限り，更にラベル $i$ に対応したキーに対する decrease 操作（いわゆる `chmin`）を $O(1)$ で行えるもの．
