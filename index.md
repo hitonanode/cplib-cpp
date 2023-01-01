@@ -454,6 +454,9 @@ data:
   - name: other_algorithms
     pages:
     - icon: ':warning:'
+      path: other_algorithms/bounded_knapsack.hpp
+      title: Bounded knapsack problem (Pisinger's algorithm)
+    - icon: ':warning:'
       path: other_algorithms/doubling.hpp
       title: other_algorithms/doubling.hpp
     - icon: ':heavy_check_mark:'

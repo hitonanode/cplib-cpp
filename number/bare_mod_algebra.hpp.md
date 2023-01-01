@@ -138,21 +138,21 @@ data:
   isVerificationFile: false
   path: number/bare_mod_algebra.hpp
   requiredBy:
-  - linear_algebra_matrix/linalg_longlong.hpp
   - number/combination.hpp
   - number/primitive_root.hpp
+  - linear_algebra_matrix/linalg_longlong.hpp
   timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-  - linear_algebra_matrix/test/linalg_ll_det.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linalg_longlong.test.cpp
-  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   - number/test/primitive_root.test.cpp
-  - number/test/combination.test.cpp
-  - number/test/combination.stress.test.cpp
   - number/test/primitive_root_1e18.test.cpp
+  - number/test/combination.stress.test.cpp
+  - number/test/combination.test.cpp
+  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/linalg_ll_det.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
 documentation_of: number/bare_mod_algebra.hpp
 layout: document
 redirect_from:
