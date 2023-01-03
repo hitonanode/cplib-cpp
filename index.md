@@ -699,7 +699,7 @@ data:
     - icon: ':warning:'
       path: utilities/gnu_pbds.hpp
       title: utilities/gnu_pbds.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: utilities/groupby.hpp
       title: groupby
     - icon: ':warning:'
@@ -1498,6 +1498,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/rerooting.yuki1718.test.cpp
       title: tree/test/rerooting.yuki1718.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/subtree_isomorphism.lc.test.cpp
+      title: tree/test/subtree_isomorphism.lc.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/tree_isomorphism.aoj1613.test.cpp
       title: tree/test/tree_isomorphism.aoj1613.test.cpp

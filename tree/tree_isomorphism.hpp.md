@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: tree/test/subtree_isomorphism.lc.test.cpp
+    title: tree/test/subtree_isomorphism.lc.test.cpp
+  - icon: ':heavy_check_mark:'
     path: tree/test/tree_isomorphism.aoj1613.test.cpp
     title: tree/test/tree_isomorphism.aoj1613.test.cpp
   _isVerificationFailed: false
@@ -97,6 +100,7 @@ data:
   timestamp: '2022-05-01 16:11:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - tree/test/subtree_isomorphism.lc.test.cpp
   - tree/test/tree_isomorphism.aoj1613.test.cpp
 documentation_of: tree/tree_isomorphism.hpp
 layout: document

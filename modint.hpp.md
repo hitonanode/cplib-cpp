@@ -205,6 +205,9 @@ data:
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   - icon: ':heavy_check_mark:'
+    path: tree/test/subtree_isomorphism.lc.test.cpp
+    title: tree/test/subtree_isomorphism.lc.test.cpp
+  - icon: ':heavy_check_mark:'
     path: tree/test/tree_isomorphism.aoj1613.test.cpp
     title: tree/test/tree_isomorphism.aoj1613.test.cpp
   - icon: ':heavy_check_mark:'
@@ -431,6 +434,7 @@ data:
   - data_structure/test/link_cut_tree.composition.test.cpp
   - data_structure/test/lazy_rbst.test.cpp
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - tree/test/subtree_isomorphism.lc.test.cpp
   - tree/test/vertex-set-path-composite.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
