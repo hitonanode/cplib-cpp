@@ -227,6 +227,7 @@ private:
         };
         Cap flow = 0;
         Cost cost = 0, prev_cost_per_flow = -1;
+        bool first_aug = true;
         std::vector<std::pair<Cap, Cost>> result = {{Cap(0), Cost(0)}};
         while (flow < flow_limit) {
             if (!dual_ref()) break;
@@ -242,9 +243,10 @@ private:
             Cost d = -dual_dist[s].first;
             flow += c;
             cost += c * d;
-            if (prev_cost_per_flow == d) { result.pop_back(); }
+            if (!first_aug && prev_cost_per_flow == d) { result.pop_back(); }
             result.push_back({flow, cost});
             prev_cost_per_flow = d;
+            first_aug = false;
         }
         return result;
     }
