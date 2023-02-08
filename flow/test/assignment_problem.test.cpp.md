@@ -125,33 +125,35 @@ data:
     \         shortest(s, t) >= 0 - (n-1)C\n                dual_dist[v].first -=\
     \ dual_dist[t].second - dual_dist[v].second;\n            }\n            return\
     \ true;\n        };\n        Cap flow = 0;\n        Cost cost = 0, prev_cost_per_flow\
-    \ = -1;\n        std::vector<std::pair<Cap, Cost>> result = {{Cap(0), Cost(0)}};\n\
-    \        while (flow < flow_limit) {\n            if (!dual_ref()) break;\n  \
-    \          Cap c = flow_limit - flow;\n            for (int v = t; v != s; v =\
-    \ g.elist[prev_e[v]].to) {\n                c = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);\n\
-    \            }\n            for (int v = t; v != s; v = g.elist[prev_e[v]].to)\
-    \ {\n                auto &e = g.elist[prev_e[v]];\n                e.cap += c;\n\
-    \                g.elist[e.rev].cap -= c;\n            }\n            Cost d =\
-    \ -dual_dist[s].first;\n            flow += c;\n            cost += c * d;\n \
-    \           if (prev_cost_per_flow == d) { result.pop_back(); }\n            result.push_back({flow,\
-    \ cost});\n            prev_cost_per_flow = d;\n        }\n        return result;\n\
-    \    }\n};\n#line 2 \"flow/test/assignment_problem.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/assignment\"\n#include <algorithm>\n#include\
-    \ <iostream>\n\ntemplate <typename TC>\nstd::pair<TC, std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>>\
-    \ cost) {\n    int N = cost.size();\n    MinCostFlow<int, TC> mcf(N * 2 + 2);\n\
-    \    int S = N * 2, T = N * 2 + 1;\n    TC bias_total_cost = 0;\n    for (int\
-    \ i = 0; i < N; i++) {\n        TC lo = *min_element(cost[i].begin(), cost[i].end());\n\
-    \        bias_total_cost += lo;\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N\
-    \ + i, T, 1, 0);\n        for (int j = 0; j < N; j++) mcf.add_edge(i, N + j, 1,\
-    \ cost[i][j] - lo);\n    }\n    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;\n\
-    \    std::vector<int> ret(N, -1);\n\n    for (auto g : mcf.edges()) {\n      \
-    \  if (g.from >= 0 and g.from < N and g.to != S and g.flow) ret[g.from] = g.to\
-    \ - N;\n    }\n    return std::make_pair(total_cost, ret);\n}\n\nint main() {\n\
-    \    int N;\n    std::cin >> N;\n    std::vector<std::vector<long long>> A(N,\
-    \ std::vector<long long>(N));\n    for (auto &vec : A) {\n        for (auto &x\
-    \ : vec) { std::cin >> x; }\n    }\n    auto ret = AssignmentProblem(A);\n   \
-    \ std::cout << ret.first << '\\n';\n    for (auto x : ret.second) std::cout <<\
-    \ x << ' ';\n    std::cout << '\\n';\n}\n"
+    \ = -1;\n        bool first_aug = true;\n        std::vector<std::pair<Cap, Cost>>\
+    \ result = {{Cap(0), Cost(0)}};\n        while (flow < flow_limit) {\n       \
+    \     if (!dual_ref()) break;\n            Cap c = flow_limit - flow;\n      \
+    \      for (int v = t; v != s; v = g.elist[prev_e[v]].to) {\n                c\
+    \ = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);\n            }\n       \
+    \     for (int v = t; v != s; v = g.elist[prev_e[v]].to) {\n                auto\
+    \ &e = g.elist[prev_e[v]];\n                e.cap += c;\n                g.elist[e.rev].cap\
+    \ -= c;\n            }\n            Cost d = -dual_dist[s].first;\n          \
+    \  flow += c;\n            cost += c * d;\n            if (!first_aug && prev_cost_per_flow\
+    \ == d) { result.pop_back(); }\n            result.push_back({flow, cost});\n\
+    \            prev_cost_per_flow = d;\n            first_aug = false;\n       \
+    \ }\n        return result;\n    }\n};\n#line 2 \"flow/test/assignment_problem.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n#include <algorithm>\n\
+    #include <iostream>\n\ntemplate <typename TC>\nstd::pair<TC, std::vector<int>>\
+    \ AssignmentProblem(std::vector<std::vector<TC>> cost) {\n    int N = cost.size();\n\
+    \    MinCostFlow<int, TC> mcf(N * 2 + 2);\n    int S = N * 2, T = N * 2 + 1;\n\
+    \    TC bias_total_cost = 0;\n    for (int i = 0; i < N; i++) {\n        TC lo\
+    \ = *min_element(cost[i].begin(), cost[i].end());\n        bias_total_cost +=\
+    \ lo;\n        mcf.add_edge(S, i, 1, 0);\n        mcf.add_edge(N + i, T, 1, 0);\n\
+    \        for (int j = 0; j < N; j++) mcf.add_edge(i, N + j, 1, cost[i][j] - lo);\n\
+    \    }\n    auto total_cost = mcf.flow(S, T, N).second + bias_total_cost;\n  \
+    \  std::vector<int> ret(N, -1);\n\n    for (auto g : mcf.edges()) {\n        if\
+    \ (g.from >= 0 and g.from < N and g.to != S and g.flow) ret[g.from] = g.to - N;\n\
+    \    }\n    return std::make_pair(total_cost, ret);\n}\n\nint main() {\n    int\
+    \ N;\n    std::cin >> N;\n    std::vector<std::vector<long long>> A(N, std::vector<long\
+    \ long>(N));\n    for (auto &vec : A) {\n        for (auto &x : vec) { std::cin\
+    \ >> x; }\n    }\n    auto ret = AssignmentProblem(A);\n    std::cout << ret.first\
+    \ << '\\n';\n    for (auto x : ret.second) std::cout << x << ' ';\n    std::cout\
+    \ << '\\n';\n}\n"
   code: "#include \"../mincostflow_nonegativeloop.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\
     \n#include <algorithm>\n#include <iostream>\n\ntemplate <typename TC>\nstd::pair<TC,\
     \ std::vector<int>> AssignmentProblem(std::vector<std::vector<TC>> cost) {\n \
@@ -174,7 +176,7 @@ data:
   isVerificationFile: true
   path: flow/test/assignment_problem.test.cpp
   requiredBy: []
-  timestamp: '2022-12-07 23:52:43+09:00'
+  timestamp: '2023-02-09 02:29:06+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: flow/test/assignment_problem.test.cpp

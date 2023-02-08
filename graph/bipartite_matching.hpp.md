@@ -112,8 +112,8 @@ data:
   isVerificationFile: false
   path: graph/bipartite_matching.hpp
   requiredBy:
-  - graph/dulmage_mendelsohn_decomposition.hpp
   - combinatorial_opt/matroids/transversal_matroid.hpp
+  - graph/dulmage_mendelsohn_decomposition.hpp
   timestamp: '2021-11-03 21:38:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

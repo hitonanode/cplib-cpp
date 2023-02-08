@@ -132,17 +132,18 @@ data:
     \         shortest(s, t) >= 0 - (n-1)C\n                dual_dist[v].first -=\
     \ dual_dist[t].second - dual_dist[v].second;\n            }\n            return\
     \ true;\n        };\n        Cap flow = 0;\n        Cost cost = 0, prev_cost_per_flow\
-    \ = -1;\n        std::vector<std::pair<Cap, Cost>> result = {{Cap(0), Cost(0)}};\n\
-    \        while (flow < flow_limit) {\n            if (!dual_ref()) break;\n  \
-    \          Cap c = flow_limit - flow;\n            for (int v = t; v != s; v =\
-    \ g.elist[prev_e[v]].to) {\n                c = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);\n\
-    \            }\n            for (int v = t; v != s; v = g.elist[prev_e[v]].to)\
-    \ {\n                auto &e = g.elist[prev_e[v]];\n                e.cap += c;\n\
-    \                g.elist[e.rev].cap -= c;\n            }\n            Cost d =\
-    \ -dual_dist[s].first;\n            flow += c;\n            cost += c * d;\n \
-    \           if (prev_cost_per_flow == d) { result.pop_back(); }\n            result.push_back({flow,\
-    \ cost});\n            prev_cost_per_flow = d;\n        }\n        return result;\n\
-    \    }\n};\n"
+    \ = -1;\n        bool first_aug = true;\n        std::vector<std::pair<Cap, Cost>>\
+    \ result = {{Cap(0), Cost(0)}};\n        while (flow < flow_limit) {\n       \
+    \     if (!dual_ref()) break;\n            Cap c = flow_limit - flow;\n      \
+    \      for (int v = t; v != s; v = g.elist[prev_e[v]].to) {\n                c\
+    \ = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);\n            }\n       \
+    \     for (int v = t; v != s; v = g.elist[prev_e[v]].to) {\n                auto\
+    \ &e = g.elist[prev_e[v]];\n                e.cap += c;\n                g.elist[e.rev].cap\
+    \ -= c;\n            }\n            Cost d = -dual_dist[s].first;\n          \
+    \  flow += c;\n            cost += c * d;\n            if (!first_aug && prev_cost_per_flow\
+    \ == d) { result.pop_back(); }\n            result.push_back({flow, cost});\n\
+    \            prev_cost_per_flow = d;\n            first_aug = false;\n       \
+    \ }\n        return result;\n    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <limits>\n#include <queue>\n#include\
     \ <vector>\n\n// CUT begin\n// Minimum cost flow WITH NO NEGATIVE CYCLE (just\
     \ negative cost edge is allowed)\n// Verified:\n// - SRM 770 Div1 Medium https://community.topcoder.com/stat?c=problem_statement&pm=15702\n\
@@ -252,28 +253,29 @@ data:
     \         shortest(s, t) >= 0 - (n-1)C\n                dual_dist[v].first -=\
     \ dual_dist[t].second - dual_dist[v].second;\n            }\n            return\
     \ true;\n        };\n        Cap flow = 0;\n        Cost cost = 0, prev_cost_per_flow\
-    \ = -1;\n        std::vector<std::pair<Cap, Cost>> result = {{Cap(0), Cost(0)}};\n\
-    \        while (flow < flow_limit) {\n            if (!dual_ref()) break;\n  \
-    \          Cap c = flow_limit - flow;\n            for (int v = t; v != s; v =\
-    \ g.elist[prev_e[v]].to) {\n                c = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);\n\
-    \            }\n            for (int v = t; v != s; v = g.elist[prev_e[v]].to)\
-    \ {\n                auto &e = g.elist[prev_e[v]];\n                e.cap += c;\n\
-    \                g.elist[e.rev].cap -= c;\n            }\n            Cost d =\
-    \ -dual_dist[s].first;\n            flow += c;\n            cost += c * d;\n \
-    \           if (prev_cost_per_flow == d) { result.pop_back(); }\n            result.push_back({flow,\
-    \ cost});\n            prev_cost_per_flow = d;\n        }\n        return result;\n\
-    \    }\n};\n"
+    \ = -1;\n        bool first_aug = true;\n        std::vector<std::pair<Cap, Cost>>\
+    \ result = {{Cap(0), Cost(0)}};\n        while (flow < flow_limit) {\n       \
+    \     if (!dual_ref()) break;\n            Cap c = flow_limit - flow;\n      \
+    \      for (int v = t; v != s; v = g.elist[prev_e[v]].to) {\n                c\
+    \ = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);\n            }\n       \
+    \     for (int v = t; v != s; v = g.elist[prev_e[v]].to) {\n                auto\
+    \ &e = g.elist[prev_e[v]];\n                e.cap += c;\n                g.elist[e.rev].cap\
+    \ -= c;\n            }\n            Cost d = -dual_dist[s].first;\n          \
+    \  flow += c;\n            cost += c * d;\n            if (!first_aug && prev_cost_per_flow\
+    \ == d) { result.pop_back(); }\n            result.push_back({flow, cost});\n\
+    \            prev_cost_per_flow = d;\n            first_aug = false;\n       \
+    \ }\n        return result;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: flow/mincostflow_nonegativeloop.hpp
   requiredBy: []
-  timestamp: '2022-12-07 23:52:43+09:00'
+  timestamp: '2023-02-09 02:29:06+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - flow/test/assignment_problem.test.cpp
   - flow/test/mincostflow.yuki1324.test.cpp
-  - flow/test/mincostflow.test.cpp
   - flow/test/mincostflow.yuki1288.test.cpp
+  - flow/test/mincostflow.test.cpp
 documentation_of: flow/mincostflow_nonegativeloop.hpp
 layout: document
 title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\u30D7\

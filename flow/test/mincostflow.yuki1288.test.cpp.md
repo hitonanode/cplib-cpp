@@ -126,18 +126,19 @@ data:
     \         shortest(s, t) >= 0 - (n-1)C\n                dual_dist[v].first -=\
     \ dual_dist[t].second - dual_dist[v].second;\n            }\n            return\
     \ true;\n        };\n        Cap flow = 0;\n        Cost cost = 0, prev_cost_per_flow\
-    \ = -1;\n        std::vector<std::pair<Cap, Cost>> result = {{Cap(0), Cost(0)}};\n\
-    \        while (flow < flow_limit) {\n            if (!dual_ref()) break;\n  \
-    \          Cap c = flow_limit - flow;\n            for (int v = t; v != s; v =\
-    \ g.elist[prev_e[v]].to) {\n                c = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);\n\
-    \            }\n            for (int v = t; v != s; v = g.elist[prev_e[v]].to)\
-    \ {\n                auto &e = g.elist[prev_e[v]];\n                e.cap += c;\n\
-    \                g.elist[e.rev].cap -= c;\n            }\n            Cost d =\
-    \ -dual_dist[s].first;\n            flow += c;\n            cost += c * d;\n \
-    \           if (prev_cost_per_flow == d) { result.pop_back(); }\n            result.push_back({flow,\
-    \ cost});\n            prev_cost_per_flow = d;\n        }\n        return result;\n\
-    \    }\n};\n#line 3 \"flow/test/mincostflow.yuki1288.test.cpp\"\n#include <iostream>\n\
-    #include <numeric>\n#include <string>\n#line 7 \"flow/test/mincostflow.yuki1288.test.cpp\"\
+    \ = -1;\n        bool first_aug = true;\n        std::vector<std::pair<Cap, Cost>>\
+    \ result = {{Cap(0), Cost(0)}};\n        while (flow < flow_limit) {\n       \
+    \     if (!dual_ref()) break;\n            Cap c = flow_limit - flow;\n      \
+    \      for (int v = t; v != s; v = g.elist[prev_e[v]].to) {\n                c\
+    \ = std::min(c, g.elist[g.elist[prev_e[v]].rev].cap);\n            }\n       \
+    \     for (int v = t; v != s; v = g.elist[prev_e[v]].to) {\n                auto\
+    \ &e = g.elist[prev_e[v]];\n                e.cap += c;\n                g.elist[e.rev].cap\
+    \ -= c;\n            }\n            Cost d = -dual_dist[s].first;\n          \
+    \  flow += c;\n            cost += c * d;\n            if (!first_aug && prev_cost_per_flow\
+    \ == d) { result.pop_back(); }\n            result.push_back({flow, cost});\n\
+    \            prev_cost_per_flow = d;\n            first_aug = false;\n       \
+    \ }\n        return result;\n    }\n};\n#line 3 \"flow/test/mincostflow.yuki1288.test.cpp\"\
+    \n#include <iostream>\n#include <numeric>\n#include <string>\n#line 7 \"flow/test/mincostflow.yuki1288.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    int N;\n    string S;\n    cin >>\
     \ N >> S;\n    vector<long long> V(N);\n    for (auto &x : V) cin >> x;\n\n  \
     \  const int s = N * 5, t = s + 1;\n    MinCostFlow<int, long long> graph(t +\
@@ -168,7 +169,7 @@ data:
   isVerificationFile: true
   path: flow/test/mincostflow.yuki1288.test.cpp
   requiredBy: []
-  timestamp: '2022-12-07 23:52:43+09:00'
+  timestamp: '2023-02-09 02:29:06+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: flow/test/mincostflow.yuki1288.test.cpp

@@ -110,8 +110,8 @@ data:
   timestamp: '2022-07-31 01:04:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/jump_on_tree.test.cpp
   - tree/test/lca.yuki898.test.cpp
+  - tree/test/jump_on_tree.test.cpp
   - tree/test/lca.test.cpp
 documentation_of: tree/lowest_common_ancestor.hpp
 layout: document
