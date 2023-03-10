@@ -103,6 +103,9 @@ data:
     path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
     title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/enumerate_cliques.test.cpp
+    title: graph/test/enumerate_cliques.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -432,6 +435,7 @@ data:
   - formal_power_series/test/stirling_number_of_1st.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
+  - graph/test/enumerate_cliques.test.cpp
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   - tree/test/subtree_isomorphism.lc.test.cpp

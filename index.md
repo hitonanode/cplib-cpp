@@ -265,6 +265,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/dulmage_mendelsohn_decomposition.hpp
       title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: graph/enumerate_cliques.hpp
+      title: "Enumerate cliques \uFF08\u30B0\u30E9\u30D5\u306E\u30AF\u30EA\u30FC\u30AF\
+        \u5168\u5217\u6319\uFF09"
     - icon: ':warning:'
       path: graph/eulerian_trail.hpp
       title: graph/eulerian_trail.hpp
@@ -1107,6 +1111,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
       title: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/enumerate_cliques.aoj2306.test.cpp
+      title: graph/test/enumerate_cliques.aoj2306.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/enumerate_cliques.test.cpp
+      title: graph/test/enumerate_cliques.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/general_matching.test.cpp
       title: graph/test/general_matching.test.cpp
