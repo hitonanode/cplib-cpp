@@ -24,6 +24,10 @@ template <class T1, class T2> struct PairHash : public std::pair<T1, T2> {
         }
         return b;
     }
+
+    template <class OStream> friend OStream &operator<<(OStream &os, const PH &x) {
+        return os << "(" << x.first << ", " << x.second << ")";
+    }
 };
 
 template <class T1, class T2, class T3> struct TupleHash3 : public std::tuple<T1, T2, T3> {
@@ -48,6 +52,10 @@ template <class T1, class T2, class T3> struct TupleHash3 : public std::tuple<T1
             b = TH(T1(d(mt)), T2(d(mt)), T3(d(mt)));
         }
         return b;
+    }
+
+    template <class OStream> friend OStream &operator<<(OStream &os, const TH &x) {
+        return os << "(" << x.v1() << ", " << x.v2() << ", " << x.v3() << ")";
     }
 };
 
@@ -78,9 +86,31 @@ template <typename V> struct rolling_hash {
         N++, hash.emplace_back(hnew);
         _extend_powvec();
     }
-    V get(int l, int r) const { // s[l] * B^(r - l - 1) + ... + s[r - 1]
-        return hash[r] - hash[l] * power[r - l];
+
+    struct Hash {
+        int length;
+        V val;
+        Hash() : length(0), val(V()) {}
+        Hash(int len, const V &v) : length(len), val(v) {}
+
+        bool operator==(const Hash &r) const noexcept {
+            return length == r.length and val == r.val;
+        }
+
+        Hash operator*(const Hash &r) const {
+            return Hash(length + r.length, val * power.at(r.length) + r.val);
+        }
+
+        template <class OStream> friend OStream &operator<<(OStream &os, const Hash &x) {
+            return os << "(length=" << x.length << ", val=" << x.val << ")";
+        }
+    };
+
+    Hash get(int l, int r) const { // s[l] * B^(r - l - 1) + ... + s[r - 1]
+        if (l >= r) return Hash();
+        return Hash(r - l, hash[r] - hash[l] * power[r - l]);
     }
+
     int lcplen(int l1, int l2) const { return longest_common_prefix(*this, l1, *this, l2); }
 };
 template <typename V> std::vector<V> rolling_hash<V>::power{V(1)};

@@ -16,13 +16,11 @@ $
 ## 使用方法
 
 ```cpp
-using Hash = ModIntMersenne61;
-
 string S = "sakanakanandaka";
-rolling_hash<Hash> rh(S)
+rolling_hash<ModIntMersenne61> rh(S)
 
 int l, r;
-Hash h = rh.get(l, r);  // S[l:r], 半開区間
+auto h = rh.get(l, r);  // S[l:r], 半開区間
 ```
 
 ハッシュの型 `PairHash` や `TupleHash3` は任意に入れ子にすることも可能で，例えば
