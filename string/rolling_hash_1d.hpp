@@ -24,6 +24,10 @@ template <class T1, class T2> struct PairHash : public std::pair<T1, T2> {
         }
         return b;
     }
+
+    template <class OStream> friend OStream &operator<<(OStream &os, const PH &x) {
+        return os << "(" << x.first << ", " << x.second << ")";
+    }
 };
 
 template <class T1, class T2, class T3> struct TupleHash3 : public std::tuple<T1, T2, T3> {
@@ -48,6 +52,10 @@ template <class T1, class T2, class T3> struct TupleHash3 : public std::tuple<T1
             b = TH(T1(d(mt)), T2(d(mt)), T3(d(mt)));
         }
         return b;
+    }
+
+    template <class OStream> friend OStream &operator<<(OStream &os, const TH &x) {
+        return os << "(" << x.v1() << ", " << x.v2() << ", " << x.v3() << ")";
     }
 };
 
@@ -91,6 +99,10 @@ template <typename V> struct rolling_hash {
 
         Hash operator*(const Hash &r) const {
             return Hash(length + r.length, val * power.at(r.length) + r.val);
+        }
+
+        template <class OStream> friend OStream &operator<<(OStream &os, const Hash &x) {
+            return os << "(length=" << x.length << ", val=" << x.val << ")";
         }
     };
 
