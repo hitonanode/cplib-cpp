@@ -1,10 +1,11 @@
 #pragma once
+#include "../random/xorshift.hpp"
 #include <algorithm>
 #include <array>
 #include <cassert>
+#include <numeric>
 #include <vector>
 
-// CUT begin
 namespace SPRP {
 // http://miller-rabin.appspot.com/
 const std::vector<std::vector<__int128>> bases{
@@ -62,6 +63,7 @@ struct {
         auto f = [&](__int128 x) -> long long { return (x * x + c) % n; };
 
         for (int t = 1;; t++) {
+            for (c = 0; c == 0 or c + 2 == n;) c = rand_int() % n;
             long long x0 = t, m = std::max(n >> 3, 1LL), x, ys, y = x0, r = 1, g, q = 1;
             do {
                 x = y;
