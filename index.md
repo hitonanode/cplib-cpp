@@ -427,7 +427,7 @@ data:
         \u30B7\u30A7\u30F3\u30C8\u95A2\u6570\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
-      title: number/factorize.hpp
+      title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/min_max_semiring.hpp
       title: "Min-max semiring\uFF08(min, max) \u534A\u74B0\uFF09"

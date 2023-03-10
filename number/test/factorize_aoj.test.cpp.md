@@ -3,7 +3,10 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: number/factorize.hpp
-    title: number/factorize.hpp
+    title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: random/xorshift.hpp
+    title: random/xorshift.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -16,8 +19,13 @@ data:
     - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A
   bundledCode: "#line 1 \"number/test/factorize_aoj.test.cpp\"\n#define PROBLEM \"\
     https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A\"\n#line 2 \"\
-    number/factorize.hpp\"\n#include <algorithm>\n#include <array>\n#include <cassert>\n\
-    #include <vector>\n\n// CUT begin\nnamespace SPRP {\n// http://miller-rabin.appspot.com/\n\
+    random/xorshift.hpp\"\n#include <cstdint>\n\n// CUT begin\nuint32_t rand_int()\
+    \ // XorShift random integer generator\n{\n    static uint32_t x = 123456789,\
+    \ y = 362436069, z = 521288629, w = 88675123;\n    uint32_t t = x ^ (x << 11);\n\
+    \    x = y;\n    y = z;\n    z = w;\n    return w = (w ^ (w >> 19)) ^ (t ^ (t\
+    \ >> 8));\n}\ndouble rand_double() { return (double)rand_int() / UINT32_MAX; }\n\
+    #line 3 \"number/factorize.hpp\"\n#include <algorithm>\n#include <array>\n#include\
+    \ <cassert>\n#include <numeric>\n#include <vector>\n\nnamespace SPRP {\n// http://miller-rabin.appspot.com/\n\
     const std::vector<std::vector<__int128>> bases{\n    {126401071349994536},   \
     \                           // < 291831\n    {336781006125, 9639812373923155},\
     \                  // < 1050535501 (1e9)\n    {2, 2570940, 211991001, 3749873356},\
@@ -42,15 +50,16 @@ data:
     \ long n) {\n        assert(n > 1);\n        if (n % 2 == 0) return 2;\n     \
     \   if (is_prime(n)) return n;\n        long long c = 1;\n        auto f = [&](__int128\
     \ x) -> long long { return (x * x + c) % n; };\n\n        for (int t = 1;; t++)\
-    \ {\n            long long x0 = t, m = std::max(n >> 3, 1LL), x, ys, y = x0, r\
-    \ = 1, g, q = 1;\n            do {\n                x = y;\n                for\
-    \ (int i = r; i--;) y = f(y);\n                long long k = 0;\n            \
-    \    do {\n                    ys = y;\n                    for (int i = std::min(m,\
-    \ r - k); i--;)\n                        y = f(y), q = __int128(q) * std::abs(x\
-    \ - y) % n;\n                    g = std::__gcd<long long>(q, n);\n          \
-    \          k += m;\n                } while (k < r and g <= 1);\n            \
-    \    r <<= 1;\n            } while (g <= 1);\n            if (g == n) {\n    \
-    \            do {\n                    ys = f(ys);\n                    g = std::__gcd(std::abs(x\
+    \ {\n            for (c = 0; c == 0 or c + 2 == n;) c = rand_int() % n;\n    \
+    \        long long x0 = t, m = std::max(n >> 3, 1LL), x, ys, y = x0, r = 1, g,\
+    \ q = 1;\n            do {\n                x = y;\n                for (int i\
+    \ = r; i--;) y = f(y);\n                long long k = 0;\n                do {\n\
+    \                    ys = y;\n                    for (int i = std::min(m, r -\
+    \ k); i--;)\n                        y = f(y), q = __int128(q) * std::abs(x -\
+    \ y) % n;\n                    g = std::__gcd<long long>(q, n);\n            \
+    \        k += m;\n                } while (k < r and g <= 1);\n              \
+    \  r <<= 1;\n            } while (g <= 1);\n            if (g == n) {\n      \
+    \          do {\n                    ys = f(ys);\n                    g = std::__gcd(std::abs(x\
     \ - ys), n);\n                } while (g <= 1);\n            }\n            if\
     \ (g != n) return g;\n        }\n    }\n\n    std::vector<long long> operator()(long\
     \ long n) {\n        std::vector<long long> ret;\n        while (n > 1) {\n  \
@@ -72,10 +81,11 @@ data:
     \ '\\n';\n}\n"
   dependsOn:
   - number/factorize.hpp
+  - random/xorshift.hpp
   isVerificationFile: true
   path: number/test/factorize_aoj.test.cpp
   requiredBy: []
-  timestamp: '2022-11-15 00:34:03+09:00'
+  timestamp: '2023-03-10 18:40:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/factorize_aoj.test.cpp

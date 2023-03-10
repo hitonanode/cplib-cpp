@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: number/factorize.hpp
+    title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: number/primitive_root.hpp
+    title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/lazy_rbst.stress.test.cpp
@@ -19,8 +25,29 @@ data:
     path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
     title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
   - icon: ':heavy_check_mark:'
+    path: graph/test/chromatic_number.test.cpp
+    title: graph/test/chromatic_number.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
     title: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/factorize_aoj.test.cpp
+    title: number/test/factorize_aoj.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/factorize_longlong.test.cpp
+    title: number/test/factorize_longlong.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/miller-rabin-5e7.test.cpp
+    title: number/test/miller-rabin-5e7.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/miller-rabin.test.cpp
+    title: number/test/miller-rabin.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/primitive_root.test.cpp
+    title: number/test/primitive_root.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/primitive_root_1e18.test.cpp
+    title: number/test/primitive_root_1e18.test.cpp
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
@@ -49,7 +76,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: random/xorshift.hpp
-  requiredBy: []
+  requiredBy:
+  - number/factorize.hpp
+  - number/primitive_root.hpp
   timestamp: '2020-03-07 22:54:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -61,7 +90,14 @@ data:
   - set_power_series/test/subset_pow.stress.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
   - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+  - graph/test/chromatic_number.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
+  - number/test/miller-rabin.test.cpp
+  - number/test/primitive_root_1e18.test.cpp
+  - number/test/factorize_aoj.test.cpp
+  - number/test/primitive_root.test.cpp
+  - number/test/miller-rabin-5e7.test.cpp
+  - number/test/factorize_longlong.test.cpp
 documentation_of: random/xorshift.hpp
 layout: document
 redirect_from:
