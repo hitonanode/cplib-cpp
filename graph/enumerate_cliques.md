@@ -28,3 +28,4 @@ ec.run(op);  // op() runs over all cliques
 ## 問題例
 
 - [Library Checker: Enumerate Cliques](https://judge.yosupo.jp/problem/enumerate_cliques)
+- [AOJ 2306: Rabbit Party](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2306)
