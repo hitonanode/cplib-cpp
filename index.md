@@ -470,6 +470,10 @@ data:
       path: other_algorithms/enumerate_triangles.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u306B\u542B\u307E\u308C\u308B\u4E09\u89D2\
         \u5F62\u306E\u5217\u6319"
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/longest_increasing_subsequence.hpp
+      title: "Longest increasing subsequence \uFF08LIS, \u6700\u9577\u5897\u52A0\u90E8\
+        \u5206\u5217\uFF09"
     - icon: ':warning:'
       path: other_algorithms/mos_algorithm.hpp
       title: "Mo's algorithm \uFF08\u533A\u9593\u30AF\u30A8\u30EA\u306B\u95A2\u3059\
@@ -1334,6 +1338,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/enumerate_triangles.test.cpp
       title: other_algorithms/test/enumerate_triangles.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/longest_increasing_subsequence.test.cpp
+      title: other_algorithms/test/longest_increasing_subsequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
       title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
