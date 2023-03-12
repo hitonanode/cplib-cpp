@@ -9,7 +9,8 @@ data:
     title: segmenttree/point-update-range-get_nonrecursive.hpp
   - icon: ':heavy_check_mark:'
     path: tree/heavy_light_decomposition.hpp
-    title: tree/heavy_light_decomposition.hpp
+    title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\
+      \uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -194,8 +195,8 @@ data:
     \ {\n        std::vector<TDATA> init;\n        for (auto x : seq) init.emplace_back(TDATA{std::pair<T,\
     \ T>(x, x)});\n        SegTree::initialize(init, TRET(0, 0));\n    }\n};\n#line\
     \ 5 \"tree/heavy_light_decomposition.hpp\"\n#include <queue>\n#line 7 \"tree/heavy_light_decomposition.hpp\"\
-    \n#include <utility>\n#line 9 \"tree/heavy_light_decomposition.hpp\"\n\n// CUT\
-    \ begin\n// Heavy-Light Decomposition of trees\n// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\n\
+    \n#include <utility>\n#line 9 \"tree/heavy_light_decomposition.hpp\"\n\n// Heavy-Light\
+    \ Decomposition of trees\n// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\n\
     struct HeavyLightDecomposition {\n    int V;\n    int k;\n    int nb_heavy_path;\n\
     \    std::vector<std::vector<int>> e;\n    std::vector<int> par;         // par[i]\
     \ = parent of vertex i (Default: -1)\n    std::vector<int> depth;       // depth[i]\
@@ -234,12 +235,11 @@ data:
     \ : e[now])\n                    if (nxt != par[now] and nxt != heavy_child[now])\
     \ q.push(nxt);\n            }\n            nb_heavy_path++;\n        }\n    }\n\
     \n    void build(std::vector<int> roots = {0}) {\n        int tree_id_now = 0;\n\
-    \        for (auto r : roots) {\n            _build_dfs(r);\n            _build_bfs(r,\
-    \ tree_id_now++);\n        }\n    }\n\n    template <typename Monoid>\n    std::vector<Monoid>\
-    \ segtree_rearrange(const std::vector<Monoid> &data) const {\n        assert(int(data.size())\
-    \ == V);\n        std::vector<Monoid> ret;\n        ret.reserve(V);\n        for\
-    \ (int i = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);\n       \
-    \ return ret;\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n\
+    \        for (auto r : roots) _build_dfs(r), _build_bfs(r, tree_id_now++);\n \
+    \   }\n\n    template <class T> std::vector<T> segtree_rearrange(const std::vector<T>\
+    \ &data) const {\n        assert(int(data.size()) == V);\n        std::vector<T>\
+    \ ret;\n        ret.reserve(V);\n        for (int i = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);\n\
+    \        return ret;\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n\
     \    void\n    for_each_vertex(int u, int v, const std::function<void(int ancestor,\
     \ int descendant)> &f) const {\n        while (true) {\n            if (aligned_id[u]\
     \ > aligned_id[v]) std::swap(u, v);\n            f(std::max(aligned_id[head[v]],\
@@ -250,39 +250,49 @@ data:
     \ const {\n        int u = from, v = to;\n        const int lca = lowest_common_ancestor(u,\
     \ v), dlca = depth[lca];\n        while (u >= 0 and depth[u] > dlca) {\n     \
     \       const int p = (depth[head[u]] > dlca ? head[u] : lca);\n            fup(aligned_id[p]\
-    \ + (p == lca), aligned_id[u]), u = par[p];\n        }\n        std::vector<std::pair<int,\
-    \ int>> lrs;\n        while (v >= 0 and depth[v] >= dlca) {\n            const\
-    \ int p = (depth[head[v]] >= dlca ? head[v] : lca);\n            lrs.emplace_back(p,\
-    \ v), v = par[p];\n        }\n        std::reverse(lrs.begin(), lrs.end());\n\
-    \        for (const auto &lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);\n\
-    \    }\n\n    // query for edges on path [u, v]\n    void for_each_edge(int u,\
-    \ int v, const std::function<void(int, int)> &f) const {\n        while (true)\
-    \ {\n            if (aligned_id[u] > aligned_id[v]) std::swap(u, v);\n       \
-    \     if (head[u] != head[v]) {\n                f(aligned_id[head[v]], aligned_id[v]);\n\
-    \                v = par[head[v]];\n            } else {\n                if (u\
-    \ != v) f(aligned_id[u] + 1, aligned_id[v]);\n                break;\n       \
-    \     }\n        }\n    }\n\n    // lowest_common_ancestor: O(logV)\n    int lowest_common_ancestor(int\
-    \ u, int v) const {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >=\
-    \ 0);\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
-    \ std::swap(u, v);\n            if (head[u] == head[v]) return u;\n          \
-    \  v = par[head[v]];\n        }\n    }\n\n    int distance(int u, int v) const\
-    \ {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);\n        return\
-    \ depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];\n    }\n};\n\
-    #line 7 \"tree/test/vertex-set-path-composite.test.cpp\"\nusing namespace std;\n\
-    using mint = ModInt<998244353>;\n\nusing P = pair<mint, mint>;\nstruct PointSetRangeComposite\
-    \ : public NonrecursiveSegmentTree<P, P, bool> {\n    using SegTree = NonrecursiveSegmentTree<P,\
-    \ P, bool>;\n    P merge_data(const P &vl, const P &vr) override {\n        return\
-    \ make_pair(vl.first * vr.first, vr.first * vl.second + vr.second);\n    };\n\
-    \    P data2ret(const P &v, const bool &q) override { return v; }\n    P merge_ret(const\
-    \ P &vl, const P &vr) override { return merge_data(vl, vr); };\n    PointSetRangeComposite(const\
-    \ std::vector<P> &seq, P zero)\n        : SegTree::NonrecursiveSegmentTree() {\n\
-    \        SegTree::initialize(seq, zero);\n    };\n};\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n\n    int N, Q;\n    cin >> N >> Q;\n    vector<P>\
-    \ V(N);\n    for (auto &x : V) cin >> x.first >> x.second;\n\n    HeavyLightDecomposition\
-    \ hld(N);\n    for (int i = 0; i < N - 1; i++) {\n        int u, v;\n        cin\
-    \ >> u >> v;\n        hld.add_edge(u, v);\n    }\n\n    hld.build();\n    vector<P>\
-    \ stinit = hld.segtree_rearrange(V);\n\n    PointSetRangeComposite segtree(stinit,\
-    \ P{1, 0});\n    reverse(stinit.begin(), stinit.end());\n    PointSetRangeComposite\
+    \ + (p == lca), aligned_id[u]), u = par[p];\n        }\n        static std::vector<std::pair<int,\
+    \ int>> lrs;\n        int sz = 0;\n        while (v >= 0 and depth[v] >= dlca)\
+    \ {\n            const int p = (depth[head[v]] >= dlca ? head[v] : lca);\n   \
+    \         if (int(lrs.size()) == sz) lrs.emplace_back(0, 0);\n            lrs.at(sz++)\
+    \ = {p, v}, v = par.at(p);\n        }\n        while (sz--) fdown(aligned_id[lrs.at(sz).first],\
+    \ aligned_id[lrs.at(sz).second]);\n    }\n\n    // query for edges on path [u,\
+    \ v]\n    void for_each_edge(int u, int v, const std::function<void(int, int)>\
+    \ &f) const {\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
+    \ std::swap(u, v);\n            if (head[u] != head[v]) {\n                f(aligned_id[head[v]],\
+    \ aligned_id[v]);\n                v = par[head[v]];\n            } else {\n \
+    \               if (u != v) f(aligned_id[u] + 1, aligned_id[v]);\n           \
+    \     break;\n            }\n        }\n    }\n\n    // lowest_common_ancestor:\
+    \ O(log V)\n    int lowest_common_ancestor(int u, int v) const {\n        assert(tree_id[u]\
+    \ == tree_id[v] and tree_id[u] >= 0);\n        while (true) {\n            if\
+    \ (aligned_id[u] > aligned_id[v]) std::swap(u, v);\n            if (head[u] ==\
+    \ head[v]) return u;\n            v = par[head[v]];\n        }\n    }\n\n    int\
+    \ distance(int u, int v) const {\n        assert(tree_id[u] == tree_id[v] and\
+    \ tree_id[u] >= 0);\n        return depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u,\
+    \ v)];\n    }\n\n    // Level ancestor, O(log V)\n    // if k-th parent is out\
+    \ of range, return -1\n    int kth_parent(int v, int k) const {\n        if (k\
+    \ < 0) return -1;\n        while (v >= 0) {\n            int h = head.at(v), len\
+    \ = depth.at(v) - depth.at(h);\n            if (k <= len) return aligned_id_inv.at(aligned_id.at(v)\
+    \ - k);\n            k -= len + 1, v = par.at(h);\n        }\n        return -1;\n\
+    \    }\n\n    // Jump on tree, O(log V)\n    int s_to_t_by_k_steps(int s, int\
+    \ t, int k) const {\n        if (k < 0) return -1;\n        if (k == 0) return\
+    \ s;\n        int lca = lowest_common_ancestor(s, t);\n        if (k <= depth.at(s)\
+    \ - depth.at(lca)) return kth_parent(s, k);\n        return kth_parent(t, depth.at(s)\
+    \ + depth.at(t) - depth.at(lca) * 2 - k);\n    }\n};\n#line 7 \"tree/test/vertex-set-path-composite.test.cpp\"\
+    \nusing namespace std;\nusing mint = ModInt<998244353>;\n\nusing P = pair<mint,\
+    \ mint>;\nstruct PointSetRangeComposite : public NonrecursiveSegmentTree<P, P,\
+    \ bool> {\n    using SegTree = NonrecursiveSegmentTree<P, P, bool>;\n    P merge_data(const\
+    \ P &vl, const P &vr) override {\n        return make_pair(vl.first * vr.first,\
+    \ vr.first * vl.second + vr.second);\n    };\n    P data2ret(const P &v, const\
+    \ bool &q) override { return v; }\n    P merge_ret(const P &vl, const P &vr) override\
+    \ { return merge_data(vl, vr); };\n    PointSetRangeComposite(const std::vector<P>\
+    \ &seq, P zero)\n        : SegTree::NonrecursiveSegmentTree() {\n        SegTree::initialize(seq,\
+    \ zero);\n    };\n};\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n    int N, Q;\n    cin >> N >> Q;\n    vector<P> V(N);\n    for (auto &x : V)\
+    \ cin >> x.first >> x.second;\n\n    HeavyLightDecomposition hld(N);\n    for\
+    \ (int i = 0; i < N - 1; i++) {\n        int u, v;\n        cin >> u >> v;\n \
+    \       hld.add_edge(u, v);\n    }\n\n    hld.build();\n    vector<P> stinit =\
+    \ hld.segtree_rearrange(V);\n\n    PointSetRangeComposite segtree(stinit, P{1,\
+    \ 0});\n    reverse(stinit.begin(), stinit.end());\n    PointSetRangeComposite\
     \ segtreeinv(stinit, P{1, 0});\n    while (Q--) {\n        int q, u, v, x;\n \
     \       cin >> q >> u >> v >> x;\n        if (q == 0) {\n            segtree.update(hld.aligned_id[u],\
     \ P{v, x});\n            segtreeinv.update(N - 1 - hld.aligned_id[u], P{v, x});\n\
@@ -332,7 +342,7 @@ data:
   isVerificationFile: true
   path: tree/test/vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2022-07-12 00:34:46+09:00'
+  timestamp: '2023-03-12 17:40:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/vertex-set-path-composite.test.cpp

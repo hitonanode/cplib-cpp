@@ -657,7 +657,8 @@ data:
       title: Frequency table of tree distance
     - icon: ':heavy_check_mark:'
       path: tree/heavy_light_decomposition.hpp
-      title: tree/heavy_light_decomposition.hpp
+      title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\
+        \uFF09"
     - icon: ':heavy_check_mark:'
       path: tree/lca_rmq.hpp
       title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\
@@ -1517,6 +1518,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/jump_on_tree.test.cpp
       title: tree/test/jump_on_tree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/jump_on_tree_hld.test.cpp
+      title: tree/test/jump_on_tree_hld.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/lca.test.cpp
       title: tree/test/lca.test.cpp

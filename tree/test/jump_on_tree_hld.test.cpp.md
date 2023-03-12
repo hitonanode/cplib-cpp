@@ -12,20 +12,21 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/lca
+    PROBLEM: https://judge.yosupo.jp/problem/jump_on_tree
     links:
-    - https://judge.yosupo.jp/problem/lca
-  bundledCode: "#line 2 \"tree/heavy_light_decomposition.hpp\"\n#include <algorithm>\n\
-    #include <cassert>\n#include <functional>\n#include <queue>\n#include <stack>\n\
-    #include <utility>\n#include <vector>\n\n// Heavy-Light Decomposition of trees\n\
-    // Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\nstruct HeavyLightDecomposition\
-    \ {\n    int V;\n    int k;\n    int nb_heavy_path;\n    std::vector<std::vector<int>>\
-    \ e;\n    std::vector<int> par;         // par[i] = parent of vertex i (Default:\
-    \ -1)\n    std::vector<int> depth;       // depth[i] = distance between root and\
-    \ vertex i\n    std::vector<int> subtree_sz;  // subtree_sz[i] = size of subtree\
-    \ whose root is i\n    std::vector<int> heavy_child; // heavy_child[i] = child\
-    \ of vertex i on heavy path (Default: -1)\n    std::vector<int> tree_id;     //\
-    \ tree_id[i] = id of tree vertex i belongs to\n    std::vector<int> aligned_id,\n\
+    - https://judge.yosupo.jp/problem/jump_on_tree
+  bundledCode: "#line 1 \"tree/test/jump_on_tree_hld.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/jump_on_tree\"\n#line 2 \"tree/heavy_light_decomposition.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <functional>\n#include <queue>\n\
+    #include <stack>\n#include <utility>\n#include <vector>\n\n// Heavy-Light Decomposition\
+    \ of trees\n// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\n\
+    struct HeavyLightDecomposition {\n    int V;\n    int k;\n    int nb_heavy_path;\n\
+    \    std::vector<std::vector<int>> e;\n    std::vector<int> par;         // par[i]\
+    \ = parent of vertex i (Default: -1)\n    std::vector<int> depth;       // depth[i]\
+    \ = distance between root and vertex i\n    std::vector<int> subtree_sz;  // subtree_sz[i]\
+    \ = size of subtree whose root is i\n    std::vector<int> heavy_child; // heavy_child[i]\
+    \ = child of vertex i on heavy path (Default: -1)\n    std::vector<int> tree_id;\
+    \     // tree_id[i] = id of tree vertex i belongs to\n    std::vector<int> aligned_id,\n\
     \        aligned_id_inv;    // aligned_id[i] =  aligned id for vertex i (consecutive\
     \ on heavy edges)\n    std::vector<int> head; // head[i] = id of vertex on heavy\
     \ path of vertex i, nearest to root\n    std::vector<int> head_ids;      // consist\
@@ -99,32 +100,33 @@ data:
     \ t, int k) const {\n        if (k < 0) return -1;\n        if (k == 0) return\
     \ s;\n        int lca = lowest_common_ancestor(s, t);\n        if (k <= depth.at(s)\
     \ - depth.at(lca)) return kth_parent(s, k);\n        return kth_parent(t, depth.at(s)\
-    \ + depth.at(t) - depth.at(lca) * 2 - k);\n    }\n};\n#line 2 \"tree/test/hl_decomposition.test.cpp\"\
-    \n#include <iostream>\n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\
-    \n\nint main() {\n    int N, Q, p, u, v;\n    std::cin >> N >> Q;\n    HeavyLightDecomposition\
-    \ hld(N);\n    for (int i = 1; i <= N - 1; i++) {\n        std::cin >> p;\n  \
-    \      hld.add_edge(i, p);\n    }\n    hld.build();\n\n    while (Q--) {\n   \
-    \     std::cin >> u >> v;\n        std::cout << hld.lowest_common_ancestor(u,\
-    \ v) << \"\\n\";\n    }\n}\n"
-  code: "#include \"../heavy_light_decomposition.hpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\nint main() {\n    int N,\
-    \ Q, p, u, v;\n    std::cin >> N >> Q;\n    HeavyLightDecomposition hld(N);\n\
-    \    for (int i = 1; i <= N - 1; i++) {\n        std::cin >> p;\n        hld.add_edge(i,\
-    \ p);\n    }\n    hld.build();\n\n    while (Q--) {\n        std::cin >> u >>\
-    \ v;\n        std::cout << hld.lowest_common_ancestor(u, v) << \"\\n\";\n    }\n\
-    }\n"
+    \ + depth.at(t) - depth.at(lca) * 2 - k);\n    }\n};\n#line 3 \"tree/test/jump_on_tree_hld.test.cpp\"\
+    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N, Q;\n    cin >> N >> Q;\n    HeavyLightDecomposition\
+    \ tree(N);\n    for (int e = 0; e < N - 1; ++e) {\n        int a, b;\n       \
+    \ cin >> a >> b;\n        tree.add_edge(a, b);\n    }\n\n    tree.build({0});\n\
+    \n    while (Q--) {\n        int s, t, i;\n        cin >> s >> t >> i;\n     \
+    \   cout << tree.s_to_t_by_k_steps(s, t, i) << '\\n';\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/jump_on_tree\"\n#include\
+    \ \"../heavy_light_decomposition.hpp\"\n#include <iostream>\nusing namespace std;\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N,\
+    \ Q;\n    cin >> N >> Q;\n    HeavyLightDecomposition tree(N);\n    for (int e\
+    \ = 0; e < N - 1; ++e) {\n        int a, b;\n        cin >> a >> b;\n        tree.add_edge(a,\
+    \ b);\n    }\n\n    tree.build({0});\n\n    while (Q--) {\n        int s, t, i;\n\
+    \        cin >> s >> t >> i;\n        cout << tree.s_to_t_by_k_steps(s, t, i)\
+    \ << '\\n';\n    }\n}\n"
   dependsOn:
   - tree/heavy_light_decomposition.hpp
   isVerificationFile: true
-  path: tree/test/hl_decomposition.test.cpp
+  path: tree/test/jump_on_tree_hld.test.cpp
   requiredBy: []
   timestamp: '2023-03-12 17:40:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: tree/test/hl_decomposition.test.cpp
+documentation_of: tree/test/jump_on_tree_hld.test.cpp
 layout: document
 redirect_from:
-- /verify/tree/test/hl_decomposition.test.cpp
-- /verify/tree/test/hl_decomposition.test.cpp.html
-title: tree/test/hl_decomposition.test.cpp
+- /verify/tree/test/jump_on_tree_hld.test.cpp
+- /verify/tree/test/jump_on_tree_hld.test.cpp.html
+title: tree/test/jump_on_tree_hld.test.cpp
 ---

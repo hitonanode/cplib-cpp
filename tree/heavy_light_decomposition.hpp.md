@@ -7,6 +7,9 @@ data:
     path: tree/test/hl_decomposition.test.cpp
     title: tree/test/hl_decomposition.test.cpp
   - icon: ':heavy_check_mark:'
+    path: tree/test/jump_on_tree_hld.test.cpp
+    title: tree/test/jump_on_tree_hld.test.cpp
+  - icon: ':heavy_check_mark:'
     path: tree/test/vertex-add-path-sum.test.cpp
     title: tree/test/vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -20,15 +23,15 @@ data:
     - http://beet-aizu.hatenablog.com/entry/2017/12/12/235950
   bundledCode: "#line 2 \"tree/heavy_light_decomposition.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <functional>\n#include <queue>\n#include <stack>\n\
-    #include <utility>\n#include <vector>\n\n// CUT begin\n// Heavy-Light Decomposition\
-    \ of trees\n// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\n\
-    struct HeavyLightDecomposition {\n    int V;\n    int k;\n    int nb_heavy_path;\n\
-    \    std::vector<std::vector<int>> e;\n    std::vector<int> par;         // par[i]\
-    \ = parent of vertex i (Default: -1)\n    std::vector<int> depth;       // depth[i]\
-    \ = distance between root and vertex i\n    std::vector<int> subtree_sz;  // subtree_sz[i]\
-    \ = size of subtree whose root is i\n    std::vector<int> heavy_child; // heavy_child[i]\
-    \ = child of vertex i on heavy path (Default: -1)\n    std::vector<int> tree_id;\
-    \     // tree_id[i] = id of tree vertex i belongs to\n    std::vector<int> aligned_id,\n\
+    #include <utility>\n#include <vector>\n\n// Heavy-Light Decomposition of trees\n\
+    // Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\nstruct HeavyLightDecomposition\
+    \ {\n    int V;\n    int k;\n    int nb_heavy_path;\n    std::vector<std::vector<int>>\
+    \ e;\n    std::vector<int> par;         // par[i] = parent of vertex i (Default:\
+    \ -1)\n    std::vector<int> depth;       // depth[i] = distance between root and\
+    \ vertex i\n    std::vector<int> subtree_sz;  // subtree_sz[i] = size of subtree\
+    \ whose root is i\n    std::vector<int> heavy_child; // heavy_child[i] = child\
+    \ of vertex i on heavy path (Default: -1)\n    std::vector<int> tree_id;     //\
+    \ tree_id[i] = id of tree vertex i belongs to\n    std::vector<int> aligned_id,\n\
     \        aligned_id_inv;    // aligned_id[i] =  aligned id for vertex i (consecutive\
     \ on heavy edges)\n    std::vector<int> head; // head[i] = id of vertex on heavy\
     \ path of vertex i, nearest to root\n    std::vector<int> head_ids;      // consist\
@@ -60,12 +63,11 @@ data:
     \ : e[now])\n                    if (nxt != par[now] and nxt != heavy_child[now])\
     \ q.push(nxt);\n            }\n            nb_heavy_path++;\n        }\n    }\n\
     \n    void build(std::vector<int> roots = {0}) {\n        int tree_id_now = 0;\n\
-    \        for (auto r : roots) {\n            _build_dfs(r);\n            _build_bfs(r,\
-    \ tree_id_now++);\n        }\n    }\n\n    template <typename Monoid>\n    std::vector<Monoid>\
-    \ segtree_rearrange(const std::vector<Monoid> &data) const {\n        assert(int(data.size())\
-    \ == V);\n        std::vector<Monoid> ret;\n        ret.reserve(V);\n        for\
-    \ (int i = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);\n       \
-    \ return ret;\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n\
+    \        for (auto r : roots) _build_dfs(r), _build_bfs(r, tree_id_now++);\n \
+    \   }\n\n    template <class T> std::vector<T> segtree_rearrange(const std::vector<T>\
+    \ &data) const {\n        assert(int(data.size()) == V);\n        std::vector<T>\
+    \ ret;\n        ret.reserve(V);\n        for (int i = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);\n\
+    \        return ret;\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n\
     \    void\n    for_each_vertex(int u, int v, const std::function<void(int ancestor,\
     \ int descendant)> &f) const {\n        while (true) {\n            if (aligned_id[u]\
     \ > aligned_id[v]) std::swap(u, v);\n            f(std::max(aligned_id[head[v]],\
@@ -76,27 +78,37 @@ data:
     \ const {\n        int u = from, v = to;\n        const int lca = lowest_common_ancestor(u,\
     \ v), dlca = depth[lca];\n        while (u >= 0 and depth[u] > dlca) {\n     \
     \       const int p = (depth[head[u]] > dlca ? head[u] : lca);\n            fup(aligned_id[p]\
-    \ + (p == lca), aligned_id[u]), u = par[p];\n        }\n        std::vector<std::pair<int,\
-    \ int>> lrs;\n        while (v >= 0 and depth[v] >= dlca) {\n            const\
-    \ int p = (depth[head[v]] >= dlca ? head[v] : lca);\n            lrs.emplace_back(p,\
-    \ v), v = par[p];\n        }\n        std::reverse(lrs.begin(), lrs.end());\n\
-    \        for (const auto &lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);\n\
-    \    }\n\n    // query for edges on path [u, v]\n    void for_each_edge(int u,\
-    \ int v, const std::function<void(int, int)> &f) const {\n        while (true)\
-    \ {\n            if (aligned_id[u] > aligned_id[v]) std::swap(u, v);\n       \
-    \     if (head[u] != head[v]) {\n                f(aligned_id[head[v]], aligned_id[v]);\n\
-    \                v = par[head[v]];\n            } else {\n                if (u\
-    \ != v) f(aligned_id[u] + 1, aligned_id[v]);\n                break;\n       \
-    \     }\n        }\n    }\n\n    // lowest_common_ancestor: O(logV)\n    int lowest_common_ancestor(int\
-    \ u, int v) const {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >=\
-    \ 0);\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
-    \ std::swap(u, v);\n            if (head[u] == head[v]) return u;\n          \
-    \  v = par[head[v]];\n        }\n    }\n\n    int distance(int u, int v) const\
-    \ {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);\n        return\
-    \ depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];\n    }\n};\n"
+    \ + (p == lca), aligned_id[u]), u = par[p];\n        }\n        static std::vector<std::pair<int,\
+    \ int>> lrs;\n        int sz = 0;\n        while (v >= 0 and depth[v] >= dlca)\
+    \ {\n            const int p = (depth[head[v]] >= dlca ? head[v] : lca);\n   \
+    \         if (int(lrs.size()) == sz) lrs.emplace_back(0, 0);\n            lrs.at(sz++)\
+    \ = {p, v}, v = par.at(p);\n        }\n        while (sz--) fdown(aligned_id[lrs.at(sz).first],\
+    \ aligned_id[lrs.at(sz).second]);\n    }\n\n    // query for edges on path [u,\
+    \ v]\n    void for_each_edge(int u, int v, const std::function<void(int, int)>\
+    \ &f) const {\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
+    \ std::swap(u, v);\n            if (head[u] != head[v]) {\n                f(aligned_id[head[v]],\
+    \ aligned_id[v]);\n                v = par[head[v]];\n            } else {\n \
+    \               if (u != v) f(aligned_id[u] + 1, aligned_id[v]);\n           \
+    \     break;\n            }\n        }\n    }\n\n    // lowest_common_ancestor:\
+    \ O(log V)\n    int lowest_common_ancestor(int u, int v) const {\n        assert(tree_id[u]\
+    \ == tree_id[v] and tree_id[u] >= 0);\n        while (true) {\n            if\
+    \ (aligned_id[u] > aligned_id[v]) std::swap(u, v);\n            if (head[u] ==\
+    \ head[v]) return u;\n            v = par[head[v]];\n        }\n    }\n\n    int\
+    \ distance(int u, int v) const {\n        assert(tree_id[u] == tree_id[v] and\
+    \ tree_id[u] >= 0);\n        return depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u,\
+    \ v)];\n    }\n\n    // Level ancestor, O(log V)\n    // if k-th parent is out\
+    \ of range, return -1\n    int kth_parent(int v, int k) const {\n        if (k\
+    \ < 0) return -1;\n        while (v >= 0) {\n            int h = head.at(v), len\
+    \ = depth.at(v) - depth.at(h);\n            if (k <= len) return aligned_id_inv.at(aligned_id.at(v)\
+    \ - k);\n            k -= len + 1, v = par.at(h);\n        }\n        return -1;\n\
+    \    }\n\n    // Jump on tree, O(log V)\n    int s_to_t_by_k_steps(int s, int\
+    \ t, int k) const {\n        if (k < 0) return -1;\n        if (k == 0) return\
+    \ s;\n        int lca = lowest_common_ancestor(s, t);\n        if (k <= depth.at(s)\
+    \ - depth.at(lca)) return kth_parent(s, k);\n        return kth_parent(t, depth.at(s)\
+    \ + depth.at(t) - depth.at(lca) * 2 - k);\n    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <functional>\n\
     #include <queue>\n#include <stack>\n#include <utility>\n#include <vector>\n\n\
-    // CUT begin\n// Heavy-Light Decomposition of trees\n// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\n\
+    // Heavy-Light Decomposition of trees\n// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\n\
     struct HeavyLightDecomposition {\n    int V;\n    int k;\n    int nb_heavy_path;\n\
     \    std::vector<std::vector<int>> e;\n    std::vector<int> par;         // par[i]\
     \ = parent of vertex i (Default: -1)\n    std::vector<int> depth;       // depth[i]\
@@ -135,12 +147,11 @@ data:
     \ : e[now])\n                    if (nxt != par[now] and nxt != heavy_child[now])\
     \ q.push(nxt);\n            }\n            nb_heavy_path++;\n        }\n    }\n\
     \n    void build(std::vector<int> roots = {0}) {\n        int tree_id_now = 0;\n\
-    \        for (auto r : roots) {\n            _build_dfs(r);\n            _build_bfs(r,\
-    \ tree_id_now++);\n        }\n    }\n\n    template <typename Monoid>\n    std::vector<Monoid>\
-    \ segtree_rearrange(const std::vector<Monoid> &data) const {\n        assert(int(data.size())\
-    \ == V);\n        std::vector<Monoid> ret;\n        ret.reserve(V);\n        for\
-    \ (int i = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);\n       \
-    \ return ret;\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n\
+    \        for (auto r : roots) _build_dfs(r), _build_bfs(r, tree_id_now++);\n \
+    \   }\n\n    template <class T> std::vector<T> segtree_rearrange(const std::vector<T>\
+    \ &data) const {\n        assert(int(data.size()) == V);\n        std::vector<T>\
+    \ ret;\n        ret.reserve(V);\n        for (int i = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);\n\
+    \        return ret;\n    }\n\n    // query for vertices on path [u, v] (INCLUSIVE)\n\
     \    void\n    for_each_vertex(int u, int v, const std::function<void(int ancestor,\
     \ int descendant)> &f) const {\n        while (true) {\n            if (aligned_id[u]\
     \ > aligned_id[v]) std::swap(u, v);\n            f(std::max(aligned_id[head[v]],\
@@ -151,38 +162,94 @@ data:
     \ const {\n        int u = from, v = to;\n        const int lca = lowest_common_ancestor(u,\
     \ v), dlca = depth[lca];\n        while (u >= 0 and depth[u] > dlca) {\n     \
     \       const int p = (depth[head[u]] > dlca ? head[u] : lca);\n            fup(aligned_id[p]\
-    \ + (p == lca), aligned_id[u]), u = par[p];\n        }\n        std::vector<std::pair<int,\
-    \ int>> lrs;\n        while (v >= 0 and depth[v] >= dlca) {\n            const\
-    \ int p = (depth[head[v]] >= dlca ? head[v] : lca);\n            lrs.emplace_back(p,\
-    \ v), v = par[p];\n        }\n        std::reverse(lrs.begin(), lrs.end());\n\
-    \        for (const auto &lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);\n\
-    \    }\n\n    // query for edges on path [u, v]\n    void for_each_edge(int u,\
-    \ int v, const std::function<void(int, int)> &f) const {\n        while (true)\
-    \ {\n            if (aligned_id[u] > aligned_id[v]) std::swap(u, v);\n       \
-    \     if (head[u] != head[v]) {\n                f(aligned_id[head[v]], aligned_id[v]);\n\
-    \                v = par[head[v]];\n            } else {\n                if (u\
-    \ != v) f(aligned_id[u] + 1, aligned_id[v]);\n                break;\n       \
-    \     }\n        }\n    }\n\n    // lowest_common_ancestor: O(logV)\n    int lowest_common_ancestor(int\
-    \ u, int v) const {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >=\
-    \ 0);\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
-    \ std::swap(u, v);\n            if (head[u] == head[v]) return u;\n          \
-    \  v = par[head[v]];\n        }\n    }\n\n    int distance(int u, int v) const\
-    \ {\n        assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);\n        return\
-    \ depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];\n    }\n};\n"
+    \ + (p == lca), aligned_id[u]), u = par[p];\n        }\n        static std::vector<std::pair<int,\
+    \ int>> lrs;\n        int sz = 0;\n        while (v >= 0 and depth[v] >= dlca)\
+    \ {\n            const int p = (depth[head[v]] >= dlca ? head[v] : lca);\n   \
+    \         if (int(lrs.size()) == sz) lrs.emplace_back(0, 0);\n            lrs.at(sz++)\
+    \ = {p, v}, v = par.at(p);\n        }\n        while (sz--) fdown(aligned_id[lrs.at(sz).first],\
+    \ aligned_id[lrs.at(sz).second]);\n    }\n\n    // query for edges on path [u,\
+    \ v]\n    void for_each_edge(int u, int v, const std::function<void(int, int)>\
+    \ &f) const {\n        while (true) {\n            if (aligned_id[u] > aligned_id[v])\
+    \ std::swap(u, v);\n            if (head[u] != head[v]) {\n                f(aligned_id[head[v]],\
+    \ aligned_id[v]);\n                v = par[head[v]];\n            } else {\n \
+    \               if (u != v) f(aligned_id[u] + 1, aligned_id[v]);\n           \
+    \     break;\n            }\n        }\n    }\n\n    // lowest_common_ancestor:\
+    \ O(log V)\n    int lowest_common_ancestor(int u, int v) const {\n        assert(tree_id[u]\
+    \ == tree_id[v] and tree_id[u] >= 0);\n        while (true) {\n            if\
+    \ (aligned_id[u] > aligned_id[v]) std::swap(u, v);\n            if (head[u] ==\
+    \ head[v]) return u;\n            v = par[head[v]];\n        }\n    }\n\n    int\
+    \ distance(int u, int v) const {\n        assert(tree_id[u] == tree_id[v] and\
+    \ tree_id[u] >= 0);\n        return depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u,\
+    \ v)];\n    }\n\n    // Level ancestor, O(log V)\n    // if k-th parent is out\
+    \ of range, return -1\n    int kth_parent(int v, int k) const {\n        if (k\
+    \ < 0) return -1;\n        while (v >= 0) {\n            int h = head.at(v), len\
+    \ = depth.at(v) - depth.at(h);\n            if (k <= len) return aligned_id_inv.at(aligned_id.at(v)\
+    \ - k);\n            k -= len + 1, v = par.at(h);\n        }\n        return -1;\n\
+    \    }\n\n    // Jump on tree, O(log V)\n    int s_to_t_by_k_steps(int s, int\
+    \ t, int k) const {\n        if (k < 0) return -1;\n        if (k == 0) return\
+    \ s;\n        int lca = lowest_common_ancestor(s, t);\n        if (k <= depth.at(s)\
+    \ - depth.at(lca)) return kth_parent(s, k);\n        return kth_parent(t, depth.at(s)\
+    \ + depth.at(t) - depth.at(lca) * 2 - k);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: tree/heavy_light_decomposition.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2023-03-12 17:40:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/hl_decomposition.test.cpp
   - tree/test/vertex-set-path-composite.test.cpp
   - tree/test/vertex-add-path-sum.test.cpp
+  - tree/test/jump_on_tree_hld.test.cpp
 documentation_of: tree/heavy_light_decomposition.hpp
 layout: document
-redirect_from:
-- /library/tree/heavy_light_decomposition.hpp
-- /library/tree/heavy_light_decomposition.hpp.html
-title: tree/heavy_light_decomposition.hpp
+title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\uFF09"
 ---
+
+木の重軽分解を行い，列に対する処理を木上のパスに拡張した処理や，最小共通祖先の効率的な計算を可能にする．前処理 $O(N)$．
+
+## 使用方法
+
+### 前処理
+
+```cpp
+HeavyLightDecomposition hld(N);
+for (int e = 0; e < N - 1; ++e) {
+    int u, v;
+    cin >> u >> v;
+    --u, --v;
+    hld.add_edge(u, v);
+}
+hld.build();  // O(N)
+```
+
+### 木に対する基本的なクエリ
+
+以下，すべてクエリ $O(\log N)$．
+
+```cpp
+cout << hld.lowest_common_ancestor(a, b) << '\n'; // (a, b) の最長共通祖先
+cout << hld.kth_parent(a, k) << '\n';  // 頂点 a の k 世代親
+cout << hld.distance(a, b) << '\n'; // 2 頂点 a, b の距離
+cout << hld.s_to_t_by_k_steps(s, t, k) << '\n'; // 頂点 s から t 方向に k 歩動いた頂点
+```
+
+### セグメント木などを利用した木上パスクエリへの対応
+
+```cpp
+// 各頂点の情報
+std::vector<S> vertices_info(N);
+
+// HLD の分解順を考慮したセグメント木の初期化
+// セグメント木上で，分解されたパス上の要素は「根方向のものから順に」連続して並ぶことに注意
+atcoder::segtree<S, op, e> segtree(hld.segtree_rearrange(vertices_info));
+
+// 頂点 from から頂点 to へのパス（両端点を含む）上の要素合成クエリ
+S ret = e();
+auto func = [&](int u, int v) { ret = op(ret, segtree.prod(u, v + 1)); };
+hld.for_each_vertex(from, to, func);
+```
+
+## 問題例
+
+- [Library Checker: Lowest Common Ancestor](https://judge.yosupo.jp/problem/lca)
