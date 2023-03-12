@@ -7,7 +7,6 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
 // Heavy-Light Decomposition of trees
 // Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950
 struct HeavyLightDecomposition {
@@ -84,16 +83,12 @@ struct HeavyLightDecomposition {
 
     void build(std::vector<int> roots = {0}) {
         int tree_id_now = 0;
-        for (auto r : roots) {
-            _build_dfs(r);
-            _build_bfs(r, tree_id_now++);
-        }
+        for (auto r : roots) _build_dfs(r), _build_bfs(r, tree_id_now++);
     }
 
-    template <typename Monoid>
-    std::vector<Monoid> segtree_rearrange(const std::vector<Monoid> &data) const {
+    template <class T> std::vector<T> segtree_rearrange(const std::vector<T> &data) const {
         assert(int(data.size()) == V);
-        std::vector<Monoid> ret;
+        std::vector<T> ret;
         ret.reserve(V);
         for (int i = 0; i < V; i++) ret.emplace_back(data[aligned_id_inv[i]]);
         return ret;
@@ -119,13 +114,14 @@ struct HeavyLightDecomposition {
             const int p = (depth[head[u]] > dlca ? head[u] : lca);
             fup(aligned_id[p] + (p == lca), aligned_id[u]), u = par[p];
         }
-        std::vector<std::pair<int, int>> lrs;
+        static std::vector<std::pair<int, int>> lrs;
+        int sz = 0;
         while (v >= 0 and depth[v] >= dlca) {
             const int p = (depth[head[v]] >= dlca ? head[v] : lca);
-            lrs.emplace_back(p, v), v = par[p];
+            if (int(lrs.size()) == sz) lrs.emplace_back(0, 0);
+            lrs.at(sz++) = {p, v}, v = par.at(p);
         }
-        std::reverse(lrs.begin(), lrs.end());
-        for (const auto &lr : lrs) fdown(aligned_id[lr.first], aligned_id[lr.second]);
+        while (sz--) fdown(aligned_id[lrs.at(sz).first], aligned_id[lrs.at(sz).second]);
     }
 
     // query for edges on path [u, v]
@@ -142,7 +138,7 @@ struct HeavyLightDecomposition {
         }
     }
 
-    // lowest_common_ancestor: O(logV)
+    // lowest_common_ancestor: O(log V)
     int lowest_common_ancestor(int u, int v) const {
         assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);
         while (true) {
@@ -155,5 +151,26 @@ struct HeavyLightDecomposition {
     int distance(int u, int v) const {
         assert(tree_id[u] == tree_id[v] and tree_id[u] >= 0);
         return depth[u] + depth[v] - 2 * depth[lowest_common_ancestor(u, v)];
+    }
+
+    // Level ancestor, O(log V)
+    // if k-th parent is out of range, return -1
+    int kth_parent(int v, int k) const {
+        if (k < 0) return -1;
+        while (v >= 0) {
+            int h = head.at(v), len = depth.at(v) - depth.at(h);
+            if (k <= len) return aligned_id_inv.at(aligned_id.at(v) - k);
+            k -= len + 1, v = par.at(h);
+        }
+        return -1;
+    }
+
+    // Jump on tree, O(log V)
+    int s_to_t_by_k_steps(int s, int t, int k) const {
+        if (k < 0) return -1;
+        if (k == 0) return s;
+        int lca = lowest_common_ancestor(s, t);
+        if (k <= depth.at(s) - depth.at(lca)) return kth_parent(s, k);
+        return kth_parent(t, depth.at(s) + depth.at(t) - depth.at(lca) * 2 - k);
     }
 };
