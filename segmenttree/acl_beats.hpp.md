@@ -101,8 +101,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats_gcd.test.cpp
-  - segmenttree/test/beats.test.cpp
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
+  - segmenttree/test/beats.test.cpp
 documentation_of: segmenttree/acl_beats.hpp
 layout: document
 title: Segment Tree Beats (based on atcoder::lazy_segtree)

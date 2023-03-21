@@ -127,8 +127,8 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/segment_tree_2d_pointadd.test.cpp
   - segmenttree/test/segment_tree_2d.test.cpp
+  - segmenttree/test/segment_tree_2d_pointadd.test.cpp
 documentation_of: segmenttree/segment_tree_2d.hpp
 layout: document
 redirect_from:
