@@ -110,6 +110,11 @@ data:
       path: data_structure/binary_trie.hpp
       title: data_structure/binary_trie.hpp
     - icon: ':heavy_check_mark:'
+      path: data_structure/fast_set.hpp
+      title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\
+        \u3092\u9AD8\u901F\u306B\u51E6\u7406\u3059\u308B\u30C7\u30FC\u30BF\u69CB\u9020\
+        \uFF09"
+    - icon: ':heavy_check_mark:'
       path: data_structure/fibonacci_heap.hpp
       title: data_structure/fibonacci_heap.hpp
     - icon: ':warning:'
@@ -898,6 +903,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
       title: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/fast_set.test.cpp
+      title: data_structure/test/fast_set.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/fibonacci_heap_dijkstra.test.cpp
       title: data_structure/test/fibonacci_heap_dijkstra.test.cpp
