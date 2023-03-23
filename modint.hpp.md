@@ -10,6 +10,10 @@ data:
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
+    path: convolution/relaxed_multiplication.hpp
+    title: "Relaxed multiplication / relaxed convolution \uFF08\u30AA\u30F3\u30E9\u30A4\
+      \u30F3\u7573\u307F\u8FBC\u307F\uFF09"
+  - icon: ':heavy_check_mark:'
     path: convolution/semirelaxed_multiplication.hpp
     title: "Semi-relaxed multiplication / semi-relaxed convolution \uFF08\u7247\u65B9\
       \u5148\u8AAD\u307F\u53EF\u80FD\u306A\u5834\u5408\u306E\u30AA\u30F3\u30E9\u30A4\
@@ -53,6 +57,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/relaxed_multiplication.exp.test.cpp
+    title: convolution/test/relaxed_multiplication.exp.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: convolution/test/relaxed_multiplication.test.cpp
+    title: convolution/test/relaxed_multiplication.test.cpp
   - icon: ':heavy_check_mark:'
     path: convolution/test/semirelaxed_multiplication.test.cpp
     title: convolution/test/semirelaxed_multiplication.test.cpp
@@ -400,6 +410,7 @@ data:
   - formal_power_series/factorial_power.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
   - convolution/ntt.hpp
+  - convolution/relaxed_multiplication.hpp
   - convolution/multivar_ntt.hpp
   - convolution/semirelaxed_multiplication.hpp
   timestamp: '2022-07-12 00:34:46+09:00'
@@ -466,10 +477,12 @@ data:
   - data_structure/test/link_cut_tree.composition.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
   - convolution/test/multivar_ntt.test.cpp
+  - convolution/test/relaxed_multiplication.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
   - convolution/test/convolution_on_tree.test.cpp
   - convolution/test/ntt.test.cpp
   - convolution/test/semirelaxed_multiplication.test.cpp
+  - convolution/test/relaxed_multiplication.exp.test.cpp
 documentation_of: modint.hpp
 layout: document
 redirect_from:
