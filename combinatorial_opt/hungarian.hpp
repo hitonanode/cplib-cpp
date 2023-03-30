@@ -18,8 +18,6 @@ template <class T> std::pair<T, std::vector<int>> hungarian(const std::vector<st
     assert(n == m);
     std::vector<T> f(n, T()), g(m, T());
 
-    auto chmin = [](T &x, T y) { return (x > y ? (x = y, true) : false); };
-
     // Make dual variables feasible
     for (int j = 0; j < m; ++j) {
         g[j] = f[0] - C[0][j];
@@ -37,9 +35,9 @@ template <class T> std::pair<T, std::vector<int>> hungarian(const std::vector<st
     for (int i = 0; i < n; ++i) {
         lvisited = {i};
         int cur = 0;
-        std::optional<int> reachable_r = std::nullopt;
+        int reachable_r = -1;
 
-        while (!reachable_r.has_value()) {
+        while (reachable_r < 0) {
 
             auto check_l = [&]() -> void {
                 int l = lvisited[cur++];
@@ -60,38 +58,36 @@ template <class T> std::pair<T, std::vector<int>> hungarian(const std::vector<st
             };
             while (cur < int(lvisited.size())) check_l();
 
-            if (!reachable_r.has_value()) {
+            if (reachable_r < 0) {
                 T min_diff = T();
                 int min_l = -1, min_r = -1;
                 for (int l : lvisited) {
                     for (int j = 0; j < m; ++j) {
                         if (rreach[j] == i) continue;
-                        T diff = C[l][j] + g[j] - f[l];
-                        if (min_l < 0) {
+                        if (T diff = C[l][j] + g[j] - f[l]; min_l < 0 or min_diff > diff) {
                             min_diff = diff;
-                            min_l = l;
-                            min_r = j;
-                        } else if (chmin(min_diff, diff)) {
                             min_l = l;
                             min_r = j;
                         }
                     }
                 }
+
                 for (int l : lvisited) f[l] += min_diff;
                 for (int j = 0; j < m; ++j) {
                     if (rreach[j] == i) g[j] += min_diff;
                 }
-                rreach[min_r] = i;
+                rreach.at(min_r) = i;
                 rprv.at(min_r) = min_l;
 
-                if (rmate[min_r].has_value()) {
-                    lvisited.push_back(rmate[min_r].value());
+                if (rmate.at(min_r).has_value()) {
+                    lvisited.push_back(rmate.at(min_r).value());
                 } else {
                     reachable_r = min_r;
                 }
             }
         }
-        for (int h = reachable_r.value(); h >= 0;) {
+
+        for (int h = reachable_r; h >= 0;) {
             int l = rprv.at(h);
             int nxth = lmate.at(l);
             rmate.at(h) = l;
