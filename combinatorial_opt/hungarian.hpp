@@ -6,16 +6,26 @@
 
 // Solve assignment problem by Hungarian algorithm
 // dual problem: maximize sum(f) - sum(g) s.t. f_i - g_j <= C_ij
-// Requires: n == m
-// Ccomplexity: O(n^2 m)
+// Ccomplexity: O(nm min(n, m))
 // https://www.slideshare.net/joisino/ss-249394573
-// Todo:
-// - generalize: n != m
-// - Reduce to O(nm min(n, m))
 template <class T> std::pair<T, std::vector<int>> hungarian(const std::vector<std::vector<T>> &C) {
     if (C.empty()) return {T(), {}};
+
     const int n = C.size(), m = C.front().size();
-    assert(n == m);
+
+    if (n < m) {
+        std::vector transC(m, std::vector<T>(n));
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) transC.at(j).at(i) = C.at(i).at(j);
+        }
+        auto j2i = hungarian(transC);
+        std::vector<int> ret(n, -1);
+        for (int j = 0; j < m; ++j) {
+            if (j2i.second.at(j) >= 0) ret.at(j2i.second.at(j)) = j;
+        }
+        return {j2i.first, ret};
+    }
+
     std::vector<T> f(n, T()), g(m, T());
 
     // Make dual variables feasible
@@ -72,6 +82,20 @@ template <class T> std::pair<T, std::vector<int>> hungarian(const std::vector<st
                     }
                 }
 
+                if (min_r < 0) {
+                    assert(i >= m);
+                    int l = lvisited.front();
+                    for (int t : lvisited) {
+                        if (f.at(l) < f.at(t)) l = t;
+                    }
+                    if (lmate.at(l) >= 0) {
+                        reachable_r = lmate.at(l);
+                        rmate.at(lmate.at(l)) = std::nullopt;
+                        lmate.at(l) = -1;
+                    }
+                    break;
+                }
+
                 for (int l : lvisited) f[l] += min_diff;
                 for (int j = 0; j < m; ++j) {
                     if (rreach[j] == i) g[j] += min_diff;
@@ -88,8 +112,7 @@ template <class T> std::pair<T, std::vector<int>> hungarian(const std::vector<st
         }
 
         for (int h = reachable_r; h >= 0;) {
-            int l = rprv.at(h);
-            int nxth = lmate.at(l);
+            int l = rprv.at(h), nxth = lmate.at(l);
             rmate.at(h) = l;
             lmate.at(l) = h;
             h = nxth;
@@ -97,6 +120,8 @@ template <class T> std::pair<T, std::vector<int>> hungarian(const std::vector<st
     }
 
     T sol = T();
-    for (int i = 0; i < n; ++i) sol += C.at(i).at(lmate.at(i));
+    for (int i = 0; i < n; ++i) {
+        if (lmate.at(i) >= 0) sol += C.at(i).at(lmate.at(i));
+    }
     return {sol, lmate};
 }
