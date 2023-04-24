@@ -16,8 +16,8 @@ data:
     - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1595
   bundledCode: "#line 1 \"tree/test/rerooting.aoj1595.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1595\"\n#line 2\
-    \ \"tree/rerooting.hpp\"\n#include <cassert>\n#include <utility>\n#include <vector>\n\
-    \n// Rerooting\n// Reference:\n// - https://atcoder.jp/contests/abc222/editorial/2749\n\
+    \ \"tree/rerooting.hpp\"\n#include <cassert>\n#include <cstdlib>\n#include <utility>\n\
+    #include <vector>\n\n// Rerooting\n// Reference:\n// - https://atcoder.jp/contests/abc222/editorial/2749\n\
     // - https://null-mn.hatenablog.com/entry/2020/04/14/124151\ntemplate <class Edge,\
     \ class St, class Ch, Ch (*merge)(Ch, Ch), Ch (*f)(St, int, Edge),\n         \
     \ St (*g)(Ch, int), Ch (*e)()>\nstruct rerooting {\n    int n_;\n    std::vector<int>\
@@ -49,7 +49,10 @@ data:
     \  const St &st = (nxt == par[now] ? dp_par[now] : dp_subtree[nxt]);\n       \
     \         rprod = merge(f(st, nxt, to[now][j].second), rprod);\n            }\n\
     \        }\n    }\n\n    void run() {\n        for (int i = 0; i < n_; ++i) {\n\
-    \            if (!visited[i]) run_connected(i);\n        }\n    }\n};\n/* Template:\n\
+    \            if (!visited[i]) run_connected(i);\n        }\n    }\n\n    const\
+    \ St &get_subtree(int root_, int par_) const {\n        if (par_ < 0) return dpall.at(root_);\n\
+    \        if (par.at(root_) == par_) return dp_subtree.at(root_);\n        if (par.at(par_)\
+    \ == root_) return dp_par.at(par_);\n        std::exit(1);\n    }\n};\n/* Template:\n\
     struct Subtree {};\nstruct Child {};\nstruct Edge {};\nChild e() { return Child();\
     \ }\nChild merge(Child x, Child y) { return Child(); }\nChild f(Subtree x, int\
     \ ch_id, Edge edge) { return Child(); }\nSubtree g(Child x, int v_id) { return\
@@ -86,7 +89,7 @@ data:
   isVerificationFile: true
   path: tree/test/rerooting.aoj1595.test.cpp
   requiredBy: []
-  timestamp: '2021-10-23 00:38:09+09:00'
+  timestamp: '2023-04-25 08:57:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/rerooting.aoj1595.test.cpp

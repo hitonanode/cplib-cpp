@@ -176,10 +176,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/chromatic_number.test.cpp
-  - number/test/sieve.stress.test.cpp
   - number/test/montmort_number_mod.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - number/test/sieve.stress.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - convolution/test/ntt.test.cpp
 documentation_of: number/modint_runtime.hpp
 layout: document
