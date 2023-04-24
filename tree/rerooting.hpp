@@ -1,5 +1,6 @@
 #pragma once
 #include <cassert>
+#include <cstdlib>
 #include <utility>
 #include <vector>
 
@@ -75,6 +76,13 @@ struct rerooting {
         for (int i = 0; i < n_; ++i) {
             if (!visited[i]) run_connected(i);
         }
+    }
+
+    const St &get_subtree(int root_, int par_) const {
+        if (par_ < 0) return dpall.at(root_);
+        if (par.at(root_) == par_) return dp_subtree.at(root_);
+        if (par.at(par_) == root_) return dp_par.at(par_);
+        std::exit(1);
     }
 };
 /* Template:

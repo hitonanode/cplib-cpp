@@ -50,11 +50,20 @@ tree.run();
 for (auto x : tree.dpall) cout << x.oneway << '\n';
 ```
 
+また，メソッド `get_subtree(int root, int par)` によって，木を頂点 `par` （`par` が $-1$ の場合は `root`）を根とした根付き木として見た場合の頂点 `root` を根とする部分木の情報が取得できる．
+
+```cpp
+int u, v;  // u-v 間に辺が存在
+Subtree s1 = tree.get_subtree(u, v);
+```
+
 ## 問題例
 
 - [エクサウィザーズプログラミングコンテスト2021（AtCoder Beginner Contest 222） F - Expensive Expense](https://atcoder.jp/contests/abc222/tasks/abc222_f)
 - [AOJ 1595: Traffic Tree](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1595)
 - [No.1718 Random Squirrel - yukicoder](https://yukicoder.me/problems/no/1718)
+- [トヨタ自動車プログラミングコンテスト2023#1(AtCoder Beginner Contest 298) Ex - Sum of Min of Length](https://atcoder.jp/contests/abc298/tasks/abc298_h)
+  - `get_subtree()` を使用するのが楽．
 
 ## リンク
 
