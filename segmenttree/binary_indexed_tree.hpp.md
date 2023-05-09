@@ -31,6 +31,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/point-add-range-sum.test.cpp
     title: segmenttree/test/point-add-range-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: tree/test/vertex-add-subtree-sum.guni.test.cpp
+    title: tree/test/vertex-add-subtree-sum.guni.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -76,6 +79,7 @@ data:
   verifiedWith:
   - segmenttree/test/binary_indexed_tree.test.cpp
   - segmenttree/test/point-add-range-sum.test.cpp
+  - tree/test/vertex-add-subtree-sum.guni.test.cpp
   - data_structure/test/rectangle_add_rectangle_sum.test.cpp
   - data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
   - data_structure/test/rectangle_sum.test.cpp

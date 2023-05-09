@@ -674,6 +674,12 @@ data:
       path: tree/frequency_table_of_tree_distance.hpp
       title: Frequency table of tree distance
     - icon: ':heavy_check_mark:'
+      path: tree/guni.hpp
+      title: "Guni (Sack) / DSU on tree \uFF08\u6839\u4ED8\u304D\u6728\u306E\u5168\
+        \u3066\u306E\u90E8\u5206\u6728\u3092\u7D4C\u7531\u3059\u308B\u3088\u3046\u306A\
+        \u9802\u70B9\u8FFD\u52A0\u30FB\u524A\u9664\u64CD\u4F5C\u5217\u306E\u751F\u6210\
+        \uFF09"
+    - icon: ':heavy_check_mark:'
       path: tree/heavy_light_decomposition.hpp
       title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\
         \uFF09"
@@ -1578,6 +1584,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-path-sum.test.cpp
       title: tree/test/vertex-add-path-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/vertex-add-subtree-sum.guni.test.cpp
+      title: tree/test/vertex-add-subtree-sum.guni.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-subtree-sum.test.cpp
       title: tree/test/vertex-add-subtree-sum.test.cpp
