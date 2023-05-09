@@ -1,5 +1,5 @@
 ---
-title: "Guni" (Sack) / DSU on tree （根付き木の全ての部分木を経由するような頂点追加・削除操作列の生成）
+title: Guni (Sack) / DSU on tree （根付き木の全ての部分木を経由するような頂点追加・削除操作列の生成）
 documentation_of: ./guni.hpp
 ---
 
