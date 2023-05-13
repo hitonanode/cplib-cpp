@@ -96,10 +96,8 @@ template <class Tick = int> struct offline_dynamic_connectivity {
         }
 
         for (const auto &op : ops) {
-            int clk = op.first, qid = op.second;
-            int t =
-                D + (std::upper_bound(query_ts.begin(), query_ts.end(), clk) - query_ts.begin()) - 1;
-            nodes[t].push_back(Procedure{DyConOperation::Event, qid});
+            int t = std::upper_bound(query_ts.begin(), query_ts.end(), op.first) - query_ts.begin();
+            nodes.at(t + D - 1).push_back(Procedure{DyConOperation::Event, op.second});
         }
         ret_.clear();
         rec(1);

@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <map>
+#include <utility>
 using namespace std;
 
 int main() {
@@ -18,7 +19,7 @@ int main() {
     vector<pair<int, int>> edges;
     map<pair<int, int>, pair<int, int>> edge_to_id_since;
 
-    offline_dynamic_connectivity<int> dc;
+    offline_dynamic_connectivity<std::pair<int, int>> dc; // for verification
 
     vector<pair<int, lint>> qs;
 
@@ -38,7 +39,7 @@ int main() {
             } else {
                 int id_, since;
                 tie(id_, since) = edge_to_id_since[make_pair(u, v)];
-                dc.apply_time_range(since, q, id_);
+                dc.apply_time_range({since, 0}, {q, 0}, id_);
                 edge_to_id_since.erase(make_pair(u, v));
             }
         } else if (tp == 2) {
@@ -46,20 +47,20 @@ int main() {
             lint x;
             cin >> v >> x;
 
-            dc.apply_time_range(q, 1 << 30, -1 - int(qs.size()));
+            dc.apply_time_range({q, 0}, {1 << 30, 0}, -1 - int(qs.size()));
             qs.emplace_back(v, x);
         } else if (tp == 3) {
             int v;
             cin >> v;
 
-            dc.add_observation(q, ret.size());
+            dc.add_observation({q, 0}, ret.size());
             get_query.push_back(v);
             ret.push_back(0);
         }
     }
 
     for (auto p : edge_to_id_since) {
-        dc.apply_time_range(p.second.second, 1 << 30, p.second.first);
+        dc.apply_time_range({p.second.second, 0}, {1 << 30, 0}, p.second.first);
     }
 
     undo_dsu<lint> dsu(a);
