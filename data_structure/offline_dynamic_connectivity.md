@@ -24,6 +24,7 @@ documentation_of: ./offline_dynamic_connectivity.hpp
 ## 使用方法
 
 ```cpp
+// Tick の型は std::lower_bound 等による二分探索ができればなんでもよい（std::pair, std::tuple なども可）
 offline_dynamic_connectivity<int> dc;
 
 dc.apply_time_range(0, 100, 1);  // 時刻 [0, 100) の範囲で辺番号 1 を追加
