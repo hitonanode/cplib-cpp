@@ -104,8 +104,8 @@ data:
   timestamp: '2022-10-30 13:35:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/nimber.test.cpp
   - unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
+  - number/test/nimber.test.cpp
 documentation_of: number/nimber.hpp
 layout: document
 title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"

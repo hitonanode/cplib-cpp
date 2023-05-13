@@ -109,8 +109,8 @@ data:
   timestamp: '2022-05-01 19:26:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/max_weight_independent_set.lc.test.cpp
   - graph/test/max_weight_independent_set.aoj3519.test.cpp
+  - graph/test/max_weight_independent_set.lc.test.cpp
 documentation_of: graph/max_weight_independent_set.hpp
 layout: document
 title: "Max weight independent set \uFF08\u91CD\u307F\u6700\u5927\u72EC\u7ACB\u96C6\

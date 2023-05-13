@@ -49,11 +49,10 @@ data:
     \                if (l & 1) nodes[l++].push_back(Procedure{DyConOperation::Begins,\
     \ e.edge_id});\n                if (r & 1) nodes[--r].push_back(Procedure{DyConOperation::Begins,\
     \ e.edge_id});\n                l >>= 1, r >>= 1;\n            }\n        }\n\n\
-    \        for (const auto &op : ops) {\n            int clk = op.first, qid = op.second;\n\
-    \            int t =\n                D + (std::upper_bound(query_ts.begin(),\
-    \ query_ts.end(), clk) - query_ts.begin()) - 1;\n            nodes[t].push_back(Procedure{DyConOperation::Event,\
-    \ qid});\n        }\n        ret_.clear();\n        rec(1);\n        return ret_;\n\
-    \    }\n};\n"
+    \        for (const auto &op : ops) {\n            int t = std::upper_bound(query_ts.begin(),\
+    \ query_ts.end(), op.first) - query_ts.begin();\n            nodes.at(t + D -\
+    \ 1).push_back(Procedure{DyConOperation::Event, op.second});\n        }\n    \
+    \    ret_.clear();\n        rec(1);\n        return ret_;\n    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <limits>\n#include <set>\n#include\
     \ <utility>\n#include <vector>\n\nenum class DyConOperation {\n    Begins = 1,\n\
     \    Ends = 2,\n    Event = 3,\n};\n\ntemplate <class Tick = int> struct offline_dynamic_connectivity\
@@ -91,16 +90,15 @@ data:
     \                if (l & 1) nodes[l++].push_back(Procedure{DyConOperation::Begins,\
     \ e.edge_id});\n                if (r & 1) nodes[--r].push_back(Procedure{DyConOperation::Begins,\
     \ e.edge_id});\n                l >>= 1, r >>= 1;\n            }\n        }\n\n\
-    \        for (const auto &op : ops) {\n            int clk = op.first, qid = op.second;\n\
-    \            int t =\n                D + (std::upper_bound(query_ts.begin(),\
-    \ query_ts.end(), clk) - query_ts.begin()) - 1;\n            nodes[t].push_back(Procedure{DyConOperation::Event,\
-    \ qid});\n        }\n        ret_.clear();\n        rec(1);\n        return ret_;\n\
-    \    }\n};\n"
+    \        for (const auto &op : ops) {\n            int t = std::upper_bound(query_ts.begin(),\
+    \ query_ts.end(), op.first) - query_ts.begin();\n            nodes.at(t + D -\
+    \ 1).push_back(Procedure{DyConOperation::Event, op.second});\n        }\n    \
+    \    ret_.clear();\n        rec(1);\n        return ret_;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: data_structure/offline_dynamic_connectivity.hpp
   requiredBy: []
-  timestamp: '2022-10-11 22:40:37+09:00'
+  timestamp: '2023-05-13 23:16:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
@@ -130,6 +128,7 @@ title: Offline dynamic connectivity
 ## 使用方法
 
 ```cpp
+// Tick の型は std::lower_bound 等による二分探索ができればなんでもよい（std::pair, std::tuple なども可）
 offline_dynamic_connectivity<int> dc;
 
 dc.apply_time_range(0, 100, 1);  // 時刻 [0, 100) の範囲で辺番号 1 を追加

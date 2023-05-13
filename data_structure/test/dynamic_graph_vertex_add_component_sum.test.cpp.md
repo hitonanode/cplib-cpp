@@ -78,78 +78,80 @@ data:
     \                if (l & 1) nodes[l++].push_back(Procedure{DyConOperation::Begins,\
     \ e.edge_id});\n                if (r & 1) nodes[--r].push_back(Procedure{DyConOperation::Begins,\
     \ e.edge_id});\n                l >>= 1, r >>= 1;\n            }\n        }\n\n\
-    \        for (const auto &op : ops) {\n            int clk = op.first, qid = op.second;\n\
-    \            int t =\n                D + (std::upper_bound(query_ts.begin(),\
-    \ query_ts.end(), clk) - query_ts.begin()) - 1;\n            nodes[t].push_back(Procedure{DyConOperation::Event,\
-    \ qid});\n        }\n        ret_.clear();\n        rec(1);\n        return ret_;\n\
-    \    }\n};\n#line 4 \"data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp\"\
-    \n\n#include <iostream>\n#include <map>\nusing namespace std;\n\nint main() {\n\
-    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q;\n    cin >>\
-    \ N >> Q;\n\n    using lint = long long;\n    vector<lint> a(N);\n    for (auto\
-    \ &x : a) cin >> x;\n\n    vector<pair<int, int>> edges;\n    map<pair<int, int>,\
-    \ pair<int, int>> edge_to_id_since;\n\n    offline_dynamic_connectivity<int> dc;\n\
-    \n    vector<pair<int, lint>> qs;\n\n    vector<int> get_query;\n    vector<lint>\
-    \ ret;\n    for (int q = 0; q < Q; ++q) {\n        int tp;\n        cin >> tp;\n\
-    \        if (tp <= 1) {\n            int u, v;\n            cin >> u >> v;\n \
-    \           if (u > v) swap(u, v);\n\n            if (tp == 0) {\n           \
-    \     edge_to_id_since[make_pair(u, v)] = make_pair(edges.size(), q);\n      \
-    \          edges.emplace_back(u, v);\n            } else {\n                int\
-    \ id_, since;\n                tie(id_, since) = edge_to_id_since[make_pair(u,\
-    \ v)];\n                dc.apply_time_range(since, q, id_);\n                edge_to_id_since.erase(make_pair(u,\
-    \ v));\n            }\n        } else if (tp == 2) {\n            int v;\n   \
-    \         lint x;\n            cin >> v >> x;\n\n            dc.apply_time_range(q,\
-    \ 1 << 30, -1 - int(qs.size()));\n            qs.emplace_back(v, x);\n       \
-    \ } else if (tp == 3) {\n            int v;\n            cin >> v;\n\n       \
-    \     dc.add_observation(q, ret.size());\n            get_query.push_back(v);\n\
-    \            ret.push_back(0);\n        }\n    }\n\n    for (auto p : edge_to_id_since)\
-    \ {\n        dc.apply_time_range(p.second.second, 1 << 30, p.second.first);\n\
-    \    }\n\n    undo_dsu<lint> dsu(a);\n\n    for (auto p : dc.generate()) {\n \
-    \       if (p.op == DyConOperation::Begins) {\n            if (p.id_ >= 0) {\n\
-    \                auto edge = edges.at(p.id_);\n                dsu.unite(edge.first,\
-    \ edge.second);\n            } else {\n                auto q = qs.at(-p.id_ -\
-    \ 1);\n                int v = q.first, x = q.second;\n                dsu.set_weight(v,\
-    \ dsu.sum(v) + x);\n            }\n        } else if (p.op == DyConOperation::Ends)\
-    \ {\n            dsu.undo();\n        } else if (p.op == DyConOperation::Event)\
-    \ {\n            int v = get_query.at(p.id_);\n            ret.at(p.id_) = dsu.sum(v);\n\
-    \        }\n    }\n\n    for (auto x : ret) cout << x << '\\n';\n}\n"
+    \        for (const auto &op : ops) {\n            int t = std::upper_bound(query_ts.begin(),\
+    \ query_ts.end(), op.first) - query_ts.begin();\n            nodes.at(t + D -\
+    \ 1).push_back(Procedure{DyConOperation::Event, op.second});\n        }\n    \
+    \    ret_.clear();\n        rec(1);\n        return ret_;\n    }\n};\n#line 4\
+    \ \"data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp\"\n\n\
+    #include <iostream>\n#include <map>\n#line 8 \"data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp\"\
+    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, Q;\n    cin >> N >> Q;\n\n    using lint = long long;\n    vector<lint>\
+    \ a(N);\n    for (auto &x : a) cin >> x;\n\n    vector<pair<int, int>> edges;\n\
+    \    map<pair<int, int>, pair<int, int>> edge_to_id_since;\n\n    offline_dynamic_connectivity<std::pair<int,\
+    \ int>> dc; // for verification\n\n    vector<pair<int, lint>> qs;\n\n    vector<int>\
+    \ get_query;\n    vector<lint> ret;\n    for (int q = 0; q < Q; ++q) {\n     \
+    \   int tp;\n        cin >> tp;\n        if (tp <= 1) {\n            int u, v;\n\
+    \            cin >> u >> v;\n            if (u > v) swap(u, v);\n\n          \
+    \  if (tp == 0) {\n                edge_to_id_since[make_pair(u, v)] = make_pair(edges.size(),\
+    \ q);\n                edges.emplace_back(u, v);\n            } else {\n     \
+    \           int id_, since;\n                tie(id_, since) = edge_to_id_since[make_pair(u,\
+    \ v)];\n                dc.apply_time_range({since, 0}, {q, 0}, id_);\n      \
+    \          edge_to_id_since.erase(make_pair(u, v));\n            }\n        }\
+    \ else if (tp == 2) {\n            int v;\n            lint x;\n            cin\
+    \ >> v >> x;\n\n            dc.apply_time_range({q, 0}, {1 << 30, 0}, -1 - int(qs.size()));\n\
+    \            qs.emplace_back(v, x);\n        } else if (tp == 3) {\n         \
+    \   int v;\n            cin >> v;\n\n            dc.add_observation({q, 0}, ret.size());\n\
+    \            get_query.push_back(v);\n            ret.push_back(0);\n        }\n\
+    \    }\n\n    for (auto p : edge_to_id_since) {\n        dc.apply_time_range({p.second.second,\
+    \ 0}, {1 << 30, 0}, p.second.first);\n    }\n\n    undo_dsu<lint> dsu(a);\n\n\
+    \    for (auto p : dc.generate()) {\n        if (p.op == DyConOperation::Begins)\
+    \ {\n            if (p.id_ >= 0) {\n                auto edge = edges.at(p.id_);\n\
+    \                dsu.unite(edge.first, edge.second);\n            } else {\n \
+    \               auto q = qs.at(-p.id_ - 1);\n                int v = q.first,\
+    \ x = q.second;\n                dsu.set_weight(v, dsu.sum(v) + x);\n        \
+    \    }\n        } else if (p.op == DyConOperation::Ends) {\n            dsu.undo();\n\
+    \        } else if (p.op == DyConOperation::Event) {\n            int v = get_query.at(p.id_);\n\
+    \            ret.at(p.id_) = dsu.sum(v);\n        }\n    }\n\n    for (auto x\
+    \ : ret) cout << x << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
     \n#include \"../../unionfind/undo_monoid_unionfind.hpp\"\n#include \"../offline_dynamic_connectivity.hpp\"\
-    \n\n#include <iostream>\n#include <map>\nusing namespace std;\n\nint main() {\n\
-    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, Q;\n    cin >>\
-    \ N >> Q;\n\n    using lint = long long;\n    vector<lint> a(N);\n    for (auto\
-    \ &x : a) cin >> x;\n\n    vector<pair<int, int>> edges;\n    map<pair<int, int>,\
-    \ pair<int, int>> edge_to_id_since;\n\n    offline_dynamic_connectivity<int> dc;\n\
-    \n    vector<pair<int, lint>> qs;\n\n    vector<int> get_query;\n    vector<lint>\
-    \ ret;\n    for (int q = 0; q < Q; ++q) {\n        int tp;\n        cin >> tp;\n\
-    \        if (tp <= 1) {\n            int u, v;\n            cin >> u >> v;\n \
-    \           if (u > v) swap(u, v);\n\n            if (tp == 0) {\n           \
-    \     edge_to_id_since[make_pair(u, v)] = make_pair(edges.size(), q);\n      \
-    \          edges.emplace_back(u, v);\n            } else {\n                int\
-    \ id_, since;\n                tie(id_, since) = edge_to_id_since[make_pair(u,\
-    \ v)];\n                dc.apply_time_range(since, q, id_);\n                edge_to_id_since.erase(make_pair(u,\
-    \ v));\n            }\n        } else if (tp == 2) {\n            int v;\n   \
-    \         lint x;\n            cin >> v >> x;\n\n            dc.apply_time_range(q,\
-    \ 1 << 30, -1 - int(qs.size()));\n            qs.emplace_back(v, x);\n       \
-    \ } else if (tp == 3) {\n            int v;\n            cin >> v;\n\n       \
-    \     dc.add_observation(q, ret.size());\n            get_query.push_back(v);\n\
-    \            ret.push_back(0);\n        }\n    }\n\n    for (auto p : edge_to_id_since)\
-    \ {\n        dc.apply_time_range(p.second.second, 1 << 30, p.second.first);\n\
-    \    }\n\n    undo_dsu<lint> dsu(a);\n\n    for (auto p : dc.generate()) {\n \
-    \       if (p.op == DyConOperation::Begins) {\n            if (p.id_ >= 0) {\n\
-    \                auto edge = edges.at(p.id_);\n                dsu.unite(edge.first,\
-    \ edge.second);\n            } else {\n                auto q = qs.at(-p.id_ -\
-    \ 1);\n                int v = q.first, x = q.second;\n                dsu.set_weight(v,\
-    \ dsu.sum(v) + x);\n            }\n        } else if (p.op == DyConOperation::Ends)\
-    \ {\n            dsu.undo();\n        } else if (p.op == DyConOperation::Event)\
-    \ {\n            int v = get_query.at(p.id_);\n            ret.at(p.id_) = dsu.sum(v);\n\
-    \        }\n    }\n\n    for (auto x : ret) cout << x << '\\n';\n}\n"
+    \n\n#include <iostream>\n#include <map>\n#include <utility>\nusing namespace std;\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N,\
+    \ Q;\n    cin >> N >> Q;\n\n    using lint = long long;\n    vector<lint> a(N);\n\
+    \    for (auto &x : a) cin >> x;\n\n    vector<pair<int, int>> edges;\n    map<pair<int,\
+    \ int>, pair<int, int>> edge_to_id_since;\n\n    offline_dynamic_connectivity<std::pair<int,\
+    \ int>> dc; // for verification\n\n    vector<pair<int, lint>> qs;\n\n    vector<int>\
+    \ get_query;\n    vector<lint> ret;\n    for (int q = 0; q < Q; ++q) {\n     \
+    \   int tp;\n        cin >> tp;\n        if (tp <= 1) {\n            int u, v;\n\
+    \            cin >> u >> v;\n            if (u > v) swap(u, v);\n\n          \
+    \  if (tp == 0) {\n                edge_to_id_since[make_pair(u, v)] = make_pair(edges.size(),\
+    \ q);\n                edges.emplace_back(u, v);\n            } else {\n     \
+    \           int id_, since;\n                tie(id_, since) = edge_to_id_since[make_pair(u,\
+    \ v)];\n                dc.apply_time_range({since, 0}, {q, 0}, id_);\n      \
+    \          edge_to_id_since.erase(make_pair(u, v));\n            }\n        }\
+    \ else if (tp == 2) {\n            int v;\n            lint x;\n            cin\
+    \ >> v >> x;\n\n            dc.apply_time_range({q, 0}, {1 << 30, 0}, -1 - int(qs.size()));\n\
+    \            qs.emplace_back(v, x);\n        } else if (tp == 3) {\n         \
+    \   int v;\n            cin >> v;\n\n            dc.add_observation({q, 0}, ret.size());\n\
+    \            get_query.push_back(v);\n            ret.push_back(0);\n        }\n\
+    \    }\n\n    for (auto p : edge_to_id_since) {\n        dc.apply_time_range({p.second.second,\
+    \ 0}, {1 << 30, 0}, p.second.first);\n    }\n\n    undo_dsu<lint> dsu(a);\n\n\
+    \    for (auto p : dc.generate()) {\n        if (p.op == DyConOperation::Begins)\
+    \ {\n            if (p.id_ >= 0) {\n                auto edge = edges.at(p.id_);\n\
+    \                dsu.unite(edge.first, edge.second);\n            } else {\n \
+    \               auto q = qs.at(-p.id_ - 1);\n                int v = q.first,\
+    \ x = q.second;\n                dsu.set_weight(v, dsu.sum(v) + x);\n        \
+    \    }\n        } else if (p.op == DyConOperation::Ends) {\n            dsu.undo();\n\
+    \        } else if (p.op == DyConOperation::Event) {\n            int v = get_query.at(p.id_);\n\
+    \            ret.at(p.id_) = dsu.sum(v);\n        }\n    }\n\n    for (auto x\
+    \ : ret) cout << x << '\\n';\n}\n"
   dependsOn:
   - unionfind/undo_monoid_unionfind.hpp
   - data_structure/offline_dynamic_connectivity.hpp
   isVerificationFile: true
   path: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-10-11 22:40:37+09:00'
+  timestamp: '2023-05-13 23:16:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp

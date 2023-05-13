@@ -371,10 +371,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/multipoint_evaluation.test.cpp
-  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-  - formal_power_series/test/stirling_number_of_1st.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+  - formal_power_series/test/stirling_number_of_1st.test.cpp
 documentation_of: formal_power_series/formal_power_series.hpp
 layout: document
 redirect_from:

@@ -172,8 +172,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/biconnected_components.test.cpp
-  - graph/test/two-edge-connected-components.test.cpp
   - graph/test/articulation_points.test.cpp
+  - graph/test/two-edge-connected-components.test.cpp
   - graph/test/bridge.test.cpp
 documentation_of: graph/lowlink.hpp
 layout: document
