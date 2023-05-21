@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/min_max_semiring.hpp
     title: "Min-max semiring\uFF08(min, max) \u534A\u74B0\uFF09"
   _extendedRequiredBy: []

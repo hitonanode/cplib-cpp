@@ -238,7 +238,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -380,10 +380,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: linear_algebra_matrix/matrix.hpp
       title: linear_algebra_matrix/matrix.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
   - name: multithread
@@ -400,7 +400,7 @@ data:
       path: number/arithmetic_cumsum.hpp
       title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\
         \u6570\u306E\u7D2F\u7A4D\u548C\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/bare_mod_algebra.hpp
       title: number/bare_mod_algebra.hpp
     - icon: ':warning:'
@@ -425,7 +425,7 @@ data:
     - icon: ':warning:'
       path: number/discrete_logarithm.hpp
       title: number/discrete_logarithm.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/dual_number.hpp
       title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
     - icon: ':warning:'
@@ -442,10 +442,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/factorize.hpp
       title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/min_max_semiring.hpp
       title: "Min-max semiring\uFF08(min, max) \u534A\u74B0\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/min_plus_semiring.hpp
       title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\
         \u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF09"
@@ -453,7 +453,7 @@ data:
       path: number/modint_mersenne61.hpp
       title: "$\\mathbb{F}_{2^{61} - 1}$ \uFF08\u30CF\u30C3\u30B7\u30E5\u7528\u30E1\
         \u30EB\u30BB\u30F3\u30CC\u7D20\u6570 modint\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
@@ -738,7 +738,7 @@ data:
     - icon: ':warning:'
       path: unionfind/undo_unionfind.hpp
       title: "UnionFind with Undo operation \uFF08Undo \u53EF\u80FD UnionFind\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: unionfind/unionfind.hpp
       title: unionfind/unionfind.hpp
     - icon: ':heavy_check_mark:'
@@ -794,7 +794,7 @@ data:
     - icon: ':warning:'
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: utilities/reader.hpp
       title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
     - icon: ':warning:'
@@ -1258,28 +1258,28 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
       title: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
       title: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
       title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/matrix_product.test.cpp
       title: linear_algebra_matrix/test/matrix_product.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
       title: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - name: number/test

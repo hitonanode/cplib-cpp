@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: utilities/reader.hpp
     title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/matrix_product
@@ -199,9 +199,9 @@ data:
     \ *= get(i, i);\n        return ret;\n    }\n    int inverse() {\n        assert(H\
     \ == W);\n        std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n\
     \        int rank = 0;\n        for (int i = 0; i < H; i++) {\n            int\
-    \ ti = i;\n            while (ti < H and tmp[ti][i] == 0) ti++;\n            if\
-    \ (ti == H) {\n                continue;\n            } else {\n             \
-    \   rank++;\n            }\n            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);\n\
+    \ ti = i;\n            while (ti < H and tmp[ti][i] == T()) ti++;\n          \
+    \  if (ti == H) {\n                continue;\n            } else {\n         \
+    \       rank++;\n            }\n            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);\n\
     \            T inv = _T_id<T>() / tmp[i][i];\n            for (int j = 0; j <\
     \ W; j++) ret[i][j] *= inv;\n            for (int j = i + 1; j < W; j++) tmp[i][j]\
     \ *= inv;\n            for (int h = 0; h < H; h++) {\n                if (i ==\
@@ -221,10 +221,10 @@ data:
     \ &v) const { return v * (*this); }\n    template <class OStream> friend OStream\
     \ &operator<<(OStream &os, const matrix &x) {\n        os << \"[(\" << x.H <<\
     \ \" * \" << x.W << \" matrix)\";\n        os << \"\\n[column sums: \";\n    \
-    \    for (int j = 0; j < x.W; j++) {\n            T s = 0;\n            for (int\
-    \ i = 0; i < x.H; i++) s += x.get(i, j);\n            os << s << \",\";\n    \
-    \    }\n        os << \"]\";\n        for (int i = 0; i < x.H; i++) {\n      \
-    \      os << \"\\n[\";\n            for (int j = 0; j < x.W; j++) os << x.get(i,\
+    \    for (int j = 0; j < x.W; j++) {\n            T s = T();\n            for\
+    \ (int i = 0; i < x.H; i++) s += x.get(i, j);\n            os << s << \",\";\n\
+    \        }\n        os << \"]\";\n        for (int i = 0; i < x.H; i++) {\n  \
+    \          os << \"\\n[\";\n            for (int j = 0; j < x.W; j++) os << x.get(i,\
     \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
     \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
     \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
@@ -248,8 +248,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/matrix_product.test.cpp
   requiredBy: []
-  timestamp: '2022-07-12 00:34:46+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-05-21 18:11:51+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/matrix_product.test.cpp
 layout: document

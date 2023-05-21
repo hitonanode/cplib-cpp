@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/factorize.hpp
     title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   - icon: ':heavy_check_mark:'

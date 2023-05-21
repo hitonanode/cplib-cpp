@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
     title: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
     title: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://yukicoder.me/problems/no/1340
@@ -69,7 +69,7 @@ data:
   path: number/min_plus_semiring.hpp
   requiredBy: []
   timestamp: '2022-01-25 23:19:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
   - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
