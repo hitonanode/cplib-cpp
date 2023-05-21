@@ -193,7 +193,7 @@ template <typename T> struct matrix {
         int rank = 0;
         for (int i = 0; i < H; i++) {
             int ti = i;
-            while (ti < H and tmp[ti][i] == 0) ti++;
+            while (ti < H and tmp[ti][i] == T()) ti++;
             if (ti == H) {
                 continue;
             } else {
@@ -235,7 +235,7 @@ template <typename T> struct matrix {
         os << "[(" << x.H << " * " << x.W << " matrix)";
         os << "\n[column sums: ";
         for (int j = 0; j < x.W; j++) {
-            T s = 0;
+            T s = T();
             for (int i = 0; i < x.H; i++) s += x.get(i, j);
             os << s << ",";
         }
