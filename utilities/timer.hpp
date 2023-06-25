@@ -1,8 +1,16 @@
 #pragma once
 #include <chrono>
 
-// CUT begin
-auto START = std::chrono::system_clock::now();
-int64_t spent_ms =
-    std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - START)
-        .count();
+class timer_ {
+    std::chrono::system_clock::time_point start_;
+
+public:
+    timer_() : start_(now()) {}
+
+    static std::chrono::system_clock::time_point now() { return std::chrono::system_clock::now(); }
+
+    int spent_ms() const {
+        auto diff = now() - start_;
+        return std::chrono::duration_cast<std::chrono::milliseconds>(diff).count();
+    }
+} timer;
