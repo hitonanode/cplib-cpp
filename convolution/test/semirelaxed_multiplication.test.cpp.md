@@ -9,7 +9,7 @@ data:
     title: "Semi-relaxed multiplication / semi-relaxed convolution \uFF08\u7247\u65B9\
       \u5148\u8AAD\u307F\u53EF\u80FD\u306A\u5834\u5408\u306E\u30AA\u30F3\u30E9\u30A4\
       \u30F3\u7573\u307F\u8FBC\u307F\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []

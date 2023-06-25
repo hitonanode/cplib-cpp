@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
     title: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
   - icon: ':heavy_check_mark:'
     path: number/test/min_max_semiring.test.cpp
     title: number/test/min_max_semiring.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"number/min_max_semiring.hpp\"\n#include <limits>\n\n// min-max\
@@ -54,10 +54,10 @@ data:
   path: number/min_max_semiring.hpp
   requiredBy: []
   timestamp: '2022-01-25 23:19:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
   - number/test/min_max_semiring.test.cpp
+  - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
 documentation_of: number/min_max_semiring.hpp
 layout: document
 title: "Min-max semiring\uFF08(min, max) \u534A\u74B0\uFF09"

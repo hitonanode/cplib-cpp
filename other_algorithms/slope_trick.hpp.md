@@ -118,8 +118,8 @@ data:
   timestamp: '2022-12-04 20:53:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
   - other_algorithms/test/slope_trick_stress.test.cpp
+  - other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
 documentation_of: other_algorithms/slope_trick.hpp
 layout: document
 title: "Slope trick \uFF08\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570\u306B\u95A2\u3059\

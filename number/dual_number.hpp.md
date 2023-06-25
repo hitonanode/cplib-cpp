@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
     title: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
     title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://atcoder.jp/contests/abc235/tasks/abc235_f
@@ -86,7 +86,7 @@ data:
   requiredBy:
   - linear_algebra_matrix/hessenberg_system.hpp
   timestamp: '2022-04-30 23:36:43+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp

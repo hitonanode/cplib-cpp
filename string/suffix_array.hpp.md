@@ -225,9 +225,9 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - string/test/run_enumerate_lyndon_rmq.test.cpp
   - string/test/sa_count_keyword.reader.test.cpp
   - string/test/sa_count_keyword.test.cpp
+  - string/test/run_enumerate_lyndon_rmq.test.cpp
 documentation_of: string/suffix_array.hpp
 layout: document
 redirect_from:

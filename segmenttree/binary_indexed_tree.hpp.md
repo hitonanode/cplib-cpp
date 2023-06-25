@@ -77,13 +77,13 @@ data:
   timestamp: '2021-11-06 11:36:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/vertex-add-subtree-sum.guni.test.cpp
   - data_structure/test/range_kth_smallest_offline.test.cpp
   - data_structure/test/rectangle_sum.test.cpp
-  - data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
   - data_structure/test/rectangle_add_rectangle_sum.test.cpp
-  - segmenttree/test/binary_indexed_tree.test.cpp
+  - data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
   - segmenttree/test/point-add-range-sum.test.cpp
+  - segmenttree/test/binary_indexed_tree.test.cpp
+  - tree/test/vertex-add-subtree-sum.guni.test.cpp
 documentation_of: segmenttree/binary_indexed_tree.hpp
 layout: document
 title: "Binary indexed tree / Fenwick tree \uFF08BIT\u30FB\u30D5\u30A7\u30CB\u30C3\

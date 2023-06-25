@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/min_plus_semiring.hpp
     title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\
       \u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF09"

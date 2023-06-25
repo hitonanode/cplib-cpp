@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/hessenberg_reduction.hpp
     title: Hessenberg reduction of matrix
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/system_of_linear_equations.hpp
     title: linear_algebra_matrix/system_of_linear_equations.hpp
   _extendedVerifiedWith:
@@ -60,33 +60,33 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
     title: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_pow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
     title: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
     title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_product.test.cpp
     title: linear_algebra_matrix/test/matrix_product.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
     title: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n\
@@ -331,35 +331,35 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/matrix.hpp
   requiredBy:
-  - linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
-  - linear_algebra_matrix/characteristic_poly.hpp
-  - linear_algebra_matrix/hessenberg_reduction.hpp
-  - linear_algebra_matrix/circular_binary_expansion.hpp
-  - linear_algebra_matrix/system_of_linear_equations.hpp
   - combinatorial_opt/linear_matroid_parity.hpp
   - graph/general_matching.hpp
+  - linear_algebra_matrix/characteristic_poly.hpp
+  - linear_algebra_matrix/system_of_linear_equations.hpp
+  - linear_algebra_matrix/circular_binary_expansion.hpp
+  - linear_algebra_matrix/hessenberg_reduction.hpp
+  - linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
   timestamp: '2023-05-21 18:11:51+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
-  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
-  - linear_algebra_matrix/test/inverse_matrix.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
-  - linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
-  - linear_algebra_matrix/test/matrix_product.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
-  - linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
-  - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
-  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
-  - linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp
-  - linear_algebra_matrix/test/characteristic_poly.test.cpp
-  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
   - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - graph/test/general_matching.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
+  - linear_algebra_matrix/test/characteristic_poly.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+  - linear_algebra_matrix/test/inverse_matrix.test.cpp
+  - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
+  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+  - linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp
+  - linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
+  - linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
+  - linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
+  - linear_algebra_matrix/test/matrix_product.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
 documentation_of: linear_algebra_matrix/matrix.hpp
 layout: document
 redirect_from:

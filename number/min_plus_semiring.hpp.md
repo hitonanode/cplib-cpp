@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
     title: linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
     title: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://yukicoder.me/problems/no/1340
@@ -69,10 +69,10 @@ data:
   path: number/min_plus_semiring.hpp
   requiredBy: []
   timestamp: '2022-01-25 23:19:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
   - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
+  - linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
 documentation_of: number/min_plus_semiring.hpp
 layout: document
 title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\u30C8\

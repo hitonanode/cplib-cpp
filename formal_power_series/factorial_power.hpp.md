@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -218,8 +218,8 @@ data:
   timestamp: '2022-07-12 00:34:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/shift_of_sampling_points.test.cpp
   - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - formal_power_series/test/shift_of_sampling_points.test.cpp
 documentation_of: formal_power_series/factorial_power.hpp
 layout: document
 title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\u7B97\

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/dual_number.hpp
     title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
   _extendedRequiredBy: []

@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
     title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - icon: ':heavy_check_mark:'
@@ -40,9 +40,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/bare_mod_algebra.hpp\"\n#include <algorithm>\n#include\
@@ -138,21 +138,21 @@ data:
   isVerificationFile: false
   path: number/bare_mod_algebra.hpp
   requiredBy:
-  - linear_algebra_matrix/linalg_longlong.hpp
-  - number/combination.hpp
   - number/primitive_root.hpp
+  - number/combination.hpp
+  - linear_algebra_matrix/linalg_longlong.hpp
   timestamp: '2022-11-15 00:34:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - number/test/combination.test.cpp
+  - number/test/primitive_root_1e18.test.cpp
+  - number/test/combination.stress.test.cpp
+  - number/test/primitive_root.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
   - linear_algebra_matrix/test/linalg_longlong.test.cpp
   - linear_algebra_matrix/test/linalg_ll_det.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-  - number/test/primitive_root_1e18.test.cpp
-  - number/test/combination.stress.test.cpp
-  - number/test/combination.test.cpp
-  - number/test/primitive_root.test.cpp
+  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
 documentation_of: number/bare_mod_algebra.hpp
 layout: document
 redirect_from:

@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/min_max_semiring.hpp
     title: "Min-max semiring\uFF08(min, max) \u534A\u74B0\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/min_plus_semiring.hpp
     title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\
       \u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1340
@@ -216,7 +216,7 @@ data:
   path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
   requiredBy: []
   timestamp: '2023-05-21 18:11:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
 layout: document

@@ -8,17 +8,22 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"utilities/timer.hpp\"\n#include <chrono>\n\n// CUT begin\n\
-    auto START = std::chrono::system_clock::now();\nint64_t spent_ms =\n    std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()\
-    \ - START)\n        .count();\n"
-  code: "#pragma once\n#include <chrono>\n\n// CUT begin\nauto START = std::chrono::system_clock::now();\n\
-    int64_t spent_ms =\n    std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()\
-    \ - START)\n        .count();\n"
+  bundledCode: "#line 2 \"utilities/timer.hpp\"\n#include <chrono>\n\nclass timer_\
+    \ {\n    std::chrono::system_clock::time_point start_;\n\npublic:\n    timer_()\
+    \ : start_(now()) {}\n\n    static std::chrono::system_clock::time_point now()\
+    \ { return std::chrono::system_clock::now(); }\n\n    int spent_ms() const {\n\
+    \        auto diff = now() - start_;\n        return std::chrono::duration_cast<std::chrono::milliseconds>(diff).count();\n\
+    \    }\n} timer;\n"
+  code: "#pragma once\n#include <chrono>\n\nclass timer_ {\n    std::chrono::system_clock::time_point\
+    \ start_;\n\npublic:\n    timer_() : start_(now()) {}\n\n    static std::chrono::system_clock::time_point\
+    \ now() { return std::chrono::system_clock::now(); }\n\n    int spent_ms() const\
+    \ {\n        auto diff = now() - start_;\n        return std::chrono::duration_cast<std::chrono::milliseconds>(diff).count();\n\
+    \    }\n} timer;\n"
   dependsOn: []
   isVerificationFile: false
   path: utilities/timer.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2023-06-26 00:35:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: utilities/timer.hpp
