@@ -273,9 +273,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - flow/test/assignment_problem.test.cpp
+  - flow/test/mincostflow.test.cpp
   - flow/test/mincostflow.yuki1324.test.cpp
   - flow/test/mincostflow.yuki1288.test.cpp
-  - flow/test/mincostflow.test.cpp
 documentation_of: flow/mincostflow_nonegativeloop.hpp
 layout: document
 title: "Minimum cost flow without negative cycle \uFF08\u8CA0\u8FBA\u30EB\u30FC\u30D7\

@@ -324,12 +324,12 @@ data:
     - icon: ':warning:'
       path: graph/segment_edge_shortest_path.hpp
       title: graph/segment_edge_shortest_path.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/shortest_cycle.hpp
+      title: graph/shortest_cycle.hpp
     - icon: ':warning:'
       path: graph/shortest_cycle01.hpp
       title: graph/shortest_cycle01.hpp
-    - icon: ':heavy_check_mark:'
-      path: graph/shortest_cycle_weighted.hpp
-      title: graph/shortest_cycle_weighted.hpp
     - icon: ':heavy_check_mark:'
       path: graph/shortest_path.hpp
       title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"

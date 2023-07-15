@@ -215,8 +215,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/countandsumlessthan.test.cpp
-  - segmenttree/test/rmq_nonrecursive.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
+  - segmenttree/test/rmq_nonrecursive.test.cpp
   - tree/test/vertex-add-subtree-sum.test.cpp
   - tree/test/vertex-set-path-composite.test.cpp
   - tree/test/vertex-add-path-sum.test.cpp

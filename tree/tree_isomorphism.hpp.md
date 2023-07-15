@@ -100,8 +100,8 @@ data:
   timestamp: '2022-05-01 16:11:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/tree_isomorphism.aoj1613.test.cpp
   - tree/test/subtree_isomorphism.lc.test.cpp
+  - tree/test/tree_isomorphism.aoj1613.test.cpp
 documentation_of: tree/tree_isomorphism.hpp
 layout: document
 title: "Tree isomrphism \uFF08\u6728\u306E\u540C\u578B\u5224\u5B9A\uFF09"
