@@ -1,7 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1320"
 
-#include "../shortest_cycle_weighted.hpp"
-#include "../shortest_path.hpp"
+#include "../shortest_cycle.hpp"
 
 #include <iostream>
 #include <vector>
@@ -15,34 +14,30 @@ int main() {
 
     if (T == 1) {
         // Directed graph
-        vector<vector<pair<int, int>>> to(N);
-        while (M--) {
-            int u, v, w;
-            cin >> u >> v >> w;
-            u--, v--;
-            to[u].emplace_back(v, w);
-        }
-        for (int s = 0; s < N; s++) {
-            shortest_path<long long, INF> graph(N + 1);
-            for (int i = 0; i < N; i++) {
-                for (auto [j, w] : to[i]) {
-                    graph.add_edge(i, j, w);
-                    if (j == s) graph.add_edge(i, N, w);
-                }
-            }
-            graph.solve(s);
-            ret = min(ret, graph.dist[N]);
-        }
-    } else {
-        // Undirected graph
-        ShortestCycleOfUndirectedWeighted<long long, INF> graph(N);
+        shortest_cycle<true, long long> graph(N);
         while (M--) {
             int u, v, w;
             cin >> u >> v >> w;
             u--, v--;
             graph.add_edge(u, v, w);
         }
-        for (int i = 0; i < N; i++) ret = min(ret, graph.Solve(i).first);
+        for (int s = 0; s < N; s++) {
+            auto len = graph.Solve(s).first;
+            if (len >= 0) ret = min(ret, len);
+        }
+    } else {
+        // Undirected graph
+        shortest_cycle<false, long long> graph(N);
+        while (M--) {
+            int u, v, w;
+            cin >> u >> v >> w;
+            u--, v--;
+            graph.add_bi_edge(u, v, w);
+        }
+        for (int i = 0; i < N; i++) {
+            auto len = graph.Solve(i).first;
+            if (len >= 0) ret = min(ret, len);
+        }
     }
     cout << (ret < INF ? ret : -1) << '\n';
 }
