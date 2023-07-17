@@ -14,10 +14,10 @@ $M\_{1} = (E, \mathcal{I}\_{1}), M_{2} = (E, \mathcal{I}\_{2})$ が与えられ�
 
 ```cpp
 UserDefinedMatroid m1, m2;
-vector<int> weights(M);
+vector<int> weights(n);
 
-assert(m1.size() == M);
-assert(m2.size() == M);
+assert(m1.size() == n);
+assert(m2.size() == n);
 
 std::vector<bool> maxindepset = MatroidIntersection(m1, m2, weights);
 ```
@@ -27,7 +27,7 @@ std::vector<bool> maxindepset = MatroidIntersection(m1, m2, weights);
 - [Hello 2020 G. Seollal - Codeforces](https://codeforces.com/contest/1284/problem/G) グラフマトロイドと分割マトロイドの交差に帰着される．
 - [Deltix Round, Summer 2021 H. DIY Tree - Codeforces](https://codeforces.com/contest/1556/problem/H) 少数の頂点に次数制約がついた最小全域木問題．グラフマトロイドと分割マトロイドの最小重み共通独立集合問題に帰着される．
 - [2019 Petrozavodsk Winter Camp, Yandex Cup D. Pick Your Own Nim - Codeforces](https://codeforces.com/gym/102156/problem/D) 二値マトロイドと分割マトロイドの交差．
-- [2128 - Demonstration of Honesty! - URI Online Judge](https://www.urionlinejudge.com.br/judge/en/problems/view/2128) 各辺に色がついている無向グラフで，同色の辺は一度しか使えない全域木構築判定問題．グラフマトロイドと分割マトロイドの交差．このライブラリでは TL が厳しいが，独立性を満たす範囲で乱択のアプローチ等によりある程度 $I$ に要素を追加した状態から増加路アルゴリズムを回すことで定数倍高速化し TL に間に合わせられる．
+- [2128 - Demonstration of Honesty! - URI Online Judge / beecrowd](https://www.beecrowd.com.br/judge/en/problems/view/2128) 各辺に色がついている無向グラフで，同色の辺は一度しか使えない全域木構築判定問題．グラフマトロイドと分割マトロイドの交差． `MatroidIntersection()` 関数では，重みなしの場合のみ前処理として独立性を満たす範囲で簡易的な評価で $I$ に各要素を追加している．これにより増加路探索の回数が削減されることで定数倍が大きく改善し，本ライブラリをそのまま貼るだけで TL に間に合う．
 - [CodeChef October Challenge 2019: Faulty System](https://www.codechef.com/problems/CNNCT2) グラフマトロイドとグラフマトロイドの交差．
 - [Rainbow Graph – Kattis, NAIPC 2018](https://naipc18.kattis.com/problems/rainbowgraph)
 - [Google Code Jam 2019 Round 3 Datacenter Duplex](https://codingcompetitions.withgoogle.com/codejam/round/0000000000051707/0000000000158f1c)
