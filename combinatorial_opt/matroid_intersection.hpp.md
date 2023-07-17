@@ -163,51 +163,72 @@ data:
     \ head[i + 1]; ++e) {\n                ss << i << \"->\" << tos[e].first << \"\
     [label=\" << tos[e].second << \"];\\n\";\n            }\n        }\n        ss\
     \ << \"}\\n\";\n        ss.close();\n        return;\n    }\n};\n#line 5 \"combinatorial_opt/matroid_intersection.hpp\"\
-    \n\n// (Min weight) matroid intersection solver\n// Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
-    // Complexity: O(CE^2 + E^3) (C : circuit query, non-weighted)\ntemplate <class\
-    \ M1, class M2, class T = int>\nstd::vector<bool> MatroidIntersection(M1 matroid1,\
-    \ M2 matroid2, std::vector<T> weights = {}) {\n    using State = std::vector<bool>;\n\
-    \    using Element = int;\n    assert(matroid1.size() == matroid2.size());\n \
-    \   const int M = matroid1.size();\n\n    for (auto &x : weights) x *= M + 1;\n\
-    \    if (weights.empty()) weights.assign(M, 0);\n\n    const Element gs = M, gt\
-    \ = M + 1;\n    State I(M);\n\n    while (true) {\n        shortest_path<T> sssp(M\
-    \ + 2);\n        matroid1.set(I);\n        matroid2.set(I);\n        for (int\
-    \ e = 0; e < M; e++) {\n            if (I[e]) continue;\n            auto c1 =\
-    \ matroid1.circuit(e), c2 = matroid2.circuit(e);\n            if (c1.empty())\
-    \ sssp.add_edge(e, gt, 0);\n            for (Element f : c1) {\n             \
-    \   if (f != e) sssp.add_edge(e, f, -weights[f] + 1);\n            }\n       \
-    \     if (c2.empty()) sssp.add_edge(gs, e, weights[e] + 1);\n            for (Element\
-    \ f : c2) {\n                if (f != e) sssp.add_edge(f, e, weights[e] + 1);\n\
-    \            }\n        }\n        sssp.solve(gs, gt);\n        auto aug_path\
-    \ = sssp.retrieve_path(gt);\n        if (aug_path.empty()) break;\n        for\
-    \ (auto e : aug_path) {\n            if (e != gs and e != gt) I[e] = !I[e];\n\
-    \        }\n    }\n    return I;\n}\n"
+    \n\n// Find augmenting path of matroid intersection.\n// m1, m2: matroids\n//\
+    \ I: independent set (will be updated if augmenting path is found)\n//\n// Return\
+    \ `true` iff augmenting path is found.\n// Complexity: O(Cn + n^2) (C: circuit\
+    \ query)\ntemplate <class Matroid1, class Matroid2, class T = int>\nbool matroid_intersection_augment(Matroid1\
+    \ &m1, Matroid2 &m2, std::vector<bool> &I,\n                                 \
+    \ const std::vector<T> &weights = {}) {\n    const int n = m1.size();\n    assert(m2.size()\
+    \ == n);\n    assert((int)I.size() == n);\n\n    auto weight = [&](int e) { return\
+    \ weights.empty() ? T() : weights.at(e) * (n + 1); };\n\n    const int gs = n,\
+    \ gt = n + 1;\n    shortest_path<T> sssp(n + 2);\n    m1.set(I);\n    m2.set(I);\n\
+    \    for (int e = 0; e < n; ++e) {\n        if (I.at(e)) continue;\n        auto\
+    \ c1 = m1.circuit(e), c2 = m2.circuit(e);\n        if (c1.empty()) sssp.add_edge(e,\
+    \ gt, T());\n        for (int f : c1) {\n            if (f != e) sssp.add_edge(e,\
+    \ f, -weight(f) + T(1));\n        }\n        if (c2.empty()) sssp.add_edge(gs,\
+    \ e, weight(e) + T(1));\n        for (int f : c2) {\n            if (f != e) sssp.add_edge(f,\
+    \ e, weight(e) + T(1));\n        }\n    }\n    sssp.solve(gs, gt);\n\n    if (auto\
+    \ aug_path = sssp.retrieve_path(gt); aug_path.empty()) {\n        return false;\n\
+    \    } else {\n        for (auto e : aug_path) {\n            if (e != gs and\
+    \ e != gt) I.at(e) = !I.at(e);\n        }\n        return true;\n    }\n}\n\n\
+    // (Min weight) matroid intersection solver\n// Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
+    // Complexity: O(Cn^2 + n^3) (C : circuit query, non-weighted)\ntemplate <class\
+    \ Matroid1, class Matroid2, class T = int>\nstd::vector<bool>\nMatroidIntersection(Matroid1\
+    \ matroid1, Matroid2 matroid2, std::vector<T> weights = {}) {\n    const int n\
+    \ = matroid1.size();\n    assert(matroid2.size() == n);\n    assert(weights.empty()\
+    \ or (int) weights.size() == n);\n\n    std::vector<bool> I(n);\n\n    if (weights.empty())\
+    \ {\n        matroid1.set(I);\n        matroid2.set(I);\n        for (int e =\
+    \ 0; e < n; ++e) {\n            if (matroid1.circuit(e).empty() and matroid2.circuit(e).empty())\
+    \ {\n                I.at(e) = true;\n                matroid1.set(I);\n     \
+    \           matroid2.set(I);\n            }\n        }\n    }\n\n    while (matroid_intersection_augment(matroid1,\
+    \ matroid2, I, weights)) {}\n    return I;\n}\n"
   code: "#pragma once\n#include \"../graph/shortest_path.hpp\"\n#include <cassert>\n\
-    #include <vector>\n\n// (Min weight) matroid intersection solver\n// Algorithm\
-    \ based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n// Complexity:\
-    \ O(CE^2 + E^3) (C : circuit query, non-weighted)\ntemplate <class M1, class M2,\
-    \ class T = int>\nstd::vector<bool> MatroidIntersection(M1 matroid1, M2 matroid2,\
-    \ std::vector<T> weights = {}) {\n    using State = std::vector<bool>;\n    using\
-    \ Element = int;\n    assert(matroid1.size() == matroid2.size());\n    const int\
-    \ M = matroid1.size();\n\n    for (auto &x : weights) x *= M + 1;\n    if (weights.empty())\
-    \ weights.assign(M, 0);\n\n    const Element gs = M, gt = M + 1;\n    State I(M);\n\
-    \n    while (true) {\n        shortest_path<T> sssp(M + 2);\n        matroid1.set(I);\n\
-    \        matroid2.set(I);\n        for (int e = 0; e < M; e++) {\n           \
-    \ if (I[e]) continue;\n            auto c1 = matroid1.circuit(e), c2 = matroid2.circuit(e);\n\
-    \            if (c1.empty()) sssp.add_edge(e, gt, 0);\n            for (Element\
-    \ f : c1) {\n                if (f != e) sssp.add_edge(e, f, -weights[f] + 1);\n\
-    \            }\n            if (c2.empty()) sssp.add_edge(gs, e, weights[e] +\
-    \ 1);\n            for (Element f : c2) {\n                if (f != e) sssp.add_edge(f,\
-    \ e, weights[e] + 1);\n            }\n        }\n        sssp.solve(gs, gt);\n\
-    \        auto aug_path = sssp.retrieve_path(gt);\n        if (aug_path.empty())\
-    \ break;\n        for (auto e : aug_path) {\n            if (e != gs and e !=\
-    \ gt) I[e] = !I[e];\n        }\n    }\n    return I;\n}\n"
+    #include <vector>\n\n// Find augmenting path of matroid intersection.\n// m1,\
+    \ m2: matroids\n// I: independent set (will be updated if augmenting path is found)\n\
+    //\n// Return `true` iff augmenting path is found.\n// Complexity: O(Cn + n^2)\
+    \ (C: circuit query)\ntemplate <class Matroid1, class Matroid2, class T = int>\n\
+    bool matroid_intersection_augment(Matroid1 &m1, Matroid2 &m2, std::vector<bool>\
+    \ &I,\n                                  const std::vector<T> &weights = {}) {\n\
+    \    const int n = m1.size();\n    assert(m2.size() == n);\n    assert((int)I.size()\
+    \ == n);\n\n    auto weight = [&](int e) { return weights.empty() ? T() : weights.at(e)\
+    \ * (n + 1); };\n\n    const int gs = n, gt = n + 1;\n    shortest_path<T> sssp(n\
+    \ + 2);\n    m1.set(I);\n    m2.set(I);\n    for (int e = 0; e < n; ++e) {\n \
+    \       if (I.at(e)) continue;\n        auto c1 = m1.circuit(e), c2 = m2.circuit(e);\n\
+    \        if (c1.empty()) sssp.add_edge(e, gt, T());\n        for (int f : c1)\
+    \ {\n            if (f != e) sssp.add_edge(e, f, -weight(f) + T(1));\n       \
+    \ }\n        if (c2.empty()) sssp.add_edge(gs, e, weight(e) + T(1));\n       \
+    \ for (int f : c2) {\n            if (f != e) sssp.add_edge(f, e, weight(e) +\
+    \ T(1));\n        }\n    }\n    sssp.solve(gs, gt);\n\n    if (auto aug_path =\
+    \ sssp.retrieve_path(gt); aug_path.empty()) {\n        return false;\n    } else\
+    \ {\n        for (auto e : aug_path) {\n            if (e != gs and e != gt) I.at(e)\
+    \ = !I.at(e);\n        }\n        return true;\n    }\n}\n\n// (Min weight) matroid\
+    \ intersection solver\n// Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
+    // Complexity: O(Cn^2 + n^3) (C : circuit query, non-weighted)\ntemplate <class\
+    \ Matroid1, class Matroid2, class T = int>\nstd::vector<bool>\nMatroidIntersection(Matroid1\
+    \ matroid1, Matroid2 matroid2, std::vector<T> weights = {}) {\n    const int n\
+    \ = matroid1.size();\n    assert(matroid2.size() == n);\n    assert(weights.empty()\
+    \ or (int) weights.size() == n);\n\n    std::vector<bool> I(n);\n\n    if (weights.empty())\
+    \ {\n        matroid1.set(I);\n        matroid2.set(I);\n        for (int e =\
+    \ 0; e < n; ++e) {\n            if (matroid1.circuit(e).empty() and matroid2.circuit(e).empty())\
+    \ {\n                I.at(e) = true;\n                matroid1.set(I);\n     \
+    \           matroid2.set(I);\n            }\n        }\n    }\n\n    while (matroid_intersection_augment(matroid1,\
+    \ matroid2, I, weights)) {}\n    return I;\n}\n"
   dependsOn:
   - graph/shortest_path.hpp
   isVerificationFile: false
   path: combinatorial_opt/matroid_intersection.hpp
   requiredBy: []
-  timestamp: '2022-05-01 15:28:23+09:00'
+  timestamp: '2023-07-17 13:05:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
@@ -229,10 +250,10 @@ $M\_{1} = (E, \mathcal{I}\_{1}), M_{2} = (E, \mathcal{I}\_{2})$ が与えられ�
 
 ```cpp
 UserDefinedMatroid m1, m2;
-vector<int> weights(M);
+vector<int> weights(n);
 
-assert(m1.size() == M);
-assert(m2.size() == M);
+assert(m1.size() == n);
+assert(m2.size() == n);
 
 std::vector<bool> maxindepset = MatroidIntersection(m1, m2, weights);
 ```
@@ -242,7 +263,7 @@ std::vector<bool> maxindepset = MatroidIntersection(m1, m2, weights);
 - [Hello 2020 G. Seollal - Codeforces](https://codeforces.com/contest/1284/problem/G) グラフマトロイドと分割マトロイドの交差に帰着される．
 - [Deltix Round, Summer 2021 H. DIY Tree - Codeforces](https://codeforces.com/contest/1556/problem/H) 少数の頂点に次数制約がついた最小全域木問題．グラフマトロイドと分割マトロイドの最小重み共通独立集合問題に帰着される．
 - [2019 Petrozavodsk Winter Camp, Yandex Cup D. Pick Your Own Nim - Codeforces](https://codeforces.com/gym/102156/problem/D) 二値マトロイドと分割マトロイドの交差．
-- [2128 - Demonstration of Honesty! - URI Online Judge](https://www.urionlinejudge.com.br/judge/en/problems/view/2128) 各辺に色がついている無向グラフで，同色の辺は一度しか使えない全域木構築判定問題．グラフマトロイドと分割マトロイドの交差．このライブラリでは TL が厳しいが，独立性を満たす範囲で乱択のアプローチ等によりある程度 $I$ に要素を追加した状態から増加路アルゴリズムを回すことで定数倍高速化し TL に間に合わせられる．
+- [2128 - Demonstration of Honesty! - URI Online Judge / beecrowd](https://www.beecrowd.com.br/judge/en/problems/view/2128) 各辺に色がついている無向グラフで，同色の辺は一度しか使えない全域木構築判定問題．グラフマトロイドと分割マトロイドの交差． `MatroidIntersection()` 関数では，重みなしの場合のみ前処理として独立性を満たす範囲で簡易的な評価で $I$ に各要素を追加している．これにより増加路探索の回数が削減されることで定数倍が大きく改善し，本ライブラリをそのまま貼るだけで TL に間に合う．
 - [CodeChef October Challenge 2019: Faulty System](https://www.codechef.com/problems/CNNCT2) グラフマトロイドとグラフマトロイドの交差．
 - [Rainbow Graph – Kattis, NAIPC 2018](https://naipc18.kattis.com/problems/rainbowgraph)
 - [Google Code Jam 2019 Round 3 Datacenter Duplex](https://codingcompetitions.withgoogle.com/codejam/round/0000000000051707/0000000000158f1c)
