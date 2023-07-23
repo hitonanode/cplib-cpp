@@ -38,8 +38,17 @@ data:
     \ == n + 2));\n\n    m1.set(I);\n    m2.set(I);\n\n    potential.resize(n + 2);\n\
     \n    auto l = [&](int e) -> T { return e < n ? (I.at(e) ? weight.at(e) : -weight.at(e))\
     \ : T(); };\n    auto edge_len = [&](int s, int t) -> T { return l(t) - potential.at(t)\
-    \ + potential.at(s); };\n\n    // Find minimum length (& minimum num. of vertices)\
-    \ gs-gt path\n    const int gs = n, gt = n + 1;\n    std::vector<std::vector<int>>\
+    \ + potential.at(s); };\n\n    if (true) { // \u81EA\u660E\u306A\u8FFD\u52A0\u304C\
+    \u53EF\u80FD\u304B\u30C1\u30A7\u30C3\u30AF\uFF08\u7701\u7565\u3057\u3066\u3082\
+    \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\u306F\u6B63\u5F53\uFF09\n        int max_elem\
+    \ = -1;\n        for (int e = 0; e < n; ++e) {\n            if (!I.at(e) and (max_elem\
+    \ < 0 or weight.at(max_elem) < weight.at(e))) max_elem = e;\n        }\n     \
+    \   if (max_elem < 0) return false;\n        for (int e = 0; e < n; ++e) {\n \
+    \           if (!I.at(e) and weight.at(e) == weight.at(max_elem) and m1.circuit(e).empty()\
+    \ and\n                m2.circuit(e).empty()) {\n                potential.at(e)\
+    \ -= l(e);\n                I.at(e) = true;\n                return true;\n  \
+    \          }\n        }\n    }\n\n    // Find minimum length (& minimum num. of\
+    \ vertices) gs-gt path\n    const int gs = n, gt = n + 1;\n    std::vector<std::vector<int>>\
     \ to(gt + 1);\n\n    bool has_gs_edge = false, has_gt_edge = false;\n\n    for\
     \ (int e = 0; e < n; ++e) {\n        if (I.at(e)) continue;\n\n        const auto\
     \ c1 = m1.circuit(e), c2 = m2.circuit(e);\n\n        if (c1.empty()) {\n     \
@@ -173,7 +182,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
   requiredBy: []
-  timestamp: '2023-07-23 18:26:21+09:00'
+  timestamp: '2023-07-23 18:47:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
