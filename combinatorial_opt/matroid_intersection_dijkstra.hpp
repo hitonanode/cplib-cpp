@@ -13,49 +13,28 @@ bool augment_matroid_intersection_dijkstra(
     Matroid2 &m2,                 // Matroid, size n, updated
     std::vector<bool> &I,         // Size k maximum weight intersection, size n, updated
     const std::vector<T> &weight, // Weights of elements, size n
-    std::vector<T> &potential     // Potential, size n, updated
+    std::vector<T> &potential     // Potential, size n + 2, updated
 ) {
     const int n = I.size();
 
     assert((int)m1.size() == n);
     assert((int)m2.size() == n);
     assert((int)weight.size() == n);
-    assert((int)potential.size() == n);
+    assert(potential.empty() or ((int)potential.size() == n) or ((int)potential.size() == n + 2));
 
     m1.set(I);
     m2.set(I);
 
-    {
-        int arghi = -1;
-        for (int e = 0; e < n; ++e) {
-            if (I.at(e)) continue;
-            if (arghi < 0 or weight.at(arghi) < weight.at(e)) arghi = e;
-        }
-        if (arghi < 0) return false;
-        if (m1.circuit(arghi).empty() and m2.circuit(arghi).empty()) {
-            I.at(arghi) = true;
-            return true;
-        }
-    }
+    potential.resize(n + 2);
 
     auto l = [&](int e) -> T { return e < n ? (I.at(e) ? weight.at(e) : -weight.at(e)) : T(); };
-    auto pot = [&](int e) -> T { return e < n ? potential.at(e) : T(); };
-    auto edge_len = [&](int s, int t) -> T { return l(t) - pot(t) + pot(s); };
+    auto edge_len = [&](int s, int t) -> T { return l(t) - potential.at(t) + potential.at(s); };
 
+    // Find minimum length (& minimum num. of vertices) gs-gt path
     const int gs = n, gt = n + 1;
-    std::vector<int> on_set;
-    for (int e = 0; e < n; ++e) {
-        if (I.at(e)) on_set.push_back(e);
-    }
+    std::vector<std::vector<int>> to(gt + 1);
 
-    // Find minimum weight (& minimum num. of vertices) gs-gt path
-    using Dist = std::pair<T, int>; // (sum of weights, num. of vertices)
-    std::vector<Dist> dp(gt + 1, {-1, -1});
-    std::vector<int> prv(gt + 1, -1); // prv[i] >= 0 => i is reachable (i != gs)
-
-    using Tpl = std::pair<Dist, int>;
-    std::priority_queue<Tpl, std::vector<Tpl>, std::greater<Tpl>> pq; // (dist, len, now)
-    std::vector<std::vector<int>> to(dp.size());
+    bool has_gs_edge = false, has_gt_edge = false;
 
     for (int e = 0; e < n; ++e) {
         if (I.at(e)) continue;
@@ -64,46 +43,108 @@ bool augment_matroid_intersection_dijkstra(
 
         if (c1.empty()) {
             to.at(e).push_back(gt);
-            for (int f : on_set) to.at(e).push_back(f);
+            if (!has_gt_edge) {
+                has_gt_edge = true;
+                potential.at(gt) = potential.at(e);
+            }
+            if (T el = edge_len(e, gt); el < T()) potential.at(gt) += el;
         }
         for (int f : c1) {
             if (f != e) to.at(e).push_back(f);
         }
 
         if (c2.empty()) {
-            dp.at(e) = Dist{edge_len(gs, e), 1};
-            prv.at(e) = gs;
-            pq.emplace(dp.at(e), e);
+            to.at(gs).push_back(e);
+            if (!has_gs_edge) {
+                has_gs_edge = true;
+                potential.at(gs) = potential.at(e) - l(e);
+            }
+            if (T el = edge_len(gs, e); el < T()) potential.at(gs) -= el;
         }
         for (int f : c2) {
             if (f != e) to.at(f).push_back(e);
         }
     }
 
+    if (const T e0 = potential.at(gs); e0 != T()) {
+        for (auto &p : potential) p -= e0;
+    }
+
+    if (!has_gs_edge or !has_gt_edge) return false;
+
+    std::vector<bool> potential_fixed(gt + 1);
+
+    T potential_add_unfixed_es = T();
+
+    auto fix_potential = [&](int e) -> void {
+        assert(!potential_fixed.at(e));
+        potential_fixed.at(e) = true;
+        potential.at(e) += potential_add_unfixed_es;
+    };
+
+    std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>, std::greater<>> pq;
+    std::vector<T> dijkstra(gt + 1);
+    std::vector<int> prv(gt + 1, -1);
+
+    pq.emplace(T(), gs);
+
     while (!pq.empty()) {
-        const auto [dnow, now] = pq.top();
+        const int e = pq.top().second;
         pq.pop();
-        if (prv.at(now) >= 0 and dp.at(now) < dnow) continue;
+        if (potential_fixed.at(e)) continue;
+        if (e != gs) potential_add_unfixed_es = edge_len(prv.at(e), e);
 
-        for (int nxt : to.at(now)) {
-            const auto w = edge_len(now, nxt);
-            // if (w < T() and now < n and nxt < n) assert(false); // for debug
+        std::vector<std::pair<int, int>> push_cands;
 
-            Dist dnxt(dnow.first + w, dnow.second + 1);
+        auto rec = [&](auto &&self, int cur) -> bool {
+            if (cur == gt) return true;
+            fix_potential(cur);
 
-            if (prv.at(nxt) < 0 or dnxt < dp.at(nxt)) {
-                dp.at(nxt) = dnxt;
-                prv.at(nxt) = now;
-                if (nxt != gt) pq.emplace(dnxt, nxt);
+            for (int nxt : to.at(cur)) {
+                if (potential_fixed.at(nxt)) continue;
+
+                const T len = edge_len(cur, nxt) - potential_add_unfixed_es;
+                // if (len < T()) std::cerr << cur << ' ' << nxt << ' ' << len << std::endl;
+                assert(len >= T());
+
+                if (len == T()) {
+                    prv.at(nxt) = cur;
+                    if (self(self, nxt)) return true;
+                } else {
+                    if (prv.at(nxt) == -1 or potential_add_unfixed_es + len < dijkstra.at(nxt)) {
+                        dijkstra.at(nxt) = potential_add_unfixed_es + len;
+                        prv.at(nxt) = cur;
+                        push_cands.emplace_back(nxt, cur);
+                    }
+                }
             }
+            return false;
+        };
+        if (rec(rec, e)) break;
+
+        for (auto [nxt, now] : push_cands) {
+            if (prv.at(nxt) == now) pq.emplace(dijkstra.at(nxt), nxt);
         }
+    }
+
+    for (int e = 0; e < gt + 1; ++e) {
+        if (!potential_fixed.at(e)) fix_potential(e);
     }
 
     if (prv.at(gt) < 0) return false;
 
-    for (int e = 0; e < n; ++e) {
-        auto [dist, len] = dp.at(e);
-        if (len >= 0) potential.at(e) += dist;
+    prv.assign(gt + 1, -1);
+    std::queue<int> q;
+    q.push(gs);
+
+    for (int now = q.front(); now != gt; now = q.front()) {
+        q.pop();
+        for (int nxt : to.at(now)) {
+            if (prv.at(nxt) == -1 and edge_len(now, nxt) == T()) {
+                prv.at(nxt) = now;
+                q.push(nxt);
+            }
+        }
     }
 
     for (int e = prv.at(gt); e != gs; e = prv.at(e)) {
