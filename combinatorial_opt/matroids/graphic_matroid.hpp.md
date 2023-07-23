@@ -9,6 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
+    title: combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
+    title: combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -85,6 +91,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
+  - combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
+  - combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
   - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
 documentation_of: combinatorial_opt/matroids/graphic_matroid.hpp
 layout: document
