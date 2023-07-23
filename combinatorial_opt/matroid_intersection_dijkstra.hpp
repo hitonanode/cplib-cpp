@@ -30,6 +30,22 @@ bool augment_matroid_intersection_dijkstra(
     auto l = [&](int e) -> T { return e < n ? (I.at(e) ? weight.at(e) : -weight.at(e)) : T(); };
     auto edge_len = [&](int s, int t) -> T { return l(t) - potential.at(t) + potential.at(s); };
 
+    if (true) { // 自明な追加が可能かチェック（省略してもアルゴリズムは正当）
+        int max_elem = -1;
+        for (int e = 0; e < n; ++e) {
+            if (!I.at(e) and (max_elem < 0 or weight.at(max_elem) < weight.at(e))) max_elem = e;
+        }
+        if (max_elem < 0) return false;
+        for (int e = 0; e < n; ++e) {
+            if (!I.at(e) and weight.at(e) == weight.at(max_elem) and m1.circuit(e).empty() and
+                m2.circuit(e).empty()) {
+                potential.at(e) -= l(e);
+                I.at(e) = true;
+                return true;
+            }
+        }
+    }
+
     // Find minimum length (& minimum num. of vertices) gs-gt path
     const int gs = n, gt = n + 1;
     std::vector<std::vector<int>> to(gt + 1);
