@@ -3,7 +3,7 @@
 #include <cassert>
 #include <vector>
 
-// Find augmenting path of matroid intersection.
+// Find minimum weight augmenting path of matroid intersection.
 // m1, m2: matroids
 // I: independent set (will be updated if augmenting path is found)
 //
@@ -46,7 +46,7 @@ bool matroid_intersection_augment(Matroid1 &m1, Matroid2 &m2, std::vector<bool> 
     }
 }
 
-// (Min weight) matroid intersection solver
+// Minimum weight matroid intersection solver
 // Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/
 // Complexity: O(Cn^2 + n^3) (C : circuit query, non-weighted)
 template <class Matroid1, class Matroid2, class T = int>
