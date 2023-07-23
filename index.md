@@ -474,6 +474,9 @@ data:
       title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   - name: other_algorithms
     pages:
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/binary_lifting.hpp
+      title: "Binary lifting / doubling \uFF08\u30C0\u30D6\u30EA\u30F3\u30B0\uFF09"
     - icon: ':warning:'
       path: other_algorithms/bounded_knapsack.hpp
       title: Bounded knapsack problem (Pisinger's algorithm)
@@ -1373,6 +1376,9 @@ data:
       title: number/test/zeta_moebius_transform.test.cpp
   - name: other_algorithms/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/binary_lifting.yuki1013.test.cpp
+      title: other_algorithms/test/binary_lifting.yuki1013.test.cpp
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
       title: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
