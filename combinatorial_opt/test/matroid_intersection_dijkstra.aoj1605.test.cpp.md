@@ -32,47 +32,62 @@ data:
     \                 // Matroid, size n, updated\n    std::vector<bool> &I,     \
     \    // Size k maximum weight intersection, size n, updated\n    const std::vector<T>\
     \ &weight, // Weights of elements, size n\n    std::vector<T> &potential     //\
-    \ Potential, size n, updated\n) {\n    const int n = I.size();\n\n    assert((int)m1.size()\
+    \ Potential, size n + 2, updated\n) {\n    const int n = I.size();\n\n    assert((int)m1.size()\
     \ == n);\n    assert((int)m2.size() == n);\n    assert((int)weight.size() == n);\n\
-    \    assert((int)potential.size() == n);\n\n    m1.set(I);\n    m2.set(I);\n\n\
-    \    {\n        int arghi = -1;\n        for (int e = 0; e < n; ++e) {\n     \
-    \       if (I.at(e)) continue;\n            if (arghi < 0 or weight.at(arghi)\
-    \ < weight.at(e)) arghi = e;\n        }\n        if (arghi < 0) return false;\n\
-    \        if (m1.circuit(arghi).empty() and m2.circuit(arghi).empty()) {\n    \
-    \        I.at(arghi) = true;\n            return true;\n        }\n    }\n\n \
-    \   auto l = [&](int e) -> T { return e < n ? (I.at(e) ? weight.at(e) : -weight.at(e))\
-    \ : T(); };\n    auto pot = [&](int e) -> T { return e < n ? potential.at(e) :\
-    \ T(); };\n    auto edge_len = [&](int s, int t) -> T { return l(t) - pot(t) +\
-    \ pot(s); };\n\n    const int gs = n, gt = n + 1;\n    std::vector<int> on_set;\n\
-    \    for (int e = 0; e < n; ++e) {\n        if (I.at(e)) on_set.push_back(e);\n\
-    \    }\n\n    // Find minimum weight (& minimum num. of vertices) gs-gt path\n\
-    \    using Dist = std::pair<T, int>; // (sum of weights, num. of vertices)\n \
-    \   std::vector<Dist> dp(gt + 1, {-1, -1});\n    std::vector<int> prv(gt + 1,\
-    \ -1); // prv[i] >= 0 => i is reachable (i != gs)\n\n    using Tpl = std::pair<Dist,\
-    \ int>;\n    std::priority_queue<Tpl, std::vector<Tpl>, std::greater<Tpl>> pq;\
-    \ // (dist, len, now)\n    std::vector<std::vector<int>> to(dp.size());\n\n  \
-    \  for (int e = 0; e < n; ++e) {\n        if (I.at(e)) continue;\n\n        const\
-    \ auto c1 = m1.circuit(e), c2 = m2.circuit(e);\n\n        if (c1.empty()) {\n\
-    \            to.at(e).push_back(gt);\n            for (int f : on_set) to.at(e).push_back(f);\n\
-    \        }\n        for (int f : c1) {\n            if (f != e) to.at(e).push_back(f);\n\
-    \        }\n\n        if (c2.empty()) {\n            dp.at(e) = Dist{edge_len(gs,\
-    \ e), 1};\n            prv.at(e) = gs;\n            pq.emplace(dp.at(e), e);\n\
-    \        }\n        for (int f : c2) {\n            if (f != e) to.at(f).push_back(e);\n\
-    \        }\n    }\n\n    while (!pq.empty()) {\n        const auto [dnow, now]\
-    \ = pq.top();\n        pq.pop();\n        if (prv.at(now) >= 0 and dp.at(now)\
-    \ < dnow) continue;\n\n        for (int nxt : to.at(now)) {\n            const\
-    \ auto w = edge_len(now, nxt);\n            // if (w < T() and now < n and nxt\
-    \ < n) assert(false); // for debug\n\n            Dist dnxt(dnow.first + w, dnow.second\
-    \ + 1);\n\n            if (prv.at(nxt) < 0 or dnxt < dp.at(nxt)) {\n         \
-    \       dp.at(nxt) = dnxt;\n                prv.at(nxt) = now;\n             \
-    \   if (nxt != gt) pq.emplace(dnxt, nxt);\n            }\n        }\n    }\n\n\
-    \    if (prv.at(gt) < 0) return false;\n\n    for (int e = 0; e < n; ++e) {\n\
-    \        auto [dist, len] = dp.at(e);\n        if (len >= 0) potential.at(e) +=\
-    \ dist;\n    }\n\n    for (int e = prv.at(gt); e != gs; e = prv.at(e)) {\n   \
-    \     potential.at(e) -= l(e);\n        I.at(e) = !I.at(e);\n    }\n\n    return\
-    \ true;\n}\n#line 3 \"combinatorial_opt/matroids/graphic_matroid.hpp\"\n#include\
-    \ <utility>\n#line 5 \"combinatorial_opt/matroids/graphic_matroid.hpp\"\n\n//\
-    \ GraphicMatroid: subgraph of undirected graphs, without loops\nclass GraphicMatroid\
+    \    assert(potential.empty() or ((int)potential.size() == n) or ((int)potential.size()\
+    \ == n + 2));\n\n    m1.set(I);\n    m2.set(I);\n\n    potential.resize(n + 2);\n\
+    \n    auto l = [&](int e) -> T { return e < n ? (I.at(e) ? weight.at(e) : -weight.at(e))\
+    \ : T(); };\n    auto edge_len = [&](int s, int t) -> T { return l(t) - potential.at(t)\
+    \ + potential.at(s); };\n\n    // Find minimum length (& minimum num. of vertices)\
+    \ gs-gt path\n    const int gs = n, gt = n + 1;\n    std::vector<std::vector<int>>\
+    \ to(gt + 1);\n\n    bool has_gs_edge = false, has_gt_edge = false;\n\n    for\
+    \ (int e = 0; e < n; ++e) {\n        if (I.at(e)) continue;\n\n        const auto\
+    \ c1 = m1.circuit(e), c2 = m2.circuit(e);\n\n        if (c1.empty()) {\n     \
+    \       to.at(e).push_back(gt);\n            if (!has_gt_edge) {\n           \
+    \     has_gt_edge = true;\n                potential.at(gt) = potential.at(e);\n\
+    \            }\n            if (T el = edge_len(e, gt); el < T()) potential.at(gt)\
+    \ += el;\n        }\n        for (int f : c1) {\n            if (f != e) to.at(e).push_back(f);\n\
+    \        }\n\n        if (c2.empty()) {\n            to.at(gs).push_back(e);\n\
+    \            if (!has_gs_edge) {\n                has_gs_edge = true;\n      \
+    \          potential.at(gs) = potential.at(e) - l(e);\n            }\n       \
+    \     if (T el = edge_len(gs, e); el < T()) potential.at(gs) -= el;\n        }\n\
+    \        for (int f : c2) {\n            if (f != e) to.at(f).push_back(e);\n\
+    \        }\n    }\n\n    if (const T e0 = potential.at(gs); e0 != T()) {\n   \
+    \     for (auto &p : potential) p -= e0;\n    }\n\n    if (!has_gs_edge or !has_gt_edge)\
+    \ return false;\n\n    std::vector<bool> potential_fixed(gt + 1);\n\n    T potential_add_unfixed_es\
+    \ = T();\n\n    auto fix_potential = [&](int e) -> void {\n        assert(!potential_fixed.at(e));\n\
+    \        potential_fixed.at(e) = true;\n        potential.at(e) += potential_add_unfixed_es;\n\
+    \    };\n\n    std::priority_queue<std::pair<T, int>, std::vector<std::pair<T,\
+    \ int>>, std::greater<>> pq;\n    std::vector<T> dijkstra(gt + 1);\n    std::vector<int>\
+    \ prv(gt + 1, -1);\n\n    pq.emplace(T(), gs);\n\n    while (!pq.empty()) {\n\
+    \        const int e = pq.top().second;\n        pq.pop();\n        if (potential_fixed.at(e))\
+    \ continue;\n        if (e != gs) potential_add_unfixed_es = edge_len(prv.at(e),\
+    \ e);\n\n        std::vector<std::pair<int, int>> push_cands;\n\n        auto\
+    \ rec = [&](auto &&self, int cur) -> bool {\n            if (cur == gt) return\
+    \ true;\n            fix_potential(cur);\n\n            for (int nxt : to.at(cur))\
+    \ {\n                if (potential_fixed.at(nxt)) continue;\n\n              \
+    \  const T len = edge_len(cur, nxt) - potential_add_unfixed_es;\n            \
+    \    // if (len < T()) std::cerr << cur << ' ' << nxt << ' ' << len << std::endl;\n\
+    \                assert(len >= T());\n\n                if (len == T()) {\n  \
+    \                  prv.at(nxt) = cur;\n                    if (self(self, nxt))\
+    \ return true;\n                } else {\n                    if (prv.at(nxt)\
+    \ == -1 or potential_add_unfixed_es + len < dijkstra.at(nxt)) {\n            \
+    \            dijkstra.at(nxt) = potential_add_unfixed_es + len;\n            \
+    \            prv.at(nxt) = cur;\n                        push_cands.emplace_back(nxt,\
+    \ cur);\n                    }\n                }\n            }\n           \
+    \ return false;\n        };\n        if (rec(rec, e)) break;\n\n        for (auto\
+    \ [nxt, now] : push_cands) {\n            if (prv.at(nxt) == now) pq.emplace(dijkstra.at(nxt),\
+    \ nxt);\n        }\n    }\n\n    for (int e = 0; e < gt + 1; ++e) {\n        if\
+    \ (!potential_fixed.at(e)) fix_potential(e);\n    }\n\n    if (prv.at(gt) < 0)\
+    \ return false;\n\n    prv.assign(gt + 1, -1);\n    std::queue<int> q;\n    q.push(gs);\n\
+    \n    for (int now = q.front(); now != gt; now = q.front()) {\n        q.pop();\n\
+    \        for (int nxt : to.at(now)) {\n            if (prv.at(nxt) == -1 and edge_len(now,\
+    \ nxt) == T()) {\n                prv.at(nxt) = now;\n                q.push(nxt);\n\
+    \            }\n        }\n    }\n\n    for (int e = prv.at(gt); e != gs; e =\
+    \ prv.at(e)) {\n        potential.at(e) -= l(e);\n        I.at(e) = !I.at(e);\n\
+    \    }\n\n    return true;\n}\n#line 3 \"combinatorial_opt/matroids/graphic_matroid.hpp\"\
+    \n#include <utility>\n#line 5 \"combinatorial_opt/matroids/graphic_matroid.hpp\"\
+    \n\n// GraphicMatroid: subgraph of undirected graphs, without loops\nclass GraphicMatroid\
     \ {\n    using Vertex = int;\n    using Element = int;\n    int M;\n    int V;\
     \ // # of vertices of graph\n    std::vector<std::vector<std::pair<Vertex, Element>>>\
     \ to;\n    std::vector<std::pair<Vertex, Vertex>> edges;\n    std::vector<Element>\
@@ -167,7 +182,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
   requiredBy: []
-  timestamp: '2023-07-23 15:18:37+09:00'
+  timestamp: '2023-07-23 18:26:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
