@@ -826,6 +826,9 @@ data:
     - icon: ':warning:'
       path: utilities/writer.hpp
       title: "\u6A19\u6E96\u51FA\u529B"
+    - icon: ':warning:'
+      path: utilities/xor_of_interval.hpp
+      title: XOR of interval
   verificationCategories:
   - name: combinatorial_opt/test
     pages:

@@ -118,9 +118,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/dulmage_mendelsohn.yuki1745.test.cpp
+  - graph/test/dulmage_mendelsohn.yuki1744.test.cpp
   - graph/test/bipartite_matching.test.cpp
   - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
-  - graph/test/dulmage_mendelsohn.yuki1744.test.cpp
 documentation_of: graph/bipartite_matching.hpp
 layout: document
 title: "Bipartite matching (Hopcroft\u2013Karp)"

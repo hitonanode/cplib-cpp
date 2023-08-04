@@ -53,13 +53,13 @@ data:
   isVerificationFile: false
   path: formal_power_series/lagrange_interpolation.hpp
   requiredBy:
-  - formal_power_series/sum_of_exponential_times_polynomial.hpp
   - number/arithmetic_cumsum.hpp
+  - formal_power_series/sum_of_exponential_times_polynomial.hpp
   timestamp: '2022-05-01 16:11:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - number/test/arithmetic_function_totient.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
 documentation_of: formal_power_series/lagrange_interpolation.hpp
 layout: document
 title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\u9593\

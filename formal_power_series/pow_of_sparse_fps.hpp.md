@@ -59,8 +59,8 @@ data:
   timestamp: '2022-05-29 00:37:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
   - formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
+  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
 documentation_of: formal_power_series/pow_of_sparse_fps.hpp
 layout: document
 title: "Power of sparse formal power series \uFF08\u975E\u96F6\u306A\u9805\u304C\u758E\
