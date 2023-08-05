@@ -14,12 +14,12 @@ jobs:
     - uses: actions/checkout@v3
 
     # https://apt.llvm.org/
-    - name: Install clang-format-14
+    - name: Install clang-format-16
       run: |
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
-        sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-14 main'
+        sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-16 main'
         sudo apt-get update
-        sudo apt-get install -y clang-format-14
+        sudo apt-get install -y clang-format-16
 
     - name: Check formatting
-      run: find ./ -name "*.hpp" -o -name "*.cpp" -not -iwholename ".verify-helper*" | xargs clang-format-14 --dry-run --Werror -style=file
+      run: find ./ -name "*.hpp" -o -name "*.cpp" -not -iwholename ".verify-helper*" | xargs clang-format-16 --dry-run --Werror -style=file
