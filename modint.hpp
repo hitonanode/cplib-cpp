@@ -86,9 +86,8 @@ template <int md> struct ModInt {
         return ans;
     }
 
+    static constexpr int cache_limit = std::min(md, 1 << 21);
     static std::vector<ModInt> facs, facinvs, invs;
-
-    static constexpr int cache_limit = std::min(md >> 1, 1 << 21);
 
     constexpr static void _precalculation(int N) {
         const int l0 = facs.size();
