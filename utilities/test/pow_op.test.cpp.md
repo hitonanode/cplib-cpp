@@ -2,97 +2,32 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: convolution/ntt.hpp
+    title: convolution/ntt.hpp
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: convolution/multivar_ntt.hpp
-    title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\u7573\
-      \u307F\u8FBC\u307F\uFF09"
+    path: number/modint_runtime.hpp
+    title: number/modint_runtime.hpp
   - icon: ':heavy_check_mark:'
-    path: convolution/relaxed_multiplication.hpp
-    title: "Relaxed multiplication / relaxed convolution \uFF08\u30AA\u30F3\u30E9\u30A4\
-      \u30F3\u7573\u307F\u8FBC\u307F\uFF09"
-  - icon: ':heavy_check_mark:'
-    path: convolution/semirelaxed_multiplication.hpp
-    title: "Semi-relaxed multiplication / semi-relaxed convolution \uFF08\u7247\u65B9\
-      \u5148\u8AAD\u307F\u53EF\u80FD\u306A\u5834\u5408\u306E\u30AA\u30F3\u30E9\u30A4\
-      \u30F3\u7573\u307F\u8FBC\u307F\uFF09"
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/coeff_of_rational_function.hpp
-    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
-      \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/factorial_power.hpp
-    title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\
-      \u7B97\uFF09"
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/polynomial_divmod.hpp
-    title: formal_power_series/polynomial_divmod.hpp
-  - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/blackbox_matrices.hpp
-    title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/convolution_on_tree.test.cpp
-    title: convolution/test/convolution_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/multivar_ntt.test.cpp
-    title: convolution/test/multivar_ntt.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/ntt.test.cpp
-    title: convolution/test/ntt.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/relaxed_multiplication.exp.test.cpp
-    title: convolution/test/relaxed_multiplication.exp.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/relaxed_multiplication.test.cpp
-    title: convolution/test/relaxed_multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: convolution/test/semirelaxed_multiplication.test.cpp
-    title: convolution/test/semirelaxed_multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-    title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/kitamasa.test.cpp
-    title: formal_power_series/test/kitamasa.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/polynomial_divmod.test.cpp
-    title: formal_power_series/test/polynomial_divmod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/shift_of_sampling_points.test.cpp
-    title: formal_power_series/test/shift_of_sampling_points.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-    title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-    title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: number/test/primitive_root.test.cpp
-    title: number/test/primitive_root.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-    title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-    title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: utilities/test/pow_op.test.cpp
-    title: utilities/test/pow_op.test.cpp
+    path: utilities/pow_op.hpp
+    title: Power (general monoid)
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include\
-    \ <vector>\n\ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n\
-    #define MDCONST constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long\
-    \ long;\n    MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://yukicoder.me/problems/no/2396
+    links:
+    - https://yukicoder.me/problems/no/2396
+  bundledCode: "#line 1 \"utilities/test/pow_op.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/2396\"\
+    \n\n#line 2 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#include <vector>\n\
+    \ntemplate <int md> struct ModInt {\n#if __cplusplus >= 201402L\n#define MDCONST\
+    \ constexpr\n#else\n#define MDCONST\n#endif\n    using lint = long long;\n   \
+    \ MDCONST static int mod() { return md; }\n    static int get_primitive_root()\
     \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
     \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
     \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
@@ -226,102 +161,116 @@ data:
     \            a[i] = garner_ntt_(ntt0[i].val(), ntt1[i].val(), ntt2[i].val(), mod);\n\
     \    }\n    return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
     \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
-    \ b, false);\n}\n"
-  code: "#pragma once\n#include \"../modint.hpp\"\n\n#include <algorithm>\n#include\
-    \ <array>\n#include <cassert>\n#include <tuple>\n#include <vector>\n\n// CUT begin\n\
-    // Integer convolution for arbitrary mod\n// with NTT (and Garner's algorithm)\
-    \ for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm if `skip_garner`\
-    \ is true or mod is in `nttprimes`.\n// input: a (size: n), b (size: m)\n// return:\
-    \ vector (size: n + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
-    \ a, std::vector<MODINT> b, bool skip_garner);\n\nconstexpr int nttprimes[3] =\
-    \ {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
-    \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
-    \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
-    \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
-    \    if (n == 1) return;\n    static const int mod = MODINT::mod();\n    static\
-    \ const MODINT root = MODINT::get_primitive_root();\n    assert(__builtin_popcount(n)\
-    \ == 1 and (mod - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n\
-    \    for (int m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod\
-    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
-    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
-    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
-    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
-    \  for (int i = s; i < s + m; i++) {\n                    MODINT x = a[i], y =\
-    \ a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n    \
-    \            }\n            }\n        }\n    } else {\n        for (int m = 1;\
-    \ m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++)\
-    \ {\n                for (int i = s; i < s + m; i++) {\n                    MODINT\
-    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
-    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv().val();\n\
-    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
-    \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
-    \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
-    \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
-    \ ap[i] = a[i], bp[i] = b[i];\n    ntt(ap, false);\n    if (a == b)\n        bp\
-    \ = ap;\n    else\n        ntt(bp, false);\n    for (int i = 0; i < sz; i++) ap[i]\
-    \ *= bp[i];\n    ntt(ap, true);\n    return ap;\n}\nlong long garner_ntt_(int\
-    \ r0, int r1, int r2, int mod) {\n    using mint2 = ModInt<nttprimes[2]>;\n  \
-    \  static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];\n    static\
-    \ const long long m0_inv_m1 = ModInt<nttprimes[1]>(nttprimes[0]).inv().val();\n\
-    \    static const long long m01_inv_m2 = mint2(m01).inv().val();\n\n    int v1\
-    \ = (m0_inv_m1 * (r1 + nttprimes[1] - r0)) % nttprimes[1];\n    auto v2 = (mint2(r2)\
-    \ - r0 - mint2(nttprimes[0]) * v1) * m01_inv_m2;\n    return (r0 + 1LL * nttprimes[0]\
-    \ * v1 + m01 % mod * v2.val()) % mod;\n}\ntemplate <typename MODINT>\nstd::vector<MODINT>\
-    \ nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool skip_garner) {\n\
-    \    if (a.empty() or b.empty()) return {};\n    int sz = 1, n = a.size(), m =\
-    \ b.size();\n    while (sz < n + m) sz <<= 1;\n    if (sz <= 16) {\n        std::vector<MODINT>\
-    \ ret(n + m - 1);\n        for (int i = 0; i < n; i++) {\n            for (int\
-    \ j = 0; j < m; j++) ret[i + j] += a[i] * b[j];\n        }\n        return ret;\n\
-    \    }\n    int mod = MODINT::mod();\n    if (skip_garner or\n        std::find(std::begin(nttprimes),\
-    \ std::end(nttprimes), mod) != std::end(nttprimes)) {\n        a.resize(sz), b.resize(sz);\n\
-    \        if (a == b) {\n            ntt(a, false);\n            b = a;\n     \
-    \   } else {\n            ntt(a, false), ntt(b, false);\n        }\n        for\
-    \ (int i = 0; i < sz; i++) a[i] *= b[i];\n        ntt(a, true);\n        a.resize(n\
-    \ + m - 1);\n    } else {\n        std::vector<int> ai(sz), bi(sz);\n        for\
-    \ (int i = 0; i < n; i++) ai[i] = a[i].val();\n        for (int i = 0; i < m;\
-    \ i++) bi[i] = b[i].val();\n        auto ntt0 = nttconv_<nttprimes[0]>(ai, bi);\n\
-    \        auto ntt1 = nttconv_<nttprimes[1]>(ai, bi);\n        auto ntt2 = nttconv_<nttprimes[2]>(ai,\
-    \ bi);\n        a.resize(n + m - 1);\n        for (int i = 0; i < n + m - 1; i++)\n\
-    \            a[i] = garner_ntt_(ntt0[i].val(), ntt1[i].val(), ntt2[i].val(), mod);\n\
-    \    }\n    return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
-    \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
-    \ b, false);\n}\n"
+    \ b, false);\n}\n#line 5 \"number/modint_runtime.hpp\"\n\nstruct ModIntRuntime\
+    \ {\nprivate:\n    static int md;\n\npublic:\n    using lint = long long;\n  \
+    \  static int mod() { return md; }\n    int val_;\n    static std::vector<ModIntRuntime>\
+    \ &facs() {\n        static std::vector<ModIntRuntime> facs_;\n        return\
+    \ facs_;\n    }\n    static int &get_primitive_root() {\n        static int primitive_root_\
+    \ = 0;\n        if (!primitive_root_) {\n            primitive_root_ = [&]() {\n\
+    \                std::set<int> fac;\n                int v = md - 1;\n       \
+    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
+    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
+    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
+    \                    for (auto i : fac)\n                        if (ModIntRuntime(g).power((md\
+    \ - 1) / i) == 1) {\n                            ok = false;\n               \
+    \             break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root_;\n    }\n    static void set_mod(const int\
+    \ &m) {\n        if (md != m) facs().clear();\n        md = m;\n        get_primitive_root()\
+    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ?\
+    \ v - md : v);\n        return *this;\n    }\n    int val() const noexcept { return\
+    \ val_; }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v\
+    \ % md + md); }\n    explicit operator bool() const { return val_ != 0; }\n  \
+    \  ModIntRuntime operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \ + x.val_);\n    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const\
+    \ {\n        return ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n\
+    \    ModIntRuntime operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \ * x.val_ % md);\n    }\n    ModIntRuntime operator/(const ModIntRuntime &x)\
+    \ const {\n        return ModIntRuntime()._setval((lint)val_ * x.inv().val() %\
+    \ md);\n    }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(md\
+    \ - val_); }\n    ModIntRuntime &operator+=(const ModIntRuntime &x) { return *this\
+    \ = *this + x; }\n    ModIntRuntime &operator-=(const ModIntRuntime &x) { return\
+    \ *this = *this - x; }\n    ModIntRuntime &operator*=(const ModIntRuntime &x)\
+    \ { return *this = *this * x; }\n    ModIntRuntime &operator/=(const ModIntRuntime\
+    \ &x) { return *this = *this / x; }\n    friend ModIntRuntime operator+(lint a,\
+    \ const ModIntRuntime &x) {\n        return ModIntRuntime()._setval(a % md + x.val_);\n\
+    \    }\n    friend ModIntRuntime operator-(lint a, const ModIntRuntime &x) {\n\
+    \        return ModIntRuntime()._setval(a % md - x.val_ + md);\n    }\n    friend\
+    \ ModIntRuntime operator*(lint a, const ModIntRuntime &x) {\n        return ModIntRuntime()._setval(a\
+    \ % md * x.val_ % md);\n    }\n    friend ModIntRuntime operator/(lint a, const\
+    \ ModIntRuntime &x) {\n        return ModIntRuntime()._setval(a % md * x.inv().val()\
+    \ % md);\n    }\n    bool operator==(const ModIntRuntime &x) const { return val_\
+    \ == x.val_; }\n    bool operator!=(const ModIntRuntime &x) const { return val_\
+    \ != x.val_; }\n    bool operator<(const ModIntRuntime &x) const {\n        return\
+    \ val_ < x.val_;\n    } // To use std::map<ModIntRuntime, T>\n    friend std::istream\
+    \ &operator>>(std::istream &is, ModIntRuntime &x) {\n        lint t;\n       \
+    \ return is >> t, x = ModIntRuntime(t), is;\n    }\n    friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModIntRuntime &x) {\n        return os << x.val_;\n    }\n\n    lint\
+    \ power(lint n) const {\n        lint ans = 1, tmp = this->val_;\n        while\
+    \ (n) {\n            if (n & 1) ans = ans * tmp % md;\n            tmp = tmp *\
+    \ tmp % md;\n            n /= 2;\n        }\n        return ans;\n    }\n    ModIntRuntime\
+    \ pow(lint n) const { return power(n); }\n    ModIntRuntime inv() const { return\
+    \ this->pow(md - 2); }\n\n    ModIntRuntime fac() const {\n        int l0 = facs().size();\n\
+    \        if (l0 > this->val_) return facs()[this->val_];\n\n        facs().resize(this->val_\
+    \ + 1);\n        for (int i = l0; i <= this->val_; i++)\n            facs()[i]\
+    \ = (i == 0 ? ModIntRuntime(1) : facs()[i - 1] * ModIntRuntime(i));\n        return\
+    \ facs()[this->val_];\n    }\n\n    ModIntRuntime doublefac() const {\n      \
+    \  lint k = (this->val_ + 1) / 2;\n        return (this->val_ & 1)\n         \
+    \          ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k) * ModIntRuntime(k).fac())\n\
+    \                   : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);\n    }\n\
+    \n    ModIntRuntime nCr(const ModIntRuntime &r) const {\n        return (this->val_\
+    \ < r.val_) ? ModIntRuntime(0)\n                                     : this->fac()\
+    \ / ((*this - r).fac() * r.fac());\n    }\n\n    ModIntRuntime sqrt() const {\n\
+    \        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n       \
+    \ if (power((md - 1) / 2) != 1) return 0;\n        ModIntRuntime b = 1;\n    \
+    \    while (b.power((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n\
+    \        while (m % 2 == 0) m >>= 1, e++;\n        ModIntRuntime x = power((m\
+    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModIntRuntime\
+    \ z = b.power(m);\n        while (y != 1) {\n            int j = 0;\n        \
+    \    ModIntRuntime t = y;\n            while (t != 1) j++, t *= t;\n         \
+    \   z = z.power(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n  \
+    \          e = j;\n        }\n        return ModIntRuntime(std::min(x.val_, md\
+    \ - x.val_));\n    }\n};\nint ModIntRuntime::md = 1;\n#line 3 \"utilities/pow_op.hpp\"\
+    \n\n// Calculate x^n\ntemplate <class S, class F> S pow_op(S x, long long n, F\
+    \ op) {\n    assert(n > 0);\n    S ans = x;\n    --n;\n    while (n) {\n     \
+    \   if (n & 1) ans = op(ans, x);\n        x = op(x, x);\n        n >>= 1;\n  \
+    \  }\n    return ans;\n}\n#line 6 \"utilities/test/pow_op.test.cpp\"\n\n#line\
+    \ 8 \"utilities/test/pow_op.test.cpp\"\nusing namespace std;\n\nusing mint = ModIntRuntime;\n\
+    \nint main() {\n    int L, K, B;\n    long long N, M;\n\n    cin >> N >> M >>\
+    \ L >> K >> B;\n    mint::set_mod(B);\n    const mint m = M;\n\n    vector<mint>\
+    \ trans{mint(1), mint(1)};\n\n    auto trun = [&](vector<mint> &vec) {\n     \
+    \   while (vec.size() > L) {\n            vec.at(vec.size() - 1 - L) += vec.back()\
+    \ * m;\n            vec.pop_back();\n        }\n    };\n\n    auto op = [&](vector<mint>\
+    \ l, const vector<mint> &r) {\n        l = nttconv(l, r);\n        trun(l);\n\
+    \        return l;\n    };\n\n    trun(trans);\n    trans = pow_op(trans, N, op);\n\
+    \    trans.resize(L);\n\n    cout << trans.at(K).val() << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/2396\"\n\n#include \"\
+    ../../convolution/ntt.hpp\"\n#include \"../../number/modint_runtime.hpp\"\n#include\
+    \ \"../pow_op.hpp\"\n\n#include <iostream>\nusing namespace std;\n\nusing mint\
+    \ = ModIntRuntime;\n\nint main() {\n    int L, K, B;\n    long long N, M;\n\n\
+    \    cin >> N >> M >> L >> K >> B;\n    mint::set_mod(B);\n    const mint m =\
+    \ M;\n\n    vector<mint> trans{mint(1), mint(1)};\n\n    auto trun = [&](vector<mint>\
+    \ &vec) {\n        while (vec.size() > L) {\n            vec.at(vec.size() - 1\
+    \ - L) += vec.back() * m;\n            vec.pop_back();\n        }\n    };\n\n\
+    \    auto op = [&](vector<mint> l, const vector<mint> &r) {\n        l = nttconv(l,\
+    \ r);\n        trun(l);\n        return l;\n    };\n\n    trun(trans);\n    trans\
+    \ = pow_op(trans, N, op);\n    trans.resize(L);\n\n    cout << trans.at(K).val()\
+    \ << '\\n';\n}\n"
   dependsOn:
+  - convolution/ntt.hpp
   - modint.hpp
-  isVerificationFile: false
-  path: convolution/ntt.hpp
-  requiredBy:
-  - convolution/relaxed_multiplication.hpp
-  - convolution/multivar_ntt.hpp
-  - convolution/semirelaxed_multiplication.hpp
-  - linear_algebra_matrix/blackbox_matrices.hpp
-  - formal_power_series/coeff_of_rational_function.hpp
-  - formal_power_series/polynomial_divmod.hpp
-  - formal_power_series/factorial_power.hpp
-  timestamp: '2022-07-12 00:34:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - convolution/test/multivar_ntt.test.cpp
-  - convolution/test/relaxed_multiplication.test.cpp
-  - convolution/test/convolution_on_tree.test.cpp
-  - convolution/test/semirelaxed_multiplication.test.cpp
-  - convolution/test/relaxed_multiplication.exp.test.cpp
-  - convolution/test/ntt.test.cpp
-  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - number/test/primitive_root.test.cpp
-  - formal_power_series/test/shift_of_sampling_points.test.cpp
-  - formal_power_series/test/polynomial_divmod.test.cpp
-  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - formal_power_series/test/kitamasa.test.cpp
-  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - utilities/test/pow_op.test.cpp
-  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-documentation_of: convolution/ntt.hpp
+  - number/modint_runtime.hpp
+  - utilities/pow_op.hpp
+  isVerificationFile: true
+  path: utilities/test/pow_op.test.cpp
+  requiredBy: []
+  timestamp: '2023-08-05 12:13:51+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: utilities/test/pow_op.test.cpp
 layout: document
 redirect_from:
-- /library/convolution/ntt.hpp
-- /library/convolution/ntt.hpp.html
-title: convolution/ntt.hpp
+- /verify/utilities/test/pow_op.test.cpp
+- /verify/utilities/test/pow_op.test.cpp.html
+title: utilities/test/pow_op.test.cpp
 ---

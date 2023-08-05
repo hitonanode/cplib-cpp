@@ -21,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/sieve.stress.test.cpp
     title: number/test/sieve.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: utilities/test/pow_op.test.cpp
+    title: utilities/test/pow_op.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -180,6 +183,7 @@ data:
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - number/test/montmort_number_mod.test.cpp
   - number/test/sieve.stress.test.cpp
+  - utilities/test/pow_op.test.cpp
   - graph/test/chromatic_number.test.cpp
 documentation_of: number/modint_runtime.hpp
 layout: document

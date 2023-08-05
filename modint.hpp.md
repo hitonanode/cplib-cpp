@@ -237,6 +237,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: utilities/test/pow.test.cpp
     title: utilities/test/pow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: utilities/test/pow_op.test.cpp
+    title: utilities/test/pow_op.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -474,6 +477,7 @@ data:
   - formal_power_series/test/stirling_number_of_1st.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - utilities/test/pow_op.test.cpp
   - utilities/test/pow.test.cpp
   - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
   - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp

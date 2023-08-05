@@ -787,7 +787,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/pow.hpp
       title: "Power \uFF08\u7D2F\u4E57\uFF09"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: utilities/pow_op.hpp
       title: Power (general monoid)
     - icon: ':heavy_check_mark:'
@@ -1642,6 +1642,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/pow.test.cpp
       title: utilities/test/pow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/pow_op.test.cpp
+      title: utilities/test/pow_op.test.cpp
     - icon: ':heavy_check_mark:'
       path: utilities/test/predecessor_problem.test.cpp
       title: utilities/test/predecessor_problem.test.cpp
