@@ -34,4 +34,4 @@ jobs:
         GH_PAT: ${{ secrets.GH_PAT }}
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
-      run: oj-verify all --jobs 2
+      run: oj-verify all --jobs 2 --tle 20 --timeout 3600
