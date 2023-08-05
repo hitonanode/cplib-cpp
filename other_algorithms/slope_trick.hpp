@@ -40,7 +40,9 @@ public:
 
     // argmin f(x), min f(x)
     // Complexity: O(1)
-    using Q = struct { T min, lo, hi; };
+    using Q = struct {
+        T min, lo, hi;
+    };
     Q get_min() const { return {min_f, topL(), topR()}; }
 
     // f(x) += b
