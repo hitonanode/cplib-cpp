@@ -257,6 +257,7 @@
 "utilities/test/integer_segments.test.cpp": "2021-04-25 18:25:53 +0900",
 "utilities/test/kth_root_integer.test.cpp": "2021-05-01 20:55:29 +0900",
 "utilities/test/pow.test.cpp": "2022-07-12 00:34:46 +0900",
+"utilities/test/pow_op.test.cpp": "2023-08-05 12:13:51 +0900",
 "utilities/test/predecessor_problem.test.cpp": "2021-04-25 18:25:53 +0900",
 "utilities/test/product_embedding.test.cpp": "2022-11-15 00:34:03 +0900"
 }
