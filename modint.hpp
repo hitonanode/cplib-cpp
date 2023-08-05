@@ -1,4 +1,5 @@
 #pragma once
+#include <cassert>
 #include <iostream>
 #include <set>
 #include <vector>
@@ -122,11 +123,51 @@ template <int md> struct ModInt {
         return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())
                                 : ModInt(k).fac() * ModInt(2).pow(k);
     }
-    constexpr ModInt nCr(const ModInt &r) const {
-        return (this->val_ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();
+
+    constexpr ModInt nCr(int r) const {
+        if (r < 0 or this->val_ < r) return ModInt(0);
+        return this->fac() * (*this - r).facinv() * ModInt(r).facinv();
     }
-    constexpr ModInt nPr(const ModInt &r) const {
-        return (this->val_ < r.val_) ? 0 : this->fac() * (*this - r).facinv();
+
+    constexpr ModInt nPr(int r) const {
+        if (r < 0 or this->val_ < r) return ModInt(0);
+        return this->fac() * (*this - r).facinv();
+    }
+
+    static ModInt binom(int n, int r) {
+        static long long bruteforce_times = 0;
+
+        if (r < 0 or n < r) return ModInt(0);
+        if (n <= bruteforce_times or n < (int)facs.size()) return ModInt(n).nCr(r);
+
+        r = std::min(r, n - r);
+
+        ModInt ret = ModInt(r).facinv();
+        for (int i = 0; i < r; ++i) ret *= n - i;
+        bruteforce_times += r;
+
+        return ret;
+    }
+
+    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1! k_2! ... k_m!)
+    // Complexity: O(sum(ks))
+    template <class Vec> static ModInt multinomial(const Vec &ks) {
+        ModInt ret{1};
+        int sum = 0;
+        for (int k : ks) {
+            assert(k >= 0);
+            ret *= ModInt(k).facinv(), sum += k;
+        }
+        return ret * ModInt(sum).fac();
+    }
+
+    // Catalan number, C_n = binom(2n, n) / (n + 1)
+    // C_0 = 1, C_1 = 1, C_2 = 2, C_3 = 5, C_4 = 14, ...
+    // https://oeis.org/A000108
+    // Complexity: O(n)
+    static ModInt catalan(int n) {
+        if (n < 0) return ModInt(0);
+        return ModInt(n * 2).fac() * ModInt(n + 1).facinv() * ModInt(n).facinv();
     }
 
     ModInt sqrt() const {
