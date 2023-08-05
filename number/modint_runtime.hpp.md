@@ -87,19 +87,19 @@ data:
     \  lint k = (this->val_ + 1) / 2;\n        return (this->val_ & 1)\n         \
     \          ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k) * ModIntRuntime(k).fac())\n\
     \                   : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);\n    }\n\
-    \n    ModIntRuntime nCr(const ModIntRuntime &r) const {\n        return (this->val_\
-    \ < r.val_) ? ModIntRuntime(0)\n                                     : this->fac()\
-    \ / ((*this - r).fac() * r.fac());\n    }\n\n    ModIntRuntime sqrt() const {\n\
-    \        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n       \
-    \ if (power((md - 1) / 2) != 1) return 0;\n        ModIntRuntime b = 1;\n    \
-    \    while (b.power((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n\
-    \        while (m % 2 == 0) m >>= 1, e++;\n        ModIntRuntime x = power((m\
-    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModIntRuntime\
-    \ z = b.power(m);\n        while (y != 1) {\n            int j = 0;\n        \
-    \    ModIntRuntime t = y;\n            while (t != 1) j++, t *= t;\n         \
-    \   z = z.power(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n  \
-    \          e = j;\n        }\n        return ModIntRuntime(std::min(x.val_, md\
-    \ - x.val_));\n    }\n};\nint ModIntRuntime::md = 1;\n"
+    \n    ModIntRuntime nCr(int r) const {\n        if (r < 0 or this->val_ < r) return\
+    \ ModIntRuntime(0);\n        return this->fac() / ((*this - r).fac() * ModIntRuntime(r).fac());\n\
+    \    }\n\n    ModIntRuntime sqrt() const {\n        if (val_ == 0) return 0;\n\
+    \        if (md == 2) return val_;\n        if (power((md - 1) / 2) != 1) return\
+    \ 0;\n        ModIntRuntime b = 1;\n        while (b.power((md - 1) / 2) == 1)\
+    \ b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0) m >>= 1,\
+    \ e++;\n        ModIntRuntime x = power((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModIntRuntime z = b.power(m);\n        while (y\
+    \ != 1) {\n            int j = 0;\n            ModIntRuntime t = y;\n        \
+    \    while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e - j - 1));\n\
+    \            x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return\
+    \ ModIntRuntime(std::min(x.val_, md - x.val_));\n    }\n};\nint ModIntRuntime::md\
+    \ = 1;\n"
   code: "#pragma once\n#include <iostream>\n#include <set>\n#include <vector>\n\n\
     struct ModIntRuntime {\nprivate:\n    static int md;\n\npublic:\n    using lint\
     \ = long long;\n    static int mod() { return md; }\n    int val_;\n    static\
@@ -158,24 +158,24 @@ data:
     \  lint k = (this->val_ + 1) / 2;\n        return (this->val_ & 1)\n         \
     \          ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k) * ModIntRuntime(k).fac())\n\
     \                   : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);\n    }\n\
-    \n    ModIntRuntime nCr(const ModIntRuntime &r) const {\n        return (this->val_\
-    \ < r.val_) ? ModIntRuntime(0)\n                                     : this->fac()\
-    \ / ((*this - r).fac() * r.fac());\n    }\n\n    ModIntRuntime sqrt() const {\n\
-    \        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n       \
-    \ if (power((md - 1) / 2) != 1) return 0;\n        ModIntRuntime b = 1;\n    \
-    \    while (b.power((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n\
-    \        while (m % 2 == 0) m >>= 1, e++;\n        ModIntRuntime x = power((m\
-    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModIntRuntime\
-    \ z = b.power(m);\n        while (y != 1) {\n            int j = 0;\n        \
-    \    ModIntRuntime t = y;\n            while (t != 1) j++, t *= t;\n         \
-    \   z = z.power(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n  \
-    \          e = j;\n        }\n        return ModIntRuntime(std::min(x.val_, md\
-    \ - x.val_));\n    }\n};\nint ModIntRuntime::md = 1;\n"
+    \n    ModIntRuntime nCr(int r) const {\n        if (r < 0 or this->val_ < r) return\
+    \ ModIntRuntime(0);\n        return this->fac() / ((*this - r).fac() * ModIntRuntime(r).fac());\n\
+    \    }\n\n    ModIntRuntime sqrt() const {\n        if (val_ == 0) return 0;\n\
+    \        if (md == 2) return val_;\n        if (power((md - 1) / 2) != 1) return\
+    \ 0;\n        ModIntRuntime b = 1;\n        while (b.power((md - 1) / 2) == 1)\
+    \ b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0) m >>= 1,\
+    \ e++;\n        ModIntRuntime x = power((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModIntRuntime z = b.power(m);\n        while (y\
+    \ != 1) {\n            int j = 0;\n            ModIntRuntime t = y;\n        \
+    \    while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e - j - 1));\n\
+    \            x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return\
+    \ ModIntRuntime(std::min(x.val_, md - x.val_));\n    }\n};\nint ModIntRuntime::md\
+    \ = 1;\n"
   dependsOn: []
   isVerificationFile: false
   path: number/modint_runtime.hpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2023-08-05 18:05:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convolution/test/ntt.test.cpp

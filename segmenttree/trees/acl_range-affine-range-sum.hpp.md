@@ -44,7 +44,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-affine-range-sum.hpp
   requiredBy: []
-  timestamp: '2022-07-12 00:34:46+09:00'
+  timestamp: '2023-08-05 18:05:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp

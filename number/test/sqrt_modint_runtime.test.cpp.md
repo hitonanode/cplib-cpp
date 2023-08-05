@@ -70,23 +70,23 @@ data:
     \  lint k = (this->val_ + 1) / 2;\n        return (this->val_ & 1)\n         \
     \          ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k) * ModIntRuntime(k).fac())\n\
     \                   : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);\n    }\n\
-    \n    ModIntRuntime nCr(const ModIntRuntime &r) const {\n        return (this->val_\
-    \ < r.val_) ? ModIntRuntime(0)\n                                     : this->fac()\
-    \ / ((*this - r).fac() * r.fac());\n    }\n\n    ModIntRuntime sqrt() const {\n\
-    \        if (val_ == 0) return 0;\n        if (md == 2) return val_;\n       \
-    \ if (power((md - 1) / 2) != 1) return 0;\n        ModIntRuntime b = 1;\n    \
-    \    while (b.power((md - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n\
-    \        while (m % 2 == 0) m >>= 1, e++;\n        ModIntRuntime x = power((m\
-    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModIntRuntime\
-    \ z = b.power(m);\n        while (y != 1) {\n            int j = 0;\n        \
-    \    ModIntRuntime t = y;\n            while (t != 1) j++, t *= t;\n         \
-    \   z = z.power(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n  \
-    \          e = j;\n        }\n        return ModIntRuntime(std::min(x.val_, md\
-    \ - x.val_));\n    }\n};\nint ModIntRuntime::md = 1;\n#line 4 \"number/test/sqrt_modint_runtime.test.cpp\"\
-    \nusing namespace std;\n\nint main() {\n    int T;\n    cin >> T;\n    while (T--)\
-    \ {\n        int Y, P;\n        cin >> Y >> P;\n        ModIntRuntime::set_mod(P);\n\
-    \        ModIntRuntime m = Y;\n        if (Y) {\n            m = m.sqrt();\n \
-    \           cout << (m ? m.val() : -1) << endl;\n        } else\n            cout\
+    \n    ModIntRuntime nCr(int r) const {\n        if (r < 0 or this->val_ < r) return\
+    \ ModIntRuntime(0);\n        return this->fac() / ((*this - r).fac() * ModIntRuntime(r).fac());\n\
+    \    }\n\n    ModIntRuntime sqrt() const {\n        if (val_ == 0) return 0;\n\
+    \        if (md == 2) return val_;\n        if (power((md - 1) / 2) != 1) return\
+    \ 0;\n        ModIntRuntime b = 1;\n        while (b.power((md - 1) / 2) == 1)\
+    \ b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0) m >>= 1,\
+    \ e++;\n        ModIntRuntime x = power((m - 1) / 2), y = (*this) * x * x;\n \
+    \       x *= (*this);\n        ModIntRuntime z = b.power(m);\n        while (y\
+    \ != 1) {\n            int j = 0;\n            ModIntRuntime t = y;\n        \
+    \    while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e - j - 1));\n\
+    \            x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return\
+    \ ModIntRuntime(std::min(x.val_, md - x.val_));\n    }\n};\nint ModIntRuntime::md\
+    \ = 1;\n#line 4 \"number/test/sqrt_modint_runtime.test.cpp\"\nusing namespace\
+    \ std;\n\nint main() {\n    int T;\n    cin >> T;\n    while (T--) {\n       \
+    \ int Y, P;\n        cin >> Y >> P;\n        ModIntRuntime::set_mod(P);\n    \
+    \    ModIntRuntime m = Y;\n        if (Y) {\n            m = m.sqrt();\n     \
+    \       cout << (m ? m.val() : -1) << endl;\n        } else\n            cout\
     \ << 0 << endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include \"\
     number/modint_runtime.hpp\"\n#include <iostream>\nusing namespace std;\n\nint\
