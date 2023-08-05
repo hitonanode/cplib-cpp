@@ -39,25 +39,25 @@ data:
     \ {\n        static_assert(INF > 0, \"INF must be greater than 0\");\n    }\n\
     \    inline int sizeL() const noexcept { return L.size(); }\n    inline int sizeR()\
     \ const noexcept { return R.size(); }\n\n    // argmin f(x), min f(x)\n    //\
-    \ Complexity: O(1)\n    using Q = struct { T min, lo, hi; };\n    Q get_min()\
-    \ const { return {min_f, topL(), topR()}; }\n\n    // f(x) += b\n    // Complexity:\
-    \ O(1)\n    slope_trick &add_const(const T &b) { return min_f += b, *this; }\n\
-    \n    // f(x) += max(x - a, 0)  _/\n    // Complexity: O(log n)\n    slope_trick\
-    \ &add_relu(const T &a) {\n        return min_f += std::max(T(0), topL() - a),\
-    \ pushL(a), pushR(popL()), *this;\n    }\n\n    // f(x) += max(a - x, 0)  \\_\n\
-    \    // Complexity: O(log n)\n    slope_trick &add_irelu(const T &a) {\n     \
-    \   return min_f += std::max(T(0), a - topR()), pushR(a), pushL(popR()), *this;\n\
-    \    }\n\n    // f(x) += |x - a|  \\/\n    // Complexity: O(log n)\n    slope_trick\
-    \ &add_abs(const T &a) { return add_relu(a).add_irelu(a); }\n\n    // f(x) <-\
-    \ min_{0 <= y <= w} f(x + y)  .\\ -> \\_\n    // Complexity: O(1)\n    slope_trick\
-    \ &move_left_curve(const T &w) { return assert(w >= 0), displacement_l += w, *this;\
-    \ }\n\n    // f(x) <- min_{0 <= y <= w} f(x - y)  /. -> _/\n    // Complexity:\
-    \ O(1)\n    slope_trick &move_right_curve(const T &w) {\n        return assert(w\
-    \ >= 0), displacement_r += w, *this;\n    }\n\n    // f(x) <- f(x - dx) \\/. ->\
-    \ .\\/\n    // Complexity: O(1)\n    slope_trick &translate(const T &dx) {\n \
-    \       return displacement_l -= dx, displacement_r += dx, *this;\n    }\n\n \
-    \   // return f(x), f destructive\n    T get_destructive(const T &x) {\n     \
-    \   T ret = get_min().min;\n        while (L.size()) ret += std::max(T(0), popL()\
+    \ Complexity: O(1)\n    using Q = struct {\n        T min, lo, hi;\n    };\n \
+    \   Q get_min() const { return {min_f, topL(), topR()}; }\n\n    // f(x) += b\n\
+    \    // Complexity: O(1)\n    slope_trick &add_const(const T &b) { return min_f\
+    \ += b, *this; }\n\n    // f(x) += max(x - a, 0)  _/\n    // Complexity: O(log\
+    \ n)\n    slope_trick &add_relu(const T &a) {\n        return min_f += std::max(T(0),\
+    \ topL() - a), pushL(a), pushR(popL()), *this;\n    }\n\n    // f(x) += max(a\
+    \ - x, 0)  \\_\n    // Complexity: O(log n)\n    slope_trick &add_irelu(const\
+    \ T &a) {\n        return min_f += std::max(T(0), a - topR()), pushR(a), pushL(popR()),\
+    \ *this;\n    }\n\n    // f(x) += |x - a|  \\/\n    // Complexity: O(log n)\n\
+    \    slope_trick &add_abs(const T &a) { return add_relu(a).add_irelu(a); }\n\n\
+    \    // f(x) <- min_{0 <= y <= w} f(x + y)  .\\ -> \\_\n    // Complexity: O(1)\n\
+    \    slope_trick &move_left_curve(const T &w) { return assert(w >= 0), displacement_l\
+    \ += w, *this; }\n\n    // f(x) <- min_{0 <= y <= w} f(x - y)  /. -> _/\n    //\
+    \ Complexity: O(1)\n    slope_trick &move_right_curve(const T &w) {\n        return\
+    \ assert(w >= 0), displacement_r += w, *this;\n    }\n\n    // f(x) <- f(x - dx)\
+    \ \\/. -> .\\/\n    // Complexity: O(1)\n    slope_trick &translate(const T &dx)\
+    \ {\n        return displacement_l -= dx, displacement_r += dx, *this;\n    }\n\
+    \n    // return f(x), f destructive\n    T get_destructive(const T &x) {\n   \
+    \     T ret = get_min().min;\n        while (L.size()) ret += std::max(T(0), popL()\
     \ - x);\n        while (R.size()) ret += std::max(T(0), x - popR());\n       \
     \ return ret;\n    }\n\n    // f(x) += g(x), g destructive\n    slope_trick &merge_destructive(slope_trick<T,\
     \ INF> &g) {\n        if (sizeL() + sizeR() > g.sizeL() + g.sizeR()) {\n     \
@@ -129,7 +129,7 @@ data:
   isVerificationFile: true
   path: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
   requiredBy: []
-  timestamp: '2022-12-04 20:53:42+09:00'
+  timestamp: '2023-08-05 14:49:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
