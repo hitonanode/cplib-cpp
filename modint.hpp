@@ -1,16 +1,12 @@
 #pragma once
+#include <cassert>
 #include <iostream>
 #include <set>
 #include <vector>
 
 template <int md> struct ModInt {
-#if __cplusplus >= 201402L
-#define MDCONST constexpr
-#else
-#define MDCONST
-#endif
     using lint = long long;
-    MDCONST static int mod() { return md; }
+    constexpr static int mod() { return md; }
     static int get_primitive_root() {
         static int primitive_root = 0;
         if (!primitive_root) {
@@ -36,52 +32,53 @@ template <int md> struct ModInt {
     }
     int val_;
     int val() const noexcept { return val_; }
-    MDCONST ModInt() : val_(0) {}
-    MDCONST ModInt &_setval(lint v) { return val_ = (v >= md ? v - md : v), *this; }
-    MDCONST ModInt(lint v) { _setval(v % md + md); }
-    MDCONST explicit operator bool() const { return val_ != 0; }
-    MDCONST ModInt operator+(const ModInt &x) const {
+    constexpr ModInt() : val_(0) {}
+    constexpr ModInt &_setval(lint v) { return val_ = (v >= md ? v - md : v), *this; }
+    constexpr ModInt(lint v) { _setval(v % md + md); }
+    constexpr explicit operator bool() const { return val_ != 0; }
+    constexpr ModInt operator+(const ModInt &x) const {
         return ModInt()._setval((lint)val_ + x.val_);
     }
-    MDCONST ModInt operator-(const ModInt &x) const {
+    constexpr ModInt operator-(const ModInt &x) const {
         return ModInt()._setval((lint)val_ - x.val_ + md);
     }
-    MDCONST ModInt operator*(const ModInt &x) const {
+    constexpr ModInt operator*(const ModInt &x) const {
         return ModInt()._setval((lint)val_ * x.val_ % md);
     }
-    MDCONST ModInt operator/(const ModInt &x) const {
+    constexpr ModInt operator/(const ModInt &x) const {
         return ModInt()._setval((lint)val_ * x.inv().val() % md);
     }
-    MDCONST ModInt operator-() const { return ModInt()._setval(md - val_); }
-    MDCONST ModInt &operator+=(const ModInt &x) { return *this = *this + x; }
-    MDCONST ModInt &operator-=(const ModInt &x) { return *this = *this - x; }
-    MDCONST ModInt &operator*=(const ModInt &x) { return *this = *this * x; }
-    MDCONST ModInt &operator/=(const ModInt &x) { return *this = *this / x; }
-    friend MDCONST ModInt operator+(lint a, const ModInt &x) {
+    constexpr ModInt operator-() const { return ModInt()._setval(md - val_); }
+    constexpr ModInt &operator+=(const ModInt &x) { return *this = *this + x; }
+    constexpr ModInt &operator-=(const ModInt &x) { return *this = *this - x; }
+    constexpr ModInt &operator*=(const ModInt &x) { return *this = *this * x; }
+    constexpr ModInt &operator/=(const ModInt &x) { return *this = *this / x; }
+    friend constexpr ModInt operator+(lint a, const ModInt &x) {
         return ModInt()._setval(a % md + x.val_);
     }
-    friend MDCONST ModInt operator-(lint a, const ModInt &x) {
+    friend constexpr ModInt operator-(lint a, const ModInt &x) {
         return ModInt()._setval(a % md - x.val_ + md);
     }
-    friend MDCONST ModInt operator*(lint a, const ModInt &x) {
+    friend constexpr ModInt operator*(lint a, const ModInt &x) {
         return ModInt()._setval(a % md * x.val_ % md);
     }
-    friend MDCONST ModInt operator/(lint a, const ModInt &x) {
+    friend constexpr ModInt operator/(lint a, const ModInt &x) {
         return ModInt()._setval(a % md * x.inv().val() % md);
     }
-    MDCONST bool operator==(const ModInt &x) const { return val_ == x.val_; }
-    MDCONST bool operator!=(const ModInt &x) const { return val_ != x.val_; }
-    MDCONST bool operator<(const ModInt &x) const {
+    constexpr bool operator==(const ModInt &x) const { return val_ == x.val_; }
+    constexpr bool operator!=(const ModInt &x) const { return val_ != x.val_; }
+    constexpr bool operator<(const ModInt &x) const {
         return val_ < x.val_;
     } // To use std::map<ModInt, T>
     friend std::istream &operator>>(std::istream &is, ModInt &x) {
         lint t;
         return is >> t, x = ModInt(t), is;
     }
-    MDCONST friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {
+    constexpr friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {
         return os << x.val_;
     }
-    MDCONST ModInt pow(lint n) const {
+
+    constexpr ModInt pow(lint n) const {
         ModInt ans = 1, tmp = *this;
         while (n) {
             if (n & 1) ans *= tmp;
@@ -90,9 +87,11 @@ template <int md> struct ModInt {
         return ans;
     }
 
+    static constexpr int cache_limit = std::min(md, 1 << 21);
     static std::vector<ModInt> facs, facinvs, invs;
-    MDCONST static void _precalculation(int N) {
-        int l0 = facs.size();
+
+    constexpr static void _precalculation(int N) {
+        const int l0 = facs.size();
         if (N > md) N = md;
         if (N <= l0) return;
         facs.resize(N), facinvs.resize(N), invs.resize(N);
@@ -101,8 +100,9 @@ template <int md> struct ModInt {
         for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);
         for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];
     }
-    MDCONST ModInt inv() const {
-        if (this->val_ < std::min(md >> 1, 1 << 21)) {
+
+    constexpr ModInt inv() const {
+        if (this->val_ < cache_limit) {
             if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};
             while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);
             return invs[this->val_];
@@ -110,24 +110,64 @@ template <int md> struct ModInt {
             return this->pow(md - 2);
         }
     }
-    MDCONST ModInt fac() const {
+    constexpr ModInt fac() const {
         while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);
         return facs[this->val_];
     }
-    MDCONST ModInt facinv() const {
+    constexpr ModInt facinv() const {
         while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);
         return facinvs[this->val_];
     }
-    MDCONST ModInt doublefac() const {
+    constexpr ModInt doublefac() const {
         lint k = (this->val_ + 1) / 2;
         return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())
                                 : ModInt(k).fac() * ModInt(2).pow(k);
     }
-    MDCONST ModInt nCr(const ModInt &r) const {
-        return (this->val_ < r.val_) ? 0 : this->fac() * (*this - r).facinv() * r.facinv();
+
+    constexpr ModInt nCr(int r) const {
+        if (r < 0 or this->val_ < r) return ModInt(0);
+        return this->fac() * (*this - r).facinv() * ModInt(r).facinv();
     }
-    MDCONST ModInt nPr(const ModInt &r) const {
-        return (this->val_ < r.val_) ? 0 : this->fac() * (*this - r).facinv();
+
+    constexpr ModInt nPr(int r) const {
+        if (r < 0 or this->val_ < r) return ModInt(0);
+        return this->fac() * (*this - r).facinv();
+    }
+
+    static ModInt binom(int n, int r) {
+        static long long bruteforce_times = 0;
+
+        if (r < 0 or n < r) return ModInt(0);
+        if (n <= bruteforce_times or n < (int)facs.size()) return ModInt(n).nCr(r);
+
+        r = std::min(r, n - r);
+
+        ModInt ret = ModInt(r).facinv();
+        for (int i = 0; i < r; ++i) ret *= n - i;
+        bruteforce_times += r;
+
+        return ret;
+    }
+
+    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1! k_2! ... k_m!)
+    // Complexity: O(sum(ks))
+    template <class Vec> static ModInt multinomial(const Vec &ks) {
+        ModInt ret{1};
+        int sum = 0;
+        for (int k : ks) {
+            assert(k >= 0);
+            ret *= ModInt(k).facinv(), sum += k;
+        }
+        return ret * ModInt(sum).fac();
+    }
+
+    // Catalan number, C_n = binom(2n, n) / (n + 1)
+    // C_0 = 1, C_1 = 1, C_2 = 2, C_3 = 5, C_4 = 14, ...
+    // https://oeis.org/A000108
+    // Complexity: O(n)
+    static ModInt catalan(int n) {
+        if (n < 0) return ModInt(0);
+        return ModInt(n * 2).fac() * ModInt(n + 1).facinv() * ModInt(n).facinv();
     }
 
     ModInt sqrt() const {

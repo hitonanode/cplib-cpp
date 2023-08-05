@@ -122,9 +122,9 @@ public:
                    : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);
     }
 
-    ModIntRuntime nCr(const ModIntRuntime &r) const {
-        return (this->val_ < r.val_) ? ModIntRuntime(0)
-                                     : this->fac() / ((*this - r).fac() * r.fac());
+    ModIntRuntime nCr(int r) const {
+        if (r < 0 or this->val_ < r) return ModIntRuntime(0);
+        return this->fac() / ((*this - r).fac() * ModIntRuntime(r).fac());
     }
 
     ModIntRuntime sqrt() const {
