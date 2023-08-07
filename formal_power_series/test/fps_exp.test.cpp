@@ -10,7 +10,7 @@ int main() {
     cin >> N;
     FormalPowerSeries<ModInt<998244353>> A(N);
     for (int i = 0; i < N; i++) cin >> A[i];
-    A.shrink();
     auto ret = A.exp(N);
-    for (int i = 0; i < N; i++) printf("%d ", ret.coeff(i).val());
+    for (int i = 0; i < N; i++) cout << ret.coeff(i).val() << ' ';
+    cout << '\n';
 }

@@ -11,7 +11,6 @@ int main() {
     ModIntRuntime::set_mod(998244353);
     FormalPowerSeries<ModIntRuntime> A(N);
     for (int i = 0; i < N; i++) cin >> A[i];
-    A.shrink();
     auto ret = A.exp(N);
     for (int i = 0; i < N; i++) printf("%d ", ret.coeff(i).val());
 }

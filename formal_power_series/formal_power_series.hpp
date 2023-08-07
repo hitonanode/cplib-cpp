@@ -27,30 +27,25 @@ template <typename T> struct FormalPowerSeries : std::vector<T> {
     P &operator+=(const P &r) {
         if (r.size() > this->size()) this->resize(r.size());
         for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];
-        shrink();
         return *this;
     }
     P &operator+=(const T &v) {
         if (this->empty()) this->resize(1);
         (*this)[0] += v;
-        shrink();
         return *this;
     }
     P &operator-=(const P &r) {
         if (r.size() > this->size()) this->resize(r.size());
         for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
-        shrink();
         return *this;
     }
     P &operator-=(const T &v) {
         if (this->empty()) this->resize(1);
         (*this)[0] -= v;
-        shrink();
         return *this;
     }
     P &operator*=(const T &v) {
         for (auto &x : (*this)) x *= v;
-        shrink();
         return *this;
     }
     P &operator*=(const P &r) {
@@ -64,7 +59,6 @@ template <typename T> struct FormalPowerSeries : std::vector<T> {
     }
     P &operator%=(const P &r) {
         *this -= *this / r * r;
-        shrink();
         return *this;
     }
     P operator-() const {
@@ -87,7 +81,6 @@ template <typename T> struct FormalPowerSeries : std::vector<T> {
     }
     P pre(int sz) const {
         P ret(this->begin(), this->begin() + std::min((int)this->size(), sz));
-        ret.shrink();
         return ret;
     }
     P operator>>(int sz) const {
@@ -101,12 +94,11 @@ template <typename T> struct FormalPowerSeries : std::vector<T> {
         return ret;
     }
 
-    P reversed(int deg = -1) const {
-        assert(deg >= -1);
+    P reversed(int sz = -1) const {
+        assert(sz >= -1);
         P ret(*this);
-        if (deg != -1) ret.resize(deg, T(0));
-        reverse(ret.begin(), ret.end());
-        ret.shrink();
+        if (sz != -1) ret.resize(sz, T());
+        std::reverse(ret.begin(), ret.end());
         return ret;
     }
 
@@ -125,30 +117,40 @@ template <typename T> struct FormalPowerSeries : std::vector<T> {
         return ret;
     }
 
+    /**
+     * @brief f(x)g(x) = 1 (mod x^deg)
+     *
+     * @param deg
+     * @return P ret.size() == deg
+     */
     P inv(int deg) const {
         assert(deg >= -1);
-        assert(this->size() and ((*this)[0]) != T(0)); // Requirement: F(0) != 0
+        if (deg == 0) return {};
+
+        assert(this->size() and this->at(0) != T()); // Requirement: F(0) != 0
         const int n = this->size();
         if (deg == -1) deg = n;
-        P ret({T(1) / (*this)[0]});
+
+        P ret({T(1) / this->at(0)});
         for (int i = 1; i < deg; i <<= 1) {
             auto h = (pre(i << 1) * ret).pre(i << 1) >> i;
             auto tmp = (-h * ret).pre(i);
-            ret.insert(ret.end(), tmp.begin(), tmp.end());
+            ret.insert(ret.end(), tmp.cbegin(), tmp.cend());
             ret.resize(i << 1);
         }
-        ret = ret.pre(deg);
-        ret.shrink();
-        return ret;
+        return ret.pre(deg);
     }
 
-    P log(int deg = -1) const {
-        assert(deg >= -1);
+    P log(int len = -1) const {
+        assert(len >= -1);
+        if (len == 0) return {};
+
         assert(this->size() and ((*this)[0]) == T(1)); // Requirement: F(0) = 1
+
         const int n = (int)this->size();
-        if (deg == 0) return {};
-        if (deg == -1) deg = n;
-        return (this->differential() * this->inv(deg)).pre(deg - 1).integral();
+        if (len == 0) return {};
+        if (len == -1) len = n;
+        return (this->differential() * this->inv(len)).pre(len - 1).integral();
     }
 
     P sqrt(int deg = -1) const {
@@ -221,10 +223,11 @@ template <typename T> struct FormalPowerSeries : std::vector<T> {
         for (int i = 0; i < n; i++) ret[i] *= T(i).fac();
         std::reverse(ret.begin(), ret.end());
         P exp_cx(n, 1);
-        for (int i = 1; i < n; i++) exp_cx[i] = exp_cx[i - 1] * c / i;
-        ret = (ret * exp_cx), ret.resize(n);
+        for (int i = 1; i < n; i++) exp_cx[i] = exp_cx[i - 1] * c * T(i).inv();
+        ret = ret * exp_cx;
+        ret.resize(n);
         std::reverse(ret.begin(), ret.end());
-        for (int i = 0; i < n; i++) ret[i] /= T(i).fac();
+        for (int i = 0; i < n; i++) ret[i] *= T(i).facinv();
         return ret;
     }
 

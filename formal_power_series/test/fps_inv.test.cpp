@@ -9,7 +9,6 @@ int main() {
     cin >> N;
     FormalPowerSeries<ModInt<998244353>> A(N);
     for (int i = 0; i < N; i++) cin >> A[i];
-    A.shrink();
     auto ret = A.inv(N);
     for (int i = 0; i < N; i++) printf("%d ", ret.coeff(i).val());
 }
