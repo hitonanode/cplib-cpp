@@ -180,53 +180,53 @@ data:
     \ }\n    P operator/(const T &v) const { return P(*this) /= v; }\n    P operator%(const\
     \ P &r) const { return P(*this) %= r; }\n\n    P &operator+=(const P &r) {\n \
     \       if (r.size() > this->size()) this->resize(r.size());\n        for (int\
-    \ i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n        shrink();\n    \
-    \    return *this;\n    }\n    P &operator+=(const T &v) {\n        if (this->empty())\
-    \ this->resize(1);\n        (*this)[0] += v;\n        shrink();\n        return\
-    \ *this;\n    }\n    P &operator-=(const P &r) {\n        if (r.size() > this->size())\
-    \ this->resize(r.size());\n        for (int i = 0; i < (int)r.size(); i++) (*this)[i]\
-    \ -= r[i];\n        shrink();\n        return *this;\n    }\n    P &operator-=(const\
-    \ T &v) {\n        if (this->empty()) this->resize(1);\n        (*this)[0] -=\
-    \ v;\n        shrink();\n        return *this;\n    }\n    P &operator*=(const\
-    \ T &v) {\n        for (auto &x : (*this)) x *= v;\n        shrink();\n      \
-    \  return *this;\n    }\n    P &operator*=(const P &r) {\n        if (this->empty()\
-    \ || r.empty())\n            this->clear();\n        else {\n            auto\
-    \ ret = nttconv(*this, r);\n            *this = P(ret.begin(), ret.end());\n \
-    \       }\n        return *this;\n    }\n    P &operator%=(const P &r) {\n   \
-    \     *this -= *this / r * r;\n        shrink();\n        return *this;\n    }\n\
-    \    P operator-() const {\n        P ret = *this;\n        for (auto &v : ret)\
-    \ v = -v;\n        return ret;\n    }\n    P &operator/=(const T &v) {\n     \
-    \   assert(v != T(0));\n        for (auto &x : (*this)) x /= v;\n        return\
-    \ *this;\n    }\n    P &operator/=(const P &r) {\n        if (this->size() < r.size())\
-    \ {\n            this->clear();\n            return *this;\n        }\n      \
-    \  int n = (int)this->size() - r.size() + 1;\n        return *this = (reversed().pre(n)\
-    \ * r.reversed().inv(n)).pre(n).reversed(n);\n    }\n    P pre(int sz) const {\n\
-    \        P ret(this->begin(), this->begin() + std::min((int)this->size(), sz));\n\
-    \        ret.shrink();\n        return ret;\n    }\n    P operator>>(int sz) const\
-    \ {\n        if ((int)this->size() <= sz) return {};\n        return P(this->begin()\
-    \ + sz, this->end());\n    }\n    P operator<<(int sz) const {\n        if (this->empty())\
-    \ return {};\n        P ret(*this);\n        ret.insert(ret.begin(), sz, T(0));\n\
-    \        return ret;\n    }\n\n    P reversed(int deg = -1) const {\n        assert(deg\
-    \ >= -1);\n        P ret(*this);\n        if (deg != -1) ret.resize(deg, T(0));\n\
-    \        reverse(ret.begin(), ret.end());\n        ret.shrink();\n        return\
-    \ ret;\n    }\n\n    P differential() const { // formal derivative (differential)\
-    \ of f.p.s.\n        const int n = (int)this->size();\n        P ret(std::max(0,\
+    \ i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n        return *this;\n\
+    \    }\n    P &operator+=(const T &v) {\n        if (this->empty()) this->resize(1);\n\
+    \        (*this)[0] += v;\n        return *this;\n    }\n    P &operator-=(const\
+    \ P &r) {\n        if (r.size() > this->size()) this->resize(r.size());\n    \
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n        return\
+    \ *this;\n    }\n    P &operator-=(const T &v) {\n        if (this->empty()) this->resize(1);\n\
+    \        (*this)[0] -= v;\n        return *this;\n    }\n    P &operator*=(const\
+    \ T &v) {\n        for (auto &x : (*this)) x *= v;\n        return *this;\n  \
+    \  }\n    P &operator*=(const P &r) {\n        if (this->empty() || r.empty())\n\
+    \            this->clear();\n        else {\n            auto ret = nttconv(*this,\
+    \ r);\n            *this = P(ret.begin(), ret.end());\n        }\n        return\
+    \ *this;\n    }\n    P &operator%=(const P &r) {\n        *this -= *this / r *\
+    \ r;\n        return *this;\n    }\n    P operator-() const {\n        P ret =\
+    \ *this;\n        for (auto &v : ret) v = -v;\n        return ret;\n    }\n  \
+    \  P &operator/=(const T &v) {\n        assert(v != T(0));\n        for (auto\
+    \ &x : (*this)) x /= v;\n        return *this;\n    }\n    P &operator/=(const\
+    \ P &r) {\n        if (this->size() < r.size()) {\n            this->clear();\n\
+    \            return *this;\n        }\n        int n = (int)this->size() - r.size()\
+    \ + 1;\n        return *this = (reversed().pre(n) * r.reversed().inv(n)).pre(n).reversed(n);\n\
+    \    }\n    P pre(int sz) const {\n        P ret(this->begin(), this->begin()\
+    \ + std::min((int)this->size(), sz));\n        return ret;\n    }\n    P operator>>(int\
+    \ sz) const {\n        if ((int)this->size() <= sz) return {};\n        return\
+    \ P(this->begin() + sz, this->end());\n    }\n    P operator<<(int sz) const {\n\
+    \        if (this->empty()) return {};\n        P ret(*this);\n        ret.insert(ret.begin(),\
+    \ sz, T(0));\n        return ret;\n    }\n\n    P reversed(int sz = -1) const\
+    \ {\n        assert(sz >= -1);\n        P ret(*this);\n        if (sz != -1) ret.resize(sz,\
+    \ T());\n        std::reverse(ret.begin(), ret.end());\n        return ret;\n\
+    \    }\n\n    P differential() const { // formal derivative (differential) of\
+    \ f.p.s.\n        const int n = (int)this->size();\n        P ret(std::max(0,\
     \ n - 1));\n        for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * T(i);\n\
     \        return ret;\n    }\n\n    P integral() const {\n        const int n =\
     \ (int)this->size();\n        P ret(n + 1);\n        ret[0] = T(0);\n        for\
     \ (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / T(i + 1);\n        return\
-    \ ret;\n    }\n\n    P inv(int deg) const {\n        assert(deg >= -1);\n    \
-    \    assert(this->size() and ((*this)[0]) != T(0)); // Requirement: F(0) != 0\n\
-    \        const int n = this->size();\n        if (deg == -1) deg = n;\n      \
-    \  P ret({T(1) / (*this)[0]});\n        for (int i = 1; i < deg; i <<= 1) {\n\
+    \ ret;\n    }\n\n    /**\n     * @brief f(x)g(x) = 1 (mod x^deg)\n     *\n   \
+    \  * @param deg\n     * @return P ret.size() == deg\n     */\n    P inv(int deg)\
+    \ const {\n        assert(deg >= -1);\n        if (deg == 0) return {};\n\n  \
+    \      assert(this->size() and this->at(0) != T()); // Requirement: F(0) != 0\n\
+    \        const int n = this->size();\n        if (deg == -1) deg = n;\n\n    \
+    \    P ret({T(1) / this->at(0)});\n        for (int i = 1; i < deg; i <<= 1) {\n\
     \            auto h = (pre(i << 1) * ret).pre(i << 1) >> i;\n            auto\
-    \ tmp = (-h * ret).pre(i);\n            ret.insert(ret.end(), tmp.begin(), tmp.end());\n\
-    \            ret.resize(i << 1);\n        }\n        ret = ret.pre(deg);\n   \
-    \     ret.shrink();\n        return ret;\n    }\n\n    P log(int deg = -1) const\
-    \ {\n        assert(deg >= -1);\n        assert(this->size() and ((*this)[0])\
-    \ == T(1)); // Requirement: F(0) = 1\n        const int n = (int)this->size();\n\
-    \        if (deg == 0) return {};\n        if (deg == -1) deg = n;\n        return\
-    \ (this->differential() * this->inv(deg)).pre(deg - 1).integral();\n    }\n\n\
+    \ tmp = (-h * ret).pre(i);\n            ret.insert(ret.end(), tmp.cbegin(), tmp.cend());\n\
+    \            ret.resize(i << 1);\n        }\n        return ret.pre(deg);\n  \
+    \  }\n\n    P log(int len = -1) const {\n        assert(len >= -1);\n        if\
+    \ (len == 0) return {};\n\n        assert(this->size() and ((*this)[0]) == T(1));\
+    \ // Requirement: F(0) = 1\n\n        const int n = (int)this->size();\n     \
+    \   if (len == 0) return {};\n        if (len == -1) len = n;\n        return\
+    \ (this->differential() * this->inv(len)).pre(len - 1).integral();\n    }\n\n\
     \    P sqrt(int deg = -1) const {\n        assert(deg >= -1);\n        const int\
     \ n = (int)this->size();\n        if (deg == -1) deg = n;\n        if (this->empty())\
     \ return {};\n        if ((*this)[0] == T(0)) {\n            for (int i = 1; i\
@@ -258,29 +258,30 @@ data:
     \ {\n        const int n = (int)this->size();\n        P ret = *this;\n      \
     \  for (int i = 0; i < n; i++) ret[i] *= T(i).fac();\n        std::reverse(ret.begin(),\
     \ ret.end());\n        P exp_cx(n, 1);\n        for (int i = 1; i < n; i++) exp_cx[i]\
-    \ = exp_cx[i - 1] * c / i;\n        ret = (ret * exp_cx), ret.resize(n);\n   \
-    \     std::reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n; i++)\
-    \ ret[i] /= T(i).fac();\n        return ret;\n    }\n\n    T coeff(int i) const\
-    \ {\n        if ((int)this->size() <= i or i < 0) return T(0);\n        return\
-    \ (*this)[i];\n    }\n\n    T eval(T x) const {\n        T ret = 0, w = 1;\n \
-    \       for (auto &v : *this) ret += w * v, w *= x;\n        return ret;\n   \
-    \ }\n};\n#line 5 \"formal_power_series/test/fps_exp.test.cpp\"\nusing namespace\
-    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n \
-    \   int N;\n    cin >> N;\n    FormalPowerSeries<ModInt<998244353>> A(N);\n  \
-    \  for (int i = 0; i < N; i++) cin >> A[i];\n    A.shrink();\n    auto ret = A.exp(N);\n\
-    \    for (int i = 0; i < N; i++) printf(\"%d \", ret.coeff(i).val());\n}\n"
+    \ = exp_cx[i - 1] * c * T(i).inv();\n        ret = ret * exp_cx;\n        ret.resize(n);\n\
+    \        std::reverse(ret.begin(), ret.end());\n        for (int i = 0; i < n;\
+    \ i++) ret[i] *= T(i).facinv();\n        return ret;\n    }\n\n    T coeff(int\
+    \ i) const {\n        if ((int)this->size() <= i or i < 0) return T(0);\n    \
+    \    return (*this)[i];\n    }\n\n    T eval(T x) const {\n        T ret = 0,\
+    \ w = 1;\n        for (auto &v : *this) ret += w * v, w *= x;\n        return\
+    \ ret;\n    }\n};\n#line 5 \"formal_power_series/test/fps_exp.test.cpp\"\nusing\
+    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N;\n    cin >> N;\n    FormalPowerSeries<ModInt<998244353>> A(N);\n \
+    \   for (int i = 0; i < N; i++) cin >> A[i];\n    auto ret = A.exp(N);\n    for\
+    \ (int i = 0; i < N; i++) cout << ret.coeff(i).val() << ' ';\n    cout << '\\\
+    n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/exp_of_formal_power_series\"\
     \n#include \"formal_power_series/formal_power_series.hpp\"\n#include \"modint.hpp\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int N;\n    cin >> N;\n    FormalPowerSeries<ModInt<998244353>>\
-    \ A(N);\n    for (int i = 0; i < N; i++) cin >> A[i];\n    A.shrink();\n    auto\
-    \ ret = A.exp(N);\n    for (int i = 0; i < N; i++) printf(\"%d \", ret.coeff(i).val());\n\
-    }\n"
+    \ A(N);\n    for (int i = 0; i < N; i++) cin >> A[i];\n    auto ret = A.exp(N);\n\
+    \    for (int i = 0; i < N; i++) cout << ret.coeff(i).val() << ' ';\n    cout\
+    \ << '\\n';\n}\n"
   dependsOn: []
   isVerificationFile: true
   path: formal_power_series/test/fps_exp.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2023-08-22 20:41:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/fps_exp.test.cpp

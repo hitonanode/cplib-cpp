@@ -216,7 +216,7 @@ data:
         \u7B97\uFF09"
     - icon: ':heavy_check_mark:'
       path: formal_power_series/formal_power_series.hpp
-      title: formal_power_series/formal_power_series.hpp
+      title: f(x)g(x) = 1 (mod x^deg)
     - icon: ':heavy_check_mark:'
       path: formal_power_series/lagrange_interpolation.hpp
       title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\
