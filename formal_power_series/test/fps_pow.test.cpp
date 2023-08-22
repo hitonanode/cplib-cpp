@@ -12,7 +12,6 @@ int main() {
     cin >> N >> M;
     FormalPowerSeries<ModInt<998244353>> A(N);
     for (auto &a : A) cin >> a;
-    A.shrink();
     auto ret = A.pow(M, N);
     for (int i = 0; i < N; i++) cout << ret.coeff(i) << ' ';
 }

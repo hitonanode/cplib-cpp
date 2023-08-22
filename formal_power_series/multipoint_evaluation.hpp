@@ -20,6 +20,7 @@ template <typename Tfield> struct MultipointEvaluation {
     std::vector<Tfield> ret;
     void _eval_rec(polynomial f, int now) {
         f %= segtree[now];
+        f.shrink();
         if (now - (nx - 1) >= 0) {
             ret[now - (nx - 1)] = f.coeff(0);
             return;
