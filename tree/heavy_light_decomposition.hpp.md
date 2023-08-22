@@ -198,8 +198,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/hl_decomposition.test.cpp
-  - tree/test/vertex-set-path-composite.test.cpp
   - tree/test/jump_on_tree_hld.test.cpp
+  - tree/test/vertex-set-path-composite.test.cpp
   - tree/test/vertex-add-path-sum.test.cpp
 documentation_of: tree/heavy_light_decomposition.hpp
 layout: document

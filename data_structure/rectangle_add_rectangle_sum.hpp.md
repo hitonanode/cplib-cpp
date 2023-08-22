@@ -123,8 +123,8 @@ data:
   timestamp: '2022-07-05 20:49:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
   - data_structure/test/rectangle_add_rectangle_sum.test.cpp
+  - data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
 documentation_of: data_structure/rectangle_add_rectangle_sum.hpp
 layout: document
 title: "Static rectangle add rectangle sum \uFF08\u77E9\u5F62\u4E00\u69D8\u52A0\u7B97\

@@ -20,6 +20,11 @@ data:
       path: combinatorial_opt/linear_matroid_parity.hpp
       title: "Linear matroid parity (unweighted) \uFF08\u7DDA\u5F62\u30DE\u30C8\u30ED\
         \u30A4\u30C9\u30D1\u30EA\u30C6\u30A3\uFF09"
+    - icon: ':warning:'
+      path: combinatorial_opt/linear_sum_assignment.hpp
+      title: "Linear sum assignment problem, Hungarian algorithm \uFF08\u5272\u5F53\
+        \u554F\u984C\u306B\u5BFE\u3059\u308B\u30CF\u30F3\u30AC\u30EA\u30A2\u30F3\u6CD5\
+        \uFF09"
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/matroid_intersection.hpp
       title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\
@@ -841,6 +846,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
       title: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
+      title: combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/linear_sum_assignment.test.cpp
+      title: combinatorial_opt/test/linear_sum_assignment.test.cpp
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
       title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
