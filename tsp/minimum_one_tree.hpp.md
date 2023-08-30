@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: tsp/held_karp.hpp
-    title: tsp/held_karp.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -59,8 +56,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: tsp/minimum_one_tree.hpp
-  requiredBy:
-  - tsp/held_karp.hpp
+  requiredBy: []
   timestamp: '2023-02-16 23:07:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
