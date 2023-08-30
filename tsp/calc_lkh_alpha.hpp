@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "tsp/mst_edges.hpp"
+
 // http://webhotel4.ruc.dk/~keld/research/LKH/LKH-2.0/DOC/LKH_REPORT.pdf, p.20
 template <class DistanceMatrix> auto calc_lkh_alpha(const DistanceMatrix &dist) {
     using T = decltype((*dist.adjacents(0).begin()).second);

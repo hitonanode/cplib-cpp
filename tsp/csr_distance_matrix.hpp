@@ -4,6 +4,8 @@
 #include <utility>
 #include <vector>
 
+#include "tsp/calc_lkh_alpha.hpp"
+
 template <class T> class csr_distance_matrix {
 
     int _rows = 0;

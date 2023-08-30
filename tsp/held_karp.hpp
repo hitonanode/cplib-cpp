@@ -1,7 +1,7 @@
 #pragma once
 
-#include "csr_distance_matrix.hpp"
-#include "minimum_one_tree.hpp"
+#include "tsp/csr_distance_matrix.hpp"
+#include "tsp/minimum_one_tree.hpp"
 
 #include <algorithm>
 #include <utility>
