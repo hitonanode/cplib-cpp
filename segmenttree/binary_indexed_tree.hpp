@@ -13,7 +13,7 @@ template <class T> struct BIT {
         for (int i = 0; i < n; i++) {
             data[i] = p += v[i];
         }
-        for (int j = n - 1; j >= 0; j--) {
+        for (int j = n - 1; j > 1; j--) {
             const int i = j & (j + 1);
             if (i > 0) data[j] -= data[i - 1];
         }
