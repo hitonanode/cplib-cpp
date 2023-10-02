@@ -8,16 +8,17 @@ template <class T> struct BIT {
     int n;
     std::vector<T> data;
     BIT(int len = 0) : n(len), data(len) {}
-    BIT(const std::vector<T> &v) : n(v.size()), data(v.size()) {
+    BIT(const T *const a, const int len) : BIT(len) {
         T p = 0;
         for (int i = 0; i < n; i++) {
-            data[i] = p += v[i];
+            data[i] = p += a[i];
         }
         for (int j = n - 1; j > 1; j--) {
             const int i = j & (j + 1);
             if (i > 0) data[j] -= data[i - 1];
         }
     }
+    BIT(const std::vector<T> &v) : BIT(v.data(), int(v.size())) {}
     void reset() { std::fill(data.begin(), data.end(), T(0)); }
     void add(int pos, T v) { // a[pos] += v
         pos++;
