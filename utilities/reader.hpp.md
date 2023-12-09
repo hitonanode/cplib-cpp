@@ -48,8 +48,8 @@ data:
   timestamp: '2021-08-01 21:42:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/radix_heap_array.dijkstra.test.cpp
   - data_structure/test/radix_heap.dijkstra.test.cpp
+  - data_structure/test/radix_heap_array.dijkstra.test.cpp
   - string/test/sa_count_keyword.reader.test.cpp
   - flow/test/maxflow.pushrelabel.yuki957.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp

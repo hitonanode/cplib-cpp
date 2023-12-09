@@ -256,8 +256,8 @@ data:
   timestamp: '2023-08-05 18:05:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - convolution/test/relaxed_multiplication.test.cpp
   - convolution/test/relaxed_multiplication.exp.test.cpp
+  - convolution/test/relaxed_multiplication.test.cpp
 documentation_of: convolution/relaxed_multiplication.hpp
 layout: document
 title: "Relaxed multiplication / relaxed convolution \uFF08\u30AA\u30F3\u30E9\u30A4\

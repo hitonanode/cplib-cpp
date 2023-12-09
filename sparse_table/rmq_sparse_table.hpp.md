@@ -71,8 +71,8 @@ data:
   verifiedWith:
   - tree/test/lca_rmq.test.cpp
   - string/test/run_enumerate_lyndon_rmq.test.cpp
-  - sparse_table/test/sparse_table.test.cpp
   - sparse_table/test/sparse_table_aoj.test.cpp
+  - sparse_table/test/sparse_table.test.cpp
 documentation_of: sparse_table/rmq_sparse_table.hpp
 layout: document
 redirect_from:

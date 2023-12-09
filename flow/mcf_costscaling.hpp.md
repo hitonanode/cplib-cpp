@@ -164,10 +164,10 @@ data:
   timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - flow/test/mcf_costscaling.test.cpp
   - flow/test/mcf_costscaling.yuki1615.test.cpp
-  - flow/test/mcf_costscaling.bflow.test.cpp
+  - flow/test/mcf_costscaling.test.cpp
   - flow/test/b_flow.test.cpp
+  - flow/test/mcf_costscaling.bflow.test.cpp
 documentation_of: flow/mcf_costscaling.hpp
 layout: document
 title: "Minimum cost flow (cost scaling, Goldberg & Tarjan) \uFF08\u30B3\u30B9\u30C8\
