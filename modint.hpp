@@ -53,18 +53,10 @@ template <int md> struct ModInt {
     constexpr ModInt &operator-=(const ModInt &x) { return *this = *this - x; }
     constexpr ModInt &operator*=(const ModInt &x) { return *this = *this * x; }
     constexpr ModInt &operator/=(const ModInt &x) { return *this = *this / x; }
-    friend constexpr ModInt operator+(lint a, const ModInt &x) {
-        return ModInt()._setval(a % md + x.val_);
-    }
-    friend constexpr ModInt operator-(lint a, const ModInt &x) {
-        return ModInt()._setval(a % md - x.val_ + md);
-    }
-    friend constexpr ModInt operator*(lint a, const ModInt &x) {
-        return ModInt()._setval(a % md * x.val_ % md);
-    }
-    friend constexpr ModInt operator/(lint a, const ModInt &x) {
-        return ModInt()._setval(a % md * x.inv().val() % md);
-    }
+    friend constexpr ModInt operator+(lint a, const ModInt &x) { return ModInt(a) + x; }
+    friend constexpr ModInt operator-(lint a, const ModInt &x) { return ModInt(a) - x; }
+    friend constexpr ModInt operator*(lint a, const ModInt &x) { return ModInt(a) * x; }
+    friend constexpr ModInt operator/(lint a, const ModInt &x) { return ModInt(a) / x; }
     constexpr bool operator==(const ModInt &x) const { return val_ == x.val_; }
     constexpr bool operator!=(const ModInt &x) const { return val_ != x.val_; }
     constexpr bool operator<(const ModInt &x) const {
