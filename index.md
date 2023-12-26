@@ -1350,6 +1350,9 @@ data:
       path: number/test/gen_primes.test.cpp
       title: number/test/gen_primes.test.cpp
     - icon: ':heavy_check_mark:'
+      path: number/test/is_prime.test.cpp
+      title: number/test/is_prime.test.cpp
+    - icon: ':heavy_check_mark:'
       path: number/test/lcm_convolution.test.cpp
       title: number/test/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1524,6 +1527,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/lcp.test.cpp
       title: string/test/lcp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/lyndon.test.cpp
+      title: string/test/lyndon.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/manacher.test.cpp
       title: string/test/manacher.test.cpp

@@ -19,6 +19,9 @@ data:
     path: number/test/factorize_longlong.test.cpp
     title: number/test/factorize_longlong.test.cpp
   - icon: ':heavy_check_mark:'
+    path: number/test/is_prime.test.cpp
+    title: number/test/is_prime.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/miller-rabin-5e7.test.cpp
     title: number/test/miller-rabin-5e7.test.cpp
   - icon: ':heavy_check_mark:'
@@ -148,6 +151,7 @@ data:
   - number/test/factorize_longlong.test.cpp
   - number/test/miller-rabin.test.cpp
   - number/test/miller-rabin-5e7.test.cpp
+  - number/test/is_prime.test.cpp
   - number/test/factorize_aoj.test.cpp
   - graph/test/chromatic_number.test.cpp
 documentation_of: number/factorize.hpp

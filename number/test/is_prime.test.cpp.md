@@ -1,0 +1,97 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: number/factorize.hpp
+    title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: random/xorshift.hpp
+    title: random/xorshift.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/primality_test
+    links:
+    - https://judge.yosupo.jp/problem/primality_test
+  bundledCode: "#line 1 \"number/test/is_prime.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/primality_test\"\
+    \n#line 2 \"random/xorshift.hpp\"\n#include <cstdint>\n\n// CUT begin\nuint32_t\
+    \ rand_int() // XorShift random integer generator\n{\n    static uint32_t x =\
+    \ 123456789, y = 362436069, z = 521288629, w = 88675123;\n    uint32_t t = x ^\
+    \ (x << 11);\n    x = y;\n    y = z;\n    z = w;\n    return w = (w ^ (w >> 19))\
+    \ ^ (t ^ (t >> 8));\n}\ndouble rand_double() { return (double)rand_int() / UINT32_MAX;\
+    \ }\n#line 3 \"number/factorize.hpp\"\n#include <algorithm>\n#include <array>\n\
+    #include <cassert>\n#include <numeric>\n#include <vector>\n\nnamespace SPRP {\n\
+    // http://miller-rabin.appspot.com/\nconst std::vector<std::vector<__int128>>\
+    \ bases{\n    {126401071349994536},                              // < 291831\n\
+    \    {336781006125, 9639812373923155},                  // < 1050535501 (1e9)\n\
+    \    {2, 2570940, 211991001, 3749873356},               // < 47636622961201 (4e13)\n\
+    \    {2, 325, 9375, 28178, 450775, 9780504, 1795265022} // <= 2^64\n};\ninline\
+    \ int get_id(long long n) {\n    if (n < 291831) {\n        return 0;\n    } else\
+    \ if (n < 1050535501) {\n        return 1;\n    } else if (n < 47636622961201)\n\
+    \        return 2;\n    else { return 3; }\n}\n} // namespace SPRP\n\n// Miller-Rabin\
+    \ primality test\n// https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95\n\
+    // Complexity: O(lg n) per query\nstruct {\n    long long modpow(__int128 x, __int128\
+    \ n, long long mod) noexcept {\n        __int128 ret = 1;\n        for (x %= mod;\
+    \ n; x = x * x % mod, n >>= 1) ret = (n & 1) ? ret * x % mod : ret;\n        return\
+    \ ret;\n    }\n    bool operator()(long long n) noexcept {\n        if (n < 2)\
+    \ return false;\n        if (n % 2 == 0) return n == 2;\n        int s = __builtin_ctzll(n\
+    \ - 1);\n\n        for (__int128 a : SPRP::bases[SPRP::get_id(n)]) {\n       \
+    \     if (a % n == 0) continue;\n            a = modpow(a, (n - 1) >> s, n);\n\
+    \            bool may_composite = true;\n            if (a == 1) continue;\n \
+    \           for (int r = s; r--; a = a * a % n) {\n                if (a == n\
+    \ - 1) may_composite = false;\n            }\n            if (may_composite) return\
+    \ false;\n        }\n        return true;\n    }\n} is_prime;\n\nstruct {\n  \
+    \  // Pollard's rho algorithm: find factor greater than 1\n    long long find_factor(long\
+    \ long n) {\n        assert(n > 1);\n        if (n % 2 == 0) return 2;\n     \
+    \   if (is_prime(n)) return n;\n        long long c = 1;\n        auto f = [&](__int128\
+    \ x) -> long long { return (x * x + c) % n; };\n\n        for (int t = 1;; t++)\
+    \ {\n            for (c = 0; c == 0 or c + 2 == n;) c = rand_int() % n;\n    \
+    \        long long x0 = t, m = std::max(n >> 3, 1LL), x, ys, y = x0, r = 1, g,\
+    \ q = 1;\n            do {\n                x = y;\n                for (int i\
+    \ = r; i--;) y = f(y);\n                long long k = 0;\n                do {\n\
+    \                    ys = y;\n                    for (int i = std::min(m, r -\
+    \ k); i--;)\n                        y = f(y), q = __int128(q) * std::abs(x -\
+    \ y) % n;\n                    g = std::__gcd<long long>(q, n);\n            \
+    \        k += m;\n                } while (k < r and g <= 1);\n              \
+    \  r <<= 1;\n            } while (g <= 1);\n            if (g == n) {\n      \
+    \          do {\n                    ys = f(ys);\n                    g = std::__gcd(std::abs(x\
+    \ - ys), n);\n                } while (g <= 1);\n            }\n            if\
+    \ (g != n) return g;\n        }\n    }\n\n    std::vector<long long> operator()(long\
+    \ long n) {\n        std::vector<long long> ret;\n        while (n > 1) {\n  \
+    \          long long f = find_factor(n);\n            if (f < n) {\n         \
+    \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
+    \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
+    \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
+    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
+    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 3\
+    \ \"number/test/is_prime.test.cpp\"\n\n#include <iostream>\nusing namespace std;\n\
+    \nint main() {\n    cin.tie(nullptr);\n    ios_base::sync_with_stdio(false);\n\
+    \n    int Q;\n    cin >> Q;\n    while (Q--) {\n        unsigned long long N;\n\
+    \        cin >> N;\n        cout << (is_prime(N) ? \"Yes\" : \"No\") << '\\n';\n\
+    \    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/primality_test\"\n#include\
+    \ \"../factorize.hpp\"\n\n#include <iostream>\nusing namespace std;\n\nint main()\
+    \ {\n    cin.tie(nullptr);\n    ios_base::sync_with_stdio(false);\n\n    int Q;\n\
+    \    cin >> Q;\n    while (Q--) {\n        unsigned long long N;\n        cin\
+    \ >> N;\n        cout << (is_prime(N) ? \"Yes\" : \"No\") << '\\n';\n    }\n}\n"
+  dependsOn:
+  - number/factorize.hpp
+  - random/xorshift.hpp
+  isVerificationFile: true
+  path: number/test/is_prime.test.cpp
+  requiredBy: []
+  timestamp: '2023-12-26 22:37:19+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: number/test/is_prime.test.cpp
+layout: document
+redirect_from:
+- /verify/number/test/is_prime.test.cpp
+- /verify/number/test/is_prime.test.cpp.html
+title: number/test/is_prime.test.cpp
+---

@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: string/test/lyndon.test.cpp
+    title: string/test/lyndon.test.cpp
+  - icon: ':heavy_check_mark:'
     path: string/test/run_enumerate_lyndon_hash.test.cpp
     title: string/test/run_enumerate_lyndon_hash.test.cpp
   - icon: ':heavy_check_mark:'
@@ -148,6 +151,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/run_enumerate_lyndon_hash.test.cpp
+  - string/test/lyndon.test.cpp
   - string/test/run_enumerate_lyndon_mersenne61.test.cpp
   - string/test/run_enumerate_lyndon_rmq.test.cpp
 documentation_of: string/lyndon.hpp
