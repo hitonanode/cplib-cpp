@@ -806,6 +806,9 @@ data:
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
     - icon: ':heavy_check_mark:'
+      path: utilities/quotients.hpp
+      title: "Quotients of integer \uFF08\u5546\u5217\u6319\uFF09"
+    - icon: ':heavy_check_mark:'
       path: utilities/reader.hpp
       title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
     - icon: ':warning:'
@@ -1662,5 +1665,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/product_embedding.test.cpp
       title: utilities/test/product_embedding.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/quotients.test.cpp
+      title: utilities/test/quotients.test.cpp
 layout: toppage
 ---
