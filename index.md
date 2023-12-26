@@ -475,6 +475,9 @@ data:
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
     - icon: ':heavy_check_mark:'
+      path: number/stern_brocot_tree.hpp
+      title: "Stern\u2013Brocot tree"
+    - icon: ':heavy_check_mark:'
       path: number/zeta_moebius_transform.hpp
       title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   - name: other_algorithms
@@ -1391,6 +1394,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/stern_brocot_tree.test.cpp
+      title: number/test/stern_brocot_tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/zeta_moebius_transform.test.cpp
       title: number/test/zeta_moebius_transform.test.cpp
