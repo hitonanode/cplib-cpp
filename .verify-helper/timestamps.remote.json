@@ -176,6 +176,7 @@
 "number/test/primitive_root_1e18.test.cpp": "2023-03-10 18:40:39 +0900",
 "number/test/sieve.stress.test.cpp": "2023-08-05 18:05:47 +0900",
 "number/test/sqrt_modint_runtime.test.cpp": "2022-05-01 16:11:38 +0900",
+"number/test/stern_brocot_tree.test.cpp": "2023-12-26 22:44:49 +0900",
 "number/test/zeta_moebius_transform.test.cpp": "2023-12-26 21:26:22 +0900",
 "other_algorithms/test/binary_lifting.yuki1013.test.cpp": "2023-07-23 19:53:47 +0900",
 "other_algorithms/test/dual_slope_trick.yuki2114.test.cpp": "2023-08-05 14:49:43 +0900",
