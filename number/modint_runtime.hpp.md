@@ -178,11 +178,11 @@ data:
   timestamp: '2023-08-05 18:05:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - convolution/test/ntt.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - number/test/sieve.stress.test.cpp
   - number/test/montmort_number_mod.test.cpp
-  - convolution/test/ntt.test.cpp
   - graph/test/chromatic_number.test.cpp
   - utilities/test/pow_op.test.cpp
 documentation_of: number/modint_runtime.hpp

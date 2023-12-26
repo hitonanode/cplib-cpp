@@ -47,13 +47,11 @@ data:
     \ + x; }\n    constexpr ModInt &operator-=(const ModInt &x) { return *this = *this\
     \ - x; }\n    constexpr ModInt &operator*=(const ModInt &x) { return *this = *this\
     \ * x; }\n    constexpr ModInt &operator/=(const ModInt &x) { return *this = *this\
-    \ / x; }\n    friend constexpr ModInt operator+(lint a, const ModInt &x) {\n \
-    \       return ModInt()._setval(a % md + x.val_);\n    }\n    friend constexpr\
-    \ ModInt operator-(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
-    \ % md - x.val_ + md);\n    }\n    friend constexpr ModInt operator*(lint a, const\
-    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.val_ % md);\n    }\n\
-    \    friend constexpr ModInt operator/(lint a, const ModInt &x) {\n        return\
-    \ ModInt()._setval(a % md * x.inv().val() % md);\n    }\n    constexpr bool operator==(const\
+    \ / x; }\n    friend constexpr ModInt operator+(lint a, const ModInt &x) { return\
+    \ ModInt(a) + x; }\n    friend constexpr ModInt operator-(lint a, const ModInt\
+    \ &x) { return ModInt(a) - x; }\n    friend constexpr ModInt operator*(lint a,\
+    \ const ModInt &x) { return ModInt(a) * x; }\n    friend constexpr ModInt operator/(lint\
+    \ a, const ModInt &x) { return ModInt(a) / x; }\n    constexpr bool operator==(const\
     \ ModInt &x) const { return val_ == x.val_; }\n    constexpr bool operator!=(const\
     \ ModInt &x) const { return val_ != x.val_; }\n    constexpr bool operator<(const\
     \ ModInt &x) const {\n        return val_ < x.val_;\n    } // To use std::map<ModInt,\
@@ -157,7 +155,7 @@ data:
   isVerificationFile: true
   path: convolution/test/bitwise_xor_conv.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:05:47+09:00'
+  timestamp: '2023-12-26 21:26:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/bitwise_xor_conv.test.cpp

@@ -275,72 +275,70 @@ data:
     \ &x) { return *this = *this - x; }\n    constexpr ModInt &operator*=(const ModInt\
     \ &x) { return *this = *this * x; }\n    constexpr ModInt &operator/=(const ModInt\
     \ &x) { return *this = *this / x; }\n    friend constexpr ModInt operator+(lint\
-    \ a, const ModInt &x) {\n        return ModInt()._setval(a % md + x.val_);\n \
-    \   }\n    friend constexpr ModInt operator-(lint a, const ModInt &x) {\n    \
-    \    return ModInt()._setval(a % md - x.val_ + md);\n    }\n    friend constexpr\
-    \ ModInt operator*(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
-    \ % md * x.val_ % md);\n    }\n    friend constexpr ModInt operator/(lint a, const\
-    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.inv().val() % md);\n\
-    \    }\n    constexpr bool operator==(const ModInt &x) const { return val_ ==\
-    \ x.val_; }\n    constexpr bool operator!=(const ModInt &x) const { return val_\
-    \ != x.val_; }\n    constexpr bool operator<(const ModInt &x) const {\n      \
-    \  return val_ < x.val_;\n    } // To use std::map<ModInt, T>\n    friend std::istream\
-    \ &operator>>(std::istream &is, ModInt &x) {\n        lint t;\n        return\
-    \ is >> t, x = ModInt(t), is;\n    }\n    constexpr friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &x) {\n        return os << x.val_;\n    }\n\n    constexpr\
-    \ ModInt pow(lint n) const {\n        ModInt ans = 1, tmp = *this;\n        while\
-    \ (n) {\n            if (n & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n\
-    \        }\n        return ans;\n    }\n\n    static constexpr int cache_limit\
-    \ = std::min(md, 1 << 21);\n    static std::vector<ModInt> facs, facinvs, invs;\n\
-    \n    constexpr static void _precalculation(int N) {\n        const int l0 = facs.size();\n\
-    \        if (N > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N),\
-    \ facinvs.resize(N), invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i]\
-    \ = facs[i - 1] * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n    \
-    \    for (int i = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n\
-    \        for (int i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n\
-    \    }\n\n    constexpr ModInt inv() const {\n        if (this->val_ < cache_limit)\
-    \ {\n            if (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n  \
-    \          while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
-    \ * 2);\n            return invs[this->val_];\n        } else {\n            return\
-    \ this->pow(md - 2);\n        }\n    }\n    constexpr ModInt fac() const {\n \
-    \       while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);\n\
-    \        return facs[this->val_];\n    }\n    constexpr ModInt facinv() const\
-    \ {\n        while (this->val_ >= int(facs.size())) _precalculation(facs.size()\
-    \ * 2);\n        return facinvs[this->val_];\n    }\n    constexpr ModInt doublefac()\
-    \ const {\n        lint k = (this->val_ + 1) / 2;\n        return (this->val_\
-    \ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())\n        \
-    \                        : ModInt(k).fac() * ModInt(2).pow(k);\n    }\n\n    constexpr\
-    \ ModInt nCr(int r) const {\n        if (r < 0 or this->val_ < r) return ModInt(0);\n\
-    \        return this->fac() * (*this - r).facinv() * ModInt(r).facinv();\n   \
-    \ }\n\n    constexpr ModInt nPr(int r) const {\n        if (r < 0 or this->val_\
-    \ < r) return ModInt(0);\n        return this->fac() * (*this - r).facinv();\n\
-    \    }\n\n    static ModInt binom(int n, int r) {\n        static long long bruteforce_times\
-    \ = 0;\n\n        if (r < 0 or n < r) return ModInt(0);\n        if (n <= bruteforce_times\
-    \ or n < (int)facs.size()) return ModInt(n).nCr(r);\n\n        r = std::min(r,\
-    \ n - r);\n\n        ModInt ret = ModInt(r).facinv();\n        for (int i = 0;\
-    \ i < r; ++i) ret *= n - i;\n        bruteforce_times += r;\n\n        return\
-    \ ret;\n    }\n\n    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1!\
-    \ k_2! ... k_m!)\n    // Complexity: O(sum(ks))\n    template <class Vec> static\
-    \ ModInt multinomial(const Vec &ks) {\n        ModInt ret{1};\n        int sum\
-    \ = 0;\n        for (int k : ks) {\n            assert(k >= 0);\n            ret\
-    \ *= ModInt(k).facinv(), sum += k;\n        }\n        return ret * ModInt(sum).fac();\n\
-    \    }\n\n    // Catalan number, C_n = binom(2n, n) / (n + 1)\n    // C_0 = 1,\
-    \ C_1 = 1, C_2 = 2, C_3 = 5, C_4 = 14, ...\n    // https://oeis.org/A000108\n\
-    \    // Complexity: O(n)\n    static ModInt catalan(int n) {\n        if (n <\
-    \ 0) return ModInt(0);\n        return ModInt(n * 2).fac() * ModInt(n + 1).facinv()\
-    \ * ModInt(n).facinv();\n    }\n\n    ModInt sqrt() const {\n        if (val_\
-    \ == 0) return 0;\n        if (md == 2) return val_;\n        if (pow((md - 1)\
-    \ / 2) != 1) return 0;\n        ModInt b = 1;\n        while (b.pow((md - 1) /\
-    \ 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0)\
-    \ m >>= 1, e++;\n        ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n \
-    \       x *= (*this);\n        ModInt z = b.pow(m);\n        while (y != 1) {\n\
-    \            int j = 0;\n            ModInt t = y;\n            while (t != 1)\
-    \ j++, t *= t;\n            z = z.pow(1LL << (e - j - 1));\n            x *= z,\
-    \ z *= z, y *= z;\n            e = j;\n        }\n        return ModInt(std::min(x.val_,\
-    \ md - x.val_));\n    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs\
-    \ = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
-    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n"
+    \ a, const ModInt &x) { return ModInt(a) + x; }\n    friend constexpr ModInt operator-(lint\
+    \ a, const ModInt &x) { return ModInt(a) - x; }\n    friend constexpr ModInt operator*(lint\
+    \ a, const ModInt &x) { return ModInt(a) * x; }\n    friend constexpr ModInt operator/(lint\
+    \ a, const ModInt &x) { return ModInt(a) / x; }\n    constexpr bool operator==(const\
+    \ ModInt &x) const { return val_ == x.val_; }\n    constexpr bool operator!=(const\
+    \ ModInt &x) const { return val_ != x.val_; }\n    constexpr bool operator<(const\
+    \ ModInt &x) const {\n        return val_ < x.val_;\n    } // To use std::map<ModInt,\
+    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
+    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    constexpr\
+    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {\n     \
+    \   return os << x.val_;\n    }\n\n    constexpr ModInt pow(lint n) const {\n\
+    \        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if (n\
+    \ & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
+    \ ans;\n    }\n\n    static constexpr int cache_limit = std::min(md, 1 << 21);\n\
+    \    static std::vector<ModInt> facs, facinvs, invs;\n\n    constexpr static void\
+    \ _precalculation(int N) {\n        const int l0 = facs.size();\n        if (N\
+    \ > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N), facinvs.resize(N),\
+    \ invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i] = facs[i - 1]\
+    \ * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n        for (int i\
+    \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
+    \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n\n    constexpr\
+    \ ModInt inv() const {\n        if (this->val_ < cache_limit) {\n            if\
+    \ (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n            while (this->val_\
+    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val_];\n\
+    \        } else {\n            return this->pow(md - 2);\n        }\n    }\n \
+    \   constexpr ModInt fac() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facs[this->val_];\n    }\n\
+    \    constexpr ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
+    \ }\n    constexpr ModInt doublefac() const {\n        lint k = (this->val_ +\
+    \ 1) / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
+    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
+    \    }\n\n    constexpr ModInt nCr(int r) const {\n        if (r < 0 or this->val_\
+    \ < r) return ModInt(0);\n        return this->fac() * (*this - r).facinv() *\
+    \ ModInt(r).facinv();\n    }\n\n    constexpr ModInt nPr(int r) const {\n    \
+    \    if (r < 0 or this->val_ < r) return ModInt(0);\n        return this->fac()\
+    \ * (*this - r).facinv();\n    }\n\n    static ModInt binom(int n, int r) {\n\
+    \        static long long bruteforce_times = 0;\n\n        if (r < 0 or n < r)\
+    \ return ModInt(0);\n        if (n <= bruteforce_times or n < (int)facs.size())\
+    \ return ModInt(n).nCr(r);\n\n        r = std::min(r, n - r);\n\n        ModInt\
+    \ ret = ModInt(r).facinv();\n        for (int i = 0; i < r; ++i) ret *= n - i;\n\
+    \        bruteforce_times += r;\n\n        return ret;\n    }\n\n    // Multinomial\
+    \ coefficient, (k_1 + k_2 + ... + k_m)! / (k_1! k_2! ... k_m!)\n    // Complexity:\
+    \ O(sum(ks))\n    template <class Vec> static ModInt multinomial(const Vec &ks)\
+    \ {\n        ModInt ret{1};\n        int sum = 0;\n        for (int k : ks) {\n\
+    \            assert(k >= 0);\n            ret *= ModInt(k).facinv(), sum += k;\n\
+    \        }\n        return ret * ModInt(sum).fac();\n    }\n\n    // Catalan number,\
+    \ C_n = binom(2n, n) / (n + 1)\n    // C_0 = 1, C_1 = 1, C_2 = 2, C_3 = 5, C_4\
+    \ = 14, ...\n    // https://oeis.org/A000108\n    // Complexity: O(n)\n    static\
+    \ ModInt catalan(int n) {\n        if (n < 0) return ModInt(0);\n        return\
+    \ ModInt(n * 2).fac() * ModInt(n + 1).facinv() * ModInt(n).facinv();\n    }\n\n\
+    \    ModInt sqrt() const {\n        if (val_ == 0) return 0;\n        if (md ==\
+    \ 2) return val_;\n        if (pow((md - 1) / 2) != 1) return 0;\n        ModInt\
+    \ b = 1;\n        while (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0,\
+    \ m = md - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m\
+    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val_, md - x.val_));\n    }\n};\ntemplate <int\
+    \ md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\ntemplate <int md> std::vector<ModInt<md>>\
+    \ ModInt<md>::facinvs = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::invs\
+    \ = {0};\n\nusing ModInt998244353 = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n\
+    // using mint = ModInt<1000000007>;\n"
   code: "#pragma once\n#include <cassert>\n#include <iostream>\n#include <set>\n#include\
     \ <vector>\n\ntemplate <int md> struct ModInt {\n    using lint = long long;\n\
     \    constexpr static int mod() { return md; }\n    static int get_primitive_root()\
@@ -369,13 +367,11 @@ data:
     \ + x; }\n    constexpr ModInt &operator-=(const ModInt &x) { return *this = *this\
     \ - x; }\n    constexpr ModInt &operator*=(const ModInt &x) { return *this = *this\
     \ * x; }\n    constexpr ModInt &operator/=(const ModInt &x) { return *this = *this\
-    \ / x; }\n    friend constexpr ModInt operator+(lint a, const ModInt &x) {\n \
-    \       return ModInt()._setval(a % md + x.val_);\n    }\n    friend constexpr\
-    \ ModInt operator-(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
-    \ % md - x.val_ + md);\n    }\n    friend constexpr ModInt operator*(lint a, const\
-    \ ModInt &x) {\n        return ModInt()._setval(a % md * x.val_ % md);\n    }\n\
-    \    friend constexpr ModInt operator/(lint a, const ModInt &x) {\n        return\
-    \ ModInt()._setval(a % md * x.inv().val() % md);\n    }\n    constexpr bool operator==(const\
+    \ / x; }\n    friend constexpr ModInt operator+(lint a, const ModInt &x) { return\
+    \ ModInt(a) + x; }\n    friend constexpr ModInt operator-(lint a, const ModInt\
+    \ &x) { return ModInt(a) - x; }\n    friend constexpr ModInt operator*(lint a,\
+    \ const ModInt &x) { return ModInt(a) * x; }\n    friend constexpr ModInt operator/(lint\
+    \ a, const ModInt &x) { return ModInt(a) / x; }\n    constexpr bool operator==(const\
     \ ModInt &x) const { return val_ == x.val_; }\n    constexpr bool operator!=(const\
     \ ModInt &x) const { return val_ != x.val_; }\n    constexpr bool operator<(const\
     \ ModInt &x) const {\n        return val_ < x.val_;\n    } // To use std::map<ModInt,\
@@ -440,86 +436,86 @@ data:
   isVerificationFile: false
   path: modint.hpp
   requiredBy:
+  - convolution/ntt.hpp
+  - convolution/multivar_ntt.hpp
+  - convolution/semirelaxed_multiplication.hpp
+  - convolution/relaxed_multiplication.hpp
+  - formal_power_series/polynomial_divmod.hpp
+  - formal_power_series/coeff_of_rational_function.hpp
+  - formal_power_series/factorial_power.hpp
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
-  - formal_power_series/coeff_of_rational_function.hpp
-  - formal_power_series/polynomial_divmod.hpp
-  - formal_power_series/factorial_power.hpp
-  - convolution/ntt.hpp
-  - convolution/relaxed_multiplication.hpp
-  - convolution/semirelaxed_multiplication.hpp
-  - convolution/multivar_ntt.hpp
-  timestamp: '2023-08-05 18:05:47+09:00'
+  timestamp: '2023-12-26 21:26:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - set_power_series/test/subset_pow.yuki1594.test.cpp
-  - set_power_series/test/subset_log.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
+  - set_power_series/test/subset_pow.yuki1594.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
-  - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
-  - data_structure/test/queue_operate_all_composite.test.cpp
-  - data_structure/test/link_cut_tree.composition.test.cpp
-  - data_structure/test/lazy_rbst.test.cpp
-  - data_structure/test/rectangle_add_rectangle_sum.test.cpp
-  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
-  - segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - segmenttree/test/range-affine-range-sum.test.cpp
-  - segmenttree/test/point-set-range-composite.test.cpp
-  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  - tree/test/subtree_isomorphism.lc.test.cpp
-  - tree/test/vertex-set-path-composite.test.cpp
-  - tree/test/tree_isomorphism.aoj1613.test.cpp
-  - string/test/rolling_hash_w_modint.test.cpp
-  - string/test/run_enumerate_lyndon_hash.test.cpp
-  - string/test/rolling_hash_lcp.test.cpp
-  - string/test/rolling_hash.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
-  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
-  - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
-  - linear_algebra_matrix/test/characteristic_poly.test.cpp
-  - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
-  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
-  - linear_algebra_matrix/test/inverse_matrix.test.cpp
-  - linear_algebra_matrix/test/matrix_product.test.cpp
-  - linear_algebra_matrix/test/hafnian.test.cpp
-  - number/test/zeta_moebius_transform.test.cpp
-  - number/test/multiple_moebius.yuki886.test.cpp
-  - number/test/primitive_root.test.cpp
-  - number/test/multiple_moebius.yuki1627.test.cpp
-  - number/test/gcd_convolution.test.cpp
-  - number/test/arithmetic_function_totient.test.cpp
-  - number/test/lcm_convolution.test.cpp
-  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - formal_power_series/test/kitamasa.test.cpp
-  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
-  - formal_power_series/test/stirling_number_of_1st.test.cpp
-  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - formal_power_series/test/polynomial_divmod.test.cpp
-  - formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
-  - formal_power_series/test/polynomial_interpolation.test.cpp
-  - formal_power_series/test/linear_recurrence.test.cpp
-  - formal_power_series/test/shift_of_sampling_points.test.cpp
-  - convolution/test/relaxed_multiplication.exp.test.cpp
-  - convolution/test/multivar_ntt.test.cpp
+  - set_power_series/test/subset_log.test.cpp
   - convolution/test/relaxed_multiplication.test.cpp
   - convolution/test/convolution_on_tree.test.cpp
+  - convolution/test/bitwise_xor_conv.test.cpp
+  - convolution/test/multivar_ntt.test.cpp
+  - convolution/test/relaxed_multiplication.exp.test.cpp
+  - convolution/test/ntt.test.cpp
   - convolution/test/semirelaxed_multiplication.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
-  - convolution/test/bitwise_xor_conv.test.cpp
-  - convolution/test/ntt.test.cpp
-  - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
   - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
-  - other_algorithms/test/permutation_tree.yuki1720.test.cpp
+  - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
+  - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
+  - data_structure/test/lazy_rbst.test.cpp
+  - data_structure/test/link_cut_tree.composition.test.cpp
+  - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
+  - data_structure/test/rectangle_add_rectangle_sum.test.cpp
+  - data_structure/test/queue_operate_all_composite.test.cpp
+  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+  - formal_power_series/test/shift_of_sampling_points.test.cpp
+  - formal_power_series/test/linear_recurrence.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
+  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
+  - formal_power_series/test/polynomial_divmod.test.cpp
+  - formal_power_series/test/stirling_number_of_1st.test.cpp
+  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
+  - formal_power_series/test/kitamasa.test.cpp
+  - formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
+  - formal_power_series/test/polynomial_interpolation.test.cpp
+  - segmenttree/test/acl_range-affine-range-sum.test.cpp
+  - segmenttree/test/point-set-range-composite.test.cpp
+  - segmenttree/test/range-affine-range-sum.test.cpp
+  - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
+  - linear_algebra_matrix/test/matrix_product.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
+  - linear_algebra_matrix/test/inverse_matrix.test.cpp
+  - linear_algebra_matrix/test/characteristic_poly.test.cpp
+  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
+  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
+  - linear_algebra_matrix/test/hafnian.test.cpp
+  - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+  - number/test/multiple_moebius.yuki1627.test.cpp
+  - number/test/arithmetic_function_totient.test.cpp
+  - number/test/multiple_moebius.yuki886.test.cpp
+  - number/test/primitive_root.test.cpp
+  - number/test/zeta_moebius_transform.test.cpp
+  - number/test/gcd_convolution.test.cpp
+  - number/test/lcm_convolution.test.cpp
+  - tree/test/tree_isomorphism.aoj1613.test.cpp
+  - tree/test/subtree_isomorphism.lc.test.cpp
+  - tree/test/vertex-set-path-composite.test.cpp
+  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - graph/test/enumerate_cliques.test.cpp
   - utilities/test/pow_op.test.cpp
   - utilities/test/pow.test.cpp
+  - string/test/run_enumerate_lyndon_hash.test.cpp
+  - string/test/rolling_hash_lcp.test.cpp
+  - string/test/rolling_hash.test.cpp
+  - string/test/rolling_hash_w_modint.test.cpp
+  - other_algorithms/test/permutation_tree.yuki1720.test.cpp
 documentation_of: modint.hpp
 layout: document
 redirect_from:

@@ -128,35 +128,33 @@ data:
     \ &operator-=(const ModInt &x) { return *this = *this - x; }\n    constexpr ModInt\
     \ &operator*=(const ModInt &x) { return *this = *this * x; }\n    constexpr ModInt\
     \ &operator/=(const ModInt &x) { return *this = *this / x; }\n    friend constexpr\
-    \ ModInt operator+(lint a, const ModInt &x) {\n        return ModInt()._setval(a\
-    \ % md + x.val_);\n    }\n    friend constexpr ModInt operator-(lint a, const\
-    \ ModInt &x) {\n        return ModInt()._setval(a % md - x.val_ + md);\n    }\n\
-    \    friend constexpr ModInt operator*(lint a, const ModInt &x) {\n        return\
-    \ ModInt()._setval(a % md * x.val_ % md);\n    }\n    friend constexpr ModInt\
-    \ operator/(lint a, const ModInt &x) {\n        return ModInt()._setval(a % md\
-    \ * x.inv().val() % md);\n    }\n    constexpr bool operator==(const ModInt &x)\
-    \ const { return val_ == x.val_; }\n    constexpr bool operator!=(const ModInt\
-    \ &x) const { return val_ != x.val_; }\n    constexpr bool operator<(const ModInt\
-    \ &x) const {\n        return val_ < x.val_;\n    } // To use std::map<ModInt,\
-    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
-    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    constexpr\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {\n     \
-    \   return os << x.val_;\n    }\n\n    constexpr ModInt pow(lint n) const {\n\
-    \        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if (n\
-    \ & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
-    \ ans;\n    }\n\n    static constexpr int cache_limit = std::min(md, 1 << 21);\n\
-    \    static std::vector<ModInt> facs, facinvs, invs;\n\n    constexpr static void\
-    \ _precalculation(int N) {\n        const int l0 = facs.size();\n        if (N\
-    \ > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N), facinvs.resize(N),\
-    \ invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i] = facs[i - 1]\
-    \ * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n        for (int i\
-    \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
-    \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n\n    constexpr\
-    \ ModInt inv() const {\n        if (this->val_ < cache_limit) {\n            if\
-    \ (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n            while (this->val_\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val_];\n\
-    \        } else {\n            return this->pow(md - 2);\n        }\n    }\n \
-    \   constexpr ModInt fac() const {\n        while (this->val_ >= int(facs.size()))\
+    \ ModInt operator+(lint a, const ModInt &x) { return ModInt(a) + x; }\n    friend\
+    \ constexpr ModInt operator-(lint a, const ModInt &x) { return ModInt(a) - x;\
+    \ }\n    friend constexpr ModInt operator*(lint a, const ModInt &x) { return ModInt(a)\
+    \ * x; }\n    friend constexpr ModInt operator/(lint a, const ModInt &x) { return\
+    \ ModInt(a) / x; }\n    constexpr bool operator==(const ModInt &x) const { return\
+    \ val_ == x.val_; }\n    constexpr bool operator!=(const ModInt &x) const { return\
+    \ val_ != x.val_; }\n    constexpr bool operator<(const ModInt &x) const {\n \
+    \       return val_ < x.val_;\n    } // To use std::map<ModInt, T>\n    friend\
+    \ std::istream &operator>>(std::istream &is, ModInt &x) {\n        lint t;\n \
+    \       return is >> t, x = ModInt(t), is;\n    }\n    constexpr friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &x) {\n        return os << x.val_;\n\
+    \    }\n\n    constexpr ModInt pow(lint n) const {\n        ModInt ans = 1, tmp\
+    \ = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n        \
+    \    tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n    static\
+    \ constexpr int cache_limit = std::min(md, 1 << 21);\n    static std::vector<ModInt>\
+    \ facs, facinvs, invs;\n\n    constexpr static void _precalculation(int N) {\n\
+    \        const int l0 = facs.size();\n        if (N > md) N = md;\n        if\
+    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
+    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
+    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
+    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
+    \ = facinvs[i] * facs[i - 1];\n    }\n\n    constexpr ModInt inv() const {\n \
+    \       if (this->val_ < cache_limit) {\n            if (facs.empty()) facs =\
+    \ {1}, facinvs = {1}, invs = {0};\n            while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n            return invs[this->val_];\n  \
+    \      } else {\n            return this->pow(md - 2);\n        }\n    }\n   \
+    \ constexpr ModInt fac() const {\n        while (this->val_ >= int(facs.size()))\
     \ _precalculation(facs.size() * 2);\n        return facs[this->val_];\n    }\n\
     \    constexpr ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
     \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
@@ -315,7 +313,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:05:47+09:00'
+  timestamp: '2023-12-26 21:26:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
