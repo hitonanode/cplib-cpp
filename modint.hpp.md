@@ -235,6 +235,9 @@ data:
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: utilities/test/multidim_index.zeta.test.cpp
+    title: utilities/test/multidim_index.zeta.test.cpp
+  - icon: ':heavy_check_mark:'
     path: utilities/test/pow.test.cpp
     title: utilities/test/pow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -510,6 +513,7 @@ data:
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - graph/test/enumerate_cliques.test.cpp
   - utilities/test/pow_op.test.cpp
+  - utilities/test/multidim_index.zeta.test.cpp
   - utilities/test/pow.test.cpp
   - string/test/run_enumerate_lyndon_hash.test.cpp
   - string/test/rolling_hash_lcp.test.cpp

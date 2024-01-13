@@ -781,6 +781,9 @@ data:
     - icon: ':warning:'
       path: utilities/momentum_deque.hpp
       title: utilities/momentum_deque.hpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/multidim_index.hpp
+      title: Multidimensional index
     - icon: ':warning:'
       path: utilities/multiprecision_int.hpp
       title: utilities/multiprecision_int.hpp
@@ -1665,6 +1668,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/kth_root_integer.test.cpp
       title: utilities/test/kth_root_integer.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/multidim_index.zeta.test.cpp
+      title: utilities/test/multidim_index.zeta.test.cpp
     - icon: ':heavy_check_mark:'
       path: utilities/test/pow.test.cpp
       title: utilities/test/pow.test.cpp
