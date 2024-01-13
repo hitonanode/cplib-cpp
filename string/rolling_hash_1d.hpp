@@ -97,6 +97,11 @@ template <typename V> struct rolling_hash {
             return length == r.length and val == r.val;
         }
 
+        bool operator<(const Hash &x) const { // To use std::map
+            if (length != x.length) return length < x.length;
+            return val < x.val;
+        }
+
         Hash operator*(const Hash &r) const {
             return Hash(length + r.length, val * power.at(r.length) + r.val);
         }
