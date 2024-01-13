@@ -77,15 +77,17 @@ data:
     \        V val;\n        Hash() : length(0), val(V()) {}\n        Hash(int len,\
     \ const V &v) : length(len), val(v) {}\n\n        bool operator==(const Hash &r)\
     \ const noexcept {\n            return length == r.length and val == r.val;\n\
-    \        }\n\n        Hash operator*(const Hash &r) const {\n            return\
-    \ Hash(length + r.length, val * power.at(r.length) + r.val);\n        }\n\n  \
-    \      template <class OStream> friend OStream &operator<<(OStream &os, const\
-    \ Hash &x) {\n            return os << \"(length=\" << x.length << \", val=\"\
-    \ << x.val << \")\";\n        }\n    };\n\n    Hash get(int l, int r) const {\
-    \ // s[l] * B^(r - l - 1) + ... + s[r - 1]\n        if (l >= r) return Hash();\n\
-    \        return Hash(r - l, hash[r] - hash[l] * power[r - l]);\n    }\n\n    int\
-    \ lcplen(int l1, int l2) const { return longest_common_prefix(*this, l1, *this,\
-    \ l2); }\n};\ntemplate <typename V> std::vector<V> rolling_hash<V>::power{V(1)};\n\
+    \        }\n\n        bool operator<(const Hash &x) const { // To use std::map\n\
+    \            if (length != x.length) return length < x.length;\n            return\
+    \ val < x.val;\n        }\n\n        Hash operator*(const Hash &r) const {\n \
+    \           return Hash(length + r.length, val * power.at(r.length) + r.val);\n\
+    \        }\n\n        template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const Hash &x) {\n            return os << \"(length=\" << x.length <<\
+    \ \", val=\" << x.val << \")\";\n        }\n    };\n\n    Hash get(int l, int\
+    \ r) const { // s[l] * B^(r - l - 1) + ... + s[r - 1]\n        if (l >= r) return\
+    \ Hash();\n        return Hash(r - l, hash[r] - hash[l] * power[r - l]);\n   \
+    \ }\n\n    int lcplen(int l1, int l2) const { return longest_common_prefix(*this,\
+    \ l1, *this, l2); }\n};\ntemplate <typename V> std::vector<V> rolling_hash<V>::power{V(1)};\n\
     \n// Longest common prerfix between s1[l1, N1) and s2[l2, N2)\ntemplate <typename\
     \ T>\nint longest_common_prefix(const rolling_hash<T> &rh1, int l1, const rolling_hash<T>\
     \ &rh2, int l2) {\n    int lo = 0, hi = std::min(rh1.N + 1 - l1, rh2.N + 1 - l2);\n\
@@ -148,15 +150,17 @@ data:
     \        V val;\n        Hash() : length(0), val(V()) {}\n        Hash(int len,\
     \ const V &v) : length(len), val(v) {}\n\n        bool operator==(const Hash &r)\
     \ const noexcept {\n            return length == r.length and val == r.val;\n\
-    \        }\n\n        Hash operator*(const Hash &r) const {\n            return\
-    \ Hash(length + r.length, val * power.at(r.length) + r.val);\n        }\n\n  \
-    \      template <class OStream> friend OStream &operator<<(OStream &os, const\
-    \ Hash &x) {\n            return os << \"(length=\" << x.length << \", val=\"\
-    \ << x.val << \")\";\n        }\n    };\n\n    Hash get(int l, int r) const {\
-    \ // s[l] * B^(r - l - 1) + ... + s[r - 1]\n        if (l >= r) return Hash();\n\
-    \        return Hash(r - l, hash[r] - hash[l] * power[r - l]);\n    }\n\n    int\
-    \ lcplen(int l1, int l2) const { return longest_common_prefix(*this, l1, *this,\
-    \ l2); }\n};\ntemplate <typename V> std::vector<V> rolling_hash<V>::power{V(1)};\n\
+    \        }\n\n        bool operator<(const Hash &x) const { // To use std::map\n\
+    \            if (length != x.length) return length < x.length;\n            return\
+    \ val < x.val;\n        }\n\n        Hash operator*(const Hash &r) const {\n \
+    \           return Hash(length + r.length, val * power.at(r.length) + r.val);\n\
+    \        }\n\n        template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const Hash &x) {\n            return os << \"(length=\" << x.length <<\
+    \ \", val=\" << x.val << \")\";\n        }\n    };\n\n    Hash get(int l, int\
+    \ r) const { // s[l] * B^(r - l - 1) + ... + s[r - 1]\n        if (l >= r) return\
+    \ Hash();\n        return Hash(r - l, hash[r] - hash[l] * power[r - l]);\n   \
+    \ }\n\n    int lcplen(int l1, int l2) const { return longest_common_prefix(*this,\
+    \ l1, *this, l2); }\n};\ntemplate <typename V> std::vector<V> rolling_hash<V>::power{V(1)};\n\
     \n// Longest common prerfix between s1[l1, N1) and s2[l2, N2)\ntemplate <typename\
     \ T>\nint longest_common_prefix(const rolling_hash<T> &rh1, int l1, const rolling_hash<T>\
     \ &rh2, int l2) {\n    int lo = 0, hi = std::min(rh1.N + 1 - l1, rh2.N + 1 - l2);\n\
@@ -172,7 +176,7 @@ data:
   isVerificationFile: false
   path: string/rolling_hash_1d.hpp
   requiredBy: []
-  timestamp: '2023-03-10 12:42:19+09:00'
+  timestamp: '2024-01-13 20:34:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/run_enumerate_lyndon_hash.test.cpp
