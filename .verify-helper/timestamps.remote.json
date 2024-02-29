@@ -234,6 +234,7 @@
 "string/test/sa_count_keyword.test.cpp": "2022-01-08 20:23:44 +0900",
 "string/test/suffix_array.test.cpp": "2022-01-08 20:23:44 +0900",
 "string/test/z_algorithm.test.cpp": "2021-01-01 16:52:32 +0900",
+"tree/test/auxiliary_tree.yuki901.test.cpp": "2024-02-29 17:58:08 +0900",
 "tree/test/cartesian_tree.test.cpp": "2021-10-13 23:08:08 +0900",
 "tree/test/diameter.test.cpp": "2021-06-09 00:31:07 +0900",
 "tree/test/frequency_table_of_tree_distance.stress.test.cpp": "2023-12-26 21:26:22 +0900",
