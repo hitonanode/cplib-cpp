@@ -103,9 +103,9 @@ data:
   timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - string/test/run_enumerate_lyndon_mersenne61.test.cpp
   - string/test/rolling_hash_mersenne61.test.cpp
   - string/test/rolling_hash_2d.aoj.test.cpp
-  - string/test/run_enumerate_lyndon_mersenne61.test.cpp
 documentation_of: number/modint_mersenne61.hpp
 layout: document
 title: "$\\mathbb{F}_{2^{61} - 1}$ \uFF08\u30CF\u30C3\u30B7\u30E5\u7528\u30E1\u30EB\

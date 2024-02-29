@@ -6,6 +6,10 @@ data:
     path: string/longest_common_prefix.hpp
     title: string/longest_common_prefix.hpp
   - icon: ':heavy_check_mark:'
+    path: tree/auxiliary_tree.hpp
+    title: "LCA-based auxiliary tree / virtual tree, online \uFF08\"\u865A\u6811\"\
+      \uFF09"
+  - icon: ':heavy_check_mark:'
     path: tree/lca_rmq.hpp
     title: "Lowest common ancestor of tree based on sparse table \uFF08\u30AF\u30A8\
       \u30EA $O(1)$ \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
@@ -19,6 +23,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/run_enumerate_lyndon_rmq.test.cpp
     title: string/test/run_enumerate_lyndon_rmq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: tree/test/auxiliary_tree.yuki901.test.cpp
+    title: tree/test/auxiliary_tree.yuki901.test.cpp
   - icon: ':heavy_check_mark:'
     path: tree/test/lca_rmq.test.cpp
     title: tree/test/lca_rmq.test.cpp
@@ -64,15 +71,17 @@ data:
   isVerificationFile: false
   path: sparse_table/rmq_sparse_table.hpp
   requiredBy:
-  - tree/lca_rmq.hpp
   - string/longest_common_prefix.hpp
+  - tree/auxiliary_tree.hpp
+  - tree/lca_rmq.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/lca_rmq.test.cpp
   - sparse_table/test/sparse_table_aoj.test.cpp
   - sparse_table/test/sparse_table.test.cpp
   - string/test/run_enumerate_lyndon_rmq.test.cpp
+  - tree/test/lca_rmq.test.cpp
+  - tree/test/auxiliary_tree.yuki901.test.cpp
 documentation_of: sparse_table/rmq_sparse_table.hpp
 layout: document
 redirect_from:

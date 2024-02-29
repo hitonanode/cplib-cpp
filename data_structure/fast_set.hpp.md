@@ -1,11 +1,18 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: tree/auxiliary_tree.hpp
+    title: "LCA-based auxiliary tree / virtual tree, online \uFF08\"\u865A\u6811\"\
+      \uFF09"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/fast_set.test.cpp
     title: data_structure/test/fast_set.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: tree/test/auxiliary_tree.yuki901.test.cpp
+    title: tree/test/auxiliary_tree.yuki901.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -99,11 +106,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: data_structure/fast_set.hpp
-  requiredBy: []
+  requiredBy:
+  - tree/auxiliary_tree.hpp
   timestamp: '2023-03-23 22:42:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/fast_set.test.cpp
+  - tree/test/auxiliary_tree.yuki901.test.cpp
 documentation_of: data_structure/fast_set.hpp
 layout: document
 title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\u3092\

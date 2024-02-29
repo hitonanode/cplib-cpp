@@ -673,6 +673,10 @@ data:
   - name: tree
     pages:
     - icon: ':heavy_check_mark:'
+      path: tree/auxiliary_tree.hpp
+      title: "LCA-based auxiliary tree / virtual tree, online \uFF08\"\u865A\u6811\
+        \"\uFF09"
+    - icon: ':heavy_check_mark:'
       path: tree/cartesian_tree.hpp
       title: Cartesian tree
     - icon: ':heavy_check_mark:'
@@ -1583,6 +1587,9 @@ data:
       title: string/test/z_algorithm.test.cpp
   - name: tree/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: tree/test/auxiliary_tree.yuki901.test.cpp
+      title: tree/test/auxiliary_tree.yuki901.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/cartesian_tree.test.cpp
       title: tree/test/cartesian_tree.test.cpp
