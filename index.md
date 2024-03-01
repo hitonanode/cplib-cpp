@@ -347,6 +347,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/strongly_connected_components_bitset.hpp
       title: graph/strongly_connected_components_bitset.hpp
+  - name: heuristic
+    pages:
+    - icon: ':warning:'
+      path: heuristic/exponential_dist_sampler.hpp
+      title: "Fast sampler of exponential distribution \uFF08\u9AD8\u901F\u6307\u6570\
+        \u5206\u5E03\u30B5\u30F3\u30D7\u30E9\u30FC\u30FB\u64EC\u4F3C\u713C\u304D\u306A\
+        \u307E\u3057\u6CD5\u306E\u9077\u79FB\u5224\u5B9A\uFF09"
   - name: linear_algebra_matrix
     pages:
     - icon: ':heavy_check_mark:'
