@@ -31,6 +31,9 @@ data:
     path: segmenttree/test/beats_gcd.test.cpp
     title: segmenttree/test/beats_gcd.test.cpp
   - icon: ':heavy_check_mark:'
+    path: segmenttree/test/beats_random_test.test.cpp
+    title: segmenttree/test/beats_random_test.test.cpp
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
   _isVerificationFailed: false
@@ -148,6 +151,7 @@ data:
   - segmenttree/test/beats_gcd.test.cpp
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
+  - segmenttree/test/beats_random_test.test.cpp
 documentation_of: segmenttree/acl_lazysegtree.hpp
 layout: document
 title: Lazy Segtree (based on atcoder::lazy_segtree)

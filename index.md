@@ -1456,6 +1456,9 @@ data:
       path: segmenttree/test/beats_gcd.test.cpp
       title: segmenttree/test/beats_gcd.test.cpp
     - icon: ':heavy_check_mark:'
+      path: segmenttree/test/beats_random_test.test.cpp
+      title: segmenttree/test/beats_random_test.test.cpp
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
       title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
     - icon: ':heavy_check_mark:'

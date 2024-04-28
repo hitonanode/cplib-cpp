@@ -60,7 +60,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2024-04-28 17:28:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp

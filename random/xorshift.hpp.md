@@ -52,6 +52,9 @@ data:
     path: number/test/primitive_root_1e18.test.cpp
     title: number/test/primitive_root_1e18.test.cpp
   - icon: ':heavy_check_mark:'
+    path: segmenttree/test/beats_random_test.test.cpp
+    title: segmenttree/test/beats_random_test.test.cpp
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -95,6 +98,7 @@ data:
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
+  - segmenttree/test/beats_random_test.test.cpp
   - number/test/primitive_root_1e18.test.cpp
   - number/test/is_prime.test.cpp
   - number/test/primitive_root.test.cpp

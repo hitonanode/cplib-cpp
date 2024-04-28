@@ -51,7 +51,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2024-04-28 17:28:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
