@@ -1,7 +1,9 @@
 #pragma once
 #include "../acl_beats.hpp"
 
-// CUT begin
+#include <cstdint>
+#include <numeric>
+
 // Verified: https://yukicoder.me/submissions/611774
 namespace yuki880 {
 constexpr uint32_t BINF = 1 << 30;
@@ -28,7 +30,7 @@ S op(S l, S r) {
     ret.sum = l.sum + r.sum;
     ret.lcm = (l.lcm >= BINF or r.lcm >= BINF)
                   ? BINF
-                  : std::min<uint64_t>(BINF, (uint64_t)l.lcm * r.lcm / std::__gcd(l.lcm, r.lcm));
+                  : std::min<uint64_t>(BINF, (uint64_t)l.lcm * r.lcm / std::gcd(l.lcm, r.lcm));
     ret.sz = l.sz + r.sz;
     if (l.all_same and r.all_same and l.max == r.max) ret.all_same = true;
     return ret;
@@ -43,7 +45,7 @@ struct F {
 };
 
 F composition(F fnew, F fold) {
-    return fnew.reset ? fnew : F(std::__gcd(fnew.dogcd, fold.dogcd), fold.reset);
+    return fnew.reset ? fnew : F(std::gcd(fnew.dogcd, fold.dogcd), fold.reset);
 }
 
 F id() { return F(); }
@@ -53,7 +55,7 @@ S mapping(F f, S x) {
     if (f.reset) x = S(f.reset, x.sz);
     if (f.dogcd) {
         if (x.all_same)
-            x = S(std::__gcd(f.dogcd, x.max), x.sz);
+            x = S(std::gcd(f.dogcd, x.max), x.sz);
         else if (f.dogcd and (x.lcm == BINF or f.dogcd % x.lcm))
             x.fail = true;
     }
