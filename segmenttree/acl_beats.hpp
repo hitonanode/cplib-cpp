@@ -76,7 +76,7 @@ F composition(F fnew, F fold) {
 F id() { return F(); }
 S mapping(F f, S x) {
     if (x.sz == 0) return e();
-    if (x.lo == x.hi or f.lb == f.ub or f.lb >= x.hi or f.ub < x.lo)
+    if (x.lo == x.hi or f.lb == f.ub or f.lb >= x.hi or f.ub <= x.lo) 
         return S(std::min(std::max(x.lo, f.lb), f.ub) + f.bias, x.sz);
     if (x.lo2 == x.hi) {
         x.lo = x.hi2 = std::max(x.lo, f.lb) + f.bias, x.hi = x.lo2 = std::min(x.hi, f.ub) + f.bias;
