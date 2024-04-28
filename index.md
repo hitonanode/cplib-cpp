@@ -354,6 +354,10 @@ data:
       title: "Fast sampler of exponential distribution \uFF08\u9AD8\u901F\u6307\u6570\
         \u5206\u5E03\u30B5\u30F3\u30D7\u30E9\u30FC\u30FB\u64EC\u4F3C\u713C\u304D\u306A\
         \u307E\u3057\u6CD5\u306E\u9077\u79FB\u5224\u5B9A\uFF09"
+    - icon: ':warning:'
+      path: heuristic/multivariate_gaussian.hpp
+      title: "Multivariate Gaussian Distribution, Kalman filter / \u591A\u5909\u91CF\
+        \u6B63\u898F\u5206\u5E03\u30FB\u30AB\u30EB\u30DE\u30F3\u30D5\u30A3\u30EB\u30BF"
   - name: linear_algebra_matrix
     pages:
     - icon: ':heavy_check_mark:'
