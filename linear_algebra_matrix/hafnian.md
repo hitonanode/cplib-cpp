@@ -13,4 +13,3 @@ documentation_of: ./hafnian.hpp
 
 - [1] A. Björklund, "Counting Perfect Matchings as Fast as Ryser,
   Proc. of 23rd ACM-SIAM symposium on Discrete Algorithms, pp.914–921, 2012.
-
