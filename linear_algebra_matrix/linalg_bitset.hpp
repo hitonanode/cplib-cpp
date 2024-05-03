@@ -43,6 +43,33 @@ template <int Wmax> int rank_gauss_jordan(int W, const std::vector<std::bitset<W
     return 0;
 }
 
+// determinant of F2 matrix.
+// Return 0 if the matrix is singular, otherwise return 1.
+// Complexity: O(W^3 / 64)
+template <int Wmax> int f2_determinant(const std::vector<std::bitset<Wmax>> &M) {
+    const int H = M.size();
+    if (H > Wmax) return 0;
+
+    auto tmp = M;
+    for (int h = 0; h < H; ++h) {
+        int piv = -1;
+        for (int j = h; j < H; ++j) {
+            if (tmp.at(j).test(h)) {
+                piv = j;
+                break;
+            }
+        }
+        if (piv == -1) return 0; // singular
+
+        if (piv != h) std::swap(tmp.at(piv), tmp.at(h));
+        for (int hh = h + 1; hh < H; ++hh) {
+            if (tmp.at(hh).test(h)) tmp.at(hh) ^= tmp.at(h);
+        }
+    }
+
+    return 1; // nonsingular
+}
+
 template <int W1, int W2>
 std::vector<std::bitset<W2>>
 matmul(const std::vector<std::bitset<W1>> &A, const std::vector<std::bitset<W2>> &B) {

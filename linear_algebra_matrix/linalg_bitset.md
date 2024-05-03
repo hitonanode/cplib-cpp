@@ -16,6 +16,9 @@ vector<bool> b;
 
 // Solve Ax = b (x: F_2^W)
 auto [feasible, x0, freedoms] = system_of_linear_equations<Wmax, vector<bool>>(A, b, W);
+
+// Calc determinant (or check whether A is regular)
+int det = f2_determinant<dim>(mat);
 ```
 
 ## 問題例
@@ -23,3 +26,4 @@ auto [feasible, x0, freedoms] = system_of_linear_equations<Wmax, vector<bool>>(A
 - [AOJ 2624: Graph Automata Player](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2624)
 - [No.1421 国勢調査 (Hard) - yukicoder](https://yukicoder.me/problems/no/1421)
 - [AtCoder Beginner Contest 276 Ex - Construct a Matrix](https://atcoder.jp/contests/abc276/tasks/abc276_h) $2000 \times 8000$ 行列の線型方程式を解く．
+- [Library Checker: Determinant of Matrix (Mod 2)](https://judge.yosupo.jp/problem/matrix_det_mod_2)
