@@ -157,8 +157,17 @@ data:
     path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
     title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_determinant.test.cpp
+    title: linear_algebra_matrix/test/matrix_determinant.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_pow.test.cpp
+    title: linear_algebra_matrix/test/matrix_pow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_product.test.cpp
     title: linear_algebra_matrix/test/matrix_product.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_rank.test.cpp
+    title: linear_algebra_matrix/test/matrix_rank.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
@@ -457,13 +466,16 @@ data:
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
+  - linear_algebra_matrix/test/matrix_pow.test.cpp
   - linear_algebra_matrix/test/inverse_matrix.test.cpp
+  - linear_algebra_matrix/test/matrix_rank.test.cpp
   - linear_algebra_matrix/test/linalg_modint_pow.test.cpp
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - linear_algebra_matrix/test/characteristic_poly.test.cpp
   - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/hafnian.test.cpp
+  - linear_algebra_matrix/test/matrix_determinant.test.cpp
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
   - convolution/test/ntt.test.cpp

@@ -1324,8 +1324,17 @@ data:
       path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
       title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/matrix_determinant.test.cpp
+      title: linear_algebra_matrix/test/matrix_determinant.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/matrix_pow.test.cpp
+      title: linear_algebra_matrix/test/matrix_pow.test.cpp
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_product.test.cpp
       title: linear_algebra_matrix/test/matrix_product.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/matrix_rank.test.cpp
+      title: linear_algebra_matrix/test/matrix_rank.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
       title: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp

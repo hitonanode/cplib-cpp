@@ -76,8 +76,17 @@ data:
     path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
     title: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_determinant.test.cpp
+    title: linear_algebra_matrix/test/matrix_determinant.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_pow.test.cpp
+    title: linear_algebra_matrix/test/matrix_pow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_product.test.cpp
     title: linear_algebra_matrix/test/matrix_product.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/matrix_rank.test.cpp
+    title: linear_algebra_matrix/test/matrix_rank.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
     title: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
@@ -346,7 +355,9 @@ data:
   - linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
+  - linear_algebra_matrix/test/matrix_pow.test.cpp
   - linear_algebra_matrix/test/inverse_matrix.test.cpp
+  - linear_algebra_matrix/test/matrix_rank.test.cpp
   - linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
   - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
   - linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp
@@ -356,6 +367,7 @@ data:
   - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
+  - linear_algebra_matrix/test/matrix_determinant.test.cpp
   - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
   - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
   - graph/test/general_matching.test.cpp
