@@ -1304,6 +1304,12 @@ data:
       path: linear_algebra_matrix/test/linalg_bitset.yuki1421.test.cpp
       title: linear_algebra_matrix/test/linalg_bitset.yuki1421.test.cpp
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/linalg_bitset_det.test.cpp
+      title: linear_algebra_matrix/test/linalg_bitset_det.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/linalg_bitset_mul.test.cpp
+      title: linear_algebra_matrix/test/linalg_bitset_mul.test.cpp
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_ll_det.test.cpp
       title: linear_algebra_matrix/test/linalg_ll_det.test.cpp
     - icon: ':heavy_check_mark:'
