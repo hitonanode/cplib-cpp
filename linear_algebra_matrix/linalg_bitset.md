@@ -15,7 +15,7 @@ vector<bitset<Wmax>> A;
 vector<bool> b;
 
 // Solve Ax = b (x: F_2^W)
-auto [feasible, x0, freedoms] = system_of_linear_equations<Wmax, vector<bool>>(A, b, W);
+auto [feasible, x0, freedoms] = f2_system_of_linear_equations<Wmax, vector<bool>>(A, b, W);
 
 // Calc determinant (or check whether A is regular)
 int det = f2_determinant<dim>(mat);
