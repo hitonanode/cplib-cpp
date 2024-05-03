@@ -658,6 +658,9 @@ data:
       path: string/mp_algorithm.hpp
       title: string/mp_algorithm.hpp
     - icon: ':heavy_check_mark:'
+      path: string/palindromic_tree.hpp
+      title: "Palindromic tree / eertree \uFF08\u56DE\u6587\u6728\uFF09"
+    - icon: ':heavy_check_mark:'
       path: string/rolling_hash_1d.hpp
       title: "Rolling hash (one dimensional) \uFF08\u4E00\u6B21\u5143\u30ED\u30FC\u30EA\
         \u30F3\u30B0\u30CF\u30C3\u30B7\u30E5\uFF09"
@@ -1585,6 +1588,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/manacher_mp.test.cpp
       title: string/test/manacher_mp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/palindromic_tree.yuki2606.test.cpp
+      title: string/test/palindromic_tree.yuki2606.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: string/test/palindromic_tree.yuki263.test.cpp
+      title: string/test/palindromic_tree.yuki263.test.cpp
     - icon: ':heavy_check_mark:'
       path: string/test/rolling_hash.test.cpp
       title: string/test/rolling_hash.test.cpp
