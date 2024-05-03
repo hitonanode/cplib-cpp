@@ -59,7 +59,7 @@ int main() {
             }
             A.emplace_back(a);
         }
-        auto [ok, solution, freedoms] = system_of_linear_equations<Wmax, vector<bool>>(A, b, N);
+        auto [ok, solution, freedoms] = f2_system_of_linear_equations<Wmax, vector<bool>>(A, b, N);
         if (!ok) bad();
         for (int i = 0; i < N; ++i) ret[i] += int(solution[i]) << d;
     }
