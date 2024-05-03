@@ -110,8 +110,8 @@ data:
   - linear_algebra_matrix/test/linalg_bitset.test.cpp
 documentation_of: linear_algebra_matrix/linalg_bitset.hpp
 layout: document
-title: "Linear algebra on $\\mathbb{F}_{2}$ using std::bitset ($\\mathbb{F}_{2}$ \u7DDA\
-  \u5F62\u4EE3\u6570)"
+title: "Linear algebra on $\\mathbb{F}_{2}$ using std::bitset (std::bitset \u3092\u4F7F\
+  \u7528\u3057\u305F $\\mathbb{F}_{2}$ \u7DDA\u5F62\u4EE3\u6570)"
 ---
 
 `std::bitset<>` を使用した $\mathbb{F}_{2}$ 用線形代数演算．64 倍程度の定数倍高速化が見込まれる．

@@ -181,4 +181,3 @@ title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\u71
 
 - [1] A. Björklund, "Counting Perfect Matchings as Fast as Ryser,
   Proc. of 23rd ACM-SIAM symposium on Discrete Algorithms, pp.914–921, 2012.
-

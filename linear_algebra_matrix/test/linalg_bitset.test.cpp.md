@@ -3,8 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linalg_bitset.hpp
-    title: "Linear algebra on $\\mathbb{F}_{2}$ using std::bitset ($\\mathbb{F}_{2}$\
-      \ \u7DDA\u5F62\u4EE3\u6570)"
+    title: "Linear algebra on $\\mathbb{F}_{2}$ using std::bitset (std::bitset \u3092\
+      \u4F7F\u7528\u3057\u305F $\\mathbb{F}_{2}$ \u7DDA\u5F62\u4EE3\u6570)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false

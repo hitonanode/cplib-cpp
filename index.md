@@ -379,6 +379,10 @@ data:
       title: "Determinant of $M_0 + M_1 x$ \uFF08\u5404\u8981\u7D20\u304C\u9AD8\u3005\
         \ $1$ \u6B21\u306E\u884C\u5217\u306E\u884C\u5217\u5F0F\uFF09"
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/f2_linear_space.hpp
+      title: "$\\mathbb{F}_{2}$ linear space ($\\mathbb{F}_{2}$ \u7DDA\u5F62\u7A7A\
+        \u9593)"
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/hafnian.hpp
       title: "Hafnian \uFF08\u884C\u5217\u306E\u30CF\u30D5\u30CB\u30A2\u30F3\uFF0C\
         \u7121\u5411\u30B0\u30E9\u30D5\u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\
@@ -394,8 +398,8 @@ data:
       title: Levinson recursion (Levinson-Durbin algorithm)
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_bitset.hpp
-      title: "Linear algebra on $\\mathbb{F}_{2}$ using std::bitset ($\\mathbb{F}_{2}$\
-        \ \u7DDA\u5F62\u4EE3\u6570)"
+      title: "Linear algebra on $\\mathbb{F}_{2}$ using std::bitset (std::bitset \u3092\
+        \u4F7F\u7528\u3057\u305F $\\mathbb{F}_{2}$ \u7DDA\u5F62\u4EE3\u6570)"
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
@@ -1278,6 +1282,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
       title: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/f2_intersection.test.cpp
+      title: linear_algebra_matrix/test/f2_intersection.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/hafnian.test.cpp
       title: linear_algebra_matrix/test/hafnian.test.cpp
