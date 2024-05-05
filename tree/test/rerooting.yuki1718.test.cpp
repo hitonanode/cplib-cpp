@@ -11,24 +11,24 @@ struct Subtree {
     bool exist;
     int oneway, round;
 };
-struct Child {
+struct Children {
     bool exist;
     int oneway, round;
 };
-Child e() { return {false, 0, 0}; }
+Children e() { return {false, 0, 0}; }
 
-Child merge(Child x, Child y) {
+Children merge(Children x, Children y) {
     if (!x.exist) return y;
     if (!y.exist) return x;
-    return Child{true, min(x.oneway + y.round, y.oneway + x.round), x.round + y.round};
+    return Children{true, min(x.oneway + y.round, y.oneway + x.round), x.round + y.round};
 }
 
-Child f(Subtree x, int, tuple<>) {
+Children add_edge(Subtree x, int, tuple<>) {
     if (!x.exist) return e();
     return {true, x.oneway + 1, x.round + 2};
 }
 
-Subtree g(Child x, int v) {
+Subtree add_vertex(Children x, int v) {
     if (x.exist or inD[v]) return {true, x.oneway, x.round};
     return {false, 0, 0};
 }
@@ -52,7 +52,7 @@ int main() {
         cin >> d;
         inD[d - 1] = 1;
     }
-    rerooting<tuple<>, Subtree, Child, merge, f, g, e> tree(to);
+    rerooting<tuple<>, Subtree, Children, merge, add_edge, add_vertex, e> tree(to);
     tree.run();
     for (auto x : tree.dpall) cout << x.oneway << '\n';
 }
