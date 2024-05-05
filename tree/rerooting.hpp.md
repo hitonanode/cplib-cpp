@@ -19,92 +19,104 @@ data:
   bundledCode: "#line 2 \"tree/rerooting.hpp\"\n#include <cassert>\n#include <cstdlib>\n\
     #include <utility>\n#include <vector>\n\n// Rerooting\n// Reference:\n// - https://atcoder.jp/contests/abc222/editorial/2749\n\
     // - https://null-mn.hatenablog.com/entry/2020/04/14/124151\ntemplate <class Edge,\
-    \ class St, class Ch, Ch (*merge)(Ch, Ch), Ch (*f)(St, int, Edge),\n         \
-    \ St (*g)(Ch, int), Ch (*e)()>\nstruct rerooting {\n    int n_;\n    std::vector<int>\
-    \ par, visited;\n    std::vector<std::vector<std::pair<int, Edge>>> to;\n    std::vector<St>\
-    \ dp_subtree;\n    std::vector<St> dp_par;\n    std::vector<St> dpall;\n    rerooting(const\
+    \ class Subtree, class Children, Children (*rake)(Children, Children),\n     \
+    \     Children (*add_edge)(Subtree, int, Edge), Subtree (*add_vertex)(Children,\
+    \ int),\n          Children (*e)()>\nstruct rerooting {\n    int n_;\n    std::vector<int>\
+    \ par, visited;\n    std::vector<std::vector<std::pair<int, Edge>>> to;\n\n  \
+    \  // dp_subtree[i] = DP(root=i, edge (i, par[i]) is removed).\n    std::vector<Subtree>\
+    \ dp_subtree;\n\n    // dp_par[i] = DP(root=par[i], edge (i, par[i]) is removed).\
+    \ dp_par[root] is meaningless.\n    std::vector<Subtree> dp_par;\n\n    // dpall[i]\
+    \ = DP(root=i, all edges exist).\n    std::vector<Subtree> dpall;\n\n    rerooting(const\
     \ std::vector<std::vector<std::pair<int, Edge>>> &to_)\n        : n_(to_.size()),\
     \ par(n_, -1), visited(n_, 0), to(to_) {\n        for (int i = 0; i < n_; ++i)\
-    \ dp_subtree.push_back(g(e(), i));\n        dp_par = dpall = dp_subtree;\n   \
-    \ }\n\n    void run_connected(int root) {\n        if (visited[root]) return;\n\
-    \        visited[root] = 1;\n        std::vector<int> visorder{root};\n\n    \
-    \    for (int t = 0; t < int(visorder.size()); ++t) {\n            int now = visorder[t];\n\
-    \            for (const auto &edge : to[now]) {\n                int nxt = edge.first;\n\
-    \                if (visited[nxt]) continue;\n                visorder.push_back(nxt);\n\
-    \                visited[nxt] = 1;\n                par[nxt] = now;\n        \
-    \    }\n        }\n\n        for (int t = int(visorder.size()) - 1; t >= 0; --t)\
-    \ {\n            int now = visorder[t];\n            Ch ch = e();\n          \
-    \  for (const auto &edge : to[now]) {\n                int nxt = edge.first;\n\
-    \                if (nxt == par[now]) continue;\n                ch = merge(ch,\
-    \ f(dp_subtree[nxt], nxt, edge.second));\n            }\n            dp_subtree[now]\
-    \ = g(ch, now);\n        }\n\n        std::vector<Ch> left;\n        for (int\
-    \ now : visorder) {\n            int m = int(to[now].size());\n            left.assign(m\
-    \ + 1, e());\n            for (int j = 0; j < m; j++) {\n                int nxt\
-    \ = to[now][j].first;\n                const St &st = (nxt == par[now] ? dp_par[now]\
-    \ : dp_subtree[nxt]);\n                left[j + 1] = merge(left[j], f(st, nxt,\
-    \ to[now][j].second));\n            }\n            dpall[now] = g(left.back(),\
-    \ now);\n\n            Ch rprod = e();\n            for (int j = m - 1; j >= 0;\
-    \ --j) {\n                int nxt = to[now][j].first;\n                if (nxt\
-    \ != par[now]) dp_par[nxt] = g(merge(left[j], rprod), now);\n\n              \
-    \  const St &st = (nxt == par[now] ? dp_par[now] : dp_subtree[nxt]);\n       \
-    \         rprod = merge(f(st, nxt, to[now][j].second), rprod);\n            }\n\
+    \ dp_subtree.push_back(add_vertex(e(), i));\n        dp_par = dpall = dp_subtree;\n\
+    \    }\n\n    void run_connected(int root) {\n        if (visited.at(root)) return;\n\
+    \        visited.at(root) = 1;\n        std::vector<int> visorder{root};\n\n \
+    \       for (int t = 0; t < int(visorder.size()); ++t) {\n            int now\
+    \ = visorder.at(t);\n            for (const auto &[nxt, _] : to[now]) {\n    \
+    \            if (visited.at(nxt)) continue;\n                visorder.push_back(nxt);\n\
+    \                visited.at(nxt) = 1;\n                par.at(nxt) = now;\n  \
+    \          }\n        }\n\n        for (int t = int(visorder.size()) - 1; t >=\
+    \ 0; --t) {\n            const int now = visorder.at(t);\n            Children\
+    \ ch = e();\n            for (const auto &[nxt, edge] : to.at(now)) {\n      \
+    \          if (nxt != par.at(now)) ch = rake(ch, add_edge(dp_subtree.at(nxt),\
+    \ nxt, edge));\n            }\n            dp_subtree.at(now) = add_vertex(ch,\
+    \ now);\n        }\n\n        std::vector<Children> left;\n        for (int now\
+    \ : visorder) {\n            const int m = to.at(now).size();\n            left.assign(m\
+    \ + 1, e());\n            for (int j = 0; j < m; j++) {\n                const\
+    \ auto &[nxt, edge] = to.at(now).at(j);\n                const Subtree &st = (nxt\
+    \ == par.at(now) ? dp_par.at(now) : dp_subtree.at(nxt));\n                left.at(j\
+    \ + 1) = rake(left.at(j), add_edge(st, nxt, edge));\n            }\n         \
+    \   dpall.at(now) = add_vertex(left.back(), now);\n\n            Children rprod\
+    \ = e();\n            for (int j = m - 1; j >= 0; --j) {\n                const\
+    \ auto &[nxt, edge] = to.at(now).at(j);\n\n                if (nxt != par.at(now))\
+    \ dp_par.at(nxt) = add_vertex(rake(left.at(j), rprod), now);\n\n             \
+    \   const Subtree &st = (nxt == par.at(now) ? dp_par.at(now) : dp_subtree.at(nxt));\n\
+    \                rprod = rake(add_edge(st, nxt, edge), rprod);\n            }\n\
     \        }\n    }\n\n    void run() {\n        for (int i = 0; i < n_; ++i) {\n\
-    \            if (!visited[i]) run_connected(i);\n        }\n    }\n\n    const\
-    \ St &get_subtree(int root_, int par_) const {\n        if (par_ < 0) return dpall.at(root_);\n\
-    \        if (par.at(root_) == par_) return dp_subtree.at(root_);\n        if (par.at(par_)\
-    \ == root_) return dp_par.at(par_);\n        std::exit(1);\n    }\n};\n/* Template:\n\
-    struct Subtree {};\nstruct Child {};\nstruct Edge {};\nChild e() { return Child();\
-    \ }\nChild merge(Child x, Child y) { return Child(); }\nChild f(Subtree x, int\
-    \ ch_id, Edge edge) { return Child(); }\nSubtree g(Child x, int v_id) { return\
-    \ Subtree(); }\n\nvector<vector<pair<int, Edge>>> to;\nrerooting<Edge, Subtree,\
-    \ Child, merge, f, g, e> tree(to);\n*/\n"
+    \            if (!visited.at(i)) run_connected(i);\n        }\n    }\n\n    const\
+    \ Subtree &get_subtree(int root_, int par_) const {\n        if (par_ < 0) return\
+    \ dpall.at(root_);\n        if (par.at(root_) == par_) return dp_subtree.at(root_);\n\
+    \        if (par.at(par_) == root_) return dp_par.at(par_);\n        std::exit(1);\n\
+    \    }\n};\n/* Template:\nstruct Subtree {};\nstruct Children {};\nstruct Edge\
+    \ {};\nChildren e() { return Children(); }\nChildren rake(Children x, Children\
+    \ y) { return Children(); }\nChildren add_edge(Subtree x, int ch_id, Edge edge)\
+    \ { return Children(); }\nSubtree add_vertex(Children x, int v_id) { return Subtree();\
+    \ }\n\nvector<vector<pair<int, Edge>>> to;\nrerooting<Edge, Subtree, Children,\
+    \ rake, add_edge, add_vertex, e> tree(to);\n*/\n"
   code: "#pragma once\n#include <cassert>\n#include <cstdlib>\n#include <utility>\n\
     #include <vector>\n\n// Rerooting\n// Reference:\n// - https://atcoder.jp/contests/abc222/editorial/2749\n\
     // - https://null-mn.hatenablog.com/entry/2020/04/14/124151\ntemplate <class Edge,\
-    \ class St, class Ch, Ch (*merge)(Ch, Ch), Ch (*f)(St, int, Edge),\n         \
-    \ St (*g)(Ch, int), Ch (*e)()>\nstruct rerooting {\n    int n_;\n    std::vector<int>\
-    \ par, visited;\n    std::vector<std::vector<std::pair<int, Edge>>> to;\n    std::vector<St>\
-    \ dp_subtree;\n    std::vector<St> dp_par;\n    std::vector<St> dpall;\n    rerooting(const\
+    \ class Subtree, class Children, Children (*rake)(Children, Children),\n     \
+    \     Children (*add_edge)(Subtree, int, Edge), Subtree (*add_vertex)(Children,\
+    \ int),\n          Children (*e)()>\nstruct rerooting {\n    int n_;\n    std::vector<int>\
+    \ par, visited;\n    std::vector<std::vector<std::pair<int, Edge>>> to;\n\n  \
+    \  // dp_subtree[i] = DP(root=i, edge (i, par[i]) is removed).\n    std::vector<Subtree>\
+    \ dp_subtree;\n\n    // dp_par[i] = DP(root=par[i], edge (i, par[i]) is removed).\
+    \ dp_par[root] is meaningless.\n    std::vector<Subtree> dp_par;\n\n    // dpall[i]\
+    \ = DP(root=i, all edges exist).\n    std::vector<Subtree> dpall;\n\n    rerooting(const\
     \ std::vector<std::vector<std::pair<int, Edge>>> &to_)\n        : n_(to_.size()),\
     \ par(n_, -1), visited(n_, 0), to(to_) {\n        for (int i = 0; i < n_; ++i)\
-    \ dp_subtree.push_back(g(e(), i));\n        dp_par = dpall = dp_subtree;\n   \
-    \ }\n\n    void run_connected(int root) {\n        if (visited[root]) return;\n\
-    \        visited[root] = 1;\n        std::vector<int> visorder{root};\n\n    \
-    \    for (int t = 0; t < int(visorder.size()); ++t) {\n            int now = visorder[t];\n\
-    \            for (const auto &edge : to[now]) {\n                int nxt = edge.first;\n\
-    \                if (visited[nxt]) continue;\n                visorder.push_back(nxt);\n\
-    \                visited[nxt] = 1;\n                par[nxt] = now;\n        \
-    \    }\n        }\n\n        for (int t = int(visorder.size()) - 1; t >= 0; --t)\
-    \ {\n            int now = visorder[t];\n            Ch ch = e();\n          \
-    \  for (const auto &edge : to[now]) {\n                int nxt = edge.first;\n\
-    \                if (nxt == par[now]) continue;\n                ch = merge(ch,\
-    \ f(dp_subtree[nxt], nxt, edge.second));\n            }\n            dp_subtree[now]\
-    \ = g(ch, now);\n        }\n\n        std::vector<Ch> left;\n        for (int\
-    \ now : visorder) {\n            int m = int(to[now].size());\n            left.assign(m\
-    \ + 1, e());\n            for (int j = 0; j < m; j++) {\n                int nxt\
-    \ = to[now][j].first;\n                const St &st = (nxt == par[now] ? dp_par[now]\
-    \ : dp_subtree[nxt]);\n                left[j + 1] = merge(left[j], f(st, nxt,\
-    \ to[now][j].second));\n            }\n            dpall[now] = g(left.back(),\
-    \ now);\n\n            Ch rprod = e();\n            for (int j = m - 1; j >= 0;\
-    \ --j) {\n                int nxt = to[now][j].first;\n                if (nxt\
-    \ != par[now]) dp_par[nxt] = g(merge(left[j], rprod), now);\n\n              \
-    \  const St &st = (nxt == par[now] ? dp_par[now] : dp_subtree[nxt]);\n       \
-    \         rprod = merge(f(st, nxt, to[now][j].second), rprod);\n            }\n\
+    \ dp_subtree.push_back(add_vertex(e(), i));\n        dp_par = dpall = dp_subtree;\n\
+    \    }\n\n    void run_connected(int root) {\n        if (visited.at(root)) return;\n\
+    \        visited.at(root) = 1;\n        std::vector<int> visorder{root};\n\n \
+    \       for (int t = 0; t < int(visorder.size()); ++t) {\n            int now\
+    \ = visorder.at(t);\n            for (const auto &[nxt, _] : to[now]) {\n    \
+    \            if (visited.at(nxt)) continue;\n                visorder.push_back(nxt);\n\
+    \                visited.at(nxt) = 1;\n                par.at(nxt) = now;\n  \
+    \          }\n        }\n\n        for (int t = int(visorder.size()) - 1; t >=\
+    \ 0; --t) {\n            const int now = visorder.at(t);\n            Children\
+    \ ch = e();\n            for (const auto &[nxt, edge] : to.at(now)) {\n      \
+    \          if (nxt != par.at(now)) ch = rake(ch, add_edge(dp_subtree.at(nxt),\
+    \ nxt, edge));\n            }\n            dp_subtree.at(now) = add_vertex(ch,\
+    \ now);\n        }\n\n        std::vector<Children> left;\n        for (int now\
+    \ : visorder) {\n            const int m = to.at(now).size();\n            left.assign(m\
+    \ + 1, e());\n            for (int j = 0; j < m; j++) {\n                const\
+    \ auto &[nxt, edge] = to.at(now).at(j);\n                const Subtree &st = (nxt\
+    \ == par.at(now) ? dp_par.at(now) : dp_subtree.at(nxt));\n                left.at(j\
+    \ + 1) = rake(left.at(j), add_edge(st, nxt, edge));\n            }\n         \
+    \   dpall.at(now) = add_vertex(left.back(), now);\n\n            Children rprod\
+    \ = e();\n            for (int j = m - 1; j >= 0; --j) {\n                const\
+    \ auto &[nxt, edge] = to.at(now).at(j);\n\n                if (nxt != par.at(now))\
+    \ dp_par.at(nxt) = add_vertex(rake(left.at(j), rprod), now);\n\n             \
+    \   const Subtree &st = (nxt == par.at(now) ? dp_par.at(now) : dp_subtree.at(nxt));\n\
+    \                rprod = rake(add_edge(st, nxt, edge), rprod);\n            }\n\
     \        }\n    }\n\n    void run() {\n        for (int i = 0; i < n_; ++i) {\n\
-    \            if (!visited[i]) run_connected(i);\n        }\n    }\n\n    const\
-    \ St &get_subtree(int root_, int par_) const {\n        if (par_ < 0) return dpall.at(root_);\n\
-    \        if (par.at(root_) == par_) return dp_subtree.at(root_);\n        if (par.at(par_)\
-    \ == root_) return dp_par.at(par_);\n        std::exit(1);\n    }\n};\n/* Template:\n\
-    struct Subtree {};\nstruct Child {};\nstruct Edge {};\nChild e() { return Child();\
-    \ }\nChild merge(Child x, Child y) { return Child(); }\nChild f(Subtree x, int\
-    \ ch_id, Edge edge) { return Child(); }\nSubtree g(Child x, int v_id) { return\
-    \ Subtree(); }\n\nvector<vector<pair<int, Edge>>> to;\nrerooting<Edge, Subtree,\
-    \ Child, merge, f, g, e> tree(to);\n*/\n"
+    \            if (!visited.at(i)) run_connected(i);\n        }\n    }\n\n    const\
+    \ Subtree &get_subtree(int root_, int par_) const {\n        if (par_ < 0) return\
+    \ dpall.at(root_);\n        if (par.at(root_) == par_) return dp_subtree.at(root_);\n\
+    \        if (par.at(par_) == root_) return dp_par.at(par_);\n        std::exit(1);\n\
+    \    }\n};\n/* Template:\nstruct Subtree {};\nstruct Children {};\nstruct Edge\
+    \ {};\nChildren e() { return Children(); }\nChildren rake(Children x, Children\
+    \ y) { return Children(); }\nChildren add_edge(Subtree x, int ch_id, Edge edge)\
+    \ { return Children(); }\nSubtree add_vertex(Children x, int v_id) { return Subtree();\
+    \ }\n\nvector<vector<pair<int, Edge>>> to;\nrerooting<Edge, Subtree, Children,\
+    \ rake, add_edge, add_vertex, e> tree(to);\n*/\n"
   dependsOn: []
   isVerificationFile: false
   path: tree/rerooting.hpp
   requiredBy: []
-  timestamp: '2023-04-25 08:57:43+09:00'
+  timestamp: '2024-05-05 15:10:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/rerooting.yuki1718.test.cpp
@@ -118,12 +130,12 @@ title: "Rerooting \uFF08\u5168\u65B9\u4F4D\u6728 DP\uFF09"
 
 - ここに記述する内容はリンク [1] で説明されていることとほぼ同等．
 - 木の各頂点・各辺になんらかのデータ構造が載っている．
-- 根付き木について，各頂点 $v$ を根とする部分木に対して計算される `St` 型の情報を $X_v$ とする．また，各辺 $uv$ が持つ `Edge` 型の情報を $e_{uv}$ とする．
-- $X_v$ は $X_v = g\left(\mathrm{merge}\left(f(X\_{c\_1}, c\_1, e\_{v c\_1}), \dots, f(X\_{c\_k}, c\_k, e\_{v c\_k})\right), v \right)$ を満たす．ここで $c\_1, \dots, c\_k$ は $v$ の子の頂点たち．
-  - $f(X\_v, v, e\_{uv})$ は $u$ の子 $v$ について `Ch` 型の情報を計算する関数．
-  - $\mathrm{merge}(y\_1, \dots, y\_k)$ は任意個の `Ch` 型の引数の積を計算する関数．
-  - $g(y, v)$ は `Ch` 型の引数 $y$ をもとに頂点 $v$ における `St` 型の情報を計算する関数．
-  - `Ch` 型には結合法則が成立しなければならない．また， `Ch` 型の単位元を `e()` とする．
+- 根付き木について，各頂点 $v$ を根とする部分木に対して計算される `Subtree` 型の情報を $X_v$ とする．また，各辺 $uv$ が持つ `Edge` 型の情報を $e_{uv}$ とする．
+- $X_v$ は $X_v = \mathrm{add\_vertex}\left(\mathrm{rake}\left(\mathrm{add\_edge}(X\_{c\_1}, c\_1, e\_{v c\_1}), \dots, \mathrm{add\_edge}(X\_{c\_k}, c\_k, e\_{v c\_k})\right), v \right)$ を満たす．ここで $c\_1, \dots, c\_k$ は $v$ の子の頂点たち．
+  - $\mathrm{add\_edge}(X\_v, v, e\_{uv})$ は $u$ の子 $v$ について `Children` 型の情報を計算する関数．
+  - $\mathrm{add\_vertex}(y, v)$ は `Children` 型の引数 $y$ をもとに頂点 $v$ における `Subtree` 型の情報を計算する関数．
+  - $\mathrm{rake}(y\_1, \dots, y\_k)$ は任意個の `Children` 型の引数の積を計算する関数．
+  - $\mathrm{rake}()$ には結合法則が成立しなければならない．また， `Children` 型の単位元を `e()` とする．
 - 以上のような性質を満たすデータ構造を考えたとき，本ライブラリは森の各頂点 $r$ を根とみなしたときの連結成分に関する $X_r$ の値を全ての $r$ について線形時間で計算する．
 
 ## 使用方法（例）
@@ -134,29 +146,29 @@ struct Subtree {
     bool exist;
     int oneway, round;
 };
-struct Child {
+struct Children {
     bool exist;
     int oneway, round;
 };
-Child merge(Child x, Child y) {
+Children rake(Children x, Children y) {
     if (!x.exist) return y;
     if (!y.exist) return x;
-    return Child{true, min(x.oneway + y.round, y.oneway + x.round), x.round + y.round};
+    return Children{true, min(x.oneway + y.round, y.oneway + x.round), x.round + y.round};
 }
-Child f(Subtree x, int, tuple<>) {
+Children add_edge(Subtree x, int, tuple<>) {
     if (!x.exist) return {false, 0, 0};
     return {true, x.oneway + 1, x.round + 2};
 }
-Subtree g(Child x, int v) {
+Subtree add_vertex(Children x, int v) {
     if (x.exist) return {true, x.oneway, x.round};
     return {inD[v], 0, 0};
     return {false, 0, 0};
 }
-Child e() { return {false, 0, 0}; }
+Children e() { return {false, 0, 0}; }
 
 
 vector<vector<pair<int, tuple<>>>> to;
-rerooting<tuple<>, Subtree, Child, merge, f, g, e> tree(to);
+rerooting<tuple<>, Subtree, Children, rake, add_edge, add_vertex, e> tree(to);
 tree.run();
 for (auto x : tree.dpall) cout << x.oneway << '\n';
 ```
