@@ -7,12 +7,12 @@ documentation_of: ./rerooting.hpp
 
 - ここに記述する内容はリンク [1] で説明されていることとほぼ同等．
 - 木の各頂点・各辺になんらかのデータ構造が載っている．
-- 根付き木について，各頂点 $v$ を根とする部分木に対して計算される `St` 型の情報を $X_v$ とする．また，各辺 $uv$ が持つ `Edge` 型の情報を $e_{uv}$ とする．
-- $X_v$ は $X_v = g\left(\mathrm{merge}\left(f(X\_{c\_1}, c\_1, e\_{v c\_1}), \dots, f(X\_{c\_k}, c\_k, e\_{v c\_k})\right), v \right)$ を満たす．ここで $c\_1, \dots, c\_k$ は $v$ の子の頂点たち．
-  - $f(X\_v, v, e\_{uv})$ は $u$ の子 $v$ について `Ch` 型の情報を計算する関数．
-  - $\mathrm{merge}(y\_1, \dots, y\_k)$ は任意個の `Ch` 型の引数の積を計算する関数．
-  - $g(y, v)$ は `Ch` 型の引数 $y$ をもとに頂点 $v$ における `St` 型の情報を計算する関数．
-  - `Ch` 型には結合法則が成立しなければならない．また， `Ch` 型の単位元を `e()` とする．
+- 根付き木について，各頂点 $v$ を根とする部分木に対して計算される `Subtree` 型の情報を $X_v$ とする．また，各辺 $uv$ が持つ `Edge` 型の情報を $e_{uv}$ とする．
+- $X_v$ は $X_v = \mathrm{add\_vertex}\left(\mathrm{rake}\left(\mathrm{add\_edge}(X\_{c\_1}, c\_1, e\_{v c\_1}), \dots, \mathrm{add\_edge}(X\_{c\_k}, c\_k, e\_{v c\_k})\right), v \right)$ を満たす．ここで $c\_1, \dots, c\_k$ は $v$ の子の頂点たち．
+  - $\mathrm{add\_edge}(X\_v, v, e\_{uv})$ は $u$ の子 $v$ について `Children` 型の情報を計算する関数．
+  - $\mathrm{add\_vertex}(y, v)$ は `Children` 型の引数 $y$ をもとに頂点 $v$ における `Subtree` 型の情報を計算する関数．
+  - $\mathrm{rake}(y\_1, \dots, y\_k)$ は任意個の `Children` 型の引数の積を計算する関数．
+  - $\mathrm{rake}()$ には結合法則が成立しなければならない．また， `Children` 型の単位元を `e()` とする．
 - 以上のような性質を満たすデータ構造を考えたとき，本ライブラリは森の各頂点 $r$ を根とみなしたときの連結成分に関する $X_r$ の値を全ての $r$ について線形時間で計算する．
 
 ## 使用方法（例）
@@ -23,29 +23,29 @@ struct Subtree {
     bool exist;
     int oneway, round;
 };
-struct Child {
+struct Children {
     bool exist;
     int oneway, round;
 };
-Child merge(Child x, Child y) {
+Children rake(Children x, Children y) {
     if (!x.exist) return y;
     if (!y.exist) return x;
-    return Child{true, min(x.oneway + y.round, y.oneway + x.round), x.round + y.round};
+    return Children{true, min(x.oneway + y.round, y.oneway + x.round), x.round + y.round};
 }
-Child f(Subtree x, int, tuple<>) {
+Children add_edge(Subtree x, int, tuple<>) {
     if (!x.exist) return {false, 0, 0};
     return {true, x.oneway + 1, x.round + 2};
 }
-Subtree g(Child x, int v) {
+Subtree add_vertex(Children x, int v) {
     if (x.exist) return {true, x.oneway, x.round};
     return {inD[v], 0, 0};
     return {false, 0, 0};
 }
-Child e() { return {false, 0, 0}; }
+Children e() { return {false, 0, 0}; }
 
 
 vector<vector<pair<int, tuple<>>>> to;
-rerooting<tuple<>, Subtree, Child, merge, f, g, e> tree(to);
+rerooting<tuple<>, Subtree, Children, rake, add_edge, add_vertex, e> tree(to);
 tree.run();
 for (auto x : tree.dpall) cout << x.oneway << '\n';
 ```
