@@ -172,6 +172,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/static_range_inversion.hpp
       title: data_structure/static_range_inversion.hpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/static_toptree.hpp
+      title: Static top tree
   - name: flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -1029,6 +1032,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/static_range_inversion.test.cpp
       title: data_structure/test/static_range_inversion.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/static_toptree.test.cpp
+      title: data_structure/test/static_toptree.test.cpp
   - name: flow/test
     pages:
     - icon: ':heavy_check_mark:'
