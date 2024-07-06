@@ -306,6 +306,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/incremental_bridge_connectivity.hpp
       title: graph/incremental_bridge_connectivity.hpp
+    - icon: ':warning:'
+      path: graph/incremental_scc.hpp
+      title: "Incremental SCC \uFF08\u5F37\u9023\u7D50\u6210\u5206\uFF09"
     - icon: ':heavy_check_mark:'
       path: graph/lowlink.hpp
       title: "Lowlink \uFF08\u7121\u5411\u30B0\u30E9\u30D5\u306E DFS tree, lowlink,\

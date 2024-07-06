@@ -71,16 +71,16 @@ data:
   isVerificationFile: false
   path: segmenttree/binary_indexed_tree.hpp
   requiredBy:
-  - data_structure/rectangle_add_rectangle_sum.hpp
   - data_structure/range_kth_smallest_offline.hpp
   - data_structure/rectangle_sum.hpp
+  - data_structure/rectangle_add_rectangle_sum.hpp
   timestamp: '2021-11-06 11:36:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/range_kth_smallest_offline.test.cpp
   - data_structure/test/rectangle_add_rectangle_sum.test.cpp
-  - data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
   - data_structure/test/rectangle_sum.test.cpp
+  - data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
   - tree/test/vertex-add-subtree-sum.guni.test.cpp
   - segmenttree/test/binary_indexed_tree.test.cpp
   - segmenttree/test/point-add-range-sum.test.cpp
