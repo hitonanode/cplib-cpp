@@ -61,8 +61,8 @@ data:
   timestamp: '2021-11-02 23:36:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - sparse_table/test/disjoint_sparse_table_rsq.test.cpp
   - sparse_table/test/disjoint_sparse_table_rmq.test.cpp
+  - sparse_table/test/disjoint_sparse_table_rsq.test.cpp
 documentation_of: sparse_table/disjoint_sparse_table.hpp
 layout: document
 title: Disjoint sparse table

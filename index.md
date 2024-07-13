@@ -493,6 +493,9 @@ data:
       title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\
         \uFF09"
     - icon: ':heavy_check_mark:'
+      path: number/rational_approximation.hpp
+      title: "Rational approximation \uFF08\u6709\u7406\u6570\u8FD1\u4F3C\uFF09"
+    - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
     - icon: ':heavy_check_mark:'
@@ -1440,6 +1443,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/primitive_root_1e18.test.cpp
       title: number/test/primitive_root_1e18.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/rational_approximation.test.cpp
+      title: number/test/rational_approximation.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/sieve.stress.test.cpp
       title: number/test/sieve.stress.test.cpp

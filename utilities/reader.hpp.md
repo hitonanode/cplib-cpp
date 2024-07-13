@@ -49,9 +49,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - flow/test/maxflow.pushrelabel.yuki957.test.cpp
+  - linear_algebra_matrix/test/matrix_product.test.cpp
   - data_structure/test/radix_heap_array.dijkstra.test.cpp
   - data_structure/test/radix_heap.dijkstra.test.cpp
-  - linear_algebra_matrix/test/matrix_product.test.cpp
   - string/test/sa_count_keyword.reader.test.cpp
 documentation_of: utilities/reader.hpp
 layout: document
