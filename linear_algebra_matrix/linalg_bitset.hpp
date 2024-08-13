@@ -1,6 +1,7 @@
 #pragma once
 #include <bitset>
 #include <cassert>
+#include <cstddef>
 #include <tuple>
 #include <utility>
 #include <vector>
@@ -8,7 +9,7 @@
 // Gauss-Jordan elimination of n * m matrix M
 // Complexity: O(nm + nm rank(M) / 64)
 // Verified: abc276_h (2000 x 8000)
-template <int Wmax>
+template <std::size_t Wmax>
 std::vector<std::bitset<Wmax>> f2_gauss_jordan(int W, std::vector<std::bitset<Wmax>> M) {
     assert(W <= Wmax);
     int H = M.size(), c = 0;
@@ -33,7 +34,8 @@ std::vector<std::bitset<Wmax>> f2_gauss_jordan(int W, std::vector<std::bitset<Wm
 }
 
 // Rank of Gauss-Jordan eliminated matrix
-template <int Wmax> int f2_rank_gauss_jordan(int W, const std::vector<std::bitset<Wmax>> &M) {
+template <std::size_t Wmax>
+int f2_rank_gauss_jordan(int W, const std::vector<std::bitset<Wmax>> &M) {
     assert(W <= Wmax);
     for (int h = (int)M.size() - 1; h >= 0; h--) {
         int j = 0;
@@ -46,7 +48,7 @@ template <int Wmax> int f2_rank_gauss_jordan(int W, const std::vector<std::bitse
 // determinant of F2 matrix.
 // Return 0 if the matrix is singular, otherwise return 1.
 // Complexity: O(W^3 / 64)
-template <int Wmax> int f2_determinant(const std::vector<std::bitset<Wmax>> &M) {
+template <std::size_t Wmax> int f2_determinant(const std::vector<std::bitset<Wmax>> &M) {
     const int H = M.size();
     if (H > Wmax) return 0;
 
@@ -70,7 +72,7 @@ template <int Wmax> int f2_determinant(const std::vector<std::bitset<Wmax>> &M) 
     return 1; // nonsingular
 }
 
-template <int W1, int W2>
+template <std::size_t W1, std::size_t W2>
 std::vector<std::bitset<W2>>
 f2_matmul(const std::vector<std::bitset<W1>> &A, const std::vector<std::bitset<W2>> &B) {
     int H = A.size(), K = B.size();
@@ -83,7 +85,7 @@ f2_matmul(const std::vector<std::bitset<W1>> &A, const std::vector<std::bitset<W
     return C;
 }
 
-template <int Wmax>
+template <std::size_t Wmax>
 std::vector<std::bitset<Wmax>> f2_matpower(std::vector<std::bitset<Wmax>> X, long long n) {
     int D = X.size();
     std::vector<std::bitset<Wmax>> ret(D);
@@ -99,7 +101,7 @@ std::vector<std::bitset<Wmax>> f2_matpower(std::vector<std::bitset<Wmax>> X, lon
 // - retval: {true, one of the solutions, {freedoms}} (if solution exists)
 //           {false, {}, {}} (otherwise)
 // Complexity: O(HW + HW rank(A) / 64 + W^2 len(freedoms))
-template <int Wmax, class Vec>
+template <std::size_t Wmax, class Vec>
 std::tuple<bool, std::bitset<Wmax>, std::vector<std::bitset<Wmax>>>
 f2_system_of_linear_equations(std::vector<std::bitset<Wmax>> A, Vec b, int W) {
     int H = A.size();
