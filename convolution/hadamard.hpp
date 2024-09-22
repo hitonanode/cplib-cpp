@@ -10,7 +10,7 @@ template <typename T, typename F> void abstract_fwht(std::vector<T> &seq, F f) {
     assert(__builtin_popcount(n) == 1);
     for (int w = 1; w < n; w *= 2) {
         for (int i = 0; i < n; i += w * 2) {
-            for (int j = 0; j < w; j++) { f(seq[i + j], seq[i + j + w]); }
+            for (int j = 0; j < w; j++) f(seq.at(i + j), seq.at(i + j + w));
         }
     }
 }
@@ -25,7 +25,7 @@ std::vector<T> bitwise_conv(std::vector<T> x, std::vector<T> y, F1 f, F2 finv) {
     } else {
         abstract_fwht(x, f), abstract_fwht(y, f);
     }
-    for (size_t i = 0; i < x.size(); i++) { x[i] *= y[i]; }
+    for (int i = 0; i < (int)x.size(); i++) x.at(i) *= y.at(i);
     abstract_fwht(x, finv);
     return x;
 }
