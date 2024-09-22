@@ -9,7 +9,7 @@ namespace palindromic_tree {
 
 template <class Key> class Node {
     int suffix_link_; // このノードからのsuffix link （suffix の最長回文）
-    int length_; // このノードが表す回文の長さ。 -1 となる場合もあるので注意
+    int length_;      // このノードが表す回文の長さ。 -1 となる場合もあるので注意
     std::map<Key, int> children;
 
 public:

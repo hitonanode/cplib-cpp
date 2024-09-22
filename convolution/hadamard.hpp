@@ -2,7 +2,6 @@
 #include <cassert>
 #include <vector>
 
-// CUT begin
 // Fast Walsh-Hadamard transform and its abstraction
 // Tutorials: <https://codeforces.com/blog/entry/71899>
 //            <https://csacademy.com/blog/fast-fourier-transform-and-variations-of-it>
@@ -11,7 +10,7 @@ template <typename T, typename F> void abstract_fwht(std::vector<T> &seq, F f) {
     assert(__builtin_popcount(n) == 1);
     for (int w = 1; w < n; w *= 2) {
         for (int i = 0; i < n; i += w * 2) {
-            for (int j = 0; j < w; j++) { f(seq[i + j], seq[i + j + w]); }
+            for (int j = 0; j < w; j++) f(seq.at(i + j), seq.at(i + j + w));
         }
     }
 }
@@ -26,7 +25,7 @@ std::vector<T> bitwise_conv(std::vector<T> x, std::vector<T> y, F1 f, F2 finv) {
     } else {
         abstract_fwht(x, f), abstract_fwht(y, f);
     }
-    for (size_t i = 0; i < x.size(); i++) { x[i] *= y[i]; }
+    for (int i = 0; i < (int)x.size(); i++) x.at(i) *= y.at(i);
     abstract_fwht(x, finv);
     return x;
 }
@@ -50,13 +49,11 @@ template <typename T> std::vector<T> xorconv(std::vector<T> x, std::vector<T> y)
 // bitwise AND conolution
 // ret[i] = \sum_{(j & k) == i} x[j] * y[k]
 template <typename T> std::vector<T> andconv(std::vector<T> x, std::vector<T> y) {
-    return bitwise_conv(
-        x, y, [](T &lo, T &hi) { lo += hi; }, [](T &lo, T &hi) { lo -= hi; });
+    return bitwise_conv(x, y, [](T &lo, T &hi) { lo += hi; }, [](T &lo, T &hi) { lo -= hi; });
 }
 
 // bitwise OR convolution
 // ret[i] = \sum_{(j | k) == i} x[j] * y[k]
 template <typename T> std::vector<T> orconv(std::vector<T> x, std::vector<T> y) {
-    return bitwise_conv(
-        x, y, [](T &lo, T &hi) { hi += lo; }, [](T &lo, T &hi) { hi -= lo; });
+    return bitwise_conv(x, y, [](T &lo, T &hi) { hi += lo; }, [](T &lo, T &hi) { hi -= lo; });
 }
