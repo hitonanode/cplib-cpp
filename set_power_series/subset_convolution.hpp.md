@@ -232,10 +232,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/hafnian.test.cpp
-  - set_power_series/test/subset_pow.stress.test.cpp
-  - set_power_series/test/subset_pow.yuki1594.test.cpp
-  - set_power_series/test/subset_exp.stress.test.cpp
   - set_power_series/test/subset_log.test.cpp
+  - set_power_series/test/subset_pow.yuki1594.test.cpp
+  - set_power_series/test/subset_pow.stress.test.cpp
+  - set_power_series/test/subset_exp.stress.test.cpp
   - set_power_series/test/subset_conv.test.cpp
 documentation_of: set_power_series/subset_convolution.hpp
 layout: document

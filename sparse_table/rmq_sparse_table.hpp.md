@@ -77,8 +77,8 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - sparse_table/test/sparse_table.test.cpp
   - sparse_table/test/sparse_table_aoj.test.cpp
+  - sparse_table/test/sparse_table.test.cpp
   - string/test/run_enumerate_lyndon_rmq.test.cpp
   - tree/test/lca_rmq.test.cpp
   - tree/test/auxiliary_tree.yuki901.test.cpp
