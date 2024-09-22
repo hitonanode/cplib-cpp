@@ -156,9 +156,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/range_kth_smallest_offline.hpp
       title: data_structure/range_kth_smallest_offline.hpp
-    - icon: ':warning:'
-      path: data_structure/rbst_fast.cpp
-      title: data_structure/rbst_fast.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/rectangle_add_rectangle_sum.hpp
       title: "Static rectangle add rectangle sum \uFF08\u77E9\u5F62\u4E00\u69D8\u52A0\

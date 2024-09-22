@@ -19,9 +19,9 @@ data:
     \u6728\uFF09\nnamespace palindromic_tree {\n\ntemplate <class Key> class Node\
     \ {\n    int suffix_link_; // \u3053\u306E\u30CE\u30FC\u30C9\u304B\u3089\u306E\
     suffix link \uFF08suffix \u306E\u6700\u9577\u56DE\u6587\uFF09\n    int length_;\
-    \ // \u3053\u306E\u30CE\u30FC\u30C9\u304C\u8868\u3059\u56DE\u6587\u306E\u9577\u3055\
-    \u3002 -1 \u3068\u306A\u308B\u5834\u5408\u3082\u3042\u308B\u306E\u3067\u6CE8\u610F\
-    \n    std::map<Key, int> children;\n\npublic:\n    explicit Node(int suffix_link,\
+    \      // \u3053\u306E\u30CE\u30FC\u30C9\u304C\u8868\u3059\u56DE\u6587\u306E\u9577\
+    \u3055\u3002 -1 \u3068\u306A\u308B\u5834\u5408\u3082\u3042\u308B\u306E\u3067\u6CE8\
+    \u610F\n    std::map<Key, int> children;\n\npublic:\n    explicit Node(int suffix_link,\
     \ int length) : suffix_link_(suffix_link), length_(length) {}\n\n    int suffix_link()\
     \ const { return suffix_link_; }\n\n    int length() const { return length_; }\n\
     \n    int get_child(Key c) const {\n        auto it = children.find(c);\n    \
@@ -66,26 +66,26 @@ data:
     // Palindromic tree / Eertree \uFF08\u56DE\u6587\u6728\uFF09\nnamespace palindromic_tree\
     \ {\n\ntemplate <class Key> class Node {\n    int suffix_link_; // \u3053\u306E\
     \u30CE\u30FC\u30C9\u304B\u3089\u306Esuffix link \uFF08suffix \u306E\u6700\u9577\
-    \u56DE\u6587\uFF09\n    int length_; // \u3053\u306E\u30CE\u30FC\u30C9\u304C\u8868\
-    \u3059\u56DE\u6587\u306E\u9577\u3055\u3002 -1 \u3068\u306A\u308B\u5834\u5408\u3082\
-    \u3042\u308B\u306E\u3067\u6CE8\u610F\n    std::map<Key, int> children;\n\npublic:\n\
-    \    explicit Node(int suffix_link, int length) : suffix_link_(suffix_link), length_(length)\
-    \ {}\n\n    int suffix_link() const { return suffix_link_; }\n\n    int length()\
-    \ const { return length_; }\n\n    int get_child(Key c) const {\n        auto\
-    \ it = children.find(c);\n        return (it == children.end()) ? -1 : it->second;\n\
-    \    }\n\n    void set_child(int c, int nxt_idx) { children[c] = nxt_idx; }\n\n\
-    \    template <class OStream> friend OStream &operator<<(OStream &os, const Node\
-    \ &node) {\n        os << \"Node(suffix_link=\" << node.suffix_link() << \", length=\"\
-    \ << node.length()\n           << \", children={\";\n        for (const auto &[c,\
-    \ nxt] : node.children) os << c << \"->\" << nxt << \", \";\n        return os\
-    \ << \"})\";\n    }\n};\n\n// Palindromic tree\n// nodes[0] \u306F\u9577\u3055\
-    \ -1, nodes[1] \u306F\u9577\u3055 1 \u306E\u30C0\u30DF\u30FC\u30CE\u30FC\u30C9\
-    \ntemplate <class Key> struct Tree {\n    std::vector<Node<Key>> nodes;\n\n  \
-    \  Tree() { nodes = {Node<Key>(-1, -1), Node<Key>(0, 0)}; }\n\n    // nodes[cursor]\
-    \ \u306F s[0:i] \u306E suffix palindrome \u3092\u8868\u3059\n    // \u672C\u95A2\
-    \u6570\u306F\u305D\u306E nodes[cursor] \u306E suffix palindrome \u3067\u3042\u3063\
-    \u3066\u66F4\u306B s[0:(i + 1)] \u306E suffix link \u3068\u306A\u308A\u3046\u308B\
-    \u6700\u9577\u306E\u3082\u306E\u3092\u8FD4\u3059\n    int find_next_suffix(const\
+    \u56DE\u6587\uFF09\n    int length_;      // \u3053\u306E\u30CE\u30FC\u30C9\u304C\
+    \u8868\u3059\u56DE\u6587\u306E\u9577\u3055\u3002 -1 \u3068\u306A\u308B\u5834\u5408\
+    \u3082\u3042\u308B\u306E\u3067\u6CE8\u610F\n    std::map<Key, int> children;\n\
+    \npublic:\n    explicit Node(int suffix_link, int length) : suffix_link_(suffix_link),\
+    \ length_(length) {}\n\n    int suffix_link() const { return suffix_link_; }\n\
+    \n    int length() const { return length_; }\n\n    int get_child(Key c) const\
+    \ {\n        auto it = children.find(c);\n        return (it == children.end())\
+    \ ? -1 : it->second;\n    }\n\n    void set_child(int c, int nxt_idx) { children[c]\
+    \ = nxt_idx; }\n\n    template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const Node &node) {\n        os << \"Node(suffix_link=\" << node.suffix_link()\
+    \ << \", length=\" << node.length()\n           << \", children={\";\n       \
+    \ for (const auto &[c, nxt] : node.children) os << c << \"->\" << nxt << \", \"\
+    ;\n        return os << \"})\";\n    }\n};\n\n// Palindromic tree\n// nodes[0]\
+    \ \u306F\u9577\u3055 -1, nodes[1] \u306F\u9577\u3055 1 \u306E\u30C0\u30DF\u30FC\
+    \u30CE\u30FC\u30C9\ntemplate <class Key> struct Tree {\n    std::vector<Node<Key>>\
+    \ nodes;\n\n    Tree() { nodes = {Node<Key>(-1, -1), Node<Key>(0, 0)}; }\n\n \
+    \   // nodes[cursor] \u306F s[0:i] \u306E suffix palindrome \u3092\u8868\u3059\
+    \n    // \u672C\u95A2\u6570\u306F\u305D\u306E nodes[cursor] \u306E suffix palindrome\
+    \ \u3067\u3042\u3063\u3066\u66F4\u306B s[0:(i + 1)] \u306E suffix link \u3068\u306A\
+    \u308A\u3046\u308B\u6700\u9577\u306E\u3082\u306E\u3092\u8FD4\u3059\n    int find_next_suffix(const\
     \ std::vector<Key> &s, int i, int cursor) {\n        while (true) {\n        \
     \    if (cursor < 0) return 0;\n\n            const int cur_len = nodes.at(cursor).length();\n\
     \            const int opposite_pos = i - cur_len - 1;\n            if (opposite_pos\
@@ -114,7 +114,7 @@ data:
   isVerificationFile: false
   path: string/palindromic_tree.hpp
   requiredBy: []
-  timestamp: '2024-05-03 18:26:06+09:00'
+  timestamp: '2024-09-22 15:59:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/palindromic_tree.yuki2606.test.cpp

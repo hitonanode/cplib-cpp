@@ -20,9 +20,9 @@ data:
     \ / Eertree \uFF08\u56DE\u6587\u6728\uFF09\nnamespace palindromic_tree {\n\ntemplate\
     \ <class Key> class Node {\n    int suffix_link_; // \u3053\u306E\u30CE\u30FC\u30C9\
     \u304B\u3089\u306Esuffix link \uFF08suffix \u306E\u6700\u9577\u56DE\u6587\uFF09\
-    \n    int length_; // \u3053\u306E\u30CE\u30FC\u30C9\u304C\u8868\u3059\u56DE\u6587\
-    \u306E\u9577\u3055\u3002 -1 \u3068\u306A\u308B\u5834\u5408\u3082\u3042\u308B\u306E\
-    \u3067\u6CE8\u610F\n    std::map<Key, int> children;\n\npublic:\n    explicit\
+    \n    int length_;      // \u3053\u306E\u30CE\u30FC\u30C9\u304C\u8868\u3059\u56DE\
+    \u6587\u306E\u9577\u3055\u3002 -1 \u3068\u306A\u308B\u5834\u5408\u3082\u3042\u308B\
+    \u306E\u3067\u6CE8\u610F\n    std::map<Key, int> children;\n\npublic:\n    explicit\
     \ Node(int suffix_link, int length) : suffix_link_(suffix_link), length_(length)\
     \ {}\n\n    int suffix_link() const { return suffix_link_; }\n\n    int length()\
     \ const { return length_; }\n\n    int get_child(Key c) const {\n        auto\
@@ -95,7 +95,7 @@ data:
   isVerificationFile: true
   path: string/test/palindromic_tree.yuki2606.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 18:26:06+09:00'
+  timestamp: '2024-09-22 15:59:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/palindromic_tree.yuki2606.test.cpp

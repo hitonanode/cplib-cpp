@@ -606,7 +606,7 @@ data:
     \ typename Weight = long long> struct mcf_graph_ns {\n\n    struct Digraph {\n\
     \        const int V;\n        int E;\n        std::vector<std::vector<int>> in_eids,\
     \ out_eids;\n        std::vector<std::pair<int, int>> arcs;\n        Digraph(int\
-    \ V = 0) : V(V), E(0), in_eids(V), out_eids(V){};\n        int add_edge(int s,\
+    \ V = 0) : V(V), E(0), in_eids(V), out_eids(V) {};\n        int add_edge(int s,\
     \ int t) {\n            assert(0 <= s and s < V);\n            assert(0 <= t and\
     \ t < V);\n            in_eids[t].push_back(E), out_eids[s].push_back(E), arcs.emplace_back(s,\
     \ t), E++;\n            return E - 1;\n        }\n        int countNodes() const\
@@ -1232,7 +1232,7 @@ data:
     \ typename Weight = long long> struct mcf_graph_ns {\n\n    struct Digraph {\n\
     \        const int V;\n        int E;\n        std::vector<std::vector<int>> in_eids,\
     \ out_eids;\n        std::vector<std::pair<int, int>> arcs;\n        Digraph(int\
-    \ V = 0) : V(V), E(0), in_eids(V), out_eids(V){};\n        int add_edge(int s,\
+    \ V = 0) : V(V), E(0), in_eids(V), out_eids(V) {};\n        int add_edge(int s,\
     \ int t) {\n            assert(0 <= s and s < V);\n            assert(0 <= t and\
     \ t < V);\n            in_eids[t].push_back(E), out_eids[s].push_back(E), arcs.emplace_back(s,\
     \ t), E++;\n            return E - 1;\n        }\n        int countNodes() const\
@@ -1272,7 +1272,7 @@ data:
   isVerificationFile: false
   path: flow/networksimplex.hpp
   requiredBy: []
-  timestamp: '2022-12-07 23:52:43+09:00'
+  timestamp: '2024-09-22 15:59:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - flow/test/bflow_ns.test.cpp
