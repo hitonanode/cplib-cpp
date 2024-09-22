@@ -10,6 +10,6 @@ int main() {
     while (T--) {
         int N, M, A, B;
         cin >> N >> M >> A >> B;
-        cout << floor_sum(N, M, A, B) << '\n';
+        cout << floor_sum<long long, unsigned long long>(N, M, A, B) << '\n';
     }
 }
