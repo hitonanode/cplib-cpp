@@ -1270,7 +1270,7 @@ template <typename Capacity = long long, typename Weight = long long> struct mcf
         int E;
         std::vector<std::vector<int>> in_eids, out_eids;
         std::vector<std::pair<int, int>> arcs;
-        Digraph(int V = 0) : V(V), E(0), in_eids(V), out_eids(V){};
+        Digraph(int V = 0) : V(V), E(0), in_eids(V), out_eids(V) {};
         int add_edge(int s, int t) {
             assert(0 <= s and s < V);
             assert(0 <= t and t < V);

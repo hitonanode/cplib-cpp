@@ -3,7 +3,6 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
 // Convolution by FFT (Fast Fourier Transform)
 // Algorithm based on http://kirika-comp.hatenablog.com/entry/2018/03/12/210446
 // Verified: ATC001C (168 ms) https://atcoder.jp/contests/atc001/submissions/9243440
@@ -11,8 +10,7 @@ using cmplx = std::complex<double>;
 void fft(int N, std::vector<cmplx> &a, double dir) {
     int i = 0;
     for (int j = 1; j < N - 1; j++) {
-        for (int k = N >> 1; k > (i ^= k); k >>= 1)
-            ;
+        for (int k = N >> 1; k > (i ^= k); k >>= 1) {}
         if (j < i) std::swap(a[i], a[j]);
     }
 

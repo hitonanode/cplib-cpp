@@ -3,7 +3,7 @@
 using namespace std;
 using pint = pair<int, int>;
 #define FOR(i, begin, end) for (int i = (begin), i##_end_ = (end); i < i##_end_; i++)
-#define IFOR(i, begin, end) for (int i = (end)-1, i##_begin_ = (begin); i >= i##_begin_; i--)
+#define IFOR(i, begin, end) for (int i = (end) - 1, i##_begin_ = (begin); i >= i##_begin_; i--)
 #define REP(i, n) FOR(i, 0, n)
 #define IREP(i, n) IFOR(i, 0, n)
 #define dbg(x) cerr << #x << " = " << (x) << " (L" << __LINE__ << ") " << __FILE__ << endl;
@@ -21,8 +21,7 @@ vector<string> ret;
 mutex mtx;
 vector<int> done;
 
-void solve(int tc) { /* tc個目のテストケースを処理する関数 */
-}
+void solve(int tc) { /* tc個目のテストケースを処理する関数 */ }
 
 void run() {
     /* 未完了で最も番号が若いテストケースを処理 */

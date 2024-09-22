@@ -2,7 +2,6 @@
 #include <cassert>
 #include <vector>
 
-// CUT begin
 // Fast Walsh-Hadamard transform and its abstraction
 // Tutorials: <https://codeforces.com/blog/entry/71899>
 //            <https://csacademy.com/blog/fast-fourier-transform-and-variations-of-it>
@@ -50,13 +49,11 @@ template <typename T> std::vector<T> xorconv(std::vector<T> x, std::vector<T> y)
 // bitwise AND conolution
 // ret[i] = \sum_{(j & k) == i} x[j] * y[k]
 template <typename T> std::vector<T> andconv(std::vector<T> x, std::vector<T> y) {
-    return bitwise_conv(
-        x, y, [](T &lo, T &hi) { lo += hi; }, [](T &lo, T &hi) { lo -= hi; });
+    return bitwise_conv(x, y, [](T &lo, T &hi) { lo += hi; }, [](T &lo, T &hi) { lo -= hi; });
 }
 
 // bitwise OR convolution
 // ret[i] = \sum_{(j | k) == i} x[j] * y[k]
 template <typename T> std::vector<T> orconv(std::vector<T> x, std::vector<T> y) {
-    return bitwise_conv(
-        x, y, [](T &lo, T &hi) { hi += lo; }, [](T &lo, T &hi) { hi -= lo; });
+    return bitwise_conv(x, y, [](T &lo, T &hi) { hi += lo; }, [](T &lo, T &hi) { hi -= lo; });
 }
