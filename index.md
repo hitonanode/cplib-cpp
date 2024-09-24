@@ -415,8 +415,9 @@ data:
   - name: multithread
     pages:
     - icon: ':warning:'
-      path: multithread/multithread_example.cpp
-      title: multithread/multithread_example.cpp
+      path: multithread/parallel_runner.hpp
+      title: "Parallel runner \uFF08\u8907\u6570\u30C6\u30B9\u30C8\u30B1\u30FC\u30B9\
+        \u306E\u30DE\u30EB\u30C1\u30B9\u30EC\u30C3\u30C9\u4E26\u5217\u5B9F\u884C\uFF09"
   - name: number
     pages:
     - icon: ':warning:'
