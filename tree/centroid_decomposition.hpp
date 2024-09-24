@@ -14,7 +14,7 @@ private:
     std::vector<int> is_alive;
     std::vector<int> subtree_size;
 
-    void decompose(int r, int conn_size, auto callback) {
+    template <class F> void decompose(int r, int conn_size, F callback) {
 
         const int c = find_current_centroids(r, conn_size).first;
         is_alive.at(c) = 0;
@@ -69,7 +69,7 @@ public:
         return {c1, c2};
     }
 
-    void run(int r, auto callback) {
+    template <class F> void run(int r, F callback) {
         int conn_size = 0;
 
         auto rec = [&](auto &&self, int now, int prv) -> void {
