@@ -706,7 +706,7 @@ data:
       title: Cartesian tree
     - icon: ':heavy_check_mark:'
       path: tree/centroid_decomposition.hpp
-      title: tree/centroid_decomposition.hpp
+      title: "Centroid decomposition \uFF08\u68EE\u306E\u91CD\u5FC3\u5206\u89E3\uFF09"
     - icon: ':heavy_check_mark:'
       path: tree/diameter.hpp
       title: "Tree diameter \uFF08\u6728\u306E\u76F4\u5F84\uFF09"

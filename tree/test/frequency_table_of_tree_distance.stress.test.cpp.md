@@ -15,7 +15,7 @@ data:
     title: random/xorshift.hpp
   - icon: ':heavy_check_mark:'
     path: tree/centroid_decomposition.hpp
-    title: tree/centroid_decomposition.hpp
+    title: "Centroid decomposition \uFF08\u68EE\u306E\u91CD\u5FC3\u5206\u89E3\uFF09"
   - icon: ':heavy_check_mark:'
     path: tree/frequency_table_of_tree_distance.hpp
     title: Frequency table of tree distance
@@ -31,69 +31,63 @@ data:
     - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "#line 1 \"tree/test/frequency_table_of_tree_distance.stress.test.cpp\"\
     \n#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
-    \ // DUMMY\n#line 2 \"tree/centroid_decomposition.hpp\"\n#include <tuple>\n#include\
-    \ <utility>\n#include <vector>\n\n// CUT begin\n/*\n(Recursive) Centroid Decomposition\n\
-    Verification: Codeforces #190 Div.1 C https://codeforces.com/contest/321/submission/59093583\n\
-    \nfix_root(int r): Build information of the tree which `r` belongs to.\ndetect_centroid(int\
-    \ r): Enumerate centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
-    \ {\n    int NO_PARENT = -1;\n    int V;\n    int E;\n    std::vector<std::vector<std::pair<int,\
-    \ int>>> to; // (node_id, edge_id)\n    std::vector<int> par;                \
-    \             // parent node_id par[root] = -1\n    std::vector<std::vector<int>>\
-    \ chi;                // children id's\n    std::vector<int> subtree_size;   \
-    \                 // size of each subtree\n    std::vector<int> available_edge;\
-    \                  // If 0, ignore the corresponding edge.\n\n    CentroidDecomposition(int\
-    \ v = 0)\n        : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v)\
-    \ {}\n    CentroidDecomposition(const std::vector<std::vector<int>> &to_)\n  \
-    \      : CentroidDecomposition(to_.size()) {\n        for (int i = 0; i < V; i++)\
-    \ {\n            for (auto j : to_[i]) {\n                if (i < j) { add_edge(i,\
-    \ j); }\n            }\n        }\n    }\n\n    void add_edge(int v1, int v2)\
-    \ {\n        to[v1].emplace_back(v2, E), to[v2].emplace_back(v1, E), E++;\n  \
-    \      available_edge.emplace_back(1);\n    }\n\n    int _dfs_fixroot(int now,\
-    \ int prv) {\n        chi[now].clear(), subtree_size[now] = 1;\n        for (auto\
-    \ nxt : to[now]) {\n            if (nxt.first != prv and available_edge[nxt.second])\
-    \ {\n                par[nxt.first] = now, chi[now].push_back(nxt.first);\n  \
-    \              subtree_size[now] += _dfs_fixroot(nxt.first, now);\n          \
-    \  }\n        }\n        return subtree_size[now];\n    }\n\n    void fix_root(int\
-    \ root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root, -1);\n \
-    \   }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
-    \    void _dfs_detect_centroids(int now, int prv, int n) {\n        bool is_centroid\
-    \ = true;\n        for (auto nxt : to[now]) {\n            if (nxt.first != prv\
-    \ and available_edge[nxt.second]) {\n                _dfs_detect_centroids(nxt.first,\
-    \ now, n);\n                if (subtree_size[nxt.first] > n / 2) is_centroid =\
-    \ false;\n            }\n        }\n        if (n - subtree_size[now] > n / 2)\
-    \ is_centroid = false;\n        if (is_centroid) centroid_cand_tmp.push_back(now);\n\
-    \    }\n    std::pair<int, int> detect_centroids(int r) { // ([centroid_node_id1],\
-    \ ([centroid_node_id2]|-1))\n        centroid_cand_tmp.clear();\n        while\
-    \ (par[r] != NO_PARENT) r = par[r];\n        int n = subtree_size[r];\n      \
-    \  _dfs_detect_centroids(r, -1, n);\n        if (centroid_cand_tmp.size() == 1)\n\
-    \            return std::make_pair(centroid_cand_tmp[0], -1);\n        else\n\
-    \            return std::make_pair(centroid_cand_tmp[0], centroid_cand_tmp[1]);\n\
-    \    }\n\n    std::vector<int> _cd_vertices;\n    void _centroid_decomposition(int\
-    \ now) {\n        fix_root(now);\n        now = detect_centroids(now).first;\n\
-    \        _cd_vertices.emplace_back(now);\n        /*\n        do something\n \
-    \       */\n        for (auto p : to[now]) {\n            int nxt, eid;\n    \
-    \        std::tie(nxt, eid) = p;\n            if (available_edge[eid] == 0) continue;\n\
-    \            available_edge[eid] = 0;\n            _centroid_decomposition(nxt);\n\
-    \        }\n    }\n    std::vector<int> centroid_decomposition(int x) {\n    \
-    \    _cd_vertices.clear();\n        _centroid_decomposition(x);\n        return\
-    \ _cd_vertices;\n    }\n};\n#line 2 \"tree/frequency_table_of_tree_distance.hpp\"\
-    \n#include <algorithm>\n#line 5 \"tree/frequency_table_of_tree_distance.hpp\"\n\
-    \nstruct frequency_table_of_tree_distance {\n    std::vector<std::vector<int>>\
-    \ tos;\n    std::vector<int> cd;\n    std::vector<std::pair<int, int>> tmp;\n\
-    \    std::vector<int> alive;\n\n    void _dfs(int now, int prv, int depth) {\n\
-    \        // if (int(tmp.size()) <= depth) tmp.resize(depth + 1, 0);\n        //\
-    \ tmp[depth]++;\n        tmp.emplace_back(now, depth);\n        for (auto nxt\
-    \ : tos[now]) {\n            if (alive[nxt] and nxt != prv) _dfs(nxt, now, depth\
-    \ + 1);\n        }\n    }\n    std::vector<std::pair<int, int>> cnt_dfs(int root)\
-    \ {\n        return tmp.clear(), _dfs(root, -1, 0), tmp;\n    }\n    frequency_table_of_tree_distance(const\
-    \ std::vector<std::vector<int>> &to) {\n        tos = to;\n        cd = CentroidDecomposition(to).centroid_decomposition(0);\n\
-    \    }\n    template <class S, std::vector<S> (*conv)(const std::vector<S> &,\
-    \ const std::vector<S> &)>\n    std::vector<S> solve(const std::vector<S> &weight)\
-    \ {\n        alive.assign(tos.size(), 1);\n        std::vector<S> ret(tos.size());\n\
-    \        std::vector<S> v;\n        for (auto root : cd) {\n            std::vector<std::vector<S>>\
-    \ vv;\n            alive[root] = 0;\n            for (auto nxt : tos[root]) {\n\
-    \                if (!alive[nxt]) continue;\n                v.clear();\n    \
-    \            for (auto p : cnt_dfs(nxt)) {\n                    while (int(v.size())\
+    \ // DUMMY\n#line 2 \"tree/centroid_decomposition.hpp\"\n#include <cassert>\n\
+    #include <utility>\n#include <vector>\n\n// Centroid Decomposition\n// Verification:\
+    \ https://yukicoder.me/problems/no/2892\n// find_current_centroids(int r, int\
+    \ conn_size): Enumerate centroid(s) of the subtree which `r` belongs to.\nstruct\
+    \ CentroidDecomposition {\n    int V;\n    std::vector<std::vector<int>> to;\n\
+    \nprivate:\n    std::vector<int> is_alive;\n    std::vector<int> subtree_size;\n\
+    \n    template <class F> void decompose(int r, int conn_size, F callback) {\n\n\
+    \        const int c = find_current_centroids(r, conn_size).first;\n        is_alive.at(c)\
+    \ = 0;\n\n        callback(c);\n\n        for (int nxt : to.at(c)) {\n       \
+    \     if (!is_alive.at(nxt)) continue;\n            int next_size = subtree_size.at(nxt);\n\
+    \            if (subtree_size.at(nxt) > subtree_size.at(c))\n                next_size\
+    \ = subtree_size.at(r) - subtree_size.at(c);\n            decompose(nxt, next_size,\
+    \ callback);\n        }\n    }\n\npublic:\n    CentroidDecomposition(int v = 0)\
+    \ : V(v), to(v), is_alive(v, 1), subtree_size(v) {}\n\n    CentroidDecomposition(int\
+    \ v, const std::vector<std::pair<int, int>> &tree_edges)\n        : CentroidDecomposition(v)\
+    \ {\n        for (auto e : tree_edges) add_edge(e.first, e.second);\n    }\n\n\
+    \    void add_edge(int v1, int v2) {\n        assert(0 <= v1 and v1 < V and 0\
+    \ <= v2 and v2 < V);\n        assert(v1 != v2);\n        to.at(v1).push_back(v2),\
+    \ to.at(v2).emplace_back(v1);\n    }\n\n    std::pair<int, int> find_current_centroids(int\
+    \ r, int conn_size) {\n        assert(is_alive.at(r));\n\n        const int thres\
+    \ = conn_size / 2;\n\n        int c1 = -1, c2 = -1;\n\n        auto rec_search\
+    \ = [&](auto &&self, int now, int prv) -> void {\n            bool is_centroid\
+    \ = true;\n            subtree_size.at(now) = 1;\n            for (int nxt : to.at(now))\
+    \ {\n                if (nxt == prv or !is_alive.at(nxt)) continue;\n        \
+    \        self(self, nxt, now);\n                subtree_size.at(now) += subtree_size.at(nxt);\n\
+    \                if (subtree_size.at(nxt) > thres) is_centroid = false;\n    \
+    \        }\n            if (conn_size - subtree_size.at(now) > thres) is_centroid\
+    \ = false;\n\n            if (is_centroid) (c1 < 0 ? c1 : c2) = now;\n       \
+    \ };\n        rec_search(rec_search, r, -1);\n\n        return {c1, c2};\n   \
+    \ }\n\n    template <class F> void run(int r, F callback) {\n        int conn_size\
+    \ = 0;\n\n        auto rec = [&](auto &&self, int now, int prv) -> void {\n  \
+    \          ++conn_size;\n            is_alive.at(now) = 1;\n\n            for\
+    \ (int nxt : to.at(now)) {\n                if (nxt == prv) continue;\n      \
+    \          self(self, nxt, now);\n            }\n        };\n        rec(rec,\
+    \ r, -1);\n\n        decompose(r, conn_size, callback);\n    }\n\n    std::vector<int>\
+    \ centroid_decomposition(int r) {\n        std::vector<int> res;\n        run(r,\
+    \ [&](int v) { res.push_back(v); });\n        return res;\n    }\n};\n#line 2\
+    \ \"tree/frequency_table_of_tree_distance.hpp\"\n#include <algorithm>\n#line 5\
+    \ \"tree/frequency_table_of_tree_distance.hpp\"\n\nstruct frequency_table_of_tree_distance\
+    \ {\n    std::vector<std::vector<int>> tos;\n    std::vector<int> cd;\n    std::vector<std::pair<int,\
+    \ int>> tmp;\n    std::vector<int> alive;\n\n    void _dfs(int now, int prv, int\
+    \ depth) {\n        // if (int(tmp.size()) <= depth) tmp.resize(depth + 1, 0);\n\
+    \        // tmp[depth]++;\n        tmp.emplace_back(now, depth);\n        for\
+    \ (auto nxt : tos[now]) {\n            if (alive[nxt] and nxt != prv) _dfs(nxt,\
+    \ now, depth + 1);\n        }\n    }\n    std::vector<std::pair<int, int>> cnt_dfs(int\
+    \ root) {\n        return tmp.clear(), _dfs(root, -1, 0), tmp;\n    }\n    frequency_table_of_tree_distance(const\
+    \ std::vector<std::vector<int>> &to) {\n        tos = to;\n\n        CentroidDecomposition\
+    \ c(to.size());\n        for (int i = 0; i < int(to.size()); i++) {\n        \
+    \    for (int j : to[i]) {\n                if (i < j) c.add_edge(i, j);\n   \
+    \         }\n        }\n\n        cd = c.centroid_decomposition(0);\n    }\n \
+    \   template <class S, std::vector<S> (*conv)(const std::vector<S> &, const std::vector<S>\
+    \ &)>\n    std::vector<S> solve(const std::vector<S> &weight) {\n        alive.assign(tos.size(),\
+    \ 1);\n        std::vector<S> ret(tos.size());\n        std::vector<S> v;\n  \
+    \      for (auto root : cd) {\n            std::vector<std::vector<S>> vv;\n \
+    \           alive[root] = 0;\n            for (auto nxt : tos[root]) {\n     \
+    \           if (!alive[nxt]) continue;\n                v.clear();\n         \
+    \       for (auto p : cnt_dfs(nxt)) {\n                    while (int(v.size())\
     \ <= p.second) v.push_back(S(0));\n                    v[p.second] += weight[p.first];\n\
     \                }\n                for (int i = 0; i < int(v.size()); i++) ret[i\
     \ + 1] += v[i] * weight[root];\n                vv.emplace_back(v);\n        \
@@ -104,14 +98,14 @@ data:
     \ (size_t i = 0; i < c.size(); i++) ret[i + 2] += c[i];\n                for (size_t\
     \ i = 0; i < vv[j - 1].size(); i++) vv[j][i] += vv[j - 1][i];\n            }\n\
     \            tos[root].clear();\n        }\n        return ret;\n    }\n};\n#line\
-    \ 2 \"modint.hpp\"\n#include <cassert>\n#include <iostream>\n#include <set>\n\
-    #line 6 \"modint.hpp\"\n\ntemplate <int md> struct ModInt {\n    using lint =\
-    \ long long;\n    constexpr static int mod() { return md; }\n    static int get_primitive_root()\
-    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
-    \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
-    \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
-    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
-    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
+    \ 3 \"modint.hpp\"\n#include <iostream>\n#include <set>\n#line 6 \"modint.hpp\"\
+    \n\ntemplate <int md> struct ModInt {\n    using lint = long long;\n    constexpr\
+    \ static int mod() { return md; }\n    static int get_primitive_root() {\n   \
+    \     static int primitive_root = 0;\n        if (!primitive_root) {\n       \
+    \     primitive_root = [&]() {\n                std::set<int> fac;\n         \
+    \       int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n \
+    \                   while (v % i == 0) fac.insert(i), v /= i;\n              \
+    \  if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
     \                    bool ok = true;\n                    for (auto i : fac)\n\
     \                        if (ModInt(g).pow((md - 1) / i) == 1) {\n           \
     \                 ok = false;\n                            break;\n          \
@@ -197,33 +191,33 @@ data:
     \ ModInt<md>::facinvs = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::invs\
     \ = {0};\n\nusing ModInt998244353 = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n\
     // using mint = ModInt<1000000007>;\n#line 3 \"convolution/ntt.hpp\"\n\n#line\
-    \ 5 \"convolution/ntt.hpp\"\n#include <array>\n#line 9 \"convolution/ntt.hpp\"\
-    \n\n// CUT begin\n// Integer convolution for arbitrary mod\n// with NTT (and Garner's\
-    \ algorithm) for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm\
-    \ if `skip_garner` is true or mod is in `nttprimes`.\n// input: a (size: n), b\
-    \ (size: m)\n// return: vector (size: n + m - 1)\ntemplate <typename MODINT>\n\
-    std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool\
-    \ skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161, 469762049};\n\
-    \n// Integer FFT (Fast Fourier Transform) for ModInt class\n// (Also known as\
-    \ Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n// ** Input\
-    \ size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
-    \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
-    \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
-    \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
-    \ std::vector<MODINT> w{1}, iw{1};\n    for (int m = w.size(); m < n / 2; m *=\
-    \ 2) {\n        MODINT dw = root.pow((mod - 1) / (4 * m)), dwinv = 1 / dw;\n \
-    \       w.resize(m * 2), iw.resize(m * 2);\n        for (int i = 0; i < m; i++)\
-    \ w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;\n    }\n\n    if (!is_inverse)\
-    \ {\n        for (int m = n; m >>= 1;) {\n            for (int s = 0, k = 0; s\
-    \ < n; s += 2 * m, k++) {\n                for (int i = s; i < s + m; i++) {\n\
-    \                    MODINT x = a[i], y = a[i + m] * w[k];\n                 \
-    \   a[i] = x + y, a[i + m] = x - y;\n                }\n            }\n      \
-    \  }\n    } else {\n        for (int m = 1; m < n; m *= 2) {\n            for\
-    \ (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n                for (int i = s;\
-    \ i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m];\n    \
-    \                a[i] = x + y, a[i + m] = (x - y) * iw[k];\n                }\n\
-    \            }\n        }\n        int n_inv = MODINT(n).inv().val();\n      \
-    \  for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
+    \ 5 \"convolution/ntt.hpp\"\n#include <array>\n#line 7 \"convolution/ntt.hpp\"\
+    \n#include <tuple>\n#line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer\
+    \ convolution for arbitrary mod\n// with NTT (and Garner's algorithm) for ModInt\
+    \ / ModIntRuntime class.\n// We skip Garner's algorithm if `skip_garner` is true\
+    \ or mod is in `nttprimes`.\n// input: a (size: n), b (size: m)\n// return: vector\
+    \ (size: n + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner);\n\nconstexpr int nttprimes[3] =\
+    \ {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
+    \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
+    \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
+    \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
+    \    if (n == 1) return;\n    static const int mod = MODINT::mod();\n    static\
+    \ const MODINT root = MODINT::get_primitive_root();\n    assert(__builtin_popcount(n)\
+    \ == 1 and (mod - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n\
+    \    for (int m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod\
+    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
+    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
+    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
+    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
+    \  for (int i = s; i < s + m; i++) {\n                    MODINT x = a[i], y =\
+    \ a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n    \
+    \            }\n            }\n        }\n    } else {\n        for (int m = 1;\
+    \ m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++)\
+    \ {\n                for (int i = s; i < s + m; i++) {\n                    MODINT\
+    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
+    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv().val();\n\
+    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
     \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
     \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
     \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
@@ -442,7 +436,7 @@ data:
   isVerificationFile: true
   path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
   requiredBy: []
-  timestamp: '2023-12-26 21:26:22+09:00'
+  timestamp: '2024-09-25 00:42:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/frequency_table_of_tree_distance.stress.test.cpp

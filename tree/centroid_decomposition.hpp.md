@@ -20,105 +20,87 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
-    - https://codeforces.com/contest/321/submission/59093583
-  bundledCode: "#line 2 \"tree/centroid_decomposition.hpp\"\n#include <tuple>\n#include\
-    \ <utility>\n#include <vector>\n\n// CUT begin\n/*\n(Recursive) Centroid Decomposition\n\
-    Verification: Codeforces #190 Div.1 C https://codeforces.com/contest/321/submission/59093583\n\
-    \nfix_root(int r): Build information of the tree which `r` belongs to.\ndetect_centroid(int\
-    \ r): Enumerate centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
-    \ {\n    int NO_PARENT = -1;\n    int V;\n    int E;\n    std::vector<std::vector<std::pair<int,\
-    \ int>>> to; // (node_id, edge_id)\n    std::vector<int> par;                \
-    \             // parent node_id par[root] = -1\n    std::vector<std::vector<int>>\
-    \ chi;                // children id's\n    std::vector<int> subtree_size;   \
-    \                 // size of each subtree\n    std::vector<int> available_edge;\
-    \                  // If 0, ignore the corresponding edge.\n\n    CentroidDecomposition(int\
-    \ v = 0)\n        : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v)\
-    \ {}\n    CentroidDecomposition(const std::vector<std::vector<int>> &to_)\n  \
-    \      : CentroidDecomposition(to_.size()) {\n        for (int i = 0; i < V; i++)\
-    \ {\n            for (auto j : to_[i]) {\n                if (i < j) { add_edge(i,\
-    \ j); }\n            }\n        }\n    }\n\n    void add_edge(int v1, int v2)\
-    \ {\n        to[v1].emplace_back(v2, E), to[v2].emplace_back(v1, E), E++;\n  \
-    \      available_edge.emplace_back(1);\n    }\n\n    int _dfs_fixroot(int now,\
-    \ int prv) {\n        chi[now].clear(), subtree_size[now] = 1;\n        for (auto\
-    \ nxt : to[now]) {\n            if (nxt.first != prv and available_edge[nxt.second])\
-    \ {\n                par[nxt.first] = now, chi[now].push_back(nxt.first);\n  \
-    \              subtree_size[now] += _dfs_fixroot(nxt.first, now);\n          \
-    \  }\n        }\n        return subtree_size[now];\n    }\n\n    void fix_root(int\
-    \ root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root, -1);\n \
-    \   }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
-    \    void _dfs_detect_centroids(int now, int prv, int n) {\n        bool is_centroid\
-    \ = true;\n        for (auto nxt : to[now]) {\n            if (nxt.first != prv\
-    \ and available_edge[nxt.second]) {\n                _dfs_detect_centroids(nxt.first,\
-    \ now, n);\n                if (subtree_size[nxt.first] > n / 2) is_centroid =\
-    \ false;\n            }\n        }\n        if (n - subtree_size[now] > n / 2)\
-    \ is_centroid = false;\n        if (is_centroid) centroid_cand_tmp.push_back(now);\n\
-    \    }\n    std::pair<int, int> detect_centroids(int r) { // ([centroid_node_id1],\
-    \ ([centroid_node_id2]|-1))\n        centroid_cand_tmp.clear();\n        while\
-    \ (par[r] != NO_PARENT) r = par[r];\n        int n = subtree_size[r];\n      \
-    \  _dfs_detect_centroids(r, -1, n);\n        if (centroid_cand_tmp.size() == 1)\n\
-    \            return std::make_pair(centroid_cand_tmp[0], -1);\n        else\n\
-    \            return std::make_pair(centroid_cand_tmp[0], centroid_cand_tmp[1]);\n\
-    \    }\n\n    std::vector<int> _cd_vertices;\n    void _centroid_decomposition(int\
-    \ now) {\n        fix_root(now);\n        now = detect_centroids(now).first;\n\
-    \        _cd_vertices.emplace_back(now);\n        /*\n        do something\n \
-    \       */\n        for (auto p : to[now]) {\n            int nxt, eid;\n    \
-    \        std::tie(nxt, eid) = p;\n            if (available_edge[eid] == 0) continue;\n\
-    \            available_edge[eid] = 0;\n            _centroid_decomposition(nxt);\n\
-    \        }\n    }\n    std::vector<int> centroid_decomposition(int x) {\n    \
-    \    _cd_vertices.clear();\n        _centroid_decomposition(x);\n        return\
-    \ _cd_vertices;\n    }\n};\n"
-  code: "#pragma once\n#include <tuple>\n#include <utility>\n#include <vector>\n\n\
-    // CUT begin\n/*\n(Recursive) Centroid Decomposition\nVerification: Codeforces\
-    \ #190 Div.1 C https://codeforces.com/contest/321/submission/59093583\n\nfix_root(int\
-    \ r): Build information of the tree which `r` belongs to.\ndetect_centroid(int\
-    \ r): Enumerate centroid(s) of the tree which `r` belongs to.\n*/\nstruct CentroidDecomposition\
-    \ {\n    int NO_PARENT = -1;\n    int V;\n    int E;\n    std::vector<std::vector<std::pair<int,\
-    \ int>>> to; // (node_id, edge_id)\n    std::vector<int> par;                \
-    \             // parent node_id par[root] = -1\n    std::vector<std::vector<int>>\
-    \ chi;                // children id's\n    std::vector<int> subtree_size;   \
-    \                 // size of each subtree\n    std::vector<int> available_edge;\
-    \                  // If 0, ignore the corresponding edge.\n\n    CentroidDecomposition(int\
-    \ v = 0)\n        : V(v), E(0), to(v), par(v, NO_PARENT), chi(v), subtree_size(v)\
-    \ {}\n    CentroidDecomposition(const std::vector<std::vector<int>> &to_)\n  \
-    \      : CentroidDecomposition(to_.size()) {\n        for (int i = 0; i < V; i++)\
-    \ {\n            for (auto j : to_[i]) {\n                if (i < j) { add_edge(i,\
-    \ j); }\n            }\n        }\n    }\n\n    void add_edge(int v1, int v2)\
-    \ {\n        to[v1].emplace_back(v2, E), to[v2].emplace_back(v1, E), E++;\n  \
-    \      available_edge.emplace_back(1);\n    }\n\n    int _dfs_fixroot(int now,\
-    \ int prv) {\n        chi[now].clear(), subtree_size[now] = 1;\n        for (auto\
-    \ nxt : to[now]) {\n            if (nxt.first != prv and available_edge[nxt.second])\
-    \ {\n                par[nxt.first] = now, chi[now].push_back(nxt.first);\n  \
-    \              subtree_size[now] += _dfs_fixroot(nxt.first, now);\n          \
-    \  }\n        }\n        return subtree_size[now];\n    }\n\n    void fix_root(int\
-    \ root) {\n        par[root] = NO_PARENT;\n        _dfs_fixroot(root, -1);\n \
-    \   }\n\n    //// Centroid Decpmposition ////\n    std::vector<int> centroid_cand_tmp;\n\
-    \    void _dfs_detect_centroids(int now, int prv, int n) {\n        bool is_centroid\
-    \ = true;\n        for (auto nxt : to[now]) {\n            if (nxt.first != prv\
-    \ and available_edge[nxt.second]) {\n                _dfs_detect_centroids(nxt.first,\
-    \ now, n);\n                if (subtree_size[nxt.first] > n / 2) is_centroid =\
-    \ false;\n            }\n        }\n        if (n - subtree_size[now] > n / 2)\
-    \ is_centroid = false;\n        if (is_centroid) centroid_cand_tmp.push_back(now);\n\
-    \    }\n    std::pair<int, int> detect_centroids(int r) { // ([centroid_node_id1],\
-    \ ([centroid_node_id2]|-1))\n        centroid_cand_tmp.clear();\n        while\
-    \ (par[r] != NO_PARENT) r = par[r];\n        int n = subtree_size[r];\n      \
-    \  _dfs_detect_centroids(r, -1, n);\n        if (centroid_cand_tmp.size() == 1)\n\
-    \            return std::make_pair(centroid_cand_tmp[0], -1);\n        else\n\
-    \            return std::make_pair(centroid_cand_tmp[0], centroid_cand_tmp[1]);\n\
-    \    }\n\n    std::vector<int> _cd_vertices;\n    void _centroid_decomposition(int\
-    \ now) {\n        fix_root(now);\n        now = detect_centroids(now).first;\n\
-    \        _cd_vertices.emplace_back(now);\n        /*\n        do something\n \
-    \       */\n        for (auto p : to[now]) {\n            int nxt, eid;\n    \
-    \        std::tie(nxt, eid) = p;\n            if (available_edge[eid] == 0) continue;\n\
-    \            available_edge[eid] = 0;\n            _centroid_decomposition(nxt);\n\
-    \        }\n    }\n    std::vector<int> centroid_decomposition(int x) {\n    \
-    \    _cd_vertices.clear();\n        _centroid_decomposition(x);\n        return\
-    \ _cd_vertices;\n    }\n};\n"
+    - https://yukicoder.me/problems/no/2892
+  bundledCode: "#line 2 \"tree/centroid_decomposition.hpp\"\n#include <cassert>\n\
+    #include <utility>\n#include <vector>\n\n// Centroid Decomposition\n// Verification:\
+    \ https://yukicoder.me/problems/no/2892\n// find_current_centroids(int r, int\
+    \ conn_size): Enumerate centroid(s) of the subtree which `r` belongs to.\nstruct\
+    \ CentroidDecomposition {\n    int V;\n    std::vector<std::vector<int>> to;\n\
+    \nprivate:\n    std::vector<int> is_alive;\n    std::vector<int> subtree_size;\n\
+    \n    template <class F> void decompose(int r, int conn_size, F callback) {\n\n\
+    \        const int c = find_current_centroids(r, conn_size).first;\n        is_alive.at(c)\
+    \ = 0;\n\n        callback(c);\n\n        for (int nxt : to.at(c)) {\n       \
+    \     if (!is_alive.at(nxt)) continue;\n            int next_size = subtree_size.at(nxt);\n\
+    \            if (subtree_size.at(nxt) > subtree_size.at(c))\n                next_size\
+    \ = subtree_size.at(r) - subtree_size.at(c);\n            decompose(nxt, next_size,\
+    \ callback);\n        }\n    }\n\npublic:\n    CentroidDecomposition(int v = 0)\
+    \ : V(v), to(v), is_alive(v, 1), subtree_size(v) {}\n\n    CentroidDecomposition(int\
+    \ v, const std::vector<std::pair<int, int>> &tree_edges)\n        : CentroidDecomposition(v)\
+    \ {\n        for (auto e : tree_edges) add_edge(e.first, e.second);\n    }\n\n\
+    \    void add_edge(int v1, int v2) {\n        assert(0 <= v1 and v1 < V and 0\
+    \ <= v2 and v2 < V);\n        assert(v1 != v2);\n        to.at(v1).push_back(v2),\
+    \ to.at(v2).emplace_back(v1);\n    }\n\n    std::pair<int, int> find_current_centroids(int\
+    \ r, int conn_size) {\n        assert(is_alive.at(r));\n\n        const int thres\
+    \ = conn_size / 2;\n\n        int c1 = -1, c2 = -1;\n\n        auto rec_search\
+    \ = [&](auto &&self, int now, int prv) -> void {\n            bool is_centroid\
+    \ = true;\n            subtree_size.at(now) = 1;\n            for (int nxt : to.at(now))\
+    \ {\n                if (nxt == prv or !is_alive.at(nxt)) continue;\n        \
+    \        self(self, nxt, now);\n                subtree_size.at(now) += subtree_size.at(nxt);\n\
+    \                if (subtree_size.at(nxt) > thres) is_centroid = false;\n    \
+    \        }\n            if (conn_size - subtree_size.at(now) > thres) is_centroid\
+    \ = false;\n\n            if (is_centroid) (c1 < 0 ? c1 : c2) = now;\n       \
+    \ };\n        rec_search(rec_search, r, -1);\n\n        return {c1, c2};\n   \
+    \ }\n\n    template <class F> void run(int r, F callback) {\n        int conn_size\
+    \ = 0;\n\n        auto rec = [&](auto &&self, int now, int prv) -> void {\n  \
+    \          ++conn_size;\n            is_alive.at(now) = 1;\n\n            for\
+    \ (int nxt : to.at(now)) {\n                if (nxt == prv) continue;\n      \
+    \          self(self, nxt, now);\n            }\n        };\n        rec(rec,\
+    \ r, -1);\n\n        decompose(r, conn_size, callback);\n    }\n\n    std::vector<int>\
+    \ centroid_decomposition(int r) {\n        std::vector<int> res;\n        run(r,\
+    \ [&](int v) { res.push_back(v); });\n        return res;\n    }\n};\n"
+  code: "#pragma once\n#include <cassert>\n#include <utility>\n#include <vector>\n\
+    \n// Centroid Decomposition\n// Verification: https://yukicoder.me/problems/no/2892\n\
+    // find_current_centroids(int r, int conn_size): Enumerate centroid(s) of the\
+    \ subtree which `r` belongs to.\nstruct CentroidDecomposition {\n    int V;\n\
+    \    std::vector<std::vector<int>> to;\n\nprivate:\n    std::vector<int> is_alive;\n\
+    \    std::vector<int> subtree_size;\n\n    template <class F> void decompose(int\
+    \ r, int conn_size, F callback) {\n\n        const int c = find_current_centroids(r,\
+    \ conn_size).first;\n        is_alive.at(c) = 0;\n\n        callback(c);\n\n \
+    \       for (int nxt : to.at(c)) {\n            if (!is_alive.at(nxt)) continue;\n\
+    \            int next_size = subtree_size.at(nxt);\n            if (subtree_size.at(nxt)\
+    \ > subtree_size.at(c))\n                next_size = subtree_size.at(r) - subtree_size.at(c);\n\
+    \            decompose(nxt, next_size, callback);\n        }\n    }\n\npublic:\n\
+    \    CentroidDecomposition(int v = 0) : V(v), to(v), is_alive(v, 1), subtree_size(v)\
+    \ {}\n\n    CentroidDecomposition(int v, const std::vector<std::pair<int, int>>\
+    \ &tree_edges)\n        : CentroidDecomposition(v) {\n        for (auto e : tree_edges)\
+    \ add_edge(e.first, e.second);\n    }\n\n    void add_edge(int v1, int v2) {\n\
+    \        assert(0 <= v1 and v1 < V and 0 <= v2 and v2 < V);\n        assert(v1\
+    \ != v2);\n        to.at(v1).push_back(v2), to.at(v2).emplace_back(v1);\n    }\n\
+    \n    std::pair<int, int> find_current_centroids(int r, int conn_size) {\n   \
+    \     assert(is_alive.at(r));\n\n        const int thres = conn_size / 2;\n\n\
+    \        int c1 = -1, c2 = -1;\n\n        auto rec_search = [&](auto &&self, int\
+    \ now, int prv) -> void {\n            bool is_centroid = true;\n            subtree_size.at(now)\
+    \ = 1;\n            for (int nxt : to.at(now)) {\n                if (nxt == prv\
+    \ or !is_alive.at(nxt)) continue;\n                self(self, nxt, now);\n   \
+    \             subtree_size.at(now) += subtree_size.at(nxt);\n                if\
+    \ (subtree_size.at(nxt) > thres) is_centroid = false;\n            }\n       \
+    \     if (conn_size - subtree_size.at(now) > thres) is_centroid = false;\n\n \
+    \           if (is_centroid) (c1 < 0 ? c1 : c2) = now;\n        };\n        rec_search(rec_search,\
+    \ r, -1);\n\n        return {c1, c2};\n    }\n\n    template <class F> void run(int\
+    \ r, F callback) {\n        int conn_size = 0;\n\n        auto rec = [&](auto\
+    \ &&self, int now, int prv) -> void {\n            ++conn_size;\n            is_alive.at(now)\
+    \ = 1;\n\n            for (int nxt : to.at(now)) {\n                if (nxt ==\
+    \ prv) continue;\n                self(self, nxt, now);\n            }\n     \
+    \   };\n        rec(rec, r, -1);\n\n        decompose(r, conn_size, callback);\n\
+    \    }\n\n    std::vector<int> centroid_decomposition(int r) {\n        std::vector<int>\
+    \ res;\n        run(r, [&](int v) { res.push_back(v); });\n        return res;\n\
+    \    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: tree/centroid_decomposition.hpp
   requiredBy:
   - tree/frequency_table_of_tree_distance.hpp
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2024-09-25 00:42:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
@@ -126,8 +108,22 @@ data:
   - tree/test/frequency_table_of_tree_distance.test.cpp
 documentation_of: tree/centroid_decomposition.hpp
 layout: document
-redirect_from:
-- /library/tree/centroid_decomposition.hpp
-- /library/tree/centroid_decomposition.hpp.html
-title: tree/centroid_decomposition.hpp
+title: "Centroid decomposition \uFF08\u68EE\u306E\u91CD\u5FC3\u5206\u89E3\uFF09"
 ---
+
+与えられた森について，指定された頂点に関する連結成分の重心分解を行う．
+
+## 使用方法
+
+```cpp
+int v = 0;
+
+// 頂点 v の連結成分を重心分解していく
+for (int c : cd.centroid_decomposition(v)) {
+    // 頂点 c を削除する
+}
+```
+
+## 問題例
+
+- [No.2892 Lime and Karin - yukicoder](https://yukicoder.me/problems/no/2892)
