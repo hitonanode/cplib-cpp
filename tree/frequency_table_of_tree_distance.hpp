@@ -22,7 +22,15 @@ struct frequency_table_of_tree_distance {
     }
     frequency_table_of_tree_distance(const std::vector<std::vector<int>> &to) {
         tos = to;
-        cd = CentroidDecomposition(to).centroid_decomposition(0);
+
+        CentroidDecomposition c(to.size());
+        for (int i = 0; i < int(to.size()); i++) {
+            for (int j : to[i]) {
+                if (i < j) c.add_edge(i, j);
+            }
+        }
+
+        cd = c.centroid_decomposition(0);
     }
     template <class S, std::vector<S> (*conv)(const std::vector<S> &, const std::vector<S> &)>
     std::vector<S> solve(const std::vector<S> &weight) {
