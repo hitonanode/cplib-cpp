@@ -3,12 +3,11 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
-// Weighted UnionFind
-template <class S> struct WeightedUnionFind {
+// Potentialized UnionFind (Weighted UnionFind)
+template <class S> struct PotentializedUnionFind {
     std::vector<int> par, sz;
     std::vector<S> pot;
-    WeightedUnionFind(int N = 0) : par(N), sz(N, 1), pot(N) {
+    PotentializedUnionFind(int N = 0) : par(N), sz(N, 1), pot(N) {
         std::iota(par.begin(), par.end(), 0);
     }
     int find(int x) {

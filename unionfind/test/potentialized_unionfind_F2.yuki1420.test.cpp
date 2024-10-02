@@ -1,7 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1420"
 #define ERROR 1 // Check only whether the answer is -1 or not
 #include "../../number/nimber.hpp"
-#include "../weighted_unionfind.hpp"
+#include "../potentialized_unionfind.hpp"
 #include <iostream>
 using namespace std;
 
@@ -10,7 +10,7 @@ int main() {
     int N, M;
     cin >> N >> M;
 
-    WeightedUnionFind<Nimber> uf(N);
+    PotentializedUnionFind<Nimber> uf(N);
     while (M--) {
         int a, b, y;
         cin >> a >> b >> y;

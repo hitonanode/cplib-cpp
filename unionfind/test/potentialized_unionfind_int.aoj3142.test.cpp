@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3142"
-#include "../weighted_unionfind.hpp"
+#include "../potentialized_unionfind.hpp"
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -8,7 +8,7 @@ using namespace std;
 int N;
 vector<vector<int>> to;
 vector<int> A, B;
-WeightedUnionFind<long long> uf;
+PotentializedUnionFind<long long> uf;
 
 long long dfs(int now, int prv) {
     long long acc = B[now] - A[now];
@@ -26,7 +26,7 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
 
     cin >> N;
-    uf = WeightedUnionFind<long long>(N);
+    uf = PotentializedUnionFind<long long>(N);
     to.resize(N);
 
     for (int e = 0; e < N - 1; e++) {
