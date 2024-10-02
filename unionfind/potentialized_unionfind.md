@@ -1,6 +1,6 @@
 ---
-title: Weighted UnionFind （重み付き UnionFind）
-documentation_of: ./weighted_unionfind.hpp
+title: Potentialized UnionFind （重み付き UnionFind）
+documentation_of: ./potentialized_unionfind.hpp
 ---
 
 2個の要素間の重みづけが可能な UnionFind．
@@ -10,7 +10,7 @@ documentation_of: ./weighted_unionfind.hpp
 ポテンシャルが（ふつうの）整数の場合．
 
 ```cpp
-WeightedUnionFind<int> uf(N);
+PotentializedUnionFind<int> uf(N);
 uf.unite(s, t, diff);  // f[t] = f[s] + diff を要請．これまでの要請と矛盾すれば false を返す．
 
 auto x = uf.diff(s, t);  // f[t] - f[s] （として考えられる値の一つ）を出力．
@@ -19,9 +19,10 @@ auto x = uf.diff(s, t);  // f[t] - f[s] （として考えられる値の一つ�
 ポテンシャルが $\mathbb{F}_{2}$ 上のベクトルの場合．
 
 ```cpp
-WeightedUnionFind<Nimber> uf(N);
+PotentializedUnionFind<Nimber> uf(N);
 ```
 
 ## 問題例
 
 - [No.1420 国勢調査 (Easy) - yukicoder](https://yukicoder.me/problems/no/1420) $\mathbb{F}_2$ 上のベクトル．
+- [AtCoder Beginner Contest 373 D - Hidden Weights](https://atcoder.jp/contests/abc373/tasks/abc373_d)

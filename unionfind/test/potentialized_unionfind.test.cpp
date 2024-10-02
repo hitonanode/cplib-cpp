@@ -1,4 +1,4 @@
-#include "../weighted_unionfind.hpp"
+#include "../potentialized_unionfind.hpp"
 #include <iostream>
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B&lang=jp"
 using namespace std;
@@ -6,7 +6,7 @@ using namespace std;
 int main() {
     int N, Q, x, y, z;
     cin >> N >> Q;
-    WeightedUnionFind<int> uf(N);
+    PotentializedUnionFind<int> uf(N);
     for (int i = 0; i < Q; i++) {
         int c;
         cin >> c;
