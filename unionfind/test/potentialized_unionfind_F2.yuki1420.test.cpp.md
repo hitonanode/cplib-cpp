@@ -5,8 +5,8 @@ data:
     path: number/nimber.hpp
     title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"
   - icon: ':heavy_check_mark:'
-    path: unionfind/weighted_unionfind.hpp
-    title: "Weighted UnionFind \uFF08\u91CD\u307F\u4ED8\u304D UnionFind\uFF09"
+    path: unionfind/potentialized_unionfind.hpp
+    title: "Potentialized UnionFind \uFF08\u91CD\u307F\u4ED8\u304D UnionFind\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -18,7 +18,7 @@ data:
     PROBLEM: https://yukicoder.me/problems/no/1420
     links:
     - https://yukicoder.me/problems/no/1420
-  bundledCode: "#line 1 \"unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp\"\
+  bundledCode: "#line 1 \"unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp\"\
     \n#define PROBLEM \"https://yukicoder.me/problems/no/1420\"\n#define ERROR 1 //\
     \ Check only whether the answer is -1 or not\n#line 2 \"number/nimber.hpp\"\n\
     #include <array>\n\n// Nimber (64 bit)\n// Reference:\n// - https://judge.yosupo.jp/submission/4542\
@@ -60,50 +60,51 @@ data:
     \ long long, 256>, 8>, 8> ret;\n    for (int d = 0; d < 8; ++d) {\n        for\
     \ (int e = 0; e < 8; ++e) {\n            ull p = _rec(1ULL << (8 * d), 1ULL <<\
     \ (8 * e));\n            for (int i = 0; i < 256; ++i) ret[d][e][i] = _rec(p,\
-    \ i);\n        }\n    }\n    return ret;\n}();\n#line 2 \"unionfind/weighted_unionfind.hpp\"\
-    \n#include <numeric>\n#include <utility>\n#include <vector>\n\n// CUT begin\n\
-    // Weighted UnionFind\ntemplate <class S> struct WeightedUnionFind {\n    std::vector<int>\
-    \ par, sz;\n    std::vector<S> pot;\n    WeightedUnionFind(int N = 0) : par(N),\
-    \ sz(N, 1), pot(N) {\n        std::iota(par.begin(), par.end(), 0);\n    }\n \
-    \   int find(int x) {\n        if (par[x] != x) {\n            int r = find(par[x]);\n\
-    \            pot[x] = pot[x] + pot[par[x]], par[x] = r;\n        }\n        return\
-    \ par[x];\n    }\n    bool unite(int s, int t, S rel_diff) {\n        // Relate\
-    \ s and t by f[t] = f[s] + rel_diff\n        // Return false iff contradiction\
-    \ happens.\n        rel_diff = rel_diff + weight(s) + (-weight(t));\n        if\
-    \ ((s = find(s)) == (t = find(t))) return rel_diff == 0;\n        if (sz[s] <\
-    \ sz[t]) std::swap(s, t), rel_diff = -rel_diff;\n        par[t] = s, sz[s] +=\
-    \ sz[t], pot[t] = rel_diff;\n        return true;\n    }\n    S weight(int x)\
-    \ { return find(x), pot[x]; }\n    S diff(int s, int t) { return weight(t) + (-weight(s));\
-    \ } // return f[t] - f[s]\n    int count(int x) { return sz[find(x)]; }\n    bool\
-    \ same(int s, int t) { return find(s) == find(t); }\n};\n#line 5 \"unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp\"\
-    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n    int N, M;\n    cin >> N >> M;\n\n    WeightedUnionFind<Nimber>\
-    \ uf(N);\n    while (M--) {\n        int a, b, y;\n        cin >> a >> b >> y;\n\
-    \        a--, b--;\n        if (!uf.unite(a, b, y)) {\n            cout << \"\
-    -1\\n\";\n            return 0;\n        }\n    }\n    for (int i = 0; i < N;\
-    \ i++) cout << uf.weight(i) << '\\n';\n}\n"
+    \ i);\n        }\n    }\n    return ret;\n}();\n#line 2 \"unionfind/potentialized_unionfind.hpp\"\
+    \n#include <numeric>\n#include <utility>\n#include <vector>\n\n// Potentialized\
+    \ UnionFind (Weighted UnionFind)\ntemplate <class S> struct PotentializedUnionFind\
+    \ {\n    std::vector<int> par, sz;\n    std::vector<S> pot;\n    PotentializedUnionFind(int\
+    \ N = 0) : par(N), sz(N, 1), pot(N) {\n        std::iota(par.begin(), par.end(),\
+    \ 0);\n    }\n    int find(int x) {\n        if (par[x] != x) {\n            int\
+    \ r = find(par[x]);\n            pot[x] = pot[x] + pot[par[x]], par[x] = r;\n\
+    \        }\n        return par[x];\n    }\n    bool unite(int s, int t, S rel_diff)\
+    \ {\n        // Relate s and t by f[t] = f[s] + rel_diff\n        // Return false\
+    \ iff contradiction happens.\n        rel_diff = rel_diff + weight(s) + (-weight(t));\n\
+    \        if ((s = find(s)) == (t = find(t))) return rel_diff == 0;\n        if\
+    \ (sz[s] < sz[t]) std::swap(s, t), rel_diff = -rel_diff;\n        par[t] = s,\
+    \ sz[s] += sz[t], pot[t] = rel_diff;\n        return true;\n    }\n    S weight(int\
+    \ x) { return find(x), pot[x]; }\n    S diff(int s, int t) { return weight(t)\
+    \ + (-weight(s)); } // return f[t] - f[s]\n    int count(int x) { return sz[find(x)];\
+    \ }\n    bool same(int s, int t) { return find(s) == find(t); }\n};\n#line 5 \"\
+    unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp\"\n#include <iostream>\n\
+    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, M;\n    cin >> N >> M;\n\n    PotentializedUnionFind<Nimber> uf(N);\n\
+    \    while (M--) {\n        int a, b, y;\n        cin >> a >> b >> y;\n      \
+    \  a--, b--;\n        if (!uf.unite(a, b, y)) {\n            cout << \"-1\\n\"\
+    ;\n            return 0;\n        }\n    }\n    for (int i = 0; i < N; i++) cout\
+    \ << uf.weight(i) << '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1420\"\n#define ERROR\
     \ 1 // Check only whether the answer is -1 or not\n#include \"../../number/nimber.hpp\"\
-    \n#include \"../weighted_unionfind.hpp\"\n#include <iostream>\nusing namespace\
+    \n#include \"../potentialized_unionfind.hpp\"\n#include <iostream>\nusing namespace\
     \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n \
-    \   int N, M;\n    cin >> N >> M;\n\n    WeightedUnionFind<Nimber> uf(N);\n  \
-    \  while (M--) {\n        int a, b, y;\n        cin >> a >> b >> y;\n        a--,\
-    \ b--;\n        if (!uf.unite(a, b, y)) {\n            cout << \"-1\\n\";\n  \
-    \          return 0;\n        }\n    }\n    for (int i = 0; i < N; i++) cout <<\
-    \ uf.weight(i) << '\\n';\n}\n"
+    \   int N, M;\n    cin >> N >> M;\n\n    PotentializedUnionFind<Nimber> uf(N);\n\
+    \    while (M--) {\n        int a, b, y;\n        cin >> a >> b >> y;\n      \
+    \  a--, b--;\n        if (!uf.unite(a, b, y)) {\n            cout << \"-1\\n\"\
+    ;\n            return 0;\n        }\n    }\n    for (int i = 0; i < N; i++) cout\
+    \ << uf.weight(i) << '\\n';\n}\n"
   dependsOn:
   - number/nimber.hpp
-  - unionfind/weighted_unionfind.hpp
+  - unionfind/potentialized_unionfind.hpp
   isVerificationFile: true
-  path: unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
+  path: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
   requiredBy: []
-  timestamp: '2022-10-30 13:35:32+09:00'
+  timestamp: '2024-10-02 23:55:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
+documentation_of: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
 layout: document
 redirect_from:
-- /verify/unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
-- /verify/unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp.html
-title: unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
+- /verify/unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
+- /verify/unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp.html
+title: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
 ---

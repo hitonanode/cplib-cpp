@@ -7,8 +7,8 @@ data:
     path: number/test/nimber.test.cpp
     title: number/test/nimber.test.cpp
   - icon: ':heavy_check_mark:'
-    path: unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
-    title: unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
+    path: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
+    title: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -105,7 +105,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/nimber.test.cpp
-  - unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
+  - unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
 documentation_of: number/nimber.hpp
 layout: document
 title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"

@@ -775,6 +775,9 @@ data:
       path: unionfind/partially_persistent_uf.hpp
       title: unionfind/partially_persistent_uf.hpp
     - icon: ':heavy_check_mark:'
+      path: unionfind/potentialized_unionfind.hpp
+      title: "Potentialized UnionFind \uFF08\u91CD\u307F\u4ED8\u304D UnionFind\uFF09"
+    - icon: ':heavy_check_mark:'
       path: unionfind/undo_monoid_unionfind.hpp
       title: "UnionFind with Undo operation, monoid weights \uFF08Undo \u53EF\u80FD\
         \u30FB\u91CD\u307F\u548C\u53D6\u5F97\u53EF\u80FD UnionFind\uFF09"
@@ -784,9 +787,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: unionfind/unionfind.hpp
       title: unionfind/unionfind.hpp
-    - icon: ':heavy_check_mark:'
-      path: unionfind/weighted_unionfind.hpp
-      title: "Weighted UnionFind \uFF08\u91CD\u307F\u4ED8\u304D UnionFind\uFF09"
   - name: utilities
     pages:
     - icon: ':heavy_check_mark:'
@@ -1711,17 +1711,17 @@ data:
       path: unionfind/test/fully_persistent_uf.test.cpp
       title: unionfind/test/fully_persistent_uf.test.cpp
     - icon: ':heavy_check_mark:'
+      path: unionfind/test/potentialized_unionfind.test.cpp
+      title: unionfind/test/potentialized_unionfind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
+      title: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: unionfind/test/potentialized_unionfind_int.aoj3142.test.cpp
+      title: unionfind/test/potentialized_unionfind_int.aoj3142.test.cpp
+    - icon: ':heavy_check_mark:'
       path: unionfind/test/unionfind.test.cpp
       title: unionfind/test/unionfind.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: unionfind/test/weighted_unionfind.test.cpp
-      title: unionfind/test/weighted_unionfind.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
-      title: unionfind/test/weighted_unionfind_F2.yuki1420.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: unionfind/test/weighted_unionfind_int.aoj3142.test.cpp
-      title: unionfind/test/weighted_unionfind_int.aoj3142.test.cpp
   - name: utilities/test
     pages:
     - icon: ':heavy_check_mark:'
