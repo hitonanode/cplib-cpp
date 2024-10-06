@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: other_algorithms/test/concave_max_plus_convolution.test.cpp
+    title: other_algorithms/test/concave_max_plus_convolution.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://web.cs.unlv.edu/larmore/Courses/CSC477/monge.pdf
@@ -98,8 +101,9 @@ data:
   path: other_algorithms/smawk.hpp
   requiredBy: []
   timestamp: '2022-11-14 22:38:59+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - other_algorithms/test/concave_max_plus_convolution.test.cpp
 documentation_of: other_algorithms/smawk.hpp
 layout: document
 title: Totally Monotone Matrix Searching (SMAWK)

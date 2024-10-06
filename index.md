@@ -524,6 +524,9 @@ data:
       path: other_algorithms/longest_increasing_subsequence.hpp
       title: "Longest increasing subsequence \uFF08LIS, \u6700\u9577\u5897\u52A0\u90E8\
         \u5206\u5217\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/monge_shortest_path.hpp
+      title: Shortest path of DAG with Monge weights
     - icon: ':warning:'
       path: other_algorithms/mos_algorithm.hpp
       title: "Mo's algorithm \uFF08\u533A\u9593\u30AF\u30A8\u30EA\u306B\u95A2\u3059\
@@ -536,7 +539,7 @@ data:
       title: "Slope trick \uFF08\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570\u306B\u95A2\
         \u3059\u308B\u7279\u5B9A\u306E\u66F4\u65B0\u3092\u9AD8\u901F\u306B\u6271\u3046\
         \u624B\u6CD5\uFF09"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/smawk.hpp
       title: Totally Monotone Matrix Searching (SMAWK)
   - name: random
@@ -1462,6 +1465,9 @@ data:
       path: other_algorithms/test/binary_lifting.yuki1013.test.cpp
       title: other_algorithms/test/binary_lifting.yuki1013.test.cpp
     - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/concave_max_plus_convolution.test.cpp
+      title: other_algorithms/test/concave_max_plus_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
       title: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1470,6 +1476,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/longest_increasing_subsequence.test.cpp
       title: other_algorithms/test/longest_increasing_subsequence.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/monge_shortest_path.yuki705.test.cpp
+      title: other_algorithms/test/monge_shortest_path.yuki705.test.cpp
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
       title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
