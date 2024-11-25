@@ -50,9 +50,9 @@ data:
   verifiedWith:
   - data_structure/test/radix_heap.dijkstra.test.cpp
   - data_structure/test/radix_heap_array.dijkstra.test.cpp
-  - flow/test/maxflow.pushrelabel.yuki957.test.cpp
   - string/test/sa_count_keyword.reader.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
+  - flow/test/maxflow.pushrelabel.yuki957.test.cpp
 documentation_of: utilities/reader.hpp
 layout: document
 title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"

@@ -97,8 +97,8 @@ data:
   timestamp: '2022-05-01 16:11:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/arithmetic_function_totient.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
+  - number/test/arithmetic_function_totient.test.cpp
 documentation_of: formal_power_series/sum_of_exponential_times_polynomial.hpp
 layout: document
 title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)

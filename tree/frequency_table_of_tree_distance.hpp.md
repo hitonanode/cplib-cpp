@@ -125,9 +125,9 @@ data:
   timestamp: '2024-09-25 00:42:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   - tree/test/frequency_table_of_tree_distance.test.cpp
+  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
 documentation_of: tree/frequency_table_of_tree_distance.hpp
 layout: document
 title: Frequency table of tree distance
