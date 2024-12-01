@@ -274,6 +274,7 @@
 "unionfind/test/unionfind.test.cpp": "2022-04-30 19:41:44 +0900",
 "utilities/test/floor_sum.test.cpp": "2024-09-22 10:23:03 +0900",
 "utilities/test/integer_segments.test.cpp": "2021-04-25 18:25:53 +0900",
+"utilities/test/kth_power_sum.yuki665.test.cpp": "2024-12-02 06:13:59 +0900",
 "utilities/test/kth_root_integer.test.cpp": "2021-05-01 20:55:29 +0900",
 "utilities/test/multidim_index.zeta.test.cpp": "2024-01-13 20:41:28 +0900",
 "utilities/test/pow.test.cpp": "2023-12-26 21:26:22 +0900",
