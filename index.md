@@ -810,6 +810,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/integer_segments.hpp
       title: utilities/integer_segments.hpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/kth_power_sum.hpp
+      title: "Sum of $k$-th powers of first $n$ positive integers \uFF08\u81EA\u7136\
+        \u6570\u306E $k$ \u4E57\u548C\uFF09"
     - icon: ':warning:'
       path: utilities/momentum_deque.hpp
       title: utilities/momentum_deque.hpp
@@ -1739,6 +1743,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/integer_segments.test.cpp
       title: utilities/test/integer_segments.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/kth_power_sum.yuki665.test.cpp
+      title: utilities/test/kth_power_sum.yuki665.test.cpp
     - icon: ':heavy_check_mark:'
       path: utilities/test/kth_root_integer.test.cpp
       title: utilities/test/kth_root_integer.test.cpp

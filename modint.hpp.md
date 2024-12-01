@@ -244,6 +244,9 @@ data:
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: utilities/test/kth_power_sum.yuki665.test.cpp
+    title: utilities/test/kth_power_sum.yuki665.test.cpp
+  - icon: ':heavy_check_mark:'
     path: utilities/test/multidim_index.zeta.test.cpp
     title: utilities/test/multidim_index.zeta.test.cpp
   - icon: ':heavy_check_mark:'
@@ -496,6 +499,7 @@ data:
   - set_power_series/test/subset_pow.yuki1594.test.cpp
   - utilities/test/multidim_index.zeta.test.cpp
   - utilities/test/pow.test.cpp
+  - utilities/test/kth_power_sum.yuki665.test.cpp
   - utilities/test/pow_op.test.cpp
   - segmenttree/test/range-affine-range-sum.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
