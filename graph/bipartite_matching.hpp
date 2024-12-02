@@ -5,13 +5,13 @@
 
 // Bipartite matching of undirected bipartite graph (Hopcroft-Karp)
 // https://ei1333.github.io/luzhiled/snippets/graph/hopcroft-karp.html
-// Comprexity: O((V + E)sqrtV)
+// Complexity: O((V + E)sqrtV)
 // int solve(): enumerate maximum number of matching / return -1 (if graph is not bipartite)
 struct BipartiteMatching {
     int V;
     std::vector<std::vector<int>> to; // Adjacency list
     std::vector<int> dist;            // dist[i] = (Distance from i'th node)
-    std::vector<int> match;           // match[i] = (Partner of i'th node) or -1 (No parter)
+    std::vector<int> match;           // match[i] = (Partner of i'th node) or -1 (No partner)
     std::vector<int> used, vv;
     std::vector<int> color; // color of each node(checking bipartition): 0/1/-1(not determined)
 

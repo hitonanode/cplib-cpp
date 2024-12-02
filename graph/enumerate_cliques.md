@@ -18,7 +18,7 @@ for (auto [u, v] : edges) {
 vector<vector<int>> cliques;
 
 auto op = [&](const vector<int> &clique) {
-    // `clique` is NOT guranteed to be sorted
+    // `clique` is NOT guaranteed to be sorted
     cliques.push_back(clique);
 };
 
