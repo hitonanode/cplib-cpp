@@ -30,12 +30,12 @@ data:
   bundledCode: "#line 2 \"graph/bipartite_matching.hpp\"\n#include <cassert>\n#include\
     \ <iostream>\n#include <vector>\n\n// Bipartite matching of undirected bipartite\
     \ graph (Hopcroft-Karp)\n// https://ei1333.github.io/luzhiled/snippets/graph/hopcroft-karp.html\n\
-    // Comprexity: O((V + E)sqrtV)\n// int solve(): enumerate maximum number of matching\
+    // Complexity: O((V + E)sqrtV)\n// int solve(): enumerate maximum number of matching\
     \ / return -1 (if graph is not bipartite)\nstruct BipartiteMatching {\n    int\
     \ V;\n    std::vector<std::vector<int>> to; // Adjacency list\n    std::vector<int>\
     \ dist;            // dist[i] = (Distance from i'th node)\n    std::vector<int>\
-    \ match;           // match[i] = (Partner of i'th node) or -1 (No parter)\n  \
-    \  std::vector<int> used, vv;\n    std::vector<int> color; // color of each node(checking\
+    \ match;           // match[i] = (Partner of i'th node) or -1 (No partner)\n \
+    \   std::vector<int> used, vv;\n    std::vector<int> color; // color of each node(checking\
     \ bipartition): 0/1/-1(not determined)\n\n    BipartiteMatching() = default;\n\
     \    BipartiteMatching(int V_) : V(V_), to(V_), match(V_, -1), used(V_), color(V_,\
     \ -1) {}\n\n    void add_edge(int u, int v) {\n        assert(u >= 0 and u < V\
@@ -211,7 +211,7 @@ data:
   path: graph/dulmage_mendelsohn_decomposition.hpp
   requiredBy:
   - combinatorial_opt/matroids/transversal_matroid.hpp
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2024-12-02 08:23:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/dulmage_mendelsohn.yuki1744.test.cpp

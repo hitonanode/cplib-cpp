@@ -272,9 +272,6 @@ data:
   - name: graph
     pages:
     - icon: ':heavy_check_mark:'
-      path: graph/bipartite_matching(slow).hpp
-      title: graph/bipartite_matching(slow).hpp
-    - icon: ':heavy_check_mark:'
       path: graph/bipartite_matching.hpp
       title: "Bipartite matching (Hopcroft\u2013Karp)"
     - icon: ':heavy_check_mark:'
@@ -457,8 +454,7 @@ data:
       title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
     - icon: ':warning:'
       path: number/dyadic_rational.hpp
-      title: "Dyadic rational, surreal number \uFF08\u4E8C\u9032\u5206\u6570\u30FB\
-        \u56FA\u5B9A\u5C0F\u6570\u70B9\u6570\uFF0CConway \u306E\u69CB\u6210\uFF09"
+      title: "Dyadic rational number \uFF082\u9032\u6709\u7406\u6570\uFF09"
     - icon: ':warning:'
       path: number/enumerate_partitions.hpp
       title: number/enumerate_partitions.hpp
@@ -1195,7 +1191,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/biconnected_components.test.cpp
       title: graph/test/biconnected_components.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/bipartite_matching(slow).test.cpp
       title: graph/test/bipartite_matching(slow).test.cpp
     - icon: ':heavy_check_mark:'

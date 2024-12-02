@@ -117,11 +117,12 @@ data:
   verifiedWith: []
 documentation_of: number/dyadic_rational.hpp
 layout: document
-title: "Dyadic rational, surreal number \uFF08\u4E8C\u9032\u5206\u6570\u30FB\u56FA\
-  \u5B9A\u5C0F\u6570\u70B9\u6570\uFF0CConway \u306E\u69CB\u6210\uFF09"
+title: "Dyadic rational number \uFF082\u9032\u6709\u7406\u6570\uFF09"
 ---
 
-分母が二冪の有理数 `DyadicRational<Int, Uint = unsigned long long>` の実装，また超現実数の構成法に基づく $\\{ l \mid r \\}$ の計算．組合せゲーム理論などへの応用がある．
+2進有理数 (dyadic rational number) の実装 `DyadicRational<Int, Uint = unsigned long long>` ，また 2進有理数 $l, r$ によって定まる区間 $[l, r]$ に対する最簡数 (simplest number) $\\{ l \mid r \\}$ の計算．
+
+2進有理数はその名の通り分母が二冪の有理数である．プログラミングコンテストでは組合せゲーム理論での応用例がある．
 
 `Int` が整数部分を表すための符号付整数型で `int` や `long long` の利用を想定，`Uint` が小数部分を表すための符号なし整数型で `unsigned` や `unsigned long long` の利用を想定（`__uint128_t` も動くかもしれない）．メンバ変数 `integ`, `frac` がそれぞれ整数部分と小数部分に対応し，
 
@@ -132,6 +133,18 @@ $
 がこのクラスのインスタンスが表す有理数 $x$ である．
 実装の制約上分母のオーダーは（`Uint = unsigned long long` の場合）$2^{63}$ が上限となる．
 
+## 組合せゲームの2進有理数による評価
+
+以下のすべての条件を満たす非不偏ゲーム (partizan game) は2進有理数を用いて局面の評価が可能．
+
+- 有限個の手
+- 有限で終了
+- 「必ず先手が勝つ」（帰結類が $\mathscr{N}$）局面が存在しない
+
+ゲームが DAG として表される場合，各局面の評価値を「その局面から先手が指した任意の局面の評価値の最大値と後手が指した任意の局面の評価値の最小値」の最簡数として再帰的に定める．この評価関数は直感的には先手の優勢度を示している．
+
+複数の局面の直和に対する評価値は，各局面の評価値の和となる．
+
 ## 使用方法
 
 ### `DyadicRational<Int>(Int x)`
@@ -140,28 +153,31 @@ $
 
 ### `double to_double()`
 
-インスタンスが表す有理数 $x$ を `double` 型に変換．
+インスタンスが表す2進有理数を `double` 型の浮動小数点数に変換．
 
 ### `DyadicRational<Int> right()`
 
-[Surreal number （超現実数）の構成過程を表す木](https://en.wikipedia.org/wiki/Surreal_number#/media/File:Surreal_number_tree.svg) において，現在の値 $x$ の右側の子の値を返す．
+インスタンスが表す2進有理数について， [Surreal number （超現実数）の構成過程を表す木](https://en.wikipedia.org/wiki/Surreal_number#/media/File:Surreal_number_tree.svg) における右の子の値を返す．
 
 ### `DyadicRational<Int> left()`
 
-`right()` とは逆に，現在の値 $x$ の左側の子の値を返す．
+`right()` とは逆に，現在の値の左側の子の値を返す．
 
 ### `DyadicRational<Int> DyadicRational<Int>::surreal(DyadicRational<Int> l, DyadicRational<Int> r)`
 
-$l < r$ を満たす二進分数 $l$, $r$ について，$l < x < r$ を満たし surreal number の構成過程を表す木で根（$0$）に最も近い要素（Conway の記法に基づくと $\\{ l \mid r \\}$）の値を返す．$l < r$ を満たさない場合 runtime error となる．
+$l < r$ を満たす二進分数 $l$, $r$ の最簡数 $\\{ l \mid r \\}$ ，すなわち $l < x < r$ を満たし surreal number の構成過程を表す木で根（$0$）に最も近い要素の値を返す．$l < r$ を満たさない場合 runtime error となる．
 
 現在は根から一歩ずつ `right()` または `left()` で探索していく実装になっているが，場合分けと bit 演算を頑張れば $O(1)$ になると思われる．
 
 ## 問題例
 
-- [AtCoder Beginner Contest 229 H - Advance or Eat](https://atcoder.jp/contests/abc229/tasks/abc229_h)
+- [AOJ 1377: Black and White Boxes](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1377) Blue-Red Hackenbush を含む．
+- [技術室奥プログラミングコンテスト#6 Day1 P - Game on Colored Tree](https://atcoder.jp/contests/tkppc6-1/tasks/tkppc6_1_p) Blue-Red Hackenbush そのもの．
+- [AtCoder Beginner Contest 229 H - Advance or Eat](https://atcoder.jp/contests/abc229/tasks/abc229_h) 帰結類 $\mathscr{N}$ に属する局面が存在しないゲームのため，2進有理数による解析が可能．
 
-### リンク
+### 参考文献・リンク
 
+- 安福・坂井・末續『組合せゲーム理論の世界: 数学で解き明かす必勝法』共立出版 2024.
 - [組合せゲーム理論入門(1)](http://www.ivis.co.jp/text/20111102.pdf) 組合せゲーム理論の観点からの解説．
 - [解説 - NECプログラミングコンテスト2021(AtCoder Beginner Contest 229)](https://atcoder.jp/contests/abc229/editorial/2977) 非不偏ゲーム（Partisan Game）の問題例とその解き方．
   - [提出 #27486895 - NECプログラミングコンテスト2021(AtCoder Beginner Contest 229)](https://atcoder.jp/contests/abc229/submissions/27486895) Nyaan さんの実装．
