@@ -9,7 +9,7 @@ int main() {
 
     int Q;
     cin >> Q;
-    BinaryTrie bt(30);
+    BinaryTrie<int> bt(30);
     while (Q--) {
         int q, x;
         cin >> q >> x;
