@@ -116,7 +116,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: data_structure/binary_trie.hpp
-      title: data_structure/binary_trie.hpp
+      title: Binary trie
     - icon: ':heavy_check_mark:'
       path: data_structure/fast_set.hpp
       title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\
@@ -974,6 +974,9 @@ data:
       path: data_structure/test/binary_trie.test.cpp
       title: data_structure/test/binary_trie.test.cpp
     - icon: ':heavy_check_mark:'
+      path: data_structure/test/binary_trie.yuki2977.test.cpp
+      title: data_structure/test/binary_trie.yuki2977.test.cpp
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
       title: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1191,9 +1194,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/biconnected_components.test.cpp
       title: graph/test/biconnected_components.test.cpp
-    - icon: ':x:'
-      path: graph/test/bipartite_matching(slow).test.cpp
-      title: graph/test/bipartite_matching(slow).test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/bipartite_matching.test.cpp
       title: graph/test/bipartite_matching.test.cpp

@@ -11,9 +11,9 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/set_xor_min
+    PROBLEM: https://yukicoder.me/problems/no/2977
     links:
-    - https://judge.yosupo.jp/problem/set_xor_min
+    - https://yukicoder.me/problems/no/2977
   bundledCode: "#line 2 \"data_structure/binary_trie.hpp\"\n#include <vector>\n\n\
     template <class Int, class Count = int> struct BinaryTrie {\n    int maxD;\n \
     \   std::vector<Count> deg, subtree_sum;\n    std::vector<int> ch0, ch1, par;\n\
@@ -53,32 +53,37 @@ data:
     \             if (child != -1) ret += subtree_sum[child];\n\n                now\
     \ = bit_x ? ch0[now] : ch1[now];\n            } else {\n                now =\
     \ bit_x ? ch1[now] : ch0[now];\n            }\n        }\n\n        return ret;\n\
-    \    }\n};\n#line 2 \"data_structure/test/binary_trie.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/set_xor_min\"\n\n#include <iostream>\nusing\
+    \    }\n};\n#line 2 \"data_structure/test/binary_trie.yuki2977.test.cpp\"\n#define\
+    \ PROBLEM \"https://yukicoder.me/problems/no/2977\"\n\n#include <iostream>\nusing\
     \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \n    int Q;\n    cin >> Q;\n    BinaryTrie<int> bt(30);\n    while (Q--) {\n\
-    \        int q, x;\n        cin >> q >> x;\n        if (q == 0)\n            bt.insert(x);\n\
-    \        else if (q == 1)\n            bt.erase(x);\n        else\n          \
-    \  cout << bt.xor_min(x) << '\\n';\n    }\n}\n"
-  code: "#include \"../binary_trie.hpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/set_xor_min\"\
+    \n    int N;\n    long long K;\n    cin >> N >> K;\n\n    vector<int> A(N);\n\
+    \    for (auto &x : A) cin >> x;\n\n    constexpr int D = 30;\n\n    BinaryTrie<int>\
+    \ trie(D);\n    for (int a : A) trie.insert(a);\n\n    int lo = 0, hi = 1 << D;\
+    \ // [lo, hi)\n    while (lo + 1 < hi) {\n        const int mid = (lo + hi) /\
+    \ 2;\n\n        long long cnt = 0;\n        for (int a : A) cnt += trie.count_less_xor(a,\
+    \ mid);\n        (cnt >= K * 2 + N ? hi : lo) = mid;\n    }\n\n    cout << lo\
+    \ << '\\n';\n}\n"
+  code: "#include \"../binary_trie.hpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/2977\"\
     \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n\n    int Q;\n    cin >> Q;\n    BinaryTrie<int>\
-    \ bt(30);\n    while (Q--) {\n        int q, x;\n        cin >> q >> x;\n    \
-    \    if (q == 0)\n            bt.insert(x);\n        else if (q == 1)\n      \
-    \      bt.erase(x);\n        else\n            cout << bt.xor_min(x) << '\\n';\n\
-    \    }\n}\n"
+    \ ios::sync_with_stdio(false);\n\n    int N;\n    long long K;\n    cin >> N >>\
+    \ K;\n\n    vector<int> A(N);\n    for (auto &x : A) cin >> x;\n\n    constexpr\
+    \ int D = 30;\n\n    BinaryTrie<int> trie(D);\n    for (int a : A) trie.insert(a);\n\
+    \n    int lo = 0, hi = 1 << D; // [lo, hi)\n    while (lo + 1 < hi) {\n      \
+    \  const int mid = (lo + hi) / 2;\n\n        long long cnt = 0;\n        for (int\
+    \ a : A) cnt += trie.count_less_xor(a, mid);\n        (cnt >= K * 2 + N ? hi :\
+    \ lo) = mid;\n    }\n\n    cout << lo << '\\n';\n}\n"
   dependsOn:
   - data_structure/binary_trie.hpp
   isVerificationFile: true
-  path: data_structure/test/binary_trie.test.cpp
+  path: data_structure/test/binary_trie.yuki2977.test.cpp
   requiredBy: []
   timestamp: '2024-12-07 22:13:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: data_structure/test/binary_trie.test.cpp
+documentation_of: data_structure/test/binary_trie.yuki2977.test.cpp
 layout: document
 redirect_from:
-- /verify/data_structure/test/binary_trie.test.cpp
-- /verify/data_structure/test/binary_trie.test.cpp.html
-title: data_structure/test/binary_trie.test.cpp
+- /verify/data_structure/test/binary_trie.yuki2977.test.cpp
+- /verify/data_structure/test/binary_trie.yuki2977.test.cpp.html
+title: data_structure/test/binary_trie.yuki2977.test.cpp
 ---
