@@ -516,6 +516,10 @@ data:
       path: other_algorithms/enumerate_triangles.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u306B\u542B\u307E\u308C\u308B\u4E09\u89D2\
         \u5F62\u306E\u5217\u6319"
+    - icon: ':warning:'
+      path: other_algorithms/hilbert_order_mos.hpp
+      title: "Mo's algorithm by Hilbert order \uFF08Hilbert order \u306B\u3088\u308B\
+        \u533A\u9593\u30AF\u30A8\u30EA\u5E73\u65B9\u5206\u5272\uFF09"
     - icon: ':heavy_check_mark:'
       path: other_algorithms/longest_increasing_subsequence.hpp
       title: "Longest increasing subsequence \uFF08LIS, \u6700\u9577\u5897\u52A0\u90E8\

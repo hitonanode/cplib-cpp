@@ -145,13 +145,13 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/linalg_ll_det.test.cpp
   - linear_algebra_matrix/test/linalg_longlong.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-  - number/test/primitive_root.test.cpp
   - number/test/combination.stress.test.cpp
   - number/test/combination.test.cpp
+  - number/test/primitive_root.test.cpp
   - number/test/primitive_root_1e18.test.cpp
 documentation_of: number/bare_mod_algebra.hpp
 layout: document

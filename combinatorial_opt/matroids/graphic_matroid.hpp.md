@@ -92,8 +92,8 @@ data:
   verifiedWith:
   - combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
   - combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
-  - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
+  - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
 documentation_of: combinatorial_opt/matroids/graphic_matroid.hpp
 layout: document
 title: "Graphic matroid \uFF08\u30B0\u30E9\u30D5\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"

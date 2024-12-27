@@ -100,8 +100,8 @@ data:
   timestamp: '2024-12-07 22:13:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/binary_trie.yuki2977.test.cpp
   - data_structure/test/binary_trie.test.cpp
+  - data_structure/test/binary_trie.yuki2977.test.cpp
 documentation_of: data_structure/binary_trie.hpp
 layout: document
 title: Binary trie

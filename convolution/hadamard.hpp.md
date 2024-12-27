@@ -80,8 +80,8 @@ data:
   timestamp: '2024-09-22 16:07:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - convolution/test/bitwise_and_conv.test.cpp
   - convolution/test/bitwise_xor_conv.test.cpp
+  - convolution/test/bitwise_and_conv.test.cpp
   - convolution/test/hadamard_xor.test.cpp
 documentation_of: convolution/hadamard.hpp
 layout: document
