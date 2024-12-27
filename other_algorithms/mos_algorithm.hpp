@@ -4,14 +4,13 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
 // Mo's algorithm
 // - add_range(l, r) : Add [l, r) as query.
 // - run(Add, Remove, Query) : run Mo's algorithm.
 //   - Add(i) : Add i-th element ([i + 1, r) -> [i, r)).
 //   - Remove(i) : Remove i-th element (Inverse of Add(i)).
 //   - Query(q) : Solve q-th problem.
-// Veirfied: https://codeforces.com/contest/375/submission/114665433
+// Verified: https://codeforces.com/contest/375/submission/114665433
 class MosAlgorithm {
     static const int INF = 1 << 30;
     int nmin, nmax;
