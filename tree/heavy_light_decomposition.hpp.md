@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: graph/test/extended_block_cut_trees.yuki1326.test.cpp
+    title: graph/test/extended_block_cut_trees.yuki1326.test.cpp
   - icon: ':heavy_check_mark:'
     path: tree/test/hl_decomposition.test.cpp
     title: tree/test/hl_decomposition.test.cpp
@@ -15,9 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - http://beet-aizu.hatenablog.com/entry/2017/12/12/235950
@@ -195,12 +198,13 @@ data:
   path: tree/heavy_light_decomposition.hpp
   requiredBy: []
   timestamp: '2023-03-12 17:40:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - tree/test/vertex-add-path-sum.test.cpp
   - tree/test/hl_decomposition.test.cpp
   - tree/test/vertex-set-path-composite.test.cpp
   - tree/test/jump_on_tree_hld.test.cpp
+  - graph/test/extended_block_cut_trees.yuki1326.test.cpp
 documentation_of: tree/heavy_light_decomposition.hpp
 layout: document
 title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\uFF09"
