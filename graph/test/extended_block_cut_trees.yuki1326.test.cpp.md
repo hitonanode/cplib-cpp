@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/extended_block_cut_trees.hpp
     title: "Extended block cut tree \uFF08Block cut tree \u306E\u4E9C\u7A2E\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/heavy_light_decomposition.hpp
     title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\
       \uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1326
@@ -185,7 +185,7 @@ data:
   path: graph/test/extended_block_cut_trees.yuki1326.test.cpp
   requiredBy: []
   timestamp: '2024-12-31 22:44:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/extended_block_cut_trees.yuki1326.test.cpp
 layout: document

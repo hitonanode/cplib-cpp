@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/extended_block_cut_trees.yuki1326.test.cpp
     title: graph/test/extended_block_cut_trees.yuki1326.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,9 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://beet-aizu.hatenablog.com/entry/2017/12/12/235950
@@ -198,7 +198,7 @@ data:
   path: tree/heavy_light_decomposition.hpp
   requiredBy: []
   timestamp: '2023-03-12 17:40:31+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/vertex-add-path-sum.test.cpp
   - tree/test/hl_decomposition.test.cpp

@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/extended_block_cut_trees.test.cpp
     title: graph/test/extended_block_cut_trees.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/extended_block_cut_trees.yuki1326.test.cpp
     title: graph/test/extended_block_cut_trees.yuki1326.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://ssrs-cp.github.io/cp_library/graph/extended_block_cut_tree.hpp.html
@@ -120,7 +120,7 @@ data:
   path: graph/extended_block_cut_trees.hpp
   requiredBy: []
   timestamp: '2024-12-31 22:44:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/extended_block_cut_trees.test.cpp
   - graph/test/extended_block_cut_trees.yuki1326.test.cpp
@@ -178,4 +178,4 @@ for (auto [i, j] : bct.get_edges()) hld.add_edge(i, j);
 - [Block-cut tree - ei1333の日記](https://ei1333.hateblo.jp/entry/2020/03/25/010057)
 - [My Algorithm : kopricky アルゴリズムライブラリ](https://kopricky.github.io/code/GraphDecomposition/articulation.html)
 - [拡張 Block Cut Tree | cp_library](https://ssrs-cp.github.io/cp_library/graph/extended_block_cut_tree.hpp.html)
-- [Xユーザーの熨斗袋さん: 「G = (V, E) に対する Block Cut Tree、G の2-点連結成分全体を C として (V ⊔ C, {{v, c} | v ∈ c}) で定義すると扱いやすかったりする？」 / X](https://x.com/noshi91/status/1529858538650374144)
+- [Xユーザーの熨斗袋さん: 「G = (V, E) に対する Block Cut Tree、G の2-点連結成分全体を C として...](https://x.com/noshi91/status/1529858538650374144)

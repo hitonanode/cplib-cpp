@@ -291,7 +291,7 @@ data:
     - icon: ':warning:'
       path: graph/eulerian_trail.hpp
       title: graph/eulerian_trail.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/extended_block_cut_trees.hpp
       title: "Extended block cut tree \uFF08Block cut tree \u306E\u4E9C\u7A2E\uFF09"
     - icon: ':heavy_check_mark:'
@@ -728,7 +728,7 @@ data:
         \u3066\u306E\u90E8\u5206\u6728\u3092\u7D4C\u7531\u3059\u308B\u3088\u3046\u306A\
         \u9802\u70B9\u8FFD\u52A0\u30FB\u524A\u9664\u64CD\u4F5C\u5217\u306E\u751F\u6210\
         \uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/heavy_light_decomposition.hpp
       title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\
         \uFF09"
@@ -1234,7 +1234,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/extended_block_cut_trees.test.cpp
       title: graph/test/extended_block_cut_trees.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/test/extended_block_cut_trees.yuki1326.test.cpp
       title: graph/test/extended_block_cut_trees.yuki1326.test.cpp
     - icon: ':heavy_check_mark:'
