@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/extended_block_cut_trees.hpp
-    title: "Extended block cut tree \uFF08Block cut tree \u306E\u4E9C\u7A2E\uFF09"
-  - icon: ':heavy_check_mark:'
     path: tree/heavy_light_decomposition.hpp
     title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\
       \uFF09"
@@ -15,63 +12,14 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1326
+    PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
     links:
-    - https://yukicoder.me/problems/no/1326
-  bundledCode: "#line 1 \"graph/test/extended_block_cut_trees.yuki1326.test.cpp\"\n\
-    #define PROBLEM \"https://yukicoder.me/problems/no/1326\"\n#line 2 \"graph/extended_block_cut_trees.hpp\"\
-    \n\n#include <cassert>\n#include <utility>\n#include <vector>\n\n// Construct\
-    \ block cut tree (or forest) from a given graph\n// Complexity: O(N + M), N =\
-    \ |vertices|, M = |edges|\n// based on this idea: https://x.com/noshi91/status/1529858538650374144\n\
-    // based on this implementation: https://ssrs-cp.github.io/cp_library/graph/extended_block_cut_tree.hpp.html\n\
-    struct extended_block_cut_trees {\n    int N;                            // number\
-    \ of vertices\n    int B;                            // number of blocks\n   \
-    \ std::vector<std::vector<int>> to; // (0, ..., N - 1): vertices, (N, ..., N +\
-    \ B - 1): blocks\n\n    extended_block_cut_trees(int N, const std::vector<std::pair<int,\
-    \ int>> &edges)\n        : N(N), B(0), to(N) {\n        std::vector<std::vector<int>>\
-    \ adj(N);\n        for (auto [u, v] : edges) {\n            if (u != v) adj.at(u).push_back(v),\
-    \ adj.at(v).push_back(u);\n        }\n\n        std::vector<int> dfs_next(N, -1),\
-    \ dist(N, -1), back_cnt(N);\n\n        auto rec1 = [&](auto &&self, int now) ->\
-    \ void {\n            for (int nxt : adj[now]) {\n                if (dist[nxt]\
-    \ == -1) {\n                    dist[nxt] = dist[now] + 1;\n                 \
-    \   dfs_next[now] = nxt;\n                    self(self, nxt);\n             \
-    \       back_cnt[now] += back_cnt[nxt];\n                } else if (dist[nxt]\
-    \ < dist[now] - 1) {\n                    ++back_cnt[now];\n                 \
-    \   --back_cnt[dfs_next[nxt]];\n                }\n            }\n        };\n\
-    \n        for (int i = 0; i < N; ++i) {\n            if (dist[i] == -1) dist[i]\
-    \ = 0, rec1(rec1, i);\n        }\n\n        std::vector<bool> used(N);\n\n   \
-    \     auto rec2 = [&](auto &&self, int now, int current_b) -> void {\n       \
-    \     used[now] = true;\n            bool ok = false;\n\n            for (int\
-    \ nxt : adj[now]) {\n                if (dist[nxt] == dist[now] + 1 and !used[nxt])\
-    \ {\n                    if (back_cnt[nxt] > 0) {\n                        if\
-    \ (!ok) {\n                            ok = true;\n                          \
-    \  add_edge(now, current_b);\n                        }\n                    \
-    \    self(self, nxt, current_b);\n                    } else {\n             \
-    \           to.push_back({});\n                        ++B;\n                \
-    \        add_edge(now, B - 1);\n                        self(self, nxt, B - 1);\n\
-    \                    }\n                }\n            }\n\n            if (!ok\
-    \ and dist[now] > 0) { add_edge(now, current_b); }\n        };\n\n        for\
-    \ (int i = 0; i < N; ++i) {\n            if (dist[i] == 0) { rec2(rec2, i, B -\
-    \ 1); }\n            if (adj[i].empty()) {\n                to.push_back({});\n\
-    \                ++B;\n                add_edge(i, B - 1);\n            }\n  \
-    \      }\n    }\n\n    int size() const { return N + B; }\n\n    bool is_articulation_point(int\
-    \ vertex) const {\n        assert(0 <= vertex and vertex < N);\n        return\
-    \ to[vertex].size() > 1;\n    }\n\n    int block_size(int block) const {\n   \
-    \     assert(0 <= block and block < B);\n        return to[N + block].size();\n\
-    \    }\n\n    const std::vector<int> &block_vertices(int block) const {\n    \
-    \    assert(0 <= block and block < B);\n        return to[N + block];\n    }\n\
-    \n    std::vector<std::vector<int>> biconnected_components() const {\n       \
-    \ return std::vector<std::vector<int>>(to.begin() + N, to.end());\n    }\n\n \
-    \   // first < N (vertices), second >= N (blocks)\n    std::vector<std::pair<int,\
-    \ int>> get_edges() const {\n        std::vector<std::pair<int, int>> edges;\n\
-    \        for (int i = 0; i < N; ++i) {\n            for (int j : to[i]) edges.emplace_back(i,\
-    \ j);\n        }\n        return edges;\n    }\n\nprivate:\n    void add_edge(int\
-    \ vertex, int block) {\n        assert(0 <= vertex and vertex < N);\n        assert(0\
-    \ <= block and block < B);\n        to[vertex].push_back(N + block);\n       \
-    \ to[N + block].push_back(vertex);\n    }\n};\n#line 2 \"tree/heavy_light_decomposition.hpp\"\
-    \n#include <algorithm>\n#line 4 \"tree/heavy_light_decomposition.hpp\"\n#include\
-    \ <functional>\n#include <queue>\n#include <stack>\n#line 9 \"tree/heavy_light_decomposition.hpp\"\
-    \n\n// Heavy-light decomposition of trees (forest)\n// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\n\
+    - https://judge.yosupo.jp/problem/vertex_add_subtree_sum
+  bundledCode: "#line 1 \"tree/test/hld_subtree_query.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\n#line 2 \"tree/heavy_light_decomposition.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <functional>\n#include <queue>\n\
+    #include <stack>\n#include <utility>\n#include <vector>\n\n// Heavy-light decomposition\
+    \ of trees (forest)\n// Based on http://beet-aizu.hatenablog.com/entry/2017/12/12/235950\n\
     struct heavy_light_decomposition {\n    int V;\n    int k;\n    std::vector<std::vector<int>>\
     \ e;\n    std::vector<int> par;         // par[i] = parent of vertex i (Default:\
     \ -1)\n    std::vector<int> depth;       // depth[i] = distance between root and\
@@ -161,44 +109,47 @@ data:
     \ t, int k) const {\n        if (k < 0) return -1;\n        if (k == 0) return\
     \ s;\n        int lca = lowest_common_ancestor(s, t);\n        if (k <= depth.at(s)\
     \ - depth.at(lca)) return kth_parent(s, k);\n        return kth_parent(t, depth.at(s)\
-    \ + depth.at(t) - depth.at(lca) * 2 - k);\n    }\n};\n#line 4 \"graph/test/extended_block_cut_trees.yuki1326.test.cpp\"\
-    \n\n#include <atcoder/fenwicktree>\n\n#include <iostream>\n\nusing namespace std;\n\
-    \nint main() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\n  \
-    \  int N, M;\n    cin >> N >> M;\n    vector<pair<int, int>> edges(M);\n    for\
-    \ (auto &[u, v] : edges) cin >> u >> v, --u, --v;\n\n    const extended_block_cut_trees\
-    \ bct(N, edges);\n\n    heavy_light_decomposition hld(bct.size(), bct.get_edges());\n\
-    \    hld.build();\n\n    atcoder::fenwick_tree<int> fw(hld.V);\n    for (int i\
-    \ = 0; i < N; ++i) fw.add(hld.subtree_begin[i], 1);\n\n    int Q;\n    cin >>\
-    \ Q;\n    while (Q--) {\n        int u, v;\n        cin >> u >> v;\n        --u,\
-    \ --v;\n        int ret = 0;\n        if (u != v) {\n            ret = -2;\n \
-    \           hld.for_each_vertex(u, v, [&](int a, int b) { ret += fw.sum(a, b +\
-    \ 1); });\n        }\n        cout << ret << '\\n';\n    }\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1326\"\n#include \"../extended_block_cut_trees.hpp\"\
-    \n#include \"../../tree/heavy_light_decomposition.hpp\"\n\n#include <atcoder/fenwicktree>\n\
-    \n#include <iostream>\n\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr);\n\
-    \    ios::sync_with_stdio(false);\n\n    int N, M;\n    cin >> N >> M;\n    vector<pair<int,\
-    \ int>> edges(M);\n    for (auto &[u, v] : edges) cin >> u >> v, --u, --v;\n\n\
-    \    const extended_block_cut_trees bct(N, edges);\n\n    heavy_light_decomposition\
-    \ hld(bct.size(), bct.get_edges());\n    hld.build();\n\n    atcoder::fenwick_tree<int>\
-    \ fw(hld.V);\n    for (int i = 0; i < N; ++i) fw.add(hld.subtree_begin[i], 1);\n\
-    \n    int Q;\n    cin >> Q;\n    while (Q--) {\n        int u, v;\n        cin\
-    \ >> u >> v;\n        --u, --v;\n        int ret = 0;\n        if (u != v) {\n\
-    \            ret = -2;\n            hld.for_each_vertex(u, v, [&](int a, int b)\
-    \ { ret += fw.sum(a, b + 1); });\n        }\n        cout << ret << '\\n';\n \
-    \   }\n}\n"
+    \ + depth.at(t) - depth.at(lca) * 2 - k);\n    }\n};\n#line 3 \"tree/test/hld_subtree_query.test.cpp\"\
+    \n#include <iostream>\n#line 6 \"tree/test/hld_subtree_query.test.cpp\"\nusing\
+    \ namespace std;\n\n#include <atcoder/fenwicktree>\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n\n    int N, Q;\n    cin >> N >> Q;\n    vector<long\
+    \ long> A(N);\n    for (auto &x : A) cin >> x;\n\n    vector<pair<int, int>> edges;\n\
+    \    for (int i = 1; i < N; ++i) {\n        int p;\n        cin >> p;\n      \
+    \  edges.emplace_back(i, p);\n    }\n\n    heavy_light_decomposition hld(N, edges);\n\
+    \    hld.build();\n\n    atcoder::fenwick_tree<long long> ft(N);\n\n    A = hld.segtree_rearrange(A);\n\
+    \    for (int i = 0; i < N; ++i) ft.add(i, A.at(i));\n\n    while (Q--) {\n  \
+    \      int tp, u;\n        cin >> tp >> u;\n        if (tp == 0) {\n         \
+    \   long long x;\n            cin >> x;\n            hld.for_vertex(u, [&](int\
+    \ i) { ft.add(i, x); });\n        } else {\n            long long ans = 0;\n \
+    \           hld.for_subtree(u, [&](int l, int r) { ans += ft.sum(l, r + 1); });\n\
+    \            cout << ans << '\\n';\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\
+    \n#include \"../heavy_light_decomposition.hpp\"\n#include <iostream>\n#include\
+    \ <utility>\n#include <vector>\nusing namespace std;\n\n#include <atcoder/fenwicktree>\n\
+    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int\
+    \ N, Q;\n    cin >> N >> Q;\n    vector<long long> A(N);\n    for (auto &x : A)\
+    \ cin >> x;\n\n    vector<pair<int, int>> edges;\n    for (int i = 1; i < N; ++i)\
+    \ {\n        int p;\n        cin >> p;\n        edges.emplace_back(i, p);\n  \
+    \  }\n\n    heavy_light_decomposition hld(N, edges);\n    hld.build();\n\n   \
+    \ atcoder::fenwick_tree<long long> ft(N);\n\n    A = hld.segtree_rearrange(A);\n\
+    \    for (int i = 0; i < N; ++i) ft.add(i, A.at(i));\n\n    while (Q--) {\n  \
+    \      int tp, u;\n        cin >> tp >> u;\n        if (tp == 0) {\n         \
+    \   long long x;\n            cin >> x;\n            hld.for_vertex(u, [&](int\
+    \ i) { ft.add(i, x); });\n        } else {\n            long long ans = 0;\n \
+    \           hld.for_subtree(u, [&](int l, int r) { ans += ft.sum(l, r + 1); });\n\
+    \            cout << ans << '\\n';\n        }\n    }\n}\n"
   dependsOn:
-  - graph/extended_block_cut_trees.hpp
   - tree/heavy_light_decomposition.hpp
   isVerificationFile: true
-  path: graph/test/extended_block_cut_trees.yuki1326.test.cpp
+  path: tree/test/hld_subtree_query.test.cpp
   requiredBy: []
   timestamp: '2025-01-01 21:10:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph/test/extended_block_cut_trees.yuki1326.test.cpp
+documentation_of: tree/test/hld_subtree_query.test.cpp
 layout: document
 redirect_from:
-- /verify/graph/test/extended_block_cut_trees.yuki1326.test.cpp
-- /verify/graph/test/extended_block_cut_trees.yuki1326.test.cpp.html
-title: graph/test/extended_block_cut_trees.yuki1326.test.cpp
+- /verify/tree/test/hld_subtree_query.test.cpp
+- /verify/tree/test/hld_subtree_query.test.cpp.html
+title: tree/test/hld_subtree_query.test.cpp
 ---

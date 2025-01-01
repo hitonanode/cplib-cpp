@@ -158,8 +158,8 @@ vector<vector<int>> bct_to = bct.to;
 assert(n + b == (int)bct_to.size());
 
 // 得られた block cut tree を heavy-light decomposition などに使う場合
-HeavyLightDecomposition hld(bct.size());
-for (auto [i, j] : bct.get_edges()) hld.add_edge(i, j);
+heavy_light_decomposition hld(bct.size(), bct.get_edges());
+hld.build();
 ```
 
 ## 問題例
