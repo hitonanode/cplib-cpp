@@ -13,11 +13,9 @@ int main() {
 
     vector<long long> A(N);
     for (auto &x : A) cin >> x;
-    HeavyLightDecomposition hld(N);
-    for (int i = 0; i < N - 1; i++) {
-        cin >> u >> v;
-        hld.add_edge(u, v);
-    }
+    vector<pair<int, int>> edges(N - 1);
+    for (auto &[u, v] : edges) cin >> u >> v;
+    heavy_light_decomposition hld(N, edges);
 
     hld.build();
     PointUpdateRangeSum<long long> segtree(hld.segtree_rearrange(A), 0LL);
@@ -30,7 +28,7 @@ int main() {
             cout << ret << '\n';
         } else {
             A[u] += v;
-            segtree.update(hld.aligned_id[u], A[u]);
+            segtree.update(hld.subtree_begin[u], A[u]);
         }
     }
 }

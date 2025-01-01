@@ -19,12 +19,11 @@ int main() {
 
     const extended_block_cut_trees bct(N, edges);
 
-    HeavyLightDecomposition hld(bct.size());
-    for (auto [i, j] : bct.get_edges()) hld.add_edge(i, j);
+    heavy_light_decomposition hld(bct.size(), bct.get_edges());
     hld.build();
 
     atcoder::fenwick_tree<int> fw(hld.V);
-    for (int i = 0; i < N; ++i) fw.add(hld.aligned_id[i], 1);
+    for (int i = 0; i < N; ++i) fw.add(hld.subtree_begin[i], 1);
 
     int Q;
     cin >> Q;
