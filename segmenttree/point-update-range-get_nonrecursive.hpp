@@ -119,19 +119,6 @@ template <typename T> struct RangeMinimumQuery : public NonrecursiveSegmentTree<
     };
 };
 
-// Range Maximum Query
-// - get: return max(x_l, ..., x_{r - 1})
-template <typename T> struct RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool> {
-    using SegTree = NonrecursiveSegmentTree<T, T, bool>;
-    T merge_data(const T &vl, const T &vr) override { return std::max(vl, vr); };
-    T data2ret(const T &v, const bool &q) override { return v; }
-    T merge_ret(const T &vl, const T &vr) override { return std::max(vl, vr); };
-    RangeMaximumQuery(const std::vector<T> &seq, T defaultmax)
-        : SegTree::NonrecursiveSegmentTree() {
-        SegTree::initialize(seq, defaultmax);
-    };
-};
-
 template <typename T> struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool> {
     using SegTree = NonrecursiveSegmentTree<T, T, bool>;
     T merge_data(const T &vl, const T &vr) override { return vl + vr; };
