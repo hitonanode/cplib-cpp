@@ -29,13 +29,10 @@ int main() {
     vector<P> V(N);
     for (auto &x : V) cin >> x.first >> x.second;
 
-    HeavyLightDecomposition hld(N);
-    for (int i = 0; i < N - 1; i++) {
-        int u, v;
-        cin >> u >> v;
-        hld.add_edge(u, v);
-    }
+    vector<pair<int, int>> edges(N - 1);
+    for (auto &[u, v] : edges) cin >> u >> v;
 
+    heavy_light_decomposition hld(N, edges);
     hld.build();
     vector<P> stinit = hld.segtree_rearrange(V);
 
@@ -46,8 +43,8 @@ int main() {
         int q, u, v, x;
         cin >> q >> u >> v >> x;
         if (q == 0) {
-            segtree.update(hld.aligned_id[u], P{v, x});
-            segtreeinv.update(N - 1 - hld.aligned_id[u], P{v, x});
+            segtree.update(hld.subtree_begin[u], P{v, x});
+            segtreeinv.update(N - 1 - hld.subtree_begin[u], P{v, x});
         } else {
             mint ret = x;
             hld.for_each_vertex_noncommutative(

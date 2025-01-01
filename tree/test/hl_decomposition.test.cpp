@@ -1,19 +1,25 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/lca"
 #include "../heavy_light_decomposition.hpp"
 #include <iostream>
-#define PROBLEM "https://judge.yosupo.jp/problem/lca"
+using namespace std;
 
 int main() {
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+
     int N, Q, p, u, v;
-    std::cin >> N >> Q;
-    HeavyLightDecomposition hld(N);
+    cin >> N >> Q;
+    vector<pair<int, int>> edges;
     for (int i = 1; i <= N - 1; i++) {
-        std::cin >> p;
-        hld.add_edge(i, p);
+        cin >> p;
+        edges.emplace_back(i, p);
     }
+
+    heavy_light_decomposition hld(N, edges);
     hld.build();
 
     while (Q--) {
-        std::cin >> u >> v;
-        std::cout << hld.lowest_common_ancestor(u, v) << "\n";
+        cin >> u >> v;
+        cout << hld.lowest_common_ancestor(u, v) << "\n";
     }
 }

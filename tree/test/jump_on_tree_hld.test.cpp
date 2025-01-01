@@ -7,13 +7,14 @@ int main() {
     cin.tie(nullptr), ios::sync_with_stdio(false);
     int N, Q;
     cin >> N >> Q;
-    HeavyLightDecomposition tree(N);
+    vector<pair<int, int>> edges;
     for (int e = 0; e < N - 1; ++e) {
         int a, b;
         cin >> a >> b;
-        tree.add_edge(a, b);
+        edges.emplace_back(a, b);
     }
 
+    heavy_light_decomposition tree(N, edges);
     tree.build({0});
 
     while (Q--) {
