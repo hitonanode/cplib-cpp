@@ -594,9 +594,6 @@ data:
       path: segmenttree/range-add-range-min.hpp
       title: Range Add Range Min (known as the Starry sky tree)
     - icon: ':heavy_check_mark:'
-      path: segmenttree/range-update-range-get.hpp
-      title: segmenttree/range-update-range-get.hpp
-    - icon: ':heavy_check_mark:'
       path: segmenttree/range_minimum_query.hpp
       title: segmenttree/range_minimum_query.hpp
     - icon: ':heavy_check_mark:'
@@ -605,9 +602,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/rangetree_bit.hpp
       title: "Range Tree with binary indexed tree \uFF08\u9818\u57DF\u6728\uFF09"
-    - icon: ':heavy_check_mark:'
-      path: segmenttree/segment_tree_2d.hpp
-      title: segmenttree/segment_tree_2d.hpp
   - name: segmenttree/trees
     pages:
     - icon: ':heavy_check_mark:'
@@ -1540,9 +1534,6 @@ data:
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
     - icon: ':heavy_check_mark:'
-      path: segmenttree/test/range-affine-range-sum.test.cpp
-      title: segmenttree/test/range-affine-range-sum.test.cpp
-    - icon: ':heavy_check_mark:'
       path: segmenttree/test/rangetree.test.cpp
       title: segmenttree/test/rangetree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1554,12 +1545,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/rmq_nonrecursive.test.cpp
       title: segmenttree/test/rmq_nonrecursive.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: segmenttree/test/segment_tree_2d.test.cpp
-      title: segmenttree/test/segment_tree_2d.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: segmenttree/test/segment_tree_2d_pointadd.test.cpp
-      title: segmenttree/test/segment_tree_2d_pointadd.test.cpp
   - name: set_power_series/test
     pages:
     - icon: ':heavy_check_mark:'

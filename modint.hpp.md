@@ -202,9 +202,6 @@ data:
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: segmenttree/test/range-affine-range-sum.test.cpp
-    title: segmenttree/test/range-affine-range-sum.test.cpp
-  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -476,7 +473,6 @@ data:
   - string/test/rolling_hash.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - segmenttree/test/range-affine-range-sum.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
   - tree/test/tree_isomorphism.aoj1613.test.cpp
   - tree/test/subtree_isomorphism.lc.test.cpp

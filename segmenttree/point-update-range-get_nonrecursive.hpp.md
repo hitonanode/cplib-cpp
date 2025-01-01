@@ -83,16 +83,8 @@ data:
     \    T data2ret(const T &v, const bool &q) override { return v; }\n    T merge_ret(const\
     \ T &vl, const T &vr) override { return std::min(vl, vr); };\n    RangeMinimumQuery(const\
     \ std::vector<T> &seq, T defaultmin)\n        : SegTree::NonrecursiveSegmentTree()\
-    \ {\n        SegTree::initialize(seq, defaultmin);\n    };\n};\n\n// Range Maximum\
-    \ Query\n// - get: return max(x_l, ..., x_{r - 1})\ntemplate <typename T> struct\
-    \ RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool> {\n    using\
-    \ SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T merge_data(const T &vl,\
-    \ const T &vr) override { return std::max(vl, vr); };\n    T data2ret(const T\
-    \ &v, const bool &q) override { return v; }\n    T merge_ret(const T &vl, const\
-    \ T &vr) override { return std::max(vl, vr); };\n    RangeMaximumQuery(const std::vector<T>\
-    \ &seq, T defaultmax)\n        : SegTree::NonrecursiveSegmentTree() {\n      \
-    \  SegTree::initialize(seq, defaultmax);\n    };\n};\n\ntemplate <typename T>\
-    \ struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool> {\n\
+    \ {\n        SegTree::initialize(seq, defaultmin);\n    };\n};\n\ntemplate <typename\
+    \ T> struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool> {\n\
     \    using SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T merge_data(const\
     \ T &vl, const T &vr) override { return vl + vr; };\n    T data2ret(const T &v,\
     \ const bool &q) override { return v; }\n    T merge_ret(const T &vl, const T\
@@ -173,16 +165,8 @@ data:
     \    T data2ret(const T &v, const bool &q) override { return v; }\n    T merge_ret(const\
     \ T &vl, const T &vr) override { return std::min(vl, vr); };\n    RangeMinimumQuery(const\
     \ std::vector<T> &seq, T defaultmin)\n        : SegTree::NonrecursiveSegmentTree()\
-    \ {\n        SegTree::initialize(seq, defaultmin);\n    };\n};\n\n// Range Maximum\
-    \ Query\n// - get: return max(x_l, ..., x_{r - 1})\ntemplate <typename T> struct\
-    \ RangeMaximumQuery : public NonrecursiveSegmentTree<T, T, bool> {\n    using\
-    \ SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T merge_data(const T &vl,\
-    \ const T &vr) override { return std::max(vl, vr); };\n    T data2ret(const T\
-    \ &v, const bool &q) override { return v; }\n    T merge_ret(const T &vl, const\
-    \ T &vr) override { return std::max(vl, vr); };\n    RangeMaximumQuery(const std::vector<T>\
-    \ &seq, T defaultmax)\n        : SegTree::NonrecursiveSegmentTree() {\n      \
-    \  SegTree::initialize(seq, defaultmax);\n    };\n};\n\ntemplate <typename T>\
-    \ struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool> {\n\
+    \ {\n        SegTree::initialize(seq, defaultmin);\n    };\n};\n\ntemplate <typename\
+    \ T> struct PointUpdateRangeSum : public NonrecursiveSegmentTree<T, T, bool> {\n\
     \    using SegTree = NonrecursiveSegmentTree<T, T, bool>;\n    T merge_data(const\
     \ T &vl, const T &vr) override { return vl + vr; };\n    T data2ret(const T &v,\
     \ const bool &q) override { return v; }\n    T merge_ret(const T &vl, const T\
@@ -211,7 +195,7 @@ data:
   isVerificationFile: false
   path: segmenttree/point-update-range-get_nonrecursive.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2025-01-01 21:39:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/countandsumlessthan.test.cpp
