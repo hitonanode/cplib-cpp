@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
-#include "../heavy_light_decomposition.hpp"
+#include "../preorder_tree_dfs.hpp"
 #include <cassert>
 #include <iostream>
 #include <atcoder/fenwicktree>
@@ -9,22 +9,19 @@ int main() {
     int N, Q;
     cin >> N >> Q;
     vector<long long> A(N);
-    vector<pair<int, int>> edges;
+    vector<vector<int>> to(N);
     for (auto &a : A) cin >> a;
     for (int i = 1; i < N; i++) {
         int p;
         cin >> p;
-        edges.emplace_back(p, i);
+        to.at(p).push_back(i);
+        to.at(i).push_back(p);
     }
 
-    heavy_light_decomposition tour(N, edges);
-    tour.build();
+    preorder_tree_dfs tour(to, 0);
 
-    vector<long long> v;
-    for (auto i : tour.vis_order) v.push_back(A[i]);
-    assert(int(v.size()) == N);
     atcoder::fenwick_tree<long long> ft(N);
-    for (int i = 0; i < N; i++) ft.add(i, v[i]);
+    for (int i = 0; i < N; i++) ft.add(tour.subtree_begin.at(i), A.at(i));
 
     while (Q--) {
         int q;
