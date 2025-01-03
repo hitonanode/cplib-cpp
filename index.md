@@ -710,9 +710,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/diameter.hpp
       title: "Tree diameter \uFF08\u6728\u306E\u76F4\u5F84\uFF09"
-    - icon: ':heavy_check_mark:'
-      path: tree/eulertour.hpp
-      title: tree/eulertour.hpp
+    - icon: ':warning:'
+      path: tree/euler_tour.hpp
+      title: "Euler tour \uFF08\u6728\u306E\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\
+        \uFF09"
     - icon: ':heavy_check_mark:'
       path: tree/frequency_table_of_tree_distance.hpp
       title: Frequency table of tree distance
@@ -733,6 +734,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/lowest_common_ancestor.hpp
       title: "Lowest common ancestor \uFF08\u6700\u5C0F\u5171\u901A\u7956\u5148\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: tree/preorder_tree_dfs.hpp
+      title: "Preorder tree DFS \uFF08\u6728\u306E\u884C\u304D\u304C\u3051\u9806 DFS\uFF09"
     - icon: ':heavy_check_mark:'
       path: tree/rerooting.hpp
       title: "Rerooting \uFF08\u5168\u65B9\u4F4D\u6728 DP\uFF09"
@@ -1691,6 +1695,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/lca_rmq.test.cpp
       title: tree/test/lca_rmq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: tree/test/preorder_tree_dfs.test.cpp
+      title: tree/test/preorder_tree_dfs.test.cpp
     - icon: ':heavy_check_mark:'
       path: tree/test/rerooting.aoj1595.test.cpp
       title: tree/test/rerooting.aoj1595.test.cpp

@@ -105,8 +105,10 @@ for (auto x : ret) cout << x << '\n';
 ## 問題例
 
 - [Codeforces Round #221 (Div. 1) D. Tree and Queries](https://codeforces.com/contest/375/submission/114665433)
-  - 部分木クエリにも使用可能．
+  - 部分木クエリにも使用可能（ただし DSU on tree でもより良い最悪計算量で同様のことが可能）．
 
 ## Links
 
 - [Codeforces blog のコメント](https://codeforces.com/blog/entry/20032?#comment-248430) : "Mo's algorithm" の起源に関する議論．
+- [Mo's algorithm - ei1333の日記](https://ei1333.hateblo.jp/entry/2017/09/11/211011)
+  - 木の部分木クエリやパスクエリに対する Mo's algorithm の応用にも触れられている．

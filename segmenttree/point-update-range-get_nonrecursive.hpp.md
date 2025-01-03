@@ -16,9 +16,6 @@ data:
     path: tree/test/vertex-add-path-sum.test.cpp
     title: tree/test/vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: tree/test/vertex-add-subtree-sum.test.cpp
-    title: tree/test/vertex-add-subtree-sum.test.cpp
-  - icon: ':heavy_check_mark:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
   _isVerificationFailed: false
@@ -203,7 +200,6 @@ data:
   - segmenttree/test/point-set-range-composite.test.cpp
   - tree/test/vertex-add-path-sum.test.cpp
   - tree/test/vertex-set-path-composite.test.cpp
-  - tree/test/vertex-add-subtree-sum.test.cpp
 documentation_of: segmenttree/point-update-range-get_nonrecursive.hpp
 layout: document
 redirect_from:

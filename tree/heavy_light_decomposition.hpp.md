@@ -19,6 +19,9 @@ data:
     path: tree/test/vertex-add-path-sum.test.cpp
     title: tree/test/vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: tree/test/vertex-add-subtree-sum.test.cpp
+    title: tree/test/vertex-add-subtree-sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
   _isVerificationFailed: false
@@ -226,6 +229,7 @@ data:
   - tree/test/vertex-set-path-composite.test.cpp
   - tree/test/jump_on_tree_hld.test.cpp
   - tree/test/hld_subtree_query.test.cpp
+  - tree/test/vertex-add-subtree-sum.test.cpp
   - graph/test/extended_block_cut_trees.yuki1326.test.cpp
 documentation_of: tree/heavy_light_decomposition.hpp
 layout: document
