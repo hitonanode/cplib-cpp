@@ -523,6 +523,12 @@ data:
       path: other_algorithms/hilbert_order_mos.hpp
       title: "Mo's algorithm by Hilbert order \uFF08Hilbert order \u306B\u3088\u308B\
         \u533A\u9593\u30AF\u30A8\u30EA\u5E73\u65B9\u5206\u5272\uFF09"
+    - icon: ':warning:'
+      path: other_algorithms/hilbert_order_mos_3d.hpp
+      title: "3D points to Hilbert order, used for Mo with update \uFF083 \u6B21\u5143\
+        \u7A7A\u9593\u306E\u70B9\u306E Hilbert order \u3078\u306E\u5909\u63DB\uFF0C\
+        \ Mo's algorithm \uFF08\u300C\u6642\u7A7A\u9593 Mo\u300D\uFF09\u3078\u306E\
+        \u5FDC\u7528\uFF09"
     - icon: ':heavy_check_mark:'
       path: other_algorithms/longest_increasing_subsequence.hpp
       title: "Longest increasing subsequence \uFF08LIS, \u6700\u9577\u5897\u52A0\u90E8\
