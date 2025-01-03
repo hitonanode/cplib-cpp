@@ -51,5 +51,5 @@ hld.build();
 
 - [Block-cut tree - ei1333の日記](https://ei1333.hateblo.jp/entry/2020/03/25/010057)
 - [My Algorithm : kopricky アルゴリズムライブラリ](https://kopricky.github.io/code/GraphDecomposition/articulation.html)
-- [拡張 Block Cut Tree | cp_library](https://ssrs-cp.github.io/cp_library/graph/extended_block_cut_tree.hpp.html)
+- [拡張 Block Cut Tree \| cp_library](https://ssrs-cp.github.io/cp_library/graph/extended_block_cut_tree.hpp.html)
 - [Xユーザーの熨斗袋さん: 「G = (V, E) に対する Block Cut Tree、G の2-点連結成分全体を C として...](https://x.com/noshi91/status/1529858538650374144)
