@@ -1,0 +1,4 @@
+-Wfatal-errors
+-Wall
+-Wextra
+-std=c++20
