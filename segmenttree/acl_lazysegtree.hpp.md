@@ -44,12 +44,13 @@ data:
     - https://atcoder.github.io/ac-library/document_ja/lazysegtree.html
     - https://betrue12.hateblo.jp/entry/2020/09/22/194541
     - https://betrue12.hateblo.jp/entry/2020/09/23/005940
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
-    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
-    \  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
-    , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.12.8/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    \         ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+    \  File \"/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
+    , line 187, in bundle\n    bundler.update(path)\n    ~~~~~~~~~~~~~~^^^^^^\n  File\
+    \ \"/opt/hostedtoolcache/Python/3.13.1/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
@@ -138,20 +139,20 @@ data:
   isVerificationFile: false
   path: segmenttree/acl_lazysegtree.hpp
   requiredBy:
+  - segmenttree/acl_beats.hpp
+  - segmenttree/trees/acl_range-affine-range-sum.hpp
+  - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   - segmenttree/trees/acl_range-update-range-sum-min.hpp
   - segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-  - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
-  - segmenttree/trees/acl_range-affine-range-sum.hpp
-  - segmenttree/acl_beats.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/beats_random_test.test.cpp
-  - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
-  - segmenttree/test/beats.test.cpp
   - segmenttree/test/beats_gcd.test.cpp
+  - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
+  - segmenttree/test/beats_random_test.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
+  - segmenttree/test/beats.test.cpp
 documentation_of: segmenttree/acl_lazysegtree.hpp
 layout: document
 title: Lazy Segtree (based on atcoder::lazy_segtree)

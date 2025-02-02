@@ -140,8 +140,8 @@ data:
   timestamp: '2022-11-15 00:34:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/combination.stress.test.cpp
   - number/test/combination.test.cpp
+  - number/test/combination.stress.test.cpp
 documentation_of: number/combination.hpp
 layout: document
 title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\u7406\

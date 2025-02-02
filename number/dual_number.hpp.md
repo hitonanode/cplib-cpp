@@ -88,8 +88,8 @@ data:
   timestamp: '2022-04-30 23:36:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
+  - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
 documentation_of: number/dual_number.hpp
 layout: document
 title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"

@@ -146,13 +146,13 @@ data:
   timestamp: '2023-03-10 18:40:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/is_prime.test.cpp
   - number/test/miller-rabin.test.cpp
-  - number/test/factorize_aoj.test.cpp
-  - number/test/factorize_longlong.test.cpp
+  - number/test/is_prime.test.cpp
   - number/test/miller-rabin-5e7.test.cpp
+  - number/test/factorize_aoj.test.cpp
   - number/test/primitive_root.test.cpp
   - number/test/primitive_root_1e18.test.cpp
+  - number/test/factorize_longlong.test.cpp
   - graph/test/chromatic_number.test.cpp
 documentation_of: number/factorize.hpp
 layout: document

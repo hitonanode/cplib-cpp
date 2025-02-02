@@ -20,8 +20,8 @@
 
 GitHub Actions-based CI is run for the environments below:
 
-- C++17 (GCC): `g++ -std=c++17 -O2 -Wall`
-- C++17 (Clang): `clang++ -std=c++17 -O2 -Wall`
+- C++20 (GCC): `g++ -std=c++20 -O2 -Wall`
+- C++20 (Clang): `clang++ -std=c++20 -O2 -Wall`
 
 ## Installation
 
