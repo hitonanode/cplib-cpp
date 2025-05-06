@@ -17,7 +17,9 @@ public:
 
     ModIntMersenne61() : _v(0) {}
     // 0 <= x < md * 2
-    explicit ModIntMersenne61(long long x) : _v(x >= md ? x - md : x) {}
+    explicit ModIntMersenne61(long long x) : _v(x >= md ? x - md : x) {
+        assert(0 <= x and x < md * 2);
+    }
 
     long long val() const noexcept { return _v; }
 

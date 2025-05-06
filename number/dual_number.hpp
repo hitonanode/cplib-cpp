@@ -1,3 +1,4 @@
+#pragma once
 #include <type_traits>
 
 namespace dual_number_ {
