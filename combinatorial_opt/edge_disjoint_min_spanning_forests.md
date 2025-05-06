@@ -31,7 +31,8 @@ tie(I1, I2) = edge_disjoint_min_spanning_forests(edges, w); // 重み付き
 ## 問題例
 
 - [Hamel Paths \| CodeChef](https://www.codechef.com/problems/HAMEL) $n \le 64, m \le n(n - 1) / 2$, 最大 64 ケース．
-- [2018 TCO Round 3A 1000 ColoringEdgesDiv1](https://community.topcoder.com/stat?c=problem_statement&pm=14909&rd=17198) $n \le 1000, m = 3n/2$
+- [2018 TCO Round 3A 1000 ColoringEdgesDiv1](https://archive.topcoder.com/ProblemStatement/pm/14909) $n \le 1000, m = 3n/2$
+- [【UR #11】元旦老人与丛林 - 题目 - Universal Online Judge](https://uoj.ac/problem/168) $n \le 2000, m \le 4000$
 
 ## 参考文献・リンク
 
