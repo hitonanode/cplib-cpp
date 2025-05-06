@@ -10,7 +10,8 @@
 // Reference: https://www.slideshare.net/tmaehara/ss-17402143
 // Verified:
 // - https://www.codechef.com/submit/HAMEL
-// - https://community.topcoder.com/stat?c=problem_statement&pm=14909&rd=17198
+// - https://archive.topcoder.com/ProblemStatement/pm/14909
+// - https://uoj.ac/problem/168
 template <class Label, class W = int>
 std::pair<std::vector<bool>, std::vector<bool>>
 edge_disjoint_min_spanning_forests(const std::vector<std::pair<Label, Label>> &edges,
@@ -61,11 +62,11 @@ edge_disjoint_min_spanning_forests(const std::vector<std::pair<Label, Label>> &e
         return prv;
     };
 
-    std::vector<int> prveid(M, -1), visited(N);
-    std::vector<std::vector<int>> L(2);
+    std::vector<int> prveid(M, -1);
+    std::vector<std::vector<int>> L(2), visited(2, std::vector<int>(N));
     std::vector<std::vector<std::pair<int, int>>> prv(2);
     for (const int e : es) {
-        if (nb_accepted_edges > 2 * (N - 1)) break;
+        if (nb_accepted_edges >= 2 * (N - 1)) break;
         const int u = uvs[e].first, v = uvs[e].second;
 
         bool found = false;
@@ -81,8 +82,9 @@ edge_disjoint_min_spanning_forests(const std::vector<std::pair<Label, Label>> &e
         }
         if (found) continue;
 
-        visited.assign(N, 0);
-        visited[u] = 1;
+        visited[0].assign(N, 0);
+        visited[1].assign(N, 0);
+        visited[0][u] = visited[1][u] = 1;
         L[0] = {e}, L[1] = {};
 
         int ehead = -1;
@@ -98,11 +100,11 @@ edge_disjoint_min_spanning_forests(const std::vector<std::pair<Label, Label>> &e
                     ehead = exy;
                     break;
                 }
-                if (!visited[x]) std::swap(x, y);
-                while (!visited[y]) {
+                if (!visited[i][x]) std::swap(x, y);
+                while (!visited[i][y]) {
                     int nxty = prv[i][y].first, nxte = prv[i][y].second;
                     L[i ^ 1].push_back(nxte);
-                    visited[y] = 1;
+                    visited[i][y] = 1;
                     y = nxty;
                     prveid[nxte] = exy;
                 }
