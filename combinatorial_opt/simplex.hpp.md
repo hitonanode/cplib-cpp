@@ -171,8 +171,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/simplex.maxflow.test.cpp
-  - combinatorial_opt/test/simplex.easy.test.cpp
   - combinatorial_opt/test/simplex.multiprecision.test.cpp
+  - combinatorial_opt/test/simplex.easy.test.cpp
   - combinatorial_opt/test/simplex.mcf.test.cpp
   - combinatorial_opt/test/simplex.shortestpath.test.cpp
 documentation_of: combinatorial_opt/simplex.hpp

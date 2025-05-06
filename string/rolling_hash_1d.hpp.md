@@ -180,9 +180,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/rolling_hash_lcp.test.cpp
-  - string/test/run_enumerate_lyndon_mersenne61.test.cpp
-  - string/test/run_enumerate_lyndon_hash.test.cpp
   - string/test/rolling_hash.test.cpp
+  - string/test/run_enumerate_lyndon_hash.test.cpp
+  - string/test/run_enumerate_lyndon_mersenne61.test.cpp
   - string/test/rolling_hash_mersenne61.test.cpp
   - string/test/rolling_hash_w_modint.test.cpp
 documentation_of: string/rolling_hash_1d.hpp

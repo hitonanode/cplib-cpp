@@ -8,23 +8,24 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
-    - https://community.topcoder.com/stat?c=problem_statement&pm=14909&rd=17198
+    - https://archive.topcoder.com/ProblemStatement/pm/14909
+    - https://uoj.ac/problem/168
     - https://www.codechef.com/submit/HAMEL
     - https://www.slideshare.net/tmaehara/ss-17402143
   bundledCode: "#line 2 \"combinatorial_opt/edge_disjoint_min_spanning_forests.hpp\"\
     \n#include <algorithm>\n#include <cassert>\n#include <numeric>\n#include <utility>\n\
     #include <vector>\n\n// Max size min weight two spanning forests\n// Complexity:\
     \ O(NM + M log M)\n// Reference: https://www.slideshare.net/tmaehara/ss-17402143\n\
-    // Verified:\n// - https://www.codechef.com/submit/HAMEL\n// - https://community.topcoder.com/stat?c=problem_statement&pm=14909&rd=17198\n\
-    template <class Label, class W = int>\nstd::pair<std::vector<bool>, std::vector<bool>>\n\
-    edge_disjoint_min_spanning_forests(const std::vector<std::pair<Label, Label>>\
-    \ &edges,\n                                   const std::vector<W> &ws = {}) {\n\
-    \    assert(ws.empty() or ws.size() == edges.size());\n    const int M = edges.size();\n\
-    \    std::vector<Label> lbl(M * 2);\n    for (int e = 0; e < M; e++) lbl[e * 2]\
-    \ = edges[e].first, lbl[e * 2 + 1] = edges[e].second;\n    std::sort(lbl.begin(),\
-    \ lbl.end());\n    lbl.erase(std::unique(lbl.begin(), lbl.end()), lbl.end());\n\
-    \    const int N = lbl.size();\n\n    std::vector<std::pair<int, int>> uvs(M);\n\
-    \    for (int e = 0; e < M; e++) {\n        int u = std::lower_bound(lbl.begin(),\
+    // Verified:\n// - https://www.codechef.com/submit/HAMEL\n// - https://archive.topcoder.com/ProblemStatement/pm/14909\n\
+    // - https://uoj.ac/problem/168\ntemplate <class Label, class W = int>\nstd::pair<std::vector<bool>,\
+    \ std::vector<bool>>\nedge_disjoint_min_spanning_forests(const std::vector<std::pair<Label,\
+    \ Label>> &edges,\n                                   const std::vector<W> &ws\
+    \ = {}) {\n    assert(ws.empty() or ws.size() == edges.size());\n    const int\
+    \ M = edges.size();\n    std::vector<Label> lbl(M * 2);\n    for (int e = 0; e\
+    \ < M; e++) lbl[e * 2] = edges[e].first, lbl[e * 2 + 1] = edges[e].second;\n \
+    \   std::sort(lbl.begin(), lbl.end());\n    lbl.erase(std::unique(lbl.begin(),\
+    \ lbl.end()), lbl.end());\n    const int N = lbl.size();\n\n    std::vector<std::pair<int,\
+    \ int>> uvs(M);\n    for (int e = 0; e < M; e++) {\n        int u = std::lower_bound(lbl.begin(),\
     \ lbl.end(), edges[e].first) - lbl.begin();\n        int v = std::lower_bound(lbl.begin(),\
     \ lbl.end(), edges[e].second) - lbl.begin();\n        uvs[e] = {u, v};\n    }\n\
     \n    std::vector<int> es(M);\n    std::iota(es.begin(), es.end(), 0);\n    if\
@@ -41,43 +42,44 @@ data:
     \ {\n                int nxt = p.first, e = p.second;\n                if (!I[e]\
     \ or prv[nxt].first >= 0) continue;\n                prv[nxt] = {now, e}, st.push_back(nxt);\n\
     \            }\n        }\n        return prv;\n    };\n\n    std::vector<int>\
-    \ prveid(M, -1), visited(N);\n    std::vector<std::vector<int>> L(2);\n    std::vector<std::vector<std::pair<int,\
-    \ int>>> prv(2);\n    for (const int e : es) {\n        if (nb_accepted_edges\
-    \ > 2 * (N - 1)) break;\n        const int u = uvs[e].first, v = uvs[e].second;\n\
-    \n        bool found = false;\n\n        for (int d = 0; d < 2; d++) {\n     \
-    \       prv[d] = dfs(u, I[d]);\n            if (prv[d][v].first < 0) {\n     \
-    \           accept_edge(e);\n                I[d][e] = 1;\n                found\
-    \ = true;\n                break;\n            }\n        }\n        if (found)\
-    \ continue;\n\n        visited.assign(N, 0);\n        visited[u] = 1;\n      \
-    \  L[0] = {e}, L[1] = {};\n\n        int ehead = -1;\n        prveid[e] = -1;\n\
-    \        for (int i = 0;; i ^= 1) {\n            if (L[i].empty()) break;\n  \
-    \          L[i ^ 1].clear();\n            while (!L[i].empty()) {\n          \
-    \      const int exy = L[i].back();\n                L[i].pop_back();\n      \
-    \          int x = uvs[exy].first, y = uvs[exy].second;\n                if (prv[i][x].first\
-    \ < 0 or prv[i][y].first < 0) {\n                    ehead = exy;\n          \
-    \          break;\n                }\n                if (!visited[x]) std::swap(x,\
-    \ y);\n                while (!visited[y]) {\n                    int nxty = prv[i][y].first,\
-    \ nxte = prv[i][y].second;\n                    L[i ^ 1].push_back(nxte);\n  \
-    \                  visited[y] = 1;\n                    y = nxty;\n          \
-    \          prveid[nxte] = exy;\n                }\n            }\n           \
-    \ if (ehead >= 0) {\n                accept_edge(e);\n                int c =\
-    \ I[0][ehead];\n                for (; ehead >= 0; ehead = prveid[ehead], c ^=\
-    \ 1) {\n                    I[c][ehead] = 1, I[c ^ 1][ehead] = 0;\n          \
-    \      }\n                break;\n            }\n        }\n    }\n    return\
-    \ {I[0], I[1]};\n}\n"
+    \ prveid(M, -1);\n    std::vector<std::vector<int>> L(2), visited(2, std::vector<int>(N));\n\
+    \    std::vector<std::vector<std::pair<int, int>>> prv(2);\n    for (const int\
+    \ e : es) {\n        if (nb_accepted_edges >= 2 * (N - 1)) break;\n        const\
+    \ int u = uvs[e].first, v = uvs[e].second;\n\n        bool found = false;\n\n\
+    \        for (int d = 0; d < 2; d++) {\n            prv[d] = dfs(u, I[d]);\n \
+    \           if (prv[d][v].first < 0) {\n                accept_edge(e);\n    \
+    \            I[d][e] = 1;\n                found = true;\n                break;\n\
+    \            }\n        }\n        if (found) continue;\n\n        visited[0].assign(N,\
+    \ 0);\n        visited[1].assign(N, 0);\n        visited[0][u] = visited[1][u]\
+    \ = 1;\n        L[0] = {e}, L[1] = {};\n\n        int ehead = -1;\n        prveid[e]\
+    \ = -1;\n        for (int i = 0;; i ^= 1) {\n            if (L[i].empty()) break;\n\
+    \            L[i ^ 1].clear();\n            while (!L[i].empty()) {\n        \
+    \        const int exy = L[i].back();\n                L[i].pop_back();\n    \
+    \            int x = uvs[exy].first, y = uvs[exy].second;\n                if\
+    \ (prv[i][x].first < 0 or prv[i][y].first < 0) {\n                    ehead =\
+    \ exy;\n                    break;\n                }\n                if (!visited[i][x])\
+    \ std::swap(x, y);\n                while (!visited[i][y]) {\n               \
+    \     int nxty = prv[i][y].first, nxte = prv[i][y].second;\n                 \
+    \   L[i ^ 1].push_back(nxte);\n                    visited[i][y] = 1;\n      \
+    \              y = nxty;\n                    prveid[nxte] = exy;\n          \
+    \      }\n            }\n            if (ehead >= 0) {\n                accept_edge(e);\n\
+    \                int c = I[0][ehead];\n                for (; ehead >= 0; ehead\
+    \ = prveid[ehead], c ^= 1) {\n                    I[c][ehead] = 1, I[c ^ 1][ehead]\
+    \ = 0;\n                }\n                break;\n            }\n        }\n\
+    \    }\n    return {I[0], I[1]};\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <numeric>\n\
     #include <utility>\n#include <vector>\n\n// Max size min weight two spanning forests\n\
     // Complexity: O(NM + M log M)\n// Reference: https://www.slideshare.net/tmaehara/ss-17402143\n\
-    // Verified:\n// - https://www.codechef.com/submit/HAMEL\n// - https://community.topcoder.com/stat?c=problem_statement&pm=14909&rd=17198\n\
-    template <class Label, class W = int>\nstd::pair<std::vector<bool>, std::vector<bool>>\n\
-    edge_disjoint_min_spanning_forests(const std::vector<std::pair<Label, Label>>\
-    \ &edges,\n                                   const std::vector<W> &ws = {}) {\n\
-    \    assert(ws.empty() or ws.size() == edges.size());\n    const int M = edges.size();\n\
-    \    std::vector<Label> lbl(M * 2);\n    for (int e = 0; e < M; e++) lbl[e * 2]\
-    \ = edges[e].first, lbl[e * 2 + 1] = edges[e].second;\n    std::sort(lbl.begin(),\
-    \ lbl.end());\n    lbl.erase(std::unique(lbl.begin(), lbl.end()), lbl.end());\n\
-    \    const int N = lbl.size();\n\n    std::vector<std::pair<int, int>> uvs(M);\n\
-    \    for (int e = 0; e < M; e++) {\n        int u = std::lower_bound(lbl.begin(),\
+    // Verified:\n// - https://www.codechef.com/submit/HAMEL\n// - https://archive.topcoder.com/ProblemStatement/pm/14909\n\
+    // - https://uoj.ac/problem/168\ntemplate <class Label, class W = int>\nstd::pair<std::vector<bool>,\
+    \ std::vector<bool>>\nedge_disjoint_min_spanning_forests(const std::vector<std::pair<Label,\
+    \ Label>> &edges,\n                                   const std::vector<W> &ws\
+    \ = {}) {\n    assert(ws.empty() or ws.size() == edges.size());\n    const int\
+    \ M = edges.size();\n    std::vector<Label> lbl(M * 2);\n    for (int e = 0; e\
+    \ < M; e++) lbl[e * 2] = edges[e].first, lbl[e * 2 + 1] = edges[e].second;\n \
+    \   std::sort(lbl.begin(), lbl.end());\n    lbl.erase(std::unique(lbl.begin(),\
+    \ lbl.end()), lbl.end());\n    const int N = lbl.size();\n\n    std::vector<std::pair<int,\
+    \ int>> uvs(M);\n    for (int e = 0; e < M; e++) {\n        int u = std::lower_bound(lbl.begin(),\
     \ lbl.end(), edges[e].first) - lbl.begin();\n        int v = std::lower_bound(lbl.begin(),\
     \ lbl.end(), edges[e].second) - lbl.begin();\n        uvs[e] = {u, v};\n    }\n\
     \n    std::vector<int> es(M);\n    std::iota(es.begin(), es.end(), 0);\n    if\
@@ -94,35 +96,36 @@ data:
     \ {\n                int nxt = p.first, e = p.second;\n                if (!I[e]\
     \ or prv[nxt].first >= 0) continue;\n                prv[nxt] = {now, e}, st.push_back(nxt);\n\
     \            }\n        }\n        return prv;\n    };\n\n    std::vector<int>\
-    \ prveid(M, -1), visited(N);\n    std::vector<std::vector<int>> L(2);\n    std::vector<std::vector<std::pair<int,\
-    \ int>>> prv(2);\n    for (const int e : es) {\n        if (nb_accepted_edges\
-    \ > 2 * (N - 1)) break;\n        const int u = uvs[e].first, v = uvs[e].second;\n\
-    \n        bool found = false;\n\n        for (int d = 0; d < 2; d++) {\n     \
-    \       prv[d] = dfs(u, I[d]);\n            if (prv[d][v].first < 0) {\n     \
-    \           accept_edge(e);\n                I[d][e] = 1;\n                found\
-    \ = true;\n                break;\n            }\n        }\n        if (found)\
-    \ continue;\n\n        visited.assign(N, 0);\n        visited[u] = 1;\n      \
-    \  L[0] = {e}, L[1] = {};\n\n        int ehead = -1;\n        prveid[e] = -1;\n\
-    \        for (int i = 0;; i ^= 1) {\n            if (L[i].empty()) break;\n  \
-    \          L[i ^ 1].clear();\n            while (!L[i].empty()) {\n          \
-    \      const int exy = L[i].back();\n                L[i].pop_back();\n      \
-    \          int x = uvs[exy].first, y = uvs[exy].second;\n                if (prv[i][x].first\
-    \ < 0 or prv[i][y].first < 0) {\n                    ehead = exy;\n          \
-    \          break;\n                }\n                if (!visited[x]) std::swap(x,\
-    \ y);\n                while (!visited[y]) {\n                    int nxty = prv[i][y].first,\
-    \ nxte = prv[i][y].second;\n                    L[i ^ 1].push_back(nxte);\n  \
-    \                  visited[y] = 1;\n                    y = nxty;\n          \
-    \          prveid[nxte] = exy;\n                }\n            }\n           \
-    \ if (ehead >= 0) {\n                accept_edge(e);\n                int c =\
-    \ I[0][ehead];\n                for (; ehead >= 0; ehead = prveid[ehead], c ^=\
-    \ 1) {\n                    I[c][ehead] = 1, I[c ^ 1][ehead] = 0;\n          \
-    \      }\n                break;\n            }\n        }\n    }\n    return\
-    \ {I[0], I[1]};\n}\n"
+    \ prveid(M, -1);\n    std::vector<std::vector<int>> L(2), visited(2, std::vector<int>(N));\n\
+    \    std::vector<std::vector<std::pair<int, int>>> prv(2);\n    for (const int\
+    \ e : es) {\n        if (nb_accepted_edges >= 2 * (N - 1)) break;\n        const\
+    \ int u = uvs[e].first, v = uvs[e].second;\n\n        bool found = false;\n\n\
+    \        for (int d = 0; d < 2; d++) {\n            prv[d] = dfs(u, I[d]);\n \
+    \           if (prv[d][v].first < 0) {\n                accept_edge(e);\n    \
+    \            I[d][e] = 1;\n                found = true;\n                break;\n\
+    \            }\n        }\n        if (found) continue;\n\n        visited[0].assign(N,\
+    \ 0);\n        visited[1].assign(N, 0);\n        visited[0][u] = visited[1][u]\
+    \ = 1;\n        L[0] = {e}, L[1] = {};\n\n        int ehead = -1;\n        prveid[e]\
+    \ = -1;\n        for (int i = 0;; i ^= 1) {\n            if (L[i].empty()) break;\n\
+    \            L[i ^ 1].clear();\n            while (!L[i].empty()) {\n        \
+    \        const int exy = L[i].back();\n                L[i].pop_back();\n    \
+    \            int x = uvs[exy].first, y = uvs[exy].second;\n                if\
+    \ (prv[i][x].first < 0 or prv[i][y].first < 0) {\n                    ehead =\
+    \ exy;\n                    break;\n                }\n                if (!visited[i][x])\
+    \ std::swap(x, y);\n                while (!visited[i][y]) {\n               \
+    \     int nxty = prv[i][y].first, nxte = prv[i][y].second;\n                 \
+    \   L[i ^ 1].push_back(nxte);\n                    visited[i][y] = 1;\n      \
+    \              y = nxty;\n                    prveid[nxte] = exy;\n          \
+    \      }\n            }\n            if (ehead >= 0) {\n                accept_edge(e);\n\
+    \                int c = I[0][ehead];\n                for (; ehead >= 0; ehead\
+    \ = prveid[ehead], c ^= 1) {\n                    I[c][ehead] = 1, I[c ^ 1][ehead]\
+    \ = 0;\n                }\n                break;\n            }\n        }\n\
+    \    }\n    return {I[0], I[1]};\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: combinatorial_opt/edge_disjoint_min_spanning_forests.hpp
   requiredBy: []
-  timestamp: '2021-09-18 18:00:53+09:00'
+  timestamp: '2025-05-06 20:55:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: combinatorial_opt/edge_disjoint_min_spanning_forests.hpp
@@ -160,7 +163,8 @@ tie(I1, I2) = edge_disjoint_min_spanning_forests(edges, w); // 重み付き
 ## 問題例
 
 - [Hamel Paths \| CodeChef](https://www.codechef.com/problems/HAMEL) $n \le 64, m \le n(n - 1) / 2$, 最大 64 ケース．
-- [2018 TCO Round 3A 1000 ColoringEdgesDiv1](https://community.topcoder.com/stat?c=problem_statement&pm=14909&rd=17198) $n \le 1000, m = 3n/2$
+- [2018 TCO Round 3A 1000 ColoringEdgesDiv1](https://archive.topcoder.com/ProblemStatement/pm/14909) $n \le 1000, m = 3n/2$
+- [【UR #11】元旦老人与丛林 - 题目 - Universal Online Judge](https://uoj.ac/problem/168) $n \le 2000, m \le 4000$
 
 ## 参考文献・リンク
 

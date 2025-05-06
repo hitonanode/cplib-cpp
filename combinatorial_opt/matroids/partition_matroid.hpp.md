@@ -72,10 +72,10 @@ data:
   timestamp: '2021-09-01 23:53:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
-  - combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
-  - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   - combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
+  - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
+  - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
+  - combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
 documentation_of: combinatorial_opt/matroids/partition_matroid.hpp
 layout: document
 title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
