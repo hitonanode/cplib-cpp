@@ -18,7 +18,7 @@ data:
   attributes:
     links:
     - https://atcoder.jp/contests/abc235/tasks/abc235_f
-  bundledCode: "#line 1 \"number/dual_number.hpp\"\n#include <type_traits>\n\nnamespace\
+  bundledCode: "#line 2 \"number/dual_number.hpp\"\n#include <type_traits>\n\nnamespace\
     \ dual_number_ {\nstruct has_id_method_impl {\n    template <class T_> static\
     \ auto check(T_ *) -> decltype(T_::id(), std::true_type());\n    template <class\
     \ T_> static auto check(...) -> std::false_type;\n};\ntemplate <class T_> struct\
@@ -49,10 +49,10 @@ data:
     \ os << '{' << x.a << ',' << x.b << '}';\n    }\n\n    T eval(const T &x) const\
     \ { return a + b * x; }\n    T root() const { return (-a) / b; } // Solve a +\
     \ bx = 0 (b \\neq 0 is assumed)\n};\n"
-  code: "#include <type_traits>\n\nnamespace dual_number_ {\nstruct has_id_method_impl\
-    \ {\n    template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
-    \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
-    \ <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr))\
+  code: "#pragma once\n#include <type_traits>\n\nnamespace dual_number_ {\nstruct\
+    \ has_id_method_impl {\n    template <class T_> static auto check(T_ *) -> decltype(T_::id(),\
+    \ std::true_type());\n    template <class T_> static auto check(...) -> std::false_type;\n\
+    };\ntemplate <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr))\
     \ {};\n} // namespace dual_number_\n\n// Dual number \uFF08\u4E8C\u91CD\u6570\uFF09\
     \n// Verified: https://atcoder.jp/contests/abc235/tasks/abc235_f\ntemplate <class\
     \ T> struct DualNumber {\n    T a, b; // a + bx\n\n    template <typename T2,\
@@ -85,7 +85,7 @@ data:
   path: number/dual_number.hpp
   requiredBy:
   - linear_algebra_matrix/hessenberg_system.hpp
-  timestamp: '2022-04-30 23:36:43+09:00'
+  timestamp: '2025-05-06 21:03:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp

@@ -25,7 +25,7 @@ data:
     - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
   bundledCode: "#line 1 \"linear_algebra_matrix/test/hessenberg_system.stress.test.cpp\"\
     \n#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
-    \ // DUMMY\n#line 1 \"number/dual_number.hpp\"\n#include <type_traits>\n\nnamespace\
+    \ // DUMMY\n#line 2 \"number/dual_number.hpp\"\n#include <type_traits>\n\nnamespace\
     \ dual_number_ {\nstruct has_id_method_impl {\n    template <class T_> static\
     \ auto check(T_ *) -> decltype(T_::id(), std::true_type());\n    template <class\
     \ T_> static auto check(...) -> std::false_type;\n};\ntemplate <class T_> struct\
@@ -234,7 +234,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
   requiredBy: []
-  timestamp: '2023-12-26 21:26:22+09:00'
+  timestamp: '2025-05-06 21:03:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/hessenberg_system.stress.test.cpp

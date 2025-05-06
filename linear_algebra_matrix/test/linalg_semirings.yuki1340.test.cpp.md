@@ -22,53 +22,58 @@ data:
     links:
     - https://yukicoder.me/problems/no/1340
   bundledCode: "#line 1 \"linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp\"\
-    \n#define PROBLEM \"https://yukicoder.me/problems/no/1340\"\n\n#line 1 \"number/min_max_semiring.hpp\"\
+    \n#define PROBLEM \"https://yukicoder.me/problems/no/1340\"\n\n#line 2 \"number/min_max_semiring.hpp\"\
     \n#include <limits>\n\n// min-max \u534A\u74B0\uFF08\u52A0\u6CD5\u304C min, \u4E57\
     \u6CD5\u304C max, \u96F6\u5143\u304C INF, \u5358\u4F4D\u5143\u304C -INF\uFF09\n\
-    // Verified: abc236g\ntemplate <class T> struct min_max_semiring {\n    T val;\n\
-    \    min_max_semiring() : val(std::numeric_limits<T>::max()) {\n        static_assert(std::numeric_limits<T>::max()\
-    \ > 0,\n                      \"std::numeric_limits<>::max() must be properly\
-    \ defined\");\n    }\n    min_max_semiring(T x) : val(x) {}\n    static min_max_semiring\
-    \ id() { return T(std::numeric_limits<T>::min()); }\n    static min_max_semiring\
-    \ max() { return T(); }\n    min_max_semiring operator+(const min_max_semiring\
-    \ &r) const {\n        return (this->val > r.val ? r.val : this->val);\n    }\n\
-    \    min_max_semiring &operator+=(const min_max_semiring &r) { return *this =\
-    \ *this + r; }\n    min_max_semiring operator*(const min_max_semiring &r) const\
+    // Verified: abc236g, abc388f\ntemplate <class T> struct min_max_semiring {\n\
+    \    T val;\n    min_max_semiring() : val(std::numeric_limits<T>::max()) {\n \
+    \       static_assert(std::numeric_limits<T>::max() > 0,\n                   \
+    \   \"std::numeric_limits<>::max() must be properly defined\");\n    }\n    min_max_semiring(T\
+    \ x) : val(x) {}\n    static min_max_semiring id() { return T(std::numeric_limits<T>::min());\
+    \ }\n    static min_max_semiring max() { return T(); }\n    min_max_semiring operator+(const\
+    \ min_max_semiring &r) const {\n        return (this->val > r.val ? r.val : this->val);\n\
+    \    }\n    min_max_semiring &operator+=(const min_max_semiring &r) { return *this\
+    \ = *this + r; }\n    min_max_semiring operator*(const min_max_semiring &r) const\
     \ {\n        return (this->val < r.val ? r.val : this->val);\n    }\n    min_max_semiring\
     \ &operator*=(const min_max_semiring &r) { return *this = *this * r; }\n    bool\
     \ operator==(const min_max_semiring &r) const { return this->val == r.val; }\n\
     \    bool operator!=(const min_max_semiring &r) const { return !(*this == r);\
-    \ }\n    template <class OStream> friend OStream &operator<<(OStream &os, const\
-    \ min_max_semiring &x) {\n        return os << x.val;\n    }\n};\n#line 2 \"number/min_plus_semiring.hpp\"\
-    \n\n// min-plus \u534A\u74B0\u30FB\u30C8\u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF08\
-    \u52A0\u6CD5\u304C min, \u4E57\u6CD5\u304C plus, \u96F6\u5143\u304C INF, \u5358\
-    \u4F4D\u5143\u304C 0\uFF09\n// INF = numeric_limits<T>::max() / 2 \u3092\u8D85\
-    \u3048\u305F\u3089 INF \u306B clamp \u3059\u308B\n// Verified: https://yukicoder.me/problems/no/1340\n\
-    template <class T> struct min_plus_semiring {\n    T val;\n    static const T\
-    \ _T_inf() {\n        static_assert(std::numeric_limits<T>::max() > 0,\n     \
-    \                 \"std::numeric_limits<>::max() must be properly defined\");\n\
-    \        return std::numeric_limits<T>::max() / 2;\n    }\n    min_plus_semiring()\
-    \ : val(_T_inf()) {}\n    min_plus_semiring(T x) : val(x) {}\n    static min_plus_semiring\
-    \ id() { return min_plus_semiring(0); }\n    min_plus_semiring operator+(const\
-    \ min_plus_semiring &r) const {\n        return (this->val > r.val ? r.val : this->val);\n\
-    \    }\n    min_plus_semiring &operator+=(const min_plus_semiring &r) { return\
-    \ *this = *this + r; }\n    min_plus_semiring operator*(const min_plus_semiring\
-    \ &r) const {\n        if (this->val == _T_inf() or r.val == _T_inf()) return\
-    \ min_plus_semiring();\n        T tmp = this->val + r.val; // Watch out for overflow\n\
-    \        return _T_inf() < tmp ? min_plus_semiring() : min_plus_semiring(tmp);\n\
-    \    }\n    min_plus_semiring &operator*=(const min_plus_semiring &r) { return\
-    \ *this = *this * r; }\n    bool operator==(const min_plus_semiring &r) const\
-    \ { return this->val == r.val; }\n    bool operator!=(const min_plus_semiring\
-    \ &r) const { return !(*this == r); }\n    bool operator<(const min_plus_semiring\
-    \ &x) const { return this->val < x.val; }\n    bool operator>(const min_plus_semiring\
-    \ &x) const { return this->val > x.val; }\n    template <class OStream> friend\
-    \ OStream &operator<<(OStream &os, const min_plus_semiring &x) {\n        return\
-    \ os << x.val;\n    }\n};\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include\
-    \ <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iterator>\n#include\
-    \ <type_traits>\n#include <utility>\n#include <vector>\n\nnamespace matrix_ {\n\
-    struct has_id_method_impl {\n    template <class T_> static auto check(T_ *) ->\
-    \ decltype(T_::id(), std::true_type());\n    template <class T_> static auto check(...)\
-    \ -> std::false_type;\n};\ntemplate <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr))\
+    \ }\n    bool operator<(const min_max_semiring &r) const { return this->val <\
+    \ r.val; }\n    bool operator>(const min_max_semiring &r) const { return this->val\
+    \ > r.val; }\n    bool operator<=(const min_max_semiring &r) const { return this->val\
+    \ <= r.val; }\n    bool operator>=(const min_max_semiring &r) const { return this->val\
+    \ >= r.val; }\n    template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const min_max_semiring &x) {\n        return os << x.val;\n    }\n};\n\
+    #line 2 \"number/min_plus_semiring.hpp\"\n\n// min-plus \u534A\u74B0\u30FB\u30C8\
+    \u30ED\u30D4\u30AB\u30EB\u534A\u74B0\uFF08\u52A0\u6CD5\u304C min, \u4E57\u6CD5\
+    \u304C plus, \u96F6\u5143\u304C INF, \u5358\u4F4D\u5143\u304C 0\uFF09\n// INF\
+    \ = numeric_limits<T>::max() / 2 \u3092\u8D85\u3048\u305F\u3089 INF \u306B clamp\
+    \ \u3059\u308B\n// Verified: https://yukicoder.me/problems/no/1340\ntemplate <class\
+    \ T> struct min_plus_semiring {\n    T val;\n    static const T _T_inf() {\n \
+    \       static_assert(std::numeric_limits<T>::max() > 0,\n                   \
+    \   \"std::numeric_limits<>::max() must be properly defined\");\n        return\
+    \ std::numeric_limits<T>::max() / 2;\n    }\n    min_plus_semiring() : val(_T_inf())\
+    \ {}\n    min_plus_semiring(T x) : val(x) {}\n    static min_plus_semiring id()\
+    \ { return min_plus_semiring(0); }\n    min_plus_semiring operator+(const min_plus_semiring\
+    \ &r) const {\n        return (this->val > r.val ? r.val : this->val);\n    }\n\
+    \    min_plus_semiring &operator+=(const min_plus_semiring &r) { return *this\
+    \ = *this + r; }\n    min_plus_semiring operator*(const min_plus_semiring &r)\
+    \ const {\n        if (this->val == _T_inf() or r.val == _T_inf()) return min_plus_semiring();\n\
+    \        T tmp = this->val + r.val; // Watch out for overflow\n        return\
+    \ _T_inf() < tmp ? min_plus_semiring() : min_plus_semiring(tmp);\n    }\n    min_plus_semiring\
+    \ &operator*=(const min_plus_semiring &r) { return *this = *this * r; }\n    bool\
+    \ operator==(const min_plus_semiring &r) const { return this->val == r.val; }\n\
+    \    bool operator!=(const min_plus_semiring &r) const { return !(*this == r);\
+    \ }\n    bool operator<(const min_plus_semiring &x) const { return this->val <\
+    \ x.val; }\n    bool operator>(const min_plus_semiring &x) const { return this->val\
+    \ > x.val; }\n    template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const min_plus_semiring &x) {\n        return os << x.val;\n    }\n};\n\
+    #line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n#include <cassert>\n\
+    #include <cmath>\n#include <iterator>\n#include <type_traits>\n#include <utility>\n\
+    #include <vector>\n\nnamespace matrix_ {\nstruct has_id_method_impl {\n    template\
+    \ <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
+    \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
+    \ <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr))\
     \ {};\n} // namespace matrix_\n\ntemplate <typename T> struct matrix {\n    int\
     \ H, W;\n    std::vector<T> elem;\n    typename std::vector<T>::iterator operator[](int\
     \ i) { return elem.begin() + i * W; }\n    inline T &at(int i, int j) { return\
@@ -215,7 +220,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
   requiredBy: []
-  timestamp: '2023-05-21 18:11:51+09:00'
+  timestamp: '2025-05-06 21:03:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp

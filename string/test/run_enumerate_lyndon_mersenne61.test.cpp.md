@@ -30,35 +30,35 @@ data:
     \ }\n    inline unsigned lo() const noexcept { return _v & ((1LL << 31) - 1);\
     \ }\n\npublic:\n    static long long mod() { return md; }\n\n    ModIntMersenne61()\
     \ : _v(0) {}\n    // 0 <= x < md * 2\n    explicit ModIntMersenne61(long long\
-    \ x) : _v(x >= md ? x - md : x) {}\n\n    long long val() const noexcept { return\
-    \ _v; }\n\n    ModIntMersenne61 operator+(const ModIntMersenne61 &x) const {\n\
-    \        return ModIntMersenne61(_v + x._v);\n    }\n\n    ModIntMersenne61 operator-(const\
-    \ ModIntMersenne61 &x) const {\n        return ModIntMersenne61(_v + md - x._v);\n\
-    \    }\n\n    ModIntMersenne61 operator*(const ModIntMersenne61 &x) const {\n\
-    \        using ull = unsigned long long;\n\n        ull uu = (ull)hi() * x.hi()\
-    \ * 2;\n        ull ll = (ull)lo() * x.lo();\n        ull lu = (ull)hi() * x.lo()\
-    \ + (ull)lo() * x.hi();\n\n        ull sum = uu + ll + ((lu & ((1ULL << 30) -\
-    \ 1)) << 31) + (lu >> 30);\n        ull reduced = (sum >> 61) + (sum & ull(md));\n\
-    \        return ModIntMersenne61(reduced);\n    }\n\n    ModIntMersenne61 pow(long\
-    \ long n) const {\n        assert(n >= 0);\n        ModIntMersenne61 ans(1), tmp\
-    \ = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n        \
-    \    tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n    ModIntMersenne61\
-    \ inv() const { return pow(md - 2); }\n\n    ModIntMersenne61 operator/(const\
-    \ ModIntMersenne61 &x) const { return *this * x.inv(); }\n\n    ModIntMersenne61\
-    \ operator-() const { return ModIntMersenne61(md - _v); }\n    ModIntMersenne61\
-    \ &operator+=(const ModIntMersenne61 &x) { return *this = *this + x; }\n    ModIntMersenne61\
-    \ &operator-=(const ModIntMersenne61 &x) { return *this = *this - x; }\n    ModIntMersenne61\
-    \ &operator*=(const ModIntMersenne61 &x) { return *this = *this * x; }\n    ModIntMersenne61\
-    \ &operator/=(const ModIntMersenne61 &x) { return *this = *this / x; }\n\n   \
-    \ ModIntMersenne61 operator+(unsigned x) const { return ModIntMersenne61(this->_v\
-    \ + x); }\n\n    bool operator==(const ModIntMersenne61 &x) const { return _v\
-    \ == x._v; }\n    bool operator!=(const ModIntMersenne61 &x) const { return _v\
-    \ != x._v; }\n    bool operator<(const ModIntMersenne61 &x) const { return _v\
-    \ < x._v; } // To use std::map\n\n    template <class OStream> friend OStream\
-    \ &operator<<(OStream &os, const ModIntMersenne61 &x) {\n        return os <<\
-    \ x._v;\n    }\n\n    static ModIntMersenne61 randgen(bool force_update = false)\
-    \ {\n        static ModIntMersenne61 b(0);\n        if (b == ModIntMersenne61(0)\
-    \ or force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \ x) : _v(x >= md ? x - md : x) {\n        assert(0 <= x and x < md * 2);\n  \
+    \  }\n\n    long long val() const noexcept { return _v; }\n\n    ModIntMersenne61\
+    \ operator+(const ModIntMersenne61 &x) const {\n        return ModIntMersenne61(_v\
+    \ + x._v);\n    }\n\n    ModIntMersenne61 operator-(const ModIntMersenne61 &x)\
+    \ const {\n        return ModIntMersenne61(_v + md - x._v);\n    }\n\n    ModIntMersenne61\
+    \ operator*(const ModIntMersenne61 &x) const {\n        using ull = unsigned long\
+    \ long;\n\n        ull uu = (ull)hi() * x.hi() * 2;\n        ull ll = (ull)lo()\
+    \ * x.lo();\n        ull lu = (ull)hi() * x.lo() + (ull)lo() * x.hi();\n\n   \
+    \     ull sum = uu + ll + ((lu & ((1ULL << 30) - 1)) << 31) + (lu >> 30);\n  \
+    \      ull reduced = (sum >> 61) + (sum & ull(md));\n        return ModIntMersenne61(reduced);\n\
+    \    }\n\n    ModIntMersenne61 pow(long long n) const {\n        assert(n >= 0);\n\
+    \        ModIntMersenne61 ans(1), tmp = *this;\n        while (n) {\n        \
+    \    if (n & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n   \
+    \     return ans;\n    }\n\n    ModIntMersenne61 inv() const { return pow(md -\
+    \ 2); }\n\n    ModIntMersenne61 operator/(const ModIntMersenne61 &x) const { return\
+    \ *this * x.inv(); }\n\n    ModIntMersenne61 operator-() const { return ModIntMersenne61(md\
+    \ - _v); }\n    ModIntMersenne61 &operator+=(const ModIntMersenne61 &x) { return\
+    \ *this = *this + x; }\n    ModIntMersenne61 &operator-=(const ModIntMersenne61\
+    \ &x) { return *this = *this - x; }\n    ModIntMersenne61 &operator*=(const ModIntMersenne61\
+    \ &x) { return *this = *this * x; }\n    ModIntMersenne61 &operator/=(const ModIntMersenne61\
+    \ &x) { return *this = *this / x; }\n\n    ModIntMersenne61 operator+(unsigned\
+    \ x) const { return ModIntMersenne61(this->_v + x); }\n\n    bool operator==(const\
+    \ ModIntMersenne61 &x) const { return _v == x._v; }\n    bool operator!=(const\
+    \ ModIntMersenne61 &x) const { return _v != x._v; }\n    bool operator<(const\
+    \ ModIntMersenne61 &x) const { return _v < x._v; } // To use std::map\n\n    template\
+    \ <class OStream> friend OStream &operator<<(OStream &os, const ModIntMersenne61\
+    \ &x) {\n        return os << x._v;\n    }\n\n    static ModIntMersenne61 randgen(bool\
+    \ force_update = false) {\n        static ModIntMersenne61 b(0);\n        if (b\
+    \ == ModIntMersenne61(0) or force_update) {\n            std::mt19937 mt(std::chrono::steady_clock::now().time_since_epoch().count());\n\
     \            std::uniform_int_distribution<long long> d(1, ModIntMersenne61::mod());\n\
     \            b = ModIntMersenne61(d(mt));\n        }\n        return b;\n    }\n\
     };\n#line 2 \"string/lyndon.hpp\"\n#include <algorithm>\n#line 4 \"string/lyndon.hpp\"\
@@ -211,7 +211,7 @@ data:
   isVerificationFile: true
   path: string/test/run_enumerate_lyndon_mersenne61.test.cpp
   requiredBy: []
-  timestamp: '2024-01-13 20:34:12+09:00'
+  timestamp: '2025-05-06 21:03:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/run_enumerate_lyndon_mersenne61.test.cpp

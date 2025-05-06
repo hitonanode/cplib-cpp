@@ -117,7 +117,7 @@ data:
     \ md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\ntemplate <int md> std::vector<ModInt<md>>\
     \ ModInt<md>::facinvs = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::invs\
     \ = {0};\n\nusing ModInt998244353 = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n\
-    // using mint = ModInt<1000000007>;\n#line 1 \"number/dual_number.hpp\"\n#include\
+    // using mint = ModInt<1000000007>;\n#line 2 \"number/dual_number.hpp\"\n#include\
     \ <type_traits>\n\nnamespace dual_number_ {\nstruct has_id_method_impl {\n   \
     \ template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
     \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
@@ -364,7 +364,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   requiredBy: []
-  timestamp: '2023-12-26 21:26:22+09:00'
+  timestamp: '2025-05-06 21:03:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp

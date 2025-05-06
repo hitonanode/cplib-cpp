@@ -15,7 +15,7 @@ data:
   attributes:
     links:
     - https://atcoder.jp/contests/abc249/tasks/abc249_h
-  bundledCode: "#line 1 \"number/dual_number.hpp\"\n#include <type_traits>\n\nnamespace\
+  bundledCode: "#line 2 \"number/dual_number.hpp\"\n#include <type_traits>\n\nnamespace\
     \ dual_number_ {\nstruct has_id_method_impl {\n    template <class T_> static\
     \ auto check(T_ *) -> decltype(T_::id(), std::true_type());\n    template <class\
     \ T_> static auto check(...) -> std::false_type;\n};\ntemplate <class T_> struct\
@@ -91,7 +91,7 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/hessenberg_system.hpp
   requiredBy: []
-  timestamp: '2022-04-30 23:36:43+09:00'
+  timestamp: '2025-05-06 21:03:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/hessenberg_system.stress.test.cpp
