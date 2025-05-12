@@ -33,17 +33,21 @@ data:
     \      [&](int i, int j) { return hilbert_values[i] < hilbert_values[j]; });\n\
     \n    return indices;\n}\n\n// Mo's algorithm with Hilbert order\n// - add(x,\
     \ y) : Add (x, y) as query.\n// - run(IncX, DecX, IncY, DecY, Query) : run Mo's\
-    \ algorithm.\nstruct MosAlgorithmHilbertOrder {\n    int cx, cy;\n    std::vector<std::pair<int,\
-    \ int>> queries;\n\n    MosAlgorithmHilbertOrder(int x_init, int y_init) : cx(x_init),\
-    \ cy(y_init) {}\n\n    void add(int x, int y) { queries.emplace_back(x, y); }\n\
-    \n    template <class IncX, class DecX, class IncY, class DecY, class Query>\n\
-    \    void run(IncX inc_x, DecX dec_x, IncY inc_y, DecY dec_y, Query query) {\n\
-    \n        std::vector<int> indices = sort_by_hilbert_order(queries);\n       \
-    \ int x = cx, y = cy;\n\n        for (int q : indices) {\n            while (y\
-    \ < queries[q].second) inc_y(y, y + 1), ++y;\n            while (x > queries[q].first)\
+    \ algorithm.\n// - run(Add, Remove, Query) : run Mo's algorithm with Add, Remove,\
+    \ and Query functions. add(x, y) means [x, y).\nstruct MosAlgorithmHilbertOrder\
+    \ {\n    int cx, cy;\n    std::vector<std::pair<int, int>> queries;\n\n    MosAlgorithmHilbertOrder(int\
+    \ x_init, int y_init) : cx(x_init), cy(y_init) {}\n\n    void add(int x, int y)\
+    \ { queries.emplace_back(x, y); }\n\n    template <class IncX, class DecX, class\
+    \ IncY, class DecY, class Query>\n    void run(IncX inc_x, DecX dec_x, IncY inc_y,\
+    \ DecY dec_y, Query query) {\n\n        std::vector<int> indices = sort_by_hilbert_order(queries);\n\
+    \        int x = cx, y = cy;\n\n        for (int q : indices) {\n            while\
+    \ (y < queries[q].second) inc_y(y, y + 1), ++y;\n            while (x > queries[q].first)\
     \ dec_x(x, x - 1), --x;\n            while (y > queries[q].second) dec_y(y, y\
     \ - 1), --y;\n            while (x < queries[q].first) inc_x(x, x + 1), ++x;\n\
-    \            query(q);\n        }\n    }\n};\n"
+    \            query(q);\n        }\n    }\n\n    template <typename F1, typename\
+    \ F3, typename F5> void run(F1 Add, F3 Remove, F5 Query) {\n        run([&](int\
+    \ x, int) { Remove(x); }, [&](int, int x) { Add(x); },\n            [&](int y,\
+    \ int) { Add(y); }, [&](int, int y) { Remove(y); }, Query);\n    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <numeric>\n#include <utility>\n\
     #include <vector>\n\n// Hilbert order of given 2D point (x, y)\n// constraints:\
     \ 0 <= x, y < 2^32\n// Reference: https://take44444.github.io/Algorithm-Book/range/mo/main.html#mos-algorithm\n\
@@ -68,22 +72,26 @@ data:
     \      [&](int i, int j) { return hilbert_values[i] < hilbert_values[j]; });\n\
     \n    return indices;\n}\n\n// Mo's algorithm with Hilbert order\n// - add(x,\
     \ y) : Add (x, y) as query.\n// - run(IncX, DecX, IncY, DecY, Query) : run Mo's\
-    \ algorithm.\nstruct MosAlgorithmHilbertOrder {\n    int cx, cy;\n    std::vector<std::pair<int,\
-    \ int>> queries;\n\n    MosAlgorithmHilbertOrder(int x_init, int y_init) : cx(x_init),\
-    \ cy(y_init) {}\n\n    void add(int x, int y) { queries.emplace_back(x, y); }\n\
-    \n    template <class IncX, class DecX, class IncY, class DecY, class Query>\n\
-    \    void run(IncX inc_x, DecX dec_x, IncY inc_y, DecY dec_y, Query query) {\n\
-    \n        std::vector<int> indices = sort_by_hilbert_order(queries);\n       \
-    \ int x = cx, y = cy;\n\n        for (int q : indices) {\n            while (y\
-    \ < queries[q].second) inc_y(y, y + 1), ++y;\n            while (x > queries[q].first)\
+    \ algorithm.\n// - run(Add, Remove, Query) : run Mo's algorithm with Add, Remove,\
+    \ and Query functions. add(x, y) means [x, y).\nstruct MosAlgorithmHilbertOrder\
+    \ {\n    int cx, cy;\n    std::vector<std::pair<int, int>> queries;\n\n    MosAlgorithmHilbertOrder(int\
+    \ x_init, int y_init) : cx(x_init), cy(y_init) {}\n\n    void add(int x, int y)\
+    \ { queries.emplace_back(x, y); }\n\n    template <class IncX, class DecX, class\
+    \ IncY, class DecY, class Query>\n    void run(IncX inc_x, DecX dec_x, IncY inc_y,\
+    \ DecY dec_y, Query query) {\n\n        std::vector<int> indices = sort_by_hilbert_order(queries);\n\
+    \        int x = cx, y = cy;\n\n        for (int q : indices) {\n            while\
+    \ (y < queries[q].second) inc_y(y, y + 1), ++y;\n            while (x > queries[q].first)\
     \ dec_x(x, x - 1), --x;\n            while (y > queries[q].second) dec_y(y, y\
     \ - 1), --y;\n            while (x < queries[q].first) inc_x(x, x + 1), ++x;\n\
-    \            query(q);\n        }\n    }\n};\n"
+    \            query(q);\n        }\n    }\n\n    template <typename F1, typename\
+    \ F3, typename F5> void run(F1 Add, F3 Remove, F5 Query) {\n        run([&](int\
+    \ x, int) { Remove(x); }, [&](int, int x) { Add(x); },\n            [&](int y,\
+    \ int) { Add(y); }, [&](int, int y) { Remove(y); }, Query);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: other_algorithms/hilbert_order_mos.hpp
   requiredBy: []
-  timestamp: '2024-12-28 06:16:13+09:00'
+  timestamp: '2025-05-12 22:55:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: other_algorithms/hilbert_order_mos.hpp
@@ -95,6 +103,8 @@ title: "Mo's algorithm by Hilbert order \uFF08Hilbert order \u306B\u3088\u308B\u
 Mo's algorithm の一種で，2 次元平面上の点として表現可能なクエリ群を Hilbert 曲線上の順序に従って処理する． $x, y$ 座標の値の範囲が $N$ でクエリが $Q$ 個のときの計算量は $O(N \sqrt{Q})$.
 
 ## 使用方法
+
+### 一般の 2 次元平面上の点クエリの場合
 
 ```cpp
 vector<Result> ret(Q); // 答えを格納する領域
@@ -115,9 +125,25 @@ mo.run(inc_x, dec_x, inc_y, dec_y, solve);
 for (auto ans : ret) cout << ans << '\n';
 ```
 
+### 特に半開区間 $[l, r)$ クエリで区間の左右の伸張・収縮が同一の関数で書ける場合
+
+```cpp
+MosAlgorithmHilbertOrder mos(0, 0);
+for (auto [l, r] : queries) {
+    mos.add(l, r);
+}
+
+mos.run(
+    [&](int i) { /* Add i */ },
+    [&](int i) { /* Remove i */ },
+    [&](int q) { /* ret.at(q) = get_solution(); */ }
+);
+```
+
 ## 問題例
 
 - [AtCoder Beginner Contest 384 G - Abs Sum](https://atcoder.jp/contests/abc384/tasks/abc384_g)
+- [AtCoder Beginner Contest 405 G - Range Shuffle Query](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 
 ## Links
 
