@@ -22,7 +22,8 @@ data:
     \ modint ncr(int n, int r) const {\n        if (n < 0 or r < 0 or n < r) return\
     \ 0;\n        return facs[n] * facinvs[r] * facinvs[n - r];\n    }\n    modint\
     \ operator[](int i) const { return facs[i]; }\n    modint finv(int i) const {\
-    \ return facinvs[i]; }\n};\n// acl_fac<mint> fac(1000000);\n"
+    \ return facinvs[i]; }\n    modint inv(int i) const { return i > 0 ? facinvs[i]\
+    \ * facs[i - 1] : 1; }\n};\n// acl_fac<mint> fac(1000000);\n"
   code: "#pragma once\n#include <atcoder/modint>\n#include <cassert>\n#include <iostream>\n\
     #include <vector>\n\n// Utility functions for atcoder::static_modint<md>\ntemplate\
     \ <int md> std::istream &operator>>(std::istream &is, atcoder::static_modint<md>\
@@ -37,12 +38,13 @@ data:
     \ modint ncr(int n, int r) const {\n        if (n < 0 or r < 0 or n < r) return\
     \ 0;\n        return facs[n] * facinvs[r] * facinvs[n - r];\n    }\n    modint\
     \ operator[](int i) const { return facs[i]; }\n    modint finv(int i) const {\
-    \ return facinvs[i]; }\n};\n// acl_fac<mint> fac(1000000);\n"
+    \ return facinvs[i]; }\n    modint inv(int i) const { return i > 0 ? facinvs[i]\
+    \ * facs[i - 1] : 1; }\n};\n// acl_fac<mint> fac(1000000);\n"
   dependsOn: []
   isVerificationFile: false
   path: number/acl_modint.hpp
   requiredBy: []
-  timestamp: '2021-06-04 02:26:17+09:00'
+  timestamp: '2025-05-12 23:00:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: number/acl_modint.hpp

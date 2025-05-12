@@ -5,6 +5,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_beats.hpp
     title: Segment Tree Beats (based on atcoder::lazy_segtree)
+  - icon: ':warning:'
+    path: segmenttree/trees/acl_range-add-chmax-range-min.hpp
+    title: segmenttree/trees/acl_range-add-chmax-range-min.hpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
     title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
@@ -144,6 +147,7 @@ data:
   - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   - segmenttree/trees/acl_range-update-range-sum-min.hpp
+  - segmenttree/trees/acl_range-add-chmax-range-min.hpp
   - segmenttree/acl_beats.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC

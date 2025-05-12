@@ -506,6 +506,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/binary_lifting.hpp
       title: "Binary lifting / doubling \uFF08\u30C0\u30D6\u30EA\u30F3\u30B0\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/bisect.hpp
+      title: "Binary search \uFF08\u4E8C\u5206\u63A2\u7D22\uFF09"
     - icon: ':warning:'
       path: other_algorithms/bounded_knapsack.hpp
       title: Bounded knapsack problem (Pisinger's algorithm)
@@ -610,6 +613,9 @@ data:
       title: "Range Tree with binary indexed tree \uFF08\u9818\u57DF\u6728\uFF09"
   - name: segmenttree/trees
     pages:
+    - icon: ':warning:'
+      path: segmenttree/trees/acl_range-add-chmax-range-min.hpp
+      title: segmenttree/trees/acl_range-add-chmax-range-min.hpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
       title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
@@ -1481,6 +1487,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/binary_lifting.yuki1013.test.cpp
       title: other_algorithms/test/binary_lifting.yuki1013.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/bisect_yuki2352.test.cpp
+      title: other_algorithms/test/bisect_yuki2352.test.cpp
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/concave_max_plus_convolution.test.cpp
       title: other_algorithms/test/concave_max_plus_convolution.test.cpp
