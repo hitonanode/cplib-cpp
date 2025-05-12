@@ -189,6 +189,7 @@
 "number/test/stern_brocot_tree.test.cpp": "2023-12-26 22:44:49 +0900",
 "number/test/zeta_moebius_transform.test.cpp": "2023-12-26 21:26:22 +0900",
 "other_algorithms/test/binary_lifting.yuki1013.test.cpp": "2023-07-23 19:53:47 +0900",
+"other_algorithms/test/bisect_yuki2352.test.cpp": "2025-05-06 20:50:55 +0900",
 "other_algorithms/test/concave_max_plus_convolution.test.cpp": "2024-10-06 15:03:32 +0900",
 "other_algorithms/test/dual_slope_trick.yuki2114.test.cpp": "2023-08-05 14:49:43 +0900",
 "other_algorithms/test/enumerate_triangles.test.cpp": "2022-01-08 20:23:44 +0900",
