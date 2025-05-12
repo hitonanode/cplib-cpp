@@ -57,6 +57,7 @@ std::vector<int> sort_by_hilbert_order(const std::vector<std::pair<Int, Int>> &p
 // Mo's algorithm with Hilbert order
 // - add(x, y) : Add (x, y) as query.
 // - run(IncX, DecX, IncY, DecY, Query) : run Mo's algorithm.
+// - run(Add, Remove, Query) : run Mo's algorithm with Add, Remove, and Query functions. add(x, y) means [x, y).
 struct MosAlgorithmHilbertOrder {
     int cx, cy;
     std::vector<std::pair<int, int>> queries;
@@ -78,5 +79,10 @@ struct MosAlgorithmHilbertOrder {
             while (x < queries[q].first) inc_x(x, x + 1), ++x;
             query(q);
         }
+    }
+
+    template <typename F1, typename F3, typename F5> void run(F1 Add, F3 Remove, F5 Query) {
+        run([&](int x, int) { Remove(x); }, [&](int, int x) { Add(x); },
+            [&](int y, int) { Add(y); }, [&](int, int y) { Remove(y); }, Query);
     }
 };

@@ -7,6 +7,8 @@ Mo's algorithm の一種で，2 次元平面上の点として表現可能なク
 
 ## 使用方法
 
+### 一般の 2 次元平面上の点クエリの場合
+
 ```cpp
 vector<Result> ret(Q); // 答えを格納する領域
 int x_init = 0, y_init = 0;
@@ -26,9 +28,25 @@ mo.run(inc_x, dec_x, inc_y, dec_y, solve);
 for (auto ans : ret) cout << ans << '\n';
 ```
 
+### 特に半開区間 $[l, r)$ クエリで区間の左右の伸張・収縮が同一の関数で書ける場合
+
+```cpp
+MosAlgorithmHilbertOrder mos(0, 0);
+for (auto [l, r] : queries) {
+    mos.add(l, r);
+}
+
+mos.run(
+    [&](int i) { /* Add i */ },
+    [&](int i) { /* Remove i */ },
+    [&](int q) { /* ret.at(q) = get_solution(); */ }
+);
+```
+
 ## 問題例
 
 - [AtCoder Beginner Contest 384 G - Abs Sum](https://atcoder.jp/contests/abc384/tasks/abc384_g)
+- [AtCoder Beginner Contest 405 G - Range Shuffle Query](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 
 ## Links
 
