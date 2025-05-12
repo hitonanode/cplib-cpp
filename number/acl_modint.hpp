@@ -28,5 +28,6 @@ template <typename modint> struct acl_fac {
     }
     modint operator[](int i) const { return facs[i]; }
     modint finv(int i) const { return facinvs[i]; }
+    modint inv(int i) const { return i > 0 ? facinvs[i] * facs[i - 1] : 1; }
 };
 // acl_fac<mint> fac(1000000);
