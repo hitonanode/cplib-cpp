@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/wavelet_matrix.yuki3207.test.cpp
+    title: data_structure/test/wavelet_matrix.yuki3207.test.cpp
+  - icon: ':heavy_check_mark:'
     path: string/test/rolling_hash_2d.aoj.test.cpp
     title: string/test/rolling_hash_2d.aoj.test.cpp
   - icon: ':heavy_check_mark:'
@@ -106,6 +109,7 @@ data:
   - string/test/rolling_hash_2d.aoj.test.cpp
   - string/test/run_enumerate_lyndon_mersenne61.test.cpp
   - string/test/rolling_hash_mersenne61.test.cpp
+  - data_structure/test/wavelet_matrix.yuki3207.test.cpp
 documentation_of: number/modint_mersenne61.hpp
 layout: document
 title: "$\\mathbb{F}_{2^{61} - 1}$ \uFF08\u30CF\u30C3\u30B7\u30E5\u7528\u30E1\u30EB\

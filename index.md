@@ -172,6 +172,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/static_toptree.hpp
       title: Static top tree
+    - icon: ':heavy_check_mark:'
+      path: data_structure/wavelet_matrix.hpp
+      title: "Wavelet matrix \uFF08\u30A6\u30A7\u30FC\u30D6\u30EC\u30C3\u30C8\u884C\
+        \u5217\uFF09"
   - name: flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -1065,6 +1069,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/static_toptree.test.cpp
       title: data_structure/test/static_toptree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/wavelet_matrix.yuki3207.test.cpp
+      title: data_structure/test/wavelet_matrix.yuki3207.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
+      title: data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/wavelet_matrix_rectangle_sum.test.cpp
+      title: data_structure/test/wavelet_matrix_rectangle_sum.test.cpp
   - name: flow/test
     pages:
     - icon: ':heavy_check_mark:'

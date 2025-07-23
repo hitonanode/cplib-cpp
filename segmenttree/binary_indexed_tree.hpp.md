@@ -26,6 +26,9 @@ data:
     path: data_structure/test/rectangle_sum.test.cpp
     title: data_structure/test/rectangle_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
+    title: data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/binary_indexed_tree.test.cpp
     title: segmenttree/test/binary_indexed_tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -80,6 +83,7 @@ data:
   - segmenttree/test/point-add-range-sum.test.cpp
   - segmenttree/test/binary_indexed_tree.test.cpp
   - tree/test/vertex-add-subtree-sum.guni.test.cpp
+  - data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
   - data_structure/test/rectangle_add_rectangle_sum.point.test.cpp
   - data_structure/test/rectangle_add_rectangle_sum.test.cpp
   - data_structure/test/range_kth_smallest_offline.test.cpp
