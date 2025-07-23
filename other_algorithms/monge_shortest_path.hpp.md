@@ -133,6 +133,7 @@ Cost ret = monge_shortest_path_with_specified_edges(n, l, r, max_weight, f);
 - [AtCoder Beginner Contest 218 H - Red and Blue Lamps](https://atcoder.jp/contests/abc218/tasks/abc218_h)
 - [東京海上日動プログラミングコンテスト2024（AtCoder Beginner Contest 355） G - Baseball](https://atcoder.jp/contests/abc355/tasks/abc355_g)
 - [東北大学プログラミングコンテスト 2022 K - Lebesgue Integral](https://atcoder.jp/contests/tupc2022/tasks/tupc2022_k)
+- [Educational Codeforces Round 181 (Rated for Div. 2) F. Timofey and Docker](https://codeforces.com/contest/2125/problem/F)
 
 ## Links
 

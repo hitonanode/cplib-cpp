@@ -536,6 +536,9 @@ data:
       path: other_algorithms/longest_increasing_subsequence.hpp
       title: "Longest increasing subsequence \uFF08LIS, \u6700\u9577\u5897\u52A0\u90E8\
         \u5206\u5217\uFF09"
+    - icon: ':warning:'
+      path: other_algorithms/monge_checker.hpp
+      title: Monge checker
     - icon: ':heavy_check_mark:'
       path: other_algorithms/monge_shortest_path.hpp
       title: Shortest path of DAG with Monge weights
