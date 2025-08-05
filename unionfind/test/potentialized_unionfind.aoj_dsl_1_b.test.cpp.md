@@ -29,7 +29,7 @@ data:
     \ sz[t], pot[t] = rel_diff;\n        return true;\n    }\n    S weight(int x)\
     \ { return find(x), pot[x]; }\n    S diff(int s, int t) { return weight(t) + (-weight(s));\
     \ } // return f[t] - f[s]\n    int count(int x) { return sz[find(x)]; }\n    bool\
-    \ same(int s, int t) { return find(s) == find(t); }\n};\n#line 2 \"unionfind/test/potentialized_unionfind.test.cpp\"\
+    \ same(int s, int t) { return find(s) == find(t); }\n};\n#line 2 \"unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp\"\
     \n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B&lang=jp\"\
     \nusing namespace std;\n\nint main() {\n    int N, Q, x, y, z;\n    cin >> N >>\
     \ Q;\n    PotentializedUnionFind<int> uf(N);\n    for (int i = 0; i < Q; i++)\
@@ -50,15 +50,15 @@ data:
   dependsOn:
   - unionfind/potentialized_unionfind.hpp
   isVerificationFile: true
-  path: unionfind/test/potentialized_unionfind.test.cpp
+  path: unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
   requiredBy: []
-  timestamp: '2024-10-02 23:55:49+09:00'
+  timestamp: '2025-08-05 22:50:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: unionfind/test/potentialized_unionfind.test.cpp
+documentation_of: unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
 layout: document
 redirect_from:
-- /verify/unionfind/test/potentialized_unionfind.test.cpp
-- /verify/unionfind/test/potentialized_unionfind.test.cpp.html
-title: unionfind/test/potentialized_unionfind.test.cpp
+- /verify/unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
+- /verify/unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp.html
+title: unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
 ---

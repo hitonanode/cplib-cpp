@@ -165,7 +165,7 @@ data:
     \ ModIntRuntime(std::min(x.val_, md - x.val_));\n    }\n};\nint ModIntRuntime::md\
     \ = 1;\n#line 2 \"random/rand_nondeterministic.hpp\"\n#include <chrono>\n#include\
     \ <random>\n\nstruct rand_int_ {\n    using lint = long long;\n    std::mt19937\
-    \ mt;\n    rand_int_() : mt(std::chrono::steady_clock::now().time_since_epoch().count())\
+    \ mt;\n    // rand_int_() : mt(42) {}\n    rand_int_() : mt(std::chrono::steady_clock::now().time_since_epoch().count())\
     \ {}\n    lint operator()(lint x) { return this->operator()(0, x); } // [0, x)\n\
     \    lint operator()(lint l, lint r) {\n        std::uniform_int_distribution<lint>\
     \ d(l, r - 1);\n        return d(mt);\n    }\n} rnd;\n#line 6 \"graph/test/chromatic_number.test.cpp\"\
@@ -195,7 +195,7 @@ data:
   isVerificationFile: true
   path: graph/test/chromatic_number.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:05:47+09:00'
+  timestamp: '2025-08-05 22:50:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/chromatic_number.test.cpp

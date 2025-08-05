@@ -8,29 +8,30 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"geometry/sort_by_argument.hpp\"\n#include <cmath>\n\n//\
-    \ CUT begin\n// Point on grid, sortable by its argument\nstruct Point {\n    constexpr\
-    \ static double eps = 1e-2;\n    long long X, Y;\n    double theta;\n    Point()\
-    \ = default;\n    Point(long long x, long long y) : X(x), Y(y), theta(std::atan2(y,\
-    \ x)) {}\n    bool operator<(const Point &r) const {\n        double b = theta\
-    \ - r.theta;\n        return std::abs(b) > eps ? (b < 0) : (X * r.Y > r.X * Y);\n\
-    \    }\n    bool operator==(const Point &r) const {\n        return std::abs(theta\
-    \ - r.theta) < eps and X * r.Y == r.X * Y;\n    }\n    void rotate_pi() {\n  \
-    \      theta += M_PI;\n        X *= -1;\n        Y *= -1;\n    }\n};\n"
-  code: "#pragma once\n#include <cmath>\n\n// CUT begin\n// Point on grid, sortable\
-    \ by its argument\nstruct Point {\n    constexpr static double eps = 1e-2;\n \
-    \   long long X, Y;\n    double theta;\n    Point() = default;\n    Point(long\
-    \ long x, long long y) : X(x), Y(y), theta(std::atan2(y, x)) {}\n    bool operator<(const\
-    \ Point &r) const {\n        double b = theta - r.theta;\n        return std::abs(b)\
-    \ > eps ? (b < 0) : (X * r.Y > r.X * Y);\n    }\n    bool operator==(const Point\
-    \ &r) const {\n        return std::abs(theta - r.theta) < eps and X * r.Y == r.X\
-    \ * Y;\n    }\n    void rotate_pi() {\n        theta += M_PI;\n        X *= -1;\n\
-    \        Y *= -1;\n    }\n};\n"
+  bundledCode: "#line 2 \"geometry/sort_by_argument.hpp\"\n\n// Point on grid, sortable\
+    \ by its argument\nstruct Point {\n    long long X, Y;\n    Point() = default;\n\
+    \    Point(long long x, long long y) : X(x), Y(y) {}\n\n    bool operator<(const\
+    \ Point &r) const {\n        const int ll = lower_or_upper(), lr = r.lower_or_upper();\n\
+    \        if (ll != lr) return ll < lr;\n        return X * r.Y > r.X * Y;\n  \
+    \  }\n\n    bool operator==(const Point &r) const {\n        return lower_or_upper()\
+    \ == r.lower_or_upper() and X * r.Y == r.X * Y;\n    }\n\n    int lower_or_upper()\
+    \ const {\n        if (Y) return Y > 0 ? 1 : -1;\n        if (X) return X > 0\
+    \ ? -1 : 1;\n        return 0; // origin\n    }\n\n    void rotate_pi() { X =\
+    \ -X, Y = -Y; }\n};\n"
+  code: "#pragma once\n\n// Point on grid, sortable by its argument\nstruct Point\
+    \ {\n    long long X, Y;\n    Point() = default;\n    Point(long long x, long\
+    \ long y) : X(x), Y(y) {}\n\n    bool operator<(const Point &r) const {\n    \
+    \    const int ll = lower_or_upper(), lr = r.lower_or_upper();\n        if (ll\
+    \ != lr) return ll < lr;\n        return X * r.Y > r.X * Y;\n    }\n\n    bool\
+    \ operator==(const Point &r) const {\n        return lower_or_upper() == r.lower_or_upper()\
+    \ and X * r.Y == r.X * Y;\n    }\n\n    int lower_or_upper() const {\n       \
+    \ if (Y) return Y > 0 ? 1 : -1;\n        if (X) return X > 0 ? -1 : 1;\n     \
+    \   return 0; // origin\n    }\n\n    void rotate_pi() { X = -X, Y = -Y; }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: geometry/sort_by_argument.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2025-08-05 22:50:49+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/sort_by_argument.hpp

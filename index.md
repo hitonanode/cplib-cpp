@@ -1803,14 +1803,17 @@ data:
       path: unionfind/test/fully_persistent_uf.test.cpp
       title: unionfind/test/fully_persistent_uf.test.cpp
     - icon: ':heavy_check_mark:'
-      path: unionfind/test/potentialized_unionfind.test.cpp
-      title: unionfind/test/potentialized_unionfind.test.cpp
+      path: unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
+      title: unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
     - icon: ':heavy_check_mark:'
       path: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
       title: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
     - icon: ':heavy_check_mark:'
       path: unionfind/test/potentialized_unionfind_int.aoj3142.test.cpp
       title: unionfind/test/potentialized_unionfind_int.aoj3142.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: unionfind/test/potentialized_unionfind_modint.test.cpp
+      title: unionfind/test/potentialized_unionfind_modint.test.cpp
     - icon: ':heavy_check_mark:'
       path: unionfind/test/unionfind.test.cpp
       title: unionfind/test/unionfind.test.cpp

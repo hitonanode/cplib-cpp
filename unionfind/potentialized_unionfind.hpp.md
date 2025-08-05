@@ -4,14 +4,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: unionfind/test/potentialized_unionfind.test.cpp
-    title: unionfind/test/potentialized_unionfind.test.cpp
+    path: unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
+    title: unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
   - icon: ':heavy_check_mark:'
     path: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
     title: unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
   - icon: ':heavy_check_mark:'
     path: unionfind/test/potentialized_unionfind_int.aoj3142.test.cpp
     title: unionfind/test/potentialized_unionfind_int.aoj3142.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: unionfind/test/potentialized_unionfind_modint.test.cpp
+    title: unionfind/test/potentialized_unionfind_modint.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -56,7 +59,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - unionfind/test/potentialized_unionfind_int.aoj3142.test.cpp
-  - unionfind/test/potentialized_unionfind.test.cpp
+  - unionfind/test/potentialized_unionfind_modint.test.cpp
+  - unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
   - unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
 documentation_of: unionfind/potentialized_unionfind.hpp
 layout: document
