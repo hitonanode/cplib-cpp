@@ -208,6 +208,11 @@ data:
       path: flow/networksimplex.hpp
       title: "Network simplex method \uFF08\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\
         \u4F53\u6CD5\uFF0Cbased on LEMON\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: flow/submodular_optimization_via_graph_cut.hpp
+      title: "Submodular function optimization via graph cut \uFF08\u6700\u5C0F\u30AB\
+        \u30C3\u30C8\u5E30\u7740\u306B\u3088\u308B\u52A3\u30E2\u30B8\u30E5\u30E9\u95A2\
+        \u6570\u306E\u6700\u5C0F\u5316\uFF09"
   - name: formal_power_series
     pages:
     - icon: ':heavy_check_mark:'
@@ -1119,6 +1124,45 @@ data:
     - icon: ':heavy_check_mark:'
       path: flow/test/mincostflow.yuki1324.test.cpp
       title: flow/test/mincostflow.yuki1324.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.aoj2496.test.cpp
+      title: flow/test/submodular_opt.aoj2496.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.aoj2903.test.cpp
+      title: flow/test/submodular_opt.aoj2903.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.aoj2943.test.cpp
+      title: flow/test/submodular_opt.aoj2943.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.aoj3058.test.cpp
+      title: flow/test/submodular_opt.aoj3058.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.yuki119.test.cpp
+      title: flow/test/submodular_opt.yuki119.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.yuki1479.test.cpp
+      title: flow/test/submodular_opt.yuki1479.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.yuki1541.test.cpp
+      title: flow/test/submodular_opt.yuki1541.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.yuki1900.test.cpp
+      title: flow/test/submodular_opt.yuki1900.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.yuki1984.test.cpp
+      title: flow/test/submodular_opt.yuki1984.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.yuki2320.test.cpp
+      title: flow/test/submodular_opt.yuki2320.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.yuki2713.test.cpp
+      title: flow/test/submodular_opt.yuki2713.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.yuki3201.test.cpp
+      title: flow/test/submodular_opt.yuki3201.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: flow/test/submodular_opt.yuki957.test.cpp
+      title: flow/test/submodular_opt.yuki957.test.cpp
   - name: formal_power_series/test
     pages:
     - icon: ':heavy_check_mark:'
