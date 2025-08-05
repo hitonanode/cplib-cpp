@@ -1,8 +1,9 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/sort_points_by_argument"
 #include "geometry/sort_by_argument.hpp"
+
 #include <algorithm>
 #include <iostream>
 #include <vector>
-#define PROBLEM "https://judge.yosupo.jp/problem/sort_points_by_argument"
 using namespace std;
 
 int main() {
