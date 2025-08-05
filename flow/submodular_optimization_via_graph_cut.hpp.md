@@ -530,7 +530,7 @@ using V = pair<int, int>;
 SubmodularOptimizationViaGraphCut<V> so;
 const long long inf = 1LL << 30;
 
-const auto x = so.GenIntVar({{i, 0}, {i, 1}}, inf); // Create int value 0 <= x < 3
+const auto x = so.GenIntVar({V{i, 0}, V{i, 1}}, inf); // Create int value 0 <= x < 3
 so.Impose(x, {5LL, 0LL, 3LL}); // Impose cost function f(x) = 5 (if x = 0), 0 (if x = 1), 3 (if x = 2).
 so.ImposeLbUb(x, 2, y, 0, 5000); // If x >= 2 && y <= 0, impose cost by 5000
 ```
