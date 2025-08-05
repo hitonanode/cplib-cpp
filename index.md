@@ -566,6 +566,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/smawk.hpp
       title: Totally Monotone Matrix Searching (SMAWK)
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/tree_pop_order_optimization.hpp
+      title: "Tree pop order optimization / \"01 on Tree\" \uFF08\u6728\u306E\u6839\
+        \u304B\u3089 2 \u6B21\u5143\u30D9\u30AF\u30C8\u30EB\u3084 01 \u6587\u5B57\u5217\
+        \u306A\u3069\u3092 pop \u3059\u308B\u9806\u5217\u306B\u95A2\u3059\u308B\u6700\
+        \u5C0F\u5316\uFF09"
   - name: random
     pages:
     - icon: ':warning:'
@@ -1571,6 +1577,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/slope_trick_stress.test.cpp
       title: other_algorithms/test/slope_trick_stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/tree_pop_order_optimization.test.cpp
+      title: other_algorithms/test/tree_pop_order_optimization.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/tree_pop_order_optimization.yuki3148.test.cpp
+      title: other_algorithms/test/tree_pop_order_optimization.yuki3148.test.cpp
   - name: segmenttree/test
     pages:
     - icon: ':heavy_check_mark:'
