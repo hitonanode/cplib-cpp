@@ -333,6 +333,10 @@ data:
       path: graph/maximum_independent_set.hpp
       title: "Maximum independent set \uFF08\u6700\u5927\u72EC\u7ACB\u96C6\u5408\uFF09"
     - icon: ':heavy_check_mark:'
+      path: graph/minimum_steiner_tree.hpp
+      title: "Minimum Steiner tree \uFF08\u6700\u5C0F\u30B7\u30E5\u30BF\u30A4\u30CA\
+        \u30FC\u6728\uFF09"
+    - icon: ':heavy_check_mark:'
       path: graph/nonzero_path_of_group_labeled_graph.hpp
       title: "Shortest Non-zero Path in Group-Labeled Graphs \uFF08\u7121\u5411\u30B0\
         \u30E9\u30D5\u306E\u7FA4\u30E9\u30D9\u30EB\u5236\u7D04\u4ED8\u304D\u6700\u77ED\
@@ -1338,6 +1342,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/maximum_independent_set.test.cpp
       title: graph/test/maximum_independent_set.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: graph/test/minimum_steiner_tree.test.cpp
+      title: graph/test/minimum_steiner_tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: graph/test/nonzero_path_of_group_labeled_graph.test.cpp
       title: graph/test/nonzero_path_of_group_labeled_graph.test.cpp
