@@ -549,8 +549,15 @@ data:
       path: other_algorithms/monge_checker.hpp
       title: Monge checker
     - icon: ':heavy_check_mark:'
+      path: other_algorithms/monge_d_edge_shortest_paths_enum.hpp
+      title: "Shortest paths of DAG with Monge weights using $d = 1, \\ldots, d_{\\\
+        mathrm{max}}$ edges \uFF08Monge \u91CD\u307F DAG \u306E\u4F7F\u7528\u8FBA\u6570\
+        \u6BCE\u306E\u6700\u77ED\u8DEF\u9577\u5217\u6319\uFF09"
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/monge_shortest_path.hpp
-      title: Shortest path of DAG with Monge weights
+      title: "Shortest path of DAG with Monge weights \uFF08Monge \u91CD\u307F\u306E\
+        \ DAG \u306E\u6700\u77ED\u8DEF\u9577\u30FB\u8FBA\u6570\u4E0A\u4E0B\u9650\u6307\
+        \u5B9A\u53EF\u80FD\uFF09"
     - icon: ':warning:'
       path: other_algorithms/mos_algorithm.hpp
       title: "Mo's algorithm \uFF08\u533A\u9593\u30AF\u30A8\u30EA\u306B\u95A2\u3059\
@@ -1568,6 +1575,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/longest_increasing_subsequence.test.cpp
       title: other_algorithms/test/longest_increasing_subsequence.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp
+      title: other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/monge_shortest_path.yuki705.test.cpp
       title: other_algorithms/test/monge_shortest_path.yuki705.test.cpp

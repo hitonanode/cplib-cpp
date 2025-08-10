@@ -59,14 +59,14 @@ data:
   isVerificationFile: false
   path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
   requiredBy:
-  - formal_power_series/sum_of_exponential_times_polynomial.hpp
   - number/arithmetic_cumsum.hpp
+  - formal_power_series/sum_of_exponential_times_polynomial.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - number/test/arithmetic_function_totient.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
-  - number/test/arithmetic_function_totient.test.cpp
 documentation_of: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
 layout: document
 title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)

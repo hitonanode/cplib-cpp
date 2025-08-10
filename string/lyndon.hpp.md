@@ -152,8 +152,8 @@ data:
   verifiedWith:
   - string/test/run_enumerate_lyndon_hash.test.cpp
   - string/test/run_enumerate_lyndon_mersenne61.test.cpp
-  - string/test/run_enumerate_lyndon_rmq.test.cpp
   - string/test/lyndon.test.cpp
+  - string/test/run_enumerate_lyndon_rmq.test.cpp
 documentation_of: string/lyndon.hpp
 layout: document
 title: "Lyndon words \uFF08Lyndon \u6587\u5B57\u5217\u306B\u95A2\u3059\u308B\u5404\

@@ -132,10 +132,10 @@ data:
   timestamp: '2024-05-03 14:40:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_bitset_mul.test.cpp
-  - linear_algebra_matrix/test/linalg_bitset_det.test.cpp
   - linear_algebra_matrix/test/linalg_bitset.yuki1421.test.cpp
+  - linear_algebra_matrix/test/linalg_bitset_det.test.cpp
   - linear_algebra_matrix/test/linalg_bitset.test.cpp
+  - linear_algebra_matrix/test/linalg_bitset_mul.test.cpp
 documentation_of: linear_algebra_matrix/linalg_bitset.hpp
 layout: document
 title: "Linear algebra on $\\mathbb{F}_{2}$ using std::bitset (std::bitset \u3092\u4F7F\

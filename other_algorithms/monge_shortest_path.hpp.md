@@ -93,7 +93,9 @@ data:
   - other_algorithms/test/monge_shortest_path.yuki705.test.cpp
 documentation_of: other_algorithms/monge_shortest_path.hpp
 layout: document
-title: Shortest path of DAG with Monge weights
+title: "Shortest path of DAG with Monge weights \uFF08Monge \u91CD\u307F\u306E DAG\
+  \ \u306E\u6700\u77ED\u8DEF\u9577\u30FB\u8FBA\u6570\u4E0A\u4E0B\u9650\u6307\u5B9A\
+  \u53EF\u80FD\uFF09"
 ---
 
 $n$ 頂点の DAG で辺重みが Monge となるようなものに対して最短路長を高速に求める． [1] で紹介されている簡易版 LARSCH Algorithm が実装されていて，計算量は $O(n \log n)$ ．

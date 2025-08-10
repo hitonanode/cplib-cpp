@@ -153,18 +153,18 @@ data:
   isVerificationFile: false
   path: graph/strongly_connected_components.hpp
   requiredBy:
-  - graph/dulmage_mendelsohn_decomposition.hpp
   - combinatorial_opt/matroids/transversal_matroid.hpp
+  - graph/dulmage_mendelsohn_decomposition.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/cycle_detection_directed.test.cpp
-  - graph/test/strongly_connected_components.test.cpp
-  - graph/test/dulmage_mendelsohn.yuki1745.test.cpp
-  - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
-  - graph/test/dulmage_mendelsohn.yuki1744.test.cpp
-  - graph/test/2sat_solver.test.cpp
   - graph/test/topological_sort.test.cpp
+  - graph/test/dulmage_mendelsohn.yuki1744.test.cpp
+  - graph/test/cycle_detection_directed.test.cpp
+  - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
+  - graph/test/dulmage_mendelsohn.yuki1745.test.cpp
+  - graph/test/strongly_connected_components.test.cpp
+  - graph/test/2sat_solver.test.cpp
 documentation_of: graph/strongly_connected_components.hpp
 layout: document
 redirect_from:

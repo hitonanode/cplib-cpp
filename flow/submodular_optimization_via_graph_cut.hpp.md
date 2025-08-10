@@ -475,18 +475,18 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - flow/test/submodular_opt.aoj3058.test.cpp
-  - flow/test/submodular_opt.yuki2713.test.cpp
   - flow/test/submodular_opt.yuki2320.test.cpp
-  - flow/test/submodular_opt.yuki1541.test.cpp
-  - flow/test/submodular_opt.aoj2903.test.cpp
-  - flow/test/submodular_opt.yuki1479.test.cpp
-  - flow/test/submodular_opt.yuki119.test.cpp
-  - flow/test/submodular_opt.yuki3201.test.cpp
-  - flow/test/submodular_opt.yuki1984.test.cpp
   - flow/test/submodular_opt.yuki1900.test.cpp
+  - flow/test/submodular_opt.yuki2713.test.cpp
+  - flow/test/submodular_opt.yuki1479.test.cpp
   - flow/test/submodular_opt.yuki957.test.cpp
-  - flow/test/submodular_opt.aoj2496.test.cpp
+  - flow/test/submodular_opt.yuki1541.test.cpp
+  - flow/test/submodular_opt.yuki119.test.cpp
+  - flow/test/submodular_opt.yuki1984.test.cpp
   - flow/test/submodular_opt.aoj2943.test.cpp
+  - flow/test/submodular_opt.yuki3201.test.cpp
+  - flow/test/submodular_opt.aoj2496.test.cpp
+  - flow/test/submodular_opt.aoj2903.test.cpp
 documentation_of: flow/submodular_optimization_via_graph_cut.hpp
 layout: document
 title: "Submodular function optimization via graph cut \uFF08\u6700\u5C0F\u30AB\u30C3\

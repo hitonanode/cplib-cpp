@@ -105,8 +105,8 @@ data:
   path: segmenttree/acl_beats.hpp
   requiredBy:
   - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-  - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   - segmenttree/trees/acl_range-add-chmax-range-sum.hpp
+  - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   timestamp: '2024-04-28 17:28:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

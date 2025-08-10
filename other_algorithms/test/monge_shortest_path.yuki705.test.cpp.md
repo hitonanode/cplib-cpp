@@ -3,7 +3,9 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: other_algorithms/monge_shortest_path.hpp
-    title: Shortest path of DAG with Monge weights
+    title: "Shortest path of DAG with Monge weights \uFF08Monge \u91CD\u307F\u306E\
+      \ DAG \u306E\u6700\u77ED\u8DEF\u9577\u30FB\u8FBA\u6570\u4E0A\u4E0B\u9650\u6307\
+      \u5B9A\u53EF\u80FD\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
