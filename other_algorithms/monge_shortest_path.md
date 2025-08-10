@@ -1,5 +1,5 @@
 ---
-title: Shortest path of DAG with Monge weights
+title: Shortest path of DAG with Monge weights （Monge 重みの DAG の最短路長・辺数上下限指定可能）
 documentation_of: ./monge_shortest_path.hpp
 ---
 
