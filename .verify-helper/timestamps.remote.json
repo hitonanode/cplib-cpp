@@ -133,6 +133,7 @@
 "graph/test/max_weight_independent_set.aoj3519.test.cpp": "2022-05-01 19:26:34 +0900",
 "graph/test/max_weight_independent_set.lc.test.cpp": "2022-05-01 19:26:34 +0900",
 "graph/test/maximum_independent_set.test.cpp": "2022-05-01 19:26:34 +0900",
+"graph/test/minimum_steiner_tree.test.cpp": "2025-08-10 22:59:17 +0900",
 "graph/test/nonzero_path_of_group_labeled_graph.test.cpp": "2022-01-08 20:23:44 +0900",
 "graph/test/shortest_cycle.test.cpp": "2023-07-15 20:54:51 +0900",
 "graph/test/shortest_path.test.cpp": "2022-05-01 15:28:23 +0900",
