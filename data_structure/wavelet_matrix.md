@@ -72,8 +72,10 @@ cout << ans << endl;
 ## 問題例
 
 - [Library Checker: Point Add Rectangle Sum](https://judge.yosupo.jp/problem/point_add_rectangle_sum)
+- [Library Checker: Static Range Sum with Upper Bound](https://judge.yosupo.jp/problem/static_range_sum_with_upper_bound)
 - [yukicoder No.3207 Digital Font](https://yukicoder.me/problems/no/3207)
 
 ## 参考文献・リンク
 
 - [ウェーブレット行列(wavelet matrix) - Eating Your Own Cat Food](https://miti-7.hatenablog.com/entry/2018/04/28/152259)
+- [Wavelet Matrix | Nyaan’s Library](https://nyaannyaan.github.io/library/data-structure-2d/wavelet-matrix.hpp.html)
