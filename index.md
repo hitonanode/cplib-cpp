@@ -1098,6 +1098,9 @@ data:
       path: data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
       title: data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp
+      title: data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp
+    - icon: ':heavy_check_mark:'
       path: data_structure/test/wavelet_matrix_rectangle_sum.test.cpp
       title: data_structure/test/wavelet_matrix_rectangle_sum.test.cpp
   - name: flow/test
