@@ -12,11 +12,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/minimum_steiner_tree
+    PROBLEM: https://yukicoder.me/problems/no/114
     links:
-    - https://judge.yosupo.jp/problem/minimum_steiner_tree
-  bundledCode: "#line 1 \"graph/test/minimum_steiner_tree.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/minimum_steiner_tree\"\n#line 2 \"graph/minimum_steiner_tree.hpp\"\
+    - https://yukicoder.me/problems/no/114
+  bundledCode: "#line 1 \"graph/test/minimum_steiner_tree.yuki114.test.cpp\"\n#define\
+    \ PROBLEM \"https://yukicoder.me/problems/no/114\"\n#line 2 \"graph/minimum_steiner_tree.hpp\"\
     \n\n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <numeric>\n\
     #include <queue>\n#include <set>\n#include <tuple>\n#include <utility>\n#include\
     \ <vector>\n\n// Minimum Steiner tree of undirected connected graph\n// n vertices,\
@@ -109,38 +109,34 @@ data:
     \ false;\n        return pow(3, k) * n + pow(2, k) * m * log(m) < pow(2, n - k)\
     \ * m;\n    };\n    return (use_dp() ? MinimumSteinerTreeDP<T>(n, edges, terminals)\n\
     \                     : MinimumSteinerTreeDense<T>(n, edges, terminals));\n}\n\
-    #line 3 \"graph/test/minimum_steiner_tree.test.cpp\"\n\n#include <iostream>\n\
-    #line 7 \"graph/test/minimum_steiner_tree.test.cpp\"\nusing namespace std;\n\n\
-    int main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N,\
-    \ M;\n    cin >> N >> M;\n\n    vector<tuple<int, int, long long>> edges(M);\n\
-    \    for (auto &[u, v, w] : edges) cin >> u >> v >> w;\n\n    int K;\n    cin\
-    \ >> K;\n    vector<int> terminals(K);\n    for (auto &t : terminals) cin >> t;\n\
+    #line 3 \"graph/test/minimum_steiner_tree.yuki114.test.cpp\"\n\n#include <iostream>\n\
+    #line 7 \"graph/test/minimum_steiner_tree.yuki114.test.cpp\"\nusing namespace\
+    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n\
+    \    int N, M, T;\n    cin >> N >> M >> T;\n\n    vector<tuple<int, int, int>>\
+    \ edges(M);\n    for (auto &[u, v, w] : edges) cin >> u >> v >> w, --u, --v;\n\
+    \n    vector<int> terminals(T);\n    for (auto &v : terminals) cin >> v, --v;\n\
     \n    const auto [cost, used_edges] = MinimumSteinerTree(N, edges, terminals);\n\
-    \    cout << cost << ' ' << used_edges.size() << '\\n';\n    for (int i = 0; i\
-    \ < (int)used_edges.size(); ++i) {\n        cout << used_edges.at(i) << (i + 1\
-    \ < (int)used_edges.size() ? ' ' : '\\n');\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/minimum_steiner_tree\"\n\
-    #include \"../minimum_steiner_tree.hpp\"\n\n#include <iostream>\n#include <tuple>\n\
-    #include <vector>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n\n    int N, M;\n    cin >> N >> M;\n\n    vector<tuple<int,\
-    \ int, long long>> edges(M);\n    for (auto &[u, v, w] : edges) cin >> u >> v\
-    \ >> w;\n\n    int K;\n    cin >> K;\n    vector<int> terminals(K);\n    for (auto\
-    \ &t : terminals) cin >> t;\n\n    const auto [cost, used_edges] = MinimumSteinerTree(N,\
-    \ edges, terminals);\n    cout << cost << ' ' << used_edges.size() << '\\n';\n\
-    \    for (int i = 0; i < (int)used_edges.size(); ++i) {\n        cout << used_edges.at(i)\
-    \ << (i + 1 < (int)used_edges.size() ? ' ' : '\\n');\n    }\n}\n"
+    \    cout << cost << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/114\"\n#include \"../minimum_steiner_tree.hpp\"\
+    \n\n#include <iostream>\n#include <tuple>\n#include <vector>\nusing namespace\
+    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n\
+    \    int N, M, T;\n    cin >> N >> M >> T;\n\n    vector<tuple<int, int, int>>\
+    \ edges(M);\n    for (auto &[u, v, w] : edges) cin >> u >> v >> w, --u, --v;\n\
+    \n    vector<int> terminals(T);\n    for (auto &v : terminals) cin >> v, --v;\n\
+    \n    const auto [cost, used_edges] = MinimumSteinerTree(N, edges, terminals);\n\
+    \    cout << cost << '\\n';\n}\n"
   dependsOn:
   - graph/minimum_steiner_tree.hpp
   isVerificationFile: true
-  path: graph/test/minimum_steiner_tree.test.cpp
+  path: graph/test/minimum_steiner_tree.yuki114.test.cpp
   requiredBy: []
   timestamp: '2025-08-11 21:45:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph/test/minimum_steiner_tree.test.cpp
+documentation_of: graph/test/minimum_steiner_tree.yuki114.test.cpp
 layout: document
 redirect_from:
-- /verify/graph/test/minimum_steiner_tree.test.cpp
-- /verify/graph/test/minimum_steiner_tree.test.cpp.html
-title: graph/test/minimum_steiner_tree.test.cpp
+- /verify/graph/test/minimum_steiner_tree.yuki114.test.cpp
+- /verify/graph/test/minimum_steiner_tree.yuki114.test.cpp.html
+title: graph/test/minimum_steiner_tree.yuki114.test.cpp
 ---

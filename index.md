@@ -1353,6 +1353,9 @@ data:
       path: graph/test/minimum_steiner_tree.test.cpp
       title: graph/test/minimum_steiner_tree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: graph/test/minimum_steiner_tree.yuki114.test.cpp
+      title: graph/test/minimum_steiner_tree.yuki114.test.cpp
+    - icon: ':heavy_check_mark:'
       path: graph/test/nonzero_path_of_group_labeled_graph.test.cpp
       title: graph/test/nonzero_path_of_group_labeled_graph.test.cpp
     - icon: ':heavy_check_mark:'

@@ -6,18 +6,23 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/minimum_steiner_tree.test.cpp
     title: graph/test/minimum_steiner_tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: graph/test/minimum_steiner_tree.yuki114.test.cpp
+    title: graph/test/minimum_steiner_tree.yuki114.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://judge.yosupo.jp/problem/minimum_steiner_tree
+    - https://yukicoder.me/problems/no/114
   bundledCode: "#line 2 \"graph/minimum_steiner_tree.hpp\"\n\n#include <algorithm>\n\
-    #include <cassert>\n#include <queue>\n#include <tuple>\n#include <utility>\n#include\
-    \ <vector>\n\n// Minimum Steiner tree of undirected connected graph\n// n vertices,\
-    \ m edges, k terminals\n// Complexity: O(3^k n + 2^k m log m)\n// Verify: https://judge.yosupo.jp/problem/minimum_steiner_tree\n\
-    template <class T>\nstd::pair<T, std::vector<int>>\nMinimumSteinerTree(int n,\
-    \ const std::vector<std::tuple<int, int, T>> &edges,\n                   const\
+    #include <cassert>\n#include <cmath>\n#include <numeric>\n#include <queue>\n#include\
+    \ <set>\n#include <tuple>\n#include <utility>\n#include <vector>\n\n// Minimum\
+    \ Steiner tree of undirected connected graph\n// n vertices, m edges, k terminals\n\
+    // Complexity: O(3^k n + 2^k m log m)\n// Verify: https://judge.yosupo.jp/problem/minimum_steiner_tree\n\
+    template <class T>\nstd::pair<T, std::vector<int>>\nMinimumSteinerTreeDP(int n,\
+    \ const std::vector<std::tuple<int, int, T>> &edges,\n                     const\
     \ std::vector<int> &terminals) {\n\n    if (n <= 1 or terminals.size() <= 1) return\
     \ {T{}, {}};\n    assert(!edges.empty());\n\n    std::vector<std::vector<std::tuple<int,\
     \ int, T>>> to(n);\n    for (int i = 0; i < (int)edges.size(); ++i) {\n      \
@@ -57,17 +62,64 @@ data:
     \       } else {\n            self(self, f(i, prv_mask));\n            self(self,\
     \ f(i, mask ^ prv_mask));\n        }\n    };\n    rec(rec, f(argmin, (1 << k)\
     \ - 1));\n\n    std::sort(used_edges.begin(), used_edges.end());\n\n    return\
-    \ {ans, used_edges};\n}\n"
-  code: "#pragma once\n\n#include <algorithm>\n#include <cassert>\n#include <queue>\n\
-    #include <tuple>\n#include <utility>\n#include <vector>\n\n// Minimum Steiner\
-    \ tree of undirected connected graph\n// n vertices, m edges, k terminals\n//\
-    \ Complexity: O(3^k n + 2^k m log m)\n// Verify: https://judge.yosupo.jp/problem/minimum_steiner_tree\n\
-    template <class T>\nstd::pair<T, std::vector<int>>\nMinimumSteinerTree(int n,\
-    \ const std::vector<std::tuple<int, int, T>> &edges,\n                   const\
-    \ std::vector<int> &terminals) {\n\n    if (n <= 1 or terminals.size() <= 1) return\
-    \ {T{}, {}};\n    assert(!edges.empty());\n\n    std::vector<std::vector<std::tuple<int,\
-    \ int, T>>> to(n);\n    for (int i = 0; i < (int)edges.size(); ++i) {\n      \
-    \  auto [u, v, w] = edges[i];\n        assert(w >= 0);\n        to.at(u).emplace_back(v,\
+    \ {ans, used_edges};\n}\n\n// Complexity: O(m log m + 2^(n - k) m alpha(n))\n\
+    // Verify: https://yukicoder.me/problems/no/114\ntemplate <class T>\nstd::pair<T,\
+    \ std::vector<int>>\nMinimumSteinerTreeDense(int n, const std::vector<std::tuple<int,\
+    \ int, T>> &edges,\n                        const std::vector<int> &terminals)\
+    \ {\n    if (n <= 1 or terminals.size() <= 1) return {T{}, {}};\n\n    std::vector<int>\
+    \ unfixed;\n    {\n        std::vector<int> is_unfixed(n, 1);\n        for (int\
+    \ v : terminals) is_unfixed.at(v) = 0;\n        for (int i = 0; i < n; ++i) {\n\
+    \            if (is_unfixed.at(i)) unfixed.emplace_back(i);\n        }\n    }\n\
+    \n    struct {\n        int n;\n        std::vector<int> par, cou;\n        void\
+    \ reset() {\n            par.resize(n);\n            std::iota(par.begin(), par.end(),\
+    \ 0);\n            cou.assign(n, 1);\n        }\n        int find(int x) { return\
+    \ (par[x] == x) ? x : (par[x] = find(par[x])); }\n        void merge(int x, int\
+    \ y) {\n            x = find(x), y = find(y);\n            if (x == y) return;\n\
+    \            if (cou[x] < cou[y]) std::swap(x, y);\n            par[y] = x, cou[x]\
+    \ += cou[y];\n        }\n        bool same(int x, int y) { return find(x) == find(y);\
+    \ }\n    } dsu{n};\n\n    auto sorted_edges = edges;\n    std::sort(sorted_edges.begin(),\
+    \ sorted_edges.end(),\n              [&](const auto &l, const auto &r) { return\
+    \ std::get<2>(l) < std::get<2>(r); });\n\n    std::vector<int> is_edge_used(sorted_edges.size(),\
+    \ -1);\n    std::vector<int> is_banned(n, -1);\n\n    T best_cost = T{};\n   \
+    \ int best_ban_set = -1;\n\n    auto solve = [&](int ban_set) -> std::pair<bool,\
+    \ T> {\n        dsu.reset();\n        for (int d = 0; d < (int)unfixed.size();\
+    \ ++d) {\n            if (ban_set & (1 << d)) is_banned.at(unfixed.at(d)) = ban_set;\n\
+    \        }\n\n        T res{0};\n        for (int pos = 0; pos < (int)sorted_edges.size();\
+    \ ++pos) {\n            auto [u, v, w] = sorted_edges.at(pos);\n            if\
+    \ (is_banned.at(u) == ban_set or is_banned.at(v) == ban_set) continue;\n     \
+    \       if (dsu.same(u, v)) continue;\n            dsu.merge(u, v);\n        \
+    \    res += w;\n            is_edge_used.at(pos) = ban_set;\n        }\n     \
+    \   for (int idx = 1; idx < (int)terminals.size(); ++idx) {\n            if (!dsu.same(terminals.at(0),\
+    \ terminals.at(idx))) return {false, T{}};\n        }\n        return {true, res};\n\
+    \    };\n\n    for (int ban_set = (1 << (int)unfixed.size()) - 1; ban_set >= 0;\
+    \ --ban_set) {\n        if (const auto [is_valid, cost] = solve(ban_set);\n  \
+    \          is_valid and (cost < best_cost or best_ban_set == -1)) {\n        \
+    \    best_cost = cost;\n            best_ban_set = ban_set;\n        }\n    }\n\
+    \n    if (best_ban_set == -1) return {T{}, {}}; // Infeasible\n\n    solve(best_ban_set);\n\
+    \    std::set<std::tuple<int, int, T>> used_edges;\n    for (int pos = 0; pos\
+    \ < (int)sorted_edges.size(); ++pos) {\n        if (is_edge_used.at(pos) == best_ban_set)\
+    \ used_edges.insert(sorted_edges.at(pos));\n    }\n\n    std::vector<int> used_edge_ids;\n\
+    \    for (int eid = 0; eid < (int)edges.size(); ++eid) {\n        if (used_edges.count(edges.at(eid)))\
+    \ {\n            used_edge_ids.emplace_back(eid);\n            used_edges.erase(edges.at(eid));\n\
+    \        }\n    }\n\n    return {best_cost, used_edge_ids};\n}\n\ntemplate <class\
+    \ T>\nstd::pair<T, std::vector<int>>\nMinimumSteinerTree(int n, const std::vector<std::tuple<int,\
+    \ int, T>> &edges,\n                   const std::vector<int> &terminals) {\n\
+    \    const int m = edges.size(), k = terminals.size();\n    auto use_dp = [&]()\
+    \ -> bool {\n        if (n - k > 30) return true;\n        if (k > 20) return\
+    \ false;\n        return pow(3, k) * n + pow(2, k) * m * log(m) < pow(2, n - k)\
+    \ * m;\n    };\n    return (use_dp() ? MinimumSteinerTreeDP<T>(n, edges, terminals)\n\
+    \                     : MinimumSteinerTreeDense<T>(n, edges, terminals));\n}\n"
+  code: "#pragma once\n\n#include <algorithm>\n#include <cassert>\n#include <cmath>\n\
+    #include <numeric>\n#include <queue>\n#include <set>\n#include <tuple>\n#include\
+    \ <utility>\n#include <vector>\n\n// Minimum Steiner tree of undirected connected\
+    \ graph\n// n vertices, m edges, k terminals\n// Complexity: O(3^k n + 2^k m log\
+    \ m)\n// Verify: https://judge.yosupo.jp/problem/minimum_steiner_tree\ntemplate\
+    \ <class T>\nstd::pair<T, std::vector<int>>\nMinimumSteinerTreeDP(int n, const\
+    \ std::vector<std::tuple<int, int, T>> &edges,\n                     const std::vector<int>\
+    \ &terminals) {\n\n    if (n <= 1 or terminals.size() <= 1) return {T{}, {}};\n\
+    \    assert(!edges.empty());\n\n    std::vector<std::vector<std::tuple<int, int,\
+    \ T>>> to(n);\n    for (int i = 0; i < (int)edges.size(); ++i) {\n        auto\
+    \ [u, v, w] = edges[i];\n        assert(w >= 0);\n        to.at(u).emplace_back(v,\
     \ i, w);\n        to.at(v).emplace_back(u, i, w);\n    }\n    const int k = terminals.size();\n\
     \n    std::vector<T> dp(n << k);\n    std::vector<int> prv(n << k, -1);\n\n  \
     \  auto f = [&](int i, int s) -> int {\n        assert(0 <= s and s < (1 << k));\n\
@@ -103,14 +155,61 @@ data:
     \       } else {\n            self(self, f(i, prv_mask));\n            self(self,\
     \ f(i, mask ^ prv_mask));\n        }\n    };\n    rec(rec, f(argmin, (1 << k)\
     \ - 1));\n\n    std::sort(used_edges.begin(), used_edges.end());\n\n    return\
-    \ {ans, used_edges};\n}\n"
+    \ {ans, used_edges};\n}\n\n// Complexity: O(m log m + 2^(n - k) m alpha(n))\n\
+    // Verify: https://yukicoder.me/problems/no/114\ntemplate <class T>\nstd::pair<T,\
+    \ std::vector<int>>\nMinimumSteinerTreeDense(int n, const std::vector<std::tuple<int,\
+    \ int, T>> &edges,\n                        const std::vector<int> &terminals)\
+    \ {\n    if (n <= 1 or terminals.size() <= 1) return {T{}, {}};\n\n    std::vector<int>\
+    \ unfixed;\n    {\n        std::vector<int> is_unfixed(n, 1);\n        for (int\
+    \ v : terminals) is_unfixed.at(v) = 0;\n        for (int i = 0; i < n; ++i) {\n\
+    \            if (is_unfixed.at(i)) unfixed.emplace_back(i);\n        }\n    }\n\
+    \n    struct {\n        int n;\n        std::vector<int> par, cou;\n        void\
+    \ reset() {\n            par.resize(n);\n            std::iota(par.begin(), par.end(),\
+    \ 0);\n            cou.assign(n, 1);\n        }\n        int find(int x) { return\
+    \ (par[x] == x) ? x : (par[x] = find(par[x])); }\n        void merge(int x, int\
+    \ y) {\n            x = find(x), y = find(y);\n            if (x == y) return;\n\
+    \            if (cou[x] < cou[y]) std::swap(x, y);\n            par[y] = x, cou[x]\
+    \ += cou[y];\n        }\n        bool same(int x, int y) { return find(x) == find(y);\
+    \ }\n    } dsu{n};\n\n    auto sorted_edges = edges;\n    std::sort(sorted_edges.begin(),\
+    \ sorted_edges.end(),\n              [&](const auto &l, const auto &r) { return\
+    \ std::get<2>(l) < std::get<2>(r); });\n\n    std::vector<int> is_edge_used(sorted_edges.size(),\
+    \ -1);\n    std::vector<int> is_banned(n, -1);\n\n    T best_cost = T{};\n   \
+    \ int best_ban_set = -1;\n\n    auto solve = [&](int ban_set) -> std::pair<bool,\
+    \ T> {\n        dsu.reset();\n        for (int d = 0; d < (int)unfixed.size();\
+    \ ++d) {\n            if (ban_set & (1 << d)) is_banned.at(unfixed.at(d)) = ban_set;\n\
+    \        }\n\n        T res{0};\n        for (int pos = 0; pos < (int)sorted_edges.size();\
+    \ ++pos) {\n            auto [u, v, w] = sorted_edges.at(pos);\n            if\
+    \ (is_banned.at(u) == ban_set or is_banned.at(v) == ban_set) continue;\n     \
+    \       if (dsu.same(u, v)) continue;\n            dsu.merge(u, v);\n        \
+    \    res += w;\n            is_edge_used.at(pos) = ban_set;\n        }\n     \
+    \   for (int idx = 1; idx < (int)terminals.size(); ++idx) {\n            if (!dsu.same(terminals.at(0),\
+    \ terminals.at(idx))) return {false, T{}};\n        }\n        return {true, res};\n\
+    \    };\n\n    for (int ban_set = (1 << (int)unfixed.size()) - 1; ban_set >= 0;\
+    \ --ban_set) {\n        if (const auto [is_valid, cost] = solve(ban_set);\n  \
+    \          is_valid and (cost < best_cost or best_ban_set == -1)) {\n        \
+    \    best_cost = cost;\n            best_ban_set = ban_set;\n        }\n    }\n\
+    \n    if (best_ban_set == -1) return {T{}, {}}; // Infeasible\n\n    solve(best_ban_set);\n\
+    \    std::set<std::tuple<int, int, T>> used_edges;\n    for (int pos = 0; pos\
+    \ < (int)sorted_edges.size(); ++pos) {\n        if (is_edge_used.at(pos) == best_ban_set)\
+    \ used_edges.insert(sorted_edges.at(pos));\n    }\n\n    std::vector<int> used_edge_ids;\n\
+    \    for (int eid = 0; eid < (int)edges.size(); ++eid) {\n        if (used_edges.count(edges.at(eid)))\
+    \ {\n            used_edge_ids.emplace_back(eid);\n            used_edges.erase(edges.at(eid));\n\
+    \        }\n    }\n\n    return {best_cost, used_edge_ids};\n}\n\ntemplate <class\
+    \ T>\nstd::pair<T, std::vector<int>>\nMinimumSteinerTree(int n, const std::vector<std::tuple<int,\
+    \ int, T>> &edges,\n                   const std::vector<int> &terminals) {\n\
+    \    const int m = edges.size(), k = terminals.size();\n    auto use_dp = [&]()\
+    \ -> bool {\n        if (n - k > 30) return true;\n        if (k > 20) return\
+    \ false;\n        return pow(3, k) * n + pow(2, k) * m * log(m) < pow(2, n - k)\
+    \ * m;\n    };\n    return (use_dp() ? MinimumSteinerTreeDP<T>(n, edges, terminals)\n\
+    \                     : MinimumSteinerTreeDense<T>(n, edges, terminals));\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/minimum_steiner_tree.hpp
   requiredBy: []
-  timestamp: '2025-08-10 22:59:17+09:00'
+  timestamp: '2025-08-11 21:45:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - graph/test/minimum_steiner_tree.yuki114.test.cpp
   - graph/test/minimum_steiner_tree.test.cpp
 documentation_of: graph/minimum_steiner_tree.hpp
 layout: document
@@ -118,7 +217,9 @@ title: "Minimum Steiner tree \uFF08\u6700\u5C0F\u30B7\u30E5\u30BF\u30A4\u30CA\u3
   \u6728\uFF09"
 ---
 
-各辺重みが非負の $n$ 頂点 $m$ 辺無向グラフとその $k$ 個の頂点からなるターミナル集合を入力として，最小シュタイナー木を $O(3^k n + 2^k m \log m)$ で求める．
+各辺重みが非負の $n$ 頂点 $m$ 辺無向グラフとその $k$ 個の頂点からなるターミナル集合を入力として，最小シュタイナー木を求める．
+現在は計算量 $O(3^k n + 2^k m \log m)$ の関数 `MinimumSteinerTreeDP()` と $O(m \log m + 2^{n - k} m \alpha (n))$ の関数 `MinimumSteinerTreeDense()` が実装されている．
+`MinimumSteinerTree()` 関数を使うと，適切なものを選んで使ってくれる．
 
 ## 使用方法
 
