@@ -423,6 +423,10 @@ data:
       path: linear_algebra_matrix/matrix.hpp
       title: linear_algebra_matrix/matrix.hpp
     - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/pfaffian.hpp
+      title: "Pfaffian of skew-symmetric matrix \uFF08\u6B6A\u5BFE\u79F0\u884C\u5217\
+        \u306E\u30D1\u30D5\u30A3\u30A2\u30F3\uFF09"
+    - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
   - name: multithread
@@ -1473,6 +1477,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
       title: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/pfaffian.test.cpp
+      title: linear_algebra_matrix/test/pfaffian.test.cpp
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp

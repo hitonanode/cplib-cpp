@@ -194,7 +194,7 @@ data:
     \                    for (auto w : ws) mtr.at(hh, w) -= mtr.at(h, w) * coeff;\n\
     \                    mtr.at(hh, c) = T();\n                }\n            c++;\n\
     \        }\n        return mtr;\n    }\n    int rank_of_gauss_jordan() const {\n\
-    \        for (int i = H * W - 1; i >= 0; i--) {\n            if (elem[i] != 0)\
+    \        for (int i = H * W - 1; i >= 0; i--) {\n            if (elem[i] != T{})\
     \ return i / W + 1;\n        }\n        return 0;\n    }\n    int rank() const\
     \ { return gauss_jordan().rank_of_gauss_jordan(); }\n\n    T determinant_of_upper_triangle()\
     \ const {\n        T ret = _T_id<T>();\n        for (int i = 0; i < H; i++) ret\
@@ -249,7 +249,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/matrix_pow.test.cpp
   requiredBy: []
-  timestamp: '2024-05-03 12:29:35+09:00'
+  timestamp: '2025-08-10 23:51:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/matrix_pow.test.cpp
