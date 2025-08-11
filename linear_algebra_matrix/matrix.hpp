@@ -176,7 +176,7 @@ template <typename T> struct matrix {
     }
     int rank_of_gauss_jordan() const {
         for (int i = H * W - 1; i >= 0; i--) {
-            if (elem[i] != 0) return i / W + 1;
+            if (elem[i] != T{}) return i / W + 1;
         }
         return 0;
     }
