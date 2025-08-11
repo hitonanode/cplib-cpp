@@ -26,6 +26,7 @@
 "convolution/test/relaxed_multiplication.exp.test.cpp": "2023-12-26 21:26:22 +0900",
 "convolution/test/relaxed_multiplication.test.cpp": "2023-12-26 21:26:22 +0900",
 "convolution/test/semirelaxed_multiplication.test.cpp": "2023-12-26 21:26:22 +0900",
+"data_structure/test/area_of_union_of_rectangles.test.cpp": "2025-08-11 22:47:50 +0900",
 "data_structure/test/assosiative_array.test.cpp": "2022-01-08 20:23:44 +0900",
 "data_structure/test/binary_trie.test.cpp": "2024-12-07 22:13:21 +0900",
 "data_structure/test/binary_trie.yuki2977.test.cpp": "2024-12-07 22:13:21 +0900",
