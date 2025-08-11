@@ -3,7 +3,9 @@ title: Minimum Steiner tree （最小シュタイナー木）
 documentation_of: ./minimum_steiner_tree.hpp
 ---
 
-各辺重みが非負の $n$ 頂点 $m$ 辺無向グラフとその $k$ 個の頂点からなるターミナル集合を入力として，最小シュタイナー木を $O(3^k n + 2^k m \log m)$ で求める．
+各辺重みが非負の $n$ 頂点 $m$ 辺無向グラフとその $k$ 個の頂点からなるターミナル集合を入力として，最小シュタイナー木を求める．
+現在は計算量 $O(3^k n + 2^k m \log m)$ の関数 `MinimumSteinerTreeDP()` と $O(m \log m + 2^{n - k} m \alpha (n))$ の関数 `MinimumSteinerTreeDense()` が実装されている．
+`MinimumSteinerTree()` 関数を使うと，適切なものを選んで使ってくれる．
 
 ## 使用方法
 
