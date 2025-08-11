@@ -114,6 +114,10 @@ data:
         \u30F3\u7573\u307F\u8FBC\u307F\uFF09"
   - name: data_structure
     pages:
+    - icon: ':warning:'
+      path: data_structure/area_of_union_of_rectangles.hpp
+      title: "Area of union of rectangles \uFF082 \u6B21\u5143\u5E73\u9762\u4E0A\u306E\
+        \u9577\u65B9\u5F62\u305F\u3061\u304C\u8986\u3046\u9762\u7A4D\uFF09"
     - icon: ':heavy_check_mark:'
       path: data_structure/binary_trie.hpp
       title: Binary trie
@@ -1017,6 +1021,9 @@ data:
       title: convolution/test/semirelaxed_multiplication.test.cpp
   - name: data_structure/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/area_of_union_of_rectangles.test.cpp
+      title: data_structure/test/area_of_union_of_rectangles.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/assosiative_array.test.cpp
       title: data_structure/test/assosiative_array.test.cpp
