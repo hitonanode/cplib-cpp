@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/discrete_logarithm_mod"
-#include "number/discrete_logarithm.hpp"
+#include "../discrete_logarithm.hpp"
 
 #include <iostream>
 using namespace std;

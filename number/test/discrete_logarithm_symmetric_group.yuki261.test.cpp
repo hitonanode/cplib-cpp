@@ -1,5 +1,5 @@
 #define PROBLEM "https://yukicoder.me/problems/no/261"
-#include "number/discrete_logarithm.hpp"
+#include "../discrete_logarithm.hpp"
 
 #include <iostream>
 #include <numeric>

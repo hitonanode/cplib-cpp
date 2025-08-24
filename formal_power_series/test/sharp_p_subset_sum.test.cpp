@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sharp_p_subset_sum"
-#include "formal_power_series/formal_power_series.hpp"
-#include "modint.hpp"
+#include "../formal_power_series.hpp"
+#include "../../modint.hpp"
 #include <iostream>
 #include <vector>
 using namespace std;

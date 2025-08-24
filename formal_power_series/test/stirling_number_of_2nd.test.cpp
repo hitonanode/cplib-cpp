@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind"
-#include "formal_power_series/formal_power_series.hpp"
-#include "modint.hpp"
+#include "../formal_power_series.hpp"
+#include "../../modint.hpp"
 #include <iostream>
 using namespace std;
 

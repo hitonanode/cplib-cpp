@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/polynomial_taylor_shift"
-#include "formal_power_series/formal_power_series.hpp"
-#include "modint.hpp"
+#include "../formal_power_series.hpp"
+#include "../../modint.hpp"
 #include <iostream>
 using namespace std;
 

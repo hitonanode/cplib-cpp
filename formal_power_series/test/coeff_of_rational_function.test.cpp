@@ -1,7 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/215"
-#include "formal_power_series/coeff_of_rational_function.hpp"
-#include "convolution/ntt.hpp"
-#include "modint.hpp"
+#include "../coeff_of_rational_function.hpp"
+#include "../../convolution/ntt.hpp"
+#include "../../modint.hpp"
 
 using mint = ModInt<1000000007>;
 
