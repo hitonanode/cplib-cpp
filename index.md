@@ -472,7 +472,8 @@ data:
       title: "Cyclotomic polynomials \uFF08\u5186\u5206\u591A\u9805\u5F0F\uFF09"
     - icon: ':warning:'
       path: number/discrete_logarithm.hpp
-      title: number/discrete_logarithm.hpp
+      title: "Discrete logarithm / Baby-step giant-step \uFF08\u96E2\u6563\u5BFE\u6570\
+        \u554F\u984C\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/dual_number.hpp
       title: "Dual number \uFF08\u4E8C\u91CD\u6570\uFF09"
@@ -1514,8 +1515,20 @@ data:
       path: number/test/count_primes.test.cpp
       title: number/test/count_primes.test.cpp
     - icon: ':heavy_check_mark:'
-      path: number/test/discrete_logarithm.test.cpp
-      title: number/test/discrete_logarithm.test.cpp
+      path: number/test/discrete_logarithm_matrix.yuki3170.test.cpp
+      title: number/test/discrete_logarithm_matrix.yuki3170.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/discrete_logarithm_matrix.yuki950.test.cpp
+      title: number/test/discrete_logarithm_matrix.yuki950.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/discrete_logarithm_mod.test.cpp
+      title: number/test/discrete_logarithm_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/discrete_logarithm_symmetric_group.yuki101.test.cpp
+      title: number/test/discrete_logarithm_symmetric_group.yuki101.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp
+      title: number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/enumerate_primes.test.cpp
       title: number/test/enumerate_primes.test.cpp
