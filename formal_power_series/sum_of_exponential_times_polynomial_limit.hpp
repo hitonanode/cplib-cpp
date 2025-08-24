@@ -20,7 +20,7 @@ MODINT sum_of_exponential_times_polynomial_limit(MODINT r, std::vector<MODINT> i
     MODINT ret = 0;
     rp = 1;
     for (int i = 0; i <= d; i++) {
-        ret += bs[d - i] * MODINT(d + 1).nCr(i) * rp;
+        ret += bs[d - i] * MODINT::binom(d + 1, i) * rp;
         rp *= -r;
     }
     return ret / MODINT(1 - r).pow(d + 1);

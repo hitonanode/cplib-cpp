@@ -11,7 +11,7 @@ int main() {
     cin >> N;
     using mint = ModInt<998244353>;
     FormalPowerSeries<mint> a(N + 1);
-    a[N] = mint(N).fac().inv();
+    a[N] = mint::facinv(N);
     for (int i = N - 1; i >= 0; i--) { a[i] = a[i + 1] * (i + 1); }
     auto b = a;
     for (int i = 0; i <= N; i++) { a[i] *= mint(i).pow(N), b[i] *= (i % 2 ? -1 : 1); }
