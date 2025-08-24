@@ -5,6 +5,7 @@
 #include <vector>
 
 template <int md> struct ModInt {
+    static_assert(md > 1);
     using lint = long long;
     constexpr static int mod() { return md; }
     static int get_primitive_root() {
@@ -102,39 +103,64 @@ template <int md> struct ModInt {
             return this->pow(md - 2);
         }
     }
-    constexpr ModInt fac() const {
-        while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);
-        return facs[this->val_];
+
+    constexpr static ModInt fac(int n) {
+        assert(n >= 0);
+        if (n >= md) return ModInt(0);
+        while (n >= int(facs.size())) _precalculation(facs.size() * 2);
+        return facs[n];
     }
-    constexpr ModInt facinv() const {
-        while (this->val_ >= int(facs.size())) _precalculation(facs.size() * 2);
-        return facinvs[this->val_];
+    [[deprecated("use static method")]] constexpr ModInt fac() { return ModInt::fac(this->val_); }
+
+    constexpr static ModInt facinv(int n) {
+        assert(n >= 0);
+        if (n >= md) return ModInt(0);
+        while (n >= int(facs.size())) _precalculation(facs.size() * 2);
+        return facinvs[n];
     }
-    constexpr ModInt doublefac() const {
-        lint k = (this->val_ + 1) / 2;
-        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k) * ModInt(k).fac())
-                                : ModInt(k).fac() * ModInt(2).pow(k);
+    [[deprecated("use static method")]] constexpr ModInt facinv() {
+        return ModInt::facinv(this->val_);
     }
 
-    constexpr ModInt nCr(int r) const {
-        if (r < 0 or this->val_ < r) return ModInt(0);
-        return this->fac() * (*this - r).facinv() * ModInt(r).facinv();
+    constexpr static ModInt doublefac(int n) {
+        assert(n >= 0);
+        if (n >= md) return ModInt(0);
+        long long k = (n + 1) / 2;
+        return (n & 1) ? ModInt::fac(k * 2) / (ModInt(2).pow(k) * ModInt::fac(k))
+                       : ModInt::fac(k) * ModInt(2).pow(k);
+    }
+    [[deprecated("use static method")]] constexpr ModInt doublefac() {
+        return ModInt::doublefac(this->val_);
     }
 
-    constexpr ModInt nPr(int r) const {
+    constexpr static ModInt nCr(int n, int r) {
+        assert(n >= 0);
+        if (r < 0 or n < r) return ModInt(0);
+        return ModInt::fac(n) * ModInt::facinv(r) * ModInt::facinv(n - r);
+    }
+    [[deprecated("use static method")]] constexpr ModInt nCr(int r) {
+        return ModInt::nCr(this->val_, r);
+    }
+
+    constexpr static ModInt nPr(int n, int r) {
+        assert(n >= 0);
+        if (r < 0 or n < r) return ModInt(0);
+        return ModInt::fac(n) * ModInt::facinv(n - r);
+    }
+    [[deprecated("use static method")]] constexpr ModInt nPr(int r) {
         if (r < 0 or this->val_ < r) return ModInt(0);
-        return this->fac() * (*this - r).facinv();
+        return ModInt::nPr(this->val_, r);
     }
 
     static ModInt binom(int n, int r) {
         static long long bruteforce_times = 0;
 
         if (r < 0 or n < r) return ModInt(0);
-        if (n <= bruteforce_times or n < (int)facs.size()) return ModInt(n).nCr(r);
+        if (n <= bruteforce_times or n < (int)facs.size()) return ModInt::nCr(n, r);
 
         r = std::min(r, n - r);
 
-        ModInt ret = ModInt(r).facinv();
+        ModInt ret = ModInt::facinv(r);
         for (int i = 0; i < r; ++i) ret *= n - i;
         bruteforce_times += r;
 
@@ -148,18 +174,23 @@ template <int md> struct ModInt {
         int sum = 0;
         for (int k : ks) {
             assert(k >= 0);
-            ret *= ModInt(k).facinv(), sum += k;
+            ret *= ModInt::facinv(k), sum += k;
         }
-        return ret * ModInt(sum).fac();
+        return ret * ModInt::fac(sum);
+    }
+    template <class... Args> static ModInt multinomial(Args... args) {
+        int sum = (0 + ... + args);
+        ModInt result = (1 * ... * ModInt::facinv(args));
+        return ModInt::fac(sum) * result;
     }
 
-    // Catalan number, C_n = binom(2n, n) / (n + 1)
+    // Catalan number, C_n = binom(2n, n) / (n + 1) = # of Dyck words of length 2n
     // C_0 = 1, C_1 = 1, C_2 = 2, C_3 = 5, C_4 = 14, ...
     // https://oeis.org/A000108
     // Complexity: O(n)
     static ModInt catalan(int n) {
         if (n < 0) return ModInt(0);
-        return ModInt(n * 2).fac() * ModInt(n + 1).facinv() * ModInt(n).facinv();
+        return ModInt::fac(n * 2) * ModInt::facinv(n + 1) * ModInt::facinv(n);
     }
 
     ModInt sqrt() const {

@@ -220,14 +220,14 @@ template <typename T> struct FormalPowerSeries : std::vector<T> {
     P shift(T c) const {
         const int n = (int)this->size();
         P ret = *this;
-        for (int i = 0; i < n; i++) ret[i] *= T(i).fac();
+        for (int i = 0; i < n; i++) ret[i] *= T::fac(i);
         std::reverse(ret.begin(), ret.end());
         P exp_cx(n, 1);
         for (int i = 1; i < n; i++) exp_cx[i] = exp_cx[i - 1] * c * T(i).inv();
         ret = ret * exp_cx;
         ret.resize(n);
         std::reverse(ret.begin(), ret.end());
-        for (int i = 0; i < n; i++) ret[i] *= T(i).facinv();
+        for (int i = 0; i < n; i++) ret[i] *= T::facinv(i);
         return ret;
     }
 

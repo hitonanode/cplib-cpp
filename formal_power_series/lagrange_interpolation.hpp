@@ -11,7 +11,7 @@ template <typename MODINT> MODINT interpolate_iota(const std::vector<MODINT> ys,
     const int N = ys.size();
     if (x_eval.val() < N) return ys[x_eval.val()];
     std::vector<MODINT> facinv(N);
-    facinv[N - 1] = MODINT(N - 1).fac().inv();
+    facinv[N - 1] = MODINT::facinv(N - 1);
     for (int i = N - 1; i > 0; i--) facinv[i - 1] = facinv[i] * i;
     std::vector<MODINT> numleft(N);
     MODINT numtmp = 1;

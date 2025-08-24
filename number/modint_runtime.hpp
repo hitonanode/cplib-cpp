@@ -1,4 +1,5 @@
 #pragma once
+#include <cassert>
 #include <iostream>
 #include <set>
 #include <vector>
@@ -105,26 +106,47 @@ public:
     ModIntRuntime pow(lint n) const { return power(n); }
     ModIntRuntime inv() const { return this->pow(md - 2); }
 
-    ModIntRuntime fac() const {
+    static ModIntRuntime fac(int n) {
+        assert(n >= 0);
+        if (n >= md) return ModIntRuntime(0);
         int l0 = facs().size();
-        if (l0 > this->val_) return facs()[this->val_];
-
-        facs().resize(this->val_ + 1);
-        for (int i = l0; i <= this->val_; i++)
+        if (l0 > n) return facs()[n];
+        facs().resize(n + 1);
+        for (int i = l0; i <= n; i++)
             facs()[i] = (i == 0 ? ModIntRuntime(1) : facs()[i - 1] * ModIntRuntime(i));
-        return facs()[this->val_];
+        return facs()[n];
     }
 
-    ModIntRuntime doublefac() const {
-        lint k = (this->val_ + 1) / 2;
-        return (this->val_ & 1)
-                   ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k) * ModIntRuntime(k).fac())
-                   : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);
+    [[deprecated("use static method")]] ModIntRuntime fac() const {
+        return ModIntRuntime::fac(this->val_);
     }
 
-    ModIntRuntime nCr(int r) const {
-        if (r < 0 or this->val_ < r) return ModIntRuntime(0);
-        return this->fac() / ((*this - r).fac() * ModIntRuntime(r).fac());
+    static ModIntRuntime doublefac(int n) {
+        assert(n >= 0);
+        if (n >= md) return ModIntRuntime(0);
+        long long k = (n + 1) / 2;
+        return (n & 1)
+                   ? ModIntRuntime::fac(k * 2) / (ModIntRuntime(2).pow(k) * ModIntRuntime::fac(k))
+                   : ModIntRuntime::fac(k) * ModIntRuntime(2).pow(k);
+    }
+
+    [[deprecated("use static method")]] constexpr ModIntRuntime doublefac() {
+        return ModIntRuntime::doublefac(this->val_);
+    }
+
+    static ModIntRuntime nCr(int n, int r) {
+        assert(n >= 0);
+        if (r < 0 or n < r) return ModIntRuntime(0);
+        return ModIntRuntime::fac(n) / (ModIntRuntime::fac(r) * ModIntRuntime::fac(n - r));
+    }
+    [[deprecated("use static method")]] constexpr ModIntRuntime nCr(int r) {
+        return ModIntRuntime::nCr(this->val_, r);
+    }
+
+    static ModIntRuntime nPr(int n, int r) {
+        assert(n >= 0);
+        if (r < 0 or n < r) return ModIntRuntime(0);
+        return ModIntRuntime::fac(n) / ModIntRuntime::fac(n - r);
     }
 
     ModIntRuntime sqrt() const {

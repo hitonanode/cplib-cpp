@@ -3,17 +3,16 @@
 #include <algorithm>
 #include <vector>
 
-// CUT begin
 // Convert factorial power -> sampling
 // [y[0], y[1], ..., y[N - 1]] -> \sum_i a_i x^\underline{i}
 // Complexity: O(N log N)
 template <class T> std::vector<T> factorial_to_ys(const std::vector<T> &as) {
     const int N = as.size();
     std::vector<T> exp(N, 1);
-    for (int i = 1; i < N; i++) exp[i] = T(i).facinv();
+    for (int i = 1; i < N; i++) exp[i] = T::facinv(i);
     auto ys = nttconv(as, exp);
     ys.resize(N);
-    for (int i = 0; i < N; i++) ys[i] *= T(i).fac();
+    for (int i = 0; i < N; i++) ys[i] *= T::fac(i);
     return ys;
 }
 
@@ -22,9 +21,9 @@ template <class T> std::vector<T> factorial_to_ys(const std::vector<T> &as) {
 // Complexity: O(N log N)
 template <class T> std::vector<T> ys_to_factorial(std::vector<T> ys) {
     const int N = ys.size();
-    for (int i = 1; i < N; i++) ys[i] *= T(i).facinv();
+    for (int i = 1; i < N; i++) ys[i] *= T::facinv(i);
     std::vector<T> expinv(N, 1);
-    for (int i = 1; i < N; i++) expinv[i] = T(i).facinv() * (i % 2 ? -1 : 1);
+    for (int i = 1; i < N; i++) expinv[i] = T::facinv(i) * (i % 2 ? -1 : 1);
     auto as = nttconv(ys, expinv);
     as.resize(N);
     return as;
@@ -36,12 +35,12 @@ template <class T> std::vector<T> shift_of_factorial(const std::vector<T> &as, T
     const int N = as.size();
     std::vector<T> b(N, 1), c(N, 1);
     for (int i = 1; i < N; i++) b[i] = b[i - 1] * (shift - i + 1) * T(i).inv();
-    for (int i = 0; i < N; i++) c[i] = as[i] * T(i).fac();
+    for (int i = 0; i < N; i++) c[i] = as[i] * T::fac(i);
     std::reverse(c.begin(), c.end());
     auto ret = nttconv(b, c);
     ret.resize(N);
     std::reverse(ret.begin(), ret.end());
-    for (int i = 0; i < N; i++) ret[i] *= T(i).facinv();
+    for (int i = 0; i < N; i++) ret[i] *= T::facinv(i);
     return ret;
 }
 
