@@ -117,6 +117,8 @@ public:
         return facs()[n];
     }
 
+    static ModIntRuntime facinv(int n) { return ModIntRuntime::fac(n).inv(); }
+
     static ModIntRuntime doublefac(int n) {
         assert(n >= 0);
         if (n >= md) return ModIntRuntime(0);
