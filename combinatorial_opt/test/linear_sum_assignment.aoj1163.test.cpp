@@ -1,11 +1,9 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1163"
 
-#include "combinatorial_opt/linear_sum_assignment.hpp"
+#include "../linear_sum_assignment.hpp"
 
-#include "utilities/reader.hpp"
-#include "utilities/writer.hpp"
-
-#include <iostream>
+#include "../../utilities/reader.hpp"
+#include "../../utilities/writer.hpp"
 
 #include <numeric>
 #include <vector>

@@ -1,7 +1,9 @@
-#include "convex_hull_trick/convex_hull_trick.hpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
+
+#include "../convex_hull_trick.hpp"
+
 #include <cassert>
 #include <iostream>
-#define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
 
 ConvexHullTrick<__int128> cht_min(true), cht_max(false);
 

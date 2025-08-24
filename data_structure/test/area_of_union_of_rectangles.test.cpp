@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/area_of_union_of_rectangles"
-#include "data_structure/area_of_union_of_rectangles.hpp"
+#include "../area_of_union_of_rectangles.hpp"
 
 #include <iostream>
 using namespace std;

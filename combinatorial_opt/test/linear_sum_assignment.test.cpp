@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/assignment"
 
-#include "combinatorial_opt/linear_sum_assignment.hpp"
+#include "../linear_sum_assignment.hpp"
 
-#include "utilities/reader.hpp"
-#include "utilities/writer.hpp"
+#include "../../utilities/reader.hpp"
+#include "../../utilities/writer.hpp"
 
 #include <vector>
 using namespace std;

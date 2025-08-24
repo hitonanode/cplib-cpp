@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/inv_of_formal_power_series"
-#include "formal_power_series/formal_power_series.hpp"
-#include "modint.hpp"
+#include "../formal_power_series.hpp"
+#include "../../modint.hpp"
 #include <iostream>
 using namespace std;
 

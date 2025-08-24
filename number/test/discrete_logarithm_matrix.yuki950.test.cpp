@@ -1,6 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/950"
-#include "number/discrete_logarithm.hpp"
-#include "utilities/pow_op.hpp"
+#include "../discrete_logarithm.hpp"
+#include "../../utilities/pow_op.hpp"
 
 #include <array>
 #include <iostream>
