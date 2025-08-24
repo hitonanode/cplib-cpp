@@ -27,105 +27,112 @@ data:
   bundledCode: "#line 1 \"formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind\"\
     \n#line 2 \"modint.hpp\"\n#include <cassert>\n#include <iostream>\n#include <set>\n\
-    #include <vector>\n\ntemplate <int md> struct ModInt {\n    using lint = long\
-    \ long;\n    constexpr static int mod() { return md; }\n    static int get_primitive_root()\
-    \ {\n        static int primitive_root = 0;\n        if (!primitive_root) {\n\
-    \            primitive_root = [&]() {\n                std::set<int> fac;\n  \
-    \              int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
-    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
-    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
-    \                    bool ok = true;\n                    for (auto i : fac)\n\
-    \                        if (ModInt(g).pow((md - 1) / i) == 1) {\n           \
-    \                 ok = false;\n                            break;\n          \
-    \              }\n                    if (ok) return g;\n                }\n \
-    \               return -1;\n            }();\n        }\n        return primitive_root;\n\
-    \    }\n    int val_;\n    int val() const noexcept { return val_; }\n    constexpr\
-    \ ModInt() : val_(0) {}\n    constexpr ModInt &_setval(lint v) { return val_ =\
-    \ (v >= md ? v - md : v), *this; }\n    constexpr ModInt(lint v) { _setval(v %\
-    \ md + md); }\n    constexpr explicit operator bool() const { return val_ != 0;\
-    \ }\n    constexpr ModInt operator+(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
-    \ + x.val_);\n    }\n    constexpr ModInt operator-(const ModInt &x) const {\n\
-    \        return ModInt()._setval((lint)val_ - x.val_ + md);\n    }\n    constexpr\
-    \ ModInt operator*(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
-    \ * x.val_ % md);\n    }\n    constexpr ModInt operator/(const ModInt &x) const\
-    \ {\n        return ModInt()._setval((lint)val_ * x.inv().val() % md);\n    }\n\
-    \    constexpr ModInt operator-() const { return ModInt()._setval(md - val_);\
-    \ }\n    constexpr ModInt &operator+=(const ModInt &x) { return *this = *this\
-    \ + x; }\n    constexpr ModInt &operator-=(const ModInt &x) { return *this = *this\
-    \ - x; }\n    constexpr ModInt &operator*=(const ModInt &x) { return *this = *this\
-    \ * x; }\n    constexpr ModInt &operator/=(const ModInt &x) { return *this = *this\
-    \ / x; }\n    friend constexpr ModInt operator+(lint a, const ModInt &x) { return\
-    \ ModInt(a) + x; }\n    friend constexpr ModInt operator-(lint a, const ModInt\
-    \ &x) { return ModInt(a) - x; }\n    friend constexpr ModInt operator*(lint a,\
-    \ const ModInt &x) { return ModInt(a) * x; }\n    friend constexpr ModInt operator/(lint\
-    \ a, const ModInt &x) { return ModInt(a) / x; }\n    constexpr bool operator==(const\
-    \ ModInt &x) const { return val_ == x.val_; }\n    constexpr bool operator!=(const\
-    \ ModInt &x) const { return val_ != x.val_; }\n    constexpr bool operator<(const\
-    \ ModInt &x) const {\n        return val_ < x.val_;\n    } // To use std::map<ModInt,\
-    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
-    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    constexpr\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {\n     \
-    \   return os << x.val_;\n    }\n\n    constexpr ModInt pow(lint n) const {\n\
-    \        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if (n\
-    \ & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
-    \ ans;\n    }\n\n    static constexpr int cache_limit = std::min(md, 1 << 21);\n\
-    \    static std::vector<ModInt> facs, facinvs, invs;\n\n    constexpr static void\
-    \ _precalculation(int N) {\n        const int l0 = facs.size();\n        if (N\
-    \ > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N), facinvs.resize(N),\
-    \ invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i] = facs[i - 1]\
-    \ * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n        for (int i\
-    \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
-    \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n\n    constexpr\
-    \ ModInt inv() const {\n        if (this->val_ < cache_limit) {\n            if\
-    \ (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n            while (this->val_\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val_];\n\
-    \        } else {\n            return this->pow(md - 2);\n        }\n    }\n \
-    \   constexpr ModInt fac() const {\n        while (this->val_ >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facs[this->val_];\n    }\n\
-    \    constexpr ModInt facinv() const {\n        while (this->val_ >= int(facs.size()))\
-    \ _precalculation(facs.size() * 2);\n        return facinvs[this->val_];\n   \
-    \ }\n    constexpr ModInt doublefac() const {\n        lint k = (this->val_ +\
-    \ 1) / 2;\n        return (this->val_ & 1) ? ModInt(k * 2).fac() / (ModInt(2).pow(k)\
-    \ * ModInt(k).fac())\n                                : ModInt(k).fac() * ModInt(2).pow(k);\n\
-    \    }\n\n    constexpr ModInt nCr(int r) const {\n        if (r < 0 or this->val_\
-    \ < r) return ModInt(0);\n        return this->fac() * (*this - r).facinv() *\
-    \ ModInt(r).facinv();\n    }\n\n    constexpr ModInt nPr(int r) const {\n    \
-    \    if (r < 0 or this->val_ < r) return ModInt(0);\n        return this->fac()\
-    \ * (*this - r).facinv();\n    }\n\n    static ModInt binom(int n, int r) {\n\
-    \        static long long bruteforce_times = 0;\n\n        if (r < 0 or n < r)\
-    \ return ModInt(0);\n        if (n <= bruteforce_times or n < (int)facs.size())\
-    \ return ModInt(n).nCr(r);\n\n        r = std::min(r, n - r);\n\n        ModInt\
-    \ ret = ModInt(r).facinv();\n        for (int i = 0; i < r; ++i) ret *= n - i;\n\
-    \        bruteforce_times += r;\n\n        return ret;\n    }\n\n    // Multinomial\
-    \ coefficient, (k_1 + k_2 + ... + k_m)! / (k_1! k_2! ... k_m!)\n    // Complexity:\
-    \ O(sum(ks))\n    template <class Vec> static ModInt multinomial(const Vec &ks)\
-    \ {\n        ModInt ret{1};\n        int sum = 0;\n        for (int k : ks) {\n\
-    \            assert(k >= 0);\n            ret *= ModInt(k).facinv(), sum += k;\n\
-    \        }\n        return ret * ModInt(sum).fac();\n    }\n\n    // Catalan number,\
-    \ C_n = binom(2n, n) / (n + 1)\n    // C_0 = 1, C_1 = 1, C_2 = 2, C_3 = 5, C_4\
-    \ = 14, ...\n    // https://oeis.org/A000108\n    // Complexity: O(n)\n    static\
-    \ ModInt catalan(int n) {\n        if (n < 0) return ModInt(0);\n        return\
-    \ ModInt(n * 2).fac() * ModInt(n + 1).facinv() * ModInt(n).facinv();\n    }\n\n\
-    \    ModInt sqrt() const {\n        if (val_ == 0) return 0;\n        if (md ==\
-    \ 2) return val_;\n        if (pow((md - 1) / 2) != 1) return 0;\n        ModInt\
-    \ b = 1;\n        while (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0,\
-    \ m = md - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m\
-    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
-    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
-    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
-    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
-    \        return ModInt(std::min(x.val_, md - x.val_));\n    }\n};\ntemplate <int\
-    \ md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\ntemplate <int md> std::vector<ModInt<md>>\
-    \ ModInt<md>::facinvs = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::invs\
-    \ = {0};\n\nusing ModInt998244353 = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n\
-    // using mint = ModInt<1000000007>;\n#line 3 \"number/sieve.hpp\"\n#include <map>\n\
-    #line 5 \"number/sieve.hpp\"\n\n// CUT begin\n// Linear sieve algorithm for fast\
-    \ prime factorization\n// Complexity: O(N) time, O(N) space:\n// - MAXN = 10^7:\
-    \  ~44 MB,  80~100 ms (Codeforces / AtCoder GCC, C++17)\n// - MAXN = 10^8: ~435\
-    \ MB, 810~980 ms (Codeforces / AtCoder GCC, C++17)\n// Reference:\n// [1] D. Gries,\
-    \ J. Misra, \"A Linear Sieve Algorithm for Finding Prime Numbers,\"\n//     Communications\
-    \ of the ACM, 21(12), 999-1003, 1978.\n// - https://cp-algorithms.com/algebra/prime-sieve-linear.html\n\
-    // - https://37zigen.com/linear-sieve/\nstruct Sieve {\n    std::vector<int> min_factor;\n\
+    #include <vector>\n\ntemplate <int md> struct ModInt {\n    static_assert(md >\
+    \ 1);\n    using lint = long long;\n    constexpr static int mod() { return md;\
+    \ }\n    static int get_primitive_root() {\n        static int primitive_root\
+    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&]() {\n\
+    \                std::set<int> fac;\n                int v = md - 1;\n       \
+    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
+    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
+    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
+    \                    for (auto i : fac)\n                        if (ModInt(g).pow((md\
+    \ - 1) / i) == 1) {\n                            ok = false;\n               \
+    \             break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root;\n    }\n    int val_;\n    int val() const\
+    \ noexcept { return val_; }\n    constexpr ModInt() : val_(0) {}\n    constexpr\
+    \ ModInt &_setval(lint v) { return val_ = (v >= md ? v - md : v), *this; }\n \
+    \   constexpr ModInt(lint v) { _setval(v % md + md); }\n    constexpr explicit\
+    \ operator bool() const { return val_ != 0; }\n    constexpr ModInt operator+(const\
+    \ ModInt &x) const {\n        return ModInt()._setval((lint)val_ + x.val_);\n\
+    \    }\n    constexpr ModInt operator-(const ModInt &x) const {\n        return\
+    \ ModInt()._setval((lint)val_ - x.val_ + md);\n    }\n    constexpr ModInt operator*(const\
+    \ ModInt &x) const {\n        return ModInt()._setval((lint)val_ * x.val_ % md);\n\
+    \    }\n    constexpr ModInt operator/(const ModInt &x) const {\n        return\
+    \ ModInt()._setval((lint)val_ * x.inv().val() % md);\n    }\n    constexpr ModInt\
+    \ operator-() const { return ModInt()._setval(md - val_); }\n    constexpr ModInt\
+    \ &operator+=(const ModInt &x) { return *this = *this + x; }\n    constexpr ModInt\
+    \ &operator-=(const ModInt &x) { return *this = *this - x; }\n    constexpr ModInt\
+    \ &operator*=(const ModInt &x) { return *this = *this * x; }\n    constexpr ModInt\
+    \ &operator/=(const ModInt &x) { return *this = *this / x; }\n    friend constexpr\
+    \ ModInt operator+(lint a, const ModInt &x) { return ModInt(a) + x; }\n    friend\
+    \ constexpr ModInt operator-(lint a, const ModInt &x) { return ModInt(a) - x;\
+    \ }\n    friend constexpr ModInt operator*(lint a, const ModInt &x) { return ModInt(a)\
+    \ * x; }\n    friend constexpr ModInt operator/(lint a, const ModInt &x) { return\
+    \ ModInt(a) / x; }\n    constexpr bool operator==(const ModInt &x) const { return\
+    \ val_ == x.val_; }\n    constexpr bool operator!=(const ModInt &x) const { return\
+    \ val_ != x.val_; }\n    constexpr bool operator<(const ModInt &x) const {\n \
+    \       return val_ < x.val_;\n    } // To use std::map<ModInt, T>\n    friend\
+    \ std::istream &operator>>(std::istream &is, ModInt &x) {\n        lint t;\n \
+    \       return is >> t, x = ModInt(t), is;\n    }\n    constexpr friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &x) {\n        return os << x.val_;\n\
+    \    }\n\n    constexpr ModInt pow(lint n) const {\n        ModInt ans = 1, tmp\
+    \ = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n        \
+    \    tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n    static\
+    \ constexpr int cache_limit = std::min(md, 1 << 21);\n    static std::vector<ModInt>\
+    \ facs, facinvs, invs;\n\n    constexpr static void _precalculation(int N) {\n\
+    \        const int l0 = facs.size();\n        if (N > md) N = md;\n        if\
+    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
+    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
+    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
+    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
+    \ = facinvs[i] * facs[i - 1];\n    }\n\n    constexpr ModInt inv() const {\n \
+    \       if (this->val_ < cache_limit) {\n            if (facs.empty()) facs =\
+    \ {1}, facinvs = {1}, invs = {0};\n            while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n            return invs[this->val_];\n  \
+    \      } else {\n            return this->pow(md - 2);\n        }\n    }\n\n \
+    \   constexpr static ModInt fac(int n) {\n        assert(n >= 0);\n        if\
+    \ (n >= md) return ModInt(0);\n        while (n >= int(facs.size())) _precalculation(facs.size()\
+    \ * 2);\n        return facs[n];\n    }\n\n    constexpr static ModInt facinv(int\
+    \ n) {\n        assert(n >= 0);\n        if (n >= md) return ModInt(0);\n    \
+    \    while (n >= int(facs.size())) _precalculation(facs.size() * 2);\n       \
+    \ return facinvs[n];\n    }\n\n    constexpr static ModInt doublefac(int n) {\n\
+    \        assert(n >= 0);\n        if (n >= md) return ModInt(0);\n        long\
+    \ long k = (n + 1) / 2;\n        return (n & 1) ? ModInt::fac(k * 2) / (ModInt(2).pow(k)\
+    \ * ModInt::fac(k))\n                       : ModInt::fac(k) * ModInt(2).pow(k);\n\
+    \    }\n\n    constexpr static ModInt nCr(int n, int r) {\n        assert(n >=\
+    \ 0);\n        if (r < 0 or n < r) return ModInt(0);\n        return ModInt::fac(n)\
+    \ * ModInt::facinv(r) * ModInt::facinv(n - r);\n    }\n\n    constexpr static\
+    \ ModInt nPr(int n, int r) {\n        assert(n >= 0);\n        if (r < 0 or n\
+    \ < r) return ModInt(0);\n        return ModInt::fac(n) * ModInt::facinv(n - r);\n\
+    \    }\n\n    static ModInt binom(int n, int r) {\n        static long long bruteforce_times\
+    \ = 0;\n\n        if (r < 0 or n < r) return ModInt(0);\n        if (n <= bruteforce_times\
+    \ or n < (int)facs.size()) return ModInt::nCr(n, r);\n\n        r = std::min(r,\
+    \ n - r);\n\n        ModInt ret = ModInt::facinv(r);\n        for (int i = 0;\
+    \ i < r; ++i) ret *= n - i;\n        bruteforce_times += r;\n\n        return\
+    \ ret;\n    }\n\n    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1!\
+    \ k_2! ... k_m!)\n    // Complexity: O(sum(ks))\n    template <class Vec> static\
+    \ ModInt multinomial(const Vec &ks) {\n        ModInt ret{1};\n        int sum\
+    \ = 0;\n        for (int k : ks) {\n            assert(k >= 0);\n            ret\
+    \ *= ModInt::facinv(k), sum += k;\n        }\n        return ret * ModInt::fac(sum);\n\
+    \    }\n    template <class... Args> static ModInt multinomial(Args... args) {\n\
+    \        int sum = (0 + ... + args);\n        ModInt result = (1 * ... * ModInt::facinv(args));\n\
+    \        return ModInt::fac(sum) * result;\n    }\n\n    // Catalan number, C_n\
+    \ = binom(2n, n) / (n + 1) = # of Dyck words of length 2n\n    // C_0 = 1, C_1\
+    \ = 1, C_2 = 2, C_3 = 5, C_4 = 14, ...\n    // https://oeis.org/A000108\n    //\
+    \ Complexity: O(n)\n    static ModInt catalan(int n) {\n        if (n < 0) return\
+    \ ModInt(0);\n        return ModInt::fac(n * 2) * ModInt::facinv(n + 1) * ModInt::facinv(n);\n\
+    \    }\n\n    ModInt sqrt() const {\n        if (val_ == 0) return 0;\n      \
+    \  if (md == 2) return val_;\n        if (pow((md - 1) / 2) != 1) return 0;\n\
+    \        ModInt b = 1;\n        while (b.pow((md - 1) / 2) == 1) b += 1;\n   \
+    \     int e = 0, m = md - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n     \
+    \   ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
+    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
+    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
+    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
+    \         e = j;\n        }\n        return ModInt(std::min(x.val_, md - x.val_));\n\
+    \    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\n\
+    template <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\ntemplate\
+    \ <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
+    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
+    #line 3 \"number/sieve.hpp\"\n#include <map>\n#line 5 \"number/sieve.hpp\"\n\n\
+    // CUT begin\n// Linear sieve algorithm for fast prime factorization\n// Complexity:\
+    \ O(N) time, O(N) space:\n// - MAXN = 10^7:  ~44 MB,  80~100 ms (Codeforces /\
+    \ AtCoder GCC, C++17)\n// - MAXN = 10^8: ~435 MB, 810~980 ms (Codeforces / AtCoder\
+    \ GCC, C++17)\n// Reference:\n// [1] D. Gries, J. Misra, \"A Linear Sieve Algorithm\
+    \ for Finding Prime Numbers,\"\n//     Communications of the ACM, 21(12), 999-1003,\
+    \ 1978.\n// - https://cp-algorithms.com/algebra/prime-sieve-linear.html\n// -\
+    \ https://37zigen.com/linear-sieve/\nstruct Sieve {\n    std::vector<int> min_factor;\n\
     \    std::vector<int> primes;\n    Sieve(int MAXN) : min_factor(MAXN + 1) {\n\
     \        for (int d = 2; d <= MAXN; d++) {\n            if (!min_factor[d]) {\n\
     \                min_factor[d] = d;\n                primes.emplace_back(d);\n\
@@ -235,32 +242,31 @@ data:
     \            a[i] = garner_ntt_(ntt0[i].val(), ntt1[i].val(), ntt2[i].val(), mod);\n\
     \    }\n    return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
     \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
-    \ b, false);\n}\n#line 5 \"formal_power_series/factorial_power.hpp\"\n\n// CUT\
-    \ begin\n// Convert factorial power -> sampling\n// [y[0], y[1], ..., y[N - 1]]\
-    \ -> \\sum_i a_i x^\\underline{i}\n// Complexity: O(N log N)\ntemplate <class\
-    \ T> std::vector<T> factorial_to_ys(const std::vector<T> &as) {\n    const int\
-    \ N = as.size();\n    std::vector<T> exp(N, 1);\n    for (int i = 1; i < N; i++)\
-    \ exp[i] = T(i).facinv();\n    auto ys = nttconv(as, exp);\n    ys.resize(N);\n\
-    \    for (int i = 0; i < N; i++) ys[i] *= T(i).fac();\n    return ys;\n}\n\n//\
-    \ Convert sampling -> factorial power\n// [y[0], y[1], ..., y[N - 1]] -> \\sum_i\
-    \ a_i x^\\underline{i}\n// Complexity: O(N log N)\ntemplate <class T> std::vector<T>\
-    \ ys_to_factorial(std::vector<T> ys) {\n    const int N = ys.size();\n    for\
-    \ (int i = 1; i < N; i++) ys[i] *= T(i).facinv();\n    std::vector<T> expinv(N,\
-    \ 1);\n    for (int i = 1; i < N; i++) expinv[i] = T(i).facinv() * (i % 2 ? -1\
-    \ : 1);\n    auto as = nttconv(ys, expinv);\n    as.resize(N);\n    return as;\n\
-    }\n\n// Compute factorial power series of f(x + shift) from that of f(x)\n// Complexity:\
-    \ O(N log N)\ntemplate <class T> std::vector<T> shift_of_factorial(const std::vector<T>\
-    \ &as, T shift) {\n    const int N = as.size();\n    std::vector<T> b(N, 1), c(N,\
-    \ 1);\n    for (int i = 1; i < N; i++) b[i] = b[i - 1] * (shift - i + 1) * T(i).inv();\n\
-    \    for (int i = 0; i < N; i++) c[i] = as[i] * T(i).fac();\n    std::reverse(c.begin(),\
-    \ c.end());\n    auto ret = nttconv(b, c);\n    ret.resize(N);\n    std::reverse(ret.begin(),\
-    \ ret.end());\n    for (int i = 0; i < N; i++) ret[i] *= T(i).facinv();\n    return\
-    \ ret;\n}\n\n// Compute y[c], ..., y[c + width - 1] from y[0], ..., y[N - 1] where\
-    \ y = f(x) is poly of up to\n// (N - 1)-th degree Complexity: O(N log N)\ntemplate\
-    \ <class T>\nstd::vector<T> shift_of_sampling_points(const std::vector<T> ys,\
-    \ T c, int width) {\n    auto as = ys_to_factorial(ys);\n    as = shift_of_factorial(as,\
-    \ c);\n    as.resize(width);\n    auto ret = factorial_to_ys(as);\n    return\
-    \ ret;\n}\n#line 6 \"formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp\"\
+    \ b, false);\n}\n#line 5 \"formal_power_series/factorial_power.hpp\"\n\n// Convert\
+    \ factorial power -> sampling\n// [y[0], y[1], ..., y[N - 1]] -> \\sum_i a_i x^\\\
+    underline{i}\n// Complexity: O(N log N)\ntemplate <class T> std::vector<T> factorial_to_ys(const\
+    \ std::vector<T> &as) {\n    const int N = as.size();\n    std::vector<T> exp(N,\
+    \ 1);\n    for (int i = 1; i < N; i++) exp[i] = T::facinv(i);\n    auto ys = nttconv(as,\
+    \ exp);\n    ys.resize(N);\n    for (int i = 0; i < N; i++) ys[i] *= T::fac(i);\n\
+    \    return ys;\n}\n\n// Convert sampling -> factorial power\n// [y[0], y[1],\
+    \ ..., y[N - 1]] -> \\sum_i a_i x^\\underline{i}\n// Complexity: O(N log N)\n\
+    template <class T> std::vector<T> ys_to_factorial(std::vector<T> ys) {\n    const\
+    \ int N = ys.size();\n    for (int i = 1; i < N; i++) ys[i] *= T::facinv(i);\n\
+    \    std::vector<T> expinv(N, 1);\n    for (int i = 1; i < N; i++) expinv[i] =\
+    \ T::facinv(i) * (i % 2 ? -1 : 1);\n    auto as = nttconv(ys, expinv);\n    as.resize(N);\n\
+    \    return as;\n}\n\n// Compute factorial power series of f(x + shift) from that\
+    \ of f(x)\n// Complexity: O(N log N)\ntemplate <class T> std::vector<T> shift_of_factorial(const\
+    \ std::vector<T> &as, T shift) {\n    const int N = as.size();\n    std::vector<T>\
+    \ b(N, 1), c(N, 1);\n    for (int i = 1; i < N; i++) b[i] = b[i - 1] * (shift\
+    \ - i + 1) * T(i).inv();\n    for (int i = 0; i < N; i++) c[i] = as[i] * T::fac(i);\n\
+    \    std::reverse(c.begin(), c.end());\n    auto ret = nttconv(b, c);\n    ret.resize(N);\n\
+    \    std::reverse(ret.begin(), ret.end());\n    for (int i = 0; i < N; i++) ret[i]\
+    \ *= T::facinv(i);\n    return ret;\n}\n\n// Compute y[c], ..., y[c + width -\
+    \ 1] from y[0], ..., y[N - 1] where y = f(x) is poly of up to\n// (N - 1)-th degree\
+    \ Complexity: O(N log N)\ntemplate <class T>\nstd::vector<T> shift_of_sampling_points(const\
+    \ std::vector<T> ys, T c, int width) {\n    auto as = ys_to_factorial(ys);\n \
+    \   as = shift_of_factorial(as, c);\n    as.resize(width);\n    auto ret = factorial_to_ys(as);\n\
+    \    return ret;\n}\n#line 6 \"formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N;\n    cin >> N;\n    using mint = ModInt<998244353>;\n    auto ys\
     \ = Sieve(N).enumerate_kth_pows<mint>(N, N);\n    const auto stirling_number_of_2nd\
@@ -281,7 +287,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
   requiredBy: []
-  timestamp: '2023-12-26 21:26:22+09:00'
+  timestamp: '2025-08-25 00:44:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp

@@ -33,7 +33,7 @@ data:
     \ https://atcoder.jp/contests/arc033/tasks/arc033_4\ntemplate <typename MODINT>\
     \ MODINT interpolate_iota(const std::vector<MODINT> ys, MODINT x_eval) {\n   \
     \ const int N = ys.size();\n    if (x_eval.val() < N) return ys[x_eval.val()];\n\
-    \    std::vector<MODINT> facinv(N);\n    facinv[N - 1] = MODINT(N - 1).fac().inv();\n\
+    \    std::vector<MODINT> facinv(N);\n    facinv[N - 1] = MODINT::facinv(N - 1);\n\
     \    for (int i = N - 1; i > 0; i--) facinv[i - 1] = facinv[i] * i;\n    std::vector<MODINT>\
     \ numleft(N);\n    MODINT numtmp = 1;\n    for (int i = 0; i < N; i++) {\n   \
     \     numleft[i] = numtmp;\n        numtmp *= x_eval - i;\n    }\n    numtmp =\
@@ -52,8 +52,8 @@ data:
     \ 0;\n    if (init.size() == 1) return init[0] / (1 - r);\n    auto &bs = init;\n\
     \    const int d = int(bs.size()) - 1;\n    MODINT rp = 1;\n    for (int i = 1;\
     \ i <= d; i++) rp *= r, bs[i] = bs[i] * rp + bs[i - 1];\n    MODINT ret = 0;\n\
-    \    rp = 1;\n    for (int i = 0; i <= d; i++) {\n        ret += bs[d - i] * MODINT(d\
-    \ + 1).nCr(i) * rp;\n        rp *= -r;\n    }\n    return ret / MODINT(1 - r).pow(d\
+    \    rp = 1;\n    for (int i = 0; i <= d; i++) {\n        ret += bs[d - i] * MODINT::binom(d\
+    \ + 1, i) * rp;\n        rp *= -r;\n    }\n    return ret / MODINT(1 - r).pow(d\
     \ + 1);\n};\n#line 6 \"formal_power_series/sum_of_exponential_times_polynomial.hpp\"\
     \n\n// CUT begin\n// $d$ \u6B21\u4EE5\u4E0B\u306E\u591A\u9805\u5F0F $f(x)$ \u3068\
     \u5B9A\u6570 $r$ \u306B\u3064\u3044\u3066\uFF0C\n// $\\sum_{i=0}^{N-1} r^i f(i)$\
@@ -94,7 +94,7 @@ data:
   path: formal_power_series/sum_of_exponential_times_polynomial.hpp
   requiredBy:
   - number/arithmetic_cumsum.hpp
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2025-08-25 00:44:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/arithmetic_function_totient.test.cpp

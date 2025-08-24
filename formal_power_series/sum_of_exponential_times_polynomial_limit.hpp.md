@@ -38,8 +38,8 @@ data:
     \ 0;\n    if (init.size() == 1) return init[0] / (1 - r);\n    auto &bs = init;\n\
     \    const int d = int(bs.size()) - 1;\n    MODINT rp = 1;\n    for (int i = 1;\
     \ i <= d; i++) rp *= r, bs[i] = bs[i] * rp + bs[i - 1];\n    MODINT ret = 0;\n\
-    \    rp = 1;\n    for (int i = 0; i <= d; i++) {\n        ret += bs[d - i] * MODINT(d\
-    \ + 1).nCr(i) * rp;\n        rp *= -r;\n    }\n    return ret / MODINT(1 - r).pow(d\
+    \    rp = 1;\n    for (int i = 0; i <= d; i++) {\n        ret += bs[d - i] * MODINT::binom(d\
+    \ + 1, i) * rp;\n        rp *= -r;\n    }\n    return ret / MODINT(1 - r).pow(d\
     \ + 1);\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <vector>\n\n// CUT begin\n// $d$\
     \ \u6B21\u4EE5\u4E0B\u306E\u591A\u9805\u5F0F $f(x)$ \u3068\u5B9A\u6570 $r$ \u306B\
@@ -52,8 +52,8 @@ data:
     \ 0;\n    if (init.size() == 1) return init[0] / (1 - r);\n    auto &bs = init;\n\
     \    const int d = int(bs.size()) - 1;\n    MODINT rp = 1;\n    for (int i = 1;\
     \ i <= d; i++) rp *= r, bs[i] = bs[i] * rp + bs[i - 1];\n    MODINT ret = 0;\n\
-    \    rp = 1;\n    for (int i = 0; i <= d; i++) {\n        ret += bs[d - i] * MODINT(d\
-    \ + 1).nCr(i) * rp;\n        rp *= -r;\n    }\n    return ret / MODINT(1 - r).pow(d\
+    \    rp = 1;\n    for (int i = 0; i <= d; i++) {\n        ret += bs[d - i] * MODINT::binom(d\
+    \ + 1, i) * rp;\n        rp *= -r;\n    }\n    return ret / MODINT(1 - r).pow(d\
     \ + 1);\n};\n"
   dependsOn: []
   isVerificationFile: false
@@ -61,7 +61,7 @@ data:
   requiredBy:
   - number/arithmetic_cumsum.hpp
   - formal_power_series/sum_of_exponential_times_polynomial.hpp
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2025-08-25 00:44:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/arithmetic_function_totient.test.cpp

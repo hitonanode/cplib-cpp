@@ -92,8 +92,8 @@ data:
     \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
     \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
     \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
-    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 2\
-    \ \"number/modint_runtime.hpp\"\n#include <iostream>\n#include <set>\n#line 5\
+    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 3\
+    \ \"number/modint_runtime.hpp\"\n#include <iostream>\n#include <set>\n#line 6\
     \ \"number/modint_runtime.hpp\"\n\nstruct ModIntRuntime {\nprivate:\n    static\
     \ int md;\n\npublic:\n    using lint = long long;\n    static int mod() { return\
     \ md; }\n    int val_;\n    static std::vector<ModIntRuntime> &facs() {\n    \
@@ -143,32 +143,38 @@ data:
     \ (n) {\n            if (n & 1) ans = ans * tmp % md;\n            tmp = tmp *\
     \ tmp % md;\n            n /= 2;\n        }\n        return ans;\n    }\n    ModIntRuntime\
     \ pow(lint n) const { return power(n); }\n    ModIntRuntime inv() const { return\
-    \ this->pow(md - 2); }\n\n    ModIntRuntime fac() const {\n        int l0 = facs().size();\n\
-    \        if (l0 > this->val_) return facs()[this->val_];\n\n        facs().resize(this->val_\
-    \ + 1);\n        for (int i = l0; i <= this->val_; i++)\n            facs()[i]\
-    \ = (i == 0 ? ModIntRuntime(1) : facs()[i - 1] * ModIntRuntime(i));\n        return\
-    \ facs()[this->val_];\n    }\n\n    ModIntRuntime doublefac() const {\n      \
-    \  lint k = (this->val_ + 1) / 2;\n        return (this->val_ & 1)\n         \
-    \          ? ModIntRuntime(k * 2).fac() / (ModIntRuntime(2).pow(k) * ModIntRuntime(k).fac())\n\
-    \                   : ModIntRuntime(k).fac() * ModIntRuntime(2).pow(k);\n    }\n\
-    \n    ModIntRuntime nCr(int r) const {\n        if (r < 0 or this->val_ < r) return\
-    \ ModIntRuntime(0);\n        return this->fac() / ((*this - r).fac() * ModIntRuntime(r).fac());\n\
-    \    }\n\n    ModIntRuntime sqrt() const {\n        if (val_ == 0) return 0;\n\
-    \        if (md == 2) return val_;\n        if (power((md - 1) / 2) != 1) return\
-    \ 0;\n        ModIntRuntime b = 1;\n        while (b.power((md - 1) / 2) == 1)\
-    \ b += 1;\n        int e = 0, m = md - 1;\n        while (m % 2 == 0) m >>= 1,\
-    \ e++;\n        ModIntRuntime x = power((m - 1) / 2), y = (*this) * x * x;\n \
-    \       x *= (*this);\n        ModIntRuntime z = b.power(m);\n        while (y\
-    \ != 1) {\n            int j = 0;\n            ModIntRuntime t = y;\n        \
-    \    while (t != 1) j++, t *= t;\n            z = z.power(1LL << (e - j - 1));\n\
-    \            x *= z, z *= z, y *= z;\n            e = j;\n        }\n        return\
-    \ ModIntRuntime(std::min(x.val_, md - x.val_));\n    }\n};\nint ModIntRuntime::md\
-    \ = 1;\n#line 2 \"random/rand_nondeterministic.hpp\"\n#include <chrono>\n#include\
-    \ <random>\n\nstruct rand_int_ {\n    using lint = long long;\n    std::mt19937\
-    \ mt;\n    // rand_int_() : mt(42) {}\n    rand_int_() : mt(std::chrono::steady_clock::now().time_since_epoch().count())\
-    \ {}\n    lint operator()(lint x) { return this->operator()(0, x); } // [0, x)\n\
-    \    lint operator()(lint l, lint r) {\n        std::uniform_int_distribution<lint>\
-    \ d(l, r - 1);\n        return d(mt);\n    }\n} rnd;\n#line 6 \"graph/test/chromatic_number.test.cpp\"\
+    \ this->pow(md - 2); }\n\n    static ModIntRuntime fac(int n) {\n        assert(n\
+    \ >= 0);\n        if (n >= md) return ModIntRuntime(0);\n        int l0 = facs().size();\n\
+    \        if (l0 > n) return facs()[n];\n        facs().resize(n + 1);\n      \
+    \  for (int i = l0; i <= n; i++)\n            facs()[i] = (i == 0 ? ModIntRuntime(1)\
+    \ : facs()[i - 1] * ModIntRuntime(i));\n        return facs()[n];\n    }\n\n \
+    \   static ModIntRuntime facinv(int n) { return ModIntRuntime::fac(n).inv(); }\n\
+    \n    static ModIntRuntime doublefac(int n) {\n        assert(n >= 0);\n     \
+    \   if (n >= md) return ModIntRuntime(0);\n        long long k = (n + 1) / 2;\n\
+    \        return (n & 1)\n                   ? ModIntRuntime::fac(k * 2) / (ModIntRuntime(2).pow(k)\
+    \ * ModIntRuntime::fac(k))\n                   : ModIntRuntime::fac(k) * ModIntRuntime(2).pow(k);\n\
+    \    }\n\n    static ModIntRuntime nCr(int n, int r) {\n        assert(n >= 0);\n\
+    \        if (r < 0 or n < r) return ModIntRuntime(0);\n        return ModIntRuntime::fac(n)\
+    \ / (ModIntRuntime::fac(r) * ModIntRuntime::fac(n - r));\n    }\n\n    static\
+    \ ModIntRuntime nPr(int n, int r) {\n        assert(n >= 0);\n        if (r <\
+    \ 0 or n < r) return ModIntRuntime(0);\n        return ModIntRuntime::fac(n) /\
+    \ ModIntRuntime::fac(n - r);\n    }\n\n    ModIntRuntime sqrt() const {\n    \
+    \    if (val_ == 0) return 0;\n        if (md == 2) return val_;\n        if (power((md\
+    \ - 1) / 2) != 1) return 0;\n        ModIntRuntime b = 1;\n        while (b.power((md\
+    \ - 1) / 2) == 1) b += 1;\n        int e = 0, m = md - 1;\n        while (m %\
+    \ 2 == 0) m >>= 1, e++;\n        ModIntRuntime x = power((m - 1) / 2), y = (*this)\
+    \ * x * x;\n        x *= (*this);\n        ModIntRuntime z = b.power(m);\n   \
+    \     while (y != 1) {\n            int j = 0;\n            ModIntRuntime t =\
+    \ y;\n            while (t != 1) j++, t *= t;\n            z = z.power(1LL <<\
+    \ (e - j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n   \
+    \     }\n        return ModIntRuntime(std::min(x.val_, md - x.val_));\n    }\n\
+    };\nint ModIntRuntime::md = 1;\n#line 2 \"random/rand_nondeterministic.hpp\"\n\
+    #include <chrono>\n#include <random>\n\nstruct rand_int_ {\n    using lint = long\
+    \ long;\n    std::mt19937 mt;\n    // rand_int_() : mt(42) {}\n    rand_int_()\
+    \ : mt(std::chrono::steady_clock::now().time_since_epoch().count()) {}\n    lint\
+    \ operator()(lint x) { return this->operator()(0, x); } // [0, x)\n    lint operator()(lint\
+    \ l, lint r) {\n        std::uniform_int_distribution<lint> d(l, r - 1);\n   \
+    \     return d(mt);\n    }\n} rnd;\n#line 6 \"graph/test/chromatic_number.test.cpp\"\
     \n\n#line 9 \"graph/test/chromatic_number.test.cpp\"\nusing namespace std;\n\n\
     int main() {\n    int N, M;\n    cin >> N >> M;\n    vector<int> to(N);\n\n  \
     \  long long md = 4;\n    do { md = rnd(1LL << 29, 1LL << 30); } while (!is_prime(md));\n\
@@ -195,7 +201,7 @@ data:
   isVerificationFile: true
   path: graph/test/chromatic_number.test.cpp
   requiredBy: []
-  timestamp: '2025-08-05 22:50:49+09:00'
+  timestamp: '2025-08-25 00:47:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/chromatic_number.test.cpp

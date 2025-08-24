@@ -28,7 +28,7 @@ data:
     \ https://atcoder.jp/contests/arc033/tasks/arc033_4\ntemplate <typename MODINT>\
     \ MODINT interpolate_iota(const std::vector<MODINT> ys, MODINT x_eval) {\n   \
     \ const int N = ys.size();\n    if (x_eval.val() < N) return ys[x_eval.val()];\n\
-    \    std::vector<MODINT> facinv(N);\n    facinv[N - 1] = MODINT(N - 1).fac().inv();\n\
+    \    std::vector<MODINT> facinv(N);\n    facinv[N - 1] = MODINT::facinv(N - 1);\n\
     \    for (int i = N - 1; i > 0; i--) facinv[i - 1] = facinv[i] * i;\n    std::vector<MODINT>\
     \ numleft(N);\n    MODINT numtmp = 1;\n    for (int i = 0; i < N; i++) {\n   \
     \     numleft[i] = numtmp;\n        numtmp *= x_eval - i;\n    }\n    numtmp =\
@@ -41,21 +41,21 @@ data:
     // Complexity: O(N)\n// Verified: https://atcoder.jp/contests/arc033/tasks/arc033_4\n\
     template <typename MODINT> MODINT interpolate_iota(const std::vector<MODINT> ys,\
     \ MODINT x_eval) {\n    const int N = ys.size();\n    if (x_eval.val() < N) return\
-    \ ys[x_eval.val()];\n    std::vector<MODINT> facinv(N);\n    facinv[N - 1] = MODINT(N\
-    \ - 1).fac().inv();\n    for (int i = N - 1; i > 0; i--) facinv[i - 1] = facinv[i]\
-    \ * i;\n    std::vector<MODINT> numleft(N);\n    MODINT numtmp = 1;\n    for (int\
-    \ i = 0; i < N; i++) {\n        numleft[i] = numtmp;\n        numtmp *= x_eval\
-    \ - i;\n    }\n    numtmp = 1;\n    MODINT ret = 0;\n    for (int i = N - 1; i\
-    \ >= 0; i--) {\n        MODINT tmp = ys[i] * numleft[i] * numtmp * facinv[i] *\
-    \ facinv[N - 1 - i];\n        ret += ((N - 1 - i) & 1) ? (-tmp) : tmp;\n     \
-    \   numtmp *= x_eval - i;\n    }\n    return ret;\n}\n"
+    \ ys[x_eval.val()];\n    std::vector<MODINT> facinv(N);\n    facinv[N - 1] = MODINT::facinv(N\
+    \ - 1);\n    for (int i = N - 1; i > 0; i--) facinv[i - 1] = facinv[i] * i;\n\
+    \    std::vector<MODINT> numleft(N);\n    MODINT numtmp = 1;\n    for (int i =\
+    \ 0; i < N; i++) {\n        numleft[i] = numtmp;\n        numtmp *= x_eval - i;\n\
+    \    }\n    numtmp = 1;\n    MODINT ret = 0;\n    for (int i = N - 1; i >= 0;\
+    \ i--) {\n        MODINT tmp = ys[i] * numleft[i] * numtmp * facinv[i] * facinv[N\
+    \ - 1 - i];\n        ret += ((N - 1 - i) & 1) ? (-tmp) : tmp;\n        numtmp\
+    \ *= x_eval - i;\n    }\n    return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: formal_power_series/lagrange_interpolation.hpp
   requiredBy:
   - number/arithmetic_cumsum.hpp
   - formal_power_series/sum_of_exponential_times_polynomial.hpp
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2025-08-25 00:44:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/arithmetic_function_totient.test.cpp
