@@ -216,9 +216,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.test.cpp
     title: set_power_series/test/subset_exp.test.cpp
-  - icon: ':x:'
-    path: set_power_series/test/subset_log.test.cpp
-    title: set_power_series/test/subset_log.test.cpp
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_pow.stress.test.cpp
     title: set_power_series/test/subset_pow.stress.test.cpp
@@ -264,9 +261,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: utilities/test/pow_op.test.cpp
     title: utilities/test/pow_op.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://oeis.org/A000108
@@ -470,7 +467,7 @@ data:
   - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/polynomial_divmod.hpp
   timestamp: '2023-12-26 21:26:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
   - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
@@ -492,7 +489,6 @@ data:
   - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   - graph/test/enumerate_cliques.test.cpp
   - set_power_series/test/subset_pow.yuki1594.test.cpp
-  - set_power_series/test/subset_log.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
   - set_power_series/test/subset_exp.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp

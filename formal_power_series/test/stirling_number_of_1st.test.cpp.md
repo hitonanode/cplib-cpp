@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/formal_power_series.hpp
     title: f(x)g(x) = 1 (mod x^deg)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []

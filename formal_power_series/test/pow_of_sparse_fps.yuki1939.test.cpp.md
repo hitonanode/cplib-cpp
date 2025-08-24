@@ -5,7 +5,7 @@ data:
     path: formal_power_series/pow_of_sparse_fps.hpp
     title: "Power of sparse formal power series \uFF08\u975E\u96F6\u306A\u9805\u304C\
       \u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u306E\u7D2F\u4E57\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []

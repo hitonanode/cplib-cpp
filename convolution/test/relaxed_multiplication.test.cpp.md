@@ -8,7 +8,7 @@ data:
     path: convolution/relaxed_multiplication.hpp
     title: "Relaxed multiplication / relaxed convolution \uFF08\u30AA\u30F3\u30E9\u30A4\
       \u30F3\u7573\u307F\u8FBC\u307F\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
