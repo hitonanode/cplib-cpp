@@ -46,11 +46,11 @@ so.ImposeLbUb(x, 2, y, 0, 5000); // If x >= 2 && y <= 0, impose cost by 5000
 
 ## 問題例
 
-- [燃やす埋める練習問題１ | MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem001)
-- [燃やす埋める練習問題２ | MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem002)
-- [燃やす埋める練習問題３ | MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem003)
-- [燃やす埋める練習問題４ | MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem004)
-- [燃やす埋める練習問題5 | MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem005)
+- [燃やす埋める練習問題１ \| MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem001)
+- [燃やす埋める練習問題２ \| MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem002)
+- [燃やす埋める練習問題３ \| MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem003)
+- [燃やす埋める練習問題４ \| MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem004)
+- [燃やす埋める練習問題5 \| MojaCoder](https://mojacoder.app/users/_kanpurin_/problems/project_selection_problem005)
 - [25365번: Kingdom Partition](https://www.acmicpc.net/problem/25365)
   - そのままではこのライブラリでは解けず， 4 状態へと拡張してやる必要がある．
 
