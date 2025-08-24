@@ -1,4 +1,6 @@
 #define PROBLEM "https://atcoder.jp/contests/arc105/tasks/arc105_f"
+// AtCoder Testcases is suspended https://atcoder.jp/posts/1377
+#define IGNORE
 #include "../../modint.hpp"
 #include "../subset_convolution.hpp"
 #include <iostream>

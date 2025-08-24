@@ -1,7 +1,4 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1773"
-#if __cplusplus < 201402L
-#define IGNORE
-#endif
 
 #include "../matrix.hpp"
 
