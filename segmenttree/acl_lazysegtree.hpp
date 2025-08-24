@@ -5,21 +5,32 @@
 #include <intrin.h>
 #endif
 
+#if __cplusplus >= 202002L
+#include <bit>
+#endif
+
 namespace atcoder {
 
 namespace internal {
 
-// @param n `0 <= n`
-// @return minimum non-negative `x` s.t. `n <= 2**x`
-int ceil_pow2(int n) {
-    int x = 0;
-    while ((1U << x) < (unsigned int)(n)) x++;
+#if __cplusplus >= 202002L
+
+using std::bit_ceil;
+
+#else
+
+// @return same with std::bit::bit_ceil
+unsigned int bit_ceil(unsigned int n) {
+    unsigned int x = 1;
+    while (x < (unsigned int)(n)) x *= 2;
     return x;
 }
 
+#endif
+
 // @param n `1 <= n`
-// @return minimum non-negative `x` s.t. `(n & (1 << x)) != 0`
-int bsf(unsigned int n) {
+// @return same with std::bit::countr_zero
+int countr_zero(unsigned int n) {
 #ifdef _MSC_VER
     unsigned long index;
     _BitScanForward(&index, n);
@@ -27,6 +38,14 @@ int bsf(unsigned int n) {
 #else
     return __builtin_ctz(n);
 #endif
+}
+
+// @param n `1 <= n`
+// @return same with std::bit::countr_zero
+constexpr int countr_zero_constexpr(unsigned int n) {
+    int x = 0;
+    while (!(n & (1 << x))) x++;
+    return x;
 }
 
 } // namespace internal
@@ -37,24 +56,31 @@ int bsf(unsigned int n) {
 #ifndef ATCODER_LAZYSEGTREE_HPP
 #define ATCODER_LAZYSEGTREE_HPP 1
 
-#include <algorithm>
 #include <cassert>
-#include <iostream>
+#include <functional>
 #include <vector>
 
-// #include "atcoder/internal_bit"
+#include "atcoder/internal_bit"
 
 namespace atcoder {
 
-template <class S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F, F),
-          F (*id)()>
+template <class S, auto op, auto e, class F, auto mapping, auto composition, auto id>
 struct lazy_segtree {
+    static_assert(std::is_convertible_v<decltype(op), std::function<S(S, S)>>,
+                  "op must work as S(S, S)");
+    static_assert(std::is_convertible_v<decltype(e), std::function<S()>>, "e must work as S()");
+    static_assert(std::is_convertible_v<decltype(mapping), std::function<S(F, S)>>,
+                  "mapping must work as S(F, S)");
+    static_assert(std::is_convertible_v<decltype(composition), std::function<F(F, F)>>,
+                  "composition must work as F(F, F)");
+    static_assert(std::is_convertible_v<decltype(id), std::function<F()>>, "id must work as F()");
+
 public:
     lazy_segtree() : lazy_segtree(0) {}
     explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, e())) {}
     explicit lazy_segtree(const std::vector<S> &v) : _n(int(v.size())) {
-        log = internal::ceil_pow2(_n);
-        size = 1 << log;
+        size = (int)internal::bit_ceil((unsigned int)(_n));
+        log = internal::countr_zero((unsigned int)size);
         d = std::vector<S>(2 * size, e());
         lz = std::vector<F>(size, id());
         for (int i = 0; i < _n; i++) d[size + i] = v[i];
@@ -69,14 +95,14 @@ public:
         for (int i = 1; i <= log; i++) update(p >> i);
     }
 
-    S get(int p) const {
+    S get(int p) {
         assert(0 <= p && p < _n);
         p += size;
         for (int i = log; i >= 1; i--) push(p >> i);
         return d[p];
     }
 
-    S prod(int l, int r) const {
+    S prod(int l, int r) {
         assert(0 <= l && l <= r && r <= _n);
         if (l == r) return e();
 
@@ -99,7 +125,7 @@ public:
         return op(sml, smr);
     }
 
-    S all_prod() const { return d[1]; }
+    S all_prod() { return d[1]; }
 
     void apply(int p, F f) {
         assert(0 <= p && p < _n);
@@ -138,10 +164,10 @@ public:
         }
     }
 
-    template <bool (*g)(S)> int max_right(int l) const {
+    template <bool (*g)(S)> int max_right(int l) {
         return max_right(l, [](S x) { return g(x); });
     }
-    template <class G> int max_right(int l, G g) const {
+    template <class G> int max_right(int l, G g) {
         assert(0 <= l && l <= _n);
         assert(g(e()));
         if (l == _n) return _n;
@@ -167,10 +193,10 @@ public:
         return _n;
     }
 
-    template <bool (*g)(S)> int min_left(int r) const {
+    template <bool (*g)(S)> int min_left(int r) {
         return min_left(r, [](S x) { return g(x); });
     }
-    template <class G> int min_left(int r, G g) const {
+    template <class G> int min_left(int r, G g) {
         assert(0 <= r && r <= _n);
         assert(g(e()));
         if (r == 0) return 0;
@@ -198,15 +224,15 @@ public:
 
 protected:
     int _n, size, log;
-    mutable std::vector<S> d;
-    mutable std::vector<F> lz;
+    std::vector<S> d;
+    std::vector<F> lz;
 
-    void update(int k) const { d[k] = op(d[2 * k], d[2 * k + 1]); }
-    virtual void all_apply(int k, F f) const {
+    void update(int k) { d[k] = op(d[2 * k], d[2 * k + 1]); }
+    virtual void all_apply(int k, F f) {
         d[k] = mapping(f, d[k]);
         if (k < size) lz[k] = composition(f, lz[k]);
     }
-    void push(int k) const {
+    void push(int k) {
         all_apply(2 * k, lz[k]);
         all_apply(2 * k + 1, lz[k]);
         lz[k] = id();
@@ -214,7 +240,7 @@ protected:
 };
 } // namespace atcoder
 #endif // ATCODER_LAZYSEGTREE_HPP
-// Reference: https://atcoder.github.io/ac-library/document_ja/lazysegtree.html
+// Reference: https://atcoder.github.io/ac-library/production/document_ja/lazysegtree.html
 //            https://betrue12.hateblo.jp/entry/2020/09/22/194541
 //            https://betrue12.hateblo.jp/entry/2020/09/23/005940
 /*

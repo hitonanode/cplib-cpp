@@ -1,8 +1,7 @@
 #pragma once
 #include <array>
 
-// CUT begin
-// 2-dimentional 1-indexed BIT (i : [1, lenX][1, lenY])
+// 2-dimensional 1-indexed BIT (i : [1, lenX][1, lenY])
 template <typename T, int lenX, int lenY> struct BIT_2D {
     std::array<T, (lenX + 1) * (lenY + 1)> val;
     constexpr static int M = lenY + 1;

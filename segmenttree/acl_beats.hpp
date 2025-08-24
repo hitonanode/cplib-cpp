@@ -1,12 +1,14 @@
 #pragma once
 #include "acl_lazysegtree.hpp"
 
-template <class S, S (*op)(S, S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F, F),
-          F (*id)()>
+#include <algorithm>
+#include <iostream>
+
+template <class S, auto op, auto e, class F, auto mapping, auto composition, auto id>
 class segtree_beats : public atcoder::lazy_segtree<S, op, e, F, mapping, composition, id> {
     using Base = atcoder::lazy_segtree<S, op, e, F, mapping, composition, id>;
     using Base::lazy_segtree;
-    void all_apply(int k, F f) const override {
+    void all_apply(int k, F f) override {
         Base::d[k] = mapping(f, Base::d[k]);
         if (k < Base::size) {
             Base::lz[k] = composition(f, Base::lz[k]);
@@ -16,8 +18,6 @@ class segtree_beats : public atcoder::lazy_segtree<S, op, e, F, mapping, composi
 };
 
 namespace RangeChMinMaxAddSum {
-#include <algorithm>
-
 template <typename Num> inline Num second_lowest(Num a, Num a2, Num c, Num c2) noexcept {
     assert(a <= a2); // a < a2 or a == a2 == INF
     assert(c <= c2); // c < c2 or c == c2 == -INF
