@@ -5,21 +5,32 @@
 #include <intrin.h>
 #endif
 
+#if __cplusplus >= 202002L
+#include <bit>
+#endif
+
 namespace atcoder {
 
 namespace internal {
 
-// @param n `0 <= n`
-// @return minimum non-negative `x` s.t. `n <= 2**x`
-int ceil_pow2(int n) {
-    int x = 0;
-    while ((1U << x) < (unsigned int)(n)) x++;
+#if __cplusplus >= 202002L
+
+using std::bit_ceil;
+
+#else
+
+// @return same with std::bit::bit_ceil
+unsigned int bit_ceil(unsigned int n) {
+    unsigned int x = 1;
+    while (x < (unsigned int)(n)) x *= 2;
     return x;
 }
 
+#endif
+
 // @param n `1 <= n`
-// @return minimum non-negative `x` s.t. `(n & (1 << x)) != 0`
-int bsf(unsigned int n) {
+// @return same with std::bit::countr_zero
+int countr_zero(unsigned int n) {
 #ifdef _MSC_VER
     unsigned long index;
     _BitScanForward(&index, n);
@@ -38,21 +49,24 @@ int bsf(unsigned int n) {
 #ifndef ATCODER_SEGTREE_HPP
 #define ATCODER_SEGTREE_HPP 1
 
-#include <algorithm>
 #include <cassert>
+#include <functional>
 #include <vector>
 
 // #include "atcoder/internal_bit"
 
 namespace atcoder {
+template <class S, auto op, auto e> struct segtree {
+    static_assert(std::is_convertible_v<decltype(op), std::function<S(S, S)>>,
+                  "op must work as S(S, S)");
+    static_assert(std::is_convertible_v<decltype(e), std::function<S()>>, "e must work as S()");
 
-template <class S, S (*op)(S, S), S (*e)()> struct segtree {
 public:
     segtree() : segtree(0) {}
     explicit segtree(int n) : segtree(std::vector<S>(n, e())) {}
     explicit segtree(const std::vector<S> &v) : _n(int(v.size())) {
-        log = internal::ceil_pow2(_n);
-        size = 1 << log;
+        size = (int)internal::bit_ceil((unsigned int)(_n));
+        log = internal::countr_zero((unsigned int)size);
         d = std::vector<S>(2 * size, e());
         for (int i = 0; i < _n; i++) d[size + i] = v[i];
         for (int i = size - 1; i >= 1; i--) { update(i); }
@@ -152,7 +166,7 @@ private:
 
 #endif // ATCODER_SEGTREE_HPP
 
-// Reference: https://atcoder.github.io/ac-library/document_ja/segtree.html
+// Reference: https://atcoder.github.io/ac-library/production/document_ja/segtree.html
 /* usage:
 struct S {
     long long su;
