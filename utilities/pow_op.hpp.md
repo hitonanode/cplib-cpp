@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: number/test/discrete_logarithm_matrix.yuki950.test.cpp
+    title: number/test/discrete_logarithm_matrix.yuki950.test.cpp
+  - icon: ':heavy_check_mark:'
     path: utilities/test/pow_op.test.cpp
     title: utilities/test/pow_op.test.cpp
   _isVerificationFailed: false
@@ -27,6 +30,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - utilities/test/pow_op.test.cpp
+  - number/test/discrete_logarithm_matrix.yuki950.test.cpp
 documentation_of: utilities/pow_op.hpp
 layout: document
 title: Power (general monoid)

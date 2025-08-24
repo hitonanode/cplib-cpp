@@ -1,6 +1,10 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: data_structure/area_of_union_of_rectangles.hpp
+    title: "Area of union of rectangles \uFF082 \u6B21\u5143\u5E73\u9762\u4E0A\u306E\
+      \u9577\u65B9\u5F62\u305F\u3061\u304C\u8986\u3046\u9762\u7A4D\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -28,17 +32,18 @@ data:
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/area_of_union_of_rectangles\"\
-    \n#include \"data_structure/area_of_union_of_rectangles.hpp\"\n\n#include <iostream>\n\
-    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n#include \"../area_of_union_of_rectangles.hpp\"\n\n#include <iostream>\nusing\
+    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int N;\n    cin >> N;\n    AreaOfUnionOfRectangles<long long> aur;\n\n \
     \   while (N--) {\n        int l, d, r, u;\n        cin >> l >> d >> r >> u;\n\
     \        aur.add_rectangle(l, r, d, u);\n    }\n\n    cout << aur.solve() << '\\\
     n';\n}\n"
-  dependsOn: []
+  dependsOn:
+  - data_structure/area_of_union_of_rectangles.hpp
   isVerificationFile: true
   path: data_structure/test/area_of_union_of_rectangles.test.cpp
   requiredBy: []
-  timestamp: '2025-08-11 22:47:50+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/area_of_union_of_rectangles.test.cpp

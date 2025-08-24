@@ -1,6 +1,10 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: number/discrete_logarithm.hpp
+    title: "Discrete logarithm / Baby-step giant-step \uFF08\u96E2\u6563\u5BFE\u6570\
+      \u554F\u984C\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -67,7 +71,7 @@ data:
     \ e();\n        for (int i = 0; i < N; ++i) cin >> g.at(i), g.at(i)--;\n     \
     \   cout << DiscreteLogarithmNonzero<S, set<S>>(f, g, op, 1LL << 30) << '\\n';\n\
     \    }\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/261\"\n#include \"number/discrete_logarithm.hpp\"\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/261\"\n#include \"../discrete_logarithm.hpp\"\
     \n\n#include <iostream>\n#include <numeric>\n#include <set>\n#include <utility>\n\
     using namespace std;\n\nconstexpr int D = 100;\nusing S = std::array<int, D>;\n\
     \nS e() {\n    S res;\n    iota(res.begin(), res.end(), 0);\n    return res;\n\
@@ -79,11 +83,12 @@ data:
     \ e();\n        for (int i = 0; i < N; ++i) cin >> g.at(i), g.at(i)--;\n     \
     \   cout << DiscreteLogarithmNonzero<S, set<S>>(f, g, op, 1LL << 30) << '\\n';\n\
     \    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - number/discrete_logarithm.hpp
   isVerificationFile: true
   path: number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp
   requiredBy: []
-  timestamp: '2025-08-24 22:54:44+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp

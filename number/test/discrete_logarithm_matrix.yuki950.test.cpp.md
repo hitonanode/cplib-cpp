@@ -1,6 +1,13 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: number/discrete_logarithm.hpp
+    title: "Discrete logarithm / Baby-step giant-step \uFF08\u96E2\u6563\u5BFE\u6570\
+      \u554F\u984C\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: utilities/pow_op.hpp
+    title: Power (general monoid)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -82,8 +89,8 @@ data:
     \ S, set<S>>(x, init, B, op, op, P * 2);\n\n    if (res < 0) {\n        puts(\"\
     -1\");\n    } else {\n        cout << first_det_match + res * det_period << '\\\
     n';\n    }\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/950\"\n#include \"number/discrete_logarithm.hpp\"\
-    \n#include \"utilities/pow_op.hpp\"\n\n#include <array>\n#include <iostream>\n\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/950\"\n#include \"../discrete_logarithm.hpp\"\
+    \n#include \"../../utilities/pow_op.hpp\"\n\n#include <array>\n#include <iostream>\n\
     #include <set>\nusing namespace std;\n\nusing S = array<long long, 4>;\n\nlong\
     \ long P;\nS op(S l, S r) {\n    return S{(((long long)l[0b00] * r[0b00] % P +\
     \ (long long)l[0b01] * r[0b10] % P) % P),\n             (((long long)l[0b00] *\
@@ -106,11 +113,13 @@ data:
     \ S, set<S>>(x, init, B, op, op, P * 2);\n\n    if (res < 0) {\n        puts(\"\
     -1\");\n    } else {\n        cout << first_det_match + res * det_period << '\\\
     n';\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - number/discrete_logarithm.hpp
+  - utilities/pow_op.hpp
   isVerificationFile: true
   path: number/test/discrete_logarithm_matrix.yuki950.test.cpp
   requiredBy: []
-  timestamp: '2025-08-24 22:54:44+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/discrete_logarithm_matrix.yuki950.test.cpp

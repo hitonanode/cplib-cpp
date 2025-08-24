@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: convex_hull_trick/test/convex_hull_trick.test.cpp
+    title: convex_hull_trick/test/convex_hull_trick.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://codeforces.com/contest/1137/submission/59448399
@@ -118,8 +121,9 @@ data:
   path: convex_hull_trick/convex_hull_trick.hpp
   requiredBy: []
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - convex_hull_trick/test/convex_hull_trick.test.cpp
 documentation_of: convex_hull_trick/convex_hull_trick.hpp
 layout: document
 redirect_from:

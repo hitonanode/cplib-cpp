@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/formal_power_series.hpp
+    title: f(x)g(x) = 1 (mod x^deg)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -268,17 +271,17 @@ data:
     \ b = ((x.exp(N + 2) - 1) >> 1).inv(N + 1);\n    for (int i = 0; i <= N; i++)\
     \ printf(\"%d \", (b.coeff(i) * mint(i).fac()).val());\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bernoulli_number\"\n#include\
-    \ \"formal_power_series/formal_power_series.hpp\"\n#include \"modint.hpp\"\n#include\
-    \ <iostream>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\
-    \    using mint = ModInt<998244353>;\n    FormalPowerSeries<mint> x({0, 1});\n\
-    \    FormalPowerSeries<mint> b = ((x.exp(N + 2) - 1) >> 1).inv(N + 1);\n    for\
-    \ (int i = 0; i <= N; i++) printf(\"%d \", (b.coeff(i) * mint(i).fac()).val());\n\
-    }\n"
-  dependsOn: []
+    \ \"../formal_power_series.hpp\"\n#include \"../../modint.hpp\"\n#include <iostream>\n\
+    using namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    using mint\
+    \ = ModInt<998244353>;\n    FormalPowerSeries<mint> x({0, 1});\n    FormalPowerSeries<mint>\
+    \ b = ((x.exp(N + 2) - 1) >> 1).inv(N + 1);\n    for (int i = 0; i <= N; i++)\
+    \ printf(\"%d \", (b.coeff(i) * mint(i).fac()).val());\n}\n"
+  dependsOn:
+  - formal_power_series/formal_power_series.hpp
   isVerificationFile: true
   path: formal_power_series/test/bernoulli_number.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/bernoulli_number.test.cpp

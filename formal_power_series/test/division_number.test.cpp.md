@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/formal_power_series.hpp
+    title: f(x)g(x) = 1 (mod x^deg)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -269,18 +272,19 @@ data:
     \ }\n    }\n    b = b.exp(N + 1).inv(N + 1);\n    for (int i = 0; i <= N; i++)\
     \ printf(\"%d \", b.coeff(i).val());\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/partition_function\"\n\
-    #include \"formal_power_series/formal_power_series.hpp\"\n#include \"modint.hpp\"\
-    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    int N;\n    cin\
-    \ >> N;\n    FormalPowerSeries<ModInt<998244353>> m({1, -1}), b(N + 1);\n    m\
-    \ = m.log(N + 1);\n    for (int i = 1; i <= N; i++) { // 1 - x^i\n        for\
-    \ (int j = 1; j * i <= N; j++) { b[i * j] += m.coeff(j); }\n    }\n    b = b.exp(N\
-    \ + 1).inv(N + 1);\n    for (int i = 0; i <= N; i++) printf(\"%d \", b.coeff(i).val());\n\
+    #include \"../formal_power_series.hpp\"\n#include \"../../modint.hpp\"\n#include\
+    \ <iostream>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\
+    \    FormalPowerSeries<ModInt<998244353>> m({1, -1}), b(N + 1);\n    m = m.log(N\
+    \ + 1);\n    for (int i = 1; i <= N; i++) { // 1 - x^i\n        for (int j = 1;\
+    \ j * i <= N; j++) { b[i * j] += m.coeff(j); }\n    }\n    b = b.exp(N + 1).inv(N\
+    \ + 1);\n    for (int i = 0; i <= N; i++) printf(\"%d \", b.coeff(i).val());\n\
     }\n"
-  dependsOn: []
+  dependsOn:
+  - formal_power_series/formal_power_series.hpp
   isVerificationFile: true
   path: formal_power_series/test/division_number.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/division_number.test.cpp

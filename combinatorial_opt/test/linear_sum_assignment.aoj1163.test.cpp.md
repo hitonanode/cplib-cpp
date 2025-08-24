@@ -1,6 +1,16 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/linear_sum_assignment.hpp
+    title: "Linear sum assignment problem, Hungarian algorithm \uFF08\u5272\u5F53\u554F\
+      \u984C\u306B\u5BFE\u3059\u308B\u30CF\u30F3\u30AC\u30EA\u30A2\u30F3\u6CD5\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: utilities/reader.hpp
+    title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
+  - icon: ':heavy_check_mark:'
+    path: utilities/writer.hpp
+    title: "\u6A19\u6E96\u51FA\u529B"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -160,7 +170,7 @@ data:
     \    char *head = cache;\n    while (x) *head = '0' + x % 10, head++, x /= 10;\n\
     \    while (head != cache) putchar(*(--head));\n    putchar(delim);\n}\n#line\
     \ 7 \"combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp\"\n\n#include\
-    \ <iostream>\n\n#include <numeric>\n#line 12 \"combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp\"\
+    \ <numeric>\n#line 10 \"combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    while (true) {\n        const int\
     \ nr = rdi(), nc = rdi();\n        if (!nr) break;\n\n        std::vector<int>\
     \ B(nr), R(nc);\n        for (auto &x : B) x = rdi();\n        for (auto &x :\
@@ -170,21 +180,24 @@ data:
     \ f, g] = linear_sum_assignment::solve(nr, nc, C);\n\n        wt_integer(-ret,\
     \ '\\n');\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1163\"\
-    \n\n#include \"combinatorial_opt/linear_sum_assignment.hpp\"\n\n#include \"utilities/reader.hpp\"\
-    \n#include \"utilities/writer.hpp\"\n\n#include <iostream>\n\n#include <numeric>\n\
-    #include <vector>\nusing namespace std;\n\nint main() {\n    while (true) {\n\
-    \        const int nr = rdi(), nc = rdi();\n        if (!nr) break;\n\n      \
-    \  std::vector<int> B(nr), R(nc);\n        for (auto &x : B) x = rdi();\n    \
-    \    for (auto &x : R) x = rdi();\n\n        std::vector C(nr, vector<int>(nc));\n\
-    \        for (int i = 0; i < nr; ++i) {\n            for (int j = 0; j < nc; ++j)\
-    \ { C.at(i).at(j) = -(std::gcd(B.at(i), R.at(j)) > 1); }\n        }\n\n      \
-    \  auto [ret, vs, f, g] = linear_sum_assignment::solve(nr, nc, C);\n\n       \
-    \ wt_integer(-ret, '\\n');\n    }\n}\n"
-  dependsOn: []
+    \n\n#include \"../linear_sum_assignment.hpp\"\n\n#include \"../../utilities/reader.hpp\"\
+    \n#include \"../../utilities/writer.hpp\"\n\n#include <numeric>\n#include <vector>\n\
+    using namespace std;\n\nint main() {\n    while (true) {\n        const int nr\
+    \ = rdi(), nc = rdi();\n        if (!nr) break;\n\n        std::vector<int> B(nr),\
+    \ R(nc);\n        for (auto &x : B) x = rdi();\n        for (auto &x : R) x =\
+    \ rdi();\n\n        std::vector C(nr, vector<int>(nc));\n        for (int i =\
+    \ 0; i < nr; ++i) {\n            for (int j = 0; j < nc; ++j) { C.at(i).at(j)\
+    \ = -(std::gcd(B.at(i), R.at(j)) > 1); }\n        }\n\n        auto [ret, vs,\
+    \ f, g] = linear_sum_assignment::solve(nr, nc, C);\n\n        wt_integer(-ret,\
+    \ '\\n');\n    }\n}\n"
+  dependsOn:
+  - combinatorial_opt/linear_sum_assignment.hpp
+  - utilities/reader.hpp
+  - utilities/writer.hpp
   isVerificationFile: true
   path: combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
   requiredBy: []
-  timestamp: '2023-08-22 20:35:28+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp

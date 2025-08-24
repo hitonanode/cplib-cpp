@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: data_structure/test/area_of_union_of_rectangles.test.cpp
+    title: data_structure/test/area_of_union_of_rectangles.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -57,8 +60,9 @@ data:
   path: data_structure/area_of_union_of_rectangles.hpp
   requiredBy: []
   timestamp: '2025-08-11 22:47:50+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - data_structure/test/area_of_union_of_rectangles.test.cpp
 documentation_of: data_structure/area_of_union_of_rectangles.hpp
 layout: document
 title: "Area of union of rectangles \uFF082 \u6B21\u5143\u5E73\u9762\u4E0A\u306E\u9577\

@@ -1,6 +1,10 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: number/discrete_logarithm.hpp
+    title: "Discrete logarithm / Baby-step giant-step \uFF08\u96E2\u6563\u5BFE\u6570\
+      \u554F\u984C\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -61,16 +65,17 @@ data:
     \    int T;\n    cin >> T;\n    while (T--) {\n        cin >> X >> Y >> M;\n \
     \       cout << DiscreteLogarithmMod<long long>(X, Y, M) << '\\n';\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/discrete_logarithm_mod\"\
-    \n#include \"number/discrete_logarithm.hpp\"\n\n#include <iostream>\nusing namespace\
+    \n#include \"../discrete_logarithm.hpp\"\n\n#include <iostream>\nusing namespace\
     \ std;\n\nint X, Y, M;\n\nint mp(int x, int y) { return (long long)x * y % M;\
     \ }\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int\
     \ T;\n    cin >> T;\n    while (T--) {\n        cin >> X >> Y >> M;\n        cout\
     \ << DiscreteLogarithmMod<long long>(X, Y, M) << '\\n';\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - number/discrete_logarithm.hpp
   isVerificationFile: true
   path: number/test/discrete_logarithm_mod.test.cpp
   requiredBy: []
-  timestamp: '2025-08-24 22:54:44+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/discrete_logarithm_mod.test.cpp

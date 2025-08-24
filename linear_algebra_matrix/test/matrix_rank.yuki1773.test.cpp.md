@@ -15,8 +15,7 @@ data:
     links:
     - https://yukicoder.me/problems/no/1773
   bundledCode: "#line 1 \"linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp\"\
-    \n#define PROBLEM \"https://yukicoder.me/problems/no/1773\"\n#if __cplusplus <\
-    \ 201402L\n#define IGNORE\n#endif\n\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
+    \n#define PROBLEM \"https://yukicoder.me/problems/no/1773\"\n\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
     \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iterator>\n\
     #include <type_traits>\n#include <utility>\n#include <vector>\n\nnamespace matrix_\
     \ {\nstruct has_id_method_impl {\n    template <class T_> static auto check(T_\
@@ -135,8 +134,8 @@ data:
     \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
     \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
     \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 7 \"linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp\"\
-    \n\n#include <iostream>\n#include <random>\n#include <tuple>\n#line 12 \"linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp\"\
+    \    }\n};\n#line 4 \"linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp\"\
+    \n\n#include <iostream>\n#include <random>\n#include <tuple>\n#line 9 \"linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp\"\
     \nusing namespace std;\n\n#include <atcoder/modint>\nusing mint = atcoder::modint1000000007;\n\
     \nmt19937 mt(530629);\nuniform_int_distribution<int> rndgen(0, mint::mod() - 1);\n\
     \nint solve(int N, const vector<tuple<int, int, int>> &uvws) {\n    matrix<mint>\
@@ -148,26 +147,25 @@ data:
     \ {\n        int u, v, w;\n        cin >> u >> v >> w;\n        u--, v--, w--;\n\
     \        uvws.emplace_back(u, v, w);\n    }\n    cout << max(solve(N, uvws), solve(N,\
     \ uvws)) << '\\n';\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1773\"\n#if __cplusplus\
-    \ < 201402L\n#define IGNORE\n#endif\n\n#include \"../matrix.hpp\"\n\n#include\
-    \ <iostream>\n#include <random>\n#include <tuple>\n#include <vector>\nusing namespace\
-    \ std;\n\n#include <atcoder/modint>\nusing mint = atcoder::modint1000000007;\n\
-    \nmt19937 mt(530629);\nuniform_int_distribution<int> rndgen(0, mint::mod() - 1);\n\
-    \nint solve(int N, const vector<tuple<int, int, int>> &uvws) {\n    matrix<mint>\
-    \ M(N, N);\n    for (auto [u, v, w] : uvws) {\n        mint x = rndgen(mt);\n\
-    \        M[u][v] += x;\n        M[v][w] += x;\n        M[w][u] += x;\n       \
-    \ M[v][u] -= x;\n        M[w][v] -= x;\n        M[u][w] -= x;\n    }\n    return\
-    \ M.gauss_jordan().rank_of_gauss_jordan() / 2;\n}\n\nint main() {\n    int N,\
-    \ M;\n    cin >> N >> M;\n    vector<tuple<int, int, int>> uvws;\n    while (M--)\
-    \ {\n        int u, v, w;\n        cin >> u >> v >> w;\n        u--, v--, w--;\n\
-    \        uvws.emplace_back(u, v, w);\n    }\n    cout << max(solve(N, uvws), solve(N,\
-    \ uvws)) << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1773\"\n\n#include \"\
+    ../matrix.hpp\"\n\n#include <iostream>\n#include <random>\n#include <tuple>\n\
+    #include <vector>\nusing namespace std;\n\n#include <atcoder/modint>\nusing mint\
+    \ = atcoder::modint1000000007;\n\nmt19937 mt(530629);\nuniform_int_distribution<int>\
+    \ rndgen(0, mint::mod() - 1);\n\nint solve(int N, const vector<tuple<int, int,\
+    \ int>> &uvws) {\n    matrix<mint> M(N, N);\n    for (auto [u, v, w] : uvws) {\n\
+    \        mint x = rndgen(mt);\n        M[u][v] += x;\n        M[v][w] += x;\n\
+    \        M[w][u] += x;\n        M[v][u] -= x;\n        M[w][v] -= x;\n       \
+    \ M[u][w] -= x;\n    }\n    return M.gauss_jordan().rank_of_gauss_jordan() / 2;\n\
+    }\n\nint main() {\n    int N, M;\n    cin >> N >> M;\n    vector<tuple<int, int,\
+    \ int>> uvws;\n    while (M--) {\n        int u, v, w;\n        cin >> u >> v\
+    \ >> w;\n        u--, v--, w--;\n        uvws.emplace_back(u, v, w);\n    }\n\
+    \    cout << max(solve(N, uvws), solve(N, uvws)) << '\\n';\n}\n"
   dependsOn:
   - linear_algebra_matrix/matrix.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp
   requiredBy: []
-  timestamp: '2025-08-10 23:51:40+09:00'
+  timestamp: '2025-08-24 23:23:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp

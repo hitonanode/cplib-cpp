@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: number/modint_runtime.hpp
+    title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -89,17 +92,18 @@ data:
     \       cout << (m ? m.val() : -1) << endl;\n        } else\n            cout\
     \ << 0 << endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include \"\
-    number/modint_runtime.hpp\"\n#include <iostream>\nusing namespace std;\n\nint\
-    \ main() {\n    int T;\n    cin >> T;\n    while (T--) {\n        int Y, P;\n\
-    \        cin >> Y >> P;\n        ModIntRuntime::set_mod(P);\n        ModIntRuntime\
-    \ m = Y;\n        if (Y) {\n            m = m.sqrt();\n            cout << (m\
-    \ ? m.val() : -1) << endl;\n        } else\n            cout << 0 << endl;\n \
-    \   }\n}\n"
-  dependsOn: []
+    ../modint_runtime.hpp\"\n#include <iostream>\nusing namespace std;\n\nint main()\
+    \ {\n    int T;\n    cin >> T;\n    while (T--) {\n        int Y, P;\n       \
+    \ cin >> Y >> P;\n        ModIntRuntime::set_mod(P);\n        ModIntRuntime m\
+    \ = Y;\n        if (Y) {\n            m = m.sqrt();\n            cout << (m ?\
+    \ m.val() : -1) << endl;\n        } else\n            cout << 0 << endl;\n   \
+    \ }\n}\n"
+  dependsOn:
+  - number/modint_runtime.hpp
   isVerificationFile: true
   path: number/test/sqrt_modint_runtime.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/sqrt_modint_runtime.test.cpp

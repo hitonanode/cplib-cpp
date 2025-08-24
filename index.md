@@ -20,7 +20,7 @@ data:
       path: combinatorial_opt/linear_matroid_parity.hpp
       title: "Linear matroid parity (unweighted) \uFF08\u7DDA\u5F62\u30DE\u30C8\u30ED\
         \u30A4\u30C9\u30D1\u30EA\u30C6\u30A3\uFF09"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: combinatorial_opt/linear_sum_assignment.hpp
       title: "Linear sum assignment problem, Hungarian algorithm \uFF08\u5272\u5F53\
         \u554F\u984C\u306B\u5BFE\u3059\u308B\u30CF\u30F3\u30AC\u30EA\u30A2\u30F3\u6CD5\
@@ -72,7 +72,7 @@ data:
     - icon: ':warning:'
       path: convex_hull_trick/add-monotone_cht.hpp
       title: convex_hull_trick/add-monotone_cht.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: convex_hull_trick/convex_hull_trick.hpp
       title: convex_hull_trick/convex_hull_trick.hpp
     - icon: ':heavy_check_mark:'
@@ -114,7 +114,7 @@ data:
         \u30F3\u7573\u307F\u8FBC\u307F\uFF09"
   - name: data_structure
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/area_of_union_of_rectangles.hpp
       title: "Area of union of rectangles \uFF082 \u6B21\u5143\u5E73\u9762\u4E0A\u306E\
         \u9577\u65B9\u5F62\u305F\u3061\u304C\u8986\u3046\u9762\u7A4D\uFF09"
@@ -259,7 +259,7 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
@@ -276,7 +276,7 @@ data:
     - icon: ':warning:'
       path: geometry/problem_of_apollonius.hpp
       title: geometry/problem_of_apollonius.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: geometry/sort_by_argument.hpp
       title: geometry/sort_by_argument.hpp
     - icon: ':heavy_check_mark:'
@@ -470,7 +470,7 @@ data:
     - icon: ':warning:'
       path: number/cyclotomic_polynomials.hpp
       title: "Cyclotomic polynomials \uFF08\u5186\u5206\u591A\u9805\u5F0F\uFF09"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: number/discrete_logarithm.hpp
       title: "Discrete logarithm / Baby-step giant-step \uFF08\u96E2\u6563\u5BFE\u6570\
         \u554F\u984C\uFF09"
@@ -671,7 +671,7 @@ data:
       title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   - name: set_power_series
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: set_power_series/subset_convolution.hpp
       title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
         \u7B97\uFF09"
@@ -924,7 +924,7 @@ data:
     - icon: ':warning:'
       path: utilities/transpose.hpp
       title: utilities/transpose.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: utilities/writer.hpp
       title: "\u6A19\u6E96\u51FA\u529B"
     - icon: ':warning:'
@@ -1694,7 +1694,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_exp.stress.test.cpp
       title: set_power_series/test/subset_exp.stress.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: set_power_series/test/subset_log.test.cpp
       title: set_power_series/test/subset_log.test.cpp
     - icon: ':heavy_check_mark:'

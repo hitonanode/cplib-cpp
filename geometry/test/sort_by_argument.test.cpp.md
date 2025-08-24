@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: geometry/sort_by_argument.hpp
+    title: geometry/sort_by_argument.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -29,17 +32,18 @@ data:
     \  }\n    sort(ps.begin(), ps.end());\n    for (auto p : ps) cout << p.X << '\
     \ ' << p.Y << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\
-    \n#include \"geometry/sort_by_argument.hpp\"\n\n#include <algorithm>\n#include\
-    \ <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \n#include \"../sort_by_argument.hpp\"\n\n#include <algorithm>\n#include <iostream>\n\
+    #include <vector>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    int N;\n    cin >> N;\n    vector<Point>\
     \ ps;\n    while (N--) {\n        long long x, y;\n        cin >> x >> y;\n  \
     \      ps.emplace_back(x, y);\n    }\n    sort(ps.begin(), ps.end());\n    for\
     \ (auto p : ps) cout << p.X << ' ' << p.Y << '\\n';\n}\n"
-  dependsOn: []
+  dependsOn:
+  - geometry/sort_by_argument.hpp
   isVerificationFile: true
   path: geometry/test/sort_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2025-08-05 22:50:49+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: geometry/test/sort_by_argument.test.cpp

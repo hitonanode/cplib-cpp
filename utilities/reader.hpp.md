@@ -4,6 +4,12 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
+    title: combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_sum_assignment.test.cpp
+    title: combinatorial_opt/test/linear_sum_assignment.test.cpp
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/radix_heap.dijkstra.test.cpp
     title: data_structure/test/radix_heap.dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,6 +54,8 @@ data:
   timestamp: '2021-08-01 21:42:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
+  - combinatorial_opt/test/linear_sum_assignment.test.cpp
   - linear_algebra_matrix/test/matrix_product.test.cpp
   - string/test/sa_count_keyword.reader.test.cpp
   - data_structure/test/radix_heap_array.dijkstra.test.cpp

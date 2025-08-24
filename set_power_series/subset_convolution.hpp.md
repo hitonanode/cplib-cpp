@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: set_power_series/test/subset_log.test.cpp
     title: set_power_series/test/subset_log.test.cpp
   - icon: ':heavy_check_mark:'
@@ -26,9 +26,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_pow.yuki1594.test.cpp
     title: set_power_series/test/subset_pow.yuki1594.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://atcoder.jp/contests/abc213/tasks/abc213_g
@@ -229,7 +229,7 @@ data:
   requiredBy:
   - linear_algebra_matrix/hafnian.hpp
   timestamp: '2021-10-16 14:40:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - linear_algebra_matrix/test/hafnian.test.cpp
   - set_power_series/test/subset_pow.yuki1594.test.cpp

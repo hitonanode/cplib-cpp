@@ -15,8 +15,7 @@ data:
     links:
     - https://judge.yosupo.jp/problem/matrix_det
   bundledCode: "#line 1 \"linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\n#if __cplusplus\
-    \ < 201402L\n#define IGNORE\n#endif\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
     \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iterator>\n\
     #include <type_traits>\n#include <utility>\n#include <vector>\n\nnamespace matrix_\
     \ {\nstruct has_id_method_impl {\n    template <class T_> static auto check(T_\
@@ -135,7 +134,7 @@ data:
     \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
     \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
     \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 6 \"linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp\"\
+    \    }\n};\n#line 3 \"linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp\"\
     \n#include <atcoder/modint>\n#include <iostream>\nusing namespace std;\nusing\
     \ mint = atcoder::modint998244353;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int N;\n    cin >> N;\n\n    matrix<mint> mat(N, N);\n    for (int i = 0;\
@@ -143,21 +142,20 @@ data:
     \            cin >> tmp;\n            mat[i][j] = tmp;\n        }\n    }\n   \
     \ auto ret = mat.gauss_jordan().determinant_of_upper_triangle();\n    cout <<\
     \ ret.val() << '\\n';\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\n#if __cplusplus\
-    \ < 201402L\n#define IGNORE\n#endif\n#include \"../matrix.hpp\"\n#include <atcoder/modint>\n\
-    #include <iostream>\nusing namespace std;\nusing mint = atcoder::modint998244353;\n\
-    \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N;\n\
-    \    cin >> N;\n\n    matrix<mint> mat(N, N);\n    for (int i = 0; i < N; ++i)\
-    \ {\n        for (int j = 0; j < N; ++j) {\n            int tmp;\n           \
-    \ cin >> tmp;\n            mat[i][j] = tmp;\n        }\n    }\n    auto ret =\
-    \ mat.gauss_jordan().determinant_of_upper_triangle();\n    cout << ret.val() <<\
-    \ '\\n';\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\n#include\
+    \ \"../matrix.hpp\"\n#include <atcoder/modint>\n#include <iostream>\nusing namespace\
+    \ std;\nusing mint = atcoder::modint998244353;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N;\n    cin >> N;\n\n    matrix<mint>\
+    \ mat(N, N);\n    for (int i = 0; i < N; ++i) {\n        for (int j = 0; j < N;\
+    \ ++j) {\n            int tmp;\n            cin >> tmp;\n            mat[i][j]\
+    \ = tmp;\n        }\n    }\n    auto ret = mat.gauss_jordan().determinant_of_upper_triangle();\n\
+    \    cout << ret.val() << '\\n';\n}\n"
   dependsOn:
   - linear_algebra_matrix/matrix.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp
   requiredBy: []
-  timestamp: '2025-08-10 23:51:40+09:00'
+  timestamp: '2025-08-24 23:23:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_aclmodint_determinant.test.cpp

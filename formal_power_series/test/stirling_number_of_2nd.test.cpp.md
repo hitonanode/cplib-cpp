@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/formal_power_series.hpp
+    title: f(x)g(x) = 1 (mod x^deg)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -271,19 +274,20 @@ data:
     \n    for (int i = 0; i <= N; i++) { cout << a.coeff(i) << (i == N ? '\\n' : '\
     \ '); }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind\"\
-    \n#include \"formal_power_series/formal_power_series.hpp\"\n#include \"modint.hpp\"\
-    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n\n    int N;\n    cin >> N;\n    using mint =\
-    \ ModInt<998244353>;\n    FormalPowerSeries<mint> a(N + 1);\n    a[N] = mint(N).fac().inv();\n\
-    \    for (int i = N - 1; i >= 0; i--) { a[i] = a[i + 1] * (i + 1); }\n    auto\
-    \ b = a;\n    for (int i = 0; i <= N; i++) { a[i] *= mint(i).pow(N), b[i] *= (i\
-    \ % 2 ? -1 : 1); }\n    a *= b;\n\n    for (int i = 0; i <= N; i++) { cout <<\
-    \ a.coeff(i) << (i == N ? '\\n' : ' '); }\n}\n"
-  dependsOn: []
+    \n#include \"../formal_power_series.hpp\"\n#include \"../../modint.hpp\"\n#include\
+    \ <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n    int N;\n    cin >> N;\n    using mint = ModInt<998244353>;\n    FormalPowerSeries<mint>\
+    \ a(N + 1);\n    a[N] = mint(N).fac().inv();\n    for (int i = N - 1; i >= 0;\
+    \ i--) { a[i] = a[i + 1] * (i + 1); }\n    auto b = a;\n    for (int i = 0; i\
+    \ <= N; i++) { a[i] *= mint(i).pow(N), b[i] *= (i % 2 ? -1 : 1); }\n    a *= b;\n\
+    \n    for (int i = 0; i <= N; i++) { cout << a.coeff(i) << (i == N ? '\\n' : '\
+    \ '); }\n}\n"
+  dependsOn:
+  - formal_power_series/formal_power_series.hpp
   isVerificationFile: true
   path: formal_power_series/test/stirling_number_of_2nd.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/stirling_number_of_2nd.test.cpp

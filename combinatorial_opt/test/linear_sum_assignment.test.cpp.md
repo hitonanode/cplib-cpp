@@ -1,6 +1,16 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/linear_sum_assignment.hpp
+    title: "Linear sum assignment problem, Hungarian algorithm \uFF08\u5272\u5F53\u554F\
+      \u984C\u306B\u5BFE\u3059\u308B\u30CF\u30F3\u30AC\u30EA\u30A2\u30F3\u6CD5\uFF09"
+  - icon: ':heavy_check_mark:'
+    path: utilities/reader.hpp
+    title: "\u9AD8\u901F\u6A19\u6E96\u5165\u529B"
+  - icon: ':heavy_check_mark:'
+    path: utilities/writer.hpp
+    title: "\u6A19\u6E96\u51FA\u529B"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -165,18 +175,21 @@ data:
     \ N, A);\n\n    wt_integer(ret, '\\n');\n    for (int i = 0; i < N - 1; ++i) wt_integer(vs.at(i),\
     \ ' ');\n    wt_integer(vs.back(), '\\n');\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n\n#include\
-    \ \"combinatorial_opt/linear_sum_assignment.hpp\"\n\n#include \"utilities/reader.hpp\"\
-    \n#include \"utilities/writer.hpp\"\n\n#include <vector>\nusing namespace std;\n\
-    \nint main() {\n    const int N = rdi();\n    vector A(N, vector<long long>(N));\n\
-    \    for (auto &v : A) {\n        for (auto &x : v) x = rdi();\n    }\n\n    auto\
-    \ [ret, vs, f, g] = linear_sum_assignment::solve(N, N, A);\n\n    wt_integer(ret,\
-    \ '\\n');\n    for (int i = 0; i < N - 1; ++i) wt_integer(vs.at(i), ' ');\n  \
-    \  wt_integer(vs.back(), '\\n');\n}\n"
-  dependsOn: []
+    \ \"../linear_sum_assignment.hpp\"\n\n#include \"../../utilities/reader.hpp\"\n\
+    #include \"../../utilities/writer.hpp\"\n\n#include <vector>\nusing namespace\
+    \ std;\n\nint main() {\n    const int N = rdi();\n    vector A(N, vector<long\
+    \ long>(N));\n    for (auto &v : A) {\n        for (auto &x : v) x = rdi();\n\
+    \    }\n\n    auto [ret, vs, f, g] = linear_sum_assignment::solve(N, N, A);\n\n\
+    \    wt_integer(ret, '\\n');\n    for (int i = 0; i < N - 1; ++i) wt_integer(vs.at(i),\
+    \ ' ');\n    wt_integer(vs.back(), '\\n');\n}\n"
+  dependsOn:
+  - combinatorial_opt/linear_sum_assignment.hpp
+  - utilities/reader.hpp
+  - utilities/writer.hpp
   isVerificationFile: true
   path: combinatorial_opt/test/linear_sum_assignment.test.cpp
   requiredBy: []
-  timestamp: '2023-08-22 20:35:28+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/linear_sum_assignment.test.cpp

@@ -58,6 +58,9 @@ data:
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
   - icon: ':heavy_check_mark:'
+    path: convolution/test/ntt_arbitrary_mod.test.cpp
+    title: convolution/test/ntt_arbitrary_mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/relaxed_multiplication.exp.test.cpp
     title: convolution/test/relaxed_multiplication.exp.test.cpp
   - icon: ':heavy_check_mark:'
@@ -84,6 +87,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/rectangle_add_rectangle_sum.test.cpp
     title: data_structure/test/rectangle_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/coeff_of_rational_function.test.cpp
+    title: formal_power_series/test/coeff_of_rational_function.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
@@ -202,9 +208,12 @@ data:
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: set_power_series/test/subset_conv.test.cpp
+    title: set_power_series/test/subset_conv.test.cpp
+  - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: set_power_series/test/subset_log.test.cpp
     title: set_power_series/test/subset_log.test.cpp
   - icon: ':heavy_check_mark:'
@@ -252,9 +261,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: utilities/test/pow_op.test.cpp
     title: utilities/test/pow_op.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://oeis.org/A000108
@@ -458,7 +467,7 @@ data:
   - formal_power_series/coeff_of_rational_function.hpp
   - formal_power_series/polynomial_divmod.hpp
   timestamp: '2023-12-26 21:26:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - combinatorial_opt/test/linear_matroid_parity.yuki1773.test.cpp
   - combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
@@ -483,6 +492,7 @@ data:
   - set_power_series/test/subset_log.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
+  - set_power_series/test/subset_conv.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
   - tree/test/tree_isomorphism.aoj1613.test.cpp
@@ -516,6 +526,7 @@ data:
   - convolution/test/relaxed_multiplication.exp.test.cpp
   - convolution/test/multivar_ntt.test.cpp
   - convolution/test/convolution_on_tree.test.cpp
+  - convolution/test/ntt_arbitrary_mod.test.cpp
   - convolution/test/relaxed_multiplication.test.cpp
   - convolution/test/semirelaxed_multiplication.test.cpp
   - convolution/test/bitwise_and_conv.test.cpp
@@ -528,6 +539,7 @@ data:
   - formal_power_series/test/linear_recurrence.test.cpp
   - formal_power_series/test/polynomial_interpolation.test.cpp
   - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - formal_power_series/test/coeff_of_rational_function.test.cpp
   - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp

@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/formal_power_series.hpp
+    title: f(x)g(x) = 1 (mod x^deg)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -268,16 +271,17 @@ data:
     \    for (auto &x : f) { cin >> x; }\n    f = f.shift(c);\n    for (int i = 0;\
     \ i < N; i++) { cout << f.coeff(i) << (i < N - 1 ? ' ' : '\\n'); }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_taylor_shift\"\
-    \n#include \"formal_power_series/formal_power_series.hpp\"\n#include \"modint.hpp\"\
-    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n    int N, c;\n    cin >> N >> c;\n    FormalPowerSeries<ModInt<998244353>>\
-    \ f(N);\n    for (auto &x : f) { cin >> x; }\n    f = f.shift(c);\n    for (int\
-    \ i = 0; i < N; i++) { cout << f.coeff(i) << (i < N - 1 ? ' ' : '\\n'); }\n}\n"
-  dependsOn: []
+    \n#include \"../formal_power_series.hpp\"\n#include \"../../modint.hpp\"\n#include\
+    \ <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, c;\n    cin >> N >> c;\n    FormalPowerSeries<ModInt<998244353>> f(N);\n\
+    \    for (auto &x : f) { cin >> x; }\n    f = f.shift(c);\n    for (int i = 0;\
+    \ i < N; i++) { cout << f.coeff(i) << (i < N - 1 ? ' ' : '\\n'); }\n}\n"
+  dependsOn:
+  - formal_power_series/formal_power_series.hpp
   isVerificationFile: true
   path: formal_power_series/test/poly_taylor_shift.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/poly_taylor_shift.test.cpp

@@ -2,10 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
+    title: combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_sum_assignment.test.cpp
+    title: combinatorial_opt/test/linear_sum_assignment.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"combinatorial_opt/linear_sum_assignment.hpp\"\n#include\
@@ -276,8 +282,10 @@ data:
   path: combinatorial_opt/linear_sum_assignment.hpp
   requiredBy: []
   timestamp: '2024-11-25 22:28:29+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
+  - combinatorial_opt/test/linear_sum_assignment.test.cpp
 documentation_of: combinatorial_opt/linear_sum_assignment.hpp
 layout: document
 title: "Linear sum assignment problem, Hungarian algorithm \uFF08\u5272\u5F53\u554F\

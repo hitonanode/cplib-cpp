@@ -1,6 +1,15 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: convolution/ntt.hpp
+    title: convolution/ntt.hpp
+  - icon: ':question:'
+    path: modint.hpp
+    title: modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: number/modint_runtime.hpp
+    title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -244,7 +253,7 @@ data:
     \   assert(ret[i].val() == retr[i].val());\n        cout << ret[i].val() << '\
     \ ';\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
-    \n#include \"convolution/ntt.hpp\"\n#include \"modint.hpp\"\n#include \"number/modint_runtime.hpp\"\
+    \n#include \"../ntt.hpp\"\n#include \"../../modint.hpp\"\n#include \"../../number/modint_runtime.hpp\"\
     \n#include <iostream>\nusing namespace std;\n\nconstexpr int MOD = 1000000007;\n\
     using mint = ModInt<MOD>;\nusing mintr = ModIntRuntime;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    mintr::set_mod(MOD);\n    int N, M;\n  \
@@ -254,11 +263,14 @@ data:
     \ = nttconv(A, B);\n    vector<mintr> retr = nttconv(Ar, Br);\n\n    for (int\
     \ i = 0; i < N + M - 1; i++) {\n        assert(ret[i].val() == retr[i].val());\n\
     \        cout << ret[i].val() << ' ';\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - convolution/ntt.hpp
+  - modint.hpp
+  - number/modint_runtime.hpp
   isVerificationFile: true
   path: convolution/test/ntt_arbitrary_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 16:11:38+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: convolution/test/ntt_arbitrary_mod.test.cpp

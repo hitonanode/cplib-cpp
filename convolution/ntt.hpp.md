@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy:
@@ -43,6 +43,9 @@ data:
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
   - icon: ':heavy_check_mark:'
+    path: convolution/test/ntt_arbitrary_mod.test.cpp
+    title: convolution/test/ntt_arbitrary_mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: convolution/test/relaxed_multiplication.exp.test.cpp
     title: convolution/test/relaxed_multiplication.exp.test.cpp
   - icon: ':heavy_check_mark:'
@@ -51,6 +54,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: convolution/test/semirelaxed_multiplication.test.cpp
     title: convolution/test/semirelaxed_multiplication.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/coeff_of_rational_function.test.cpp
+    title: formal_power_series/test/coeff_of_rational_function.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
     title: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
@@ -324,11 +330,13 @@ data:
   - convolution/test/relaxed_multiplication.exp.test.cpp
   - convolution/test/multivar_ntt.test.cpp
   - convolution/test/convolution_on_tree.test.cpp
+  - convolution/test/ntt_arbitrary_mod.test.cpp
   - convolution/test/relaxed_multiplication.test.cpp
   - convolution/test/semirelaxed_multiplication.test.cpp
   - convolution/test/ntt.test.cpp
   - formal_power_series/test/shift_of_sampling_points.test.cpp
   - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - formal_power_series/test/coeff_of_rational_function.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
   - formal_power_series/test/polynomial_divmod.test.cpp

@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: geometry/test/sort_by_argument.test.cpp
+    title: geometry/test/sort_by_argument.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"geometry/sort_by_argument.hpp\"\n\n// Point on grid, sortable\
@@ -32,8 +35,9 @@ data:
   path: geometry/sort_by_argument.hpp
   requiredBy: []
   timestamp: '2025-08-05 22:50:49+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - geometry/test/sort_by_argument.test.cpp
 documentation_of: geometry/sort_by_argument.hpp
 layout: document
 redirect_from:

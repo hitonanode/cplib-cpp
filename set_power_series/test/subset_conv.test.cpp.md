@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: modint.hpp
+    title: modint.hpp
+  - icon: ':question:'
     path: set_power_series/subset_convolution.hpp
     title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
       \u7B97\uFF09"
@@ -208,17 +211,18 @@ data:
     \    for (auto &x : A) cin >> x;\n    for (auto &x : B) cin >> x;\n\n    for (auto\
     \ x : subset_convolution(A, B)) cout << x << ' ';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\
-    #include \"../subset_convolution.hpp\"\n#include \"modint.hpp\"\n#include <iostream>\n\
-    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    #include \"../subset_convolution.hpp\"\n#include \"../../modint.hpp\"\n#include\
+    \ <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int N;\n    cin >> N;\n    vector<ModInt<998244353>> A(1 << N), B(1 << N);\n\
     \    for (auto &x : A) cin >> x;\n    for (auto &x : B) cin >> x;\n\n    for (auto\
     \ x : subset_convolution(A, B)) cout << x << ' ';\n}\n"
   dependsOn:
   - set_power_series/subset_convolution.hpp
+  - modint.hpp
   isVerificationFile: true
   path: set_power_series/test/subset_conv.test.cpp
   requiredBy: []
-  timestamp: '2021-10-16 14:40:57+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: set_power_series/test/subset_conv.test.cpp

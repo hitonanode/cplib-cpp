@@ -1,6 +1,16 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: convolution/ntt.hpp
+    title: convolution/ntt.hpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/coeff_of_rational_function.hpp
+    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
+      \u7B97\uFF08Bostan-Mori algorithm\uFF09"
+  - icon: ':question:'
+    path: modint.hpp
+    title: modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -199,26 +209,29 @@ data:
     \ = -x;\n    denom[0] = 1;\n    for (int i = f.size() - 1; i > 1; i--) f[i - 1]\
     \ += f[i];\n    std::cout << coefficient_of_rational_function(N, f, denom) <<\
     \ '\\n';\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n#include \"formal_power_series/coeff_of_rational_function.hpp\"\
-    \n#include \"convolution/ntt.hpp\"\n#include \"modint.hpp\"\n\nusing mint = ModInt<1000000007>;\n\
-    \n#include <iostream>\n\nstd::vector<mint> gen_dp(std::vector<int> v, int n) {\n\
-    \    std::vector<std::vector<mint>> dp(n + 1, std::vector<mint>(v.back() * n +\
-    \ 1));\n    dp[0][0] = 1;\n    for (auto x : v) {\n        for (int i = n - 1;\
-    \ i >= 0; i--) {\n            for (int j = 0; j < dp[i].size(); j++)\n       \
-    \         if (dp[i][j]) {\n                    for (int k = 1; i + k <= n; k++)\
-    \ dp[i + k][j + x * k] += dp[i][j];\n                }\n        }\n    }\n   \
-    \ return dp.back();\n}\n\nint main() {\n    long long N;\n    int P, C;\n    std::cin\
-    \ >> N >> P >> C;\n    std::vector<mint> primes = gen_dp({2, 3, 5, 7, 11, 13},\
-    \ P),\n                      composites = gen_dp({4, 6, 8, 9, 10, 12}, C);\n \
-    \   std::vector<mint> f = nttconv(primes, composites);\n    std::vector<mint>\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n#include \"../coeff_of_rational_function.hpp\"\
+    \n#include \"../../convolution/ntt.hpp\"\n#include \"../../modint.hpp\"\n\nusing\
+    \ mint = ModInt<1000000007>;\n\n#include <iostream>\n\nstd::vector<mint> gen_dp(std::vector<int>\
+    \ v, int n) {\n    std::vector<std::vector<mint>> dp(n + 1, std::vector<mint>(v.back()\
+    \ * n + 1));\n    dp[0][0] = 1;\n    for (auto x : v) {\n        for (int i =\
+    \ n - 1; i >= 0; i--) {\n            for (int j = 0; j < dp[i].size(); j++)\n\
+    \                if (dp[i][j]) {\n                    for (int k = 1; i + k <=\
+    \ n; k++) dp[i + k][j + x * k] += dp[i][j];\n                }\n        }\n  \
+    \  }\n    return dp.back();\n}\n\nint main() {\n    long long N;\n    int P, C;\n\
+    \    std::cin >> N >> P >> C;\n    std::vector<mint> primes = gen_dp({2, 3, 5,\
+    \ 7, 11, 13}, P),\n                      composites = gen_dp({4, 6, 8, 9, 10,\
+    \ 12}, C);\n    std::vector<mint> f = nttconv(primes, composites);\n    std::vector<mint>\
     \ denom = f;\n    for (auto &x : denom) x = -x;\n    denom[0] = 1;\n    for (int\
     \ i = f.size() - 1; i > 1; i--) f[i - 1] += f[i];\n    std::cout << coefficient_of_rational_function(N,\
     \ f, denom) << '\\n';\n}\n"
-  dependsOn: []
+  dependsOn:
+  - formal_power_series/coeff_of_rational_function.hpp
+  - convolution/ntt.hpp
+  - modint.hpp
   isVerificationFile: true
   path: formal_power_series/test/coeff_of_rational_function.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/coeff_of_rational_function.test.cpp

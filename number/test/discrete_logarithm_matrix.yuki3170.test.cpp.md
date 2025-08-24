@@ -1,6 +1,10 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: number/discrete_logarithm.hpp
+    title: "Discrete logarithm / Baby-step giant-step \uFF08\u96E2\u6563\u5BFE\u6570\
+      \u554F\u984C\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -68,7 +72,7 @@ data:
     \ 4> A, B;\n        for (auto &x : A) cin >> x;\n        for (auto &x : B) cin\
     \ >> x;\n\n        auto res = DiscreteLogarithm<S, S, set<S>>(A, S{1, 0, 0, 1},\
     \ B, op, op, (long long)P * P);\n        cout << res << '\\n';\n    }\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/3170\"\n#include \"number/discrete_logarithm.hpp\"\
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/3170\"\n#include \"../discrete_logarithm.hpp\"\
     \n\n#include <array>\n#include <iostream>\n#include <set>\nusing namespace std;\n\
     \nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int T;\n\
     \    cin >> T;\n    while (T--) {\n        using S = array<int, 4>;\n\n      \
@@ -81,11 +85,12 @@ data:
     \ 4> A, B;\n        for (auto &x : A) cin >> x;\n        for (auto &x : B) cin\
     \ >> x;\n\n        auto res = DiscreteLogarithm<S, S, set<S>>(A, S{1, 0, 0, 1},\
     \ B, op, op, (long long)P * P);\n        cout << res << '\\n';\n    }\n}\n"
-  dependsOn: []
+  dependsOn:
+  - number/discrete_logarithm.hpp
   isVerificationFile: true
   path: number/test/discrete_logarithm_matrix.yuki3170.test.cpp
   requiredBy: []
-  timestamp: '2025-08-24 22:54:44+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/discrete_logarithm_matrix.yuki3170.test.cpp

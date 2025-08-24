@@ -23,71 +23,70 @@ data:
     - https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod
   bundledCode: "#line 1 \"linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod\"\
-    \n#if __cplusplus < 201402L\n#define IGNORE\n#endif\n#line 2 \"linear_algebra_matrix/matrix.hpp\"\
-    \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iterator>\n\
-    #include <type_traits>\n#include <utility>\n#include <vector>\n\nnamespace matrix_\
-    \ {\nstruct has_id_method_impl {\n    template <class T_> static auto check(T_\
-    \ *) -> decltype(T_::id(), std::true_type());\n    template <class T_> static\
-    \ auto check(...) -> std::false_type;\n};\ntemplate <class T_> struct has_id :\
-    \ decltype(has_id_method_impl::check<T_>(nullptr)) {};\n} // namespace matrix_\n\
-    \ntemplate <typename T> struct matrix {\n    int H, W;\n    std::vector<T> elem;\n\
-    \    typename std::vector<T>::iterator operator[](int i) { return elem.begin()\
-    \ + i * W; }\n    inline T &at(int i, int j) { return elem[i * W + j]; }\n   \
-    \ inline T get(int i, int j) const { return elem[i * W + j]; }\n    int height()\
-    \ const { return H; }\n    int width() const { return W; }\n    std::vector<std::vector<T>>\
-    \ vecvec() const {\n        std::vector<std::vector<T>> ret(H);\n        for (int\
-    \ i = 0; i < H; i++) {\n            std::copy(elem.begin() + i * W, elem.begin()\
-    \ + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n        return ret;\n\
-    \    }\n    operator std::vector<std::vector<T>>() const { return vecvec(); }\n\
-    \    matrix() = default;\n    matrix(int H, int W) : H(H), W(W), elem(H * W) {}\n\
-    \    matrix(const std::vector<std::vector<T>> &d) : H(d.size()), W(d.size() ?\
-    \ d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(), raw.end(),\
-    \ std::back_inserter(elem));\n    }\n\n    template <typename T2, typename std::enable_if<matrix_::has_id<T2>::value>::type\
-    \ * = nullptr>\n    static T2 _T_id() {\n        return T2::id();\n    }\n   \
-    \ template <typename T2, typename std::enable_if<!matrix_::has_id<T2>::value>::type\
-    \ * = nullptr>\n    static T2 _T_id() {\n        return T2(1);\n    }\n\n    static\
-    \ matrix Identity(int N) {\n        matrix ret(N, N);\n        for (int i = 0;\
-    \ i < N; i++) ret.at(i, i) = _T_id<T>();\n        return ret;\n    }\n\n    matrix\
-    \ operator-() const {\n        matrix ret(H, W);\n        for (int i = 0; i <\
-    \ H * W; i++) ret.elem[i] = -elem[i];\n        return ret;\n    }\n    matrix\
-    \ operator*(const T &v) const {\n        matrix ret = *this;\n        for (auto\
-    \ &x : ret.elem) x *= v;\n        return ret;\n    }\n    matrix operator/(const\
-    \ T &v) const {\n        matrix ret = *this;\n        const T vinv = _T_id<T>()\
-    \ / v;\n        for (auto &x : ret.elem) x *= vinv;\n        return ret;\n   \
-    \ }\n    matrix operator+(const matrix &r) const {\n        matrix ret = *this;\n\
-    \        for (int i = 0; i < H * W; i++) ret.elem[i] += r.elem[i];\n        return\
-    \ ret;\n    }\n    matrix operator-(const matrix &r) const {\n        matrix ret\
-    \ = *this;\n        for (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i];\n\
-    \        return ret;\n    }\n    matrix operator*(const matrix &r) const {\n \
-    \       matrix ret(H, r.W);\n        for (int i = 0; i < H; i++) {\n         \
-    \   for (int k = 0; k < W; k++) {\n                for (int j = 0; j < r.W; j++)\
-    \ ret.at(i, j) += this->get(i, k) * r.get(k, j);\n            }\n        }\n \
-    \       return ret;\n    }\n    matrix &operator*=(const T &v) { return *this\
-    \ = *this * v; }\n    matrix &operator/=(const T &v) { return *this = *this /\
-    \ v; }\n    matrix &operator+=(const matrix &r) { return *this = *this + r; }\n\
-    \    matrix &operator-=(const matrix &r) { return *this = *this - r; }\n    matrix\
-    \ &operator*=(const matrix &r) { return *this = *this * r; }\n    bool operator==(const\
-    \ matrix &r) const { return H == r.H and W == r.W and elem == r.elem; }\n    bool\
-    \ operator!=(const matrix &r) const { return H != r.H or W != r.W or elem != r.elem;\
-    \ }\n    bool operator<(const matrix &r) const { return elem < r.elem; }\n   \
-    \ matrix pow(int64_t n) const {\n        matrix ret = Identity(H);\n        bool\
-    \ ret_is_id = true;\n        if (n == 0) return ret;\n        for (int i = 63\
-    \ - __builtin_clzll(n); i >= 0; i--) {\n            if (!ret_is_id) ret *= ret;\n\
-    \            if ((n >> i) & 1) ret *= (*this), ret_is_id = false;\n        }\n\
-    \        return ret;\n    }\n    std::vector<T> pow_vec(int64_t n, std::vector<T>\
-    \ vec) const {\n        matrix x = *this;\n        while (n) {\n            if\
-    \ (n & 1) vec = x * vec;\n            x *= x;\n            n >>= 1;\n        }\n\
-    \        return vec;\n    };\n    matrix transpose() const {\n        matrix ret(W,\
-    \ H);\n        for (int i = 0; i < H; i++) {\n            for (int j = 0; j <\
-    \ W; j++) ret.at(j, i) = this->get(i, j);\n        }\n        return ret;\n  \
-    \  }\n    // Gauss-Jordan elimination\n    // - Require inverse for every non-zero\
-    \ element\n    // - Complexity: O(H^2 W)\n    template <typename T2, typename\
-    \ std::enable_if<std::is_floating_point<T2>::value>::type * = nullptr>\n    static\
-    \ int choose_pivot(const matrix<T2> &mtr, int h, int c) noexcept {\n        int\
-    \ piv = -1;\n        for (int j = h; j < mtr.H; j++) {\n            if (mtr.get(j,\
-    \ c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv, c))))\n \
-    \               piv = j;\n        }\n        return piv;\n    }\n    template\
-    \ <typename T2, typename std::enable_if<!std::is_floating_point<T2>::value>::type\
+    \n#line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n#include\
+    \ <cassert>\n#include <cmath>\n#include <iterator>\n#include <type_traits>\n#include\
+    \ <utility>\n#include <vector>\n\nnamespace matrix_ {\nstruct has_id_method_impl\
+    \ {\n    template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
+    \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
+    \ <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr))\
+    \ {};\n} // namespace matrix_\n\ntemplate <typename T> struct matrix {\n    int\
+    \ H, W;\n    std::vector<T> elem;\n    typename std::vector<T>::iterator operator[](int\
+    \ i) { return elem.begin() + i * W; }\n    inline T &at(int i, int j) { return\
+    \ elem[i * W + j]; }\n    inline T get(int i, int j) const { return elem[i * W\
+    \ + j]; }\n    int height() const { return H; }\n    int width() const { return\
+    \ W; }\n    std::vector<std::vector<T>> vecvec() const {\n        std::vector<std::vector<T>>\
+    \ ret(H);\n        for (int i = 0; i < H; i++) {\n            std::copy(elem.begin()\
+    \ + i * W, elem.begin() + (i + 1) * W, std::back_inserter(ret[i]));\n        }\n\
+    \        return ret;\n    }\n    operator std::vector<std::vector<T>>() const\
+    \ { return vecvec(); }\n    matrix() = default;\n    matrix(int H, int W) : H(H),\
+    \ W(W), elem(H * W) {}\n    matrix(const std::vector<std::vector<T>> &d) : H(d.size()),\
+    \ W(d.size() ? d[0].size() : 0) {\n        for (auto &raw : d) std::copy(raw.begin(),\
+    \ raw.end(), std::back_inserter(elem));\n    }\n\n    template <typename T2, typename\
+    \ std::enable_if<matrix_::has_id<T2>::value>::type * = nullptr>\n    static T2\
+    \ _T_id() {\n        return T2::id();\n    }\n    template <typename T2, typename\
+    \ std::enable_if<!matrix_::has_id<T2>::value>::type * = nullptr>\n    static T2\
+    \ _T_id() {\n        return T2(1);\n    }\n\n    static matrix Identity(int N)\
+    \ {\n        matrix ret(N, N);\n        for (int i = 0; i < N; i++) ret.at(i,\
+    \ i) = _T_id<T>();\n        return ret;\n    }\n\n    matrix operator-() const\
+    \ {\n        matrix ret(H, W);\n        for (int i = 0; i < H * W; i++) ret.elem[i]\
+    \ = -elem[i];\n        return ret;\n    }\n    matrix operator*(const T &v) const\
+    \ {\n        matrix ret = *this;\n        for (auto &x : ret.elem) x *= v;\n \
+    \       return ret;\n    }\n    matrix operator/(const T &v) const {\n       \
+    \ matrix ret = *this;\n        const T vinv = _T_id<T>() / v;\n        for (auto\
+    \ &x : ret.elem) x *= vinv;\n        return ret;\n    }\n    matrix operator+(const\
+    \ matrix &r) const {\n        matrix ret = *this;\n        for (int i = 0; i <\
+    \ H * W; i++) ret.elem[i] += r.elem[i];\n        return ret;\n    }\n    matrix\
+    \ operator-(const matrix &r) const {\n        matrix ret = *this;\n        for\
+    \ (int i = 0; i < H * W; i++) ret.elem[i] -= r.elem[i];\n        return ret;\n\
+    \    }\n    matrix operator*(const matrix &r) const {\n        matrix ret(H, r.W);\n\
+    \        for (int i = 0; i < H; i++) {\n            for (int k = 0; k < W; k++)\
+    \ {\n                for (int j = 0; j < r.W; j++) ret.at(i, j) += this->get(i,\
+    \ k) * r.get(k, j);\n            }\n        }\n        return ret;\n    }\n  \
+    \  matrix &operator*=(const T &v) { return *this = *this * v; }\n    matrix &operator/=(const\
+    \ T &v) { return *this = *this / v; }\n    matrix &operator+=(const matrix &r)\
+    \ { return *this = *this + r; }\n    matrix &operator-=(const matrix &r) { return\
+    \ *this = *this - r; }\n    matrix &operator*=(const matrix &r) { return *this\
+    \ = *this * r; }\n    bool operator==(const matrix &r) const { return H == r.H\
+    \ and W == r.W and elem == r.elem; }\n    bool operator!=(const matrix &r) const\
+    \ { return H != r.H or W != r.W or elem != r.elem; }\n    bool operator<(const\
+    \ matrix &r) const { return elem < r.elem; }\n    matrix pow(int64_t n) const\
+    \ {\n        matrix ret = Identity(H);\n        bool ret_is_id = true;\n     \
+    \   if (n == 0) return ret;\n        for (int i = 63 - __builtin_clzll(n); i >=\
+    \ 0; i--) {\n            if (!ret_is_id) ret *= ret;\n            if ((n >> i)\
+    \ & 1) ret *= (*this), ret_is_id = false;\n        }\n        return ret;\n  \
+    \  }\n    std::vector<T> pow_vec(int64_t n, std::vector<T> vec) const {\n    \
+    \    matrix x = *this;\n        while (n) {\n            if (n & 1) vec = x *\
+    \ vec;\n            x *= x;\n            n >>= 1;\n        }\n        return vec;\n\
+    \    };\n    matrix transpose() const {\n        matrix ret(W, H);\n        for\
+    \ (int i = 0; i < H; i++) {\n            for (int j = 0; j < W; j++) ret.at(j,\
+    \ i) = this->get(i, j);\n        }\n        return ret;\n    }\n    // Gauss-Jordan\
+    \ elimination\n    // - Require inverse for every non-zero element\n    // - Complexity:\
+    \ O(H^2 W)\n    template <typename T2, typename std::enable_if<std::is_floating_point<T2>::value>::type\
+    \ * = nullptr>\n    static int choose_pivot(const matrix<T2> &mtr, int h, int\
+    \ c) noexcept {\n        int piv = -1;\n        for (int j = h; j < mtr.H; j++)\
+    \ {\n            if (mtr.get(j, c) and (piv < 0 or std::abs(mtr.get(j, c)) > std::abs(mtr.get(piv,\
+    \ c))))\n                piv = j;\n        }\n        return piv;\n    }\n   \
+    \ template <typename T2, typename std::enable_if<!std::is_floating_point<T2>::value>::type\
     \ * = nullptr>\n    static int choose_pivot(const matrix<T2> &mtr, int h, int\
     \ c) noexcept {\n        for (int j = h; j < mtr.H; j++) {\n            if (mtr.get(j,\
     \ c) != T2()) return j;\n        }\n        return -1;\n    }\n    matrix gauss_jordan()\
@@ -186,7 +185,7 @@ data:
     \ == 0);\n\n            for (int j = 0; j < N; j++) {\n                Ring anew\
     \ = M[j][r + 1] * m11 - M[j][i] * m10;\n                Ring bnew = -M[j][r +\
     \ 1] * m01 + M[j][i] * m00;\n                M[j][r + 1] = anew;\n           \
-    \     M[j][i] = bnew;\n            }\n        }\n    }\n}\n#line 8 \"linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp\"\
+    \     M[j][i] = bnew;\n            }\n        }\n    }\n}\n#line 5 \"linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp\"\
     \n#include <atcoder/modint>\n#include <iostream>\nusing namespace std;\n\nint\
     \ main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, M;\n\
     \    cin >> N >> M;\n    using mint = atcoder::modint;\n    mint::set_mod(M);\n\
@@ -195,15 +194,14 @@ data:
     \  mat[i][j] = v;\n        }\n    }\n    mat = -mat;\n    ring_hessenberg_reduction(mat);\n\
     \    cout << characteristic_poly_of_hessenberg(mat)[0].val() << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod\"\
-    \n#if __cplusplus < 201402L\n#define IGNORE\n#endif\n#include \"../characteristic_poly.hpp\"\
-    \n#include \"../hessenberg_reduction.hpp\"\n#include \"../matrix.hpp\"\n#include\
-    \ <atcoder/modint>\n#include <iostream>\nusing namespace std;\n\nint main() {\n\
-    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int N, M;\n    cin >>\
-    \ N >> M;\n    using mint = atcoder::modint;\n    mint::set_mod(M);\n    matrix<mint>\
-    \ mat(N, N);\n    for (int i = 0; i < N; ++i) {\n        for (int j = 0; j < N;\
-    \ ++j) {\n            int v;\n            cin >> v;\n            mat[i][j] = v;\n\
-    \        }\n    }\n    mat = -mat;\n    ring_hessenberg_reduction(mat);\n    cout\
-    \ << characteristic_poly_of_hessenberg(mat)[0].val() << '\\n';\n}\n"
+    \n#include \"../characteristic_poly.hpp\"\n#include \"../hessenberg_reduction.hpp\"\
+    \n#include \"../matrix.hpp\"\n#include <atcoder/modint>\n#include <iostream>\n\
+    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, M;\n    cin >> N >> M;\n    using mint = atcoder::modint;\n    mint::set_mod(M);\n\
+    \    matrix<mint> mat(N, N);\n    for (int i = 0; i < N; ++i) {\n        for (int\
+    \ j = 0; j < N; ++j) {\n            int v;\n            cin >> v;\n          \
+    \  mat[i][j] = v;\n        }\n    }\n    mat = -mat;\n    ring_hessenberg_reduction(mat);\n\
+    \    cout << characteristic_poly_of_hessenberg(mat)[0].val() << '\\n';\n}\n"
   dependsOn:
   - linear_algebra_matrix/characteristic_poly.hpp
   - linear_algebra_matrix/matrix.hpp
@@ -211,7 +209,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp
   requiredBy: []
-  timestamp: '2025-08-10 23:51:40+09:00'
+  timestamp: '2025-08-24 23:23:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/determinant_arbitrary_mod.test.cpp

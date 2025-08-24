@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/formal_power_series.hpp
+    title: f(x)g(x) = 1 (mod x^deg)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -274,23 +277,23 @@ data:
     \ }\n    A = A.exp(T + 1);\n    for (int t = 1; t <= T; t++) cout << A.coeff(t)\
     \ << ' ';\n    cout << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sharp_p_subset_sum\"\n\
-    #include \"formal_power_series/formal_power_series.hpp\"\n#include \"modint.hpp\"\
-    \n#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n\
-    \    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N, T;\n    cin\
-    \ >> N >> T;\n    vector<int> cnt(T + 1);\n    while (N--) {\n        int s;\n\
-    \        cin >> s;\n        cnt[s]++;\n    }\n    FormalPowerSeries<ModInt<998244353>>\
-    \ A(T + 1), invs(T + 1);\n    for (int i = 1; i <= T; i++) invs[i] = (invs[i]\
-    \ + i).inv();\n\n    for (int i = 1; i <= T; i++) {\n        if (cnt[i]) {\n \
-    \           for (int j = 1; j * i <= T; j++) {\n                if (j % 2)\n \
-    \                   A[j * i] += cnt[i] * invs[j];\n                else\n    \
-    \                A[j * i] -= cnt[i] * invs[j];\n            }\n        }\n   \
-    \ }\n    A = A.exp(T + 1);\n    for (int t = 1; t <= T; t++) cout << A.coeff(t)\
-    \ << ' ';\n    cout << '\\n';\n}\n"
-  dependsOn: []
+    #include \"../formal_power_series.hpp\"\n#include \"../../modint.hpp\"\n#include\
+    \ <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n\n    int N, T;\n    cin >> N >> T;\n    vector<int>\
+    \ cnt(T + 1);\n    while (N--) {\n        int s;\n        cin >> s;\n        cnt[s]++;\n\
+    \    }\n    FormalPowerSeries<ModInt<998244353>> A(T + 1), invs(T + 1);\n    for\
+    \ (int i = 1; i <= T; i++) invs[i] = (invs[i] + i).inv();\n\n    for (int i =\
+    \ 1; i <= T; i++) {\n        if (cnt[i]) {\n            for (int j = 1; j * i\
+    \ <= T; j++) {\n                if (j % 2)\n                    A[j * i] += cnt[i]\
+    \ * invs[j];\n                else\n                    A[j * i] -= cnt[i] * invs[j];\n\
+    \            }\n        }\n    }\n    A = A.exp(T + 1);\n    for (int t = 1; t\
+    \ <= T; t++) cout << A.coeff(t) << ' ';\n    cout << '\\n';\n}\n"
+  dependsOn:
+  - formal_power_series/formal_power_series.hpp
   isVerificationFile: true
   path: formal_power_series/test/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2020-11-18 20:06:08+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/sharp_p_subset_sum.test.cpp

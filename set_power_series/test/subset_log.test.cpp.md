@@ -1,26 +1,30 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: set_power_series/subset_convolution.hpp
     title: "Subset convolution \uFF08\u96C6\u5408\u95A2\u6570\u306E\u5404\u7A2E\u6F14\
       \u7B97\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/arc105/tasks/arc105_f
+    IGNORE: ''
+    IGNORE_IF_CLANG: ''
+    IGNORE_IF_GCC: ''
     links:
     - https://atcoder.jp/contests/arc105/tasks/arc105_f
+    - https://atcoder.jp/posts/1377
     - https://codeforces.com/blog/entry/83535?#comment-709269
   bundledCode: "#line 1 \"set_power_series/test/subset_log.test.cpp\"\n#define PROBLEM\
-    \ \"https://atcoder.jp/contests/arc105/tasks/arc105_f\"\n#line 2 \"modint.hpp\"\
+    \ \"https://atcoder.jp/contests/arc105/tasks/arc105_f\"\n// AtCoder Testcases\
+    \ is suspended https://atcoder.jp/posts/1377\n#define IGNORE\n#line 2 \"modint.hpp\"\
     \n#include <cassert>\n#include <iostream>\n#include <set>\n#include <vector>\n\
     \ntemplate <int md> struct ModInt {\n    using lint = long long;\n    constexpr\
     \ static int mod() { return md; }\n    static int get_primitive_root() {\n   \
@@ -207,7 +211,7 @@ data:
     \ &x : f) x *= f0inv;\n        poly_log(f);\n        for (auto &x : f) x *= k;\n\
     \        poly_exp(f);\n        for (auto &x : f) x *= f0pow;\n        f.resize(rem,\
     \ 0);\n        f.insert(f.begin(), m - int(f.size()), T(0));\n    };\n    subset_func(f,\
-    \ poly_pow);\n}\n#line 5 \"set_power_series/test/subset_log.test.cpp\"\nusing\
+    \ poly_pow);\n}\n#line 7 \"set_power_series/test/subset_log.test.cpp\"\nusing\
     \ namespace std;\nusing mint = ModInt<998244353>;\n\n// https://codeforces.com/blog/entry/83535?#comment-709269\n\
     int main() {\n    int N, M;\n    cin >> N >> M;\n    vector<int> to(N);\n    while\
     \ (M--) {\n        int a, b;\n        cin >> a >> b;\n        a--, b--;\n    \
@@ -220,9 +224,10 @@ data:
     \    f[s] = pow2inv[nbe[s]];\n    }\n    f = subset_convolution(f, f);\n    for\
     \ (int s = 0; s < 1 << N; s++) f[s] *= pow2[nbe[s]];\n    subset_log(f);\n   \
     \ cout << f.back() / 2 << '\\n';\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/arc105/tasks/arc105_f\"\n#include\
-    \ \"../../modint.hpp\"\n#include \"../subset_convolution.hpp\"\n#include <iostream>\n\
-    using namespace std;\nusing mint = ModInt<998244353>;\n\n// https://codeforces.com/blog/entry/83535?#comment-709269\n\
+  code: "#define PROBLEM \"https://atcoder.jp/contests/arc105/tasks/arc105_f\"\n//\
+    \ AtCoder Testcases is suspended https://atcoder.jp/posts/1377\n#define IGNORE\n\
+    #include \"../../modint.hpp\"\n#include \"../subset_convolution.hpp\"\n#include\
+    \ <iostream>\nusing namespace std;\nusing mint = ModInt<998244353>;\n\n// https://codeforces.com/blog/entry/83535?#comment-709269\n\
     int main() {\n    int N, M;\n    cin >> N >> M;\n    vector<int> to(N);\n    while\
     \ (M--) {\n        int a, b;\n        cin >> a >> b;\n        a--, b--;\n    \
     \    to[a] += 1 << b, to[b] += 1 << a;\n    }\n\n    const mint inv2 = mint(2).inv();\n\
@@ -240,8 +245,8 @@ data:
   isVerificationFile: true
   path: set_power_series/test/subset_log.test.cpp
   requiredBy: []
-  timestamp: '2023-12-26 21:26:22+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-08-24 23:23:07+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: set_power_series/test/subset_log.test.cpp
 layout: document

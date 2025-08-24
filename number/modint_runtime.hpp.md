@@ -7,6 +7,15 @@ data:
     path: convolution/test/ntt.test.cpp
     title: convolution/test/ntt.test.cpp
   - icon: ':heavy_check_mark:'
+    path: convolution/test/ntt_arbitrary_mod.test.cpp
+    title: convolution/test/ntt_arbitrary_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_exp_modintruntime.test.cpp
+    title: formal_power_series/test/fps_exp_modintruntime.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+    title: formal_power_series/test/fps_sqrt_modintruntime.test.cpp
+  - icon: ':heavy_check_mark:'
     path: graph/test/chromatic_number.test.cpp
     title: graph/test/chromatic_number.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/sieve.stress.test.cpp
     title: number/test/sieve.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: number/test/sqrt_modint_runtime.test.cpp
+    title: number/test/sqrt_modint_runtime.test.cpp
   - icon: ':heavy_check_mark:'
     path: utilities/test/pow_op.test.cpp
     title: utilities/test/pow_op.test.cpp
@@ -182,9 +194,13 @@ data:
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - graph/test/chromatic_number.test.cpp
   - utilities/test/pow_op.test.cpp
+  - number/test/sqrt_modint_runtime.test.cpp
   - number/test/sieve.stress.test.cpp
   - number/test/montmort_number_mod.test.cpp
+  - convolution/test/ntt_arbitrary_mod.test.cpp
   - convolution/test/ntt.test.cpp
+  - formal_power_series/test/fps_exp_modintruntime.test.cpp
+  - formal_power_series/test/fps_sqrt_modintruntime.test.cpp
 documentation_of: number/modint_runtime.hpp
 layout: document
 redirect_from:

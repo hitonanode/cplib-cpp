@@ -8,7 +8,7 @@ data:
     path: formal_power_series/linear_recurrence.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
       \u63A8\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -252,8 +252,8 @@ data:
     \        ret -= acc * p;\n        g = prod_x(g);\n        N--;\n        acc +=\
     \ f_reversed[N];\n    }\n    std::cout << ret << '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/214\"\n#include \"../../convolution/ntt.hpp\"\
-    \n#include \"../linear_recurrence.hpp\"\n#include \"modint.hpp\"\nusing mint =\
-    \ ModInt<1000000007>;\n\n#include <iostream>\n#include <numeric>\n\nstd::vector<mint>\
+    \n#include \"../linear_recurrence.hpp\"\n#include \"../../modint.hpp\"\nusing\
+    \ mint = ModInt<1000000007>;\n\n#include <iostream>\n#include <numeric>\n\nstd::vector<mint>\
     \ gen_dp(std::vector<int> v, int n) {\n    std::vector<std::vector<mint>> dp(n\
     \ + 1, std::vector<mint>(v.back() * n + 1));\n    dp[0][0] = 1;\n    for (auto\
     \ x : v) {\n        for (int i = n - 1; i >= 0; i--) {\n            for (int j\
@@ -285,7 +285,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/kitamasa.test.cpp
   requiredBy: []
-  timestamp: '2023-12-26 21:26:22+09:00'
+  timestamp: '2025-08-24 23:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/kitamasa.test.cpp
