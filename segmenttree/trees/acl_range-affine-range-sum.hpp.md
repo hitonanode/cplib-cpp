@@ -29,7 +29,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
+    \ segmenttree/acl_lazysegtree.hpp: line 56: found codes out of include guard\n"
   code: "#pragma once\n#include \"../../modint.hpp\"\n#include \"../acl_lazysegtree.hpp\"\
     \n#include <utility>\n\n// CUT begin\nnamespace RangeAffineRangeSum {\nusing T\
     \ = ModInt<998244353>;\nusing S = std::pair<T, size_t>;\nusing F = std::pair<T,\
@@ -46,7 +46,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-affine-range-sum.hpp
   requiredBy: []
-  timestamp: '2023-12-26 21:26:22+09:00'
+  timestamp: '2025-08-24 23:32:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/acl_range-affine-range-sum.test.cpp

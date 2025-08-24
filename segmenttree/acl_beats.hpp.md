@@ -44,20 +44,20 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
-  code: "#pragma once\n#include \"acl_lazysegtree.hpp\"\n\ntemplate <class S, S (*op)(S,\
-    \ S), S (*e)(), class F, S (*mapping)(F, S), F (*composition)(F, F),\n       \
-    \   F (*id)()>\nclass segtree_beats : public atcoder::lazy_segtree<S, op, e, F,\
-    \ mapping, composition, id> {\n    using Base = atcoder::lazy_segtree<S, op, e,\
-    \ F, mapping, composition, id>;\n    using Base::lazy_segtree;\n    void all_apply(int\
-    \ k, F f) const override {\n        Base::d[k] = mapping(f, Base::d[k]);\n   \
-    \     if (k < Base::size) {\n            Base::lz[k] = composition(f, Base::lz[k]);\n\
+    \ segmenttree/acl_lazysegtree.hpp: line 56: found codes out of include guard\n"
+  code: "#pragma once\n#include \"acl_lazysegtree.hpp\"\n\n#include <algorithm>\n\
+    #include <iostream>\n\ntemplate <class S, auto op, auto e, class F, auto mapping,\
+    \ auto composition, auto id>\nclass segtree_beats : public atcoder::lazy_segtree<S,\
+    \ op, e, F, mapping, composition, id> {\n    using Base = atcoder::lazy_segtree<S,\
+    \ op, e, F, mapping, composition, id>;\n    using Base::lazy_segtree;\n    void\
+    \ all_apply(int k, F f) override {\n        Base::d[k] = mapping(f, Base::d[k]);\n\
+    \        if (k < Base::size) {\n            Base::lz[k] = composition(f, Base::lz[k]);\n\
     \            if (Base::d[k].fail) Base::push(k), Base::update(k);\n        }\n\
-    \    }\n};\n\nnamespace RangeChMinMaxAddSum {\n#include <algorithm>\n\ntemplate\
-    \ <typename Num> inline Num second_lowest(Num a, Num a2, Num c, Num c2) noexcept\
-    \ {\n    assert(a <= a2); // a < a2 or a == a2 == INF\n    assert(c <= c2); //\
-    \ c < c2 or c == c2 == -INF\n    return a == c ? std::min(a2, c2) : a2 <= c ?\
-    \ a2 : c2 <= a ? c2 : std::max(a, c);\n}\ntemplate <typename Num> inline Num second_highest(Num\
+    \    }\n};\n\nnamespace RangeChMinMaxAddSum {\ntemplate <typename Num> inline\
+    \ Num second_lowest(Num a, Num a2, Num c, Num c2) noexcept {\n    assert(a <=\
+    \ a2); // a < a2 or a == a2 == INF\n    assert(c <= c2); // c < c2 or c == c2\
+    \ == -INF\n    return a == c ? std::min(a2, c2) : a2 <= c ? a2 : c2 <= a ? c2\
+    \ : std::max(a, c);\n}\ntemplate <typename Num> inline Num second_highest(Num\
     \ a, Num a2, Num b, Num b2) noexcept {\n    assert(a >= a2); // a > a2 or a ==\
     \ a2 == -INF\n    assert(b >= b2); // b > b2 or b == b2 == INF\n    return a ==\
     \ b ? std::max(a2, b2) : a2 >= b ? a2 : b2 >= a ? b2 : std::min(a, b);\n}\n\n\
@@ -107,7 +107,7 @@ data:
   - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   - segmenttree/trees/acl_range-add-chmax-range-sum.hpp
   - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
-  timestamp: '2024-04-28 17:28:53+09:00'
+  timestamp: '2025-08-24 23:32:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp

@@ -38,7 +38,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
+    \ segmenttree/acl_lazysegtree.hpp: line 56: found codes out of include guard\n"
   code: "#include \"../trees/acl_range-add-chmax-range-sum.hpp\"\n#define PROBLEM\
     \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0427\"\n#include\
     \ <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
@@ -59,7 +59,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2024-04-28 17:28:53+09:00'
+  timestamp: '2025-08-24 23:32:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp

@@ -24,7 +24,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
+    \ segmenttree/acl_lazysegtree.hpp: line 56: found codes out of include guard\n"
   code: "#pragma once\n#include \"../acl_lazysegtree.hpp\"\n#include <algorithm>\n\
     \n// CUT begin\nnamespace RangeUpdateRangeSumMin {\nusing Int = long long;\nconst\
     \ Int INF = 101010101010LL;\nstruct S {\n    Int sum;\n    int sz;\n    Int minval;\n\
@@ -40,7 +40,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-update-range-sum-min.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2025-08-24 23:32:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: segmenttree/trees/acl_range-update-range-sum-min.hpp

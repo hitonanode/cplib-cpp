@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_segtree.hpp
-    title: segmenttree/acl_segtree.hpp
+    title: Segtree (based on atcoder::segtree)
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -29,7 +29,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ segmenttree/acl_segtree.hpp: line 37: found codes out of include guard\n"
+    \ segmenttree/acl_segtree.hpp: line 48: found codes out of include guard\n"
   code: "#pragma once\n#include \"acl_segtree.hpp\"\n#include <algorithm>\n#include\
     \ <cassert>\n#include <utility>\n#include <vector>\n\n// CUT begin\n// \u9006\u5143\
     \u3092\u8981\u6C42\u3057\u306A\u3044\u9818\u57DF\u6728\ntemplate <class S, S (*op)(S,\
@@ -81,7 +81,7 @@ data:
   isVerificationFile: false
   path: segmenttree/rangetree.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2025-08-24 23:32:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/rangetree.test.cpp

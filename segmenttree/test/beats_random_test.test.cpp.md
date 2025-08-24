@@ -35,7 +35,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
+    \ segmenttree/acl_lazysegtree.hpp: line 56: found codes out of include guard\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \ // DUMMY\n\n#include \"../../random/xorshift.hpp\"\n#include \"../acl_beats.hpp\"\
     \n\n#include <algorithm>\n#include <cstdio>\n#include <numeric>\n#include <vector>\n\
@@ -83,7 +83,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/beats_random_test.test.cpp
   requiredBy: []
-  timestamp: '2024-04-28 17:28:53+09:00'
+  timestamp: '2025-08-24 23:32:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/beats_random_test.test.cpp

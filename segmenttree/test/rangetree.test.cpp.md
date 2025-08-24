@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_segtree.hpp
-    title: segmenttree/acl_segtree.hpp
+    title: Segtree (based on atcoder::segtree)
   - icon: ':heavy_check_mark:'
     path: segmenttree/rangetree.hpp
     title: "Range Tree \uFF08\u9818\u57DF\u6728\uFF09"
@@ -32,7 +32,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ segmenttree/acl_segtree.hpp: line 37: found codes out of include guard\n"
+    \ segmenttree/acl_segtree.hpp: line 48: found codes out of include guard\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
     \n#include \"../rangetree.hpp\"\n#include <iostream>\n#include <tuple>\n#include\
     \ <vector>\nusing namespace std;\n\nusing S = unsigned long long;\nS op(S l, S\
@@ -58,7 +58,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/rangetree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2025-08-24 23:32:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/rangetree.test.cpp

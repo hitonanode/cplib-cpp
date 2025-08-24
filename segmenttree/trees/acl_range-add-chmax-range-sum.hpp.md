@@ -33,7 +33,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
+    \ segmenttree/acl_lazysegtree.hpp: line 56: found codes out of include guard\n"
   code: "#pragma once\n#include \"../acl_beats.hpp\"\n\n// CUT begin\n// Verified:\
     \ http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0427\nnamespace RangeAddChmaxRangeSum\
     \ {\n#include <algorithm>\n\ntemplate <typename Num>\ninline Num second_lowest(Num\
@@ -63,7 +63,7 @@ data:
   isVerificationFile: false
   path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
   requiredBy: []
-  timestamp: '2024-04-28 17:28:53+09:00'
+  timestamp: '2025-08-24 23:32:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp

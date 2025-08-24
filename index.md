@@ -621,7 +621,7 @@ data:
       title: Lazy Segtree (based on atcoder::lazy_segtree)
     - icon: ':heavy_check_mark:'
       path: segmenttree/acl_segtree.hpp
-      title: segmenttree/acl_segtree.hpp
+      title: Segtree (based on atcoder::segtree)
     - icon: ':heavy_check_mark:'
       path: segmenttree/binary_indexed_tree.hpp
       title: "Binary indexed tree / Fenwick tree \uFF08BIT\u30FB\u30D5\u30A7\u30CB\

@@ -23,7 +23,7 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ segmenttree/acl_lazysegtree.hpp: line 37: found codes out of include guard\n"
+    \ segmenttree/acl_lazysegtree.hpp: line 56: found codes out of include guard\n"
   code: "#pragma once\n#include <algorithm>\n#include <vector>\n\n#include \"segmenttree/acl_lazysegtree.hpp\"\
     \n\ntemplate <class T> class AreaOfUnionOfRectangles {\n    struct Rectangle {\n\
     \        T xl, xr, yl, yr;\n    };\n    std::vector<Rectangle> rectangles;\n\n\
