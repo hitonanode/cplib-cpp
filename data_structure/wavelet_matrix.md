@@ -78,4 +78,4 @@ cout << ans << endl;
 ## 参考文献・リンク
 
 - [ウェーブレット行列(wavelet matrix) - Eating Your Own Cat Food](https://miti-7.hatenablog.com/entry/2018/04/28/152259)
-- [Wavelet Matrix | Nyaan’s Library](https://nyaannyaan.github.io/library/data-structure-2d/wavelet-matrix.hpp.html)
+- [Wavelet Matrix \| Nyaan’s Library](https://nyaannyaan.github.io/library/data-structure-2d/wavelet-matrix.hpp.html)
