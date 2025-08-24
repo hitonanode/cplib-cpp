@@ -117,10 +117,6 @@ public:
         return facs()[n];
     }
 
-    [[deprecated("use static method")]] ModIntRuntime fac() const {
-        return ModIntRuntime::fac(this->val_);
-    }
-
     static ModIntRuntime doublefac(int n) {
         assert(n >= 0);
         if (n >= md) return ModIntRuntime(0);
@@ -130,17 +126,10 @@ public:
                    : ModIntRuntime::fac(k) * ModIntRuntime(2).pow(k);
     }
 
-    [[deprecated("use static method")]] constexpr ModIntRuntime doublefac() {
-        return ModIntRuntime::doublefac(this->val_);
-    }
-
     static ModIntRuntime nCr(int n, int r) {
         assert(n >= 0);
         if (r < 0 or n < r) return ModIntRuntime(0);
         return ModIntRuntime::fac(n) / (ModIntRuntime::fac(r) * ModIntRuntime::fac(n - r));
-    }
-    [[deprecated("use static method")]] constexpr ModIntRuntime nCr(int r) {
-        return ModIntRuntime::nCr(this->val_, r);
     }
 
     static ModIntRuntime nPr(int n, int r) {

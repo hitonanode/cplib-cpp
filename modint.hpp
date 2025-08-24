@@ -110,16 +110,12 @@ template <int md> struct ModInt {
         while (n >= int(facs.size())) _precalculation(facs.size() * 2);
         return facs[n];
     }
-    [[deprecated("use static method")]] constexpr ModInt fac() { return ModInt::fac(this->val_); }
 
     constexpr static ModInt facinv(int n) {
         assert(n >= 0);
         if (n >= md) return ModInt(0);
         while (n >= int(facs.size())) _precalculation(facs.size() * 2);
         return facinvs[n];
-    }
-    [[deprecated("use static method")]] constexpr ModInt facinv() {
-        return ModInt::facinv(this->val_);
     }
 
     constexpr static ModInt doublefac(int n) {
@@ -129,27 +125,17 @@ template <int md> struct ModInt {
         return (n & 1) ? ModInt::fac(k * 2) / (ModInt(2).pow(k) * ModInt::fac(k))
                        : ModInt::fac(k) * ModInt(2).pow(k);
     }
-    [[deprecated("use static method")]] constexpr ModInt doublefac() {
-        return ModInt::doublefac(this->val_);
-    }
 
     constexpr static ModInt nCr(int n, int r) {
         assert(n >= 0);
         if (r < 0 or n < r) return ModInt(0);
         return ModInt::fac(n) * ModInt::facinv(r) * ModInt::facinv(n - r);
     }
-    [[deprecated("use static method")]] constexpr ModInt nCr(int r) {
-        return ModInt::nCr(this->val_, r);
-    }
 
     constexpr static ModInt nPr(int n, int r) {
         assert(n >= 0);
         if (r < 0 or n < r) return ModInt(0);
         return ModInt::fac(n) * ModInt::facinv(n - r);
-    }
-    [[deprecated("use static method")]] constexpr ModInt nPr(int r) {
-        if (r < 0 or this->val_ < r) return ModInt(0);
-        return ModInt::nPr(this->val_, r);
     }
 
     static ModInt binom(int n, int r) {
