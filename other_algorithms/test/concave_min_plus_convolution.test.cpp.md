@@ -2,11 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: other_algorithms/monge_d_edge_shortest_paths_enum.hpp
-    title: "Shortest paths of DAG with Monge weights using $d = 1, \\ldots, d_{\\\
-      mathrm{max}}$ edges \uFF08Monge \u91CD\u307F DAG \u306E\u4F7F\u7528\u8FBA\u6570\
-      \u6BCE\u306E\u6700\u77ED\u8DEF\u9577\u5217\u6319\uFF09"
-  - icon: ':heavy_check_mark:'
     path: other_algorithms/smawk.hpp
     title: Totally Monotone Matrix Searching (SMAWK), concave max-plus / min-plus
       convolution
@@ -17,16 +12,16 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/952
+    PROBLEM: https://judge.yosupo.jp/problem/min_plus_convolution_concave_arbitrary
     links:
-    - https://yukicoder.me/problems/no/952
-  bundledCode: "#line 1 \"other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp\"\
-    \n#define PROBLEM \"https://yukicoder.me/problems/no/952\"\n\n#line 2 \"other_algorithms/smawk.hpp\"\
-    \n#include <cassert>\n#include <functional>\n#include <numeric>\n#include <utility>\n\
-    #include <vector>\n\n// SMAWK: finding minima of totally monotone function f(i,\
-    \ j) (0 <= i < N, 0 <= j < M) for each i\n// Constraints: every submatrix of f(i,\
-    \ j) is monotone (= totally monotone).\n// Complexity: O(N + M)\n// Reference:\n\
-    // https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html\n\
+    - https://judge.yosupo.jp/problem/min_plus_convolution_concave_arbitrary
+  bundledCode: "#line 1 \"other_algorithms/test/concave_min_plus_convolution.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_concave_arbitrary\"\
+    \n\n#line 2 \"other_algorithms/smawk.hpp\"\n#include <cassert>\n#include <functional>\n\
+    #include <numeric>\n#include <utility>\n#include <vector>\n\n// SMAWK: finding\
+    \ minima of totally monotone function f(i, j) (0 <= i < N, 0 <= j < M) for each\
+    \ i\n// Constraints: every submatrix of f(i, j) is monotone (= totally monotone).\n\
+    // Complexity: O(N + M)\n// Reference:\n// https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html\n\
     // http://web.cs.unlv.edu/larmore/Courses/CSC477/monge.pdf\n// Verify: https://codeforces.com/contest/1423/submission/98368491\n\
     template <class T>\nstd::vector<std::pair<int, T>> SMAWK(int N, int M, const std::function<T(int\
     \ i, int j)> &weight) {\n    std::vector<std::pair<int, T>> minima(N);\n\n   \
@@ -87,55 +82,32 @@ data:
     \ jr) / 2;\n                self(self, il, ir, jl, jm);\n                self(self,\
     \ il, ir, jm, jr);\n            }\n        }\n    };\n\n    rec(rec, 0, n + m\
     \ - 1, 0, n);\n\n    return ret;\n    // return argmin;  // If you want argmin\
-    \ (0 <= argmin[idx] < len(a))\n}\n#line 3 \"other_algorithms/monge_d_edge_shortest_paths_enum.hpp\"\
-    \n\n#line 7 \"other_algorithms/monge_d_edge_shortest_paths_enum.hpp\"\n\n// Calculate\
-    \ min cost paths of N vertices DAG from 0 to (N - 1), whose weight is Monge\n\
-    // returns vector<T> costs, where costs[d - 1] == (min cost from 0 to (N - 1)\
-    \ with exactly d edges)\n// Complexity: O(N maxD) (if SMAWK is used)\n// Verify:\
-    \ https://yukicoder.me/problems/no/952\n// Verify: https://mofecoder.com/contests/monoxercon_202508/tasks/monoxercon_202508_k\n\
-    template <class T>\nstd::vector<T>\nMongeDEdgeShortestPaths(int N, int max_d,\
-    \ const std::function<T(int i, int j)> &weight, T inf) {\n    assert(max_d < N);\n\
-    \    std::vector<T> ans;\n\n    std::vector<T> dp(N, inf);\n    dp.at(0) = 0;\n\
-    \    // std::vector prevs(max_d, std::vector<int>(N, -1)); // if you need to retrieve\
-    \ path\n\n    std::vector<T> costs;\n    for (int d = 1; d <= max_d; ++d) {\n\
-    \        // MonotoneMinima<T>() is Also OK\n        const auto res = SMAWK<T>(\n\
-    \            N, N - 1, [&](int j, int i) -> T { return i < j ? dp[i] + weight(i,\
-    \ j) : inf; });\n\n        for (int i = d; i < N; ++i) dp.at(i) = res.at(i).second;\n\
-    \        // for (int i = d; i < N; ++i) {\n        //     prevs.at(d - 1).at(i)\
-    \ = res.at(i).first;\n        // }\n        costs.push_back(dp.at(N - 1));\n \
-    \   }\n\n    return costs;\n}\n#line 4 \"other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp\"\
-    \n\n#include <algorithm>\n#include <iostream>\nusing namespace std;\n\nint main()\
-    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N;\n    cin\
-    \ >> N;\n    vector<int> A(N);\n    for (auto &a : A) cin >> a;\n\n    vector<long\
-    \ long> cs(N + 1);\n    for (int i = 0; i < N; ++i) cs.at(i + 1) = cs.at(i) +\
-    \ A.at(i);\n\n    constexpr long long inf = 1LL << 60;\n\n    auto f = [&](int\
-    \ i, int j) -> long long {\n        long long sum = cs.at(j - 1) - cs.at(i);\n\
-    \        return sum * sum;\n    };\n\n    auto costs = MongeDEdgeShortestPaths<long\
-    \ long>(N + 2, N, f, inf);\n    std::reverse(costs.begin(), costs.end());\n  \
-    \  for (auto x : costs) cout << x << '\\n';\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/952\"\n\n#include \"../monge_d_edge_shortest_paths_enum.hpp\"\
-    \n\n#include <algorithm>\n#include <iostream>\nusing namespace std;\n\nint main()\
-    \ {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\n    int N;\n    cin\
-    \ >> N;\n    vector<int> A(N);\n    for (auto &a : A) cin >> a;\n\n    vector<long\
-    \ long> cs(N + 1);\n    for (int i = 0; i < N; ++i) cs.at(i + 1) = cs.at(i) +\
-    \ A.at(i);\n\n    constexpr long long inf = 1LL << 60;\n\n    auto f = [&](int\
-    \ i, int j) -> long long {\n        long long sum = cs.at(j - 1) - cs.at(i);\n\
-    \        return sum * sum;\n    };\n\n    auto costs = MongeDEdgeShortestPaths<long\
-    \ long>(N + 2, N, f, inf);\n    std::reverse(costs.begin(), costs.end());\n  \
-    \  for (auto x : costs) cout << x << '\\n';\n}\n"
+    \ (0 <= argmin[idx] < len(a))\n}\n#line 4 \"other_algorithms/test/concave_min_plus_convolution.test.cpp\"\
+    \n\n#include <iostream>\n#line 7 \"other_algorithms/test/concave_min_plus_convolution.test.cpp\"\
+    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n    int N, M;\n    cin >> N >> M;\n    vector<int> A(N), B(M);\n    for (auto\
+    \ &a : A) cin >> a;\n    for (auto &b : B) cin >> b;\n\n    vector<int> ret =\
+    \ concave_min_plus_convolution<int>(B, A);\n\n    for (int i = 0; i < N + M -\
+    \ 1; ++i) cout << ret[i] << \" \\n\"[i + 1 == N + M - 1];\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_concave_arbitrary\"\
+    \n\n#include \"../smawk.hpp\"\n\n#include <iostream>\n#include <vector>\nusing\
+    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \n    int N, M;\n    cin >> N >> M;\n    vector<int> A(N), B(M);\n    for (auto\
+    \ &a : A) cin >> a;\n    for (auto &b : B) cin >> b;\n\n    vector<int> ret =\
+    \ concave_min_plus_convolution<int>(B, A);\n\n    for (int i = 0; i < N + M -\
+    \ 1; ++i) cout << ret[i] << \" \\n\"[i + 1 == N + M - 1];\n}\n"
   dependsOn:
-  - other_algorithms/monge_d_edge_shortest_paths_enum.hpp
   - other_algorithms/smawk.hpp
   isVerificationFile: true
-  path: other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp
+  path: other_algorithms/test/concave_min_plus_convolution.test.cpp
   requiredBy: []
   timestamp: '2025-08-24 23:54:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp
+documentation_of: other_algorithms/test/concave_min_plus_convolution.test.cpp
 layout: document
 redirect_from:
-- /verify/other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp
-- /verify/other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp.html
-title: other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp
+- /verify/other_algorithms/test/concave_min_plus_convolution.test.cpp
+- /verify/other_algorithms/test/concave_min_plus_convolution.test.cpp.html
+title: other_algorithms/test/concave_min_plus_convolution.test.cpp
 ---

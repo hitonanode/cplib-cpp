@@ -3,7 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: other_algorithms/smawk.hpp
-    title: Totally Monotone Matrix Searching (SMAWK)
+    title: Totally Monotone Matrix Searching (SMAWK), concave max-plus / min-plus
+      convolution
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,8 +20,8 @@ data:
     \n\n#line 2 \"other_algorithms/smawk.hpp\"\n#include <cassert>\n#include <functional>\n\
     #include <numeric>\n#include <utility>\n#include <vector>\n\n// SMAWK: finding\
     \ minima of totally monotone function f(i, j) (0 <= i < N, 0 <= j < M) for each\
-    \ i\n// Constraints: every submatrix of f(i, j) is monotone.\n// Complexity: O(N\
-    \ + M)\n// Reference:\n// https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html\n\
+    \ i\n// Constraints: every submatrix of f(i, j) is monotone (= totally monotone).\n\
+    // Complexity: O(N + M)\n// Reference:\n// https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120923/1348327542.html\n\
     // http://web.cs.unlv.edu/larmore/Courses/CSC477/monge.pdf\n// Verify: https://codeforces.com/contest/1423/submission/98368491\n\
     template <class T>\nstd::vector<std::pair<int, T>> SMAWK(int N, int M, const std::function<T(int\
     \ i, int j)> &weight) {\n    std::vector<std::pair<int, T>> minima(N);\n\n   \
@@ -37,20 +38,51 @@ data:
     \ fq);\n                init = false;\n                if (js[q] == jt) break;\n\
     \            }\n        }\n    };\n\n    std::vector<int> js(M);\n    std::iota(js.begin(),\
     \ js.end(), 0);\n    rec(rec, js, 0, N - 1, 1);\n\n    return minima;\n}\n\n//\
-    \ Concave max-plus convolution\n// b must be concave\n// Complexity: O(n + m)\n\
-    // Verify: https://www.codechef.com/problems/MAXPREFFLIP\ntemplate <class S, S\
-    \ INF>\nstd::vector<S> concave_max_plus_convolution(const std::vector<S> &a, const\
-    \ std::vector<S> &b) {\n    const int n = a.size(), m = b.size();\n\n    auto\
-    \ is_concave = [&](const std::vector<S> &u) -> bool {\n        for (int i = 1;\
-    \ i + 1 < int(u.size()); ++i) {\n            if (u[i - 1] + u[i + 1] > u[i] +\
-    \ u[i]) return false;\n        }\n        return true;\n    };\n\n    bool a_concave\
-    \ = is_concave(a), b_concave = is_concave(b);\n    assert(a_concave or b_concave);\n\
-    \    if (!b_concave) return concave_max_plus_convolution<S, INF>(b, a);\n\n  \
-    \  auto select = [&](int i, int j) -> S {\n        int aidx = j, bidx = i - j;\n\
-    \        if (bidx < 0 or bidx >= m or aidx >= n) return INF;\n        return -(a[aidx]\
-    \ + b[bidx]);\n    };\n    const auto minima = SMAWK<S>(n + m - 1, n, select);\n\
-    \    std::vector<S> ret;\n    for (auto x : minima) ret.push_back(-x.second);\n\
-    \    return ret;\n}\n#line 4 \"other_algorithms/test/concave_max_plus_convolution.test.cpp\"\
+    \ Find minima of totally ANTI-monotone function f(i, j) (0 <= i < N, 0 <= j <\
+    \ M) for each i\n// Constraints: every submatrix of f(i, j) is anti-monotone.\n\
+    // Complexity: O(N + M)\ntemplate <class T>\nstd::vector<std::pair<int, T>>\n\
+    SMAWKAntiMonotone(int N, int M, const std::function<T(int i, int j)> &weight)\
+    \ {\n    auto minima = SMAWK<T>(N, M, [&](int i, int j) -> T { return weight(i,\
+    \ M - 1 - j); });\n    for (auto &p : minima) p.first = M - 1 - p.first;\n   \
+    \ return minima;\n}\n\n// Concave max-plus convolution\n// **b MUST BE CONCAVE**\n\
+    // Complexity: O(n + m)\n// Verify: https://www.codechef.com/problems/MAXPREFFLIP\n\
+    template <class S, S INF>\nstd::vector<S> concave_max_plus_convolution(const std::vector<S>\
+    \ &a, const std::vector<S> &b) {\n    const int n = a.size(), m = b.size();\n\n\
+    \    auto is_concave = [&](const std::vector<S> &u) -> bool {\n        for (int\
+    \ i = 1; i + 1 < int(u.size()); ++i) {\n            if (u[i - 1] + u[i + 1] >\
+    \ u[i] + u[i]) return false;\n        }\n        return true;\n    };\n    assert(is_concave(b));\n\
+    \n    auto select = [&](int i, int j) -> S {\n        int aidx = j, bidx = i -\
+    \ j;\n        if (bidx < 0 or bidx >= m or aidx >= n) return INF;\n        return\
+    \ -(a[aidx] + b[bidx]);\n    };\n    const auto minima = SMAWK<S>(n + m - 1, n,\
+    \ select);\n    std::vector<S> ret;\n    for (auto x : minima) ret.push_back(-x.second);\n\
+    \    return ret;\n}\n\n// Concave min-plus convolution\n// **b MUST BE CONCAVE**\n\
+    // Complexity: O((n + m)log(n + m))\ntemplate <class S>\nstd::vector<S> concave_min_plus_convolution(const\
+    \ std::vector<S> &a, const std::vector<S> &b) {\n    const int n = a.size(), m\
+    \ = b.size();\n\n    auto is_concave = [&](const std::vector<S> &u) -> bool {\n\
+    \        for (int i = 1; i + 1 < int(u.size()); ++i) {\n            if (u[i -\
+    \ 1] + u[i + 1] > u[i] + u[i]) return false;\n        }\n        return true;\n\
+    \    };\n    assert(is_concave(b));\n\n    std::vector<S> ret(n + m - 1);\n  \
+    \  std::vector<int> argmin(n + m - 1, -1);\n\n    // mat[i][j] = a[j] + b[i -\
+    \ j]\n    auto is_valid = [&](int i, int j) { return 0 <= i - j and i - j < m;\
+    \ };\n    auto has_valid = [&](int il, int ir, int jl, int jr) {\n        if (il\
+    \ >= ir or jl >= jr) return false;\n        return is_valid(il, jl) or is_valid(il,\
+    \ jr - 1) or is_valid(ir - 1, jl) or\n               is_valid(ir - 1, jr - 1);\n\
+    \    };\n\n    auto rec = [&](auto &&self, int il, int ir, int jl, int jr) ->\
+    \ void {\n        if (!has_valid(il, ir, jl, jr)) return;\n\n        if (is_valid(il,\
+    \ jr - 1) and is_valid(ir - 1, jl)) {\n            auto select = [&](int i, int\
+    \ j) -> S { return a[j + jl] + b[(i + il) - (j + jl)]; };\n            const auto\
+    \ res = SMAWKAntiMonotone<S>(ir - il, jr - jl, select);\n            for (int\
+    \ idx = 0; idx < ir - il; ++idx) {\n                const int i = il + idx;\n\
+    \                if (argmin[i] == -1 or res[idx].second < ret[i]) {\n        \
+    \            ret[i] = res[idx].second;\n                    argmin[i] = res[idx].first\
+    \ + jl;\n                }\n            }\n        } else {\n            if (const\
+    \ int di = ir - il, dj = jr - jl; di > dj) {\n                const int im = (il\
+    \ + ir) / 2;\n                self(self, il, im, jl, jr);\n                self(self,\
+    \ im, ir, jl, jr);\n            } else {\n                const int jm = (jl +\
+    \ jr) / 2;\n                self(self, il, ir, jl, jm);\n                self(self,\
+    \ il, ir, jm, jr);\n            }\n        }\n    };\n\n    rec(rec, 0, n + m\
+    \ - 1, 0, n);\n\n    return ret;\n    // return argmin;  // If you want argmin\
+    \ (0 <= argmin[idx] < len(a))\n}\n#line 4 \"other_algorithms/test/concave_max_plus_convolution.test.cpp\"\
     \n\n#include <iostream>\n#line 7 \"other_algorithms/test/concave_max_plus_convolution.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
     \n    int N, M;\n    cin >> N >> M;\n    vector<int> A(N), B(M);\n    for (auto\
@@ -71,7 +103,7 @@ data:
   isVerificationFile: true
   path: other_algorithms/test/concave_max_plus_convolution.test.cpp
   requiredBy: []
-  timestamp: '2025-08-10 22:53:14+09:00'
+  timestamp: '2025-08-24 23:54:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: other_algorithms/test/concave_max_plus_convolution.test.cpp

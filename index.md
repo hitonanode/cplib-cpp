@@ -572,6 +572,10 @@ data:
         \ DAG \u306E\u6700\u77ED\u8DEF\u9577\u30FB\u8FBA\u6570\u4E0A\u4E0B\u9650\u6307\
         \u5B9A\u53EF\u80FD\uFF09"
     - icon: ':warning:'
+      path: other_algorithms/monotone_minima.hpp
+      title: "Monotone minima \uFF08Monotone \u306A\u884C\u5217\u306E\u884C\u6700\u5C0F\
+        \u5024\u306E\u52B9\u7387\u7684\u306A\u63A2\u7D22\uFF09"
+    - icon: ':warning:'
       path: other_algorithms/mos_algorithm.hpp
       title: "Mo's algorithm \uFF08\u533A\u9593\u30AF\u30A8\u30EA\u306B\u95A2\u3059\
         \u308B\u5E73\u65B9\u5206\u5272\u30C6\u30AF\u30CB\u30C3\u30AF\uFF09"
@@ -585,7 +589,8 @@ data:
         \u624B\u6CD5\uFF09"
     - icon: ':heavy_check_mark:'
       path: other_algorithms/smawk.hpp
-      title: Totally Monotone Matrix Searching (SMAWK)
+      title: Totally Monotone Matrix Searching (SMAWK), concave max-plus / min-plus
+        convolution
     - icon: ':heavy_check_mark:'
       path: other_algorithms/tree_pop_order_optimization.hpp
       title: "Tree pop order optimization / \"01 on Tree\" \uFF08\u6728\u306E\u6839\
@@ -1607,6 +1612,9 @@ data:
       path: other_algorithms/test/concave_max_plus_convolution.test.cpp
       title: other_algorithms/test/concave_max_plus_convolution.test.cpp
     - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/concave_min_plus_convolution.test.cpp
+      title: other_algorithms/test/concave_min_plus_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
       title: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1694,6 +1702,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: set_power_series/test/subset_exp.stress.test.cpp
       title: set_power_series/test/subset_exp.stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: set_power_series/test/subset_exp.test.cpp
+      title: set_power_series/test/subset_exp.test.cpp
     - icon: ':x:'
       path: set_power_series/test/subset_log.test.cpp
       title: set_power_series/test/subset_log.test.cpp

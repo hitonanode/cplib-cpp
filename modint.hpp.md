@@ -213,6 +213,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: set_power_series/test/subset_exp.stress.test.cpp
     title: set_power_series/test/subset_exp.stress.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: set_power_series/test/subset_exp.test.cpp
+    title: set_power_series/test/subset_exp.test.cpp
   - icon: ':x:'
     path: set_power_series/test/subset_log.test.cpp
     title: set_power_series/test/subset_log.test.cpp
@@ -491,6 +494,7 @@ data:
   - set_power_series/test/subset_pow.yuki1594.test.cpp
   - set_power_series/test/subset_log.test.cpp
   - set_power_series/test/subset_pow.stress.test.cpp
+  - set_power_series/test/subset_exp.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
   - set_power_series/test/subset_conv.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp
