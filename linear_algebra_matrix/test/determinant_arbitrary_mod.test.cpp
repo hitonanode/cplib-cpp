@@ -1,7 +1,4 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod"
-#if __cplusplus < 201402L
-#define IGNORE
-#endif
 #include "../characteristic_poly.hpp"
 #include "../hessenberg_reduction.hpp"
 #include "../matrix.hpp"

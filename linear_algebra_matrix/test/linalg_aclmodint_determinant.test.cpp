@@ -1,7 +1,4 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
-#if __cplusplus < 201402L
-#define IGNORE
-#endif
 #include "../matrix.hpp"
 #include <atcoder/modint>
 #include <iostream>
