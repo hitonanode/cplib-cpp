@@ -130,4 +130,4 @@ const std::vector<long long> res = MongeDEdgeShortestPaths<long long>(N, max_d, 
 ## Links
 
 - [Knuth-Yao speedup - 週刊 spaghetti_source - TopCoder部](https://topcoder-g-hatena-ne-jp.jag-icpc.org/spaghetti_source/20120915/1347668163.html)
-- [monge グラフ上の d-辺最短路の d=1,…,N における列挙 | Nyaan’s Library](https://nyaannyaan.github.io/library/dp/monge-d-edge-shortest-path-enumerate.hpp.html)
+- [monge グラフ上の d-辺最短路の d=1,…,N における列挙 \| Nyaan’s Library](https://nyaannyaan.github.io/library/dp/monge-d-edge-shortest-path-enumerate.hpp.html)
