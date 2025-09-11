@@ -8,12 +8,18 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links:
-    - https://codeforces.com/contest/786/submission/93412867>
+    - https://atcoder.jp/contests/abc414/tasks/abc414_g
+    - https://atcoder.jp/contests/nadafes2022_day1/tasks/nadafes2022_day1_i
+    - https://atcoder.jp/contests/nikkei2019-2-qual/tasks/nikkei2019_2_qual_d
+    - https://codeforces.com/contest/786/submission/93412867
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3506
   bundledCode: "#line 2 \"graph/segment_edge_shortest_path.hpp\"\n#include <algorithm>\n\
     #include <cassert>\n#include <deque>\n#include <limits>\n#include <queue>\n#include\
-    \ <utility>\n#include <vector>\n\n// CUT begin\n// \u533A\u9593\u306B\u8FBA\u3092\
-    \u5F35\u3063\u3066\u6700\u77ED\u8DDD\u96E2\u554F\u984C\u3092\u89E3\u304F\n// Verify:\
-    \ Codeforces Round #406 (Div. 1), problem: (B) Legacy <https://codeforces.com/contest/786/submission/93412867>\n\
+    \ <utility>\n#include <vector>\n\n// \u533A\u9593\u306B\u8FBA\u3092\u5F35\u3063\
+    \u3066\u6700\u77ED\u8DDD\u96E2\u554F\u984C\u3092\u89E3\u304F\n// Verify: Codeforces\
+    \ Round #406 (Div. 1), problem: (B) Legacy\n// https://codeforces.com/contest/786/submission/93412867\n\
+    // https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3506\n// https://atcoder.jp/contests/abc414/tasks/abc414_g\n\
+    // https://atcoder.jp/contests/nadafes2022_day1/tasks/nadafes2022_day1_i\n// https://atcoder.jp/contests/nikkei2019-2-qual/tasks/nikkei2019_2_qual_d\n\
     template <typename T = long long> struct SegmentEdgeShortestPath {\n    int V;\n\
     \    int h;\n    int INVALID = -1;\n    std::vector<std::vector<std::pair<int,\
     \ T>>> to;\n    SegmentEdgeShortestPath() = default;\n    SegmentEdgeShortestPath(int\
@@ -57,16 +63,18 @@ data:
     \ + h, _d_tmp.begin() + h + V, dist.begin());\n    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include <deque>\n\
     #include <limits>\n#include <queue>\n#include <utility>\n#include <vector>\n\n\
-    // CUT begin\n// \u533A\u9593\u306B\u8FBA\u3092\u5F35\u3063\u3066\u6700\u77ED\u8DDD\
-    \u96E2\u554F\u984C\u3092\u89E3\u304F\n// Verify: Codeforces Round #406 (Div. 1),\
-    \ problem: (B) Legacy <https://codeforces.com/contest/786/submission/93412867>\n\
-    template <typename T = long long> struct SegmentEdgeShortestPath {\n    int V;\n\
-    \    int h;\n    int INVALID = -1;\n    std::vector<std::vector<std::pair<int,\
-    \ T>>> to;\n    SegmentEdgeShortestPath() = default;\n    SegmentEdgeShortestPath(int\
-    \ V) : V(V), h(1) {\n        while (h < V) h *= 2;\n        to.resize(h * 3);\n\
-    \        for (int i = 1; i < h; i++) {\n            to[i].emplace_back(i * 2,\
-    \ 0);\n            to[i].emplace_back(i * 2 + 1, 0);\n            int j = i *\
-    \ 2 + h * 2;\n            if (j >= h * 3) j -= h * 2;\n            to[j].emplace_back(i\
+    // \u533A\u9593\u306B\u8FBA\u3092\u5F35\u3063\u3066\u6700\u77ED\u8DDD\u96E2\u554F\
+    \u984C\u3092\u89E3\u304F\n// Verify: Codeforces Round #406 (Div. 1), problem:\
+    \ (B) Legacy\n// https://codeforces.com/contest/786/submission/93412867\n// https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3506\n\
+    // https://atcoder.jp/contests/abc414/tasks/abc414_g\n// https://atcoder.jp/contests/nadafes2022_day1/tasks/nadafes2022_day1_i\n\
+    // https://atcoder.jp/contests/nikkei2019-2-qual/tasks/nikkei2019_2_qual_d\ntemplate\
+    \ <typename T = long long> struct SegmentEdgeShortestPath {\n    int V;\n    int\
+    \ h;\n    int INVALID = -1;\n    std::vector<std::vector<std::pair<int, T>>> to;\n\
+    \    SegmentEdgeShortestPath() = default;\n    SegmentEdgeShortestPath(int V)\
+    \ : V(V), h(1) {\n        while (h < V) h *= 2;\n        to.resize(h * 3);\n \
+    \       for (int i = 1; i < h; i++) {\n            to[i].emplace_back(i * 2, 0);\n\
+    \            to[i].emplace_back(i * 2 + 1, 0);\n            int j = i * 2 + h\
+    \ * 2;\n            if (j >= h * 3) j -= h * 2;\n            to[j].emplace_back(i\
     \ + h * 2, 0);\n            to[j + 1].emplace_back(i + h * 2, 0);\n        }\n\
     \    }\n    void _add_dfs(int now, int l, int r, int begin, int end, std::vector<int>\
     \ &vec_add) {\n        if (end <= l or r <= begin) return;\n        if (l <= begin\
@@ -105,7 +113,7 @@ data:
   isVerificationFile: false
   path: graph/segment_edge_shortest_path.hpp
   requiredBy: []
-  timestamp: '2020-11-21 18:08:42+09:00'
+  timestamp: '2025-09-11 21:55:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/segment_edge_shortest_path.hpp

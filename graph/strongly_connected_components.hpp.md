@@ -160,11 +160,11 @@ data:
   verifiedWith:
   - graph/test/topological_sort.test.cpp
   - graph/test/dulmage_mendelsohn.yuki1744.test.cpp
+  - graph/test/2sat_solver.test.cpp
+  - graph/test/strongly_connected_components.test.cpp
+  - graph/test/dulmage_mendelsohn.yuki1745.test.cpp
   - graph/test/cycle_detection_directed.test.cpp
   - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
-  - graph/test/dulmage_mendelsohn.yuki1745.test.cpp
-  - graph/test/strongly_connected_components.test.cpp
-  - graph/test/2sat_solver.test.cpp
 documentation_of: graph/strongly_connected_components.hpp
 layout: document
 redirect_from:

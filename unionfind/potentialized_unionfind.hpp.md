@@ -58,9 +58,9 @@ data:
   timestamp: '2024-10-02 23:55:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - unionfind/test/potentialized_unionfind_modint.test.cpp
-  - unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
   - unionfind/test/potentialized_unionfind_int.aoj3142.test.cpp
+  - unionfind/test/potentialized_unionfind_F2.yuki1420.test.cpp
+  - unionfind/test/potentialized_unionfind_modint.test.cpp
   - unionfind/test/potentialized_unionfind.aoj_dsl_1_b.test.cpp
 documentation_of: unionfind/potentialized_unionfind.hpp
 layout: document

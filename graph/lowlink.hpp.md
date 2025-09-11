@@ -172,9 +172,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/biconnected_components.test.cpp
-  - graph/test/bridge.test.cpp
-  - graph/test/articulation_points.test.cpp
   - graph/test/two-edge-connected-components.test.cpp
+  - graph/test/articulation_points.test.cpp
+  - graph/test/bridge.test.cpp
 documentation_of: graph/lowlink.hpp
 layout: document
 title: "Lowlink \uFF08\u7121\u5411\u30B0\u30E9\u30D5\u306E DFS tree, lowlink, \u6A4B\

@@ -167,8 +167,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_algorithms/test/concave_min_plus_convolution.test.cpp
-  - other_algorithms/test/concave_max_plus_convolution.test.cpp
   - other_algorithms/test/monge_d_edge_shortest_paths_enum.yuki952.test.cpp
+  - other_algorithms/test/concave_max_plus_convolution.test.cpp
 documentation_of: other_algorithms/smawk.hpp
 layout: document
 title: Totally Monotone Matrix Searching (SMAWK), concave max-plus / min-plus convolution
