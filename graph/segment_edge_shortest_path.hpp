@@ -7,9 +7,13 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
 // 区間に辺を張って最短距離問題を解く
-// Verify: Codeforces Round #406 (Div. 1), problem: (B) Legacy <https://codeforces.com/contest/786/submission/93412867>
+// Verify: Codeforces Round #406 (Div. 1), problem: (B) Legacy
+// https://codeforces.com/contest/786/submission/93412867
+// https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3506
+// https://atcoder.jp/contests/abc414/tasks/abc414_g
+// https://atcoder.jp/contests/nadafes2022_day1/tasks/nadafes2022_day1_i
+// https://atcoder.jp/contests/nikkei2019-2-qual/tasks/nikkei2019_2_qual_d
 template <typename T = long long> struct SegmentEdgeShortestPath {
     int V;
     int h;
