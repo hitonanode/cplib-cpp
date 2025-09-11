@@ -138,13 +138,14 @@ template <int md> struct ModInt {
         return ModInt::fac(n) * ModInt::facinv(n - r);
     }
 
-    static ModInt binom(int n, int r) {
+    static ModInt binom(long long n, long long r) {
         static long long bruteforce_times = 0;
 
         if (r < 0 or n < r) return ModInt(0);
         if (n <= bruteforce_times or n < (int)facs.size()) return ModInt::nCr(n, r);
 
         r = std::min(r, n - r);
+        assert((int)r == r);
 
         ModInt ret = ModInt::facinv(r);
         for (int i = 0; i < r; ++i) ret *= n - i;
@@ -155,6 +156,7 @@ template <int md> struct ModInt {
 
     // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1! k_2! ... k_m!)
     // Complexity: O(sum(ks))
+    // Verify: https://yukicoder.me/problems/no/3178
     template <class Vec> static ModInt multinomial(const Vec &ks) {
         ModInt ret{1};
         int sum = 0;
