@@ -60,7 +60,7 @@ constexpr int countr_zero_constexpr(unsigned int n) {
 #include <functional>
 #include <vector>
 
-#include "atcoder/internal_bit"
+// #include "atcoder/internal_bit"
 
 namespace atcoder {
 
