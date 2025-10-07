@@ -318,35 +318,35 @@ data:
   isVerificationFile: false
   path: convolution/ntt.hpp
   requiredBy:
-  - convolution/multivar_ntt.hpp
-  - convolution/semirelaxed_multiplication.hpp
-  - convolution/relaxed_multiplication.hpp
-  - linear_algebra_matrix/blackbox_matrices.hpp
-  - formal_power_series/coeff_of_rational_function.hpp
-  - formal_power_series/polynomial_divmod.hpp
   - formal_power_series/factorial_power.hpp
+  - formal_power_series/polynomial_divmod.hpp
+  - formal_power_series/coeff_of_rational_function.hpp
+  - linear_algebra_matrix/blackbox_matrices.hpp
+  - convolution/multivar_ntt.hpp
+  - convolution/relaxed_multiplication.hpp
+  - convolution/semirelaxed_multiplication.hpp
   timestamp: '2025-08-25 00:44:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - formal_power_series/test/polynomial_divmod.test.cpp
+  - formal_power_series/test/shift_of_sampling_points.test.cpp
+  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - formal_power_series/test/coeff_of_rational_function.test.cpp
+  - formal_power_series/test/kitamasa.test.cpp
+  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
   - utilities/test/pow_op.test.cpp
-  - convolution/test/semirelaxed_multiplication.test.cpp
-  - convolution/test/multivar_ntt.test.cpp
-  - convolution/test/convolution_on_tree.test.cpp
-  - convolution/test/relaxed_multiplication.test.cpp
-  - convolution/test/ntt_arbitrary_mod.test.cpp
-  - convolution/test/relaxed_multiplication.exp.test.cpp
-  - convolution/test/ntt.test.cpp
-  - number/test/primitive_root.test.cpp
-  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - formal_power_series/test/kitamasa.test.cpp
-  - formal_power_series/test/coeff_of_rational_function.test.cpp
-  - formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
-  - formal_power_series/test/shift_of_sampling_points.test.cpp
-  - formal_power_series/test/polynomial_divmod.test.cpp
+  - convolution/test/relaxed_multiplication.exp.test.cpp
+  - convolution/test/convolution_on_tree.test.cpp
+  - convolution/test/semirelaxed_multiplication.test.cpp
+  - convolution/test/multivar_ntt.test.cpp
+  - convolution/test/ntt_arbitrary_mod.test.cpp
+  - convolution/test/ntt.test.cpp
+  - convolution/test/relaxed_multiplication.test.cpp
+  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - tree/test/frequency_table_of_tree_distance.stress.test.cpp
+  - number/test/primitive_root.test.cpp
 documentation_of: convolution/ntt.hpp
 layout: document
 redirect_from:

@@ -71,8 +71,8 @@ data:
     \ << x))) x++;\n    return x;\n}\n\n} // namespace internal\n\n} // namespace\
     \ atcoder\n\n#endif // ATCODER_INTERNAL_BITOP_HPP\n#ifndef ATCODER_LAZYSEGTREE_HPP\n\
     #define ATCODER_LAZYSEGTREE_HPP 1\n\n#include <cassert>\n#include <functional>\n\
-    #include <vector>\n\n#include \"atcoder/internal_bit\"\n\nnamespace atcoder {\n\
-    \ntemplate <class S, auto op, auto e, class F, auto mapping, auto composition,\
+    #include <vector>\n\n// #include \"atcoder/internal_bit\"\n\nnamespace atcoder\
+    \ {\n\ntemplate <class S, auto op, auto e, class F, auto mapping, auto composition,\
     \ auto id>\nstruct lazy_segtree {\n    static_assert(std::is_convertible_v<decltype(op),\
     \ std::function<S(S, S)>>,\n                  \"op must work as S(S, S)\");\n\
     \    static_assert(std::is_convertible_v<decltype(e), std::function<S()>>, \"\
@@ -153,21 +153,21 @@ data:
   isVerificationFile: false
   path: segmenttree/acl_lazysegtree.hpp
   requiredBy:
-  - segmenttree/trees/acl_range-update-range-sum-min.hpp
-  - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
-  - segmenttree/trees/acl_range-affine-range-sum.hpp
-  - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
-  - segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-  - segmenttree/trees/acl_range-add-chmax-range-min.hpp
   - segmenttree/acl_beats.hpp
-  timestamp: '2025-08-24 23:32:38+09:00'
+  - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
+  - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
+  - segmenttree/trees/acl_range-add-chmax-range-min.hpp
+  - segmenttree/trees/acl_range-add-chmax-range-sum.hpp
+  - segmenttree/trees/acl_range-affine-range-sum.hpp
+  - segmenttree/trees/acl_range-update-range-sum-min.hpp
+  timestamp: '2025-10-07 09:41:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
   - segmenttree/test/beats_gcd.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - segmenttree/test/beats.test.cpp
+  - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
   - segmenttree/test/beats_random_test.test.cpp
+  - segmenttree/test/beats.test.cpp
 documentation_of: segmenttree/acl_lazysegtree.hpp
 layout: document
 title: Lazy Segtree (based on atcoder::lazy_segtree)

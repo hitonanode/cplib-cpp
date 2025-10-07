@@ -534,9 +534,9 @@ data:
     - icon: ':warning:'
       path: other_algorithms/bounded_knapsack.hpp
       title: Bounded knapsack problem (Pisinger's algorithm)
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/doubling.hpp
-      title: other_algorithms/doubling.hpp
+      title: "Binary lifting / doubling \uFF08\u30C0\u30D6\u30EA\u30F3\u30B0\uFF09"
     - icon: ':heavy_check_mark:'
       path: other_algorithms/dual_slope_trick.hpp
       title: Dual slope trick
@@ -1614,6 +1614,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/concave_min_plus_convolution.test.cpp
       title: other_algorithms/test/concave_min_plus_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/doubling.yuki3305.test.cpp
+      title: other_algorithms/test/doubling.yuki3305.test.cpp
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp
       title: other_algorithms/test/dual_slope_trick.yuki2114.test.cpp

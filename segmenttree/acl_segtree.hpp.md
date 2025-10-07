@@ -99,10 +99,10 @@ data:
   timestamp: '2025-08-24 23:32:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/acl_rsq.test.cpp
+  - segmenttree/test/acl_rmq.test.cpp
   - segmenttree/test/rangetree.yuki1625.test.cpp
   - segmenttree/test/rangetree.test.cpp
-  - segmenttree/test/acl_rmq.test.cpp
+  - segmenttree/test/acl_rsq.test.cpp
 documentation_of: segmenttree/acl_segtree.hpp
 layout: document
 title: Segtree (based on atcoder::segtree)
