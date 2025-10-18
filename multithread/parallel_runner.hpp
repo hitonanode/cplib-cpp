@@ -23,11 +23,12 @@ public:
     int num_threads_;
     std::vector<Solver> instances;
     std::vector<std::optional<typename Solver::Ret>> rets;
+    int num_failures_;
 
     std::mutex mtx;
 
     ParallelRunner(int num_threads = std::thread::hardware_concurrency())
-        : num_threads_(num_threads > 0 ? num_threads : 1) {
+        : num_threads_(num_threads > 0 ? num_threads : 1), num_failures_(0) {
         std::cerr << "num_threads: " << num_threads_ << std::endl;
     }
 
@@ -40,6 +41,10 @@ public:
         }
     }
 
+    void show_result() const {
+        std::cerr << "Done: " << num_failures_ << " failures." << std::endl;
+    }
+
     void run_sequential() {
         rets.assign(instances.size(), std::nullopt);
 
@@ -49,6 +54,8 @@ public:
                 mhc_stdout_(instances.at(index), rets.at(index).value(), index);
             }
         }
+
+        show_result();
     }
 
     void run_parallel(int num_skip = 0) {
@@ -85,6 +92,8 @@ public:
         }
 
         for (auto &f : futures) f.get();
+
+        show_result();
     }
 
     void run_single_(int current_index) {
@@ -100,10 +109,12 @@ public:
         } catch (const std::exception &e) {
             std::unique_lock<std::mutex> lock(mtx);
             std::cerr << "Error in Case #" << current_index + 1 << ": " << e.what() << std::endl;
+            ++num_failures_;
             return;
         } catch (...) {
             std::unique_lock<std::mutex> lock(mtx);
             std::cerr << "Unknown error in Case #" << current_index + 1 << std::endl;
+            ++num_failures_;
             return;
         }
 
@@ -122,7 +133,6 @@ public:
         std::cout << std::flush;
     }
 };
-
 #endif // PARALLEL_RUNNER_HPP
 
 /* Usage:
@@ -143,10 +153,12 @@ struct Solver {
     }
 };
 
-int T;
-cin >> T;
+int main() {
+    int T;
+    cin >> T;
 
-ParallelRunner<Solver> pm;
-pm.read_all(T);
-pm.run_parallel();
+    ParallelRunner<Solver> pm;
+    pm.read_all(T);
+    pm.run_parallel();
+}
 */
