@@ -103,9 +103,9 @@ data:
   timestamp: '2024-09-25 00:42:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/frequency_table_of_tree_distance.test.cpp
-  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
+  - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - tree/test/frequency_table_of_tree_distance.test.cpp
 documentation_of: tree/centroid_decomposition.hpp
 layout: document
 title: "Centroid decomposition \uFF08\u68EE\u306E\u91CD\u5FC3\u5206\u89E3\uFF09"

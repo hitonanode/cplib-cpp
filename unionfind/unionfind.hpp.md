@@ -66,8 +66,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - unionfind/test/unionfind.test.cpp
-  - graph/test/incremental-bridge-connectivity.test.cpp
   - graph/test/manhattan_mst.test.cpp
+  - graph/test/incremental-bridge-connectivity.test.cpp
   - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
 documentation_of: unionfind/unionfind.hpp
 layout: document

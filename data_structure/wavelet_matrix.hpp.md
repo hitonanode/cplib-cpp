@@ -311,10 +311,10 @@ data:
   timestamp: '2025-07-23 23:51:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp
-  - data_structure/test/wavelet_matrix_rectangle_sum.test.cpp
   - data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
+  - data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp
   - data_structure/test/wavelet_matrix.yuki3207.test.cpp
+  - data_structure/test/wavelet_matrix_rectangle_sum.test.cpp
 documentation_of: data_structure/wavelet_matrix.hpp
 layout: document
 title: "Wavelet matrix \uFF08\u30A6\u30A7\u30FC\u30D6\u30EC\u30C3\u30C8\u884C\u5217\

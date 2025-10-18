@@ -134,8 +134,8 @@ data:
   timestamp: '2025-08-05 23:34:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_algorithms/test/tree_pop_order_optimization.test.cpp
   - other_algorithms/test/tree_pop_order_optimization.yuki3148.test.cpp
+  - other_algorithms/test/tree_pop_order_optimization.test.cpp
 documentation_of: other_algorithms/tree_pop_order_optimization.hpp
 layout: document
 title: "Tree pop order optimization / \"01 on Tree\" \uFF08\u6728\u306E\u6839\u304B\

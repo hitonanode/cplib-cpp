@@ -16,16 +16,19 @@ data:
     \    { ct.dump_stdout(std::declval<typename T::Ret>()) } -> std::same_as<void>;\n\
     };\n\ntemplate <ISolver Solver> class ParallelRunner {\npublic:\n    int num_threads_;\n\
     \    std::vector<Solver> instances;\n    std::vector<std::optional<typename Solver::Ret>>\
-    \ rets;\n\n    std::mutex mtx;\n\n    ParallelRunner(int num_threads = std::thread::hardware_concurrency())\n\
-    \        : num_threads_(num_threads > 0 ? num_threads : 1) {\n        std::cerr\
-    \ << \"num_threads: \" << num_threads_ << std::endl;\n    }\n\n    void read_all(int\
-    \ num_testcases) {\n        instances.clear();\n        instances.reserve(num_testcases);\n\
-    \        for (int i = 0; i < num_testcases; ++i) {\n            instances.emplace_back(Solver{});\n\
-    \            instances.back().read_stdin();\n        }\n    }\n\n    void run_sequential()\
-    \ {\n        rets.assign(instances.size(), std::nullopt);\n\n        for (int\
-    \ index = 0; index < (int)instances.size(); ++index) {\n            run_single_(index);\n\
-    \            if (rets.at(index).has_value()) {\n                mhc_stdout_(instances.at(index),\
-    \ rets.at(index).value(), index);\n            }\n        }\n    }\n\n    void\
+    \ rets;\n    int num_failures_;\n\n    std::mutex mtx;\n\n    ParallelRunner(int\
+    \ num_threads = std::thread::hardware_concurrency())\n        : num_threads_(num_threads\
+    \ > 0 ? num_threads : 1), num_failures_(0) {\n        std::cerr << \"num_threads:\
+    \ \" << num_threads_ << std::endl;\n    }\n\n    void read_all(int num_testcases)\
+    \ {\n        instances.clear();\n        instances.reserve(num_testcases);\n \
+    \       for (int i = 0; i < num_testcases; ++i) {\n            instances.emplace_back(Solver{});\n\
+    \            instances.back().read_stdin();\n        }\n    }\n\n    void show_result()\
+    \ const {\n        std::cerr << \"Done: \" << num_failures_ << \" failures.\"\
+    \ << std::endl;\n    }\n\n    void run_sequential() {\n        rets.assign(instances.size(),\
+    \ std::nullopt);\n\n        for (int index = 0; index < (int)instances.size();\
+    \ ++index) {\n            run_single_(index);\n            if (rets.at(index).has_value())\
+    \ {\n                mhc_stdout_(instances.at(index), rets.at(index).value(),\
+    \ index);\n            }\n        }\n\n        show_result();\n    }\n\n    void\
     \ run_parallel(int num_skip = 0) {\n        rets.assign(instances.size(), std::nullopt);\n\
     \n        const int num_inputs = instances.size();\n        std::vector<std::future<void>>\
     \ futures;\n\n        std::atomic<int> index(num_skip < 0 ? 0 : num_skip);\n \
@@ -42,29 +45,30 @@ data:
     \                                 rets.at(num_written).value(), num_written);\n\
     \                            }\n                            ++num_written;\n \
     \                       }\n                    }\n                }\n        \
-    \    }));\n        }\n\n        for (auto &f : futures) f.get();\n    }\n\n  \
-    \  void run_single_(int current_index) {\n        {\n            std::unique_lock<std::mutex>\
+    \    }));\n        }\n\n        for (auto &f : futures) f.get();\n\n        show_result();\n\
+    \    }\n\n    void run_single_(int current_index) {\n        {\n            std::unique_lock<std::mutex>\
     \ lock(mtx);\n            std::cerr << \"[#\" << current_index + 1 << \"] start\"\
     \ << std::endl;\n        }\n\n        auto start = std::chrono::steady_clock::now();\n\
     \n        try {\n            rets.at(current_index) = instances.at(current_index).solve();\n\
     \        } catch (const std::exception &e) {\n            std::unique_lock<std::mutex>\
     \ lock(mtx);\n            std::cerr << \"Error in Case #\" << current_index +\
-    \ 1 << \": \" << e.what() << std::endl;\n            return;\n        } catch\
-    \ (...) {\n            std::unique_lock<std::mutex> lock(mtx);\n            std::cerr\
-    \ << \"Unknown error in Case #\" << current_index + 1 << std::endl;\n        \
-    \    return;\n        }\n\n        auto end = std::chrono::steady_clock::now();\n\
-    \        auto msec = std::chrono::duration_cast<std::chrono::milliseconds>(end\
-    \ - start).count();\n\n        {\n            std::unique_lock<std::mutex> lock(mtx);\n\
-    \            std::cerr << \"[#\" << current_index + 1 << \"] end, \" << msec <<\
-    \ \" ms\" << std::endl;\n        }\n    }\n\n    static void mhc_stdout_(const\
-    \ Solver &result, const Solver::Ret &sol, int index) {\n        std::cout << \"\
-    Case #\" << index + 1 << \": \";\n        result.dump_stdout(sol);\n        std::cout\
-    \ << std::flush;\n    }\n};\n\n\n\n/* Usage:\nstruct Solver {\n    using Ret =\
-    \ int;\n\n    void read_stdin() {\n        // read input using std::cin\n    }\n\
-    \n    Ret solve() {\n        // solve the problem\n    }\n\n    void dump_stdout(const\
-    \ Ret &ret) const {\n        // output the result using std::cout\n        //\
-    \ std::cout << ret << std::endl;\n    }\n};\n\nint T;\ncin >> T;\n\nParallelRunner<Solver>\
-    \ pm;\npm.read_all(T);\npm.run_parallel();\n*/\n"
+    \ 1 << \": \" << e.what() << std::endl;\n            ++num_failures_;\n      \
+    \      return;\n        } catch (...) {\n            std::unique_lock<std::mutex>\
+    \ lock(mtx);\n            std::cerr << \"Unknown error in Case #\" << current_index\
+    \ + 1 << std::endl;\n            ++num_failures_;\n            return;\n     \
+    \   }\n\n        auto end = std::chrono::steady_clock::now();\n        auto msec\
+    \ = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();\n\
+    \n        {\n            std::unique_lock<std::mutex> lock(mtx);\n           \
+    \ std::cerr << \"[#\" << current_index + 1 << \"] end, \" << msec << \" ms\" <<\
+    \ std::endl;\n        }\n    }\n\n    static void mhc_stdout_(const Solver &result,\
+    \ const Solver::Ret &sol, int index) {\n        std::cout << \"Case #\" << index\
+    \ + 1 << \": \";\n        result.dump_stdout(sol);\n        std::cout << std::flush;\n\
+    \    }\n};\n\n\n/* Usage:\nstruct Solver {\n    using Ret = int;\n\n    void read_stdin()\
+    \ {\n        // read input using std::cin\n    }\n\n    Ret solve() {\n      \
+    \  // solve the problem\n    }\n\n    void dump_stdout(const Ret &ret) const {\n\
+    \        // output the result using std::cout\n        // std::cout << ret <<\
+    \ std::endl;\n    }\n};\n\nint main() {\n    int T;\n    cin >> T;\n\n    ParallelRunner<Solver>\
+    \ pm;\n    pm.read_all(T);\n    pm.run_parallel();\n}\n*/\n"
   code: "#ifndef PARALLEL_RUNNER_HPP\n#define PARALLEL_RUNNER_HPP\n\n#include <chrono>\n\
     #include <concepts>\n#include <exception>\n#include <future>\n#include <iostream>\n\
     #include <mutex>\n#include <optional>\n#include <vector>\n\ntemplate <class T>\n\
@@ -73,16 +77,19 @@ data:
     \    { ct.dump_stdout(std::declval<typename T::Ret>()) } -> std::same_as<void>;\n\
     };\n\ntemplate <ISolver Solver> class ParallelRunner {\npublic:\n    int num_threads_;\n\
     \    std::vector<Solver> instances;\n    std::vector<std::optional<typename Solver::Ret>>\
-    \ rets;\n\n    std::mutex mtx;\n\n    ParallelRunner(int num_threads = std::thread::hardware_concurrency())\n\
-    \        : num_threads_(num_threads > 0 ? num_threads : 1) {\n        std::cerr\
-    \ << \"num_threads: \" << num_threads_ << std::endl;\n    }\n\n    void read_all(int\
-    \ num_testcases) {\n        instances.clear();\n        instances.reserve(num_testcases);\n\
-    \        for (int i = 0; i < num_testcases; ++i) {\n            instances.emplace_back(Solver{});\n\
-    \            instances.back().read_stdin();\n        }\n    }\n\n    void run_sequential()\
-    \ {\n        rets.assign(instances.size(), std::nullopt);\n\n        for (int\
-    \ index = 0; index < (int)instances.size(); ++index) {\n            run_single_(index);\n\
-    \            if (rets.at(index).has_value()) {\n                mhc_stdout_(instances.at(index),\
-    \ rets.at(index).value(), index);\n            }\n        }\n    }\n\n    void\
+    \ rets;\n    int num_failures_;\n\n    std::mutex mtx;\n\n    ParallelRunner(int\
+    \ num_threads = std::thread::hardware_concurrency())\n        : num_threads_(num_threads\
+    \ > 0 ? num_threads : 1), num_failures_(0) {\n        std::cerr << \"num_threads:\
+    \ \" << num_threads_ << std::endl;\n    }\n\n    void read_all(int num_testcases)\
+    \ {\n        instances.clear();\n        instances.reserve(num_testcases);\n \
+    \       for (int i = 0; i < num_testcases; ++i) {\n            instances.emplace_back(Solver{});\n\
+    \            instances.back().read_stdin();\n        }\n    }\n\n    void show_result()\
+    \ const {\n        std::cerr << \"Done: \" << num_failures_ << \" failures.\"\
+    \ << std::endl;\n    }\n\n    void run_sequential() {\n        rets.assign(instances.size(),\
+    \ std::nullopt);\n\n        for (int index = 0; index < (int)instances.size();\
+    \ ++index) {\n            run_single_(index);\n            if (rets.at(index).has_value())\
+    \ {\n                mhc_stdout_(instances.at(index), rets.at(index).value(),\
+    \ index);\n            }\n        }\n\n        show_result();\n    }\n\n    void\
     \ run_parallel(int num_skip = 0) {\n        rets.assign(instances.size(), std::nullopt);\n\
     \n        const int num_inputs = instances.size();\n        std::vector<std::future<void>>\
     \ futures;\n\n        std::atomic<int> index(num_skip < 0 ? 0 : num_skip);\n \
@@ -99,35 +106,36 @@ data:
     \                                 rets.at(num_written).value(), num_written);\n\
     \                            }\n                            ++num_written;\n \
     \                       }\n                    }\n                }\n        \
-    \    }));\n        }\n\n        for (auto &f : futures) f.get();\n    }\n\n  \
-    \  void run_single_(int current_index) {\n        {\n            std::unique_lock<std::mutex>\
+    \    }));\n        }\n\n        for (auto &f : futures) f.get();\n\n        show_result();\n\
+    \    }\n\n    void run_single_(int current_index) {\n        {\n            std::unique_lock<std::mutex>\
     \ lock(mtx);\n            std::cerr << \"[#\" << current_index + 1 << \"] start\"\
     \ << std::endl;\n        }\n\n        auto start = std::chrono::steady_clock::now();\n\
     \n        try {\n            rets.at(current_index) = instances.at(current_index).solve();\n\
     \        } catch (const std::exception &e) {\n            std::unique_lock<std::mutex>\
     \ lock(mtx);\n            std::cerr << \"Error in Case #\" << current_index +\
-    \ 1 << \": \" << e.what() << std::endl;\n            return;\n        } catch\
-    \ (...) {\n            std::unique_lock<std::mutex> lock(mtx);\n            std::cerr\
-    \ << \"Unknown error in Case #\" << current_index + 1 << std::endl;\n        \
-    \    return;\n        }\n\n        auto end = std::chrono::steady_clock::now();\n\
-    \        auto msec = std::chrono::duration_cast<std::chrono::milliseconds>(end\
-    \ - start).count();\n\n        {\n            std::unique_lock<std::mutex> lock(mtx);\n\
-    \            std::cerr << \"[#\" << current_index + 1 << \"] end, \" << msec <<\
-    \ \" ms\" << std::endl;\n        }\n    }\n\n    static void mhc_stdout_(const\
-    \ Solver &result, const Solver::Ret &sol, int index) {\n        std::cout << \"\
-    Case #\" << index + 1 << \": \";\n        result.dump_stdout(sol);\n        std::cout\
-    \ << std::flush;\n    }\n};\n\n#endif // PARALLEL_RUNNER_HPP\n\n/* Usage:\nstruct\
-    \ Solver {\n    using Ret = int;\n\n    void read_stdin() {\n        // read input\
-    \ using std::cin\n    }\n\n    Ret solve() {\n        // solve the problem\n \
-    \   }\n\n    void dump_stdout(const Ret &ret) const {\n        // output the result\
-    \ using std::cout\n        // std::cout << ret << std::endl;\n    }\n};\n\nint\
-    \ T;\ncin >> T;\n\nParallelRunner<Solver> pm;\npm.read_all(T);\npm.run_parallel();\n\
-    */\n"
+    \ 1 << \": \" << e.what() << std::endl;\n            ++num_failures_;\n      \
+    \      return;\n        } catch (...) {\n            std::unique_lock<std::mutex>\
+    \ lock(mtx);\n            std::cerr << \"Unknown error in Case #\" << current_index\
+    \ + 1 << std::endl;\n            ++num_failures_;\n            return;\n     \
+    \   }\n\n        auto end = std::chrono::steady_clock::now();\n        auto msec\
+    \ = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();\n\
+    \n        {\n            std::unique_lock<std::mutex> lock(mtx);\n           \
+    \ std::cerr << \"[#\" << current_index + 1 << \"] end, \" << msec << \" ms\" <<\
+    \ std::endl;\n        }\n    }\n\n    static void mhc_stdout_(const Solver &result,\
+    \ const Solver::Ret &sol, int index) {\n        std::cout << \"Case #\" << index\
+    \ + 1 << \": \";\n        result.dump_stdout(sol);\n        std::cout << std::flush;\n\
+    \    }\n};\n#endif // PARALLEL_RUNNER_HPP\n\n/* Usage:\nstruct Solver {\n    using\
+    \ Ret = int;\n\n    void read_stdin() {\n        // read input using std::cin\n\
+    \    }\n\n    Ret solve() {\n        // solve the problem\n    }\n\n    void dump_stdout(const\
+    \ Ret &ret) const {\n        // output the result using std::cout\n        //\
+    \ std::cout << ret << std::endl;\n    }\n};\n\nint main() {\n    int T;\n    cin\
+    \ >> T;\n\n    ParallelRunner<Solver> pm;\n    pm.read_all(T);\n    pm.run_parallel();\n\
+    }\n*/\n"
   dependsOn: []
   isVerificationFile: false
   path: multithread/parallel_runner.hpp
   requiredBy: []
-  timestamp: '2024-09-25 00:21:34+09:00'
+  timestamp: '2025-10-19 01:57:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: multithread/parallel_runner.hpp
