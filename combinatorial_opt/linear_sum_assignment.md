@@ -60,6 +60,7 @@ for (int t = 0; t < k; ++t) {
 ## 問題例
 
 - [Library Checker: Assignment Problem](https://judge.yosupo.jp/problem/assignment)
+- [No.3306 Life is Easy? - yukicoder](https://yukicoder.me/problems/no/3306)
 
 ## 文献・リンク集
 

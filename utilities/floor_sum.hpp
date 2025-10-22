@@ -6,6 +6,7 @@
 // 1 <= m < 2e32 (if Int is long long)
 // 0 <= a, b < m
 // Complexity: O(lg(m))
+// (Int, Unsigned) = (long long, unsigned long long), (__int128_t, __uint128_t)
 template <class Int, class Unsigned> Int floor_sum(Int n, Int m, Int a, Int b) {
     static_assert(-Int(1) < 0, "Int must be signed");
     static_assert(-Unsigned(1) > 0, "Unsigned must be unsigned");
