@@ -580,6 +580,10 @@ data:
       title: "Mo's algorithm \uFF08\u533A\u9593\u30AF\u30A8\u30EA\u306B\u95A2\u3059\
         \u308B\u5E73\u65B9\u5206\u5272\u30C6\u30AF\u30CB\u30C3\u30AF\uFF09"
     - icon: ':heavy_check_mark:'
+      path: other_algorithms/north_east_lattice_paths.hpp
+      title: "Counting north-east lattice paths \uFF082 \u6B21\u5143\u30B0\u30EA\u30C3\
+        \u30C9\u4E0A\u306E\u6700\u77ED\u8DEF\u306E\u6570\u3048\u4E0A\u3052\uFF09"
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/permutation_tree.hpp
       title: "Permutation tree \uFF08\u9806\u5217\u6728\uFF09"
     - icon: ':heavy_check_mark:'
@@ -599,9 +603,10 @@ data:
         \u5C0F\u5316\uFF09"
   - name: random
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: random/custom_hash.hpp
-      title: random/custom_hash.hpp
+      title: "Custom hash functions \uFF08\u5404\u7A2E\u30C7\u30FC\u30BF\u69CB\u9020\
+        \u306E\u305F\u3081\u306E\u30CF\u30C3\u30B7\u30E5\u95A2\u6570\uFF09"
     - icon: ':heavy_check_mark:'
       path: random/rand_nondeterministic.hpp
       title: random/rand_nondeterministic.hpp
@@ -953,6 +958,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/linear_sum_assignment.test.cpp
       title: combinatorial_opt/test/linear_sum_assignment.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: combinatorial_opt/test/linear_sum_assignment.yuki3306.test.cpp
+      title: combinatorial_opt/test/linear_sum_assignment.yuki3306.test.cpp
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
       title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
@@ -1633,6 +1641,15 @@ data:
       path: other_algorithms/test/monge_shortest_path.yuki705.test.cpp
       title: other_algorithms/test/monge_shortest_path.yuki705.test.cpp
     - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/north_east_lattice_paths.aoj3335.test.cpp
+      title: other_algorithms/test/north_east_lattice_paths.aoj3335.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/north_east_lattice_paths.bruteforce.test.cpp
+      title: other_algorithms/test/north_east_lattice_paths.bruteforce.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/north_east_lattice_paths.test.cpp
+      title: other_algorithms/test/north_east_lattice_paths.test.cpp
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
       title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1892,6 +1909,9 @@ data:
       title: unionfind/test/unionfind.test.cpp
   - name: utilities/test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: utilities/test/floor_sum.int128.yuki3307.test.cpp
+      title: utilities/test/floor_sum.int128.yuki3307.test.cpp
     - icon: ':heavy_check_mark:'
       path: utilities/test/floor_sum.test.cpp
       title: utilities/test/floor_sum.test.cpp

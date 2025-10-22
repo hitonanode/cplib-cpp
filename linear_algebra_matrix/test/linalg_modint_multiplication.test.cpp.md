@@ -94,63 +94,65 @@ data:
     \ * ModInt::facinv(r) * ModInt::facinv(n - r);\n    }\n\n    constexpr static\
     \ ModInt nPr(int n, int r) {\n        assert(n >= 0);\n        if (r < 0 or n\
     \ < r) return ModInt(0);\n        return ModInt::fac(n) * ModInt::facinv(n - r);\n\
-    \    }\n\n    static ModInt binom(int n, int r) {\n        static long long bruteforce_times\
-    \ = 0;\n\n        if (r < 0 or n < r) return ModInt(0);\n        if (n <= bruteforce_times\
-    \ or n < (int)facs.size()) return ModInt::nCr(n, r);\n\n        r = std::min(r,\
-    \ n - r);\n\n        ModInt ret = ModInt::facinv(r);\n        for (int i = 0;\
-    \ i < r; ++i) ret *= n - i;\n        bruteforce_times += r;\n\n        return\
-    \ ret;\n    }\n\n    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1!\
-    \ k_2! ... k_m!)\n    // Complexity: O(sum(ks))\n    template <class Vec> static\
-    \ ModInt multinomial(const Vec &ks) {\n        ModInt ret{1};\n        int sum\
-    \ = 0;\n        for (int k : ks) {\n            assert(k >= 0);\n            ret\
-    \ *= ModInt::facinv(k), sum += k;\n        }\n        return ret * ModInt::fac(sum);\n\
-    \    }\n    template <class... Args> static ModInt multinomial(Args... args) {\n\
-    \        int sum = (0 + ... + args);\n        ModInt result = (1 * ... * ModInt::facinv(args));\n\
-    \        return ModInt::fac(sum) * result;\n    }\n\n    // Catalan number, C_n\
-    \ = binom(2n, n) / (n + 1) = # of Dyck words of length 2n\n    // C_0 = 1, C_1\
-    \ = 1, C_2 = 2, C_3 = 5, C_4 = 14, ...\n    // https://oeis.org/A000108\n    //\
-    \ Complexity: O(n)\n    static ModInt catalan(int n) {\n        if (n < 0) return\
-    \ ModInt(0);\n        return ModInt::fac(n * 2) * ModInt::facinv(n + 1) * ModInt::facinv(n);\n\
-    \    }\n\n    ModInt sqrt() const {\n        if (val_ == 0) return 0;\n      \
-    \  if (md == 2) return val_;\n        if (pow((md - 1) / 2) != 1) return 0;\n\
-    \        ModInt b = 1;\n        while (b.pow((md - 1) / 2) == 1) b += 1;\n   \
-    \     int e = 0, m = md - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n     \
-    \   ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
-    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
-    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
-    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
-    \         e = j;\n        }\n        return ModInt(std::min(x.val_, md - x.val_));\n\
-    \    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\ntemplate\
-    \ <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
-    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
-    #line 2 \"number/bare_mod_algebra.hpp\"\n#include <algorithm>\n#line 4 \"number/bare_mod_algebra.hpp\"\
-    \n#include <tuple>\n#include <utility>\n#line 7 \"number/bare_mod_algebra.hpp\"\
-    \n\n// CUT begin\n// Solve ax+by=gcd(a, b)\ntemplate <class Int> Int extgcd(Int\
-    \ a, Int b, Int &x, Int &y) {\n    Int d = a;\n    if (b != 0) {\n        d =\
-    \ extgcd(b, a % b, y, x), y -= (a / b) * x;\n    } else {\n        x = 1, y =\
-    \ 0;\n    }\n    return d;\n}\n// Calculate a^(-1) (MOD m) s if gcd(a, m) == 1\n\
-    // Calculate x s.t. ax == gcd(a, m) MOD m\ntemplate <class Int> Int mod_inverse(Int\
-    \ a, Int m) {\n    Int x, y;\n    extgcd<Int>(a, m, x, y);\n    x %= m;\n    return\
-    \ x + (x < 0) * m;\n}\n\n// Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a,\
-    \ b), xa = g MOD b, 0 <= x < b/g\ntemplate <class Int> /* constexpr */ std::pair<Int,\
-    \ Int> inv_gcd(Int a, Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a\
-    \ == 0) return {b, 0};\n    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
-    \        Int u = s / t;\n        s -= t * u, m0 -= m1 * u;\n        auto tmp =\
-    \ s;\n        s = t, t = tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0\
-    \ < 0) m0 += b / s;\n    return {s, m0};\n}\n\ntemplate <class Int>\n/* constexpr\
-    \ */ std::pair<Int, Int> crt(const std::vector<Int> &r, const std::vector<Int>\
-    \ &m) {\n    assert(r.size() == m.size());\n    int n = int(r.size());\n    //\
-    \ Contracts: 0 <= r0 < m0\n    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n;\
-    \ i++) {\n        assert(1 <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n\
-    \        if (r1 < 0) r1 += m1;\n        if (m0 < m1) {\n            std::swap(r0,\
-    \ r1);\n            std::swap(m0, m1);\n        }\n        if (m0 % m1 == 0) {\n\
-    \            if (r0 % m1 != r1) return {0, 0};\n            continue;\n      \
-    \  }\n        Int g, im;\n        std::tie(g, im) = inv_gcd<Int>(m0, m1);\n\n\
-    \        Int u1 = m1 / g;\n        if ((r1 - r0) % g) return {0, 0};\n\n     \
-    \   Int x = (r1 - r0) / g % u1 * im % u1;\n        r0 += x * m0;\n        m0 *=\
-    \ u1;\n        if (r0 < 0) r0 += m0;\n    }\n    return {r0, m0};\n}\n\n// \u87FB\
-    \u672C P.262\n// \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\u3092\u5229\u7528\u3057\u3066\
+    \    }\n\n    static ModInt binom(long long n, long long r) {\n        static\
+    \ long long bruteforce_times = 0;\n\n        if (r < 0 or n < r) return ModInt(0);\n\
+    \        if (n <= bruteforce_times or n < (int)facs.size()) return ModInt::nCr(n,\
+    \ r);\n\n        r = std::min(r, n - r);\n        assert((int)r == r);\n\n   \
+    \     ModInt ret = ModInt::facinv(r);\n        for (int i = 0; i < r; ++i) ret\
+    \ *= n - i;\n        bruteforce_times += r;\n\n        return ret;\n    }\n\n\
+    \    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1! k_2! ... k_m!)\n\
+    \    // Complexity: O(sum(ks))\n    // Verify: https://yukicoder.me/problems/no/3178\n\
+    \    template <class Vec> static ModInt multinomial(const Vec &ks) {\n       \
+    \ ModInt ret{1};\n        int sum = 0;\n        for (int k : ks) {\n         \
+    \   assert(k >= 0);\n            ret *= ModInt::facinv(k), sum += k;\n       \
+    \ }\n        return ret * ModInt::fac(sum);\n    }\n    template <class... Args>\
+    \ static ModInt multinomial(Args... args) {\n        int sum = (0 + ... + args);\n\
+    \        ModInt result = (1 * ... * ModInt::facinv(args));\n        return ModInt::fac(sum)\
+    \ * result;\n    }\n\n    // Catalan number, C_n = binom(2n, n) / (n + 1) = #\
+    \ of Dyck words of length 2n\n    // C_0 = 1, C_1 = 1, C_2 = 2, C_3 = 5, C_4 =\
+    \ 14, ...\n    // https://oeis.org/A000108\n    // Complexity: O(n)\n    static\
+    \ ModInt catalan(int n) {\n        if (n < 0) return ModInt(0);\n        return\
+    \ ModInt::fac(n * 2) * ModInt::facinv(n + 1) * ModInt::facinv(n);\n    }\n\n \
+    \   ModInt sqrt() const {\n        if (val_ == 0) return 0;\n        if (md ==\
+    \ 2) return val_;\n        if (pow((md - 1) / 2) != 1) return 0;\n        ModInt\
+    \ b = 1;\n        while (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0,\
+    \ m = md - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m\
+    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val_, md - x.val_));\n    }\n};\ntemplate <int\
+    \ md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\ntemplate <int md> std::vector<ModInt<md>>\
+    \ ModInt<md>::facinvs = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::invs\
+    \ = {0};\n\nusing ModInt998244353 = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n\
+    // using mint = ModInt<1000000007>;\n#line 2 \"number/bare_mod_algebra.hpp\"\n\
+    #include <algorithm>\n#line 4 \"number/bare_mod_algebra.hpp\"\n#include <tuple>\n\
+    #include <utility>\n#line 7 \"number/bare_mod_algebra.hpp\"\n\n// CUT begin\n\
+    // Solve ax+by=gcd(a, b)\ntemplate <class Int> Int extgcd(Int a, Int b, Int &x,\
+    \ Int &y) {\n    Int d = a;\n    if (b != 0) {\n        d = extgcd(b, a % b, y,\
+    \ x), y -= (a / b) * x;\n    } else {\n        x = 1, y = 0;\n    }\n    return\
+    \ d;\n}\n// Calculate a^(-1) (MOD m) s if gcd(a, m) == 1\n// Calculate x s.t.\
+    \ ax == gcd(a, m) MOD m\ntemplate <class Int> Int mod_inverse(Int a, Int m) {\n\
+    \    Int x, y;\n    extgcd<Int>(a, m, x, y);\n    x %= m;\n    return x + (x <\
+    \ 0) * m;\n}\n\n// Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a, b), xa =\
+    \ g MOD b, 0 <= x < b/g\ntemplate <class Int> /* constexpr */ std::pair<Int, Int>\
+    \ inv_gcd(Int a, Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a == 0)\
+    \ return {b, 0};\n    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n   \
+    \     Int u = s / t;\n        s -= t * u, m0 -= m1 * u;\n        auto tmp = s;\n\
+    \        s = t, t = tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0 < 0)\
+    \ m0 += b / s;\n    return {s, m0};\n}\n\ntemplate <class Int>\n/* constexpr */\
+    \ std::pair<Int, Int> crt(const std::vector<Int> &r, const std::vector<Int> &m)\
+    \ {\n    assert(r.size() == m.size());\n    int n = int(r.size());\n    // Contracts:\
+    \ 0 <= r0 < m0\n    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n; i++) {\n \
+    \       assert(1 <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n       \
+    \ if (r1 < 0) r1 += m1;\n        if (m0 < m1) {\n            std::swap(r0, r1);\n\
+    \            std::swap(m0, m1);\n        }\n        if (m0 % m1 == 0) {\n    \
+    \        if (r0 % m1 != r1) return {0, 0};\n            continue;\n        }\n\
+    \        Int g, im;\n        std::tie(g, im) = inv_gcd<Int>(m0, m1);\n\n     \
+    \   Int u1 = m1 / g;\n        if ((r1 - r0) % g) return {0, 0};\n\n        Int\
+    \ x = (r1 - r0) / g % u1 * im % u1;\n        r0 += x * m0;\n        m0 *= u1;\n\
+    \        if (r0 < 0) r0 += m0;\n    }\n    return {r0, m0};\n}\n\n// \u87FB\u672C\
+    \ P.262\n// \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\u3092\u5229\u7528\u3057\u3066\
     \uFF0C\u8272\u3005\u306A\u7D20\u6570\u3067\u5272\u3063\u305F\u4F59\u308A\u304B\
     \u3089\u5143\u306E\u5024\u3092\u5FA9\u5143\n// \u9023\u7ACB\u7DDA\u5F62\u5408\u540C\
     \u5F0F A * x = B mod M \u306E\u89E3\n// Requirement: M[i] > 0\n// Output: x =\
@@ -398,7 +400,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   requiredBy: []
-  timestamp: '2025-08-25 00:47:28+09:00'
+  timestamp: '2025-09-11 21:33:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp

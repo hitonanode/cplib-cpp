@@ -112,14 +112,14 @@ data:
   isVerificationFile: false
   path: graph/bipartite_matching.hpp
   requiredBy:
-  - combinatorial_opt/matroids/transversal_matroid.hpp
   - graph/dulmage_mendelsohn_decomposition.hpp
+  - combinatorial_opt/matroids/transversal_matroid.hpp
   timestamp: '2024-12-02 08:23:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
   - graph/test/dulmage_mendelsohn.yuki1744.test.cpp
   - graph/test/bipartite_matching.test.cpp
+  - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
   - graph/test/dulmage_mendelsohn.yuki1745.test.cpp
 documentation_of: graph/bipartite_matching.hpp
 layout: document

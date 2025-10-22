@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/linear_sum_assignment.test.cpp
     title: combinatorial_opt/test/linear_sum_assignment.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/linear_sum_assignment.yuki3306.test.cpp
+    title: combinatorial_opt/test/linear_sum_assignment.yuki3306.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -285,6 +288,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
+  - combinatorial_opt/test/linear_sum_assignment.yuki3306.test.cpp
   - combinatorial_opt/test/linear_sum_assignment.test.cpp
 documentation_of: combinatorial_opt/linear_sum_assignment.hpp
 layout: document
@@ -349,6 +353,7 @@ for (int t = 0; t < k; ++t) {
 ## 問題例
 
 - [Library Checker: Assignment Problem](https://judge.yosupo.jp/problem/assignment)
+- [No.3306 Life is Easy? - yukicoder](https://yukicoder.me/problems/no/3306)
 
 ## 文献・リンク集
 

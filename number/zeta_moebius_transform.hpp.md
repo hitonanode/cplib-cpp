@@ -211,9 +211,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/lcm_convolution.test.cpp
-  - number/test/multiple_moebius.yuki886.test.cpp
   - number/test/multiple_moebius.yuki1627.test.cpp
   - number/test/zeta_moebius_transform.test.cpp
+  - number/test/multiple_moebius.yuki886.test.cpp
   - number/test/gcd_convolution.test.cpp
 documentation_of: number/zeta_moebius_transform.hpp
 layout: document

@@ -204,40 +204,41 @@ data:
     \ * ModInt::facinv(r) * ModInt::facinv(n - r);\n    }\n\n    constexpr static\
     \ ModInt nPr(int n, int r) {\n        assert(n >= 0);\n        if (r < 0 or n\
     \ < r) return ModInt(0);\n        return ModInt::fac(n) * ModInt::facinv(n - r);\n\
-    \    }\n\n    static ModInt binom(int n, int r) {\n        static long long bruteforce_times\
-    \ = 0;\n\n        if (r < 0 or n < r) return ModInt(0);\n        if (n <= bruteforce_times\
-    \ or n < (int)facs.size()) return ModInt::nCr(n, r);\n\n        r = std::min(r,\
-    \ n - r);\n\n        ModInt ret = ModInt::facinv(r);\n        for (int i = 0;\
-    \ i < r; ++i) ret *= n - i;\n        bruteforce_times += r;\n\n        return\
-    \ ret;\n    }\n\n    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1!\
-    \ k_2! ... k_m!)\n    // Complexity: O(sum(ks))\n    template <class Vec> static\
-    \ ModInt multinomial(const Vec &ks) {\n        ModInt ret{1};\n        int sum\
-    \ = 0;\n        for (int k : ks) {\n            assert(k >= 0);\n            ret\
-    \ *= ModInt::facinv(k), sum += k;\n        }\n        return ret * ModInt::fac(sum);\n\
-    \    }\n    template <class... Args> static ModInt multinomial(Args... args) {\n\
-    \        int sum = (0 + ... + args);\n        ModInt result = (1 * ... * ModInt::facinv(args));\n\
-    \        return ModInt::fac(sum) * result;\n    }\n\n    // Catalan number, C_n\
-    \ = binom(2n, n) / (n + 1) = # of Dyck words of length 2n\n    // C_0 = 1, C_1\
-    \ = 1, C_2 = 2, C_3 = 5, C_4 = 14, ...\n    // https://oeis.org/A000108\n    //\
-    \ Complexity: O(n)\n    static ModInt catalan(int n) {\n        if (n < 0) return\
-    \ ModInt(0);\n        return ModInt::fac(n * 2) * ModInt::facinv(n + 1) * ModInt::facinv(n);\n\
-    \    }\n\n    ModInt sqrt() const {\n        if (val_ == 0) return 0;\n      \
-    \  if (md == 2) return val_;\n        if (pow((md - 1) / 2) != 1) return 0;\n\
-    \        ModInt b = 1;\n        while (b.pow((md - 1) / 2) == 1) b += 1;\n   \
-    \     int e = 0, m = md - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n     \
-    \   ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
-    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
-    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
-    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
-    \         e = j;\n        }\n        return ModInt(std::min(x.val_, md - x.val_));\n\
-    \    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\ntemplate\
-    \ <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
-    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
-    #line 5 \"graph/general_matching.hpp\"\n#include <chrono>\n#include <queue>\n\
-    #include <random>\n#line 10 \"graph/general_matching.hpp\"\n\n// CUT begin\n//\
-    \ Find maximum matchings in general graph using the Tutte matrix (The Rabin-Vazirani\
-    \ algorithm)\n// Complexity: O(N^3)\n// Reference: https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h\n\
+    \    }\n\n    static ModInt binom(long long n, long long r) {\n        static\
+    \ long long bruteforce_times = 0;\n\n        if (r < 0 or n < r) return ModInt(0);\n\
+    \        if (n <= bruteforce_times or n < (int)facs.size()) return ModInt::nCr(n,\
+    \ r);\n\n        r = std::min(r, n - r);\n        assert((int)r == r);\n\n   \
+    \     ModInt ret = ModInt::facinv(r);\n        for (int i = 0; i < r; ++i) ret\
+    \ *= n - i;\n        bruteforce_times += r;\n\n        return ret;\n    }\n\n\
+    \    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1! k_2! ... k_m!)\n\
+    \    // Complexity: O(sum(ks))\n    // Verify: https://yukicoder.me/problems/no/3178\n\
+    \    template <class Vec> static ModInt multinomial(const Vec &ks) {\n       \
+    \ ModInt ret{1};\n        int sum = 0;\n        for (int k : ks) {\n         \
+    \   assert(k >= 0);\n            ret *= ModInt::facinv(k), sum += k;\n       \
+    \ }\n        return ret * ModInt::fac(sum);\n    }\n    template <class... Args>\
+    \ static ModInt multinomial(Args... args) {\n        int sum = (0 + ... + args);\n\
+    \        ModInt result = (1 * ... * ModInt::facinv(args));\n        return ModInt::fac(sum)\
+    \ * result;\n    }\n\n    // Catalan number, C_n = binom(2n, n) / (n + 1) = #\
+    \ of Dyck words of length 2n\n    // C_0 = 1, C_1 = 1, C_2 = 2, C_3 = 5, C_4 =\
+    \ 14, ...\n    // https://oeis.org/A000108\n    // Complexity: O(n)\n    static\
+    \ ModInt catalan(int n) {\n        if (n < 0) return ModInt(0);\n        return\
+    \ ModInt::fac(n * 2) * ModInt::facinv(n + 1) * ModInt::facinv(n);\n    }\n\n \
+    \   ModInt sqrt() const {\n        if (val_ == 0) return 0;\n        if (md ==\
+    \ 2) return val_;\n        if (pow((md - 1) / 2) != 1) return 0;\n        ModInt\
+    \ b = 1;\n        while (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0,\
+    \ m = md - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m\
+    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val_, md - x.val_));\n    }\n};\ntemplate <int\
+    \ md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\ntemplate <int md> std::vector<ModInt<md>>\
+    \ ModInt<md>::facinvs = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::invs\
+    \ = {0};\n\nusing ModInt998244353 = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n\
+    // using mint = ModInt<1000000007>;\n#line 5 \"graph/general_matching.hpp\"\n\
+    #include <chrono>\n#include <queue>\n#include <random>\n#line 10 \"graph/general_matching.hpp\"\
+    \n\n// CUT begin\n// Find maximum matchings in general graph using the Tutte matrix\
+    \ (The Rabin-Vazirani algorithm)\n// Complexity: O(N^3)\n// Reference: https://github.com/kth-competitive-programming/kactl/blob/master/content/graph/GeneralMatching.h\n\
     //            https://kopricky.github.io/code/Academic/maximum_matching.html\n\
     std::vector<std::pair<int, int>> generalMatching(int N, std::vector<std::pair<int,\
     \ int>> ed) {\n    using MODINT = ModInt<1000000007>;\n    std::vector<std::pair<int,\

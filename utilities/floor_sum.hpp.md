@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: utilities/test/floor_sum.int128.yuki3307.test.cpp
+    title: utilities/test/floor_sum.int128.yuki3307.test.cpp
+  - icon: ':heavy_check_mark:'
     path: utilities/test/floor_sum.test.cpp
     title: utilities/test/floor_sum.test.cpp
   _isVerificationFailed: false
@@ -13,7 +16,8 @@ data:
     links: []
   bundledCode: "#line 2 \"utilities/floor_sum.hpp\"\n#include <utility>\n\n// \\sum_{i=0}^{n-1}\
     \ floor((ai + b) / m)\n// 0 <= n < 2e32 (if Int is long long)\n// 1 <= m < 2e32\
-    \ (if Int is long long)\n// 0 <= a, b < m\n// Complexity: O(lg(m))\ntemplate <class\
+    \ (if Int is long long)\n// 0 <= a, b < m\n// Complexity: O(lg(m))\n// (Int, Unsigned)\
+    \ = (long long, unsigned long long), (__int128_t, __uint128_t)\ntemplate <class\
     \ Int, class Unsigned> Int floor_sum(Int n, Int m, Int a, Int b) {\n    static_assert(-Int(1)\
     \ < 0, \"Int must be signed\");\n    static_assert(-Unsigned(1) > 0, \"Unsigned\
     \ must be unsigned\");\n    static_assert(sizeof(Unsigned) >= sizeof(Int), \"\
@@ -35,7 +39,8 @@ data:
     \ m, a, b);\n}\n"
   code: "#pragma once\n#include <utility>\n\n// \\sum_{i=0}^{n-1} floor((ai + b) /\
     \ m)\n// 0 <= n < 2e32 (if Int is long long)\n// 1 <= m < 2e32 (if Int is long\
-    \ long)\n// 0 <= a, b < m\n// Complexity: O(lg(m))\ntemplate <class Int, class\
+    \ long)\n// 0 <= a, b < m\n// Complexity: O(lg(m))\n// (Int, Unsigned) = (long\
+    \ long, unsigned long long), (__int128_t, __uint128_t)\ntemplate <class Int, class\
     \ Unsigned> Int floor_sum(Int n, Int m, Int a, Int b) {\n    static_assert(-Int(1)\
     \ < 0, \"Int must be signed\");\n    static_assert(-Unsigned(1) > 0, \"Unsigned\
     \ must be unsigned\");\n    static_assert(sizeof(Unsigned) >= sizeof(Int), \"\
@@ -59,9 +64,10 @@ data:
   isVerificationFile: false
   path: utilities/floor_sum.hpp
   requiredBy: []
-  timestamp: '2024-09-22 10:23:03+09:00'
+  timestamp: '2025-10-23 00:39:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - utilities/test/floor_sum.int128.yuki3307.test.cpp
   - utilities/test/floor_sum.test.cpp
 documentation_of: utilities/floor_sum.hpp
 layout: document

@@ -93,48 +93,50 @@ data:
     \ * ModInt::facinv(r) * ModInt::facinv(n - r);\n    }\n\n    constexpr static\
     \ ModInt nPr(int n, int r) {\n        assert(n >= 0);\n        if (r < 0 or n\
     \ < r) return ModInt(0);\n        return ModInt::fac(n) * ModInt::facinv(n - r);\n\
-    \    }\n\n    static ModInt binom(int n, int r) {\n        static long long bruteforce_times\
-    \ = 0;\n\n        if (r < 0 or n < r) return ModInt(0);\n        if (n <= bruteforce_times\
-    \ or n < (int)facs.size()) return ModInt::nCr(n, r);\n\n        r = std::min(r,\
-    \ n - r);\n\n        ModInt ret = ModInt::facinv(r);\n        for (int i = 0;\
-    \ i < r; ++i) ret *= n - i;\n        bruteforce_times += r;\n\n        return\
-    \ ret;\n    }\n\n    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1!\
-    \ k_2! ... k_m!)\n    // Complexity: O(sum(ks))\n    template <class Vec> static\
-    \ ModInt multinomial(const Vec &ks) {\n        ModInt ret{1};\n        int sum\
-    \ = 0;\n        for (int k : ks) {\n            assert(k >= 0);\n            ret\
-    \ *= ModInt::facinv(k), sum += k;\n        }\n        return ret * ModInt::fac(sum);\n\
-    \    }\n    template <class... Args> static ModInt multinomial(Args... args) {\n\
-    \        int sum = (0 + ... + args);\n        ModInt result = (1 * ... * ModInt::facinv(args));\n\
-    \        return ModInt::fac(sum) * result;\n    }\n\n    // Catalan number, C_n\
-    \ = binom(2n, n) / (n + 1) = # of Dyck words of length 2n\n    // C_0 = 1, C_1\
-    \ = 1, C_2 = 2, C_3 = 5, C_4 = 14, ...\n    // https://oeis.org/A000108\n    //\
-    \ Complexity: O(n)\n    static ModInt catalan(int n) {\n        if (n < 0) return\
-    \ ModInt(0);\n        return ModInt::fac(n * 2) * ModInt::facinv(n + 1) * ModInt::facinv(n);\n\
-    \    }\n\n    ModInt sqrt() const {\n        if (val_ == 0) return 0;\n      \
-    \  if (md == 2) return val_;\n        if (pow((md - 1) / 2) != 1) return 0;\n\
-    \        ModInt b = 1;\n        while (b.pow((md - 1) / 2) == 1) b += 1;\n   \
-    \     int e = 0, m = md - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n     \
-    \   ModInt x = pow((m - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n\
-    \        ModInt z = b.pow(m);\n        while (y != 1) {\n            int j = 0;\n\
-    \            ModInt t = y;\n            while (t != 1) j++, t *= t;\n        \
-    \    z = z.pow(1LL << (e - j - 1));\n            x *= z, z *= z, y *= z;\n   \
-    \         e = j;\n        }\n        return ModInt(std::min(x.val_, md - x.val_));\n\
-    \    }\n};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\n\
-    template <int md> std::vector<ModInt<md>> ModInt<md>::facinvs = {1};\ntemplate\
-    \ <int md> std::vector<ModInt<md>> ModInt<md>::invs = {0};\n\nusing ModInt998244353\
-    \ = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n// using mint = ModInt<1000000007>;\n\
-    #line 2 \"number/dual_number.hpp\"\n#include <type_traits>\n\nnamespace dual_number_\
-    \ {\nstruct has_id_method_impl {\n    template <class T_> static auto check(T_\
-    \ *) -> decltype(T_::id(), std::true_type());\n    template <class T_> static\
-    \ auto check(...) -> std::false_type;\n};\ntemplate <class T_> struct has_id :\
-    \ decltype(has_id_method_impl::check<T_>(nullptr)) {};\n} // namespace dual_number_\n\
-    \n// Dual number \uFF08\u4E8C\u91CD\u6570\uFF09\n// Verified: https://atcoder.jp/contests/abc235/tasks/abc235_f\n\
-    template <class T> struct DualNumber {\n    T a, b; // a + bx\n\n    template\
-    \ <typename T2, typename std::enable_if<dual_number_::has_id<T2>::value>::type\
-    \ * = nullptr>\n    static T2 _T_id() {\n        return T2::id();\n    }\n   \
-    \ template <typename T2, typename std::enable_if<!dual_number_::has_id<T2>::value>::type\
-    \ * = nullptr>\n    static T2 _T_id() {\n        return T2(1);\n    }\n\n    DualNumber(T\
-    \ x = T(), T y = T()) : a(x), b(y) {}\n    static DualNumber id() { return DualNumber(_T_id<T>(),\
+    \    }\n\n    static ModInt binom(long long n, long long r) {\n        static\
+    \ long long bruteforce_times = 0;\n\n        if (r < 0 or n < r) return ModInt(0);\n\
+    \        if (n <= bruteforce_times or n < (int)facs.size()) return ModInt::nCr(n,\
+    \ r);\n\n        r = std::min(r, n - r);\n        assert((int)r == r);\n\n   \
+    \     ModInt ret = ModInt::facinv(r);\n        for (int i = 0; i < r; ++i) ret\
+    \ *= n - i;\n        bruteforce_times += r;\n\n        return ret;\n    }\n\n\
+    \    // Multinomial coefficient, (k_1 + k_2 + ... + k_m)! / (k_1! k_2! ... k_m!)\n\
+    \    // Complexity: O(sum(ks))\n    // Verify: https://yukicoder.me/problems/no/3178\n\
+    \    template <class Vec> static ModInt multinomial(const Vec &ks) {\n       \
+    \ ModInt ret{1};\n        int sum = 0;\n        for (int k : ks) {\n         \
+    \   assert(k >= 0);\n            ret *= ModInt::facinv(k), sum += k;\n       \
+    \ }\n        return ret * ModInt::fac(sum);\n    }\n    template <class... Args>\
+    \ static ModInt multinomial(Args... args) {\n        int sum = (0 + ... + args);\n\
+    \        ModInt result = (1 * ... * ModInt::facinv(args));\n        return ModInt::fac(sum)\
+    \ * result;\n    }\n\n    // Catalan number, C_n = binom(2n, n) / (n + 1) = #\
+    \ of Dyck words of length 2n\n    // C_0 = 1, C_1 = 1, C_2 = 2, C_3 = 5, C_4 =\
+    \ 14, ...\n    // https://oeis.org/A000108\n    // Complexity: O(n)\n    static\
+    \ ModInt catalan(int n) {\n        if (n < 0) return ModInt(0);\n        return\
+    \ ModInt::fac(n * 2) * ModInt::facinv(n + 1) * ModInt::facinv(n);\n    }\n\n \
+    \   ModInt sqrt() const {\n        if (val_ == 0) return 0;\n        if (md ==\
+    \ 2) return val_;\n        if (pow((md - 1) / 2) != 1) return 0;\n        ModInt\
+    \ b = 1;\n        while (b.pow((md - 1) / 2) == 1) b += 1;\n        int e = 0,\
+    \ m = md - 1;\n        while (m % 2 == 0) m >>= 1, e++;\n        ModInt x = pow((m\
+    \ - 1) / 2), y = (*this) * x * x;\n        x *= (*this);\n        ModInt z = b.pow(m);\n\
+    \        while (y != 1) {\n            int j = 0;\n            ModInt t = y;\n\
+    \            while (t != 1) j++, t *= t;\n            z = z.pow(1LL << (e - j\
+    \ - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n        }\n\
+    \        return ModInt(std::min(x.val_, md - x.val_));\n    }\n};\ntemplate <int\
+    \ md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\ntemplate <int md> std::vector<ModInt<md>>\
+    \ ModInt<md>::facinvs = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::invs\
+    \ = {0};\n\nusing ModInt998244353 = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n\
+    // using mint = ModInt<1000000007>;\n#line 2 \"number/dual_number.hpp\"\n#include\
+    \ <type_traits>\n\nnamespace dual_number_ {\nstruct has_id_method_impl {\n   \
+    \ template <class T_> static auto check(T_ *) -> decltype(T_::id(), std::true_type());\n\
+    \    template <class T_> static auto check(...) -> std::false_type;\n};\ntemplate\
+    \ <class T_> struct has_id : decltype(has_id_method_impl::check<T_>(nullptr))\
+    \ {};\n} // namespace dual_number_\n\n// Dual number \uFF08\u4E8C\u91CD\u6570\uFF09\
+    \n// Verified: https://atcoder.jp/contests/abc235/tasks/abc235_f\ntemplate <class\
+    \ T> struct DualNumber {\n    T a, b; // a + bx\n\n    template <typename T2,\
+    \ typename std::enable_if<dual_number_::has_id<T2>::value>::type * = nullptr>\n\
+    \    static T2 _T_id() {\n        return T2::id();\n    }\n    template <typename\
+    \ T2, typename std::enable_if<!dual_number_::has_id<T2>::value>::type * = nullptr>\n\
+    \    static T2 _T_id() {\n        return T2(1);\n    }\n\n    DualNumber(T x =\
+    \ T(), T y = T()) : a(x), b(y) {}\n    static DualNumber id() { return DualNumber(_T_id<T>(),\
     \ T()); }\n    explicit operator bool() const { return a != T() or b != T(); }\n\
     \    DualNumber operator+(const DualNumber &x) const { return DualNumber(a + x.a,\
     \ b + x.b); }\n    DualNumber operator-(const DualNumber &x) const { return DualNumber(a\
@@ -369,7 +371,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
   requiredBy: []
-  timestamp: '2025-08-25 00:44:48+09:00'
+  timestamp: '2025-09-11 21:33:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp

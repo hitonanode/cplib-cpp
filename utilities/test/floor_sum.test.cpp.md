@@ -18,18 +18,19 @@ data:
     https://judge.yosupo.jp/problem/sum_of_floor_of_linear\"\n#line 2 \"utilities/floor_sum.hpp\"\
     \n#include <utility>\n\n// \\sum_{i=0}^{n-1} floor((ai + b) / m)\n// 0 <= n <\
     \ 2e32 (if Int is long long)\n// 1 <= m < 2e32 (if Int is long long)\n// 0 <=\
-    \ a, b < m\n// Complexity: O(lg(m))\ntemplate <class Int, class Unsigned> Int\
-    \ floor_sum(Int n, Int m, Int a, Int b) {\n    static_assert(-Int(1) < 0, \"Int\
-    \ must be signed\");\n    static_assert(-Unsigned(1) > 0, \"Unsigned must be unsigned\"\
-    );\n    static_assert(sizeof(Unsigned) >= sizeof(Int), \"Unsigned must be larger\
-    \ than Int\");\n\n    auto safe_mod = [](Int x, Int m) -> Int {\n        x %=\
-    \ m;\n        if (x < 0) x += m;\n        return x;\n    };\n    auto floor_sum_unsigned\
-    \ = [](Unsigned n, Unsigned m, Unsigned a, Unsigned b) -> Unsigned {\n       \
-    \ Unsigned ans = 0;\n        while (true) {\n            if (a >= m) {\n     \
-    \           ans += n * (n - 1) / 2 * (a / m);\n                a %= m;\n     \
-    \       }\n            if (b >= m) {\n                ans += n * (b / m);\n  \
-    \              b %= m;\n            }\n\n            Unsigned y_max = a * n +\
-    \ b;\n            if (y_max < m) break;\n            // y_max < m * (n + 1)\n\
+    \ a, b < m\n// Complexity: O(lg(m))\n// (Int, Unsigned) = (long long, unsigned\
+    \ long long), (__int128_t, __uint128_t)\ntemplate <class Int, class Unsigned>\
+    \ Int floor_sum(Int n, Int m, Int a, Int b) {\n    static_assert(-Int(1) < 0,\
+    \ \"Int must be signed\");\n    static_assert(-Unsigned(1) > 0, \"Unsigned must\
+    \ be unsigned\");\n    static_assert(sizeof(Unsigned) >= sizeof(Int), \"Unsigned\
+    \ must be larger than Int\");\n\n    auto safe_mod = [](Int x, Int m) -> Int {\n\
+    \        x %= m;\n        if (x < 0) x += m;\n        return x;\n    };\n    auto\
+    \ floor_sum_unsigned = [](Unsigned n, Unsigned m, Unsigned a, Unsigned b) -> Unsigned\
+    \ {\n        Unsigned ans = 0;\n        while (true) {\n            if (a >= m)\
+    \ {\n                ans += n * (n - 1) / 2 * (a / m);\n                a %= m;\n\
+    \            }\n            if (b >= m) {\n                ans += n * (b / m);\n\
+    \                b %= m;\n            }\n\n            Unsigned y_max = a * n\
+    \ + b;\n            if (y_max < m) break;\n            // y_max < m * (n + 1)\n\
     \            // floor(y_max / m) <= n\n            n = (Unsigned)(y_max / m);\n\
     \            b = (Unsigned)(y_max % m);\n            std::swap(m, a);\n      \
     \  }\n        return ans;\n    };\n\n    Unsigned ans = 0;\n    if (a < 0) {\n\
@@ -53,7 +54,7 @@ data:
   isVerificationFile: true
   path: utilities/test/floor_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-09-22 10:23:03+09:00'
+  timestamp: '2025-10-23 00:39:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: utilities/test/floor_sum.test.cpp
