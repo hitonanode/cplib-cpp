@@ -1,6 +1,7 @@
 #pragma once
 #include <chrono>
 #include <cstdlib>
+#include <functional>
 
 struct custom_hash {
     // https://codeforces.com/blog/entry/62393
@@ -19,10 +20,19 @@ struct custom_hash {
     }
 };
 
-// Usage
-#include <unordered_map>
-std::unordered_map<int, int, custom_hash> robust_unordered_map;
+// Template of std::hash for arbitrary structs
+// template <> struct std::hash<T> {
+//     std::size_t operator()(const T &x) const noexcept {
+//         static custom_hash h;
+//         return h(/* */);
+//     }
+// };
 
-#include <ext/pb_ds/assoc_container.hpp>
-using namespace __gnu_pbds;
-gp_hash_table<int, null_type, custom_hash> robust_hash_table; // fast unordered_set / unordered_map
+// robust unordered_map
+// #include <unordered_map>
+// std::unordered_map<int, int, custom_hash> robust_unordered_map;
+
+// fast unordered_set / unordered_map
+// #include <ext/pb_ds/assoc_container.hpp>
+// using namespace __gnu_pbds;
+// gp_hash_table<int, null_type, custom_hash> fast_hash_table;
