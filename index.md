@@ -679,6 +679,9 @@ data:
     - icon: ':warning:'
       path: segmenttree/trees/acl_range-update-range-sum-min.hpp
       title: segmenttree/trees/acl_range-update-range-sum-min.hpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/trees/range-chmax-range-sum.hpp
+      title: segmenttree/trees/range-chmax-range-sum.hpp
   - name: set_power_series
     pages:
     - icon: ':heavy_check_mark:'
@@ -1702,6 +1705,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-update-range-min.test.cpp
       title: segmenttree/test/point-update-range-min.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/test/range-chmax-range-sum.yuki3314.test.cpp
+      title: segmenttree/test/range-chmax-range-sum.yuki3314.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/rangetree.test.cpp
       title: segmenttree/test/rangetree.test.cpp
