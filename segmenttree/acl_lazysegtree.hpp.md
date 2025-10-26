@@ -9,9 +9,6 @@ data:
     path: segmenttree/trees/acl_range-add-chmax-range-min.hpp
     title: segmenttree/trees/acl_range-add-chmax-range-min.hpp
   - icon: ':heavy_check_mark:'
-    path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-    title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-  - icon: ':heavy_check_mark:'
     path: segmenttree/trees/acl_range-affine-range-sum.hpp
     title: segmenttree/trees/acl_range-affine-range-sum.hpp
   - icon: ':warning:'
@@ -24,8 +21,14 @@ data:
     path: segmenttree/trees/acl_range-update-range-sum-min.hpp
     title: segmenttree/trees/acl_range-update-range-sum-min.hpp
   - icon: ':heavy_check_mark:'
+    path: segmenttree/trees/range-chmax-add-range-sum.hpp
+    title: segmenttree/trees/range-chmax-add-range-sum.hpp
+  - icon: ':heavy_check_mark:'
     path: segmenttree/trees/range-chmax-range-sum.hpp
     title: segmenttree/trees/range-chmax-range-sum.hpp
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/trees/range-chmin-chmax-add-range-sum.hpp
+    title: segmenttree/trees/range-chmin-chmax-add-range-sum.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
@@ -40,8 +43,8 @@ data:
     path: segmenttree/test/beats_random_test.test.cpp
     title: segmenttree/test/beats_random_test.test.cpp
   - icon: ':heavy_check_mark:'
-    path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
-    title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
+    path: segmenttree/test/beats_range-chmax-add-range-sum.aoj0427.test.cpp
+    title: segmenttree/test/beats_range-chmax-add-range-sum.aoj0427.test.cpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/range-chmax-range-sum.yuki3314.test.cpp
     title: segmenttree/test/range-chmax-range-sum.yuki3314.test.cpp
@@ -160,19 +163,20 @@ data:
   path: segmenttree/acl_lazysegtree.hpp
   requiredBy:
   - segmenttree/acl_beats.hpp
+  - segmenttree/trees/range-chmax-add-range-sum.hpp
   - segmenttree/trees/acl_range-update-gcd-range-max-sum.hpp
   - segmenttree/trees/acl_range-bitwiseandor-range-max.hpp
   - segmenttree/trees/acl_range-add-chmax-range-min.hpp
   - segmenttree/trees/range-chmax-range-sum.hpp
-  - segmenttree/trees/acl_range-add-chmax-range-sum.hpp
+  - segmenttree/trees/range-chmin-chmax-add-range-sum.hpp
   - segmenttree/trees/acl_range-affine-range-sum.hpp
   - segmenttree/trees/acl_range-update-range-sum-min.hpp
   timestamp: '2025-10-07 09:41:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/beats_gcd.test.cpp
+  - segmenttree/test/beats_range-chmax-add-range-sum.aoj0427.test.cpp
   - segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
   - segmenttree/test/beats_random_test.test.cpp
   - segmenttree/test/beats.test.cpp
   - segmenttree/test/range-chmax-range-sum.yuki3314.test.cpp

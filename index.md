@@ -665,9 +665,6 @@ data:
       path: segmenttree/trees/acl_range-add-chmax-range-min.hpp
       title: segmenttree/trees/acl_range-add-chmax-range-min.hpp
     - icon: ':heavy_check_mark:'
-      path: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-      title: segmenttree/trees/acl_range-add-chmax-range-sum.hpp
-    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/acl_range-affine-range-sum.hpp
       title: segmenttree/trees/acl_range-affine-range-sum.hpp
     - icon: ':warning:'
@@ -680,8 +677,14 @@ data:
       path: segmenttree/trees/acl_range-update-range-sum-min.hpp
       title: segmenttree/trees/acl_range-update-range-sum-min.hpp
     - icon: ':heavy_check_mark:'
+      path: segmenttree/trees/range-chmax-add-range-sum.hpp
+      title: segmenttree/trees/range-chmax-add-range-sum.hpp
+    - icon: ':heavy_check_mark:'
       path: segmenttree/trees/range-chmax-range-sum.hpp
       title: segmenttree/trees/range-chmax-range-sum.hpp
+    - icon: ':heavy_check_mark:'
+      path: segmenttree/trees/range-chmin-chmax-add-range-sum.hpp
+      title: segmenttree/trees/range-chmin-chmax-add-range-sum.hpp
   - name: set_power_series
     pages:
     - icon: ':heavy_check_mark:'
@@ -1685,8 +1688,8 @@ data:
       path: segmenttree/test/beats_random_test.test.cpp
       title: segmenttree/test/beats_random_test.test.cpp
     - icon: ':heavy_check_mark:'
-      path: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
-      title: segmenttree/test/beats_range-add-chmax-range-sum.test.cpp
+      path: segmenttree/test/beats_range-chmax-add-range-sum.aoj0427.test.cpp
+      title: segmenttree/test/beats_range-chmax-add-range-sum.aoj0427.test.cpp
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp

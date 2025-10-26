@@ -65,7 +65,7 @@ data:
   isVerificationFile: true
   path: segmenttree/test/range-chmax-range-sum.yuki3314.test.cpp
   requiredBy: []
-  timestamp: '2025-10-26 13:33:44+09:00'
+  timestamp: '2025-10-26 13:49:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/range-chmax-range-sum.yuki3314.test.cpp

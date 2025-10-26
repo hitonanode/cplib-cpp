@@ -7,6 +7,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/acl_lazysegtree.hpp
     title: Lazy Segtree (based on atcoder::lazy_segtree)
+  - icon: ':heavy_check_mark:'
+    path: segmenttree/trees/range-chmin-chmax-add-range-sum.hpp
+    title: segmenttree/trees/range-chmin-chmax-add-range-sum.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -30,29 +33,33 @@ data:
     , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
     \    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
     \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
+    \    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+    \  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 355, in update\n    raise BundleErrorAt(path, i + 1, \"found codes out\
     \ of include guard\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ segmenttree/acl_lazysegtree.hpp: line 56: found codes out of include guard\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
-    \n#include \"../acl_beats.hpp\"\n#include <iostream>\n#include <vector>\nusing\
-    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
-    \    int N, Q;\n    cin >> N >> Q;\n    vector<RangeChMinMaxAddSum::S> A(N);\n\
-    \    for (auto &a : A) {\n        long long tmp;\n        cin >> tmp, a = {tmp,\
-    \ 1};\n    }\n    RangeChMinMaxAddSum::segtree segtree(A);\n    while (Q--) {\n\
-    \        int q, l, r;\n        long long b;\n        cin >> q >> l >> r;\n   \
-    \     if (q < 3) {\n            cin >> b;\n            if (q == 0) segtree.apply(l,\
-    \ r, RangeChMinMaxAddSum::F::chmin(b));\n            if (q == 1) segtree.apply(l,\
-    \ r, RangeChMinMaxAddSum::F::chmax(b));\n            if (q == 2) segtree.apply(l,\
-    \ r, RangeChMinMaxAddSum::F::add(b));\n        } else {\n            long long\
-    \ ret = segtree.prod(l, r).sum;\n            cout << ret << '\\n';\n        }\n\
-    \    }\n}\n"
+    \n#include \"../trees/range-chmin-chmax-add-range-sum.hpp\"\n#include <iostream>\n\
+    #include <vector>\nusing namespace std;\n\nusing RCCARS = RangeChminChmaxAddRangeSum<long\
+    \ long, (1LL << 60)>;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, Q;\n    cin >> N >> Q;\n    vector<RCCARS::S> A(N);\n    for (auto\
+    \ &a : A) {\n        long long tmp;\n        cin >> tmp, a = RCCARS::Gen(tmp);\n\
+    \    }\n\n    RCCARS::segtree segtree(A);\n\n    while (Q--) {\n        int q,\
+    \ l, r;\n        long long b;\n        cin >> q >> l >> r;\n        if (q < 3)\
+    \ {\n            cin >> b;\n            if (q == 0) segtree.apply(l, r, RCCARS::Chmin(b));\n\
+    \            if (q == 1) segtree.apply(l, r, RCCARS::Chmax(b));\n            if\
+    \ (q == 2) segtree.apply(l, r, RCCARS::Add(b));\n        } else {\n          \
+    \  long long ret = segtree.prod(l, r).sum;\n            cout << ret << '\\n';\n\
+    \        }\n    }\n}\n"
   dependsOn:
+  - segmenttree/trees/range-chmin-chmax-add-range-sum.hpp
   - segmenttree/acl_beats.hpp
   - segmenttree/acl_lazysegtree.hpp
   isVerificationFile: true
   path: segmenttree/test/beats.test.cpp
   requiredBy: []
-  timestamp: '2025-10-07 09:41:07+09:00'
+  timestamp: '2025-10-26 13:49:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/beats.test.cpp
