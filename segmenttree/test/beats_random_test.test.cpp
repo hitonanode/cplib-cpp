@@ -1,14 +1,14 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A" // DUMMY
 
 #include "../../random/xorshift.hpp"
-#include "../acl_beats.hpp"
+#include "../trees/range-chmin-chmax-add-range-sum.hpp"
 
 #include <algorithm>
 #include <cstdio>
 #include <numeric>
 #include <vector>
 
-using RangeChMinMaxAddSum::S, RangeChMinMaxAddSum::F;
+using RCCARS = RangeChminChmaxAddRangeSum<long long, (1LL << 60)>;
 
 int main() {
     for (int trial = 0; trial < 1 << 20; ++trial) {
@@ -17,16 +17,14 @@ int main() {
         const int maxA = rand_int() % 50 + 1;
         const int Q = rand_int() % 10 + 1;
 
-        std::vector<S> A(N);
+        std::vector<RCCARS::S> A(N);
         std::vector<int> simulate(N);
         for (int i = 0; i < N; ++i) {
             simulate.at(i) = rand_int() % (maxA + 1);
-            A.at(i) = S(simulate.at(i), 1);
+            A.at(i) = RCCARS::Gen(simulate.at(i));
         }
 
-        segtree_beats<S, RangeChMinMaxAddSum::op, RangeChMinMaxAddSum::e, F, RangeChMinMaxAddSum::mapping,
-                      RangeChMinMaxAddSum::composition, RangeChMinMaxAddSum::id>
-            segtree(A);
+        RCCARS::segtree segtree(A);
 
         for (int q = 0; q < Q; ++q) {
             int tp = rand_int() % 4;
@@ -43,17 +41,17 @@ int main() {
                 int b = rand_int() % (maxA + 1);
                 if (tp == 0) {
                     for (int i = l; i < r; ++i) simulate.at(i) = std::min(simulate.at(i), b);
-                    segtree.apply(l, r, RangeChMinMaxAddSum::F::chmin(b));
+                    segtree.apply(l, r, RCCARS::Chmin(b));
                 }
 
                 if (tp == 1) {
                     for (int i = l; i < r; ++i) simulate.at(i) = std::max(simulate.at(i), b);
-                    segtree.apply(l, r, RangeChMinMaxAddSum::F::chmax(b));
+                    segtree.apply(l, r, RCCARS::Chmax(b));
                 }
 
                 if (tp == 2) {
                     for (int i = l; i < r; ++i) simulate.at(i) += b;
-                    segtree.apply(l, r, RangeChMinMaxAddSum::F::add(b));
+                    segtree.apply(l, r, RCCARS::Add(b));
                 }
             }
 
@@ -72,7 +70,7 @@ int main() {
 
                 assert(prod.sum == std::accumulate(values.begin(), values.end(), 0LL));
 
-                assert(prod.sz == r - l);
+                assert((int)prod.sz == r - l);
                 assert(!prod.fail);
 
                 if (values.front() != values.back()) {
