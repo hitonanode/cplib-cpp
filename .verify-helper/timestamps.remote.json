@@ -244,6 +244,7 @@
 "segmenttree/test/point-add-range-sum.test.cpp": "2021-11-06 11:36:55 +0900",
 "segmenttree/test/point-set-range-composite.test.cpp": "2025-09-11 21:33:22 +0900",
 "segmenttree/test/point-update-range-min.test.cpp": "2022-01-08 20:23:44 +0900",
+"segmenttree/test/range-chmax-range-sum.yuki3314.test.cpp": "2025-10-26 13:33:44 +0900",
 "segmenttree/test/rangetree.test.cpp": "2025-08-24 23:32:38 +0900",
 "segmenttree/test/rangetree.yuki1625.test.cpp": "2025-08-24 23:32:38 +0900",
 "segmenttree/test/rangetree_bit.test.cpp": "2022-01-08 20:23:44 +0900",
