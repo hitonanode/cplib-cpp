@@ -16,6 +16,11 @@ for (auto [l, r] : palindromes) {
 }
 ```
 
+## 問題例
+
+- [Enumerate Palindromes](https://judge.yosupo.jp/problem/enumerate_palindromes)
+- [No.3392 Count 23578 Sequence - yukicoder](https://yukicoder.me/problems/no/3392)
+
 ## 文献
 
 - [1] G. Manacher, "A new linear-time "on-line" algorithm for finding the smallest initial palindrome of a string", Journal of the ACM, 22 (3), 346-351, 1975.
