@@ -3,7 +3,6 @@
 #include <utility>
 #include <vector>
 
-// CUT begin
 // Manacher's Algorithm: radius of palindromes
 // Input: std::string or std::vector<T> of length N
 // Output: std::vector<int> of size N
@@ -30,8 +29,13 @@ std::vector<int> manacher(const std::string &S) {
     return manacher(v);
 }
 
+// Find maximal palindrome length for each center
+// input: array of length N
+// output: array of length N * 2 - 1
 template <typename T>
 std::vector<std::pair<int, int>> enumerate_palindromes(const std::vector<T> &vec) {
+    if (vec.empty()) return {};
+
     std::vector<T> v;
     const int N = vec.size();
     for (int i = 0; i < N - 1; i++) {
@@ -52,7 +56,6 @@ std::vector<std::pair<int, int>> enumerate_palindromes(const std::vector<T> &vec
     }
     return ret;
 }
-
 std::vector<std::pair<int, int>> enumerate_palindromes(const std::string &S) {
     std::vector<char> v(S.size());
     for (int i = 0; i < int(S.size()); i++) v[i] = S[i];
