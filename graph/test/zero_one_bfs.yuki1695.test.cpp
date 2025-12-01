@@ -14,6 +14,7 @@ int solve(const string &S, const string &T) {
     if (!nmatch) return INF;
     if (T.size() % 2) return INF;
     auto trev = T;
+    reverse(trev.begin(), trev.end());
     if (trev != T) return INF;
     shortest_path<int> graph(T.size() + 1);
     for (int i = 0; i < int(T.size()); ++i) graph.add_edge(i, i + 1, 0);
@@ -23,7 +24,7 @@ int solve(const string &S, const string &T) {
         if ((l + r) % 2 == 0) graph.add_edge(r, (l + r) / 2, 1);
     }
     graph.zero_one_bfs(T.size(), nmatch);
-    return graph.dist[nmatch];
+    return std::max(1, graph.dist[nmatch]);
 }
 
 int main() {
