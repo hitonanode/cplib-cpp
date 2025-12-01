@@ -20,28 +20,29 @@ data:
     - https://yukicoder.me/problems/no/1695
   bundledCode: "#line 1 \"graph/test/shortest_path_dial.yuki1695.test.cpp\"\n#define\
     \ PROBLEM \"https://yukicoder.me/problems/no/1695\"\n#line 2 \"string/manacher.hpp\"\
-    \n#include <string>\n#include <utility>\n#include <vector>\n\n// CUT begin\n//\
-    \ Manacher's Algorithm: radius of palindromes\n// Input: std::string or std::vector<T>\
-    \ of length N\n// Output: std::vector<int> of size N\n// Complexity: O(N)\n//\
-    \ Sample:\n// - `sakanakanandaka` -> [1, 1, 2, 1, 4, 1, 4, 1, 2, 2, 1, 1, 1, 2,\
-    \ 1]\n// Reference: https://snuke.hatenablog.com/entry/2014/12/02/235837\ntemplate\
-    \ <typename T> std::vector<int> manacher(const std::vector<T> &S) {\n    std::vector<int>\
-    \ res(S.size());\n    int i = 0, j = 0;\n    while (i < int(S.size())) {\n   \
-    \     while (i - j >= 0 and i + j < int(S.size()) and S[i - j] == S[i + j]) j++;\n\
-    \        res[i] = j;\n        int k = 1;\n        while (i - k >= 0 and i + k\
-    \ < int(S.size()) and k + res[i - k] < j)\n            res[i + k] = res[i - k],\
-    \ k++;\n        i += k, j -= k;\n    }\n    return res;\n}\nstd::vector<int> manacher(const\
-    \ std::string &S) {\n    std::vector<char> v(S.size());\n    for (int i = 0; i\
-    \ < int(S.size()); i++) v[i] = S[i];\n    return manacher(v);\n}\n\ntemplate <typename\
-    \ T>\nstd::vector<std::pair<int, int>> enumerate_palindromes(const std::vector<T>\
-    \ &vec) {\n    std::vector<T> v;\n    const int N = vec.size();\n    for (int\
-    \ i = 0; i < N - 1; i++) {\n        v.push_back(vec[i]);\n        v.push_back(-1);\n\
+    \n#include <string>\n#include <utility>\n#include <vector>\n\n// Manacher's Algorithm:\
+    \ radius of palindromes\n// Input: std::string or std::vector<T> of length N\n\
+    // Output: std::vector<int> of size N\n// Complexity: O(N)\n// Sample:\n// - `sakanakanandaka`\
+    \ -> [1, 1, 2, 1, 4, 1, 4, 1, 2, 2, 1, 1, 1, 2, 1]\n// Reference: https://snuke.hatenablog.com/entry/2014/12/02/235837\n\
+    template <typename T> std::vector<int> manacher(const std::vector<T> &S) {\n \
+    \   std::vector<int> res(S.size());\n    int i = 0, j = 0;\n    while (i < int(S.size()))\
+    \ {\n        while (i - j >= 0 and i + j < int(S.size()) and S[i - j] == S[i +\
+    \ j]) j++;\n        res[i] = j;\n        int k = 1;\n        while (i - k >= 0\
+    \ and i + k < int(S.size()) and k + res[i - k] < j)\n            res[i + k] =\
+    \ res[i - k], k++;\n        i += k, j -= k;\n    }\n    return res;\n}\nstd::vector<int>\
+    \ manacher(const std::string &S) {\n    std::vector<char> v(S.size());\n    for\
+    \ (int i = 0; i < int(S.size()); i++) v[i] = S[i];\n    return manacher(v);\n\
+    }\n\n// Find maximal palindrome length for each center\n// input: array of length\
+    \ N\n// output: array of length N * 2 - 1\ntemplate <typename T>\nstd::vector<std::pair<int,\
+    \ int>> enumerate_palindromes(const std::vector<T> &vec) {\n    if (vec.empty())\
+    \ return {};\n\n    std::vector<T> v;\n    const int N = vec.size();\n    for\
+    \ (int i = 0; i < N - 1; i++) {\n        v.push_back(vec[i]);\n        v.push_back(-1);\n\
     \    }\n    v.push_back(vec.back());\n    const auto man = manacher(v);\n    std::vector<std::pair<int,\
     \ int>> ret;\n    for (int i = 0; i < N * 2 - 1; i++) {\n        if (i & 1) {\n\
     \            int w = man[i] / 2;\n            ret.emplace_back((i + 1) / 2 - w,\
     \ (i + 1) / 2 + w);\n        } else {\n            int w = (man[i] - 1) / 2;\n\
     \            ret.emplace_back(i / 2 - w, i / 2 + w + 1);\n        }\n    }\n \
-    \   return ret;\n}\n\nstd::vector<std::pair<int, int>> enumerate_palindromes(const\
+    \   return ret;\n}\nstd::vector<std::pair<int, int>> enumerate_palindromes(const\
     \ std::string &S) {\n    std::vector<char> v(S.size());\n    for (int i = 0; i\
     \ < int(S.size()); i++) v[i] = S[i];\n    return enumerate_palindromes<char>(v);\n\
     }\n#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include <cassert>\n\
@@ -193,38 +194,39 @@ data:
     \nusing namespace std;\n\nconstexpr int INF = 1 << 28;\n\nint solve(const string\
     \ &S, const string &T) {\n    int nmatch = 0;\n    while (nmatch < min<int>(S.size(),\
     \ T.size()) and S[nmatch] == T[nmatch]) nmatch++;\n    if (!nmatch) return INF;\n\
-    \    if (T.size() % 2) return INF;\n    auto trev = T;\n    if (trev != T) return\
-    \ INF;\n    shortest_path<int> graph(T.size() + 1);\n    for (int i = 0; i < int(T.size());\
-    \ ++i) graph.add_edge(i, i + 1, 0);\n    auto ps = enumerate_palindromes(T);\n\
-    \    for (const auto &p : ps) {\n        auto l = p.first, r = p.second;\n   \
-    \     if ((l + r) % 2 == 0) graph.add_edge(r, (l + r) / 2, 1);\n    }\n    graph.dial(T.size(),\
-    \ nmatch);\n    return graph.dist[nmatch];\n}\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n    int N, M;\n    string S, T;\n    cin >> N\
-    \ >> M >> S >> T;\n    int ret = solve(S, T);\n    reverse(S.begin(), S.end());\n\
-    \    ret = min(ret, solve(S, T));\n    cout << (ret < INF ? ret : -1) << '\\n';\n\
-    }\n"
+    \    if (T.size() % 2) return INF;\n    auto trev = T;\n    reverse(trev.begin(),\
+    \ trev.end());\n    if (trev != T) return INF;\n    shortest_path<int> graph(T.size()\
+    \ + 1);\n    for (int i = 0; i < int(T.size()); ++i) graph.add_edge(i, i + 1,\
+    \ 0);\n    auto ps = enumerate_palindromes(T);\n    for (const auto &p : ps) {\n\
+    \        auto l = p.first, r = p.second;\n        if ((l + r) % 2 == 0) graph.add_edge(r,\
+    \ (l + r) / 2, 1);\n    }\n    graph.dial(T.size(), nmatch);\n    return std::max(1,\
+    \ graph.dist[nmatch]);\n}\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N, M;\n    string S, T;\n    cin >> N >> M >> S >> T;\n    int ret =\
+    \ solve(S, T);\n    reverse(S.begin(), S.end());\n    ret = min(ret, solve(S,\
+    \ T));\n    cout << (ret < INF ? ret : -1) << '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1695\"\n#include \"../../string/manacher.hpp\"\
     \n#include \"../shortest_path.hpp\"\n#include <algorithm>\n#include <iostream>\n\
     #include <string>\nusing namespace std;\n\nconstexpr int INF = 1 << 28;\n\nint\
     \ solve(const string &S, const string &T) {\n    int nmatch = 0;\n    while (nmatch\
     \ < min<int>(S.size(), T.size()) and S[nmatch] == T[nmatch]) nmatch++;\n    if\
     \ (!nmatch) return INF;\n    if (T.size() % 2) return INF;\n    auto trev = T;\n\
-    \    if (trev != T) return INF;\n    shortest_path<int> graph(T.size() + 1);\n\
-    \    for (int i = 0; i < int(T.size()); ++i) graph.add_edge(i, i + 1, 0);\n  \
-    \  auto ps = enumerate_palindromes(T);\n    for (const auto &p : ps) {\n     \
-    \   auto l = p.first, r = p.second;\n        if ((l + r) % 2 == 0) graph.add_edge(r,\
-    \ (l + r) / 2, 1);\n    }\n    graph.dial(T.size(), nmatch);\n    return graph.dist[nmatch];\n\
-    }\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int\
-    \ N, M;\n    string S, T;\n    cin >> N >> M >> S >> T;\n    int ret = solve(S,\
-    \ T);\n    reverse(S.begin(), S.end());\n    ret = min(ret, solve(S, T));\n  \
-    \  cout << (ret < INF ? ret : -1) << '\\n';\n}\n"
+    \    reverse(trev.begin(), trev.end());\n    if (trev != T) return INF;\n    shortest_path<int>\
+    \ graph(T.size() + 1);\n    for (int i = 0; i < int(T.size()); ++i) graph.add_edge(i,\
+    \ i + 1, 0);\n    auto ps = enumerate_palindromes(T);\n    for (const auto &p\
+    \ : ps) {\n        auto l = p.first, r = p.second;\n        if ((l + r) % 2 ==\
+    \ 0) graph.add_edge(r, (l + r) / 2, 1);\n    }\n    graph.dial(T.size(), nmatch);\n\
+    \    return std::max(1, graph.dist[nmatch]);\n}\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int N, M;\n    string S, T;\n    cin >> N\
+    \ >> M >> S >> T;\n    int ret = solve(S, T);\n    reverse(S.begin(), S.end());\n\
+    \    ret = min(ret, solve(S, T));\n    cout << (ret < INF ? ret : -1) << '\\n';\n\
+    }\n"
   dependsOn:
   - string/manacher.hpp
   - graph/shortest_path.hpp
   isVerificationFile: true
   path: graph/test/shortest_path_dial.yuki1695.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 15:28:23+09:00'
+  timestamp: '2025-12-01 22:55:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_path_dial.yuki1695.test.cpp

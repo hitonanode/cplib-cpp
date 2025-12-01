@@ -1784,6 +1784,9 @@ data:
       path: string/test/manacher.test.cpp
       title: string/test/manacher.test.cpp
     - icon: ':heavy_check_mark:'
+      path: string/test/manacher.yuki3392.test.cpp
+      title: string/test/manacher.yuki3392.test.cpp
+    - icon: ':heavy_check_mark:'
       path: string/test/manacher_mp.test.cpp
       title: string/test/manacher_mp.test.cpp
     - icon: ':heavy_check_mark:'
