@@ -8,7 +8,7 @@
 
 // Permutation tree
 // Complexity: O(N log N)
-// https://codeforces.com/blog/entry/78898 https://yukicoder.me/problems/no/1720
+// https://codeforces.com/blog/entry/78898 https://judge.yosupo.jp/problem/common_interval_decomposition_tree
 struct permutation_tree {
     enum NodeType {
         JoinAsc,
@@ -17,13 +17,14 @@ struct permutation_tree {
         Leaf,
         None,
     };
-    struct node {
+    struct Node {
         NodeType tp;
         int L, R;       // i in [L, R)
         int mini, maxi; // A[i] in [mini, maxi]
+        int par_id = -1;
         std::vector<int> child;
         int sz() const { return R - L; }
-        template <class OStream> friend OStream &operator<<(OStream &os, const node &n) {
+        template <class OStream> friend OStream &operator<<(OStream &os, const Node &n) {
             os << "[[" << n.L << ',' << n.R << ")(ch:";
             for (auto i : n.child) os << i << ',';
             return os << ")(tp=" << n.tp << ")]";
@@ -32,14 +33,14 @@ struct permutation_tree {
 
     int root;
     std::vector<int> A;
-    std::vector<node> nodes;
+    std::vector<Node> nodes;
 
-    void _add_child(int parid, int chid) {
-        nodes[parid].child.push_back(chid);
-        nodes[parid].L = std::min(nodes[parid].L, nodes[chid].L);
-        nodes[parid].R = std::max(nodes[parid].R, nodes[chid].R);
-        nodes[parid].mini = std::min(nodes[parid].mini, nodes[chid].mini);
-        nodes[parid].maxi = std::max(nodes[parid].maxi, nodes[chid].maxi);
+    void _add_child(int par_id, int chid) {
+        nodes[par_id].child.push_back(chid);
+        nodes[par_id].L = std::min(nodes[par_id].L, nodes[chid].L);
+        nodes[par_id].R = std::max(nodes[par_id].R, nodes[chid].R);
+        nodes[par_id].mini = std::min(nodes[par_id].mini, nodes[chid].mini);
+        nodes[par_id].maxi = std::max(nodes[par_id].maxi, nodes[chid].maxi);
     }
 
     permutation_tree() : root(-1) {}
@@ -62,7 +63,7 @@ struct permutation_tree {
             lo.push_back(i);
 
             int h = nodes.size();
-            nodes.push_back({NodeType::Leaf, i, i + 1, A[i], A[i], std::vector<int>{}});
+            nodes.push_back({NodeType::Leaf, i, i + 1, A[i], A[i], -1, std::vector<int>{}});
 
             while (true) {
                 NodeType join_tp = NodeType::None;
@@ -70,7 +71,7 @@ struct permutation_tree {
                 if (!st.empty() and nodes[h].maxi + 1 == nodes[st.back()].mini) join_tp = JoinDesc;
 
                 if (!st.empty() and join_tp != NodeType::None) {
-                    const node &vtp = nodes[st.back()];
+                    const Node &vtp = nodes[st.back()];
                     // Insert v as the child of the top node in the stack
                     if (join_tp == vtp.tp) {
                         // Append child to existing Join node
@@ -81,7 +82,7 @@ struct permutation_tree {
                         // Make new join node (with exactly two children)
                         int j = st.back();
                         nodes.push_back(
-                            {join_tp, nodes[j].L, nodes[j].R, nodes[j].mini, nodes[j].maxi, {j}});
+                            {join_tp, nodes[j].L, nodes[j].R, nodes[j].mini, nodes[j].maxi, -1, {j}});
                         st.pop_back();
                         _add_child(nodes.size() - 1, h);
                         h = nodes.size() - 1;
@@ -89,7 +90,7 @@ struct permutation_tree {
                 } else if (seg.prod(0, i + 1 - nodes[h].sz()) == 0) {
                     // Make Cut node
                     int L = nodes[h].L, R = nodes[h].R, maxi = nodes[h].maxi, mini = nodes[h].mini;
-                    nodes.push_back({NodeType::Cut, L, R, mini, maxi, {h}});
+                    nodes.push_back({NodeType::Cut, L, R, mini, maxi, -1, {h}});
                     h = nodes.size() - 1;
                     do {
                         _add_child(h, st.back());
@@ -104,6 +105,11 @@ struct permutation_tree {
             seg.add(0, i + 1, -1);
         }
         assert(st.size() == 1);
+
+        for (int i = 0; i < int(nodes.size()); i++) {
+            for (auto ch : nodes[i].child) nodes[ch].par_id = i;
+        }
+
         root = st[0];
     }
 
