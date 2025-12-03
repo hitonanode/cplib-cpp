@@ -7,6 +7,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: other_algorithms/test/permutation_tree.test.cpp
+    title: other_algorithms/test/permutation_tree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
   _isVerificationFailed: false
@@ -15,7 +18,7 @@ data:
   attributes:
     links:
     - https://codeforces.com/blog/entry/78898
-    - https://yukicoder.me/problems/no/1720
+    - https://judge.yosupo.jp/problem/common_interval_decomposition_tree
   bundledCode: "#line 2 \"segmenttree/range-add-range-min.hpp\"\n#include <algorithm>\n\
     #include <limits>\n#include <vector>\n\n// CUT begin\n// StarrySkyTree: segment\
     \ tree for Range Minimum Query & Range Add Query\n// Complexity: $O(N)$ (construction),\
@@ -51,23 +54,24 @@ data:
     #line 4 \"other_algorithms/permutation_tree.hpp\"\n#include <cassert>\n#include\
     \ <fstream>\n#include <string>\n#line 8 \"other_algorithms/permutation_tree.hpp\"\
     \n\n// Permutation tree\n// Complexity: O(N log N)\n// https://codeforces.com/blog/entry/78898\
-    \ https://yukicoder.me/problems/no/1720\nstruct permutation_tree {\n    enum NodeType\
-    \ {\n        JoinAsc,\n        JoinDesc,\n        Cut,\n        Leaf,\n      \
-    \  None,\n    };\n    struct node {\n        NodeType tp;\n        int L, R; \
-    \      // i in [L, R)\n        int mini, maxi; // A[i] in [mini, maxi]\n     \
-    \   std::vector<int> child;\n        int sz() const { return R - L; }\n      \
-    \  template <class OStream> friend OStream &operator<<(OStream &os, const node\
-    \ &n) {\n            os << \"[[\" << n.L << ',' << n.R << \")(ch:\";\n       \
-    \     for (auto i : n.child) os << i << ',';\n            return os << \")(tp=\"\
-    \ << n.tp << \")]\";\n        }\n    };\n\n    int root;\n    std::vector<int>\
-    \ A;\n    std::vector<node> nodes;\n\n    void _add_child(int parid, int chid)\
-    \ {\n        nodes[parid].child.push_back(chid);\n        nodes[parid].L = std::min(nodes[parid].L,\
-    \ nodes[chid].L);\n        nodes[parid].R = std::max(nodes[parid].R, nodes[chid].R);\n\
-    \        nodes[parid].mini = std::min(nodes[parid].mini, nodes[chid].mini);\n\
-    \        nodes[parid].maxi = std::max(nodes[parid].maxi, nodes[chid].maxi);\n\
-    \    }\n\n    permutation_tree() : root(-1) {}\n    permutation_tree(const std::vector<int>\
-    \ &A_) : root(-1), A(A_) { // A: nonempty perm., 0-origin\n        assert(!A.empty());\n\
-    \        RangeAddRangeMin<int> seg((std::vector<int>(A.size())));\n\n        std::vector<int>\
+    \ https://judge.yosupo.jp/problem/common_interval_decomposition_tree\nstruct permutation_tree\
+    \ {\n    enum NodeType {\n        JoinAsc,\n        JoinDesc,\n        Cut,\n\
+    \        Leaf,\n        None,\n    };\n    struct Node {\n        NodeType tp;\n\
+    \        int L, R;       // i in [L, R)\n        int mini, maxi; // A[i] in [mini,\
+    \ maxi]\n        int par_id = -1;\n        std::vector<int> child;\n        int\
+    \ sz() const { return R - L; }\n        template <class OStream> friend OStream\
+    \ &operator<<(OStream &os, const Node &n) {\n            os << \"[[\" << n.L <<\
+    \ ',' << n.R << \")(ch:\";\n            for (auto i : n.child) os << i << ',';\n\
+    \            return os << \")(tp=\" << n.tp << \")]\";\n        }\n    };\n\n\
+    \    int root;\n    std::vector<int> A;\n    std::vector<Node> nodes;\n\n    void\
+    \ _add_child(int par_id, int chid) {\n        nodes[par_id].child.push_back(chid);\n\
+    \        nodes[par_id].L = std::min(nodes[par_id].L, nodes[chid].L);\n       \
+    \ nodes[par_id].R = std::max(nodes[par_id].R, nodes[chid].R);\n        nodes[par_id].mini\
+    \ = std::min(nodes[par_id].mini, nodes[chid].mini);\n        nodes[par_id].maxi\
+    \ = std::max(nodes[par_id].maxi, nodes[chid].maxi);\n    }\n\n    permutation_tree()\
+    \ : root(-1) {}\n    permutation_tree(const std::vector<int> &A_) : root(-1),\
+    \ A(A_) { // A: nonempty perm., 0-origin\n        assert(!A.empty());\n      \
+    \  RangeAddRangeMin<int> seg((std::vector<int>(A.size())));\n\n        std::vector<int>\
     \ hi{-1}, lo{-1};\n        std::vector<int> st;\n        for (int i = 0; i < int(A.size());\
     \ ++i) {\n            while (hi.back() >= 0 and A[i] > A[hi.back()]) {\n     \
     \           seg.add(hi[hi.size() - 2] + 1, hi.back() + 1, A[i] - A[hi.back()]);\n\
@@ -76,12 +80,12 @@ data:
     \  seg.add(lo[lo.size() - 2] + 1, lo.back() + 1, A[lo.back()] - A[i]);\n     \
     \           lo.pop_back();\n            }\n            lo.push_back(i);\n\n  \
     \          int h = nodes.size();\n            nodes.push_back({NodeType::Leaf,\
-    \ i, i + 1, A[i], A[i], std::vector<int>{}});\n\n            while (true) {\n\
-    \                NodeType join_tp = NodeType::None;\n                if (!st.empty()\
+    \ i, i + 1, A[i], A[i], -1, std::vector<int>{}});\n\n            while (true)\
+    \ {\n                NodeType join_tp = NodeType::None;\n                if (!st.empty()\
     \ and nodes[st.back()].maxi + 1 == nodes[h].mini) join_tp = JoinAsc;\n       \
     \         if (!st.empty() and nodes[h].maxi + 1 == nodes[st.back()].mini) join_tp\
     \ = JoinDesc;\n\n                if (!st.empty() and join_tp != NodeType::None)\
-    \ {\n                    const node &vtp = nodes[st.back()];\n               \
+    \ {\n                    const Node &vtp = nodes[st.back()];\n               \
     \     // Insert v as the child of the top node in the stack\n                \
     \    if (join_tp == vtp.tp) {\n                        // Append child to existing\
     \ Join node\n                        _add_child(st.back(), h);\n             \
@@ -89,24 +93,26 @@ data:
     \           } else {\n                        // Make new join node (with exactly\
     \ two children)\n                        int j = st.back();\n                \
     \        nodes.push_back(\n                            {join_tp, nodes[j].L, nodes[j].R,\
-    \ nodes[j].mini, nodes[j].maxi, {j}});\n                        st.pop_back();\n\
+    \ nodes[j].mini, nodes[j].maxi, -1, {j}});\n                        st.pop_back();\n\
     \                        _add_child(nodes.size() - 1, h);\n                  \
     \      h = nodes.size() - 1;\n                    }\n                } else if\
     \ (seg.prod(0, i + 1 - nodes[h].sz()) == 0) {\n                    // Make Cut\
     \ node\n                    int L = nodes[h].L, R = nodes[h].R, maxi = nodes[h].maxi,\
     \ mini = nodes[h].mini;\n                    nodes.push_back({NodeType::Cut, L,\
-    \ R, mini, maxi, {h}});\n                    h = nodes.size() - 1;\n         \
-    \           do {\n                        _add_child(h, st.back());\n        \
-    \                st.pop_back();\n                    } while (nodes[h].maxi -\
-    \ nodes[h].mini + 1 != nodes[h].sz());\n                    std::reverse(nodes[h].child.begin(),\
+    \ R, mini, maxi, -1, {h}});\n                    h = nodes.size() - 1;\n     \
+    \               do {\n                        _add_child(h, st.back());\n    \
+    \                    st.pop_back();\n                    } while (nodes[h].maxi\
+    \ - nodes[h].mini + 1 != nodes[h].sz());\n                    std::reverse(nodes[h].child.begin(),\
     \ nodes[h].child.end());\n                } else {\n                    break;\n\
     \                }\n            }\n            st.push_back(h);\n            seg.add(0,\
-    \ i + 1, -1);\n        }\n        assert(st.size() == 1);\n        root = st[0];\n\
-    \    }\n\n    void to_DOT(std::string filename = \"\") const {\n        if (filename.empty())\
-    \ filename = \"permutation_tree_v=\" + std::to_string(A.size()) + \".DOT\";\n\n\
-    \        std::ofstream ss(filename);\n        ss << \"digraph{\\n\";\n       \
-    \ int nleaf = 0;\n        for (int i = 0; i < int(nodes.size()); i++) {\n    \
-    \        ss << i << \"[\\n\";\n            std::string lbl;\n            if (nodes[i].tp\
+    \ i + 1, -1);\n        }\n        assert(st.size() == 1);\n\n        for (int\
+    \ i = 0; i < int(nodes.size()); i++) {\n            for (auto ch : nodes[i].child)\
+    \ nodes[ch].par_id = i;\n        }\n\n        root = st[0];\n    }\n\n    void\
+    \ to_DOT(std::string filename = \"\") const {\n        if (filename.empty()) filename\
+    \ = \"permutation_tree_v=\" + std::to_string(A.size()) + \".DOT\";\n\n       \
+    \ std::ofstream ss(filename);\n        ss << \"digraph{\\n\";\n        int nleaf\
+    \ = 0;\n        for (int i = 0; i < int(nodes.size()); i++) {\n            ss\
+    \ << i << \"[\\n\";\n            std::string lbl;\n            if (nodes[i].tp\
     \ == NodeType::Leaf) {\n                lbl = \"A[\" + std::to_string(nleaf) +\
     \ \"] = \" + std::to_string(A[nleaf]), nleaf++;\n            } else {\n      \
     \          lbl += std::string(nodes[i].tp == NodeType::Cut ? \"Cut\" : \"Join\"\
@@ -121,23 +127,24 @@ data:
   code: "#pragma once\n#include \"../segmenttree/range-add-range-min.hpp\"\n#include\
     \ <algorithm>\n#include <cassert>\n#include <fstream>\n#include <string>\n#include\
     \ <vector>\n\n// Permutation tree\n// Complexity: O(N log N)\n// https://codeforces.com/blog/entry/78898\
-    \ https://yukicoder.me/problems/no/1720\nstruct permutation_tree {\n    enum NodeType\
-    \ {\n        JoinAsc,\n        JoinDesc,\n        Cut,\n        Leaf,\n      \
-    \  None,\n    };\n    struct node {\n        NodeType tp;\n        int L, R; \
-    \      // i in [L, R)\n        int mini, maxi; // A[i] in [mini, maxi]\n     \
-    \   std::vector<int> child;\n        int sz() const { return R - L; }\n      \
-    \  template <class OStream> friend OStream &operator<<(OStream &os, const node\
-    \ &n) {\n            os << \"[[\" << n.L << ',' << n.R << \")(ch:\";\n       \
-    \     for (auto i : n.child) os << i << ',';\n            return os << \")(tp=\"\
-    \ << n.tp << \")]\";\n        }\n    };\n\n    int root;\n    std::vector<int>\
-    \ A;\n    std::vector<node> nodes;\n\n    void _add_child(int parid, int chid)\
-    \ {\n        nodes[parid].child.push_back(chid);\n        nodes[parid].L = std::min(nodes[parid].L,\
-    \ nodes[chid].L);\n        nodes[parid].R = std::max(nodes[parid].R, nodes[chid].R);\n\
-    \        nodes[parid].mini = std::min(nodes[parid].mini, nodes[chid].mini);\n\
-    \        nodes[parid].maxi = std::max(nodes[parid].maxi, nodes[chid].maxi);\n\
-    \    }\n\n    permutation_tree() : root(-1) {}\n    permutation_tree(const std::vector<int>\
-    \ &A_) : root(-1), A(A_) { // A: nonempty perm., 0-origin\n        assert(!A.empty());\n\
-    \        RangeAddRangeMin<int> seg((std::vector<int>(A.size())));\n\n        std::vector<int>\
+    \ https://judge.yosupo.jp/problem/common_interval_decomposition_tree\nstruct permutation_tree\
+    \ {\n    enum NodeType {\n        JoinAsc,\n        JoinDesc,\n        Cut,\n\
+    \        Leaf,\n        None,\n    };\n    struct Node {\n        NodeType tp;\n\
+    \        int L, R;       // i in [L, R)\n        int mini, maxi; // A[i] in [mini,\
+    \ maxi]\n        int par_id = -1;\n        std::vector<int> child;\n        int\
+    \ sz() const { return R - L; }\n        template <class OStream> friend OStream\
+    \ &operator<<(OStream &os, const Node &n) {\n            os << \"[[\" << n.L <<\
+    \ ',' << n.R << \")(ch:\";\n            for (auto i : n.child) os << i << ',';\n\
+    \            return os << \")(tp=\" << n.tp << \")]\";\n        }\n    };\n\n\
+    \    int root;\n    std::vector<int> A;\n    std::vector<Node> nodes;\n\n    void\
+    \ _add_child(int par_id, int chid) {\n        nodes[par_id].child.push_back(chid);\n\
+    \        nodes[par_id].L = std::min(nodes[par_id].L, nodes[chid].L);\n       \
+    \ nodes[par_id].R = std::max(nodes[par_id].R, nodes[chid].R);\n        nodes[par_id].mini\
+    \ = std::min(nodes[par_id].mini, nodes[chid].mini);\n        nodes[par_id].maxi\
+    \ = std::max(nodes[par_id].maxi, nodes[chid].maxi);\n    }\n\n    permutation_tree()\
+    \ : root(-1) {}\n    permutation_tree(const std::vector<int> &A_) : root(-1),\
+    \ A(A_) { // A: nonempty perm., 0-origin\n        assert(!A.empty());\n      \
+    \  RangeAddRangeMin<int> seg((std::vector<int>(A.size())));\n\n        std::vector<int>\
     \ hi{-1}, lo{-1};\n        std::vector<int> st;\n        for (int i = 0; i < int(A.size());\
     \ ++i) {\n            while (hi.back() >= 0 and A[i] > A[hi.back()]) {\n     \
     \           seg.add(hi[hi.size() - 2] + 1, hi.back() + 1, A[i] - A[hi.back()]);\n\
@@ -146,12 +153,12 @@ data:
     \  seg.add(lo[lo.size() - 2] + 1, lo.back() + 1, A[lo.back()] - A[i]);\n     \
     \           lo.pop_back();\n            }\n            lo.push_back(i);\n\n  \
     \          int h = nodes.size();\n            nodes.push_back({NodeType::Leaf,\
-    \ i, i + 1, A[i], A[i], std::vector<int>{}});\n\n            while (true) {\n\
-    \                NodeType join_tp = NodeType::None;\n                if (!st.empty()\
+    \ i, i + 1, A[i], A[i], -1, std::vector<int>{}});\n\n            while (true)\
+    \ {\n                NodeType join_tp = NodeType::None;\n                if (!st.empty()\
     \ and nodes[st.back()].maxi + 1 == nodes[h].mini) join_tp = JoinAsc;\n       \
     \         if (!st.empty() and nodes[h].maxi + 1 == nodes[st.back()].mini) join_tp\
     \ = JoinDesc;\n\n                if (!st.empty() and join_tp != NodeType::None)\
-    \ {\n                    const node &vtp = nodes[st.back()];\n               \
+    \ {\n                    const Node &vtp = nodes[st.back()];\n               \
     \     // Insert v as the child of the top node in the stack\n                \
     \    if (join_tp == vtp.tp) {\n                        // Append child to existing\
     \ Join node\n                        _add_child(st.back(), h);\n             \
@@ -159,24 +166,26 @@ data:
     \           } else {\n                        // Make new join node (with exactly\
     \ two children)\n                        int j = st.back();\n                \
     \        nodes.push_back(\n                            {join_tp, nodes[j].L, nodes[j].R,\
-    \ nodes[j].mini, nodes[j].maxi, {j}});\n                        st.pop_back();\n\
+    \ nodes[j].mini, nodes[j].maxi, -1, {j}});\n                        st.pop_back();\n\
     \                        _add_child(nodes.size() - 1, h);\n                  \
     \      h = nodes.size() - 1;\n                    }\n                } else if\
     \ (seg.prod(0, i + 1 - nodes[h].sz()) == 0) {\n                    // Make Cut\
     \ node\n                    int L = nodes[h].L, R = nodes[h].R, maxi = nodes[h].maxi,\
     \ mini = nodes[h].mini;\n                    nodes.push_back({NodeType::Cut, L,\
-    \ R, mini, maxi, {h}});\n                    h = nodes.size() - 1;\n         \
-    \           do {\n                        _add_child(h, st.back());\n        \
-    \                st.pop_back();\n                    } while (nodes[h].maxi -\
-    \ nodes[h].mini + 1 != nodes[h].sz());\n                    std::reverse(nodes[h].child.begin(),\
+    \ R, mini, maxi, -1, {h}});\n                    h = nodes.size() - 1;\n     \
+    \               do {\n                        _add_child(h, st.back());\n    \
+    \                    st.pop_back();\n                    } while (nodes[h].maxi\
+    \ - nodes[h].mini + 1 != nodes[h].sz());\n                    std::reverse(nodes[h].child.begin(),\
     \ nodes[h].child.end());\n                } else {\n                    break;\n\
     \                }\n            }\n            st.push_back(h);\n            seg.add(0,\
-    \ i + 1, -1);\n        }\n        assert(st.size() == 1);\n        root = st[0];\n\
-    \    }\n\n    void to_DOT(std::string filename = \"\") const {\n        if (filename.empty())\
-    \ filename = \"permutation_tree_v=\" + std::to_string(A.size()) + \".DOT\";\n\n\
-    \        std::ofstream ss(filename);\n        ss << \"digraph{\\n\";\n       \
-    \ int nleaf = 0;\n        for (int i = 0; i < int(nodes.size()); i++) {\n    \
-    \        ss << i << \"[\\n\";\n            std::string lbl;\n            if (nodes[i].tp\
+    \ i + 1, -1);\n        }\n        assert(st.size() == 1);\n\n        for (int\
+    \ i = 0; i < int(nodes.size()); i++) {\n            for (auto ch : nodes[i].child)\
+    \ nodes[ch].par_id = i;\n        }\n\n        root = st[0];\n    }\n\n    void\
+    \ to_DOT(std::string filename = \"\") const {\n        if (filename.empty()) filename\
+    \ = \"permutation_tree_v=\" + std::to_string(A.size()) + \".DOT\";\n\n       \
+    \ std::ofstream ss(filename);\n        ss << \"digraph{\\n\";\n        int nleaf\
+    \ = 0;\n        for (int i = 0; i < int(nodes.size()); i++) {\n            ss\
+    \ << i << \"[\\n\";\n            std::string lbl;\n            if (nodes[i].tp\
     \ == NodeType::Leaf) {\n                lbl = \"A[\" + std::to_string(nleaf) +\
     \ \"] = \" + std::to_string(A[nleaf]), nleaf++;\n            } else {\n      \
     \          lbl += std::string(nodes[i].tp == NodeType::Cut ? \"Cut\" : \"Join\"\
@@ -193,21 +202,22 @@ data:
   isVerificationFile: false
   path: other_algorithms/permutation_tree.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2025-12-03 22:27:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
+  - other_algorithms/test/permutation_tree.test.cpp
 documentation_of: other_algorithms/permutation_tree.hpp
 layout: document
-title: "Permutation tree \uFF08\u9806\u5217\u6728\uFF09"
+title: "Common interval decomposition tree / \"Permutation tree\" \uFF08\u9806\u5217\
+  \u6728\uFF09"
 ---
 
-与えられた $[0, \dots, N - 1]$ の置換 $\mathbf{A} = [A\_0, \dots, A\_{N - 1}]$ について，この連続部分列であってその長さがそれに含まれる要素の最大値と最小値の差に $1$ を加えた値と等しくなるようなものを全て列挙するのに役立つデータ構造．
+順列 $(0, \dots, N - 1)$ の置換 $P = (P\_0, \dots, P\_{N - 1})$ について，この連続部分列であってその区間をソートすると連番となるようなもの（たとえば、 $P = (1, 5, 3, 4, 7, 2, 6)$ における $(5, 3, 4)$ などの部分）を全列挙するのに役立つデータ構造．
 
-Permutation tree は区間のマージ過程を表す木として表現される．$N$ 個の葉は長さ $1$ の区間（単一の要素）に対応し，根は $\mathbf{A}$ 全体に対応する．
+Permutation tree は区間のマージ過程を表す木として表現される．$N$ 個の葉は長さ $1$ の区間（単一の要素）に対応し，根は $P$ 全体に対応する．
 
 葉以外の全ての頂点は `Join` と `Cut` いずれかの属性を持つ．`Join` 属性を持つ頂点は，その子を $c\_1, \dots, c\_k$ とおくと，任意の $1 \le i \le j \le k$ について頂点 $(c\_i, \dots, c\_j)$ が表す区間の和集合は上記の条件を満たす．また，全ての頂点について，その頂点が表す区間全体は上記の条件を満たす．そして，上記の条件を満たす区間はこれらに限られるというのが最も重要な性質である．
-
 
 ## 使用方法（例）
 
@@ -215,8 +225,8 @@ Permutation tree は区間のマージ過程を表す木として表現される
 
 ```cpp
 enum NodeType {
-    JoinAsc,    // Join，特に A[i] の値が増加していく
-    JoinDesc,   // Join，特に A[i] の値が減少していく
+    JoinAsc,    // Join，特に P[i] の値が増加していく
+    JoinDesc,   // Join，特に P[i] の値が減少していく
     Cut,        // Cut
     Leaf,       // 葉である
     None,
@@ -224,7 +234,7 @@ enum NodeType {
 struct node {
     NodeType tp;
     int L, R;                // [L, R) : 頂点が表す区間
-    int mini, maxi;          // 区間に含まれる A[i] (L <= i < R) の最小・最大値
+    int mini, maxi;          // 区間に含まれる P[i] (L <= i < R) の最小・最大値
     std::vector<int> child;  // 子の頂点番号（昇順）
 };
 ```
@@ -238,7 +248,7 @@ struct node {
 上記の条件を満たす区間の個数だけを求めればよい問題．
 
 ```cpp
-permutation_tree tree(A);
+permutation_tree tree(P);
 
 auto rec = [&](auto &&self, int now) -> long long {
     long long ret = 1;
@@ -282,6 +292,8 @@ rec(rec, tree.root);
 
 for (int i = 1; i <= K; i++) cout << dp[i][N].val() << '\n';
 ```
+
+### [Common Interval Decomposition Tree](https://judge.yosupo.jp/problem/common_interval_decomposition_tree)
 
 ## リンク
 

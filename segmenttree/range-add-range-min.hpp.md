@@ -4,8 +4,12 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: other_algorithms/permutation_tree.hpp
-    title: "Permutation tree \uFF08\u9806\u5217\u6728\uFF09"
+    title: "Common interval decomposition tree / \"Permutation tree\" \uFF08\u9806\
+      \u5217\u6728\uFF09"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: other_algorithms/test/permutation_tree.test.cpp
+    title: other_algorithms/test/permutation_tree.test.cpp
   - icon: ':heavy_check_mark:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
@@ -87,6 +91,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
+  - other_algorithms/test/permutation_tree.test.cpp
 documentation_of: segmenttree/range-add-range-min.hpp
 layout: document
 title: Range Add Range Min (known as the Starry sky tree)

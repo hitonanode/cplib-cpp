@@ -585,7 +585,8 @@ data:
         \u30C9\u4E0A\u306E\u6700\u77ED\u8DEF\u306E\u6570\u3048\u4E0A\u3052\uFF09"
     - icon: ':heavy_check_mark:'
       path: other_algorithms/permutation_tree.hpp
-      title: "Permutation tree \uFF08\u9806\u5217\u6728\uFF09"
+      title: "Common interval decomposition tree / \"Permutation tree\" \uFF08\u9806\
+        \u5217\u6728\uFF09"
     - icon: ':heavy_check_mark:'
       path: other_algorithms/slope_trick.hpp
       title: "Slope trick \uFF08\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570\u306B\u95A2\
@@ -1655,6 +1656,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/north_east_lattice_paths.test.cpp
       title: other_algorithms/test/north_east_lattice_paths.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: other_algorithms/test/permutation_tree.test.cpp
+      title: other_algorithms/test/permutation_tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
       title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
