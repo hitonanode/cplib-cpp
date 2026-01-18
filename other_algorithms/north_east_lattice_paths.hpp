@@ -171,6 +171,7 @@ NorthEastLatticePathsBothBounded(const std::vector<int> &lb, const std::vector<i
     for (int i = 1; i < n; ++i) {
         assert(lb[i - 1] <= lb[i]);
         assert(ub[i - 1] <= ub[i]);
+        if (ub[i - 1] <= lb[i]) return std::vector<MODINT>(ub.back() - lb.back());
     }
 
     for (int i = 0; i < n; ++i) {
