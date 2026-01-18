@@ -105,6 +105,7 @@ data:
     \ == ub.size());\n\n    const int n = ub.size();\n    if (n == 0) return left;\n\
     \n    assert((int)left.size() == ub[0] - lb[0]);\n    for (int i = 1; i < n; ++i)\
     \ {\n        assert(lb[i - 1] <= lb[i]);\n        assert(ub[i - 1] <= ub[i]);\n\
+    \        if (ub[i - 1] <= lb[i]) return std::vector<MODINT>(ub.back() - lb.back());\n\
     \    }\n\n    for (int i = 0; i < n; ++i) {\n        if (lb[i] >= ub[i]) return\
     \ std::vector<MODINT>(ub.back() - lb.back());\n    }\n\n    int x = 0;\n    std::vector<MODINT>\
     \ dp_left = left;\n    std::vector<int> tmp_ub;\n    while (true) {\n        dp_left.resize(ub[x]\
@@ -239,6 +240,7 @@ data:
     \ == ub.size());\n\n    const int n = ub.size();\n    if (n == 0) return left;\n\
     \n    assert((int)left.size() == ub[0] - lb[0]);\n    for (int i = 1; i < n; ++i)\
     \ {\n        assert(lb[i - 1] <= lb[i]);\n        assert(ub[i - 1] <= ub[i]);\n\
+    \        if (ub[i - 1] <= lb[i]) return std::vector<MODINT>(ub.back() - lb.back());\n\
     \    }\n\n    for (int i = 0; i < n; ++i) {\n        if (lb[i] >= ub[i]) return\
     \ std::vector<MODINT>(ub.back() - lb.back());\n    }\n\n    int x = 0;\n    std::vector<MODINT>\
     \ dp_left = left;\n    std::vector<int> tmp_ub;\n    while (true) {\n        dp_left.resize(ub[x]\
@@ -291,7 +293,7 @@ data:
   isVerificationFile: false
   path: other_algorithms/north_east_lattice_paths.hpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-01-18 14:24:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_algorithms/test/north_east_lattice_paths.test.cpp
