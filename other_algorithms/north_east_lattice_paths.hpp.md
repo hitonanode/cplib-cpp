@@ -296,9 +296,9 @@ data:
   timestamp: '2026-01-18 14:24:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - other_algorithms/test/north_east_lattice_paths.aoj3335.test.cpp
   - other_algorithms/test/north_east_lattice_paths.test.cpp
   - other_algorithms/test/north_east_lattice_paths.bruteforce.test.cpp
-  - other_algorithms/test/north_east_lattice_paths.aoj3335.test.cpp
 documentation_of: other_algorithms/north_east_lattice_paths.hpp
 layout: document
 title: "Counting north-east lattice paths \uFF082 \u6B21\u5143\u30B0\u30EA\u30C3\u30C9\

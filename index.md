@@ -491,6 +491,9 @@ data:
       path: number/factorize.hpp
       title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
     - icon: ':heavy_check_mark:'
+      path: number/gaussian_integer.hpp
+      title: "Gaussian Integer \uFF08\u30AC\u30A6\u30B9\u6574\u6570\uFF09"
+    - icon: ':heavy_check_mark:'
       path: number/min_max_semiring.hpp
       title: "Min-max semiring\uFF08(min, max) \u534A\u74B0\uFF09"
     - icon: ':heavy_check_mark:'
@@ -517,6 +520,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: number/sqrt_mod.hpp
+      title: "Square root modulo prime \uFF08\u5E73\u65B9\u5270\u4F59\uFF09"
+    - icon: ':warning:'
+      path: number/square_sums.hpp
+      title: "Sum of two squares \uFF08\u4E8C\u3064\u306E\u5E73\u65B9\u6570\u306E\u548C\
+        \uFF09"
     - icon: ':heavy_check_mark:'
       path: number/stern_brocot_tree.hpp
       title: "Stern\u2013Brocot tree"
@@ -1562,6 +1572,9 @@ data:
       path: number/test/gcd_convolution.test.cpp
       title: number/test/gcd_convolution.test.cpp
     - icon: ':heavy_check_mark:'
+      path: number/test/gcd_of_gaussian_integers.test.cpp
+      title: number/test/gcd_of_gaussian_integers.test.cpp
+    - icon: ':heavy_check_mark:'
       path: number/test/gen_primes.test.cpp
       title: number/test/gen_primes.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1606,6 +1619,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/sieve.stress.test.cpp
       title: number/test/sieve.stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: number/test/sqrt_mod.test.cpp
+      title: number/test/sqrt_mod.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp

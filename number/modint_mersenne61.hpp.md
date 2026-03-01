@@ -107,8 +107,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/run_enumerate_lyndon_mersenne61.test.cpp
-  - string/test/rolling_hash_2d.aoj.test.cpp
   - string/test/rolling_hash_mersenne61.test.cpp
+  - string/test/rolling_hash_2d.aoj.test.cpp
   - data_structure/test/wavelet_matrix.yuki3207.test.cpp
 documentation_of: number/modint_mersenne61.hpp
 layout: document

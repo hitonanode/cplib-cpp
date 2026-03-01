@@ -287,8 +287,8 @@ data:
   timestamp: '2024-11-25 22:28:29+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
   - combinatorial_opt/test/linear_sum_assignment.yuki3306.test.cpp
+  - combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
   - combinatorial_opt/test/linear_sum_assignment.test.cpp
 documentation_of: combinatorial_opt/linear_sum_assignment.hpp
 layout: document

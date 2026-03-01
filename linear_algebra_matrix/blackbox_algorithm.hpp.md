@@ -207,8 +207,8 @@ data:
   timestamp: '2022-07-05 01:52:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
+  - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
 documentation_of: linear_algebra_matrix/blackbox_algorithm.hpp
 layout: document
 title: "Black box linear algebra \u3092\u5229\u7528\u3057\u305F\u5404\u7A2E\u9AD8\u901F\
