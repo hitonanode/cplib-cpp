@@ -14,13 +14,15 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Set up Python
-      uses: actions/setup-python@v1
-    
+      uses: actions/setup-python@v5
+
     - name: Install boost
       run: sudo apt install -y libboost-dev
 
     - name: Install dependencies
-      run: pip3 install -U online-judge-verify-helper
+      run: |
+        python -m pip install -U pip
+        python -m pip install -U "setuptools<81" online-judge-verify-helper
 
     - name: Clone AC Library
       run: cd ${GITHUB_WORKSPACE}/../ && git clone https://github.com/atcoder/ac-library.git
