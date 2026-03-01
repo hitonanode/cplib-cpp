@@ -122,6 +122,9 @@ data:
       path: data_structure/binary_trie.hpp
       title: Binary trie
     - icon: ':heavy_check_mark:'
+      path: data_structure/dynamic_bitset.hpp
+      title: "Dynamic Bitset \uFF08\u52D5\u7684\u30B5\u30A4\u30BA bitset\uFF09"
+    - icon: ':heavy_check_mark:'
       path: data_structure/fast_set.hpp
       title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\
         \u3092\u9AD8\u901F\u306B\u51E6\u7406\u3059\u308B\u30C7\u30FC\u30BF\u69CB\u9020\
@@ -1068,6 +1071,33 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/binary_trie.yuki2977.test.cpp
       title: data_structure/test/binary_trie.yuki2977.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_bitset.yuki1444.test.cpp
+      title: data_structure/test/dynamic_bitset.yuki1444.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_bitset.yuki1514.test.cpp
+      title: data_structure/test/dynamic_bitset.yuki1514.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_bitset.yuki1560.test.cpp
+      title: data_structure/test/dynamic_bitset.yuki1560.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_bitset.yuki1782.test.cpp
+      title: data_structure/test/dynamic_bitset.yuki1782.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_bitset.yuki1861.test.cpp
+      title: data_structure/test/dynamic_bitset.yuki1861.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_bitset.yuki2319.test.cpp
+      title: data_structure/test/dynamic_bitset.yuki2319.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_bitset.yuki2542.test.cpp
+      title: data_structure/test/dynamic_bitset.yuki2542.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_bitset.yuki3041.test.cpp
+      title: data_structure/test/dynamic_bitset.yuki3041.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/dynamic_bitset.yuki3060.test.cpp
+      title: data_structure/test/dynamic_bitset.yuki3060.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
       title: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
