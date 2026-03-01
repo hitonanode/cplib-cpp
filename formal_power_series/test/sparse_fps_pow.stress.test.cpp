@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A" // DUMMY
-#include "../pow_of_sparse_fps.hpp"
+#include "../sparse_fps.hpp"
 #include "../../modint.hpp"
 #include "../../random/xorshift.hpp"
 #include "../formal_power_series.hpp"
@@ -20,12 +20,16 @@ int main() {
                         vector<mint> f(nin);
                         for (int i = d0; i < nin; ++i) f[i] = rand_int();
 
-                        auto ret = pow_of_sparse_fps(f, degout, k);
-                        auto ret_fps = fps(f.begin(), f.end()).pow(k, degout + 1);
+                        const fps init = fps(f.begin(), f.end());
+
+                        const vector<mint> ret1 = sparse_fps::pow(f, degout, k);
+                        const fps ret2 = sparse_fps::pow(init, degout, k);
+                        const fps ret_fps = init.pow(k, degout + 1);
+
                         for (int i = 0; i <= degout; ++i) {
-                            if (ret[i] != ret_fps.coeff(i)) {
+                            if (ret1[i] != ret_fps.coeff(i) or ret2[i] != ret_fps.coeff(i)) {
                                 cerr << nin << ' ' << d0 << ' ' << degout << ' ' << k << ' '
-                                     << iter << ' ' << i << ' ' << ret[i] << ' '
+                                     << iter << ' ' << i << ' ' << ret1[i] << ' ' << ret2[i] << ' '
                                      << ret_fps.coeff(i) << endl;
                                 exit(1);
                             }

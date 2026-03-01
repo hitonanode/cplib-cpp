@@ -1,5 +1,5 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1939"
-#include "../pow_of_sparse_fps.hpp"
+#include "../sparse_fps.hpp"
 #include "../../modint.hpp"
 #include <iostream>
 #include <vector>
@@ -17,5 +17,5 @@ int main() {
         cin >> l;
         f[l] += 1;
     }
-    cout << pow_of_sparse_fps(f, N, N + 1)[N] / (N + 1) << '\n';
+    cout << sparse_fps::pow(f, N, N + 1)[N] / (N + 1) << '\n';
 }
