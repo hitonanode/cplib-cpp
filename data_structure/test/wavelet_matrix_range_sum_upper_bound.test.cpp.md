@@ -156,9 +156,9 @@ data:
     \ yl_idx = to_index_y(yl);\n        const auto idx = index_next_value(xl, xr,\
     \ yl_idx);\n        return idx ? distinct_ys.at(*idx) : std::nullopt;\n    }\n\
     };\n/* Sample usage:\nwavelet_matrix<int> wm;\n\nwm.build();\nvector tmp(wm.D(),\
-    \ vector<BIT<T>>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx,\
-    \ wx); });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0)\
-    \ { ret += tmp[d].sum(l0, r0); }); // range sum\n*/\n#line 3 \"data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp\"\
+    \ BIT<T>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx, wx);\
+    \ });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0) { ret\
+    \ += tmp[d].sum(l0, r0); }); // range sum\n*/\n#line 3 \"data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp\"\
     \n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n\n    int N, Q;\n    cin >> N >> Q;\n    vector<int>\
     \ A(N);\n    for (auto &a : A) cin >> a;\n    const wavelet_matrix<int> wm(A);\n\
@@ -188,7 +188,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp
   requiredBy: []
-  timestamp: '2025-08-10 23:50:57+09:00'
+  timestamp: '2026-03-01 21:03:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp

@@ -160,9 +160,9 @@ data:
     \ yl_idx = to_index_y(yl);\n        const auto idx = index_next_value(xl, xr,\
     \ yl_idx);\n        return idx ? distinct_ys.at(*idx) : std::nullopt;\n    }\n\
     };\n/* Sample usage:\nwavelet_matrix<int> wm;\n\nwm.build();\nvector tmp(wm.D(),\
-    \ vector<BIT<T>>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx,\
-    \ wx); });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0)\
-    \ { ret += tmp[d].sum(l0, r0); }); // range sum\n*/\n#line 3 \"number/modint_mersenne61.hpp\"\
+    \ BIT<T>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx, wx);\
+    \ });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0) { ret\
+    \ += tmp[d].sum(l0, r0); }); // range sum\n*/\n#line 3 \"number/modint_mersenne61.hpp\"\
     \n#include <chrono>\n#include <random>\n\n// F_p, p = 2^61 - 1\n// https://qiita.com/keymoon/items/11fac5627672a6d6a9f6\n\
     class ModIntMersenne61 {\n    static const long long md = (1LL << 61) - 1;\n \
     \   long long _v;\n\n    inline unsigned hi() const noexcept { return _v >> 31;\
@@ -268,7 +268,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/wavelet_matrix.yuki3207.test.cpp
   requiredBy: []
-  timestamp: '2025-07-23 23:51:49+09:00'
+  timestamp: '2026-03-01 21:03:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/wavelet_matrix.yuki3207.test.cpp

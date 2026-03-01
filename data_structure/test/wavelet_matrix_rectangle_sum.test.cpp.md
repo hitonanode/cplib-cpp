@@ -156,9 +156,9 @@ data:
     \ yl_idx = to_index_y(yl);\n        const auto idx = index_next_value(xl, xr,\
     \ yl_idx);\n        return idx ? distinct_ys.at(*idx) : std::nullopt;\n    }\n\
     };\n/* Sample usage:\nwavelet_matrix<int> wm;\n\nwm.build();\nvector tmp(wm.D(),\
-    \ vector<BIT<T>>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx,\
-    \ wx); });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0)\
-    \ { ret += tmp[d].sum(l0, r0); }); // range sum\n*/\n#line 3 \"data_structure/test/wavelet_matrix_rectangle_sum.test.cpp\"\
+    \ BIT<T>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx, wx);\
+    \ });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0) { ret\
+    \ += tmp[d].sum(l0, r0); }); // range sum\n*/\n#line 3 \"data_structure/test/wavelet_matrix_rectangle_sum.test.cpp\"\
     \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
     \ ios::sync_with_stdio(false);\n    int N, Q;\n    cin >> N >> Q;\n\n    wavelet_matrix<int>\
     \ wm;\n    vector<tuple<int, int, int>> points(N);\n    for (auto &[i, j, x] :\
@@ -193,7 +193,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/wavelet_matrix_rectangle_sum.test.cpp
   requiredBy: []
-  timestamp: '2025-07-23 23:51:49+09:00'
+  timestamp: '2026-03-01 21:03:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/wavelet_matrix_rectangle_sum.test.cpp

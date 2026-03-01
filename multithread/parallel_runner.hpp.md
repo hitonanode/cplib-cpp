@@ -63,12 +63,13 @@ data:
     \ std::endl;\n        }\n    }\n\n    static void mhc_stdout_(const Solver &result,\
     \ const Solver::Ret &sol, int index) {\n        std::cout << \"Case #\" << index\
     \ + 1 << \": \";\n        result.dump_stdout(sol);\n        std::cout << std::flush;\n\
-    \    }\n};\n\n\n/* Usage:\nstruct Solver {\n    using Ret = int;\n\n    void read_stdin()\
-    \ {\n        // read input using std::cin\n    }\n\n    Ret solve() {\n      \
-    \  // solve the problem\n    }\n\n    void dump_stdout(const Ret &ret) const {\n\
-    \        // output the result using std::cout\n        // std::cout << ret <<\
-    \ std::endl;\n    }\n};\n\nint main() {\n    int T;\n    cin >> T;\n\n    ParallelRunner<Solver>\
-    \ pm;\n    pm.read_all(T);\n    pm.run_parallel();\n}\n*/\n"
+    \    }\n};\n\n\n/* Usage:\nstruct Solver {\n    using Ret = lint;\n\n    void\
+    \ read_stdin() {\n        // read input using std::cin\n    }\n\n    Ret solve()\
+    \ {\n        // solve the problem\n    }\n\n    void dump_stdout(const Ret &ret)\
+    \ const {\n        // output the result using std::cout\n        // std::cout\
+    \ << ret << std::endl;\n    }\n};\n\nint main() {\n    int T;\n    cin >> T;\n\
+    \n    ParallelRunner<Solver> pm;\n    pm.read_all(T);\n    pm.run_parallel();\n\
+    }\n*/\n"
   code: "#ifndef PARALLEL_RUNNER_HPP\n#define PARALLEL_RUNNER_HPP\n\n#include <chrono>\n\
     #include <concepts>\n#include <exception>\n#include <future>\n#include <iostream>\n\
     #include <mutex>\n#include <optional>\n#include <vector>\n\ntemplate <class T>\n\
@@ -125,7 +126,7 @@ data:
     \ const Solver::Ret &sol, int index) {\n        std::cout << \"Case #\" << index\
     \ + 1 << \": \";\n        result.dump_stdout(sol);\n        std::cout << std::flush;\n\
     \    }\n};\n#endif // PARALLEL_RUNNER_HPP\n\n/* Usage:\nstruct Solver {\n    using\
-    \ Ret = int;\n\n    void read_stdin() {\n        // read input using std::cin\n\
+    \ Ret = lint;\n\n    void read_stdin() {\n        // read input using std::cin\n\
     \    }\n\n    Ret solve() {\n        // solve the problem\n    }\n\n    void dump_stdout(const\
     \ Ret &ret) const {\n        // output the result using std::cout\n        //\
     \ std::cout << ret << std::endl;\n    }\n};\n\nint main() {\n    int T;\n    cin\
@@ -135,7 +136,7 @@ data:
   isVerificationFile: false
   path: multithread/parallel_runner.hpp
   requiredBy: []
-  timestamp: '2025-10-19 01:57:32+09:00'
+  timestamp: '2026-03-01 21:03:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: multithread/parallel_runner.hpp

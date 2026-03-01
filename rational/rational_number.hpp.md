@@ -10,8 +10,8 @@ data:
     links:
     - https://contest.yandex.com/contest/42710/problems/K
   bundledCode: "#line 2 \"rational/rational_number.hpp\"\n#include <cassert>\n#include\
-    \ <limits>\n\n// Rational number + {infinity(1 / 0), -infiity(-1 / 0), nan(0 /\
-    \ 0)} \uFF08\u6709\u7406\u6570\uFF09\n// Verified: Yandex Cup 2022 Final E https://contest.yandex.com/contest/42710/problems/K\n\
+    \ <limits>\n\n// Rational number + {infinity(1 / 0), -infinity(-1 / 0), nan(0\
+    \ / 0)} \uFF08\u6709\u7406\u6570\uFF09\n// Verified: Yandex Cup 2022 Final E https://contest.yandex.com/contest/42710/problems/K\n\
     template <class Int, bool AutoReduce = false> struct Rational {\n    Int num,\
     \ den; // den >= 0\n\n    static constexpr Int my_gcd(Int a, Int b) {\n      \
     \  // return __gcd(a, b);\n        if (a < 0) a = -a;\n        if (b < 0) b =\
@@ -69,7 +69,7 @@ data:
     \   }\n    static constexpr Rational<Int, false> lowest() noexcept {\n       \
     \ return std::numeric_limits<Int>::lowest();\n    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <limits>\n\n// Rational number\
-    \ + {infinity(1 / 0), -infiity(-1 / 0), nan(0 / 0)} \uFF08\u6709\u7406\u6570\uFF09\
+    \ + {infinity(1 / 0), -infinity(-1 / 0), nan(0 / 0)} \uFF08\u6709\u7406\u6570\uFF09\
     \n// Verified: Yandex Cup 2022 Final E https://contest.yandex.com/contest/42710/problems/K\n\
     template <class Int, bool AutoReduce = false> struct Rational {\n    Int num,\
     \ den; // den >= 0\n\n    static constexpr Int my_gcd(Int a, Int b) {\n      \
@@ -131,7 +131,7 @@ data:
   isVerificationFile: false
   path: rational/rational_number.hpp
   requiredBy: []
-  timestamp: '2024-09-22 10:22:52+09:00'
+  timestamp: '2026-03-01 21:04:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: rational/rational_number.hpp

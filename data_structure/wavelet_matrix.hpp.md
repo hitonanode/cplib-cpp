@@ -159,9 +159,9 @@ data:
     \ yl_idx = to_index_y(yl);\n        const auto idx = index_next_value(xl, xr,\
     \ yl_idx);\n        return idx ? distinct_ys.at(*idx) : std::nullopt;\n    }\n\
     };\n/* Sample usage:\nwavelet_matrix<int> wm;\n\nwm.build();\nvector tmp(wm.D(),\
-    \ vector<BIT<T>>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx,\
-    \ wx); });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0)\
-    \ { ret += tmp[d].sum(l0, r0); }); // range sum\n*/\n"
+    \ BIT<T>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx, wx);\
+    \ });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0) { ret\
+    \ += tmp[d].sum(l0, r0); }); // range sum\n*/\n"
   code: "#pragma once\n#include <algorithm>\n#include <bit>\n#include <cassert>\n\
     #include <cstdint>\n#include <optional>\n#include <vector>\n\ntemplate <class\
     \ Int> class wavelet_matrix {\n\n    class bit_vector {\n        static constexpr\
@@ -301,14 +301,14 @@ data:
     \ yl_idx = to_index_y(yl);\n        const auto idx = index_next_value(xl, xr,\
     \ yl_idx);\n        return idx ? distinct_ys.at(*idx) : std::nullopt;\n    }\n\
     };\n/* Sample usage:\nwavelet_matrix<int> wm;\n\nwm.build();\nvector tmp(wm.D(),\
-    \ vector<BIT<T>>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx,\
-    \ wx); });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0)\
-    \ { ret += tmp[d].sum(l0, r0); }); // range sum\n*/\n"
+    \ BIT<T>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx, wx);\
+    \ });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0) { ret\
+    \ += tmp[d].sum(l0, r0); }); // range sum\n*/\n"
   dependsOn: []
   isVerificationFile: false
   path: data_structure/wavelet_matrix.hpp
   requiredBy: []
-  timestamp: '2025-07-23 23:51:49+09:00'
+  timestamp: '2026-03-01 21:03:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
