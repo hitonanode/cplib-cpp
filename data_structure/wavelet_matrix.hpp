@@ -326,7 +326,7 @@ public:
 wavelet_matrix<int> wm;
 
 wm.build();
-vector tmp(wm.D(), vector<BIT<T>>(wm.N()));
+vector tmp(wm.D(), BIT<T>(wm.N()));
 wm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx, wx); });  // point add
 T ret{};
 wm.prod(l, r, u, [&](int d, int l0, int r0) { ret += tmp[d].sum(l0, r0); }); // range sum

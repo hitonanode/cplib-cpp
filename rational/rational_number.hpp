@@ -2,7 +2,7 @@
 #include <cassert>
 #include <limits>
 
-// Rational number + {infinity(1 / 0), -infiity(-1 / 0), nan(0 / 0)} （有理数）
+// Rational number + {infinity(1 / 0), -infinity(-1 / 0), nan(0 / 0)} （有理数）
 // Verified: Yandex Cup 2022 Final E https://contest.yandex.com/contest/42710/problems/K
 template <class Int, bool AutoReduce = false> struct Rational {
     Int num, den; // den >= 0
