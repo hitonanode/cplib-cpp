@@ -946,6 +946,10 @@ data:
       title: "\u975E\u518D\u5E30\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3067\u533A\u9593\
         \u306B\u5BFE\u5FDC\u3059\u308B\u9802\u70B9\u756A\u53F7\u306E\u5217\u6319"
     - icon: ':warning:'
+      path: utilities/static_bitset_size_dispatch.hpp
+      title: "Static bitset size dispatch \uFF08\u30B3\u30F3\u30D1\u30A4\u30EB\u6642\
+        \ bitset \u30B5\u30A4\u30BA\u306E\u5B9F\u884C\u6642\u5206\u5C90\uFF09"
+    - icon: ':warning:'
       path: utilities/timer.hpp
       title: utilities/timer.hpp
     - icon: ':warning:'
