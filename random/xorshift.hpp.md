@@ -22,8 +22,8 @@ data:
     path: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
     title: data_structure/test/link_cut_tree.pathadd.stress.test.cpp
   - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-    title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+    path: formal_power_series/test/sparse_fps_pow.stress.test.cpp
+    title: formal_power_series/test/sparse_fps_pow.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/chromatic_number.test.cpp
     title: graph/test/chromatic_number.test.cpp
@@ -97,7 +97,7 @@ data:
   - number/test/miller-rabin.test.cpp
   - number/test/primitive_root_1e18.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+  - formal_power_series/test/sparse_fps_pow.stress.test.cpp
   - data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - data_structure/test/lazy_rbst.stress.test.cpp
   - data_structure/test/link_cut_tree.pathadd.stress.test.cpp

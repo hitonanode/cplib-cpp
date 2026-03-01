@@ -245,9 +245,9 @@ data:
       path: formal_power_series/polynomial_divmod.hpp
       title: formal_power_series/polynomial_divmod.hpp
     - icon: ':heavy_check_mark:'
-      path: formal_power_series/pow_of_sparse_fps.hpp
-      title: "Power of sparse formal power series \uFF08\u975E\u96F6\u306A\u9805\u304C\
-        \u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u306E\u7D2F\u4E57\uFF09"
+      path: formal_power_series/sparse_fps.hpp
+      title: "Sparse formal power series \uFF08\u758E\u306A\u5F62\u5F0F\u7684\u51AA\
+        \u7D1A\u6570\u306E\u6F14\u7B97\uFF09"
     - icon: ':heavy_check_mark:'
       path: formal_power_series/sum_of_exponential_times_polynomial.hpp
       title: Sum of exponential times polynomial ($\sum_{i=0}^{N - 1} r^i f(i)$)
@@ -1286,17 +1286,32 @@ data:
       path: formal_power_series/test/polynomial_interpolation.test.cpp
       title: formal_power_series/test/polynomial_interpolation.test.cpp
     - icon: ':heavy_check_mark:'
-      path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-      title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
-      title: formal_power_series/test/pow_of_sparse_fps.yuki1939.test.cpp
-    - icon: ':heavy_check_mark:'
       path: formal_power_series/test/sharp_p_subset_sum.test.cpp
       title: formal_power_series/test/sharp_p_subset_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/shift_of_sampling_points.test.cpp
       title: formal_power_series/test/shift_of_sampling_points.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/sparse_fps_exp.test.cpp
+      title: formal_power_series/test/sparse_fps_exp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/sparse_fps_inv.test.cpp
+      title: formal_power_series/test/sparse_fps_inv.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/sparse_fps_log.test.cpp
+      title: formal_power_series/test/sparse_fps_log.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/sparse_fps_pow.stress.test.cpp
+      title: formal_power_series/test/sparse_fps_pow.stress.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/sparse_fps_pow.test.cpp
+      title: formal_power_series/test/sparse_fps_pow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/sparse_fps_pow.yuki1939.test.cpp
+      title: formal_power_series/test/sparse_fps_pow.yuki1939.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: formal_power_series/test/sparse_fps_sqrt.test.cpp
+      title: formal_power_series/test/sparse_fps_sqrt.test.cpp
     - icon: ':heavy_check_mark:'
       path: formal_power_series/test/stirling_number_of_1st.test.cpp
       title: formal_power_series/test/stirling_number_of_1st.test.cpp

@@ -43,11 +43,11 @@ data:
     path: formal_power_series/test/polynomial_interpolation.test.cpp
     title: formal_power_series/test/polynomial_interpolation.test.cpp
   - icon: ':heavy_check_mark:'
-    path: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-    title: formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
-  - icon: ':heavy_check_mark:'
     path: formal_power_series/test/sharp_p_subset_sum.test.cpp
     title: formal_power_series/test/sharp_p_subset_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: formal_power_series/test/sparse_fps_pow.stress.test.cpp
+    title: formal_power_series/test/sparse_fps_pow.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/stirling_number_of_1st.test.cpp
     title: formal_power_series/test/stirling_number_of_1st.test.cpp
@@ -435,7 +435,7 @@ data:
   - formal_power_series/test/poly_taylor_shift.test.cpp
   - formal_power_series/test/stirling_number_of_2nd.test.cpp
   - formal_power_series/test/division_number.test.cpp
-  - formal_power_series/test/pow_of_sparse_fps.stress.test.cpp
+  - formal_power_series/test/sparse_fps_pow.stress.test.cpp
   - formal_power_series/test/fps_pow.test.cpp
   - formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - formal_power_series/test/fps_inv.test.cpp
