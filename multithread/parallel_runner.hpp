@@ -137,7 +137,7 @@ public:
 
 /* Usage:
 struct Solver {
-    using Ret = int;
+    using Ret = lint;
 
     void read_stdin() {
         // read input using std::cin
