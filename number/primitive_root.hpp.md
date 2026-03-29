@@ -130,11 +130,11 @@ data:
     \ Verified:\n// - https://yukicoder.me/submissions/405938\n// - https://judge.yosupo.jp/problem/primitive_root\n\
     // - SRM 840 Div.1 900 https://community.topcoder.com/stat?c=problem_statement&pm=17877\n\
     // Sample:\n//  - 998244353 ( = (119 << 23) + 1 ) -> 3\n//  - 163577857 ( = (39\
-    \ << 22) + 1 ) -> 23\n//  - 2 -> 1\n//  - 1 -> -1\nlong long find_smallest_primitive_root(long\
+    \ << 22) + 1 ) -> 23\n//  - 2 -> 1\n//  - 1 -> -1\ninline long long find_smallest_primitive_root(long\
     \ long n) {\n    std::vector<long long> fac;\n    const long long phi = FactorizeLonglong.euler_phi(n);\n\
     \    for (long long q : FactorizeLonglong(phi)) {\n        if (fac.empty() or\
     \ fac.back() != q) fac.push_back(q);\n    }\n\n    for (long long g = 1; g < n;\
-    \ g++) {\n        if (std::__gcd(n, g) != 1) continue;\n        if (pow_mod<long\
+    \ g++) {\n        if (std::gcd(n, g) != 1) continue;\n        if (pow_mod<long\
     \ long, __int128>(g, phi, n) != 1) return -1;\n        bool ok = true;\n     \
     \   for (auto pp : fac) {\n            if (pow_mod<long long, __int128>(g, phi\
     \ / pp, n) == 1) {\n                ok = false;\n                break;\n    \
@@ -147,11 +147,11 @@ data:
     \ Verified:\n// - https://yukicoder.me/submissions/405938\n// - https://judge.yosupo.jp/problem/primitive_root\n\
     // - SRM 840 Div.1 900 https://community.topcoder.com/stat?c=problem_statement&pm=17877\n\
     // Sample:\n//  - 998244353 ( = (119 << 23) + 1 ) -> 3\n//  - 163577857 ( = (39\
-    \ << 22) + 1 ) -> 23\n//  - 2 -> 1\n//  - 1 -> -1\nlong long find_smallest_primitive_root(long\
+    \ << 22) + 1 ) -> 23\n//  - 2 -> 1\n//  - 1 -> -1\ninline long long find_smallest_primitive_root(long\
     \ long n) {\n    std::vector<long long> fac;\n    const long long phi = FactorizeLonglong.euler_phi(n);\n\
     \    for (long long q : FactorizeLonglong(phi)) {\n        if (fac.empty() or\
     \ fac.back() != q) fac.push_back(q);\n    }\n\n    for (long long g = 1; g < n;\
-    \ g++) {\n        if (std::__gcd(n, g) != 1) continue;\n        if (pow_mod<long\
+    \ g++) {\n        if (std::gcd(n, g) != 1) continue;\n        if (pow_mod<long\
     \ long, __int128>(g, phi, n) != 1) return -1;\n        bool ok = true;\n     \
     \   for (auto pp : fac) {\n            if (pow_mod<long long, __int128>(g, phi\
     \ / pp, n) == 1) {\n                ok = false;\n                break;\n    \
@@ -163,7 +163,7 @@ data:
   isVerificationFile: false
   path: number/primitive_root.hpp
   requiredBy: []
-  timestamp: '2023-03-10 18:40:39+09:00'
+  timestamp: '2026-03-29 15:21:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/primitive_root.test.cpp

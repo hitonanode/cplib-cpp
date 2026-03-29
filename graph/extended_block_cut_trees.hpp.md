@@ -122,8 +122,8 @@ data:
   timestamp: '2024-12-31 22:44:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/extended_block_cut_trees.test.cpp
   - graph/test/extended_block_cut_trees.yuki1326.test.cpp
+  - graph/test/extended_block_cut_trees.test.cpp
 documentation_of: graph/extended_block_cut_trees.hpp
 layout: document
 title: "Extended block cut tree \uFF08Block cut tree \u306E\u4E9C\u7A2E\uFF09"

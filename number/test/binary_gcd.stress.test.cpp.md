@@ -23,24 +23,23 @@ data:
     \   if (x > y) {\n            x = (x - y) >> __builtin_ctzll(x - y);\n       \
     \ } else {\n            y = (y - x) >> __builtin_ctzll(y - x);\n        }\n  \
     \  }\n    return x << (n > m ? m : n);\n}\n#line 3 \"number/test/binary_gcd.stress.test.cpp\"\
-    \n#include <algorithm> // __gcd\n#include <iostream>\nusing namespace std;\n\n\
-    template <typename Int> void test_binary_gcd(Int lo, Int hi) {\n    for (Int x\
-    \ = lo; x <= hi; x++) {\n        for (Int y = lo; y <= hi; y++) {\n          \
-    \  auto g = __gcd<Int>(x, y);\n            if (g < 0) g = -g;\n            if\
-    \ (binary_gcd(x, y) != g) {\n                cerr << \"Did not match : (x, y)\
-    \ = \" << x << ',' << y << ')' << endl;\n                throw;\n            }\n\
-    \        }\n    }\n}\n\nint main() {\n    test_binary_gcd<int>(-1000, 1000);\n\
-    \    test_binary_gcd<unsigned int>(0, 2000);\n    test_binary_gcd<long long>(-1000,\
-    \ 1000);\n    test_binary_gcd<unsigned long long>(0, 2000);\n    cout << \"Hello\
-    \ World\" << endl;\n}\n"
+    \n#include <iostream>\n#include <numeric>\nusing namespace std;\n\ntemplate <typename\
+    \ Int> void test_binary_gcd(Int lo, Int hi) {\n    for (Int x = lo; x <= hi; x++)\
+    \ {\n        for (Int y = lo; y <= hi; y++) {\n            auto g = gcd<Int>(x,\
+    \ y);\n            if (g < 0) g = -g;\n            if (binary_gcd(x, y) != g)\
+    \ {\n                cerr << \"Did not match : (x, y) = \" << x << ',' << y <<\
+    \ ')' << endl;\n                throw;\n            }\n        }\n    }\n}\n\n\
+    int main() {\n    test_binary_gcd<int>(-1000, 1000);\n    test_binary_gcd<unsigned\
+    \ int>(0, 2000);\n    test_binary_gcd<long long>(-1000, 1000);\n    test_binary_gcd<unsigned\
+    \ long long>(0, 2000);\n    cout << \"Hello World\" << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
-    \ // DUMMY\n#include \"../binary_gcd.hpp\"\n#include <algorithm> // __gcd\n#include\
-    \ <iostream>\nusing namespace std;\n\ntemplate <typename Int> void test_binary_gcd(Int\
-    \ lo, Int hi) {\n    for (Int x = lo; x <= hi; x++) {\n        for (Int y = lo;\
-    \ y <= hi; y++) {\n            auto g = __gcd<Int>(x, y);\n            if (g <\
-    \ 0) g = -g;\n            if (binary_gcd(x, y) != g) {\n                cerr <<\
-    \ \"Did not match : (x, y) = \" << x << ',' << y << ')' << endl;\n           \
-    \     throw;\n            }\n        }\n    }\n}\n\nint main() {\n    test_binary_gcd<int>(-1000,\
+    \ // DUMMY\n#include \"../binary_gcd.hpp\"\n#include <iostream>\n#include <numeric>\n\
+    using namespace std;\n\ntemplate <typename Int> void test_binary_gcd(Int lo, Int\
+    \ hi) {\n    for (Int x = lo; x <= hi; x++) {\n        for (Int y = lo; y <= hi;\
+    \ y++) {\n            auto g = gcd<Int>(x, y);\n            if (g < 0) g = -g;\n\
+    \            if (binary_gcd(x, y) != g) {\n                cerr << \"Did not match\
+    \ : (x, y) = \" << x << ',' << y << ')' << endl;\n                throw;\n   \
+    \         }\n        }\n    }\n}\n\nint main() {\n    test_binary_gcd<int>(-1000,\
     \ 1000);\n    test_binary_gcd<unsigned int>(0, 2000);\n    test_binary_gcd<long\
     \ long>(-1000, 1000);\n    test_binary_gcd<unsigned long long>(0, 2000);\n   \
     \ cout << \"Hello World\" << endl;\n}\n"
@@ -49,7 +48,7 @@ data:
   isVerificationFile: true
   path: number/test/binary_gcd.stress.test.cpp
   requiredBy: []
-  timestamp: '2021-08-21 15:46:09+09:00'
+  timestamp: '2026-03-29 15:21:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/binary_gcd.stress.test.cpp

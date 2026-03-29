@@ -119,9 +119,9 @@ data:
   timestamp: '2025-08-24 22:54:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/discrete_logarithm_symmetric_group.yuki101.test.cpp
   - number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp
   - number/test/discrete_logarithm_matrix.yuki3170.test.cpp
+  - number/test/discrete_logarithm_symmetric_group.yuki101.test.cpp
   - number/test/discrete_logarithm_matrix.yuki950.test.cpp
   - number/test/discrete_logarithm_mod.test.cpp
 documentation_of: number/discrete_logarithm.hpp

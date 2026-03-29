@@ -46,16 +46,17 @@ data:
     \ {\n                now = y;\n            } else {\n                ret += Int(1)\
     \ << d, now = ch0[now] ^ ch1[now] ^ y;\n            }\n        }\n        return\
     \ ret;\n    }\n\n    // Count elements y such that x ^ y < thres\n    Count count_less_xor(Int\
-    \ x, Int thres) const {\n        Count ret = Count();\n        int now = 0;\n\n\
-    \        for (int d = maxD - 1; d >= 0; d--) {\n            if (now == -1) break;\n\
-    \n            const bool bit_x = (x >> d) & 1;\n\n            if ((thres >> d)\
-    \ & 1) {\n                const int child = bit_x ? ch1[now] : ch0[now];\n   \
-    \             if (child != -1) ret += subtree_sum[child];\n\n                now\
-    \ = bit_x ? ch0[now] : ch1[now];\n            } else {\n                now =\
-    \ bit_x ? ch1[now] : ch0[now];\n            }\n        }\n\n        return ret;\n\
-    \    }\n};\n#line 2 \"data_structure/test/binary_trie.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/set_xor_min\"\n\n#include <iostream>\nusing\
-    \ namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \ x, Int thres) const {\n        if (thres <= 0) return Count();\n        if ((thres\
+    \ >> maxD) > 0) return subtree_sum[0];\n        Count ret = Count();\n       \
+    \ int now = 0;\n\n        for (int d = maxD - 1; d >= 0; d--) {\n            if\
+    \ (now == -1) break;\n\n            const bool bit_x = (x >> d) & 1;\n\n     \
+    \       if ((thres >> d) & 1) {\n                const int child = bit_x ? ch1[now]\
+    \ : ch0[now];\n                if (child != -1) ret += subtree_sum[child];\n\n\
+    \                now = bit_x ? ch0[now] : ch1[now];\n            } else {\n  \
+    \              now = bit_x ? ch1[now] : ch0[now];\n            }\n        }\n\n\
+    \        return ret;\n    }\n};\n#line 2 \"data_structure/test/binary_trie.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/set_xor_min\"\n\n#include\
+    \ <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \n    int Q;\n    cin >> Q;\n    BinaryTrie<int> bt(30);\n    while (Q--) {\n\
     \        int q, x;\n        cin >> q >> x;\n        if (q == 0)\n            bt.insert(x);\n\
     \        else if (q == 1)\n            bt.erase(x);\n        else\n          \
@@ -72,7 +73,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/binary_trie.test.cpp
   requiredBy: []
-  timestamp: '2024-12-07 22:13:21+09:00'
+  timestamp: '2026-03-29 15:21:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/binary_trie.test.cpp

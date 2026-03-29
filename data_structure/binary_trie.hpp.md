@@ -46,14 +46,15 @@ data:
     \ {\n                now = y;\n            } else {\n                ret += Int(1)\
     \ << d, now = ch0[now] ^ ch1[now] ^ y;\n            }\n        }\n        return\
     \ ret;\n    }\n\n    // Count elements y such that x ^ y < thres\n    Count count_less_xor(Int\
-    \ x, Int thres) const {\n        Count ret = Count();\n        int now = 0;\n\n\
-    \        for (int d = maxD - 1; d >= 0; d--) {\n            if (now == -1) break;\n\
-    \n            const bool bit_x = (x >> d) & 1;\n\n            if ((thres >> d)\
-    \ & 1) {\n                const int child = bit_x ? ch1[now] : ch0[now];\n   \
-    \             if (child != -1) ret += subtree_sum[child];\n\n                now\
-    \ = bit_x ? ch0[now] : ch1[now];\n            } else {\n                now =\
-    \ bit_x ? ch1[now] : ch0[now];\n            }\n        }\n\n        return ret;\n\
-    \    }\n};\n"
+    \ x, Int thres) const {\n        if (thres <= 0) return Count();\n        if ((thres\
+    \ >> maxD) > 0) return subtree_sum[0];\n        Count ret = Count();\n       \
+    \ int now = 0;\n\n        for (int d = maxD - 1; d >= 0; d--) {\n            if\
+    \ (now == -1) break;\n\n            const bool bit_x = (x >> d) & 1;\n\n     \
+    \       if ((thres >> d) & 1) {\n                const int child = bit_x ? ch1[now]\
+    \ : ch0[now];\n                if (child != -1) ret += subtree_sum[child];\n\n\
+    \                now = bit_x ? ch0[now] : ch1[now];\n            } else {\n  \
+    \              now = bit_x ? ch1[now] : ch0[now];\n            }\n        }\n\n\
+    \        return ret;\n    }\n};\n"
   code: "#pragma once\n#include <vector>\n\ntemplate <class Int, class Count = int>\
     \ struct BinaryTrie {\n    int maxD;\n    std::vector<Count> deg, subtree_sum;\n\
     \    std::vector<int> ch0, ch1, par;\n\n    int _new_node(int id_par) {\n    \
@@ -85,23 +86,24 @@ data:
     \ {\n                now = y;\n            } else {\n                ret += Int(1)\
     \ << d, now = ch0[now] ^ ch1[now] ^ y;\n            }\n        }\n        return\
     \ ret;\n    }\n\n    // Count elements y such that x ^ y < thres\n    Count count_less_xor(Int\
-    \ x, Int thres) const {\n        Count ret = Count();\n        int now = 0;\n\n\
-    \        for (int d = maxD - 1; d >= 0; d--) {\n            if (now == -1) break;\n\
-    \n            const bool bit_x = (x >> d) & 1;\n\n            if ((thres >> d)\
-    \ & 1) {\n                const int child = bit_x ? ch1[now] : ch0[now];\n   \
-    \             if (child != -1) ret += subtree_sum[child];\n\n                now\
-    \ = bit_x ? ch0[now] : ch1[now];\n            } else {\n                now =\
-    \ bit_x ? ch1[now] : ch0[now];\n            }\n        }\n\n        return ret;\n\
-    \    }\n};\n"
+    \ x, Int thres) const {\n        if (thres <= 0) return Count();\n        if ((thres\
+    \ >> maxD) > 0) return subtree_sum[0];\n        Count ret = Count();\n       \
+    \ int now = 0;\n\n        for (int d = maxD - 1; d >= 0; d--) {\n            if\
+    \ (now == -1) break;\n\n            const bool bit_x = (x >> d) & 1;\n\n     \
+    \       if ((thres >> d) & 1) {\n                const int child = bit_x ? ch1[now]\
+    \ : ch0[now];\n                if (child != -1) ret += subtree_sum[child];\n\n\
+    \                now = bit_x ? ch0[now] : ch1[now];\n            } else {\n  \
+    \              now = bit_x ? ch1[now] : ch0[now];\n            }\n        }\n\n\
+    \        return ret;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: data_structure/binary_trie.hpp
   requiredBy: []
-  timestamp: '2024-12-07 22:13:21+09:00'
+  timestamp: '2026-03-29 15:21:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/binary_trie.yuki2977.test.cpp
   - data_structure/test/binary_trie.test.cpp
+  - data_structure/test/binary_trie.yuki2977.test.cpp
 documentation_of: data_structure/binary_trie.hpp
 layout: document
 title: Binary trie
@@ -130,3 +132,4 @@ Key v = bt.xor_min(t);  // t ^ x （x は現在存在する値）の最小値を
 
 - [Library Checker: Set Xor-Min](https://judge.yosupo.jp/problem/set_xor_min)
 - [No.2977 Kth Xor Pair - yukicoder](https://yukicoder.me/problems/no/2977)
+- [AtCoder Beginner Contest 451 G - Minimum XOR Walk](https://atcoder.jp/contests/abc451/tasks/abc451_g)

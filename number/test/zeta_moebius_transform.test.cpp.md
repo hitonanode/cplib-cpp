@@ -236,9 +236,10 @@ data:
     \ md> std::vector<ModInt<md>> ModInt<md>::facs = {1};\ntemplate <int md> std::vector<ModInt<md>>\
     \ ModInt<md>::facinvs = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::invs\
     \ = {0};\n\nusing ModInt998244353 = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n\
-    // using mint = ModInt<1000000007>;\n#line 7 \"number/test/zeta_moebius_transform.test.cpp\"\
-    \nusing namespace std;\n\nusing mint = ModInt<1000000007>;\n\nlong long state\
-    \ = 1;\nmint rndgen() {\n    state = (state * 1234567 + 890123) % mint::mod();\n\
+    // using mint = ModInt<1000000007>;\n#line 6 \"number/test/zeta_moebius_transform.test.cpp\"\
+    \n#include <numeric>\n#line 8 \"number/test/zeta_moebius_transform.test.cpp\"\n\
+    using namespace std;\n\nusing mint = ModInt<1000000007>;\n\nlong long state =\
+    \ 1;\nmint rndgen() {\n    state = (state * 1234567 + 890123) % mint::mod();\n\
     \    return mint(state);\n}\nvector<mint> vecgen(int n) {\n    vector<mint> ret(n\
     \ + 1);\n    for (int i = 1; i <= n; ++i) ret[i] = rndgen();\n    return ret;\n\
     }\n\nvoid test_divisor_zeta() {\n    for (int n = 1; n <= 100; ++n) {\n      \
@@ -263,56 +264,57 @@ data:
     \   for (int iter = 0; iter < 10; ++iter) {\n            vector<mint> x = vecgen(n),\
     \ y = vecgen(n), z(n + 1);\n            auto conv = gcdconv(x, y);\n         \
     \   for (int i = 1; i <= n; ++i) {\n                for (int j = 1; j <= n; ++j)\
-    \ z[__gcd(i, j)] += x[i] * y[j];\n            }\n            assert(conv == z);\n\
+    \ z[gcd(i, j)] += x[i] * y[j];\n            }\n            assert(conv == z);\n\
     \        }\n    }\n}\n\nvoid test_lcmconv() {\n    for (int n = 1; n <= 100; ++n)\
     \ {\n        for (int iter = 0; iter < 10; ++iter) {\n            vector<mint>\
     \ x = vecgen(n), y = vecgen(n), z(n + 1);\n            auto conv = lcmconv(x,\
     \ y);\n            for (int i = 1; i <= n; ++i) {\n                for (int j\
-    \ = 1; j <= n; ++j) {\n                    int l = i * j / __gcd(i, j);\n    \
-    \                if (l <= n) z[l] += x[i] * y[j];\n                }\n       \
-    \     }\n            assert(conv == z);\n        }\n    }\n}\n\nint main() {\n\
-    \    test_divisor_zeta();\n    test_divisor_moebius();\n    test_multiple_zeta();\n\
+    \ = 1; j <= n; ++j) {\n                    int l = i * j / gcd(i, j);\n      \
+    \              if (l <= n) z[l] += x[i] * y[j];\n                }\n         \
+    \   }\n            assert(conv == z);\n        }\n    }\n}\n\nint main() {\n \
+    \   test_divisor_zeta();\n    test_divisor_moebius();\n    test_multiple_zeta();\n\
     \    test_multiple_moebius();\n    test_gcdconv();\n    test_lcmconv();\n    cout\
     \ << \"Hello World\\n\";\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \ // DUMMY\n#include \"../zeta_moebius_transform.hpp\"\n#include \"../../modint.hpp\"\
-    \n#include <cassert>\n#include <iostream>\n#include <vector>\nusing namespace\
-    \ std;\n\nusing mint = ModInt<1000000007>;\n\nlong long state = 1;\nmint rndgen()\
-    \ {\n    state = (state * 1234567 + 890123) % mint::mod();\n    return mint(state);\n\
-    }\nvector<mint> vecgen(int n) {\n    vector<mint> ret(n + 1);\n    for (int i\
-    \ = 1; i <= n; ++i) ret[i] = rndgen();\n    return ret;\n}\n\nvoid test_divisor_zeta()\
-    \ {\n    for (int n = 1; n <= 100; ++n) {\n        for (int iter = 0; iter < 10;\
-    \ ++iter) {\n            vector<mint> x = vecgen(n), y(n + 1);\n            for\
-    \ (int i = 1; i <= n; ++i) {\n                for (int j = 1; j <= i; ++j) {\n\
-    \                    if (i % j == 0) y[i] += x[j];\n                }\n      \
-    \      }\n            divisor_zeta(x);\n            assert(x == y);\n        }\n\
-    \    }\n}\n\nvoid test_divisor_moebius() {\n    for (int n = 1; n <= 100; ++n)\
+    \n#include <cassert>\n#include <iostream>\n#include <numeric>\n#include <vector>\n\
+    using namespace std;\n\nusing mint = ModInt<1000000007>;\n\nlong long state =\
+    \ 1;\nmint rndgen() {\n    state = (state * 1234567 + 890123) % mint::mod();\n\
+    \    return mint(state);\n}\nvector<mint> vecgen(int n) {\n    vector<mint> ret(n\
+    \ + 1);\n    for (int i = 1; i <= n; ++i) ret[i] = rndgen();\n    return ret;\n\
+    }\n\nvoid test_divisor_zeta() {\n    for (int n = 1; n <= 100; ++n) {\n      \
+    \  for (int iter = 0; iter < 10; ++iter) {\n            vector<mint> x = vecgen(n),\
+    \ y(n + 1);\n            for (int i = 1; i <= n; ++i) {\n                for (int\
+    \ j = 1; j <= i; ++j) {\n                    if (i % j == 0) y[i] += x[j];\n \
+    \               }\n            }\n            divisor_zeta(x);\n            assert(x\
+    \ == y);\n        }\n    }\n}\n\nvoid test_divisor_moebius() {\n    for (int n\
+    \ = 1; n <= 100; ++n) {\n        for (int iter = 0; iter < 10; ++iter) {\n   \
+    \         vector<mint> x = vecgen(n), y = x;\n            divisor_zeta(x);\n \
+    \           divisor_moebius(x);\n            assert(x == y);\n        }\n    }\n\
+    }\n\nvoid test_multiple_zeta() {\n    for (int n = 1; n <= 100; ++n) {\n     \
+    \   for (int iter = 0; iter < 10; ++iter) {\n            vector<mint> x = vecgen(n),\
+    \ y(n + 1);\n            for (int i = 1; i <= n; ++i) {\n                for (int\
+    \ j = i; j <= n; ++j) {\n                    if (j % i == 0) y[i] += x[j];\n \
+    \               }\n            }\n            multiple_zeta(x);\n            assert(x\
+    \ == y);\n        }\n    }\n}\n\nvoid test_multiple_moebius() {\n    for (int\
+    \ n = 1; n <= 100; ++n) {\n        for (int iter = 0; iter < 10; ++iter) {\n \
+    \           vector<mint> x = vecgen(n), y = x;\n            multiple_zeta(x);\n\
+    \            multiple_moebius(x);\n            assert(x == y);\n        }\n  \
+    \  }\n}\n\nvoid test_gcdconv() {\n    for (int n = 1; n <= 100; ++n) {\n     \
+    \   for (int iter = 0; iter < 10; ++iter) {\n            vector<mint> x = vecgen(n),\
+    \ y = vecgen(n), z(n + 1);\n            auto conv = gcdconv(x, y);\n         \
+    \   for (int i = 1; i <= n; ++i) {\n                for (int j = 1; j <= n; ++j)\
+    \ z[gcd(i, j)] += x[i] * y[j];\n            }\n            assert(conv == z);\n\
+    \        }\n    }\n}\n\nvoid test_lcmconv() {\n    for (int n = 1; n <= 100; ++n)\
     \ {\n        for (int iter = 0; iter < 10; ++iter) {\n            vector<mint>\
-    \ x = vecgen(n), y = x;\n            divisor_zeta(x);\n            divisor_moebius(x);\n\
-    \            assert(x == y);\n        }\n    }\n}\n\nvoid test_multiple_zeta()\
-    \ {\n    for (int n = 1; n <= 100; ++n) {\n        for (int iter = 0; iter < 10;\
-    \ ++iter) {\n            vector<mint> x = vecgen(n), y(n + 1);\n            for\
-    \ (int i = 1; i <= n; ++i) {\n                for (int j = i; j <= n; ++j) {\n\
-    \                    if (j % i == 0) y[i] += x[j];\n                }\n      \
-    \      }\n            multiple_zeta(x);\n            assert(x == y);\n       \
-    \ }\n    }\n}\n\nvoid test_multiple_moebius() {\n    for (int n = 1; n <= 100;\
-    \ ++n) {\n        for (int iter = 0; iter < 10; ++iter) {\n            vector<mint>\
-    \ x = vecgen(n), y = x;\n            multiple_zeta(x);\n            multiple_moebius(x);\n\
-    \            assert(x == y);\n        }\n    }\n}\n\nvoid test_gcdconv() {\n \
-    \   for (int n = 1; n <= 100; ++n) {\n        for (int iter = 0; iter < 10; ++iter)\
-    \ {\n            vector<mint> x = vecgen(n), y = vecgen(n), z(n + 1);\n      \
-    \      auto conv = gcdconv(x, y);\n            for (int i = 1; i <= n; ++i) {\n\
-    \                for (int j = 1; j <= n; ++j) z[__gcd(i, j)] += x[i] * y[j];\n\
-    \            }\n            assert(conv == z);\n        }\n    }\n}\n\nvoid test_lcmconv()\
-    \ {\n    for (int n = 1; n <= 100; ++n) {\n        for (int iter = 0; iter < 10;\
-    \ ++iter) {\n            vector<mint> x = vecgen(n), y = vecgen(n), z(n + 1);\n\
-    \            auto conv = lcmconv(x, y);\n            for (int i = 1; i <= n; ++i)\
-    \ {\n                for (int j = 1; j <= n; ++j) {\n                    int l\
-    \ = i * j / __gcd(i, j);\n                    if (l <= n) z[l] += x[i] * y[j];\n\
-    \                }\n            }\n            assert(conv == z);\n        }\n\
-    \    }\n}\n\nint main() {\n    test_divisor_zeta();\n    test_divisor_moebius();\n\
-    \    test_multiple_zeta();\n    test_multiple_moebius();\n    test_gcdconv();\n\
-    \    test_lcmconv();\n    cout << \"Hello World\\n\";\n}\n"
+    \ x = vecgen(n), y = vecgen(n), z(n + 1);\n            auto conv = lcmconv(x,\
+    \ y);\n            for (int i = 1; i <= n; ++i) {\n                for (int j\
+    \ = 1; j <= n; ++j) {\n                    int l = i * j / gcd(i, j);\n      \
+    \              if (l <= n) z[l] += x[i] * y[j];\n                }\n         \
+    \   }\n            assert(conv == z);\n        }\n    }\n}\n\nint main() {\n \
+    \   test_divisor_zeta();\n    test_divisor_moebius();\n    test_multiple_zeta();\n\
+    \    test_multiple_moebius();\n    test_gcdconv();\n    test_lcmconv();\n    cout\
+    \ << \"Hello World\\n\";\n}\n"
   dependsOn:
   - number/zeta_moebius_transform.hpp
   - number/sieve.hpp
@@ -320,7 +322,7 @@ data:
   isVerificationFile: true
   path: number/test/zeta_moebius_transform.test.cpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-03-29 15:21:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/zeta_moebius_transform.test.cpp

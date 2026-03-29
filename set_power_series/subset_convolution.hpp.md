@@ -234,8 +234,8 @@ data:
   - set_power_series/test/subset_pow.stress.test.cpp
   - set_power_series/test/subset_conv.test.cpp
   - set_power_series/test/subset_pow.yuki1594.test.cpp
-  - set_power_series/test/subset_exp.test.cpp
   - set_power_series/test/subset_exp.stress.test.cpp
+  - set_power_series/test/subset_exp.test.cpp
   - linear_algebra_matrix/test/hafnian.test.cpp
 documentation_of: set_power_series/subset_convolution.hpp
 layout: document

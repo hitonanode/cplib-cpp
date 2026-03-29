@@ -87,8 +87,8 @@ data:
   verifiedWith:
   - graph/test/zero_one_bfs.yuki1695.test.cpp
   - graph/test/shortest_path_dial.yuki1695.test.cpp
-  - string/test/manacher.test.cpp
   - string/test/manacher.yuki3392.test.cpp
+  - string/test/manacher.test.cpp
   - string/test/manacher_mp.test.cpp
 documentation_of: string/manacher.hpp
 layout: document

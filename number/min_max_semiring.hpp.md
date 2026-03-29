@@ -64,8 +64,8 @@ data:
   timestamp: '2025-05-06 21:03:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/min_max_semiring.test.cpp
   - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
+  - number/test/min_max_semiring.test.cpp
 documentation_of: number/min_max_semiring.hpp
 layout: document
 title: "Min-max semiring\uFF08(min, max) \u534A\u74B0\uFF09"
