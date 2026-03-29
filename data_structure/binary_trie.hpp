@@ -85,6 +85,8 @@ template <class Int, class Count = int> struct BinaryTrie {
 
     // Count elements y such that x ^ y < thres
     Count count_less_xor(Int x, Int thres) const {
+        if (thres <= 0) return Count();
+        if ((thres >> maxD) > 0) return subtree_sum[0];
         Count ret = Count();
         int now = 0;
 

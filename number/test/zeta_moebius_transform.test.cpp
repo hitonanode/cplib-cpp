@@ -3,6 +3,7 @@
 #include "../../modint.hpp"
 #include <cassert>
 #include <iostream>
+#include <numeric>
 #include <vector>
 using namespace std;
 
@@ -77,7 +78,7 @@ void test_gcdconv() {
             vector<mint> x = vecgen(n), y = vecgen(n), z(n + 1);
             auto conv = gcdconv(x, y);
             for (int i = 1; i <= n; ++i) {
-                for (int j = 1; j <= n; ++j) z[__gcd(i, j)] += x[i] * y[j];
+                for (int j = 1; j <= n; ++j) z[gcd(i, j)] += x[i] * y[j];
             }
             assert(conv == z);
         }
@@ -91,7 +92,7 @@ void test_lcmconv() {
             auto conv = lcmconv(x, y);
             for (int i = 1; i <= n; ++i) {
                 for (int j = 1; j <= n; ++j) {
-                    int l = i * j / __gcd(i, j);
+                    int l = i * j / gcd(i, j);
                     if (l <= n) z[l] += x[i] * y[j];
                 }
             }
