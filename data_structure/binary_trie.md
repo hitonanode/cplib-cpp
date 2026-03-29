@@ -26,3 +26,4 @@ Key v = bt.xor_min(t);  // t ^ x （x は現在存在する値）の最小値を
 
 - [Library Checker: Set Xor-Min](https://judge.yosupo.jp/problem/set_xor_min)
 - [No.2977 Kth Xor Pair - yukicoder](https://yukicoder.me/problems/no/2977)
+- [AtCoder Beginner Contest 451 G - Minimum XOR Walk](https://atcoder.jp/contests/abc451/tasks/abc451_g)

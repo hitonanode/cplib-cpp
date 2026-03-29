@@ -1,13 +1,13 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A" // DUMMY
 #include "../binary_gcd.hpp"
-#include <algorithm> // __gcd
 #include <iostream>
+#include <numeric>
 using namespace std;
 
 template <typename Int> void test_binary_gcd(Int lo, Int hi) {
     for (Int x = lo; x <= hi; x++) {
         for (Int y = lo; y <= hi; y++) {
-            auto g = __gcd<Int>(x, y);
+            auto g = gcd<Int>(x, y);
             if (g < 0) g = -g;
             if (binary_gcd(x, y) != g) {
                 cerr << "Did not match : (x, y) = " << x << ',' << y << ')' << endl;

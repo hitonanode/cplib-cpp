@@ -16,7 +16,7 @@
 //  - 163577857 ( = (39 << 22) + 1 ) -> 23
 //  - 2 -> 1
 //  - 1 -> -1
-long long find_smallest_primitive_root(long long n) {
+inline long long find_smallest_primitive_root(long long n) {
     std::vector<long long> fac;
     const long long phi = FactorizeLonglong.euler_phi(n);
     for (long long q : FactorizeLonglong(phi)) {
@@ -24,7 +24,7 @@ long long find_smallest_primitive_root(long long n) {
     }
 
     for (long long g = 1; g < n; g++) {
-        if (std::__gcd(n, g) != 1) continue;
+        if (std::gcd(n, g) != 1) continue;
         if (pow_mod<long long, __int128>(g, phi, n) != 1) return -1;
         bool ok = true;
         for (auto pp : fac) {
