@@ -30,7 +30,7 @@ public:
         const int Q = ranges.size();
         if (!Q) return;
         const int nbbucket = std::max(1, std::min<int>(nmax - nmin, sqrt(Q)));
-        const int szbucket = (nmax - nmin + nbbucket - 1) / nbbucket;
+        const int szbucket = std::max(1, (nmax - nmin + nbbucket - 1) / nbbucket);
         std::vector<int> qs(Q);
         std::iota(qs.begin(), qs.end(), 0);
         std::sort(qs.begin(), qs.end(), [&](int q1, int q2) {
