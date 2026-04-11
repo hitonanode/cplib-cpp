@@ -14,9 +14,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: random/rand_nondeterministic.hpp
     title: random/rand_nondeterministic.hpp
-  - icon: ':heavy_check_mark:'
-    path: random/xorshift.hpp
-    title: random/xorshift.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -42,14 +39,9 @@ data:
     \ i = __builtin_ctz(s);\n        f[s] = f[s - (1 << i)] + f[(s - (1 << i)) & ~edge[i]];\n\
     \    }\n    for (int k = 1; k < V; k++) {\n        for (int s = 0; s < S; s++)\
     \ g[s] *= f[s];\n        if (std::accumulate(g.begin(), g.end(), MODINT()).val())\
-    \ return k;\n    }\n    return V;\n};\n#line 2 \"random/xorshift.hpp\"\n#include\
-    \ <cstdint>\n\n// CUT begin\nuint32_t rand_int() // XorShift random integer generator\n\
-    {\n    static uint32_t x = 123456789, y = 362436069, z = 521288629, w = 88675123;\n\
-    \    uint32_t t = x ^ (x << 11);\n    x = y;\n    y = z;\n    z = w;\n    return\
-    \ w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));\n}\ndouble rand_double() { return (double)rand_int()\
-    \ / UINT32_MAX; }\n#line 3 \"number/factorize.hpp\"\n#include <algorithm>\n#include\
-    \ <array>\n#include <cassert>\n#line 8 \"number/factorize.hpp\"\n\nnamespace SPRP\
-    \ {\n// http://miller-rabin.appspot.com/\nconst std::vector<std::vector<__int128>>\
+    \ return k;\n    }\n    return V;\n};\n#line 2 \"number/factorize.hpp\"\n#include\
+    \ <algorithm>\n#include <cassert>\n#include <cstdint>\n#line 7 \"number/factorize.hpp\"\
+    \n\nnamespace SPRP {\n// http://miller-rabin.appspot.com/\nconst std::vector<std::vector<__int128>>\
     \ bases{\n    {126401071349994536},                              // < 291831\n\
     \    {336781006125, 9639812373923155},                  // < 1050535501 (1e9)\n\
     \    {2, 2570940, 211991001, 3749873356},               // < 47636622961201 (4e13)\n\
@@ -58,63 +50,68 @@ data:
     \ if (n < 1050535501) {\n        return 1;\n    } else if (n < 47636622961201)\n\
     \        return 2;\n    else { return 3; }\n}\n} // namespace SPRP\n\n// Miller-Rabin\
     \ primality test\n// https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95\n\
-    // Complexity: O(lg n) per query\nstruct {\n    long long modpow(__int128 x, __int128\
-    \ n, long long mod) noexcept {\n        __int128 ret = 1;\n        for (x %= mod;\
-    \ n; x = x * x % mod, n >>= 1) ret = (n & 1) ? ret * x % mod : ret;\n        return\
-    \ ret;\n    }\n    bool operator()(long long n) noexcept {\n        if (n < 2)\
-    \ return false;\n        if (n % 2 == 0) return n == 2;\n        int s = __builtin_ctzll(n\
-    \ - 1);\n\n        for (__int128 a : SPRP::bases[SPRP::get_id(n)]) {\n       \
-    \     if (a % n == 0) continue;\n            a = modpow(a, (n - 1) >> s, n);\n\
-    \            bool may_composite = true;\n            if (a == 1) continue;\n \
-    \           for (int r = s; r--; a = a * a % n) {\n                if (a == n\
+    // Complexity: O(lg n) per query\ninline struct {\n    long long modpow(__int128\
+    \ x, __int128 n, long long mod) noexcept {\n        __int128 ret = 1;\n      \
+    \  for (x %= mod; n; x = x * x % mod, n >>= 1) ret = (n & 1) ? ret * x % mod :\
+    \ ret;\n        return ret;\n    }\n    bool operator()(long long n) noexcept\
+    \ {\n        if (n < 2) return false;\n        if (n % 2 == 0) return n == 2;\n\
+    \        int s = __builtin_ctzll(n - 1);\n\n        for (__int128 a : SPRP::bases[SPRP::get_id(n)])\
+    \ {\n            if (a % n == 0) continue;\n            a = modpow(a, (n - 1)\
+    \ >> s, n);\n            bool may_composite = true;\n            if (a == 1) continue;\n\
+    \            for (int r = s; r--; a = a * a % n) {\n                if (a == n\
     \ - 1) may_composite = false;\n            }\n            if (may_composite) return\
-    \ false;\n        }\n        return true;\n    }\n} is_prime;\n\nstruct {\n  \
-    \  // Pollard's rho algorithm: find factor greater than 1\n    long long find_factor(long\
-    \ long n) {\n        assert(n > 1);\n        if (n % 2 == 0) return 2;\n     \
-    \   if (is_prime(n)) return n;\n        long long c = 1;\n        auto f = [&](__int128\
-    \ x) -> long long { return (x * x + c) % n; };\n\n        for (int t = 1;; t++)\
-    \ {\n            for (c = 0; c == 0 or c + 2 == n;) c = rand_int() % n;\n    \
-    \        long long x0 = t, m = std::max(n >> 3, 1LL), x, ys, y = x0, r = 1, g,\
-    \ q = 1;\n            do {\n                x = y;\n                for (int i\
-    \ = r; i--;) y = f(y);\n                long long k = 0;\n                do {\n\
-    \                    ys = y;\n                    for (int i = std::min(m, r -\
-    \ k); i--;)\n                        y = f(y), q = __int128(q) * std::abs(x -\
-    \ y) % n;\n                    g = std::__gcd<long long>(q, n);\n            \
-    \        k += m;\n                } while (k < r and g <= 1);\n              \
-    \  r <<= 1;\n            } while (g <= 1);\n            if (g == n) {\n      \
-    \          do {\n                    ys = f(ys);\n                    g = std::__gcd(std::abs(x\
-    \ - ys), n);\n                } while (g <= 1);\n            }\n            if\
-    \ (g != n) return g;\n        }\n    }\n\n    std::vector<long long> operator()(long\
-    \ long n) {\n        std::vector<long long> ret;\n        while (n > 1) {\n  \
-    \          long long f = find_factor(n);\n            if (f < n) {\n         \
-    \       auto tmp = operator()(f);\n                ret.insert(ret.end(), tmp.begin(),\
-    \ tmp.end());\n            } else\n                ret.push_back(n);\n       \
-    \     n /= f;\n        }\n        std::sort(ret.begin(), ret.end());\n       \
-    \ return ret;\n    }\n    long long euler_phi(long long n) {\n        long long\
-    \ ret = 1, last = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last\
-    \ != p), last = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 3\
-    \ \"number/modint_runtime.hpp\"\n#include <iostream>\n#include <set>\n#line 6\
-    \ \"number/modint_runtime.hpp\"\n\nstruct ModIntRuntime {\nprivate:\n    static\
-    \ int md;\n\npublic:\n    using lint = long long;\n    static int mod() { return\
-    \ md; }\n    int val_;\n    static std::vector<ModIntRuntime> &facs() {\n    \
-    \    static std::vector<ModIntRuntime> facs_;\n        return facs_;\n    }\n\
-    \    static int &get_primitive_root() {\n        static int primitive_root_ =\
-    \ 0;\n        if (!primitive_root_) {\n            primitive_root_ = [&]() {\n\
-    \                std::set<int> fac;\n                int v = md - 1;\n       \
-    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
-    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
-    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
-    \                    for (auto i : fac)\n                        if (ModIntRuntime(g).power((md\
-    \ - 1) / i) == 1) {\n                            ok = false;\n               \
-    \             break;\n                        }\n                    if (ok) return\
-    \ g;\n                }\n                return -1;\n            }();\n      \
-    \  }\n        return primitive_root_;\n    }\n    static void set_mod(const int\
-    \ &m) {\n        if (md != m) facs().clear();\n        md = m;\n        get_primitive_root()\
-    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ?\
-    \ v - md : v);\n        return *this;\n    }\n    int val() const noexcept { return\
-    \ val_; }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v\
-    \ % md + md); }\n    explicit operator bool() const { return val_ != 0; }\n  \
-    \  ModIntRuntime operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \ false;\n        }\n        return true;\n    }\n} is_prime;\n\ninline struct\
+    \ {\n    static uint32_t xorshift() noexcept {\n        static uint32_t x = 123456789;\n\
+    \        static uint32_t y = 362436069;\n        static uint32_t z = 521288629;\n\
+    \        static uint32_t w = 88675123;\n        uint32_t t = x ^ (x << 11);\n\
+    \        x = y;\n        y = z;\n        z = w;\n        return w = (w ^ (w >>\
+    \ 19)) ^ (t ^ (t >> 8));\n    }\n\n    // Pollard's rho algorithm: find factor\
+    \ greater than 1\n    long long find_factor(long long n) {\n        assert(n >\
+    \ 1);\n        if (n % 2 == 0) return 2;\n        if (is_prime(n)) return n;\n\
+    \        long long c = 1;\n        auto f = [&](__int128 x) -> long long { return\
+    \ (x * x + c) % n; };\n\n        for (int t = 1;; t++) {\n            for (c =\
+    \ 0; c == 0 or c + 2 == n;) c = xorshift() % n;\n            long long x0 = t,\
+    \ m = std::max(n >> 3, 1LL), x, ys, y = x0, r = 1, g, q = 1;\n            do {\n\
+    \                x = y;\n                for (int i = r; i--;) y = f(y);\n   \
+    \             long long k = 0;\n                do {\n                    ys =\
+    \ y;\n                    for (int i = std::min(m, r - k); i--;)\n           \
+    \             y = f(y), q = __int128(q) * std::abs(x - y) % n;\n             \
+    \       g = std::gcd<long long>(q, n);\n                    k += m;\n        \
+    \        } while (k < r and g <= 1);\n                r <<= 1;\n            }\
+    \ while (g <= 1);\n            if (g == n) {\n                do {\n         \
+    \           ys = f(ys);\n                    g = std::gcd(std::abs(x - ys), n);\n\
+    \                } while (g <= 1);\n            }\n            if (g != n) return\
+    \ g;\n        }\n    }\n\n    std::vector<long long> operator()(long long n) {\n\
+    \        std::vector<long long> ret;\n        while (n > 1) {\n            long\
+    \ long f = find_factor(n);\n            if (f < n) {\n                auto tmp\
+    \ = operator()(f);\n                ret.insert(ret.end(), tmp.begin(), tmp.end());\n\
+    \            } else\n                ret.push_back(n);\n            n /= f;\n\
+    \        }\n        std::sort(ret.begin(), ret.end());\n        return ret;\n\
+    \    }\n    long long euler_phi(long long n) {\n        long long ret = 1, last\
+    \ = -1;\n        for (auto p : this->operator()(n)) ret *= p - (last != p), last\
+    \ = p;\n        return ret;\n    }\n} FactorizeLonglong;\n#line 3 \"number/modint_runtime.hpp\"\
+    \n#include <iostream>\n#include <set>\n#line 6 \"number/modint_runtime.hpp\"\n\
+    \nstruct ModIntRuntime {\nprivate:\n    static int md;\n\npublic:\n    using lint\
+    \ = long long;\n    static int mod() { return md; }\n    int val_;\n    static\
+    \ std::vector<ModIntRuntime> &facs() {\n        static std::vector<ModIntRuntime>\
+    \ facs_;\n        return facs_;\n    }\n    static int &get_primitive_root() {\n\
+    \        static int primitive_root_ = 0;\n        if (!primitive_root_) {\n  \
+    \          primitive_root_ = [&]() {\n                std::set<int> fac;\n   \
+    \             int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
+    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
+    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
+    \                    bool ok = true;\n                    for (auto i : fac)\n\
+    \                        if (ModIntRuntime(g).power((md - 1) / i) == 1) {\n  \
+    \                          ok = false;\n                            break;\n \
+    \                       }\n                    if (ok) return g;\n           \
+    \     }\n                return -1;\n            }();\n        }\n        return\
+    \ primitive_root_;\n    }\n    static void set_mod(const int &m) {\n        if\
+    \ (md != m) facs().clear();\n        md = m;\n        get_primitive_root() = 0;\n\
+    \    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ? v - md\
+    \ : v);\n        return *this;\n    }\n    int val() const noexcept { return val_;\
+    \ }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v %\
+    \ md + md); }\n    explicit operator bool() const { return val_ != 0; }\n    ModIntRuntime\
+    \ operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
     \ + x.val_);\n    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const\
     \ {\n        return ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n\
     \    ModIntRuntime operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
@@ -195,13 +192,12 @@ data:
   dependsOn:
   - graph/chromatic_number.hpp
   - number/factorize.hpp
-  - random/xorshift.hpp
   - number/modint_runtime.hpp
   - random/rand_nondeterministic.hpp
   isVerificationFile: true
   path: graph/test/chromatic_number.test.cpp
   requiredBy: []
-  timestamp: '2025-08-25 00:47:28+09:00'
+  timestamp: '2026-04-11 14:52:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/chromatic_number.test.cpp

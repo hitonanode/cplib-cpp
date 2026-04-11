@@ -124,15 +124,16 @@ data:
     \ ModInt<md>::facinvs = {1};\ntemplate <int md> std::vector<ModInt<md>> ModInt<md>::invs\
     \ = {0};\n\nusing ModInt998244353 = ModInt<998244353>;\n// using mint = ModInt<998244353>;\n\
     // using mint = ModInt<1000000007>;\n#line 2 \"utilities/pow_sum.hpp\"\n#include\
-    \ <algorithm>\n#include <utility>\n\n// CUT begin\n// {x^n, x^0 + ... + x^(n -\
-    \ 1)} for n >= 1\n// Verify: ABC212H\ntemplate <typename T, typename Int> std::pair<T,\
-    \ T> pow_sum(T x, Int n) {\n    T sum = 1, p = x; // ans = x^0 + ... + x^(len\
-    \ - 1), p = x^len\n    for (int d = std::__lg(n) - 1; d >= 0; d--) {\n       \
-    \ sum = sum * (p + 1);\n        p *= p;\n        if ((n >> d) & 1) {\n       \
-    \     sum += p;\n            p *= x;\n        }\n    }\n    return {p, sum};\n\
-    }\n#line 7 \"utilities/test/pow.test.cpp\"\nusing namespace std;\n\nint main()\
-    \ {\n    ModInt<1000000007> M;\n    int N;\n    cin >> M >> N;\n    auto ret =\
-    \ pow(M, N);\n    assert(pow_sum(M, N).first == ret);\n    assert((pow_sum(M,\
+    \ <bit>\n#include <type_traits>\n#include <utility>\n\n// {x^n, x^0 + ... + x^(n\
+    \ - 1)} for n >= 0\n// Verify: ABC212H\ntemplate <typename T, typename Int> std::pair<T,\
+    \ T> pow_sum(T x, Int n) {\n    using Uint = std::make_unsigned_t<Int>;\n    if\
+    \ (n == 0) return {1, 0};\n    T sum = 1, p = x; // ans = x^0 + ... + x^(len -\
+    \ 1), p = x^len\n    for (int d = std::bit_width(Uint(n)) - 2; d >= 0; d--) {\n\
+    \        sum = sum * (p + 1);\n        p *= p;\n        if ((n >> d) & 1) {\n\
+    \            sum += p;\n            p *= x;\n        }\n    }\n    return {p,\
+    \ sum};\n}\n#line 7 \"utilities/test/pow.test.cpp\"\nusing namespace std;\n\n\
+    int main() {\n    ModInt<1000000007> M;\n    int N;\n    cin >> M >> N;\n    auto\
+    \ ret = pow(M, N);\n    assert(pow_sum(M, N).first == ret);\n    assert((pow_sum(M,\
     \ N).second) * (M - 1) + 1 == ret);\n\n    cout << ret << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B\"\
     \n#include \"../pow.hpp\"\n#include \"../../modint.hpp\"\n#include \"../pow_sum.hpp\"\
@@ -147,7 +148,7 @@ data:
   isVerificationFile: true
   path: utilities/test/pow.test.cpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-04-11 15:33:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: utilities/test/pow.test.cpp

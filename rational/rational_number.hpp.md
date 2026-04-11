@@ -14,19 +14,19 @@ data:
     \ / 0)} \uFF08\u6709\u7406\u6570\uFF09\n// Verified: Yandex Cup 2022 Final E https://contest.yandex.com/contest/42710/problems/K\n\
     template <class Int, bool AutoReduce = false> struct Rational {\n    Int num,\
     \ den; // den >= 0\n\n    static constexpr Int my_gcd(Int a, Int b) {\n      \
-    \  // return __gcd(a, b);\n        if (a < 0) a = -a;\n        if (b < 0) b =\
-    \ -b;\n        while (a and b) {\n            if (a > b) {\n                a\
-    \ %= b;\n            } else {\n                b %= a;\n            }\n      \
-    \  }\n        return a + b;\n    }\n\n    constexpr Rational(Int num = 0, Int\
-    \ den = 1) : num(num), den(den) { normalize(); }\n    constexpr void normalize()\
-    \ noexcept {\n        if constexpr (AutoReduce) { // reduction\n            Int\
-    \ g = my_gcd(num, den);\n            if (g) num /= g, den /= g;\n        } else\
-    \ {\n            if (den == 0) {\n                if (num > 1) num = 1;\n    \
-    \            if (num < -1) num = -1;\n            }\n        }\n        if (den\
-    \ < 0) num = -num, den = -den; // denominator >= 0\n    }\n\n    constexpr bool\
-    \ is_finite() const noexcept { return den != 0; }\n    constexpr bool is_infinite_or_nan()\
-    \ const noexcept { return den == 0; }\n\n    constexpr Rational operator+(const\
-    \ Rational &r) const noexcept {\n        if (is_infinite_or_nan() and r.is_infinite_or_nan())\
+    \  // return gcd(a, b);\n        if (a < 0) a = -a;\n        if (b < 0) b = -b;\n\
+    \        while (a and b) {\n            if (a > b) {\n                a %= b;\n\
+    \            } else {\n                b %= a;\n            }\n        }\n   \
+    \     return a + b;\n    }\n\n    constexpr Rational(Int num = 0, Int den = 1)\
+    \ : num(num), den(den) { normalize(); }\n    constexpr void normalize() noexcept\
+    \ {\n        if constexpr (AutoReduce) { // reduction\n            Int g = my_gcd(num,\
+    \ den);\n            if (g) num /= g, den /= g;\n        } else {\n          \
+    \  if (den == 0) {\n                if (num > 1) num = 1;\n                if\
+    \ (num < -1) num = -1;\n            }\n        }\n        if (den < 0) num = -num,\
+    \ den = -den; // denominator >= 0\n    }\n\n    constexpr bool is_finite() const\
+    \ noexcept { return den != 0; }\n    constexpr bool is_infinite_or_nan() const\
+    \ noexcept { return den == 0; }\n\n    constexpr Rational operator+(const Rational\
+    \ &r) const noexcept {\n        if (is_infinite_or_nan() and r.is_infinite_or_nan())\
     \ return Rational(num + r.num, 0);\n        return Rational(num * r.den + den\
     \ * r.num, den * r.den);\n    }\n    constexpr Rational operator-(const Rational\
     \ &r) const noexcept {\n        if (is_infinite_or_nan() and r.is_infinite_or_nan())\
@@ -73,19 +73,19 @@ data:
     \n// Verified: Yandex Cup 2022 Final E https://contest.yandex.com/contest/42710/problems/K\n\
     template <class Int, bool AutoReduce = false> struct Rational {\n    Int num,\
     \ den; // den >= 0\n\n    static constexpr Int my_gcd(Int a, Int b) {\n      \
-    \  // return __gcd(a, b);\n        if (a < 0) a = -a;\n        if (b < 0) b =\
-    \ -b;\n        while (a and b) {\n            if (a > b) {\n                a\
-    \ %= b;\n            } else {\n                b %= a;\n            }\n      \
-    \  }\n        return a + b;\n    }\n\n    constexpr Rational(Int num = 0, Int\
-    \ den = 1) : num(num), den(den) { normalize(); }\n    constexpr void normalize()\
-    \ noexcept {\n        if constexpr (AutoReduce) { // reduction\n            Int\
-    \ g = my_gcd(num, den);\n            if (g) num /= g, den /= g;\n        } else\
-    \ {\n            if (den == 0) {\n                if (num > 1) num = 1;\n    \
-    \            if (num < -1) num = -1;\n            }\n        }\n        if (den\
-    \ < 0) num = -num, den = -den; // denominator >= 0\n    }\n\n    constexpr bool\
-    \ is_finite() const noexcept { return den != 0; }\n    constexpr bool is_infinite_or_nan()\
-    \ const noexcept { return den == 0; }\n\n    constexpr Rational operator+(const\
-    \ Rational &r) const noexcept {\n        if (is_infinite_or_nan() and r.is_infinite_or_nan())\
+    \  // return gcd(a, b);\n        if (a < 0) a = -a;\n        if (b < 0) b = -b;\n\
+    \        while (a and b) {\n            if (a > b) {\n                a %= b;\n\
+    \            } else {\n                b %= a;\n            }\n        }\n   \
+    \     return a + b;\n    }\n\n    constexpr Rational(Int num = 0, Int den = 1)\
+    \ : num(num), den(den) { normalize(); }\n    constexpr void normalize() noexcept\
+    \ {\n        if constexpr (AutoReduce) { // reduction\n            Int g = my_gcd(num,\
+    \ den);\n            if (g) num /= g, den /= g;\n        } else {\n          \
+    \  if (den == 0) {\n                if (num > 1) num = 1;\n                if\
+    \ (num < -1) num = -1;\n            }\n        }\n        if (den < 0) num = -num,\
+    \ den = -den; // denominator >= 0\n    }\n\n    constexpr bool is_finite() const\
+    \ noexcept { return den != 0; }\n    constexpr bool is_infinite_or_nan() const\
+    \ noexcept { return den == 0; }\n\n    constexpr Rational operator+(const Rational\
+    \ &r) const noexcept {\n        if (is_infinite_or_nan() and r.is_infinite_or_nan())\
     \ return Rational(num + r.num, 0);\n        return Rational(num * r.den + den\
     \ * r.num, den * r.den);\n    }\n    constexpr Rational operator-(const Rational\
     \ &r) const noexcept {\n        if (is_infinite_or_nan() and r.is_infinite_or_nan())\
@@ -131,7 +131,7 @@ data:
   isVerificationFile: false
   path: rational/rational_number.hpp
   requiredBy: []
-  timestamp: '2026-03-01 21:04:23+09:00'
+  timestamp: '2026-04-11 14:52:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: rational/rational_number.hpp

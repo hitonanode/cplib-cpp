@@ -453,7 +453,10 @@ data:
         \u6570\u306E\u7D2F\u7A4D\u548C\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/bare_mod_algebra.hpp
-      title: number/bare_mod_algebra.hpp
+      title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\
+        \u6570\u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\
+        \u5B9A\u7406\u30FB\u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\u306A\u3069\u306E\
+        \u5B9F\u88C5\uFF09"
     - icon: ':warning:'
       path: number/big_combination_logarithm.hpp
       title: number/big_combination_logarithm.hpp
@@ -513,6 +516,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/nimber.hpp
       title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: number/pow_mod.hpp
+      title: "Modular exponentiation \uFF08\u3079\u304D\u4E57 mod\uFF09"
     - icon: ':heavy_check_mark:'
       path: number/primitive_root.hpp
       title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\

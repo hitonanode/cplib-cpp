@@ -11,25 +11,27 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"utilities/pow_sum.hpp\"\n#include <algorithm>\n#include\
-    \ <utility>\n\n// CUT begin\n// {x^n, x^0 + ... + x^(n - 1)} for n >= 1\n// Verify:\
-    \ ABC212H\ntemplate <typename T, typename Int> std::pair<T, T> pow_sum(T x, Int\
-    \ n) {\n    T sum = 1, p = x; // ans = x^0 + ... + x^(len - 1), p = x^len\n  \
-    \  for (int d = std::__lg(n) - 1; d >= 0; d--) {\n        sum = sum * (p + 1);\n\
+  bundledCode: "#line 2 \"utilities/pow_sum.hpp\"\n#include <bit>\n#include <type_traits>\n\
+    #include <utility>\n\n// {x^n, x^0 + ... + x^(n - 1)} for n >= 0\n// Verify: ABC212H\n\
+    template <typename T, typename Int> std::pair<T, T> pow_sum(T x, Int n) {\n  \
+    \  using Uint = std::make_unsigned_t<Int>;\n    if (n == 0) return {1, 0};\n \
+    \   T sum = 1, p = x; // ans = x^0 + ... + x^(len - 1), p = x^len\n    for (int\
+    \ d = std::bit_width(Uint(n)) - 2; d >= 0; d--) {\n        sum = sum * (p + 1);\n\
     \        p *= p;\n        if ((n >> d) & 1) {\n            sum += p;\n       \
     \     p *= x;\n        }\n    }\n    return {p, sum};\n}\n"
-  code: "#pragma once\n#include <algorithm>\n#include <utility>\n\n// CUT begin\n\
-    // {x^n, x^0 + ... + x^(n - 1)} for n >= 1\n// Verify: ABC212H\ntemplate <typename\
-    \ T, typename Int> std::pair<T, T> pow_sum(T x, Int n) {\n    T sum = 1, p = x;\
-    \ // ans = x^0 + ... + x^(len - 1), p = x^len\n    for (int d = std::__lg(n) -\
-    \ 1; d >= 0; d--) {\n        sum = sum * (p + 1);\n        p *= p;\n        if\
-    \ ((n >> d) & 1) {\n            sum += p;\n            p *= x;\n        }\n  \
-    \  }\n    return {p, sum};\n}\n"
+  code: "#pragma once\n#include <bit>\n#include <type_traits>\n#include <utility>\n\
+    \n// {x^n, x^0 + ... + x^(n - 1)} for n >= 0\n// Verify: ABC212H\ntemplate <typename\
+    \ T, typename Int> std::pair<T, T> pow_sum(T x, Int n) {\n    using Uint = std::make_unsigned_t<Int>;\n\
+    \    if (n == 0) return {1, 0};\n    T sum = 1, p = x; // ans = x^0 + ... + x^(len\
+    \ - 1), p = x^len\n    for (int d = std::bit_width(Uint(n)) - 2; d >= 0; d--)\
+    \ {\n        sum = sum * (p + 1);\n        p *= p;\n        if ((n >> d) & 1)\
+    \ {\n            sum += p;\n            p *= x;\n        }\n    }\n    return\
+    \ {p, sum};\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: utilities/pow_sum.hpp
   requiredBy: []
-  timestamp: '2021-08-01 20:22:45+09:00'
+  timestamp: '2026-04-11 15:33:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - utilities/test/pow.test.cpp

@@ -9,7 +9,10 @@ data:
     title: modint.hpp
   - icon: ':heavy_check_mark:'
     path: number/bare_mod_algebra.hpp
-    title: number/bare_mod_algebra.hpp
+    title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\u6570\
+      \u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\u5B9A\
+      \u7406\u30FB\u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\u306A\u3069\u306E\u5B9F\
+      \u88C5\uFF09"
   - icon: ':heavy_check_mark:'
     path: tree/centroid_decomposition.hpp
     title: "Centroid decomposition \uFF08\u68EE\u306E\u91CD\u5FC3\u5206\u89E3\uFF09"
@@ -185,87 +188,82 @@ data:
     \            a[i] = garner_ntt_(ntt0[i].val(), ntt1[i].val(), ntt2[i].val(), mod);\n\
     \    }\n    return a;\n}\n\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(const\
     \ std::vector<MODINT> &a, const std::vector<MODINT> &b) {\n    return nttconv<MODINT>(a,\
-    \ b, false);\n}\n#line 5 \"number/bare_mod_algebra.hpp\"\n#include <utility>\n\
-    #line 7 \"number/bare_mod_algebra.hpp\"\n\n// CUT begin\n// Solve ax+by=gcd(a,\
-    \ b)\ntemplate <class Int> Int extgcd(Int a, Int b, Int &x, Int &y) {\n    Int\
-    \ d = a;\n    if (b != 0) {\n        d = extgcd(b, a % b, y, x), y -= (a / b)\
-    \ * x;\n    } else {\n        x = 1, y = 0;\n    }\n    return d;\n}\n// Calculate\
-    \ a^(-1) (MOD m) s if gcd(a, m) == 1\n// Calculate x s.t. ax == gcd(a, m) MOD\
-    \ m\ntemplate <class Int> Int mod_inverse(Int a, Int m) {\n    Int x, y;\n   \
-    \ extgcd<Int>(a, m, x, y);\n    x %= m;\n    return x + (x < 0) * m;\n}\n\n//\
-    \ Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a, b), xa = g MOD b, 0 <= x\
-    \ < b/g\ntemplate <class Int> /* constexpr */ std::pair<Int, Int> inv_gcd(Int\
-    \ a, Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a == 0) return {b,\
-    \ 0};\n    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n        Int u =\
-    \ s / t;\n        s -= t * u, m0 -= m1 * u;\n        auto tmp = s;\n        s\
-    \ = t, t = tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0 < 0) m0 += b /\
-    \ s;\n    return {s, m0};\n}\n\ntemplate <class Int>\n/* constexpr */ std::pair<Int,\
-    \ Int> crt(const std::vector<Int> &r, const std::vector<Int> &m) {\n    assert(r.size()\
-    \ == m.size());\n    int n = int(r.size());\n    // Contracts: 0 <= r0 < m0\n\
-    \    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n; i++) {\n        assert(1\
-    \ <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n        if (r1 < 0) r1\
-    \ += m1;\n        if (m0 < m1) {\n            std::swap(r0, r1);\n           \
-    \ std::swap(m0, m1);\n        }\n        if (m0 % m1 == 0) {\n            if (r0\
-    \ % m1 != r1) return {0, 0};\n            continue;\n        }\n        Int g,\
-    \ im;\n        std::tie(g, im) = inv_gcd<Int>(m0, m1);\n\n        Int u1 = m1\
-    \ / g;\n        if ((r1 - r0) % g) return {0, 0};\n\n        Int x = (r1 - r0)\
-    \ / g % u1 * im % u1;\n        r0 += x * m0;\n        m0 *= u1;\n        if (r0\
-    \ < 0) r0 += m0;\n    }\n    return {r0, m0};\n}\n\n// \u87FB\u672C P.262\n//\
-    \ \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\u3092\u5229\u7528\u3057\u3066\uFF0C\u8272\
-    \u3005\u306A\u7D20\u6570\u3067\u5272\u3063\u305F\u4F59\u308A\u304B\u3089\u5143\
-    \u306E\u5024\u3092\u5FA9\u5143\n// \u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\
-    \ A * x = B mod M \u306E\u89E3\n// Requirement: M[i] > 0\n// Output: x = first\
-    \ MOD second (if solution exists), (0, 0) (otherwise)\ntemplate <class Int>\n\
-    std::pair<Int, Int>\nlinear_congruence(const std::vector<Int> &A, const std::vector<Int>\
-    \ &B, const std::vector<Int> &M) {\n    Int r = 0, m = 1;\n    assert(A.size()\
-    \ == M.size());\n    assert(B.size() == M.size());\n    for (int i = 0; i < (int)A.size();\
-    \ i++) {\n        assert(M[i] > 0);\n        const Int ai = A[i] % M[i];\n   \
-    \     Int a = ai * m, b = B[i] - ai * r, d = std::__gcd(M[i], a);\n        if\
-    \ (b % d != 0) {\n            return std::make_pair(0, 0); // \u89E3\u306A\u3057\
-    \n        }\n        Int t = b / d * mod_inverse<Int>(a / d, M[i] / d) % (M[i]\
-    \ / d);\n        r += m * t;\n        m *= M[i] / d;\n    }\n    return std::make_pair((r\
-    \ < 0 ? r + m : r), m);\n}\n\ntemplate <class Int = int, class Long = long long>\
-    \ Int pow_mod(Int x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2\
-    \ <= sizeof(Long), \"Watch out for overflow\");\n    if (md == 1) return 0;\n\
-    \    Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x\
-    \ % md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n\
-    }\n#line 5 \"tree/centroid_decomposition.hpp\"\n\n// Centroid Decomposition\n\
-    // Verification: https://yukicoder.me/problems/no/2892\n// find_current_centroids(int\
-    \ r, int conn_size): Enumerate centroid(s) of the subtree which `r` belongs to.\n\
-    struct CentroidDecomposition {\n    int V;\n    std::vector<std::vector<int>>\
-    \ to;\n\nprivate:\n    std::vector<int> is_alive;\n    std::vector<int> subtree_size;\n\
-    \n    template <class F> void decompose(int r, int conn_size, F callback) {\n\n\
-    \        const int c = find_current_centroids(r, conn_size).first;\n        is_alive.at(c)\
-    \ = 0;\n\n        callback(c);\n\n        for (int nxt : to.at(c)) {\n       \
-    \     if (!is_alive.at(nxt)) continue;\n            int next_size = subtree_size.at(nxt);\n\
-    \            if (subtree_size.at(nxt) > subtree_size.at(c))\n                next_size\
-    \ = subtree_size.at(r) - subtree_size.at(c);\n            decompose(nxt, next_size,\
-    \ callback);\n        }\n    }\n\npublic:\n    CentroidDecomposition(int v = 0)\
-    \ : V(v), to(v), is_alive(v, 1), subtree_size(v) {}\n\n    CentroidDecomposition(int\
-    \ v, const std::vector<std::pair<int, int>> &tree_edges)\n        : CentroidDecomposition(v)\
-    \ {\n        for (auto e : tree_edges) add_edge(e.first, e.second);\n    }\n\n\
-    \    void add_edge(int v1, int v2) {\n        assert(0 <= v1 and v1 < V and 0\
-    \ <= v2 and v2 < V);\n        assert(v1 != v2);\n        to.at(v1).push_back(v2),\
-    \ to.at(v2).emplace_back(v1);\n    }\n\n    std::pair<int, int> find_current_centroids(int\
-    \ r, int conn_size) {\n        assert(is_alive.at(r));\n\n        const int thres\
-    \ = conn_size / 2;\n\n        int c1 = -1, c2 = -1;\n\n        auto rec_search\
-    \ = [&](auto &&self, int now, int prv) -> void {\n            bool is_centroid\
-    \ = true;\n            subtree_size.at(now) = 1;\n            for (int nxt : to.at(now))\
-    \ {\n                if (nxt == prv or !is_alive.at(nxt)) continue;\n        \
-    \        self(self, nxt, now);\n                subtree_size.at(now) += subtree_size.at(nxt);\n\
-    \                if (subtree_size.at(nxt) > thres) is_centroid = false;\n    \
-    \        }\n            if (conn_size - subtree_size.at(now) > thres) is_centroid\
-    \ = false;\n\n            if (is_centroid) (c1 < 0 ? c1 : c2) = now;\n       \
-    \ };\n        rec_search(rec_search, r, -1);\n\n        return {c1, c2};\n   \
-    \ }\n\n    template <class F> void run(int r, F callback) {\n        int conn_size\
-    \ = 0;\n\n        auto rec = [&](auto &&self, int now, int prv) -> void {\n  \
-    \          ++conn_size;\n            is_alive.at(now) = 1;\n\n            for\
-    \ (int nxt : to.at(now)) {\n                if (nxt == prv) continue;\n      \
-    \          self(self, nxt, now);\n            }\n        };\n        rec(rec,\
-    \ r, -1);\n\n        decompose(r, conn_size, callback);\n    }\n\n    std::vector<int>\
-    \ centroid_decomposition(int r) {\n        std::vector<int> res;\n        run(r,\
-    \ [&](int v) { res.push_back(v); });\n        return res;\n    }\n};\n#line 5\
-    \ \"tree/frequency_table_of_tree_distance.hpp\"\n\nstruct frequency_table_of_tree_distance\
+    \ b, false);\n}\n#line 4 \"number/bare_mod_algebra.hpp\"\n#include <numeric>\n\
+    #line 6 \"number/bare_mod_algebra.hpp\"\n#include <utility>\n#line 8 \"number/bare_mod_algebra.hpp\"\
+    \n\n// Solve ax+by=gcd(a, b)\ntemplate <class Int> Int extgcd(Int a, Int b, Int\
+    \ &x, Int &y) {\n    Int d = a;\n    if (b != 0) {\n        d = extgcd(b, a %\
+    \ b, y, x), y -= (a / b) * x;\n    } else {\n        x = 1, y = 0;\n    }\n  \
+    \  return d;\n}\n\n// Calculate a^(-1) (MOD m) if gcd(a, m) == 1\n// Calculate\
+    \ x s.t. ax == gcd(a, m) MOD m and 0 <= x < m\ntemplate <class Int> Int inv_mod(Int\
+    \ a, Int m) {\n    Int x, y;\n    extgcd<Int>(a, m, x, y);\n    x %= m;\n    return\
+    \ x + (x < 0) * m;\n}\n\n// Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a,\
+    \ b), xa = g MOD b, 0 <= x < b/g\ntemplate <class Int> /* constexpr */ std::pair<Int,\
+    \ Int> inv_gcd(Int a, Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a\
+    \ == 0) return {b, 0};\n    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
+    \        Int u = s / t;\n        s -= t * u, m0 -= m1 * u;\n        auto tmp =\
+    \ s;\n        s = t, t = tmp, tmp = m0, m0 = m1, m1 = tmp;\n    }\n    if (m0\
+    \ < 0) m0 += b / s;\n    return {s, m0};\n}\n\ntemplate <class Int>\n/* constexpr\
+    \ */ std::pair<Int, Int> crt(const std::vector<Int> &r, const std::vector<Int>\
+    \ &m) {\n    assert(r.size() == m.size());\n    int n = int(r.size());\n    //\
+    \ Contracts: 0 <= r0 < m0\n    Int r0 = 0, m0 = 1;\n    for (int i = 0; i < n;\
+    \ i++) {\n        assert(1 <= m[i]);\n        Int r1 = r[i] % m[i], m1 = m[i];\n\
+    \        if (r1 < 0) r1 += m1;\n        if (m0 < m1) {\n            std::swap(r0,\
+    \ r1);\n            std::swap(m0, m1);\n        }\n        if (m0 % m1 == 0) {\n\
+    \            if (r0 % m1 != r1) return {0, 0};\n            continue;\n      \
+    \  }\n        Int g, im;\n        std::tie(g, im) = inv_gcd<Int>(m0, m1);\n\n\
+    \        Int u1 = m1 / g;\n        if ((r1 - r0) % g) return {0, 0};\n\n     \
+    \   Int x = (r1 - r0) / g % u1 * im % u1;\n        r0 += x * m0;\n        m0 *=\
+    \ u1;\n        if (r0 < 0) r0 += m0;\n    }\n    return {r0, m0};\n}\n\n// \u87FB\
+    \u672C P.262\n// \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\u3092\u5229\u7528\u3057\u3066\
+    \uFF0C\u8272\u3005\u306A\u7D20\u6570\u3067\u5272\u3063\u305F\u4F59\u308A\u304B\
+    \u3089\u5143\u306E\u5024\u3092\u5FA9\u5143\n// \u9023\u7ACB\u7DDA\u5F62\u5408\u540C\
+    \u5F0F A_i x = R_i mod M_i \u306E\u89E3\n// Requirement: M[i] > 0\n// Output:\
+    \ x = first MOD second (if solution exists), (0, 0) (otherwise)\ntemplate <class\
+    \ Int>\nstd::pair<Int, Int>\nlinear_congruence(const std::vector<Int> &A, const\
+    \ std::vector<Int> &R, const std::vector<Int> &M) {\n    Int r = 0, m = 1;\n \
+    \   assert(A.size() == M.size());\n    assert(R.size() == M.size());\n    for\
+    \ (int i = 0; i < (int)A.size(); i++) {\n        assert(M[i] > 0);\n        const\
+    \ Int ai = A[i] % M[i];\n        Int a = ai * m, b = R[i] - ai * r, d = std::gcd(M[i],\
+    \ a);\n        if (b % d != 0) {\n            return std::make_pair(0, 0); //\
+    \ \u89E3\u306A\u3057\n        }\n        Int t = b / d * inv_mod<Int>(a / d, M[i]\
+    \ / d) % (M[i] / d);\n        r += m * t;\n        m *= M[i] / d;\n    }\n   \
+    \ return std::make_pair((r < 0 ? r + m : r), m);\n}\n#line 5 \"tree/centroid_decomposition.hpp\"\
+    \n\n// Centroid Decomposition\n// Verification: https://yukicoder.me/problems/no/2892\n\
+    // find_current_centroids(int r, int conn_size): Enumerate centroid(s) of the\
+    \ subtree which `r` belongs to.\nstruct CentroidDecomposition {\n    int V;\n\
+    \    std::vector<std::vector<int>> to;\n\nprivate:\n    std::vector<int> is_alive;\n\
+    \    std::vector<int> subtree_size;\n\n    template <class F> void decompose(int\
+    \ r, int conn_size, F callback) {\n\n        const int c = find_current_centroids(r,\
+    \ conn_size).first;\n        is_alive.at(c) = 0;\n\n        callback(c);\n\n \
+    \       for (int nxt : to.at(c)) {\n            if (!is_alive.at(nxt)) continue;\n\
+    \            int next_size = subtree_size.at(nxt);\n            if (subtree_size.at(nxt)\
+    \ > subtree_size.at(c))\n                next_size = subtree_size.at(r) - subtree_size.at(c);\n\
+    \            decompose(nxt, next_size, callback);\n        }\n    }\n\npublic:\n\
+    \    CentroidDecomposition(int v = 0) : V(v), to(v), is_alive(v, 1), subtree_size(v)\
+    \ {}\n\n    CentroidDecomposition(int v, const std::vector<std::pair<int, int>>\
+    \ &tree_edges)\n        : CentroidDecomposition(v) {\n        for (auto e : tree_edges)\
+    \ add_edge(e.first, e.second);\n    }\n\n    void add_edge(int v1, int v2) {\n\
+    \        assert(0 <= v1 and v1 < V and 0 <= v2 and v2 < V);\n        assert(v1\
+    \ != v2);\n        to.at(v1).push_back(v2), to.at(v2).emplace_back(v1);\n    }\n\
+    \n    std::pair<int, int> find_current_centroids(int r, int conn_size) {\n   \
+    \     assert(is_alive.at(r));\n\n        const int thres = conn_size / 2;\n\n\
+    \        int c1 = -1, c2 = -1;\n\n        auto rec_search = [&](auto &&self, int\
+    \ now, int prv) -> void {\n            bool is_centroid = true;\n            subtree_size.at(now)\
+    \ = 1;\n            for (int nxt : to.at(now)) {\n                if (nxt == prv\
+    \ or !is_alive.at(nxt)) continue;\n                self(self, nxt, now);\n   \
+    \             subtree_size.at(now) += subtree_size.at(nxt);\n                if\
+    \ (subtree_size.at(nxt) > thres) is_centroid = false;\n            }\n       \
+    \     if (conn_size - subtree_size.at(now) > thres) is_centroid = false;\n\n \
+    \           if (is_centroid) (c1 < 0 ? c1 : c2) = now;\n        };\n        rec_search(rec_search,\
+    \ r, -1);\n\n        return {c1, c2};\n    }\n\n    template <class F> void run(int\
+    \ r, F callback) {\n        int conn_size = 0;\n\n        auto rec = [&](auto\
+    \ &&self, int now, int prv) -> void {\n            ++conn_size;\n            is_alive.at(now)\
+    \ = 1;\n\n            for (int nxt : to.at(now)) {\n                if (nxt ==\
+    \ prv) continue;\n                self(self, nxt, now);\n            }\n     \
+    \   };\n        rec(rec, r, -1);\n\n        decompose(r, conn_size, callback);\n\
+    \    }\n\n    std::vector<int> centroid_decomposition(int r) {\n        std::vector<int>\
+    \ res;\n        run(r, [&](int v) { res.push_back(v); });\n        return res;\n\
+    \    }\n};\n#line 5 \"tree/frequency_table_of_tree_distance.hpp\"\n\nstruct frequency_table_of_tree_distance\
     \ {\n    std::vector<std::vector<int>> tos;\n    std::vector<int> cd;\n    std::vector<std::pair<int,\
     \ int>> tmp;\n    std::vector<int> alive;\n\n    void _dfs(int now, int prv, int\
     \ depth) {\n        // if (int(tmp.size()) <= depth) tmp.resize(depth + 1, 0);\n\
@@ -330,7 +328,7 @@ data:
   isVerificationFile: true
   path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-04-11 14:52:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/frequency_table_of_tree_distance_ntt.test.cpp

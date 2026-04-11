@@ -3,7 +3,10 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: number/bare_mod_algebra.hpp
-    title: number/bare_mod_algebra.hpp
+    title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\u6570\
+      \u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\u5B9A\
+      \u7406\u30FB\u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\u306A\u3069\u306E\u5B9F\
+      \u88C5\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -20,15 +23,15 @@ data:
     - https://ferin-tech.hatenablog.com/entry/2018/01/17/010829
     - https://judge.yosupo.jp/problem/binomial_coefficient
   bundledCode: "#line 2 \"number/bare_mod_algebra.hpp\"\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <tuple>\n#include <utility>\n#include <vector>\n\n// CUT\
-    \ begin\n// Solve ax+by=gcd(a, b)\ntemplate <class Int> Int extgcd(Int a, Int\
-    \ b, Int &x, Int &y) {\n    Int d = a;\n    if (b != 0) {\n        d = extgcd(b,\
+    \ <cassert>\n#include <numeric>\n#include <tuple>\n#include <utility>\n#include\
+    \ <vector>\n\n// Solve ax+by=gcd(a, b)\ntemplate <class Int> Int extgcd(Int a,\
+    \ Int b, Int &x, Int &y) {\n    Int d = a;\n    if (b != 0) {\n        d = extgcd(b,\
     \ a % b, y, x), y -= (a / b) * x;\n    } else {\n        x = 1, y = 0;\n    }\n\
-    \    return d;\n}\n// Calculate a^(-1) (MOD m) s if gcd(a, m) == 1\n// Calculate\
-    \ x s.t. ax == gcd(a, m) MOD m\ntemplate <class Int> Int mod_inverse(Int a, Int\
-    \ m) {\n    Int x, y;\n    extgcd<Int>(a, m, x, y);\n    x %= m;\n    return x\
-    \ + (x < 0) * m;\n}\n\n// Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a, b),\
-    \ xa = g MOD b, 0 <= x < b/g\ntemplate <class Int> /* constexpr */ std::pair<Int,\
+    \    return d;\n}\n\n// Calculate a^(-1) (MOD m) if gcd(a, m) == 1\n// Calculate\
+    \ x s.t. ax == gcd(a, m) MOD m and 0 <= x < m\ntemplate <class Int> Int inv_mod(Int\
+    \ a, Int m) {\n    Int x, y;\n    extgcd<Int>(a, m, x, y);\n    x %= m;\n    return\
+    \ x + (x < 0) * m;\n}\n\n// Require: 1 <= b\n// return: (g, x) s.t. g = gcd(a,\
+    \ b), xa = g MOD b, 0 <= x < b/g\ntemplate <class Int> /* constexpr */ std::pair<Int,\
     \ Int> inv_gcd(Int a, Int b) {\n    a %= b;\n    if (a < 0) a += b;\n    if (a\
     \ == 0) return {b, 0};\n    Int s = b, t = a, m0 = 0, m1 = 1;\n    while (t) {\n\
     \        Int u = s / t;\n        s -= t * u, m0 -= m1 * u;\n        auto tmp =\
@@ -48,24 +51,19 @@ data:
     \u672C P.262\n// \u4E2D\u56FD\u5270\u4F59\u5B9A\u7406\u3092\u5229\u7528\u3057\u3066\
     \uFF0C\u8272\u3005\u306A\u7D20\u6570\u3067\u5272\u3063\u305F\u4F59\u308A\u304B\
     \u3089\u5143\u306E\u5024\u3092\u5FA9\u5143\n// \u9023\u7ACB\u7DDA\u5F62\u5408\u540C\
-    \u5F0F A * x = B mod M \u306E\u89E3\n// Requirement: M[i] > 0\n// Output: x =\
-    \ first MOD second (if solution exists), (0, 0) (otherwise)\ntemplate <class Int>\n\
-    std::pair<Int, Int>\nlinear_congruence(const std::vector<Int> &A, const std::vector<Int>\
-    \ &B, const std::vector<Int> &M) {\n    Int r = 0, m = 1;\n    assert(A.size()\
-    \ == M.size());\n    assert(B.size() == M.size());\n    for (int i = 0; i < (int)A.size();\
-    \ i++) {\n        assert(M[i] > 0);\n        const Int ai = A[i] % M[i];\n   \
-    \     Int a = ai * m, b = B[i] - ai * r, d = std::__gcd(M[i], a);\n        if\
-    \ (b % d != 0) {\n            return std::make_pair(0, 0); // \u89E3\u306A\u3057\
-    \n        }\n        Int t = b / d * mod_inverse<Int>(a / d, M[i] / d) % (M[i]\
-    \ / d);\n        r += m * t;\n        m *= M[i] / d;\n    }\n    return std::make_pair((r\
-    \ < 0 ? r + m : r), m);\n}\n\ntemplate <class Int = int, class Long = long long>\
-    \ Int pow_mod(Int x, long long n, Int md) {\n    static_assert(sizeof(Int) * 2\
-    \ <= sizeof(Long), \"Watch out for overflow\");\n    if (md == 1) return 0;\n\
-    \    Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x\
-    \ % md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n\
-    }\n#line 5 \"number/combination.hpp\"\n\n// nCr mod m = p^q (p: prime, q >= 1)\n\
-    // Can be used for n, r <= 1e18, m <= 1e7\n// Complexity: O(m) (construction),\
-    \ O(log(n)) (per query)\n// https://ferin-tech.hatenablog.com/entry/2018/01/17/010829\n\
+    \u5F0F A_i x = R_i mod M_i \u306E\u89E3\n// Requirement: M[i] > 0\n// Output:\
+    \ x = first MOD second (if solution exists), (0, 0) (otherwise)\ntemplate <class\
+    \ Int>\nstd::pair<Int, Int>\nlinear_congruence(const std::vector<Int> &A, const\
+    \ std::vector<Int> &R, const std::vector<Int> &M) {\n    Int r = 0, m = 1;\n \
+    \   assert(A.size() == M.size());\n    assert(R.size() == M.size());\n    for\
+    \ (int i = 0; i < (int)A.size(); i++) {\n        assert(M[i] > 0);\n        const\
+    \ Int ai = A[i] % M[i];\n        Int a = ai * m, b = R[i] - ai * r, d = std::gcd(M[i],\
+    \ a);\n        if (b % d != 0) {\n            return std::make_pair(0, 0); //\
+    \ \u89E3\u306A\u3057\n        }\n        Int t = b / d * inv_mod<Int>(a / d, M[i]\
+    \ / d) % (M[i] / d);\n        r += m * t;\n        m *= M[i] / d;\n    }\n   \
+    \ return std::make_pair((r < 0 ? r + m : r), m);\n}\n#line 5 \"number/combination.hpp\"\
+    \n\n// nCr mod m = p^q (p: prime, q >= 1)\n// Can be used for n, r <= 1e18, m\
+    \ <= 1e7\n// Complexity: O(m) (construction), O(log(n)) (per query)\n// https://ferin-tech.hatenablog.com/entry/2018/01/17/010829\n\
     struct combination_prime_pow {\n    int p, q, m;\n    std::vector<int> fac, invfac,\
     \ ppow;\n\n    long long _ej(long long n) const {\n        long long ret = 0;\n\
     \        while (n) ret += n, n /= p;\n        return ret;\n    }\n\n    combination_prime_pow(int\
@@ -137,7 +135,7 @@ data:
   isVerificationFile: false
   path: number/combination.hpp
   requiredBy: []
-  timestamp: '2022-11-15 00:34:03+09:00'
+  timestamp: '2026-04-11 14:52:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/combination.test.cpp

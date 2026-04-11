@@ -152,21 +152,20 @@ data:
     \ y;\n            while (t != 1) j++, t *= t;\n            z = z.power(1LL <<\
     \ (e - j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n   \
     \     }\n        return ModIntRuntime(std::min(x.val_, md - x.val_));\n    }\n\
-    };\nint ModIntRuntime::md = 1;\n#line 4 \"number/test/sieve.stress.test.cpp\"\n\
-    #include <algorithm>\n#line 6 \"number/test/sieve.stress.test.cpp\"\n#include\
-    \ <cstdio>\n#line 9 \"number/test/sieve.stress.test.cpp\"\nusing namespace std;\n\
-    \nstruct Case {\n    int SIEVE_SIZE;\n    int MAX;\n};\n\nint euler_phi(int x)\
-    \ {\n    int ret = 0;\n    for (int d = 1; d <= x; d++) ret += (std::__gcd(d,\
-    \ x) == 1);\n    return ret;\n}\n\nvoid test_divisors(Case testcase) {\n    const\
-    \ Sieve sieve(testcase.SIEVE_SIZE);\n    for (int x = 1; x <= testcase.MAX; x++)\
-    \ {\n        auto divs = sieve.divisors(x);\n        std::vector<int> is_div(x\
-    \ + 1);\n        for (auto d : divs) is_div.at(d) = 1;\n        for (int y = 1;\
-    \ y <= x; y++) assert(is_div.at(y) == (x % y == 0));\n    }\n\n    cerr << \"\
-    divisors(): passed\" << endl;\n}\n\nvoid test_euler_of_divisors(Case testcase)\
-    \ {\n    const Sieve sieve(testcase.SIEVE_SIZE);\n    for (int x = 1; x <= testcase.MAX;\
-    \ x++) {\n        auto div2euler = sieve.euler_of_divisors(x);\n        for (auto\
-    \ de : div2euler) {\n            assert(euler_phi(de.first) == de.second);\n \
-    \           assert(x % de.first == 0);\n        }\n        assert(div2euler.size()\
+    };\nint ModIntRuntime::md = 1;\n#line 5 \"number/test/sieve.stress.test.cpp\"\n\
+    #include <cstdio>\n#line 7 \"number/test/sieve.stress.test.cpp\"\n#include <numeric>\n\
+    #line 9 \"number/test/sieve.stress.test.cpp\"\nusing namespace std;\n\nstruct\
+    \ Case {\n    int SIEVE_SIZE;\n    int MAX;\n};\n\nint euler_phi(int x) {\n  \
+    \  int ret = 0;\n    for (int d = 1; d <= x; d++) ret += (std::gcd(d, x) == 1);\n\
+    \    return ret;\n}\n\nvoid test_divisors(Case testcase) {\n    const Sieve sieve(testcase.SIEVE_SIZE);\n\
+    \    for (int x = 1; x <= testcase.MAX; x++) {\n        auto divs = sieve.divisors(x);\n\
+    \        std::vector<int> is_div(x + 1);\n        for (auto d : divs) is_div.at(d)\
+    \ = 1;\n        for (int y = 1; y <= x; y++) assert(is_div.at(y) == (x % y ==\
+    \ 0));\n    }\n\n    cerr << \"divisors(): passed\" << endl;\n}\n\nvoid test_euler_of_divisors(Case\
+    \ testcase) {\n    const Sieve sieve(testcase.SIEVE_SIZE);\n    for (int x = 1;\
+    \ x <= testcase.MAX; x++) {\n        auto div2euler = sieve.euler_of_divisors(x);\n\
+    \        for (auto de : div2euler) {\n            assert(euler_phi(de.first) ==\
+    \ de.second);\n            assert(x % de.first == 0);\n        }\n        assert(div2euler.size()\
     \ == sieve.divisors(x).size());\n    }\n\n    cerr << \"euler_of_divisors(): passed\"\
     \ << endl;\n}\n\nvoid test_moebius_table(int HI) {\n    const Sieve sieve_hi(HI);\n\
     \    const auto answer = sieve_hi.GenerateMoebiusFunctionTable();\n    assert(int(answer.size())\
@@ -192,10 +191,10 @@ data:
     \    test_enumerate_kth_pows(100);\n\n    puts(\"Hello World\");\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A\"\
     \ // DUMMY\n#include \"../sieve.hpp\"\n#include \"../modint_runtime.hpp\"\n#include\
-    \ <algorithm>\n#include <cassert>\n#include <cstdio>\n#include <iostream>\n#include\
+    \ <cassert>\n#include <cstdio>\n#include <iostream>\n#include <numeric>\n#include\
     \ <vector>\nusing namespace std;\n\nstruct Case {\n    int SIEVE_SIZE;\n    int\
     \ MAX;\n};\n\nint euler_phi(int x) {\n    int ret = 0;\n    for (int d = 1; d\
-    \ <= x; d++) ret += (std::__gcd(d, x) == 1);\n    return ret;\n}\n\nvoid test_divisors(Case\
+    \ <= x; d++) ret += (std::gcd(d, x) == 1);\n    return ret;\n}\n\nvoid test_divisors(Case\
     \ testcase) {\n    const Sieve sieve(testcase.SIEVE_SIZE);\n    for (int x = 1;\
     \ x <= testcase.MAX; x++) {\n        auto divs = sieve.divisors(x);\n        std::vector<int>\
     \ is_div(x + 1);\n        for (auto d : divs) is_div.at(d) = 1;\n        for (int\
@@ -234,7 +233,7 @@ data:
   isVerificationFile: true
   path: number/test/sieve.stress.test.cpp
   requiredBy: []
-  timestamp: '2025-08-25 00:47:28+09:00'
+  timestamp: '2026-04-11 14:52:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/sieve.stress.test.cpp
