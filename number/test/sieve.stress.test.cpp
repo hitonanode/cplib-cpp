@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A" // DUMMY
 #include "../sieve.hpp"
 #include "../modint_runtime.hpp"
-#include <algorithm>
 #include <cassert>
 #include <cstdio>
 #include <iostream>
+#include <numeric>
 #include <vector>
 using namespace std;
 
@@ -15,7 +15,7 @@ struct Case {
 
 int euler_phi(int x) {
     int ret = 0;
-    for (int d = 1; d <= x; d++) ret += (std::__gcd(d, x) == 1);
+    for (int d = 1; d <= x; d++) ret += (std::gcd(d, x) == 1);
     return ret;
 }
 

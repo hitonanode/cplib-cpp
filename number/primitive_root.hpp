@@ -1,6 +1,6 @@
 #pragma once
-#include "bare_mod_algebra.hpp"
 #include "factorize.hpp"
+#include "pow_mod.hpp"
 
 // Find smallest primitive root for given number n （最小の原始根探索）
 // n must be 2 / 4 / p^k / 2p^k (p: odd prime, k > 0)
@@ -25,10 +25,10 @@ inline long long find_smallest_primitive_root(long long n) {
 
     for (long long g = 1; g < n; g++) {
         if (std::gcd(n, g) != 1) continue;
-        if (pow_mod<long long, __int128>(g, phi, n) != 1) return -1;
+        if (pow_mod(g, phi, n) != 1) return -1;
         bool ok = true;
         for (auto pp : fac) {
-            if (pow_mod<long long, __int128>(g, phi / pp, n) == 1) {
+            if (pow_mod(g, phi / pp, n) == 1) {
                 ok = false;
                 break;
             }
