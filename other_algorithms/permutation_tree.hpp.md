@@ -205,8 +205,8 @@ data:
   timestamp: '2025-12-03 22:27:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - other_algorithms/test/permutation_tree.test.cpp
+  - other_algorithms/test/permutation_tree.yuki1720.test.cpp
 documentation_of: other_algorithms/permutation_tree.hpp
 layout: document
 title: "Common interval decomposition tree / \"Permutation tree\" \uFF08\u9806\u5217\

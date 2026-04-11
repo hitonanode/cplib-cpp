@@ -121,8 +121,8 @@ data:
   verifiedWith:
   - number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp
   - number/test/discrete_logarithm_matrix.yuki3170.test.cpp
-  - number/test/discrete_logarithm_symmetric_group.yuki101.test.cpp
   - number/test/discrete_logarithm_matrix.yuki950.test.cpp
+  - number/test/discrete_logarithm_symmetric_group.yuki101.test.cpp
   - number/test/discrete_logarithm_mod.test.cpp
 documentation_of: number/discrete_logarithm.hpp
 layout: document

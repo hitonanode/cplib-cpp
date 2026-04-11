@@ -114,8 +114,8 @@ data:
   timestamp: '2023-03-10 15:00:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/enumerate_cliques.aoj2306.test.cpp
   - graph/test/enumerate_cliques.test.cpp
+  - graph/test/enumerate_cliques.aoj2306.test.cpp
 documentation_of: graph/enumerate_cliques.hpp
 layout: document
 title: "Enumerate cliques \uFF08\u30B0\u30E9\u30D5\u306E\u30AF\u30EA\u30FC\u30AF\u5168\

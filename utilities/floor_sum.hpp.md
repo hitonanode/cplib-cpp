@@ -67,8 +67,8 @@ data:
   timestamp: '2025-10-23 00:39:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - utilities/test/floor_sum.int128.yuki3307.test.cpp
   - utilities/test/floor_sum.test.cpp
+  - utilities/test/floor_sum.int128.yuki3307.test.cpp
 documentation_of: utilities/floor_sum.hpp
 layout: document
 title: floor sum

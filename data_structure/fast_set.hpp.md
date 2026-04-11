@@ -111,8 +111,8 @@ data:
   timestamp: '2023-03-23 22:42:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - tree/test/auxiliary_tree.yuki901.test.cpp
   - data_structure/test/fast_set.test.cpp
+  - tree/test/auxiliary_tree.yuki901.test.cpp
 documentation_of: data_structure/fast_set.hpp
 layout: document
 title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\u3092\

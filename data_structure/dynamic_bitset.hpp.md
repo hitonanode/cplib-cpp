@@ -298,15 +298,15 @@ data:
   timestamp: '2026-03-02 01:35:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/dynamic_bitset.yuki2319.test.cpp
-  - data_structure/test/dynamic_bitset.yuki1444.test.cpp
-  - data_structure/test/dynamic_bitset.yuki1861.test.cpp
-  - data_structure/test/dynamic_bitset.yuki1782.test.cpp
-  - data_structure/test/dynamic_bitset.yuki3041.test.cpp
-  - data_structure/test/dynamic_bitset.yuki3060.test.cpp
-  - data_structure/test/dynamic_bitset.yuki1560.test.cpp
   - data_structure/test/dynamic_bitset.yuki1514.test.cpp
+  - data_structure/test/dynamic_bitset.yuki1861.test.cpp
   - data_structure/test/dynamic_bitset.yuki2542.test.cpp
+  - data_structure/test/dynamic_bitset.yuki3060.test.cpp
+  - data_structure/test/dynamic_bitset.yuki1782.test.cpp
+  - data_structure/test/dynamic_bitset.yuki1444.test.cpp
+  - data_structure/test/dynamic_bitset.yuki2319.test.cpp
+  - data_structure/test/dynamic_bitset.yuki1560.test.cpp
+  - data_structure/test/dynamic_bitset.yuki3041.test.cpp
 documentation_of: data_structure/dynamic_bitset.hpp
 layout: document
 title: "Dynamic Bitset \uFF08\u52D5\u7684\u30B5\u30A4\u30BA bitset\uFF09"

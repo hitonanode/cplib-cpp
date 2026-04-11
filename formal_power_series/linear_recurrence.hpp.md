@@ -139,8 +139,8 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
+  - linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/linear_recurrence.test.cpp
 documentation_of: formal_power_series/linear_recurrence.hpp

@@ -99,8 +99,8 @@ data:
   timestamp: '2025-10-26 13:49:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - segmenttree/test/beats.test.cpp
   - segmenttree/test/beats_random_test.test.cpp
+  - segmenttree/test/beats.test.cpp
 documentation_of: segmenttree/trees/range-chmin-chmax-add-range-sum.hpp
 layout: document
 redirect_from:

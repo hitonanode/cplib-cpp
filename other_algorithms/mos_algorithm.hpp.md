@@ -23,8 +23,8 @@ data:
     \ F2, typename F3, typename F4, typename F5>\n    void run(F1 AddRight, F2 AddLeft,\
     \ F3 RemoveRight, F4 RemoveLeft, F5 Query) {\n        const int Q = ranges.size();\n\
     \        if (!Q) return;\n        const int nbbucket = std::max(1, std::min<int>(nmax\
-    \ - nmin, sqrt(Q)));\n        const int szbucket = (nmax - nmin + nbbucket - 1)\
-    \ / nbbucket;\n        std::vector<int> qs(Q);\n        std::iota(qs.begin(),\
+    \ - nmin, sqrt(Q)));\n        const int szbucket = std::max(1, (nmax - nmin +\
+    \ nbbucket - 1) / nbbucket);\n        std::vector<int> qs(Q);\n        std::iota(qs.begin(),\
     \ qs.end(), 0);\n        std::sort(qs.begin(), qs.end(), [&](int q1, int q2) {\n\
     \            int b1 = (ranges[q1].first - nmin) / szbucket, b2 = (ranges[q2].first\
     \ - nmin) / szbucket;\n            if (b1 != b2)\n                return b1 <\
@@ -51,8 +51,8 @@ data:
     \ F2, typename F3, typename F4, typename F5>\n    void run(F1 AddRight, F2 AddLeft,\
     \ F3 RemoveRight, F4 RemoveLeft, F5 Query) {\n        const int Q = ranges.size();\n\
     \        if (!Q) return;\n        const int nbbucket = std::max(1, std::min<int>(nmax\
-    \ - nmin, sqrt(Q)));\n        const int szbucket = (nmax - nmin + nbbucket - 1)\
-    \ / nbbucket;\n        std::vector<int> qs(Q);\n        std::iota(qs.begin(),\
+    \ - nmin, sqrt(Q)));\n        const int szbucket = std::max(1, (nmax - nmin +\
+    \ nbbucket - 1) / nbbucket);\n        std::vector<int> qs(Q);\n        std::iota(qs.begin(),\
     \ qs.end(), 0);\n        std::sort(qs.begin(), qs.end(), [&](int q1, int q2) {\n\
     \            int b1 = (ranges[q1].first - nmin) / szbucket, b2 = (ranges[q2].first\
     \ - nmin) / szbucket;\n            if (b1 != b2)\n                return b1 <\
@@ -70,7 +70,7 @@ data:
   isVerificationFile: false
   path: other_algorithms/mos_algorithm.hpp
   requiredBy: []
-  timestamp: '2024-12-28 06:16:13+09:00'
+  timestamp: '2026-04-05 22:37:37+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: other_algorithms/mos_algorithm.hpp

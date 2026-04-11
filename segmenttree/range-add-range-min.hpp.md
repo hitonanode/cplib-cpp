@@ -90,8 +90,8 @@ data:
   timestamp: '2022-01-08 20:23:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - other_algorithms/test/permutation_tree.test.cpp
+  - other_algorithms/test/permutation_tree.yuki1720.test.cpp
 documentation_of: segmenttree/range-add-range-min.hpp
 layout: document
 title: Range Add Range Min (known as the Starry sky tree)

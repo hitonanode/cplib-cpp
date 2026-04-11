@@ -166,8 +166,8 @@ data:
   timestamp: '2023-07-23 18:47:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
   - combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
+  - combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
 documentation_of: combinatorial_opt/matroid_intersection_dijkstra.hpp
 layout: document
 title: Weighted matroid intersection using Dijkstra's algorithm
