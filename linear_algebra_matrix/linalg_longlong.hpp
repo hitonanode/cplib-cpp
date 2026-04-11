@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <vector>
 
-// CUT begin
 template <typename lint, typename mdint>
 std::vector<std::vector<lint>> gauss_jordan(std::vector<std::vector<lint>> mtr, mdint mod) {
     // Gauss-Jordan elimination 行基本変形のみを用いるガウス消去法
@@ -28,7 +27,7 @@ std::vector<std::vector<lint>> gauss_jordan(std::vector<std::vector<lint>> mtr, 
                     mtr[piv][w] ? mod - mtr[piv][w] : 0; // To preserve sign of determinant
             }
         }
-        lint pivinv = mod_inverse<lint>(mtr[h][c], mod);
+        lint pivinv = inv_mod<lint>(mtr[h][c], mod);
         for (int hh = 0; hh < H; hh++) {
             if (hh == h) continue;
             lint coeff = mtr[hh][c] * pivinv % mod;

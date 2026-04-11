@@ -1,8 +1,7 @@
 #pragma once
-#include "../random/xorshift.hpp"
 #include <algorithm>
-#include <array>
 #include <cassert>
+#include <cstdint>
 #include <numeric>
 #include <vector>
 
@@ -28,7 +27,7 @@ inline int get_id(long long n) {
 // Miller-Rabin primality test
 // https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%A9%E3%83%BC%E2%80%93%E3%83%A9%E3%83%93%E3%83%B3%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A%E6%B3%95
 // Complexity: O(lg n) per query
-struct {
+inline struct {
     long long modpow(__int128 x, __int128 n, long long mod) noexcept {
         __int128 ret = 1;
         for (x %= mod; n; x = x * x % mod, n >>= 1) ret = (n & 1) ? ret * x % mod : ret;
@@ -53,7 +52,19 @@ struct {
     }
 } is_prime;
 
-struct {
+inline struct {
+    static uint32_t xorshift() noexcept {
+        static uint32_t x = 123456789;
+        static uint32_t y = 362436069;
+        static uint32_t z = 521288629;
+        static uint32_t w = 88675123;
+        uint32_t t = x ^ (x << 11);
+        x = y;
+        y = z;
+        z = w;
+        return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
+    }
+
     // Pollard's rho algorithm: find factor greater than 1
     long long find_factor(long long n) {
         assert(n > 1);
@@ -63,7 +74,7 @@ struct {
         auto f = [&](__int128 x) -> long long { return (x * x + c) % n; };
 
         for (int t = 1;; t++) {
-            for (c = 0; c == 0 or c + 2 == n;) c = rand_int() % n;
+            for (c = 0; c == 0 or c + 2 == n;) c = xorshift() % n;
             long long x0 = t, m = std::max(n >> 3, 1LL), x, ys, y = x0, r = 1, g, q = 1;
             do {
                 x = y;
@@ -73,7 +84,7 @@ struct {
                     ys = y;
                     for (int i = std::min(m, r - k); i--;)
                         y = f(y), q = __int128(q) * std::abs(x - y) % n;
-                    g = std::__gcd<long long>(q, n);
+                    g = std::gcd<long long>(q, n);
                     k += m;
                 } while (k < r and g <= 1);
                 r <<= 1;
@@ -81,7 +92,7 @@ struct {
             if (g == n) {
                 do {
                     ys = f(ys);
-                    g = std::__gcd(std::abs(x - ys), n);
+                    g = std::gcd(std::abs(x - ys), n);
                 } while (g <= 1);
             }
             if (g != n) return g;

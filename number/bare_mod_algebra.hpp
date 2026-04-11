@@ -1,11 +1,11 @@
 #pragma once
 #include <algorithm>
 #include <cassert>
+#include <numeric>
 #include <tuple>
 #include <utility>
 #include <vector>
 
-// CUT begin
 // Solve ax+by=gcd(a, b)
 template <class Int> Int extgcd(Int a, Int b, Int &x, Int &y) {
     Int d = a;
@@ -16,9 +16,10 @@ template <class Int> Int extgcd(Int a, Int b, Int &x, Int &y) {
     }
     return d;
 }
-// Calculate a^(-1) (MOD m) s if gcd(a, m) == 1
-// Calculate x s.t. ax == gcd(a, m) MOD m
-template <class Int> Int mod_inverse(Int a, Int m) {
+
+// Calculate a^(-1) (MOD m) if gcd(a, m) == 1
+// Calculate x s.t. ax == gcd(a, m) MOD m and 0 <= x < m
+template <class Int> Int inv_mod(Int a, Int m) {
     Int x, y;
     extgcd<Int>(a, m, x, y);
     x %= m;
@@ -76,37 +77,25 @@ template <class Int>
 
 // 蟻本 P.262
 // 中国剰余定理を利用して，色々な素数で割った余りから元の値を復元
-// 連立線形合同式 A * x = B mod M の解
+// 連立線形合同式 A_i x = R_i mod M_i の解
 // Requirement: M[i] > 0
 // Output: x = first MOD second (if solution exists), (0, 0) (otherwise)
 template <class Int>
 std::pair<Int, Int>
-linear_congruence(const std::vector<Int> &A, const std::vector<Int> &B, const std::vector<Int> &M) {
+linear_congruence(const std::vector<Int> &A, const std::vector<Int> &R, const std::vector<Int> &M) {
     Int r = 0, m = 1;
     assert(A.size() == M.size());
-    assert(B.size() == M.size());
+    assert(R.size() == M.size());
     for (int i = 0; i < (int)A.size(); i++) {
         assert(M[i] > 0);
         const Int ai = A[i] % M[i];
-        Int a = ai * m, b = B[i] - ai * r, d = std::__gcd(M[i], a);
+        Int a = ai * m, b = R[i] - ai * r, d = std::gcd(M[i], a);
         if (b % d != 0) {
             return std::make_pair(0, 0); // 解なし
         }
-        Int t = b / d * mod_inverse<Int>(a / d, M[i] / d) % (M[i] / d);
+        Int t = b / d * inv_mod<Int>(a / d, M[i] / d) % (M[i] / d);
         r += m * t;
         m *= M[i] / d;
     }
     return std::make_pair((r < 0 ? r + m : r), m);
-}
-
-template <class Int = int, class Long = long long> Int pow_mod(Int x, long long n, Int md) {
-    static_assert(sizeof(Int) * 2 <= sizeof(Long), "Watch out for overflow");
-    if (md == 1) return 0;
-    Int ans = 1;
-    while (n > 0) {
-        if (n & 1) ans = (Long)ans * x % md;
-        x = (Long)x * x % md;
-        n >>= 1;
-    }
-    return ans;
 }
