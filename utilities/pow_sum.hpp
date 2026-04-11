@@ -1,12 +1,15 @@
 #pragma once
 #include <bit>
+#include <type_traits>
 #include <utility>
 
-// {x^n, x^0 + ... + x^(n - 1)} for n >= 1
+// {x^n, x^0 + ... + x^(n - 1)} for n >= 0
 // Verify: ABC212H
 template <typename T, typename Int> std::pair<T, T> pow_sum(T x, Int n) {
+    using Uint = std::make_unsigned_t<Int>;
+    if (n == 0) return {1, 0};
     T sum = 1, p = x; // ans = x^0 + ... + x^(len - 1), p = x^len
-    for (int d = std::bit_floor(n) - 1; d >= 0; d--) {
+    for (int d = std::bit_width(Uint(n)) - 2; d >= 0; d--) {
         sum = sum * (p + 1);
         p *= p;
         if ((n >> d) & 1) {
