@@ -38,8 +38,9 @@ struct guni {
         if constexpr (std::is_invocable_v<F &, std::span<const int>>) {
             ResetAll(subtree(v));
         } else {
-            static_assert(std::is_invocable_v<F &>,
-                          "ResetAll must be callable with std::span<const int> or with no argument");
+            static_assert(
+                std::is_invocable_v<F &>,
+                "ResetAll must be callable with std::span<const int> or with no argument");
             ResetAll();
         }
     }
