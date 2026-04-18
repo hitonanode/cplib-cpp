@@ -33,29 +33,41 @@ data:
     \ &os, const BIT &bit) {\n        T prv = 0;\n        os << '[';\n        for\
     \ (int i = 1; i <= bit.n; i++) {\n            T now = bit.sum(i);\n          \
     \  os << now - prv << ',', prv = now;\n        }\n        return os << ']';\n\
-    \    }\n};\n#line 3 \"tree/guni.hpp\"\n\n// Guni / Sack / DSU on tree\n// https://codeforces.com/blog/entry/44351\n\
-    struct guni {\n    int n;\n    int last_root;\n    std::vector<std::vector<int>>\
-    \ to;\n    std::vector<int> sz, ver, st, ft; // subtree size / dfs order / subtree\
-    \ start / subtree fin\n\n    guni(int n_ = 0) : n(n_), last_root(-1), to(n_) {}\n\
-    \n    void add_bi_edge(int u, int v) { to.at(u).push_back(v), to.at(v).push_back(u);\
-    \ }\n\n    void sdfs(int v, int p) { // Build sz / ver / st / ft\n        st.at(v)\
-    \ = ver.size(), ver.push_back(v);\n        for (int u : to.at(v)) sz.at(v) +=\
-    \ (u != p) ? (sdfs(u, v), sz.at(u)) : 0;\n        ft.at(v) = ver.size();\n   \
-    \ }\n\n    template <class F1, class F2, class F3>\n    void dfs(int v, int p,\
-    \ bool keep, F1 Add, F2 Remove, F3 Solve) {\n        int mx = -1, big_child =\
-    \ -1;\n        for (int u : to.at(v)) {\n            if (u != p and sz.at(u) >\
-    \ mx) mx = sz.at(u), big_child = u;\n        }\n        for (int u : to.at(v))\
-    \ {\n            if (u != p and u != big_child) dfs(u, v, false, Add, Remove,\
-    \ Solve);\n        }\n        if (big_child != -1) dfs(big_child, v, true, Add,\
-    \ Remove, Solve);\n\n        for (int u : to.at(v)) {\n            if (u != p\
-    \ and u != big_child) {\n                for (int i = st.at(u); i < ft.at(u);\
+    \    }\n};\n#line 2 \"tree/guni.hpp\"\n#include <span>\n#include <type_traits>\n\
+    #line 5 \"tree/guni.hpp\"\n\n// Guni / Sack / DSU on tree\n// https://codeforces.com/blog/entry/44351\n\
+    // https://atcoder.jp/contests/abc454/editorial/19112\nstruct guni {\n    int\
+    \ n;\n    int last_root;\n    std::vector<std::vector<int>> to;\n    std::vector<int>\
+    \ sz, ver, st, ft; // subtree size / dfs order / subtree start / subtree fin\n\
+    \n    guni(int n_ = 0) : n(n_), last_root(-1), to(n_) {}\n\n    void add_bi_edge(int\
+    \ u, int v) { to.at(u).push_back(v), to.at(v).push_back(u); }\n\n    void sdfs(int\
+    \ v, int p) { // Build sz / ver / st / ft, and move heavy child to the back\n\
+    \        st.at(v) = ver.size(), ver.push_back(v);\n        int heavy_idx = -1;\n\
+    \        for (int i = 0; i < int(to.at(v).size()); ++i) {\n            int u =\
+    \ to.at(v).at(i);\n            if (u == p) continue;\n            sdfs(u, v);\n\
+    \            sz.at(v) += sz.at(u);\n            if (heavy_idx == -1 or sz.at(u)\
+    \ > sz.at(to.at(v).at(heavy_idx))) heavy_idx = i;\n        }\n        if (heavy_idx\
+    \ != -1) std::swap(to.at(v).at(heavy_idx), to.at(v).back());\n        ft.at(v)\
+    \ = ver.size();\n    }\n\n    std::span<const int> subtree(int v) const {\n  \
+    \      return std::span<const int>(ver).subspan(st.at(v), ft.at(v) - st.at(v));\n\
+    \    }\n\n    template <class F> void call_reset(F &ResetAll, int v) const {\n\
+    \        if constexpr (std::is_invocable_v<F &, std::span<const int>>) {\n   \
+    \         ResetAll(subtree(v));\n        } else {\n            static_assert(\n\
+    \                std::is_invocable_v<F &>,\n                \"ResetAll must be\
+    \ callable with std::span<const int> or with no argument\");\n            ResetAll();\n\
+    \        }\n    }\n\n    template <class F1, class F2, class F3>\n    void dfs(int\
+    \ v, int p, F1 &Add, F2 &ResetAll, F3 &Solve) {\n        const int big_child =\
+    \ (!to.at(v).empty() and to.at(v).back() != p) ? to.at(v).back() : -1;\n     \
+    \   for (int u : to.at(v)) {\n            if (u != p and u != big_child) {\n \
+    \               dfs(u, v, Add, ResetAll, Solve);\n                call_reset(ResetAll,\
+    \ u);\n            }\n        }\n        if (big_child != -1) dfs(big_child, v,\
+    \ Add, ResetAll, Solve);\n\n        for (int u : to.at(v)) {\n            if (u\
+    \ != p and u != big_child) {\n                for (int i = st.at(u); i < ft.at(u);\
     \ ++i) Add(ver.at(i));\n            }\n        }\n        Add(v);\n        Solve(v);\n\
-    \n        if (!keep) {\n            for (int i = st.at(v); i < ft.at(v); ++i)\
-    \ Remove(ver.at(i));\n        }\n    }\n\n    template <class F1, class F2, class\
-    \ F3> void run(const int root, F1 Add, F2 Remove, F3 Solve) {\n        if (last_root\
-    \ != root) {\n            last_root = root, ver.clear(), st.resize(n), ft.resize(n),\
-    \ sz.assign(n, 1);\n            sdfs(root, -1);\n        }\n        dfs(root,\
-    \ -1, false, Add, Remove, Solve);\n    }\n};\n#line 3 \"tree/test/vertex-add-subtree-sum.guni.test.cpp\"\
+    \    }\n\n    template <class F1, class F2, class F3>\n    void run(const int\
+    \ root, F1 Add, F2 ResetAll, F3 Solve) {\n        if (last_root != root) {\n \
+    \           last_root = root, ver.clear(), st.resize(n), ft.resize(n), sz.assign(n,\
+    \ 1);\n            sdfs(root, -1);\n        }\n        dfs(root, -1, Add, ResetAll,\
+    \ Solve);\n        call_reset(ResetAll, root);\n    }\n};\n#line 3 \"tree/test/vertex-add-subtree-sum.guni.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\n\
     #include <cassert>\n#include <iostream>\n#line 7 \"tree/test/vertex-add-subtree-sum.guni.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    int N, Q;\n    cin >> N >> Q;\n  \
@@ -68,11 +80,12 @@ data:
     \ == 0) {\n            int x;\n            cin >> x;\n            v2t2add.at(u).emplace_back(t,\
     \ x);\n        } else {\n            v2t2sol.at(u).emplace_back(t, -1);\n    \
     \    }\n    }\n\n    auto Add = [&](int v) {\n        for (auto [t, w] : v2t2add.at(v))\
-    \ bit.add(t, w);\n    };\n\n    auto Remove = [&](int v) {\n        for (auto\
-    \ [t, w] : v2t2add.at(v)) bit.add(t, -w);\n    };\n\n    auto Solve = [&](int\
-    \ v) {\n        for (auto [t, _] : v2t2sol.at(v)) ret.at(t) = bit.sum(0, t + 1);\n\
-    \    };\n\n    g.run(0, Add, Remove, Solve);\n\n    for (auto x : ret) {\n   \
-    \     if (x >= 0) cout << x << '\\n';\n    }\n}\n"
+    \ bit.add(t, w);\n    };\n\n    auto ResetSubtree = [&](std::span<const int> view)\
+    \ {\n        for (int v : view) {\n            for (auto [t, w] : v2t2add.at(v))\
+    \ bit.add(t, -w);\n        }\n    };\n\n    auto Solve = [&](int v) {\n      \
+    \  for (auto [t, _] : v2t2sol.at(v)) ret.at(t) = bit.sum(0, t + 1);\n    };\n\n\
+    \    g.run(0, Add, ResetSubtree, Solve);\n\n    for (auto x : ret) {\n       \
+    \ if (x >= 0) cout << x << '\\n';\n    }\n}\n"
   code: "#include \"../../segmenttree/binary_indexed_tree.hpp\"\n#include \"../guni.hpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\n\
     #include <cassert>\n#include <iostream>\n#include <vector>\nusing namespace std;\n\
@@ -86,18 +99,19 @@ data:
     \ >> x;\n            v2t2add.at(u).emplace_back(t, x);\n        } else {\n   \
     \         v2t2sol.at(u).emplace_back(t, -1);\n        }\n    }\n\n    auto Add\
     \ = [&](int v) {\n        for (auto [t, w] : v2t2add.at(v)) bit.add(t, w);\n \
-    \   };\n\n    auto Remove = [&](int v) {\n        for (auto [t, w] : v2t2add.at(v))\
-    \ bit.add(t, -w);\n    };\n\n    auto Solve = [&](int v) {\n        for (auto\
-    \ [t, _] : v2t2sol.at(v)) ret.at(t) = bit.sum(0, t + 1);\n    };\n\n    g.run(0,\
-    \ Add, Remove, Solve);\n\n    for (auto x : ret) {\n        if (x >= 0) cout <<\
-    \ x << '\\n';\n    }\n}\n"
+    \   };\n\n    auto ResetSubtree = [&](std::span<const int> view) {\n        for\
+    \ (int v : view) {\n            for (auto [t, w] : v2t2add.at(v)) bit.add(t, -w);\n\
+    \        }\n    };\n\n    auto Solve = [&](int v) {\n        for (auto [t, _]\
+    \ : v2t2sol.at(v)) ret.at(t) = bit.sum(0, t + 1);\n    };\n\n    g.run(0, Add,\
+    \ ResetSubtree, Solve);\n\n    for (auto x : ret) {\n        if (x >= 0) cout\
+    \ << x << '\\n';\n    }\n}\n"
   dependsOn:
   - segmenttree/binary_indexed_tree.hpp
   - tree/guni.hpp
   isVerificationFile: true
   path: tree/test/vertex-add-subtree-sum.guni.test.cpp
   requiredBy: []
-  timestamp: '2023-05-09 07:39:04+09:00'
+  timestamp: '2026-04-19 01:24:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/vertex-add-subtree-sum.guni.test.cpp

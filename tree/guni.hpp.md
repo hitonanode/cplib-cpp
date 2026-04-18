@@ -11,59 +11,83 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
+    - https://atcoder.jp/contests/abc454/editorial/19112
     - https://codeforces.com/blog/entry/44351
-  bundledCode: "#line 2 \"tree/guni.hpp\"\n#include <vector>\n\n// Guni / Sack / DSU\
-    \ on tree\n// https://codeforces.com/blog/entry/44351\nstruct guni {\n    int\
+  bundledCode: "#line 2 \"tree/guni.hpp\"\n#include <span>\n#include <type_traits>\n\
+    #include <vector>\n\n// Guni / Sack / DSU on tree\n// https://codeforces.com/blog/entry/44351\n\
+    // https://atcoder.jp/contests/abc454/editorial/19112\nstruct guni {\n    int\
     \ n;\n    int last_root;\n    std::vector<std::vector<int>> to;\n    std::vector<int>\
     \ sz, ver, st, ft; // subtree size / dfs order / subtree start / subtree fin\n\
     \n    guni(int n_ = 0) : n(n_), last_root(-1), to(n_) {}\n\n    void add_bi_edge(int\
     \ u, int v) { to.at(u).push_back(v), to.at(v).push_back(u); }\n\n    void sdfs(int\
-    \ v, int p) { // Build sz / ver / st / ft\n        st.at(v) = ver.size(), ver.push_back(v);\n\
-    \        for (int u : to.at(v)) sz.at(v) += (u != p) ? (sdfs(u, v), sz.at(u))\
-    \ : 0;\n        ft.at(v) = ver.size();\n    }\n\n    template <class F1, class\
-    \ F2, class F3>\n    void dfs(int v, int p, bool keep, F1 Add, F2 Remove, F3 Solve)\
-    \ {\n        int mx = -1, big_child = -1;\n        for (int u : to.at(v)) {\n\
-    \            if (u != p and sz.at(u) > mx) mx = sz.at(u), big_child = u;\n   \
-    \     }\n        for (int u : to.at(v)) {\n            if (u != p and u != big_child)\
-    \ dfs(u, v, false, Add, Remove, Solve);\n        }\n        if (big_child != -1)\
-    \ dfs(big_child, v, true, Add, Remove, Solve);\n\n        for (int u : to.at(v))\
-    \ {\n            if (u != p and u != big_child) {\n                for (int i\
-    \ = st.at(u); i < ft.at(u); ++i) Add(ver.at(i));\n            }\n        }\n \
-    \       Add(v);\n        Solve(v);\n\n        if (!keep) {\n            for (int\
-    \ i = st.at(v); i < ft.at(v); ++i) Remove(ver.at(i));\n        }\n    }\n\n  \
-    \  template <class F1, class F2, class F3> void run(const int root, F1 Add, F2\
-    \ Remove, F3 Solve) {\n        if (last_root != root) {\n            last_root\
-    \ = root, ver.clear(), st.resize(n), ft.resize(n), sz.assign(n, 1);\n        \
-    \    sdfs(root, -1);\n        }\n        dfs(root, -1, false, Add, Remove, Solve);\n\
-    \    }\n};\n"
-  code: "#pragma once\n#include <vector>\n\n// Guni / Sack / DSU on tree\n// https://codeforces.com/blog/entry/44351\n\
-    struct guni {\n    int n;\n    int last_root;\n    std::vector<std::vector<int>>\
-    \ to;\n    std::vector<int> sz, ver, st, ft; // subtree size / dfs order / subtree\
-    \ start / subtree fin\n\n    guni(int n_ = 0) : n(n_), last_root(-1), to(n_) {}\n\
-    \n    void add_bi_edge(int u, int v) { to.at(u).push_back(v), to.at(v).push_back(u);\
-    \ }\n\n    void sdfs(int v, int p) { // Build sz / ver / st / ft\n        st.at(v)\
-    \ = ver.size(), ver.push_back(v);\n        for (int u : to.at(v)) sz.at(v) +=\
-    \ (u != p) ? (sdfs(u, v), sz.at(u)) : 0;\n        ft.at(v) = ver.size();\n   \
-    \ }\n\n    template <class F1, class F2, class F3>\n    void dfs(int v, int p,\
-    \ bool keep, F1 Add, F2 Remove, F3 Solve) {\n        int mx = -1, big_child =\
-    \ -1;\n        for (int u : to.at(v)) {\n            if (u != p and sz.at(u) >\
-    \ mx) mx = sz.at(u), big_child = u;\n        }\n        for (int u : to.at(v))\
-    \ {\n            if (u != p and u != big_child) dfs(u, v, false, Add, Remove,\
-    \ Solve);\n        }\n        if (big_child != -1) dfs(big_child, v, true, Add,\
-    \ Remove, Solve);\n\n        for (int u : to.at(v)) {\n            if (u != p\
-    \ and u != big_child) {\n                for (int i = st.at(u); i < ft.at(u);\
+    \ v, int p) { // Build sz / ver / st / ft, and move heavy child to the back\n\
+    \        st.at(v) = ver.size(), ver.push_back(v);\n        int heavy_idx = -1;\n\
+    \        for (int i = 0; i < int(to.at(v).size()); ++i) {\n            int u =\
+    \ to.at(v).at(i);\n            if (u == p) continue;\n            sdfs(u, v);\n\
+    \            sz.at(v) += sz.at(u);\n            if (heavy_idx == -1 or sz.at(u)\
+    \ > sz.at(to.at(v).at(heavy_idx))) heavy_idx = i;\n        }\n        if (heavy_idx\
+    \ != -1) std::swap(to.at(v).at(heavy_idx), to.at(v).back());\n        ft.at(v)\
+    \ = ver.size();\n    }\n\n    std::span<const int> subtree(int v) const {\n  \
+    \      return std::span<const int>(ver).subspan(st.at(v), ft.at(v) - st.at(v));\n\
+    \    }\n\n    template <class F> void call_reset(F &ResetAll, int v) const {\n\
+    \        if constexpr (std::is_invocable_v<F &, std::span<const int>>) {\n   \
+    \         ResetAll(subtree(v));\n        } else {\n            static_assert(\n\
+    \                std::is_invocable_v<F &>,\n                \"ResetAll must be\
+    \ callable with std::span<const int> or with no argument\");\n            ResetAll();\n\
+    \        }\n    }\n\n    template <class F1, class F2, class F3>\n    void dfs(int\
+    \ v, int p, F1 &Add, F2 &ResetAll, F3 &Solve) {\n        const int big_child =\
+    \ (!to.at(v).empty() and to.at(v).back() != p) ? to.at(v).back() : -1;\n     \
+    \   for (int u : to.at(v)) {\n            if (u != p and u != big_child) {\n \
+    \               dfs(u, v, Add, ResetAll, Solve);\n                call_reset(ResetAll,\
+    \ u);\n            }\n        }\n        if (big_child != -1) dfs(big_child, v,\
+    \ Add, ResetAll, Solve);\n\n        for (int u : to.at(v)) {\n            if (u\
+    \ != p and u != big_child) {\n                for (int i = st.at(u); i < ft.at(u);\
     \ ++i) Add(ver.at(i));\n            }\n        }\n        Add(v);\n        Solve(v);\n\
-    \n        if (!keep) {\n            for (int i = st.at(v); i < ft.at(v); ++i)\
-    \ Remove(ver.at(i));\n        }\n    }\n\n    template <class F1, class F2, class\
-    \ F3> void run(const int root, F1 Add, F2 Remove, F3 Solve) {\n        if (last_root\
-    \ != root) {\n            last_root = root, ver.clear(), st.resize(n), ft.resize(n),\
-    \ sz.assign(n, 1);\n            sdfs(root, -1);\n        }\n        dfs(root,\
-    \ -1, false, Add, Remove, Solve);\n    }\n};\n"
+    \    }\n\n    template <class F1, class F2, class F3>\n    void run(const int\
+    \ root, F1 Add, F2 ResetAll, F3 Solve) {\n        if (last_root != root) {\n \
+    \           last_root = root, ver.clear(), st.resize(n), ft.resize(n), sz.assign(n,\
+    \ 1);\n            sdfs(root, -1);\n        }\n        dfs(root, -1, Add, ResetAll,\
+    \ Solve);\n        call_reset(ResetAll, root);\n    }\n};\n"
+  code: "#pragma once\n#include <span>\n#include <type_traits>\n#include <vector>\n\
+    \n// Guni / Sack / DSU on tree\n// https://codeforces.com/blog/entry/44351\n//\
+    \ https://atcoder.jp/contests/abc454/editorial/19112\nstruct guni {\n    int n;\n\
+    \    int last_root;\n    std::vector<std::vector<int>> to;\n    std::vector<int>\
+    \ sz, ver, st, ft; // subtree size / dfs order / subtree start / subtree fin\n\
+    \n    guni(int n_ = 0) : n(n_), last_root(-1), to(n_) {}\n\n    void add_bi_edge(int\
+    \ u, int v) { to.at(u).push_back(v), to.at(v).push_back(u); }\n\n    void sdfs(int\
+    \ v, int p) { // Build sz / ver / st / ft, and move heavy child to the back\n\
+    \        st.at(v) = ver.size(), ver.push_back(v);\n        int heavy_idx = -1;\n\
+    \        for (int i = 0; i < int(to.at(v).size()); ++i) {\n            int u =\
+    \ to.at(v).at(i);\n            if (u == p) continue;\n            sdfs(u, v);\n\
+    \            sz.at(v) += sz.at(u);\n            if (heavy_idx == -1 or sz.at(u)\
+    \ > sz.at(to.at(v).at(heavy_idx))) heavy_idx = i;\n        }\n        if (heavy_idx\
+    \ != -1) std::swap(to.at(v).at(heavy_idx), to.at(v).back());\n        ft.at(v)\
+    \ = ver.size();\n    }\n\n    std::span<const int> subtree(int v) const {\n  \
+    \      return std::span<const int>(ver).subspan(st.at(v), ft.at(v) - st.at(v));\n\
+    \    }\n\n    template <class F> void call_reset(F &ResetAll, int v) const {\n\
+    \        if constexpr (std::is_invocable_v<F &, std::span<const int>>) {\n   \
+    \         ResetAll(subtree(v));\n        } else {\n            static_assert(\n\
+    \                std::is_invocable_v<F &>,\n                \"ResetAll must be\
+    \ callable with std::span<const int> or with no argument\");\n            ResetAll();\n\
+    \        }\n    }\n\n    template <class F1, class F2, class F3>\n    void dfs(int\
+    \ v, int p, F1 &Add, F2 &ResetAll, F3 &Solve) {\n        const int big_child =\
+    \ (!to.at(v).empty() and to.at(v).back() != p) ? to.at(v).back() : -1;\n     \
+    \   for (int u : to.at(v)) {\n            if (u != p and u != big_child) {\n \
+    \               dfs(u, v, Add, ResetAll, Solve);\n                call_reset(ResetAll,\
+    \ u);\n            }\n        }\n        if (big_child != -1) dfs(big_child, v,\
+    \ Add, ResetAll, Solve);\n\n        for (int u : to.at(v)) {\n            if (u\
+    \ != p and u != big_child) {\n                for (int i = st.at(u); i < ft.at(u);\
+    \ ++i) Add(ver.at(i));\n            }\n        }\n        Add(v);\n        Solve(v);\n\
+    \    }\n\n    template <class F1, class F2, class F3>\n    void run(const int\
+    \ root, F1 Add, F2 ResetAll, F3 Solve) {\n        if (last_root != root) {\n \
+    \           last_root = root, ver.clear(), st.resize(n), ft.resize(n), sz.assign(n,\
+    \ 1);\n            sdfs(root, -1);\n        }\n        dfs(root, -1, Add, ResetAll,\
+    \ Solve);\n        call_reset(ResetAll, root);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: tree/guni.hpp
   requiredBy: []
-  timestamp: '2023-05-09 07:39:04+09:00'
+  timestamp: '2026-04-19 01:24:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/vertex-add-subtree-sum.guni.test.cpp
@@ -92,7 +116,7 @@ title: "Guni (Sack) / DSU on tree \uFF08\u6839\u4ED8\u304D\u6728\u306E\u5168\u30
 Heavy-light decomposition を行う．ある頂点 $v$ に到達した際，以下の手続きを行う：
 
 1. $v$ と light edge で繋がる子の部分木全てについて再帰的に DFS する
-2. $v$ と heavy edge で繋がる子の部分木について再帰的に DFS する（ただし， 手順 5. の削除操作を省く）
+2. $v$ と heavy edge で繋がる子の部分木について再帰的に DFS する（ただし， 手順 6. の削除操作を省く）
 3. $v$ light edge で繋がる子の部分木に含まれる全頂点を追加する
 4. 頂点 $v$ を追加する
 5. （ $S\_v$ ができる）
@@ -105,7 +129,7 @@ Heavy-light decomposition を行う．ある頂点 $v$ に到達した際，以�
 
 ## 使用方法
 
-本テクニックを使用するまでもない例だが，根付き木の全ての部分木について「部分木を構成する頂点の `id` の 2 乗和」は以下のように実装できる．
+根付き木の全ての部分木について「部分木を構成する頂点の `id` の 2 乗和」は以下のように実装できる（本テクニックを使用するまでもない例だが）．
 
 ```cpp
 int N, root;
@@ -118,18 +142,27 @@ std::vector<long long> ret(N);
 long long sum_of_i_quads = 0;
 
 auto Add = [&](int i) { sum_of_i_quads += (long long)i * i; };
-auto Remove = [&](int i) { sum_of_i_quads -= (long long)i * i; };
+auto ResetAll = [&](std::span<const int> view) {
+    for (int i : view) sum_of_i_quads -= (long long)i * i;
+};
 auto Solve = [&](int i) { ret.at(i) = sum_of_i_quads; };
 
-g.run(0, Add, Remove, Solve);
+g.run(0, Add, ResetAll, Solve);
 ```
+
+`ResetAll` は次のどちらでもよい．
+
+- `ResetAll(std::span<const int> view)` : 削除すべき全頂点を受け取る
+- `ResetAll()` : 何も受け取らない（全削除が $O(1)$ でできる場合など）
 
 ## 問題例
 
 - [Library Checker: Vertex Add Subtree Sum](https://judge.yosupo.jp/problem/vertex_add_subtree_sum)
 - [Codeforces Round 862 (Div. 2) E. There Should Be a Lot of Maximums](https://codeforces.com/contest/1805/problem/E)
+- [AtCoder Beginner Contest 454 G - Mode in the Subtree](https://atcoder.jp/contests/abc454/tasks/abc454_g)
 
 ## 文献・リンク集
 
 - [[Tutorial] Sack (dsu on tree) - Codeforces](https://codeforces.com/blog/entry/44351)
 - [DSU on Tree - Speaker Deck](https://speakerdeck.com/camypaper/dsu-on-tree)
+- [解説 - キーサイト・テクノロジープログラミングコンテスト（AtCoder Beginner Contest 454）](https://atcoder.jp/contests/abc454/editorial/19112)
