@@ -39,15 +39,17 @@ int main() {
         for (auto [t, w] : v2t2add.at(v)) bit.add(t, w);
     };
 
-    auto Remove = [&](int v) {
-        for (auto [t, w] : v2t2add.at(v)) bit.add(t, -w);
+    auto ResetSubtree = [&](std::span<const int> view) {
+        for (int v : view) {
+            for (auto [t, w] : v2t2add.at(v)) bit.add(t, -w);
+        }
     };
 
     auto Solve = [&](int v) {
         for (auto [t, _] : v2t2sol.at(v)) ret.at(t) = bit.sum(0, t + 1);
     };
 
-    g.run(0, Add, Remove, Solve);
+    g.run(0, Add, ResetSubtree, Solve);
 
     for (auto x : ret) {
         if (x >= 0) cout << x << '\n';
