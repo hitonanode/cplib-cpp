@@ -664,6 +664,10 @@ data:
       title: "Merge sort tree \uFF08\u9759\u7684\u306A\u5217\u306E\u90E8\u5206\u5217\
         \u306B\u542B\u307E\u308C\u308B\u95BE\u5024\u4EE5\u4E0B\u306E\u8981\u7D20\u6570\
         \u30AF\u30A8\u30EA\uFF09"
+    - icon: ':warning:'
+      path: segmenttree/persistent_segtree.hpp
+      title: "Persistent segtree \uFF08\u5B8C\u5168\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\
+        \u30C8\u6728\uFF09"
     - icon: ':heavy_check_mark:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
