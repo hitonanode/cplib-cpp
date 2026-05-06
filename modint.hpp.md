@@ -193,6 +193,9 @@ data:
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp
+    title: linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp
+  - icon: ':heavy_check_mark:'
     path: number/test/arithmetic_function_totient.test.cpp
     title: number/test/arithmetic_function_totient.test.cpp
   - icon: ':heavy_check_mark:'
@@ -533,6 +536,7 @@ data:
   - linear_algebra_matrix/test/matrix_rank.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - linear_algebra_matrix/test/matrix_det_dual_number.yuki1303.test.cpp
+  - linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp
   - linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
   - linear_algebra_matrix/test/matrix_determinant.test.cpp

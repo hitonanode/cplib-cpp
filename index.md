@@ -436,6 +436,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/system_of_linear_equations.hpp
       title: linear_algebra_matrix/system_of_linear_equations.hpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/upper_triangular_matrix.hpp
+      title: "Upper triangular matrix \uFF08\u5B9A\u6570\u6B21\u5143\u4E0A\u4E09\u89D2\
+        \u884C\u5217\uFF09"
   - name: multithread
     pages:
     - icon: ':warning:'
@@ -1583,6 +1587,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
       title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp
+      title: linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp
   - name: number/test
     pages:
     - icon: ':heavy_check_mark:'
