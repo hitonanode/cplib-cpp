@@ -195,6 +195,7 @@
 "linear_algebra_matrix/test/matrix_rank.yuki1773.test.cpp": "2025-08-24 23:23:07 +0900",
 "linear_algebra_matrix/test/pfaffian.test.cpp": "2025-08-10 23:51:27 +0900",
 "linear_algebra_matrix/test/system_of_linear_equations.test.cpp": "2025-09-11 21:33:22 +0900",
+"linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp": "2026-05-06 21:05:36 +0900",
 "number/test/arithmetic_function_totient.test.cpp": "2025-09-11 21:33:22 +0900",
 "number/test/binary_gcd.stress.test.cpp": "2026-03-29 15:21:46 +0900",
 "number/test/bs_sieve.test.cpp": "2022-01-08 20:23:44 +0900",
