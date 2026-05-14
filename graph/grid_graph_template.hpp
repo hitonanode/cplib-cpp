@@ -5,6 +5,7 @@
 #include <tuple>
 #include <utility>
 #include <vector>
+#include <functional>
 
 // CUT begin
 template <typename T_E, T_E INF> struct GridGraph {
@@ -12,7 +13,7 @@ template <typename T_E, T_E INF> struct GridGraph {
     const std::vector<int> dx{1, -1, 0, 0};
     const std::vector<int> dy{0, 0, 1, -1};
     // T_E (*edge_cost)(int, int, int, int);
-    function<T_E(int, int, int, int)> edge_cost;
+    std::function<T_E(int, int, int, int)> edge_cost;
 
     GridGraph() = default;
     GridGraph(int h, int w, std::function<T_E(int, int, int, int)> _edge_cost): H(h), W(w), edge_cost(move(_edge_cost)) {}
