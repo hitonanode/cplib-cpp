@@ -16,7 +16,7 @@ template <typename T_E, T_E INF> struct GridGraph {
     std::function<T_E(int, int, int, int)> edge_cost;
 
     GridGraph() = default;
-    GridGraph(int h, int w, std::function<T_E(int, int, int, int)> _edge_cost): H(h), W(w), edge_cost(move(_edge_cost)) {}
+    GridGraph(int h, int w, std::function<T_E(int, int, int, int)> _edge_cost) : H(h), W(w), edge_cost(move(_edge_cost)) {}
 
     // Dijkstra's algorithm
     // Complexity: O(HWlog(HW))
@@ -29,7 +29,7 @@ template <typename T_E, T_E INF> struct GridGraph {
 
         using P = std::tuple<T_E, int, int>;
         std::priority_queue<P, std::vector<P>, std::greater<P>> pq;
-        for (auto [x_s, y_s]: xy_s) {
+        for (auto [x_s, y_s] : xy_s) {
             dist[x_s][y_s] = 0;
             pq.emplace(0, x_s, y_s);
         }
@@ -56,12 +56,12 @@ template <typename T_E, T_E INF> struct GridGraph {
         std::deque<std::pair<int, int>> deq;
         dist.assign(H, std::vector<T_E>(W, INF));
         prv.assign(H, std::vector<std::pair<int, int>>(W, std::make_pair(-1, -1)));
-        for (auto [x_s, y_s]: xy_s) {
+        for (auto [x_s, y_s] : xy_s) {
             dist[x_s][y_s] = 0;
             deq.emplace_back(x_s, y_s);
         }
         while (!deq.empty()) {
-            auto [x, y] = deq.front(); 
+            auto [x, y] = deq.front();
             deq.pop_front();
             const auto dnow = dist[x][y];
             for (unsigned d = 0; d < dx.size(); d++) {
