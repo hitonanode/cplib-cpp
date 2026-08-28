@@ -33,8 +33,8 @@ data:
   timestamp: '2022-01-09 00:24:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
   - combinatorial_opt/test/linear_sum_assignment.test.cpp
+  - combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
 documentation_of: utilities/writer.hpp
 layout: document
 title: "\u6A19\u6E96\u51FA\u529B"

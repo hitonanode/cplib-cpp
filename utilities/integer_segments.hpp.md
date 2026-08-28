@@ -114,8 +114,8 @@ data:
   timestamp: '2021-04-25 18:25:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - utilities/test/predecessor_problem.test.cpp
   - utilities/test/integer_segments.test.cpp
+  - utilities/test/predecessor_problem.test.cpp
 documentation_of: utilities/integer_segments.hpp
 layout: document
 redirect_from:

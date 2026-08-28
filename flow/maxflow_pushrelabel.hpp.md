@@ -165,8 +165,8 @@ data:
   timestamp: '2022-12-07 23:52:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - flow/test/maxflow.pushrelabel.test.cpp
   - flow/test/maxflow.pushrelabel.yuki957.test.cpp
+  - flow/test/maxflow.pushrelabel.test.cpp
 documentation_of: flow/maxflow_pushrelabel.hpp
 layout: document
 title: "Maxflow (push-relabel, Goldberg & Tarjan) \uFF08Push-relabel \u306B\u3088\u308B\

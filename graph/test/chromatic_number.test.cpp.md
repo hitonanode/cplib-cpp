@@ -13,7 +13,7 @@ data:
     title: number/modint_runtime.hpp
   - icon: ':heavy_check_mark:'
     path: random/rand_nondeterministic.hpp
-    title: random/rand_nondeterministic.hpp
+    title: "Random number generators \uFF08\u4E71\u6570\u751F\u6210\u5668\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -165,19 +165,37 @@ data:
     \ y;\n            while (t != 1) j++, t *= t;\n            z = z.power(1LL <<\
     \ (e - j - 1));\n            x *= z, z *= z, y *= z;\n            e = j;\n   \
     \     }\n        return ModIntRuntime(std::min(x.val_, md - x.val_));\n    }\n\
-    };\nint ModIntRuntime::md = 1;\n#line 2 \"random/rand_nondeterministic.hpp\"\n\
-    #include <chrono>\n#include <random>\n\nstruct rand_int_ {\n    using lint = long\
-    \ long;\n    std::mt19937 mt;\n    // rand_int_() : mt(42) {}\n    rand_int_()\
-    \ : mt(std::chrono::steady_clock::now().time_since_epoch().count()) {}\n    lint\
-    \ operator()(lint x) { return this->operator()(0, x); } // [0, x)\n    lint operator()(lint\
-    \ l, lint r) {\n        std::uniform_int_distribution<lint> d(l, r - 1);\n   \
-    \     return d(mt);\n    }\n} rnd;\n#line 6 \"graph/test/chromatic_number.test.cpp\"\
-    \n\n#line 9 \"graph/test/chromatic_number.test.cpp\"\nusing namespace std;\n\n\
-    int main() {\n    int N, M;\n    cin >> N >> M;\n    vector<int> to(N);\n\n  \
-    \  long long md = 4;\n    do { md = rnd(1LL << 29, 1LL << 30); } while (!is_prime(md));\n\
-    \    cerr << md << '\\n';\n    ModIntRuntime::set_mod(md);\n\n    while (M--)\
-    \ {\n        int u, v;\n        cin >> u >> v;\n        to[u] |= 1 << v;\n   \
-    \     to[v] |= 1 << u;\n    }\n    cout << ChromaticNumber<ModIntRuntime>(to)\
+    };\nint ModIntRuntime::md = 1;\n#line 3 \"random/rand_nondeterministic.hpp\"\n\
+    #include <chrono>\n#line 5 \"random/rand_nondeterministic.hpp\"\n#include <random>\n\
+    \nstruct RNGMt19937 {\n    using lint = long long;\n    std::mt19937 mt;\n   \
+    \ RNGMt19937(long long seed) : mt(seed) {}\n    lint operator()(lint x) { // [0,\
+    \ x)\n        assert(x > 0);\n        return this->operator()(0, x);\n    }\n\
+    \    lint operator()(lint l, lint r) {\n        assert(l < r);\n        std::uniform_int_distribution<lint>\
+    \ d(l, r - 1);\n        return d(mt);\n    }\n};\n// RNGMt19937 rnd(123456789);\n\
+    // RNGMt19937 rnd(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    \n// Fast random number generator based on xoshiro256++.\nstruct FastRNG {\n \
+    \   using ull = unsigned long long;\n    ull s[4];\n\n    static ull rotl(ull\
+    \ x, int k) { return (x << k) | (x >> (64 - k)); }\n\n    static ull splitmix64(ull\
+    \ &x) {\n        ull z = (x += 0x9e3779b97f4a7c15ULL);\n        z = (z ^ (z >>\
+    \ 30)) * 0xbf58476d1ce4e5b9ULL;\n        z = (z ^ (z >> 27)) * 0x94d049bb133111ebULL;\n\
+    \        return z ^ (z >> 31);\n    }\n\n    FastRNG(ull seed) {\n        for\
+    \ (auto &x : s) x = splitmix64(seed);\n    }\n\n    ull next_u64() {\n       \
+    \ ull res = rotl(s[0] + s[3], 23) + s[0];\n        ull t = s[1] << 17;\n\n   \
+    \     s[2] ^= s[0];\n        s[3] ^= s[1];\n        s[1] ^= s[2];\n        s[0]\
+    \ ^= s[3];\n\n        s[2] ^= t;\n        s[3] = rotl(s[3], 45);\n\n        return\
+    \ res;\n    }\n\n    uint32_t next_u32() { return next_u64() >> 32; }\n\n    //\
+    \ [0, n)\n    uint32_t operator()(uint32_t n) {\n        assert(n > 0);\n    \
+    \    return (uint64_t(next_u32()) * n) >> 32;\n    }\n\n    // [l, r)\n    int\
+    \ operator()(int l, int r) {\n        assert(l < r);\n        uint32_t width =\
+    \ uint64_t(int64_t(r) - int64_t(l));\n        return int(int64_t(l) + (*this)(width));\n\
+    \    }\n\n    uint16_t next_u16() { return next_u64() >> 48; }\n};\ninline FastRNG\
+    \ rnd(123456789);\n// FastRNG rnd(std::chrono::steady_clock::now().time_since_epoch().count());\n\
+    #line 6 \"graph/test/chromatic_number.test.cpp\"\n\n#line 9 \"graph/test/chromatic_number.test.cpp\"\
+    \nusing namespace std;\n\nint main() {\n    int N, M;\n    cin >> N >> M;\n  \
+    \  vector<int> to(N);\n\n    long long md = 4;\n    do { md = rnd(1LL << 29, 1LL\
+    \ << 30); } while (!is_prime(md));\n    cerr << md << '\\n';\n    ModIntRuntime::set_mod(md);\n\
+    \n    while (M--) {\n        int u, v;\n        cin >> u >> v;\n        to[u]\
+    \ |= 1 << v;\n        to[v] |= 1 << u;\n    }\n    cout << ChromaticNumber<ModIntRuntime>(to)\
     \ << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/chromatic_number\"\n#include\
     \ \"../chromatic_number.hpp\"\n#include \"../../number/factorize.hpp\"\n#include\
@@ -197,7 +215,7 @@ data:
   isVerificationFile: true
   path: graph/test/chromatic_number.test.cpp
   requiredBy: []
-  timestamp: '2026-04-11 14:52:31+09:00'
+  timestamp: '2026-08-28 22:52:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/chromatic_number.test.cpp

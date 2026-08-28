@@ -288,8 +288,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/linear_sum_assignment.yuki3306.test.cpp
-  - combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
   - combinatorial_opt/test/linear_sum_assignment.test.cpp
+  - combinatorial_opt/test/linear_sum_assignment.aoj1163.test.cpp
 documentation_of: combinatorial_opt/linear_sum_assignment.hpp
 layout: document
 title: "Linear sum assignment problem, Hungarian algorithm \uFF08\u5272\u5F53\u554F\

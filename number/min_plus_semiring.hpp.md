@@ -71,8 +71,8 @@ data:
   timestamp: '2022-01-25 23:19:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
   - linear_algebra_matrix/test/linalg_min_plus_semiring.yuki1780.test.cpp
+  - linear_algebra_matrix/test/linalg_semirings.yuki1340.test.cpp
 documentation_of: number/min_plus_semiring.hpp
 layout: document
 title: "Min-plus semiring / tropical semiring\uFF08(min, +) \u534A\u74B0\u30FB\u30C8\

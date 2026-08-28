@@ -311,9 +311,9 @@ data:
   timestamp: '2026-03-01 21:03:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - data_structure/test/wavelet_matrix.yuki3207.test.cpp
-  - data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp
   - data_structure/test/wavelet_matrix_point_add_rectangle_sum.test.cpp
+  - data_structure/test/wavelet_matrix_range_sum_upper_bound.test.cpp
+  - data_structure/test/wavelet_matrix.yuki3207.test.cpp
   - data_structure/test/wavelet_matrix_rectangle_sum.test.cpp
 documentation_of: data_structure/wavelet_matrix.hpp
 layout: document

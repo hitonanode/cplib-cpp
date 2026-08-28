@@ -127,11 +127,11 @@ data:
   verifiedWith:
   - number/test/combination.test.cpp
   - number/test/combination.stress.test.cpp
-  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - linear_algebra_matrix/test/linalg_longlong.test.cpp
-  - linear_algebra_matrix/test/linalg_ll_det.test.cpp
-  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
   - tree/test/frequency_table_of_tree_distance_ntt.test.cpp
+  - linear_algebra_matrix/test/linalg_ll_det.test.cpp
+  - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
+  - linear_algebra_matrix/test/linalg_longlong.test.cpp
 documentation_of: number/bare_mod_algebra.hpp
 layout: document
 title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\u6570\

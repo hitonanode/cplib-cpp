@@ -633,7 +633,7 @@ data:
         \u306E\u305F\u3081\u306E\u30CF\u30C3\u30B7\u30E5\u95A2\u6570\uFF09"
     - icon: ':heavy_check_mark:'
       path: random/rand_nondeterministic.hpp
-      title: random/rand_nondeterministic.hpp
+      title: "Random number generators \uFF08\u4E71\u6570\u751F\u6210\u5668\uFF09"
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
