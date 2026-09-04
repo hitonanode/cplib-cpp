@@ -41,6 +41,7 @@
 "data_structure/test/dynamic_bitset.yuki3041.test.cpp": "2026-03-02 01:35:44 +0900",
 "data_structure/test/dynamic_bitset.yuki3060.test.cpp": "2026-03-02 01:35:44 +0900",
 "data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp": "2023-05-13 23:16:23 +0900",
+"data_structure/test/fast_hash_map.test.cpp": "2026-09-05 01:34:00 +0900",
 "data_structure/test/fast_set.test.cpp": "2023-03-23 22:42:50 +0900",
 "data_structure/test/fibonacci_heap_dijkstra.test.cpp": "2022-01-08 20:23:44 +0900",
 "data_structure/test/fibonacci_heap_shortestpath.test.cpp": "2022-01-08 20:23:44 +0900",
