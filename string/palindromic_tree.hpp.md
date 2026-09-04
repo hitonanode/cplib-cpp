@@ -117,8 +117,8 @@ data:
   timestamp: '2024-09-22 15:59:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - string/test/palindromic_tree.yuki2606.test.cpp
   - string/test/palindromic_tree.yuki263.test.cpp
+  - string/test/palindromic_tree.yuki2606.test.cpp
 documentation_of: string/palindromic_tree.hpp
 layout: document
 title: "Palindromic tree / eertree \uFF08\u56DE\u6587\u6728\uFF09"

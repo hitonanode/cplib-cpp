@@ -41,8 +41,8 @@ data:
   timestamp: '2026-04-11 14:52:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/primitive_root.test.cpp
   - number/test/primitive_root_1e18.test.cpp
+  - number/test/primitive_root.test.cpp
 documentation_of: number/pow_mod.hpp
 layout: document
 title: "Modular exponentiation \uFF08\u3079\u304D\u4E57 mod\uFF09"

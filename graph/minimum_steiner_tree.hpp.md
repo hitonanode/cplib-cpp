@@ -209,8 +209,8 @@ data:
   timestamp: '2025-08-11 21:45:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - graph/test/minimum_steiner_tree.yuki114.test.cpp
   - graph/test/minimum_steiner_tree.test.cpp
+  - graph/test/minimum_steiner_tree.yuki114.test.cpp
 documentation_of: graph/minimum_steiner_tree.hpp
 layout: document
 title: "Minimum Steiner tree \uFF08\u6700\u5C0F\u30B7\u30E5\u30BF\u30A4\u30CA\u30FC\

@@ -29,8 +29,8 @@ data:
   timestamp: '2023-08-05 12:13:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - number/test/discrete_logarithm_matrix.yuki950.test.cpp
   - utilities/test/pow_op.test.cpp
+  - number/test/discrete_logarithm_matrix.yuki950.test.cpp
 documentation_of: utilities/pow_op.hpp
 layout: document
 title: Power (general monoid)

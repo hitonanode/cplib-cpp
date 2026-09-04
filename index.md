@@ -125,6 +125,9 @@ data:
       path: data_structure/dynamic_bitset.hpp
       title: "Dynamic Bitset \uFF08\u52D5\u7684\u30B5\u30A4\u30BA bitset\uFF09"
     - icon: ':heavy_check_mark:'
+      path: data_structure/fast_hash_map.hpp
+      title: Fast hash map
+    - icon: ':heavy_check_mark:'
       path: data_structure/fast_set.hpp
       title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\
         \u3092\u9AD8\u901F\u306B\u51E6\u7406\u3059\u308B\u30C7\u30FC\u30BF\u69CB\u9020\
@@ -1115,6 +1118,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
       title: data_structure/test/dynamic_graph_vertex_add_component_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: data_structure/test/fast_hash_map.test.cpp
+      title: data_structure/test/fast_hash_map.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/fast_set.test.cpp
       title: data_structure/test/fast_set.test.cpp
