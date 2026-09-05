@@ -231,6 +231,7 @@ template <typename Tp> struct heap {
     P pop() {
         P ret = _heap.top();
         _heap.pop();
+        vp[ret.second] = nullptr;
         return ret;
     }
     int size() { return _heap.size(); }
