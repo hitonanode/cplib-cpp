@@ -1,11 +1,31 @@
 #pragma once
 
+#include <compare>
+
 template <class T> struct UpperTriangular3d {
-    static T explicit_init_required() = delete;
-    T a00 = this->explicit_init_required(), a01 = this->explicit_init_required(),
-      a02 = this->explicit_init_required();
-    T a11 = this->explicit_init_required(), a12 = this->explicit_init_required();
-    T a22 = this->explicit_init_required();
+private:
+    struct DesignatedInitializationOnly {
+    private:
+        constexpr DesignatedInitializationOnly() = default;
+        constexpr DesignatedInitializationOnly(const DesignatedInitializationOnly &) = default;
+        DesignatedInitializationOnly &operator=(const DesignatedInitializationOnly &) = default;
+        friend UpperTriangular3d;
+
+    public:
+        auto operator<=>(const DesignatedInitializationOnly &) const = default;
+    };
+
+    template <class U> static constexpr U explicit_init_required() {
+        static_assert(sizeof(U) == 0, "all matrix entries must be explicitly initialized");
+        return U{};
+    }
+
+public:
+    [[no_unique_address]] DesignatedInitializationOnly designated_initialization_only{};
+    T a00 = explicit_init_required<T>(), a01 = explicit_init_required<T>(),
+      a02 = explicit_init_required<T>();
+    T a11 = explicit_init_required<T>(), a12 = explicit_init_required<T>();
+    T a22 = explicit_init_required<T>();
 
     UpperTriangular3d operator*(const UpperTriangular3d &r) const {
         return UpperTriangular3d{
