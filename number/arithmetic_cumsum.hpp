@@ -156,7 +156,7 @@ template <class T> arithmetic_cumsum<T> zeta_shift_cumsum(long long n, int k) {
     auto init_pows = Sieve(k).enumerate_kth_pows<T>(k, k);
     for (int i = 1; i <= ret.K; ++i) {
         ret.a[i - 1] = T(i).pow(k);
-        ret.A[i] = ret.a[i] + (i ? ret.A[i - 1] : 0);
+        ret.A[i - 1] = ret.a[i - 1] + (i > 1 ? ret.A[i - 2] : 0);
     }
     for (int l = 0; l < ret.L; ++l) {
         ret.invA[l] = sum_of_exponential_times_polynomial<T>(1, init_pows, n / (l + 1) + 1);

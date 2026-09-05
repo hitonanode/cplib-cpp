@@ -3,9 +3,9 @@
 
 // 2-dimensional 1-indexed BIT (i : [1, lenX][1, lenY])
 template <typename T, int lenX, int lenY> struct BIT_2D {
-    std::array<T, (lenX + 1) * (lenY + 1)> val;
+    std::array<T, (lenX + 1) * (lenY + 1)> val{};
     constexpr static int M = lenY + 1;
-    BIT_2D() {}
+    BIT_2D() = default;
     void add(int posx, int posy, T v) noexcept {
         for (int x = posx; x <= lenX; x += x & -x) {
             for (int y = posy; y <= lenY; y += y & -y) val[x * M + y] += v;

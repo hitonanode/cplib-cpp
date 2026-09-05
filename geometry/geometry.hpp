@@ -79,7 +79,7 @@ int ccw(const Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) {
     if (v1.det(v2) > Point2d<T_P>::EPS) return 1;   // 左折
     if (v1.det(v2) < -Point2d<T_P>::EPS) return -1; // 右折
     if (v1.dot(v2) < -Point2d<T_P>::EPS) return 2;  // c-a-b
-    if (v1.norm() < v2.norm()) return -2;           // a-b-c
+    if (v1.norm2() < v2.norm2()) return -2;         // a-b-c
     return 0;                                       // a-c-b
 }
 
@@ -184,6 +184,7 @@ IntersectTwoCircles(const Point2d<T_P> &Ca, T_P Ra, const Point2d<T_P> &Cb, T_P 
     static_assert(std::is_floating_point<T_P>::value == true);
     T_P d = (Ca - Cb).norm();
     if (Ra + Rb < d) return {};
+    if (d == 0) return {};
     T_P rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);
     T_P rs2 = Ra * Ra - rc * rc;
     if (rs2 < 0) return {};
@@ -199,7 +200,9 @@ std::vector<Float> IntersectCircleLine(const PointNd &x0, const PointNd &v, Floa
     Float b = Float(x0.dot(v)) / v.norm2();
     Float c = Float(x0.norm2() - Float(R) * R) / v.norm2();
     if (b * b - c < 0) return {};
-    Float ret1 = -b + sqrtl(b * b - c) * (b > 0 ? -1 : 1);
+    Float discriminant_root = sqrtl(b * b - c);
+    if (discriminant_root == 0) return {-b, -b};
+    Float ret1 = -b + discriminant_root * (b > 0 ? -1 : 1);
     Float ret2 = c / ret1;
     return ret1 < ret2 ? std::vector<Float>{ret1, ret2} : std::vector<Float>{ret2, ret1};
 }

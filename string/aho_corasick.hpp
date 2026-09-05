@@ -18,7 +18,16 @@ template <class T, int (*char2int)(char)> struct AhoCorasick {
     const int D;
     std::vector<T> node;
     AhoCorasick(int D_) : built(false), D(D_), node(1, D) {}
-    AhoCorasick operator=(const AhoCorasick &rhs) { return AhoCorasick(rhs.D); }
+    AhoCorasick(const AhoCorasick &) = default;
+    AhoCorasick &operator=(const AhoCorasick &rhs) {
+        if (this == &rhs) return *this;
+        assert(D == rhs.D);
+        built = rhs.built;
+        node = rhs.node;
+        endpos = rhs.endpos;
+        visorder = rhs.visorder;
+        return *this;
+    }
 
     void enter_child(int n, int nn, int c) { node[n].setch(c, nn); }
 

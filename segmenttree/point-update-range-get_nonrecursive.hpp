@@ -149,7 +149,9 @@ struct CountAndSumLessThan
         return ret;
     }
     TRET data2ret(const TDATA &vec, const TQUERY &q) override {
-        int i = std::lower_bound(vec.begin(), vec.end(), std::make_pair(q, q)) - vec.begin();
+        int i = std::lower_bound(vec.begin(), vec.end(), q,
+                                 [](const auto &p, const TQUERY &v) { return p.first < v; }) -
+                vec.begin();
         if (!i)
             return std::make_pair(0, 0);
         else

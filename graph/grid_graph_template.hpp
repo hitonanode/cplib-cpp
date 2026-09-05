@@ -60,11 +60,12 @@ template <typename T_E, T_E INF, T_E (*edge_cost)(int, int, int, int)> struct Gr
             for (unsigned d = 0; d < dx.size(); d++) {
                 int xn = x + dx[d], yn = y + dy[d];
                 if (xn < 0 or yn < 0 or xn >= H or yn >= W) continue;
-                auto dnxt = dnow + edge_cost(x, y, xn, yn);
+                auto weight = edge_cost(x, y, xn, yn);
+                auto dnxt = dnow + weight;
                 if (dnxt < dist[xn][yn]) {
                     dist[xn][yn] = dnxt;
                     prv[xn][yn] = std::make_pair(x, y);
-                    if (dnxt)
+                    if (weight)
                         deq.emplace_back(xn, yn);
                     else
                         deq.emplace_front(xn, yn);

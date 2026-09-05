@@ -52,6 +52,7 @@ std::vector<cmplx> conv_cmplx(const std::vector<T> &a, const std::vector<T> &b) 
 // Requirement: length * max(a) * max(b) < 10^15
 template <typename T>
 std::vector<long long int> fftconv(const std::vector<T> &a, const std::vector<T> &b) {
+    if (a.empty() or b.empty()) return {};
     std::vector<cmplx> ans = conv_cmplx(a, b);
     std::vector<long long int> ret(ans.size());
     for (int i = 0; i < (int)ans.size(); i++) ret[i] = floor(ans[i].real() + 0.5);

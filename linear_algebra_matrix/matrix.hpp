@@ -191,24 +191,21 @@ template <typename T> struct matrix {
         assert(H == W);
         std::vector<std::vector<T>> ret = Identity(H), tmp = *this;
         int rank = 0;
-        for (int i = 0; i < H; i++) {
-            int ti = i;
-            while (ti < H and tmp[ti][i] == T()) ti++;
-            if (ti == H) {
-                continue;
-            } else {
-                rank++;
-            }
-            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);
-            T inv = _T_id<T>() / tmp[i][i];
-            for (int j = 0; j < W; j++) ret[i][j] *= inv;
-            for (int j = i + 1; j < W; j++) tmp[i][j] *= inv;
+        for (int c = 0; c < W; c++) {
+            int ti = rank;
+            while (ti < H and tmp[ti][c] == T()) ti++;
+            if (ti == H) { continue; }
+            ret[rank].swap(ret[ti]), tmp[rank].swap(tmp[ti]);
+            T inv = _T_id<T>() / tmp[rank][c];
+            for (int j = 0; j < W; j++) ret[rank][j] *= inv;
+            for (int j = c + 1; j < W; j++) tmp[rank][j] *= inv;
             for (int h = 0; h < H; h++) {
-                if (i == h) continue;
-                const T c = -tmp[h][i];
-                for (int j = 0; j < W; j++) ret[h][j] += ret[i][j] * c;
-                for (int j = i + 1; j < W; j++) tmp[h][j] += tmp[i][j] * c;
+                if (rank == h) continue;
+                const T coeff = -tmp[h][c];
+                for (int j = 0; j < W; j++) ret[h][j] += ret[rank][j] * coeff;
+                for (int j = c + 1; j < W; j++) tmp[h][j] += tmp[rank][j] * coeff;
             }
+            rank++;
         }
         *this = ret;
         return rank;

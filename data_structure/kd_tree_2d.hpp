@@ -59,8 +59,8 @@ template <class T> struct kd_tree {
                 // split y
                 std::nth_element(
                     _tmp.begin() + l, _tmp.begin() + c, _tmp.begin() + r,
-                    [&](const Tpl &l, const Tpl &r) { return std::get<2>(l) < std : get<2>(r); });
-                _nodes[_node_id].lch = _build(l, c, 0, nsplity + 1);:
+                    [&](const Tpl &l, const Tpl &r) { return std::get<2>(l) < std::get<2>(r); });
+                _nodes[_node_id].lch = _build(l, c, 0, nsplity + 1);
                 _nodes[_node_id].rch = _build(c, r, 0, nsplity + 1);
             }
         }

@@ -88,7 +88,7 @@ template <typename Int> struct integer_segments {
     // Count elements strictly less than x, O((# of segments))
     Int order_of_key(Int x) const {
         Int ret = 0;
-        for (auto p : x) {
+        for (auto p : mp) {
             if (p.first >= x) break;
             ret += std::min(x - 1, p.second) - p.first + 1;
         }

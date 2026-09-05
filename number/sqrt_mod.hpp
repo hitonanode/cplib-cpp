@@ -17,9 +17,9 @@ template <class Int> Int sqrt_mod(Int a, Int p) {
         }
         return ans;
     };
+    a %= p;
+    if (a < 0) a += p;
     if (a == 0) return 0;
-
-    a = (a % p + p) % p;
     if (p == 2) return a;
     if (pow(a, (p - 1) / 2) != 1) return -1;
 

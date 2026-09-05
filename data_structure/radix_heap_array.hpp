@@ -73,5 +73,8 @@ public:
         chmin(vnew, i);
     }
 
-    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }
+    void clear() noexcept {
+        sz = 0, last = 0, i2bj.clear();
+        for (auto &bucket : v) bucket.clear();
+    }
 };

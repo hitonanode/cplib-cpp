@@ -10,7 +10,9 @@ struct Quadratic {
     Quadratic(Int a, Int b, Int c, Int lb, Int ub) : a(a), b(b), c(c), lb(lb), ub(ub) {}
     Int slope(Int s) const noexcept {
         if (a == 0) return b <= s ? ub : lb;
-        auto ret = (s + a - b) / (a * 2);
+        const Int num = s + a - b, den = a * 2;
+        auto ret = num / den;
+        if (num < 0 and num % den) --ret;
         return ret > ub ? ub : ret < lb ? lb : ret;
     }
     Int eval(Int x) const noexcept { return (a * x + b) * x + c; }

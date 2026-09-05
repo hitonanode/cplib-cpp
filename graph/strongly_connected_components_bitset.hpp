@@ -11,6 +11,15 @@
 // Complexity: O(V^2/64)
 // Verified: CF1268D <https://codeforces.com/contest/1268/submission/68125495>
 template <int VMAX> struct DirectedGraphSCC64 {
+    static int find_first(const std::bitset<VMAX> &bits) {
+#ifdef __GLIBCXX__
+        return bits._Find_first();
+#else
+        for (int i = 0; i < VMAX; i++)
+            if (bits[i]) return i;
+        return VMAX;
+#endif
+    }
     int V;
     const std::vector<std::bitset<VMAX>> &e, &einv;
     std::vector<int> vs, cmp;
@@ -24,7 +33,7 @@ template <int VMAX> struct DirectedGraphSCC64 {
         while (!_st.empty()) {
             int now = _st.back();
             unvisited.reset(now);
-            int nxt = (unvisited & e[now])._Find_first();
+            int nxt = find_first(unvisited & e[now]);
             if (nxt < V) {
                 unvisited.reset(nxt);
                 _st.push_back(nxt);
@@ -43,7 +52,7 @@ template <int VMAX> struct DirectedGraphSCC64 {
             _st.pop_back();
             cmp[now] = k;
             while (true) {
-                int nxt = (unvisited & einv[now])._Find_first();
+                int nxt = find_first(unvisited & einv[now]);
                 if (nxt >= V) break;
                 _st.push_back(nxt);
                 unvisited.reset(nxt);

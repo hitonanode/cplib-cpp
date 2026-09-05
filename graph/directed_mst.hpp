@@ -92,6 +92,7 @@ template <typename Weight = long long> struct MinimumSpanningArborescence {
         void pop() {
             data[root].push();
             root = _meld(data[root].r, data[root].l);
+            sz--;
         }
         int size() const { return sz; }
         bool empty() const { return sz == 0; }
@@ -162,7 +163,7 @@ template <typename Weight = long long> struct MinimumSpanningArborescence {
         }
     }
 };
-template <>
-std::vector<MinimumSpanningArborescence<long long>::skew_heap::node>
-    MinimumSpanningArborescence<long long>::skew_heap::data = {};
+template <typename Weight>
+std::vector<typename MinimumSpanningArborescence<Weight>::skew_heap::node>
+    MinimumSpanningArborescence<Weight>::skew_heap::data = {};
 template <typename T> unsigned MinimumSpanningArborescence<T>::skew_heap::len = 0;

@@ -154,13 +154,14 @@ struct shortest_path {
                 int nxt = nx.first;
                 if (dist[nxt] > dnx) {
                     dist[nxt] = dnx;
+                    prev[nxt] = now;
                     if (!in_queue[nxt]) {
                         if (q.size() and dnx < dist[q.front()]) { // Small label first optimization
                             q.push_front(nxt);
                         } else {
                             q.push_back(nxt);
                         }
-                        prev[nxt] = now, in_queue[nxt] = 1;
+                        in_queue[nxt] = 1;
                     }
                 }
             }

@@ -107,6 +107,7 @@ public:
             ++d;
         }
         if (d > maxd) return 1LL << maxd;
+        if (d == 0) return 0;
 
         --d;
 

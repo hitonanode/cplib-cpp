@@ -50,5 +50,7 @@ template <typename Tp, Tp defaultT = std::numeric_limits<Tp>::max() / 2> struct 
     }
     // Return f(x_begin, ..., x_{end - 1})
     Tp get(int pos) const noexcept { return prod(pos, pos + 1); }
-    Tp prod(int begin, int end) const noexcept { return _get(begin, end, 1, 0, head); }
+    Tp prod(int begin, int end) const noexcept {
+        return begin == end ? defaultT : _get(begin, end, 1, 0, head);
+    }
 };

@@ -13,10 +13,37 @@ using namespace std;
 using S = UpperTriangular3d<ModInt998244353>;
 
 S op(const S &l, const S &r) { return l * r; }
-S e() { return S{1, 0, 0, 1, 0, 1}; }
+S e() {
+    return S{
+        .a00 = 1,
+        .a01 = 0,
+        .a02 = 0,
+        .a11 = 1,
+        .a12 = 0,
+        .a22 = 1,
+    };
+}
 
-S GenR() { return S{ModInt998244353(3) / 4, ModInt998244353(1) / 4, 0, 1, 0, 1}; }
-S GenL() { return S{1, 0, 0, ModInt998244353(3) / 4, ModInt998244353(1) / 4, 1}; }
+S GenR() {
+    return S{
+        .a00 = ModInt998244353(3) / 4,
+        .a01 = ModInt998244353(1) / 4,
+        .a02 = 0,
+        .a11 = 1,
+        .a12 = 0,
+        .a22 = 1,
+    };
+}
+S GenL() {
+    return S{
+        .a00 = 1,
+        .a01 = 0,
+        .a02 = 0,
+        .a11 = ModInt998244353(3) / 4,
+        .a12 = ModInt998244353(1) / 4,
+        .a22 = 1,
+    };
+}
 
 ModInt998244353 Solve(vector<pair<int, int>> ps) {
     vector<tuple<int, int, int>> yxis;
