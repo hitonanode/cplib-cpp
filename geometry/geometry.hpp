@@ -184,6 +184,7 @@ IntersectTwoCircles(const Point2d<T_P> &Ca, T_P Ra, const Point2d<T_P> &Cb, T_P 
     static_assert(std::is_floating_point<T_P>::value == true);
     T_P d = (Ca - Cb).norm();
     if (Ra + Rb < d) return {};
+    if (d == 0) return {};
     T_P rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);
     T_P rs2 = Ra * Ra - rc * rc;
     if (rs2 < 0) return {};
