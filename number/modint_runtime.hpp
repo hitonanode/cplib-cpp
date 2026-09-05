@@ -45,7 +45,9 @@ public:
         get_primitive_root() = 0;
     }
     ModIntRuntime &_setval(lint v) {
-        val_ = (v >= md ? v - md : v);
+        if (v < 0) v += md;
+        if (v >= md) v -= md;
+        val_ = v;
         return *this;
     }
     int val() const noexcept { return val_; }
