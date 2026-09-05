@@ -200,7 +200,9 @@ std::vector<Float> IntersectCircleLine(const PointNd &x0, const PointNd &v, Floa
     Float b = Float(x0.dot(v)) / v.norm2();
     Float c = Float(x0.norm2() - Float(R) * R) / v.norm2();
     if (b * b - c < 0) return {};
-    Float ret1 = -b + sqrtl(b * b - c) * (b > 0 ? -1 : 1);
+    Float discriminant_root = sqrtl(b * b - c);
+    if (discriminant_root == 0) return {-b, -b};
+    Float ret1 = -b + discriminant_root * (b > 0 ? -1 : 1);
     Float ret2 = c / ret1;
     return ret1 < ret2 ? std::vector<Float>{ret1, ret2} : std::vector<Float>{ret2, ret1};
 }
