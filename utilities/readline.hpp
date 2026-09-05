@@ -12,11 +12,7 @@ std::vector<int> read_ints() {
     if (s.empty()) return {};
     std::stringstream ss(s);
     std::vector<int> ret;
-    while (!ss.eof()) {
-        int t;
-        ss >> t;
-        ret.push_back(t);
-    }
+    for (int t; ss >> t;) ret.push_back(t);
     return ret;
 }
 
