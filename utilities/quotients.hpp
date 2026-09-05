@@ -8,14 +8,16 @@
 template <class T = long long> std::vector<T> get_quotients(T n) {
     std::vector<T> res;
     for (T x = 1;; ++x) {
-        if (x * x >= n) {
+        const T quotient = n / x;
+        const bool is_square = quotient == x and n % x == 0;
+        if (x > quotient or is_square) {
             const int sz = res.size();
-            if (x * x == n) res.push_back(x);
+            if (is_square) res.push_back(x);
             res.reserve(res.size() + sz);
             for (int i = sz - 1; i >= 0; --i) {
                 T tmp = n / res.at(i);
                 if (tmp < x) continue;
-                if (tmp == x and tmp * tmp == n) continue;
+                if (tmp == x and is_square) continue;
                 res.push_back(tmp);
             }
             return res;
