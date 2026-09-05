@@ -102,7 +102,7 @@ std::pair<int, std::vector<bool>> bounded_knapsack(const std::vector<int> &weigh
     auto sol = bounded_knapsack_nonnegative(tmp, capacity);
     for (int i = 0; i < int(weights.size()); ++i) {
         if (weights.at(i) < 0) {
-            capacity += weights.at(i);
+            sol.first += weights.at(i);
             sol.second.at(i).flip();
         }
     }
