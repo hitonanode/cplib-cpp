@@ -67,6 +67,9 @@ struct DirectedGraphSCC {
     }
     std::vector<int> DetectCycle() {
         int ns = FindStronglyConnectedComponents();
+        for (int v = 0; v < V; v++) {
+            if (std::find(to[v].begin(), to[v].end(), v) != to[v].end()) return {v};
+        }
         if (ns == V) return {};
         std::vector<int> cnt(ns);
         for (auto x : cmp) cnt[x]++;
