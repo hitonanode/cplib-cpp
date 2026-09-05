@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/test/binary_lifting.yuki1013.test.cpp
     title: other_algorithms/test/binary_lifting.yuki1013.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"other_algorithms/binary_lifting.hpp\"\n#include <cassert>\n\
@@ -55,12 +55,13 @@ data:
     \ F> long long max_length(const int s, F f, const int maxd = 60) {\n        assert(isin(s));\n\
     \        int d = 0;\n        while (d <= maxd and f(pow_prod(s, d))) {\n     \
     \       if (!isin(pow_next(s, d))) return 1LL << maxd;\n            ++d;\n   \
-    \     }\n        if (d > maxd) return 1LL << maxd;\n\n        --d;\n\n       \
-    \ int cur = pow_next(s, d);\n        long long len = 1LL << d;\n        S p =\
-    \ pow_prod(s, d);\n\n        for (int e = d - 1; e >= 0; --e) {\n            if\
-    \ (S nextp = op(p, pow_prod(cur, e)); f(nextp)) {\n                std::swap(p,\
-    \ nextp);\n                cur = pow_next(cur, e);\n                len += 1LL\
-    \ << e;\n            }\n        }\n\n        return len;\n    }\n};\n"
+    \     }\n        if (d > maxd) return 1LL << maxd;\n        if (d == 0) return\
+    \ 0;\n\n        --d;\n\n        int cur = pow_next(s, d);\n        long long len\
+    \ = 1LL << d;\n        S p = pow_prod(s, d);\n\n        for (int e = d - 1; e\
+    \ >= 0; --e) {\n            if (S nextp = op(p, pow_prod(cur, e)); f(nextp)) {\n\
+    \                std::swap(p, nextp);\n                cur = pow_next(cur, e);\n\
+    \                len += 1LL << e;\n            }\n        }\n\n        return\
+    \ len;\n    }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <vector>\n\n// Binary lifting\
     \ (Doubling) on functional graphs\ntemplate <class S, S (*op)(S, S)> class binary_lifting\
     \ {\n    int n = 0;\n    std::vector<std::vector<int>> _nexts;\n    std::vector<std::vector<S>>\
@@ -105,18 +106,18 @@ data:
     \ int maxd = 60) {\n        assert(isin(s));\n        int d = 0;\n        while\
     \ (d <= maxd and f(pow_prod(s, d))) {\n            if (!isin(pow_next(s, d)))\
     \ return 1LL << maxd;\n            ++d;\n        }\n        if (d > maxd) return\
-    \ 1LL << maxd;\n\n        --d;\n\n        int cur = pow_next(s, d);\n        long\
-    \ long len = 1LL << d;\n        S p = pow_prod(s, d);\n\n        for (int e =\
-    \ d - 1; e >= 0; --e) {\n            if (S nextp = op(p, pow_prod(cur, e)); f(nextp))\
-    \ {\n                std::swap(p, nextp);\n                cur = pow_next(cur,\
-    \ e);\n                len += 1LL << e;\n            }\n        }\n\n        return\
-    \ len;\n    }\n};\n"
+    \ 1LL << maxd;\n        if (d == 0) return 0;\n\n        --d;\n\n        int cur\
+    \ = pow_next(s, d);\n        long long len = 1LL << d;\n        S p = pow_prod(s,\
+    \ d);\n\n        for (int e = d - 1; e >= 0; --e) {\n            if (S nextp =\
+    \ op(p, pow_prod(cur, e)); f(nextp)) {\n                std::swap(p, nextp);\n\
+    \                cur = pow_next(cur, e);\n                len += 1LL << e;\n \
+    \           }\n        }\n\n        return len;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: other_algorithms/binary_lifting.hpp
   requiredBy: []
-  timestamp: '2023-07-23 19:53:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:19:58+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - other_algorithms/test/binary_lifting.yuki1013.test.cpp
 documentation_of: other_algorithms/binary_lifting.hpp

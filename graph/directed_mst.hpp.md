@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/test/directed_mst.aoj.test.cpp
     title: graph/test/directed_mst.aoj.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://joisino.hatenablog.com/entry/2017/01/11/230141
@@ -53,17 +53,17 @@ data:
     \   std::pair<Weight, int> top() const { return {data[root].weight(), data[root].getid()};\
     \ }\n        void add_all(Weight w) {\n            if (root != -1) data[root].apply(w);\n\
     \        }\n        void pop() {\n            data[root].push();\n           \
-    \ root = _meld(data[root].r, data[root].l);\n        }\n        int size() const\
-    \ { return sz; }\n        bool empty() const { return sz == 0; }\n    };\n\n \
-    \   Weight ret;\n    MinimumSpanningArborescence(const int N,\n              \
-    \                  const std::vector<std::tuple<int, int, Weight>> &edges, int\
-    \ r) {\n        assert(r >= 0 and r < N);\n        std::vector<short> used(N);\n\
-    \        std::vector<skew_heap> incoming_edges(N);\n\n        ret = 0;\n     \
-    \   std::vector<int> from(N, r);\n        std::vector<Weight> from_cost(N, 0);\n\
-    \        std::vector<int> used_eids;\n        uf.initialize(N);\n        used[r]\
-    \ = 2;\n\n        // std::vector<int> par(N, -1);\n        int s, t;\n       \
-    \ Weight w;\n        for (int eid = 0; eid < int(edges.size()); eid++) {\n   \
-    \         std::tie(s, t, w) = edges[eid];\n            incoming_edges[t].push(w,\
+    \ root = _meld(data[root].r, data[root].l);\n            sz--;\n        }\n  \
+    \      int size() const { return sz; }\n        bool empty() const { return sz\
+    \ == 0; }\n    };\n\n    Weight ret;\n    MinimumSpanningArborescence(const int\
+    \ N,\n                                const std::vector<std::tuple<int, int, Weight>>\
+    \ &edges, int r) {\n        assert(r >= 0 and r < N);\n        std::vector<short>\
+    \ used(N);\n        std::vector<skew_heap> incoming_edges(N);\n\n        ret =\
+    \ 0;\n        std::vector<int> from(N, r);\n        std::vector<Weight> from_cost(N,\
+    \ 0);\n        std::vector<int> used_eids;\n        uf.initialize(N);\n      \
+    \  used[r] = 2;\n\n        // std::vector<int> par(N, -1);\n        int s, t;\n\
+    \        Weight w;\n        for (int eid = 0; eid < int(edges.size()); eid++)\
+    \ {\n            std::tie(s, t, w) = edges[eid];\n            incoming_edges[t].push(w,\
     \ eid);\n        }\n\n        for (int start = 0; start < N; start++) {\n    \
     \        if (used[start] != 0) continue;\n            int cur = start;\n     \
     \       std::vector<int> processing;\n            while (used[cur] != 2) {\n \
@@ -83,10 +83,10 @@ data:
     \                        }\n                        p = uf.find(from[p]);\n  \
     \                  } while (p != cur);\n                } else {\n           \
     \         cur = from[cur];\n                }\n            }\n            for\
-    \ (int v : processing) used[v] = 2;\n        }\n    }\n};\ntemplate <>\nstd::vector<MinimumSpanningArborescence<long\
-    \ long>::skew_heap::node>\n    MinimumSpanningArborescence<long long>::skew_heap::data\
-    \ = {};\ntemplate <typename T> unsigned MinimumSpanningArborescence<T>::skew_heap::len\
-    \ = 0;\n"
+    \ (int v : processing) used[v] = 2;\n        }\n    }\n};\ntemplate <typename\
+    \ Weight>\nstd::vector<typename MinimumSpanningArborescence<Weight>::skew_heap::node>\n\
+    \    MinimumSpanningArborescence<Weight>::skew_heap::data = {};\ntemplate <typename\
+    \ T> unsigned MinimumSpanningArborescence<T>::skew_heap::len = 0;\n"
   code: "#pragma once\n#include <cassert>\n#include <numeric>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\n\n// CUT begin\n// Minimum spanning tree\
     \ for directed graph (spanning arborescence)\n//\n// Complexity: O(nm) (Chu-Liu/Edmonds'\
@@ -126,17 +126,17 @@ data:
     \      std::pair<Weight, int> top() const { return {data[root].weight(), data[root].getid()};\
     \ }\n        void add_all(Weight w) {\n            if (root != -1) data[root].apply(w);\n\
     \        }\n        void pop() {\n            data[root].push();\n           \
-    \ root = _meld(data[root].r, data[root].l);\n        }\n        int size() const\
-    \ { return sz; }\n        bool empty() const { return sz == 0; }\n    };\n\n \
-    \   Weight ret;\n    MinimumSpanningArborescence(const int N,\n              \
-    \                  const std::vector<std::tuple<int, int, Weight>> &edges, int\
-    \ r) {\n        assert(r >= 0 and r < N);\n        std::vector<short> used(N);\n\
-    \        std::vector<skew_heap> incoming_edges(N);\n\n        ret = 0;\n     \
-    \   std::vector<int> from(N, r);\n        std::vector<Weight> from_cost(N, 0);\n\
-    \        std::vector<int> used_eids;\n        uf.initialize(N);\n        used[r]\
-    \ = 2;\n\n        // std::vector<int> par(N, -1);\n        int s, t;\n       \
-    \ Weight w;\n        for (int eid = 0; eid < int(edges.size()); eid++) {\n   \
-    \         std::tie(s, t, w) = edges[eid];\n            incoming_edges[t].push(w,\
+    \ root = _meld(data[root].r, data[root].l);\n            sz--;\n        }\n  \
+    \      int size() const { return sz; }\n        bool empty() const { return sz\
+    \ == 0; }\n    };\n\n    Weight ret;\n    MinimumSpanningArborescence(const int\
+    \ N,\n                                const std::vector<std::tuple<int, int, Weight>>\
+    \ &edges, int r) {\n        assert(r >= 0 and r < N);\n        std::vector<short>\
+    \ used(N);\n        std::vector<skew_heap> incoming_edges(N);\n\n        ret =\
+    \ 0;\n        std::vector<int> from(N, r);\n        std::vector<Weight> from_cost(N,\
+    \ 0);\n        std::vector<int> used_eids;\n        uf.initialize(N);\n      \
+    \  used[r] = 2;\n\n        // std::vector<int> par(N, -1);\n        int s, t;\n\
+    \        Weight w;\n        for (int eid = 0; eid < int(edges.size()); eid++)\
+    \ {\n            std::tie(s, t, w) = edges[eid];\n            incoming_edges[t].push(w,\
     \ eid);\n        }\n\n        for (int start = 0; start < N; start++) {\n    \
     \        if (used[start] != 0) continue;\n            int cur = start;\n     \
     \       std::vector<int> processing;\n            while (used[cur] != 2) {\n \
@@ -156,16 +156,16 @@ data:
     \                        }\n                        p = uf.find(from[p]);\n  \
     \                  } while (p != cur);\n                } else {\n           \
     \         cur = from[cur];\n                }\n            }\n            for\
-    \ (int v : processing) used[v] = 2;\n        }\n    }\n};\ntemplate <>\nstd::vector<MinimumSpanningArborescence<long\
-    \ long>::skew_heap::node>\n    MinimumSpanningArborescence<long long>::skew_heap::data\
-    \ = {};\ntemplate <typename T> unsigned MinimumSpanningArborescence<T>::skew_heap::len\
-    \ = 0;\n"
+    \ (int v : processing) used[v] = 2;\n        }\n    }\n};\ntemplate <typename\
+    \ Weight>\nstd::vector<typename MinimumSpanningArborescence<Weight>::skew_heap::node>\n\
+    \    MinimumSpanningArborescence<Weight>::skew_heap::data = {};\ntemplate <typename\
+    \ T> unsigned MinimumSpanningArborescence<T>::skew_heap::len = 0;\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/directed_mst.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:24:47+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - graph/test/directed_mst.aoj.test.cpp
 documentation_of: graph/directed_mst.hpp

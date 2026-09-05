@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/bare_mod_algebra.hpp
     title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\u6570\
       \u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\u5B9A\

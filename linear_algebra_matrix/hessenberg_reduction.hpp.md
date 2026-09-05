@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
   _extendedRequiredBy:
@@ -113,48 +113,47 @@ data:
     \ const {\n        T ret = _T_id<T>();\n        for (int i = 0; i < H; i++) ret\
     \ *= get(i, i);\n        return ret;\n    }\n    int inverse() {\n        assert(H\
     \ == W);\n        std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n\
-    \        int rank = 0;\n        for (int i = 0; i < H; i++) {\n            int\
-    \ ti = i;\n            while (ti < H and tmp[ti][i] == T()) ti++;\n          \
-    \  if (ti == H) {\n                continue;\n            } else {\n         \
-    \       rank++;\n            }\n            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);\n\
-    \            T inv = _T_id<T>() / tmp[i][i];\n            for (int j = 0; j <\
-    \ W; j++) ret[i][j] *= inv;\n            for (int j = i + 1; j < W; j++) tmp[i][j]\
-    \ *= inv;\n            for (int h = 0; h < H; h++) {\n                if (i ==\
-    \ h) continue;\n                const T c = -tmp[h][i];\n                for (int\
-    \ j = 0; j < W; j++) ret[h][j] += ret[i][j] * c;\n                for (int j =\
-    \ i + 1; j < W; j++) tmp[h][j] += tmp[i][j] * c;\n            }\n        }\n \
-    \       *this = ret;\n        return rank;\n    }\n    friend std::vector<T> operator*(const\
-    \ matrix &m, const std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n\
-    \        std::vector<T> ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];\n    \
-    \    }\n        return ret;\n    }\n    friend std::vector<T> operator*(const\
-    \ std::vector<T> &v, const matrix &m) {\n        assert(int(v.size()) == m.H);\n\
-    \        std::vector<T> ret(m.W);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[j] += v[i] * m.get(i, j);\n    \
-    \    }\n        return ret;\n    }\n    std::vector<T> prod(const std::vector<T>\
-    \ &v) const { return (*this) * v; }\n    std::vector<T> prod_left(const std::vector<T>\
-    \ &v) const { return v * (*this); }\n    template <class OStream> friend OStream\
-    \ &operator<<(OStream &os, const matrix &x) {\n        os << \"[(\" << x.H <<\
-    \ \" * \" << x.W << \" matrix)\";\n        os << \"\\n[column sums: \";\n    \
-    \    for (int j = 0; j < x.W; j++) {\n            T s = T();\n            for\
-    \ (int i = 0; i < x.H; i++) s += x.get(i, j);\n            os << s << \",\";\n\
-    \        }\n        os << \"]\";\n        for (int i = 0; i < x.H; i++) {\n  \
-    \          os << \"\\n[\";\n            for (int j = 0; j < x.W; j++) os << x.get(i,\
-    \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
-    \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
-    \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 5 \"linear_algebra_matrix/hessenberg_reduction.hpp\"\n\n// Upper\
-    \ Hessenberg reduction of square matrices\n// Complexity: O(n^3)\n// Reference:\n\
-    // http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf\ntemplate <class Tp>\
-    \ void hessenberg_reduction(matrix<Tp> &M) {\n    assert(M.height() == M.width());\n\
-    \    const int N = M.height();\n    for (int r = 0; r < N - 2; r++) {\n      \
-    \  int piv = matrix<Tp>::choose_pivot(M, r + 1, r);\n        if (piv < 0) continue;\n\
-    \        for (int i = 0; i < N; i++) std::swap(M[r + 1][i], M[piv][i]);\n    \
-    \    for (int i = 0; i < N; i++) std::swap(M[i][r + 1], M[i][piv]);\n\n      \
-    \  const auto rinv = Tp(1) / M[r + 1][r];\n        for (int i = r + 2; i < N;\
-    \ i++) {\n            const auto n = M[i][r] * rinv;\n            for (int j =\
-    \ 0; j < N; j++) M[i][j] -= M[r + 1][j] * n;\n            for (int j = 0; j <\
-    \ N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n\ntemplate <class\
+    \        int rank = 0;\n        for (int c = 0; c < W; c++) {\n            int\
+    \ ti = rank;\n            while (ti < H and tmp[ti][c] == T()) ti++;\n       \
+    \     if (ti == H) { continue; }\n            ret[rank].swap(ret[ti]), tmp[rank].swap(tmp[ti]);\n\
+    \            T inv = _T_id<T>() / tmp[rank][c];\n            for (int j = 0; j\
+    \ < W; j++) ret[rank][j] *= inv;\n            for (int j = c + 1; j < W; j++)\
+    \ tmp[rank][j] *= inv;\n            for (int h = 0; h < H; h++) {\n          \
+    \      if (rank == h) continue;\n                const T coeff = -tmp[h][c];\n\
+    \                for (int j = 0; j < W; j++) ret[h][j] += ret[rank][j] * coeff;\n\
+    \                for (int j = c + 1; j < W; j++) tmp[h][j] += tmp[rank][j] * coeff;\n\
+    \            }\n            rank++;\n        }\n        *this = ret;\n       \
+    \ return rank;\n    }\n    friend std::vector<T> operator*(const matrix &m, const\
+    \ std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n        std::vector<T>\
+    \ ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n            for (int j =\
+    \ 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];\n        }\n        return ret;\n\
+    \    }\n    friend std::vector<T> operator*(const std::vector<T> &v, const matrix\
+    \ &m) {\n        assert(int(v.size()) == m.H);\n        std::vector<T> ret(m.W);\n\
+    \        for (int i = 0; i < m.H; i++) {\n            for (int j = 0; j < m.W;\
+    \ j++) ret[j] += v[i] * m.get(i, j);\n        }\n        return ret;\n    }\n\
+    \    std::vector<T> prod(const std::vector<T> &v) const { return (*this) * v;\
+    \ }\n    std::vector<T> prod_left(const std::vector<T> &v) const { return v *\
+    \ (*this); }\n    template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const matrix &x) {\n        os << \"[(\" << x.H << \" * \" << x.W << \"\
+    \ matrix)\";\n        os << \"\\n[column sums: \";\n        for (int j = 0; j\
+    \ < x.W; j++) {\n            T s = T();\n            for (int i = 0; i < x.H;\
+    \ i++) s += x.get(i, j);\n            os << s << \",\";\n        }\n        os\
+    \ << \"]\";\n        for (int i = 0; i < x.H; i++) {\n            os << \"\\n[\"\
+    ;\n            for (int j = 0; j < x.W; j++) os << x.get(i, j) << \",\";\n   \
+    \         os << \"]\";\n        }\n        os << \"]\\n\";\n        return os;\n\
+    \    }\n    template <class IStream> friend IStream &operator>>(IStream &is, matrix\
+    \ &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n    }\n\
+    };\n#line 5 \"linear_algebra_matrix/hessenberg_reduction.hpp\"\n\n// Upper Hessenberg\
+    \ reduction of square matrices\n// Complexity: O(n^3)\n// Reference:\n// http://www.phys.uri.edu/nigh/NumRec/bookfpdf/f11-5.pdf\n\
+    template <class Tp> void hessenberg_reduction(matrix<Tp> &M) {\n    assert(M.height()\
+    \ == M.width());\n    const int N = M.height();\n    for (int r = 0; r < N - 2;\
+    \ r++) {\n        int piv = matrix<Tp>::choose_pivot(M, r + 1, r);\n        if\
+    \ (piv < 0) continue;\n        for (int i = 0; i < N; i++) std::swap(M[r + 1][i],\
+    \ M[piv][i]);\n        for (int i = 0; i < N; i++) std::swap(M[i][r + 1], M[i][piv]);\n\
+    \n        const auto rinv = Tp(1) / M[r + 1][r];\n        for (int i = r + 2;\
+    \ i < N; i++) {\n            const auto n = M[i][r] * rinv;\n            for (int\
+    \ j = 0; j < N; j++) M[i][j] -= M[r + 1][j] * n;\n            for (int j = 0;\
+    \ j < N; j++) M[j][r + 1] += M[j][i] * n;\n        }\n    }\n}\n\ntemplate <class\
     \ Ring> void ring_hessenberg_reduction(matrix<Ring> &M) {\n    assert(M.height()\
     \ == M.width());\n    const int N = M.height();\n    for (int r = 0; r < N - 2;\
     \ r++) {\n        int piv = matrix<Ring>::choose_pivot(M, r + 1, r);\n       \
@@ -215,7 +214,7 @@ data:
   path: linear_algebra_matrix/hessenberg_reduction.hpp
   requiredBy:
   - linear_algebra_matrix/determinant_of_first_degree_poly_mat.hpp
-  timestamp: '2025-08-10 23:51:40+09:00'
+  timestamp: '2026-09-05 15:19:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp

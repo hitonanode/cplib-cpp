@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/
@@ -82,107 +82,107 @@ data:
     \ = 0;\n            for (int e = head[now]; e < head[now + 1]; ++e) {\n      \
     \          const auto &nx = tos[e];\n                T dnx = dist[now] + nx.second;\n\
     \                int nxt = nx.first;\n                if (dist[nxt] > dnx) {\n\
-    \                    dist[nxt] = dnx;\n                    if (!in_queue[nxt])\
-    \ {\n                        if (q.size() and dnx < dist[q.front()]) { // Small\
-    \ label first optimization\n                            q.push_front(nxt);\n \
-    \                       } else {\n                            q.push_back(nxt);\n\
-    \                        }\n                        prev[nxt] = now, in_queue[nxt]\
-    \ = 1;\n                    }\n                }\n            }\n        }\n \
-    \   }\n\n    // 01-BFS\n    // - Requirement: all weights must be 0 or w (positive\
-    \ constant).\n    // - Complexity: O(V + E)\n    void zero_one_bfs(int s, int\
-    \ t = INVALID) {\n        assert(0 <= s and s < V);\n        build_();\n     \
-    \   dist.assign(V, INF), prev.assign(V, INVALID);\n        dist[s] = 0;\n    \
-    \    std::vector<int> q(V * 4);\n        int ql = V * 2, qr = V * 2;\n       \
-    \ q[qr++] = s;\n        while (ql < qr) {\n            int v = q[ql++];\n    \
-    \        if (v == t) return;\n            for (int e = head[v]; e < head[v + 1];\
-    \ ++e) {\n                const auto &nx = tos[e];\n                T dnx = dist[v]\
-    \ + nx.second;\n                if (dist[nx.first] > dnx) {\n                \
-    \    dist[nx.first] = dnx, prev[nx.first] = v;\n                    if (nx.second)\
-    \ {\n                        q[qr++] = nx.first;\n                    } else {\n\
-    \                        q[--ql] = nx.first;\n                    }\n        \
-    \        }\n            }\n        }\n    }\n\n    // Dial's algorithm\n    //\
-    \ - Requirement: wmin >= 0\n    // - Complexity: O(wmax * V + E)\n    void dial(int\
-    \ s, int t = INVALID) {\n        assert(0 <= s and s < V);\n        build_();\n\
-    \        dist.assign(V, INF), prev.assign(V, INVALID);\n        dist[s] = 0;\n\
-    \        std::vector<std::vector<std::pair<int, T>>> q(wmax + 1);\n        q[0].emplace_back(s,\
-    \ dist[s]);\n        int ninq = 1;\n\n        int cur = 0;\n        T dcur = 0;\n\
-    \        for (; ninq; ++cur, ++dcur) {\n            if (cur == wmax + 1) cur =\
-    \ 0;\n            while (!q[cur].empty()) {\n                int v = q[cur].back().first;\n\
-    \                T dnow = q[cur].back().second;\n                q[cur].pop_back(),\
-    \ --ninq;\n                if (v == t) return;\n                if (dist[v] <\
-    \ dnow) continue;\n\n                for (int e = head[v]; e < head[v + 1]; ++e)\
-    \ {\n                    const auto &nx = tos[e];\n                    T dnx =\
-    \ dist[v] + nx.second;\n                    if (dist[nx.first] > dnx) {\n    \
-    \                    dist[nx.first] = dnx, prev[nx.first] = v;\n             \
-    \           int nxtcur = cur + int(nx.second);\n                        if (nxtcur\
-    \ >= int(q.size())) nxtcur -= q.size();\n                        q[nxtcur].emplace_back(nx.first,\
-    \ dnx), ++ninq;\n                    }\n                }\n            }\n   \
-    \     }\n    }\n\n    // Solver for DAG\n    // - Requirement: graph is DAG\n\
-    \    // - Complexity: O(V + E)\n    bool dag_solver(int s) {\n        assert(0\
-    \ <= s and s < V);\n        build_();\n        dist.assign(V, INF), prev.assign(V,\
-    \ INVALID);\n        dist[s] = 0;\n        std::vector<int> indeg(V, 0);\n   \
-    \     std::vector<int> q(V * 2);\n        int ql = 0, qr = 0;\n        q[qr++]\
-    \ = s;\n        while (ql < qr) {\n            int now = q[ql++];\n          \
-    \  for (int e = head[now]; e < head[now + 1]; ++e) {\n                const auto\
-    \ &nx = tos[e];\n                ++indeg[nx.first];\n                if (indeg[nx.first]\
-    \ == 1) q[qr++] = nx.first;\n            }\n        }\n        ql = qr = 0;\n\
+    \                    dist[nxt] = dnx;\n                    prev[nxt] = now;\n\
+    \                    if (!in_queue[nxt]) {\n                        if (q.size()\
+    \ and dnx < dist[q.front()]) { // Small label first optimization\n           \
+    \                 q.push_front(nxt);\n                        } else {\n     \
+    \                       q.push_back(nxt);\n                        }\n       \
+    \                 in_queue[nxt] = 1;\n                    }\n                }\n\
+    \            }\n        }\n    }\n\n    // 01-BFS\n    // - Requirement: all weights\
+    \ must be 0 or w (positive constant).\n    // - Complexity: O(V + E)\n    void\
+    \ zero_one_bfs(int s, int t = INVALID) {\n        assert(0 <= s and s < V);\n\
+    \        build_();\n        dist.assign(V, INF), prev.assign(V, INVALID);\n  \
+    \      dist[s] = 0;\n        std::vector<int> q(V * 4);\n        int ql = V *\
+    \ 2, qr = V * 2;\n        q[qr++] = s;\n        while (ql < qr) {\n          \
+    \  int v = q[ql++];\n            if (v == t) return;\n            for (int e =\
+    \ head[v]; e < head[v + 1]; ++e) {\n                const auto &nx = tos[e];\n\
+    \                T dnx = dist[v] + nx.second;\n                if (dist[nx.first]\
+    \ > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n  \
+    \                  if (nx.second) {\n                        q[qr++] = nx.first;\n\
+    \                    } else {\n                        q[--ql] = nx.first;\n \
+    \                   }\n                }\n            }\n        }\n    }\n\n\
+    \    // Dial's algorithm\n    // - Requirement: wmin >= 0\n    // - Complexity:\
+    \ O(wmax * V + E)\n    void dial(int s, int t = INVALID) {\n        assert(0 <=\
+    \ s and s < V);\n        build_();\n        dist.assign(V, INF), prev.assign(V,\
+    \ INVALID);\n        dist[s] = 0;\n        std::vector<std::vector<std::pair<int,\
+    \ T>>> q(wmax + 1);\n        q[0].emplace_back(s, dist[s]);\n        int ninq\
+    \ = 1;\n\n        int cur = 0;\n        T dcur = 0;\n        for (; ninq; ++cur,\
+    \ ++dcur) {\n            if (cur == wmax + 1) cur = 0;\n            while (!q[cur].empty())\
+    \ {\n                int v = q[cur].back().first;\n                T dnow = q[cur].back().second;\n\
+    \                q[cur].pop_back(), --ninq;\n                if (v == t) return;\n\
+    \                if (dist[v] < dnow) continue;\n\n                for (int e =\
+    \ head[v]; e < head[v + 1]; ++e) {\n                    const auto &nx = tos[e];\n\
+    \                    T dnx = dist[v] + nx.second;\n                    if (dist[nx.first]\
+    \ > dnx) {\n                        dist[nx.first] = dnx, prev[nx.first] = v;\n\
+    \                        int nxtcur = cur + int(nx.second);\n                \
+    \        if (nxtcur >= int(q.size())) nxtcur -= q.size();\n                  \
+    \      q[nxtcur].emplace_back(nx.first, dnx), ++ninq;\n                    }\n\
+    \                }\n            }\n        }\n    }\n\n    // Solver for DAG\n\
+    \    // - Requirement: graph is DAG\n    // - Complexity: O(V + E)\n    bool dag_solver(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        build_();\n        dist.assign(V,\
+    \ INF), prev.assign(V, INVALID);\n        dist[s] = 0;\n        std::vector<int>\
+    \ indeg(V, 0);\n        std::vector<int> q(V * 2);\n        int ql = 0, qr = 0;\n\
     \        q[qr++] = s;\n        while (ql < qr) {\n            int now = q[ql++];\n\
     \            for (int e = head[now]; e < head[now + 1]; ++e) {\n             \
-    \   const auto &nx = tos[e];\n                --indeg[nx.first];\n           \
-    \     if (dist[nx.first] > dist[now] + nx.second)\n                    dist[nx.first]\
-    \ = dist[now] + nx.second, prev[nx.first] = now;\n                if (indeg[nx.first]\
-    \ == 0) q[qr++] = nx.first;\n            }\n        }\n        return *max_element(indeg.begin(),\
-    \ indeg.end()) == 0;\n    }\n\n    // Retrieve a sequence of vertex ids that represents\
-    \ shortest path [s, ..., goal]\n    // If not reachable to goal, return {}\n \
-    \   std::vector<int> retrieve_path(int goal) const {\n        assert(int(prev.size())\
-    \ == V);\n        assert(0 <= goal and goal < V);\n        if (dist[goal] == INF)\
-    \ return {};\n        std::vector<int> ret{goal};\n        while (prev[goal] !=\
-    \ INVALID) {\n            goal = prev[goal];\n            ret.push_back(goal);\n\
-    \        }\n        std::reverse(ret.begin(), ret.end());\n        return ret;\n\
-    \    }\n\n    void solve(int s, int t = INVALID) {\n        if (wmin >= 0) {\n\
-    \            if (single_positive_weight) {\n                zero_one_bfs(s, t);\n\
-    \            } else if (wmax <= 10) {\n                dial(s, t);\n         \
-    \   } else {\n                if ((long long)V * V < (E << 4)) {\n           \
-    \         dijkstra_vquad(s, t);\n                } else {\n                  \
-    \  dijkstra(s, t);\n                }\n            }\n        } else {\n     \
-    \       bellman_ford(s, V);\n        }\n    }\n\n    // Warshall-Floyd algorithm\n\
-    \    // - Requirement: no negative loop\n    // - Complexity: O(E + V^3)\n   \
-    \ std::vector<std::vector<T>> floyd_warshall() {\n        build_();\n        std::vector<std::vector<T>>\
-    \ dist2d(V, std::vector<T>(V, INF));\n        for (int i = 0; i < V; i++) {\n\
-    \            dist2d[i][i] = 0;\n            for (const auto &e : edges) {\n  \
-    \              int s = std::get<0>(e), t = std::get<1>(e);\n                dist2d[s][t]\
-    \ = std::min(dist2d[s][t], std::get<2>(e));\n            }\n        }\n      \
-    \  for (int k = 0; k < V; k++) {\n            for (int i = 0; i < V; i++) {\n\
-    \                if (dist2d[i][k] == INF) continue;\n                for (int\
-    \ j = 0; j < V; j++) {\n                    if (dist2d[k][j] == INF) continue;\n\
-    \                    dist2d[i][j] = std::min(dist2d[i][j], dist2d[i][k] + dist2d[k][j]);\n\
-    \                }\n            }\n        }\n        return dist2d;\n    }\n\n\
-    \    void to_dot(std::string filename = \"shortest_path\") const {\n        std::ofstream\
-    \ ss(filename + \".DOT\");\n        ss << \"digraph{\\n\";\n        build_();\n\
-    \        for (int i = 0; i < V; i++) {\n            for (int e = head[i]; e <\
-    \ head[i + 1]; ++e) {\n                ss << i << \"->\" << tos[e].first << \"\
-    [label=\" << tos[e].second << \"];\\n\";\n            }\n        }\n        ss\
-    \ << \"}\\n\";\n        ss.close();\n        return;\n    }\n};\n#line 5 \"combinatorial_opt/matroid_intersection.hpp\"\
-    \n\n// Find minimum weight augmenting path of matroid intersection.\n// m1, m2:\
-    \ matroids\n// I: independent set (will be updated if augmenting path is found)\n\
-    //\n// Return `true` iff augmenting path is found.\n// Complexity: O(Cn + n^2)\
-    \ (C: circuit query)\ntemplate <class Matroid1, class Matroid2, class T = int>\n\
-    bool matroid_intersection_augment(Matroid1 &m1, Matroid2 &m2, std::vector<bool>\
-    \ &I,\n                                  const std::vector<T> &weights = {}) {\n\
-    \    const int n = m1.size();\n    assert(m2.size() == n);\n    assert((int)I.size()\
-    \ == n);\n\n    auto weight = [&](int e) { return weights.empty() ? T() : weights.at(e)\
-    \ * (n + 1); };\n\n    const int gs = n, gt = n + 1;\n    shortest_path<T> sssp(n\
-    \ + 2);\n    m1.set(I);\n    m2.set(I);\n    for (int e = 0; e < n; ++e) {\n \
-    \       if (I.at(e)) continue;\n        auto c1 = m1.circuit(e), c2 = m2.circuit(e);\n\
-    \        if (c1.empty()) sssp.add_edge(e, gt, T());\n        for (int f : c1)\
-    \ {\n            if (f != e) sssp.add_edge(e, f, -weight(f) + T(1));\n       \
-    \ }\n        if (c2.empty()) sssp.add_edge(gs, e, weight(e) + T(1));\n       \
-    \ for (int f : c2) {\n            if (f != e) sssp.add_edge(f, e, weight(e) +\
-    \ T(1));\n        }\n    }\n    sssp.solve(gs, gt);\n\n    if (auto aug_path =\
-    \ sssp.retrieve_path(gt); aug_path.empty()) {\n        return false;\n    } else\
-    \ {\n        for (auto e : aug_path) {\n            if (e != gs and e != gt) I.at(e)\
-    \ = !I.at(e);\n        }\n        return true;\n    }\n}\n\n// Minimum weight\
-    \ matroid intersection solver\n// Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
+    \   const auto &nx = tos[e];\n                ++indeg[nx.first];\n           \
+    \     if (indeg[nx.first] == 1) q[qr++] = nx.first;\n            }\n        }\n\
+    \        ql = qr = 0;\n        q[qr++] = s;\n        while (ql < qr) {\n     \
+    \       int now = q[ql++];\n            for (int e = head[now]; e < head[now +\
+    \ 1]; ++e) {\n                const auto &nx = tos[e];\n                --indeg[nx.first];\n\
+    \                if (dist[nx.first] > dist[now] + nx.second)\n               \
+    \     dist[nx.first] = dist[now] + nx.second, prev[nx.first] = now;\n        \
+    \        if (indeg[nx.first] == 0) q[qr++] = nx.first;\n            }\n      \
+    \  }\n        return *max_element(indeg.begin(), indeg.end()) == 0;\n    }\n\n\
+    \    // Retrieve a sequence of vertex ids that represents shortest path [s, ...,\
+    \ goal]\n    // If not reachable to goal, return {}\n    std::vector<int> retrieve_path(int\
+    \ goal) const {\n        assert(int(prev.size()) == V);\n        assert(0 <= goal\
+    \ and goal < V);\n        if (dist[goal] == INF) return {};\n        std::vector<int>\
+    \ ret{goal};\n        while (prev[goal] != INVALID) {\n            goal = prev[goal];\n\
+    \            ret.push_back(goal);\n        }\n        std::reverse(ret.begin(),\
+    \ ret.end());\n        return ret;\n    }\n\n    void solve(int s, int t = INVALID)\
+    \ {\n        if (wmin >= 0) {\n            if (single_positive_weight) {\n   \
+    \             zero_one_bfs(s, t);\n            } else if (wmax <= 10) {\n    \
+    \            dial(s, t);\n            } else {\n                if ((long long)V\
+    \ * V < (E << 4)) {\n                    dijkstra_vquad(s, t);\n             \
+    \   } else {\n                    dijkstra(s, t);\n                }\n       \
+    \     }\n        } else {\n            bellman_ford(s, V);\n        }\n    }\n\
+    \n    // Warshall-Floyd algorithm\n    // - Requirement: no negative loop\n  \
+    \  // - Complexity: O(E + V^3)\n    std::vector<std::vector<T>> floyd_warshall()\
+    \ {\n        build_();\n        std::vector<std::vector<T>> dist2d(V, std::vector<T>(V,\
+    \ INF));\n        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n\
+    \            for (const auto &e : edges) {\n                int s = std::get<0>(e),\
+    \ t = std::get<1>(e);\n                dist2d[s][t] = std::min(dist2d[s][t], std::get<2>(e));\n\
+    \            }\n        }\n        for (int k = 0; k < V; k++) {\n           \
+    \ for (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
+    \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
+    \ == INF) continue;\n                    dist2d[i][j] = std::min(dist2d[i][j],\
+    \ dist2d[i][k] + dist2d[k][j]);\n                }\n            }\n        }\n\
+    \        return dist2d;\n    }\n\n    void to_dot(std::string filename = \"shortest_path\"\
+    ) const {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
+    n\";\n        build_();\n        for (int i = 0; i < V; i++) {\n            for\
+    \ (int e = head[i]; e < head[i + 1]; ++e) {\n                ss << i << \"->\"\
+    \ << tos[e].first << \"[label=\" << tos[e].second << \"];\\n\";\n            }\n\
+    \        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n  \
+    \  }\n};\n#line 5 \"combinatorial_opt/matroid_intersection.hpp\"\n\n// Find minimum\
+    \ weight augmenting path of matroid intersection.\n// m1, m2: matroids\n// I:\
+    \ independent set (will be updated if augmenting path is found)\n//\n// Return\
+    \ `true` iff augmenting path is found.\n// Complexity: O(Cn + n^2) (C: circuit\
+    \ query)\ntemplate <class Matroid1, class Matroid2, class T = int>\nbool matroid_intersection_augment(Matroid1\
+    \ &m1, Matroid2 &m2, std::vector<bool> &I,\n                                 \
+    \ const std::vector<T> &weights = {}) {\n    const int n = m1.size();\n    assert(m2.size()\
+    \ == n);\n    assert((int)I.size() == n);\n\n    auto weight = [&](int e) { return\
+    \ weights.empty() ? T() : weights.at(e) * (n + 1); };\n\n    const int gs = n,\
+    \ gt = n + 1;\n    shortest_path<T> sssp(n + 2);\n    m1.set(I);\n    m2.set(I);\n\
+    \    for (int e = 0; e < n; ++e) {\n        if (I.at(e)) continue;\n        auto\
+    \ c1 = m1.circuit(e), c2 = m2.circuit(e);\n        if (c1.empty()) sssp.add_edge(e,\
+    \ gt, T());\n        for (int f : c1) {\n            if (f != e) sssp.add_edge(e,\
+    \ f, -weight(f) + T(1));\n        }\n        if (c2.empty()) sssp.add_edge(gs,\
+    \ e, weight(e) + T(1));\n        for (int f : c2) {\n            if (f != e) sssp.add_edge(f,\
+    \ e, weight(e) + T(1));\n        }\n    }\n    sssp.solve(gs, gt);\n\n    if (auto\
+    \ aug_path = sssp.retrieve_path(gt); aug_path.empty()) {\n        return false;\n\
+    \    } else {\n        for (auto e : aug_path) {\n            if (e != gs and\
+    \ e != gt) I.at(e) = !I.at(e);\n        }\n        return true;\n    }\n}\n\n\
+    // Minimum weight matroid intersection solver\n// Algorithm based on http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/\n\
     // Complexity: O(Cn^2 + n^3) (C : circuit query, non-weighted)\ntemplate <class\
     \ Matroid1, class Matroid2, class T = int>\nstd::vector<bool>\nMatroidIntersection(Matroid1\
     \ matroid1, Matroid2 matroid2, std::vector<T> weights = {}) {\n    const int n\
@@ -229,8 +229,8 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/matroid_intersection.hpp
   requiredBy: []
-  timestamp: '2023-07-23 15:18:37+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:18:59+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
   - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp

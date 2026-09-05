@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/formal_power_series.hpp
     title: f(x)g(x) = 1 (mod x^deg)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []
@@ -292,14 +292,15 @@ data:
     \ g;\n                }\n                return -1;\n            }();\n      \
     \  }\n        return primitive_root_;\n    }\n    static void set_mod(const int\
     \ &m) {\n        if (md != m) facs().clear();\n        md = m;\n        get_primitive_root()\
-    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ?\
-    \ v - md : v);\n        return *this;\n    }\n    int val() const noexcept { return\
-    \ val_; }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v\
-    \ % md + md); }\n    explicit operator bool() const { return val_ != 0; }\n  \
-    \  ModIntRuntime operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
-    \ + x.val_);\n    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const\
-    \ {\n        return ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n\
-    \    ModIntRuntime operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        if (v < 0) v += md;\n\
+    \        if (v >= md) v -= md;\n        val_ = v;\n        return *this;\n   \
+    \ }\n    int val() const noexcept { return val_; }\n    ModIntRuntime() : val_(0)\
+    \ {}\n    ModIntRuntime(lint v) { _setval(v % md + md); }\n    explicit operator\
+    \ bool() const { return val_ != 0; }\n    ModIntRuntime operator+(const ModIntRuntime\
+    \ &x) const {\n        return ModIntRuntime()._setval((lint)val_ + x.val_);\n\
+    \    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const {\n        return\
+    \ ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n    ModIntRuntime\
+    \ operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
     \ * x.val_ % md);\n    }\n    ModIntRuntime operator/(const ModIntRuntime &x)\
     \ const {\n        return ModIntRuntime()._setval((lint)val_ * x.inv().val() %\
     \ md);\n    }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(md\
@@ -368,7 +369,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/fps_exp_modintruntime.test.cpp
   requiredBy: []
-  timestamp: '2025-08-25 00:47:28+09:00'
+  timestamp: '2026-09-05 15:19:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/fps_exp_modintruntime.test.cpp

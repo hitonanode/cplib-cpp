@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A
@@ -67,13 +67,13 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 2 \"number/test/prime_factorization.test.cpp\"\n#include <iostream>\n#define\
-    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A\"\
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 2 \"number/test/prime_factorization.test.cpp\"\
+    \n#include <iostream>\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A\"\
     \nusing namespace std;\n\nint main() {\n    Sieve sieve(1 << 15);\n    int N;\n\
     \    cin >> N;\n    map<long long int, int> factors = sieve.factorize<long long>(N);\n\
     \    cout << N << ':';\n    for (auto p : factors) {\n        while (p.second--)\
@@ -88,8 +88,8 @@ data:
   isVerificationFile: true
   path: number/test/prime_factorization.test.cpp
   requiredBy: []
-  timestamp: '2021-10-30 11:24:11+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:19:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/prime_factorization.test.cpp
 layout: document

@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/integer_segments.hpp
     title: utilities/integer_segments.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
@@ -54,7 +54,7 @@ data:
     \ >= k + 1) return hi + k + 1;\n            k -= add;\n            hi = std::max(hi,\
     \ r);\n        }\n        return -1;\n    }\n\n    // Count elements strictly\
     \ less than x, O((# of segments))\n    Int order_of_key(Int x) const {\n     \
-    \   Int ret = 0;\n        for (auto p : x) {\n            if (p.first >= x) break;\n\
+    \   Int ret = 0;\n        for (auto p : mp) {\n            if (p.first >= x) break;\n\
     \            ret += std::min(x - 1, p.second) - p.first + 1;\n        }\n    \
     \    return ret;\n    }\n\n    friend std::ostream &operator<<(std::ostream &os,\
     \ const integer_segments &x) {\n        os << '{';\n        for (auto &&p : x.mp)\
@@ -86,8 +86,8 @@ data:
   isVerificationFile: true
   path: utilities/test/predecessor_problem.test.cpp
   requiredBy: []
-  timestamp: '2021-04-25 18:25:53+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:20:42+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: utilities/test/predecessor_problem.test.cpp
 layout: document

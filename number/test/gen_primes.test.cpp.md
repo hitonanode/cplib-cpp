@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C
@@ -67,19 +67,19 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 2 \"number/test/gen_primes.test.cpp\"\n#include <iostream>\n#line 4 \"number/test/gen_primes.test.cpp\"\
-    \n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C\"\
-    \nusing namespace std;\n\nint main() {\n    Sieve sieve(10000);\n    int N;\n\
-    \    cin >> N;\n    int ret = 0;\n    while (N--) {\n        int x;\n        cin\
-    \ >> x;\n        bool flg = true;\n        for (auto p : sieve.primes)\n     \
-    \       if (x % p == 0 and x != p) {\n                flg = false;\n         \
-    \       break;\n            }\n        ret += flg;\n    }\n    cout << ret <<\
-    \ '\\n';\n}\n"
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 2 \"number/test/gen_primes.test.cpp\"\
+    \n#include <iostream>\n#line 4 \"number/test/gen_primes.test.cpp\"\n#define PROBLEM\
+    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C\"\nusing\
+    \ namespace std;\n\nint main() {\n    Sieve sieve(10000);\n    int N;\n    cin\
+    \ >> N;\n    int ret = 0;\n    while (N--) {\n        int x;\n        cin >> x;\n\
+    \        bool flg = true;\n        for (auto p : sieve.primes)\n            if\
+    \ (x % p == 0 and x != p) {\n                flg = false;\n                break;\n\
+    \            }\n        ret += flg;\n    }\n    cout << ret << '\\n';\n}\n"
   code: "#include \"../sieve.hpp\"\n#include <iostream>\n#include <vector>\n#define\
     \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C\"\
     \nusing namespace std;\n\nint main() {\n    Sieve sieve(10000);\n    int N;\n\
@@ -93,8 +93,8 @@ data:
   isVerificationFile: true
   path: number/test/gen_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-10-30 11:24:11+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:19:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/gen_primes.test.cpp
 layout: document

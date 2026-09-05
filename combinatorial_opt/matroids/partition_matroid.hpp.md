@@ -3,10 +3,10 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
   - icon: ':heavy_check_mark:'
@@ -15,9 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
     title: combinatorial_opt/test/matroid_intersection_dijkstra.aoj_grl_2_b.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"combinatorial_opt/matroids/partition_matroid.hpp\"\n#include\
@@ -70,7 +70,7 @@ data:
   path: combinatorial_opt/matroids/partition_matroid.hpp
   requiredBy: []
   timestamp: '2021-09-01 23:53:05+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - combinatorial_opt/test/matroid_intersection_dijkstra.aoj1605.test.cpp
   - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp

@@ -43,8 +43,8 @@ data:
     \ = vnew;\n            }\n        }\n    }\n\n    void pop() { argmin_pop(); }\n\
     \    std::pair<Uint, int> top() { return pull(), v[0].back(); }\n    [[deprecated(\"\
     NOT usual emplace() opeation!\")]] void emplace(Uint vnew, int i) {\n        chmin(vnew,\
-    \ i);\n    }\n\n    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }\n\
-    };\n"
+    \ i);\n    }\n\n    void clear() noexcept {\n        sz = 0, last = 0, i2bj.clear();\n\
+    \        for (auto &bucket : v) bucket.clear();\n    }\n};\n"
   code: "#pragma once\n#include <array>\n#include <limits>\n#include <type_traits>\n\
     #include <utility>\n#include <vector>\n\ntemplate <class Uint> class radix_heap_array\
     \ {\n    int sz;\n    Uint last;\n    std::array<std::vector<std::pair<Uint, int>>,\
@@ -76,13 +76,13 @@ data:
     \ = vnew;\n            }\n        }\n    }\n\n    void pop() { argmin_pop(); }\n\
     \    std::pair<Uint, int> top() { return pull(), v[0].back(); }\n    [[deprecated(\"\
     NOT usual emplace() opeation!\")]] void emplace(Uint vnew, int i) {\n        chmin(vnew,\
-    \ i);\n    }\n\n    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }\n\
-    };\n"
+    \ i);\n    }\n\n    void clear() noexcept {\n        sz = 0, last = 0, i2bj.clear();\n\
+    \        for (auto &bucket : v) bucket.clear();\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: data_structure/radix_heap_array.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2026-09-05 15:18:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/radix_heap_array.dijkstra.test.cpp

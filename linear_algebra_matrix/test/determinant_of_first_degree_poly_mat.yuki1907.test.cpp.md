@@ -12,10 +12,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/hessenberg_reduction.hpp
     title: Hessenberg reduction of matrix
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -118,37 +118,37 @@ data:
     \ const {\n        T ret = _T_id<T>();\n        for (int i = 0; i < H; i++) ret\
     \ *= get(i, i);\n        return ret;\n    }\n    int inverse() {\n        assert(H\
     \ == W);\n        std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n\
-    \        int rank = 0;\n        for (int i = 0; i < H; i++) {\n            int\
-    \ ti = i;\n            while (ti < H and tmp[ti][i] == T()) ti++;\n          \
-    \  if (ti == H) {\n                continue;\n            } else {\n         \
-    \       rank++;\n            }\n            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);\n\
-    \            T inv = _T_id<T>() / tmp[i][i];\n            for (int j = 0; j <\
-    \ W; j++) ret[i][j] *= inv;\n            for (int j = i + 1; j < W; j++) tmp[i][j]\
-    \ *= inv;\n            for (int h = 0; h < H; h++) {\n                if (i ==\
-    \ h) continue;\n                const T c = -tmp[h][i];\n                for (int\
-    \ j = 0; j < W; j++) ret[h][j] += ret[i][j] * c;\n                for (int j =\
-    \ i + 1; j < W; j++) tmp[h][j] += tmp[i][j] * c;\n            }\n        }\n \
-    \       *this = ret;\n        return rank;\n    }\n    friend std::vector<T> operator*(const\
-    \ matrix &m, const std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n\
-    \        std::vector<T> ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];\n    \
-    \    }\n        return ret;\n    }\n    friend std::vector<T> operator*(const\
-    \ std::vector<T> &v, const matrix &m) {\n        assert(int(v.size()) == m.H);\n\
-    \        std::vector<T> ret(m.W);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[j] += v[i] * m.get(i, j);\n    \
-    \    }\n        return ret;\n    }\n    std::vector<T> prod(const std::vector<T>\
-    \ &v) const { return (*this) * v; }\n    std::vector<T> prod_left(const std::vector<T>\
-    \ &v) const { return v * (*this); }\n    template <class OStream> friend OStream\
-    \ &operator<<(OStream &os, const matrix &x) {\n        os << \"[(\" << x.H <<\
-    \ \" * \" << x.W << \" matrix)\";\n        os << \"\\n[column sums: \";\n    \
-    \    for (int j = 0; j < x.W; j++) {\n            T s = T();\n            for\
-    \ (int i = 0; i < x.H; i++) s += x.get(i, j);\n            os << s << \",\";\n\
-    \        }\n        os << \"]\";\n        for (int i = 0; i < x.H; i++) {\n  \
-    \          os << \"\\n[\";\n            for (int j = 0; j < x.W; j++) os << x.get(i,\
-    \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
-    \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
-    \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 4 \"linear_algebra_matrix/characteristic_poly.hpp\"\n\n// Characteristic\
+    \        int rank = 0;\n        for (int c = 0; c < W; c++) {\n            int\
+    \ ti = rank;\n            while (ti < H and tmp[ti][c] == T()) ti++;\n       \
+    \     if (ti == H) { continue; }\n            ret[rank].swap(ret[ti]), tmp[rank].swap(tmp[ti]);\n\
+    \            T inv = _T_id<T>() / tmp[rank][c];\n            for (int j = 0; j\
+    \ < W; j++) ret[rank][j] *= inv;\n            for (int j = c + 1; j < W; j++)\
+    \ tmp[rank][j] *= inv;\n            for (int h = 0; h < H; h++) {\n          \
+    \      if (rank == h) continue;\n                const T coeff = -tmp[h][c];\n\
+    \                for (int j = 0; j < W; j++) ret[h][j] += ret[rank][j] * coeff;\n\
+    \                for (int j = c + 1; j < W; j++) tmp[h][j] += tmp[rank][j] * coeff;\n\
+    \            }\n            rank++;\n        }\n        *this = ret;\n       \
+    \ return rank;\n    }\n    friend std::vector<T> operator*(const matrix &m, const\
+    \ std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n        std::vector<T>\
+    \ ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n            for (int j =\
+    \ 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];\n        }\n        return ret;\n\
+    \    }\n    friend std::vector<T> operator*(const std::vector<T> &v, const matrix\
+    \ &m) {\n        assert(int(v.size()) == m.H);\n        std::vector<T> ret(m.W);\n\
+    \        for (int i = 0; i < m.H; i++) {\n            for (int j = 0; j < m.W;\
+    \ j++) ret[j] += v[i] * m.get(i, j);\n        }\n        return ret;\n    }\n\
+    \    std::vector<T> prod(const std::vector<T> &v) const { return (*this) * v;\
+    \ }\n    std::vector<T> prod_left(const std::vector<T> &v) const { return v *\
+    \ (*this); }\n    template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const matrix &x) {\n        os << \"[(\" << x.H << \" * \" << x.W << \"\
+    \ matrix)\";\n        os << \"\\n[column sums: \";\n        for (int j = 0; j\
+    \ < x.W; j++) {\n            T s = T();\n            for (int i = 0; i < x.H;\
+    \ i++) s += x.get(i, j);\n            os << s << \",\";\n        }\n        os\
+    \ << \"]\";\n        for (int i = 0; i < x.H; i++) {\n            os << \"\\n[\"\
+    ;\n            for (int j = 0; j < x.W; j++) os << x.get(i, j) << \",\";\n   \
+    \         os << \"]\";\n        }\n        os << \"]\\n\";\n        return os;\n\
+    \    }\n    template <class IStream> friend IStream &operator>>(IStream &is, matrix\
+    \ &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n    }\n\
+    };\n#line 4 \"linear_algebra_matrix/characteristic_poly.hpp\"\n\n// Characteristic\
     \ polynomial of upper Hessenberg matrix M (|xI - M|)\n// Complexity: O(n^3)\n\
     // R. Rehman, I. C. Ipsen, \"La Budde's Method for Computing Characteristic Polynomials,\"\
     \ 2011.\ntemplate <class Tp> std::vector<Tp> characteristic_poly_of_hessenberg(matrix<Tp>\
@@ -342,7 +342,7 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-09-05 15:19:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp

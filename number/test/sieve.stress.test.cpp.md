@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A
@@ -72,36 +72,38 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 3 \"number/modint_runtime.hpp\"\n#include <iostream>\n#include <set>\n#line\
-    \ 6 \"number/modint_runtime.hpp\"\n\nstruct ModIntRuntime {\nprivate:\n    static\
-    \ int md;\n\npublic:\n    using lint = long long;\n    static int mod() { return\
-    \ md; }\n    int val_;\n    static std::vector<ModIntRuntime> &facs() {\n    \
-    \    static std::vector<ModIntRuntime> facs_;\n        return facs_;\n    }\n\
-    \    static int &get_primitive_root() {\n        static int primitive_root_ =\
-    \ 0;\n        if (!primitive_root_) {\n            primitive_root_ = [&]() {\n\
-    \                std::set<int> fac;\n                int v = md - 1;\n       \
-    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
-    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
-    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
-    \                    for (auto i : fac)\n                        if (ModIntRuntime(g).power((md\
-    \ - 1) / i) == 1) {\n                            ok = false;\n               \
-    \             break;\n                        }\n                    if (ok) return\
-    \ g;\n                }\n                return -1;\n            }();\n      \
-    \  }\n        return primitive_root_;\n    }\n    static void set_mod(const int\
-    \ &m) {\n        if (md != m) facs().clear();\n        md = m;\n        get_primitive_root()\
-    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ?\
-    \ v - md : v);\n        return *this;\n    }\n    int val() const noexcept { return\
-    \ val_; }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v\
-    \ % md + md); }\n    explicit operator bool() const { return val_ != 0; }\n  \
-    \  ModIntRuntime operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
-    \ + x.val_);\n    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const\
-    \ {\n        return ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n\
-    \    ModIntRuntime operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 3 \"number/modint_runtime.hpp\"\
+    \n#include <iostream>\n#include <set>\n#line 6 \"number/modint_runtime.hpp\"\n\
+    \nstruct ModIntRuntime {\nprivate:\n    static int md;\n\npublic:\n    using lint\
+    \ = long long;\n    static int mod() { return md; }\n    int val_;\n    static\
+    \ std::vector<ModIntRuntime> &facs() {\n        static std::vector<ModIntRuntime>\
+    \ facs_;\n        return facs_;\n    }\n    static int &get_primitive_root() {\n\
+    \        static int primitive_root_ = 0;\n        if (!primitive_root_) {\n  \
+    \          primitive_root_ = [&]() {\n                std::set<int> fac;\n   \
+    \             int v = md - 1;\n                for (lint i = 2; i * i <= v; i++)\n\
+    \                    while (v % i == 0) fac.insert(i), v /= i;\n             \
+    \   if (v > 1) fac.insert(v);\n                for (int g = 1; g < md; g++) {\n\
+    \                    bool ok = true;\n                    for (auto i : fac)\n\
+    \                        if (ModIntRuntime(g).power((md - 1) / i) == 1) {\n  \
+    \                          ok = false;\n                            break;\n \
+    \                       }\n                    if (ok) return g;\n           \
+    \     }\n                return -1;\n            }();\n        }\n        return\
+    \ primitive_root_;\n    }\n    static void set_mod(const int &m) {\n        if\
+    \ (md != m) facs().clear();\n        md = m;\n        get_primitive_root() = 0;\n\
+    \    }\n    ModIntRuntime &_setval(lint v) {\n        if (v < 0) v += md;\n  \
+    \      if (v >= md) v -= md;\n        val_ = v;\n        return *this;\n    }\n\
+    \    int val() const noexcept { return val_; }\n    ModIntRuntime() : val_(0)\
+    \ {}\n    ModIntRuntime(lint v) { _setval(v % md + md); }\n    explicit operator\
+    \ bool() const { return val_ != 0; }\n    ModIntRuntime operator+(const ModIntRuntime\
+    \ &x) const {\n        return ModIntRuntime()._setval((lint)val_ + x.val_);\n\
+    \    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const {\n        return\
+    \ ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n    ModIntRuntime\
+    \ operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
     \ * x.val_ % md);\n    }\n    ModIntRuntime operator/(const ModIntRuntime &x)\
     \ const {\n        return ModIntRuntime()._setval((lint)val_ * x.inv().val() %\
     \ md);\n    }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(md\
@@ -233,8 +235,8 @@ data:
   isVerificationFile: true
   path: number/test/sieve.stress.test.cpp
   requiredBy: []
-  timestamp: '2026-04-11 14:52:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:19:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/sieve.stress.test.cpp
 layout: document

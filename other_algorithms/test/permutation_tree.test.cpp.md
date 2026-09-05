@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/permutation_tree.hpp
     title: "Common interval decomposition tree / \"Permutation tree\" \uFF08\u9806\
       \u5217\u6728\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/range-add-range-min.hpp
     title: Range Add Range Min (known as the Starry sky tree)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/common_interval_decomposition_tree
@@ -51,9 +51,9 @@ data:
     \                 _get(begin, end, pos * 2 + 1, (l + r) / 2, r)) +\n         \
     \      range_add[pos];\n    }\n    // Return f(x_begin, ..., x_{end - 1})\n  \
     \  Tp get(int pos) const noexcept { return prod(pos, pos + 1); }\n    Tp prod(int\
-    \ begin, int end) const noexcept { return _get(begin, end, 1, 0, head); }\n};\n\
-    #line 4 \"other_algorithms/permutation_tree.hpp\"\n#include <cassert>\n#include\
-    \ <fstream>\n#include <string>\n#line 8 \"other_algorithms/permutation_tree.hpp\"\
+    \ begin, int end) const noexcept {\n        return begin == end ? defaultT : _get(begin,\
+    \ end, 1, 0, head);\n    }\n};\n#line 4 \"other_algorithms/permutation_tree.hpp\"\
+    \n#include <cassert>\n#include <fstream>\n#include <string>\n#line 8 \"other_algorithms/permutation_tree.hpp\"\
     \n\n// Permutation tree\n// Complexity: O(N log N)\n// https://codeforces.com/blog/entry/78898\
     \ https://judge.yosupo.jp/problem/common_interval_decomposition_tree\nstruct permutation_tree\
     \ {\n    enum NodeType {\n        JoinAsc,\n        JoinDesc,\n        Cut,\n\
@@ -146,8 +146,8 @@ data:
   isVerificationFile: true
   path: other_algorithms/test/permutation_tree.test.cpp
   requiredBy: []
-  timestamp: '2025-12-03 22:27:21+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:20:25+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: other_algorithms/test/permutation_tree.test.cpp
 layout: document

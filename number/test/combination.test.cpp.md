@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/bare_mod_algebra.hpp
     title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\u6570\
       \u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\u5B9A\
       \u7406\u30FB\u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\u306A\u3069\u306E\u5B9F\
       \u88C5\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/combination.hpp
     title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
       \u7406\u306E\u62E1\u5F35\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient
@@ -150,16 +150,16 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 4 \"number/test/combination.test.cpp\"\n#include <iostream>\nusing namespace\
-    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n \
-    \   int T, m;\n    cin >> T >> m;\n    combination nCr(Sieve(1 << 15).factorize(m));\n\
-    \    while (T--) {\n        long long n, r;\n        cin >> n >> r;\n        cout\
-    \ << nCr(n, r) << '\\n';\n    }\n}\n"
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 4 \"number/test/combination.test.cpp\"\
+    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
+    \ ios::sync_with_stdio(false);\n    int T, m;\n    cin >> T >> m;\n    combination\
+    \ nCr(Sieve(1 << 15).factorize(m));\n    while (T--) {\n        long long n, r;\n\
+    \        cin >> n >> r;\n        cout << nCr(n, r) << '\\n';\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n\
     #include \"../combination.hpp\"\n#include \"../sieve.hpp\"\n#include <iostream>\n\
     using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
@@ -173,8 +173,8 @@ data:
   isVerificationFile: true
   path: number/test/combination.test.cpp
   requiredBy: []
-  timestamp: '2026-04-11 14:52:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:19:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/combination.test.cpp
 layout: document

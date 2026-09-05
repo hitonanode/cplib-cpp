@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: geometry/triangle.hpp
     title: geometry/triangle.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: geometry/test/circumcenter.test.cpp
     title: geometry/test/circumcenter.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"geometry/point3d.hpp\"\n#include <cmath>\n#include <iostream>\n\
@@ -64,7 +64,7 @@ data:
   requiredBy:
   - geometry/triangle.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - geometry/test/circumcenter.test.cpp
 documentation_of: geometry/point3d.hpp

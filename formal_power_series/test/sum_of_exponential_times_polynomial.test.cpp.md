@@ -11,10 +11,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
     title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
@@ -223,12 +223,12 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 7 \"formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp\"\
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 7 \"formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp\"\
     \nusing namespace std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    int\
     \ r, d;\n    long long n;\n    cin >> r >> d >> n;\n    mint::_precalculation(d\
     \ + 10);\n    auto initial_terms = Sieve(d).enumerate_kth_pows<mint>(d, d);\n\
@@ -251,7 +251,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-09-05 15:19:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/sum_of_exponential_times_polynomial.test.cpp

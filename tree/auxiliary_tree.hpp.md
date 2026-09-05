@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/fast_set.hpp
     title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\
       \u3092\u9AD8\u901F\u306B\u51E6\u7406\u3059\u308B\u30C7\u30FC\u30BF\u69CB\u9020\
       \uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: sparse_table/rmq_sparse_table.hpp
     title: sparse_table/rmq_sparse_table.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/auxiliary_tree.yuki901.test.cpp
     title: tree/test/auxiliary_tree.yuki901.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://noshi91.github.io/algorithm-encyclopedia/auxiliary-tree
@@ -279,7 +279,7 @@ data:
   path: tree/auxiliary_tree.hpp
   requiredBy: []
   timestamp: '2024-02-29 17:58:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/auxiliary_tree.yuki901.test.cpp
 documentation_of: tree/auxiliary_tree.hpp

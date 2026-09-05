@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/enumerate_primes
@@ -68,18 +68,18 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 3 \"number/test/enumerate_primes.test.cpp\"\n#include <iostream>\n#line\
-    \ 5 \"number/test/enumerate_primes.test.cpp\"\nusing namespace std;\n\nint main()\
-    \ {\n    int N, A, B;\n    cin >> N >> A >> B;\n    Sieve sieve(N);\n    vector<int>\
-    \ ret;\n    for (unsigned i = 0; A * i + B < sieve.primes.size(); i++)\n     \
-    \   ret.push_back(sieve.primes[A * i + B]);\n    cout << sieve.primes.size() <<\
-    \ ' ' << ret.size() << '\\n';\n    for (auto p : ret) cout << p << ' ';\n    cout\
-    \ << '\\n';\n}\n"
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 3 \"number/test/enumerate_primes.test.cpp\"\
+    \n#include <iostream>\n#line 5 \"number/test/enumerate_primes.test.cpp\"\nusing\
+    \ namespace std;\n\nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n\
+    \    Sieve sieve(N);\n    vector<int> ret;\n    for (unsigned i = 0; A * i + B\
+    \ < sieve.primes.size(); i++)\n        ret.push_back(sieve.primes[A * i + B]);\n\
+    \    cout << sieve.primes.size() << ' ' << ret.size() << '\\n';\n    for (auto\
+    \ p : ret) cout << p << ' ';\n    cout << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
     \ \"../sieve.hpp\"\n#include <iostream>\n#include <vector>\nusing namespace std;\n\
     \nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n    Sieve sieve(N);\n\
@@ -92,8 +92,8 @@ data:
   isVerificationFile: true
   path: number/test/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:19:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/enumerate_primes.test.cpp
 layout: document

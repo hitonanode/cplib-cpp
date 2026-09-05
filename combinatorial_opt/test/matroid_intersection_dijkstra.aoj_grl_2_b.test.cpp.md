@@ -4,11 +4,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/matroid_intersection_dijkstra.hpp
     title: Weighted matroid intersection using Dijkstra's algorithm
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: combinatorial_opt/matroids/graphic_matroid.hpp
     title: "Graphic matroid \uFF08\u30B0\u30E9\u30D5\u30DE\u30C8\u30ED\u30A4\u30C9\
       \uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: combinatorial_opt/matroids/partition_matroid.hpp
     title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
   _extendedRequiredBy: []

@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/blackbox_algorithm.hpp
     title: "Black box linear algebra \u3092\u5229\u7528\u3057\u305F\u5404\u7A2E\u9AD8\
       \u901F\u8A08\u7B97"
@@ -13,15 +13,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/linear_recurrence.test.cpp
     title: formal_power_series/test/linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - http://misawa.github.io/others/fast_kitamasa_method.html
@@ -60,15 +60,15 @@ data:
     \ <typename Tfield>\nstd::vector<Tfield> monomial_mod_polynomial(long long N,\
     \ const std::vector<Tfield> &f_reversed) {\n    assert(!f_reversed.empty() and\
     \ f_reversed[0] == 1);\n    int K = f_reversed.size() - 1;\n    if (!K) return\
-    \ {};\n    int D = 64 - __builtin_clzll(N);\n    std::vector<Tfield> ret(K, 0);\n\
-    \    ret[0] = 1;\n    auto self_conv = [](std::vector<Tfield> x) -> std::vector<Tfield>\
-    \ {\n        int d = x.size();\n        std::vector<Tfield> ret(d * 2 - 1);\n\
-    \        for (int i = 0; i < d; i++) {\n            ret[i * 2] += x[i] * x[i];\n\
-    \            for (int j = 0; j < i; j++) ret[i + j] += x[i] * x[j] * 2;\n    \
-    \    }\n        return ret;\n    };\n    for (int d = D; d--;) {\n        ret\
-    \ = self_conv(ret);\n        for (int i = 2 * K - 2; i >= K; i--) {\n        \
-    \    for (int j = 1; j <= K; j++) ret[i - j] -= ret[i] * f_reversed[j];\n    \
-    \    }\n        ret.resize(K);\n        if ((N >> d) & 1) {\n            std::vector<Tfield>\
+    \ {};\n    std::vector<Tfield> ret(K, 0);\n    ret[0] = 1;\n    if (N == 0) return\
+    \ ret;\n    int D = 64 - __builtin_clzll(N);\n    auto self_conv = [](std::vector<Tfield>\
+    \ x) -> std::vector<Tfield> {\n        int d = x.size();\n        std::vector<Tfield>\
+    \ ret(d * 2 - 1);\n        for (int i = 0; i < d; i++) {\n            ret[i *\
+    \ 2] += x[i] * x[i];\n            for (int j = 0; j < i; j++) ret[i + j] += x[i]\
+    \ * x[j] * 2;\n        }\n        return ret;\n    };\n    for (int d = D; d--;)\
+    \ {\n        ret = self_conv(ret);\n        for (int i = 2 * K - 2; i >= K; i--)\
+    \ {\n            for (int j = 1; j <= K; j++) ret[i - j] -= ret[i] * f_reversed[j];\n\
+    \        }\n        ret.resize(K);\n        if ((N >> d) & 1) {\n            std::vector<Tfield>\
     \ c(K);\n            c[0] = -ret[K - 1] * f_reversed[K];\n            for (int\
     \ i = 1; i < K; i++) { c[i] = ret[i - 1] - ret[K - 1] * f_reversed[K - i]; }\n\
     \            ret = c;\n        }\n    }\n    return ret;\n}\n\n// Guess k-th element\
@@ -111,15 +111,15 @@ data:
     \ <typename Tfield>\nstd::vector<Tfield> monomial_mod_polynomial(long long N,\
     \ const std::vector<Tfield> &f_reversed) {\n    assert(!f_reversed.empty() and\
     \ f_reversed[0] == 1);\n    int K = f_reversed.size() - 1;\n    if (!K) return\
-    \ {};\n    int D = 64 - __builtin_clzll(N);\n    std::vector<Tfield> ret(K, 0);\n\
-    \    ret[0] = 1;\n    auto self_conv = [](std::vector<Tfield> x) -> std::vector<Tfield>\
-    \ {\n        int d = x.size();\n        std::vector<Tfield> ret(d * 2 - 1);\n\
-    \        for (int i = 0; i < d; i++) {\n            ret[i * 2] += x[i] * x[i];\n\
-    \            for (int j = 0; j < i; j++) ret[i + j] += x[i] * x[j] * 2;\n    \
-    \    }\n        return ret;\n    };\n    for (int d = D; d--;) {\n        ret\
-    \ = self_conv(ret);\n        for (int i = 2 * K - 2; i >= K; i--) {\n        \
-    \    for (int j = 1; j <= K; j++) ret[i - j] -= ret[i] * f_reversed[j];\n    \
-    \    }\n        ret.resize(K);\n        if ((N >> d) & 1) {\n            std::vector<Tfield>\
+    \ {};\n    std::vector<Tfield> ret(K, 0);\n    ret[0] = 1;\n    if (N == 0) return\
+    \ ret;\n    int D = 64 - __builtin_clzll(N);\n    auto self_conv = [](std::vector<Tfield>\
+    \ x) -> std::vector<Tfield> {\n        int d = x.size();\n        std::vector<Tfield>\
+    \ ret(d * 2 - 1);\n        for (int i = 0; i < d; i++) {\n            ret[i *\
+    \ 2] += x[i] * x[i];\n            for (int j = 0; j < i; j++) ret[i + j] += x[i]\
+    \ * x[j] * 2;\n        }\n        return ret;\n    };\n    for (int d = D; d--;)\
+    \ {\n        ret = self_conv(ret);\n        for (int i = 2 * K - 2; i >= K; i--)\
+    \ {\n            for (int j = 1; j <= K; j++) ret[i - j] -= ret[i] * f_reversed[j];\n\
+    \        }\n        ret.resize(K);\n        if ((N >> d) & 1) {\n            std::vector<Tfield>\
     \ c(K);\n            c[0] = -ret[K - 1] * f_reversed[K];\n            for (int\
     \ i = 1; i < K; i++) { c[i] = ret[i - 1] - ret[K - 1] * f_reversed[K - i]; }\n\
     \            ret = c;\n        }\n    }\n    return ret;\n}\n\n// Guess k-th element\
@@ -136,8 +136,8 @@ data:
   path: formal_power_series/linear_recurrence.hpp
   requiredBy:
   - linear_algebra_matrix/blackbox_algorithm.hpp
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:18:33+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/linear_recurrence.test.cpp

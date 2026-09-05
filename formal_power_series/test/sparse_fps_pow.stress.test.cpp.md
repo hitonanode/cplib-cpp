@@ -8,10 +8,10 @@ data:
     path: formal_power_series/sparse_fps.hpp
     title: "Sparse formal power series \uFF08\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\
       \u6570\u306E\u6F14\u7B97\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp
   _extendedRequiredBy: []

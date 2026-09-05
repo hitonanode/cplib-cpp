@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/coeff_of_rational_function.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306B\u95A2\u3059\u308B\u9AD8\u901F\u8A08\
       \u7B97\uFF08Bostan-Mori algorithm\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -186,21 +186,21 @@ data:
     \ <https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a>\ntemplate <typename Tp>\n\
     Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vector<Tp>\
     \ den) {\n    assert(N >= 0);\n    while (den.size() and den.back() == 0) den.pop_back();\n\
-    \    assert(den.size());\n    int h = 0;\n    while (den[h] == 0) h++;\n    N\
-    \ += h;\n    den.erase(den.begin(), den.begin() + h);\n\n    if (den.size() ==\
-    \ 1) return N < int(num.size()) ? num[N] / den[0] : 0;\n\n    while (N) {\n  \
-    \      std::vector<Tp> g = den;\n        for (size_t i = 1; i < g.size(); i +=\
-    \ 2) { g[i] = -g[i]; }\n        auto conv_num_g = nttconv(num, g);\n        num.resize((conv_num_g.size()\
-    \ + 1 - (N & 1)) / 2);\n        for (size_t i = 0; i < num.size(); i++) { num[i]\
-    \ = conv_num_g[i * 2 + (N & 1)]; }\n        auto conv_den_g = nttconv(den, g);\n\
-    \        for (size_t i = 0; i < den.size(); i++) { den[i] = conv_den_g[i * 2];\
-    \ }\n        N >>= 1;\n    }\n    return num[0] / den[0];\n}\n\n// Find the n-th\
-    \ term of the sequence (0-ORIGIN)\n// Complexity: O(K lg K \\log N)\n// ainit\
-    \ = [a_0, a_1,..., ]\n// c[0] = 1, \\sum_j a_{i - j} * c_j = 0\ntemplate <typename\
-    \ Tp>\nTp find_kth_term(std::vector<Tp> ainit, const std::vector<Tp> c, long long\
-    \ n) {\n    assert(ainit.size() + 1 == c.size());\n    auto a = nttconv(ainit,\
-    \ c);\n    a.resize(ainit.size());\n    return coefficient_of_rational_function(n,\
-    \ a, c);\n}\n#line 3 \"formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
+    \    assert(den.size());\n    if (num.empty()) return Tp(0);\n    int h = 0;\n\
+    \    while (den[h] == 0) h++;\n    N += h;\n    den.erase(den.begin(), den.begin()\
+    \ + h);\n\n    if (den.size() == 1) return N < int(num.size()) ? num[N] / den[0]\
+    \ : 0;\n\n    while (N) {\n        std::vector<Tp> g = den;\n        for (size_t\
+    \ i = 1; i < g.size(); i += 2) { g[i] = -g[i]; }\n        auto conv_num_g = nttconv(num,\
+    \ g);\n        num.resize((conv_num_g.size() + 1 - (N & 1)) / 2);\n        for\
+    \ (size_t i = 0; i < num.size(); i++) { num[i] = conv_num_g[i * 2 + (N & 1)];\
+    \ }\n        auto conv_den_g = nttconv(den, g);\n        for (size_t i = 0; i\
+    \ < den.size(); i++) { den[i] = conv_den_g[i * 2]; }\n        N >>= 1;\n    }\n\
+    \    return num[0] / den[0];\n}\n\n// Find the n-th term of the sequence (0-ORIGIN)\n\
+    // Complexity: O(K lg K \\log N)\n// ainit = [a_0, a_1,..., ]\n// c[0] = 1, \\\
+    sum_j a_{i - j} * c_j = 0\ntemplate <typename Tp>\nTp find_kth_term(std::vector<Tp>\
+    \ ainit, const std::vector<Tp> c, long long n) {\n    assert(ainit.size() + 1\
+    \ == c.size());\n    auto a = nttconv(ainit, c);\n    a.resize(ainit.size());\n\
+    \    return coefficient_of_rational_function(n, a, c);\n}\n#line 3 \"formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
     \n#line 5 \"formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
@@ -223,7 +223,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-09-05 15:18:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/kth_term_of_linearly_recurrent_sequence.test.cpp

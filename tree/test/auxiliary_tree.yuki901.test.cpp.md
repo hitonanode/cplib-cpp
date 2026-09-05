@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/fast_set.hpp
     title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\
       \u3092\u9AD8\u901F\u306B\u51E6\u7406\u3059\u308B\u30C7\u30FC\u30BF\u69CB\u9020\
       \uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: sparse_table/rmq_sparse_table.hpp
     title: sparse_table/rmq_sparse_table.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/auxiliary_tree.hpp
     title: "LCA-based auxiliary tree / virtual tree, online \uFF08\"\u865A\u6811\"\
       \uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/901
@@ -245,101 +245,102 @@ data:
     \ = 0;\n            for (int e = head[now]; e < head[now + 1]; ++e) {\n      \
     \          const auto &nx = tos[e];\n                T dnx = dist[now] + nx.second;\n\
     \                int nxt = nx.first;\n                if (dist[nxt] > dnx) {\n\
-    \                    dist[nxt] = dnx;\n                    if (!in_queue[nxt])\
-    \ {\n                        if (q.size() and dnx < dist[q.front()]) { // Small\
-    \ label first optimization\n                            q.push_front(nxt);\n \
-    \                       } else {\n                            q.push_back(nxt);\n\
-    \                        }\n                        prev[nxt] = now, in_queue[nxt]\
-    \ = 1;\n                    }\n                }\n            }\n        }\n \
-    \   }\n\n    // 01-BFS\n    // - Requirement: all weights must be 0 or w (positive\
-    \ constant).\n    // - Complexity: O(V + E)\n    void zero_one_bfs(int s, int\
-    \ t = INVALID) {\n        assert(0 <= s and s < V);\n        build_();\n     \
-    \   dist.assign(V, INF), prev.assign(V, INVALID);\n        dist[s] = 0;\n    \
-    \    std::vector<int> q(V * 4);\n        int ql = V * 2, qr = V * 2;\n       \
-    \ q[qr++] = s;\n        while (ql < qr) {\n            int v = q[ql++];\n    \
-    \        if (v == t) return;\n            for (int e = head[v]; e < head[v + 1];\
-    \ ++e) {\n                const auto &nx = tos[e];\n                T dnx = dist[v]\
-    \ + nx.second;\n                if (dist[nx.first] > dnx) {\n                \
-    \    dist[nx.first] = dnx, prev[nx.first] = v;\n                    if (nx.second)\
-    \ {\n                        q[qr++] = nx.first;\n                    } else {\n\
-    \                        q[--ql] = nx.first;\n                    }\n        \
-    \        }\n            }\n        }\n    }\n\n    // Dial's algorithm\n    //\
-    \ - Requirement: wmin >= 0\n    // - Complexity: O(wmax * V + E)\n    void dial(int\
-    \ s, int t = INVALID) {\n        assert(0 <= s and s < V);\n        build_();\n\
-    \        dist.assign(V, INF), prev.assign(V, INVALID);\n        dist[s] = 0;\n\
-    \        std::vector<std::vector<std::pair<int, T>>> q(wmax + 1);\n        q[0].emplace_back(s,\
-    \ dist[s]);\n        int ninq = 1;\n\n        int cur = 0;\n        T dcur = 0;\n\
-    \        for (; ninq; ++cur, ++dcur) {\n            if (cur == wmax + 1) cur =\
-    \ 0;\n            while (!q[cur].empty()) {\n                int v = q[cur].back().first;\n\
-    \                T dnow = q[cur].back().second;\n                q[cur].pop_back(),\
-    \ --ninq;\n                if (v == t) return;\n                if (dist[v] <\
-    \ dnow) continue;\n\n                for (int e = head[v]; e < head[v + 1]; ++e)\
-    \ {\n                    const auto &nx = tos[e];\n                    T dnx =\
-    \ dist[v] + nx.second;\n                    if (dist[nx.first] > dnx) {\n    \
-    \                    dist[nx.first] = dnx, prev[nx.first] = v;\n             \
-    \           int nxtcur = cur + int(nx.second);\n                        if (nxtcur\
-    \ >= int(q.size())) nxtcur -= q.size();\n                        q[nxtcur].emplace_back(nx.first,\
-    \ dnx), ++ninq;\n                    }\n                }\n            }\n   \
-    \     }\n    }\n\n    // Solver for DAG\n    // - Requirement: graph is DAG\n\
-    \    // - Complexity: O(V + E)\n    bool dag_solver(int s) {\n        assert(0\
-    \ <= s and s < V);\n        build_();\n        dist.assign(V, INF), prev.assign(V,\
-    \ INVALID);\n        dist[s] = 0;\n        std::vector<int> indeg(V, 0);\n   \
-    \     std::vector<int> q(V * 2);\n        int ql = 0, qr = 0;\n        q[qr++]\
-    \ = s;\n        while (ql < qr) {\n            int now = q[ql++];\n          \
-    \  for (int e = head[now]; e < head[now + 1]; ++e) {\n                const auto\
-    \ &nx = tos[e];\n                ++indeg[nx.first];\n                if (indeg[nx.first]\
-    \ == 1) q[qr++] = nx.first;\n            }\n        }\n        ql = qr = 0;\n\
+    \                    dist[nxt] = dnx;\n                    prev[nxt] = now;\n\
+    \                    if (!in_queue[nxt]) {\n                        if (q.size()\
+    \ and dnx < dist[q.front()]) { // Small label first optimization\n           \
+    \                 q.push_front(nxt);\n                        } else {\n     \
+    \                       q.push_back(nxt);\n                        }\n       \
+    \                 in_queue[nxt] = 1;\n                    }\n                }\n\
+    \            }\n        }\n    }\n\n    // 01-BFS\n    // - Requirement: all weights\
+    \ must be 0 or w (positive constant).\n    // - Complexity: O(V + E)\n    void\
+    \ zero_one_bfs(int s, int t = INVALID) {\n        assert(0 <= s and s < V);\n\
+    \        build_();\n        dist.assign(V, INF), prev.assign(V, INVALID);\n  \
+    \      dist[s] = 0;\n        std::vector<int> q(V * 4);\n        int ql = V *\
+    \ 2, qr = V * 2;\n        q[qr++] = s;\n        while (ql < qr) {\n          \
+    \  int v = q[ql++];\n            if (v == t) return;\n            for (int e =\
+    \ head[v]; e < head[v + 1]; ++e) {\n                const auto &nx = tos[e];\n\
+    \                T dnx = dist[v] + nx.second;\n                if (dist[nx.first]\
+    \ > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n  \
+    \                  if (nx.second) {\n                        q[qr++] = nx.first;\n\
+    \                    } else {\n                        q[--ql] = nx.first;\n \
+    \                   }\n                }\n            }\n        }\n    }\n\n\
+    \    // Dial's algorithm\n    // - Requirement: wmin >= 0\n    // - Complexity:\
+    \ O(wmax * V + E)\n    void dial(int s, int t = INVALID) {\n        assert(0 <=\
+    \ s and s < V);\n        build_();\n        dist.assign(V, INF), prev.assign(V,\
+    \ INVALID);\n        dist[s] = 0;\n        std::vector<std::vector<std::pair<int,\
+    \ T>>> q(wmax + 1);\n        q[0].emplace_back(s, dist[s]);\n        int ninq\
+    \ = 1;\n\n        int cur = 0;\n        T dcur = 0;\n        for (; ninq; ++cur,\
+    \ ++dcur) {\n            if (cur == wmax + 1) cur = 0;\n            while (!q[cur].empty())\
+    \ {\n                int v = q[cur].back().first;\n                T dnow = q[cur].back().second;\n\
+    \                q[cur].pop_back(), --ninq;\n                if (v == t) return;\n\
+    \                if (dist[v] < dnow) continue;\n\n                for (int e =\
+    \ head[v]; e < head[v + 1]; ++e) {\n                    const auto &nx = tos[e];\n\
+    \                    T dnx = dist[v] + nx.second;\n                    if (dist[nx.first]\
+    \ > dnx) {\n                        dist[nx.first] = dnx, prev[nx.first] = v;\n\
+    \                        int nxtcur = cur + int(nx.second);\n                \
+    \        if (nxtcur >= int(q.size())) nxtcur -= q.size();\n                  \
+    \      q[nxtcur].emplace_back(nx.first, dnx), ++ninq;\n                    }\n\
+    \                }\n            }\n        }\n    }\n\n    // Solver for DAG\n\
+    \    // - Requirement: graph is DAG\n    // - Complexity: O(V + E)\n    bool dag_solver(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        build_();\n        dist.assign(V,\
+    \ INF), prev.assign(V, INVALID);\n        dist[s] = 0;\n        std::vector<int>\
+    \ indeg(V, 0);\n        std::vector<int> q(V * 2);\n        int ql = 0, qr = 0;\n\
     \        q[qr++] = s;\n        while (ql < qr) {\n            int now = q[ql++];\n\
     \            for (int e = head[now]; e < head[now + 1]; ++e) {\n             \
-    \   const auto &nx = tos[e];\n                --indeg[nx.first];\n           \
-    \     if (dist[nx.first] > dist[now] + nx.second)\n                    dist[nx.first]\
-    \ = dist[now] + nx.second, prev[nx.first] = now;\n                if (indeg[nx.first]\
-    \ == 0) q[qr++] = nx.first;\n            }\n        }\n        return *max_element(indeg.begin(),\
-    \ indeg.end()) == 0;\n    }\n\n    // Retrieve a sequence of vertex ids that represents\
-    \ shortest path [s, ..., goal]\n    // If not reachable to goal, return {}\n \
-    \   std::vector<int> retrieve_path(int goal) const {\n        assert(int(prev.size())\
-    \ == V);\n        assert(0 <= goal and goal < V);\n        if (dist[goal] == INF)\
-    \ return {};\n        std::vector<int> ret{goal};\n        while (prev[goal] !=\
-    \ INVALID) {\n            goal = prev[goal];\n            ret.push_back(goal);\n\
-    \        }\n        std::reverse(ret.begin(), ret.end());\n        return ret;\n\
-    \    }\n\n    void solve(int s, int t = INVALID) {\n        if (wmin >= 0) {\n\
-    \            if (single_positive_weight) {\n                zero_one_bfs(s, t);\n\
-    \            } else if (wmax <= 10) {\n                dial(s, t);\n         \
-    \   } else {\n                if ((long long)V * V < (E << 4)) {\n           \
-    \         dijkstra_vquad(s, t);\n                } else {\n                  \
-    \  dijkstra(s, t);\n                }\n            }\n        } else {\n     \
-    \       bellman_ford(s, V);\n        }\n    }\n\n    // Warshall-Floyd algorithm\n\
-    \    // - Requirement: no negative loop\n    // - Complexity: O(E + V^3)\n   \
-    \ std::vector<std::vector<T>> floyd_warshall() {\n        build_();\n        std::vector<std::vector<T>>\
-    \ dist2d(V, std::vector<T>(V, INF));\n        for (int i = 0; i < V; i++) {\n\
-    \            dist2d[i][i] = 0;\n            for (const auto &e : edges) {\n  \
-    \              int s = std::get<0>(e), t = std::get<1>(e);\n                dist2d[s][t]\
-    \ = std::min(dist2d[s][t], std::get<2>(e));\n            }\n        }\n      \
-    \  for (int k = 0; k < V; k++) {\n            for (int i = 0; i < V; i++) {\n\
-    \                if (dist2d[i][k] == INF) continue;\n                for (int\
-    \ j = 0; j < V; j++) {\n                    if (dist2d[k][j] == INF) continue;\n\
-    \                    dist2d[i][j] = std::min(dist2d[i][j], dist2d[i][k] + dist2d[k][j]);\n\
-    \                }\n            }\n        }\n        return dist2d;\n    }\n\n\
-    \    void to_dot(std::string filename = \"shortest_path\") const {\n        std::ofstream\
-    \ ss(filename + \".DOT\");\n        ss << \"digraph{\\n\";\n        build_();\n\
-    \        for (int i = 0; i < V; i++) {\n            for (int e = head[i]; e <\
-    \ head[i + 1]; ++e) {\n                ss << i << \"->\" << tos[e].first << \"\
-    [label=\" << tos[e].second << \"];\\n\";\n            }\n        }\n        ss\
-    \ << \"}\\n\";\n        ss.close();\n        return;\n    }\n};\n#line 5 \"tree/test/auxiliary_tree.yuki901.test.cpp\"\
-    \n#include <iostream>\nusing namespace std;\n\nint main() {\n    cin.tie(nullptr),\
-    \ ios::sync_with_stdio(false);\n    int N;\n    cin >> N;\n    vector<vector<int>>\
-    \ to(N);\n\n    shortest_path<long long> sp(N);\n\n    for (int e = 0; e < N -\
-    \ 1; ++e) {\n        int u, v, w;\n        cin >> u >> v >> w;\n        to.at(u).push_back(v);\n\
-    \        to.at(v).push_back(u);\n        sp.add_bi_edge(u, v, w);\n    }\n\n \
-    \   const int root = 0;\n\n    auxiliary_tree at(to, root);\n\n    sp.solve(root);\n\
-    \n    int Q;\n    cin >> Q;\n    while (Q--) {\n        int k;\n        cin >>\
-    \ k;\n        vector<int> xs(k);\n        for (auto &x : xs) cin >> x;\n\n   \
-    \     for (int x : xs) at.activate(x);\n\n        long long ret = 0;\n\n     \
-    \   auto rec = [&](auto &&self, int now) -> void {\n            for (int nxt :\
-    \ at.get_children(now)) {\n                self(self, nxt);\n                ret\
-    \ += sp.dist.at(nxt) - sp.dist.at(now);\n            }\n        };\n\n       \
-    \ rec(rec, at.auxiliary_root());\n\n        for (int x : xs) at.deactivate(x);\n\
-    \n        cout << ret << '\\n';\n    }\n}\n"
+    \   const auto &nx = tos[e];\n                ++indeg[nx.first];\n           \
+    \     if (indeg[nx.first] == 1) q[qr++] = nx.first;\n            }\n        }\n\
+    \        ql = qr = 0;\n        q[qr++] = s;\n        while (ql < qr) {\n     \
+    \       int now = q[ql++];\n            for (int e = head[now]; e < head[now +\
+    \ 1]; ++e) {\n                const auto &nx = tos[e];\n                --indeg[nx.first];\n\
+    \                if (dist[nx.first] > dist[now] + nx.second)\n               \
+    \     dist[nx.first] = dist[now] + nx.second, prev[nx.first] = now;\n        \
+    \        if (indeg[nx.first] == 0) q[qr++] = nx.first;\n            }\n      \
+    \  }\n        return *max_element(indeg.begin(), indeg.end()) == 0;\n    }\n\n\
+    \    // Retrieve a sequence of vertex ids that represents shortest path [s, ...,\
+    \ goal]\n    // If not reachable to goal, return {}\n    std::vector<int> retrieve_path(int\
+    \ goal) const {\n        assert(int(prev.size()) == V);\n        assert(0 <= goal\
+    \ and goal < V);\n        if (dist[goal] == INF) return {};\n        std::vector<int>\
+    \ ret{goal};\n        while (prev[goal] != INVALID) {\n            goal = prev[goal];\n\
+    \            ret.push_back(goal);\n        }\n        std::reverse(ret.begin(),\
+    \ ret.end());\n        return ret;\n    }\n\n    void solve(int s, int t = INVALID)\
+    \ {\n        if (wmin >= 0) {\n            if (single_positive_weight) {\n   \
+    \             zero_one_bfs(s, t);\n            } else if (wmax <= 10) {\n    \
+    \            dial(s, t);\n            } else {\n                if ((long long)V\
+    \ * V < (E << 4)) {\n                    dijkstra_vquad(s, t);\n             \
+    \   } else {\n                    dijkstra(s, t);\n                }\n       \
+    \     }\n        } else {\n            bellman_ford(s, V);\n        }\n    }\n\
+    \n    // Warshall-Floyd algorithm\n    // - Requirement: no negative loop\n  \
+    \  // - Complexity: O(E + V^3)\n    std::vector<std::vector<T>> floyd_warshall()\
+    \ {\n        build_();\n        std::vector<std::vector<T>> dist2d(V, std::vector<T>(V,\
+    \ INF));\n        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n\
+    \            for (const auto &e : edges) {\n                int s = std::get<0>(e),\
+    \ t = std::get<1>(e);\n                dist2d[s][t] = std::min(dist2d[s][t], std::get<2>(e));\n\
+    \            }\n        }\n        for (int k = 0; k < V; k++) {\n           \
+    \ for (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
+    \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
+    \ == INF) continue;\n                    dist2d[i][j] = std::min(dist2d[i][j],\
+    \ dist2d[i][k] + dist2d[k][j]);\n                }\n            }\n        }\n\
+    \        return dist2d;\n    }\n\n    void to_dot(std::string filename = \"shortest_path\"\
+    ) const {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
+    n\";\n        build_();\n        for (int i = 0; i < V; i++) {\n            for\
+    \ (int e = head[i]; e < head[i + 1]; ++e) {\n                ss << i << \"->\"\
+    \ << tos[e].first << \"[label=\" << tos[e].second << \"];\\n\";\n            }\n\
+    \        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n  \
+    \  }\n};\n#line 5 \"tree/test/auxiliary_tree.yuki901.test.cpp\"\n#include <iostream>\n\
+    using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N;\n    cin >> N;\n    vector<vector<int>> to(N);\n\n    shortest_path<long\
+    \ long> sp(N);\n\n    for (int e = 0; e < N - 1; ++e) {\n        int u, v, w;\n\
+    \        cin >> u >> v >> w;\n        to.at(u).push_back(v);\n        to.at(v).push_back(u);\n\
+    \        sp.add_bi_edge(u, v, w);\n    }\n\n    const int root = 0;\n\n    auxiliary_tree\
+    \ at(to, root);\n\n    sp.solve(root);\n\n    int Q;\n    cin >> Q;\n    while\
+    \ (Q--) {\n        int k;\n        cin >> k;\n        vector<int> xs(k);\n   \
+    \     for (auto &x : xs) cin >> x;\n\n        for (int x : xs) at.activate(x);\n\
+    \n        long long ret = 0;\n\n        auto rec = [&](auto &&self, int now) ->\
+    \ void {\n            for (int nxt : at.get_children(now)) {\n               \
+    \ self(self, nxt);\n                ret += sp.dist.at(nxt) - sp.dist.at(now);\n\
+    \            }\n        };\n\n        rec(rec, at.auxiliary_root());\n\n     \
+    \   for (int x : xs) at.deactivate(x);\n\n        cout << ret << '\\n';\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/901\"\n#include \"../auxiliary_tree.hpp\"\
     \n#include \"../../graph/shortest_path.hpp\"\n#include <cassert>\n#include <iostream>\n\
     using namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
@@ -364,8 +365,8 @@ data:
   isVerificationFile: true
   path: tree/test/auxiliary_tree.yuki901.test.cpp
   requiredBy: []
-  timestamp: '2024-02-29 17:58:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:18:59+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/auxiliary_tree.yuki901.test.cpp
 layout: document

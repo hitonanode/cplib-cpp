@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/light_forward_list.hpp
     title: data_structure/light_forward_list.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/aho_corasick.hpp
     title: string/aho_corasick.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D
@@ -36,12 +36,15 @@ data:
     \ O(|keyword_i|)\n// - build_aho_corasick(): O(\\sum_i |keyword_i|)\n// - match()\
     \ : O(\\sum_i |keyword_i| + |str|)\ntemplate <class T, int (*char2int)(char)>\
     \ struct AhoCorasick {\n    bool built;\n    const int D;\n    std::vector<T>\
-    \ node;\n    AhoCorasick(int D_) : built(false), D(D_), node(1, D) {}\n    AhoCorasick\
-    \ operator=(const AhoCorasick &rhs) { return AhoCorasick(rhs.D); }\n\n    void\
-    \ enter_child(int n, int nn, int c) { node[n].setch(c, nn); }\n\n    std::vector<int>\
-    \ endpos;\n    int add(const std::string &keyword) { // Enter_in_tree() in [1]\n\
-    \        built = false;\n        int n = 0;\n        for (const auto &cc : keyword)\
-    \ {\n            int c = char2int(cc), nn = node[n].Goto(c);\n            if (!nn)\
+    \ node;\n    AhoCorasick(int D_) : built(false), D(D_), node(1, D) {}\n    AhoCorasick(const\
+    \ AhoCorasick &) = default;\n    AhoCorasick &operator=(const AhoCorasick &rhs)\
+    \ {\n        if (this == &rhs) return *this;\n        assert(D == rhs.D);\n  \
+    \      built = rhs.built;\n        node = rhs.node;\n        endpos = rhs.endpos;\n\
+    \        visorder = rhs.visorder;\n        return *this;\n    }\n\n    void enter_child(int\
+    \ n, int nn, int c) { node[n].setch(c, nn); }\n\n    std::vector<int> endpos;\n\
+    \    int add(const std::string &keyword) { // Enter_in_tree() in [1]\n       \
+    \ built = false;\n        int n = 0;\n        for (const auto &cc : keyword) {\n\
+    \            int c = char2int(cc), nn = node[n].Goto(c);\n            if (!nn)\
     \ {\n                nn = node.size();\n                enter_child(n, nn, c),\
     \ node.emplace_back(D);\n            }\n            n = nn;\n        }\n     \
     \   return endpos.push_back(n), n;\n    }\n\n    void complete_failure(int n,\
@@ -103,8 +106,8 @@ data:
   isVerificationFile: true
   path: string/test/aho_corasick_unorderedmap.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:20:29+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: string/test/aho_corasick_unorderedmap.test.cpp
 layout: document

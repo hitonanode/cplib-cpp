@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/bipartite_matching.hpp
     title: "Bipartite matching (Hopcroft\u2013Karp)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
   _extendedRequiredBy:
@@ -97,16 +97,17 @@ data:
     \ used[nxt] = 1;\n                if (_dfs_detectcycle(nxt, true)) return true;\n\
     \                _ret_cycle.pop_back();\n            }\n        return false;\n\
     \    }\n    std::vector<int> DetectCycle() {\n        int ns = FindStronglyConnectedComponents();\n\
-    \        if (ns == V) return {};\n        std::vector<int> cnt(ns);\n        for\
-    \ (auto x : cmp) cnt[x]++;\n        _c = std::find_if(cnt.begin(), cnt.end(),\
-    \ [](int x) { return x > 1; }) - cnt.begin();\n        _init = std::find(cmp.begin(),\
-    \ cmp.end(), _c) - cmp.begin();\n        used.assign(V, false);\n        _ret_cycle.clear();\n\
-    \        _dfs_detectcycle(_init, false);\n        return _ret_cycle;\n    }\n\n\
-    \    // After calling `FindStronglyConnectedComponents()`, generate a new graph\
-    \ by uniting all\n    // vertices belonging to the same component(The resultant\
-    \ graph is DAG).\n    DirectedGraphSCC GenerateTopologicalGraph() {\n        DirectedGraphSCC\
-    \ newgraph(scc_num);\n        for (int s = 0; s < V; s++)\n            for (auto\
-    \ t : to[s]) {\n                if (cmp[s] != cmp[t]) newgraph.add_edge(cmp[s],\
+    \        for (int v = 0; v < V; v++) {\n            if (std::find(to[v].begin(),\
+    \ to[v].end(), v) != to[v].end()) return {v};\n        }\n        if (ns == V)\
+    \ return {};\n        std::vector<int> cnt(ns);\n        for (auto x : cmp) cnt[x]++;\n\
+    \        _c = std::find_if(cnt.begin(), cnt.end(), [](int x) { return x > 1; })\
+    \ - cnt.begin();\n        _init = std::find(cmp.begin(), cmp.end(), _c) - cmp.begin();\n\
+    \        used.assign(V, false);\n        _ret_cycle.clear();\n        _dfs_detectcycle(_init,\
+    \ false);\n        return _ret_cycle;\n    }\n\n    // After calling `FindStronglyConnectedComponents()`,\
+    \ generate a new graph by uniting all\n    // vertices belonging to the same component(The\
+    \ resultant graph is DAG).\n    DirectedGraphSCC GenerateTopologicalGraph() {\n\
+    \        DirectedGraphSCC newgraph(scc_num);\n        for (int s = 0; s < V; s++)\n\
+    \            for (auto t : to[s]) {\n                if (cmp[s] != cmp[t]) newgraph.add_edge(cmp[s],\
     \ cmp[t]);\n            }\n        return newgraph;\n    }\n};\n\n// 2-SAT solver:\
     \ Find a solution for  `(Ai v Aj) ^ (Ak v Al) ^ ... = true`\n// - `nb_sat_vars`:\
     \ Number of variables\n// - Considering a graph with `2 * nb_sat_vars` vertices\n\
@@ -211,7 +212,7 @@ data:
   path: graph/dulmage_mendelsohn_decomposition.hpp
   requiredBy:
   - combinatorial_opt/matroids/transversal_matroid.hpp
-  timestamp: '2024-12-02 08:23:50+09:00'
+  timestamp: '2026-09-05 15:19:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/dulmage_mendelsohn.yuki1615.test.cpp

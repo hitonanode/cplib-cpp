@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
   - icon: ':heavy_check_mark:'
     path: formal_power_series/factorial_power.hpp
     title: "factorial power \uFF08\u968E\u4E57\u51AA\u306B\u95A2\u3059\u308B\u6F14\
       \u7B97\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
@@ -179,39 +179,39 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 3 \"convolution/ntt.hpp\"\n\n#include <algorithm>\n#include <array>\n#line\
-    \ 7 \"convolution/ntt.hpp\"\n#include <tuple>\n#line 9 \"convolution/ntt.hpp\"\
-    \n\n// CUT begin\n// Integer convolution for arbitrary mod\n// with NTT (and Garner's\
-    \ algorithm) for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm\
-    \ if `skip_garner` is true or mod is in `nttprimes`.\n// input: a (size: n), b\
-    \ (size: m)\n// return: vector (size: n + m - 1)\ntemplate <typename MODINT>\n\
-    std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool\
-    \ skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161, 469762049};\n\
-    \n// Integer FFT (Fast Fourier Transform) for ModInt class\n// (Also known as\
-    \ Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n// ** Input\
-    \ size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
-    \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
-    \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
-    \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
-    \ std::vector<MODINT> w{1}, iw{1};\n    for (int m = w.size(); m < n / 2; m *=\
-    \ 2) {\n        MODINT dw = root.pow((mod - 1) / (4 * m)), dwinv = 1 / dw;\n \
-    \       w.resize(m * 2), iw.resize(m * 2);\n        for (int i = 0; i < m; i++)\
-    \ w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;\n    }\n\n    if (!is_inverse)\
-    \ {\n        for (int m = n; m >>= 1;) {\n            for (int s = 0, k = 0; s\
-    \ < n; s += 2 * m, k++) {\n                for (int i = s; i < s + m; i++) {\n\
-    \                    MODINT x = a[i], y = a[i + m] * w[k];\n                 \
-    \   a[i] = x + y, a[i + m] = x - y;\n                }\n            }\n      \
-    \  }\n    } else {\n        for (int m = 1; m < n; m *= 2) {\n            for\
-    \ (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n                for (int i = s;\
-    \ i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m];\n    \
-    \                a[i] = x + y, a[i + m] = (x - y) * iw[k];\n                }\n\
-    \            }\n        }\n        int n_inv = MODINT(n).inv().val();\n      \
-    \  for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 3 \"convolution/ntt.hpp\"\
+    \n\n#include <algorithm>\n#include <array>\n#line 7 \"convolution/ntt.hpp\"\n\
+    #include <tuple>\n#line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer\
+    \ convolution for arbitrary mod\n// with NTT (and Garner's algorithm) for ModInt\
+    \ / ModIntRuntime class.\n// We skip Garner's algorithm if `skip_garner` is true\
+    \ or mod is in `nttprimes`.\n// input: a (size: n), b (size: m)\n// return: vector\
+    \ (size: n + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner);\n\nconstexpr int nttprimes[3] =\
+    \ {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
+    \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
+    \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
+    \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
+    \    if (n == 1) return;\n    static const int mod = MODINT::mod();\n    static\
+    \ const MODINT root = MODINT::get_primitive_root();\n    assert(__builtin_popcount(n)\
+    \ == 1 and (mod - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n\
+    \    for (int m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod\
+    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
+    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
+    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
+    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
+    \  for (int i = s; i < s + m; i++) {\n                    MODINT x = a[i], y =\
+    \ a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n    \
+    \            }\n            }\n        }\n    } else {\n        for (int m = 1;\
+    \ m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++)\
+    \ {\n                for (int i = s; i < s + m; i++) {\n                    MODINT\
+    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
+    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv().val();\n\
+    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
     \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
     \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
     \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
@@ -288,7 +288,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-09-05 15:19:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/factorial_power.stirling_number_of_2nd.test.cpp

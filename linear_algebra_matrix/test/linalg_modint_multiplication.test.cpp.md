@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/bare_mod_algebra.hpp
     title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\u6570\
       \u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\u5B9A\
       \u7406\u30FB\u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\u306A\u3069\u306E\u5B9F\
       \u88C5\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D
@@ -185,14 +185,15 @@ data:
     \     }\n                return -1;\n            }();\n        }\n        return\
     \ primitive_root_;\n    }\n    static void set_mod(const int &m) {\n        if\
     \ (md != m) facs().clear();\n        md = m;\n        get_primitive_root() = 0;\n\
-    \    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ? v - md\
-    \ : v);\n        return *this;\n    }\n    int val() const noexcept { return val_;\
-    \ }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v %\
-    \ md + md); }\n    explicit operator bool() const { return val_ != 0; }\n    ModIntRuntime\
-    \ operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
-    \ + x.val_);\n    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const\
-    \ {\n        return ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n\
-    \    ModIntRuntime operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \    }\n    ModIntRuntime &_setval(lint v) {\n        if (v < 0) v += md;\n  \
+    \      if (v >= md) v -= md;\n        val_ = v;\n        return *this;\n    }\n\
+    \    int val() const noexcept { return val_; }\n    ModIntRuntime() : val_(0)\
+    \ {}\n    ModIntRuntime(lint v) { _setval(v % md + md); }\n    explicit operator\
+    \ bool() const { return val_ != 0; }\n    ModIntRuntime operator+(const ModIntRuntime\
+    \ &x) const {\n        return ModIntRuntime()._setval((lint)val_ + x.val_);\n\
+    \    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const {\n        return\
+    \ ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n    ModIntRuntime\
+    \ operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
     \ * x.val_ % md);\n    }\n    ModIntRuntime operator/(const ModIntRuntime &x)\
     \ const {\n        return ModIntRuntime()._setval((lint)val_ * x.inv().val() %\
     \ md);\n    }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(md\
@@ -331,37 +332,37 @@ data:
     \ const {\n        T ret = _T_id<T>();\n        for (int i = 0; i < H; i++) ret\
     \ *= get(i, i);\n        return ret;\n    }\n    int inverse() {\n        assert(H\
     \ == W);\n        std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n\
-    \        int rank = 0;\n        for (int i = 0; i < H; i++) {\n            int\
-    \ ti = i;\n            while (ti < H and tmp[ti][i] == T()) ti++;\n          \
-    \  if (ti == H) {\n                continue;\n            } else {\n         \
-    \       rank++;\n            }\n            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);\n\
-    \            T inv = _T_id<T>() / tmp[i][i];\n            for (int j = 0; j <\
-    \ W; j++) ret[i][j] *= inv;\n            for (int j = i + 1; j < W; j++) tmp[i][j]\
-    \ *= inv;\n            for (int h = 0; h < H; h++) {\n                if (i ==\
-    \ h) continue;\n                const T c = -tmp[h][i];\n                for (int\
-    \ j = 0; j < W; j++) ret[h][j] += ret[i][j] * c;\n                for (int j =\
-    \ i + 1; j < W; j++) tmp[h][j] += tmp[i][j] * c;\n            }\n        }\n \
-    \       *this = ret;\n        return rank;\n    }\n    friend std::vector<T> operator*(const\
-    \ matrix &m, const std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n\
-    \        std::vector<T> ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];\n    \
-    \    }\n        return ret;\n    }\n    friend std::vector<T> operator*(const\
-    \ std::vector<T> &v, const matrix &m) {\n        assert(int(v.size()) == m.H);\n\
-    \        std::vector<T> ret(m.W);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[j] += v[i] * m.get(i, j);\n    \
-    \    }\n        return ret;\n    }\n    std::vector<T> prod(const std::vector<T>\
-    \ &v) const { return (*this) * v; }\n    std::vector<T> prod_left(const std::vector<T>\
-    \ &v) const { return v * (*this); }\n    template <class OStream> friend OStream\
-    \ &operator<<(OStream &os, const matrix &x) {\n        os << \"[(\" << x.H <<\
-    \ \" * \" << x.W << \" matrix)\";\n        os << \"\\n[column sums: \";\n    \
-    \    for (int j = 0; j < x.W; j++) {\n            T s = T();\n            for\
-    \ (int i = 0; i < x.H; i++) s += x.get(i, j);\n            os << s << \",\";\n\
-    \        }\n        os << \"]\";\n        for (int i = 0; i < x.H; i++) {\n  \
-    \          os << \"\\n[\";\n            for (int j = 0; j < x.W; j++) os << x.get(i,\
-    \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
-    \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
-    \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 7 \"linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp\"\
+    \        int rank = 0;\n        for (int c = 0; c < W; c++) {\n            int\
+    \ ti = rank;\n            while (ti < H and tmp[ti][c] == T()) ti++;\n       \
+    \     if (ti == H) { continue; }\n            ret[rank].swap(ret[ti]), tmp[rank].swap(tmp[ti]);\n\
+    \            T inv = _T_id<T>() / tmp[rank][c];\n            for (int j = 0; j\
+    \ < W; j++) ret[rank][j] *= inv;\n            for (int j = c + 1; j < W; j++)\
+    \ tmp[rank][j] *= inv;\n            for (int h = 0; h < H; h++) {\n          \
+    \      if (rank == h) continue;\n                const T coeff = -tmp[h][c];\n\
+    \                for (int j = 0; j < W; j++) ret[h][j] += ret[rank][j] * coeff;\n\
+    \                for (int j = c + 1; j < W; j++) tmp[h][j] += tmp[rank][j] * coeff;\n\
+    \            }\n            rank++;\n        }\n        *this = ret;\n       \
+    \ return rank;\n    }\n    friend std::vector<T> operator*(const matrix &m, const\
+    \ std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n        std::vector<T>\
+    \ ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n            for (int j =\
+    \ 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];\n        }\n        return ret;\n\
+    \    }\n    friend std::vector<T> operator*(const std::vector<T> &v, const matrix\
+    \ &m) {\n        assert(int(v.size()) == m.H);\n        std::vector<T> ret(m.W);\n\
+    \        for (int i = 0; i < m.H; i++) {\n            for (int j = 0; j < m.W;\
+    \ j++) ret[j] += v[i] * m.get(i, j);\n        }\n        return ret;\n    }\n\
+    \    std::vector<T> prod(const std::vector<T> &v) const { return (*this) * v;\
+    \ }\n    std::vector<T> prod_left(const std::vector<T> &v) const { return v *\
+    \ (*this); }\n    template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const matrix &x) {\n        os << \"[(\" << x.H << \" * \" << x.W << \"\
+    \ matrix)\";\n        os << \"\\n[column sums: \";\n        for (int j = 0; j\
+    \ < x.W; j++) {\n            T s = T();\n            for (int i = 0; i < x.H;\
+    \ i++) s += x.get(i, j);\n            os << s << \",\";\n        }\n        os\
+    \ << \"]\";\n        for (int i = 0; i < x.H; i++) {\n            os << \"\\n[\"\
+    ;\n            for (int j = 0; j < x.W; j++) os << x.get(i, j) << \",\";\n   \
+    \         os << \"]\";\n        }\n        os << \"]\\n\";\n        return os;\n\
+    \    }\n    template <class IStream> friend IStream &operator>>(IStream &is, matrix\
+    \ &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n    }\n\
+    };\n#line 7 \"linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp\"\
     \nusing namespace std;\n\nconstexpr int MODfixed = 1000003;\nconstexpr int MODruntime\
     \ = 10007;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
     \    int N, M, L;\n    cin >> N >> M >> L;\n    matrix<ModInt<MODfixed>> Afixed(N,\
@@ -399,8 +400,8 @@ data:
   isVerificationFile: true
   path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   requiredBy: []
-  timestamp: '2026-04-11 14:52:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:19:39+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 layout: document

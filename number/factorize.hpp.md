@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/primitive_root.hpp
     title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedVerifiedWith:
@@ -18,21 +18,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/is_prime.test.cpp
     title: number/test/is_prime.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/miller-rabin-5e7.test.cpp
     title: number/test/miller-rabin-5e7.test.cpp
   - icon: ':heavy_check_mark:'
     path: number/test/miller-rabin.test.cpp
     title: number/test/miller-rabin.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/primitive_root_1e18.test.cpp
     title: number/test/primitive_root_1e18.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - http://miller-rabin.appspot.com/
@@ -145,7 +145,7 @@ data:
   requiredBy:
   - number/primitive_root.hpp
   timestamp: '2026-04-11 14:52:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - graph/test/chromatic_number.test.cpp
   - number/test/primitive_root_1e18.test.cpp

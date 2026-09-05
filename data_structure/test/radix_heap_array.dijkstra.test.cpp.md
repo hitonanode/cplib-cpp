@@ -51,20 +51,20 @@ data:
     \ = vnew;\n            }\n        }\n    }\n\n    void pop() { argmin_pop(); }\n\
     \    std::pair<Uint, int> top() { return pull(), v[0].back(); }\n    [[deprecated(\"\
     NOT usual emplace() opeation!\")]] void emplace(Uint vnew, int i) {\n        chmin(vnew,\
-    \ i);\n    }\n\n    void clear() noexcept { sz = 0, last = 0, i2bj.clear(); }\n\
-    };\n#line 2 \"utilities/reader.hpp\"\n#include <cstdio>\n#include <string>\n\n\
-    // CUT begin\ntemplate <typename T> T rd_integer() {\n    T ret = 0;\n    bool\
-    \ minus = false;\n\n    char c = getchar_unlocked();\n    while (!isdigit(c))\
-    \ minus |= (c == '-'), c = getchar_unlocked();\n    while (isdigit(c)) ret = (ret\
-    \ << 1) + (ret << 3) + (c ^ 48), c = getchar_unlocked();\n\n    return minus ?\
-    \ -ret : ret;\n}\nint rdi() { return rd_integer<int>(); }\nlong long rdll() {\
-    \ return rd_integer<long long>(); }\nstd::string rdstr() {\n    std::string ret;\n\
-    \    char c = getchar_unlocked();\n    while (!isgraph(c)) c = getchar_unlocked();\n\
-    \    while (isgraph(c)) ret += c, c = getchar_unlocked();\n    return ret;\n}\n\
-    #line 4 \"data_structure/test/radix_heap_array.dijkstra.test.cpp\"\n#include <iostream>\n\
-    #line 8 \"data_structure/test/radix_heap_array.dijkstra.test.cpp\"\nusing namespace\
-    \ std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n \
-    \   int N = rdi(), M = rdi(), s = rdi(), t = rdi();\n\n    vector<vector<pair<int,\
+    \ i);\n    }\n\n    void clear() noexcept {\n        sz = 0, last = 0, i2bj.clear();\n\
+    \        for (auto &bucket : v) bucket.clear();\n    }\n};\n#line 2 \"utilities/reader.hpp\"\
+    \n#include <cstdio>\n#include <string>\n\n// CUT begin\ntemplate <typename T>\
+    \ T rd_integer() {\n    T ret = 0;\n    bool minus = false;\n\n    char c = getchar_unlocked();\n\
+    \    while (!isdigit(c)) minus |= (c == '-'), c = getchar_unlocked();\n    while\
+    \ (isdigit(c)) ret = (ret << 1) + (ret << 3) + (c ^ 48), c = getchar_unlocked();\n\
+    \n    return minus ? -ret : ret;\n}\nint rdi() { return rd_integer<int>(); }\n\
+    long long rdll() { return rd_integer<long long>(); }\nstd::string rdstr() {\n\
+    \    std::string ret;\n    char c = getchar_unlocked();\n    while (!isgraph(c))\
+    \ c = getchar_unlocked();\n    while (isgraph(c)) ret += c, c = getchar_unlocked();\n\
+    \    return ret;\n}\n#line 4 \"data_structure/test/radix_heap_array.dijkstra.test.cpp\"\
+    \n#include <iostream>\n#line 8 \"data_structure/test/radix_heap_array.dijkstra.test.cpp\"\
+    \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
+    \    int N = rdi(), M = rdi(), s = rdi(), t = rdi();\n\n    vector<vector<pair<int,\
     \ unsigned>>> to(N);\n    while (M--) {\n        int a = rdi(), b = rdi(), c =\
     \ rdi();\n        to[b].emplace_back(a, c);\n    }\n    vector<unsigned long long>\
     \ dist(N, numeric_limits<unsigned long long>::max());\n    vector<int> prv(N,\
@@ -104,7 +104,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/radix_heap_array.dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2026-09-05 15:18:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/radix_heap_array.dijkstra.test.cpp

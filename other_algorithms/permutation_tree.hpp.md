@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/range-add-range-min.hpp
     title: Range Add Range Min (known as the Starry sky tree)
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/test/permutation_tree.test.cpp
     title: other_algorithms/test/permutation_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://codeforces.com/blog/entry/78898
@@ -50,9 +50,9 @@ data:
     \                 _get(begin, end, pos * 2 + 1, (l + r) / 2, r)) +\n         \
     \      range_add[pos];\n    }\n    // Return f(x_begin, ..., x_{end - 1})\n  \
     \  Tp get(int pos) const noexcept { return prod(pos, pos + 1); }\n    Tp prod(int\
-    \ begin, int end) const noexcept { return _get(begin, end, 1, 0, head); }\n};\n\
-    #line 4 \"other_algorithms/permutation_tree.hpp\"\n#include <cassert>\n#include\
-    \ <fstream>\n#include <string>\n#line 8 \"other_algorithms/permutation_tree.hpp\"\
+    \ begin, int end) const noexcept {\n        return begin == end ? defaultT : _get(begin,\
+    \ end, 1, 0, head);\n    }\n};\n#line 4 \"other_algorithms/permutation_tree.hpp\"\
+    \n#include <cassert>\n#include <fstream>\n#include <string>\n#line 8 \"other_algorithms/permutation_tree.hpp\"\
     \n\n// Permutation tree\n// Complexity: O(N log N)\n// https://codeforces.com/blog/entry/78898\
     \ https://judge.yosupo.jp/problem/common_interval_decomposition_tree\nstruct permutation_tree\
     \ {\n    enum NodeType {\n        JoinAsc,\n        JoinDesc,\n        Cut,\n\
@@ -202,8 +202,8 @@ data:
   isVerificationFile: false
   path: other_algorithms/permutation_tree.hpp
   requiredBy: []
-  timestamp: '2025-12-03 22:27:21+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:20:25+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - other_algorithms/test/permutation_tree.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy:
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/polynomial_divmod.hpp
     title: formal_power_series/polynomial_divmod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
   _extendedVerifiedWith:
@@ -72,13 +72,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/shift_of_sampling_points.test.cpp
     title: formal_power_series/test/shift_of_sampling_points.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
   - icon: ':heavy_check_mark:'
@@ -90,18 +90,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: other_algorithms/test/north_east_lattice_paths.test.cpp
     title: other_algorithms/test/north_east_lattice_paths.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/test/pow_op.test.cpp
     title: utilities/test/pow_op.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <cassert>\n#include <iostream>\n\
@@ -336,7 +336,7 @@ data:
   - convolution/semirelaxed_multiplication.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
   timestamp: '2025-09-11 21:33:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/coeff_of_rational_function.test.cpp

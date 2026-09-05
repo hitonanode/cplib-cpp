@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data_structure/light_forward_list.hpp
     title: data_structure/light_forward_list.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/aho_corasick.hpp
     title: string/aho_corasick.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/aho_corasick_online.test.cpp
     title: string/test/aho_corasick_online.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://codeforces.com/blog/entry/10725?#comment-160742>
@@ -37,12 +37,15 @@ data:
     \ O(|keyword_i|)\n// - build_aho_corasick(): O(\\sum_i |keyword_i|)\n// - match()\
     \ : O(\\sum_i |keyword_i| + |str|)\ntemplate <class T, int (*char2int)(char)>\
     \ struct AhoCorasick {\n    bool built;\n    const int D;\n    std::vector<T>\
-    \ node;\n    AhoCorasick(int D_) : built(false), D(D_), node(1, D) {}\n    AhoCorasick\
-    \ operator=(const AhoCorasick &rhs) { return AhoCorasick(rhs.D); }\n\n    void\
-    \ enter_child(int n, int nn, int c) { node[n].setch(c, nn); }\n\n    std::vector<int>\
-    \ endpos;\n    int add(const std::string &keyword) { // Enter_in_tree() in [1]\n\
-    \        built = false;\n        int n = 0;\n        for (const auto &cc : keyword)\
-    \ {\n            int c = char2int(cc), nn = node[n].Goto(c);\n            if (!nn)\
+    \ node;\n    AhoCorasick(int D_) : built(false), D(D_), node(1, D) {}\n    AhoCorasick(const\
+    \ AhoCorasick &) = default;\n    AhoCorasick &operator=(const AhoCorasick &rhs)\
+    \ {\n        if (this == &rhs) return *this;\n        assert(D == rhs.D);\n  \
+    \      built = rhs.built;\n        node = rhs.node;\n        endpos = rhs.endpos;\n\
+    \        visorder = rhs.visorder;\n        return *this;\n    }\n\n    void enter_child(int\
+    \ n, int nn, int c) { node[n].setch(c, nn); }\n\n    std::vector<int> endpos;\n\
+    \    int add(const std::string &keyword) { // Enter_in_tree() in [1]\n       \
+    \ built = false;\n        int n = 0;\n        for (const auto &cc : keyword) {\n\
+    \            int c = char2int(cc), nn = node[n].Goto(c);\n            if (!nn)\
     \ {\n                nn = node.size();\n                enter_child(n, nn, c),\
     \ node.emplace_back(D);\n            }\n            n = nn;\n        }\n     \
     \   return endpos.push_back(n), n;\n    }\n\n    void complete_failure(int n,\
@@ -86,35 +89,37 @@ data:
     \ d, int i) { (*this)[d] = i; }\n};\n\nint c2i0aA(char c) { return isdigit(c)\
     \ ? c - '0' : islower(c) ? c - 'a' + 10 : c - 'A' + 36; }\n\n/* Usage:\nAhoCorasick<TrieNodeFL,\
     \ c2i0aA> trie(62);\ntrie.add(P);\ntrie.build();\nvector<int> ret = trie.match();\n\
-    */\n#line 5 \"string/aho_corasick_online.hpp\"\n\n// CUT begin\n// Aho-Corasick,\
-    \ Online keyword addition\n// Implementation idea: <https://codeforces.com/blog/entry/10725?#comment-160742>\n\
-    struct OnlineAhoCorasick {\n    int n_keywords;\n    int D = 62;\n    using AC\
-    \ = AhoCorasick<TrieNodeFL, c2i0aA>;\n    std::vector<std::string> keywords;\n\
-    \    std::vector<std::vector<int>> kwd_ids;\n    std::vector<AC> automata;\n \
-    \   OnlineAhoCorasick() : n_keywords(0), kwd_ids(30), automata(30, D) {}\n\n \
-    \   // O(lg(n_keywords) |keyword|) amortized\n    void add(const std::string &keyword)\
-    \ {\n        int pos = __builtin_clz(~n_keywords);\n        keywords.push_back(keyword),\
-    \ kwd_ids[pos].push_back(n_keywords);\n        automata[pos].add(keyword);\n \
-    \       n_keywords++;\n        for (int p = 0; p < pos; p++) {\n            for\
-    \ (auto i : kwd_ids[p]) automata[pos].add(keywords[i]);\n            kwd_ids[pos].insert(kwd_ids[pos].end(),\
-    \ kwd_ids[p].begin(), kwd_ids[p].end());\n            kwd_ids[p].clear(), automata[p]\
-    \ = AC(D);\n        }\n    }\n\n    // O(lg(n_keywords) |str| + \\sum_i |keyword_i|)\n\
-    \    std::vector<int> match(const std::string &str) {\n        std::vector<int>\
-    \ ret(keywords.size());\n        for (unsigned p = 0; p < kwd_ids.size(); p++)\
-    \ {\n            std::vector<int> subret = automata[p].match(str);\n         \
-    \   for (unsigned i = 0; i < kwd_ids[p].size(); i++) ret[kwd_ids[p][i]] = subret[i];\n\
-    \        }\n        return ret;\n    }\n};\n"
-  code: "#pragma once\n#include \"aho_corasick.hpp\"\n#include <string>\n#include\
-    \ <vector>\n\n// CUT begin\n// Aho-Corasick, Online keyword addition\n// Implementation\
+    */\n#line 3 \"string/aho_corasick_online.hpp\"\n#include <bit>\n#line 6 \"string/aho_corasick_online.hpp\"\
+    \n\n// CUT begin\n// Aho-Corasick, Online keyword addition\n// Implementation\
     \ idea: <https://codeforces.com/blog/entry/10725?#comment-160742>\nstruct OnlineAhoCorasick\
     \ {\n    int n_keywords;\n    int D = 62;\n    using AC = AhoCorasick<TrieNodeFL,\
     \ c2i0aA>;\n    std::vector<std::string> keywords;\n    std::vector<std::vector<int>>\
     \ kwd_ids;\n    std::vector<AC> automata;\n    OnlineAhoCorasick() : n_keywords(0),\
     \ kwd_ids(30), automata(30, D) {}\n\n    // O(lg(n_keywords) |keyword|) amortized\n\
-    \    void add(const std::string &keyword) {\n        int pos = __builtin_clz(~n_keywords);\n\
+    \    void add(const std::string &keyword) {\n        int pos = std::countr_one(static_cast<unsigned>(n_keywords));\n\
     \        keywords.push_back(keyword), kwd_ids[pos].push_back(n_keywords);\n  \
     \      automata[pos].add(keyword);\n        n_keywords++;\n        for (int p\
     \ = 0; p < pos; p++) {\n            for (auto i : kwd_ids[p]) automata[pos].add(keywords[i]);\n\
+    \            kwd_ids[pos].insert(kwd_ids[pos].end(), kwd_ids[p].begin(), kwd_ids[p].end());\n\
+    \            kwd_ids[p].clear(), automata[p] = AC(D);\n        }\n    }\n\n  \
+    \  // O(lg(n_keywords) |str| + \\sum_i |keyword_i|)\n    std::vector<int> match(const\
+    \ std::string &str) {\n        std::vector<int> ret(keywords.size());\n      \
+    \  for (unsigned p = 0; p < kwd_ids.size(); p++) {\n            std::vector<int>\
+    \ subret = automata[p].match(str);\n            for (unsigned i = 0; i < kwd_ids[p].size();\
+    \ i++) ret[kwd_ids[p][i]] = subret[i];\n        }\n        return ret;\n    }\n\
+    };\n"
+  code: "#pragma once\n#include \"aho_corasick.hpp\"\n#include <bit>\n#include <string>\n\
+    #include <vector>\n\n// CUT begin\n// Aho-Corasick, Online keyword addition\n\
+    // Implementation idea: <https://codeforces.com/blog/entry/10725?#comment-160742>\n\
+    struct OnlineAhoCorasick {\n    int n_keywords;\n    int D = 62;\n    using AC\
+    \ = AhoCorasick<TrieNodeFL, c2i0aA>;\n    std::vector<std::string> keywords;\n\
+    \    std::vector<std::vector<int>> kwd_ids;\n    std::vector<AC> automata;\n \
+    \   OnlineAhoCorasick() : n_keywords(0), kwd_ids(30), automata(30, D) {}\n\n \
+    \   // O(lg(n_keywords) |keyword|) amortized\n    void add(const std::string &keyword)\
+    \ {\n        int pos = std::countr_one(static_cast<unsigned>(n_keywords));\n \
+    \       keywords.push_back(keyword), kwd_ids[pos].push_back(n_keywords);\n   \
+    \     automata[pos].add(keyword);\n        n_keywords++;\n        for (int p =\
+    \ 0; p < pos; p++) {\n            for (auto i : kwd_ids[p]) automata[pos].add(keywords[i]);\n\
     \            kwd_ids[pos].insert(kwd_ids[pos].end(), kwd_ids[p].begin(), kwd_ids[p].end());\n\
     \            kwd_ids[p].clear(), automata[p] = AC(D);\n        }\n    }\n\n  \
     \  // O(lg(n_keywords) |str| + \\sum_i |keyword_i|)\n    std::vector<int> match(const\
@@ -129,8 +134,8 @@ data:
   isVerificationFile: false
   path: string/aho_corasick_online.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:20:36+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - string/test/aho_corasick_online.test.cpp
 documentation_of: string/aho_corasick_online.hpp

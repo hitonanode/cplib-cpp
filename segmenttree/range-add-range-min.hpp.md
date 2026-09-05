@@ -2,20 +2,20 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/permutation_tree.hpp
     title: "Common interval decomposition tree / \"Permutation tree\" \uFF08\u9806\
       \u5217\u6728\uFF09"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/test/permutation_tree.test.cpp
     title: other_algorithms/test/permutation_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segmenttree/range-add-range-min.hpp\"\n#include <algorithm>\n\
@@ -49,7 +49,8 @@ data:
     \                 _get(begin, end, pos * 2 + 1, (l + r) / 2, r)) +\n         \
     \      range_add[pos];\n    }\n    // Return f(x_begin, ..., x_{end - 1})\n  \
     \  Tp get(int pos) const noexcept { return prod(pos, pos + 1); }\n    Tp prod(int\
-    \ begin, int end) const noexcept { return _get(begin, end, 1, 0, head); }\n};\n"
+    \ begin, int end) const noexcept {\n        return begin == end ? defaultT : _get(begin,\
+    \ end, 1, 0, head);\n    }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <limits>\n#include <vector>\n\
     \n// CUT begin\n// StarrySkyTree: segment tree for Range Minimum Query & Range\
     \ Add Query\n// Complexity: $O(N)$ (construction), $O(\\log N)$ (add / get / prod)\n\
@@ -81,14 +82,15 @@ data:
     \  _get(begin, end, pos * 2 + 1, (l + r) / 2, r)) +\n               range_add[pos];\n\
     \    }\n    // Return f(x_begin, ..., x_{end - 1})\n    Tp get(int pos) const\
     \ noexcept { return prod(pos, pos + 1); }\n    Tp prod(int begin, int end) const\
-    \ noexcept { return _get(begin, end, 1, 0, head); }\n};\n"
+    \ noexcept {\n        return begin == end ? defaultT : _get(begin, end, 1, 0,\
+    \ head);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: segmenttree/range-add-range-min.hpp
   requiredBy:
   - other_algorithms/permutation_tree.hpp
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:20:25+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - other_algorithms/test/permutation_tree.test.cpp

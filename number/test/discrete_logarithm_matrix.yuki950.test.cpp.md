@@ -5,7 +5,7 @@ data:
     path: number/discrete_logarithm.hpp
     title: "Discrete logarithm / Baby-step giant-step \uFF08\u96E2\u6563\u5BFE\u6570\
       \u554F\u984C\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: utilities/pow_op.hpp
     title: Power (general monoid)
   _extendedRequiredBy: []

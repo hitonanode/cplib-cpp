@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linalg_longlong.hpp
     title: linear_algebra_matrix/linalg_longlong.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/combination.hpp
     title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
       \u7406\u306E\u62E1\u5F35\uFF09"
@@ -19,21 +19,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
     title: linear_algebra_matrix/test/linalg_longlong_matmul.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/combination.stress.test.cpp
     title: number/test/combination.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/combination.test.cpp
     title: number/test/combination.test.cpp
   - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/bare_mod_algebra.hpp\"\n#include <algorithm>\n#include\
@@ -123,7 +123,7 @@ data:
   - linear_algebra_matrix/linalg_longlong.hpp
   - number/combination.hpp
   timestamp: '2026-04-11 14:52:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - linear_algebra_matrix/test/linalg_longlong.test.cpp
   - linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp

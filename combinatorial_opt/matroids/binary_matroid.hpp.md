@@ -13,10 +13,13 @@ data:
     \ on F2) : linearly independent vectors\n// VDIM: max. dimension of vector space\n\
     // Verified: SRM526.5 1000 (Used only for linear independence check)\n// Verified:\
     \ CF102156D 2019 Petrozavodsk Winter Camp, Yandex Cup D. Pick Your Own Nim\ntemplate\
-    \ <int VDIM> class BinaryMatroid {\n    using Element = int;\n    static void\
-    \ chxormin(std::bitset<VDIM> &l, const std::bitset<VDIM> &r) {\n        int i\
-    \ = r._Find_first();\n        if (i < VDIM and l[i]) l ^= r;\n    }\n    std::vector<std::bitset<VDIM>>\
-    \ mat;\n    std::vector<Element> Iset;\n    std::vector<std::vector<std::bitset<VDIM>>>\
+    \ <int VDIM> class BinaryMatroid {\n    using Element = int;\n    static int find_first(const\
+    \ std::bitset<VDIM> &bits) {\n#ifdef __GLIBCXX__\n        return bits._Find_first();\n\
+    #else\n        for (int i = 0; i < VDIM; i++)\n            if (bits[i]) return\
+    \ i;\n        return VDIM;\n#endif\n    }\n    static void chxormin(std::bitset<VDIM>\
+    \ &l, const std::bitset<VDIM> &r) {\n        int i = find_first(r);\n        if\
+    \ (i < VDIM and l[i]) l ^= r;\n    }\n    std::vector<std::bitset<VDIM>> mat;\n\
+    \    std::vector<Element> Iset;\n    std::vector<std::vector<std::bitset<VDIM>>>\
     \ bs;\n\npublic:\n    BinaryMatroid() = default;\n    BinaryMatroid(const std::vector<std::bitset<VDIM>>\
     \ &bitmat) : mat(bitmat) {}\n\n    int size() const { return mat.size(); }\n\n\
     \    template <class State> void set(const State &I) {\n        Iset.clear();\n\
@@ -38,10 +41,13 @@ data:
     \ dimension of vector space\n// Verified: SRM526.5 1000 (Used only for linear\
     \ independence check)\n// Verified: CF102156D 2019 Petrozavodsk Winter Camp, Yandex\
     \ Cup D. Pick Your Own Nim\ntemplate <int VDIM> class BinaryMatroid {\n    using\
-    \ Element = int;\n    static void chxormin(std::bitset<VDIM> &l, const std::bitset<VDIM>\
-    \ &r) {\n        int i = r._Find_first();\n        if (i < VDIM and l[i]) l ^=\
-    \ r;\n    }\n    std::vector<std::bitset<VDIM>> mat;\n    std::vector<Element>\
-    \ Iset;\n    std::vector<std::vector<std::bitset<VDIM>>> bs;\n\npublic:\n    BinaryMatroid()\
+    \ Element = int;\n    static int find_first(const std::bitset<VDIM> &bits) {\n\
+    #ifdef __GLIBCXX__\n        return bits._Find_first();\n#else\n        for (int\
+    \ i = 0; i < VDIM; i++)\n            if (bits[i]) return i;\n        return VDIM;\n\
+    #endif\n    }\n    static void chxormin(std::bitset<VDIM> &l, const std::bitset<VDIM>\
+    \ &r) {\n        int i = find_first(r);\n        if (i < VDIM and l[i]) l ^= r;\n\
+    \    }\n    std::vector<std::bitset<VDIM>> mat;\n    std::vector<Element> Iset;\n\
+    \    std::vector<std::vector<std::bitset<VDIM>>> bs;\n\npublic:\n    BinaryMatroid()\
     \ = default;\n    BinaryMatroid(const std::vector<std::bitset<VDIM>> &bitmat)\
     \ : mat(bitmat) {}\n\n    int size() const { return mat.size(); }\n\n    template\
     \ <class State> void set(const State &I) {\n        Iset.clear();\n        for\
@@ -62,7 +68,7 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/matroids/binary_matroid.hpp
   requiredBy: []
-  timestamp: '2021-09-05 18:41:59+09:00'
+  timestamp: '2026-09-05 15:17:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: combinatorial_opt/matroids/binary_matroid.hpp

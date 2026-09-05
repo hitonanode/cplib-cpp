@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/radix_heap.hpp
     title: "Radix heap \uFF08\u57FA\u6570\u30D2\u30FC\u30D7\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
@@ -81,111 +81,111 @@ data:
     \ = 0;\n            for (int e = head[now]; e < head[now + 1]; ++e) {\n      \
     \          const auto &nx = tos[e];\n                T dnx = dist[now] + nx.second;\n\
     \                int nxt = nx.first;\n                if (dist[nxt] > dnx) {\n\
-    \                    dist[nxt] = dnx;\n                    if (!in_queue[nxt])\
-    \ {\n                        if (q.size() and dnx < dist[q.front()]) { // Small\
-    \ label first optimization\n                            q.push_front(nxt);\n \
-    \                       } else {\n                            q.push_back(nxt);\n\
-    \                        }\n                        prev[nxt] = now, in_queue[nxt]\
-    \ = 1;\n                    }\n                }\n            }\n        }\n \
-    \   }\n\n    // 01-BFS\n    // - Requirement: all weights must be 0 or w (positive\
-    \ constant).\n    // - Complexity: O(V + E)\n    void zero_one_bfs(int s, int\
-    \ t = INVALID) {\n        assert(0 <= s and s < V);\n        build_();\n     \
-    \   dist.assign(V, INF), prev.assign(V, INVALID);\n        dist[s] = 0;\n    \
-    \    std::vector<int> q(V * 4);\n        int ql = V * 2, qr = V * 2;\n       \
-    \ q[qr++] = s;\n        while (ql < qr) {\n            int v = q[ql++];\n    \
-    \        if (v == t) return;\n            for (int e = head[v]; e < head[v + 1];\
-    \ ++e) {\n                const auto &nx = tos[e];\n                T dnx = dist[v]\
-    \ + nx.second;\n                if (dist[nx.first] > dnx) {\n                \
-    \    dist[nx.first] = dnx, prev[nx.first] = v;\n                    if (nx.second)\
-    \ {\n                        q[qr++] = nx.first;\n                    } else {\n\
-    \                        q[--ql] = nx.first;\n                    }\n        \
-    \        }\n            }\n        }\n    }\n\n    // Dial's algorithm\n    //\
-    \ - Requirement: wmin >= 0\n    // - Complexity: O(wmax * V + E)\n    void dial(int\
-    \ s, int t = INVALID) {\n        assert(0 <= s and s < V);\n        build_();\n\
-    \        dist.assign(V, INF), prev.assign(V, INVALID);\n        dist[s] = 0;\n\
-    \        std::vector<std::vector<std::pair<int, T>>> q(wmax + 1);\n        q[0].emplace_back(s,\
-    \ dist[s]);\n        int ninq = 1;\n\n        int cur = 0;\n        T dcur = 0;\n\
-    \        for (; ninq; ++cur, ++dcur) {\n            if (cur == wmax + 1) cur =\
-    \ 0;\n            while (!q[cur].empty()) {\n                int v = q[cur].back().first;\n\
-    \                T dnow = q[cur].back().second;\n                q[cur].pop_back(),\
-    \ --ninq;\n                if (v == t) return;\n                if (dist[v] <\
-    \ dnow) continue;\n\n                for (int e = head[v]; e < head[v + 1]; ++e)\
-    \ {\n                    const auto &nx = tos[e];\n                    T dnx =\
-    \ dist[v] + nx.second;\n                    if (dist[nx.first] > dnx) {\n    \
-    \                    dist[nx.first] = dnx, prev[nx.first] = v;\n             \
-    \           int nxtcur = cur + int(nx.second);\n                        if (nxtcur\
-    \ >= int(q.size())) nxtcur -= q.size();\n                        q[nxtcur].emplace_back(nx.first,\
-    \ dnx), ++ninq;\n                    }\n                }\n            }\n   \
-    \     }\n    }\n\n    // Solver for DAG\n    // - Requirement: graph is DAG\n\
-    \    // - Complexity: O(V + E)\n    bool dag_solver(int s) {\n        assert(0\
-    \ <= s and s < V);\n        build_();\n        dist.assign(V, INF), prev.assign(V,\
-    \ INVALID);\n        dist[s] = 0;\n        std::vector<int> indeg(V, 0);\n   \
-    \     std::vector<int> q(V * 2);\n        int ql = 0, qr = 0;\n        q[qr++]\
-    \ = s;\n        while (ql < qr) {\n            int now = q[ql++];\n          \
-    \  for (int e = head[now]; e < head[now + 1]; ++e) {\n                const auto\
-    \ &nx = tos[e];\n                ++indeg[nx.first];\n                if (indeg[nx.first]\
-    \ == 1) q[qr++] = nx.first;\n            }\n        }\n        ql = qr = 0;\n\
+    \                    dist[nxt] = dnx;\n                    prev[nxt] = now;\n\
+    \                    if (!in_queue[nxt]) {\n                        if (q.size()\
+    \ and dnx < dist[q.front()]) { // Small label first optimization\n           \
+    \                 q.push_front(nxt);\n                        } else {\n     \
+    \                       q.push_back(nxt);\n                        }\n       \
+    \                 in_queue[nxt] = 1;\n                    }\n                }\n\
+    \            }\n        }\n    }\n\n    // 01-BFS\n    // - Requirement: all weights\
+    \ must be 0 or w (positive constant).\n    // - Complexity: O(V + E)\n    void\
+    \ zero_one_bfs(int s, int t = INVALID) {\n        assert(0 <= s and s < V);\n\
+    \        build_();\n        dist.assign(V, INF), prev.assign(V, INVALID);\n  \
+    \      dist[s] = 0;\n        std::vector<int> q(V * 4);\n        int ql = V *\
+    \ 2, qr = V * 2;\n        q[qr++] = s;\n        while (ql < qr) {\n          \
+    \  int v = q[ql++];\n            if (v == t) return;\n            for (int e =\
+    \ head[v]; e < head[v + 1]; ++e) {\n                const auto &nx = tos[e];\n\
+    \                T dnx = dist[v] + nx.second;\n                if (dist[nx.first]\
+    \ > dnx) {\n                    dist[nx.first] = dnx, prev[nx.first] = v;\n  \
+    \                  if (nx.second) {\n                        q[qr++] = nx.first;\n\
+    \                    } else {\n                        q[--ql] = nx.first;\n \
+    \                   }\n                }\n            }\n        }\n    }\n\n\
+    \    // Dial's algorithm\n    // - Requirement: wmin >= 0\n    // - Complexity:\
+    \ O(wmax * V + E)\n    void dial(int s, int t = INVALID) {\n        assert(0 <=\
+    \ s and s < V);\n        build_();\n        dist.assign(V, INF), prev.assign(V,\
+    \ INVALID);\n        dist[s] = 0;\n        std::vector<std::vector<std::pair<int,\
+    \ T>>> q(wmax + 1);\n        q[0].emplace_back(s, dist[s]);\n        int ninq\
+    \ = 1;\n\n        int cur = 0;\n        T dcur = 0;\n        for (; ninq; ++cur,\
+    \ ++dcur) {\n            if (cur == wmax + 1) cur = 0;\n            while (!q[cur].empty())\
+    \ {\n                int v = q[cur].back().first;\n                T dnow = q[cur].back().second;\n\
+    \                q[cur].pop_back(), --ninq;\n                if (v == t) return;\n\
+    \                if (dist[v] < dnow) continue;\n\n                for (int e =\
+    \ head[v]; e < head[v + 1]; ++e) {\n                    const auto &nx = tos[e];\n\
+    \                    T dnx = dist[v] + nx.second;\n                    if (dist[nx.first]\
+    \ > dnx) {\n                        dist[nx.first] = dnx, prev[nx.first] = v;\n\
+    \                        int nxtcur = cur + int(nx.second);\n                \
+    \        if (nxtcur >= int(q.size())) nxtcur -= q.size();\n                  \
+    \      q[nxtcur].emplace_back(nx.first, dnx), ++ninq;\n                    }\n\
+    \                }\n            }\n        }\n    }\n\n    // Solver for DAG\n\
+    \    // - Requirement: graph is DAG\n    // - Complexity: O(V + E)\n    bool dag_solver(int\
+    \ s) {\n        assert(0 <= s and s < V);\n        build_();\n        dist.assign(V,\
+    \ INF), prev.assign(V, INVALID);\n        dist[s] = 0;\n        std::vector<int>\
+    \ indeg(V, 0);\n        std::vector<int> q(V * 2);\n        int ql = 0, qr = 0;\n\
     \        q[qr++] = s;\n        while (ql < qr) {\n            int now = q[ql++];\n\
     \            for (int e = head[now]; e < head[now + 1]; ++e) {\n             \
-    \   const auto &nx = tos[e];\n                --indeg[nx.first];\n           \
-    \     if (dist[nx.first] > dist[now] + nx.second)\n                    dist[nx.first]\
-    \ = dist[now] + nx.second, prev[nx.first] = now;\n                if (indeg[nx.first]\
-    \ == 0) q[qr++] = nx.first;\n            }\n        }\n        return *max_element(indeg.begin(),\
-    \ indeg.end()) == 0;\n    }\n\n    // Retrieve a sequence of vertex ids that represents\
-    \ shortest path [s, ..., goal]\n    // If not reachable to goal, return {}\n \
-    \   std::vector<int> retrieve_path(int goal) const {\n        assert(int(prev.size())\
-    \ == V);\n        assert(0 <= goal and goal < V);\n        if (dist[goal] == INF)\
-    \ return {};\n        std::vector<int> ret{goal};\n        while (prev[goal] !=\
-    \ INVALID) {\n            goal = prev[goal];\n            ret.push_back(goal);\n\
-    \        }\n        std::reverse(ret.begin(), ret.end());\n        return ret;\n\
-    \    }\n\n    void solve(int s, int t = INVALID) {\n        if (wmin >= 0) {\n\
-    \            if (single_positive_weight) {\n                zero_one_bfs(s, t);\n\
-    \            } else if (wmax <= 10) {\n                dial(s, t);\n         \
-    \   } else {\n                if ((long long)V * V < (E << 4)) {\n           \
-    \         dijkstra_vquad(s, t);\n                } else {\n                  \
-    \  dijkstra(s, t);\n                }\n            }\n        } else {\n     \
-    \       bellman_ford(s, V);\n        }\n    }\n\n    // Warshall-Floyd algorithm\n\
-    \    // - Requirement: no negative loop\n    // - Complexity: O(E + V^3)\n   \
-    \ std::vector<std::vector<T>> floyd_warshall() {\n        build_();\n        std::vector<std::vector<T>>\
-    \ dist2d(V, std::vector<T>(V, INF));\n        for (int i = 0; i < V; i++) {\n\
-    \            dist2d[i][i] = 0;\n            for (const auto &e : edges) {\n  \
-    \              int s = std::get<0>(e), t = std::get<1>(e);\n                dist2d[s][t]\
-    \ = std::min(dist2d[s][t], std::get<2>(e));\n            }\n        }\n      \
-    \  for (int k = 0; k < V; k++) {\n            for (int i = 0; i < V; i++) {\n\
-    \                if (dist2d[i][k] == INF) continue;\n                for (int\
-    \ j = 0; j < V; j++) {\n                    if (dist2d[k][j] == INF) continue;\n\
-    \                    dist2d[i][j] = std::min(dist2d[i][j], dist2d[i][k] + dist2d[k][j]);\n\
-    \                }\n            }\n        }\n        return dist2d;\n    }\n\n\
-    \    void to_dot(std::string filename = \"shortest_path\") const {\n        std::ofstream\
-    \ ss(filename + \".DOT\");\n        ss << \"digraph{\\n\";\n        build_();\n\
-    \        for (int i = 0; i < V; i++) {\n            for (int e = head[i]; e <\
-    \ head[i + 1]; ++e) {\n                ss << i << \"->\" << tos[e].first << \"\
-    [label=\" << tos[e].second << \"];\\n\";\n            }\n        }\n        ss\
-    \ << \"}\\n\";\n        ss.close();\n        return;\n    }\n};\n#line 2 \"data_structure/radix_heap.hpp\"\
-    \n#include <array>\n#include <cstddef>\n#line 6 \"data_structure/radix_heap.hpp\"\
-    \n#include <type_traits>\n#line 9 \"data_structure/radix_heap.hpp\"\n\n// Radix\
-    \ heap for unsigned integer\n// https://github.com/iwiwi/radix-heap\ntemplate\
-    \ <class Uint, class Label, typename std::enable_if<std::is_unsigned<Uint>::value>::type\
-    \ * = nullptr>\nclass radix_heap {\n    int sz;\n    Uint last;\n    std::array<std::vector<std::pair<Uint,\
-    \ Label>>, std::numeric_limits<Uint>::digits + 1> v;\n\n    template <class U,\
-    \ typename std::enable_if<sizeof(U) == 4>::type * = nullptr>\n    static inline\
-    \ int bucket(U x) noexcept {\n        return x ? 32 - __builtin_clz(x) : 0;\n\
-    \    }\n    template <class U, typename std::enable_if<sizeof(U) == 8>::type *\
-    \ = nullptr>\n    static inline int bucket(U x) noexcept {\n        return x ?\
-    \ 64 - __builtin_clzll(x) : 0;\n    }\n\n    void pull() {\n        if (!v[0].empty())\
-    \ return;\n        int i = 1;\n        while (v[i].empty()) ++i;\n        last\
-    \ = v[i].back().first;\n        for (int j = 0; j < int(v[i].size()); j++) last\
-    \ = std::min(last, v[i][j].first);\n        for (int j = 0; j < int(v[i].size());\
-    \ j++) {\n            v[bucket(v[i][j].first ^ last)].emplace_back(std::move(v[i][j]));\n\
-    \        }\n        v[i].clear();\n    }\n\npublic:\n    radix_heap() : sz(0),\
-    \ last(0) {\n        static_assert(std::numeric_limits<Uint>::digits > 0, \"Invalid\
-    \ type.\");\n    }\n    std::size_t size() const noexcept { return sz; }\n   \
-    \ bool empty() const noexcept { return sz == 0; }\n    void push(Uint x, const\
-    \ Label &val) { ++sz, v[bucket(x ^ last)].emplace_back(x, val); }\n    void push(Uint\
-    \ x, Label &&val) { ++sz, v[bucket(x ^ last)].emplace_back(x, std::move(val));\
-    \ }\n    template <class... Args> void emplace(Uint x, Args &&...args) {\n   \
-    \     ++sz, v[bucket(x ^ last)].emplace_back(std::piecewise_construct, std::forward_as_tuple(x),\n\
-    \                                               std::forward_as_tuple(args...));\n\
+    \   const auto &nx = tos[e];\n                ++indeg[nx.first];\n           \
+    \     if (indeg[nx.first] == 1) q[qr++] = nx.first;\n            }\n        }\n\
+    \        ql = qr = 0;\n        q[qr++] = s;\n        while (ql < qr) {\n     \
+    \       int now = q[ql++];\n            for (int e = head[now]; e < head[now +\
+    \ 1]; ++e) {\n                const auto &nx = tos[e];\n                --indeg[nx.first];\n\
+    \                if (dist[nx.first] > dist[now] + nx.second)\n               \
+    \     dist[nx.first] = dist[now] + nx.second, prev[nx.first] = now;\n        \
+    \        if (indeg[nx.first] == 0) q[qr++] = nx.first;\n            }\n      \
+    \  }\n        return *max_element(indeg.begin(), indeg.end()) == 0;\n    }\n\n\
+    \    // Retrieve a sequence of vertex ids that represents shortest path [s, ...,\
+    \ goal]\n    // If not reachable to goal, return {}\n    std::vector<int> retrieve_path(int\
+    \ goal) const {\n        assert(int(prev.size()) == V);\n        assert(0 <= goal\
+    \ and goal < V);\n        if (dist[goal] == INF) return {};\n        std::vector<int>\
+    \ ret{goal};\n        while (prev[goal] != INVALID) {\n            goal = prev[goal];\n\
+    \            ret.push_back(goal);\n        }\n        std::reverse(ret.begin(),\
+    \ ret.end());\n        return ret;\n    }\n\n    void solve(int s, int t = INVALID)\
+    \ {\n        if (wmin >= 0) {\n            if (single_positive_weight) {\n   \
+    \             zero_one_bfs(s, t);\n            } else if (wmax <= 10) {\n    \
+    \            dial(s, t);\n            } else {\n                if ((long long)V\
+    \ * V < (E << 4)) {\n                    dijkstra_vquad(s, t);\n             \
+    \   } else {\n                    dijkstra(s, t);\n                }\n       \
+    \     }\n        } else {\n            bellman_ford(s, V);\n        }\n    }\n\
+    \n    // Warshall-Floyd algorithm\n    // - Requirement: no negative loop\n  \
+    \  // - Complexity: O(E + V^3)\n    std::vector<std::vector<T>> floyd_warshall()\
+    \ {\n        build_();\n        std::vector<std::vector<T>> dist2d(V, std::vector<T>(V,\
+    \ INF));\n        for (int i = 0; i < V; i++) {\n            dist2d[i][i] = 0;\n\
+    \            for (const auto &e : edges) {\n                int s = std::get<0>(e),\
+    \ t = std::get<1>(e);\n                dist2d[s][t] = std::min(dist2d[s][t], std::get<2>(e));\n\
+    \            }\n        }\n        for (int k = 0; k < V; k++) {\n           \
+    \ for (int i = 0; i < V; i++) {\n                if (dist2d[i][k] == INF) continue;\n\
+    \                for (int j = 0; j < V; j++) {\n                    if (dist2d[k][j]\
+    \ == INF) continue;\n                    dist2d[i][j] = std::min(dist2d[i][j],\
+    \ dist2d[i][k] + dist2d[k][j]);\n                }\n            }\n        }\n\
+    \        return dist2d;\n    }\n\n    void to_dot(std::string filename = \"shortest_path\"\
+    ) const {\n        std::ofstream ss(filename + \".DOT\");\n        ss << \"digraph{\\\
+    n\";\n        build_();\n        for (int i = 0; i < V; i++) {\n            for\
+    \ (int e = head[i]; e < head[i + 1]; ++e) {\n                ss << i << \"->\"\
+    \ << tos[e].first << \"[label=\" << tos[e].second << \"];\\n\";\n            }\n\
+    \        }\n        ss << \"}\\n\";\n        ss.close();\n        return;\n  \
+    \  }\n};\n#line 2 \"data_structure/radix_heap.hpp\"\n#include <array>\n#include\
+    \ <cstddef>\n#line 6 \"data_structure/radix_heap.hpp\"\n#include <type_traits>\n\
+    #line 9 \"data_structure/radix_heap.hpp\"\n\n// Radix heap for unsigned integer\n\
+    // https://github.com/iwiwi/radix-heap\ntemplate <class Uint, class Label, typename\
+    \ std::enable_if<std::is_unsigned<Uint>::value>::type * = nullptr>\nclass radix_heap\
+    \ {\n    int sz;\n    Uint last;\n    std::array<std::vector<std::pair<Uint, Label>>,\
+    \ std::numeric_limits<Uint>::digits + 1> v;\n\n    template <class U, typename\
+    \ std::enable_if<sizeof(U) == 4>::type * = nullptr>\n    static inline int bucket(U\
+    \ x) noexcept {\n        return x ? 32 - __builtin_clz(x) : 0;\n    }\n    template\
+    \ <class U, typename std::enable_if<sizeof(U) == 8>::type * = nullptr>\n    static\
+    \ inline int bucket(U x) noexcept {\n        return x ? 64 - __builtin_clzll(x)\
+    \ : 0;\n    }\n\n    void pull() {\n        if (!v[0].empty()) return;\n     \
+    \   int i = 1;\n        while (v[i].empty()) ++i;\n        last = v[i].back().first;\n\
+    \        for (int j = 0; j < int(v[i].size()); j++) last = std::min(last, v[i][j].first);\n\
+    \        for (int j = 0; j < int(v[i].size()); j++) {\n            v[bucket(v[i][j].first\
+    \ ^ last)].emplace_back(std::move(v[i][j]));\n        }\n        v[i].clear();\n\
+    \    }\n\npublic:\n    radix_heap() : sz(0), last(0) {\n        static_assert(std::numeric_limits<Uint>::digits\
+    \ > 0, \"Invalid type.\");\n    }\n    std::size_t size() const noexcept { return\
+    \ sz; }\n    bool empty() const noexcept { return sz == 0; }\n    void push(Uint\
+    \ x, const Label &val) { ++sz, v[bucket(x ^ last)].emplace_back(x, val); }\n \
+    \   void push(Uint x, Label &&val) { ++sz, v[bucket(x ^ last)].emplace_back(x,\
+    \ std::move(val)); }\n    template <class... Args> void emplace(Uint x, Args &&...args)\
+    \ {\n        ++sz, v[bucket(x ^ last)].emplace_back(std::piecewise_construct,\
+    \ std::forward_as_tuple(x),\n                                               std::forward_as_tuple(args...));\n\
     \    }\n    void pop() { pull(), --sz, v[0].pop_back(); }\n    std::pair<Uint,\
     \ Label> top() { return pull(), v[0].back(); }\n    Uint top_key() { return pull(),\
     \ last; }\n    Label &top_label() { return pull(), v[0].back().second; }\n   \
@@ -227,7 +227,7 @@ data:
   isVerificationFile: true
   path: graph/test/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2022-05-01 15:28:23+09:00'
+  timestamp: '2026-09-05 15:18:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: graph/test/shortest_path.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
   _extendedRequiredBy: []
@@ -102,58 +102,57 @@ data:
     \ const {\n        T ret = _T_id<T>();\n        for (int i = 0; i < H; i++) ret\
     \ *= get(i, i);\n        return ret;\n    }\n    int inverse() {\n        assert(H\
     \ == W);\n        std::vector<std::vector<T>> ret = Identity(H), tmp = *this;\n\
-    \        int rank = 0;\n        for (int i = 0; i < H; i++) {\n            int\
-    \ ti = i;\n            while (ti < H and tmp[ti][i] == T()) ti++;\n          \
-    \  if (ti == H) {\n                continue;\n            } else {\n         \
-    \       rank++;\n            }\n            ret[i].swap(ret[ti]), tmp[i].swap(tmp[ti]);\n\
-    \            T inv = _T_id<T>() / tmp[i][i];\n            for (int j = 0; j <\
-    \ W; j++) ret[i][j] *= inv;\n            for (int j = i + 1; j < W; j++) tmp[i][j]\
-    \ *= inv;\n            for (int h = 0; h < H; h++) {\n                if (i ==\
-    \ h) continue;\n                const T c = -tmp[h][i];\n                for (int\
-    \ j = 0; j < W; j++) ret[h][j] += ret[i][j] * c;\n                for (int j =\
-    \ i + 1; j < W; j++) tmp[h][j] += tmp[i][j] * c;\n            }\n        }\n \
-    \       *this = ret;\n        return rank;\n    }\n    friend std::vector<T> operator*(const\
-    \ matrix &m, const std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n\
-    \        std::vector<T> ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];\n    \
-    \    }\n        return ret;\n    }\n    friend std::vector<T> operator*(const\
-    \ std::vector<T> &v, const matrix &m) {\n        assert(int(v.size()) == m.H);\n\
-    \        std::vector<T> ret(m.W);\n        for (int i = 0; i < m.H; i++) {\n \
-    \           for (int j = 0; j < m.W; j++) ret[j] += v[i] * m.get(i, j);\n    \
-    \    }\n        return ret;\n    }\n    std::vector<T> prod(const std::vector<T>\
-    \ &v) const { return (*this) * v; }\n    std::vector<T> prod_left(const std::vector<T>\
-    \ &v) const { return v * (*this); }\n    template <class OStream> friend OStream\
-    \ &operator<<(OStream &os, const matrix &x) {\n        os << \"[(\" << x.H <<\
-    \ \" * \" << x.W << \" matrix)\";\n        os << \"\\n[column sums: \";\n    \
-    \    for (int j = 0; j < x.W; j++) {\n            T s = T();\n            for\
-    \ (int i = 0; i < x.H; i++) s += x.get(i, j);\n            os << s << \",\";\n\
-    \        }\n        os << \"]\";\n        for (int i = 0; i < x.H; i++) {\n  \
-    \          os << \"\\n[\";\n            for (int j = 0; j < x.W; j++) os << x.get(i,\
-    \ j) << \",\";\n            os << \"]\";\n        }\n        os << \"]\\n\";\n\
-    \        return os;\n    }\n    template <class IStream> friend IStream &operator>>(IStream\
-    \ &is, matrix &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n\
-    \    }\n};\n#line 5 \"linear_algebra_matrix/system_of_linear_equations.hpp\"\n\
-    \n// CUT begin\n// Solve Ax = b for T = ModInt<PRIME>\n// - retval: {one of the\
-    \ solution, {freedoms}} (if solution exists)\n//           {{}, {}} (otherwise)\n\
-    // Complexity:\n// - Yield one of the possible solutions: O(HW rank(A)) (H: #\
-    \ of eqs., W: # of variables)\n// - Enumerate all of the bases: O(W(H + W))\n\
-    template <typename T>\nstd::pair<std::vector<T>, std::vector<std::vector<T>>>\n\
-    system_of_linear_equations(matrix<T> A, std::vector<T> b) {\n    int H = A.height(),\
-    \ W = A.width();\n    matrix<T> M(H, W + 1);\n    for (int i = 0; i < H; i++)\
-    \ {\n        for (int j = 0; j < W; j++) M[i][j] = A[i][j];\n        M[i][W] =\
-    \ b[i];\n    }\n    M = M.gauss_jordan();\n    std::vector<int> ss(W, -1), ss_nonneg_js;\n\
-    \    for (int i = 0; i < H; i++) {\n        int j = 0;\n        while (j <= W\
-    \ and M[i][j] == 0) j++;\n        if (j == W) { // No solution\n            return\
-    \ {{}, {}};\n        } else if (j < W) {\n            ss_nonneg_js.push_back(j);\n\
-    \            ss[j] = i;\n        } else {\n            break;\n        }\n   \
-    \ }\n\n    std::vector<T> x(W);\n    std::vector<std::vector<T>> D;\n    for (int\
-    \ j = 0; j < W; j++) {\n        if (ss[j] == -1) {\n            // This part may\
-    \ require W^2 space complexity in output\n            std::vector<T> d(W);\n \
-    \           d[j] = 1;\n            for (int jj : ss_nonneg_js) {\n           \
-    \     if (jj >= j) break;\n                d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n\
-    \            }\n            D.emplace_back(d);\n        } else {\n           \
-    \ x[j] = M[ss[j]][W] / M[ss[j]][j];\n        }\n    }\n    return std::make_pair(x,\
-    \ D);\n}\n"
+    \        int rank = 0;\n        for (int c = 0; c < W; c++) {\n            int\
+    \ ti = rank;\n            while (ti < H and tmp[ti][c] == T()) ti++;\n       \
+    \     if (ti == H) { continue; }\n            ret[rank].swap(ret[ti]), tmp[rank].swap(tmp[ti]);\n\
+    \            T inv = _T_id<T>() / tmp[rank][c];\n            for (int j = 0; j\
+    \ < W; j++) ret[rank][j] *= inv;\n            for (int j = c + 1; j < W; j++)\
+    \ tmp[rank][j] *= inv;\n            for (int h = 0; h < H; h++) {\n          \
+    \      if (rank == h) continue;\n                const T coeff = -tmp[h][c];\n\
+    \                for (int j = 0; j < W; j++) ret[h][j] += ret[rank][j] * coeff;\n\
+    \                for (int j = c + 1; j < W; j++) tmp[h][j] += tmp[rank][j] * coeff;\n\
+    \            }\n            rank++;\n        }\n        *this = ret;\n       \
+    \ return rank;\n    }\n    friend std::vector<T> operator*(const matrix &m, const\
+    \ std::vector<T> &v) {\n        assert(m.W == int(v.size()));\n        std::vector<T>\
+    \ ret(m.H);\n        for (int i = 0; i < m.H; i++) {\n            for (int j =\
+    \ 0; j < m.W; j++) ret[i] += m.get(i, j) * v[j];\n        }\n        return ret;\n\
+    \    }\n    friend std::vector<T> operator*(const std::vector<T> &v, const matrix\
+    \ &m) {\n        assert(int(v.size()) == m.H);\n        std::vector<T> ret(m.W);\n\
+    \        for (int i = 0; i < m.H; i++) {\n            for (int j = 0; j < m.W;\
+    \ j++) ret[j] += v[i] * m.get(i, j);\n        }\n        return ret;\n    }\n\
+    \    std::vector<T> prod(const std::vector<T> &v) const { return (*this) * v;\
+    \ }\n    std::vector<T> prod_left(const std::vector<T> &v) const { return v *\
+    \ (*this); }\n    template <class OStream> friend OStream &operator<<(OStream\
+    \ &os, const matrix &x) {\n        os << \"[(\" << x.H << \" * \" << x.W << \"\
+    \ matrix)\";\n        os << \"\\n[column sums: \";\n        for (int j = 0; j\
+    \ < x.W; j++) {\n            T s = T();\n            for (int i = 0; i < x.H;\
+    \ i++) s += x.get(i, j);\n            os << s << \",\";\n        }\n        os\
+    \ << \"]\";\n        for (int i = 0; i < x.H; i++) {\n            os << \"\\n[\"\
+    ;\n            for (int j = 0; j < x.W; j++) os << x.get(i, j) << \",\";\n   \
+    \         os << \"]\";\n        }\n        os << \"]\\n\";\n        return os;\n\
+    \    }\n    template <class IStream> friend IStream &operator>>(IStream &is, matrix\
+    \ &x) {\n        for (auto &v : x.elem) is >> v;\n        return is;\n    }\n\
+    };\n#line 5 \"linear_algebra_matrix/system_of_linear_equations.hpp\"\n\n// CUT\
+    \ begin\n// Solve Ax = b for T = ModInt<PRIME>\n// - retval: {one of the solution,\
+    \ {freedoms}} (if solution exists)\n//           {{}, {}} (otherwise)\n// Complexity:\n\
+    // - Yield one of the possible solutions: O(HW rank(A)) (H: # of eqs., W: # of\
+    \ variables)\n// - Enumerate all of the bases: O(W(H + W))\ntemplate <typename\
+    \ T>\nstd::pair<std::vector<T>, std::vector<std::vector<T>>>\nsystem_of_linear_equations(matrix<T>\
+    \ A, std::vector<T> b) {\n    int H = A.height(), W = A.width();\n    matrix<T>\
+    \ M(H, W + 1);\n    for (int i = 0; i < H; i++) {\n        for (int j = 0; j <\
+    \ W; j++) M[i][j] = A[i][j];\n        M[i][W] = b[i];\n    }\n    M = M.gauss_jordan();\n\
+    \    std::vector<int> ss(W, -1), ss_nonneg_js;\n    for (int i = 0; i < H; i++)\
+    \ {\n        int j = 0;\n        while (j <= W and M[i][j] == 0) j++;\n      \
+    \  if (j == W) { // No solution\n            return {{}, {}};\n        } else\
+    \ if (j < W) {\n            ss_nonneg_js.push_back(j);\n            ss[j] = i;\n\
+    \        } else {\n            break;\n        }\n    }\n\n    std::vector<T>\
+    \ x(W);\n    std::vector<std::vector<T>> D;\n    for (int j = 0; j < W; j++) {\n\
+    \        if (ss[j] == -1) {\n            // This part may require W^2 space complexity\
+    \ in output\n            std::vector<T> d(W);\n            d[j] = 1;\n       \
+    \     for (int jj : ss_nonneg_js) {\n                if (jj >= j) break;\n   \
+    \             d[jj] = -M[ss[jj]][j] / M[ss[jj]][jj];\n            }\n        \
+    \    D.emplace_back(d);\n        } else {\n            x[j] = M[ss[j]][W] / M[ss[j]][j];\n\
+    \        }\n    }\n    return std::make_pair(x, D);\n}\n"
   code: "#pragma once\n#include \"matrix.hpp\"\n#include <utility>\n#include <vector>\n\
     \n// CUT begin\n// Solve Ax = b for T = ModInt<PRIME>\n// - retval: {one of the\
     \ solution, {freedoms}} (if solution exists)\n//           {{}, {}} (otherwise)\n\
@@ -181,7 +180,7 @@ data:
   isVerificationFile: false
   path: linear_algebra_matrix/system_of_linear_equations.hpp
   requiredBy: []
-  timestamp: '2025-08-10 23:51:40+09:00'
+  timestamp: '2026-09-05 15:19:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/system_of_linear_equations.test.cpp

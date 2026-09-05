@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/heavy_light_decomposition.hpp
     title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\
       \uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -94,8 +94,9 @@ data:
     \ (size_t i = 1; i < ret.size(); i++)\n                ret[i].second = ret[i -\
     \ 1].second + ret[i].first;\n        }\n        return ret;\n    }\n    TRET data2ret(const\
     \ TDATA &vec, const TQUERY &q) override {\n        int i = std::lower_bound(vec.begin(),\
-    \ vec.end(), std::make_pair(q, q)) - vec.begin();\n        if (!i)\n         \
-    \   return std::make_pair(0, 0);\n        else\n            return std::make_pair(i,\
+    \ vec.end(), q,\n                                 [](const auto &p, const TQUERY\
+    \ &v) { return p.first < v; }) -\n                vec.begin();\n        if (!i)\n\
+    \            return std::make_pair(0, 0);\n        else\n            return std::make_pair(i,\
     \ vec[i - 1].second);\n    }\n    TRET merge_ret(const TRET &l, const TRET &r)\
     \ override {\n        return std::make_pair(l.first + r.first, l.second + r.second);\n\
     \    }\n    using SegTree = NonrecursiveSegmentTree<TDATA, TRET, TQUERY>;\n  \
@@ -224,8 +225,8 @@ data:
   isVerificationFile: true
   path: tree/test/vertex-add-path-sum.test.cpp
   requiredBy: []
-  timestamp: '2025-01-01 21:39:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:20:20+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/vertex-add-path-sum.test.cpp
 layout: document

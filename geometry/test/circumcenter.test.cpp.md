@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: geometry/geometry.hpp
     title: geometry/geometry.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: geometry/point3d.hpp
     title: geometry/point3d.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: geometry/triangle.hpp
     title: geometry/triangle.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.000001'
@@ -65,23 +65,24 @@ data:
     \u66F2\u304C\u308A\u65B9\n    Point2d<T_P> v1 = b - a;\n    Point2d<T_P> v2 =\
     \ c - a;\n    if (v1.det(v2) > Point2d<T_P>::EPS) return 1;   // \u5DE6\u6298\n\
     \    if (v1.det(v2) < -Point2d<T_P>::EPS) return -1; // \u53F3\u6298\n    if (v1.dot(v2)\
-    \ < -Point2d<T_P>::EPS) return 2;  // c-a-b\n    if (v1.norm() < v2.norm()) return\
-    \ -2;           // a-b-c\n    return 0;                                      \
-    \ // a-c-b\n}\n\n// Convex hull \uFF08\u51F8\u5305\uFF09\n// return: IDs of vertices\
-    \ used for convex hull, counterclockwise\n// include_boundary: If true, interior\
-    \ angle pi is allowed\ntemplate <typename T_P>\nstd::vector<int> convex_hull(const\
-    \ std::vector<Point2d<T_P>> &ps, bool include_boundary = false) {\n    int n =\
-    \ ps.size();\n    if (n <= 1) return std::vector<int>(n, 0);\n    std::vector<std::pair<Point2d<T_P>,\
-    \ int>> points(n);\n    for (size_t i = 0; i < ps.size(); i++) points[i] = std::make_pair(ps[i],\
-    \ i);\n    std::sort(points.begin(), points.end());\n    int k = 0;\n    std::vector<std::pair<Point2d<T_P>,\
-    \ int>> qs(2 * n);\n    auto ccw_check = [&](int c) { return include_boundary\
-    \ ? (c == -1) : (c <= 0); };\n    for (int i = 0; i < n; i++) {\n        while\
-    \ (k > 1 and ccw_check(ccw(qs[k - 2].first, qs[k - 1].first, points[i].first)))\
-    \ k--;\n        qs[k++] = points[i];\n    }\n    for (int i = n - 2, t = k; i\
-    \ >= 0; i--) {\n        while (k > t and ccw_check(ccw(qs[k - 2].first, qs[k -\
-    \ 1].first, points[i].first))) k--;\n        qs[k++] = points[i];\n    }\n   \
-    \ std::vector<int> ret(k - 1);\n    for (int i = 0; i < k - 1; i++) ret[i] = qs[i].second;\n\
-    \    return ret;\n}\n\n// Solve r1 + t1 * v1 == r2 + t2 * v2\ntemplate <typename\
+    \ < -Point2d<T_P>::EPS) return 2;  // c-a-b\n    if (v1.norm2() < v2.norm2())\
+    \ return -2;         // a-b-c\n    return 0;                                 \
+    \      // a-c-b\n}\n\n// Convex hull \uFF08\u51F8\u5305\uFF09\n// return: IDs\
+    \ of vertices used for convex hull, counterclockwise\n// include_boundary: If\
+    \ true, interior angle pi is allowed\ntemplate <typename T_P>\nstd::vector<int>\
+    \ convex_hull(const std::vector<Point2d<T_P>> &ps, bool include_boundary = false)\
+    \ {\n    int n = ps.size();\n    if (n <= 1) return std::vector<int>(n, 0);\n\
+    \    std::vector<std::pair<Point2d<T_P>, int>> points(n);\n    for (size_t i =\
+    \ 0; i < ps.size(); i++) points[i] = std::make_pair(ps[i], i);\n    std::sort(points.begin(),\
+    \ points.end());\n    int k = 0;\n    std::vector<std::pair<Point2d<T_P>, int>>\
+    \ qs(2 * n);\n    auto ccw_check = [&](int c) { return include_boundary ? (c ==\
+    \ -1) : (c <= 0); };\n    for (int i = 0; i < n; i++) {\n        while (k > 1\
+    \ and ccw_check(ccw(qs[k - 2].first, qs[k - 1].first, points[i].first))) k--;\n\
+    \        qs[k++] = points[i];\n    }\n    for (int i = n - 2, t = k; i >= 0; i--)\
+    \ {\n        while (k > t and ccw_check(ccw(qs[k - 2].first, qs[k - 1].first,\
+    \ points[i].first))) k--;\n        qs[k++] = points[i];\n    }\n    std::vector<int>\
+    \ ret(k - 1);\n    for (int i = 0; i < k - 1; i++) ret[i] = qs[i].second;\n  \
+    \  return ret;\n}\n\n// Solve r1 + t1 * v1 == r2 + t2 * v2\ntemplate <typename\
     \ T_P, typename std::enable_if<std::is_floating_point<T_P>::value>::type * = nullptr>\n\
     Point2d<T_P> lines_crosspoint(Point2d<T_P> r1, Point2d<T_P> v1, Point2d<T_P> r2,\
     \ Point2d<T_P> v2) {\n    static_assert(std::is_floating_point<T_P>::value ==\
@@ -119,16 +120,17 @@ data:
     \ Div.1 900)\ntemplate <typename T_P>\nstd::vector<Point2d<T_P>>\nIntersectTwoCircles(const\
     \ Point2d<T_P> &Ca, T_P Ra, const Point2d<T_P> &Cb, T_P Rb) {\n    static_assert(std::is_floating_point<T_P>::value\
     \ == true);\n    T_P d = (Ca - Cb).norm();\n    if (Ra + Rb < d) return {};\n\
-    \    T_P rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);\n    T_P rs2 = Ra * Ra -\
-    \ rc * rc;\n    if (rs2 < 0) return {};\n    T_P rs = std::sqrt(rs2);\n    Point2d<T_P>\
-    \ diff = (Cb - Ca) / d;\n    return {Ca + diff * Point2d<T_P>(rc, rs), Ca + diff\
-    \ * Point2d<T_P>(rc, -rs)};\n}\n\n// Solve |x0 + vt| = R (SRM 543 Div.1 1000,\
-    \ GCJ 2016 R3 C)\ntemplate <typename PointNd, typename Float>\nstd::vector<Float>\
+    \    if (d == 0) return {};\n    T_P rc = (d * d + Ra * Ra - Rb * Rb) / (2 * d);\n\
+    \    T_P rs2 = Ra * Ra - rc * rc;\n    if (rs2 < 0) return {};\n    T_P rs = std::sqrt(rs2);\n\
+    \    Point2d<T_P> diff = (Cb - Ca) / d;\n    return {Ca + diff * Point2d<T_P>(rc,\
+    \ rs), Ca + diff * Point2d<T_P>(rc, -rs)};\n}\n\n// Solve |x0 + vt| = R (SRM 543\
+    \ Div.1 1000, GCJ 2016 R3 C)\ntemplate <typename PointNd, typename Float>\nstd::vector<Float>\
     \ IntersectCircleLine(const PointNd &x0, const PointNd &v, Float R) {\n    static_assert(std::is_floating_point<Float>::value\
     \ == true);\n    Float b = Float(x0.dot(v)) / v.norm2();\n    Float c = Float(x0.norm2()\
-    \ - Float(R) * R) / v.norm2();\n    if (b * b - c < 0) return {};\n    Float ret1\
-    \ = -b + sqrtl(b * b - c) * (b > 0 ? -1 : 1);\n    Float ret2 = c / ret1;\n  \
-    \  return ret1 < ret2 ? std::vector<Float>{ret1, ret2} : std::vector<Float>{ret2,\
+    \ - Float(R) * R) / v.norm2();\n    if (b * b - c < 0) return {};\n    Float discriminant_root\
+    \ = sqrtl(b * b - c);\n    if (discriminant_root == 0) return {-b, -b};\n    Float\
+    \ ret1 = -b + discriminant_root * (b > 0 ? -1 : 1);\n    Float ret2 = c / ret1;\n\
+    \    return ret1 < ret2 ? std::vector<Float>{ret1, ret2} : std::vector<Float>{ret2,\
     \ ret1};\n}\n\n// Distance between point p <-> line ab\ntemplate <typename PointFloat>\n\
     decltype(PointFloat::x)\nDistancePointLine(const PointFloat &p, const PointFloat\
     \ &a, const PointFloat &b) {\n    assert(a != b);\n    return (b - a).absdet(p\
@@ -193,8 +195,8 @@ data:
   isVerificationFile: true
   path: geometry/test/circumcenter.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:24:14+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: geometry/test/circumcenter.test.cpp
 layout: document

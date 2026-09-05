@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/frequency_table_of_tree_distance.test.cpp
     title: tree/test/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - http://kirika-comp.hatenablog.com/entry/2018/03/12/210446
@@ -36,10 +36,11 @@ data:
     \ *= b_[i];\n    fft(N, a_, -1);\n    for (int i = 0; i < N; i++) a_[i] /= N;\n\
     \    return a_;\n}\n// retval[i] = \\sum_j a[j]b[i - j]\n// Requirement: length\
     \ * max(a) * max(b) < 10^15\ntemplate <typename T>\nstd::vector<long long int>\
-    \ fftconv(const std::vector<T> &a, const std::vector<T> &b) {\n    std::vector<cmplx>\
-    \ ans = conv_cmplx(a, b);\n    std::vector<long long int> ret(ans.size());\n \
-    \   for (int i = 0; i < (int)ans.size(); i++) ret[i] = floor(ans[i].real() + 0.5);\n\
-    \    ret.resize(a.size() + b.size() - 1);\n    return ret;\n}\n"
+    \ fftconv(const std::vector<T> &a, const std::vector<T> &b) {\n    if (a.empty()\
+    \ or b.empty()) return {};\n    std::vector<cmplx> ans = conv_cmplx(a, b);\n \
+    \   std::vector<long long int> ret(ans.size());\n    for (int i = 0; i < (int)ans.size();\
+    \ i++) ret[i] = floor(ans[i].real() + 0.5);\n    ret.resize(a.size() + b.size()\
+    \ - 1);\n    return ret;\n}\n"
   code: "#pragma once\n#include <complex>\n#include <utility>\n#include <vector>\n\
     \n// Convolution by FFT (Fast Fourier Transform)\n// Algorithm based on http://kirika-comp.hatenablog.com/entry/2018/03/12/210446\n\
     // Verified: ATC001C (168 ms) https://atcoder.jp/contests/atc001/submissions/9243440\n\
@@ -62,16 +63,17 @@ data:
     \ *= b_[i];\n    fft(N, a_, -1);\n    for (int i = 0; i < N; i++) a_[i] /= N;\n\
     \    return a_;\n}\n// retval[i] = \\sum_j a[j]b[i - j]\n// Requirement: length\
     \ * max(a) * max(b) < 10^15\ntemplate <typename T>\nstd::vector<long long int>\
-    \ fftconv(const std::vector<T> &a, const std::vector<T> &b) {\n    std::vector<cmplx>\
-    \ ans = conv_cmplx(a, b);\n    std::vector<long long int> ret(ans.size());\n \
-    \   for (int i = 0; i < (int)ans.size(); i++) ret[i] = floor(ans[i].real() + 0.5);\n\
-    \    ret.resize(a.size() + b.size() - 1);\n    return ret;\n}\n"
+    \ fftconv(const std::vector<T> &a, const std::vector<T> &b) {\n    if (a.empty()\
+    \ or b.empty()) return {};\n    std::vector<cmplx> ans = conv_cmplx(a, b);\n \
+    \   std::vector<long long int> ret(ans.size());\n    for (int i = 0; i < (int)ans.size();\
+    \ i++) ret[i] = floor(ans[i].real() + 0.5);\n    ret.resize(a.size() + b.size()\
+    \ - 1);\n    return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: convolution/fft_double.hpp
   requiredBy: []
-  timestamp: '2024-09-22 15:59:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:18:01+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - tree/test/frequency_table_of_tree_distance.test.cpp
 documentation_of: convolution/fft_double.hpp

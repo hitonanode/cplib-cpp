@@ -3,34 +3,39 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/binary_gcd.stress.test.cpp
     title: number/test/binary_gcd.stress.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"number/binary_gcd.hpp\"\n\n// CUT begin\ntemplate <typename\
-    \ Int> Int binary_gcd(Int x_, Int y_) {\n    unsigned long long x = x_ < 0 ? -x_\
-    \ : x_, y = y_ < 0 ? -y_ : y_;\n    if (!x or !y) return x + y;\n    int n = __builtin_ctzll(x),\
+  bundledCode: "#line 2 \"number/binary_gcd.hpp\"\n#include <type_traits>\n\n// CUT\
+    \ begin\ntemplate <typename Int> Int binary_gcd(Int x_, Int y_) {\n    using Uint\
+    \ = std::make_unsigned_t<Int>;\n    auto magnitude = [](Int v) -> Uint {\n   \
+    \     Uint u = static_cast<Uint>(v);\n        return v < 0 ? Uint(0) - u : u;\n\
+    \    };\n    unsigned long long x = magnitude(x_), y = magnitude(y_);\n    if\
+    \ (!x or !y) return x + y;\n    int n = __builtin_ctzll(x), m = __builtin_ctzll(y);\n\
+    \    x >>= n, y >>= m;\n    while (x != y) {\n        if (x > y) {\n         \
+    \   x = (x - y) >> __builtin_ctzll(x - y);\n        } else {\n            y =\
+    \ (y - x) >> __builtin_ctzll(y - x);\n        }\n    }\n    return x << (n > m\
+    \ ? m : n);\n}\n"
+  code: "#pragma once\n#include <type_traits>\n\n// CUT begin\ntemplate <typename\
+    \ Int> Int binary_gcd(Int x_, Int y_) {\n    using Uint = std::make_unsigned_t<Int>;\n\
+    \    auto magnitude = [](Int v) -> Uint {\n        Uint u = static_cast<Uint>(v);\n\
+    \        return v < 0 ? Uint(0) - u : u;\n    };\n    unsigned long long x = magnitude(x_),\
+    \ y = magnitude(y_);\n    if (!x or !y) return x + y;\n    int n = __builtin_ctzll(x),\
     \ m = __builtin_ctzll(y);\n    x >>= n, y >>= m;\n    while (x != y) {\n     \
     \   if (x > y) {\n            x = (x - y) >> __builtin_ctzll(x - y);\n       \
     \ } else {\n            y = (y - x) >> __builtin_ctzll(y - x);\n        }\n  \
     \  }\n    return x << (n > m ? m : n);\n}\n"
-  code: "#pragma once\n\n// CUT begin\ntemplate <typename Int> Int binary_gcd(Int\
-    \ x_, Int y_) {\n    unsigned long long x = x_ < 0 ? -x_ : x_, y = y_ < 0 ? -y_\
-    \ : y_;\n    if (!x or !y) return x + y;\n    int n = __builtin_ctzll(x), m =\
-    \ __builtin_ctzll(y);\n    x >>= n, y >>= m;\n    while (x != y) {\n        if\
-    \ (x > y) {\n            x = (x - y) >> __builtin_ctzll(x - y);\n        } else\
-    \ {\n            y = (y - x) >> __builtin_ctzll(y - x);\n        }\n    }\n  \
-    \  return x << (n > m ? m : n);\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: number/binary_gcd.hpp
   requiredBy: []
-  timestamp: '2021-08-21 15:46:09+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 21:26:13+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number/test/binary_gcd.stress.test.cpp
 documentation_of: number/binary_gcd.hpp

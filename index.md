@@ -25,7 +25,7 @@ data:
       title: "Linear sum assignment problem, Hungarian algorithm \uFF08\u5272\u5F53\
         \u554F\u984C\u306B\u5BFE\u3059\u308B\u30CF\u30F3\u30AC\u30EA\u30A2\u30F3\u6CD5\
         \uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: combinatorial_opt/matroid_intersection.hpp
       title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\
         \uFF09\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
@@ -44,7 +44,7 @@ data:
     - icon: ':warning:'
       path: combinatorial_opt/matroids/binary_matroid.hpp
       title: "Binary matroid \uFF08\u4E8C\u5024\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: combinatorial_opt/matroids/graphic_matroid.hpp
       title: "Graphic matroid \uFF08\u30B0\u30E9\u30D5\u30DE\u30C8\u30ED\u30A4\u30C9\
         \uFF09"
@@ -52,7 +52,7 @@ data:
       path: combinatorial_opt/matroids/matroid_example.hpp
       title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u30AF\u30E9\u30B9\u306E\u30A4\u30F3\u30BF\
         \u30FC\u30D5\u30A7\u30FC\u30B9\u306E\u8AAC\u660E"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: combinatorial_opt/matroids/partition_matroid.hpp
       title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
     - icon: ':warning:'
@@ -90,7 +90,7 @@ data:
     - icon: ':warning:'
       path: convolution/fft_arbitrary_mod.hpp
       title: convolution/fft_arbitrary_mod.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: convolution/fft_double.hpp
       title: convolution/fft_double.hpp
     - icon: ':heavy_check_mark:'
@@ -100,7 +100,7 @@ data:
       path: convolution/multivar_ntt.hpp
       title: "Multivariate linear convolution \uFF08\u591A\u5909\u6570\u7DDA\u5F62\
         \u7573\u307F\u8FBC\u307F\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: convolution/ntt.hpp
       title: convolution/ntt.hpp
     - icon: ':heavy_check_mark:'
@@ -127,12 +127,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/fast_hash_map.hpp
       title: Fast hash map
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: data_structure/fast_set.hpp
       title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\
         \u3092\u9AD8\u901F\u306B\u51E6\u7406\u3059\u308B\u30C7\u30FC\u30BF\u69CB\u9020\
         \uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: data_structure/fibonacci_heap.hpp
       title: data_structure/fibonacci_heap.hpp
     - icon: ':warning:'
@@ -141,10 +141,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/lazy_rbst.hpp
       title: Randomized binary search tree with lazy propagation
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: data_structure/light_forward_list.hpp
       title: data_structure/light_forward_list.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: data_structure/link_cut_tree.hpp
       title: Link-Cut tree
     - icon: ':heavy_check_mark:'
@@ -240,7 +240,7 @@ data:
       path: formal_power_series/lagrange_interpolation.hpp
       title: "Lagrange interpolation\uFF08\u591A\u9805\u5F0F\u306E Lagrange \u88DC\
         \u9593\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: formal_power_series/linear_recurrence.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u767A\u898B\u30FB\u7B2C $N$ \u9805\
         \u63A8\u5B9A"
@@ -265,18 +265,18 @@ data:
     - icon: ':warning:'
       path: generate_snippet_conf.py
       title: generate_snippet_conf.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint.hpp
       title: modint.hpp
   - name: geometry
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: geometry/geometry.hpp
       title: geometry/geometry.hpp
     - icon: ':warning:'
       path: geometry/point2d_w_error.hpp
       title: geometry/point2d_w_error.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: geometry/point3d.hpp
       title: geometry/point3d.hpp
     - icon: ':warning:'
@@ -285,7 +285,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: geometry/sort_by_argument.hpp
       title: geometry/sort_by_argument.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: geometry/triangle.hpp
       title: geometry/triangle.hpp
   - name: graph
@@ -297,7 +297,7 @@ data:
       path: graph/chromatic_number.hpp
       title: "Chromatic number of undirected graph \uFF08\u7121\u5411\u30B0\u30E9\u30D5\
         \u306E\u5F69\u8272\u6570\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/directed_mst.hpp
       title: graph/directed_mst.hpp
     - icon: ':heavy_check_mark:'
@@ -364,13 +364,13 @@ data:
     - icon: ':warning:'
       path: graph/shortest_cycle01.hpp
       title: graph/shortest_cycle01.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/shortest_path.hpp
       title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/strongly_connected_components.hpp
       title: graph/strongly_connected_components.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/strongly_connected_components_bitset.hpp
       title: graph/strongly_connected_components_bitset.hpp
   - name: heuristic
@@ -386,11 +386,11 @@ data:
         \u6B63\u898F\u5206\u5E03\u30FB\u30AB\u30EB\u30DE\u30F3\u30D5\u30A3\u30EB\u30BF"
   - name: linear_algebra_matrix
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: linear_algebra_matrix/blackbox_algorithm.hpp
       title: "Black box linear algebra \u3092\u5229\u7528\u3057\u305F\u5404\u7A2E\u9AD8\
         \u901F\u8A08\u7B97"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: linear_algebra_matrix/blackbox_matrices.hpp
       title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -429,7 +429,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/linalg_longlong.hpp
       title: linear_algebra_matrix/linalg_longlong.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: linear_algebra_matrix/matrix.hpp
       title: linear_algebra_matrix/matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -458,7 +458,7 @@ data:
       path: number/arithmetic_cumsum.hpp
       title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\
         \u6570\u306E\u7D2F\u7A4D\u548C\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/bare_mod_algebra.hpp
       title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\
         \u6570\u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\
@@ -467,13 +467,13 @@ data:
     - icon: ':warning:'
       path: number/big_combination_logarithm.hpp
       title: number/big_combination_logarithm.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/binary_gcd.hpp
       title: Binary GCD
     - icon: ':heavy_check_mark:'
       path: number/bs_sieve.hpp
       title: number/bs_sieve.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/combination.hpp
       title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
         \u7406\u306E\u62E1\u5F35\uFF09"
@@ -500,7 +500,7 @@ data:
       path: number/euler_totient_phi.hpp
       title: "Euler's totient function\uFF08\u30AA\u30A4\u30E9\u30FC\u306E\u30C8\u30FC\
         \u30B7\u30A7\u30F3\u30C8\u95A2\u6570\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/factorize.hpp
       title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
     - icon: ':heavy_check_mark:'
@@ -517,26 +517,26 @@ data:
       path: number/modint_mersenne61.hpp
       title: "$\\mathbb{F}_{2^{61} - 1}$ \uFF08\u30CF\u30C3\u30B7\u30E5\u7528\u30E1\
         \u30EB\u30BB\u30F3\u30CC\u7D20\u6570 modint\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/modint_runtime.hpp
       title: number/modint_runtime.hpp
     - icon: ':heavy_check_mark:'
       path: number/nimber.hpp
       title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/pow_mod.hpp
       title: "Modular exponentiation \uFF08\u3079\u304D\u4E57 mod\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/primitive_root.hpp
       title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\
         \uFF09"
     - icon: ':heavy_check_mark:'
       path: number/rational_approximation.hpp
       title: "Rational approximation \uFF08\u6709\u7406\u6570\u8FD1\u4F3C\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/sqrt_mod.hpp
       title: "Square root modulo prime \uFF08\u5E73\u65B9\u5270\u4F59\uFF09"
     - icon: ':warning:'
@@ -546,12 +546,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/stern_brocot_tree.hpp
       title: "Stern\u2013Brocot tree"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/zeta_moebius_transform.hpp
       title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   - name: other_algorithms
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: other_algorithms/binary_lifting.hpp
       title: "Binary lifting / doubling \uFF08\u30C0\u30D6\u30EA\u30F3\u30B0\uFF09"
     - icon: ':heavy_check_mark:'
@@ -609,7 +609,7 @@ data:
       path: other_algorithms/north_east_lattice_paths.hpp
       title: "Counting north-east lattice paths \uFF082 \u6B21\u5143\u30B0\u30EA\u30C3\
         \u30C9\u4E0A\u306E\u6700\u77ED\u8DEF\u306E\u6570\u3048\u4E0A\u3052\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: other_algorithms/permutation_tree.hpp
       title: "Common interval decomposition tree / \"Permutation tree\" \uFF08\u9806\
         \u5217\u6728\uFF09"
@@ -640,7 +640,7 @@ data:
     - icon: ':warning:'
       path: random/shuffle_container.hpp
       title: random/shuffle_container.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: random/xorshift.hpp
       title: random/xorshift.hpp
   - name: rational
@@ -675,10 +675,10 @@ data:
       path: segmenttree/persistent_segtree.hpp
       title: "Persistent segtree \uFF08\u5B8C\u5168\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\
         \u30C8\u6728\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/range-add-range-min.hpp
       title: Range Add Range Min (known as the Starry sky tree)
     - icon: ':heavy_check_mark:'
@@ -727,7 +727,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: sparse_table/disjoint_sparse_table.hpp
       title: Disjoint sparse table
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: sparse_table/rmq_sparse_table.hpp
       title: sparse_table/rmq_sparse_table.hpp
     - icon: ':heavy_check_mark:'
@@ -738,10 +738,10 @@ data:
       title: 2D sparse table
   - name: string
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/aho_corasick.hpp
       title: string/aho_corasick.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/aho_corasick_online.hpp
       title: string/aho_corasick_online.hpp
     - icon: ':heavy_check_mark:'
@@ -794,14 +794,14 @@ data:
       title: syntactic_analysis/parsetree.hpp
   - name: tree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/auxiliary_tree.hpp
       title: "LCA-based auxiliary tree / virtual tree, online \uFF08\"\u865A\u6811\
         \"\uFF09"
     - icon: ':heavy_check_mark:'
       path: tree/cartesian_tree.hpp
       title: Cartesian tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: tree/centroid_decomposition.hpp
       title: "Centroid decomposition \uFF08\u68EE\u306E\u91CD\u5FC3\u5206\u89E3\uFF09"
     - icon: ':heavy_check_mark:'
@@ -811,7 +811,7 @@ data:
       path: tree/euler_tour.hpp
       title: "Euler tour \uFF08\u6728\u306E\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\
         \uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: tree/frequency_table_of_tree_distance.hpp
       title: Frequency table of tree distance
     - icon: ':heavy_check_mark:'
@@ -820,7 +820,7 @@ data:
         \u3066\u306E\u90E8\u5206\u6728\u3092\u7D4C\u7531\u3059\u308B\u3088\u3046\u306A\
         \u9802\u70B9\u8FFD\u52A0\u30FB\u524A\u9664\u64CD\u4F5C\u5217\u306E\u751F\u6210\
         \uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: tree/heavy_light_decomposition.hpp
       title: "Heavy-light decomposition \uFF08HLD, \u6728\u306E\u91CD\u8EFD\u5206\u89E3\
         \uFF09"
@@ -905,7 +905,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/int_kth_root.hpp
       title: utilities/int_kth_root.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: utilities/integer_segments.hpp
       title: utilities/integer_segments.hpp
     - icon: ':heavy_check_mark:'
@@ -932,7 +932,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/pow.hpp
       title: "Power \uFF08\u7D2F\u4E57\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: utilities/pow_op.hpp
       title: Power (general monoid)
     - icon: ':heavy_check_mark:'
@@ -945,7 +945,7 @@ data:
     - icon: ':warning:'
       path: utilities/quadratic_solver.hpp
       title: utilities/quadratic_solver.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: utilities/quotients.hpp
       title: "Quotients of integer \uFF08\u5546\u5217\u6319\uFF09"
     - icon: ':heavy_check_mark:'
@@ -1002,10 +1002,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: combinatorial_opt/test/linear_sum_assignment.yuki3306.test.cpp
       title: combinatorial_opt/test/linear_sum_assignment.yuki3306.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
       title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
       title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1124,13 +1124,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/fast_set.test.cpp
       title: data_structure/test/fast_set.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: data_structure/test/fibonacci_heap_dijkstra.test.cpp
       title: data_structure/test/fibonacci_heap_dijkstra.test.cpp
     - icon: ':heavy_check_mark:'
       path: data_structure/test/fibonacci_heap_shortestpath.test.cpp
       title: data_structure/test/fibonacci_heap_shortestpath.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: data_structure/test/fibonacci_heap_spanningtree.test.cpp
       title: data_structure/test/fibonacci_heap_spanningtree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1145,7 +1145,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/test/link_cut_tree.composition.test.cpp
       title: data_structure/test/link_cut_tree.composition.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
       title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1376,13 +1376,13 @@ data:
       title: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   - name: geometry/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: geometry/test/circumcenter.test.cpp
       title: geometry/test/circumcenter.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: geometry/test/convex_cut.test.cpp
       title: geometry/test/convex_cut.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: geometry/test/convex_hull.test.cpp
       title: geometry/test/convex_hull.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1396,7 +1396,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/articulation_points.test.cpp
       title: graph/test/articulation_points.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/bellman_ford.test.cpp
       title: graph/test/bellman_ford.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1414,7 +1414,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/cycle_detection_directed.test.cpp
       title: graph/test/cycle_detection_directed.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/directed_mst.aoj.test.cpp
       title: graph/test/directed_mst.aoj.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1480,13 +1480,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/shortest_path_dial.yuki1695.test.cpp
       title: graph/test/shortest_path_dial.yuki1695.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/spfa.test.cpp
       title: graph/test/spfa.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/strongly_connected_components.test.cpp
       title: graph/test/strongly_connected_components.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/strongly_connected_components_bitset.test.cpp
       title: graph/test/strongly_connected_components_bitset.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1495,7 +1495,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/test/two-edge-connected-components.test.cpp
       title: graph/test/two-edge-connected-components.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/test/warshallfloyd.test.cpp
       title: graph/test/warshallfloyd.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1503,7 +1503,7 @@ data:
       title: graph/test/zero_one_bfs.yuki1695.test.cpp
   - name: linear_algebra_matrix/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
       title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1560,7 +1560,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
       title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1601,16 +1601,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/arithmetic_function_totient.test.cpp
       title: number/test/arithmetic_function_totient.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/binary_gcd.stress.test.cpp
       title: number/test/binary_gcd.stress.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/bs_sieve.test.cpp
       title: number/test/bs_sieve.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/combination.stress.test.cpp
       title: number/test/combination.stress.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/combination.test.cpp
       title: number/test/combination.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1631,7 +1631,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp
       title: number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/enumerate_primes.test.cpp
       title: number/test/enumerate_primes.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1640,22 +1640,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/factorize_longlong.test.cpp
       title: number/test/factorize_longlong.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/gcd_convolution.test.cpp
       title: number/test/gcd_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/gcd_of_gaussian_integers.test.cpp
       title: number/test/gcd_of_gaussian_integers.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/gen_primes.test.cpp
       title: number/test/gen_primes.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/is_prime.test.cpp
       title: number/test/is_prime.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/lcm_convolution.test.cpp
       title: number/test/lcm_convolution.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/miller-rabin-5e7.test.cpp
       title: number/test/miller-rabin-5e7.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1664,48 +1664,48 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/min_max_semiring.test.cpp
       title: number/test/min_max_semiring.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/montmort_number_mod.test.cpp
       title: number/test/montmort_number_mod.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/multiple_moebius.yuki1627.test.cpp
       title: number/test/multiple_moebius.yuki1627.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/multiple_moebius.yuki886.test.cpp
       title: number/test/multiple_moebius.yuki886.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/nimber.test.cpp
       title: number/test/nimber.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/primitive_root.test.cpp
       title: number/test/primitive_root.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/primitive_root_1e18.test.cpp
       title: number/test/primitive_root_1e18.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/rational_approximation.test.cpp
       title: number/test/rational_approximation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/sieve.stress.test.cpp
       title: number/test/sieve.stress.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/sqrt_mod.test.cpp
       title: number/test/sqrt_mod.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
     - icon: ':heavy_check_mark:'
       path: number/test/stern_brocot_tree.test.cpp
       title: number/test/stern_brocot_tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: number/test/zeta_moebius_transform.test.cpp
       title: number/test/zeta_moebius_transform.test.cpp
   - name: other_algorithms/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: other_algorithms/test/binary_lifting.yuki1013.test.cpp
       title: other_algorithms/test/binary_lifting.yuki1013.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1744,10 +1744,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/north_east_lattice_paths.test.cpp
       title: other_algorithms/test/north_east_lattice_paths.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: other_algorithms/test/permutation_tree.test.cpp
       title: other_algorithms/test/permutation_tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
       title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1785,7 +1785,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/countandsumlessthan.test.cpp
       title: segmenttree/test/countandsumlessthan.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1794,7 +1794,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1812,7 +1812,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/rangetree_bit.test.cpp
       title: segmenttree/test/rangetree_bit.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: segmenttree/test/rmq_nonrecursive.test.cpp
       title: segmenttree/test/rmq_nonrecursive.test.cpp
   - name: set_power_series/test
@@ -1851,16 +1851,16 @@ data:
       title: sparse_table/test/sparse_table_aoj.test.cpp
   - name: string/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/test/aho_corasick_forwardlist.test.cpp
       title: string/test/aho_corasick_forwardlist.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/test/aho_corasick_online.test.cpp
       title: string/test/aho_corasick_online.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/test/aho_corasick_unorderedmap.test.cpp
       title: string/test/aho_corasick_unorderedmap.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/test/aho_corasick_vector.test.cpp
       title: string/test/aho_corasick_vector.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1925,7 +1925,7 @@ data:
       title: string/test/z_algorithm.test.cpp
   - name: tree/test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/auxiliary_tree.yuki901.test.cpp
       title: tree/test/auxiliary_tree.yuki901.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1934,10 +1934,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/diameter.test.cpp
       title: tree/test/diameter.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
       title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/frequency_table_of_tree_distance.test.cpp
       title: tree/test/frequency_table_of_tree_distance.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1979,7 +1979,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/tree_isomorphism.aoj1613.test.cpp
       title: tree/test/tree_isomorphism.aoj1613.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/vertex-add-path-sum.test.cpp
       title: tree/test/vertex-add-path-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1988,7 +1988,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/test/vertex-add-subtree-sum.test.cpp
       title: tree/test/vertex-add-subtree-sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: tree/test/vertex-set-path-composite.test.cpp
       title: tree/test/vertex-set-path-composite.test.cpp
   - name: unionfind/test
@@ -2019,7 +2019,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/floor_sum.test.cpp
       title: utilities/test/floor_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: utilities/test/integer_segments.test.cpp
       title: utilities/test/integer_segments.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2034,16 +2034,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: utilities/test/pow.test.cpp
       title: utilities/test/pow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: utilities/test/pow_op.test.cpp
       title: utilities/test/pow_op.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: utilities/test/predecessor_problem.test.cpp
       title: utilities/test/predecessor_problem.test.cpp
     - icon: ':heavy_check_mark:'
       path: utilities/test/product_embedding.test.cpp
       title: utilities/test/product_embedding.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: utilities/test/quotients.test.cpp
       title: utilities/test/quotients.test.cpp
 layout: toppage

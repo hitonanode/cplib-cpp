@@ -53,22 +53,22 @@ data:
     \ j = i + 1; j < nb_bc; j++) {\n                R[i][j] = R[i][j - 1] + R[i +\
     \ 1][j] - R[i + 1][j - 1] + presuf[j][i * bs];\n            }\n        }\n   \
     \ }\n    long long get(int l, int r) const {\n        assert(l >= 0 and l <= N\
-    \ and r >= 0 and r <= N and l <= r);\n        const int lb = (l + bs - 1) / bs,\
-    \ rb = (r == N ? nb_bc : r / bs) - 1;\n        long long ret = 0;\n        if\
-    \ (l / bs == (r - 1) / bs) {\n            const int b = l / bs;\n            ret\
-    \ += preH[r - 1] - (l % bs ? preH[l - 1] : 0);\n            int less_cnt = 0;\n\
-    \            for (int p = b * bs, q = std::min((b + 1) * bs, N); p < q; p++) {\n\
-    \                less_cnt += (vals_sorted[p].second >= l and vals_sorted[p].second\
-    \ < r);\n                ret -= less_cnt * (vals_sorted[p].second < l);\n    \
-    \        }\n            return ret;\n        }\n        ret += R[lb][rb];\n  \
-    \      if (bs * lb > l) {\n            ret += sufG[l];\n            for (int b\
-    \ = lb; b <= rb; b++) { ret += presuf[b][l]; }\n        }\n        if (bs * (rb\
-    \ + 1) < r) {\n            ret += preH[r - 1];\n            for (int b = lb; b\
-    \ <= rb; b++) { ret += presuf[b][r - 1]; }\n        }\n        int less_cnt =\
-    \ 0, j = (rb + 1) * bs;\n        for (int p = std::max(0, (lb - 1) * bs), q =\
-    \ lb * bs; p < q; p++) {\n            if (vals_sorted[p].second >= l) {\n    \
-    \            while (j < std::min(N, (rb + 2) * bs) and\n                     \
-    \  (vals_sorted[j].second >= r or vals_sorted[j].first < vals_sorted[p].first))\
+    \ and r >= 0 and r <= N and l <= r);\n        if (l == r) return 0;\n        const\
+    \ int lb = (l + bs - 1) / bs, rb = (r == N ? nb_bc : r / bs) - 1;\n        long\
+    \ long ret = 0;\n        if (l / bs == (r - 1) / bs) {\n            const int\
+    \ b = l / bs;\n            ret += preH[r - 1] - (l % bs ? preH[l - 1] : 0);\n\
+    \            int less_cnt = 0;\n            for (int p = b * bs, q = std::min((b\
+    \ + 1) * bs, N); p < q; p++) {\n                less_cnt += (vals_sorted[p].second\
+    \ >= l and vals_sorted[p].second < r);\n                ret -= less_cnt * (vals_sorted[p].second\
+    \ < l);\n            }\n            return ret;\n        }\n        ret += R[lb][rb];\n\
+    \        if (bs * lb > l) {\n            ret += sufG[l];\n            for (int\
+    \ b = lb; b <= rb; b++) { ret += presuf[b][l]; }\n        }\n        if (bs *\
+    \ (rb + 1) < r) {\n            ret += preH[r - 1];\n            for (int b = lb;\
+    \ b <= rb; b++) { ret += presuf[b][r - 1]; }\n        }\n        int less_cnt\
+    \ = 0, j = (rb + 1) * bs;\n        for (int p = std::max(0, (lb - 1) * bs), q\
+    \ = lb * bs; p < q; p++) {\n            if (vals_sorted[p].second >= l) {\n  \
+    \              while (j < std::min(N, (rb + 2) * bs) and\n                   \
+    \    (vals_sorted[j].second >= r or vals_sorted[j].first < vals_sorted[p].first))\
     \ {\n                    less_cnt += (vals_sorted[j].second < r), j++;\n     \
     \           }\n                ret += less_cnt;\n            }\n        }\n  \
     \      return ret;\n    }\n};\n#line 2 \"data_structure/test/static_range_inversion.test.cpp\"\
@@ -89,7 +89,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/static_range_inversion.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2026-09-05 15:18:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/static_range_inversion.test.cpp

@@ -15,18 +15,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/test/jump_on_tree_hld.test.cpp
     title: tree/test/jump_on_tree_hld.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/vertex-add-path-sum.test.cpp
     title: tree/test/vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: tree/test/vertex-add-subtree-sum.test.cpp
     title: tree/test/vertex-add-subtree-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - http://beet-aizu.hatenablog.com/entry/2017/12/12/235950
@@ -222,7 +222,7 @@ data:
   path: tree/heavy_light_decomposition.hpp
   requiredBy: []
   timestamp: '2025-01-01 21:10:39+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - tree/test/hld_subtree_query.test.cpp
   - tree/test/jump_on_tree_hld.test.cpp

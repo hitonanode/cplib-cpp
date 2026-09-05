@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other_algorithms/binary_lifting.hpp
     title: "Binary lifting / doubling \uFF08\u30C0\u30D6\u30EA\u30F3\u30B0\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1013
@@ -60,12 +60,12 @@ data:
     \ int maxd = 60) {\n        assert(isin(s));\n        int d = 0;\n        while\
     \ (d <= maxd and f(pow_prod(s, d))) {\n            if (!isin(pow_next(s, d)))\
     \ return 1LL << maxd;\n            ++d;\n        }\n        if (d > maxd) return\
-    \ 1LL << maxd;\n\n        --d;\n\n        int cur = pow_next(s, d);\n        long\
-    \ long len = 1LL << d;\n        S p = pow_prod(s, d);\n\n        for (int e =\
-    \ d - 1; e >= 0; --e) {\n            if (S nextp = op(p, pow_prod(cur, e)); f(nextp))\
-    \ {\n                std::swap(p, nextp);\n                cur = pow_next(cur,\
-    \ e);\n                len += 1LL << e;\n            }\n        }\n\n        return\
-    \ len;\n    }\n};\n#line 4 \"other_algorithms/test/binary_lifting.yuki1013.test.cpp\"\
+    \ 1LL << maxd;\n        if (d == 0) return 0;\n\n        --d;\n\n        int cur\
+    \ = pow_next(s, d);\n        long long len = 1LL << d;\n        S p = pow_prod(s,\
+    \ d);\n\n        for (int e = d - 1; e >= 0; --e) {\n            if (S nextp =\
+    \ op(p, pow_prod(cur, e)); f(nextp)) {\n                std::swap(p, nextp);\n\
+    \                cur = pow_next(cur, e);\n                len += 1LL << e;\n \
+    \           }\n        }\n\n        return len;\n    }\n};\n#line 4 \"other_algorithms/test/binary_lifting.yuki1013.test.cpp\"\
     \n#include <iostream>\n#include <tuple>\n#line 7 \"other_algorithms/test/binary_lifting.yuki1013.test.cpp\"\
     \nusing namespace std;\n\nusing S = long long;\nS op(S l, S r) { return l + r;\
     \ }\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n    int\
@@ -86,8 +86,8 @@ data:
   isVerificationFile: true
   path: other_algorithms/test/binary_lifting.yuki1013.test.cpp
   requiredBy: []
-  timestamp: '2023-07-23 19:53:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:19:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: other_algorithms/test/binary_lifting.yuki1013.test.cpp
 layout: document

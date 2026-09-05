@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/bare_mod_algebra.hpp
     title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\u6570\
       \u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\u5B9A\
       \u7406\u30FB\u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\u306A\u3069\u306E\u5B9F\
       \u88C5\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/centroid_decomposition.hpp
     title: "Centroid decomposition \uFF08\u68EE\u306E\u91CD\u5FC3\u5206\u89E3\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/frequency_table_of_tree_distance.hpp
     title: Frequency table of tree distance
   _extendedRequiredBy: []

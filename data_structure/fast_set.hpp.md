@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/auxiliary_tree.hpp
     title: "LCA-based auxiliary tree / virtual tree, online \uFF08\"\u865A\u6811\"\
       \uFF09"
@@ -10,12 +10,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/test/fast_set.test.cpp
     title: data_structure/test/fast_set.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/test/auxiliary_tree.yuki901.test.cpp
     title: tree/test/auxiliary_tree.yuki901.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"data_structure/fast_set.hpp\"\n\n#include <cassert>\n#include\
@@ -109,7 +109,7 @@ data:
   requiredBy:
   - tree/auxiliary_tree.hpp
   timestamp: '2023-03-23 22:42:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - data_structure/test/fast_set.test.cpp
   - tree/test/auxiliary_tree.yuki901.test.cpp

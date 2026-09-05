@@ -11,14 +11,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
     title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   - icon: ':heavy_check_mark:'
     path: number/arithmetic_cumsum.hpp
     title: "Cumulative sum of arithmetic functions \uFF08\u6570\u8AD6\u7684\u95A2\u6570\
       \u306E\u7D2F\u7A4D\u548C\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
@@ -227,15 +227,16 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 5 \"number/arithmetic_cumsum.hpp\"\n#include <cmath>\n#line 7 \"number/arithmetic_cumsum.hpp\"\
-    \n\n// CUT begin\n// Dirichlet product (convolution)\n// - a[i] = f(i) (1-origin)\n\
-    // - A[i - 1] = f(1) + ... + f(i)\n// - invA[i - 1] = f(1) + ... + f(N / i)\n\
-    // Reference:\n// https://maspypy.com/dirichlet-%e7%a9%8d%e3%81%a8%e3%80%81%e6%95%b0%e8%ab%96%e9%96%a2%e6%95%b0%e3%81%ae%e7%b4%af%e7%a9%8d%e5%92%8c\n\
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 5 \"number/arithmetic_cumsum.hpp\"\
+    \n#include <cmath>\n#line 7 \"number/arithmetic_cumsum.hpp\"\n\n// CUT begin\n\
+    // Dirichlet product (convolution)\n// - a[i] = f(i) (1-origin)\n// - A[i - 1]\
+    \ = f(1) + ... + f(i)\n// - invA[i - 1] = f(1) + ... + f(N / i)\n// Reference:\n\
+    // https://maspypy.com/dirichlet-%e7%a9%8d%e3%81%a8%e3%80%81%e6%95%b0%e8%ab%96%e9%96%a2%e6%95%b0%e3%81%ae%e7%b4%af%e7%a9%8d%e5%92%8c\n\
     template <class T> struct arithmetic_cumsum {\n    long long N;\n    int K, L;\n\
     \    bool _verify_shape(const arithmetic_cumsum &x) const {\n        return N\
     \ == x.N and K == x.K and L == x.L;\n    }\n\n    std::vector<T> a, A, invA;\n\
@@ -298,14 +299,14 @@ data:
     \ zeta_shift_cumsum(long long n, int k) {\n    if (k == 0) return zeta_cumsum<T>(n);\n\
     \    if (k == 1) return zeta_shift_1_cumsum<T>(n);\n    arithmetic_cumsum<T> ret(n);\n\
     \    auto init_pows = Sieve(k).enumerate_kth_pows<T>(k, k);\n    for (int i =\
-    \ 1; i <= ret.K; ++i) {\n        ret.a[i - 1] = T(i).pow(k);\n        ret.A[i]\
-    \ = ret.a[i] + (i ? ret.A[i - 1] : 0);\n    }\n    for (int l = 0; l < ret.L;\
-    \ ++l) {\n        ret.invA[l] = sum_of_exponential_times_polynomial<T>(1, init_pows,\
-    \ n / (l + 1) + 1);\n    }\n    return ret;\n}\n\n// Euler totient phi function\
-    \ phi(s) = zeta(s - 1) / zeta(s)\ntemplate <class T> arithmetic_cumsum<T> euler_phi_cumsum(long\
-    \ long n) {\n    return zeta_shift_1_cumsum<T>(n) / zeta_cumsum<T>(n);\n}\n\n\
-    // \u7D04\u6570\u95A2\u6570\u306E\u7D2F\u7A4D\u548C\n// sigma_k (n) = \\sum_{d\
-    \ \\mid n} d^k\ntemplate <class T> arithmetic_cumsum<T> divisor_func_cumsum(long\
+    \ 1; i <= ret.K; ++i) {\n        ret.a[i - 1] = T(i).pow(k);\n        ret.A[i\
+    \ - 1] = ret.a[i - 1] + (i > 1 ? ret.A[i - 2] : 0);\n    }\n    for (int l = 0;\
+    \ l < ret.L; ++l) {\n        ret.invA[l] = sum_of_exponential_times_polynomial<T>(1,\
+    \ init_pows, n / (l + 1) + 1);\n    }\n    return ret;\n}\n\n// Euler totient\
+    \ phi function phi(s) = zeta(s - 1) / zeta(s)\ntemplate <class T> arithmetic_cumsum<T>\
+    \ euler_phi_cumsum(long long n) {\n    return zeta_shift_1_cumsum<T>(n) / zeta_cumsum<T>(n);\n\
+    }\n\n// \u7D04\u6570\u95A2\u6570\u306E\u7D2F\u7A4D\u548C\n// sigma_k (n) = \\\
+    sum_{d \\mid n} d^k\ntemplate <class T> arithmetic_cumsum<T> divisor_func_cumsum(long\
     \ long n, int k) {\n    return zeta_shift_cumsum<T>(n, k) * zeta_cumsum<T>(n);\n\
     }\n\n// Cumulative sum of Moebius function (: Mertens function)\ntemplate <class\
     \ T> arithmetic_cumsum<T> moebius_func_cumsum(long long n) {\n    return arithmetic_cumsum<T>::identity(n)\
@@ -327,7 +328,7 @@ data:
   isVerificationFile: true
   path: number/test/arithmetic_function_totient.test.cpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-09-05 15:19:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/arithmetic_function_totient.test.cpp

@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: convolution/fft_double.hpp
     title: convolution/fft_double.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/centroid_decomposition.hpp
     title: "Centroid decomposition \uFF08\u68EE\u306E\u91CD\u5FC3\u5206\u89E3\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/frequency_table_of_tree_distance.hpp
     title: Frequency table of tree distance
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -109,10 +109,11 @@ data:
     \ *= b_[i];\n    fft(N, a_, -1);\n    for (int i = 0; i < N; i++) a_[i] /= N;\n\
     \    return a_;\n}\n// retval[i] = \\sum_j a[j]b[i - j]\n// Requirement: length\
     \ * max(a) * max(b) < 10^15\ntemplate <typename T>\nstd::vector<long long int>\
-    \ fftconv(const std::vector<T> &a, const std::vector<T> &b) {\n    std::vector<cmplx>\
-    \ ans = conv_cmplx(a, b);\n    std::vector<long long int> ret(ans.size());\n \
-    \   for (int i = 0; i < (int)ans.size(); i++) ret[i] = floor(ans[i].real() + 0.5);\n\
-    \    ret.resize(a.size() + b.size() - 1);\n    return ret;\n}\n#line 4 \"tree/test/frequency_table_of_tree_distance.test.cpp\"\
+    \ fftconv(const std::vector<T> &a, const std::vector<T> &b) {\n    if (a.empty()\
+    \ or b.empty()) return {};\n    std::vector<cmplx> ans = conv_cmplx(a, b);\n \
+    \   std::vector<long long int> ret(ans.size());\n    for (int i = 0; i < (int)ans.size();\
+    \ i++) ret[i] = floor(ans[i].real() + 0.5);\n    ret.resize(a.size() + b.size()\
+    \ - 1);\n    return ret;\n}\n#line 4 \"tree/test/frequency_table_of_tree_distance.test.cpp\"\
     \n#include <iostream>\n#line 6 \"tree/test/frequency_table_of_tree_distance.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
     \nusing namespace std;\n\nint main() {\n    cin.tie(nullptr), ios::sync_with_stdio(false);\n\
@@ -137,8 +138,8 @@ data:
   isVerificationFile: true
   path: tree/test/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2024-09-25 00:42:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:18:01+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: tree/test/frequency_table_of_tree_distance.test.cpp
 layout: document

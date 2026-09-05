@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/montmort_number_mod
@@ -33,14 +33,15 @@ data:
     \     }\n                return -1;\n            }();\n        }\n        return\
     \ primitive_root_;\n    }\n    static void set_mod(const int &m) {\n        if\
     \ (md != m) facs().clear();\n        md = m;\n        get_primitive_root() = 0;\n\
-    \    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ? v - md\
-    \ : v);\n        return *this;\n    }\n    int val() const noexcept { return val_;\
-    \ }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v %\
-    \ md + md); }\n    explicit operator bool() const { return val_ != 0; }\n    ModIntRuntime\
-    \ operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
-    \ + x.val_);\n    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const\
-    \ {\n        return ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n\
-    \    ModIntRuntime operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \    }\n    ModIntRuntime &_setval(lint v) {\n        if (v < 0) v += md;\n  \
+    \      if (v >= md) v -= md;\n        val_ = v;\n        return *this;\n    }\n\
+    \    int val() const noexcept { return val_; }\n    ModIntRuntime() : val_(0)\
+    \ {}\n    ModIntRuntime(lint v) { _setval(v % md + md); }\n    explicit operator\
+    \ bool() const { return val_ != 0; }\n    ModIntRuntime operator+(const ModIntRuntime\
+    \ &x) const {\n        return ModIntRuntime()._setval((lint)val_ + x.val_);\n\
+    \    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const {\n        return\
+    \ ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n    ModIntRuntime\
+    \ operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
     \ * x.val_ % md);\n    }\n    ModIntRuntime operator/(const ModIntRuntime &x)\
     \ const {\n        return ModIntRuntime()._setval((lint)val_ * x.inv().val() %\
     \ md);\n    }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(md\
@@ -109,8 +110,8 @@ data:
   isVerificationFile: true
   path: number/test/montmort_number_mod.test.cpp
   requiredBy: []
-  timestamp: '2025-08-25 00:47:28+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:19:39+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/montmort_number_mod.test.cpp
 layout: document

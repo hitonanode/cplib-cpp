@@ -21,24 +21,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/montmort_number_mod.test.cpp
     title: number/test/montmort_number_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/sieve.stress.test.cpp
     title: number/test/sieve.stress.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/sqrt_modint_runtime.test.cpp
     title: number/test/sqrt_modint_runtime.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/test/pow_op.test.cpp
     title: utilities/test/pow_op.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/modint_runtime.hpp\"\n#include <cassert>\n#include\
@@ -58,14 +58,15 @@ data:
     \ g;\n                }\n                return -1;\n            }();\n      \
     \  }\n        return primitive_root_;\n    }\n    static void set_mod(const int\
     \ &m) {\n        if (md != m) facs().clear();\n        md = m;\n        get_primitive_root()\
-    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ?\
-    \ v - md : v);\n        return *this;\n    }\n    int val() const noexcept { return\
-    \ val_; }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v\
-    \ % md + md); }\n    explicit operator bool() const { return val_ != 0; }\n  \
-    \  ModIntRuntime operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
-    \ + x.val_);\n    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const\
-    \ {\n        return ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n\
-    \    ModIntRuntime operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \ = 0;\n    }\n    ModIntRuntime &_setval(lint v) {\n        if (v < 0) v += md;\n\
+    \        if (v >= md) v -= md;\n        val_ = v;\n        return *this;\n   \
+    \ }\n    int val() const noexcept { return val_; }\n    ModIntRuntime() : val_(0)\
+    \ {}\n    ModIntRuntime(lint v) { _setval(v % md + md); }\n    explicit operator\
+    \ bool() const { return val_ != 0; }\n    ModIntRuntime operator+(const ModIntRuntime\
+    \ &x) const {\n        return ModIntRuntime()._setval((lint)val_ + x.val_);\n\
+    \    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const {\n        return\
+    \ ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n    ModIntRuntime\
+    \ operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
     \ * x.val_ % md);\n    }\n    ModIntRuntime operator/(const ModIntRuntime &x)\
     \ const {\n        return ModIntRuntime()._setval((lint)val_ * x.inv().val() %\
     \ md);\n    }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(md\
@@ -134,14 +135,15 @@ data:
     \     }\n                return -1;\n            }();\n        }\n        return\
     \ primitive_root_;\n    }\n    static void set_mod(const int &m) {\n        if\
     \ (md != m) facs().clear();\n        md = m;\n        get_primitive_root() = 0;\n\
-    \    }\n    ModIntRuntime &_setval(lint v) {\n        val_ = (v >= md ? v - md\
-    \ : v);\n        return *this;\n    }\n    int val() const noexcept { return val_;\
-    \ }\n    ModIntRuntime() : val_(0) {}\n    ModIntRuntime(lint v) { _setval(v %\
-    \ md + md); }\n    explicit operator bool() const { return val_ != 0; }\n    ModIntRuntime\
-    \ operator+(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
-    \ + x.val_);\n    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const\
-    \ {\n        return ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n\
-    \    ModIntRuntime operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
+    \    }\n    ModIntRuntime &_setval(lint v) {\n        if (v < 0) v += md;\n  \
+    \      if (v >= md) v -= md;\n        val_ = v;\n        return *this;\n    }\n\
+    \    int val() const noexcept { return val_; }\n    ModIntRuntime() : val_(0)\
+    \ {}\n    ModIntRuntime(lint v) { _setval(v % md + md); }\n    explicit operator\
+    \ bool() const { return val_ != 0; }\n    ModIntRuntime operator+(const ModIntRuntime\
+    \ &x) const {\n        return ModIntRuntime()._setval((lint)val_ + x.val_);\n\
+    \    }\n    ModIntRuntime operator-(const ModIntRuntime &x) const {\n        return\
+    \ ModIntRuntime()._setval((lint)val_ - x.val_ + md);\n    }\n    ModIntRuntime\
+    \ operator*(const ModIntRuntime &x) const {\n        return ModIntRuntime()._setval((lint)val_\
     \ * x.val_ % md);\n    }\n    ModIntRuntime operator/(const ModIntRuntime &x)\
     \ const {\n        return ModIntRuntime()._setval((lint)val_ * x.inv().val() %\
     \ md);\n    }\n    ModIntRuntime operator-() const { return ModIntRuntime()._setval(md\
@@ -197,8 +199,8 @@ data:
   isVerificationFile: false
   path: number/modint_runtime.hpp
   requiredBy: []
-  timestamp: '2025-08-25 00:47:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:19:39+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - formal_power_series/test/fps_exp_modintruntime.test.cpp
   - formal_power_series/test/fps_sqrt_modintruntime.test.cpp

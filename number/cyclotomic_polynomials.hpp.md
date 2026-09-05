@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
@@ -64,32 +64,32 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 4 \"number/cyclotomic_polynomials.hpp\"\n\n// CUT begin\n// cyclotomic polynominals\
-    \ : \u5186\u5206\u591A\u9805\u5F0F\n// ret[i][j] = [x^j]\\Phi_i(x) for i <= Nmax,\
-    \ which are known to be integers\nstd::vector<std::vector<int>> cyclotomic_polynomials(int\
-    \ Nmax) {\n    std::vector<int> moebius = Sieve(Nmax).GenerateMoebiusFunctionTable();\n\
-    \    std::vector<std::vector<int>> ret(Nmax + 1);\n    auto multiply = [](const\
-    \ std::vector<int> &a, const std::vector<int> &b) { // a * b\n        std::vector<int>\
-    \ ret(int(a.size() + b.size()) - 1);\n        for (size_t i = 0; i < a.size();\
-    \ i++)\n            for (size_t j = 0; j < b.size(); j++) { ret[i + j] += a[i]\
-    \ * b[j]; }\n        return ret;\n    };\n    auto divide = [](std::vector<int>\
-    \ a, const std::vector<int> &b) { // a / b, abs(b[0]) = 1\n        std::vector<int>\
-    \ ret(int(a.size()) - int(b.size()) + 1);\n        for (size_t i = 0; i < ret.size();\
-    \ i++) {\n            ret[i] = a[i] / b[0];\n            for (size_t j = 0; j\
-    \ < b.size(); j++) a[i + j] -= ret[i] * b[j];\n        }\n        while (ret.size()\
-    \ and !ret.back()) ret.pop_back();\n        return ret;\n    };\n\n    for (int\
-    \ n = 0; n <= Nmax; n++) {\n        std::vector<std::vector<int>> num, den;\n\
-    \        for (int d = 1; d <= n; d++)\n            if (n % d == 0 and moebius[d])\
-    \ {\n                std::vector<int> r(n / d + 1);\n                r[0] = -1,\
-    \ r.back() = 1;\n                (moebius[d] > 0 ? num : den).push_back(r);\n\
-    \            }\n        std::vector<int> phi{1};\n        for (auto v : num) phi\
-    \ = multiply(phi, v);\n        for (auto v : den) phi = divide(phi, v);\n    \
-    \    ret[n] = phi;\n    }\n    return ret;\n}\n"
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 4 \"number/cyclotomic_polynomials.hpp\"\
+    \n\n// CUT begin\n// cyclotomic polynominals : \u5186\u5206\u591A\u9805\u5F0F\n\
+    // ret[i][j] = [x^j]\\Phi_i(x) for i <= Nmax, which are known to be integers\n\
+    std::vector<std::vector<int>> cyclotomic_polynomials(int Nmax) {\n    std::vector<int>\
+    \ moebius = Sieve(Nmax).GenerateMoebiusFunctionTable();\n    std::vector<std::vector<int>>\
+    \ ret(Nmax + 1);\n    auto multiply = [](const std::vector<int> &a, const std::vector<int>\
+    \ &b) { // a * b\n        std::vector<int> ret(int(a.size() + b.size()) - 1);\n\
+    \        for (size_t i = 0; i < a.size(); i++)\n            for (size_t j = 0;\
+    \ j < b.size(); j++) { ret[i + j] += a[i] * b[j]; }\n        return ret;\n   \
+    \ };\n    auto divide = [](std::vector<int> a, const std::vector<int> &b) { //\
+    \ a / b, abs(b[0]) = 1\n        std::vector<int> ret(int(a.size()) - int(b.size())\
+    \ + 1);\n        for (size_t i = 0; i < ret.size(); i++) {\n            ret[i]\
+    \ = a[i] / b[0];\n            for (size_t j = 0; j < b.size(); j++) a[i + j] -=\
+    \ ret[i] * b[j];\n        }\n        while (ret.size() and !ret.back()) ret.pop_back();\n\
+    \        return ret;\n    };\n\n    for (int n = 0; n <= Nmax; n++) {\n      \
+    \  std::vector<std::vector<int>> num, den;\n        for (int d = 1; d <= n; d++)\n\
+    \            if (n % d == 0 and moebius[d]) {\n                std::vector<int>\
+    \ r(n / d + 1);\n                r[0] = -1, r.back() = 1;\n                (moebius[d]\
+    \ > 0 ? num : den).push_back(r);\n            }\n        std::vector<int> phi{1};\n\
+    \        for (auto v : num) phi = multiply(phi, v);\n        for (auto v : den)\
+    \ phi = divide(phi, v);\n        ret[n] = phi;\n    }\n    return ret;\n}\n"
   code: "#pragma once\n#include \"sieve.hpp\"\n#include <vector>\n\n// CUT begin\n\
     // cyclotomic polynominals : \u5186\u5206\u591A\u9805\u5F0F\n// ret[i][j] = [x^j]\\\
     Phi_i(x) for i <= Nmax, which are known to be integers\nstd::vector<std::vector<int>>\
@@ -116,7 +116,7 @@ data:
   isVerificationFile: false
   path: number/cyclotomic_polynomials.hpp
   requiredBy: []
-  timestamp: '2021-10-30 11:24:11+09:00'
+  timestamp: '2026-09-05 15:19:48+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: number/cyclotomic_polynomials.hpp

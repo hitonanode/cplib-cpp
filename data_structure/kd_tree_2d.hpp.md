@@ -42,8 +42,8 @@ data:
     \      } else {\n                // split y\n                std::nth_element(\n\
     \                    _tmp.begin() + l, _tmp.begin() + c, _tmp.begin() + r,\n \
     \                   [&](const Tpl &l, const Tpl &r) { return std::get<2>(l) <\
-    \ std : get<2>(r); });\n                _nodes[_node_id].lch = _build(l, c, 0,\
-    \ nsplity + 1);:\n                _nodes[_node_id].rch = _build(c, r, 0, nsplity\
+    \ std::get<2>(r); });\n                _nodes[_node_id].lch = _build(l, c, 0,\
+    \ nsplity + 1);\n                _nodes[_node_id].rch = _build(c, r, 0, nsplity\
     \ + 1);\n            }\n        }\n        return _node_id;\n    }\n\n    void\
     \ _initialize(const std::vector<std::pair<T, T>> &vs) {\n        _ps = vs;\n \
     \       _tmp.resize(_ps.size());\n        for (int i = 0; i < int(vs.size());\
@@ -93,8 +93,8 @@ data:
     \      } else {\n                // split y\n                std::nth_element(\n\
     \                    _tmp.begin() + l, _tmp.begin() + c, _tmp.begin() + r,\n \
     \                   [&](const Tpl &l, const Tpl &r) { return std::get<2>(l) <\
-    \ std : get<2>(r); });\n                _nodes[_node_id].lch = _build(l, c, 0,\
-    \ nsplity + 1);:\n                _nodes[_node_id].rch = _build(c, r, 0, nsplity\
+    \ std::get<2>(r); });\n                _nodes[_node_id].lch = _build(l, c, 0,\
+    \ nsplity + 1);\n                _nodes[_node_id].rch = _build(c, r, 0, nsplity\
     \ + 1);\n            }\n        }\n        return _node_id;\n    }\n\n    void\
     \ _initialize(const std::vector<std::pair<T, T>> &vs) {\n        _ps = vs;\n \
     \       _tmp.resize(_ps.size());\n        for (int i = 0; i < int(vs.size());\
@@ -116,7 +116,7 @@ data:
   isVerificationFile: false
   path: data_structure/kd_tree_2d.hpp
   requiredBy: []
-  timestamp: '2022-01-11 01:21:14+09:00'
+  timestamp: '2026-09-05 15:18:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: data_structure/kd_tree_2d.hpp

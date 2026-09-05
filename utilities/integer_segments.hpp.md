@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/test/integer_segments.test.cpp
     title: utilities/test/integer_segments.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: utilities/test/predecessor_problem.test.cpp
     title: utilities/test/predecessor_problem.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://satanic0258.github.io/snippets/data-structure/SegmentMap.html
@@ -55,7 +55,7 @@ data:
     \ >= k + 1) return hi + k + 1;\n            k -= add;\n            hi = std::max(hi,\
     \ r);\n        }\n        return -1;\n    }\n\n    // Count elements strictly\
     \ less than x, O((# of segments))\n    Int order_of_key(Int x) const {\n     \
-    \   Int ret = 0;\n        for (auto p : x) {\n            if (p.first >= x) break;\n\
+    \   Int ret = 0;\n        for (auto p : mp) {\n            if (p.first >= x) break;\n\
     \            ret += std::min(x - 1, p.second) - p.first + 1;\n        }\n    \
     \    return ret;\n    }\n\n    friend std::ostream &operator<<(std::ostream &os,\
     \ const integer_segments &x) {\n        os << '{';\n        for (auto &&p : x.mp)\
@@ -101,7 +101,7 @@ data:
     \ >= k + 1) return hi + k + 1;\n            k -= add;\n            hi = std::max(hi,\
     \ r);\n        }\n        return -1;\n    }\n\n    // Count elements strictly\
     \ less than x, O((# of segments))\n    Int order_of_key(Int x) const {\n     \
-    \   Int ret = 0;\n        for (auto p : x) {\n            if (p.first >= x) break;\n\
+    \   Int ret = 0;\n        for (auto p : mp) {\n            if (p.first >= x) break;\n\
     \            ret += std::min(x - 1, p.second) - p.first + 1;\n        }\n    \
     \    return ret;\n    }\n\n    friend std::ostream &operator<<(std::ostream &os,\
     \ const integer_segments &x) {\n        os << '{';\n        for (auto &&p : x.mp)\
@@ -111,8 +111,8 @@ data:
   isVerificationFile: false
   path: utilities/integer_segments.hpp
   requiredBy: []
-  timestamp: '2021-04-25 18:25:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:20:42+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - utilities/test/integer_segments.test.cpp
   - utilities/test/predecessor_problem.test.cpp

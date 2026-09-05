@@ -69,14 +69,14 @@ data:
     \ {\n    assert(capacity >= 0);\n    std::vector<int> tmp = weights;\n    for\
     \ (int &w : tmp) {\n        if (w < 0) w = -w, capacity += w;\n    }\n    auto\
     \ sol = bounded_knapsack_nonnegative(tmp, capacity);\n    for (int i = 0; i <\
-    \ int(weights.size()); ++i) {\n        if (weights.at(i) < 0) {\n            capacity\
+    \ int(weights.size()); ++i) {\n        if (weights.at(i) < 0) {\n            sol.first\
     \ += weights.at(i);\n            sol.second.at(i).flip();\n        }\n    }\n\
     \    return sol;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: other_algorithms/bounded_knapsack.hpp
   requiredBy: []
-  timestamp: '2023-01-01 23:15:53+09:00'
+  timestamp: '2026-09-05 15:20:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: other_algorithms/bounded_knapsack.hpp

@@ -12,30 +12,19 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/upper_triangular_matrix.hpp\"\n\n\
-    template <class T> struct UpperTriangular3d {\n    static T explicit_init_required()\
-    \ = delete;\n    T a00 = this->explicit_init_required(), a01 = this->explicit_init_required(),\n\
-    \      a02 = this->explicit_init_required();\n    T a11 = this->explicit_init_required(),\
-    \ a12 = this->explicit_init_required();\n    T a22 = this->explicit_init_required();\n\
-    \n    UpperTriangular3d operator*(const UpperTriangular3d &r) const {\n      \
-    \  return UpperTriangular3d{\n            .a00 = this->a00 * r.a00,\n        \
-    \    .a01 = this->a00 * r.a01 + this->a01 * r.a11,\n            .a02 = this->a00\
-    \ * r.a02 + this->a01 * r.a12 + this->a02 * r.a22,\n            .a11 = this->a11\
-    \ * r.a11,\n            .a12 = this->a11 * r.a12 + this->a12 * r.a22,\n      \
-    \      .a22 = this->a22 * r.a22,\n        };\n    }\n\n    UpperTriangular3d operator-()\
-    \ const {\n        return UpperTriangular3d{\n            .a00 = -this->a00,\n\
-    \            .a01 = -this->a01,\n            .a02 = -this->a02,\n            .a11\
-    \ = -this->a11,\n            .a12 = -this->a12,\n            .a22 = -this->a22,\n\
-    \        };\n    }\n\n    UpperTriangular3d operator+(const UpperTriangular3d\
-    \ &r) const {\n        return UpperTriangular3d{\n            .a00 = this->a00\
-    \ + r.a00,\n            .a01 = this->a01 + r.a01,\n            .a02 = this->a02\
-    \ + r.a02,\n            .a11 = this->a11 + r.a11,\n            .a12 = this->a12\
-    \ + r.a12,\n            .a22 = this->a22 + r.a22,\n        };\n    }\n\n    auto\
-    \ operator<=>(const UpperTriangular3d &) const = default;\n};\n"
-  code: "#pragma once\n\ntemplate <class T> struct UpperTriangular3d {\n    static\
-    \ T explicit_init_required() = delete;\n    T a00 = this->explicit_init_required(),\
-    \ a01 = this->explicit_init_required(),\n      a02 = this->explicit_init_required();\n\
-    \    T a11 = this->explicit_init_required(), a12 = this->explicit_init_required();\n\
-    \    T a22 = this->explicit_init_required();\n\n    UpperTriangular3d operator*(const\
+    #include <compare>\n\ntemplate <class T> struct UpperTriangular3d {\nprivate:\n\
+    \    struct DesignatedInitializationOnly {\n    private:\n        constexpr DesignatedInitializationOnly()\
+    \ = default;\n        constexpr DesignatedInitializationOnly(const DesignatedInitializationOnly\
+    \ &) = default;\n        DesignatedInitializationOnly &operator=(const DesignatedInitializationOnly\
+    \ &) = default;\n        friend UpperTriangular3d;\n\n    public:\n        auto\
+    \ operator<=>(const DesignatedInitializationOnly &) const = default;\n    };\n\
+    \n    template <class U> static constexpr U explicit_init_required() {\n     \
+    \   static_assert(sizeof(U) == 0, \"all matrix entries must be explicitly initialized\"\
+    );\n        return U{};\n    }\n\npublic:\n    [[no_unique_address]] DesignatedInitializationOnly\
+    \ designated_initialization_only{};\n    T a00 = explicit_init_required<T>(),\
+    \ a01 = explicit_init_required<T>(),\n      a02 = explicit_init_required<T>();\n\
+    \    T a11 = explicit_init_required<T>(), a12 = explicit_init_required<T>();\n\
+    \    T a22 = explicit_init_required<T>();\n\n    UpperTriangular3d operator*(const\
     \ UpperTriangular3d &r) const {\n        return UpperTriangular3d{\n         \
     \   .a00 = this->a00 * r.a00,\n            .a01 = this->a00 * r.a01 + this->a01\
     \ * r.a11,\n            .a02 = this->a00 * r.a02 + this->a01 * r.a12 + this->a02\
@@ -51,11 +40,39 @@ data:
     \       .a12 = this->a12 + r.a12,\n            .a22 = this->a22 + r.a22,\n   \
     \     };\n    }\n\n    auto operator<=>(const UpperTriangular3d &) const = default;\n\
     };\n"
+  code: "#pragma once\n\n#include <compare>\n\ntemplate <class T> struct UpperTriangular3d\
+    \ {\nprivate:\n    struct DesignatedInitializationOnly {\n    private:\n     \
+    \   constexpr DesignatedInitializationOnly() = default;\n        constexpr DesignatedInitializationOnly(const\
+    \ DesignatedInitializationOnly &) = default;\n        DesignatedInitializationOnly\
+    \ &operator=(const DesignatedInitializationOnly &) = default;\n        friend\
+    \ UpperTriangular3d;\n\n    public:\n        auto operator<=>(const DesignatedInitializationOnly\
+    \ &) const = default;\n    };\n\n    template <class U> static constexpr U explicit_init_required()\
+    \ {\n        static_assert(sizeof(U) == 0, \"all matrix entries must be explicitly\
+    \ initialized\");\n        return U{};\n    }\n\npublic:\n    [[no_unique_address]]\
+    \ DesignatedInitializationOnly designated_initialization_only{};\n    T a00 =\
+    \ explicit_init_required<T>(), a01 = explicit_init_required<T>(),\n      a02 =\
+    \ explicit_init_required<T>();\n    T a11 = explicit_init_required<T>(), a12 =\
+    \ explicit_init_required<T>();\n    T a22 = explicit_init_required<T>();\n\n \
+    \   UpperTriangular3d operator*(const UpperTriangular3d &r) const {\n        return\
+    \ UpperTriangular3d{\n            .a00 = this->a00 * r.a00,\n            .a01\
+    \ = this->a00 * r.a01 + this->a01 * r.a11,\n            .a02 = this->a00 * r.a02\
+    \ + this->a01 * r.a12 + this->a02 * r.a22,\n            .a11 = this->a11 * r.a11,\n\
+    \            .a12 = this->a11 * r.a12 + this->a12 * r.a22,\n            .a22 =\
+    \ this->a22 * r.a22,\n        };\n    }\n\n    UpperTriangular3d operator-() const\
+    \ {\n        return UpperTriangular3d{\n            .a00 = -this->a00,\n     \
+    \       .a01 = -this->a01,\n            .a02 = -this->a02,\n            .a11 =\
+    \ -this->a11,\n            .a12 = -this->a12,\n            .a22 = -this->a22,\n\
+    \        };\n    }\n\n    UpperTriangular3d operator+(const UpperTriangular3d\
+    \ &r) const {\n        return UpperTriangular3d{\n            .a00 = this->a00\
+    \ + r.a00,\n            .a01 = this->a01 + r.a01,\n            .a02 = this->a02\
+    \ + r.a02,\n            .a11 = this->a11 + r.a11,\n            .a12 = this->a12\
+    \ + r.a12,\n            .a22 = this->a22 + r.a22,\n        };\n    }\n\n    auto\
+    \ operator<=>(const UpperTriangular3d &) const = default;\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: linear_algebra_matrix/upper_triangular_matrix.hpp
   requiredBy: []
-  timestamp: '2026-05-06 21:05:36+09:00'
+  timestamp: '2026-09-05 15:19:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp

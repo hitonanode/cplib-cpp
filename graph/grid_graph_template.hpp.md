@@ -38,12 +38,12 @@ data:
     \ dnow = dist[x][y];\n            deq.pop_front();\n            for (unsigned\
     \ d = 0; d < dx.size(); d++) {\n                int xn = x + dx[d], yn = y + dy[d];\n\
     \                if (xn < 0 or yn < 0 or xn >= H or yn >= W) continue;\n     \
-    \           auto dnxt = dnow + edge_cost(x, y, xn, yn);\n                if (dnxt\
-    \ < dist[xn][yn]) {\n                    dist[xn][yn] = dnxt;\n              \
-    \      prv[xn][yn] = std::make_pair(x, y);\n                    if (dnxt)\n  \
-    \                      deq.emplace_back(xn, yn);\n                    else\n \
-    \                       deq.emplace_front(xn, yn);\n                }\n      \
-    \      }\n        }\n    }\n};\n"
+    \           auto weight = edge_cost(x, y, xn, yn);\n                auto dnxt\
+    \ = dnow + weight;\n                if (dnxt < dist[xn][yn]) {\n             \
+    \       dist[xn][yn] = dnxt;\n                    prv[xn][yn] = std::make_pair(x,\
+    \ y);\n                    if (weight)\n                        deq.emplace_back(xn,\
+    \ yn);\n                    else\n                        deq.emplace_front(xn,\
+    \ yn);\n                }\n            }\n        }\n    }\n};\n"
   code: "#pragma once\n#include <array>\n#include <deque>\n#include <queue>\n#include\
     \ <tuple>\n#include <utility>\n#include <vector>\n\n// CUT begin\ntemplate <typename\
     \ T_E, T_E INF, T_E (*edge_cost)(int, int, int, int)> struct GridGraph {\n   \
@@ -73,17 +73,18 @@ data:
     \ = deq.front();\n            const auto dnow = dist[x][y];\n            deq.pop_front();\n\
     \            for (unsigned d = 0; d < dx.size(); d++) {\n                int xn\
     \ = x + dx[d], yn = y + dy[d];\n                if (xn < 0 or yn < 0 or xn >=\
-    \ H or yn >= W) continue;\n                auto dnxt = dnow + edge_cost(x, y,\
-    \ xn, yn);\n                if (dnxt < dist[xn][yn]) {\n                    dist[xn][yn]\
-    \ = dnxt;\n                    prv[xn][yn] = std::make_pair(x, y);\n         \
-    \           if (dnxt)\n                        deq.emplace_back(xn, yn);\n   \
-    \                 else\n                        deq.emplace_front(xn, yn);\n \
-    \               }\n            }\n        }\n    }\n};\n"
+    \ H or yn >= W) continue;\n                auto weight = edge_cost(x, y, xn, yn);\n\
+    \                auto dnxt = dnow + weight;\n                if (dnxt < dist[xn][yn])\
+    \ {\n                    dist[xn][yn] = dnxt;\n                    prv[xn][yn]\
+    \ = std::make_pair(x, y);\n                    if (weight)\n                 \
+    \       deq.emplace_back(xn, yn);\n                    else\n                \
+    \        deq.emplace_front(xn, yn);\n                }\n            }\n      \
+    \  }\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/grid_graph_template.hpp
   requiredBy: []
-  timestamp: '2021-01-10 04:34:32+09:00'
+  timestamp: '2026-09-05 15:18:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/grid_graph_template.hpp

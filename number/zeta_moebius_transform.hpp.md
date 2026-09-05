@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/gcd_convolution.test.cpp
     title: number/test/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/lcm_convolution.test.cpp
     title: number/test/lcm_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/multiple_moebius.yuki1627.test.cpp
     title: number/test/multiple_moebius.yuki1627.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/multiple_moebius.yuki886.test.cpp
     title: number/test/multiple_moebius.yuki886.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/zeta_moebius_transform.test.cpp
     title: number/test/zeta_moebius_transform.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://codeforces.com/contest/1630/problem/E
@@ -83,17 +83,18 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 3 \"number/zeta_moebius_transform.hpp\"\n#include <algorithm>\n#line 5 \"\
-    number/zeta_moebius_transform.hpp\"\n#include <utility>\n#line 7 \"number/zeta_moebius_transform.hpp\"\
-    \n\n// f[n] \u306B\u5BFE\u3057\u3066\u3001\u5168\u3066\u306E n \u306E\u500D\u6570\
-    \ n*i \u306B\u5BFE\u3059\u308B f[n*i] \u306E\u548C\u304C\u51FA\u3066\u304F\u308B\
-    \ \u8A08\u7B97\u91CF O(N loglog N)\n// \u7D20\u6570p\u6BCE\u306B\u51E6\u7406\u3059\
-    \u308B\u9AD8\u901F\u30BC\u30FC\u30BF\u5909\u63DB\n// \u4F7F\u7528\u4F8B https://yukicoder.me/submissions/385043\n\
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 3 \"number/zeta_moebius_transform.hpp\"\
+    \n#include <algorithm>\n#line 5 \"number/zeta_moebius_transform.hpp\"\n#include\
+    \ <utility>\n#line 7 \"number/zeta_moebius_transform.hpp\"\n\n// f[n] \u306B\u5BFE\
+    \u3057\u3066\u3001\u5168\u3066\u306E n \u306E\u500D\u6570 n*i \u306B\u5BFE\u3059\
+    \u308B f[n*i] \u306E\u548C\u304C\u51FA\u3066\u304F\u308B \u8A08\u7B97\u91CF O(N\
+    \ loglog N)\n// \u7D20\u6570p\u6BCE\u306B\u51E6\u7406\u3059\u308B\u9AD8\u901F\u30BC\
+    \u30FC\u30BF\u5909\u63DB\n// \u4F7F\u7528\u4F8B https://yukicoder.me/submissions/385043\n\
     template <class T> void multiple_zeta(std::vector<T> &f) {\n    int N = int(f.size())\
     \ - 1;\n    std::vector<int> is_prime(N + 1, 1);\n    for (int p = 2; p <= N;\
     \ p++) {\n        if (is_prime[p]) {\n            for (int q = p * 2; q <= N;\
@@ -207,8 +208,8 @@ data:
   isVerificationFile: false
   path: number/zeta_moebius_transform.hpp
   requiredBy: []
-  timestamp: '2022-01-29 16:38:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:19:48+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number/test/lcm_convolution.test.cpp
   - number/test/gcd_convolution.test.cpp

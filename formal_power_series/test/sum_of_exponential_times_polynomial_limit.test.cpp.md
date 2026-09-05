@@ -10,10 +10,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/sum_of_exponential_times_polynomial_limit.hpp
     title: Sum of exponential times polynomial limit ($\sum_{i=0}^\infty r^i f(i)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
@@ -195,39 +195,39 @@ data:
     \ **0^0 == 1**\n    template <class MODINT> std::vector<MODINT> enumerate_kth_pows(long\
     \ long K, int nmax) const {\n        assert(nmax < int(min_factor.size()));\n\
     \        assert(K >= 0);\n        if (K == 0) return std::vector<MODINT>(nmax\
-    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0, ret[1]\
-    \ = 1;\n        for (int n = 2; n <= nmax; n++) {\n            if (min_factor[n]\
-    \ == n) {\n                ret[n] = MODINT(n).pow(K);\n            } else {\n\
-    \                ret[n] = ret[n / min_factor[n]] * ret[min_factor[n]];\n     \
-    \       }\n        }\n        return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n\
-    #line 3 \"convolution/ntt.hpp\"\n\n#include <algorithm>\n#include <array>\n#line\
-    \ 7 \"convolution/ntt.hpp\"\n#include <tuple>\n#line 9 \"convolution/ntt.hpp\"\
-    \n\n// CUT begin\n// Integer convolution for arbitrary mod\n// with NTT (and Garner's\
-    \ algorithm) for ModInt / ModIntRuntime class.\n// We skip Garner's algorithm\
-    \ if `skip_garner` is true or mod is in `nttprimes`.\n// input: a (size: n), b\
-    \ (size: m)\n// return: vector (size: n + m - 1)\ntemplate <typename MODINT>\n\
-    std::vector<MODINT> nttconv(std::vector<MODINT> a, std::vector<MODINT> b, bool\
-    \ skip_garner);\n\nconstexpr int nttprimes[3] = {998244353, 167772161, 469762049};\n\
-    \n// Integer FFT (Fast Fourier Transform) for ModInt class\n// (Also known as\
-    \ Number Theoretic Transform, NTT)\n// is_inverse: inverse transform\n// ** Input\
-    \ size must be 2^n **\ntemplate <typename MODINT> void ntt(std::vector<MODINT>\
-    \ &a, bool is_inverse = false) {\n    int n = a.size();\n    if (n == 1) return;\n\
-    \    static const int mod = MODINT::mod();\n    static const MODINT root = MODINT::get_primitive_root();\n\
-    \    assert(__builtin_popcount(n) == 1 and (mod - 1) % n == 0);\n\n    static\
-    \ std::vector<MODINT> w{1}, iw{1};\n    for (int m = w.size(); m < n / 2; m *=\
-    \ 2) {\n        MODINT dw = root.pow((mod - 1) / (4 * m)), dwinv = 1 / dw;\n \
-    \       w.resize(m * 2), iw.resize(m * 2);\n        for (int i = 0; i < m; i++)\
-    \ w[m + i] = w[i] * dw, iw[m + i] = iw[i] * dwinv;\n    }\n\n    if (!is_inverse)\
-    \ {\n        for (int m = n; m >>= 1;) {\n            for (int s = 0, k = 0; s\
-    \ < n; s += 2 * m, k++) {\n                for (int i = s; i < s + m; i++) {\n\
-    \                    MODINT x = a[i], y = a[i + m] * w[k];\n                 \
-    \   a[i] = x + y, a[i + m] = x - y;\n                }\n            }\n      \
-    \  }\n    } else {\n        for (int m = 1; m < n; m *= 2) {\n            for\
-    \ (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n                for (int i = s;\
-    \ i < s + m; i++) {\n                    MODINT x = a[i], y = a[i + m];\n    \
-    \                a[i] = x + y, a[i + m] = (x - y) * iw[k];\n                }\n\
-    \            }\n        }\n        int n_inv = MODINT(n).inv().val();\n      \
-    \  for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
+    \ + 1, 1);\n        std::vector<MODINT> ret(nmax + 1);\n        ret[0] = 0;\n\
+    \        if (nmax == 0) return ret;\n        ret[1] = 1;\n        for (int n =\
+    \ 2; n <= nmax; n++) {\n            if (min_factor[n] == n) {\n              \
+    \  ret[n] = MODINT(n).pow(K);\n            } else {\n                ret[n] =\
+    \ ret[n / min_factor[n]] * ret[min_factor[n]];\n            }\n        }\n   \
+    \     return ret;\n    }\n};\n// Sieve sieve((1 << 20));\n#line 3 \"convolution/ntt.hpp\"\
+    \n\n#include <algorithm>\n#include <array>\n#line 7 \"convolution/ntt.hpp\"\n\
+    #include <tuple>\n#line 9 \"convolution/ntt.hpp\"\n\n// CUT begin\n// Integer\
+    \ convolution for arbitrary mod\n// with NTT (and Garner's algorithm) for ModInt\
+    \ / ModIntRuntime class.\n// We skip Garner's algorithm if `skip_garner` is true\
+    \ or mod is in `nttprimes`.\n// input: a (size: n), b (size: m)\n// return: vector\
+    \ (size: n + m - 1)\ntemplate <typename MODINT>\nstd::vector<MODINT> nttconv(std::vector<MODINT>\
+    \ a, std::vector<MODINT> b, bool skip_garner);\n\nconstexpr int nttprimes[3] =\
+    \ {998244353, 167772161, 469762049};\n\n// Integer FFT (Fast Fourier Transform)\
+    \ for ModInt class\n// (Also known as Number Theoretic Transform, NTT)\n// is_inverse:\
+    \ inverse transform\n// ** Input size must be 2^n **\ntemplate <typename MODINT>\
+    \ void ntt(std::vector<MODINT> &a, bool is_inverse = false) {\n    int n = a.size();\n\
+    \    if (n == 1) return;\n    static const int mod = MODINT::mod();\n    static\
+    \ const MODINT root = MODINT::get_primitive_root();\n    assert(__builtin_popcount(n)\
+    \ == 1 and (mod - 1) % n == 0);\n\n    static std::vector<MODINT> w{1}, iw{1};\n\
+    \    for (int m = w.size(); m < n / 2; m *= 2) {\n        MODINT dw = root.pow((mod\
+    \ - 1) / (4 * m)), dwinv = 1 / dw;\n        w.resize(m * 2), iw.resize(m * 2);\n\
+    \        for (int i = 0; i < m; i++) w[m + i] = w[i] * dw, iw[m + i] = iw[i] *\
+    \ dwinv;\n    }\n\n    if (!is_inverse) {\n        for (int m = n; m >>= 1;) {\n\
+    \            for (int s = 0, k = 0; s < n; s += 2 * m, k++) {\n              \
+    \  for (int i = s; i < s + m; i++) {\n                    MODINT x = a[i], y =\
+    \ a[i + m] * w[k];\n                    a[i] = x + y, a[i + m] = x - y;\n    \
+    \            }\n            }\n        }\n    } else {\n        for (int m = 1;\
+    \ m < n; m *= 2) {\n            for (int s = 0, k = 0; s < n; s += 2 * m, k++)\
+    \ {\n                for (int i = s; i < s + m; i++) {\n                    MODINT\
+    \ x = a[i], y = a[i + m];\n                    a[i] = x + y, a[i + m] = (x - y)\
+    \ * iw[k];\n                }\n            }\n        }\n        int n_inv = MODINT(n).inv().val();\n\
+    \        for (auto &v : a) v *= n_inv;\n    }\n}\ntemplate <int MOD>\nstd::vector<ModInt<MOD>>\
     \ nttconv_(const std::vector<int> &a, const std::vector<int> &b) {\n    int sz\
     \ = a.size();\n    assert(a.size() == b.size() and __builtin_popcount(sz) == 1);\n\
     \    std::vector<ModInt<MOD>> ap(sz), bp(sz);\n    for (int i = 0; i < sz; i++)\
@@ -363,28 +363,29 @@ data:
     \ O(N (lgN)^2) building, O(N (lgN)^2 + M lg M) evaluation\ntemplate <typename\
     \ Tfield> struct MultipointEvaluation {\n    int nx;\n    using polynomial = FormalPowerSeries<Tfield>;\n\
     \    std::vector<polynomial> segtree;\n    MultipointEvaluation(const std::vector<Tfield>\
-    \ &xs) : nx(xs.size()) {\n        segtree.resize(nx * 2 - 1);\n        for (int\
-    \ i = 0; i < nx; i++) { segtree[nx - 1 + i] = {-xs[i], 1}; }\n        for (int\
-    \ i = nx - 2; i >= 0; i--) { segtree[i] = segtree[2 * i + 1] * segtree[2 * i +\
-    \ 2]; }\n    }\n    std::vector<Tfield> ret;\n    void _eval_rec(polynomial f,\
-    \ int now) {\n        f %= segtree[now];\n        f.shrink();\n        if (now\
+    \ &xs) : nx(xs.size()) {\n        segtree.resize(nx ? nx * 2 - 1 : 0);\n     \
+    \   for (int i = 0; i < nx; i++) { segtree[nx - 1 + i] = {-xs[i], 1}; }\n    \
+    \    for (int i = nx - 2; i >= 0; i--) { segtree[i] = segtree[2 * i + 1] * segtree[2\
+    \ * i + 2]; }\n    }\n    std::vector<Tfield> ret;\n    void _eval_rec(polynomial\
+    \ f, int now) {\n        f %= segtree[now];\n        f.shrink();\n        if (now\
     \ - (nx - 1) >= 0) {\n            ret[now - (nx - 1)] = f.coeff(0);\n        \
     \    return;\n        }\n        _eval_rec(f, 2 * now + 1);\n        _eval_rec(f,\
     \ 2 * now + 2);\n    }\n    std::vector<Tfield> evaluate_polynomial(const polynomial\
-    \ &f) {\n        ret.resize(nx);\n        _eval_rec(f, 0);\n        return ret;\n\
-    \    }\n    std::vector<Tfield> evaluate_polynomial(const std::vector<Tfield>\
-    \ &f) {\n        return evaluate_polynomial(polynomial(f.begin(), f.end()));\n\
-    \    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial _rec_interpolation(int\
-    \ now, const std::vector<Tfield> &ys) const {\n        int i = now - (nx - 1);\n\
-    \        if (i >= 0) return {ys[i]};\n        auto retl = _rec_interpolation(2\
-    \ * now + 1, ys);\n        auto retr = _rec_interpolation(2 * now + 2, ys);\n\
-    \        return retl * segtree[2 * now + 2] + retr * segtree[2 * now + 1];\n \
-    \   }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys)\
-    \ {\n        assert(nx == int(ys.size()));\n        if (_interpolate_coeffs.empty())\
-    \ {\n            _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());\n\
-    \            for (auto &x : _interpolate_coeffs) x = x.inv();\n        }\n   \
-    \     for (int i = 0; i < nx; i++) ys[i] *= _interpolate_coeffs[i];\n        return\
-    \ _rec_interpolation(0, ys);\n    }\n};\n#line 8 \"formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp\"\
+    \ &f) {\n        if (!nx) return {};\n        ret.resize(nx);\n        _eval_rec(f,\
+    \ 0);\n        return ret;\n    }\n    std::vector<Tfield> evaluate_polynomial(const\
+    \ std::vector<Tfield> &f) {\n        return evaluate_polynomial(polynomial(f.begin(),\
+    \ f.end()));\n    }\n\n    std::vector<Tfield> _interpolate_coeffs;\n    polynomial\
+    \ _rec_interpolation(int now, const std::vector<Tfield> &ys) const {\n       \
+    \ int i = now - (nx - 1);\n        if (i >= 0) return {ys[i]};\n        auto retl\
+    \ = _rec_interpolation(2 * now + 1, ys);\n        auto retr = _rec_interpolation(2\
+    \ * now + 2, ys);\n        return retl * segtree[2 * now + 2] + retr * segtree[2\
+    \ * now + 1];\n    }\n    std::vector<Tfield> polynomial_interpolation(std::vector<Tfield>\
+    \ ys) {\n        assert(nx == int(ys.size()));\n        if (!nx) return {};\n\
+    \        if (_interpolate_coeffs.empty()) {\n            _interpolate_coeffs =\
+    \ evaluate_polynomial(segtree[0].differential());\n            for (auto &x :\
+    \ _interpolate_coeffs) x = x.inv();\n        }\n        for (int i = 0; i < nx;\
+    \ i++) ys[i] *= _interpolate_coeffs[i];\n        return _rec_interpolation(0,\
+    \ ys);\n    }\n};\n#line 8 \"formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp\"\
     \nusing namespace std;\nusing mint = ModInt<998244353>;\n\nint main() {\n    int\
     \ r, d;\n    cin >> r >> d;\n    mint::_precalculation(d + 10);\n    auto initial_terms\
     \ = Sieve(d).enumerate_kth_pows<mint>(d, d);\n    if (d > 0 and d <= 100000) {\n\
@@ -412,7 +413,7 @@ data:
   isVerificationFile: true
   path: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2025-09-11 21:33:22+09:00'
+  timestamp: '2026-09-05 15:19:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: formal_power_series/test/sum_of_exponential_times_polynomial_limit.test.cpp

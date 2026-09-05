@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/directed_mst.hpp
     title: graph/directed_mst.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B
@@ -54,17 +54,17 @@ data:
     \   std::pair<Weight, int> top() const { return {data[root].weight(), data[root].getid()};\
     \ }\n        void add_all(Weight w) {\n            if (root != -1) data[root].apply(w);\n\
     \        }\n        void pop() {\n            data[root].push();\n           \
-    \ root = _meld(data[root].r, data[root].l);\n        }\n        int size() const\
-    \ { return sz; }\n        bool empty() const { return sz == 0; }\n    };\n\n \
-    \   Weight ret;\n    MinimumSpanningArborescence(const int N,\n              \
-    \                  const std::vector<std::tuple<int, int, Weight>> &edges, int\
-    \ r) {\n        assert(r >= 0 and r < N);\n        std::vector<short> used(N);\n\
-    \        std::vector<skew_heap> incoming_edges(N);\n\n        ret = 0;\n     \
-    \   std::vector<int> from(N, r);\n        std::vector<Weight> from_cost(N, 0);\n\
-    \        std::vector<int> used_eids;\n        uf.initialize(N);\n        used[r]\
-    \ = 2;\n\n        // std::vector<int> par(N, -1);\n        int s, t;\n       \
-    \ Weight w;\n        for (int eid = 0; eid < int(edges.size()); eid++) {\n   \
-    \         std::tie(s, t, w) = edges[eid];\n            incoming_edges[t].push(w,\
+    \ root = _meld(data[root].r, data[root].l);\n            sz--;\n        }\n  \
+    \      int size() const { return sz; }\n        bool empty() const { return sz\
+    \ == 0; }\n    };\n\n    Weight ret;\n    MinimumSpanningArborescence(const int\
+    \ N,\n                                const std::vector<std::tuple<int, int, Weight>>\
+    \ &edges, int r) {\n        assert(r >= 0 and r < N);\n        std::vector<short>\
+    \ used(N);\n        std::vector<skew_heap> incoming_edges(N);\n\n        ret =\
+    \ 0;\n        std::vector<int> from(N, r);\n        std::vector<Weight> from_cost(N,\
+    \ 0);\n        std::vector<int> used_eids;\n        uf.initialize(N);\n      \
+    \  used[r] = 2;\n\n        // std::vector<int> par(N, -1);\n        int s, t;\n\
+    \        Weight w;\n        for (int eid = 0; eid < int(edges.size()); eid++)\
+    \ {\n            std::tie(s, t, w) = edges[eid];\n            incoming_edges[t].push(w,\
     \ eid);\n        }\n\n        for (int start = 0; start < N; start++) {\n    \
     \        if (used[start] != 0) continue;\n            int cur = start;\n     \
     \       std::vector<int> processing;\n            while (used[cur] != 2) {\n \
@@ -84,11 +84,12 @@ data:
     \                        }\n                        p = uf.find(from[p]);\n  \
     \                  } while (p != cur);\n                } else {\n           \
     \         cur = from[cur];\n                }\n            }\n            for\
-    \ (int v : processing) used[v] = 2;\n        }\n    }\n};\ntemplate <>\nstd::vector<MinimumSpanningArborescence<long\
-    \ long>::skew_heap::node>\n    MinimumSpanningArborescence<long long>::skew_heap::data\
-    \ = {};\ntemplate <typename T> unsigned MinimumSpanningArborescence<T>::skew_heap::len\
-    \ = 0;\n#line 2 \"graph/test/directed_mst.aoj.test.cpp\"\n#include <iostream>\n\
-    using namespace std;\n#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B\"\
+    \ (int v : processing) used[v] = 2;\n        }\n    }\n};\ntemplate <typename\
+    \ Weight>\nstd::vector<typename MinimumSpanningArborescence<Weight>::skew_heap::node>\n\
+    \    MinimumSpanningArborescence<Weight>::skew_heap::data = {};\ntemplate <typename\
+    \ T> unsigned MinimumSpanningArborescence<T>::skew_heap::len = 0;\n#line 2 \"\
+    graph/test/directed_mst.aoj.test.cpp\"\n#include <iostream>\nusing namespace std;\n\
+    #define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B\"\
     \n\nint main() {\n    int N, M, S;\n    cin >> N >> M >> S;\n    std::vector<std::tuple<int,\
     \ int, long long>> edges;\n    while (M--) {\n        int a, b, c;\n        cin\
     \ >> a >> b >> c;\n        edges.emplace_back(a, b, c);\n    }\n    MinimumSpanningArborescence<long\
@@ -104,8 +105,8 @@ data:
   isVerificationFile: true
   path: graph/test/directed_mst.aoj.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:24:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: graph/test/directed_mst.aoj.test.cpp
 layout: document

@@ -5,7 +5,7 @@ data:
     path: linear_algebra_matrix/upper_triangular_matrix.hpp
     title: "Upper triangular matrix \uFF08\u5B9A\u6570\u6B21\u5143\u4E0A\u4E09\u89D2\
       \u884C\u5217\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []
@@ -20,80 +20,89 @@ data:
     - https://yukicoder.me/problems/no/3530
   bundledCode: "#line 1 \"linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp\"\
     \n#define PROBLEM \"https://yukicoder.me/problems/no/3530\"\n#line 2 \"linear_algebra_matrix/upper_triangular_matrix.hpp\"\
-    \n\ntemplate <class T> struct UpperTriangular3d {\n    static T explicit_init_required()\
-    \ = delete;\n    T a00 = this->explicit_init_required(), a01 = this->explicit_init_required(),\n\
-    \      a02 = this->explicit_init_required();\n    T a11 = this->explicit_init_required(),\
-    \ a12 = this->explicit_init_required();\n    T a22 = this->explicit_init_required();\n\
-    \n    UpperTriangular3d operator*(const UpperTriangular3d &r) const {\n      \
-    \  return UpperTriangular3d{\n            .a00 = this->a00 * r.a00,\n        \
-    \    .a01 = this->a00 * r.a01 + this->a01 * r.a11,\n            .a02 = this->a00\
-    \ * r.a02 + this->a01 * r.a12 + this->a02 * r.a22,\n            .a11 = this->a11\
-    \ * r.a11,\n            .a12 = this->a11 * r.a12 + this->a12 * r.a22,\n      \
-    \      .a22 = this->a22 * r.a22,\n        };\n    }\n\n    UpperTriangular3d operator-()\
-    \ const {\n        return UpperTriangular3d{\n            .a00 = -this->a00,\n\
-    \            .a01 = -this->a01,\n            .a02 = -this->a02,\n            .a11\
-    \ = -this->a11,\n            .a12 = -this->a12,\n            .a22 = -this->a22,\n\
-    \        };\n    }\n\n    UpperTriangular3d operator+(const UpperTriangular3d\
-    \ &r) const {\n        return UpperTriangular3d{\n            .a00 = this->a00\
-    \ + r.a00,\n            .a01 = this->a01 + r.a01,\n            .a02 = this->a02\
-    \ + r.a02,\n            .a11 = this->a11 + r.a11,\n            .a12 = this->a12\
-    \ + r.a12,\n            .a22 = this->a22 + r.a22,\n        };\n    }\n\n    auto\
-    \ operator<=>(const UpperTriangular3d &) const = default;\n};\n#line 2 \"modint.hpp\"\
-    \n#include <cassert>\n#include <iostream>\n#include <set>\n#include <vector>\n\
-    \ntemplate <int md> struct ModInt {\n    static_assert(md > 1);\n    using lint\
-    \ = long long;\n    constexpr static int mod() { return md; }\n    static int\
-    \ get_primitive_root() {\n        static int primitive_root = 0;\n        if (!primitive_root)\
-    \ {\n            primitive_root = [&]() {\n                std::set<int> fac;\n\
-    \                int v = md - 1;\n                for (lint i = 2; i * i <= v;\
-    \ i++)\n                    while (v % i == 0) fac.insert(i), v /= i;\n      \
-    \          if (v > 1) fac.insert(v);\n                for (int g = 1; g < md;\
-    \ g++) {\n                    bool ok = true;\n                    for (auto i\
-    \ : fac)\n                        if (ModInt(g).pow((md - 1) / i) == 1) {\n  \
-    \                          ok = false;\n                            break;\n \
-    \                       }\n                    if (ok) return g;\n           \
-    \     }\n                return -1;\n            }();\n        }\n        return\
-    \ primitive_root;\n    }\n    int val_;\n    int val() const noexcept { return\
-    \ val_; }\n    constexpr ModInt() : val_(0) {}\n    constexpr ModInt &_setval(lint\
-    \ v) { return val_ = (v >= md ? v - md : v), *this; }\n    constexpr ModInt(lint\
-    \ v) { _setval(v % md + md); }\n    constexpr explicit operator bool() const {\
-    \ return val_ != 0; }\n    constexpr ModInt operator+(const ModInt &x) const {\n\
-    \        return ModInt()._setval((lint)val_ + x.val_);\n    }\n    constexpr ModInt\
-    \ operator-(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
-    \ - x.val_ + md);\n    }\n    constexpr ModInt operator*(const ModInt &x) const\
-    \ {\n        return ModInt()._setval((lint)val_ * x.val_ % md);\n    }\n    constexpr\
-    \ ModInt operator/(const ModInt &x) const {\n        return ModInt()._setval((lint)val_\
-    \ * x.inv().val() % md);\n    }\n    constexpr ModInt operator-() const { return\
-    \ ModInt()._setval(md - val_); }\n    constexpr ModInt &operator+=(const ModInt\
-    \ &x) { return *this = *this + x; }\n    constexpr ModInt &operator-=(const ModInt\
-    \ &x) { return *this = *this - x; }\n    constexpr ModInt &operator*=(const ModInt\
-    \ &x) { return *this = *this * x; }\n    constexpr ModInt &operator/=(const ModInt\
-    \ &x) { return *this = *this / x; }\n    friend constexpr ModInt operator+(lint\
-    \ a, const ModInt &x) { return ModInt(a) + x; }\n    friend constexpr ModInt operator-(lint\
-    \ a, const ModInt &x) { return ModInt(a) - x; }\n    friend constexpr ModInt operator*(lint\
-    \ a, const ModInt &x) { return ModInt(a) * x; }\n    friend constexpr ModInt operator/(lint\
-    \ a, const ModInt &x) { return ModInt(a) / x; }\n    constexpr bool operator==(const\
-    \ ModInt &x) const { return val_ == x.val_; }\n    constexpr bool operator!=(const\
-    \ ModInt &x) const { return val_ != x.val_; }\n    constexpr bool operator<(const\
-    \ ModInt &x) const {\n        return val_ < x.val_;\n    } // To use std::map<ModInt,\
-    \ T>\n    friend std::istream &operator>>(std::istream &is, ModInt &x) {\n   \
-    \     lint t;\n        return is >> t, x = ModInt(t), is;\n    }\n    constexpr\
-    \ friend std::ostream &operator<<(std::ostream &os, const ModInt &x) {\n     \
-    \   return os << x.val_;\n    }\n\n    constexpr ModInt pow(lint n) const {\n\
-    \        ModInt ans = 1, tmp = *this;\n        while (n) {\n            if (n\
-    \ & 1) ans *= tmp;\n            tmp *= tmp, n >>= 1;\n        }\n        return\
-    \ ans;\n    }\n\n    static constexpr int cache_limit = std::min(md, 1 << 21);\n\
-    \    static std::vector<ModInt> facs, facinvs, invs;\n\n    constexpr static void\
-    \ _precalculation(int N) {\n        const int l0 = facs.size();\n        if (N\
-    \ > md) N = md;\n        if (N <= l0) return;\n        facs.resize(N), facinvs.resize(N),\
-    \ invs.resize(N);\n        for (int i = l0; i < N; i++) facs[i] = facs[i - 1]\
-    \ * i;\n        facinvs[N - 1] = facs.back().pow(md - 2);\n        for (int i\
-    \ = N - 2; i >= l0; i--) facinvs[i] = facinvs[i + 1] * (i + 1);\n        for (int\
-    \ i = N - 1; i >= l0; i--) invs[i] = facinvs[i] * facs[i - 1];\n    }\n\n    constexpr\
-    \ ModInt inv() const {\n        if (this->val_ < cache_limit) {\n            if\
-    \ (facs.empty()) facs = {1}, facinvs = {1}, invs = {0};\n            while (this->val_\
-    \ >= int(facs.size())) _precalculation(facs.size() * 2);\n            return invs[this->val_];\n\
-    \        } else {\n            return this->pow(md - 2);\n        }\n    }\n\n\
-    \    constexpr static ModInt fac(int n) {\n        assert(n >= 0);\n        if\
+    \n\n#include <compare>\n\ntemplate <class T> struct UpperTriangular3d {\nprivate:\n\
+    \    struct DesignatedInitializationOnly {\n    private:\n        constexpr DesignatedInitializationOnly()\
+    \ = default;\n        constexpr DesignatedInitializationOnly(const DesignatedInitializationOnly\
+    \ &) = default;\n        DesignatedInitializationOnly &operator=(const DesignatedInitializationOnly\
+    \ &) = default;\n        friend UpperTriangular3d;\n\n    public:\n        auto\
+    \ operator<=>(const DesignatedInitializationOnly &) const = default;\n    };\n\
+    \n    template <class U> static constexpr U explicit_init_required() {\n     \
+    \   static_assert(sizeof(U) == 0, \"all matrix entries must be explicitly initialized\"\
+    );\n        return U{};\n    }\n\npublic:\n    [[no_unique_address]] DesignatedInitializationOnly\
+    \ designated_initialization_only{};\n    T a00 = explicit_init_required<T>(),\
+    \ a01 = explicit_init_required<T>(),\n      a02 = explicit_init_required<T>();\n\
+    \    T a11 = explicit_init_required<T>(), a12 = explicit_init_required<T>();\n\
+    \    T a22 = explicit_init_required<T>();\n\n    UpperTriangular3d operator*(const\
+    \ UpperTriangular3d &r) const {\n        return UpperTriangular3d{\n         \
+    \   .a00 = this->a00 * r.a00,\n            .a01 = this->a00 * r.a01 + this->a01\
+    \ * r.a11,\n            .a02 = this->a00 * r.a02 + this->a01 * r.a12 + this->a02\
+    \ * r.a22,\n            .a11 = this->a11 * r.a11,\n            .a12 = this->a11\
+    \ * r.a12 + this->a12 * r.a22,\n            .a22 = this->a22 * r.a22,\n      \
+    \  };\n    }\n\n    UpperTriangular3d operator-() const {\n        return UpperTriangular3d{\n\
+    \            .a00 = -this->a00,\n            .a01 = -this->a01,\n            .a02\
+    \ = -this->a02,\n            .a11 = -this->a11,\n            .a12 = -this->a12,\n\
+    \            .a22 = -this->a22,\n        };\n    }\n\n    UpperTriangular3d operator+(const\
+    \ UpperTriangular3d &r) const {\n        return UpperTriangular3d{\n         \
+    \   .a00 = this->a00 + r.a00,\n            .a01 = this->a01 + r.a01,\n       \
+    \     .a02 = this->a02 + r.a02,\n            .a11 = this->a11 + r.a11,\n     \
+    \       .a12 = this->a12 + r.a12,\n            .a22 = this->a22 + r.a22,\n   \
+    \     };\n    }\n\n    auto operator<=>(const UpperTriangular3d &) const = default;\n\
+    };\n#line 2 \"modint.hpp\"\n#include <cassert>\n#include <iostream>\n#include\
+    \ <set>\n#include <vector>\n\ntemplate <int md> struct ModInt {\n    static_assert(md\
+    \ > 1);\n    using lint = long long;\n    constexpr static int mod() { return\
+    \ md; }\n    static int get_primitive_root() {\n        static int primitive_root\
+    \ = 0;\n        if (!primitive_root) {\n            primitive_root = [&]() {\n\
+    \                std::set<int> fac;\n                int v = md - 1;\n       \
+    \         for (lint i = 2; i * i <= v; i++)\n                    while (v % i\
+    \ == 0) fac.insert(i), v /= i;\n                if (v > 1) fac.insert(v);\n  \
+    \              for (int g = 1; g < md; g++) {\n                    bool ok = true;\n\
+    \                    for (auto i : fac)\n                        if (ModInt(g).pow((md\
+    \ - 1) / i) == 1) {\n                            ok = false;\n               \
+    \             break;\n                        }\n                    if (ok) return\
+    \ g;\n                }\n                return -1;\n            }();\n      \
+    \  }\n        return primitive_root;\n    }\n    int val_;\n    int val() const\
+    \ noexcept { return val_; }\n    constexpr ModInt() : val_(0) {}\n    constexpr\
+    \ ModInt &_setval(lint v) { return val_ = (v >= md ? v - md : v), *this; }\n \
+    \   constexpr ModInt(lint v) { _setval(v % md + md); }\n    constexpr explicit\
+    \ operator bool() const { return val_ != 0; }\n    constexpr ModInt operator+(const\
+    \ ModInt &x) const {\n        return ModInt()._setval((lint)val_ + x.val_);\n\
+    \    }\n    constexpr ModInt operator-(const ModInt &x) const {\n        return\
+    \ ModInt()._setval((lint)val_ - x.val_ + md);\n    }\n    constexpr ModInt operator*(const\
+    \ ModInt &x) const {\n        return ModInt()._setval((lint)val_ * x.val_ % md);\n\
+    \    }\n    constexpr ModInt operator/(const ModInt &x) const {\n        return\
+    \ ModInt()._setval((lint)val_ * x.inv().val() % md);\n    }\n    constexpr ModInt\
+    \ operator-() const { return ModInt()._setval(md - val_); }\n    constexpr ModInt\
+    \ &operator+=(const ModInt &x) { return *this = *this + x; }\n    constexpr ModInt\
+    \ &operator-=(const ModInt &x) { return *this = *this - x; }\n    constexpr ModInt\
+    \ &operator*=(const ModInt &x) { return *this = *this * x; }\n    constexpr ModInt\
+    \ &operator/=(const ModInt &x) { return *this = *this / x; }\n    friend constexpr\
+    \ ModInt operator+(lint a, const ModInt &x) { return ModInt(a) + x; }\n    friend\
+    \ constexpr ModInt operator-(lint a, const ModInt &x) { return ModInt(a) - x;\
+    \ }\n    friend constexpr ModInt operator*(lint a, const ModInt &x) { return ModInt(a)\
+    \ * x; }\n    friend constexpr ModInt operator/(lint a, const ModInt &x) { return\
+    \ ModInt(a) / x; }\n    constexpr bool operator==(const ModInt &x) const { return\
+    \ val_ == x.val_; }\n    constexpr bool operator!=(const ModInt &x) const { return\
+    \ val_ != x.val_; }\n    constexpr bool operator<(const ModInt &x) const {\n \
+    \       return val_ < x.val_;\n    } // To use std::map<ModInt, T>\n    friend\
+    \ std::istream &operator>>(std::istream &is, ModInt &x) {\n        lint t;\n \
+    \       return is >> t, x = ModInt(t), is;\n    }\n    constexpr friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &x) {\n        return os << x.val_;\n\
+    \    }\n\n    constexpr ModInt pow(lint n) const {\n        ModInt ans = 1, tmp\
+    \ = *this;\n        while (n) {\n            if (n & 1) ans *= tmp;\n        \
+    \    tmp *= tmp, n >>= 1;\n        }\n        return ans;\n    }\n\n    static\
+    \ constexpr int cache_limit = std::min(md, 1 << 21);\n    static std::vector<ModInt>\
+    \ facs, facinvs, invs;\n\n    constexpr static void _precalculation(int N) {\n\
+    \        const int l0 = facs.size();\n        if (N > md) N = md;\n        if\
+    \ (N <= l0) return;\n        facs.resize(N), facinvs.resize(N), invs.resize(N);\n\
+    \        for (int i = l0; i < N; i++) facs[i] = facs[i - 1] * i;\n        facinvs[N\
+    \ - 1] = facs.back().pow(md - 2);\n        for (int i = N - 2; i >= l0; i--) facinvs[i]\
+    \ = facinvs[i + 1] * (i + 1);\n        for (int i = N - 1; i >= l0; i--) invs[i]\
+    \ = facinvs[i] * facs[i - 1];\n    }\n\n    constexpr ModInt inv() const {\n \
+    \       if (this->val_ < cache_limit) {\n            if (facs.empty()) facs =\
+    \ {1}, facinvs = {1}, invs = {0};\n            while (this->val_ >= int(facs.size()))\
+    \ _precalculation(facs.size() * 2);\n            return invs[this->val_];\n  \
+    \      } else {\n            return this->pow(md - 2);\n        }\n    }\n\n \
+    \   constexpr static ModInt fac(int n) {\n        assert(n >= 0);\n        if\
     \ (n >= md) return ModInt(0);\n        while (n >= int(facs.size())) _precalculation(facs.size()\
     \ * 2);\n        return facs[n];\n    }\n\n    constexpr static ModInt facinv(int\
     \ n) {\n        assert(n >= 0);\n        if (n >= md) return ModInt(0);\n    \
@@ -142,57 +151,67 @@ data:
     \n\n#include <algorithm>\n#line 7 \"linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp\"\
     \n#include <map>\n#include <utility>\n#line 10 \"linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp\"\
     \n#include <atcoder/segtree>\n\nusing namespace std;\nusing S = UpperTriangular3d<ModInt998244353>;\n\
-    \nS op(const S &l, const S &r) { return l * r; }\nS e() { return S{1, 0, 0, 1,\
-    \ 0, 1}; }\n\nS GenR() { return S{ModInt998244353(3) / 4, ModInt998244353(1) /\
-    \ 4, 0, 1, 0, 1}; }\nS GenL() { return S{1, 0, 0, ModInt998244353(3) / 4, ModInt998244353(1)\
-    \ / 4, 1}; }\n\nModInt998244353 Solve(vector<pair<int, int>> ps) {\n    vector<tuple<int,\
-    \ int, int>> yxis;\n    for (int i = 0; i < (int)ps.size(); ++i) {\n        auto\
-    \ [x, y] = ps.at(i);\n        yxis.emplace_back(y, x, i);\n    }\n    sort(yxis.begin(),\
-    \ yxis.end());\n\n    const auto L = GenL(), R = GenR();\n    const vector<S>\
-    \ init(ps.size(), R);\n    atcoder::segtree<S, op, e> seg(init);\n\n    int last_x\
-    \ = -1e9;\n\n    ModInt998244353 ret = 0;\n\n    map<int, vector<pair<int, int>>>\
-    \ x2yis;\n    for (int i = 0; i < (int)ps.size(); ++i) {\n        auto [x, y]\
-    \ = ps.at(i);\n        x2yis[x].emplace_back(y, i);\n    }\n    for (auto [x,\
-    \ yis] : x2yis) {\n\n        const ModInt998244353 dx = x - last_x;\n        ret\
-    \ += dx * seg.all_prod().a02;\n\n        for (auto [y, i] : yis) {\n         \
-    \   const int idx =\n                lower_bound(yxis.begin(), yxis.end(), make_tuple(y,\
-    \ x, i)) - yxis.begin();\n            seg.set(idx, L);\n        }\n\n        last_x\
-    \ = x;\n    }\n\n    return ret;\n}\n\nint main() {\n    int N;\n    cin >> N;\n\
-    \    vector<pair<int, int>> xy(N);\n\n    for (auto &[x, y] : xy) cin >> x >>\
-    \ y;\n\n    const ModInt998244353 coeff = ModInt998244353(4).pow(N);\n    ModInt998244353\
-    \ ret1 = Solve(xy) * coeff;\n    for (auto &[x, y] : xy) swap(x, y);\n    ModInt998244353\
-    \ ret2 = Solve(xy) * coeff;\n    cout << (ret1 + ret2) * 2 << '\\n';\n}\n"
+    \nS op(const S &l, const S &r) { return l * r; }\nS e() {\n    return S{\n   \
+    \     .a00 = 1,\n        .a01 = 0,\n        .a02 = 0,\n        .a11 = 1,\n   \
+    \     .a12 = 0,\n        .a22 = 1,\n    };\n}\n\nS GenR() {\n    return S{\n \
+    \       .a00 = ModInt998244353(3) / 4,\n        .a01 = ModInt998244353(1) / 4,\n\
+    \        .a02 = 0,\n        .a11 = 1,\n        .a12 = 0,\n        .a22 = 1,\n\
+    \    };\n}\nS GenL() {\n    return S{\n        .a00 = 1,\n        .a01 = 0,\n\
+    \        .a02 = 0,\n        .a11 = ModInt998244353(3) / 4,\n        .a12 = ModInt998244353(1)\
+    \ / 4,\n        .a22 = 1,\n    };\n}\n\nModInt998244353 Solve(vector<pair<int,\
+    \ int>> ps) {\n    vector<tuple<int, int, int>> yxis;\n    for (int i = 0; i <\
+    \ (int)ps.size(); ++i) {\n        auto [x, y] = ps.at(i);\n        yxis.emplace_back(y,\
+    \ x, i);\n    }\n    sort(yxis.begin(), yxis.end());\n\n    const auto L = GenL(),\
+    \ R = GenR();\n    const vector<S> init(ps.size(), R);\n    atcoder::segtree<S,\
+    \ op, e> seg(init);\n\n    int last_x = -1e9;\n\n    ModInt998244353 ret = 0;\n\
+    \n    map<int, vector<pair<int, int>>> x2yis;\n    for (int i = 0; i < (int)ps.size();\
+    \ ++i) {\n        auto [x, y] = ps.at(i);\n        x2yis[x].emplace_back(y, i);\n\
+    \    }\n    for (auto [x, yis] : x2yis) {\n\n        const ModInt998244353 dx\
+    \ = x - last_x;\n        ret += dx * seg.all_prod().a02;\n\n        for (auto\
+    \ [y, i] : yis) {\n            const int idx =\n                lower_bound(yxis.begin(),\
+    \ yxis.end(), make_tuple(y, x, i)) - yxis.begin();\n            seg.set(idx, L);\n\
+    \        }\n\n        last_x = x;\n    }\n\n    return ret;\n}\n\nint main() {\n\
+    \    int N;\n    cin >> N;\n    vector<pair<int, int>> xy(N);\n\n    for (auto\
+    \ &[x, y] : xy) cin >> x >> y;\n\n    const ModInt998244353 coeff = ModInt998244353(4).pow(N);\n\
+    \    ModInt998244353 ret1 = Solve(xy) * coeff;\n    for (auto &[x, y] : xy) swap(x,\
+    \ y);\n    ModInt998244353 ret2 = Solve(xy) * coeff;\n    cout << (ret1 + ret2)\
+    \ * 2 << '\\n';\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/3530\"\n#include \"../upper_triangular_matrix.hpp\"\
     \n#include \"../../modint.hpp\"\n\n#include <algorithm>\n#include <iostream>\n\
     #include <map>\n#include <utility>\n#include <vector>\n#include <atcoder/segtree>\n\
     \nusing namespace std;\nusing S = UpperTriangular3d<ModInt998244353>;\n\nS op(const\
-    \ S &l, const S &r) { return l * r; }\nS e() { return S{1, 0, 0, 1, 0, 1}; }\n\
-    \nS GenR() { return S{ModInt998244353(3) / 4, ModInt998244353(1) / 4, 0, 1, 0,\
-    \ 1}; }\nS GenL() { return S{1, 0, 0, ModInt998244353(3) / 4, ModInt998244353(1)\
-    \ / 4, 1}; }\n\nModInt998244353 Solve(vector<pair<int, int>> ps) {\n    vector<tuple<int,\
-    \ int, int>> yxis;\n    for (int i = 0; i < (int)ps.size(); ++i) {\n        auto\
-    \ [x, y] = ps.at(i);\n        yxis.emplace_back(y, x, i);\n    }\n    sort(yxis.begin(),\
-    \ yxis.end());\n\n    const auto L = GenL(), R = GenR();\n    const vector<S>\
-    \ init(ps.size(), R);\n    atcoder::segtree<S, op, e> seg(init);\n\n    int last_x\
-    \ = -1e9;\n\n    ModInt998244353 ret = 0;\n\n    map<int, vector<pair<int, int>>>\
-    \ x2yis;\n    for (int i = 0; i < (int)ps.size(); ++i) {\n        auto [x, y]\
-    \ = ps.at(i);\n        x2yis[x].emplace_back(y, i);\n    }\n    for (auto [x,\
-    \ yis] : x2yis) {\n\n        const ModInt998244353 dx = x - last_x;\n        ret\
-    \ += dx * seg.all_prod().a02;\n\n        for (auto [y, i] : yis) {\n         \
-    \   const int idx =\n                lower_bound(yxis.begin(), yxis.end(), make_tuple(y,\
-    \ x, i)) - yxis.begin();\n            seg.set(idx, L);\n        }\n\n        last_x\
-    \ = x;\n    }\n\n    return ret;\n}\n\nint main() {\n    int N;\n    cin >> N;\n\
-    \    vector<pair<int, int>> xy(N);\n\n    for (auto &[x, y] : xy) cin >> x >>\
-    \ y;\n\n    const ModInt998244353 coeff = ModInt998244353(4).pow(N);\n    ModInt998244353\
-    \ ret1 = Solve(xy) * coeff;\n    for (auto &[x, y] : xy) swap(x, y);\n    ModInt998244353\
-    \ ret2 = Solve(xy) * coeff;\n    cout << (ret1 + ret2) * 2 << '\\n';\n}\n"
+    \ S &l, const S &r) { return l * r; }\nS e() {\n    return S{\n        .a00 =\
+    \ 1,\n        .a01 = 0,\n        .a02 = 0,\n        .a11 = 1,\n        .a12 =\
+    \ 0,\n        .a22 = 1,\n    };\n}\n\nS GenR() {\n    return S{\n        .a00\
+    \ = ModInt998244353(3) / 4,\n        .a01 = ModInt998244353(1) / 4,\n        .a02\
+    \ = 0,\n        .a11 = 1,\n        .a12 = 0,\n        .a22 = 1,\n    };\n}\nS\
+    \ GenL() {\n    return S{\n        .a00 = 1,\n        .a01 = 0,\n        .a02\
+    \ = 0,\n        .a11 = ModInt998244353(3) / 4,\n        .a12 = ModInt998244353(1)\
+    \ / 4,\n        .a22 = 1,\n    };\n}\n\nModInt998244353 Solve(vector<pair<int,\
+    \ int>> ps) {\n    vector<tuple<int, int, int>> yxis;\n    for (int i = 0; i <\
+    \ (int)ps.size(); ++i) {\n        auto [x, y] = ps.at(i);\n        yxis.emplace_back(y,\
+    \ x, i);\n    }\n    sort(yxis.begin(), yxis.end());\n\n    const auto L = GenL(),\
+    \ R = GenR();\n    const vector<S> init(ps.size(), R);\n    atcoder::segtree<S,\
+    \ op, e> seg(init);\n\n    int last_x = -1e9;\n\n    ModInt998244353 ret = 0;\n\
+    \n    map<int, vector<pair<int, int>>> x2yis;\n    for (int i = 0; i < (int)ps.size();\
+    \ ++i) {\n        auto [x, y] = ps.at(i);\n        x2yis[x].emplace_back(y, i);\n\
+    \    }\n    for (auto [x, yis] : x2yis) {\n\n        const ModInt998244353 dx\
+    \ = x - last_x;\n        ret += dx * seg.all_prod().a02;\n\n        for (auto\
+    \ [y, i] : yis) {\n            const int idx =\n                lower_bound(yxis.begin(),\
+    \ yxis.end(), make_tuple(y, x, i)) - yxis.begin();\n            seg.set(idx, L);\n\
+    \        }\n\n        last_x = x;\n    }\n\n    return ret;\n}\n\nint main() {\n\
+    \    int N;\n    cin >> N;\n    vector<pair<int, int>> xy(N);\n\n    for (auto\
+    \ &[x, y] : xy) cin >> x >> y;\n\n    const ModInt998244353 coeff = ModInt998244353(4).pow(N);\n\
+    \    ModInt998244353 ret1 = Solve(xy) * coeff;\n    for (auto &[x, y] : xy) swap(x,\
+    \ y);\n    ModInt998244353 ret2 = Solve(xy) * coeff;\n    cout << (ret1 + ret2)\
+    \ * 2 << '\\n';\n}\n"
   dependsOn:
   - linear_algebra_matrix/upper_triangular_matrix.hpp
   - modint.hpp
   isVerificationFile: true
   path: linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp
   requiredBy: []
-  timestamp: '2026-05-06 21:05:36+09:00'
+  timestamp: '2026-09-05 15:19:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/upper_trinaglular_matrix.yuki3530.test.cpp

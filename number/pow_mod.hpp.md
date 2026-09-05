@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/primitive_root.hpp
     title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/test/primitive_root_1e18.test.cpp
     title: number/test/primitive_root_1e18.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/pow_mod.hpp\"\n#include <cassert>\n#include <type_traits>\n\
@@ -22,24 +22,24 @@ data:
     \ =\n        std::conditional_t<std::is_same_v<Int, int>, long long,\n       \
     \                    std::conditional_t<std::is_same_v<Int, long long>, __int128,\
     \ void>>;\n    assert(n >= 0 and md > 0);\n    if (md == 1) return 0;\n    if\
-    \ (n == 0) return 1;\n\n    x = (x % md + md) % md;\n    Int ans = 1;\n    while\
-    \ (n > 0) {\n        if (n & 1) ans = (Long)ans * x % md;\n        x = (Long)x\
-    \ * x % md;\n        n >>= 1;\n    }\n    return ans;\n}\n"
+    \ (n == 0) return 1;\n\n    x %= md;\n    if (x < 0) x += md;\n    Int ans = 1;\n\
+    \    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x % md;\n        x\
+    \ = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n}\n"
   code: "#pragma once\n#include <cassert>\n#include <type_traits>\n\ntemplate <class\
     \ Int> Int pow_mod(Int x, long long n, Int md) {\n    using Long =\n        std::conditional_t<std::is_same_v<Int,\
     \ int>, long long,\n                           std::conditional_t<std::is_same_v<Int,\
     \ long long>, __int128, void>>;\n    assert(n >= 0 and md > 0);\n    if (md ==\
-    \ 1) return 0;\n    if (n == 0) return 1;\n\n    x = (x % md + md) % md;\n   \
-    \ Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x %\
-    \ md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n\
-    }\n"
+    \ 1) return 0;\n    if (n == 0) return 1;\n\n    x %= md;\n    if (x < 0) x +=\
+    \ md;\n    Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans\
+    \ * x % md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return\
+    \ ans;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: number/pow_mod.hpp
   requiredBy:
   - number/primitive_root.hpp
-  timestamp: '2026-04-11 14:52:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-05 15:19:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - number/test/primitive_root_1e18.test.cpp
   - number/test/primitive_root.test.cpp

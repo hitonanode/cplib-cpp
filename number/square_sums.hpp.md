@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/sqrt_mod.hpp
     title: "Square root modulo prime \uFF08\u5E73\u65B9\u5270\u4F59\uFF09"
   _extendedRequiredBy: []
@@ -19,11 +19,11 @@ data:
     \ long long>, __int128, void>>;\n\n    auto pow = [&](Int x, long long n) {\n\
     \        Int ans = 1, tmp = x;\n        while (n) {\n            if (n & 1) ans\
     \ = (Long)ans * tmp % p;\n            tmp = (Long)tmp * tmp % p, n /= 2;\n   \
-    \     }\n        return ans;\n    };\n    if (a == 0) return 0;\n\n    a = (a\
-    \ % p + p) % p;\n    if (p == 2) return a;\n    if (pow(a, (p - 1) / 2) != 1)\
-    \ return -1;\n\n    int b = 1;\n    while (pow(b, (p - 1) / 2) == 1) ++b;\n\n\
-    \    int e = 0;\n    Int m = p - 1;\n    while (m % 2 == 0) m /= 2, ++e;\n\n \
-    \   Int x = pow(a, (m - 1) / 2), y = (Long)x * x % p * a % p;\n    x = (Long)x\
+    \     }\n        return ans;\n    };\n    a %= p;\n    if (a < 0) a += p;\n  \
+    \  if (a == 0) return 0;\n    if (p == 2) return a;\n    if (pow(a, (p - 1) /\
+    \ 2) != 1) return -1;\n\n    int b = 1;\n    while (pow(b, (p - 1) / 2) == 1)\
+    \ ++b;\n\n    int e = 0;\n    Int m = p - 1;\n    while (m % 2 == 0) m /= 2, ++e;\n\
+    \n    Int x = pow(a, (m - 1) / 2), y = (Long)x * x % p * a % p;\n    x = (Long)x\
     \ * a % p;\n    Int z = pow(b, m);\n    while (y != 1) {\n        int j = 0;\n\
     \        Int t = y;\n        while (t != 1) t = (Long)t * t % p, ++j;\n      \
     \  z = pow(z, 1LL << (e - j - 1));\n        x = (Long)x * z % p;\n        z =\
@@ -47,7 +47,7 @@ data:
   isVerificationFile: false
   path: number/square_sums.hpp
   requiredBy: []
-  timestamp: '2026-03-01 20:50:35+09:00'
+  timestamp: '2026-09-05 15:19:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: number/square_sums.hpp

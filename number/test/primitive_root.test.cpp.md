@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: number/factorize.hpp
     title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/pow_mod.hpp
     title: "Modular exponentiation \uFF08\u3079\u304D\u4E57 mod\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: number/primitive_root.hpp
     title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/931
@@ -82,12 +82,12 @@ data:
     \ n, Int md) {\n    using Long =\n        std::conditional_t<std::is_same_v<Int,\
     \ int>, long long,\n                           std::conditional_t<std::is_same_v<Int,\
     \ long long>, __int128, void>>;\n    assert(n >= 0 and md > 0);\n    if (md ==\
-    \ 1) return 0;\n    if (n == 0) return 1;\n\n    x = (x % md + md) % md;\n   \
-    \ Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans * x %\
-    \ md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return ans;\n\
-    }\n#line 4 \"number/primitive_root.hpp\"\n\n// Find smallest primitive root for\
-    \ given number n \uFF08\u6700\u5C0F\u306E\u539F\u59CB\u6839\u63A2\u7D22\uFF09\n\
-    // n must be 2 / 4 / p^k / 2p^k (p: odd prime, k > 0)\n// (https://en.wikipedia.org/wiki/Primitive_root_modulo_n)\n\
+    \ 1) return 0;\n    if (n == 0) return 1;\n\n    x %= md;\n    if (x < 0) x +=\
+    \ md;\n    Int ans = 1;\n    while (n > 0) {\n        if (n & 1) ans = (Long)ans\
+    \ * x % md;\n        x = (Long)x * x % md;\n        n >>= 1;\n    }\n    return\
+    \ ans;\n}\n#line 4 \"number/primitive_root.hpp\"\n\n// Find smallest primitive\
+    \ root for given number n \uFF08\u6700\u5C0F\u306E\u539F\u59CB\u6839\u63A2\u7D22\
+    \uFF09\n// n must be 2 / 4 / p^k / 2p^k (p: odd prime, k > 0)\n// (https://en.wikipedia.org/wiki/Primitive_root_modulo_n)\n\
     //\n// Complexity: maybe O(sqrt(n)), if n is\n// prime Algorithm: http://kirika-comp.hatenablog.com/entry/2018/03/12/210446\
     \ Verified:\n// - https://yukicoder.me/submissions/405938\n// - https://judge.yosupo.jp/problem/primitive_root\n\
     // - SRM 840 Div.1 900 https://community.topcoder.com/stat?c=problem_statement&pm=17877\n\
@@ -295,8 +295,8 @@ data:
   isVerificationFile: true
   path: number/test/primitive_root.test.cpp
   requiredBy: []
-  timestamp: '2026-04-11 14:52:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-05 15:19:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: number/test/primitive_root.test.cpp
 layout: document

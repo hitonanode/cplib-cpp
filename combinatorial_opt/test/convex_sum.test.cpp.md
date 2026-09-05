@@ -21,7 +21,8 @@ data:
     \ ub\nstruct Quadratic {\n    using Int = long long;\n    Int a, b, c, lb, ub;\n\
     \    Quadratic(Int a, Int b, Int c, Int lb, Int ub) : a(a), b(b), c(c), lb(lb),\
     \ ub(ub) {}\n    Int slope(Int s) const noexcept {\n        if (a == 0) return\
-    \ b <= s ? ub : lb;\n        auto ret = (s + a - b) / (a * 2);\n        return\
+    \ b <= s ? ub : lb;\n        const Int num = s + a - b, den = a * 2;\n       \
+    \ auto ret = num / den;\n        if (num < 0 and num % den) --ret;\n        return\
     \ ret > ub ? ub : ret < lb ? lb : ret;\n    }\n    Int eval(Int x) const noexcept\
     \ { return (a * x + b) * x + c; }\n    // f(x) - f(x - 1)\n    Int next_cost(Int\
     \ x) const noexcept { return 2 * a * x - a + b; }\n};\n\n// x^3 - ax, x \\geq\
@@ -81,7 +82,7 @@ data:
   isVerificationFile: true
   path: combinatorial_opt/test/convex_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2026-09-05 15:17:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/convex_sum.test.cpp
