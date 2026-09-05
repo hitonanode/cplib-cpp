@@ -1,5 +1,4 @@
 #pragma once
-#include <array>
 #include <cassert>
 #include <iostream>
 #include <list>
@@ -52,9 +51,10 @@ template <typename Tp> struct fibonacci_heap {
     bool empty() const noexcept { return sz == 0; }
     int size() const noexcept { return sz; }
 
-    std::array<Node *, 30> _arr;
+    std::vector<Node *> _arr;
     void _fmerge(Node *ptr) {
         int d = ptr->deg;
+        if (d >= int(_arr.size())) _arr.resize(d + 1, nullptr);
         if (_arr[d] == nullptr)
             _arr[d] = ptr;
         else {
@@ -74,7 +74,7 @@ template <typename Tp> struct fibonacci_heap {
         }
     }
     void _consolidate() {
-        _arr.fill(nullptr);
+        _arr.assign(1, nullptr);
         for (auto ptr : roots)
             if (ptr != nullptr) {
                 if (ptr->deg < 0)
