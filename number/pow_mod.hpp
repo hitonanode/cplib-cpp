@@ -10,7 +10,8 @@ template <class Int> Int pow_mod(Int x, long long n, Int md) {
     if (md == 1) return 0;
     if (n == 0) return 1;
 
-    x = (x % md + md) % md;
+    x %= md;
+    if (x < 0) x += md;
     Int ans = 1;
     while (n > 0) {
         if (n & 1) ans = (Long)ans * x % md;
