@@ -125,12 +125,14 @@ template <typename Tp> struct fibonacci_heap {
     }
 
     void _deldfs(Node *now) {
-        while (now != nullptr) {
+        if (now == nullptr) return;
+        Node *start = now;
+        do {
             if (now->child != nullptr) _deldfs(now->child);
             Node *nxt = now->right;
             delete now;
             now = nxt;
-        }
+        } while (now != start);
     }
     void clear() {
         for (auto root : roots) _deldfs(root);
