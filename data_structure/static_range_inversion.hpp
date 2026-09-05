@@ -71,6 +71,7 @@ template <typename T> struct StaticRangeInversion {
     }
     long long get(int l, int r) const {
         assert(l >= 0 and l <= N and r >= 0 and r <= N and l <= r);
+        if (l == r) return 0;
         const int lb = (l + bs - 1) / bs, rb = (r == N ? nb_bc : r / bs) - 1;
         long long ret = 0;
         if (l / bs == (r - 1) / bs) {
