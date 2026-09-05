@@ -79,7 +79,7 @@ int ccw(const Point2d<T_P> &a, const Point2d<T_P> &b, const Point2d<T_P> &c) {
     if (v1.det(v2) > Point2d<T_P>::EPS) return 1;   // 左折
     if (v1.det(v2) < -Point2d<T_P>::EPS) return -1; // 右折
     if (v1.dot(v2) < -Point2d<T_P>::EPS) return 2;  // c-a-b
-    if (v1.norm() < v2.norm()) return -2;           // a-b-c
+    if (v1.norm2() < v2.norm2()) return -2;         // a-b-c
     return 0;                                       // a-c-b
 }
 
