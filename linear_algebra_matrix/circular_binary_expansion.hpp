@@ -31,6 +31,6 @@ std::pair<matrix<MODINT>, matrix<MODINT>> circular_binary_expansion(int lgdim) {
     }
     for (int i = 0; i < D; i++) {
         for (int j = 0; j < D; j++) transinv[i][j] *= invD;
-        return {trans, transinv};
     }
+    return {trans, transinv};
 }
