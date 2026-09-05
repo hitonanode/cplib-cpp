@@ -67,9 +67,10 @@ std::vector<Tfield> monomial_mod_polynomial(long long N, const std::vector<Tfiel
     assert(!f_reversed.empty() and f_reversed[0] == 1);
     int K = f_reversed.size() - 1;
     if (!K) return {};
-    int D = 64 - __builtin_clzll(N);
     std::vector<Tfield> ret(K, 0);
     ret[0] = 1;
+    if (N == 0) return ret;
+    int D = 64 - __builtin_clzll(N);
     auto self_conv = [](std::vector<Tfield> x) -> std::vector<Tfield> {
         int d = x.size();
         std::vector<Tfield> ret(d * 2 - 1);
