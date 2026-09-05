@@ -10,6 +10,24 @@
 // Verified: https://judge.yosupo.jp/submission/1864 / https://yukicoder.me/problems/no/382
 // Reference: https://www.slideshare.net/wata_orz/ss-12131479
 template <int BS = 64> struct maximum_independent_set {
+    static int find_first(const std::bitset<BS> &bits) {
+#ifdef __GLIBCXX__
+        return bits._Find_first();
+#else
+        for (int i = 0; i < BS; i++)
+            if (bits[i]) return i;
+        return BS;
+#endif
+    }
+    static int find_next(const std::bitset<BS> &bits, int pos) {
+#ifdef __GLIBCXX__
+        return bits._Find_next(pos);
+#else
+        for (int i = pos + 1; i < BS; i++)
+            if (bits[i]) return i;
+        return BS;
+#endif
+    }
     std::vector<std::bitset<BS>> conn;
     int V;               // # of vertices
     int nret;            // Largest possible size of independent set
@@ -22,13 +40,13 @@ template <int BS = 64> struct maximum_independent_set {
         std::stack<int> st;
         while (retry) {
             retry = false;
-            for (int i = _avail._Find_first(); i < V; i = _avail._Find_next(i)) {
+            for (int i = find_first(_avail); i < V; i = find_next(_avail, i)) {
                 int nb = (_avail & conn[i]).count();
                 if (nb <= 1) {
                     st.emplace(i), _avail.reset(i), _tmp_state.set(i);
                     retry = true;
                     if (nb == 1) {
-                        int j = (_avail & conn[i])._Find_first();
+                        int j = find_first(_avail & conn[i]);
                         st.emplace(j), _avail.reset(j);
                     }
                 }
@@ -39,7 +57,7 @@ template <int BS = 64> struct maximum_independent_set {
         if (t > nret) nret = t, ret = _tmp_state;
 
         int d = -1, n = -1;
-        for (int i = _avail._Find_first(); i < V; i = _avail._Find_next(i)) {
+        for (int i = find_first(_avail); i < V; i = find_next(_avail, i)) {
             int c = (_avail & conn[i]).count();
             if (c > d) d = c, n = i;
         }
