@@ -63,6 +63,7 @@ void fft(int n, std::vector<cmplx> &a) {
 // retval[i] = \sum_j a[j] b[i - j]
 template <typename MODINT>
 std::vector<MODINT> convolution_mod(std::vector<MODINT> a, std::vector<MODINT> b) {
+    if (a.empty() or b.empty()) return {};
     int need = int(a.size() + b.size()) - 1;
     int nbase = 0;
     while ((1 << nbase) < need) nbase++;
