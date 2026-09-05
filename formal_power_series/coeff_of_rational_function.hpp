@@ -12,6 +12,7 @@ Tp coefficient_of_rational_function(long long N, std::vector<Tp> num, std::vecto
     assert(N >= 0);
     while (den.size() and den.back() == 0) den.pop_back();
     assert(den.size());
+    if (num.empty()) return Tp(0);
     int h = 0;
     while (den[h] == 0) h++;
     N += h;
