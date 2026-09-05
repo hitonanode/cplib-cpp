@@ -4,7 +4,7 @@
 // CUT begin
 template <typename Int> Int binary_gcd(Int x_, Int y_) {
     using Uint = std::make_unsigned_t<Int>;
-    auto magnitude = [](Int v) {
+    auto magnitude = [](Int v) -> Uint {
         Uint u = static_cast<Uint>(v);
         return v < 0 ? Uint(0) - u : u;
     };

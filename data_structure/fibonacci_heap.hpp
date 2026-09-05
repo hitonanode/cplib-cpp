@@ -2,6 +2,8 @@
 #include <cassert>
 #include <iostream>
 #include <list>
+#include <utility>
+#include <vector>
 
 // CUT begin
 // Fibonacci heap
@@ -200,8 +202,6 @@ template <typename Tp> struct fibonacci_heap {
     }
 };
 
-#include <utility>
-#include <vector>
 template <typename Tp> struct heap {
     using P = std::pair<Tp, int>;
     fibonacci_heap<P> _heap;

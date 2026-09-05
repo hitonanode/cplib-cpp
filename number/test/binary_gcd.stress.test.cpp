@@ -18,6 +18,8 @@ template <typename Int> void test_binary_gcd(Int lo, Int hi) {
 }
 
 int main() {
+    test_binary_gcd<signed char>(-127, 126);
+    test_binary_gcd<short>(-1000, 1000);
     test_binary_gcd<int>(-1000, 1000);
     test_binary_gcd<unsigned int>(0, 2000);
     test_binary_gcd<long long>(-1000, 1000);
