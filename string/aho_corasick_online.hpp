@@ -1,5 +1,6 @@
 #pragma once
 #include "aho_corasick.hpp"
+#include <bit>
 #include <string>
 #include <vector>
 
@@ -17,7 +18,7 @@ struct OnlineAhoCorasick {
 
     // O(lg(n_keywords) |keyword|) amortized
     void add(const std::string &keyword) {
-        int pos = __builtin_clz(~n_keywords);
+        int pos = std::countr_one(static_cast<unsigned>(n_keywords));
         keywords.push_back(keyword), kwd_ids[pos].push_back(n_keywords);
         automata[pos].add(keyword);
         n_keywords++;
