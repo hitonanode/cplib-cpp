@@ -101,7 +101,7 @@ std::vector<MODINT> convolution_mod(std::vector<MODINT> a, std::vector<MODINT> b
     }
     fft(sz, fa);
     fft(sz, fb);
-    std::vector<MODINT> ret(sz);
+    std::vector<MODINT> ret(need);
     long long bp = MODINT(2).pow(D_FFT).val();
     long long cp = MODINT(2).pow(D_FFT * 2).val();
     for (int i = 0; i < need; i++) {
