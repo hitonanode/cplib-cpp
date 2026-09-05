@@ -9,8 +9,17 @@
 // Verified: CF102156D 2019 Petrozavodsk Winter Camp, Yandex Cup D. Pick Your Own Nim
 template <int VDIM> class BinaryMatroid {
     using Element = int;
+    static int find_first(const std::bitset<VDIM> &bits) {
+#ifdef __GLIBCXX__
+        return bits._Find_first();
+#else
+        for (int i = 0; i < VDIM; i++)
+            if (bits[i]) return i;
+        return VDIM;
+#endif
+    }
     static void chxormin(std::bitset<VDIM> &l, const std::bitset<VDIM> &r) {
-        int i = r._Find_first();
+        int i = find_first(r);
         if (i < VDIM and l[i]) l ^= r;
     }
     std::vector<std::bitset<VDIM>> mat;
