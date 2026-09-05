@@ -92,6 +92,7 @@ template <typename Weight = long long> struct MinimumSpanningArborescence {
         void pop() {
             data[root].push();
             root = _meld(data[root].r, data[root].l);
+            sz--;
         }
         int size() const { return sz; }
         bool empty() const { return sz == 0; }
