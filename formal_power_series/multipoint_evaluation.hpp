@@ -13,7 +13,7 @@ template <typename Tfield> struct MultipointEvaluation {
     using polynomial = FormalPowerSeries<Tfield>;
     std::vector<polynomial> segtree;
     MultipointEvaluation(const std::vector<Tfield> &xs) : nx(xs.size()) {
-        segtree.resize(nx * 2 - 1);
+        segtree.resize(nx ? nx * 2 - 1 : 0);
         for (int i = 0; i < nx; i++) { segtree[nx - 1 + i] = {-xs[i], 1}; }
         for (int i = nx - 2; i >= 0; i--) { segtree[i] = segtree[2 * i + 1] * segtree[2 * i + 2]; }
     }
@@ -29,6 +29,7 @@ template <typename Tfield> struct MultipointEvaluation {
         _eval_rec(f, 2 * now + 2);
     }
     std::vector<Tfield> evaluate_polynomial(const polynomial &f) {
+        if (!nx) return {};
         ret.resize(nx);
         _eval_rec(f, 0);
         return ret;
@@ -47,6 +48,7 @@ template <typename Tfield> struct MultipointEvaluation {
     }
     std::vector<Tfield> polynomial_interpolation(std::vector<Tfield> ys) {
         assert(nx == int(ys.size()));
+        if (!nx) return {};
         if (_interpolate_coeffs.empty()) {
             _interpolate_coeffs = evaluate_polynomial(segtree[0].differential());
             for (auto &x : _interpolate_coeffs) x = x.inv();
