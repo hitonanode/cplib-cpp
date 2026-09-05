@@ -103,7 +103,9 @@ struct Sieve {
         assert(K >= 0);
         if (K == 0) return std::vector<MODINT>(nmax + 1, 1);
         std::vector<MODINT> ret(nmax + 1);
-        ret[0] = 0, ret[1] = 1;
+        ret[0] = 0;
+        if (nmax == 0) return ret;
+        ret[1] = 1;
         for (int n = 2; n <= nmax; n++) {
             if (min_factor[n] == n) {
                 ret[n] = MODINT(n).pow(K);
