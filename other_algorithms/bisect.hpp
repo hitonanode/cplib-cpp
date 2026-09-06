@@ -2,6 +2,7 @@
 #include <bit>
 #include <functional>
 #include <numeric>
+#include <type_traits>
 
 // Calculate next point to check in floating point "binary" search
 double bisect_mid_fp(double a, double b) {
@@ -29,7 +30,12 @@ template <class T> auto bisect(T ok, T ng, const std::function<bool(T)> &f, T ab
     };
 
     while (true) {
-        T mid = std::is_floating_point<T>::value ? bisect_mid_fp(ok, ng) : std::midpoint(ok, ng);
+        T mid;
+        if constexpr (std::is_floating_point<T>::value) {
+            mid = bisect_mid_fp(ok, ng);
+        } else {
+            mid = std::midpoint(ok, ng);
+        }
         if (mid == ok or mid == ng) break;
         (f(mid) ? ok : ng) = mid;
         if (ok - ng <= abs_tol and ng - ok <= abs_tol) break;
