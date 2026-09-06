@@ -30,9 +30,9 @@ struct Line {
     }
     bool operator<(const Line &r) const {
         if (b == T_MIN) {
-            return r.rp.first == T_MIN ? true : a * r.rp.second < r.rp.first;
+            return r.rp.first == T_MIN ? true : __int128(a) * r.rp.second < r.rp.first;
         } else if (r.b == T_MIN) {
-            return rp.first == T_MIN ? false : !(r.a * rp.second < rp.first);
+            return rp.first == T_MIN ? false : !(__int128(r.a) * rp.second < rp.first);
         } else {
             return a < r.a;
         }
