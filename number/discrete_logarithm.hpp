@@ -53,6 +53,9 @@ template <class S, class F, class Container>
 long long
 DiscreteLogarithm(const F &f, const S &s, const S &t, const std::function<S(F, S)> &mapping,
                   const std::function<F(F, F)> &composition, long long max_search) {
+    if (s == t) return 0;
+    if (max_search <= 0) return -1;
+
     const int giant_stride = ceil(sqrtl(max_search));
     F giant = f, tmp = f;
     for (int n = giant_stride - 1; n; n >>= 1) {
