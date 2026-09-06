@@ -8,11 +8,12 @@
 double bisect_mid_fp(double a, double b) {
     auto encode = [&](double x) -> unsigned long long {
         auto tmp = std::bit_cast<unsigned long long>(x);
-        return x >= 0 ? (tmp ^ (1ULL << 63)) : ~tmp;
+        // Give -0.0 and +0.0 the same code, as they compare equal in bisect().
+        return (tmp >> 63) ? (0ULL - tmp) : (tmp ^ (1ULL << 63));
     };
 
     auto decode = [&](unsigned long long x) -> double {
-        auto tmp = (x >> 63) ? (x ^ (1ULL << 63)) : ~x;
+        auto tmp = (x >> 63) ? (x ^ (1ULL << 63)) : (0ULL - x);
         return std::bit_cast<double>(tmp);
     };
 
