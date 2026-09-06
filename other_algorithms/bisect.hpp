@@ -2,16 +2,18 @@
 #include <bit>
 #include <functional>
 #include <numeric>
+#include <type_traits>
 
 // Calculate next point to check in floating point "binary" search
 double bisect_mid_fp(double a, double b) {
     auto encode = [&](double x) -> unsigned long long {
         auto tmp = std::bit_cast<unsigned long long>(x);
-        return x >= 0 ? (tmp ^ (1ULL << 63)) : ~tmp;
+        // Give -0.0 and +0.0 the same code, as they compare equal in bisect().
+        return (tmp >> 63) ? (0ULL - tmp) : (tmp ^ (1ULL << 63));
     };
 
     auto decode = [&](unsigned long long x) -> double {
-        auto tmp = (x >> 63) ? (x ^ (1ULL << 63)) : ~x;
+        auto tmp = (x >> 63) ? (x ^ (1ULL << 63)) : (0ULL - x);
         return std::bit_cast<double>(tmp);
     };
 
@@ -29,7 +31,12 @@ template <class T> auto bisect(T ok, T ng, const std::function<bool(T)> &f, T ab
     };
 
     while (true) {
-        T mid = std::is_floating_point<T>::value ? bisect_mid_fp(ok, ng) : std::midpoint(ok, ng);
+        T mid;
+        if constexpr (std::is_floating_point<T>::value) {
+            mid = bisect_mid_fp(ok, ng);
+        } else {
+            mid = std::midpoint(ok, ng);
+        }
         if (mid == ok or mid == ng) break;
         (f(mid) ? ok : ng) = mid;
         if (ok - ng <= abs_tol and ng - ok <= abs_tol) break;

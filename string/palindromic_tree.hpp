@@ -24,7 +24,7 @@ public:
         return (it == children.end()) ? -1 : it->second;
     }
 
-    void set_child(int c, int nxt_idx) { children[c] = nxt_idx; }
+    void set_child(Key c, int nxt_idx) { children[c] = nxt_idx; }
 
     template <class OStream> friend OStream &operator<<(OStream &os, const Node &node) {
         os << "Node(suffix_link=" << node.suffix_link() << ", length=" << node.length()
