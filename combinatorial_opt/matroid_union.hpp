@@ -1,5 +1,4 @@
 #pragma once
-#include "../graph/shortest_path.hpp"
 #include <cassert>
 #include <utility>
 #include <vector>
@@ -16,37 +15,54 @@ template <class M1, class M2, class State1, class State2, class T = int>
 bool augment_union_matroid(M1 &matroid1, M2 &matroid2, State1 &I1, State2 &I2,
                            const std::vector<T> &weights) {
     const int M = matroid1.size();
-    const int gs = M, gt = M + 1;
-    shortest_path<T> sssp(M + 2);
+    const int gt = M;
+    std::vector<std::vector<int>> rev(M + 1);
     std::vector<int> color(M, -1);
     matroid1.set(I1);
     matroid2.set(I2);
     for (int e = 0; e < M; e++) {
-        if (!I1[e] and !I2[e]) sssp.add_edge(gs, e, weights.size() ? weights[e] : 0);
         if (!I1[e]) {
             auto c = matroid1.circuit(e);
-            if (c.empty()) sssp.add_edge(e, gt, 0), color[e] = 0;
+            if (c.empty()) rev[gt].push_back(e), color[e] = 0;
             for (int f : c) {
-                if (f != e) sssp.add_edge(e, f, 1);
+                if (f != e) rev[f].push_back(e);
             }
         }
         if (!I2[e]) {
             auto c = matroid2.circuit(e);
-            if (c.empty()) sssp.add_edge(e, gt, 0), color[e] = 1;
+            if (c.empty()) rev[gt].push_back(e), color[e] = 1;
             for (int f : c) {
-                if (f != e) sssp.add_edge(e, f, 1);
+                if (f != e) rev[f].push_back(e);
             }
         }
     }
-    sssp.solve(gs, gt);
-    auto aug_path = sssp.retrieve_path(gt);
-    if (aug_path.empty()) return false;
-    assert(aug_path.size() >= 3);
+    // Find a shortest exchange path to gt from every augmentable element.
+    std::vector<int> next(M + 1, -1), q{gt};
+    next[gt] = gt;
+    for (int i = 0; i < int(q.size()); ++i) {
+        for (int e : rev[q[i]]) {
+            if (next[e] >= 0) continue;
+            next[e] = q[i];
+            q.push_back(e);
+        }
+    }
+
+    // Minimize the added weight independently of the number of exchanges.
+    int start = -1;
+    for (int e = 0; e < M; ++e) {
+        if (I1[e] or I2[e] or next[e] < 0) continue;
+        if (start < 0 or (!weights.empty() and weights[e] < weights[start])) start = e;
+    }
+    if (start < 0) return false;
+
+    std::vector<int> aug_path;
+    for (int e = start; e != gt; e = next[e]) aug_path.push_back(e);
     int c0 = -1;
-    if (I1[aug_path[aug_path.size() - 2]]) c0 = 1;
-    if (I2[aug_path[aug_path.size() - 2]]) c0 = 0;
-    if (c0 < 0) c0 = color[aug_path[aug_path.size() - 2]];
-    for (int k = int(aug_path.size()) - 2, e = aug_path[k]; k; e = aug_path[--k]) {
+    if (I1[aug_path.back()]) c0 = 1;
+    if (I2[aug_path.back()]) c0 = 0;
+    if (c0 < 0) c0 = color[aug_path.back()];
+    for (int k = int(aug_path.size()) - 1; k >= 0; --k) {
+        int e = aug_path[k];
         (c0 ? I2 : I1)[e] = 1, (c0 ? I1 : I2)[e] = 0;
         c0 ^= 1;
     }
