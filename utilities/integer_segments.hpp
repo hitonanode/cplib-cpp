@@ -19,7 +19,10 @@ template <typename Int> struct integer_segments {
         return *itr;
     }
 
-    bool contains(Int x) const { return lower_bound(x) == x; }
+    bool contains(Int x) const {
+        auto itr = mp.upper_bound(x);
+        return itr != mp.begin() and std::prev(itr)->second >= x;
+    }
 
     // Find the min. y in the set that satisfies x <= y
     Int lower_bound(Int x) const {
