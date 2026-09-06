@@ -296,14 +296,16 @@ public:
         if (upper_bound <= 0) return std::nullopt;
 
         const int n = index_range_freq(l, r, upper_bound);
-        return n == 0 ? std::nullopt : index_kth_smallest(l, r, n - 1);
+        if (n == 0) return std::nullopt;
+        return index_kth_smallest(l, r, n - 1);
     }
 
     // max y s.t. x in [xl, xr), y < yr
     std::optional<Int> prev_value(Int xl, Int xr, Int yr) const {
         const int l = to_index_x(xl), r = to_index_x(xr), ub = to_index_y(yr);
         const auto idx = index_prev_value(l, r, ub);
-        return idx ? distinct_ys.at(*idx) : std::nullopt;
+        if (!idx) return std::nullopt;
+        return distinct_ys.at(*idx);
     }
 
     // min v_i s.t. i in [l, r), v_i >= lower_bound
@@ -312,14 +314,16 @@ public:
         assert(is_built());
         if (lower_bound >= (int)distinct_ys.size()) return std::nullopt;
         const int n = index_range_freq(l, r, lower_bound);
-        return n >= (r - l) ? std::nullopt : index_kth_smallest(l, r, n);
+        if (n >= r - l) return std::nullopt;
+        return index_kth_smallest(l, r, n);
     }
 
     // min y s.t. x in [xl, xr), y >= yl
     std::optional<Int> next_value(Int l, Int r, Int yl) const {
         const int xl = to_index_x(l), xr = to_index_x(r), yl_idx = to_index_y(yl);
         const auto idx = index_next_value(xl, xr, yl_idx);
-        return idx ? distinct_ys.at(*idx) : std::nullopt;
+        if (!idx) return std::nullopt;
+        return distinct_ys.at(*idx);
     }
 };
 /* Sample usage:
