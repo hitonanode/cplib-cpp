@@ -198,19 +198,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/arithmetic_function_totient.test.cpp
     title: number/test/arithmetic_function_totient.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/gcd_convolution.test.cpp
     title: number/test/gcd_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/lcm_convolution.test.cpp
     title: number/test/lcm_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/multiple_moebius.yuki1627.test.cpp
     title: number/test/multiple_moebius.yuki1627.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/multiple_moebius.yuki886.test.cpp
     title: number/test/multiple_moebius.yuki886.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
   - icon: ':x:'
@@ -225,13 +225,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: other_algorithms/test/north_east_lattice_paths.test.cpp
     title: other_algorithms/test/north_east_lattice_paths.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/acl_range-affine-range-sum.test.cpp
     title: segmenttree/test/acl_range-affine-range-sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
   - icon: ':heavy_check_mark:'

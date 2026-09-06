@@ -24,13 +24,13 @@ data:
   - icon: ':x:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/montmort_number_mod.test.cpp
     title: number/test/montmort_number_mod.test.cpp
   - icon: ':x:'
     path: number/test/sieve.stress.test.cpp
     title: number/test/sieve.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/sqrt_modint_runtime.test.cpp
     title: number/test/sqrt_modint_runtime.test.cpp
   - icon: ':x:'

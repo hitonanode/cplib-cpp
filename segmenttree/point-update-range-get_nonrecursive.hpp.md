@@ -3,10 +3,10 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/countandsumlessthan.test.cpp
     title: segmenttree/test/countandsumlessthan.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
     title: tree/test/vertex-set-path-composite.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\n\
@@ -195,7 +195,7 @@ data:
   path: segmenttree/point-update-range-get_nonrecursive.hpp
   requiredBy: []
   timestamp: '2026-09-05 15:20:20+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - segmenttree/test/countandsumlessthan.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp

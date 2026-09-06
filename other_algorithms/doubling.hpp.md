@@ -18,11 +18,32 @@ data:
     struct BinaryLifting {\n    int N, lgD;\n\n    bool is_valid(int idx) const {\
     \ return 0 <= idx and idx < N; }\n\n    std::vector<std::vector<int>> mat;\n \
     \   BinaryLifting() : N(0), lgD(0) {}\n    BinaryLifting(const std::vector<int>\
-    \ &to, int lgd = 0) : N(to.size()), lgD(lgd) {\n        while ((1LL << lgD) <\
-    \ N) lgD++;\n        mat.assign(lgD, std::vector<int>(N));\n        mat[0] = to;\n\
-    \n        for (int d = 0; d < lgD - 1; d++) {\n            for (int i = 0; i <\
-    \ N; i++) {\n                mat[d + 1][i] = mat[d][is_valid(mat[d][i]) ? mat[d][i]\
-    \ : i];\n            }\n        }\n    }\n\n    int kth_next(int now, long long\
+    \ &to, int lgd = 0) : N(to.size()), lgD(lgd) {\n        while (lgD == 0 or (1LL\
+    \ << lgD) < N) lgD++;\n        mat.assign(lgD, std::vector<int>(N));\n       \
+    \ mat[0] = to;\n\n        for (int d = 0; d < lgD - 1; d++) {\n            for\
+    \ (int i = 0; i < N; i++) {\n                mat[d + 1][i] = mat[d][is_valid(mat[d][i])\
+    \ ? mat[d][i] : i];\n            }\n        }\n    }\n\n    int kth_next(int now,\
+    \ long long k) const {\n        assert(k >= 0);\n        assert(k < (1LL << lgD));\n\
+    \        for (int d = 0; k and is_valid(now); d++, k >>= 1) {\n            if\
+    \ (k & 1) now = mat[d][now];\n        }\n        return now;\n    }\n\n    //\
+    \ Distance from l to [r, \\infty)\n    // Requirement: mat[0][i] >= r (i = r,\
+    \ r + 1, ...) (monotone)\n    int distance(int l, int r) const {\n        if (l\
+    \ >= r) return 0;\n        int ret = 0;\n        for (int d = lgD - 1; d >= 0;\
+    \ d--) {\n            if (mat[d][l] < r and is_valid(mat[d][l])) ret += 1 << d,\
+    \ l = mat[d][l];\n        }\n\n        if (!is_valid(mat[0][l]) or mat[0][l] >=\
+    \ r) {\n            return ret + 1;\n        } else {\n            return -1;\
+    \ // Unable to reach\n        }\n    }\n};\n"
+  code: "#pragma once\n#include <cassert>\n#include <vector>\n\n// Binary lifting\
+    \ / `Doubling`\n// Complexity: O(NlogN) precalculation / O(logN) per query\n//\
+    \ https://atcoder.jp/contests/arc060/submissions/7039451\nstruct BinaryLifting\
+    \ {\n    int N, lgD;\n\n    bool is_valid(int idx) const { return 0 <= idx and\
+    \ idx < N; }\n\n    std::vector<std::vector<int>> mat;\n    BinaryLifting() :\
+    \ N(0), lgD(0) {}\n    BinaryLifting(const std::vector<int> &to, int lgd = 0)\
+    \ : N(to.size()), lgD(lgd) {\n        while (lgD == 0 or (1LL << lgD) < N) lgD++;\n\
+    \        mat.assign(lgD, std::vector<int>(N));\n        mat[0] = to;\n\n     \
+    \   for (int d = 0; d < lgD - 1; d++) {\n            for (int i = 0; i < N; i++)\
+    \ {\n                mat[d + 1][i] = mat[d][is_valid(mat[d][i]) ? mat[d][i] :\
+    \ i];\n            }\n        }\n    }\n\n    int kth_next(int now, long long\
     \ k) const {\n        assert(k >= 0);\n        assert(k < (1LL << lgD));\n   \
     \     for (int d = 0; k and is_valid(now); d++, k >>= 1) {\n            if (k\
     \ & 1) now = mat[d][now];\n        }\n        return now;\n    }\n\n    // Distance\
@@ -33,32 +54,11 @@ data:
     \        }\n\n        if (!is_valid(mat[0][l]) or mat[0][l] >= r) {\n        \
     \    return ret + 1;\n        } else {\n            return -1; // Unable to reach\n\
     \        }\n    }\n};\n"
-  code: "#pragma once\n#include <cassert>\n#include <vector>\n\n// Binary lifting\
-    \ / `Doubling`\n// Complexity: O(NlogN) precalculation / O(logN) per query\n//\
-    \ https://atcoder.jp/contests/arc060/submissions/7039451\nstruct BinaryLifting\
-    \ {\n    int N, lgD;\n\n    bool is_valid(int idx) const { return 0 <= idx and\
-    \ idx < N; }\n\n    std::vector<std::vector<int>> mat;\n    BinaryLifting() :\
-    \ N(0), lgD(0) {}\n    BinaryLifting(const std::vector<int> &to, int lgd = 0)\
-    \ : N(to.size()), lgD(lgd) {\n        while ((1LL << lgD) < N) lgD++;\n      \
-    \  mat.assign(lgD, std::vector<int>(N));\n        mat[0] = to;\n\n        for\
-    \ (int d = 0; d < lgD - 1; d++) {\n            for (int i = 0; i < N; i++) {\n\
-    \                mat[d + 1][i] = mat[d][is_valid(mat[d][i]) ? mat[d][i] : i];\n\
-    \            }\n        }\n    }\n\n    int kth_next(int now, long long k) const\
-    \ {\n        assert(k >= 0);\n        assert(k < (1LL << lgD));\n        for (int\
-    \ d = 0; k and is_valid(now); d++, k >>= 1) {\n            if (k & 1) now = mat[d][now];\n\
-    \        }\n        return now;\n    }\n\n    // Distance from l to [r, \\infty)\n\
-    \    // Requirement: mat[0][i] >= r (i = r, r + 1, ...) (monotone)\n    int distance(int\
-    \ l, int r) const {\n        if (l >= r) return 0;\n        int ret = 0;\n   \
-    \     for (int d = lgD - 1; d >= 0; d--) {\n            if (mat[d][l] < r and\
-    \ is_valid(mat[d][l])) ret += 1 << d, l = mat[d][l];\n        }\n\n        if\
-    \ (!is_valid(mat[0][l]) or mat[0][l] >= r) {\n            return ret + 1;\n  \
-    \      } else {\n            return -1; // Unable to reach\n        }\n    }\n\
-    };\n"
   dependsOn: []
   isVerificationFile: false
   path: other_algorithms/doubling.hpp
   requiredBy: []
-  timestamp: '2025-10-07 09:40:50+09:00'
+  timestamp: '2026-09-06 11:24:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_algorithms/test/doubling.yuki3305.test.cpp

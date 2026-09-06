@@ -4,20 +4,20 @@ data:
   - icon: ':question:'
     path: number/factorize.hpp
     title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/pow_mod.hpp
     title: "Modular exponentiation \uFF08\u3079\u304D\u4E57 mod\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root_1e18.test.cpp
     title: number/test/primitive_root_1e18.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://kirika-comp.hatenablog.com/entry/2018/03/12/210446
@@ -123,7 +123,7 @@ data:
   path: number/primitive_root.hpp
   requiredBy: []
   timestamp: '2026-09-05 15:19:44+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/primitive_root_1e18.test.cpp
   - number/test/primitive_root.test.cpp

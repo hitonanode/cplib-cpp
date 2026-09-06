@@ -2,20 +2,20 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other_algorithms/permutation_tree.hpp
     title: "Common interval decomposition tree / \"Permutation tree\" \uFF08\u9806\
       \u5217\u6728\uFF09"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other_algorithms/test/permutation_tree.test.cpp
     title: other_algorithms/test/permutation_tree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segmenttree/range-add-range-min.hpp\"\n#include <algorithm>\n\
@@ -90,7 +90,7 @@ data:
   requiredBy:
   - other_algorithms/permutation_tree.hpp
   timestamp: '2026-09-05 15:20:25+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_algorithms/test/permutation_tree.yuki1720.test.cpp
   - other_algorithms/test/permutation_tree.test.cpp

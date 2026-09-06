@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
-  - icon: ':x:'
+  - icon: ':question:'
     path: number/zeta_moebius_transform.hpp
     title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   _extendedRequiredBy: []

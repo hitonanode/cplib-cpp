@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/linalg_longlong.hpp
     title: linear_algebra_matrix/linalg_longlong.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: number/combination.hpp
     title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
       \u7406\u306E\u62E1\u5F35\uFF09"
@@ -25,7 +25,7 @@ data:
   - icon: ':x:'
     path: number/test/combination.stress.test.cpp
     title: number/test/combination.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/combination.test.cpp
     title: number/test/combination.test.cpp
   - icon: ':heavy_check_mark:'

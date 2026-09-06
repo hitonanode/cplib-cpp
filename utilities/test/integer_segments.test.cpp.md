@@ -23,12 +23,13 @@ data:
     \n    // Get the range [l, r] that satisfies l <= x <= r, or [INVALID, INVALID]\
     \ otherwise\n    std::pair<Int, Int> get(Int x) const {\n        auto itr = mp.upper_bound(x);\n\
     \        if (itr == mp.begin() or (--itr)->second < x) return std::make_pair(INVALID,\
-    \ INVALID);\n        return *itr;\n    }\n\n    bool contains(Int x) const { return\
-    \ lower_bound(x) == x; }\n\n    // Find the min. y in the set that satisfies x\
-    \ <= y\n    Int lower_bound(Int x) const {\n        auto itr = mp.upper_bound(x);\n\
-    \        if (itr != mp.begin() and std::prev(itr)->second >= x) return x;\n  \
-    \      if (itr != mp.end()) return itr->first;\n        return INVALID;\n    }\n\
-    \n    // Find the max. y in the set that satisfies y <= x\n    Int inv_lower_bound(Int\
+    \ INVALID);\n        return *itr;\n    }\n\n    bool contains(Int x) const {\n\
+    \        auto itr = mp.upper_bound(x);\n        return itr != mp.begin() and std::prev(itr)->second\
+    \ >= x;\n    }\n\n    // Find the min. y in the set that satisfies x <= y\n  \
+    \  Int lower_bound(Int x) const {\n        auto itr = mp.upper_bound(x);\n   \
+    \     if (itr != mp.begin() and std::prev(itr)->second >= x) return x;\n     \
+    \   if (itr != mp.end()) return itr->first;\n        return INVALID;\n    }\n\n\
+    \    // Find the max. y in the set that satisfies y <= x\n    Int inv_lower_bound(Int\
     \ x) const {\n        auto itr = mp.upper_bound(x);\n        if (itr == mp.begin())\
     \ return INVALID;\n        if ((--itr)->second >= x) return x;\n        return\
     \ itr->second;\n    }\n\n    void _mp_upd(Int l, Int r) {\n        if (mp.count(l))\
@@ -79,7 +80,7 @@ data:
   isVerificationFile: true
   path: utilities/test/integer_segments.test.cpp
   requiredBy: []
-  timestamp: '2026-09-05 15:20:42+09:00'
+  timestamp: '2026-09-06 11:24:08+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: utilities/test/integer_segments.test.cpp

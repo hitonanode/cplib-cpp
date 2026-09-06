@@ -12,42 +12,47 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"other_algorithms/bisect.hpp\"\n#include <bit>\n#include\
-    \ <functional>\n#include <numeric>\n\n// Calculate next point to check in floating\
-    \ point \"binary\" search\ndouble bisect_mid_fp(double a, double b) {\n    auto\
-    \ encode = [&](double x) -> unsigned long long {\n        auto tmp = std::bit_cast<unsigned\
-    \ long long>(x);\n        return x >= 0 ? (tmp ^ (1ULL << 63)) : ~tmp;\n    };\n\
-    \n    auto decode = [&](unsigned long long x) -> double {\n        auto tmp =\
-    \ (x >> 63) ? (x ^ (1ULL << 63)) : ~x;\n        return std::bit_cast<double>(tmp);\n\
-    \    };\n\n    unsigned long long tmp = std::midpoint(encode(a), encode(b));\n\
-    \n    return decode(tmp);\n}\n\n// Binary search\n// Maintain f(ok) = true and\
-    \ f(ng) = false and return (ok, ng)\n// Final (ok, ng) satisfies |ok - ng| <=\
-    \ abs_tol\ntemplate <class T> auto bisect(T ok, T ng, const std::function<bool(T)>\
-    \ &f, T abs_tol = T()) {\n    struct Result {\n        T ok, ng;\n    };\n\n \
-    \   while (true) {\n        T mid = std::is_floating_point<T>::value ? bisect_mid_fp(ok,\
-    \ ng) : std::midpoint(ok, ng);\n        if (mid == ok or mid == ng) break;\n \
-    \       (f(mid) ? ok : ng) = mid;\n        if (ok - ng <= abs_tol and ng - ok\
-    \ <= abs_tol) break;\n    }\n\n    return Result{ok, ng};\n}\n"
-  code: "#pragma once\n#include <bit>\n#include <functional>\n#include <numeric>\n\
-    \n// Calculate next point to check in floating point \"binary\" search\ndouble\
-    \ bisect_mid_fp(double a, double b) {\n    auto encode = [&](double x) -> unsigned\
-    \ long long {\n        auto tmp = std::bit_cast<unsigned long long>(x);\n    \
-    \    return x >= 0 ? (tmp ^ (1ULL << 63)) : ~tmp;\n    };\n\n    auto decode =\
-    \ [&](unsigned long long x) -> double {\n        auto tmp = (x >> 63) ? (x ^ (1ULL\
-    \ << 63)) : ~x;\n        return std::bit_cast<double>(tmp);\n    };\n\n    unsigned\
+    \ <functional>\n#include <numeric>\n#include <type_traits>\n\n// Calculate next\
+    \ point to check in floating point \"binary\" search\ndouble bisect_mid_fp(double\
+    \ a, double b) {\n    auto encode = [&](double x) -> unsigned long long {\n  \
+    \      auto tmp = std::bit_cast<unsigned long long>(x);\n        // Give -0.0\
+    \ and +0.0 the same code, as they compare equal in bisect().\n        return (tmp\
+    \ >> 63) ? (0ULL - tmp) : (tmp ^ (1ULL << 63));\n    };\n\n    auto decode = [&](unsigned\
+    \ long long x) -> double {\n        auto tmp = (x >> 63) ? (x ^ (1ULL << 63))\
+    \ : (0ULL - x);\n        return std::bit_cast<double>(tmp);\n    };\n\n    unsigned\
     \ long long tmp = std::midpoint(encode(a), encode(b));\n\n    return decode(tmp);\n\
     }\n\n// Binary search\n// Maintain f(ok) = true and f(ng) = false and return (ok,\
     \ ng)\n// Final (ok, ng) satisfies |ok - ng| <= abs_tol\ntemplate <class T> auto\
     \ bisect(T ok, T ng, const std::function<bool(T)> &f, T abs_tol = T()) {\n   \
     \ struct Result {\n        T ok, ng;\n    };\n\n    while (true) {\n        T\
-    \ mid = std::is_floating_point<T>::value ? bisect_mid_fp(ok, ng) : std::midpoint(ok,\
-    \ ng);\n        if (mid == ok or mid == ng) break;\n        (f(mid) ? ok : ng)\
-    \ = mid;\n        if (ok - ng <= abs_tol and ng - ok <= abs_tol) break;\n    }\n\
-    \n    return Result{ok, ng};\n}\n"
+    \ mid;\n        if constexpr (std::is_floating_point<T>::value) {\n          \
+    \  mid = bisect_mid_fp(ok, ng);\n        } else {\n            mid = std::midpoint(ok,\
+    \ ng);\n        }\n        if (mid == ok or mid == ng) break;\n        (f(mid)\
+    \ ? ok : ng) = mid;\n        if (ok - ng <= abs_tol and ng - ok <= abs_tol) break;\n\
+    \    }\n\n    return Result{ok, ng};\n}\n"
+  code: "#pragma once\n#include <bit>\n#include <functional>\n#include <numeric>\n\
+    #include <type_traits>\n\n// Calculate next point to check in floating point \"\
+    binary\" search\ndouble bisect_mid_fp(double a, double b) {\n    auto encode =\
+    \ [&](double x) -> unsigned long long {\n        auto tmp = std::bit_cast<unsigned\
+    \ long long>(x);\n        // Give -0.0 and +0.0 the same code, as they compare\
+    \ equal in bisect().\n        return (tmp >> 63) ? (0ULL - tmp) : (tmp ^ (1ULL\
+    \ << 63));\n    };\n\n    auto decode = [&](unsigned long long x) -> double {\n\
+    \        auto tmp = (x >> 63) ? (x ^ (1ULL << 63)) : (0ULL - x);\n        return\
+    \ std::bit_cast<double>(tmp);\n    };\n\n    unsigned long long tmp = std::midpoint(encode(a),\
+    \ encode(b));\n\n    return decode(tmp);\n}\n\n// Binary search\n// Maintain f(ok)\
+    \ = true and f(ng) = false and return (ok, ng)\n// Final (ok, ng) satisfies |ok\
+    \ - ng| <= abs_tol\ntemplate <class T> auto bisect(T ok, T ng, const std::function<bool(T)>\
+    \ &f, T abs_tol = T()) {\n    struct Result {\n        T ok, ng;\n    };\n\n \
+    \   while (true) {\n        T mid;\n        if constexpr (std::is_floating_point<T>::value)\
+    \ {\n            mid = bisect_mid_fp(ok, ng);\n        } else {\n            mid\
+    \ = std::midpoint(ok, ng);\n        }\n        if (mid == ok or mid == ng) break;\n\
+    \        (f(mid) ? ok : ng) = mid;\n        if (ok - ng <= abs_tol and ng - ok\
+    \ <= abs_tol) break;\n    }\n\n    return Result{ok, ng};\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: other_algorithms/bisect.hpp
   requiredBy: []
-  timestamp: '2025-05-06 20:50:55+09:00'
+  timestamp: '2026-09-06 11:24:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_algorithms/test/bisect_yuki2352.test.cpp

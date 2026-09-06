@@ -4,17 +4,17 @@ data:
   - icon: ':question:'
     path: number/factorize.hpp
     title: "Integer factorization \uFF08\u7D20\u56E0\u6570\u5206\u89E3\uFF09"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/pow_mod.hpp
     title: "Modular exponentiation \uFF08\u3079\u304D\u4E57 mod\uFF09"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/primitive_root.hpp
     title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/primitive_root
@@ -113,7 +113,7 @@ data:
   path: number/test/primitive_root_1e18.test.cpp
   requiredBy: []
   timestamp: '2026-09-05 15:19:44+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/primitive_root_1e18.test.cpp
 layout: document

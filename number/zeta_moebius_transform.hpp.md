@@ -6,16 +6,16 @@ data:
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/gcd_convolution.test.cpp
     title: number/test/gcd_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/lcm_convolution.test.cpp
     title: number/test/lcm_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/multiple_moebius.yuki1627.test.cpp
     title: number/test/multiple_moebius.yuki1627.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/multiple_moebius.yuki886.test.cpp
     title: number/test/multiple_moebius.yuki886.test.cpp
   - icon: ':x:'
@@ -23,7 +23,7 @@ data:
     title: number/test/zeta_moebius_transform.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://codeforces.com/contest/1630/problem/E
@@ -209,7 +209,7 @@ data:
   path: number/zeta_moebius_transform.hpp
   requiredBy: []
   timestamp: '2026-09-05 15:19:48+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - number/test/lcm_convolution.test.cpp
   - number/test/gcd_convolution.test.cpp

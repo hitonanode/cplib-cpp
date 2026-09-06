@@ -7,7 +7,7 @@ data:
       \u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\u5B9A\
       \u7406\u30FB\u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\u306A\u3069\u306E\u5B9F\
       \u88C5\uFF09"
-  - icon: ':x:'
+  - icon: ':question:'
     path: number/combination.hpp
     title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
       \u7406\u306E\u62E1\u5F35\uFF09"

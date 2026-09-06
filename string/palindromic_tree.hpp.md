@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/palindromic_tree.yuki2606.test.cpp
     title: string/test/palindromic_tree.yuki2606.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/test/palindromic_tree.yuki263.test.cpp
     title: string/test/palindromic_tree.yuki263.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"string/palindromic_tree.hpp\"\n\n#include <map>\n#include\
@@ -25,7 +25,7 @@ data:
     \ int length) : suffix_link_(suffix_link), length_(length) {}\n\n    int suffix_link()\
     \ const { return suffix_link_; }\n\n    int length() const { return length_; }\n\
     \n    int get_child(Key c) const {\n        auto it = children.find(c);\n    \
-    \    return (it == children.end()) ? -1 : it->second;\n    }\n\n    void set_child(int\
+    \    return (it == children.end()) ? -1 : it->second;\n    }\n\n    void set_child(Key\
     \ c, int nxt_idx) { children[c] = nxt_idx; }\n\n    template <class OStream> friend\
     \ OStream &operator<<(OStream &os, const Node &node) {\n        os << \"Node(suffix_link=\"\
     \ << node.suffix_link() << \", length=\" << node.length()\n           << \", children={\"\
@@ -73,7 +73,7 @@ data:
     \ length_(length) {}\n\n    int suffix_link() const { return suffix_link_; }\n\
     \n    int length() const { return length_; }\n\n    int get_child(Key c) const\
     \ {\n        auto it = children.find(c);\n        return (it == children.end())\
-    \ ? -1 : it->second;\n    }\n\n    void set_child(int c, int nxt_idx) { children[c]\
+    \ ? -1 : it->second;\n    }\n\n    void set_child(Key c, int nxt_idx) { children[c]\
     \ = nxt_idx; }\n\n    template <class OStream> friend OStream &operator<<(OStream\
     \ &os, const Node &node) {\n        os << \"Node(suffix_link=\" << node.suffix_link()\
     \ << \", length=\" << node.length()\n           << \", children={\";\n       \
@@ -114,8 +114,8 @@ data:
   isVerificationFile: false
   path: string/palindromic_tree.hpp
   requiredBy: []
-  timestamp: '2024-09-22 15:59:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-09-06 11:24:08+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - string/test/palindromic_tree.yuki263.test.cpp
   - string/test/palindromic_tree.yuki2606.test.cpp

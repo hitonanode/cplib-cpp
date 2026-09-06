@@ -12,12 +12,12 @@ data:
   - icon: ':x:'
     path: number/test/combination.stress.test.cpp
     title: number/test/combination.stress.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/combination.test.cpp
     title: number/test/combination.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://ferin-tech.hatenablog.com/entry/2018/01/17/010829
@@ -136,7 +136,7 @@ data:
   path: number/combination.hpp
   requiredBy: []
   timestamp: '2026-04-11 14:52:31+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - number/test/combination.stress.test.cpp
   - number/test/combination.test.cpp

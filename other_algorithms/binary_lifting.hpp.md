@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other_algorithms/test/binary_lifting.yuki1013.test.cpp
     title: other_algorithms/test/binary_lifting.yuki1013.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"other_algorithms/binary_lifting.hpp\"\n#include <cassert>\n\
@@ -117,7 +117,7 @@ data:
   path: other_algorithms/binary_lifting.hpp
   requiredBy: []
   timestamp: '2026-09-05 15:19:58+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - other_algorithms/test/binary_lifting.yuki1013.test.cpp
 documentation_of: other_algorithms/binary_lifting.hpp

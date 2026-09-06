@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/sqrt_mod.hpp
     title: "Square root modulo prime \uFF08\u5E73\u65B9\u5270\u4F59\uFF09"
   _extendedRequiredBy: []

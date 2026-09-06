@@ -46,12 +46,13 @@ data:
     \ S) -> S\n// composition: (F, F) -> F\ntemplate <class S, class F, class Container>\n\
     long long\nDiscreteLogarithm(const F &f, const S &s, const S &t, const std::function<S(F,\
     \ S)> &mapping,\n                  const std::function<F(F, F)> &composition,\
-    \ long long max_search) {\n    const int giant_stride = ceil(sqrtl(max_search));\n\
-    \    F giant = f, tmp = f;\n    for (int n = giant_stride - 1; n; n >>= 1) {\n\
-    \        if (n & 1) giant = composition(giant, tmp);\n        tmp = composition(tmp,\
-    \ tmp);\n    }\n    return DiscreteLogarithm<S, F, Container>(f, giant, s, t,\
-    \ mapping, max_search, giant_stride);\n}\n\n// Solve min_n x^n = y (1 <= n <=\
-    \ max_search)\ntemplate <class S, class Container>\nlong long DiscreteLogarithmNonzero(const\
+    \ long long max_search) {\n    if (s == t) return 0;\n    if (max_search <= 0)\
+    \ return -1;\n\n    const int giant_stride = ceil(sqrtl(max_search));\n    F giant\
+    \ = f, tmp = f;\n    for (int n = giant_stride - 1; n; n >>= 1) {\n        if\
+    \ (n & 1) giant = composition(giant, tmp);\n        tmp = composition(tmp, tmp);\n\
+    \    }\n    return DiscreteLogarithm<S, F, Container>(f, giant, s, t, mapping,\
+    \ max_search, giant_stride);\n}\n\n// Solve min_n x^n = y (1 <= n <= max_search)\n\
+    template <class S, class Container>\nlong long DiscreteLogarithmNonzero(const\
     \ S &x, const S &y, const std::function<S(S, S)> &op,\n                      \
     \             long long max_search) {\n    long long res = DiscreteLogarithm<S,\
     \ S, Container>(x, x, y, op, op, max_search);\n    if (res < 0 or res >= max_search)\
@@ -90,12 +91,13 @@ data:
     \ S) -> S\n// composition: (F, F) -> F\ntemplate <class S, class F, class Container>\n\
     long long\nDiscreteLogarithm(const F &f, const S &s, const S &t, const std::function<S(F,\
     \ S)> &mapping,\n                  const std::function<F(F, F)> &composition,\
-    \ long long max_search) {\n    const int giant_stride = ceil(sqrtl(max_search));\n\
-    \    F giant = f, tmp = f;\n    for (int n = giant_stride - 1; n; n >>= 1) {\n\
-    \        if (n & 1) giant = composition(giant, tmp);\n        tmp = composition(tmp,\
-    \ tmp);\n    }\n    return DiscreteLogarithm<S, F, Container>(f, giant, s, t,\
-    \ mapping, max_search, giant_stride);\n}\n\n// Solve min_n x^n = y (1 <= n <=\
-    \ max_search)\ntemplate <class S, class Container>\nlong long DiscreteLogarithmNonzero(const\
+    \ long long max_search) {\n    if (s == t) return 0;\n    if (max_search <= 0)\
+    \ return -1;\n\n    const int giant_stride = ceil(sqrtl(max_search));\n    F giant\
+    \ = f, tmp = f;\n    for (int n = giant_stride - 1; n; n >>= 1) {\n        if\
+    \ (n & 1) giant = composition(giant, tmp);\n        tmp = composition(tmp, tmp);\n\
+    \    }\n    return DiscreteLogarithm<S, F, Container>(f, giant, s, t, mapping,\
+    \ max_search, giant_stride);\n}\n\n// Solve min_n x^n = y (1 <= n <= max_search)\n\
+    template <class S, class Container>\nlong long DiscreteLogarithmNonzero(const\
     \ S &x, const S &y, const std::function<S(S, S)> &op,\n                      \
     \             long long max_search) {\n    long long res = DiscreteLogarithm<S,\
     \ S, Container>(x, x, y, op, op, max_search);\n    if (res < 0 or res >= max_search)\
@@ -116,7 +118,7 @@ data:
   isVerificationFile: false
   path: number/discrete_logarithm.hpp
   requiredBy: []
-  timestamp: '2025-08-24 22:54:44+09:00'
+  timestamp: '2026-09-06 11:24:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/discrete_logarithm_mod.test.cpp

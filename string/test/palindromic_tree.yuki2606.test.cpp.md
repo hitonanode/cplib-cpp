@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/palindromic_tree.hpp
     title: "Palindromic tree / eertree \uFF08\u56DE\u6587\u6728\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/2606
@@ -27,7 +27,7 @@ data:
     \ {}\n\n    int suffix_link() const { return suffix_link_; }\n\n    int length()\
     \ const { return length_; }\n\n    int get_child(Key c) const {\n        auto\
     \ it = children.find(c);\n        return (it == children.end()) ? -1 : it->second;\n\
-    \    }\n\n    void set_child(int c, int nxt_idx) { children[c] = nxt_idx; }\n\n\
+    \    }\n\n    void set_child(Key c, int nxt_idx) { children[c] = nxt_idx; }\n\n\
     \    template <class OStream> friend OStream &operator<<(OStream &os, const Node\
     \ &node) {\n        os << \"Node(suffix_link=\" << node.suffix_link() << \", length=\"\
     \ << node.length()\n           << \", children={\";\n        for (const auto &[c,\
@@ -95,8 +95,8 @@ data:
   isVerificationFile: true
   path: string/test/palindromic_tree.yuki2606.test.cpp
   requiredBy: []
-  timestamp: '2024-09-22 15:59:27+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-06 11:24:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: string/test/palindromic_tree.yuki2606.test.cpp
 layout: document

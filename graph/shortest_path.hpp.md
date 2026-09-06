@@ -6,9 +6,6 @@ data:
     path: combinatorial_opt/matroid_intersection.hpp
     title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\uFF09\
       \u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
-  - icon: ':warning:'
-    path: combinatorial_opt/matroid_union.hpp
-    title: "Matroid union \uFF08\u30DE\u30C8\u30ED\u30A4\u30C9\u306E\u5408\u4F75\uFF09"
   _extendedVerifiedWith:
   - icon: ':x:'
     path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
@@ -348,7 +345,6 @@ data:
   path: graph/shortest_path.hpp
   requiredBy:
   - combinatorial_opt/matroid_intersection.hpp
-  - combinatorial_opt/matroid_union.hpp
   timestamp: '2026-09-05 15:18:59+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

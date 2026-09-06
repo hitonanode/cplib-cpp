@@ -7,12 +7,12 @@ data:
     title: "Sum of two squares \uFF08\u4E8C\u3064\u306E\u5E73\u65B9\u6570\u306E\u548C\
       \uFF09"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/sqrt_mod.test.cpp
     title: number/test/sqrt_mod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/sqrt_mod.hpp\"\n#include <algorithm>\n#include <type_traits>\n\
@@ -55,7 +55,7 @@ data:
   requiredBy:
   - number/square_sums.hpp
   timestamp: '2026-09-05 15:19:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/sqrt_mod.test.cpp
 documentation_of: number/sqrt_mod.hpp

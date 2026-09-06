@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/primitive_root.hpp
     title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\uFF09"
   _extendedVerifiedWith:
@@ -24,10 +24,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/miller-rabin.test.cpp
     title: number/test/miller-rabin.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root_1e18.test.cpp
     title: number/test/primitive_root_1e18.test.cpp
   _isVerificationFailed: true

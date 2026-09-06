@@ -78,7 +78,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
     title: linear_algebra_matrix/test/det_of_blackbox_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/primitive_root.test.cpp
     title: number/test/primitive_root.test.cpp
   - icon: ':heavy_check_mark:'

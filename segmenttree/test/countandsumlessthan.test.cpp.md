@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: segmenttree/point-update-range-get_nonrecursive.hpp
     title: segmenttree/point-update-range-get_nonrecursive.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/877
@@ -120,7 +120,7 @@ data:
   path: segmenttree/test/countandsumlessthan.test.cpp
   requiredBy: []
   timestamp: '2026-09-05 15:20:20+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: segmenttree/test/countandsumlessthan.test.cpp
 layout: document

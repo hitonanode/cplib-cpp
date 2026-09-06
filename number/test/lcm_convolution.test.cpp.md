@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: number/sieve.hpp
     title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
-  - icon: ':x:'
+  - icon: ':question:'
     path: number/zeta_moebius_transform.hpp
     title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/lcm_convolution
@@ -259,7 +259,7 @@ data:
   path: number/test/lcm_convolution.test.cpp
   requiredBy: []
   timestamp: '2026-09-05 15:19:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: number/test/lcm_convolution.test.cpp
 layout: document

@@ -31,31 +31,32 @@ data:
     \ {}\n    static std::pair<T_CHT, T_CHT> cross(const Line &ll, const Line &lr)\
     \ {\n        return std::make_pair(ll.b - lr.b, lr.a - ll.a); // `ll.a < lr.a`\
     \ is assumed implicitly\n    }\n    bool operator<(const Line &r) const {\n  \
-    \      if (b == T_MIN) {\n            return r.rp.first == T_MIN ? true : a *\
-    \ r.rp.second < r.rp.first;\n        } else if (r.b == T_MIN) {\n            return\
-    \ rp.first == T_MIN ? false : !(r.a * rp.second < rp.first);\n        } else {\n\
-    \            return a < r.a;\n        }\n    }\n};\ntemplate <typename T_MP> struct\
-    \ Lines : std::multiset<Line> {\n    bool flg_min; // true iff for minimization\n\
-    \    inline bool isNeedless(iterator itr) {\n        if (size() == 1) return false;\n\
-    \        auto nxt = std::next(itr);\n        if (itr == begin())\n           \
-    \ return itr->a == nxt->a and itr->b <= nxt->b;\n        else {\n            auto\
-    \ prv = std::prev(itr);\n            if (nxt == end())\n                return\
-    \ itr->a == prv->a and itr->b <= prv->b;\n            else\n                return\
-    \ T_MP(prv->b - itr->b) * (nxt->a - itr->a) >=\n                       T_MP(itr->b\
-    \ - nxt->b) * (itr->a - prv->a);\n        }\n    }\n    void add_line(T_CHT a,\
-    \ T_CHT b) {\n        if (flg_min) a = -a, b = -b;\n        auto itr = insert({a,\
-    \ b});\n        if (isNeedless(itr))\n            erase(itr);\n        else {\n\
-    \            while (std::next(itr) != end() and isNeedless(std::next(itr))) {\n\
-    \                erase(std::next(itr));\n            }\n            while (itr\
-    \ != begin() and isNeedless(std::prev(itr))) { erase(std::prev(itr)); }\n    \
-    \        if (std::next(itr) != end()) { itr->rp = CHT::Line::cross(*itr, *std::next(itr));\
-    \ }\n            if (itr != begin()) { std::prev(itr)->rp = CHT::Line::cross(*std::prev(itr),\
-    \ *itr); }\n        }\n    }\n    Lines(bool is_minimizer) : flg_min(is_minimizer)\
-    \ {}\n    std::pair<T_CHT, T_CHT> get(T_CHT x) {\n        auto itr = lower_bound({x,\
-    \ CHT::T_MIN});\n        T_CHT retval = CHT::T_MIN, reta = CHT::T_MIN;\n     \
-    \   if (itr != end()) { retval = itr->a * x + itr->b, reta = itr->a; }\n     \
-    \   if (itr != begin()) {\n            T_CHT tmp = std::prev(itr)->a * x + std::prev(itr)->b;\n\
-    \            if (tmp >= retval) { retval = tmp, reta = std::max(reta, std::prev(itr)->a);\
+    \      if (b == T_MIN) {\n            return r.rp.first == T_MIN ? true : __int128(a)\
+    \ * r.rp.second < r.rp.first;\n        } else if (r.b == T_MIN) {\n          \
+    \  return rp.first == T_MIN ? false : !(__int128(r.a) * rp.second < rp.first);\n\
+    \        } else {\n            return a < r.a;\n        }\n    }\n};\ntemplate\
+    \ <typename T_MP> struct Lines : std::multiset<Line> {\n    bool flg_min; // true\
+    \ iff for minimization\n    inline bool isNeedless(iterator itr) {\n        if\
+    \ (size() == 1) return false;\n        auto nxt = std::next(itr);\n        if\
+    \ (itr == begin())\n            return itr->a == nxt->a and itr->b <= nxt->b;\n\
+    \        else {\n            auto prv = std::prev(itr);\n            if (nxt ==\
+    \ end())\n                return itr->a == prv->a and itr->b <= prv->b;\n    \
+    \        else\n                return T_MP(prv->b - itr->b) * (nxt->a - itr->a)\
+    \ >=\n                       T_MP(itr->b - nxt->b) * (itr->a - prv->a);\n    \
+    \    }\n    }\n    void add_line(T_CHT a, T_CHT b) {\n        if (flg_min) a =\
+    \ -a, b = -b;\n        auto itr = insert({a, b});\n        if (isNeedless(itr))\n\
+    \            erase(itr);\n        else {\n            while (std::next(itr) !=\
+    \ end() and isNeedless(std::next(itr))) {\n                erase(std::next(itr));\n\
+    \            }\n            while (itr != begin() and isNeedless(std::prev(itr)))\
+    \ { erase(std::prev(itr)); }\n            if (std::next(itr) != end()) { itr->rp\
+    \ = CHT::Line::cross(*itr, *std::next(itr)); }\n            if (itr != begin())\
+    \ { std::prev(itr)->rp = CHT::Line::cross(*std::prev(itr), *itr); }\n        }\n\
+    \    }\n    Lines(bool is_minimizer) : flg_min(is_minimizer) {}\n    std::pair<T_CHT,\
+    \ T_CHT> get(T_CHT x) {\n        auto itr = lower_bound({x, CHT::T_MIN});\n  \
+    \      T_CHT retval = CHT::T_MIN, reta = CHT::T_MIN;\n        if (itr != end())\
+    \ { retval = itr->a * x + itr->b, reta = itr->a; }\n        if (itr != begin())\
+    \ {\n            T_CHT tmp = std::prev(itr)->a * x + std::prev(itr)->b;\n    \
+    \        if (tmp >= retval) { retval = tmp, reta = std::max(reta, std::prev(itr)->a);\
     \ }\n        }\n        return std::make_pair(flg_min ? -retval : retval, flg_min\
     \ ? -reta : reta);\n    }\n};\n} // namespace CHT\n\ntemplate <typename T_MP>\
     \ struct ConvexHullTrick {\n    using T_CHT = CHT::T_CHT;\n    CHT::Lines<T_MP>\
@@ -82,31 +83,32 @@ data:
     \ {}\n    static std::pair<T_CHT, T_CHT> cross(const Line &ll, const Line &lr)\
     \ {\n        return std::make_pair(ll.b - lr.b, lr.a - ll.a); // `ll.a < lr.a`\
     \ is assumed implicitly\n    }\n    bool operator<(const Line &r) const {\n  \
-    \      if (b == T_MIN) {\n            return r.rp.first == T_MIN ? true : a *\
-    \ r.rp.second < r.rp.first;\n        } else if (r.b == T_MIN) {\n            return\
-    \ rp.first == T_MIN ? false : !(r.a * rp.second < rp.first);\n        } else {\n\
-    \            return a < r.a;\n        }\n    }\n};\ntemplate <typename T_MP> struct\
-    \ Lines : std::multiset<Line> {\n    bool flg_min; // true iff for minimization\n\
-    \    inline bool isNeedless(iterator itr) {\n        if (size() == 1) return false;\n\
-    \        auto nxt = std::next(itr);\n        if (itr == begin())\n           \
-    \ return itr->a == nxt->a and itr->b <= nxt->b;\n        else {\n            auto\
-    \ prv = std::prev(itr);\n            if (nxt == end())\n                return\
-    \ itr->a == prv->a and itr->b <= prv->b;\n            else\n                return\
-    \ T_MP(prv->b - itr->b) * (nxt->a - itr->a) >=\n                       T_MP(itr->b\
-    \ - nxt->b) * (itr->a - prv->a);\n        }\n    }\n    void add_line(T_CHT a,\
-    \ T_CHT b) {\n        if (flg_min) a = -a, b = -b;\n        auto itr = insert({a,\
-    \ b});\n        if (isNeedless(itr))\n            erase(itr);\n        else {\n\
-    \            while (std::next(itr) != end() and isNeedless(std::next(itr))) {\n\
-    \                erase(std::next(itr));\n            }\n            while (itr\
-    \ != begin() and isNeedless(std::prev(itr))) { erase(std::prev(itr)); }\n    \
-    \        if (std::next(itr) != end()) { itr->rp = CHT::Line::cross(*itr, *std::next(itr));\
-    \ }\n            if (itr != begin()) { std::prev(itr)->rp = CHT::Line::cross(*std::prev(itr),\
-    \ *itr); }\n        }\n    }\n    Lines(bool is_minimizer) : flg_min(is_minimizer)\
-    \ {}\n    std::pair<T_CHT, T_CHT> get(T_CHT x) {\n        auto itr = lower_bound({x,\
-    \ CHT::T_MIN});\n        T_CHT retval = CHT::T_MIN, reta = CHT::T_MIN;\n     \
-    \   if (itr != end()) { retval = itr->a * x + itr->b, reta = itr->a; }\n     \
-    \   if (itr != begin()) {\n            T_CHT tmp = std::prev(itr)->a * x + std::prev(itr)->b;\n\
-    \            if (tmp >= retval) { retval = tmp, reta = std::max(reta, std::prev(itr)->a);\
+    \      if (b == T_MIN) {\n            return r.rp.first == T_MIN ? true : __int128(a)\
+    \ * r.rp.second < r.rp.first;\n        } else if (r.b == T_MIN) {\n          \
+    \  return rp.first == T_MIN ? false : !(__int128(r.a) * rp.second < rp.first);\n\
+    \        } else {\n            return a < r.a;\n        }\n    }\n};\ntemplate\
+    \ <typename T_MP> struct Lines : std::multiset<Line> {\n    bool flg_min; // true\
+    \ iff for minimization\n    inline bool isNeedless(iterator itr) {\n        if\
+    \ (size() == 1) return false;\n        auto nxt = std::next(itr);\n        if\
+    \ (itr == begin())\n            return itr->a == nxt->a and itr->b <= nxt->b;\n\
+    \        else {\n            auto prv = std::prev(itr);\n            if (nxt ==\
+    \ end())\n                return itr->a == prv->a and itr->b <= prv->b;\n    \
+    \        else\n                return T_MP(prv->b - itr->b) * (nxt->a - itr->a)\
+    \ >=\n                       T_MP(itr->b - nxt->b) * (itr->a - prv->a);\n    \
+    \    }\n    }\n    void add_line(T_CHT a, T_CHT b) {\n        if (flg_min) a =\
+    \ -a, b = -b;\n        auto itr = insert({a, b});\n        if (isNeedless(itr))\n\
+    \            erase(itr);\n        else {\n            while (std::next(itr) !=\
+    \ end() and isNeedless(std::next(itr))) {\n                erase(std::next(itr));\n\
+    \            }\n            while (itr != begin() and isNeedless(std::prev(itr)))\
+    \ { erase(std::prev(itr)); }\n            if (std::next(itr) != end()) { itr->rp\
+    \ = CHT::Line::cross(*itr, *std::next(itr)); }\n            if (itr != begin())\
+    \ { std::prev(itr)->rp = CHT::Line::cross(*std::prev(itr), *itr); }\n        }\n\
+    \    }\n    Lines(bool is_minimizer) : flg_min(is_minimizer) {}\n    std::pair<T_CHT,\
+    \ T_CHT> get(T_CHT x) {\n        auto itr = lower_bound({x, CHT::T_MIN});\n  \
+    \      T_CHT retval = CHT::T_MIN, reta = CHT::T_MIN;\n        if (itr != end())\
+    \ { retval = itr->a * x + itr->b, reta = itr->a; }\n        if (itr != begin())\
+    \ {\n            T_CHT tmp = std::prev(itr)->a * x + std::prev(itr)->b;\n    \
+    \        if (tmp >= retval) { retval = tmp, reta = std::max(reta, std::prev(itr)->a);\
     \ }\n        }\n        return std::make_pair(flg_min ? -retval : retval, flg_min\
     \ ? -reta : reta);\n    }\n};\n} // namespace CHT\n\ntemplate <typename T_MP>\
     \ struct ConvexHullTrick {\n    using T_CHT = CHT::T_CHT;\n    CHT::Lines<T_MP>\
@@ -120,7 +122,7 @@ data:
   isVerificationFile: false
   path: convex_hull_trick/convex_hull_trick.hpp
   requiredBy: []
-  timestamp: '2022-01-08 20:23:44+09:00'
+  timestamp: '2026-09-06 11:24:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - convex_hull_trick/test/convex_hull_trick.test.cpp

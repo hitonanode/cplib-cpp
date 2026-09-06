@@ -144,26 +144,27 @@ data:
     \ v_i < upper_bound\n    std::optional<int> index_prev_value(int l, int r, int\
     \ upper_bound) const {\n        assert(0 <= l and l <= r and r <= N());\n    \
     \    assert(is_built());\n        if (upper_bound <= 0) return std::nullopt;\n\
-    \n        const int n = index_range_freq(l, r, upper_bound);\n        return n\
-    \ == 0 ? std::nullopt : index_kth_smallest(l, r, n - 1);\n    }\n\n    // max\
-    \ y s.t. x in [xl, xr), y < yr\n    std::optional<Int> prev_value(Int xl, Int\
-    \ xr, Int yr) const {\n        const int l = to_index_x(xl), r = to_index_x(xr),\
+    \n        const int n = index_range_freq(l, r, upper_bound);\n        if (n ==\
+    \ 0) return std::nullopt;\n        return index_kth_smallest(l, r, n - 1);\n \
+    \   }\n\n    // max y s.t. x in [xl, xr), y < yr\n    std::optional<Int> prev_value(Int\
+    \ xl, Int xr, Int yr) const {\n        const int l = to_index_x(xl), r = to_index_x(xr),\
     \ ub = to_index_y(yr);\n        const auto idx = index_prev_value(l, r, ub);\n\
-    \        return idx ? distinct_ys.at(*idx) : std::nullopt;\n    }\n\n    // min\
-    \ v_i s.t. i in [l, r), v_i >= lower_bound\n    std::optional<int> index_next_value(int\
-    \ l, int r, int lower_bound) const {\n        assert(0 <= l and l <= r and r <=\
-    \ N());\n        assert(is_built());\n        if (lower_bound >= (int)distinct_ys.size())\
-    \ return std::nullopt;\n        const int n = index_range_freq(l, r, lower_bound);\n\
-    \        return n >= (r - l) ? std::nullopt : index_kth_smallest(l, r, n);\n \
-    \   }\n\n    // min y s.t. x in [xl, xr), y >= yl\n    std::optional<Int> next_value(Int\
-    \ l, Int r, Int yl) const {\n        const int xl = to_index_x(l), xr = to_index_x(r),\
-    \ yl_idx = to_index_y(yl);\n        const auto idx = index_next_value(xl, xr,\
-    \ yl_idx);\n        return idx ? distinct_ys.at(*idx) : std::nullopt;\n    }\n\
-    };\n/* Sample usage:\nwavelet_matrix<int> wm;\n\nwm.build();\nvector tmp(wm.D(),\
-    \ BIT<T>(wm.N()));\nwm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx, wx);\
-    \ });  // point add\nT ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0) { ret\
-    \ += tmp[d].sum(l0, r0); }); // range sum\n*/\n#line 3 \"number/modint_mersenne61.hpp\"\
-    \n#include <chrono>\n#include <random>\n\n// F_p, p = 2^61 - 1\n// https://qiita.com/keymoon/items/11fac5627672a6d6a9f6\n\
+    \        if (!idx) return std::nullopt;\n        return distinct_ys.at(*idx);\n\
+    \    }\n\n    // min v_i s.t. i in [l, r), v_i >= lower_bound\n    std::optional<int>\
+    \ index_next_value(int l, int r, int lower_bound) const {\n        assert(0 <=\
+    \ l and l <= r and r <= N());\n        assert(is_built());\n        if (lower_bound\
+    \ >= (int)distinct_ys.size()) return std::nullopt;\n        const int n = index_range_freq(l,\
+    \ r, lower_bound);\n        if (n >= r - l) return std::nullopt;\n        return\
+    \ index_kth_smallest(l, r, n);\n    }\n\n    // min y s.t. x in [xl, xr), y >=\
+    \ yl\n    std::optional<Int> next_value(Int l, Int r, Int yl) const {\n      \
+    \  const int xl = to_index_x(l), xr = to_index_x(r), yl_idx = to_index_y(yl);\n\
+    \        const auto idx = index_next_value(xl, xr, yl_idx);\n        if (!idx)\
+    \ return std::nullopt;\n        return distinct_ys.at(*idx);\n    }\n};\n/* Sample\
+    \ usage:\nwavelet_matrix<int> wm;\n\nwm.build();\nvector tmp(wm.D(), BIT<T>(wm.N()));\n\
+    wm.apply(i, j, [&](int d, int idx) { tmp[d].add(idx, wx); });  // point add\n\
+    T ret{};\nwm.prod(l, r, u, [&](int d, int l0, int r0) { ret += tmp[d].sum(l0,\
+    \ r0); }); // range sum\n*/\n#line 3 \"number/modint_mersenne61.hpp\"\n#include\
+    \ <chrono>\n#include <random>\n\n// F_p, p = 2^61 - 1\n// https://qiita.com/keymoon/items/11fac5627672a6d6a9f6\n\
     class ModIntMersenne61 {\n    static const long long md = (1LL << 61) - 1;\n \
     \   long long _v;\n\n    inline unsigned hi() const noexcept { return _v >> 31;\
     \ }\n    inline unsigned lo() const noexcept { return _v & ((1LL << 31) - 1);\
@@ -268,7 +269,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/wavelet_matrix.yuki3207.test.cpp
   requiredBy: []
-  timestamp: '2026-03-01 21:03:18+09:00'
+  timestamp: '2026-09-06 11:24:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/wavelet_matrix.yuki3207.test.cpp

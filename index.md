@@ -473,7 +473,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/bs_sieve.hpp
       title: number/bs_sieve.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: number/combination.hpp
       title: "Combination \uFF08${}_n \\mathrm{C}_r \\bmod{m}$\uFF0CLucas \u306E\u5B9A\
         \u7406\u306E\u62E1\u5F35\uFF09"
@@ -523,10 +523,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/nimber.hpp
       title: "Nimber, Nim product \uFF08\u30CB\u30E0\u6570\uFF0C$\\mathbb{F}_{2^{64}}$\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/pow_mod.hpp
       title: "Modular exponentiation \uFF08\u3079\u304D\u4E57 mod\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/primitive_root.hpp
       title: "Primitive root modulo $n$ \uFF08\u539F\u59CB\u6839\u306E\u767A\u898B\
         \uFF09"
@@ -536,7 +536,7 @@ data:
     - icon: ':question:'
       path: number/sieve.hpp
       title: "Linear sieve \uFF08\u7DDA\u5F62\u7BE9\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/sqrt_mod.hpp
       title: "Square root modulo prime \uFF08\u5E73\u65B9\u5270\u4F59\uFF09"
     - icon: ':warning:'
@@ -546,12 +546,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/stern_brocot_tree.hpp
       title: "Stern\u2013Brocot tree"
-    - icon: ':x:'
+    - icon: ':question:'
       path: number/zeta_moebius_transform.hpp
       title: "Zeta transform / Moebius transform \uFF08\u7D04\u6570\u5305\u9664\uFF09"
   - name: other_algorithms
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/binary_lifting.hpp
       title: "Binary lifting / doubling \uFF08\u30C0\u30D6\u30EA\u30F3\u30B0\uFF09"
     - icon: ':heavy_check_mark:'
@@ -609,7 +609,7 @@ data:
       path: other_algorithms/north_east_lattice_paths.hpp
       title: "Counting north-east lattice paths \uFF082 \u6B21\u5143\u30B0\u30EA\u30C3\
         \u30C9\u4E0A\u306E\u6700\u77ED\u8DEF\u306E\u6570\u3048\u4E0A\u3052\uFF09"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/permutation_tree.hpp
       title: "Common interval decomposition tree / \"Permutation tree\" \uFF08\u9806\
         \u5217\u6728\uFF09"
@@ -675,10 +675,10 @@ data:
       path: segmenttree/persistent_segtree.hpp
       title: "Persistent segtree \uFF08\u5B8C\u5168\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\
         \u30C8\u6728\uFF09"
-    - icon: ':x:'
+    - icon: ':question:'
       path: segmenttree/point-update-range-get_nonrecursive.hpp
       title: segmenttree/point-update-range-get_nonrecursive.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/range-add-range-min.hpp
       title: Range Add Range Min (known as the Starry sky tree)
     - icon: ':heavy_check_mark:'
@@ -761,7 +761,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/mp_algorithm.hpp
       title: string/mp_algorithm.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/palindromic_tree.hpp
       title: "Palindromic tree / eertree \uFF08\u56DE\u6587\u6728\uFF09"
     - icon: ':heavy_check_mark:'
@@ -1610,7 +1610,7 @@ data:
     - icon: ':x:'
       path: number/test/combination.stress.test.cpp
       title: number/test/combination.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/combination.test.cpp
       title: number/test/combination.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1631,7 +1631,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp
       title: number/test/discrete_logarithm_symmetric_group.yuki261.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/enumerate_primes.test.cpp
       title: number/test/enumerate_primes.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1640,7 +1640,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/factorize_longlong.test.cpp
       title: number/test/factorize_longlong.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/gcd_convolution.test.cpp
       title: number/test/gcd_convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1652,7 +1652,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/is_prime.test.cpp
       title: number/test/is_prime.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/lcm_convolution.test.cpp
       title: number/test/lcm_convolution.test.cpp
     - icon: ':x:'
@@ -1664,13 +1664,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: number/test/min_max_semiring.test.cpp
       title: number/test/min_max_semiring.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/montmort_number_mod.test.cpp
       title: number/test/montmort_number_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/multiple_moebius.yuki1627.test.cpp
       title: number/test/multiple_moebius.yuki1627.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/multiple_moebius.yuki886.test.cpp
       title: number/test/multiple_moebius.yuki886.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1679,10 +1679,10 @@ data:
     - icon: ':x:'
       path: number/test/prime_factorization.test.cpp
       title: number/test/prime_factorization.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/primitive_root.test.cpp
       title: number/test/primitive_root.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/primitive_root_1e18.test.cpp
       title: number/test/primitive_root_1e18.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1691,10 +1691,10 @@ data:
     - icon: ':x:'
       path: number/test/sieve.stress.test.cpp
       title: number/test/sieve.stress.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/sqrt_mod.test.cpp
       title: number/test/sqrt_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: number/test/sqrt_modint_runtime.test.cpp
       title: number/test/sqrt_modint_runtime.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1705,7 +1705,7 @@ data:
       title: number/test/zeta_moebius_transform.test.cpp
   - name: other_algorithms/test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/binary_lifting.yuki1013.test.cpp
       title: other_algorithms/test/binary_lifting.yuki1013.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1744,10 +1744,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: other_algorithms/test/north_east_lattice_paths.test.cpp
       title: other_algorithms/test/north_east_lattice_paths.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/permutation_tree.test.cpp
       title: other_algorithms/test/permutation_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other_algorithms/test/permutation_tree.yuki1720.test.cpp
       title: other_algorithms/test/permutation_tree.yuki1720.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1785,7 +1785,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/binary_indexed_tree.test.cpp
       title: segmenttree/test/binary_indexed_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/countandsumlessthan.test.cpp
       title: segmenttree/test/countandsumlessthan.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1794,7 +1794,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-add-range-sum.test.cpp
       title: segmenttree/test/point-add-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segmenttree/test/point-set-range-composite.test.cpp
       title: segmenttree/test/point-set-range-composite.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1881,10 +1881,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/test/manacher_mp.test.cpp
       title: string/test/manacher_mp.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/test/palindromic_tree.yuki2606.test.cpp
       title: string/test/palindromic_tree.yuki2606.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/test/palindromic_tree.yuki263.test.cpp
       title: string/test/palindromic_tree.yuki263.test.cpp
     - icon: ':heavy_check_mark:'
