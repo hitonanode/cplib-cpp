@@ -13,7 +13,7 @@ struct BinaryLifting {
     std::vector<std::vector<int>> mat;
     BinaryLifting() : N(0), lgD(0) {}
     BinaryLifting(const std::vector<int> &to, int lgd = 0) : N(to.size()), lgD(lgd) {
-        while ((1LL << lgD) < N) lgD++;
+        while (lgD == 0 or (1LL << lgD) < N) lgD++;
         mat.assign(lgD, std::vector<int>(N));
         mat[0] = to;
 
