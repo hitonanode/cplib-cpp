@@ -47,11 +47,11 @@ private:
                 for (int j = 0; j < N + 2; j++) {
                     if (j != j_ch) {
                         mat[i_ch][j] *= -mat[i_ch][j_ch];
-                        if (abs_(mat[i_ch][j]) > EPS) jupd.push_back(j);
+                        if (mat[i_ch][j] != 0) jupd.push_back(j);
                     }
                 }
                 for (int i = 0; i < M + 2; i++) {
-                    if (abs_(mat[i][j_ch]) < EPS or i == i_ch) continue;
+                    if (mat[i][j_ch] == 0 or i == i_ch) continue;
                     for (auto j : jupd) mat[i][j] += mat[i][j_ch] * mat[i_ch][j];
                     mat[i][j_ch] *= mat[i_ch][j_ch];
                 }
@@ -76,7 +76,7 @@ private:
                         i_ch = i;
                     } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch] <
                                    EPS and
-                               idx[i_ch] > idx[i]) {
+                               idx[N + 1 + i_ch] > idx[N + 1 + i]) {
                         i_ch = i;
                     }
                 }
