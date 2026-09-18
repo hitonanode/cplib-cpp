@@ -5,22 +5,22 @@ data:
   - icon: ':warning:'
     path: geometry/problem_of_apollonius.hpp
     title: geometry/problem_of_apollonius.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: geometry/triangle.hpp
     title: geometry/triangle.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: geometry/test/circumcenter.test.cpp
     title: geometry/test/circumcenter.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: geometry/test/convex_cut.test.cpp
     title: geometry/test/convex_cut.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: geometry/test/convex_hull.test.cpp
     title: geometry/test/convex_hull.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"geometry/geometry.hpp\"\n#include <algorithm>\n#include\
@@ -277,7 +277,7 @@ data:
   - geometry/problem_of_apollonius.hpp
   - geometry/triangle.hpp
   timestamp: '2026-09-05 15:24:14+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - geometry/test/convex_hull.test.cpp
   - geometry/test/convex_cut.test.cpp

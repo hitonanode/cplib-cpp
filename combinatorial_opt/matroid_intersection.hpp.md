@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://dopal.cs.uec.ac.jp/okamotoy/lect/2015/matroid/
@@ -230,7 +230,7 @@ data:
   path: combinatorial_opt/matroid_intersection.hpp
   requiredBy: []
   timestamp: '2026-09-05 15:18:59+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
   - combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp

@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/directed_mst.aoj.test.cpp
     title: graph/test/directed_mst.aoj.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://joisino.hatenablog.com/entry/2017/01/11/230141
@@ -165,7 +165,7 @@ data:
   path: graph/directed_mst.hpp
   requiredBy: []
   timestamp: '2026-09-05 15:24:47+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/directed_mst.aoj.test.cpp
 documentation_of: graph/directed_mst.hpp

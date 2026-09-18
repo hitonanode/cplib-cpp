@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/bipartite_matching.hpp
     title: "Bipartite matching (Hopcroft\u2013Karp)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
   _extendedRequiredBy:

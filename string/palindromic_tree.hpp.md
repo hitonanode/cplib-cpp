@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/test/palindromic_tree.yuki2606.test.cpp
     title: string/test/palindromic_tree.yuki2606.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/test/palindromic_tree.yuki263.test.cpp
     title: string/test/palindromic_tree.yuki263.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"string/palindromic_tree.hpp\"\n\n#include <map>\n#include\
@@ -115,7 +115,7 @@ data:
   path: string/palindromic_tree.hpp
   requiredBy: []
   timestamp: '2026-09-06 11:24:08+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - string/test/palindromic_tree.yuki263.test.cpp
   - string/test/palindromic_tree.yuki2606.test.cpp

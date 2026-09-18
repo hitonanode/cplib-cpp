@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/hessenberg_reduction.hpp
     title: Hessenberg reduction of matrix
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
   _extendedRequiredBy: []

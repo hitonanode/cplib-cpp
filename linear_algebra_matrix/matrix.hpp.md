@@ -33,13 +33,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
     title: combinatorial_opt/test/linear_matroid_parity_size.yuki1773.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
     title: data_structure/test/link_cut_tree.noncommutative.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/general_matching.test.cpp
     title: graph/test/general_matching.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -63,7 +63,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_determinant.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
     title: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   - icon: ':heavy_check_mark:'
@@ -93,9 +93,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
     title: linear_algebra_matrix/test/system_of_linear_equations.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"linear_algebra_matrix/matrix.hpp\"\n#include <algorithm>\n\
@@ -348,7 +348,7 @@ data:
   - graph/general_matching.hpp
   - combinatorial_opt/linear_matroid_parity.hpp
   timestamp: '2026-09-05 15:19:19+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - linear_algebra_matrix/test/matrix_rank.test.cpp
   - linear_algebra_matrix/test/determinant_of_first_degree_poly_mat.yuki1907.test.cpp

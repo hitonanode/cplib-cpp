@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: convolution/ntt.hpp
     title: convolution/ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: utilities/pow_op.hpp
     title: Power (general monoid)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/2396
@@ -293,7 +293,7 @@ data:
   path: utilities/test/pow_op.test.cpp
   requiredBy: []
   timestamp: '2026-09-05 15:19:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: utilities/test/pow_op.test.cpp
 layout: document

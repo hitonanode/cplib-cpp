@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: utilities/test/integer_segments.test.cpp
     title: utilities/test/integer_segments.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: utilities/test/predecessor_problem.test.cpp
     title: utilities/test/predecessor_problem.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://satanic0258.github.io/snippets/data-structure/SegmentMap.html
@@ -114,7 +114,7 @@ data:
   path: utilities/integer_segments.hpp
   requiredBy: []
   timestamp: '2026-09-06 11:24:08+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - utilities/test/integer_segments.test.cpp
   - utilities/test/predecessor_problem.test.cpp

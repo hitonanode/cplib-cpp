@@ -24,15 +24,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
     title: graph/test/dulmage_mendelsohn.yuki1745.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/strongly_connected_components.test.cpp
     title: graph/test/strongly_connected_components.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/topological_sort.test.cpp
     title: graph/test/topological_sort.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/strongly_connected_components.hpp\"\n#include <algorithm>\n\
@@ -158,7 +158,7 @@ data:
   - graph/dulmage_mendelsohn_decomposition.hpp
   - combinatorial_opt/matroids/transversal_matroid.hpp
   timestamp: '2026-09-05 15:19:04+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/dulmage_mendelsohn.yuki1615.test.cpp
   - graph/test/dulmage_mendelsohn.yuki1745.test.cpp

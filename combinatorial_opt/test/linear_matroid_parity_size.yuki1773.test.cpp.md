@@ -5,10 +5,10 @@ data:
     path: combinatorial_opt/linear_matroid_parity.hpp
     title: "Linear matroid parity (unweighted) \uFF08\u7DDA\u5F62\u30DE\u30C8\u30ED\
       \u30A4\u30C9\u30D1\u30EA\u30C6\u30A3\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []

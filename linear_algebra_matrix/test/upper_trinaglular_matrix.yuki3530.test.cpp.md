@@ -5,7 +5,7 @@ data:
     path: linear_algebra_matrix/upper_triangular_matrix.hpp
     title: "Upper triangular matrix \uFF08\u5B9A\u6570\u6B21\u5143\u4E0A\u4E09\u89D2\
       \u884C\u5217\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []

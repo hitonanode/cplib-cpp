@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/binary_gcd.stress.test.cpp
     title: number/test/binary_gcd.stress.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"number/binary_gcd.hpp\"\n#include <type_traits>\n\n// CUT\
@@ -35,7 +35,7 @@ data:
   path: number/binary_gcd.hpp
   requiredBy: []
   timestamp: '2026-09-05 21:26:13+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - number/test/binary_gcd.stress.test.cpp
 documentation_of: number/binary_gcd.hpp

@@ -3,18 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/fibonacci_heap_dijkstra.test.cpp
     title: data_structure/test/fibonacci_heap_dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
     path: data_structure/test/fibonacci_heap_shortestpath.test.cpp
     title: data_structure/test/fibonacci_heap_shortestpath.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/test/fibonacci_heap_spanningtree.test.cpp
     title: data_structure/test/fibonacci_heap_spanningtree.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://rsk0315.hatenablog.com/entry/2019/10/29/151823>
@@ -204,7 +204,7 @@ data:
   path: data_structure/fibonacci_heap.hpp
   requiredBy: []
   timestamp: '2026-09-05 21:26:13+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/fibonacci_heap_dijkstra.test.cpp
   - data_structure/test/fibonacci_heap_shortestpath.test.cpp

@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/discrete_logarithm_matrix.yuki950.test.cpp
     title: number/test/discrete_logarithm_matrix.yuki950.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: utilities/test/pow_op.test.cpp
     title: utilities/test/pow_op.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"utilities/pow_op.hpp\"\n#include <cassert>\n\n// Calculate\
@@ -27,7 +27,7 @@ data:
   path: utilities/pow_op.hpp
   requiredBy: []
   timestamp: '2023-08-05 12:13:51+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - utilities/test/pow_op.test.cpp
   - number/test/discrete_logarithm_matrix.yuki950.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/lazy_rbst.hpp
     title: Randomized binary search tree with lazy propagation
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: random/xorshift.hpp
     title: random/xorshift.hpp
   _extendedRequiredBy: []

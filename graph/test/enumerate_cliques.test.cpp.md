@@ -5,7 +5,7 @@ data:
     path: graph/enumerate_cliques.hpp
     title: "Enumerate cliques \uFF08\u30B0\u30E9\u30D5\u306E\u30AF\u30EA\u30FC\u30AF\
       \u5168\u5217\u6319\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy: []

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: geometry/geometry.hpp
     title: geometry/geometry.hpp
   - icon: ':warning:'

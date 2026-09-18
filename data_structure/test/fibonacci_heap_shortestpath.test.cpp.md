@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/fibonacci_heap.hpp
     title: data_structure/fibonacci_heap.hpp
   _extendedRequiredBy: []

@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/is_prime.test.cpp
     title: number/test/is_prime.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: number/test/miller-rabin-5e7.test.cpp
     title: number/test/miller-rabin-5e7.test.cpp
   - icon: ':heavy_check_mark:'
@@ -30,9 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: number/test/primitive_root_1e18.test.cpp
     title: number/test/primitive_root_1e18.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://miller-rabin.appspot.com/
@@ -145,7 +145,7 @@ data:
   requiredBy:
   - number/primitive_root.hpp
   timestamp: '2026-04-11 14:52:31+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - graph/test/chromatic_number.test.cpp
   - number/test/primitive_root_1e18.test.cpp

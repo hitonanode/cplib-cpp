@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/fast_set.hpp
     title: "Fast set of integers \uFF0864\u5206\u6728\u3067\u6574\u6570\u96C6\u5408\
       \u3092\u9AD8\u901F\u306B\u51E6\u7406\u3059\u308B\u30C7\u30FC\u30BF\u69CB\u9020\
       \uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: sparse_table/rmq_sparse_table.hpp
     title: sparse_table/rmq_sparse_table.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/auxiliary_tree.hpp
     title: "LCA-based auxiliary tree / virtual tree, online \uFF08\"\u865A\u6811\"\
       \uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/901
@@ -366,7 +366,7 @@ data:
   path: tree/test/auxiliary_tree.yuki901.test.cpp
   requiredBy: []
   timestamp: '2026-09-05 15:18:59+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: tree/test/auxiliary_tree.yuki901.test.cpp
 layout: document

@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/dulmage_mendelsohn_decomposition.hpp
     title: "Dulmage\u2013Mendelsohn decomposition \uFF08DM \u5206\u89E3\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/strongly_connected_components.hpp
     title: graph/strongly_connected_components.hpp
   _extendedRequiredBy: []

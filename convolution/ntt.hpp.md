@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
   _extendedRequiredBy:
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/polynomial_divmod.hpp
     title: formal_power_series/polynomial_divmod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/blackbox_matrices.hpp
     title: "Black box linear algebra \u306E\u305F\u3081\u306E\u884C\u5217"
   _extendedVerifiedWith:
@@ -72,7 +72,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: formal_power_series/test/shift_of_sampling_points.test.cpp
     title: formal_power_series/test/shift_of_sampling_points.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
     title: linear_algebra_matrix/test/blackbox_matrix_stress.test.cpp
   - icon: ':heavy_check_mark:'
@@ -90,18 +90,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: other_algorithms/test/north_east_lattice_paths.test.cpp
     title: other_algorithms/test/north_east_lattice_paths.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
   - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
     title: tree/test/frequency_table_of_tree_distance_ntt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: utilities/test/pow_op.test.cpp
     title: utilities/test/pow_op.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint.hpp\"\n#include <cassert>\n#include <iostream>\n\
@@ -336,7 +336,7 @@ data:
   - convolution/semirelaxed_multiplication.hpp
   - linear_algebra_matrix/blackbox_matrices.hpp
   timestamp: '2025-09-11 21:33:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - formal_power_series/test/kitamasa.test.cpp
   - formal_power_series/test/coeff_of_rational_function.test.cpp

@@ -9,18 +9,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: segmenttree/test/point-set-range-composite.test.cpp
     title: segmenttree/test/point-set-range-composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segmenttree/test/rmq_nonrecursive.test.cpp
     title: segmenttree/test/rmq_nonrecursive.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/vertex-add-path-sum.test.cpp
     title: tree/test/vertex-add-path-sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/vertex-set-path-composite.test.cpp
     title: tree/test/vertex-set-path-composite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segmenttree/point-update-range-get_nonrecursive.hpp\"\n\
@@ -195,7 +195,7 @@ data:
   path: segmenttree/point-update-range-get_nonrecursive.hpp
   requiredBy: []
   timestamp: '2026-09-05 15:20:20+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - segmenttree/test/countandsumlessthan.test.cpp
   - segmenttree/test/point-set-range-composite.test.cpp

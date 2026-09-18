@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint.hpp
     title: modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/bare_mod_algebra.hpp
     title: "Modular arithmetic utilities \uFF08C++ \u306E\u57FA\u672C\u578B\u6574\u6570\
       \u306B\u5BFE\u3059\u308B\u62E1\u5F35 GCD\u30FB\u4E2D\u56FD\u5270\u4F59\u5B9A\
       \u7406\u30FB\u9023\u7ACB\u7DDA\u5F62\u5408\u540C\u5F0F\u306A\u3069\u306E\u5B9F\
       \u88C5\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: number/modint_runtime.hpp
     title: number/modint_runtime.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D
@@ -401,7 +401,7 @@ data:
   path: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
   requiredBy: []
   timestamp: '2026-09-05 15:19:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: linear_algebra_matrix/test/linalg_modint_multiplication.test.cpp
 layout: document

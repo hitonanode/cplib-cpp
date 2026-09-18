@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/simplex.shortestpath.test.cpp
     title: combinatorial_opt/test/simplex.shortestpath.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: combinatorial_opt/test/simplex.yuki3674.test.cpp
+    title: combinatorial_opt/test/simplex.yuki3674.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -47,26 +50,26 @@ data:
     \ = Float(1) / mat[i_ch][j_ch];\n                jupd.clear();\n             \
     \   for (int j = 0; j < N + 2; j++) {\n                    if (j != j_ch) {\n\
     \                        mat[i_ch][j] *= -mat[i_ch][j_ch];\n                 \
-    \       if (abs_(mat[i_ch][j]) > EPS) jupd.push_back(j);\n                   \
-    \ }\n                }\n                for (int i = 0; i < M + 2; i++) {\n  \
-    \                  if (abs_(mat[i][j_ch]) < EPS or i == i_ch) continue;\n    \
-    \                for (auto j : jupd) mat[i][j] += mat[i][j_ch] * mat[i_ch][j];\n\
-    \                    mat[i][j_ch] *= mat[i_ch][j_ch];\n                }\n   \
-    \         }\n\n            j_ch = -1;\n            for (int j = 0; j < N + 1;\
-    \ j++) {\n                if (j_ch < 0 or idx[j_ch] > idx[j]) {\n            \
-    \        if (mat[M + 1][j] > EPS or (abs_(mat[M + 1][j]) < EPS and mat[M][j] >\
-    \ EPS))\n                        j_ch = j;\n                }\n            }\n\
-    \            if (j_ch < 0) break;\n\n            i_ch = -1;\n            for (int\
-    \ i = 0; i < M; i++) {\n                if (mat[i][j_ch] < -EPS) {\n         \
-    \           if (i_ch < 0) {\n                        i_ch = i;\n             \
-    \       } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch]\
-    \ <\n                               -EPS) {\n                        i_ch = i;\n\
-    \                    } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N\
-    \ + 1] / mat[i][j_ch] <\n                                   EPS and\n        \
-    \                       idx[i_ch] > idx[i]) {\n                        i_ch =\
-    \ i;\n                    }\n                }\n            }\n            if\
-    \ (i_ch < 0) {\n                is_infty = true;\n                break;\n   \
-    \         }\n        }\n        if (mat[M + 1][N + 1] < -EPS) {\n            infeasible\
+    \       if (mat[i_ch][j] != 0) jupd.push_back(j);\n                    }\n   \
+    \             }\n                for (int i = 0; i < M + 2; i++) {\n         \
+    \           if (mat[i][j_ch] == 0 or i == i_ch) continue;\n                  \
+    \  for (auto j : jupd) mat[i][j] += mat[i][j_ch] * mat[i_ch][j];\n           \
+    \         mat[i][j_ch] *= mat[i_ch][j_ch];\n                }\n            }\n\
+    \n            j_ch = -1;\n            for (int j = 0; j < N + 1; j++) {\n    \
+    \            if (j_ch < 0 or idx[j_ch] > idx[j]) {\n                    if (mat[M\
+    \ + 1][j] > EPS or (abs_(mat[M + 1][j]) < EPS and mat[M][j] > EPS))\n        \
+    \                j_ch = j;\n                }\n            }\n            if (j_ch\
+    \ < 0) break;\n\n            i_ch = -1;\n            for (int i = 0; i < M; i++)\
+    \ {\n                if (mat[i][j_ch] < -EPS) {\n                    if (i_ch\
+    \ < 0) {\n                        i_ch = i;\n                    } else if (mat[i_ch][N\
+    \ + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch] <\n                  \
+    \             -EPS) {\n                        i_ch = i;\n                   \
+    \ } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch]\
+    \ <\n                                   EPS and\n                            \
+    \   idx[N + 1 + i_ch] > idx[N + 1 + i]) {\n                        i_ch = i;\n\
+    \                    }\n                }\n            }\n            if (i_ch\
+    \ < 0) {\n                is_infty = true;\n                break;\n         \
+    \   }\n        }\n        if (mat[M + 1][N + 1] < -EPS) {\n            infeasible\
     \ = true;\n            return;\n        }\n        x.assign(N, 0);\n        for\
     \ (int i = 0; i < M; i++) {\n            if (idx[N + 1 + i] < N) x[idx[N + 1 +\
     \ i]] = mat[i][N + 1];\n        }\n        ans = mat[M][N + 1];\n    }\n\npublic:\n\
@@ -116,26 +119,26 @@ data:
     \ = Float(1) / mat[i_ch][j_ch];\n                jupd.clear();\n             \
     \   for (int j = 0; j < N + 2; j++) {\n                    if (j != j_ch) {\n\
     \                        mat[i_ch][j] *= -mat[i_ch][j_ch];\n                 \
-    \       if (abs_(mat[i_ch][j]) > EPS) jupd.push_back(j);\n                   \
-    \ }\n                }\n                for (int i = 0; i < M + 2; i++) {\n  \
-    \                  if (abs_(mat[i][j_ch]) < EPS or i == i_ch) continue;\n    \
-    \                for (auto j : jupd) mat[i][j] += mat[i][j_ch] * mat[i_ch][j];\n\
-    \                    mat[i][j_ch] *= mat[i_ch][j_ch];\n                }\n   \
-    \         }\n\n            j_ch = -1;\n            for (int j = 0; j < N + 1;\
-    \ j++) {\n                if (j_ch < 0 or idx[j_ch] > idx[j]) {\n            \
-    \        if (mat[M + 1][j] > EPS or (abs_(mat[M + 1][j]) < EPS and mat[M][j] >\
-    \ EPS))\n                        j_ch = j;\n                }\n            }\n\
-    \            if (j_ch < 0) break;\n\n            i_ch = -1;\n            for (int\
-    \ i = 0; i < M; i++) {\n                if (mat[i][j_ch] < -EPS) {\n         \
-    \           if (i_ch < 0) {\n                        i_ch = i;\n             \
-    \       } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch]\
-    \ <\n                               -EPS) {\n                        i_ch = i;\n\
-    \                    } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N\
-    \ + 1] / mat[i][j_ch] <\n                                   EPS and\n        \
-    \                       idx[i_ch] > idx[i]) {\n                        i_ch =\
-    \ i;\n                    }\n                }\n            }\n            if\
-    \ (i_ch < 0) {\n                is_infty = true;\n                break;\n   \
-    \         }\n        }\n        if (mat[M + 1][N + 1] < -EPS) {\n            infeasible\
+    \       if (mat[i_ch][j] != 0) jupd.push_back(j);\n                    }\n   \
+    \             }\n                for (int i = 0; i < M + 2; i++) {\n         \
+    \           if (mat[i][j_ch] == 0 or i == i_ch) continue;\n                  \
+    \  for (auto j : jupd) mat[i][j] += mat[i][j_ch] * mat[i_ch][j];\n           \
+    \         mat[i][j_ch] *= mat[i_ch][j_ch];\n                }\n            }\n\
+    \n            j_ch = -1;\n            for (int j = 0; j < N + 1; j++) {\n    \
+    \            if (j_ch < 0 or idx[j_ch] > idx[j]) {\n                    if (mat[M\
+    \ + 1][j] > EPS or (abs_(mat[M + 1][j]) < EPS and mat[M][j] > EPS))\n        \
+    \                j_ch = j;\n                }\n            }\n            if (j_ch\
+    \ < 0) break;\n\n            i_ch = -1;\n            for (int i = 0; i < M; i++)\
+    \ {\n                if (mat[i][j_ch] < -EPS) {\n                    if (i_ch\
+    \ < 0) {\n                        i_ch = i;\n                    } else if (mat[i_ch][N\
+    \ + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch] <\n                  \
+    \             -EPS) {\n                        i_ch = i;\n                   \
+    \ } else if (mat[i_ch][N + 1] / mat[i_ch][j_ch] - mat[i][N + 1] / mat[i][j_ch]\
+    \ <\n                                   EPS and\n                            \
+    \   idx[N + 1 + i_ch] > idx[N + 1 + i]) {\n                        i_ch = i;\n\
+    \                    }\n                }\n            }\n            if (i_ch\
+    \ < 0) {\n                is_infty = true;\n                break;\n         \
+    \   }\n        }\n        if (mat[M + 1][N + 1] < -EPS) {\n            infeasible\
     \ = true;\n            return;\n        }\n        x.assign(N, 0);\n        for\
     \ (int i = 0; i < M; i++) {\n            if (idx[N + 1 + i] < N) x[idx[N + 1 +\
     \ i]] = mat[i][N + 1];\n        }\n        ans = mat[M][N + 1];\n    }\n\npublic:\n\
@@ -167,9 +170,10 @@ data:
   isVerificationFile: false
   path: combinatorial_opt/simplex.hpp
   requiredBy: []
-  timestamp: '2022-10-30 13:35:32+09:00'
+  timestamp: '2026-09-06 19:06:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - combinatorial_opt/test/simplex.yuki3674.test.cpp
   - combinatorial_opt/test/simplex.maxflow.test.cpp
   - combinatorial_opt/test/simplex.easy.test.cpp
   - combinatorial_opt/test/simplex.shortestpath.test.cpp

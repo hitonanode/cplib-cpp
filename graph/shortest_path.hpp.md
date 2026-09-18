@@ -2,18 +2,18 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/matroid_intersection.hpp
     title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\uFF09\
       \u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
     title: combinatorial_opt/test/matroid_intersection.aoj_grl_2_b.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/bellman_ford.test.cpp
     title: graph/test/bellman_ford.test.cpp
   - icon: ':heavy_check_mark:'
@@ -28,24 +28,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/test/shortest_path_dial.yuki1695.test.cpp
     title: graph/test/shortest_path_dial.yuki1695.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/spfa.test.cpp
     title: graph/test/spfa.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/test/warshallfloyd.test.cpp
     title: graph/test/warshallfloyd.test.cpp
   - icon: ':heavy_check_mark:'
     path: graph/test/zero_one_bfs.yuki1695.test.cpp
     title: graph/test/zero_one_bfs.yuki1695.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/auxiliary_tree.yuki901.test.cpp
     title: tree/test/auxiliary_tree.yuki901.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/frequency_table_of_tree_distance.stress.test.cpp
     title: tree/test/frequency_table_of_tree_distance.stress.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/shortest_path.hpp\"\n#include <algorithm>\n#include\
@@ -346,7 +346,7 @@ data:
   requiredBy:
   - combinatorial_opt/matroid_intersection.hpp
   timestamp: '2026-09-05 15:18:59+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - tree/test/auxiliary_tree.yuki901.test.cpp
   - tree/test/frequency_table_of_tree_distance.stress.test.cpp

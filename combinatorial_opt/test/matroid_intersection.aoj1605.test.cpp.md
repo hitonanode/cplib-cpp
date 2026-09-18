@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/matroid_intersection.hpp
     title: "(Weighted) matroid intersection \uFF08\uFF08\u91CD\u307F\u3064\u304D\uFF09\
       \u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/matroids/graphic_matroid.hpp
     title: "Graphic matroid \uFF08\u30B0\u30E9\u30D5\u30DE\u30C8\u30ED\u30A4\u30C9\
       \uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: combinatorial_opt/matroids/partition_matroid.hpp
     title: "Partition matroid \uFF08\u5206\u5272\u30DE\u30C8\u30ED\u30A4\u30C9\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/shortest_path.hpp
     title: "Shortest Path \uFF08\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1605
@@ -297,7 +297,7 @@ data:
   path: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
   requiredBy: []
   timestamp: '2026-09-05 15:18:59+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: combinatorial_opt/test/matroid_intersection.aoj1605.test.cpp
 layout: document

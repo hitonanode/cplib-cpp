@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/longest_common_prefix.hpp
     title: string/longest_common_prefix.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/auxiliary_tree.hpp
     title: "LCA-based auxiliary tree / virtual tree, online \uFF08\"\u865A\u6811\"\
       \uFF09"
@@ -23,15 +23,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/test/run_enumerate_lyndon_rmq.test.cpp
     title: string/test/run_enumerate_lyndon_rmq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/test/auxiliary_tree.yuki901.test.cpp
     title: tree/test/auxiliary_tree.yuki901.test.cpp
   - icon: ':heavy_check_mark:'
     path: tree/test/lca_rmq.test.cpp
     title: tree/test/lca_rmq.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"sparse_table/rmq_sparse_table.hpp\"\n#include <algorithm>\n\
@@ -75,7 +75,7 @@ data:
   - tree/lca_rmq.hpp
   - tree/auxiliary_tree.hpp
   timestamp: '2022-01-08 20:23:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - sparse_table/test/sparse_table.test.cpp
   - sparse_table/test/sparse_table_aoj.test.cpp

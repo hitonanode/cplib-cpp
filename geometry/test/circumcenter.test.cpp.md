@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: geometry/geometry.hpp
     title: geometry/geometry.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: geometry/point3d.hpp
     title: geometry/point3d.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: geometry/triangle.hpp
     title: geometry/triangle.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.000001'
@@ -196,7 +196,7 @@ data:
   path: geometry/test/circumcenter.test.cpp
   requiredBy: []
   timestamp: '2026-09-05 15:24:14+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: geometry/test/circumcenter.test.cpp
 layout: document

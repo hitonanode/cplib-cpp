@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/general_matching.hpp
     title: graph/general_matching.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: linear_algebra_matrix/matrix.hpp
     title: linear_algebra_matrix/matrix.hpp
   _extendedRequiredBy: []

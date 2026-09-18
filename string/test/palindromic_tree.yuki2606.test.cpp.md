@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/palindromic_tree.hpp
     title: "Palindromic tree / eertree \uFF08\u56DE\u6587\u6728\uFF09"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/2606
@@ -96,7 +96,7 @@ data:
   path: string/test/palindromic_tree.yuki2606.test.cpp
   requiredBy: []
   timestamp: '2026-09-06 11:24:08+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: string/test/palindromic_tree.yuki2606.test.cpp
 layout: document
