@@ -15,12 +15,13 @@ HashMap<long long, long long, 1 << 20> mp;
 
 mp.set(10, 20);  // key 10 に value 20 を設定
 mp.get(10);      // 20（存在しないキーに対しては V{}）
+mp.contains(10); // true（キーの存在判定）
 mp.size();       // 1
 mp.empty();      // false
 mp.clear();      // 全要素を O(1) で削除
 ```
 
-キーは 64 bit 以下の整数型でなければならない．計算量は `set()` / `get()` が平均 $O(1)$，`clear()` / `reset()` / `size()` / `empty()` が $O(1)$．格納する相異なるキー数が `N` を超えないようにする必要がある．
+キーは 64 bit 以下の整数型でなければならない．計算量は `set()` / `get()` / `contains()` が平均 $O(1)$，`clear()` / `reset()` / `size()` / `empty()` が $O(1)$．格納する相異なるキー数が `N` を超えないようにする必要がある．
 
 ## 問題例
 
