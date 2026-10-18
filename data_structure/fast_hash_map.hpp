@@ -73,6 +73,16 @@ public:
         return V{};
     }
 
+    bool contains(K key) const noexcept {
+        std::size_t pos = hash(key);
+        for (std::size_t step = 0; step < N; ++step) {
+            if (versions[pos] != version) return false;
+            if (keys[pos] == key) return true;
+            pos = (pos + 1) & (N - 1);
+        }
+        return false;
+    }
+
     std::size_t size() const noexcept { return count; }
     bool empty() const noexcept { return count == 0; }
 
