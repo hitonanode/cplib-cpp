@@ -116,8 +116,8 @@ data:
   timestamp: '2026-09-06 11:24:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - utilities/test/integer_segments.test.cpp
   - utilities/test/predecessor_problem.test.cpp
+  - utilities/test/integer_segments.test.cpp
 documentation_of: utilities/integer_segments.hpp
 layout: document
 redirect_from:

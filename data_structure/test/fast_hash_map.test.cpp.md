@@ -43,23 +43,28 @@ data:
     \     for (std::size_t step = 0; step < N; ++step) {\n            if (versions[pos]\
     \ != version) return V{};\n            if (keys[pos] == key) return values[pos];\n\
     \            pos = (pos + 1) & (N - 1);\n        }\n        return V{};\n    }\n\
-    \n    std::size_t size() const noexcept { return count; }\n    bool empty() const\
-    \ noexcept { return count == 0; }\n\n    void clear() noexcept {\n        ++version;\n\
-    \        count = 0;\n    }\n    void reset() noexcept { clear(); }\n};\n#line\
-    \ 4 \"data_structure/test/fast_hash_map.test.cpp\"\n#include <iostream>\n\nHashMap<unsigned\
-    \ long long, unsigned long long, 1 << 21> mp;\n\nint main() {\n    std::cin.tie(nullptr),\
-    \ std::ios::sync_with_stdio(false);\n\n    int Q;\n    std::cin >> Q;\n    while\
-    \ (Q--) {\n        int type;\n        unsigned long long key;\n        std::cin\
-    \ >> type >> key;\n        if (type == 0) {\n            unsigned long long value;\n\
-    \            std::cin >> value;\n            mp.set(key, value);\n        } else\
-    \ {\n            std::cout << mp.get(key) << '\\n';\n        }\n    }\n\n    mp.clear();\n\
-    \    assert(mp.empty());\n    assert(mp.size() == 0);\n    assert(mp.get(1) ==\
-    \ 0);\n\n    mp.set(1, 2);\n    mp.set(1, 3);\n    assert(mp.size() == 1);\n \
-    \   assert(mp.get(1) == 3);\n\n    mp.reset();\n    assert(mp.empty());\n    assert(mp.get(1)\
-    \ == 0);\n\n    HashMap<int, int, 1> one;\n    assert(one.get(-1) == 0);\n   \
-    \ one.set(-1, 4);\n    assert(one.size() == 1);\n    assert(one.get(-1) == 4);\n\
-    \    assert(one.get(0) == 0);\n    one.clear();\n    one.set(0, 5);\n    assert(one.get(0)\
-    \ == 5);\n\n    HashMap<int, int, 8> full;\n    for (int i = 0; i < 8; ++i) full.set(i,\
+    \n    bool contains(K key) const noexcept {\n        std::size_t pos = hash(key);\n\
+    \        for (std::size_t step = 0; step < N; ++step) {\n            if (versions[pos]\
+    \ != version) return false;\n            if (keys[pos] == key) return true;\n\
+    \            pos = (pos + 1) & (N - 1);\n        }\n        return false;\n  \
+    \  }\n\n    std::size_t size() const noexcept { return count; }\n    bool empty()\
+    \ const noexcept { return count == 0; }\n\n    void clear() noexcept {\n     \
+    \   ++version;\n        count = 0;\n    }\n    void reset() noexcept { clear();\
+    \ }\n};\n#line 4 \"data_structure/test/fast_hash_map.test.cpp\"\n#include <iostream>\n\
+    \nHashMap<unsigned long long, unsigned long long, 1 << 21> mp;\n\nint main() {\n\
+    \    std::cin.tie(nullptr), std::ios::sync_with_stdio(false);\n\n    int Q;\n\
+    \    std::cin >> Q;\n    while (Q--) {\n        int type;\n        unsigned long\
+    \ long key;\n        std::cin >> type >> key;\n        if (type == 0) {\n    \
+    \        unsigned long long value;\n            std::cin >> value;\n         \
+    \   mp.set(key, value);\n        } else {\n            std::cout << mp.get(key)\
+    \ << '\\n';\n        }\n    }\n\n    mp.clear();\n    assert(mp.empty());\n  \
+    \  assert(mp.size() == 0);\n    assert(mp.get(1) == 0);\n\n    mp.set(1, 2);\n\
+    \    mp.set(1, 3);\n    assert(mp.size() == 1);\n    assert(mp.get(1) == 3);\n\
+    \n    mp.reset();\n    assert(mp.empty());\n    assert(mp.get(1) == 0);\n\n  \
+    \  HashMap<int, int, 1> one;\n    assert(one.get(-1) == 0);\n    one.set(-1, 4);\n\
+    \    assert(one.size() == 1);\n    assert(one.get(-1) == 4);\n    assert(one.get(0)\
+    \ == 0);\n    one.clear();\n    one.set(0, 5);\n    assert(one.get(0) == 5);\n\
+    \n    HashMap<int, int, 8> full;\n    for (int i = 0; i < 8; ++i) full.set(i,\
     \ i + 1);\n    assert(full.size() == 8);\n    for (int i = 0; i < 8; ++i) assert(full.get(i)\
     \ == i + 1);\n    assert(full.get(8) == 0);\n    full.clear();\n    full.set(8,\
     \ 9);\n    assert(full.size() == 1);\n    assert(full.get(8) == 9);\n}\n"
@@ -86,7 +91,7 @@ data:
   isVerificationFile: true
   path: data_structure/test/fast_hash_map.test.cpp
   requiredBy: []
-  timestamp: '2026-09-05 01:34:00+09:00'
+  timestamp: '2026-10-18 21:57:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: data_structure/test/fast_hash_map.test.cpp

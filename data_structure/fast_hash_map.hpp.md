@@ -39,9 +39,14 @@ data:
     \     for (std::size_t step = 0; step < N; ++step) {\n            if (versions[pos]\
     \ != version) return V{};\n            if (keys[pos] == key) return values[pos];\n\
     \            pos = (pos + 1) & (N - 1);\n        }\n        return V{};\n    }\n\
-    \n    std::size_t size() const noexcept { return count; }\n    bool empty() const\
-    \ noexcept { return count == 0; }\n\n    void clear() noexcept {\n        ++version;\n\
-    \        count = 0;\n    }\n    void reset() noexcept { clear(); }\n};\n"
+    \n    bool contains(K key) const noexcept {\n        std::size_t pos = hash(key);\n\
+    \        for (std::size_t step = 0; step < N; ++step) {\n            if (versions[pos]\
+    \ != version) return false;\n            if (keys[pos] == key) return true;\n\
+    \            pos = (pos + 1) & (N - 1);\n        }\n        return false;\n  \
+    \  }\n\n    std::size_t size() const noexcept { return count; }\n    bool empty()\
+    \ const noexcept { return count == 0; }\n\n    void clear() noexcept {\n     \
+    \   ++version;\n        count = 0;\n    }\n    void reset() noexcept { clear();\
+    \ }\n};\n"
   code: "#pragma once\n\n#include <array>\n#include <bit>\n#include <cassert>\n#include\
     \ <chrono>\n#include <cstddef>\n#include <cstdint>\n#include <random>\n#include\
     \ <type_traits>\n\n// Fixed-capacity hash map for integer keys.\n// N must be\
@@ -69,14 +74,19 @@ data:
     \     for (std::size_t step = 0; step < N; ++step) {\n            if (versions[pos]\
     \ != version) return V{};\n            if (keys[pos] == key) return values[pos];\n\
     \            pos = (pos + 1) & (N - 1);\n        }\n        return V{};\n    }\n\
-    \n    std::size_t size() const noexcept { return count; }\n    bool empty() const\
-    \ noexcept { return count == 0; }\n\n    void clear() noexcept {\n        ++version;\n\
-    \        count = 0;\n    }\n    void reset() noexcept { clear(); }\n};\n"
+    \n    bool contains(K key) const noexcept {\n        std::size_t pos = hash(key);\n\
+    \        for (std::size_t step = 0; step < N; ++step) {\n            if (versions[pos]\
+    \ != version) return false;\n            if (keys[pos] == key) return true;\n\
+    \            pos = (pos + 1) & (N - 1);\n        }\n        return false;\n  \
+    \  }\n\n    std::size_t size() const noexcept { return count; }\n    bool empty()\
+    \ const noexcept { return count == 0; }\n\n    void clear() noexcept {\n     \
+    \   ++version;\n        count = 0;\n    }\n    void reset() noexcept { clear();\
+    \ }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: data_structure/fast_hash_map.hpp
   requiredBy: []
-  timestamp: '2026-09-05 01:34:00+09:00'
+  timestamp: '2026-10-18 21:57:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - data_structure/test/fast_hash_map.test.cpp
@@ -97,12 +107,13 @@ HashMap<long long, long long, 1 << 20> mp;
 
 mp.set(10, 20);  // key 10 に value 20 を設定
 mp.get(10);      // 20（存在しないキーに対しては V{}）
+mp.contains(10); // true（キーの存在判定）
 mp.size();       // 1
 mp.empty();      // false
 mp.clear();      // 全要素を O(1) で削除
 ```
 
-キーは 64 bit 以下の整数型でなければならない．計算量は `set()` / `get()` が平均 $O(1)$，`clear()` / `reset()` / `size()` / `empty()` が $O(1)$．格納する相異なるキー数が `N` を超えないようにする必要がある．
+キーは 64 bit 以下の整数型でなければならない．計算量は `set()` / `get()` / `contains()` が平均 $O(1)$，`clear()` / `reset()` / `size()` / `empty()` が $O(1)$．格納する相異なるキー数が `N` を超えないようにする必要がある．
 
 ## 問題例
 

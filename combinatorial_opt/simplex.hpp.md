@@ -173,12 +173,12 @@ data:
   timestamp: '2026-09-06 19:06:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - combinatorial_opt/test/simplex.yuki3674.test.cpp
-  - combinatorial_opt/test/simplex.maxflow.test.cpp
+  - combinatorial_opt/test/simplex.multiprecision.test.cpp
   - combinatorial_opt/test/simplex.easy.test.cpp
   - combinatorial_opt/test/simplex.shortestpath.test.cpp
-  - combinatorial_opt/test/simplex.multiprecision.test.cpp
+  - combinatorial_opt/test/simplex.maxflow.test.cpp
   - combinatorial_opt/test/simplex.mcf.test.cpp
+  - combinatorial_opt/test/simplex.yuki3674.test.cpp
 documentation_of: combinatorial_opt/simplex.hpp
 layout: document
 title: "Simplex method \uFF08\u5358\u4F53\u6CD5\uFF09"

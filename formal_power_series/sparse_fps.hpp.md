@@ -163,12 +163,12 @@ data:
   timestamp: '2026-03-01 22:00:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - formal_power_series/test/sparse_fps_inv.test.cpp
+  - formal_power_series/test/sparse_fps_log.test.cpp
+  - formal_power_series/test/sparse_fps_pow.test.cpp
   - formal_power_series/test/sparse_fps_sqrt.test.cpp
   - formal_power_series/test/sparse_fps_exp.test.cpp
   - formal_power_series/test/sparse_fps_pow.yuki1939.test.cpp
-  - formal_power_series/test/sparse_fps_log.test.cpp
-  - formal_power_series/test/sparse_fps_pow.test.cpp
-  - formal_power_series/test/sparse_fps_inv.test.cpp
   - formal_power_series/test/sparse_fps_pow.stress.test.cpp
 documentation_of: formal_power_series/sparse_fps.hpp
 layout: document
